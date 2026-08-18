@@ -25,8 +25,7 @@ With faster Java releases, it's an exciting time to be a Java developer. Every n
 
 To give them a spin, you have the tooling support in Eclipse Java IDE ready at your disposal.
 
-Under the Hood
---------------
+## Under the Hood
 
 The Java tooling in Eclipse IDE has its own compiler implementation which not only generates class files, but also produces a Java document model which forms the basis for implementing a large number of tooling features.
 
@@ -34,8 +33,7 @@ To support the latest Java versions, the Eclipse Compiler for Java implements al
 
 Here is a sneak peek into the major interesting features of recent Java versions with their support in the Eclipse IDE.
 
-Highlights
-----------
+## Highlights
 
 To get started, you can add a JRE in Preferences \> Java \> Installed JREs:
 
@@ -177,8 +175,7 @@ Eclipse IDE provides you many quick assist, clean up, formatting, and refactorin
 
 ![](Functional-instances-quick-assists.png)
 
-Summary
--------
+## Summary
 
 This post provides you a glimpse of the tooling features provided by Eclipse IDE as part of its support for the recent Java versions.
 

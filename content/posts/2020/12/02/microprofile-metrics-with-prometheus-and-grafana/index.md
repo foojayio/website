@@ -28,8 +28,6 @@ In this short video Rudy de Busscher shows how to connect MicroProfile Metrics w
 
 {{< youtube HfmEFwAmiDY >}}
 
-<br />
-
 The goal of [MicroProfile](https://microprofile.io/ "MicroProfile") Metrics is to expose monitoring data from the implementation in a unified way. It also defines a Java API so that the developer can define and supply his own values.
 
 [Prometheus](https://prometheus.io/ "Prometheus") is one of the most popular Open source solutions for gathering metrics. Created in 2012 by SoundCloud (online audio distribution platform and music sharing) and in 2018 graduated at the Cloud Native Computing Foundation. It can be used as a database for storing time series but has many more features:

@@ -30,8 +30,7 @@ A part of this major shift in our industry is a change to our fundamental roles 
 
 Production is in the amorphous Cloud, which is accessible everywhere. Yet it's never been further away from the people who wrote the software powering it. We no longer have the fundamental insight we took for granted a bit over a decade ago.
 
-Is That So Bad?
----------------
+## Is That So Bad?
 
 Yes, and no. We gave up some insight and control and got a lot in return:
 
@@ -41,8 +40,7 @@ Yes, and no. We gave up some insight and control and got a lot in return:
 
 These are pretty incredible benefits. We don't want to give these benefits up. But we also lost some insight, debugging became harder and complexity rose. We discussed these problems before but today I want to talk about one impact only...
 
-Cost
-----
+## Cost
 
 This is a form of blindness.
 
@@ -60,8 +58,7 @@ Before we proceed, I'd like to take a moment to discuss the concept of cost. The
 
 We don't see the underlying hardware, but it's there, and it carries a carbon footprint. By optimizing, we can affect both costs significantly.
 
-Observing Production Effectively
---------------------------------
+## Observing Production Effectively
 
 APMs are great for measuring performance at a high level. But they provide very little detail about the dynamic inner workings of the application and the cost-cutting measures we can take inside. I often liken them to the bat signal or check engine light. They notify us of a problem but leave us without the tool to inspect the details.
 
@@ -115,8 +112,7 @@ What if it's used by very few people?
 
 That's exactly what the counter metric does. It counts the number of times a line was reached. It can tell us which methods are important to us and how frequently they're reached. You wouldn't be as concerned about a refactor if only three people reach that line of code...
 
-Finally
--------
+## Finally
 
 I could carry on with the discussion of these techniques, but the gist is simple: we need to "see" what's going on. As developers, we're given a task to build a product. But the tools that let us peer into production aren't as capable as our local tools. The results we get from production can be very misleading.
 

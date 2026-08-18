@@ -65,21 +65,17 @@ First add the following dependency to your project:
 </dependency>
 ```
 
-
 Then add the following property when running your program:
 
 ```
 -Djava.security.manager=org.apache.river.tool.SecurityPolicyWriter
 ```
 
-
 Whatever the name and location of your current policy file is, the tool will create one with the same name, with the word ".new" appended.
 
 Run your application and log in as the user role you want to make the policy for, then only the permissions required for you to run your program as that user, performing the tasks you just performed are added to the policy file. You might also do this with a test suite that performs the necessary tasks, then remove the grant statements in the generated policy file for test code.
 
 You do need to read the policy file, following generation, to identify any permissions that library dependencies have been granted, that you don't want those libraries to have and remove them. Such as network connections, if they were unnecessary, for example, if it's reporting heuristics to an unrecognized network address, if you remove that specific SocketPermission that grants it access, it can no longer open a network connection to that address.
-
-<br />
 
 Now move your old policy file out of the way, and rename the new policy file.
 
@@ -88,7 +84,6 @@ Run your program again this time with:
 ```
 -Djava.security.manager=java.lang.SecurityManager,\
 ```
-
 
 Confirm that the user cannot do anything they are not authorized to do.
 
@@ -105,13 +100,11 @@ Now if you're experiencing performance issues, because you have developed high s
 </dependency>
 ```
 
-
 Then set the following property:
 
 ```
 -Dpolicy.provider=org.apache.river.api.security.ConcurrentPolicyFile,\
 ```
-
 
 This replaces the built-in horribly slow Java policy provider with a modern performant and highly scalable implementation, with identical functionality.
 
@@ -130,7 +123,6 @@ If you want to improve java security even further, definitely consider disabling
 ```
 -Djdk.serialFilter=!*,\
 ```
-
 
 You still need to be observant of other typical Java problems, like sanitizing user input, using TLS and client certificates then you'll have really locked down your Java application:
 

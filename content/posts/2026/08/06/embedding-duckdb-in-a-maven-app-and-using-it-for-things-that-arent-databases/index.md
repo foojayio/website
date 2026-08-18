@@ -32,7 +32,6 @@ One dependency. The native engine is bundled inside the JAR, so there's nothing 
 </dependency>
 ```
 
-
 It exposes a standard JDBC interface, so from the point of view of anyone who's ever written Java database code before, there's no new API to learn. The connection string `jdbc:duckdb:` (with nothing after the colon) gives you a purely in-memory instance --- nothing is written to disk, and everything disappears when the connection closes.
 
 ### Querying a file on the internet with SQL
@@ -59,7 +58,6 @@ public class DuckDB {
     }
 }
 ```
-
 
 And here it is again with line-by-line explanations:
 
@@ -142,7 +140,6 @@ public class DuckDB {
 }
 ```
 
-
 ### Querying a file on the internet with SQL
 
 The interesting part is the `FROM` clause. DuckDB treats the URL as a table: it fetches the file, sniffs the delimiter and column types, and runs the query against it. Swap in a local path and it works the same way. Globs work too --- `FROM 'logs/*.parquet'` queries a whole directory of Parquet files as one dataset.
@@ -153,7 +150,6 @@ For anything beyond plain HTTPS (S3, for instance), you'll need the httpfs exten
 s.execute("INSTALL httpfs; LOAD httpfs;");
 ```
 
-
 The query above returns one row per penguin species from the 344-row raw dataset, ordered by how many observations each has: Adelie leads with 152, followed by Gentoo at 124 and Chinstrap at 68 (a couple of rows have no recorded mass, which is what `TRY_CAST` above is handling):
 
 ```
@@ -161,7 +157,6 @@ Adelie Penguin (Pygoscelis adeliae)            152   3700.7
 Gentoo penguin (Pygoscelis papua)              124   5076.0
 Chinstrap penguin (Pygoscelis antarctica)       68   3733.1
 ```
-
 
 ### Where this is actually useful
 

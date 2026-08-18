@@ -24,8 +24,7 @@ frozen: false
 
 **In this article, we will cover how to store files in a database using Spring Boot and discuss some alternatives.**
 
-**Introduction**
-----------------
+## **Introduction**
 
 Recently, a fellow developer who I helped in past reached out to me on Slack seeking assistance with handling file uploads in a Spring Boot application. After providing some guidance, I decided to compile this article to assist others facing similar challenges.
 
@@ -33,8 +32,7 @@ When dealing with file data, storing these files in your database as Binary Larg
 
 That being said, if you're building a small-scale application or have specific requirements that warrant the use of a database for file storage, this approach can work.
 
-**Process Overview for Database File Storage**
-----------------------------------------------
+## **Process Overview for Database File Storage**
 
 ### **Step 1: Entity Class**
 
@@ -92,16 +90,12 @@ Please ensure that your MySQL database can indeed support that maximum size. If 
 
 ### **Step 2: Repository Class**
 
-<br />
-
 Next, we create a Repository interface extending JpaRepository. This gives us a variety of standard methods for CRUD operations that we can use with our Document entities.
 
 ```
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 }
 ```
-
-<br />
 
 ### Step 3: Service Class
 
@@ -120,8 +114,6 @@ public class FileUploadService {
 
 }
 ```
-
-<br />
 
 ### Step 4: Controller Class
 
@@ -148,8 +140,7 @@ When the user sends an HTTP POST request to upload a file, the uploadFile method
 
 It then uses the fileUploadService.saveFileInDatabase(file) **;** to persist this object in the database.
 
-**Alternatives to Database File Storage**
------------------------------------------
+## **Alternatives to Database File Storage**
 
 While storing files in a database can work for some cases, it's not suitable for all. Here are a couple of alternatives:
 
@@ -176,8 +167,6 @@ public void saveFileInFileSystem(MultipartFile file) throws IOException {
 ```
 
 Now run the application and do curl:
-
-<br />
 
 ```
 curl -X POST -H 'Content-Type: multipart/form-data' -F 'file=@/home/uses/uploads/_cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg http://localhost:8080/files/upload
@@ -206,8 +195,6 @@ public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
     }
 }
 ```
-
-<br />
 
 ### **Content Delivery Network (CDN) Storage**
 
@@ -243,8 +230,7 @@ These services provide built-in file storage, organization, and security and can
 
 The advantage of these services is that they offload much of the work of file management and allow you to leverage their well-designed interfaces and organizational structures.
 
-Pros and Cons
--------------
+## Pros and Cons
 
 Storing files in a database offers consistency and simplicity but can lead to performance and scalability issues. Local and network file systems provide performance benefits but struggle with scalability and data integrity. Cloud storage services offer scalability and performance but might be costly for small applications. Content Delivery Networks (CDNs) enhance performance but at a cost.
 
@@ -252,8 +238,7 @@ Object storage offers scalability and affordability but may lack in performance,
 
 Ultimately, the choice of storage depends on the unique requirements of the application, such as volume, performance, budget, and use case.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we showed you a simple setup for storing uploaded files in a database using Spring Boot and gave some alternatives.
 

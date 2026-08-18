@@ -55,7 +55,6 @@ private static Vehicle createVehicle(String type) {
 }
 ```
 
-
 Example 1. VehicleFactory, method "createVehicle" in Java - switch statement
 
 ```kotlin
@@ -66,7 +65,6 @@ fun createVehicle(type: String): KVehicle = when(type){
    else -> throw IllegalArgumentException("illegal type:$type")
 }
 ```
-
 
 Example 2. VehicleFactory, method "createVehicle" in Kotlin - when expression
 
@@ -79,11 +77,9 @@ def createVehicle(vehicleType: String): SVehicle = vehicleType match {
 }
 ```
 
-
 Example 3. VehicleFactory, method "createVehicle" in Scala - match mechanism
 
-Conclusions
------------
+## Conclusions
 
 The "*VehicleFactory*" has been implemented in three different JVM languages: Java, Kotlin and Scala. It seems that commonly used critique about the verbosity in Java is not really valid in this example. Actually, each of three different implementations look very similar.
 
@@ -138,11 +134,9 @@ java.lang.IllegalArgumentException: illegal type: BLA
    at scala.tools.nsc.MainGenericRunner.main(MainGenericRunner.scala)
 ```
 
-
 Example 4. Vehicle factory causes exceptions with StackTraces
 
-References:
------------
+## References:
 
 1. GitHub jvm-language-examples : https://github.com/mirage22/jvm-language-examples
 2. JEP-420, Pattern Matching for switch (Second Preview): https://openjdk.java.net/jeps/420

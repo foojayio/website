@@ -24,8 +24,7 @@ I don't want to discuss issue trackers, unit testing and proper TDD. I think the
 
 With that out of the way let's continue with...
 
-The Process
------------
+## The Process
 
 Hopefully by this point you were able to reproduce your problem in the debugger. Possibly even limited it to a small area you can step through.
 
@@ -157,8 +156,7 @@ The way I approach race conditions in threading code is this: "It's a state bug"
 
 It's always a state bug. When we have a race condition it means we either read from the state when it wasn't ready or wrote to the state too late/early. Field breakpoints are your friends in this case and can really help you get the full picture of what's going on. You can also simulate the bad state situation by changing variable values.
 
-Finally
--------
+## Finally
 
 If you follow through your assumptions and catalog the bugs into one of those common pitfalls then you're 90% of the way to understanding the root cause. The rest is deciding on the right fix for the problem.
 

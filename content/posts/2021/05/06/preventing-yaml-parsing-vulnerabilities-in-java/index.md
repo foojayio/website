@@ -25,8 +25,7 @@ Although YAML looks like an excellent alternative for XML and JSON, many people 
 
 Most importantly to note, manually importing YAML in your Java application with an outdated version of **[snakeyaml](https://snyk.io/vuln/SNYK-JAVA-ORGYAML-537645)**might get you into trouble.
 
-Billion laughs attack
----------------------
+## Billion laughs attack
 
 One feature of YAML is that you can create anchors. You can reuse these anchors in different places so you do not have to repeat yourself. In the simplified example below, I create two variables: `var1` and `var2`. By using anchors, `var2` has the same value as `var1`.
 
@@ -34,7 +33,6 @@ One feature of YAML is that you can create anchors. You can reuse these anchors 
 var1: &anchor value
 var2: *anchor
 ```
-
 
 Let's take this to the extreme and create the famous billion laughs attack for YAML. By applying this concept in a nested way, I can *actually* make a billion laughs.
 
@@ -50,7 +48,6 @@ lol8: &lol8 [*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7,*lol7]
 lol9: &lol9 [*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8,*lol8]
 lolz: &lolz [*lol9]
 ```
-
 
 As you can see, `lol1` is a list of 10 strings `"lol"`. The variable `lol2` is a list of 10 times `lol1`. By repeating this principle several times, we end up with `lolz` = 10\^9 times `"lol"`. Better said, a billion laughs.
 

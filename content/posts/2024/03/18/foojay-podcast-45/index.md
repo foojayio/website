@@ -31,13 +31,11 @@ Does Java 22 also bring that much innovation, or is it just a bug-fix release?
 
 And what needs to be done to get such a release published on time? Let's find out...
 
-Video
------
+## Video
 
 {{< youtube _NYuuoCQgO8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +43,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Speakers
---------
+## Speakers
 
 ### Loïc Mathieu
 
@@ -69,8 +66,7 @@ Speakers
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests   
 
@@ -161,10 +157,7 @@ Content
 
 52:10 Conclusion
 
-<br />
-
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

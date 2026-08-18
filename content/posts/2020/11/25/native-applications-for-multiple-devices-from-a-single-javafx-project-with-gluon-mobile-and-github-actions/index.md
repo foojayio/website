@@ -30,8 +30,7 @@ In this post, we will use such a project and build it with GitHub Actions as a n
 > True "Write Once, Run Everywhere"!!!
 ![](github_actions_gluon_diagram.jpg)
 
-The Application
----------------
+## The Application
 
 This application is built around a Java library I created last year for my book ["Getting Started with Java on the Raspberry Pi"](https://webtechie.be/books/) which helps you to calculate the value of a resistor from its color rings. This library is further described on ["Resistor color codes and calculations as a Java Maven library"](https://webtechie.be/post/2019-11-25-resistor-color-codes-and-calculations-a-java-maven-library/).
 
@@ -94,8 +93,7 @@ There are still some things to do:
 
 Any help and pull requests are welcome on [the GitHub project](https://github.com/FDelporte/ResistorCalculatorApp) 😉
 
-**GitHub Actions**
-------------------
+## **GitHub Actions**
 
 [GitHub Actions](https://github.com/features/actions) allow you to automate your software workflows with Continuous Integration and Continuous Deployment right from GitHub.
 
@@ -114,9 +112,7 @@ jobs:
       - run: bats -v
 ```
 
-
-**Gluon**
----------
+## **Gluon**
 
 Gluon provides an easy and modern approach to develop Java Client applications. These applications can run on the JVM or can be converted to platform-specific native-images, which have a lightning-fast startup and take a fraction of space. Moreover, applications can also be targeted to Android, iOS, and embedded apart from all the desktop environments.
 
@@ -144,8 +140,7 @@ Gluon created such a build action which you can integrate into the build process
 
 Gluon Substrate takes away most of the complexity of using GraalVM Native Image. You can create an app in Java, test it on your desktop, and then compile and link the Java bytecode to a native image for a specific platform by defining a profile in Maven. The resulting binary can be deployed to the AppStore or Google Play.
 
-**The Build Process on GitHub Actions**
----------------------------------------
+## **The Build Process on GitHub Actions**
 
 For the sake of this post, all the different build processes are split into separate .yml-files, but GitHub Actions allows you to combine different "jobs" into one such file.
 
@@ -180,14 +175,12 @@ For Linux, a list of extra libraries is required, which is done with an addition
   run: sudo apt install libasound2-dev libavcodec-dev libavformat-dev libavutil-dev libgl-dev libgtk-3-dev libpango1.0-dev libxtst-dev
 ```
 
-
 This build process produces both a JAR and a Linux native application. For the first one we run a Maven package:
 
 ```
 - name: Build JAR with Maven
   run: mvn -B package
 ```
-
 
 Because the build process is running on a Linux machine, we can define the target as desktop to build a native Linux application with the Gluon Maven client plugin and need to provide the GraalVM location:
 
@@ -197,7 +190,6 @@ Because the build process is running on a Linux machine, we can define the targe
   env:
     GRAALVM_HOME: ${{ env.JAVA_HOME }}
 ```
-
 
 #### **Windows Native Application**
 
@@ -215,7 +207,6 @@ To build the Windows version of the application, Visual Studio is required, whic
   uses: egor-tensin/vs-shell@v1
 ```
 
-
 The rest of the script is similar to the Linux one and at the end, we only copy the exe-file to the package.
 
 #### **MacOS Native Application**
@@ -230,7 +221,6 @@ Xcode is required to build Apple applications. Again we can add this to our step
 - uses: maxim-lobanov/setup-xcode@v1
   with: xcode-version: '11.7.0'
 ```
-
 
 And the resulting file "target/client/x86_64-darwin/Resistor Calculator" is copied to the package.
 
@@ -299,7 +289,6 @@ By using these with our secret keys, all the required steps can be run inside a 
     api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
 ```
 
-
 #### **Android App (Linux Build)**
 
 Action file: [maven-ubuntu-android.yml](https://github.com/FDelporte/ResistorCalculatorApp/blob/master/.github/workflows/maven-ubuntu-android.yml)
@@ -321,7 +310,6 @@ The additional steps for Google Play include initialization of the Android Keyst
     encodedString: ${{ secrets.GLUON_ANDROID_KEYSTORE_BASE64 }}
 ```
 
-
 And finally, the upload is done with:
 
 ```
@@ -335,16 +323,12 @@ And finally, the upload is done with:
     track: beta
 ```
 
-
-**Conclusion**
---------------
+## **Conclusion**
 
 The power of JavaFX combined with the Gluon tools and GitHub actions is amazing. Building and distributing a truly cross-platform application has never been easier!
 
 Really not a single code change is needed to run on different platforms. As you can see from the build processed, the exact same code is used to create native applications for both Windows, Linux, MacOS, iOS, and Android!
 
 Gluon is also working on a sample using this work-flow, which is available on [github.com/gluonhq/hello-gluon-ci](https://github.com/gluonhq/hello-gluon-ci).
-
-
 
 **Note:** Used with permission and thanks --- originally published on [webtechie.be](https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/).

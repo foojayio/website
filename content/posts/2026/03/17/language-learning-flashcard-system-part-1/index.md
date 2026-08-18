@@ -28,13 +28,11 @@ These apps are flashcard tools, where you have the front of a card with a questi
 
 In this post, we'll write a Java Spring Boot REST API backend application without any frontend, that will store flash cards and decks in MongoDB. In a second post, we'll add the SRS part and a functional React frontend to use our cards.
 
-****GitHub Repository: Complete SRS Flashcard App Code****
-----------------------------------------------------------
+## ****GitHub Repository: Complete SRS Flashcard App Code****
 
 If you want to follow along, but don't want to copy/paste code, you can get the app at: <https://github.com/mongodb-developer/srsapp>
 
-****How to Create a Spring Boot Project with Spring Initializr****
-------------------------------------------------------------------
+## ****How to Create a Spring Boot Project with Spring Initializr****
 
 Let's start by creating our base, empty project in Spring Initializr. This is a web-based tool to create a Spring Boot project quickly. Head over to <https://start.spring.io/index.html> and select:
 
@@ -58,7 +56,6 @@ Run the app from the command line interface (in the case of Linux / macOS) with:
 ./mvnw spring-boot:run
 ```
 
-
 You need to have a Java SDK installed and available in your PATH.
 
 It will fail! You'll see an error like:
@@ -67,11 +64,9 @@ It will fail! You'll see an error like:
 com.mongodb.MongoSocketOpenException: Exception opening socket
 ```
 
-
 This happens because Spring Boot is already trying to connect to MongoDB, as MongoDB is part of the starter dependencies, and we don't have yet a database. Let's fix this by creating a free MongoDB Atlas cluster. You need to [register for a free Atlas account](https://account.mongodb.com/account/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray) and then follow the instructions on how to [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/). Select the Atlas UI, to create the cluster using your browser (you can also create a cluster using the command line and Atlas CLI).
 
-****Configure MongoDB Connection URI in Spring Boot****
--------------------------------------------------------
+## ****Configure MongoDB Connection URI in Spring Boot****
 
 Once we have that cluster created, we can [copy the connection string](https://www.mongodb.com/docs/manual/reference/connection-string/?deployment-type=atlas&interface-atlas-only=atlas-ui&utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray) and add it to the properties file that Spring Boot reads on startup.
 
@@ -80,7 +75,6 @@ A MongoDB Connection String should look like:
 ```
 mongodb+srv://<user>:<password>@<your-cluster>.mongodb.net/
 ```
-
 
 Where you need to put in your user and password.
 
@@ -101,7 +95,6 @@ spring:
 
     database: srsapp
 ```
-
 
 We want to add an error message at the start of our app to warn about the missing URI. For that, we'll edit the main method in src/main/java/com/mongodb/nimongo/srsapp/SrsappApplication.java
 
@@ -134,7 +127,6 @@ public class SrsappApplication implements CommandLineRunner {
 }
 ```
 
-
 Several changes here:
 
 * We introduce a Logger instance to print out debugging information to the console. Import the relevant classes from the org.slf4j package.
@@ -164,13 +156,11 @@ This way, if we start the app from the command line without the MONGODB_URI envi
     Missing database connection string!
 ```
 
-
 To fix this, set the environment variable before starting the app:
 
 ```
     export MONGODB_URI="<YOUR_CONNECTION_STRING>"
 ```
-
 
 Then run your application again.
 
@@ -180,18 +170,15 @@ Finally, if we provide a URI, the app starts:
 MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4a5b49494d55485e7a43554f481759564f494e5f48145755545d555e5814545f4e">[email protected]</a>/srsapp ./mvnw spring-boot:run
 ```
 
-
 And you should see in the log messages from org.mongodb.driver.client
 
-****Flashcard System: Logical Data Model \& ERD****
----------------------------------------------------
+## ****Flashcard System: Logical Data Model \& ERD****
 
 From a logical point of view, cards are organized in Decks. A Deck of Cards will have a name and will contain cards. There's no limit to the number of Decks and Cards we can have in our system. A Card will have some text in the front, some text in the back, and will belong to a Deck. A Card can be in only one Deck, so this is a one-to-many relationship: a Deck can have 0..n Cards. We can represent that with the following ERD:
 
 erDiagram DECK \|\|--o{ CARD : contains DECK { string id string name string description } CARD { string id date frontText string backText }
 
-****MongoDB Schema Design: One-to-Many Relationships****
---------------------------------------------------------
+## ****MongoDB Schema Design: One-to-Many Relationships****
 
 To model our entities, we have several options. Let's reason through them and find the best schema for this particular problem.
 
@@ -210,7 +197,6 @@ Option 1: Everything in one Collection. We can put Decks in one collection and d
     ]
 }
 ```
-
 
 The main problem here is that we can keep adding cards to the same deck. For instance, the [Jōyō Kanji (常用漢字)](https://www.kanshudo.com/collections/joyo_kanji) is the "basic" set of kanji you're expected to learn, all 2136. That means an array of at least 2136 elements. Every single time you add, delete, or edit a Card, MongoDB reads the whole Deck in memory and saves it in one implicit transaction. This will slow down the system if many people were accessing the same Deck (not in this case), but the main problem here is the lack of boundaries. That array can grow without boundaries and hit the 16MB limit for BSON objects, in what is called the [Unbounded Array Antipattern](https://www.mongodb.com/docs/manual/data-modeling/design-antipatterns/unbounded-arrays/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-boot-foojay&utm_term=hugh.murray)
 
@@ -231,7 +217,6 @@ Our Decks will look like:
 }
 ```
 
-
 And our Cards:
 
 ```
@@ -243,9 +228,7 @@ And our Cards:
 }
 ```
 
-
-****Java Model Classes: Deck and FlashCard (Spring Boot Records)****
---------------------------------------------------------------------
+## ****Java Model Classes: Deck and FlashCard (Spring Boot Records)****
 
 Based on the previous schema, we'll have these two model classes:
 
@@ -262,7 +245,6 @@ public record Deck(
         String description) {
 }
 ```
-
 
 As you can see, the collection name is decks, we have a String id field in Java, that will map to the _id field in the database.
 
@@ -288,11 +270,9 @@ public record FlashCard(
 }
 ```
 
-
 We'll store everything in a cards collection, and use a parentDeckId as a link to the Deck this Card belongs.
 
-****Spring Boot DevTools: How to Enable Automatic Restarts****
---------------------------------------------------------------
+## ****Spring Boot DevTools: How to Enable Automatic Restarts****
 
 Every single time we change something in our code, we need to stop the application and start it again. This can become a tedious process quickly, and also one that is prone to changes. If I got a penny every time I changed something without saving and then was puzzled about the fix not being deployed, I won't be writing this now. I'll be retired a sailing the world in a luxury yacht.
 
@@ -308,11 +288,9 @@ Open your pom.xml file and add this dependency:
         </dependency>
 ```
 
-
 Now, stop and relaunch the app for the last time, and from now on, every time you change anything in your code, your app will recompile and relaunch automagically.
 
-****REST API Design for Flashcard Decks and Cards****
------------------------------------------------------
+## ****REST API Design for Flashcard Decks and Cards****
 
 We need several endpoints for our app.
 
@@ -350,8 +328,7 @@ We need several endpoints for our app.
     * 204 No Content on success, or
     * 404 Not Found if the deckId doesn't exist.
 
-****Create a Spring Boot REST Controller for Decks****
-------------------------------------------------------
+## ****Create a Spring Boot REST Controller for Decks****
 
 To test that our Spring Data API points work, we'll start by adding an empty Deck controller. Create a BaseController.java and DeckController.java file in web/controller like:
 
@@ -365,7 +342,6 @@ public abstract class BaseController {
     static final Logger log = LoggerFactory.getLogger(SrsappApplication.class);
 }
 ```
-
 
 BaseController adds a Logger to our controllers.
 
@@ -443,11 +419,9 @@ public class DeckController extends BaseController{
 }
 ```
 
-
 If you look at the code, you'll see that we are just returning empty responses. We want to call these endpoints and make sure the web part is working properly.
 
-****How to Change the Default Spring Boot Port (Port 5400)****
---------------------------------------------------------------
+## ****How to Change the Default Spring Boot Port (Port 5400)****
 
 Then, we'll change the default port (8080) to 5400 and add some options to improve the debugging logs. Open application.yml and change it to:
 
@@ -471,9 +445,7 @@ logging:
           mongodb: DEBUG
 ```
 
-
-****Test Spring Boot REST APIs with cURL Commands****
------------------------------------------------------
+## ****Test Spring Boot REST APIs with cURL Commands****
 
 To test our endpoints, we will use cURL, available in Linux/macOS and Windows.
 
@@ -489,7 +461,6 @@ curl "http://localhost:5400/decks"
 curl "http://localhost:5400/decks?pageSize=2&pageNumber=0"
 ```
 
-
 To insert a new Deck:
 
 ```
@@ -503,7 +474,6 @@ curl -X "POST" "http://localhost:5400/decks" \
 }'
 ```
 
-
 For search and delete:
 
 ```
@@ -516,11 +486,9 @@ curl -X "DELETE" "http://localhost:5400/decks/<deck id>"
 curl "http://localhost:5400/decks/search?term=lang"
 ```
 
-
 But wait! All this is just working with the placeholder DeckController that is not storing or retrieving anything from a database! Let's fix this by adding our MongoDB code for Decks!
 
-****Spring Data MongoDB Repositories: DeckRepository \& CardRepository****
---------------------------------------------------------------------------
+## ****Spring Data MongoDB Repositories: DeckRepository \& CardRepository****
 
 To access MongoDB, we will create an interface DeckRepository that extends MongoRepository. This is the quickest way to access MongoDB, as MongoRepository includes several useful methods to access our collections. We can even add our own methods to the interface to get custom behaviour. If we need something more advanced or customized, we will need to use MongoTemplate.
 
@@ -558,7 +526,6 @@ public interface DeckRepository extends MongoRepository<Deck, String> {
     List<Deck> searchByText(String searchText, Pageable pageable);
 }
 ```
-
 
 As you can see, we have added one new method: searchByText that it's using a regular expression to search for some text (denoted by ?0 inside name or description. We pass in the i option to perform a case-insensitive comparison. Using regular expressions is not the best way to search for text in MongoDB; generally is better to use [Full Text Search](https://www.mongodb.com/resources/basics/full-text-search), defining a Search Index and using $search.
 
@@ -617,9 +584,7 @@ public interface CardRepository extends MongoRepository<FlashCard, String> {
 }
 ```
 
-
-****Implementing Business Logic with Spring Boot Services****
--------------------------------------------------------------
+## ****Implementing Business Logic with Spring Boot Services****
 
 Services is where we actually use the database code. Our services will interact with the database, sending the queries, inserts, updates, etc., and will expose a set of business-level operations consumed by our web controllers. Go ahead and create DeckService.java in the new folder service. Here, we will use DeckRepository and CardRepository to access the database. For instance, to get a Deck by its identifier, we'll use findById, which is part of CrudRepository and in this case will be implemented by our MongoDB driver.
 
@@ -641,7 +606,6 @@ public class DeckService {
 }
 ```
 
-
 To add a Deck, we'll use save:
 
 ```
@@ -649,7 +613,6 @@ public Deck createDeck(Deck deck) {
         return deckRepository.save(deck);
     }
 ```
-
 
 Then, to delete:
 
@@ -659,7 +622,6 @@ public void deleteDeck(String id) {
     }
 ```
 
-
 If we need to delete all the cards in a Deck, we'll use deleteAllByParentDeckId from CardRepository:
 
 ```
@@ -667,7 +629,6 @@ public void deleteCardsInDeck(String id) {
         cardRepository.deleteAllByParentDeckId(id);
     }
 ```
-
 
 The final DeckService will look like:
 
@@ -779,7 +740,6 @@ public class DeckService {
 }
 ```
 
-
 For Cards, we'll use CardRepository in a similar way:
 
 ```
@@ -856,9 +816,7 @@ public class CardService {
 }
 ```
 
-
-****Connecting Controllers to Database: DeckController Implementation****
--------------------------------------------------------------------------
+## ****Connecting Controllers to Database: DeckController Implementation****
 
 Now that we have our Repositories (defining the operations we want to perform on the database) and the Services (the business use cases), we can wire everything up in our controllers.
 
@@ -873,7 +831,6 @@ For instance, to get one Deck, we'll use deckById from deckService:
         return new ResponseEntity<>(deckService.deckById(id), HttpStatus.OK);
     }
 ```
-
 
 The complete, updated listing for DeckController:
 
@@ -961,7 +918,6 @@ public class DeckController extends BaseController{
 }
 ```
 
-
 And for Cards:
 
 ```
@@ -1032,7 +988,6 @@ public class CardController extends BaseController{
 }
 ```
 
-
 Finally, our constants:
 
 ```
@@ -1044,8 +999,6 @@ public class Constants {
 }
 ```
 
-
-**Next steps**
---------------
+## **Next steps**
 
 In this post, we've covered a lot of ground: building a Spring Boot API that stores our data in MongoDB and testing it. In the second part of this post, we'll add a Spaced Repetition System library and a couple of endpoints to actually do our reviews, along with the schema changes. Stay tuned!

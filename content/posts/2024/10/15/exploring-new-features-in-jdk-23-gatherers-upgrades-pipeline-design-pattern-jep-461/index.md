@@ -33,15 +33,13 @@ var totalNumberOfWords =
           .collect(Collectors.counting());                           // 3
 ```
 
-
 **Example 1**.: Standard stream usage is expressive and very efficient
 
 A Stream API meets the requirements for most standard use cases, but when an additional complex conditional transformation is required, these steps lead to a complex definition of a terminal function, which is represented by the use of a Collector.
 
 Such collector usage can be not only difficult to understand but also difficult to maintain. In other words, there is an obvious lack of ability to define advanced intermediate operations on the pipeline.
 
-Expanding intermediate functions with JEP-461
----------------------------------------------
+## Expanding intermediate functions with JEP-461
 
 JEP-461\[1\] comes with the salvage option named Gatherers. The Gatherer is an intermediate function, a functional interface (Example 2.), that can transform an input element of type *T* to an output element of type *R* . The Gatherer may potentially remember its internal state of type *A* (Example 2. - method integrator).
 
@@ -56,7 +54,6 @@ public interface Gatherer<T, A, R> {
     default BiConsumer<A, Downstream<? super R>> finisher() {...}
 }
 ```
-
 
 **Example 2.**: Gather is a functional interface that defines a stages, where type A represent an internal state
 
@@ -105,16 +102,13 @@ var list  = Stream.of(1,2,3,4,5,6,7,8)
 System.out.println("Result:" + list);
 ```
 
-
 ```
 Output: Result:[[[1, 2, 3], [4, 5, 6]], [[7, 8]]]
 ```
 
-
 **Example 3** .: The *FixedWindow* gatherer operates on a stream of types *T* with internal state of type *A* as *ArrayList* and output type *List* . *Collectors.toList()* is the terminal operation and the moment the stream materializes
 
-Collection of build-in gatherers
---------------------------------
+## Collection of build-in gatherers
 
 JEP-461 comes with collection of build-in gatherers which may serve main of purposes without requirement creating custom ones (Example 4.):
 
@@ -141,7 +135,6 @@ var slidingWindow2 =
        Stream.of(1,2,3,4).gather(Gatherers.windowSliding(2)).toList();
 ```
 
-
 ```
 Output:
 Result fold1:[123456789]
@@ -149,11 +142,9 @@ Result scan1:[1, 12, 123, 1234]
 Result slidingWindow2:[[1, 2], [2, 3], [3, 4]]
 ```
 
-
 **Example 4**.: Some of build-in gatherers and their outputs
 
-Conclusion
-----------
+## Conclusion
 
 JEP-461 can help meet the functional requirements of today's industry, where huge amounts of data need to be processed and analyzed.
 
@@ -165,8 +156,7 @@ In addition, each introduced gatherer can be tested within the scope of its func
 
 JEP-461: Stream Gatherers is another great example of how to move the Java platform forward\[2\] while meeting industry needs.
 
-References
-----------
+## References
 
 [\[1\]JEP-473: Stream Gatherers (Second Preview)](https://openjdk.org/jeps/473)  
 [\[2\]Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

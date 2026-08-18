@@ -21,8 +21,7 @@ frozen: false
 
 **A family vacation as a topic for a Foojay blog post? Really? Yes, because, very unexpectedly, it was influenced by a change in the OpenJDK project...**
 
-Traveling to Kazakhstan
------------------------
+## Traveling to Kazakhstan
 
 In August, our family vacation brought us to Kazakhstan. An important trip, as it is the birth country of our (now) 14 year old son. It was over 13 years that we had been there, and we planned to go back earlier, but some stupid virus messed up everyone's life a few years ago...
 
@@ -42,8 +41,7 @@ So finally, early this year, we decided to start organizing our trip. And it was
 
 *(yes, I may have walked around in a Foojay T-shirt and JVM cap)*
 
-Flight Time Change
-------------------
+## Flight Time Change
 
 But why am I telling this story here on a technical, Java blog? Because we almost missed our flight home, and that wouldn't have happened if I had paid more attention to a specific change in one of the latest Java release notes...!
 
@@ -56,7 +54,6 @@ Because we wanted to be sure of a good price for our plane tickets, we bought th
 
 Luckily we checked the departure time the day before as we had to leave the hotel in the middle of the night. According to our trip organizer we were not the first ones who got confused about changed flight times in Kazakhstan this year.
 
-Conclusion
-----------
+## Conclusion
 
 Is Kazakhstan worth a visit? Definitely! Take your time and travel around as it's a very big country with a lot of beautiful spots. And, before you leave for your next trip, double-check the tickets and the OpenJDK code to validate the times 😉

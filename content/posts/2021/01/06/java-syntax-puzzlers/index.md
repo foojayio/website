@@ -21,8 +21,6 @@ While working on Eclipse, I fondly remember working on various parts of the Java
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-36746" src="muskallatweet-700x129.png" alt="" width="700" height="129">
 
-<br />
-
 Working on language-specific tooling exposes you to all kinds of edge cases and delicate details and language has to offer. Some of them are well known and generally seen as "unprofessional" (hello `goto`). Others are actually not known at all. And with all due respect, I quite enjoy discovering the edge cases of the language syntax - a lot of times to confuse my co-workers who think they know the Java Language Syntax 😉 And given I love a good puzzle (especially the Java Puzzles), let's try a puzzle but using the Java syntax only, without any runtime behavior.
 
 ### Using Java for Phishing
@@ -45,7 +43,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 Indeed, in the context of the post, you correctly guessed that it is printing "1 is 2". Just...HOW? How is it possible to trick Java into thinking 1 == 2, even with Unicode magic? INSIDE A COMMENT. Any guesses? It actually doesn't change the expression. The following Unicode characters were harmed in the process:
 
 * `\u000a` - the newline character `\n`
@@ -63,7 +60,6 @@ public static void main(String[] args) {
    }
 }
 ```
-
 
 Funny enough, most programmers would suspect something fishy with this comment when they see it. But what about indenting it so it's not shown in your editor anymore? 😉
 
@@ -86,7 +82,6 @@ BlockStatement:
   Statement
 ```
 
-
 Taking a closer look at the definition of `Block`, we learn that they can contain statements (so far so good) but also...`ClassDeclaration`s. Now it gets interesting. Let's see how deep the rabbit hole goes.
 
 ```java
@@ -105,7 +100,6 @@ public void howDeepCanWeGo() {
     instance.hello();
 }
 ```
-
 
 Funnily enough, while this feature seems quite useless at first sight, it's the only one I've been using in actual test code in the past. While working on a framework that heavily relied on reflection, the inline class definitions came in quite handy to define classes under test and keeping them with the test. The alternative of having a bunch of nested classes scattered alongside tests was a good reason to move them closer to the test. You can read more about the quirks of local classes in [JLS 14.3](https://docs.oracle.com/javase/specs/jls/se15/html/jls-14.html#jls-14.3).
 
@@ -127,14 +121,12 @@ public class KeywordParameter {
 }
 ```
 
-
 So we're creating a new instance of `KeywordParameter` and calling the `callMe` method on it. Passing the `int` parameter. But wait, the method has two parameters. And one is even named after a keyword. That shouldn't even compile, right? It actually does. Looking at the JLS 8.4 Method Declarations, we can find the definition for method declarations.
 
 ```java
 MethodDeclarator:
   Identifier ( [ReceiverParameter ,] [FormalParameterList] ) [Dims]
 ```
-
 
 We see that the first parameter is a special, optional parameter not part of the formal parameter list. And it's actually defined to always have the name "this:
 
@@ -143,13 +135,11 @@ ReceiverParameter:
   {Annotation} UnannType [Identifier .] this
 ```
 
-
 The so-called "receiver parameter" is an "optional syntactic device" that represents the object it is invoked on (so it's really the same as what you'd expect from "this"). Its sole purpose is to be available in the source code to be annotated if necessary. Assuming we have an `@Immutable` annotation in our project and for some reason, we want to ensure that our IDE (or other static analyzers) understand that `this` in our current context represents an immutable data structure. With the explicit receiver parameter, we can annotate it correspondingly:
 
 ```java
 public void callMe(@Immutable KeywordParameter this, int foo) { ... }
 ```
-
 
 ### @Everywhere
 
@@ -170,11 +160,8 @@ public class TypeAnnotationsEverywhere {
 }
 ```
 
-
 In conclusion, using `TYPE_USE` allows us to put the annotation in the most unusual spots. [JLS 4.11](https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.11) defines all the spots that are covered by a "type usage".
 
 Which one of those syntaxes were you aware of? Got all of them? The code for the post can be found on [GitHub](https://github.com/bmuskalla/java-syntax-puzzlers) as well. In the meantime, I'm still working on my museum of interesting cases of the language constructs, so please share anything you've encountered yourself. You can reach me on Twitter via [@bmuskalla](https://twitter.com/bmuskalla).
-
-
 
 Note: This post was originally published on [bmuskalla.github.io](https://bmuskalla.github.io/blog/2021-01-04-java-syntax-puzzle/ "bmuskalla.github.io")

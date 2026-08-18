@@ -33,8 +33,7 @@ In reactive programming, Mono and Flux are two fundamental types of the Publishe
 
 Let's see what features and tools IntelliJ IDEA provides to conveniently work with these crucial types.
 
-Reactor live templates
-----------------------
+## Reactor live templates
 
 Who doesn't love typing less and coding faster? Reactive live templates will help you do exactly that!
 
@@ -45,8 +44,7 @@ When working on projects that have Reactor support, IntelliJ IDEA can automatica
 Here's how you can effortlessly return Mono from the string with the help of the toMono live template:  
 ![Reactive_live_templates](image5.gif)
 
-Debugging Reactor Streams
--------------------------
+## Debugging Reactor Streams
 
 IntelliJ IDEA allows you to debug your reactive projects. Prior to starting the process, you'll need to adjust your configurations. Go to Preferences/Settings \| Languages \& Frameworks \| Reactive Streams. Tick the Enable Reactor Debug mode option and select Hooks.onOperatorDebug().
 
@@ -64,8 +62,7 @@ You can also perform more complex evaluations.
 
 By default, the debugger fetches the first 100 items of Flux. You can configure this number in *File \| Settings \| Languages \& Frameworks \| Reactive Streams*. Each time you trigger a computation, the IDE subscribes to a Publisher value and assumes the operation is safe to retry.
 
-Noteworthy inspections for daily needs
---------------------------------------
+## Noteworthy inspections for daily needs
 
 Our helpful inspections are always ready to highlight inconsistencies in your code -- everybody can use an extra set of eyes! We'll demonstrate two of the most helpful inspections that you can benefit from when using Reactive Streams.
 

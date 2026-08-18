@@ -35,14 +35,12 @@ For instance, the January 2023 release notes for Azul Zulu Builds of OpenJDK con
 This release of Azul Zulu comes with IANA Time Zone Database version 2022g.
 ```
 
-
 Why do we need a new version of the time zone and currency database every few months?
 
 Let's find out...
 ![](timezone-currency-1024x400.jpg)
 
-Time Zone Database
-------------------
+## Time Zone Database
 
 Within the Java code, a whole list of time zones is defined. We can get this list quickly in jshell. The result below is truncated because it has 602 entries!
 
@@ -55,7 +53,6 @@ $2 ==> [Asia/Aden, America/Cuiaba, Etc/GMT+9, Etc/GMT+8, Africa/Nairobi, America
 jshell> ZoneId.getAvailableZoneIds().size()
 $3 ==> 602
 ```
-
 
 ### Where are the Time Zones Managed?
 
@@ -70,13 +67,9 @@ In Java, the ZoneRulesProvider provides access to this information. The JavaDoc 
 
 That history is actually essential if you want to find out the correct daylight savings timestamps from earlier years!
 
-
-
 ***IANA is an external third party with its own community that maintains the Time Zone Database. Based on this database, many other projects -- like OpenJDK -- keep their own database up-to-date by following the changes in IANA. Anyone can contribute or monitor changes via the [OpenJDK GitHub project](https://github.com/openjdk/jdk), so it's easy to check if all changes are applied. Within the OpenJDK project, these changes are backported to all active versions. Azul even goes a step further and goes back to version 6.***
 
 **Dmitry Cherepanov and Andrew Brygin, Staff Software Engineers, Azul**
-
-
 
 The database itself is defined in text files within the OpenJDK project, with a set of rules for each country. You can find [the rules on GitHub](https://github.com/openjdk/jdk/tree/master/src/java.base/share/data/tzdata).
 
@@ -112,7 +105,6 @@ Rule    C-Eur   1977    1980    -   Apr Sun>=1    2:00s  1:00    S
 ...
 ```
 
-
 In the files `iso3166.tab` and `zone.tab`, the connection is made between the country rules and the time zones. This is the data for the same example country "Belgium":
 
 ```
@@ -123,14 +115,9 @@ zone.tab
 BE  +5050+00420 Europe/Brussels
 ```
 
-
-
-
 ***Keeping the JDK in sync with the changes in the time zone database is a real team effort! These changes are not only implemented in the most recent version but are also backported to all other still-maintained versions. This means many people are involved from various companies and the OpenJDK community. To give you an idea of the work needed for such a change, take a look at the list of tickets and people who contributed to this [OpenJDK ticket JDK-8296108](https://bugs.openjdk.org/browse/JDK-8296108).***
 
 **Yuri Nesterenko, Azul Senior Software Engineer, Azul**
-
-
 
 ### What Methods are Available?
 
@@ -160,7 +147,6 @@ jshell> datetime.withZoneSameInstant(ZoneId.of("Asia/Kolkata"))
 $5 ==> 2023-01-02T17:30+05:30[Asia/Kolkata]
 ```
 
-
 We can also work vice-versa, define a variable for a given time zone, and get the offsets compared to the UTC:
 
 ```
@@ -177,7 +163,6 @@ jshell> datetime.getOffset()
 $9 ==> -08:00
 ```
 
-
 Within the rules files, the daylight saving change dates are also included. Let's see how we can retrieve some of that information.
 
 For example, for Belgium again, to find the first daylight saving change in 2023 (changing to summer time) and the second one (changing back to winter time):
@@ -193,16 +178,11 @@ jshell> ZoneId.of("Europe/Brussels").getRules().nextTransition(datetime.plusMont
 $14 ==> Transition[Overlap at 2023-10-29T03:00+02:00 to +01:00]
 ```
 
-
-
-
 ***These changes may seem to be trivial, but they sometimes have a very big impact on the OpenJDK project. An excellent example is [JDK-8284840](https://bugs.openjdk.org/browse/JDK-8284840), to upgrade the Unicode Common Locale Data Repository (CLDR) data in the JDK to version 42. This CLDR provides critical building blocks for software to support the world's languages. The pull request to achieve this Unicode compatibility includes changes in 377 files, as seen [in this commit](https://github.com/openjdk/jdk/commit/5b3de6e143e370272c36383adac3e31f359bc686). Luckily these kinds of significant changes usually happen only once in a feature release and are never backported as a whole to earlier versions. This differs from time zone updates, which may occur rather often and always get integrated into update releases.***
 
 ***Sometimes small changes have a huge impact...***
 
 **Yuri Nesterenko, Senior Software Engineer, Azul**
-
-
 
 ### Update the Timezone Database Separately
 
@@ -215,8 +195,7 @@ More information is available on:
 * Azul website: [ZIUpdater Time Zone Tool](https://www.azul.com/products/components/ziupdater-time-zone-tool/)
 * Azul docs: [Timezone Updater](https://docs.azul.com/core/timezone-updater)
 
-Also Changing Between Releases: Currency Data
----------------------------------------------
+## Also Changing Between Releases: Currency Data
 
 The data directory in the OpenJDK sources contains another file that can change between versions: `CurrencyData.properties`[. The January 2023 release notes of Azul Zulu Builds of OpenJDK](https://docs.azul.com/core/zulu-openjdk/release-notes/january-2023#whats-new) lists the following changes, which align this properties file with ISO-related changes regarding the codes for historic denominations of currencies and funds.
 
@@ -249,7 +228,6 @@ jshell> currency.getSymbol()
 $4 ==> "HRK"
 ```
 
-
 When I wrote this post in January 2023, this didn't seem to align with the changes we saw in the screenshot above, as Croatia changed from HRK to EUR! Let's check the Java version...
 
 ```
@@ -258,7 +236,6 @@ openjdk version "19.0.1" 2022-10-18
 OpenJDK Runtime Environment Zulu19.30+11-CA (build 19.0.1+10)
 OpenJDK 64-Bit Server VM Zulu19.30+11-CA (build 19.0.1+10, mixed mode, sharing)
 ```
-
 
 Let's change to the latest Java 19 version, released later in January, and check the same code...
 
@@ -287,11 +264,9 @@ jshell> currency.getSymbol()
 $4 ==> "€"
 ```
 
-
 Isn't that impressive? The same code now gives the correct output by just switching to the most up-to-date version of Java!
 
-Conclusion
-----------
+## Conclusion
 
 Time zone, daylight savings, and currencies are not only a problem for programmers.
 
@@ -307,4 +282,3 @@ And ... in case you still have `jshell` open in your terminal and want to get ou
 jshell> /exit
 |  Goodbye
 ```
-

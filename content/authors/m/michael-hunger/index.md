@@ -13,3 +13,4 @@ aliases:
   - "/today/author/michael-hunger/"
 frozen: false
 ---
+

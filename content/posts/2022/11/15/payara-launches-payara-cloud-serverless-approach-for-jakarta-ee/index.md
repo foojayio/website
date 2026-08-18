@@ -22,8 +22,7 @@ related_posts:
 frozen: false
 ---
 
-The cloud native application runtime automates tasks like Kubernetes deployment, ingress and YAML.
---------------------------------------------------------------------------------------------------
+## The cloud native application runtime automates tasks like Kubernetes deployment, ingress and YAML.
 
 Payara has launched a new product [++Payara Cloud++](https://www.globenewswire.com/Tracker?data=vWpu_qnRrkJcVsDvJOwJah09cL0__ihD70JQn1PC6vbdZhbW7zbNxo2ghVnHWkXX3jO6POtRb8Gjgiaa-vrN66gNjzvUPyiITCnoWqKAaYV4D440OmdOMwAVS0lLCo76), designed to run Jakarta EE apps easily and quickly on the cloud.
 
@@ -62,7 +61,6 @@ Quotes on Payara Cloud:
 
 We are running a Payara Cloud webinar to answer all your questions and explain the concept:
 
-[**Payara Cloud -- Realizing the Potential of Cloud Native Serverless Jakarta EE**](https://us02web.zoom.us/webinar/register/WN_AKWjBlnISz69FH7yp5lkzA)
--------------------------------------------------------------------------------------------------------------------------------------------------------
+## [**Payara Cloud -- Realizing the Potential of Cloud Native Serverless Jakarta EE**](https://us02web.zoom.us/webinar/register/WN_AKWjBlnISz69FH7yp5lkzA)
 
 ### Nov 18, 2022 03:00 PM

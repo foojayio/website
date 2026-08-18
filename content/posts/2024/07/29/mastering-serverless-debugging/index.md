@@ -46,12 +46,9 @@ Before I proceed I think it's important to disclose a bias: I am personally not 
 
 {{< youtube B6uyutAbEDw >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Introduction to Serverless Computing
-------------------------------------
+## Introduction to Serverless Computing
 
 Serverless computing, often referred to as Function as a Service (FaaS), allows developers to build and run applications without managing servers. In this model, cloud providers automatically handle the infrastructure, scaling, and management tasks, enabling developers to focus purely on writing and deploying code. Popular serverless platforms include AWS Lambda, Azure Functions, and Google Cloud Functions.
 
@@ -64,8 +61,7 @@ The "catch" is two fold:
 * Serverless programming removes the need to understand the servers but also removes the ability to rely on them resulting in more complex architectures.
 * Pricing starts off cheap. Practically free. It can quickly escalate especially in case of an attack or misconfiguration.
 
-Challenges of Serverless Debugging
-----------------------------------
+## Challenges of Serverless Debugging
 
 While serverless architectures offer some benefits, they also introduce unique debugging challenges. The primary issues stem from the inherent complexity and distributed nature of serverless environments. Here are some of the most pressing challenges.
 
@@ -89,8 +85,7 @@ Serverless functions are designed to handle high concurrency and scale seamlessl
 
 Notice that when I discuss concurrency here I'm often referring to race conditions between separate services.
 
-Effective Strategies for Serverless Debugging
----------------------------------------------
+## Effective Strategies for Serverless Debugging
 
 Despite these challenges, several strategies can help make serverless debugging more manageable. By leveraging a combination of local debugging, feature flags, staged rollouts, logging, idempotency, and Infrastructure as Code (IaC), developers can effectively diagnose and fix issues in serverless applications.
 
@@ -126,8 +121,6 @@ I talk about striking the delicate balance between debuggable code, performance 
 
 {{< youtube 53qCLRFcBSs >}}
 
-<br />
-
 ### Embracing Idempotency
 
 Idempotency, a key concept from functional programming, ensures that functions produce the same result given the same inputs, regardless of the number of times they are executed. This simplifies debugging and testing by ensuring consistent and predictable behavior.
@@ -136,12 +129,9 @@ Designing your serverless functions to be idempotent involves ensuring that they
 
 Testing is always important but in serverless and complex deployments it becomes critical. Awareness and embrace of idempotency allows for more testable code and easier to reproduce bugs.
 
-Debugging a Lambda Application Locally with AWS SAM
----------------------------------------------------
+## Debugging a Lambda Application Locally with AWS SAM
 
 {{< youtube SlFA-JlTYGM >}}
-
-<br />
 
 Debugging serverless applications, particularly AWS Lambda functions, can be challenging due to their distributed nature and the limitations of traditional debugging tools. However, AWS SAM (Serverless Application Model) provides a way to simulate Lambda functions locally, enabling developers to test and debug their applications more effectively. I will use it as a sample to explore the process of setting up a local debugging environment, running a sample application, and configuring remote debugging.
 
@@ -217,8 +207,7 @@ After updating the timeout value, re-issue the `sam build` command to apply the 
 
 In some cases, running the application locally might not be enough. You may need to simulate running on the actual AWS stack to get more accurate debugging information. Solutions like SST (Serverless Stack) or MerLoc can help achieve this, though they are specific to AWS and relatively niche.
 
-Final Word
-----------
+## Final Word
 
 Serverless debugging requires a combination of strategies to effectively identify and resolve issues. While traditional debugging methods may not always apply, leveraging local debugging, feature flags, staged rollouts, comprehensive logging, idempotency, and IaC can significantly improve your ability to debug serverless applications. As the serverless ecosystem continues to evolve, staying adaptable and continuously updating your debugging techniques will be key to success.
 

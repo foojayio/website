@@ -30,6 +30,4 @@ Moreover, in combination with Kubernetes, MicroProfile is a very powerful tool t
 
 {{< youtube QSij7M7DdPc >}}
 
-<br />
-
 This presentation by Ondrej Mihalyi at DevOpsCon showcases the strength of combining MicroProfile and an OAuth service by doing a live demonstration of securing enterprise Java microservices in Kubernetes.

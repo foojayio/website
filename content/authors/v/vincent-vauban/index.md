@@ -13,3 +13,4 @@ aliases:
   - "/today/author/vincent-vauban/"
 frozen: false
 ---
+

@@ -32,10 +32,7 @@ This is an important skill that we need to master in a startup where we might no
 
 {{< youtube 2HatFLh4xoA >}}
 
-<br />
-
-What's DevOps?
---------------
+## What's DevOps?
 
 DevOps is a software development methodology that aims to bridge the gap between development and operations teams. It emphasizes collaboration and communication between these two teams to ensure the seamless delivery of high-quality software products.
 
@@ -45,8 +42,7 @@ The core principles behind it are:
 2. **Automation** - Automation involves automating repetitive tasks such as building, testing, and deploying software. This helps to reduce the time and effort required to perform these tasks, freeing up developers to focus on more important tasks.As a developer, automation can help you by freeing up your time and allowing you to focus on writing code, rather than spending time on manual tasks. Additionally, automation helps reduce the risk of human error, ensuring that your code is always deployed correctly.
 3. **Collaboration and Communication** - DevOps emphasizes collaboration and communication between development and operations teams. This helps ensure that everyone is on the same page and working towards a common goal. It also helps reduce the time and effort required to resolve any issues that may arise.
 
-Platform Engineering
---------------------
+## Platform Engineering
 
 Recently there's been a rise in the field of platform engineering. This is somewhat confusing as the overlap between the role of DevOps and a Platform Engineer isn't necessarily clear.
 
@@ -58,8 +54,7 @@ In other words, DevOps is concerned with improving the way software is developed
 
 While both DevOps and Platform Engineering complement each other, they serve different purposes. DevOps helps teams to work together more effectively and deliver software faster, while Platform Engineering provides the infrastructure and tools needed to support that process.
 
-Where do we Start?
-------------------
+## Where do we Start?
 
 When learning DevOps, it is important to have a solid understanding of the tools and techniques commonly used in the field. Here are some of the most important tools and techniques to learn:
 
@@ -81,8 +76,7 @@ However, by having a solid understanding of the most commonly used tools and tec
 
 Most features and capabilities are transferable. If you learn CI principles in one tool, moving to another won't be seamless. But it will be relatively easy.
 
-Version Control
----------------
+## Version Control
 
 We all use git, or at least I hope so. Git's dominance in version control has made it much easier to build solutions that integrate deeply. As developers, Git is primarily viewed as a version control system that helps us manage and track changes to our codebase.
 
@@ -125,8 +119,7 @@ We decide on these metrics based on rules of thumb and best practices. But a goo
 
 The second benefit of pull requests is their crucial role in the CI/CD process. When a developer creates a pull request, it triggers an automated build and testing process, which verifies that the code changes are compatible with the rest of the codebase and that all tests pass. This helps identify any issues early in the development process and prevents bugs from reaching production. Once the build and test processes are successful, the pull request can be merged into the main branch, triggering the release pipeline to deploy the changes to production. I will cover CI more in-depth in the next installment of this series.
 
-Finally
--------
+## Finally
 
 I feel that the discussion of DevOps is often very vague.
 

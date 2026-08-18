@@ -36,8 +36,7 @@ JSR 335 has greatly facilitated programming in a multicore environment by introd
 
 If Lambda Expressions had been integrated into the Collections API from the beginning, their development could have taken a different path. However, they have enriched the Collections API by introducing new methods to current interfaces and introducing new Interfaces such as **'Stream'**.
 
-Why Lambda Expressions?
------------------------
+## Why Lambda Expressions?
 
 Before the introduction of**Lambda Expressions**, developers commonly used ubiquitous anonymous inner classes, which were more verbose and overwhelming.
 
@@ -45,8 +44,7 @@ However, Lambda expressions are simplified, made more concise, and made it elega
 
 So,
 
-What is Lambda Expression?
---------------------------
+## What is Lambda Expression?
 
 According to Oracle documentation, **a lambda expression is just a shorter way of writing an implementation of a method for later execution.**
 
@@ -59,7 +57,6 @@ Composing a lambda expression involves three components:
 ```java
 () -> { }
 ```
-
 
 1. A block of parameters
 2. An Arrow and Java uses meager arrows(-\>)
@@ -80,7 +77,6 @@ Collections.sort(names, new Comparator() {
 });
 ```
 
-
 Using the **lamda expression**, we can simplify the above code snippet like the below,
 
 ```java
@@ -88,7 +84,6 @@ List names = List.of("Foojay", "Java", "Steve", "Mahi");
 
 names.sort((str1, str2) -> str1.compareTo(str2));
 ```
-
 
 The provided code snippet describes the lambda expression and sorting method used for the list of names as follows:
 
@@ -130,14 +125,12 @@ List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
 names.sort((str1, str2) -> str1.compareTo(str2));
 ```
 
-
 The above code can be rewritten as
 
 ```java
 List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
 names.sort(String::compareTo);
 ```
-
 
 In this instance, the `compareTo` method within the String class serves as a Method Reference for `String::compareTo`, effectively substituting the lambda expression `(str1, str2) -> str1.compareTo(str2)`.
 
@@ -161,7 +154,6 @@ public class CustomComparator {
 }
 ```
 
-
 **Lambda Expression Code**
 
 ```java
@@ -170,7 +162,6 @@ var comparator = new CustomComparator();
 names.sort((str1, str2) -> comparator.compareStrings(str1, str2));
 ```
 
-
 **Using Method References**
 
 ```java
@@ -178,7 +169,6 @@ List<String> names = List.of("Foojay", "Java", "Steve", "Mahi");
 var comparator = new CustomComparator();
 names.sort(comparator::compareStrings);
 ```
-
 
 The method reference `comparator::compareStrings` refers to the compareStrings method of the comparator object, replacing the lambda expression `(str1, str2) -> comparator.compareStrings(str1, str2`. This substitution enhances the code's conciseness and readability.
 
@@ -194,13 +184,11 @@ Let's consider the following example
 Consumer<String> result = (s) -> System.out.println(s);
 ```
 
-
 **Using Bounded Method References**
 
 ```java
 Consumer<String> printer = System.out::println;
 ```
-
 
 ### 4. Constructor Method References
 
@@ -212,13 +200,11 @@ This is pretty straigthforward, for example
 Supplier<List<String>> supplier = () -> new ArrayList<>();
 ```
 
-
 **Constructor Method References** : `ClassName::new`
 
 ```java
 Supplier<List<String>> supplier = ArrayList::new;
 ```
-
 
 3. Functional Interfaces
 ------------------------
@@ -242,13 +228,11 @@ public interface Supplier<T> {
  }
 ```
 
-
 The subsequent lambda implements the aforementioned interface.
 
 ```java
 Supplier<String> supplier = () -> "Hello Foojay!";`
 ```
-
 
 The JDK comes with four of specialized suppliers which will avoid unneccessary boxing / unboxing
 
@@ -270,13 +254,11 @@ public interface Consumer<T> {
 }
 ```
 
-
 The subsequent lambda implements the aforementioned interface.
 
 ```java
 Consumer<String> printer = str -> System.out.println(str);
 ```
-
 
 There are specialized versions of `BiConsumer` interface which handles the primitive types
 
@@ -297,13 +279,11 @@ public interface Predicate<T> {
 }
 ```
 
-
 The subsequent lambda implements the aforementioned interface.
 
 ```java
 Predicate<String> lengthCheck = s -> s.length() == 9;
 ```
-
 
 It also contains specialized versions of interfaces
 
@@ -325,7 +305,6 @@ public interface Function<T, R> {
 }
 ```
 
-
 Example
 
 ```java
@@ -342,9 +321,7 @@ int length = stringLength.apply(example);
 System.out.println("The length of the string is: " + length);
 ```
 
-
-Key Benefits
-------------
+## Key Benefits
 
 * Improving Readability: Reducing boilerplate code enhances the clarity of the logic.
 * Increasing Efficiency: Writing less code accelerates the development process.

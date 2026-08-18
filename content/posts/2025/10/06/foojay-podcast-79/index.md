@@ -23,13 +23,11 @@ On September 19th, 2025, the first [AI4Devs conference](https://amsterdam.ai4dev
 
 I asked all my guests the same opening question: 'What's your name, and what brings you to this conference?' Let's get started!
 
-Video
------
+## Video
 
 {{< youtube QyBcTQUjHek >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,8 +35,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction
 

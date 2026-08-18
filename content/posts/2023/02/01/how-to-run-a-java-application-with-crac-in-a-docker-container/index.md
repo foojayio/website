@@ -62,8 +62,7 @@ If you would like to know more about the implementation or if you would like to 
 
 [Github Page](https://github.com/CRaC)
 
-Preparations
-------------
+## Preparations
 
 The idea is to have an application or service that consists of a single executable JAR file.
 
@@ -92,7 +91,6 @@ RUN mkdir -p /opt/crac-files
 COPY build/libs/MY-APP.jar /opt/app/MY-APP.jar
 ```
 
-
 3. Now we can run `docker build -t myapp_on_crac .` to build the docker image.
 
 #### Start your application in a docker container
@@ -103,14 +101,12 @@ COPY build/libs/MY-APP.jar /opt/app/MY-APP.jar
 docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac
 ```
 
-
 2. In the docker container run: 
 
 ```
 cd /opt/app
 java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
 ```
-
 
 <!-- -->
 
@@ -125,7 +121,6 @@ java -XX:CRaCCheckpointTo=/opt/crac-files -jar MY-APP.jar
 ```
 docker exec -it -u root my_app_on_crac /bin/bash
 ```
-
 
 3. Now it's up to you when you would like to create the checkpoint (e.g. apply some workload to your app to make sure everything is compiled and optimized).
 4. Take the PID that you noted from the other shell window and create the checkpoint by executing `jcmd PID JDK.checkpoint`
@@ -143,7 +138,6 @@ docker exec -it -u root my_app_on_crac /bin/bash
 docker commit CONTAINER_ID my_app_on_crac:checkpoint
 ```
 
-
    in the second shell window, we can commit the current state of the container to the state checkpoint.
 4. Now we can stop the docker container by executing `exit`in the first shell window.
 
@@ -154,7 +148,6 @@ docker commit CONTAINER_ID my_app_on_crac:checkpoint
 ```
 docker run -it --privileged --rm --name my_app_on_crac my_app_on_crac:checkpoint java -XX:CRaCRestoreFrom=/opt/crac-files
 ```
-
 
 2. Your application should now start much faster from the saved checkpoint.
 

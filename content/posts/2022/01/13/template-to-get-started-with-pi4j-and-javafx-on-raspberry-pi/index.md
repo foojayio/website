@@ -32,15 +32,11 @@ The Pi4J project wants to be the starting point for everyone who wants to use Ja
 * Explain the use of a MVC-model (Model-View-Controller) to clearly split data, actions and user interface
 * Explain the use of JUnit test
 
-<br />
-
-Sources and info
-----------------
+## Sources and info
 
 Please check the [README of the sources of the project](https://github.com/Pi4J/pi4j-template-javafx) for a full description of the setup process of the Raspberry Pi and to fully understand the example applications and the MVC-model. This page is only intended to give you a quick overview.
 
-Example applications
---------------------
+## Example applications
 
 ### HelloFX
 
@@ -78,8 +74,7 @@ The MVC concept should also be used for applications without a GUI.
 
 When developing PUI only applications, or when adding the GUI later, then one should use the `TemplatePUIApp` as template.
 
-The MVC concept
----------------
+## The MVC concept
 
 The classic Model-View-Controller concept contains in addition to the starter class at least 3 more classes.  
 
@@ -93,7 +88,6 @@ GUI and PUI work with the same identical controller and thus also the same ident
 In the MVC concept, every user interaction traverses the exact same cycle:
 ![](mvc-interaction.png)
 
-Conclusion
-----------
+## Conclusion
 
 You can use the same architecture (MVC) to implement a JavaFX-based GUI, a PUI attached to a Raspberry Pi, and integrate both in a clean, modular way.

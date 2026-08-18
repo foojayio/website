@@ -28,8 +28,7 @@ But what is MicroProfile specification, what is it used for and why might you ne
 
 This article explains all!
 
-What Is MicroProfile?
----------------------
+## What Is MicroProfile?
 
 The [MicroProfile](https://microprofile.io/) specification is a set of Enterprise Java APIs and technologies, designed to help with the challenge of building microservices architectures in Java.
 
@@ -51,8 +50,7 @@ Microservices refer to a software architecture style where your application is s
 
 Services can then be deployed and maintained independently from each other. Read our ['Explaining Microservices: No Nonsense Guide for Decision Makers'](https://www.payara.fish/resource/explaining-microservices-no-nonsense-guide-for-decision-makers/) for more information about microservices.
 
-How Does MicroProfile Help You With Microservices Applications?
----------------------------------------------------------------
+## How Does MicroProfile Help You With Microservices Applications?
 
 MicroProfile has ready-made APIs to deal with common challenges in microservices architecture. It means you can use MicroProfile APIs, rather than write custom code to fix some problems. For example:
 
@@ -63,8 +61,7 @@ MicroProfile has ready-made APIs to deal with common challenges in microservices
 * **Problem:** More independently built services = more data and metrics in different systems. How do you keep track of them to monitor performance and usage?  
   **MicroProfile Solution:** [Metrics](https://download.eclipse.org/microprofile/microprofile-metrics-4.0/microprofile-metrics-spec-4.0.html)- this API gathers data and metrics from different services and combines them into a centralized system.
 
-Who Maintains MicroProfile?
----------------------------
+## Who Maintains MicroProfile?
 
 Both MicroProfile and Jakarta EE are managed by the [Eclipse Foundation,](https://www.eclipse.org/org/foundation/) a not-for-profit software corporation that stewards many open source projects.
 
@@ -72,15 +69,13 @@ MicroProfile is open source, so anyone can get involved in the project.
 
 The Eclipse Foundation manages the [MicroProfile Working Group,](https://microprofile.io/workinggroup/#:~:text=MicroProfile%20is%20an%20open%20forum,with%20a%20goal%20of%20standardization.) an open forum where different vendors work together to build the brand, establish the technical roadmap, define the rules around compatibility and what makes a MicroProfile compatible implementation.
 
-What Is A MicroProfile Implementation?
---------------------------------------
+## What Is A MicroProfile Implementation?
 
 Like Jakarta EE, each MicroProfile API has a Technology Compatibility Kit (TCK), a test suite your software has to pass to prove it is compatible with the API.
 
 Compatible implementations will follow the specifications and pass the TCKs.
 
-What Is A MicroProfile Runtime?
--------------------------------
+## What Is A MicroProfile Runtime?
 
 MicroProfile, like Jakarta EE, is designed to work with a runtime. A runtime is a program where your application runs. It handles HTTP requests sent by its clients over the internet.
 
@@ -88,8 +83,7 @@ A MicroProfile runtime will need to pass the TCKs to be a compatible implementat
 
 Many different vendors have created MicroProfile compatible runtimes, including Payara. [Payara Micro](https://www.payara.fish/products/payara-micro/) is our lightweight solution: MicroProfile and Jakarta EE compatible and designed for containerized Jakarta EE and MicroProfile deployments.
 
-Further Reading :
------------------
+## Further Reading :
 
 * [Demystifying Microservices for Jakarta EE \& Java EE Developers](https://info.payara.fish/demystifying-microservices-for-java-ee-developers)
 * [MicroProfile Fault Tolerance to Build Cloud Native Applications](https://www.payara.fish/page/how-to-use-eclipse-microprofile-fault-tolerance-api-to-build-cloud-native-applications-on-payara-platform/)

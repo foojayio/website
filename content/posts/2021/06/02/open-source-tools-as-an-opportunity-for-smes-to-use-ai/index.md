@@ -20,8 +20,7 @@ Time-traveling cyborgs and robots that are able to love. These interesting and r
 
 The goal of my research at [Hochschule Pforzheim](https://www.hs-pforzheim.de/en/), summarized in this article, is to explore how SMEs can be sensitized to the topic of AI with the help of Open Source Tools. Firstly, the relevance of AI for SMEs will be addressed. Afterwards, relevant Open Source Tools are identified and a decision aid for SMEs will be provided. The focus of this article is on German SMEs, but the learnings can be applied all over the globe.
 
-Relevance of Artifical Intelligence for SMEs
---------------------------------------------
+## Relevance of Artifical Intelligence for SMEs
 
 ### Current state of Digitalization
 
@@ -80,8 +79,7 @@ Other barriers for the use of AI include the available investment limit \[1\], l
 
 But how can SMEs integrate AI into their business model? Around 40% of all SMEs still see AI as a threat. However, an equally large proportion of SMEs see AI as an opportunity for themselves and their industry. ^\[1\]^ Above all, these companies need a cost-effective AI solution. At this point, it would be an option for SMEs to consider Open Source Tools.
 
-Open Source Tools for Articial Intelligence
--------------------------------------------
+## Open Source Tools for Articial Intelligence
 
 ### Overview of Open Source Tools
 
@@ -134,8 +132,7 @@ If SMEs choose an open source tool as a way to use AI, there are numerous applic
 
 Once all these steps have been followed, a narrowed down selection of tools should then be available. In the next step, these should be compared with the company's investment plan and readiness for AI. Only then can SMEs make a final decision in favor of a particular Open Source Software. In this way, they can exploit the potential of AI.
 
-Conclusion
-----------
+## Conclusion
 
 The purpose of this article is to raise awareness of AI among SMEs with the help of Open Source Tools.
 
@@ -145,10 +142,7 @@ In general, SMEs can be recommended to increase their research activities in the
 
 Artificial Intelligence was, is and will be a relevant topic of digitalization. Therefore, not only SMEs, but all companies should follow this trend and implement AI in their companies.
 
-
-
-Sources
--------
+## Sources
 
 \[1\] Demary, Vera und Goecke, Henry (2019): Künstliche Intelligenz: Deutsche Unternehmen zwischen Risiko und Chance. In: IW-Trends -- Vierteljahresschrift zur empirischen Wirtschaftsforschung. 46. Jg. Nr.4. S.3-18. Cologne
 

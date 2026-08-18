@@ -23,8 +23,7 @@ The vulnerability occurs in the [Jingle Naming and Directory Interface](https://
 
 Additional vulnerabilities have been detected that may impact holiday celebrations. Previous version of YuleLog4J are also at risk of a [Denial of Santa](https://threatpost.com/third-log4j-bug-dos-apache-patch/177159/) (DoS) vulnerability in recursive lookups based when paired with untrusted kindling.
 
-Mitigating Your Risk
---------------------
+## Mitigating Your Risk
 
 Patches to defend the RCE are available in YuleLog4J 2.17.0.
 

@@ -33,10 +33,7 @@ But it's also tedious. Before we continue, if you prefer, I cover most of these 
 >
 > --- Shai Almog (@debugagent) [April 19, 2022](https://twitter.com/debugagent/status/1516497057573388294?ref_src=twsrc%5Etfw)
 
-<br />
-
-Watch Annotations
------------------
+## Watch Annotations
 
 Last time we discussed customizing the watch UI to render complex objects more effectively. But there's one problem with that: "We aren't alone".
 
@@ -51,7 +48,6 @@ That's where JetBrains provides a unique solution: custom annotations. Just anno
  <version>23.0.0</version>
 </dependency>
 ```
-
 
 Once this is done, we can annotate the class from the previous duckling to achieve the same effect:
 
@@ -68,13 +64,11 @@ public interface VisitRepository extends JpaRepository<Visit, Integer> {
 }
 ```
 
-
 Notice we need to escape the strings in the annotation so they will be valid Java Strings. We need to escape the quote symbols and use them to write a "proper" string.
 
 Again everything else matches the content and result we saw in the previous duckling.
 
-Memory Debugger
----------------
+## Memory Debugger
 
 The primary focus of this post is the memory debugging capabilities. By default, JetBrains disables most of these capabilities to boost program execution performance. We can enable the memory debugger view by checking it on the right-hand side of the bottom tool window.
 
@@ -120,8 +114,7 @@ The backtraces for memory allocations are the missing piece that would show you 
 
 This is difficult to see sometimes in memory intensive applications. When multiple threads allocate multiple objects in memory, the noise is hard to filter. But of all the tools I used, this is by far the easiest.
 
-Finally
--------
+## Finally
 
 One of my favorite things in Java is the lack of real memory errors. There are no invalid memory addresses. No uninitialized memory that leads to invalid memory accesses. No invalid pointers, no memory address (that we're exposed to) or manual configuration. Things "just work".
 

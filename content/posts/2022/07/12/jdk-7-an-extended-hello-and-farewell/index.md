@@ -32,8 +32,7 @@ However, it turns out that there are still a significant number of people who ar
 
 In many ways, this is one of Java's strengths: you can just keep using an older version because your application doesn't need features from newer releases. If you can keep your implementation of JDK 7 updated with relevant security patches and bug fixes, why change?
 
-Extending Support of JDK 7
---------------------------
+## Extending Support of JDK 7
 
 Fortunately, if you are one of those users who are not in a position to migrate from JDK 7 to a newer release, Azul has a solution for you.
 

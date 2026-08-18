@@ -73,7 +73,6 @@ public class MainView extends VerticalLayout { // (2)
 }
 ```
 
-
 (1) This `@Route` annotation makes the view accessible to the end user, in this case, using the empty \`\` route.  
 
 (2) As the the `MainView` class extends `VerticalLayout`, components added to it will be ordered vertically.  
@@ -102,8 +101,7 @@ Then, in your browser, open [http://localhost:8080](http://localhost:8080 "http:
 
 ![Animation of Vaadin Todo app](https://vaadin.com/docs/latest/static/54a9ced3610b3825d3c8b32e3c7e95dd/completed-app.gif "Animation of Vaadin Todo app")
 
-Go further
-----------
+## Go further
 
 Now that you have a taste of how Vaadin Flow empowers you to quickly build web apps in pure Java, without writing any HTML or JavaScript.
 

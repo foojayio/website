@@ -68,7 +68,6 @@ package xyz.sumithpuri.spring.boot.annotation;
  }
 ```
 
-
 **@EnableAutoConfiguration**
 
 Spring allows for the automatic configuration of the application, by creating and registering the spring beans in the classpath. The @EnableAutoConfiguration allows to define the base search package.
@@ -107,7 +106,6 @@ package xyz.sumithpuri.spring.boot.annotation;
  }
 ```
 
-
 **@SpringBootTest**
 
 This one is straightforward, @SpringBootTest is used to create an application context object that supports testing.
@@ -131,7 +129,6 @@ package xyz.sumithpuri.spring.boot.annotation;
       }  
  }
 ```
-
 
 **@SpringBootConfiguration**
 
@@ -171,7 +168,6 @@ package xyz.sumithpuri.spring.boot.annotation.configuration;
  }
 ```
 
-
 With Spring DevTools Enabled, you will see one such log on the console that are the debug statements showing the matches or evaluations against the conditions.
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEh_YHALIvRTyRrUibkYVbv4T6wajr7lTequVrbA6XybZubtdP61FHgch9J84jsHrPcvXmlTmoo0_Q4CFzo9SRYompQJgGkuZWWHcP3MBtJKfoSI4ByS7-VuG7Jpf2tbMKqHi-fgivNuWH76fWzHjLGsfGp3OYhY5s0JhilC5kDne9a-BJCqIzkuy1k_3A)
@@ -208,7 +204,6 @@ public class SBASampleConfiguration {
 
 }
 ```
-
 
 Please go ahead and add the property 'mode=false' in your application.properties
 
@@ -253,7 +248,6 @@ public void setName(String name) {
 
 ..... // Getter and Setter Methods
 ```
-
 
 **Typical Properties File to be Read By ConfigurationProperties**
 

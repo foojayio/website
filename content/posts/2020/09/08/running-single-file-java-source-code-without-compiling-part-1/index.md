@@ -30,13 +30,11 @@ public class HelloUniverse{
 }
 ```
 
-
 Normally to run this class, first, you would need to compile it, using a Java compiler (`javac`), which would result in a `HelloUniverse.class` file:
 
 ```markdown
 > javac HelloUniverse.java
 ```
-
 
 Then you would use a `java` virtual machine (interpreter) command to run the resulting class file:
 
@@ -44,7 +42,6 @@ Then you would use a `java` virtual machine (interpreter) command to run the res
 > java HelloUniverse
 Hello foojay!
 ```
-
 
 This starts up the JVM, loads the class, and executes the code.
 

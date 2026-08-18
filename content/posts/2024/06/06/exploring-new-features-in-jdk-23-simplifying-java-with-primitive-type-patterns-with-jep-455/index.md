@@ -85,7 +85,6 @@ record User(long id, boolean loggedIn) {
 }
 ```
 
-
 In this example, we create a User object with an ID and a `loggedIn` status. The switch expression inside the `startProcessing` method evaluates whether the user is logged in.
 
 If the user is logged in, their ID is used for processing; if not, a log message is generated, and -1 is yielded to indicate an unrecognized user. The startProcessing method then uses another switch statement to handle different OrderStatus values.

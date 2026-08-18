@@ -10,8 +10,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)  
 [If, Then, Else \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)
 
@@ -31,8 +29,6 @@ We create both the example float and double with 20 decimals to see the number o
  public class NumberValues { public static void main (String[] args) { int intValue = 2; float floatValue = 1.12345678901234567890F; double doubleValue = 1.12345678901234567890D; System.out.println("Integer: " + intValue); System.out.println("Float: " + floatValue); System.out.println("Double: " + doubleValue); System.out.println("Multiply: " + (intValue * floatValue) + ", rounded: " + Math.round(intValue * floatValue)); } }
 </div>
 
-
-
 When we run this code, you see how many decimals are stored in the values and also how you can round a value.
 
 ```
@@ -44,7 +40,5 @@ Double: 1.1234567890123457
 Multiply: 2.2469137, rounded: 2
 ```
 
-
-  
 [\<\< Using Arguments and String Arrays](https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/)  
 [If, Then, Else \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)

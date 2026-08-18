@@ -60,13 +60,11 @@ brew install mongodb-atlas
 brew install mongosh
 ```
 
-
 On Linux, installation is just as simple:
 
 ```
 curl -s https://mongodb.dev/cli | bash
 ```
-
 
 🚀 Creating a Local Atlas Deployment  
 
@@ -78,7 +76,6 @@ Once Docker is running, launch the interactive setup:
 atlas deployments setup
 ```
 
-
 Choose the local option, accept the defaults, and specify a port (e.g., 27017). The CLI will spin up a containerized MongoDB 8.0 replica set with Atlas-compatible features. Now you can list active deployments:
 
 ```
@@ -87,7 +84,6 @@ NAME       TYPE    MDB VER   STATE
 local813   LOCAL   8.0.11    IDLE
 ```
 
-
 🔗 Connecting to the Deployment
 
 To connect to your local deployment, simply run:
@@ -95,7 +91,6 @@ To connect to your local deployment, simply run:
 ```
 atlas deployments connect
 ```
-
 
 You'll be prompted to choose how you want to connect. For example:
 
@@ -107,7 +102,6 @@ You'll be prompted to choose how you want to connect. For example:
  connectionString - Connection String
 ```
 
-
 Selecting mongosh will launch an interactive session connected to your local MongoDB replica set. You can now run queries, create indexes, test aggregations, or explore features like MongoDB Atlas Search and Vector Search.
 
 ```
@@ -118,7 +112,6 @@ local   588.00 KiB
 AtlasLocalDev local813 [direct: primary] test>
 ```
 
-
 ⚙️ Managing the Deployment
 
 Pause the deployment:
@@ -127,13 +120,11 @@ Pause the deployment:
 atlas deployments pause
 ```
 
-
 Start the deployment:
 
 ```
 atlas deployments start
 ```
-
 
 View logs:
 
@@ -141,13 +132,11 @@ View logs:
 atlas deployments logs
 ```
 
-
 Delete the deployment:
 
 ```
 atlas deployments delete
 ```
-
 
 Each command will prompt you to select a deployment if none is specified.
 

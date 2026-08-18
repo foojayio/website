@@ -13,3 +13,4 @@ aliases:
   - "/today/author/arthur_rib/"
 frozen: false
 ---
+

@@ -30,8 +30,7 @@ This post walks the K8ssandra developer through various activities for getting s
 
 The sections include: editor and tooling installation, installation and setup of K8ssandra, hands-on exercises, and information shared from K8ssandra maintainers.
 
-Configuring the development environment
----------------------------------------
+## Configuring the development environment
 
 Let's set the foundation for a K8ssandra development environment. Where possible, this guide attempts to maintain an operating system agnostic approach. K8ssandra supports the following operating systems for development:
 
@@ -62,8 +61,6 @@ First, download the VS Code binaries and install the necessary extensions to ass
    To install an extension, navigate to **File-** \>**Preferences-** \>**Extensions** in VS Code and search for "Go". This guide uses version 0.23.2 (not the nightly build) from the Go Team at Google.
 3. Follow the steps in the Go extension's documentation, which includes a [Download](https://golang.org/) of **Go**specific to your operating system. Select 1.14+ as a version.
 
-<br />
-
 Here is a list of useful VS Code extensions for K8ssandra development. Search for them by name in the VS Code extensions page.
 
 * [ms-kubernetes-tools.vscode-kubernetes-tools](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) - develop, deploy, and debug Kubernetes applications
@@ -83,8 +80,7 @@ If you already have Git setup and you've got a GitHub account, feel free to skip
 2. Reference information for setting up a GitHub account.  
    [Getting started](https://github.com/join) with GitHub
 
-Checkpoint
-----------
+## Checkpoint
 
 At this point, you should have the following setup \& installed:
 
@@ -102,21 +98,17 @@ See the references listed below of useful information developers use when starti
 * A Git [cheat sheet](https://training.github.com/downloads/github-git-cheat-sheet/)
 * Go [tutorial](https://golang.org/doc/tutorial/getting-started)
 
-Installing and configuring a Kubernetes and K8ssandra environment
------------------------------------------------------------------
+## Installing and configuring a Kubernetes and K8ssandra environment
 
 If you already have a Kubernetes environment setup with K8ssandra, feel free to skip this section.
 
 This [10-minute quick-start](https://k8ssandra.io/docs/getting-started/) will guide you through the steps to run a basic K8ssandra deployment in a local Kubernetes environment.
 
-<br />
-
 For a more visual and interactive demonstration of setting up K8ssandra, check out [K8ssandra First Touch](https://k8ssandra.io/blog/2021/03/30/k8ssandra-first-touch/), a step-by-step 15 minute video.
 
 Now it's time to learn about the file types contained in the K8ssandra codebase.
 
-Getting hands-on
-----------------
+## Getting hands-on
 
 ### Repository
 
@@ -131,7 +123,6 @@ Command line example:
 ```
 git clone https://github.com/your-github-repo-name/k8ssandra.git
 ```
-
 
 **Note**: Insert your personal GitHub repository name followed by k8ssandra.git.
 
@@ -177,18 +168,15 @@ Issue the command:
 make unit-test
 ```
 
-
 Once complete, you should see something like the following:
 
 ```
 ok github.com/k8ssandra/k8ssandra/tests/unit 47.156s
 ```
 
-
 Feel free to explore the K8ssandra [Makefile](https://github.com/k8ssandra/k8ssandra/blob/main/Makefile) for other recipes that can be targeted.
 
-Maintainer tips and tricks
---------------------------
+## Maintainer tips and tricks
 
 The K8ssandra maintainer team has developed a set of common knowledge and best practices that we wanted to share with you. Think of it as a starting point for learning and growing with K8ssandra. This will enable you to become more comfortable with contributing to the project and/or utilizing K8sssandra to deploy your own applications.
 
@@ -237,7 +225,6 @@ Let's get started with some useful commands for looking at important K8ssandra l
 kubectl logs cassandra-pod -c cassandra -n k8ssandra
 ```
 
-
 The Management-api is a service layer that attempts to build a well supported set of operational actions on Apache Cassandra nodes. This service shares the same container as Apache Cassandra and runs as process ID 1 (as an init process).
 
 ➠ View [Apache Cassandra](https://cassandra.apache.org/) logs. Replace cassandra-pod with an actual pod instance name.
@@ -246,13 +233,11 @@ The Management-api is a service layer that attempts to build a well supported se
 kubectl logs cassandra-pod -c server-system-logger -n k8ssandra
 ```
 
-
 ➠ View [Medusa](https://github.com/thelastpickle/cassandra-medusa) logs. Replace cassandra-pod with an actual pod instance name.
 
 ```
 kubectl logs cassandra-pod -c medusa -n k8ssandra
 ```
-
 
 See also kubectl documentation describing the [logs command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) in more detail.
 
@@ -263,7 +248,6 @@ See also kubectl documentation describing the [logs command](https://kubernetes.
 ```
 kubectl get pods -n k8ssandra
 ```
-
 
 Example: A summarized version of the output.
 
@@ -281,13 +265,11 @@ prometheus-k8ssandra-kube-prometheus-prometheus-0
 traefik-57d7955dcc-dgm7z
 ```
 
-
 Another variation with the -o wide option provides details of IP and node, which is super helpful when you need to trace a pod back to a node or require IP details for network troubleshooting.
 
 ```
 kubectl get pods -n k8ssandra -o wide
 ```
-
 
 ➠ Gather container information for a pod.
 
@@ -297,13 +279,11 @@ First, list out the pods scoped to the K8ssandra namespace and instance with a t
 kubectl get pods -l app.kubernetes.io/instance=release-name -n k8ssandra
 ```
 
-
 If you don't know the release name, look it up with a common Helm command:
 
 ```
 helm list -n k8ssandra -o yaml
 ```
-
 
 Example: output of the releases in YAML format.
 
@@ -324,13 +304,11 @@ status: deployed
 updated: 2021-04-01 10:46:07.048129 -0500 CDT
 ```
 
-
 Next, targeting a specific pod, filtering out container-specific information. Replace pod-name with the target pod of interest.
 
 ```
 kubectl describe pod/pod-name -n k8ssandra | grep container -C 1
 ```
-
 
 **Example**: describe with output returning one line above, and one line below the word being grepped.
 
@@ -339,14 +317,12 @@ kubectl describe pod/pod-name -n k8ssandra | grep container -C 1
 <code>-n k8ssandra | grep container -C 1</code>
 ```
 
-
 **server-config-init:**
 
 ```
 Container ID: containerd://eceb37bacb91b261dc7dc7ae03852a7d5a5c2e2181a4bf613aec68d72b0b8cdc 
 Image: datastax/cass-config-builder:1.0.3
 ```
-
 
 --
 
@@ -357,7 +333,6 @@ Container ID: containerd://084fa60db282be00c79970f4cb32dc5397e56ac7a6044313634e8
 Image: busybox
 ```
 
-
 --
 
 **cassandra:**
@@ -365,7 +340,6 @@ Image: busybox
 ```
 Container ID: containerd://3dbc4ebaa07e08139360c8321f1c3986d001896c087564595207e63fb6f6c740 Image: datastax/cassandra-mgmtapi-3_11_10:v0.1.22
 ```
-
 
 --
 
@@ -376,13 +350,11 @@ Container ID: containerd://4420cc9591aa683490478846dd278ed050e1cdf1832f597948494
 Image: busybox:1.32.0-uclibc
 ```
 
-
 ➠ A slight variation, get pods having a label for a Cassandra cluster.
 
 ```
 kubectl get pods -l cassandra.datastax.com/cluster=release-name -n k8ssandra
 ```
-
 
 Now, using one of the pod names returned, describe the pod details.
 
@@ -390,13 +362,11 @@ Now, using one of the pod names returned, describe the pod details.
 kubectl describe pod/pod-name -n k8ssandra
 ```
 
-
 ➠ Describe the CassandraDatacenter resource. This provides a wealth of information about the resource, which includes aged events with detail to assist when trying to troubleshoot an issue.
 
 ```
 kubectl describe cassandradatacenter/dc1 -n k8ssandra
 ```
-
 
 Example: includes a sample of the output provided.
 
@@ -424,7 +394,6 @@ Fields Type: FieldsV1
 fieldsV1:
 ```
 
-
 **...**
 
 #### Helm commands
@@ -435,13 +404,11 @@ fieldsV1:
 helm list -n k8ssandra
 ```
 
-
 ➠ Determine what configurations have been applied. That is, a full picture of the current K8ssandra configuration for a scoped release. Look out, it returns lots of content!
 
 ```
 helm get all k8ssandra -n k8ssandra
 ```
-
 
 It's advisable to add some filtering to this output, based on what resource you are trying to locate.
 
@@ -451,9 +418,7 @@ Example: locating information around Stargate configurations.
 helm get all k8ssandra -n k8ssandra | grep stargate -C 2
 ```
 
-
-Summing up
-----------
+## Summing up
 
 We've covered a lot in this post, including:
 
@@ -473,8 +438,7 @@ There are additional open source repositories that makeup the overall K8ssandra 
 * [medusa-operator](https://github.com/k8ssandra/medusa-operator)
 * [cass-operator](https://github.com/k8ssandra/cass-operator)
 
-Next steps
-----------
+## Next steps
 
 Here are some recommended next steps for learning more about K8ssandra:
 

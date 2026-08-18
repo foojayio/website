@@ -34,8 +34,7 @@ So... let's time travel and get back to Utrecht when I got the organizers before
 
 {{< youtube VzhDmWZilI4 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +42,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Michel van Dongen
 
@@ -72,8 +70,7 @@ Guests
 * [https://twitter.com/hannotify](https://twitter.com/hannotify%0Ahttps://foojay.social/@hannotify)
 * [https://foojay.social/@hannotify](https://twitter.com/hannotify%0Ahttps://foojay.social/@hannotify)
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
@@ -82,15 +79,13 @@ Podcast
 
 ![](utrechtjug-819x1024.jpg)
 
-Links
------
+## Links
 
 * <https://www.meetup.com/Utrecht-Java-User-Group/>
 * <https://www.linkedin.com/company/javautrecht/>
 * <https://twitter.com/utrechtjug>
 
-Content
--------
+## Content
 
 00:00 Intro  
 

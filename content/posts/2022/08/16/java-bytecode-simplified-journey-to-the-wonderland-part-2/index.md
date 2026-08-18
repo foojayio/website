@@ -64,7 +64,6 @@ public class Lamp {
 }
 ```
 
-
 If we compile this code using `javac` we will get a class file, and then we can use `javap` to disassemble the bytecode from the command line as follows:
 
 `javap Lamp`
@@ -81,7 +80,6 @@ public class ca.bazlur.Lamp {
 }
 ```
 
-
 Note that it prints only the public, protected, and default methods. Abobe, it did not print private methods. If we also wish to view the private method, we must specify an additional switch `-p`.
 
 `javap -p Lamp`
@@ -97,7 +95,6 @@ public class ca.bazlur.Lamp {
   public static void main(java.lang.String[]);
 }
 ```
-
 
 Nonetheless, this only prints the names of the methods. We would be looking for more information, including the bytecode used in the method body. This requires another switch, which is `-c`.
 
@@ -143,7 +140,6 @@ public class ca.bazlur.Lamp {
       16: return
 }
 ```
-
 
 Now, this becomes significantly more intriguing, and we can observe the presence of all bytecodes. If we examine the first line of the main method, we see the following:
 
@@ -219,7 +215,6 @@ Constant pool:
   #51 = Utf8               Lamp.java
 ```
 
-
 The output is quite large, so only a portion of the code for the constant pool is shown here.
 
 Bytecode starts with minor and major versions. This allows us to determine the version it was compiled from. There are a few other stuff like flags. This flag is `ACC PUBLIC` because this class is a public class. The `ACC SUPER` was implemented to fix a problem with super invocation, but since Java 1.8, it has no effect; perhaps it will be deleted in the future. In reality, a JEP proposal is available to eliminate this: <https://openjdk.org/jeps/8267650>. We will not discuss all of the content of bytecode here, rather let's move on to **ConstantPool**.
@@ -232,7 +227,6 @@ cp_info {
     u1 info[];
 }
 ```
-
 
 It contains numerous elements, including class name, field name, interface name, String, numbers, pointers to classes or methods, type descriptor, etc., and has an index.  
 

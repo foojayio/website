@@ -64,8 +64,6 @@ Check it out now on our [GitHub repo](https://github.com/DataStax-Examples/cassa
 
 *Follow the* [*DataStax Tech Blog*](https://datastax.medium.com/)*for more developer stories. Check out our* [*YouTube*](https://www.youtube.com/channel/UCqA6zOSMpQ55vvguq4Y0jAg)*channel for tutorials and here for DataStax Developers on* [*Twitter*](https://twitter.com/DataStaxDevs)*for the latest news about our developer community.*{#2141}
 
-<br />
-
 ### Resources
 
 1. [Apache Cassandra](https://cassandra.apache.org/_/index.html)

@@ -30,8 +30,6 @@ Anyone who worked on technical documentation in a big team is certainly aware of
 
 As the project grows in size, duplicated content will start to occur. This is especially true for big projects including many similar products or features.
 
-
-
 **Good:**{#duplication-good-bad}
 
 define once:
@@ -43,15 +41,11 @@ define once:
 </p>
 ```
 
-
 reuse elsewhere:
 
 ```html
 <TroubleshootingNote/>
 ```
-
-
-
 
 **Bad**:
 
@@ -68,13 +62,9 @@ reuse elsewhere:
 </p>
 ```
 
-
-
-
 The idea that advocates against duplication is commonly known as [DRY Principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). Though it is primarily associated with programming, the same property is highly favoured in documentation.
 
-Project intro
--------------
+## Project intro
 
 Modern authoring tools typically have features for content reuse, making technical constraints less of a concern. The real problem, on the other hand, lies in spotting duplicates. Before you extract something to a reusable chunk, you need to know what to extract.
 
@@ -85,8 +75,7 @@ Unfortunately, the same feature is not suitable for documentation, as it relies 
 
 One of my ongoing projects is to implement a duplicate finder for documentation. The tool will be capable of quickly finding non-exact, or *fuzzy* , matches, such as the [bad](#duplication-good-bad) example above.
 
-Current status
---------------
+## Current status
 
 As of this writing, the project is WIP, but there is already a working prototype:
 ![The UI of the duplicate finder tool prototype showing several detected duplicates in a dummy project](https://flounder.dev/img/duplicates-finder-prototype.png)
@@ -95,8 +84,7 @@ The algorithm takes under 30 seconds to analyze a project with \~6k source files
 
 The prototype has already helped me and my colleagues find a lot of duplicates in real projects, so I'm quite enthusiastic about the results and future improvements.
 
-What's next
------------
+## What's next
 
 In the following posts, I will lay out the algorithm step-by-step and perform benchmarks to evaluate its performance. If you are into programming, you are welcome to code along.
 

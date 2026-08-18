@@ -23,8 +23,7 @@ The latest version of Eclipse GlassFish 8.0.2 was released on May 5, 2026, with 
  <img fetchpriority="high" decoding="async" width="791" height="483" src="glassfish-802-banner-2-smaller.png" alt="" class="wp-image-123851" style="width:433px;height:auto">
 </figure>
 
-Security fixes
---------------
+## Security fixes
 
 First and foremost, GlassFish 8.0.2 brings a few important security fixes, which alone should be a good-enough reason to upgrade GlassFish:
 
@@ -33,15 +32,13 @@ First and foremost, GlassFish 8.0.2 brings a few important security fixes, which
 
 The two currently undisclosed CVEs were reported directly to the Eclipse Foundation and the Eclipse GlassFish team. While OmniFish collaborated closely on these fixes and possesses full knowledge of the vulnerabilities, we are unable to share specific details before the CVE details are officially published. These security flaws have been successfully resolved in GlassFish 8.0.2 and are currently in the process of being formally published by the Eclipse Foundation through a recognized CVE authority.
 
-Stability and other Improvements
---------------------------------
+## Stability and other Improvements
 
 GlassFish 8.0.2 introduces **enhanced hostname resolution** for localhost. While this might appear to be a minor refinement, it effectively addresses numerous edge cases where GlassFish previously logged errors or even failed to boot when it incorrectly derived the hostname or local IP address.
 
 This latest GlassFish version also includes an improvement for the**`@EJB` annotation** when utilizing the ***`beanName`*** attribute in an appclient. Although this specific functionality is rarely used in applications, the update was essential to ensure synchronization with the recent Jakarta EE 11 TCK service release, enabling GlassFish 8.0.2 to achieve full compliance.
 
-Component upgrades
-------------------
+## Component upgrades
 
 The GlassFish 8.0.2 release brings several component upgrades. However, this time many of the updates weren't simple "bump version, test, and merge" tasks. They involved components maintained by the Eclipse GlassFish project itself or related Eclipse projects in which OmniFish is also involved. In several instances, an improvement in one component triggered changes in others, leading to a chain of multiple dependent releases. This required careful coordination with other committers and project leads before the changes could finally be integrated into GlassFish.
 
@@ -54,8 +51,7 @@ We originally tried to upgrade to Eclipse JAXB Impl 4.0.7, but we had to roll it
 Some notable third-party component upgrades include Jackson, Helidon Config, Nimbus JOSE JWT, JNoSQL, Commons IO and Commons Codec.
 > GlassFish 8.0.2 is a patch release of GlassFish 8, which brought Jakarta EE 11 and many other new features and enhancements. [Learn More About What's New In GlassFish 8](https://omnifish.ee/blog/glassfish-8-released-enterprise-grade-java-redefined/)
 
-Conclusion -- GlassFish is a platform you can trust
----------------------------------------------------
+## Conclusion -- GlassFish is a platform you can trust
 
 A patch release might not sound exciting, but 8.0.2 tells a clear story: GlassFish is a platform where security issues get fixed quickly, components are kept up to date, and the team is paying attention to what matters in production -- security, stability and performance.
 
@@ -63,20 +59,15 @@ Meanwhile, work is already in progress on GlassFish 8.0.3, which will bring addi
 
 If you are evaluating Jakarta EE platforms for a new project, or looking for a reliable home for existing applications, Eclipse GlassFish backed by OmniFish is worth a serious look. [Download 8.0.2](https://glassfish.org/download_gf8.html#eclipse-glassfish-802) and see for yourself, or reach out to us if you want to talk through your specific setup.
 
-
-
 More information:
 
 * [Download GlassFish 8.0.2](https://glassfish.org/download_gf8.html#eclipse-glassfish-802)
-
-
 
 <figure class="alignleft size-full is-resized">
  <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
 </figure>
 
-[OmniFish - Jakarta EE experts](https://omnifish.ee)
-----------------------------------------------------
+## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 
 * Enterprise Support For Eclipse GlassFish
 * Jakarta EE Support: Payara Community, Piranha, Quarkus

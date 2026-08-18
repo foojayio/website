@@ -23,13 +23,11 @@ This is part 2 of the interviews recorded on September 19th, 2025, at the first 
 
 I also asked these guests the same opening question: 'What's your name, and what brings you to this conference?'
 
-Video
------
+## Video
 
 {{< youtube 8D1l4heWKQY >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,8 +35,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction
 

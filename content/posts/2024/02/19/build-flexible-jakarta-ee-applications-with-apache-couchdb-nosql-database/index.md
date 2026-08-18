@@ -28,15 +28,13 @@ This webinar - [watch the recording here](https://youtu.be/PVp40gXJ954?feature=s
 
 {{< youtube PVp40gXJ954 >}}
 
-What is CouchDB?
-----------------
+## What is CouchDB?
 
 CouchDB is a NoSQL database used in distributed and cloud environments. It uses a schema-free JSON document format, which allows for more flexible and efficient data models.
 
 With features like Multi-Version Concurrency Control (MVCC) for high data integrity, and a RESTful HTTP API for seamless integration, CouchDB stands as a compelling choice for Jakarta EE applications looking to adopt a NoSQL database.
 
-Key objectives of this webinar include
---------------------------------------
+## Key objectives of this webinar include
 
 1. **NoSQL for Jakarta EE Developers**: Understand the advantages and trade-offs of using NoSQL databases like CouchDB in Jakarta EE applications.
 2. **CouchDB Essentials**: Get a comprehensive introduction to CouchDB's features, from its JSON-based document storage to its RESTful HTTP API, and learn why it's a good fit for Jakarta EE projects.
@@ -45,10 +43,6 @@ Key objectives of this webinar include
 5. **Deployment and Scaling**: Learn practical tips on how to deploy and scale your Jakarta EE microservices with CouchDB in a cloud environment, ensuring both high availability and fault tolerance.
 
 By the end of this webinar, you'll walk away with the skills and knowledge to integrate CouchDB into your Jakarta EE applications.
-
-<br />
-
-<br />
 
 Whether you're new to NoSQL databases or looking to optimize your existing Jakarta EE applications, this webinar will provide you with actionable insights to take your projects to the next level with the power and flexibility of NoSQL databases!
 

@@ -41,8 +41,7 @@ Luckily Alexander Liggesmeyer, a Pi4J user, took up the challenge to find a solu
 
 (Images from https://www.raspberrypi.com)
 
-What is Pi4J?
--------------
+## What is Pi4J?
 
 Here on Foojay.io, you can already find [many different articles and examples](https://foojay.io/?s=pi4j) of what can be done with Java on the Raspberry Pi. As it is a full Linux computer -- with a small size -- it can run any Java application. But this board has the additional benefit of the GPIO pins which allow you to connect sensors, buttons, displays, servos, LEDs, and any kind of electronic component.
 
@@ -50,8 +49,7 @@ The [Pi4J project](https://pi4j.com/) aims to make the interaction with such com
 
 This project abstracts the low-level native integration and interrupt monitoring to enable Java programmers to **focus on implementing their application business logic**." This is not only achieved by providing a Java library, but also with an extended website containing extra info about how to use Java and JavaFX on the Raspberry Pi.
 
-New Version of Pi4J to Support the Raspberry Pi 5
--------------------------------------------------
+## New Version of Pi4J to Support the Raspberry Pi 5
 
 The second version of Pi4J (first released on Aug 26, 2021) is based on a l[ayered approach, aiming to separate the GPIOs' logic from the underlying native code](https://pi4j.com/architecture/). This is achieved with Plugins that can support one or more different protocols.
 
@@ -66,8 +64,7 @@ On March 18th, 2024, version 2.5 of Pi4J was released. In this version, the supp
 * A priority system has been introduced into the plugins, making the initialization of GPIO objects easier.
 * Many fixes and small improvements in the existing code.
 
-Interview with Alexander Liggesmeyer
-------------------------------------
+## Interview with Alexander Liggesmeyer
 
 Let's find out why Alexander decided to contribute support for the Raspberry Pi 5 to Pi4J.
 
@@ -121,15 +118,10 @@ It depends on what a person wants to achieve. I personally like to use Python to
 
 Java requires the developer to add the type of a variable every time it is defined, which adds to readability. On the other hand, Python does not force the developer to add type hints, leading to many developers not adding them. This makes refactoring code harder and more prone to errors.
 
-Conclusion
-----------
+## Conclusion
 
 Thanks to this new version of Pi4J, the newest Raspberry Pi board, version 5, is now also supported.
 
 On top of that, the GpioD is future-proof, as it can interact with the new RP1 chip that will be used in future boards.
 
 V2.5.1 of Pi4J is the first release with this new GpioD plugin, and we are looking forward to seeing how it is going to be used by the community in their many projects and how we can further improve Pi4J to make JavaOnRaspberryPi an, even more, fun and exciting topic!
-
-<br />
-
-<br />

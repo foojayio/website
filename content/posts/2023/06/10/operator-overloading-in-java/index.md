@@ -35,12 +35,9 @@ Additionally, we'll touch upon a solution that Manifold offers to address some l
 
 {{< youtube pwQs-308OdY >}}
 
-<br />
-
 Before we begin as always, you can find the code examples for this post and other videos in this series on my [GitHub page](https://github.com/shai-almog/java-book/). Be sure to check out the project, give it a star, and follow me on GitHub to stay updated!
 
-Arithmetic Operators
---------------------
+## Arithmetic Operators
 
 Operator overloading allows us to use familiar mathematical notation in code, making it more expressive and intuitive. While Java doesn't support operator overloading by default, Manifold provides a solution to this limitation.
 
@@ -62,7 +59,6 @@ public class Vec {
 }
 ```
 
-
 With Manifold, we can simplify the code significantly. Using Manifold's operator overloading features, we can directly add vectors together using the `+` operator as such:
 
 ```
@@ -70,7 +66,6 @@ Vec vec1 = new Vec(1, 2, 3);
 Vec vec2 = new Vec(1, 1, 1);
 Vec vec3 = vec1 + vec2;
 ```
-
 
 Manifold seamlessly maps the operator to the appropriate method invocation, making the code cleaner and more concise. This fluid syntax resembles mathematical notation, enhancing code readability.
 
@@ -84,7 +79,6 @@ public Vec plus(float other) {
 }
 ```
 
-
 This will make all these lines valid:
 
 ```
@@ -93,7 +87,6 @@ vec3 = 5.0f + vec3;
 vec3 = vec3 + 5.0f;
 vec3 += Float.valueOf(5.0f);
 ```
-
 
 In this code, we demonstrate that Manifold can swap the order to invoke `Vec.plus(float)` seamlessly. We also show that the plus equals operator support is built into the plus method support
 
@@ -111,7 +104,6 @@ var y = new BigDecimal(25L);
 var z = x + y;
 ```
 
-
 Under the hood, Manifold adds the applicable plus, minus, times, etc. methods to the class. It does so by leveraging class extensions which [I discussed before](https://debugagent.com/extending-java-apis-add-missing-features-without-the-hassle).
 
 ### Limits of Boxing
@@ -126,13 +118,11 @@ This extension enables us to perform arithmetic operations between different typ
 var z = 5 + x + y;
 ```
 
-
 Unfortunately, this won't compile with that change. The number five is a primitive, not an Integer and the only way to get that code to work would be:
 
 ```
 var z = Integer.valueOf(5) + x + y;
 ```
-
 
 This isn't what we want. However, there's a simple solution. We can create an extension to `BigDecimal` itself and rely on the fact that the order can be swapped seamlessly. This means that this simple extension can support the `5 + x + y` expression without a change:
 
@@ -144,7 +134,6 @@ public class BigDecimalExt {
     }
 }
 ```
-
 
 ### List of Arithmetic Operators
 
@@ -163,8 +152,7 @@ So far we focused on the plus operator but Manifold supports a wide range of ope
 
 Notice that the increment and decrement operators don't have a distinction between the prefix and postfix positioning. Both `a++` and `++a` would lead to the `inc` method.
 
-Index Operator
---------------
+## Index Operator
 
 The support for the index operator took me completely off guard when I looked at it. This is a complete game-changer... The index operator is the square brackets we use to get an array value by index.
 
@@ -175,7 +163,6 @@ var list = List.of("A", "B", "C");
 var v = list[0];
 ```
 
-
 In this case, `v` will be `"A"` and the code is the equivalent to invoking `list.get(0)`. The index operators seamlessly map to get and set methods. We can do assignment as well using:
 
 ```
@@ -183,7 +170,6 @@ var list = new ArrayList<>(List.of("A", "B", "C"));
 var v = list[0];
 list[0] = "1";
 ```
-
 
 Notice I had to wrap the List in an `ArrayList` since `List.of()` returns an unmodifiable List. But this isn't the part I'm reeling about. That code is "nice". This code is absolutely amazing:
 
@@ -193,13 +179,11 @@ var key = map["Key"];
 map["Key"] = "New Value";
 ```
 
-
 Yes!
 
 You're reading valid code in Manifold. An index operator is used to lookup in a map. Notice that a map has a put() method and not a set method. That's an annoying inconsistency that Manifold fixed with an extension method. We can then use an object to look up within a map using the operator.
 
-Relational and Equality Operators
----------------------------------
+## Relational and Equality Operators
 
 We still have a lot to cover... Can we write code like this (referring to the `Vec` object from before):
 
@@ -208,7 +192,6 @@ if(vec3 > vec2) {
     // …
 }
 ```
-
 
 This won't compile by default. However, if we add the `Comparable` interface to the `Vec` class this will work as expected:
 
@@ -227,7 +210,6 @@ public class Vec implements Comparable<Vec> {
 }
 ```
 
-
 These `>=, >, <, <=` comparison operators will work exactly as expected by invoking the `compareTo` method. But there's a big problem. You will notice that the `==` and `!=` operators are missing from this list.
 
 In Java, we often use these operators to perform pointer comparisons, this makes a lot of sense in terms of performance. We wouldn't want to change something so inherent in Java. To avoid that, Manifold doesn't override these operators by default.
@@ -240,12 +222,9 @@ However, we can implement the `ComparableUsing` interface which is a sub-interfa
 
 That interface also lets us override the `compareToUsing(T, Operator)` method. This is similar to the compareTo method but lets us create operator-specific behavior which might be important in some edge cases.
 
-Unit Expressions for Scientific Coding
---------------------------------------
+## Unit Expressions for Scientific Coding
 
 {{< youtube r4iycWnI5fE >}}
-
-<br />
 
 Notice that Unit expressions are experimental in Manifold. But they are one of the most interesting applications of operator overloading in this context.
 
@@ -261,7 +240,6 @@ if(force == 49.035 N) {
 }
 ```
 
-
 The unit expressions allow us to express numeric values (or variables) along with their associated units. The compiler checks the compatibility of units, preventing incompatible conversions and ensuring accurate calculations. This feature streamlines scientific code and enables powerful calculations with ease.
 
 Under the hood, a unit expression is just a conversion call. The expression `100 mph` is converted to:
@@ -270,7 +248,6 @@ Under the hood, a unit expression is just a conversion call. The expression `100
 VelocityUnit.postfixBind(Integer.valueOf(100))
 ```
 
-
 This expression returns a Velocity object. The expression `3 hr` is similarly bound to the postfix method and returns a Time object. At this point, the Manifold `Velocity` class has a `times` method which as you recall, is an operator and it's invoked on both results:
 
 ```
@@ -278,7 +255,6 @@ public Length times( Time t ) {
     return new Length( toBaseNumber() * t.toBaseNumber(), LengthUnit.BASE, getDisplayUnit().getLengthUnit() );
 }
 ```
-
 
 Notice that the class has multiple overloaded versions of the times method that accept different object types. A `Velocity` times `Mass` will produce `Momentum`. A `Velocity` times `Force` results in `Power`.
 
@@ -290,13 +266,11 @@ You might notice a big omission here: Currency. I would love to have something l
 var sum = 50 USD + 70 EUR;
 ```
 
-
 If you look at that code the problem should be apparent. We need an exchange rate. This makes no sense without exchange rates and possibly conversion costs. The complexities of financial calculations don't translate as nicely to the current state of the code.
 
 I suspect that this is the reason this is still experimental. I'm very curious to see how something like this can be solved elegantly.
 
-Pitfalls of Operator Overloading
---------------------------------
+## Pitfalls of Operator Overloading
 
 While Manifold provides powerful operator overloading capabilities, it's important to be mindful of potential challenges and performance considerations.
 
@@ -310,13 +284,11 @@ Let's look at this code:
 var n = x + y + z;
 ```
 
-
 On the surface, it can seem efficient and short. It physically translates to this code:
 
 ```
 var n = x.plus(y).plus(z);
 ```
-
 
 This is still hard to spot but notice that in order to create the result we invoke two methods and allocate at least two objects. A more efficient approach would be:
 
@@ -324,13 +296,11 @@ This is still hard to spot but notice that in order to create the result we invo
 var n = x.plus(y, z);
 ```
 
-
 This is an optimization we often do for high-performance matrix calculations. You need to be mindful of this and understand what the operator is doing under the hood if performance is important. I don't want to imply that operators are inherently slower.
 
 In fact they're as fast as a method invocation, but sometimes the specific method invoked and amount of allocations are unintuitive.
 
-Type Safety Features
---------------------
+## Type Safety Features
 
 The following aren't related to operator overloading but they were a part of the second video so I feel they make sense as part of a wide-sweeping discussion on type safety.
 
@@ -350,7 +320,6 @@ exposedString.value[2] = '0';
 System.out.println(exposedString);
 ```
 
-
 JailBreak can be applied to static fields and methods as well. However, accessing static members requires assigning null to the variable, which may seem counterintuitive. Nonetheless, this feature provides a more controlled and type-safe approach to accessing the internal state, minimizing the risks associated with using reflection.
 
 ```
@@ -358,14 +327,12 @@ JailBreak can be applied to static fields and methods as well. However, accessin
 str.isASCII(new byte[] { 111, (byte)222 });
 ```
 
-
 Finally, all objects in Manifold are injected with a jailbreak() method. This method can be used like this (notice that `fastTime` is a private field):
 
 ```
 Date d = new Date();
 long t = d.jailbreak().fastTime;
 ```
-
 
 ### Self Annotation: Enforcing Method Parameter Type
 
@@ -393,7 +360,6 @@ public class MySizeClass {
 }
 ```
 
-
 Notice I added an equals method and annotated the argument with Self. If I remove the Self annotation this code will compile:
 
 ```
@@ -401,7 +367,6 @@ var size = new MySizeClass();
 size.equals("");
 size.equals(new MySizeClass());
 ```
-
 
 With the `@Self` annotation the string comparison will fail during compilation.
 
@@ -413,8 +378,7 @@ Manifold has the benefit of working outside of those constraints and it offers a
 
 Auto is particularly useful when working with tuples, a feature not yet discussed in this post. It allows for elegant and concise code, enhancing readability and maintainability. You can effectively use auto as a drop-in replacement for var.
 
-Finally
--------
+## Finally
 
 Operator overloading with Manifold brings expressive and intuitive mathematical notation to Java, enhancing code readability and simplicity.
 

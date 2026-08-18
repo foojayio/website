@@ -43,14 +43,11 @@ This article delves into the intricacies of DTrace, an innovative tool that has 
 
 {{< youtube 3M0AhZnVoUk >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [**Debugging book**](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [**Java Basics book**](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/). If you want to get back to Java after a while check out my [**Java 8 to 21 book**.](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)
 
 {#dtrace-overview}
 
-DTrace Overview
----------------
+## DTrace Overview
 
 DTrace was first introduced by Sun Microsystems in 2004, DTrace quickly garnered attention for its groundbreaking approach to dynamic system tracing. Originally developed for Solaris, it has since been ported to various platforms, including MacOS, Windows, and Linux.
 
@@ -58,8 +55,7 @@ DTrace stands out as a dynamic tracing framework that enables deep inspection of
 
 {#understanding-dtraces-capabilities}
 
-Understanding DTrace's Capabilities
------------------------------------
+## Understanding DTrace's Capabilities
 
 DTrace, short for Dynamic Tracing, is a comprehensive toolkit for real-time system monitoring and debugging, offering an array of capabilities that span across different levels of system operation.
 
@@ -99,8 +95,7 @@ For example, it can be used to determine the cause of a slow file operation, ana
 
 {#performance-and-compatibility-of-dtrace}
 
-Performance and Compatibility of DTrace
----------------------------------------
+## Performance and Compatibility of DTrace
 
 A standout feature of DTrace is its ability to operate with remarkable efficiency. Despite its deep system integration, DTrace is designed to have minimal impact on overall system performance.
 
@@ -124,20 +119,17 @@ We can disable SIP using the command:
 csrutil disable
 ```
 
-
 We can optionally use a more refined approach of enabling SIP without dtrace using the following command:
 
 ```
 csrutil enable --without dtrace
 ```
 
-
 Be extra careful when issuing these commands and when working on machines where dtrace is enabled. Back up your data properly!
 
 {#customizability-and-flexibility-of-dtrace}
 
-Customizability and Flexibility of DTrace
------------------------------------------
+## Customizability and Flexibility of DTrace
 
 A key feature that sets DTrace apart in the realm of system monitoring tools is its highly customizable nature. DTrace employs a scripting language that bears similarity to C syntax, offering users the ability to craft detailed and specific diagnostic scripts.
 
@@ -161,15 +153,13 @@ Users can define probes to monitor specific system events, track the behavior of
 sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p 9999
 ```
 
-
 The kernel is instrumented with hooks that match various callbacks. dtrace connects to these hooks and can perform interesting tasks when these hooks are triggered. They have a naming convention, specially: `provider:module:function:name`. In this case the provider is a system call in both cases. We have no module so we can leave that part blank between the colon (`:`) symbols. We grab a write operation and `sendto` entries. When an application will write or tries to send a packet, the following code event will trigger.
 
 These things happen frequently which is why we restrict the process ID to the specific target with `pid == $target`. This means the code will only trigger for the PID passed to us in the command line. The rest of the code should be simple for anyone with basic C experience, it's a printf that would list the processes and the data passed.
 
 {#real-world-applications-of-dtrace}
 
-Real-World Applications of DTrace
----------------------------------
+## Real-World Applications of DTrace
 
 DTrace's diverse capabilities extend far beyond theoretical use, playing a pivotal role in resolving real-world system complexities. Its ability to provide deep insights into system operations makes it an indispensable tool in a variety of practical applications.
 
@@ -264,7 +254,6 @@ syscallbysysc.d(1m)      - syscalls by syscall. Uses DTrace
 topsyscall(1m)           - top syscalls by syscall name. Uses DTrace
 topsysproc(1m)           - top syscalls by process name. Uses DTrace
 ```
-
 
 There's a lot here, we don't need to read everything. The point is that when you run into a problem you can just search through this list and find a tool dedicated to debugging that problem.
 

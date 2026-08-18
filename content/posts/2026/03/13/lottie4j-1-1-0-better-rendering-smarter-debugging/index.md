@@ -25,8 +25,7 @@ A lot happened in that one week. A logo was designed for the project, a Lottie a
 
 {{< youtube _zZ1q6zbRgM >}}
 
-What Is Lottie4J?
------------------
+## What Is Lottie4J?
 
 [LottieFiles](https://lottiefiles.com/) is a JSON-based animation format, originally developed at Airbnb, widely used to play back animations on websites and mobile apps. Players exist for JavaScript, Android, iOS, and more, but a Java/JavaFX player was missing. That's the gap I want to fix with Lottie4J.
 
@@ -37,8 +36,7 @@ The library is split into two Maven artifacts:
 
 You can find them on [Maven Central](https://central.sonatype.com/namespace/com.lottie4j).
 
-What's New in Lottie4J v1.1.0
------------------------------
+## What's New in Lottie4J v1.1.0
 
 ### License and API Improvements
 
@@ -86,8 +84,7 @@ Perhaps the most exciting developer tooling addition: a unit test called [**Comp
 
 This makes it much easier to track down rendering regressions and verify improvements. Note that the test requires a display (it can't run headless yet --- see [this open issue](https://github.com/lottie4j/lottie4j/issues/4)), so it won't run on CI for now, but it's extremely useful locally.
 
-Trying It Out
--------------
+## Trying It Out
 
 Add the Maven dependency for whichever module you need:
 
@@ -107,11 +104,9 @@ Add the Maven dependency for whichever module you need:
 </dependency>
 ```
 
-
 The full list of changes between 1.0.0 and 1.1.0 is [available on GitHub](https://github.com/lottie4j/lottie4j/compare/v1.0.0...v1.1.0).
 
-What's Next
------------
+## What's Next
 
 The goal isn't to ship a new release every week, but when rendering problems are found in specific animations, the debug tools and automated tests make it much easier to isolate, fix, and verify. If you run into a Lottie file that doesn't render correctly in JavaFX, it can be added to the test suite and investigated.
 

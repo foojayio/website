@@ -22,20 +22,15 @@ frozen: false
 
 As a developer, there is a large chance that you use Command Line Interfaces (CLIs) every day. From Git, to kubectl or Maven, they are everywhere. In this article, we'll look into use cases where CLIs are a great idea. We'll also dive into best practises, and discover one of the most used library for CLIs in the JVM world: **[picoCLI](https://picocli.info/)**.
 
-Why using Command Line interfaces
----------------------------------
+## Why using Command Line interfaces
 
 There are a couple reasons why a CLI can be a good use case for you and your users.
 
 * In case you create fat jars that you run with input arguments, creating a thin CLI wrapper around it can be of great help for you and your users. Indeed, **it looks cleaner and abstracts the JVM ecosystem away** . This becomes easily clear with an example.
 
-  <br />
-
 <img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-46678" class="size-medium wp-image-46678" src="image1-700x135.png" alt="2 commands, one usiong the java -jar expression and the other using a native tool" width="700" height="135">
 
   Using a native application from the CLI is cleaner than using java -jar{#caption-attachment-46678}
-
-  <br />
 
 * Compared to running in an IDE, or via a GUI, CLIs make it very easy to interface (pipe) with other terminal tools, or scripts. <br />
 
@@ -43,22 +38,17 @@ There are a couple reasons why a CLI can be a good use case for you and your use
 
   Usage of piping in Bash{#caption-attachment-46679}
 
-  <br />
-
 * CLIs usually also have a very clear and embedded man / help page. This helps your user use the tool in the right way and avoids having to look at documentation or ask for help. <br />
 
 <img decoding="async" aria-describedby="caption-attachment-46680" class="size-medium wp-image-46680" src="image3-700x335.png" alt="The help commands from swacli" width="700" height="335">
 
   Help is a very expressive way to have information about the tool{#caption-attachment-46680}
 
-  <br />
-
 * Finally, we can perpetuate stereotypes. Everybody knows that real developers only use the command line *DUH*. (Please don't listen to people, and use whatever you prefer / are most productive with)
 
 By now, you should be convinced that a CLI can be a nice addition to your developer's toolbelt. So let's have a deeper look into how to create one using Kotlin, and picoCLI.
 
-About picoCLI
--------------
+## About picoCLI
 
 [picoCLI](https://picocli.info/) is one of the many options available to you to create CLIs on the JVM. Other possibilities include [Jakarta Commons CLI](https://commons.apache.org/proper/commons-cli/) or [Clikt](https://ajalt.github.io/clikt/) if you're using Kotlin.  
 
@@ -76,8 +66,7 @@ how the gradle configuration looks like in Gradle for a Kotlin project.{#caption
 
 *Note: Even though I love the annotation processor, I tend to disable it because it has a tendency to slow down my IDE a lot.*
 
-Running Hello World
--------------------
+## Running Hello World
 
 As usual, the first thing we want to do with a new tool is to run Hello World.  
 
@@ -98,8 +87,7 @@ Result of the help command of sw{#caption-attachment-46683}
 
 *Tip :Make sure to describe all you can when defining your CLI, picoCLI will make sure to generate great help for you and make sure your users are not confused.*
 
-Diving into Options and Arguments
----------------------------------
+## Diving into Options and Arguments
 
 Without being able to provide any inputs to it, a CLI usage would be very limited. Inputs are usually divided into two main types :
 
@@ -109,13 +97,9 @@ Without being able to provide any inputs to it, a CLI usage would be very limite
   Because this will be the main interface between our users and the tool, we should take good care of choosing options and arguments that make sense.  
   In our Star Wars use case, we want users to be able to **search for planets OR characters** and **either insert some search item (ex : 'Darth') or nothing** and get a full list of characters back. Let's see how those options and parameters look like :
 
-  <br />
-
 <img loading="lazy" decoding="async" aria-describedby="caption-attachment-46684" class="size-medium wp-image-46684" src="image7-700x349.png" alt="Using argument groups with pico CLI. Snippet of code" width="700" height="349">
 
   Our arguments and commands for to search for StarWars information{#caption-attachment-46684}
-
-  <br />
 
 * We define our search query using the Parameter annotation. Because there is only one parameter, we place it at index 0. And because we allow the search query to be empty, we define an [arity](https://en.wikipedia.org/wiki/Arity) of 0 to 1. Just like for databases, an arity defines the number of arguments the parameter can take (bounded by 0, 1 or n).
 * We define two *options*, which define the search mode (planet, or character). We define short, and long names for them
@@ -128,8 +112,7 @@ Here is what happens when trying to run the code without specifying one option :
 Missing required argument when running the example. Good!{#caption-attachment-46685}
 > Tip : Don't break conventions that have been there for decades. -i (input) , -o (output), -r (recursive) have typical meanings when using command lines. Make sure to apply those unwritten conventions
 
-SubCommands for a better user experience
-----------------------------------------
+## SubCommands for a better user experience
 
 You may already have heard or seen subcommands in CLIs. Subcommands are basically using semantic words to achieve your actions. Typical examples are `kubectl get services`, or `gh repo clone jlengrand/swacli`. SubCommands are perfect in our case because they allow us to get rid of our clunky exclusive options. Let's see how to implement them :  
 
@@ -141,8 +124,7 @@ I omitted all the non-crucial information here. What is important to note is tha
 
 Using this method, users can now search for `sw planets tatooine` or `sw people Luke`.
 
-Colors and Emojis support for clear information display
--------------------------------------------------------
+## Colors and Emojis support for clear information display
 
 Nowadays, all terminals support color schemes as well as emojis (!!). We can leverage those to present information to our users in the clearest possible way and reduce cognitive load. picoCLI supports a custom markup notation that helps with color usage.  
 
@@ -152,8 +134,7 @@ Picturing a *Response* object that contains a number of results, together with d
 
 An example of formatted text using the picoCLI format{#caption-attachment-46687}
 
-Native compilation for a blazing fast experience
-------------------------------------------------
+## Native compilation for a blazing fast experience
 
 The last thing we can do to help our users enjoy our CLI is to make sure it's blazing fast. This is where native compilation and [GraalVM](https://www.graalvm.org/) come into play.
 

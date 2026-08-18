@@ -31,8 +31,7 @@ Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the groun
 
 **DocBox v5.0.0** represents a complete architectural rewrite---modern syntax, blazing performance, and a stunning new look that finally brings API documentation into 2025. Gone are the clunky HTML pages of yesteryear. Say hello to a gorgeous, theme-driven single-page application that makes browsing your API docs feel like using a premium developer tool. We have also released a dedicated module for BoxLang: **BX-DOCBOX**. A fully interactive CLI tool for generating your docs from the command line using pure BoxLang.
 
-What's Included
----------------
+## What's Included
 
 This release introduces **three distinct flavors** for generating world-class documentation: the core library for embedding in your apps, a native BoxLang CLI module for modern workflows, and CommandBox integration for your existing pipelines. Oh, and did we mention the **gorgeous new theme system?** The default theme is a modern SPA with dark mode, lightning-fast search, and responsive design that looks stunning on any device.
 
@@ -40,8 +39,7 @@ This release introduces **three distinct flavors** for generating world-class do
 
 ![](docbox-dashboard-700x347.png)
 
-The Evolution: One Tool, Three Flavors 🎭
------------------------------------------
+## The Evolution: One Tool, Three Flavors 🎭
 
 DocBox v5 gives you three powerful ways to generate stunning API documentation:
 
@@ -51,8 +49,7 @@ DocBox v5 gives you three powerful ways to generate stunning API documentation:
 
 Choose your flavor based on your needs. Use one, use all three. We don't judge. 😎
 
-🎨 Theme System: Documentation That Doesn't Look Like It's From 2005
---------------------------------------------------------------------
+## 🎨 Theme System: Documentation That Doesn't Look Like It's From 2005
 
 ![](docbox-overview-440x510.png)  
 
@@ -71,8 +68,7 @@ DocBox v5 introduces a **professional theme system** with multiple gorgeous temp
 
 The result? API documentation that developers actually want to use. 💯. Here are the docs for the DocBox library itself: <https://s3.amazonaws.com/apidocs.ortussolutions.com/docbox/5.0.0/index.html>
 
-Flavor #1: DocBox Core Library 📚
----------------------------------
+## Flavor #1: DocBox Core Library 📚
 
 Perfect for runtime documentation generation, integration testing, or building custom doc workflows.
 
@@ -129,8 +125,7 @@ new docbox.DocBox()
 
 **Real-world scenario:** Integrate doc generation into your deployment pipeline, automatically refresh docs on code commits, or create living documentation that updates with your codebase. 🔄
 
-Flavor #2: bx-docbox (BoxLang Native CLI) ⚡
--------------------------------------------
+## Flavor #2: bx-docbox (BoxLang Native CLI) ⚡
 
 The future is now. Native BoxLang module, zero dependencies, maximum performance (<https://docbox.ortusbooks.com/getting-started/boxlang-cli>). 🚄
 
@@ -163,8 +158,7 @@ boxlang module:docbox --source=tests/resources/coldbox \
                        --theme=default
 ```
 
-Flavor #3: CommandBox Integration 📦
-------------------------------------
+## Flavor #3: CommandBox Integration 📦
 
 Already using CommandBox? We've got you covered with seamless integration. 🤝
 
@@ -205,13 +199,11 @@ docbox generate strategy=HTML,JSON source=src outputDir=docs
 }
 ```
 
-Fully Documented \& MCP Server
-------------------------------
+## Fully Documented \& MCP Server
 
 Our entire library is documented in our docs here: <https://docbox.ortusbooks.com/>. It also contains an MCP server so you can integrate it into your AI coding workflows!
 
-What's Actually New in v5.0.0 🎁
---------------------------------
+## What's Actually New in v5.0.0 🎁
 
 Check out our full engineering docs here: <https://docbox.ortusbooks.com/readme/release-history/whats-new-with-5.0.0>
 
@@ -262,8 +254,7 @@ properties = {
 }
 ```
 
-Real-World Example: Complete Workflow 🛠️
------------------------------------------
+## Real-World Example: Complete Workflow 🛠️
 
 Here's how we use DocBox at Ortus for our open-source libraries:
 
@@ -296,8 +287,7 @@ Quick checklist:
 
 ✅ Enjoy the speed boost and gorgeous new themes
 
-Get Started Now 🏁
-------------------
+## Get Started Now 🏁
 
 * Documentation: <https://docbox.ortusbooks.com> 📖
 * GitHub: <https://github.com/Ortus-Solutions/DocBox> 💻
@@ -312,8 +302,7 @@ boxlang install bx-docbox         # BoxLang CLI ⚡
 box install commandbox-docbox     # CommandBox integration 📦
 ```
 
-Why Documentation Matters 📝
-----------------------------
+## Why Documentation Matters 📝
 
 Great code deserves great documentation. Whether you're building enterprise applications, open-source libraries, or internal tools, DocBox v5 makes it effortless to create professional API documentation that your team (and future you) will actually use. 👏
 

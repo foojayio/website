@@ -30,10 +30,6 @@ If you want to learn more about CRaC, feel free to read about it [here](https://
 
 To test the support for CRaC in SpringBoot 3.2, I will use the [SpringBoot Petclinic](https://github.com/spring-projects/spring-petclinic "SpringBoot Petclinic") demo.
 
-<br />
-
-<br />
-
 For this little test, I run Ubuntu 22.04 in Parallels on my M1 Macbook Pro using 4 cores and 4GB of RAM.
 
 #### **Prerequisites**
@@ -57,7 +53,6 @@ sudo chown root:root $JAVA_HOME/lib/criu
 sudo chmod u+s $JAVA_HOME/lib/criu
 ```
 
-
 **org.crac.**   
 
 Clone the petclinic repository to your local machine and add the dependency on the `org.crac` library.
@@ -74,7 +69,6 @@ Gradle:
 implementation 'org.crac:crac:1.4.0'
 ```
 
-
 Maven:
 
 ```
@@ -84,7 +78,6 @@ Maven:
   <version>1.4.0</version>
 </dependency>
 ```
-
 
 **Create a folder for the checkpoint**   
 
@@ -103,7 +96,6 @@ Start the application by executing:
 ```
 java -jar spring-petclinic-3.2.0.jar
 ```
-
 
 Here are the results when starting up the application without using CRaC:
 
@@ -125,7 +117,6 @@ To make use of the automatic checkpointing, we start the application as follows:
 java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar
 ```
 
-
 After executing the application, it will create the checkpoint, store the checkpoint files in the folder `./tmp_checkpoint`, and will then exit the application.
 
 Now you can restore the application from the checkpoint (which means starting it again) by executing:
@@ -133,7 +124,6 @@ Now you can restore the application from the checkpoint (which means starting it
 ```
 java -XX:CRaCRestoreFrom=./tmp_checkpoint
 ```
-
 
 Here are the results related to the startup time when restoring from the automatic checkpoint
 
@@ -161,7 +151,6 @@ First you start your application as follows:
 java -XX:CRaCCheckpointTo=./tmp_checkpoint -jar spring-petclinic-3.2.0.jar
 ```
 
-
 Now you wait until the application was completely started up before you open a second shell window.  
 
 In this second shell window, you execute the following command:
@@ -169,7 +158,6 @@ In this second shell window, you execute the following command:
 ```
 jcmd spring-petclinic-3.2.0.jar JDK.checkpoint
 ```
-
 
 Now you should see that in the first shell window, where you started the petclinic application, a checkpoint is created and the application was shut down.
 
@@ -182,7 +170,6 @@ To restore the application from this checkpoint you execute the same command as 
 ```
 java -XX:CRaCRestoreFrom=./tmp_checkpoint
 ```
-
 
 This manually triggered checkpoint does not only contain the framework code but also the application code which means we should see an even faster startup because the application was already loaded and started by the framework. So here are the results:
 

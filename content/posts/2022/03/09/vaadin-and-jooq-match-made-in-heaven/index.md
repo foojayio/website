@@ -24,8 +24,7 @@ Have you ever had to write an application that didn't do much other than display
 
 How about if that was a lot easier?
 
-Introducing Vaadin and jOOQ
----------------------------
+## Introducing Vaadin and jOOQ
 
 Vaadin exists already for 20 years but was completely overhauled three years ago. Vaadin Flow is a web framework that allows the development of a web application in Java. It's based on web components and the state is synchronized between browser and server.
 
@@ -35,8 +34,7 @@ The second framework we will use is jOOQ for database access. jOOQ consists of t
 
 With the code generator, you can generate Java code for all database objects including tables, views, procedures, user-defined types, and many more. The DSL allows you to write type-safe, compile-time-checked SQL in Java using the generated Java classes.
 
-Displaying a List of Data
--------------------------
+## Displaying a List of Data
 
 ### Data Providers
 
@@ -53,7 +51,6 @@ public record CustomerInfo(Integer id, String lastname, String firstname, double
 }
 ```
 
-
 This Java Record can then be used to define the type of the grid and add the columms. The `addColumn` is an overloaded method and we use pass a method reference that returns the value that must be displayed in the grid cell.
 
 ```java
@@ -63,7 +60,6 @@ grid.addColumn(CustomerInfo::firstname).setHeader("First Name");
 grid.addColumn(CustomerInfo::lastname).setHeader("Last Name");
 grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 ```
-
 
 ### Fetching the Data
 
@@ -83,7 +79,6 @@ grid.setItems(query -> dsl
 	.fetchStreamInto(CustomerInfo.class)
 ```
 
-
 To fetch the data we use the jOOQ DSL with the generated Java code. There are Java classes for the tables (CUSTOMER, PURCHASE_ORDER, ORDER_ITEM and PRODUCT) that contain the columms (CUSTOMER.ID, CUSTOMER.LASTNAME etc). Finally we fetch the result into the `CustomerInfo` record.
 
 We use offest and limit from the query object that is passed to the fetch callback method form Vaadin so the grid will have infinite scrolling and will call the callback method to fetch data when needed.
@@ -94,13 +89,10 @@ And finally this is how the grid looks like. There are many more features in the
 
 ![](grid-1-1024x381.png)
 
-Conclusion
-----------
+## Conclusion
 
 This introduction covered only a small part of the feature set of both frameworks but I hope the example gives you an impression of how easy it is to create data-centric web applications with the combination of Vaadin and jOOQ.
 
 If you'd like to know more checkout the [jOOQ documentation and tutorials](https://www.jooq.org/learn/) and watch my Vaadin quick start tutorial to learn more about Vaadin:
 
 {{< youtube QrN1WI87xu8 >}}
-
-<br />

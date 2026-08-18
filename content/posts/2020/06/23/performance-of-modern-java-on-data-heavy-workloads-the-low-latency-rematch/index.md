@@ -83,7 +83,6 @@ latencies
       .writeTo(Sinks.files("/home/ec2-user/bench"));
 ```
 
-
 The main part, sliding window aggregation, remains the same, but the following stages that process the results are new. We write the data to two files: `laten`, containing all the raw latency data points, and `bench`, containing an [HDR Histogram](https://hdrhistogram.github.io/HdrHistogram/plotFiles.html) of the latencies.
 
 Another key difference is that, in the original post, we measured the latency of *completing* to emit a result set, but here we measure the latency of *starting* to emit it. Since we are changing the size of the output, if we kept measuring the completion latency, we'd be introducing a different amount of application-induced latency at each data point.

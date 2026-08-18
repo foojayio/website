@@ -94,7 +94,6 @@ jshell> 8*9
 $3 ==> 72
 ```
 
-
 **Java 11** introduced a new way to **execute single-file code**. This allows you to run "java HelloWorld.java," for instance, just like how you would execute a PHP or bash script.
 
 And other tools provide excellent added value to this topic. Take a look at **[JBang](https://www.jbang.dev/)**, which lets you execute code that uses dependencies without the need to compile your code or use a build tool like Maven or Gradle. And if you didn't install Java yet on your machine, it will do this for you!
@@ -161,7 +160,6 @@ If you are running on macOS or Linux, you should look at **[SDKMAN](https://sdkm
 ```
 sdk install java 17.0.4-zulu
 ```
-
 
 **Fact: most of the OpenJDK distributions provide installers for the various platforms and tools like SDKMAN allow to easily install and switch between versions.**
 
@@ -238,20 +236,17 @@ interface ExampleB {
 }
 ```
 
-
 The above code without the `doSomething`-method in `ExampleC` will generate this error:
 
 ```
 class ExampleC inherits unrelated defaults for doSomething() from types ExampleA and ExampleB
 ```
 
-
 But by adding it, the compiler understands how we want this method to behave and will output:
 
 ```
 Output of C
 ```
-
 
 **Fact: Since JDK 8 multiple inheritance of behavior is available.**
 
@@ -266,8 +261,7 @@ As you can see in the example code above, both the interfaces `ExampleA` and `Ex
 
 **Fact: This is no longer true, and implementations can be added to an interface.**
 
-Conclusion
-----------
+## Conclusion
 
 Let's try to dismiss outdated ideas about Java.
 

@@ -19,8 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Things you can do right now to learn new and valuable things that can improve your code.
-----------------------------------------------------------------------------------------
+## Things you can do right now to learn new and valuable things that can improve your code.
 
 There are many common mistakes I've seen repeated over the years while trying to make observability initiatives successful. However, the most critical and fundamental of these organizational stumbles is the irresistible infatuation with technology and toolings themselves.
 
@@ -96,9 +95,7 @@ By sheer luck, someone has already written a Spring Component for communicating 
 	}
 ```
 
-
-Updating the Pet Model
-----------------------
+## Updating the Pet Model
 
 Next, in order to save the vaccination data and not retrieve it each time, the model and DB structure have to be updated. This involves a lot of boilerplate really, but necessary in order to save the vaccination info for each pet. Bob duly adds a new table, models the relationship in his classes, and also updates the DDL scripts.{#3d47}
 
@@ -128,9 +125,7 @@ public class PetVaccine extends BaseEntity {
 }
 ```
 
-
-Adding a Domain Service to retrieve and update the new Pet vaccination date field
----------------------------------------------------------------------------------
+## Adding a Domain Service to retrieve and update the new Pet vaccination date field
 
 Following best practices, Bob creates a simple domain service that will be injected into the PetController. The new service orchestrates the domain logic for retrieving the vaccine record for the new pet from the external API and updating the model with the latest date. Unfortunately, this is where Bob also makes several mistakes, some of which are related to the leaky abstraction of the facade which obscures the expensive HTTP calls. Bob also doesn't notice much of the logic is redundant.{#193e}
 
@@ -167,7 +162,6 @@ public class PetVaccinationStatusService {
 }
 ```
 
-
 #### Update the View Template
 
 Finally, Bob adds a new field that will indicate whether a pet vaccine is overdue.
@@ -201,12 +195,10 @@ Finally, Bob adds a new field that will indicate whether a pet vaccine is overdu
 ...
 ```
 
-
 That's it! The changes are ready. Bob even writes some tests and watches them turn into a happy shade of green. Pleased with the quick progress and feeling confident about the code that runs without incident when testing out locally, Bob turns to the collected runtime data to see what it can reveal about his changes. He decides to [stretch the Definition of Done](https://digma.ai/blog/youre-never-done-by-definition/) and spends additional effort in examining the data related to his changes.
 ![](image-20.png)
 
-Observability to the rescue
----------------------------
+## Observability to the rescue
 
 First, it's important to refer to some sort of baseline. There are two API operations that were impacted by the changes and Bob would like to get some sense of how they were performing before and after the changes were in place. As a part of the observability setup, Bob also configured Micrometer and the Actuator to provide useful metrics about the API (more info [here](https://mokkapps.de/blog/monitoring-spring-boot-application-with-micrometer-prometheus-and-grafana-using-custom-metrics)). These can be accessed directly via the actuator URL, in our case <http://localhost:8082/actuator/metrics>. This endpoint is not recommended for production usage, but it is extremely simple to activate in dev. For better visualization and more graphing options, Bob will be using Prometheus and Grafana OSS running locally in his stack.{#9043}
 
@@ -215,7 +207,6 @@ Looking at some common Grafana dashboards, it was surprising to see there are no
 ```
 http_server_requests_seconds{uri="/owners/{ownerId}/pets/new", quantile="0.5", method="POST", outcome="REDIRECTION"} != 0
 ```
-
 
 We can then examine the graph before and after the code change.{#4117}
 
@@ -230,16 +221,14 @@ Yikes! Undoubtedly the changes caused a significant performance issue. We can im
 
 Thus, without adding a single breakpoint we can already learn a lot going on with this code in this request. Information that until now Bob was quite oblivious to. While he did notice some lagginess when trying out the new request, he did not pay it much attention. Maybe the external API is just slow? Now that he has access to the trace, he can take a fresh look at the code he's introducing.{#6c7e}
 
-Select statements galore
-------------------------
+## Select statements galore
 
 The first issue that stands out is the many SQL statements triggered as a part of the findById repository method. This gets automatically instrumented by Spring.Data and gives us some context into what's going on. Examining the queries more closely reveals a familiar Hibernate pitfall:{#8100}
 ![](image-25-1024x240.png)
 
 It looks like the 'Visits' relationship is being fetched lazily for each pet in what is commonly referred to as an **N+1 Select.**Interestingly enough, this issue seems to be endemic to the PetClinic application and seems to pre-date Bob's changes. Indeed, while this is causing some slowdown it is not as significant as some of the other issues, as becomes apparent when Bob examines the trace further.{#1e5e}
 
-HTTP Requests Chatter
----------------------
+## HTTP Requests Chatter
 
 The true cause of the performance regression seems to be related to a misunderstanding of Bob's, probably due to the ambiguous naming of the `VaccineServiceFacade` methods. It seems that it was not that clear to him that an API call is executed behind the scenes each time the `VaccineRecord` function was invoked. This leaky abstraction might have been alleviated with a better naming convention, emphasizing this is in fact an execution of a long synchronous operation.{#1369}
 ![](image-26-1024x587.png)
@@ -248,14 +237,12 @@ The true cause of the performance regression seems to be related to a misunderst
  <img loading="lazy" decoding="async" src="image-27-1024x532.png" alt="" class="wp-image-100964" width="840" height="436">
 </figure>
 
-Hidden Errors
--------------
+## Hidden Errors
 
 Something else is going on with the HTTP requests. As we scroll down the list of requests Bob notices some of them ended with an error, followed by an exception in trying to serialize the nonexisting response. The underlying cause, based on the HTTP error code is related to a rate limit or throttling or the external API. This problem may be temporarily solved by optimizing the number of calls but may resurface as more users start using this component concurrently. Additionally, the exception handling in this code is definitely faulty, perhaps a retry mechanism might be in order.{#df14}
 ![](image-28-1024x505.png)
 
-Open Session in View
---------------------
+## Open Session in View
 
 Just before he is off to start correcting the many issues revealed by examining the observability artifacts, Bob decides to take a quick look at the other API he modified. There doesn't seem to be a significant performance degradation in this case, but examining the trace still reveals at least one issue that needs to be fixed.{#d288}
 
@@ -265,13 +252,11 @@ Just before he is off to start correcting the many issues revealed by examining 
 
 There is a significant number of SQL calls occurring during the rendering phase, an anti-pattern caused by accessing lazy Hibernate attributes while the Session is still open, known as [**open session in view**](https://vladmihalcea.com/the-open-session-in-view-anti-pattern/)**.**This issue can be tricky to spot but is immediately apparent in the trace.{#a7ae}
 
-The writing was on the observability wall
------------------------------------------
+## The writing was on the observability wall
 
 There are other issues that can be identified in the data, but let's rewind our scenario and consider for a moment what would have happened had Bob not analyzed it before merging his changes: The code eventually gets deployed. Some of the issues are caught on during the CR or later stage testing, leading to more changes, additional delays, and painful merges as more changes steam in the interim. Other issues escape into production leading to further woes: slowing down the release, rushing hotfixes, increasing the team's anxiety and frustration, etc. Beyond doubt, we can find a lot of benefits in shortening the feedback loop.{#c90c}
 
-Big win? Not quite
-------------------
+## Big win? Not quite
 
 In this somewhat naive example, we were able to demonstrate how simply turning OTEL ON and streaming the data through some OSS tools, has the potential to provide an additional guardrail for Bob and other developers. However, the reality of the situation is that Bob's team would most likely have failed to continue to apply such feedback in a sustainable way. There are several key reasons why this is the case:{#1396}
 
@@ -291,8 +276,7 @@ In this somewhat naive example, we were able to demonstrate how simply turning O
  </div>
 </figure>
 
-The Future is Continuous Feedback
----------------------------------
+## The Future is Continuous Feedback
 
 [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/) is a new development practice that aims to bridge the gap we've identified: having plenty of data that is easy to collect about the code runtime --- but requiring manual work, expertise, and time to process into something practical and actionable. There are three ingredients that can make it work: A continuous pipeline (an inverted CI pipeline), integrated tooling, and ML/data science to automate the data analytics.{#0f37}
 
@@ -309,8 +293,7 @@ Everything from the Session in View anti-pattern, the N+1 Queries, detecting slo
 In this manner, similar to testing, we can finally make observability transparent --- something that requires no conscious effort. Just like plumbing, the role of observability should be to blend into the background. It should not matter how the data is collected or whether it was OTEL or some other technology. More importantly, we've reversed the process. Instead of Bob searching in a haystack of metrics and traces for issues related to the code, he beings by viewing the code issues which themselves contain links to relevant metrics and traces for further investigation.
 ![](image-34-1024x676.png)
 
-What do you know / or want to know about your code?
----------------------------------------------------
+## What do you know / or want to know about your code?
 
 The most eye-opening exercise in considering continuous feedback is simply turning it off. It is maddening to know all of the issues are still there, except completely invisible --- to me it feels like coding in the dark.{#4d12}
 

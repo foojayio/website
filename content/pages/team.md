@@ -17,15 +17,11 @@ With our collective expertise and passion for all things OpenJDK, we strive to p
 
 Product Owner
 
-<br />
-
 ![](/images/pages/team/2023-04-03-12.59.50-768x1024.jpg)
 
 ### [Vigen](https://www.linkedin.com/in/vigen-sarkisyan-87a9bb109/) (Kyiv)
 
 CEO
-
-<br />
 
 ![](/images/pages/team/2023-04-03-12.59.23-767x1024.jpg)
 
@@ -33,15 +29,11 @@ CEO
 
 Lead Designer
 
-<br />
-
 ![](/images/pages/team/IMG_20230403_112518-768x1024.jpg)
 
 ### Dennis (Kyiv)
 
 Front-end developer
-
-<br />
 
 ![](/images/pages/team/20230402_165626-768x1024.jpg)
 
@@ -49,23 +41,17 @@ Front-end developer
 
 Back-end developer
 
-<br />
-
 ![](/images/pages/team/image-770x1024-1.png)
 
 ### Eugenia (Kyiv)
 
 UI/UX Designer
 
-<br />
-
 ![](/images/pages/team/geertjan-3-41-32.png)
 
 ### Geertjan (Amsterdam)
 
 Founder
-
-<br />
 
 ![](/images/pages/team/1516553431566.jpg)
 

@@ -23,8 +23,7 @@ Hey **AOP** fan, after explaining the basics of AOP in ***[Part 1](https://fooja
 
 The complete example can be found on ***[GitHub](https://github.com/mezocode/healthcare-management-system/blob/main/src/main/java/com/mezocode/healthcare/shared/aop/LoggingAspect.java).***
 
-**The Problem with Logging Everywhere**
----------------------------------------
+## **The Problem with Logging Everywhere**
 
 As software developers, we know the importance of logging 📝. But scattering log statements everywhere comes with drawbacks:
 
@@ -50,7 +49,6 @@ public void updateUser(User user) {
 }
 ```
 
-
 Without AOP, your logs might be a mix of different actions, making it hard to filter what's important:
 
 ```
@@ -61,15 +59,13 @@ INFO: User updated 12345
 INFO: Deleted user 67890
 ```
 
-
 The same logger call shows up everywhere. Yuck!
 
 This leads to a dilemma - log everything and suffer messy code, or omit logging and lose visibility.
 
 There must be a better way! 🤔
 
-**Introducing Aspect-Oriented Logging**
----------------------------------------
+## **Introducing Aspect-Oriented Logging**
 
 With AOP, we can modularize cross-cutting concerns like logging away from core functionality. Let's see it in action!
 
@@ -88,7 +84,6 @@ public @interface Loggable {
     String[] hideParameters() default {};
 }
 ```
-
 
 Then define the *[LoggingAspect](https://github.com/mezocode/healthcare-management-system/blob/main/src/main/java/com/mezocode/healthcare/shared/aop/LoggingAspect.java)*.
 
@@ -112,7 +107,6 @@ public class DoctorController {
 }
 ```
 
-
 Now logging is cleanly separated from core code via AOP!
 
 After Code Sample Output
@@ -127,11 +121,9 @@ Execution time of getAllDoctors is 104ms
 DoctorController -> getDoctor(id = 1, date = mydate)
 ```
 
-
 This output shows method names and parameters being logged systematically, and the name parameter is hidden, thanks to AOP.
 
-**Smart Logging Techniques 🧠**
--------------------------------
+## **Smart Logging Techniques 🧠**
 
 We can take it further by controlling what gets logged based on metadata.
 
@@ -144,9 +136,7 @@ public void updateUser(Long id, String password) {
 }
 ```
 
-
-**Smart Logging Technique Output**
-----------------------------------
+## **Smart Logging Technique Output**
 
 With smart logging annotations, you get precise control over logged information:
 
@@ -156,11 +146,9 @@ INFO: Entering UserService.updateUser with params [id=12345]
 INFO: Exiting UserService.updateUser
 ```
 
-
 Passwords are masked, while IDs are shown, enhancing both security and clarity.
 
-**Where to Go from Here**
--------------------------
+## **Where to Go from Here**
 
 With AOP, we can log smarter, not harder! Some ideas:
 

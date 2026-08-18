@@ -27,8 +27,7 @@ The documentation states:
 
 Unfortunately, `core.log` ultimately depends on nginx's logging, and its buffer is limited in size. Thanks to my colleague [Abhishek](https://twitter.com/shreemaan_abhi) for finding [the info](http://nginx.org/en/docs/dev/development_guide.html#logging). For this reason, the `ctx` display is (heavily) truncated. I had to log data bit by bit; however, it was instructive.
 
-The context
------------
+## The context
 
 The `ctx` parameter is a Lua table. In Lua, table data structures are used for regular indexed access (akin to arrays) and key access (like hash maps). A single `ctx` instance is used for each *request*.
 
@@ -36,8 +35,7 @@ The Apache APISIX engine reads and writes data in the `ctx` table. It's responsi
 
 I resorted to a custom plugin to conditionally apply rate-limiting in the demo. The custom plugin is a copy-paste of the [limit-count](https://apisix.apache.org/docs/apisix/plugins/limit-count/) plugin. Note that the analysis is done in a specific context. Refrain from assuming the same data is available in your own. However, it should be a good starting point.
 
-Overview of the `ctx` parameter
--------------------------------
+## Overview of the `ctx` parameter
 
 The data available in the `ctx` parameter is overwhelming. To better understand it, we shall go from the more general to the more particular. Let's start from the overview.
 
@@ -54,8 +52,7 @@ The data available in the `ctx` parameter is overwhelming. To better understand 
 * `matched_route`: the route that was matched based on host header/URI and/or `remote_addr`; see below
 * `plugins`: pairs of plugin/data - see below
 
-Matched route
--------------
+## Matched route
 
 The `matched_route` row is a complex data tree that deserves a detailed description.
 
@@ -81,15 +78,13 @@ curl http://apisix:9180/apisix/admin/routes/2 -H 'X-API-KEY: edd1c9f034335f136f8
 }'
 ```
 
-
 * `priority`: since we didn't set it, it has a default value 0. [Priority](https://apisix.apache.org/docs/apisix/admin-api/#request-body-parameters) is essential when multiple routes match to determine which one to apply.
 * `create_time`: self-explanatory
 * `update_time`: self-explanatory
 * `plugins`: references to plugin's function
 * `status`: I couldn't find this
 
-Plugins
--------
+## Plugins
 
 The `plugins` value contains plugin-related data in an indexed-based Lua table. Each plugin has two entries: the first (even-indexed) entry contains data related to the plugin in general, *e.g.*, its schema; while the second (odd-index) entry data is related to its configuration in the current route.
 
@@ -99,8 +94,7 @@ My setup has two plugins, hence four entries, but to keep things simpler, I kept
 
 Key values match directly to the plugin schema and configuration; you can check the whole descriptions directly in the plugin.
 
-A final trick
--------------
+## A final trick
 
 I initially had issues printing the `ctx` table because of the nginx buffer limit and had to do it bit by bit. However, you can print it to a file.
 
@@ -116,15 +110,13 @@ file.write(core.json.encode(ctx, true) .. "\n")
 file.close()
 ```
 
-
 Here's the whole data representation, in case you have good eyes:
 
 [![](ctx-all-1024x371.png)](ctx-all.png)
 
 Alternatively, here's the [PlantUML representation](https://www.plantuml.com/plantuml/svg/xLfVSzis4d_Nfy3myj2ciaKfjc9vEhrwNFVYQHff4YSplKRbGCHAH4m2AlxuJpt-xaVIa49lQCDmgaiVel6BYH-0tovs5mjWVzI6AlD1Iz6vwf3o5oNBt2wuI0Gj8DedaHNKccmhvmKtKVS6aqenJpYhcWUhRqibBouJ1UUA6qWKBE0YiOedALqQgq2Nu9iPQdHSzUsTzNiPvBcint0j_QhbvclzyTgDhwGrW2Pr7rTKtu7IN0fWv7NrdHX9nZaZ1vFZDSbQjehBxwiP6woS75mgRYvBJ3-EzxgtMvryrMnpAr9JJhTFueldWvtHxjxk7jtPsujGbxCRLb69s-wZDfrcKD2rQX0HkGHbU5Dr66DrfMgQ9mh-jA1DhN4hD9q3weGwCj2fuajJ4wl78NWSmeKsG5cNdBmuVaFAltT7htyZRr-zEVZvQBif9HxSN2vh3Ssap86A-w0CvjJcfaJFQQwX5NZTtZ_Af3RtIxcane2g9VpZztXhHBV-EjZwxzRszBjlzj-_PrVzxkxrj_z-iYReLvI0SrBDI-PI4RlKHW4j7gAB4id58WeIq2f-ltm5lNW9Oc6o4hOJZuRTXwdY_VlUzjD0eKikZvJvFcJ1nLg0Vf1k2Z2PPFUh1uGjcgxUZlhFqGccY24lZWv-yc4cupSdNinRB-IdevT79qS-rA-_78vV-a27uyblte76xxoJZISdn-DNRxp2lHvFVZv-vLNKo_7XBpxCsrSFGKqEJWvV-40dhmyEZw8xCTDGE_OxZDiBYQet8MUeGSQTb9tGhX2yExHlQHZfbMNTcSWvSTidcLsIr6eZ2_uNC28L0zNKZa-VN1XOWC8wyUW6ExTIKYKAz58A3GyJJGeOprr4yF_y0_gZl5_03R2Gim-GcWUoyAAcdxLCZ6iwo_thqveuVDRCSvuRK8-nUTULC32W2Yv0a_CCJ0QAc0oS5n01m3Gnaio0m0MarW0Zr11bXU45X3W4LOfUUgJj-FGGRX6Uz0ee0uN3YpzJSFtgRC6baqWNuJxva3MaZF6A1yqdpTXOvvLuVh-gF3rSyd9h9fJS1uLjZs2ju71HDY4IpZ0d0HAYNvca_x4__Uw9lsEu8OM7sSq4_t0dtZ1hOOiPg4Uo3kurxMncV3yoGCkH1lD_yxYl7lVLuxvwd892dk4iqUywnmOAZzTuagw0ZhoQB81Yw2dIUs_ZVFNlNg9EE29WYQ--VEhbZvRXKN9JqH5FiE5eUDtTF3iSzJOHZQQRDdLFwpJeQBL-7N4MvGzmWsudFA3v0vZ_JEV8af9i-z3XTdWTVlDiCcg8jZDjkB46o5p9WgGv1s4-kPdkaboUWoBhYwkoiwXHxl25JzfuSJ5HVwmAZKtHarGM1GXJZMGohadvHqb1rMajYhIAS55D06nrtU2UYZht48m4BM1z_xYrUgj2e7ASz3HnmxM_OyL3kXD77JGD2W3UzoTyzCQctn8PwoV1RxQVVjkcsDwJ_ctnfuYX_paFaQ5f2bgtAu76pzWmZW8Ux2eTS0KCITPKlRJYhlqjCho0v9mB9iy_DT1fg2dwRnlGNNDagdkwZ_Bl03pRtRkBx2bS9cx-ptw0EQCgwdeXIIgB6HUqMgNDNUVZLycQt2EkpR1U_WOcTCbBhOUHQTYKPwKkqjngVWQ_Si6BUjMGitXkylsaa1VyO-Wek0cqIIePU3TansOGX_3ftlk4wuRS7OqUP0YxyRCW-MYUo_E4mK9HHjt6UlN57-zrLfAgYqgIFwqqD0dnco1kHbbud44KUk7di-c7xjBdDn1C51JIG48PK-7PqCRpcBRQe_0qvZaTiZY-knodxqyVdFQZL0fj2r19pSoXKSHVXsZKZeBmi14uy5QAjyAsyBGpACE4ny5HwkLrEQCi1YCdY2OvqBf8QC6r0KMe8PanIxtVwvLIQtwnBTMYjsusaYp0a4jfLLL_HOmy1K6eO0J41tb9hAY902DfILyxeV4MqLoYJcDxZ-gSCxLALObdKb2JPYNL9JLPMrrPj08eQStj41-b2gW1TYmON5GJDfGRISKNoSUIiQlhHbjQ1Q0aeuBbe3vfBIJZS_vns6WO_wjVii5svNJNgudftg09iKj63IHhLJIQbWhE7B6oNSnBccVrGWu73LH6TS9aGJao29THvHRjTYXTndQwEbybdAtfu7gSHcKTAh51cJlgtL0oxesYmAU9wcZqhD-MgA9ZK6lFdVvEt1gAa7qabGzNKWz7WxsTGNyunBvbgB6wHI-tLwbLTVxoHUmUjwiWaSKWhhl3FGnJ_8vrmexJtjYxl_Mf_v3cN0jxoJ3krBXcbQaBryY7ga1vsu-JbAPPYq4t3gOuDBGL4qQvJ6bU_OC1pMEkTpHVUtFxBN7zvuFjGRmTRvVojTDVbRkXSZNacMvQDsUhubSYLBYKKKE_FvESaQS_L6v1ozyiXNGu6iLHirDgwYZslO8vA10fQ3AZwMbT3g6aDEJc3Fg3AzdjN7SwFu9WLLtn_m00).
 
-Conclusion
-----------
+## Conclusion
 
 **In this post, I described the structure of the `ctx` parameter in the `access()` function. While specific entries vary from configuration to configuration, it gives a good entry point into data manipulated by plugins.**
 
@@ -133,7 +125,5 @@ It's also a good reminder that even if you're not fluent in a language or a code
 **To go further:**
 
 * [ctx parameter](https://apisix.apache.org/docs/apisix/plugin-develop/#ctx-parameter)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/rabbit-hole-apisix-plugin/) on September 24^th^, 2023*

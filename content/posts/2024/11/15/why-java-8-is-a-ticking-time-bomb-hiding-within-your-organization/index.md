@@ -25,8 +25,7 @@ When I spoke to developers at Devoxx in Belgium in October, I was surprised to l
 
 I know I'm biased, as I experiment extensively with the latest Java versions to learn what improvements they bring. But it hurts my heart to think of all those developers maintaining old systems, missing out on all the coding and performance improvements that newer versions offer. In this post, I want to highlight some of the many reasons why staying on Java 8 is a ticking time bomb...
 
-Critical Reasons to Upgrade
----------------------------
+## Critical Reasons to Upgrade
 
 Yes, your old applications may have been running stable for many years. But isn't that precisely the thread? How long since someone has looked into the sources, and are they even still available? How long will it be before the system they are running on breaks? Does your team still know how all features are implemented? These are critical questions that should make you feel uncomfortable.
 
@@ -88,8 +87,7 @@ Java wasn't initially created to run in containers. Of course not; they didn't e
 
 Thanks to the six-monthly release of new OpenJDK versions, the architects and the community can continue adapting and evolving it. Maybe not as fast as some want, but OpenJDK has always focused on stability. Still, each new version brings new features that enable Java to be used in all modern use cases.
 
-Reasons to Do Nothing
----------------------
+## Reasons to Do Nothing
 
 Of course, doing nothing is an option. Just let things run as they are. But remember, every patch you don't apply is a technical debt you don't have to acknowledge. Every upgrade you postpone is a problem waiting to happen in the future. Yes, you can wait until you are retired or have moved to a new job; someone else will need to handle it.
 
@@ -99,8 +97,7 @@ Or did the original developer leave and there is no documentation? Then how can 
 
 No, there isn't a single reason that convinces me that "doing nothing" is an option...
 
-Read More
----------
+## Read More
 
 Yes, this is not a new message. But it turns out that it needs to be repeated over and over again as too many companies keep being stuck on outdated systems! Some other posts may help you to convince your managers that a change is urgent and required:
 
@@ -110,8 +107,7 @@ Yes, this is not a new message. But it turns out that it needs to be repeated ov
 * [The Importance of Java Security Updates](https://www.azul.com/blog/the-importance-of-java-security-updates/)
 * [The Definitive Guide to Updating Azul Zulu Builds of OpenJDK](https://www.azul.com/blog/the-definitive-guide-to-updating-azul-zulu-builds-of-openjdk/)
 
-Conclusion
-----------
+## Conclusion
 
 Companies like Azul can help you to maintain your Java 6, 7, and 8 environments for many more years. But there are a lot of reasons to move on. Support for these versions will end one day, and you want to be prepared for it. Make your systems future-proof now. Make your Developer and DevOps team happy and give them the tools they deserve by ensuring your runtime is secure and you reach maximum performance with modern Java versions.
 > You can find reactions on this blog post in this follow-up post:   

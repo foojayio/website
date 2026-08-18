@@ -20,8 +20,7 @@ frozen: false
 
 Memory management remains the primary factor for application performance in enterprise Java environments. Between 2017 and 2025, the ecosystem shifted from manual tuning to architectural selection. Industry data suggests that 60 percent of Java performance issues and 45 percent of production incidents in distributed systems stem from suboptimal Garbage Collection (GC) behavior. This guide provides a strategic framework for selecting collectors based on workload characteristics. It covers the transition from legacy collectors to Generational ZGC, analyzing trade-offs regarding throughput, latency, and hardware constraints with mathematical precision.
 
-Introduction
-------------
+## Introduction
 
 The era of "write once, run anywhere" has evolved. In modern cloud-native architectures, you must "tune everywhere." The migration from bare-metal monoliths to containerized microservices fundamentally changed how the Java Virtual Machine (JVM) interacts with memory.
 
@@ -29,8 +28,7 @@ A collector that performs well for a batch process often fails in a low-latency 
 
 This guide analyzes five primary workload categories. It synthesizes performance data from **JDK 8 through JDK 25**. It provides a technical decision matrix for Senior Architects and Site Reliability Engineers (SREs).
 
-Workload Analysis and Strategic Selection
------------------------------------------
+## Workload Analysis and Strategic Selection
 
 We categorize applications based on their resource patterns and business goals. Each category requires a distinct memory management strategy supported by specific mathematical tuning models.
 
@@ -104,8 +102,7 @@ You must calculate the Allocation Rate (R~alloc~) over a time period (*t*) to de
 
 If R~alloc~ consistently approaches the concurrent collection speed of ZGC, you must either increase the heap size or optimize the code. For modern stacks on JDK 21 or later, Generational ZGC is the superior choice as it handles high allocation rates by frequently clearing the Young Generation, preventing stalls.
 
-Technical Performance Deep Dives
---------------------------------
+## Technical Performance Deep Dives
 
 This section explores the specific trade-offs involved in migration and architecture design.
 
@@ -141,8 +138,7 @@ Generational ZGC (JDK 21+) resolves these issues. It frequently collects the you
 
 **Benchmark:** In Apache Cassandra tests, non-generational ZGC failed at 75 concurrent clients. Generational ZGC **maintained stability with up to 275 concurrent clients**.
 
-Technical Matrix and Decision Logic
------------------------------------
+## Technical Matrix and Decision Logic
 
 Use this data to guide your architectural decisions.
 
@@ -207,8 +203,7 @@ Architect's Note:
 
 In JDK 25, G1 remains the most memory-efficient option regarding RSS. For performance-critical stacks on JDK 21+, Generational ZGC should be the baseline, provided you provision the infrastructure with at least 25 percent memory headroom.
 
-The Architect's Roadmap: Optimization by JDK Version
-----------------------------------------------------
+## The Architect's Roadmap: Optimization by JDK Version
 
 As a Principal Java Architect, I recognize that being "stuck" on a specific JDK version often involves balancing legacy stability with the need for modern performance. Here is your roadmap for optimization and troubleshooting, depending on which version of the JVM you are currently tethered to.
 
@@ -241,16 +236,13 @@ As a Principal Java Architect, I recognize that being "stuck" on a specific JDK 
 
 > **Analogy:** Navigating Java versions is like maintaining a building's HVAC system. **Java 8** is an old boiler where you must manually watch the pressure gauges (Metaspace and PermGen). **Java 11 and 17** are modern units that work well but require you to clear out the old filters (inherited flags) to be effective. **Java 21** is a smart climate control system: by enabling Generational ZGC, the system finally becomes intelligent enough to focus its energy only on the rooms currently in use (the young generation), saving you massive amounts of manual labor and resource cost.
 
-Conclusion
-----------
+## Conclusion
 
 **There is no single "best" collector. There is only the right collector for your specific constraints.**
 
 Parallel GC is a massive double-decker bus. It carries the most passengers (throughput) but blocks all traffic when it stops. G1 is a fleet of mid-sized shuttles. They cause frequent but short delays. Generational ZGC is a network of drones. They deliver instantly, but they consume more energy and space to operate.
 
 Align your JVM configuration with your business goals. Monitor your allocation rates using the equations provided. And most importantly, stop treating memory management as an afterthought.
-
-
 
 **References**
 

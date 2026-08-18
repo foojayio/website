@@ -22,8 +22,7 @@ Time flies when having fun...
 
 So here we are again, another month has passed and this is a summary of the Links Of The Week that were published on [jfx-central.com](https://www.jfx-central.com/home) during November.
 
-JavaFX Core
------------
+## JavaFX Core
 
 * We already shared here that Oracle will also be distributing JavaFX builds, and you can see [the announcement they did at JavaOne here](https://www.youtube.com/watch?v=4hUbmI0nplU&t=1600s).
   * [**Takaaki Sugiyama**](https://twitter.com/zinbe) shared [a lot of screenshot pictures of the JavaOne presentation "JavaFX 19 and Beyond"](https://twitter.com/zinbe/status/1583208414707998720), and the full presentation by [**Kevin Rushforth**](https://twitter.com/kevinrushforth) is available as a [PDF here](https://cr.openjdk.java.net/~kcr/presentations/javaone-2022/JavaFX-19_Final.pdf).
@@ -32,13 +31,11 @@ JavaFX Core
   * [Gluon](https://gluonhq.com/products/javafx/)
   * [Oracle](https://jdk.java.net/javafx20/)
 
-SceneBuilder
-------------
+## SceneBuilder
 
 * A feature in development for SceneBuilder: drop one or more FXML files into the welcome page to open them, as you can see in [this video](https://twitter.com/Raumzeitfalle/status/1587543306782887937?t=48IdRrEehs88chXQ0iAMKg&s=09) shared by [**Raumzeitfalle**](https://twitter.com/Raumzeitfalle).
 
-Games
------
+## Games
 
 * JavaFX Chess by [**John Sirach**](https://twitter.com/john_sirach) is not a new project, but [**Jakob Jenkov**](https://twitter.com/jjenkov) shared [a tweet about it](https://twitter.com/jjenkov/status/1586785876050427904), and it's always nice [to see a video of this amazing project](https://www.youtube.com/watch?v=6S6km5duBrM).
 * [**JavaFX3D**](https://twitter.com/JavaFX3D) shared some nice links:
@@ -47,8 +44,7 @@ Games
 * [**OrangoMango**](https://twitter.com/orango_mango), a Java game developer, [published a video](https://www.youtube.com/watch?v=NOPdE1UoqRw) showing how to make a simple shooter game in Java with the JavaFX framework.
 * GenCross-A mini crossword application written with JavaFX by **u/CasualCompetive** , fully described on [shifitzel.itch.io/gencross](https://shifitzel.itch.io/gencross).
 
-Showcase
---------
+## Showcase
 
 * [**Samie Azubike**](https://twitter.com/samieteq) shared a [video in a tweet showing BobFI](https://twitter.com/samieteq/status/1583769072273354752), a nice JavaFX UI to manage tasks, projects, messages, and help you communicate with your team.
 * Some new great demos of the visual modeler, written in JavaFX and integrating OpenCV, by [**Alessio Vinerbi**](https://twitter.com/Alessio_Vinerbi):
@@ -62,20 +58,17 @@ Showcase
 * [**Thanhpv**](https://twitter.com/realThanhpv) shared some [first screenshots of a new JavaFX application](https://twitter.com/realThanhpv/status/1590306623364665345) to quickly and accurately build visualized and transparent construction quantity reports for resource planning, cost estimation, risk management.,... To be continued...
 * A [simple periodic table app for chemistry lovers on GitHub](https://github.com/AmirAli-AZ/PeriodicTable) by **AmirAli** , based on this [periodic table JSON](https://github.com/Bowserinator/Periodic-Table-JSON).
 
-Learning
---------
+## Learning
 
 * [**Dave Barret**](https://twitter.com/Polypragmatist) has a lot of very nice tutorials on his site! For instance ["An Introduction to Model-View-Controller-Interactor"](https://www.pragmaticcoding.ca/javafx/Mvci-Introduction).
 * [**Neba Desmond**](https://twitter.com/desmond__neba) on Twitter: ["Day 24 of #100Daysofcode. Today was about making menus in #JavaFX"](https://twitter.com/desmond__neba/status/1595881606602194944).
 * [**Donald Raab**](https://twitter.com/TheDonRaab) shared a blog about [building his very first JavaFX application with IntelliJ IDEA](https://donraab.medium.com/my-first-javafx-application-ee70a1d48cb3).
 
-New on jfx-central.com
-----------------------
+## New on jfx-central.com
 
 * Real-world app: ["HERO"](https://www.jfx-central.com/real_world/hero) by [**Pedro Duque Vieira**](https://twitter.com/P_Duke), a CAD application for calculating the energy efficiency of dwellings.
 
-Other...
---------
+## Other...
 
 * [**JPro**](https://twitter.com/jpro_one) announced a [new version 2022.1.6](https://www.jpro.one/docs/current/3.1/2022.1.X?) with a modernized FileUpload API, support for multi-file upload, and browser native scrolling.
   * This means [jfx-central.com](https://www.jfx-central.com/) now also uses this new scrolling implementation.

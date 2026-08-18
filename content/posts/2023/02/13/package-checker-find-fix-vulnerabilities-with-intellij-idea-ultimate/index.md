@@ -31,8 +31,7 @@ We'll have a look at how to view known vulnerabilities in your Maven or Gradle p
 
 There are several ways to view known vulnerabilities for the dependencies to your project.
 
-View vulnerable dependencies in Maven projects
-----------------------------------------------
+## View vulnerable dependencies in Maven projects
 
 In a Maven project, all of your project's dependencies are declared in the pom.xml.
 
@@ -54,8 +53,7 @@ This will open the Vulnerable Dependencies tool window.
 
 [![Vulnerable Dependencies tool window](vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")](vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")
 
-View vulnerable dependencies in Gradle projects
------------------------------------------------
+## View vulnerable dependencies in Gradle projects
 
 In a Gradle project, all of your project's dependencies are declared in the build.gradle.
 
@@ -69,8 +67,7 @@ We can right-click the build.gradle file and go to **Analyze** \> **Show Vulnera
 
 [![Vulnerable Dependencies tool window](gradle-vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")](gradle-vulnerable-dependencies-tool-window.png "Vulnerable Dependencies tool window")
 
-View vulnerable dependencies in the Vulnerable Dependencies tool window
------------------------------------------------------------------------
+## View vulnerable dependencies in the Vulnerable Dependencies tool window
 
 We can also open the Vulnerable Dependencies tool window without having to open the files where our dependencies are declared.
 
@@ -102,8 +99,7 @@ We can use the **Show safe** button to toggle between showing all dependencies o
 
 [![Show safe](show-safe.png "Show safe")](show-safe.png "Show safe")
 
-Remediate dependencies using IntelliJ IDEA Ultimate
----------------------------------------------------
+## Remediate dependencies using IntelliJ IDEA Ultimate
 
 Finally, we can remediate these vulnerabilities.
 
@@ -133,8 +129,7 @@ We see that the overview in the Vulnerable Checker tool window is updated, and w
 
 [![Updated](updated-1.png "Updated")](updated-1.png "Updated")
 
-Summary and Shortcuts
----------------------
+## Summary and Shortcuts
 
 As we have seen, the [Package Checker plugin](https://plugins.jetbrains.com/plugin/18337-package-checker) bundled with [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) offers several different ways in which we can view vulnerable dependencies in our project inside IntelliJ IDEA Ultimate, get more information about these vulnerabilities, and remediate them.
 

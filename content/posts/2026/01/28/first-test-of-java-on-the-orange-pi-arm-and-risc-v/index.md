@@ -22,8 +22,7 @@ I got both boards for free, but what I write here and show in the video is not c
 
 {{< youtube X_t8DiUWBUo >}}
 
-OrangePi Lineup
----------------
+## OrangePi Lineup
 
 OrangePi offers a diverse range of single board computers at various price points. For this table, I focused on the two boards that I received:
 
@@ -37,8 +36,7 @@ OrangePi offers a diverse range of single board computers at various price point
 The OrangePi 5 Ultra is a high-end board with the powerful RK3588 SOC (same chip used in many Android TV boxes and mini PCs), while the OrangePi RV2 is their budget RISC-V with a Kylin X1 processor.
 ![](rpi5-orangepi5-orangepirv2-1024x540.jpg)
 
-Test Boards
------------
+## Test Boards
 
 I received two boards, two eMMC modules, and two power supplies. So everything to get me started! But to speed things up, I decided to use SD cards for the Operating System and will use the eMMC modules later, which should give a significant better performance.
 
@@ -64,8 +62,7 @@ More info about the OrangePi RV2 is available here:
 
 I used the image: `Orangepirv2_1.0.0_ubuntu_noble_desktop_gnome_linux6.6.63`.
 
-Getting Started
----------------
+## Getting Started
 
 ### Hardware Setup
 
@@ -74,8 +71,7 @@ Both boards arrived well-packaged. The OrangePi 5 Ultra looks almost identical a
 
 Installation for both followed a similar pattern: download the Ubuntu image from OrangePi's Google Drive, flash to microSD, and boot.
 
-Java Installation and Testing
------------------------------
+## Java Installation and Testing
 
 ### OrangePi 5 Ultra (ARM)
 
@@ -91,14 +87,12 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk version
 ```
 
-
 SDKMAN provides easy access to multiple Java distributions and versions. For this board, I installed Azul Zulu 25 with JavaFX:
 
 ```
 sdk install java 25.0.1.fx-zulu
 sdk install jbang
 ```
-
 
 #### Testing with Pi4J Examples
 
@@ -108,7 +102,6 @@ I cloned my [JBang project from the Pi4J repositories](https://github.com/Pi4J/p
 git clone https://github.com/Pi4J/pi4j-jbang.git
 cd pi4j-jbang
 ```
-
 
 The plain Java examples worked perfectly. The JavaFX example also ran smoothly, demonstrating that the RK3588 GPU is well-supported in Ubuntu. The board feels very responsive with these first, quick tests.
 
@@ -129,7 +122,6 @@ sudo apt upgrade
 sudo apt install openjdk-25-jdk
 ```
 
-
 This installed OpenJDK 25 for RISC-V (but without JavaFX dependencies).
 
 #### Testing Basic Java
@@ -143,14 +135,11 @@ I ran the same JBang examples that worked on the OrangePi 5 Ultra. Plain Java co
 The [overall benchmark results](https://www.phoronix.com/review/orange-pi-rv2-benchmarks/7) paint a clearer picture:
 ![Phoronix benchmark results](https://phoronix.com/benchmark/result/orange-pi-rv2-risc-v-ky-x1-cpu-benchmarks/geometric-mean-of-all-test-results-result-composite-oprrvkxcb.svgz)
 
-<br />
-
 The RV2 scores lower than both the Raspberry Pi 4 and 5 across most tests. This isn't a surprise because RISC-V is still maturing, and the Ky X1 is an early implementation. The 8 cores help with parallel workloads, but single-threaded performance lags behind ARM equivalents.
 
 In contrast, the OrangePi 5 Ultra performs exceptionally well and should be comparable to the Raspberry Pi 5 performance thanks to the powerful RK3588 SOC. But that's an other personal goal for 2026, setting up a good benchmark to compare Java performance on various boards...
 
-Conclusion
-----------
+## Conclusion
 
 These two boards represent vastly different approaches. The OrangePi 5 Ultra is a premium board that competes directly with high-end single-board and desktop computers for many tasks. It's more expensive than a Raspberry Pi but delivers impressive performance. Thanks to SDKMAN and the various Java tools that work just as wel as on any other type of Linux computer, including JavaFX, it's an attractive platform for serious development work for a low price.
 

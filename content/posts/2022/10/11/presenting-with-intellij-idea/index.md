@@ -20,20 +20,15 @@ frozen: false
 
 In this article, we will take a look at ways to level up your presentation skills with IntelliJ IDEA.
 
-Presentation Assistant plugin
------------------------------
+## Presentation Assistant plugin
 
 Our first tip is to use the Presentation Assistant plugin. The Presentation Assistant plugin will show which shortcuts are being used.
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-60174" src="presentation-assistant-example-700x137.png" alt="Presentation Assistant plugin example" width="700" height="137">
 
-<br />
-
 To install the plugin, open Preferences using **⌘,** (on Mac) or **Ctrl+Alt+S** (on Windows/Linux). Go to Plugins and search for "Presentation assistant" on the Marketplace tab. Click **Install** and when it's done, click **OK** to apply the changes and close the dialog or click **Apply** to keep the dialog open.
 
 <img decoding="async" class="size-medium wp-image-60175" src="presentation-assistant-install-700x508.png" alt="Installing the Presentation Assistant plugin in IntelliJ IDEA Preferences" width="700" height="508">
-
-<br />
 
 To configure the Presentation Assistant plugin, go back to **Preferences** and go to **Appearance \& Behavior \> Presentation Assistant**.
 
@@ -41,32 +36,23 @@ To configure the Presentation Assistant plugin, go back to **Preferences** and g
 
 Here we can configure font size, duration, alignment, and which keymaps to show. We are using macOS, with Windows as the alternative keymap. We have also configured the Presentation Assistant plugin to show the shortcuts at the top of the screen.
 
-Presentation Mode
------------------
+## Presentation Mode
 
 When presenting, you can use **Presentation Mode**. The IDE switches to full screen and everything is hidden except for the main editor window. The font size is increased, so it is easier to read from a distance.
 
 <img decoding="async" class="size-medium wp-image-60178" src="presentation-mode-700x436.png" alt="Presentation Mode in IntelliJ IDEA" width="700" height="436">
 
-<br />
-
 You can switch to Presentation Mode by clicking **View \> Appearance \> Enter Presentation Mode**.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60176" src="enter-presentation-mode-700x280.png" alt="Enter Presentation Mode using the menu in IntelliJ IDEA" width="700" height="280">
-
-<br />
 
 **Exit Presentation Mode** by clicking **View \> Appearance \> Exit Presentation Mode**.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60177" src="exit-presentation-mode-700x280.png" alt="Exit Presentation Mode using the menu in IntelliJ IDEA" width="700" height="280">
 
-<br />
-
 If needed, the font size in Presentation Mode can be configured in **Preferences \> Appearance \& Behavior \> Appearance** . Scroll down to **Presentation Mode** , and font size and set the font size you want. Click **OK** to apply the changes and close the dialog or click **Apply** to keep the dialog open. Click **Cancel** to discard the changes and close the dialog.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60179" src="presentation-mode-config-font-size-615x510.png" alt="Configuring Presentation Mode Font Size in IntelliJ IDEA Preferences" width="615" height="510">
-
-<br />
 
 We can also open Presentation Mode using short-cuts. Open the **Quick Switch Scheme** using **⌃ BackTick** (on Mac) or **Ctrl+BackTick** (on Windows/Linux). Use the arrows to select **View Mode** and then select **Enter Presentation Mode**.
 
@@ -76,34 +62,25 @@ We can use **Quick Switch Scheme** again to **Exit Presentation Mode**.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60193" src="qss-exit-presentation-mode-1-700x323.png" alt="Exit Presentation Mode in Quick Switch Scheme" width="700" height="323">
 
-<br />
-
-Mouse Zoom
-----------
+## Mouse Zoom
 
 To enable mouse zoom, you need to turn it on explicitly. Go to **Preferences \> Editor \> General** and select **Change font size with Command+Mouse Wheel** (on Mac) or **Change font size with Control+Mouse** (on Windows/Linux). Click **OK** to apply the changes and close the dialog or click **Apply** to keep the dialog open.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60195" src="enable-mouse-zoom-698x510.png" alt="Enable Mouse Zoom in IntelliJ IDEA Preferences" width="698" height="510">
 
-<br />
-
 Now we can use **Command+Mouse Wheel** (on Mac) or **Control+Mouse Wheel** (on Windows/Linux) to zoom in or out. While we are using mouse zoom, a popup appears containing the current font size on the left and a link to reset to the original font size on the right. Click the link to reset the font size.
 
 ![Reset font size](resize.png)
 
-Font
-----
+## Font
 
 To configure font and font size, go to **Preferences \> Editor \> Font**. We can select the font we want to use, and set the font size.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60201" src="font-700x508.png" alt="Configuring font and font size in IntelliJ IDEA Preferences" width="700" height="508">
 
-<br />
-
 When presenting in person, make sure the font can be read from a distance. If possible, check out the room where you'll be speaking, do your setup before your talk, and walk to the back of the room to check if the code is readable.
 
-Theme
------
+## Theme
 
 By default, IntelliJ IDEA uses the Darcula theme. To change it, go to **Preferences \> Appearance \& Behavior \> Appearance**.
 
@@ -116,18 +93,13 @@ Select the UI theme from the Theme list:
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60202" src="theme-700x507.png" alt="Selecting a Theme in IntelliJ IDEA Preferences" width="700" height="507">
 
-<br />
-
 Which theme to use depends on your personal preference. When presenting in front of an audience, you may want to take into account how light or dark the room is. If possible, try different themes and walk to the back of the room to see which one works best before your presentation. When sharing your screen during an online meeting, you may also want to check with teammates which theme works best.
 
-Tool windows
-------------
+## Tool windows
 
 We recommend closing all unused windows so we can focus on the code we're looking at. Use **Command + Shift + F12** (on Mac) or **Control+Shift+F12** (on Windows/Linux) to hide all tool windows.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60203" src="hide-all-windows-1-700x419.png" alt="Hide all windows in IntelliJ IDEA" width="700" height="419">
-
-<br />
 
 We can always reopen them using shortcuts. Here are the shortcuts to some of the most used windows:
 
@@ -140,40 +112,29 @@ We can always reopen them using shortcuts. Here are the shortcuts to some of the
 
 You can also use keyboard shortcuts to stretch the active window. Go to the relevant window, and use **⌃ ⌥ ←** or **⌃ ⌥ →** (on Mac) or **Control+Alt+Shift+Left** or **Control+Alt+Shift+Right** (on Windows/Linux) to stretch the window left or right. This also works with the tool windows at the bottom, using the up or down arrows to stretch the window up or down.
 
-Find action
------------
+## Find action
 
 If you want to do something, but don't remember the shortcut or menu option, use **Find Action** . Press **⇧⌘A** (on Mac) or **Control+Shift+A** (on Windows/Linux) to open the **Find Action** dialog. Search for the action you want, and select the relevant action.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60204" src="find-action-700x57.png" alt="Find Action in IntelliJ IDEA" width="700" height="57">
 
-<br />
-
 For example, let's use **Find Action** to apply soft-wrap.
 
-Soft-wrap
----------
+## Soft-wrap
 
 When using a file that has long lines, we can prevent horizontal scrolling by using soft-wrap. Let's use **Find Action** to enable soft-wrap. Press **⇧⌘A** (on Mac) or **Control+Shift+A** (on Windows/Linux) to open the Find Action dialog, and search for "soft-wrap".
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60206" src="find-action-softwrap-700x106.png" alt="Find Action soft-wrap in IntelliJ IDEA" width="700" height="106">
 
-<br />
-
 We get the option to turn on soft-wrap, which will be for this file only. You can click this option to turn soft-wrap on or off.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60207" src="find-action-softwrap-on-700x109.png" alt="Find Action and turn soft-wrap ON in IntelliJ IDEA" width="700" height="109">
-
-<br />
 
 Alternatively, we can configure soft-wrap. Let's select "**Soft wrap these files** ", which will soft-wrap several types of text files. Click **OK** to apply the changes and close the Preferences dialog.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60205" src="config-softwrap-700x505.png" alt="Configure soft-wrap in IntelliJ IDEA Preferences" width="700" height="505">
 
-<br />
-
-Shortcuts
----------
+## Shortcuts
 
 We recommend using shortcuts as much as possible when presenting. This is easier to do during a presentation than using a mouse or trackpad, especially if you get nervous and your hands might get slippery. There are several ways to learn shortcuts.
 
@@ -184,8 +145,7 @@ We recommend using shortcuts as much as possible when presenting. This is easier
 
 Let's take a look at some shortcuts for navigation.
 
-Navigation
-----------
+## Navigation
 
 We can use several shortcuts to navigate around a project:
 
@@ -193,15 +153,11 @@ We can **Find a class** using **⌘ O** (on Mac) or **Ctrl+N** (on Windows/Linux
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60208" src="find-class-700x317.png" alt="Find Class in IntelliJ IDEA" width="700" height="317">
 
-<br />
-
 We can move the caret to a method and use **⌘ B** (on Mac) or **Ctrl+B** (on Windows/Linux) to go to the declaration or usages.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60210" src="find-usages-700x316.png" alt="Find Usages in IntelliJ IDEA" width="700" height="316">
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60209" src="find-only-usage-700x243.png" alt="Find Usage in IntelliJ IDEA" width="700" height="243">
-
-<br />
 
 We can also navigate backwards by using **⌘ \[** (on Mac) or **Ctrl+Alt+Left** (on Windows/Linux), or navigate forward: **⌘ \]** (on Mac) or **Ctrl+Alt+Right** (on Windows/Linux).
 
@@ -209,24 +165,17 @@ Use **⇧ ⌘ E** (on Mac) or **Ctrl+Shift+E** (on Windows/Linux) to find **Rece
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60212" src="recent-locations-700x358.png" alt="Recent Locations in IntelliJ IDEA" width="700" height="358">
 
-<br />
-
 Or find **Last edited location** with **⇧ ⌘ ⌫** (on Mac) or **Ctrl+Shift+Backspace** (on Windows/Linux).
 
 Finally, we can find **Recent Files** using **⌘ E** (on Mac) or **Ctrl+E** (on Windows/Linux).
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60211" src="recent-files-700x357.png" alt="Recent Files in IntelliJ IDEA" width="700" height="357">
 
-<br />
-
-Bookmarks
----------
+## Bookmarks
 
 Another way to navigate through code, is to use bookmarks. Press **F3** (on Mac) or **F11** (on Windows/Linux) to create an anonymous line bookmark.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60197" src="anonymous-bookmark-700x157.png" alt="Anonymous Line Bookmark in IntelliJ IDEA" width="700" height="157">
-
-<br />
 
 To add a mnemonic line bookmark, press **⌥ F3** (on Mac) or **Control+F11** (on Windows/Linux). In the popup that opens, select a number or a letter that you want to use as an identifier for this bookmark. Press **⏎** (on Mac) or **Enter** (on Windows/Linux) to save the bookmark. To bookmark files, packages, folders, and modules, right-click the item you want to bookmark in the **Project Tool Window** , and add an anonymous bookmark (**F3** (on Mac) or **F11** (on Windows/Linux)), or a mnemonic bookmark (**⌥ F3** (on Mac) or **Control+F11** (on Windows/Linux)).
 
@@ -234,18 +183,13 @@ To add a mnemonic line bookmark, press **⌥ F3** (on Mac) or **Control+F11** (o
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60199" src="mnemonic-bookmark-700x124.png" alt="Mnemonic Line Bookmark in IntelliJ IDEA" width="700" height="124">
 
-<br />
-
 There are several ways to navigate between bookmarks. Press **⌘ F3** (on Mac) or **Control+F11** (on Windows/Linux) to open a popup showing bookmarks and select the desired bookmark with the keyboard and press **⏎**, or select the corresponding digit or letter for a mnemonic bookmark.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-60198" src="bookmarks-700x284.png" alt="Bookmarks in IntelliJ IDEA" width="700" height="284">
 
-<br />
-
 To jump straight to a mnemonic bookmark, hold **\^** (on Mac) or **Control** (on Windows/Linux) and press the mnemonic digit or letter on the keyboard.
 
-Summary and Shortcuts
----------------------
+## Summary and Shortcuts
 
 Now we know several tricks that will level up our presentation skills with IntelliJ IDEA.
 

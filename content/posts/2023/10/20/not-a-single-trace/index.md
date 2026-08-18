@@ -33,8 +33,7 @@ This scenario underscores a crucial point: while individual traces are invaluabl
 
 {#the-limiting-factor}
 
-The Limiting Factor
--------------------
+## The Limiting Factor
 
 The first problem is the narrow perspective. Imagine debugging a multi-threaded Java application. If you were to only focus on the behavior of one thread, you might miss how it interacts with others, potentially overlooking deadlocks or race conditions.
 
@@ -50,8 +49,7 @@ A single trace might show that a Java method, `processOrders()`, took 5 seconds 
 
 {#strength-in-numbers}
 
-Strength in Numbers
--------------------
+## Strength in Numbers
 
 Think of traces as chapters in a book and metrics as the book's summary. While each chapter (trace) provides detailed insights, the summary (metrics) gives an overarching view. Reading chapters in isolation might lead to missing the plot, but when read in sequence and in tandem with the summary, the story becomes clear.
 
@@ -65,8 +63,7 @@ I wrote about this extensively in a previous post about the [Tong motion needed 
 
 {#example}
 
-Example
--------
+## Example
 
 Observability is somewhat resistant to examples, everything I try to come up with feels a bit synthetic and unrealistic when I examine it after the fact. Having said that, I looked at my modified version of the venerable Spring Pet Clinic demo using [digma.ai](http://digma.ai). Running it showed several interesting concepts taken by Digma.
 
@@ -84,8 +81,7 @@ These become questions with easy answers at this point. When we see all the diff
 
 {#magical-apis}
 
-Magical APIs
-------------
+## Magical APIs
 
 The N+1 problem I mentioned before is a common bug in Java Persistence API (JPA). The great Vlad Mihalcea has [an excellent explanation](https://vladmihalcea.com/n-plus-1-query-problem/). The TL;DR is rather simple. We write a simple database query using ORM. But we accidentally split the transaction causing the data to be fetched N+1 times where N is the number of records we fetch.
 
@@ -95,8 +91,7 @@ In the past, I used to reach to the profiler for such things, which would often 
 
 {#final-word}
 
-Final Word
-----------
+## Final Word
 
 Relying on a single individual trace is akin to navigating a vast terrain with just a flashlight. While these traces offer valuable insights, their true potential is only realized when viewed collectively. The limitations of a single trace, such as a narrow perspective, temporal blindness, and lack of context, can often lead developers astray, causing them to miss broader systemic issues.
 

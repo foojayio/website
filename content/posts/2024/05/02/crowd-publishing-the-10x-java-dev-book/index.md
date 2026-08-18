@@ -33,8 +33,6 @@ That's the question Steve Poole and Olimpiu Pop embarked on to respond. And, wha
 
 ](https://10xjava.dev/)
 
-<br />
-
 We(all of us) will write a [book](https://10xjava.dev/ "book") in an era when you ask and the AI assistant answers. A community crowd-sourced book to show you the track on how to become the expert you always wanted to be.
 
 The book will be a series of practical advice - real recipes on mastering a trade of the development flow. We will look at architecture, algorithms, tooling, cloud, platforms, collaborations and more.

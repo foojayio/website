@@ -37,8 +37,7 @@ However, it doesn't mean it's the best approach.
 
 It's a bad one in most cases.
 
-A concrete example
-------------------
+## A concrete example
 
 Imagine an API application. It runs on the JVM, and it's written in the "Reactive" style with the help of the Spring Boot framework.
 
@@ -86,7 +85,6 @@ class HelloHandler(private val bucket: Bucket) {             //3
 }
 ```
 
-
 1. Get configuration properties from a `@ConfigurationProperties`-annotated class
 2. Create a properly-configured bucket
 3. Pass the bucket to the handler
@@ -101,8 +99,7 @@ At this point, the bucket is for the whole app. If we want a dedicated bucket pe
 
 While it's perfectly acceptable, it's a lot of effort for a feature that one can implement cheaper elsewhere.
 
-The golden case for API Gateways
---------------------------------
+## The golden case for API Gateways
 
 > A place for everything, everything in its place
 
@@ -141,13 +138,11 @@ routes:
       key-auth: ~                             #1
 ```
 
-
 1. We use a simple HTTP header for authentication for demo purposes. Real-world apps would use OAuth2.0 or OpenID Connect, but the principle is the same
 2. Rate limiting plugin
 3. Configure a bucket per consumer
 
-Discussion: what belongs where?
--------------------------------
+## Discussion: what belongs where?
 
 Before answering the question, let me go through a detour first. The book [Thinking, Fast and Slow](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow) makes the case that the brain has two "modes":
 > The book's main thesis is that of a dichotomy between two modes of thought: "System 1" is fast, instinctive and emotional; "System 2" is slower, more deliberative, and more logical.
@@ -179,8 +174,7 @@ Finally, as I mentioned in the introduction, your experience will influence your
 
 One should be careful to limit one's bias toward one's preferred solution, which might not be the best fit in a different context.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I've taken the example of per-user rate limiting to show how one can implement it in a library and an infrastructure component.
 

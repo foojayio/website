@@ -24,8 +24,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Building Games and Having Fun with Java and JavaFX
---------------------------------------------------
+## Building Games and Having Fun with Java and JavaFX
 
 Welcome to Part 2 of this five part series!
 
@@ -48,8 +47,7 @@ Here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 2: Look and Feel Enhancements
-----------------------------------
+## Part 2: Look and Feel Enhancements
 
 Wordish uses a specialized Label control that reflects the user's guess compared to the target word. Similarly, the virtual keyboard Button control must also reflect the matching status of its specific key.
 
@@ -79,7 +77,6 @@ public class LetterLabel extends Label {
 }
 ```
 
-
 Property `matchResult` holds the status of that letter's match against the target word: exact match, partial match, or no-match. Since we don't reveal match results until after animating the tiles, a second property, `letterDisplay`, determines the CSS styling of the LetterLabel. `DisplayType` is an enum that reflects one of the five possible states of a LetterLabel.
 
 ```java
@@ -90,7 +87,6 @@ public class LetterStyle {
     }  
 }
 ```
-
 
 Figure 2 illustrates all five `DisplayType` enum states: The three lower rows of LetterLabel in the TilePane are styled with DisplayType `PLAIN`. The word "BLEAK" is styled with DisplayType `DISPLAYING`. This state applies when the user is entering the word before submitting it. The words "STONE" and "FLAIR" illustrate the other three DisplayTypes applied after the matching process is complete: the L in FLAIR is `MATCHING`, the E in STONE and the A in FLAIR is `PARTIALMATCH`, and the remaining LetterLabels are DisplayType `NOMATCH`.
 
@@ -113,7 +109,6 @@ public class KeyButton extends Button {
 }
 ```
 
-
 As [Figure 2](#figure-2) illustrates, key L is `MATCHING`, keys E and A are `PARTIALMATCH`, and keys R, T, I, O, S, F, and N are `NOMATCH`. The remaining keys are `PLAIN`.
 
 When you submit a word, the controller code updates the LetterLabel and KeyButton states. In the following code snippet, we invoke the setter for property `matchResult`, which specifies that the letter in the LetterLabel is matching.
@@ -126,7 +121,6 @@ if (isMatching(ll.getText())) {
 }
 ```
 
-
 After processing the submitted word, we update the LetterLabel's `letterDisplay` property with the value from its `matchResult` property.
 
 ```java
@@ -134,14 +128,12 @@ After processing the submitted word, we update the LetterLabel's `letterDisplay`
 ll.setLetterDisplay(ll.getMatchResult());
 ```
 
-
 Next, we synchronize the associated key in KeyButton by updating its `letterDisplay` property. Here, `list` is the row of LetterLabel controls for this play and `keyLetters` is a Map. Note that we use the Map's `key` to identify the KeyButton control for LetterLabel's letter.
 
 ```java
 list.stream().forEach(ll -> keyLetters.get(ll.getText())
             .setLetterDisplay(ll.getMatchResult()));
 ```
-
 
 Importantly, by calling the JavaFX property setter `setLetterDisplay() `for both LetterLabel and KeyButton, the UI styles automatically update to reflect the matching state. To see how this works, let's discuss CSS pseudo-classes with the well-known Button control.
 
@@ -152,7 +144,6 @@ Many JavaFX controls, including Button, have a JavaFX property called `disablePr
 ```java
 myButton.setDisable(true);    // disable myButton
 ```
-
 
 When this code executes, the UI reflects the disabled state by reducing the opacity of the control. *Note that we don't update the styling ourselves.* JavaFX implements this styling behavior with CSS pseudo-classes, where a change in a property triggers a change in the node's CSS styling.
 
@@ -181,7 +172,6 @@ public class LetterStyle {
 }
 ```
 
-
 Let's examine the pseudo-class returned by `PseudoClass.getPseudoClass("matching")`. Here, the styling is identified in our CSS file and depends on the node. For LetterLabel control in a TilePane, for instance, style class `.matching-letter` in state `matching` has the following style.
 
 ```css
@@ -192,7 +182,6 @@ Let's examine the pseudo-class returned by `PseudoClass.getPseudoClass("matching
 }
 ```
 
-
 And for a KeyButton control in a FlowPane, style class `.matching-letter` in state `matching` is defined as follows.
 
 ```css
@@ -202,7 +191,6 @@ And for a KeyButton control in a FlowPane, style class `.matching-letter` in sta
 }
 ```
 
-
 **Note** : Colors `-fx-match-color` and **-**`fx-text-fill-alt-color` are defined elsewhere in the CSS file.
 
 There are similar style classes defined for states `plain`, `displaying`, `partialmatch`, and `nomatch` for controls in TilePane. We also have classes defined for states `plain`, `partialmatch`, and `nomatch` with controls in FlowPane. We assign these style classes to our customized controls in the LetterLabel and KeyButton constructors with the following (for example).
@@ -210,7 +198,6 @@ There are similar style classes defined for states `plain`, `displaying`, `parti
 ```java
 getStyleClass().add("matching-letter");
 ```
-
 
 ### Reacting to Property Updates
 
@@ -262,15 +249,13 @@ public class LetterLabel extends Label {
 }
 ```
 
-
 The `invalidated()` method for property `letterDisplay` must ensure that a pseudo-class state is mutually exclusive. That is, no `letterDisplay` pseudo-class state can match more than one state. Therefore, before turning on the `matching` pseudo-class state, we make all pseudo-class states false, as shown above.
 
 **Note** : See **[LetterStyle.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/modelview/LetterStyle.java)** , **[LetterLabel.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/modelview/LetterLabel.java)** , and **[KeyButton.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/modelview/KeyButton.java)** for the above discussion.
 
 **Note** : See **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)** for the CSS styles used in Wordish.
 
-iKonli Font Library
--------------------
+## iKonli Font Library
 
 It's easy to add flair to your applications with third party icon packs. In Wordish, we use the [iKonli Font Library](https://kordamp.org/ikonli/) for the Delete Key as well as the Replay, Information, and Stats (Bar Chart) buttons. In addition, the Close icon lets you return to the main view from either the Information or Stats view. These icons are based on Material Design. Using familiar icons and fonts help make an application intuitive when you match icons with common, expected behavior.
 
@@ -285,7 +270,6 @@ module wordish {
       . . .
 }
 ```
-
 
 And add these dependencies to the **pom.xml** file.
 
@@ -305,7 +289,6 @@ And add these dependencies to the **pom.xml** file.
 </dependencies>
 ```
 
-
 Here's how to add an icon graphic to either a Button or Label in FXML. For example, we add the Delete icon named `"mdi2b-backspace-outline"` to our virtual keyboard KeyButton control. Note that you can specify its pixel width with attribute `iconSize`.
 
 ```xml
@@ -319,11 +302,9 @@ Here's how to add an icon graphic to either a Button or Label in FXML. For examp
 </KeyButton>
 ```
 
-
 The [Material Design2 cheat sheet](https://kordamp.org/ikonli/cheat-sheet-material2.html) provides a handy list of other iconLiteral codes that you can incorporate into your UI.
 
-Adding Custom Controls to Scene Builder
----------------------------------------
+## Adding Custom Controls to Scene Builder
 
 To use customized controls with Scene Builder, supply a JAR file with these compiled classes. After you import them into Scene Builder, you can use Scene Builder's visual features with your custom controls. Similarly, to incorporate third party icons within Scene Builder, import the required JAR file or repository.
 
@@ -349,8 +330,7 @@ Once you add them, the classes appear in the Custom section under Library. You c
 
 For the iKonli Font Library, select **Search repositories** and provide the Group or Artifact ID. You can then select the libraries you need.
 
-Customizing CSS
----------------
+## Customizing CSS
 
 Besides providing style classes to support the customized pseudo-classes, we also added custom styles to support the look you see in [Figure 2](#figure-2). We styled the application using root values for certain colors.
 
@@ -371,7 +351,6 @@ We use black and white for the letter stroke color. Wordish has four main colors
 }
 ```
 
-
 These colors are then reused when we define our pseudo-class states.
 
 Normally, when a JavaFX button is disabled, its opacity is reduced to .4. To mimic the Wordle UI, we override this behavior by leaving disabled buttons in our virtual keyboard fully opaque, as shown.
@@ -381,7 +360,6 @@ Normally, when a JavaFX button is disabled, its opacity is reduced to .4. To mim
     -fx-opacity: 1.0 ;
 }
 ```
-
 
 However, we commented out the above style during development and testing, since it was helpful to notice when we disabled a button.
 

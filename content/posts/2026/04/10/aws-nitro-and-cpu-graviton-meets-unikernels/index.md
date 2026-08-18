@@ -21,13 +21,11 @@ related_posts:
 frozen: false
 ---
 
-AWS Nitro and CPU Graviton Meets Unikernels: Java and Quarkus on ARM64 AWS Graviton with Nanos Unikernel
---------------------------------------------------------------------------------------------------------
+## AWS Nitro and CPU Graviton Meets Unikernels: Java and Quarkus on ARM64 AWS Graviton with Nanos Unikernel
 
 ![image](https://github.com/user-attachments/assets/2c957ea8-2c6b-4caa-86f8-5adeb9e8bedc)
 
-Java and Jakarta EE Truly Meet Unikernels
------------------------------------------
+## Java and Jakarta EE Truly Meet Unikernels
 
 The key message of this article is simple and strong:
 
@@ -39,10 +37,7 @@ With **Nanos Unikernel** , Java applications run unchanged: the JVM is not modif
 
 This represents a major shift: unikernels are no longer a research topic or a niche experiment, but a **first-class deployment target** for enterprise Java workloads.
 
-
-
-From Virtual Machines and Containers to Unikernels
---------------------------------------------------
+## From Virtual Machines and Containers to Unikernels
 
 Cloud-native Java applications have traditionally been deployed on virtual machines and, more recently, inside containers orchestrated by Kubernetes. While containers brought improvements in portability and density, they also introduced additional layers of software complexity.
 
@@ -50,10 +45,7 @@ Unikernels remove these layers by compiling the application and its required run
 
 With Nanos Unikernel, this model becomes practical for Java and Jakarta EE workloads.
 
-
-
-Proof of Concept Overview
--------------------------
+## Proof of Concept Overview
 
 ### Reproducibility and Artifacts
 
@@ -109,19 +101,13 @@ This article builds on the original Foojay article, where the application image 
 
 This demonstrates that Nanos unikernels are **hypervisor-agnostic** and cloud-independent.
 
-
-
-Architectural Diagram of the PoC
---------------------------------
+## Architectural Diagram of the PoC
 
 ![image](https://github.com/user-attachments/assets/3d2ee606-59e5-4287-af6f-78d04ffbcef1)
 
 The application runs as a single unikernel image directly on top of the AWS Nitro hypervisor, without a guest operating system, container runtime, or Kubernetes node.
 
-
-
-Containers vs Unikernels: A Stack Comparison
---------------------------------------------
+## Containers vs Unikernels: A Stack Comparison
 
 ![image](https://github.com/user-attachments/assets/2462ae08-9dc9-40b6-ae49-d9123294cdae)
 
@@ -143,19 +129,13 @@ Containers vs Unikernels: A Stack Comparison
 
 By removing unnecessary layers, unikernels reduce boot time, memory footprint, and attack surface.
 
-
-
-Quarkus, Semeru, and Nanos on AWS Nitro Graviton
-------------------------------------------------
+## Quarkus, Semeru, and Nanos on AWS Nitro Graviton
 
 ![image](https://github.com/user-attachments/assets/5abe0556-690e-4e39-827b-a6090a64dc32)
 
 Quarkus is particularly well suited for this model thanks to its fast startup and low memory usage, while IBM Semeru provides a production-grade OpenJDK runtime. Combined with Nanos, the result is a highly efficient Java unikernel.
 
-
-
-AWS Nitro: Cloud-Native Capabilities Without Kubernetes
--------------------------------------------------------
+## AWS Nitro: Cloud-Native Capabilities Without Kubernetes
 
 AWS Nitro, like all modern hypervisors, already provides many of the foundational capabilities often associated with Kubernetes:
 
@@ -174,19 +154,13 @@ Running Java applications as unikernels allows teams to:
 * Reduce operational complexity
 * Lower infrastructure and operational costs
 
-
-
-Hypervisor Independence
------------------------
+## Hypervisor Independence
 
 In the original article, the application image runs on the Oracle OCI hypervisor. In this Proof of Concept, the same image runs on AWS Nitro.
 
 This confirms that Nanos unikernels are **not tied to a specific cloud provider or hypervisor**. The same Java application can be deployed consistently across environments.
 
-
-
-Why This Matters for Java and Jakarta EE
-----------------------------------------
+## Why This Matters for Java and Jakarta EE
 
 Java and Jakarta EE can benefit **today** from unikernel advantages:
 
@@ -199,10 +173,7 @@ Most importantly, this comes **without changing existing applications or the JVM
 
 Unikernels with Nanos represent an evolutionary step, not a disruptive rewrite, for the Java ecosystem.
 
-
-
-Conclusion
-----------
+## Conclusion
 
 The cloud is evolving, and unikernels are becoming a practical deployment option for real-world workloads.
 

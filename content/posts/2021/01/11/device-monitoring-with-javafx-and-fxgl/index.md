@@ -26,8 +26,7 @@ In a previous post ["Getting Started with FXGL Game Development"](https://foojay
 
 But, this game engine can also be used for other use cases. In this post, we will be building a system monitoring dashboard, which can run on a Raspberry Pi. The dashboard can be used to keep an eye on any device that can report its state to a queue. And, for me personally, it finally solves the problem of finding the IP addresses of all my Raspberry Pi's when my router decided to shuffle them... 😉
 
-Application Description
------------------------
+## Application Description
 
 A proof-of-concept has been set up using one Raspberry Pi as the "central system" to host the queue (Mosquitto). On this Raspberry Pi and others, a Python script runs to send the device state every second to the queue.  
 
@@ -47,8 +46,7 @@ When the application starts, you can choose between "Mock Data", or an IP addres
 
 The sources of this project are available on [GitHub in the FXGLSystemMonitoring repository](https://github.com/FDelporte/FXGLSystemMonitoring).
 
-Mosquitto
----------
+## Mosquitto
 
 [Eclipse Mosquitto](https://mosquitto.org/) is an open-source message broker that implements the MQTT protocol which is lightweight and is suitable for use on all devices from low power single board computers to full servers. As such, it's a perfect match to use on the Raspberry Pi.
 
@@ -62,7 +60,6 @@ $ sudo apt install -y mosquitto mosquitto-clients
 $ sudo systemctl enable mosquitto.service
 ```
 
-
 We can check if it is installed correctly and running by requesting the version:
 
 ```
@@ -72,7 +69,6 @@ $ mosquitto -v
 1569780732: Opening ipv4 listen socket on port 1883.
 1569780732: Error: Address already in use
 ```
-
 
 The last line with the error message can be ignored.
 
@@ -84,7 +80,6 @@ The installed mosquitto-clients can be used to easily test if Mosquitto is runni
 $ mosquitto_sub -v -t 'testing/TestTopic'
 ```
 
-
 In the second terminal we send multiple commands with a message for this specific topic, like this:
 
 ```
@@ -93,12 +88,10 @@ $ mosquitto_pub -t 'testing/TestTopic' -m 'hello world'
 $ mosquitto_pub -t 'testing/TestTopic' -m 'jieha it works'
 ```
 
-
 Every "publish" from the second terminal window will appear in the first one as you can see in these screenshots:
 ![](mosquitto_testing.png)
 
-Send State from Raspberry Pi
-----------------------------
+## Send State from Raspberry Pi
 
 To send the state from all our Raspberry Pi-boards to Mosquitto, a [script is available in the GitHub project](https://github.com/FDelporte/FXGLSystemMonitoring/blob/main/python/statsSender.py). For this script, we are using Python as we only need some minimal example data which is easily available with the "psutil" library. Of course the same could be done with Java, but let's embrace Python for once 😉
 
@@ -110,7 +103,6 @@ If you started from the default Raspberry Pi OS, Python is already installed. So
 pip install paho-mqtt
 pip install psutil
 ```
-
 
 In this example we are only using a subset of all the data which is available from psutil to show as a proof-of-concept. A full overview is available on [pypi.org/project/psutil](https://pypi.org/project/psutil/).
 
@@ -132,7 +124,6 @@ jsonString += " },"
 jsonString = "}"
 ```
 
-
 With the paho-library we can send such a message to the queue with:
 
 ```java
@@ -141,9 +132,7 @@ client.connect(mosquitto)
 client.publish(topicName, jsonString)
 ```
 
-
-Inside the Monitoring Application
----------------------------------
+## Inside the Monitoring Application
 
 The application starts in MonitorApp which extends an FXGL GameApplication.
 
@@ -172,7 +161,6 @@ runOnce(() -> {
 }, Duration.seconds(0.01));
 ```
 
-
 Another one is the `run()` method which, every second, runs the provided code. In this case, the code generates random data for the "mock" mode using [Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise):
 
 ```java
@@ -188,7 +176,6 @@ run(() -> monitors.forEach(m -> {
     m.onReading(reading);
 }), DATA_UPDATE_FREQUENCY);
 ```
-
 
 ### Incoming Data
 
@@ -219,7 +206,6 @@ public class VirtualMemory {
 }
 ```
 
-
 ### Queue
 
 By using the ["org.eclipse.paho.client.mqttv3" dependency](https://www.eclipse.org/paho/), we can easily connect to the queue:
@@ -230,7 +216,6 @@ client.setCallback(new ClientCallback(readings));
 client.subscribe(topicName);
 ```
 
-
 The ClientCallBack gets called each time a message is available for the topic that we mentioned earlier.
 
 ```java
@@ -240,7 +225,6 @@ public void messageArrived(String s, MqttMessage mqttMessage) {
     System.out.println("Message received: " + data);
 }
 ```
-
 
 ### The View Components
 
@@ -258,7 +242,6 @@ CollapsedView uses LoadView
 ExpandedView uses CanvasLineChart
 ```
 
-
 All these views implement the `ReadingHandler` callback, which notifies each view when a new reading from the queue is available. Therefore, all views can easily be updated following this notification.
 
 ### Animations
@@ -274,7 +257,6 @@ animationBuilder()
         .to(APP_WIDTH)
         .buildAndPlay();
 ```
-
 
 ### Running the Application with Mock Data
 
@@ -323,9 +305,7 @@ $ stress --cpu 2
 $ stress --vm 4 --vm-bytes 1024M
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 It should be noted that something similar could be done with the magnificent [TilesFX library by Gerrit Grunwald](https://github.com/HanSolo/tilesfx) but we deliberately took another approach to show you how you can create visualization components with JavaFX and FXGL yourself.
 

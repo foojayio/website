@@ -36,8 +36,7 @@ If you've never dealt with localization and would like to learn, it might be a g
 If you're already familiar with the basics, and just want to see AI in action, you might want to skip to [Translate texts](#translate-texts) or clone [my fork](https://github.com/flounder4130/spring-petclinic) to skim over the commits and evaluate the results.
 ![Localize Apps with AI - post banner](https://flounder.dev/img/localize-apps-with-ai-banner.png)
 
-Get the project
----------------
+## Get the project
 
 Creating an application just for a localization experiment would be overkill, so let's fork some open-source project. I chose [Spring Petclinic](https://github.com/spring-projects/spring-petclinic), an example web app that is used to showcase the [Spring](https://spring.io) framework for Java.
 
@@ -45,8 +44,7 @@ Fork and clone Petclinic (requires GitHub CLI): `gh repo fork https://github.com
 
 If you haven't used Spring before, some code snippets might not look familiar to you, but, as I already mentioned, this discussion is technology-agnostic. The steps are roughly the same regardless of the language and framework.
 
-Localization prerequisites
---------------------------
+## Localization prerequisites
 
 Before an application can be localized, it has to be *internationalized*.
 
@@ -61,14 +59,12 @@ Resource bundles hold the text values for different languages:
 }
 ```
 
-
 ```json
 {
   "greeting": "¡Hola!",
   "farewell": "¡Adiós!"
 }
 ```
-
 
 For these values to make their way to the UI, the UI must be explicitly programmed to use these files.
 
@@ -78,8 +74,7 @@ Examples of such libraries include *i18next* (JavaScript), *Babel* (Python), and
 
 Java supports internationalization out-of-the-box, so we don't need to bring additional dependencies into the project.
 
-Examine the sources
--------------------
+## Examine the sources
 
 Java uses files with the `.properties` extension to store localized strings for the user interface.
 
@@ -96,7 +91,6 @@ typeMismatch.date=invalid date
 typeMismatch.birthDate=invalid date
 ```
 
-
 ```
 welcome=Bienvenido
 required=Es requerido
@@ -108,15 +102,13 @@ typeMismatch.date=Fecha invalida
 typeMismatch.birthDate=Fecha invalida
 ```
 
-
 Externalizing UI strings is not something all projects universally do.  
 
 Some projects may have these texts directly hard-coded into the application logic.
 
 Putting UI texts separately from application logic is a good practice with advantages beyond internationalization. It makes the code easier to maintain and promotes consistency in UI messages. If you are starting a project, consider implementing i18n as early as possible.
 
-Test run
---------
+## Test run
 
 Let's add a way to change the locale through URL parameters. This will allow us to test if everything is fully externalized and translated to at least one language.
 
@@ -149,7 +141,6 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
-
 Now that we can test different locales, we run the server, and compare the home page for several locale parameters:
 
 * <http://localhost:8080> -- default locale
@@ -162,15 +153,13 @@ Changing the locale is reflected in the UI, which is good news.
 
 It appears, however, that changing the locale has only affected a portion of the texts. For Spanish, **Welcome** has changed to **Bienvenido**, but the links in the header remained the same, and the other pages are still in English. This means we have some work to do.
 
-Prepare for localization
-------------------------
+## Prepare for localization
 
 The Petclinic project generates pages using [Thymeleaf templates](https://www.thymeleaf.org), so let's inspect the template files.
 
 ```html
 <h2>Find Owners</h2>
 ```
-
 
 Indeed, some of the texts are hard-coded, so we need to modify the code to refer to the  
 
@@ -184,18 +173,15 @@ so we can incorporate references to the corresponding resource bundle keys right
 <h2>Find Owners</h2>
 ```
 
-
 ```html
 <h2 th:text='#{heading.find.owners}'>Find Owners</h2>
 ```
-
 
 Of course, for the change to work, it must be accompanied with the matching entry in the resource bundles:
 
 ```
 heading.find.owners=Find Owners
 ```
-
 
 The previously hard-coded text is still there, but now it serves as a fallback value, which will only be used if there is an error retrieving a proper localized message.
 
@@ -207,15 +193,11 @@ The rest of the texts are externalized in a similar manner, however, there are s
 private String firstName;
 ```
 
-
 ```java
 @Column(name = "first_name")
 @NotBlank(message = "{field.validation.notblank}")
 private String firstName;
 ```
-
-
-
 
 In a couple of places, the logic has to be changed:
 
@@ -224,7 +206,6 @@ In a couple of places, the logic has to be changed:
     <th:block th:if="${pet['new']}">New </th:block>Pet
 </h2>
 ```
-
 
 In the example above, the template uses a condition. If the `new` attribute is present,  
 **New** is added to the UI text. Consequently, the resulting text is either **New Pet** or **Pet** depending on the presence of the attribute.
@@ -242,10 +223,7 @@ One possible solution to this situation is to make the logic even more sophistic
 </h2>
 ```
 
-
 Separate branches will also simplify the translation process and future maintenance of the codebase.
-
-
 
 The **New Pet** form has a trick too. Its **Type** drop-down is created by passing  
 
@@ -254,7 +232,6 @@ the collection of pet types to the `selectField.html` template:
 ```html
 <input th:replace="~{fragments/selectField :: select (#{pet.type}, 'type', ${types})}" />
 ```
-
 
 Unlike the other UI texts, the pet types are a part of the application's data model. They are sourced from a database at runtime. The dynamic nature of this data prevents us from directly extracting the texts to a property bundle.
 
@@ -266,13 +243,11 @@ There are again several ways to handle this. One way is to dynamically construct
         th:text="${item}">dog</option>
 ```
 
-
 ```java
 <option th:each="item : ${items}"
         th:value="${item}"
         th:text="#{'pettype.' + ${item}}">dog</option>
 ```
-
 
 In this approach, rather than directly rendering the value, for example, `cat` in the UI, we prefix it with `pettype.`. This results in `pettype.cat`, which we then use as a key to retrieve the localized UI text:
 
@@ -282,13 +257,11 @@ pettype.cat=cat
 pettype.dog=dog
 ```
 
-
 ```
 pettype.bird=pájaro
 pettype.cat=gato
 pettype.dog=perro
 ```
-
 
 You might notice that we have just modified the template of a reusable component. Since reusable components are meant to serve multiple clients, it is not correct to bring client logic in it.
 
@@ -296,14 +269,11 @@ In this particular case, the drop-down list component becomes tied to pet types,
 
 This flaw was there from the beginning -- see \`dog\` as the options' default text. We just propagated this flaw further. This should not be done in real projects and needs refactoring.
 
-
-
 Of course, there is more project code to internationalize; however, the rest of it  
 
 mostly aligns with the examples above. For a complete review of all my changes, you are welcome to examine [the commits in my fork](https://github.com/flounder4130/spring-petclinic).
 
-Add missing keys
-----------------
+## Add missing keys
 
 After replacing all UI text with references to property bundle keys, we must make sure to introduce all these new keys. We don't need to translate anything at this point, just add the keys and original texts to the `messages.properties` file.
 
@@ -315,8 +285,7 @@ IntelliJ IDEA has good Thymeleaf support. It detects if a template references a 
 
 With all preparations done, we get to the most interesting part of the work. We have all the keys, and we have all the values for English. Where do we get values for the other languages?
 
-Translate texts
----------------
+## Translate texts
 
 For translating the texts, we will create a script that uses an external translation service. There are plenty of translation services available, and many ways to write such a script. I've made the following choices for the implementation:
 
@@ -402,7 +371,6 @@ for language in languages:
     populate_properties(properties_directory + f"messages_{language}.properties", base_properties, language)
 ```
 
-
 The script extracts the keys from the default property bundle (`messages.properties`)  
 
 and looks for their translations in the locale-specific bundles. If it finds a certain key lacks a translation, the script will request the translation from DeepL API and add it to the property bundle.
@@ -431,8 +399,7 @@ Also, missing properties get added to:
 
 But what about the results? Can we see them already?
 
-Check the results
------------------
+## Check the results
 
 Let's relaunch the application and test it using different `lang` parameter values. For example:
 
@@ -444,15 +411,13 @@ Let's relaunch the application and test it using different `lang` parameter valu
 Personally, I find it very satisfying to see each page correctly localized. We've put in some effort, and now it's paying off:
 ![Spring Petclinic Find Owners page in Dutch](https://flounder.dev/img/localized-nl.png)
 
-Address the issues
-------------------
+## Address the issues
 
 The results are impressive. However, if you take a closer look, you may discover mistakes that arise from missing context. For example:
 
 ```
 visit.update = Visit
 ```
-
 
 'Visit' can be both a noun and a verb. Without additional context, the translation  
 
@@ -464,7 +429,6 @@ We can address this by editing the translations manually or by adjusting the tra
 # Noun. Heading. Displayed on the page that allows the user to edit details of a veterinary visit
 visit.update = Visit
 ```
-
 
 We can then modify the translation script to parse such comments and pass them with  
 
@@ -481,13 +445,11 @@ data = {
 }
 ```
 
-
 As we dig deeper and consider more languages, we might come across more things that require improvements. This is an iterative process.
 
 If there's one thing that's indispensable in this process, that's review and testing. Regardless of whether we improve the automation or edit its output, we will find it necessary to conduct quality control and evaluation.
 
-Beyond the scope
-----------------
+## Beyond the scope
 
 Spring Petclinic is a simple, yet realistic project, just like the problems we've just solved. Of course, localization presents a lot of challenges that are out-of-scope for this article, including:
 
@@ -498,8 +460,7 @@ Spring Petclinic is a simple, yet realistic project, just like the problems we'v
 
 Each of these topics warrants a writing of its own. If you would like to read more, I will be happy to cover these topics in separate posts.
 
-Summary
--------
+## Summary
 
 All right, now that we've finished localizing our application, it's time to reflect on what we've learned:
 

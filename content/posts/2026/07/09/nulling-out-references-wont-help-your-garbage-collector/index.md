@@ -23,8 +23,7 @@ It's also wrong, and the way it's wrong tells you most of what's worth knowing a
 
 That is, the vast majority of data allocated in a tracing garbage collected runtime becomes collectable as soon as a variable falls out of scope.
 
-The collector doesn't delete anything
--------------------------------------
+## The collector doesn't delete anything
 
 Let's look at the name, garbage collection, because that's where the trouble starts. The term "Garbage Collector" leaves one with the mental model that once an object is no longer in use, garbage collection works to free the memory used by that object making it available for reuse.
 
@@ -34,8 +33,7 @@ After all of the live data is copied from the "from" memory pool to the "to" mem
 
 Once one starts to think about garbage collection as live object harvesting, you quickly realize that the collector doesn't delete anything. Instead it preserves all the data that it can reach by tracing live references. The impact of how data is scoped on garbage collection is key to understanding why `ref = null` isn't helpful
 
-Most objects die young
-----------------------
+## Most objects die young
 
 Garbage collection is triggered when the accumulation of memory consumed by an application hits a threshold. Once triggered, the garbage collector starts the process of cleaning memory by first finding all of the garbage collection roots (GC roots).
 
@@ -59,7 +57,6 @@ For completeness, an internal pointer is one that exists completely internal to 
 
             Figure 1. External vs internal pointer
 ```
-
 
 While GC roots are found in a number of JVM data structures, the data structure of interest in this instance is the Java stack. Let's take a deeper dive into how Java stacks function to understand their role in object liveness. Here is some code to consider.
 
@@ -85,7 +82,6 @@ public class StackExample {
             Listing 1. Sample code used to explore the Stack for the main thread.
 ```
 
-
 In the JVM, stacks are per-thread and private. In contrast, data in Java heap is shared by every thread. As the JVM's main thread executes the code above, it will push a stackframe onto the stack for each method call.
 
 The stackframe will hold the parameters passed to the method, all of the local variables and the return value. Only Java primitive values or references are pushed onto the stack
@@ -104,7 +100,6 @@ Thread - main stack — main() is the only frame (bottom of the stack)
 
             Figure 2. Stack with initial Stack Frame
 ```
-
 
 The stack above contains a single stack frame. Within the frame are a local variables array and an operand stack; each slot, in either one, holds a Java primitive value or a reference.
 
@@ -144,7 +139,6 @@ Thread - main stack — call1() return value is pushed to the operands stack
 └──────────────┴───────────┴──────────────┘
             Figure 3. Stack with Stack Frame for each call
 ```
-
 
 In Figure 3 we can see the state of the stack for the call chain main() -\> runit() -\> call1(). All of the code has been executed in call1 and the return value, reference to output, has been pushed onto the operand stack.
 
@@ -195,7 +189,6 @@ One last point, the nodes are all pointing to another object and it is generally
             Figure 4. LinkedList Nepotism
 ```
 
-
 ### Conclusion
 
 The takeaway is a short one. As part of the method return, the top of stack is adjusted so that the current stack frame is no longer in scope. With this adjustment, all of the local references to data stored in that stack frame will be lost. Ironically, this loss of references, something you'd fight to avoid in C/C++, is exactly what needs to happen in the Java runtime. It is this loss of references that allows the collector to reclaim memory without the aid of a `ref = null` from you.
@@ -205,5 +198,3 @@ And given that in most applications, the vast majority of data will be locally s
 With that, I hope that this helps your understanding of how intricate and amazing the JVM is and how much cognitive load that it takes on so you rarely have to think about things that steal your focus away from application logic.
 
 If you have a persistent problem with memory or perhaps you'd like to know how to use less of it, I can help. My heap analysis tooling is designed to work with any size heap. Moreover, it is configurable so that it can be tuned specifically to answer questions about your application.
-
-<br />

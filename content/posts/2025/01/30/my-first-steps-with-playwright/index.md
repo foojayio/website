@@ -28,8 +28,7 @@ Here are [the metrics](https://www.linkedin.com/dashboard/) I want on LinkedIn:
 
 I searched for a long time but found no API access for the metrics above. I scraped the metrics manually every morning for a long time and finally decided to automate this tedious task. Here's what I learned.
 
-The context
------------
+## The context
 
 The job is in Python, so I want to stay in the same tech stack. After a quick research, I found [Playwright](https://playwright.dev/), a browser automation tool with a couple of language APIs, including Python. Playwright's primary use case is end-to-end testing, but it can also manage the browser outside a testing context.
 
@@ -39,11 +38,9 @@ I'm using Poetry to manage dependencies. Installing Playwright is as easy as:
 poetry add playwright
 ```
 
-
 At this point, Playwright is ready to use. It offers two distinct APIs, one *synchronous* and one *asynchronous*. Because of my use-case, the first flavour is more than enough.
 
-Getting my feet wet
--------------------
+## Getting my feet wet
 
 I like to approach development incrementally.
 
@@ -71,7 +68,6 @@ with (sync_playwright() as pw):                                                 
     browser.close()                                                                    #9
 ```
 
-
 1. Get a `playwright` object
 2. Launch a browser instance. Multiple browser types are available; I chose Chromium on a whim. Note that you should have installed the specific browser previously, *i.e.* , `playwright install --with-deps chromium`.By default, the browser opens *headless* ; it doesn't show up. I'd advise running it visibly at the beginning for easier debugging: `headless = True`.
 3. Open a new browser window
@@ -82,8 +78,7 @@ with (sync_playwright() as pw):                                                 
 8. Get the inner text of the first element
 9. Close the browser to clean up
 
-Storing cookies
----------------
+## Storing cookies
 
 The above worked as expected. The only downside is that I received an email from LinkedIn every time I ran the script:
 > Hi Nicolas,
@@ -114,7 +109,6 @@ with sync_playwright() as pw:
         context.close()
 ```
 
-
 1. Playwright will store the profile in the specified folder and reuse it across runs
 2. Improve exception handling
 3. The `BrowserContext` can also open pages
@@ -123,8 +117,7 @@ with sync_playwright() as pw:
 
 At this point, we need only to authenticate with both credentials the first time. On subsequent runs, it depends.
 
-Adapting to reality
--------------------
+## Adapting to reality
 
 I was surprised to see that the code above didn't work reliably. It worked on the first run and sometimes on subsequent ones. Because I'm storing the browser profile across runs, when I need to authenticate, LinkedIn only asks for the password, not the login! Because the code tries to enter the login, it fails in this case. The fix is pretty straightforward:
 
@@ -135,9 +128,7 @@ if username_field.is_visible():
 page.locator('#password').press_sequentially(getenv('LINKEDIN_PASSWORD'))
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Though I'm no expert in Python, I managed to achieve what I wanted with Playwright.
 
@@ -149,7 +140,5 @@ Playwright allows recording videos in the context of tests, which is very useful
 
 * [Playwright](https://playwright.dev/)
 * [Video recording](https://playwright.dev/python/docs/videos)
-
-
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/first-steps-playwright/) on January 19^th^, 2024*

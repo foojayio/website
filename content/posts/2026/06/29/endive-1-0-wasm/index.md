@@ -24,8 +24,7 @@ A few weeks ago, we wrote about [a new generation of Java libraries](https://foo
 
 Today, the runtime that makes it all work has its first official release under the [Bytecode Alliance](https://bytecodealliance.org/). **[Endive 1.0](https://endive.run/blog/endive-1.0)** is available on Maven Central.
 
-What Shipped
-------------
+## What Shipped
 
 Endive continues the work started as [Chicory](https://github.com/dylibso/chicory), the pure-Java WebAssembly runtime that has been powering this ecosystem since 2023. Same API, same community, same codebase. The move to the Bytecode Alliance is organizational, not technical. For details on the fork and governance, see the [announcement article](https://bytecodealliance.org/articles/endive-and-the-next-chapter-of-webassembly-on-the-jvm).
 
@@ -33,8 +32,7 @@ For existing Chicory users, migrating is a find-and-replace. Maven coordinates m
 
 Beyond the rename, Endive 1.0 ships new technical work.
 
-WasmGC: The Libraries Get Smarter
----------------------------------
+## WasmGC: The Libraries Get Smarter
 
 The previous article focused on wrapping C and Rust libraries. Those languages compile to Wasm straightforwardly because they manage their own memory. But a growing number of languages target the WasmGC proposal instead: Kotlin/Wasm, Dart, and others. Google Sheets already runs its Java-based calculation engine through WasmGC in production. Endive passes the full WasmGC spec testsuite, and the project testsuite already includes a Kotlin/Wasm hello-world to validate the integration end to end:
 
@@ -62,20 +60,17 @@ fun wasiGetTime(clockId: Int): Long = withScopedMemoryAllocator { allocator ->
 }
 ```
 
-
 Standard Kotlin, targeting WasmGC and WASI, running through Endive with no changes.
 
 What Endive 1.0 adds is the host integration. When GC-managed objects (structs, arrays, `externref` values) cross the boundary between Wasm and Java, they are now tracked by the JVM garbage collector directly. No separate store, no manual lifecycle management. The annotation processor supports `externref` as plain `Object`, so host functions work naturally with GC types.
 
 This is the foundation for the next wave of Wasm-powered Java libraries, ones built from languages that rely on garbage collection rather than manual memory management. If you already use WasmGC types at the host boundary, the runtime will guide you through a small update. See the [release notes](https://endive.run/blog/endive-1.0) for details.
 
-Tail Call Optimizations
------------------------
+## Tail Call Optimizations
 
 CPython 3.14 adopted tail calls in its interpreter loop. The Endive compiler now optimizes tail-call dispatch by eliminating unnecessary stack frame allocation. If you're running Python UDFs in [Trino](https://trino.io/docs/current/udf/python.html), this is where you feel it.
 
-One More JAR: tree-sitter for Java
-----------------------------------
+## One More JAR: tree-sitter for Java
 
 In the previous article, every example followed the same shape. Take a proven native library. Compile it to Wasm. Wrap it in a JAR. Ship it on Maven Central.
 
@@ -91,8 +86,7 @@ Meanwhile, [Reshapr](https://github.com/reshaprio/reshapr), the open-source no-c
 
 Another battle-tested native library, another JAR on the classpath, another use case that would have been painful with JNI.
 
-Beyond Libraries: Endive as a Host
-----------------------------------
+## Beyond Libraries: Endive as a Host
 
 The library-wrapping story is just the beginning. At the [wasmCloud community call](https://www.youtube.com/watch?v=QyVyD37cvrw) in May, Bailey Hayes built a wasmCloud host in Java using Endive, scheduling workloads over NATS. The demo then embedded Wasm functions alongside plain Java handlers in an [Eclipse Vert.x](https://vertx.io/) app: two plain Java routes, two Wasm routes, one HTTP server, one JVM. The Wasm invoker was three lines of code. The Java caller had no idea it was talking to WebAssembly.
 
@@ -100,13 +94,11 @@ If you want to see the full picture of where this is heading, the [JNation 2026 
 
 To stress-test the runtime, we compiled javac itself to Wasm via [GraalVM WebImage](https://www.graalvm.org/jdk25/reference-manual/web-image/) and ran it back in Endive. It produced valid `.class` files. We also ran a [Scala.js](https://www.scala-js.org/) WasmGC hello-world through the build-time compiler end to end. These aren't meant for production. They're the kind of exercises that shake out edge cases and prove the runtime handles real-world complexity. The [examples are on GitHub](https://github.com/andreaTP/metacircular-java-wasm).
 
-What's Next
------------
+## What's Next
 
 Community members have started prototyping [Component Model](https://github.com/roastedroot/endive-cm) support, the standard for typed, language-neutral interfaces between Wasm components. Cranelift-based native compilation is also in the works, bringing near-native execution speed while preserving the pure-Java packaging story.
 
-Get Started
------------
+## Get Started
 
 Documentation, getting started guides, and the full migration reference are at [endive.run](https://endive.run/docs/). The source lives at [github.com/bytecodealliance/endive](https://github.com/bytecodealliance/endive).
 

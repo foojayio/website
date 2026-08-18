@@ -120,7 +120,6 @@ Detailed functional testing is available through a powerful testing framework, w
 }
 ```
 
-
 Each Service is defined in terms of its implementation class and the Chronicle Queues that are used for the transmission of Events. There is enough information here for the Chronicle Services runtime to create and start each service.
 
 Diagrammatically, the application described in the above file would appear like this:

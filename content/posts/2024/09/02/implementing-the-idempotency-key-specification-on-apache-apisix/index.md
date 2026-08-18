@@ -30,8 +30,7 @@ In short, the idea is for the client to send a unique key along with the request
 
 This post shows how to implement it with [Apache APISIX](https://apisix.apache.org/).
 
-Overview
---------
+## Overview
 
 Before starting coding, we need to define a couple of things. Apache APISIX offers a plugin-based architecture. Hence, we will code the above logic in a plugin.
 
@@ -61,7 +60,6 @@ services:
       - "8001:8001"                                          #3
 ```
 
-
 1. Static route configuration
 2. Path to our future plugin
 3. Port of Redis Insights (GUI). Not necessary *per se*, but very useful during development for debugging
@@ -85,7 +83,6 @@ plugin_attr:                                                 #4
     host: redis                                              #5
 ```
 
-
 1. Configure APISIX for static routes configuration
 2. Configure the location of our plugin
 3. Custom plugins need to be explicitly declared. The priority comment is not required but is good practice and improves maintainability
@@ -105,15 +102,13 @@ routes:
 #END                                                         #3
 ```
 
-
 1. Declare the plugin that we are going to create
 2. httpbin is a useful upstream as we can try different URIs and methods
 3. Mandatory for static routes configuration!
 
 With this infrastructure in place, we can start the implementation.
 
-Laying out the plugin
----------------------
+## Laying out the plugin
 
 The foundations of an Apache APISIX plugin are pretty basic:
 
@@ -129,7 +124,6 @@ local _M = {
 
 return _M
 ```
-
 
 The next step is configuration, *e.g.* Redis host and port. For starters, we shall offer a single Redis configuration across all routes. That's the idea behind the `plugin_attr` section in the `config.yaml` file: common configuration. Let's flesh out our plugin:
 
@@ -163,7 +157,6 @@ function _M.init()
 end
 ```
 
-
 1. Define the shape of the configuration
 2. Check the configuration is valid
 
@@ -188,14 +181,12 @@ function _M.init()
 end
 ```
 
-
 1. Reference the `new` function of the OpenResty Redis module
 2. Call it to get an instance
 
 The Redis client is now available in the `redis` variable throughout the rest of the plugin execution cycle.
 
-Implementing the nominal path
------------------------------
+## Implementing the nominal path
 
 In my previous software engineer life, I usually implemented the nominal path first. Afterward, I made the code more robust by managing error cases individually. This way, if I had to release at any point, I would still deliver business values - with warnings. I shall approach this mini-project the same way.
 
@@ -212,7 +203,6 @@ DO forward to upstream
 DO store response in Redis
 RETURN response
 ```
-
 
 We need to map the logic to the phase I mentioned above. Two phases are available before the upstream, *rewrite* and *access* ; three after, *header_filter* , *body_filter* and *log* . The *access* phase seemed obvious for work before, but I needed to figure out between the three others. I randomly chose the *body_filter*, but I'm more than willing to listen to sensible arguments for other phases.
 
@@ -245,7 +235,6 @@ function _M.access(conf, ctx)
 end
 ```
 
-
 1. Extract the idempotency key from the request
 2. Prefix the key so we avoid potential collisions
 3. Get the data set stored in Redis under the idempotency key
@@ -274,7 +263,6 @@ function _M.body_filter(conf, ctx)
 end
 ```
 
-
 1. xtract the idempotency key from the request
 2. Arrange the different elements of a response in a Lua table
 3. Store the JSON-encoded response in a Redis set
@@ -289,11 +277,9 @@ curl -i -H 'Idempotency-Key: B' localhost:9080/status/250
 curl -i -H 'Idempotency-Key: C' -H 'foo: bar'  localhost:9080/status/250
 ```
 
-
 Also, try to reuse a mismatched idempotency key, *e.g.* , `A`, for the third request. As we haven't implemented any error management yet, you'll get the cached response for another request. It's time to up our game.
 
-Implementing error paths
-------------------------
+## Implementing error paths
 
 The specification defines several error paths:
 
@@ -311,7 +297,6 @@ function _M.access(conf, ctx)
     end
     -- ...
 ```
-
 
 Just return the appropriate 400 if the key is missing. That one was easy.
 
@@ -332,7 +317,6 @@ local function hash_request(request, ctx)
 end
 ```
 
-
 1. Create a table with only the relevant parts
 2. The `cjson` library produces JSON whose members might be sorted differently across several calls. Hence, it results in different hashes. The `core.json.stably_encode` fixes that issue.
 3. Hash it
@@ -351,7 +335,6 @@ if next(resp) == nil then
 then -- ...
 ```
 
-
 We read the hash stored under the idempotency key on the other branch. If they don't match, we exit with the relevant error code:
 
 ```lua
@@ -361,7 +344,6 @@ if hash ~= stored_hash then
     return core.response.exit(422, "This operation is idempotent and it requires correct usage of Idempotency Key. Idempotency Key MUST not be reused across different payloads of this operation.")
 end
 ```
-
 
 The final error management happens just afterward. Imagine the following scenario:
 
@@ -381,11 +363,9 @@ if not data["response"] then
 end
 ```
 
-
 That's it.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I showed a simple implementation of the `Idempotency-Key` header specification on Apache APISIX via a plugin.
 
@@ -401,7 +381,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Fixing duplicate API requests](https://blog.frankel.ch/fix-duplicate-api-requests/)
 * [Plugin Develop - APISIX website](https://apisix.apache.org/docs/apisix/plugin-develop/)
 * [How to Build an Apache APISIX Plugin From 0 to 1](https://api7.ai/blog/how-to-build-an-apache-apisix-plugin-from-0-to-1)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/implement-idempotency-key-apisix/) on April 7^th^, 2024*

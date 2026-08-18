@@ -43,13 +43,11 @@ Today, let's look at how to access a native library built using the Rust languag
 
 For the impatient the example code is at [github.com/carldea/panama-polyglot/rust](https://github.com/carldea/panama-polyglot/tree/main/rust).
 
-Problem
--------
+## Problem
 
 As a Java developer, you want to invoke my Rust based library function `rust_get_pid()` that will return an **integer** value representing an application's process id.
 
-Solution
---------
+## Solution
 
 Below are the high-level steps to access a native **Rust** library and function.
 
@@ -61,8 +59,7 @@ Below are the high-level steps to access a native **Rust** library and function.
 
 **Step 4:** Create a `Main.java` to call the `rust_get_pid()` generated function
 
-Requirements
-------------
+## Requirements
 
 Before we can take the steps above let's make sure we install the JDK 19 EA release of OpenJDK containing Panama and Rust correctly.
 
@@ -75,16 +72,13 @@ To **install** Rust run the following for (MacOS/Linux):
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-
 Assuming you've installed **Rust** you'll want to add its binaries on the `PATH` as followings:
 
 ```bash
 source $HOME/.cargo/env
 ```
 
-
-Step 1: Creating a Native Rust Library
---------------------------------------
+## Step 1: Creating a Native Rust Library
 
 Let's initialize the Rust project with the following commands:
 
@@ -95,7 +89,6 @@ mkdir rust
 cd rust
 cargo init --lib
 ```
-
 
 Edit and replace the contents of the file `src/lib.rs` with the following:
 
@@ -108,7 +101,6 @@ pub extern "C" fn rust_get_pid() -> u32 {
 }
 ```
 
-
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | Line number | Description                                                                                                                               |
 | 1           | Use Rust's standard library module `process`                                                                                              |
@@ -120,8 +112,7 @@ A Rust library exported adheres to the C ABI
 
 After you've edited and saved the `lib.rs` file let's edit the `Cargo.toml` file by replacing it with the following contents:
 
-Updating build project file `Cargo.toml`
-----------------------------------------
+## Updating build project file `Cargo.toml`
 
 The following contents of the `Cargo.toml` file will **compile** and **build** a native Rust library created in the `target/debug` directory.
 
@@ -142,15 +133,13 @@ edition = "2021"
 [dependencies]
 ```
 
-
 Above you'll notice `cbindgen` is used to generate a C header (`.h`) file for `jextract` to later generate binding code in Java. Also, you want to make sure the name of the library will be named `myrustlibrary`.
 
 On a MacOS system the library created will reside in the following directory: `target/debug/libmyrustlibrary.dylib`
 
 On a Linux system the library will be named `libmyrustlibrary.so`
 
-Step 2: Create a Rust C header generator (generates a lib.h file)
------------------------------------------------------------------
+## Step 2: Create a Rust C header generator (generates a lib.h file)
 
 Create a file called `build.rs` with the following contents:
 
@@ -171,13 +160,11 @@ fn main() {
 }
 ```
 
-
 Run the following statement that will call `cbindgen` to generate a `lib.h` file.
 
 ```
 cargo build
 ```
-
 
 The output should look like the following:
 
@@ -199,9 +186,7 @@ This may take awhile. When this is done you can view the contents of `lib.h` as 
 uint32_t rust_get_pid(void);
 ```
 
-
-Step 3: Use `jextract` against C header file (`lib.h`)
-------------------------------------------------------
+## Step 3: Use `jextract` against C header file (`lib.h`)
 
 Run the following using `jextract` to generate binding code that will be used in the `Main.java` program created later.
 
@@ -212,9 +197,7 @@ jextract -d classes \
    -- lib.h
 ```
 
-
-Step 4: Creating a Main.java to call the native function
---------------------------------------------------------
+## Step 4: Creating a Main.java to call the native function
 
 Edit or create a `Main.java` file with the following contents:
 
@@ -228,11 +211,9 @@ public class Main {
 }
 ```
 
-
 Above you'll notice the static import will reference generated Panama binding code. The bindings will do a library lookup and a native symbol lookup of the function `rust_get_pid()` function based on the **C ABI**.
 
-Running Main.java
------------------
+## Running Main.java
 
 To run the Java program you'll simply do the following:
 
@@ -244,7 +225,6 @@ java --add-modules jdk.incubator.foreign \
    Main.java
 ```
 
-
 The output will look like the following:
 
 ```
@@ -253,7 +233,6 @@ warning: using incubating module(s): jdk.incubator.foreign
 1 warning
 Rust getting process id = 36396
 ```
-
 
 If you've gotten this far you deserve a high five! Way to go!
 

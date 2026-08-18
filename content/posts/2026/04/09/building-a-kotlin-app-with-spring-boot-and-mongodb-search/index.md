@@ -28,8 +28,7 @@ One of my favorite activities is traveling and exploring the world. You know tha
 
 In this tutorial, we will learn to build an application in Kotlin that utilizes full-text search in a database containing thousands of Airbnb listings. We'll explore how we can find the perfect accommodation that meets our specific needs.
 
-Demonstration
--------------
+## Demonstration
 
 To achieve our goal, we will create a Kotlin Spring Boot application that communicates with MongoDB Atlas using the Kotlin Sync Driver.
 
@@ -38,8 +37,7 @@ The application will use a pre-imported database in Atlas called sample_airbnb, 
 To identify the best Airbnb listings, we will create an endpoint that returns information about these listings. This endpoint will use the summary field from the collection to perform a full-text search with the fuzzy parameter in text operator. Additionally, we will filter the documents based on a minimum number of reviews, utilizing the search functionalities provided by MongoDB Search.  
 ![](Screenshot-2026-03-27-at-9.30.27-AM-1024x572.png)
 
-Pre-requisites
---------------
+## Pre-requisites
 
 * [MongoDB Atlas account](https://www.mongodb.com/atlas/database)
   * Get started with MongoDB Atlas for free! If you don't already have an account, MongoDB offers a free-forever Atlas cluster.
@@ -47,8 +45,7 @@ Pre-requisites
 * [Gradle 8.8+](https://gradle.org/install/)
 * IDE of your choice
 
-What is MongoDB Search?
------------------------
+## What is MongoDB Search?
 
 MongoDB Search is a feature in MongoDB Atlas that provides powerful and flexible search capabilities for your data. It integrates with Apache Lucene, enabling advanced text analysis, custom scoring, and result highlighting. This allows you to build sophisticated search functionality directly within your MongoDB applications.
 
@@ -60,8 +57,7 @@ To utilize MongoDB Search effectively, we will focus on three key operators: tex
 
 While this article will not delve deeply into all available operators, those interested in a more comprehensive exploration can refer to the [MongoDB Atlas Search documentation](https://www.mongodb.com/docs/atlas/atlas-search) for further details.
 
-Load sample dataset
--------------------
+## Load sample dataset
 
 Before starting, you'll need to import the sample dataset, which includes several databases and collections, like the Airbnb list. After setting up your cluster, just click on "Database" in the left menu and choose "Load sample dataset," as shown in the image:  
 ![](Screenshot-2026-03-27-at-9.31.10-AM-1024x751.png)
@@ -69,8 +65,7 @@ Before starting, you'll need to import the sample dataset, which includes severa
 If everything goes smoothly, after the import, you will see our databases and collections displayed as shown in the image.  
 ![](Screenshot-2026-03-27-at-9.31.42-AM-1024x751.png)
 
-Creating the MongoDB Search index
----------------------------------
+## Creating the MongoDB Search index
 
 After importing the collections, the next step is to create an index for the Airbnb collection. To do this, select "Database" from the side menu under "Deployment," go to the "MongoDB Search" tab, and click on "JSON Editor," as shown in the image.  
 ![](Screenshot-2026-03-27-at-9.32.30-AM-1024x764.png)
@@ -83,8 +78,7 @@ Note that we are using Dynamic Mappings for simplicity, which allows MongoDB Sea
 If everything goes well, the "searchPlaces" index will be created successfully, and you can view it here.  
 ![](Screenshot-2026-03-27-at-9.33.20-AM-1024x514.png)
 
-Testing our index in MongoDB Compass
-------------------------------------
+## Testing our index in MongoDB Compass
 
 To test our index, we need to create an aggregation pipeline. While there are various methods to test this, we will use MongoDB Compass for convenience. MongoDB Compass is a [powerful GUI tool](https://www.mongodb.com/docs/compass/current/) that facilitates managing and analyzing MongoDB data. It provides features to visualize schemas, build queries, and manage data through an intuitive interface.
 
@@ -132,7 +126,6 @@ We need to set up an aggregation pipeline to meet the following requirements: Fi
 ]
 ```
 
-
 Let's break down each stage:
 
 1. **$search:** The $search stage uses the MongoDB Search capabilities to perform a full-text search with additional filtering.
@@ -147,21 +140,18 @@ Let's break down each stage:
 Simply run this pipeline to obtain the results. See:  
 ![](Screenshot-2026-03-27-at-9.34.18-AM-1024x593.png)
 
-Building a Kotlin application
------------------------------
+## Building a Kotlin application
 
 Our application will be developed in Kotlin with Spring. It's important to note that we will not be using Spring Data. Instead, we will use the **Kotlin Sync Driver**, which is specialized for communication between the application and MongoDB. The goal of our application is simple: to provide an endpoint that allows us to make requests and communicate with MongoDB Atlas.
 
-Creating the project
---------------------
+## Creating the project
 
 To do this, we'll use the [Spring Initializer official page](https://start.spring.io/) to create our project:  
 ![](Screenshot-2026-03-27-at-9.34.49-AM-1024x662.png)
 
 As you can see, I have only added the **Spring Web** dependency.
 
-Adding MongoDB driver dependency
---------------------------------
+## Adding MongoDB driver dependency
 
 The first thing we'll do is open the build.gradle.kts file and add the mongodb-driver-kotlin-sync dependency.
 
@@ -171,11 +161,9 @@ dependencies {
 }
 ```
 
-
 ![](Screenshot-2026-03-27-at-9.35.18-AM-1024x768.png)
 
-Establishing a connection
--------------------------
+## Establishing a connection
 
 To establish our connection, we need to follow these steps. First, update the application.properties file with the required values.
 
@@ -186,7 +174,6 @@ spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection"
 
 spring.data.mongodb.database=sample_airbnb
 ```
-
 
 ![](Screenshot-2026-03-27-at-9.35.50-AM-1024x199.png)
 
@@ -220,7 +207,6 @@ class MongoConfig {
    }
 }
 ```
-
 
 Great, we have defined our MongoConfig class, which will use the values from application.properties. Create the class AirbnbEntity within the resources package:
 
@@ -261,9 +247,7 @@ data class AirbnbEntity(
 }
 ```
 
-
-Creating the repository
------------------------
+## Creating the repository
 
 Now, let's create our class that will utilize the MongoDB Search index. To do this, create the AirbnbRepository class within the resources package.
 
@@ -338,7 +322,6 @@ class AirbnbRepository(
 }
 ```
 
-
 Let's analyze the find method.
 
 As you can see, the method expects a query string and an int (minNumberReviews) and returns a list of ***AirbnbEntity***. This list is generated through an aggregation pipeline, which consists of three stages:
@@ -349,8 +332,7 @@ As you can see, the method expects a query string and an int (minNumberReviews) 
 
 Notice: Depending on the scenario, adding stages after the $search stage can drastically impact the application's performance. For more details, refer to our docs on [performance considerations](https://www.mongodb.com/docs/atlas/atlas-search/performance/query-performance/).
 
-Creating a service
-------------------
+## Creating a service
 
 To continue with our project, let's create a domain package with two classes. The first will be our Airbnb.
 
@@ -372,7 +354,6 @@ data class Airbnb(
 )
 ```
 
-
 Next, our service:
 
 ```
@@ -393,11 +374,9 @@ class AirbnbService(
 }
 ```
 
-
 Notice that this class is responsible for validating our inputs and accessing the repository.
 
-Creating a controller
----------------------
+## Creating a controller
 
 To enable REST communication, create the AirbnbController class within the application.web package:
 
@@ -424,18 +403,14 @@ class AirbnbController(
 }
 ```
 
-
-Final application structure
----------------------------
+## Final application structure
 
 Great. If all the steps have been followed, our folder structure should look similar to the one in the image:  
 ![](Screenshot-2026-03-27-at-9.38.48-AM-744x1024.png)
 
-*Application structure*
------------------------
+## *Application structure*
 
-Running the application
------------------------
+## Running the application
 
 Simply run the application and access the endpoint provided at 'http://localhost:8080/airbnb/search'. Below is an example of how to use it:
 
@@ -443,11 +418,9 @@ Simply run the application and access the endpoint provided at 'http://localhost
 curl --location 'http://localhost:8080/airbnb/search?query=Istambun&minNumberReviews=50'
 ```
 
-
 ![](Screenshot-2026-03-27-at-9.39.25-AM-1024x668.png)
 
-Conclusion
-----------
+## Conclusion
 
 In this tutorial, we built a Kotlin-based Spring Boot application that uses MongoDB Search to find Airbnb listings efficiently. We demonstrated how to set up MongoDB Atlas, create a search index, and implement an aggregation pipeline for filtering and searching data.
 

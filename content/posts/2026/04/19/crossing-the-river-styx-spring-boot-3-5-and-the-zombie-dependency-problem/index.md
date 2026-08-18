@@ -24,8 +24,7 @@ Tomorrow I start (o so early) for [JCON Europe](https://2026.europe.jcon.one/) i
 
 After digging into the CVE stories behind [Tomcat 8.5's end of life](https://foojay.io/today/the-real-mechanics-of-vulnerabilities-in-an-upstream-downstream-topsy-turvy-eol-world/), I turned my attention to Spring Boot 3.5. Same question, different framework: what *actually* happens to your security posture when a project crosses the EOL line?
 
-The CVE Blind Spot
-------------------
+## The CVE Blind Spot
 
 Most of us understand the *idea* of a CVE. A vulnerability gets discovered, reported, assigned a severity score, and patched. We run our scanners, check our dashboards, update our dependencies. The system works.
 
@@ -37,8 +36,7 @@ And critically: what happens to that pipeline when a project reaches end of life
 
 The answer is that it dries up. Not all at once. Not even dramatically. It just... stops.
 
-The River Styx
---------------
+## The River Styx
 
 Think of moving from active development and maintenance into EOL mode as crossing the River Styx. On the living side, you have maintainers actively looking at the code. Security researchers submitting reports. A CNA (CVE Numbering Authority) assigning identifiers. A disclosure process that, for all its flaws, at least functions.
 
@@ -70,8 +68,7 @@ A vulnerability exists in both the supported and the EOL branch. On the supporte
 
 On the EOL side? The same vulnerability sits in the same code. But fewer researchers are looking. Fewer reports get filed. The vulnerability doesn't appear in your scanner results. Not because it doesn't exist, but because nobody filed the paperwork.
 
-When Dependencies Become Zombies
---------------------------------
+## When Dependencies Become Zombies
 
 Pretty quickly the public CVE count against an EOL project drops. If you're lucky, it's because there are none to be found. The codebase is what we'd traditionally call *stable* . But it's more likely the software didn't get safer. All that happened was the system that *records* the problems wound down.
 
@@ -81,8 +78,7 @@ Your dependencies end up in one of two states: actually stable, or more likely, 
 
 We need to stop thinking silence means stability. It's frequently the opposite.
 
-Spring Boot 3.5: The Next Crossing
-----------------------------------
+## Spring Boot 3.5: The Next Crossing
 
 Spring Boot 3.5 reaches end of open-source support on June 30, 2026. That's roughly 80 days from now.
 
@@ -102,8 +98,7 @@ But here's the thing: it doesn't happen overnight. There *is* time. The zombie t
 
 The quicker you assess the scale of the change from 3.5 to 4.0, the better positioned you'll be. Maybe that means migrating on your own terms. Maybe it means arranging commercial support to bridge the gap, or finding another path entirely. The worst move is to wait until the silence sets in and assume everything is fine.
 
-The Map, Not Just the Landscape
--------------------------------
+## The Map, Not Just the Landscape
 
 That's the landscape. Now let's talk about the map.
 
@@ -112,7 +107,5 @@ In my recent [JDK 8 to 25 review](https://noregressions.substack.com/p/how-to-mi
 In the coming articles, I'll cover the technical challenges organised by severity. The obvious compilation errors, the runtime failures and hidden behavioural changes that may slip past your test suite. I'll look at the costs, explore the alternatives, and break down what a realistic migration timeline looks like.
 
 The zombie transition is coming for Spring Boot 3.5. The only question is whether you'll be ready for it or surprised by it. If you're at JCON or Devoxx France this week, come find me at the HeroDevs booth. I'd love to swap migration war stories.
-
-
 
 *Steve Poole is a Java Champion, Oracle ACE and IBM Champion. Also a developer advocate at [HeroDevs](https://www.herodevs.com/), and author of the [No Regressions](https://noregressions.substack.com/) newsletter. Find him at the HeroDevs booth at JCON or Devoxx France*

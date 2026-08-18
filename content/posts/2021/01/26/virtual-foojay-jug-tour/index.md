@@ -88,5 +88,3 @@ Here's the (growing) roster of topics!
   **Status:** **Available**
 * **Disco API: OpenJDK Distributions As A Service,** *Gerrit Grunwald (Azul)* **:** "At Azul, we have spent some time to create a little API that should help you to discover builds of OpenJDK from different distributions in a general way. In this session, I will give you a short introduction on what the Disco API is and how it can help you to find the JDK/JRE of your choice. At the moment, the API can help you to get builds of the OpenJDK from the following distributions -- AdoptOpenJDK, Corretto, Dragonwell, Liberica, Oracle OpenJDK, SAP Machine, and Zulu."  
   **Status:** **Booked March 2, JUG Bonn**
-
-<br />

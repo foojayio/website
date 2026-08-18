@@ -30,8 +30,7 @@ The Raspberry Pi also has an ARM processor, so I wanted to know if CRaC can impr
 >
 > TL;DR; It does work perfectly but still needs a modified kernel and changes in Zulu which will be part of the next release in July.
 
-Raspberry Pi OS
----------------
+## Raspberry Pi OS
 
 On the [download page of Azul](https://www.azul.com/downloads/?package=jdk-crac#zulu), two versions of Zulu are available now, with CRaC included. As you can see in the screenshot, both aim Linux, one for x86 64-bit platforms and the other one for ARM v8 64-bit. The second one is the same processor used in the Raspberry Pi 4.
 
@@ -44,7 +43,6 @@ $ sudo apt update
 $ sudo apt upgrade
 ```
 
-
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
   <img fetchpriority="high" decoding="async" width="1024" height="678" data-id="98783" src="imager-64bit-1024x678.png" alt="" class="wp-image-98783">
@@ -54,8 +52,7 @@ $ sudo apt upgrade
  </figure>
 </figure>
 
-Install Azul Zulu OpenJDK
--------------------------
+## Install Azul Zulu OpenJDK
 
 ### Manual Install Steps
 
@@ -80,7 +77,6 @@ openjdk version "17.0.7" 2023-04-18 LTS
 OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS)
 OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
 ```
-
 
 ### Using SDKMAN
 
@@ -132,9 +128,7 @@ OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS)
 OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA (build 17.0.7+7-LTS, mixed mode)
 ```
 
-
-Create a Checkpoint with a Java Test Application
-------------------------------------------------
+## Create a Checkpoint with a Java Test Application
 
 Within the CRaC-project, a demo application was created to explain the usage of the checkpoint and restore system, as [described here](https://github.com/CRaC/docs/blob/master/STEP-BY-STEP.md). Clone this project, build it with Maven, and execute it with an extra command line argument `-XX:CRaCCheckpointTo=cr` to define the directory where the checkpoint must be created.
 
@@ -164,7 +158,6 @@ $ java -XX:CRaCCheckpointTo=cr -jar target/example-jetty-1.0-SNAPSHOT.jar
 2023-06-15 07:51:28.948:INFO:oejs.Server:main: Started @895ms
 ```
 
-
 The application started in 895ms but didn't do anything yet. At this point, we must open a second terminal to trigger an action in the application to "warm it up", and we can request the creation of the checkpoint.
 
 ```
@@ -175,7 +168,6 @@ $ jcmd target/example-jetty-1.0-SNAPSHOT.jar JDK.checkpoint
 3467:
 CR: Checkpoint ...
 ```
-
 
 The expected result in the first terminal should be that the application log shows that the checkpoint is created and the application terminated. Unfortunately, this is the output I got, ending with an exception:
 
@@ -205,7 +197,6 @@ jdk.internal.crac.CheckpointException
     at java.base/jdk.internal.crac.Core.checkpointRestore(Core.java:246)
     at java.base/jdk.internal.crac.Core.checkpointRestoreInternal(Core.java:262)
 ```
-
 
 The file created in `example-jetty/cr/dump4.log` seems to lead to a possible cause, as it says that CRIU does not exist.
 
@@ -237,9 +228,7 @@ The file created in `example-jetty/cr/dump4.log` seems to lead to a possible cau
 (00.077677) Error (criu/crtools.c:260): Could not initialize kernel features detection.
 ```
 
-
-Fix 1: Add CRIU to the Kernel
------------------------------
+## Fix 1: Add CRIU to the Kernel
 
 Thanks to the support of my colleague Sergey Nazarkin, it quickly became apparent how we needed to solve this problem... It turned out that Raspberry Pi OS doesn't support CRIU out-of-the-box yet. Because this Linux component is used by CRaC, at this moment, to create checkpoints and restore them, we must add this to the kernel.
 
@@ -284,7 +273,6 @@ $ uname -a
 Linux crac 6.1.32-v8-CRAC+ #1 SMP PREEMPT Thu Jun 15 09:30:31 BST 2023 aarch64 GNU/Linux
 ```
 
-
 The last line proves that we could build our own kernel version, and the board has successfully started with it! On to the next step...
 
 FYI: the command `make -j4 Image.gz modules dtbs` takes the longest time: 2 hours!
@@ -298,7 +286,6 @@ $ sudo apt install libncurses5-dev
 $ make menuconfig
 ```
 
-
 * Go to "General setup"
 * Scroll down and select "Checkpoint/restore support"
 * Save and exit
@@ -309,7 +296,6 @@ $ make menuconfig
 $ uname -a
 Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 GNU/Linux
 ```
-
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -324,15 +310,13 @@ Linux crac 6.1.32-v8-CRAC+ #2 SMP PREEMPT Thu Jun 15 11:08:18 BST 2023 aarch64 G
 
 Unfortunately, this kernel change is insufficient, as the same error occurs during checkpoint creation...
 
-Fix 2: Replace Zulu with a Dev Version
---------------------------------------
+## Fix 2: Replace Zulu with a Dev Version
 
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
 ```
 % scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d4c5f5d7e0f090c100f08100f100f0a0b">[email protected]</a>:/home/crac/
 ```
-
 
 And then installed in the `/opt/` directory as described above.
 
@@ -347,7 +331,6 @@ openjdk version "17.0.7" 2023-04-18 LTS
 OpenJDK Runtime Environment Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7-LTS-dev-20230614092542)
 OpenJDK 64-Bit Server VM Zulu17.42+21-CRaC-CA-dev-20230614092542 (build 17.0.7+7-LTS-dev-20230614092542, mixed mode, sharing)
 ```
-
 
 ### Retry the Checkpoint Creation with Fix 1 and 2
 
@@ -381,7 +364,6 @@ INFO: /home/crac/example-jetty/target/example-jetty-1.0-SNAPSHOT.jar is recorded
 Killed
 ```
 
-
 In Terminal 2:
 
 ```
@@ -393,11 +375,9 @@ $ /opt/zulu-crac/bin/jcmd target/example-jetty-1.0-SNAPSHOT.jar JDK.checkpoint
 CR: Checkpoint ...
 ```
 
-
 It seems we have a breakthrough here, and the checkpoint was successfully created, after which the application was killed!
 
-Restart From Checkpoint
------------------------
+## Restart From Checkpoint
 
 In the `cr` directory that we defined at startup of the application with `-XX:CRaCCheckpointTo=cr`, we can now find the following files:
 
@@ -445,7 +425,6 @@ total 28M
 -rw-r--r-- 1 crac crac  199 Jun 15 11:33 tty-info.img
 ```
 
-
 As mentioned on [Azul Docs \> Debugging Coordinated Restore at Checkpoint Failures \> Failures in Native Checkpoint or Restore](https://docs.azul.com/core/crac/crac-debugging#failures-in-native-checkpoint-or-restore), the permissions of `criu` with the JDK must be set correctly.
 
 ```
@@ -457,7 +436,6 @@ $ ls -l /opt/zulu-crac/lib/criu
 -rwsr-xr-x 1 root root 7241504 Jun 14 10:40 /opt/zulu-crac/lib/criu
 ```
 
-
 When this is done, we can restart the application from the checkpoint:
 
 ```
@@ -467,11 +445,9 @@ $ /opt/zulu-crac/bin/java -XX:CRaCRestoreFrom=cr
 2023-06-15 12:32:38.450:INFO:oejs.Server:Attach Listener: Started @3578432ms
 ```
 
-
 There is still a fix required to show the correct startup duration, but based on the timestamps we can see that it only took 450-430 = 20 milliseconds!
 
-Conclusion
-----------
+## Conclusion
 
 You can't run this test in a few minutes as the kernel takes a long time to build. But this first test shows that CRaC on embedded / Raspberry Pi is definitely possible and dramatically improves the startup time!
 

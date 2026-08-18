@@ -39,8 +39,7 @@ Let's find out together with these fantastic guests...
 {{< youtube EmV6WJmTeSk >}}
 
 >
-> Podcast Apps
-> ------------
+> ## Podcast Apps
 >
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -48,8 +47,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Trisha Gee (Gradle)
   * [@trisha_gee](https://twitter.com/trisha_gee)
@@ -63,8 +61,7 @@ Guests
   * [fosstodon.org/@nuempe](https://fosstodon.org/@nuempe)
   * [linkedin.com/in/pierre-%C3%A9tienne-meunier-1b93b619b/](https://www.linkedin.com/in/pierre-%C3%A9tienne-meunier-1b93b619b/)
 
-Podcast
--------
+## Podcast
 
 * Host: Hanno Embregts
   * [@hannotify](https://twitter.com/hannotify)
@@ -76,8 +73,7 @@ Podcast
 
 ![](podcast-versioncontrol-guests-1024x383.png)
 
-Content
--------
+## Content
 
 * 00'00 Intro and introduction of the guests and host
 * 04'15 Should we automate as much as possible to be able to focus on developing

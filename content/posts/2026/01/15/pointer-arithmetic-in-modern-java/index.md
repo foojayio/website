@@ -20,15 +20,13 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 In this post, we dive into a more advanced topic: pointer arithmetic in Java. With the introduction of the Foreign Function \& Memory API (Panama), we can interact with native memory.
 
 Usually, when we work with off-heap memory, we use `MemorySegment` instances to ensure safety. However, creating these objects can sometimes add overhead. In this post, we will look at how to access native memory using addresses. The goal is to create fewer objects that are not strictly needed and only add GC pressure.
 
-Background Info
----------------
+## Background Info
 
 I am working on a Project that creates bindings to \[IO_Uring\](<https://github.com/davidtos/JUring>). The project has a path that loops over thousands of pointers and converts them to `MemorySegments`. This is done to access three values inside the struct the pointers point to. This loop creates a lot of short-lived Objects as I need a new `MemorySegment` for each pointer. To prevent creating so many objects, I used the pointer arithmetic you see in this post.
 
@@ -36,8 +34,7 @@ I am working on a Project that creates bindings to \[IO_Uring\](<https://github.
 
 When using a global segment, we are trading safety for speed. This approach cannot detect if the memory backing the pointer has been released or even is there to begin with.
 
-The Setup
----------
+## The Setup
 
 To make this work, we need a way to access memory using addresses. In the following class, we define a simple "Point" structure (with x and y coordinates) and a special constant called `GLOBAL_MEMORY`.
 
@@ -82,13 +79,11 @@ public class ZeroGcPoint {
 }
 ```
 
-
 The magic and the danger lies in the `GLOBAL_MEMORY` constant. We create a segment starting at address 0 and use `reinterpret` to extend its size to `Long.MAX_VALUE`. This effectively gives us a view over the entire system memory.
 
 Because our VarHandles are derived from the Layout, they expect a MemorySegment and an offset. By passing `GLOBAL_MEMORY` as the base segment and the address as the offset, we are telling Java: "Start at 0, move forward by address, and read the data."
 
-Comparing Approaches
---------------------
+## Comparing Approaches
 
 Now let's see how this compares to the standard way of accessing off-heap memory. In the following example, we allocate a `ZeroGcPoint` inside an Arena and try two different approaches to read the data.
 
@@ -146,11 +141,9 @@ public class Main {
 }
 ```
 
-
 In the first approach, notice line 29 `MemorySegment.ofAddress`. We are explicitly asking the JVM to instantiate a new MemorySegment object on the heap that wraps the native memory at that address. If you do this once, it's negligible. If you do this inside a loop running thousands of times, you are generating a massive number of short-lived objects that the Garbage Collector eventually has to clean up.
 
-Benchmark
----------
+## Benchmark
 
 Running a JMH benchmark shows the following performance improvement:
 
@@ -160,10 +153,8 @@ approach2       thrpt    5  21009813.078 ± 98033.024  ops/ms
 approach1       thrpt    5   1488555.237 ± 42608.652  ops/ms
 ```
 
-
 A higher score means it performs better.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we looked at how to perform pointer arithmetic using the Foreign Function \& Memory API. By using a global memory segment and addresses, we can access native memory without the overhead of creating temporary `MemorySegments`.

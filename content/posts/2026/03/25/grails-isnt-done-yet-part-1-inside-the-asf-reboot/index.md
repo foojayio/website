@@ -113,8 +113,6 @@ One of the challenges Grails faces today is not a lack of activity but a lack of
 
 Much of the effort is concentrated in a tight group of committed maintainers. From the outside, that can appear to be silence even when meaningful progress is underway.
 
-
-
 To make that work more visible, I spoke with **James Fredley, the Apache Grails PMC Chair,** about where the project stands and where it is heading.
 
 #### What motivated the move to the Apache Software Foundation?
@@ -158,8 +156,6 @@ To make that work more visible, I spoke with **James Fredley, the Apache Grails 
 *It is a "framework of frameworks," built on Spring Boot, Spring Framework, Jakarta EE, and Hibernate.*
 
 *If you know those, you already know a significant part of Grails.*
-
-
 
 ### Where Grails realistically sits in 2026
 

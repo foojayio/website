@@ -27,8 +27,7 @@ In this final article, we address the Issues and Improvements identified in AppV
 
 All the application versions and revisions from this article were developed by a senior MongoDB developer, as they are built on all the previous versions and utilize the Dynamic Schema pattern, which isn't very common to see.
 
-Application version 6 revision 0 (appV6R0): A dynamic monthly bucket document
------------------------------------------------------------------------------
+## Application version 6 revision 0 (appV6R0): A dynamic monthly bucket document
 
 As mentioned in the Issues and Improvements of appV5R4 from the [previous article](https://foojay.io/today/the-cost-of-not-knowing-mongodb-part-2-appv5r0-to-appv5r4/), the primary limitation of our MongoDB server is its disk throughput. To address this, we need to reduce the size of the documents being stored.
 
@@ -189,8 +188,7 @@ To address the limitations observed in appV6R0, we propose adopting the same lin
 
 As highlighted in the Load Test Results, the current bottleneck lies in the size of the index relative to the available cache/memory. By increasing the bucketing interval from month to quarter, we can reduce the number of documents by approximately a factor of three. This reduction will, in turn, decrease the number of index entries by the same factor, leading to a smaller index size.
 
-Application version 6 revision 1 (appV6R1): A dynamic quarter bucket document
------------------------------------------------------------------------------
+## Application version 6 revision 1 (appV6R1): A dynamic quarter bucket document
 
 As discussed in the previous Issues and Improvements section, the primary bottleneck in appV6R0 was the index size nearing the memory capacity of the machine running MongoDB. To mitigate this issue, we propose increasing the bucketing interval from a month to a quarter for appV6R1, following the approach used in appV5R1.
 
@@ -313,8 +311,7 @@ When we applied the Computed Pattern from appV5R3 to appV5R4, we observed an 8.2
 
 With these two "maybes" and a scientific spirit of always trying to test things to see where they'll break, let's give the Computed Pattern another chance.
 
-Application version 6 revision 2 (appV6R2): A dynamic bucket and computed document
-----------------------------------------------------------------------------------
+## Application version 6 revision 2 (appV6R2): A dynamic bucket and computed document
 
 As discussed in the previous Issues and Improvements section, in this revision, we'll give another try to the Computed Pattern and pre-compute the status totals for each document. This implementation is equal to the one tried in appV5R4, with the only difference being that we are using a Dynamic Schema for the items field instead of an array.
 
@@ -420,8 +417,7 @@ The reports documents are composed of fields oneYear, threeYears, fiveYears, sev
 
 So, for our next application revision, we'll condense the Get Reports five aggregation pipelines into one, avoiding wasting processing power on repeated calculation.
 
-Application version 6 revision 3 (appV6R3): Getting everything at once
-----------------------------------------------------------------------
+## Application version 6 revision 3 (appV6R3): Getting everything at once
 
 As discussed in the previous Issues and Improvements section, in this revision, we'll improve the performance of our application by changing the Get Reports functionality to generate the reports document using only one aggregation pipeline instead of five.
 
@@ -538,8 +534,7 @@ If we take a closer look at the [MongoDB documentation](https://www.mongodb.com/
 
 Would it be possible to use a different and more effective compression library to reduce the size of the data even further and, as a consequence, reduce the load on the server's disk? Yes, and in the following application revision, we will use the zstd compression library instead of the default snappy compression library.
 
-Application version 6 revision 4 (appV6R4)
-------------------------------------------
+## Application version 6 revision 4 (appV6R4)
 
 As discussed in the previous Issues and Improvements section, the performance gains of this version will be provided by changing the algorithm of the [collection block compressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor). By default, MongoDB uses the [snappy](https://www.mongodb.com/docs/manual/reference/glossary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-of-not-knowing-foojay-part3&utm_term=tony.kim#std-term-snappy), which we will change to [zstd](https://www.mongodb.com/docs/manual/reference/glossary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-of-not-knowing-foojay-part3&utm_term=tony.kim#std-term-zstd) to achieve a better compression performance at the expense of more CPU usage.
 
@@ -633,8 +628,7 @@ Although this is the final version of the series, there is still room for improv
 * Optimize the aggregation pipeline logic for Get Reports in the appV6R4.
 * Change the [zstd compression level](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.zstdCompressionLevel) from its default value of 6 to a higher value.
 
-Conclusion
-----------
+## Conclusion
 
 This final part of "The Cost of Not Knowing MongoDB" series has explored the ultimate evolution of MongoDB application optimization, demonstrating how revolutionary design patterns and infrastructure-level improvements can transcend traditional performance boundaries. The journey through appV6R0 to appV6R4 represents the culmination of sophisticated MongoDB development practices, achieving performance levels that seemed impossible with the baseline appV1 implementation.
 

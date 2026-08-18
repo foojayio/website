@@ -19,8 +19,7 @@ related_posts:
 frozen: false
 ---
 
-**Hey Java Devs, Let's Talk About AI MCP! 🤖**
-----------------------------------------------
+## **Hey Java Devs, Let's Talk About AI MCP! 🤖**
 
 Ever feel like your AI models are stuck in a bubble, cut off from the real-time data and tools they need to be truly useful? Well, you're not alone! This has been a major headache for developers. But what if I told you there's a new sheriff in town that's changing the game? Enter the **Model Context Protocol (MCP)**.
 
@@ -30,15 +29,11 @@ Think of MCP as a universal translator for your AI. It's an open standard that l
 
 This open source protocol was cooked up by [Anthropic](https://www.anthropic.com/news/model-context-protocol) and has been rapidly gaining traction as an industry standard. It's all about making AI more "agentic" -- that is, able to autonomously pursue goals and take action.
 
-
-
 ### **The Problem MCP Is Solving**
 
 Before MCP, integrating an AI model with various tools and databases was a chaotic mess. For every new tool or data source you wanted your AI to use, you had to write custom code. This is what's known as the "M×N integration problem" -- connecting *M* AI models to *N* tools resulted in a tangled web of integrations that was a nightmare to maintain.
 
 MCP swoops in to solve this by providing a standardized communication layer. Instead of a messy web, you get a clean, hub-and-spoke model. Your AI (the client) connects to an MCP server, and that server can then talk to all your different tools and data sources. This dramatically simplifies the architecture and makes it much easier to scale your AI applications.
-
-
 
 ### **The Evolution of AI Integration**
 
@@ -49,8 +44,6 @@ The journey to MCP has been a series of stepping stones:
 * **Agent Frameworks:** These provided more structure but were still often fragmented, with different frameworks having their own way of doing things.
 
 Then came **MCP**, which brought a universal standard to the table. It's like the world finally agreeing on a single type of power outlet! This standardization is fostering a whole new ecosystem of interoperable AI tools and services.
-
-
 
 ### **The Good, the Bad, and the How-To**
 
@@ -68,8 +61,6 @@ Then came **MCP**, which brought a universal standard to the table. It's like th
 * **Tool Naming Conflicts:** As the ecosystem grows, ensuring unique and clear tool names will be crucial to avoid confusion.
 * **Security:** [MCP provides a framework](https://modelcontextprotocol.io/specification/2025-06-18#security-and-trust-%26-safety) for secure access control and data handling, and [recommends authorization flows](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices) in order to mitigate related security risks associated with 3rd party tools to be used.
 * **Context overfill :** MCP tools consume a lot of context tokens. If you augment your agent with a bunch of MCPs, you end up consuming a good portion of your context just with the MCPs tool definitions .... just enable ONLY the MCP tools you really need.
-
-
 
 ### **Let's Get Our Hands Dirty: Creating an MCP with Java and Quarkus 🚀**
 
@@ -97,8 +88,6 @@ public class MyTools {
 You can check and play with the project code repository here : <https://github.com/jonathanvila/demo-mcp-server> .
 
 For a more in-depth guide and to explore more advanced features, check out the [Quarkus MCP Server documentation](https://docs.quarkiverse.io/quarkus-mcp-server/dev/index.html) and the [announcement blog post](https://quarkus.io/blog/introducing-mcp-servers/).
-
-
 
 ### **Using Your MCP from IDEs 👨‍💻**
 
@@ -132,8 +121,6 @@ Also IntelliJ, through the Github Copilot plugin with a very similar installatio
 And the way to use it couldn't be easier, just ask your question in natural language and the assistant will decide which tool to use and answer to your request :
 
 ![](Screenshot-2025-11-03-at-14.51.47-300x167.png)
-
-
 
 ### **A Cool MCP on the Block: The SonarQube MCP Server**
 

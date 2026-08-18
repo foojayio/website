@@ -133,7 +133,6 @@ query vehicles {
 }
 ```
 
-
 So what business problems can such a system solve? With the storage engines [supported](https://stargate.io/docs/stargate/1.0/concepts/concepts.html#_project_architecture) today, it plays to Apache Cassandra's strengths of writing fast, reading fast on primary key and secondary index in "fast data" business use cases like:
 
 * Transaction logging: user behavior, actions

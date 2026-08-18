@@ -34,10 +34,7 @@ There's a solution, and it's discussed in duckling 6 number 7 also covers a lot 
 >
 > --- Shai Almog (@debugagent) [March 22, 2022](https://twitter.com/debugagent/status/1506284778772963337?ref_src=twsrc%5Etfw)
 
-<br />
-
-Filters
--------
+## Filters
 
 Filters solve the problem of "noisy" breakpoints. They let us limit a breakpoint to a very specific narrow area, which we can then inspect more casually. When debugging a major project, this is an invaluable tool at our disposal.
 
@@ -79,8 +76,7 @@ In that case, you can add a class filter to only break in the field watch point 
 
 Have you ever reached a breakpoint and looked at the stack... Then kept pressing continue until that stack changed to include the method you wanted in the stack. The one that invoked your call. This is where the caller filter comes in. You can exclude a specific stack element from consideration or require a specific method.
 
-Method Breakpoint
------------------
+## Method Breakpoint
 
 You may recall I mentioned you shouldn't use method breakpoints... They're usually just emulated by line breakpoints to avoid their typical overhead. So there's no actual need for them when placing one on a method.
 
@@ -96,8 +92,7 @@ So how do you deal with the excessive noise?
 
 We can use a conditional breakpoint just like we can in any other area of the program. We can use tracepoints and pretty much any other option in the list above.
 
-Show Objects
-------------
+## Show Objects
 
 For the last section, I'm going to go to the watch instead of the current breakpoint discussion. This is a feature that's so cool and so simple... Yet unfamiliar to many developers.  
 
@@ -109,8 +104,7 @@ When you do that on a `Thread` object, you see the JIT compiler thread. You can 
 
 You can even narrow down that list with an expression statement to make it even more useful for a larger list of objects.
 
-TL;DR
------
+## TL;DR
 
 I hope this blew your mind. There are so many debugger capabilities that we sometimes gloss over when trying to build an application. The tools we discussed today are all designed for debugging large code bases. Where the capabilities of these tools really shine.
 

@@ -34,10 +34,7 @@ Genre: Technical Fiction***
 
 The Software Engineer's Guidebook
 
-<br />
-
-Summary of Each Section
------------------------
+## Summary of Each Section
 
 ### **Part 1: Developer Career Fundamentals**
 
@@ -85,8 +82,7 @@ Summary of Each Section
 
 In a nutshell, Part 1-6 which is applicable to all engineering levels, from novice software developer to principal engineer and above engineers and part 2, 3, 4, and 5 applicable mainly for senior engineering levels.
 
-Recommendation
---------------
+## Recommendation
 
 I strongly suggest that fellow developers and individuals with an interest in programming and problem-solving consider **"The Software Engineer's Guidebook"** as a valuable resource.
 

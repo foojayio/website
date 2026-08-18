@@ -22,8 +22,7 @@ frozen: false
 
 This article shows how to configure Vaadin and Spring Security to use OAuth2 with Keycloak.
 
-Keycloak
---------
+## Keycloak
 
 First, we must start Keycloak and configure a realm. The easiest way is to start Keycloak with Docker.   
 *Caution: This is just for development purposes. Don't use the setup in production.*
@@ -32,7 +31,6 @@ First, we must start Keycloak and configure a realm. The easiest way is to start
 docker run -d -p 8180:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin \ 
        quay.io/keycloak/keycloak:20.0.1 start-dev
 ```
-
 
 Now you can log in to the admin console: <http://localhost:8180/admin> (user: admin, password: admin)
 
@@ -87,8 +85,7 @@ Now comes a crucial step. We must disable the role mapping to the ID token. When
 The configuration must look like this:
 ![](https://martinelli.ch/wp-content/uploads/2022/11/image-1024x723.png)
 
-Vaadin Application with Security Configuration
-----------------------------------------------
+## Vaadin Application with Security Configuration
 
 First, we need to extend VaadinWebSecurity to set up the Vaadin Spring security integration. There we override the configure method.
 
@@ -106,7 +103,6 @@ protected void configure(HttpSecurity http) throws Exception {
     super.configure(http);
 }
 ```
-
 
 Starting from line 5, the generic OAuth2 login is configured, and a special LogoutHandler for Keycloak is configured. The LogoutHandler uses the Keycloak REST API to log out.
 
@@ -135,7 +131,6 @@ public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
 }
 ```
 
-
 Finally, we must add the OAuth2 configuration in the application.properties file:
 
 ```
@@ -145,7 +140,6 @@ spring.security.oauth2.client.registration.keycloak.scope=openid
 spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8180/realms/vaadin
 spring.security.oauth2.client.provider.keycloak.user-name-attribute=preferred_username
 ```
-
 
 Now you can start the application and open <http://localhost:8080>.
 ![](https://martinelli.ch/wp-content/uploads/2022/11/image-1.png)
@@ -160,7 +154,6 @@ Sign in with admin/admin, and you'll be redirected to the app:
 
 Now you have access to all views.
 
-Conclusion
-----------
+## Conclusion
 
 Setting up Vaadin, Spring Security, and Keycloak is straight forwarded. The only tricky part was the role mapping to get the realm roles as GranteAuthority.

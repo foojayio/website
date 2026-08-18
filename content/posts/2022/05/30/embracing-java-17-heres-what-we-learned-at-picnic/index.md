@@ -74,8 +74,6 @@ Some features also spur discussion on established patterns we're using. For exam
 
 So, all in all, we're super excited to get to know the new features over time and will be sure to keep you updated with our progress --- watch this space! {#1cb5}
 
-<br />
-
 *This post was co-written by [Sander Mak](https://medium.com/@sander.mak),* [*Nathan Kooij*](https://medium.com/u/e52ce2e1a997?source=post_page-----69779d95fdf2--------------------------------)*,* [*Stephan Schroevers*](https://medium.com/u/f691c947a256?source=post_page-----69779d95fdf2--------------------------------)*, and* [*Ryan Whitmore*](https://medium.com/u/c37ce8652748?source=post_page-----69779d95fdf2--------------------------------)*.*{#c03d}
 
 👉 Come [work with us](https://picnic.app/careers/jobs/986403/technology--amp--engineering/amsterdam-north-holland-netherlands/java-developer) to shape the future of Java at Picnic!

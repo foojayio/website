@@ -24,8 +24,7 @@ My recent article ["Why Java 8 is a Ticking Time Bomb Hiding Within Your Organiz
 
 Here is a summary of what I learned from the reactions!
 
-Reasons to Stick to 8
----------------------
+## Reasons to Stick to 8
 
 Of course, there are many reasons why some projects deliberately are kept on Java 8 or don't succeed on moving to a newer version.
 
@@ -119,8 +118,7 @@ One reason I didn't consider myself is education. It turns out that many schools
 >
 > *Until the disasters become visible, many people don't want to invest and prepare. Sounds a bit like climate change. Apart from that disasters are already happening and people still don't want to change things.*
 
-More Reasons to Upgrade
------------------------
+## More Reasons to Upgrade
 
 As much as people agree and shared some of their experiences how they got stuck, there were also more arguments to make the switch to an up-to-date Java version.
 
@@ -132,8 +130,7 @@ You don't want to be the company where applicants don't want to work because the
 **[Jiří Hermann](https://www.linkedin.com/in/ji%C5%99%C3%AD-hermann-8926a173/)** on LinkedIn:
 > *Nearly three years ago, I had an interview where someone mentioned they were still using Java 7 and were planning to upgrade to Java 8. 😄*
 
-Success Story
--------------
+## Success Story
 
 Between all the complaints about old versions being in use, I was happy to learn from Ulas that a big bank successfully did the move!
 
@@ -146,8 +143,7 @@ Between all the complaints about old versions being in use, I was happy to learn
 >
 > *Here's to more technological milestones and continued excellence in serving our customers! 🎉*
 
-Conclusion
-----------
+## Conclusion
 
 All developers want to use the latest features and improvements but there are many reasons why it doesn't happen...
 

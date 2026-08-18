@@ -32,13 +32,9 @@ The application:
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-102830" src="JDKMonitor-644x510.png" alt="" width="644" height="510">
 
-<br />
-
 The available widgets:
 
 <img decoding="async" class="alignnone size-medium wp-image-102832" src="JDKMonitor-Widgets-700x236.png" alt="" width="700" height="236">
-
-<br />
 
 You can find the app on the MacOS app store following [this link](https://apps.apple.com/us/app/jdkmonitor/id6468484792 "this link")...
 

@@ -30,8 +30,7 @@ The Raspberry Pi is a perfect board for testing Java and JavaFX on ARM, and that
 
 {{< youtube XhDQvkcYJ88 >}}
 
-Azul Zulu Builds with JavaFX
-----------------------------
+## Azul Zulu Builds with JavaFX
 
 As [described in our documentation](https://docs.azul.com/core/install/debian), there are multiple ways to get the latest version of Zulu for your system. This post highlights two of these options.
 
@@ -81,9 +80,7 @@ $ sdk use java 22.0.1.fx-zulu
 Using java version 22.0.1.fx-zulu in this shell.
 ```
 
-
-JavaFX Demo Experiment
-----------------------
+## JavaFX Demo Experiment
 
 Let's try it out with a simple JavaFX application on this Raspberry Pi. You can find the complete code in [this GitHub Gist](https://gist.github.com/FDelporte/c69a02c57acc892b4c996a9779d4f830). It starts a user interface with labels to show the Java and JavaFX versions and a framerate counter. Additionally, one or more circles are added that bounce around on the screen and change direction when they hit a border of the application.
 
@@ -136,7 +133,6 @@ public class FxDemo extends Application {
 }
 ```
 
-
 As we already used SDKMAN to install Java, we can also use it to install J'BANG! and check if it installed correctly by running these commands:
 
 ```
@@ -144,7 +140,6 @@ $ sdk install jbang
 $ jbang --version
 0.117.1
 ```
-
 
 Get the code from GitHub and save it as FxDemo.java. You can now start the application without the need to compile any code, J'BANG! will handle this for us:
 
@@ -158,9 +153,7 @@ $ jbang FxDemo.java
 $ DISPLAY=:0 jbang FxDemo.java
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Once more, Azul brings Java to more platforms by adding JavaFX support for ARM 64-bit Linux systems.
 

@@ -21,8 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-When Event-Driven Architecture Is Not the Right Choice
-------------------------------------------------------
+## When Event-Driven Architecture Is Not the Right Choice
 
 Event-Driven Architecture (EDA) can help teams build scalable, loosely coupled and highly responsive distributed systems. Technologies such as Apache Kafka, RabbitMQ, Pulsar and cloud messaging platforms have made this architectural style increasingly popular.
 
@@ -33,8 +32,7 @@ The important question is therefore not only **"When should we use Event-Driven 
 
 In this article, we will examine seven situations where synchronous APIs, direct service calls or traditional database transactions may be the better choice. The goal is not to discourage event-driven systems, but to help architects and developers use them where they create real value rather than unnecessary complexity.
 
-TL;DR ☕
--------
+## TL;DR ☕
 
 Event-Driven Architecture (EDA) is one of the most powerful architectural styles for scalable distributed systems, but it is **not** a universal solution.
 
@@ -46,12 +44,7 @@ Great architects also know when **not** to use it.
 
 {{< youtube f6Txm8IRr_E >}}
 
-<br />
-
-
-
-Why This Article?
------------------
+## Why This Article?
 
 Modern software architecture often swings between extremes.
 
@@ -74,8 +67,6 @@ Let us examine the most common situations where EDA may actually be the wrong ar
 
 Don't use EDA for everything{#caption-attachment-124878}
 
-
-
 1. Avoid EDA for Simple CRUD Applications
 -----------------------------------------
 
@@ -96,7 +87,6 @@ REST
 Database
 ```
 
-
 You suddenly have:
 
 ```bash
@@ -110,7 +100,6 @@ Consumer
  ↓
 Database
 ```
-
 
 Congratulations. 🎉
 
@@ -135,12 +124,9 @@ public Customer create(@RequestBody Customer c) {
 }
 ```
 
-
 One request, one transaction and one database update. For small CRUD applications, this is easier to maintain than introducing asynchronous messaging and distributed infrastructure.
 
 **The complexity budget of EDA should be paid only when it brings clear business value.**
-
-
 
 2. Avoid EDA When Strong Consistency Is Required
 ------------------------------------------------
@@ -164,7 +150,6 @@ Publish event
 Credit account
 ```
 
-
 If something crashes in the middle, money may disappear.
 
 Not ideal.
@@ -183,12 +168,9 @@ public void transfer(Account from, Account to, BigDecimal amount) {
 }
 ```
 
-
 Some business operations require atomicity. Distributed events introduce temporary inconsistency that may violate important business invariants.
 
 **This does not mean EDA is incompatible with finance. Many banks use it extensively, but usually after the transactional boundary.**
-
-
 
 3. Avoid EDA When Users Expect an Immediate Response
 ----------------------------------------------------
@@ -198,7 +180,6 @@ Imagine clicking:
 ```bash
 Pay Now
 ```
-
 
 Would you like the UI to answer:
 > "We will eventually process your payment."
@@ -214,7 +195,6 @@ Immediate validation
 ↓
 Immediate confirmation
 ```
-
 
 Synchronous APIs are often the right tool.
 
@@ -236,10 +216,7 @@ public Token login(LoginRequest request) {
 }
 ```
 
-
 Authentication is conversational. The client waits for the answer before continuing. An asynchronous workflow would only increase latency and complexity.
-
-
 
 4. Avoid EDA When There Is No Fan-Out
 -------------------------------------
@@ -251,7 +228,6 @@ One producer
 ↓
 Many consumers
 ```
-
 
 For example:
 
@@ -271,7 +247,6 @@ Fraud Detection
 Email
 ```
 
-
 Beautiful.
 
 Now imagine:
@@ -282,7 +257,6 @@ Producer
 One consumer
 ```
 
-
 That is basically an asynchronous method call.
 
 You added a broker to replace:
@@ -290,7 +264,6 @@ You added a broker to replace:
 ```java
 service.process(order);
 ```
-
 
 That is not always a good trade-off.
 
@@ -301,10 +274,7 @@ orderValidator.validate(order);
 paymentService.process(order);
 ```
 
-
 If only one service consumes the information, direct calls are usually simpler, easier to debug and cheaper to operate than an event broker.
-
-
 
 5. Avoid EDA When Your Team Is Not Operationally Ready
 ------------------------------------------------------
@@ -344,10 +314,7 @@ if(processedIds.contains(event.id())) {
 handle(event);
 ```
 
-
 Consumers should safely process duplicate events. Idempotency is one of the foundations of reliable event-driven systems.
-
-
 
 6. Avoid EDA When the Business Process Is a Conversation
 --------------------------------------------------------
@@ -372,7 +339,6 @@ Confirm
 Return result
 ```
 
-
 Each step requires immediate feedback.
 
 This is more of a conversation than a reaction.
@@ -386,10 +352,7 @@ Quote quote = pricingService.calculate(order);
 reservationService.reserve(quote);
 ```
 
-
 Sequential workflows where each step depends on the previous result are often easier to express using synchronous service calls.
-
-
 
 7. Avoid EDA When You Do Not Have a Real Event Model
 ----------------------------------------------------
@@ -405,7 +368,6 @@ ProductUpdated
 
 InvoiceUpdated
 ```
-
 
 Those are often just CRUD notifications.
 
@@ -428,13 +390,9 @@ publisher.publish(
 );
 ```
 
-
 Events should describe something meaningful that happened in the business domain, not simply mirror SQL `UPDATE` statements.
 
-
-
-What Event-Driven Architecture Is Excellent At
-----------------------------------------------
+## What Event-Driven Architecture Is Excellent At
 
 EDA shines when you need:
 
@@ -457,10 +415,7 @@ It becomes even more powerful when combined with patterns such as:
 * Dead-Letter Queues
 * Schema Registry
 
-
-
-Common Event-Driven Architecture Anti-Patterns
-----------------------------------------------
+## Common Event-Driven Architecture Anti-Patterns
 
 * ❌ Kafka replacing every REST call
 * ❌ Events for simple CRUD updates
@@ -471,10 +426,7 @@ Common Event-Driven Architecture Anti-Patterns
 * ❌ Using events to hide slow services
 * ❌ Assuming asynchronous always means scalable
 
-
-
-Key Takeaways 🎯
-----------------
+## Key Takeaways 🎯
 
 * EDA is a powerful architectural style, not a silver bullet.
 * Complexity should be introduced only when it solves a real problem.
@@ -485,8 +437,6 @@ Key Takeaways 🎯
 * Business events should represent domain facts, not CRUD operations.
 * A good architect chooses the simplest solution that satisfies today's requirements while leaving room for tomorrow's growth.
 
-
-
 Architecture is about trade-offs, not trends.
 
 Sometimes the best event is...
@@ -495,10 +445,7 @@ Sometimes the best event is...
 
 #EventDrivenArchitecture #EDA #Kafka #ApacheKafka #SoftwareArchitecture #Microservices #Java #SpringBoot #DistributedSystems #CloudNative #CQRS #EventSourcing #SystemDesign #Backend #SoftwareEngineering #Architecture #TechLeadership
 
-
-
-Go Further with Java Certification
-----------------------------------
+## Go Further with Java Certification
 
 ### Java
 

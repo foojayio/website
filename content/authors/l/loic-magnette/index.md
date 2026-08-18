@@ -13,3 +13,4 @@ aliases:
   - "/today/author/loic-magnette/"
 frozen: false
 ---
+

@@ -30,8 +30,7 @@ OK, you've tested your JavaFX mobile application on both iOS and Android devices
 
 The challenges have to do with each app store's rules for user safety, application transparency, data privacy, software compliance, and specifying age-appropriate users. So, let's jump in and examine the process that will hopefully result in acceptance for your application.
 
-**Apple App Store**
--------------------
+## **Apple App Store**
 
 Here's a summary of the steps required to submit a mobile app to the App Store. Gluon has very detailed, helpful instructions for each target platform. Read them carefully! Here you can find the instructions for ios targets. <https://docs.gluonhq.com/#platforms_ios>
 
@@ -55,7 +54,6 @@ Here's a summary of the steps required to submit a mobile app to the App Store. 
       </releaseConfiguration>
 ```
 
-
 If there are issues with either your bundle ID, provisioning profile, or signing certificate, you will need to fix these and rerun the link step (you don't need to rerun the compile step).
 
 * Create an IPA file to submit to **TestFlight**.
@@ -63,7 +61,6 @@ If there are issues with either your bundle ID, provisioning profile, or signing
 ```
 $ mvn -Pios gluonfx:package
 ```
-
 
 This creates file TiltMaze.ipa.
 
@@ -88,7 +85,6 @@ If you need to upload a new version, you must change the version number in file 
 <key>CFBundleShortVersionString</key>
 <string>1.0.1</string>
 ```
-
 
 #### **TestFlight**
 
@@ -124,7 +120,6 @@ Here are the steps to upload your app to the Google Play Store.
             </providedKeyAliasPassword>
 </releaseConfiguration>
 ```
-
 
 Create an Internal Testing release. Google recommends you use Play App Signing, which means Google signs the app for you, but uses your **.keystore** file to verify your upload. The Internal Testing lets you supply a list of emails of your testers.
 

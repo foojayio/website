@@ -24,8 +24,7 @@ A few weeks ago, I had the honor to present at the [Arnhem JUG](https://www.meet
 
 Everything in this series is in Java 8 and earlier. So after reading this article, you will be able to use it in your projects.
 
-Optional
---------
+## Optional
 
 Well, `Optional` is a well known class of Java, it's used for objects that can have a value or not with handy methods such as `ifPresent`, `orElse` or `stream()`.  
 
@@ -37,7 +36,6 @@ Optional<Integer> age = Optional.empty();
 Integer age = null; // null when unknown
 ```
 
-
 Now if you see a colleague adding an `Optional<Integer>` or an `Integer` object, you can now make the remark that there is an [**`OptionalInt`**](https://docs.oracle.com/javase/8/docs/api/java/util/OptionalInt.html) class in Java.  
 
 This class works with an int variable. It has methods such as `ifPresent(IntConsumer)`, `orElse(int)`, `orElseGet(IntSupplier)` and `IntStream stream()`.
@@ -47,8 +45,7 @@ The following classes are also available in Java:
 * [**`OptionalLong`**](https://docs.oracle.com/javase/8/docs/api/java/util/OptionalLong.html)
 * [**`OptionalDouble`**](https://docs.oracle.com/javase/8/docs/api/java/util/OptionalDouble.html)
 
-Statistics
-----------
+## Statistics
 
 Java has statistics classes included in the JDK. I discovered it when doing the One Billion Row Challenge ([1BRC](https://foojay.io/today/12-lessons-learned-from-doing-the-one-billion-row-challenge/)).
 
@@ -60,8 +57,7 @@ This class will remember the min, max, sum, count and average.
 
 If you're working with floating points, Java has a **[`DoubleSummaryStatistics`](https://docs.oracle.com/javase/8/docs/api/java/util/DoubleSummaryStatistics.html)** class.
 
-LinkedHashMap
--------------
+## LinkedHashMap
 
 **[`LinkedHashMap`](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html)** is a well known class in Java. It has the advantage to keep the insert order of the items added when using the iterator, such as `ArrayList` for a list.
 
@@ -87,11 +83,9 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
 }
 ```
 
-
 If you are using this cache from multiple threads, don't forget to make it a synchronized map using `Collections.synchronizedMap(new LRUCache(20));`
 
-WeakHashMap
------------
+## WeakHashMap
 
 A **[WeakHashMap](https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html)** is another kind of `Map`. It has the particularity to have weak references to the keys. This means that objects in the keys may be garbage collected if there is no hard references to the same object somewhere else in the code.
 
@@ -108,8 +102,7 @@ Since `JTable` doesn't cache the cell component, it repaints the cell when neede
 To lower the CPU load, I added a `Map<Long, String> cacheTime = new WeakHashMap<>(100);` and then use `String formattedTime = cacheTime.computeIfAbsent(...);`  
 ![File manager Ant Commander Pro with tables listing files](ant-commander-pro-scrolling-1024x551.png) Ant Commander Pro with scroll bars next to the file dates
 
-BitSet
-------
+## BitSet
 
 When working with booleans (false/true), java can't store them in an optimized way as 1 bit per boolean. Here is what is sometimes used:
 

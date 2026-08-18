@@ -91,13 +91,10 @@ The July 2020 advisory by the OpenJDK Vulnerability Group cites [CVE-2020-14562]
 
 This distinction is crucial as many software teams are expected to do vulnerability scanning in the form of open-source dependencies. Scanners often look only at the library names and then assume that all usage of those libraries contain all CVEs. In the case of a custom jlink-ed JRE, any scanner that reported the JRE as vulnerable to this flaw would be incorrect. Removing the component removes the vulnerabilities and risk in that component. Hackers cannot attack what isn't there.
 
-Tactical Take-Aways
--------------------
+## Tactical Take-Aways
 
 Java users should incorporate several practices to take full benefit from the defenses of the modern JRE:
 
 1. Follow an automated patch schedule that coincides with the OpenJDK vendor's quarterly patch cycle.
 2. Automate application packaging with jlink to remove modules that are not used by the application.
 3. Watch for CVEs in application libraries, and automate their updates as much as possible in line with the JRE patch schedule.
-
-<br />

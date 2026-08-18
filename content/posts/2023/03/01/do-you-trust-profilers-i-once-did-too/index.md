@@ -45,8 +45,7 @@ I would highly recommend you to read my [Writing a profiler from scratch series]
 
 If you want to know more about how the foundational AsyncGetCallTrace is used in profilers. Just to list a few.
 
-A sample AsyncGetCallTraceTrace bug
------------------------------------
+## A sample AsyncGetCallTraceTrace bug
 
 A problem that has been less discussed is the lacking test coverage of the underlying APIs.
 
@@ -78,7 +77,6 @@ public class Main {
 }
 ```
 
-
 This is the simplest test case that can be written in the OpenJDK JTREG test framework for OpenJDK. The problem with this test case? The implementation of checkAsyncGetCallTraceCall only checks for the topmost frame.
 
 To test AsyncGetCallTrace correctly here, one should compare the trace returned by this call with the trace of an oracle. We can use GetStackTrace (the safepoint-biased predecessor of ASGCT) here as it seems to return the correct trace.
@@ -98,7 +96,6 @@ Frame 7: java.lang.reflect.Method.invoke
 Frame 8: Main.main
 ```
 
-
 AsyncGetCallTrace, on the other hand, had problems walking over some of the reflection internals and returned:
 
 ```java
@@ -106,7 +103,6 @@ Frame 0: Main.checkAsyncGetStackTraceCall
 Frame 1: Main.test
 Frame 2: java.lang.invoke.LambdaForm$DMH.[...].invokeStatic
 ```
-
 
 This problem can be observed with a [modified test case](https://gist.github.com/parttimenerd/502251b67d3e42baad17419442a72c39) with JFR and async-profiler too:
 
@@ -130,7 +126,6 @@ public class Main {
 }
 ```
 
-
 ![](https://mostlynerdless.de/wp-content/uploads/2023/02/frame_problem.png) The expected flame graph is on the left (obtained after fixing the bug), and the actual flame graph is on the right.
 
 So the only test case on AsyncGetCallTrace in the OpenJDK did not properly test the whole trace. This was not a problem when the test case was written. One can expect that its author checked the entire stack trace manually once and then created a small check test case to test the first frame, which is not implementation specific. But this is a problem for regression testing:
@@ -141,8 +136,7 @@ My PR improves the test by checking the result of AsyncGetCallTrace against GetS
 
 My main problem with finding this bug is that it shows how the lack of test coverage for the underlying profiling APIs might cause problems even for profiling simple Java code. I only found the bug because I'm [writing many tests](https://github.com/openjdk/jdk/pull/11767) for my new AsyncGetStackTrace API. It's hard work, but I'm convinced this is the only way to create a reliable foundation for profilers.
 
-Profilers in a loop
--------------------
+## Profilers in a loop
 
 Profilers have many problems but are still helpful if you know what they can and cannot do. They should be used with care, without trusting everything they tell you. Profilers are only as good as the person interpreting the profiler results and the person's technique.
 
@@ -159,8 +153,7 @@ Then you formulate a hypothesis based on the problem you're investigating embedd
 
 This technique lets you use profilers without fearing that spurious errors will lead you to wrong conclusions.
 
-Conclusion
-----------
+## Conclusion
 
 I hope you found this article helpful and educational.
 

@@ -23,8 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 One of the most useful features of real-time stream processing is to combine the strengths and advantages of various technologies to provide a unique developer experience and an efficient way of processing data in real time at scale.
 
@@ -39,8 +38,7 @@ Meanwhile, Apache Pulsar **can be used for** both messaging and streaming use ca
 
 ![](https://hazelcast.com/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.00.51.png)
 
-Prerequisites
--------------
+## Prerequisites
 
 We're building an application where we ingest data from Apache Pulsar into Hazelcast and then process it in real-time. To run this application, make sure your system has the following components:
 
@@ -55,20 +53,17 @@ brew tap hazelcast/hz
 brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f8f1eaf5fcf3f1e3e4d0a5bea2bea1">[email protected]</a>
 ```
 
-
 Check if Hazelcast is installed:
 
 ```
 hz -V
 ```
 
-
 Then start a local cluster:
 
 ```
 hz start
 ```
-
 
 You should see the following in the console:
 
@@ -79,7 +74,6 @@ Members {size:1, ver:1} [
 ]
 ```
 
-
 You can start Pulsar in Docker using the following command:
 
 ```
@@ -89,7 +83,6 @@ docker run -it -p 6650:6650 -p 8080:8080 \
     apachepulsar/pulsar:2.11.0 bin/pulsar standalone
 ```
 
-
 To install Management Center, use one of the following methods, depending on your operating system:
 
 ```
@@ -98,16 +91,13 @@ brew tap hazelcast/hz
 brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6afb4aba2adafbdbae3a3afa0afa9aba3aba0bae3adaba0baabbc8efbe0fce0ff">[email protected]</a>
 ```
 
-
 Check that Management Center is installed:
 
 ```
 hz-mc -V
 ```
 
-
-Data collection
----------------
+## Data collection
 
 For our application, we wish to ingest air quality readings from around the United States via the AirNow data provider.
 
@@ -131,13 +121,11 @@ Example AirQuality Data
 {"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","latitude":39.95,"longitude":-75.151,"parameterName":"PM10","aqi":19,"category":{"number":1,"name":"Good","additionalProperties":{}},"additionalProperties":{}}
 ```
 
-
 Example Ozone Data
 
 ```
 {"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"O3","latitude":39.95,"longitude":-75.151,"aqi":8}
 ```
-
 
 Example PM10 Data
 
@@ -145,18 +133,15 @@ Example PM10 Data
 {"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM10","latitude":39.95,"longitude":-75.151,"aqi":19}
 ```
 
-
 Example PM2.5 Data
 
 ```
 {"dateObserved":"2023-01-19 ","hourObserved":12,"localTimeZone":"EST","reportingArea":"Philadelphia","stateCode":"PA","parameterName":"PM2.5","latitude":39.95,"longitude":-75.151,"aqi":54}
 ```
 
-
 ![](https://hazelcast.com/wp-content/uploads/2023/01/Screenshot-2023-01-27-at-14.01.42.png)
 
-Data processing
----------------
+## Data processing
 
 In order to process the data collected, we used the[Hazelcast Pulsar connector](https://docs.hazelcast.com/hazelcast/latest/pipelines/pulsar) module to ingest data from Pulsar topics (note: you can use the same connector to write to Pulsar topics).
 
@@ -186,7 +171,6 @@ In your pom file, import the following dependencies.
 </dependency>
 ```
 
-
 We create a PulsarSources.pulsarReaderBuilder instance to connect to the previously started pulsar cluster located at pulsar://localhost:6650.
 
 ```java
@@ -196,7 +180,6 @@ StreamSource<Event>source = PulsarSources.pulsarReaderBuilder(
      () -> Schema.JSON(Event.class),
      Message::getValue).build();
 ```
-
 
 We then create a pipeline to read from the source with a sliding window and aggregate count, before we write to logger:
 
@@ -222,7 +205,6 @@ HazelcastInstance hz = Hazelcast.bootstrappedInstance();
 hz.getJet().newJob(p, cfg);
 ```
 
-
 You can run the previous code from your IDE (in this case, it will create its own Hazelcast member and run the job on it), or you can run this on the previously started Hazelcast member (in this case, you need to create a runnable JAR including all dependencies required to run it):
 
 ```
@@ -230,7 +212,6 @@ mvn package
 
 bin/hz-cli submit target/pulsar-example-1.0-SNAPSHOT.jar
 ```
-
 
 To cancel the job and shut down the Hazelcast cluster:
 
@@ -240,9 +221,7 @@ bin/hz-cli cancel pulsar-message-counter
 hz-stop
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this article, we have demonstrated how you can combine the strengths and advantages of various technologies to provide a unique developer experience and an efficient way of processing data in real time at scale.
 
@@ -256,16 +235,14 @@ Pulsar allows you to use your choice of messaging protocols to quickly distribut
 
 StreamNative is the company made up of the original creators of Apache Pulsar and Apache BookKeeper. StreamNative provides a full enterprise experience for Apache Pulsar in the cloud and on premise.
 
-More on Hazelcast
------------------
+## More on Hazelcast
 
 * **Join us on our Real-Time Stream Processing Unconference (#RTSPUnconf): <https://hazelcast.com/lp/unconference/>**
 * Learn the Hazelcast Fundamentals: Start a Local Cluster with the [CLI](https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-cli) or [Docker](https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-docker).
 * Start a [Viridian Serverless Cluster](https://viridian.hazelcast.com/): Serverless is a managed cloud service that offers a pay-as-you-go pricing model. Serverless clusters auto-scale to provide the resources that your application needs. You pay only for the resources that your application consumes.
 * Join the Hazelcast [Slack](https://slack.hazelcast.com/) and Hazelcast [Github](https://github.com/hazelcast/hazelcast) repository.
 
-More on Apache Pulsar
----------------------
+## More on Apache Pulsar
 
 * Learn the Pulsar Fundamentals: While this blog did not cover the Pulsar fundamentals, there are great resources available to help you learn more. If you are new to Pulsar, we recommend you to take the [self-paced Pulsar courses](https://www.academy.streamnative.io/tracks) or [instructor-led Pulsar training](https://streamnative.io/training/) developed by some of the original creators of Pulsar. This will get you started with Pulsar and accelerate your streaming immediately.
 * Spin up a Pulsar Cluster in Minutes: If you want to try building microservices without having to set up a Pulsar cluster yourself, sign up for [StreamNative Cloud](https://streamnative.io/streamnativecloud/) today. StreamNative Cloud is a simple, fast, and cost-effective way to run Pulsar in the public cloud.

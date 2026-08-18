@@ -30,8 +30,7 @@ And this time, we are in Chicago to learn from the Java and Kotlin user groups.
 
 {{< youtube UkCmZ02pJek >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +38,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Mary Grygleski
 
@@ -52,8 +50,7 @@ Guests
 * <https://bigshoulders.city/@wakingrufus>
 * <https://twitter.com/wakingrufus>
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
@@ -62,8 +59,7 @@ Podcast
 
 ![](foojay-podcast-guests-chicago-1024x576.png)
 
-Links
------
+## Links
 
 ### Chicago JUG
 
@@ -85,8 +81,7 @@ Links
 
 DataStax Vector DB and Search (no credit card and $25 monthly complimentary usage for up to a year): <https://bit.ly/3L1Dkgi>
 
-Content
--------
+## Content
 
 00:00 Intro and introduction of the guests  
 

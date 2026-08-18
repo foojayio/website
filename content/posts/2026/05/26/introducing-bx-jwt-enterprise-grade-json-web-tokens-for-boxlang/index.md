@@ -54,7 +54,6 @@ token = jwtNew()
     .sign( secret, "HS256" );
 ```
 
-
 Every standard claim has a named method. Custom claims go through `.claim( key, val )`. Headers via `.header( key, val )`. Swap `.sign()` for `.encrypt()` and you have a JWE. It reads like what it does. 🎯
 
 ### The BIF Functions
@@ -82,7 +81,6 @@ payload = jwtVerify( token, secret, "HS256" );
 writeOutput( payload.sub ); // user-123
 ```
 
-
 ### RSA Sign and Verify
 
 ```java
@@ -90,7 +88,6 @@ keys    = jwtGenerateKeyPair( "RS256" );
 token   = jwtCreate( { sub: "user-123" }, keys.privateKey, "RS256" );
 payload = jwtVerify( token, keys.publicKey, "RS256" );
 ```
-
 
 ### JWE Encryption
 
@@ -104,7 +101,6 @@ token   = jwtEncrypt(
 );
 payload = jwtDecrypt( token, secret32bytes, { keyAlgorithm: "dir", encAlgorithm: "A256GCM" } );
 ```
-
 
 Or nest them --- sign first, encrypt the signed token --- for the full sign-then-encrypt pattern:
 
@@ -120,7 +116,6 @@ encryptedToken = jwtEncrypt( signedToken, outerPubKey, {
     encAlgorithm : "A256GCM"
 } );
 ```
-
 
 This is where `bx-jwt` separates from basic JWT libraries. The **Key Registry** lets you define named keys once in configuration and reference them by name throughout your entire application. Keys never appear in application logic. Rotation is a config change, not a code change.
 
@@ -153,7 +148,6 @@ settings = {
 }
 ```
 
-
 With defaults fully configured, the key and algorithm arguments become optional everywhere:
 
 ```java
@@ -162,14 +156,12 @@ token   = jwtCreate( { sub: "user-123" } );
 payload = jwtVerify( token );
 ```
 
-
 Keys can also be registered at runtime via the `JWTService`:
 
 ```java
 jwtService = getBoxContext().getRuntime().getGlobalService( "JWTService" );
 jwtService.registerKey( "session-key", { algorithm: "HS256", secret: generateSecureKey() } );
 ```
-
 
 `bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** --- they cannot be turned off:
 
@@ -198,7 +190,6 @@ Algorithm-confusion attacks exploit servers that accept any algorithm the token 
 allowedAlgorithms: [ "HS256", "RS256" ]
 ```
 
-
 ### Clock Skew Tolerance
 
 Distributed systems have clock drift. bx-jwt ships with a configurable `clockSkew` (default: 60 seconds) that prevents legitimate tokens from failing `exp`/`nbf` validation due to minor time differences between services. Tune it per environment:
@@ -210,7 +201,6 @@ payload = jwtVerify( token, secret, "HS256", { clockSkew: 0 } );
 // Distributed system with known drift
 payload = jwtVerify( token, secret, "HS256", { clockSkew: 120 } );
 ```
-
 
 ### Authentication Middleware
 
@@ -235,7 +225,6 @@ function requireAuth() {
 }
 ```
 
-
 ### Token Refresh with Grace Period
 
 ```java
@@ -253,7 +242,6 @@ function refreshToken( token ) {
 }
 ```
 
-
 ### Kid-Based Key Rotation
 
 ```java
@@ -264,7 +252,6 @@ function verifyWithKeyRotation( token ) {
     return jwtVerify( token, key, decoded.header.alg );
 }
 ```
-
 
 ### Signing (JWS)
 
@@ -288,7 +275,6 @@ box install bx-jwt
 # BoxLang CLI
 install-bx-module bx-jwt
 ```
-
 
 **bx-jwt requires a BoxLang+ or BoxLang++ subscription. 🔑**
 

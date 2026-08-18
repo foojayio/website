@@ -31,8 +31,7 @@ Pattern matching can be classified into two types.
 
 ![regex meme](https://i.imgur.com/M6xKDas.jpeg)
 
-Why Pattern Matching?
----------------------
+## Why Pattern Matching?
 
 Why do we need pattern matching? We don't, to be honest!
 
@@ -49,8 +48,7 @@ Pattern matching is not a requirement for a good programming language. Many of t
 
 Of course, these advantages depend on how a language implements pattern matching. So later, we will look at these from the perspective of Java.
 
-Pattern Matching Features
--------------------------
+## Pattern Matching Features
 
 These are many languages that have great support for pattern matching. Rust and OCaml lead the pack here. On the JVM world, Scala also offers many of these pattern matching features. So when a language claims to have support for pattern matching, these are the features we expect:
 
@@ -67,8 +65,7 @@ These are many languages that have great support for pattern matching. Rust and 
 
 It's not an exhaustive list but more of a general expectation to fulfill the previous advantages we saw.
 
-Pattern Matching in Java
-------------------------
+## Pattern Matching in Java
 
 Unfortunately, Java is still a bit behind the curve when it comes to pattern matching.
 
@@ -104,7 +101,6 @@ if (obj instanceof String s) {
 }
 ```
 
-
 We can also use pattern matching as a type guard in returns and variable assignments. See how concise the code is when we do the return using a type guard instead of casting the type.
 
 ```java
@@ -125,7 +121,6 @@ public boolean equals(Object o) {
 }
 ```
 
-
 Here is a variable assignment using a type guard. Again the code is much nicer with pattern matching.
 
 ```java
@@ -139,7 +134,6 @@ System.out.println(x);
 var x = o instanceof Point p ? p.x : 0;
 System.out.println(x);
 ```
-
 
 For a realistic use case, we could do something like below, when we want to do different logic based on the type, using the `instanceof` operator. But that's a lot of if-else and cognitive load.
 
@@ -159,7 +153,6 @@ static String formatter(Object o) {
 }
 ```
 
-
 ### Pattern Matching for switch
 
 But with the new preview feature in Java 17, we can do pattern matching for data types in switch cases as well. For Both, switch statements and switch expressions.
@@ -177,7 +170,6 @@ static String formatter(Object o) {
    };
 }
 ```
-
 
 This has Reduced cognitive complexity, and the syntax is closer to most other languages with pattern matching. With this, the compiler can warn us when pattern dominance occurs, as generic types should always come after specific types.
 
@@ -206,7 +198,6 @@ static String formatter(Object o) {
 }
 ```
 
-
 ### Type Guards \& pattern refinement
 
 As we saw earlier, Type guards are already supported for `instanceof` operator from Java 16 onwards, and Java 17 preview adds that for switch cases as well. This means we can rely on the type guards to refine the patterns further to have conditions, relations, and value checks.
@@ -230,7 +221,6 @@ static void test(Object o) {
    }
 }
 ```
-
 
 While it's not as flexible as in Rust or OCaml, it's a good start, in my opinion.
 
@@ -256,7 +246,6 @@ public abstract sealed class Shape {
   final class Rectangle extends Shape { ... }
 }
 ```
-
 
 A sealed class imposes three constraints on its permitted sub-classes.
 
@@ -290,7 +279,6 @@ public sealed class Rectangle implements Shape
 public non-sealed class WeirdShape implements Shape { ... }
 ```
 
-
 A sealed class can be abstract and can have abstract members, and similarly, sealed interfaces can have default implementations and so on. But abstract subclasses should be sealed or non-sealed and not final.
 
 Extending a non-permitted class with a sealed class will be a compile-time error.
@@ -323,7 +311,6 @@ Shape rotate(Shape shape, double angle) {
 }
 ```
 
-
 ### Partial patterns and destructing
 
 There is a candidate feature to add preview for destructing/deconstruction syntax for the `instanceof` operator, so logically at some point, that should extend to the switch syntax as well. There are also talks about improving the feature further to add support for primitives in switch case patterns and to declare how it should be deconstructed at the class level so that normal classes can also be deconstructed.
@@ -344,7 +331,6 @@ void printSum(Object o) {
 }
 ```
 
-
 Deconstruction can be nested as well but doesn't have any facility for ignoring members like in other languages yet.
 
 ```java
@@ -359,7 +345,6 @@ void printSum(Object o) {
 }
 ```
 
-
 Array deconstruction is also proposed, and syntax is a bit similar to array deconstruction in JavaScript. Thankfully at least elements at the end can be ignored in this case; it would be pretty useless otherwise 😉
 
 See how the string array is deconstructed to the first two elements with the rest ignored. The syntax is closer to the new array syntax as well.
@@ -372,7 +357,6 @@ static void printFirstTwoStrings(Object o) {
 }
 ```
 
-
 Nested deconstruction is also possible for a mix of arrays and records. See how an array of `Points` are deconstructed here. And yes, `var` should work instead of type as well.
 
 ```java
@@ -382,7 +366,6 @@ static void printSumOfFirstTwoXCoords(Object o) {
    }
 }
 ```
-
 
 Of course, it's a baby step and not as powerful as deconstruction in Rust or JS, but I hope we get there, and even this baby step would make pattern matching much more powerful.
 
@@ -425,8 +408,6 @@ To summarize, these are the current and future limitations as far as we can see
 In a future version of Java, some of these limitations might be removed, at least for `instanceof` operator.  
 
 We probably would still have to wait a few years before we can actually start using full-fledged pattern matching in production. I'll update this post when more features are released.
-
-
 
 If you like this article, please leave a like or a comment. Originally published at [deepu.tech](https://deepu.tech/state-of-pattern-matching-java/).
 

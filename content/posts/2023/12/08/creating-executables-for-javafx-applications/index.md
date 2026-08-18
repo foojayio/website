@@ -32,8 +32,7 @@ Let's take a look in this article at the current state of what can be done with 
 
 All the sources and workflow files used here [can be found in the `JavaPackageDemo` repository](https://github.com/heshanthenura/JavaPackageDemo).
 
-General Configuration
----------------------
+## General Configuration
 
 ### JavaFX Launch File
 
@@ -50,7 +49,6 @@ public class Launcher {
     }
 }
 ```
-
 
 ### Prerequisites
 
@@ -69,7 +67,6 @@ task customFatJar(type: Jar) {
     with jar
 }
 ```
-
 
 * `task customFatJar(type: Jar)`: Defines a new task named customFatJar of type Jar, indicating that this task will generate a JAR file.
 * `manifest {...}`: Sets the Main-Class attribute in the JAR's manifest file to point to the Launcher class, which serves as the entry point of your application.
@@ -105,7 +102,6 @@ Sample usages:
 ...
 ```
 
-
 Creating a native executable application requires performing the build on the target platform. For each platform, the required additional steps and the `jpackage` command are explained.
 
 ### GitHub Workflows
@@ -120,13 +116,11 @@ Installing the [WiX Toolset](https://wixtoolset.org/), version 3.0 or later for 
 jpackage --input <direcory of jar file> --name <name> --main-jar <main jar file > --main-class <main class> --type <type> --win-dir-chooser
 ```
 
-
 Example:
 
 ```
 jpackage --input build/ --name PackageDemo --main-jar <mPackageDemoJAR.jar > --main-class <com.heshanthenura.packagedemo.Launcher> --type msi --win-dir-chooser
 ```
-
 
 ### Linux
 
@@ -140,7 +134,6 @@ After completing the prerequisites, execute the following command:
 jpackage --input <direcory of jar file> --name <name> --main-jar <main jar file> --main-class <main class> --type <type>
 ```
 
-
 ### MacOS
 
 For macOS, no additional installations are needed and you can immediately execute the following example command:
@@ -149,9 +142,7 @@ For macOS, no additional installations are needed and you can immediately execut
 jpackage --input build/libs/ --name PackageDemo --main-jar PackageDemoJAR-1.0-SNAPSHOT.jar --main-class com.heshanthenura.packagedemo.Launcher --type dmg --dest build/macos/ --app-version 1.0 --vendor "Heshan Thenura"
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Creating a native executable with JavaFX and `jpackage` for Windows, macOS, and Linux streamlines deployment across multiple operating systems.
 

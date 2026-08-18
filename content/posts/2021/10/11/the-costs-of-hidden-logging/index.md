@@ -20,8 +20,7 @@ frozen: false
 
 A while ago I received a customer escalation ticket regarding performance degradation when using [Datadog Continuous Profiler for Java](https://docs.datadoghq.com/tracing/profiler/). The degradation was observable as an increased CPU usage as well as unexpected latency.
 
-The Beginning: Unusual Customer Escalation
-------------------------------------------
+## The Beginning: Unusual Customer Escalation
 
 To bootstrap the troubleshooting, I usually try to isolate the area which might be causing the regression.
 
@@ -43,8 +42,7 @@ The CPU usage graph would look something like this.
 
 Well, that makes the things clear, doesn't it?
 
-And Down the Rabbit Hole...
----------------------------
+## And Down the Rabbit Hole...
 
 So, here I am. With a confirmed performance degradation, obviously caused by the profiler but with no explanation and, what was worse, no local reproducer. I had to rely on whatever data I was able to get from the collected profiles, preferably not disturbing the customer with too many restarts and redeployments. But the number of initial hints was surprisingly small, just that the regression was triggered by a common load test run and that the application was running on JDK 8u.
 
@@ -52,8 +50,7 @@ With nothing to start with, I resorted to checking the JFR recordings and the pr
 
 Why is the "JFR Periodic Task" thread even shown here? Usually, JFR is trying to stay as "quiet" as possible in terms of heap allocation not to disturb the observed application. So, why suddenly here JFR is **THE** memory hog?
 
-Elimination Round
------------------
+## Elimination Round
 
 The "JFR Periodic Task" takes care of emitting periodical events. That was the good news: there are only a few built-in periodical events and the customer was not adding any of theirs. That meant that I would be able to identify the offender pretty fast, even considering that each change had to be discussed with the customer and then deployed by them.
 
@@ -61,8 +58,7 @@ And as luck had it my first candidate was `jdk.NativeExecutionSample` which is u
 
 So, that would be it. Problem fixed!
 
-Root Causing
-------------
+## Root Causing
 
 Although disabling that particular event did resolve the escalation ticket, I was really curious what was the real root cause. I double checked the event implementation and I was 100% confident that it was not doing any on-heap allocation, especially since it is a "native" JFR event, written completely in C++.
 
@@ -72,8 +68,7 @@ As it turns out, during the JDK 8 backport of JFR a shortcut was made when adjus
 
 This definitely has the potential to allocate a lot. And with a lot of garbage there comes quite high GC pressure, eating away the CPU and increasing the application latency.
 
-Solution
---------
+## Solution
 
 Once it became clear that it was the partially implemented logging facility in the JDK 8 backport of JFR (for which I was also partially responsible) I opened a new JDK bug to track the work:
 
@@ -83,7 +78,6 @@ The fix turned out to be not that complex, I just had to surface the log level c
 
 For JDK 8u JFR backport there are no real log levels, though, just 'enabled' and 'disabled' logging, making the fix even simpler. You can see the actual code changes [here](https://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/rev/cb560b38d15a) and [here](https://hg.openjdk.java.net/jdk8u/jdk8u-dev/hotspot/rev/88e29f735f12) ) and it was included in JDK 8u302, and that's the version since which you can enjoy minimal heap allocation from the JFR events again.
 
-Final words
------------
+## Final words
 
 I wish I had some great words of wisdom to share here. So, I'll leave you with only this: never underestimate the danger of a partial implementation (even if it is just a logging implementation) and the 'invisible' bugs are pretty darned hard to find and fix!

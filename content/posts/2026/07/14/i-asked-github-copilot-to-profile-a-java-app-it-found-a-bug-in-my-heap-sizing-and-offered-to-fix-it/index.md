@@ -16,8 +16,7 @@ frozen: false
 
 I built an extension to collapse the entire loop of running and measuring the performance of Java workloads, so it can be used within a place some developers are starting to consider their new "development environment" in the agentic AI era: the [**GitHub Copilot app**](https://github.com/features/ai/github-app).
 
-The idea: Copilot-driven profiling
-----------------------------------
+## The idea: Copilot-driven profiling
 
 This extension is called JVM Pulse, and this is a walkthrough of one real run. JVM Pulse is a canvas extension for the GitHub Copilot app. It doesn't hard-code how to build or run Java projects and it doesn't need the user to be specific either. You click Run analysis, and Copilot does the project-specific work: it detects your build tool and JDK, writes or compiles a representative workload, and launches it with the right flags: unified GC logging and a JFR recording with settings=profile.
 
@@ -26,8 +25,7 @@ Then the artifacts flow through Microsoft's [GCToolkit](https://github.com/micro
 For this walkthrough I pointed it at a [**JairoSVG**](https://github.com/brunoborges/jairosvg) rendering benchmark: 43 sample SVGs, a parse + render + PNG-encode loop, \~25 seconds, heap pinned at 256M on G1GC (JDK 25).
 ![Article content](https://media.licdn.com/dms/image/v2/D5612AQGi5Fh5WeV08g/article-inline_image-shrink_1000_1488/B56Z9dQtpWHUAI-/0/1783976090853?e=1785369600&v=beta&t=xDWdvclaLdC_bk2VdzqoMtnlRjYs9668wrapx_XOqBU) Run analysis - Copilot will run and profile the app
 
-Step 1 --- Copilot ran it, and showed me exactly what it ran
-------------------------------------------------------------
+## Step 1 --- Copilot ran it, and showed me exactly what it ran
 
 The thing I care most about in an AI tool is that it's transparent about what it did. JVM Pulse records the **exact launch command**, including every JVM flag. And after 5,633 renders completed, GC log and JFR recording were captured, and the dashboard rendered right next to the chat.
 ![Article content](https://media.licdn.com/dms/image/v2/D5612AQFaUQAEsRBkCg/article-inline_image-shrink_400_744/B56Z9dS_SkGsAU-/0/1783976687217?e=1785369600&v=beta&t=qnTaX59MLc4y-ILcWDKOtl-xPvIbv9H9p2zTH_qKjpM)
@@ -89,5 +87,3 @@ JVM Pulse is open source (MIT). If you write Java and you've ever bounced betwee
 👉 <https://github.com/brunoborges/jvm-pulse>
 
 *Built with Microsoft GCToolkit, the JDK* jfr*CLI, and the GitHub Copilot canvas extension API leveraging the GitHub Copilot SDK for AI integration.* GitHub Copilot App can be used without a GitHub Copilot subscription, along with BYOK models.
-
-<br />

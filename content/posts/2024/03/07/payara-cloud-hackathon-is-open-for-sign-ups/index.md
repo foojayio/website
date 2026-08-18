@@ -27,10 +27,7 @@ The Payara Cloud Hackathon will be running from the 11th until the 31st of March
 
 Winners will be spotlighted across our platforms, earn money prizes, and present their solutions to a worldwide audience.
 
-<br />
-
-Power up Your Jakarta EE!
--------------------------
+## Power up Your Jakarta EE!
 
 ### **Your Mission:**
 
@@ -44,16 +41,14 @@ Power up Your Jakarta EE!
 * A chance to contribute to sustainability, push the limits of Jakarta EE and Payara Cloud, and gain recognition for your innovative solutions.
 * Winners will be spotlighted across our platforms, earn money prizes, and present their solutions to a worldwide audience.
 
-Awards
-------
+## Awards
 
 * First Place -- £3,000
 * Second Place -- £2,000
 * Third Place -- £1,000
 * Payara \& Eclipse Foundation Swag Bag for the **Top 10** contestants
 
-How to Enter?
--------------
+## How to Enter?
 
 1. Fill in[the signup form on this page.](https://www.payara.fish/page/payara-hackathon-2024/) Make sure you enter all the data!
 2. You may want to join our informative webinar on the 8th of March -- [register here](https://us02web.zoom.us/webinar/register/WN_EWfDdM0jQeOIcqYOuXNbRA#/registration).

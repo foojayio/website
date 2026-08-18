@@ -21,8 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-And why MongoDB might be a better relational database than you ever realized.
------------------------------------------------------------------------------
+## And why MongoDB might be a better relational database than you ever realized.
 
 <figure class="wp-block-image size-full is-resized">
  <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="aspect-ratio:2.2802192518511397;width:840px;height:auto">
@@ -30,16 +29,13 @@ And why MongoDB might be a better relational database than you ever realized.
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 
-
-
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 
 [In Part 1 of this series](https://foojay.io/today/aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1/), we described a use case based on a recent design review I conducted with a team at a MongoDB customer. The team in question was new to MongoDB, and the approach they had taken to both modeling their data and then subsequently querying it was very "RDBMS-like." As a result, query performance was significantly slower than their SLA called for.
 
 In this second part of the series, we'll discuss the first of four changes we made in the process of improving the query performance.
 
-The video streaming service use case: profiles, devices, and device types (a recap)
------------------------------------------------------------------------------------
+## The video streaming service use case: profiles, devices, and device types (a recap)
 
 Based on the use case presented by the customer team during their design review, the scenario we introduced in Part 1 was for a fictional video streaming service. The specific part of the application we were focussing on mapped user profiles to the devices from which those users streamed the service.
 
@@ -65,8 +61,7 @@ With this design, a test run of 300 iterations of the query pipeline split up an
 
 With a target query response time of one second or less, this was obviously problematic.
 
-Optimization, Step 1: removing the $unwind stages
--------------------------------------------------
+## Optimization, Step 1: removing the $unwind stages
 
 The initial pipeline design included two [$unwind](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-unwind--aggregation-) stages. `$unwind` stages are used to flatten arrays in MongoDB documents, usually so that the data can be reorganized or grouped by a different field.  
 
@@ -101,7 +96,6 @@ As an example, after running the `$lookup` stage to join a profile document with
   ]
 }
 ```
-
 
 After running a subsequent `$unwind` stage on the mappingData field, the example document above would be transformed into two separate output documents: one for each element in the mappingData array:
 
@@ -141,7 +135,6 @@ After running a subsequent `$unwind` stage on the mappingData field, the example
 }
 ```
 
-
 The customer team had included this `$unwind` stage to ensure the subsequent `$lookup` stage, joining to devices on the value of `mappingData.deviceSN`, was carried out for each matched mapping. As this data was originally contained within elements of an array, they believed it was necessary to first unwind the array to ensure the $lookup was performed for each element.
 
 As a reminder, the format of the second `$lookup` stage to join to the devices collection was this:
@@ -169,7 +162,6 @@ As a reminder, the format of the second `$lookup` stage to join to the devices c
   }
 ```
 
-
 The key element here is the localField value, and there is an important aspect the customer team was unaware of: If the field pointed to by localField is a field within elements of an array, **the `$lookup` will automatically be run for the corresponding value of each element** **of the array** . This meant the proceeding `$unwind` was unnecessary.  
 
 As well as being handy syntactic sugar, being able to eliminate the first `$unwind` stage had another important benefit: In our test system, an initial search for profiles listing "Austin" in their city field returned 6,763 documents. After joining these with their corresponding mapping documents, they totaled 8.73MB of data. Following the `$unwind` of the mappingData array, this jumped to 34,182 documents and 28.92MB of data. (Remember, all of the fields from the parent profile documents would be duplicated for each "unwound" mapping).
@@ -194,7 +186,6 @@ The second `$unwind` stage in the original pipeline was being used to filter out
 }
 ```
 
-
 When an `$unwind` stage is carried out on an empty array, the default behavior is for the parent document to be removed from the result set. Although this was working as logically intended, the same outcome could be achieved with a simple [$match](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim) operation that was easier to understand:
 
 ```
@@ -206,7 +197,6 @@ When an `$unwind` stage is carried out on an empty array, the default behavior i
   }
 }
 ```
-
 
 With these changes in place, the complete pipeline now looked as follows:
 
@@ -275,7 +265,6 @@ With these changes in place, the complete pipeline now looked as follows:
 ]
 ```
 
-
 One final thing to note in the refactored pipeline was that because we were no longer using any `$unwind` stages, there was no need for the subsequent [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-group--aggregation-) stage to regroup the documents by the original profileID, and so it too had been removed from the pipeline. In fact, any time you see a MongoDB pipeline which includes an `$unwind` stage followed by a `$group` stage that regroups the documents by the original ID, you should be wary. There's usually a more efficient way to do the same operation---often with a [$set](https://www.mongodb.com/docs/manual/reference/operator/aggregation/set/#-set--aggregation-?utm_campaign=devrel&utm_source=third-party&utm_medium=cta&utm_content=Aggregation%20Optimization2&utm_term=graeme.robinson) stage that uses the [$map](https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-map--aggregation-), [$reduce](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-reduce--aggregation-), or [$filter](https://www.mongodb.com/docs/manual/reference/operator/aggregation/filter/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-filter--aggregation-) operators to manipulate the array entries as needed. In our case, without the `$unwind` stages, all that was needed was a `$set` stage to remove unwanted fields (a [$project](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim#-project--aggregation-) stage would also have worked here):
 
 ```
@@ -289,7 +278,6 @@ One final thing to note in the refactored pipeline was that because we were no l
   }
 }
 ```
-
 
 With these changes in place, retesting the performance of the pipeline showed a 60% improvement in both the performance of individual queries and the total time to complete 300 query iterations.
 

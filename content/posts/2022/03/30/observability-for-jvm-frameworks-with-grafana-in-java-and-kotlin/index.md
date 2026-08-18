@@ -28,8 +28,7 @@ frozen: false
 
 Grafana dashboard for all running frameworks
 
-Introduction
-------------
+## Introduction
 
 In times of Cloud and distributed applications, it is becoming more and more important to be able to evaluate a functionality at runtime, an aspect which is referred to as [observability](https://en.wikipedia.org/wiki/Observability).
 
@@ -43,8 +42,7 @@ The article focuses on utilising metrics and provisioning subsystem data to the 
 
 The article explores the configuration and libraries required over the selected frameworks by using two different JVM languages, namely Java and Kotlin.
 
-Sample Scenario
----------------
+## Sample Scenario
 
 For the purposes of this article, a simple application scenario has been created that will be referred to throughout this article.
 
@@ -58,8 +56,7 @@ The code is available on GitHub:
 
 <https://github.com/mirage22/fw-monitoring-examples>
 
-Tools
------
+## Tools
 
 Most probably the best open-source solution that's able to visualize data points is Grafana. **Grafana** allows for the creation of very useful graphical dashboards with the utilization of mathematical and statistical functions. Grafana also provides a very neat alerting system and can be connected with various types of databases, out of the article scope.
 
@@ -75,8 +72,7 @@ Having all parts of the puzzle lined up to get usage data drained from JVM based
 
 * Grafana is designed to visualize metrics from different sources and enforce availability of the data.
 
-Enabling Metrics for Java Frameworks
-------------------------------------
+## Enabling Metrics for Java Frameworks
 
 Popular Java frameworks were selected to represent the Java language in the examples that follow. The following section describes in more detail the initiation of the metrics.
 
@@ -94,14 +90,12 @@ public class PrometheusMeterRegistryProducer {
    public PrometheusMeterRegistry
 ```
 
-
 **Example** 1. Singleton bean instantiation
 
 ```java
 MainController(final PrometheusMeterRegistry registry, final HelloService helloService) {
    this.registry = registry;
 ```
-
 
 **Example 2.** Injecting "PrometheusMeterRegistry" bean and creating counters
 
@@ -119,7 +113,6 @@ public MainController(PrometheusMeterRegistry registry, HelloService helloServic
    this.registry = registry;
 ```
 
-
 **Example 3** . Injecting the "***PrometheusMeterRegistry"*** as a Bean
 
 **3. Micronaut on Java**
@@ -133,11 +126,9 @@ public MainController(PrometheusMeterRegistry registry, HelloService helloServic
    this.registry = registry;
 ```
 
-
 **Example 4.** Injecting "***PrometheusMeterRegistry*** " to the "***MainController***"
 
-Enabling Metrics for Kotlin Frameworks
---------------------------------------
+## Enabling Metrics for Kotlin Frameworks
 
 The following section provides additional details on how to enable metrics for the selected Kotlin frameworks.
 
@@ -165,14 +156,12 @@ fun Application.module(testing: Boolean = false) {
    )
 ```
 
-
 **Example 5** . installation and initiation the "***MetricService***" component
 
 ```kotlin
 val registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
 .apply{config().commonTags("application", APP_NAME)}
 ```
-
 
 **Example 6.** Initiation of the Prometheus registry and providing a reference
 
@@ -189,7 +178,6 @@ class MainController @Inject constructor(
        private val halloService: HalloService)
 ```
 
-
 **Example 7.** Prometheus registry constructor injection
 
 **3. Spring Boot on Kotlin**
@@ -200,7 +188,6 @@ Similar to the spring-boot java version it's required to import both libraries: 
 @RestController("/")
 class MainController(private val helloService: HelloService, private val registry: PrometheusMeterRegistry) {
 ```
-
 
 **Example 8.** Injecting "***PrometheusMeterRegistry"*** in the controller constructor
 
@@ -213,11 +200,9 @@ The initiation of the "***PrometheusMeterRegistry*** " does not differ too much 
 class MainController(private val registry: PrometheusMeterRegistry, private val helloService: HelloService) {
 ```
 
-
 **Example 9**. Injecting registry to the main controller
 
-Creating and Exposing Custom Counters and More
-----------------------------------------------
+## Creating and Exposing Custom Counters and More
 
 Each considered scenario is intended to be very trivial and similar across different frameworks to help for a complete picture of the Micrometer instrumentation wrapper "***Counter"*** class.
 
@@ -243,7 +228,6 @@ name_counter_total{application="spring-boot-kt",name="magic",} 1.0
 name_counter_total{application="micronaut",name="magic",} 1.0
 ```
 
-
 **Example 10.** Example of the metrics output for the custom counters
 
 **1. Java Counters**
@@ -256,7 +240,6 @@ this.helloCounter = registry.counter("hello-counter", "application", "<FRAMEWORK
 this.nameCounterBuilder = Counter.builder("name-counter").tag("application", "<FRAMEWORK_NAME>");
 ```
 
-
 **Example 11**. Counters initiation
 
 ```java
@@ -264,7 +247,6 @@ private Counter getNameCounter(String name) {
    return counters.computeIfAbsent(name, (k) -> nameCounterBuilder.tag("name", k).register(registry));
 }
 ```
-
 
 **Example 12.** Initiate a name counter on demand
 
@@ -278,11 +260,9 @@ counters.getOrPut(name) {
    nameCounterBuilder.tag("name", name).register(registry)}.increment()
 ```
 
-
 **Example 13.**Initiate and increment counters in Kotlin
 
-Visualizing Applications with Docker Compose
---------------------------------------------
+## Visualizing Applications with Docker Compose
 
 By setting up the previous parts we have configured and initiated counters and similar endpoints for each framework.
 
@@ -298,7 +278,6 @@ COPY --from=build /app_build/quarkus-java-monitoring/build/quarkus-app /app
 WORKDIR /app
 CMD ["sh", "-c", "java -jar quarkus-run.jar"]
 ```
-
 
 **Example 14.** Docker file approach, with quarkus example
 
@@ -322,7 +301,6 @@ scrape_configs:
      - targets: [ 'app-micronaut:3802'
 ```
 
-
 **Example 15.** Prometheus jobs configuration refers to the docker-compose file
 
 As a careful reader may have noticed, the names of the targets are referring to the names and ports used inside the docker-file (Example 16.).
@@ -336,13 +314,11 @@ services:
      - "3800:3800"
 ```
 
-
 **Example 16.** Docker-file example of particular node definition (Example 15.)
 
 Now everything is configured and the connection between all considered frameworks, Prometheus and Grafana docker nodes is configured. It is possible to run and play with the data.
 
-Playing with Grafana
---------------------
+## Playing with Grafana
 
 All nodes are up and running (Example 17.)! Now let's generate some traffic in order to be able to observe some actions. Luckily there is one commonly used tool that allows us to generate a continual traffic without much effort.
 
@@ -358,7 +334,6 @@ fw-monitoring-examples_app-micronaut_1
 fw-monitoring-examples_app-ktor_1
 fw-monitoring-examples_app-quarkus-kotlin_1
 ```
-
 
 **Example 17.** Considered containers are up
 
@@ -382,8 +357,7 @@ As has been already mentioned, Grafana provides a very neat environment to work 
 
 **Image 5.** Timeline of requested name endpoints and the customer "**Counter**" provided by each docker node
 
-Conclusion
-----------
+## Conclusion
 
 In this article we have discovered how to expose metrics that provide JVM specific information, which may be helpful and relevant for gaining a closer understanding of the implemented code.
 

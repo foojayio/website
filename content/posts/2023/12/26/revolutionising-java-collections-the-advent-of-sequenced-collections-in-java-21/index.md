@@ -29,8 +29,7 @@ The Java Enhancement Proposal system is a process for proposing, reviewing, and 
 
 JEP 431, in particular, introduces necessary enhancements to the Java Collections Framework, addressing longstanding limitations and expanding its capabilities for us Java developers.
 
-Understanding the Need for JEP 431
-----------------------------------
+## Understanding the Need for JEP 431
 
 Historically, Java's collections framework, while comprehensive, lacked a specific collection type that could represent a sequence of elements with a defined order. This gap was more than a minor inconvenience for some larger projects.
 
@@ -38,8 +37,7 @@ Take, for instance, the List and Deque interfaces -- both define an encounter or
 
 This inconsistent support across the hierarchy made it difficult to express and handle ordered collections uniformly. You'd often face challenges in iterating collections in reverse order or implementing specific operations for ordered collections, leading to inefficient and cumbersome solutions.
 
-Introducing Sequenced Collections with JEP 431
-----------------------------------------------
+## Introducing Sequenced Collections with JEP 431
 
 JEP 431 introduces new interfaces: sequenced collections, sequenced sets, and sequenced maps.
 
@@ -80,9 +78,7 @@ assertEquals("Apple", sequencedCollection.getFirst());
 assertEquals("Cherry", sequencedCollection.getLast());
 ```
 
-
-Sequenced Maps
---------------
+## Sequenced Maps
 
 Sequenced maps represent Map entries with a defined order. This interface introduces methods to get and manipulate entries in a specific sequence, including putting entries at the start or end of the map.
 
@@ -103,21 +99,17 @@ assertEquals("Cherry", sequencedMap.lastEntry().getKey());
 assertEquals(30, sequencedMap.lastEntry().getValue());
 ```
 
-
-Retrofitting and Compatibility
-------------------------------
+## Retrofitting and Compatibility
 
 The retrofitting of these interfaces into existing classes and interfaces like List, Deque, LinkedHashSet, SortedSet, LinkedHashMap, and SortedMap ensures backward compatibility while expanding functionality, an important aspect in a widely used language like Java.
 
-Addressing Risks and Forward Compatibility
-------------------------------------------
+## Addressing Risks and Forward Compatibility
 
 With any significant addition to a language's core features, there are risks and concerns, especially regarding backward compatibility.
 
 JEP 43 introduces methods that are compatible with existing interfaces and carefully considers the impact of new methods high in the inheritance hierarchy.
 
-Conclusion
-----------
+## Conclusion
 
 JEP 431 marks a significant milestone in Java's evolution.
 

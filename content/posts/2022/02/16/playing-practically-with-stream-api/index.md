@@ -45,7 +45,6 @@ var setOfProduct = customer1.getOrders()
        .forEach(System.out::println);
 ```
 
-
 If we want to combine both in one go -
 
 ```
@@ -60,7 +59,6 @@ customer1.getOrders()
     .limit(3)
     .forEach(System.out::println);
 ```
-
 
 **Note**: over here we've used distinct. The reason is, in our first attempt, we have first put the result in Set. The elements of the Set is always unique. In our second attempt, if we don't use distinct, then we will lose the unique property and the result will be different.
 
@@ -96,7 +94,6 @@ var customer1Orders = customer1.getOrders()
         .forEach(System.out::println);
 ```
 
-
 ### Problem 4:
 
 #### Find out customer 1's favorite product. A favorite product is the maximum quantity a customer ordered of a specific product
@@ -117,7 +114,6 @@ productsMap
     .ifPresent(System.out::println);
 ```
 
-
 Or maybe -
 
 ```java
@@ -127,7 +123,6 @@ productsMap
     .max(Map.Entry.comparingByValue())
     .ifPresent(System.out::println);
 ```
-
 
 We can try it in one go -
 
@@ -140,7 +135,6 @@ customer1Orders
     .max(Map.Entry.comparingByValue())
     .ifPresent(System.out::println);
 ```
-
 
 ### Problem 5:
 
@@ -159,7 +153,6 @@ var total = customer1.getOrders().get(0)
 System.out.println(total);
 ```
 
-
 ### Problem 6:
 
 #### Find out all books written by each author
@@ -174,7 +167,6 @@ products.stream()
     .sorted(Map.Entry.comparingByKey())
     .forEach(System.out::println);
 ```
-
 
 The full code in one file can be found [here](https://github.com/mainul35/pondit-b4/blob/main/src/com/pondit/b4/class30_31/StreamPractice.java "here").
 

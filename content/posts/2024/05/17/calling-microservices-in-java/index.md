@@ -56,7 +56,6 @@ public class SimpleServiceCaller {
 }
 ```
 
-
 **Pros:**
 
 * It's simple and doesn't need extra software libraries.
@@ -93,7 +92,6 @@ public class ApacheHttpClientExample {
 }
 ```
 
-
 **Pros:**
 
 * Handles complex HTTP interactions well.
@@ -122,7 +120,6 @@ public class RestTemplateExample {
 }
 ```
 
-
 **Example with WebClient:**
 
 ```
@@ -140,7 +137,6 @@ public class WebClientExample {
     }
 }
 ```
-
 
 **Pros:**
 
@@ -166,7 +162,6 @@ public interface ServiceClient {
     String callService();
 }
 ```
-
 
 **Pros:**
 
@@ -195,7 +190,3 @@ While simple methods are fine for small tasks or when you don't need to call ser
 Follow best practices to ensure your application is robust and performs well.
 
 Happy coding!
-
-<br />
-
-<br />

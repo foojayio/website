@@ -26,8 +26,7 @@ In my [previous article](https://foojay.io/today/a-short-history-of-ajax-and-ssr
 
 I heard a lot of [Vue.js](https://vuejs.org/). Additionally, a friend who transitioned from developer to manager told me good things about Vue, which further piqued my interest. I decided to have a look at it: it will be the first "lightweight" JavaScript framework I'll study - from the point of view of a newbie, which I am.
 
-Laying out the work
--------------------
+## Laying out the work
 
 I explained WebJars and Thymeleaf in the last article. Here's the setup, server- and client-side.
 
@@ -58,7 +57,6 @@ Here is how I integrate both in the POM:
 </dependencies>
 ```
 
-
 1. Spring Boot itself; I decided on the regular, non-reactive approach
 2. Spring Boot Thymeleaf integration
 3. WebJars locator, to avoid specifying the Vue version on the client-side
@@ -73,7 +71,6 @@ fun vue(todos: List<Todo>) = router {                                    //1
     }
 }
 ```
-
 
 1. Pass a static list of `Todo` objects
 2. See below
@@ -102,7 +99,6 @@ Here's the code on the HTML side:
 </script>
 ```
 
-
 1. [Axios](https://axios-http.com/) helps making HTTP requests
 2. Vue itself
 3. Our client-side code
@@ -112,8 +108,7 @@ As explained in last week's article, one of Thymeleaf's benefits is that it allo
 
 ![](vue-static-display.webp)
 
-The Vue code
-------------
+## The Vue code
 
 Now, let's dive into the Vue code.  
 
@@ -137,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {                    //1
 }
 ```
 
-
 1. Run the block when the DOM has finished loading
 
 The next step is to let Vue manage part of the page. On the HTML side, we must decide which top-level part Vue manages. We can choose an arbitrary `<div>` and change it later if need be.
@@ -147,13 +141,11 @@ The next step is to let Vue manage part of the page. On the HTML side, we must d
 </div>
 ```
 
-
 On the JavaScript side, we create an *app* , passing the CSS selector of the previous HTML `<div>`.
 
 ```javascript
 Vue.createApp({}).mount('#app');
 ```
-
 
 At this point, we launch Vue when the page loads, but nothing visible happens.
 
@@ -167,7 +159,6 @@ Let's start with a root template that can display the title.
 </template>
 ```
 
-
 1. Set the ID for easy binding
 2. Use the `title` property; it remains to be set up
 
@@ -179,7 +170,6 @@ const TodosApp = {
     template: document.getElementById('todos-app').innerHTML,
 }
 ```
-
 
 1. Declare the `title` property, the one used in the HTML template
 
@@ -195,7 +185,6 @@ Vue.createApp({
     }
 }).mount('#app');
 ```
-
 
 1. Configure the component
 2. Vue expects the `render()` function
@@ -219,7 +208,6 @@ const TodoLine = {
 }
 ```
 
-
 ```html
 <template id="todo-line">
     <tr>
@@ -234,7 +222,6 @@ const TodoLine = {
 </template>
 ```
 
-
 1. Display the `Todo` id
 2. Display the `Todo` label
 3. Check the box if its `completed` attribute is `true`
@@ -244,7 +231,6 @@ Vue allows event handling via the `@` syntax.
 ```html
 <input type="checkbox" :checked="todo.completed" @click="check" />
 ```
-
 
 Vue calls the template's `check()` function when the user clicks on the line. We define this function in a `setup()` parameter:
 
@@ -264,7 +250,6 @@ const TodoLine = {
     }
 }
 ```
-
 
 1. Accept the `props` array, so we can later access it
 2. Vue passes the `event` that triggered the call
@@ -288,7 +273,6 @@ We now know how to handle events via Vue:
 <button class="btn btn-warning" @click="cleanup">Cleanup</button>
 ```
 
-
 On the `TodosApp` object, we add a function of the same name:
 
 ```javascript
@@ -306,7 +290,6 @@ const TodosApp = {
     }
 }
 ```
-
 
 1. As above
 2. Axios offers automated JSON conversion of the HTTP call
@@ -343,7 +326,6 @@ createApp({
 }).mount('#app');
 ```
 
-
 1. Get the data set in the HTML page, via Thymeleaf, as explained above
 2. We change the way we set the `title`. It's not necessary since there's no two-way binding - we don't update the title client-side, but I prefer to keep the handling coherent across all values
 3. Return the refs, as per Vue's expectations
@@ -359,7 +341,6 @@ On the HTML side, we use the relevant Vue attributes:
   <tr is="vue:todo-line" v-for="todo in todos" :key="todo.id" :todo="todo"></tr> <!--1-2-->
 </tbody>
 ```
-
 
 1. Loop over the list of `Todo` objects
 2. The `is` attribute is crucial to cope with the way the browser parses HTML. See [Vue documentation](https://vuejs.org/api/built-in-special-attributes#is) for more details
@@ -396,7 +377,6 @@ const TodosApp = {
 }
 ```
 
-
 1. Create a reactive wrapper around the title whose scope is limited to the function
 2. The `create()` function proper
 3. Append the new JSON object returned by the API call to the list of `Todo`
@@ -419,13 +399,11 @@ On the HTML side, we add a button and bind to the `create()` function. Likewise,
 </form>
 ```
 
-
 Vue binds the `create()` function to the HTML button. It does call it asynchronously and refreshes the reactive `Todo` list with the new item returned by the call. We do the same for the *Cleanup* button, to remove checked `Todo` objects.
 
 Note that I didn't intentionally implement any error-handling code to avoid making the code more complex than necessary. I'll stop here as we gained enough insights for a first experience.
 
-Conclusion
-----------
+## Conclusion
 
 In this artic;e, I took my first steps in augmenting an SSR app with Vue. It was pretty straightforward. The biggest issue I encountered was for Vue to replace the line template: I didn't read the documentation extensively and missed the `is` attribute.
 
@@ -438,7 +416,5 @@ The complete source code for this article can be found on [GitHub](https://githu
 **Go further:**
 
 * [Vue.js](https://vuejs.org/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/3/) on September 22^nd^, 2024*

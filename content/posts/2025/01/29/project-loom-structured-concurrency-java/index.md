@@ -34,8 +34,6 @@ The structured concurrency feature was first introduced as an incubator in [JEP-
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-115435" src="SC-700x394.jpg" alt="Structured Concurrency" width="700" height="394">
 
-<br />
-
 To effectively explore structured concurrency, one must grasp several fundamental concepts, including:
 
 * **Concurrency:** This refers to a system that can handle multiple tasks at the same time, where tasks may not operate in parallel but can progress independently.
@@ -73,8 +71,6 @@ In a nutshell, *Structured Concurrency occurs when a primary task divides into m
 The structured concurrency API includes the primary class *StructuredTaskScope* , which resides in the `java.util.concurrent` package.
 
 <img decoding="async" class="size-medium wp-image-115436" src="SC1-700x394.jpg" alt="StructuredTaskScope" width="700" height="394">
-
-<br />
 
 **Overview of the StructuredTaskScope Class Utilization**
 
@@ -166,7 +162,6 @@ public class StructuredConcurrencyDemo {
 }
 ```
 
-
 ```
 Executing processShutdownOnSuccessTasks...
 Task Three started.
@@ -185,7 +180,6 @@ Results: Task 1 = 20, Task 2 = 30, Task 3 = 40
 All tasks completed successfully.
 ```
 
-
 * `ShutdownOnSuccess` **focuses on the first successful result**.
 * `ShutdownOnFailure` ensures that **all tasks are complete unless one fails**.
 
@@ -202,7 +196,6 @@ We can debug StructuredTaskScope and its forked tasks using the `jcmd` command
 jcmd <PID> Thread.print -format=json
 ```
 
-
 Steps to follow
 
 * Run `SturcuturedTaskScope` Java application
@@ -216,8 +209,7 @@ Steps to follow
 * **Resource Safety:** The system automatically cleans up tasks and their resources when the process finishes.
 * **Predictability:** The connection between parent and child tasks ensures that no task continues running in the background.
 
-Conclusion
-----------
+## Conclusion
 
 * **Simplified Task Management:** Structured concurrency organizes tasks in a clear hierarchy, ensuring that all smaller tasks finish or stop when the main task is done.
 
@@ -235,8 +227,7 @@ Conclusion
 
 *Structured concurrency* encourages clean, predictable, and safer patterns in concurrency, marking an important step forward for Java developers.
 
-References
-----------
+## References
 
 * <https://openjdk.org/jeps/428>
 * <https://openjdk.org/jeps/453>
@@ -246,5 +237,3 @@ References
 * <https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/StructuredTaskScope.html>
 
 Happy Reading and Learning!
-
-<br />

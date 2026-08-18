@@ -22,8 +22,7 @@ frozen: false
 
 **Sonatype have just released the 9th edition of their [State of the Software Supply Chain Report](https://www.sonatype.com/state-of-the-software-supply-chain/introduction). It delves into the landscape of open source, software development, and software supply chain security. I thought I'd pull out some highlights for Java Developers!**
 
-Software Supply Chains and Open Source
---------------------------------------
+## Software Supply Chains and Open Source
 
 #### Maven Central hits 1 Trillion downloads
 
@@ -57,8 +56,7 @@ It's not all doom and gloom though - there are signs that we're acknowledging th
 
 [Chapter 2's Open Source Security Practises](https://www.sonatype.com/state-of-the-software-supply-chain/open-source-security-practices "Chapter 2’s Open Source Security Practises ")explains more about what the OpenSSF and others have been doing to help us all in this area.
 
-Software Supply Chain Maturity
-------------------------------
+## Software Supply Chain Maturity
 
 While the efforts of the OpenSSF and other organizations are a welcome aid in helping with dependency management to some extent that ship has sailed.
 
@@ -103,8 +101,7 @@ Read more here:
 2. [Eclipse Foundation](https://eclipse-foundation.blog/2023/01/15/european-cyber-resiliency-act-potential-impact-on-the-eclipse-foundation/ "Eclipse Foundation")
 3. [Linux Foundation](https://linuxfoundation.eu/cyber-resilience-act "Linux Foundation")
 
-Generative AI is here
----------------------
+## Generative AI is here
 
 The recent explosion of generative AI on the scene can't be ignored and obviously it is having an impact on software development across the board.
 
@@ -122,8 +119,7 @@ Although we might consider that we're still climbing the hype curve it seems tha
 
 If you're concerned about AI taking over your job your not alone - 18% of those surveyed had the same worry. However, it seems that using these tools as part of your role makes you more productive and more valuable.
 
-Summary
--------
+## Summary
 
 Sonatype's state of the [software supply chain](https://www.sonatype.com/state-of-the-software-supply-chain/introduction "software supply chain") is a yearly eye-opener for the industry. It clear that this year, more than ever before, our world is starting to change.
 

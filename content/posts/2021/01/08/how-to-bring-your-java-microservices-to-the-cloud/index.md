@@ -84,15 +84,9 @@ Cloud computing has brought many methodologies and techniques that have revoluti
 Like any new concept, there are several concepts with the same name; if you read books or articles about cloud-native, you may not find consensus about it. For example:
 > *"Cloud-native is an approach to building and running applications that exploits the advantages of the cloud computing model."* --- [From Pivotal](https://pivotal.io/de/cloud-native)
 
-<br />
-
 > *"Cloud-native is a different way of thinking and reasoning about software systems. It embodies the following concepts: powered by disposable infrastructure, composed of bounded, scales globally, embraces disposable architecture."* --- [Architecting Cloud Native Applications: Design high-performing and cost-effective applications for the cloud.](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
 
-<br />
-
 > *"In general usage, 'cloud-native' is an approach to building and running applications that exploits the advantages of the cloud-computing delivery model. 'Cloud-native' is about how applications are created and deployed, not where."* --- [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
-
-<br />
 
 In a mutual consensus around the definitions from several articles, we can say that cloud-native is a term used to describe container-based environments. So cloud-native isn't related to specific programming languages or frameworks or even to a cloud provider company, but to containers.
 

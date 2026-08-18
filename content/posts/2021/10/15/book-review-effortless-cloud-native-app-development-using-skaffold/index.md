@@ -24,8 +24,6 @@ frozen: false
 
 In "[Effortless Cloud-Native App Development Using Skaffold](https://www.packtpub.com/product/effortless-cloud-native-app-development-using-skaffold/9781801077118)", Ashish Choudhary provides a thorough overview of [Skaffold](https://skaffold.dev/), with the book's subtitle clearly defining its agenda: "Simplify the development and deployment of Cloud-native SpringBoot applications on Kubernetes with Skaffold".
 
-<br />
-
 * Section 1, "The Kubernetes Nightmare -- Skaffold to the Rescue", promises to describe "the pain and suffering of developing an application with Kubernetes", with Skaffold as the solution to help in automating the building, pushing, and deployment of applications running on Kubernetes.  
   * In **chapter 1** , "Code, Build, Test, and Repeat -- The Application Development Inner Loop", the author explains what the "application development inner loop" is, as well as the inner versus outer development loops, together with an exploration of the traditional application development inner loop in contrast to the container-native application development inner loop. All this is discussed in the context of JRebel and SpringBoot, with their related tools and technologies.  
 

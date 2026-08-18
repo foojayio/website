@@ -22,20 +22,16 @@ frozen: false
 
 ![Native Java Win32, 3D Gaming, Printing and Wallet](https://www.codenameone.com/blog/weekly.jpg)
 
-<br />
-
 This week we're introducing native Windows support (no JVM!), a 3D graphics API, a gaming API, support for Apple Wallet, printing and more in what is probably our biggest update ever... But that's not the thing that excites me the most.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-The thing that excites me the most
-----------------------------------
+## The thing that excites me the most
 
 I won't tease you about this too much. The thing that excited me the most this week is [this new article by Francesco Galgani introducing Codename One](https://www.baeldung.com/java-codename-one-cross-platform), published on Baeldung. Beyond the great writing and form, the excitement is about the community: the way you're all using Codename One and helping us build it. The issues, the tracking, and the enthusiasm about upcoming features, like [this one](https://github.com/codenameone/CodenameOne/issues/5215) where a request to consolidate documentation chapters opens with a triple thank-you for the game development API before it even gets to the point.
 
 Again, thank you all for being a part of this. We literally wouldn't be doing this without you!
 
-What shipped this week
-----------------------
+## What shipped this week
 
 Version 7.0.251 is live, and the four big items each get a full tutorial over the next few days. Here is a deeper look at what's coming.
 
@@ -64,11 +60,8 @@ public void onFrame(GraphicsDevice device) {
 }
 ```
 
-
 And it isn't limited to primitives. A binary glTF model authored in any 3D tool loads with one call and renders with its own textures. This is the Khronos BoomBox sample model rendering on the native Mac target:
 ![A glTF model rendered by the portable 3D API on the native Mac target](https://www.codenameone.com/blog/portable-3d-graphics-api/boombox-mac.png)
-
-<br />
 
 On iOS the vertex buffers are SIMD-aligned so the data is handed to Metal with no copy in between. The `RenderView` hosting all of this is a regular component, so a 3D view drops into a normal form next to buttons and text. We walk through the whole API in .
 
@@ -91,11 +84,8 @@ protected void update(double dt) {
 }
 ```
 
-
 No render code in sight: the linked sprites track their physics bodies and the scene draws itself. Here it is running in the simulator:
 ![The gaming API physics demo, Box2D bodies driving sprites](https://www.codenameone.com/blog/game-development-api-box2d/gaming-demo.gif)
-
-<br />
 
 The physics engine is JBox2D repackaged under `com.codename1.gaming.physics.box2d`, with an idiomatic wrapper that keeps your code in screen pixels and hides the meters and the flipped y-axis. Because everything is pure Java where it matters, it runs unchanged on every target, including iOS. For years we said no to gaming APIs in Codename One; also explains what changed our mind.
 
@@ -106,8 +96,6 @@ The new Windows target translates your Java/Kotlin bytecode to C through ParparV
 
 To be clear about what this is, because "Java on Windows" carries old associations: there is no Swing here, no AWT, no JavaFX, and no bundled runtime. It is the full Codename One framework compiled to native code, and everything in it works there, including the new printing API and the 3D layer. This is the same app from the same code base, rendered by Direct2D and DirectWrite on Windows:
 ![A Codename One app rendering natively on Windows via Direct2D](https://www.codenameone.com/blog/native-windows-port-no-jvm/chatview-windows.png)
-
-<br />
 
 People have been asking how to turn Java into a real `.exe` since the late nineties, and the modern answer, GraalVM, is a tool designed for a different purpose. The architecture, the history, and how this completes the native desktop story the Mac target started are all in .
 
@@ -125,7 +113,6 @@ if (Printer.isPrintingSupported()) {
 }
 ```
 
-
 And card issuers can now let users add cards to Apple Wallet from inside the Wallet app itself. The iOS build generates Apple's issuer-provisioning extension pair from build hints, with zero native code on your side:
 
 ```
@@ -134,18 +121,15 @@ ios.wallet.appGroup=group.com.mybank.app
 ios.wallet.issuerEndpoint=https://api.mybank.com/wallet/provision
 ```
 
-
 Your app publishes its card list through the new `WalletExtension` API and the extension picks it up from the shared App Group. Both features get the full treatment in .
 
-Behind the scenes: the build cloud was rebuilt
-----------------------------------------------
+## Behind the scenes: the build cloud was rebuilt
 
 Codename One was founded in 2012, when Docker was still a "new thing", and a lot of the infrastructure we built back then was duct-taped together as we were working in startup mode. A big part of this week's work happened at that infrastructure level: the build servers underwent a major rebuild and re-architecture, and more is going on there than is apparent from the outside.
 
 We're telling you this so you're prepared: if a build behaves differently or something breaks where it didn't before, please let us know right away through the [issue tracker](https://github.com/codenameone/CodenameOne/issues) so we can fix it quickly. The goal of all this is a faster, more maintainable build cloud, and the transition is the risky part.
 
-Simulator UX improvements
--------------------------
+## Simulator UX improvements
 
 [PR #5211](https://github.com/codenameone/CodenameOne/pull/5211) reworks the simulator chrome around several long-standing annoyances:
 
@@ -154,18 +138,15 @@ Simulator UX improvements
 * **The standalone simulator is the default.** The plain device window is what you get out of the box; the multi-panel app frame is still available through the Single Window Mode preference, and explicit settings are honored.
 * **The menus make sense.** The confusing Simulator vs Simulate split is gone: the device and its window live under one menu, simulated device state (location, push, biometrics, dark mode) under another, and developer tools under Tools.
 
-A verification problem that was very hard to track
---------------------------------------------------
+## A verification problem that was very hard to track
 
 [PR #5216](https://github.com/codenameone/CodenameOne/pull/5216) fixes a bug in the build pipeline's bytecode compliance check that could silently lose its API rewrites when classes were recompiled with unchanged sources. The symptom was an iOS build failing deep inside Xcode with an error about an undeclared `String.replaceAll` function, and the only recovery was wiping the build directory. The check now detects recompiled classes and re-runs, and a failed check can no longer be skipped on the next build. If you ever hit that mystery error locally, this was it.
 
-UIScene apps start up smoother
-------------------------------
+## UIScene apps start up smoother
 
 [PR #5218](https://github.com/codenameone/CodenameOne/pull/5218) fixes the black flash at iOS app launch that arrived with the UIScene default. iOS wasn't rendering the launch storyboard for scene-based apps, and the render surface was empty until the first form painted. The build now generates the modern launch-screen configuration and the native code covers the hand-off with a placeholder that matches the launch screen exactly, fading into the first form. The result: icon tap, launch screen, invisible hand-off, first form, with no black at any point. If you need the old behavior, the `ios.launchPlaceholder=false` build hint opts out.
 
-Pin the browser appearance on iOS
----------------------------------
+## Pin the browser appearance on iOS
 
 Embedded web views on iOS follow the device's light/dark appearance, and since the UIScene transition the app-wide plist override stopped affecting them. [PR #5203](https://github.com/codenameone/CodenameOne/pull/5203) adds a per-component property to pin it:
 
@@ -173,11 +154,9 @@ Embedded web views on iOS follow the device's light/dark appearance, and since t
 browser.setProperty(BrowserComponent.BROWSER_PROPERTY_INTERFACE_STYLE, "light");
 ```
 
-
 Valid values are `light`, `dark`, and `auto`. It's safe to call in the constructor; the property is applied when the native peer is ready.
 
-Upcoming attractions
---------------------
+## Upcoming attractions
 
 Four tutorials follow this post, one per day; each link below goes live on its day:
 
@@ -186,7 +165,6 @@ Four tutorials follow this post, one per day; each link below goes live on its d
 * **Monday.** . PRs [#5144](https://github.com/codenameone/CodenameOne/pull/5144), [#5209](https://github.com/codenameone/CodenameOne/pull/5209).
 * **Tuesday.** . PRs [#5217](https://github.com/codenameone/CodenameOne/pull/5217), [#5227](https://github.com/codenameone/CodenameOne/pull/5227).
 
-Wrapping up
------------
+## Wrapping up
 
 The issue tracker is [here](https://github.com/codenameone/CodenameOne/issues) and it is the best place to reach us right now. The discussion forum is [here](https://www.codenameone.com/discussion-forum.html), and the Build Cloud console is at [`/console/`](https://cloud.codenameone.com/console/index.html). The [Playground](https://www.codenameone.com/playground/), [Initializr](https://www.codenameone.com/initializr/), and [Skin Designer](https://www.codenameone.com/skindesigner/) are where they have always been.

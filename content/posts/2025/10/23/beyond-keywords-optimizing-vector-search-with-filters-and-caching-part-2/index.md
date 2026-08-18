@@ -34,8 +34,7 @@ This is the second part of a **three-part series** where we're building a movie 
 
 The full source code for this part is available on [GitHub](https://github.com/mongodb-developer/spring-data-mongodb-hybrid-search).
 
-Adding filters: From story to code
-----------------------------------
+## Adding filters: From story to code
 
 Imagine this: You've just finished building your shiny new semantic movie search. You type "a science fiction movie about rebels fighting an empire in space" and---boom---*Star Wars* pops up. Success!
 
@@ -49,7 +48,6 @@ At this point, our application can only take a **query string**:
 public record MovieSearchRequest(String query) {}
 ```
 
-
 So we need to evolve. First, let's extend the request with a minIMDbRating field to capture this new requirement:
 
 ```
@@ -61,7 +59,6 @@ public record MovieSearchRequest(
 
 ) {}
 ```
-
 
 ### First try: Add a post-filter in MovieService
 
@@ -88,7 +85,6 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 }
 ```
 
-
 Now try it:
 
 ```
@@ -100,7 +96,6 @@ Content-Type: application/json
  "minIMDbRating": 9
 }
 ```
-
 
 When you run this query against our dataset, you'll notice***it returns nothing***. Why?
 
@@ -136,7 +131,6 @@ To implement the pre-filter, the first step is to update our **MongoDB** **Atlas
 }
 ```
 
-
 Once the index finishes updating, we can adjust our code. In the searchMovies method, remove the MatchOperation and apply the filter directly in the VectorSearchOperation:
 
 ```
@@ -156,7 +150,6 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 }
 ```
 
-
 Now, when you run the same request, the filter is applied first, and only then similarity is computed, returning results that already satisfy the IMDb rating constraint.
 
 ```
@@ -169,7 +162,6 @@ Now, when you run the same request, the filter is applied first, and only then s
  ...
 }
 ```
-
 
 To learn more about pre-filters, check out the[official documentation](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=optimizing-vector-search-foojay&utm_term=tony.kim#atlas-vector-search-pre-filter).
 
@@ -191,7 +183,6 @@ public record MovieSearchRequest(
       boolean excludeGenres
 ) {}
 ```
-
 
 To make the filters actually work, we need a way to translate the request fields into a MongoDB query. For this, our MovieSearchRequest record implements a toCriteria() method. Here is the complete MovieSearchRequest code:
 
@@ -266,7 +257,6 @@ public record MovieSearchRequest(
 }
 ```
 
-
 **In short:** The request validates which filters are present---if any are set, it builds a criteria combining them; if not, it returns an empty criteria, meaning no filters are applied.
 
 ### Applying toCriteria() in the search
@@ -289,7 +279,6 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
    ).getMappedResults();
 }
 ```
-
 
 After these modifications, the last step is to include the additional filter fields (such as year and genres) in your MongoDB Atlas Vector Search index definition:
 
@@ -318,7 +307,6 @@ After these modifications, the last step is to include the additional filter fie
 }
 ```
 
-
 Once the index finishes building, these filters will be ready to use in your queries. For example:
 
 ```
@@ -339,7 +327,6 @@ Content-Type: application/json
 }
 ```
 
-
 You should see a similar result:
 
 ```
@@ -358,9 +345,7 @@ You should see a similar result:
 }
 ```
 
-
-Reducing embedding costs with caching
--------------------------------------
+## Reducing embedding costs with caching
 
 When testing the search endpoint, you might notice that embeddings are generated every single time, even if the query text doesn't change. For example, if you keep searching for...
 
@@ -377,7 +362,6 @@ When testing the search endpoint, you might notice that embeddings are generated
 }
 ```
 
-
 ...and then repeat the same query but change only the filters (genres, year, minIMDbRating), the log still shows embeddings being generated:
 
 ```
@@ -386,7 +370,6 @@ When testing the search endpoint, you might notice that embeddings are generated
 2025-09-04T11:48:52.438-03:00  INFO 27180 --- [nio-8080-exec-2] com.mongodb.EmbeddingService             : Generating embeddings ..
 2025-09-04T11:48:52.737-03:00  INFO 27180 --- [nio-8080-exec-2] com.mongodb.EmbeddingService             : Embeddings generated successfully!
 ```
-
 
 But here's the thing: **If the query text doesn't change, there's no need to regenerate the embeddings**. The conversion is deterministic, the same text always produces the same vector.
 
@@ -407,7 +390,6 @@ public List<Double> embedQuery(
 }
 ```
 
-
 And finally, don't forget to enable it in your Spring Boot application class.
 
 ```
@@ -427,7 +409,6 @@ public class SpringDataMongodbHybridSearchApplication
 }
 ```
 
-
 After enabling caching, run a few searches in a row with the same query text but different filters (genres, year, minIMDbRating). You'll notice that the log message appears only the first time.
 
 ```
@@ -435,11 +416,9 @@ After enabling caching, run a few searches in a row with the same query text but
 2025-09-04T11:50:05.086-03:00  INFO 27322 --- [nio-8080-exec-1] com.mongodb.EmbeddingService             : Embeddings generated successfully!
 ```
 
-
 **In short:** Caching embeddings prevents redundant API calls, saves cost, and improves response time without changing your search logic. For production, there are more advanced ways to manage caching (e.g., distributed caches, eviction policies). Here, we're just showing a simple idea to illustrate the concept.
 
-A minimal frontend
-------------------
+## A minimal frontend
 
 Before wrapping up, let's add a very simple frontend. The goal here is **not** to focus on UI or design, but just to provide a way to test our API in the browser. I'll leave a small example in HTML, JavaScript, and CSS. Feel free to adapt it and build a nicer page if you'd like.
 
@@ -455,15 +434,13 @@ Download the script.js file from [this repository](https://github.com/mongodb-de
 
 Finally, download the styles.css file from [this repository](https://github.com/mongodb-developer/spring-data-mongodb-hybrid-search/blob/main/src/main/resources/static/styles.css)and place it in the same folder.
 
-Running the frontend
---------------------
+## Running the frontend
 
 ### Step 1: Start the application
 
 ```
 mvn spring-boot:run
 ```
-
 
 ### Step 2: Open the application
 
@@ -477,8 +454,7 @@ With the backend already running, simply open http://localhost:8080 in your brow
 Then, click to view movie details.
 ![](Screenshot-2025-10-13-at-12.52.44-PM.png)
 
-Wrapping up
------------
+## Wrapping up
 
 In this second part, we explored how to use pre-filters in MongoDB Atlas Vector Search to make queries more efficient, and we looked at strategies to save resources by avoiding unnecessary embedding generation with caching.
 

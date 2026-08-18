@@ -65,7 +65,6 @@ default MutableIntSet symmetricDifference(IntSet set)
 }
 ```
 
-
 ### Symmetric Difference --- Usage
 
 ```java
@@ -80,10 +79,7 @@ public void symmetricDifference()
 }
 ```
 
-
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractImmutablePrimitiveSetTestCase.stg#L387).
-
-
 
 ### Is Subset of --- What does this operation do?
 
@@ -110,7 +106,6 @@ default boolean isSubsetOf(IntSet set)
 }
 ```
 
-
 ### Is Subset of --- Usage
 
 ```java
@@ -127,10 +122,7 @@ public void isSubsetOf()
 }
 ```
 
-
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L615).
-
-
 
 ### Is Proper Subset of --- What does this operation do?
 
@@ -146,7 +138,6 @@ default boolean isProperSubsetOf(IntSet set)
     return this.size() < set.size() && set.containsAll(this);
 }
 ```
-
 
 ### Is Proper Subset of --- Usage
 
@@ -164,10 +155,7 @@ public void isProperSubsetOf()
 }
 ```
 
-
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L655).
-
-
 
 ### Cartesian Product --- What does this operation do?
 
@@ -197,7 +185,6 @@ public LazyIterable<IntIntPair> cartesianProduct(IntSet set)
 }
 ```
 
-
 Below code is the underlying `cartesianProduct` implementation.
 
 ```java
@@ -209,7 +196,6 @@ public static <A, B, C> LazyIterable<C> cartesianProduct(IntSet set1, IntSet set
                     .collect(second -> function.value(first, second)));
 }
 ```
-
 
 ### Cartesian Product --- Usage
 
@@ -229,11 +215,6 @@ public void cartesianProduct()
 }
 ```
 
-
 Test cases covering various scenarios can be found [here](https://github.com/eclipse/eclipse-collections/blob/75b93337df25915794d613c216042c36df6f0be3/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L695).
 
-
-
 *I am a committer for the* [*Eclipse Collections*](https://github.com/eclipse/eclipse-collections)*OSS project at Eclipse Foundation.* [*Eclipse Collections*](https://github.com/eclipse/eclipse-collections)*is open for contributions*and if you like our library, let us know by starring our GitHub repository.
-
-<br />

@@ -43,7 +43,6 @@ public class SumNumbers {
 }
 ```
 
-
 We're going to count to 1 Million by adding 1 to 0 a million times. A very simple program.
 
 So, what is happening when this program is run? First, the Java code is compiled into bytecode. In essence, the `javac` command is run to compile the Java source into Java bytecode, then the bytecode is executed using the JVM.
@@ -54,7 +53,6 @@ The performance timing of this is interesting (for reference, I'm running OpenJD
 time javac SumNumbers.java
 ```
 
-
 I get this result:
 
 ```
@@ -62,7 +60,6 @@ real 0m0.762s
 user 0m1.432s
 sys 0m0.042s
 ```
-
 
 These Linux timings can be a bit confusing. The `real` time is the total amount of time "from the start to the finish of the call." The `user` time appears to include the time I spent pressing the "Enter" key and the time that was taken for the result to be displayed on my console. The `sys` time is the amount of CPU time that was spent in Kernel mode. From these descriptions, I think the `real` time is what developers will be most interested in, when we're thinking about cloud applications. We don't have a developer press "Enter" every time a customer accesses our application.
 
@@ -75,7 +72,6 @@ So, what's in `SumNumbers.class`? We can see this by executing the following com
 ```
 javap -c SumNumbers
 ```
-
 
 Here's what we see:
 
@@ -91,13 +87,11 @@ We can run the Java bytecode that `javac` produced using the following command:
 java SumNumbers
 ```
 
-
 When the `java` command sees no file extension, it looks for a file that ends with the extension `.class`; so that command runs the `SumNumbers.class` bytecode file. Here's the timing we see from doing that on my Linux system:
 
 ```
 time java SumNumbers
 ```
-
 
 ```
 The total sum is 1000000
@@ -106,7 +100,6 @@ real	0m0.088s
 user	0m0.098s
 sys	0m0.017s
 ```
-
 
 So, we see that the time to execute the bytecode for this simple program is a small fraction of the time to compile it using `javac`.
 

@@ -23,14 +23,12 @@ Here is the last overview of the JavaFX LinksOfTheMonth for 2024. You can find t
 
 Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core
-----
+## Core
 
 * The OpenJFX project is [looking for UI designers and developers for a new modern theme](https://mail.openjdk.org/pipermail/openjfx-dev/2024-December/051222.html): "*Ideally, this is more than a "Modena 2025" refresh. I completely agree that this is a big project, and it requires talented people to pull it off. However, there are talented UI designers and developers in the JavaFX community. I hope this will start a discussion on how a modern JavaFX user experience can look like, and how we'd be able to achieve it.*"
 * [**Johan Vos** shared](https://mastodon.social/@johanvos/113630372338659041): "*Progress. This is a screenshot from the XCode console, output from an iPhone. HelloWorld.java on iOS using hotspot (zero interpreter mode). Finally back to the point reached by the great **Bob Vandette** many years ago. Need to anchor this.*"
 
-Applications
-------------
+## Applications
 
 * [**BJ Dela Cruz** on LinkedIn](https://www.linkedin.com/posts/bj-delacruz_javafx-java-programmingisfun-activity-7270631777281486849-tAoR/): "*My HEX Viewer application is nearly done! ⭐️ Users can edit a file at a byte or bit level, and the last screenshot shows the changes after they have been saved. Note that the MD5 and SHA256 hashes will be different once the file is saved.* " You can find the [sources on Bitbucket](https://bitbucket.org/bjpeterdelacruz/hex-viewer/src/main/).
 * [**Patrik Karlström** released CRIC 24.12](https://bsky.app/profile/trixon.se/post/3lcqdymorck2x): "*Custom Runtime Image Creator, a gui for the jlink command. It produces custom runtime images, kind of Java Runtime Environments. Starting with this release, the snap supports classic confinement. Enjoy!* " You can find the [releases and source on GitHub](https://github.com/trixon/cric/releases/tag/v24.12).
@@ -38,13 +36,11 @@ Applications
 * [**Sean Phillips**](https://bsky.app/profile/seanmiphillips.bsky.social/post/3ldbhwnymi22l): "*New full [release for the Trinity XAI analysis tool](https://github.com/trinity-xai/Trinity/releases/tag/v2024.12.13) just in time for the holiday season 💙. Thanks again to [**Samypr100**](https://github.com/samypr100) for his build wizardry!*"
 * [**Patrik Karlström**](https://bsky.app/profile/trixon.se/post/3ldbewsqm7s2f): "*Say hello to [nbRsync 24.12](https://github.com/trixon/nbRsync/releases/tag/v24.12)! 🎆 It's a GUI for rsync written in Java \& JavaFX atop the NetBeans Platform. nbRsync has a built-in scheduler that manages backups in a cron like fashion. AppImage for Linux is available too.*"
 
-Games
------
+## Games
 
 * [**Mark J. Koch**](https://bsky.app/profile/markjkoch.bsky.social/post/3lcdxjbcazs24): "*Making some small progress on dialogs for my next point and click adventure called 'Chiba City Blues'. It's an unauthorized remake of Neuromancer Commodore/PC (1988/1989). Same game content, new engine and new artwork. 100% open source. So much to still do.*"
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * Ongoing work by **Dirk Lemmermann** on GemsFX:
   * "*[Just released a new control inside GemsFX 2.69.0](https://bsky.app/profile/dlemmermann.bsky.social/post/3lcdka4kqyc2b) that will allow you to toggle between a wrapped node of your application (e.g. a list view) and a progress indicator (when loading / refreshing data). Quite handy. I use it all the time.*"
@@ -56,8 +52,7 @@ Components, Libraries, Tools
   * [PART 13](https://bsky.app/profile/p-duke.bsky.social/post/3lddzex7j7c2i): "*New LIGHT and DARK styles for ToolBar and DatePicker, including a "light" variation for ToolBar.*"
   * "*The release is getting close. Still missing but already partially implemented: ListView, TreeView, TableView and TableTreeView.*"
 
-Podcasts, Videos, Books
------------------------
+## Podcasts, Videos, Books
 
 * New JFXInAction interviews by **Frank Delporte** :
   * In episode 11 he talks with **Almas Baim** about FXGL, a library that helps us create JavaFX games. But it's much more than games! With the integrated Goal-Oriented Action Planning (GOAP) functionality, it can use game technology and AI to solve any goal, based on actions and preconditions. In the video, Almas [live codes such a solution with a minimal amount of code](https://webtechie.be/post/2024-12-05-jfxinaction-almas-baim/)!
@@ -66,15 +61,13 @@ Podcasts, Videos, Books
 * The third edition of "*The [Definitive Guide to Modern Java Clients with JavaFX](https://www.amazon.com/Definitive-Guide-Modern-Clients-JavaFX/dp/B0DFP9PY1T): Cross-Platform Mobile and Cloud Development Updated for JavaFX 21 and 23* " is now available. 644 pages of JavaFX brought to you by **Stephen Chin** , **Johan Vos** , and **James Weaver**.
 * The talk by **Frank Delporte** and his son **Vik** about the MelodyMatrix application, at the JFall conference in November, got published: "*[Looking at Music: an experiment with Kotlin, JavaFX, MIDI, and VirtualThreads](https://www.youtube.com/watch?v=bwc8Y3qnduo)*"
 
-Tutorials
----------
+## Tutorials
 
 * **Muhammed Afsal Villan** created a [livestream tutorial on YouTube](https://www.youtube.com/live/mWXTf27RmWc): "*JavaFX with Spring AI. Building a real LLM-based AI Assistant from Scratch.* " The accompanying code [is available on GitHub](https://github.com/afsalashyana/javafx-ai-assistant).
 * [**polypragmatist** shared](https://bsky.app/profile/polypragmatist.bsky.social/post/3lcxlt4izw226): "*I've just published what I believe to be the most comprehensive guide to styling the JavaFX TableView available. [This guide includes some tutorials](https://www.pragmaticcoding.ca/javafx/elements/styling-guide-tableView) plus a complete (I think) catalogue of TableView CSS selectors.*"
 * [**Radhika Vyas** on index.dev](https://www.index.dev/blog/how-to-build-java-gui-application): "*The Best Way to Build a Java GUI Application: A Step-by-Step Guide*"
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**Maciej Gorywoda** shared on Bluesky](https://bsky.app/profile/makingthematrix.github.io/post/3lc3bi4z2vk26): "*This is my BSky account if anyone was interested in talking about JavaFX on Android. In fact, I have a whole [repository of examples](https://github.com/makingthematrix/scalaonandroid)*."
 * [Coding tip by **Johan Vos**](https://bsky.app/profile/johanvos.bsky.social/post/3lc3b5tmnwk2u): "*[VisualVM](https://visualvm.github.io/) can be a great help in performance tuning for JavaFX apps. The screenshot shows the single-threaded JavaFX AppThread spends ca 2/3 of its time in "userspace" (Platform.runLater) and about 30% time in rendering (QuantumToolkit$$...).*"
@@ -90,8 +83,7 @@ Miscellaneous
 * [**Heshan Kariyawasam** shared a video](https://www.linkedin.com/posts/heshanthenura_java-javafx-activity-7274047577895899137-Sf9v/): "*I created a fun project called Java Rabbit using JavaFX. It lets you draw on a canvas by entering simple commands. It's just for fun, but I'm planning to add more features in the future. 🎉* ". You can [find it on GitHub](https://github.com/heshanthenura/JavaRabbit).
 * [**Carl Dea**](https://x.com/carldea/status/1868649928584745005): "*I wish someone could create [UIVerse](http://UIVerse.io) for JavaFX developers.😁 It was my wishful thinking for the JavaFX enthusiast in many of us.*"
 
-JFX Central
------------
+## JFX Central
 
 * New content:
   * Tools: [jDeploy, distribute your JavaFX app as a native bundle](https://www.jfx-central.com/tools/jdeploy)

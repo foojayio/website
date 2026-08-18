@@ -31,15 +31,13 @@ The Disco API (i.e., the short name for the Universal OpenJDK Discovery API) is 
 
 Most of the tools described here are developed by Gerrit Grunwald (aka hansolo on [Twitter/X](https://twitter.com/hansolo_) and [Mastodon](https://foojay.social/@hansolo_@mastodon.social)). As they are all open source, you can review them and propose improvements.
 
-Learn More About OpenJDK Versions and Distributions
----------------------------------------------------
+## Learn More About OpenJDK Versions and Distributions
 
 The Devoxx UK presentation ["Welcome to the Jungle" by Gerrit Grunwald](https://www.youtube.com/watch?v=7kURkyISzyM), gives you a lot of insights into the many OpenJDK versions and distributions and how the Disco API provides all the related information.
 
 {{< youtube 7kURkyISzyM >}}
 
-Disco API
----------
+## Disco API
 
 ### Sources
 
@@ -80,7 +78,6 @@ curl -X 'GET'
   -H 'accept: application/json'
 ```
 
-
 This will return the following result, in which we can see that version 22 is already available as Early Access (EA).
 
 ```
@@ -115,7 +112,6 @@ This will return the following result, in which we can see that version 22 is al
 }
 ```
 
-
 #### Get Packages For Filter
 
 The packages API provides a long list of filters. This examples searches for all the packages for:
@@ -132,7 +128,6 @@ curl -X 'GET'
   'https://api.foojay.io/disco/v3.0/packages?version=17&architecture=aarch64&archive_type=dmg&archive_type=pkg&package_type=jdk&operating_system=macos&javafx_bundled=true&latest=available' 
   -H 'accept: application/json'
 ```
-
 
 This filter will return the following result:
 
@@ -182,9 +177,7 @@ This filter will return the following result:
 }
 ```
 
-
-Tools
------
+## Tools
 
 As mentioned in the introduction, the Disco API is integrated into many tools you may already be using. But there are even more!
 
@@ -230,7 +223,6 @@ To be able to use any OpenJDK distribution in a GitHub Action, you can't use the
       run: ./mvnw package
 ```
 
-
 You can check all available combinations on the [Disco Testing Matrix](https://github.com/foojayio/discoTestingMatrix). It verifies JDK tests on various distros and versions using Github Actions.
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-3 is-layout-flex wp-block-gallery-is-layout-flex">
@@ -245,8 +237,7 @@ You can check all available combinations on the [Disco Testing Matrix](https://g
  </figure>
 </figure>
 
-Conclusion
-----------
+## Conclusion
 
 Foojay wants to support the OpenJDK community not only with blogs, podcasts, command line options, and other readable content.
 

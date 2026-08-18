@@ -21,8 +21,6 @@ frozen: false
 
 *This article is adapted from [The Confidence Trap](https://noregressions.substack.com/p/the-confidence-trap-why-developers), part of the "2026 Supply Chain Reckoning" series on my No Regressions newsletter.*
 
-
-
 Your boss calls you on a Friday afternoon. He's read all the available data, he tells you with absolute confidence, and he's decided that migrating from Spring Boot 3.5 to 4.0 will be straightforward. Wants it done over the weekend.
 
 You'd push back. You'd ask which data. You'd point out the breaking changes.
@@ -33,8 +31,7 @@ Sonatype's 2026 State of the Software Supply Chain report found that nearly 30% 
 
 So why do we keep accepting it?
 
-Your Brain Is Working Against You
----------------------------------
+## Your Brain Is Working Against You
 
 The short answer is psychology. Specifically, something called the *fluency heuristic*: when information is easy to process, your brain treats it as more likely to be true.
 
@@ -44,8 +41,7 @@ Large language models exploit this wiring perfectly. They produce fluent, struct
 
 Psychologists at Carnegie Mellon found that LLMs hallucinated in 69% to 88% of legal queries while maintaining a tone that consistently misled even trained evaluators. The packaging was so good that experts couldn't reliably spot the fakes.
 
-Where Java Developers Are Most Exposed
---------------------------------------
+## Where Java Developers Are Most Exposed
 
 This isn't an abstract concern. Java's ecosystem has characteristics that make several areas particularly vulnerable to confident-sounding AI output.
 
@@ -57,8 +53,7 @@ This isn't an abstract concern. Java's ecosystem has characteristics that make s
 
 **API usage patterns are plausible but outdated.** An LLM trained on older codebases will confidently suggest deprecated APIs, removed methods, or patterns that worked in Java 11 but behave differently in Java 21. It doesn't know your runtime version or your Spring Boot version. Code that compiled fine against last year's stack may not compile against this year's.
 
-Your Toolchain Catches Some of This
------------------------------------
+## Your Toolchain Catches Some of This
 
 If an AI hallucinates a Maven coordinate that doesn't exist, your build fails. `mvn compile` resolves every dependency against Maven Central. IntelliJ underlines it red before you even run the build. Deprecated API calls get warnings. Type errors fail at compile time.
 
@@ -74,8 +69,7 @@ For dependencies specifically, that verification gap needs:
 
 For generated code more broadly: code review with the same rigour you'd apply to a pull request from a stranger. The AI is a contributor you've never worked with before. Its code compiles. Its suggestions are well-formatted. But you have no track record to trust.
 
-Make the Model Show Its Working
--------------------------------
+## Make the Model Show Its Working
 
 Toolchain checks catch problems after the fact. But you can also change how you interact with the model to reduce false confidence at the source. There are habits that can help shift the dynamic. Worth trying, not guaranteed to work. (aka - works for me)
 
@@ -89,8 +83,7 @@ Toolchain checks catch problems after the fact. But you can also change how you 
 
 **5: Treat the first answer as a draft.** The human expert heuristic hits hardest on the first pass. The code looks good; it makes sense in your head, and your instinct is to paste it in. Train yourself to treat every AI suggestion as a starting point, not a finished answer.
 
-The Confidence Tax
-------------------
+## The Confidence Tax
 
 None of this eliminates the confidence trap. But it shifts the dynamic from a model that delivers and a developer who accepts to a conversation where the model has to justify itself.
 
@@ -102,12 +95,9 @@ The tools are useful. The confidence they project is not earned. Build the habit
 
 *For the full psychology behind the confidence trap, including the research on status-enhancement theory and automation bias, read [The Confidence Trap](https://noregressions.substack.com) on the No Regressions newsletter.*
 
-
-
 *This article is part of the "2026 Supply Chain Reckoning" series. Read the full series on [No Regressions](https://noregressions.substack.com).*
 
-Sources
--------
+## Sources
 
 1. Sonatype, [2026 State of the Software Supply Chain](https://www.sonatype.com/state-of-the-software-supply-chain/introduction) --- 28% hallucination rate and 345 cases of worsened security from LLM dependency recommendations.
 

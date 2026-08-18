@@ -26,20 +26,17 @@ Hello and welcome back to the **Java Panama Polyglot** series where we will be p
 
 In [Part 1](https://foojay.io/today/java-panama-polyglot-part1/) you got a chance to learn about how to use Java [Project Panama](https://jdk.java.net/panama/)'s (foreign function interface) abilities to access native libraries written in C++. Today, we will be looking at Java code being able to talk to Apple's [Swift](https://developer.apple.com/swift/) language.
 
-Requirements
-------------
+## Requirements
 
 * Project Panama EA release - Build 19-panama+1-13 (2022/1/18) - <https://jdk.java.net/panama/>
 * Apple's Swift compiler
   * MacOS - <https://developer.apple.com/technology/xcode.html>
 
-Problem
--------
+## Problem
 
 As a **MacOS Swift developer** you want to expose functions allowing Java developers to call into.
 
-Solution
---------
+## Solution
 
 Create and **export C functions** as symbols that are available to linkers. As a Swift developer you will create Swift functions annotated to export them as C functions that will allow Java's foreign function APIs to access native symbols (CLinker).
 
@@ -51,8 +48,7 @@ Similar to jar files native libraries are operating system specific and can be c
 
 Before we create a Swift file let's get glimpse of the language by using the Swift REPL (Read-Evaluate-Print-line).
 
-Swift Primer
-------------
+## Swift Primer
 
 Since this is a Java centric article, this section is going to be very brief. It will give you the very basics to get started with the Swift language.
 
@@ -65,7 +61,6 @@ In a terminal window type `swift`
 ```
 $ swift
 ```
-
 
 You should see something like the following:
 
@@ -92,7 +87,6 @@ Type :help for assistance.
   1>
 ```
 
-
 Above you'll notice the Swift **REPL** which is similar to Java's [JShell](https://foojay.io/today/learn-javafx-with-jshell-in-60-seconds/) (REPL) where you can create variables and functions to be output to the console. This is a great way to test out simple code snippets.
 
 To create a simple **Hello World** type the following to assign a string to a variable:
@@ -101,14 +95,12 @@ To create a simple **Hello World** type the following to assign a string to a va
 var myString = "Hello, World!"
 ```
 
-
 After hitting enter the following is the output:
 
 ```
 1> var myString = "Hello, World!"
 myString: String = "Hello, World!"
 ```
-
 
 Most, REPLs will display the variable and the value that is assigned to let you know it can be used later.
 
@@ -120,11 +112,9 @@ Hello, World!
 3>
 ```
 
-
 Assuming you've got the hang of it, let's create a simple Swift function.
 
-Swift functions
----------------
+## Swift functions
 
 Still inside the REPL you can create a Swift function by starting with the `func` keyword, the **name** of the function, parameter list (in parens) and an optional return type prefixed with the arrow symbol `->`.
 
@@ -140,7 +130,6 @@ Enter the code below:
 7>
 ```
 
-
 Now, to execute the function enter the following:
 
 ```
@@ -150,13 +139,11 @@ $R0: Bool = true
 8>
 ```
 
-
 Above, you'll notice the output text of **authenticated** and subsequent a result of the call `$R0` and it's value. The variable `$R0` can also be reused in later statements in the REPL.
 
 To exit the REPL type `:` (colon symbol) then the `(lldb)` prompt appears for you to type `quit`.
 
-Creating a dynamic link library on MacOS
-----------------------------------------
+## Creating a dynamic link library on MacOS
 
 Now that you are familiar with how to create a function lets create a native library that will export the Swift function as a C (ABI) function. This will allow Java Panama to load the library to access it as a native symbol.
 
@@ -170,7 +157,6 @@ public func authenticateUser() -> Bool  {
 }
 ```
 
-
 While this is a very simple function to be invoked, keep in mind that when using other Swift specific data types, they'll need to conform to the C ABI. e.g., A Swift string must be converted to a C string. In the case of conversion please see the link <https://developer.apple.com/documentation/foundation/nsstring/1408489-cstring>
 
 This will of course be seen as an instance of a `MemorySegment` which contains the method `getUtf8String(0)`.
@@ -180,7 +166,6 @@ Okay, back to the example code. Let's compile the Swift code from the terminal b
 ```bash
 swiftc myauth.swift -emit-library -o libmyauth.dylib
 ```
-
 
 After the compilation the output should be a file named `libmyauth.dylib` in the local directory.
 
@@ -193,8 +178,7 @@ As a reminder the name of the library when loaded using `System.loadLibrary("mya
 
 Now, that we have a library we can now use Project Panama's foreign function access APIs to execute the exported function.
 
-Example
--------
+## Example
 
 Let's create a Java application that will use the foreign access APIs to load the native library and invoke the function. Create a file called `MyAuthMain.java` with the following code:
 
@@ -234,7 +218,6 @@ public class MyAuthMain {
 }
 ```
 
-
 After saving the file now type the following to run the Java application (`MyAuthMain.java`):
 
 ```bash
@@ -244,7 +227,6 @@ java -cp .:classes \
    --add-modules jdk.incubator.foreign \
    MyAuthMain.java
 ```
-
 
 Success!   
 
@@ -256,11 +238,9 @@ authenticated
 You may enter!
 ```
 
-
 For extra credit check out my example of using MacOS' Touch ID using your fingerprint on GitHub [https://github.com/carldea/panama4newbies](https://github.com/carldea/panama4newbies/tree/main/macos-touchID) (sub project `touchid`).
 
-How it Works
-------------
+## How it Works
 
 Compiling and building a native library:
 
@@ -283,9 +263,7 @@ The code example using Java 18's Panama (FFI) APIs you don't need to use the `je
 FunctionDescriptor.of(ValueLayout.JAVA_BOOLEAN)
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 You got a chance to get familiar with Swift REPL to try out some language basics. Next, you learned about the `@_cdecl("")`annotation that enable Swift functions to be exported as native symbols that follow the C ABI (convention).
 

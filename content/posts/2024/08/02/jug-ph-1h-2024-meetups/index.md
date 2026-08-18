@@ -23,8 +23,7 @@ frozen: false
 
 Summary of the meetups done in the 1st half of 2024. We discussed a variety of topics which was useful to our Java enthusiasts and members.
 
-2024 Meetup Kickoff
--------------------
+## 2024 Meetup Kickoff
 
 We kicked-off the Java meetup in partnership with Angular Philippines. The meetup had 2 sessions which was demonstrated by Mark Montealto and Eric Martin.
 
@@ -53,8 +52,7 @@ Eric Martin discussed Clean Coding by Robert Martin using Java. He discussed the
 
 ![](jugph-angular-2024-3-680x510.jpeg)
 
-JCP 25th Anniversary
---------------------
+## JCP 25th Anniversary
 
 ### JCP Celeberation
 
@@ -80,8 +78,7 @@ Some keypoints during the talk:
 
 Raymond Del Rosario discussed Spring Boot Micrometer as a tool for observability. He demonstrated on how to observe Spring Boot applications using Prometheus and Grafana.
 
-GitHub Copilot Day
-------------------
+## GitHub Copilot Day
 
 This meetup focuses on the use of GitHub Copilot in creating a Spring Boot API, Dockerfile and Kubernetes Deployment object. Bryan San Juan demonstrated this in front of the Java Members and Partners.
 
@@ -95,8 +92,7 @@ Sequence of the demonstration using GitHub Copilot
 
 ![](jugph-github-2024-2-680x510.jpeg)
 
-Modern API Development
-----------------------
+## Modern API Development
 
 This meetup focuses on Modern Java API Development and Testing Frameworks.
 
@@ -116,8 +112,7 @@ Lino Borsoto discussed Spring Boot API Testing and the different annotations of 
 * Mockito
 * and so on..
 
-Sponsors
---------
+## Sponsors
 
 The meetups were sponsored generously by Azul, ING Hubs Philippines, Inventive Media, and Orange and Bronze Software Labs. Thanks for these organizations for their continuous support for the Philippine Java Community!
 
@@ -128,8 +123,7 @@ Check-out the product and career opportunities of our sponsors!
 * **Orange and Bronze Software Labs (Venue Sponsor)** - Focusing in IT consulting and services using Java-based technologies. Their organization consists of experts with extensive experience of Java, Spring and Cloud Technologies. For more information, check out, <https://orangeandbronze.com/>
 * **Inventive Media (Venue Sponsor)** - An IT Learning Hub focusing in delivering high-quality IT trainings in the Philippines. For more information, check out: <https://www.inventivemedia.com.ph/>
 
-Connect with us!
-----------------
+## Connect with us!
 
 The presentations and recording of these meetups can be access below:
 

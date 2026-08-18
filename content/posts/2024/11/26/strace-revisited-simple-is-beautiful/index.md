@@ -46,12 +46,9 @@ In this article, we'll delve into the nuances of strace, from its history and te
 
 {{< youtube bgi7PJXtEzc >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-Understanding strace and its Origins
-------------------------------------
+## Understanding strace and its Origins
 
 ### A Look Back: strace and dtrace
 
@@ -61,8 +58,7 @@ The journey of strace begins with its predecessor, dtrace, [which we covered las
 
 strace, like dtrace, traces its roots back to Sun Microsystems, emerging in the 90s (a decade before dtrace). This isn't surprising given the impressive array of technologies that originated from Sun. However, strace differentiates itself by its straightforwardness in both usage and capabilities. Unlike DTrace, which demands deep operating system support and thus remained absent as an official feature in common Linux distributions, strace thrives in the Linux environment. Its simplicity and ease of implementation make it a popular choice for Linux users, offering a distinct approach to system diagnostics.
 
-Technical Functioning of strace
--------------------------------
+## Technical Functioning of strace
 
 ### The Role of ptrace in strace
 
@@ -72,8 +68,7 @@ The cornerstone of strace's functionality is the ptrace kernel feature. ptrace, 
 
 While DTrace offers a more in-depth analysis through deeper kernel support, strace operates on a more surface level. This simplicity, however, does not undermine its effectiveness. strace works essentially by logging every kernel call made by a process, providing verbose but incredibly detailed insights into the system's operation. This method allows users to trace the inner workings of a process, understanding each interaction with the kernel.
 
-Practical Usage and Advantages
-------------------------------
+## Practical Usage and Advantages
 
 ### Ease of Use and Accessibility
 
@@ -83,8 +78,7 @@ One of the most appealing aspects of strace is its user-friendly nature. It does
 
 strace's popularity in Linux circles is not only due to its accessibility but also its practicality. Being able to run without special privileges makes it a go-to tool for diagnosing various system-related issues. However, it's important to note that strace should be used cautiously in production environments. Its extensive logging can create a significant performance overhead, potentially impacting the efficiency of a live system. This is why strace is generally recommended for use in development or isolated testing environments rather than in production.
 
-strace in Action: A Closer Look at System Calls
------------------------------------------------
+## strace in Action: A Closer Look at System Calls
 
 ### Basic Usage and Output Analysis
 
@@ -93,7 +87,6 @@ Using strace is straightforward: you simply pass the command line to it.
 ```
 strace java -classpath . PrimeMain
 ```
-
 
 This simplicity belies its power, as the output offers a wealth of information. Each line in the strace output corresponds to a system call made by the process as you can see below:
 
@@ -109,13 +102,11 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RD
 stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
 ```
 
-
 By analyzing these calls, users can gain insights into the intricate operations of their applications. For instance, if a Java process attempts to load a library and fails, strace can reveal the underlying system call and its exit code, providing clues about potential issues like missing files or directories. E.g. in this line:
 
 ```
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 ```
-
 
 Java tries to load the `pthread` library from the `tls` directory using a system call open to load the file. The exit code of the system call is `-1,` which means that the file isn't there. Under normal circumstances, we should get back a file descriptor value from this API (positive non-zero integer). Looking in the directory, it seems the `tls` directory is missing. I'm guessing that this is because of a missing `JCE` (Java Cryptography Extensions) installation. This is probably OK but might have been interesting in some cases.
 
@@ -123,8 +114,7 @@ Java tries to load the `pthread` library from the `tls` directory using a system
 
 The output of strace, while verbose, is a goldmine for troubleshooting. For example, a negative exit code in a system call indicates an error, such as a missing file, which could be crucial for diagnosing issues in an application. This level of detail, although overwhelming at times, is invaluable for understanding the interactions between your application and the Linux system.
 
-Advanced Features and Tips
---------------------------
+## Advanced Features and Tips
 
 ### Filtering System Calls for Efficiency
 
@@ -134,15 +124,13 @@ A common challenge with strace is managing its voluminous output. Fortunately, s
 strace -e open java -classpath . PrimeMain
 ```
 
-
 This selective logging not only makes the output more manageable but also allows for focused troubleshooting, speeding up the debugging process.
 
 ### Exploring a Variety of System Calls
 
 strace's utility extends beyond just tracking file access or network interactions. It can be used to monitor a range of system calls, offering insights into various aspects of application behavior. By understanding and utilizing different system calls, users can gain a comprehensive view of their application's interaction with the operating system, leading to more effective debugging and optimization.
 
-strace and Java: A Special Case
--------------------------------
+## strace and Java: A Special Case
 
 ### strace with the JVM
 
@@ -154,8 +142,7 @@ For instance, Java's memory management differs significantly from standard syste
 
 Similarly, Java threading is currently well-represented in strace output, but this is changing with Java 21 and Project Loom. Java 21 added support for Virtual Threads which are only partially visible to the operating system hence 1,000 threads can seem like 16 threads. These changes could affect the clarity of strace outputs in complex, heavily threaded Java applications.
 
-Final Word
-----------
+## Final Word
 
 strace stands out as an exceptionally versatile and powerful tool in the Linux debugging arsenal. Its ability to provide detailed insights into system calls makes it invaluable for diagnosing and understanding the inner workings of applications. Despite its simplicity, strace is capable of handling complex debugging scenarios, especially when used with its advanced filtering options.
 

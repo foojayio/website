@@ -59,8 +59,7 @@ Furthermore, the book underscores the significance of testing within clean archi
 
 Although the book employs code snippets and diagrams to illustrate concepts, it could benefit from additional visual aids to enhance the understanding of complex architectural diagrams and patterns. Visual learners may find supplementary diagrams and illustrations useful in comprehending certain concepts.
 
-Conclusion
-----------
+## Conclusion
 
 **"Get Your Hands Dirty on Clean Architecture" by Tom Hombergs is a valuable addition to the library of any software developer aiming to create maintainable, scalable, and clean code. The book's comprehensive coverage of clean architecture principles and its practical approach to implementation make it an essential resource for both beginners looking to learn about software architecture and experienced developers aiming to adopt clean architecture practices in Java projects.**
 

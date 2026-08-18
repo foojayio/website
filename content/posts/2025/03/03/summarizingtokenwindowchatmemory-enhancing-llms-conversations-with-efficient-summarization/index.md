@@ -37,8 +37,7 @@ These memory policies help optimize resource usage while ensuring conversations 
 
 While both approaches are effective, I wondered why not add a **third approach** ---one that summarizes old messages rather **than removing** them. This idea led me to experiment and eventually implement **SummarizingTokenWindowChatMemory** .
 
-**SummarizingTokenWindowChatMemory**
-------------------------------------
+## **SummarizingTokenWindowChatMemory**
 
 The core idea behind **SummarizingTokenWindowChatMemory** is straightforward:
 
@@ -239,7 +238,6 @@ public class SummarizingTokenWindowChatMemory implements ChatMemory {
 }
 ```
 
-
 The **SummarizingTokenWindowChatMemory** class manages chat messages, ensuring they stay within a specified token limit by summarizing older messages when necessary. It uses an [**OpenAiTokenizer**](https://javadoc.io/doc/dev.langchain4j/langchain4j-open-ai/latest/dev/langchain4j/model/openai/OpenAiTokenizer.html) to estimate token counts and a **Summarizer** to generate summaries.
 
 The class also handles system messages separately, preserving them during summarization. The \\`Builder\` class provides a convenient way to construct **SummarizingTokenWindowChatMemory** instances with the required dependencies.
@@ -259,7 +257,6 @@ public interface Summarizer {
     String summarize(List<ChatMessage> messages);
 }
 ```
-
 
 This provides a contract for any summarization strategy.
 
@@ -312,7 +309,6 @@ public class OpenAILLMSummarizer implements Summarizer {
 }
 ```
 
-
 * Constructs a structured prompt containing key user, AI, and system messages.
 * Invokes the **SummarizerAssistant** , which interacts with OpenAI's language model to generate the summary.
 
@@ -342,14 +338,12 @@ interface SummarizerAssistant {
 }
 ```
 
-
 This mechanism:
 
 * Calls an **LLM model** (e.g., OpenAI's GPT) to generate concise summaries.
 * Ensures that the summarized conversation remains within a predefined token limit.
 
-Why This Matters
-----------------
+## Why This Matters
 
 The **SummarizingTokenWindowChatMemory** approach effectively manages long conversations while staying within the constraints of an LLM's context window. The chatbot can retain essential details by summarizing older exchanges, ensuring coherence without exceeding token limits.
 
@@ -363,8 +357,7 @@ Moreover, the summarization step itself adds computational overhead, and its eff
 
 These trade-offs must be carefully weighed when deciding whether this approach is the right fit for a given application.
 
-Conclusion
-----------
+## Conclusion
 
 To test its functionality, I created a simple chatbot that suggests recipes.
 

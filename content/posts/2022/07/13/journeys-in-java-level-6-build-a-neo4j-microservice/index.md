@@ -44,8 +44,7 @@ In this post, we will create our Neo4j database and get the data loaded, then bu
 
 Let's get into the technical stuff!
 
-Architecture
-------------
+## Architecture
 
 We began this microservices project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). In our last post ([level5](https://jmhreif.com/blog/microservices-level5/)), we used our existing services with book and author data, but set up Docker Compose to manage all the services together using a yaml file and a couple of commands.
 
@@ -59,8 +58,7 @@ The items outside the grey box are what we are adding today - Neo4j database and
 
 Notice that we are not yet incorporating Neo4j and our new service to Docker Compose. I prefer to build things in small increments, so that there is less room for errors. We will add these new pieces to our existing architecture in a later post.
 
-Database-as-a-service: AuraDB
------------------------------
+## Database-as-a-service: AuraDB
 
 We want to add a new database into our microservices system, and we know we want to use [AuraDB](https://dev.neo4j.com/aura-java) free tier. Signing up and creating the database instance requires a couple steps and a bit of information, such as verifying your email address and waiting for the instance to spin up (takes a few minutes).
 
@@ -68,8 +66,7 @@ Details of that process (with screenshots) are shown in most of my colleague [Mi
 
 Once the instance is running, we can get started with our data load.
 
-Graph data load
----------------
+## Graph data load
 
 I could just load reviews to Neo4j, but graphs gain power from relationships between data. So, we can load all the entities for books, authors, and reviews.
 
@@ -79,8 +76,7 @@ My [data Github repository](https://github.com/JMHReif/graph-demo-datasets/tree/
 
 Time to start building our application to pull review data.
 
-Applications - Service 4
-------------------------
+## Applications - Service 4
 
 For those following along from previous iterations of this project, our new `service4` will look pretty similar to `service1` and `service3` for books and authors, respectively. For those jumping in with this blog post, we will build a Spring Boot application with a couple of REST endpoints to access the data from the connected database (in this case, Neo4j).
 
@@ -112,7 +108,6 @@ spring.neo4j.authentication.password=
 spring.data.neo4j.database=
 ```
 
-
 Because we have multiple services, we need the `server.port` property to ensure traffic does not conflict. We have already used ports 8080-8082 for services 1-3, so 8083 is our next in line. Next, we need to connect to our database using the properties for Neo4j URI, username, password, and database. *\*Note:\* Database should be `neo4j`, unless you have specifically used commands to change the default.*
 
 On to the project code!
@@ -136,7 +131,6 @@ class Review {
 }
 ```
 
-
 The `@Data` is a [Lombok annotation](https://projectlombok.org/features/Data) that generates our getters, setters, equals, hashCode, and toString methods for the domain class. It cuts down on the boilerplate code, so that's nice. Next is the [`@Node`](https://github.com/JMHReif/microservices-level6/blob/main/service4/src/main/java/com/jmhreif/service4/Service4Application.java#L53) annotation. This is a Spring Data Neo4j annotation that marks it as a Neo4j entity class (Neo4j entities are called nodes).
 
 Within the class declaration, we define a few fields (properties) for our class. The `@Id` annotation marks the field as a unique identifier, and the `@GeneratedValue` says that it is generated internally by Neo4j. On our next field [`review_id`](https://github.com/JMHReif/microservices-level6/blob/main/service4/src/main/java/com/jmhreif/service4/Service4Application.java#L59), we have a Lombok [`@NonNull`](https://projectlombok.org/features/NonNull) annotation that specifies this field cannot be null. We also have some other fields we want to retrieve for the review text, dates, and rating information.
@@ -151,7 +145,6 @@ interface ReviewRepository extends ReactiveCrudRepository {
 	Flux findReviewsByBook(String book_id);
 }
 ```
-
 
 We want this repository to extend the `ReactiveCrudRepository`, which will let us use reactive methods and types for working with the data. Then, we define a couple of methods. While we could use Spring Data's out-of-the-box implementations of a few default methods (listed in the [code example of the documentation](https://docs.spring.io/spring-data/commons/docs/current/reference/html/#repositories.core-concepts)), we want to customize a little bit, so we will define our own. Instead of using the default `.findAll()` method, we want to pull only 1,000 results because pulling all 35,342 reviews could overload result-rendering on the client.
 
@@ -181,7 +174,6 @@ class ReviewController {
 }
 ```
 
-
 Those familiar with our previous services 1 and 3 code will notice this looks almost the exact same (except with reviews instead of books or authors). The `@RestController` Spring annotation designates this as a rest controller class, and the `@RequestMapping` defines a high-level endpoint for using any of the class methods. Within the class declaration, we inject the `ReviewRepository` with the [first line](https://github.com/JMHReif/microservices-level6/blob/main/service4/src/main/java/com/jmhreif/service4/Service4Application.java#L32), so that we can utilize our written methods.
 
 Next, we map endpoints for each of our methods. The `liveCheck()` method uses the high-level `/neo` endpoint to return a string, ensuring that our service is live and reachable. We can execute the `getReviews()` method by adding a nested endpoint (`/reviews`). This method uses the `findFirst1000By()` method that we wrote in the repository and returns a reactive `Flux` type where we expect 0 or more reviews in the results.
@@ -190,8 +182,7 @@ Our [final method](https://github.com/JMHReif/microservices-level6/blob/main/ser
 
 Time to test our new service!
 
-Put it to the test
-------------------
+## Put it to the test
 
 Since `service4` is currently separate from our other services and using a different database, we will test this individually for now and test everything together once we are ready to incorporate `service4` with the rest in Docker Compose.
 
@@ -209,8 +200,7 @@ And here is the resulting output from authors api results from service4!
 
 ![microservices lvl6 results book](microservices-lvl6-results-book.png)
 
-Wrapping up!
-------------
+## Wrapping up!
 
 We walked through creating a graph database instance using Neo4j AuraDB free tier and loaded data for books, authors, and reviews.
 
@@ -226,8 +216,7 @@ Another area of exploration is to take further advantage of graph benefits by pu
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level6](https://github.com/JMHReif/microservices-level6) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

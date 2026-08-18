@@ -28,8 +28,7 @@ frozen: false
 
 ***A Blade Runner riff for a world where the lobster ships paid endpoints while humans still argue about the roadmap.***
 
-The shift that matters for agent commerce - From "Crypto AI" to general AI
---------------------------------------------------------------------------
+## The shift that matters for agent commerce - From "Crypto AI" to general AI
 
 Today, you can search the web all day and never see an invoice.  
 
@@ -64,8 +63,7 @@ Replace "one provider, many API keys" with "one payment-enabled access surface t
 To tackle this topic, we need to start by breaking down discovery, routing, identity, and paid endpoints in a production-shaped workflow.  
 ![](ChatGPT-Image-19.-2.-2026-18_43_09.png)
 
-What changed in x402 and ERC-8004 in the last month or so?
-----------------------------------------------------------
+## What changed in x402 and ERC-8004 in the last month or so?
 
 What changed since the first article, and why does it matter?
 
@@ -89,8 +87,7 @@ One example is routing paid calls into existing payout systems instead of forcin
 
 In short, the ecosystem started to look less like demos and more like deployable plumbing.
 
-This is the moment that unlocked agent commerce
------------------------------------------------
+## This is the moment that unlocked agent commerce
 
 The last few weeks changed the pace, not the primitives.  
 
@@ -177,8 +174,7 @@ Once discovery, identity, and paid calls become standard, the system starts rewa
 
 That shift bridges "crypto AI" and general AI, because the story stops being about tokens and starts being about paid tool use as default infrastructure.
 
-What is still missing?
-----------------------
+## What is still missing?
 
 Discovery needs to become normal, not a niche index that only insiders check.  
 
@@ -196,8 +192,7 @@ Wallet UX still needs improvement, so funding, budgets, and spend policies work 
 
 Latency and throughput also remain practical constraints once agents start chaining many paid calls per task.
 
-What does the stack look like in practice?
-------------------------------------------
+## What does the stack look like in practice?
 
 A practical agent-commerce stack combines five pieces into one workflow:
 
@@ -209,8 +204,7 @@ A practical agent-commerce stack combines five pieces into one workflow:
 
 One current implementation is DayDreams, where these pieces run together as a single workflow for publishing, discovering, and calling paid agent endpoints.
 
-Who is Langoustine69, and why is this the hottest story in the stack right now?
--------------------------------------------------------------------------------
+## Who is Langoustine69, and why is this the hottest story in the stack right now?
 
 To show that this stack is moving from theory to production-shaped behavior, *Langoustine69* is the simplest public example right now.  
 [*Langoustine69*](https://langoustine69.github.io/) operates as an effectively autonomous agent.  
@@ -279,8 +273,7 @@ The next step is to make this loop smoother and more portable.
 
 4. Add hosting defaults, keep the harness minimal, and let the system run the shipping loop without constant human supervision.
 
-What does Langoustine's inventory catalog look like so far?
------------------------------------------------------------
+## What does Langoustine's inventory catalog look like so far?
 
 **Crypto and DeFi:**
 
@@ -303,8 +296,7 @@ What does Langoustine's inventory catalog look like so far?
 * Calendar context agent: Date context for agents, including holidays and notable events.
 * SpaceX data: Launches, rockets, and Starlink tracking from the SpaceX API.
 
-How does DayDreams plan to bridge crypto AI to general AI?
-----------------------------------------------------------
+## How does DayDreams plan to bridge crypto AI to general AI?
 
 DayDreams pushes a simple wedge into the broader AI world.  
 
@@ -329,8 +321,7 @@ This matters for general AI because it reduces friction in standard developer wo
 It also enables a path where agents pay for tools in the background while products still feel like standard SaaS.  
 ![](1500x500.png)
 
-So, Agentic commerce has developed. What else does the stack need?
-------------------------------------------------------------------
+## So, Agentic commerce has developed. What else does the stack need?
 
 Microtransactions on layer two networks are increasing, but this increase does not come only from agent commerce.  
 
@@ -352,8 +343,7 @@ Wallet UX becomes boring and safe, with budgets, policies, and auditing that pro
 
 When those pieces land, the story stops being "agent commerce is possible" and becomes "agent commerce is the cheaper default than rebuilding the tool yourself."
 
-What is the takeaway?
----------------------
+## What is the takeaway?
 
 Just several months ago, there was an idea of a stack, as described in [Not a Lucid Web3 Dream Anymore: x402, ERC-8004, A2A, and The Next Wave of AI Commerce \| HackerNoon](https://hackernoon.com/not-a-lucid-web3-dream-anymore-x402-erc-8004-a2a-and-the-next-wave-of-ai-commerce).  
 
@@ -374,8 +364,7 @@ It is neither a new coin nor a new chatbot.
 
 It is a tool economy in which paid calls, discovery, and identity begin to look like standard infrastructure.
 
-Where can we go from here?
---------------------------
+## Where can we go from here?
 
 If you zoom out, OpenClaw looks like an early candidate for an "AI operating system" layer.  
 

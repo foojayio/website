@@ -35,8 +35,6 @@ You can also watch the video playlist here:
 
 {{< youtube videoseries >}}
 
-<br />
-
 You may also enjoy these related Foojay topics:
 
 * Java and cloud-native development
@@ -47,10 +45,7 @@ You may also enjoy these related Foojay topics:
 
 * JVM ecosystem evolution
 
-
-
-Quality in Development: Simplicity Still Wins
----------------------------------------------
+## Quality in Development: Simplicity Still Wins
 
 One topic came back constantly during the interviews: software quality.
 
@@ -98,10 +93,7 @@ Monitoring also appeared as a key subject. Developers explained that technical q
 
 Therefore, software quality is not a final validation step. Instead, it becomes a continuous engineering process shared by developers, architects, and Ops teams.
 
-
-
-Favorite Java Framework: Spring Boot vs Quarkus
------------------------------------------------
+## Favorite Java Framework: Spring Boot vs Quarkus
 
 Another major topic was the favorite Java framework.
 
@@ -163,10 +155,7 @@ Developers additionally appreciated:
 
 Finally, the Quarkus community itself received a lot of praise. Multiple interviewees described it as extremely welcoming and helpful.
 
-
-
-Welcoming Girls in Tech: Inclusion Through Everyday Actions
------------------------------------------------------------
+## Welcoming Girls in Tech: Inclusion Through Everyday Actions
 
 Another important question concerned welcoming women into tech teams.
 
@@ -197,10 +186,7 @@ Another strong point emerged repeatedly: diversity improves technical discussion
 
 Different perspectives often produce better ideas, better architecture decisions, and more inclusive engineering cultures.
 
-
-
-Best Thing About Tech Communities
----------------------------------
+## Best Thing About Tech Communities
 
 One of the strongest themes across all interviews was the importance of tech communities.
 
@@ -250,10 +236,7 @@ Communities also create career opportunities. Several speakers explained that co
 
 Most importantly, communities create learning environments where developers continuously improve together.
 
-
-
-Best Java Developer Skill Today: Adaptability
----------------------------------------------
+## Best Java Developer Skill Today: Adaptability
 
 When asked about the most valuable skill for Java developers today, one word came back several times: adaptability.
 
@@ -290,10 +273,7 @@ Several speakers also emphasized soft skills:
 One interviewee summarized it perfectly:
 > Great developers are not only technical experts. They also help teams grow.
 
-
-
-Why Not Java? Kotlin, TypeScript, and Node.js Perspectives
-----------------------------------------------------------
+## Why Not Java? Kotlin, TypeScript, and Node.js Perspectives
 
 Some interviewees also explained why they sometimes choose technologies other than Java.
 
@@ -331,10 +311,7 @@ TypeScript additionally brought stronger structure and scalability to large appl
 
 Nevertheless, most interviewees still respected Java deeply and continued using it for enterprise systems and backend applications.
 
-
-
-Becoming a Java Architect
--------------------------
+## Becoming a Java Architect
 
 Another major question focused on architecture careers.
 
@@ -370,10 +347,7 @@ Most importantly, architects should not pursue technology for technology itself.
 
 Instead, architecture should always serve business goals and user needs.
 
-
-
-IntelliJ IDEA: Still the Favorite IDE
--------------------------------------
+## IntelliJ IDEA: Still the Favorite IDE
 
 IntelliJ IDEA received overwhelmingly positive feedback.
 
@@ -405,10 +379,7 @@ Several developers explained that IntelliJ significantly improves productivity b
 
 Therefore, IntelliJ was repeatedly described as more than an editor. It became a real engineering companion.
 
-
-
-Working Efficiently With Ops Teams
-----------------------------------
+## Working Efficiently With Ops Teams
 
 Finally, many interviewees highlighted the growing importance of DevOps collaboration.
 
@@ -440,10 +411,7 @@ Instead, developers and Ops engineers should collaboratively define:
 
 This collaborative approach improves software quality while also reducing friction between teams.
 
-
-
-Final Thoughts
---------------
+## Final Thoughts
 
 What started as short spontaneous interviews during DevLille 2026 eventually revealed something bigger about the Java ecosystem.
 

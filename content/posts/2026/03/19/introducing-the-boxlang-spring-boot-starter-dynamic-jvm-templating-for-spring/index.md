@@ -46,8 +46,7 @@ Not only that, it is completely documented for you:
 * <https://boxlang.ortusbooks.com/getting-started/running-boxlang/spring-boot>
 * <https://boxlang.ortusbooks.com/boxlang-language/templating-language>
 
-🌐 What is BoxLang?
--------------------
+## 🌐 What is BoxLang?
 
 **BoxLang** is a modern dynamic JVM language purpose-built for rapid application development. Think of it as what you'd get if Java's runtime, a scripting language's expressiveness, and a templating engine had a very productive meeting.
 
@@ -63,9 +62,7 @@ Key highlights:
 BoxRuntime runtime = BoxRuntime.getInstance();
 ```
 
-
-✨ Zero-Config Spring Boot Integration
--------------------------------------
+## ✨ Zero-Config Spring Boot Integration
 
 The starter follows Spring Boot's auto-configuration philosophy religiously. Add the dependency and you're done. No `@EnableBoxLang`. No manual bean registration. No XML.
 
@@ -77,7 +74,6 @@ dependencies {
 }
 ```
 
-
 Maven
 
 ```java
@@ -88,11 +84,9 @@ Maven
 </dependency>
 ```
 
-
 Spring Boot's auto-configuration mechanism detects the starter on the classpath and wires `BoxLangViewResolver`, starts the `BoxRuntime` lifecycle, and registers all required beans automatically. Read more in our docs: <https://boxlang.ortusbooks.com/getting-started/running-boxlang/spring-boot>
 
-🚀 From Controller to Template in Minutes
------------------------------------------
+## 🚀 From Controller to Template in Minutes
 
 Your Spring MVC controllers stay exactly as they are. Return a view name, add model attributes --- BoxLang handles the rest.
 
@@ -108,7 +102,6 @@ public class HomeController {
     }
 }
 ```
-
 
 Then write your template in `src/main/resources/templates/home.bxm`:
 
@@ -128,11 +121,9 @@ Then write your template in `src/main/resources/templates/home.bxm`:
 </bx:output>
 ```
 
-
 Every attribute you add via `model.addAttribute(...)` is automatically injected into the BoxLang `variables` scope. No extra mapping, no boilerplate.
 
-🌐 Full Web Scopes --- Out of the Box
--------------------------------------
+## 🌐 Full Web Scopes --- Out of the Box
 
 Unlike most view engines that only expose model data, BoxLang templates have access to the complete set of HTTP scopes natively, and the entire request/response servlet contexts.
 
@@ -158,9 +149,7 @@ Unlike most view engines that only expose model data, BoxLang templates have acc
 </bx:output>
 ```
 
-
-🔥 Hot-Reload During Development
---------------------------------
+## 🔥 Hot-Reload During Development
 
 Switch to a `file`: prefix in a dev Spring profile and template edits take effect on the next request --- no restarts required.
 
@@ -171,16 +160,13 @@ boxlang.prefix=file:src/main/resources/templates/
 boxlang.debug-mode=true
 ```
 
-
 Activate it:
 
 ```java
 ./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 
-
-⚙️ Configuration That Stays Out of Your Way
--------------------------------------------
+## ⚙️ Configuration That Stays Out of Your Way
 
 All settings live under the `boxlang.*` namespace in `application.properties` or `application.yml`. Sensible defaults mean you only override what you need.
 
@@ -192,11 +178,9 @@ boxlang:
   # runtime-home: /app/.boxlang  # great for containers
 ```
 
-
 You can also supply a `boxlang.json` config file at `src/main/resources/boxlang.json` for advanced language-level settings like locale, timezone, and logging.
 
-🔀 Coexist With Any Other View Technology
------------------------------------------
+## 🔀 Coexist With Any Other View Technology
 
 `BoxLangViewResolver` integrates cleanly into Spring MVC's resolver chain. If a `.bxm` template doesn't exist for a given view name, it returns `null` and Spring falls through to the next resolver --- meaning Thymeleaf, FreeMarker, and BoxLang can all live in the same application without conflict.
 
@@ -205,9 +189,7 @@ You can also supply a `boxlang.json` config file at `src/main/resources/boxlang.
 boxlang.view-resolver-order=1
 ```
 
-
-📋 Requirements
----------------
+## 📋 Requirements
 
 | Dependency  | Version |
 |-------------|---------|
@@ -215,8 +197,7 @@ boxlang.view-resolver-order=1
 | Spring Boot | 3.4.x+  |
 | BoxLang     | 1.11.0+ |
 
-🛠️ How It Works Under the Hood
--------------------------------
+## 🛠️ How It Works Under the Hood
 
 For the curious Java developer:
 
@@ -227,8 +208,7 @@ For the curious Java developer:
 
 Clean separation of concerns. No magic you can't trace.
 
-🎯 Get Started
---------------
+## 🎯 Get Started
 
 ```java
 git clone https://github.com/ortus-boxlang/boxlang-spring-boot-starter.git
@@ -236,15 +216,13 @@ cd boxlang-spring-boot-starter
 ./gradlew :test-app: bootRun
 ```
 
-
 Open **<http://localhost:8080>** and see BoxLang rendering live in your Spring Boot app.
 
 📚 Full documentation: [boxlang.ortusbooks.com](http://https://boxlang.ortusbooks.com/boxlang-language/templating-language "boxlang.ortusbooks.com")
 
 🔌 VS Code Extension: [BoxLang VSCode Extension](http://https://marketplace.visualstudio.com/items?itemName=ortus-solutions.vscode-boxlang "BoxLang VSCode Extension")
 
-💼 Professional Support
------------------------
+## 💼 Professional Support
 
 BoxLang is free and open source. Ortus Solutions offers commercial support, custom development, migration services, and enterprise modules for teams that need it.
 

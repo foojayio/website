@@ -23,8 +23,7 @@ Last month we were in the US, and this time we travel to the other side of the w
 
 {{< youtube y_RDJvuM6ME >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -32,8 +31,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Shin Tanimoto
   * [https://twitter.com/cero_t](https://twitter.com/cero_t%20)
@@ -45,13 +43,11 @@ Guests
   * <https://twitter.com/maaya8585>
   * [https://www.linkedin.com/in/maaya-ishida-5486b7109/](https://www.linkedin.com/in/maaya-ishida-5486b7109/%20)
 
-Host
-----
+## Host
 
 * Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
-Links
------
+## Links
 
 * JJUG (Japan JUG)
   * Contact: <https://jjug.doorkeeper.jp/contact/new>
@@ -65,8 +61,7 @@ Links
   * [https://facebook.com/groups/javajo](https://facebook.com/groups/javajo%20)
   * <https://instagram.com/javajo_tokyo/>
 
-Content
--------
+## Content
 
 * 00'00 Intro and music
 * 00'13 About the topic of this podcast

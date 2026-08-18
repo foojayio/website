@@ -30,8 +30,7 @@ The bootcamp was organized by the JUG Leaders and Volunteers and DEVCON Voluntee
 
 ![](java-bootcamp-2024-1-510x510.jpg)
 
-Registration
-------------
+## Registration
 
 The bootcamp received an overwhelming **110+ registrations** but 50 was only accomodated due to the slots of the venue.
 
@@ -39,8 +38,7 @@ The JUG Leaders evaluated the interested participants that will be joining the e
 
 **See the registration of the bootcamp in LUMA:** <https://lu.ma/ohzqexnb>
 
-Java in Education by Java Community Process (JCP)
--------------------------------------------------
+## Java in Education by Java Community Process (JCP)
 
 JUG PH as a Partner Member of JCP, we integrated the Java in Education initiative of JCP to our curriculum.
 
@@ -48,8 +46,7 @@ The contents of the sessions were modified based on the needs of future and earl
 
 For more information about JCP - Java in Education, check out: [JCP - Java in Education GitHub Wiki](https://github.com/jcp-org/Java-in-Education/wiki/Java-in-Education---Wiki-Page "JCP - Java in Education GitHub Wiki")
 
-Sessions
---------
+## Sessions
 
 Before the Java sessions start, the community partners introduced themselves and their initiative for the Philippines!
 
@@ -95,8 +92,7 @@ The afternoon session will tackle different features of Java starting from Java 
 
 **To access the presentation of these sessions, check out:** [JUG PH Bootcamp Slides](https://github.com/JUGPH/java-presentations/tree/main/java-development-bootcamp-1 "JUG PH Bootcamp Slides")
 
-Community Partners
-------------------
+## Community Partners
 
 The bootcamp will not be possible without the help of our community partner.
 
@@ -104,16 +100,14 @@ The bootcamp will not be possible without the help of our community partner.
 
 ![](java-bootcamp-2024-5-510x510.jpg)
 
-Sponsors
---------
+## Sponsors
 
 This bootcamp was generously sponsored by Azul and AWS Philippines. This is the 1st time that AWS will sponsor for the JUG Philippines through DEVCON Manila. Thanks for these organizations for their support for the Philippine Java Community!
 
 * **Azul (Food Sponsor)** - Focusing in delivering alternative OpenJDK distribution aside from Oracle JDK. Azul JDK offers tremendous savings for your Java applications. For more information, check out <https://www.azul.com/>
 * **AWS Philippines (Venue Sponsor via DEVCON)** - Extending the services of Amazon Web Services in the Philippines. For more information, check out <https://aws.amazon.com/>
 
-Connect with us!
-----------------
+## Connect with us!
 
 The bootcamp exercises can be access below:
 

@@ -39,6 +39,4 @@ ven you or your organization does not do anything, we still want to ask you to f
 
 ](https://opnform.com/forms/it-sustainability-goals-ewq3yc)
 
-<br />
-
 [You can find the survey here.](https://opnform.com/forms/it-sustainability-goals-ewq3yc)

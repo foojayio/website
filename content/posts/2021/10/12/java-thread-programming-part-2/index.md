@@ -93,7 +93,6 @@ public class SingleThreadedServer {
 }
 ```
 
-
 Let's walk through the code first. In the above code, a `ServerSocket` starts at a port and waits in a loop for the clients to connect. The `handle()` method is the most important one. It gets a Socket object and then talks to the client. If a client sends a valid URL, It calls a service, `MostFrequentWordService`, to get the most frequent words.
 
 We can use telnet to connect the server and use this server.
@@ -125,7 +124,6 @@ public class MultiThreadedServer {
   //rest of the code. 
 }
 ```
-
 
 Now, we can connect multiple clients at once, and serve them all simultaneously:
 
@@ -176,6 +174,5 @@ public class MostFrequentWordService {
   }
 }
 ```
-
 
 That's it for today!

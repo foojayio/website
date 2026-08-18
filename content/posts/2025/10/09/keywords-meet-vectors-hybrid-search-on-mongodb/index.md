@@ -25,8 +25,7 @@ In the previous issues, I explained how to run a local [MongoDB](https://www.lin
 
 Reading time: 4--5 min
 
-What is hybrid search?
-----------------------
+## What is hybrid search?
 
 Hybrid search in MongoDB brings together **two complementary search techniques**:
 
@@ -38,8 +37,7 @@ Hybrid search in MongoDB brings together **two complementary search techniques**
 
 On their own, each method has advantages and limitations. Text search misses context ("non-linear crime story" won't return Memento). Pure semantic search may return results that are semantically aligned but sometimes not practically useful. Hybrid search combines the strengths of both, ensuring results are contextually relevant and precise.
 
-How does it work in MongoDB?
-----------------------------
+## How does it work in MongoDB?
 
 MongoDB Atlas (and soon MongoDB Community Edition and Enterprise Advanced) handles both layers natively:
 
@@ -67,7 +65,6 @@ You first need to confirm that the Inception document exists in the dataset and 
 db.getSiblingDB("sample_mflix").embedded_movies.find({ title: "Inception" },{ title: 1, year: 1, genres: 1, imdb: 1, plot: 1, plot_embedding: 1})
 ```
 
-
 The query should return:
 
 ```
@@ -81,7 +78,6 @@ The query should return:
 }
 ```
 
-
 The presence of **plot_embedding** confirms this document can serve as a query vector.
 
 ### Sanity checks
@@ -92,7 +88,6 @@ You need a [vector index](https://www.mongodb.com/docs/manual/reference/command/
 // Check that the vector search index is available
 db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()
 ```
-
 
 Expected output:
 
@@ -116,7 +111,6 @@ Expected output:
 ]
 ```
 
-
 ### Step 1: Prepare the query vector
 
 MongoDB stores embeddings compactly as BSON Binary (Float32) for storage and indexing efficiency, while [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-foojay&utm_term=megan.grant#mongodb-pipeline-pipe.-vectorSearch) expects the queryVector as a plain [JavaScript array](https://www.w3schools.com/js/js_arrays.asp). You need to extract and convert it at query time.
@@ -129,7 +123,6 @@ const d = db.getSiblingDB("sample_mflix").embedded_movies.findOne(
 
 const qv = Array.from(d.plot_embedding.toFloat32Array())
 ```
-
 
 Here, **qv** becomes a 1,536-element JavaScript array representing the semantic meaning of Inception.
 
@@ -187,7 +180,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
 ]
 ```
 
-
 Semantic search finds thematically close titles, but ranking does not yet reflect quality.
 
 ### Step 3: Apply hybrid scoring
@@ -231,7 +223,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
 ])
 ```
 
-
 Example results:
 
 ```
@@ -273,7 +264,6 @@ Example results:
   }
 ]
 ```
-
 
 This hybrid scoring surfaces titles that are both semantically similar and widely acclaimed.
 
@@ -361,7 +351,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
   { $project: { _id:0, title:1, year:1, genres:1, imdb:1, rrf:1, textRank:1, vectorRank:1 } }
 ])
 ```
-
 
 Example result:
 
@@ -460,11 +449,9 @@ Example result:
 ]
 ```
 
-
 This yields **one ranked list** that balances **keyword intent** (textRank) and **semantic meaning** (vectorRank). Items that rank well in both legs rise to the top; items strong in only one leg still get credit but are ranked lower.
 
-Wrap-up
--------
+## Wrap-up
 
 * **Hybrid search = BM25 + k-NN** . In MongoDB, you combine **Atlas Search** (Lucene/BM25 in mongot) with **Atlas Vector Search** (k-NN over knnVector fields) to capture both exact intent and semantic similarity.
 

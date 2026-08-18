@@ -34,8 +34,7 @@ Expect to spend as much time on operational concerns --- dependency resolution i
 
 Plan around two hours for working through the scenario below!
 
-Step 1 --- Get the original example running
--------------------------------------------
+## Step 1 --- Get the original example running
 
 ### 1.1 Install Deep Netts into your local Maven repository
 
@@ -47,14 +46,12 @@ Download the Deep Netts Pro ZIP from [Deep Netts](https://www.deepnetts.com/) (c
 ./importToLocalMaven.sh      # importToLocalMaven.bat on Windows
 ```
 
-
 Verify it landed:
 
 ```
 ls ~/.m2/repository/com/deepnetts/
 # expect: deepnetts-core-pro/  deepnetts-license/
 ```
-
 
 ### 1.2 Clone and run the example
 
@@ -65,7 +62,6 @@ unzip creditcard.zip          # the full 284k-row dataset
 mvn clean package
 mvn exec:java
 ```
-
 
 The project's `pom.xml` declares:
 
@@ -91,10 +87,7 @@ The imbalance is the whole problem. A model that predicts "not fraud" for every 
 
 Training on the balanced file is the standard starting move, but understand the trade: undersampling throws away \~99% of the legitimate examples, and the resulting model's raw output is calibrated to a 50/50 world that doesn't exist. Your decision threshold will need work (step 4).
 
-
-
-Step 2 --- Make the split deterministic
----------------------------------------
+## Step 2 --- Make the split deterministic
 
 The example splits data at runtime with a random shuffle. For a service, you need to persist a scaler alongside the model, and the scaler's parameters must come from *exactly* the training rows --- not a fresh random split. So split once, to files, and keep them.
 
@@ -156,14 +149,10 @@ public class SplitData {
 }
 ```
 
-
 Run it once. Commit the seed, not the CSVs.
 > The `endsWith(",1")` check assumes `Class` is the final column with no trailing whitespace. Verify against your header before trusting it.
 
-
-
-Step 3 --- Train and export a deployable artifact
--------------------------------------------------
+## Step 3 --- Train and export a deployable artifact
 
 Training produces **two** files. Everyone remembers the model. The forgotten one causes most production incidents.
 
@@ -253,17 +242,13 @@ public class TrainFraudModel {
 }
 ```
 
-
 **Why the duplicated max computation?** The service needs the scaling constants at inference time, and how you retrieve them from `MaxNormalizer` varies by version. Computing them independently from the same file is version-proof and takes 10 lines. Add a test asserting the two agree if your version exposes them.
 
 **This is the number-one production bug in Java ML services:** the model is deployed, the scaler isn't, raw un-normalized values get fed to a network trained on values in `[-1, 1]`, and every output saturates. Nothing throws. Your fraud rate just quietly becomes 0% or 100%.
 
 Ship `fraud-model.dnet` and `scaler.json` as a pair, versioned together, always.
 
-
-
-Step 4 --- Pick a threshold (do not use 0.5)
---------------------------------------------
+## Step 4 --- Pick a threshold (do not use 0.5)
 
 Before writing any Spring code, decide what score means "fraud". Add this to the end of training:
 
@@ -286,15 +271,11 @@ for (float t = 0.05f; t < 1.0f; t += 0.05f) {
 }
 ```
 
-
 Now pick based on cost, not on a round number. A false negative is a chargeback plus fraud loss. A false positive is a declined card, an angry customer, and a support call. If a missed fraud costs 40× a false decline, you want a low threshold and you accept the noise. That's a business decision --- bring the table above to whoever owns it, and put the answer in config, not in code.
 
 Remember the calibration caveat from step 1.3: a model trained on a balanced set outputs numbers that look like probabilities but aren't. The threshold table is empirical and honest; the raw score is not a probability. Don't show it to users as one.
 
-
-
-Step 5 --- Create the Spring Boot project
------------------------------------------
+## Step 5 --- Create the Spring Boot project
 
 ```
 curl https://start.spring.io/starter.zip \
@@ -303,7 +284,6 @@ curl https://start.spring.io/starter.zip \
   -d groupId=com.example -d artifactId=fraud-service \
   -o fraud-service.zip && unzip fraud-service.zip -d fraud-service
 ```
-
 
 Add to `pom.xml`:
 
@@ -325,7 +305,6 @@ Add to `pom.xml`:
 </dependency>
 ```
 
-
 > **CI will break here.** A local `.m2` install works on your laptop and nowhere else. Publish both Deep Netts jars to your internal Nexus/Artifactory once with `mvn deploy:deploy-file` and point CI at that repository. Do this now rather than on the day of your first build-server failure.
 
 `src/main/resources/application.yml`:
@@ -341,13 +320,9 @@ management:
   endpoint.health.show-details: always
 ```
 
-
 Copy `fraud-model.dnet` and `scaler.json` into `src/main/resources/model/`.
 
-
-
-Step 6 --- Load the model and scaler
-------------------------------------
+## Step 6 --- Load the model and scaler
 
 `FraudProperties.java`:
 
@@ -361,7 +336,6 @@ import org.springframework.core.io.Resource;
 public record FraudProperties(Resource modelPath, Resource scalerPath,
                               float threshold, int poolSize) {}
 ```
-
 
 `ModelConfig.java`:
 
@@ -434,17 +408,13 @@ public class ModelConfig {
 }
 ```
 
-
 Two things that matter here:
 
 **The pool exists because a Deep Netts network is stateful.** `setInput()` followed by `getOutput()` is a two-step sequence against instance fields. Two concurrent Tomcat threads sharing one network instance will interleave and hand each other's results back to the wrong caller. It won't throw. It won't log. You'll find it in a customer complaint. A pool of independently deserialized instances is the fix; a `synchronized` block is the simpler fix if your throughput is modest --- measure before choosing.
 
 **`DeepNetts.shutdown()` is not optional.** Without it your context close hangs and your pods take the full termination grace period to die.
 
-
-
-Step 7 --- Scaler and scoring service
--------------------------------------
+## Step 7 --- Scaler and scoring service
 
 `Scaler.java`:
 
@@ -464,7 +434,6 @@ public record Scaler(float[] columnMax) {
     }
 }
 ```
-
 
 `FraudScoringService.java`:
 
@@ -511,7 +480,6 @@ public class FraudScoringService {
 }
 ```
 
-
 Note the `finally` block returns the instance even on failure. Miss that and the pool drains under error conditions, then every request blocks for 200ms and times out --- a slow, confusing outage.
 
 `ScoringUnavailableException.java`:
@@ -528,11 +496,7 @@ public class ScoringUnavailableException extends RuntimeException {
 }
 ```
 
-
-
-
-Step 8 --- The REST layer
--------------------------
+## Step 8 --- The REST layer
 
 Thirty positional floats in a JSON array is a terrible public contract --- one silently reordered field and the model reads `Amount` as `V7`. Name the fields.
 
@@ -559,7 +523,6 @@ public record TransactionRequest(
     }
 }
 ```
-
 
 `FraudController.java`:
 
@@ -595,7 +558,6 @@ public class FraudController {
 }
 ```
 
-
 The `modelVersion` field isn't decoration. When someone asks in six months why a specific transaction was declined, you need to know which model made the call. Log the score and the version for every decision --- in most jurisdictions an automated financial decision needs an audit trail, and reconstructing one retroactively is not possible.
 
 Try it:
@@ -610,11 +572,7 @@ curl -X POST localhost:8080/api/v1/transactions/score \
        "amount":0.0}'
 ```
 
-
-
-
-Step 9 --- Health check and tests
----------------------------------
+## Step 9 --- Health check and tests
 
 A health check that only reports "the bean exists" tells you nothing. Run a known vector through the model:
 
@@ -646,7 +604,6 @@ public class ModelHealthIndicator implements HealthIndicator {
 }
 ```
 
-
 Then a golden-vector test --- the single most valuable test in an ML service, because it catches the model/scaler mismatch that nothing else catches:
 
 ```
@@ -669,15 +626,11 @@ class ScoringRegressionTest {
 }
 ```
 
-
 Pull ten of each from `test.csv`, hard-code them, and let the test fail loudly whenever someone swaps the model without the matching scaler.
 
 Also worth adding: a concurrency test that fires the same vector from 50 threads and asserts every response is identical. If you skipped the pool, this is what catches it.
 
-
-
-Step 10 --- Package and deploy
-------------------------------
+## Step 10 --- Package and deploy
 
 **Model location.** Bundling `.dnet` into the jar is simplest and gives you immutable, atomically-deployed builds. It also means every retrain is a full app deploy. The alternative --- mount from a volume or pull from S3 at startup --- decouples the two but demands you version the model/scaler pair rigorously and handle a bad artifact at boot. Start bundled; move it out when retrain frequency actually hurts.
 
@@ -698,24 +651,17 @@ ENV JAVA_OPTS="-Xmx1g -XX:MaxRAMPercentage=75"
 ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app/app.jar"]
 ```
 
-
 Deep Netts is pure Java, so everything lives on the heap --- no off-heap surprises, but size `-Xmx` for `poolSize × model size` plus normal application overhead. Eight copies of a large network is eight times the memory.
 
 **Readiness vs liveness.** Deserializing eight model instances at startup takes real time. Point your readiness probe at `/actuator/health/readiness` and give it a generous `initialDelaySeconds`, or Kubernetes will kill pods mid-warmup and you'll never reach a stable state.
 
-
-
-Step 11 --- Licensing, before you go live
------------------------------------------
+## Step 11 --- Licensing, before you go live
 
 The free tier is genuinely restrictive for a service like this. It permits deployment in **no more than one production environment** , requires annual revenue generated through the product under **USD 100,000** and total company revenue under **USD 1,000,000** , and explicitly prohibits use to operate or enable any hosted AI platform, managed service, or **SaaS offering**.
 
 An internal fraud-scoring service inside a single production environment at a small company may fit. Anything customer-facing, multi-region, or sold as a service does not. Read the [EULA](https://www.deepnetts.com/end-user-license-agreement/) and talk to Deep Netts before you build a roadmap on the free tier --- I'm not a lawyer and this is a summary, not advice.
 
-
-
-Step 12 --- What you still need for production
-----------------------------------------------
+## Step 12 --- What you still need for production
 
 The service works now. These are the things that separate it from a demo:
 
@@ -725,10 +671,7 @@ The service works now. These are the things that separate it from a demo:
 * **A kill switch.** A config flag that bypasses the model and falls back to rules, flippable without a deploy.
 * **No PII in the feature vector.** The Kaggle data is anonymized for you. Your own features won't be --- decide deliberately what goes into the model and what gets logged.
 
-
-
-Reference: project layout
--------------------------
+## Reference: project layout
 
 ```
 fraud-service/
@@ -759,7 +702,6 @@ fraud-service/
     └── test/java/com/example/fraud/
         └── ScoringRegressionTest.java
 ```
-
 
 Training classes living in the same module is fine to start. Split them into a separate `fraud-training` module once the training dependencies (tablesaw, plotting) start bloating your service image.
 

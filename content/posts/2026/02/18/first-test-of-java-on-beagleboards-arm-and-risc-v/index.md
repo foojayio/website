@@ -30,13 +30,11 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube pZ8hMuQbk8Y >}}
 
-ARM versus RISC-V?
-------------------
+## ARM versus RISC-V?
 
 ARM and RISC-V represent two different approaches to processor design. ARM is the established player we know from, e.g., the Raspberry Pi's. It's mature, and has a huge ecosystem of tools and support built over decades. RISC-V is the open-source alternative, free from licensing restrictions and fully transparent. While ARM still leads in performance and tooling today, RISC-V is catching up fast. The real difference isn't just about speed. It's about openness and flexibility. With RISC-V, you're not locked into a vendor's ecosystem, and you have complete visibility into how your hardware works.
 
-BeagleBoards
-------------
+## BeagleBoards
 
 BeagleBoard has a wide range of single-board-computers in Raspberry Pi-like and Arduino-like formats. Here's how the BeagleBoards I received, compare to the latest Raspberry Pi's:
 
@@ -95,8 +93,7 @@ I received the following boards.
  </figure>
 </figure>
 
-First Tests
------------
+## First Tests
 
 The easiest way to get started with a BeagleBoard and burn the latest OS on an SD card, is the [BeagleBoard Imaging Utility](https://www.beagleboard.org/bb-imager), available for Windows, macOS and Linux. This is the first supplier of SBC's that provides such a tool that is comparable to the Raspberry Pi Imager Tool. It's a crucial factor to get started with a new type of SBC, and BeagleBoard has done a great job in making this tool available.
 
@@ -121,7 +118,6 @@ cd javafx
 jbang HelloJavaFXWorld.java
 ```
 
-
 ### BeagleV-Fire (RISC-V Processor)
 
 This board proved challenging due to my Raspberry Pi habits. I initially created an SD card using the Imaging Utility, not realizing the board already has Ubuntu pre-installed in its eMMC storage. Unfortunately, it's running Ubuntu 23.04, which is no longer maintained, preventing me from updating or installing Java through the package manager. The correct approach requires connecting the board via USB to my computer and flashing the eMMC directly using the Imaging Utility's device mode, but I haven't successfully completed this process yet. While Java RISC-V builds exist and should theoretically work, I need to resolve the OS update issue first before confirming Java compatibility.
@@ -136,7 +132,6 @@ BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19
 Support: https://bbb.io/debian
 default username:password is [beagle:temppwd]
 ```
-
 
 ### BeagleV-Ahead (RISC-V Processor)
 
@@ -165,13 +160,11 @@ Building dependency tree... Done
 E: Unable to locate package java
 ```
 
-
 ### PocketBeagle 2 2 (ARM Processor)
 
 This tiny ARM-based board uses the Cortex A53 processor (the same as the BeagleY-AI), which means Java should run without issues since ARM Java distributions are readily available. I haven't tested it yet, but I'm confident it will work. The exciting part is the included Tech Lab kit with buttons and RGB LEDs that mount directly on top of the board, making it an ideal platform for coding clubs and educational settings where you want to combine programming with physical computing experiments. This compact form factor paired with interactive hardware makes it a promising board for hands-on Java experimentation.
 
-Conclusion
-----------
+## Conclusion
 
 My congratulations to BeagleBoard for their documentation website and Imaging Utility! That really sets them apart from other single-board computer suppliers I tested before. Java on BeagleY-AI runs within minutes of starting my tests, and I'm confident I'll be able to use it for further experiments.
 

@@ -31,8 +31,7 @@ Note that this article does not refer to other embedded systems without a window
 
 If you have never used WSL or the graphics support of WSL before, you might be surprised how seamless everything works nowadays. The X11 configuration is done automatically and should work out of the box once all necessary packages are installed. Performance is decent and comparably much better than running a Linux VM on your Windows system.
 
-JavaFX dependencies on Linux
-----------------------------
+## JavaFX dependencies on Linux
 
 The main thing that can catch you out on these systems is a missing dependency. This will cause the JavaFX platform initialization to fail with library loading errors most of the time.
 
@@ -64,7 +63,6 @@ libpangoft2-1.0-0
 libx11-6<code></code>
 ```
 
-
 And the following dependency list for RPM-based systems (And yes, that is the proper notation. For simplicity, you can ignore the suffixes when reading the list, but you must specify them for it to be a proper notation.):
 
 ```
@@ -95,13 +93,11 @@ libXtst.so.6()(64bit)
 libXxf86vm.so.1()(64bit)
 ```
 
-
 Note that this list is only compiled for basic purposes. If you are looking into full media support with video and sound, you might have to augment these lists with all other dependencies listed in the links. Also, note that these lists are designed for JavaFX 21+ as there is no GTK2 included anymore. When running older versions, you might have to depend on GTK2 as well.
 
 When generating a .deb or .rpm installer, you just have to list these packages to depend on, and they should be automatically installed by the package manager. The generation of .deb and .rpm installers is not covered in this article. We use the [gradle-ospackage-plugin](https://github.com/nebula-plugins/gradle-ospackage-plugin) for that, which is an easy-to-use gradle plugin. However, any other solution should also work.
 
-JavaFX font loading on Linux
-----------------------------
+## JavaFX font loading on Linux
 
 In contrast to Windows and macOS, font loading on Linux is a lot more dynamic. Especially on non-graphical systems or embedded systems, there might be no fonts at all installed by default. Things are made more complicated by the fact that font package names can vary across distributions and package managers. There's no sure way to install some font package on every system as that package might not exist in some distro package manager repositories or has a different name.
 
@@ -137,7 +133,6 @@ private static boolean hasFonts() {
 }
 ```
 
-
 If you make sure that this method is called before the JavaFX platform, or more specifically the font loader, is initialized, your application will always have fonts ready to load, regardless of whether the system has fontconfig or any fonts installed.
 
 It will also only use your custom logical font definitions when your bundled fonts are required, so it does not mess up your existing font configuration on normal systems.
@@ -152,14 +147,12 @@ font.0=Roboto Regular
 file.0=Roboto-Regular.ttf
 ```
 
-
 *logicalfonts.properties:*
 
 ```
 sans.regular.0.font=Roboto Regular
 sans.regular.0.file=Roboto-Regular.ttf
 ```
-
 
 And of course, the .ttf font file itself. You can switch this up any way you like with different fonts or multiple ones, even for different styles. You can take a look at the [documentation](https://wiki.openjdk.org/display/OpenJFX/Font+Setup#FontSetup-JavaFXonanEmbeddedLinuxdevicewithoutthefontconfiglibrary) for a full reference. Keep in mind that it is a little bit outdated and not 100% accurate.
 
@@ -174,5 +167,3 @@ If you're looking for a quick demo, you can attempt to install and run our appli
 And that's all for today! Here is how a JavaFX applications looks like in an Oracle Linux WSL instance:
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-106377 aligncenter" src="wsl-700x450.png" alt="" width="700" height="450">
-
-<br />

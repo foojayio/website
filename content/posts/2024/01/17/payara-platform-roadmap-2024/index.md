@@ -26,12 +26,7 @@ Read below to find out more about Payara Rodmap in the coming months - Java 21 c
 
 You can also [watch the Payara Roadmap 2024 presented](https://www.crowdcast.io/c/virtualpayaraconference/xstAZ) at the Virtual Payara Conference last month.
 
-<br />
-
-<br />
-
-Jakarta EE, MicroProfile \& Payara Platform in 2023 - Recap
------------------------------------------------------------
+## Jakarta EE, MicroProfile \& Payara Platform in 2023 - Recap
 
 We've had a busy year with some exciting new products and features being launched.
 
@@ -62,8 +57,7 @@ At the end of 2023, we launched [our new Payara Starter](https://start.payara.fi
 
 [](https://info.payara.fish/hubfs/Slide4.jpg)
 
-Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud
-----------------------------------------------------------
+## Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud
 
 ### Jakarta EE 10​
 
@@ -97,8 +91,7 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud
 * PAAS
 * [Free 15 days trial](https://www.payara.fish/products/payara-cloud/)
 
-2024 and Beyond
----------------
+## 2024 and Beyond
 
 ### Payara Platform Vision
 
@@ -129,8 +122,7 @@ Summary of 2023 - Jakarta EE, MicroProfile \& Payara Cloud
 * Managing and Monitoring capabilities
 * Adapting to new architectures and deployment infrastructure such as cloud and containers
 
-![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg)Jakarta EE 11
-----------------------------------------------------------------------------------------------------------------
+## ![Slide13](https://blog.payara.fish/hs-fs/hubfs/Slide13.jpg?width=1280&height=720&name=Slide13.jpg)Jakarta EE 11
 
 Previous work on Jakarta EE has focused on establishing a framework and foundation for future innovation so as to make Jakarta EE a solid basis for open source developers to build on. ​
 
@@ -169,13 +161,11 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 
 ​There are also some new specifications which are candidates for inclusion, such as Jakarta Data 1.0, Jakarta MVC 3.0 and Jakarta NoSQL 1.0, which you will also have seen in our roadmap.​
 
-​Payara Developer Tools​
-------------------------
+## ​Payara Developer Tools​
 
 ![](image-5-1024x576.png)
 
-[](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​
---------------------------------------------------------------------
+## [](https://info.payara.fish/hubfs/Slide16.jpg)**Payara Connectors**​
 
 * Supports additional non-standard connectors to other Enterprise infrastructure e.g. Kafka, JMS Providers, Config Sources, Notification Sinks, Security providers.
 * Usable across Payara Core, Payara Server and Payara Cloud.
@@ -186,13 +176,11 @@ The specifications that will all have updated versions for Jakarta EE 11 are lis
 * Deployment of applications to any of the other Payara products.
 * Support for other standard developer tool chains including; CI/CD tools, Maven, Gradle, test frameworks like Arquillian.
 
-Payara Cloud PaaS and Project Aquarium​
----------------------------------------
+## Payara Cloud PaaS and Project Aquarium​
 
 ![](image-6-1024x576.png)
 
-[](https://info.payara.fish/hubfs/Slide18.jpg)
-----------------------------------------------
+## [](https://info.payara.fish/hubfs/Slide18.jpg)
 
 We currently offer **Payara Cloud PaaS, which**is a fully managed installation of Payara Cloud on Payara managed infrastructure (on Azure). It is billed to the customer based on usage. ​
 
@@ -232,8 +220,7 @@ Normally, a developer has to manually manage all the related operations, like pr
 * Azure Edition
 * Native K8s Edition - OpenShift, Rancher, CharmedK8s
 
-Summary
--------
+## Summary
 
 * Payara Platform is first for Jakarta EE, leveraging all the benefits of separating the application from the runtime
 * Developers write business logic, and Payara Platform manages the infrastructure and simplifies deployment
@@ -246,7 +233,4 @@ Summary
   * **Payara Cloud**
 * We have exciting plans for all of our products with a jam-packed roadmap for the coming years!
 
-[Watch the full Payara 2024 Roadmap presentation by clicking here.](https://www.crowdcast.io/c/virtualpayaraconference/xstAZ)
------------------------------------------------------------------------------------------------------------------------------
-
-<br />
+## [Watch the full Payara 2024 Roadmap presentation by clicking here.](https://www.crowdcast.io/c/virtualpayaraconference/xstAZ)

@@ -27,10 +27,7 @@ v5.4.0 shipped without a dedicated changelog post, so this article covers the hi
 
 Let's dig in.
 
-
-
-Verify the signature of the JDK you download
---------------------------------------------
+## Verify the signature of the JDK you download
 
 Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and runs your code is downloaded over the network, and for a long time the only integrity guarantee was TLS. That's fine --- until it isn't. The JDK becomes the `java` binary that the rest of your pipeline trusts, with access to your secrets, your signing keys, and your deploy credentials. Supply-chain integrity of the toolchain itself matters.
 
@@ -43,7 +40,6 @@ v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
     java-version: '21'
     verify-signature: true
 ```
-
 
 When `verify-signature: true`, the action downloads the detached GPG signature that the distribution publishes alongside the archive and validates the JDK **before** it's installed. If the signature doesn't check out, the step fails --- the bad JDK never makes it onto the runner.
 
@@ -62,15 +58,11 @@ A few important details:
     verify-signature-public-key: ${{ secrets.JDK_TRUSTED_PUBLIC_KEY }}
 ```
 
-
 The key is passed as an ASCII-armored GPG public key and overrides the default bundled key for the selected distribution.
 
 If you care about reproducible, supply-chain-safe builds, this is the flag to reach for. Expect the list of supported distributions to grow over time.
 
-
-
-Tencent Kona JDK
-----------------
+## Tencent Kona JDK
 
 `actions/setup-java` now speaks **Tencent Kona JDK** natively:
 
@@ -81,15 +73,11 @@ Tencent Kona JDK
     java-version: '21'
 ```
 
-
 [Tencent Kona JDK](https://tencent.github.io/konajdk/) is an OpenJDK-based, production-grade distribution that Tencent runs at scale, with builds for LTS lines. If your organization standardizes on Kona --- or you just want to test against it --- you no longer need a custom download-and-extract step. It's a first-class `distribution` value now, and it also works via version files (more on that below).
 
 This brings the roster of supported distributions to a healthy list: Temurin, Zulu, Adopt (Hotspot/OpenJ9), Liberica, Microsoft, Corretto, Semeru, Oracle, Dragonwell, SapMachine, GraalVM, GraalVM Community, and now Kona.
 
-
-
-Install a JDK *without* making it the default
----------------------------------------------
+## Install a JDK *without* making it the default
 
 By default, every call to `setup-java` sets `JAVA_HOME` and updates `PATH`, so the last JDK you install "wins" and becomes *the* `java` for the rest of the job. That's usually what you want --- but not always.
 
@@ -110,7 +98,6 @@ Sometimes you need a specific JDK available to *one* step (say, a tool that must
     set-default: false
 ```
 
-
 With `set-default: false`, the action:
 
 * Leaves `JAVA_HOME` and `PATH` **untouched**, so Java 21 remains the default.
@@ -120,10 +107,7 @@ With `set-default: false`, the action:
 This makes it possible for a single job to juggle multiple JDKs cleanly, without the ordering games of "install the one you want last."
 > Note: if you install multiple JDKs in one step via a multiline `java-version`, `set-default: false` applies to all of them --- none become the default, but each stays discoverable through its `JAVA_HOME__` variable.
 
-
-
-Smarter version files: auto-detect the distribution
----------------------------------------------------
+## Smarter version files: auto-detect the distribution
 
 `setup-java` can read your Java version from a file instead of hard-coding it in the workflow. It supports `.java-version`, `.tool-versions` (asdf), and `.sdkmanrc` (SDKMAN). The recent releases taught it to **infer the distribution** from those files, so you can stop repeating yourself.
 
@@ -137,19 +121,14 @@ SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zul
     java-version-file: '.sdkmanrc'
 ```
 
-
 ```
 # .sdkmanrc
 java=21.0.5-tem
 ```
 
-
 That `-tem` is enough --- no `distribution` input needed. In fact, `distribution` is now *optional* when your `.sdkmanrc` uses a recognized suffix.
 
-
-
-A much nicer Maven experience
------------------------------
+## A much nicer Maven experience
 
 Several changes in these releases target one of the most common Java build tools directly.
 
@@ -165,7 +144,6 @@ Maven loves to print a line for *every* artifact it downloads. On a cold cache t
 # Subsequent `mvn` / `./mvnw` calls inherit -ntp automatically
 ```
 
-
 Details worth knowing:
 
 * Applies to **Maven 3.9.0+** and the **Maven Wrapper** (`mvnw`), which honor `MAVEN_ARGS`. Older Maven versions ignore it --- there you can pass `--no-transfer-progress` on the command line.
@@ -180,7 +158,6 @@ Details worth knowing:
     show-download-progress: true  # keep the download/transfer chatter
 ```
 
-
 ### Non-interactive `settings.xml`
 
 The generated `settings.xml` now disables Maven's interactive mode. Translation: Maven will never sit there blocking a CI run waiting on a prompt that no human is going to answer.
@@ -191,10 +168,7 @@ This one is a genuine bug fix that'll make some people very happy. If you called
 
 The generated `toolchains.xml` is now **deduplicated by toolchain type and id** . And crucially, it **preserves** your existing root attributes and any non-JDK toolchains you had in there. So you can install as many JDKs as you like across multiple steps and get a clean, correct toolchains file at the end.
 
-
-
-Don't forget these v5.4.0 additions
------------------------------------
+## Don't forget these v5.4.0 additions
 
 Three more things from that release deserve a callout:
 
@@ -211,11 +185,7 @@ Three more things from that release deserve a callout:
     java-version: '21'
 ```
 
-
-
-
-Putting it all together
------------------------
+## Putting it all together
 
 Here's a workflow that uses several of these features at once --- signature-verified Temurin as the default, a secondary JDK for a tool, version driven from `.sdkmanrc`, Maven caching, and clean logs out of the box:
 
@@ -247,11 +217,7 @@ jobs:
         run: ./mvnw verify   # -ntp already applied; javac errors annotate the PR
 ```
 
-
-
-
-A note on pinning
------------------
+## A note on pinning
 
 One recurring recommendation from the maintainers, and good advice for any third-party action: **pin it** . For reproducible, supply-chain-safe builds, reference the exact release tag `v5.5.0` which are now immutable, or for the strongest guarantee, the full commit SHA:
 
@@ -259,10 +225,7 @@ One recurring recommendation from the maintainers, and good advice for any third
 - uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a  # v5.5.0
 ```
 
-
 The floating `v5` major tag is convenient but moves under you. Pinning to a SHA means the bytes you audited are the bytes that run. Combined with the new `verify-signature` support, you can now have confidence in both *the action* and *the JDK it installs*.
-
-
 
 Grab the full details in the [advanced usage guide](https://github.com/actions/setup-java/blob/v5.5.0/docs/advanced-usage.md) and the [v5.5.0 release notes](https://github.com/actions/setup-java/releases/tag/v5.5.0). As always, feedback and issues are welcome in the [actions/setup-java](https://github.com/actions/setup-java/issues) repo.
 

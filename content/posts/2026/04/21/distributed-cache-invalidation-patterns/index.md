@@ -35,8 +35,7 @@ This is the main reason why cache invalidation is often considered one of the mo
 
 In this article, we will explore several practical models for managing cache invalidation. We will focus on the different strategies developers can apply in real-world systems using tools such as Spring Boot, Redis, and Apache Kafka.
 
-Why Cache Invalidation Becomes Hard in Distributed Systems
-----------------------------------------------------------
+## Why Cache Invalidation Becomes Hard in Distributed Systems
 
 To better understand why cache invalidation in a distributed system is so complex, let's consider how modern systems are typically implemented.
 
@@ -66,8 +65,7 @@ Ensuring that all these levels remain consistent is no trivial matter. As system
 
 The solution? A good cache invalidation strategy should minimize stale data while keeping the system scalable and resilient. Let's see how to do that.
 
-Time-Based Expiration (TTL)
----------------------------
+## Time-Based Expiration (TTL)
 
 One of the simplest strategies for cache invalidation is to apply a time-based expiration, often implemented using a TTL (time-to-live).
 
@@ -91,7 +89,6 @@ public class CacheConfig {
 }
 ```
 
-
 Entries logically expire after ten minutes. Redis removes expired keys lazily when they are accessed, plus a background process periodically cleans them up. This means expired keys may still consume memory briefly after their TTL expires.
 
 We can indicate that the result of a method should be cached by using Spring's caching abstraction:
@@ -107,15 +104,13 @@ public class ProductService {
 }
 ```
 
-
 The main advantage of TTL-based caching is definitely its simplicity: it works well when the application can tolerate short periods of outdated data.
 
 However, TTL alone rarely solves the entire problem: if a record changes immediately after being cached, the system may serve outdated information for the entire TTL.
 
 More proactive and effective invalidation strategies are necessary when dealing with highly dynamic data.
 
-The Cache-Aside Pattern
------------------------
+## The Cache-Aside Pattern
 
 A widely used approach to application-level caching is the "cache-aside" model, also known as the "lazy loading" mechanism. In this model, the application itself handles interactions with both the cache and the database (or any other system to be cached).
 
@@ -131,7 +126,6 @@ public Product getProduct(String id) {
 }
 ```
 
-
 When data changes, the application explicitly removes the corresponding cache entry.
 
 ```
@@ -142,13 +136,11 @@ public void updateProduct(Product product) {
 }
 ```
 
-
 The next request will trigger the process again: reading from the database and repopulating the cache.
 
 Cache-aside works very well in single-instance applications. In distributed systems, however, it invalidates the cache only on the node that performs the update. The other nodes may continue to serve outdated values unless additional coordination mechanisms are implemented.
 
-Event-Based Cache Invalidation
-------------------------------
+## Event-Based Cache Invalidation
 
 A common approach to invalidating a distributed cache is to use event-driven communication.
 
@@ -180,7 +172,6 @@ public class ProductService {
 }
 ```
 
-
 Each service instance subscribes to the invalidation channel and clears the cache entry locally.
 
 ```
@@ -197,13 +188,11 @@ public class CacheInvalidationListener implements MessageListener {
 }
 ```
 
-
 This approach ensures that all nodes have the opportunity to respond to the same stream of events, keeping caches synchronized across the entire system.
 
 The main challenge lies in managing reliability issues, such as message delivery guarantees and duplicate events. For this reason, enterprise systems with strict requirements often rely on durable messaging platforms rather than the simple Pub/Sub model.
 
-Versioned Cache Keys
---------------------
+## Versioned Cache Keys
 
 Another effective strategy is using versioned cache keys. Instead of deleting cache entries when data changes, the system creates a new cache key with an incremented version.
 
@@ -215,7 +204,6 @@ product:123:v1
 product:123:v2
 ```
 
-
 When the product changes, the application increments the version number and writes the updated value under the new key; at this point, users automatically retrieve the latest version.
 
 We can create a helper method to manage versioned keys:
@@ -226,13 +214,11 @@ public String buildCacheKey(String productId, int version) {
 }
 ```
 
-
 This technique eliminates race conditions in which one node invalidates a cache entry while another node is writing a new value to that entry.
 
 Versioned keys are particularly useful in high-throughput systems, where invalidation events may arrive in random order. What is the drawback? Keys can accumulate over time, leading to cache overload. It is therefore necessary to implement a periodic cleanup process to remove obsolete and no-longer-useful versions.
 
-Multi-Layer Caching
--------------------
+## Multi-Layer Caching
 
 Many modern systems combine local in-memory caches with distributed caches. This multi-tiered approach reduces latency while maintaining the necessary scalability.
 
@@ -259,11 +245,9 @@ public CacheManager cacheManager() {
 }
 ```
 
-
 In a setup like this, invalidation events must clear both cache levels. While this adds complexity, it allows us to significantly reduce the number of remote cache calls and improve response times under heavy load. It's important to note that local cache size should be tuned relative to the number of instances. With 10 instances each caching 10,000 entries, total memory consumption across the fleet is 100,000 entries. Size it carefully!
 
-Event-Driven Cache Rebuilds
----------------------------
+## Event-Driven Cache Rebuilds
 
 There are some architectural strategies, particularly those inspired by CQRS, where caches are not simply invalidated but are rebuilt from domain events.
 
@@ -288,13 +272,11 @@ public void handleProductUpdate(ProductUpdatedEvent event) {
 }
 ```
 
-
 Applying this pattern transforms the cache into a projection of the event stream rather than a layer of temporary storage.
 
 It is a powerful pattern, but it requires a mature event infrastructure and careful design focused on ensuring the consistency of the final result.
 
-Choosing the Right Strategy
----------------------------
+## Choosing the Right Strategy
 
 So what is the best approach? None. There is no single optimal approach to cache invalidation in distributed systems.
 
@@ -310,8 +292,7 @@ A starting combination could be:
 
 Systems with high-throughput requirements can adopt versioned keys or event-driven read patterns to ensure the overall effectiveness of the invalidation model.
 
-Final Thoughts
---------------
+## Final Thoughts
 
 Caching remains one of the most effective ways to improve the performance of distributed systems. When implemented effectively and in line with business requirements, it can drastically reduce the load on the database or external services and greatly improve response times and overall system latency.
 

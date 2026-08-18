@@ -34,14 +34,11 @@ frozen: false
 
 {{< youtube JaYaDOHtbyA >}}
 
-<br />
-
 It's also a core part of the academic theory behind debugging. Its purpose is to prevent regressions and increase collaboration in a team environment. Without this process, any issue we fix might come back to haunt us in the future. This process helps developers work cohesively and efficiently.
 
 {#the-importance-of-issue-tracking}
 
-The Importance of Issue Tracking
---------------------------------
+## The Importance of Issue Tracking
 
 I'm sure we all use an issue tracker. In that sense, we should all be aligned. But do you sometimes "just fix a bug"?
 
@@ -72,8 +69,7 @@ Issues in a tracking system are often more accessible than pull requests or spec
 
 {#communication-issue-tracker-vs-ephemeral-channels}
 
-Communication: Issue Tracker vs. Ephemeral Channels
----------------------------------------------------
+## Communication: Issue Tracker vs. Ephemeral Channels
 
 I use Slack a lot. This is a problem, it's convenient but it's ephemeral and in more than one case important information written in a Slack chat was gone. Emails aren't much of an improvement, especially in the long term. An email thread I had with a former colleague was cut short and I had no context as to where it ended.
 
@@ -103,8 +99,7 @@ However, it's essential to keep these meetings concise. Detailed discussions sho
 
 {#the-role-of-testing-in-debugging}
 
-The Role of Testing in Debugging
---------------------------------
+## The Role of Testing in Debugging
 
 We all use tests when developing (hopefully) but debugging theory has a special place for tests.
 
@@ -129,8 +124,7 @@ To ensure quality **focus on integration tests for coverage.** Relying solely on
 
 {#final-word}
 
-Final Word
-----------
+## Final Word
 
 A structured approach to debugging, combined with effective communication and a robust testing strategy, can significantly enhance the efficiency and quality of software development. This isn't about convenience, the process underlying debugging is like a paper trail for the debugging process.
 

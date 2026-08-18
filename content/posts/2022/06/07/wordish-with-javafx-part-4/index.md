@@ -49,8 +49,7 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 4: What's In a Word, Anyway?
----------------------------------
+## Part 4: What's In a Word, Anyway?
 
 Wordish depends on a word list. While the official Wordle game gives every player the same target word once per day, Wordish allows you to play as many times as you want. Wordish generates a word randomly from a list and uses the same list to check the validity of a submitted word. Thus, target words don't come from a carefully curated list. This makes Wordish more difficult, since you can be challenged with obscure words, such as:
 
@@ -68,7 +67,6 @@ The following shell command uses the search command `grep` to find all five-lett
 ```bash
 $ grep -E '^[a-z]{5}$' /usr/share/dict/words | tr [:lower:] [:upper:] > wordlist.txt
 ```
-
 
 The resulting file contains 8,497 words and we add **wordlist.txt** to our maven project under subdirectory **resource**.
 
@@ -108,7 +106,6 @@ public class WordData {
 }
 ```
 
-
 Once the WordData object is created, we set a new target word (the word to be guessed) with method `setNewWord()`, shown below. Instance variable `usedIndices` is a Set. The `do-while` loop terminates when a unique index is added to the Set. (The Set `add()` method rejects elements already in the Set, returning false.) We then use this index to set the next target word from our list of words. This lets users play multiple games of Wordish without getting duplicate words for the target.
 
 ```java
@@ -130,7 +127,6 @@ Once the WordData object is created, we set a new target word (the word to be gu
     }
 ```
 
-
 We call method `setNewWord()` when we start a new game. And we call method `getTheWord()` any time we need to access our current target word.
 
 ### Is Your Word Valid?
@@ -144,7 +140,6 @@ public boolean isAWord(String guess) {
     return words.stream().anyMatch(w -> w.equals(guess));
 }
 ```
-
 
 We use `stream()` and `anyMatch()` which returns true if any stream element matches the provided guess word. Since this is a short-circuiting terminal operation, processing ends as soon as a match is found.
 

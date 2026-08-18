@@ -34,8 +34,7 @@ In this first step of the AutoScale development, we have introduced the concept 
 
 The AutoScale feature is in continuous development, with improvements and additional functionality (including addressing the routing issue) planned in our future releases.
 
-Up and Down
------------
+## Up and Down
 
 The ability to increase or decrease the number of instances in a Deployment Group is an important aspect in the idea for the AutoScale feature.
 
@@ -45,22 +44,19 @@ When an instance is added to a Deployment Group, the required configuration and 
 ./asadmin scale-up dg-apps
 ```
 
-
 (where dg-apps is the name of the Deployment Group.)
 
 You have the ability to add multiple instances at once (use `-q <n>` as option with *\<n\>* the number you additional instances) or decrease the number of instances with the asadmin command `scale-down`.
 
 The process of adding and removing instances to a deployment group depends on your environment. A Deployment Group must know how it can perform the scale request since it is different if you are using SSH nodes with Virtual Machine than when you run the environment within a Cloud Provider, like Microsoft Azure. To account for these differences, we have introduced the concept of a Scale Group and for the important environments, like Virtual Machines and the major Cloud providers, we will implement the concept. But it is an API, so anyone can implement their requirements.
 
-Scale Groups
-------------
+## Scale Groups
 
 The request to add or remove an instance from a Deployment Group is delegated to the Scale Group associated with it. With the June 2021 Community Edition release (5.2021.4), we have implemented a Scale Group that operates on SSH nodes. The command to create such a Scale Group is the `create-nodes-scaling-group` asadmin command.
 
 ```
 ./asadmin create-nodes-scaling-group --deploymentgroup dg-apps --config dg-config --nodes "payara-node1,payara-node2" my-scaler
 ```
-
 
 It requires 4 parameters:
 
@@ -71,22 +67,19 @@ It requires 4 parameters:
 
 Each Deployment Group can have only one Scale Group. When you try to assign multiple you will receive an error message and when the Deployment Group doesn't have a Scale Group, the scale-up and scale-down commands will result in an error message.
 
-Current Limitations
--------------------
+## Current Limitations
 
 We realise that the SSH nodes Scale Group might have limited use cases. The implementation requires that you have already defined these SSH nodes, which means that although the number of instances is dynamic, it is also a bit fixed as it is limited to the number of SSH nodes you specify.
 
 The implementation for the different Cloud Providers can take advantage of the dynamic nature of that system but the SSH nodes implementation was the easiest to implement as it doesn't has any other dependencies than Payara Server itself.
 
-Routing
--------
+## Routing
 
 In this first implementation of AutoScale, we did not address the issue of the request routing. An additional instance means also that the configuration of the load balancer needs to be adjusted so that user requests can be routed to this new instance. This will be addressed after we have finished implementing the different Scale Groups.
 
 There are already options to make use of the dynamic scaling with today's AutoScale version, for example, you can configure loadbalancers like Nginx and Apache with a health check so that requests are only routed when the instance is running.
 
-Installation
-------------
+## Installation
 
 This AutoScale functionality is not included within the Payara Community Edition by default - it is an extension. [You can read more about the installation and the different asadmin commands on our documentation page](https://docs.payara.fish/community/docs/documentation/extensions/autoscale/).
 
@@ -98,8 +91,7 @@ In short;
 
 The artifacts can also be found in our Nexus repository <https://nexus.payara.fish/#browse/browse:payara-artifacts>.
 
-The Future of the AutoScale Feature
------------------------------------
+## The Future of the AutoScale Feature
 
 When fully developed, AutoScale will make it easy to dynamically change the cluster size of your Deployment Group. In this release, we have laid the groundwork of the functionality. The Scale Group API is defined and we have implemented it with SSH nodes as that did not require an external dependency. Later on, we will expand this functionality to Cloud providers, address the routing, and add some rules so that scaling can be autonomous.
 

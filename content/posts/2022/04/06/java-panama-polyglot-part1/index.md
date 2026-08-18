@@ -44,8 +44,7 @@ You'll first see some requirements needed to successfully execute the code examp
 
 Next, you will be shown a **problem** and **solution** section then followed-up by code examples. Lastly, is the **How it works** section explains what is actually going on in the code examples.
 
-Requirements
-------------
+## Requirements
 
 * Project Panama EA release - Build 19-panama+1-13 (2022/1/18) - <https://jdk.java.net/panama/>
 * GNU g++ compiler
@@ -53,13 +52,11 @@ Requirements
   * Linux - install g++
   * Windows - <https://code.visualstudio.com/docs/cpp/config-mingw>
 
-Problem
--------
+## Problem
 
 As a **C++ developer** you want to expose functions allowing Java developers to call into.
 
-Solution
---------
+## Solution
 
 Create and **export C functions** as symbols that are available to linkers. As a C++ developer you will create C based functions that will allow Java's foreign function APIs to access native symbols (CLinker).
 
@@ -67,8 +64,7 @@ As a C++ developer you will create a native C++ library created for a specific o
 
 Similar to jar files native libraries are operating system specific and can be compiled along with other C++ based applications. Often times library developers will make functions available to other languages that understand the well known C ABI (Application Binary Interface) standard (convention).
 
-Example
--------
+## Example
 
 As an example we will create a C++ class representing a rectangle object with private fields `width` and `height`.
 
@@ -104,7 +100,6 @@ int rectArea(int w, int h) {
 }
 ```
 
-
 Let's create a native library using `g++`. Enter the following to compile the C++ code above:
 
 ```bash
@@ -117,7 +112,6 @@ g++ -dynamiclib -current_version 1.0 -I <include directory> -o myrectangle.so My
 // Windows
 g++ -dynamiclib -current_version 1.0 -I <include directory> -o myrectangle.dll MyRectangle.cpp
 ```
-
 
 Above you'll notice switches being used. The following are the switches and their descriptions:
 
@@ -147,7 +141,6 @@ int area = (int) rectAreaMH.invokeExact(w, h);
 System.out.printf("MethodHandle calling rectArea(%d, %d) = (%d)\n", w, h, area);
 ```
 
-
 To execute the code do the following:
 
 ```bash
@@ -157,7 +150,6 @@ java --enable-native-access=ALL-UNNAMED \
      RectangleMain.java
 ```
 
-
 Below is the output:
 
 ```bash
@@ -165,9 +157,7 @@ Inside C++ Code
 MethodHandle calling rectArea(8, 2) = (16)
 ```
 
-
-How it Works
-------------
+## How it Works
 
 Looking at the C++ code listing above you'll notice a `Rectangle` class defined with a constructor definition having two (private) data members **width** \& **height** and a public function `area()` that will return the area calculation of the rectangle.
 
@@ -188,7 +178,6 @@ int doWork(int num) {
 }
 ```
 
-
 ### Compiling and Building a Native library
 
 When building the native library the `g++` compiler will need the switch `-dynamiclib` and `-I` with known include directories. When the `-o` option is applied the library's file name is named based on the operating system (library naming convention). This allows Java's `System.loadLibrary()` method to load the library in a portable way across operating systems.
@@ -205,7 +194,6 @@ The following are the naming conventions for the respective operating systems:
 java.lang.UnsatisfiedLinkError
 ```
 
-
 ### Java talking to C++ (C functions)
 
 The code example using Java 18's Panama (FFI) APIs you don't need to use the `jextract` tool. Here you'll notice the code creating a method handle (`MethodHandle`) instance by obtaining the native symbol (C function) to be invoked. Shown below is the `FunctionDescriptor` of the signature for the `areaRect()` C function.
@@ -215,9 +203,7 @@ The code example using Java 18's Panama (FFI) APIs you don't need to use the `je
 FunctionDescriptor.of(C_INT, C_INT, C_INT)
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In a series of articles, we will be exploring other languages that can be accessed using Panama's foreign function interface APIs.
 

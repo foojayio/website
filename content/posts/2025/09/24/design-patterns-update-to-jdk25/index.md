@@ -71,7 +71,6 @@ void main(){
 }
 ```
 
-
 I have updated the source code for my book "[Practical Design Patterns for Java Developers \[7\]](https://github.com/mirage22/Practical-Design-Patterns-for-Java-Developers/tree/main-update-j25 "Practical Design Patterns for Java Developers [7]")" to JDK 25, maintaining these examples in a separate branch to ensure the code samples referenced in the book remain accessible.
 
 ### JEPs LTS journey (focus on coding but not only):
@@ -117,5 +116,3 @@ JDK25 LTS:
 6. [Project Valhalla](https://openjdk.org/projects/valhalla/ "Project Valhalla")
 7. [GitHub Update to JDK25, Practical Design Patterns for Java Developers](https://github.com/mirage22/Practical-Design-Patterns-for-Java-Developers/tree/main-update-j25 "GitHub Update to JDK25, Practical Design Patterns for Java Developers")
 8. [Stochastic AI Agility](https://foojay.io/today/stochastic-ai-agility-breaking-cycles-of-debt/ " Stochastic AI Agility")
-
-<br />

@@ -36,7 +36,6 @@ if (optionalValue.isPresent()) {
 }
 ```
 
-
 In this example, we created an Optional from a potentially null value. We then use the Optional.isPresent() method to check if the value is present, and use Optional.get() to access the value safely.
 
 ### Simplifying Exception Handling
@@ -47,7 +46,6 @@ Another compelling use case of Optional is to simplify exception handling. You c
 Optional<String> optionalValue = Optional.empty();
 String value = optionalValue.orElseThrow(() -> new RuntimeException("Value is not present!"));
 ```
-
 
 In this example, we create an empty Optional and use Optional.orElseThrow() to throw a RuntimeException if the value is not present. This simplifies the exception-handling code and makes it more concise and readable.
 
@@ -69,7 +67,6 @@ public static Book searchBook(String isbn) {
 }
 ```
 
-
 This method throws an exception if the book with the given ISBN is not found in the library. The decision on how to handle this error is made by the method itself. Now, let's modify this method to use Optional to delay error handling to the caller:
 
 ```java
@@ -84,7 +81,6 @@ public static Optional<Book> searchBook(String isbn) {
 }
 ```
 
-
 In this modified version, if the book with the given ISBN is not found in the library, the method returns an empty Optional, indicating an error has occurred. Otherwise, it returns an Optional containing the book.
 
 Now, the caller of this method can decide how to handle the error. Here's an example:
@@ -98,14 +94,11 @@ if (book.isPresent()) {
 }
 ```
 
-
 In this example, the caller will print an error message if the book with the given ISBN is not found in the library. Otherwise, it will print the title of the book. The caller now decides how to handle the error, not the method itself.
 
 Thanks to my friend [Ties van de Ven](https://twitter.com/ties_ven) for sharing this one.
 
 ### Chaining Optional Values
-
-<br />
 
 We can also chain Optional values using the Optional.flatMap() method. This can be useful for accessing values that are nested within other objects. For example, if you have an object that contains another object that might be null, you can use Optional.flatMap() to access the nested value without risking a NullPointerException.
 
@@ -113,7 +106,6 @@ We can also chain Optional values using the Optional.flatMap() method. This can 
 Optional<Author> optionalAuthor = Optional.ofNullable(book)
                                           .flatMap(Book::getAuthor);
 ```
-
 
 In this example, we chain two Optional values using Optional.flatMap(). We create an Optional from a potentially null book object and then use Optional.flatMap() to access the author value if it is present. This simplifies the code and avoids the need for null checks.
 
@@ -128,7 +120,6 @@ String result = Optional.ofNullable(value)
                         .orElse(defaultValue);
 ```
 
-
 In this example, we created an Optional from a potentially null value, and used Optional.orElse() to specify a default value if the Optional is empty. This makes the code more resilient and avoids errors caused by null or missing values.
 
 ### Avoiding Boilerplate Code
@@ -142,7 +133,6 @@ String result = optionalValue.map(s -> s.toUpperCase())
                             .orElse("default");
 ```
 
-
 In this example, we create an Optional from a potentially null value, and use Optional.map() to perform a transformation on the value only if it is present. This avoids the need for an if statement to check for null, and makes the code more concise and readable.
 
 ### Facilitating Method Composition
@@ -154,7 +144,6 @@ Optional<String> optionalValue = Optional.of("Hello")
                                          .map(s -> s.toUpperCase())
                                          .filter(s -> s.startsWith("H"));
 ```
-
 
 In this example, we create an Optional from a string, use Optional.map() to convert it to uppercase, and then use Optional.filter() to remove any values that do not start with "H". This allows us to compose multiple methods calls together in a single expression.
 
@@ -172,7 +161,6 @@ String result = optionalList.stream()
                             .collect(Collectors.joining(" "));
 ```
 
-
 In this example, we create a list of Optional values, use Optional.stream() to create a stream of non-empty values, and then use stream methods to join the non-empty values into a single string. This allows us to handle collections of Optional values more elegantly and expressively.
 
 ### Simplifying Configurations
@@ -184,7 +172,6 @@ String value = Optional.ofNullable(System.getProperty("my.property"))
                        .orElse("default");
 ```
 
-
 In this example, we create an Optional from a system property value and use Optional.orElse() to specify a default value if the property is not present. This makes the configuration more resilient and avoids errors caused by missing configuration parameters.
 
 ### Simplifying Method Signatures
@@ -195,10 +182,7 @@ Optional can be used to simplify method signatures by allowing methods to return
 Optional<String> findValue(String key);
 ```
 
-
 In this example, we define a method that returns an Optional value, indicating that the value might be missing. This provides a concise and expressive way to indicate that the method might not return a value, and avoids the need for null checks.
-
-<br />
 
 ### Providing Default Implementation
 
@@ -213,7 +197,6 @@ public interface UserService {
 }
 ```
 
-
 In this example, we define an interface that provides a default implementation for a method that returns an Optional value. This simplifies the implementation of the interface and provides a default behavior that can be overridden if necessary.
 
 ### Enhancing Readability
@@ -224,7 +207,6 @@ Optional can be used to enhance the readability of code by providing a clear and
 Optional.ofNullable(value)
         .ifPresentOrElse(v -> doSomething(v), () -> doSomethingElse());
 ```
-
 
 In this example, we create an Optional from a potentially null value, and use Optional.ifPresentOrElse() to perform one action if the value is present, and a different action if the value is not present. This provides a clear and concise way to handle null values, and makes the code more readable and maintainable.
 
@@ -239,7 +221,6 @@ Optional.ofNullable(value)
         .ifPresent(v -> doSomething(v));
 ```
 
-
 In this example, we create an Optional from a potentially null value, use Optional.map() to convert it to uppercase, use Optional.filter() to remove any values that do not start with "A", and then use Optional.ifPresent() to perform an action if the value is present. This provides a clear and concise way to chain method calls together and makes the code more expressive and readable.
 
 ### Handling Complex Object
@@ -252,7 +233,6 @@ Optional<Color> colorOptional = Optional.ofNullable(square)
                 .map(ColoredPoint::color);
 ```
 
-
 In this example, we create an Optional from a potentially null object, use Optional.map() to access a sub-object, and then use Optional.map() to access a value in the sub-object. This allows us to handle complex objects more elegantly and expressively, making the code more resilient and maintainable.
 
 ### Providing an Alternative Value
@@ -263,7 +243,6 @@ Optional can be used to provide an alternative value if a value is not present. 
 Optional<String> optionalValue = Optional.ofNullable(value)
                                          .or(() -> Optional.of("default"));<span class="c3 c0">                                   </span>
 ```
-
 
 In this example, we create an Optional from a potentially null value, and use Optional.or() to provide an alternative value if the value is not present. This allows us to handle missing values more elegantly and expressively.
 
@@ -276,7 +255,6 @@ Optional<String> lazyValue = Optional.ofNullable(null)
                                       .map(v -> computeValue());<span class="c3 c0">            </span>
 ```
 
-
 In this example, we create an Optional from a potentially null value and use Optional.map() to defer the computation of the value until the value is actually needed. This provides a lazy evaluation of the value, and can improve the performance of the code.
 
 ### Handling Multiple Optional Values
@@ -288,7 +266,6 @@ Optional<String> optionalValue1 = Optional.of("Hello");
 Optional<String> optionalValue2 = Optional.of("World");
 Optional<String> result = optionalValue1.flatMap(v1 -> optionalValue2.map(v2 -> v1 + " " + v2));
 ```
-
 
 In this example, we create two Optional values, use Optional.flatMap() and Optional.map() to combine the values into a single string, and then use the resulting Optional to perform additional operations. This provides a concise and expressive way to handle multiple optional values and makes the code more readable and maintainable.
 
@@ -305,7 +282,6 @@ TypedQuery<User> query = em.createQuery(cq);
 Optional<User> result = query.getResultList().stream().findFirst();
 ```
 
-
 In this example, we create a JPA Criteria Query, use Optional to handle the case where the query might not have any results, and then use the resulting Optional to perform additional operations. This provides a simple and expressive way to handle JPA Criteria Queries, and avoids null checks and if statements.
 
 ### Simplifying Database Operations
@@ -320,13 +296,8 @@ ResultSet rs = stmt.executeQuery();
 Optional<String> name = rs.next() ? Optional.of(rs.getString("name")) : Optional.empty();
 ```
 
-
 In this example, we create a database connection, prepare a statement, execute a query, and use Optional to handle cases where the query might not have any results. This provides a simple and expressive way to handle database operations and avoids null checks and if statements.
 
 These are just a few more examples of how Optional can simplify and improve your Java code. By leveraging the capabilities of Optional, you can write more concise, expressive, and resilient code.
 
 I hope you enjoyed the article; until next time, stay happy!
-
-<br />
-
-<br />

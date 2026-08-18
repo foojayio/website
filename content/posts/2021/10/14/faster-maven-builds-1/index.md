@@ -25,8 +25,7 @@ Builds require a few properties, chief among them reproducibility. I would consi
 
 I want to detail some techniques you can leverage to make your Maven builds faster in this article. The [next article](https://foojay.io/today/faster-maven-builds-part-2/) focuses on how to do the same inside of Docker.
 
-Baseline
---------
+## Baseline
 
 Since I want to propose techniques and evaluate their impact, we need a sample repository. I've chosen [Hazelcast code samples](https://github.com/hazelcast/hazelcast-code-samples) because it provides a large enough multi-modules code base with many submodules; the exact commit is [448febd](https://github.com/hazelcast/hazelcast-code-samples/commit/448febd9977b9927a3f00bbf61ba50b2c0d94bb4).
 
@@ -46,7 +45,6 @@ The rules are the following:
 [INFO] -------------------------------------------------------
 ```
 
-
 Let's start with our baseline, `mvn test`. The results are:
 
 * 02:00 min
@@ -55,8 +53,7 @@ Let's start with our baseline, `mvn test`. The results are:
 * 01:56 min
 * 01:58 min
 
-Using all CPUs
---------------
+## Using all CPUs
 
 By default, Maven uses a single thread. In the age of multicores, this is just waste. It's possible to run parallel builds using multiple threads by setting an absolute number or a number relative to the number of available cores. For more information, please check the [relevant documentation](https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3).
 
@@ -70,7 +67,6 @@ When the command starts, you should see the following message in the console:
 Using the MultiThreadedBuilder implementation with a thread count of X
 ```
 
-
 * 51.487 s (Wall Clock)
 * 40.322 s (Wall Clock)
 * 52.468 s (Wall Clock)
@@ -79,8 +75,7 @@ Using the MultiThreadedBuilder implementation with a thread count of X
 
 The numbers are much better but with a higher variance.
 
-Parallel test execution
------------------------
+## Parallel test execution
 
 Parallelization is an excellent technique. We can do the same regarding test execution. By default, the Maven Surefire plugin runs tests sequentially, but it's possible to configure it to run tests in parallel. Please refer to the [documentation](https://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html#Parallel_Test_Execution) for the whole set of options.
 
@@ -91,7 +86,6 @@ We will manually set the number of threads:
 ```bash
 mvn test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 #1 #2
 ```
-
 
 1. Configure Surefire to run both classes and methods in parallel
 2. Manual override the thread count to 16
@@ -106,8 +100,7 @@ Let's run it:
 
 It seems that the cost of thread synchronization offsets the potential gain of running parallel tests.
 
-Offline
--------
+## Offline
 
 Maven will check whether a `SNAPSHOT` dependency has a new "version" at every run. It means additional network roundtrips. We can prevent this check with the `--offline` option.
 
@@ -123,8 +116,7 @@ The command is `mvn test -o`, `-o` being the shortcut for `--offline`.
 
 The codebase has a considerable number of `SNAPSHOT` dependencies; hence offline speeds up the build significantly.
 
-JVM parameters
---------------
+## JVM parameters
 
 Maven itself is a Java-based application. It means each run starts a new . A JVM first interprets the *bytecode* **and** then analyze the workload and compiles the *bytecode* to *native code* accordingly: it means peak performance, but only after a (long) while. It's great for long-running processes, not so much for command-line applications.
 
@@ -134,7 +126,6 @@ We will likely not reach the peak performance point in the context of builds sin
 -XX:-TieredCompilation -XX:TieredStopAtLevel=1
 ```
 
-
 Let's now simply run `mvn test`:
 
 * 01:44 min
@@ -143,8 +134,7 @@ Let's now simply run `mvn test`:
 * 01:53 min
 * 01:55 min
 
-Maven daemon
-------------
+## Maven daemon
 
 The [Maven daemon](https://github.com/mvndaemon/mvnd) is a recent addition to the Maven ecosystem. It draws its inspiration from the [Gradle daemon](https://docs.gradle.org/current/userguide/gradle_daemon.html):
 > Gradle runs on the Java Virtual Machine (JVM) and uses several supporting libraries that require a non-trivial initialization time. As a result, it can sometimes seem a little slow to start. The solution to this problem is the Gradle Daemon: a long-lived background process that executes your builds much more quickly than would otherwise be the case. We accomplish this by avoiding the expensive bootstrapping process and leveraging caching by keeping data about your project in memory.
@@ -163,8 +153,7 @@ Once you have installed the software, you can run the daemon with the `mvnd` com
 
 Note that the daemon uses multiple threads by default, with `number of cores - 1`.
 
-Mixing and matching
--------------------
+## Mixing and matching
 
 We've seen several ways to speed up the build. What if we used them in conjunction?
 
@@ -173,7 +162,6 @@ Let's first try with every technique we've seen so far in the same run:
 ```bash
 mvnd test -Dparallel=all -DperCoreThreadCount=false -DthreadCount=16 -o #1 #2 #3 #4
 ```
-
 
 1. Use the Maven daemon
 2. Run the tests in parallel
@@ -209,8 +197,7 @@ Now we can display the consolidated results:
 |         % gain         |     -      |     61.46%     |     1.19%      |  8.66%  |   6.79%    | 72.48% |                     78.32%                     |            **79.80%**             |
 |------------------------|------------|----------------|----------------|---------|------------|--------|------------------------------------------------|-----------------------------------|
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we have seen several ways to speed up your Maven build. Here's the summary:
 

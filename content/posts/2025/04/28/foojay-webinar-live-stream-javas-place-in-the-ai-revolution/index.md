@@ -28,8 +28,7 @@ This webinar focuses on practical predictive AI/ML approaches in pure Java. We'l
 
 If you're a Java developer or architect interested in learning more about AI/ML with structured data, this session will show you how to do it efficiently using native Java tools.
 
-Guests
-------
+## Guests
 
 ### Frank Greco
 
@@ -39,15 +38,13 @@ Senior AI/ML Consultant, Technology Strategist, Java Champion, Developer Ecosyst
 
 CEO of @Deep Netts, Full Professor at University of Belgrade, Java Champion, AI Consultant \| Deep Learning Development Platform
 
-Moderator
----------
+## Moderator
 
 ### Pratik Patel
 
 VP Developer Advocacy at Azul, Java Champion
 
-Links
------
+## Links
 
 * LinkedIn Course: [Foundations of AI and Machine Learning for Java Developers](https://www.linkedin.com/learning/foundations-of-ai-and-machine-learning-for-java-developers/patterns-are-everywhere)
 * Demo on Github: <https://github.com/deepnetts/CreditCardFraudDetection>
@@ -55,7 +52,6 @@ Links
 * Join Linkedin Group AI/ML for Java Ecosystem: <https://www.linkedin.com/groups/10084933/>
 * Quick Survey for future webinars: <https://forms.gle/RfskNfohaKkhP15Q9>
 
-Slides
-------
+## Slides
 
 [Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025](https://foojay.io/wp-content/uploads/2025/04/Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025.pdf){#wp-block-file--media-c83080be-6911-4038-b049-292febd02417}[Download](https://foojay.io/wp-content/uploads/2025/04/Foojay_Webinar_Java_s_Place_in_the_AI_Revolution_Azul_DeepNetts_April_2025.pdf)

@@ -36,7 +36,6 @@ In order to upgrade to the new version, simply change the dependency version in 
 </dependency>
 ```
 
-
 #### Maven dependency for Jakarta EE Web Profile 9.1
 
 ```java
@@ -46,4 +45,3 @@ In order to upgrade to the new version, simply change the dependency version in 
   <version>9.1.0</version>
 </dependency>
 ```
-

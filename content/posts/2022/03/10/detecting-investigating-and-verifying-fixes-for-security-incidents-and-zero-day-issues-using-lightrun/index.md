@@ -23,15 +23,13 @@ frozen: false
 
 I'm not a security expert. I'd like to think of myself as a security conscious developer, but this is a vast subject with depth and breadth. What I understand is [Lightrun and Debugging](https://lightrun.com/debugging/remote-debugging/). In that capacity, I can show some creative ways you can use it as a security tool. A "proper" security expert could take this to the next level.
 
-What is Lightrun?
------------------
+## What is Lightrun?
 
 Lightrun is a developer oriented observability tool. Like a debugger in your [production environment](https://lightrun.com/debugging/debugging-microservices-in-production-an-overview/) without the security risks. Lightrun is a tool that's flexible enough to fit into multiple molds, just like the debuggers that birthed it.
 
 With Lightrun, you can inject logs without code changes. Add snapshots (breakpoints that don't stop the code execution) and use metrics to get observable insight at the code level.
 
-Security Tool Use Cases
------------------------
+## Security Tool Use Cases
 
 There are several reasons I would reach for Lightrun as a security tool. Here I'll focus
 
@@ -45,8 +43,7 @@ Finally, I will discuss how Lightrun secures itself. We can't have a vulnerable 
 
 Enough with the high level theory. Let's show the code!
 
-Verify a Security Vulnerability
--------------------------------
+## Verify a Security Vulnerability
 
 Security tools are like [observability tools](https://lightrun.com/java/full-cycle-observability-with-the-elastic-stack-and-lightrun/). They provide high-level alerts of potential risks. But they rarely communicate at the code level. As a result, a developer might have a hard time with actionable security tasks and validation. If the security issue reproduces locally, that's great. You can often fill in the gap with a debugger.
 
@@ -68,12 +65,9 @@ This is trivial to test in Lightrun. We can just add a log or a snapshot that wi
 
 <img decoding="async" class="alignnone size-medium wp-image-52559" src="2-700x471.png" alt="" width="700" height="471">
 
-<br />
-
 Notice that we use a regular expression to validate the name value. If we receive a log, it means the problematic value is exploitable. This also means the risk of the security vulnerability is high.
 
-Is it Actively Exploited?
--------------------------
+## Is it Actively Exploited?
 
 So we found a security vulnerability like the one above. Should we panic? Are there hackers already in the system?
 
@@ -82,8 +76,6 @@ What do we do?
 Well, we can do something similar to what we did above and add a snapshot with a similar condition and a few "tune ups":
 
 <img decoding="async" class="alignnone size-medium wp-image-52560" src="3-672x510.png" alt="" width="672" height="510">
-
-<br />
 
 This image contains a lot, so let's try to unpack it.
 
@@ -123,8 +115,7 @@ Verifying the fix is pretty similar. We can place a log or a snapshot in the pro
 
 You can also add additional logging to verify that attempted exploits reach the area they're expected to reach and are handled as you would expect.
 
-Lightrun Security
------------------
+## Lightrun Security
 
 A security tool that's vulnerable defeats its purpose. So understanding the security measures in Lightrun is an important part of this post. Following are the high level features in Lightrun that make it so secure.
 
@@ -160,8 +151,7 @@ A block list can define files that are blocked inside Lightrun agents. These fil
 
 Personal Identifiable Information, such as credit card numbers, can be logged intentionally or unintentionally. PII reduction lets us define patterns that are risky and those will be implicitly erased from the logs. As a result, you won't need to purge such logs and won't expose yourself to potential regulatory liability.
 
-TL;DR
------
+## TL;DR
 
 We did not design Lightrun as a security tool. It shouldn't replace existing security tools. But it's [a perfect sidekick](https://lightrun.com/dev-tools/nodejs-security-observability-lightrun-snyk/) to the tools you already have. It plays to their strengths and pushes the envelope of fast response to vulnerabilities/hacks.
 

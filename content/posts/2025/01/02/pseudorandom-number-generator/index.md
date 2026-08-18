@@ -60,7 +60,6 @@ public class SantasRandomGiftBag {
 }
 ```
 
-
 By utilizing a `Random` object, you can generate streams of random numbers across various types, including int, double, long, float, and boolean.
 
 #### 2. java.security.SecureRandom Class
@@ -85,7 +84,6 @@ public class SantasSecureRandomGiftBag {
 }
 ```
 
-
 The fundamental difference between `java.util.Random` and `java.security. SecureRandom` lies in how the seed is chosen. A seed is an initial value used to initialize a pseudorandom number generator, and its randomness directly impacts the quality of the generated random numbers
 
 In `java.util.Random`, the seed is typically generated using the system clock, which can be predictable. In contrast, `java.security.SecureRandom` generates its seed from random data provided by the operating system, ensuring a higher level of unpredictability and cryptographic security.
@@ -100,7 +98,6 @@ However, if you have specific requirements, you can explicitly select an algorit
 // Specify the algorithm you want to use
 SecureRandom secureRandom = SecureRandom.getInstance("NativePRNG");
 ```
-
 
 When choosing a [random number generation algorithm](https://docs.oracle.com/en/java/javase/21/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms), it is important to consider its blocking behavior. A blocking algorithm, such as `NativePRNGBlocking`, can stall if there isn't enough environmental noise to generate the required amount of randomness. This can lead to performance issues, particularly in applications that need large volumes of random data quickly.
 

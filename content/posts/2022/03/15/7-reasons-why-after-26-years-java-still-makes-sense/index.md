@@ -24,10 +24,6 @@ Java has been and continues to be the most popular language over the last two de
 
 However, in recent years, with the popularity of microservices and data science, other programming languages, such as Python, have gained in popularity. Some developers may view this as concerning news, as it may indicate the decline of Java, while others would argue differently.
 
-<br />
-
-<br />
-
 Java Champion [Nicolai Parlog](https://twitter.com/nipafx)contends that the number of people coding increases every year. If we think of it as a cake, then the size of the cake is expanding. Though the Java share may dwindle slightly in the TIOBE index, the overall size of the Java share of the cake continues to increase. So there will always be more Java developers than those moving on to alternatives.
 
 Now, the question is, still, should we be concerned about any apparent decline? While most java developers don't necessarily find this to be a relevant question, the most pertinent question I would ask is: "Why do they like Java as much as they do in the first place, and especially to those Java developers who have been working with it for over two decades: Why have they stuck with Java for all these many years?"
@@ -35,8 +31,6 @@ Now, the question is, still, should we be concerned about any apparent decline? 
 I asked these questions to many Java developers and there were many and varied answers. For example, Brazilian Java champion [Bruno Souza](https://twitter.com/brjavaman) states that the main reasons for him to stick with Java are:
 
 <img decoding="async" class="alignnone size-medium wp-image-52566" src="Screen-Shot-2022-03-10-at-9.07.04-AM-679x510.png" alt="" width="679" height="510">
-
-<br />
 
 While many others mentioned similar ideas, Java Champion [Geertjan Wielenga](https://twitter.com/GeertjanW) has shared that he's stayed with Java, amongst other reasons, because that's where his friends are found. Indeed, that's an excellent reason for sticking with a community and thus with Java itself.
 

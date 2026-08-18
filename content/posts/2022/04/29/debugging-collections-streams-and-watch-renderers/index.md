@@ -33,10 +33,7 @@ This is very important for collections and arrays. We can have thousands or mill
 >
 > --- Shai Almog (@debugagent) [April 5, 2022](https://twitter.com/debugagent/status/1511357550159187972?ref_src=twsrc%5Etfw)
 
-<br />
-
-Collections, Arrays and Streams
--------------------------------
+## Collections, Arrays and Streams
 
 Debugging collections (lists, maps etc.) and arrays is painful. You need to dig through results or place conditional breakpoints in for loops. That's all painful. There are better solutions...
 
@@ -74,8 +71,7 @@ This tool represents every stream function as a stage. You can go back and forth
 
 Notice that all the elements are "live" and you can inspect everything as you can with normal inspection in the watch.
 
-Renderers
----------
+## Renderers
 
 We normally look at elements in the watch area without giving it too much thought. That's the "object" or the data...
 
@@ -139,8 +135,7 @@ As you can see, the top repository is a JPA repository. The one below isn't. The
 
 Notice that the video above doesn't yet cover the last portion here. I ran out of time there. Next week's video will cover that and an additional interesting renderer feature.
 
-Summary
--------
+## Summary
 
 Showing the right information in the watch is crucial. We can get a sense of what's going on in an instant!
 

@@ -26,8 +26,7 @@ Both IntelliJ IDEA Changelists and Git staging are accessible from the **Commit*
 
 Finally, before we get started with the comparison, you can't use IntelliJ IDEA Changelists and the Git staging area at the same time. You can switch between them, but not use them simultaneously. Let's start with IntelliJ IDEA Changelists.
 
-What is an 'IntelliJ IDEA Changelist'?
---------------------------------------
+## What is an 'IntelliJ IDEA Changelist'?
 
 Prior to the release of 2020.3, IntelliJ IDEA Changelists were the only way to commit changes to your Git repository.
 
@@ -77,8 +76,6 @@ You can also move files between Changelists. You can move a whole file to a new 
 
 {{< youtube yvW-6Evx50Y >}}
 
-<br />
-
 In this example, all future changes will now be assigned to our *DateFormat* changelist because we set that one to be the 'Active' one when we created it.
 
 There is an additional checkbox on the New Changelist dialog called **Track context** . If you are working with [tasks and contexts](https://www.jetbrains.com/help/idea/managing-tasks-and-context.html) and have connected IntelliJ IDEA with an appropriate 3rd party application, you can [use this checkbox](https://www.jetbrains.com/help/idea/new-changelist-dialog.html) to get IntelliJ IDEA to [manage the task context](https://www.jetbrains.com/help/idea/new-changelist-dialog.html).
@@ -86,8 +83,6 @@ There is an additional checkbox on the New Changelist dialog called **Track cont
 As well as moving whole files between Changelists, you can also move single changes within a file between Changelists. This is especially useful if you're working on changes that impact one file, but you want to split the commits up for the reasons we talked about earlier. To assign some, but not all changes in a file to a different Changelist, right-click on the change from the *diff* view in **Your version** on the right-hand side. You can then select 'Move to another changelist'. You can also use **⇧⌘M** on macOS, or **Alt** +**Shift** +**M** on Windows and Linux.
 
 {{< youtube 2vIOyoSZJsE >}}
-
-<br />
 
 You can also move changes between Changelists using the coloured bars in the gutter:  
 ![Move changes between changelists](move-between-changelists.png)
@@ -110,8 +105,7 @@ When you're happy with that you can use **⌘K** on macOS, or **Ctrl** +**K** on
 
 This adds the files and commits them in one step into your local Git history. You can then go ahead and [push the changes](https://www.jetbrains.com/help/idea/push-dialog-mercurial-git.html#Push_Dialog_(Mercurial_Git)-6-chapter) to your remote repository if you want to.
 
-What is 'Git Staging'?
-----------------------
+## What is 'Git Staging'?
 
 IntelliJ IDEA 2020.3 introduced support for [Git staging](https://git-scm.com/docs/git-add). It is not enabled by default, but the fastest way to enable it is with Find Actions (**⇧⌘A** on macOS, or **Ctrl** +**Shift** +**A** on Windows and Linux) and type in *git staging*. Git staging is the git-native way of committing file diffs to a git repository.
 
@@ -173,8 +167,7 @@ With Git Staging enabled, your commit will be made up of the changes (diffs) you
 
 You can then go ahead and [push the changes](https://www.jetbrains.com/help/idea/push-dialog-mercurial-git.html#Push_Dialog_(Mercurial_Git)-6-chapter) to your remote repository if you want to.
 
-Summary
--------
+## Summary
 
 It's completely up to you which approach you prefer. They both achieve the same result in slightly different ways.
 

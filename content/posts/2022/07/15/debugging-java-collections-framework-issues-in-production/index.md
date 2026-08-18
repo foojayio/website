@@ -30,8 +30,7 @@ One of the core principles underlying the framework is coding to the interface. 
 
 When we debug a typical class we can inspect the variables or the implementation. In this case, the collection of objects is often hidden behind an abstraction which masks a complex internal structure e.g. red black tree etc.
 
-Local Debugging is Easy
------------------------
+## Local Debugging is Easy
 
 With local debugging we can just add an inspection such `aslist.toArray()`. This will perform poorly but will still work. However, in a production environment when using [Lightrun](https://lightrun.com/) this will fail.
 
@@ -39,8 +38,7 @@ When trying to print out a complex list we can fail on the method invocation its
 
 Printing the content of a collection of elements is problematic. Even if you have code that uses the `Iterable` interface to loop over the entire list the likelihood of avoiding quota restrictions is low. Printing a primitive type array is easy but printing objects requires more.
 
-Erasure of Collection Elements
-------------------------------
+## Erasure of Collection Elements
 
 The collection framework includes another challenge when debugging: erasures. In Java one would expect code like this to work:
 
@@ -48,13 +46,11 @@ The collection framework includes another challenge when debugging: erasures. In
 List<MyObject> myList = new ArrayList<>();
 ```
 
-
 Then the log might look like this:
 
 ```
 The property value of the first element is {myList.get(0).getProperty()}
 ```
-
 
 This will fail.
 
@@ -68,9 +64,7 @@ The solution is to write the code as if the generic isn't present and cast to th
 The property value of the first element is {((MyObject)myList.get(0)).getProperty()}
 ```
 
-
-Getting Around Quota Limits
----------------------------
+## Getting Around Quota Limits
 
 ### What's Quota?
 
@@ -114,13 +108,11 @@ The code below uses the java streams API to covert elements. In that conversion 
 vet.getFirstName().equals("Shai")
 ```
 
-
 If it's met I can print out the full details for the entry: `Current vet is {newVet}`.
 
 ![](Screen-Shot-2022-03-28-at-14.59.23-700x414.png)
 
-Preparation
------------
+## Preparation
 
 Debugging Java Collections is harder when we aren't prepared. The nice thing is that preparation is also the first step in writing better code for long term maintenance.
 
@@ -140,7 +132,6 @@ return vets.findAllByOrderById(Pageable.ofSize(5).withPage(page)).stream().map(v
 }).collect(Collectors.toList());
 ```
 
-
 It seems so much cooler than this code which returns from the method after value assignment:
 
 ```java
@@ -156,7 +147,6 @@ List<VetDTO> returnValue = vets.findAllByOrderById(Pageable.ofSize(5).withPage(p
 return returnValue;
 ```
 
-
 But the second one lets us debug the collection locally as well as remotely. It also makes it much easier to add a log statement covering the collection result value which is something you should generally consider.
 
 This is especially true when dealing with Java streams which emphasize such terse syntax.
@@ -167,8 +157,7 @@ I cannot stress this enough: if it goes into the collection framework it should 
 
 When we include the class in a snapshot or a log the` toString()` method is invoked. If there's no implementation in the class we will see the object ID which isn't as useful.
 
-Summary
--------
+## Summary
 
 Snapshots are superior for debugging collection framework objects as they display more of the hierarchy.
 

@@ -27,16 +27,14 @@ Therefore, it is important to know how Maven works. For instance, if you find vu
 
 In this article, I will explain how you can fix vulnerabilities in third-party libraries when using Maven, even when it is not obvious.
 
-Finding vulnerabilities
------------------------
+## Finding vulnerabilities
 
 If you are using Maven for building your project and managing your dependencies for your project, there are several ways to scan your projects, using tools such as [Snyk](https://snyk.io). This is regardless of the actual programming language you use---this can be Java, Kotlin, Scala, Groovy, or any other language that is designed for the Java Virtual Machine (JVM).  
 
 Scanning your Maven project for vulnerabilities can be done, by using Snyk, for example. In the example below, I use the [Snyk CLI](https://support.snyk.io/hc/en-us/articles/360003817357-Snyk-for-Java-Gradle-Maven-#UUID-3d91eb09-1fcf-e973-89ff-bf24ab0ddfe2_section-idm13169231445744), which will show you if and how you can fix vulnerabilities, by updating the top-level dependencies. However, if there is no improved version of the top-level dependencies, Snyk shows you if there is a newer version of the underlying dependency that fixes the vulnerabilities.
 ![](https://lh4.googleusercontent.com/mZSSwqr_bQsZ-HNTvPOThi2xscIaO49aDfH4QNj3GHXhgGHrq-gw7dw6EZLOvqu-n0ILqBtb9bVq_1gOwGZo0qRYuWY82HZ3_kXUXpN1tXQlnOlHzQtGUscExnxsofwyLBu4ESep)
 
-Fixing top-level vulnerabilities
---------------------------------
+## Fixing top-level vulnerabilities
 
 The easiest way to fix a vulnerability found by Snyk is to change the top level library, if possible. If the library does not have underlying dependencies it is quite obvious that you need to upgrade to a newer version that does not have that particular issue. The same applies when an underlying dependency does have an issue but there is already a newer version of the top-level dependency available that doesn't have the issue.
 
@@ -60,7 +58,6 @@ If the dependency you need to upgrade is defined in a parent pom, first look for
 </parent>
 ```
 
-
 ### Properties
 
 If a property is used, update the property first. This can potentially update other dependencies as well, but just as with the parent pom, there is a good reason for this. If libraries are released as a set you know that they work better together if they have the same version.
@@ -70,7 +67,6 @@ If a property is used, update the property first. This can potentially update ot
     <commons-lang3.version>3.9</commons-lang3.version>
 </properties>
 ```
-
 
 ### Direct
 
@@ -86,9 +82,7 @@ Finally, your dependency is declared in the dependencies part of your maven pom 
 </dependency>
 ```
 
-
-Fixing underlying dependencies
-------------------------------
+## Fixing underlying dependencies
 
 Let's say there is not yet a newer version of your top-level dependency available but one of the underlying dependencies has an issue you need to fix. The CLI already notified you that there is a newer version of that underlying dependency available that fixes the problem.
 
@@ -106,7 +100,6 @@ In the example below, I override the BOM for Jackson in my Spring Boot project:
 </properties>
 ```
 
-
 ### Dependency management
 
 In a Maven POM, it is possible to exclude and include specific underlying dependencies when declaring a top-level dependency. However, this can be problematic when two libraries share the same underlying dependency. A best practice in Maven is to bundle these declarations in the dependency management section. This section allows project authors to directly specify the versions of artifacts to be used when they are encountered in transitive dependencies. In addition to the example below, the [documentation](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management) clearly explains how dependencyManagement should be used:
@@ -123,9 +116,7 @@ In a Maven POM, it is possible to exclude and include specific underlying depend
 </dependencyManagement>
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 As you can see, there are several ways to mitigate security issues in open source dependencies for a Maven-based project.
 

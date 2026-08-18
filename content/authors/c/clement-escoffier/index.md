@@ -13,3 +13,4 @@ aliases:
   - "/today/author/clement-escoffier/"
 frozen: false
 ---
+

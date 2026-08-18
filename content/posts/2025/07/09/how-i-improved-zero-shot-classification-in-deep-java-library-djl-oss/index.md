@@ -27,8 +27,7 @@ frozen: false
 > * Spring AI with DJL: <https://docs.spring.io/spring-ai/reference/api/embeddings/onnx.html>
 > * Semantic Search with SpringBoot \& Redis: <https://foojay.io/today/semantic-search-with-spring-boot-redis/>
 
-**TL;DR:**
-----------
+## **TL;DR:**
 
 * You're doing zero-shot classification in a Java app using DJL.
 * DJL didn't handle some models well --- like DeBERTa. It missed support for token_type_ids, assumed wrong label positions, and oversimplified the softmax implementation.
@@ -36,8 +35,7 @@ frozen: false
 * Now DJL gives correct results across different models --- just like the Transformers library does in Python.
 * The fix is merged and will probably be released with version 0.34.0.
 
-What's Zero-Shot Classification (and Why It Matters)
-----------------------------------------------------
+## What's Zero-Shot Classification (and Why It Matters)
 
 Zero-shot classification is a machine learning technique that allows models to classify text into categories they haven't explicitly seen during training. Unlike traditional classification models that can only predict classes they were trained on, zero-shot classifiers can generalize to new, unseen categories.
 
@@ -51,7 +49,6 @@ Software Engineering: 0.015
 Politics: 0.001
 ```
 
-
 Meaning that "Software Programming" is the hypothesis that best classifies the premise.
 
 In this example, we're comparing the premise to all hypotheses, but we could also compare them individually. We can do it by enabling the "multi_label" option. In this case, it will return:
@@ -62,15 +59,13 @@ Software Engineering: 0.668
 Politics: 0.000
 ```
 
-
 With a higher score for "Software Engineering" and an even lower score for "Politics."
 
 ![](https://cdn-images-1.medium.com/max/2000/1*H7FiUe-NTKoYSlqg76peww.gif)
 
 You can easily try it out at: [https://huggingface.co/MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli](https://huggingface.co/MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli?candidate_labels=Software+Engineering%2C+Software+Programming%2C+Politics&multi_class=true&text=Java+is+a+great+programming+language)
 
-Integrating a Zero-Shot Classification Model with the Deep Java Library
------------------------------------------------------------------------
+## Integrating a Zero-Shot Classification Model with the Deep Java Library
 
 ![](https://cdn-images-1.medium.com/max/2612/0*MqJEP40BE5Gi3Ay7.png)
 
@@ -92,7 +87,6 @@ implementation("ai.djl.pytorch:pytorch-engine:0.32.0")
 implementation("ai.djl:model-zoo:0.32.0")
 ```
 
-
 ### The Criteria Class
 
 The Criteria class in DJL is a builder-style utility that tells DJL **how to load and use a model**. It defines:
@@ -113,7 +107,6 @@ Criteria criteria = Criteria.builder()
             .optTranslatorFactory(new ZeroShotClassificationTranslatorFactory())
             .build();
 ```
-
 
 When building a Criteria in DJL, we need to pick an engine that matches what the model was trained with. Most Hugging Face models use PyTorch. We also have to define the input and output types the model expects. **For zero-shot classification, DJL gives us ready-to-use classes:**
 
@@ -160,7 +153,6 @@ predictor.close();
 model.close();
 ```
 
-
 By running the code above, we should see the following output:
 
 ```
@@ -170,11 +162,9 @@ Software Engineering: 0.15263372659683228
 Politics: 0.017614541575312614
 ```
 
-
 This has been easy so far. But what if you want to use a different model?
 
-Using different models
-----------------------
+## Using different models
 
 If you want to use a different model, you have two options: pick one that's hosted by DJL or load one directly from Hugging Face. To see all the models that DJL hosts, just run the code below , it'll all available models.
 
@@ -190,13 +180,11 @@ for (String name : modelNames) {
 }
 ```
 
-
 This will output multiple models for you with their respective URIs that you can simply replace on the criteria we implemented previously in this tutorial. It should just work.
 
 However, if you want to host a model that is not available in the Model Zoo, you will have to not only download it from HuggingFace, but also convert it to a format that is compatible with DJL.
 
-Using a model that is not available in the Model Zoo
-----------------------------------------------------
+## Using a model that is not available in the Model Zoo
 
 The model I want to use is the one I introduced in the beginning of this article: MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli. But since It's not available in the Model Zoo, we will need to perform a few extra steps to make it compatible with DJL.
 
@@ -223,13 +211,11 @@ djl-convert --help
 djl-import --help
 ```
 
-
 After that, you can run the following command to convert the model to a format DJL can understand:
 
 ```
 djl-convert -m MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli
 ```
-
 
 This will store the converted model under folder model/DeBERTa-v3-large-mnli-fever-anli-ling-wanli in the working directory.
 
@@ -247,7 +233,6 @@ Criteria criteria = Criteria.builder()
                 .optTranslatorFactory(new ZeroShotClassificationTranslatorFactory())
                 .build();
 ```
-
 
 Running it should be as straightforward as before:
 
@@ -272,9 +257,7 @@ double[] scores = result.getScores();
 for (int i = 0; i  Dict(str, Tensor)
 ```
 
-
-Problem #1: No support for token_input_ids
-------------------------------------------
+## Problem #1: No support for token_input_ids
 
 Not every Zero-Shot Classification Model is the same, and one thing that sets them apart is whether they use **token type IDs**.
 
@@ -292,7 +275,6 @@ By digging into the implementation of ZeroShotClassificationTranslator, I was ab
 NDList in = encoding.toNDList(manager, false, int32);
 ```
 
-
 I fixed this by adding a method to the Translator Builder. This method sets the token_type_id property during initialization. I also refactored the class to make it work.
 
 ```
@@ -301,7 +283,6 @@ public ZeroShotClassificationTranslator.Builder optTokenTypeId(boolean withToken
     return this;
 }
 ```
-
 
 And even though it worked as I expected, I was surprised to find out that the scores that were output way off from scores I expected.
 
@@ -313,7 +294,6 @@ Software Engineering: 0.7510316371917725
 Politics: 0.00020543287973850965
 ```
 
-
 The Deep Java Library was outputting completely wrong scores:
 
 ```
@@ -322,13 +302,11 @@ Software Engineering: 0.0009450475918129086
 Software Programming: 0.00021904722962062806
 ```
 
-
 You can see that the scores were so wrong that it actually output that Politics was the label that best fit our premise: "Java is the best programming language."
 
 What's going on here?
 
-Problem #2: Hard coded logit positions and oversimplified softmax implementation
---------------------------------------------------------------------------------
+## Problem #2: Hard coded logit positions and oversimplified softmax implementation
 
 To understand what's going on, we also need to understand how Zero-Shot Classification models work. These models aren't trained to classify things directly. Instead, they take two sentences, the input and the label as a hypothesis, and decide how they relate.
 
@@ -349,8 +327,7 @@ After refactoring the softmax logic, the translator started outputting the expec
 
 You can check it out at: <https://github.com/raphaeldelio/deep-java-library-zero-shot-classification-comparison-to-python/>
 
-Contributing to the Deep Java Library
--------------------------------------
+## Contributing to the Deep Java Library
 
 After I had tested and made sure the translator was working as expected, it was time to contribute back to the library. I opened a pull request to the DJL repository with the changes I had made. The maintainer was super responsive and helped me refactor my changes to follow the guidelines of the project, and after a few tweaks, the changes were approved and merged.
 
@@ -358,8 +335,7 @@ As a result, you can find the PR here: <https://github.com/deepjavalibrary/djl/p
 
 ![](https://cdn-images-1.medium.com/max/800/1*qWVMzOJ0JDDrqtJpIFIRbg.png)
 
-Final Words
------------
+## Final Words
 
 If you're a Java developer working with AI, I really encourage you to check out the [Deep Java Library](https://github.com/deepjavalibrary/djl), the [Spring AI](https://docs.spring.io/spring-ai/), and the [Redis OM Spring](https://github.com/redis/redis-om-spring) projects, which build on top of it.
 

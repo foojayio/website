@@ -26,8 +26,6 @@ Originally written by Timefold engineers Lars Beckmann, Jenne De Bleser and Luk√
 
 Adapted for foojay by Tom Cools
 
-
-
 Something felt off.
 
 We use [Timefold Solver](https://github.com/TimefoldAI/timefold-solver) to power our optimization platform, a Java library that handles problems like shift scheduling and vehicle routing. On our platform, it runs inside [Quarkus](https://quarkus.io/ "Quarkus").

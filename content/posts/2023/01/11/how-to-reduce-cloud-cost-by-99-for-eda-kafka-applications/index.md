@@ -97,7 +97,6 @@ while (!shutDown.get()) {
 }
 ```
 
-
 Using the record *key()* to carry an *int* value might be a bit unorthodox but allows us to improve performance and simplify the code.
 
 #### Chronicle Queue
@@ -121,7 +120,6 @@ while (!shutDown.get()) {
     }
 }
 ```
-
 
 ### Benchmarks
 
@@ -152,7 +150,6 @@ Here is a snapshot from the output from the "top" command when running two insta
 3142126 per.min+  20   0   20.5g   1.6g  20300 S 296.3   2.5  19:36.17 java                                                                            
 3132946 per.min+  20   0   11.3g   1.0g  22056 S  73.8   1.6   9:22.42 java
 ```
-
 
 ### Chronicle Queue
 

@@ -24,8 +24,7 @@ frozen: false
 
 In this insightful discussion, we sit down with Miro Wengner, an accomplished software engineer with a deep-rooted affinity for Java. Miro shares his professional journey, highlights the significant challenges in the field, and reflects on the key moments that shaped his career.  
 
-Profile
--------
+## Profile
 
 * 🐦 Twitter: <https://twitter.com/miragemiko>
 * 👔 LinkedIn: <https://www.linkedin.com/in/mwengner/>
@@ -33,8 +32,6 @@ Profile
 * 🏠Home Page: <https://www.wengnermiro.com/>  
 
 > ***Fun fact: When I was in my early 30s, I took my sister to Amsterdam. We visited almost all the museums, and I realized they kept selling me a student ticket without asking me the whole time. And it happened many more times after that. So finally, when I was 38, my wife told me I should grow a beard and that I didn't look like a student, so I've had a beard ever since. So I could get a beer without showing id.***
-
-
 
 ***Bazlur: Can you tell us about your background and how you got started in the software industry?***
 
@@ -54,19 +51,13 @@ I actively sought out projects that would take my skills to the next level, and 
 
 Those three moments greatly influenced my entire career and, I would say, life, and it was just the beginning.
 
-
-
 ***Bazlur: What were some of the most memorable projects or challenges you faced, and how did they help shape your professional growth?***
 
 **Miro**: It's a great question; I'd say all of them, one way or another. One of my first tasks was to help improve the validation and efficiency of automatic translations in 2001--2002. The team I was part of built a distributed system with many interconnected nodes across the globe. It was a great time because I gained extensive knowledge in various areas such as hardware, operating systems, scripting, the Java platform, and application development.
 
 I remember that solving concurrency problems was very challenging. As a young engineer, I think it quickly advanced my skills. The critical point was that I was working with people at a different level of knowledge, just better than me, and I was looking to work with such people to improve my skills. Brainstorming with them was like a leap forward, and it's necessary if one wants to be good at something. Just get out of your comfort zone and move.
 
-<br />
-
 > Brainstorming with people who are better than me and have a different level of knowledge was like a leap forward. It is essential if one wants to be good at something. Just get out of your comfort zone and move.   
-
-
 
 ***Bazlur: It's great to hear about your experiences and how they shaped your professional growth. I'm curious: What motivated you to specialize in Java?***
 
@@ -75,8 +66,6 @@ I remember that solving concurrency problems was very challenging. As a young en
 In those days, the community wasn't as big as it is today, but the attitude was fantastic in different ways; we didn't have iMessage, WhatsApp, etc. Java kind of drove everyone, and I felt it too!
 
 I remember once discussing virtual machine-based languages and why they can achieve optimal performance over compiled languages. Well, that piqued my curiosity and still does, and after all, Java has made fantastic progress in recent years. The Java platform results from several fields, such as mathematics, statistics, probability, and hardware. It's fascinating, and it's all moving forward!
-
-
 
 ***Bazlur: In your opinion, what factors have contributed to Java's continued growth and success in recent years?***
 
@@ -87,11 +76,7 @@ There is much more to the story, but to keep it brief, all of this would not be 
 2018 was a milestone year for the Java platform with the release of Java SE 11. Tools like Java Flight Recorder and Mission Control were fully open-sourced, along with 6-month release cycles. You could say a new era for Java started here.
 > ***2018 was a milestone year for the Java platform with the release of Java SE 11. Tools like Java Flight*** ***Recorder and Mission Control were fully open-sourced, along with 6-month release cycles. You could say a new era for Java started here.***
 
-<br />
-
 To summarize, it's a community, open-source, and continuous evolution driven by community requests; it's a "closed" loop that helps keep progress moving forward in the timeline.
-
-
 
 ***Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that developers face today? Additionally, do you have any advice on how to overcome these challenges?***
 
@@ -106,8 +91,6 @@ A third challenge can be learning to respond to anti-patterns, a natural state o
 
 This brings me to the second question about referring newcomers: I would advise them to stay hungry for information (the what) and take the time to explore the essential details (the why) and how to apply the newly acquired knowledge (the how). When the solution doesn't fit, let's explore what might. You see, it appears to be a short cycle moving along the timeline and generating an individual's knowledge base. In principle, it's not about jumping or mixing technologies; it's about understanding and learning.
 
-
-
 ***Bazlur: What advice would you give someone new to the software industry who is unsure about which career path to take? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles?***
 
 **Miro:** This is another excellent question for which there is no trivial answer, as each person's case is unique. Still, I would advise newcomers to match their hobbies and interests with the path they choose to take. Of course, define the direction first; it should crystallize based on current capabilities. Patience, thinking, and study are golden gifts. In my opinion, quick success does not lead to the desired satisfaction.
@@ -119,23 +102,15 @@ This is similar to anti-patterns in software development - learning how to respo
 
 From the different roles you mentioned, there is momentum that brings them together. It is a combination of knowledge of mathematics, statistics, and probability. I know it seems a little weird, but being able to apply the [80/20 rule](https://betterexplained.com/articles/understanding-the-pareto-principle-the-8020-rule/) makes things easier, and there is no AI that I believe can replace the human brain based on the current state of the art.
 
-
-
 ***Bazlur: Thank you, Miro, for sharing your insights. Do you have any enjoyable or memorable stories from your time in the software industry that you would be willing to share with us?***
 
-<br />
-
 **Miro:** Of course, I have many of them, but it would be a long article, and one story is special. It was in 2009 that I was asked to introduce speakers at the conference, and one of them, my good friend [Andres Almiray](https://www.linkedin.com/in/aalmiray/), had a birthday. So an idea flashed in my head, and I started singing the song "Happy Birthday" in front of the whole audience. Honestly, I'm not the best singer, but a nice effect was that the audience joined me during my performance. Andres didn't expect anything like that. Me neither, but it was great that we celebrated this day together.
-
-
 
 ***Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?***
 
 Absolutely, one book I already mentioned above was recently published, "**Practical Design Patterns for Java Developers**." I recommend it to developers, architects, project owners, or even managers.
 
 In this book, the vehicle assembly is taken as a carrier abstraction, which allows for a discussion of the chosen approaches' programming principles, decisions taken, and effects. The book contains links not only to supplementary literature but also to internal parts of the JDK. In addition, I recommend reading classic books like "Introduction to Algorithms (Cormen and co.)" because the basics don't change.  
-
-
 
 **Conclusion:** Our dialogue with Miro serves as a testament to the resilience, continuous learning, and community involvement required to excel in the dynamic software industry. His journey and insights offer invaluable advice for anyone aspiring to make their mark in this field.  
 

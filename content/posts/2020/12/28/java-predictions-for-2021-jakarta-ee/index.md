@@ -17,8 +17,6 @@ frozen: false
 
 **To celebrate the world of Java and predict our highlights for 2021, several key Foojay participants will share their thoughts and hopes during the coming days on Foojay, [starting with Frank Delporte, Foojay Community Manager for the Raspberry Pi](https://foojay.io/today/java-predictions-for-2021-raspberry-pi/), and now continuing with Jadon Ortlepp, Foojay Community Manager for Microservices, who here provides the predictions of his Payara colleagues on Jakarta EE in 2021**.
 
-
-
 <figure class="wp-block-image size-large is-resized is-style-rounded">
  <img decoding="async" src="image.png" alt="" class="wp-image-36725" align="right" width="133" height="143">
 </figure>
@@ -31,8 +29,6 @@ frozen: false
 
 *Steve Millidge, Payara CEO and Founder*
 
-
-
 <figure class="wp-block-image size-large is-resized is-style-rounded">
  <img decoding="async" src="image-1.png" alt="" class="wp-image-36727" align="right" width="133" height="143">
 </figure>
@@ -42,8 +38,6 @@ frozen: false
 ### The next Long Term Support (LTS) version of Java is also due in 2021, Java 17. It will either confirm the split in the Java World (Java 8 versus the rest), or the adoption rate will be a sign that current users on Java 8 will migrate eventually."
 
 *Rudy De Busscher, Payara Pre-Sales Consultant*
-
-
 
 <figure class="wp-block-image size-large is-resized is-style-rounded">
  <img decoding="async" src="image-2.png" alt="" class="wp-image-36728" align="right" width="133" height="143">

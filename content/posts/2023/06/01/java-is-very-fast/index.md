@@ -74,7 +74,6 @@ public class EchoTopOfBookHandler implements TopOfBookHandler {
    }
 ```
 
-
 In this case, deepCopy() creates a new TopOfBook and sets all the fields.
 
 The benchmark can be run in two modes, one where no objects are allocated and one where any object is allocated and initialised, allowing us to measure the difference this makes. Each event is modelled as an asynchronous RPC call to make testing, development and maintenance easier.
@@ -84,7 +83,6 @@ public interface TopOfBookListener {
    void topOfBook(TopOfBook topOfBook);
 }
 ```
-
 
 Low latency software can be very fast but also difficult to work with, slowing development. In other words, often to create low latency software developers adopt low level techniques that are hard to read and maintain. This overhead can slow down your development. With Chronicle Wire your data structures are easy to read and debug, yet do not sacrifice performance.
 
@@ -119,7 +117,6 @@ topOfBook: {
 }
 ...
 ```
-
 
 #### The Code
 

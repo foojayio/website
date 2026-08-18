@@ -40,7 +40,6 @@ ImageIO.write(image, "PNG", new File("image.png"));
 JDeli.write(image, "PNG", new File("image.png"));
 ```
 
-
 While Java removes a lot of Image complexity, it is worth understanding in more detail how images work. In this series of articles, we will be diving deep into how BufferedImage provides this abstraction, how different types of images work and how you can access the low-level Image data.
 
 See you next time when we will look at ColorSpaces.

@@ -30,8 +30,7 @@ Please download and install [the Azure Toolkit for IntelliJ](https://aka.ms/azur
 
 We hope you like these features and enjoy the smooth experience with our Azure toolkit. So let us get started.
 
-Azure Toolkit for IntelliJ Improvements
----------------------------------------
+## Azure Toolkit for IntelliJ Improvements
 
 ### Azure Cosmos DB Support
 

@@ -51,8 +51,6 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-123170" src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" alt="" width="509" height="510">
 
-<br />
-
 * **Live search + status filters** --- filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 
 ![](333.gif)
@@ -79,7 +77,6 @@ Every setting is also overridable via URL query params, making CI integration cl
 /tests/?directory=tests.specs.integration&labels=slow&runnerUrl=/tests/runner.bxm
 ```
 
-
 ### Keyboard Shortcuts
 
 |    Shortcut    |               Action               |
@@ -98,7 +95,6 @@ TestBox RUN ships automatically with every TestBox 7 install under `bx/tests/`. 
 ```java
 testbox generate harness --help
 ```
-
 
 > **Note:** TestBox RUN requires a running web server and a `runner.bxm`` endpoint with SSE support via BoxLang. For pure CLI apps, use the BoxLang runner with ``--stream` (see below).
 
@@ -127,7 +123,6 @@ component {
 }
 ```
 
-
 #### BoxLang CLI `--stream` Flag
 
 The BoxLang CLI runner gets native streaming support:
@@ -137,11 +132,9 @@ The BoxLang CLI runner gets native streaming support:
 ./testbox/run --directory=tests.specs --stream
 ```
 
-
 This is especially useful in CI pipelines where live progress matters more than waiting for a buffered final report.
 
-Dry Run \& Spec Discovery
--------------------------
+## Dry Run \& Spec Discovery
 
 Two long-requested features land in TestBox 7: **spec discovery** and **dry run** mode. Audit exactly what would run before committing to a full suite execution.
 
@@ -156,13 +149,11 @@ var tb      = new testbox.system.TestBox( bundles = "tests.specs" );
 var results = tb.dryRun();
 ```
 
-
 #### CLI Dry Run
 
 ```java
 ./testbox/run --dry-run
 ```
-
 
 ![](888.gif)
 
@@ -177,7 +168,6 @@ Need to feed results into another tool?
 ./testbox/run --dry-run=json --bundles=tests.specs.MySpec | jq .
 ```
 
-
 Dry run respects all the same filters as a normal run: `--labels`, `--bundles`, `--directory`, `--testSuites`, `--testSpecs`.
 
 ### BoxLang CLI Runner --- New Power Options
@@ -190,14 +180,12 @@ The BoxLang runner gets a substantial set of new flags for fine-grained control 
 ./testbox/run --show-failed-only
 ```
 
-
 #### Stack Trace Control
 
 ```java
 ./testbox/run --stacktrace=short   # condensed (default)
 ./testbox/run --stacktrace=full    # complete Java/BoxLang trace
 ```
-
 
 #### Output \& Performance Flags
 
@@ -216,13 +204,11 @@ The BoxLang runner gets a substantial set of new flags for fine-grained control 
 ./testbox/run --top-slowest=5
 ```
 
-
 Combine them for a tight CI workflow:
 
 ```java
 ./testbox/run --show-failed-only --stacktrace=short --max-failures=5 --top-slowest=3
 ```
-
 
 #### Application Mappings Auto-Load (TESTBOX-440)
 
@@ -244,7 +230,6 @@ var testbox = new testbox.system.TestBox(
 );
 ```
 
-
 Or from the CLI: `--show-skipped=false`
 
 #### Suite Filtering Fixes (TESTBOX-435)
@@ -254,7 +239,6 @@ Direct suite name matching is now reliable at any nesting depth. If a suite's na
 ```java
 ./testbox/run --testSuites="My Integration Suite"
 ```
-
 
 ### TestBox CLI Updates (v1.8.0)
 
@@ -270,14 +254,12 @@ testbox info
 testbox reinstall
 ```
 
-
 Streaming is also available via the CLI:
 
 ```java
 testbox run --streaming
 testbox run --streaming --verbose   # include passing specs in live output
 ```
-
 
 #### Engine Support
 
@@ -301,12 +283,10 @@ TestBox 7 is available today via CommandBox:
 box install testbox
 ```
 
-
 Or pin to 7.x:
 
 ```java
 box install testbox@^7.0.0
 ```
-
 
 Full release notes and issue links are in the [TestBox documentation](http://https://testbox.ortusbooks.com/ "TestBox documentation"). As always, file bugs and feature requests in [our JIRA](http://https://ortussolutions.atlassian.net/browse/TESTBOX "our JIRA"). You can also check out the what's new guide here: <https://testbox.ortusbooks.com/readme/release-history/whats-new-with-7.0.0>

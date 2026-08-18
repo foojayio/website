@@ -31,8 +31,7 @@ Similar to its alternatives, **Quartz Scheduler can be integrated into almost an
 
 The fact that Quartz has been around for so long has two major advantages: **the library is battle-tested and has a large community** , which makes it easier to find help. All these elements together make it the most popular job scheduling library in Java. Despite all these strengths, **choosing Quartz is no longer so obvious due to some glaring issues**.
 
-Limitations of Quartz
----------------------
+## Limitations of Quartz
 
 ### Quartz is showing its age
 
@@ -68,8 +67,7 @@ We distinguish between two types of schedulers:
 * The first class consists of Java job scheduling libraries. Similar to Quartz, t**hey can be included in any Java application as a dependency**. They live inside your application.
 * The second class are workflow engines, which target a broader audience. These are **standalone services that your application will need to communicate with.**
 
-Alternatives to Quartz in Java
-------------------------------
+## Alternatives to Quartz in Java
 
 There are two great alternatives to Quartz for scheduling jobs in Java, namely JobRunr and db-scheduler. They can be added as a dependency to any Java application to **provide features like distributed background task processing and persisted task scheduling**.
 
@@ -90,7 +88,6 @@ jobScheduler.schedule(
     () -> sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6114120413210419000c110d044f020e0c">[email protected]</a>")
 );
 ```
-
 
 JobRunr integrates very well with the whole Java ecosystem like Spring Boot, Quarkus and Micronaut and supports all major SQL databases and even some popular NoSQL databases.
 
@@ -123,7 +120,6 @@ public void scheduledTask() {
 }
 ```
 
-
 While `@Scheduled` with ShedLock provides a straightforward solution for distributed scheduling, it lacks some crucial features found in dedicated job scheduling solutions:
 
 * No built-in persistence - failed tasks aren't automatically recovered if a server crashes
@@ -132,8 +128,7 @@ While `@Scheduled` with ShedLock provides a straightforward solution for distrib
 
 For applications requiring these advanced features, consider using a dedicated job scheduling solution like those discussed above.
 
-Other job scheduling tools
---------------------------
+## Other job scheduling tools
 
 There are several job scheduling alternatives to Quartz that are aimed at a broader audience; we could probably not list them all, even if we wanted to. These alternatives come as standalone services, often referred to as **workflow engines**, that communicates with your application.
 

@@ -28,8 +28,7 @@ Jakarta Concurrency is a small, but fundamental, specification under the Jakarta
 
 As project lead, I provide more information on what it is, its future and how to be involved.
 
-Why Do We Need Concurrency?
----------------------------
+## Why Do We Need Concurrency?
 
 When programming in Java, you need to take into consideration the level of context for your application when you move between different threads. For example, if you've logged into a REST API and then need to create a task on a new thread, you need to retain the security context. To do this in [Java SE](https://www.oracle.com/java/technologies/downloads/), you use concurrency primitives: units of code related to concurrency, multithreading, and parallelism.
 
@@ -72,7 +71,6 @@ public class GenericResource {
 }
 ```
 
-
 ### Use Case 2: Running Tasks in Parallel
 
 You may have a REST request coming in, and want to run two tasks in parallel, merge the result and return it to a user. With Jakarta Concurrency you can inject the Managed Executor Service into your REST endpoint, and then you can use the Managed Executor API to submit two jobs at once. The method returns immediately and you get back an instance of Future class. You can get the outcome of the job by calling the *get()* method and merge it and then return to the user.  
@@ -100,9 +98,7 @@ public String getParallelJob() throws ExecutionException, InterruptedException {
 }
 ```
 
-
-What Are The Main Components of Jakarta Concurrency?
-----------------------------------------------------
+## What Are The Main Components of Jakarta Concurrency?
 
 ### 1. Managed Executor Services
 
@@ -116,8 +112,7 @@ Managed Thread Factory in Jakarta EE maps on to Thread Factory in Java SE. This 
 
 Context Service enables you to wrap your *Runnable*, creating a contextual proxy to submit to any raw thread. It will establish all the context you expect, and therefore is useful for if you are using an API or library that has no knowledge of Jakarta EE but is spawning threads.
 
-Future Outlook of Jakarta Concurrency
--------------------------------------
+## Future Outlook of Jakarta Concurrency
 
 Jakarta Concurrency arrived in Java EE 7, in 2013. As with other specifications, it was moved into the Jakarta EE namespace with the [Jakarta EE 9](https://blog.payara.fish/jakarta-ee-9-is-here) release, and made compatible with Java SE 11 within [Jakarta EE 9.1](https://blog.payara.fish/jakarta-ee-9.1-launches). Now the transition is complete, it is in the place to start making substantial, functional changes to specifications.  
 
@@ -141,8 +136,7 @@ This new feature could eventually result in a single @Asynchronous annotation co
 
 Jakarta Concurrency was released in Java EE 7, so has not been brought up to date to match concurrency primitives brought in with Java SE 9, 11 and 17. Some of these include support for the ForkJoinPool in a standard way, and updated APIs for current Java SE Managed Executor Services.
 
-Get Involved!
--------------
+## Get Involved!
 
 As the project lead of Jakarta Concurrency, my goal is not to define its future, but lead a community group that can drive the specification forwards. In short, I need your help to make the specification happen!  
 

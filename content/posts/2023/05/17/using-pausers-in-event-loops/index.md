@@ -73,7 +73,6 @@ while (running) {
     }
 ```
 
-
 ### Pauser Modes
 
 This table illustrates several different Pauser modes, as well as the benefits and downsides to using each of them.

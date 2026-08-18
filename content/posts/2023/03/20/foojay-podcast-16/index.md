@@ -34,8 +34,7 @@ Let's find out and learn more about the process of the OpenJDK evolution!
 
 {{< youtube Dl-1ZaKDl_w >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +42,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Simon Ritter
   * <https://twitter.com/speakjava>
@@ -55,15 +53,13 @@ Guests
   * <https://www.linkedin.com/in/mwengner/>
   * <https://www.amazon.de/dp/180461467X>
 
-Podcast Host
-------------
+## Podcast Host
 
 * Frank Delporte
   * <https://twitter.com/FrankDelporte>
   * <https://foojay.social/@frankdelporte>
 
-Content
--------
+## Content
 
 * 00'00 Intro
 * 00'40 Introduction of the guests

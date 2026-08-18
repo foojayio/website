@@ -31,13 +31,11 @@ If you remember, [in Part 5](https://foojay.io/today/creating-a-javafx-world-clo
 
 JFX World Clock Part 6{#caption-attachment-45129}
 
-Getting started
----------------
+## Getting started
 
 If you want to jump right into the code just head over to <https://github.com/carldea/worldclock>
 
-Requirements
-------------
+## Requirements
 
 * Java 16 - An OpenJDK with JavaFX (bundled with JavaFX modules)
   * [Azul Zulu](https://www.azul.com/downloads/?package=jdk-fx "Azul Zulu") with JavaFX
@@ -51,28 +49,24 @@ I recommend using an OpenJDK build that already contains the JavaFX modules. Bec
 
 Before we begin, I want to mention some additional prerequisites or steps that need to be taken in order to execute the JavaFX World Clock application successfully. The application needs to obtain an API key provided by OpenWeatherMap.org. You'll need to follow the instructions below.
 
-Add API key (appid) to a resource file
---------------------------------------
+## Add API key (appid) to a resource file
 
 Because the World Clock app uses a weather service, the app will need to obtain an **appid** from a file **you'll need to create locally** . After registering and obtaining your API key you'll need to add the API key into a text file named `openweathermap-appid.txt`. The file must be located in the project's directory at: `src/main/resources/com/carlfx/worldclock/`.
 
 The appid (API key) file is private (local) and will be ignored by GitHub (not checked into GitHub). An entry will exist to ignore the appid file via the `.gitignore` file. So, when you build the application local to you the appid file will be included into your build.
 
-Testing the application
------------------------
+## Testing the application
 
 ```
 $ mvn javafx:run
 ```
-
 
 Assuming you have valid locations having geo coordinates (lat/lon) for a given clock face row you should see a weather icon and it's associated temperature displayed as shown below.  
 ![OpenWeatherMap Icons](OpenWeatherMap-Icons.png)
 
 OpenWeatherMap Icons{#caption-attachment-45130}
 
-OpenWeatherMap's API for the Daily Weather forecast
----------------------------------------------------
+## OpenWeatherMap's API for the Daily Weather forecast
 
 In order to make REST API calls to fetch for weather information the API key will need to be applied to the http url request parameter like the following.
 
@@ -80,13 +74,11 @@ In order to make REST API calls to fetch for weather information the API key wil
 https://api.openweathermap.org/data/2.5/weather?units=metric&lat={lat}&lon={lon}&appid={API key}
 ```
 
-
 For more info on OpenWeatherMap APIs visit the link below:
 
 <https://openweathermap.org/current#geo>
 
-Using Java 11's HttpClient
---------------------------
+## Using Java 11's HttpClient
 
 In the listing below I created a utility method to use Java 11's standard HttpClient API to fetch JSON data from the weather service. Because it returns a `CompletableFuture` this call will defer its results (JSON String) at a later time. As you'll see later, the caller of this function will be able to apply or chain additional functions to the future to do further processing such as when fetching is complete.
 
@@ -102,9 +94,7 @@ public CompletableFuture<String> fetch(String uri) {
 }
 ```
 
-
-Fetching the Current Weather forecast
--------------------------------------
+## Fetching the Current Weather forecast
 
 For convenience I've created a `getWeatherOutlook()` method that will prepare the `URL` to be passed to the `fetch()` function described above. As you can see in the listing below having a final step of using the function `.whenComplete()`. It is responsible for parsing and populating the UI (`updateWeatherUI`).
 
@@ -113,11 +103,9 @@ CompletableFuture<String> fetchWeather = getWeatherOutlook(location);
 firstWeatherJsonFetch.whenComplete(updateWeatherUI);
 ```
 
-
 You'll notice the lambda `updateWeatherUI` is passed into the `.whenComplete()`. The signature takes a `BiConsumer<String, Throwable>`. What's nice about this function is that you can handle both a success and failure of the call from the HTTP request. Later, I will show you the `updateWeatherUI` lambda function, where it parses JSON using the Jackson library and subsequently populating the UI.
 
-The function `getWeatherOutlook()`
-----------------------------------
+## The function `getWeatherOutlook()`
 
 I created a *business-y* function `getWeatherOutlook()` that takes a `Location` object's GPS coordinates, obtains the API key(appid) and prepares a GET request call to OpenWeatherMap.org.
 
@@ -147,9 +135,7 @@ private CompletableFuture<String> getWeatherOutlook(Location location) {
 }
 ```
 
-
-Updating the UI after fetch is complete
----------------------------------------
+## Updating the UI after fetch is complete
 
 After fetching the JSON response from the webservice it's time to update the UI. In the listing below is a `BiConsumer<String, Throwable>` lambda function `updateWeatherUI` that is passed into the `.whenComplete()` function of the `CompletableFuture` (async call). The following will parse JSON and begin to update the UI elements.
 
@@ -181,9 +167,7 @@ BiConsumer<String, Throwable> updateWeatherUI =  (dayForecastJson, err) -> {
     }
 ```
 
-
-How it works?
--------------
+## How it works?
 
 As you can see above the code will parse the weather info and do the following:
 
@@ -200,7 +184,6 @@ In step 4, ImageView will get a Tooltip applied using the function
 ```java
 Tooltip.install(weatherIconImageView, weatherToolTip);
 ```
-
 
 Some JavaFX UI components don't have a `setTooltip()` function such as ImageView, so this function is used to apply tooltips to non form input type controls.
 

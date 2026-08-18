@@ -42,7 +42,6 @@ Format everything in your current directory:
 boxlang format
 ```
 
-
 That's it. It recurses through your project and rewrites supported files in place.
 
 Want to target a specific path or file?
@@ -55,13 +54,11 @@ boxlang format --source ./src
 boxlang format --source ./models/User.bx
 ```
 
-
 Multiple paths at once (v1.14+):
 
 ```java
 boxlang format --source commands,models,services
 ```
-
 
 The formatter works great out of the box with sensible defaults, but you can customize it with a `.bxformat.json` file in your project root.
 
@@ -70,7 +67,6 @@ Bootstrap one instantly:
 ```java
 boxlang format --initConfig
 ```
-
 
 This drops a starter config in your current directory. From there, tweak what you care about. Here's a minimal example:
 
@@ -89,7 +85,6 @@ This drops a starter config in your current directory. From there, tweak what yo
 }
 ```
 
-
 You've got control over indentation, line length, brace style, struct/array formatting, operator style, SQL keyword casing, import sorting, and a lot more. Only override what you need --- everything else uses sensible defaults.
 
 This is where it gets really useful. Run the formatter in check mode as a quality gate:
@@ -97,7 +92,6 @@ This is where it gets really useful. Run the formatter in check mode as a qualit
 ```java
 boxlang format --check --source ./
 ```
-
 
 * Exits `0` if everything is already formatted correctly
 * Exits non-zero if any file has drift
@@ -126,7 +120,6 @@ If you want formatting to happen automatically as you work, the BoxLang LSP supp
 }
 ```
 
-
 **Step 2** - Add this to your VS Code `settings.json`:
 
 ```java
@@ -139,7 +132,6 @@ If you want formatting to happen automatically as you work, the BoxLang LSP supp
   }
 }
 ```
-
 
 **Step 3** - Open the Command Palette and run:
 
@@ -157,7 +149,6 @@ Already using cfformat in your project? Migration is a two-step process, and you
 boxlang format --convertConfig --source ./
 ```
 
-
 This transforms your `.cfformat.json` into a `.bxformat.json`, keeping your rules intact.
 
 **Step 2 - Validate with check mode:**
@@ -165,7 +156,6 @@ This transforms your `.cfformat.json` into a `.bxformat.json`, keeping your rule
 ```java
 boxlang format --check --source ./
 ```
-
 
 See what (if anything) drifted. Run the formatter once in a cleanup commit, then turn on `--check` in CI and you're done.
 
@@ -175,20 +165,17 @@ See what (if anything) drifted. Run the formatter once in a cleanup commit, then
 boxlang format --overwrite false --source ./handlers/MainHandler.cfc
 ```
 
-
 **Exclude directories** (v1.14+):
 
 ```java
 boxlang format --source . --excludes generated,vendor
 ```
 
-
 **Use a custom config path:**
 
 ```java
 boxlang format --config ./config/.bxformat.json --source ./
 ```
-
 
 Stop spending review cycles on style. The formatter handles it --- in your editor, in your pre-commit hook, in CI. One command, consistent output, zero arguments about semicolons ever again.
 
@@ -197,6 +184,5 @@ Go format something:
 ```java
 boxlang format
 ```
-
 
 Questions? Hit us up on [Community \& Support](https://community.ortussolutions.com/ "Community &amp; Support") or open a discussion on the [BoxLang repo](https://github.com/ortus-boxlang/BoxLang "BoxLang repo"). We'd love to hear how you're using it.

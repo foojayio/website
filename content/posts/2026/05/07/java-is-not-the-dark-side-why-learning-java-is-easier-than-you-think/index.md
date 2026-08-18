@@ -49,8 +49,7 @@ Java is not the Dark Side.
 
 It is the Jedi Order in code form.
 
-The Myth: "Java is Too Hard for Beginners"
-------------------------------------------
+## The Myth: "Java is Too Hard for Beginners"
 
 Many new developers imagine Java like a Sith holocron, ancient, complex, and impossible to decode.
 
@@ -74,15 +73,13 @@ public class Main {
 }
 ```
 
-
 No lightsaber required.  
 
 No Jedi Council approval needed.  
 
 Just structure.
 
-Java: The Jedi Order of Programming
------------------------------------
+## Java: The Jedi Order of Programming
 
 In the Star Wars galaxy, Jedi training is not random.
 
@@ -102,7 +99,6 @@ class Jedi {
    String rank;
 }
 ```
-
 
 This is your Jedi identity stored in code.  
 
@@ -129,7 +125,6 @@ public class Main {
 }
 ```
 
-
 Luke didn't become a Jedi by reading scrolls on Tatooine.  
 
 He became one through experience.
@@ -153,7 +148,6 @@ class Jedi {
 }
 ```
 
-
 And when invoked:
 
 ```java
@@ -162,18 +156,15 @@ obiWan.name = "Obi-Wan Kenobi";
 obiWan.useForce();
 ```
 
-
 Output:
 
 ```java
 Obi-Wan Kenobi uses the Force like Master Yoda taught.
 ```
 
-
 ![](duke_st_03-1024x687.jpg)
 
-The Real Dark Side: The Empire of Bad Learning
-----------------------------------------------
+## The Real Dark Side: The Empire of Bad Learning
 
 Most Padawans fail not because Java is powerful...
 
@@ -187,8 +178,7 @@ Even Darth Vader didn't start by building an Empire.
 
 He started as Anakin... a learner.
 
-Why Java Feels Like the Jedi Code (But Isn't Hard)
---------------------------------------------------
+## Why Java Feels Like the Jedi Code (But Isn't Hard)
 
 #### The Jedi Code of Java Logic
 
@@ -202,7 +192,6 @@ if (midiChlorians > 10000) {
 }
 ```
 
-
 In the Jedi Order, everything has meaning and structure.
 
 Java is the same.
@@ -215,8 +204,7 @@ Only discipline.
 
 ![](duke_st_04-1024x687.jpg)
 
-Training Like a Jedi: Loops in the Temple
------------------------------------------
+## Training Like a Jedi: Loops in the Temple
 
 Jedi training is repetition.
 
@@ -230,11 +218,9 @@ for (int i = 1; i <= 3; i++) {
 }
 ```
 
-
 Even Luke Skywalker didn't master the Force in one training montage.
 
-Your Journey from Youngling to Jedi Developer
----------------------------------------------
+## Your Journey from Youngling to Jedi Developer
 
 Let's map your path through the galaxy:
 
@@ -243,7 +229,6 @@ Let's map your path through the galaxy:
 ```java
 int lightsaber = 1;
 ```
-
 
 You are just discovering the Force exists.  
 
@@ -256,7 +241,6 @@ if (lightsaber == 1) {
    System.out.println("Training begins under Kenobi.");
 }
 ```
-
 
 You start learning discipline.
 
@@ -271,7 +255,6 @@ class Jedi {
    }
 }
 ```
-
 
 You begin building systems.
 
@@ -304,15 +287,13 @@ public class Main {
 }
 ```
 
-
 Now you are no longer a learner.
 
 You are building systems like the Jedi rebuilt themselves after Order 66.
 
 ![](java_start_wars_end-1024x683.png)
 
-Final Wisdom from the Jedi Archives
------------------------------------
+## Final Wisdom from the Jedi Archives
 
 Java is not the Dark Side.
 

@@ -23,8 +23,7 @@ In the good old days, applications were simple. A browser sent a request to a we
 
 The rise of mobile clients and integrations with other apps upset this simplicity. I want to discuss one solution to handle the complexity in this post.
 
-The increased complexity of system architecture
------------------------------------------------
+## The increased complexity of system architecture
 
 Let's first model the above simple architecture.
 
@@ -48,8 +47,7 @@ Behind microservices lies the idea of two-pizzas teams. Each team is autonomous 
 
 Each microservice needs to serve the data strictly necessary for each kind of client to avoid the over-fetching issue above. With a small number of microservices, it's unwieldy to make each one filter out data depending on the client; with a large number, it's plain impossible. *Ergo*, the cartesian factor between the number of microservices and the number of different clients makes dedicated data endpoints on each microservice exponentially expensive.
 
-The solution: Backend For Front-end
------------------------------------
+## The solution: Backend For Front-end
 
 The idea behind is to move logic from each microservice to a dedicated deployable endpoint. The latter is responsible for:
 
@@ -62,8 +60,7 @@ The same team develops the client **and** its associated BFF. BFF offers the sam
 
 ![](bff.png)
 
-Separate deployment unit vs. API Gateways
------------------------------------------
+## Separate deployment unit vs. API Gateways
 
 The literature about BFF implies dedicated deployment units, as in the diagram above. Some posts, like this [one](https://www.manuelkruisz.com/blog/posts/api-gateway-vs-bff), oppose BFF with API Gateways. But the conceptual diagram shouldn't necessarily map one-to-one with the deployment diagram.
 
@@ -73,8 +70,7 @@ Like in many areas, people should focus more on the organizational side of thing
 
 For example, with Apache APISIX, each team could deploy their BFF code independently as a separate plugin.
 
-Performance considerations
---------------------------
+## Performance considerations
 
 For the monolith, the situation is the following:
 
@@ -85,8 +81,7 @@ As soon as one migrates to microservices, the client needs to call each one in t
 
 In the BFF case, we are back to one request, in *T* time, whatever the implementation. Compared to the monolith, there are additional requests `t1`, `t2`, `ti`, `tn` from the BFF to the microservices, but they are probably located together. Hence, the overall time will be longer than for a monolith, but since each `t` is much shorter than `T`, it won't affect the user experience much.
 
-Conclusion
-----------
+## Conclusion
 
 You probably shouldn't implement microservices. If you do, microservices shouldn't return the whole data and make clients responsible for cleaning them. Thus, the microservice needs to return the exact data necessary, depending on the client. It introduces strong coupling between a microservice and its clients.
 

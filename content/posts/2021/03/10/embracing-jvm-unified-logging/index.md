@@ -23,8 +23,7 @@ In the previous [blog post](https://foojay.io/today/introduction-to-jvm-unified-
 
 I wasn't satisfied with the official documentation and other blog posts as they usually present only a fragmented picture of the previous options. This led me to dig in.
 
-Migrating the GC logging (continued)
-------------------------------------
+## Migrating the GC logging (continued)
 
 |------|--------------------------------|
 | Note | These log are based on JDK11u. |
@@ -111,7 +110,6 @@ These caveats led me to think that instead of trying to *mimic* old logging opti
 -Xlog:gc*=debug,gc+ergo*=trace,gc+age*=trace,safepoint*:file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
 ```
 
-
 Log config breakdown
 
 ```
@@ -122,7 +120,6 @@ Log config breakdown
   safepoint*
   :file=/gclogs/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
 ```
-
 
 * Line 2: Logs everything under `gc` at `debug` level.
 * Line 3: Specific *tagset* level configuration for ergonomics.
@@ -178,7 +175,6 @@ jcmd $(pidof java) \
     output="file=/var/log/%t-gc-region-tracing.log" \
     output_options="filecount=10,filesize=20M"
 ```
-
 
 ### Migrating the Trace\* flags
 
@@ -244,8 +240,6 @@ static AliasedFlag const removed_develop_logging_flags[] = {
 #endif //PRODUCT
 ```
 
-
-End words
----------
+## End words
 
 In this article I provided an exhaustive translation table for GC logging flags and Trace\* logging flags. However after using these log configuration the surfacing idea to bring home is there is a better approach than using a one-to-one mapping from flags to tags, instead favoring tag with wildcard resulting in simpler and future-proof log configuration.

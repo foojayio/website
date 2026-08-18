@@ -25,8 +25,7 @@ The hardest part in debugging is knowing the general area of the bug... and bise
 
 Before we begin, let's make one thing clear: bisect is a tool for debugging regressions. It does nothing for regular bugs. When we have a regression, we typically know that the issue used to work in a specific release, we would typically have a specific revision where the code worked. We would typically know that it doesn't work in the current version, but which commit along the way causes the failure?
 
-In the Olden Days
------------------
+## In the Olden Days
 
 Back in the old days of SVN (or CVS, SourceSafe, etc.) we used to checkout an older version of the repository and test on it. If it failed, we'd go further back and if it succeeded we'd go forward to hone in on the specific commit that failed. Those among us who were lucky enough to work with competent QA departments could often pass this task to them. Ultimately, the work was manual.
 
@@ -38,8 +37,7 @@ We sometimes did but since no versioning system was as dominant as git these aut
 
 ![](FUSGSqAX0A4FnFe.jpg)
 
-Git Bisect: Find the Bug. Automatically!
-----------------------------------------
+## Git Bisect: Find the Bug. Automatically!
 
 That's right. It does exactly that. The simplest use of git bisect starts with the command:
 
@@ -47,20 +45,17 @@ That's right. It does exactly that. The simplest use of git bisect starts with t
 git bisect start
 ```
 
-
 This switches us into bisect mode. We can now define the "good" version where things used to work properly. E.g. for <https://github.com/codenameone/CodenameOne/> I can use the revision `79a8e37adb7dd48093779bd3657142e607bdd2d9` as the good revision. We can thus mark it using the command:
 
 ```
 git bisect good 79a8e37adb7dd48093779bd3657142e607bdd2d9
 ```
 
-
 Once we do, we can activate bisect traversal by marking the bad revision. For most cases this means the current head revision which is the default, but you can specify a specific revision as an argument to this command:
 
 ```
 git bisect bad
 ```
-
 
 Once this is done, we can move between revisions by redefining the good or bad revisions.
 
@@ -74,8 +69,7 @@ I marked it as bad, could have marked it as "good" and that would have worked fi
 
 ![](Screen-Shot-2022-07-10-at-12.20.22-1-700x101.png)
 
-This Sucks! Or Does It?
------------------------
+## This Sucks! Or Does It?
 
 Going through every revision manually is a major pain!
 
@@ -91,7 +85,6 @@ This is actually pretty easy. We can create a complex command line but personall
 git bisect run testMyJavaProject.sh
 ```
 
-
 Then I implement the shell script with the commands that build/test. But before that I need to create a unit test that fails for that specific bug. I assume this is something most of us can accomplish easily. Now that we have a unit test creating the shell script is trivial. The code below assumes you use maven for building:
 
 ```
@@ -102,7 +95,6 @@ mvn package -DskipTests
 mvn test -Dtest=MyTestClass
 ```
 
-
 That's it. Notice that if compilation will fail because of dependencies within the test class you might end up with the wrong revision. So keep the test simple!
 
 When you're done with git bisect or wish to stop for any reason just issue the command:
@@ -111,9 +103,7 @@ When you're done with git bisect or wish to stop for any reason just issue the c
 git bisect reset
 ```
 
-
-TL;DR
------
+## TL;DR
 
 Git bisect is probably the simplest tool I will cover in this series.
 

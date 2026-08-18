@@ -31,8 +31,7 @@ The one-size-fits-all model era is over; the model you choose now expresses some
 
 In this article, we'll explore three surprising takeaways from this new era: why your LLM is now a statement about your product, how models now have distinct personalities and styles, and why your prompts have to now evolve from monolithic instructions to adaptive systems.
 
-Takeaway 1: LLM choice is now a statement about your product
-------------------------------------------------------------
+## Takeaway 1: LLM choice is now a statement about your product
 
 Choosing a model is no longer a straightforward decision where the main consequence of your choice is having to implement a new API. It is now a product decision about the user experience you want to create, the failure modes you can tolerate, the economics you want to optimize for, and the metrics you want to excel in.
 
@@ -48,8 +47,7 @@ I would strongly recommend creating your own North Star metrics to better gauge 
 
 What you'll find is that the right model is the one whose instincts match the designed product behavior and your users' needs, not the one at the top of any external leaderboard.
 
-Takeaway 2: Frontier models have divergent 'personalities'
-----------------------------------------------------------
+## Takeaway 2: Frontier models have divergent 'personalities'
 
 Models are (now more than ever) "**grown, not built,**" and as a result, the latest generation has developed distinct instincts and behaviors. Different post-training cookbooks have fundamentally changed the direction of each model class. A prompt that works perfectly for one model will not work the same in another. Their fundamental approaches to the same task have diverged.
 
@@ -69,8 +67,7 @@ These qualitative differences translate into hard, operational differences.
 | Context Awareness        | Aware of its own context window, tracks token budget, persists/compresses based on headroom                                               | Lacks explicit context window awareness (like cooking without a clock)                                                     |
 | Verbosity                | Higher, easier to read, double the word count                                                                                             | Lower, harder to read, information-dense                                                                                   |
 
-Takeaway 3: End of an era. Prompts are no longer monoliths
-----------------------------------------------------------
+## Takeaway 3: End of an era. Prompts are no longer monoliths
 
 Because the fundamental behaviors of models have diverged, a prompt written for one model will not work "as is" on another anymore. For example, a directive-heavy prompt designed for Claude can feel over-constrained on GPT-5-Codex, and a prompt optimized for Codex to explore deep reasoning behavior will likely underperform on Claude. That means that the era of the monolithic, one-size-fits-all prompt is over.
 
@@ -91,8 +88,7 @@ The second solution is to implement **continuous updates driven by user feedback
 
 Evals are more important than ever but have to be designed more tightly around acceptability by users instead of raw performance since one model might be technically correct significantly more than another model but might drown the user in nitpicky and verbose comments, diluting its value to users. By measuring the metrics that matter \~ acceptance rate, signal-to-noise ratio, p95 latency, cost, among others - and tuning prompts in small steps, the system will remain aligned with user expectations and product goals. The last thing you want is great quantitative results on benchmarks and tests but low user acceptance.
 
-Conclusion
-----------
+## Conclusion
 
 This shift from one-size-fits-all prompt engineering to a new model specific paradigm is critical. The days of brittle, monolithic prompts and plug-and-play model swaps are over. Instead, modular prompting, paired with deliberate model choice, give your product resilience.
 

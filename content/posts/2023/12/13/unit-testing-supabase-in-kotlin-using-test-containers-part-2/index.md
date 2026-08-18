@@ -161,7 +161,6 @@ class MainKtTest {
 }
 ```
 
-
 To achieve those results, a few manual steps are required. The Docker Compose file provided by Supabase uses `container_name` parameters, [which aren't supported by Test Containers](https://github.com/testcontainers/testcontainers-java/pull/2741?ref=lengrand.fr).
 
 I needed to :
@@ -192,7 +191,6 @@ public NginxContainer<?> nginx = new NginxContainer<>(NGINX_IMAGE)
     .withCopyFileToContainer(MountableFile.forHostPath(tmpDirectory), "/usr/share/nginx/html")
     .waitingFor(new HttpWaitStrategy());
 ```
-
 
 All of the implementation I've seen extend from `GenericContainer` though, not `ComposeContainer` so I've decided to hold that off and keep it simple for now.
 

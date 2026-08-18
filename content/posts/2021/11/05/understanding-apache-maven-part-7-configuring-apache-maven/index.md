@@ -20,8 +20,7 @@ frozen: false
 
 In this, [part 7 of the series](https://foojay.io/today/author/c-guntur/), various means of configuring Apache Maven are covered!
 
-Why Configure Apache Maven?
----------------------------
+## Why Configure Apache Maven?
 
 Over several parts in this series, Maven was touted to be ***convention-over-configuration***. Maven assumes defaults and allows for overrides where possible.
 
@@ -29,8 +28,7 @@ However, Maven can depend on constraints external to what is packaged. Examples 
 
 The examples mentioned above are external to both the maven executable/distribution as well as to the POM that is authored. Hence a need to provide a means of configuration.
 
-Options to configure Maven
---------------------------
+## Options to configure Maven
 
 * Using environment variables
 * Using config files under a .mvn directory in the project

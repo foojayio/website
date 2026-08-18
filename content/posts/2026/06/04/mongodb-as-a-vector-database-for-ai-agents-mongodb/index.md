@@ -26,16 +26,14 @@ A vector database stores data as dense numerical representations of text, images
 
 In this blog post, we'll build an AI agent in Java using MongoDB as our database, by storing user queries, documents, agent memory, and embeddings in a single place. We will understand how MongoDB simplifies the implementation of retrieval-augmented generation and persistent memory systems.
 
-Why should you use MongoDB for building AI agents?
---------------------------------------------------
+## Why should you use MongoDB for building AI agents?
 
 1. **Vector store and voyage AI support** -- MongoDB Atlas infrastructure offers you a developer-friendly ecosystem. Giving you the ability to store vector embeddings, create vector embeddings, and finally perform the vector search directly from the platform. This reduces the need to have different systems to build an enterprise application.
 2. **Hybrid Search --** With MongoDB Atlas infrastructure, you can add filters with a vector search query and add additional conditions to the query results. Unlike specialized vector stores, MongoDB can do both semantic ([vector](https://www.mongodb.com/products/platform/atlas-vector-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=vector-mongodb-foojay&utm_term=hugh.murray)) and classically structured (keyword) queries together.
 3. **Developer Ecosystem --** MongoDB has been a developer-first database ever since, and as it continues to do so, it lets your application integrate efficiently.
 4. **Operational Efficiency** - If you already use MongoDB, adding vector search avoids the need to introduce new infrastructure. It simplifies schema, transactions, and ops.
 
-Understanding AI agents
------------------------
+## Understanding AI agents
 
 While we are building AI agents, it is important to understand the core principles of embeddings, retrieval-augmented generation (RAG), and agentic architectures.
 
@@ -53,8 +51,7 @@ With these changes, the concepts of agents came into the picture. In these agent
 
 In these architectures, vector databases serve as both the retrieval and the storage layer for these systems. Therefore, vector search no longer remains just for semantic searches but rather a foundational building block for agentic systems. It underpins how agents retrieve knowledge, maintain memory, and produce contextually relevant, low-hallucination outputs in real-world applications.
 
-Building a multi-agent application with MongoDB
------------------------------------------------
+## Building a multi-agent application with MongoDB
 
 Before we get into the actual code for building the agents, let's first understand a few basic prerequisites for building the application.
 
@@ -103,7 +100,6 @@ Go to MongoDB Atlas, create a collection named *incident_memory*, and create a v
 }
 ```
 
-
 ### Step 2: Creating the Trip
 
 The trip is created with the following API call. This request lands in the controller. Because the request body is optional, we use a default CreateTripRequest when none is supplied and pass that normalized request into the service. So, normalized is just the incoming request or a default placeholder when the client omits the body.
@@ -117,7 +113,6 @@ public TripState createTrip(@RequestBody(required = false) CreateTripRequest req
     return tripService.createTrip(normalized);
 }
 ```
-
 
 And with the Service layer, it creates the trip. Example:
 
@@ -133,7 +128,6 @@ curl -X POST "http://localhost:8080/trip/create" \
     }
   }'
 ```
-
 
 Would result in:
 
@@ -155,7 +149,6 @@ Would result in:
 }
 ```
 
-
 This trip gets stored in *trip_state*. At this point, everything looks fine.
 
 ### Step 3: Induce a disruption
@@ -172,7 +165,6 @@ curl -X POST "http://localhost:8080/event/simulate-delay" \
   }'
 ```
 
-
 This is done using another code block in the controller.
 
 ```java
@@ -180,14 +172,12 @@ This is done using another code block in the controller.
 public TravelEvent simulateDelay(@RequestBody SimulateDelayRequest request)
 ```
 
-
 And at the same time, something critical happens:
 
 ```java
 tripState.setStatus(TripStatus.DISRUPTED);
 tripService.saveTrip(tripState);
 ```
-
 
 This is your first agent that detects a problem, updates the state, and logs the decision.
 
@@ -207,7 +197,6 @@ The following delay is stimulated:
 }
 ```
 
-
 ### Step 4: Replanning
 
 To trigger replanning, the PlannerAgent orchestrates the other agents. It asks MemoryAgent for similar incidents using MongoDB Vector Search and asks BookingAgent for alternative routes; then BudgetAgent and PreferenceAgent refine those options before PlannerAgent commits the final itinerary.
@@ -219,7 +208,6 @@ This enters the
 public TripState replan(@RequestBody ReplanRequest request)
 ```
 
-
 And the planner agent takes over. Example:
 
 ```bash
@@ -229,7 +217,6 @@ curl -X POST http://localhost:8080/plan/replan \
     "tripId": "69dd6111674d2228e4db4b25"
   }'
 ```
-
 
 Which responds as
 
@@ -254,7 +241,6 @@ Which responds as
 }
 ```
 
-
 This is where it starts to suggest taking another flight from Chicago.
 
 ### Step 5: The Memory agents make use of vector search.
@@ -265,7 +251,6 @@ At first, the planner agents check, "Have we seen something like this?" If so, t
 List<IncidentMemory> results = vectorSearchService.findSimilar(query);
 ```
 
-
 ### Step 6: Booking agent generates options
 
 At this point, when no response is found, it starts to generate its own options. To do so,
@@ -275,14 +260,12 @@ List<AlternativeRoute> options =
     bookingAgent.generateOptions(tripState, latestEvent, memories);
 ```
 
-
 The budget agent also starts to filter options with
 
 ```
 List<AlternativeRoute> budgeted =
     budgetAgent.filterOptions(tripState, options);
 ```
-
 
 ### Step 7: The system finally makes the decision
 
@@ -291,7 +274,6 @@ Finally, the trip is updated, and the system records the reason for the same. At
 ```bash
 curl http://localhost:8080/trip/69dd6111674d2228e4db4b25
 ```
-
 
 It would give you the response as:
 
@@ -311,13 +293,11 @@ It would give you the response as:
 }
 ```
 
-
 Finally, the system didn't just detect a delay, but it used memory, coordinated multiple agents, and produced a better plan with a fully traceable decision history stored in MongoDB.
 
 The complete code for this multi-agent system is available on the [GitHub repository](https://github.com/aasawariS/travel_multi-agent_with_mongodb).
 
-Conclusion
-----------
+## Conclusion
 
 In this blog, we tried to build a multi-agent system that is adaptive, stateful, and intelligent, all using MongoDB.
 

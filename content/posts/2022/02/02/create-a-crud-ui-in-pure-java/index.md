@@ -87,7 +87,6 @@ public class Person {
 }
 ```
 
-
 We also create a repository interface using Spring Data in order to work with `Person` entities as follows:
 
 ```java
@@ -98,7 +97,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 }
 ```
-
 
 In order to work with some data, we also populate the embedded H2 database with some random entries that are generated using the `ExampleDataGenerator` helper class. The following `DataGenerator` class generates 100 random entities.
 
@@ -138,7 +136,6 @@ public class DataGenerator {
    }
 }
 ```
-
 
 ### Step 3: Create the Editor Layout
 
@@ -204,7 +201,6 @@ public class EditorLayout extends VerticalLayout {
 
 }
 ```
-
 
 ### Step 4: Create the CRUD View
 
@@ -332,7 +328,6 @@ public class CrudView extends SplitLayout {
 }
 ```
 
-
 ### Step 5: Run the Application
 
 To run the project from the command line, type `mvnw spring-boot:run` (on Windows), or `./mvnw spring-boot:run` (on macOS or Linux).
@@ -346,5 +341,3 @@ Congratulations! You have created a web UI that performs full CRUD (create, read
 You can explore the full source code on [GitHub](https://github.com/tarekoraby/crud-ui-tutorial "GitHub").
 
 Visit [start.vaadin.com](https://start.vaadin.com/app/?preset=flow "start.vaadin.com") to customize your own Vaadin app starter, or learn more about Vaadin Flow in its [documentation](https://vaadin.com/docs/latest/flow/overview "documentation").
-
-<br />

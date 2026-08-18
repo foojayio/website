@@ -25,8 +25,7 @@ But did you know there are multiple ways you can do this and even get much more 
 
 Let's find out...
 
-Reading the Java Version in the Terminal
-----------------------------------------
+## Reading the Java Version in the Terminal
 
 Probably the easiest way to find the installed version is by using the `java -version` terminal command:
 
@@ -37,9 +36,7 @@ OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
-
-Checking Version Files in the Installation Directory
-----------------------------------------------------
+## Checking Version Files in the Installation Directory
 
 The above output results from info read by the `java` executable from a file inside its installation directory.
 
@@ -57,7 +54,6 @@ drwxr-xr-x  15 frankdelporte  staff  480 Sep  7 18:36 19-zulu
 drwxr-xr-x  18 frankdelporte  staff  576 Apr 18  2022 8.0.332-zulu
 lrwxr-xr-x   1 frankdelporte  staff    7 Nov 21 21:09 current -> 19-zulu
 ```
-
 
 And in each of these directories a release file can be found which also shows us the version information, including some extra information.
 
@@ -81,9 +77,7 @@ OS_ARCH="aarch64"
 SOURCE="git:f4b2b4c5882e"
 ```
 
-
-Getting More Information With showSettings
-------------------------------------------
+## Getting More Information With showSettings
 
 In 2010, an experimental flag (indicated with the `X`) was added to OpenJDK to provide more configuration information: `-XshowSettings`.
 ![](Screenshot-2022-12-01-at-12.23.11.png) Twitter screenshot of a message by OpenJDK about adding the -XshowSettings flag
@@ -160,7 +154,6 @@ OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
-
 If you ever faced the problem of an unsupported Java version 59 (are similar), you'll now also understand where this value is defined, it's right here in this list as `java.class.version`.
 
 It's an internal number used by Java to define the version.
@@ -191,7 +184,6 @@ OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
-
 ### Reading the VM Settings
 
 With the `-XshowSettings:vm` flag, some info is shown about the Java Virtual Machine.
@@ -218,12 +210,10 @@ OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
 ```
 
-
 ### Reading all at Once
 
 If you want all of the information above with one call, use the `-XshowSettings:all` flag.
 
-Conclusion
-----------
+## Conclusion
 
 Next to `java -version`, we can also use `java -XshowSettings:all -version` to get more info about our Java environment.

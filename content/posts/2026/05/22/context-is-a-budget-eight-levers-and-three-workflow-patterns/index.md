@@ -35,8 +35,7 @@ This post is a practical guide to spending it well: where the tokens actually go
 
 ![Token distribution by bucket — most teams are surprised which one dominates](01-token-distribution-700x364.png)
 
-Where the tokens actually go
-----------------------------
+## Where the tokens actually go
 
 Every request to a coding assistant is a stack of buckets. The shape varies by tool and session, but it tends to look like this:
 
@@ -60,14 +59,11 @@ In a Copilot context, you can't see token counts directly --- but you can see th
 
 ![VS Code Output panel showing Copilot Chat ccreq lines — your free token meter](ccreq-log-650x510.png)
 
-The Eight Levers
-----------------
+## The Eight Levers
 
 These aren't in priority order --- they're in the order you'd naturally encounter them in a session. The first three (context, caching, tools) are about the request *shape* . The next three (instructions, model, output) are about how you *talk* to the assistant. The last two (repo, observability) are the foundations that make all of the others stick.
 
 ![Eight levers that mananges token budget](eight-levers-700x211.png)
-
-
 
 ### A. Context engineering --- scope your asks
 
@@ -86,8 +82,6 @@ Specificity is free. Every `#file:` (Copilot) or explicit path (Claude Code) you
 
 **Do this Monday:** make `#file:` your default. Use agent-mode-with-broad-retrieval only when you genuinely don't know what you don't know.
 
-
-
 ### B. Prompt caching --- order matters
 
 Every major provider supports prompt caching now. Anthropic and OpenAI both charge roughly **10% of base input cost for cache hits**. Google's Gemini does it explicitly. The mechanism is the same: a stable prefix at the front of your prompt is cached after the first request and read back cheaply on subsequent ones.
@@ -105,8 +99,6 @@ Static at the top, dynamic at the bottom. The longest stable prefix you can cons
 The classic anti-pattern is innocent-looking and brutal is to have dynamic values/variables part of your instructions, custom agent files. It will most likely **busts the cache on every request**. You will pay full price for the same 10 KB of preamble all day. The fix is to push dynamic content down into the user message or tail of the prompt.
 
 **Do this Monday:** audit the *first* 200 tokens of your system prompts. Anything that changes per-request belongs further down.
-
-
 
 ### C. Tool \& MCP hygiene --- every schema is a tax
 
@@ -127,8 +119,6 @@ Treat MCP servers like browser extensions: useful, but only the ones you actuall
 The same discipline applies to **the tools you build yourself** . A tool that returns `{ id, summary }` is cheap. A tool that returns a 50-field JSON object is expensive --- the model re-processes all 50 fields on every turn it's referenced. Default to compact responses with optional `?expand=...` for the rare caller that needs the rest.
 
 **Do this Monday:** open MCP server list, disable everything you didn't actively use this week. Re-enable on demand.
-
-
 
 ### D. Custom instructions \& skills --- codify it once
 
@@ -155,8 +145,6 @@ This file is loaded *only* when a matching file is in scope. Repo-wide rules go 
 
 **Do this Monday:** check what you've typed into chat windows in the last week. Anything that reappeared more than twice is a candidate for an instructions file.
 
-
-
 ### E. Model routing --- start cheap, escalate when stuck
 
 Routine tasks pick the most expensive model by default if you let them. You probably just paid 10× for the same answer.
@@ -175,8 +163,6 @@ The rule is: **start cheap, escalate only when stuck.** "Stuck" means you've tri
 The math compounds. A team of fifty doing twenty agent runs each per day at 10× costs five times more than at 2× --- for the same diffs, on most days.
 
 **Do this Monday:** pin your default to the mid-tier. Make Opus a deliberate choice with a reason.
-
-
 
 ### F. Output discipline --- diffs, not novels
 
@@ -199,8 +185,6 @@ The leverage is in the system prompt. Two lines in `copilot-instructions.md` mak
     - Prefer diffs over full files.
 
 **Do this Monday:** add those two lines.
-
-
 
 ### G. Repo hygiene --- what the indexer sees
 
@@ -235,8 +219,6 @@ Three lines, \~50 tokens. Now "what does the template engine do?" can be answere
 
 **Do this Monday:** `git rm --cached` whatever shouldn't be indexed; add three-line summaries to your top-of-mind modules.
 
-
-
 ### H. Observability --- latency is your token meter
 
 You can't see Copilot's token counts. You don't need to. Use the proxy you already have:
@@ -268,14 +250,11 @@ Wire it into CI and context bloat stops accumulating silently across PRs.
 
 **Do this Monday:** put a stopwatch next to your editor for one day. Count "Amsterdam" (not Mississippi's) . You'll know which chats to rotate.
 
-Three workflow patterns that compound
--------------------------------------
+## Three workflow patterns that compound
 
 The eight levers above shrink the cost of an individual turn. These three patterns shrink the *number* of expensive turns. Apply them on top.
 
 ![3 workflow patterns](workflow-patterns-700x194.png)
-
-
 
 ### 1. The Ralph Wiggum loop
 
@@ -298,8 +277,6 @@ After it runs, `git log --oneline` reads like a changelog: one commit per task, 
 
 ![TODO.md mid-loop on the left, the per-task git log on the right — disk is the memory](07-todo-gitlog-700x280.png)
 
-
-
 ### 2. Auto-compact
 
 Most assistants don't compact aggressively on their own. **You** have to drive it.
@@ -318,8 +295,6 @@ If you are interested in a sofisticated implementation of compaction, check this
 
 **Rule of thumb:** one task per chat. New task → new chat with summary attached.
 
-
-
 ### 3. Planner → Implementer → Reviewer (agent handover)
 
 This is the one that changes how features get built. Three short, focused chats with three different model choices and one shared artifact:
@@ -334,8 +309,7 @@ Three chats, \~5--8 premium requests total for an end-to-end feature. Compare wi
 
 The crucial discipline: the **handover artifact** (`plan.md`, the diff, the review notes) is the *only* thing that crosses the boundary. Never chat history. That's how you keep each agent's context small, focused, and cheap.
 
-The Monday checklist
---------------------
+## The Monday checklist
 
 Pin this to your team's wiki. Take what's useful, ignore the rest.
 
@@ -362,8 +336,7 @@ Pin this to your team's wiki. Take what's useful, ignore the rest.
 * \[ \] Use the planner / implementer / reviewer split for one real feature. Notice the request count.
 * \[ \] Treat latency as your token meter. Count Amsterdam for one day.
 
-Closing
--------
+## Closing
 
 The mindset shift is small and the wins are not.
 

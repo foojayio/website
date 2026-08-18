@@ -22,8 +22,7 @@ We are excited to announce the 1.0 release of [Language Support for Java™ by R
 
 We believe this is a significant milestone for Java support on Visual Studio Code and the result of a multi-year collaboration between Microsoft, Red Hat and the entire Visual Studio Code and Java community. This release wouldn't have been possible without your support and we want to thank everyone who has provided feedback or made contributions.
 
-Release highlights
-------------------
+## Release highlights
 
 When we started with our very first release, our goal was to provide an outstanding Java development experience on Visual Studio Code. Since then, we have maintained a release cycle of 1-2 times per month, through many iterations.
 
@@ -69,8 +68,7 @@ We already support Gradle projects using Groovy scripts, but we heard the need f
 
 Our hope is that we can continue to expand upon this and deliver a great experience for Kotlin in the future.
 
-Java Journey on Visual Studio Code
-----------------------------------
+## Java Journey on Visual Studio Code
 
 The language support for Java™ by Red Hat extension is a fundamental piece of the Java expansion pack and offers essential components such as Java code editing, completion, refactoring and navigation. Over the past few years, Microsoft have been working together closely with Red Hat and adding new features to this language server. We have also been fine-tuning the performance of the language server and improving the stability by addressing issues and bugs.
 
@@ -78,8 +76,7 @@ In addition to the main Java language support, we have built various Java extens
 
 Our goal behind all this work is to provide the best Java development experience possible on Visual Studio Code.
 
-Going Forward
--------------
+## Going Forward
 
 Going forward, we have planned many items for the Java language support on Visual Studio Code.
 

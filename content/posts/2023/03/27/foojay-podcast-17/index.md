@@ -29,8 +29,7 @@ With the same code, some of your existing program code can be executed hundreds 
 
 {{< youtube 4Y-3qZNSkfM >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +37,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * *Juan Fumero, TornadoVM Lead Architect*
   * [*https://twitter.com/snatverk*](https://twitter.com/snatverk)
@@ -58,8 +56,7 @@ Guests
   * [*https://twitter.com/jjenkov*](https://twitter.com/jjenkov)
   * [*https://www.linkedin.com/in/jakob-jenkov-4a3a8/*](https://www.linkedin.com/in/jakob-jenkov-4a3a8/)
 
-Podcast
--------
+## Podcast
 
 * Host: Erik Costlow
   * <https://twitter.com/costlow>
@@ -70,8 +67,7 @@ Podcast
 
 ![](podcast-guests-tornadovm-1024x384.png)
 
-**Content**
------------
+## **Content**
 
 * 00'00 Intro
 * 00'36 Introduction of the guests

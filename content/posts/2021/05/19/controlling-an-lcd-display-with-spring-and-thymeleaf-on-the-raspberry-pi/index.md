@@ -30,8 +30,7 @@ frozen: false
 This time we want to highlight his work which combines a web app made with Spring and Thymeleaf, to control an LCD display connected to a Raspberry PI.
 ![](spring_lcd.jpg)
 
-Frameworks and components
--------------------------
+## Frameworks and components
 
 1. [**Spring Boot**](https://spring.io/projects/spring-boot) is an extension of the Spring framework, which eliminates the boilerplate configurations required for setting up a Spring application.
 2. [**Thymeleaf**](https://www.thymeleaf.org/) is a Java template engine for processing and creating HTML, XML, JavaScript, CSS, and text.
@@ -40,8 +39,7 @@ Frameworks and components
 
 ![](lcd_example01-1024x365.jpg)
 
-Wiring
-------
+## Wiring
 
 <figure class="wp-block-image size-large is-resized">
  <img decoding="async" src="glcd-pinout-683x1024.jpg" alt="" class="wp-image-44923" width="683" height="1024">
@@ -50,8 +48,7 @@ Wiring
 The display is connected according to this table indicating the physical PIN number and its according BCM number used in the code:
 ![](LCD_raspberry_map.png)
 
-Project idea
-------------
+## Project idea
 
 Goal of this project, is to setup a simple Spring Boot Thymeleaf application, which shows a form with a 128×64 table. Each table position is the representation of a pixel of the LCD graphic display. This is achieved by using an array of bits with all the positions of this table.
 ![](spring_thymeleaf_app01-1024x713.png)
@@ -65,8 +62,7 @@ A method was added to the application to convert the Array of bits into an Array
 
 Many tools including GIMP can save an image as XBM. A [nice step-by-step instruction that the API docs show is here](https://sandhansblog.wordpress.com/2017/04/16/interfacing-displaying-a-custom-graphic-on-an-0-96-i2c-oled/).
 
-Code
-----
+## Code
 
 A few examples of the code in the project.
 
@@ -85,7 +81,6 @@ config = GlcdConfigBuilder
        .build();
 ```
 
-
 Converting the bits array to a byte array for the XBM format:
 
 ```java
@@ -98,11 +93,9 @@ private static byte[] encodeToByteArray(int[] bits) {
 }
 ```
 
-
 You can get the full code from [this GitHub repository](https://github.com/igfasouza/Spring-Thymeleaf-Raspberry-PI-LCD).
 
-Result
-------
+## Result
 
 There are some XBM files inside the resources folder and you can follow up on the API example to display these images.
 
@@ -125,8 +118,7 @@ Some additional work is still needed to finish the logic for a combobox to show 
 
 Remember to use the hashtag ***#JavaOnRaspberryPi*** on Twitter to show the world Raspberry Pi with Java.
 
-Links
------
+## Links
 
 * <https://en.wikipedia.org/wiki/X_BitMap>
 * <https://www.fileformat.info/format/xbm/egff.htm>
@@ -134,7 +126,5 @@ Links
 * <https://spring.io/projects/spring-boot>
 * <https://www.thymeleaf.org/>
 * <https://github.com/ribasco/ucgdisplay>
-
-
 
 Originally shared by [Igor De Souza on his blog](http://www.igfasouza.com/blog/spring-thymeleaf-raspberry-pi-lcd/).

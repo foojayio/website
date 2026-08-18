@@ -19,8 +19,7 @@ frozen: false
 
 The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL integration, and delivers over 100 critical bug fixes for production-grade stability. This release focuses on modern web application development with fluent APIs, streaming support, persistent connection management, and extensive CFML compatibility improvements.
 
-🚀 What's New in 1.8.0
-----------------------
+## 🚀 What's New in 1.8.0
 
 ### 🎯 Modular Compiler Architecture \& Ultra-Slim Runtime
 
@@ -65,7 +64,6 @@ java -jar boxlang-1.8.0.jar myapp.bx
 java -jar boxlang-noop-1.8.0.jar myapp.bx
 ```
 
-
 *Enterprise Security Win*: Deploy with boxlang-noop in production to guarantee no runtime code compilation, meeting strict security policies for PCI-DSS, HIPAA, SOC 2, and government compliance requirements.
 
 ##### 🔌 Plug-and-Play Compiler Modules
@@ -96,7 +94,6 @@ Compilers are now **modular add-ons** that can be loaded dynamically via classpa
 }
 ```
 
-
 ##### 🚀 Revolutionary IBoxpiler Interface
 
 The new IBoxpiler interface enables true plug-and-play compiler development:
@@ -111,7 +108,6 @@ public interface IBoxpiler {
     String getVersion();
 }
 ```
-
 
 **What This Means:**
 
@@ -139,7 +135,6 @@ compiler = new VerifiableCompiler()
     .signOutput()
     .enableProofOfCompilation();
 ```
-
 
 ##### 💼 Enterprise Benefits
 
@@ -179,8 +174,7 @@ compiler = new VerifiableCompiler()
 
 **Migration Path:** Existing applications continue to work seamlessly. Simply choose boxlang for standard deployments or upgrade to boxlang-noop when security requirements demand pre-compiled-only execution.
 
-🌐 Revolutionary HTTP Client - Modern, Fluent, and Powerful
------------------------------------------------------------
+## 🌐 Revolutionary HTTP Client - Modern, Fluent, and Powerful
 
 BoxLang 1.8.0 completely rewrites the HTTP subsystem from the ground up, delivering a modern, fluent HTTP client with streaming support, connection pooling, and advanced features for building robust web applications.
 
@@ -220,7 +214,6 @@ future = http( "https://api.example.com/data" )
     .sendAsync();
 ```
 
-
 **Key Features:**
 
 * **Fluent API** - Readable, chainable methods for request building
@@ -259,7 +252,6 @@ The `bx:http` component has been rebuilt to match the fluent BIF capabilities wh
     onComplete="#() => println( 'Complete!' )#" />
 ```
 
-
 **New Features:**
 
 * **Streaming Callbacks** - onChunk, onMessage, onError, onComplete, onRequestStart
@@ -283,9 +275,7 @@ println( "Total requests: #stats.totalRequests#" );
 println( "Active connections: #stats.activeConnections#" );
 ```
 
-
-🧼 SOAP/WSDL Client Integration - Web Services Made Simple
-----------------------------------------------------------
+## 🧼 SOAP/WSDL Client Integration - Web Services Made Simple
 
 BoxLang now includes comprehensive SOAP web service support with automatic WSDL parsing and fluent method invocation:
 
@@ -311,7 +301,6 @@ operations = ws.getOperationNames();
 opInfo = ws.getOperationInfo( "getUserInfo" );
 ```
 
-
 **Features:**
 
 * **Automatic WSDL Parsing** - Discovers methods, parameters, and types
@@ -324,8 +313,7 @@ opInfo = ws.getOperationInfo( "getUserInfo" );
 
 Perfect for integrating with legacy SOAP services, enterprise APIs, and third-party web services!
 
-🎯 Context Shutdown Listeners - Graceful Application Cleanup
-------------------------------------------------------------
+## 🎯 Context Shutdown Listeners - Graceful Application Cleanup
 
 New lifecycle hooks enable graceful application shutdown with resource cleanup:
 
@@ -346,7 +334,6 @@ component {
 }
 ```
 
-
 **Use Cases:**
 
 * Database connection cleanup
@@ -365,9 +352,7 @@ println( "Class: #meta.fullName#" );
 println( "Simple name: #meta.simpleName#" ); // New in 1.8.0
 ```
 
-
-🤖 Core Runtime Enhancements
-----------------------------
+## 🤖 Core Runtime Enhancements
 
 #### MiniServer JSON Configuration
 
@@ -384,7 +369,6 @@ boxlang-miniserver /path/to/config.json
 boxlang-miniserver miniserver.json --port 9090 --debug
 ```
 
-
 **Example Configuration:**
 
 ```java
@@ -399,7 +383,6 @@ boxlang-miniserver miniserver.json --port 9090 --debug
     "envFile" : "/etc/boxlang/.env.production"
 }
 ```
-
 
 **Configuration Priority:**
 
@@ -421,7 +404,6 @@ The experimental compiler setting is now a top-level directive in `boxlang.json:
 }
 ```
 
-
 Valid values: `"asm"` (default), `"java"`, `"noop"`
 
 ### Dynamic Class Loading
@@ -438,7 +420,6 @@ getRequestClassLoader().addPaths( [
 // Now load classes from those JARs
 MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() );
 ```
-
 
 ### Performance Optimizations
 
@@ -457,8 +438,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
   * Generated keys support (ROWID)
   * Stored procedure ref cursor support
 
-🐛 100+ Critical Bug Fixes
---------------------------
+## 🐛 100+ Critical Bug Fixes
 
 ### Date \& Time (30+ fixes)
 
@@ -551,8 +531,7 @@ MyClass = createObject( "java", "com.example.MyClass", getRequestClassLoader() )
 * **Stored Procedures** - Null attribute respected, multiple result sets
 * **Exception Handling** - Custom tags in catch blocks work correctly
 
-🎉 New BoxLang+ Modules for Subscribers
----------------------------------------
+## 🎉 New BoxLang+ Modules for Subscribers
 
 Exciting news for **BoxLang+ subscribers**! Several powerful premium modules have been released:
 
@@ -573,8 +552,7 @@ Each module follows BoxLang's fluent API patterns and integrates seamlessly with
 
 [View BoxLang+ Plans](https://boxlang.io/plans#open-source "View BoxLang+ Plans")
 
-🛠️ Developer Experience
-------------------------
+## 🛠️ Developer Experience
 
 ### Feature Audit Tool
 
@@ -590,8 +568,7 @@ All web-related BIFs and components include proper descriptions via @BoxBIF and 
 
 Removed all JavaParser dependencies externally unless explicitly checked - reduces runtime footprint and startup time.
 
-⚡ Migration Guide
------------------
+## ⚡ Migration Guide
 
 ### Breaking Changes
 
@@ -615,7 +592,6 @@ data = http( "https://api.example.com/users.json" )
     .send();
 ```
 
-
 **SOAP Integration** : Use the new `soap()` BIF for web services:
 
 ```java
@@ -631,7 +607,6 @@ ws = createObject( "webservice", "http://example.com/service.wsdl" );
 result = ws.methodName( arg1, arg2 );
 ```
 
-
 **Configuration** : Update `boxlang.json` to use the new top-level compiler directive:
 
 ```java
@@ -642,7 +617,6 @@ result = ws.methodName( arg1, arg2 );
     }
 }
 ```
-
 
 ### 🙏 Thank You
 
@@ -670,7 +644,6 @@ box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfem
 https://boxlang.io/download
 ```
 
-
 ### 🙏 Thank You
 
 A huge thank you to our community for your continued feedback, bug reports, and contributions. Your input drives BoxLang forward!
@@ -685,8 +658,7 @@ A huge thank you to our community for your continued feedback, bug reports, and 
 Ready to experience real-time streaming, distributed caching, and blazing performance?  
 **Upgrade to BoxLang 1.7.0 today!**
 
-Download
---------
+## Download
 
 Please visit our [download](https://www.boxlang.io/download "download") page or our quick [installation guides](https://boxlang.ortusbooks.com/getting-started/installation "installation guides") to upgrade your installation.
 
@@ -709,8 +681,7 @@ Join us and redefine development on the JVM **Ready to learn more**? Explore Box
 
 [Try BoxLang](https://try.boxlang.io)
 
-Join the BoxLang Community ⚡️
------------------------------
+## Join the BoxLang Community ⚡️
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

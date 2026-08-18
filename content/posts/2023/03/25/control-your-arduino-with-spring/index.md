@@ -121,7 +121,6 @@ private static final void loop() throws IOException, InterruptedException {
 }
 ```
 
-
 Here is a simple code that just blinks the Arduino LED.
 
 ### Spring App
@@ -144,7 +143,6 @@ public void onApplicationEvent(final ContextRefreshedEvent event) {
     return;
 }
 ```
-
 
 I use the @EventListener annotation to run logic after the Spring context has been initialised and I do the device connection.
 

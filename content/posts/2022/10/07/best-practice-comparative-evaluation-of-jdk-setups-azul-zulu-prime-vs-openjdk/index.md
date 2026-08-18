@@ -27,8 +27,7 @@ In this article, you will learn about best practices for **comparative evaluatio
 
 By following this guide, you will be able to establish credible evidence that Azul Zulu Prime improves aspects of application behavior to a degree that justifies using it within your organization.
 
-Comparative Evaluation
-----------------------
+## Comparative Evaluation
 
 ### What To Do
 
@@ -52,8 +51,7 @@ Although this is a possible production scenario, it is very rare. In most cases,
 
 In general, all software components such as Linux, Java, Messaging platform, etc. work very differently in a typical production environment versus completely saturated conditions, and the behavior of saturated environments is not a good indicator of performance under normal loads.
 
-Defining the Test Goals
------------------------
+## Defining the Test Goals
 
 Each application services its unique purpose and related goals and requirements. As such, different test goals can be defined.
 
@@ -92,8 +90,7 @@ In default mode, Azul Zulu Prime actually takes a longer time to warm up than Op
 
 But when you use a tool like [ReadyNow](https://docs.azul.com/prime/Use-ReadyNow.html), you can in many cases reach optimum speed much quicker than with OpenJDK. How warm-up times can be measured, configured, and compared is described in detail on [Analyzing and Tuning Warm-up](https://docs.azul.com/prime/analyzing-tuning-warmup.html).
 
-Defining the Test Approach
---------------------------
+## Defining the Test Approach
 
 When evaluating your application performance on Azul Zulu Prime, or any Java runtime, it is important to adhere to the following guidelines.
 
@@ -128,8 +125,7 @@ It is important to establish a testing approach by asking the following question
 | Insufficient memory | Prime can work with the same amount of memory as OpenJDK. However, Prime can use more memory without the usual drawbacks. Feel free to assign more memory to Prime, if available. More memory can allow for better performance.                                                     |
 | Poor metrics        | For instance, averages and no SLAs are considered as poor metrics. Looking at the average is rarely useful in the context of performance testing. Focus on where the pain is.                                                                                                       |
 
-Step-by-Step Guide
-------------------
+## Step-by-Step Guide
 
 ### Comparing your Current JDK with Azul Zulu Prime
 

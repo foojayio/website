@@ -32,19 +32,13 @@ Microsoft Access databases are everywhere. Decades of `.mdb` and `.accdb` files 
 
 **UCanAccess** puts an end to that. It is an open-source, pure-Java JDBC driver that lets you read and write Microsoft Access databases (`.mdb` and `.accdb`) just like any other SQL database --- no native drivers, no Windows dependency, no friction.
 
-
-
-A Brief History
----------------
+## A Brief History
 
 UCanAccess was originally created by Marco Amadei and Gord Thompson and quickly became the go-to solution for Java-to-Access connectivity. The project was invaluable, but development went quiet around 2020. After a period of community reliance on an unmaintained codebase, the project was forked and revived in 2022 by its current maintainer, ensuring the lights stay on and the code stays clean.
 
 The current fork is not just a maintenance release. It is an active effort to modernize the codebase: adopting JUnit 5, enforcing strict clean code standards with Checkstyle and PMD, keeping dependencies minimal and CVE-free, and continuously improving test coverage.
 
-
-
-What Problems Does It Solve?
-----------------------------
+## What Problems Does It Solve?
 
 ### The Disappeared Bridge
 
@@ -58,10 +52,7 @@ Because UCanAccess is 100% Java with zero native code, it runs on Linux, macOS, 
 
 UCanAccess is not just for bespoke Java applications. Software environments that speak JDBC --- such as **LibreOffice Base** , **OpenOffice** , **DbVisualizer** , **SQuirreL SQL** , **DBeaver** , and **MATLAB** --- can connect to Access files through UCanAccess without any extra configuration.
 
-
-
-Tech Stack \& Requirements
---------------------------
+## Tech Stack \& Requirements
 
 * **Java 11 or higher** (LTS versions 17 and 21 are fully tested)
 * **Build tool**: Maven or Gradle
@@ -70,10 +61,7 @@ Tech Stack \& Requirements
   * [HSQLDB](http://hsqldb.org/): provides the in-memory SQL engine for query translation
 * **License**: Apache License 2.0
 
-
-
-Getting Started
----------------
+## Getting Started
 
 ### Add the Dependency
 
@@ -87,13 +75,11 @@ Getting Started
 </dependency>
 ```
 
-
 **Gradle (Kotlin DSL):**
 
 ```
 implementation("io.github.spannm:ucanaccess:5.1.5")
 ```
-
 
 ### Connect and Query
 
@@ -117,7 +103,6 @@ try (Connection conn = DriverManager.getConnection(url);
     System.err.println("Database access failed: " + ex);
 }
 ```
-
 
 No class registration, no native driver setup.  
 
@@ -146,7 +131,6 @@ try (Connection conn = DriverManager.getConnection(url);
 }
 ```
 
-
 ### Access-Specific Functions
 
 One common pain point when working with Access queries is the use of Access-specific SQL functions that standard JDBC drivers simply do not understand. UCanAccess ships with built-in emulations of the most common ones --- `IIf()`, `Nz()`, `Format()`, and financial functions like `PMT()` and `PV()`. Queries originally written for Access often run without any modification at all.
@@ -155,10 +139,7 @@ One common pain point when working with Access queries is the use of Access-spec
 
 If you are integrating UCanAccess into a tool that does not use Maven --- such as LibreOffice Base or SQuirreL SQL --- the project ships a so-called **Uber JAR** : a single self-contained archive with all dependencies bundled in. You can download it directly from [Maven Central](https://central.sonatype.com/artifact/io.github.spannm/ucanaccess) and drop it onto the classpath without any further setup.
 
-
-
-Quality \& Maintenance
-----------------------
+## Quality \& Maintenance
 
 The active fork maintains a high bar for code quality:
 
@@ -167,15 +148,10 @@ The active fork maintains a high bar for code quality:
 * **Security**: Regular dependency updates keep the library free of known CVEs.
 * **Distribution**: Every release is published to Maven Central for straightforward integration.
 
-
-
-Get Involved
-------------
+## Get Involved
 
 UCanAccess lives at [github.com/spannm/ucanaccess](https://github.com/spannm/ucanaccess). Whether you have a bug to report, a feature idea, or want to contribute a test case, contributions are warmly welcomed.
 
 If UCanAccess has helped you keep a legacy system running or simplified a migration, consider dropping a ⭐ on GitHub --- it helps the project stay visible and signals to the community that this bridge is alive and well-maintained.
-
-
 
 *UCanAccess is licensed under the Apache License 2.0 and available on [Maven Central](https://central.sonatype.com/artifact/io.github.spannm/ucanaccess).*

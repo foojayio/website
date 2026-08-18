@@ -65,7 +65,6 @@ record IntegerListRecord(List<Integer> integerList) {
 }
 ```
 
-
 In this example, we created a list of integers(integerList), added one element into it, and initialized the record class with this. Calling method getListSize of record class results into 1. Now we add one more element in integerList and calling getListSize results into 2. Here we did not change the record component (integerList) but updated the fields of the record component, which does not have any restriction. This is the reason we call the record shallowly immutable.
 
 ### Conclusion

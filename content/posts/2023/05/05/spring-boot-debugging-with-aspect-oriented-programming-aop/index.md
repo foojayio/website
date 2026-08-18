@@ -32,10 +32,7 @@ In this post, we will explore how to use AOP to debug a Spring Boot application 
 
 {{< youtube 6kxpkcEqssw >}}
 
-<br />
-
-AOP Concepts
-------------
+## AOP Concepts
 
 Before diving into debugging with AOP, it is essential to understand the core concepts. AOP lets us write code that executes before or after a method. It includes the following common terms:
 
@@ -60,8 +57,7 @@ To minimize the performance impact of AOP, consider the following best practices
 4. **Use conditional aspects:** If some aspects are only required for debugging or development purposes, use conditional aspects that can be enabled or disabled based on a configuration property. This ensures that the performance impact is limited to specific environments or scenarios.
 5. **Monitor and measure:** Regularly monitor and measure the performance of your application to ensure that the overhead introduced by AOP is within acceptable limits. Use profiling tools to identify potential bottlenecks and optimize your AOP implementation accordingly.
 
-Logging Aspect
---------------
+## Logging Aspect
 
 Let's create a simple aspect to log the execution time of methods in our Spring Boot application. This can help identify performance bottlenecks.
 
@@ -91,15 +87,13 @@ public class LoggingAspect {
 }
 ```
 
-
 Pointcut methods are empty because their sole purpose is to define a pointcut expression, which determines the join points (i.e., specific points in the execution of a program) where the aspect should be applied. The method body itself does not contain any logic, as the behavior of the aspect is defined in the advice methods (e.g., `@Before`, `@After`, `@Around`, etc.).
 
 The pointcut method serves as a reusable reference to a specific pointcut expression, making it easier to maintain and update if needed. By referring to a pointcut method in your advice methods, you can apply the same pointcut expression to multiple pieces of advice without duplicating the expression. We will see that in action below.
 
 After implementing the LoggingAspect, we can run our application and observe the logs. We should now see the execution time for each targeted method as a poor man's profiler. Just like a regular profiler, this tool has many disadvantages and impacts the observed application. However, we can extract valuable data if we tune this correctly.
 
-Logging All Methods
--------------------
+## Logging All Methods
 
 One of the common problems we face in big projects is flaky tests and failures. These are especially hard to understand as we might not have enough logging data.
 
@@ -135,9 +129,7 @@ public class LoggingAspect {
 }
 ```
 
-
-The Tip of the Iceberg
-----------------------
+## The Tip of the Iceberg
 
 Logging to keep track of performance or method entry/exit is powerful but basic. We can go much deeper than that. We can create an aspect to log incoming HTTP requests and responses. This aspect intercepts the methods with the `@RequestMapping` annotation, which is typically used for handling HTTP requests in Spring Boot applications:
 
@@ -163,7 +155,6 @@ public class RequestResponseLoggingAspect {
     }
 }
 ```
-
 
 Another important aspect is bean creation and destruction. We can create an aspect to log these events. This aspect intercepts the methods annotated with `@PostConstruct` and `@PreDestroy` which doesn't apply to all beans but would help us keep track of the applicable code in a large application:
 
@@ -191,7 +182,6 @@ public class BeanLifecycleLoggingAspect {
 }
 ```
 
-
 We can even log dependency injection events. This aspect intercepts the methods with the `@Autowired` annotation. It doesn't track constructor injection though but we can use it to track the instance type that gets injected into a bean:
 
 ```
@@ -209,9 +199,7 @@ public class DependencyInjectionLoggingAspect {
 }
 ```
 
-
-Final Word
-----------
+## Final Word
 
 AOP is a fantastic debugging tool.
 

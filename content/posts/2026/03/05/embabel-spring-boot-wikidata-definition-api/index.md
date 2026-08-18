@@ -18,8 +18,7 @@ enlighterjs: true
 frozen: false
 ---
 
-TL;DR
------
+## TL;DR
 
 * I built a **Spring Boot 4** API that defines terms via **Wikidata**.
 * The app is fully reproducible: **no API keys** and **no model installation** needed.
@@ -27,8 +26,6 @@ TL;DR
 * The logs show planning, execution, and typed object binding---the most useful part for teaching agentic flows.
 
 {{< youtube TiuYS6K3HaU >}}
-
-<br />
 
 I wanted a demo that is **simple** , **reproducible** , and still **shows agentic orchestration** in a way that's easy to explain on video.
 
@@ -40,10 +37,7 @@ It returns a compact JSON "definition" fetched from **Wikidata** (no authenticat
 
 The important part: I used **Embabel** to orchestrate the workflow, even though the workflow is deterministic and **does not need an LLM**.
 
-
-
-Part I --- Concepts
--------------------
+## Part I --- Concepts
 
 ### I.1 Embabel
 
@@ -55,8 +49,6 @@ Embabel is an agent framework for the JVM. I like to think of it as a way to mod
 * **Planning**: decide which actions to run and in which order to achieve the goal
 
 In practice, that means I don't call methods in a fixed chain. I provide an initial input (a domain object), tell Embabel what type I want as the result, and Embabel **plans** and runs the required actions.
-
-
 
 ### I.2 Spring AI (even in a "no LLM" demo)
 
@@ -70,8 +62,6 @@ This kept the demo:
 * focused on orchestration,
 * and easy to extend later with a real model.
 
-
-
 ### I.3 Role of Embabel in this application
 
 A reasonable question is: *"What's the point of using Embabel just to query a REST API?"*
@@ -84,8 +74,6 @@ The REST call is not the point. The point is to demonstrate a workflow that:
 4. builds a typed `DefinitionResult`
 
 Embabel makes these steps explicit, typed, and observable, and it can re-plan as the state evolves. That's a much better foundation than packing everything into one big service method---especially when the demo grows.
-
-
 
 ### I.4 Wikidata: definition and why it's ideal for demos
 
@@ -102,10 +90,7 @@ I used two endpoints:
 
 This gives a nice "definition API" in a few lines of code, with zero setup for viewers.
 
-
-
-Part II --- App building (code + explanations)
-----------------------------------------------
+## Part II --- App building (code + explanations)
 
 ### II.1 Maven setup (`pom.xml`)
 
@@ -181,9 +166,6 @@ I also forced **Jackson 2** compatibility (`spring-boot-jackson2`) and excluded 
 </project>
 ```
 
-
-
-
 ### II.2 Configuration (`application.yml`)
 
 I set the server port and configured the default Embabel model name to `noop`.
@@ -200,9 +182,6 @@ embabel:
   models:
     default-llm: noop
 ```
-
-
-
 
 ### II.3 App launcher + Embabel enablement + NOOP LLM registration
 
@@ -237,9 +216,6 @@ public class WikiDemoApplication {
 }
 ```
 
-
-
-
 ### II.4 The NOOP ChatModel (Spring AI)
 
 This is intentionally minimal. If Embabel ever calls it, it returns a predictable message.
@@ -266,9 +242,6 @@ public class NoopChatModel implements ChatModel {
     }
 }
 ```
-
-
-
 
 ### II.5 Domain model (Java records)
 
@@ -303,7 +276,6 @@ public record WikidataEntityId(String id) {
 }
 ```
 
-
 ```java
 
 ```
@@ -313,8 +285,6 @@ public record WikidataEntityId(String id) {
 ```
 
 The key idea is that Embabel "stores" and "reuses" these typed objects during execution. They become the agent's working memory.
-
-
 
 ### II.6 Repository: Wikidata calls with RestClient
 
@@ -471,9 +441,6 @@ public class WikidataRepository {
 }
 ```
 
-
-
-
 ### II.7 The Embabel agent (actions + goal)
 
 The agent defines the workflow. Each method is a step (`@Action`). The final step is tagged as a goal (`@AchievesGoal`) because it produces the desired output type `DefinitionResult`.
@@ -542,7 +509,6 @@ public class WikidataDefinitionAgent {
 }
 ```
 
-
 ```java
 
 ```
@@ -557,8 +523,6 @@ I like this structure because it stays small and readable. More importantly, it 
 * add a caching action,
 * add alternative paths,
 * add optional post-processing.
-
-
 
 ### II.8 Service: running the agent via `AgentInvocation`
 
@@ -591,9 +555,6 @@ public class WikiService {
     }
 }
 ```
-
-
-
 
 ### II.9 Controller: a single endpoint
 
@@ -630,7 +591,6 @@ public class WikiController {
 }
 ```
 
-
 ```java
 
 ```
@@ -639,17 +599,13 @@ public class WikiController {
 
 ```
 
-
-
-Part III --- Demo
------------------
+## Part III --- Demo
 
 ### III.1 Curl request
 
 ```bash
 curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'
 ```
-
 
 ### III.2 Response
 
@@ -663,7 +619,6 @@ curl --request get --url 'http://localhost:8080/api/wiki/define?term=kafka'
   "wikipediaUrl": "https://en.wikipedia.org/wiki/Apache_Kafka"
 }
 ```
-
 
 This is intentionally "small JSON": label + description + canonical links.
 
@@ -700,7 +655,6 @@ These logs are the best part to show on screen, because they reveal Embabel's pl
 21:35:06.196 [task-1] INFO  Embabel - [goofy_mcclintock] goal ... achieved in PT1.164...
 ```
 
-
 What stands out:
 
 * Embabel starts with `DefinitionRequest`
@@ -711,10 +665,7 @@ What stands out:
 
 This is the "agentic" angle: Embabel is not just calling methods---it's planning against typed state.
 
-
-
-Part IV --- Conclusion and extensions
--------------------------------------
+## Part IV --- Conclusion and extensions
 
 This application intentionally starts simple. It's a demo designed to be reproduced in minutes.
 
@@ -772,8 +723,6 @@ A good, minimal LLM use case is last-mile text rewriting:
 * generate a short TL;DR
 
 This keeps the retrieval deterministic and makes the LLM optional, which is often a safer architecture.
-
-
 
 Repo: [https://github.com/vinny59200/embabel](https://github.com/vinny59200/embabel%20)
 

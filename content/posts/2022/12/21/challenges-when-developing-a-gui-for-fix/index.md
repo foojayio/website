@@ -128,7 +128,6 @@ One of the reasons we selected JSON is it can handle this type of hierarchical d
 ]
 ```
 
-
 #### Undertow
 
 We selected Undertow as our web-server because it is relatively lightweight and easy to develop with.
@@ -149,7 +148,6 @@ Undertow server = Undertow.builder().addHttpListener(port,
 "localhost", handler).build();
 server.start();
 ```
-
 
 #### Finally
 

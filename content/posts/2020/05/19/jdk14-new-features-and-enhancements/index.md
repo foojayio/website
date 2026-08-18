@@ -26,8 +26,7 @@ In total, there are a very impressive 16 JDK Enhancement Proposals (JEPs) and 69
 
 Let's start with the more significant items that introduce changes to the Java language syntax.
 
-Records
--------
+## Records
 
 Java is an object-oriented language; you create classes to hold data and use encapsulation to control how that data is accessed and modified. The use of objects makes manipulating complex data types simple and straightforward. It's one of the reasons Java is so popular as a platform.
 
@@ -53,7 +52,6 @@ public class Point {
 }
 ```
 
-
 That's 14 lines of code just to represent a two-value tuple.
 
 JDK 14 introduces records as a [preview feature](https://openjdk.java.net/jeps/12). Preview features are a new concept that allows the developers of the Java platform to include a new language feature without making it part of the Java SE standard. By doing this, developers can try out these features and provide feedback allowing changes (or even the removal of a feature), if required, before the feature becomes set in the standard. To use a preview feature, you must specify the command line flag, `--enable-preview`for both compilation and runtime. For compilation, you must also specify the `-source`flag.
@@ -63,7 +61,6 @@ A record is a much simpler way of representing a data class. If we take our Poin
 ```java
 public record Point(double x, double y) { }
 ```
-
 
 This takes nothing away from the readability of the code; we're immediately aware that we now have a class that contains two double values called x and y that we can access using the standard accessor method names of getX and getY.
 
@@ -84,11 +81,9 @@ record Range(int min, int max) {
 }
 ```
 
-
 Note that the constructor definition is still abbreviated, as specifying the parameters is redundant. Any of the members that are automatically derived from the state description can also be declared so, for example, you can provide an alternative `toString()`or `hashCode()`implementation.
 
-Pattern Matching instanceof
----------------------------
+## Pattern Matching instanceof
 
 In some situations, you do not know the exact type of an object. To handle this, Java has the instanceof operator that can be used to test against different types. The drawback to this is that, having determined the type of an object; you must use an explicit cast if you want to use it as that type:
 
@@ -99,14 +94,12 @@ if (o instanceof String) {
 }
 ```
 
-
 In JDK 14, the instanceof operator has been extended to allow a variable name to be specified in addition to the type. That variable can then be used without the explicit cast:
 
 ```java
 if (o instanceof String s)
   System.out.println(s.length);
 ```
-
 
 The scope of the variable is limited to where its use is logically correct so:
 
@@ -117,20 +110,17 @@ else
   // s is out of scope here
 ```
 
-
 The scope can also apply within the conditional statement so we can do something like this:
 
 ```java
 if (o instanceof String s && s.length() > 4) ...
 ```
 
-
 This makes sense since the length() method will only be called *if* o is a String. The same does not work with a logical or operation:
 
 ```java
 if (o instanceof String s || s.length() > 4) ...
 ```
-
 
 In this case, s.length() needs to be evaluated regardless of the result of whether o is a String. Logically, this does not work and so will result in a compilation error.
 
@@ -143,13 +133,11 @@ if (!(o instanceof String s && s.length() > 3)
 System.out.println(s.length());  // s is in scope here
 ```
 
-
 I have seen some negative feedback on the way variables are scoped but, given that all scoping is entirely logical, I think it works very well.
 
 There are already plans for a second preview version of this feature that will extend pattern matching to work with records and provide a simple way of implementing the deconstruction pattern. More details of this can be found in the [JEP 375](https://openjdk.java.net/jeps/375).
 
-Helpful NullPointerException
-----------------------------
+## Helpful NullPointerException
 
 Anyone who's written more than a few lines of Java code will have experienced a NullPointerException at some point. Failing to initialise an object reference (or mistakenly explicitly setting it to null) and then trying to use the reference will cause this exception to be thrown.
 
@@ -165,7 +153,6 @@ public class NullTest {
 }
 ```
 
-
 The error generated is:
 
 ```java
@@ -173,7 +160,6 @@ Exception in thread "main" java.lang.NullPointerException
             at jdk14.NullTest.<init>(NullTest.java:16)
             at jdk14.Main.main(Main.java:15)
 ```
-
 
 Since we're referencing *list* on line 16, it's evident that *list* is the culprit and we can quickly resolve the problem.
 
@@ -183,14 +169,12 @@ However, if we use chained references in a line like this:
 a.b.c.d = 12;
 ```
 
-
 When we run this, we might see an error like this:
 
 ```java
 Exception in thread "main" java.lang.NullPointerException
     at Prog.main(Prog.java:5)
 ```
-
 
 The problem is that we are unable to determine from this whether the exception is as a result of *a* being null, *b* being null or *c* being null. We either need to use a debugger from our IDE or change the code to separate the references onto different lines; neither of which is ideal.
 
@@ -202,11 +186,9 @@ Exception in thread "main" java.lang.NullPointerException:
     at Prog.main(Prog.java:5)
 ```
 
-
 Immediately, we can see that a.b is the problem and set about correcting it. I'm sure that this will make many Java developers lives easier.
 
-New APIs
---------
+## New APIs
 
 Now let's turn our attention to the changes in the class libraries.
 
@@ -275,8 +257,7 @@ The foreign-memory access API introduces three main abstractions:
 * MemoryAddress: providing an offset into a MemorySegment (basically, a pointer).
 * MemoryLayout: providing a way to describe the layout of a memory segment that greatly simplifies accessing a MemorySegment with a var handle. Using this, it is not necessary to calculate the offset based on the way the memory is being used. For example, an array of ints or longs will offset differently but will be handled transparently using a MemoryLayout.
 
-JVM Changes
------------
+## JVM Changes
 
 I scanned all 609 pages of the JVM specification but couldn't find any highlighted differences. It will be interesting to look at the bytecodes generated for records since this doesn't require any special support at the JVM level. The same applies to the helpful NullPointerException feature.
 
@@ -288,8 +269,7 @@ JDK 14 does include some JEPs that change non-functional parts of the JVM
 * [**JEP 364**](https://openjdk.java.net/jeps/364): ZGC on macOS and [JEP 365](https://openjdk.java.net/jeps/365): ZGC on Windows. ZGC is an experimental low-latency collector that was initially only supported on Linux. This has now been extended to the macOS and Windows operating systems.
 * [**JEP 366**](https://openjdk.java.net/jeps/366): Deprecate the ParallelScavenge and SerialOld GC combination. Oracle states that very few people use this combination and the maintenance overhead is considerable. Expect this combination to be removed at some point in the not-too-distant future.
 
-Other Features
---------------
+## Other Features
 
 There are a number of JEPs that relate to different parts of the OpenJDK:
 

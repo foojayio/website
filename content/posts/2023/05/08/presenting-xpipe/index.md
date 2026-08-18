@@ -31,8 +31,7 @@ There are a couple of limitations that all established protocol-based solutions 
 * Outside the SSH bubble there exist a variety of different other remote shell connection methods and each one would require its own implementation/library to be supported.
 * You would also have to handle proxies and nested connections as nowadays a remote shell connection might go through multiple intermediate systems due to firewalls, login servers, proxies, and more.
 
-An alternative approach to remote shell connections
----------------------------------------------------
+## An alternative approach to remote shell connections
 
 This motivated me to experiment with completely alternative approaches and eventually led to the creation of [X-Pipe](https://github.com/xpipe-io/xpipe). Instead of implementing all this protocol handling through libraries, the alternative approach of X-Pipe is to delegate everything to existing command-line programs. If the user has already installed the appropriate programs to connect to remote systems, why not try to use them instead of libraries?
 
@@ -89,7 +88,6 @@ SshStore remoteSsh = new SshStore(local,
 // This connection will be established with docker exec -i "<container name>" sh
 DockerStore docker = new DockerStore(remoteSsh, "<container name>");
 ```
-
 
 The next step is to create and start a remote shell control. This object will handle everything related to the shell connection:
 
@@ -168,11 +166,9 @@ try (ShellControl sc = docker.control().start()) {
 }
 ```
 
-
 This is just a brief showcase, there's more that you can do with it.
 
-Building the X-Pipe desktop application
----------------------------------------
+## Building the X-Pipe desktop application
 
 After the core functionality had been implemented, the next step on my TODO list was to apply it to something practical. The result of that is the X-Pipe desktop application, which is entirely built on top of the remote process control implementation and was created with JavaFX.
 
@@ -210,8 +206,7 @@ The remote process implementation is used to set up script files such that a loc
 * It can easily be extended to include support for new tools. Adding support for a [new terminal](https://github.com/xpipe-io/xpipex/blob/8033d24654967d04a20939b8c4bf014d9dd5d99b/app/src/main/java/io/xpipe/app/prefs/ExternalTerminalType.java) or [text editor](https://github.com/xpipe-io/xpipex/blob/8033d24654967d04a20939b8c4bf014d9dd5d99b/app/src/main/java/io/xpipe/app/prefs/ExternalEditorType.java) takes around 15 LOC.
 * The user can happily work with their tools that they're familiar with
 
-Architecture
-------------
+## Architecture
 
 The project is fully realized in modern Java and currently targets Java 19, with the focus lying on taking the necessary time in order to achieve a proper implementation (One of the nice things when there aren't tight deadlines).
 
@@ -255,8 +250,7 @@ Each extension module in X-Pipe is just a modularized jar that is loaded into a 
 
 Required dependencies can be placed next to the extension jar, the module finder will pick them up automatically and add them to the layer. One extension can also depend on others and use their module layers as its parents.
 
-Conclusion
-----------
+## Conclusion
 
 I recently decided to switch to the Apache 2.0 license for this project and am still working open sourcing the last parts of the remote process implementation. Currently, the remote process API implementation and the X-Pipe application are coupled together somewhat. It is however possible in theory to separate them and I have plans to do that in the near future if there's any interest.
 

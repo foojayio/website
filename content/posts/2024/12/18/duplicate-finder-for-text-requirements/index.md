@@ -28,8 +28,7 @@ It's been a while since I published the [intro to the duplicate finder project](
 
 Before starting to write the program code, it makes sense to lay down the requirements first. A good way to do this is by writing tests. Not only will the tests help us develop faster, but they will also ensure that the code adheres to the specification.
 
-Requirements
-------------
+## Requirements
 
 In this section, I've formulated my idea of the duplicate finder's core features. These work well for my applications. However, as each project might have different needs, I would be happy to hear and implement your ideas.
 
@@ -43,11 +42,9 @@ For example, it should identify the following texts as similar:
 This is *one of the two texts* that the duplicate finder tool should *consistently* detect.
 ```
 
-
 ```
 This *is an example text* that the duplicate finder tool should detect *consistently*.
 ```
-
 
 Additionally, in the case of fuzzy duplicates, the degree of similarity should be measurable. This would allow us to quickly evaluate the duplicate pairs and sort them by how closely the text fragments resemble each other.
 
@@ -65,8 +62,7 @@ The criteria for identifying duplicates should be adjustable, with the settings 
 
 Generally, the longer and more frequently repeated a section is, the more beneficial it is to deduplicate it. However, it ultimately depends on the particular application, so it would be nice to have control over these thresholds.
 
-Definitions
------------
+## Definitions
 
 With the basic requirements sorted out, it's time to get code definitions in place. At this stage, we'll need:
 
@@ -88,7 +84,6 @@ class Chunk(
 )
 ```
 
-
 This definition doesn't take into account some nuances. For example, we might leave out the `content` field. This would save us some RAM, but the tradeoff will be the speed of accessing the element's content, because then the program will have to read it from disk each time instead of only once. We're not fighting for performance right now, so a potentially suboptimal choice is fine.
 
 ### Interface
@@ -107,7 +102,6 @@ interface DuplicateFinder {
 }
 ```
 
-
 Here's the meaning of the parameters that the interface accepts:
 
 * `root` -- the folder with the content to analyze
@@ -125,11 +119,9 @@ Actually, the definition above is unnecessarily verbose. Introducing an interfac
 val duplicateFinder: (Path, DuplicateFinderOptions) -> Map<Chunk, List<Chunk>> = TODO()
 ```
 
-
 This declaration means that the duplicate finder is a function that takes `Path, DuplicateFinderOptions` and outputs `Map<Chunk, List<Chunk>>` , and that the function itself is not yet implemented. This might not be the best style for large projects, but in smaller ones like ours, it works great.
 
-Test data
----------
+## Test data
 
 Since the duplicate finder is supposed to work with text data, the tests will also need some texts to analyze. This means we need to prepare some examples containing fuzzy duplicates. Let's start with the duplicates:
 
@@ -137,7 +129,6 @@ Since the duplicate finder is supposed to work with text data, the tests will al
 val EXACT_MATCH = "This is an exact match. It will be inserted in the test data as-is."
 val FUZZY_MATCH_TEMPLATE = "This is a fuzzy match. It will be inserted in the test data with minor changes."
 ```
-
 
 The idea behind `FUZZY_MATCH_TEMPLATE` is that we'll use it to programmatically produce the actual fuzzy matches:
 
@@ -151,7 +142,6 @@ val fuzzyMatches = listOf(
     FUZZY_MATCH_TEMPLATE.removeRange(10, 15)
 )
 ```
-
 
 Next, we'll generate a text consisting of [random English words](https://www.mit.edu/~ecprice/wordlist.10000):
 
@@ -180,7 +170,6 @@ fun generateTestData(
 }
 ```
 
-
 Finally, we'll randomly inject `EXACT_MATCH` and `fuzzyMatches` into the generated text:
 
 ```kotlin
@@ -191,9 +180,7 @@ fun injectDuplicates(testDataDir: String) = Files.list(Path.of(testDataDir)).toL
 }
 ```
 
-
-Tests
------
+## Tests
 
 As already mentioned, the primary goal of the tests at this stage is to define the specification, so let's not waste too much time on perfecting the test suite. Instead, we'll write just enough to ensure that the future code adheres to the requirements.
 
@@ -239,8 +226,6 @@ class DuplicateFinderTest {
 private fun Map<Chunk, List<Chunk>>.texts() = (keys + values.flatten()).map { it.content }
 ```
 
-
-Next steps
-----------
+## Next steps
 
 We have established the requirements by defining the interface and writing the tests. In the next post of the series, we'll implement the actual algorithm and see how well it performs. See you soon!

@@ -20,8 +20,7 @@ frozen: false
 
 **In an ideal world, every piece of code we write would be easily testable, clearly understood, and perfectly maintainable. However, reality often presents us with complex problems and solutions that aren't always straightforward. Writing testable code sometimes requires a thoughtful approach, deep consideration of the use cases, and even refactoring to ensure that the code is robust and fully tested.**
 
-The Challenge of Testing
-------------------------
+## The Challenge of Testing
 
 Imagine a scenario where you need to create an Amazon S3 client based on different credential providers. At first glance, the implementation might seem simple. However, when it comes to writing unit tests for this code, challenges arise.
 
@@ -47,9 +46,7 @@ public AmazonS3 getAmazonS3Client(
 }
 ```
 
-
-The Process of Refactoring
---------------------------
+## The Process of Refactoring
 
 Recognizing that the code is hard to test, the next step is to consider how it can be refactored to make testing easier. This often involves identifying the dependencies and behaviours that are hard to test and finding ways to isolate them.
 
@@ -101,11 +98,9 @@ AmazonS3 getAmazonS3Client(
 }
 ```
 
-
 This refactoring allowed the behaviour to be tested in isolation without having to know the internal details of the Amazon S3 client.
 
-Writing the Tests
------------------
+## Writing the Tests
 
 With the code refactored, we can now write unit tests that cover all code paths and ensure 100% coverage. Here are the specific tests:
 
@@ -123,7 +118,6 @@ public void shouldUseAWSStaticCredentialsProvider_whenKeysProvided() {
 }
 ```
 
-
 ### Test the Default AWS Credentials Provider Factory
 
 This test ensures that the factory for creating an S3 client with the default credentials provider works correctly.
@@ -138,7 +132,6 @@ public void shouldUseDefaultAWSCredentialsProvider_whenKeysNotProvided() {
   assertEquals(REGION.getName(), s3Client.getRegionName());
 }
 ```
-
 
 ### Test the Choice of Credentials Provider Based on Input
 
@@ -166,11 +159,9 @@ public void shouldUseDefaultAWSCredentials_whenKeysEmpty() {
 }
 ```
 
-
 These examples illustrate how refactoring the code to use an interface and separate implementations allows for thorough testing of the logic, including the choice of credentials provider based on the input parameters.
 
-Lessons Learned and Conclusion
-------------------------------
+## Lessons Learned and Conclusion
 
 The journey from initial implementation to fully testable code teaches us to:
 

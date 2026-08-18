@@ -22,8 +22,7 @@ frozen: false
 
 The January 2026 OpenJDK quarterly updates are now (or will soon be) available from various OpenJDK distributors. This quarterly release brings important security fixes and updates to all currently supported Java versions.
 
-The Quarterly Update Cycle
---------------------------
+## The Quarterly Update Cycle
 
 **Every three months** (in January, April, July, and October), the OpenJDK project releases **security updates, bug fixes, and improvements** for **all supported Java versions**. This predictable schedule helps organizations plan their Java updates and maintain secure, stable production environments.
 
@@ -50,8 +49,7 @@ PSUs offer the full set of improvements and refinements from the OpenJDK communi
 
 In an ideal scenario, you install a CPU as soon as possible after a brief test to secure your environment. After that, you start testing with the PSU release for a longer time. Once all your tests are green, switch your environment to the PSU version. This must be completed before the next quarterly update, so you can easily repeat the cycle.
 
-Difference With the Six-Month Release Cycle
--------------------------------------------
+## Difference With the Six-Month Release Cycle
 
 The **six-month release cycle** , introduced with OpenJDK 9, **brings a new major OpenJDK version** in March and September. For example, on September 16, 2026, we saw the "birth" of Java 25 (25.0.0).
 
@@ -66,8 +64,7 @@ The **quarterly cycle brings updates to existing releases**. For example, the Ja
 
 Important message to understand: to keep your systems secure, you need to install an update of your JDK every three months. Check `java -version` to understand how much updates you missed. For instance, if you installed the first release of JDK 17 (17.0.0), you have missed 18 updates with security and bug fixes by now!
 
-Distributor Availability
-------------------------
+## Distributor Availability
 
 The beauty of the OpenJDK ecosystem is that multiple distributors provide builds of these releases. Major OpenJDK distributors, including Azul (Zulu), BellSoft, Oracle, Eclipse (Temurin), and others, typically make updated builds available for all currently supported Java versions within a few hours or days. This typically includes:
 
@@ -77,8 +74,7 @@ The beauty of the OpenJDK ecosystem is that multiple distributors provide builds
 
 Check with your specific OpenJDK distributor to confirm which versions receive updates and the support timeline for your deployment.
 
-In this January Release
------------------------
+## In this January Release
 
 The January release, as [stated by Oracle](https://www.oracle.com/security-alerts/cpujan2026.html#AppendixJAVA), *contains 11 new security patches for Oracle Java SE. All of these vulnerabilities may be remotely exploitable without authentication, i.e., may be exploited over a network without requiring user credentials. The highest CVSS v3.1 Base Score of vulnerabilities affecting Oracle Java SE is 7.5.*
 
@@ -95,8 +91,7 @@ Azul has also posted its release notes, which you can [find here](https://docs.a
 * Image Encryption: By default, the CRaC images contain application data, including environment variables and arguments, in plaintext. If this data contains secrets and the images are accessible to untrusted parties, you can encrypt the images to ensure the secrets stay hidden.
 * Alternative Images: Automatically select the best CRaC image at restore. This brings a solution to modern cloud environments where a single checkpoint image may not be enough
 
-Next Steps
-----------
+## Next Steps
 
 Review the release notes from your OpenJDK distributor to understand the specific fixes and improvements in this quarter's release. Plan your testing and deployment schedule to ensure your Java applications benefit from the latest security patches and bug fixes.
 

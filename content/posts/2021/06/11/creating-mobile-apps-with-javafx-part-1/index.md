@@ -81,7 +81,6 @@ try {
 }
 ```
 
-
 Once you have the `AccelerometerService` initialized, you can start and stop it, depending on whether the game is in progress.
 
 ```java
@@ -90,7 +89,6 @@ service.start();
 // stop the accelerometer service
 service.stop();
 ```
-
 
 The TiltMaze game lets you control a rolling ball by tilting the phone. As you tilt the phone left or right, the game moves the ball along the X-axis by updating the `translateX` property of the ball.
 
@@ -102,7 +100,6 @@ xv = acceleration.getX();
 yv = acceleration.getY() * -1;
 ```
 
-
 Using these values, we check for possible collisions or falling into holes before updating the ball's XY position.
 
 ```java
@@ -110,14 +107,12 @@ ball.setTranslateX(ball.getTranslateX() + xv);
 ball.setTranslateY(ball.getTranslateY() + yv);
 ```
 
-
 As the ball rolls, we also mark its path by updating a JavaFX Path object, adding a `LineTo` segment to the path with each update.
 
 ```java
 path.getElements().add(
         new LineTo(ball.getTranslateX(), ball.getTranslateY()));
 ```
-
 
 Figure 3 shows a game in progress. The ball's path is marked in blue and the countdown timer has 6.5 seconds remaining. Of course, the game must perform collision detection with the maze barriers, holes, and outside boundaries. We leave this code for you to digest at your leisure!  
 ![](TiltMaze-InPlay-small.png) Figure 3. TiltMaze during play  

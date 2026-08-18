@@ -31,12 +31,9 @@ Recently, I mentioned [how I refactored](https://blog.frankel.ch/kotlin-scriptin
 
 ](https://twitter.com/nicolas_frankel/status/1715313240568197233)
 
-<br />
-
 Though the current setup works flawlessly - and is free, I wanted to experiment with self-hosted runners. Here are my findings.
 
-Context
--------
+## Context
 
 GitHub offers a large free usage of GitHub Actions:
 > GitHub Actions usage is free for standard GitHub-hosted runners in public repositories, and for self-hosted runners. For private repositories, each GitHub account receives a certain amount of free minutes and storage for use with GitHub-hosted runners, depending on the account's plan. Any usage beyond the included amounts is controlled by spending limits.
@@ -53,8 +50,7 @@ Yet, the policy can easily change tomorrow. Free tier policies show a regular tr
 
 Forewarned is forearmed. I like to try options before I need to choose one. Case in point: what if I need to migrate?
 
-The theory
-----------
+## The theory
 
 GitHub Actions comprise two components:
 
@@ -79,11 +75,9 @@ jobs:
     runs-on: self-hosted
 ```
 
-
 It's a bit more involved, though. Let's detail what steps I had to undertake in my repo to make the job work.
 
-The practice
-------------
+## The practice
 
 GitHub Actions depend on Docker being installed on the runner. Because of this, I thought jobs ran in a dedicated image: it's plain wrong. Whatever you script in your job happens on the running system. Case in point, the initial script installed Python and Poetry.
 
@@ -102,7 +96,6 @@ jobs:
           poetry-version: 1.7.1
 ```
 
-
 In the context of a temporary container created during each run, it makes sense; in the context of a stable, long-running system, it doesn't.
 
 Raspbian, the Raspberry default operating system, already has Python 3.11 installed. Hence, I had to downgrade the version configured in Poetry. It's no big deal because I don't use any specific Python 3.12 feature.
@@ -111,7 +104,6 @@ Raspbian, the Raspberry default operating system, already has Python 3.11 instal
 [tool.poetry.dependencies]
 python = "^3.11"
 ```
-
 
 Raspbian forbids the installation of any Python dependency in the primary environment, which is a very sane default. To install Poetry, I used the regular APT package manager:
 
@@ -133,7 +125,6 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 ```
 
-
 It allows segregating individual steps so that a step has access to only the environmental variables it needs. For self-hosted runners, you set environment variables in an existing `.env` file inside the folder.
 
 ```
@@ -145,7 +136,6 @@ jobs:
         run: poetry run python src/main.py --live
 ```
 
-
 If you want more secure setups, you're on your own.
 
 Finally, the architecture is a pull-based model. The runner constantly checks if a job is scheduled. To make the runner a service, we need to use out-of-the-box scripts inside the runner folder:
@@ -155,11 +145,9 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 ```
 
-
 The script uses `systemd` underneath.
 
-Conclusion
-----------
+## Conclusion
 
 Migrating from a GitHub runner to a self-hosted runner is not a big deal but requires changing some bits and pieces.
 
@@ -177,10 +165,4 @@ I'd be happy to hear if you found and used such a solution. In any case, I'm not
 * [About self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
 * [Configuring the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/raspberry-pi-github-action/) on March 10^th^ 2024*
-
-<br />
-
-<br />

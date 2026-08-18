@@ -22,8 +22,7 @@ related_posts:
 frozen: false
 ---
 
-Latency and Throughput
-----------------------
+## Latency and Throughput
 
 In discussions on performance, it is common to encounter the terms *Latency* and *Throughput* to describe the characteristics of a software component.
 
@@ -41,8 +40,7 @@ In the context of the fast-food restaurant, throughput would measure how many cu
 
 ![](Screenshot-2024-01-26-at-14.00.08-1024x238.png)
 
-Scaling Out to Improve Throughput
----------------------------------
+## Scaling Out to Improve Throughput
 
 A commonly suggested solution to increase the throughput of a component is to introduce more concurrency into a system, the aim being to process more than one task at the same time. This could be done within a component instance by introducing multiple threads of execution, each of which can handle a single request.
 
@@ -56,8 +54,7 @@ Modern cloud infrastructure allows new instances of components to be dynamically
 
 The general term for this type of approach is "Scaling Out", or "Horizontal Scaling".
 
-The Problems with Scaling Out
------------------------------
+## The Problems with Scaling Out
 
 Scaling out seems to offer an attractive path to increasing the throughput of a system. However, the advantages it brings do not come without cost, and it is important to appreciate this. The basic approach is to make multiple independent instances of a component appear to the outside as if there were only one instance. This is sometimes referred to as the "single-system" approach. Though it may seem an attractive solution, building and managing such an abstraction introduces complexity, which can have a detrimental effect on the time taken to process individual tasks.
 
@@ -79,8 +76,7 @@ All of these things introduce further complexity into the request processing cyc
 
 ![](Screenshot-2024-01-26-at-14.01.58.png)
 
-Increasing Throughput by Reducing Latency
------------------------------------------
+## Increasing Throughput by Reducing Latency
 
 In many cases, it is possible to improve throughput performance in a component without resorting to scaling out. This approach is based on a simple observation. If we can reduce the amount of time to process a single request, then the net result is that we can process more requests in a given timeframe.
 
@@ -98,8 +94,7 @@ The net effect of these approaches is, however, to remove much of the additional
 
 ![](Screenshot-2024-01-26-at-14.04.25.png)
 
-Conclusion
-----------
+## Conclusion
 
 Low latency coding techniques are designed to keep a processor core as busy as possible, executing at its full potential and so getting work done as quickly as possible. This feeds through to optimising for throughput in a component.
 

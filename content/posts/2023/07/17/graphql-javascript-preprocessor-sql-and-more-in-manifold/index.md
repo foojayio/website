@@ -29,10 +29,7 @@ By summarizing these features and reflecting on the knowledge gained throughout 
 
 {{< youtube 7PzaVwZ68II >}}
 
-<br />
-
-Expanding Horizons with GraphQL Support
----------------------------------------
+## Expanding Horizons with GraphQL Support
 
 GraphQL, a relatively young technology, has emerged as an alternative to REST APIs. It introduced a specification for requesting and manipulating data between client and server, offering an arguably more efficient and streamlined approach. However, GraphQL can pose challenges for static languages like Java.
 
@@ -75,7 +72,6 @@ extend type Query {
 }
 ```
 
-
 We can write this sort of fluent code:
 
 ```
@@ -90,11 +86,9 @@ for (var movie : actionMovies) {
 }
 ```
 
-
 None of these objects need to be declared in advance, all we need are the GraphQL files.
 
-Achieving Code Parity with JavaScript Integration
--------------------------------------------------
+## Achieving Code Parity with JavaScript Integration
 
 In some cases, regulatory requirements demand identical algorithms in both client and server code. This is common for cases like interest rate calculations where in the past we used Swing applications to calculate and display the rate. Since both the backend and front-end were in Java it was simple to have a single algorithm.
 
@@ -109,7 +103,6 @@ function calculateValue(total, year, rate) {
 }
 ```
 
-
 Can be invoked from Java as if it was a static method:
 
 ```
@@ -117,9 +110,7 @@ var interest = Calc.calculateValue(4,1999, 5);
 System.out.println(interest);
 ```
 
-
-Preprocessor for Java
----------------------
+## Preprocessor for Java
 
 While preprocessor-like functionality may seem unnecessary in Java due to its portable nature and JIT compilation, there are scenarios where conditional code becomes essential.
 
@@ -139,9 +130,7 @@ With Manifold, we can write preprocessor code such as:
 #endif
 ```
 
-
-Reflecting on Manifold's Power
-------------------------------
+## Reflecting on Manifold's Power
 
 Throughout this series, we have explored the many features of Manifold, including type-safe reflection, extension methods, operator overloading, property support, and more. These features demonstrate Manifold's commitment to enhancing Java development and bridging the gap between Java and modern programming paradigms. By leveraging Manifold, developers can achieve cleaner, more expressive code while maintaining the robustness and type safety of the Java language.
 
@@ -153,8 +142,7 @@ I will probably need to interact with GraphQL though and this was a big deciding
 
 I do miss the Lombok constructor's annotations though, I hope something like that will eventually make its way into Manifold. Alternatively, if I find the time I might implement this myself.
 
-Final Word
-----------
+## Final Word
 
 As we conclude this journey through Manifold, it's clear that this library offers a rich set of features that elevate Java development to new heights.
 

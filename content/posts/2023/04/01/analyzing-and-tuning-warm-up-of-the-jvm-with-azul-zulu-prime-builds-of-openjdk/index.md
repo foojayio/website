@@ -27,8 +27,7 @@ frozen: false
 It is the task of the Just-in-Time (JIT) compiler to deliver optimal performance by producing optimized compiled code from application bytecode. This article will give you a basic understanding of how JIT compilation works and how to optimize warm-up using Azul Zulu Prime Builds of OpenJDK (Azul Zulu Prime JDK).
 > This post has been reviewed and extended on July 20th of 2023 thanks to the contributions of Matt Van Order.
 
-An Introduction to JIT Compilation
-----------------------------------
+## An Introduction to JIT Compilation
 
 When people think of Java compilers, they usually think about `javac`, which turns your Java source code into Java bytecode. But equally important is JIT compilation, which turns your Java bytecode into optimized machine code for the specific hardware on which your Java program is running.
 
@@ -40,8 +39,7 @@ Because JIT compilation needs to use the same resources that your program runs, 
 
 JIT compilers make speculations on the best way to optimize methods based on the usage seen in the life of the program so far. Sometimes those speculations turn out to be incorrect. When this happens, the JVM performs a de-optimization, or deopt, in which the compiled method is discarded and the method is run in the interpreter or in Tier 1 until the JIT compiler can provide a newly compiled method that matches the new usage patterns.
 
-Azul Zulu Prime JDK and the Falcon JIT Compiler
------------------------------------------------
+## Azul Zulu Prime JDK and the Falcon JIT Compiler
 
 Azul Zulu Prime JDK replaces OpenJDK's HotSpot JIT compiler with Azul's Falcon JIT compiler. Unlike HotSpot, Falcon has different levels of optimizations that you can use to balance eventual code speed versus how much time and computer resources you can commit to JIT warmup.
 
@@ -54,8 +52,7 @@ There are many reasons to be sensitive to long warm-up, even if it delivers high
 * You have policies in place that throttle traffic or spin up new instances when CPU utilization goes over a certain percentage.
 * You have to reserve capacity on your machines for the spike in CPU activity during warm-up, even though you do not need those resources for the regular running of your application.
 
-Tuning JIT Compilation
-----------------------
+## Tuning JIT Compilation
 
 ### Tune the Delivery of Full Falcon Optimizations
 
@@ -101,8 +98,7 @@ You may have lots of methods in your compile queue for things that the applicati
 
 You can train Falcon to focus only on compiling methods that were recently hot using the `-XX:TopTierCompileThresholdTriggerMillis` flag. This flag controls the triggering time limit (in ms) in which the method needs to reach the compile threshold in order to be queued for compilation. If the threshold is reached, but not within this time limit, the method is ignored and the timer starts over again.
 
-Analyzing Java Warm-up
-----------------------
+## Analyzing Java Warm-up
 
 So how do you know if your application is warmed up? The best way is by measuring the performance of your program by whatever metric you would normally measure it with. This could be operations/second or service time. Run a very long test and see how long it takes to reach 99% of peak performance and remain steadily at that level for a long period of time.
 
@@ -120,8 +116,7 @@ After your test, open the log file in the [Azul GC Log Analyzer](https://docs.az
 * Compiler Threads: shows how many threads were used over time for the JIT compilation
 * Tier 2 Compile Counts and Tier 2 Wait Time Distribution: shows the full amount of compilations requested over the life of the process and how long it took to fulfill requests.
 
-Example Case
-------------
+## Example Case
 
 Let's compare the results of running the same application with or without certain parameters to see the impact on the warm-up. We let the application run for the same duration, which is long enough to reach a stable state, with the same load to ensure the maximum benefit from the Falcon compiler is reached, and similar use cases are compared.
 
@@ -158,29 +153,25 @@ Clicking "Compiler Statistics" \> "Tier 2 Compile Counts" shows a large number o
 Clicking "Tier 2 Wait Time Distribution" shows our JVM is experiencing long wait times for compiled methods in the first run, while the second run shows much better times to respond with compiled methods.
 ![](chart-tier-2-wait-time-distribution-compare-1024x278.png) Wait distribution time without parameters, versus extra threads and lower compile treshold.
 
-Eviction From the Compiler Queue
---------------------------------
+## Eviction From the Compiler Queue
 
 The JVM enqueues a massive number of methods for compilation as your program starts. Most programs have different phases of execution. For example, your program could have an initialization phase followed by a steady run phase. The methods that are the hottest in the initialization phase may not be the same methods that are needed when you move to your steady run phase.
 
 Azul Zulu Prime JDK optimizes for this situation by continuing to count invocations after the compilation threshold has been reached. Every time there are another 10K invocations, the JVM increments a counter on the method. If the counter hasn't been incremented in 20s, meaning it hasn't been called 10K times in the last 20 seconds, the method is evicted from the compile queue. You can disable the eviction policy using `-XX:TopTierCompileQueueEvictAfterMs=-1`.
 
-Use Cloud Native Compiler
--------------------------
+## Use Cloud Native Compiler
 
 We often see cases where customers want to take advantage of full Falcon super-optimizations but are running on small machines whose resource constraints make it difficult. That's why Azul has developed Cloud Native Compiler. Cloud Native Compiler provides a server-side optimization solution that offloads JIT compilation to dedicated hardware, providing more processing power to JIT compilation while freeing your client JVMs from the load of doing JIT compilation.
 
 For more information, see the [Cloud Native Compiler documentation](https://docs.azul.com/cloud_native_compiler/).
 
-Use ReadyNow Warm-Up Optimizer
-------------------------------
+## Use ReadyNow Warm-Up Optimizer
 
 ReadyNow is a feature of Azul Zulu Prime JDK that can dramatically reduce your warm-up time. ReadyNow persists the profiling information gathered during the run of the application so that subsequent runs do not have to learn again from scratch. On the next run, ReadyNow pre-compiles all the methods in the profile before launching the Main method.
 
 For more information, see the [ReadyNow documentation](https://docs.azul.com/prime/Use-ReadyNow).
 
-Advanced Tuning Hints
----------------------
+## Advanced Tuning Hints
 
 When problems have been identified from the log-file analysis, you can dive even deeper into this process by running your application with additional flags that will give you more information.
 

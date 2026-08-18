@@ -33,7 +33,6 @@ r.stop(); [5]
 r.dump(Files.createFile("/var/log/jfr/app-initiated.jfr")); [6]
 ```
 
-
 1. As shown above, choose the JFR configuration.
 2. Choose which events the recording should be interested in. Another signature accepts classes, it's unlikely to be helpful for JDK events, but it may get interesting for custom events, your classes.
 3. Eventually set recording constraints, like the maximum age of the records.
@@ -63,7 +62,6 @@ try(RecordingFile rf = new RecordingFile(Paths.get("/var/log/jfr/app-initiated.j
 }
 ```
 
-
 1. Open the JFR file, it's a `Closeable` and it reads a file, so be sure to use it in a `try-with-resources` block.
 2. `readEventTypes()` gets you the schema of the events, fields name, labels, thresholds, etc.
 3. Then there's this weird enumeration style API to read the events `hasMoreEvents()` and `readEvent()`.
@@ -77,7 +75,6 @@ if (event.hasField("intValue")) {
    System.out.println("Int value: " + intValue);
 }
 ```
-
 
 This API is now complemented by streaming live events [JEP-349](https://openjdk.java.net/jeps/349) in JDK 14 using an API `RecordingStream` that is mix of the above, that's out of scope for this article. But that's yet another reason to make the effort to upgrade our JDK.
 

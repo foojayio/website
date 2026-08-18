@@ -40,12 +40,9 @@ Understanding these tools is crucial for developers, as it bridges the gap betwe
 
 {{< youtube rQjHAMM3XfY >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-The Need for Advanced Management Tools in Development
------------------------------------------------------
+## The Need for Advanced Management Tools in Development
 
 Development and DevOps teams utilize an array of tools, often perceived as complex or alien by developers. These tools, designed for scalability, enable the management of thousands of servers simultaneously.
 
@@ -91,8 +88,7 @@ Spring Framework's Actuator module exemplifies the integration of management cap
 
 This integration propels applications to "production-ready" status, allowing developers to monitor and manage applications with unprecedented depth and efficiency.
 
-Tooling for JMX Management
---------------------------
+## Tooling for JMX Management
 
 While JMX can be accessed through various web interfaces and administrative tools, command-line tooling offers a direct, efficient method for interacting with JMX-enabled applications on production servers.
 
@@ -116,13 +112,11 @@ Once the connection is made we can issue commands to JMX and retrieve informatio
 >domains #following domains are available JMImplementation com.sun.management java.lang java.nio java.util.logging javax.cache jdk.management.jfr
 ```
 
-
 I can select a specific domain and thus perform future operations within said domain:
 
 ```
 >domain java.util.logging #domain is set to java.util.logging
 ```
-
 
 Once inside the domain I can select a specific bean and perform operations on it. For this I need to first list the beans in the domain, in this case there's only the logging bean. I can then select that bean using the `bean` command:
 
@@ -130,11 +124,9 @@ Once inside the domain I can select a specific bean and perform operations on it
 >beans #domain = java.util.logging: java.util.logging:type=Logging
 ```
 
-
 ```
 >bean java.util.logging:type=Logging #bean is set to java.util.logging:type=Logging
 ```
-
 
 I can perform many operations on beans, perhaps the most useful is the `info` command which lets me query a bean.
 
@@ -144,23 +136,19 @@ Notice that a bean can have attributes, think of them like object fields and ope
 >info #mbean = java.util.logging:type=Logging #class name = sun.management.ManagementFactoryHelper$PlatformLoggingImpl # attributes %0 - LoggerNames ([Ljava.lang.String;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - java.lang.String getLoggerLevel(java.lang.String p0) %1 - java.lang.String getParentLoggerName(java.lang.String p0) %2 - void setLoggerLevel(java.lang.String p0,java.lang.String p1) #there's no notifications
 ```
 
-
 I can run operations and pass various commands e.g. I can get the logger level, set it and then check that the logger level was indeed updated:
 
 ```
 >run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns:
 ```
 
-
 ```
 >run setLoggerLevel org.apache.tomcat.websocket.WsWebSocketContainer INFO #calling operation setLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer, INFO] #operation returns: null
 ```
 
-
 ```
 >run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns: INFO
 ```
-
 
 This is just the tip of the iceberg. We can get many things such as spring settings, internal VM information, etc. In this example I can query VM information directly from the console:
 
@@ -168,24 +156,19 @@ This is just the tip of the iceberg. We can get many things such as spring setti
 >domain com.sun.management #domain is set to com.sun.management
 ```
 
-
 ```
 >beans #domain = com.sun.management: com.sun.management:type=DiagnosticCommand com.sun.management:type=HotSpotDiagnostic
 ```
-
 
 ```
 >bean com.sun.management:type=HotSpotDiagnostic #bean is set to com.sun.management:type=HotSpotDiagnostic
 ```
 
-
 ```
 >info #mbean = com.sun.management:type=HotSpotDiagnostic #class name = com.sun.management.internal.HotSpotDiagnostic # attributes %0 - DiagnosticOptions ([Ljavax.management.openmbean.CompositeData;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - void dumpHeap(java.lang.String p0,boolean p1) %1 - javax.management.openmbean.CompositeData getVMOption(java.lang.String p0) %2 - void setVMOption(java.lang.String p0,java.lang.String p1) #there's no notifications
 ```
 
-
-Leveraging JMX in Debugging and Management
-------------------------------------------
+## Leveraging JMX in Debugging and Management
 
 JMX stands out as a robust tool for wiring management consoles, allowing developers to expose critical settings and metrics for their projects.
 
@@ -193,8 +176,7 @@ Beyond its conventional use, JMX can be leveraged as part of the debugging proce
 
 This approach not only simplifies the management of server applications but also enhances the developer's ability to diagnose and resolve issues efficiently.
 
-Exposing MBeans in Spring Boot
-------------------------------
+## Exposing MBeans in Spring Boot
 
 Up until now we discussed the process of working with beans that are a part of the JVM or Spring. But what about our own application logic?
 
@@ -246,7 +228,6 @@ public class Configuration implements ConfigurationMBean {
 }
 ```
 
-
 In this example, the `Configuration` class is annotated with `@ManagedResource`, making it available as an MBean with operations and attributes accessible via JMX clients.
 
 Exposing MBeans in Spring Boot is a powerful feature that enhances the management and monitoring capabilities of applications.
@@ -255,8 +236,7 @@ By following the steps outlined above, developers can provide external tools wit
 
 This not only aids in debugging and performance tuning but also aligns with best practices for building manageable, robust applications.
 
-Final Word
-----------
+## Final Word
 
 Advanced management tools, particularly JMX and its integration with frameworks like Spring, offer developers powerful capabilities for application monitoring, configuration, and debugging.
 

@@ -34,8 +34,7 @@ As stream builds happen in a fixed schedule, all changes are included in the [re
 
 Twice a year (in February and August), a Stream build becomes the new Stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the release 24.02.0.0.
 
-Changes Included in 24.02
--------------------------
+## Changes Included in 24.02
 
 As Stable builds overlap, your system should be on the 23.08 Stable line, and you have a window of four months to test and migrate to the 24.02 Stable line.
 
@@ -110,13 +109,8 @@ A new experimental feature is available on client side with the command line opt
 * A new option in 23.09, `GPGCSafepointWaitForMutatorResume`, has been introduced and is set to `true` by default. This flag tells the Garbage Collector to pause and wait for mutator threads to be woken up before resuming, after every GC safepoint. If `-XX:-GPGCSafepointWaitForMutatorResume` is set, the Garbage Collector resumes its work in parallel with mutator threads waking up.
 * A small but significant change is introduced in 24.01 to the behavior of `-XX:ProfileStartupLimitInSeconds`. Now, when you set this option to `0`, it means 0 seconds. Previously, if you set this flag to `0`, it would be interpreted as "infinite". You can still specify "infinite" by using any negative number, for example `-1`. The default behavior without setting this option remains the same, i.e. the default value has changed from `0` to `-1`.
 
-Conclusion
-----------
+## Conclusion
 
 In addition to many improvements and fixes, the new Stable Azul Zing Build of OpenJDK includes the new Long Term Support (LTS) version, OpenJDK 21.
 
 It makes it the best Java runtime for your production environment!
-
-<br />
-
-<br />

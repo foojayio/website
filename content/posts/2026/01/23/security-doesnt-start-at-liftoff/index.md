@@ -28,8 +28,7 @@ This is a follow-on to the article [The Real Mechanics of Vulnerabilities in an 
 * **Vulnerability Distortion**: Embedded, forked, and end-of-life components obscure vulnerability visibility and responsibility.
 * **Your Mission**: Governance and lifecycle changes are necessary to avoid being structurally late to "silent" vulnerabilities.
 
-Are you sitting comfortably?
-----------------------------
+## Are you sitting comfortably?
 
 In February 2025, Apache Tomcat shipped a set of routine point releases. They arrived without urgency, without commentary, and without the kind of noise that can accompany significant security incidents.
 
@@ -43,15 +42,13 @@ The fix existed before the problem had a name. For teams that had upgraded in Fe
 
 For everyone else, it came as a nasty surprise: a CVSS score of **9.8** is a great way to start your day.
 
-The CVE is (almost) not important
----------------------------------
+## The CVE is (almost) not important
 
 Feel free to look up the details of the CVE here <https://nvd.nist.gov/vuln/detail/CVE-2025-24813>. We'll look at the content later, since what is recorded and by whom is part of this story. The gory technical details of the CVE are mostly irrelevant. The important characteristic is that this CVE doesn't occur in default mode; it has to be enabled.
 
 What the following sequence of events will help us understand is how CVEs can evolve and how that can impact consumers.
 
-The Inversion of the Security Timeline
---------------------------------------
+## The Inversion of the Security Timeline
 
 This inversion is easy to miss if you only look at disclosure dates.
 
@@ -63,8 +60,7 @@ In this case, the Tomcat security team followed a pattern that is entirely norma
 
 Only after patched versions were available did public disclosure occur. The intention was not secrecy, but containment: The aim is to reduce the window in which defenders have no viable response.
 
-Habit vs. Hype
---------------
+## Habit vs. Hype
 
 That approach works well for organisations that treat point releases as something to be applied routinely.
 
@@ -80,8 +76,7 @@ One was insulated, the other exposed.
 
 The difference was not threat intelligence, tooling, or awareness. It was *habit*.
 
-The Flawed Assumption of Loud Alerts
-------------------------------------
+## The Flawed Assumption of Loud Alerts
 
 There is a persistent assumption in many engineering organisations that serious security issues will announce themselves loudly enough to demand attention.
 
@@ -91,8 +86,7 @@ In this case, the most crucial indicator was indistinguishable from routine main
 
 Once the CVE was published, the usual narrative took over. The vulnerability acquired a name, a score, and a target audience. Discussions about severity, exploitability, and configuration began immediately. But by then, the window for quiet safety had already closed.
 
-Prioritising Changes Over Stories
----------------------------------
+## Prioritising Changes Over Stories
 
 It is tempting to view those February releases as fortunate timing.
 
@@ -108,8 +102,7 @@ What followed was not a single, shared reality. How this CVE (and to be honest, 
 
 That is where this case study becomes interesting and makes such a great sample.
 
-The main timeline
------------------
+## The main timeline
 
 There's a lot to unwrap.
 
@@ -181,8 +174,7 @@ Palo Alto's Unit 42 reports 125,856 exploit attempts blocked in March 2025 alone
 
 *Source: Unit 42 Report*
 
-Are we done?
-------------
+## Are we done?
 
 Well, for some set of Tomcat users , those on versions 9,10 or 11 everythings ok. They have a fix and as long as they upgrade, then they are safe. But there is more to tell
 
@@ -210,8 +202,7 @@ That means, in theory, exploitability depends on the Tomcat user being able to m
 
 However, there are many forks and commercial variants of Apache Tomcat. For instance It's a component of Spring Boot, and Broadcom Tanzu embeds it too. How many fat jars are out there where the component information has been lost, or the project POM has been updated since shipping?
 
-How the message dilutes
------------------------
+## How the message dilutes
 
 The frequently bitter truth is that CVE reporting and getting appropriate awareness to the right people fails. In fact the more popular a component is to be forked or embedded the harder it can be to reach those who need to know.
 
@@ -224,8 +215,7 @@ The Tanzu suite is sophisticated and complex. Suddenly, the CVE, rather than bei
 
 I don't know if Tanzu has versions with Tomcat 8 or earlier - I assume they do. Given their advisory is dated 2025-03-25, well before the CVE had the additional EOL version info added one can sympathise with this omision even if it could be a major exposure for older Tanzu products,
 
-A common scenerio
------------------
+## A common scenerio
 
 By the time CVE-2025-24813 acquired a name, a score, and a media cycle, the outcome had already diverged.
 
@@ -243,8 +233,7 @@ The uncomfortable reality is that by the time the wider ecosystem had finished d
 
 How should you react?
 
-What This Means to You and What to Do Next
-------------------------------------------
+## What This Means to You and What to Do Next
 
 Much as I dislike the term "uncomfortable truth" its the one used most often in these circumstances. So the "uncomfortable conclusion" of this case study is not that CVE-2025-24813 was unusually dangerous. It is that *nothing about it was unusual at all*
 
@@ -254,8 +243,7 @@ If your security posture depends on knowing why an update matters before you app
 
 **In modern ecosystems, explanation follows action, not the other way around.**
 
-What this means in practice
----------------------------
+## What this means in practice
 
 **First**, disclosure is no longer the start of the security timeline.
 
@@ -277,8 +265,7 @@ If you cannot prove how a component is configured in production, you cannot rely
 
 The difference between the protected and the exposed systems in this story was not tooling, threat intelligence, or response speed. It was whether routine maintenance had been institutionalised before anyone knew it mattered.
 
-What you should do next
------------------------
+## What you should do next
 
 Do not wait for the next CVE to test these assumptions. You already have enough information to act.
 
@@ -308,7 +295,6 @@ End-of-life does not mean *"unsafe by default."* It means the burden of proof ha
 
 **CVE-2025-24813** unfolded over months, not days. So do most real vulnerabilities. If your processes only engage at the moment of disclosure, you are optimising for narratives rather than outcomes.
 
-Security does not start at liftoff.
------------------------------------
+## Security does not start at liftoff.
 
 By the time the countdown reaches zero, the engines have already been burning for a long time. The only question is whether you noticed, and whether you built your systems to move before someone told you why.

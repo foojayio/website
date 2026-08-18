@@ -23,13 +23,11 @@ frozen: false
 
 In the three previous podcasts, we featured interviews from the JCON conference on "[Being a better Java developer](https://foojay.io/today/foojay-podcast-72/)," "[Evolutions in Java](https://foojay.io/today/foojay-podcast-72/)," and "[How to use AI with Java](https://foojay.io/today/foojay-podcast-73/)." However, we talked to many more people during the conference, so this podcast focuses on tips and tricks. Let's learn from the many other experienced visitors of JCON.
 
-Video
------
+## Video
 
 {{< youtube GZDNPoWF6Vg >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,8 +35,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction  
 

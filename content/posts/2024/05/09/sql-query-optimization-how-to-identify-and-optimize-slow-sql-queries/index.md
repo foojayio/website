@@ -25,13 +25,11 @@ If you are a developer who doesn't use database ORMs like Hibernate that much, y
 
 That's why we decided to share our experience and offer insights using real-life examples on how to identify and optimize SQL queries.
 
-The context
------------
+## The context
 
 Here's our story---while monitoring our Postgres database in the development environment, we noticed a significant increase in CPU usage and set out to identify which queries were causing the issue.
 
-Why is it hard to find slow SQL queries?
-----------------------------------------
+## Why is it hard to find slow SQL queries?
 
 * High volume of queries: When you have a high volume of queries against the database your application is talking to, it can be challenging to find slow SQL queries.
 * Missing database indexes: When a database has tables with missing indexes, it can lead to slow SQL queries, particularly when the columns that come after the WHERE, JOIN, GROUP BY, and ORDER BY clauses are not indexed.
@@ -41,8 +39,7 @@ Why is it hard to find slow SQL queries?
 
 All of these benefits are not without a major drawback: The infamous N + 1 query problem, this problem revolves around how ORM frameworks handle the lazy loading of related entries.
 
-Solving SQL query issues before they become big problems using Continuous Feedback
-----------------------------------------------------------------------------------
+## Solving SQL query issues before they become big problems using Continuous Feedback
 
 Continuous Feedback is a new development practice that lets you access information about how your code and queries are performing much earlier in the development process. Continuous Feedback platforms automate the task of finding problematic queries in the traces and logs and providing the data to prioritize and solve them.
 
@@ -55,8 +52,7 @@ To make it more in-context with the work rather than a dashboard or external too
 
 To follow along and [try for yourself](https://docs.digma.ai/digma-developer-guide "try for yourself") -- just install the Digma IDE plugin from the [marketplace](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "marketplace") and run your code as you usually do.
 
-What Digma had to say about our SQL queries
--------------------------------------------
+## What Digma had to say about our SQL queries
 
 Upon inspecting our code with Digma, I discovered that one particular new query I added a few days ago took about 28 seconds to execute in staging, which of course significantly slower than anything else.
 
@@ -64,8 +60,7 @@ Upon inspecting our code with Digma, I discovered that one particular new query 
 
 Continuous Feedback doesn't acquire any new data -- it just listens to the observability data stream to detect anything I should notice, this was definitely something you want to catch early on. The most important thing for me as a developer is finding out a not-optimized query before it goes to production.
 
-Why SQL queries in databases can be slow
-----------------------------------------
+## Why SQL queries in databases can be slow
 
 ### Wrong Index or No Index on Table to be queried
 
@@ -105,8 +100,7 @@ When your database starts growing due to many users signing up to use your appli
 
 We can not talk about a growing client base without talking about time complexity, which measures how long a query will take to run as the data tables in a database increase. A table with 100k users could require up to 100k operations to check for a username.
 
-Resolving the query issue
--------------------------
+## Resolving the query issue
 
 After a brief investigation, I realized that adding the right index to the relevant table could improve the query performance.
 
@@ -118,8 +112,7 @@ Consequently, after adding the index, the query's execution time decreased from 
 
 ![](https://lh7-us.googleusercontent.com/w7J0NspRmvxmLPNVKx4g_a8QV3UZ_h2j3pStQd9HklfVj9fuuv-FJtsYQD2aHMOngNi2Bygz_YRCmlIxQUEzvPHBT3aluqfua68a3ioOul-mL8jtdjBP-MzJKhDCfr-QWVkCm5CjLTH11yfgJTx7KnA)
 
-Finding other opportunities for SQL query optimization
-------------------------------------------------------
+## Finding other opportunities for SQL query optimization
 
 As we continue to work on our code, Digma will analyze the data in the backend and continue to look for opportunities for improvement. One example is searching for SQL queries that are significantly slower than other queries of the same type, running on the same DB, which makes them great candidates for optimization.
 
@@ -128,8 +121,7 @@ As we continue to work on our code, Digma will analyze the data in the backend a
 This data can be readily accessed during development or code reviews along with other types of suggested improvements and detected issues such as an unusually high number of queries, N+1 selects, the "open session in view" antipattern, and other insights.  
 ![](https://lh7-us.googleusercontent.com/i4jubvVwAe_cXABhTOalt2I00IqCZc8OvBFZ-2OVRmqFGom9TD9FH27DM2gmxjAaf-RVZEeIJ7Cs-3hX7aMNd3LjVGW9QQ8FDXbzUNwpMDbHR0_mzozmprRuG30ExWdwRO4vAwHGyQCE9ebxNZ5JX38)
 
-Where to spend your efforts?
-----------------------------
+## Where to spend your efforts?
 
 Being aware of problematic queries is important to ship better code. However, this can easily lead developers down the rabbit hole of micro-optimization. Blindly following the trail of inefficiencies might lead to more elegant queries but won't necessarily have any impact on your users.
 
@@ -153,15 +145,10 @@ There are so many methods with which a developer can optimize SQL queries; the m
 6. Be sure to properly index the columns that come after the WHERE, JOIN, and ORDER BY clauses.
 7. For frequently used queries, put them in stored procedures, as it will save you time due to the precompiled execution plan that comes with it.
 
-Conclusion: How to optimize slow SQL queries
---------------------------------------------
+## Conclusion: How to optimize slow SQL queries
 
 Identifying slow SQL queries and then optimizing them can be tedious and time-consuming, but with a sound knowledge of SQL, knowing how to take advantage of continuous feedback, and using database monitoring tools, you can quickly find a slow SQL query and optimize it.
 
 However, even more tricky than optimizing SQL queries is finding out about these issues, and navigating the many problems to solve those that matter. By using Continuous Feedback tools we can create a dev process in which spotting and assessing such problems doesn't require any reactive effort but is proactively a part of how our code gets deployed and an organic part of our work environment.
 
 Learn more: [Here](https://docs.digma.ai/digma-developer-guide "Here")
-
-<br />
-
-<br />

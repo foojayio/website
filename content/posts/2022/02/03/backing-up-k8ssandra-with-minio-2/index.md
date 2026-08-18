@@ -23,8 +23,7 @@ frozen: false
 
 K8ssandra includes Medusa for Apache Cassandra® to handle backup and restore for your Cassandra nodes. Recently Medusa was upgraded to introduce support for all S3 compatible backends, including [MinIO](https://min.io/), the popular k8s-native object storage suite. Let's see how to set up K8ssandra and MinIO to backup Cassandra in just a few steps.
 
-Deploy MinIO
-------------
+## Deploy MinIO
 
 Similar to K8ssandra, MinIO can be simply deployed through Helm.
 
@@ -33,7 +32,6 @@ First, add the MinIO repository to your local list:
 ```
 helm repo add minio https://helm.min.io/
 ```
-
 
 The MinIO Helm charts allow you to do several things at once at install time:
 
@@ -45,7 +43,6 @@ You can create a `k8ssandra-medusa` bucket and use `minio_key/minio_secret` as t
 ```
 helm install --set accessKey=minio_key,secretKey=minio_secret,defaultBucket.enabled=true,defaultBucket.name=k8ssandra-medusa minio minio/minio -n minio --create-namespace
 ```
-
 
 **Note:** Creating the bucket is not mandatory at this stage and can be done through MinIO's UI.
 
@@ -66,7 +63,6 @@ NAME                              DESIRED   CURRENT   READY   AGE
 replicaset.apps/minio-5fd4dd687   1         1         1       109s
 ```
 
-
 Using port forwarding, you can expose access to the MinIO UI in the browser on port 9000:
 
 ```
@@ -75,15 +71,13 @@ Forwarding from 127.0.0.1:9000 -> 9000
 Forwarding from [::1]:9000 -> 9000
 ```
 
-
 Now you can login to MinIO at [http://localhost:9000](http://localhost:9000/) using your install time defined credentials (if you used the same commands above they would be `minio_key` and `minio_secret`):
 ![](minio-login.png)
 
 Once logged in, you can see that the `k8ssandra-medusa` bucket was created and is currently empty:
 ![](k8ssandra-medusa-bucket.png)
 
-Deploy K8ssandra
-----------------
+## Deploy K8ssandra
 
 Now that MinIO is up and running, you can create a namespace for your K8ssandra installation and create a secret for Medusa to access the bucket. Create a `medusa_secret.yaml` file with the following content:
 
@@ -101,14 +95,12 @@ stringData:
    aws_secret_access_key = minio_secret
 ```
 
-
 Now create the `k8ssandra` namespace and the Medusa secret with the following commands:
 
 ```
 kubectl create namespace k8ssandra
 kubectl apply -f medusa_secret.yaml -n k8ssandra
 ```
-
 
 You should now see the `medusa-bucket-key` secret in the `k8ssandra` namespace:
 
@@ -118,7 +110,6 @@ NAME                  TYPE                                  DATA   AGE
 default-token-twk5w   kubernetes.io/service-account-token   3      4m49s
 medusa-bucket-key     Opaque                                1      45s
 ```
-
 
 You can then deploy K8ssandra with the following custom values file (all default values will be used if not customized here) :
 
@@ -134,20 +125,17 @@ medusa:
   storageSecret: medusa-bucket-key
 ```
 
-
 Save the above file as `k8ssandra_medusa_minio.yaml` and then install K8ssandra with the following command:
 
 ```
 helm install k8ssandra k8ssandra/k8ssandra -f k8ssandra_medusa_minio.yaml -n k8ssandra
 ```
 
-
 Now wait for the Cassandra cluster to be ready by using the following `wait` command:
 
 ```
 kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra
 ```
-
 
 You should now see a list of pods similar to this:
 
@@ -166,9 +154,7 @@ k8ssandra-reaper-schema-4gshj                         0/1     Completed   0     
 prometheus-k8ssandra-kube-prometheus-prometheus-0     2/2     Running     1          6m32s
 ```
 
-
-Create some data and back it up
--------------------------------
+## Create some data and back it up
 
 Extract the username and password to access Cassandra (the password is different for each installation unless it is explicitly set at install time) into variables:
 
@@ -177,13 +163,11 @@ Extract the username and password to access Cassandra (the password is different
 % password=$(kubectl get secret k8ssandra-superuser -n k8ssandra -o jsonpath="{.data.password}" | base64 --decode)
 ```
 
-
 Connect through CQLSH on one of the nodes:
 
 ```
 % kubectl exec -it k8ssandra-dc1-default-sts-0 -n k8ssandra -c cassandra -- cqlsh -u $username -p $password
 ```
-
 
 Copy/paste the following statements into the CQLSH prompt and press enter:
 
@@ -196,7 +180,6 @@ INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protec
 INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9d9f8c9192be9b869f938e929bd09d9193">[email protected]</a>', 'Carol Jackson', 'CA');
 INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aecacfd8c7caeecbd6cfc3dec2cb80cdc1c3">[email protected]</a>', 'David Yang', 'NV');
 ```
-
 
 Check that the rows were properly inserted:
 
@@ -213,7 +196,6 @@ SELECT * FROM medusa_test.users;
 (4 rows)
 ```
 
-
 Now backup this data, and check that files get created in your MinIO bucket.
 
 To that end, use the following command:
@@ -222,13 +204,11 @@ To that end, use the following command:
 helm install my-backup k8ssandra/backup -n k8ssandra --set name=backup1,cassandraDatacenter.name=dc1
 ```
 
-
 Since the backup operation is asynchronous, you can monitor its completion by running the following command:
 
 ```
 kubectl get cassandrabackup backup1 -n k8ssandra -o jsonpath={.status.finishTime}
 ```
-
 
 As long as this doesn't output a date and time, then the backup is still running. With the amount of data present and the fact that you're using a locally accessible backend, this should complete quickly.
 
@@ -237,8 +217,7 @@ Now refresh the MinIO UI and you should see some files in the `k8ssandra-medusa`
 
 An index folder should appear (it is Medusa's backup index) and then another folder that is specific to each Cassandra node in the cluster (in this case there is only one node).
 
-Deleting the data and restoring the backup
-------------------------------------------
+## Deleting the data and restoring the backup
 
 `TRUNCATE` the table and verify it is empty:
 
@@ -255,13 +234,11 @@ SELECT * FROM medusa_test.users;
 (0 rows)
 ```
 
-
 Now restore the backup taken previously:
 
 ```
 helm install restore-test k8ssandra/restore --set name=restore-backup1,backup.name=backup1,cassandraDatacenter.name=dc1 -n k8ssandra
 ```
-
 
 This operation will take a little longer as it requires to stop the StatefulSet pod and perform the restore as part of the init containers, before the Cassandra container can start. You can monitor progress using this command:
 
@@ -269,13 +246,11 @@ This operation will take a little longer as it requires to stop the StatefulSet 
 watch -d kubectl get cassandrarestore restore-backup1 -o jsonpath={.status} -n k8ssandra
 ```
 
-
 The restore operation is fully completed once the `finishTime` value appears in the output:
 
 ```
 {"finishTime":"2021-03-23T13:58:36Z","restoreKey":"83977399-44dd-4752-b4c4-407273f0339e","startTime":"2021-03-23T13:55:35Z"}
 ```
-
 
 Check that you can read the data from the previously truncated table:
 
@@ -292,10 +267,8 @@ Check that you can read the data from the previously truncated table:
 (4 rows)
 ```
 
-
 You've successfully restored your lost data in just a few commands!
 
-Many backends available
------------------------
+## Many backends available
 
 MinIO, while being an obvious choice in the Kubernetes world, is not the only S3 compatible backend that K8ssandra can use. K8ssandra has supported AWS S3 and Google Cloud Storage as Medusa backends since 1.0.0. There are also a wide variety of solutions that can run on-prem (including CEPH, Cloudian, Riak S2, and Dell EMC ECS) or in cloud environments (including IBM Cloud Object Storage, and OVHcloud Object Storage). See the [K8ssandra backup/restore documentation](https://docs.k8ssandra.io/tasks/backup-restore/) for more detailed instructions and [let us know](/cdn-cgi/l/email-protection#ec87d49f9f8d82889e8dc1999f899e9fac8b83838b80898b9e83999c9fc28f8381) if you have questions, we love to help! If you are looking to learn Cassandra, or want to see how backups are handled on a Cassandra managed service, please head over to the [Astra DB](https://astra.dev/3q5iv9v) website and try the free tier.

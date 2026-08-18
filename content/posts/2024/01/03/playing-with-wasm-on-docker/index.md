@@ -26,8 +26,7 @@ WebAssembly is the new implementation of an old idea. While WebAssembly is meant
 
 In this post, I want to explore how it can work.
 
-Prerequisite
-------------
+## Prerequisite
 
 Running WebAssembly is a *beta* feature and requires using `containerd`. To enable `containerd`, go to the Docker Desktop dashboard, then Settings \> Features in development \> Beta features \> Use containerd for storing and pulling image.
 
@@ -35,8 +34,7 @@ Be warned that enabling `containerd` previously broke one of my Kubernetes demos
 
 I want to compare regular images with WebAssembly; hence, I require a project that can compile to both native code and WASM. For this reason, I chose to use the Rust language. I'll have a single simple project with two Dockerfiles: one that compiles to native, the other that compiles to WASM.
 
-Building locally
-----------------
+## Building locally
 
 Here's the Rust expected Hello World:
 
@@ -46,7 +44,6 @@ fn main() {
 }
 ```
 
-
 We can install the Webassembly target and build locally for comparison purposes:
 
 ```bash
@@ -54,13 +51,11 @@ rustup target add wasm32-wasi
 cargo build --target wasm32-wasi --release
 ```
 
-
 The file is relatively small:
 
     -rwxr-xr-x  1 nico  staff   2.0M Jun  4 15:44   wasm-native.wasm
 
-Building the basic Docker images
---------------------------------
+## Building the basic Docker images
 
 The `Dockerfile` that builds the Webassembly image is the following:
 
@@ -82,7 +77,6 @@ COPY --from=build /target/wasm32-wasi/release/wasm-native.wasm wasm.wasm #5
 ENTRYPOINT [ "/wasm.wasm" ]
 ```
 
-
 1. Start from the last Rust Docker image
 2. Add the WASM target
 3. Build, targeting Webassembly
@@ -95,13 +89,11 @@ The reference material uses the `--platform wasi/wasm32` argument when building 
 docker build -f Dockerfile-wasm -t docker-wasm:1.0 .
 ```
 
-
 We can now run it, specifying a supported WASM runtime:
 
 ```bash
 docker run --runtime=io.containerd.wasmedge.v1 docker-wasm:1.0
 ```
-
 
 To compare, we can create a native image *with the same code*:
 
@@ -119,7 +111,6 @@ FROM scratch                                                        #2
 COPY --from=build /target/release/wasm-native native
 ```
 
-
 1. Make the binary self-sufficient
 2. Can start from scratch
 
@@ -131,13 +122,11 @@ docker-native      1.0      0c227194910a   7 weeks ago   7.09MB
 docker-wasm        1.0      f9a88747f798   4 weeks ago   2.61MB
 ```
 
-
 The Webassembly image is about one-third of the native binary package.
 
 We cheat a bit because we add the WASM runtime... at runtime.
 
-Building more complex images
-----------------------------
+## Building more complex images
 
 Let's see how we can add parameters to the binary and update the code accordingly:
 
@@ -154,7 +143,6 @@ fn main() {
 }
 ```
 
-
 Let's rebuild the images and compare again:
 
 ```
@@ -165,9 +153,7 @@ docker-wasm        1.0      f9a88747f798   4 weeks ago      2.61MB
 docker-wasm        1.1      41e38b68f4e4   39 minutes ago   2.63MB
 ```
 
-
-Executing HTTP calls?
----------------------
+## Executing HTTP calls?
 
 With this, it's easy to get carried away and start thinking big: what if we could execute HTTP calls?
 
@@ -179,7 +165,6 @@ reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1.28", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 ```
-
 
 We can now update the code to make a request to and print the result:
 
@@ -213,7 +198,6 @@ struct GetBody {
 }
 ```
 
-
 Compiling this code reveals WASM limitations, though:
 
 ```
@@ -224,13 +208,11 @@ Compiling this code reveals WASM limitations, though:
 #0 12.40     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-
 WASM is not multi-threaded, while Tokio is *by default* . We can, however, configure Tokio to work in a single-thread environment. Let's start by using the features that we need: `macros` for the `main` function and `rt` for the tokio runtime.
 
 ```ini
 tokio = { version = "1.28", features = ["rt", "macros"] }
 ```
-
 
 Now, we can limit Tokio to the unique thread:
 
@@ -238,7 +220,6 @@ Now, we can limit Tokio to the unique thread:
 #[tokio::main(flavor = "current_thread")]
 async fn main() {}
 ```
-
 
 Compiling now works. However, I encounter issues when running:
 
@@ -251,7 +232,6 @@ Compiling now works. However, I encounter issues when running:
 docker: Error response from daemon: Others("unknown import"): unknown.
 ```
 
-
 The `reqwest` crate doesn't work with the WASI environment. Until it does, there's a fork aptly named [reqwest_wasi](https://docs.rs/reqwest_wasi/latest/reqwest/). The [tokio_wasi](https://docs.rs/tokio_wasi/latest/tokio/) is the WASI-compatible crate for `tokio`. Note that the latter's version needs to catch up. Let's replace the crates:
 
 ```ini
@@ -259,7 +239,6 @@ The `reqwest` crate doesn't work with the WASI environment. Until it does, there
 reqwest_wasi = { version = "0.11", features = ["json"] }
 tokio_wasi = { version = "1.25", features = ["rt", "macros"] }
 ```
-
 
 With the new crates, compilation works, as well as execution. On the other side, the native image works flawlessly, with slight changes for the Dockerfile:
 
@@ -282,7 +261,6 @@ COPY --from=build /target/release/wasm-native native
 ENTRYPOINT [ "/native" ]
 ```
 
-
 1. Install required libraries for SSL
 2. Change to a more complete base image to avoid installing additional libraries
 
@@ -298,13 +276,11 @@ docker-wasm        1.1      41e38b68f4e4   22 hours ago     2.63MB
 docker-wasm        1.2      6026f5bd789c   18 seconds ago   5.34MB
 ```
 
-
 I didn't fiddle with the optimization of the native image. However, it would be hard to beat the WASM image, as it stands below 6MB!
 
 There's no chance to implement an Axum server, though.
 
-Conclusion
-----------
+## Conclusion
 
 I implemented a couple of WASM Docker images in this post, from the most straightforward Hello World to an HTTP client.
 

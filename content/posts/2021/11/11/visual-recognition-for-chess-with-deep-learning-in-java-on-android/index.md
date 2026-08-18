@@ -33,8 +33,6 @@ If you want to try this kind of software, our free Chess Position Scanner and An
 
 {{< youtube jxPEccHEIIg >}}
 
-<br />
-
 For more info see <https://metatransapps.com/chess-board-scanner-and-analyzer/>
 
 If you are a Java developer and would like to have a look at the underlying source code, you could check out our open source project, which shows how it works (Windows version) look at <https://github.com/bagaturchess/ChessBoardScanner/tree/main/BoardScanner>

@@ -29,8 +29,7 @@ This approach allows APISIX to provide out-of-the-box Lua plugins that should fi
 
 However, if Lua is not part of your tech stack, [diving into a new ecosystem is a considerable investment](https://blog.frankel.ch/on-learning-new-programming-language/). Therefore, Apache APISIX offers developers to write plugins in several other languages. In this post, I'd like to highlight how to write such a plugin with Rust.
 
-A bit of context
-----------------
+## A bit of context
 
 Before I dive into the "how", let me first describe a bit of context surrounding the Rust integration in Apache APISIX. I believe it's a good story because it highlights the power of Open Source.
 
@@ -48,8 +47,7 @@ The specification is available on [GitHub](https://github.com/proxy-wasm/spec).
 * Developers can create SDK for their tech stack
 * Proxy and API Gateway providers can integrate `proxy-wasm` in their product
 
-Apache APISIX and proxy-wasm
-----------------------------
+## Apache APISIX and proxy-wasm
 
 The Apache APISIX project decided to integrate `proxy-wasm` into the product to benefit from the standardization effort. It also allows end-users to start with Envoy, or any other `proxy-wasm`-compatible reverse proxy, to migrate to Apache APISIX when necessary.
 
@@ -58,8 +56,7 @@ APISIX doesn't implement `proxy-wasm` but integrates [wasm-nginx-module](https:/
 
 Apache APISIX and WebAssemby architecture overview{#caption-attachment-60106}
 
-Let's code!
------------
+## Let's code!
 
 Now that we have explained how everything fits together, it's time to code.
 
@@ -71,13 +68,11 @@ Before developing the first line of code, we need to give Rust compilation capab
 rustup target add wasm32-wasi
 ```
 
-
 It allows the Rust compiler to output WASM code:
 
 ```bash
 cargo build --target wasm32-wasi
 ```
-
 
 The WASM code is found in:
 
@@ -91,7 +86,6 @@ The setup of the project is pretty straightforward:
 ```bash
 cargo new sample --lib           #1
 ```
-
 
 1. Create a `lib` project with the expected structure
 
@@ -134,7 +128,6 @@ impl HttpContext for HttpCall {                                                 
 }
 ```
 
-
 1. Set the log level to Apache APISIX's default
 2. Set the HTTP context to create for *each* request
 3. Need to implement `Context`. By default, **all** functions are implemented in `Context`, so implementation is not mandatory
@@ -144,8 +137,7 @@ impl HttpContext for HttpCall {                                                 
 
 After generating the WebAssembly code (see above), we have to configure Apache APISIX.
 
-Configuring Apache APISIX for WASM
-----------------------------------
+## Configuring Apache APISIX for WASM
 
 Apache APISIX's [documentation](https://apisix.apache.org/docs/apisix/wasm/) is geared toward Go. Still, since both Go and Rust generate WebAssembly, we can reuse most of it.
 
@@ -158,7 +150,6 @@ wasm:
       priority: 7999
       file: /opt/apisix/wasm/sample.wasm
 ```
-
 
 Then, we can use the plugin like any other:
 
@@ -175,7 +166,6 @@ routes:
 #END
 ```
 
-
 1. Plugin name
 2. At the moment, the `conf` attribute is mandatory and must be non-empty on the Apache APISIX validation side, even though we don't configure anything on the Rust side
 
@@ -185,16 +175,13 @@ At this point, we can ping the endpoint:
 curl localhost:9080
 ```
 
-
 The result is as expected:
 
 ```
 rust-wasm-plugin-apisix-1  | 2022/09/21 13:43:14 [warn] 44#44: *286 on_http_request_headers, client: 192.168.128.1, server: _, request: "GET / HTTP/1.1", host: "localhost:9080"
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this post, I described the history behind the `proxy-wasm` and how Apache APISIX integrates it via the WASM Nginx module. I explained how to set up your Rust local environment to generate WebAssembly. Finally, I created a dummy plugin and deployed it to Apache APISIX.
 

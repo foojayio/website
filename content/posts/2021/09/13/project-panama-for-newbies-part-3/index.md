@@ -31,8 +31,7 @@ frozen: false
  </figcaption>
 </figure>
 
-Introduction
-------------
+## Introduction
 
 Welcome to the third part of the series on Java's Project Panama for newbies. Before jumping into this article, I want to congratulate you for getting this far, you deserve a virtual pat on the back!
 
@@ -63,8 +62,7 @@ Before diving deeper into calling 3rd party libraries, I want to talk about `Met
 
 **Note:** Throughout this article when referencing the word *function* I'm referring to C functions and when referencing the word *method* it's a Java class or object's function (member).
 
-What is a `MethodHandle`?
--------------------------
+## What is a `MethodHandle`?
 
 By now you should be familiar with `jextract` but have you ever thought about the generated source code it creates? When examining the generated source code you will notice low-level Java (Panama) code using the object `MethodHandle` to make native invocations.
 
@@ -95,11 +93,9 @@ SymbolLookup stdlibLookup = SymbolLookup.loaderLookup()
 MemorySegment getpidSymbol = stdlibLookup.findOrThrow("getpid");
 ```
 
-
 Now that we can obtain the symbol let's create a `MethodHandle` to access the system C function `getpid()` that typically is used to obtain a running application's process ID.
 
-Get Pid from a C perspective
-----------------------------
+## Get Pid from a C perspective
 
 Getting the Pid via `getpid()` is a system level C function to obtain a **process id** number on Unix/Linux based operating systems.
 
@@ -113,7 +109,6 @@ Let's examine the `getpid()` function's definition as shown below.
 
 pid_t getpid(void);
 ```
-
 
 Notice the header `sys/types.h` and `unistd.h` which contains the system's data type `pid_t` and a function `getpid(void)` respectively. Let's look at what exactly is a `pid_t` data type and a `void` parameter.
 
@@ -137,13 +132,9 @@ MethodHandle downcallHandle(MemorySegment symbolMemSeg,
                             Option... options);
 ```
 
-
-<br />
-
 ```
 MethodHandle getpidMethodHandle = linker.downcallHandle(getpidSymbol, funcDef);
 ```
-
 
 **Note:** Because the `getpid(void)` function signature has no parameters to be passed in and there for there is no need to pass in `Linker.Option` objects to the downcallHandle() 's third argument.
 
@@ -168,7 +159,6 @@ import java.lang.foreign.FunctionDescriptor;
 public static FunctionDescriptor of(MemoryLayout returnLayout, MemoryLayout... argLayouts) 
 public static FunctionDescriptor ofVoid(MemoryLayout... argLayouts) // void return function signature
 ```
-
 
 Now that you know how to lookup symbols and describe method signitures let's invoke the `getpid()` function using a `MethodHandle`.
 
@@ -196,7 +186,6 @@ int jextractPid = foo_h.getpid();
 System.out.printf("Jextract's calling getpid()   (%d)\n", jextractPid);
 ```
 
-
 In the above code listing it does the following:
 
 1. Creates a Arena (SegmentAllocator)
@@ -214,7 +203,6 @@ Outputs the following:
 MethodHandle calling getpid() (16514)
 ```
 
-
 Of course if you use the `jextract` tool the `getpid() `method would only be a one liner like the following code snippet:
 
 ```java
@@ -223,13 +211,11 @@ int jextractPid = foolib.getpid();
 System.out.printf("Calling getpid()   (%d)\n", jextractPid);
 ```
 
-
 Now that you know how to call functions in a low-level way using MethodHandles we will be switching gears a bit, by going back to using the `jextract` tool to generate C functions. This will be neccesary as we approach more complex C functions ahead.
 
 Let's kick it up a notch with little more advanced C function `localtime_r()` defined in the header file `Time.h`.
 
-Time.h
-------
+## Time.h
 
 Similar to Java's `java.util.Date` or `System.currentTimeMillis()`, the local time or some refer to epoch time in milliseconds since 1970. The C function `localtime_r()`, will be expecting seconds instead of milliseconds.
 
@@ -238,7 +224,6 @@ Shown below is the C function signiture `localtime_r()` from `Time.h`.
 ```c
 struct tm *localtime_r( const time_t * epochSeconds, struct tm * tmStruct );
 ```
-
 
 As you can see, the function signature takes a pointer to a `time_t` and a pointer to a struct `tm`. It looks very complex to mimic by using a `MethodHandle`, so let's use jextract!
 
@@ -255,7 +240,6 @@ An header file `foo.h` that contains multiple header includes as shown below:
 #include <time.h>
 ```
 
-
 Next, you'll run `jextract` against `foo.h` to generate source code and/or classes.
 
 ### Jextract foo.h
@@ -269,7 +253,6 @@ $ jextract --output src \
    foo.h
 ```
 
-
 The next step is the same as before but instead of generating source code `jextract` will generate class files. You can compile the generated/src directory but the statement below generates files automatically. Notice the absence of the source (`--source`) option and output destination option set to classes (`-d classes`).
 
 ```
@@ -279,7 +262,6 @@ $ jextract \
    -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include \
    foo.h
 ```
-
 
 <figure class="wp-block-image size-full is-resized is-style-default">
  <img decoding="async" width="397" height="243" src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" alt="" class="wp-image-46625" style="width:425px;height:260px">
@@ -327,7 +309,6 @@ public static int tm_hour$get(MemorySegment seg)
 // asctime function
 public static MemoryAddress asctime ( Addressable x0)
 ```
-
 
 ### Invoking localtime_r() function
 
@@ -386,7 +367,6 @@ System.out.printf("3. C's tm struct getters tm_hour, tm_min, tm_sec. %02d:%02d:%
 printf(memorySession.allocateUtf8String("4. C's asctime() function to display date time: %s\n"), asctime(pTmStruct));
 ```
 
-
 ### How does it work?
 
 The code listing above performs the following steps:
@@ -394,8 +374,6 @@ The code listing above performs the following steps:
 1.) Allocate space for a `C_LONG_LONG` 64 Bits (`time_t`),
 
     static final  OfLong C_LONG_LONG$LAYOUT= JAVA_LONG.withBitAlignment(64); // OfLong extends ValueLayout
-
-<br />
 
 2.) Invoke `time()` to populate the `MemorySegment` object **now** that will contain the epoch time in **seconds**   
 
@@ -422,7 +400,6 @@ $ java -cp .:classes \
     src/PanamaTime.java
 ```
 
-
 Running `PanamaTime.java` outputs the following:
 
 ```
@@ -431,11 +408,9 @@ Running `PanamaTime.java` outputs the following:
 3. C's asctime() function to display date time: Mon Aug 30 03:35:36 2021
 ```
 
-
 Now that you have some experience calling system level C functions it's time to look at a third party library. Popular among game developers are SDL and OpenGL API.
 
-A complete program using the SDL (Simple DirectMedia Layer) API
----------------------------------------------------------------
+## A complete program using the SDL (Simple DirectMedia Layer) API
 
 Until now, most of the example in this series have been about single utility function, but we have now all building block to to make use of a complete C API. This section will feature a program written with the [SDL2](https://www.libsdl.org/) library. SDL is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL.
 
@@ -446,7 +421,6 @@ The first thing needed is to install the libraries, on Linux `freeglut3-dev` and
 ```bash
 brew install sdl2
 ```
-
 
 This will install the latest version of the library and create the necessary symbolic links in strategic locations. Brew install these in `brew --prefix`, which on macOs usually resolves to `/usr/local` (unless it's Apple Silicon, LinuxBrew uses a different folder).
 
@@ -464,7 +438,6 @@ Since this program will use a multiple API of the SDL library lets use `jextract
 #include <SDL_opengl.h>
 ```
 
-
 Then let's run the `jextract` to generate bindings
 
 ```bash
@@ -476,7 +449,6 @@ jextract --source -source src \
     --header-class-name LibSDL2 \
     sdlfoo.h
 ```
-
 
 Notice the include locations (materialized by the `-I` option) with the *homebrew* path mentioned above. Also since this code will load a library, it is necessary to tell what is the name of the compiled library, on Linux (`libSDL2.so`), on macOs (`libSDL2.dylib`), In Jaa this library can be looked up by it's name **SDL2** (via `System.load` call), this is the value passed to the `-l` option. Finally `--header-class-name` simply tells the name of the generated Java class, otherwise the class will be named after the passed header file.
 
@@ -490,7 +462,6 @@ WARNING: skipping atanl because of unsupported type usage: long double
 WARNING: skipping atan2l because of unsupported type usage: long double
 ...
 ```
-
 
 Now we can start with a familiar stub the `ResourceScope`. Then iterate to implement the relevant parts.
 
@@ -512,7 +483,6 @@ public class SDLFoo {
 }
 ```
 
-
 Let's initialize SDL in an `init` method.
 
 ```java
@@ -525,7 +495,6 @@ Let's initialize SDL in an `init` method.
     else {
       // Starts the intialization sequence of the window
 ```
-
 
 Notice the first 2 lines
 
@@ -576,7 +545,6 @@ Now following the original tutorial, this code needs to check if it can open a w
   }
 ```
 
-
 The above snippet reuses what we learned until now:
 
 * access to constants `SDL_GL_CONTEXT_MAJOR_VERSION()`, `SDL_WINDOW_OPENGL()`, etc.
@@ -624,7 +592,6 @@ Now that the window is ready let's initialize OpenGL itself.
   }
 ```
 
-
 Again no surprises, however we no notice in this snippet that the library drives the coding pattern to handle errors. Each native API may use different approach, I advise to follow the regular way to use such API as much as possible.
 
 Then invoke the `init` method.
@@ -645,7 +612,6 @@ Then invoke the `init` method.
     }
 ```
 
-
 Then we need to make sure the code correctly cleans up upon exit. Since `ResourceScope` is destined to be used in a try-with-resources, it's close method will be invoked to clean allocated resources. Also `ResourceScope` has a nifty `ResourceScope::addCloseAction` that can be used to register actions to be performed when this scope closed.
 
 ```java
@@ -654,7 +620,6 @@ Then we need to make sure the code correctly cleans up upon exit. Since `Resourc
     SDL_Quit();
   }
 ```
-
 
 ```java
     try (var arena = Arena.ofConfined()) {
@@ -674,7 +639,6 @@ Then we need to make sure the code correctly cleans up upon exit. Since `Resourc
     }
 ```
 
-
 Then we can try to render something on the window like what's on the original tutorial : a quadrilateral surface.
 
 The program can run already but it will close almost immediately, even if the code renders some OpenGL. It's usual to have a loop that wait for some events to happen. With SDL the idea is to wait for events via `SDL_PollEvent`, also it is needed to tell SDL that keyboard event are allowed.
@@ -687,7 +651,6 @@ The following code adds two nested loops, the outer one that will continue as lo
 SDL_Event event;
 SDL_PollEvent(&event)
 ```
-
 
 Here's the modified code, this code awaits for the user to click the close button (on macOs the red button in the top bar).
 
@@ -726,7 +689,6 @@ Here's the modified code, this code awaits for the user to click the close butto
     }
 ```
 
-
 The above code defines a memory zone, the sdlEvent, that is reused for each loop iteration. In C++, one just have to declare `SDL_Event e`, but with panama it is necessary to reserve the memory for the whole data type. Which is done by this statement `allocateNative(SDL_Event.sizeof(), scope)`, it can be even simplified to `SDL_Event.allocate(scope)` or a an overload of this method using a `SegmentAllocator`.
 
 The `SDL_Event` is a union data type, it is defined in a way such as the field member `type` is always present and can be used to identify the kind of event (and the actual data structure of this even). The code checks the type via the generated method `SDL_Event.type$get(MemorySegment event)`. However there's some differences in how union types are accessed in C and Panama. In this tutorial, the code needs to read the [SDL_TextInputEvent](https://wiki.libsdl.org/SDL_TextInputEvent), in C this would be written like this
@@ -736,7 +698,6 @@ if(event.type == SDL_TEXTINPUT) {
   char c = event.text.text[0];
 }
 ```
-
 
 The code generated by `jextract` has the name `slice`: Typically this method SDL_Event.text$slice(sdlEvent) is somewhat equivalent to event.text, and simply restrict the range of the segment to the size of a SDL_TextInputEvent. Then from this reduced slice, it's possible to access SDL_TextInputEvent's members, in particular the text member (which happens to be a C string).
 
@@ -750,7 +711,6 @@ if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
 }
 ```
 
-
 This is not quite as readable as the C code, but since it is a union datatype it's possible to directly use `SDL_TextInputEvent.asSlice()` to access the C string from the `SDL_Event` segment.
 
 ```java
@@ -762,7 +722,6 @@ if (SDL_Event.type$get(sdlEvent) == SDL_TEXTINPUT()) {
   }
 }
 ```
-
 
 Then the main method can finally perform the OpenGL rendering:
 
@@ -813,7 +772,6 @@ Then the main method can finally perform the OpenGL rendering:
     }
 ```
 
-
 The code of the render method is really simple for the purpose of this example, basically it clears the screen with some color, then the quadrilateral shape, with some rotations.
 
 ```java
@@ -835,7 +793,6 @@ The code of the render method is really simple for the purpose of this example, 
   }
 ```
 
-
 This code is not quite fancy, in order to go in to more OpenGL details go to other tutorials like this [one](https://lazyfoo.net/tutorials/OpenGL/index.php). The last thing to do is to call the `SDL_GL_SwapWindow` in order to tell SDL that the OpenGL rendering is done.
 
 ```java
@@ -845,13 +802,11 @@ This code is not quite fancy, in order to go in to more OpenGL details go to oth
   }
 ```
 
-
 And we're done, now to run this code and see it in action we need the usual options add incubating module, but we also need to tell the JDK where to look for the SDL2 library. Indeed the default library lookup location does not include additional path like `/usr/local/lib`. It's possible to see the lookup location with the `java.library.path` system property.
 
 ```
 /Users/brice/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
 ```
-
 
 It's possible to make the JDK look for additional location via the `JAVA_LIBRARY_PATH` environment variable. As we need to add the location described above : `JAVA_LIBRARY_PATH=:/u`sr/local/lib
 
@@ -867,7 +822,6 @@ env JAVA_LIBRARY_PATH=:/usr/local/lib java \
   src/SDLFoo.java
 ```
 
-
 This should display a window like this:
 
 <figure class="wp-block-image size-full is-resized">
@@ -878,8 +832,7 @@ This example shows that porting a complete C or C++ program to Java using Panama
 
 Moreover, thinking about an allocation strategy will come to mind, since the above program uses a naive approach by using `MemorySegment.allocateNative`, while for performance reasons it might be worth it to consider `SegmentAllocator` and its different strategies.
 
-Conclusion
-----------
+## Conclusion
 
 In part 3, we looked down at what `jextract` actually does to generate bindings, in particular how `CLinker` uses `MethodHandle`s to perform calls to native functions. The *time* example makes use of a struct datatype whose reference, ie the memory address is passed to the native function. This last example mark a stepping stone in that a Java program has all building blocks to use a complete native API set. That's what has been done with the SDL / OpenGL example, it uses all items learned in this series.
 

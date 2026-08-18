@@ -28,8 +28,6 @@ Whether you prefer reading or watching, let's review how to start using the Open
 
 {{< youtube 8bpIXrz7xJw >}}
 
-<br />
-
 Imagine you want to visit a city and have a specific budget in mind. How should you spend the money and make your trip memorable? This is an excellent question to delegate to the OpenAI engine.
 
 Let's help users get the most out of their trips by building a simple Java application called [BudgetJourney](https://github.com/YugabyteDB-Samples/budget-journey-gpt "BudgetJourney"). The app can suggest multiple points of interest within a city, tailored to fit specific budget constraints.
@@ -62,14 +60,12 @@ The open-source [OpenAI Java library](https://github.com/TheoKanning/openai-java
 </dependency>
 ```
 
-
 * Create an instance of the `OpenAiService` class by providing your token and a timeout for requests between the app and OpenAI engine.
 
 ```java
 OpenAiService openAiService = new OpenAiService(
     apiKey, Duration.ofSeconds(apiTimeout));
 ```
-
 
   Easy! Next, let's see how you can work with the GPT-3.5 model via the `OpenAiService` instance.
 
@@ -88,7 +84,6 @@ ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
             new ChatMessage("user", String.format("I want to visit %s and have a budget of %d dollars", city, budget))))
     .build();
 ```
-
 
 * `model("gpt-3.5-turbo")` is an optimized version of the GPT-3.5 model.
 * `temperature(...)` controls how much randomness and creativity to expect in a model's response. For instance, higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more deterministic.
@@ -120,7 +115,6 @@ openAiService.createChatCompletion(chatCompletionRequest)
         builder.append(choice.getMessage().getContent());
 });
 ```
-
 
 The `jsonResponse` object is then further processed by the rest of the application logic which prepares a list of points of interest and displays them with the help of Vaadin.
 
@@ -158,7 +152,6 @@ For example, suppose a user is visiting Tokyo and wants to spend up to $900 in t
 ]}
 ```
 
-
 This JSON is then converted into a list of different points of interest. It is then shown to the user:  
 ![](image3-700x352.png)
 
@@ -190,7 +183,6 @@ public interface CityTripRepository extends JpaRepository<CityTrip, Integer> {
 }
 ```
 
-
 With an `Entity` class looking as follows:
 
 ```java
@@ -217,7 +209,6 @@ public class CityTrip {
     //The rest of the logic
 }
 ```
-
 
 So, all you need to do is to make a call to the database first, then revert to the OpenAI API if relevant suggestions are not yet available in the database. As your application increases in popularity, more and more local recommendations will be available, making this approach even more cost-effective over time.
 

@@ -25,8 +25,7 @@ To show these possible gains, a dummy application will be presented, and many po
 
 All the code and some extra information used through this article can be found in the [GitHub](https://github.com/ArturGC/the-cost-of-not-knowing-mongodb) repository.
 
-The application: finding fraudulent behavior in transactions
-------------------------------------------------------------
+## The application: finding fraudulent behavior in transactions
 
 The application goal is to identify fraudulent behavior in a financial transaction system by analyzing the transactions' statuses over a time period for a determined user. The possible transaction statuses are \`approved\`, \`noFunds\`, \`pending\`, and \`rejected\`. Each user is uniquely identifiable by a 64-character hexadecimal \`key\` value.
 
@@ -42,8 +41,7 @@ The following document is an example of a \`reports\` document for the user of \
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | export const reports = \[ { id: 'oneYear', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2021-06-15T00:00:00.000Z'), totals: { approved: 4, noFunds: 1, pending: 1, rejected: 1 }, }, { id: 'threeYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2019-06-15T00:00:00.000Z'), totals: { approved: 8, noFunds: 2, pending: 2, rejected: 2 }, }, { id: 'fiveYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2017-06-15T00:00:00.000Z'), totals: { approved: 12, noFunds: 3, pending: 3, rejected: 3 }, }, { id: 'sevenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2015-06-15T00:00:00.000Z'), totals: { approved: 16, noFunds: 4, pending: 4, rejected: 4 }, }, { id: 'tenYears', end: new Date('2022-06-15T00:00:00.000Z'), start: new Date('2012-06-15T00:00:00.000Z'), totals: { approved: 20, noFunds: 5, pending: 5, rejected: 5 }, }, \]; |
 
-The load test
--------------
+## The load test
 
 Two functions for each application version were created to be executed simultaneously and load-test each application version's performance. One function is called \`Bulk Upsert\`, which inserts the event documents. The other is called \`Get Reports\`, which generates the \`reports\` for a specific user \`key\` and \`date\`. The parallelization of the execution of each function was made using worker threads, with 20 workers allocated to each function. The test's duration for each application version is 200 minutes, with different execution parameters being used through the load test.
 
@@ -54,8 +52,7 @@ The \`Get Reports\` function will generate one \`reports\` document per executio
 The following graph depicts the rates of \`Bulk Upsert\` and \`Get Reports\` for the test scenario presented above:
 ![](Screenshot-2025-10-09-at-11.48.21-AM.png)
 
-Initial scenario and data generator
------------------------------------
+## Initial scenario and data generator
 
 To make a fair comparison between the application versions, the initial scenario/working set used in the tests had to be greater than the memory of the machine running the MongoDB server, forcing cache activity and avoiding the situation where all the working set would fit in the cache. To accomplish that, the following parameters were chosen:
 
@@ -73,15 +70,13 @@ To also approach a real-world scenario, the distribution of the event statuses i
 * 7.5% \`pending\`.
 * 2.5% \`rejected\`.
 
-The instances configuration
----------------------------
+## The instances configuration
 
 The EC2 instance running the MongoDB server is a \`c7a.large\` on the AWS cloud. It has 2vCPU and 4GB of memory. Two disks were attached to it: one for the operating system with \`15GB\` of size and \`GP3\` type, and the other for the MongoDB server, which stores its data with \`300GB\` of size, \`IO2\` type, and \`10.000IOPS\`. The operating system installed on the instance is Ubuntu 22.04, with all the updates and upgrades available at the time. All the recommended production notes were applied to the machine to allow MongoDB to extract the maximum performance of the available hardware.
 
 The EC2 instance running the application server is a \`c6a.xlarge\` on the AWS cloud. It has 4vCPU and 8GB of memory. Two disks were attached to it: one for the operating system with \`10GB\` of size and \`GP3\` type, and the other for the secondary MongoDB server, which stores its data with \`10GB\` of size and \`GP3\` type. The operating system installed on the instance is Ubuntu 22.04, with all the updates and upgrades available at the time. All the recommended production notes were applied to the machine to allow MongoDB to extract the maximum performance of the available hardware.
 
-Application Version 1 (appV1)
------------------------------
+## Application Version 1 (appV1)
 
 The first application version and the base case for our comparison would have been developed by someone with a junior knowledge level of MongoDB who just took a quick look at the documentation and learned that every document in a collection must have an \`_id\` field and this field is always unique indexed.
 
@@ -148,8 +143,7 @@ The improvement here is to extract the fields \`key\` and \`date\` from the \`_i
 
 This first implementation can be seen as a forced worst-case scenario to make the more optimized solutions look better. Unfortunately, that is not the case. It's not hard to find implementations like this on the internet and I've worked on a big project with a schema like this one, from where I got the idea for this first case.
 
-Application Version 2 (appV2)
------------------------------
+## Application Version 2 (appV2)
 
 As discussed in the issues and improvements of \`appV1\`, embedding the fields \`key\` and \`date\` as a document in the \`_id\` field trying to take advantage of its obligatory index is not a good solution for our application because we would still need to create an extra index and the index on the \`_id\` field would take more storage than needed.
 
@@ -227,8 +221,7 @@ The field \`key\`, as presented in the scenario section, is composed of hexadeci
 
 For the status field names, we can see that the names of the fields use more storage than the value itself. The field names are strings with at least 7 UTF-8 characters, which takes at least 7 bytes. The value of the status fields is a 32-bit integer, which takes 4 bytes. We can shorthand the status names by their first character, where \`approved\` becomes \`a\`, \`noFunds\` becomes \`n\`, \`pending\` becomes \`p\`, and \`rejected\` becomes \`r\`.
 
-Application Version 3 (appV3)
------------------------------
+## Application Version 3 (appV3)
 
 As discussed in the issues and improvements of \`appV2\`, to reduce the document size, two improvements were proposed. One is to convert the data type of the field \`key\` from string to binary, requiring four bits to represent each hexadecimal character instead of the eight bits of a UTF-8 character. The other is to shorthand the name of the status fields by its first letter, requiring one byte for each field name instead of seven bytes. Each document would still register the status totals for one user, specified by the field \`key\`, in one day, specified by the field \`date\`, the same way it was done in the previous implementations.
 
@@ -317,8 +310,7 @@ As seen above, the \`key\` field is compared by equality in both cases, and the 
 
 One point of attention is how we are going to format the \`date\` field in this concatenation in a way that the range filter works and we don't store more data than we really need. One possible implementation will be presented and tested in the next application version, \`appV4\`.
 
-Application Version 4 (appV4)
------------------------------
+## Application Version 4 (appV4)
 
 As presented in the issues and improvements of \`appV3\`, one way to take advantage of the obligatory field and index on \`_id\` is storing on it the concatenated value of \`key\` + \`date\`. One thing that we need to cover now is what data type the \`_id\` field will have and how we are going to format the \`date\` field.
 
@@ -406,8 +398,7 @@ One way of doing that is using [the Bucket Pattern](https://www.mongodb.com/blog
 
 Looking at our application from the perspective of the bucket pattern, so far, we have bucketed our data by daily user, each document containing the status totals for one user in one day. We can increase the bucketing range or our schema and in one document, store events or status totals from a week, month, or even quarter.
 
-Conclusion
-----------
+## Conclusion
 
 That is the end of the first part of the series. We covered how indexes work on fields of type documents and saw some small changes that we can make to our application to reduce its storage and index needs, and as a consequence, improve its performance.
 
@@ -421,8 +412,7 @@ So far, none of our applications have gotten even close to the desired rates, bu
 
 For any further questions, you can go to the[MongoDB Community Forum](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part1-foojay&utm_term=tony.kim), or if you want to build your application using MongoDB, the MongoDB Developer Center has lots of examples in many different programming languages.
 
-Index on Embedded Documents
----------------------------
+## Index on Embedded Documents
 
 Let's take a look at how MongoDB indexes a field with a value of type document and see why we need an extra index for the \`appV1\` implementation.
 

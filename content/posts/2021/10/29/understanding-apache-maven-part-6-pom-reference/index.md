@@ -26,8 +26,7 @@ With the assumption that the above linked content has been read *and bookmarked 
 
 **Reminder**: Apache Maven is polyglot. XML was the first and most commonly used format for describing a POM. This blog assumes XML format but other formats share the same logic.
 
-The `project`
--------------
+## The `project`
 
 ![POM Contents. The dark background elements have complex structures while the light background are simple elements. Build and Profiles have additional diagrams](https://cgunturme.files.wordpress.com/2020/06/mavenpomproject.png?w=1024) POM contents. The dark background elements have complex structures while the light background is for simple elements. Build and Profiles have additional diagrams
 
@@ -201,8 +200,7 @@ etc., all covered earlier in this series.
 
 Link: <https://maven.apache.org/ref/3.6.3/maven-model/maven.html#class_profile>
 
-Additional links
-----------------
+## Additional links
 
 Link: <https://maven.apache.org/pom.html>  
 

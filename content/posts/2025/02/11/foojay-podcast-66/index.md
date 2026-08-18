@@ -40,13 +40,11 @@ In this Foojay podcast, we dive into a few articles that were published recently
 
 * And we start with Wim De Troye about the code changes he had to do in a project that got upgraded from Spring Boot 2 to 3.
 
-Video
------
+## Video
 
 {{< youtube IB7drozkKUk >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -54,8 +52,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Wim De Troyer
   * <https://www.linkedin.com/in/wim-de-troyer-40647b130/>
@@ -67,8 +64,7 @@ Guests
   * <https://www.linkedin.com/in/inspector-patronum/>
   * <https://x.com/flounder4130>
 
-Links
------
+## Links
 
 * <https://foojay.io/today/the-proper-way-to-define-configuration-properties-in-spring/>
 * <https://foojay.io/today/make-the-life-of-your-developer-clients-easier-with-smart-builders/>
@@ -76,8 +72,7 @@ Links
 * <https://foojay.io/today/crafting-your-own-railway-display-with-java/>
 * <https://foojay.io/today/duplicate-finder-for-text-requirements/>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topics and guests
 

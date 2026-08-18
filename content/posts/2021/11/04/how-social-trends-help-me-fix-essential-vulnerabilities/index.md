@@ -25,16 +25,14 @@ Following the social trends of security vulnerabilities makes practical sense. W
 
 Let's take a look at vulnerability social trends (sentiment analysis) in action.
 
-A trending example in Java
---------------------------
+## A trending example in Java
 
 I created a small Java application based on an outdated Spring Boot version, `2.2.0-RELEASE`. After [connecting the GitHub repo to my Snyk account](https://snyk.io/login), I found the following vulnerability on top of my list because it is currently trending on social media.
 ![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-vuln-1240x363.png)
 
 It is a remote code execution (RCE) vulnerability in the embedded Apache Tomcat version that ships with the specific Spring Boot starter package I use. By clicking on the trending button, I found many tweets referring to this specific vulnerability and a working exploit that is published. I will come back to this later, but first, let me explain the vulnerability.
 
-Remote Code Execution Vulnerability CVE-2020-9484 explained
------------------------------------------------------------
+## Remote Code Execution Vulnerability CVE-2020-9484 explained
 
 I will briefly explain the dynamics of this RCE vulnerability in Tomcat. This vulnerability exists in all Tomcat versions, including the embedded version supplied with Spring Boot. It is also good to know that a new update is already available for all versions fixing this issue.
 
@@ -48,8 +46,7 @@ If you want to know more about why deserialization vulnerabilities are harmful, 
 
 For more information about this vulnerability in Tomcat, a great article on [redtimmy.com](https://www.redtimmy.com/apache-tomcat-rce-by-deserialization-cve-2020-9484-write-up-and-exploit/) explains it in more detail. You can find an exploit proof of concept on this GitHub repository: <https://github.com/masahiro331/CVE-2020-9484>
 
-How Snyk Social Trends help you focus on the important stuff
-------------------------------------------------------------
+## How Snyk Social Trends help you focus on the important stuff
 
 You might say that this vulnerability has a bunch of prerequisites before it can actually be exploited.
 
@@ -64,9 +61,5 @@ So, if for some reason someone in my team decides to use the `PersistentManger` 
 More importantly, if a vuln is trending, this means a lot of people know and talk about it --- including people with bad intentions. For me, it is a marker that I have to investigate such a vuln even more closely than I already do to see if I am vulnerable now or will be in the future.
 
 Including the trending marker in the Snyk UI not only puts a spotlight on the vuln but also increases the priority score for that reason. Therefore, we believe that searching social media to determine the popularity of a specific vulnerability is a powerful tool so I will not get caught by obvious and well-known security mistakes. So when you see ![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-trending.png), we encourage you to take a second look at a vuln you may have ignored before.
-
-<br />
-
-<br />
 
 This article was originally posted on the Snyk.io blog: [https://snyk.io/blog/snyk-social-trends-fix-security-vulnerabilities/](https://snyk.io/blog/docker-for-java-developers/) and is used with permission.

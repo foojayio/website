@@ -22,8 +22,7 @@ frozen: false
 
 Have you ever wondered why updates and upgrades are so essential for any system? Well, it's no secret: They ensure that systems remain relevant and efficient. With MongoDB, it's no different. Whenever we think about updating, we seek efficiency, security, performance, and other benefits that come with updated systems. However, every update introduces changes that need to be carefully managed. In this article, we will cover some of the new features of MongoDB version 8.0 and highlight the key considerations you should take into account before migrating to this new version.
 
-What's new in version 8.0?
---------------------------
+## What's new in version 8.0?
 
 The most popular document database is [now faster than ever](https://www.mongodb.com/products/updates/version-release/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim). MongoDB 8.0 is an excellent choice for those looking for performance, cutting-edge technology, and an intuitive experience. It offers a notable improvement in throughput and latency, compared to earlier versions. Internal testing against 7.0 demonstrates 32% faster reads, 59% faster updates, and 200%+ faster time-series queries. The release of this latest version focuses on several key pillars:
 
@@ -33,8 +32,7 @@ The most popular document database is [now faster than ever](https://www.mongodb
 
 **Resilience, scalability, and high availability**: With MongoDB 8.0, horizontal scaling is now faster and more affordable. This method allows applications to go beyond the limits of traditional databases by spreading data across multiple servers, known as shards, without needing to prepare large amounts of resources in advance. The new sharding features in MongoDB 8.0 make data distribution up to 50 times faster while cutting costs by up to 50%.
 
-General changes
----------------
+## General changes
 
 ### Queryable Encryption
 
@@ -52,7 +50,6 @@ Express was introduced as a new execution stage that optimizes the query path fo
 ```
 db.customer.find({_id: ObjectId('670ec6b005b98857588f5b6a')}).explain()
 ```
-
 
 ...you will see that this new EXPRESS_IXSCAN stage has been included.  
 ![](Screenshot-2025-12-30-at-10.17.14-PM.png)
@@ -90,7 +87,6 @@ db.pizzaOrders.find({price: 10})
    },
 ```
 
-
 We can set a querySettings to reject queries that match this structure (independent of the values):
 
 ```
@@ -109,13 +105,11 @@ db.adminCommand( {
 } )
 ```
 
-
 This command sets a query shape where any query looking for price in the pizzaOrders collection will be rejected, regardless of the actual price value provided in the query. (The focus is entirely on the query's structure.) Therefore, if we execute a query that matches this structure...
 
 ```
 db.pizzaOrders.find({price: 10})
 ```
-
 
 ...the query will be automatically rejected by MongoDB:  
 ![](Screenshot-2025-12-30-at-10.18.43-PM.png)
@@ -129,7 +123,6 @@ db.aggregate( [
    { $querySettings: {} }
 ] )
 ```
-
 
 Result:
 
@@ -152,7 +145,6 @@ Result:
 ]
 ```
 
-
 However, if you want to inspect query shapes---i.e., the different types of queries that have been executed---you have two options:
 
 1. Use**$queryStats** .
@@ -165,7 +157,6 @@ db.aggregate( [
 { $queryStats: {} }
 ])
 ```
-
 
 2. 
 
@@ -186,11 +177,9 @@ db.adminCommand(
 )
 ```
 
-
 This approach is valuable as it ensures the database won't be affected by third-party queries that could cause high resource consumption, all without the need to make changes to the application.
 
-Compatibility and deprecations
-------------------------------
+## Compatibility and deprecations
 
 ### Query behavior
 
@@ -215,7 +204,6 @@ db.people.find({name: null})
 ]
 ```
 
-
 Data with undefined will no longer be returned. If your application contains data with undefined, you can rewrite or migrate undefined data and queries to account for this behavior change.
 
 **Note**: The undefined type has been deprecated, and in some cases, if you attempt to insert undefined, it will be converted to null.
@@ -224,8 +212,7 @@ Data with undefined will no longer be returned. If your application contains dat
 
 Consider using setQuerySettings, as discussed in the query shape section of this article, since index filters are deprecated in this version. SetQuerySettings offers significantly more functionality, making it the preferred choice. With index filters now deprecated, it's advisable to switch to setQuerySettings to take advantage of its advanced features.
 
-Migration planning and strategy
--------------------------------
+## Migration planning and strategy
 
 Now that you've seen the new features in the latest version and decided to upgrade to the newest MongoDB release, there are a few things you need to be aware of. This topic will describe some strategies and steps that are ideal to ensure a smooth and successful migration of a replica set in MongoDB Atlas.
 
@@ -299,8 +286,6 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 After testing in a staging environment, ensure that the **Feature Compatibility Version (FCV)** is set appropriately, before upgrading the production cluster.
 
-<br />
-
 FCV provides an extra layer of security during the upgrade process by controlling which features of the new MongoDB version are enabled in the cluster. This allows you to transition gradually to the latest version, making sure everything works correctly before fully enabling the new features in production.  
 ![](Screenshot-2025-12-30-at-10.27.38-PM.png)
 
@@ -342,8 +327,7 @@ Your upgrade plan should be customized to align with your organization's specifi
 4. Don't overlook driver updates.
 5. Conduct thorough testing before proceeding with the upgrade.
 
-How complex is your upgrade?
-----------------------------
+## How complex is your upgrade?
 
 Now that we've outlined the key steps for a successful upgrade---including pre-migration assessment, staging cluster testing, and checking driver compatibility---let's evaluate how complex your upgrade might be. The effort required to upgrade to MongoDB 8.0 depends on multiple factors, including your current version, driver compatibility, data size, and experience level.
 
@@ -359,8 +343,7 @@ Since upgrade time varies significantly based on these factors, using a staging 
 
 Regardless of complexity, following best practices---such as testing a staging environment and monitoring cluster health---ensures a smooth and reliable transition. The effort is well worth it, as upgrading unlocks better performance, security improvements, and new features.
 
-Conclusion
-----------
+## Conclusion
 
 This article highlighted key changes in the latest version, including compatibility considerations, deprecated features, and best practices for a smooth migration. By understanding these aspects, you can ensure a seamless transition to MongoDB 8.0 and continue benefiting from its enhanced capabilities.
 

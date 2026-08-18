@@ -40,8 +40,7 @@ Decompiler experience upgrade, image
 
 Decompiler experience upgrade
 
-Toggling Inlay Hint on the Fly
-------------------------------
+## Toggling Inlay Hint on the Fly
 
 Inlay Hint is a popular feature in Visual Studio Code and many other developer tools. It adds inline information to the source code to help you understand what the code does, such as parameter names, parameter types, variable types and so on.
 
@@ -61,8 +60,7 @@ Toggle inlay hints on the fly demo, image
 
 Toggle inlay hints on the fly demo
 
-Code Completion Performance Improvement Deep-Dive
--------------------------------------------------
+## Code Completion Performance Improvement Deep-Dive
 
 We have consistently stressed the importance of code completion performance and its critical role of boosting the developer's productivity.
 
@@ -116,8 +114,7 @@ If you are a Spring developer working on a Spring Boot application, you can also
 
 [![Spring boot extension pack](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)](https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/10/spring.png)
 
-Feedback and suggestions
-------------------------
+## Feedback and suggestions
 
 As always, your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to give us feedback
 
@@ -125,8 +122,7 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-Resources
----------
+## Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

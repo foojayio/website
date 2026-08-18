@@ -29,8 +29,7 @@ One way to do this is by adding a data domain. Applications often model some sce
 
 While microservices systems vary greatly in size, technologies, etc., data can be found at the center of nearly all of them.
 
-Architecture
-------------
+## Architecture
 
 Our goal is still to create microservices that communicate and pass information without intervention. These blog posts will take us from the beginning to that goal stage in a (hopefully) understandable way. In our last post, we connected two Spring Boot applications communicating via a REST endpoint using the analogy of a bridge connecting two bits of land.
 
@@ -44,8 +43,7 @@ There are all kinds of data sets we could use, but a few things led me to use bo
 
 Now let's add some books! If you are following along from the previous blog post, feel free to start with the [microservices-level1](https://github.com/JMHReif/microservices-level1) version of the code and make modifications as we discuss them below. If you are starting from this blog post, you can either start fresh with today's [level2 code](https://github.com/JMHReif/microservices-level2) or start from the [level1 code](https://github.com/JMHReif/microservices-level1).
 
-Applications - Service 1
-------------------------
+## Applications - Service 1
 
 Just as before, I like to work from the backend up (or out). Since we are dealing with data now, we will need some sort of datastore. There are too many options to fathom, but we can limit our choices.
 
@@ -63,7 +61,6 @@ We will need to add a couple of additional dependencies in order to create an em
    org.springframework.boot
    spring-boot-starter-data-mongodb-reactive
 ```
-
 
 Flapdoodle provides the embedded version of MongoDB, although only scoped for testing. We can tweak this by commenting out the scope, so that we can use embedded MongoDB instances for our whole application. Note, this is not recommended for production. 😉
 
@@ -86,7 +83,6 @@ class Book {
 }
 ```
 
-
 With Lombok in our dependencies, this class might look smaller than typical Java object classes. The [`@Data`](https://projectlombok.org/features/Data) annotation creates getter/setter methods, equals/hashcode/toString methods, and a constructor with required arguments. The `@Document` annotation tells Spring that this is a MongoDB entity class (data model uses document entities).
 
 Next, we add a few entity variables (properties). A unique id helps us identify a particular book in the database, and the title and author are probably interesting fields. All three fields are `String` types. The first property (`bookId`) has an annotation of `@Id`, which tells Spring that this is the id field for our class. The `title` and `author` properties have a `@NonNull` annotation, which means that we don't want these properties to be missing when we search for books or add new ones. Makes sense, as it's hard to find a book without a title and/or author.
@@ -97,7 +93,6 @@ We also need to add a repository interface that allows us to define methods for 
 interface BookRepository extends ReactiveCrudRepository {
 }
 ```
-
 
 We have entered very little code here because Spring Data provides a few implementations of common methods such as `findAll()`, `findById()`, and more. This is mentioned briefly in the [related section](https://docs.spring.io/spring-data/commons/docs/current/reference/html/#repositories.core-concepts) of the Spring Data Commons documentation. We are using the `ReactiveCrudRepository` because we want to use reactive methods and types for working with the data, requiring a different repository extension from a traditional `CrudRepository`.
 
@@ -114,7 +109,6 @@ class BookController {
 	Flux getBooks() { return bookRepository.findAll(); }
 }
 ```
-
 
 Comparing against our [previous version's controller class](https://github.com/JMHReif/microservices-level1/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java), the name of the endpoint on line 3 changed from `/text` to `/db` to more clearly state our connection to a database and data. The name of the class (line 4) goes from `TextController` to `BookController` to align with the data we're passing.
 
@@ -139,7 +133,6 @@ CommandLineRunner clr(BookRepository repo) {
 }
 ```
 
-
 A [`CommandLineRunner`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html) runs when the application starts, so this bean executes early in the startup. We pass our `BookRepository` into the method so we can access the methods to MongoDB data.
 
 In the method body, we return the results of a [Lambda expression](https://www.javatpoint.com/java-lambda-expressions) - passing in arguments from the application context on the left side of the arrow and executing the statement on the right side of the arrow. It uses the repo's provided method `deleteAll()` to ensure an empty database, then takes some defined `Book` objects (4 of my favorite books), flattens the multiple-object Flux to another Flux (`.flatMap()`), and saves that Flux of books in our database with another Lambda (`repo::save`) that calls the `save` method on the book repository.
@@ -148,8 +141,7 @@ We log all this to find any errors (`.log()`) and subscribe to put the publisher
 
 We can run the application now, though it only confirms data gets loaded via logging. This completes the backing service. Updating service2 will allow us to access the backend we just set up to ensure our services can still communicate.
 
-Applications - Service 2
-------------------------
+## Applications - Service 2
 
 In service2, we don't need to add any dependencies because we are not changing the functionality, only the data being passed. Our frontend service still sends a request and displays a response, and while the format of that data is different (books), the technologies to sending and receiving it isn't.
 
@@ -167,7 +159,6 @@ class Book {
    private String author;
 }
 ```
-
 
 Service2 does not interact directly with the database, so it only needs the domain class to ensure data being passed matches what our backend services expects and returns. We only need the `@Data` annotation, since we need to access the getter/setter methods in order to map the object fields.
 
@@ -189,15 +180,13 @@ class BookController {
 }
 ```
 
-
 The first change is to the name of the class itself (from `TextController` to `BookController`) to align with our book domain. On [line 9](https://github.com/JMHReif/microservices-level2/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L42) of the above code, we implement the `getBooks()` method. The name for the method also gets updated to match our book domain, and we need to use a different return type (from `Mono` to `Flux`) because we are dealing with book objects instead of a string and expect multiple books instead of a single string return.
 
 On the [eleventh line of controller](https://github.com/JMHReif/microservices-level2/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L44), we need to update our endpoint URL path because we changed that in our backend service from `/text` to `/db/books`. Finally, the last line of the method ([controller line 12](https://github.com/JMHReif/microservices-level2/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L46)) maps the return body to a `Flux` (one or more) of `Book` objects, rather than the [previous mapping to a Mono of String](https://github.com/JMHReif/microservices-level1/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L43).
 
 None of the code in the `Service2Application` class needs to change, so now it's time to test it out and see if it works!
 
-Put it to the test
-------------------
+## Put it to the test
 
 Start each of the applications, either through your IDE or via the command line. Once both are running, open a browser and go to `localhost:8080/hello`. Alternatively, you can run this at the command line with `curl localhost:8080/hello` or (if you have [httpie](https://httpie.io/) tool installed) `http :8080/hello`.
 
@@ -205,10 +194,7 @@ And here is the resulting output!
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55181" src="microservices-lvl2-results-1-611x510.png" alt="" width="611" height="510">
 
-<br />
-
-Wrapping up!
-------------
+## Wrapping up!
 
 Congratulations, we have taken the next step to add a data domain (with database) to our microservices project!
 
@@ -218,8 +204,7 @@ Microservices are all about having multiple applications/technologies as service
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level2](https://github.com/JMHReif/microservices-level2) repository
 * Documentation: [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)

@@ -25,8 +25,7 @@ But what is it exactly, and why is it important to understand how it works? If y
 
 Since I joined Azul as technical writer, it was a real discovery to talk to the engineers who develop such GCs and help companies get the most out of their Java systems.
 
-What is the Garbage Collector?
-------------------------------
+## What is the Garbage Collector?
 
 In many other programming languages, programmers manage the creation and removal of objects to moderate memory usage. In Java, programmers focus on application functionality while the Garbage Collector (GC) controls how memory is used.
 
@@ -44,10 +43,7 @@ So it is clear the GC is at the center of memory management for Java application
   * Reference counting: the number of references for each object defines if an object is still in use
   * A mix of scope and counting and a bit of GC
 
-How Does a Garbage Collector Work?
-----------------------------------
-
-
+## How Does a Garbage Collector Work?
 
 **A managed language like Java hides the complexity for you**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png)  
@@ -58,8 +54,6 @@ How Does a Garbage Collector Work?
 *Which means you don't need to care! Because a lot of developers are working hard on the runtime and the language itself, the vast user base of developers can benefit from all the work that is happening "under the hoods." The initial GC in the original JVM was very limited and not working seamlessly, but thanks to all the evolutions, the current overhead of the GC is way less noticeable.*
 
 *Please read on, but keep in mind that you can focus on your business logic, and the Java runtime will take care of the memory management -- even if you are unaware of how much the GC is working for you! On the other hand, if you want to understand better how the GC can impact your program, there is a lot to learn here.*
-
-
 
 ### Different Stages in Garbage Collection
 
@@ -123,13 +117,10 @@ The following diagram illustrates how a typical Young generation GC cleans and m
 
 You can take advantage of the young generation system by focusing on local variables within methods that have a short lifetime so the GC can focus on a subset of the heap that can quickly be handled.
 
-Types of Java Garbage Collectors
---------------------------------
+## Types of Java Garbage Collectors
 
 Just like Java-the-language has evolved, the runtime and tools have evolved a lot, and different GCs have been part of the JRE.
 ![](https://www.azul.com/wp-content/uploads/garbage-collectors-table.png) Table overview of the different Garbage Collectors in Java
-
-
 
 **Some tips for older GC generations are no longer applicable**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DeepakSreedhar-300x300.png)  
@@ -143,18 +134,13 @@ Just like Java-the-language has evolved, the runtime and tools have evolved a lo
 
 *One thing that developers still need to be careful about is avoiding leaks in the Java heap that can lead to high live sets for GC. The duration of, and CPU consumption by, most modern GCs is proportional to the size of live set. The Java ecosystem has [several tools](https://docs.azul.com/prime/Java-Flight-Recorder) that can help analyze live sets and identify problems. And Azul support is always ready to provide any help we can!*
 
-
-
-Impact of the Garbage Collector on the Application
---------------------------------------------------
+## Impact of the Garbage Collector on the Application
 
 ### Which Garbage Collector to Use?
 
 As should be clear by now, "The Garbage Collector" doesn't exist; but depending on the version of your Java runtime and/or startup options, multiple ones are available, and you can even choose which one you want to use! But with this flexibility also comes some responsibility.
 
 Do you just go for the default option, or do you want to use another one? The specialists at Azul are always available to guide new customers when they want to evaluate Azul Zulu Prime versus OpenJDK or other distributions, and they have a lot of experience in comparing different use cases.
-
-
 
 ***Certain coding practices can have an impact on how Java uses memory***  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-MichaelRoeschter-300x300.png)  
@@ -173,13 +159,9 @@ Do you just go for the default option, or do you want to use another one? The sp
 
 *This is not a programming issue but has a "business" reason -- for example, when a rolling transaction log, session buffer, or similar must be used. When an application is constantly modifying its "old" long-lived data at a high rate, then non-concurrent GCs sooner or later run into trouble and need a full GC.*
 
-
-
 ### Impact on the Runtime Environment
 
 Azul also has other technologies on top of OpenJDK that improve the performance of Java applications as this is not always only related to the behavior of the application itself but can also be impacted by the environment, cluster, or resources used within the organization.
-
-
 
 **Always consider the most urgent problem to solve**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-DanielWitkowski-300x300.png)  
@@ -187,15 +169,11 @@ Azul also has other technologies on top of OpenJDK that improve the performance 
 
 *When we guide potential customers while evaluating Azul Zulu Prime, we always consider the most urgent problem to solve. Depending on that starting point, we will look at how Falcon, ReadyNow, or our C4 GC will provide the most significant win from the start. For specific projects, it is clear that the heap size is causing long pauses in the application execution caused by the Garbage Collector.*
 
-<br />
-
 *For example, projects where a 100Gb heap is used can expect pause times of over 10 seconds when the GC is cleaning up the memory. In other cases, for example, financial and gaming applications, a smaller heap of 10Gb size which stops for hundreds of milliseconds can already be a big problem. Anyhow, having a Garbage Collector that doesn't stop your application completely for an unpredictable time is essential for every project that expects consistent short response times; low latency in other words.*
 
 *Clusters are another example where we have seen problems caused by the GC. When one node with a big heap is considered dead because it is not responding during a GC cycle, a process is started to spin up a new node and redistribute the data... But suddenly, the node that is considered to be dead reappears after the GC cycle, causing a chain of undesired events in the cluster.*
 
 *We have seen in different projects that the introduction of Azul Zulu Prime solved many problems that low latency specialists tried to solve in the code but are now entirely handled by the C4 Azul Zulu Prime Garbage Collector, removing all the pauses their application was experiencing.*
-
-
 
 ### Select Two Out of Three
 
@@ -234,8 +212,6 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 * [Analyze live data with Java Flight Recorder](https://docs.azul.com/prime/Java-Flight-Recorder)
 * [Analyze log files (post-mortem) with GC Log Analyzer](https://docs.azul.com/prime/diagnosing-java-performance-problems-with-gc-log-analyzer)
 
-
-
 **There is still much to learn**  
 ![](https://www.azul.com/wp-content/uploads/2022-Nov-Java-GC-JohnCuthbertson-300x300.png)  
 **John Cuthbertson (Principal Engineer, C4 GC team)**
@@ -244,10 +220,7 @@ VisualVM (provided in OpenJDK), Java Flight Recorder(OpenJDK and Azul), and the 
 
 *We always need to consider the "Butterfly effect." A small change on one side can have a considerable effect somewhere else. Predicting what the effect will be of a change is always hard. That's why so many people are working on the tuning of implementations in the Java Virtual Machine and documenting all the possible changes and their impact.*
 
-
-
-Learn More...
--------------
+## Learn More...
 
 If you were asking, "What should I know about garbage collection," this post gives an overview of the functionality of the Garbage Collector and the things a developer should know.
 

@@ -37,8 +37,7 @@ In this article, we'll cover the new features and walk you through the steps req
 
 We've also experienced unprecedented cross-industry collaboration with software, hardware and QA testing donations from the likes of Amazon, DataStax, iland, and Instaclustr. Everyone in the Cassandra community has been pushing hard to deliver a release that is battle-tested with enterprise security features and with an understanding of what it takes to deliver scale in the cloud.
 
-New for 4.0
------------
+## New for 4.0
 
 <figure class="wp-block-embed is-type-rich is-provider-embed-handler wp-block-embed-embed-handler wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">
@@ -75,8 +74,7 @@ This an exciting feature that enables 4.0 to take advantage of the new garbage c
 
 Compression is configured on a per-table basis and Cassandra 4.0 supports Zstandard (Zstd), a data compression algorithm. With 4.0's significantly improved compression, it not only reduces the amount of data written to disk, but often improves read and write throughput. This is because the CPU overhead of compressing data is faster than the time it would take to read or write the same uncompressed data from disk.
 
-Growth of the Cassandra ecosystem
----------------------------------
+## Growth of the Cassandra ecosystem
 
 The third-party ecosystem around Cassandra continues to thrive and many utilities have already added support for 4.0. These include client drivers, Spring Boot and Spring Data, the DataStax Kafka Connector and Bulk Loader, and Quarkus.
 
@@ -86,8 +84,7 @@ Multiple members of the community have been hard at work to make Cassandra easie
 
 DataStax has also open-sourced [K8ssandra](https://k8ssandra.io/), an open-source distribution for Cassandra on Kubernetes, providing DBAs and SREs a fast and easy cloud-native data plane. The themes are clear. Working together to make Cassandra the default database for cloud-native workloads.
 
-Ready to upgrade?
------------------
+## Ready to upgrade?
 
 If you're a current Cassandra user, upgrading can be fairly simple and requires no downtime. There are a few steps to follow to make sure you have the least amount of surprises.
 

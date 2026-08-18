@@ -31,8 +31,7 @@ First of all, something has happened that, to my knowledge, has never happened b
 
 So that's what's been done here. More information on String Templates removal in ticket [JDK-8329949](https://bugs.openjdk.org/browse/JDK-8329949).
 
-JEP 455 - Primitive Types in Patterns, instanceof, and switch (Preview)
------------------------------------------------------------------------
+## JEP 455 - Primitive Types in Patterns, instanceof, and switch (Preview)
 
 Preview feature that adds support for primitive types in `instanceof` and `switch`, and enhances pattern matching to support primitive type patterns: in `instanceof`, in `switch` cases, and in record deconstruction. **Switches now support all primitive types.**
 
@@ -48,7 +47,6 @@ switch (l) {
 }
 ```
 
-
 **We can now use `instanceof` for all primitive types.**
 
 Example from the JEP:
@@ -58,7 +56,6 @@ if (i instanceof byte) {  // value of i fits in a byte
     ... (byte)i ...       // traditional cast required
 }
 ```
-
 
 But most interesting of all is the support for pattern matching. Here are some examples of where it's now possible to use pattern matching for a primitive type.
 
@@ -73,7 +70,6 @@ switch (x.getStatus()) {
 }
 ```
 
-
 Guards are also supported via the `when` clause:
 
 ```
@@ -85,7 +81,6 @@ switch (x.getStatus()) {
 }
 ```
 
-
 Example of pattern matching of a primitive type within an `instanceof` from the JEP:
 
 ```
@@ -93,7 +88,6 @@ if (i instanceof byte b) {
     ... b ...
 }
 ```
-
 
 Example of pattern matching of a primitive type when deconstructing a record:
 
@@ -109,13 +103,11 @@ if (json instanceof JsonObject(int number)) {
 }
 ```
 
-
 This evolution necessitated the implementation of conversion rules within pattern matching, so that a primitive type matches another primitive type, as in the previous example 30 matched an `int` even though the record component was defined as a double, the target type must be covered by the pattern test. Here, 30 is covered by an int. Values not covered will be rejected.
 
 More information in the [JEP 455](https://openjdk.org/jeps/455 "JEP").
 
-JEP 467 - Markdown Documentation Comments
------------------------------------------
+## JEP 467 - Markdown Documentation Comments
 
 Feature that lets you write **JavaDoc** documentation comments in [Markdown](https://wikipedia.org/wiki/Markdown "Markdown") and not just with a mix of HTML and JavaDoc tags.
 
@@ -161,7 +153,6 @@ Here's an example from the JEP:
  */
 ```
 
-
 Which would be written like this in Markdown:
 
 ```
@@ -197,11 +188,9 @@ Which would be written like this in Markdown:
 /// @see     java.lang.System#identityHashCode
 ```
 
-
 More information in the [JEP 467](https://openjdk.org/jeps/467 "JEP").
 
-JEP 471 - Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal
-----------------------------------------------------------------------------
+## JEP 471 - Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal
 
 **Unsafe** is, as its name suggests, an internal and unsupported JDK class that is not safe to call.
 
@@ -222,8 +211,7 @@ These methods will be progressively degraded and deprecated in phases:
 
 More information in the [JEP 471](https://openjdk.org/jeps/471 "JEP").
 
-JEP 474 - ZGC: Generational Mode by Default
--------------------------------------------
+## JEP 474 - ZGC: Generational Mode by Default
 
 ZGC is a Garbage Collector designed to support very large heaps (several terabytes) with very low pauses (on the order of milliseconds).
 
@@ -233,8 +221,7 @@ Generational mode is now the default.
 
 More information in the [JEP 474](https://openjdk.org/jeps/474 "JEP").
 
-JEP 476 - Module Import Declarations (Preview)
-----------------------------------------------
+## JEP 476 - Module Import Declarations (Preview)
 
 In Java, you can import:
 
@@ -249,13 +236,11 @@ This is now done with the `import module java.base;` statement, which in a singl
 
 More information in the [JEP 476](https://openjdk.org/jeps/476 "JEP").
 
-Features coming out of preview
-------------------------------
+## Features coming out of preview
 
 No feature previously in preview (or incubator module) has been released from preview or incubation in Java 23. Apart, of course, the String Templates feature I mentioned in the introduction, which has been removed from the preview to go nowhere.
 
-Features that remain in preview
--------------------------------
+## Features that remain in preview
 
 The following features remain in preview (or in the incubator module).
 
@@ -267,8 +252,7 @@ The following features remain in preview (or in the incubator module).
 * [JEP 481](https://openjdk.org/jeps/481) - **Scoped Values** : third preview, allow immutable data to be shared within and between threads. A minor change.
 * [JEP 482](https://openjdk.org/jeps/482) - **Flexible Constructor Bodies** : second preview, a feature that allows instructions to be called **before** the parent constructor as long as they do not access the instance currently being created. A constructor can now initialize fields of the same class before explicitly calling a constructor.
 
-Miscellaneous
--------------
+## Miscellaneous
 
 Various additions to the JDK:
 
@@ -286,8 +270,7 @@ The following methods have been removed, they had been deprecated for deletion, 
 
 All the new JDK 23 APIs can be found in [The Java Version Almanac -- New APIs in Java 23](https://javaalmanac.io/jdk/23/apidiff/22/ "The").
 
-Internal changes, performance, and security
--------------------------------------------
+## Internal changes, performance, and security
 
 The Parallel GC garbage collector has seen a re-implementation of its Full GC algorithm to use a more classic **parallel Mark-Sweep-Compact** algorithm.
 
@@ -295,13 +278,11 @@ This is the same as the one used by the G1 garbage collector and optimizes perfo
 
 Other changes have been made on the Garbage Collector side, and can be found in this article by Thomas Schatzl: [JDK 23 G1/Parallel/Serial GC changes](https://tschatzl.github.io/2024/07/22/jdk23-g1-serial-parallel-gc-changes.html).
 
-JFR Events
-----------
+## JFR Events
 
 No new Java Flight Recorder (JFR) events. You can find all the JFR events supported in this version of Java on the page [JFR Events](https://sap.github.io/SapMachine/jfrevents/23.html "JFR").
 
-Conclusion
-----------
+## Conclusion
 
 This new version of Java is rather sparse in terms of new features, and few of those currently under development have made it out of the preview.
 

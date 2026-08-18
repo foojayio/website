@@ -28,8 +28,7 @@ The Jakarta EE 11 certification was achieved by successfully passing the Jakarta
 
 [Download Payara Platform Community 7 Beta today](https://www.payara.fish/downloads/payara-platform-community-edition/ "Download Payara Platform Community 7 Beta today") and be the first to build on Jakarta EE 11 with a vendor-certified runtime!
 
-Why Jakarta EE 11 Certification Matters for Payara Users
---------------------------------------------------------
+## Why Jakarta EE 11 Certification Matters for Payara Users
 
 Certification isn't just a badge - it's a promise. For Payara Platform Community users, this achievement means you can:
 
@@ -38,34 +37,29 @@ Certification isn't just a badge - it's a promise. For Payara Platform Community
 * Develop future-oriented applications and enhance your Jakarta EE skills.
 * Trust Payara as your technology partner to leverage the latest technologies and innovations.
 
-Not a Payara Platform Community User? No Problem!
--------------------------------------------------
+## Not a Payara Platform Community User? No Problem!
 
 If you're currently running another open-source Jakarta EE middleware technology, you can still [download and use](https://www.payara.fish/downloads/payara-platform-community-edition/ "download and use") Payara Platform Community 7 Beta completely free of charge. Plus, because Payara Platform is built on the same Jakarta EE specifications as other solutions, moving your applications from one runtime to another is straightforward.
 
 You can quickly test, deploy and run your existing apps on Payara Platform without major rewrites while having the ability to experiment and apply the latest Jakarta EE 11 functionalities.
 
-Jakarta EE 11: The Future of Enterprise Java
---------------------------------------------
+## Jakarta EE 11: The Future of Enterprise Java
 
 Jakarta EE 11 ([find out more](https://blog.payara.fish/jakarta-ee-11-is-here-and-its-ready-for-the-cloud "find out more")) represents the most modern iteration of the enterprise Java platform, with updates and new APIs designed for today's cloud-native world. From streamlined specifications to stronger alignment with modern development practices, Jakarta EE 11 is about making enterprise Java more relevant, agile and developer-friendly than ever before.
 
 By offering the first vendor-certified implementation of Jakarta EE 11 in Payara's application server technologies, validated through the Jakarta EE TCK/CTS, we further highlight our commitment to users. In effect, the Payara Community can immediately take advantage of the latest enterprise Java advancements.
 
-Jakarta EE 11 Certification Availability
-----------------------------------------
+## Jakarta EE 11 Certification Availability
 
 Currently, Jakarta EE 11 certification is available in the Payara Platform Community Edition, specifically in the 7 Beta release. This gives our community an early opportunity to explore and adopt the latest Jakarta EE standards. As we move toward the final release of Payara Platform Community 7, we'll continue refining the platform and working closely with the community to ensure it meets the needs of developers and enterprises worldwide.
 
 We're also working to extend certification to the Payara Platform Enterprise Edition to bring all the benefits of Jakarta EE 11 to mission-critical workloads. In effect, Payara Platform Enterprise 7 will combine the latest specifications with the reliability, support and stability that Payara Platform Enterprise customers value for applications running in production environments.
 
-Payara's Role in the Community
-------------------------------
+## Payara's Role in the Community
 
 We're proud to have our open source application platform being certified across all three Jakarta EE 11 profiles. This milestone reflects our ongoing commitment to the enterprise Java community and ecosystem, as we actively contribute to the development of Jakarta EE and its specifications. Even more, we work to bring those innovations to our users as quickly as possible.
 
-What's Next
------------
+## What's Next
 
 With the achievement of Jakarta EE 11 certifications, Payara Platform Community 7 Beta is ready for you to explore today ([download here](https://www.payara.fish/downloads/payara-platform-community-edition/ "download here")). Download your free version today and start developing, deploying as well as running the first Jakarta EE 11 applications in the industry!
 

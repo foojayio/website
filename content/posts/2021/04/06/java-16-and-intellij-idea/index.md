@@ -38,15 +38,13 @@ Records introduce a new type declaration that simplifies the task of modeling yo
 record Person(String name, int age) {}
 ```
 
-
 With just one line of code, the preceding example defines a record `Person` with two components `name` and `age`. To create a record using IntelliJ IDEA 2021.1, select Record in the New Java Class dialog box. Fill in the name and you are good to go.
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-6-cover.png)
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
-IntelliJ IDEA Configuration
----------------------------
+## IntelliJ IDEA Configuration
 
 Java 16 features are supported in IntelliJ IDEA 2021.1, which is scheduled to be released this March. The early access versions of 2021.1 are already available. You can configure it to use Java 16 by selecting 16 as the Project SDK and choosing *16 (Preview) -- Sealed types* in the Project language level for your Project and Modules settings.
 
@@ -58,15 +56,13 @@ You can also download Java 16 directly from IntelliJ IDEA. To do so, go to *Plat
 
 All sample code used in this blog post is hosted at [Github](https://github.com/malagupta/Java16AndIntelliJIDEA).
 
-Implicit members added to a record
-----------------------------------
+## Implicit members added to a record
 
 The compilation process creates a full-blown class -- a record is defined as a final class, extending the `java.lang.Record` class from the core Java API. For each of the components of the record Person, the compiler defines a final instance variable (`name` and `age`). Interestingly, the name of the getter method is the same as that of the data variable (it doesn't start with `get` or `is`). Since a record is supposed to be immutable, no setter methods are defined.
 
 The methods `toString()`, `hashCode()`, and `equals()` are also generated automatically for records.
 
-Why use records
----------------
+## Why use records
 
 Imagine you want to persist the details of, say, a person to a file. Before the introduction of records, you would need to define a regular class with instance variables, accessor methods, and implement methods from the Object class (`toString()`, `hashcode()`, and `equals()`). Though IntelliJ IDEA can generate all this code for you easily, there is no way to tag this class as a data class, so it would still be read as a regular class.
 
@@ -80,8 +76,7 @@ Now, let's declare `Person` as a record using just one line of code with compone
 
 Record `Person` is just one example on how you can use Records. You can use records to model your data, without additional overhead of defining additional methods.
 
-What you can and can't add to a record
---------------------------------------
+## What you can and can't add to a record
 
 Since the state of a record is defined using components in its declaration, it doesn't make much sense to allow the addition of instance variables (or fields) to a record. However, you can add static fields, and instance or static methods to a record, if you need them. Here's an example:
 
@@ -97,9 +92,7 @@ public record Person(String name, int age) {
 }
 ```
 
-
-Modifying the default behavior of a constructor in a record
------------------------------------------------------------
+## Modifying the default behavior of a constructor in a record
 
 The default constructor of a record just initializes its state with the values you pass to it. You can change this default behavior if necessary, for example, to validate the parameter values before they are assigned.
 
@@ -115,8 +108,7 @@ By invoking context actions in IntelliJ IDEA (with Alt+Enter), you can easily co
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-9-cover.png)
 
-Truly immutable data
---------------------
+## Truly immutable data
 
 Records are truly immutable -- you can't change their field values using reflection ( if you haven't tried it out yet, you can change the value of immutable strings using reflection).
 
@@ -141,14 +133,12 @@ public class NoteBook {
 }
 ```
 
-
 And here's the code for a record `Point`:
 
 ```java
 public record Point(int x, int y) {
 }
 ```
-
 
 The following code confirms that the private and final fields of a (regular) class can be changed using reflection, but records are a harder nut to crack:
 
@@ -190,9 +180,7 @@ public class UseReflection {
 }
 ```
 
-
-Defining a Generic record
--------------------------
+## Defining a Generic record
 
 You can define records with generics. Here's an example of a record called `Parcel`, which can store any object as its contents, and capture the parcel's dimensions and weight:
 
@@ -203,7 +191,6 @@ public record Parcel<T>(T contents,
    double height,
    double weight) {}
 ```
-
 
 You can instantiate this record as follows:
 
@@ -218,23 +205,19 @@ new Table(), 200, 100, 55, 136.88);
 }
 ```
 
-
-Converting Record to a regular class
-------------------------------------
+## Converting Record to a regular class
 
 If you are working with records but need to transition it to the codebase of an older Java version that doesn't support records, you can quickly convert a record to a regular class by using the context action Convert record to class or vice-versa by using the context action Convert to a record:
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-10-cover.png)
 
-Records as components of record
--------------------------------
+## Records as components of record
 
 A record component can be another record. In the following example, record `Automobile` defines one of its components as `Engine`, another record:
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-11-cover.png)
 
-Adding annotations to record components
----------------------------------------
+## Adding annotations to record components
 
 You can add an appropriate annotation to the components of a record, say, `@NotNull`, as demonstrated in the following gif:
 
@@ -250,7 +233,6 @@ public record Rectangle(
        @JsonProperty("length") int length) {
 }
 ```
-
 
 **If you are using Jackson 2.12.2 or later versions, you don't need to annotate your record components with `@JsonProperty`.**   
 
@@ -293,7 +275,6 @@ public class ReadWriteRecordUsingJackson {
 }
 ```
 
-
 If you are working with a Maven project, you can add the following dependencies to your pom.xml:
 
 ```xml
@@ -314,9 +295,7 @@ If you are working with a Maven project, you can add the following dependencies 
 </dependency>
 ```
 
-
-Reading and Writing Records to a File
--------------------------------------
+## Reading and Writing Records to a File
 
 You can write records to streams and read them, like other class instances. Let your record implement a relevant interface like the `Serializable` interface. Here's example code, which will write to and read from a file:
 
@@ -358,16 +337,13 @@ public class ReadWriteObj {
 }
 ```
 
-
-Refactoring the signature of a Record
--------------------------------------
+## Refactoring the signature of a Record
 
 You can refactor a Record and modify the order of its components or types, modify their names, and add new or remove existing ones. IntelliJ IDEA has simplified how you apply Rename or Change Signature Refactorings. The changes would reflect in a record's canonical constructor and its instance creation:
 
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/03/java16-13-cover.png)
 
-A restricted identifier
------------------------
+## A restricted identifier
 
 `record` is a restricted identifier (like `var`), but it isn't a regular keyword (yet). So, the following code is valid:
 
@@ -376,11 +352,9 @@ int record = 10;
 void record() {}
 ```
 
-
 However, you may want to refrain from using `record` as an identifier because such code will become confusing as more developers start using records.
 
-Local records
--------------
+## Local records
 
 You can define local records to model a domain object while you are processing values in a method. In the following example, the method `getTopPerformingStocks` finds and returns the names of the `Stock` with the highest value on a specified date.
 
@@ -398,14 +372,11 @@ return allStocks.stream()
 }
 ```
 
-
-Declaring implicit or explicit static members in an inner class
----------------------------------------------------------------
+## Declaring implicit or explicit static members in an inner class
 
 Starting from Java 16, an inner class can explicitly or implicitly define static members, including records.
 
-Local interfaces and enums
---------------------------
+## Local interfaces and enums
 
 You can declare local enums and interfaces. You can encapsulate your data or business logic, which is local to a method, within the method.
 
@@ -423,7 +394,6 @@ public void createLocalEnum() {
 }
 ```
 
-
 However, they cannot capture any context variable. For example, for the local enum `Data`, the enum constants `FOO` and `BAR` can't be created using the method parameter input in the method `test()`:
 
 ```java
@@ -437,7 +407,6 @@ void test(int input) {
    }
 }
 ```
-
 
 ***You can read about Sealed Classes and Interfaces as well as Pattern Matching for `instanceof` on the [main JetBrains IntelliJ IDEA blog](https://blog.jetbrains.com/idea/2021/03/java-16-and-intellij-idea/).***
 

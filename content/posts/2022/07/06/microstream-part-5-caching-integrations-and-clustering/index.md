@@ -31,8 +31,7 @@ We have now covered three main aspects of MicroStream:
 
 In this last article of the series, we cover a few other features of MicroStream: caching, integrations into other products, and we discuss a major upcoming feature.
 
-Caching
--------
+## Caching
 
 The MicroStream Cache project provides you with an implementation of the Cache specification. This specification describes how you can keep values cached for later usage if creating or retrieving certain results are too expensive and don't change often. Besides the implementation of this specification, MicroStream also adds the functionality to persist the values so that the cache is also available at the next start of your process.
 
@@ -46,7 +45,6 @@ If you want to make use of it, you can add the following dependency to your proj
     </dependency>
 ```
 
-
 You now have the MicroStream's implementation of JCache available and can start creating caches like this one. We first create a configuration for the cache we need where we can provide a storage manager that stores the cache entries. With this configuration, we can create the actual cache from the *CacheManager*.
 
 ```java
@@ -59,13 +57,11 @@ You now have the MicroStream's implementation of JCache available and can start 
     Cache<String, String> capitals = cacheManager.createCache("jCache", configuration);
 ```
 
-
 But MicroStream provides more caching integrations than just JCache. You can also define it as a secondary cache for Hibernate for example. This gives it an additional functionality, your secondary cache can be restored from a previous run and thus provide more caching functionality.
 
 The documentation describes how you can set up this [caching functionality](https://docs.microstream.one/manual/cache/index.html) when using Hibernate as a JPA provider or within the Spring framework.
 
-Integrations
-------------
+## Integrations
 
 Speaking of the Spring framework, there are several integrations available of MicroStream.
 
@@ -93,8 +89,7 @@ You can follow this [step-by-step tutorial](https://micronaut-projects.github.io
 
 As mentioned, we are working on improved integrations and also providing integrations for more products.
 
-MicroStream Cluster
--------------------
+## MicroStream Cluster
 
 The OpenSource version of MicroStream is a single node implementation. Only a single JVM is allowed to write to a certain store. When multiple JVMs are used, the storage can be corrupted as the Object Graph of the different JVM instances is not identical.
 
@@ -106,8 +101,7 @@ Later this year, we will launch a new product called MicroStream Cluster that ca
 
 More information will follow later on that will allow you to run MicroStream in a large-scale environment very easily.
 
-Resources
----------
+## Resources
 
 * [MicroStream website](https://microstream.one/)
 * [MicroStream reference manual](https://docs.microstream.one/manual/intro/welcome.html)

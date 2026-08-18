@@ -33,7 +33,3 @@ Go here for all the details:
 And let's not forget, you'll be entered into a drawing to win a set of Apple AirPods Max (value $549).
 
 Don't forget to share this article!
-
-<br />
-
-<br />

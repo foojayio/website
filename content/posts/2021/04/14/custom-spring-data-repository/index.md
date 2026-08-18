@@ -61,7 +61,6 @@ fun main(args: Array<String>) {
 }
 ```
 
-
 ### Toward a more functional approach
 
 This step has nothing to do with Spring Data and is not required, but it fits the functional approach better. As mentioned above, we can benefit from using the Routes and Beans DSL. Let's refactor the above code to remove annotations as much as possible.
@@ -93,7 +92,6 @@ fun main(args: Array<String>) {
   }
 }
 ```
-
 
 1. Create a handler class to organize the routing functions
 2. All routing functions should accept a `ServerRequest` parameter and return a `ServerResponse`
@@ -135,7 +133,6 @@ repository
     }.get()                                         // 4
 ```
 
-
 1. `Optional`
 2. `Optional<Either>`
 3. `Optional`
@@ -149,7 +146,6 @@ private fun <T> Optional<T>.toEither() =
     else Unit.left()
 ```
 
-
 With this function, we can improve the existing code:
 
 ```kotlin
@@ -161,7 +157,6 @@ repository
         { ServerResponse.ok().body(it) }          // 3
     )<code class="language-kotlin"></code>
 ```
-
 
 1. `Optional`
 2. `Either`
@@ -204,7 +199,6 @@ interface PersonRepository
     : CrudRepository<Person, Long>, CustomPersonRepository                 // 6
 ```
 
-
 1. New custom interface
 2. Declare the wanted function
 3. New implementing class...
@@ -221,7 +215,6 @@ repository.arrowFindById(req.pathVariable("id").toLong())
         { ServerResponse.ok().body(it) }
     )
 ```
-
 
 This approach works but has one major flaw. To avoid a clash in the functions' signature, we have to invent an original name for our function that returns `Either` *i.e.* `arrowFindById()`.
 
@@ -259,7 +252,6 @@ class SimpleArrowRepository<T, ID>(                                  // 4
 }
 ```
 
-
 1. Our new interface repository...
 2. ...with the signature we choose without any collision risk.
 3. I was too lazy to implement everything.
@@ -274,14 +266,12 @@ We need to annotate the main application class with `@EnableJdbcRepositories` an
 class SpringDataArrowApplication
 ```
 
-
 To ease the usage from the client code, we can create an annotation that overrides the default value:
 
 ```kotlin
 @EnableJdbcRepositories(repositoryBaseClass = SimpleArrowRepository::class)
 annotation class EnableArrowRepositories
 ```
-
 
 Now, the usage is straightforward:
 
@@ -290,7 +280,6 @@ Now, the usage is straightforward:
 @EnableArrowRepositories
 class SpringDataArrowApplication
 ```
-
 
 At this point, we can move the Arrow repository code into its project and distribute it for other "client" projects to use. No further extension is necessary, though Spring Data offers much more, *e.g.*, switching the factory bean.
 

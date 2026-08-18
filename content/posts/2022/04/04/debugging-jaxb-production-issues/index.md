@@ -36,14 +36,12 @@ try(StringWriter writer = new StringWriter()) {
 }
 ```
 
-
 This code converts an arbitrary source object to an XML String using the marshal method. The reverse is also pretty easy:
 
 ```java
 JAXBContext context = JAXBContext.newInstance(User.class); 
 User user = (User) context.createUnmarshaller().unmarshal(new StringReader(xml));
 ```
-
 
 Notice we need to give the right type of object to serialize into. We do this through JAXB binding, defined as annotations on the POJO. They indicate how an object should be serialized, this is especially true when creating complex hierarchies of objects.
 
@@ -66,7 +64,6 @@ public class History {
    public History() {}
 }
 ```
-
 
 You will notice several points of interest in the class definition above:
 
@@ -92,7 +89,6 @@ public class InstantAdapter extends XmlAdapter<String, Instant> {
 }
 ```
 
-
 JAXB binding invokes this code every time it needs to parse or generate XML for a field annotated with this adapter.
 
 The resulting XML for the History class would look something like this (formatted for clarity):
@@ -108,11 +104,9 @@ The resulting XML for the History class would look something like this (formatte
 </history>
 ```
 
-
 **TIP:** Java SE bundled JAXB 2.0 as part of the Java 8 release (AKA JDK/Java 1.8). Unfortunately, Java 9 removed it. It's important that you explicitly include it in your Maven/Gradle dependencies for compatibility between the various versions of Java SE.
 
-The XML Database Demo
----------------------
+## The XML Database Demo
 
 To show the power and ease of JAXB, I created a simple demo that uses JAXB to store/read the objects stored within it. You can find the source code [here](https://github.com/lightrun-platform/lightrun/tree/main/examples).
 
@@ -120,8 +114,7 @@ The demo includes a simple web service that accepts typical restful requests and
 
 We can debug this project, but this is a non-transferable skill. Your project will look different. Instead, we will debug the JAXB implementation. This will work even for your custom projects using roughly the same process.
 
-Debugging JAXB In Production
-----------------------------
+## Debugging JAXB In Production
 
 We need to start by setting up Lightrun and running your project with the Lightrun agent. I'll skip the details as the getting started process covers them well.
 
@@ -130,7 +123,6 @@ In the case of the XML demo, we can run it with Lightrun using the command:
 ```
 java -agentpath:./agent/lightrun_agent_x86.so -jar target/jaxb-0.0.1-SNAPSHOT.jar
 ```
-
 
 Once it's running, we can open the project in the IDE. I'll show the rest in IntelliJ/IDEA, but VSCode should work just fine.
 
@@ -150,7 +142,6 @@ Before we can see this happening, we need to create a new database user which we
 curl -X PUT -H "Content-Type: application/json" -d '{"login":"shai","password":"123456"}' http://localhost:8080/addUser
 ```
 
-
 This command will return a user token which you can use in the following curl command. In my case, the token is: `cf3d2809-bd25-4f34-afe0-d4dd6b04cb87`.
 
 Then we can just add a new command and replace my token with yours:
@@ -158,7 +149,6 @@ Then we can just add a new command and replace my token with yours:
 ```
 curl -X POST -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" -d '{"coreData":[20,22,22,22,33,44]}' http://localhost:8080/create
 ```
-
 
 After that command is sent, you will see the snapshot representing the XML marshaling:
 
@@ -168,8 +158,7 @@ In the variables view, you can deeply inspect every property, including the stat
 
 ![Screen Shot 2022-01-27 at 15.28.29.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537232346/iNvT4AX2X.png)
 
-JAXB Unmarshaller
------------------
+## JAXB Unmarshaller
 
 The reading process is practically identical to the writing process. We open a class file and type Unmarshall into it (I didn't even need to finish typing):
 
@@ -183,7 +172,6 @@ We can then use the following curl command to read the previously added entry:
 curl -H "Content-Type: application/json" -H "Authorization: 46d37d7a-5984-4acd-8932-f12c1a475d4f" "http://localhost:8080/read?id=cf3d2809-bd25-4f34-afe0-d4dd6b04cb87"
 ```
 
-
 You need to update authorization like before. Notice you can set the value for the ID parameter from the values we saw in the previous stack:
 
 ![Screen Shot 2022-01-27 at 16.06.26.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1648537592431/5eqDoijKv.png)
@@ -194,8 +182,7 @@ Once we have that in place, we can add a snapshot and see the resulting stack:
 
 We can dig deeper similarly into the sax parser content tree and inspect an individual XML element. This approach makes it much easier to debug applications with XML.
 
-TL;DR
------
+## TL;DR
 
 The JAXB runtime API is a powerful tool for converting generic types to XML and vice versa. It's popular in Java EE (Jakarta EE), Spring and pretty much all application server platforms. JAXB 2.0 was bundled in Java 8 but removed in Java 9, which means the runtime API must be included as a dependency.
 

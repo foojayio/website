@@ -29,8 +29,7 @@ This is useful for a number of reasons:
 
 In this blog post I'm going to explain how to use JmFrX for recording JMX data in your applications, point out some interesting JmFrX implemention details, and lastly will discuss some potential steps for future development of the tool.
 
-Why JmFrX?
-----------
+## Why JmFrX?
 
 [Java Flight Recorder](https://openjdk.java.net/jeps/328) is a "low-overhead data collection framework for troubleshooting Java applications and the HotSpot JVM". In combination with the JDK Mission Control client application it allows to gain deep insights into the performance characteristics of Java applications.
 
@@ -57,7 +56,6 @@ Until a stable release will be provided, you can obtain JmFrX snapshot builds vi
 ...
 ```
 
-
 Then add the JmFrX dependency:
 
 ```xml
@@ -69,7 +67,6 @@ Then add the JmFrX dependency:
 </dependency>
 ...
 ```
-
 
 The next step is registering the JmFrX event type with JFR in the start-up routine of your program. This could for instance be done in the `main()` method, the static initializer of a class loaded early on, an eagerly initialized Spring or CDI bean, etc. A Java agent for this purpose will be provided as part of this project soon.
 
@@ -88,7 +85,6 @@ public class EventRegisterer {
   }
 }
 ```
-
 
 Now start your application and create a JFR configuration file which enables the JmFrX event type. To do so, open JDK Mission Control, and choose your running application in the JVM Browser. Then perform these steps:
 
@@ -147,7 +143,6 @@ public class JavaLangEventProfileContributor implements
 }
 ```
 
-
 1. Profiles are linked via the MBean name
 2. The atribute type is specified via an `AnnotationElement` for one of the JFR type metadata annotations
 3. If needed, the actual value can be modified too, e.g. to convert it into another data type, or to shift its value into an expected range (for instance 0 to 1 for percentage values)
@@ -162,7 +157,6 @@ module com.example {
         with com.example.MyEventProfileContributor;
 }
 ```
-
 
 When building an application using the traditional classpath, register the names of all profile contributors in the *META-INF/services/dev.morling.jmfrx.spi.EventProfileContributor* file.
 
@@ -190,7 +184,6 @@ public class JmxDumpEvent extends Event {
   // event implementation ...
 }
 ```
-
 
 Upon application start-up, JmFrX [registers](https://github.com/gunnarmorling/jmfrx/blob/master/src/main/java/dev/morling/jmfrx/Jmfrx.java#L74) this event type with the JFR environment:
 
@@ -221,7 +214,6 @@ public void unregister() {
 }
 ...
 ```
-
 
 1. The event hook implementation
 2. Register the periodic event
@@ -265,7 +257,6 @@ public static EventDescriptor getDescriptorFor(String mBeanName) {
 }
 ...
 ```
-
 
 1. Define event metadata like name, label, category etc. via the JFR metadata annotations
 2. For each MBean attribute, an attribute is added to the event type; its definition is based on the information in the corresponding event profile, if present

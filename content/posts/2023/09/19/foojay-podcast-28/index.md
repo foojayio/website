@@ -36,8 +36,7 @@ Let's see what our experts find the most important facts we need to know about J
 
 {{< youtube OY8TYRbcutc >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +44,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Mohamed Taman
 
@@ -67,8 +65,7 @@ Guests
 * <https://twitter.com/speakjava>
 * <https://www.linkedin.com/in/siritter/>
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
@@ -77,8 +74,7 @@ Podcast
 
 ![](episode-28-guests-1024x578.png)
 
-Content
--------
+## Content
 
 00:00 Intro and introduction of the guests  
 

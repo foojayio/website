@@ -21,8 +21,7 @@ frozen: false
 
 There's no support for the pipe operator `|>` in Kotlin, so we have to come up with a custom and clean implementation for this function.
 
-Defining a Pipe Operator
-------------------------
+## Defining a Pipe Operator
 
 Next, one consistent and clean implementation is given for a pipe operator in Kotlin.
 
@@ -64,7 +63,6 @@ First, the `---` operator is defined:
 infix fun <X, Y> X.`---`(f: (X) -> Y): Y = f(this)
 ```
 
-
 **Definition of the Pipe ("---") Operator**
 
 Where:
@@ -105,7 +103,6 @@ value class Title(val value: String) {
 val title: (String) -> Title = { Title(it) }
 ```
 
-
 **Definition of an "Article" DSL**
 
 So, to test the code, I will add a user input title that is not cleaned, some  
@@ -119,7 +116,6 @@ content, and I'll also define more functions with **transformations** , so we ca
 val inputTitle = "FP in Kotlin: Defining a Pipe   Operator  "
 val inputContent = "Lorem ipsum dolor sit amet..."
 ```
-
 
 **Sample User Input for Example Snippet**
 
@@ -135,7 +131,6 @@ val formatTitle: (String) -> String =
     { it `---` clean `---` uppercase `---` markdownTitle }
 ```
 
-
 **Transformations for Example Snippet**
 
 Finally, we can create an `Article` with `title` and `content`:
@@ -150,7 +145,6 @@ print(
     )
 )
 ```
-
 
 **Building an "Article" for the Example Snippet**
 
@@ -172,7 +166,6 @@ Article(
 )
 ```
 
-
 **Program's Output (Formatted)**
 
 The example code is [here](https://blog.mathsoftware.engineer/fp-in-kotlin/kotlin/Pipe.kt/).
@@ -187,8 +180,7 @@ As said above, the pipe can be commonly denoted by `|` or `|>`. Since `pipe` is 
 
 This was the design of a custom pipe operator that can be used in Kotlin, and some insights about functional languages as well.
 
-Options for a Pipe Operator in Kotlin
--------------------------------------
+## Options for a Pipe Operator in Kotlin
 
 As developed before, we faced many constraints in Kotlin for getting a language design that enables us to use the pipe operator.
 

@@ -30,8 +30,7 @@ Numerous professional developers and software companies worldwide are building a
 
 Let's get started!
 
-Pedro Duque Vieira, aka Duke about Hero, PDFSam, FXThemes, FXComponents,...
----------------------------------------------------------------------------
+## Pedro Duque Vieira, aka Duke about Hero, PDFSam, FXThemes, FXComponents,...
 
 [Pedro Duque Vieira](https://www.pixelduke.com) is a Software Engineer, Software Designer, and Entrepreneur. He develops beautiful, graphical applications that users feel happy to use and that significantly boost their productivity. Pedro mainly uses Java and JavaFX and has contributed several libraries to the JavaFX community. In this interview, he shares insights into a few applications, like [Hero (CAD application to calculate energy efficiency)](https://foojay.io/today/creating-cad-applications-with-java-and-javafx/) and [PDFSam (powerful and professional PDF editor)](https://pdfsam.org/).
 
@@ -41,8 +40,7 @@ More recently, Trinity - a tool for AI analysis - was open-sourced by The Johns 
 
 {{< youtube YaF62a4pebg >}}
 
-Daniel Zimmermann about JavaFX and Kotlin
------------------------------------------
+## Daniel Zimmermann about JavaFX and Kotlin
 
 Daniel Zimmermann is a Java, Kotlin, and JavaFX developer working for [cnlab](https://www.cnlab.ch/en/). He is developing an application to test network speeds and detect potential problems.
 
@@ -52,8 +50,7 @@ You can find Daniel on [Twitter](https://x.com/DystopianSnow) and [Mastodon](htt
 
 {{< youtube OKbeVaHV3HA >}}
 
-Christopher Schnick about XPipe, an app to manage all your servers
-------------------------------------------------------------------
+## Christopher Schnick about XPipe, an app to manage all your servers
 
 Christopher is a software engineer with experience in the Java ecosystem and desktop application development. He is passionate about designing innovative solutions for end users and learning new technologies and tools when needed. You can find him on [Twitter](https://twitter.com/crschnick) and [LinkedIn](https://www.linkedin.com/in/crschnick/).
 
@@ -64,8 +61,7 @@ Currently, he has two public JavaFX applications:
 
 {{< youtube mZV1OJ23d2c >}}
 
-Robert Ladstätter about LogoRRR, a cross-platform log analysis tool
--------------------------------------------------------------------
+## Robert Ladstätter about LogoRRR, a cross-platform log analysis tool
 
 Robert is Group Leader for the Software Team at Nextsense GmbH (part of [Hexagon](https://hexagon.com/)) and develops software with Scala and JavaFX. You can find him on [Twitter](https://x.com/rladstaetter) and [LinkedIn](https://www.linkedin.com/in/robert-ladst%C3%A4tter-bb50692b1/). He is the creator of LogoRRR, a cross-platform log analysis tool that offers a clear and rapid way to navigate through large text files, emphasizing critical events with its interactive, user-friendly interface.
 
@@ -77,8 +73,7 @@ Another supporter is [Oliver Loeffler](https://x.com/Raumzeitfalle) who also pro
 
 {{< youtube 2y8aK_t--gM >}}
 
-Videos on JFX Central
----------------------
+## Videos on JFX Central
 
 These videos are also added to the [video section of JFX Central](https://www.jfx-central.com/videos), select "JFX In Action" in the "Type" filter. More to come after the summer break...
 ![](jfxcentral-videos-940x1024.png)

@@ -39,8 +39,7 @@ This is where something like Spring Cloud Netflix Eureka comes into play.
 
 Eureka is a service discovery project that helps services interact with one another without hardwiring in instance-specific or environment-dependent details.
 
-Architecture
-------------
+## Architecture
 
 Our microservices system has come a long way from [two local applications communicating over REST](https://jmhreif.com/blog/microservices-level1/) to a more intricate web containing multiple data stores, utility services, APIs, and client applications. Last [blog post](https://jmhreif.com/blog/microservices-level9/), we migrated any standalone services into Docker Compose so that it could orchestrate startup and shutdown as a unit.
 
@@ -52,15 +51,13 @@ Updated architecture:
 
 Docker Compose manages most of the services (in dark gray area), with each containerized service encompassed in a light gray box. Neo4j is the only component managed externally with Neo4j's database-as-a-service (Aura). Interactions between services are shown using arrows, and the types of data objects passed to numbered services (1-4) are depicted next to each.
 
-Spring Cloud Netflix Eureka
----------------------------
+## Spring Cloud Netflix Eureka
 
 Spring Cloud Netflix originally contained a few open-sourced projects from Netflix, [including Eureka, Zuul, Hystrix, and Ribbon](https://www.interviewgrid.com/interview_questions/spring_cloud/spring_cloud_netflix). Since then, most of those have been migrated into other Spring projects, except for Eureka.
 
 Eureka handles service registry and discovery. A Eureka server is a central place for services to register themselves. Eureka clients register with the server and are able to find and communicate with other services on the registry without referencing hostname and port information within the service itself.
 
-Config + Eureka Architecture Decision
--------------------------------------
+## Config + Eureka Architecture Decision
 
 I had to make a decision on architecture when using Spring Cloud Config and Eureka together in a microservices system. There are a couple of options:
 
@@ -73,8 +70,7 @@ I opted for the config-first approach because there is already a bit of delay st
 
 Without further ado, let's start coding!
 
-Applications - Eureka server
-----------------------------
+## Applications - Eureka server
 
 We will use the Spring Initializr at [start.spring.io](https://start.spring.io/) to set up the outline for our Eureka server application.
 
@@ -94,7 +90,6 @@ eureka.client.register-with-eureka=false
 eureka.client.fetch-registry=false
 ```
 
-
 We need to specify a port number for this application to use so that its traffic doesn't conflict with our other services. The default port for Spring Cloud Eureka server is `8761`, so we will use that. Next, we don't need to register the server itself with Eureka (useful in systems with multiple Eureka servers), so we will set the `eureka.client.register-with-eureka` value to `false`. The last property is set to `false` because we also don't need this server to pull the registry from other sources (like other Eureka servers). A [StackOverflow question and answer](https://stackoverflow.com/questions/57639611/what-is-the-use-of-fetchregistry-property-in-eureka-server) addresses these settings well.
 
 In the `EurekaServerApplication` class, we only need to add the annotation `@EnableEurekaServer` to set this up as a Eureka server.
@@ -105,8 +100,7 @@ Let's test this locally by starting the application in our IDE and navigating a 
 
 That's it for the server, so let's start retrofitting our other services as Eureka clients.
 
-Applications - Service1
------------------------
+## Applications - Service1
 
 We don't have many changes to add for Spring Cloud Eureka. Starting in the `pom.xml`, we need to add a dependency.
 
@@ -117,7 +111,6 @@ We don't have many changes to add for Spring Cloud Eureka. Starting in the `pom.
 </dependency>
 ```
 
-
 This dependency enables the application as a Eureka client. Most recommendations would also have us adding an annotation like `@EnableEurekaClient` (Eureka-specific) or `@EnableDiscoveryClient` (project-agnostic) to the main application class. However, that is not a necessary requirement, as it is defaulted to enabling this functionality when you add the dependency to the `pom.xml`.
 
 To run the service locally, we will also need to add a property to the `application.properties` file.
@@ -126,13 +119,11 @@ To run the service locally, we will also need to add a property to the `applicat
 eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 ```
 
-
 This tells the application where to look for the Eureka server. We will move this property to the config server file for this application, so we can comment this one out when we test everything together. However, for testing a siloed application, you will need it enabled here.
 
 Let's start on changes to service2, which interacts with service1.
 
-Applications - Service2
------------------------
+## Applications - Service2
 
 Just like with service1, we need to add the Eureka client dependency to service2's `pom.xml` to enable service discovery.
 
@@ -147,7 +138,6 @@ Just like with service1, we need to add the Eureka client dependency to service2
 </dependency>
 ```
 
-
 We also want to have this application use Spring Cloud Config for referencing the Eureka server, so we can retrofit that by adding the dependency. We will walk through the config file changes in a bit.
 
 Again, if we test locally, we would also need to add the following property to the `application.properties` file.
@@ -155,7 +145,6 @@ Again, if we test locally, we would also need to add the following property to t
 ```
 eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
 ```
-
 
 Since we will test everything together, it is commented out in the application for now. Instead, we will add a properties file for Spring Cloud Config to host, similar to our other services (next section).
 
@@ -176,15 +165,13 @@ public class Service2Application {
 }
 ```
 
-
 If you [compare the code to the previous version](https://github.com/JMHReif/microservices-level9/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L19) (Level 9), you will see there are some changes.
 
 First, we have removed the `@Value` annotation and `hostname` variable. When we originally implemented the `@Value`, we did so for dynamic environments - running a local versus containerized application. Eureka lets calling applications reference an application name, and it will map the hostname/port details behind-the-scenes, no matter where the application is running. This is where we see the `mongo-client` referenced in the second `@Bean` definition ([11th line of above code](https://github.com/JMHReif/microservices-level10/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L29)).
 
 We also need to create a load-balanced bean (only required when using Eureka). Step-by-step, I created a `WebClient.Builder` bean, load balanced it with the `@LoadBalanced` annotation, then used that to create the actual `WebClient` bean that gets injected for use in method calls ([in the BookController class](https://github.com/JMHReif/microservices-level10/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L36)).
 
-Applications - Service3 and Service4
-------------------------------------
+## Applications - Service3 and Service4
 
 Next, we need to add our other services to Eureka using the steps below.
 
@@ -193,8 +180,7 @@ Next, we need to add our other services to Eureka using the steps below.
 
 Now let's add the Eureka property to the Spring Cloud Config files for our applications!
 
-Spring Cloud Config
--------------------
+## Spring Cloud Config
 
 For each config file the server hosts, we will need to add the following:
 
@@ -204,7 +190,6 @@ eureka:
     serviceUrl:
       defaultZone: http://goodreads-eureka:8761/eureka
 ```
-
 
 This tells the application where to look so it can register with Eureka. Full sample code for each config file is located in the [related Github repository folder](https://github.com/JMHReif/microservices-level10/tree/main/microservices-java-config).
 
@@ -221,13 +206,11 @@ eureka:
       defaultZone: http://goodreads-eureka:8761/eureka
 ```
 
-
 A sample is provided on the [Github repository](https://github.com/JMHReif/microservices-level10/blob/main/microservices-java-config/goodreads-client-docker.yaml), but this file is created in a local repository initialized with [git](https://git-scm.com/), and then referenced in the [config server properties file](https://github.com/JMHReif/microservices-level10/blob/main/config-server/src/main/resources/application.properties#L2) for that project to serve up. More information on that is in a [previous blog post](https://jmhreif.com/blog/microservices-level7/).
 
 Let's make a few changes to the `docker-compose.yml`!
 
-docker-compose.yml
-------------------
+## docker-compose.yml
 
 We need to remove the dynamic environment property for service2 and to add the Eureka server project for Docker Compose to manage.
 
@@ -239,7 +222,6 @@ goodreads-svc2:
       - SPRING_CONFIG_IMPORT=configserver:http://goodreads-config:8888
       - SPRING_PROFILES_ACTIVE=docker
 ```
-
 
 We removed the `BACKEND_HOSTNAME` we see in the [previous version of the code](https://github.com/JMHReif/microservices-level9/blob/main/docker-compose.yml#L57), and instead replaced it with [environment variables](https://github.com/JMHReif/microservices-level10/blob/main/docker-compose.yml#L57) for application name, config server location, and spring profiles like we see in our other services.
 
@@ -260,7 +242,6 @@ goodreads-eureka:
       - goodreads
 ```
 
-
 For our last step, we need to build all of the updated applications and create the Docker images. To do that we can execute the following commands from the project folder:
 
 ```bash
@@ -276,18 +257,15 @@ cd ../eureka-server
 mvn clean package
 ```
 
-
 *\*Note:\* The Docker Compose file is using my pre-built images with Apple silicon architecture. If your machine has a different chip, you will need to do one of the following: 1) utilize the `build` option in the docker-compose.yml file (comment out `image` option), 2) create your own Docker images and publish to DockerHub (plus modify the `docker-compose.yml` file `image` options).*
 
-Put it to the test!
--------------------
+## Put it to the test!
 
 We can run our system with the same command we have been using.
 
 ```bash
 docker-compose up -d
 ```
-
 
 *\*Note:\* If you are building local images with the `build` field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 
@@ -310,9 +288,7 @@ Bring everything back down again with the below command.
 docker-compose down
 ```
 
-
-Wrapping up!
-------------
+## Wrapping up!
 
 In this iteration of the project, we integrated service discovery through the Spring Cloud Netflix Eureka project. We created a Eureka server project, and then retrofitted our other services as Eureka clients with an added dependency.
 
@@ -320,8 +296,7 @@ Finally, we integrated the new Eureka server project to Docker Compose and updat
 
 Keep following along in this journey to find out what comes next (or [review previous iterations](https://jmhreif.com/blog/) to see what we have accomplished). Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level10](https://github.com/JMHReif/microservices-level10) repository
 * Blog post: [Baeldung's guide to Spring Cloud Netflix Eureka](https://www.baeldung.com/spring-cloud-netflix-eureka)

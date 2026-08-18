@@ -23,8 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-The Hidden Cost of "Good Enough" Code
--------------------------------------
+## The Hidden Cost of "Good Enough" Code
 
 A few weeks ago, Kirk Pepperdine published a fascinating performance challenge --- a small Java code snippet that appeared trivial but produced puzzling runtime behavior.
 
@@ -40,8 +39,7 @@ We all love to talk about cloud cost optimization --- how to save 30%, 40%, mayb
 
 That's the real art of performance tuning --- not chasing milliseconds, but seeing where we're blind to inefficiency.
 
-A Quick Reality Check -- Programming Languages and Energy
----------------------------------------------------------
+## A Quick Reality Check -- Programming Languages and Energy
 
 A remarkable study comparing the [energy efficiency of 27 programming languages](https://appdevelopermagazine.com/how-27-programming-languages-differ-in-energy-consumption/ "energy efficiency of 27 programming languages") quantified what many of us intuitively know: language choice matters --- not just for speed, but for environmental impact.
 
@@ -57,8 +55,7 @@ Not by buying more servers, but by thinking smarter about how existing systems u
 
 That's what this article is about --- how thinking differently about code can do more for performance (and cost) than all the hardware tuning in the world.
 
-Let's see how good am I with performance analysis
--------------------------------------------------
+## Let's see how good am I with performance analysis
 
 ### Step One -- Exceptions as Logic
 
@@ -78,7 +75,6 @@ public static boolean checkIntegerOrg(String testInteger) {
 }
 ```
 
-
 Looks reasonable, right? If the string isn't a number, we catch the exception and move on. Simple.
 
 Except it's not.
@@ -91,8 +87,6 @@ A colleague once told me, "Our validation layer runs slower than our database qu
 
 This is where the journey begins --- three datasets, each one messier than the last, with more incorrect or malformed entries.
 ![](fj_art1_results_1-700x247.png)
-
-<br />
 
 ### Step Two -- The RegExp Trap
 
@@ -112,11 +106,8 @@ public static boolean checkIntegerRegExp(String testInteger) {
 }
 ```
 
-
 It looked elegant and safe. And it was slower. Much slower.
 ![](fj_art1_results_2-700x273.png)
-
-<br />
 
 **Why RegExp Can Be a Trojan Horse**
 
@@ -147,11 +138,8 @@ public static boolean checkIntegerIsDigit(String testInteger) {
 }
 ```
 
-
 Performance immediately improved --- **by an order of magnitude.**
 ![](fj_art1_results_3-700x345.png)
-
-<br />
 
 Why? Because the CPU loves predictability.
 
@@ -193,11 +181,8 @@ public static int fastParseInt(String s) {
 }
 ```
 
-
 This handcrafted version was roughly 2× faster than Character.isDigit(). Why? No method calls, no Unicode overhead, no irrelevant checks.
 ![](fj_art1_results_4-700x368.png)
-
-<br />
 
 But that improvement came with a trade-off. The code was less general, less future-proof, and slightly harder to read. I've seen similar patterns in production. In one low-latency financial system, we replaced Integer.parseInt() in a critical path that processed millions of messages per second. The gain was 300 ms per million messages. Trivial in isolation, transformative at global scale.
 
@@ -230,16 +215,12 @@ public static boolean checkIntegerFinal(String testInteger) {
 }
 ```
 
-
 This version delivered 10× to 50× better performance than the original --- nearly matching Kirk's own unrolled switch-case variant (labeled as Best on a chart below).
 ![](fj_art1_results_5-700x411.png)
 
-<br />
-
 At that point, I realized something: The process of optimization itself teaches more than the final result. Each step --- exception removal, regex replacement, loop simplification --- peeled away layers of waste. The outcome wasn't just faster code. It was clearer thinking.
 
-The Economics of Efficiency
----------------------------
+## The Economics of Efficiency
 
 Cloud computing gives us infinite scalability --- and infinite temptation to ignore waste.
 
@@ -263,8 +244,7 @@ Efficiency scales people, not just servers.
 
 Compute equals energy. Wasteful software silently increases carbon footprint. Optimized code isn't just cheaper --- it's greener. Cloud efficiency and sustainability start at the keyboard, not in the billing dashboard.
 
-The Art, Not the Algorithm
---------------------------
+## The Art, Not the Algorithm
 
 Performance tuning is less about syntax and more about craftsmanship. It's about curiosity, attention to detail, and respect for the machine. It's about seeing beauty in precision and economy of motion.
 
@@ -276,8 +256,7 @@ Knuth wrote The Art of Computer Programming, not The Science, for a reason: scie
 
 Every optimization has a cost. The trick is knowing which costs are worth paying.
 
-Closing Thoughts -- Code as Craft
----------------------------------
+## Closing Thoughts -- Code as Craft
 
 My final implementation wasn't perfect. Kirk's was still a little faster. But that's not the point. The point is that software waste is invisible until you measure it. We've normalized inefficiency because the cloud hides it behind elasticity. We call it resilience, but it's often just overprovisioning.
 

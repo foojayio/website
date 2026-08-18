@@ -37,7 +37,6 @@ In the [release notes of Raspbian](http://downloads.raspberrypi.org/raspbian/rel
 * Oracle Java 7 and 8 replaced with OpenJDK 11
 ```
 
-
 So, if we start with a fresh new Raspbian OS, we indeed get this Java version result:
 
 ```
@@ -47,15 +46,13 @@ OpenJDK Runtime Environment (build 11.0.3+7-post-Raspbian-5)
 OpenJDK Server VM (build 11.0.3+7-post-Raspbian-5, mixed mode)
 ```
 
-
 This means we are already good to start any Java 11 based program!
 
 As JavaFX is no longer part of the Java JDK, since version 11, running a JavaFX program on the Raspberry Pi will not work out of the box.
 
 Luckily, we can use the Liberica JDK, which is provided by BellSoft. They have a version dedicated for the Raspberry Pi, which includes JavaFX, so you will be able to run a JavaFX application with a simple "java -jar yourapp.jar" start command.
 
-Installing Liberica JDK
------------------------
+## Installing Liberica JDK
 
 We only need the download link from their site to install an alternative Java JDK like this:
 
@@ -67,7 +64,6 @@ $ sudo update-alternatives --config javac
 $ sudo update-alternatives --config java
 ```
 
-
 When this is done, we can check the version again and it should look like this:
 
 ```
@@ -77,12 +73,10 @@ OpenJDK Runtime Environment (build 13-BellSoft+33)
 OpenJDK Server VM (build 13-BellSoft+33, mixed mode)
 ```
 
-
 On my test-Pi I even keeping different versions of LibericaJDK and switching is very easy with "update-alternatives".
 ![](https://webtechie.be/images/2020-04-08/java-versions-on-pi.png)
 
-Install Scripts on GitHub
--------------------------
+## Install Scripts on GitHub
 
 On [Github, in the sources](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_04_Java/scripts) of my book ["Getting started with Java on Raspberry Pi"](https://webtechie.be/books/), you can find install scripts for multiple versions of Liberica JDK, which already contain the correct download link for each one:
 ![](https://webtechie.be/images/2020-04-08/github-scripts.png)

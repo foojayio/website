@@ -28,8 +28,7 @@ The CDI specification is an important backbone of Jakarta EE as it brings severa
 
 We will also tell you a bit about the different scopes, the interceptor mechanism, and the Event system.
 
-Dependency Injection and Bean Scopes
-------------------------------------
+## Dependency Injection and Bean Scopes
 
 Instead of instantiating Java Objects yourself, it is sometimes easier to ask for an instance from a central location. It can handle the lifecycle for you when the instance needs to be created and can be disposed of. It will also have all its dependencies prepared and ready and can be enhanced with some interceptors related to logging, transaction, and security, for example.
 
@@ -59,7 +58,6 @@ bean-discovery-mode="annotated">
 </beans>
 ```
 
-
 The value annotated for the Bean Discovery mode indicates CDI should only consider explicitly annotated classes. But this configuration is optional and the beans.xml file doesn't need to be there to have the Dependency Injection functionality in your application.
 
 Let us conclude this section with a typical example of a CDI bean.
@@ -81,7 +79,6 @@ public class GreetingService {
 }
 ```
 
-
 It can be included in the JAX-RS greeting endpoint we defined in the previous blog using the jakarta.inject.Inject annotation.
 
 ```java
@@ -100,9 +97,7 @@ public class HelloResource {
 }
 ```
 
-
-Bean Initialisation
--------------------
+## Bean Initialisation
 
 If we define a CDI bean, the required dependencies are 'injected' were we have used the @Inject annotation. But in some cases, the service needs to perform some initialisation steps before it can be used. We indicate which method needs to be executed after the instance is created, the dependencies are injected but BEFORE the bean itself is injected into another bean.
 
@@ -119,9 +114,7 @@ public class GreetingService {
 }
 ```
 
-
-Interceptors
-------------
+## Interceptors
 
 Another important aspect of CDI is the ability to define interceptors. They define some cross-cutting concerns for your application. These code bits need to be applied to various parts of your code and ideally should be separated from it as they don't belong to the logic of a method. But they are very important as they handle the transactional, security, or logging aspects.
 
@@ -139,7 +132,6 @@ public class GreetingService {
 ﻿
 ```
 
-
 That is a custom annotation we have invented, so we need to define it. The special requirement here for the CDI interceptor is that we define it as an Interceptor Binding.
 
 ```java
@@ -149,7 +141,6 @@ That is a custom annotation we have invented, so we need to define it. The speci
 public @interface Timed {
 }
 ```
-
 
 We need also the code that needs to be executed whenever the annotated method will be executed. We can again define this very easily through some annotations.
 
@@ -170,7 +161,6 @@ public class TimedInterceptor {
 }
 ```
 
-
 The indication that it is the code for our timed interceptor is done through the annotations jakarta.interceptor.Interceptor and our custom interceptor binding annotation.
 
 This class needs to have a method that is annotated with jakarta.interceptor.AroundInvoke and must have a parameter of type jakarta.interceptor.InvocationContext, which gives us access to the context in which the interceptor execution is performed.
@@ -189,11 +179,9 @@ The interceptors are not applied automatically by the CDI implementation, we nee
 </beans>
 ```
 
-
 In the above example, we did not specify the namespace of the beans tag. This has the advantage that it can be used by different versions of Java EE and Jakarta EE (since the namespace changes between Java EE, Jakarta EE 8, and Jakarta EE 9) but we do not specify the bean discovery mode.
 
-CDI Events
-----------
+## CDI Events
 
 Another very powerful feature of the CDI framework is the ability to send Events from producer to consumers in a very efficient and decoupled way. In many applications, you have the requirement that some information or an event needs to be used by other parts of the application. Instead of direct coupling, you can choose a loose coupling so that producers and consumers don't have to know each other.
 
@@ -216,7 +204,6 @@ public class AddPersonEvent {
 }
 ```
 
-
 As you can see, no specific requirements for this class. You can store multiple objects in this payload class and in the above case, you can even use the Person class as Payload without the need to define a new class. Producing an event with the above payload can be done by injecting an instance of jakarta.enterprise.event.Event and execute the fire() method on it.
 
 ```java
@@ -226,7 +213,6 @@ private Event<AddPersonEvent> addPersonEvent;
 addPersonEvent.fire(new AddPersonEvent(person));
 ```
 
-
 The listener part can be any in any other CDI bean when you indicate that the method Observes events with that specific payload.
 
 ```
@@ -235,18 +221,15 @@ public void addPerson(@Observes AddPersonEvent addPersonEvent) {
 }
 ```
 
-
 As you can see, there is no coupling between the producer and the consumer of the CDI events. The only link they have is the payload class, AddPersonEvent in our example.
 
-Conclusion
-----------
+## Conclusion
 
 The Context and Dependency Injection specification provides you with some powerful features for the core of your Jakarta EE application. You can define beans that provide you services or keep data for a user request. You can define the lifecycle of those beans using annotations and define initialisation methods. You can also define an alternative, decorators and producers for CDI beans which I didn't cover in this blog. [Have a look at the documentation what is available and how you can use it.](https://docs.payara.fish/community/docs/documentation/payara-server/development-tools/cdi-dev-mode/README.html)
 
 Besides the basics of Dependency Injection, we saw also some other features that are available with the specification, defining interceptors, and using CDI events.
 
-Watch the Video
----------------
+## Watch the Video
 
 We've also created an associated video demonstration as part of our video series['Getting Started with Jakarta EE 9'.](https://www.youtube.com/playlist?list=PLFMhxiCgmMR8rWUcvrxiSQnKqyHk2knpi)
 

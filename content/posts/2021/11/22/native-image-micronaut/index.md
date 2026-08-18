@@ -23,8 +23,7 @@ frozen: false
 
 Last week, I wrote a native web app that queried the Marvel API [using Spring Boot](https://foojay.io/today/native-spring-boot/). This week, I want to do the same with the Micronaut framework.
 
-Creating a new project
-----------------------
+## Creating a new project
 
 Micronaut offers two options to create a new project:
 
@@ -50,8 +49,7 @@ In both options, you can configure the following parameters:
 
 The application's code is on [GitHub](https://github.com/micronaut-projects/micronaut-starter). You can clone and adapt it, but as far as I know, it's not designed with extension in mind (yet?).
 
-Bean configuration
-------------------
+## Bean configuration
 
 Micronaut's bean configuration relies on [JSR 330](http://javax-inject.github.io/javax-inject/). The JSR defines a couple of annotations, *e.g.* , `@Singleton` and `@Inject`, in the `jakarta.inject` package. Developers use them, and the service provider implements the specification.
 
@@ -65,7 +63,6 @@ class BeanFactory {
     fun messageDigest() = MessageDigest.getInstance("MD5")  // 3
 }
 ```
-
 
 1. Bean-generating class
 2. Regular scope annotation
@@ -81,9 +78,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-
-Controller configuration
-------------------------
+## Controller configuration
 
 Micronaut copied the `@Controller` annotation from Spring. You can use it in the same way. Likewise, annotate functions with the relevant HTTP method annotation.
 
@@ -96,9 +91,7 @@ class MarvelController() {
 }
 ```
 
-
-Non-blocking HTTP client
-------------------------
+## Non-blocking HTTP client
 
 Micronaut provides two HTTP clients: a declarative one and a low-level one. Both of them are non-blocking.
 
@@ -106,15 +99,12 @@ The declarative client is for simple use-cases, while the low-level is for more 
 
 <img decoding="async" class="aligncenter wp-image-50795 size-medium" src="client-api-700x415.png" alt="Micronaut Client API class diagram" width="700" height="415">
 
-<br />
-
 The usage is straightforward:
 
 ```kotlin
 val request = HttpRequest.GET<Unit>("https://gateway.marvel.com:443/v1/public/characters")
 client.retrieve(request, String::class.java)
 ```
-
 
 Remember that we should get parameters from the request to the application and propagate them to the request we make to the Marvel API. Micronaut can automatically bind such query parameters to method parameters with the `@QueryValue` annotation for the first part.
 
@@ -127,12 +117,9 @@ fun characters(
 )
 ```
 
-
 It's not possible to use Kotlin's string interpolation as these parameters are optional. Fortunately, Micronaut provides an `UriBuilder` abstraction, which follows the Builder pattern principles.
 
 <img decoding="async" class="aligncenter wp-image-50796 size-medium" src="uribuilder-api-700x455.png" alt="Micronaut URI Builder class diagram" width="700" height="455">
-
-<br />
 
 We can use it like this:
 
@@ -151,9 +138,7 @@ fun UriBuilder.queryParamsWith(params: Map<String, String?>) = apply {
 }
 ```
 
-
-Parameterization
-----------------
+## Parameterization
 
 Like Spring, Micronaut can bind application properties to Kotlin data classes. In Micronaut, the file is named `application.yml`. The file already exists and contains the `micronaut.application.name` key. We only need to add the additional data. I chose to put it under the same parent key, but there's no such constraint.
 
@@ -164,7 +149,6 @@ micronaut:
     marvel:
       serverUrl: https://gateway.marvel.com:443
 ```
-
 
 To bind, we need the help of two annotations:
 
@@ -177,12 +161,10 @@ data class MarvelProperties @ConfigurationInject constructor(  // 2
 )
 ```
 
-
 1. Bind the property class to the property file prefix
 2. Allow using a data class. The `@ConfigurationInject` needs to be set on the constructor: it's a sign that the team could improve Kotlin integration in Micronaut.
 
-Testing
--------
+## Testing
 
 Micronaut tests are based on the `@MicronautTest` annotation.
 
@@ -190,7 +172,6 @@ Micronaut tests are based on the `@MicronautTest` annotation.
 @MicronautTest
 class MicronautNativeApplicationTest
 ```
-
 
 We defined the properties of the above data class as non-nullable strings. Hence, we need to pass the value when the test starts. For that, Micronaut provides the `TestPropertyProvider` interface:
 
@@ -210,7 +191,6 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
 }
 ```
 
-
 The next step is to set up Testcontainers. Integration is provided out-of-the-box for popular containers, *e.g.*, Postgres, but not with the mock server. We have to write code to handle it.
 
 ```kotlin
@@ -228,7 +208,6 @@ class MicronautNativeApplicationTest {
     }
 }
 ```
-
 
 1. By default, one server is created for each test method. We want one per test class.
 2. Don't forget to start it explicitly!
@@ -293,7 +272,6 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
 }
 ```
 
-
 1. Inject the *reactive* client
 2. Inject the embedded server, *i.e.*, the application
 3. Retrieve the IP and the port from the mock server
@@ -301,8 +279,7 @@ class MicronautNativeApplicationTest : TestPropertyProvider {
 5. We need to block as the client is reactive
 6. There's no JSON assertion API. The easiest path is to deserialize in a `Model` class, and then assert the object's state.
 
-Docker and GraalVM integration
-------------------------------
+## Docker and GraalVM integration
 
 As with Spring, Micronaut provides two ways to create native images:
 
@@ -312,13 +289,11 @@ As with Spring, Micronaut provides two ways to create native images:
 mvn package -Dpackaging=native-image
 ```
 
-
 2. In Docker. It requires a local Docker installation. 
 
 ```bash
 mvn package -Dpackaging=docker-native
 ```
-
 
    Note that if you don't use a GraalVM JDK, you need to activate the \`graalvm\` profile.
 
@@ -326,14 +301,12 @@ mvn package -Dpackaging=docker-native
 mvn package -Dpackaging=docker-native -Pgraalvm
 ```
 
-
 With the second approach, the result is the following:
 
 ```
 REPOSITORY             TAG       IMAGE ID         CREATED          SIZE
 native-micronaut       latest    898f73fb44b0     33 seconds ago   85.3MB
 ```
-
 
 The layers are the following:
 
@@ -346,14 +319,12 @@ Cmp   Size  Command
      64 MB  #(nop) COPY file:106f24caede12d6d28c6c90d9a3ae33f78485ad71e4157125  #4
 ```
 
-
 1. Parent image
 2. Alpine glibc
 3. Additional packages
 4. Our native binary
 
-Miscellaneous comments
-----------------------
+## Miscellaneous comments
 
 I'm pretty familiar with Spring Boot, much less with Micronaut.  
 
@@ -363,8 +334,6 @@ Here are several miscellaneous comments.
 * Documentation matrix:Micronaut guides each offer a configuration matrix. You choose both the language and the build tool, and you'll read the guide in the exact desired flavor.
 
 <img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-50798" src="micronaut-guide-700x291.jpg" alt="Micronaut guide choice matrix screenshot" width="700" height="291">
-
-  <br />
 
   I wish more polyglot multi-platform frameworks' documentation would offer such a feature.
 * Configurable packaging:Micronaut parameterizes the Maven's POM `packaging` so you can override it, as in the above native image generation. It's *very* clever!
@@ -376,8 +345,7 @@ Here are several miscellaneous comments.
 
   The team is working toward KSP support, but it's an undergoing effort.
 
-Conclusion
-----------
+## Conclusion
 
 Micronaut achieves the same result as Spring Boot. The Docker image's size is about 20% smaller. It's also more straightforward, with fewer layers, and based on Linux Alpine.
 

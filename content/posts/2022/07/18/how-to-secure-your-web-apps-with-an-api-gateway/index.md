@@ -27,8 +27,7 @@ However, once you've set up such a gateway, you can use it for different purpose
 
 Today, I want to show you how to improve the security of web apps.
 
-Prevent sniffing
-----------------
+## Prevent sniffing
 
 Browsers are fantastic pieces of technology that try to make the life of users as comfortable as possible.
 
@@ -46,7 +45,6 @@ To prevent such catastrophic scenarios, one can set the [X-Content-Type-Options]
 ```
 X-Content-Type-Options: nosniff
 ```
-
 
 As an example, I'll use the [Apache APISIX API Gateway](https://apisix.apache.org/). Apache APISIX is built upon a plugin architecture. As its name implies, the [response-rewrite](https://apisix.apache.org/docs/apisix/plugins/response-rewrite/) plugin allows to modify the response, including HTTP response headers.
 
@@ -66,11 +64,9 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
 Apache APISIX will set the header on request matching the route. Since the route is a catchall, the browser will sniff response from no response.
 
-Prevent framing
----------------
+## Prevent framing
 
 Some malicious sites may embed your site in an HTML `iframe` to carry on attacks. For example, a malicious actor could devise the website `myshop.trustmebro.com` that embeds your legit webshop `myshop.legit.com`. Users browsing the former would believe they are browsing the latter.
 
@@ -97,11 +93,9 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
 At this point, compliant browsers will prevent bad actors from framing your website.
 
-HTTPS pinning
--------------
+## HTTPS pinning
 
 HTTPS allows security guarantees compared to plain HTTP:
 > Hypertext Transfer Protocol Secure (HTTPS) is an extension of the Hypertext Transfer Protocol (HTTP). It is used for secure communication over a computer network, and is widely used on the Internet. In HTTPS, the communication protocol is encrypted using Transport Layer Security (TLS) or, formerly, Secure Sockets Layer (SSL). The protocol is therefore also referred to as HTTP over TLS, or HTTP over SSL.
@@ -142,9 +136,7 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
-Fine-grained content control
-----------------------------
+## Fine-grained content control
 
 Many ways are available for an attacker to load malicious resources from your domain. If they can access the underlying website, they can add a \`\` tag and reference anything they'd want. that render content dynamically, *e.g.*, WordPress, are a favorite target among bad actors.
 
@@ -158,7 +150,6 @@ Here's a sample :
 ```
 Content-Security-Policy: default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; frame-ancestors 'self'; form-action 'self';
 ```
-
 
 The policy allows images, scripts, form submission, and CSS *from the same origin*. However, it disallows any other resources to load.
 
@@ -187,9 +178,7 @@ curl -i http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 The correct HTTP response headers can go a long way toward making your webapp more secure.
 

@@ -39,8 +39,7 @@ By the end of the tutorial, you will see:
 
 If you want the full code for this tutorial, check out the [GitHub repository](https://github.com/mongodb-developer/spring-sessions-mongodb-app).
 
-Prerequisites
--------------
+## Prerequisites
 
 Before starting, ensure you have the following installed:
 
@@ -54,18 +53,15 @@ The application expects a MongoDB connection string through the environment vari
 MONGODB_URI
 ```
 
-
 For example:
 
 ```
 export MONGODB_URI="mongodb+srv://<username>:<password>@cluster.mongodb.net/"
 ```
 
-
 The application configuration will append the database name automatically.
 
-Project Dependencies
---------------------
+## Project Dependencies
 
 We're going to start with a new Spring application. You can use [Spring Initializr](https://start.spring.io/) and make sure you are using Spring Boot 4.0+ to ensure compatibility with [Spring Session 4.0](https://docs.spring.io/spring-session/reference/whats-new.html) or higher. The Maven configuration for this project is shown below.
 
@@ -92,7 +88,6 @@ We're going to start with a new Spring application. You can use [Spring Initiali
 </dependencies>
 ```
 
-
 ### Spring Web
 
 spring-boot-starter-web provides an embedded web server, and the Spring MVC framework is used for building REST APIs. It includes annotations such as:
@@ -118,15 +113,13 @@ The most important dependency is:
 mongodb-spring-session
 ```
 
-
 This library replaces the default HTTP session implementation with a MongoDB-backed version.
 
 Instead of storing session state in memory inside the application container, sessions are persisted as documents in MongoDB. This allows multiple application instances to access the same session data.
 
 In a distributed system, this removes the dependency between a user session and a single server instance.
 
-Application Configuration
--------------------------
+## Application Configuration
 
 Next, we configure the MongoDB connection.
 
@@ -137,7 +130,6 @@ spring.mongodb.database=springSessions
 
 spring.mongodb.uri=${MONGODB_URI}&appName=${spring.application.name}
 ```
-
 
 Three properties are defined here.
 
@@ -153,13 +145,11 @@ The example above appends appName using \&. This assumes that your MONGODB_URI a
 mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
 ```
 
-
 If your URI already contains options like ?retryWrites=true, you can keep the configuration exactly as written:
 
 ```
 spring.mongodb.uri=${MONGODB_URI}&appName=${spring.application.name}
 ```
-
 
 However, if your URI does **not** contain a query section, appending \&appName will produce an invalid connection string. In that case, you should append the parameter using ? instead:
 
@@ -167,14 +157,12 @@ However, if your URI does **not** contain a query section, appending \&appName w
 spring.mongodb.uri=${MONGODB_URI}?appName=${spring.application.name}
 ```
 
-
 In short:
 
 * Use \&appName= if the URI already has query parameters.
 * Use ?appName= if the URI does not have one.
 
-Bootstrapping the Application
------------------------------
+## Bootstrapping the Application
 
 The entry point for the application is a standard Spring Boot class.
 
@@ -187,11 +175,9 @@ public class SpringSessionsMongodbAppApplication {
 }
 ```
 
-
 Nothing special happens here. The important detail is that we are not manually configuring session storage. Spring Boot will automatically wire everything together once the session configuration is enabled.
 
-Enabling MongoDB HTTP Sessions
-------------------------------
+## Enabling MongoDB HTTP Sessions
 
 To activate MongoDB-backed sessions, we add a configuration class.
 
@@ -202,13 +188,11 @@ public class SessionConfig {
 }
 ```
 
-
 The @EnableMongoHttpSession annotation instructs Spring to replace the default session management mechanism with the MongoDB-backed implementation provided by Spring Session. This annotation changes the underlying session storage model for the entire application.
 
 Controllers will continue to use the familiar HttpSession API, but session state will now be persisted in MongoDB.
 
-Building the Theme API
-----------------------
+## Building the Theme API
 
 The API exposes two endpoints.
 
@@ -245,7 +229,6 @@ public class ThemeController {
 }
 ```
 
-
 Two important things are happening here. First, the controller accepts an HttpSession object as a method parameter. Spring automatically provides this object for each request.
 
 Second, the controller interacts with the session using the standard API.
@@ -254,11 +237,9 @@ Second, the controller interacts with the session using the standard API.
 session.setAttribute("theme", theme);
 ```
 
-
 From the controller's perspective, this behaves exactly like a normal session. However, because Spring Session MongoDB is enabled, the session data is not stored in memory. Instead, it is persisted as a document in MongoDB. The controller does not need to know anything about that implementation detail.
 
-Running the Application
------------------------
+## Running the Application
 
 Start the application with:
 
@@ -266,25 +247,21 @@ Start the application with:
 mvn spring-boot:run
 ```
 
-
 The API will be available at:
 
 ```
 http://localhost:8080
 ```
 
-
 Now we can test the session behavior.
 
-Testing Session Behavior with curl
-----------------------------------
+## Testing Session Behavior with curl
 
 Using curl allows us to inspect HTTP headers and cookies directly. First, we create a session and store a theme preference.
 
 ```
 curl -i -c cookies.txt -X POST "http://localhost:8080/theme?theme=light"
 ```
-
 
 The response should look similar to this:
 
@@ -300,18 +277,15 @@ Content-Type: application/json
 }
 ```
 
-
 Several things happened here. Because the request did not include a session cookie, Spring created a new session. The theme value was stored as a session attribute, and Spring Session persisted the session in MongoDB. The server then returned a cookie called SESSION. The -c cookies.txt option instructs curl to save that cookie so it can be reused later.
 
-Reusing the Session
--------------------
+## Reusing the Session
 
 Next we send another request using the stored cookie.
 
 ```
 curl -i -b cookies.txt http://localhost:8080/theme
 ```
-
 
 Example response:
 
@@ -321,7 +295,6 @@ Example response:
  "sessionId":"b240e967-b2ea-4df5-ae68-90a6a51d310c"
 }
 ```
-
 
 The session ID is the same as the previous request. This confirms that the session was successfully resolved using the cookie.
 
@@ -335,8 +308,7 @@ Spring performed the following steps internally:
 
 From the application's perspective, this still looks like normal session usage.
 
-Inspecting the Session in MongoDB
----------------------------------
+## Inspecting the Session in MongoDB
 
 If you connect to MongoDB and inspect the springSessions database, you will see documents created by Spring Session representing each active HTTP session.
 
@@ -353,7 +325,6 @@ A session document might look similar to this:
   "attr": { "$binary": "..."}
 }
 ```
-
 
 Each field captures a different aspect of the session lifecycle.
 
@@ -373,7 +344,6 @@ The attr field stores the session attributes themselves. In our example, the con
 session.setAttribute("theme", theme);
 ```
 
-
 Spring serializes the session attributes and stores them in this field. When the session is loaded again, Spring deserializes the data and restores the attributes into the HttpSession object that your controller interacts with.
 
 Although the example only stores a single theme value, real applications typically store more meaningful session data. Common examples include:
@@ -391,15 +361,13 @@ This is particularly important in load-balanced environments. When a request arr
 
 In practice, this means your application can scale horizontally without losing the ability to maintain consistent session state across requests.
 
-Why This Matters
-----------------
+## Why This Matters
 
 In a single-node application, storing sessions in memory may appear sufficient. However, as soon as multiple application instances are introduced, this approach breaks down. Imagine a load-balanced system where a user sends the first request to server A. That server stores the session in memory. On the next request, the load balancer routes the user to server B. If sessions are stored locally, server B has no knowledge of that user's session. This leads to inconsistent application behavior. Many systems attempt to solve this with sticky sessions at the load balancer, but this approach reduces resilience and complicates scaling.
 
 Spring Session MongoDB solves this by moving session state into a shared datastore. Now every application instance can resolve the same session using the session identifier stored in the cookie.
 
-Conclusion
-----------
+## Conclusion
 
 Spring Session MongoDB allows Spring applications to externalize HTTP session storage without changing the programming model used by controllers. Developers can continue working with the familiar HttpSession API while the underlying session state is persisted in MongoDB.
 

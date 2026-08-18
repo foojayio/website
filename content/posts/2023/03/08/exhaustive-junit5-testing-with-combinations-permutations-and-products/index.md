@@ -70,7 +70,6 @@ The combinations of X are:
 [A, B, C]
 ```
 
-
 The permutations of X are:
 
 ```
@@ -81,7 +80,6 @@ The permutations of X are:
 [C, A, B]
 [C, B, A]
 ```
-
 
 The permutations of all combinations of X are:
 
@@ -104,7 +102,6 @@ The permutations of all combinations of X are:
 [C, B, A]
 ```
 
-
 Where \[\] denotes a sequence of no elements. As can be seen from the sequences above, the number of variants will increase very rapidly as the number of set members increases.
 
 This puts a practical limit on the exhaustiveness of the test one can write.
@@ -120,7 +117,6 @@ The product of s1 and s2 is:
 [B, 2]
 ```
 
-
 Products have many similarities with database "join" operations and relate to nested loops.
 
 ### The Test Framework
@@ -133,7 +129,6 @@ Combination.of("A", "B", "C")
     .forEach(System.out::println)
 ```
 
-
 This prints all the combinations of {A, B, C} the result being the same as in the previous chapter. In the same way, the following example will print out all the permutations of {A, B, C}:
 
 ```
@@ -141,7 +136,6 @@ This prints all the combinations of {A, B, C} the result being the same as in th
 Permutation.of("A", "B", "C")
     .forEach(System.out::println)
 ```
-
 
 In this following example, we combine the capabilities of combinations and permutations:
 
@@ -151,7 +145,6 @@ Combination.of("A", "B", "C")
     .flatMap(Permutation::of)
     .forEach(System.out::println)
 ```
-
 
 The methods above produce a Stream of Collection elements allowing easy adaptations to other frameworks such as JUnit5.
 
@@ -165,7 +158,6 @@ Product.of(strings, integers)
         .forEach(System.out::println);
 ```
 
-
 This will print:
 
 ```
@@ -175,7 +167,6 @@ Product2Impl{first=B, second=1}
 Product2Impl{first=B, second=2}
 ```
 
-
 If a more recent Java version is used, the following scheme would typically be used instead:
 
 ```
@@ -183,7 +174,6 @@ record StringInteger(String string, Integer integer){}
 Product.of(strings, integers, StringInteger::new)
         .forEach(System.out::println);
 ```
-
 
 This will produce:
 
@@ -193,7 +183,6 @@ StringInteger[string=A, integer=2]
 StringInteger[string=B, integer=1]
 StringInteger[string=B, integer=2]
 ```
-
 
 In my opinion, the above is better than the default Product2Impl tuple because the record is a "nominal tuple" where the names and types of the state elements are declared in the record header compared to the Product2Impl which relies on generic types and "first" and "second" as names.
 
@@ -211,7 +200,6 @@ list.addAll(Arrays.asList(2, 3, 4, 5))
 list.removeIf(ODD)
 Where Predicate<Integer> ODD = v -> v % 2 == 1.
 ```
-
 
 In this article, we will initially use ArrayList and LinkedList for comparison.
 
@@ -251,7 +239,6 @@ Stream<DynamicTest> validate() {
 }
 ```
 
-
 This is the entire solution, and when run under IntelliJ (or other similar tools), the following tests will be performed (only the first 16 of the 326 tests are shown for brevity):
 
 ![](Screen-Shot-2023-02-27-at-9.52.42-AM.png)
@@ -274,7 +261,6 @@ Stack
 Vector
 ```
 
-
 To expand the concept, we begin by creating a collection of List constructors:
 
 ```
@@ -286,7 +272,6 @@ private static final Collection<Supplier<List<Integer>>> CONSTRUCTORS =
             Stack::new,
             Vector::new);
 ```
-
 
 The reason for working with constructors rather than instances is that we need to be able to create new List implementations for each dynamic test.
 
@@ -323,7 +308,6 @@ Stream<DynamicTest> validateMany() {
 }
 ```
 
-
 Strictly, this is a bit of cheating as a single dynamic test contains several subtests for a plurality of List pairs.
 
 However, It would be reasonably easy to modify the code above to flatMap() in the various assertions under separate dynamic tests. This is left to the reader as an exercise.
@@ -346,7 +330,6 @@ long poc6 = Combination.of(1, 2, 3, 4, 5, 6)
         .flatMap(Permutation::of)
         .count();
 ```
-
 
 The stream above will, unsurprisingly, return 1,957 as there are six input elements.
 

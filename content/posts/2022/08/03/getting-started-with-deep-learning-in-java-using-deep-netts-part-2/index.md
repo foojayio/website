@@ -26,8 +26,7 @@ In [part 1](https://foojay.io/today/getting-started-with-deep-learning-in-java-u
 
 If you have more complex challenges, more data, and need better performance or just want friendly tools to quickly try and learn AI, you should take a look at Deep Netts Professional Edition.
 
-Download \& Installation
-------------------------
+## Download \& Installation
 
 1. Download Deep Netts from the [official download page](http://https://deepnetts.com:10172/download/faces/user/signUpAndDownload.xhtml "official download page").
 2. Run Maven installation scripts provided by the downloaded package to install Deep Netts JARs into your local Maven repo.
@@ -36,8 +35,7 @@ A detailed step by step installation guide is [available here](http://https://ww
 
 Note that the free download is fully functional and that it can be used for development. If you build a working prototype, it is possible to get a free low-volume production license.
 
-Example: Hand-Written Digits Recognition
-----------------------------------------
+## Example: Hand-Written Digits Recognition
 
 This example shows how to build a deep learning model in Java that can learn how to classify images, given the set of example images with corresponding category labels/classes.
 
@@ -55,7 +53,6 @@ imageSet.setInvertImages(true);
 imageSet.loadLabels(new File(labelsFile));
 imageSet.loadImages(new File(trainingFile), 1000);
 ```
-
 
 Convolutional neural networks are type of deep learning models which are capable to learn patterns in image pixels, and they will be used to demonstrate how Deep Netts can be used to accomplish this.
 
@@ -79,11 +76,9 @@ ConvolutionalNetwork neuralNet = ConvolutionalNetwork.builder()
             .build();
 ```
 
-
 Full source of this example with comments and more detailed explanation is available at [GitHub](https://github.com/deepnetts/How-to-Get-Started-With-Deep-Learning-in-Java) and [step by step tutorial](https://www.deepnetts.com/blog/using-deep-learning-in-java-for-image-recognition.html).
 
-Deep Learning IDE
------------------
+## Deep Learning IDE
 
 Deep Netts IDE provides visual tools and wizards that simplify building, debugging, and experimenting with various AI-related development activities.
 
@@ -93,8 +88,7 @@ It is built on top of [Apache NetBeans](https://netbeans.apache.org/), following
 
 ![](https://miro.medium.com/max/1750/0*ilQdE60YGfg6BUBd)
 
-Differences Compared to Community Edition
------------------------------------------
+## Differences Compared to Community Edition
 
 The professional edition provides tools and features that can significantly improve and simplify building your AI models.
 
@@ -104,8 +98,7 @@ This includes:
 2. **IDE with visual tools and debugger.** Highly productive environment, enables understanding and fixing models and data.
 3. **Improved algorithms.** And other features that provide faster training and higher accuracy.
 
-Links
------
+## Links
 
 * [Deep Netts download](https://deepnetts.com:10172/download/faces/user/signUpAndDownload.xhtml)
 * [Fulls source of the example on GiHub](https://github.com/deepnetts/How-to-Get-Started-With-Deep-Learning-in-Java)

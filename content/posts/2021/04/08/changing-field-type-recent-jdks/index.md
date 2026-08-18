@@ -46,7 +46,6 @@ class Foo {
 }
 ```
 
-
 Take some time to guess the result of executing this program when running it with a JDK 8.
 
 Here's the relevant class diagram to help you:
@@ -62,7 +61,6 @@ Exception in thread "main" java.lang.NoSuchFieldException: type
     at java.base/java.lang.Class.getDeclaredField(Class.java:2549)
     at ch.frankel.blog.FirstAttempt.main(FirstAttempt.java:12)
 ```
-
 
 The exception explicitly mentions line 12: `Field.class.getDeclaredField("type")`. It seems as if the implementation of the `Field` class changed.
 
@@ -83,7 +81,6 @@ public final class Field extends AccessibleObject implements Member {
     // ...
 }
 ```
-
 
 1. Interestingly, the `field` type is there.
 
@@ -117,7 +114,6 @@ static {
 }
 ```
 
-
 1. All of the `Field` attributes are filtered out!
 
 For this reason, none of the attributes of `Field` are accessible via reflection!
@@ -145,7 +141,6 @@ var hidden = field.get(foo);
 System.out.println(hidden);
 ```
 
-
 But running the code yields the following:
 
 ```
@@ -156,7 +151,6 @@ Exception in thread "main" java.lang.IllegalArgumentException: Can not set int f
     at java.base/java.lang.reflect.Field.set(Field.java:793)
     at ch.frankel.blog.FinalAttempt.main(FinalAttempt.java:16)
 ```
-
 
 Though the code compiles and runs, it throws at `field.set(foo, "This should print 5!")`. We reference the `type` field and can change it without any issue, but it still complains.
 
@@ -177,7 +171,6 @@ public Field getDeclaredField(String name)
     return getReflectionFactory().copyField(field);      // 1
 }
 ```
-
 
 1. Return a copy of the `Field` object, not the `Field` itself.
 

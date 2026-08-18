@@ -25,8 +25,7 @@ frozen: false
 
 **TL;DR:** We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 minutes---starting at just **$5/month.** One-click deployment, auto-scaling, automatic redeployments, and zero downtime included.
 
-Cloud-Native BoxLang Has Never Been Easier
-------------------------------------------
+## Cloud-Native BoxLang Has Never Been Easier
 
 Today, we're excited to announce the BoxLang DigitalOcean Starter Template---a complete, production-ready solution that takes you from zero to deployed BoxLang application in minutes, not hours.
 

@@ -42,7 +42,6 @@ We configure JCStress tests using annotations provided by the JCStress framework
 @Outcome: Describes the test outcome, and how to deal with it.
 ```
 
-
 This is a basic example of the JCStress test using the annotations above:
 
 ```java
@@ -71,7 +70,6 @@ public class APISample_01_Simple {
 
 }
 ```
-
 
 Following are few important points about the above test:
 
@@ -103,7 +101,6 @@ mvn archetype:generate \
  -Dversion=1.0
 ```
 
-
 [This](https://github.com/Vipin-Sharma/jcstresstest) is a Github project created using the above command.
 
 Running tests, if we have not created any test it will execute default test available.
@@ -114,13 +111,11 @@ mvn clean install
 java -jar target/jcstress.jar
 ```
 
-
 In case we want to execute a particular test use -t option like below
 
 ```
 java -jar target/jcstress.jar -t ConcurrencyTest
 ```
-
 
 Open test report:
 
@@ -129,7 +124,6 @@ Open test report:
 ```java
 firefox results/index.html
 ```
-
 
 ### More JCStress APIs
 
@@ -152,7 +146,6 @@ C:  char
 D:  double
 L:  object
 ```
-
 
 With the help of this, we can try to find a pre canned Result class in JCStress, for example:
 
@@ -177,7 +170,6 @@ Following are the annotations to add the descriptions and references:
 @Ref("http://openjdk.java.net/projects/code-tools/jcstress/")
 ```
 
-
 ### JCStress Options
 
 #### Vm Options
@@ -197,7 +189,6 @@ JCStress has got a couple of helpful command line options, we can pass option -h
 java -jar target/jcstress.jar -h
 ```
 
-
 Some important options are:
 
 ```
@@ -206,7 +197,6 @@ Test name(-t)
 verbose result (-v)
 Number of CPUs used (-c)
 ```
-
 
 ***option -m***sets the test mode, from sanity to stress, going from simple test to more rigorous, and for concurrency issues more rigorous is more helpful. At least once we should run our test with stress option, and then we can run tests in the quick mode as part of CI. Following are sample commands to run different modes:
 
@@ -217,7 +207,6 @@ java -jar target/jcstress.jar -t ConcurrencyTest -m default
 java -jar target/jcstress.jar -t ConcurrencyTest -m tough
 java -jar target/jcstress.jar -t ConcurrencyTest -m stress
 ```
-
 
 ### Conclusion
 

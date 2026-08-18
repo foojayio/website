@@ -21,8 +21,7 @@ FXSkins is a collection of new Skins for existing JavaFX controls. These Skins w
 
 This library is targeted for the most recent Java versions.
 
-FXSkins Details
----------------
+## FXSkins Details
 
 ![FXSkins ScrollPane Skin](ScrollPane4.gif)
 
@@ -40,8 +39,7 @@ I've made sure, by defining new styles, that by default FXSkins new features and
 
 I've also took the opportunity to add one new Skin to FXSkins (non existing in JMetro), the Conscious ScrollPane Skin, which you can see in the animated image above. You can check out more details about it in the [FXSkins documentation page](https://pixelduke.com/fxskins/). Personally, I think, this can be a nice new addition.
 
-Wrapping Up
------------
+## Wrapping Up
 
 JMetro will, in a near future version, start using FXSkins. This means I'll be removing all Skins currently present in JMetro repository. JMetro will also add its own new style for the new Conscious ScrollPane Skin through CSS.
 

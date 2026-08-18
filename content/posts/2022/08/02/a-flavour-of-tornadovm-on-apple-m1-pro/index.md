@@ -40,7 +40,6 @@ $ brew install wget
 $ brew install maven
 ```
 
-
 ### 2. Run TornadoVM Installer
 
 Now that prerequisites are in place, the next step is to use the TornadoVM installer which will download, install all dependencies, and build TornadoVM. In the example below, TornadoVM is installed with OpenJDK 11 and the OpenCL backend; which is the only backend that can currently operate on Apple M1 Pro.
@@ -53,7 +52,6 @@ $ cd TornadoVM
 $ ./scripts/tornadoVMInstaller.sh --jdk11 --opencl
 ```
 
-
 Once the installer script is completed, users can source the script that holds all the paths that need to be exported before they run TornadoVM.
 
 Be aware that this step has to be run every time that a new terminal process begins. Alternatively, you can add that command in your *bashrc* or *zsh* profile.
@@ -63,20 +61,17 @@ $ source source.sh
 $ echo 'source <path-to-TornadoVM>/TornadoVM/source.sh' >> ~/.zprofile
 ```
 
-
 If you want to rebuild TornadoVM using the same JDK (OpenJDK 11) with the installation, you can type:
 
 ```
 $ make jdk-11-plus
 ```
 
-
 Now that TornadoVM is installed in your system, let's see which devices are detected as OpenCL compatible by running:
 
 ```
 $ tornado --devices
 ```
-
 
 ![](devices-m1-pro.png)
 
@@ -103,7 +98,6 @@ We opted to run the Matrix Multiplication application for two dimensional matric
 ```
 $ tornado --threadInfo -Ds0.t0.device=0:1 -m tornado.examples/uk.ac.manchester.tornado.examples.compute.MatrixMultiplication2D 2048
 ```
-
 
 The result is 738.5x performance increase compared to a single threaded execution, as shown below.  
 ![](mxm-m1-pro-700x227.png)

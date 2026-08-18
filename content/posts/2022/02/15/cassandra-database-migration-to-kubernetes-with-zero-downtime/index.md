@@ -28,8 +28,7 @@ K8ssandra is a cloud-native distribution of the Apache Cassandra® database that
 
 As an Apache Cassandra user, your expectation should be that migrating to K8ssandra would happen without downtime. To make that happen with "classic" clusters running on virtual machines or bare metal instances, you will use the datacenter (DC) switch technique which is commonly used in the Cassandra community to transfer clusters to different hardware or environments. The good news is that it's not very different for clusters running in Kubernetes as most Container Network Interfaces (CNI) will provide routable pod IPs.
 
-Routable pod IPs in Kubernetes
-------------------------------
+## Routable pod IPs in Kubernetes
 
 A common misconception about Kubernetes networking is that services are the only way to expose pods outside the cluster and that pods themselves are only reachable directly from within the cluster.
 
@@ -40,8 +39,7 @@ The same documentation tells us that the default CNI used in AWS EKS, Azure AKS 
 
 This is necessary because Cassandra nodes in both datacenters will need to be able to communicate with each other without having to go through services. Each Cassandra node stores the list of all the other nodes in the cluster in the `system.peers(_v2)` table and communicates with them using the IP addresses that are stored there. If pod IPs aren't routable, there's no (easy) way to create a hybrid Cassandra cluster that would span outside of the boundaries of a Kubernetes cluster.
 
-Database Migration using Cassandra Datacenter Switch
-----------------------------------------------------
+## Database Migration using Cassandra Datacenter Switch
 
 The traditional technique to migrate a cluster to a different set of hardware or environment is to add up a new datacenter to the cluster whose nodes will be located in the target infrastructure, configure keyspaces so that Cassandra replicates data to the new DC, switch traffic to the new DC once it's up to date, and then decommission the old infrastructure.
 
@@ -55,8 +53,7 @@ Here are the steps we'll go through to perform the migration:
 * Switch traffic over to the K8ssandra datacenter.
 * Decommission the original Cassandra datacenter.
 
-Performing the migration
-------------------------
+## Performing the migration
 
 ### Initial State
 
@@ -73,7 +70,6 @@ UN  172.31.4.217   10.2 GiB  16      100.0%            9a9b5e8f-c0c2-404d-95e1-3
 UN  172.31.38.15   10.2 GiB  16      100.0%            1e6a9077-bb47-4584-83d5-8bed63512fd8  us-west-2b
 UN  172.31.22.153  10.2 GiB  16      100.0%            d6488a81-be1c-4b07-9145-2aa32675282a  us-west-2a
 ```
-
 
 In the AWS console, we can access the details of a node in the EC2 service and locate its VPC id which we'll need later to create a peering connection with the EKS cluster VPC:
 ![](image-1536x722-1-1024x481.png) Finding the VPC id
@@ -96,14 +92,12 @@ export TF_VAR_resource_owner=adejanovski
 export TF_VAR_region=us-west-2
 ```
 
-
 We go to the env directory and initialize our Terraform files:
 
 ```
 cd env
 terraform init
 ```
-
 
 We can then update the `variables.tf` file and adjust it to our needs:
 
@@ -141,7 +135,6 @@ variable "private_cidr_block" {
 }
 ```
 
-
 Make sure the private CIDR blocks are different from the ones used in the EC2 cluster VPC, otherwise you may end up with IP addresses conflicts.
 
 Now create the EKS cluster and the three worker nodes:
@@ -158,7 +151,6 @@ Do you want to perform these actions in workspace "eks-experiment"?
   Enter a value: yes
 ```
 
-
 The operation will take a few minutes to complete and output something similar to this at the end:
 
 ```
@@ -173,7 +165,6 @@ cluster_version = "1.20"
 connect_cluster = "aws eks --region us-west-2 update-kubeconfig --name dev-adejanovski-migration-cluster-eks-cluster"
 ```
 
-
 Note the `connect_cluster` command which will allow us to create the kubeconfig context entry to interact with the cluster using `kubectl`:
 
 ```
@@ -181,7 +172,6 @@ Note the `connect_cluster` command which will allow us to create the kubeconfig 
 
 Updated context arn:aws:eks:us-west-2:3373455535488:cluster/dev-adejanovski-migration-cluster-eks-cluster in /Users/adejanovski/.kube/config
 ```
-
 
 We can now check the list of worker nodes in our k8s cluster:
 
@@ -192,7 +182,6 @@ ip-10-0-1-107.us-west-2.compute.internal   Ready    <none>   5m   v1.20.4-eks-6b
 ip-10-0-2-34.us-west-2.compute.internal    Ready    <none>   5m   v1.20.4-eks-6b7464
 ip-10-0-3-239.us-west-2.compute.internal   Ready    <none>   5m   v1.20.4-eks-6b7464
 ```
-
 
 ### VPC Peering and Security Groups
 
@@ -219,7 +208,6 @@ system       system_distributed  system_traces  system_virtual_schema
 system_auth  system_schema       system_views   tlp_stress
 ```
 
-
 Several system keyspaces use the special `LocalStrategy` and are not replicated across nodes. They contain only node specific information and cannot be altered in any way.
 
 We'll alter the following keyspaces to make them use NTS and only put replicas on the existing datacenter:
@@ -237,7 +225,6 @@ We will now run the following command on all the above keyspaces using the exist
 cqlsh> ALTER KEYSPACE <keyspace_name> WITH replication = {'class': 'NetworkTopologyStrategy', 'us-west-2': 3};
 ```
 
-
 Make sure client traffic is pinned to the `us-west-2` datacenter by specifying it as the local datacenter. This can be done by using the `DCAwareRoundRobinPolicy` in some older versions of the Datastax drivers or by specifying it as local datacenter when creating a new `CqlSession` object in the 4.x branch of the Java Driver:
 
 ```
@@ -245,7 +232,6 @@ CqlSession session = CqlSession.builder()
     .withLocalDatacenter("us-west-2")
     .build();
 ```
-
 
 More information can be found in the drivers documentation.
 
@@ -315,7 +301,6 @@ reaper:
   enabled: false
 ```
 
-
 Note that the cluster name must match the value used for the EC2 Cassandra nodes and the datacenter should be named differently than the existing one(s). We will only install Cassandra in our K8ssandra datacenter, but other components could be deployed as well during this phase.
 
 Let's deploy K8ssandra and have it join the Cassandra cluster:
@@ -331,20 +316,17 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-
 You can monitor the logs of the Cassandra pods to see if they're joining appropriately:
 
 ```
 kubectl logs pod/adejanovski-migration-cluster-k8s-1-r1-sts-0 -c server-system-logger -n k8ssandra --follow
 ```
 
-
 Cass-operator will only start one node at a time so if you get a message looking like the following, try checking the logs of another pod:
 
 ```
 tail: can't open '/var/log/cassandra/system.log': No such file or directory
 ```
-
 
 If VPC peering was done appropriately, the nodes should join the cluster one by one and after a while, `nodetool status` should give an output that looks like this:
 
@@ -368,7 +350,6 @@ UN  172.31.38.15   10.2 GiB   16      100.0%            1e6a9077-bb47-4584-83d5-
 UN  172.31.22.153  10.2 GiB   16      100.0%            d6488a81-be1c-4b07-9145-2aa32675282a  us-west-2a
 ```
 
-
 ### Rebuilding the new datacenter
 
 ![](image-3.png) Replicating data to the new datacenter by rebuilding
@@ -379,13 +360,11 @@ Now that our K8ssandra datacenter has joined the cluster, we will alter the repl
 cqlsh> ALTER KEYSPACE <keyspace_name> WITH replication = {'class': 'NetworkTopologyStrategy', 'us-west-2': '3', 'k8s-1': '3'};
 ```
 
-
 After altering all required keyspaces, rebuild the newly added nodes by running the following command for each Cassandra pod:
 
 ```
 % kubectl exec -it pod/adejanovski-migration-cluster-k8s-1-r1-sts-0 -c cassandra -n k8ssandra -- nodetool rebuild us-west-2
 ```
-
 
 Once all three nodes are rebuilt, the load should be similar on all nodes:
 
@@ -409,7 +388,6 @@ UN  172.31.38.15   10.32 GiB  16      100.0%            1e6a9077-bb47-4584-83d5-
 UN  172.31.22.153  10.32 GiB  16      100.0%            d6488a81-be1c-4b07-9145-2aa32675282a  us-west-2a
 ```
 
-
 ***Note that K8ssandra will create a new superuser and that the existing users in the cluster will be retained as well after the migration. You can forcefully recreate the existing superuser credentials in the K8ssandra datacenter by adding the following block in the "cassandra" section of the Helm values file:***
 
 ```
@@ -419,7 +397,6 @@ UN  172.31.22.153  10.32 GiB  16      100.0%            d6488a81-be1c-4b07-9145-
       secret: "superuser-password"
       username: "superuser-name"
 ```
-
 
 ### Switching traffic to the new datacenter
 
@@ -437,13 +414,11 @@ Once all the client apps/services have been restarted, we can alter our keyspace
 cqlsh> ALTER KEYSPACE <keyspace_name> WITH replication = {'class': 'NetworkTopologyStrategy', 'k8s-1': '3'};
 ```
 
-
 Then `ssh` into each of the Cassandra nodes in `us-west-2` and run the following command to decommission them:
 
 ```
 % nodetool decommission
 ```
-
 
 They will appear as leaving (UL) while the decommission is running:
 
@@ -467,7 +442,6 @@ UN  172.31.38.15   10.32 GiB  16      0.0%              1e6a9077-bb47-4584-83d5-
 UL  172.31.22.153  10.32 GiB  16      0.0%              d6488a81-be1c-4b07-9145-2aa32675282a  us-west-2a
 ```
 
-
 The operation should be fairly fast as no streaming will take place since we no longer have keyspaces replicated on `us-west-2`.
 
 Once all three nodes were decommissioned, we should be left with the `k8s-1` datacenter only:
@@ -483,13 +457,11 @@ UN  10.0.2.66  10.3 GiB  16      100.0%            b1409a2e-cba1-482f-9ea6-c895b
 UN  10.0.1.77  10.3 GiB  16      100.0%            78c53702-7a47-4629-a7bd-db41b1705bb8  r1
 ```
 
-
 As a final step, we can now delete the VPC peering connection which is no longer necessary.
 
 Note that the cluster can run in hybrid mode for as long as necessary. There's no requirement to delete the `us-west-2` datacenter if it makes sense to keep it alive.
 
-Conclusion
-----------
+## Conclusion
 
 We have seen today that it was possible to migrate existing Cassandra clusters to K8ssandra without downtime, leveraging flat networking to allow Cassandra nodes running in VMs to connect to Cassandra pods running in Kubernetes directly.
 

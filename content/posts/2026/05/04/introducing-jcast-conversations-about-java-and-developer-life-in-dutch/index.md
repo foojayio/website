@@ -24,8 +24,7 @@ The Java community thrives on sharing knowledge and experiences. Most content is
 
 That's why we created JCast, a podcast for the Dutch-speaking developer community. Moreover, today we're excited to launch Season 2!
 
-Season 2 Starts with Frank Delporte
------------------------------------
+## Season 2 Starts with Frank Delporte
 
 For our second season opener, we sat down with Frank Delporte. He's well-known in the Java community as a Java Champion. Additionally, he's a Java Developer, Technical Writer at Azul, Blogger, and Author of "Getting started with Java on Raspberry Pi". Furthermore, he's a Pi4J Contributor.
 
@@ -35,8 +34,7 @@ Ultimately, it's a conversation about code as communication. About bridging hard
 
 *Listen now at [jcast.dev](https://jcast.dev)*
 
-What is JCast?
---------------
+## What is JCast?
 
 JCast is a podcast about IT, dev life, and soft skills. As we like to say: "gezonde meningsverschillen" (healthy disagreements).
 
@@ -76,8 +74,7 @@ Communication. Understanding people. Navigating team dynamics. And yes, those "g
 
 Being a good developer isn't just about writing perfect code. It's about the whole picture.
 
-From Season 1 to Season 2
--------------------------
+## From Season 1 to Season 2
 
 Season 1 brought us 12 episodes of honest conversations. Capacity planning. Developer hobbies. New Year's resolutions. The real challenges of modern development.
 
@@ -85,8 +82,7 @@ Season 2 continues that journey with even more inspiring guests. We're kicking o
 
 More exciting conversations are coming. We can't wait to share them with you.
 
-Where to Listen
----------------
+## Where to Listen
 
 JCast is available on all major podcast platforms:
 
@@ -96,8 +92,7 @@ JCast is available on all major podcast platforms:
 
 Start with Season 2, Episode 1 featuring Frank Delporte. Available now!
 
-Final Thoughts
---------------
+## Final Thoughts
 
 JCast is our contribution to the Dutch-speaking developer community. A place where technical excellence meets honest conversation. Where we can discuss both the 'how' and the 'why' of what we do.
 

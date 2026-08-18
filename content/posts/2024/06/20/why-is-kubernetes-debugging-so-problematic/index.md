@@ -39,8 +39,6 @@ This article will walk you through the intricacies of Kubernetes debugging, offe
 
 {{< youtube xkOekt02mNY >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
 ### The Immutable Nature of Containers
@@ -100,8 +98,6 @@ Ephemeral containers, by their nature, can access sensitive information within t
 ### Interlude: The Role of Observability
 
 {{< youtube bRnOGb7rUV4 >}}
-
-<br />
 
 While tools like `kubectl exec` and `kubectl debug` are invaluable for troubleshooting, they are not replacements for comprehensive observability solutions. Observability allows you to monitor, trace, and log the behavior of your applications in real-time, providing deeper insights into issues without the need for intrusive debugging sessions.
 

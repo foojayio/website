@@ -35,8 +35,7 @@ For example, prior to COVID-19, most financial transactions were processed using
 
 When introducing such new capabilities, maintaining **backward compatibility** is imperative so legacy clients continue functioning without disruption. ***API versioning***provides a structured way to evolve APIs while preserving existing functionality, allowing developers to deliver new features without breaking old integrations.
 
-What is API versioning?
------------------------
+## What is API versioning?
 
 **API versioning** is a feature that helps clients and customers access new functionalities introduced through new API endpoints in an existing application. It ensures **backward compatibility**, allowing both old and new clients to use the service without disruption.
 
@@ -51,8 +50,7 @@ The **core strategies of API versioning** in Spring are as follows:
 5. **ApiVersionDeprecationHandler**---This component manages deprecation notifications using the standard ApiVersionDeprecationHandler, informing clients when they are using deprecated API versions.
 6. **Request Mapping**---The ApiVersionStrategy integrates with Spring's request mapping mechanism to correctly map incoming requests to the corresponding versioned controller methods.
 
-API Versioning In Action
-------------------------
+## API Versioning In Action
 
 This guide explains how to set up, build, and run the API versioning and project generated using [Spring Initializr](https://start.spring.io/)
 
@@ -113,7 +111,6 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
-
 * **Path Segment Versioning**
 
 ```java
@@ -137,4 +134,3 @@ public class WebConfig implements WebMvcConfigurer {
     }
 }
 ```
-

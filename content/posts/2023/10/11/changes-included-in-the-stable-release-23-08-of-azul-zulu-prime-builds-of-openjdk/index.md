@@ -32,8 +32,7 @@ frozen: false
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a stream build becomes the new stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the latest stable release, 23.08.01.0.
 ![](Azul-Prime-Stable-2308-1024x400.jpg)
 
-Changes Included in 23.08.1.0
------------------------------
+## Changes Included in 23.08.1.0
 
 As stable builds overlap, your system should be on the 23.02-stable line, and there are now four months of overlap with the 23.08-stable builds. Let's look at some of the most significant changes between 23.02 and 23.08 and the changes included in the new Stable Build 23.08.01.00 released on September 26, 2023.
 
@@ -130,8 +129,7 @@ Due to rebranding of Cloud Native Compiler to Optimizer Hub, some options have b
 
 ZVision and ZVRobot components have been deprecated and are no longer actively developed. While we still support these components, we encourage users to switch to [Java Flight Recorder](http://doc-builder.azulsystems.com:8081/prime/release/23.08/release-notes#https://docs.azul.com/prime/Java-Flight-Recorder), as ZVision and ZVRobot are planned for End-of-life with Azul Platform Prime 24.02.0.0.
 
-Resolved Issues
----------------
+## Resolved Issues
 
 | Issue ID  |                                                        Description                                                        |
 |-----------|---------------------------------------------------------------------------------------------------------------------------|
@@ -152,7 +150,6 @@ Resolved Issues
 | ZVM-27897 | Hadoop fails with Prime when -XX:+UseAES is used                                                                          |
 | ZVM-27098 | Incompatibility with Apache Flink with RocksDB                                                                            |
 
-Conclusion
-----------
+## Conclusion
 
 The new Stable Azul Zulu Prime Build of OpenJDK brings many improvements and fixes to bring a more performant and secure runtime to your environment.

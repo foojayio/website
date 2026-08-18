@@ -24,8 +24,6 @@ In two previous posts, we [explained how you can add executable Java code to you
 
 To achieve this full integration, we got [Gokul Chandrasekaran](https://www.linkedin.com/in/gokulchandrasekaran-jdoodle/)'s support to use the plugin version, and he also gave us some insight into the history and development of JDoodle.
 
-<br />
-
 ***Thanks, Gokul for your support in bringing*** an online Java editor to Foojay! Can you introduce yourself,***please?***
 
 Certainly! I'm Gokul the founder of JDoodle, and I have over 20 years of experience in the IT sector. My journey began as a Java developer, laying the foundation for my deep-rooted connection with the language.

@@ -24,8 +24,7 @@ In [Part 2](https://foojay.io/today/junit-5-testing-basics/), we looked at the b
 
 Below, we will cover some customization of names for tests. First, a justification of why names should be customized at all.
 
-Why Customize Names?
---------------------
+## Why Customize Names?
 
 When test class with a few test methods is run with JUnit, the output produced lists the name of the class and a status of execution for each method. The name of the class is used as the top level identifier:
 ![JUnitNoDisplayName](https://cgunturme.files.wordpress.com/2019/07/junitnodisplayname.png?w=840)
@@ -41,8 +40,7 @@ Clearly the latter image communicates a lot better about what was tested and wha
 
 Let's now look at how we customize the names in JUnit 5.
 
-Customizing Names in JUnit 5
-----------------------------
+## Customizing Names in JUnit 5
 
 There are primarily two ways in which JUnit5 allows for customizing names.
 
@@ -80,7 +78,6 @@ Adding a @DisplayName annotation on a given class or test method can help custom
 public class STest3PeriodsAndDurationsTest {
 ```
 
-
 #### DisplayName on a test method
 
 **Example** : **[@DisplayName](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest2LocalAndZonedDateTimesTest.java#L304)** (<https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest2LocalAndZonedDateTimesTest.java#L304>)
@@ -116,7 +113,6 @@ public class STest3PeriodsAndDurationsTest {
                 "The minute should be 35 when Zone Offset is GMT +0530");
     }
 ```
-
 
 ### Using DisplayNameGenerator
 
@@ -214,7 +210,6 @@ public class HandlesKataDisplayNames extends DisplayNameGenerator.Standard {
 }
 ```
 
-
 Once a DisplayNameGenerator is created, the second step is to associate it with a test class. This requires using the @DisplayNameGeneration annotation on the test class.
 
 #### Applying a DisplayNameGenerator
@@ -263,9 +258,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class TestSolutionDefaultConstructorInvocation {
 ```
 
-
-Summary
--------
+## Summary
 
 In this article, we saw how we can customize test classes and test method names to produce more meaningful output.
 

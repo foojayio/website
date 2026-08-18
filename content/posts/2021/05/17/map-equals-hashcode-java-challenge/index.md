@@ -27,8 +27,7 @@ What about going deeply into the Map, equals, and hashcode method by trying out 
 
 It's time to improve your Java skills with this Map equals hashcode Challenge...
 
-Map equals hashcode Challenge
------------------------------
+## Map equals hashcode Challenge
 
 What do you think will happen in the following code after running it?
 
@@ -59,7 +58,6 @@ public class MapEqualsChallenge {
 }
 ```
 
-
 A) 245  
 
 B) 123  
@@ -80,7 +78,6 @@ Another important point to note is the hashCode method that even though it's a b
 public int hashCode() { return 4000 << 2 * 2000 / 10000; }
 ```
 
-
 Pay attention that the equals method is actually comparing the length of the String. So, objects are going to be the same if the String length is the same.
 
 ```
@@ -92,7 +89,6 @@ Bran has 4 characters - it will replace Arya
 
 Jaime has 5 characters - it will replace Sansa
 ```
-
 
 As Bran has 4 characters and it was the last one to be inserted, it will replace Arya. Therefore the first value is 4.  
 

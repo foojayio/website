@@ -80,7 +80,6 @@ private final StyleableProperty<Color> color =
    new SimpleStyleableObjectProperty<>(COLOR, this, "color");
 ```
 
-
 As you can see, we defined a CssMetaData object called COLOR which defines the property that will be used in CSS.
 
 This CssMetaData object will be passed into the constructor of the SimpleStyleableObjectProperty and with this the link is established.
@@ -92,7 +91,6 @@ Now we need to define this CSS property in our CSS file for our control wich wou
     -color: red;
 }
 ```
-
 
 That was the color and now we need a BooleanProperty for the state of the control. For this we can also make use of a CSS feature in JavaFX, the CSS PseudoClass. This can be seen as a boolean switch that if triggered in CSS can be used to define a separate style for the true/false state.
 
@@ -107,7 +105,6 @@ In our case the code for our state property will look like follows:
             @Override public String getName() { return "state"; }
         };
 ```
-
 
 The PseudoClass ON_PSEUDO_CLASS defines the link to the CSS pseudo class "on" and to make use of it we trigger it in the invalidated() method of our state property by calling pseudoClassStateChanged(ON_PSEUDO_CLASS.get()).
 
@@ -128,7 +125,6 @@ To make this work we will also need the on pseudo class in our CSS file. Remembe
                                     -color 100%);
 }
 ```
-
 
 So in case we trigger the :on pseudo class we only change the gradient from a darker to a brighter version and thats it.
 
@@ -212,7 +208,6 @@ public class CustomControl extends Control {
     @Override public List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() { return FACTORY.getCssMetaData(); }
 }
 ```
-
 
 I don't want to go into detail here because most of it is self explaining. You see that we define an enum SkinType that has LED and SWITCH which will be used in the method getUserAgentStyleSheet(). Dependent on the skinType variable we load a different stylesheet. The default is the LED which is defined in custom-control.css and the switch is defined in switch.css.
 
@@ -339,7 +334,6 @@ public class LedSkin extends SkinBase<CustomControl> implements Skin<CustomContr
 }
 ```
 
-
 So, the main idea is to use three Region objects (for each layer of the LED one Region) and style them using CSS. With this approach we only have to take care about sizing and positioning the Regions. All the rest will be done in CSS.
 
 The Skin class has a dispose method which you should use to de-register listeners and clean up to avoid memory leaks when changing the Skin of a Control.
@@ -387,7 +381,6 @@ To make it complete, here comes the CSS file for the LED:
     -fx-background-radius: 1024;
 }
 ```
-
 
 In the CSS file we really just define the background radius of each Region and the paint which are always gradients here.
 
@@ -482,7 +475,6 @@ public class SwitchSkin extends SkinBase<CustomControl> implements Skin<CustomCo
 }
 ```
 
-
 When reading the code you will find that it has a lot of stuff in common with the LedSkin. Because we don't have a resizing logic here I've simply put the positioning of the Regions in the layoutChildren() method. When looking at other ones controls you might find that they do most of the resize/layout related things in the layoutChildren() method. I usually don't do this because in this case you should also add variables like isDirty and such to avoid to often resizing/relayouting. I found that for most of my controls it is enough to resize/relayout when the size of the control changed. For that reason you will most of the times find a resize() method in my controls.
 
 Now, the only thing that is missing is the switch.css file which looks like this:
@@ -521,7 +513,6 @@ Now, the only thing that is missing is the switch.css file which looks like this
 }
 ```
 
-
 You can see that I not only restrict the size of the control in CSS but also place the thumb using the -fx-translate-x and -fx-translate-y in it's initial position. CSS in JavaFX is really powerful and one can do a lot of things if you know how to do it 🙂
 
 If you take a look a the code over at [github](https://github.com/HanSolo/JavaFXCustomControls "github") you will see in the DemoControlSkinBased.java a comment as follows:
@@ -530,7 +521,6 @@ If you take a look a the code over at [github](https://github.com/HanSolo/JavaFX
 //scene.getStylesheets().add(DemoControlSkinBased.class.getResource("styles.css").toExternalForm());
 ```
 
-
 If you uncomment this line it will load the styles.css which looks like this:
 
 ```css
@@ -538,7 +528,6 @@ If you uncomment this line it will load the styles.css which looks like this:
     -color: magenta;
 }
 ```
-
 
 And if you then start the demo it will look like this:
 

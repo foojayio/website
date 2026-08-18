@@ -28,7 +28,6 @@ In his book, "[Why Programs Fail --- A Guide to Systemic Debugging](https://www.
 10 print “Hello World”<code class="language-basic"></code>
 ```
 
-
 And he got a syntax error. He was surprised since the program seemed correct and it isn't exactly complex. You can probably understand it without knowing any Basic...
 
 In debugging and in programming in general, we need to break down a problem into smaller components. So he typed in:
@@ -36,7 +35,6 @@ In debugging and in programming in general, we need to break down a problem into
 ```
 10
 ```
-
 
 An empty statement.
 
@@ -87,8 +85,7 @@ A good example of this is "undefined," which pollutes databases everywhere as it
 
 This can be done with code and also with continuous observability tools such as [Lightrun](https://lightrun.com/).
 
-TL;DR
------
+## TL;DR
 
 Debugging is a skill that we use daily but still don't invest enough time honing. We end up using the same tools and techniques over and over. We fall back to using logs and don't use sophisticated capabilities that have been around for years. Unfortunately, bugs aren't standing still. As we scale our infrastructure with amazing container technology, the bugs scale with our distributed solutions. They become more insidious at scale.
 

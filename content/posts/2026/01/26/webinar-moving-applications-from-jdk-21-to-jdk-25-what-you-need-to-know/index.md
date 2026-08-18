@@ -21,13 +21,11 @@ frozen: false
 
 JDK 25 has arrived as the latest long-term support (LTS) release for Java, bringing performance improvements and enhanced stability for modern applications. If your organization is running JDK 21, now is the time to start planning your migration path.
 
-Why Upgrade?
-------------
+## Why Upgrade?
 
 Each new LTS release represents years of refinements, optimizations, and new capabilities. JDK 25 builds on the foundation of JDK 21 while delivering the reliability that enterprise applications demand. But understanding what's changed---and what might break---is essential for a smooth transition.
 
-Upcoming Webinar: Your Migration Guide
---------------------------------------
+## Upcoming Webinar: Your Migration Guide
 
 Azul is hosting a live session, led by Java Champion Simon Ritter, covering everything you need to know about moving from JDK 21 to JDK 25. The webinar will cover key differences between the two releases, new features and compatibility considerations, and best practices for a seamless migration.
 [![](sritter-1024x553.png)](https://www.azul.com/events/moving-applications-from-jdk-21-to-jdk-25/)
@@ -43,5 +41,3 @@ Attendees will also see a live demo of an example application migration, along w
 Whether you're just starting to evaluate JDK 25 or ready to begin your upgrade, this session will provide practical guidance to help you move forward with confidence.
 
 [Register for the webinar](https://www.azul.com/events/moving-applications-from-jdk-21-to-jdk-25/) to secure your spot.
-
-<br />

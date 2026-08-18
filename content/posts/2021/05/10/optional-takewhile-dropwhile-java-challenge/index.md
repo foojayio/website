@@ -53,7 +53,6 @@ public class OptionalChallenge4 {
 }
 ```
 
-
 A) Optional\[777\]  
 
 B) Optional\[5\]  

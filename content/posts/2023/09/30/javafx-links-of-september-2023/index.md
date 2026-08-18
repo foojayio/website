@@ -23,8 +23,7 @@ This month OpenJDK and OpenJDK 21 got officially released, so links to the new d
 
 Here is the overview of the JavaFX LinksOfTheWeek that got published on [jfx-central.com](https://www.jfx-central.com/) during September.
 
-Core
-----
+## Core
 
 * [Announcement by **GluonHQ**](https://techhub.social/@gluonhq/111092296190292324): "We're proud to announce JavaFX 21 GA. Download the SDK/jmods from [gluonhq.com/products/javafx/](https://gluonhq.com/products/javafx/) or get the artifacts from Maven central. Release notes with many fixes and enhancements at [gluonhq.com/products/javafx/openjfx-21-release-notes](https://gluonhq.com/products/javafx/openjfx-21-release-notes/). Great work by a growing number of contributors!"
 * [Release notes by **Kevin Rushforth** on GitHub](https://github.com/openjdk/jfx/blob/master/doc-files/release-notes-21.md).
@@ -48,8 +47,7 @@ Core
   * [**Dirk Lemmermann** is experimenting with 22-ea+9](https://twitter.com/dlemmermann/status/1707024018232983615): "Showing correct bold text on macOS and much lower initial memory consumption in our CRM software".
 * [A message by **Johan Vos**](https://mastodon.social/@johanvos/111121272095237602): "One of the great (non-technical) things about JavaFX is that it is not owned by a single company that tries to use it for its business strategy (e.g. like Google does with most of their "free" stuff). It is really the wide JavaFX ecosystem that drives JavaFX forward, and that allows for pure and honest innovation."
 
-Applications
-------------
+## Applications
 
 * [**Onkel Stipe** shared a screenshot of SoundLab](https://twitter.com/OnkelStipe/status/1696236782885474494): "I developed it to investigate in generating realtime virtual analog sounds. The Oscilloscope feels quite analog. It also has a realtime spectrum and a view called "klangteppich", which nicely imitates the spectral view of audacity."
 * [**WhiteWoodCity** is upgrading dillon-boot-fx, a Permission Management System UI](https://twitter.com/WhiteWoodCity/status/1694998831480614954), to JDK 17+ and also providing jigsaw support.
@@ -69,8 +67,7 @@ Applications
 * [**Eltayeb Ibrahim** created a user-friendly Product Management System using JavaFX for the frontend](https://www.linkedin.com/posts/eltayeb-ibrahim-98324a193_javafx-java-javascript-activity-7113009374276526080-G99X) and Node.js with Express.js framework for the backend.
 * [**Heshan Thenura Kariyawasam** made a File Shredder app](https://twitter.com/Heshantk/status/1707473425395286439) and shared the sources.
 
-Games
------
+## Games
 
 * [London Softworks is working on a new Particle Editor and making progress with an OpenGL context being rendered to a JavaFX Canvas object (in real-time)](https://twitter.com/LondonSoftworks/status/1696427139212447753): "Making good use of FBO's for this one. Now to sort the colour issue out..."
 * [**OrangoMango** announces "Chess 2.0 is finally complete"](https://twitter.com/orango_mango/status/1703057689582993815): "The WebFX version is now available at [orangomango.itch.io/chess](https://orangomango.itch.io/chess). Play single player against stockfish. Play multiplayer against a friend in LAN or on the server."
@@ -78,8 +75,7 @@ Games
 * [**Ahmed Bakr** completed a Tic Tac Toe Game with Tiva C and JavaFX](https://www.linkedin.com/feed/update/urn:li:activity:7109933250885685248/): "Our primary goal in undertaking this project was to explore the integration of microcontrollers with high-powered processing computers to tackle tasks beyond the capabilities of a standalone microcontroller."
 * [**WhiteWoodCity** made his game demo and self-made game utilities](https://twitter.com/WhiteWoodCity/status/1706656526726045930) fully open source on [github.com/chengenzhao/fxcity](https://github.com/chengenzhao/fxcity).
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * [**Pedro Duque Vieira** released a new library, a JavaFX theme called Transit Theme](https://twitter.com/P_Duke/status/1696149890370285877): "Modern look and feel, Zero tight coupling, Looks integrated on Windows, Also works well on other OSes, Light and Dark versions,..."
   * The announcement of this new Transit Theme [got published on **Foojay.io**](https://foojay.io/today/new-javafx-theme-library-transit-released/).
@@ -98,8 +94,7 @@ Components, Libraries, Tools
 * [**Sean Phillips** announced a new release of the special effects library LitFX](https://twitter.com/SeanMiPhillips/status/1700852671287107803): lightning, radio waves/bands, line of sight lighting and shadowing, animated window and floating panes, flame convolution.
 * [**Michael Paus** has done a basic POC for Skia integration into JavaFX](https://twitter.com/MichaelPaus/status/1701214040876323013).
 
-Tutorials
----------
+## Tutorials
 
 * [**Mark Baird** released the second in a series of blog posts showing how to use the beta release of the Java Maps SDK (with support for Arm Linux devices) with a Raspberry Pi](https://www.linkedin.com/posts/mark-baird-5565786_how-to-use-the-java-maps-sdk-in-a-raspberry-activity-7100825332420599808-w5P7/) to integrate IoT data collection into your geospatial applications.
 * [**Edward Nyirenda Jr** explains how to add TextField autocompletion in JavaFX using ControlsFX](https://twitter.com/EdwardAlgorist/status/1697359282449072213): "TextField autocompletion is a convenient feature that enhances user experience by providing suggestions or predictions as users type into a text field."
@@ -116,8 +111,7 @@ Tutorials
 * **Edward Nyirenda Jr** is continuing his series of tutorials: [Internationalization in JavaFX: Building Multilingual Apps](https://twitter.com/EdwardAlgorist/status/1701348814156685713): "Internationalization is the process of designing your application so that it can be easily adapted to different languages and regions without code changes."
 * In Portuguese by **Edivaldo Brito** : ["Como instalar o Gluon Scene Builder no Linux via Flatpak"](https://twitter.com/edivaldobrito/status/1702468670130425979) (How to install Gluon Scene Builder on Linux via Flatpak).
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**Dirk Lemmermann** noticed something remarkable](https://twitter.com/dlemmermann/status/1696098284002054553): "A JavaScript account retweeting a JavaFX tweet? 🙂 What's next? Flying pigs? :-)"
 * [**Frederic Thevenet** wrote a long thread on Mastodon](https://mastodon.social/@fthevenet/111028413815320945) to explain why "JavaFX is a very solid piece of tech which unfortunately came to maturity at the worst possible time for a "desktop application" GUI framework."
@@ -135,8 +129,7 @@ Miscellaneous
 * [**Pedro Duque Vieira** shared some hidden messages](https://twitter.com/P_Duke/status/1706658008820830476): "Hint: squint, move your phone/monitor further away or zoom out, to see it more clearly."
 * [**Christopher Schnick** believes JavaFX applications can always use some more Duke](https://twitter.com/crschnick/status/1706982902951485727).
 
-JFX Central
------------
+## JFX Central
 
 * The JFX Central website is now reachable via both [jfxcentral.com](http://jfxcentral.com) and [jfx-central.com](http://jfx-central.com).
 * [Many improvements](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2/commits/develop) are going on...

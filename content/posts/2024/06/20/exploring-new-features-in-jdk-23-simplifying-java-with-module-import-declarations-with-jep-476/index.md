@@ -45,13 +45,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 ```
 
-
 With JEP 476, this can be simplified to:
 
 ```java
 import module java.base;
 ```
-
 
 This single line imports all necessary classes, making the code cleaner and more concise. Consider the following example:
 
@@ -89,9 +87,6 @@ void main() {
 
 //java --enable-preview --source 23 Helloworld.java
 ```
-
-
-<br />
 
 With this module import, you import the entire module; there is no need to maintain a long list of import statements at the beginning of the file.  
 

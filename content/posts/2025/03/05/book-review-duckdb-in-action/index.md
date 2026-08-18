@@ -24,8 +24,7 @@ This review is about [DuckDB in Action](https://www.manning.com/books/duckdb-in-
 
 The book was sent to me by [Michael Simons](https://mastodon.social/@rotnroll666). He asked for my feedback: I changed my reading schedule, took a few months, and here it is.
 
-Facts
------
+## Facts
 
 * 10 chapters
 * 288 pages
@@ -33,8 +32,7 @@ Facts
 
 Note that MotherDuck, the company behind DuckDB, offers a [free PDF copy](https://motherduck.com/duckdb-book-brief/).
 
-Chapters
---------
+## Chapters
 
 1. An introduction to DuckDB
 2. Getting started with DuckDB
@@ -50,20 +48,16 @@ Chapters
 
 The book takes a step-by-step approach, starting from the basics of DuckDB **and** SQL.
 
-Pros and cons
--------------
+## Pros and cons
 
 After the mandatory section about introducing DuckDB and installing it, the book explains SQL. At first, I admit I thought that the book was for newbies, as it explained things as simple as `JOIN`. However, the chapter afterwards explained Common Table Expressions and built complex queries upon them.
 
 I like how the authors describe DuckDB in its "natural environment", *i.e.*, how it integrates into different ecosystems, such as Python's Pandas and Apache Spark. In addition, a complete appendix section focuses on DuckDB in Java. Finally, the authors dedicate a section to MotherDuck, a DuckDB cloud provider.
 
-Conclusion
-----------
+## Conclusion
 
 My thoughts on the book are a bit divided. On one side, it tries to explain DuckDB itself and its integration in different environments. On the other hand, it teaches regular and advanced SQL, which users of an SQL database product should know IMHO. The book can't decide between a Learn SQL with DuckDB approach and a DuckDB in Action one. The role of a book editor is to help authors make hard decisions. It feels as if this one didn't want to stop the authors' enthusiasm and couldn't bring themselves to rein them in.
 
 Don't get me wrong: the book is great and can teach you a lot, but it could have been better with more focus.
-
-
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/duckdb-in-action/) on November 2^nd^, 2024*

@@ -26,8 +26,7 @@ frozen: false
 >
 > ### For this post, I got the help of [DaShaun Carter](https://twitter.com/dashaun), Spring Developer Advocate, who immediately jumped in when I raised some questions about these configuration options. Thanks, DaShaun!
 >
-Spring Boot Petclinic Project
------------------------------
+## Spring Boot Petclinic Project
 
 To illustrate our approach, we'll use the Spring Boot Petclinic project, a Spring Boot application built using Maven or Gradle, to demonstrate how a Spring Boot project is set up fully and how the code is structured and must be packaged.
 
@@ -38,9 +37,7 @@ $ git clone https://github.com/spring-projects/spring-petclinic
 $ cd spring-petclinic
 ```
 
-
-Modify and extend the default settings
---------------------------------------
+## Modify and extend the default settings
 
 We just need a few additional configurations in the `spring-boot-maven-plugin` section in the `pom.xml` file of the project to modify the OpenJDK distribution in the generated Docker image and add additional debug settings. Don't change the executions; just insert the configuration section. The goal of this Docker image is to use the Azulu Zulu Build of OpenJDK as the runtime and to include all possible debug and test tools, so it has all the following options. Of course, which ones you use will depend on your use case.
 
@@ -77,7 +74,6 @@ We just need a few additional configurations in the `spring-boot-maven-plugin` s
         </executions>
     </plugin>
 ```
-
 
 To better understand this section, we need to look at all the different options separately:
 
@@ -166,9 +162,7 @@ $ ./mvnw spring-boot:build-image
 [INFO] ------------------------------------------------------------------------
 ```
 
-
-Checking the created Docker images
-----------------------------------
+## Checking the created Docker images
 
 During the build process, various images were downloaded and created. As you can see, there are more than we may expect, but a few of these are used during the unit tests.
 
@@ -186,9 +180,7 @@ paketobuildpacks/java        latest           2ddc6cc7d346   43 years ago   207M
 spring-petclinic             3.1.0-SNAPSHOT   c05d70c78109   43 years ago   496MB
 ```
 
-
-Running the Docker image
-------------------------
+## Running the Docker image
 
 You can now start the Docker image. Three ports are configured for various use cases:
 
@@ -227,9 +219,7 @@ JMX enabled on port 5000
 ...
 ```
 
-
-Validating the Docker image
----------------------------
+## Validating the Docker image
 
 At this point, you can perform various steps to validate the Docker image we created with the additional settings:
 
@@ -286,9 +276,7 @@ java_class_path (initial): /workspace
 Launcher Type: SUN_STANDARD
 ```
 
-
-Making use of the logging and debug configurations
---------------------------------------------------
+## Making use of the logging and debug configurations
 
 Analyzing and debugging the application inside Docker with the various tools and configurations is beyond the scope of this article. But we can validate all of them quickly to confirm their correct configuration, and how you can use them.
 
@@ -301,7 +289,6 @@ $ docker cp petclinic:/tmp/rec.jfr rec.jfr
 $ docker cp petclinic:/tmp/gc.log gc.log
 ```
 
-
 ### Connecting to debug
 
 From within your IDE, for instance, IntelliJ IDEA, you can start a debug connection to the running application inside the Docker via port 8000 and set breakpoints in your code.
@@ -309,7 +296,6 @@ From within your IDE, for instance, IntelliJ IDEA, you can start a debug connect
 ```
 Connected to the target VM, address: 'localhost:8000', transport: 'socket'
 ```
-
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -338,8 +324,7 @@ Click on any of the three images below for a larger image.
  </figure>
 </figure>
 
-Conclusion
-----------
+## Conclusion
 
 This post's extended `pom.xml` configuration includes various ways to enable remote debugging and generate log files.
 
@@ -347,14 +332,7 @@ You should never use all of them simultaneously, and definitely not in productio
 
 And... mission accomplished!
 
-<br />
-
-
-
-<br />
-
-Read more
----------
+## Read more
 
 * [Video created by DaShaun Carter](https://www.youtube.com/watch?v=6FfP3v40il8)
 * Paketo docs:

@@ -41,7 +41,6 @@ For those who are not familiar with the state of Java's Project Panama \& the `j
 java --enable-preview --source 19 --enable-native-access=ALL-UNNAMED MyJavaApp.java
 ```
 
-
 By enabling and using JDK 19's preview features you can begin to kick the tires and provide [feedback](https://mail.openjdk.java.net/mailman/listinfo/panama-dev) to the engineers and community before it becomes final in the GA release of Java.
 
 Prior to JEP 424 the early access builds of the OpenJDK used to contain the `jextract` tool as part of the JDK.
@@ -50,8 +49,7 @@ However, the decision was made to have the `jextract` tool become its own projec
 
 Having said this, you'll want to be able to build the `jextract` tool yourself. Of course you can wait till a build is available, but why wait? In this article I will walk you through the process on how to build `jextract` yourself.
 
-Assumptions
------------
+## Assumptions
 
 This article assumes you know what is Java's Foreign Function and Memory Access APIs (APIs from Project Panama) and basic knowledge of the following.
 
@@ -59,8 +57,7 @@ This article assumes you know what is Java's Foreign Function and Memory Access 
 * Git is installed
 * Git commands
 
-Requirement
------------
+## Requirement
 
 * [JDK 19 EA](https://jdk.java.net/19/) - The early access build of JDK 19 (Preview Release)
 * [jextract](https://github.com/openjdk/jextract) - A tool to generate binding code to allow developers to easily access native symbols. The `jextract` tool is now on GitHub. The master branch is a in synch with the latest OpenJDK version. If you would like to obtain a past build for a version check jdk\<version\>. At this time a branch `jdk18` is a build.
@@ -68,15 +65,13 @@ Requirement
 * [Gradle](https://gradle.org) (optional) - The Gradle build tool to build the `jextract` project.
 * Git
 
-Installing Software
--------------------
+## Installing Software
 
 First on the list of required software is JDK 19 EA. If you are a fan of using SDKMan then do the following:
 
 ```bash
 sdk install java 19.ea.25-open
 ```
-
 
 Note: If you have installed the JDK using SDKMan than you can skip to the **jextract at GitHub** section.
 
@@ -101,7 +96,6 @@ C:\> set JAVA_HOME=<unzipped_dir>\jdk-19
 C:\> set PATH=%JAVA_HOME%\bin;%PATH%
 ```
 
-
 Of course if you choose to make environment variables persistent you'll need to add them to the `.bashrc` or `.bash_profile` file of your Linux or MacOS environment. On the Windows operating system you will want to add or update environment variables in the control panel's `System Properties` `->` `Environment Variables`.
 
 ### jextract at GitHub
@@ -112,7 +106,6 @@ After setting up JDK 19 you can fork / clone the GitHub project `jextract` with 
 git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5828c91a5828c918d9087cb868a88">[email protected]</a>:openjdk/jextract.git
 cd jextract
 ```
-
 
 **Note:** It is preferable that you fork the project and then clone your fork of the project. That way you can provide pull requests whenever you find a bug to fix or a proposed enhancement to the project. But if you just want to build from master branch or a previous branch you can simply clone `jextract`'s main repo as shown below:
 ![](Screen-Shot-2022-06-06-at-3.03.47-PM.png)
@@ -127,7 +120,6 @@ Next, you'll need to [download LLVM](https://github.com/llvm/llvm-project/releas
 sh ./gradlew -Pjdk19_home=<jdk19_home_dir> -Pllvm_home=<libclang_dir> clean verify
 ```
 
-
 **Note:** Substitute the following place holders `<jdk19_home_dir>` and `<libclang_dir>` with the `JAVA_HOME`'s directory and LLVM's installed directory (clang+llvm-13.0.0-\*) respectively. An example on my MacOS terminal is shown below.
 
 ```bash
@@ -137,7 +129,6 @@ sh ./gradlew \
    clean verify
 ```
 
-
 You're almost done! After building the tool the process will create a new JDK SDK image that will be used instead of your newly downloaded JDK 19. By passing in the `-Pjdk19_home` it will create and generate a copy of the JDK 19 and `jextract` binaries located in the following directories:
 
 ```bash
@@ -145,19 +136,16 @@ build/jextract/bin
 build/jextract/lib
 ```
 
-
 The JDK with `jextract` build directory should look like the following:
 ![](Screen-Shot-2022-06-06-at-3.26.33-PM.png)
 
-Re-setting the `JAVA_HOME` and `PATH` environment variables
------------------------------------------------------------
+## Re-setting the `JAVA_HOME` and `PATH` environment variables
 
 Before we can use the `jextract` tool you'll need to change the previous `JAVA_HOME` and `PATH` to now point to the directory `build/jextract` and `build/jextract/bin` respectively.
 
 Great, now that you have a fresh JDK containing the `jextract`, let's generate some binding code!
 
-Generate Panama bindings
-------------------------
+## Generate Panama bindings
 
 Another requirement of `jextract` is to have access to the C libraries. Using `jextract` to generate binding code on the various operating systems you will need to install C libraries and headers files. The following are instructions to install C libraries for the respective operating systems.
 
@@ -168,7 +156,6 @@ In order to obtain C libraries and header files on a MacOS operating system you'
 ```
 xcode-select —install
 ```
-
 
 ### Linux
 
@@ -183,15 +170,13 @@ sudo apt install build-essential
 sudo yum groupinstall 'Development Tools'
 ```
 
-
 ### Windows
 
 When developing native C/C++ libraries you will download and decompress **MinGW** from <https://sourceforge.net/projects/mingw-w64/>. After downloaded you can unzipped MinGW into the **C:** drive's root directory.
 
 Now that you have all the required C libraries lets use `jextract` against the `stdio.h` file to generate binding code.
 
-Use `jextract` against `stdio.h`
---------------------------------
+## Use `jextract` against `stdio.h`
 
 Now that you have all your C libraries and header files in place you can target the `stdio.h` file to generate binding code. The commands below will generate source code that will be outputted in the **src** directory. Use the appropriate commands based on your operating system.
 
@@ -209,7 +194,6 @@ set C_INCLUDE_PATH=C:\MinGW\include
 jextract.exe --source --output src -t org.unix -I %C_INCLUDE_PATH% %C_INCLUDE_PATH%\stdio.h
 ```
 
-
 Using `jextract` to generate binding code for the Windows platform. This assumes you've installed **MinGW** in the **C:** directory.
 
 ```
@@ -226,11 +210,9 @@ set C_INCLUDE_PATH=C:\MinGW\include
 jextract.exe --output classes -t org.unix -I %C_INCLUDE_PATH% %C_INCLUDE_PATH%\stdio.h
 ```
 
-
 Now that you've generated Java source code or classes they can be conveniently used in your Java applications.
 
-Conclusion
-----------
+## Conclusion
 
 You've now learned that the `jextract` tool has been separated into its own project and is no longer part of the OpenJDK build distributions.
 

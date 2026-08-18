@@ -32,7 +32,6 @@ My use case is a banking application that offers a REST layer allowing clients t
 curl localhost:8080/balance/123          // 1
 ```
 
-
 1. Query the balance of the account `123`
 
 On the other hand, creating a new operation, *e.g.* , a credit, requires passing data to `curl`. While it's feasible to do that, the payload's structure itself *is* complex as it's part JSON. Hence, it's a risk to use `curl` to demo the command part in front of a live audience. I tend to avoid unnecessary risks, so I thought about a few alternatives.
@@ -71,7 +70,6 @@ public class GeneratorApplication {
 }
 ```
 
-
 1. Generate a random `Operation`, somehow
 2. Get the number of calls from the argument
 3. Call the URL of the main web application
@@ -108,7 +106,6 @@ public class GeneratorApplication {
     // Command-line runner
 }
 ```
-
 
 1. Scan for JPA repositories
 2. Scan for JPA entities

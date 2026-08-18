@@ -37,8 +37,7 @@ On the other side, the JVM automatically releases objects from memory when they 
 
 As the ecosystem around the JVM is well developed, it makes sense to develop applications using the JVM and delegate the most memory-sensitive parts to Rust.
 
-Existing alternatives for JVM-Rust integration
-----------------------------------------------
+## Existing alternatives for JVM-Rust integration
 
 During the research for this article, I found quite a couple of approaches for JVM-Rust integration:
 
@@ -61,8 +60,7 @@ During the research for this article, I found quite a couple of approaches for J
 
   has been **the** way to integrate C/C++ with Java in the past. While it's not the most glamorous approach, it requires no specific platform and is stable. For this reason, I'll describe it in detail in the next section.
 
-Integrating Java and Rust via JNI
----------------------------------
+## Integrating Java and Rust via JNI
 
 From a bird's eye view, integrating Java and Rust requires the following steps:
 
@@ -83,7 +81,6 @@ We first need to create the Java skeleton methods. In Java, we learn that method
 public native int doubleRust(int input);
 ```
 
-
 Next, we need to generate the corresponding C header file. To automate generation, we can leverage the Maven compiler plugin:
 
 ```xml
@@ -98,7 +95,6 @@ Next, we need to generate the corresponding C header file. To automate generatio
     </configuration>
 </plugin>
 ```
-
 
 ```
 
@@ -131,7 +127,6 @@ JNIEXPORT jint JNICALL Java_ch_frankel_blog_rust_Main_doubleRust
 #endif
 ```
 
-
 ### Rust implementation
 
 Now, we can start the Rust implementation. Let's create a new project:
@@ -139,7 +134,6 @@ Now, we can start the Rust implementation. Let's create a new project:
 ```bash
 cargo new lib-rust
 ```
-
 
 ```
 [package]
@@ -154,7 +148,6 @@ jni = "0.19.0"                                     // 1
 [lib]
 crate_type = ["cdylib"]                            // 2
 ```
-
 
 1. Use the `jni` crate
 2. Generate a *system* library. Several crate types are available: `cdylib` is for dynamic system libraries that you can load from other languages. You can check all other available types [in the documentation](https://doc.rust-lang.org/reference/linkage.html).
@@ -171,7 +164,6 @@ pub extern "system" fn Java_ch_frankel_blog_rust_Main_doubleRust(_env: JNIEnv, _
     x * 2
 }
 ```
-
 
 A lot happens in the above code. Let's detail it.
 
@@ -198,7 +190,6 @@ We can now build the project:
 cargo build
 ```
 
-
 The build produces a system-dependent library. For example, on OSX, the artifact has a `dylib` extension; on Linux, it will have a `so` one, etc.
 
 ### Use the library on the Java side
@@ -215,7 +206,6 @@ public class Main {
     }
 }
 ```
-
 
 Note that on Mac OS, the `lib` prefix is **not** part of the library's name.
 
@@ -247,7 +237,6 @@ public class Main {
 }
 ```
 
-
 1. Should compute `arg1 * arg2`
 
 The `native` method looks precisely the same as above, but its name. Hence, the generated C header also looks the same. The magic needs to happen on the Rust side.
@@ -262,13 +251,11 @@ pub extern "system" fn Java_ch_frankel_blog_rust_Main_timesRust(env: JNIEnv, obj
 }
 ```
 
-
 1. Same as above
 2. Pass the object's reference, the field's name in Java and its type. The type refers to the correct [JVM type signature](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/types.html#type-signatures), *e.g.* `"I"` for `int`.
 3. `state` is a `Result<JValue>`. We need to unwrap it to a `JValue`, and then "cast" it to a `Result<jint>` via `i()`
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we have seen how to call Rust from Java. It involves flagging methods to be delegated as `native`, generating the C header file, and using the `jni` crate. We have only scraped the surface with simple examples: yet, we've laid the road to more complex usages.
 

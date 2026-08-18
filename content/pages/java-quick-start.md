@@ -27,8 +27,6 @@ d. [Install Java (Linux)](https://foojay.io/java-quick-start/install-java/instal
 
 e. [Find Another Java Version](https://foojay.io/java-quick-start/install-java/find-another-java-version/)
 
-
-
 2. Get Started
 --------------
 
@@ -56,8 +54,6 @@ j. [Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using
 
 k. [What's Next?](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/) (00:00:035)
 
-
-
 3. Next Steps
 -------------
 
@@ -70,8 +66,6 @@ Here are some of the next steps you can take with the knowledge you now have.
 Here on Foojay.io you can find hundreds of blog posts, but we filtered out the ones that will help you to get started with Java:
 
 [Foojay Today Posts for Java Beginners](/today/category/java-beginner/){#/today/category/java-beginner/}
-
-<br />
 
 ### Learn more from on-line tutorials.
 

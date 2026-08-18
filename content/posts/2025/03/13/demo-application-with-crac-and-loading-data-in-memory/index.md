@@ -29,8 +29,7 @@ Improving the startup time of Java applications is only one use case for CRaC. B
 
 {{< youtube RW2K5qC9_v0 >}}
 
-Demo Application
-----------------
+## Demo Application
 
 The [sources of the demo application can be found on GitHub](https://github.com/FDelporte/crac-example). They are based on another example from the CRaC repository at [github.com/CRaC/example-jetty](https://github.com/CRaC/example-jetty), and the PostgreSQL integration is based on [stackabuse.com/working-with-postgresql-in-java](https://stackabuse.com/working-with-postgresql-in-java/). The CSV files located in `src/main/resources/data` were downloaded from [datablist.com](https://www.datablist.com/learn/csv/download-sample-csv-files).
 
@@ -62,7 +61,6 @@ As I like to experiment with Java on the Raspberry Pi, and the full CRaC-functio
 $ sdk install java 21.crac-zulu
 ```
 
-
 #### Build and Run From JAR
 
 I compiled the application on the Raspberry Pi and executed it with the following command which specifies the directory where the checkpoint must be created:
@@ -73,7 +71,6 @@ $ cd crac-example
 $ mvn package
 $ java -XX:CRaCCheckpointTo=cr -jar target/crac-example.jar
 ```
-
 
 These are the durations needed for the HTTP endpoints to respond, as logged in the database. As you can see, the biggest file needs about 12 seconds to unzip and return the results.
 
@@ -97,13 +94,11 @@ duration=0, description=Started from main
 duration=0, description====================================================]
 ```
 
-
 Once this is done, we can create a checkpoint by opening a second terminal and executing the following command:
 
 ```
 $ jcmd target/crac-example.jar JDK.checkpoint
 ```
-
 
 In the first terminal, you can see what's happening during the checkpoint creation, and the application getting terminated at the end if the checkpoint creation was successful.
 
@@ -138,7 +133,6 @@ INFO: /home/crac/crac-example/target/crac-example.jar is recorded as always avai
 Killed
 ```
 
-
 #### Run From Checkpoint
 
 Our checkpoint has been created in the `cr` directory, so we can now restart it with the following command.
@@ -153,7 +147,6 @@ $ java -XX:CRaCRestoreFrom=cr
 2023-10-17 19:22:48.800:INFO:oejs.AbstractConnector:Attach Listener: Started ServerConnector@77a98a6a{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
 ```
 
-
 As you can see, within a second the `afterRestore` methods get executed, meaning the application is up-and-running in the same state as it was just before the checkpoint was created. As unzipping and converting the CSV files into Java objects was already done, the HTTP endpoint can respond immediately. For the largest file this means a response in 7 milliseconds instead of over 10 seconds.
 
 ```
@@ -166,9 +159,7 @@ duration=0, description=Reopened DB connection after restore
 duration=0, description====================================================
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Of course, this time-consuming CSV-reading process is not a typical use case, but it's a nice illustration of how time-consuming processes can be stored in a checkpoint.
 

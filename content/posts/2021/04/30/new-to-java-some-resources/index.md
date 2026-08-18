@@ -25,8 +25,7 @@ I've listed content that is both free and paid. It's not that one type is superi
 
 The other super important point is that everyone learns differently; some like reading, some like doing, some like watching, most of us like a bit of a mix of everything. I tend to switch between them depending on what I want to learn about and how I feel. You're probably similar, so pick an approach that works for you.
 
-Learning Platforms
-------------------
+## Learning Platforms
 
 Let's start with learning platforms. There are plenty of them to choose from, so you can pick one that works for your learning and budget style.
 
@@ -36,8 +35,7 @@ I've also used [Udemy](https://www.udemy.com/course/java-the-complete-java-devel
 
 Finally, I've played around with [codewars](https://www.codewars.com/). This is a nice gentle introduction to katas (more on them soon), irrespective of where you are on your coding journey. It's less structured than either JetBrains Academy or Udemy and can provide some light coding respite when the mood takes you.
 
-Communities
------------
+## Communities
 
 The Java community is a rich, vibrant and welcoming place. This is played out in the communities that have sprung up around it.
 
@@ -49,8 +47,7 @@ The [Java Specialists](https://www.javaspecialists.eu/) is another active group 
 
 The [Code Ranch](https://coderanch.com/) is a very friendly place for newcomers to Java where you can post questions, learn from others and try out coding questions. [The forum](https://coderanch.com/forums/c/1/java) is also really active (oh, and did I mention that everyone here is super lovely?).
 
-Code Katas
-----------
+## Code Katas
 
 I am a relative newcomer to code katas, but I really like them as a way of learning. They are self-contained mini-puzzles that you can solve at your leisure.
 
@@ -60,8 +57,7 @@ I am a relative newcomer to code katas, but I really like them as a way of learn
 
 I've not started [these yet](https://manifesto.co.uk/using-java-code-katas-to-practise-test-driven-development/), but I like the look of them because the tests are right there to look at.
 
-Specific Java Resources (including Frameworks)
-----------------------------------------------
+## Specific Java Resources (including Frameworks)
 
 This is a bit of a catch-all section, but there are a few resources that I've come across that are amazingly useful; they are listed here.
 
@@ -75,8 +71,7 @@ One more thing I do want to mention is the official [Oracle documentation for Ja
 
 Of course, there are plenty of dedicated Java blogs out there, which you can find with a quick Google, but I want to keep this list of resources specifically targeted at content that newcomers might find helpful and that I've used.
 
-Books
------
+## Books
 
 I like books; arguably, I like them more than videos. As with all other resources I've listed here, there is no shortage of them. These are the ones that I specifically have found helpful.
 
@@ -88,8 +83,7 @@ I like books; arguably, I like them more than videos. As with all other resource
 
 [Head First Design Patterns 2nd Edition](https://www.amazon.co.uk/Head-First-Design-Patterns-Object-Oriented/dp/149207800X/ref=sr_1_1?dchild=1&keywords=head+first+design+patterns&qid=1617782892&sr=8-1). This book is so fresh off the printing line that the ink is likely still wet. I'm going to come clean and say that I don't own this yet, but I plan to own it very soon. I do own the first edition, and it was excellent. I fully expect the second edition to be just as good, if not better. Design pattern knowledge and understanding will serve you well, no matter what your coding goals are.
 
-Java Certification
-------------------
+## Java Certification
 
 A note about Java Oracle Certification: this tends to be one of those subjects that can polarise opinion. I think certification is very valuable for a deep understanding of the Java language, and it will serve you well if you want to study and obtain it. I don't think you *need* to be certified as such, and I suspect that on the job knowledge of Java will provide you with an equally rich and diverse experience of the language, albeit from a different angle. It's entirely up to you, but here are my recommendations for resources if you want to pursue Java certification.
 
@@ -97,8 +91,7 @@ There are [excellent books](https://www.amazon.co.uk/Oracle-Certified-Profession
 
 My colleague [Mala Gupta](https://twitter.com/emalagupta) is also a passionate advocate of Java Certifications and [her book for Java SE 11](https://www.manning.com/books/java-se-11-programmer-i-certification-guide) is in preview so that you can get your eyes on it already!
 
-Goals, Learning Styles and Time
--------------------------------
+## Goals, Learning Styles and Time
 
 Irrespective of if you're new to coding, new to Java specifically, or took a break from Java, this is a list of resources that will help you get up and running quickly. I suggest you find the ones that work for you and build your list. Invariably what works for one person might not work for the next, so feel free to explore the wealth of content out there. Your learning style will also play a part, as will the amount of time you have available.
 

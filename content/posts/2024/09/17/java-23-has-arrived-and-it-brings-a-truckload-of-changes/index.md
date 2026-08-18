@@ -29,8 +29,7 @@ In this article, we take you on a tour of everything that is part of this releas
 
 Where applicable the differences with Java 22 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 
-From Project Amber
-------------------
+## From Project Amber
 
 Java 23 contains 4 features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -58,7 +57,6 @@ switch (reverb.roomSize()) {
 }
 ```
 
-
 ...to be written as follows:
 
 ```java
@@ -69,7 +67,6 @@ switch (reverb.roomSize()) {
     case int i -> "Unsupported int value: " + i;
 }
 ```
-
 
 This also allows guards to inspect the matched value, like so:
 
@@ -83,7 +80,6 @@ switch (reverb.roomSize()) {
     case int i -> "Unsupported int value: " + i;
 }
 ```
-
 
 #### Record Patterns
 
@@ -110,7 +106,6 @@ if (tuner instanceof Tuner(double p)) {
 }
 ```
 
-
 To put it differently, the Java compiler widens the provided `int` to a double, but it doesn't narrow it back to an `int`. This limitation exists because narrowing could lead to data loss: the value of the `double` at runtime might exceed the range of an `int` or have more precision than an `int` can accommodate. However, one significant advantage of pattern matching is its ability to automatically reject invalid values by not matching them at all. If the `double` component of a `Tuner` is either too large or too precise to safely convert back to an `int`, then `instanceof Tuner(int p)` would simply return `false`, allowing the program to manage the large `double` component in a different code branch.
 
 This is analogous to how pattern matching currently behaves for reference type patterns. For example:
@@ -127,7 +122,6 @@ if (singleEffect instanceof SingleEffect(Delay d)) {
     // ...
 }
 ```
-
 
 `instanceof` can be used here to try to match a `SingleEffect` with a `Delay` or a `Reverb` component; it automatically narrows if the pattern matches.
 
@@ -146,7 +140,6 @@ if (roomSize >= -128 && roomSize < 127) {
 }
 ```
 
-
 This JEP proposes the possibility to replace these constructs with simple `instanceof` checks that operate on primitives. Let's rewrite the code example to make use of this feature:
 
 ```java
@@ -156,7 +149,6 @@ if (roomSize instanceof byte r) {
     // now it's safe to use r
 }
 ```
-
 
 The pattern `roomSize instanceof byte r` will match only if `roomSize` fits into a `byte`, eliminating the need for casts and range checks.
 
@@ -173,7 +165,6 @@ if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
     ... (byte) roomSize ... // yes, it fits! but cast is required
 }
 ```
-
 
 This JEP proposes to support this construct, which makes it easier to change the `instanceof` check to take a type pattern and vice versa.
 
@@ -194,7 +185,6 @@ String guitaristResponse = switch (guitar.isInTune()) {
     }
 }
 ```
-
 
 #### What's Different From Java 22?
 
@@ -221,7 +211,6 @@ Map<String, String> m =
     Stream.of(instruments)
           .collect(Collectors.toMap(s -> s.toUpperCase().substring(0, 1), Function.identity()));
 ```
-
 
 ...the imports take up just as much space as the code itself.
 
@@ -254,7 +243,6 @@ Date d = ...                  // Error - Ambiguous name!
 ...
 ```
 
-
 Resolving ambiguities is straightforward: use a single-type-import declaration. For example, to resolve the ambiguous `Date` of the previous example:
 
 ```java
@@ -267,7 +255,6 @@ import java.sql.Date;         // resolve the ambiguity of the simple name Date
 Date d = ...                  // Ok! Date is resolved to java.sql.Date
 ...
 ```
-
 
 #### What's Different From Java 22?
 
@@ -288,7 +275,6 @@ public class HelloWorld {
     }
 }
 ```
-
 
 On top of that, it forces newcomers to grasp a few concepts that they certainly don't need on their first day of Java programming:
 
@@ -313,7 +299,6 @@ class HelloWorld {
 }
 ```
 
-
 * allow a compilation unit to implicitly declare a class:
 
 ```java
@@ -322,7 +307,6 @@ void main() { // this is an instance main method in an implicitly declared class
 }
 ```
 
-
 * in implicitly declared classes, automatically import useful methods for textual input and output, thereby avoiding the mysterious `System.out.println`:
 
 ```java
@@ -330,7 +314,6 @@ void main() {
     println("Hello, World!"); // this method is automatically imported
 }
 ```
-
 
 #### A Flexible Launch Protocol
 
@@ -372,7 +355,6 @@ class Main {
 }
 ```
 
-
 The code may seem familiar to experienced developers, but beginners often find it confusing due to new concepts like `import`, `try`, `catch`, `BufferedReader`, `InputStreamReader` and `IOException`. While there are other approaches, none are significantly better for those just starting out.
 
 To make interacting with the console easier for beginners, implicit classes now automatically import all static methods from the newly added class [`java.io.IO`](https://cr.openjdk.org/~prappo/8305457/java.base/java/io/IO.html):
@@ -390,7 +372,6 @@ void main() {
     println(name);
 }
 ```
-
 
 #### Automatic Import of the `java.base` Module
 
@@ -430,7 +411,6 @@ class StringQuartet extends Orchestra {
 }
 ```
 
-
 It would be better to let the constructor fail fast, by validating its arguments before the `super(...)` constructor is called.  
 
 Pre-Java 22, we could only achieve this by introducing a `static` method that acts upon the value passed to the super constructor.
@@ -449,7 +429,6 @@ public class StringQuartet extends Orchestra {
 }
 ```
 
-
 But a far more readable way to write the same would be:
 
 ```java
@@ -463,7 +442,6 @@ public class StringQuartet extends Orchestra {
     }
 }
 ```
-
 
 This approach will be possible in Java 23, due to the introduction of *early construction contexts* .  
 
@@ -516,8 +494,7 @@ There's no way for us to know exactly when a new proposal will be ready, so we'l
 
 And in the meantime, if you're interested, [this excellent video](https://inside.java/2024/06/20/newscast-71) by Nicolai Parlog has a few more interesting details to keep you occupied.
 
-From Project Loom
------------------
+## From Project Loom
 
 Java 23 contains 2 features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -552,7 +529,6 @@ public class MultiWaiterRestaurant implements Restaurant {
 }
 ```
 
-
 Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
 * If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
@@ -577,7 +553,6 @@ public class SingleWaiterRestaurant implements Restaurant {
     }
 }
 ```
-
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -616,7 +591,6 @@ public class StructuredConcurrencyRestaurant implements Restaurant {
     }
 }
 ```
-
 
 The scope's purpose is to keep the threads together.  
 
@@ -666,7 +640,6 @@ public class StructuredConcurrencyBar implements Bar {
     }
 }
 ```
-
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar.  
 
@@ -735,7 +708,6 @@ public class StructuredConcurrencyBar implements Bar {
 }
 ```
 
-
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The invocation of `call(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of `call(...)`, the lambda expression - and any method called (in)directly from it - can read the scoped value via the value's `get()` method. After the `call(...)` method finishes, the binding is destroyed.
 
 #### Typical Use Cases
@@ -755,15 +727,13 @@ The method `ScopedValue.callWhere(key, value, operation)` (which is a shorter wa
     // ...
 ```
 
-
 Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
 
 #### More Information
 
 For more information on this feature, see [JEP 481](https://openjdk.org/jeps/481).
 
-HotSpot
--------
+## HotSpot
 
 Java 23 introduces a single change to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -787,13 +757,11 @@ To run your workload with Generational ZGC in Java 22, the following configurati
 $ java -XX:+UseZGC -XX:+ZGenerational ...
 ```
 
-
 In Java 23, this command-line option is no longer needed, it will use generational mode by default:
 
 ```bash
 $ java -XX:+UseZGC ...
 ```
-
 
 When you *do* still include it, a warning will be issued that the `ZGenerational` option is deprecated.
 
@@ -802,7 +770,6 @@ To revert back to non-generational ZGC, you would need to run:
 ```bash
 $ java -XX:+UseZGC -XX:-ZGenerational ...
 ```
-
 
 And you would get two warnings:
 
@@ -813,8 +780,7 @@ And you would get two warnings:
 
 For more information on this feature, see [JEP 474](https://openjdk.org/jeps/474).
 
-Core Libraries
---------------
+## Core Libraries
 
 Java 23 also brings you 4 additions that are part of the core libraries:
 
@@ -858,7 +824,6 @@ void fooBar(boolean z, int x) {
 }
 ```
 
-
 With ASM we could generate the method like so:
 
 ```java
@@ -882,7 +847,6 @@ mv.visitInsn(RETURN);
 mv.visitEnd();
 ```
 
-
 Unlike in ASM, where clients directly create a `ClassWriter` and then request a `MethodVisitor`, the Class-File API adopts a different approach. Here, instead of clients initiating a builder through a constructor or factory, they supply a lambda function that takes a builder as its parameter:
 
 ```java
@@ -905,7 +869,6 @@ classBuilder.withMethod("fooBar", MethodTypeDesc.of(CD_void, CD_boolean, CD_int)
         .return_();
 });
 ```
-
 
 #### What's Different From Java 22?
 
@@ -965,7 +928,6 @@ void vectorComputation(float[] a, float[] b, float[] c) {
 }
 ```
 
-
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
 #### Typical Use Cases
@@ -1000,7 +962,6 @@ long numberOfNonClassicalGuitars = guitars.stream() // source of elements
         .collect(Collectors.counting()); // terminal operation
 ```
 
-
 The Stream API offers a relatively diverse but predetermined range of intermediate and terminal operations, including mapping, filtering, reduction, sorting, and more. Over the years, many new intermediate operations have been suggested for the Stream API. For example, it could be useful to introduce a `distinctBy` intermediate operation. A `distinct` operation *does* exist, trakcing the elements it has already seen by using object equality. But what if we want distinct elements based on something else than object equality?
 
 ```java
@@ -1008,7 +969,6 @@ var singleGuitarPerStyle = guitars.stream()
                 .distinctBy(Guitar::guitarStyle) // hypothetical
                 .toList();
 ```
-
 
 Over the years, many new intermediate operations have been suggested for the Stream API.  
 
@@ -1056,7 +1016,6 @@ stream
     .collect(...);
 ```
 
-
 #### Built-in gatherers
 
 As part of this JEP a few built-in gatherers are introduced:
@@ -1100,7 +1059,6 @@ static <T, A> Gatherer<T, ?, T> distinctBy(Function<? super T, ? extends A> clas
 }
 ```
 
-
 ...and this is how you could use it:
 
 ```java
@@ -1109,7 +1067,6 @@ guitars.stream()
         .forEach(System.out::println);
 ```
 
-
 ...which would yield the following output:
 
 ```java
@@ -1117,7 +1074,6 @@ Guitar[name=Taylor GS Mini-e Koa, guitarStyle=WESTERN]
 Guitar[name=Fender Stratocaster, guitarStyle=ELECTRIC]
 Guitar[name=Cordoba F7 Paco Flamenco, guitarStyle=CLASSICAL]
 ```
-
 
 #### No New Intermediate Operations
 
@@ -1156,8 +1112,7 @@ All uses of memory-access methods in `sun.misc.Unsafe` will generate compile-tim
 
 For more information on this feature, see [JEP 471](https://openjdk.org/jeps/471). It has more details on the targeted methods, their alternatives from `VarHandle` and `MemorySegment` and how to configure the deprecation warnings with the new command-line option `--sun-misc-unsafe-memory-access` (to promote the warnings to `UnsupportedOperationException`s already, for example). It also provides a few migration examples.
 
-Tools
------
+## Tools
 
 Java 23 contains a single feature that is part of the JavaDoc tool:
 
@@ -1195,7 +1150,6 @@ Markdown documentation comments are written in the [CommonMark](https://spec.com
 /// | Epiphone | Casino     |
 ```
 
-
 You can create a link to an element declared elsewhere in your API, by simply enclosing a reference to the element in square brackets.  
 
 For example, to link to `java.util.List`, you can write `[java.util.List]`, or just `[List]`.  
@@ -1212,13 +1166,11 @@ You can link to any kind of program element:
 /// - a method [Guitar#isInTune()]
 ```
 
-
 To create a link with alternative text, you can use the form \[text\]\[element\]. For example:
 
 ```java
 /// Please feel free to use our [utility guitar tuning method][Guitar#isInTune()]!
 ```
-
 
 #### What's Different From Java 22?
 
@@ -1228,7 +1180,6 @@ In Java 22, it wasn't yet possible to include Markdown in documentation comments
 
 For more information on this feature, see [JEP 467](https://openjdk.org/jeps/467).
 
-Final thoughts
---------------
+## Final thoughts
 
 This release of Java didn't have as many new features as previous versions, but there's still more than enough going on in our favourite language. Project Amber is still going strong, making Java more expressive and elegant. String templates might be missing from this release, but its omission shows that the preview process is working as intended. We can look forward to getting a redesigned version in the future. Also, Java is becoming friendlier towards newcomers now that beginner programs can be shorter than before. And that's not all that's new: [many other updates](https://jdk.java.net/23/release-notes) were included in this release, including thousands of performance, stability and security updates. So what are you waiting for? Time to take this brand-new Java version for a test drive!

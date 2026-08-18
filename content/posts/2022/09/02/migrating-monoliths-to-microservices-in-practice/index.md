@@ -32,8 +32,7 @@ Our goal is to keep the conveniences we had in the legacy monolith while avoidin
 
 n this article, I will outline some practical approaches you can use while carrying out this migration.
 
-Decision
---------
+## Decision
 
 I'm strongly in the "start with a monolith" camp, it should be a modular monolith so we can easily break it down. There's a myth of a monolith as a "block of interconnected code". This is far from the case, most monoliths use the capabilities of modern programming languages (e.g packages, modules, etc.) to separate the various pieces. Calls between the various parts of a modular monolith occur through clearly defined interfaces or event buses.
 
@@ -51,8 +50,7 @@ The nice thing about this is that you can take this step while keeping the monol
 
 Once you have a sense of those, you can start estimating the benefit you might get from the monolith to microservices migration.
 
-Where Do We Start?
-------------------
+## Where Do We Start?
 
 Assuming the monolithic code is already relatively modular and supports SSO (Single Sign On), we can pick any module we want. How do we know which one will have the best return on our investment of time and effort?
 
@@ -66,8 +64,7 @@ These things are simple enough when running locally but often the behavior of th
 
 In those cases we can use developer observability tools such as a runtime line counter to evaluate usage. We need to strike a balance of benefit and utility when we choose the module to break out.
 
-Avoiding the Tiny Monolithic Architecture
------------------------------------------
+## Avoiding the Tiny Monolithic Architecture
 
 People often recite the tenants of microservices but proceed to build something that doesn't follow the general rules.
 
@@ -93,8 +90,7 @@ But maybe some user code invoked the webservice directly and effectively circumv
 
 This is where logs and snapshots come in. We can add them in the backend API and also in the broken off service to verify that the results that we got are indeed the results from the gateway cache.
 
-Rinse -- Repeat
----------------
+## Rinse -- Repeat
 
 This process is most challenging when we break off the first microservice out of monolithic applications. As we break additional pieces, it typically becomes easier until the entire monolith is gone. But there are challenges along the way. Initially, we pick an achievable goal which is easier. As we move forward, we run into harder challenges and need to decide on boundaries for a service that might be less than ideal.
 
@@ -108,8 +104,7 @@ Some of those inter-dependencies can be inferred from the code and refactored aw
 
 This lets us isolate an entire module from the rest of the application and limit the interaction to a narrow interface. By raising such a barrier we can use the compiler and IDE to enforce module restrictions.
 
-Finally
--------
+## Finally
 
 Breaking down monolithic applications is always challenging. It takes time and effort to isolate the business logic into the correct domains. The communication overhead and division of features to a specific service are the components that make the difference in such a process.
 

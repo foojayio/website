@@ -61,7 +61,6 @@ Here's an excerpt from the POM:
 </dependency>
 ```
 
-
 Hazelcast data pipelines work by regularly polling the source. With an HTTP endpoint, that's straightforward, but with SSE, not so much as SSE relies on subscription. Hence, we need to implement a custom `Source` and design it around an internal queue to store the changes as they arrive, while polling will dequeue and send them further down the pipeline.
 
 We design the code around the following components:
@@ -93,7 +92,6 @@ Running the code outputs something like this:
 {"server_script_path":"/w","server_name":"www.wikidata.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":false,"wiki":"wikidatawiki","length":{"new":22936,"old":22819},"type":"edit","title":"Q80075234","revision":{"new":1468164258,"old":1467697544},"patrolled":true,"meta":{"dt":"2021-07-28T04:07:44Z","partition":0,"offset":363427334,"stream":"mediawiki.recentchange","domain":"www.wikidata.org","topic":"codfw.mediawiki.recentchange","id":"7016afae-6691-4dca-bfaf-a5a3363edf31","uri":"https://www.wikidata.org/wiki/Q80075234","request_id":"aa4f6828-149d-4feb-a3cf-cd39902773fe"},"namespace":0,"comment":"/* wbsetdescription-add:1|dv */ އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, [[:toollabs:quickstatements/#/batch/60416|batch #60416]]","id":1514670484,"server_url":"https://www.wikidata.org","user":"EN-Jungwon","parsedcomment":"\u200e<span dir=\"auto\"><span class=\"autocomment\">Added [dv] description: <\/span><\/span> އަކުއިލާ ނަކަތުގައިވާ ތަރިއެއް, <a href=\"https://iw.toolforge.org/quickstatements/#.2Fbatch.2F60416\" class=\"extiw\" title=\"toollabs:quickstatements/\">batch #60416<\/a>","timestamp":1627445264}
 {"server_script_path":"/w","server_name":"de.wikipedia.org","$schema":"/mediawiki/recentchange/1.0.0","minor":false,"bot":true,"wiki":"dewiki","length":{"new":17069,"old":17075},"type":"edit","title":"Liste der Biografien/Caro","revision":{"new":214271460,"old":213857611},"meta":{"dt":"2021-07-28T04:07:43Z","partition":0,"offset":363427335,"stream":"mediawiki.recentchange","domain":"de.wikipedia.org","topic":"codfw.mediawiki.recentchange","id":"6618b0ab-eadf-405a-a474-ec2ad9fef8bb","uri":"https://de.wikipedia.org/wiki/Liste_der_Biografien/Caro","request_id":"23181b86-03de-4153-ad99-e7e20e611ed6"},"namespace":0,"comment":"Bot: Automatische Aktualisierung, siehe [[Benutzer:APPERbot/LdB]]","id":309672385,"server_url":"https://de.wikipedia.org","user":"APPERbot","parsedcomment":"Bot: Automatische Aktualisierung, siehe <a href=\"/wiki/Benutzer:APPERbot/LdB\" title=\"Benutzer:APPERbot/LdB\">Benutzer:APPERbot/LdB<\/a>","timestamp":1627445263}
 ```
-
 
 Here's the last entry, but formatted for better understanding:
 
@@ -136,7 +134,6 @@ Here's the last entry, but formatted for better understanding:
 }
 ```
 
-
 As I mentioned in the introduction, we have a fantastic tool at our disposal for data visualization that doesn't require writing code, and that tool is Kibana. Kibana is part of the so-called ELK stack:
 
 * Elasticsearch provides the storage and indexing part
@@ -161,7 +158,6 @@ val elasticsearch = ElasticSinks.elastic(clientBuilder) {
 }
 ```
 
-
 1. Provide some parameterization to allow to run in different environments
 2. Connect to the configured Elasticsearch instance
 3. Effectively send the data to . Under the cover, Hazelcast will batch the requests.
@@ -176,7 +172,6 @@ val pipeline = Pipeline.create().apply {
 }
 Hazelcast.bootstrappedInstance().jet.newJob(pipeline)
 ```
-
 
 The icing on the cake, with good naming, the Hazelcast API allows people who are not developers to follow the logic along.
 
@@ -226,7 +221,6 @@ com.hazelcast.jet.JetException: failure in bulk execution:
   at java.base/java.lang.Thread.run(Thread.java:829)
 ```
 
-
 It happens because of the way Elasticsearch works. As we didn't provide any explicit index schema, Elasticsearch inferred one for us from the first data payload it received. In this case, the `log_params` attribute has mostly the following structure:
 
 ```
@@ -234,7 +228,6 @@ It happens because of the way Elasticsearch works. As we didn't provide any expl
   "userid": 108038
 }
 ```
-
 
 Hence, Elasticsearch recognizes it as a JSON object with the `userid` property. Yet, sometimes, the stream contains `"log_params":[]`, which is JSON array. Elasticsearch cannot reconcile between the two and throws the above exception.
 
@@ -255,7 +248,6 @@ val pipeline = Pipeline.create().apply {
     .writeTo(elasticsearch)
 }
 ```
-
 
 1. Define a `FunctionEx` that takes a `JSONObject` as a parameter and returns a `JSONObject`
 2. Return the same `JSONObject` with the following changes applied
@@ -283,7 +275,6 @@ class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx<StreamS
 }
 ```
 
-
 To use it:
 
 ```java
@@ -294,7 +285,6 @@ val pipeline = Pipeline.create().apply {
     .writeTo(elasticsearch)
 }
 ```
-
 
 1. Focus on the what
 
@@ -310,7 +300,6 @@ val pipeline = Pipeline.create().apply {
 }
 ```
 
-
 1. We log every item to the standard output
 
 With a lot of data, this can be too much noise. A sample is enough:
@@ -324,7 +313,6 @@ val toStringFn = FunctionEx<Any?, String> {
   it?.toString()                                      // 2
 }
 ```
-
 
 1. Return `true` if the random value between `0` and `frequency` is `0`
 2. Null-safe `toString()`
@@ -340,7 +328,6 @@ val pipeline = Pipeline.create().apply {
     .writeTo(elasticsearch)
 }
 ```
-
 
 1. Sample one item per 50 **on average**
 
@@ -359,7 +346,6 @@ class MakeFieldObjectIfArray(private val fieldName: String) : FunctionEx {
 }
 ```
 
-
 With this, launching the pipeline outputs the following log:
 
 ```
@@ -373,7 +359,6 @@ digraph DAG {
   "map" -> "elasticSink" [queueSize=1024];
 }
 ```
-
 
 Looking at the existing data, we can notice two types of contributions:
 
@@ -398,7 +383,6 @@ Let's add the necessary dependencies:
     <version>2.15.0</version>
 </dependency>
 ```
-
 
 Then, we can add an additional step in the processing pipeline to check whether the user is an IP and add the info if it is:
 
@@ -427,7 +411,6 @@ val pipeline = Pipeline.create().apply {
     .writeTo(elasticsearch)
 }
 ```
-
 
 1. Set a descriptive name
 2. If the bot property is false and if the user property exists
@@ -486,7 +469,6 @@ We are now ready to map the field.
 }
 ```
 
-
 10. Click on the Create template button
 
 In the `wikipedia` index, Elasticsearch will map every field named `coordinates` inside a field named `location` to a Geo-Point. For that reason, we need to change the mapping code slightly.
@@ -511,14 +493,12 @@ private fun JSONObject.withLocationFrom(response: CityResponse) {
 }
 ```
 
-
 We can now use it in the pipeline:
 
 ```json
 reader.tryCity(InetAddress.getByName(user))
     .ifPresent { json.withLocationFrom(it) }
 ```
-
 
 Let's start the pipeline again. Now, we can try to repeat the steps to create a Map. This time, it recognizes the field we mapped as a Geo-point and lets us go further.
 
@@ -580,7 +560,6 @@ val enrichWithLanguage = { stage: StreamStage<JSONObject> ->
 }
 ```
 
-
 1. Create the function that provides the language detector
 2. The magic happens here
 3. Add language-related data to the JSON
@@ -598,7 +577,6 @@ val pipeline = Pipeline.create().apply {
             .writeTo(elasticsearch)
     }
 ```
-
 
 On the Kibana map, you can now add any language related fields, *e.g.* , `language.name` to display it along the rest of the data points. Yet, some of them have an empty `comment` field so that the language is not shown. One option would be to update the data pipeline accordingly, but it's also possible to filter out unwanted data points on the Kibana interface. In general, that's the way to go: push data anyway and leave what data they want to display to the final user.
 
@@ -638,7 +616,6 @@ if (languagesWithConfidence.isNotEmpty()) {
     )
 }
 ```
-
 
 1. Get the sorted map of languages
 2. Get the confidence rating of the second language, or 0 if the map has a single element

@@ -26,8 +26,7 @@ What if we took a different approach? What if we made **requirements** the sourc
 
 After years of building business applications, I began developing a methodology that combines ideas from the [Rational Unified Process](https://en.wikipedia.org/wiki/Rational_unified_process) (RUP) with modern AI tooling: The [AI Unified Process](https://aiup.dev). The results are remarkable: better business alignment, maintainable code, and complete traceability from business needs to implementation.
 
-The Problem with Code-Centric Development
------------------------------------------
+## The Problem with Code-Centric Development
 
 Traditional development follows this pattern:
 
@@ -40,8 +39,7 @@ The problem? Code becomes the source of truth. Requirements documents get outdat
 
 AI coding tools make this worse by generating code faster. We're accelerating toward the same maintenance problems we've always had.
 
-Requirements as the Single Source of Truth
-------------------------------------------
+## Requirements as the Single Source of Truth
 
 My approach flips this around. Requirements stay at the center, and everything else gets generated from them:
 
@@ -77,8 +75,7 @@ When requirements change, AI tools like Claude Code update all downstream artifa
 
 No manual synchronization. No outdated documentation. No guessing what the system should do.
 
-The Structure: Independent Epics
---------------------------------
+## The Structure: Independent Epics
 
 Business applications are complex, but that doesn't mean they have to be complicated. I organize everything into independent epics:
 
@@ -88,8 +85,7 @@ Business applications are complex, but that doesn't mean they have to be complic
 
 No cross-epic dependencies. Each epic is a bounded context that can be developed, tested, and deployed independently. This simplifies both the AI generation process and the overall system architecture.
 
-A Real Example: System Use Case Specification
----------------------------------------------
+## A Real Example: System Use Case Specification
 
 Here's how a system use case looks in practice:
 
@@ -117,11 +113,9 @@ Here's how a system use case looks in practice:
 - End Date: Required, must be >= start date
 ```
 
-
 This level of detail gives AI tools everything they need to generate correct, complete implementations. Business stakeholders can understand the main flow, while developers get precise technical requirements.
 
-The Results
------------
+## The Results
 
 This approach has transformed how I build business applications:
 
@@ -135,8 +129,7 @@ This approach has transformed how I build business applications:
 
 **Quality Assurance**: Generated code includes comprehensive tests based on the use case specifications.
 
-Why This Works for Business Applications
-----------------------------------------
+## Why This Works for Business Applications
 
 Business applications have predictable technical patterns but more or less complex domain logic. Frameworks like Vaadin, Spring Boot, and jOOQ provide stable foundations (see [the Simon Martinelli Stack](https://martinelli.ch/the-simon-martinelli-stack-a-pragmatic-approach-to-full-stack-java-development/)). The real complexity lies in understanding and modeling the business domain correctly.
 
@@ -145,8 +138,7 @@ This methodology plays to both strengths:
 * Human expertise handles business domain complexity
 * AI handles consistent technical implementation
 
-Getting Started
----------------
+## Getting Started
 
 If you want to try this approach:
 
@@ -156,8 +148,7 @@ If you want to try this approach:
 4. **Use AI as your consistency engine**: Let tools like Claude Code handle generation and updates.
 5. **Keep epics independent**: Avoid cross-dependencies to simplify both development and AI generation.
 
-The Future of Business Application Development
-----------------------------------------------
+## The Future of Business Application Development
 
 We're at an inflection point. AI can generate high-quality code, but only if we give it high-quality specifications. The organizations that invest in better requirements processes will build better software faster.
 
@@ -166,5 +157,3 @@ This isn't about replacing developers with AI. It's about using AI to eliminate 
 The code is the easy part. Getting the requirements right is where the real value lies. Read more: [https://aiup.dev](https://aiup.dev/)
 
 *This article was first published on <https://martinelli.ch/spec-driven-development-with-ai-a-new-approach-and-a-journey-into-the-past/>*
-
-<br />

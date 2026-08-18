@@ -22,16 +22,13 @@ Here's a super awesome prompt (e.g., for Claude Code) that you can use with <htt
 And the end result is this, a view into the traces of your application (without anything at all at the start of the process).
 ![](dash0-foojay-2-1024x545.png)
 
-**The Super Awesome Prompt**
-----------------------------
+## **The Super Awesome Prompt**
 
 Take a careful look below: before doing this prompt, not only do we not have an application that is instrumented with OpenTelemetry yet. Not only do we not have the agent we need to do the instrumentation yet.
 
 The application itself doesn't even exist yet.
 
 So, here's the prompt that gets you from really zero to OpenTelemetry:
-
-
 
 **Create a minimal Spring Boot app from scratch in this directory with two endpoints: GET /hello returning a greeting, and GET /work that sleeps 50--200ms and returns a JSON payload. Use Maven and Java 21.**   
 **Then instrument it with OpenTelemetry to send traces, metrics, and logs to Dash0 using the otel-instrumentation skill.**   
@@ -46,14 +43,9 @@ Service version and namespace as appropriate resource attributes**
 **Use the OpenTelemetry Java agent (-javaagent:opentelemetry-javaagent.jar) --- download it into the project. Don't hardcode the token in source; put env vars in a run.sh script that's gitignored, and document everything in a README. Follow OpenTelemetry semantic conventions for any custom spans or attributes you add.**   
 **When done, show me the exact commands to run the app and generate some traffic.**
 
-
-
-<br />
-
 (All you need to run this prompt is to get your endpoint and token from your Dash0 Settings dialog, and put them in the placeholders above.)
 
-Why This Prompt Works
----------------------
+## Why This Prompt Works
 
 A few things in there are deliberate:
 
@@ -74,7 +66,6 @@ Then run it (also fine to do in your AI prompt):
 # in another terminal, generate traffic:
 for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; done
 ```
-
 
 Then in Dash0 go to the **Trace Explorer** --- filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10--30 seconds.
 ![](dash0-foojay-2-1024x545.png)

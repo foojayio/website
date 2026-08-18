@@ -36,8 +36,7 @@ In this article, we'll build a small **movie search** app that understands inten
 
 Along the way, we'll explore how to generate embeddings, perform vector searches, and retrieve the most relevant results.
 
-The magic behind vector search
-------------------------------
+## The magic behind vector search
 
 When searching for a movie in the past, the most common approach was keyword-based. You'd type something like**title =** ***"Star Wars"***, and the system would return the exact match.
 
@@ -55,8 +54,7 @@ Together, these three steps form the foundation of vector search.
 
 **Note** : It is recommended to use the same model for both creating and querying embeddings. For example, if the dataset was embedded with [Voyage AI](https://www.voyageai.com/), the queries should also be embedded with Voyage AI to ensure the most accurate and meaningful results.
 
-Prerequisites
--------------
+## Prerequisites
 
 Before we start building the application, make sure you have the following in place:
 
@@ -67,8 +65,7 @@ Before we start building the application, make sure you have the following in pl
 * The [sample dataset](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-data-monogbd-hybrid-search-foojay&utm_term=tony.kim) uploaded to your cluster
   * The embedded_movies collection, which we'll query throughout the examples
 
-Tag your Atlas Cluster
-----------------------
+## Tag your Atlas Cluster
 
 If you're deploying this application on MongoDB Atlas, you can use [Resource Tags](https://www.mongodb.com/docs/atlas/tags/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hybrid-search&utm_term=ricardo.mello) to label your clusters or projects for tracking and cost visibility. For instance, I recommend tagging your cluster with values that describe this tutorial:
 
@@ -76,7 +73,6 @@ If you're deploying this application on MongoDB Atlas, you can use [Resource Tag
 Key: application
 Value: hybrid-search
 ```
-
 
 Adding tags is a simple but powerful way to organize your MongoDB Atlas resources, especially if you manage multiple clusters, environments, or demos. Tags make it easier to:
 
@@ -102,8 +98,7 @@ To add a tag:
 
 This step won't affect your code, but it's a best practice to keep your Atlas environment organized. If you're running MongoDB locally, you can safely skip this step.
 
-Embeddings with Voyage AI
--------------------------
+## Embeddings with Voyage AI
 
 [Voyage AI](https://www.voyageai.com/) is an embedding platform offering high-quality, production-ready models behind a simple API. In this project, we use Voyage AI to generate embeddings in **two places**:
 
@@ -117,16 +112,14 @@ The similarity comparison is executed by [MongoDB Atlas Vector Search](https://w
 
 If you'd like to explore more details about the model we use here, you can check the official[Voyage AI blog post](https://blog.voyageai.com/2025/01/07/voyage-3-large/?utm_source=chatgpt.com).
 
-Preparing the dataset
----------------------
+## Preparing the dataset
 
 Before creating the index, make sure the **embedded_movies** collection has been imported into your MongoDB Atlas cluster. In our case, this dataset already comes with a field called **plot_embedding_voyage_3_large**, which stores the pre-computed embeddings for each movie plot.
 ![](Screenshot-2025-10-09-at-12.27.14-PM.png)
 
 With the dataset in place, the next step is to create a vector index so MongoDB Atlas knows which field to use, its dimensionality, and the similarity metric.
 
-MongoDB Atlas Vector Search (index and retrieval)
--------------------------------------------------
+## MongoDB Atlas Vector Search (index and retrieval)
 
 To compare embeddings at query time, MongoDB Atlas needs a search index that tells it which field stores your vectors, their dimensionality, and which similarity metric to use. Once the collection is in place, [create the following index](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=spring-data-monogbd-hybrid-search-foojay&utm_term=tony.kim):
 
@@ -143,7 +136,6 @@ db.embedded_movies.createSearchIndex(
 )
 ```
 
-
 Let's break it down:
 
 * **"vector_index"**: the index name
@@ -151,8 +143,7 @@ Let's break it down:
 * **numDimensions**: must match the model's embedding size
 * **similarity**: metric used for nearest-neighbor ranking (e.g., dotProduct, cosine, euclidean)
 
-Building the movie search app
------------------------------
+## Building the movie search app
 
 Now that we've seen what vector search is, how embeddings are generated, and created the vector index in MongoDB Atlas, let's put everything into practice. To get started, open [Spring Initializr](https://start.spring.io/), create a new project, and select Spring Web and Spring Data MongoDB as dependencies. Download the project and open it in your favorite IDE.
 ![](Screenshot-2025-10-09-at-12.16.10-PM.png)
@@ -179,7 +170,6 @@ voyage:
  num-candidates: 160
 ```
 
-
 What this does (briefly):
 
 * **MongoDB**: connects Spring Data to your Atlas cluster and the embedded_movies collection
@@ -204,7 +194,6 @@ public record VoyageConfigProperties(
     String apiKey){}
 ```
 
-
 ### The document model
 
 Our embedded_movies collection contains several fields that describe each movie, such as title, year, plot, and cast. To work with this data in our application, we'll define a simple record that maps to the collection but only includes the fields we want to return to the client. Create a record named Movie and annotate it with *Document("embedded_movies")*:
@@ -228,7 +217,6 @@ public record Movie(
 }
 ```
 
-
 ### Wire the request DTO
 
 Next, let's create a request record with a single query field to hold the user's search text, for now. We'll revisit this class later to add extra fields for filtering:
@@ -238,7 +226,6 @@ public record MovieSearchRequest(
       String query
 ) {}
 ```
-
 
 ### Communicating with Voyage AI
 
@@ -259,7 +246,6 @@ public record EmbeddingsRequest(
 ) {}
 ```
 
-
 **EmbeddingsResponse**: This represents the response from Voyage AI.
 
 ```
@@ -269,7 +255,6 @@ public record EmbeddingsResponse(List<Item> data) {
  public record Item(List<Double> embedding) {}
 }
 ```
-
 
 #### The VoyageEmbeddingsClient
 
@@ -292,7 +277,6 @@ public interface VoyageEmbeddingsClient {
  EmbeddingsResponse embed(@RequestBody EmbeddingsRequest body);
 }
 ```
-
 
 **In short**: This interface acts as a strongly-typed wrapper around Voyage AI's /embeddings endpoint, letting us call the API as if it were a regular Java method.
 
@@ -321,7 +305,6 @@ public class VoyageClientConfig {
   }
 }
 ```
-
 
 **In short**: This config builds the HTTP client, injects the API key into every request, and exposes a ready-to-use VoyageEmbeddingsClient bean.
 
@@ -354,11 +337,9 @@ public class EmbeddingService {
 }
 ```
 
-
 This service calls the Voyage AI API with the user's text, generates the embedding using the configured model, and returns the vector as a list of numbers.
 
-Querying with Spring Data Vector Search operation
--------------------------------------------------
+## Querying with Spring Data Vector Search operation
 
 There are multiple ways to run a vector search. You could even work directly with raw document queries. But in this tutorial, we'll focus on the brand-new [Spring Data MongoDB support for semantic search](https://github.com/spring-projects/spring-data-mongodb/releases?page=2), introduced in Spring Data MongoDB 4.5.
 
@@ -405,7 +386,6 @@ public class MovieService {
 }
 ```
 
-
 The *searchMovies* method takes the user's text, generates an embedding with EmbeddingService, and uses Spring Data's new [VectorSearchOperation](https://docs.spring.io/spring-data/mongodb/reference/5.0/mongodb/repositories/vector-search.html) to query MongoDB Atlas Vector Search, returning the most relevant movies directly as mapped Movie objects.
 
 ### The MovieController
@@ -437,7 +417,6 @@ public class MovieController {
 }
 ```
 
-
 **In short**: The controller takes in a search request, delegates to MovieService, and returns a list of matching movies.
 
 By the end, you'll have a project structure similar to this.
@@ -468,11 +447,9 @@ spring-data-mongodb-hybrid-search/
            └── application.yml
 ```
 
-
 **Note**: There's no strict separation into layers or packages here. It's up to you, the reader, to organize the code however you prefer.
 
-Running the application
------------------------
+## Running the application
 
 Set the required environment variables:
 
@@ -482,13 +459,11 @@ export MONGODB_URI=<YOUR CONNECTION>
 export VOYAGE_API_KEY=<YOUR API KEY>
 ```
 
-
 Then, start the application:
 
 ```
 mvn spring-boot:run
 ```
-
 
 With the app running, let's perform a POST request to our new endpoint:
 
@@ -503,7 +478,6 @@ Content-Type: application/json
  "query": "a science fiction movie about rebels fighting an empire in space"
 }
 ```
-
 
 You should see results coming back from the embedded_movies collection, movies semantically close to the description, even though the exact title wasn't mentioned.
 
@@ -525,9 +499,7 @@ You should see results coming back from the embedded_movies collection, movies s
 }
 ```
 
-
-Looking ahead
--------------
+## Looking ahead
 
 In this first part, we explored what vector search is, its core principles, and how it enables semantic search beyond simple keywords. We saw how to generate embeddings with Voyage AI, create a vector index in MongoDB Atlas, and use the brand-new Spring Data MongoDB support for vector queries to build a working movie search application.
 

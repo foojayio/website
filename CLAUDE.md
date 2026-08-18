@@ -108,6 +108,25 @@ IntelliJ's terminal, read this before making changes.
   `HtmlToMarkdown.toMarkdown` now drops heading ids at the source, so a
   re-scrape is a no-op; the script stays for the same reason
   `MigrateEnlighterToFences.java` does. `--dry-run` / `--path` as usual.
+- **`scripts/NormalizeMarkdown.java`**: one-off migration that brought
+  `content/` in line with the storage format the converter now emits. Two
+  things, both Flexmark defaults that were never a deliberate choice:
+  **setext headings → ATX** (Flexmark underlines h1/h2 with `====`/`----` and
+  only hashes from h3 down, so content was in two styles at once — 8053
+  converted), and **decorative `<br>` lines dropped** (WP uses a bare `<br />`
+  as a vertical spacer after images and embeds; 1152 removed, same case as the
+  decorative `<hr>`s below). Bodies now end in a single newline.
+  `HtmlToMarkdown` emits both shapes directly now
+  (`FlexmarkHtmlConverter.SETEXT_HEADINGS = false` + the `STANDALONE_BREAK`
+  pass), so a re-scrape is a no-op. `--dry-run` / `--path` as usual.
+
+  Three things it deliberately leaves alone, each because touching them would
+  change the page rather than restyle the source: a `<br>` with text on its line
+  (load-bearing in a table cell or inline SVG), anything inside a fence or an
+  indented code block (several posts paste multi-document YAML whose `---`
+  separators would otherwise become headings), and a `---` under a **list item**
+  (CommonMark says a setext underline can't interrupt a list, so that pair
+  already renders as list + thematic break — 203 left underlined for this).
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
   `authors:` slug without a matching author bundle), run by
@@ -233,6 +252,16 @@ IntelliJ's terminal, read this before making changes.
   `.Destination`/`.Title`, because those arrive raw and CommonMark decodes
   entities in a destination, so `?a=1&amp;b=2` otherwise renders as a query
   param literally named `amp;b` (~90 posts). Check both when editing a hook.
+- **Headings are stored as ATX (`##`), not setext underlines.** Levels map 1:1
+  to WordPress's `<h1>`–`<h6>`, so nesting is exactly what the author wrote —
+  verified by diffing the built site: across 3543 pages, **zero** changed their
+  heading-level sequence when `NormalizeMarkdown.java` restyled 8053 of them.
+  (Content nesting is mostly sane on its own: posts start at h2, and only 87
+  skips — mostly h2 → h4 — exist across 15,930 headings in 50 files. Those are
+  the authors' own markup, not a conversion artifact.) Note that a setext
+  underline heads the **whole paragraph** above it, which is why 3 posts were
+  rendering a paragraph of prose inside their `<h2>`; ATX heads only its own
+  line, so the migration fixed those. Don't reintroduce `----` underlines.
 - **Code blocks are stored as Markdown fences, rendered as EnlighterJS.**
   `content/` holds ```` ```java ````; `themes/foojay/layouts/_default/_markup/render-codeblock.html`
   turns every fence back into the `<pre class="EnlighterJSRAW">` element the
@@ -250,14 +279,18 @@ IntelliJ's terminal, read this before making changes.
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `MigrateEnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
-- **WordPress's decorative `<hr>`s are dropped, not converted.** Flexmark
+- **WordPress's decorative `<hr>`s and `<br>` spacers are dropped, not
+  converted.** Flexmark
   renders `<hr>` as `*** ** * ** ***`, and WP bodies are full of them between
   sections — they carried styling the WP theme supplied and this one doesn't,
   so on Hugo they were bare rules that added nothing. `HtmlToMarkdown` strips
   them from the converter's output (`FLEXMARK_THEMATIC_BREAK`), before the
   preserved placeholders are restored, so a code sample containing the same
   asterisks is never touched. ~950 were removed from `content/` in one pass;
-  this keeps a re-scrape from putting them back.
+  this keeps a re-scrape from putting them back. A line holding nothing but
+  `<br>` tags is dropped at the same point and for the same reason
+  (`STANDALONE_BREAK`) — WP uses them as vertical spacers after images and
+  embeds. A `<br>` with text on its line is a real hard break and stays.
 - **Posts are filed by publish date, not flat**: `content/posts/<year>/<month>/<slug>.md`,
   bucketed by the post's original publish date (parsed in `ConvertPosts.java`'s
   `bucketDirFor()`), purely to keep a 1000+-post directory browsable. This has

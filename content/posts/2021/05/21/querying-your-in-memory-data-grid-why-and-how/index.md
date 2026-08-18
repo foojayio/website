@@ -65,7 +65,6 @@ var predicate = entry.get("component").equal(name);       // 1
 Collection<String> values = map.values(predicate);        // 2
 ```
 
-
 1. `name` is the component's ID
 2. `values` contains all values that match the component's name
 
@@ -76,7 +75,6 @@ analytics.set(uuid.uuid4(), json.dumps(data)).result()          # 1
 analytics.set(uuid.uuid4(), HazelcastJsonValue(data)).result()
 ```
 
-
 1. `data` is a Python `dic`
 
 On the query side, the only change is to update the generic type of the collection:
@@ -85,7 +83,6 @@ On the query side, the only change is to update the generic type of the collecti
 Collection<String> values = map.values(predicate);
 Collection<HazelcastJsonValue> values = map.values(predicate);
 ```
-
 
 ### The Shape of ~~Water~~ Stored Data
 
@@ -148,14 +145,12 @@ factory = {
 }
 ```
 
-
 On the Java side, we can avoid creating the class by using GenericRecord. As its name implies, it's generic. Hence, we can query the data without having the definition of a Java `Analytics` class on the classpath! Again, the change is straightforward:
 
 ```java
 Collection<HazelcastJsonValue> values = map.values(predicate); 
 Collection<GenericRecord> values = map.values(predicate);
 ```
-
 
 In both cases, you can access a field by its name:
 
@@ -164,7 +159,6 @@ values.stream()
         .map(value -> value.getString("component"))
         .forEach(System.out::println);
 ```
-
 
 ### Indexing Data
 
@@ -195,7 +189,6 @@ var entry = Predicates.newPredicateBuilder().getEntryObject();
 var predicate = entry.get("component").equal(name).and(entry.get("instant").lessThan(instant));
 ```
 
-
 The relevant index configuration would be:
 
 ```yaml
@@ -210,7 +203,6 @@ hazelcast:
           attributes:
             - "instant"
 ```
-
 
 At this point, we know how to query an `IMap` with the Criteria API and make it fast with the proper index configuration.
 
@@ -228,7 +220,6 @@ As a Java developer, you might already be familiar with SQL and JDBC. Learning a
 </dependency>
 ```
 
-
 2. Use the standard JDBC API: 
 
 ```java
@@ -245,7 +236,6 @@ try (var connection = DriverManager.getConnection("jdbc:hazelcast://localhost:57
 }
 ```
 
-
 That's all! The icing on the cake, you can use SQL in other language stacks (without JDBC, obviously). At the time of this writing, it still uses part of the Criteria API, but we intend to move it outside. The above code can be rewritten in Python like the following:
 
 ```python
@@ -255,7 +245,6 @@ results = analytics.values(sql(select)).result()
 for result in results:
     print(result.component)
 ```
-
 
 ### Conclusion
 

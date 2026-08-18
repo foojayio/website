@@ -29,8 +29,7 @@ Risk management is pretty [much documented](https://en.wikipedia.org/wiki/Risk_m
 
 Let's see how we can apply it to security using the [Attach API](https://blog.frankel.ch/jvm-security/4/) as an example.
 
-Identify the risk
------------------
+## Identify the risk
 
 In short, the Attach API allows one to change the *bytecode* already loaded in a running JVM 1.6+. For that, you need:
 
@@ -41,8 +40,7 @@ When the attached JVM starts again, it discards the updated *bytecode* and loads
 
 With the Attach API, a malicious actor could change the behavior of a running application. For example, the actor could direct a few cents on every transaction to their account in a banking system.
 
-Analyze the risk
-----------------
+## Analyze the risk
 
 Now that we have correctly identified the risk, we need to quantify its likelihood: how likely can a malicious actor trigger the risk?
 
@@ -67,16 +65,13 @@ long pid = Runtime.getRuntime()
                .map { it[0] }
 ```
 
-
 Starting from 9 onwards, the JVM added a dedicated `ProcessHandle` class in the Process API:
 
 ```kotlin
 long pid = ProcessHandle.current().pid()
 ```
 
-
-Prioritize
-----------
+## Prioritize
 
 To prioritize, we need to evaluate the impact of a successful attack.
 
@@ -90,8 +85,7 @@ It's very context-dependent, so here's a sample of some domains:
 | Economic with large radius  | High to very high | * Banking transaction involving millions * Stock exchange * Food-related goods trading |
 | Gaming (except competitive) | Low               | Candy Crush                                                                            |
 
-Treat
------
+## Treat
 
 Treating includes two separate things:
 
@@ -102,8 +96,7 @@ Mitigations allow reducing the impact of the attack. There might be several miti
 
 With the Attach API, the feature is enabled by default. The treatment is to disable it explicitly. I couldn't come up with any mitigation. Once the malicious actor has injected the *bytecode*, the latter will run its course.
 
-Risk management in the real-world
----------------------------------
+## Risk management in the real-world
 
 Security is not a black-and-white concern. There's no such thing as a secure system vs. an insecure one. Some systems are more secure than others against specific threats. Moreover, improving security against a threat has a cost in general. Hence, one needs to find the right balance between the likelihood of the risk, its impact, the cost of the treatment, and possible mitigations.
 

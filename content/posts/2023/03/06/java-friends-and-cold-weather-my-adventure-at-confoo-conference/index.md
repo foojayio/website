@@ -24,15 +24,11 @@ The conference took place over three days at the Bonaventure Hotel in Montreal, 
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-62703" src="PXL_20230223_204517242-700x394.jpg" alt="" width="700" height="394">
 
-<br />
-
 To make it possible, I requested the organizers schedule both of my talks on the same day, so I could fly in from Toronto in the morning and leave in the evening. I was grateful to them for accommodating my request.
 
 However, the weather was brutally cold, with a negative temperature. Unfortunately, due to time constraints and bad weather, I did not have the opportunity to explore the beautiful city that I had always wanted to visit.
 
 <img decoding="async" class="alignnone size-medium wp-image-62704" src="PXL_20230223_195714931-700x394.jpg" alt="" width="700" height="394">
-
-<br />
 
 I presented two talks on Java and JVM technologies. The first one was titled "Your code on the Fastlane: catch up with everyone," where I presented the newer additions to Java after Java 8 and 9.
 
@@ -44,21 +40,15 @@ I was fortunate to have a great audience who interacted with me, and I received 
 
 <img decoding="async" class="alignnone size-medium wp-image-62705" src="PXL_20230223_210951111-700x394.jpg" alt="" width="700" height="394">
 
-<br />
-
 I missed attending other presentations but met some old and new friends, including Java champions [Ken Fogel](https://twitter.com/omniprof), Pratik Patel, and [Henri Tremblay](https://twitter.com/henri_tremblay), whom I knew only online but finally met in person. Ken Fogel lives in Montreal, and we had a great conversation where he shared his talk with me about the Java microbenchmark.
 
 Later, I met [Pratik Patel](https://twitter.com/prpatel), and we chatted about our work and ended up coming up with the idea of organizing a conference in Toronto soon. It was a fruitful discussion, and I hope to catch up with them again at some other conference in the future.
 
 <img loading="lazy" decoding="async" class="alignnone size-medium wp-image-62706" src="PXL_20230223_184610646-700x394.jpg" alt="" width="700" height="394">
 
-<br />
-
 The trip was short but nice, and I hope to attend the conference next year, God willing, and maybe get an invitation to speak again.  
 
 <img loading="lazy" decoding="async" class="alignnone size-medium wp-image-62707" src="PXL_20230223_142427620-700x394.jpg" alt="" width="700" height="394">
-
-<br />
 
 My flight was delayed several times due to the weather, and I was exhausted when it finally took off around 10 p.m.
 

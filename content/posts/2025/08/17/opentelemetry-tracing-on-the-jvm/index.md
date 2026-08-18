@@ -31,8 +31,7 @@ In this post, I want to compare the different zero-code OpenTelemetry approaches
 * Quarkus
 * Quarkus with the OpenTelemetry Agent
 
-Commonalities
--------------
+## Commonalities
 
 I keep the architecture pretty simple:
 
@@ -53,7 +52,6 @@ val products = coroutineScope {
 }
 ```
 
-
 Here are the features for each stack:
 
 |                         |             Quarkus             | Spring Boot |
@@ -63,8 +61,7 @@ Here are the features for each stack:
 | Database access pattern | Record                          | Repository  |
 | Database access         | Hibernate Reactive with Panache | R2DBC       |
 
-Running the OpenTelemetry Agent
--------------------------------
+## Running the OpenTelemetry Agent
 
 The OpenTelemetry Java Agent is the first approach I used regarding OpenTelemetry.
 
@@ -73,7 +70,6 @@ The only necessary configuration is to set the agent when running the JVM:
 ```bash
 java -javaagent:opentelemetry-javaagent.jar -jar otel-boot-agent.jar
 ```
-
 
 The agent supports [lots of frameworks and libraries](https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md), including Spring Boot, Quarkus, Ktor, Spark, and many others. When the application flow finds a supported framework/library, it logs a span.
 
@@ -89,7 +85,6 @@ services:
       OTEL_METRICS_EXPORTER: none                                    #3
       OTEL_LOGS_EXPORTER: none                                       #3
 ```
-
 
 1. OpenTelemetry service name
 2. OpenTelemetry endpoint; Spring Boot uses HTTP
@@ -107,8 +102,7 @@ Spring Boot features an additional span that displays the repository call. There
 
 The Agent outputs the SQL query in both frameworks, *i.e.* , `SELECT product.* FROM product`. **The Java Agent works out-of-the-box**.
 
-Micrometer Tracing on Spring Boot
----------------------------------
+## Micrometer Tracing on Spring Boot
 
 Spring Boot provides dedicated OpenTelemetry support via [Micrometer Tracing](https://docs.micrometer.io/tracing/reference/).
 > Micrometer Tracing provides a simple facade for the most popular tracer libraries, letting you instrument your JVM-based application code without vendor lock-in. It is designed to add little to no overhead to your tracing collection activity while maximizing the portability of your tracing effort.
@@ -129,7 +123,6 @@ services:
       MANAGEMENT_OTLP_TRACING_ENDPOINT: http://jaeger:4318/v1/traces #1-3
 ```
 
-
 1. Different values from the OpenTelemetry specification
 2. The Spring application name serves as the OpenTelemetry service name
 3. Full path to the API endpoint
@@ -142,8 +135,7 @@ The new trace contains the database span:
 
 You might notice another issue: calls to the service and the database are sequential, where they should be parallel. It stems from Spring Boot not handling context propagation properly to the coroutine scope. It's an underlying work from the Spring team. Subscribe to the [GitHub issue](https://github.com/spring-projects/spring-framework/issues/35185) if you're interested.
 
-OpenTelemetry Spring Boot Starter
----------------------------------
+## OpenTelemetry Spring Boot Starter
 
 The OpenTelemetry project provides a [Spring Boot starter](https://opentelemetry.io/docs/zero-code/java/spring-boot-starter/). You need only a single dependency, and like other starters, Spring Boot magic takes care of configuration:
 
@@ -154,13 +146,11 @@ The OpenTelemetry project provides a [Spring Boot starter](https://opentelemetry
 </dependency>
 ```
 
-
 ![](boot-starter-1024x143.png)
 
 The result is very similar to the previous one, including the not-parallel-but-serial issue.
 
-Quarkus
--------
+## Quarkus
 
 We saw the results of using the OpenTelemetry Agent in the first section. It's quite straightforward to use OpenTelemetry without the Agent; you need a single dependency:
 
@@ -170,7 +160,6 @@ We saw the results of using the OpenTelemetry Agent in the first section. It's q
     <artifactId>quarkus-opentelemetry</artifactId>
 </dependency>
 ```
-
 
 Quarkus prefixes regular OpenTelemetry environment variable names with `QUARKUS_`:
 
@@ -182,7 +171,6 @@ services:
       QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4317 #2
 ```
 
-
 1. OpenTelemetry service name
 2. OpenTelemetry endpoint; Quarkus uses gRPC
 
@@ -190,8 +178,7 @@ Results are as expected:
 
 ![](quarkus-1024x145.png)
 
-Discussion
-----------
+## Discussion
 
 OpenTelemetry approaches vary widely in both configuration and results. Unless you're prevented from using Java agents for technical or organizational reasons, I recommend using the OpenTelemetry Agent first. It handles everything you can throw at it out of the box, including the most common libraries. Barring that, you need deep knowledge of the stack you're using, lest results don't represent what happens in reality.
 
@@ -202,7 +189,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [OpenTelemetry Java Agent](https://opentelemetry.io/docs/zero-code/java/agent/)
 * [Kotlin Coroutines and OpenTelemetry tracing](https://blog.frankel.ch/kotlin-coroutines-otel-tracing/)
 * [Add support for Micrometer context propagation in Kotlin coroutines](https://github.com/spring-projects/spring-framework/issues/35185)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-tracing-jvm/) on August 3^rd^, 2025*

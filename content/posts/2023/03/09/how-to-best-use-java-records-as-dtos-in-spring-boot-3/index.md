@@ -31,10 +31,7 @@ Whether you prefer reading or watching, let's review a few approaches for using 
 
 {{< youtube uy6iN0d6J8E >}}
 
-<br />
-
-Sample Database
----------------
+## Sample Database
 
 Follow these intructions if you'd like to install the sample database and experiment yourself. Otherwise, feel free to skip this section:
 
@@ -54,20 +51,17 @@ docker run -d --name yugabytedb_node1 --net custom-network \
   --base_dir=/home/yugabyte/yb_data --daemon=false
 ```
 
-
 * Create the `chinook` database in YugabyteDB:
 
 ```
 createdb -h 127.0.0.1 -p 5433 -U yugabyte -E UTF8 chinook
 ```
 
-
 * Load the sample dataset: 
 
 ```
 psql -h 127.0.0.1 -p 5433 -U yugabyte -f Chinook_PostgreSql_utf8.sql -d chinook
 ```
-
 
 Next, create a sample Spring Boot 3 application:
 
@@ -82,7 +76,6 @@ Next, create a sample Spring Boot 3 application:
 </dependency>
 ```
 
-
 * Provide YugabyteDB connectivity settings in the `application.properties` file:
 
 ```
@@ -91,11 +84,9 @@ spring.datasource.username = yugabyte
 spring.datasource.password = yugabyte
 ```
 
-
 All set! Now, you're ready to follow the rest of the guide.
 
-Data Model
-----------
+## Data Model
 
 The Chinook Database comes with many relations, but two tables will be more than enough to show how to use Java records as DTOs.
 
@@ -133,7 +124,6 @@ public class Track {
 }
 ```
 
-
 The second table is `Album` and has the following entity class:
 
 ```
@@ -152,16 +142,13 @@ public class Album {
 }
 ```
 
-
 In addition to the entity classes, create a Java Record named `TrackRecord` that stores short but descriptive song information:
 
 ```
 public record TrackRecord(String name, String album, String composer) {}
 ```
 
-
-Naive Approach
---------------
+## Naive Approach
 
 Imagine you need to implement a REST endpoint that returns a short song description. The API needs to provide song and album names, as well as the author's name.
 
@@ -173,7 +160,6 @@ The previously created `TrackRecord` class can fit the required information. So,
 public interface TrackRepository extends JpaRepository<Track, Integer> {
 }
 ```
-
 
 * Add a Spring Boot's Service-level method that creates a `TrackRecord` instance from the `Track` entity class. The latter is retrieved via the `TrackRepository` instance:
 
@@ -190,7 +176,6 @@ public TrackRecord getTrackRecord(Integer trackId) {
     return trackRecord;
 }
 ```
-
 
 The solution looks simple and compact, but it's very inefficient because Hibernate needs to instantiate two entities first---`Track` and `Album` (see the `track.getAlbum().getTitle()`).
 
@@ -223,13 +208,11 @@ Hibernate:
         a1_0.album_id=?
 ```
 
-
 Hibernate selects 12 columns across two tables, but `TrackRecord` needs only three columns!
 
 This is a waste of memory, computing, and networking resources, especially if you use distributed databases like YugabyteDB that scatters data across multiple cluster nodes.
 
-TupleTransformer
-----------------
+## TupleTransformer
 
 The naive approach can be easily remediated if you query only the records the API requires then transform a query result set to a respective Java Record.
 
@@ -261,7 +244,6 @@ public TrackRecord getTrackRecord(Integer trackId) {
 }
 ```
 
-
 * `entityManager.createQuery(...)` - creates a JPA query that requests three columns that are needed for the `TrackRecord` class.
 * `query.setTupleTransformer(...)` - the TupleTransformer supports Java records which means a `TrackRecord` instance can be created in the transformer's implementation.
 
@@ -284,11 +266,9 @@ Hibernate:
         t1_0.track_id=?
 ```
 
-
 However, there is one, very visible downside to this approach ---the implementation of the `public TrackRecord getTrackRecordV2(Integer trackId)` became longer and wordier.
 
-Java Record Within JPA Query
-----------------------------
+## Java Record Within JPA Query
 
 There are several ways to shorten the previous implementation. One is to instantiate a Java Record instance within a JPA query.
 
@@ -305,7 +285,6 @@ public interface TrackRepository extends JpaRepository<Track, Integer> {
         TrackRecord findTrackRecord(@Param("id") Integer trackId);
 ```
 
-
 Next, update the implementation of the `public TrackRecord getTrackRecord(Integer trackId)` this way:
 
 ```
@@ -315,7 +294,6 @@ public TrackRecord getTrackRecord(Integer trackId) {
 }
 ```
 
-
 So, the method implementation is a one-liner that gets a `TrackRecord` instance straight from the JPA repository. As simple as possible.
 
 But that's not all. There is one more small issue. The JPA query that constructs a Java Record requires you to provide a full package name for the `TrackRecord` class:
@@ -324,16 +302,13 @@ But that's not all. There is one more small issue. The JPA query that constructs
 SELECT new com.my.springboot.app.TrackRecord(t.name, a.title, t.composer)...
 ```
 
-
 Let's find a way to bypass this requirement. Ideally, the Java Record needs to be instantiated without the package name:
 
 ```
 SELECT new TrackRecord(t.name, a.title, t.composer)...
 ```
 
-
-Hypersistence Utils
--------------------
+## Hypersistence Utils
 
 [Hypersistence Utils](https://github.com/vladmihalcea/hypersistence-utils "Hypersistence Utils") library comes with many goodies for Spring and Hibernate. One feature allows you to create a Java Record instance within a JPA query without the package name.
 
@@ -351,13 +326,11 @@ public class ClassImportIntegratorProvider implements IntegratorProvider {
 }
 ```
 
-
 * Update the `application.properties` file by adding this custom `IntegratorProvider`:
 
 ```
 spring.jpa.properties.hibernate.integrator_provider=com.my.springboot.app.ClassImportIntegratorProvider
 ```
-
 
 After that you can update the JPA query of the `TrackRepository.findTrackRecord(...)` method by removing the Java Record's package name (`com.my.springboot.app`) from the query string:
 
@@ -371,11 +344,9 @@ After that you can update the JPA query of the `TrackRepository.findTrackRecord(
  TrackRecord findTrackRecord(@Param("id") Integer trackId);
 ```
 
-
 It's that simple!
 
-Summary
--------
+## Summary
 
 The latest versions of Java, Spring, and Hibernate have a number of significant enhancements to simplify and make coding in Java more fun.
 

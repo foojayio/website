@@ -28,8 +28,7 @@ JReleaser is a tool that streamlines the release process for Java projects, allo
 
 This article will use the [SemVer Check project](https://github.com/jagodevreede/semver-check/ "SemVer Check project") as an example project that uses Maven as a build tool.
 
-Preconditions
--------------
+## Preconditions
 
 In order to publish to Maven central, you will need to have a GPG key and have a group-id (coordinate) registered.
 
@@ -44,13 +43,11 @@ You will need a GPG key to sign the artifacts, this will allow users to verify t
 gpg --gen-key
 ```
 
-
 * Now find the id of your key with 
 
 ```
 gpg --list-keys --keyid-format=long
 ```
-
 
   The output should look something like this:
 
@@ -63,14 +60,12 @@ uid                 [ultimate] Jago de Vreede <<a href="/cdn-cgi/l/email-protect
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]
 ```
 
-
   In this case, the id of the public key is XXXXXXXXXXXXFC74
 * Publish your public key to a public server, for example Ubuntu: 
 
 ```
 gpg --keyserver keyserver.ubuntu.com --send-keys XXXXXXXXXXXXFC74
 ```
-
 
 ### Coordinate (group-id)
 
@@ -136,7 +131,6 @@ A Maven example is as follows:
 </profiles>
 ```
 
-
 #### Meta information in pom
 
 Maven Central also requires metadata in your pom like a description, inception year, license, list of developers, and scm location.
@@ -170,7 +164,6 @@ Example configurations is:
 </scm>
 ```
 
-
 #### Deploy plugin version
 
 We need to have at least version 3.0.0 of the Maven deploy version, so add the following to the root pom
@@ -187,9 +180,7 @@ We need to have at least version 3.0.0 of the Maven deploy version, so add the f
 </pluginManagement>
 ```
 
-
-JReleaser
----------
+## JReleaser
 
 ### Installing locally
 
@@ -209,7 +200,6 @@ JRELEASER_GPG_PUBLIC_KEY=something_base64_with_around_3000+_chars
 JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME=p72a6s<br>JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD=also-secret
 ```
 
-
 #### GitHub token
 
 First, we need a GitHub token that has access to the repository.
@@ -226,7 +216,6 @@ First, we need to export our private key as a base64 string and put it in the co
 gpg --export-secret-keys XXXXXXXXXXXXFC74 | base64
 ```
 
-
 The `JRELEASER_GPG_PASSPHRASE` is the password we used when we exported the secret key.
 
 Next is the public key, also a base64 encoded string
@@ -234,7 +223,6 @@ Next is the public key, also a base64 encoded string
 ```
 gpg --export XXXXXXXXXXXXFC74 | base64
 ```
-
 
 This we put in the config file under `JRELEASER_GPG_PUBLIC_KEY`.
 
@@ -249,7 +237,6 @@ We need to create a `jreleaser.yml` file for the project. This can be done with 
 ```
 jreleaser init --format yml
 ```
-
 
 You will need to edit the file and fill in the yml. This is where your copy-paste skills will shine, as almost all information can be found in the `pom.xml`.
 
@@ -273,9 +260,7 @@ deploy:
           - target/staging-deploy
 ```
 
-
-The actual local release
-------------------------
+## The actual local release
 
 Now that all the preconditions and plumbing is out of the way it is time for the actual release
 
@@ -287,7 +272,6 @@ You can do that with the Maven versions plugin for example
 mvn versions:set -DnewVersion=0.0.1
 ```
 
-
 ### Staging
 
 The release needs to be uploaded from a staging directory, to create that invoke the following command:
@@ -295,7 +279,6 @@ The release needs to be uploaded from a staging directory, to create that invoke
 ```
 mvn -Ppublication deploy -DaltDeploymentRepository=local::file:./target/staging-deploy
 ```
-
 
 ### Release
 
@@ -305,13 +288,11 @@ First, set the version that you will be releasing (this must be the same as what
 export JRELEASER_PROJECT_VERSION=0.0.1
 ```
 
-
 Then do the actual release with (note there is no staging area or anything so there is no way back after running this command):
 
 ```
 jreleaser full-release
 ```
-
 
 ### Check progress in Maven Central repository
 
@@ -319,10 +300,7 @@ You can login in to the [Maven Central repository](https://central.sonatype.com/
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-121972" src="Screenshot-2025-12-08-at-14.20.55-700x402.png" alt="" width="700" height="402">
 
-<br />
-
-GitHub action
--------------
+## GitHub action
 
 Now that we can release by hand it is time to automate this entire process!
 
@@ -355,7 +333,6 @@ on:
         required: true
 ```
 
-
 This will look something like this when you start the release workflow
 
 <img decoding="async" class="alignnone size-medium wp-image-121970" src="Screenshot-2025-12-08-at-14.08.23-653x510.png" alt="" width="653" height="510">
@@ -379,14 +356,12 @@ jobs:
           cache: maven
 ```
 
-
 Next, we need to set the version that we will be releasing, we can do that with the Maven versions plugin.
 
 ```
 - name: Set release version
   run: mvn --no-transfer-progress --batch-mode versions:set -DnewVersion=${{ github.event.inputs.version }}
 ```
-
 
 This change will be the code that will be released, so we want to commit that change. A tag will be created in the release process by JReleaser
 
@@ -398,7 +373,6 @@ This change will be the code that will be released, so we want to commit that ch
     message: Releasing version ${{ github.event.inputs.version }}
 ```
 
-
 Now its time to stage the release, as we did manually
 
 ```
@@ -406,13 +380,11 @@ Now its time to stage the release, as we did manually
   run: mvn --no-transfer-progress --batch-mode -Ppublication clean deploy -DaltDeploymentRepository=local::default::file://`pwd`/target/staging-deploy
 ```
 
-
 Then we can call JReleaser this is where we use the secrets we set up before.
 
 ```
 <br>- name: Run JReleaser<br>  uses: jreleaser/release-action@v2<br>  with:<br>    setup-java: false<br>    version: 1.20.0<br>  env:<br>    JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}<br>    JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}<br>    JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}<br>    JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}<br>    JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_PASSWORD }}
 ```
-
 
 When we are done we need to set the next development version and push that.
 
@@ -427,13 +399,11 @@ When we are done we need to set the next development version and push that.
     tags: true
 ```
 
-
 The full file can be found here: <https://github.com/jagodevreede/semver-check/blob/c9353fa86eb9ae8f6b309057748672a6c1e0f435/.github/workflows/release.yml>
 
 And with that, we are done! Now we can easily release our module to Maven Central with the press of a button in GitHub.
 
-Maven plugin
-------------
+## Maven plugin
 
 There is also a JReleaser [Maven plugin](https://jreleaser.org/guide/latest/quick-start/maven.html) available that offers a Maven DSL to configure JReleaser. With that the `jreleaser.yml` file can be omitted as information can be read from the pom file instead.
 
@@ -445,12 +415,9 @@ The use of the Maven DSL offers these benefits:
 
 So why is the CLI used in this article, you might ask? Well, the CLI can be used for projects other than Maven as well, and it demonstrates the capabilities of JReleaser.
 
-Resources used
---------------
+## Resources used
 
 * <https://central.sonatype.org/publish/publish-guide/>
 * <https://jreleaser.org/guide/latest/examples/maven/index.html>
 * <https://github.com/marketplace/actions/jreleaser>
 * <https://central.sonatype.org/pages/ossrh-eol/#central-support>
-
-<br />

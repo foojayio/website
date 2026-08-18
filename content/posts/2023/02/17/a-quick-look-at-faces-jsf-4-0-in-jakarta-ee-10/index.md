@@ -53,8 +53,7 @@ As you can see, there was a lot of changes.
 
 In this article, we take a look at the programmatic API, extensionless mapping, @ClientWindowScoped, and multi-file upload.
 
-Programmatic View API In Faces 4
---------------------------------
+## Programmatic View API In Faces 4
 
 The only way to create views in previous versions of Faces was through .xhtml files.
 
@@ -126,7 +125,6 @@ public class Greet extends Facelet {
 }
 ```
 
-
 The class is annotated @View("/greet.xhtml"), meaning the created component should be hosted/accessible at that path.
 
 The apply method creates an HTML doctype, literal html element, a form, an output text and a button.
@@ -151,8 +149,7 @@ However, for developers that prefer to create their application views in Java, t
 
 Whether it will be developed further is going to be a matter of how many people adopt this API and give feedback.
 
-Extensionless Mapping
----------------------
+## Extensionless Mapping
 
 Hitherto, accessing a view in the browser meant having to add the .xhtml file extension to the view. So for instance, to access the view index.xhtml, you needed to add the literal .xhtml in the browser.
 
@@ -172,11 +169,9 @@ This extensionless mapping feature can be enabled in the web.xml file via contex
  </context-param>
 ```
 
-
 In my test run, I found that extensionless mapping didn't seem to work with programmatic UIs. This is something you should test for yourself and keep in mind.
 
-@ClientWindowScoped
--------------------
+## @ClientWindowScoped
 
 Faces 4.0 comes with the @ClientWindowScoped bean scope that is based on the jakarta.faces.lifecycle.ClientWindow.
 
@@ -194,7 +189,6 @@ This feature can be enabled through the context param as shown below.
 </context-param>
 ```
 
-
 The number of client window scoped bean instances per HTTP session can be set through the context param as shown below.
 
 ```xml
@@ -204,9 +198,7 @@ The number of client window scoped bean instances per HTTP session can be set th
 </context-param>
 ```
 
-
-Multiple File Upload
---------------------
+## Multiple File Upload
 
 The \<h:inputFile/\> has a new multiple attribute that when set to true, allows the upload of multiple files.
 
@@ -234,7 +226,6 @@ The file-upload.xhmtl file below shows a simple example of multi-file upload usi
 </h:body>
 </html>
 ```
-
 
 The above facelet file renders as shown below.
 
@@ -264,11 +255,9 @@ public class FileUploadBean {
 }
 ```
 
-
 The files list will contain the uploaded files for the bean to validate and consequently upload/store in the database or however the business case demands.
 
-Conclusion
-----------
+## Conclusion
 
 As you can see, Faces 4.0 has a number of major and quality of life features that makes this venerable framework even more productive.
 

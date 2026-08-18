@@ -103,7 +103,6 @@ public class LoggingAspect {
 }
 ```
 
-
 The pointcut expression identifies the join points (method executions) where advice will be applied.
 
 ### Benefits of AOP ✨
@@ -132,7 +131,3 @@ In the upcoming article we will see the AOP in Action, stay tuned.
 
 * [AspectJ Project Homepage](https://www.eclipse.org/aspectj/):
 * [Aspect-Oriented Programming with AspectJ by Ivan Kiselev](https://www.amazon.com/Aspect-Oriented-Programming-AspectJ-Ivan-Kiselev/dp/0672324105)
-
-<br />
-
-<br />

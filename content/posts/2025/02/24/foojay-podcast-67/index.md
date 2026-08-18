@@ -32,13 +32,11 @@ But that's only my story. I invited several guests to share their knowledge abou
 * Len Epp is the co-founder of Leanpub, so he can tell us a lot about ebooks.
 * And we start with Trisha Gee, who wrote a lot of books!
 
-Video
------
+## Video
 
 {{< youtube xhEiXA8ImJo >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -46,8 +44,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Trisha Gee
 
@@ -76,8 +73,7 @@ Guests
 * <https://www.linkedin.com/in/mari%C3%A1n-varga-4869a042/>
 * <https://mastodon.social/@mrvarga>
 
-Links
------
+## Links
 
 ### Book by Frank
 
@@ -116,8 +112,7 @@ Links
 
 * [https://www.lulu.com/](https://www.lulu.com/%20%20)
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests
 

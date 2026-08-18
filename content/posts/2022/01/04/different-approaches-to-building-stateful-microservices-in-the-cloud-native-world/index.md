@@ -90,8 +90,7 @@ HTTP cookies generated from the web server are being cached on the client-side w
 
 JSON Web Token (JWT) offers a compact and self-contained way to securely transmit messages as JSON object between the client and the server.
 
-Cloud Native and the Twelve-Factor App
---------------------------------------
+## Cloud Native and the Twelve-Factor App
 
 The [12-Factor App methodology](https://12factor.net/) from Heroku provides a set of guidelines for designing cloud native systems.
 
@@ -101,8 +100,7 @@ As we can see, #6 and #9 epitomize the need for highly efficient and very lightw
 
 Hence, the question now becomes...
 
-How can stateless microservices handle stateful workload?
----------------------------------------------------------
+## How can stateless microservices handle stateful workload?
 
 While microservices themselves are implemented as stateless containers, they can still utilize the operations and services outside of the containers to perform any stateful tasks.
 
@@ -204,8 +202,7 @@ The [MicroProfile Long Running Action 1.0 (LRA)](https://download.eclipse.org/mi
 
 [Open Liberty](https://openliberty.io)implements MicroProfile LRA by way of a transaction manager that acts as a coordinator. This coordinator handles one or more participant services so that the execution of their business logic is organized in a predictable way.
 
-Closing thoughts
-----------------
+## Closing thoughts
 
 Stateful workload processing is certainly not for the faint of heart, especially in the present cloud computing era. There can be a multitude of *moving parts* within a distributed ecosystem that are constantly updating the state of the data, and our job is to not only keep track of the state changes, but also ensure the integrity of the data as it flows through the ecosystem in the infrastructural and the application systems layers.
 

@@ -115,8 +115,6 @@ The recursion tree will look like this.
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-52494" src="Screen-Shot-2022-02-26-at-10.05.20-AM-493x510.png" alt="" width="493" height="510">
 
-<br />
-
 We count that we will have 15 tasks. The top task, which is 5, will create two new tasks and wait for them to finish.
 
 Since we have four threads, one will go into a waiting state. We now have only three left. Task 4 and 5 will be picked two of these threads. But each of them will create two more tasks each wait for them to finish. So now 3 threads are in a waiting state. Only one is available.

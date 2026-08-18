@@ -30,7 +30,3 @@ What makes JCON EUROPE truly special is the strong community that characterizes 
 The core of JCON EUROPE is high-level content and practice-oriented topics. International speakers from the Java community share inspiring insights and help participants foster and expand their know-how.
 
 JCON EUROPE offers a unique experience for Java developers by combining professional and personal growth, encouraging networking on an equal footing, and further strengthening our Java community.
-
-<br />
-
-<br />

@@ -20,8 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-What is Pitest?
----------------
+## What is Pitest?
 
 Pitest is a library that helps us do mutation testing.
 
@@ -37,8 +36,7 @@ Mutations can take a lot of forms, relational operators (+, -, \*, /) being swit
 
 A full list of possible mutators can be found on the [Pitest Mutator Overview Page](https://pitest.org/quickstart/mutators/)
 
-Ok, but why should I use it?
-----------------------------
+## Ok, but why should I use it?
 
 The question we have to ask ourselves is: `Who watches the watchmen?`
 
@@ -50,8 +48,7 @@ It can also help us find issues if there were gaps in our **T** est **D** riven 
 
 `We test our tests`
 
-A short demo
-------------
+## A short demo
 
 If you want to run the code yourself, please make sure you have `Maven` installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 
@@ -60,8 +57,6 @@ The actual application itself doesn't entail much, it just contains a simple fun
 Let's run `mvn test` on this project, and we'll get this magnificent JaCoCo project:
 
 <img decoding="async" class="alignnone size-medium wp-image-101899" src="jacoco-700x48.png" alt="A JaCoCo report - all 100%" width="700" height="48">
-
-<br />
 
 A line \& branch coverage of 100% magnificent, isn't it?  
 
@@ -74,8 +69,6 @@ In this project a basic Pitest setup has already been done, so we can also take 
 As you can see
 
 <img fetchpriority="high" decoding="async" class="alignnone wp-image-101900 size-medium" src="report1-700x122.png" alt="The first Pitest report with all mutations surviving" width="700" height="122">
-
-<br />
 
 Things do not look quite as good over here. Pitest mutated our code, and 6 out of 7 mutations survived.  
 
@@ -112,12 +105,9 @@ void decays() {
 }
 ```
 
-
 If we then run Pitest again, we'll already see some improvements:
 
 <img loading="lazy" decoding="async" class="alignnone size-medium wp-image-101902" src="report3-700x414.png" alt="" width="700" height="414">
-
-<br />
 
 However, we'll notice there are still a couple of surviving mutations.  
 
@@ -141,7 +131,6 @@ void decays() {
 }
 ```
 
-
 And rerun our tests we'll see that 2 more mutations have joined the choir invisible:
 
 ![A mutation coverage report with even more killed mutations](report4-1024x607.png)
@@ -149,8 +138,6 @@ And rerun our tests we'll see that 2 more mutations have joined the choir invisi
 **Note**: hovering over a covered mutation will show you which testcase(s) have killed it:
 
 <img loading="lazy" decoding="async" class="alignnone wp-image-101905 size-medium" src="solvedmutation-700x96.png" alt="A display of which test(s) killed a mutation" width="700" height="96">
-
-<br />
 
 Now if we take a look at the remaining mutations we notice we can cover a lot of mutations in one by testing our happy path:
 
@@ -176,15 +163,13 @@ void aliveWithNiceWeatherAndNormalGrowth() {
 }
 ```
 
-
 And as we can see after our run:
 
 ![A mutation coverage report with even more killed mutations](report5-1024x601.png)
 
 In this manner, we can keep eliminating the gaps in our test coverage.
 
-Configuration
--------------
+## Configuration
 
 Pitest can be quite a resource-intensive plugin, so proper configuration is important.  
 
@@ -196,8 +181,7 @@ A list of configuration options can be found on the [command line quick start](h
 
 The list of possible features is shown when verbose logging is enabled.
 
-Sample setup
-------------
+## Sample setup
 
 Personally, I like to use this setup:
 
@@ -241,7 +225,6 @@ Personally, I like to use this setup:
 </profile>
 ```
 
-
 With this setup, I can just run `mvn -Ppitest test` to have everything mutated in my project, or I can pass in a glob to limit what gets mutated (`-DtargetClasses="dev.simonverhoeven.analyseme"`).  
 
 It's configured so that:
@@ -252,8 +235,7 @@ It's configured so that:
 * history in/output files are enabled to speed up the analysis
 * auto threads is enabled, so it uses the number of threads reported by my current machine **NOTE:** it is not recommended to use this on a CI server
 
-Advice
-------
+## Advice
 
 The value of mutation testing lies in the analysis and the actions taken, not its execution.
 
@@ -267,8 +249,7 @@ It's a tool to help you receive quick feedback in your development lifecycle, no
 
 Please run it before your code's set in stone, especially as the implications of certain mutations might help point out spots where a different approach might be a better fit.
 
-Frequently Asked Questions
---------------------------
+## Frequently Asked Questions
 
 1. How can I speed up Pitest?
    * use proper slicing, and specific rules to target what's actually of interest to you (see for reference this [blogpost](https://blog.pitest.org/dont-let-your-code-dry))
@@ -291,8 +272,7 @@ Frequently Asked Questions
 8. What is I want Subsumption analysis?  
    This is part of the [pitest extensions](https://www.arcmutate.com/) available through Arcmutate but does require a paid license
 
-References
-----------
+## References
 
 * [Source code for this project](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 * [Official website](https://pitest.org/)

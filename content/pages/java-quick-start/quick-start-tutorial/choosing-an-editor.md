@@ -8,8 +8,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [Hello World! \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world)
 
 This tutorial uses single Java source files, i.e., not projects, which means that you can use any text editor, such as Notepad on Windows, and you do not need a dedicated development environment.
@@ -23,14 +21,9 @@ Once the program is installed, add extensions for Java support:
 * Search for "language support for java."
 * Select "Language Support for Java(TM) by Red Hat" and click "Install."
 
-
-
 {{< youtube 6Jt9FUgxOso >}}
 
-
-
-Other IDEs
-----------
+## Other IDEs
 
 There are many more IDEs you can use. These are some of the most frequently used for Java development:
 

@@ -22,8 +22,7 @@ frozen: false
 
 I've been a big fan of [Mutation Testing](https://en.wikipedia.org/wiki/Mutation_testing) since I discovered [PIT](https://pitest.org/). As I dive deeper into Rust, I wanted to check the state of mutation testing in Rust.
 
-Starting with `cargo-mutants`
------------------------------
+## Starting with `cargo-mutants`
 
 I found two crates for mutation testing in Rust:
 
@@ -67,7 +66,6 @@ mod tests {
 }
 ```
 
-
 Using `cargo-mutants` is a two-step process:
 
 1. Install it, `cargo install --locked cargo-mutants`
@@ -82,8 +80,7 @@ ok       Unmutated baseline in 0.1s build + 0.3s test
 
 I expected a mutant to survive, as I didn't test the boundary when the test value equals the limit. Strangely enough, `cargo-mutants` didn't detect it.
 
-Finding and fixing the issue
-----------------------------
+## Finding and fixing the issue
 
 I investigated the source code and found the place where it mutates operators:
 
@@ -102,7 +99,6 @@ BinOp::Ge(_) => vec![quote! {<}],
 BinOp::Add(_) => vec![quote! {-}, quote! {*}],
 ```
 
-
 Indeed, `, but not to ``<=`. I forked the repo and updated the code accordingly:
 
 ```rust
@@ -110,20 +106,17 @@ BinOp::Lt(_) => vec![quote! { == }, quote! {>}, quote!{ <= }],
 BinOp::Gt(_) => vec![quote! { == }, quote! {<}, quote!{ => }],
 ```
 
-
 I installed the new forked version:
 
 ```bash
 cargo install --git https://github.com/nfrankel/cargo-mutants.git --locked
 ```
 
-
 I reran the command:
 
 ```bash
 cargo mutants
 ```
-
 
 The output is the following:
 
@@ -135,7 +128,6 @@ MISSED   src/lib.rs:11:15: replace < with <= in LowPassPredicate::test in 0.2s b
 5 mutants tested in 2s: 1 missed, 4 caught
 ```
 
-
 You can find the same information in the `missed.txt` file. I thought I fixed it and was ready to make a Pull Request to the `cargo-mutants` repo. I just needed to add the test at the boundary:
 
 ```rust
@@ -146,11 +138,9 @@ fn should_return_false_when_equals_limit() {
 }
 ```
 
-
 ```bash
 cargo test
 ```
-
 
 ```
 running 3 tests
@@ -161,11 +151,9 @@ test tests::should_return_true_when_under_limit ... ok
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-
 ```bash
 cargo mutants
 ```
-
 
 And all mutants are killed!
 
@@ -176,9 +164,7 @@ ok       Unmutated baseline in 0.1s build + 0.2s test
 5 mutants tested in 2s: 5 caught
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Not many blog posts end with a Pull Request, but this one [does](https://github.com/sourcefrog/cargo-mutants/pull/501). Unfortunately, I couldn't manage to make the tests pass; fortunately, the repository maintainer helped me--a lot. The Pull Request is merged: enjoy this slight improvement.
 
@@ -189,7 +175,5 @@ I learned more about `cargo-mutants` and could improve the code in the process.
 * [Mutation testing](https://en.wikipedia.org/wiki/Mutation_testing)
 * [Welcome to cargo-mutants](https://mutants.rs)
 * [GitHub cargo-mutants](https://github.com/sourcefrog/cargo-mutants)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/mutation-testing-rust/) on March 30^th^, 2025*

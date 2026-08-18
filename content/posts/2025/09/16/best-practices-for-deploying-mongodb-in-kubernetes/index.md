@@ -56,7 +56,6 @@ spec:
   persistent: true
 ```
 
-
 In just a few lines of YAML, this tells the Operator to deploy a three-member MongoDB replica set, version 8.0.0, in the mongodb namespace, with persistence enabled and a dedicated Kubernetes Service for internal communication.
 
 Once applied, the Operator creates the appropriate StatefulSet, provisions and binds persistent volumes, monitors the health of each member, and handles cluster-wide operations like rolling upgrades or scale-outs automatically.
@@ -91,7 +90,6 @@ spec:
           storageClass: standard
 ```
 
-
 This configuration allocates 20Gi for MongoDB's database files and 4Gi for logs, using the standard storage class. Having logs on a separate volume helps reduce I/O contention and can make debugging easier during performance issues.
 
 For a full example of persistent volumes configuration, see [replica-set-persistent-volumes.yaml](https://github.com//mongodb/mongodb-kubernetes/blob/master/public/samples/mongodb/persistent-volumes/replica-set-persistent-volumes.yaml) in the [MongoDB Kubernetes persistent volumes samples](https://github.com//mongodb/mongodb-kubernetes/tree/master/public/samples/mongodb/persistent-volumes).
@@ -123,7 +121,6 @@ resources:
     memory: 1Gi
 ```
 
-
 These settings should be applied inside your Operator Deployment manifest. If you're using Helm to deploy the Operator, you can configure the same values inside your values.yaml file.
 
 **Example snippet from the Operator deployment:**
@@ -140,7 +137,6 @@ containers:
       cpu: 1100m
       memory: 1Gi
 ```
-
 
 This ensures the Operator has enough headroom to spin up large numbers of clusters while remaining responsive.
 
@@ -161,14 +157,12 @@ limits:
   memory: 512Mi
 ```
 
-
 These values keep usage predictable and ensure WiredTiger (MongoDB's storage engine) has enough memory to operate efficiently. However, it is important to note that performing some operations, like index builds, large aggregations, or initial syncs, can cause temporary CPU spikes. In those cases, the pod may benefit from a higher CPU limit, such as:
 
 ```
 limits:
   cpu: "1"
 ```
-
 
 Raising the CPU limit allows MongoDB to accommodate short bursts of activity without being throttled, especially during intensive workloads. Requests can remain low to maintain efficient bin-packing, but limits should reflect peak usage patterns based on your deployment profile.
 
@@ -195,7 +189,6 @@ spec:
               cpu: "0.25"
               memory: 512Mi
 ```
-
 
 Again, if you use Helm to deploy resources, define these values in the [values.yaml file.](https://www.mongodb.com/docs/kubernetes/current/reference/helm-operator-settings/#std-label-k8s-op-resources-setting?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly)
 
@@ -236,7 +229,6 @@ spec:
         topologyKey: "kubernetes.io/hostname"
 ```
 
-
 * The \[nodeAffinity\](- [Node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)) ensures pods only land on nodes within the allowed availability zones (zone-a, zone-b, etc.).
 * The podAntiAffinity makes sure that no two MongoDB pods land on the same node, using hostname as the topology key.
 
@@ -270,7 +262,6 @@ spec:
               - e2e-az2
 ```
 
-
 This instructs Kubernetes to only place MongoDB pods in nodes labeled with those specific zones, and to avoid overlapping placements on the same physical host.
 
 You can find full examples in the replica-set-affinity.yaml file in the [MongoDB Affinity samples](https://github.com//mongodb/mongodb-kubernetes/tree/master/public/samples/mongodb/persistent-volumes) directory. The same directory includes configurations for sharded clusters and standalone instances too.
@@ -293,7 +284,6 @@ operator:
   maxConcurrentReconciles: 20
 ```
 
-
 Or, if deploying manually, you can set this environment variable in the Operator deployment:
 
 ```
@@ -301,7 +291,6 @@ env:
 - name: MDB_MAX_CONCURRENT_RECONCILES
   value: "20"
 ```
-
 
 This setting should be adjusted based on your operational needs and the available compute resources in your Kubernetes cluster. The more concurrent threads the Operator runs, the more CPU and memory it will require---and the more load it will place on the Kubernetes API server.
 
@@ -332,8 +321,7 @@ Importantly, scaling the API server is not a valid justification for deploying m
 * Monitor Operator resource usage and Kubernetes API load closely.
 * Only run multiple Operators if they are scoped to different resources and managed carefully.
 
-Conclusion
-----------
+## Conclusion
 
 Running MongoDB in Kubernetes introduces challenges that don't exist with stateless applications. By default, Kubernetes doesn't understand MongoDB's replica set topology, quorum requirements, or data durability constraints. The MongoDB Kubernetes Operator bridges that gap, enabling you to declaratively deploy and manage replica sets and sharded clusters using familiar Kubernetes patterns.
 

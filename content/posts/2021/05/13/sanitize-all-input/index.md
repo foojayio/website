@@ -30,14 +30,12 @@ In some cases, sanitization can be achieved by enforcing specific encoding for u
 </dependency>
 ```
 
-
 ```java
 String untrusted = "<script> alert(1); </script>";
 System.out.println(Encode.forHtml(untrusted));
 
 // output: <script> alert(1); </script>
 ```
-
 
 Sanitizing user text input is an obvious one. But what about the data you retrieve from a database, even when it's your own database? What if your database was breached and someone planted some malicious text in a database field or document?
 

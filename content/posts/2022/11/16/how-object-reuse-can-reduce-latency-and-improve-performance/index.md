@@ -104,7 +104,6 @@ public class MarketData extends SelfDescribingMarshallable {
 }
 ```
 
-
 The idea is to create a top-level object that is reused when appending a large number of messages to a queue and then analyse internal object usage for the entire stack when running this code:
 
 ```java
@@ -126,7 +125,6 @@ public static void main(String[] args) {
     }
 }
 ```
-
 
 Since Chronicle Queue is serializing the objects to memory-mapped files, it is important that it does not create other unnecessary objects for the performance reasons stated above.
 
@@ -150,7 +148,6 @@ sun.util.resources.LocaleData$LocaleDataResourceBundleControl
 Total        472015      123487536
 ```
 
-
 After the application appended about 100 million additional messages some seconds later, a new dump was made:
 
 ```
@@ -168,7 +165,6 @@ pemi@Pers-MBP-2 queue-demo % jmap -histo 8536
 sun.util.resources.LocaleData$LocaleDataResourceBundleControl
 Total        473485      123487536
 ```
-
 
 As can be seen, there was only a slight increase in the number of objects allocated (around 1500 objects) indicating n**o object allocation was made per message sent**. No GC was reported by the JVM so no objects were collected during the sampling interval.
 

@@ -24,8 +24,7 @@ We've been talking about migrating workloads to the cloud for a long time, but a
 
 For this reason, there has been a surge of recent interest in data infrastructure that is designed to take maximum advantage of the benefits that cloud computing provides. A [cloud-native database](https://k8ssandra.io/blog/2021/03/23/the-search-for-a-cloud-native-database/) is one that achieves the goals of scalability, elasticity, resiliency, observability and automation; the [K8ssandra](https://k8ssandra.io/) project is a great example. It packages Apache [Cassandra](https://containerjournal.com/?s=Cassandra) and supporting tools into a production-ready Kubernetes deployment.
 
-Databases on Kubernetes
------------------------
+## Databases on Kubernetes
 
 This raises an interesting question: must a database run on Kubernetes to be considered cloud-native? While Kubernetes was originally designed for stateless workloads, recent improvements in Kubernetes -- such as StatefulSets and persistent volumes -- have made it possible to run stateful workloads, as well. Even long-time DevOps practitioners [skeptical of running databases](https://thenewstack.io/a-case-for-databases-on-kubernetes-from-a-former-skeptic/) on Kubernetes are beginning to come around, and [best practices](https://cloud.google.com/blog/products/databases/to-run-or-not-to-run-a-database-on-kubernetes-what-to-consider) are starting to emerge.
 
@@ -84,8 +83,7 @@ In the Kubernetes declarative approach, you specify the desired state of resourc
 
 The next generation of operators should enable us to specify rules for stored data size, number of transactions per second or both. Perhaps we'll be able to specify maximum and minimum cluster sizes, and when to move less frequently used data to object storage.
 
-Draw on the Wisdom of the Community
------------------------------------
+## Draw on the Wisdom of the Community
 
 I hope I've convinced you that Kubernetes is a great source of best practices for cloud-native database implementations, and the innovation continues. Solutions for federating Kubernetes clusters are still maturing, but will soon make it much simpler to manage multi-data center Cassandra clusters in Kubernetes. In the Cassandra community, we can work to make extensions for management and metrics a part of the core Apache project so that Cassandra is more naturally cloud-native for everyone, right out of the box.
 

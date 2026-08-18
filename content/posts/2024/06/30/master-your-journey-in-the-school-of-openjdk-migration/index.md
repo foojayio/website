@@ -24,8 +24,7 @@ Azul has led so many OpenJDK migrations, we could write a book. Like, seriously,
 
 [The School of OpenJDK Migration](https://www.azul.com/school-of-open-jdk-migration/) is your ultimate resource for mastering OpenJDK migration. Dive into our rich collection of webinars, where OpenJDK experts divulge their secrets, from foundational knowledge to advanced tactics, derived from industry knowledge and professional experience. You'll leave the course with a blueprint to navigate the complexities of OpenJDK migration with confidence and ease.
 
-How difficult are most OpenJDK migrations?
-------------------------------------------
+## How difficult are most OpenJDK migrations?
 
 For many smaller organizations with less complex infrastructures, an OpenJDK migration can be very straightforward. **"In fact, migrating to certified builds of OpenJDK can be very straightforward and simple for the vast majority of enterprises,"** I wrote in [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/). **"If you're migrating server applications, you're not likely to encounter any challenges."**
 
@@ -43,8 +42,7 @@ Every migration is unique, so it's critical to understand your goals. After you'
 2. **inventory to create a migration plan.** Execution. For each machine that requires a Java runtime, install the same version (or versions) of the OpenJDK distribution you choose.
 3. **Validation.** Test your applications to verify that everything works as expected.
 
-Join the School of OpenJDK Migration
-------------------------------------
+## Join the School of OpenJDK Migration
 
  The school provides strategies and tactical tips from Java Champions and migration experts who have real-world experience. Try it now and get:
 
@@ -53,7 +51,3 @@ Join the School of OpenJDK Migration
 * **Blueprint for Success:**Each session equips you with actionable insights and a clear blueprint to implement OpenJDK migration effectively and efficiently.
 
 The [School of OpenJDK Migration is totally free](https://www.azul.com/school-of-open-jdk-migration/) and self-paced. Do yourself a favor and start preparing about OpenJDK migration today.
-
-<br />
-
-<br />

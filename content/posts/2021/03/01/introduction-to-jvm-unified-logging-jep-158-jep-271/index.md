@@ -73,7 +73,6 @@ The JEP describes how the logging configuration works in the command line:
                        parameter=value
 ```
 
-
 This command-line option is the main entry point to unified logging. It allows configuring loggers that used to require multiple options into a single argument.
 
 Moreover, it's now possible to declare multiple log configurations simply by adding additional `-Xlog...​` options. Their output must however be unique in these logs, otherwise the last option declaration will override the previous log configuration.
@@ -152,7 +151,6 @@ Some examples:
          and then enable messages tagged with 'safepoint' up to 'trace' level to file 'safepointtrace.txt'.
 ```
 
-
 Also, you may have to enable logs on a running VM, well in this case the `jcmd`  
 
 sub-command `VM.log` is your tool of choice.
@@ -178,7 +176,6 @@ Options: (options must be specified using the  or = syntax)
         list : [optional] Lists current log configuration. (BOOLEAN, no default value)
         rotate : [optional] Rotates all logs. (BOOLEAN, no default value)
 ```
-
 
 ### Configuration
 
@@ -225,11 +222,9 @@ In practice this will give for `java` and `jcmd` in that order:
 -Xlog:pagesize,os*,os+container=trace:file=/var/log/%t-os-container-pagesise.log:uptime,tags,level
 ```
 
-
 ```bash
 $ jcmd $(pidof java) VM.log output=/var/log/%t-os-container-pagesise.log what=pagesize,os*,os+container=trace decorators=uptime,tags,level
 ```
-
 
 The above commands are equivalent, but note that depending on the specified tags and level, the log content may be less useful when enabled at a later time. In the above example in particular the `os+container=trace` will output some interesting logs only during JVM startup.
 
@@ -275,13 +270,11 @@ The basic translation of the following usual GC logging configuration:
 -Xloggc:/var/log/`date +%FT%H-%M-%S`-gc.log   \
 ```
 
-
 These flags could be translated to the following configuration:
 
 ```
 -Xlog:gc*,gc+heap=debug,gc+ref=debug,gc+ergo*=trace,gc+age*=trace,gc+phases*=debug,safepoint*:file=/var/log/%t-gc.log:uptime,tags,level:filecount=10,filesize=20M
 ```
-
 
 Let's break down this configuration
 
@@ -298,7 +291,6 @@ Let's break down this configuration
   :time,tags,level
   :filecount=5,filesize=10M
 ```
-
 
 * Line 2: `PrintGCDetails` (remember that default level is `info`)
 * Line 3: `PrintHeapAtGC`

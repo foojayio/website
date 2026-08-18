@@ -33,7 +33,6 @@ java.util.Stack
 java.util.HashTable
 ```
 
-
 Every method in these classes has synchronized keywords associated with them. Although we can use them in a multi-threaded environment, these classes are no longer recommended to use, as we have better alternatives. However, we will discuss them shortly.
 
 Apart from these classes, we can transform any collections available in java.util package, using the following factory methods available in java.util.Collections:
@@ -47,14 +46,12 @@ static <T> SortedSet<T> synchronizedSortedSet(SortedSet<T> s);
 static <K,V> SortedMap<K, V> synchronizedSortedMap(SortedMap<K,V> m);
 ```
 
-
 These methods return synchronized collections. Example:
 
 ```java
 var ints = new ArrayList<Integer>();
 var synchronizedList = Collections.synchronizedList(ints);
 ```
-
 
 ### **Client-Side Locking**
 
@@ -82,7 +79,6 @@ public class ListHelper {
 }
 ```
 
-
 In the above class, we have two methods, one gets the last item, and the other removes the last one. So now the question is, what if we call these two methods from two different threads?
 
 In the first method (getLast()) has two statements in it. The first statement finds the size of the vector and then subtracts one from it to find the last index of the last elements. The second statement uses this index to find the last element. What if while executing the first segment in one thread, before returning the element, another thread removes the element? We will certainly get an ArrayIndexOutOfBoundException. The reason is, while the second statement of the first method is trying to access the element, it's not there anymore; it's already removed.
@@ -104,7 +100,6 @@ public class ListHelper {
   }
 }
 ```
-
 
 Even though it sounds like the above code will solve the issue, but it doesn't. The reason is, when we use synchronized keywords on a static method, it uses the class (ListHelper.class) object as its lock. On the other hand, the vector class is a synchronized class; it has its own lock. That means we are dealing with two different locks here. If these methods are called from two different threads ( A and B), one of them will acquire the lock of the ListHelper class at a point in time.
 
@@ -129,7 +124,6 @@ public class ListHelper {
   }
 }
 ```
-
 
 The above class exactly does that. It synchronizes over the list object itself. This sort of synchronization is called client-side locking or external locking.
 
@@ -165,7 +159,6 @@ public class SynchronizedCollectionDemo {
 }
 ```
 
-
 There is another standard way to iterate over a collection.
 
 ```java
@@ -173,7 +166,6 @@ for (Integer number : synchronizedNumbers) {
   processIt(number);
 }
 ```
-
 
 However, this iteration doesn't avert the need for client-side locking if other threads can modify the collection. This is because the iteration returned by synchronized collections are not designed to deal with concurrent modification; rather, a fail-first approach was taken. If they detect that collection was changed after the iteration began, it throws the unchecked ConcurrentModificationException.
 
@@ -192,7 +184,6 @@ java.util.concurrent.CopyOnWriteArraySet
 java.util.concurrent.CopyOnWriteArrayList
 java.util.concurrent.ArrayBlockingQueue</code>
 ```
-
 
 We don't need to use client-side locking in the above classes. These are thread-safe, optimized, and highly performant classes. Ideally, in our modern code, we will use these classes in our day-to-day coding rather than the technique discussed in this article.
 

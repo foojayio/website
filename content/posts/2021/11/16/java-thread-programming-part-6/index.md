@@ -46,7 +46,6 @@ while (true) {
 }
 ```
 
-
 The above code looks just fine; it doesn't seem to have any problem; it will produce the correct result. When the `Boolean` variable `votingComplete` becomes `true`, the voting count will start; otherwise, the thread that runs this piece of code will stay there and do nothing. The only problem is, we are running it under a while loop. This is essentially doing nothing but eating up the CPU cycle. This sort of situation is sometimes called busy waiting.
 
 We can prevent this from happening. The thread can stay waiting without wasting CPU cycles. To understand that, we have to know a little about the thread's life cycle. Let's learn about it.
@@ -81,14 +80,12 @@ synchronized (lock) {
 }
 ```
 
-
 We can send a signal to a thread using two methods of the lock object:
 
 ```java
 notify()
 notifyAll();
 ```
-
 
 If we have only one thread in a waiting state, then we can call notify() method, and if we have multiple threads waiting, then we call notifyAll();
 
@@ -98,7 +95,6 @@ synchronized (lock) {
   lock.notify();
 }
 ```
-
 
 We have to keep two things in mind while using `wait()` \& `notify()`:
 
@@ -110,7 +106,6 @@ while (!conditionMet){
   lock.wait();
 }
 ```
-
 
 Let's see a class example called producer-consumer.
 
@@ -171,7 +166,6 @@ public class Buffer {
     }
 }
 ```
-
 
 In the above program, we have used a `queue` for integers. For simplicity, let's assume this queue can hold 10 sizes. In the `addItem()` method, when the queue size becomes 10, we call the `wait()` from the lock; as a result, the thread that is executing this `addItem()` method will go into a waiting state.
 
@@ -234,7 +228,6 @@ public class ProducerConsumerExample {
 }
 ```
 
-
 Sample output:
 
 ```java
@@ -292,7 +285,6 @@ Thread[Consumer # 2,5,main]: Resumed.
 .....
 ......
 ```
-
 
 ```text
 

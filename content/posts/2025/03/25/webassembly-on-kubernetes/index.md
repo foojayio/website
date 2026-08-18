@@ -27,8 +27,7 @@ Like a couple of innovative technologies, different people have different viewpo
 
 In this post, I'll stay away from these debates and focus solely on how to use WebAssembly on Kubernetes.
 
-My approach and the use case
-----------------------------
+## My approach and the use case
 
 Unlike regular programming languages, you don't write WebAssembly directly: you write code that generates WebAssembly. At the moment, Go and Rust are the main source languages. I know Kotlin and Python are working toward this objective. There might be other languages I'm not aware of.
 
@@ -42,8 +41,7 @@ Don't worry; I'll explain the difference between the two last approaches later.
 
 The use case should be more advanced than Hello World to highlight the capabilities of WebAssembly. I've implemented an HTTP server mimicking a single endpoint of the excellent [https://httpbin.org/\[httpbin](https://httpbin.org/%5Bhttpbin)\^\] API testing utility. The code itself is not essential as the post is not about Rust, but in case you're interested, you can find it on [GitHub](https://github.com/ajavageek/wasm-kubernetes/blob/master/src/main.rs). I add a field to the response to explicitly return the underlying approach, respectively `native`, `embed`, or `runtime`.
 
-Baseline: regular Rust-to-native
---------------------------------
+## Baseline: regular Rust-to-native
 
 For the regular native compilation, I'm using a multistage Docker file:
 
@@ -75,7 +73,6 @@ COPY --from=build /native/target/aarch64-unknown-linux-musl/release/httpbin http
 ENTRYPOINT ["./httpbin"]
 ```
 
-
 1. Start from the latest Rust image
 2. Heredocs for the win
 3. Install the necessary toolchain to cross-compile
@@ -85,8 +82,7 @@ ENTRYPOINT ["./httpbin"]
 
 The final `wasm-kubernetes:native` image weighs 8.71M, with its base image `distroless/static` taking 6.03M of them.
 
-Adapting to WebAssembly
------------------------
+## Adapting to WebAssembly
 
 The main idea behind WebAssembly is that it's secure because it can't access the host system. However, we must open a socket to listen to incoming requests to run an HTTP server. WebAssembly can't do that. We need a runtime that provides this feature and other system-dependent capabilities. It's the goal of .
 > The WebAssembly System Interface (WASI) is a group of standards-track API specifications for software compiled to the W3C WebAssembly (Wasm) standard. WASI is designed to provide a secure standard interface for applications that can be compiled to Wasm from any language, and that may run anywhere---from browsers to clouds to embedded devices.
@@ -125,7 +121,6 @@ axum = "0.8"
 serde = { version = "1.0.217", features = ["derive"] }
 ```
 
-
 1. Patch the `tokio` and `socket2` crates with WASI-related calls
 2. The latest `tokio` crate is 1.43, but the latest (and only) patch v1.36. We can't use the latest version because there's no patch.
 
@@ -154,7 +149,6 @@ WORKDIR /wasm
 RUN RUSTFLAGS="--cfg wasmedge --cfg tokio_unstable" cargo build --target wasm32-wasip1 --release #2-3
 ```
 
-
 1. Install the WASM target
 2. Compile to WASM
 3. We must activate the `wasmedge` flag, as well as the `tokio_unstable` one, to successfully compile to WebAssembly
@@ -171,7 +165,6 @@ COPY --from=build /wasm/target/wasm32-wasip1/release/httpbin.wasm /httpbin.wasm
 CMD ["wasmedge", "--dir", ".:/", "/httpbin.wasm"]
 ```
 
-
   From a usage perspective, it's pretty similar to the native approach.
 * Copy the WebAssembly file and make it a runtime responsibility: 
 
@@ -183,13 +176,11 @@ COPY --from=build /wasm/target/wasm32-wasip1/release/httpbin.wasm /httpbin.wasm
 ENTRYPOINT ["/httpbin.wasm"]
 ```
 
-
   It's where things get interesting.
 
 The `native` approach is slightly better than the `embed` one, but the `runtime` is the leanest since it contains only a single Webassembly file.
 
-Running the Wasm image on Docker
---------------------------------
+## Running the Wasm image on Docker
 
 Not all Docker runtimes are equal, and to run Wasm workloads, we need to delve a bit into the Docker name. While Docker, the company, created Docker as the product, the current reality is that containers have evolved beyond Docker and now answer to specifications.
 > The **Open Container Initiative** is an open governance structure for the express purpose of creating open industry standards around container formats and runtimes.
@@ -209,13 +200,11 @@ Finally, we can run the above OCI image containing the Wasm file by selecting a 
 docker run --rm -p3000:3000 --runtime=io.containerd.wasmedge.v1 ghcr.io/ajavageek/wasm-kubernetes:runtime
 ```
 
-
 `io.containerd.wasmedge.v1` is the current version of the Wasmedge runtime. You must be authenticated with GitHub if you want to try it out.
 
 ```bash
 curl localhost:3000/get\?foo=bar | jq
 ```
-
 
 The result is the same as for the native version:
 
@@ -234,7 +223,6 @@ The result is the same as for the native version:
 }
 ```
 
-
 Wasi on Docker Desktop allows you to spin up an HTTP server that behaves like a regular native image! Even better, the image size is as tiny as the WebAssembly file it contains:
 
 |                                   |   Tag   | Size (Mb) |
@@ -243,8 +231,7 @@ Wasi on Docker Desktop allows you to spin up an HTTP server that behaves like a 
 | ghcr.io/ajavageek/wasm-kubernetes | embed   | 12.4      |
 | ghcr.io/ajavageek/wasm-kubernetes | native  | 8.7       |
 
-Running the Wasm image on Kubernetes
-------------------------------------
+## Running the Wasm image on Kubernetes
 
 Now comes the fun part: your favorite Cloud provider(s) isn't using Docker Desktop. Despite this, we can still run WebAssembly workloads on Kubernetes. For this, we need to understand a bit about the not-too-low levels of what happens when you run a container, regardless of whether it's from an OCI runtime or Kubernetes.
 
@@ -258,13 +245,11 @@ Despite some of the [mainstream](https://learn.microsoft.com/en-us/azure/aks/use
 brew install minikube
 ```
 
-
 Now, we start `minikube` with the `containerd` driver and specify a profile to enable differently configured VMs. We unimaginatively call this profile `wasm`.
 
 ```bash
 minikube start --driver=docker --container-runtime=containerd -p=wasm
 ```
-
 
 Depending on whether you have already installed `minikube` and whether it has already downloaded its images, starting can take a few seconds to dozens of minutes. Be patient. The output should be something akin to:
 
@@ -287,7 +272,6 @@ Depending on whether you have already installed `minikube` and whether it has al
 🏄  Done! kubectl is now configured to use "wasm" cluster and "default" namespace by default
 ```
 
-
 At this point, our goal is to install on the underlying VM:
 
 * Wasmedge to run Wasm workloads
@@ -297,13 +281,11 @@ At this point, our goal is to install on the underlying VM:
 minikube ssh -p wasm
 ```
 
-
 We can install Wasmedge, but I found nowhere to download the shim. In the [next step](https://wasmedge.org/docs/develop/deploy/cri-runtime/containerd), we will build both. We first need to install Rust:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-
 
 The script likely complains that it can't execute the downloaded binary:
 
@@ -312,7 +294,6 @@ Cannot execute /tmp/tmp.NXPz8utAQx/rustup-init (likely because of mounting /tmp 
 Please copy the file to a location where you can execute binaries and run ./rustup-init.
 ```
 
-
 Follow the instructions:
 
 ```bash
@@ -320,13 +301,11 @@ cp /tmp/tmp.NXPz8utAQx/rustup-init .
 ./rustup-init
 ```
 
-
 Proceed with the default installation by pressing the `ENTER` button. When it's finished, source your current shell.
 
 ```bash
 . "$HOME/.cargo/env"
 ```
-
 
 The system is ready to build Wasmedge and the shim.
 
@@ -343,7 +322,6 @@ make build-wasmedge
 INSTALL="sudo install" LN="sudo ln -sf" make install-wasmedge
 ```
 
-
 The last step requires configuring the `containerd` process with the shim. Insert the following snippet in the `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes]` section of the `/etc/containerd/config.toml` file:
 
 ```ini
@@ -351,13 +329,11 @@ The last step requires configuring the `containerd` process with the shim. Inser
   runtime_type = "io.containerd.wasmedge.v1"
 ```
 
-
 Restart `containerd` to load the new config.
 
 ```bash
 sudo systemctl restart containerd
 ```
-
 
 Our system is finally ready to accept Webassembly workloads. Users can deploy a Wasmedge `pod` with the following manifest:
 
@@ -381,7 +357,6 @@ spec:
   runtimeClassName: wasmedge                                             #3
 ```
 
-
 1. Wasmedge workloads should use this name
 2. Handler to use. It should be the last segment of the section added in the TOML file, *i.e.* , `containerd.runtimes.wasmedgev2`
 3. Point to the runtime class name we defined just above
@@ -394,8 +369,7 @@ Notice the many levels of indirection:
 2. The `wasmedge` runtime class points to the `wasmedgev1` handler
 3. The `wasmedgev1` handler in the TOML file specifies the `io.containerd.wasmedge.v1` runtime type
 
-Final steps
------------
+## Final steps
 
 To compare the approaches and test our work, we can use the `minikube` `ingress` addon and [vCluster](https://www.vcluster.com/). The former offers a single access point for all three workloads, `native`, `embed`, and `runtime`, while vCluster isolates workloads from each other in their virtual cluster.
 
@@ -404,7 +378,6 @@ Let's start by installing the addon:
 ```bash
 minikube -p wasm addons enable ingress
 ```
-
 
 It deploys an Nginx Ingress Controller in the `ingress-nginx` namespace:
 
@@ -419,13 +392,11 @@ You can view the list of minikube maintainers at: https://github.com/kubernetes/
 🌟  The 'ingress' addon is enabled
 ```
 
-
 We must create a dedicated virtual cluster to deploy the `Pod` later.
 
 ```bash
 helm upgrade --install runtime vcluster/vcluster --namespace runtime --create-namespace  --values vcluster.yaml
 ```
-
 
 We will define the `Ingress`, the `Service`, and their related `Pod` in each virtual cluster. We need vCluster to synchronize the `Ingress` with the Ingress Controller. Here's the configuration to achieve this:
 
@@ -435,7 +406,6 @@ sync:
     ingresses:
       enabled: true
 ```
-
 
 The output should be similar to:
 
@@ -448,7 +418,6 @@ STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 ```
-
 
 We can amend the above manifest with the `Service` and `Ingress` to expose the `Pod`:
 
@@ -486,7 +455,6 @@ spec:
                   number: 3000
 ```
 
-
 1. Expose the `Pod` inside the cluster
 2. Nginx-specific annotations to handle path regular expression and rewrite it
 3. Regex path
@@ -497,7 +465,6 @@ Nginx will forward all requests starting with `/runtime` to the `runtime` servic
 vcluster connect runtime
 ```
 
-
 ```
 11:53:21 info Waiting for vcluster to come up...
 11:53:39 done vCluster is up and running
@@ -507,13 +474,11 @@ vcluster connect runtime
 - Use `kubectl get namespaces` to access the vcluster
 ```
 
-
 Now apply the manifest:
 
 ```bash
 kubectl apply -f runtime.yaml
 ```
-
 
 We do the same with the `embed` and the `native` pods, barring the `runtimeClassName` as they are "regular" images.
 
@@ -521,14 +486,11 @@ The final deployment diagram is the following:
 
 <img decoding="async" class="aligncenter size-medium wp-image-115699" src="deployment-diagram-600x510.png" alt="" width="600" height="510">
 
-<br />
-
 The final touch is to tunnel to expose services:
 
 ```bash
 minikube -p wasm tunnel
 ```
-
 
 ```
 ✅  Tunnel successfully started
@@ -541,13 +503,11 @@ minikube -p wasm tunnel
 Password:
 ```
 
-
 Let's request the lightweight container that uses the Wasmedge runtime:
 
 ```bash
 curl localhost/runtime/get\?foo=bar | jq
 ```
-
 
 We get the expected output:
 
@@ -574,11 +534,9 @@ We get the expected output:
 }
 ```
 
-
 We should get similar results with the other approaches, with different `flavor` values.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I showed how to use Webassembly on Kubernetes with the Wasmedge runtime. I created three flavors for comparison purposes: `native`, `embed`, and `runtime`. The first two are "regular" Docker images, while the latter contains only a single Wasm file, which makes it very lightweight and secure. However, we need a dedicated runtime to run it.
 

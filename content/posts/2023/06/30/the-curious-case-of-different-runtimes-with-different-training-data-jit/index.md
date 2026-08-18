@@ -26,8 +26,7 @@ The following article discusses a performance problem encountered while finalizi
 
 By the way, we can change the code to make the problem go away, but we are still interested to find out why Java's JIT comes to its conclusion and permanently sticks to it. The code is question is almost compatible with any Java version and no does not use any fancy features.
 
-The Problem
------------
+## The Problem
 
 We updated our [load test software XLT](https://github.com/Xceptance/XLT) and especially worked on the runtime of the report generator. While testing it before release, we noticed very unstable runtimes. A fixed data set sees runtimes between 5 to 14 min. The 5 min runtime is the expected one, while higher runtimes only occur occasionally. These range from 6 to 14 min in about 10 to 15% of the cases.
 
@@ -37,8 +36,7 @@ The report generator is multi-threaded and reads about 7 GB of compressed CSV da
 
 You can find the full source code of the examples below on [GitHub](https://github.com/rschwietzke/jmh-C2-compile).
 
-Summary
--------
+## Summary
 
 Because you might just say TL;DR now, here is a quick summary of all the data and experiments below.
 
@@ -52,8 +50,7 @@ Columns are formed by the warm-up data, the later measurement data (run) is in t
 
 Running this with GraalVM 22.3-19 produces even worse runtimes. We talk about 2600 ns/op now instead of 1000 ns/op for OpenJDK 17. No idea why, especially because the JIT of Graal is totally different but of course might follow the same basic ideas.
 
-First Diagnostics
------------------
+## First Diagnostics
 
 ### Async Profiler
 
@@ -74,7 +71,6 @@ When we caught a process in the act of being slow, we connected Async Profiler a
  18011700149    3.77%     1800  com.xceptance.xlt.api.util.XltCharBuffer.hashCode
 ```
 
-
 #### Bad
 
 ```
@@ -89,7 +85,6 @@ When we caught a process in the act of being slow, we connected Async Profiler a
   4381854811    0.91%      438  java.util.regex.Pattern$BmpCharProperty.match
   3881428022    0.80%      388  vtable stub
 ```
-
 
 ### PrintCompilation
 
@@ -109,8 +104,7 @@ JITWatch marks an area in red and tells us that this code owns four additional u
 
 Ok, we got here by profiling and watching the compiler. We still don't know why this happens and how to reproduce that reliably.
 
-Theory
-------
+## Theory
 
 Based on the observation, profiling, and knowing the data that goes into the parser, we came up with the following theory:
 > When the parser code sees a certain CSV line length or CSV data content early, it will come up with a compile result that is, bluntly spoken, horrible. The compiler will also not reconsider its decision later, hence the program stays extremely slow forever. Due to the multi-threading of the CSV processing, the order of CSV lines is not deterministic. Because this problem only occurs in 10 to 15% of the case, the data causing it must be "rare" too.
@@ -119,8 +113,7 @@ Let's find some possible simple test cases that exactly exhibits the behavior we
 
 We will take the extreme cases of our data and try to construct some test cases.
 
-Data
-----
+## Data
 
 For this test, we use three lines of CSV data. The long versions are displayed in a shorted version here, to highlight the difference. You find the long version in the source code.
 
@@ -132,8 +125,7 @@ As you can see, the long version only differs in one spot - additional quotes ar
 
 This quoted version is very rare, because commas in urls are not often used.
 
-Test Case
----------
+## Test Case
 
 Our test case utilizes JMH and uses a trick to be able to use different data during warm-up. We count how often we ran setup and compare that to the provided `BenchmarkParams`. When we reach the measurement phase, we setup different data.  
 
@@ -141,8 +133,7 @@ There might be another way of doing that, but I could not find an JMH-API exposi
 
 The regular test cases are just using a single character array (the parser prefers open writable arrays over Strings), and runs the benchmark for that. See all B03 test cases. The advanced test case, where warm-up and measurement data have to differ, keeps a state counters and calls setup per invocation. See the B05 test cases.
 
-Measurements and Results
-------------------------
+## Measurements and Results
 
 All measurements have been taken on a Google Cloud c2-standard-8 instance. Similar data has been seen on a Lenovo T14s AMD.
 
@@ -158,8 +149,7 @@ We compiled additional test cases to vary the data a little more.
 
 The differences are not as big as with the single runs, but that is also related to the averaging effect of the data lines. Training with small and quoted leads to a larger runtimes difference when runnig just against the long data, but for mixed execution and mixed training, no differences are visible.
 
-Conclusion
-----------
+## Conclusion
 
 We have produced a test case that shows us that the JIT comes up with different code when the data presented and the data later run is different. That does not come as a surprise, that is the nature of C2 optimization. Just profile the running code and find the best version for that.
 

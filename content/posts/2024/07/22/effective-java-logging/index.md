@@ -53,7 +53,6 @@ public class MyClass {
 }
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Hardcoding a specific logging framework implementation in your application code can lead to difficulties when needing to switch libraries.
@@ -66,7 +65,6 @@ private static final Logger logger = Logger.getLogger(MyClass.class);
 // ...
 }
 ```
-
 
 ##### 2. Configure Logback for Efficient Logging
 
@@ -88,7 +86,6 @@ Externalize your Logback configuration and use `PatternLayout` for improved perf
 </configuration>
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Using an outdated or non-performant layout class and hardcoding configuration settings in the code can make it difficult to adapt to different environments.
@@ -104,7 +101,6 @@ Using an outdated or non-performant layout class and hardcoding configuration se
 </configuration>
 ```
 
-
 ##### 3. Use Appropriate Log Levels
 
 **🟢 Good Practice:**   
@@ -117,7 +113,6 @@ logger.debug("The value of X is {}", x);
 logger.error("Unable to process the request.", e);
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Logging everything at the same level, can overwhelm the log files with noise and make it difficult to spot critical issues.
@@ -127,7 +122,6 @@ logger.error("Application has started."); // Incorrect use of log level
 logger.error("The value of X is " + x); // Inefficient string concatenation
 // ...
 ```
-
 
 ##### 4. Log Meaningful Messages
 
@@ -139,7 +133,6 @@ Include relevant information such as transaction or correlation IDs in your log 
 logger.info("Order {} has been processed successfully.", orderId);
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Vague or generic log messages that do not provide sufficient context to understand the event or issue.
@@ -147,7 +140,6 @@ Vague or generic log messages that do not provide sufficient context to understa
 ```
 logger.info("Processed successfully."); // No context provided
 ```
-
 
 ##### 5. Use Placeholders for Dynamic Content
 
@@ -159,7 +151,6 @@ Utilize placeholders to 🔴 Avoid Practice: unnecessary string concatenation wh
 logger.debug("User {} logged in at {}", username, LocalDateTime.now());
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Concatenating strings within log statements is less efficient.
@@ -167,7 +158,6 @@ Concatenating strings within log statements is less efficient.
 ```
 logger.debug("User " + username + " logged in at " + LocalDateTime.now());
 ```
-
 
 ##### 6. Log Exceptions with Stack Traces
 
@@ -183,7 +173,6 @@ logger.error("An unexpected error occurred", e);
 }
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Logging only the exception message without the stack trace can omit critical diagnostic information.
@@ -195,7 +184,6 @@ try {
 logger.error("An unexpected error occurred: " + e.getMessage());
 }
 ```
-
 
 ##### 7. Use Asynchronous Logging for Performance
 
@@ -222,7 +210,6 @@ Implement asynchronous logging to improve application performance by offloading 
 </configuration>
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Synchronous logging in performance-critical paths without considering the potential for log-related latency.
@@ -230,7 +217,6 @@ Synchronous logging in performance-critical paths without considering the potent
 ```
 logger.info("A time-sensitive operation has completed.");
 ```
-
 
 ##### 8. Log at the Appropriate Granularity
 
@@ -252,7 +238,6 @@ public void processOrder(Order order) {
     logger.info("Order processed successfully");
 }
 ```
-
 
 **🔴 Avoid Practice:**   
 
@@ -278,7 +263,6 @@ public void processOrder(Order order) {
 }
 ```
 
-
 ##### 9. Monitor and Rotate Log Files
 
 **🟢 Good Practice:**
@@ -297,7 +281,6 @@ Configure log file rotation based on size or time to prevent logs from consuming
     <!-- ... -->
 </appender>
 ```
-
 
 **🔴 Avoid Practice:**   
 
@@ -319,7 +302,6 @@ public String maskCreditCard(String creditCardNumber) {
 }
 ```
 
-
 **🔴 Avoid Practice:**   
 
 Logging sensitive information such as passwords, API keys, Credit Cards, or personally identifiable information (PII).
@@ -327,7 +309,6 @@ Logging sensitive information such as passwords, API keys, Credit Cards, or pers
 ```
 log.info("Processing payment with card: {}", creditCardNumber);
 ```
-
 
 ##### 11. Structured Logging
 
@@ -360,20 +341,17 @@ Adopt structured logging to output logs in a machine-readable format like JSON, 
 </configuration>
 ```
 
-
 Let's take a look at an example log message that is printed in JSON format:
 
 ```
 logger.info("Order has been processed");
 ```
 
-
 The output of the above log message will be printed as below:
 
 ```
 {"@timestamp":"2024-03-26T15:52:00.789Z","@version":"1","message":"Order has been processed","logger_name":"Application","thread_name":"main","level":"INFO"}
 ```
-
 
 **🔴 Avoid Practice:**   
 
@@ -412,7 +390,3 @@ We have great content [***here***](https://mezocode.com/logging-just-got-smarter
 Effective logging is not just about capturing data; it's about capturing the right data at the right time and in the right format. By implementing these best practices, developers and operations teams can leverage SLF4J and Logback to turn logs into strategic resources for application management and incident resolution.
 
 Embracing these guidelines will lead to improved observability, quicker troubleshooting, and a deeper understanding of system behavior, establishing a solid foundation for application reliability and performance.
-
-<br />
-
-<br />

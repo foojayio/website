@@ -27,13 +27,11 @@ We cover the BoxLang AI v3 release, a major overhaul that ships multi-agent orch
 
 Whether you're a Java developer curious about dynamic JVM languages, an AI engineer looking for a productive alternative to Python-based agent frameworks, or just want to see what the JVM ecosystem can do in 2026, this episode is for you.
 
-YouTube
--------
+## YouTube
 
 {{< youtube qYPsvYo20i8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Luis Majano
   * [Foojay author page](https://foojay.io/today/author/luis-majano/)
@@ -51,8 +48,7 @@ Guests
   * [Foojay author page](https://foojay.io/today/author/cristobal-escobar/)
   * [LinkedIn](https://www.linkedin.com/in/cristobalescobarh/)
 
-Links
------
+## Links
 
 * On the [BoxLang website](https://www.boxlang.io):
   * [BoxLang docs](https://boxlang.ortusbooks.com/)
@@ -72,8 +68,7 @@ Links
   * [Introducing BoxLings!](https://foojay.io/today/introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd/)
   * [Introducing skills.boxlang.io --- The Open Agent Skills Ecosystem for BoxLang \& the Ortus World](https://foojay.io/today/introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world/)
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests  
 

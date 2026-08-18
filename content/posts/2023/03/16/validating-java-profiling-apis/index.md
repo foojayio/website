@@ -36,8 +36,7 @@ I focus here on the AsyncGetCallTrace and GetStackTrace API, but due to the simi
 
 *The tool took far longer to bring to a usable(ish) state; this is why I didn't write an article last week. I hope to be on schedule again next week.*
 
-AsyncGetCallTrace and GetStackTrace
------------------------------------
+## AsyncGetCallTrace and GetStackTrace
 
 A short recap from my series ["Writing a Profiler from Scratch"](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) -- both APIs return the stack trace for a given thread at a given point in time (A called B, which in turn called C, ...):
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgct_2-2000x1125.png) AsyncGetCallTrace
@@ -46,8 +45,7 @@ The only difference is that AsyncGetCallTrace (ASGCT) returns the stack trace at
 
 GetStackTrace is the only official API to obtain stack traces but it has precision problems. Both don't have more than a few basic tests in the OpenJDK.
 
-Correctness
------------
+## Correctness
 
 But when is the result of a profiling API deemed to be correct? If it matches the execution of the program.
 
@@ -55,23 +53,20 @@ This is hard to check if we don't modify the JVM. But it is relatively simple to
 
 The basic idea for automation is to automatically compare the returns of the profiling API to the returns of an oracle. But, we sadly don't have an oracle for the asynchronous AsyncGetCallTrace yet, but we can create one by weakening our correctness definition and building up our oracle in multiple stages.
 
-Weakening the correctness definition
-------------------------------------
+## Weakening the correctness definition
 
 In practice, we don't need the profiling APIs to return the correct result in 100% of all cases and for all frames in the trace. Typical profilers are sampling profilers and therefore approximate the result anyway.
 
 This makes the correctness definition easier to test, as it lets us make the trade-off between feasibility and precision.
 
-Layered oracle
---------------
+## Layered oracle
 
 The idea is now to build our oracle in different layers. We are starting with basic assumptions and writing tests to verify that the layer above is probably correct too. This is leading us to our combined test of asynchronous AsyncGetCallTrace.
 
 This has the advantage that every check is relatively simple, which is essential because the whole oracle depends on how much we trust the basic assumptions and the tests that verify that a layer is correct. I describe the layers and checks in the following:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/03/layers.png) Different layers of trace_validation
 
-Ground layer
-------------
+## Ground layer
 
 We start with the most basic assumption as our ground layer: An approximation of the stack traces can be obtained by instrumenting the byte code at runtime.
 
@@ -85,7 +80,6 @@ class A {
 }
 ```
 
-
 ... is transformed into ...
 
 ```java
@@ -98,15 +92,13 @@ class A {
 }
 ```
 
-
 The instrumentation agent modifies the bytecode at runtime, so every exit of the method is recorded. *I used the great [Javassist](https://www.javassist.org/) library for the heavy lifting.* We record all of this information in thread-local stacks.
 
 This does not capture all methods, because we cannot modify native methods implemented in C++, but it covers most of the methods. This is what I meant by an approximation before. A problem with this is the cost of the instrumentation. We can make a trade-off between precision and usefulness by only instrumenting some of the methods.
 
 We can ask the stack data structure to approximate the current stack trace in the middle of every method. These traces are by construction correct, especially when we implement the stack data structure in native code, only exposing the `Trace::push` and `Trace::pop` methods. This limits the code reordering by the JVM.
 
-GetStackTrace layer
--------------------
+## GetStackTrace layer
 
 As I described above, this API is the official API to get the stack traces and it is not limited to basic stack walking, as it walks only when the JVM state is defined. One could therefore assume that it returns the correct frames. This is what I did in my previous article.
 
@@ -116,8 +108,7 @@ There are usually more frames present in the return of GetStackTrace, but it is 
 
 This layer now allows us to get the frames consisting of method id and location at safe points.
 
-Safe point AsyncGetCallTrace layer
-----------------------------------
+## Safe point AsyncGetCallTrace layer
 
 We can now use the previous layer and the fact that the result of both APIs has almost the same format to check that AsyncGetCallTrace returns the correct result at safe points. Both APIs should yield the same results there.
 
@@ -125,8 +116,7 @@ The check here is as simple as calling both APIs in the Trace::check method and 
 
 *If you're curious: The main difference between the frames of both APIs is the magic number that ASGCT and GST use to denote native methods in the location field.*
 
-Async AsyncGetCallTrace layer
------------------------------
+## Async AsyncGetCallTrace layer
 
 We aim to convince ourselves that AsyncGetCallTrace is safe at non-safepoints, assuming that AsyncGetCallTrace is safe at safe points (here the beginning of methods). The solution consists of two parts: The trace stack, which contains the current stack trace and the sample loop, which calls AsyncGetCallTrace asynchronously and compares the returns with the trace stack.
 
@@ -145,8 +135,7 @@ With this, we can be reasonably sure that AsyncGetCallTrace is correct enough wh
 
 There is another possible way to implement the last check, which I didn't implement (yet) but which is still interesting to explore:
 
-A variant of the Async AsyncGetCallTrace check
-----------------------------------------------
+## A variant of the Async AsyncGetCallTrace check
 
 We can base this layer on top of the GetStackTrace layer too by exploiting the fact that GetStackTrace blocks at non-safepoints until a safe point is reached and then obtain the stack trace (see JBS). Like with the other check variant, we create a sample loop in a separate thread, pick a random Java thread, send it a signal, and then call AsyncGetCallTrace in the signal handler.
 
@@ -156,8 +145,7 @@ The advantage is that we don't do any instrumentation with this approach and onl
 
 I did not yet test it but might do so in the future because the setup should be simple enough to add it to the OpenJDK as a test case.
 
-Conclusion
-----------
+## Conclusion
 
 I've shown you in this article how we can test the correctness of AsyncGetCallTrace automatically using a multi-level oracle.
 

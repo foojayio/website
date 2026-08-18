@@ -40,7 +40,6 @@ $ curl -s "https://get.sdkman.io" | bash
 $ sdk install java 15.0.0.fx-librca
 ```
 
-
 Now we are ready to install all the required tools, get the sources from GitHub, and create the JDK build configuration.
 
 ```
@@ -77,13 +76,11 @@ Build performance summary:
 * Memory limit:   7815 MB
 ```
 
-
 With all the required tools being available and configured, we can start the compile process with \`make images\`. This will run for a longer time, compiling all components of the JDK. The Raspberry Pi 4 has enough resources as memory usage fluctuates between 1 and 3GB.
 
 ```
 $ make images
 ```
-
 
 ![](compiling-java-1024x357.png)
 
@@ -97,7 +94,6 @@ openjdk version "16-internal" 2021-03-16
 OpenJDK Runtime Environment (build 16-internal+0-adhoc.pi.jdk)
 OpenJDK 64-Bit Server VM (build 16-internal+0-adhoc.pi.jdk, mixed mode, sharing)
 ```
-
 
 Yep, there it is: **the cutting edge, not yet released, straight from the sources, freshly baked and served "**Java JDK 16-internal**" on a Raspberry Pi**! 🙂
 ![](java-16-internal-on-raspberrypi-1024x646.png)

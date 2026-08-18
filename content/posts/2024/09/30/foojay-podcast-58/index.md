@@ -34,13 +34,11 @@ In this podcast, we'll discuss how developers can secure their code.
 
 I talked with three authors who posted a security and code quality post on Foojay.io.
 
-Video
------
+## Video
 
 {{< youtube sRVcqILDuSo >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -48,8 +46,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Jonathan Vila
 
@@ -68,8 +65,7 @@ Guests
 * <https://www.linkedin.com/in/costlow/>
 * <https://twitter.com/costlow>
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests
 

@@ -28,10 +28,7 @@ I have been analyzing the latest [**Sonar Leaderboard**](https://www.sonarsource
 
 Not all "high-end" models write code that you would want to push to production. Here is what the numbers and the code say, straight up. 👇
 
-
-
-**1. The "Bloatware" Trap: Precision vs. Verbosity 📉**
--------------------------------------------------------
+## **1. The "Bloatware" Trap: Precision vs. Verbosity 📉**
 
 One of the craziest stats from the leaderboard is the difference in the amount of code that different models write to solve **exactly the same problem**.
 
@@ -90,7 +87,6 @@ public List<String> filterValidUsers(List<User> users) {
 }
 ```
 
-
 **What an "Efficient" model would tend to generate (Gemini 3 Pro / OpenCoder style):** Direct, readable, and using the Streams API correctly.
 
 ```java
@@ -111,14 +107,10 @@ public List<String> filterValidUsers(List<User> users) {
 }
 ```
 
-
 Which one do you prefer to maintain in 6 months? Exactly.
 ![](Screenshot-2026-01-09-at-19.51.13-1024x217.png)
 
-
-
-**2. Security: A "Bug" is not the same as an "Open Door" 🚨**
--------------------------------------------------------------
+## **2. Security: A "Bug" is not the same as an "Open Door" 🚨**
 
 Here is where things get serious. Many devs assume that if a model is "smarter", it writes safer code. **Spoiler: No.**
 
@@ -146,7 +138,6 @@ public List<User> search(String username) {
 }
 ```
 
-
 While a secure model (like **Opus 4.5 Thinking** ) would **tend** to use *Prepared Statements* by default:
 
 ```java
@@ -165,16 +156,12 @@ public List<User> search(String username) {
 }
 ```
 
-
 **Pro Tip:** If you use a model with high *Issue Density* (\>25), assume there are vulnerabilities. ALWAYS run a comprehensive code scanner (like SonarQube) before accepting the PR.
 
 Difference in terms of issue density on the main model of each organization:
 ![](Screenshot-2026-01-09-at-19.51.23-1024x634.png)
 
-
-
-**3. "New" does not guarantee "Better Code" 📉**
-------------------------------------------------
+## **3. "New" does not guarantee "Better Code" 📉**
 
 There is a belief that version v5 will always be cleaner than v4. Sonar's data says: *"Not so fast!"*.
 
@@ -201,13 +188,9 @@ try {
 }
 ```
 
-
 ![](Screenshot-2026-01-09-at-19.51.31-1024x326.png)
 
-
-
-**4. The Summary: Which model should I use for Java?**
-------------------------------------------------------
+## **4. The Summary: Which model should I use for Java?**
 
 Forgetting the hype and looking only at engineering metrics (Pass Rate + Clean Code), here is the guide:
 
@@ -234,12 +217,8 @@ The balanced option.
 * **Power:** Solves very hard problems.
 * **Cons:** Be prepared to refactor a lot of verbose code and clean *bad smells*.
 
-
-
 ### **Final Summary 📝**
 
 Don't let the *Pass Rate* blind you. Code that works but is full of security holes or has absurd cyclomatic complexity is a time bomb. 💣
 
 Choose tools that respect your time (and your security team's time). See you in the next commit! 🚀👨‍💻
-
-<br />

@@ -31,8 +31,7 @@ In some cases, this is a simple issue that we can reproduce locally and deploy. 
 
 In those cases, we need to understand the problem in the parse tree before pushing an update. Otherwise, we might have a broken product in production.
 
-What is jsoup? The Java HTML Parser
------------------------------------
+## What is jsoup? The Java HTML Parser
 
 Before we go into the nuts and bolts of debugging jsoup let's first answer, the question above and discuss the core concepts behind jsoup.
 
@@ -54,7 +53,6 @@ for (Element headline : newsHeadlines) {
 }
 ```
 
-
 This code snippet fetches headlines from wikipedia. In the code above, you can see several interesting features:
 
 * Connection to URL is practically seamless -- just pass a string URL to the connect method
@@ -63,8 +61,7 @@ This code snippet fetches headlines from wikipedia. In the code above, you can s
 
 If you're looking at that and thinking "that looks fragile". Yes, it is.
 
-Simple jsoup Test
------------------
+## Simple jsoup Test
 
 To demonstrate debugging, I created a simple demo that you can download here.
 
@@ -77,7 +74,6 @@ You can use the following Maven dependency to install jsoup into any Java progra
   <version>1.14.3</version>
 </dependency>
 ```
-
 
 This demo is a trivial Java app that returns a complete list of external links and elements with src attributes in a page. This is based on the code from here, converted to a Spring Boot Java program.
 
@@ -110,7 +106,6 @@ public Set<String> listLinks(String url, boolean includeMedia) throws IOExceptio
 }
 ```
 
-
 As you can see, we fetch the input String URL. We can also use input streams, but this makes things slightly more complicated when parsing relative URLs (we need a base URL anyway). We then search for links and objects that have an src attribute. The code then adds all of them into a set to keep the entries sorted and unique.
 
 We expose this as a web service using the following code:
@@ -131,18 +126,15 @@ public class ParseLinksWS {
 }
 ```
 
-
 Once we run the application can the application, we can use it with a simple curl command:
 
 ```
 curl -H "Content-Type: application/json" "http://localhost:8080/parseLinks?url=https%3A%2F%2Flightrun.com"
 ```
 
-
 This prints out the list of URLs referred to in the Lightrun home page.
 
-Debugging Content Failures
---------------------------
+## Debugging Content Failures
 
 Typical string scraping issues occur when an element object changes. E.g. wikipedia can change the structure of their pages and the select method above can suddenly fail. This is often a nuanced failure, e.g. missing DOM element in the Java object hierarchy which can trigger a failure of the select method.
 
@@ -168,7 +160,6 @@ I ctrl-clicked (on Mac use Meta-click) the select method call here:
 Elements links = doc.select("a[href]");
 ```
 
-
 And it led me to the Element class. In it I ctrl-clicked the Selector "select" method and got to the "interesting" place.
 
 Here, I could place a conditional snapshot to see every case where an "a\[href\]" query is made:
@@ -191,7 +182,6 @@ First, we add a log with the following text:
 "Executing query {query}"
 ```
 
-
 ![image2.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650465598568/jjkSGCvVa.png)
 
 Then, to find out how many entries we returned, we just go to the caller (which we know thanks to the stack in the snapshot) and add the following log there:
@@ -200,7 +190,6 @@ Then, to find out how many entries we returned, we just go to the caller (which 
 Links query returned {links.size()}
 <img decoding="async" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1650465693574/unexIjfhz.png" alt="image5.png">
 ```
-
 
 This produces the following log which lets us see that we had 147 `a[href]` links. The beauty of this is that the additional logs are interlaced with the pre-existing logs in-context:
 
@@ -215,9 +204,7 @@ Feb 02, 2022 11:25:27 AM org.jsoup.select.Selector select
 INFO: LOGPOINT: Executing query [src]
 ```
 
-
-Avoid Security and GDPR Issues
-------------------------------
+## Avoid Security and GDPR Issues
 
 GDPR and security issues can be a problem with leaking user information into the logs. This can be a major problem, and Lightrun helps you reduce that risk significantly.
 
@@ -239,8 +226,7 @@ Personally Identifiable Information (PII) is at the core of GDPR and is also a m
 
 PII reduction lets us hide information matching specific patterns from the logs (e.g. credit card format etc). This can be defined in the Lightrun web interface by a manager role.
 
-TL;DR
------
+## TL;DR
 
 With Java content scraping, jsoup is the obvious leader. Development with jsoup is far more than string operations or even handling the connection aspects. Besides getting the document object, it also handles complex aspects required for DOM element and scripting.
 

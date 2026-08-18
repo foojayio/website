@@ -28,8 +28,7 @@ Note that if you want to play along, you'll need to compile with the `-Xcontext-
 
 The main idea behind context receivers is to pass additional parameters to a function without having to do it explicitly.
 
-A simplified model sample
--------------------------
+## A simplified model sample
 
 Let's start with a simple example to show how it works. We want to model a simple transfer operation between two bank accounts.
 
@@ -53,7 +52,6 @@ class AccountService {
 }
 ```
 
-
 We can call the above code as:
 
 ```kotlin
@@ -67,9 +65,7 @@ service.transfer(
 )
 ```
 
-
-Improving the code with extension functions
--------------------------------------------
+## Improving the code with extension functions
 
 We can slightly improve the above code by making use of [extension functions](https://kotlinlang.org/docs/extensions.html#extension-functions). Instead of defining the `Transaction` as a parameter to the `transfer()` function, we can migrate the latter to an extension function.
 
@@ -87,7 +83,6 @@ class AccountService {
 }
 ```
 
-
 1. Implicit `this` references the `Transaction` object
 
 Within the context of an `AccountService`, we can now call the `transfer()` function on an existing `Transaction`.
@@ -100,7 +95,6 @@ with(service) {                               // 1
     )
 }
 ```
-
 
 1. Bring the `service` instance in scope
 2. So it's valid to call `transfer` on the `transaction` object
@@ -121,15 +115,13 @@ with(transaction) {
 }
 ```
 
-
 IMHO, conciseness has very little value compared to the cost of wrong semantics.
 
 Unfortunately, with the current language constructs, fixing semantics means we would need to move the `transfer()` function to `Transaction`.
 
 It would be lousy modeling as the transfer is the responsibility of the service.
 
-Context receivers to the rescue
--------------------------------
+## Context receivers to the rescue
 
 As I mentioned in the introduction, the idea behind context receivers is to somehow "pass" function parameters without being explicit about them.
 
@@ -137,7 +129,6 @@ As I mentioned in the introduction, the idea behind context receivers is to some
 context(Foo, Bar, Baz)
 fun myfunction() {}
 ```
-
 
 To call such a function, one needs to bring an object of each contextual type "in scope". We can achieve it with the [with](https://kotlinlang.org/docs/scope-functions.html#with) function:
 
@@ -154,7 +145,6 @@ with(foo) {                     // 1
 }
 ```
 
-
 1. Bring `foo` in scope
 2. Bring `bar` in scope
 3. Bring `baz` in scope
@@ -170,7 +160,6 @@ fun myfunction() {
     println(this@Baz)
 }
 ```
-
 
 We use context receivers to be able to write code using the wanted code:
 
@@ -189,7 +178,6 @@ class AccountService {
 }
 ```
 
-
 1. Implicit `this` references the `Transaction` object. We don't need to qualify further with the class name as there's no other context object
 
 We can now call the code accordingly, with the correct semantics:
@@ -203,12 +191,10 @@ with(transaction) {                               // 1
 }
 ```
 
-
 1. Bring `transaction` in scope
 2. Use the `transaction` object in scope
 
-Discussion
-----------
+## Discussion
 
 Context receivers allow us to implement the API with the correct calling code semantics.
 

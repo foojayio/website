@@ -26,8 +26,7 @@ When everything is set up, you'll probably want to expose some pods to the outsi
 
 Kubernetes provides different ways to do it: I'll describe them in this post.
 
-Setup
------
+## Setup
 
 For the sake of the demo, I'll be using [Kind](https://kind.sigs.k8s.io/):
 > kind is a tool for running local Kubernetes clusters using Docker container "nodes". kind was primarily designed for testing Kubernetes itself, but may be used for local development or CI.
@@ -46,14 +45,12 @@ nodes:
 - role: worker                       # 2
 ```
 
-
 1. Port forwarding to cope with the Docker VM layer on Mac (see below)
 2. Two nodes
 
 ```bash
 kind create cluster -- config kind.yml
 ```
-
 
 ![](cluster.png)
 
@@ -66,23 +63,19 @@ docker pull nginx:1.23
 kind load docker-image nginx:1.23
 ```
 
-
 Finally, I alias `kubetcl` to `k`:
 
 ```bash
 alias k=kubectl
 ```
 
-
-No outside access by default
-----------------------------
+## No outside access by default
 
 The default situation is to provide no access to the outside of the cluster.
 
 ```bash
 k create deployment nginx --image=nginx:1.23 # 1
 ```
-
 
 1. Create a deployment of a single pod
 
@@ -91,7 +84,6 @@ Let's check if everything is fine:
 ```bash
 k get pods
 ```
-
 
     NAME                     READY   STATUS    RESTARTS   AGE
     nginx-6c7985744b-c7cpl   1/1     Running   0          67s
@@ -102,7 +94,6 @@ The pod has an IP, but we cannot reach it outside the cluster.
 k get pod nginx-6c7985744b-c7cpl --template '{{.status.podIP}}'
 ```
 
-
     10.244.1.2
 
 Let's confirm the IP by running a shell inside the pod itself:
@@ -112,7 +103,6 @@ k exec -it nginx-6c7985744b-c7cpl -- /bin/bash
 hostname -I
 ```
 
-
 ```bash
 10.244.1.2
 ```
@@ -121,8 +111,7 @@ hostname -I
 
 We cannot successfully ping this IP outside the cluster; it's an internal IP.
 
-Internal IPs are not stable
----------------------------
+## Internal IPs are not stable
 
 We created a deployment. Hence, if we delete the single pod, Kubernetes will detect it and create a new one, thanks to its self-healing capabilities.
 
@@ -130,7 +119,6 @@ We created a deployment. Hence, if we delete the single pod, Kubernetes will det
 k delete pod nginx-6c7985744b-c7cpl
 k get pods
 ```
-
 
 ```bash
 NAME                     READY   STATUS    RESTARTS   AGE
@@ -143,7 +131,6 @@ Let's check its new IP:
 k exec -it nginx-6c7985744b-c6f92 -- /bin/bash
 hostname -I
 ```
-
 
 `10.244.2.2`
 
@@ -161,7 +148,6 @@ k expose deployment nginx --type=ClusterIP --port=8080
 k get svc
 ```
 
-
 ```bash
 NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
 kubernetes   ClusterIP   10.96.0.1     <none>        443/TCP    9m47s
@@ -174,8 +160,7 @@ From this point on, it's possible to access the pod *via* the service's `Cluster
 
 All is set for access inside the cluster. From the outside, it's not possible yet. So why shall we use `ClusteIP`? It's pretty darn useful for services that you don't want to expose to the outside world: databases, ElasticSearch nodes, Redis nodes, etc.
 
-Accessing a pod
----------------
+## Accessing a pod
 
 Accessing a pod from outside the cluster is when things become interesting.
 
@@ -185,7 +170,6 @@ We first need to remove the existing deployment and service.
 k delete deployment nginx
 k delete svc nginx
 ```
-
 
 The simplest way to allow external access is to change the service's type to `NodePort`.  
 `NodePort` adds an access port to a `ClusterIP`.
@@ -259,7 +243,6 @@ spec:
       nodePort: 30800
 ```
 
-
 1. Override the default configuration to return hostname and IP address
 2. `NodePort` maps the pod's port to an externally accessible port
 
@@ -269,7 +252,6 @@ Let's apply the configuration:
 k apply -f deployment.yml
 ```
 
-
 Note that I'm running on Mac; hence, there's a VM container around Docker, like in Windows. For this reason, Kind needs to port forward the VM to the host. Please check the [documentation](https://kind.sigs.k8s.io/docs/user/configuration/#extra-port-mappings) on how to achieve it.
 
 Once Kubernetes has scheduled the pod, we can access it on the configured port:
@@ -277,7 +259,6 @@ Once Kubernetes has scheduled the pod, we can access it on the configured port:
 ```bash
 curl localhost:30800
 ```
-
 
     host: nginx-b69d8877c-p2s79
     IP:   10.244.2.2
@@ -297,7 +278,6 @@ k scale deployment nginx --replicas=2
 k get pods -o wide
 ```
 
-
 Kubernetes balances the cluster so that each pod resides on a different node:
 
     NAME                    READY   STATUS    RESTARTS   AGE    IP           NODE           NOMINATED NODE   READINESS GATES
@@ -309,7 +289,6 @@ To which node/pod will requests be sent?
 ```bash
 while true; do curl localhost:30800; done
 ```
-
 
     host: nginx-b69d8877c-w7db4
     IP:   10.244.2.2
@@ -328,8 +307,7 @@ while true; do curl localhost:30800; done
 
 The service balances the requests between all available pods.
 
-The load balancing abstraction
-------------------------------
+## The load balancing abstraction
 
 `NodePort` allows querying *any* cluster node. `LoadBalancer` is a facade over the cluster that does... load balancing. It's an abstract object provided by Kubernetes; each cloud provider implements it differently depending on its peculiarities though the behavior is the same.
 > LoadBalancer: Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
@@ -357,13 +335,11 @@ spec:
       targetPort: 30800
 ```
 
-
 Let's look at the services:
 
 ```bash
 k get svc
 ```
-
 
     NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          4h37m
@@ -375,8 +351,7 @@ Unfortunately, as I mentioned above, on Mac (and Windows), Docker runs in a VM. 
 
 Depending on the cloud provider, `LoadBalancer` may provide additional proprietary capabilities.
 
-Ingress, when you need routing
-------------------------------
+## Ingress, when you need routing
 
 `Ingress` focuses on *routing* requests to services in the cluster.  
 
@@ -402,7 +377,6 @@ helm install apisix apisix/apisix \
   --namespace ingress-apisix \
   --set ingress-controller.config.apisix.serviceNamespace=ingress-apisix
 ```
-
 
 Note that though the documentation mentions Minikube, it's applicable to *any* local cluster, including Kind.
 
@@ -481,7 +455,6 @@ data:
     }
 ```
 
-
 The above snippet only describes the `left` path; it should contain a similar configuration for the `right` path.
 
 At this point, we can create the configuration to route paths to services:
@@ -509,7 +482,6 @@ spec:
       servicePort: 80                            # 3
 ```
 
-
 1. Use the `ApisixRoute` CRD created by the installation
 2. Forward request to the `left` service
 3. Forward request to the `right` service
@@ -524,7 +496,6 @@ To check that it works, let's curl again.
 curl localhost:30800
 ```
 
-
     {"error_msg":"404 Route Not Found"}
 
 It's a good sign: APISIX is responding.
@@ -535,13 +506,11 @@ We can now try to curl the `right` path to ensure it will forward to the relevan
 curl localhost:30800/right
 ```
 
-
     right
 
 `/left`, it works as well.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I've described several ways to access pods outside the cluster: `NodePort` and `LoadBalancer` services and `Ingress`. For `Ingress`, you may have noticed that the `ApisixRoute` object is a proprietary CRD. To avoid it, Kubernetes aims to provide an abstraction; the CNCF is working on a [Gateway API](https://gateway-api.sigs.k8s.io/) project.
 

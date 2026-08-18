@@ -23,8 +23,7 @@ frozen: false
 
 Analytics are crucial for understanding how users interact with your web application. In this guide, I'll show you how to integrate Google Analytics with your Vaadin Flow application in a clean, maintainable way.
 
-Prerequisites
--------------
+## Prerequisites
 
 Before we start, you'll need:
 
@@ -32,8 +31,7 @@ Before we start, you'll need:
 * A Google Analytics account with a measurement ID (usually starts with "G-")
 * Basic understanding of Vaadin components
 
-Creating the Analytics Component
---------------------------------
+## Creating the Analytics Component
 
 First, let's create a reusable component that handles the Google Analytics integration. This component will:
 
@@ -114,9 +112,7 @@ public class GoogleAnalytics extends Component implements HasSize {
 }
 ```
 
-
-Using the Component
--------------------
+## Using the Component
 
 ### Step 1: Add To Main Layout
 
@@ -135,7 +131,6 @@ public class MainLayout extends AppLayout {
     }
 }
 ```
-
 
 ### Step 2: Track Custom Events
 
@@ -162,9 +157,7 @@ public class UserProfileView extends VerticalLayout {
 }
 ```
 
-
-How It Works
-------------
+## How It Works
 
 The component uses Vaadin's JavaScript execution capabilities to:
 
@@ -175,8 +168,7 @@ The component uses Vaadin's JavaScript execution capabilities to:
 
 The JavaScript code is structured for readability and maintainability, with clear variable names and comments explaining each step.
 
-Best Practices
---------------
+## Best Practices
 
 1. Initialize analytics only once in your main layout
 2. Use descriptive event names and parameters
@@ -184,8 +176,7 @@ Best Practices
 4. Consider user privacy and GDPR compliance
 5. Add error handling for analytics calls
 
-Common Use Cases
-----------------
+## Common Use Cases
 
 Here are some events you might want to track:
 
@@ -195,8 +186,7 @@ Here are some events you might want to track:
 * Error occurrences
 * User preferences
 
-Conclusion
-----------
+## Conclusion
 
 This integration provides a clean, type-safe way to use Google Analytics in your Vaadin Flow application. The component approach makes it easy to maintain and extend the tracking functionality as needed.
 

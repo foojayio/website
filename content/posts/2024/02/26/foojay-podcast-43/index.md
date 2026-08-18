@@ -28,13 +28,11 @@ Let's explore the art of ensuring robust and bug-free code in the Java ecosystem
 
 Whether you're a seasoned developer or just starting out, there's a lot you can learn from the experts in this podcast about testing methodologies, tools, and best practices, empowering you to write reliable Java applications.
 
-Video
------
+## Video
 
 {{< youtube PY7cyyVqxL4 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,8 +40,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Oleg Šelajev
 
@@ -63,16 +60,14 @@ Guests
 * <https://twitter.com/jonas_grgt>
 * <https://jonasg.io/posts/unit-test-ambiguity/>
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>[](https://foojay.social/@frankdelporte)
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 
@@ -105,10 +100,7 @@ Content
 
 01:18:40 Conclusion
 
-<br />
-
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

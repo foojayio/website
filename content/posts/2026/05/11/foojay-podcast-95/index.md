@@ -30,13 +30,11 @@ Together they cover how CVEs in the Java runtime are handled through coordinated
 
 An animated, occasionally alarming, and ultimately optimistic conversation about a problem the Java community is well-positioned to lead on.
 
-YouTube
--------
+## YouTube
 
 {{< youtube -T5h4HqRpVw >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -44,8 +42,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Steve Poole
 
@@ -58,8 +55,7 @@ Guests
 
 * [LinkedIn](https://www.linkedin.com/in/dwelch2344/)
 
-Content
--------
+## Content
 
 00:00 Introduction of topics and guests  
 

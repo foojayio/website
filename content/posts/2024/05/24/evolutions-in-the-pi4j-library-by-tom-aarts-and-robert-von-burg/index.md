@@ -30,13 +30,11 @@ Multiple improvements have been implemented in the new release, V2.6.0 (2024-04-
 * [Interview with Tom Aarts](#interview-tom)
 * [Conclusion](#conclusion)
 
-Ongoing I2C Improvements
-------------------------
+## Ongoing I2C Improvements
 
 Robert von Burg worked on improvements to the I2C implementation in Pi4J. The changes are in [pull request #351](https://github.com/Pi4J/pi4j-v2/pull/351/files) and allow atomically executing multiple I2C calls in a thread safely, plus other improvements. See [this blog post for more details](https://pi4j.com/blog/2024/20240418_i2c_improvements/).
 
-PWM Hardware Support on Raspberry Pi 5
---------------------------------------
+## PWM Hardware Support on Raspberry Pi 5
 
 Tom Aarts added PWM hardware support for the Raspberry Pi 5 via a new provider `linuxfs-pwm`. The previous PWM PiGpio provider does not support the Raspberry Pi 5 RP1 chip. To use this new provider, changes are required in your dependencies and Java code. See [this blog post for more details and a code example](https://pi4j.com/blog/2024/20240423_pwm_rpi5/).
 
@@ -49,8 +47,7 @@ Tom Aarts added PWM hardware support for the Raspberry Pi 5 via a new provider `
  </figure>
 </figure>
 
-New Class to Get Board Info
----------------------------
+## New Class to Get Board Info
 
 The new `BoardInfoHelper` class and the related enums and methods can provide the type of Raspberry Pi board and real-time info about memory use, voltage, board temperature,... This new class is needed to define which type of Raspberry Pi is executing the code to make sure the priority of the plugins is correct to support all the GPIO interfaces. More info on [this page on the Pi4J website](https://pi4j.com/documentation/board-info/).
 
@@ -65,8 +62,7 @@ This new class is already used as the basis for the website [api.pi4j.com](https
  </figure>
 </figure>
 
-Interview with Robert von Burg
-------------------------------
+## Interview with Robert von Burg
 
 The Pi4J project has two important Roberts. The first one is **Robert Savage** (living in the US), who started the Pi4J development. You can read more about him and why Pi4J was created in [this interview on F](https://foojay.io/today/interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi/)oojay. He also created V2 of Pi4J, but hasn't been involved much in the project since its release. Luckily, we have another Robert in [the Pi4J team](https://pi4j.com/about/team/)! **Robert von Burg** (living in Switzerland), also known as **Eitch** , is the [main maintainer now of the Pi4J V2 sources](https://github.com/Pi4J/pi4j-v2) and takes care of the releases.
 
@@ -112,8 +108,7 @@ We are focusing on making the API easier to understand and use, making it work o
 
 These devices, as they become more powerful with each generation, make it easier to implement more features at home. If we think about how people use them to extend their home networks for security, media playback, or home automation, I see a bright future. Our goal with the Pi4J project is to make onboarding newcomers as easy as possible.
 
-Interview Tom Aarts
--------------------
+## Interview Tom Aarts
 
 **Tom Aarts** started contributing to the Pi4J project when he did his first commit in the [pi4j-example-devices repository](https://github.com/Pi4J/pi4j-example-devices/). Currently, you can find example implementations for a long list of devices (see screenshot below), using V2 of Pi4J. While creating these implementations, he found some missing pieces and bugs in the core library and also fixed them. For instance, this blog post is [about the ongoing PWM improvements for the Raspberry Pi 5](https://pi4j.com/blog/2024/20240423_pwm_rpi5/). Furthermore, Tom often assists users who [filed a Pi4J V2 issue](https://github.com/Pi4J/pi4j-v2/issues) or [started a discussion](https://github.com/Pi4J/pi4j-v2/discussions).
 
@@ -179,7 +174,6 @@ By adding more demonstration cases of Pi4J, we can increase the interest and num
 
 I think Java will remain a valuable choice for these cases. Currently, there is an emphasis on languages that prevent memory leaks and provide security; Java does both of these items. I think we can assume the Java Runtime Environments will continue to improve Java's performance and memory usage. Also, very useful IDEs are available for development and, of course, Java portability.
 
-Conclusion
-----------
+## Conclusion
 
 The Pi4J project is open-source and can only evolve through its contributors. Luckily, we have fixed team members and enthusiast users who maintain and evolve the code while answering issues and discussions. Are you a Pi4J user who created a project or wants to help improve the code and/or documentation? Let me know!

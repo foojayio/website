@@ -54,5 +54,3 @@ For more information, please visit:
 [Payara Welcomes Jakarta EE 10](https://blog.payara.fish/payara-welcomes-jakarta-ee-10)
 
 [Jakarta EE 10 Certification](https://jakarta.ee/compatibility/certification/10/)
-
-<br />

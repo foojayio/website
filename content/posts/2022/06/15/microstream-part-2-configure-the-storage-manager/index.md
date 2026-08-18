@@ -33,8 +33,7 @@ And the Java instances are serialised to a persistent medium so that they can be
 
 In this article, we have a look at how you define what is considered as the database for MicroStream and how you can configure the storage manager.
 
-The Storage Manager
--------------------
+## The Storage Manager
 
 You as a developer will interact with the class *StorageManager* to persist your data. When supplying the configuration, a StorageManager is ready to write the Java Instances in a binary format to the persistent medium. But more on the format later on, let us jump directly into some pieces of code to show you the gist of the *StorageManager*.
 
@@ -45,7 +44,6 @@ try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("targ
    storageManager.storeRoot();
 }
 ```
-
 
 We start an embedded storage, an alternate name for referring to the Java instances in memory as database, by providing it a root object of the Object Graph that denotes our database and a path on the file system where data is persisted to survive a process restart.
 
@@ -62,11 +60,9 @@ public class DataRoot {
 }
 ```
 
-
 As indicated earlier, no need for a mapping, annotation, or interface, just plain Java POJOs.
 
-Configuration
--------------
+## Configuration
 
 What dependencies do you need to add to your project? You just need a single dependency to have access to the *StorageManager* class that writes to the file system.
 
@@ -77,7 +73,6 @@ What dependencies do you need to add to your project? You just need a single dep
    <version>${microstream.version}</version>
 </dependency>
 ```
-
 
 It brings in a few other MicroStream artifacts, the persistence to binary format and the Abstract File System, more on that later, but there are no other external dependencies included through the artifact. With the latest release v7.0, we have added the SLF4J API dependency to be able to give some feedback on the internal actions through logging statements.
 
@@ -106,9 +101,7 @@ StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
 StorageManager storageManager = EmbeddedStorage.start(root, storageConfiguration);
 ```
 
-
-Abstract File System (AFS)
---------------------------
+## Abstract File System (AFS)
 
 To allow for different kinds of persistence storages, MicroStream uses internally an Abstract File System. The systems that read and write the data use implementations of this AFS so that not only a directory on the disk can be used, but also data can be stored inside a database. You can create even your custom implementation of this AFS and use any system you like.
 
@@ -125,7 +118,6 @@ How can you make use of it? Add the AFS SQL artifact to your project to have sup
    <version>${microstream.version}</version>
 </dependency>
 ```
-
 
 Other databases are supported for our Enterprise customers through additional artifacts. But also No-SQL solutions, like Redis, Kafka, and Hazelcast and Cloud storage like Amazon S3 and Microsoft Azure Blob Storage.
 
@@ -153,9 +145,7 @@ StorageConfiguration storageConfiguration = StorageConfiguration.Builder()
         .createConfiguration();
 ```
 
-
-Configuration through Configuration Files
------------------------------------------
+## Configuration through Configuration Files
 
 Until now, we have always used the programmatic configuration of the *StorageManager*. Through some Java statements, we defined the file locations and the number of channels that need to be used. MicroStream has the option to read the configuration properties from external sources like properties files, ini files, and XML files.
 
@@ -168,7 +158,6 @@ You can of course read configuration values yourself from an external source, bu
    <version>${microstream.version}</version>
 </dependency>
 ```
-
 
 With this dependency in place, we can just refer to the location of the configuration file and the Storage Manager can be configured based on the key-value pairs that are found. The supported formats are properties and ini files and XML files. The format is based on the extension the configuration file has.
 
@@ -186,13 +175,11 @@ try (EmbeddedStorageManager storageManager = EmbeddedStorageConfiguration.load(
 }
 ```
 
-
 The *EmbeddedStorageFoundation* class is actually the configuration class that gives you the possibility to configure every little detail of MicroStream. The StorageConfiguration we have used in the previous section is a convenient helper method to configure the most important aspects while leaving all the other configuration aspects to their defaults.
 
 The list of all configuration properties and their description can be found on this documentation page <https://docs.microstream.one/manual/storage/configuration/properties.html>
 
-Conclusion
-----------
+## Conclusion
 
 Setting up the Storage Manager can be as easy as pointing a directory on disk to the root object of the Object Graph that we consider as our in-memory database.
 

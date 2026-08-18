@@ -26,8 +26,7 @@ The standard, or baseline, implementation of RAG typically relies on a vector-ba
 
 To address these limitations, a variation of the RAG architecture known as GraphRAG---[first introduced by Microsoft Research](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/)---has gained traction. GraphRAG integrates knowledge graphs with LLMs, offering distinct advantages over traditional vector-based RAG for certain use cases. Understanding the relative strengths and weaknesses of vector-based RAG and GraphRAG is crucial for developers seeking to build more reliable AI applications.
 
-RAG: The Baseline Approach Based on Embeddings
-----------------------------------------------
+## RAG: The Baseline Approach Based on Embeddings
 
 In a standard vector-based RAG system, the underlying data used to augment the knowledge of LLMs is processed by first splitting it into chunks. Using embedding models, these chunks are then transformed into numerical vectors known as embeddings. Retrieval is then performed by searching for chunks whose vector embeddings are similar to the user's query embedding. This process efficiently identifies pieces of text that are semantically or contextually related to the input.
 
@@ -46,8 +45,7 @@ Similarly, a query like, "What is Jane Smith's role in ACME's renewable energy p
 
 Making these logical connections across different entities, often referred to as multi-hop retrieval or reasoning, is where vector-based RAG often falls short.
 
-GraphRAG: Connecting the Dots with Knowledge Graphs
----------------------------------------------------
+## GraphRAG: Connecting the Dots with Knowledge Graphs
 
 GraphRAG builds upon the foundation established by RAG but introduces a critical enhancement: the integration of a knowledge graph. A knowledge graph is a structured way of representing information. It consists of entities---which are key items like people, places, organizations, or concepts---and relationships, which define how these entities are connected. Think of a knowledge graph as a map that explicitly shows how different pieces of information relate to each other.
 

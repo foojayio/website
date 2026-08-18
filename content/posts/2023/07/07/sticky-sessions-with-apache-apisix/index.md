@@ -24,8 +24,7 @@ Sticky sessions, also known as session affinity, is a mechanism by which a routi
 
 In this article, I'll describe the reason behind sticky sessions, available alternatives, and how to implement them via Apache APISIX.
 
-Why sticky sessions?
---------------------
+## Why sticky sessions?
 
 Sticky sessions became popular when we stored the state on the upstream node, not the database. I'll use the example of a simplified e-commerce shop to explain further.
 
@@ -41,8 +40,7 @@ Going to the database every time is an expensive operation. It's ok for data tha
 
 However, if we store user X's cart on node 1, we need to ensure that we forward every request of user X to the same node.Otherwise, they will feel as if they lost their cart's content.Sticky sessions, or session affinity, is the mechanism that consistently routes the same user to the same node.
 
-Limitation of sticky sessions
------------------------------
+## Limitation of sticky sessions
 
 Before going further, I must explain a significant limitation of sticky sessions.If the webapp node that stores the data goes down for any reason, the data are irremediably lost.For the e-commerce scenario above, it means users will lose their cart occasionally, which is unacceptable from a business point-of-view.
 
@@ -56,8 +54,7 @@ While session replication exists in all tech stacks, there's no related specific
 
 When data is replicated on all nodes (or a remote cluster), you may think you no longer need sticky sessions.It's true if one accounts only for availability and not for performance.It's about data locality: fetching data on the current node than from somewhere else via the network is faster.
 
-Sticky sessions on Apache APISIX
---------------------------------
+## Sticky sessions on Apache APISIX
 
 Sticky sessions are a must-have for any Load Balancer, Reverse Proxy, and API Gateway worth their salt. However, I must admit that Apache APISIX's documentation needs an easy entry point into the subject.
 
@@ -93,14 +90,12 @@ routes:
       key: cookie_JSESSIONID         #4
 ```
 
-
 1. Define the upstream nodes
 2. Choose the consistent hashing algorithm
 3. Hash on cookie
 4. Define which cookie to hash on
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we detailed sticky sessions, that you should always use session replication with sticky sessions, and how to implement sticky sessions on Apache APISIX.
 

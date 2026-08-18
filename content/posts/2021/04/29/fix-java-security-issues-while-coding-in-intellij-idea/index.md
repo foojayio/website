@@ -26,6 +26,4 @@ Let's see how we can integrate security and secure development into IntelliJ IDE
 
 {{< youtube xB9vJ9vhOsg >}}
 
-<br />
-
 [Read the full article here!](https://snyk.io/blog/how-to-fix-java-security-issues-while-coding-in-intellij-idea/)

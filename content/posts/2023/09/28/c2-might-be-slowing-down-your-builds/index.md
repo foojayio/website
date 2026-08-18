@@ -29,15 +29,12 @@ Maven uses the [Plexus compiler wrapper](https://codehaus-plexus.github.io/plexu
 * Garbage Collection thread for memory management
 * JIT compilation thread to compile the maven byte code (it's getting meta), enabling it to run faster (see [Mastering the Art of Controlling the JIT: Unlocking Reproducible Profiler Tests](https://mostlynerdless.de/blog/2023/05/18/mastering-the-art-of-controlling-the-jit-unlocking-reproducible-profiler-tests/) for more information). Especially the C2 compiler takes some time. This is our example in a shared thread with the GC.
 
-Small builds
-------------
+## Small builds
 
 This is problematic on short builds (like building maven itself in 30s), as the C2 JIT does cost a significant amount of cpu-time, more than is saved by the faster execution of the jitted code. The maven self-built, for example, spent more than half of its cpu-time in the C2 compiler:
 [![](https://mostlynerdless.de/wp-content/uploads/2023/09/image-7-2000x462.png)](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html) Maven 4 (f24266eb64) was built with maven 3.8.7 on SapMachine 17.0.8.1 and profiled with [async-profiler](https://github.com/jvm-profiling-tools/async-profiler); click to view the [full](https://mostlynerdless.de/wp-content/uploads/2023/09/profile-two-core-none.html)flame graph
 
 We can use the information by async-profiler to get the cpu-time proportions for significant parts of the built:
-
-<br />
 
 |----------------------------------------|---------------------|---------|
 | Part                                   | cpu-time percentage | samples |
@@ -62,8 +59,7 @@ Side note: Maven only compiles with one thread, compiling with two threads (`-T2
 
 Does this mean that you should always disable C2 in CI builds? No. At a certain project size, the performance increase by the faster, compiled methods outweighs the C2 compilation costs.
 
-Large builds
-------------
+## Large builds
 
 Take, for example, [quarkus](https://quarkus.io/): A clean build on two cores runs for 430s (710s cpu-time) with C2 enabled:
 
@@ -90,10 +86,7 @@ The built without C2 runs in comparison for 880s (1000s cpu-time), so it doesn't
 | C2Compiler::compile_method             | 0 %                 | 0       |
 | Compiler::compile_method (C1 compiler) | 7 %                 | 6150    |
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 Disabling C2 can be an option to speed up builds of smaller Java applications in CI systems, mainly when restricted to one or two CPU cores. I would recommend exploring this for every maven build that runs under a minute, as it is not too hard to integrate (`MVN_OPTS="`*-XX:TieredStopAtLevel=1*`"`), yet might result in less CPU usage. Preliminary findings also show that it reduces memory usage. But my findings also show that it is not helpful for large builds.
 

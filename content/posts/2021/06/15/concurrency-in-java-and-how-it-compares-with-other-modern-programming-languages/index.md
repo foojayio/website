@@ -35,10 +35,7 @@ The chapters of this series are as below, with part 6 here on Foojay.io, the pla
 7. Concurrent web server in Kotlin with JVM
 8. Comparison and conclusion of benchmarks
 
-
-
-Concurrency in Java
--------------------
+## Concurrency in Java
 
 > "The Java programming language and the Java virtual machine (JVM) have been designed to support concurrent programming, and all execution takes place in the context of threads. " -- Wikipedia
 
@@ -66,8 +63,7 @@ The latest versions of Java provide the building blocks required for asynchronou
 
 Java still doesn't have any syntax sugar for async/await though but there are alternatives like the [EA Async](https://github.com/electronicarts/ea-async) library that's close enough.
 
-Benchmarking
-------------
+## Benchmarking
 
 Now that we have some basic understanding of concurrency features in Java, let us build a simple concurrent web server in Java. Since Java offers multiple ways to achieve this we'll be building two sample applications and comparing them. The Java version used is the latest (16.0.1) at the time of writing.
 
@@ -152,7 +148,6 @@ class ServerThread extends Thread {
 }
 ```
 
-
 As you can see, we bind a TCP listener using `ServerSocket` to port 8080 and listen to all incoming requests. Each request is processed in a new thread.
 
 Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.
@@ -194,7 +189,6 @@ Percentage of the requests served within a certain time (ms)
   99%   2006
  100%   2025 (longest request)
 ```
-
 
 As you can see, the request handler thread sleeps for 2 seconds for every 10th request. In a real-world scenario, the thread pool itself could become the bottleneck and you may not be able to set so many threads as the OS may not be able to provide so many thus creating increased resource usage and bottleneck. In this simple use case, since each thread spawns and processes the request really fast we won't encounter an issue.
 
@@ -281,7 +275,6 @@ public class JavaAsyncHTTPServer {
 }
 ```
 
-
 As you can see, we bind an asynchronous listener to port 8080 and listen to all incoming requests. Each request is processed in a new task provided by `AsynchronousServerSocketChannel`. We are not using any thread pools here and all the incoming requests are processed asynchronously and hence we don't have a bottleneck for maximum connections. But one thing you may immediately notice is that the code is much more complex now.
 
 Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.
@@ -325,11 +318,9 @@ Percentage of the requests served within a certain time (ms)
  100%   2026 (longest request)
 ```
 
-
 We have almost identical results here, this one is even faster by 100ms. Hence this version seems much more efficient than the multi-threaded version for this particular use case, however, at the cost of added complexity.
 
-Conclusion
-----------
+## Conclusion
 
 As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases.
 
@@ -337,10 +328,7 @@ Instead, it's a simple test for a very particular use case, a simple concurrent 
 
 The idea is to see the differences in solutions and to understand how concurrency works in Java. And for this particular use case, asynchronous solutions do seem to be the best choice.
 
-
-
-References
-----------
+## References
 
 * [blogs.oracle.com](https://blogs.oracle.com/javamagazine/going-inside-javas-project-loom-and-virtual-threads)
 * [dzone.com](https://dzone.com/articles/java-concurrency-evolution)
@@ -349,8 +337,6 @@ References
 * [www.baeldung.com](https://www.baeldung.com/java-asynchronous-programming)
 * [dzone.com](https://dzone.com/articles/async-await-in-java)
 * [www.baeldung.com](https://www.baeldung.com/akka-actors-java)
-
-
 
 If you like this article, please leave a like or a comment.
 

@@ -31,10 +31,7 @@ One of the advantages of ArchUnit is also that it is "just" another test, and do
 
 Please feel free to clone [this repository](https://github.com/SimonVerhoeven/archunit-demo), so you can easily follow along.
 
-
-
-Defining what is analyzed
--------------------------
+## Defining what is analyzed
 
 There are a couple of ways to determine what should be analyzed:
 
@@ -45,10 +42,7 @@ There are a couple of ways to determine what should be analyzed:
 
 Examples can be found in the `analysismanagement` package
 
-
-
-Areas
------
+## Areas
 
 ### Core
 
@@ -79,7 +73,6 @@ services.forEach(service -> {
 });
 ```
 
-
 As you can see this is a tad cumbersome, and this is where the higher-level Lang API comes into play
 
 ### Lang
@@ -96,7 +89,6 @@ final var rule = ArchRuleDefinition.noClasses()
 
 rule.check(importedClasses);
 ```
-
 
 ### Library
 
@@ -126,10 +118,7 @@ final var importedClasses = new ClassFileImporter().importPackages("dev.simonver
         architectureRule.check(importedClasses);
 ```
 
-
 An example can be found in the [LayerTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/LayerTest.java)
-
-
 
 #### Onion architecture
 
@@ -150,7 +139,6 @@ void onion() {
     rule.check(importedClasses);
 }
 ```
-
 
 An example can be found in the [OnionTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/OnionTest.java) which uses the slicingmodule as a verification source. The onion package contains a setup with some violations to demonstrate the validation
 
@@ -174,13 +162,9 @@ void noDependencies() {
 }
 ```
 
-
 An example can be found in the [SliceTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/SliceTest.java) which uses the slicingmodule as a verification source.
 
-
-
-Customization
--------------
+## Customization
 
 ### Custom rules
 
@@ -212,7 +196,6 @@ void controllerCheck() {
 }
 ```
 
-
 An example can be found in the [CustomPredicateAndConditionTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomPredicateAndConditionTest.java) where we define a predicate for what we think a controller looks like, and our condition with the rules we agreed it should adhere to.
 
 ### Custom concepts
@@ -233,7 +216,6 @@ ClassesTransformer<JavaField> constantClassFields = new AbstractClassesTransform
     }
 };
 ```
-
 
 An example can be found in the [CustomConceptsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomConceptsTest.java) where we check all our fields in our constants are defined as `Static` and `Final`. You can transform to other concepts such as a BookModule for example.
 
@@ -260,13 +242,9 @@ public class UppercasingFailureFormat implements FailureDisplayFormat {
 }
 ```
 
-
 An example implementation can be found in the [UppercasingFailureFormat](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/UppercasingFailureFormat.java)
 
-
-
-Predefined predicates and conditions
-------------------------------------
+## Predefined predicates and conditions
 
 Now custom predicates like in the [custom predicates and conditions](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/customization/CustomPredicateAndConditionTest.java) example can often be created using predefined elements which ArchUnit tends to put in an inner `Predicates` class in the targeted type.
 
@@ -287,13 +265,9 @@ ArchCondition<JavaClass> condition = ArchConditions.beAnnotatedWith(RestControll
 condition = condition.and(ArchConditions.notBeEnums());
 ```
 
-
 An example implementation can be found in the [PredefinedPredicatesAndConditionsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/PredefinedPredicatesAndConditionsTest.java)
 
-
-
-PlantUML
---------
+## PlantUML
 
 ArchUnit also allows us to import [PlantUML](https://plantuml.com/component-diagram) diagrams and derive our rules from it to validate our imported `JavaClasses`.
 
@@ -314,7 +288,6 @@ Reader --> Book
 @enduml
 ```
 
-
 Which we can then use within our test:
 
 ```java
@@ -322,15 +295,11 @@ final var diagram = getClass().getClassLoader().getResource("diagram.puml");
 classes().should(adhereToPlantUmlDiagram(diagram, consideringOnlyDependenciesInAnyPackage("..plantmodule.."))).check(importedClasses);
 ```
 
-
 An example implementation can be found in the [PlantUMLTest](src%5Ctest%5Cjava%5Cdev%5Csimonverhoeven%5Carchunitdemo%5CPlantUMLTest.java)
 
 **note** : There are certain rules to keep in mind for your diagram which you can find in the [ArchUnit configuration documentation](https://www.archunit.org/userguide/html/000_Index.html#_configurations_2)
 
-
-
-Architecture metrics
---------------------
+## Architecture metrics
 
 ArchUnit also allows us to calculate metrics using some well-known software architecture metrics such as:
 
@@ -375,15 +344,11 @@ void visibilityMetrics() {
 }
 ```
 
-
 examples can be found in the [DependencyMetricsTest](https://github.com/SimonVerhoeven/archunit-demo/blob/main/src/test/java/dev/simonverhoeven/archunitdemo/DependencyMetricsTest.java)  
 
 For more information on these metrics, you check out the references at the end of this article.
 
-
-
-Resolution behaviour
---------------------
+## Resolution behaviour
 
 By default ArchUnit searches for missing classes (a class within the import scope has a reference to a class outside it) on your classpath.  
 
@@ -417,15 +382,11 @@ import.dependencyResolutionProcess.maxIterationsForAnnotationTypes = -1
 import.dependencyResolutionProcess.maxIterationsForGenericSignatureTypes = -1
 ```
 
-
 Where a negative value means full resolution, and 0 disables automatic resolution.  
 
 Keep in mind that these should be set to a reasonable default, as the depth can have a performance impact on bigger projects.
 
-
-
-Adding ArchUnit to an existing application
-------------------------------------------
+## Adding ArchUnit to an existing application
 
 In case you want to add `ArchUnit` to an existing application, you might run into a situation where there are a lot of existing violations, this is where `FreezingArchRule` comes into play.
 
@@ -452,7 +413,6 @@ freeze.store.default.allowStoreUpdate=true
 freeze.refreeze=false
 ```
 
-
 It is also possible to configure these using system properties  
 `-Darchunit.freeze.store.default.allowStoreCreation=true`
 
@@ -465,10 +425,7 @@ Furthermore one can also define an `archunit_ignore_patterns.txt` file in the ro
 
 One can also just tailor their `.that()` to ignore these legacy classes, but that can quickly become quite cumbersome.
 
-
-
-Notes
------
+## Notes
 
 1)  
 
@@ -478,7 +435,6 @@ It is possible to define easy tests using:
 @ArchTest 
 private final ArchRule no_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 ```
-
 
 2)  
 
@@ -522,10 +478,7 @@ This cache can be managed by configuring the `cacheMode`
 
 It is possible to run ArchUnit rules directly from Maven using the Maven plugin by [Société Générale](https://github.com/societe-generale/arch-unit-maven-plugin)
 
-
-
-References
-----------
+## References
 
 * Cumulative dependency metrics - Large-Scale C++ Software Design by John Lakos
 * Component dependency metrics - Clean Architecture by Robert C. Martin

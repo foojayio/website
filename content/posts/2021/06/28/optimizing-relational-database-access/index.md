@@ -47,8 +47,6 @@ In the initial version, the client establishes a connection for every request it
 
 ](http1-connection-lifecycle.png)
 
-<br />
-
 In 1996, HTTP/1.0 was officially released. It introduced *persistent connections*. That's an essential step toward better performance: it allows the client to reuse connections! Once a connection has been used, that connection is released and placed in a pool of connections. So, we can reuse the connection to perform another request. It does not change the interactions between client and server, but it significantly improves performance by saving the expensive connection creations:
 
 [](connection-pool-sequence-1.png)
@@ -58,8 +56,6 @@ In 1996, HTTP/1.0 was officially released. It introduced *persistent connections
 <img decoding="async" class="aligncenter wp-image-45511 size-medium" src="connection-pool-sequence-1-700x477.png" alt="" width="700" height="477">
 
 ](connection-pool-sequence-1.png)
-
-<br />
 
 Let's go back to concurrency.
 
@@ -76,8 +72,6 @@ As servers usually process each request upon reception and send the response jus
 <img decoding="async" class="wp-image-45294 size-medium" src="http-pipelining-700x477.png" alt="HTTP Pipelining" width="700" height="477">
 
 ](http-pipelining.png)
-
-<br />
 
 While pipelining is not a silver bullet, it can increase concurrency. It provides noticeable performance improvements when the round-trip time (RTT, the time to go from the client to the server and back) is greater than the processing latency. Noteworthy is that HTTP pipelining is never used on the web since some HTTP proxies will not respect the FIFO order mandated by this technique.
 
@@ -121,8 +115,6 @@ Whether PostgreSQL supports message pipelining is a legitimate concern. The Post
 
 ](database-pipelining.png)
 
-<br />
-
 The Vert.x PostgreSQL Client supports connection-level pipelining and pool-level pipelining:
 
 * Connection-level pipelining allows pipelining queries on the same connection.
@@ -143,8 +135,6 @@ The client and the database run in different pods but running on the same node.
 <img loading="lazy" decoding="async" class="wp-image-45290 size-medium" src="benchmark-700x174.png" alt="Impact of the level of pipelining on database queries" width="700" height="174">
 
 ](benchmark.png)
-
-<br />
 
 The first result shows pipelining at level 1 and provides a baseline for the test. This is equivalent to a non-pipelining connection since, at most, one query will be sent to the database.
 

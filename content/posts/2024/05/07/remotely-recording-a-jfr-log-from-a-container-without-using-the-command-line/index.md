@@ -55,9 +55,7 @@ For example:
 -Dcom.sun.management.jmxremote.ssl=false \
 ```
 
-
-Connecting to a Remote JVM Using Azul Mission Control
------------------------------------------------------
+## Connecting to a Remote JVM Using Azul Mission Control
 
 If you don't have Azul Mission Control yet, head over to the [Azul Mission Control download page](https://www.azul.com/products/components/azul-mission-control/#downloads).
 
@@ -79,8 +77,7 @@ Your remote JVM now appears in the JVM Browser.
 
 *Depending on your network and container setup, port forwarding may need to be set up. Contact your network's administrator if you need help with port forwarding.*
 
-Recording a JFR from your Remote JVM
-------------------------------------
+## Recording a JFR from your Remote JVM
 
 Now that you're connected to your JVM remotely, it's time to make a JFR recording.
 

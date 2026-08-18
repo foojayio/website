@@ -20,8 +20,7 @@ related_posts:
 frozen: false
 ---
 
-...The Fewer the Words, the Greater the Profit."
-------------------------------------------------
+## ...The Fewer the Words, the Greater the Profit."
 
 These wise words were written by François Fénelon, a writer and theologian living during the 17th century.
 

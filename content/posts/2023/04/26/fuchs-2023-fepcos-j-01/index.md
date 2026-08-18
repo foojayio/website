@@ -28,8 +28,7 @@ So far, FEPCOS-J is a prototype with 1629 lines of Java-code. I develop and test
 
 You can contribute so that FEPCOS-J becomes *Free/Libre and Open-Source Software* (FLOSS).
 
-Introduction
-------------
+## Introduction
 
 When I was a child, I loved to create things out of building blocks --- this has never changed (Fig. 1). It is a pleasure for me to compose parts into a new whole. This also applies for programming.  
 
@@ -46,8 +45,7 @@ There were up to a hundred spots (the number depended on the experiment) that ha
 
 This abstraction has helped me handle the complexity. In the following years, I have dug deeper into this matter. Among others, FEPCOS-J has arisen in this context. \[[4,5,6](#references)\].
 
-Outline
--------
+## Outline
 
 This post is organized as follows:
 
@@ -59,8 +57,7 @@ Thirdly, the section [FEPCOS-J -- Current State](#currentState) describes the ac
 
 Lastly, the section [Conclusion and Outlook](#conclusionOutlook) concludes this post and announces my next post. Further, I encourage you to contribute so that FEPCOS-J becomes *Free/Libre and Open-Source Software*.
 
-FEPCOS-J -- Description
------------------------
+## FEPCOS-J -- Description
 
 FEPCOS-J implements a model-based Java-language extension for declarative programming of networked systems. It frees a developer from network programming and supports cross-system concurrency.
 
@@ -93,8 +90,7 @@ The other environment contains *SIM* and runs the *system application* . In addi
 This access can be both blocking and concurrent. *fjp* generates a corresponding *system interface* and an *adapter*. They handle the required coordination and network communication together with additional modules FEPCOS-J provides.  
 ![FEPCOS-J protocol stack: a system import module (SIM) and a corresponding system export module (SXM) are deployed to different Java-Runtime Environments, which can communicate via an IPv4-network. One Java-environment runs fjx and contains SXM. The other runs the system application and contains the SIM and a system user.](fuchs2023fepcos-j-protocol-stack-system-user-accesses-system-specification-via-ip-network.png) **Fig. 3)** **Using FEPCOS-J to access a system specification via an IPv4-network:** A *system user* can access a *system specification* via an IPv4-network. In detail, the access is via a generated *system interface* that*SIM* contains, via modules FEPCOS-J provides, via an internet socket *fjx* listens to, via modules FEPCOS-J provides, and via a generated *adapter* that *SXM* contains.
 
-FEPCOS-J -- Impressions of Usage
---------------------------------
+## FEPCOS-J -- Impressions of Usage
 
 This section describes a typical workflow for Java-programming with FEPCOS-J. In particular, it explains the complete Java-source code of a system specification by using the following example:
 
@@ -116,7 +112,6 @@ module adder.spec {
 }
 ```
 
-
 #### System declaration Sy.java
 
 The class *SY* belongs to the package *adder.spec* and imports *fepcos.sy* , which contains the annotations *@SYDec* and *@Cap*. The following explains their usage.
@@ -133,7 +128,6 @@ class SY {
 	@Cap Add add;
 }
 ```
-
 
 #### Activity specification Add.java
 
@@ -160,7 +154,6 @@ class Add {
 	}
 }
 ```
-
 
 ### *fjp* processes the system specification; *fjx* provides access to it via an IPv4-network.
 
@@ -206,8 +199,7 @@ Finally, `sy.close()` closes the system interface (Fig. 5g).
  </figcaption>
 </figure>
 
-FEPCOS-J -- Current State
--------------------------
+## FEPCOS-J -- Current State
 
 ### Test and development environment
 
@@ -241,8 +233,7 @@ Those 53 Java-files are organized in 7 modular jar-files, which require 88 kB in
 
 So far, I am the only person who develops and uses FEPCOS-J.
 
-Conclusion and Outlook
-----------------------
+## Conclusion and Outlook
 
 In this post, I have described FEPCOS-J and given you an idea of how to use it. For this purpose, I have exemplary realized a system that provides both blocking and concurrent access via an IPv4-network; this post explains the complete Java-code.
 
@@ -262,10 +253,7 @@ It would be great if we could establish a new, declarative way for programming n
 
 Thanks for reading!
 
-
-
-References
-----------
+## References
 
 1. Wikipedia, The Free Encyclopedia: "*Sun SPOT* "; <https://en.wikipedia.org/wiki/Sun_SPOT> (last accessed: 2023-04-20).
 2. Fuchs, G. and German, R.: "*UML2 activity diagram based programming of wireless sensor networks* "; 2010 ICSE Workshop on Software Engineering for Sensor Network Applications (SESENA); Cape Town, South Africa; 2010; pp. 8--13; <https://doi.org/10.1145/1809111.1809116>.

@@ -24,8 +24,7 @@ frozen: false
 
 As soon as Java 22 is out, it'll be time to walk through all the functionalities that this version bring to us as developers.
 
-JEP 461 - Stream Gatherers (Preview)
-------------------------------------
+## JEP 461 - Stream Gatherers (Preview)
 
 Enhances the Stream API with support for custom intermediate operations. This is a preview API.
 
@@ -67,7 +66,6 @@ System.out.println(slidingWindows);
 // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
 ```
 
-
 The JavaDoc gives the following example of a gatherer that reproduces the `Stream.map()` operation:
 
 ```
@@ -79,11 +77,9 @@ public <T, R> Gatherer<T, ?, R> map(Function<? super T, ? extends R> mapper) {
 }
 ```
 
-
 More information in the [JEP 461](https://openjdk.org/jeps/461 "JEP")
 
-JEP 458 - Launch Multi-File Source-Code Programs
-------------------------------------------------
+## JEP 458 - Launch Multi-File Source-Code Programs
 
 Since Java 11, it is possible to launch a program from a `.java` source file without first compiling it. The Java launcher will then compile the program in memory automatically before execution.
 
@@ -93,8 +89,7 @@ Only source files used by the main program are compiled in memory.
 
 More information in the [JEP 458](https://openjdk.org/jeps/458 "JEP")
 
-JEP 447 - Statements before super (preview)
--------------------------------------------
+## JEP 447 - Statements before super (preview)
 
 When a class extends another class and wants to call the parent class's constructor in its own constructor, the JVM forces the call to the parent constructor to be the first instruction in the parent class's constructor. This ensures that all fields in the parent class are initialized before the child class is built.
 
@@ -114,7 +109,6 @@ public class PositiveBigInteger extends BigInteger {
 }
 ```
 
-
 And with the JEP 447:
 
 ```
@@ -129,13 +123,11 @@ public class PositiveBigInteger extends BigInteger {
 }
 ```
 
-
 The code is more readable and potentially avoids the effects of the parent constructor.
 
 More information in the [JEP 447](https://openjdk.org/jeps/447 "JEP")
 
-457 - Class-File API (Preview)
-------------------------------
+## 457 - Class-File API (Preview)
 
 JEP 457 provides a standard API for parsing, generating and transforming Java class files. This API is in preview.
 
@@ -149,8 +141,7 @@ The following presentation by Brian Goetz at the VM Language Summit 2023 describ
 
 More information in the [JEP 457](https://openjdk.org/jeps/457 "JEP")
 
-ListFormat
-----------
+## ListFormat
 
 `ListFormat` is a new formatter that allows you to format a list of strings regarding a locale based on the Unicode standard. Example:
 
@@ -160,7 +151,6 @@ var formatter = ListFormat.getInstance();
 System.out.println(formatter.format(list));
 // [Black, White, Red]
 ```
-
 
 When creating the formatter we can pass it:
 
@@ -178,8 +168,7 @@ The following table shows the different outputs for the US locale:
 
 More information in the issue [JDK-8041488](https://bugs.openjdk.org/browse/JDK-8041488 "JDK-8041488").
 
-Features coming out of preview
-------------------------------
+## Features coming out of preview
 
 The following features comes out of preview (or incubator module) are now standard features:
 
@@ -190,8 +179,7 @@ An important change has been made in the Foreign Function \& Memory API that sho
 
 Currently, access to restricted methods generates a warning, but access to them may be forbidden in a future version of the JVM. Restricted methods are used to bind a native function and/or native data, which is inherently unsafe. For this reason, access to them must be given specifically via a command-line option.
 
-Features that remain in preview
--------------------------------
+## Features that remain in preview
 
 The following features remain in preview (or in the incubator module).
 
@@ -201,8 +189,7 @@ The following features remain in preview (or in the incubator module).
 * [JEP 463](https://openjdk.org/jeps/463 "JEP") - **Implicitly Declared Classes and Instance Main Methods** : second preview, simplifies the writing of simple programs by allowing them to be defined in an implicit class (without declaration) and in an instance method `void main()`.
 * [JEP 459](https://openjdk.org/jeps/459 "JEP") - **String Templates**: Second preview, a string template is a literal of String that lets you incorporate expressions and variables. No noticeable changes for this new preview.
 
-Miscellaneous
--------------
+## Miscellaneous
 
 Various additions to the JDK:
 
@@ -213,8 +200,7 @@ Various additions to the JDK:
 
 All the new JDK 21 APIs can be found in [The Java Version Almanac -- New APIs in Java 22](https://javaalmanac.io/jdk/22/apidiff/21/ "The").
 
-Internal changes, performance, and security
--------------------------------------------
+## Internal changes, performance, and security
 
 The G1 Garbage Collector has seen an improvement when a JNI (Java Native Interface) call defines a critical region. Previously, G1 was totally disabled, with the risk of blocking application threads requiring a GC, or even out of memory.
 
@@ -222,8 +208,7 @@ Thanks to JEP 423: Region Pinning for G1, G1GC is now able to pin only a single 
 
 Parallel GC and Serial GC also have seen some optimisations in the card table scaning area (card table stores old-to-young references). Other changes on the Garbage Collector side can be found in this article by Thomas Schatzl: [JDK 22 G1/Parallel/Serial GC changes](https://tschatzl.github.io/2024/02/06/jdk22-g1-parallel-gc-changes.html).
 
-JFR Events
-----------
+## JFR Events
 
 Here are the new Java Flight Recorder (JFR) events of the JVM :
 
@@ -234,8 +219,7 @@ Here are the new Java Flight Recorder (JFR) events of the JVM :
 
 You can find all the JFR events supported in this version of Java on the page [JFR Events](https://sap.github.io/SapMachine/jfrevents/22.html "JFR").
 
-Conclusion
-----------
+## Conclusion
 
 One might have thought that Java 22 would be a stabilizing release after version 21, which is LTS, but no, there's a major addition in the form of Stream Gatherer and a number of JEPs designed to simplify the language and make it easier to use.
 
@@ -244,7 +228,3 @@ Also noteworthy is that the Foreign Function \& Memory API goes out of preview, 
 To find all the changes in Java 22, refer to the [release notes](https://jdk.java.net/22/release-notes "release").
 
 This article was first published in my personal blog: [JAVA 22: WHAT'S NEW?](https://www.loicmathieu.fr/wordpress/en/informatique/java-22-quoi-de-neuf/).
-
-<br />
-
-<br />

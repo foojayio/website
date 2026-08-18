@@ -23,8 +23,7 @@ frozen: false
 
 In a previous post, we [explained how you can add executable Java code to your posts here on Foojay](https://foojay.io/today/integrate-executable-java-code-in-your-blog-posts/), by using JDoodle. In this post, you will learn how you can extend this with one or more libraries.
 
-Define Dependencies
--------------------
+## Define Dependencies
 
 To integrate Java code in your post or page that needs dependencies, you need to specify them in the initial `div` with `data-libs`.
 
@@ -43,11 +42,9 @@ To integrate Java code in your post or page that needs dependencies, you need to
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
 ```
 
-
 The `data-client-id` can only be used for the Foojay website! Create your own [account on the JDoodle site](https://www.jdoodle.com) if you want to use this functionality on another website.
 
-Example Application
--------------------
+## Example Application
 
 For example, let's use the Jackson library to parse JSON.
 
@@ -114,7 +111,6 @@ public class JsonParsing {
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
 ```
 
-
 Will produce the following output. Hit the "Execute" button to run the code.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="4" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-libs="com.fasterxml.jackson.core:jackson-annotations:2.16.0,com.fasterxml.jackson.core:jackson-core:2.16.0,com.fasterxml.jackson.core:jackson-databind:2.16.0">
@@ -127,8 +123,7 @@ Will produce the following output. Hit the "Execute" button to run the code.
 
 **Notice you can also select Java 21 now to execute this code!**
 
-Conclusion
-----------
+## Conclusion
 
 Not only "simple" Java code can be added to blog posts. As we illustrated here, a more complex class with a record and Maven dependencies can be created and executed within a webpage.
 

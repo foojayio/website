@@ -26,8 +26,7 @@ Let's discuss making these loggers suck less with proper usage guidelines that r
 
 Notice that while this is very much focused around Java/JVM logging, a lot of the subjects discussed here should have universal appeal.
 
-Why is Logging Difficult?
--------------------------
+## Why is Logging Difficult?
 
 Normally, it's just printing data to the console/file. It seems trivial. Something we can literally write in 20 minutes with our hands tied behind our back.
 
@@ -41,8 +40,7 @@ Some developers still choose to roll out their own logging frameworks or wrapper
 
 Rolling your own is redundant. There are many complexities involved. Whatever you fix or save will probably come back to bite you. As we recently saw with the Log4J security vulnerability all the way to nuanced performance pitfalls and complex custom output expected by ingestion. There's a lot going on.
 
-Coding Best Practices
----------------------
+## Coding Best Practices
 
 In this section, we'll focus on tips related to writing logs in the source code. What we should and shouldn't do both as a coder and a reviewer. Every tip includes an explanation. Please keep in mind that for every "rule" there's always an exception. We do not set these in stone...
 
@@ -72,7 +70,6 @@ Don't do this:
 logger.info("Reached X and value of method is {}", method());
 ```
 
-
 Even if the method is cheap. You're effectively running the method regardless of the respective logging levels!
 
 If you MUST do that for a case of a different log level, use an if statement to prevent the code from executing every time:
@@ -82,7 +79,6 @@ if(LOGGER.getLevel() == Level.DEBUG) {
        ...
 }
 ```
-
 
 The right things to log are the things you already have as variables.
 
@@ -100,13 +96,11 @@ Never use string concatenation for logging, e.g.:
 LOGGER.info("This is the variable: " + var);
 ```
 
-
 Instead, use this or the equivalent provided by various popular logging frameworks:
 
 ```java
 LOGGER.info("This is the variable: {}", var);
 ```
-
 
 If the log is swallowed due to log levels, the former must still perform the string concatenation and will produce garbage. The latter will vanish.
 
@@ -158,7 +152,6 @@ if(y) {
 }
 ```
 
-
 Instead, change the code to lead to one return value:
 
 ```java
@@ -166,7 +159,6 @@ Object value = computeValue();
 LOGGER.info(...);
 return value;
 ```
-
 
 We can easily achieve this by refactoring the code in the method to another method.
 
@@ -182,8 +174,7 @@ Unfortunately, the performance and verbosity make the debugging even harder. Thi
 
 Some developers enable this for test running during the CI process. This sounds like a good idea at first, but it makes tracking test failures even harder with all the verbosity.
 
-Security
---------
+## Security
 
 There are many important things we need to keep in mind.
 
@@ -199,8 +190,7 @@ Good logging frameworks support seamless removal of personally identifiable info
 
 E.g., m ost engineers in an organization have access to the logs. But very few would have access to users' credit card information or social security. If you log a card by mistake, you're effectively disabling that security.
 
-Aspirations
------------
+## Aspirations
 
 These are "vague" goals that we need to aspire to. They make sense, but they aren't concrete.
 
@@ -234,8 +224,7 @@ Logs are a form of comment on the code around them and should help code readabil
 
 Thinking of them in this way helps make better, cleaner and more consistent logs.
 
-MDC Guidelines
---------------
+## MDC Guidelines
 
 Mapped Diagnostic Context (MDC) is essential for modern day logging. Avoiding it is akin to disabling the stack trace on your debugger. The MDC adds a logging context map to every entry. We can see a user ID related to a specific log line or payment transaction ID related to it.
 
@@ -266,8 +255,7 @@ But the default that's most common uses thread context. With a thread pool, it m
 
 A common trick is to use a custom thread pool that cleans up the MDC when a thread returns to the pool.
 
-Configuration
--------------
+## Configuration
 
 One of the great things in using a "ready-made" solution is the depth and breadth we can reach by just tuning configuration files.
 
@@ -289,8 +277,7 @@ It's a common practice to increase logging in testing. This is reasonable as cos
 
 If we need a higher log level to resolve a test case failure, it might mean our logging is insufficient.
 
-Summary
--------
+## Summary
 
 I hope this post will help clarify your thoughts on this subject and put these ideas in order. There are so many nuanced logging practices we can improve upon in our day to day coding.
 

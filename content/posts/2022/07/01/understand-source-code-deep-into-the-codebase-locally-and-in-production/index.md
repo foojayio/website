@@ -31,8 +31,7 @@ We use IDE tools to search for connections, but this is really hard. It's like f
 
 As a consultant for over a decade, I picked up new client projects on a weekly basis. In this post, I'll describe the approach I used to do that and how I adapted this approach further at Lightrun.
 
-Finding Usage
--------------
+## Finding Usage
 
 The programming language can help a lot. As Java developers, we're lucky, codebase exploration tools are remarkably reliable. We can dig into the code and find usage. IDEs highlight unused code and they're pretty great for this. But this has several problems:
 
@@ -49,8 +48,7 @@ Another option is UML chart generation from source files. My personal experience
 
 They elevate minor implementation details and unused code into equal footing in a mind-boggling confusing chart. With a typical codebase, we need more than a high level view. The devil is in the details and our perception should be of the actual codebase in version control. Not some theoretical model.
 
-Debugging as a Learning Tool
-----------------------------
+## Debugging as a Learning Tool
 
 Debuggers instantly solve all these problems. We can instantly verify assumptions, see "real world" usage, and step over a code block to understand the flow. We can place a breakpoint to see if we reached a piece of code. If it's reached too frequently and we can't figure out what's going on, we can make this breakpoint conditional.
 
@@ -122,8 +120,7 @@ Thankfully, we have [tracepoints](https://talktotheduck.dev/basics-of-breakpoint
 
 ![](image-5-680x510.png)
 
-What's Going on in Production -- AKA "Reality Coverage"
--------------------------------------------------------
+## What's Going on in Production -- AKA "Reality Coverage"
 
 This works great for "simple" systems. But there are platforms and settings in our industry that are remarkably hard to reproduce in a debugger. Knowledge about the way our code works locally is one thing. The way it works in production is something completely different.
 
@@ -179,8 +176,7 @@ Simple, place a conditional snapshot for the permission. Then inspect the result
 
 ![](image-8-700x229.gif)
 
-Final Word
-----------
+## Final Word
 
 Developers often have a strained relationship with debugging tools.
 

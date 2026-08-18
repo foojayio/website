@@ -21,8 +21,7 @@ frozen: false
 
 Already the end of March, so time to look back at the JavaFX Links Of The Week that were published on <https://www.jfx-central.com/>.
 
-JavaFX Core
------------
+## JavaFX Core
 
 * [**Johan Vos** is working on backports for JavaFX 17.0.7](https://mastodon.social/@johanvos/110011897804267729) to guarantee quality and long-term support.
   * And he announced [JavaFX 20 could be released in the week of March 20th](https://mastodon.social/@johanvos/110033625841149774). As planned.
@@ -37,8 +36,7 @@ JavaFX Core
   * Or [OpenJDK](https://mastodon.social/@openjdk/110078557118569030).
 * A [request by **Raumzeitfalle**](https://twitter.com/Raumzeitfalle/status/1638993956796239873): "If you like Java and JavaFX, give Scene Builder Leadinge Edge a try. Its latest version runs with Java 20 using JavaFX 20 and it combines many of the pending PRs so that one can test the functionality. Feel free to share your feedback on Github."
 
-JavaFX and Game Development
----------------------------
+## JavaFX and Game Development
 
 * [17.0.13 of JArkanoid by **Gerrit Grunwald**](https://twitter.com/hansolo_/status/1629506318389198850) adds the ability to shoot enemies.
   * He describes in a [Foojay post how to turn an existing application to an iPhone app](https://foojay.io/today/porting-an-existing-javafx-app-to-ios/).
@@ -71,15 +69,13 @@ JavaFX and Game Development
   * [Video showing the new sliders in FXGL](https://twitter.com/AlmasBaim/status/1641582312730030082).
   * [He is throwing grenades...](https://twitter.com/AlmasBaim/status/1637915086571606016).
 
-JavaFX in Science
------------------
+## JavaFX in Science
 
 * [**Fabrice Jossinet** shared an impressive preview video](https://twitter.com/rnartist_app/status/1629862954127568897) of a new tool to visualize the folding pathways of an RNA during its transcription. Pathways are computed with a Rust algorithm. Visualization and GUI are made with Kotlin, JavaFX and his rnartistcore library.
 * [**RNArtist** shared again an impressive video](https://twitter.com/rnartist_app/status/1637923762438918150) showing RNA visualization with JavaFX.
   * ["In RNAStudio, you can animate the transcription process](https://twitter.com/rnartist_app/status/1637912428276072448) along one of the computed folding pathways. When a new helix pops, it is first highlighted then added to the 2D. You can stop/restart the animation, go backwards/forwards."
 
-Miscellanous
-------------
+## Miscellanous
 
 * [jdeploy by **Steve Hannah** now produces signed apps for Windows installers](https://twitter.com/shannah78/status/1629515948637188096). This should make Windows Defender more pleasant to be around.
 * **Dirk Lemmermann** has also been very active...

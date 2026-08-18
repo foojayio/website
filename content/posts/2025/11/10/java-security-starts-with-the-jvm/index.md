@@ -119,8 +119,7 @@ Switching to Azul isn't just about reducing licensing costs---it's also about si
 
 You get a secure, fully supported Java environment with minimal disruption to your development and operations.
 
-Final thoughts
---------------
+## Final thoughts
 
 Java is built for stability, but without a secure and supported JDK, you're leaving the door open to avoidable risk. Whether you're running modern cloud-native services or maintaining legacy systems, Azul helps you keep your Java workloads secure, up to date, and compliant---without the headaches.
 

@@ -39,8 +39,7 @@ But couldn't we just attach some context to every JFR event we're interested in?
 
 The main idea of Jaroslav's approach is to store a context in thread-local memory and attach it to every JFR event as configured. But before I dive into the custom context, I want to show you the example program, which you can find, as always, MIT-licensed on [GitHub](https://github.com/parttimenerd/jfr-context-example).
 
-Example
--------
+## Example
 
 We create a simple file server via [Javalin](https://javalin.io), which allows a user to
 
@@ -91,7 +90,6 @@ try (Javalin lin = Javalin.create(conf -> {
 }
 ```
 
-
 This example runs on Jaroslav's OpenJDK fork (commit 6ea2b4f), so if you want to run it in its complete form, please build the fork and make sure that you're `PATH` and `JAVA_HOME` environment variables are set accordingly.
 
 You can build the server using `mvn package` and  
@@ -101,7 +99,6 @@ start it, listening on the port `1000`, via:
 ```bash
 java -jar target/jfr-context-example.jar 1000
 ```
-
 
 You can then use it via your browser or `curl`:
 
@@ -129,7 +126,6 @@ kill $pid
 # this results in the flight.jfr file
 ```
 
-
 To make testing easier, I created the `test.sh script`, which starts the server, registers a few users and stores, loads, and deletes a few files, creating a JFR file along the way. We're using a custom JFR configuration to enable the IO events without any threshold. This is not recommended for production, but is required in our toy example to get any such event:
 
 ```xml
@@ -151,13 +147,11 @@ To make testing easier, I created the `test.sh script`, which starts the server,
 </configuration>
 ```
 
-
 We can use the [jfr tool](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jfr.html) to easily print all the [jdk.FileRead](https://sap.github.io/SapMachine/jfrevents/#fileread) events from the created `flight.jfr` file in JSON format.
 
 ```bash
 jfr print --events jdk.FileRead --json flight.jfr
 ```
-
 
 This prints a list of events like:
 
@@ -182,7 +176,6 @@ This prints a list of events like:
 }
 ```
 
-
 You can find more information on this and other events in my [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents):  
 [![](https://mostlynerdless.de/wp-content/uploads/2023/10/Screenshot-2023-10-19-at-12.28.35-2000x1509.png)](https://sap.github.io/SapMachine/jfrevents/#fileread)
 
@@ -190,8 +183,7 @@ There are, of course, other events, but in our file server example, we're only i
 
 Now, we can start bringing the events into context.
 
-Adding Custom Context
----------------------
+## Adding Custom Context
 
 Before we can add the context, we have to define it, as described in [Jaroslav's blog post](https://jbachorik.github.io/posts/seeing-in-context_2). We [create a context](https://github.com/parttimenerd/jfr-context-example/blob/e055b39a38fa7ee9dc4cf903d5d2b4fce9e2ac8d/src/main/java/me/bechberger/server/TracerContextType.java) that stores the current user, action, trace ID, and optional file:
 
@@ -238,7 +230,6 @@ public class TracerContextType extends ContextType implements AutoCloseable {
 }
 ```
 
-
 A context has to be set and then later unset, which can be cumbersome in the face of exceptions. Implementing the `AutoClosable` interface solves this by allowing us to wrap code in a try-with-resources statement:
 
 ```
@@ -246,7 +237,6 @@ try (var t = new TracerContextType(/* ... */)) {
     // ...
 }
 ```
-
 
 All JFR events with enabled context that happen in the body of the statement are associated with the `TracerContextType` instance. We can use the code of all request handlers in our server with such a construct, e.g.:
 
@@ -261,7 +251,6 @@ All JFR events with enabled context that happen in the body of the statement are
 })
 ```
 
-
 One last thing before we can analyze the annotated events: JFR has to know about your context before the recording starts. We do this by creating a registration class registered as a service.
 
 ```java
@@ -275,11 +264,9 @@ public class TraceContextTypeRegistration implements ContextType.Registration {
 }
 ```
 
-
 We use the [auto-service](https://github.com/google/auto/tree/main/service) project by Google to automatically create the required build files (read more in this [blog post](https://pedrorijo.com/blog/java-service-loader/) by Pedro Rijo.
 
-Using the Custom Context
-------------------------
+## Using the Custom Context
 
 After adding the context, we can see it in the `jdk.FileRead` events:
 
@@ -307,7 +294,6 @@ After adding the context, we can see it in the `jdk.FileRead` events:
   }
 }
 ```
-
 
 We clearly see the stored context information (`tracer-context_*`).
 
@@ -341,11 +327,9 @@ sally   100
 sue     80
 ```
 
-
 The empty user is for all the bytes read unrelated to any specific user (like class files), which is quite helpful.
 
-Conclusion
-----------
+## Conclusion
 
 This small example is just a glimpse of what is possible with JFR contexts. Jaroslav's prototypical implementation is still limited; it, e.g., doesn't support contexts at method sampling events, but it is already a significant improvement over the status quo. I'll be creating follow-up blog posts as the prototype evolves and matures.
 

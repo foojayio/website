@@ -69,7 +69,6 @@ As explained in point 4, you can start Minishift with the following command:
 minishift start
 ```
 
-
 Minishift performs the following system checks.
 
 ```
@@ -85,7 +84,6 @@ OpenShift server started.
 The server is accessible via web console at:
 https://192.168.64.3:8443/console
 ```
-
 
 ### Accessing Web Console
 
@@ -107,7 +105,6 @@ Now you need to select a base image(also called the builder image) for the appli
 ```
 oc new-app registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift~https://github.com/userac/springboot-kubernetes.git — name=springboot-demo-openshift
 ```
-
 
 Following is the output.
 
@@ -132,7 +129,6 @@ Following is the output.
 > service “springboot-demo-openshift” created
 ```
 
-
 ### Checking Build Status
 
 Once the application is created, the build will be automatically scheduled using S2I. You can view the logs using the below command to check the status of the build.
@@ -140,7 +136,6 @@ Once the application is created, the build will be automatically scheduled using
 ```
 oc logs -f bc/springboot-demo-openshift
 ```
-
 
 Following is the output.
 
@@ -179,7 +174,6 @@ Following is the output.
 > Push successful
 ```
 
-
 Once the build is triggered, you can see that S2I is doing its work as expected by cloning the repository first and then building it. Later on, after the build is a success, as seen above, the image will push for further execution. You've just built and run a new runnable container image from source code in a git repository. You might be wondering what is S2I?. Allow me to explain it.
 
 ### What is S2I?
@@ -202,7 +196,6 @@ Following is the output.
 > deployment #1 deployed 20 minutes ago — 1 pod
 ```
 
-
 As you can see that there is one pod running. You can view the same status on the web console also. You should see the following.
 
 ![](https://cdn-images-1.medium.com/max/2384/1*mc5CF_MgjHChXK7-zMvZFw.png)
@@ -217,13 +210,11 @@ As explained above, our application is not exposed to the outside world. We can 
 oc expose svc/springboot-demo-openshift
 ```
 
-
 Following is the output.
 
 ```
 route.route.openshift.io/springboot-demo-openshift exposed
 ```
-
 
 Similarly, if you goto web console applications\>routes. You can see that route is created. Now our application is exposed to the outside world. Cool.
 
@@ -245,14 +236,12 @@ However, if you are on the OpenShift 4.x version, a better option would be to us
 
 It's a wrap for now. Happy coding!
 
-Support me
-----------
+## Support me
 
 If you like what you just read, then you can buy me a coffee by clicking the link in the image below:
 
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/meashish)
 
-Further reading
----------------
+## Further reading
 
 You can also read one of my previous [articles](https://ashishtechmill.com/)

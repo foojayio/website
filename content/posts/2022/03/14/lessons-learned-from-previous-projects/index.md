@@ -20,8 +20,7 @@ frozen: false
 
 An exciting part of software development is what was unanimously considered good practice at one point in time can be more ambiguous years later. Or even plain wrong. However, you generally need to do it multiple times over time to realize it. Here are my top learnings from my experience in Java projects.
 
-Packaging by layers
--------------------
+## Packaging by layers
 
 When I started my developer career in Java, every project organized their classes by layers - controllers, services and s (repositories). A typical project's structure would look like this:
 
@@ -37,7 +36,6 @@ ch.frankel
      ├─ FirstDao
      └─ SecondDao
 ```
-
 
 This approach has two main disadvantages:
 
@@ -58,13 +56,11 @@ ch.frankel
      └─ SecondDao
 ```
 
-
 This way, the controller is `public` and represents the entry point in the feature. Services and DAOs are an "implementation detail": they have the `package` visibility and can only be accessed from inside their package.
 
 As an added benefit, if you need to split your code, you only need to do it by package.
 
-Blindly obey quality tools
---------------------------
+## Blindly obey quality tools
 
 I found myself using a quality tool named Hammurapi a long time ago. For the record, it still has an [online presence](http://www.hammurapi.biz/hammurapi-biz/ef/xmenu/hammurapi-group/products/hammurapi/index.html), even if it feels like it hasn't been updated in ages. Anyway, when I ran the engine on my codebase, the most reported violation was the lack of JavaDocs on public methods. Given that all getters and setters were public, I got many of them.
 
@@ -90,15 +86,13 @@ public void setFoo(Foo foo) {
 }
 ```
 
-
 It satisfied the side of me that loves green checks. However, there was no added value.
 
 In fact, most quality tools have a pretty low return over investment. It's not because you used tabs instead of spaces that your project's quality decreases drastically. Code quality is hard to define, complicated to measure, and doing so in an automated way even more so.
 
 While I'm not saying to avoid quality tools, be careful with [metrics](https://blog.frankel.ch/metrics) they give you. Engineers and managers love metrics, but it can lead your team/organization to places you don't want to go, even with the best intentions.
 
-Setters
--------
+## Setters
 
 After creating a class, Java developers always generate accessors for it, *i.e.*, getters, and setters.
 
@@ -139,7 +133,6 @@ public class Account {
 }
 ```
 
-
 It's like a Pavlovian reflex. Worse, it's part of the [JavaBean](https://stackoverflow.com/questions/3295496/what-is-a-javabean-exactly#answer-3295517) conventions, so that a lot of tools rely on them: frameworks, serialization libraries, *e.g.* Jackson, mapping tools, *e.g.* MapStruct, etc.
 
 Hence, if you rely on any of those tools, you have no choice. If you don't, then you should probably think about whether you want to go this way or not.
@@ -164,11 +157,9 @@ class Account {
 }
 ```
 
-
 Note that getter alternatives make for a more complex design without many added benefits. I'm willing to keep them if they don't expose private data - either immutable objects or copies.
 
-Abstractions everywhere
------------------------
+## Abstractions everywhere
 
 One of the first lessons I was taught in enterprise was that "good" developers always design their implementation around the following three components:
 
@@ -178,8 +169,7 @@ The problem is that `FooImpl` is the only `Foo` implementation, and it becomes a
 
 Abstractions do lower coupling. However, coupling in applications has much less impact than in libraries, if at all.
 
-Data Transfer Objects
----------------------
+## Data Transfer Objects
 
 I've used for a very long time. One of my [earliest blog posts](https://blog.frankel.ch/automated-beans-conversion/) is actually about DTOs, bean mapping, and the [Dozer](https://github.com/DozerMapper/dozer) library to automate the mapping process. I even remember that a fellow architect advised me to design a dedicated class for each layer:
 
@@ -195,8 +185,7 @@ It got me thinking about DTOs. They probably are a good idea if your view is *ve
 
 In that case, I'll probably favour one of the techniques listed in this [previous post](https://blog.frankel.ch/alternatives-dto/).
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I've described five techniques I'd probably not use anymore, or at least be very careful on the context I apply them to.
 

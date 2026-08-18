@@ -26,12 +26,7 @@ frozen: false
 
 **Today's the first day of Java 21's availability! It's been six months since Java 20 was released, so it's time for another fresh wave of Java features. This post takes you on a tour of the JEPs that are associated with this release and it gives you a brief introduction to each of them, and [check out the Java 21 podcast here](https://foojay.io/today/foojay-podcast-28/). Where applicable the differences with Java 20 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!**
 
-<br />
-
-<br />
-
-From Project Amber
-------------------
+## From Project Amber
 
 Java 21 contains five features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -70,7 +65,6 @@ static String apply(Effect effect) {
 }
 ```
 
-
 This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? Let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
 ```java
@@ -85,7 +79,6 @@ static String apply(Effect effect) {
     };
 }
 ```
-
 
 Pattern matching for switch made our code far more elegant here. We're even able to address possible `null`s by defining a specific case for them or combining it with the default case (which is what we've done here).
 
@@ -104,7 +97,6 @@ static String apply(Effect effect, Guitar guitar) {
     };
 }
 ```
-
 
 Here, the guard makes sure that intricate boolean logic can still be expressed in a concise way. Having to nest `if` statements to test this logic within a case branch would not only be more verbose, but also potentially introduce subtle bugs that we set out to avoid in the first place.
 
@@ -138,7 +130,6 @@ static String apply(Effect effect) {
 }
 ```
 
-
 `Delay(int timeInMs)` is a record pattern here, deconstructing the `Delay` instance into its components. And this mechanism can become even more powerful when we apply it to a more complicated object graph by using *nested* record patterns:
 
 ```java
@@ -154,7 +145,6 @@ class TunerApplier {
 }
 ```
 
-
 #### Inference of type arguments
 
 Nested record patterns also benefit from *inference of type arguments*. For example:
@@ -168,7 +158,6 @@ class TunerApplier {
     }
 }
 ```
-
 
 Here the type arguments for the nested pattern `Tuner(var pitch, Note(var note))` are inferred. This only works with nested patterns for now; type patterns do not yet support implicit inference of type arguments. So the type pattern `Tuner tu` is always treated as a raw type pattern.
 
@@ -193,7 +182,6 @@ static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
 }
 ```
 
-
 Here, the logic doesn't reference the reverb name whatsoever, but Java currently doesn't have a way to indicate this omission might be intentional. And so the entire record pattern has been written out, leading future readers of this code to doubt the correctness of the implementation.
 
 #### Unnamed Patterns
@@ -208,7 +196,6 @@ static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
     return false;
 }
 ```
-
 
 The underscore denotes the unnamed pattern here: it is an unconditional pattern which binds nothing. You can use it to indicate that it doesn't matter to what first value the pattern matches the `Reverb`, as long as the second parameter can be matched to an `int`.
 
@@ -226,7 +213,6 @@ static void apply(Effect effect, Piano piano) {
 }
 ```
 
-
 Here, we execute specific logic when we encounter a tuner that tunes a flat (♭) or sharp (♯) note. We use an unnamed pattern variable, because the logic acts on the matched type only - the value can be safely ignored.
 
 #### Unnamed Variables
@@ -242,7 +228,6 @@ for (Guitar guitar : guitars) {
 }
 ```
 
-
 The `guitar` variable is declared and populated here, but it is never used. Unfortunately, its intentional non-use doesn't come across as such to the reader. Moreover, static code analysis tools like Sonar will probably complain about the unused variable, raising suspicions even more. Introducing an unnamed variable can better convey the intent of the code:
 
 ```java
@@ -254,7 +239,6 @@ for (Guitar _ : guitars) {
 }
 ```
 
-
 Another good example could be handling exceptions in a generic way:
 
 ```java
@@ -265,7 +249,6 @@ try {
     System.out.println("Sorry, out of stock!");
 }
 ```
-
 
 Keep in mind that unnamed variables only make sense when they're not visible outside a method, so they currently only work with local variables, exception parameters and lambda parameters. The theoretical concept of *unnamed method parameters* is briefly touched upon in the JEP, but supporting that comes with enough challenges to at least warrant postponing it to a future JEP.
 
@@ -289,7 +272,6 @@ public class HelloWorld {
 }
 ```
 
-
 On top of that, it forces newcomers to Java to grasp a few concepts that they certainly don't need on their first day of Java programming:
 
 * The `public` access modifier and the role it plays in encapsulating units of code, together with its counterparts `private`, `protected` and default;
@@ -312,7 +294,6 @@ class HelloWorld {
 }
 ```
 
-
 * introduce *unnamed classes* to make the `class` declaration implicit;
 
 ```java
@@ -320,7 +301,6 @@ void main() { // this is an instance main method inside of an unnamed class
     System.out.println("Hello, World!");
 }
 ```
-
 
 #### Selecting a Main Method
 
@@ -366,7 +346,6 @@ System.out.println(STR."I bought a \{guitarType} yesterday.");
 // outputs "I bought a Les Paul yesterday."
 ```
 
-
 The template expression `STR."I bought a \{guitarType} yesterday."` consists of:
 
 * A template processor (`STR`);
@@ -381,7 +360,6 @@ System.out.println(STR."A set of strings costs \{price} dollars; so each string 
 // outputs "A set of strings costs 12 dollars; so each string costs 2 dollars."
 ```
 
-
 ```java
 record Guitar(String name, boolean inTune) {}
 class GuitarTuner {
@@ -392,7 +370,6 @@ class GuitarTuner {
     }
 }
 ```
-
 
 As you can see, double-quote characters can be used inside embedded expressions without escaping them as `\"`, making the switch from concatenation (using `+`) to template expressions easier. Multi-line template expressions are also possible; they use a syntax similar to that of [text blocks](https://docs.oracle.com/javase/specs/jls/se20/html/jls-3.html#jls-3.10.6):
 
@@ -410,7 +387,6 @@ String html = STR."""
         </html>
         """;
 ```
-
 
 #### Template Processors
 
@@ -430,7 +406,6 @@ String guitarType = "Les Paul";
 System.out.println(STR."I bought a \{guitarType} yesterday.");
 ```
 
-
 is equivalent to:
 
 ```java
@@ -439,7 +414,6 @@ StringTemplate template = RAW."I bought a \{guitarType} yesterday.");
 System.out.println(STR.process(template));
 ```
 
-
 Template expressions are designed to prevent the direct conversion of strings with embedded expressions to interpolated strings. This makes it impossible for potentially incorrect strings to spread. A template processor securely handles this interpolation, and if you forget to use one, the compiler will report an error.
 
 ```java
@@ -447,7 +421,6 @@ String guitarType = "Les Paul";
 System.out.println("I bought a \{guitarType} yesterday."); // doesn't compile!
 // outputs: "error: processor missing from template expression"
 ```
-
 
 #### Custom Template Processors
 
@@ -469,7 +442,6 @@ JSONObject doc = JSON."""
     };
     """;
 ```
-
 
 So the `JSON` template processor returns instances of `JSONObject` instead of `String`.  
 
@@ -501,14 +473,12 @@ record QueryBuilder(Connection conn) implements StringTemplate.Processor<Prepare
 }
 ```
 
-
 ```java
 var DB = new QueryBuilder(conn);
 String type = "Les Paul"; 
 PreparedStatement ps = DB."SELECT * FROM Guitar g WHERE g.guitar_type = \{type}";
 ResultSet rs = ps.executeQuery();
 ```
-
 
 The `DB` custom template processor is capable of constructing `PreparedStatements` that have their parameters injected in a safe way.
 
@@ -520,8 +490,7 @@ Java 20 didn't contain anything related to string templates yet, so Java 21 is t
 
 For more information on this feature, see [JEP 430](https://openjdk.org/jeps/430).
 
-From Project Loom
------------------
+## From Project Loom
 
 Java 21 contains three features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -561,7 +530,6 @@ var virtualThread = Thread.startVirtualThread(() -> {
 virtualThread.start();
 ```
 
-
 When your code uses the `ExecutorService` interface already, switching to virtual threads will take even less effort:
 
 ```java
@@ -577,7 +545,6 @@ try (var virtualThreadsExecutor = Executors.newVirtualThreadPerTaskExecutor()) {
     });
 } // close() is called implicitly
 ```
-
 
 Note that the `ExecutorService` interface was adjusted in Java 19 to extend `AutoCloseable`, so it can now be used in a try-with-resources construct.
 
@@ -622,7 +589,6 @@ public class MultiWaiterRestaurant implements Restaurant {
 }
 ```
 
-
 Now, consider the fact that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
 * If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
@@ -647,7 +613,6 @@ public class SingleWaiterRestaurant implements Restaurant {
     }
 }
 ```
-
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -686,7 +651,6 @@ public class StructuredConcurrencyRestaurant implements Restaurant {
     }
 }
 ```
-
 
 The scope's purpose is to keep the threads together.  
 
@@ -736,7 +700,6 @@ public class StructuredConcurrencyBar implements Bar {
     }
 }
 ```
-
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on the preferences of the guest and the current supply of drinks at the bar.  
 
@@ -798,7 +761,6 @@ ScopedValue.where(V, <value>)
 ... V.get() ...
 ```
 
-
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The call to `run(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of the `run(...)` call, the lambda expression, or any method called directly or indirectly from that expression, can read the scoped value via the value's `get()` method. After the `run(...)` method finishes, the binding is destroyed.
 
 #### Typical Use Cases
@@ -813,8 +775,7 @@ The only difference from Java 20 is that Scoped Values has become a Preview API 
 
 For more information on this feature, see [JEP 446](https://openjdk.org/jeps/446).
 
-From Project Panama
--------------------
+## From Project Panama
 
 Java 21 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -862,7 +823,6 @@ try (Arena offHeap = Arena.ofConfined()) {
 } // 8. All off-heap memory is deallocated here
 assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true
 ```
-
 
 Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
 
@@ -943,7 +903,6 @@ void vectorComputation(float[] a, float[] b, float[] c) {
 }
 ```
 
-
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
 #### Typical Use Cases
@@ -961,8 +920,7 @@ Aside from a minor set of enhancements in the API, the biggest differences with 
 
 For more information on this feature, see [JEP 448](https://openjdk.org/jeps/448).
 
-HotSpot
--------
+## HotSpot
 
 Java 21 introduces three changes to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -1036,8 +994,7 @@ Java 21 is the first version of Java that issues warnings when agents are loaded
 
 For more information on this feature, see [JEP 451](https://openjdk.org/jeps/451).
 
-Core \& Security Libs
----------------------
+## Core \& Security Libs
 
 Java 21 also brings you two additions that are part of the Core Libs and Security Libs, respectively:
 
@@ -1071,7 +1028,6 @@ interface SequencedCollection<E> extends Collection<E> {
 }
 ```
 
-
 A sequenced set is a `Set` that is a `SequencedCollection` that contains no duplicate elements:
 
 ```java
@@ -1079,7 +1035,6 @@ interface SequencedSet<E> extends Set<E>, SequencedCollection<E> {
     SequencedSet<E> reversed();    // covariant override
 }
 ```
-
 
 A sequenced map is a `Map` whose entries have a defined encounter order:
 
@@ -1099,7 +1054,6 @@ interface SequencedMap<K,V> extends Map<K,V> {
     Entry<K, V> pollLastEntry();
 }
 ```
-
 
 The `Collections` utility class has also been extended to create unmodifiable wrappers for the three new types:
 
@@ -1194,7 +1148,6 @@ public final class KEM {
 }
 ```
 
-
 > The `getInstance` methods create a new `KEM` object that implements the specified algorithm.
 
 And here is an example of how to use this class (again, taken from the JEP):
@@ -1228,7 +1181,6 @@ SecretKey secR = d.decapsulate(em);
 // secS and secR will be identical
 ```
 
-
 #### What's Different From Java 20?
 
 The Key Encapsulation Mechanism API didn't exist yet in Java 20; it was newly added in Java 21.
@@ -1237,7 +1189,6 @@ The Key Encapsulation Mechanism API didn't exist yet in Java 20; it was newly ad
 
 There is a bit more to this API than we were able to cover here (like different *KEM configurations* , for example), so to get the full picture you could have a look at [JEP 452](https://openjdk.org/jeps/452).
 
-Final thoughts
---------------
+## Final thoughts
 
 Phew! I guess it's safe to say that JDK 21 turned out to be quite the update, with no less than 15 JEPs delivered! And that's not even all that's new: thousands of other updates were included in this new release, including various performance and stability updates. Our favourite language is clearly more alive than ever, and I think it's due to Java's continuing focus on its best traits: performance, stability, security, compatibility and maintainability. Wishing you many happy hours of developing with Java 21!

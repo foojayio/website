@@ -113,8 +113,6 @@ In an industry that celebrates only the new, the work of keeping older systems s
 [Spring Boot End of Life Dates](https://endoflife.date/spring-boot)  
 [Grails 7.0.0 Release Announcement](https://grails.apache.org/blog/2025-10-18-introducing-grails-7.html)
 
-
-
 #### Author's note: Full Disclosure
 
 *In the interest of transparency: I work for HeroDevs, a company provides extended security support for end-of-life open source components ( including Java ecosystem frameworks ) and funds open source maintainers through its sustainability programme.*

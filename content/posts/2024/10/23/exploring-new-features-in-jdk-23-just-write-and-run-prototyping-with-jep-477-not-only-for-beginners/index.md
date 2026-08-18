@@ -33,8 +33,7 @@ JEP-477: Implicitly declared classes and main instance methods (Third Preview) b
 
 The Java Platform has already introduced several important JEPs, such as type inference of local variables (JEP-286\[4\]), the ability to run multi-file source programs with the need to define a package structure (JEP-458\[5\]), etc.
 
-Analyzing, Parsing and understanding data
------------------------------------------
+## Analyzing, Parsing and understanding data
 
 In an age where machine learning techniques are required on a daily basis, it is essential to understand, analyze data quickly and parse them correctly. A data analysis scenario can take many forms.
 
@@ -43,7 +42,6 @@ One could be to generate a record-specific sequence. The output represents strin
 ```
 File: Jep477Main.java
 ```
-
 
 ```
 void main()  {
@@ -55,17 +53,14 @@ String template(String name, int value) {
 }
 ```
 
-
 ```
 Command: $java --enable-preview Jep477Main.java
 ```
-
 
 ```
 Output:
 record name:one, value:1
 ```
-
 
 **Example 1.** : Java allows direct execution without having to worry about imports for the *java.base* module and traditional I/O operations like *printnl(..)*
 
@@ -77,7 +72,6 @@ This could come in even more handy when the logic couldn't be kept exactly insid
 File: Jep477Main.java
 ```
 
-
 ```
 void main() {
     var list = IntStream.range(0, 10).boxed()
@@ -88,21 +82,17 @@ void main() {
 }
 ```
 
-
 ```
 File: Sample.java
 ```
-
 
 ```
 record Sample(String name, int value){}
 ```
 
-
 ```
 File: SampleFactory.java
 ```
-
 
 ```
 public class SampleFactory{
@@ -116,17 +106,14 @@ public class SampleFactory{
 }
 ```
 
-
 ```
 Command: $  java --enable-preview Jep477Main.java
 ```
-
 
 ```
 Output:
 list:[[[Sample[name=one, value=42], Sample[name=, value=-1], Sample[name=two, value=22]], [Sample[name=one, value=42], Sample[name=two, value=22], Sample[name=, value=-1]]], [[Sample[name=one, value=42], Sample[name=, value=-1], Sample[name=two, value=22]], [Sample[name=one, value=42]]]]
 ```
-
 
 **Example 2.**: Java platform allows to execute program considering multiple files present inside the folder
 
@@ -136,18 +123,15 @@ Although it sounds great, there are some limitations, one of which can be consid
 File: SampleFactory.java
 ```
 
-
 ```
 record Sample(String name, int value){}
 public class SampleFactory{
    static Sample createSample(int number)
 ```
 
-
 ```
 Command: $ java --enable-preview Jep477Main.java
 ```
-
 
 ```
 Output:
@@ -157,7 +141,6 @@ Exception in thread "main" java.lang.NoClassDefFoundError: Sample
 ...
 ```
 
-
 Example 3.: The definition of the *Sample record* is located in the *SampleFactory.java* file
 
 Despite such limitations, the ability to use Java is also very useful for such cases as mind context switch is not required. The following example demonstrates the power of JEP-477 by reading and analyzing data provided by a given text file. The content of the text file can also include log records that need to be manipulated in a certain way in order to extract the required information (Example 4.)
@@ -165,7 +148,6 @@ Despite such limitations, the ability to use Java is also very useful for such c
 ```
 File: Jep477Main.java
 ```
-
 
 ```
 void main() throws IOException {
@@ -178,24 +160,20 @@ void main() throws IOException {
 }
 ```
 
-
 ```
 Command:$ java --enable-preview Jep477Main.java
 ```
-
 
 ```
 Output: 
 fileContentAsSet:[1, 2, 3]
 ```
 
-
 **Example 4.**: Reading and analyzing files is possible without the need to import additional classes as java.base module is already imported by default
 
 The example shows that despite the automatic imports, a correct checked exception definition is still required.
 
-Conclusion
-----------
+## Conclusion
 
 **In** fact, JEP-477 can be considered an example of the symbiotic development of multiple JEPs together, similar to the result of the development of the Java platform.
 
@@ -205,8 +183,7 @@ Although an already existing jShell might be a good alternative, the ability to 
 
 JEP-477 can meet current business requirements driven by the use of various artificial intelligence techniques and its another great example of big step forward.
 
-References
-----------
+## References
 
 [\[1\] JEP 477: Implicitly Declared Classes and Instance Main Methods (Third Preview)](https://openjdk.org/jeps/477)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

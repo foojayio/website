@@ -48,7 +48,6 @@ public sealed interface Expression {
 }
 ```
 
-
 And the expression evaluator:  
 
 ```java
@@ -69,7 +68,6 @@ public class ExpressionEvaluator {
    }
 }
 ```
-
 
 ### **Traditional Parameterized Test (with ArgumentsSource)**
 
@@ -116,7 +114,6 @@ class ExpressionEvaluatorTest {
 }
 ```
 
-
 ### **Refactoring with Records**
 
 Now, let's see how we can improve the clarity and maintainability of our tests by introducing records.
@@ -127,7 +124,6 @@ Now, let's see how we can improve the clarity and maintainability of our tests b
 record TestCase(String description, Expression expression, TestOutcome expectedOutcome) {}
 ```
 
-
 **Sealed TestOutcome:**
 
 ```java
@@ -136,9 +132,6 @@ sealed interface TestOutcome {
     record Failure(Supplier<? extends RuntimeException> exceptionSupplier) implements TestOutcome {}
 }
 ```
-
-
-<br />
 
 **Refactored Tests**   
 
@@ -177,7 +170,6 @@ void testEvaluateExpression(TestCase testCase) {
     }
 }
 ```
-
 
 ### Benefits of the Record-Based Approach
 

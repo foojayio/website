@@ -21,8 +21,6 @@ Last week, I [described a use-case](https://blog.frankel.ch/real-world-stream-co
 
 <img fetchpriority="high" decoding="async" class="aligncenter wp-image-44873 size-medium" src="Screenshot-2021-05-09-at-15.31.46-700x171.png" alt="" width="700" height="171">
 
-<br />
-
 Hats off to you, Miguel! Your comment revealed a method I didn't know!
 
 So I decided to investigate what is the `teeing()` method about.
@@ -57,7 +55,6 @@ public PriceAndRows getPriceAndRows(Cart cart) {
       ));
 }
 ```
-
 
 1. Map each `Entry` to a `CartRow`
 2. Call the `teeing()` method

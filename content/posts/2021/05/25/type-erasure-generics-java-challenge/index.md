@@ -29,8 +29,7 @@ Without further ado, it's time to solve the Java Challenge quiz!
 
 It's time to improve your Java skills with this Type Erasure Generics Simpson Java Challenge.
 
-Type Erasure Generics Simpson Java Challenge
---------------------------------------------
+## Type Erasure Generics Simpson Java Challenge
 
 What will happen when running the following code?
 
@@ -68,7 +67,6 @@ public class GenericsChallenge3 {
 }
 ```
 
-
 A) There will be a ClassCastException in the line 27  
 
 B)
@@ -78,9 +76,6 @@ B)
 Homer
 4.0
 ```
-
-
-<br />
 
 C) It won't compile at line 9
 
@@ -92,7 +87,6 @@ Let's analyse the code:
 <code>List firstResult = GenericsChallenge3.get(new ArrayList(), new String("1"));</code>
 ```
 
-
 In the line above, we are invoking the get method passing an ArrayList and a String as parameters. It's going to work fine, T will be a String. Even though we are passing an ArrayList without a type, Java will implicitly pass a String since the second type is String. If the second type is Integer, the type of the ArrayList would be Integer as well.
 
 Then we invoke this other method:
@@ -101,13 +95,11 @@ Then we invoke this other method:
 <code>List secondResult = GenericsChallenge3.get("Homer", Double.valueOf("4"));</code>
 ```
 
-
 Note that we are passing two different types to those generic parameters:
 
 ```java
 <code>public static List get(T type1, R type2) { ... }</code>
 ```
-
 
 The type T will become an Object since we are passing two different types. In order to make T compatible with the different types we are passing, the JVM will transform T into an object so that the elements can be inserted into the ArrayList.
 

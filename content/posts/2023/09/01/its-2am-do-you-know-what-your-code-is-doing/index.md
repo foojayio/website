@@ -35,8 +35,7 @@ But there are other ways. Tools like Lightrun are active in their observability,
 
 {#observability-isnt-pillars}
 
-Observability isn't Pillars
----------------------------
+## Observability isn't Pillars
 
 I've been guilty of listing the pillars of observability just as much as the next guy. They're even in my book (sorry). To be fair, I also discussed what observability **really** means...
 
@@ -52,8 +51,7 @@ Existing developer observability tools work actively. To answer the question if 
 
 {#tracing-and-opentelemetry}
 
-Tracing and OpenTelemetry
--------------------------
+## Tracing and OpenTelemetry
 
 It's a sad state of affairs that most developers don't use tracing in their day-to-day job. For those of you who don't know it, it is like a call stack for the cloud. It lets us see the stack across servers and through processes. No, not method calls. More at the entry point level, but this often contains details like the database queries that were made and similarly deep insights.
 
@@ -67,8 +65,7 @@ It also doesn't have a standard server which makes it very confusing. That means
 
 {#background-developer-observability}
 
-Background Developer Observability
-----------------------------------
+## Background Developer Observability
 
 I'm going to coin a term here since there isn't one: Background Developer Observability. What if the data you need was already here and a system already collected it for you in the background?
 
@@ -82,8 +79,7 @@ If you use Digma you can see that right away. OpenTelelbery already collected th
 
 {#enough-exposition}
 
-Enough Exposition
------------------
+## Enough Exposition
 
 I know, I go on... Let's get to the meat and potatoes of why this rocks. Notice that this is a demo, when running locally the benefits are limited. The true value of these tools is in understanding production, still they can provide a lot of insight even when running locally and even when running tests.
 
@@ -105,8 +101,7 @@ There is a strong connection to the code directly from the observability data an
 
 {#how-does-this-help-at-2am}
 
-How Does This Help at 2AM?
---------------------------
+## How Does This Help at 2AM?
 
 Disasters happen because we aren't looking. I'd like to say I open my observability dashboard regularly but I don't. Then when there's a failure I take a while to get my bearings within it. The locality of the applicable data is important, it helps us notice issues when they happen. Detect regressions before they turn to failures and understand the impact of the code we just merged.
 
@@ -116,8 +111,7 @@ When the failure actually happens, the locality and accessibility of the data ma
 
 {#final-word}
 
-Final Word
-----------
+## Final Word
 
 With all the discussion about observability and open telemetry, you would think everyone is using them. Unfortunately, the reality is far from that. Yes, there's some saturation and familiarity in the DevOps crowd. This is not the case for developers.
 

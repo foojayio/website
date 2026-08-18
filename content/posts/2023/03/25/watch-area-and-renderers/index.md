@@ -28,8 +28,7 @@ There are 50 total videos which total in 7 hours... I also recorded additional v
 
 So keep an eye on those!
 
-Renderers
----------
+## Renderers
 
 In today's video we discuss one of my favorite obscure IDE features: renderers. Very few people are aware of them. I explained them in the past but I feel I didn't properly explain why they are so much better than any other alternative. This time I think I got the explanation right.
 
@@ -37,10 +36,7 @@ If you work with JPA or any elaborate API you should check this out, I think the
 
 {{< youtube oaUf8KXHsd0 >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the sixth part of debugging at scale where the bugs come to die.  
 
@@ -114,8 +110,7 @@ We add an import to the renderer then we scroll down and we added simple rendere
 
 If you're building libraries or frameworks you can integrate this to make the debugging experience easier to your users without impacting the behavior of the `toString()` methods or similar semantics.
 
-Finally
--------
+## Finally
 
 In the next video we'll discuss threading issues. Their reputation as "hard to debug" isn't always justified.
 

@@ -54,7 +54,6 @@ Stream.of(r1,r2,r3, 42).forEach( e -> {
 });
 ```
 
-
 **Example 1.**: Currently supported usage of Record and class types in switch expressions
 
 Another missing piece was improving the platform to handle Record like other classes. This means using a compact switch expression as well as control instances (JEP-405, Reference 1).
@@ -66,7 +65,6 @@ if(r1 instanceof ExampleOne(int value, String t, Color c)){
    System.out.println("2: color:" + c);
 }
 ```
-
 
 **Example 2.**: Still results in compilation error but a new build of Java SE 19 is on its way
 
@@ -95,7 +93,6 @@ Response handle() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 **Example 3.** : Java SE 5 introduced the ability to run tasks concurrently, but the disadvantages of processing failure remained. e.g. the *findUser* function failed and the *fetchOrder* function continued to run without warning, resulting in a thread leak, and so on.
 
 The implementation of VirtualThreads opens up new possibilities for making concurrency accessible to a wider user base.
@@ -119,7 +116,6 @@ Response handle() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 **Example 4.** : *StructureTaskScope* wraps all concurrent subtasks and processes them as a whole, even if they branch into their own threads (see **Example 2.**)
 
 ### JEP-424: Foreign Function \& Memory API (Preview)
@@ -136,7 +132,6 @@ SymbolLookup stdlib = linker.defaultLookup();
 MethodHandle radixSort = linker.downcallHandle(
                              stdlib.lookup("radixsort"), ...);
 ```
-
 
 **Example 5.**: Finding and linking a foreign function
 
@@ -163,8 +158,6 @@ In my humble opinion, none of the above improvements and all the others would ha
 Fortunately, it was well received by the community.
 
 **Used Build**: Java SE 19, Build 23 (Reference 7.)
-
-<br />
 
 ### References
 

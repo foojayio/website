@@ -51,7 +51,6 @@ template:
       device_class: temperature                                                 #2
 ```
 
-
 1. Match the pair entity-attribute above
 2. Must be `temperature` to be used as a temperature sensor afterward
 
@@ -78,7 +77,5 @@ You can use this approach for every State. Check them, and I'm sure you'll get n
 * [Netatmo site](https://www.netatmo.com/en-eu/)
 * [Netatmo integration](https://www.home-assistant.io/integrations/netatmo/)
 * [Sensor entity](https://developers.home-assistant.io/docs/core/entity/sensor/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/home-assistant/7/) on May 18^th^, 2025*

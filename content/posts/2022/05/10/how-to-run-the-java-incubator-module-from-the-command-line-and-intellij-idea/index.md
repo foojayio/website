@@ -62,9 +62,6 @@ public class Main {
 }
 ```
 
-
-<br />
-
 I tried to run the command line using the [source code launcher](https://openjdk.java.net/jeps/330) but end up getting the following error-
 
 ```
@@ -78,9 +75,6 @@ import jdk.incubator.concurrent.StructuredTaskScope;
 error: compilation failed
 ```
 
-
-<br />
-
 The reason is that the features are being developed under the incubator module which isn't visible. If we want to use the module, we need to explicitly add a module while you run it. Let's fix it.
 
 ```
@@ -91,7 +85,6 @@ warning: using incubating module(s): jdk.incubator.concurrent
 1 warning
 fooBaz = 327780169
 ```
-
 
 It worked.  
 
@@ -107,7 +100,6 @@ At the bottom, there is a box named the additional command line parameter. Add t
 ```
 --add-modules jdk.incubator.concurrent
 ```
-
 
 And then go to the run configuration. Select the modify options and Mark the Add VM options.
 ![](Screen-Shot-2022-05-08-at-5.04.39-AM-1024x722.png)

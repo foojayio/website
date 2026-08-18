@@ -41,7 +41,6 @@ For a hostId of 28, the generated timestamp would look like this:
 2021-12-28T14:07:02.954100128
 ```
 
-
 The last two digits represent the hostId, and the remainder represents the timestamp on that hostId as date/time/microseconds.
 
 With this change, the resolution of the timestamp is now one-tenth of a microsecond (hundreds of nano-seconds). This apparent loss of precision is not important, since it corresponds to the limit of the available wall clock in many systems.
@@ -51,7 +50,6 @@ The hostId can be set as a system property by default on the command line with `
 ```
 DistributedUniqueTimeProvider.instance().hostId(hostId)
 ```
-
 
 ### Generating Unique IDs in a Distributed System
 

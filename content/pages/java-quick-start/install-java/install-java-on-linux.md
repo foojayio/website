@@ -48,5 +48,4 @@ For another Linux-based system, you may need to select a `.rpm` download and ins
 sudo yum install <package>.rpm
 ```
 
-
 That's it. You're now ready to run Java programs and, even better... create your own!

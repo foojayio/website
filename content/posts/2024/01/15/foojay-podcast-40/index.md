@@ -29,13 +29,11 @@ Is this a problem to attract more Java developers?
 
 And how can we make the Java language more attractive for newbies? Let's ask some experts...
 
-Video
------
+## Video
 
 {{< youtube XvUmhzoL_cY >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +41,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 **Elvira van der Ven**
 
@@ -61,8 +58,7 @@ Guests
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-Podcast Host
-------------
+## Podcast Host
 
 **Deepu K Sasidharan**
 
@@ -71,8 +67,7 @@ Podcast Host
 * <https://mastodon.social/@deepu105>
 * <https://twitter.com/deepu105>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic, guests, and host  
 
@@ -107,8 +102,7 @@ Content
 
 56:55 Outro
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

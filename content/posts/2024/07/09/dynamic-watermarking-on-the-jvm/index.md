@@ -48,7 +48,6 @@ private fun watermark(imageFilename: String): BufferedImage? {
 }
 ```
 
-
 1. Get the original image
 2. Get the watermarking image
 3. Get the canvas of the original image
@@ -71,7 +70,6 @@ class WatermarkFilter : Filter {
 }
 ```
 
-
 1. Get the image filename
 2. Watermark the image
 3. Write the image in the response output stream
@@ -84,10 +82,4 @@ I explained how to watermark images on a Java stack in this post. I did the wate
 * [Java 2D API](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/spec/j2d-intro.html)
 * [Image Processing in WebAssembly](https://silvia-odwyer.github.io/photon/)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/1/) on June 30^th^, 2024*
-
-<br />
-
-<br />

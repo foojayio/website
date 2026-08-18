@@ -32,8 +32,7 @@ We will make a *very* simple clone of Geometry Wars using [FXGL](https://github.
 
 To complete this tutorial you first need to [get FXGL](https://github.com/AlmasB/FXGL/wiki/Get-FXGL-%28Maven%2C-Gradle%2C-Uber%29) either via Maven / Gradle, or as an uber-jar. Ensure you use FXGL 11, the current latest version is `11.8`. This tutorial is standalone and does not require previous FXGL knowledge.
 
-Dependencies
-------------
+## Dependencies
 
 I started with an empty Maven project and extended the pom.xml file with this dependency:
 
@@ -45,9 +44,7 @@ I started with an empty Maven project and extended the pom.xml file with this de
 </dependency>
 ```
 
-
-Code
-----
+## Code
 
 The code is split into two classes
 
@@ -79,7 +76,6 @@ import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
 ```
 
-
 #### Minimal code in the game class
 
 This section will go through each method and explain the major parts of the code. By default FXGL sets the game size to 800x600, which works for our game. You can change these and various other settings, for example `settings.setWidth(1280)`. For now, we will just set the title and add the entry point - `main()`.
@@ -98,7 +94,6 @@ public class GeoWarsApp extends GameApplication {
 }
 ```
 
-
 #### Defining the game entities
 
 The next step is to think about the types of game objects, which are called entities, that we will have in the game. In this simple example we will have the player, bullets and enemies. To mark these types, we will create an enum:
@@ -108,7 +103,6 @@ public enum EntityType {
     PLAYER, BULLET, ENEMY
 }
 ```
-
 
 ### GeoWarsFactory
 
@@ -140,7 +134,6 @@ public class GeoWarsFactory implements EntityFactory {
 }
 ```
 
-
 #### Define the player entity
 
 The factory needs to know how to create each entity. So, for each type we specified above in the EntityType enum, starting with `player` first, we must provide the following details:
@@ -159,7 +152,6 @@ public class GeoWarsFactory implements EntityFactory {
     }
 }
 ```
-
 
 First, the method signature is of importance. It has an annotation that we can later use to spawn a player. Next, let's have a look at how we define the player.
 
@@ -196,7 +188,6 @@ public class GeoWarsFactory implements EntityFactory {
 }
 ```
 
-
 First we get the player instance. The second line computes the direction in which the bullet will travel when created, starting from the players center. Excluding the API we already covered above, `.with(new ProjectileComponent(direction, 1000))` and `.with(new OffscreenCleanComponent())` attach **components** to our bullet entity. A component can contain data and behaviour and brings new functionality to an entity. For example, `ProjectileComponent` moves the entity every frame along `direction` with the given speed. `OffscreenCleanComponent`, as the name implies, removes the entity from the game if it is beyond the screen bounds.
 
 #### Finally, we have the enemy entity
@@ -227,7 +218,6 @@ public class GeoWarsFactory implements EntityFactory {
 }
 ```
 
-
 For our enemy, we will use a circle as the view. Most methods have already been covered above, so we will focus on `RandomMoveComponent`. This component, using the provided rectangular bounds, moves the entity randomly within these bounds. This simple behaviour is sufficient for our little game.
 
 We are done with the factory class now!
@@ -248,7 +238,6 @@ public class GeoWarsApp extends GameApplication {
 }
 ```
 
-
 Using this reference, we can start adding some user actions, known as input handling:
 
 ```java
@@ -262,7 +251,6 @@ protected void initInput() {
         spawn("bullet", player.getCenter()));
 }
 ```
-
 
 The code above should be self-explanatory and makes use of Java 8+ lambda notation. If you want to be able to shoot while the mouse button is being pressed, rather than just on a single press, you can change `onBtnDown` to `onBtn`.
 
@@ -279,7 +267,6 @@ protected void initGame() {
     run(() -> spawn("enemy"), Duration.seconds(1.0));
 }
 ```
-
 
 First, we add our factory to the game world, so that we can use methods like `spawn()`. Next, we initialize our `player` reference by spawning the player entity in the center of the game. We also need to provide this player to our geoWarsFactory as it needs it to define the starting point of new bullets.
 
@@ -303,11 +290,9 @@ protected void initPhysics() {
 }
 ```
 
-
 We set up two collision handlers. The first one handles the collision between the bullet type and the enemy type. When such a collision occurs, we simply remove both entities from the game. In the second handler, we show an information dialog with text "You Died!" and restart the game.
 
-Conclusion
-----------
+## Conclusion
 
 Hit run in your IDE on the main-method and that is all! A first working JavaFX game created with FXGL.
 

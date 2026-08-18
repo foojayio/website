@@ -25,8 +25,7 @@ In [the last post](https://foojay.io/today/intro-to-rag-foundations-of-retrieval
 
 In this post, we'll dive deeper into the different layers of RAG, including vector RAG, graph RAG, and agents. We'll explore how these layers can be combined to create more powerful and effective AI systems.
 
-GenAI systems as layers
------------------------
+## GenAI systems as layers
 
 I've recently started thinking of GenAI in a series of layers - the LLM, semantic search, retrieval queries (RAG sources), agents, etc. Each of these layers can add different kinds of value to the solution, producing custom, potentially high-quality results and reducing the risk of hallucinations.
 
@@ -38,8 +37,7 @@ Additional layers also add complexity, so analysis needs to be done to evaluate 
 
 Let's look at some of the layers in the current GenAI landscape.
 
-Vector RAG
-----------
+## Vector RAG
 
 [Vector-only RAG](https://developers.cloudflare.com/vectorize/reference/what-is-a-vector-database/#retrieval-augmented-generation) (also called "Naive RAG") means that you create vectors (embeddings) for the data you want to provide to the LLM and search that data using vector similarity search. This approach is very powerful, as it retrieves semantically relevant information from a large dataset, allowing the LLM to generate more accurate and contextually appropriate responses.
 
@@ -53,8 +51,7 @@ Vector databases are designed and optimized for storing and searching vector emb
 
 This is where a graph layer can provide additional context and relationships between the data points, improving the relevance of the retrieved information. This is especially important when dealing with complex analysis or when the data has intricate relationships that should be considered.
 
-Graph RAG
----------
+## Graph RAG
 
 [GraphRAG](https://neo4j.com/blog/genai/what-is-graphrag/) introduces a layer that utilizes relationships between data points, enhancing the retrieval process by considering the connections and context in the data. GraphRAG combines the strengths of vector similarity search with the connected data of graph databases, allowing for more nuanced and related context retrieval.
 
@@ -68,8 +65,7 @@ GraphRAG has been shown to improve the accuracy and relevance of generated outpu
 
 This is where agents come into play, which act as intermediaries to carry out tasks and retrieve information from various sources. Agents can be designed to break down complex processes into a series of steps and complete them to gather the most relevant information for a given query.
 
-AI Agents
----------
+## AI Agents
 
 [AI Agents](https://www.anthropic.com/engineering/building-effective-agents) can range from simple to complex and can be arranged in configurations of one or multiple agents, depending on their design and functionality. Agentic systems can interact with various data sources, APIs, and even other AI systems to gather information, automate tasks, and generate outputs. Agents contribute to improved automation, but also work towards autonomous systems that can make decisions and operate independently.
 
@@ -79,8 +75,7 @@ Agents are a powerful tool for enhancing GenAI systems, but they also add comple
 
 Design of agentic systems can vary widely, from simple rule-based systems to complex multi-agent systems that can learn and adapt over time. The choice of design will depend on the specific use case and the level of complexity required.
 
-Model Context Protocol (MCP)
-----------------------------
+## Model Context Protocol (MCP)
 
 The [Model Context Protocol (MCP)](https://neo4j.com/blog/developer/model-context-protocol/) has been a hot topic in the GenAI community. MCP is a **protocol** for managing resources for LLM **models** to use as **context**. It is kind of like a template for connecting external data sources, tools, infrastructure, and data APIs to an LLM, providing a standardized way to access and utilize external knowledge sources more effectively.
 
@@ -96,15 +91,13 @@ The MCP protocol is still evolving, so it is likely that we will see rigorous im
 
 There are several 3rd party resources for getting started with MCP provided in the [Neo4j blog post on the topic](https://neo4j.com/blog/developer/model-context-protocol/), if you want to know more.
 
-What should you choose?
------------------------
+## What should you choose?
 
 So how do you choose which layer(s) to use? It depends on the use case and the complexity of the data. There are many variations and nuances to consider, and the best decision will likely require testing several different combinations of LLM models, vector stores (databases), and agentic architectures to find the optimal solution for your specific needs.
 
 Does vector similarity search provide a high enough accuracy and relevance for your use case? If so, then you may not need to add the complexity of a graph database or agentic system. If results are missing context or high accuracy is critical, then a graph database approach may be the best option. Are there simply too many scattered and inconsistent data sources to make a unified data store practical or will requests contain tasks/data that need to be sent to other systems? Then an agentic system may be worth the added complexity. And if you find yourself needing to write custom integrations for multiple tools, APIs, and data sources, then the Model Context Protocol (MCP) may be a valuable addition.
 
-Wrapping up!
-------------
+## Wrapping up!
 
 In this blog post, we explored the different layers of RAG, including vector RAG, graph RAG, and agents. We discussed how these layers can be combined to create more powerful and effective AI systems, and the trade-offs involved in adding complexity to your GenAI solutions. It is important to understand the specific use case and the data involved in order to determine which layers to use. The choice of layers will depend on the complexity of the data, the level of accuracy required, and the specific goals of the AI system.
 
@@ -114,8 +107,7 @@ Whether you're a developer, data scientist, or simply someone interested in the 
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Previous blog post: [Intro to RAG: Foundations of Retrieval Augmented Generation, part 1](https://neo4j.com/blog/genai/intro-to-rag/)
 * Blog post: [What is GraphRAG? - Neo4j](https://neo4j.com/blog/genai/what-is-graphrag/)

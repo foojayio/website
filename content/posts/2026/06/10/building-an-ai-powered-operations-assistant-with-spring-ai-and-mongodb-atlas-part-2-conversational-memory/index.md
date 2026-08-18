@@ -23,8 +23,7 @@ frozen: false
 
 This is the second article in a three-part series. Part 1 covered the RAG foundation --- loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume.
 
-The Problem with Stateless Chat
--------------------------------
+## The Problem with Stateless Chat
 
 In the first part of the series, we successfully created a chat interface where an operator can ask questions and receive answers based on the actual content of the runbooks they have uploaded and embedded in the system. For example, they can ask in the chat, "*What should I check when my server's CPU usage exceeds 80%?*" and the assistant retrieves the relevant sections from the various runbooks and assembles a coherent and concrete response.
 
@@ -34,8 +33,7 @@ This situation is extremely restrictive, and in this context, it's even more com
 
 In this second part, we'll bridge this gap and build an assistant that remembers the content of the current conversation and previous conversations.
 
-What We Are Building
---------------------
+## What We Are Building
 
 Where do we start to add memory to our assistant? First, we need to try working with two different time perspectives of memory.
 
@@ -45,8 +43,7 @@ The second type of memory is long-term memory. This type of memory serves to arc
 
 In this exercise, both of these memory levels are hosted within [MongoDB Atlas](https://www.mongodb.com/products/platform/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agentic-foojay-part2&utm_term=hugh.murray), along with the knowledge chunks saved in Part 1. The extension is extremely straightforward, as we only need to add a new collection to our application without needing to create new infrastructure components.
 
-Two Different Kinds of Memory
------------------------------
+## Two Different Kinds of Memory
 
 Let's go a little deeper into the description of these two types of memory. The goal is to understand their similarities and differences, but above all to avoid treating them generically.
 
@@ -56,8 +53,7 @@ Long-term memory, on the other hand, serves to accumulate knowledge, conversatio
 
 Now that we have a clearer understanding of the main characteristics of these two types of memory, let's see how these characteristics guide us in the actual design. Short-term memory must be cheap and consumed quickly: retain it for a short period and then discard it. Long-term memory, on the other hand, is selective but, above all, must be durable over time. It is important that it contains preprocessed and structured information, including all the metadata that allows us to retrieve it when actually needed.
 
-Mix \& Match
-------------
+## Mix \& Match
 
 Let's now resume the application developed in Part 1. To enable the use of these two types of memory, we need to add two components that work closely together within the request pipeline.
 
@@ -72,8 +68,7 @@ Let's try to visualize all of this within a sequence diagram:
 
 In addition to all this, we must also consider the existence of a separate workflow, which can be triggered on demand or at scheduled intervals, not with every single request, and is responsible for consolidating the information exchanged into long-term memory. This stream reads the entire conversation from the chat memory, calls the LLM to extract the relevant facts from the conversation, and writes them to the memories collection for later retrieval.
 
-Short-Term Memory: Keeping the Conversation Coherent
-----------------------------------------------------
+## Short-Term Memory: Keeping the Conversation Coherent
 
 Now that we've examined why these two types of memory exist and how to logically integrate them into our pipeline, it's time to look at the code we'll use to implement all of this.
 
@@ -85,8 +80,7 @@ The fundamental element on which this consolidation is based is the conversation
 
 Windowing prevents the indefinite accumulation of messages in cases where a conversation lasts for hours. In this case, we apply a FIFO logic to the queue, removing the oldest information from the context and leaving only the newest. Clearly, deleting does not mean forgetting: the essence of the messages is still always consolidated in long-term memory.
 
-Long-Term Memory: Carrying Knowledge Across Sessions
-----------------------------------------------------
+## Long-Term Memory: Carrying Knowledge Across Sessions
 
 Long-term memory is stored within a second *VectorStore* , which is separate and distinct from the one that holds the knowledge chunks. This points to a collection of memories within the same Atlas cluster, with its own vector search index (*memories_vector_index*) and fields representing metadata that can be used for filtering.
 
@@ -116,7 +110,6 @@ Each memory record is a document with a text field *content,* an *embedding* vec
 }
 ```
 
-
 The *memoryType* field is an enumeration that can take on 5 different categories:
 
 * PREFERENCE for personal style preferences
@@ -134,8 +127,7 @@ When a request arrives with a user ID, the advisor extracts the content from the
 Below is a representative sequence diagram.  
 ![](Screenshot-2026-06-10-at-2.21.41-PM.png)
 
-Memory Consolidation: From Conversation to Durable Fact
--------------------------------------------------------
+## Memory Consolidation: From Conversation to Durable Fact
 
 As explained so far, short-term memory stores everything, while long-term memory stores only what is important to remember. The bridge connecting these two types of memory is the process of consolidation.
 
@@ -168,8 +160,7 @@ An unclear conversation, full of imprecise intermediate commands and inaccurate 
 Below is a sequence diagram summarizing the interaction just presented:
 ![](Screenshot-2026-06-10-at-2.22.17-PM.png)
 
-The Advisor Chain and Why Order Matters
----------------------------------------
+## The Advisor Chain and Why Order Matters
 
 Spring AI is designed to execute advisors in ascending order of precedence, running those with lower precedence first.
 
@@ -184,8 +175,7 @@ Spring AI is designed to execute advisors in ascending order of precedence, runn
 
 The chain functions correctly, adhering to the principle of component responsibility: each advisor performs a specific task, delegating the next step to the subsequent advisor in the chain.
 
-The Atlas Index for Memories
-----------------------------
+## The Atlas Index for Memories
 
 Just as with the *knowledge_chunks* collection presented in Part 1 of this tutorial, the *memories* collection also requires its own vector search index in Atlas. In this case, we can define a vector index as follows:
 
@@ -204,11 +194,9 @@ Just as with the *knowledge_chunks* collection presented in Part 1 of this tutor
 }
 ```
 
-
 It is important to note in this definition the declaration of the two filter fields, which are necessary for semantic search to pre-filter vectors based on the user performing the search before conducting the similarity search. Without this filter, every query would have to scan the entire collection, which is unsustainable as the application's usage grows.
 
-Trying It Out
--------------
+## Trying It Out
 
 Now that we have all the components for our assistant's short- and long-term memory, let's run it and see how it works. Let's start the application:
 
@@ -225,8 +213,7 @@ Once the conversation has accumulated a good amount of information and exchanges
 
 Once the conversation is complete, we can create a new conversation, which is assigned a new ID. Let's proceed again with the information request, and we'll see how the responses will include the key information the assistant remembers about us, such as the preferences expressed in the first conversation, without having to re-enter this information.
 
-Conclusion and What's Next
---------------------------
+## Conclusion and What's Next
 
 The time has come, just as it did for our assistant, to consolidate what we've done so far into memory. We started with a question-and-answer tool and gave it memory capabilities, both within a single session and across different sessions. Short-term memory allowed us to ensure consistency without any custom code, leaving Spring AI to handle the persistence and retrieval of information transparently. Long-term memory allows us to introduce something even more interesting: a specific knowledge base, tailored to the user, that grows over time, fed by preferences and decisions made during investigative activities.
 

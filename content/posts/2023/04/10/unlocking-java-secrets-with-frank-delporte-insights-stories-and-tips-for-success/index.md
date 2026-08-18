@@ -30,10 +30,7 @@ In this interview, we will explore his journey in the software world, his work a
 
 Join us as we delve into Frank's experiences and expertise, uncovering the secrets behind his success and the future of Java development.
 
-<br />
-
-Profile
--------
+## Profile
 
 Name: **Frank Delporte** 🚀  
 
@@ -47,16 +44,14 @@ Mastodon: [@\[email protected\]](https://foojay.social/@frankdelporte) 🐘
 
 GitHub: [FDelporte](https://github.com/FDelporte)LinkedIn: [frankdelporte/](https://www.linkedin.com/in/frankdelporte/) 🔗
 
-Key Takeaways
--------------
+## Key Takeaways
 
 1. Start learning Java with beginner-friendly resources like the "[Java Quick Start](https://foojay.io/java-quick-start/)" tutorial on Foojay.io and explore J'bang for simplified Java development.
 2. Developers should communicate with end-users to better understand the real-life applications of their products and improve user experience.
 3. A career in software development can extend beyond pure development to roles like team lead, sales, project management, and technical writing.
 4. A strong community presence, such as attending local JUG meetings and conferences, is important for networking, learning, and staying updated in the software development field.
 
-**Fun Facts**
--------------
+## **Fun Facts**
 
 * From time to time, check your backups! Many years ago, I lost three weeks of work because of a hard disk crash, only to discover that the backup tape on the server contained not a single file.
 * As a freelance video editor, in one year, I worked on three different cooking programs for national television. That's probably where I learned most of my "cooking skills."
@@ -82,8 +77,6 @@ There are way smarter people than me who develop amazing Java applications and c
 
 And that's what I really would like to keep doing in the next years: "Spread the love for Java." 🙂
 
-
-
 ### Bazlur: It's great to see how your passion for Java and sharing your knowledge has led to this achievement. As you continue to spread your love for Java, what are the most exciting developments or features in the Java ecosystem that you're looking forward to sharing with the community in the coming years?
 
 **Frank:** It's incredible to see how much evolution we have witnessed in OpenJDK and the JVM since the 6-months release cycle was introduced.
@@ -97,8 +90,6 @@ So Project Panama with Foreign-Functions and Memory API could bring many improve
 Still, I think that will be driven for a big part by how it gets integrated into, for instance, Spring and bring a performance boost to applications without requiring developers to change their code.
 
 For me, the most exciting developments are the ones that make code more clean and readable. So I'm a big fan of [Text Blocks](https://openjdk.org/jeps/378) and all the new functions related to [instanceOf](https://openjdk.org/jeps/305).
-
-
 
 ### Bazlur: Can you tell us about your background and how you started in the software industry?
 
@@ -115,8 +106,6 @@ I started within the Microsoft world with C#, SQL Server, ASP.NET,..., and later
 When I joined Televic Rail, a Belgian-based company building passenger information systems for trains, I switched to Java.
 
 The whole "ecosystem" of open-source, a friendly community, having tons of tutorials and blogs, libraries for everything you can ever possibly need,... has been and still is a truly fantastic experience.
-
-
 
 ### Bazlur: It's impressive that you started programming early on. How did your background in film and video engineering and witnessing the analog-to-digital transition impact your journey in the software development field?
 
@@ -150,13 +139,9 @@ Soon after, my clients wanted to distribute their company movie to (potential) c
 
 Nowadays, video and audio are everywhere, and we don't need to consider file sizes and bandwidth constraints. We have come a long way, and I would really like to go back to my first professional days and tell my younger self what incredible years lie ahead.
 
-
-
 ### Bazlur: I must say, your journey thus far has been awe-inspiring. If I say those days were more thrilling and dramatic compared to the present, do you agree?
 
 **Frank:** Sometimes I'm homesick for the time that I was working on television. The "glitter and glamour" of working behind the scenes of it brings a very special emotion. But then I remember the long working hours, sometimes seven days a week, with a lot of lost time in traffic, driving to the various studios in and around Brussels... Yes, those times were more thrilling, but when you get older and have a family, you start appreciating a quieter life. Now my only home-work commute is one stair up to my home office. I have all the equipment I can dream of to create videos and podcasts at a fraction of the price these things cost 20 years ago (see <https://webtechie.be/post/2023-03-17-podcast-editing/>). And from here, I have access to the whole world and can talk and share ideas with people like you. I've had my part of "thrills and drama", enough not to miss it...
-
-
 
 ### Bazlur: Absolutely, priorities change as we age, and we start to appreciate different aspects of life, while some tasks are just easier when tackled at a younger age. Now, let's delve into the realm of software development. I'm curious about your perspective on the challenges that developers grapple with in today's world.
 
@@ -164,13 +149,9 @@ Nowadays, video and audio are everywhere, and we don't need to consider file siz
 
 As you [discussed with Shai Almog](https://foojay.io/today/navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog/), ChatGPT and other AI tools will also have quite some impact, but it's tough to predict how this will evolve as the end of programming has already been predicted many times in the past.
 
-
-
 ### Bazlur: Since you mentioned that the golden rule for every decision is "it depends," do you think having a programming language named "Depends" would help settle the debate on which language to choose, hahaha!
 
 **Frank:** That would be a good idea! But the best new language that was recently introduced is definitely the ***Rockstar*** language! If you have never heard about it, check out this video: [https://www.youtube.com/watch?v=_T8ta3BBhc4\&t=2190s](https://www.youtube.com/watch?v=_T8ta3BBhc4&t=2190s)
-
-
 
 ### Bazlur: That gave me a good laugh! Moving on to a more serious note, I've noticed that you've been developing content for Java beginners and have even authored a book on Raspberry Pi. What advice would you give to newcomers who have just started learning Java? Where should they begin their learning journey?
 
@@ -178,15 +159,11 @@ As you [discussed with Shai Almog](https://foojay.io/today/navigating-the-challe
 
 I also like what [J'Bang](https://www.jbang.dev/) has done to simplify how you can get started with Java development without the need to install a Java runtime.
 
-
-
 ### Bazlur: Your resources for beginners are fantastic, and I'm sure our readers will find them incredibly helpful. As someone with great experience in the software industry, do you have any enjoyable or memorable stories you'd like to share with us? We always love hearing about personal experiences in the industry. Can you share any particular story or anecdote from your time working in software development that either made a lasting impression on you or had a significant impact on your career?
 
 **Frank:** When I was working on the passenger information screens for trains, we had a project for the Thameslink trains in the UK. We first went to Germany, where one of these new trains was tested on a circular 6 km track, to test if our system was announcing the correct stations and stops. Most of these test drives were during the night. One night, the train driver let me take over the "steering wheel" and let me drive that brand new 240-meter-long train of over 10 million euros for one tour around the track. I missed the "station" with 150 meters and learned that everyone should stick to their job 😉
 
 Later, a few colleagues and I were on that same train for test drives on the actual track. Again during the night hours, we drove a few times up and down through London to test all announcements and see if our system was working as expected. I just read the book "[The Girl on the Train](https://www.litcharts.com/lit/the-girl-on-the-train/summary)" about a divorced woman who used to live next to a train track in London. It was a bizarre feeling to be on that train with only a few people and look at the lives of all those people living next to the tracks, while our system was announcing every stop for an empty train...
-
-
 
 ### Bazlur: As a technical writer at Azul, could you provide some insight into your job responsibilities and your experiences in this role? It is often believed that in a software company, one can only pursue a career as a developer, especially for those starting out. Can you shed some light on this career path and the benefits of being a technical writer?
 
@@ -196,8 +173,6 @@ I didn't plan to become a technical writer. Until last year I was a developer wh
 
 Together with my colleague, Matt Van Order, we maintain [docs.azul.com](https://docs.azul.com/), where release notes of the two OpenJDK distributions of Azul (Core and Prime Builds of OpenJDK) are published, next to other product documentation. We also work on blog posts for the Azul website and Foojay. As a side-project, it also allows me to talk to many of the well-known Java community members for the [Foojay podcast](https://foojay.io/today/category/podcast/). It's both a challenging and rewarding daily task to keep in contact with the Java users, learn from the many experts that work at Azul and know the Java code in detail, and provide helpful content to guide developers.
 
-
-
 ### Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?
 
 **Frank:** Well, foojay.io is definitely a recommended resource 🙂 And am I allowed to do some shameless self-promotion? If you want to get started with electronics programming with Java on the Raspberry Pi, take a look at my book you can get it on [Leanpub for 9,99$ or the amount you want to pay](https://webtechie.be/books/). Recently I read and reviewed the book "[Practical Design Patterns for Java Developers](https://foojay.io/today/book-review-practical-design-patterns-for-java-developers/)" by Miro Wengner, which gives a perfect view of recent changes in the Java language and how you can use them with 42 practical design patterns for clean and maintainable code.
@@ -206,11 +181,7 @@ I'm also a big fan of JavaFX to build GUI (Graphical User Interface) desktop and
 
 But the best advice is probably just to keep an eye on a few technology news sites, follow some Java experts on Mastodon (or Twitter...), or even join <https://foojay.social> if you don't have a Mastodon account yet. If you can join a local JUG occasionally or visit a conference, please do! Getting in contact with the community and learning from the many resources all these people share is a great way to learn!
 
-
-
 ### Conclusion:
-
-<br />
 
 In conclusion, our engaging interview with Frank Delporte has provided valuable insights into the world of Java development, the importance of community involvement, and the diverse career paths available in the software industry.
 
@@ -219,8 +190,6 @@ Frank's dedication to creating beginner-friendly content and his passion for Jav
 His experiences and the resources he shared will undoubtedly inspire and assist those embarking on their own Java learning journey.
 
 We hope that our readers have found this interview both enlightening and motivating, as it showcases the exciting opportunities that lie ahead in the realm of software development and the power of a supportive community.
-
-
 
 **NOTE:**
 

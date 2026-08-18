@@ -73,7 +73,6 @@ public class Temperature {
 }
 ```
 
-
 For value objects, we want to state that objects are equal when *all* of their properties are equal.
 
 The implementation should be this:
@@ -104,7 +103,6 @@ public class Temperature {
 }
 ```
 
-
 Short-circuit if the passed in object is the same reference (in memory) as the current object. An object can never be equal to \`null\` and it cannot be equal to an object of another class. We can safely cast the passed in object as we are sure it is of the same class as this object. Compare each of the properties of the passed in object with the current object Use the JDK \`Objects.hash()\` method to generate a hash code using all of the properties of the current object.
 
 We can validate now that 2 `Temperature` objects with the same properties are equal:
@@ -119,7 +117,6 @@ void testEqualTemperature() {
     assertTrue(equal);
 }
 ```
-
 
 I explictly called the `equals()` method here in the test, but this is not how you would normally do this.  
 
@@ -139,7 +136,6 @@ void testHashCodeForEqualObjects() {
     assertThat(hashCode1).isEqualTo(hashCode2);
 }
 ```
-
 
 We test that equal objects should give equal hash codes.
 
@@ -190,7 +186,6 @@ public class User {
 }
 ```
 
-
 Since we only care about the `id` field, a naive implementation would look like this:
 
 ```java
@@ -213,7 +208,6 @@ Since we only care about the `id` field, a naive implementation would look like 
         return Objects.hash(id);
     }
 ```
-
 
 Unfortunately, this is wrong.
 
@@ -242,7 +236,6 @@ Luckily, Vlad Mihalcea shows us [how to implement this correctly](https://vladmi
         return getClass().hashCode();
     }
 ```
-
 
 2 important notes:
 
@@ -300,7 +293,6 @@ public class Book {
 }
 ```
 
-
 The `Book` entity does not have the `@GeneratedValue` annotation, so we will need to pass in a value at construction time.
 
 Now that we know the `id` field is never `null`, we can use this implementation:
@@ -324,7 +316,6 @@ Now that we know the `id` field is never `null`, we can use this implementation:
     }
 ```
 
-
 We just use `id` for `equals()`, and we can relay on `id` as well for `hashCode()`
 
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -342,7 +333,6 @@ A test on equals could look like this:
     }
 ```
 
-
 Since we only test the id, this test will also succeed:
 
 ```java
@@ -354,7 +344,6 @@ Since we only test the id, this test will also succeed:
         assertThat(book1).isEqualTo(book2);
     }
 ```
-
 
 This might be counter-intuative at first, but this is really what you want.
 
@@ -375,7 +364,6 @@ Add it to your `pom.xml`:
     test
 ```
 
-
 And write the test:
 
 ```java
@@ -384,7 +372,6 @@ And write the test:
         EqualsVerifier.forClass(Temperature.class).verify();
     }
 ```
-
 
 This will test if `equals()` is reflexive, symmetric, transitive and consistent. It also tests if `hashCode()` adheres to the contract defined in the `java.lang.Object` API.
 

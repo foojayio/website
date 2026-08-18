@@ -89,9 +89,6 @@ public class WorkService {
 }
 ```
 
-
-<br />
-
 2. @Asynchronous
 ----------------
 
@@ -140,17 +137,12 @@ record Order() {
 }
 ```
 
-
-<br />
-
 3. Bootstrap API
 ----------------
 
 If you are invoking a REST service outside of a Jakarta EE environment, e.g., unit tests, integration tests etc., this is good to have a standalone API to do that.
 
 With this, you don't need to run the entire container. Thus, it becomes very convenient.
-
-<br />
 
 ![](image-9-1024x497.png)
 
@@ -195,7 +187,6 @@ public class FileResource {
 }
 ```
 
-
 5. **@OpenIdAuthenticationDefinition**
 --------------------------------------
 
@@ -219,7 +210,6 @@ Life is much simpler now; specify the required properties, such as Provider URI,
 public class SecurityConfig {
 }
 ```
-
 
 6. **UUID Key**
 ---------------
@@ -247,7 +237,6 @@ public class User {
 }
 ```
 
-
 Besides, it brings several functions to the query language and Criteria API. The new functions fall into three categories:
 
 * Numeric functions (CEILING, EXP, FLOOR, LN, POWER, ROUND, SIGN)
@@ -262,8 +251,7 @@ Besides, it brings several functions to the query language and Criteria API. The
 If you are particularly not interested in writing any kind of tagging language whatsoever, you can now write your UI code entirely in Java with the pure Java Faces view. I love it.
 ![](image-8-1024x440.png)
 
-Conclusion
-----------
+## Conclusion
 
 Now a bit about Jakarta EE ambassadors.
 

@@ -29,8 +29,7 @@ frozen: false
 
 I spent a year and a half migrating more than 15 projects in production. Full time. Real teams, real deadlines, real 2am breakage. This is everything I wish someone had written before I started.
 
-Why Are We Still Here? 👀
--------------------------
+## Why Are We Still Here? 👀
 
 Walk into any company with a codebase older than 5 years and you'll hear the same thing:
 > "We can't migrate; it's too risky."
@@ -41,8 +40,7 @@ Here's why. Public support for JDK 7 ended years ago, and most organizations run
 
 The risk isn't migrating. The risk is staying. 🦖
 
-The Mistake Everyone Makes: The Big Jump
-----------------------------------------
+## The Mistake Everyone Makes: The Big Jump
 
 When teams finally decide to migrate, they do the worst possible thing.
 
@@ -60,8 +58,7 @@ Each hop is manageable. Each hop ships. Each hop gives your team confidence befo
 
 For large legacy systems, migrating one LTS at a time reduces risk and simplifies troubleshooting. Some teams successfully jump 8→17 or 11→21 directly, but the bigger the gap the harder it is to isolate what broke and why. Your call based on your codebase size and test coverage.
 
-Step 1: Read Your Codebase Before You Touch Anything 🔍
--------------------------------------------------------
+## Step 1: Read Your Codebase Before You Touch Anything 🔍
 
 Before you change a single line, you need to know what you're dealing with.
 
@@ -70,7 +67,6 @@ Run a dependency audit. Every library has a maximum supported JDK version. Find 
 ```
 mvn versions:display-dependency-updates
 ```
-
 
 Look for:
 
@@ -81,8 +77,7 @@ Look for:
 
 Document everything you find. This is your migration map. Without it you're just hiking blind into a jungle. 🌿
 
-Step 2: The Tools That Actually Help (and the Ones That Gaslight You)
----------------------------------------------------------------------
+## Step 2: The Tools That Actually Help (and the Ones That Gaslight You)
 
 ### OpenRewrite ✅
 
@@ -106,14 +101,12 @@ rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
  }
 ```
 
-
 Then run:
 
 ```
 ./gradlew rewriteRun # Gradle 
 mvn rewrite:run # Maven
 ```
-
 
 Then `git diff`. Review every change. Commit. Move on.
 > **One important thing OpenRewrite won't touch:** your ` in ``pom.xml`` or ``targetCompatibility`` in ``build.gradle`. You need to update those manually before running compiler checks. Don't forget. 🚩
@@ -127,7 +120,6 @@ Built into the JDK itself. Scans your code for deprecated API usage before they 
 ```
 jdeprscan --class-path your-app.jar your-app.jar
 ```
-
 
 Run this before every hop. Not after. Before.
 
@@ -149,13 +141,11 @@ Lock your minimum JDK version so nobody on the team accidentally compiles agains
  </plugin>
 ```
 
-
 ### What Gaslights You ❌
 
 Any tool that says it will "fully migrate your project automatically." No it won't. These tools handle the mechanical stuff. The architectural decisions, the library incompatibilities, the Hibernate pain (more on that below 👇) --- that's still on you. Every diff needs a human review. Every automated change needs a test run. Don't skip that. Ever.
 
-Step 3: The Breaking Changes That Will Ruin Your Day
-----------------------------------------------------
+## Step 3: The Breaking Changes That Will Ruin Your Day
 
 ### JDK 7 → JDK 8
 
@@ -180,7 +170,6 @@ The Java EE modules got removed from the JDK. `javax.xml.bind`, `javax.activatio
  <version>2.3.1</version>
 </dependency>
 ```
-
 
 > **Note:** this gets you back to compiling. If you're also targeting Spring Boot 3 eventually, you'll need to migrate to the `jakarta.*` namespace too, but that's a separate decision and a separate hop. Don't mix them.
 
@@ -255,13 +244,11 @@ public class CustomIdGenerator implements BeforeExecutionGenerator {
 }
 ```
 
-
 Also: from Hibernate 6.4, if you have `@GeneratedValue` on a non-identifier field, Hibernate now throws an `AnnotationException` at startup. Previous versions silently ignored it. Code that booted fine for years will suddenly refuse to start. Grep your whole codebase for `@GeneratedValue` before this hop. 🚩
 
 The bottom line with Hibernate across these hops: OpenRewrite does the JDK-level stuff. Hibernate is manual work. Budget real time for it.
 
-Step 4: Build a Migration Plan That Won't Make Your Team Cry 📋
----------------------------------------------------------------
+## Step 4: Build a Migration Plan That Won't Make Your Team Cry 📋
 
 Here's the structure that worked across 15+ projects.
 
@@ -281,8 +268,7 @@ Change the JDK version. Run OpenRewrite. Update your build file `java.version` m
 
 Same process for each LTS hop. The first one is the hardest. By the third one your team is doing it in their sleep.
 
-The Things Nobody Tells You 🤫
-------------------------------
+## The Things Nobody Tells You 🤫
 
 **Your CI/CD pipeline needs updating too.** Forget to update your Docker base image and you're building with the new JDK but running with the old one in production. That's a fun Friday afternoon. Update the pipeline before you ship each hop.
 
@@ -292,8 +278,7 @@ The Things Nobody Tells You 🤫
 
 **Communicate with your team constantly.** Migration fatigue is real. People get frustrated when they're blocked by a Hibernate mapping error at 5pm on a Friday. Keep the team in the loop, celebrate each hop that ships, and make it clear this is progress not punishment.
 
-What's Waiting for You on the Other Side 🏆
--------------------------------------------
+## What's Waiting for You on the Other Side 🏆
 
 After 15+ migrations this is the part that still gets me every time.
 
@@ -318,13 +303,11 @@ public class RaceResult {
 record RaceResult(int round, String gp, int points) {}
 ```
 
-
 Virtual threads that let your app handle way more load with far less overhead. Pattern matching that makes your switch statements actually readable. Stream Gatherers that let you batch, slide, and group data without collector headaches.
 
 The language on JDK 21 is not the same language as JDK 7. It's better. Way better. And your team deserves to write it. ✨
 
-The Real Cost of Staying 💸
----------------------------
+## The Real Cost of Staying 💸
 
 Every month you stay on JDK 7:
 
@@ -335,13 +318,10 @@ Every month you stay on JDK 7:
 
 The migration isn't free. But staying isn't free either. The bill is just quieter.
 
-TL;DR 🦕
---------
+## TL;DR 🦕
 
 Don't jump, hop. Scan before you touch anything. Use OpenRewrite but don't trust it blindly. Update your build file manually. Update dependencies before the JDK. Budget real time for Hibernate. One project at a time. Ship each hop before starting the next.
 
 65 million years ago, the dinosaurs didn't have a choice. But you do! 🦖
 
 So please adapt, migrate, and survive!
-
-<br />

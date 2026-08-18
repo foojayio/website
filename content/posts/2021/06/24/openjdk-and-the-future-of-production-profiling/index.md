@@ -85,7 +85,6 @@ This means that different profilers probably want these wall-clock samples to be
 Event#commit(Thread)
 ```
 
-
 This would allow someone to build a profiler by simply periodically committing events on the threads it currently cares about. It would also allow building other kinds of profilers and sampling behaviours.
 
 Another way of accomplishing this would be to add an annotation to override default stuff captured by JFR in an event.
@@ -97,7 +96,6 @@ class MyEvent extends Event {
     Thread overrideThread;
 }
 ```
-
 
 An advantage with this variant is that you could potentially add more override behaviours that are handled by JFR over time.
 

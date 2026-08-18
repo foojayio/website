@@ -21,18 +21,14 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-
-
-→ Java Memory Architecture (Java Memory Model)
-----------------------------------------------
+## → Java Memory Architecture (Java Memory Model)
 
 The diagram below is the Java Memory Model for the Heap as well as the PermGen for any Java Application running in the Java Virtual Machine (JVM). The ratios are also provided to get a fair understanding of how the distribution of allowed memory is done across each of the generation types. All of the info is completely applicable up to Java 1.7 (inclusive). This diagram is also known as the 'Managed Area' of the memory model.  
 
 ![Image title](https://dzone.com/storage/temp/544006-untitled.jpg)  
 In addition to the above, there is a Stack Area, which can be configured using the -Xss option. This area holds the references on the heap, native references, pc registers, code cache, and local variables for all threads. This is also known as the 'Native Area' of the memory model.
 
-→ Managed Area of the Java Memory Model
----------------------------------------
+## → Managed Area of the Java Memory Model
 
 ### \[Young Generation/Nursery\] Eden Space
 
@@ -62,8 +58,7 @@ Other important and interesting flags related to the overall heap are \*\*-XX:Su
 
 The 'Permgen' is used to store the following information: Constant Pool (Memory Pool), Field \& Method Data and Code. Each of them related to the same specifics as their name suggests.
 
-→ Garbage Collection Algorithms
--------------------------------
+## → Garbage Collection Algorithms
 
 #### Serial GC (-XX:UseSerialGC): GC on Young Generation and Old Generation
 
@@ -85,8 +80,7 @@ As the name suggests, the CMS GC minimzes the pauses that are required for GC. I
 
 This is a parallel, concurrent, and incrementally compacting low-pause garbage collector. G1 was introduced in Java 7 with the ultimate vision to replace CMS GC. It divides the heap into multiple, equal sized regions and then performs GC, usually starting with the region that has less live data, hence "Garbage First".
 
-→ Most Common Out of Memory Issues
-----------------------------------
+## → Most Common Out of Memory Issues
 
 The most common out of memory issues, which all Java developers should know, are as follows:
 
@@ -101,18 +95,14 @@ The most common out of memory issues, which all Java developers should know, are
 * **Exception in thread "main": java.lang.OutOfMemoryError:** *(Native method)* .  
   This indicates that a Native method has met with an allocation failure. The root cause was that the error occurred in JNI rather than in the code executing inside the JVM. *When the native code does not check for memory allocation errors, then the application **crashes** instead of going out of memory.*
 
-♦ Definition of Memory Leak
----------------------------
+## ♦ Definition of Memory Leak
 
 \> Think of memory leakage as a disease and the OutOfMemoryError as a symptom. But not all OutOfMemoryErrors imply memory leaks, and not all memory leaks manifest themselves as OutOfMemoryErrors.
-
-<br />
 
 \*\*From \[Wikipedia\](https://en.wikipedia.org/wiki/Memory_leak)\*\*:  
 In Computer Science, a memory leak is a type of resource leak that occurs when a computer program incorrectly manages memory allocations in such a way that memory, which is no longer needed, is _not_ released. In Object-Oriented Programming, a memory leak may happen when an object is stored in memory but cannot be accessed by the running code.
 
-♦ Common Definitions of Memory Leak in Java
--------------------------------------------
+## ♦ Common Definitions of Memory Leak in Java
 
 A memory leak occurs when object references that are no longer needed are unnecessarily maintained.
 
@@ -134,8 +124,7 @@ Some of the most common causes of Memory Leaks are:
 
 I recommend the usage of Visual VM bundled with the JDK to start debugging your memory leak issues.
 
-♦ Common Debugging of Memory Leaks
-----------------------------------
+## ♦ Common Debugging of Memory Leaks
 
 1. NetBeans Profiler
 

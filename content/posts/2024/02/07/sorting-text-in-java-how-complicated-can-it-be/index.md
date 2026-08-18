@@ -24,8 +24,7 @@ frozen: false
 
 Text is represented by the *String* class in Java. In this article we'll explore how to sort String, the advantages and drawbacks of each possibility.
 
-Level 1: Comparable
--------------------
+## Level 1: Comparable
 
 The class String implements *Comparable* so sorting a list of String is as simple as
 
@@ -33,7 +32,6 @@ The class String implements *Comparable* so sorting a list of String is as simpl
 List<String> textList = new ArrayList<>(List.of("test","test11","test2","Test4","test3","test5","tést2","test2","3test","testa","test2a","test4a","test2b"));
 Collections.sort(textList);
 ```
-
 
 =\> **\[3test, Test4, test, test11, test2, test2, test2a, test2b, test3, test4a, test5, testa, tést2\]**
 
@@ -54,13 +52,11 @@ Another variant of this is
 Collections.sort(textList, String.CASE_INSENSITIVE_ORDER);
 ```
 
-
 which fixes the case sensitivity problem.  
 
 =\> **\[3test, test, test11, test2, test2, test2a, test2b, test3, Test4, test4a, test5, testa, tést2\]**
 
-Level 2: Collator
------------------
+## Level 2: Collator
 
 To sort text in a more accurate way, Java includes the class *java.text.[Collator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/Collator.html)* (and its direct sub-class *java.text.[RuleBasedCollator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/RuleBasedCollator.html)*)
 
@@ -68,7 +64,6 @@ To sort text in a more accurate way, Java includes the class *java.text.[Collato
 Collator collator = Collator.getInstance();
 Collections.sort(textList, collator);
 ```
-
 
 Beware that sorting could be locale sensitive so if you want a consistent result you may prefer using `Collator.getInstance(Locale);`.
 
@@ -91,7 +86,6 @@ collator.setStrength(Collator.TERTIARY);
 Collections.sort(textList, collator);
 ```
 
-
 =\> **\[3test, test, test11, test2, test2, tést2, test2a, test2b, test3, Test4, test4a, test5, testa\]**
 
 Here is some code to better understand the different collator strengths:
@@ -108,9 +102,7 @@ collator.compare("test", "tést"); => -1
 collator.compare("test", "tEst"); => -1
 ```
 
-
-Level 3: External library
--------------------------
+## Level 3: External library
 
 A good resource for different sorting text algorithms with numbers is the [natural order benchmark](https://github.com/ChristianLutz/natural-order-benchmark/) GitHub project from Christian Lutz.
 
@@ -130,8 +122,7 @@ I noted that a few algorithms were using `Character.isDigit()` which was a big p
 * Performance varies based on library used
 * Can be quite complex to read how they work
 
-Level 4: Custom algorithm
--------------------------
+## Level 4: Custom algorithm
 
 For my file manager [Ant Commander Pro](https://www.antcommander.com) and for my text utilities software [Japplis Toolbox](https://www.japplis.com/toolbox/), I wanted a fast and accurate sorting algorithm.
 
@@ -152,7 +143,6 @@ public static Comparator<String> stringComparator() {
 }
 ```
 
-
 For the compare, I like to be on the safe side and if you use a list of String or a String\[\] it may have many values that could be empty or null. So adding a method to take care of empty and null values first.
 
 ```java
@@ -167,7 +157,6 @@ public static int compareStrings(String s1, String s2) {
     return compare;
 }
 ```
-
 
 Now, we need a method to compare characters.
 
@@ -212,7 +201,6 @@ private static Collator getCollactor(int strenght) {
     return Collator.getInstance();
 }
 ```
-
 
 And now, the main compare method that will handle numbers:
 
@@ -260,15 +248,11 @@ public static int compareWithNumbers(String s1, String s2) {
 }
 ```
 
-
 ```java
 Collections.sort(textList, stringComparator());
 ```
 
-
 =\> **\[3test, test, test2, test2, tést2, test2a, test2b, test3, Test4, test4a, test5, test11, testa\]**
-
-<br />
 
 #### Advantages:
 
@@ -285,7 +269,3 @@ Collections.sort(textList, stringComparator());
 
 ![File Manager Ant Commander Pro using the sorting algorithm with numbers](sorting-ant-commander-pro-invoices.png) File Manager Ant Commander Pro using the sorting algorithm with files with numbers  
 [![](sorting-toolbox-test-457x1024.png)](https://www.japplis.com/toolbox/) Text Utility Japplis Toolbox applying the sort algorithm on text with numbers
-
-<br />
-
-<br />

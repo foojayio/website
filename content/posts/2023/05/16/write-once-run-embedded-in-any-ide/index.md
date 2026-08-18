@@ -26,8 +26,7 @@ frozen: false
 
 **Having written many Java GUI applications, I thought it would be cool to run them embedded in IntelliJ IDEA, Eclipse and NetBeans. I didn't want to write three plugins per application so I came up with this solution.**
 
-The embedded panel criteria
----------------------------
+## The embedded panel criteria
 
 To convert my Java Swing applications to run embedded in an IDE, I had to put the user interface in a panel with minimal implementation changes. I came up with these *should ideally* criteria:
 
@@ -44,8 +43,7 @@ Hopefully Java has a class for this: **`JApplet`**
 
 Applets were designed (in 1995) to run embedded Java applications in an HTML browser, but nothing in the API prevents them to run in an application that is not an HTML browser.
 
-Let's write our monitoring applet
----------------------------------
+## Let's write our monitoring applet
 
 Let's write and deploy an application that monitors localhost and shows us when it's ready for testing.  
 
@@ -196,7 +194,6 @@ public class MonitorSite extends JApplet {
 }
 ```
 
-
 ### Let's analyze the code
 
 * No external libraries needed in the imports
@@ -220,8 +217,6 @@ To **run** the application in your IDE, install and start Applet Runner, use the
 
 <img decoding="async" class="size-medium wp-image-66520 aligncenter" src="netbeans-monitor-700x431.png" alt="Monitoring applet running in NetBeans" width="700" height="431">
 
-<br />
-
 It is also possible to specify another class file or to add external libraries or to pass parameters to the applet. For this you need to create an HTML file with an [\<applet\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet) tag or a JNLP file with an [\<applet-desc\>](https://docs.oracle.com/javase/tutorial/deployment/deploymentInDepth/embeddingJNLPFileInWebPage.html) tag.
 
 ```html
@@ -236,16 +231,11 @@ It is also possible to specify another class file or to add external libraries o
 </html>
 ```
 
-
 <img decoding="async" class="aligncenter size-medium wp-image-66522" src="eclipse-monitor-700x405.png" alt="Monitoring applet running in Eclipse IDE" width="700" height="405">
-
-<br />
 
 If you have JDK 18 or higher installed, you can test the monitoring by executing *jwebserver -p 8080*.
 
 <img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-66521" src="intellij-monitor-700x456.png" alt="Monitoring applet in JetBrains IntelliJ IDEA" width="700" height="456">
-
-<br />
 
 For the **distribution**, copy the html and class files on a network drive or website and send the location of the file to your colleagues.
 
@@ -257,8 +247,7 @@ For the **distribution**, copy the html and class files on a network drive or we
 * If you try to open an http or https applet that is not in your bookmarks, you will get a warning window before.
 * You can only run one applet at a time in Applet Runner. Applet Runner Pro allows multiple applets running.
 
-For the lazy ones
------------------
+## For the lazy ones
 
 Applet Runner is distributed with more than 100 applet bookmarks. And more are coming soon, such as [Control Dashboard](https://www.japplis.com/control-dashboard/) to monitor websites 😉.  
 
@@ -272,8 +261,7 @@ Here is a small overview:
 
 {{< youtube n2L4P4_ek4w >}}
 
-Links
------
+## Links
 
 * [Applet Runner website](https://www.japplis.com/applet-runner/)
 * [Applet Runner plugin in **JetBrains** Marketplace](https://plugins.jetbrains.com/plugin/16682-applet-runner/)

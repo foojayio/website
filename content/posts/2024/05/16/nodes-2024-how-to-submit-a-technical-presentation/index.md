@@ -27,8 +27,7 @@ Today, we will look at how to submit a technical presentation for an event and g
 
 Let's get started!
 
-Event Research
---------------
+## Event Research
 
 No matter what event you are interested in, do your research! Find out about the event, their goals, the audience, and the types of presentations they are looking for. This information will help you decide if the event is a good fit, as well as help you tailor your submission to the attendees.
 
@@ -38,8 +37,7 @@ NODES 2024 is devoted to technical presentations related to graph data and techn
 
 Now let's decide whether to speak.
 
-Speakers Wanted!
-----------------
+## Speakers Wanted!
 
 Deciding to submit a presentation to an event is a commitment. It can be intimidating to put yourself out there and share your knowledge with others, plus the effort and time it take to build and polish your content. But it can also be a rewarding and invigorating experience. I always remind myself that my experience and learning journey is unique and can hopefully inspire or help someone else. Everyone can contribute value to a conversation!
 
@@ -49,8 +47,7 @@ NODES 2024 will be virtual, so no travel or logistics are required. The event wi
 
 So, if you are thinking about submitting a presentation to an event, go for it! And if you have decided to submit, congratulate yourself on being courageous and taking the first step. If you're still on the fence, take some time to think about it and consider reaching out to the event organizers or other speakers for advice. I'm always happy to chat about speaking and help others get started!
 
-Deciding on a Topic
--------------------
+## Deciding on a Topic
 
 Choosing a topic for your presentation can be challenging. You want to pick something that you are passionate about, that you have experience with, or want to learn about. Try to pick things you like or love. That enthusiasm will come through in your presentation and help keep you motivated as you prepare. If you're interested in the topic, it's likely that someone else will be, too.
 
@@ -70,8 +67,7 @@ For NODES 2024, the event is focused on graph data and technologies to interact 
 
 This list could continue on, but hopefully these give some good starting points. Once you have a topic in mind, it's time to write a session abstract and submit it!
 
-Session Abstract and Submission
--------------------------------
+## Session Abstract and Submission
 
 The session abstract is a short description of your presentation that will be used to promote your session to attendees. It should be clear, brief, and interesting. It should give attendees an idea of what to expect from your presentation and why they should attend.
 
@@ -110,8 +106,7 @@ For NODES 2024, all of these things apply, but there are a couple of additional 
 
 Also, NODES is meant to showcase community stories and real-world uses, so be sure to include your honest, unique experience or perspective in your abstract. Sessions are geared for technical audiences, so try to include aspects such as architecture, demos, code, tools, solutions, and so on. Even if you don't write live code, you can still show code snippets or tool screenshots to help illustrate your points.
 
-Wrapping Up!
-------------
+## Wrapping Up!
 
 Today, we walked through how to submit a technical presentation for an event. We discussed doing your research, deciding on a topic, writing a session abstract, and preparing for your presentation. We also covered some tips and tricks for writing a valuable abstract that will hopefully increase your chances of being selected.
 
@@ -119,8 +114,7 @@ You can find out more about NODES 2024 at [dev.neo4j.com/nodes24](https://dev.ne
 
 Happy coding and best wishes on your submissions!
 
-Resources
----------
+## Resources
 
 * Event page: [NODES 2024](https://dev.neo4j.com/nodes24)
 * CfP page: [NODES 2024 CfP](https://sessionize.com/nodes-2024/)

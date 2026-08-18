@@ -42,7 +42,6 @@ try {
 }
 ```
 
-
 ### Exception table
 
 The resulting bytecode includes an interesting section in the Code attribute called the Exception table. Each method can have its own exception table, and it's only present when relevant. If there is no exception-handling logic in the method, it won't have an exception table.
@@ -56,7 +55,6 @@ Exception table:
        2    16    32   any
       22    26    32   any
 ```
-
 
 The numbers point to the addresses of the bytecode instructions. Each line in this table shows a range of bytecode instructions (`from` and `to`) that is guarded by an exception handler. The handler itself is also just a set of bytecode instructions, and the `target` column points to the address where the handling code starts. `type` simply means the type of exception that can be handled by the specified handler.
 
@@ -87,7 +85,6 @@ To see what exactly these addresses are pointing to, let's take a look also at t
 38: return
 ```
 
-
 Let me walk you through.
 
 Instructions `0` - `2` are responsible for creating a variable `int a = 0;`.
@@ -111,7 +108,6 @@ Exception table:
        2    16    32   any
       22    26    32   any
 ```
-
 
 We encountered `athrow` at address `15`. This address is covered by the first two lines of the table, as it falls within the range \[`2`, `16`).
 

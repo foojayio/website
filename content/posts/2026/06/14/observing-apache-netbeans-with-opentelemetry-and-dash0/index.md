@@ -19,8 +19,7 @@ frozen: false
 
 *What happens when you point an observability agent at your IDE rather than your application?*
 
-The question nobody thinks to ask
----------------------------------
+## The question nobody thinks to ask
 
 Observability is something we do to our applications. We instrument services, add trace context to HTTP requests, collect JVM heap metrics, ship logs to a backend. The IDE we use to write that instrumentation is --- by convention --- invisible. It just runs. When it is slow, we assume it is busy. When it crashes, we restart it. We have no data.
 
@@ -28,8 +27,7 @@ But Apache NetBeans is a Java application. It runs on the JVM. It makes HTTP req
 
 I tried it. This is what I found.
 
-Why this is more than a curiosity
----------------------------------
+## Why this is more than a curiosity
 
 Before getting into the mechanics, it is worth naming the three reasons this matters beyond the novelty.
 
@@ -37,8 +35,7 @@ Before getting into the mechanics, it is worth naming the three reasons this mat
 * **Startup time is a tax paid every day.** If your IDE takes 40 seconds to start, and you restart it three times per day, that is two minutes of waiting per developer per day. Across a team of 20, that is 40 developer-minutes daily, or roughly 170 hours per year. With startup traces you can see exactly which module takes the longest to initialise and where the time goes.
 * **The OTel agent is zero-code instrumentation.** I did not write a single line of NetBeans plugin code to get this working. One JAR, three environment variables, one config file change. That is the promise of the OpenTelemetry Java agent --- it instruments any JVM process at the bytecode level without requiring source access or recompilation. NetBeans is not special. The same approach works on any Java application you have ever shipped.
 
-The setup
----------
+## The setup
 
 ### What I started with
 
@@ -51,7 +48,6 @@ The setup
 ```
 wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 ```
-
 
 ### Step 2: Edit `netbeans.conf`
 
@@ -72,7 +68,6 @@ netbeans_default_options="${netbeans_default_options} \
     -J-Dotel.instrumentation.java-http-client.enabled=false"
 ```
 
-
 The two disabled instrumentations (`okhttp`, `java-http-client`) prevent a recursive loop: the OTel agent uses OkHttp internally to export telemetry, and without this exclusion it would attempt to instrument its own export calls, creating a cycle.
 
 ### Step 3: Start NetBeans
@@ -81,18 +76,15 @@ The two disabled instrumentations (`okhttp`, `java-http-client`) prevent a recur
 netbeans --jdkhome /path/to/jdk21<code class="language-sh"></code>
 ```
 
-
 The agent announces itself on startup:
 
 ```
 [otel.javaagent] INFO opentelemetry-javaagent - version: 2.28.1
 ```
 
-
 From that point on, the IDE runs normally. The agent operates invisibly, collecting data in the background.
 
-What arrives in Dash0
----------------------
+## What arrives in Dash0
 
 ### Logs: the IDE's internal monologue
 
@@ -154,8 +146,7 @@ For comparison, the stub test process (essentially an empty JVM) had 21 threads.
 
 **CPU time**: \~24 seconds of CPU consumed during a 20-second wall-clock run. The ratio above 1× is entirely the OTel agent's startup cost --- bytecode instrumentation of the JVM's loaded classes. After the first 10--15 seconds this overhead disappears and the agent's steady-state CPU footprint is negligible.
 
-What this enables
------------------
+## What this enables
 
 With this setup in place, several things become possible that were not before.
 
@@ -164,8 +155,7 @@ With this setup in place, several things become possible that were not before.
 * **Startup regression detection.** If a new NetBeans release or a new plugin increases startup time by 15 seconds, the change would be visible in the log timestamps --- the delta between the first log record and the `USG_LOOK_AND_FEEL` record (which fires when the main window is ready). Over a team of 20 developers restarting 3 times per day, a 15-second regression is 15 developer-hours per week of invisible tax.
 * **Correlation with application services.** Because the IDE and your application services use the same OTel backend, you can correlate IDE-side events with service-side events. If a developer's Maven build triggers a CI pipeline that causes elevated load on a staging service, both sides of that interaction are visible in the same observability dataset.
 
-What comes next
----------------
+## What comes next
 
 The zero-code agent approach gives us JVM metrics, outbound HTTP spans, and bridged log records. The next layer is a NetBeans module --- a proper plugin that registers a `ModuleInstall.restored()` lifecycle hook and emits spans with business-meaningful attributes:
 
@@ -175,8 +165,7 @@ The zero-code agent approach gives us JVM metrics, outbound HTTP spans, and brid
 
 The internal `TIMER` logger is particularly interesting. NetBeans already instruments itself for performance measurement; it just discards the data after displaying it locally in the Timers module window. Intercepting those `LogRecord` entries and forwarding them as OTel spans would give you a full startup trace --- every module initialisation timed to the millisecond --- without modifying any NetBeans source code beyond the one new plugin.
 
-The broader point
------------------
+## The broader point
 
 OpenTelemetry's value is that it is not application-specific. The JVM does not know or care whether the code running on it is a REST service, a batch job, or an IDE. The agent instruments bytecode. The protocol speaks HTTP or gRPC. The backend stores spans and metrics.
 

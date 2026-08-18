@@ -21,14 +21,11 @@ The following four short videos will take you step-by-step through installing, w
 
 {#more-36262}
 
-Introduction to Payara Server
------------------------------
+## Introduction to Payara Server
 
 Learn how to write a simple Hello World application and deploy it to Payara Server.
 
 {{< youtube KEsus1Ihjs4 >}}
-
-<br />
 
 **Install Software**
 
@@ -41,8 +38,6 @@ Four Software Requirements:
 
 {{< youtube 50ujuQfho0E >}}
 
-<br />
-
 **Start Payara Server**
 
 Two Methods of Starting Payara Server:
@@ -51,8 +46,6 @@ Two Methods of Starting Payara Server:
 2. Using NetBeans
 
 {{< youtube tl8UbAETM68 >}}
-
-<br />
 
 **Deploy App on Payara Server**
 
@@ -63,8 +56,6 @@ Three Methods to Deploy an App on Payara Server:
 3. Through the Admin Console
 
 {{< youtube XV1_LHUlM3s >}}
-
-<br />
 
 #### As an alternative, you can also follow these instructions...
 

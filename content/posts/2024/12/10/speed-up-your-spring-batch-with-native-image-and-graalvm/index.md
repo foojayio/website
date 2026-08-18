@@ -36,8 +36,7 @@ In this article, you'll learn how to build a Spring Batch application that reads
 
 🔵⚪⚪⚪⚪⚪⚪⚪
 
-What is a Native Image?
------------------------
+## What is a Native Image?
 
 **A Native Image is a standalone executable** that includes everything the application needs to run *(classes, libraries, and the JVM itself)* in one package. Unlike JVM-based JAR files, **native images do not require a JVM at runtime**, which means:
 
@@ -45,14 +44,11 @@ What is a Native Image?
 * Lower memory usage (since there's no JVM)
 * There is no need for JVM warm-up (perfect for short-lived apps like batch jobs)
 
-🏆 What is GraalVM?
--------------------
+## 🏆 What is GraalVM?
 
 **GraalVM is a universal virtual machine** that can execute applications written in Java, Kotlin, Scala, and other languages. **One of its** most powerful **features is the Native Image capabilit** y, which converts Java applications into ahead-of-time (AOT) compiled executables. **This means the Java bytecode is turned into platform-specific machine code**.
 
 When you compile a Spring Boot application into a native image, you remove the need for the JVM, which leads to instant start times and minimal resource usage.
-
-
 
 🔵🔵⚪⚪⚪⚪⚪⚪
 
@@ -76,8 +72,6 @@ Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114
 
 Run a PostgreSQL container with Docker  
 `docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres`
-
-
 
 🔵🔵🔵⚪⚪⚪⚪⚪
 
@@ -115,7 +109,6 @@ public class Billing {
     private int calls;
     private int messages;
 ```
-
 
 #### The batch job with its tasks: reading a CSV, logging it, and writing it to DB
 
@@ -196,10 +189,7 @@ public class BillingJobConfig {
 }
 ```
 
-
 Full complete code: <https://github.com/vinny59200/spring-batch-native-image>
-
-
 
 🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -208,8 +198,6 @@ Commands to Compile
 1. Open Visual Code, open a terminal
 2. Clear previous builds: `mvn clean package`
 3. Compile to Native Image: `./mvnw -Pnative native:compile -DskipTests`*(It is a bit long --1 or 2min)*
-
-
 
 🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -225,16 +213,14 @@ Run it using the compiled native image:
 
 `./target/nativeBatch`**⏱️ Execution time: \~0.2 seconds**
 
-Results Summary
----------------
+## Results Summary
 
 | 𝐄𝐗𝐄𝐂𝐔𝐓𝐈𝐎𝐍 | 𝐖𝐈𝐓𝐇𝐎𝐔𝐓 𝐍𝐀𝐓𝐈𝐕𝐄 | 𝐖𝐈𝐓𝐇 𝐍𝐀𝐓𝐈𝐕𝐄 |
 |--------------------|-----------------------------|-----------------------|
 | Startup Time       | 4 seconds                   | 0.2 seconds           |
 | Resource Usage     | Higher (JVM)                | Lower (Native)        |
 
-📊 Why Native Image Wins
-------------------------
+## 📊 Why Native Image Wins
 
 | 𝐀𝐒𝐏𝐄𝐂𝐓 | 𝐖𝐈𝐓𝐇𝐎𝐔𝐓 𝐍𝐀𝐓𝐈𝐕𝐄 |  𝐖𝐈𝐓𝐇 𝐍𝐀𝐓𝐈𝐕𝐄  |
 |--------------|-----------------------------|-------------------------|
@@ -242,8 +228,6 @@ Results Summary
 | Memory Usage | High (JVM required)         | Low (No JVM)            |
 | Footprint    | Requires JVM + JAR          | Single Executable       |
 | Use Case     | Long-running Jobs           | Short, On-Demand Jobs   |
-
-
 
 🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -258,22 +242,12 @@ By **using GraalVM Native Imag** e, you can build **batch jobs** that **are fast
 **If you're dealing with micro-batch jobs that run for seconds, Native Image is a must-have.** If your batch jobs are long-lived (running for hours), the benefit is less significant, but for fast, one-shot batch jobs, Native Image is unbeatable.
 > **🚀 Switch to Native Image for Spring Batch. Your jobs will love it. 🚀**
 
-
-
 🔵🔵🔵🔵🔵🔵🔵⚪
 
 {{< youtube kFVwJSKVckA >}}
-
-<br />
-
-
 
 🔵🔵🔵🔵🔵🔵🔵🔵
 
 * <https://foojay.io/today/prevent-ldap-injection-in-java-with-springboot/>
 * <https://foojay.io/today/a-simple-service-with-spring-boot/>
 * <https://youtu.be/_oXnnQcD_wc> (Legal JVM Dopes For Your Apps 🇬🇧 --- Dmitri Chuyko)
-
-<br />
-
-<br />

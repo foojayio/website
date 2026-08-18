@@ -38,14 +38,12 @@ Now let's delete the class file. You'll understand why in a moment:
 rm HelloUniverse.class
 ```
 
-
 Now if you run the class only with the `java` interpreter, without compilation, as in:
 
 ```
 > java HelloUniverse.java
 Hello foojay!
 ```
-
 
 You should see the same result as before: it runs.
 

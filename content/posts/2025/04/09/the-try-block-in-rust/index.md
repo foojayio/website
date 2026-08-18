@@ -22,8 +22,7 @@ frozen: false
 
 I wrote previously about [libs for error management in Rust](https://blog.frankel.ch/error-management-rust-libs/). This week, I want to write about the `try` block, an experimental feature.
 
-The limit of the `?` operator
------------------------------
+## The limit of the `?` operator
 
 Please check the above article for a complete refresher on error management in general and the `?` operator in particular. In short, `?` allows to hook into a function call that returns a `Result`:
 
@@ -41,14 +40,12 @@ fn main() {
 }
 ```
 
-
 The output is the following:
 
 ```
 Ok(3)
 Err(ParseIntError { kind: InvalidDigit })
 ```
-
 
 Note that the defining function's signature *must* return a `Result` or an `Option`. The following block doesn't compile:
 
@@ -58,14 +55,11 @@ fn add(str1: &str, str2: &str) -> i8 {
 }
 ```
 
-
 ```
 the `?` operator can only be used in a function that returns `Result` or `Option`
 ```
 
-
-The verbose alternative
------------------------
+## The verbose alternative
 
 We must manually unwrap to return a non-wrapper type, *e.g.* , `i8` instead of `Option`.
 
@@ -78,14 +72,12 @@ fn add(str1: &str, str2: &str) -> i8 {
 }
 ```
 
-
 1. Define `Result` variables
 2. Manually checks if any of the variables contains an error, *i.e.*, the parsing failed
 3. Return a default value since we cannot get a `Result`. In this case, it's not a great idea, but it's for explanation's sake
 4. Unwrap with confidence
 
-The `try` block to the rescue
------------------------------
+## The `try` block to the rescue
 
 The sample above works but is quite lengthy. The `try` block is an *experimental* approach to make it more elegant. It allows "compacting" all the checks for errors in a single block:
 
@@ -103,7 +95,6 @@ fn add(str1: &str, str2: &str) -> i8 {
 }
 ```
 
-
 1. Enable the experimental feature
 2. Use the `?` operator though the defining function doesn't return `Result`
 3. Check for errors only once
@@ -114,7 +105,6 @@ Alas, the code doesn't compile:
 ```
 the `?` operator can only be applied to values that implement `Try`
 ```
-
 
 `i8` doesn't implement `Try`. Neither `i8` nor `Try` belong to our crate; a custom implementation would require the use of the wrapper-type pattern. Fortunately, a couple of types already implement `Try`: `Result`, `Option`, `Poll`, and `ControlFlow`.
 
@@ -128,14 +118,12 @@ fn add(str1: &str, str2: &str) -> i8 {
 }
 ```
 
-
 1. The compiler cannot infer the type
 2. Using `?` on `Result` inside the `try` block is now allowed
 
 ![](try-api.png)
 
-Conclusion
-----------
+## Conclusion
 
 I learned about the `try` block in Java over twenty years ago. Java needs it because exceptions are at the root of its error-handling system; Rust doesn't because it uses Functional Programming for its error handling - mainly `Result`.
 
@@ -147,7 +135,5 @@ The `?` operator builds upon the `Result` type to allow short-circuiting in func
 * ["The Rust Unstable Book: try_blocks"](https://doc.rust-lang.org/beta/unstable-book/language-features/try-blocks.html)
 * [The Rust RFC Book](https://rust-lang.github.io/rfcs/3058-try-trait-v2.html)
 * [Extending Rust's Effect System](https://blog.yoshuawuyts.com/extending-rusts-effect-system/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/try-block-rust/) on April 21^st^, 2024*

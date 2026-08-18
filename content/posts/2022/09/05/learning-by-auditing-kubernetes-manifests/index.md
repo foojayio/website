@@ -43,8 +43,7 @@ I knew about some of them, even though I don't intend to fix them in my context.
 
 Others are entirely new to me. I'm happy to share here my (or not).
 
-Prefer digests to tags
-----------------------
+## Prefer digests to tags
 
 * *Rule* : [CKV_K8S_43 - Ensure images are selected using a digest](https://docs.bridgecrew.io/docs/bc_k8s_39)
 * *Severity*: Medium
@@ -55,8 +54,7 @@ Tags are just pointers to specific images. Publishers can point an existing tag 
 
 For the demo, I'm building images on my local machine so that keeping the tag makes sense. I can update the dependencies' version, rebuild, and get the latest built image.
 
-Explicitly disallow privilege escalation
-----------------------------------------
+## Explicitly disallow privilege escalation
 
 * *Rule* : [CKV_K8S_20 - Ensure containers do not run with AllowPrivilegeEscalation](https://docs.bridgecrew.io/docs/bc_k8s_19)
 * *Severity*: Medium
@@ -70,8 +68,7 @@ To summarize: **by default, a child process of a container can gain more privile
 
 It's a pretty serious issue. Note that the Pod Security Policy itself has been deprecated in v1.21 and will be removed in v1.25. Until that version, one should always explicitly set the attribute to `false`.
 
-Set the security context
-------------------------
+## Set the security context
 
 * *Rule* : [CKV_K8S_30 - Ensure securityContext is applied to pods and containers](https://docs.bridgecrew.io/docs/bc_k8s_28)
 * *Severity*: Low
@@ -90,8 +87,7 @@ Some of them are described in more detail in the sections below, but a complete 
 
 Alternatively, Snykt wrote a [great explanatory article](https://snyk.io/blog/10-kubernetes-security-context-settings-you-should-understand/) on the most important ones.
 
-Don't run as root
------------------
+## Don't run as root
 
 * *Rule* : [CKV_K8S_23 - Minimize admission of root containers](https://docs.bridgecrew.io/docs/bc_k8s_22)
 * *Severity*: Medium
@@ -114,9 +110,7 @@ spec:
     runAsUser: <user>
 ```
 
-
-Set a high UID user
--------------------
+## Set a high UID user
 
 * *Rule* : [CKV_K8S_40 - Ensure containers run with a high UID to avoid host conflict](https://docs.bridgecrew.io/docs/bc_k8s_37)
 * *Severity*: Low
@@ -133,9 +127,7 @@ spec:
     runAsUser: <+10,000>
 ```
 
-
-Set the seccomp profile
------------------------
+## Set the seccomp profile
 
 * *Rule* : [CKV_K8S_31 - Ensure seccomp profile is set to Docker/Default or Runtime/Default](https://docs.bridgecrew.io/docs/bc_k8s_30)
 * *Severity*: Low
@@ -159,7 +151,6 @@ metadata:
     seccomp.security.alpha.kubernetes.io/pod: "runtime/default"
 ```
 
-
 * For Kubernetes 1.19+, the `securityContext` attribute features a `secompProfile`:
 
 ```yaml
@@ -175,9 +166,7 @@ spec:
     ...
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 If you want to enforce policies on `seccomp`, please check the documentation relative to [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/), or [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), depending on your Kubernetes version.
 

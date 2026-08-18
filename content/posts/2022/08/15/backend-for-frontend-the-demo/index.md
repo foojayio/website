@@ -26,8 +26,7 @@ In short, it offers a single facade over multiple backend parts.
 
 Moreover, it provides each client type, *e.g.,* desktop or mobile, exactly the data that it needs and not more in the format required by this client type.
 
-The use-case
-------------
+## The use-case
 
 Imagine the following use-case.
 
@@ -43,8 +42,7 @@ Depending on the client, we want more or less data. For example, on a client wit
 
 Every client requires its specific data and for performance reasons, we want to fetch them in a single call. It sounds like a use-case for .
 
-Setting up the demo
--------------------
+## Setting up the demo
 
 In order to simplify things, I'll keep only three sources of data: products, news and technical data. Three unrelated data sources are enough to highlight the issue.
 
@@ -62,7 +60,6 @@ def home():
   }
 ```
 
-
 1. Somehow get the data internally, *e.g.*, from the database
 
 At this point, everything is fine. We can provide different data depending on the client:
@@ -72,8 +69,7 @@ At this point, everything is fine. We can provide different data depending on th
 
 As it doesn't add anything to the demo, I won't provide different data depending on the client in the following.
 
-Migrating to microservices
---------------------------
+## Migrating to microservices
 
 At one point, the organization decides to migrate to a microservices architecture. The reason might be because the CTO read about microservices in a blog post, because the team lead wants to add microservices on its resume, or even because the development grew too big and the organization do need to evolve. In any case, the monolith has to be split in *two* microservices: a catalog providing products and a newsfeed providing... news.
 
@@ -89,7 +85,6 @@ def get_products():
     return jsonify(products)     #2
 ```
 
-
 1. Each microservice has its own `debug` endpoint
 2. The payload is not an object anymore but an array
 
@@ -103,13 +98,11 @@ def get_news():
     return jsonify(news)         #1
 ```
 
-
 1. As above
 
 Now, each client needs two calls, and filter out data that are not relevant.
 
-Dedicated backend-for-frontend
-------------------------------
+## Dedicated backend-for-frontend
 
 Because of the issues highlighted above, a solution is to develop one application that does the aggregation and filtering. There should be one for each client type, and it should be cared for by the same team as the client. Again, for this demo, it's enough to have a single one that only does aggregation.
 
@@ -130,13 +123,11 @@ def home():
     }
 ```
 
-
 1. Get data
 2. Get debug info
 3. The returned JSON should be designed for easy consumption on the client side. To illustrate it, I chose for the debug data to be nested instead of top-level.
 
-Backend-for-frontend at the API Gateway level
----------------------------------------------
+## Backend-for-frontend at the API Gateway level
 
 If you're offering APIs, whether internally or to the outside world, chances are high that you're already using an API Gateway. If not, you should probably [deeply consider](https://apisix.apache.org/docs/apisix/terminology/api-gateway/) starting to. In the following, I assume that you do use one.
 
@@ -153,7 +144,6 @@ routes:
       bff: ~                   #2
       public-api: ~            #2
 ```
-
 
 1. For demo purposes, I preferred to set it at the root instead of `/bff/*`
 2. Declare the two plugins. Note that I'm using the [stand-alone mode](https://apisix.apache.org/docs/apisix/stand-alone/).
@@ -172,7 +162,6 @@ local _M = {                           --1
 
 return _M                              --4
 ```
-
 
 1. The table needs to be named `_M`
 2. In this scenario, `priority` is irrelevant as no other plugins are involved (but `public_api`)
@@ -193,15 +182,13 @@ function _M.api()
 end
 ```
 
-
 Now, we have to define the `fetch_all_data` function. It's only a matter of making HTTP calls to the catalog and newsfeed microservices. Have a look at [the code](https://github.com/ajavageek/backend-for-frontend/blob/master/bff_plugin/init.lua#L24-L52) if you're interested in the exact details.
 
 At this point, the (single) client can query `http://localhost:9080/` and get the complete payload.
 
 In a "real life" microservices-based organization, every team should be independent of each other. With this approach, each can develop its own BFF as a plugin and deploy it independently in the gateway.
 
-Bonus: a poor man's BFF
------------------------
+## Bonus: a poor man's BFF
 
 The microservices architecture creates two problems for clients:
 
@@ -240,7 +227,6 @@ In essence, the client would need to send the following payload to a previously 
     ]
 }
 ```
-
 
 The response will in turn look like:
 
@@ -297,11 +283,9 @@ The response will in turn look like:
 ]
 ```
 
-
 It's up to the client to filter out unnecessary data. It's not as good as true BFF, but we still managed to make a single call out of 4.
 
-Conclusion
-----------
+## Conclusion
 
 A microservices architecture brings a ton of technical issues to cope with.
 

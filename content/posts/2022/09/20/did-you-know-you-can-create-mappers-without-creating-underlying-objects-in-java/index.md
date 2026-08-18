@@ -48,7 +48,6 @@ public final class Security extends SelfDescribingMarshallable {
 }
 ```
 
-
 The SelfDescribingMarshallable is basically a serialization marker.
 
 #### Implementing an IntMapper
@@ -83,7 +82,6 @@ public class IntMapper<V> extends SelfDescribingMarshallable {
 }
 ```
 
-
 That's it!
 
 We have created a reusable mapper with no object creation overhead with reasonable query performance.
@@ -114,13 +112,11 @@ public class SecurityLookup {
 }
 ```
 
-
 As expected, the program will produce the following output when run:
 
 ```
 security100 = Security{id=100, averagePrice=45, count=2}
 ```
-
 
 #### Binary Search Method Implementation
 
@@ -144,7 +140,6 @@ int binarySearch(final int key) {
 }
 ```
 
-
 Unfortunately, we cannot use Arrays::binarySearch or Collections::binarySearch. One reason is that methods like these would create additional objects upon querying.
 
 #### Other Key Types
@@ -155,7 +150,6 @@ If we want to use other types like CharSequence or other reference objects, ther
 values.sort(
     comparing(Security::getId, CharSequenceComparator.INSTANCE));
 ```
-
 
 More generally, if the key reference object is of type K, then the binary search method above can easily be modified to use an extractor of type Function instead and an added Comparator parameter.
 
@@ -169,13 +163,11 @@ Sending IntMapper objects over the wire without object creation requires special
 private final transient List buffer = new ArrayList();
 ```
 
-
 We also have to override the IntMapper::readMarshallable method and include:
 
 ```java
 wire.read("values").sequence(values, buffer, Security::new);
 ```
-
 
 The complete setup is outside the scope of this article.
 

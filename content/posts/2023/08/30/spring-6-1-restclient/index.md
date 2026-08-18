@@ -38,8 +38,7 @@ So the Spring team decided to introduce the `RestClient` which:
 
 Now let's have some fun with it, and please do feel free to check out [the repository](https://github.com/SimonVerhoeven/restclient-demo)!
 
-Usage
------
+## Usage
 
 ### Using rest client builder
 
@@ -50,7 +49,6 @@ public JokeController(RestClient.Builder restClientBuilder, @Value("${jokeservic
     this.restClient = restClientBuilder.baseUrl(jokeserviceUrl).build();
 }
 ```
-
 
 And then we can fetch a joke using:
 
@@ -63,7 +61,6 @@ return this.restClient
     .body(Joke.class);
 ```
 
-
 Which as you can see is well, a lot more fluid.
 
 When doing this call we'll be rewarded with:
@@ -75,7 +72,6 @@ When doing this call we'll be rewarded with:
     "status": 200
 }
 ```
-
 
 Now in case we're interested in the whole response including the status code, we can replace `.body(Joke.class)` with `.toEntity(Joke.class)`.  
 
@@ -94,14 +90,12 @@ interface JokeClient {
 }
 ```
 
-
 Then we can create our client using:
 
 ```java
 var factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
 jokeClient = factory.createClient(JokeClient.class);
 ```
-
 
 After that, we can easily consume it using
 
@@ -111,7 +105,6 @@ Joke getJokeUsingInterface() {
     return this.jokeClient.getJoke("M7wPC5wPKBd");
 }
 ```
-
 
 And we'll receive:
 
@@ -123,7 +116,6 @@ And we'll receive:
 }
 ```
 
-
 ### Error handling
 
 By default, RestClient will throw a subclass of RestClientException upon a `4**` or `5**` status code, but we can override this using `onStatus` so that we can define our own status handlers:
@@ -133,7 +125,6 @@ By default, RestClient will throw a subclass of RestClientException upon a `4**`
     throw new PunException();
 }))
 ```
-
 
 ### More granular control
 
@@ -152,9 +143,7 @@ return this.restClient
     });
 ```
 
-
-Wrap-up
--------
+## Wrap-up
 
 I hope this sheds some light on the how, and why. And if you're adding `Webflux` just to make use of `WebClient` please consider changing to `RestClient`.
 

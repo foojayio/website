@@ -37,7 +37,6 @@ You can use the Maven build tools to compile and package your Jakarta EE 9 appli
 mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart
 ```
 
-
 These are the important parts of the maven configuration for your Jakarta EE 9 project:
 
 * Define the `jakartaee-web-api` dependency so that your project can use all the frameworks that are part of the Web Profile. For most projects, the Web Profile is sufficient, otherwise, you can use the `jakartaee-api` dependency that corresponds with the Full Profile.
@@ -80,7 +79,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 </project>
 ```
 
-
 You are now ready to open the Maven Project in your favorite IDE and start coding your application.
 
 ### Setting Up with Gradle
@@ -90,7 +88,6 @@ You can also use Gradle as an alternative for Maven as your build tool. It doesn
 ```
 gradle init --type basic
 ```
-
 
 It generates the basic files, like a *build.gradle* file containing the main configuration for your Gradle project, and the required wrapper files for Gradle.
 
@@ -131,7 +128,6 @@ war {
 }
 ```
 
-
 You are now ready to open the Gradle Project in your favoriite IDE and start coding your application.
 
 ### Hello Servlet
@@ -161,7 +157,6 @@ public class HelloServlet extends HttpServlet {
 
 }
 ```
-
 
 Some background information on the example:
 

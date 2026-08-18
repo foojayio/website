@@ -73,7 +73,6 @@ public class PaymentGateway
 }
 ```
 
-
 Once declared, a scoped value is used as shown below.
 
 ```java
@@ -88,7 +87,6 @@ public class PaymentProcessor
 }
 ```
 
-
 In the code snippet above, a scoped value and the object to which it is to be bound are passed to the where() method as a key and a value argument.
 
 The run() call binds the scoped value to the current thread by providing a specific incarnation of it. That makes the scoped value accessible in getPaidByCreditCard() method.
@@ -100,7 +98,6 @@ In this way, notice that the where() and run() methods together provide a one-wa
 
 ```
 
-
 ```java
 public class PaymentService
 {
@@ -108,7 +105,6 @@ public class PaymentService
        ValidationService.checkValidity();
 }
 ```
-
 
 ```java
 public class ValidationService
@@ -119,7 +115,6 @@ public class ValidationService
    }
 }
 ```
-
 
 The bound scoped value can be read via the value's get() method during the lifetime of the run() method, the lambda expression, or any method called directly or indirectly from that expression.
 
@@ -145,7 +140,6 @@ public class PaymentService
    }
 }
 ```
-
 
 > The return type of the run() method is void. If the printPaymentInfo() method was returning a value, we can prefer the call() method which calls a value-returned operation to handle the returned value.
 
@@ -189,7 +183,6 @@ public static void getPaidByCreditCard() throws InterruptedException, ExecutionE
     }
 }
 ```
-
 
 ```
 

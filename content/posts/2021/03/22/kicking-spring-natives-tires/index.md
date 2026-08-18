@@ -109,7 +109,6 @@ The second step is to add a dependency and a plugin to the POM. I put both into 
 </pluginRepositories>
 ```
 
-
 With this configuration snippet, one can create a native image with the `native` profile:
 
 ```bash
@@ -124,7 +123,6 @@ The AOT compilation process takes a long time. It should succeed (though it disp
 docker run -it --rm -p8080:8080 docker.io/library/imperative-to-reactive:1.0-SNAPSHOT     #1
 ```
 
-
 1. I use `--rm` so it removes the container after it has run and doesn't waste disk space
 
 Unfortunately, this fails with the following exception:
@@ -137,7 +135,6 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.boot.autoconfig
     at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:324) ~[na:na]
     ... 28 common frames omitted
 ```
-
 
 It seems that Spring Native missed this one. We need to add it ourselves. There are two ways to do that:
 
@@ -155,7 +152,6 @@ In the above section, I chose to set Spring Native in a dedicated Maven profile.
 ]
 ```
 
-
 Building and running again yields the following:
 
 ```
@@ -164,7 +160,6 @@ Caused by: java.lang.NoSuchFieldException: VERSION
     at com.hazelcast.instance.BuildInfoProvider.readStaticStringField(BuildInfoProvider.java:139) ~[na:na]
     ... 79 common frames omitted
 ```
-
 
 This time, a Hazelcast-related static field is missing. We need to configure the missing field, re-build and re-run again. It still fails. Rinse and repeat: I'll spare you the details; please check the [repo](https://github.com/hazelcast-demos/imperative-to-reactive/tree/native) if you're interested.
 
@@ -178,7 +173,6 @@ Because I configure Hazelcast with XML, the whole XML initialization process is 
 }
 ```
 
-
 Unfortunately, the build continues to fail. It's still an XML-related exception **though we configured the class correctly**!
 
 ```
@@ -191,7 +185,6 @@ Caused by: java.lang.RuntimeException: internal error
     at com.oracle.svm.core.classinitialization.ClassInitializationInfo.initialize(ClassInitializationInfo.java:295) ~[na:na]
     ... 82 common frames omitted
 ```
-
 
 ### Switching to YAML
 
@@ -212,7 +205,6 @@ We shouldn't forget to add the above resource into the resource configuration fi
   ]}
 }
 ```
-
 
 Because of missing charsets at runtime, we also need to initialize the YAML reader at build time:
 
@@ -243,7 +235,6 @@ Caused by: com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined 
     ... 46 common frames omitted
 ```
 
-
 This one is about proxies and is pretty straightforward. In this context, Spring Data proxies the `PersonRepository` interface through a couple of other components. Those are all listed in the stack trace. [GraalVM can handle proxies](https://www.graalvm.org/reference-manual/native-image/DynamicProxy/) but requires you to configure them.
 
 ```
@@ -255,7 +246,6 @@ This one is about proxies and is pretty straightforward. In this context, Spring
    "org.springframework.core.DecoratingProxy"]
 ]
 ```
-
 
 ### And Now For Serialization
 
@@ -278,14 +268,12 @@ With the above configuration, the image should start successfully, which makes m
 2021-03-18 20:22:30.655  INFO 1 --- [           main] o.s.boot.SpringApplication               : Started application in 2.355 seconds (JVM running for 2.358)
 ```
 
-
 If we access the endpoint at this point, the app throws a runtime exception:
 
 ```
 java.lang.IllegalStateException: Required identifier property not found for class org.hazelcast.cache.Person!
     at org.springframework.data.mapping.PersistentEntity.getRequiredIdProperty(PersistentEntity.java:105) ~[na:na]
 ```
-
 
 ```
 
@@ -302,7 +290,6 @@ AOT left out serialized classes, and we need to manage them. As for proxies, Gra
 ]
 ```
 
-
 ### Success!
 
 Now, we can (finally!) `curl` the running image:
@@ -312,7 +299,6 @@ curl http://localhost:8080/person/1
 curl http://localhost:8080/person/1
 ```
 
-
 The output returns the expected result:
 
 ```
@@ -320,7 +306,6 @@ The output returns the expected result:
 2021-03-15 09:54:19.108  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 put in cache
 2021-03-15 09:54:46.694  INFO 1 --- [onPool-worker-3] o.h.c.CachingService : Person with id 1 found in cache
 ```
-
 
 We need to configure the `Sort` class to work with the root '/' endpoint, which retrieves all entities at once.
 

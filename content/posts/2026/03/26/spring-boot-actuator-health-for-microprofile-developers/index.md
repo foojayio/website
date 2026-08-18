@@ -25,8 +25,7 @@ frozen: false
 
 If you worked with MicroProfile Health, you already understand the value of exposing application health information through standardized endpoints. You know about liveness, readiness and startup probes. You implemented the HealthCheck interface and annotated your procedures with @Liveness, @Readiness and @Startup. Spring Boot Actuator follows a similar philosophy but takes a different architectural approach. This post will help you map your MicroProfile Health knowledge to Spring's world.
 
-The Conceptual BridgeThe Conceptual Bridge
-------------------------------------------
+## The Conceptual BridgeThe Conceptual Bridge
 
 At its core, Spring Boot Actuator serves the same purpose as MicroProfile Health: it provides a mechanism for validating the availability and status of your application in containerized environments. Both specifications recognize that modern cloud platforms like Kubernetes need machine-readable health information to make decisions about pod lifecycle management.
 
@@ -38,8 +37,7 @@ The fundamental concepts translate directly:
 * Health status is aggregated from multiple contributors using a logical AND policy by default
 * HTTP status codes signal overall health (200 for UP, 503 for DOWN)
 
-Endpoint Mapping
-----------------
+## Endpoint Mapping
 
 In MicroProfile Health 4.0, you work with four endpoints: /health/ready, /health/live, /health/started, and the combined /health. Spring Boot Actuator uses a similar structure with some naming differences.
 
@@ -58,9 +56,7 @@ readinessProbe:
     port: <actuator-port>
 ```
 
-
-Writing Health ChecksWriting Health Checks
-------------------------------------------
+## Writing Health ChecksWriting Health Checks
 
 In MicroProfile Health, you implement the HealthCheck functional interface and return a HealthCheckResponse. The annotation determines whether it's a liveness, readiness, or startup check. Spring Boot Actuator follows a similar pattern but uses the HealthIndicator interface instead.
 
@@ -79,7 +75,6 @@ public class DatabaseCheck implements HealthCheck {
 }
 ```
 
-
 #### Spring Boot Actuator Approach
 
 ```
@@ -93,7 +88,6 @@ public class DatabaseHealthIndicator implements HealthIndicator {
     }
 }
 ```
-
 
 Notice the similarities: both use a builder pattern, both support additional data/details, and both return a status. The naming is derived from the class name in Spring (DatabaseHealthIndicator becomes "database"), while MicroProfile requires explicit naming in the response.
 
@@ -131,7 +125,6 @@ A typical Actuator health response looks like:
   }
 }
 ```
-
 
 Compare this to MicroProfile's format using a "checks" array instead of a "components" object. The structure differs slightly, but the information conveyed is equivalent.
 

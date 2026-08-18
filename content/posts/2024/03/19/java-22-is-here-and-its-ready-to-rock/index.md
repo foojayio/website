@@ -30,8 +30,7 @@ In this article, you'll go on a tour of the JEPs that are part of this release, 
 
 Where applicable, the differences with Java 21 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!
 
-From Project Amber
-------------------
+## From Project Amber
 
 Java 22 contains four features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -60,7 +59,6 @@ class StringQuartet extends Orchestra {
 }
 ```
 
-
 It would be better to let the constructor fail fast, by validating its arguments before the `super(...)` constructor is called.  
 
 Pre-Java 22, we could only achieve this by introducing a `static` method that acts upon the value passed to the super constructor.
@@ -79,7 +77,6 @@ public class StringQuartet extends Orchestra {
 }
 ```
 
-
 But a far more readable way to write the same would be:
 
 ```java
@@ -93,7 +90,6 @@ public class StringQuartet extends Orchestra {
     }
 }
 ```
-
 
 This approach will be possible in Java 22, due to the introduction of *pre-construction contexts* .  
 
@@ -126,7 +122,6 @@ static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
 }
 ```
 
-
 This piece of code, which originates from a [music store example repository](https://github.com/hannotify/pattern-matching-music-store), deals with comparing two guitar effects that are stored in the `EffectLoop` that the fictional guitar player is currently using.  
 
 Here, the logic in the `if` body doesn't reference the `name` whatsoever, but for a long time Java didn't have a way to indicate this as an intentional omission.
@@ -146,7 +141,6 @@ static boolean isDelayTimeEqualToReverbRoomSize(EffectLoop effectLoop) {
 }
 ```
 
-
 The underscore denotes the unnamed pattern here: it is an unconditional pattern which binds nothing. You can use it to indicate that it doesn't matter to what first value the pattern matches the `Reverb`, as long as the second parameter is matched to an `int`.
 
 #### Unnamed Pattern Variables
@@ -165,7 +159,6 @@ static void apply(Effect effect, Piano piano) {
 }
 ```
 
-
 Here, we execute specific logic when we encounter a tuner that tunes a flat (♭) or sharp (♯) note. An unnamed pattern variable is the appropriate choice here, because the logic acts on the matched type only - meaning its value can be safely ignored.
 
 #### Unnamed Variables
@@ -181,7 +174,6 @@ for (Guitar guitar : guitars) {
 }
 ```
 
-
 The `guitar` variable is declared and populated here, but it is never used. Unfortunately, its intentional non-use doesn't come across as such to the reader.
 
 Moreover, static code analysis tools like Sonar will probably complain about the unused variable, raising suspicions even more. An unnamed variable better conveys the intent of the code:
@@ -195,7 +187,6 @@ for (Guitar _ : guitars) {
 }
 ```
 
-
 Another good example is handling exceptions in a generic way:
 
 ```java
@@ -206,7 +197,6 @@ try {
     System.out.println("Sorry, out of stock!");
 }
 ```
-
 
 Keep in mind that unnamed variables only make sense when they're not visible outside a method, so they currently only work with local variables, exception parameters and lambda parameters. The theoretical concept of *unnamed method parameters* is briefly touched upon in the JEP, but supporting it comes with enough challenges to at least warrant postponing it to a future JEP.
 
@@ -239,7 +229,6 @@ System.out.println(STR."I bought a \{guitarType} yesterday.");
 // outputs "I bought a Les Paul yesterday."
 ```
 
-
 The template expression `STR."I bought a \{guitarType} yesterday."` consists of:
 
 * A template processor (`STR`);
@@ -254,7 +243,6 @@ System.out.println(STR."A set of strings costs \{price} dollars; so each string 
 // outputs "A set of strings costs 12 dollars; so each string costs 2 dollars."
 ```
 
-
 ```java
 record Guitar(String name, boolean inTune) {}
 class GuitarTuner {
@@ -265,7 +253,6 @@ class GuitarTuner {
     }
 }
 ```
-
 
 As you can see, double-quote characters can be used inside embedded expressions without escaping them, making the switch from concatenation to template expressions easier. Multi-line template expressions are also possible; they use a syntax similar to that of [text blocks](https://docs.oracle.com/javase/specs/jls/se20/html/jls-3.html#jls-3.10.6):
 
@@ -283,7 +270,6 @@ String html = STR."""
         </html>
         """;
 ```
-
 
 #### Template Processors
 
@@ -303,7 +289,6 @@ String guitarType = "Les Paul";
 System.out.println(STR."I bought a \{guitarType} yesterday.");
 ```
 
-
 is equivalent to:
 
 ```java
@@ -312,7 +297,6 @@ StringTemplate template = RAW."I bought a \{guitarType} yesterday.");
 System.out.println(STR.process(template));
 ```
 
-
 Template expressions are designed to prevent the direct conversion of strings with embedded expressions to interpolated strings, making it impossible for potentially incorrect strings to spread. A template processor securely handles this interpolation, and if you forget to use one, the compiler will report an error.
 
 ```java
@@ -320,7 +304,6 @@ String guitarType = "Les Paul";
 System.out.println("I bought a \{guitarType} yesterday."); // doesn't compile!
 // outputs: "error: processor missing from template expression"
 ```
-
 
 #### Custom Template Processors
 
@@ -342,7 +325,6 @@ JSONObject doc = JSON."""
     };
     """;
 ```
-
 
 So the `JSON` template processor returns instances of `JSONObject` instead of `String`.  
 
@@ -374,14 +356,12 @@ record QueryBuilder(Connection conn) implements StringTemplate.Processor<Prepare
 }
 ```
 
-
 ```java
 var DB = new QueryBuilder(conn);
 String type = "Les Paul"; 
 PreparedStatement ps = DB."SELECT * FROM Guitar g WHERE g.guitar_type = \{type}";
 ResultSet rs = ps.executeQuery();
 ```
-
 
 The `DB` custom template processor is capable of constructing `PreparedStatements` that have their parameters injected in a safe way.
 
@@ -407,7 +387,6 @@ public class HelloWorld {
 }
 ```
 
-
 On top of that, it forces newcomers to grasp a few concepts that they certainly don't need on their first day of Java programming:
 
 * The `public` access modifier and its role in encapsulating units of code, together with its counterparts `private`, `protected` and default;
@@ -430,7 +409,6 @@ class HelloWorld {
 }
 ```
 
-
 * allow a compilation unit to implicitly declare a class:
 
 ```java
@@ -438,7 +416,6 @@ void main() { // this is an instance main method in an implicitly declared class
     System.out.println("Hello, World!");
 }
 ```
-
 
 #### A flexible launch protocol
 
@@ -469,8 +446,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 463](https://openjdk.org/jeps/463).
 
-From Project Loom
------------------
+## From Project Loom
 
 Java 22 contains two features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -505,7 +481,6 @@ public class MultiWaiterRestaurant implements Restaurant {
 }
 ```
 
-
 Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
 * If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
@@ -530,7 +505,6 @@ public class SingleWaiterRestaurant implements Restaurant {
     }
 }
 ```
-
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -570,7 +544,6 @@ public class StructuredConcurrencyRestaurant implements Restaurant {
 }
 ```
 
-
 The scope's purpose is to keep the threads together. At `1`, we wait (`join`) until *all* threads are done with their work. If one of the threads is interrupted, an `InterruptedException` is thrown here. At `2`, an `ExecutionException` is thrown if an exception occurs in one of the threads. Once we reach `3`, we can be sure everything has gone well, and we can retrieve and process the results.
 
 Actually, the main difference with the code we had before is the fact that we create threads (`fork`) within a new `scope`. Now we can be certain that the lifetimes of the three threads are confined to this scope, which coincides with the body of the try-with-resources statement.
@@ -601,7 +574,6 @@ public class StructuredConcurrencyBar implements Bar {
     }
 }
 ```
-
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar. In the method `Waiter.getDrinkOrder(Guest guest, DrinkCategory... categories)`, the waiter starts to list all available drinks in the drink categories that were passed to the method. Once a guest hears something they like, they respond and the waiter creates a drink order. When this happens, the `getDrinkOrder(..)` method returns a `DrinkOrder` object and the scope will shut down. This means that any unfinished subtasks (such as the one in which Elmo is still listing different kinds of tea) will be cancelled.  
 
@@ -666,7 +638,6 @@ public class StructuredConcurrencyBar implements Bar {
 }
 ```
 
-
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The invocation of `call(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of `call(...)`, the lambda expression - and any method called (in)directly from it - can read the scoped value via the value's `get()` method. After the `call(...)` method finishes, the binding is destroyed.
 
 #### Typical Use Cases
@@ -683,8 +654,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 464](https://openjdk.org/jeps/464).
 
-From Project Panama
--------------------
+## From Project Panama
 
 Java 22 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -733,7 +703,6 @@ try (Arena offHeap = Arena.ofConfined()) {
 } // 8. All off-heap memory is deallocated here
 assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true
 ```
-
 
 Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
 
@@ -816,7 +785,6 @@ void vectorComputation(float[] a, float[] b, float[] c) {
 }
 ```
 
-
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
 #### Typical Use Cases
@@ -831,8 +799,7 @@ Aside from a minor set of bugfixes and (performance) enhancements in the API, th
 
 For more information on this feature, see [JEP 460](https://openjdk.org/jeps/460).
 
-HotSpot
--------
+## HotSpot
 
 Java 22 introduces a single change to [HotSpot](https://openjdk.org/groups/hotspot/):
 
@@ -858,8 +825,7 @@ In Java 21, G1GC disables garbage collection during critical regions to avoid mo
 
 For more information on this feature, see [JEP 423](https://openjdk.org/jeps/423).
 
-Compiler
---------
+## Compiler
 
 Java 22 also brings us an addition that's part of the compiler:
 
@@ -885,7 +851,6 @@ class Helper {
 }
 ```
 
-
 Running `java Prog.java` compiles the `Prog` class in memory and executes its `main` method. If `Prog` refers to another class, such as `Helper`, the launcher locates the `Helper.java` file in the filesystem and compiles its class in memory. Furthermore, if `Prog.java` would contain a `Helper` class, then that class would be preferred over the `Helper` class in `Helper.java`; the launcher would not search for the file `Helper.java`.
 
 #### Pre-compiled classes
@@ -901,14 +866,12 @@ libs/
 ├─ library2.jar
 ```
 
-
 ...we can run these programs by passing `--class-path lib/*` to the `java` launcher:
 
 ```bash
 $ java --class-path 'lib/*' Prog1.java
 $ java --class-path 'lib/*' Prog2.java
 ```
-
 
 > The argument to the `--class-path` option is quoted to avoid expansion of the asterisk by the shell.
 
@@ -919,7 +882,6 @@ $ java -p lib Prog1.java
 $ java -p lib Prog2.java
 ```
 
-
 #### What's Different From Java 21?
 
 Up until Java 21, running a program on the command-line directly without a separate compilation command was supported for single file programs only. Java 22 adds support for programs that span multiple files.
@@ -928,8 +890,7 @@ Up until Java 21, running a program on the command-line directly without a separ
 
 For more information on this feature, see [JEP 458](https://openjdk.org/jeps/458). It contains a few more details on launch-time semantics, how the launcher finds source files and how package structure comes into play.
 
-Core Libraries
---------------
+## Core Libraries
 
 Java 22 also brings you two additions that are part of the core libraries:
 
@@ -971,7 +932,6 @@ void fooBar(boolean z, int x) {
 }
 ```
 
-
 With ASM we could generate the method like so:
 
 ```java
@@ -995,7 +955,6 @@ mv.visitInsn(RETURN);
 mv.visitEnd();
 ```
 
-
 Unlike in ASM, where clients directly create a `ClassWriter` and then request a `MethodVisitor`, the Class-File API adopts a different approach. Here, instead of clients initiating a builder through a constructor or factory, they supply a lambda function that takes a builder as its parameter:
 
 ```java
@@ -1018,7 +977,6 @@ classBuilder.withMethod("fooBar", MethodTypeDesc.of(CD_void, CD_boolean, CD_int)
         .return_();
 });
 ```
-
 
 #### What's Different From Java 21?
 
@@ -1046,7 +1004,6 @@ long numberOfNonClassicalGuitars = guitars.stream() // source of elements
         .collect(Collectors.counting()); // terminal operation
 ```
 
-
 The Stream API offers a relatively diverse but predetermined range of intermediate and terminal operations, including mapping, filtering, reduction, sorting, and more. Over the years, many new intermediate operations have been suggested for the Stream API.
 
 For example, it could be useful to introduce a `distinctBy` intermediate operation. A `distinct` operation *does* exist, trakcing the elements it has already seen by using object equality. But what if we want distinct elements based on something else than object equality?
@@ -1056,7 +1013,6 @@ var singleGuitarPerStyle = guitars.stream()
                 .distinctBy(Guitar::guitarStyle) // hypothetical
                 .toList();
 ```
-
 
 Over the years, many new intermediate operations have been suggested for the Stream API.  
 
@@ -1108,7 +1064,6 @@ stream
     .collect(...);
 ```
 
-
 #### Built-in gatherers
 
 As part of this JEP a few built-in gatherers are introduced:
@@ -1152,7 +1107,6 @@ static <T, A> Gatherer<T, ?, T> distinctBy(Function<? super T, ? extends A> clas
 }
 ```
 
-
 ...and this is how you could use it:
 
 ```java
@@ -1161,7 +1115,6 @@ guitars.stream()
         .forEach(System.out::println);
 ```
 
-
 ...which would yield the following output:
 
 ```
@@ -1169,7 +1122,6 @@ Guitar[name=Taylor GS Mini-e Koa, guitarStyle=WESTERN]
 Guitar[name=Fender Stratocaster, guitarStyle=ELECTRIC]
 Guitar[name=Cordoba F7 Paco Flamenco, guitarStyle=CLASSICAL]
 ```
-
 
 #### No New Intermediate Operations
 
@@ -1189,8 +1141,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, see [JEP 461](https://openjdk.org/jeps/461) and the [blog post on gatherers](https://dev.to/khmarbaise/jdk22-gatherer-2a6e) by Karl Heinz Marbaise.
 
-Final thoughts
---------------
+## Final thoughts
 
 It seems clear to me that Java 22 is ready to rock, with no less than 12 JEPs delivered!
 

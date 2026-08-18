@@ -55,7 +55,6 @@ public class YodaForce {
 }
 ```
 
-
 **A.**   
 
 useSaber  
@@ -86,7 +85,6 @@ Will this code compile and run fine? The concepts demonstrated here are mostly a
 System.out.println(new Yoda().useSaber());
 ```
 
-
 Note that we are using a covariant return type for the overridden method: the Yoda subclass's useSaber method returns a String instead of an Object. This method prints "useSaber".
 
 In the second method invocation we are invoking another overridden method, attack:
@@ -95,7 +93,6 @@ In the second method invocation we are invoking another overridden method, attac
 System.out.println(new Yoda().attack());
 ```
 
-
 We can't use a covariant type here because there is no inheritance between primitive types; both methods return a long. The output of this method call is 99999.
 
 Finally, we print the lightForce variable that is incremented each time the LightForce class is instantiated:
@@ -103,7 +100,6 @@ Finally, we print the lightForce variable that is incremented each time the Ligh
 ```java
 System.out.println(new Yoda().lightForce); // Line 5
 ```
-
 
 Even though we instantiate the LightForce class three times, note that the lightForce variable is an instance variable. Therefore, the variable will be reset every time a new instance is created. We have three instantiations, but the result of this variable will be 1 for each of the three instances.
 
@@ -130,7 +126,6 @@ public class MysteriousDoorLambdaChallenge {
 
 }
 ```
-
 
 **A.**   
 
@@ -193,7 +188,6 @@ public class KeyMakerOverloading {
 }
 ```
 
-
 **A.**   
 
 short:1  
@@ -240,13 +234,11 @@ Let's analyze the code. In the first invocation, we pass the hardcoded value 1:
 makeKey(1);
 ```
 
-
 int is the default type interpreted to non-decimal numbers that fit within this type's range, so the JVM will convert this hardcoded number to int. But none of the overloaded methods takes an int, so the type will be promoted to a wider one. The first method the JVM finds that can accommodate this type is this one:
 
 ```java
 static void makeKey(long longCode) { … }
 ```
-
 
 Therefore, the first output will be:
 
@@ -254,13 +246,11 @@ Therefore, the first output will be:
 long:1
 ```
 
-
 In the second method invocation, we are passing an explicit float because we are using the letter F after the number:
 
 ```java
 makeKey(1F);
 ```
-
 
 As we already have a corresponding method for the float type, the output for this invocation will be:
 
@@ -268,13 +258,11 @@ As we already have a corresponding method for the float type, the output for thi
 float:1.0
 ```
 
-
 In the third method invocation, we pass a char:
 
 ```java
 makeKey('1');
 ```
-
 
 There's no method that takes a char, so type promotion will again be used here. As the diagram in figure 5.1 shows, a char can be promoted to an int, which as we've already seen will be promoted further to a long in this example. The char value will be converted to the corresponding number in the ASCII table, which is 49. Therefore, the output will be:
 
@@ -282,13 +270,11 @@ There's no method that takes a char, so type promotion will again be used here. 
 long: 49
 ```
 
-
 Finally, the number 1.0 will be automatically converted by the JVM to the type double, and then it will invoke the method that receives a double:
 
 ```java
 double:1.0
 ```
-
 
 Therefore, the correct answer will be...
 

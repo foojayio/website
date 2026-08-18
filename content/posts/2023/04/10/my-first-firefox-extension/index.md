@@ -26,8 +26,7 @@ It was not a walk in the park.
 
 To help others who may be interested in doing the same (and my future self), here's my journey!
 
-Context
--------
+## Context
 
 I've written multiple posts about my [conference submission workflow](https://blog.frankel.ch/automating-conference-submission-workflow/).
 
@@ -46,8 +45,7 @@ I thought long and hard about the first part. If I automate it, it will create a
 
 However, I created the card manually by copy-pasting relevant data: name, dates, due date, CFP link, and website. It's precisely what a Firefox extension can help one with.
 
-Requirements and design
------------------------
+## Requirements and design
 
 The user story is pretty straightforward:
 > AS A: Lazy developer  
@@ -66,8 +64,7 @@ I chose the second option because I needed to figure out how to achieve the firs
 
 I also wanted first to create my extension in Rust with WebAssembly. Spoiler: I didn't.
 
-A simple Firefox extension
---------------------------
+## A simple Firefox extension
 
 I had no clue about writing a Firefox extension, as this was the first time I did write one. My first step was to follow the [tutorial](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension). It explains the basics of an extension structure. Then, I followed the [second tutorial](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_second_WebExtension). It explains how to create a pop-up menu for the extension but not how to interact with the web page. At this point, I decided to learn by doing, a technique that works well for me.
 
@@ -86,28 +83,21 @@ A Firefox extension starts with a [manifest](https://developer.mozilla.org/en-US
 }
 ```
 
-
 ```javascript
 document.body.style.border = '5px solid red';
 ```
-
 
 I found the development feedback loop good. Imagine that you have followed the tutorial and created all the necessary files above. You can go to and click on the "Load Temporary Add-on" button.
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-65603" src="firefox-load-extension-700x182.jpg" alt="" width="700" height="182">
 
-<br />
-
 Then, point to your manifest file. Firefox loads the extension: it's now active.
 
 <img decoding="async" class="aligncenter size-medium wp-image-65604" src="firefox-loaded-extension-700x508.jpg" alt="" width="700" height="508">
 
-<br />
-
 In the above example, the JavaScript from the tutorial adds a red border around every web page. It's useless, we can do better, but it shows how it works. We can change the script to change the color, *e.g.* , from `red` to `green`. To make Firefox reload **any change**, including changes to the manifest, click on the "Reload" button on the temporary extension panel.
 
-Interacting with the extension
-------------------------------
+## Interacting with the extension
 
 As I mentioned above, I want a button to trigger the creation of the Trello Card. Firefox allows multiple interaction options: direct trigger or opening of a pop-up window. I don't need to enter any parameter, so the former is enough in my case.
 
@@ -122,14 +112,12 @@ Adding the button takes place in the manifest:
 }
 ```
 
-
 1. Set the button on the navigation bar. For more details on the button location, please check the [documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_action)
 2. Configure the icon. One can use bitmaps in different formats, but it's so much easier to set an SVG
 
 At this point, everything was fine and dandy. Afterward, I lost many hours trying to understand the different kinds of scripts and how they interact. I'll make it a dedicated section.
 
-Scripts, scripts everywhere
----------------------------
+## Scripts, scripts everywhere
 
 The default language for scripts in extensions is JavaScript. However, depending on their location, they play different roles. Worse, they need to "talk" with one another.
 
@@ -150,7 +138,6 @@ Let's create such a script. It starts with the `manifest` - as usual:
 }
 ```
 
-
 We can now create the script itself:
 
 ```javascript
@@ -161,11 +148,9 @@ function foo() {
 browser.browserAction.onClicked.addListener(foo)    //1
 ```
 
-
 1. Register the `foo` function as an event listener to the button. When one clicks the extension button, it calls the `foo` function
 
-Debugging the extension
------------------------
+## Debugging the extension
 
 Let's stop for a moment to talk about debugging. I lost several hours because I didn't know what had happened. When I started to develop JavaScript 20 years ago, we "debugged" with `alert()`. It was not the best developer experience you could hope for. More modern practices include *logging* and *debugging*. Spoiler: I didn't manage to get debugging working, so I'll focus on logging.
 
@@ -173,10 +158,7 @@ First things first, content scripts work in the context of the page. Hence, logg
 
 <img decoding="async" class="aligncenter size-medium wp-image-65605" src="extension-developer-console-700x260.jpg" alt="" width="700" height="260">
 
-<br />
-
-Communication across scripts
-----------------------------
+## Communication across scripts
 
 Now that we know how to log, it's possible to go further and describe communication across scripts. Here's an overview of the overall flow:
 
@@ -199,7 +181,6 @@ function sendMessage(tab) {
 browser.browserAction.onClicked.addListener(sendMessage)
 ```
 
-
 Now, we change the code of `content.js`:
 
 ```javascript
@@ -208,9 +189,7 @@ browser.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-
-Getting the content
--------------------
+## Getting the content
 
 So far, we have implemented a back-and-forth flow between the `background` and the `content` scripts. The meat is to get content from the page in the `content` script and pass it back to the `background` via a message. Remember that only the `content` script can access the page! The code itself uses the Document API, *e.g.* , `document.querySelector()`, `document.getElementsByClassName()`, etc. Specifics are unimportant.
 
@@ -233,7 +212,6 @@ The next issue is that the structure of Sessionize and Papercall are different. 
 }]
 ```
 
-
 1. Match different sites
 2. Scripts for Sessionize
 3. Scripts for Papercall
@@ -241,8 +219,7 @@ The next issue is that the structure of Sessionize and Papercall are different. 
 
 At this point, we managed to get the necessary data and send it back to the `background` script. The last step is to call Trello with the data.
 
-Handling authentication credentials
------------------------------------
+## Handling authentication credentials
 
 Using Trello's REST requires authentication credentials. I want to share the code on GitHub, so I cannot hard-code credentials: I need configuration.
 
@@ -253,7 +230,6 @@ We can configure a Firefox extension via a dedicated *options* page. To do so, t
   "page": "settings/options.html"
 }
 ```
-
 
 The page can directly reference the scripts and stylesheet it needs. The script needs to:
 
@@ -288,7 +264,6 @@ document.addEventListener('DOMContentLoaded', restoreOptions)                //2
 document.querySelector('form').addEventListener('submit', saveOptions)       //3
 ```
 
-
 1. Uses the Firefox `storage` API
 2. Read from the storage when the page loads
 3. Save to the storage when the user submits the HTML `form`
@@ -299,12 +274,9 @@ We also need to ask the `storage` permission in the manifest:
 "permissions": [ "storage" ]
 ```
 
-
 We can now store the Trello credentials (as well as the required Trello list id) on the settings page:
 
 <img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-65607" src="settings-700x384.jpg" alt="" width="700" height="384">
-
-<br />
 
 We can use the same `storage` API in the Trello calling code to read credentials.
 
@@ -312,8 +284,7 @@ At this point, I was happy with my setup. I just added another round-trip from t
 
 ![](final-result-1024x434.jpg)
 
-Conclusion
-----------
+## Conclusion
 
 It was the first extension I wrote, and though the beginning was challenging, I achieved what I wanted. Now, I can navigate to a Papercall and a Sessionize page, click the extension button, and get the conference on my Trello board. It took me a couple of days and was fun; it was well worth it. I continue working on it to improve it bit by bit.
 

@@ -29,8 +29,7 @@ To make it as easy as possible to get started with Java on the Raspberry Pi to i
 
 **In this tutorial, I want to show you how you can read the temperature, humidity, and pressure from a BME280 Sensor.**
 
-What Is Used?
--------------
+## What Is Used?
 
 As explained on the websites of each project:
 
@@ -52,8 +51,7 @@ All info on: [jbang.dev](https://www.jbang.dev/)
 
 All info on: [raspberrypi.com](https://www.raspberrypi.com/)
 
-Tutorial
---------
+## Tutorial
 
 This tutorial is also explained in this video, which is based on the [documentation provided by the Pi4J website](https://pi4j.com/examples/jbang/bme280_temperature_humidity_pressure/).
 
@@ -116,7 +114,6 @@ import com.pi4j.io.i2c.I2CProvider;
 import java.text.DecimalFormat;
 ```
 
-
 #### Main Method
 
 The `main` method initializes the communication with the component and reads the values ten times. This approach allows to show the difference with the SPI code, which mainly only differs in regards of this communication.
@@ -152,7 +149,6 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-
 #### Reading the Temperature
 
 Reading the values of the sensor is a "Java translation" of the code provided by Bosch in the datasheet and GitHub example project.
@@ -184,7 +180,6 @@ double temperature = (var1 + var2) / 5120.0;
 console.println("Temperature: " + df.format(temperature) + " °C");
 console.println("Temperature: " + df.format(temperature* 1.8 + 32) + " °F ");
 ```
-
 
 ### Running the Application
 
@@ -220,9 +215,7 @@ $ jbang Pi4JTempHumPressI2C.java
 [main] INFO com.pi4j.util.Console - Finished
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 After my earlier [JBang experiment with only a basic LED and button](https://foojay.io/today/controlling-electronics-with-jbang-on-the-raspberry-pi/), this BME280 was more challenging.
 
@@ -234,10 +227,7 @@ JBang is here to help regarding the dependencies. In my opinion, this is a much 
 
 I have a bunch of other components in my drawer waiting for more experiments, so I hope to extend this JBang-series further!
 
-
-
-Read More
----------
+## Read More
 
 * [Pi4J_V2-TemperatureSensor example code by Tom Aarts](https://github.com/Pi4J/pi4j-example-devices/blob/master/src/main/java/com/pi4j/devices/bmp280/README.md)
 * [Bosch BMP280 Data Sheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp280-ds001.pdf)

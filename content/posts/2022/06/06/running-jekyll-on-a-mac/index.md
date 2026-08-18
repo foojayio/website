@@ -70,7 +70,6 @@ truffleruby-22.0.0.2
 truffleruby+graalvm-22.0.0.2
 ```
 
-
 Let's install the latest "standard" version:
 
 ```bash

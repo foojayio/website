@@ -32,8 +32,7 @@ To get started with these tools, you'll need to sign up for a free Snyk account.
 
 After you have signed up, there are multiple ways to engage with Snyk for Java. I will explain this tool by tool below.
 
-Snyk CLI
---------
+## Snyk CLI
 
 The [Snyk CLI](https://support.snyk.io/hc/en-us/articles/360003812458-Getting-started-with-the-CLI) is the most accessible tool to start with Snyk for Java. You can install it in multiple ways using npm or brew, for instance:
 
@@ -47,8 +46,7 @@ When your project contains multiple manifest files, like multiple pom files. Use
 
 Check out the [CLI cheat sheet](https://snyk.io/blog/snyk-cli-cheat-sheet/) for more tips and tricks on the Snyk CLI. You can use the same CLI to scan your containers for security issues and your infrastructure as code (IaC). In addition, we will soon be releasing Snyk Code for the CLI, which helps to prevent security vulnerabilities in your custom Java code.
 
-Connecting your Java project's Git repository
----------------------------------------------
+## Connecting your Java project's Git repository
 
 Next, you can connect your Git repository. If you connect your Java repository, for example Github, Snyk automatically searches for your Maven or Gradle manifest file and scans your dependencies. By default, this action will be repeated daily, and you will get notified whenever a new security vulnerability or a new fix is found in your repository.  
 
@@ -57,8 +55,7 @@ The example below shows a pom file from a demo project that contains known secur
 In addition, the get integration can also scan Dockerfiles and perform Snyk Code analyses. If you want more information about the Snyk Code analyses for Java applications with the Snyk Git integration, check out this [Solving Java security issues in my Spring MVC application](https://snyk.io/blog/java-code-analysis-solving-java-security-issues-in-spring-mvc-app/) blog post.
 ![Develop secure Java code with Snyk](https://res.cloudinary.com/snyk/images/w_1240,h_221,c_scale/f_auto,q_auto/v1/wordpress-sync/blog-secure-java-development-repo/blog-secure-java-development-repo-1240x221.png?_i=AA)
 
-Maven and Gradle plugins
-------------------------
+## Maven and Gradle plugins
 
 Some people prefer to automate their security testing during their builds. Naturally, you can do this inside a CI pipeline. However, it might make more sense to do this in your build tool. If you use either Maven or Gradle, this is the point where your dependencies get pulled in, and where the artifact is created. Why not automate security scanning in the same way as we do with unit testing? Snyk provides both a Maven and Gradle plugin. The only thing you need is an API key that you can get from your free account.
 
@@ -67,8 +64,7 @@ Now you either call a snyk test from both Maven and Gradle manually or connect t
 * [Snyk Maven plugin: Integrated security vulnerability scanning for developers](https://snyk.io/blog/snyk-maven-plugin-integrated-security-vulnerability-scanning-for-developers/)
 * [Gradle dependencies: scanning with new Snyk Gradle plugin](https://snyk.io/blog/gradle-plugin-by-snyk-gradle-dependencies-scanning/)
 
-Snyk Java IDE plugins
----------------------
+## Snyk Java IDE plugins
 
 Some developers are more comfortable doing everything from their IDE. To some extent, the IDE nowadays is like a swiss army knife with a tremendous amount of options and extensibility. Some developers practically live in their IDE.  
 
@@ -80,8 +76,7 @@ Check out the following articles for more information on the specific plugins.
 * [Fix open source vulnerabilities directly from your Eclipse IDE](https://snyk.io/blog/fix-open-source-vulnerabilities-directly-from-your-eclipse-ide/)
 * [Visual Studio Code extension for Snyk Code](https://support.snyk.io/hc/en-us/articles/360018585717-Visual-Studio-Code-extension-for-Snyk-Code-)
 
-It is easy to start with Snyk
------------------------------
+## It is easy to start with Snyk
 
 As you can see, starting with Snyk and creating secure Java applications doesn't have to be hard.
 

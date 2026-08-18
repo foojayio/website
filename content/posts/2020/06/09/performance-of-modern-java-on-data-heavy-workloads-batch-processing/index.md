@@ -44,7 +44,6 @@ p.readFrom(longSource)
  .writeTo(Sinks.logger())
 ```
 
-
 The source is again a self-contained mock source that just emits a sequence of `long` numbers and the key function is defined so that the grouping key cycles through the key space: 0, 1, 2, ..., `NUM_KEYS`, 0, 1, 2, ... This means that, over the first cycle, the pipeline observes all the keys and builds up a fixed data structure to hold the aggregation results. Over the following cycles it just updates the existing data. This aligns perfectly with the Generational Garbage Hypothesis: the objects either last through the entire computation or are short-lived temporary objects that become garbage very soon after creation.
 
 We let our source emit 400 million items and had 100 million distinct keys, so we cycled four times over the same keys.
@@ -94,7 +93,6 @@ p.readFrom(longSource())
  .writeTo(Sinks.logger())
 ;
 ```
-
 
 Since the source is non-parallel, we applied some optimizations so it doesn't become a bottleneck. We let the source emit the numbers 0, 10, 20, ... and then applied a parallelized `flatMap` stage that interpolates the missing numbers. We also used `rebalance()` between the source and `flatMap`, spreading the data across the cluster. We applied rebalancing again before entering the main stage, keyed aggregation. After the aggregation stage we first reduce the output to every millionth key-value pair and then send it to the logger. We used one billion data items and a keyset of half a billion.
 

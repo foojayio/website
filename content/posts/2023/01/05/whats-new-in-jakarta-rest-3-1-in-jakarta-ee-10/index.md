@@ -32,8 +32,7 @@ The Jakarta RESTful Web Services specification is the Jakarta EE standard for cr
 
 The latest version of Jakarta REST is 3.1, which shipped with Jakarta EE 10. This version comes with two new noteworthy features that we will explore in this article.
 
-Java SE Bootstrap API
----------------------
+## Java SE Bootstrap API
 
 In the past, to run a Jakarta EE REST application required a full deployment to a compatible runtime like the Payara Platform or Payara Cloud. Jakarta REST 3.1 in Jakarta EE 10 introduced a new API to bootstrap REST resources outside of a container.
 
@@ -64,7 +63,6 @@ var body = response.body();
 assertNotNull(body);
 ```
 
-
 Using the SeBoostrap class, we call the static start method, which takes a jakarta.ws.rs.core.Application instance and a default, implicit SeBootstrap#Configuration. We then call the baseUriBuilder() method on the returned Instance to build a URL that we pass to the java.net.http HttpRequest builder. This is the Java SE HTTP client introduced in Java 11. The HTTP client then makes a call to the configured resource and makes some assertions on it.
 
 The start method of the SeBootstrap class has an overloaded version that can be used to pass a SeBootstrap#Configuration object. This can be used to configure the underlying HTTP server on which the REST resource is deployed. An example of such configuration could be as follows
@@ -82,7 +80,6 @@ final SeBootstrap.Configuration config = SeBootstrap.Configuration
  .build();
 ```
 
-
 This configuration can then be passed to the start method of SeBootstrap, as follows:
 
 ```java
@@ -94,11 +91,9 @@ SeBootstrap.Instance instance = SeBootstrap.start(new Application() {
 }, config).toCompletableFuture().get();
 ```
 
-
 Jakarta EE with Jakarta REST 3.1 has a number of ways you can now configure and deploy REST resources outside of a typical runtime container. You can take a look at these examples from the Jakarta REST GitHub repo for inspiration for your own projects.
 
-Multipart Support
------------------
+## Multipart Support
 
 Jakarta REST 3.1 in Jakarta EE 10 finally has standard, portable support for multipart as defined in RFC 7578. You can inject multipart EntityPart into a resource method through @FormParameter or as a list. The example below shows the injection of an EntityPart the represents a user's picture into a resource method.
 
@@ -118,7 +113,6 @@ public Response postForm(@FormParam("userId") String userId,
 }
 ```
 
-
 The pic parameter in the resource method is a jakarta.ws.rs.core.EntityPart type annotated @FormParam. This will be extracted from the request body and automatically injected into the annoated field. The EntityPart has methods to get the headers, file name, name, file content as input stream among others.
 
 The specification has small caveat about being careful with using Strings and EntityParts because parts of a multipart entity can be quite large, so care should be taken when using String parameter types as that will load the entire content of the part into the Java heap. We can make client requests to the above endpoint using the Jakarta REST client as follows.
@@ -134,7 +128,6 @@ Response response = target
  .request() 
  .post(entity);
 ```
-
 
 We construct the request using the EntityPart, then pass it as the body of the jakarta.ws.rs.client. Entity instance passed to the resource method. Another nice addition in Jakarta REST release is the ability to register a jakarta.ws.rs.core.Feature declaratively by placing an instance in META-INF/services/.
 

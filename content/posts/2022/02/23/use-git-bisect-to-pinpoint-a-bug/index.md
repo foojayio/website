@@ -26,13 +26,11 @@ I had read about `git bisect` a few times and figured that this time, I would us
 
 So what does `git bisect` do? It helps you find the exact commit that introduced a bug, using binary search.
 
-Prerequisites
--------------
+## Prerequisites
 
 For this, you must know a point in history (a commit hash, a tag) that did *not* have the bug. You also need to know a point in history that *does* have the bug. And finally, you need to have a reliable way to determine if the bug is there.
 
-The Process
------------
+## The Process
 
 From here on, using `git bisect` looks a bit like a game:
 > Git: does this version of your project contain the bug?  
@@ -59,7 +57,6 @@ git bisect bad           # no argument, so current revision
 git bisect good cecedd34 # could also be a tag
 ```
 
-
 Every time you answer that question, `git bisect` can cross out either half of the history between the last two points that you've checked:
 
 ```
@@ -67,7 +64,6 @@ git bisect good          # this commit is fine, it doesn't have the bug
 git bisect bad           # this commit is bad, it does have the bug
 git bisect skip          # this commit cannot be tested for the bug
 ```
-
 
 After each question that you answer, git checks out another revision, somewhere halfway between the last "good" and the last "bad" commit. With every iteration, this reduces the search space (the number of commits to consider) with 50%.
 
@@ -78,8 +74,7 @@ As you can see in the picture above, every time you answer that question, you ge
 
 If you want, you can watch a replay by looking at the output of `git bisect log`. Now is also a good time to clean up the mess we made with all those checkouts by issuing `git bisect reset`.
 
-Automate Everything!
---------------------
+## Automate Everything!
 
 But wait a minute... having this tedious manual check is both boring and error prone. There must be a way to automate this!
 
@@ -93,8 +88,7 @@ Rather than going through the manual process, we can have a script perform the c
 
 Typically, something like `mvn test` would be a good test.
 
-When Things Get Complicated
----------------------------
+## When Things Get Complicated
 
 But what if your setup is a bit more complex? The situation I faced today was a problem where Maven couldn't build Maven. How would you use `git bisect` for that?
 
@@ -145,7 +139,6 @@ echo "Exiting with status '$status'"
 exit $status
 ```
 
-
 Since the bug was not present in the last release of Maven, the last "good" commit is the **maven-3.6.3** tag. And because I don't know when it started failing, I use **HEAD** for the first "bad" commit.
 
 ```
@@ -153,14 +146,12 @@ git bisect start HEAD maven-3.6.3 --
 git bisect run ../can-build-master.sh
 ```
 
-
 After a couple of minutes and a lot of noise from my computer, I get the same output:
 > 9f88494b6064ad45ea2e2e1e3478afc7af0bc065 is the first bad commit
 
 Again, make sure to reset the project clone to a pristine state with `git bisect reset`.
 
-Wrapping Up
------------
+## Wrapping Up
 
 So, did I find the bug? Well, yes and no. I did find out which commit introduced the bug. But given that the message was so unclear, I gave up there.
 

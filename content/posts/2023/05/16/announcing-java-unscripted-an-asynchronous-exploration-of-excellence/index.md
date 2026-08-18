@@ -22,10 +22,6 @@ frozen: false
 
 **Introducing "Java Unscripted," a series featuring interviews with Java industry experts. We aim to inspire and guide new developers with these insights. Interested in participating? Fill out our [Interview Participation Form](https://docs.google.com/forms/d/e/1FAIpQLSfyZEjdUaL_NTRKO-Gfk_Y9jIhuUszka3p1Kw6cWVdRBkOESQ/viewform). Let's share your story with our community!**
 
-
-
-<br />
-
 In a rapidly evolving world of technology, insights from industry luminaries can act as a beacon for those looking to navigate the challenging landscape. Over the years, industry leaders have seen the technological landscape transform. As a result, they possess a treasure trove of experiences and insights that can inspire and guide the upcoming generation of professionals. This idea inspired our new interview series, "**[Java Unscripted: An Asynchronous Exploration of Excellence.](https://docs.google.com/forms/d/e/1FAIpQLSfyZEjdUaL_NTRKO-Gfk_Y9jIhuUszka3p1Kw6cWVdRBkOESQ/viewform)** "  
 
 An illuminating example of the rich insights shared in these interviews comes from [Geertjan Wielenga](https://twitter.com/GeertjanW). He emphasizes the importance of building deep, specialized knowledge within a specific ecosystem, like Java. Constantly hopping from one technology to another might seem enticing, but it can lead to a superficial understanding of multiple technologies without truly mastering any.
@@ -46,8 +42,6 @@ As you can see, these interviews offer a plethora of insightful ideas that can g
 Now, let's get to the exciting part! We're launching the "**Java Unscripted**" series, aimed at spotlighting influential personalities in the Java community. This series is a golden opportunity for you to share your journey, knowledge, and advice with the burgeoning developers of today.
 
 The interviews will be conducted asynchronously via **email** or **Slack** , with a set of 8-10 questions sent to you one at a time. This approach allows you the flexibility to respond in your own time and provide as much detail as you wish. Your responses will be compiled into a weekly feature published on **foojay.io**, along with your headshot. If we have enough interviews, we may even publish them in a book!
-
-<br />
 
 ### **We'd be thrilled to have you if you're interested in contributing to this series. Please fill out this Google Form to provide some basic information and preferences for the interview process:[Interview Participation Form](https://forms.gle/DsC9hN424sCPicgM8)**
 

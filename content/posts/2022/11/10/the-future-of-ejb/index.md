@@ -28,8 +28,7 @@ frozen: false
 
 Once upon a time EJB was almost synonymous with what was called Java EE or J2EE back then (Jakarta EE now). It suffered from many issues though, although it did incrementally got better. We'll explore some of those issues next.
 
-The past
---------
+## The past
 
 The very first version of EJB was released before XML even existed and featured a rather awkward "programmatic" configuration, where a java class had to be compiled and its binary and serialised version used as configuration file.
 
@@ -45,15 +44,13 @@ In CDI, things work exactly the other way around; CDI offers a core component mo
 
 Unfortunately, a few mistakes crept into CDI as especially in the beginning people didn't quite agree on CDI becoming this core model, or CDI becoming another attempt at doing EJB, but in broad lines other APIs building on CDI is what CDI is about.
 
-The Present
------------
+## The Present
 
 In the years after EJB 3.1, various APIs such as Jakarta Faces rebased on CDI, and new APIs such as Jakarta Security and Jakarta MVC were introduced that fully build on CDI from the get-go. Several features of EJB, such as the `@Asynchronous` annotation, were implemented in other APIs as a CDI compatible feature.
 
 EJB Full incrementally inched closer to EJB Lite, by removing Entity Beans (CMP/BMP), CORBA/IIOP Distributed Interoperability, and the embedded EJB container, as well as making the entire Enterprise Beans 2.x API Group optional.
 
-The Future
-----------
+## The Future
 
 With EJB being greatly de-emphasised in favour of CDI and many APIs in Jakarta EE that build upon CDI, there's almost certainly not going to be any further innovation in EJB itself. That is, no new features are foreseen to be added. On the other hand, due to the large amount of existing code that uses EJB beans, the technology is also not expected to be removed from Jakarta EE anytime soon.
 
@@ -86,7 +83,6 @@ public class AsyncBean {
 }
 ```
 
-
 Using OmniBeans, the above bean would become a regular CDI bean, with `@Stateless` translated to a custom scope that emulates some of the semantics of the real `@Stateless` in EJB, and the `@Asyncronous` annotation translated to a CDI based interceptor.
 
 At the moment of writing, the support is still limited, as transactions aren't yet supported and neither does the `@Asyncronous` support comes from Jakarta Concurrency. There's obviously a lot of work to be done still, but the beginning is there. Ideally we would end up with pluggable implementations of Jakarta Enterprise Beans, Jakarta Concurrency and Jakarta Transactions, which could then be somewhat trivially added to our own Jakarta EE runtime [Piranha Cloud](https://piranha.cloud/) or perhaps to up and coming Jakarta EE Core Profile runtimes such as Rudy De Busscher's [AtBash Runtime](https://github.com/atbashEE/runtime).
@@ -102,14 +98,11 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here: <https://omnifish.ee/blog/>.
 
-<br />
-
 <figure class="alignleft size-full is-resized">
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts
------------------------------
+## OmniFish - Jakarta EE experts
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

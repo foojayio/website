@@ -32,8 +32,7 @@ You can create workflows that build and test every pull request to your reposito
 
 And by integrating Snyk into your GitHub CI/CD, you can automate security scanning as part of your build cycle prior to production.
 
-Setting up a Github Actions CI Pipeline for Java
-------------------------------------------------
+## Setting up a Github Actions CI Pipeline for Java
 
 GitHub Actions workflows are YAML files in the `.github/workflows` folder. If you do not have a workflow, or want to add a new one, select **Actions** and **New workflow**.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-workflows-1240x274.jpg)
@@ -65,13 +64,11 @@ jobs:
      run: mvn -B package --file pom.xml
 ```
 
-
 This action will run on every push or pull request on the master branch. It is based on ubuntu and checks out the repository, while using the [setup-java](https://github.com/actions/setup-java) GitHub Action --- with Java 17 and Maven --- to build the Java jar file.
 
 If you're familiar with the syntax, this workflow is relatively straightforward, but you can refer to the [GitHub Actions documentation](https://docs.github.com/en/actions) for a complete overview of the possibilities.
 
-Integrating Snyk in your Github CI/CD
--------------------------------------
+## Integrating Snyk in your Github CI/CD
 
 With Snyk, you can integrate security testing for your new Java project. There are two primary methods for doing this. However, let's make sure two things are set up first.
 
@@ -96,7 +93,6 @@ Follow the steps described below --- including the few extra steps after`Build w
    run: snyk code test
 ```
 
-
 Set up NodeJS version 14 and download the Snyk CLI using npm. Next, analyze your dependencies with Snyk Open Source, and use Snyk Code to scan your custom code for vulnerabilities.
 
 Then, declare `SNYK_TOKEN` as the environment variable containing your API key. You can refer to the secret `SNYK_TOKEN` you set up earlier, or feel free to reuse the full code example of the GitHub Action.
@@ -105,7 +101,6 @@ Then, declare `SNYK_TOKEN` as the environment variable containing your API key. 
 env:
  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 ```
-
 
 The benefit of this approach is that you only have to compile and build your application once, which can save a lot of time when building large applications. The downside is the steps are used in series, and might not be efficient if one of the later steps fails.
 
@@ -128,7 +123,6 @@ opensource-security:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 ```
 
-
 According to the documentation, the default command is `test`. Without any additional configuration, it will scan your application for known vulnerabilities in your dependencies. If you want to set a specific CLI argument like `--all-projects` to accommodate nested projects, use the `with` keyword and set the property to `args`.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-properties-1240x278.jpg)
 
@@ -147,11 +141,9 @@ While Snyk scans our dependencies, let's check the Java code for vulnerabilities
          command: code test
 ```
 
-
 Notice that all three jobs will run in parallel, which is, in many cases, more efficient.
 
-Adding secure continuous delivery to your GitHub CI/CD
-------------------------------------------------------
+## Adding secure continuous delivery to your GitHub CI/CD
 
 Now, let's discuss the deployment --- or delivery --- part of your GitHub CI/CD. After building and testing are completed, it's time to publish the package to GitHub. To establish this, we'll use the Maven release plugin in our Java project
 
@@ -177,7 +169,6 @@ release:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-
 The maven commands [release:prepare](https://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html) and [release:perform](https://maven.apache.org/maven-release/maven-release-plugin/examples/perform-release.html) verify that the release has the right version number and actually gets published to our GitHub repository. Since we're counting on Maven to handle this, make the following configurations to your pom.xml file.
 
 ```
@@ -193,7 +184,6 @@ The maven commands [release:prepare](https://maven.apache.org/maven-release/mave
        </repository>
    </distributionManagement>
 ```
-
 
 Though our newly released application is currently free from vulnerabilities, that doesn't mean it'll remain secure forever. New vulnerabilities can show up in a variety of places, making it vital to continually monitor your code and dependencies after an application is deployed.
 
@@ -213,12 +203,10 @@ In addition to scanning during development, we can use Snyk to monitor dependenc
          command: monitor
 ```
 
-
 This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using --- and ensure that our published Java project remains vulnerability free.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-snyk-ui-1240x149.jpg)
 
-Integrating security in your GitHub Actions
--------------------------------------------
+## Integrating security in your GitHub Actions
 
 With GitHub Actions, creating a CI/CD pipeline for your GitHub project is quite straightforward. And with the Snyk actions, you can easily integrate security scanning on multiple levels for all applications.  
 

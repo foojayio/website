@@ -22,8 +22,7 @@ In the Java world, the situation is much better because Java desktop application
 
 frgaal ([https://frgaal.org](https://frgaal.org/)) is a retrofitting compiler for Java that helps you with these situations. It allows you to use modern and even experimental features while still keeping compatibility with your target runtime.
 
-frgaal: Frugal Czech Cake
--------------------------
+## frgaal: Frugal Czech Cake
 
 frgaal, based [on the name of a Czech cake](http://czechgastronomy.com/frgaly/), and pronounced a bit like "frugal", targets all those developers who are stuck with a runtime that doesn't support modern language features.
 
@@ -51,8 +50,7 @@ It's cool to read about new language features in upcoming versions of Java, but 
 
 Usually you'll need to download a JDK daily build or even build it from source. With frgaal it becomes much less painful.
 
-How to use frgaal
------------------
+## How to use frgaal
 
 The only thing you need to use it in a Maven build is to configure the maven-compiler-plugin.
 
@@ -83,7 +81,6 @@ The only thing you need to use it in a Maven build is to configure the maven-com
     </plugins>
 </build>
 ```
-
 
 If you would like to try it out right now, the only thing you need to do is clone this Github repository with a demo:
 
@@ -125,7 +122,6 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
 }
 ```
 
-
 Building and running the project is no different from a regular Maven project. Assuming you have JDK 8 or newer just run:
 
 *$ mvn clean install*
@@ -139,7 +135,6 @@ after sorting: [1, 3, 5, 6]
 ok
 ```
 
-
 That's it, three lines of code to try out new and experimental Java features without installing a preview JDK.
 
 ### I can't believe it's not Java!
@@ -150,8 +145,7 @@ The project patches javac 14 to allow it to generate bytecode for JDK8 and compi
 
 It seems really surprising that frgaal can produce bytecode from Java 14 syntax that is compatible with JDK 8, but it actually isn't, as JDK 9--14 contains no features that would require bytecode changes except modules and records. The `var` keyword is purely syntactic, so the compiled code remains the same. The same applies to """textblocks"""" as well. Switch expressions and "instanceof" do not require any special bytecode either. Most of these features just alter the AST of Java, so it's easy to emit JDK 8 compatible bytecode for the generator.
 
-Summary
--------
+## Summary
 
 The [frgaal project](http://frgaal.org/) allows you to try or use new Java language features in a very simple and convenient way. It's the quickest way to try out new Java syntax and language features. More important, it's a way to use these features in your real projects and brush up your Java, even if you're limited to an older runtime like in a serverless environment.
 

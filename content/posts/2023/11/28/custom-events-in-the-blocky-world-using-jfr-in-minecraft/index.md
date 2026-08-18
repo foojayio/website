@@ -51,7 +51,6 @@ jfr metadata debug/server-2023-11-17-155349.jfr | \
     grep minecraft --after-context=40
 ```
 
-
 The ChunkGeneration event looks as follows:
 
 ```java
@@ -95,14 +94,12 @@ class ChunkGeneration extends jdk.jfr.Event {
 }
 ```
 
-
 You can find all defined events [here](https://gist.github.com/parttimenerd/a3b0c74eea0c1da89fec533ebd468479). The actual implementation of these events is only slightly larger because some events accumulate data over a period of time.
 
 I'm, of course, not the first OpenJDK developer who stumbled upon these custom events. Erik Gahlin even found them shortly after their addition in 2021 and promptly created an issue to recommend improvements (see [MC-236873](https://bugs.mojang.com/browse/MC-236873)):
 [![](https://mostlynerdless.de/wp-content/uploads/2023/11/image-5.png)](https://bugs.mojang.com/browse/MC-236873)
 
-Conclusion
-----------
+## Conclusion
 
 In [my previous blog post](https://mostlynerdless.de/blog/2023/11/20/custom-jfr-events-a-short-introduction/), I showed you how to create custom JFR events for a small sample application.
 

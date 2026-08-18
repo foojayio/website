@@ -35,8 +35,7 @@ On the picture:
 
 Let's compare the different types of processors used for these SBCs.
 
-ARM: Efficient by Design
-------------------------
+## ARM: Efficient by Design
 
 [Arm Holdings plc](https://en.wikipedia.org/wiki/Arm_Holdings) (originally "Acorn RISC Machine", later "Advanced RISC Machines") is a British semiconductor and software design company. There primary business is the design of central processing unit (CPU) cores that implement the ARM architecture family of instruction sets. They don't manufacture the chips, but design the architecture and license it to others. This means that an application written for a [Qualcomm Snapdragon](https://en.wikipedia.org/wiki/Qualcomm_Snapdragon) processor should also work on a [Samsung Exynos](https://en.wikipedia.org/wiki/Exynos) or [Apple's M-series](https://en.wikipedia.org/wiki/Apple_M1) chip because they speak the same "ARM language".
 
@@ -90,8 +89,7 @@ What I love about ARM for Java development is the mature ecosystem. The JVM has 
 
 The entire Java ecosystem (OpenJDK, popular frameworks, and build tools) works seamlessly on ARM instances, including Apple's M-series and AWS Graviton. This means the same ARM-optimized Java code you're running on your Raspberry Pi could theoretically scale all the way up to massive cloud deployments on AWS Graviton. The architecture that powers your 20-euro Raspberry Pi Zero 2 is the same one handling enterprise-scale workloads in data centers. That's the beauty of ARM's versatility. It ranges from microcontrollers, to smart phones, to embedded systems, to cloud infrastructure, all with consistent tooling and development practices.
 
-x86: Running the Same Code Since 1985
--------------------------------------
+## x86: Running the Same Code Since 1985
 
 The x86 architecture of [Intel](https://en.wikipedia.org/wiki/Intel) (x86-64/AMD64 for modern systems) takes a different approach. It's a [CISC (Complex Instruction Set Computer)](https://en.wikipedia.org/wiki/Complex_instruction_set_computer) architecture with a rich, complex instruction set that's evolved over decades.
 
@@ -129,8 +127,7 @@ In 2023, Intel discontinued the NUC line entirely. But many other companies are 
 
 As expected, Java runs without issue on an x86 SBC, as I[documented in a video and blog post in November 2025](https://webtechie.be/post/2025-11-25-first-test-lattepanda-iota-with-ubuntu-and-java/). First experiments with Pi4J are unsuccessful because the GPIOs on the IOTA are controlled by an onboard [Raspberry Pi RP2040](https://www.raspberrypi.com/products/rp2040/), which must be addressed via a serial link. I will experiment with this in the future...
 
-RISC-V: Open Source Goes Hardware
----------------------------------
+## RISC-V: Open Source Goes Hardware
 
 [RISC-V](https://en.wikipedia.org/wiki/RISC-V) (pronounced "risk five") is the new kid on the block, and it's shaking things up. Unlike ARM and Intel, RISC-V is an open standard, and anyone can implement it without licensing fees. Features of the ARM architecture:
 
@@ -187,8 +184,7 @@ This is the main reason I want to try out RISC-V with Java! Pi4J will soon be re
 
 Does it work? No idea. Stay tuned for my 2026 experiments! 🙂
 
-Java Development Considerations
--------------------------------
+## Java Development Considerations
 
 As a Java developer working with embedded systems, here's what matters:
 
@@ -207,8 +203,7 @@ As a Java developer working with embedded systems, here's what matters:
   * Great for contributing to open-source JVM development
   * Exciting to experiment with new hardware platforms
 
-My 2026 Experiments
--------------------
+## My 2026 Experiments
 
 RISC-V is promising, improving rapidly, but not yet ready to replace established platforms for most use cases. However, for developers who value openness, want to experiment with cutting-edge hardware, or need to avoid licensing constraints, RISC-V with Java is an exciting frontier.
 
@@ -220,5 +215,3 @@ So this year, I plan to get hands-on experience with Pi4J on more SBCs by:
 * Sharing and contributing where I can
 
 Watch [my blog](https://webtechie.be/) for new posts, and subscribe to my [LinkedIn](https://www.linkedin.com/in/frankdelporte/), [Bluesky](https://bsky.app/profile/frankdelporte.be), [Mastodon](https://foojay.social/@frankdelporte), and [YouTube channel](https://www.youtube.com/@FrankDelporte) for updates!
-
-<br />

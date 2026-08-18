@@ -26,8 +26,7 @@ While undeniably powerful, **sun.misc.Unsafe** is a double-edged sword. Its impr
 
 For over a decade, the Java community has grappled with the challenge of addressing the widespread use of **sun.misc.Unsafe** in numerous libraries while mitigating its risks. Finally, with [JEP 471](https://openjdk.org/jeps/471), **sun.misc.Unsafe**'s memory-access methods are set to be deprecated, marking a clear pathway to their eventual removal.
 
-Safe and Efficient Alternatives
--------------------------------
+## Safe and Efficient Alternatives
 
 Two standard APIs now provide safe and efficient alternatives to **sun.misc.Unsafe**.
 
@@ -35,8 +34,7 @@ Two standard APIs now provide safe and efficient alternatives to **sun.misc.Unsa
 
 [**Foreign Function \& Memory API**](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/foreign/package-summary.html): Available from JDK 22, this API allows safe interaction with native memory and functions, promoting better memory management practices.
 
-Code Example: Atomic Counter
-----------------------------
+## Code Example: Atomic Counter
 
 To illustrate the transition, let's consider the **AtomicCounter** class, a simple thread-safe counter often implemented using **sun.misc.Unsafe** :  
 
@@ -86,9 +84,6 @@ public class AtomicCounter {
 }
 ```
 
-
-<br />
-
 While the above code is accessible in the earlier JDK version, from now on, the following version using VarHandle is advised.   
 
 ```java
@@ -131,9 +126,7 @@ public class AtomicCounterUsingVarHandle {
 }
 ```
 
-
-Phased Deprecation and Migration
---------------------------------
+## Phased Deprecation and Migration
 
 The migration will occur in several phases, each aligned with a separate JDK release:
 
@@ -142,8 +135,7 @@ The migration will occur in several phases, each aligned with a separate JDK rel
 3. **Phase 3 (JDK 26 or later)**: When these methods are invoked, the response will escalate by default, throwing exceptions.
 4. **Phases 4 and 5**: The deprecated methods will be removed, potentially occurring in the same release.
 
-Conclusion
-----------
+## Conclusion
 
 Developers are encouraged to transition to the VarHandle API and the Foreign Function \& Memory API.
 

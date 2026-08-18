@@ -37,8 +37,7 @@ This isn't a discipline problem: it's an architecture problem. System prompts ar
 
 **BoxLang AI 3.0 fixes this with the AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills "Anthropic's Agent Skills open standard") that treats knowledge as a first-class, versioned, reusable asset. Define it once. Inject it everywhere. Let your codebase --- not copy-paste --- be the source of truth.
 
-🧠 What Is a Skill?
--------------------
+## 🧠 What Is a Skill?
 
 A skill is a named block of domain knowledge or instructions that can be injected into any agent or model's system context at runtime. Think of it as a reusable expertise module: a SQL style guide, a tone-of-voice policy, an API cheat sheet, a set of security rules.
 
@@ -51,11 +50,9 @@ property name="description" type="string" default="";
 property name="content"     type="string" default="";
 ```
 
-
 That's it. The `description` tells the LLM when to apply the skill. The `content` is the full instruction block. Simple by design.
 
-📄 The SKILL.md File Format
----------------------------
+## 📄 The SKILL.md File Format
 
 Skills live in named subdirectories under `.ai/skills/`, following the Agent Skills open standard:
 
@@ -68,7 +65,6 @@ Skills live in named subdirectories under `.ai/skills/`, following the Agent Ski
     api-guidelines/
         SKILL.md
 ```
-
 
 The file format is plain Markdown with optional YAML frontmatter:
 
@@ -86,7 +82,6 @@ Alias all tables with a meaningful short name.
 Use parameterized queries for all user input.
 ```
 
-
 One important detail from the source code: if you omit the frontmatter `description`, BoxLang automatically uses the **first paragraph of the body** as the description. This matches the Claude Agent Skills standard, and it means even the simplest possible `SKILL.md` --- just a few lines of plain text --- works without any configuration:
 
 ```java
@@ -102,11 +97,9 @@ if ( descFromFrontmatter.len() ) {
 }
 ```
 
-
 The directory name becomes the skill's default name when loaded from a path. So `sql-optimizer/SKILL.md` becomes the `sql-optimizer` skill automatically.
 
-🔧 Creating Skills
-------------------
+## 🔧 Creating Skills
 
 Three ways to create skills, for three different use cases.
 
@@ -117,14 +110,12 @@ Three ways to create skills, for three different use cases.
 apiSkill = aiSkill( ".ai/skills/api-guidelines/SKILL.md" )
 ```
 
-
 **From an entire directory (recursive by default):**
 
 ```java
 // Discover every SKILL.md under .ai/skills/ and all subdirectories
 allSkills = aiSkill( ".ai/skills/", recurse: true )
 ```
-
 
 **Inline, for short guidance that lives in your code:**
 
@@ -136,11 +127,9 @@ sqlStyle = aiSkill(
 )
 ```
 
-
 The `aiSkill()` BIF handles all three cases --- you pass either a path or named arguments, and it figures out the rest.
 
-⚡ Two Injection Modes
----------------------
+## ⚡ Two Injection Modes
 
 This is where the architecture gets genuinely clever. Skills support two injection strategies that you can mix freely within the same agent.
 
@@ -158,7 +147,6 @@ agent = aiAgent(
 )
 ```
 
-
 Best for: short, universally relevant guidance that applies to virtually every query.
 
 ### Lazy / Available Skills
@@ -172,7 +160,6 @@ agent = aiAgent(
 )
 ```
 
-
 What the LLM sees in its system message:
 
 ```html
@@ -183,7 +170,6 @@ Call loadSkill(name) to activate when needed:
 - api-guidelines: REST API design standards for all new endpoints.
 - security-policy: Security rules for handling user data and authentication.
 ```
-
 
 The LLM only pulls full content for skills it actually needs. A query about formatting a date never loads the SQL optimizer. **Token usage stays low even with hundreds of skills in the library.**
 
@@ -207,7 +193,6 @@ var loadSkillTool = aiTool(
 )
 ```
 
-
 When the LLM calls `loadSkill( "sql-optimizer" )`, two things happen: the full content is returned as a tool result (so the LLM can use it immediately), and the skill is **promoted to always-on** for all subsequent calls in that session. The agent learns on the fly what it needs.
 
 ### Promoting Lazy Skills Mid-Session
@@ -220,9 +205,7 @@ You can also promote a skill programmatically at any point:
 agent.activateSkill( "sql-optimizer" )
 ```
 
-
-🌍 Global Skills Pool
----------------------
+## 🌍 Global Skills Pool
 
 Register skills once at the application level and have them automatically available to every new agent --- no explicit wiring required.
 
@@ -235,7 +218,6 @@ aiGlobalSkills().add( aiSkill( ".ai/skills/security-policy/SKILL.md" ) )
 agent1 = aiAgent( name: "support-bot" )    // already has company-tone + security-policy
 agent2 = aiAgent( name: "code-assistant" ) // ditto
 ```
-
 
 You can also configure global skills statically in `boxlang.json`:
 
@@ -252,11 +234,9 @@ You can also configure global skills statically in `boxlang.json`:
 }
 ```
 
-
 With `autoLoadSkills: true`, any `SKILL.md` file discovered in `skillsDirectory` at startup is automatically added to the global pool.
 
-🎨 How Skills Render
---------------------
+## 🎨 How Skills Render
 
 `AiSkill` has two rendering methods that are used differently depending on whether the skill is always-on or lazy.
 
@@ -265,7 +245,6 @@ With `autoLoadSkills: true`, any `SKILL.md` file discovered in `skillsDirectory`
 ```html
 - sql-optimizer: Enforces our SQL coding standards. Apply when writing or reviewing database queries.
 ```
-
 
 `toContentBlock()` --- the full markdown block injected for always-on skills:
 
@@ -280,11 +259,9 @@ Prefer CTEs over nested sub-queries for readability.
 ...
 ```
 
-
 The `buildSkillsContent()` method on `AiBaseRunnable` assembles both sections into the final system message block --- always-on skills rendered in full, available skills as a compact index.
 
-🔍 Introspection
-----------------
+## 🔍 Introspection
 
 Both `AiAgent` and `AiModel` expose full skill visibility:
 
@@ -300,7 +277,6 @@ println( config.skills.availableSkills )        // [{ name, description }, ...]
 println( agent.buildSkillsContent() )
 ```
 
-
 The system message is also cached and fingerprinted --- if nothing has changed since the last call (same description, instructions, skill pools), the cached version is returned without rebuilding:
 
 ```java
@@ -312,11 +288,9 @@ private string function _buildSystemMessageFingerprint() {
 }
 ```
 
-
 Cache invalidation happens automatically when you add or activate skills.
 
-📋 Full Skills API Reference
-----------------------------
+## 📋 Full Skills API Reference
 
 |                       Method / BIF                       |       Where        |               Description                |
 |----------------------------------------------------------|--------------------|------------------------------------------|
@@ -330,8 +304,7 @@ Cache invalidation happens automatically when you add or activate skills.
 | `buildSkillsContent()`                                   | `AiModel, AiAgent` | Render the combined system-message block |
 | `listSkills() `                                          | `AiModel, AiAgent` | Get active and available skill summaries |
 
-🚀 Putting It Together
-----------------------
+## 🚀 Putting It Together
 
 Here's a complete real-world example: a code review agent with a curated skill library. Short, universal skills are always-on. A large specialized library is lazy-loaded on demand.
 
@@ -357,11 +330,9 @@ response = agent.run( "Review this BoxLang class for style and correctness: ..."
 response = agent.run( "Is this query efficient? SELECT * FROM orders WHERE ..." )
 ```
 
-
 No hardcoded system prompts. No copy-paste. Skills live in files, travel with your codebase, and get reviewed alongside your code.
 
-What's Next
------------
+## What's Next
 
 **In Part 2** , we'll go deep on the Tool System Overhaul --- `BaseTool`, `ClosureTool`, the Global Tool Registry, `@AITool` annotation scanning, and the built-in `now@bxai` tool that gives every agent temporal awareness for free.
 
@@ -370,5 +341,3 @@ What's Next
 [← Previous](https://foojay.io/today/boxlang-ai-series-complete-guide-to-building-ai-agents/)
 
 [Next →](https://foojay.io/today/boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem/)
-
-<br />

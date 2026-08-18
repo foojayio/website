@@ -31,13 +31,11 @@ img {
 }
 ```
 
-
 However, it means that you download the original image. It entails two problems: the size of the original image and the suboptimal browser-based resizing.
 
 This post will cover two alternatives: traditional and brand-new solutions.
 
-Ahead-of-time resizing
-----------------------
+## Ahead-of-time resizing
 
 The traditional solution to a single image source has been ahead-of-time resizing. Before releasing, designers would take time to provide multiple image versions in different resolutions. On this blog, I'm using this technique. I provide three resolutions to display the post's main image in different contexts as background images:
 
@@ -67,13 +65,11 @@ In turn, one can use it like the following:
 </picture>
 ```
 
-
 This way has worked for ages, but it has two issues. First, providing multiple resolutions for each image takes a long time. One could automate the process and get good results with AI.
 
 However, the volume of necessary storage could be twice or thrice the size of the original image, depending on the number of extra resolutions created. In an assets-rich environment, *e.g.*, e-commerce would significantly increase costs.
 
-On-the-fly resizing
--------------------
+## On-the-fly resizing
 
 I recently stumbled upon `imgproxy`, a component to resize images on-the-fly:
 > imgproxy makes websites and apps blazing fast while saving storage and SaaS costs
@@ -102,7 +98,6 @@ One solution would be for the web developer to code each imgproxy URL in the HTM
 </picture>
 ```
 
-
 It leaks topology-related details on the web page. It's not a maintainable solution. We can solve the issue with a reverse proxy or an API Gateway. I'll use Apache APISIX for obvious reasons.
 
 With this approach, the above HTML becomes much more straightforward:
@@ -117,7 +112,6 @@ With this approach, the above HTML becomes much more straightforward:
     <img src="ai-generated.jpg" />
 </picture>
 ```
-
 
 Apache APISIX intercepts requests starting with `/resize`, rewrites the URL for `imgproxy`, and forwards the rewritten URL to `imgproxy`. Here's the overall flow:
 
@@ -135,7 +129,6 @@ routes:
       nodes:
         "imgproxy:8080": 1
 ```
-
 
 1. Match requests prefixed with `/resize`
 2. Rewrite the URL
@@ -163,7 +156,6 @@ services:
     build: content
 ```
 
-
 1. Simple web server hosting the HTML and the main image
 
 We can now test the above setup with the browser's Developer Tools, emulating small screen devices, *i.e.* , iPhone SE. The result is the following: [![](test-set-up-result.png)](test-set-up-result.png)
@@ -178,8 +170,7 @@ Cutting your storage costs by ten is naturally a great benefit. However, it's no
 
 To fix it, we need a caching layer in front, either a custom one or, more likely, a . You may object that we will store assets again; thus, storage costs will rise again. However, a considerable difference is that the cache works only for **used** images, whereas we previously paid for storing all images in the first solution. You can also apply known recipes for caching, such as pre-warming, when you know a group of images will be in high demand, *e.g.*, before an event.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we described how to use Apache APISIX with `imgproxy` to reduce the storage cost of images in multiple resolutions. With caching on top, it adds more components to the overall architecture but shrinks down storage costs.
 
@@ -191,8 +182,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [imgproxy documentation](https://docs.imgproxy.net/)
 * [imgproxy interactive demo](https://imgproxy.net/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/resize-images-on-the-fly/) on October 1^st^, 2023*
 

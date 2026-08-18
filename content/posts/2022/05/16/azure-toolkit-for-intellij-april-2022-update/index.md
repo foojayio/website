@@ -31,8 +31,7 @@ In addition, we'll share some new features and enhancements of our latest releas
 
 So let us get right into it...
 
-Roadmap
--------
+## Roadmap
 
 We are excited to announce our roadmap for the next few months.
 
@@ -40,8 +39,7 @@ Here is a picture that summarizes our investment areas:
 
 ![Toolkit roadmap 2022](Toolkit-roadmap-2022-1024x576.png)
 
-What is upcoming?
------------------
+## What is upcoming?
 
 ### Integration with Azure Services
 
@@ -81,8 +79,7 @@ In addition to the areas above, we also plan to make deeper integration with key
 
 We hope these improvements will greatly increase developer's productivity when working with Azure applications in IntelliJ IDEA. Let us know if you have any feedback or questions regarding the roadmap above!
 
-New Features in April
----------------------
+## New Features in April
 
 Besides the roadmap, we also want to share some exciting new product features in the latest release.
 

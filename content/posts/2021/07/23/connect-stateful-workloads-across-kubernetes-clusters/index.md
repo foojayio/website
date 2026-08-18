@@ -29,8 +29,7 @@ One of the biggest challenges in providing a solution that spans multiple region
 
 In this post, we'll go over how we arrived at our solution, its technical overview, and a hands-on example with the Cassandra operator.
 
-Storytime
----------
+## Storytime
 
 About a year ago, several blog posts were published that inspired us on this journey. The first was the [Nebula announcement](https://slack.engineering/introducing-nebula-the-open-source-global-overlay-network-from-slack/) from Slack. Reading it and then learning about Nebula's architecture was a good introduction to the capabilities and feasibility of home-built overlay networks. The introduction to [how Tailscale works](https://tailscale.com/blog/how-tailscale-works/) was another good primer on the subject.
 
@@ -38,8 +37,7 @@ Later, Linkerd published a post about [service mirroring](https://linkerd.io/202
 
 So the idea of making our own virtual IPs and exposing them just to the relevant pods via sidecars was born.
 
-Lightweight overlay network to the rescue
------------------------------------------
+## Lightweight overlay network to the rescue
 
 Overlay networks differ in their capabilities and implementations, but one thing that unites them is that they run on top of other networks. Each link connecting two nodes of an overlay network corresponds to a path of one or more links on the underlying network. While overlay networks usually serve traffic for multiple different apps, the overlay network described here will be single tenant and dedicated to one app. It will consist of two logical components: routing and transport. For routing, we need a way to route connections to a given stateful pod (virtual IP) that survives pod IP changes during pod restart. For transport, we'll need to communicate the source and destination virtual IP addresses across the connection and to secure the data stream.
 ![](image-2-1024x450.png)
@@ -52,8 +50,7 @@ With routing figured out, we now need to address packet transport. Using a proxy
 
 We'll attach an init container and a sidecar to each pod. The privileged init container will set up the packet routing and forwarding logic, while the sidecar will proxy the traffic to the right endpoint, either local or remote. This is similar to the approach used by popular service mesh implementations like Istio and Linkerd, which usually auto-inject these containers during pod creation via the [Mutating Admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/).
 
-Hands-on example with cass-operator
------------------------------------
+## Hands-on example with cass-operator
 
 We can illustrate the above concept by creating a lightweight overlay network for Cassandra's internode traffic. We'll deploy a Cassandra cluster consisting of two datacenters using the open source [cass-operator](https://github.com/k8ssandra/cass-operator). After preparing two Kubernetes clusters of 3 nodes each (2 CPU \& 4 GB RAM), perform the following steps. Steps one through five are performed in both kubes, while steps six and seven are different for each:
 
@@ -461,12 +458,9 @@ After the pods come up, we can run a command to view the status of the cluster i
     UN  10.2.0.0  184.51 KiB  1            7.5%              0baf0e17-b057-473f-903c-44a2dea2ee56  rack0
     UN  10.2.1.0  189.05 KiB  1            24.6%             b999cd26-6149-498b-aa6f-f851cad679d5  rack1
 
-<br />
-
 And there we have it, a multi datacenter deployment of Cassandra on it's own lightweight overlay network! To set up [CQL connectivity](https://github.com/k8ssandra/cass-operator/tree/master/docs/ingress), regular pod IPs can continue to be used, as the overlay network is only carrying internode traffic. One thing to note is the absence of mTLS, which would need to be added to the nginx configuration to properly secure the installation.
 
-To wrap it up
--------------
+## To wrap it up
 
 With a bit of creativity, we were able to utilize off-the-shelf functionality and components to set up lightweight cross-cluster communication for apps in a multitenant environment.
 

@@ -26,8 +26,7 @@ You find one giant cluster on one end of the spectrum and many small-sized ones 
 
 I want to list each approach's pros and cons in this post. Then, I'll settle the discussion once and for all and argue why selecting the giant cluster option is better.
 
-The one giant cluster approach
-------------------------------
+## The one giant cluster approach
 
 Deciding on a single giant cluster has great benefits.
 
@@ -61,8 +60,7 @@ A single cluster means a single control plane, simplifying management and reduci
 
 Additionally, many of the points above tie into cost optimization. With a single cluster, you only need to configure monitoring (*e.g.*, Prometheus), logging, and security tools once, reducing duplication. In-place automation streamlines operations, helping manage costs without adding unnecessary infrastructure expenses.
 
-Downsides of a one giant cluster approach
------------------------------------------
+## Downsides of a one giant cluster approach
 
 Unfortunately, the giant cluster option is not only unicorns and rainbows; there are definite downsides.
 
@@ -90,8 +88,7 @@ Kubernetes objects are namespace-scoped, but a couple of them are cluster-scoped
 
 It means that if a team wants to use v1 of a CRD, then every team on the same cluster is stuck with v1 if they wish to use this CRD. Worse, if any team wants to upgrade to v2, they must coordinate across all teams using the CRD to synchronize the upgrade.
 
-What's the ideal size, then?
-----------------------------
+## What's the ideal size, then?
 
 I could describe the pros and cons of very granular clusters, but they mirror the opposite of what we have just seen. For example, very granular clusters allow each team to work on their version of a CRD without stepping on another team's toes. For this reason, I'll avoid repeating myself.
 
@@ -99,12 +96,9 @@ Most, if not all, articles evaluating the pros and cons of each end of the spect
 
 <img fetchpriority="high" decoding="async" class="aligncenter wp-image-115768 size-medium" src="ideal-cluster-size-700x313.png" alt="What's the ideal cluster topology?" width="700" height="313">
 
-<br />
-
 ‎I'll take a risk and advertise for two clusters: one for production and the other for everything else. How would you manage the cons mentioned above? Read on.
 
-vCluster
---------
+## vCluster
 
 [vCluster](https://www.vcluster.com/) is an Open Source product that allows creating of so-called virtual clusters. vCluster is part of the CNCF landscape, specifically a [certified Kubernetes distribution](https://www.cncf.io/training/certification/software-conformance/). Being a certified distro means a virtual cluster offers every Kubernetes API you can expect, and you can deploy any application to it just like any other Kubernetes cluster.
 
@@ -112,14 +106,11 @@ vCluster operates by creating the virtual cluster in a dedicated namespace. You 
 
 <img decoding="async" class="aligncenter wp-image-115769 size-medium" src="vcluster-700x510.png" alt="Virtual clusters inside a host cluster" width="700" height="510">
 
-<br />
-
 Once you've created a virtual cluster via the CLI or the Helm chart, you can connect to it. The client-side CLI creates a dedicated reusable kubeconfig context. From within a virtual cluster, users see no other virtual clusters.
 
 If you need to access the host cluster resources from the virtual cluster or vice versa, vCluster uses a so-called syncer that syncs objects back and forth according to a configuration file. This way, you can set up an Ingress Controller on the host cluster and define your Ingress objects in the virtual cluster(s).
 
-How vCluster mitigates the downsides of a giant cluster
--------------------------------------------------------
+## How vCluster mitigates the downsides of a giant cluster
 
 Let's review each downside of a giant cluster and how vCluster handles it.
 
@@ -129,20 +120,16 @@ Let's review each downside of a giant cluster and how vCluster handles it.
 * Upgrades and maintenance risks: Upgrade and maintenance tasks are limited to the scope of a single virtual cluster. You can do them in turn, and they will only affect the virtual clusters you target.
 * Cluster-wide objects: Finally, with virtual clusters, every team can install their version of a CRD, and its virtual cluster binds the CRD. It allows each team to be entirely independent of each other regarding the version of a CRD they use.
 
-But I need different clusters!
-------------------------------
+## But I need different clusters!
 
 While a single giant cluster provides compelling advantages, there are contexts in which a multi-cluster approach is justified. The most common reason is geographic distribution---specific applications require clusters in multiple regions to meet compliance requirements, reduce latency, or provide disaster recovery. For example, companies operating under GDPR or financial regulations may need strict data residency enforcement, which requires region-specific clusters. Similarly, organizations with stringent security postures may enforce complete isolation between environments or business units, making separate clusters a hard requirement.
 
 However, even in these cases, vCluster remains relevant. It allows for minimizing the number of physical clusters while still enabling workload separation at a virtual level. Instead of creating a sprawling landscape of Kubernetes clusters, teams can deploy regional virtual clusters within a single host cluster, balancing isolation and operation complexity.
 
-Conclusion
-----------
+## Conclusion
 
 Kubernetes cluster topology decisions are critical and long-lasting. While many advocate for a middle-ground approach between a single cluster and many small ones, they rarely specify the exact setup. Instead of guessing how many clusters to create, consolidating everything into a single, well-managed giant cluster makes more sense. The benefits---better resource utilization, lower operational overhead, simplified networking, centralized governance, and cost efficiency---outweigh the downsides.
 
 That said, the traditional downsides of a giant cluster, such as a larger blast radius, multi-tenancy complexities, scalability limits, upgrade challenges, and cluster-wide object constraints, are valid concerns. This is where vCluster changes the game. By using virtual clusters, you retain all the advantages of a single giant cluster while mitigating its worst drawbacks. vCluster isolates workloads, reduces operational risk, scales dynamically, simplifies upgrades, and removes conflicts over cluster-wide objects.
 
 Enhanced with vCluster, one cluster for production and one giant cluster for everything else, is the best approach for long-term scalability, efficiency, and ease of operations.
-
-<br />

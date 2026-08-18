@@ -31,8 +31,6 @@ The reason is that there isn't much to write about. Its debugger is simpler for 
 
 {{< youtube OBgLeRwjlAc >}}
 
-<br />
-
 This isn't a slam against VS Code or against Microsoft. Visual Studio has one of the most powerful debuggers around. But Visual Studio Code doesn't have a lot of the features from Visual Studio or other IDEs. I believe this is intentional.
 
 I think this is a user experience-driven decision in which they removed features to simplify usability. One thing VS Code did well was exposing the logpoint (tracepoint) feature, so it is more discoverable to the casual developer. That's pretty great and wouldn't have been practical if the IDE had all the salient features.
@@ -77,8 +75,7 @@ As you can see in the following table there are many missing features that are a
 | Searchable memory View      | ❌           |                                | [Video](https://www.youtube.com/watch?v=dFOFOEg2W4k&t=55s), [Post](https://debugagent.com/memory-debugging-a-deep-level-of-insight)  |
 | Track new Instances         | ❌           |                                | [Video](https://www.youtube.com/watch?v=dFOFOEg2W4k&t=197s), [Post](https://debugagent.com/memory-debugging-a-deep-level-of-insight) |
 
-The Missing Features
---------------------
+## The Missing Features
 
 Following is a high-level overview of the missing features.
 
@@ -140,8 +137,7 @@ We can search through memory to [find any object instance](https://www.youtube.c
 
 Better yet. We can [track every new instance of a particular class](https://www.youtube.com/watch?v=dFOFOEg2W4k&t=197s). Get full stack traces to every new instance created between one breakpoint and another. This can track what happened under the hood with surgical precision.
 
-Finally
--------
+## Finally
 
 There's a lot I didn't cover because there's just so much. I don't think VS Code is inherently bad. It just went for simplicity. Personally, I think of myself as a power user. If you're like me I hope this post gave you a sense of what you're missing.
 

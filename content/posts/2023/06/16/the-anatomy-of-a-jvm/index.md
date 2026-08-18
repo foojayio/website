@@ -28,20 +28,11 @@ In this article, we want to look at one part under the umbrella: the **Java Virt
 
 What is it exactly, and how does it work?
 
-<br />
-
-
-
 ### *Java is consistently in the top of most popular languages. The real reason for this is not the language itself but the JVM. And the power that it gives to the developer.*
 
 Simon Ritter, Deputy CTO, Azul
 
-<br />
-
-
-
-Understanding JDK versus JRE versus JVM
----------------------------------------
+## Understanding JDK versus JRE versus JVM
 
 The software world is overloaded with abbreviations, which can be confusing and lead to misuse of specific terms, so we first need to understand the difference between the following terms.
 ![CHART: Understanding JDK versus JRE versus JVM](FY24-Q2-Oracle-Compete-Anatomy-of-a-JDK-hero-1.jpg)
@@ -68,8 +59,7 @@ But with Java 9, modules were introduced, which allow you to build a runtime wit
 
 Because many organizations still depend on a JRE approach, Azul and other providers still create JREs for newer versions. Look at the [Azul Core download page](https://www.azul.com/downloads/?package=jre) for a list of all available JREs.
 
-What's happening inside the JVM
--------------------------------
+## What's happening inside the JVM
 
 As we learned, the Java Virtual Machine (JVM) is part of the JDK, runs our application, and is called a "**managed runtime environment."** The "managed" part of this term is essential as it means it not only executes the code but handles a lot of extra functionality on top of that.
 
@@ -142,8 +132,7 @@ Keep in mind that "statically" is linked to how values are defined because, on t
 
 For instance, based on environment settings, you can use different databases during testing versus in-production. In each case, other classes can be loaded dynamically to interact with the database.
 
-What are "Azul Builds of OpenJDK?"
-----------------------------------
+## What are "Azul Builds of OpenJDK?"
 
 All Java runtimes have to behave the same way, so that you, as a user, are guaranteed that your application will produce the same results, independent of which JDK you are using.
 
@@ -183,8 +172,7 @@ To verify this, distributions must pass all the tests of the Java Technology Com
 
 The Azul JDK distributions can be downloaded from ["Download Azul JDKs](https://www.azul.com/downloads/?package=jdk)."
 
-Conclusion
-----------
+## Conclusion
 
 The JVM handles many tasks that you, as a developer, don't want and need to take care of compared to other languages.
 

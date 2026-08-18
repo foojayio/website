@@ -25,15 +25,13 @@ frozen: false
 The most voted answer is:
 > Namespace scoped CRDs
 
-A short intro to CRDs
----------------------
+## A short intro to CRDs
 
 Kubernetes comes packed with existing objects, such as `Pod`, `Service`, `DaemonSet`, etc., but you can create your own: the latter are called Custom Resource Definitions. Most of the time, s are paired with a custom controller called an *operator*. An operator subscribes to the lifecycle events of CRD(s). When you act upon a CRD by creating, updating, or deleting it, Kubernetes changes its status, and the operator gets notified. What it does depends on the nature of the CRD.
 
 For example, the [Prometheus operator](https://prometheus-operator.dev/docs/getting-started/introduction/) subscribes to the lifecycles of a couple of different CRDs: `Prometheus`, `Alertmanager`, `ServiceMonitor`, etc., to make operating Prometheus easier. In particular, it will create a Prometheus instance when it detects a new `Prometheus` . It will configure the instance according to the CR's manifest.
 
-The issue with cluster-wide CRDs
---------------------------------
+## The issue with cluster-wide CRDs
 
 CRDs have a cluster-wide scope; that is, you install a CRD for an entire cluster. Note that while the definition is cluster-wide, the CR's scope is either `Cluster` or `Namespaced` depending on the CRD.
 
@@ -49,8 +47,7 @@ Don't get me wrong; I'm all for a lean architectural landscape that limits the n
 
 The cluster-wide CRD doesn't allow it, or at least makes it very hard: we should find a Traefik that handles v0.5.0, **if there's one** and it's still maintained, migrate all APISIX CR to Traefik **at once**, and then proceed to upgrade. This approach requires expensive coordination, the cost of which grows exponentially with the number of teams involved.
 
-The separate clusters approach
-------------------------------
+## The separate clusters approach
 
 The obvious solution is to have one cluster per team. If you have been operating clusters, you know this approach doesn't scale.
 
@@ -60,8 +57,7 @@ On top of that, every cluster needs a complete monitoring solution. It includes 
 
 All in all, lots of clusters mean lots of additional operational costs.
 
-vCluster, a sensible alternative
---------------------------------
+## vCluster, a sensible alternative
 
 The ideal situation, as the initial quote of this post states, would be to have namespace-scoped CRDs. Unfortunately, it's not the path that Kubernetes chose. The next best thing would be to add a virtual cluster on top of the real one to partition it: that's the promise of [vCluster](https://www.vcluster.com/).
 > What are virtual clusters?
@@ -78,7 +74,6 @@ We can now create our virtual clusters.
 vcluster create teamx
 ```
 
-
 The output should be similar to the following:
 
 ```
@@ -92,7 +87,6 @@ The output should be similar to the following:
 08:01:32 done vCluster is up and running
 ```
 
-
 Because we didn't specify any namespace, `vcluster` created one with the same name as the virtual cluster. If you prefer to set a specific namespace, use the `-n` option, .e.g._, `vcluster create mycluster -n mynamespace`.
 
 Note that you can customize each virtual cluster via a `values.yaml` [configuration file](https://www.vcluster.com/docs/vcluster/configure/vcluster-yaml/). In the context of this post, we will keep the default options.
@@ -105,7 +99,6 @@ At this point, it's as if we were in a separate Kubernetes cluster. Team X can i
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml
 ```
 
-
 The output is:
 
 ```
@@ -115,13 +108,11 @@ customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.
 customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
 ```
 
-
 Team Y can do the same with their version. Because we are both teams X and Y, we need to disconnect first from the virtual cluster.
 
 ```bash
 vcluster disconnect
 ```
-
 
 You should see the result of the operation:
 
@@ -129,14 +120,12 @@ You should see the result of the operation:
 08:05:29 info Successfully disconnected and switched back to the original context: orbstack
 ```
 
-
 Let's impersonate team Y, create the virtual cluster, and install another version of the CRDs:
 
 ```bash
 vcluster create teamy
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/standard-install.yaml
 ```
-
 
 The output of the second command is the following:
 
@@ -148,15 +137,13 @@ customresourcedefinition.apiextensions.k8s.io/httproutes.gateway.networking.k8s.
 customresourcedefinition.apiextensions.k8s.io/referencegrants.gateway.networking.k8s.io created
 ```
 
-
 Version 1.2 has a new GRPC route that is not found in version 1.0. This way, team X can now install their Gateway API provider that works with v1.0 and team Y the one that works with 1.2.
 
 CRDs are cluster-wide resources, but there's no conflict since the virtual clusters behave like isolated clusters. Each team can happily use the version they need without forcing others to use it.
 
 ![](deployment-vcluster.png)
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we touched on the problem of some Kubernetes objects: they are cluster-wide and lock all teams working on the same cluster to use the same version. Running a Kubernetes cluster incurs costs; managing lots of them requires mature and organized automation.
 

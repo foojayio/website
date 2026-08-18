@@ -30,8 +30,7 @@ The main purpose is to reduce the number of system calls needed between the subs
 
 In this article, I will explain how DTOs are used in modern Java applications, ways your application can benefit, and how Java DTOs can help you be more secure by preventing accidental data leaks.
 
-What is a POJO, Java Bean, and Value Object
--------------------------------------------
+## What is a POJO, Java Bean, and Value Object
 
 As the name already suggested, a Plain Old Java Object (POJO) is an ordinary Java Object. It can be any class and isn't bound to any specific restrictions other than the ones prescribed by the Java language. They are created for re-usability and increased readability.
 
@@ -51,7 +50,6 @@ public class CoffeePOJO {
    }
 }
 ```
-
 
 A Java Bean is a POJO according to the [JavaBean standard](https://www.oracle.com/java/technologies/javase/javabeans-spec.html). According to this standard, all properties are private, and will be accessed with getter and setter methods. Additionally a no-arg constructor should be present, along with a few more things.
 
@@ -84,7 +82,6 @@ public class CoffeeBEAN implements Serializable {
 }
 ```
 
-
 A Value Object is a small object that represents a simple data entity.
 
 However, a value object doesn't typically have an identity.
@@ -93,8 +90,7 @@ Value objects are not currently available in Java, but JDK maintainers are worki
 
 For now, we have to create a POJO to do the work for us.
 
-Implementing a Data Transfer Object
------------------------------------
+## Implementing a Data Transfer Object
 
 A DTO can be implemented as a POJO --- or a Java Bean for that matter. The most important thing is that a DTO separates concerns between entities like the presentation layer and the domain model, for example.
 
@@ -131,7 +127,6 @@ public class FavoriteCoffeeDTO {
 }
 ```
 
-
 I separated the domain layer from the presentation layer in the implementation above, allowing my controller to now handle mapping the two domain entities to the DTO.
 
 In this example, I made the fields private, meaning I have to create getter and setter methods to access the fields. Users often choose to follow the JavaBean standard either completely or partially for DTO.
@@ -149,7 +144,6 @@ public class FavoriteCoffeeDTO {
 String name = favCoffeeDTO.name;
 ```
 
-
 Lastly, if you updated to a more recent version of Java, you might want to use Java records for your DTO's. Java Records are simple immutable classes that automatically provide you with an all-args constructor, access methods, toString(), and hashCode() without defining them.
 
 This makes your code less verbose and more readable. Notice that records do not follow the Java Bean specification, since the access methods do not have a `get` or `set` prefix.
@@ -160,9 +154,7 @@ public record FavoriteCoffeeDTO(String name, List<String> coffees) {}
 String name = favoriteCoffeeDTO.name();
 ```
 
-
-What makes a good DTO?
-----------------------
+## What makes a good DTO?
 
 The purpose of a DTO is to carry data between processes. Therefore, a good DTO only contains the information needed for that specific part of the system.
 
@@ -170,8 +162,7 @@ In our API example, we only need to return the name of the customer and their fa
 
 Also after a DTO is initialized, its state shouldn't change or evolve. This means that an immutable data structure would be a great fit for a DTO. As a DTO only carries data that should be unaltered, a Java Record would be a great fit --- especially because JSON serialization libraries like Jackson support Java Records.
 
-DTO security considerations
----------------------------
+## DTO security considerations
 
 We already noticed that we decouple the Domain model from the presentation layer with this DTO pattern. Simple DTOs that only contain the data needed for this subsystem or API, without any business logic, can also improve your security.
 
@@ -185,7 +176,6 @@ public List<Customer> getAllCustomers(){
    return repository.findAll();       
 }
 ```
-
 
 If our customer object is the same as in our previous example, we are already displaying too much information. Do we actually need the `id` or the list of favorite `coffees`?
 
@@ -202,7 +192,6 @@ public class Customer {
 }
 ```
 
-
 If we don't filter in our endpoint, we suddenly create a data breach, since providing a full name and home address is considered a privacy breach in many countries.
 
 Decoupling the API from the data model with a DTO would have prevented this because the mapper controller would only populate necessary fields in the DTO.
@@ -216,9 +205,7 @@ public class CustomerDTO {
 }
 ```
 
-
-Recommendations
----------------
+## Recommendations
 
 Using DTOs in Java to decouple subsystems is generally a good idea.
 
@@ -240,8 +227,7 @@ Check out the following resources to learn more about Java security:
 * [10 Java security best practices](https://snyk.io/blog/10-java-security-best-practices/)
 * [Java logging: what should you log and what not?](https://snyk.io/blog/java-logging-what-should-you-log-and-what-not/)
 
-Secure your Java code with Snyk
--------------------------------
+## Secure your Java code with Snyk
 
 Create a free Snyk account to find and fix vulnerabilities in your Java applications.
 

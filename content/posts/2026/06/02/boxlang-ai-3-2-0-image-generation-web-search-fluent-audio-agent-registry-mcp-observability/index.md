@@ -50,7 +50,6 @@ response = aiImage(
 dataURI = response.toDataURI()
 ```
 
-
 The returned AiImageResponse object gives you everything you need: hasImages(), getCount(), getFirstURL(), getFirstBase64(), saveToFile(), saveAllToDirectory(), toDataURI(), getMimeType(), and toStruct().
 
 Supported providers out of the box:
@@ -68,7 +67,6 @@ A generateImage@bxai agent tool is auto-registered in the global tool registry a
 agent = aiAgent( tools: [ "generateImage@bxai" ] )
 ```
 
-
 📚 **[Image Generation Docs](https://ai.ortusbooks.com/main-components/image-generation "Image Generation Docs")**
 
 🔍 Web Search --- aiWebSearch() \& aiWebSearchAsync()  
@@ -83,7 +81,6 @@ results = aiWebSearch( "latest BoxLang AI updates", { provider: "brave", maxResu
 future = aiWebSearchAsync( "BoxLang release highlights", { provider: "tavily" } )
 results = future.get()
 ```
-
 
 Supported providers:
 
@@ -105,7 +102,6 @@ agent = aiAgent(
 
 response = agent.run( "Find and summarize recent BoxLang AI release highlights" )
 ```
-
 
 📚 **[Web Search Docs](https://ai.ortusbooks.com/main-components/web-search "Web Search Docs")**
 
@@ -142,7 +138,6 @@ audio = aiSpeak()
     .speak()
 ```
 
-
 Key builder methods: .of(), .voice(), .male() / .female(), .speed(), .instructions(), .outputFile(), .asMP3() / .asWav() / .asFlac() / .asOpus() / .asPCM(), .provider(), .speak().
 
 aiTranscribe()
@@ -167,7 +162,6 @@ english = aiTranscribe()
     .translate()
 ```
 
-
 Key builder methods: .file(), .url(), .data(), .language(), .withWordTimestamps(), .withSegmentTimestamps(), .diarize(), .asJSON() / .asText() / .asVerboseJSON() / .asSRT() / .asVTT(), .transcribe(), .translate().
 
 aiTranslate()
@@ -178,7 +172,6 @@ english = aiTranslate()
     .asText()
     .translate()
 ```
-
 
 📚 **[Audio Docs](https://ai.ortusbooks.com/main-components/audio "Audio Docs")**
 
@@ -213,7 +206,6 @@ aiAgentRegistry().unregister( "support-agent@my-app" )
 aiAgentRegistry().unregisterByModule( "my-app" )
 ```
 
-
 Module Authors: First-Class Agent \& Tool Registration 🎯  
 
 This is a big deal for the BoxLang ecosystem. Developers building BoxLang modules can now ship agents and tools that auto-register themselves globally when the module loads --- no manual wiring by the application developer required.
@@ -244,7 +236,6 @@ if ( server.isPaused() ) {
 
 server.resume()
 ```
-
 
 pause() --- fires onMCPServerPause; all non-ping requests receive error code -32005  
 
@@ -291,7 +282,6 @@ summary = client.getSummary() // totalCalls, successRate, avgResponseTime
 // Reset when needed
 client.resetStats()
 ```
-
 
 Three new interception points cover the full client lifecycle: onMCPClientRequest, onMCPClientResponse, onMCPClientError.
 
@@ -347,7 +337,6 @@ agent = aiAgent(
 )
 ```
 
-
 🐛 Bug Fix --- ClosureTool.doInvoke() JSON Struct Handling  
 
 MCP clients that send JSON fields as real objects or arrays (rather than pre-stringified JSON) no longer cause "Can't cast Struct to a string" errors. doInvoke() now inspects declared parameters and calls jsonSerialize() on any non-simple value whose declared type is string. Silent, automatic, no code changes required.
@@ -376,7 +365,6 @@ New image Settings Block
 }
 ```
 
-
 New Interception Points  
 
 3.2.0 brings bx-ai to 50 total interception points, adding 10 new events:
@@ -404,7 +392,6 @@ box install bx-ai
 # OS
 install-bx-module bx-ai
 ```
-
 
 📚 Full Docs: ai.ortusbooks.com 💬 Community: community.ortussolutions.com ⭐ GitHub: github.com/ortus-boxlang/bx-ai
 

@@ -26,8 +26,7 @@ And I got accepted at a few of them, which was really great because I started mi
 It was the most travel, distance (and continent) wise, that I ever did before, by quite some margin:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/image-1-2000x745.png) [Read more: To Brussels, Canada and Back](https://foojay.io/today/to-brussels-canada-and-back/)
 
-FOSDEM
-------
+## FOSDEM
 
 Every good journey starts with taking a train far too early:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2674-Large.jpeg)
@@ -52,15 +51,12 @@ But it wasn't the last time I'd give the same talk at [PyCon Berlin](https://202
 
 After these conferences, I had two weeks without any conference, which was great because the next conference was somewhat farther away...
 
-ConFoo
-------
+## ConFoo
 
 I've never been to another continent, let alone visited Canada, so I was pretty happy when I got accepted to ConFoo in Montreal. Being 8 hours on a plane on the 19th of February and having Jetlag, both for the first time, was quite tiring, but hey, at least the conference paid for it:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2724-2000x1500.jpeg)
 
 After arriving in Montreal, I explored the city, [Mount Royal](https://montrealvisitorsguide.com/mount-royal-mont-royal/), and the [underground](https://www.mtl.org/en/experience/guide-underground-city-shopping) for an evening and a whole day, meeting [Theresa Mammarella](https://www.linkedin.com/in/tmammarella/) and her husband for dinner in [China Town](https://www.mtl.org/en/experience/discover-neighbourhood-montreal-chinatown):
-
-<br />
 
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2738-1500x2000.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_2743-1500x2000.jpeg)  
@@ -112,8 +108,7 @@ Where Montreal was icy cold, Toronto felt welcoming, almost warm. I explored the
 
 Being in Canada was great, and I'm looking forward to returning to North America for [KCDC](https://www.kcdc.info/) in June. I came back to Europe Saturday morning with quite some jetlag and four bagels from St. Viateur, spending my weekend with a friend close to the airport before going to Zurich in the following week:
 
-VoxxedDays Zurich
------------------
+## VoxxedDays Zurich
 
 I actually flew to and from Canada via Zurich, so I was at home in Karlsruhe for just three days before going back for the [VoxxedDays](https://www.flickr.com/photos/bejug/albums/72177720315384585/with/53581963697), meeting new and old acquaintances and giving a talk called [Instrument to Remove: Using Java agents for fun and profit](https://voxxeddays.com/zurich/schedule/talk/?id=1754) (related [blog post](https://mostlynerdless.de/blog/2023/04/06/instrumenting-java-code-to-find-and-handle-unused-classes/)):
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/53581958507_5e78d36869_o-2000x1334.jpg) Photo by the great [Dimitris Doutsiopoulos](https://ddphotography.gr/)
@@ -133,8 +128,7 @@ After the one-day conference, I met someone the next day, someone I had first me
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3274-2-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2024/03/IMG_3279-1500x2000.jpeg)
 
-Conclusion
-----------
+## Conclusion
 
 My conference year started with three great conferences and the opportunity to travel. I'm grateful to my team at [SapMachine](https://sapmachine.io/) that allows me to speak in so many different places, as well as for all the other people, be it the conference organizers or hosts, that make all this possible.
 

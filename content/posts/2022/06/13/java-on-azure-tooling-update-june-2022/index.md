@@ -35,8 +35,7 @@ For Gradle plugins, we have some new features for Azure Web Apps and Azure Funct
 
 We hope you like these new features and share your feedback with us. So let us get right into it...
 
-Azure Toolkit for IntelliJ Improvements
----------------------------------------
+## Azure Toolkit for IntelliJ Improvements
 
 ### New Application-centric View in Azure Explorer
 
@@ -84,8 +83,7 @@ Besides, you do not need to specify Runtime for Enterprise Tier app since it wil
 
 ![Spring-apps2-Toolkit](Spring-apps2.gif)
 
-Gradle Plugin Improvements
---------------------------
+## Gradle Plugin Improvements
 
 ### Deployment Slots Support
 
@@ -103,15 +101,13 @@ azurewebapp {
 }
 ```
 
-
 Starting from June, you can try our Gradle plugin for deployment slots support for Azure Web App with version of 1.4.0. and Azure Functions with version of 1.9.0. with the latest release. You could manually add the following configuration in file "build.gradle" and try this new feature.
 
 ![Gradle Slot-Toolkit](Gradle-Slot2.gif)
 
 To learn more about Gradle plugin, you can find more details with [how to deploy Java web apps to Azure with Gradle in one step](https://devblogs.microsoft.com/java/gradle-deploy-java-web-apps-to-azure-in-one-step/ "how to deploy Java web apps to Azure with Gradle in one step").
 
-Feedback and Suggestions
-------------------------
+## Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -121,8 +117,7 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new "Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-Resources
----------
+## Resources
 
 Here is a list of links that are helpful to learn Java on Azure Tooling,
 

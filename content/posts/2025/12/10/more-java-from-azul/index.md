@@ -26,8 +26,7 @@ When looking at expanding the company through acquisition, we obviously wanted t
 
 Before we get into the details of what's happening, let's look at a little Java history.
 
-A Little Java History
----------------------
+## A Little Java History
 
 In 1999, Sun Microsystems announced the creation of three Java Editions: Micro, Standard and Enterprise. Micro Edition was intended for devices, Standard Edition (SE) was the core platform, and Enterprise Edition was for server-side applications. Java Enterprise Edition (EE) consisted of a set of specifications providing a simplified way to develop business logic and web page components. This initially consisted of Servlets and Java Server Pages, for rendering client HTML and Enterprise Java Beans (EJBs). EJBs came in two flavours: Session Beans for business logic and Entity Beans for persistent data (typically for mapping to a database).
 
@@ -41,8 +40,7 @@ Since acquiring Sun Microsystems, Oracle has made several strategic decisions re
 
 Which brings us to Payara.
 
-**Payara and Azul**
--------------------
+## **Payara and Azul**
 
 To quote from the Payara website:
 

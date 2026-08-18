@@ -117,7 +117,6 @@ This file then might look similar to the following...
 }
 ```
 
-
 If you are not familiar with the CSS variant that is used in JavaFX, you might want to take a look [here](https://openjfx.io/javadoc/15/javafx.graphics/javafx/scene/doc-files/cssref.html "here").
 
 In principle, it is very similar to the web CSS except that it based on CSS 2.1, all properties are prefixed with "-fx-" and it has some special things like inbuilt support for variables etc.
@@ -145,7 +144,6 @@ To get rid of the gradients is an easy task, we simply have to define some color
 }
 ```
 
-
 The nice thing about this is that we can now use -material-design-color everywhere we need it in the CSS file as long as we are in `.check-box`.
 
 The next thing to change is the checkmark itself. In JavaFX CSS you will find a property named `-fx-shape`which takes a SVG path to style a region and the checkmark is implemented using this feature.
@@ -159,7 +157,6 @@ In the modena.css file it is the following code that defines the checkmark.
     -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
 }
 ```
-
 
 As you can see it defines the `.mark`````````````inside the `````````````.box`````````````inside the `````````````.check-box`.
 
@@ -185,7 +182,6 @@ And the CSS with the SVG path will look like follows:
 }
 ```
 
-
 As you can see we also adjusted the scaling to make it fit better in the existing CheckBox.
 
 The next thing we need to change is the box itself because it doesn't need a background gradient but only a border. So instead of setting a linear gradient to the background as in the modena.css, we set the background to transparent and instead set a border as follows:
@@ -204,7 +200,6 @@ The next thing we need to change is the box itself because it doesn't need a bac
 }
 ```
 
-
 Because the box should be filled when the CheckBox is selected we have to make the following adjustments to the CSS code:
 
 ```css
@@ -215,7 +210,6 @@ Because the box should be filled when the CheckBox is selected we have to make t
     -fx-border-color: transparent;
 }
 ```
-
 
 As you can see, we now simply fill the background and set the border to transparent
 
@@ -230,7 +224,6 @@ Using CSS makes it really easy to add this circle. Let's take a look at the focu
     -fx-background-radius: 1024;
 }
 ```
-
 
 There is one thing which is a bit special and that is the fact that the circle is larger than the control itself. To achieve this, we need to set two background colors in `-fx-background-color: #6161613e, transparent;`````` and define the areas for these background colors by setting ````````-fx-background-insets: -14, 0;`````````. `To get a circle we now simply have to set the background radius to ``````-fx-background-radius:1024;` and we are good to go. You could set the background radius also to a smaller number but it should not be smaller than the size of the circle, otherwise you will get a rounded rectangle instead of a circle.
 
@@ -264,7 +257,6 @@ And so, the only thing that is now missing is to add this circle with the right 
     -fx-border-color: transparent;
 }
 ```
-
 
 And the result of this change will look like this...
 

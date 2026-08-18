@@ -42,8 +42,7 @@ We implement the profiler in a daemon thread started by a Java agent. This allow
 * Profiler: Contains the profiling loop
 * Store: Stores and outputs the collected results
 
-Main Class
-----------
+## Main Class
 
 We start by implementing the agent entry points:
 
@@ -67,7 +66,6 @@ public class Main {
 }
 ```
 
-
 The `premain` is called when the agent is attached to the JVM at the start.
 
 This is typical because the user passed the `-javagent` to the JVM.
@@ -77,7 +75,6 @@ In our example, this means that the user runs Java with
 ```bash
 java -javaagent:./target/tiny_profiler.jar=agentArgs ...
 ```
-
 
 But there is also the possibility that the user attaches the agent at runtime. In this case, the JVM calls the method `agentmain`.
 
@@ -101,20 +98,17 @@ public class Options {
 }
 ```
 
-
 The exciting part of the Main class is its run method. The Profiler class implements the Runnable interface so that we can create a thread directly:
 
 ```java
 Thread t = new Thread(new Profiler(options));
 ```
 
-
 We then mark the profiler thread as a daemon thread; this means that the JVM does terminate at the end of the profiled application even when the profiler thread is running:
 
 ```java
 t.setDaemon(true);
 ```
-
 
 No, we're almost finished; we only have to start the thread. Before we do this, we name the thread, this is not required, but it makes debugging easier.
 
@@ -123,9 +117,7 @@ t.setName("Profiler");
 t.start();
 ```
 
-
-Profiler Class
---------------
+## Profiler Class
 
 The actual sampling takes place in the Profiler class:
 
@@ -174,13 +166,11 @@ public class Profiler implements Runnable {
     }
 ```
 
-
 We start by looking at the constructor. The interesting part is
 
 ```java
 Runtime.getRuntime().addShutdownHook(new Thread(this::onEnd));
 ```
-
 
 which causes the JVM to call the `Profiler::onEnd` when it shuts down.
 
@@ -201,7 +191,6 @@ while (true) {
 }
 ```
 
-
 This calls the `sample` method and sleeps the required time afterward, to ensure that the `sample` method is called every `interval` (typically 10 ms).
 
 The core sampling takes place in this `sample` method:
@@ -216,7 +205,6 @@ Thread.getAllStackTraces().forEach(
 });
 ```
 
-
 We use here the `Thread::getAllStackTraces` method to obtain the stack traces of all threads. This triggers a safepoint and is why this profiler is safepoint-biased.
 
 Taking the stack traces of a subset of threads would not make sense, as there is no method in the JDK for this.
@@ -227,8 +215,7 @@ The result of `Thread::getAllStackTraces` is filtered so that we don't include d
 
 We pass the appropriate traces to the Store, which deals with the post-processing.
 
-Store Class
------------
+## Store Class
 
 This is the last class of this profiler and also the by far most significant, post-processing, storing, and outputting of the collected information:
 
@@ -333,7 +320,6 @@ public class Store {
 }
 ```
 
-
 The Profiler calls the `addSample` method which flattens the stack trace elements and stores them in the trace tree (for the flame graph) and counts the traces that any method is part of.
 
 The interesting part is the trace tree modeled by the Node class.
@@ -413,9 +399,7 @@ private static class Node {
 }
 ```
 
-
-Tiny-Profiler
--------------
+## Tiny-Profiler
 
 I named the final profiler tiny-profiler and its sources are on [GitHub](https://github.com/parttimenerd/tiny-profiler) (MIT licensed).
 
@@ -429,7 +413,6 @@ mvn package
 # and the flame graph, taking a sample every 10ms
 java -javaagent:target/tiny-profiler.jar=flamegraph=flame.html ...
 ```
-
 
 You can easily run it on the renaissance benchmark and create the flame graph shown earlier:
 
@@ -452,11 +435,9 @@ scala.collection.immutable.List.foreach       16271     145.06       3       0.0
 ...
 ```
 
-
 The overhead for this example is around 2% on my MacBook Pro 13" for a 10ms interval, which makes the profiler usable when you ignore the safepoint-bias.
 
-Conclusion
-----------
+## Conclusion
 
 Writing a Java profiler in 240 lines of pure Java is possible and the resulting profiler could even be used to analyze performance problems.
 

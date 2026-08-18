@@ -30,8 +30,7 @@ REST is not a protocol or a rigid standard. It's a lightweight architectural app
 
 This tutorial is here to guide you through building clean, idiomatic REST APIs using Spring Boot. If you want the code, the full demo is available on [GitHub](https://github.com/mongodb-developer/spring-rest).
 
-How can Spring help?
---------------------
+## How can Spring help?
 
 Spring Boot makes it easy to build RESTful APIs in Java by:
 
@@ -51,8 +50,7 @@ Before you begin, make sure you have:
 * [Maven](https://maven.apache.org/download.cgi), version 3.9+.
 * A REST client (Postman, curl, HTTPie).
 
-Creating our app
-----------------
+## Creating our app
 
 We'll use [Spring Initializr](https://start.spring.io/) to generate the basic structure for our project. Just give it a name, pick Java 17 or higher, and add the following dependencies:
 
@@ -64,8 +62,7 @@ We'll use [Spring Initializr](https://start.spring.io/) to generate the basic st
 
 This gives us everything we need to expose REST endpoints and talk to MongoDB. Now, we can open it up in the IDE of our choosing.
 
-Connecting our database
------------------------
+## Connecting our database
 
 To connect to MongoDB, we need to add our [connection string](https://www.mongodb.com/docs/manual/reference/connection-string/#find-your-mongodb-atlas-connection-string?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=spring+rest+simple&utm_term=tim.kelly) to our application.properties, and specify the name of the database we want to use:
 
@@ -74,7 +71,6 @@ spring.data.mongodb.uri=YOUR_CONNECTION_STRING
 
 spring.data.mongodb.database=library
 ```
-
 
 This tells Spring to connect to our MongoDB Atlas cluster and use the library database. If this doesn't exist yet, don't worry. The minute we start trying to add data to it, MongoDB will create it for us.
 
@@ -152,7 +148,6 @@ public class Book {
 }
 ```
 
-
 We use the @Document annotation to tell Spring that this class represents a MongoDB document, and we specify "books" as the name of the collection it should be stored in. If the books collection doesn't already exist, MongoDB will create it for us automatically.
 
 The @Id annotation marks the id field as the primary key, and we use ObjectId from the MongoDB driver to match MongoDB's native ID format.
@@ -176,7 +171,6 @@ import org.springframework.stereotype.Repository;
 
 public interface BookRepository extends MongoRepository<Book, ObjectId> {}
 ```
-
 
 By extending [MongoRepository](https://docs.spring.io/spring-data/mongodb/docs/current/api/org/springframework/data/mongodb/repository/MongoRepository.html), we get a full set of CRUD operations. No need to write any implementation code. This includes methods like:
 
@@ -229,15 +223,13 @@ public class BookController {
 }
 ```
 
-
 @RestController tells Spring that this class will handle HTTP requests and that all return values should be serialized directly to the response body.
 
 @RequestMapping("/api/books") sets the base URL for all endpoints in this controller. Every method we add here will start with /api/books.
 
 We'll build out the individual endpoints (like GET, POST, PUT, and DELETE) in the next steps. Each of those will use our BookRepository to read and write data in MongoDB.
 
-Create
-------
+## Create
 
 To handle creating new books, we'll add a @PostMapping method inside our BookController. This endpoint will accept a Book object in the request body, save it to the database using our repository, and return the saved book along with a 201 Created response.
 
@@ -253,11 +245,9 @@ public ResponseEntity<Book> createBook(@RequestBody Book book) {
 }
 ```
 
-
 That's all we need. Spring will automatically deserialize the incoming JSON into a Book object, and bookRepository.save() will insert it into MongoDB. Once saved, the response includes the stored document (including the generated _id) so the client knows exactly what was created.
 
-Read
-----
+## Read
 
 Now that we can add books, let's make sure we can retrieve them. We'll start with a simple endpoint to return all books in the collection:
 
@@ -272,7 +262,6 @@ public ResponseEntity<List<Book>> getAllBooks() {
 
 }
 ```
-
 
 Next, we'll add the ability to fetch a single book by its ID. MongoDB uses ObjectId as the ID type, and Spring will automatically convert the incoming string to an ObjectId when the request hits this endpoint:
 
@@ -290,7 +279,6 @@ public ResponseEntity<Book> getBookById(@PathVariable ObjectId id) {
 }
 ```
 
-
 If the ID exists, we return the matching book with a 200 OK. If it doesn't, we return a 404 Not Found.
 
 Now, let's go a step further and let users search for books by title. We want the search to be case-insensitive and to match any part of the title string. Instead of writing the query ourselves, we'll let Spring generate it.
@@ -300,7 +288,6 @@ Inside our BookRepository, we define the following method:
 ```
 List<Book> findByTitleContainingIgnoreCase(String title);
 ```
-
 
 That's it. Spring Data parses this method name and automatically builds a query that matches documents where the title field contains the provided string, ignoring case.
 
@@ -318,15 +305,13 @@ public ResponseEntity<List<Book>> getBooksByTitle(@PathVariable String title) {
 }
 ```
 
-
 Spring Data gives us dynamic query generation. By simply naming a method according to a pattern, like findByFieldName or findByFieldOneAndFieldTwo, Spring can build the corresponding MongoDB query behind the scenes.
 
 It saves a lot of boilerplate and keeps your code clean and declarative. If you ever need something more complex, you can still write custom queries using @Query annotations or full-blown aggregation pipelines, but for a lot of use cases, method naming gets you surprisingly far.
 
 Check out the [full list of supported query keywords in the Spring documentation](https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#repositories.query-methods.query-creation).
 
-Update
-------
+## Update
 
 To update an existing book, we'll use @PutMapping with the book's ID in the path. This method first checks if the book exists. If it does, we update the relevant fields and save the changes. If not, we return a 404 Not Found.
 
@@ -358,11 +343,9 @@ public ResponseEntity<Book> updateBook(@PathVariable ObjectId id, @RequestBody B
 }
 ```
 
-
 This pattern is basic. We only update if the book is already present, and we use the same repository method as we did to insert, save(...), to persist the changes. If the ID doesn't exist, the API gracefully handles it with a 404.
 
-Delete
-------
+## Delete
 
 To remove a book from the collection, we add a @DeleteMapping endpoint that takes the book's ID.
 
@@ -386,11 +369,9 @@ public ResponseEntity<Void> deleteBook(@PathVariable ObjectId id) {
 }
 ```
 
-
 Before deleting, we check if the book exists. If it does, we delete it and return a 204 No Content response. If not, we return a 404 Not Found.
 
-Adding DTOs and validation
---------------------------
+## Adding DTOs and validation
 
 Right now, our controller methods take in Book objects directly. That's fine for small demos, but it's not ideal for real-world APIs. We want more control over what data comes in and out, especially when it comes to validating input.
 
@@ -430,7 +411,6 @@ public record BookRequest(
 
 ) {}
 ```
-
 
 This is what we'll use for POST and PUT requests. We've added some basic validation: Both fields are required, and the title can't exceed 200 characters.
 
@@ -476,7 +456,6 @@ public record BookResponse(
 }
 ```
 
-
 This wraps our domain object in a clean, API-friendly shape. We're converting the MongoDB ObjectId into a string here so it works nicely in JSON responses.
 
 You rarely need to expose every field in your domain model, especially if some of that data is internal, sensitive, or just irrelevant to the client. By shaping our responses with DTOs, we can return only the fields that matter, keeping responses lightweight and easier to evolve over time.
@@ -502,7 +481,6 @@ public ResponseEntity<BookResponse> createBook(@RequestBody @Valid BookRequest r
 
 }
 ```
-
 
 When we annotate a method argument with @Valid, Spring will automatically validate the request using our BookRequest annotations, and throw a MethodArgumentNotValidException if validation fails with a 400 Bad Request response. But the default error response isn't very nice. It's often verbose and not very readable for clients.
 
@@ -558,7 +536,6 @@ public class GlobalExceptionHandler {
 }
 ```
 
-
 This will mean instead of a wall of hard-to-parse error information, we get a nice and clean error like:
 
 ```
@@ -570,7 +547,6 @@ This will mean instead of a wall of hard-to-parse error information, we get a ni
 
 }
 ```
-
 
 **Read (all)**
 
@@ -592,7 +568,6 @@ public ResponseEntity<List<BookResponse>> getAllBooks() {
 }
 ```
 
-
 **Read by ID**
 
 ```
@@ -610,7 +585,6 @@ public ResponseEntity<BookResponse> getBookById(@PathVariable ObjectId id) {
 
 }
 ```
-
 
 **Search by title**
 
@@ -631,7 +605,6 @@ public ResponseEntity<List<BookResponse>> getBooksByTitle(@PathVariable String t
 
 }
 ```
-
 
 **Update**
 
@@ -661,7 +634,6 @@ public ResponseEntity<BookResponse> updateBook(@PathVariable ObjectId id,
 }
 ```
 
-
 **Delete stays the same**
 
 We don't need a DTO for deletes, so this one stays just as it is:
@@ -686,7 +658,6 @@ public ResponseEntity<Void> deleteBook(@PathVariable ObjectId id) {
 }
 ```
 
-
 With this small update, our API is much more robust:
 
 * We're validating input using Jakarta Bean Validation.
@@ -695,8 +666,7 @@ With this small update, our API is much more robust:
 
 Now, we're ready to test it.
 
-Testing the API
----------------
+## Testing the API
 
 Once everything is wired up, it's time to see our API in action. We can use curl, Postman, or HTTPie. We just need something for sending HTTP requests.
 
@@ -710,7 +680,6 @@ To start our application, we open a terminal in our project directory and run:
 mvn spring-boot:run
 ```
 
-
 ### Create
 
 Let's create a new book using a simple POST request.
@@ -722,7 +691,6 @@ curl -X POST http://localhost:8080/api/books \
 
   -d '{"title": "Dune", "author": "Frank Herbert"}'
 ```
-
 
 If everything is working, we should get back a JSON response with the saved book, including its automatically generated _id. It'll look something like:
 
@@ -737,7 +705,6 @@ If everything is working, we should get back a JSON response with the saved book
 
 }
 ```
-
 
 We'll use the id in some of the next steps.
 
@@ -765,20 +732,17 @@ This should return an array of book objects. Since we've only added one, we'll g
 ]
 ```
 
-
 To search by title, we can use the following endpoint. It will return all books whose title contains the word "dune", case-insensitively.
 
 ```
 curl http://localhost:8080/api/books/title/dune
 ```
 
-
 To fetch a specific book by ID, we replace \<id\> with the actual ID returned earlier:
 
 ```
 curl http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b
 ```
-
 
 If the book exists, we'll get back the full object. If not, we'll see a 404 Not Found.
 
@@ -794,7 +758,6 @@ curl -X PUT http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b \
   -d '{"title": "Dune: Extended Edition", "author": "Frank Herbert"}'
 ```
 
-
 This should return the updated book:
 
 ```
@@ -809,7 +772,6 @@ This should return the updated book:
 }
 ```
 
-
 ### Delete
 
 To remove the book entirely, send a DELETE request with the same ID:
@@ -818,15 +780,13 @@ To remove the book entirely, send a DELETE request with the same ID:
 curl -X DELETE http://localhost:8080/api/books/64fc99b10f4e3a2f04262a8b
 ```
 
-
 If successful, we'll get back a 204 No Content response, meaning the deletion was successful, but there's nothing left to return.
 
 If we try to fetch the book again after this, we'll get a 404 Not Found, or checking the endpoint http://localhost:8080/api/books will return an empty array.
 
 By this point, we've tested the full lifecycle of a resource, creating it, reading it, updating it, and deleting it. Everything should now be wired up and working cleanly. If you want to keep experimenting, try adding more books or search using partial title matches to see the dynamic query in action.
 
-Conclusion
-----------
+## Conclusion
 
 You now have a fully working REST API built with Spring Boot and MongoDB. We've covered the full CRUD cycle, from creating and retrieving documents to updating and deleting them.
 

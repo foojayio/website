@@ -36,7 +36,6 @@ When you load the sample dataset to MongoDB, one of the movies you'll find in th
 db.getSiblingDB("sample_mflix").embedded_movies.find({ title: "The Matrix" })
 ```
 
-
 The document includes standard fields like title, plot, and genres, plus two vector embeddings:
 
 * plot_embedding → 1536 dimensions from OpenAI's [text-embedding-ada-002](https://platform.openai.com/docs/models/text-embedding-ada-002)
@@ -66,7 +65,6 @@ The document includes standard fields like title, plot, and genres, plus two vec
 }
 ```
 
-
 These embeddings encode meaning, not just words. You can use them so MongoDB finds movies with a similar concept, even when plots share no obvious keywords.
 
 For this tutorial, let's use *The Matrix* 's [plot_embedding](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies) as your query vector. Since this embedding is already stored in the document, you simply retrieve it and pass it to the [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#syntax) stage as a query parameter---no extra model calls required.
@@ -78,7 +76,6 @@ First, check if a knnVector index exists (vector field type used for k-nearest n
 ```
 db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()
 ```
-
 
 You should see something like:
 
@@ -103,7 +100,6 @@ You should see something like:
 ]
 ```
 
-
 Both indexes should be in READY status so you can run queries.
 
 📦 Checking stored vectors
@@ -114,13 +110,11 @@ You'll be using the plot_embedding. First, confirm that the plot_embedding field
 db.getSiblingDB("sample_mflix").embedded_movies.countDocuments({ plot_embedding: { $type: "binData" } })
 ```
 
-
 Result:
 
 ```
 3402
 ```
-
 
 3402 means 3,402 documents in embedded_movies have a ready-to-use vector in BSON Binary format.
 
@@ -145,7 +139,6 @@ const d = db.getSiblingDB("sample_mflix").embedded_movies.findOne(
 const qv = Array.from(d.plot_embedding.toFloat32Array())
 ```
 
-
 Next, run:
 
 ```
@@ -153,7 +146,6 @@ qv.length
 
 1536
 ```
-
 
 qv.length returns 1536, confirming the correct dimension.
 
@@ -188,7 +180,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
   }
 ])
 ```
-
 
 Expected output:
 
@@ -251,7 +242,6 @@ Expected output:
 ]
 ```
 
-
 Here, *TRON* , *Swordfish* , and *The Net* rank high, thematically similar to *The Matrix* even without matching keywords.
 
 ⚖ Running hybrid search (vector + IMDb rating)
@@ -299,7 +289,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.aggregate([
   }
 ])
 ```
-
 
 Expected output:
 
@@ -411,7 +400,6 @@ Expected output:
   }
 ]
 ```
-
 
 In hybrid mode, *Guardians of the Galaxy* and *Edge of Tomorrow* appear at the top because they are both conceptually similar to *The Matrix* and have strong IMDb scores, whereas pure semantic search might rank less popular but slightly more semantically similar films higher.
 

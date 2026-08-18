@@ -62,8 +62,6 @@ Initially, the architecture looks like this:
 
     Database Server
 
-<br />
-
 All reads and writes go to one machine.
 
 This approach is called **vertical scaling,** when you keep upgrading the same server by adding:
@@ -92,8 +90,6 @@ Instead of storing all data on a single machine:
 
     2 TB of data
 
-<br />
-
 You distribute the data:
 
     Server A → 500 GB
@@ -104,13 +100,9 @@ You distribute the data:
 
     Server D → 500 GB
 
-<br />
-
 Each server stores only **part of the dataset**.
 
 This is exactly what **sharding** does.
-
-
 
 Sharding is the process of **splitting large datasets across multiple database servers**.
 
@@ -176,8 +168,6 @@ A simplified architecture looks like this:
 
     Shard1  Shard2   Shard3
 
-<br />
-
 This abstraction means the application **does not need to know where the data is stored**.
 
 A **shard key** determines how data is distributed across shards.
@@ -185,8 +175,6 @@ A **shard key** determines how data is distributed across shards.
 For example:
 
     { userId: 1 }
-
-<br />
 
 MongoDB uses the shard key to decide **which shard a document belongs to**.
 
@@ -210,7 +198,6 @@ First, enable sharding for a database.
 sh.enableSharding("companyDB")
 ```
 
-
 Next, shard a collection.
 
 ```
@@ -222,7 +209,6 @@ sh.shardCollection(
 
 )
 ```
-
 
 MongoDB will now automatically distribute documents across shards.
 
@@ -239,7 +225,6 @@ db.employees.find(
 
 )
 ```
-
 
 The **mongos router** determines which shard contains the relevant documents and routes the query to that shard.From the application's perspective, it still feels like **one database**.
 

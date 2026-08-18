@@ -24,8 +24,7 @@ frozen: false
 
 Last month I released a second update. Let's explore how I did this. By levering Java libraries, I was able to create such a complex piece of software very quickly.
 
-The NetBeans Platform
----------------------
+## The NetBeans Platform
 
 [The NetBeans Platform](https://netbeans.apache.org/kb/docs/platform/) is a desktop application framework. You can see it as shopping for the parts (modules) that you'd like to have from the NetBeans IDE.
 
@@ -42,8 +41,7 @@ Another part where the NetBeans Platform will save you a lot of time is for crea
 
 There is online documentation and several [books](https://www.amazon.com/Pro-Apache-NetBeans-Building-Applications-ebook/dp/B0836C3Y86/) to learn how to use it.
 
-Apache POI
-----------
+## Apache POI
 
 [Apache POI](https://poi.apache.org/) is an Apache library to read Microsoft Office documents. It has more than 1,500 stars on GitHub and has an [active community](https://poi.apache.org/changes.html).
 
@@ -51,8 +49,7 @@ Depending of the kind of document you want to open, Apache POI has a more or les
 
 A big part of Joeffice is to translate the information from the document to its visual representation. If you use Apache POI at your company, you could use Joeffice as a playground to understand and play with the Apache POI library.
 
-Swing
------
+## Swing
 
 [Swing](https://docs.oracle.com/javase/tutorial/uiswing/TOC.html) is a Java graphical user interface included in Java. Instead of relying on native components, like the AWT API is, each component is drawn in Java using the Java 2D API. The main advantages are consistency between the platforms, the possibility to make the component skinnable, also called look and feel, and it's quite easy to define or override new components.
 
@@ -67,8 +64,7 @@ In the latest release of Joeffice, I've made it easier to reuse the Excel table 
 
 {{< youtube eAix0KT9zMU >}}
 
-Other libraries
----------------
+## Other libraries
 
 Here is a quick overview of some other libraries used in Joeffice:
 
@@ -76,8 +72,7 @@ Here is a quick overview of some other libraries used in Joeffice:
 * [Apache Batik SVG](https://xmlgraphics.apache.org/batik/): An API to draw .svg files. It is also part of Apache POI dependencies.
 * [JUniversalCharDet](https://github.com/albfernandez/juniversalchardet): Help to detect character encoding of text files. Used to parse CSV text file.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we've seen on how by combining several API's we can create a new software.
 

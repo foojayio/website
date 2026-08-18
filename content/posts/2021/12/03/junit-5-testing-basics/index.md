@@ -23,8 +23,7 @@ In [Part 1](https://foojay.io/today/junit-5-introduction/) of this series of art
 
 This article will share examples of a JUnit test which makes use of a few of these annotations.
 
-Testing
--------
+## Testing
 
 ### Marking a method as a Test
 
@@ -51,7 +50,6 @@ Tests in JUnit5 are annotated with the **@Test** annotation. *Unlike prior versi
                 "Date and Instant milliseconds should be equal");
     }
 ```
-
 
 ### Assertions
 
@@ -98,7 +96,6 @@ Typically, unit tests statically import the assertions required for the given te
     }
 ```
 
-
 **See also** : **[Static Import](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L18)** ([](https://github.com/c-guntur/java-katas/blob/baseline/java-datetime/src/solutions/java/none/cvg/datetime/STest1InstantAndDateInteropTest.java#L18)<https://github.com/c-guntur/java-katas/blob/main/java-datetime/src/test/java/none/cvg/datetime/TestKata1InstantAndDateInterop.java#L18>)
 
 ```java
@@ -121,11 +118,9 @@ import static none.cvg.datetime.LenientAssert.assertAlmostEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 ```
 
-
 > ***NOTE**: Assertion parameter ordering in JUnit 5 is different from the order in prior versions. In my opinion, the current parameter arrangement makes a lot more sense.*
 
-Filtering and Categorizing Tests
---------------------------------
+## Filtering and Categorizing Tests
 
 ### Tags
 
@@ -152,7 +147,6 @@ Tags are a means to categorize test methods and classes. Tagging also leads to d
                 "Date and Instant milliseconds should be equal");
     }
 ```
-
 
 ### Assumptions
 
@@ -182,13 +176,11 @@ class TestWithAssumptions {
 }
 ```
 
-
 Typically, unit tests statically import the assumptions required for the given tests in a test class.
 
 ***There is no current example of an assumption in the code kata.***
 
-Ordering Tests
---------------
+## Ordering Tests
 
 ### Test execution order
 
@@ -223,7 +215,6 @@ More custom orders can be created by implementing the `MethodOrderer` interface.
 public class STest1InstantAndDateInteropTest {
 ```
 
-
 #### Extra Step (For OrderAnnotation only): Adding an Order via annotations
 
 In addition to the above annotation instructing JUnit to order test methods, **an additional annotation is needed if the `OrderAnnotation` orderer is specified** . The **[@Order](https://junit.org/junit5/docs/5.5.0/api/org/junit/jupiter/api/Order.html)** annotation accepts an integer that specifies the ascending order of execution.
@@ -249,7 +240,6 @@ In addition to the above annotation instructing JUnit to order test methods, **a
                 "Date and Instant milliseconds should be equal");
     }
 ```
-
 
 That's a wrap of part two of this series on Junit 5.
 

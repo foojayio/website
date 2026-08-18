@@ -36,8 +36,7 @@ In the past, I had the privilege to work on a project that was initially created
 
 This month, he's published a new book, "[Modern frontends with htmx](https://www.wimdeblauwe.com/books/modern-frontends-with-htmx/)" where he takes a new approach by adding htmx into the "mix" to create dynamic and interactive web applications with Spring Boot and Thymeleaf.
 
-Technologies
-------------
+## Technologies
 
 The book is filled with example applications using several technologies.
 
@@ -73,8 +72,7 @@ For the different examples in the book, various other tools are also used and de
 * [SortableJS](https://sortablejs.github.io/Sortable/): JavaScript library for reorderable drag-and-drop lists.
 * [Shoelace](https://shoelace.style/): A forward-thinking library of web components.
 
-Content of the book
--------------------
+## Content of the book
 
 All the sources used in the book are [available on GitHub](https://github.com/wimdeblauwe/modern-frontends-with-htmx-sources) with a directory per chapter. The samples use Java 17 (but also work with Java 21) and Spring Boot 3.1, but Wim plans to update the book and samples to use the recently released version 3.2 of Spring Boot.
 
@@ -141,8 +139,7 @@ This chapter provides examples to push data from the server to the client with t
 
 Some extra links to further explore htmx.
 
-Review
-------
+## Review
 
 Wim's book gives a lot of examples. They not only fully explain the use of htmx, but can also be used to improve your knowledge about Spring Boot and Thymeleaf. But I would advise you to read Wim's Thymeleaf book first if you have never used it before.
 

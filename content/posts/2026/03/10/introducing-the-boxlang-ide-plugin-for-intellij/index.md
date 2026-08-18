@@ -28,8 +28,7 @@ Whether you're building new BoxLang applications or maintaining existing CFML co
 
 ![](testbox-integration-700x438.png)
 
-Installing the Plugin
----------------------
+## Installing the Plugin
 
 Installing the plugin is easy from the JetBrains Marketplace.
 
@@ -44,8 +43,7 @@ Or install directly from the marketplace:
 
 ![](plugin-web-view-695x510.png)
 
-Key Features
-------------
+## Key Features
 
 The IntelliJ plugin brings powerful development features for both **BoxLang and CFML developers.**
 
@@ -120,8 +118,7 @@ This is particularly useful for teams that are:
 * Maintaining legacy codebases
 * Working with hybrid projects
 
-Designed for the JVM Ecosystem
-------------------------------
+## Designed for the JVM Ecosystem
 
 BoxLang is built for the JVM and integrates naturally with Java-based tooling and workflows.
 
@@ -132,8 +129,7 @@ That means IntelliJ users get:
 * Rich plugin ecosystem
 * Seamless integration with JVM tooling
 
-Get Started Today
------------------
+## Get Started Today
 
 Ready to try BoxLang in IntelliJ?
 
@@ -143,8 +139,7 @@ Ready to try BoxLang in IntelliJ?
 👉 Learn more about BoxLang:  
 <https://boxlang.io>
 
-Feedback Welcome
-----------------
+## Feedback Welcome
 
 We're actively improving the plugin and [would love your feedback.](http://https://ortussolutions.atlassian.net/jira/software/c/projects/BLIDE/boards/132?search_id=c5d57cde-72a5-400c-b8ee-32b5fe3c8a6f "would love your feedback.")
 

@@ -91,7 +91,6 @@ dependencies {
 }
 ```
 
-
 In our latest release, we have supported annotation processing in our [Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle) extension, so if you have annotationProcessor marked in your dependencies, you will be able to see your generated files during compilation.
 
 #### User Experience -- Better Build Error Message Prompt
@@ -132,8 +131,7 @@ As always, your feedback and suggestions are very important to us and will help 
 * [Open an issue](https://github.com/microsoft/vscode-java-pack/issues/new/choose) on our GitHub Issues page
 * Send an email to: [\[email protected\]](/cdn-cgi/l/email-protection)
 
-Resources
----------
+## Resources
 
 Here is a list of links that are helpful to learn Java on Visual Studio Code.
 

@@ -33,8 +33,7 @@ It's a common behavior among all databases implementing [MVCC](https://en.wikipe
 
 But, suppose our Java app uses a distributed database for the user data. Will that database also generate litter in response to application requests? Let's find out....
 
-LSM Tree-Based Databases
-------------------------
+## LSM Tree-Based Databases
 
 There is a class of distributed databases that stores and arranges application data in a[log-structured merge (LSM) tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree " log-structured merge (LSM) tree") for its performance and scalability characteristics. Apache Cassandra, Apache HBase, ScyllaDB, and YugabyteDB all belong to this class.
 
@@ -56,8 +55,7 @@ Another database can have just Level 0 and merge multiple SSTable into a new fil
 
 Alright, enough of the theory. Let's see how things work in practice.
 
-Starting YugabyteDB and the App
--------------------------------
+## Starting YugabyteDB and the App
 
 Our [sample app](https://github.com/dmagda/java-litters-everywhere "sample app") is a Spring Boot RESTful service for a pizzeria. The app tracks pizza orders.
 
@@ -81,20 +79,17 @@ bin/yugabyted start --listen=yugabytedb_node1 \
 --base_dir=/home/yugabyte/yb_data --daemon=false
 ```
 
-
 * Connect to the container: 
 
 ```powershell
 docker exec -it yugabytedb_node1 /bin/bash
 ```
 
-
 * Connect to the database using the `ysqlsh` tool:
 
 ```powershell
 bin/ysqlsh -h yugabytedb_node1
 ```
-
 
 * Make sure the database is empty (no tables yet): 
 
@@ -103,7 +98,6 @@ yugabyte=# \d
 Did not find any relations.
 ```
 
-
 Next, start the application:
 
 * Clone the app:  
@@ -111,7 +105,6 @@ Next, start the application:
 ```powershell
 git clone https://github.com/dmagda/java-litters-everywhere.git && cd java-litters-everywher
 ```
-
 
 * Open the `src\main\resources\application.properties` file and enable YugabyteDB connection properties:  
 
@@ -127,13 +120,11 @@ spring.datasource.password = yugabyte
 # spring.datasource.password = password
 ```
 
-
 * Launch the app:  
 
 ```powershell
 mvn spring-boot:run
 ```
-
 
 Once the application starts, it will be listening on port `8080` for user requests:  
 
@@ -142,7 +133,6 @@ INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - 
 INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path
 ```
-
 
 Finally, go back to your `ysqlsh` session within the Docker container to make sure the application created the `pizza_order` table:
 
@@ -161,9 +151,7 @@ yugabyte=# select * from pizza_order;
 (0 rows)
 ```
 
-
-Generating Garbage in the Database
-----------------------------------
+## Generating Garbage in the Database
 
 Now, go ahead and put the first pizza order in the queue.
 
@@ -174,7 +162,6 @@ curl -i -X POST \
     http://localhost:8080/putNewOrder \
     --data 'id=1'
 ```
-
 
 * The application persists the order to the database (check the application logs):  
 
@@ -188,7 +175,6 @@ Hibernate:
         (?, ?, ?)
 ```
 
-
 * Use the `ysqlsh` session to ensure the order made it to the database:  
 
 ```sql
@@ -198,7 +184,6 @@ yugabyte=# select * from pizza_order;
   1 | Ordered | 2022-12-13 14:56:32.13
 (1 row)
 ```
-
 
 As the next step, update the order status two times:
 
@@ -211,7 +196,6 @@ curl -i -X PUT \
     --data 'status=Baking'
 ```
 
-
 * And then to `Delivering`:  
 
 ```powershell
@@ -220,7 +204,6 @@ curl -i -X PUT \
    --data 'id=1' \
    --data 'status=Delivering'
 ```
-
 
 If you select the data from the `pizza_order` table, it's not surprising that you'll see the status column is set to `Delivering`:
 
@@ -231,7 +214,6 @@ yugabyte=# select * from pizza_order;
   1 | Delivering | 2022-12-13 14:56:32.13
 (1 row)
 ```
-
 
 Does that mean that the previous status values (`Ordered` and `Baking`) are gone from the database? Nope! They are still there, sitting in the memtable.
 
@@ -250,20 +232,17 @@ But, we can see the multiple versions of the `status` column by forcefully flush
 \q
 ```
 
-
 * Use `yb_admin` command to find the `pizza_order` table ID:  
 
 ```powershell
 yb-admin -master_addresses yugabytedb_node1:7100 list_tables include_table_id | grep pizza_order
 ```
 
-
 * Flush the memtable to disk:  
 
 ```powershell
 yb-admin -master_addresses yugabytedb_node1:7100 flush_table ysql.yugabyte pizza_order
 ```
-
 
 * Open the SSTable file with multiple versions of the `status` column:  
 
@@ -279,7 +258,6 @@ SubDocKey(DocKey(0x1210, [1], []), [ColumnId(1); HT{ physical: 1670964617951372 
 SubDocKey(DocKey(0x1210, [1], []), [ColumnId(2); HT{ physical: 1670964638701253 w: 1 }]) -> 724261817884000; intent doc ht: HT{ physical: 1670964638692844 w: 1 }
 ```
 
-
 There are three versions of `ColumnId(1)`, which is the `status` column.
 
 * Line #6 - this is the latest column value that is visible to all future requests (`status='Delivering'`). It has the highest hybrid time (HT) which is `HT{ physical: 1670964638701253 }`.
@@ -288,8 +266,7 @@ There are three versions of `ColumnId(1)`, which is the `status` column.
 
 For curious minds, `ColumnId(2)` on line #9 is the `order_time` column. As long as it has not been updated after the order was placed in the database, there is only one version of the column.
 
-Garbage Collection in the Database
-----------------------------------
+## Garbage Collection in the Database
 
 It's clear that YugabyteDB can't and doesn't want to keep stale and deleted data forever. This is why the database has its own garbage collection process called compaction.
 
@@ -308,8 +285,7 @@ Let's use the picture below to break things down:
 * The SSTable1 through SSTable4 files get deleted.
 * The SSTable5 is left untouched. It was not included in the compaction cycle.
 
-Wrapping Up
------------
+## Wrapping Up
 
 As you can see, garbage collection is a widespread technique used far beyond the Java ecosystem.
 

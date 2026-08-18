@@ -24,8 +24,7 @@ frozen: false
 
 While developing the [Foojay Quickstart Java Tutorial](https://foojay.io/java-quick-start/), I was looking for an easy way to integrate runnable Java code examples into the Foojay pages and blogs. That's when I discovered [jdoodle.com](https://www.jdoodle.com/). I started by using their online editor, but with this blog I want to show you an even easier method to integrate runnable code here on Foojay.
 
-Integration examples
---------------------
+## Integration examples
 
 ### Single file code
 
@@ -39,7 +38,6 @@ To integrate "plain" Java code in your post or page, use the following syntax an
 </div>
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
 ```
-
 
 For example, this "Custom HTML":
 
@@ -62,7 +60,6 @@ public class MainArguments {
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
 ```
 
-
 Will produce the following output. Hit the "Execute" button to run the code.
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="4">
@@ -75,7 +72,6 @@ Will produce the following output. Hit the "Execute" button to run the code.
  <h3 class="wp-block-heading" id="h3-2-code-with-external-data-files">Code with external data files</h3>
  <p class="wp-block-paragraph">In one of the more advanced tutorial steps, I wanted to read data from a text file. This can also be done with JDoodle, but needs a slightly different "Custom HTML" block that looks like this:</p>
  
-
 ```
 <div data-pym-src="https://www.jdoodle.com/plugin" 
    data-version-index="4"
@@ -95,7 +91,6 @@ Will produce the following output. Hit the "Execute" button to run the code.
  <p class="wp-block-paragraph">The <code>data-client-id</code> is important here to allow the use of external files, but is only valid when used on the Foojay website! Create your own <a target="_blank" href="https://www.jdoodle.com">account on the JDoodle site</a> if you want to use this functionality on another website.</p>
  <p class="wp-block-paragraph">This is a simple example to read data from a CSV file:</p>
  
-
 ```
 <div data-pym-src="https://www.jdoodle.com/plugin" 
    data-version-index="4"

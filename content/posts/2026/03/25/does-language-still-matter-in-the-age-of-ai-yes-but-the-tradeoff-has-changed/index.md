@@ -22,28 +22,24 @@ enlighterjs: true
 frozen: false
 ---
 
-![](dominance-700x467.png)
---------------------------
+## ![](dominance-700x467.png)
 
 I keep hearing the same question in architecture reviews, slack threads, and conference Hallways:
 > **"If AI is writing the code, does language even matter anymore?"**
 
 It does. More than ever, actually --- just not for the reasons we've been arguing about for the last decade.
 
-The Bottleneck Has Moved
-------------------------
+## The Bottleneck Has Moved
 
 For decades, we optimized for developer productivity. How fast can someone write code? How expressive is the language? How quickly can we ship features?
 
 That math doesn't hold anymore.
 
-AI Produces Code Faster Than Teams Can Review It
-------------------------------------------------
+## AI Produces Code Faster Than Teams Can Review It
 
 I've watched teams adopt Copilot and immediately drown in PRs. The code looks plausible. It even compiles. But nobody has time to actually verify it. Authoring is no longer the bottleneck --- understanding and verification is.
 
-Why Verbose Languages Are Making a Comeback
--------------------------------------------
+## Why Verbose Languages Are Making a Comeback
 
 Languages we spent years complaining about --- Java, C# --- are turning into strategic assets. Not because they're faster to write --- they never were. What changed is they're easier to *read under pressure*.
 
@@ -53,8 +49,7 @@ When you're reviewing AI-generated code at scale, you need:
 * Structured patterns that make inconsistencies obvious
 * Clear intent a reviewer can confirm in seconds
 
-Boilerplate Is Now Signal
--------------------------
+## Boilerplate Is Now Signal
 
 What we used to call "boilerplate" is now signal. A Java method signature tells you the input types, return type, and nullability contract. You get all of that before reading a single line of implementation. A Python function gives you a name and some parameters that could be anything.
 
@@ -74,10 +69,7 @@ That last point is worth sitting with. AI-generated Java looks like human-writte
 
 ![](foojay-700x467.png)
 
-<br />
-
-The Other Half: Runtime Performance
------------------------------------
+## The Other Half: Runtime Performance
 
 Clarity gets code through review. But once it ships, it has to run.
 
@@ -99,8 +91,7 @@ Java runs 5-6x faster than Python on compute-intensive work. Rust beats Java by 
 
 Java sits in a pragmatic middle ground. It won't match Rust in a tight loop. But it gives you strong runtime performance without manual memory management. And it pairs that with a type system that makes AI-generated code reviewable.
 
-From Language Choice to Pipeline Design
----------------------------------------
+## From Language Choice to Pipeline Design
 
 The real shift isn't about picking the "best language." Software production now has three distinct stages. Each has different optimization criteria:
 
@@ -120,8 +111,7 @@ Runtime performance, scalability, and infrastructure cost. Rust and C++ dominate
 
 Previously these were a single decision. Now they're decoupled. Optimizing for one stage will hurt you in the others.
 
-Clarity First, Then Speed
--------------------------
+## Clarity First, Then Speed
 
 We're not choosing between readability and performance anymore. We're sequencing them.
 
@@ -129,8 +119,7 @@ We're not choosing between readability and performance anymore. We're sequencing
 
 2. **Performance comes next** --- Once deployed, inefficiency becomes your AWS bill.
 
-Code Examples: Same Intent, Different Review Experience
--------------------------------------------------------
+## Code Examples: Same Intent, Different Review Experience
 
 ### Python: concise but ambiguous
 
@@ -138,7 +127,6 @@ Code Examples: Same Intent, Different Review Experience
 def total_completed_orders(orders):
     return sum(order["total"] for order in orders if order["status"] == "COMPLETED")
 ```
-
 
 Concise. But what's in `orders`? What type is `"total"` --- float, int, Decimal? What if the key is missing? A reviewer has to hold all of that in their head.
 
@@ -167,7 +155,6 @@ enum OrderStatus {
 }
 ```
 
-
 More code, yes. But a reviewer knows immediately: the input is a `List`, the total is `BigDecimal` (not a floating point footgun), and status is a closed enum. The AI can't sneak in a string comparison or rounding error.
 
 ### Rust: maximum guarantees, steeper curve
@@ -194,11 +181,9 @@ fn total_completed_orders(orders: &[Order]) -> f64 {
 }
 ```
 
-
 Strong structural guarantees. Best runtime performance of the three. The tradeoff? A steeper learning curve and ownership semantics that slow down both AI generation and human review.
 
-Where Language Still Matters
-----------------------------
+## Where Language Still Matters
 
 Language matters more than ever --- just not as a tool for writing code faster.
 

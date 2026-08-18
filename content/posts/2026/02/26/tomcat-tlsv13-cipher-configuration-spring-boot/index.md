@@ -32,8 +32,7 @@ Prior to the change, Tomcat used a single `ciphers` attribute on the SSL connect
 
 The Tomcat team made this change to align with the distinct nature of TLSv1.3 cipher suites, which differ structurally from their TLSv1.2 counterparts. However, the migration path is problematic: TLSv1.3 ciphers placed in the `ciphers` attribute are removed from the configuration, logging only a warning.
 
-What's the risk?
-----------------
+## What's the risk?
 
 For example, consider an organization with a security policy requiring 256-bit encryption only. Let's say they configure a Spring Boot application as follows:
 
@@ -52,7 +51,6 @@ spring:
               - TLSv1.3
 ```
 
-
 Before the Tomcat change, the server only offered the two ciphers listed above and clients had to negotiate 256-bit encryption or the handshake failed.
 
 After upgrading to an affected Tomcat version, both ciphers are removed from the *explicit* configuration set by the administrator. The only indication of this behavior is in the Tomcat log messages.
@@ -60,7 +58,6 @@ After upgrading to an affected Tomcat version, both ciphers are removed from the
 ```bash
 2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_AES_256_GCM_SHA384] included in the TLS 1.2 and below ciphers list will be ignored<br>2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_CHACHA20_POLY1305_SHA256] included in the TLS 1.2 and below ciphers list will be ignored
 ```
-
 
 In this scenario, this does not mean those ciphers are no longer offered. It does mean that the intended cipher restriction is now gone. As a result, Tomcat reverts to offering all default TLSv1.3 ciphers, which includes the 128-bit cipher that was intentionally left out.
 
@@ -87,13 +84,11 @@ PORT     STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 0.08 seconds
 ```
 
-
 Despite the explicit exclusion of the `TLS_AES_128_GCM_SHA256` (128-bit) cipher to align with our fictitious organization's security policy, all three default TLSv1.3 ciphers appear as active.
 
 While all standard TLSv1.3 ciphers are cryptographically strong and the default ciphers are not inherently weak, the central issue is the server's silent deviation from the administrator's security policy. Because of this, the mismatch between the intended configuration and the server's actual behavior is a significant concern. In regulated environments (FIPS 140-2, PCI-DSS, internal compliance mandates), this gap between intended and actual configuration is exactly what auditors and penetration testers look for.
 
-Who is Affected
----------------
+## Who is Affected
 
 Any Spring Boot application that:
 
@@ -101,8 +96,7 @@ Any Spring Boot application that:
 * Explicitly configures TLSv1.3 cipher suites, either via `server.ssl.ciphers` or via `options.ciphers` in an [SSL Bundle](https://docs.spring.io/spring-boot/reference/features/ssl.html#features.ssl.applying) [applied](https://docs.spring.io/spring-boot/how-to/webserver.html#howto.webserver.configure-ssl.bundles) to the connection with `server.ssl.bundle`
 * Runs on Tomcat 9.0.115+, 10.1.52+, or 11.0.18+
 
-The Fix
--------
+## The Fix
 
 Spring Boot's OSS releases `v3.5.11` and `v4.0.3` introduced a patch that correctly configures ciphers. This configuration allows for separate cipher settings for TLSv1.2 and older versions, distinct from those used for TLSv1.3.
 
@@ -117,7 +111,6 @@ openssl s_client -connect localhost:8443 -tls1_3 </dev/null 2>&1 | grep "Cipher 
 # Get a full list of Ciphers offered by the server
 nmap --script ssl-enum-ciphers -p 8443 localhost
 ```
-
 
 Once the fix is applied, only the explicitly configured ciphers should be offered by the server.
 

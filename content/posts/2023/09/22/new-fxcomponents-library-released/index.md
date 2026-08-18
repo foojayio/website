@@ -26,8 +26,7 @@ As of the time of writing, FXComponents is being built using Java 17 and JavaFX 
 
 Below is a brief description of the controls currently present in this library (more coming soon). If you want to know more, head on over to the [documentation page](https://pixelduke.com/2023/09/04/fxcomponents-library-released/) for more detailed information about this library and how to start using it.
 
-Controls
---------
+## Controls
 
 ### List Builder
 
@@ -52,8 +51,6 @@ A blocking dialog (blocks user input) that shows a progress bar while a backgrou
 The ProgressBar can be of indeterminate progress or not.
 
 The developer passes a Runnable to the showAndWait method. That Runnable will be executed in a background task, progress can be updated through convenience methods in the Task class API.
-
-<br />
 
 #### Indeterminate
 

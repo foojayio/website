@@ -25,8 +25,7 @@ frozen: false
 
 One critical aspect of Spring Boot dependency management is security. Software vulnerabilities are discovered frequently, and by keeping your project's dependencies up to date, you're essentially putting on your digital security armor. Outdated dependencies can be like unlocked doors, inviting trouble from potential threats, and that's something we'd like to avoid.
 
-Finding vulnerabilities in Spring Boot
---------------------------------------
+## Finding vulnerabilities in Spring Boot
 
 Software composition analysis (SCA) tools are a very useful tool for developers. They cover an easy solution to managing dependencies, handling security vulnerabilities, navigating licensing issues, and ensuring compliance in your software projects. By using [++Snyk Open Source++](https://snyk.io/product/open-source-security-management/) as your SCA, you can easily find out if your Spring Boot packages contain vulnerabilities.
 
@@ -38,8 +37,7 @@ The second vulnerability I would like to discuss is a medium severity arbitrary 
 
 I won't go into the actual problem of individual vulnerabilities today, but you can check out the dedicated [++blog post++](https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/) for more information on the \`snakeyaml\` problem. Let's focus on solving the problem and implementing the best solution.
 
-Remediating vulnerable packages in your Spring Boot application
----------------------------------------------------------------
+## Remediating vulnerable packages in your Spring Boot application
 
 For the first vulnerability, there is a clear fix described. My application is based on Spring Boot 2.7.16, and therefore, the \`spring-boot-starter-webflux\` is also on version 2.7.16.
 
@@ -72,7 +70,6 @@ Typically, your spring boot manifest looks something like the following code:
 </dependencies>
 ```
 
-
 **Gradle**:
 
 ```groovy
@@ -88,7 +85,6 @@ dependencies {
  …
 }
 ```
-
 
 ### Update Spring Boot starter
 
@@ -108,13 +104,11 @@ When looking at the first vulnerability found in my project, the fix suggestion 
    </dependency>
 ```
 
-
 **Gradle:**
 
 ```
 implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.17'
 ```
-
 
 **But stop right here!** This is not the recommended way of solving the problem. The specific version, 2.7.17, is used over the parent version. While this might work since this is a patch version release, it isn't the best or most secure solution. Since semver does not guarantee that API's stay intact, we can't be sure this will work. But the most important argument is that there probably is a full new release of Spring Boot.  
 
@@ -131,7 +125,6 @@ Remember that I told you earlier that these starters belong together? Therefore 
 </parent>
 ```
 
-
 **Gradle:**
 
 ```groovy
@@ -140,7 +133,6 @@ plugins {
  id 'org.springframework.boot' version '2.7.17'
 }
 ```
-
 
 I would advise everyone to go the extra mile and update their entire spring boot version to the latest appropriate version. To find out what that is, simply go to https://start.spring.io.
 ![blog-sprint-boot-initializer](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1701273847%2Fblog-sprint-boot-initializer.jpg&w=2560&q=75)
@@ -163,13 +155,11 @@ For maven, you can add a property in the properties section.
 </properties>
 ```
 
-
 For Gradle, we can edit this property in a \`gradle.properties\` file:
 
 ```
 snakeyaml.version=3.0
 ```
-
 
 This is the preferred way over dependency management since \`snakeyaml\` is just a single library. However, in many cases, it is more than one library. The version can refer to a [++BOM++](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#bill-of-materials-bom-poms) (bill of materials), not to be confused with an SBOM, representing a set of groups of packages that need to be used together and essentially have the same version --- such as an API and an implementation package. Both need to be on the same version to perform as expected.
 
@@ -193,7 +183,6 @@ For Maven, it's most commonly added to the \`dependencyManagement\` block. This 
 </dependencyManagement>
 ```
 
-
 Since we use the [++dependency-management++](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/)plugin for Spring in our Gradle file, we have pretty similar capabilities for Gradle available. Note that this plugin was inserted by the Spring Boot initializer when scaffolding my project.
 
 **Gradle:**
@@ -205,7 +194,6 @@ dependencyManagement {
    }
 }
 ```
-
 
 If you don't use the \`io.spring.dependency-management\` plugin, you can also add [++constraints++](https://docs.gradle.org/current/userguide/dependency_constraints.html#sec:adding-constraints-transitive-deps) to transitive dependencies in Gradle to update a transitive dependency like the one below. Remember that these constraints do not play well with the Spring \`dependency-management\` plugin. So it is either one or the other.
 
@@ -220,9 +208,7 @@ dependencies {
 }
 ```
 
-
-Scanning your Spring Boot applications with Snyk
-------------------------------------------------
+## Scanning your Spring Boot applications with Snyk
 
 Scanning your Spring Boot application with Snyk is essential for ensuring the security and stability of your software. Snyk helps identify in your application's dependencies, which can be exploited by malicious actors if left unaddressed. After reading this article, you also know what the best way is to implement the remediation advice provide by Snyk.  
 

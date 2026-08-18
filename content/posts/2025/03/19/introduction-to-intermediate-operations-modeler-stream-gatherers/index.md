@@ -38,7 +38,6 @@ The `java.util.stream.Gatherer` interface, which models a gatherer, has three ty
 public interface Gatherer<T, A, R> { … }
 ```
 
-
 `T` represents the input element.  
 `A` represents the potential mutable state object.  
 `R` represents the output that will be pushed downstream.
@@ -51,7 +50,6 @@ Integrator<A, T, R> integrator();
 BinaryOperator<A> combiner();
 BiConsumer<A, Downstream<? super R>> finisher();
 ```
-
 
 `Initializer` -- A function that produces an instance of the internal intermediate state.  
 `Integrator` -- Integrates a new element into the stream produced by the Gatherer.  
@@ -69,7 +67,6 @@ var uppercaseGatherer = Gatherer.<String, String>of((state, element, downstream)
 -> downstream.push(element.toUpperCase()));
 ```
 
-
 The example gatherer above calls toUpperCase on an input element of type String and pushes the result downstream. This gatherer is equivalent to the following map operation.
 
 ```java
@@ -78,7 +75,6 @@ Stream.of("a", "b", "c", "d", "e", "f", "g")
    .forEach(System.out::print);
 ```
 
-
 The Stream interface now includes a method called `gather()`, which accepts a Gatherer parameter. We can use it by passing the gatherer we created.
 
 ```java
@@ -86,7 +82,6 @@ Stream.of("a", "b", "c", "d", "e", "f", "g")
     .gather(uppercaseGatherer) 
     .forEach(System.out::print);
 ```
-
 
 ### Built-in Gaterers
 
@@ -132,7 +127,6 @@ class LogWrapper {
 }
 ```
 
-
 The object has a level field representing the log level. The details field represents the content of the log entry.
 
 We need a stateful gatherer because we must retain information about past events to determine whether failures occur consecutively. To achieve this, the internal state of our gatherer can be a `List<LogWrapper>`.
@@ -142,7 +136,6 @@ static Supplier<List<LogWrapper>> initializer() {
    return ArrayList::new; 
 }
 ```
-
 
 The object returned by the `initializer()` corresponds to the second parameter explained earlier in the type parameters of the Gatherer interface.
 
@@ -170,7 +163,6 @@ static Integrator<List<LogWrapper>, LogWrapper, String> integrator(final int thr
 }
 ```
 
-
 The integrator will be responsible for integrating elements into the produced stream. The third parameter of the integrator represents the downstream object.
 
 We check whether more elements are needed by calling the `isRejecting()`, which determines if the next stage no longer wants to receive elements. If this condition is met, we return false.
@@ -192,7 +184,6 @@ static BinaryOperator<List<LogWrapper>> combiner() {
 }
 ```
 
-
 To prevent our gatherer from being used in a parallel stream, we define a combiner, even though it is not strictly required. This is because our gatherer is inherently designed to work as expected only in a sequential stream.
 
 ```java
@@ -204,7 +195,6 @@ static BiConsumer<List<LogWrapper>, Downstream<? super String>> finisher(final i
     }; 
 }
 ```
-
 
 Finally, we define a finisher to push any remaining stream elements that have not yet been emitted downstream.
 

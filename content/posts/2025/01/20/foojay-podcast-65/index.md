@@ -24,13 +24,11 @@ By now, you've likely had your year-end performance review with your manager and
 
 I've invited three fantastic guests who are eager to share their experiences and help you elevate your professional journey.
 
-Video
------
+## Video
 
 {{< youtube NRHxtT8YQAc >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Rafael Del Nero
   * <https://www.linkedin.com/in/rafadelnero/>
@@ -56,14 +53,12 @@ Guests
   * <https://www.youtube.com/ElderMoraes>
   * <https://instagram.com/eldermoraes>
 
-SouJava (JUG Brazil)
---------------------
+## SouJava (JUG Brazil)
 
 * <https://www.meetup.com/SouJava/>
 * <http://soujava.org.br/>
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests  
 

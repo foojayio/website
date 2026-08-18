@@ -22,8 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Two unit-testing approaches explained!
---------------------------------------
+## Two unit-testing approaches explained!
 
 Pick any topic around testing and there will be at least two very contrary approaches that seem to be at odds.
 
@@ -33,8 +32,7 @@ One of the many points of discussion around unit testing, and in particular TDD,
 
 Specifically: What can or should be considered the right size of a unit with regard to what is to be tested in isolation.
 
-What is a Unit?
----------------
+## What is a Unit?
 
 A Unit could be a method, a class or even a cohesive group of classes, that together compose a feature, as a unit.
 > \[...\] Object-oriented design tends to treat a class as the unit, procedural or functional approaches might consider a single function as a unit. But really it's a situational thing - the team decides what makes sense to be a unit for the purposes of their understanding of the system and its testing. Although I start with the notion of the unit being a class, I often take a bunch of closely related classes and treat them as a single unit. Rarely I might take a subset of methods in a class as a unit. However you define it doesn't really matter.
@@ -48,8 +46,7 @@ This makes sense in some context to make a specific approach more catchable, but
 
 Although everything we discuss here makes sense particularly in the context of TDD, for this article, we solely focus on how to define unit boundaries for tests rather than discussing TDD as an approach.
 
-Unit testing, two extremes!
----------------------------
+## Unit testing, two extremes!
 
 We present two approaches for defining units and illustrate how these approaches to testing differ based on where we place boundaries for testing.
 
@@ -79,8 +76,7 @@ Ideally starting with the test and then building the matching behaviour, either 
 
 Both approaches we describe here follow a different approach to achieving that and are applied at different levels of granularity and as such have different benefits and drawbacks.
 
-The running example
--------------------
+## The running example
 
 Before we take a look at both approaches, let us introduce our running example: a simple calculator
 
@@ -89,7 +85,6 @@ The calculator has a well defined public interface with only one method:
 ```java
 public double calculate(final Expression calculationExpression);
 ```
-
 
 The calculator gets a mathematical expression as input and returns the result of evaluating the expression.  
 
@@ -113,7 +108,6 @@ For example the expression `(10+20)-(3+4)` is represented as the `Expression` tr
     └──┘  └──┘   └─┘  └─┘
 ```
 
-
 Put in code, this calculation would look like this:
 
 ```java
@@ -134,7 +128,6 @@ public class Main {
 }
 ```
 
-
 ### Implementation
 
 Note: The implementation as discussed here, is intentionally more complex than necessary just as a means for us to highlight the differences between the **fine grained** and **coarse grained** units.
@@ -149,7 +142,6 @@ public sealed interface Expression
 }
 ```
 
-
 **The ExpressionHandler interface:**
 
 ```java
@@ -160,14 +152,12 @@ public sealed interface ExpressionHandler< T extends Expression >
 }
 ```
 
-
 The Divide expression for example is a record with a dividend and divisor implementing the Expression interface.
 
 ```java
 public record Divide(Expression dividend, Expression divisor) implements Expression {
 }
 ```
-
 
 Accordingly, there is also a DivideHandler implementing the ExpressionHandler interface.
 
@@ -186,7 +176,6 @@ final class DivideHandler implements ExpressionHandler<Divide> {
 }
 ```
 
-
 As the operands of the Divide expression are themselves expressions, we simply utilize a `Calculator` instance to recursively calculate the result of the operand expressions. Finally, the Divide handler performs the actual division.
 
 All other operators follow the same pattern, so we won't explain them in detail here.
@@ -199,7 +188,6 @@ Here the Value expression comes to the rescue. It's a constant expression and re
 public record Value(double value) implements Expression {}
 ```
 
-
 The respective expression handler simply returns the value of the Value expression.
 
 ```
@@ -211,7 +199,6 @@ final class ValueHandler implements ExpressionHandler<Value> {
     }
 }
 ```
-
 
 As mentioned earlier, the leaves of the expression tree must be Value expressions in order for the mathematical expression to make sense.
 
@@ -228,7 +215,6 @@ public double calculate(final Expression calculationExpression) {
     return expressionHandler.evaluate(this, calculationExpression);
 }
 ```
-
 
 Now you might wonder where the `expressionHandlerProvider` comes from?
 
@@ -263,7 +249,6 @@ public class ExpressionHandlerProvider {
 }
 ```
 
-
 As the handlers are stateless, the factory uses constants for the expression handlers.
 
 It simply returns the correct handler instance for the given expression.
@@ -274,8 +259,7 @@ You can find code from the example here: <https://github.com/sebastiankonieczek/
 
 Now, let's dive into the first approach of testing this library.
 
-The Fine Grained Style
-----------------------
+## The Fine Grained Style
 
 To follow along, you can checkout the branch "fine-grained-testing" in the repository linked above for the full test implementation.
 
@@ -290,7 +274,6 @@ The interface of the `PlusHandler` expression for example looks like this:
 ```java
 public double evaluate(final Calculator calculator, final Plus expression)
 ```
-
 
 As we can see, we have two inputs, the calculator and the `Plus` expression. We know that the plus expression itself consists of two child expressions. One expression for the augend and one that represents the addend.
 
@@ -334,7 +317,6 @@ class PlusHandlerTest {
 }
 ```
 
-
 ➀ - Our testee is the PlusHandler so we create an instance of the plus handler as a field variable. The first input of the plus handler is the calculator, we define it as a field variable as well.
 
 ➁ - We initialize the calculator to a mock instance in the set up method of the test as want to avoid accidentally testing the behaviour of the calculator class.
@@ -364,7 +346,6 @@ Again, let us at first look at the interface of the calculator.
 ```java
 public double calculate(final Expression calculationExpression)
 ```
-
 
 The calculate method has one input, the expression to be calculated. Furthermore, the Calculator has one collaborator, the expression handler factory.
 
@@ -405,7 +386,6 @@ class CalculatorTest {
     }
 }
 ```
-
 
 At first, you might notice that there is only one test for the calculator (side note: There should of course be some `null` tests, but we omitted those for brevity and to focus on points we want to emphasize). Because we tested all the other collaborators of the library separately, we do not need to test these again. Thus, as the calculator only glues our collaborators together. We only need to test if this composition is done the right way.
 
@@ -473,7 +453,6 @@ class ExpressionHandlerProviderTest {
 }
 ```
 
-
 We have two tests here.  
 
 ➀ - One test is a parametrized test. It tests if the provider provides handlers of the correct type for each known expression type.
@@ -482,8 +461,7 @@ We have two tests here.
 
 Now let us go on with the coarse grained style.
 
-The coarse grained style
-------------------------
+## The coarse grained style
 
 We named this approach to defining units **coarse grained style** , because we try to build larger units which we will test.  
 
@@ -560,7 +538,6 @@ class TestCalculator {
 }
 ```
 
-
 In this case we have a module without any external dependencies that represents a function. The module is a computation that, given an input, will produce an output without any side effects. So there is no need for any test doubles.
 
 The test cases represent different variations of possible inputs. Of course not exhaustive but expressions could be arbitrarily complex in order to cover different edge cases. Most test cases use a parametrised test as they follow the same pattern. There is also an explicit test for the division by zero which is one of the edge cases of the calculator.
@@ -571,8 +548,7 @@ It is not the case in our example. But this coarse grained style does not confli
 
 Think for instance of a module that retrieves and/or stores data from an external datastore. That datastore could still be provided by a test double. On that test double interactions could be validated, if needed, or it could simply provide prepared data for the test. At the same time which classes exactly would interact with the external collaborator of the module is not constrained by the test.
 
-Pros and Cons of each approach
-------------------------------
+## Pros and Cons of each approach
 
 ### The fine grained style:
 
@@ -612,8 +588,7 @@ When a lot of external collaborators come into play while using the coarse grain
 
 The same holds true for complex input structures or a combination of both.
 
-Conclusion
-----------
+## Conclusion
 
 In this article we contrasted two approaches to defining units of abstraction in your code and tests. Which one should you use in the end? As many things in this profession, the answer is, it depends.
 

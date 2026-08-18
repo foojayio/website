@@ -29,8 +29,7 @@ This occurrence is not limited to a developer having to fix a bug; it can be a s
 
 Hence, I want to describe how I approach the situation so it can benefit others.
 
-An example issue
-----------------
+## An example issue
 
 To illustrate my point, I'll use a common GitHub issue requesting a new feature on an Open Source project.
 
@@ -47,8 +46,7 @@ At the time, I found this interesting issue:
 
 As an OpenSource contributor, how would I approach the work?
 
-Diagramming is key
-------------------
+## Diagramming is key
 
 Documentation is the first step to embark on a new project. On a regular project, the documentation will probably be missing, incomplete, or partly (if not entirely) misleading; at a hackathon, time may be too short to read it in detail.
 
@@ -88,7 +86,6 @@ public abstract class AbstractCacheRecordStore<R extends CacheRecord, CRM extend
 }
 ```
 
-
 1. The `DefaultRecordStore` reads the `Record`, which triggers the update of the last access time.
 
 Fixing the issue is outside of the scope of this post. It involves talking to people more familiar with the overall design to develop the best solution. A good approach in a hackathon is first to offer at least two alternatives and document their respective trade-offs.
@@ -101,8 +98,7 @@ For the tooling, plenty of alternatives are available. My preferences go to [Pla
 * It's Open Source and free
 * It's maintained regularly
 
-Conclusion
-----------
+## Conclusion
 
 Understanding an existing codebase is a crucial skill regardless of one's exact technical role.
 

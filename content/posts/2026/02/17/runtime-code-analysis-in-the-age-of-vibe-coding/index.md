@@ -27,8 +27,7 @@ However, traditional profilers can feel like overkill for quick validation. In a
 
 **jvm-hotpath** is a lightweight Java agent built for this workflow. It surfaces per-line execution counts directly in your source code, showing you exactly which lines run and how often---while your application runs.
 
-What Makes This Different
--------------------------
+## What Makes This Different
 
 **Zero timing overhead.** Just counts, no nanosecond measurements.
 
@@ -40,8 +39,7 @@ What Makes This Different
 
 **Modern Java.** Tested in CI on Java 11, 17, 21, 23, and 24. It also works with Spring Boot and Micronaut.
 
-The Gap in Java Tooling
------------------------
+## The Gap in Java Tooling
 
 ### The Original Problem
 
@@ -64,8 +62,7 @@ After an hour of dead ends, Claude cut to the chase:
 
 Ultimately, that question decided the direction.
 
-A Real-World Bug
-----------------
+## A Real-World Bug
 
 ### How the Bug Appeared
 
@@ -81,8 +78,7 @@ In other words, the filter was sitting inside a loop instead of being evaluated 
 
 Execution counts made it obvious. For example, seeing "19,147,293 executions" next to a single line removed all ambiguity. No timing data was required, and no interpretation was needed.
 
-The Key Insight: Frequency ≠ Resource Consumption
--------------------------------------------------
+## The Key Insight: Frequency ≠ Resource Consumption
 
 Java profilers focus on **resource consumption** : CPU time, memory allocation, thread contention. jvm-hotpath, by contrast, shows **how many times code runs** (frequency).
 
@@ -90,8 +86,7 @@ In modern Java, this distinction matters. For instance, JIT compilation makes in
 
 **It's a "Logic X-Ray," not a "Resource Monitor."**
 
-How It Works
-------------
+## How It Works
 
 ### Instrumentation
 
@@ -115,8 +110,7 @@ The agent also writes `execution-report.json`. Therefore, it gives you a machine
 
 <https://github.com/user-attachments/assets/cc89451b-a41f-491e-a1f6-8e87328979c0>
 
-Getting Started
----------------
+## Getting Started
 
 ### Maven Plugin (Recommended)
 
@@ -175,28 +169,23 @@ java -jar jvm-hotpath-agent.jar --data=target/site/jvm-hotpath/execution-report.
 
 It is not a coverage percentage tool---use JaCoCo for that. Nor is it a CPU timing profiler---use JFR or async-profiler instead. Finally, it is not a 24/7 production monitoring system.
 
-Beyond Performance: Dead Code and Cognitive Load
-------------------------------------------------
+## Beyond Performance: Dead Code and Cognitive Load
 
 Execution counts make it easy to spot dead code and rarely used branches. Moreover, they surface features that exist largely for historical reasons. Furthermore, they reduce cognitive load. When you know which parts actually run, it becomes much easier to reason about changes, refactor with confidence, or decide what not to think about yet.
 
 Indeed, for anyone working quickly with AI-assisted tools, that kind of clarity is invaluable.
 
-A Note on How This Was Built
-----------------------------
+## A Note on How This Was Built
 
 The first prototype came out of AI-assisted vibe coding, primarily with Claude. Subsequently, I iterated with a mix of manual work and help from Codex and Gemini. I also validated everything against real JVM workloads.
 
 Overall, the tools accelerated exploration. Even so, the motivation and direction came from hands-on use in real codebases.
 
-Where This Is Going
--------------------
+## Where This Is Going
 
 There are obvious next steps---Gradle improvements, better exclusion controls, broader framework testing. For now, though, I'm deliberately keeping the scope small. Indeed, this is my first open-source release.
 
 The real question is simpler: **does this help you understand your codebase faster and with more confidence?**
-
-
 
 **Project:** [github.com/sfkamath/jvm-hotpath](https://github.com/sfkamath/jvm-hotpath)  
 **Documentation:** [Full README](https://github.com/sfkamath/jvm-hotpath/blob/main/README.md)  

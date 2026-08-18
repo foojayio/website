@@ -39,12 +39,9 @@ In this article, I want to discuss the upside of failure. Why you should seek fa
 
 {{< youtube 9Yv1Jj3yn2c >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-Fail-Fast
----------
+## Fail-Fast
 
 Fail-fast systems are designed to immediately stop functioning upon encountering an unexpected condition. This immediate failure helps to catch errors early, making debugging more straightforward.
 
@@ -59,8 +56,7 @@ However, fail-fast systems carry their own risks, particularly in production env
 * **Production Disruptions:** If a bug reaches production, it can cause immediate and significant disruptions, potentially impacting both system performance and the business's operations.
 * **Risk Appetite:** Fail-fast systems require a level of risk tolerance from both engineers and executives. They need to be prepared to handle and address failures quickly, often balancing this with potential business impacts.
 
-Fail-Safe
----------
+## Fail-Safe
 
 Fail-safe systems take a different approach, aiming to recover and continue even in the face of unexpected conditions. This makes them particularly suited for uncertain or volatile environments.
 
@@ -75,8 +71,7 @@ However, fail-safe systems have downsides:
 * **Hidden Errors:** By attempting to recover from errors, fail-safe systems can delay the detection of issues, making them harder to trace and potentially leading to more severe cascading failures.
 * **Debugging Challenges:** This delayed nature of errors can complicate debugging, requiring more time and effort to find and resolve issues.
 
-Choosing Between Fail-Fast and Fail-Safe
-----------------------------------------
+## Choosing Between Fail-Fast and Fail-Safe
 
 It's challenging to determine which approach is better, as both have their merits. Fail-fast systems offer immediate debugging, lower risk of cascading failures, and quicker detection and resolution of bugs. This helps catch and fix issues early, preventing them from spreading.
 
@@ -107,14 +102,11 @@ They tested their system and "it works", even in production. But lets assume tha
 
 This is especially important once we redefine failures.
 
-Redefining Failure
-------------------
+## Redefining Failure
 
 Failures in software systems aren't just about crashes. A crash can be seen as a simple and immediate failure, but there are more complex issues to consider. In fact, crashes in the age of containers are probably the best failures. A system restarts seamlessly with barely an interruption.
 
 {{< youtube N4OFIiJV22I >}}
-
-<br />
 
 ### Data Corruption
 
@@ -130,8 +122,7 @@ If it's a bug in production you should probably revert, if you can't instantly r
 
 Failures must be fully understood before a fix is undertaken. In my own companies I often skipped that step due to pressure, in a small startup that is forgivable. In larger companies we need to understand the root cause. A culture of debrief for bugs and production issues is essential. The fix should also include process mitigation that prevents similar issues from reaching production.
 
-Debugging Failure
------------------
+## Debugging Failure
 
 Fail-fast systems are much easier to debug. They have inherently simpler architecture and it is easier to pinpoint an issue to a specific area. It is crucial to throw exceptions even for minor violations (e.g. validations). This prevents cascading types of bugs that prevail in loose systems.
 
@@ -143,8 +134,7 @@ Failure isn't something we can avoid, predict or fully test against. The only th
 
 A great example of fail-safe would be a cache of REST responses that lets us keep working even when a service is down. Unfortunately, this can lead to complex niche issues such as cache poisoning or a situation in which a banned user still had access due to cache.
 
-Hybrid in Production
---------------------
+## Hybrid in Production
 
 Fail-safe is best applied only in production/staging and in the OPS layer. This reduces the amount of changes between production and dev, we want them to be as similar as possible, yet it's still a change which can negatively impact production. But the benefits are tremendous as observability can get a clear picture of system failures.
 
@@ -152,8 +142,7 @@ The discussion here is a bit colored by my more recent experience of building ob
 
 There's also a special case of libraries/frameworks that often provide inconsistent and badly documented behaviors in these situations. I myself am guilty of such inconsistency in some of my work. It's an easy mistake to make.
 
-Final Word
-----------
+## Final Word
 
 This is my last post on the theory of debugging series that's part of my book/course on debugging. We often think of debugging as the action we take when something fails, it isn't. Debugging starts the moment we write the first line of code. We make decisions that will impact the debugging process as we code, often we're just unaware of these decisions until we get a failure.
 

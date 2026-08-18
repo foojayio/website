@@ -32,8 +32,6 @@ This blog post will cover the subsequent design patterns.
 
 Microservice Architecture Patterns
 
-<br />
-
 Undoubtedly, the logging mechanism benefits troubleshooting issues that arise when executing operations or transactions on multiple deployed microservices.
 
 We can further categorize the observability patterns into six distinct patterns.
@@ -47,8 +45,7 @@ We can further categorize the observability patterns into six distinct patterns.
 
 In the subsequent segment, we will discuss each topic separately.
 
-Log Aggregation
----------------
+## Log Aggregation
 
 By implementing the microservice architecture pattern, we partition the monolithic application into several microservices and deploy them separately. Nevertheless, we need to establish a centralized logging mechanism across all the services to ensure seamless communication between them. This approach facilitates developers in tracing and troubleshoot issues that may arise during the application's operation.
 
@@ -66,8 +63,7 @@ The following services commonly employ capturing and storing logs in application
 
 To capture all the logs, we need substantial infrastructure.
 
-Application Metrics
--------------------
+## Application Metrics
 
 Gaining a comprehensive understanding of the application's performance through the observation of metrics captured throughout its runtime is crucial.
 
@@ -79,13 +75,11 @@ We can use tools such as [Prometheus](https://prometheus.io/), [Grafana](https:/
 
 We can also use instrumentation libraries such as [Prometheus Client Libraries](https://prometheus.io/docs/instrumenting/clientlibs/) and Coda Hale/Yammer [Java Metrics Library](http://metrics.dropwizard.io/3.1.0/)
 
-Audit Logging
--------------
+## Audit Logging
 
 The user needs to capture and store different events while interacting with various instances of microservices in the database. The microservice architecture extensively employs this practice, commonly referred to as audit logging.
 
-Distrubuted Tracing
--------------------
+## Distrubuted Tracing
 
 Microservices architectures employ distributed tracing as a crucial technique for monitoring and resolving intricate, distributed systems. It helps in comprehending and visually representing the progression of requests as they navigate through diverse microservices and components, thereby offering valuable insights into the system's performance and behavior. This technique plays a vital role in identifying problems, enhancing performance, and guaranteeing dependability within a microservices environment.
 
@@ -93,15 +87,13 @@ Utilizing the [Spring Boot](https://spring.io/projects/spring-boot) and [Spring 
 
 In the context of event-driven architecture, we employ Message Queue systems such as ActiveMQ, RabbitMQ, or Kafka to capture traces and subsequently transmit them to Monitoring Servers.
 
-Exception Tracking
-------------------
+## Exception Tracking
 
 In the microservices architecture, separate servers host numerous services and instances. If a runtime issue occurs, the application raises an exception and provides a stacktrace to indicate how it manages the exception.
 
 To optimize code and ensure cleanliness, developers commonly practice writing single exception handling (@RestControllerAdvice) class for the entire application instead of writing it for each individual module.
 
-Health Check API
-----------------
+## Health Check API
 
 In the microservice architecture, a service may be incapable of processing a request despite the application being operational, owing to connectivity problems with databases, messaging systems, or other issues. In such cases, users cannot execute any requests and must activate an alert mechanism.
 
@@ -114,8 +106,7 @@ We can further categorize the cross-cutting concern patterns into four distinct 
 * Circuit Breaker Pattern
 * Blue Green Deployment Pattern
 
-External Configuration
-----------------------
+## External Configuration
 
 In a monolithic application, the application tightly couples the majority of the business-related properties, database, or any 3rd party related services.
 
@@ -125,8 +116,7 @@ As a result, this approach enables developers to effortlessly modify or enables 
 
 [Spring Boot's externalized configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) makes values within the Spring application context accessible. It retrieves them from various sources such as **operating system environment variables, property files, and command line arguments**.
 
-Service Discovery Pattern
--------------------------
+## Service Discovery Pattern
 
 In monolithic architecture, a fixed host and port number are used for service communication, utilizing protocols such as REST API and Remote Procedure Calls (RPC).
 
@@ -148,8 +138,7 @@ The [Netflix OSS Components](http://netflix.github.io/) offer [Eureka](https://g
 
 We will utilize the application name to invoke a service from another. The service registry maintains multiple instances of services, each with dynamically assigned IP addresses and ports. Therefore, by specifying the application name, we can successfully invoke the desired service.
 
-Circuit Breaker Pattern
------------------------
+## Circuit Breaker Pattern
 
 In certain cases, services may encounter unanticipated failures or undergo maintenance, resulting in the user experiencing unresponsiveness while utilizing them. To enhance the customer/user experience, we will incorporate a circuit-breaker pattern and establish a fallback method that ensures a seamless user journey without causing any inconvenience.
 
@@ -157,8 +146,7 @@ Utilizing [Netflix Hystrix](https://github.com/Netflix/Hystrix) in conjunction w
 
 To enhance modularity, we have introduced a new framework called [Resilience4j](https://resilience4j.readme.io/docs). This framework segregates **Circuit Breaker, Rate Limiter, Retry, and Bulkhead** into separate modules, allowing for greater flexibility and customization.
 
-Blue-Green Deployment Pattern
------------------------------
+## Blue-Green Deployment Pattern
 
 In microservice architecture, we employ the technique of blue-green deployment to securely update and launch software applications without any interruptions or disturbances. To put it simply, you can envision having two identical sets of your application, with one labeled "blue" and the other labeled "green."
 

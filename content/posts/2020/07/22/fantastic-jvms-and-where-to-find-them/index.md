@@ -45,8 +45,7 @@ At the time of writing this blog, the new CPU (Critical Patch Update) releases h
 
 If you're running anything else in production, without a support contract, it could be argued you're not doing things quite right.
 
-What's what?
-------------
+## What's what?
 
 OpenJDK, being open sourced, has builds provided by plenty of vendors. Here is a**non-exhaustive** list of some vendors shipping supported versions of OpenJDK (in alphabetical order, distribution(s) in parenthesis):
 
@@ -63,8 +62,7 @@ These providers usually ship distributions with pretty much the same bits from t
 
 There are also upstream builds, not supported by anyone, built on Red Hat infrastructure and hosted by AdoptOpenJDK. For example, if you get a JDK 8 from Docker Hub (openjdk/jdk8u252, openjdk/jdk8), that is what you would [get](https://github.com/docker-library/openjdk/blob/master/8/jdk/Dockerfile).
 
-Where to get JFR -- Public Service Announcement
------------------------------------------------
+## Where to get JFR -- Public Service Announcement
 
 As you probably know, JDK Flight Recorder, a technology close to my heart, has been backported to JDK 8. Since we're talking about where to get your JVMs and versions, I thought I'd include a small table for which provider will be including JFR in what version of their JDK 8 builds.
 
@@ -79,8 +77,7 @@ As you probably know, JDK Flight Recorder, a technology close to my heart, has b
 
 Where to get JDK Flight Recorder
 
-Summary
--------
+## Summary
 
 * Use the latest version of an LTS which is still supported, or the latest version
 * Use a supported build in production (even if you haven't bought support)

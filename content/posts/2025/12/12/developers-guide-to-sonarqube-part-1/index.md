@@ -34,10 +34,7 @@ This is where **SonarQube for IDE** (formerly known as SonarLint) changes the ga
 
 This is **Part 1** of our series. Today, we focus on the **Standalone Mode** ---how to install the SonarQube IDE extension and use it to solve your daily coding headaches right inside [IntelliJ](https://www.jetbrains.com/idea/).
 
-
-
-**Problem #1: "I don't have time for complex tool setups"**
------------------------------------------------------------
+## **Problem #1: "I don't have time for complex tool setups"**
 
 We are busy. We don't want to spend 2 hours configuring a linter script or messing with XML files.
 
@@ -49,14 +46,9 @@ We are busy. We don't want to spend 2 hours configuring a linter script or messi
 3. Search for SonarQube for IDE.
 4. Click **Install** and **Restart**.
 
-<br />
-
 That's it. No servers. No heavy configuration. It just works.
 
-
-
-**Problem #2: "I think my code is right, but is it?"**
-------------------------------------------------------
+## **Problem #2: "I think my code is right, but is it?"**
 
 You are typing fast. The logic seems sound. But are you accidentally introducing a memory leak? Or a security flaw?
 
@@ -70,10 +62,7 @@ You don't need to run a command. As soon as you write a bad line, the SonarQube 
 It catches the things our eyes miss because we have been staring at the screen for too long.
 ![](Screenshot-2025-12-12-at-15.52.52.png)
 
-
-
-**Problem #3: "Is this urgent, or can it wait?"**
--------------------------------------------------
+## **Problem #3: "Is this urgent, or can it wait?"**
 
 Great, now you have 10 warnings. Which one should you fix first? The naming convention issue or the potential crash?
 
@@ -87,10 +76,7 @@ If you look at the **SonarQube for IDE Tool Window** (usually at the bottom), it
 You can sort the list by severity and tackle the fires first.
 ![](Screenshot-2025-12-12-at-15.52.59.png)
 
-
-
-**Problem #4: "I'm not just writing Java anymore..."**
-------------------------------------------------------
+## **Problem #4: "I'm not just writing Java anymore..."**
 
 In modern projects, a Java developer is never *just* a Java developer. You are editing a **Dockerfile** , tweaking a **Jenkinsfile** , writing some **JavaScript** for the frontend, or fixing **JSON** config.
 
@@ -107,10 +93,7 @@ SonarQube for IDE covers [**over 20 languages**](https://docs.sonarsource.com/so
 It ensures that your deployment scripts are just as secure as your Java classes. It is really satisfying to see the tool catching a security issue in a Dockerfile that you would have completely ignored otherwise.
 ![](Screenshot-2025-12-12-at-15.53.06.png)
 
-
-
-**Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."**
------------------------------------------------------------------------------
+## **Problem #5: "I opened a legacy file and got 500 errors. I'm overwhelmed."**
 
 This is the main reason developers uninstall quality tools. You open a class written 5 years ago, and the screen lights up with errors that aren't yours.
 
@@ -121,10 +104,7 @@ In the tool settings window, enable the setting **"Focus on New Code"**. This is
 Then in the analysis
 ![](Screenshot-2025-12-12-at-15.53.14.png)
 
-
-
-**Problem #6: "I know it's bad, but how do I fix it?"**
--------------------------------------------------------
+## **Problem #6: "I know it's bad, but how do I fix it?"**
 
 SonarQube for IDE doesn't just complain; it teaches.
 
@@ -144,7 +124,6 @@ Optional<User> user = findUser("juan");
 String name = user.get().getName();
 ```
 
-
 **The Educational Fix:** When you select an issue, SonarQube for IDE opens a **Rule Description** tab. This is my favorite part. It doesn't just say "fix this." It gives you a mini-article explaining **why** this is an issue and provides clear "Non-Compliant" vs "Compliant" code examples. It effectively trains you to be a better developer while you work.
 ![](Screenshot-2025-12-12-at-15.53.22.png)
 
@@ -156,11 +135,7 @@ String name = user.get().getName();
 String name = user.map(User::getName).orElse("Unknown");
 ```
 
-
-
-
-**Problem #7: "The 'Oops' Moment (Hardcoded Secrets)" 🔓**
-----------------------------------------------------------
+## **Problem #7: "The 'Oops' Moment (Hardcoded Secrets)" 🔓**
 
 This is the nightmare scenario. You are testing a DB connection, so you hardcode the password. You plan to remove it later. You forget. You commit. You push. Too late. Bots have already scraped your repo.
 
@@ -186,11 +161,9 @@ public Connection getDBConnection() {
 }
 ```
 
-
 It acts as a safety net, reminding you to move that sensitive data to an environment variable or a properties file.
 
-**⚙️ A Note on Configuration**
-------------------------------
+## **⚙️ A Note on Configuration**
 
 Out of the box, it works great. But if you feel a rule is too strict (e.g., "Method has too many lines"), you are in control.
 
@@ -201,10 +174,7 @@ You can go to **Settings** -\> **Tools** -\> **SonarQube for IDE** -\> **Rules**
 
 ![](Screenshot-2025-12-12-at-15.53.31.png)
 
-
-
-**Summary**
------------
+## **Summary**
 
 Using **SonarQube for IDE** is about coding with confidence. It catches the silly mistakes, the security holes, and the bad practices in real-time, across all your project files (not just Java!).
 

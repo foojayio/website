@@ -22,8 +22,7 @@ frozen: false
 
 We're excited to announce **BoxLang 1.10.0**, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and enterprise-grade distributed locking to the BoxLang runtime. This release represents a significant leap forward in developer productivity and application scalability.
 
-🎯 What's New
--------------
+## 🎯 What's New
 
 ### Nine New Array Methods for Functional Programming
 
@@ -46,7 +45,6 @@ productPages.each( ( page, index ) => {
 } )
 ```
 
-
 Smart Element Finding with Defaults  
 
 The new `findFirst()` and `first()` methods eliminate null-checking boilerplate by supporting default values:
@@ -67,7 +65,6 @@ admin = users.findFirst(
 // Safe first element access
 settings = configArray.first( { theme: "default", locale: "en" } )
 ```
-
 
 Data Grouping and Aggregation  
 
@@ -93,7 +90,6 @@ bySizeCategory = transactions.groupBy( ( t ) => {
 } )
 ```
 
-
 Flatten Nested Structures  
 
 Control how deep to flatten nested arrays with the new `flatten() ` method:
@@ -113,7 +109,6 @@ apiResults = [
 allItems = apiResults.map( ( r ) => r.items ).flatten()
 ```
 
-
 Map and Flatten in One Operation  
 
 The `flatMap()` method combines mapping and flattening - essential for working with nested data structures:
@@ -132,7 +127,6 @@ allItems = orders.flatMap( ( order ) => order.items )
 allItems = orders.map( ( order ) => order.items ).flatten()
 ```
 
-
 Filter Inverse with Reject  
 
 The `reject()` method provides the inverse of `filter()`, making exclusion logic more readable:
@@ -150,7 +144,6 @@ outOfStock = products.reject( ( p ) => p.inStock )
 // vs. the filter equivalent
 outOfStock = products.filter( ( p ) => !p.inStock )
 ```
-
 
 Matrix Operations with Transpose  
 
@@ -174,7 +167,6 @@ byMonth = salesData.transpose()
 // Now organized by columns instead of rows
 ```
 
-
 Remove Duplicates with Type Control  
 
 The `unique()` method removes duplicate values with optional type comparison:
@@ -188,7 +180,6 @@ mixed = [ 1, "1", 2, "2", 1 ]
 mixed.unique()        // [ 1, "1", 2, "2" ] - preserves types
 mixed.unique( "any" ) // [ 1, 2 ] - type-insensitive
 ```
-
 
 Combine Arrays Element-wise with Zip  
 
@@ -211,7 +202,6 @@ headers = [ "Name", "Email", "Role" ]
 values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41202d282224012439202c312d246f222e2c">[email protected]</a>", "Admin" ]
 record = headers.zip( values )
 ```
-
 
 ### Elegant Loop Destructuring Syntax
 
@@ -241,7 +231,6 @@ for ( row, rowNumber in getUserQuery() ) {
 }
 ```
 
-
 This new syntax replaces verbose patterns like `structEach()` and manual index tracking:
 
 ```java
@@ -255,7 +244,6 @@ for ( key, value in userData ) {
     println( "#key#: #value#" )
 }
 ```
-
 
 ### Distributed Cache Locking for Clustered Environments
 
@@ -275,7 +263,6 @@ lock( name="updateLocalCache", type="exclusive", timeout=10 ) {
     localCache.update( key, value )
 }
 ```
-
 
 **Requirements** : Distributed locking requires a cache provider that implements `ILockableCacheProvider`. Compatible providers include:
 
@@ -304,15 +291,13 @@ if ( moduleService.hasModule( "customAuth" ) ) {
 }
 ```
 
-
 This is especially valuable for:
 
 * **Plugin systems** - Load user-installed plugins dynamically
 * **Feature flags** - Enable/disable modules based on configuration
 * **Java integration** - Allow Java applications to extend BoxLang functionality at runtime
 
-⚡ Performance Optimizations
----------------------------
+## ⚡ Performance Optimizations
 
 ### Fully-Qualified Name Resolution
 
@@ -333,9 +318,7 @@ content( type="application/pdf" ) {
 }
 ```
 
-
-🛠️ Developer Experience Enhancements
--------------------------------------
+## 🛠️ Developer Experience Enhancements
 
 ### MiniServer Warmup URLs
 
@@ -357,7 +340,6 @@ The MiniServer runtime now supports warmup URLs to pre-initialize your applicati
 }
 ```
 
-
 Warmup requests execute sequentially during server startup, ensuring:
 
 * Caches are populated
@@ -377,7 +359,6 @@ println( "Running on PID: #server.java.pid#" )
 println( "Using compiler: #server.boxlang.compiler#" )
 ```
 
-
 These variables are invaluable for:
 
 * **Container deployments** - Identifying processes in Kubernetes/Docker
@@ -395,7 +376,6 @@ These variables are invaluable for:
       └── custom-command
 ```
 
-
 ### JSR-223 Configuration Flexibility
 
 The JSR-223 scripting engine integration now supports environment variables and system properties for configuration, enabling containerized deployments:
@@ -411,9 +391,7 @@ java -Dboxlang.jsr223.timeout=30000 \
      -jar app.jar
 ```
 
-
-🔧 Additional Improvements
---------------------------
+## 🔧 Additional Improvements
 
 ### Type System Enhancements
 
@@ -432,7 +410,6 @@ cache( "userSessions" )  // Checks app cache first, then global
 // Explicit cache provider targeting
 cacheGet( "key", "redisCache" )  // Direct provider access
 ```
-
 
 This ensures application-level cache isolation while maintaining fallback to global caches.
 
@@ -454,13 +431,11 @@ query.setDatasource( "myDB" )
 query.setSQL( "SELECT * FROM users" )
 ```
 
-
 ### Oracle SQL Improvements
 
 The runtime now automatically removes trailing semicolons from Oracle SQL statements, eliminating common syntax errors.
 
-🐛 Notable Bug Fixes
---------------------
+## 🐛 Notable Bug Fixes
 
 ### Compilation \& ASM
 
@@ -505,8 +480,7 @@ The runtime now automatically removes trailing semicolons from Oracle SQL statem
 * **\[BL-2129\]** Variable attribute is now optional on execute component in compat mode
 * **\[BL-2131\]** Compat mode now allows duplicate UDF declarations in CF source files  
 
-  🚀 Get Started
-  --------------
+## 🚀 Get Started
 
   ### Download BoxLang 1.10.0:
 

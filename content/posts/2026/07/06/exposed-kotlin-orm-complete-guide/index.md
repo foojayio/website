@@ -27,8 +27,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 For quite some time, I have been a huge fan of and fascinated by JetBrains products, tools, and libraries because of their masterful craftsmanship in product creation and their pristine focus on building high-quality developer tools.
 
@@ -94,8 +93,7 @@ Exposed can be integrated into your application in multiple ways. You can either
 In this article, we will explore Exposed's capabilities by implementing simple CRUD operations with **Spring Boot 4**.
 > **Note: *Support for [Spring Boot 3](https://www.jetbrains.com/help/exposed/spring-boot-integration.html#spring-boot-3) will be sunsetting in the next major release of Exposed. New projects should use Spring Boot 4 whenever possible.***
 >
-> Step-by-Step Guide
-> ------------------
+> ## Step-by-Step Guide
 >
 > ### Pre-requisities
 >
@@ -122,8 +120,6 @@ In this article, we will explore Exposed's capabilities by implementing simple C
 > | Packaging     | Jar                         |
 > | Configuration | Properties/YAML             |
 > | Java          | 17/21                       |
-
-<br />
 
 **Step 2: Add Required Dependencies**
 
@@ -154,7 +150,6 @@ explore-exposed
 └── gradlew
 ```
 
-
 ### **Step 4: Verify the Application**
 
 Run the application using Gradle:
@@ -162,7 +157,6 @@ Run the application using Gradle:
 ```
 ./gradlew bootRun
 ```
-
 
 Or simply run the `ExploreExposedApplication.kt` class directly from your IDE.
 
@@ -172,14 +166,11 @@ If everything is configured correctly, Spring Boot will start successfully, conf
 
 Add the below exposed Spring Boot starter artifact to `build.gradle.kts` the script.
 
-<br />
-
 ```json
 dependencies {
     implementation("org.jetbrains.exposed:exposed-spring-boot4-starter:1.3.1")
 }
 ```
-
 
 So final `build.gradle.kts` looks like this:
 
@@ -235,7 +226,6 @@ tasks.withType<Test> {
 }
 ```
 
-
 The **Exposed Spring Boot Starter** bundles the latest version of Exposed, the custom SpringTransactionManager from the **spring7-transaction** module, and the **Spring Boot Starter JDBC** dependency. This starter simplifies Exposed integration by providing the essential components out of the box.
 
 The **Exposed Spring Boot Starter** builds on top of `spring-boot-starter-jdbc`, so Spring Boot requires a configured data source. To establish a connection to the database, add the following properties to your `application.properties` file:
@@ -255,7 +245,6 @@ spring.exposed.generate-ddl=true
 spring.exposed.show-sql=true
 ```
 
-
 To enable Exposed's auto-configuration, import the Exposed auto-configuration class into your Spring Boot application. You can do this in one of the following ways:
 
 * **Option 1:** Add the **@ImportAutoConfiguration** annotation to your main Spring Boot Application class
@@ -273,7 +262,6 @@ Since Exposed provides its own SpringTransactionManager, you need to explicitly 
     exclude = [DataSourceTransactionManagerAutoConfiguration::class]
 )
 ```
-
 
 This configuration imports Exposed AutoConfiguration, which registers Exposed's infrastructure beans, including the custom ***SpringTransactionManager*** . At the same time, it excludes Spring Boot's default ***DataSourceTransactionManagerAutoConfiguration*** to ensure that Exposed exclusively manages database transactions.
 
@@ -300,7 +288,6 @@ class ExposedConfig {
 }
 ```
 
-
 ### Step 6: Create Course Table Entity
 
 We can create different datatypes with primary keys; we will use [LongIdTable](https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html){#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/-long-id-table/index.html}. For more details, <https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html>{#https://jetbrains.github.io/Exposed/api/exposed-core/org.jetbrains.exposed.v1.core.dao.id/index.html}
@@ -320,7 +307,6 @@ object CourseEntity : LongIdTable("courses") {
 }
 ```
 
-
 ### Step 7: Understanding the Service Layer
 
 The *CourseService* class holds all the business logic for CRUD operations on courses. It uses **Exposed's DSL** to access the database, while Spring handles transactions behind the scenes.
@@ -336,7 +322,6 @@ import org.springframework.transaction.annotation.Transactional
 class CourseService {
 }
 ```
-
 
 Putting ***@Transactional*** on the class means every public method automatically runs inside a database transaction. In practice:
 
@@ -380,7 +365,6 @@ The *CourseController* is where HTTP requests meet business logic. It's a bit un
 class CourseController(private val courseService: CourseService) {
 ```
 
-
 Note this uses *@Controller* , not *@RestController.* That's intentional---most methods here return a **view name** (a string like *"index"* or *"redirect:/courses"*), which Spring resolves to an HTML template. A few methods explicitly wrap their response in ResponseEntity to return raw JSON instead. This lets one controller power both a traditional web UI and a small API.
 
 Serving Pages (View-Based Endpoints)
@@ -406,7 +390,6 @@ src/main/resources/templates/add-course.html
 src/main/resources/templates/edit-course.html
 ```
 
-
 Spring Boot's Thymeleaf auto-configuration takes care of resolving these automatically---no extra ViewResolver setup needed, as long as spring-boot-starter-thymeleaf is on the classpath.
 
 ### **Step 10: Verify the Application**
@@ -416,7 +399,6 @@ Run the application using Gradle:
 ```
 ./gradlew bootRun
 ```
-
 
 ```bash
   .   ____          _            __ _ _
@@ -445,7 +427,6 @@ Run the application using Gradle:
 SQL: CREATE TABLE IF NOT EXISTS COURSES (ID BIGINT AUTO_INCREMENT PRIMARY KEY, TITLE VARCHAR(255) NOT NULL, DESCRIPTION TEXT NOT NULL, PUBLISHED BOOLEAN NOT NULL)
 ```
 
-
 Run the following:
 
 <http://localhost:8080/courses>
@@ -458,11 +439,9 @@ SQL: INSERT INTO COURSES (TITLE, DESCRIPTION, PUBLISHED) VALUES ('Learn Exposed'
 SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FROM COURSES
 ```
 
-
 ![Course management](Screenshot-2026-07-05-at-2.14.45-PM-1024x510.png) Course management
 
-Conclusion
-----------
+## Conclusion
 
 Working with databases in Kotlin usually means picking a side: raw SQL, which is fast but easy to get wrong, or a heavy ORM, which is safe but full of boilerplate. Exposed sits nicely in between.
 
@@ -478,11 +457,8 @@ If you're a Kotlin developer tired of choosing between "too much magic" and "too
 
 Everything comes from the companion [GithubRepo](https://github.com/bsmahi/explore-exposed), which contains fully working implementations of each example.
 
-References:
------------
+## References:
 
 1. <https://martinfowler.com/bliki/DomainSpecificLanguage.html>
 2. <https://www.jetbrains.com/mps/concepts/domain-specific-languages>
 3. Exposed: <https://www.jetbrains.com/help/exposed/about.html>
-
-<br />

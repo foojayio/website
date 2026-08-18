@@ -37,15 +37,13 @@ public void testRunASGCT2() {
 }
 ```
 
-
 This test case checks that calling AsyncGetCallTrace gives the correct result in this specific example. The test library allows you to write tests comparing the returns of multiple GetStackTrace, AsyncGetCallTrace, and AsyncGetStackTrace invocations in different modes and settings. The library can be found as trace-tester on GitHub; I aim to bring it into the OpenJDK later with my JEP.
 
 Writing small test cases this way is great, but it would be even better if we could force specific methods to be compiled, interpreted, or inlined so that we can test different scenarios. The proposed AsyncGetStackTrace will return the compilation level directly for every frame, so it is necessary to check the correctness of the level too.
 
 *Consider reading my* [*Validating Java Profiling API*s](https://foojay.io/today/validating-java-profiling-apis/) article to*get a different angle on profiling API testing.*
 
-Introduction
-------------
+## Introduction
 
 Before I start with discussing the ways you can force methods to be compiled, interpreted, or inlined, I'll have to clarify that:
 
@@ -65,8 +63,7 @@ The JVM might decide at any point to use the interpreted version of a method by 
 
 Every compiler can decide to inline called methods of a currently compiled method. A compiler uses the initial byte code for this purpose.
 
-What we want and what we get
-----------------------------
+## What we want and what we get
 
 The ideal would be to tell the JVM to just use a method in its compiled version, e.g.:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/05/tiered_states3-2000x474.png)
@@ -74,8 +71,7 @@ The ideal would be to tell the JVM to just use a method in its compiled version,
 But this is not possible, as the JVM does not have any information it needs for compilation before the first execution of a method. We, therefore, have first to execute the method (or the benchmark) and then set the compilation level:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/05/tiered_states2-2000x470.png)
 
-How do we get it?
------------------
+## How do we get it?
 
 We can split the task of forcing a method to be compiled (or inlined, for that matter) into two parts:
 
@@ -87,8 +83,7 @@ The following is the modified state diagram when forcing a method to be C1 compi
 
 In the following, I'll discuss how to use both the WhiteBox API and Compiler Control to facilitate the wanted behavior.
 
-WhiteBox API
-------------
+## WhiteBox API
 
 Many JVM tests are written in the JTreg framework, allowing developers to write these tests in Java. But these tests often require specific functionality not regularly available to Java developers. This functionality is exported in the WhiteBox API:
 > One of the not so well-known tools of the HotSpot VM is its WhiteBox testing API. Introduced in Java 7 it has been significantly improved and extended in Java 8 and 9. It can be used to query or change HotSpot internals which are not otherwise exposed to Java-land. While its features make it an indispensable tool for writing good HotSpot regression tests, it can also be used for experiments or for the mere fun of peeking into the VM. This entry will focus on the usage of the WhiteBox API in Java 8 and 9.
@@ -131,7 +126,6 @@ public class WhiteBoxTest {
 }
 ```
 
-
 This is from his blog post WhiteBox API, the only blog post I could find on this topic.
 
 Back to our goal of forcing the compilation of a method. It is a good idea to reset the state of a method and deoptimize it to start from a blank slate:
@@ -147,14 +141,12 @@ wb.deoptimizeMethod(m);
 wb.clearMethodState(m);
 ```
 
-
 We can then either leave the method uncompiled (for compilation level 0) or enqueue for compilation:
 
 ```java
 // level 1 - 3: C1, level 4: C2
 wb.enqueueMethodForCompilation(m, level);
 ```
-
 
 But be aware that it takes some time to actually compile the method, so it's best to wait till it is compiled:
 
@@ -164,14 +156,12 @@ while (wb.getMethodCompilationLevel(m) != level) {
 }
 ```
 
-
 We can then also force a method to be never inlined:
 
 ```java
 wb.testSetDontInlineMethod(m, true);
 wb.testSetForceInlineMethod(m, false);
 ```
-
 
 Or inversely to be always inlined:
 
@@ -180,28 +170,23 @@ wb.testSetDontInlineMethod(m, false);
 wb.testSetForceInlineMethod(m, true);
 ```
 
-
 I implemented this in the [WhiteBoxUtil](https://github.com/parttimenerd/trace_tester/blob/4b02b80a1935822f18c356f0b340f70ca7ec06b2/src/main/java/tester/util/WhiteBoxUtil.java) class in my trace-tester library. This allows us to force all methods in their respective states. But the JVM can still decide to optimize further or inline a method, even when specifying the contrary. So we have to force the JVM using the second the Compiler Control specifications.
 
-Compiler Control
-----------------
+## Compiler Control
 
 This control mechanism has been introduced in Java 9 with [JEP 165](https://openjdk.org/jeps/165) by Nils Eliasson:
 >
-> Summary
-> -------
+> ## Summary
 >
 > This JEP proposes an improved way to control the JVM compilers. It enables runtime manageable, method dependent compiler flags. (Immutable for the duration of a compilation.)
 >
-> Goals
-> -----
+> ## Goals
 >
 > * Fine-grained and method-context dependent control of the JVM compilers (C1 and C2)
 > * The ability to change the JVM compiler control options in run time
 > * No performance degradation
 >
-> Motivation
-> ----------
+> ## Motivation
 >
 > Method-context dependent control of the compilation process is a powerful tool for writing small contained JVM compiler tests that can be run without restarting the entire JVM. It is also very useful for creating workarounds for bugs in the JVM compilers. A good encapsulation of the compiler options is also good hygiene.
 > [JEP 165](https://openjdk.org/jeps/165)
@@ -231,13 +216,11 @@ The following directives specify as an example that the method m should not be C
 ]
 ```
 
-
 This, in theory, allows the method to be deoptimized, but this did not happen during my testing. With forced compilation, one can assume that this method will almost be used in its compiled form.
 
 I recommend this Compiler Control guide for a more in-depth guide with all options. An implementation of the control file generation with a fluent API can be found in the trace-tester project in the [CompilerDirectives](https://github.com/parttimenerd/trace_tester/blob/4b02b80a1935822f18c356f0b340f70ca7ec06b2/src/main/java/tester/util/CompilerDirectives.java) class. Feel free to adapt this for your own projects.
 
-Conclusion
-----------
+## Conclusion
 
 I've shown you in this article how to control the JIT to specify the inlining and compilation of methods using two lesser-known JVM APIs.
 

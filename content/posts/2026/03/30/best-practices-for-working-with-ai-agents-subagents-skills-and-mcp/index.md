@@ -20,10 +20,7 @@ frozen: false
 
 A practical guide to the five best practices every developer should apply when working with AI agents, subagents, skills and MCP servers --- from choosing the right model and writing precise prompts, to defining agent behaviour with SDD, isolating context with Claude Code subagents, securing MCP calls, and guiding agent response quality with guardrails.
 
-
-
-§0 📖 Where This Fits in the Series
------------------------------------
+## §0 📖 Where This Fits in the Series
 
 > This article assumes you already know what MCP is and have used or built at least one Agent.  
 >
@@ -33,15 +30,12 @@ A practical guide to the five best practices every developer should apply when w
 >
 > This article picks up where those leave off: architecture, production patterns, and the problems that only appear at scale.
 
-§1 🏗️ The Naive Architecture --- and Why It Breaks
----------------------------------------------------
+## §1 🏗️ The Naive Architecture --- and Why It Breaks
 
 Most agent implementations start the same way. You have a model, you have a few tools or API calls hardcoded into the agent, and you have one big system prompt that tries to make the whole thing work. It looks like this:
 
 **`naive-architecture`**
 ![](Screenshot_20260330_194732-642x510.png)
-
-<br />
 
 This works in the demo. Here's why it fails in production:
 
@@ -53,15 +47,12 @@ This works in the demo. Here's why it fails in production:
 | **No specialization**    | The same model and prompt handles order lookups, refund approvals, supplier payments, and compliance checks. Each task degrades the others.                                  |
 | **Impossible to test**   | One monolithic agent with a 4000-token system prompt has no meaningful unit surface. You can only test the whole thing, end to end, every time.                              |
 
-§2 ✅ The Better Architecture --- Multi-Agent with MCP
------------------------------------------------------
+## §2 ✅ The Better Architecture --- Multi-Agent with MCP
 
 The solution is decomposition --- the same principle that moved us from monolithic services to microservices, applied to agent systems. A supervisor agent handles intent routing. specialised subagents handle specific domains. MCP servers provide standardised, scoped access to external systems. Each component has one job and a clearly bounded blast radius.
 
 **`multi-agent-mcp-architecture`**
 ![](Screenshot_20260330_194746-392x510.png)
-
-<br />
 
 This is better for concrete reasons: a subagent that can only read orders cannot delete them, regardless of what the model is told to do. An MCP server scoped to `read` cannot be coerced into writing. The supervisor that only routes cannot directly touch any external system. Scope is enforced by architecture, not just by instruction.
 
@@ -75,8 +66,7 @@ But this architecture introduces three categories of problems that the naive one
 
 Each section below is labeled by the problem category it addresses, and by whether the pattern applies to you as a **user** of these systems (working with agents and MCP servers you didn't build) or as a **creator** (building the tools and architecture others depend on). Most of us are both --- read straight through or jump to your current problem.
 
-§3 📉 Before You Build: The Productivity Reality Check
-------------------------------------------------------
+## §3 📉 Before You Build: The Productivity Reality Check
 
 Before committing to multi-agent architecture, it's worth grounding expectations in data. A 2025 METR RCT --- 16 experienced developers, 246 real tasks --- found AI tools made developers **19% slower** , while those same developers believed they'd been 20% faster \[1\]. Faros AI found **zero measurable DORA improvement** across 10,000+ developers despite 75% AI adoption \[2\] --- individual gains absorbed by bottlenecks that hadn't changed.
 
@@ -95,14 +85,11 @@ METR studied Cursor and Claude, not MCP agents --- so the table below is our int
 
 The point isn't that agents don't work. It's that the same failure modes that slowed developers down with Cursor are structurally worse in agent systems --- because mistakes compound across tool calls and subagent boundaries rather than staying contained to one suggestion. **Better architecture doesn't eliminate these problems, but it makes them visible, testable, and fixable.**
 
-
-
 \[1\] METR --- *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity* (RCT, 246 tasks, July 2025) · [metr.org](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) · [arxiv.org/abs/2507.09089](https://arxiv.org/abs/2507.09089)
 
 \[2\] Faros AI --- *The AI Productivity Paradox* (10,000+ developers across 1,255 teams, June 2025) · [faros.ai/blog/ai-software-engineering](https://www.faros.ai/blog/ai-software-engineering)
 
-§3b 📐 Requirements First --- The Bottleneck AI Doesn't Remove
---------------------------------------------------------------
+## §3b 📐 Requirements First --- The Bottleneck AI Doesn't Remove
 
 AI has made coding cheap. Thinking is still expensive. Before any agent is built, someone needs to work out what the system should do --- and that is still a human job. As Simon Martinelli put it: *"AI did not remove complexity. It relocated it. The effort is no longer in writing code. It is in understanding what should be built."*
 
@@ -131,8 +118,7 @@ It ships with over 30 LSP servers --- Java, TypeScript, Go, Rust, Python, and mo
 
 The four best practices that follow cover what you can control as a user: model choice, agent specification, context isolation, MCP security, and output quality. All of them work better when the requirements behind the agent are clear from the start.
 
-🏆 Best Practices
------------------
+## 🏆 Best Practices
 
 Five practices covering the most common failure modes. Apply them in order --- each one makes the next more effective, and all work better when the requirements behind the agent are clear from the start.
 
@@ -156,7 +142,6 @@ public Order getOrder(String id) {
  return repository.findById(id);
 }
 ```
-
 
 **claude.ai --- constrained prompt, explicit requirements**
 
@@ -188,7 +173,6 @@ public OrderSummaryDto getOrderById(
  .orElseThrow(() -> new OrderNotFoundException(orderId));
 }
 ```
-
 
 Model size raises the ceiling. Prompt precision raises the floor. Pick the right model for the task --- but never use model choice as a substitute for prompt discipline.
 
@@ -255,7 +239,6 @@ test_cases:
     expect: OUT_OF_SCOPE response
 ```
 
-
 Every field maps directly to a constraint. `forbidden_actions` becomes a hard block in the system prompt. `tools` is the exact list the implementation registers --- nothing more. `test_cases` become your automated test suite. When the agent misbehaves, you update the spec first --- then the implementation follows. The spec is the artefact; the code is its current expression.
 
 #### Turning the spec into code with Claude Code
@@ -281,7 +264,6 @@ Constraints:
 - If any test_case expectation is ambiguous, ask me before writing the test
 - Output format must match spec.output.format exactly
 ```
-
 
 **CLAUDE:**
 
@@ -348,7 +330,6 @@ void outOfScope_crossCustomerQuery_returnsOutOfScope() {
 // — should the assertion check for absence of email addresses only,
 // or also phone numbers and full names? Let me know and I'll tighten the assertion.
 ```
-
 
 Notice what Claude Code does: it derives the system prompt word-for-word from the spec fields, registers only the three tools listed, writes one test per spec test case, and stops to ask before making an assumption on the ambiguous one. That last behaviour is the constraint doing its job --- without "if ambiguous, ask", Claude Code would have quietly chosen an interpretation and moved on.
 > **💡 Spec first, code second --- always**   
@@ -421,7 +402,6 @@ def add(a: int, b: int, sidenote: str) -> int:
     return a + b
 ```
 
-
 > **⚠ The "Rug Pull" attack**   
 >
 > A concrete demonstration by Invariant Labs showed exactly this: an attacker-controlled "sleeper" MCP server first advertised an innocuous tool and only later switched it for a malicious one after user trust was established. The fundamental issue is that a tool's underlying code and behaviour can be modified without any notification to, or re-verification by, the MCP client --- and standard clients, once a tool is "approved", typically do not re-fetch and re-verify the tool's complete definition on every subsequent invocation.
@@ -483,7 +463,6 @@ The easiest guardrail to set up is a `CLAUDE.md` file in your project root. Clau
 - Prefer doing less correctly over doing more incorrectly
 ```
 
-
 Think of `CLAUDE.md` as a version-controlled system prompt. Scope, output rules, PII handling, escalation --- all in one file, reviewed like code, readable by the whole team. Not a replacement for programmatic guardrails in production, but it closes most gaps immediately for developer workflows.
 
 #### When CLAUDE.md isn't enough: Hooks
@@ -508,7 +487,6 @@ Think of `CLAUDE.md` as a version-controlled system prompt. Scope, output rules,
 }
 ```
 
-
 **`~/.claude/validators/block_secrets.py`**
 
 ```
@@ -531,7 +509,6 @@ if SECRET_PATTERN.search(content):
 sys.exit(0)       # exit 0 = allow
 ```
 
-
 The `hookify` plugin removes the JSON editing. You describe the rule and it generates the hook:
 
 **Claude Code --- creating hooks with hookify**
@@ -544,7 +521,6 @@ The `hookify` plugin removes the JSON editing. You describe the rule and it gene
 /hookify Block rm -rf commands that include home directory paths
 /hookify Warn when any command contains "prod" or "production"
 ```
-
 
 |     Guardrail type      |                 Mechanism                 |      Can be overridden by model?      |                    Best for                    |
 |-------------------------|-------------------------------------------|---------------------------------------|------------------------------------------------|
@@ -608,12 +584,8 @@ Each best practice above addresses a specific failure mode. This is the consolid
 | **Hard limits on destructive operations**   | Max record count, max transaction value, human approval above threshold. These are deterministic rules enforced in code --- not model judgement calls, not system prompt instructions.                                  |
 | **Immutable audit log**                     | Every write, delete, and bulk operation logged with agent ID, tenant, parameters, and outcome. The log cannot be modified by the agent. If something goes wrong, you need to know what the agent did and in what order. |
 
-
-
 **// tl;dr**
 
 A single agent with everything hardwired works in the demo and fails at scale. The multi-agent MCP architecture --- supervisor routing to specialised subagents backed by scoped MCP servers --- enforces boundaries structurally rather than through instruction alone. But the architecture only delivers if the engineering around it is solid: prompts as versioned config, SDD specs before implementation, subagents with explicit scope and tool constraints, skills as version-controlled capability packages, guardrails at both the input and output layer, and every third-party MCP server treated like a third-party library --- reviewed, pinned, and audited. **The architecture is the right move. These patterns are what make it safe to run.** 😅
-
-
 
 **Thanks** to Simon Martinelli, Javier Ramirez (QuestDB) and Álvaro Sanchez (Oracle) for their great ideas and experience that inspired this article.

@@ -41,11 +41,3 @@ This handy book offers a concise, fun-to-read overview of OpenJDK migration:
 You'll also get tips on how to select the right Java partner to assist with your migration and provide ongoing support, security updates, application tuning, cost reductions, and expertise.
 
 [Go here to get your free book, your starter kit for starting to migrate to OpenJDK!](https://www.azul.com/openjdk-migration-for-dummies/)
-
-<br />
-
-
-
-<br />
-
-

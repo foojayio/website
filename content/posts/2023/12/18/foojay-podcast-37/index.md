@@ -23,13 +23,11 @@ Check the previous Foojay Podcasts for the first three parts of our J-Fall repor
 
 In this episode, you'll get the remaining interviews we made that day! And as they say, last but not least, again, we have some fascinating insights for you into Java and its evolutions.
 
-Video report
-------------
+## Video report
 
 {{< youtube 3h4GG4owtYQ >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,8 +35,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 **00:00 Introduction
 00:38 Maurice Naftalin: Collections, Java history**
@@ -90,17 +87,13 @@ Content
 
 **36:53 Conclusion**
 
-<br />
-
-Host: Frank Delporte
---------------------
+## Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://www.linkedin.com/in/frankdelporte/>
 * <https://foojay.io/today/author/frankdelporte/>
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

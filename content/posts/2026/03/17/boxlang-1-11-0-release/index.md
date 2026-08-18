@@ -29,8 +29,7 @@ frozen: false
 
 We're proud to announce **BoxLang 1.11.0**, a highly focused performance and stability release that delivers measurable speed improvements across every BoxLang application, with zero code changes required. The team invested deeply in bytecode generation, class loading, lock management, and type casting to produce one of the most impactful runtime optimization releases to date. Alongside the performance wave, this release resolves critical concurrency bugs, hardens DateTime handling, and ships powerful new developer tooling.
 
-🚀 What's New in 1.11.0
------------------------
+## 🚀 What's New in 1.11.0
 
 You can find the full release notes here:  
 <https://boxlang.ortusbooks.com/readme/release-history/1.11.0>
@@ -59,7 +58,6 @@ flag   = isBoolean( "true" )        // Faster boolean string parsing
 someBif( arg1, arg2 )               // Arg/return type casting via keys, not reflection
 ```
 
-
 Memory \& Concurrency
 
 * **Cached closest** `variables` **scope** reference in function contexts
@@ -85,7 +83,6 @@ lock name="processPayment_#orderId#" type="exclusive" timeout="30" {
 }
 ```
 
-
 Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atlassian.net/browse/BL-2201 "BL-2201")) for better performance and memory efficiency. If you rely on exclusive locks for payment processing, inventory management, or any critical section --- this is an important upgrade.
 
 ### 🗓️ DateTime Casting Reliability
@@ -109,7 +106,6 @@ qoq = queryExecute(
 cast1 = dateTimeFormat( odbcDate, "yyyy-mm-dd" )          // BL-2188
 ```
 
-
 ### 🆕 **`enforceUDFTypeChecks`** Configuration Setting
 
 A new runtime setting allows you to skip UDF argument and return type validation --- useful for trusted high-performance codebases:
@@ -120,7 +116,6 @@ A new runtime setting allows you to skip UDF argument and return type validation
     "enforceUDFTypeChecks": false
 }
 ```
-
 
 When false, BoxLang skips argument type validation and return type casting on function calls --- similar to how the Java compiler performs generic type erasure. This can improve performance but removes the safety net of runtime type checks.
 
@@ -142,7 +137,6 @@ elapsed = getTickCount( "second" ) - start
 println( "Elapsed: #elapsed# seconds" )  // 2
 ```
 
-
 ### 🗑️ New BIF: `ExecutorDelete()`
 
 The missing `ExecutorDelete()` BIF has been added, completing the executor lifecycle management API. Previously, shutting down an executor did not remove it from the executor registry (BL-2168), causing issues when recreating executors with the same name.
@@ -159,9 +153,7 @@ future.get()
 executorDelete( "myPool" )
 ```
 
-
-🤖 Core Runtime Updates
------------------------
+## 🤖 Core Runtime Updates
 
 ### 🏗️ Class System Improvements
 
@@ -201,8 +193,7 @@ executorDelete( "myPool" )
 * **Transaction** **`end`** **action** no longer throws an error when a stored procedure was executed within the transaction ([BL-2157](http://https://ortussolutions.atlassian.net/browse/BL-2157 "BL-2157"))
 * **Transaction** **`action`** **attribute** is now case-insensitive ([BL-2238](http://https://ortussolutions.atlassian.net/browse/BL-2238 "BL-2238"))
 
-📡 MiniServer Runtime Updates
------------------------------
+## 📡 MiniServer Runtime Updates
 
 ### 📁 **`.boxlang.json`** Convention
 
@@ -213,7 +204,6 @@ The MiniServer now automatically detects and loads a .boxlang.json file from the
 $ boxlang server start
 ```
 
-
 ```java
 // .boxlang.json — project-level configuration, committed to source control
 {
@@ -221,7 +211,6 @@ $ boxlang server start
     "defaultDatasource": "mydb"
 }
 ```
-
 
 This makes project-level BoxLang configuration portable and self-contained --- ideal for containerized deployments and team environments.
 
@@ -247,7 +236,6 @@ You can now tune Undertow, socket, and WebSocket low-level options directly from
 }
 ```
 
-
 ### 📂 Logging Directory Output
 
 The MiniServer now logs the logging directory path during startup ([BL-1342](http://https://ortussolutions.atlassian.net/browse/BL-1342 "BL-1342")) --- a small but welcome quality-of-life improvement:
@@ -261,8 +249,7 @@ The MiniServer now logs the logging directory path during startup ([BL-1342](htt
 
 The MiniServer now runs on **Undertow 2.3.23.Final**, bringing the latest HTTP server fixes and security patches.
 
-🌐 Web Support Updates
-----------------------
+## 🌐 Web Support Updates
 
 ### 🔀 Pre-Request Interception for Request Rerouting
 
@@ -275,8 +262,7 @@ A new interception point fires **before** `onRequestStart`, enabling interceptor
 
 All handled before any application overhead kicks in.
 
-🛠️ Developer Experience
-------------------------
+## 🛠️ Developer Experience
 
 ### 🌳 Enhanced **`--bx-printast`** Tooling
 
@@ -292,7 +278,6 @@ echo 'result = 1 + 2' | boxlang --bx-printast
 # Integrate with editors and build pipelines
 cat MyComponent.bx | boxlang --bx-printast | jq '.body[0]'
 ```
-
 
 ### 🧩 SOAP Client --- Binary and Map Type Support
 
@@ -314,7 +299,6 @@ result = ws.updateRecord( {
 } )
 ```
 
-
 ### 🔧 Session Configuration in `boxlang.json`
 
 Two previously missing session configuration settings are now supported ([BL-1859](http://https://ortussolutions.atlassian.net/browse/BL-1859 "BL-1859")):
@@ -326,13 +310,11 @@ Two previously missing session configuration settings are now supported ([BL-185
 }
 ```
 
-
 ### 📋 Improved CLI Error Messages
 
 CLI error messages now provide clearer context and actionable information when BoxLang scripts fail ([BL-2212](http://https://ortussolutions.atlassian.net/browse/BL-2212 "BL-2212")).
 
-🐛 Notable Bug Fixes🐛 Notable Bug Fixes
-----------------------------------------
+## 🐛 Notable Bug Fixes🐛 Notable Bug Fixes
 
 |                                      Ticket                                      |                                    Summary                                    |
 |----------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
@@ -349,8 +331,7 @@ CLI error messages now provide clearer context and actionable information when B
 | [BL-2242](http://https://ortussolutions.atlassian.net/browse/BL-2242 "BL-2242")  | Null in switch statement threw error                                          |
 | [BL-2251](http://https://ortussolutions.atlassian.net/browse/BL-2251 "BL-2251")  | Abstract class incorrectly required to implement all interface methods        |
 
-🔧 Configuration Updates Summary
---------------------------------
+## 🔧 Configuration Updates Summary
 
 |         Setting         |                               Description                               |
 |-------------------------|-------------------------------------------------------------------------|
@@ -359,16 +340,14 @@ CLI error messages now provide clearer context and actionable information when B
 | `sessionCluster`        | Enable distributed session clustering in `boxlang.json`                 |
 | `.boxlang.json `        | MiniServer now auto-loads this file from the working directory          |
 
-📦 Dependency Updates
----------------------
+## 📦 Dependency Updates
 
 * **Undertow** upgraded to `2.3.23.Final`
 * **Gradle wrapper** updated to `9.3.1`
 * **Jackson Jr** bumped to `2.21.1`
 * **Logback Classic** bumped to `1.5.32`
 
-🎯 Upgrading
-------------
+## 🎯 Upgrading
 
 BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit from the performance improvements.
 
@@ -383,11 +362,9 @@ bvm install 1.11.0 && bvm use 1.11.0
 FROM ortussolutions/boxlang:1.11.0
 ```
 
-
 Full release notes, documentation, and downloads are available at [boxlang.io](http://https://boxlang.io/?_gl=1*1i9icmx*_gcl_au*NDk3OTAwOTEuMTc2ODUxNjQ4Nw..*_ga*MTg5MDU4NDYzMS4xNzMyMDQwMzg2*_ga_663JFQ7YGX*czE3NzM0MTYwNzYkbzkyJGcxJHQxNzczNDE2MTAyJGozNCRsMCRoMA.. "boxlang.io") and [boxlang.ortusbooks.com](http://https://boxlang.ortusbooks.com/ "boxlang.ortusbooks.com").
 
-Join the BoxLang Community ⚡️
------------------------------
+## Join the BoxLang Community ⚡️
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

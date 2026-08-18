@@ -34,13 +34,11 @@ public class Main {
 }
 ```
 
-
 It is so simple that I could just run it in the command line using the [source code launcher](https://openjdk.java.net/jeps/330) :
 
 ```
 java --enable-preview --release 19 Main.java
 ```
-
 
 However, it needed a bit of [yak shaving](https://en.wiktionary.org/wiki/yak_shaving). I needed to download the JDK, extract the tarball, set the java home, etc. I manage multiple JDKs using [SDKMAN](https://sdkman.io/); it doesn't have it since it's still in early access release. So I had to let SDKMAN know it manually.
 
@@ -60,7 +58,6 @@ At the bottom, there is a box named the additional command line parameter. Add t
 --enable-preview
 ```
 
-
 And then go to the run configuration. Select the modify options and Mark the Add VM options.
 
 ![](Screen-Shot-2022-05-08-at-5.04.39-AM.png)
@@ -72,7 +69,3 @@ You need to add `--enable-preview `there as well.
 That's it.
 
 Now you can run the project loom from IntelliJ IDEA.
-
-<br />
-
-<br />

@@ -29,8 +29,7 @@ Over time, your team learns these are the "flaky tests", and begins to ignore th
 
 Maybe you even automate re-running them when they fail to check that they do actually pass occasionally.
 
-Why should we care about flaky tests?
--------------------------------------
+## Why should we care about flaky tests?
 
 Flaky tests may seem like a minor inconvenience; we learn to identify which tests occasionally (or frequently!) fail for no good reason and pay them less attention...
 

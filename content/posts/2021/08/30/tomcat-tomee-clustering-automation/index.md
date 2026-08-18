@@ -35,8 +35,7 @@ Now, with these goals in mind, we've analyzed numerous successful examples over 
 
 Below, you can find out more about the implementation of Tomcat and TomEE auto-clustering in Jelastic PaaS, as well as how to get these clusters up and running.
 
-Tomcat / TomEE Auto-Cluster Installation
-----------------------------------------
+## Tomcat / TomEE Auto-Cluster Installation
 
 There are multiple tutorials on how to set up Tomcat clusters, but the configuration is relatively complex and includes many tweaks, which makes it seem like a lot. However, with the Jelastic [Auto-Clustering](https://docs.jelastic.com/what-is-auto-clustering/) feature, we went further and automated the whole process, making it as simple as flipping a switch.
 
@@ -52,8 +51,7 @@ There are multiple tutorials on how to set up Tomcat clusters, but the configura
 3. In a few minutes, your Tomcat cluster will appear within the dashboard.
 ![tomcat cluster topology](https://jelastic.com/blog/wp-content/uploads/2021/08/image10.png)
 
-Tomcat / TomEE Cluster Topology and Specifics
----------------------------------------------
+## Tomcat / TomEE Cluster Topology and Specifics
 
 The topology of the highly available Tomcat cluster is straightforward and efficient, without any unnecessary elements to complicate it or reduce performance. The default cluster topology looks like below:  
 
@@ -72,7 +70,6 @@ Here are some Tomcat-specific changes and optimizations based on the cluster ins
 ```
 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="6">
 ```
-
 
 where:
 
@@ -108,8 +105,7 @@ You can check and adjust it if necessary via the built-in [Configuration File Ma
 
 All these settings are done automatically during creation and do not require manual maintenance during the cluster lifecycle.
 
-Tomcat / TomEE Cluster Horizontal Scaling
------------------------------------------
+## Tomcat / TomEE Cluster Horizontal Scaling
 
 It's evident that high availability is demanded almost for any application, so it is a great benefit that you can automate cluster nodes' addition/deletion based on the [configurable scaling](https://docs.jelastic.com/automatic-horizontal-scaling/#triggers-for-automatic-scaling)*[](https://docs.jelastic.com/automatic-horizontal-scaling/#triggers-for-automatic-scaling)* [triggers](https://docs.jelastic.com/automatic-horizontal-scaling/#triggers-for-automatic-scaling) to match the variable load.
 

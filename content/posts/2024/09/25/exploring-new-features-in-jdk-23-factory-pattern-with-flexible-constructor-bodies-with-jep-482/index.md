@@ -47,7 +47,6 @@ public final class VehicleSensorFactory {
 }
 ```
 
-
 **Example 1.**: input arguments initiated different types of VehicleSensor
 
 Each created incarnation of *VehicleSensor* interface contains the default functionalities provided by the *AbstractValueSensor* class (Example 2).
@@ -68,7 +67,6 @@ abstract class AbstractValueSensor implements VehicleSensor {
    }
 ...
 ```
-
 
 **Example 2.**: Considered parentheses and abstractions hierarchy
 
@@ -91,7 +89,6 @@ class CylinderValueSensor extends AbstractValueSensor {
 }
 ```
 
-
 **Example 3.** : Constructor considers unexpected situations and initiates  
 
 internals accordingly
@@ -111,7 +108,6 @@ class EngineValueSensor extends AbstractValueSensor {
  …
 ```
 
-
 **Example 4.**: Throwing an exception due to invalid arguments without instantiating an object
 
 ### Conclusion
@@ -128,7 +124,6 @@ EngineValueSensor(Integer value) {
 }
 ```
 
-
 **Example 5.** : Since Java 1.0 the first statement of the constructor was *super(...)* or *this(...)*
 
 **JEP-482** comes up with a possible solution to improve and rethink the current use of creational patterns \[1\]. The example given shows the shift of responsibilities and the possible reduction of the boilerplate code.
@@ -143,7 +138,6 @@ Exception in thread "main" java.lang.IllegalArgumentException: value grater than
     at com.wengnerits.jep482.VehicleSensorFactory.createVehicleSensor(VehicleSensorFactory.java:80)
     at com.wengnerits.jep482.Jep482Main.main(Jep482Main.java:25)
 ```
-
 
 **Example 5.**: The example output compares two approaches to instantiation, one considering state versus an exception-throwing style.
 

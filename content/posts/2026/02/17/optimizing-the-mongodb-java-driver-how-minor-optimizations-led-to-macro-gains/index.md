@@ -29,8 +29,7 @@ In this blog, we share how the Java developer experience team optimized the Mong
 
 These are the lessons we learned turning micro-optimizations into macro-gains. Our findings might surprise you --- they certainly surprised us --- so we encourage you to read until the end.
 
-Getting the metrics right
--------------------------
+## Getting the metrics right
 
 Development teams often assume they know where bottlenecks are, but intuition is rarely dependable. During this exercise, the MongoDB Java team discovered that performance problems were often not where the team expected them to be.
 
@@ -42,8 +41,7 @@ To avoid 'premature optimization'---that is, improving code that appears slow bu
 
 We applied the [Pareto principle](https://en.wikipedia.org/wiki/Pareto_principle) (also known as the 80/20 rule) to target the specific code paths responsible for the majority of execution time. For this analysis, we used [**async-profiler**](https://github.com/async-profiler/async-profiler). Its low-overhead, sampling-based approach allowed us to capture actionable CPU and memory profiles with negligible performance impact.
 
-How we measured performance
----------------------------
+## How we measured performance
 
 We standardized performance tests based on throughput (MB/s), simplifying comparisons across all scenarios. Our methodology focused on minimizing the influence of external variables and ensuring practical relevance.
 
@@ -70,9 +68,6 @@ for (int i = 0; i < arraySize; i++) {
    }
 ```
 
-
-<br />
-
 Calling toString() and encoding the result for every index was clearly suboptimal, because it repeats the same conversion work for the same indexes over and over again: each call rebuilds the String representation of i and then turns that String into a byte\[\]. This involves unnecessary copying, even though the result remains the same.
 
 Our first improvement was to precompute and cache these immutable byte arrays for reuse in tight loops.
@@ -85,7 +80,6 @@ for (int i = 0; i < 1000; i++) {
 }
 ```
 
-
 ```
 for (int i = 0; i < arraySize; i++) {
     if (i < PRE_ENCODED_INDICES.length) {
@@ -96,13 +90,11 @@ for (int i = 0; i < arraySize; i++) {
 }
 ```
 
-
 This caching step was already effective. We also changed the cache layout from a jagged byte\[\]\[\] (that is, many small byte\[\] objects) to a flat byte\[\] representation.
 
 ```
 private static final byte[] PRE_ENCODED_INDICES;
 ```
-
 
 The flat byte\[\] layout remains the preferred choice because it uses fewer heap objects and scales more efficiently as the cache grows due to spatial locality. Our benchmarks showed no significant throughput difference compared to jagged byte\[\]\[\] structures in smaller caches; this parity stems from the HotSpot's [Thread-Local Allocation Buffer (TLAB)](https://shipilev.net/jvm/anatomy-quarks/4-tlab-allocation/) allocator, which places small rows close together in memory. Even with [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) (GC) settings that forced frequent promotion into the old generation, we often observed the same effect. Because that behaviour is JVM- and GC-specific rather than guaranteed, we use the flat array as the more robust solution. To quantify the impact of caching itself, we adapted the "**Small Doc** **insertOne"** workload from our performance specification for array-heavy documents. Instead of the original shape, each document now contained A arrays of B length (that is, 100×100, and 100×1000), so the total number of encoded array indexes per document was A × B. The larger the arrays we use per document, the more significant the difference is, as the array encoding fraction in the "**insertOne"** operation is larger for larger arrays.
 
@@ -125,7 +117,6 @@ write(value >> 16);
 
 write(value >> 24);
 ```
-
 
 However, this approach wasn't efficient. It required individual bounds checks and manual byte shuffling for every byte written, which showed up as a hotspot in profiles. We chose to adopt ByteBuffer's methods---such as putInt, putLong, and putDouble. This method collapses four separate byte operations into a single call (putInt) that handles byte order automatically.
 
@@ -152,7 +143,6 @@ ByteBuffer currentBuffer = bufferList.get(currentBufferIndex);
 //other code
 currentBuffer.put(value);
 ```
-
 
 This get() call is fast, but performing it many times adds up---especially since each call includes range checks and method indirection (as the path is too deep; the JVM might not always inline it).
 
@@ -182,7 +172,6 @@ while (checkNext) {
 }
 ```
 
-
 The primary issue with this approach is that it requires more comparisons for the same amount of work. For large documents, the process calls **buffer.get()** billions of times. Processing each byte individually requires a load, check, and conditional jump each time, which rapidly increases the total instruction count.
 
 To improve performance, we used a classic optimization technique: [**SWAR**](https://en.wikipedia.org/wiki/SWAR) (SIMD Within A Register Vectorization). Instead of checking each byte separately, SWAR lets us examine eight bytes simultaneously with a single 64-bit load and some bitwise operations. Here's what that looks like:
@@ -197,7 +186,6 @@ if (mask != 0) {
     return (pos - prevPos) + offset + 1;
 }
 ```
-
 
 These 'magic numbers' aren't arbitrary: 0x0101010101010101L repeats the byte 1, while 0x8080808080808080L repeats the byte 128. By subtracting 1 from each byte, ANDing with the inverted value, and applying the high-bit mask, you can instantly detect if a zero exists. Then, simply **counting the trailing zeros** allows you to calculate the precise byte offset. This method is highly effective with CPU pipelining.  
 
@@ -250,7 +238,6 @@ prevResult = 00000001 11111111 00000001 00000000
              00000000 10000000 00000000 00000000
 ```
 
-
 The final result:
 
 - The result has a high bit set (10000000) in Byte 2, showing there's a zero byte at that position.
@@ -278,7 +265,6 @@ if (buffer.isBackedByArray()) {
     return new String(array, arrayOffset + position, bsonStringSize - 1, StandardCharsets.UTF_8);
 }
 ```
-
 
 For direct buffers (which are not backed by a Java heap array), we cannot hand a backing array to the \`String\` constructor. We still need to copy bytes from the buffer, but we can avoid allocating a new \`byte\[\]\` for every string.  
 
@@ -323,7 +309,6 @@ for (int i = 0; i < len;) {
 }
 ```
 
-
 In practice, modern JVMs can unroll tight, counted loops, reducing back branches and enhancing instruction pipeline efficiency under suitable conditions. However, when examining the assembly generated by the JIT for this method, we observed that loop unrolling did ***not*** occur in this instance. This underscores the importance of keeping the hot path as straight as possible, minimizing branches, checks, and method indirection, especially for large workloads.
 
 Our first optimization was based on the hypothesis that most workloads mainly use ASCII characters. Using this assumption, we developed a new loop that was much more JIT-friendly.
@@ -341,7 +326,6 @@ for (; sp < str.length(); sp++, pos++) {
     dst[pos] = (byte) c;
 }
 ```
-
 
 Before entering the loop, we verified that String.length() \< ByteBuffer's capacity and got the underlying array from the ByteBuffer (*our* *ByteBuffer* *is a wrapper over the JDK or Netty buffers*)
 
@@ -383,7 +367,6 @@ loop body:
     strb    w4,  [x10,#17]          ; dst[pos+1] = (byte)c1
 ```
 
-
 What we did:
 
 * Removed internal method indirection (like write() wrappers) that introduced extra bound checks.
@@ -397,8 +380,7 @@ This optimization improved insert throughput across all related benchmarks. For 
 
 You can see the particular test conditions in the [Performance Benchmarking specification](https://github.com/mongodb/specifications/blob/master/source/benchmarking/benchmarking.md#large-doc-bulk-insert).
 
-Lessons learned
----------------
+## Lessons learned
 
 * **Cache immutable data on the hot path:** In our case, pre-encoding BSON index CStrings once into a compact flat byte\[\] removed repeated int to byte\[\] conversions and cut heap overhead from thousands of tiny byte\[\] objects.  
 * **The JVM can surprise you:** Use intrinsics and hardware features whenever possible. After implementing our changes and testing, we found that a simple modification affecting less than 0.03% of the codebase increased throughput for large document bulk inserts by nearly 39%.  
@@ -410,6 +392,4 @@ Lessons learned
 **Figure 3.** The figure below shows the final results for throughput improvements (measured in MB/s) after optimizing the driver, as explained above, based on [this](https://github.com/mongodb/specifications/blob/master/source/benchmarking/benchmarking.md#large-doc-bulk-insert) performance benchmarking specification. The 'Large doc Collection BulkWrite insert' saw the highest performance improvement +96.46%.  
 ![](Screenshot-2026-02-10-at-11.44.20-AM.png)
 
-Check out our [developer blog](https://www.mongodb.com/company/blog/channel/developer-blog) to learn how we are solving different engineering problems, or consider joining our [engineering team](https://www.mongodb.com/company/careers/teams/engineering).   
-
-<br />
+Check out our [developer blog](https://www.mongodb.com/company/blog/channel/developer-blog) to learn how we are solving different engineering problems, or consider joining our [engineering team](https://www.mongodb.com/company/careers/teams/engineering).

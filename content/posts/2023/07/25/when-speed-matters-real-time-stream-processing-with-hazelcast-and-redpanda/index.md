@@ -125,7 +125,6 @@ depends_on:
       - redpanda-0
 ```
 
-
 The above file contains the configuration necessary to [spin up a Redpanda cluster](https://docs.redpanda.com/docs/get-started/quick-start/?num-brokers=three) with a single broker. If needed, you can use a three-broker cluster. But, a single broker would be more than enough for our use case.
 
 Please note that using Redpanda on Docker is only recommended for development and testing purposes. For other deployment options, consider [Linux](https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/manual/) or [Kubernetes](https://docs.redpanda.com/docs/deploy/deployment-option/self-hosted/kubernetes/).
@@ -203,7 +202,6 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-
 ### Setting up Hazelcast
 
 Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
@@ -213,7 +211,6 @@ brew tap hazelcast/hz
 brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c0c9d2cdc4cbc9dbdce89d869b8699">[email protected]</a>
 hz -V
 ```
-
 
 Now that we understand what we are going to build, and have prerequisites set up, let's jump right into the solution.
 
@@ -225,7 +222,6 @@ Let's start the [Redpanda cluster](https://docs.redpanda.com/docs/21.11/deployme
 docker compose up -d
 ```
 
-
 An output similar to the following confirms that the Redpanda cluster is up and running.
 
 ```
@@ -236,7 +232,6 @@ An output similar to the following confirms that the Redpanda cluster is up and 
 ⠿ Container redpanda-console               Started  0.6s
 ```
 
-
 ### Step 2: Run Hazelcast
 
 You can run the following command to start a Hazelcast cluster with one node.
@@ -244,7 +239,6 @@ You can run the following command to start a Hazelcast cluster with one node.
 ```
 hz start
 ```
-
 
 To add more members to your cluster, open another terminal window and rerun the start command.
 
@@ -255,7 +249,6 @@ We will use the SQL shell---the easiest way to run SQL queries on a cluster. You
 ```
 bin/hz-cli sql
 ```
-
 
 ### Step 4: Ingest into Hazelcast iMap (pizzastream)
 
@@ -276,7 +269,6 @@ OPTIONS (
 'bootstrap.servers' = 'localhost:19092');
 ```
 
-
 ### Step 5: Enrich the stream with recommendations data (recommender)
 
 For this step, we create another Map:
@@ -294,7 +286,6 @@ OPTIONS (
 'valueFormat'='json-flat');
 ```
 
-
 We add some values into the Map:
 
 ```
@@ -309,7 +300,6 @@ INSERT INTO recommender VALUES
 (8, 'user_8', 'Jalapeno_poppers', 'Coleslaw', 'Zucchini_fries'),
 (9, 'user_9', 'Onion_rings','Jalapeno_poppers','Soup');
 ```
-
 
 ### Step 6: Combine both Maps using SQL
 
@@ -327,7 +317,6 @@ JOIN recommender
 ON recommender.user_id = recommender.user_id 
 AND recommender.extra2 = 'Soup';
 ```
-
 
 ### Step 7: Send the combined data stream to Redpanda
 
@@ -363,9 +352,7 @@ ON recommender.user_id = recommender.user_id
 AND recommender.extra2 = 'Soup';
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this post, we explained how to build a pizza delivery service with Redpanda and Hazelcast.
 

@@ -8,8 +8,6 @@ aliases:
 frozen: false
 ---
 
-
-
 Do you want to try out Java? Or you've been using it for a while and need to install it again?
 
 Just like other programming languages, you will need some one-time steps to have the required tools locally available.

@@ -26,8 +26,7 @@ I assume readers know the reasons behind versioning, semantic versioning, and pr
 
 I'll summarize the subject in a few words in any case.
 
-Generalities
-------------
+## Generalities
 
 Software naturally evolves, because of business need or changing regulations. In some cases, the said software has no clients but humans, *e.g.*, a monolith with Server-Side Rendering. In all other cases, at least another software component interacts with your software:
 
@@ -47,8 +46,7 @@ The crux of the problem is now how to use a specific version of the endpoint. Th
 
 Let's detail them in turn. It all boils down to routing; I'll demo the configuration with [Apache APISIX](https://apisix.apache.org/) to implement each versioning approach.
 
-Path-based versioning
----------------------
+## Path-based versioning
 
 Path-based versioning is so ubiquitous that it's the approach most people think about when they think about API versioning. The idea is to set the version in the path:
 
@@ -73,7 +71,6 @@ routes:
     upstream_id: 2
 ```
 
-
 The above setup doesn't work unfortunately: as it stands, we forward `/v1/*` to the upstream, whereas it probably can handle only `*` - the path behind the version prefix. We need to remove the version prefix before forwarding to the upstream:
 
 ```yaml
@@ -89,7 +86,6 @@ routes:
       proxy-rewrite:
         regex_uri: [ "/v2(.*)", "$1" ]        #1
 ```
-
 
 1. Remove the version path prefix before forwarding
 
@@ -108,13 +104,11 @@ routes:
           priority: 1000                      #3
 ```
 
-
 1. `proxy-rewrite` default priority is `1008`
 2. `proxy-mirror` default priority is `1010`
 3. Set it to `1000` so that it now applies *after* the rewrite takes place
 
-Query-based versioning
-----------------------
+## Query-based versioning
 
 Another way to version is to use query parameters, *e.g.* , `?version=v1`. While I've never seen it in the wild, it deserves a mention nonetheless. We can leverage the following Apache APISIX configuration:
 
@@ -133,13 +127,11 @@ routes:
     priority: 1
 ```
 
-
 1. Both routes match the same URI, so we must evaluate them in order. That's the role of `priority`: Apache APISIX evaluates the highest priority first
 2. Evaluate the query parameter named `version`
 3. Default route when no `version` is provided. Here, I route to version 1, but you can also return an HTTP status `4xx` to require a version.
 
-Header-based versioning
------------------------
+## Header-based versioning
 
 The last alternative for versioning is to use HTTP headers. Here's a custom header:
 
@@ -148,7 +140,6 @@ GET / HTTP1.1
 
 Version: 1
 ```
-
 
 From an HTTP point of view, asking for a version via a header is the definition of *content negotiation* between the client and the server:
 > Content negotiation refers to mechanisms defined as a part of HTTP that make it possible to serve different versions of a document (or more generally, representations of a resource) at the same URI, so that user agents can specify which version fits their capabilities the best.
@@ -169,7 +160,6 @@ GET / HTTP1.1
 Accept: application/vnd.ch.frankel.myservice.v1+json
 ```
 
-
 Theoretically, the client can leverage the *quality* of `Accept` headers to communicate that it can handle different versions. The following request tells that the client prefers version 2 but can handle version 1 if the need be:
 
 ```vb
@@ -177,7 +167,6 @@ GET / HTTP1.1
 
 Accept: application/vnd.ch.frankel.myservice.v2+json;q=0.8, application/vnd.ch.frankel.myservice.v1+json;q=0.2
 ```
-
 
 In practice, quality requires a high level of maturity, both on the server-side - handling qualities and on the client-side - handling two versions simultaneously.
 
@@ -198,9 +187,7 @@ routes:
     priority: 1
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this short article, we detailed the three options for versioning HTTP APIs: path-based, query-based, and header-based.
 
@@ -215,7 +202,5 @@ The complete source code for this article can be found on [GitHub](https://githu
 * [API deployment strategies](https://navendu.me/posts/api-deployment-strategies/)
 * [Content Negotiation in RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-content-negotiation)
 * [Routing in Apache APISIX](https://apisix.apache.org/docs/apisix/router-radixtree/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/api-versioning/) on November 5^th^, 2023*

@@ -28,8 +28,7 @@ frozen: false
 
 Hilla is designed to be simple enough for small utilities, but robust enough to build complex, enterprise-grade apps.
 
-Automatic Java to TypeScript Code Generation
---------------------------------------------
+## Automatic Java to TypeScript Code Generation
 
 Automatic TypeScript code generation helps ensure that the frontend always stays in sync with the backend, so you can build apps faster and with greater confidence, even when your team grows bigger. The strong type-safety also means you can explore server endpoint methods and their input and return types right from your IDE as you type.
 
@@ -50,7 +49,6 @@ public class PersonEndpoint {
     }
 }
 ```
-
 
 **TypeScript View:**
 
@@ -75,14 +73,11 @@ export class PersonView extends View {
 }
 ```
 
-
-Getting started
----------------
+## Getting started
 
 You can learn more about Hilla and get started on <https://hilla.dev/>.
 
-Full Release Notes
-------------------
+## Full Release Notes
 
 ### Features
 

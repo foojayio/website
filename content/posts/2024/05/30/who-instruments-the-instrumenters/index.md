@@ -29,8 +29,7 @@ This is the premise of my [meta-agent](https://github.com/parttimenerd/meta-agen
 
 This article is a collaboration with [Mikaël Francoeur](https://www.linkedin.com/in/mika%C3%ABl-francoeur/), who had the idea for the meta-agent and wrote most of this post. So it's my first ever post-collaboration. But I start with a short introduction to the agent itself before Mikaël takes over with real-world examples.
 
-Meta-Agent
-----------
+## Meta-Agent
 
 The meta-agent ([GitHub](https://github.com/parttimenerd/meta-agent)) is a Java agent that instruments the I`nstrumentation.`[addTransformer](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html#addTransformer(java.lang.instrument.ClassFileTransformer)) methods agents use to add bytecode transformers and wrap the added transformers to capture bytecode before and after each transformation.
 
@@ -42,7 +41,6 @@ But how can you use it? You first have to [download the agent](https://github.co
 java -javaagent:target/meta-agent.jar -jar your-program.jar
 ```
 
-
 This will then create a web server at <http://localhost:7071> that allows you to inspect the bytecode modifications of each instrumenter dynamically. For the example from the README <http://localhost:7071/full-diff/class?pattern=java.lang.Iterable> shows you, for example, how Mockito modifies the Iterable class upon mocking:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/05/image-2000x1144.png)
 
@@ -53,8 +51,7 @@ Another nice feature is that the agent allows you to inspect almost all classes,
 
 Now I'm handing it over to Mikaël, who actually fixed bugs using my tool:
 
-Spring and Mockito
-------------------
+## Spring and Mockito
 
 Two of the tools I work the most with are Spring and Mockito, and both make liberal use of bytecode generation and modification.
 
@@ -94,7 +91,6 @@ void testSecured() {
 }
 ```
 
-
 These few lines of code are enough to implement an annotation that can be reused on arbitrary interfaces. In fact, a lot of what Spring does can be summed up by this code snippet.
 
 But alas, the JDK only supports this for interfaces, not for classes, so you wouldn't be able to use this if `Door`, or any of the types annotated with `@Secured`, was not an interface, even though the code would still make perfect sense from a developer's point of view. CGLIB addresses this gap.
@@ -111,7 +107,6 @@ CGLIB is a bytecode generation library that is now abandoned but forked, repacka
   );
 }
 ```
-
 
 And everything you pass into `makeSecure()` will now have its `@Secured` methods intercepted. This is a powerful mechanism, but have you ever wondered what happens when you invoke [Proxy.newProxyInstance](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/reflect/Proxy.html#newProxyInstance(java.lang.ClassLoader,java.lang.Class%5B%5D,java.lang.reflect.InvocationHandler)), or [Enhancer.create](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cglib/proxy/Enhancer.html#create())? What kind of trickery takes place? Well, meta-agent lets us see exactly what is happening. Here is part of the decompiled bytecode from the `$Proxy8` class that was dynamically created by the `Proxy` in the first example above:
 
@@ -136,7 +131,6 @@ final class $Proxy8 extends Proxy implements Door {
   }
 }
 ```
-
 
 This is something you could very well write in any Java program. In fact, it's a pretty standard implementation of the decorator design pattern. In a static initializer, the relevant methods are first cached in static fields so that `getMethod()`, a non-trivial operation, only has to happen once. Then, every method is just a simple delegation to the InvocationHandler you provided, surrounded by some error handling. The only peculiar thing about this code is that it was generated at run-time directly in bytecode.
 
@@ -164,7 +158,6 @@ public class SimpleDoor$$EnhancerByCGLIB$$b71b2e45 {
   }
 }
 ```
-
 
 There are two surprising things here. First, this check for `isOpenCallback == null` seems redundant. It turns out that CGLIB allows setting or removing callbacks after the proxy is initialized, so proxies have to do this sanity check for every method call.
 
@@ -196,7 +189,6 @@ void givenRepositoryThrowsException_whenSaveUser_thenDoesNotSendNotification() {
   verifyNoInteractions(notificationService);
 }
 ```
-
 
 Where Mockito shines is not only in its API ([mock()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#mock(T...)), [when()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#when(T))`.`[thenThrow()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/stubbing/OngoingStubbing.html#thenThrow(java.lang.Class)), [any()](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/ArgumentMatchers.html#any(java.lang.Class)), and [`verifyNoInteractions()`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#verifyNoInteractions(java.lang.Object...)) in this example), but also its ability to mock even final or static methods. The proxying techniques we've seen so far used subclassing to generate new objects that implemented or extended existing interfaces or classes. But final and static methods can't be overridden. Mockito gets around this by registering a JVM agent and transforming the existing classes [(5)](#ref5).
 
@@ -231,7 +223,6 @@ class UserRepository {
 }
 ```
 
-
 Notice that the name of the `UserRepository` class hasn't changed. Whereas `Proxy` and `CGLIB` generated new classes that are extended or inherited from our existing types, Mockito transforms the existing class, and every method of the transformed class first checks with a static registry (`MockMethodDispatcher`) to see if the current object is a mock.
 
 If it is, then it uses the mocked behavior; if not, it uses the object's natural behavior (in this case, just returning the user). Something that isn't so obvious unless you dig through Mockito's source code is that this transformation is done for every class up the chain of inheritance, up to Object. The meta-agent will readily show the complete list of transformed classes using the `/classes` endpoint.
@@ -244,8 +235,7 @@ This is decompiled code, and the Vineflower decompiler backing meta-agent strugg
 
 Fortunately, you can also pass `?mode=javap` or `?mode=javap-verbose` to meta-agent, and it will show the actual bytecode and other low-level information like constant pools.
 
-Conclusion
-----------
+## Conclusion
 
 This was a fun project; there's probably more to uncover by analyzing generated code.
 
@@ -268,7 +258,3 @@ This project shows how a question during a conference, "How can I inspect code a
 (6) Rafael Winterhalter's answer to "How to add a field to an existing instance with ByteBuddy?" <https://stackoverflow.com/a/58529716/7096763>.{#ref6}
 
 *This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone. This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de/blog/2024/05/10/who-instruments-the-instrumenters/).*
-
-<br />
-
-<br />

@@ -50,8 +50,7 @@ Sounds reasonable right? Let's get to it!
 
 *Disclaimer: I am using ChatGPT Plus with the latest GPT4 model to generate the code snippets. Some of the code generation prompt examples here might not work with the current free-to-use GPT3.5 model.*
 
-Step 1: Bootstrapping the initial Spring Boot skeleton
-------------------------------------------------------
+## Step 1: Bootstrapping the initial Spring Boot skeleton
 
 (The prompts and responses are copied as is - for the reader's benefit, the dialog is shared as text instead of screenshots. Prompts are shared as is without any modification)
 
@@ -81,8 +80,6 @@ Step 1: Bootstrapping the initial Spring Boot skeleton
     |   |   |-- resources
     |-- pom.xml
 
-<br />
-
 *Inside the* [`com.ai`](http://com.ai/) *package, create the main class file* [`CodeGenerationServiceApplication.java`](http://codegenerationserviceapplication.java/) *with the following content:*
 
 ```java
@@ -97,7 +94,6 @@ public class CodeGenerationServiceApplication {
     }
 }
 ```
-
 
 *Next, create the* `pom.xml` *file in the root directory of the project with the following content:*
 
@@ -147,7 +143,6 @@ public class CodeGenerationServiceApplication {
 </project>
 ```
 
-
 *This sets up a basic Spring Boot project using Maven as the build tool and Java 17 as the programming language. The project has a single CodeGenerationServiceApplication class, which is the entry point for the application. The pom.xml file includes the required dependencies and build configurations.*
 
 **\[me\] \>** *Provide a run command to start the application using Maven*
@@ -158,10 +153,7 @@ public class CodeGenerationServiceApplication {
 mvn spring-boot:run
 ```
 
-
 *This command will start the Spring Boot application, and you should see the application logs in the terminal.*
-
-
 
 Okay. This was... pretty straightforward. We were able to generate a minimal required setup for a Spring Boot application. Let's check it actually works:
 
@@ -189,11 +181,9 @@ $ mvn spring-boot:run
 2023-03-21 21:05:39.673  INFO 19502 --- [           main] com.ai.CodeGenerationServiceApplication  : Started CodeGenerationServiceApplication in 1.902 seconds (JVM running for 2.239)
 ```
 
-
 Great success! Or at least a great start.
 
-Step 2: Create OpenAI API client
---------------------------------
+## Step 2: Create OpenAI API client
 
 **\[me\] \>** *In this project we're going to use the OpenAI API. Write a Java client that contains a method named* `generateCode` *that accepts a String input and returns the generated code by the API.*
 
@@ -212,7 +202,6 @@ Step 2: Create OpenAI API client
     <version>2.9.0</version>
 </dependency>
 ```
-
 
 *Next, create a new package called* [`com.ai`](http://com.ai/)`.openai` *and add the following files:*
 
@@ -234,7 +223,6 @@ public interface OpenAIApi {
 
 }
 ```
-
 
 *2.* [`OpenAIClient.java`](http://openaiclient.java/)*:*
 
@@ -305,12 +293,9 @@ public class OpenAIClient {
 }
 ```
 
-
 *Replace your_api_key with your OpenAI API key. The OpenAIClient class has a method* `generateCode` *that accepts a String input and returns the generated code by the API. It uses Retrofit to make API requests and OkHttpClient to add the necessary headers.*
 
 *Please note that this implementation uses synchronous calls to the OpenAI API. In a real-world application, it's recommended to use asynchronous calls to avoid blocking the main thread.*
-
-
 
 A few interesting observations on the generated code:
 
@@ -322,8 +307,6 @@ A few interesting observations on the generated code:
 
 4. The sync vs. async comment at the end: it seems that ChatGPT decided to regard the 'production-ready code' requirement we mentioned to it before in a manner of criticizing its own code rather than implementing it "properly" from the first try.
 
-
-
 Let's continue:
 
 **\[me\] \>** *Please extract the* `API_KEY` *property into external* [`application.properties`](http://application.properties/) *file and refactor the client to use the new config property*
@@ -333,7 +316,6 @@ Let's continue:
 ```yaml
 openai.api-key=your_api_key
 ```
-
 
 *Replace your_api_key with your OpenAI API key.*
 
@@ -405,17 +387,13 @@ public class OpenAIClient {
 }
 ```
 
-
 *Now, the OpenAIClient class reads the API key from the* [](http://application.properties/)*[application.properties](http://application.properties/)* *file and uses it for authentication when making requests to the OpenAI API.*
-
-
 
 We can see that ChatGPT made the change correctly using Spring's proper annotations, understood where the [`application.properties`](http://application.properties/) should be located (under `resources` folder) and refactored the code accordingly.
 
 Implicitly, I hoped for it to take one step further and create a relevant interface, a separate [Service class](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Service.html), and take any [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) aspects in concern. We'll get back to it later!
 
-Step 3: POJOs to the rescue
----------------------------
+## Step 3: POJOs to the rescue
 
 **\[me\] \>** *Write a record class named* `PromptRequest` *that contains one String argument named* `input` *and place it under a new relative package called* `pojos`
 
@@ -429,7 +407,6 @@ public record PromptRequest(String input) {
 }
 ```
 
-
 **\[me\] \>** *Now create another record class under the same package, named* `GeneratedCodeResult`*, that has one String argument named* `result`
 
 **\[chatGPT\] \>** *To create a record class named* `GeneratedCodeResult` *with a single String argument named* `result`*, add the following* [`GeneratedCodeResult.java`](http://generatedcoderesult.java/) *file to the* [`com.ai`](http://com.ai/)`.pojos` *package:*
@@ -442,11 +419,9 @@ public record GeneratedCodeResult(String result) {
 }
 ```
 
-
 Nothing complicated here. We created the request \& response POJOs that will be used later for serving the API calls. ChatGPT delivered as desired.
 
-Step 4: Write our first REST service endpoint (controller)
-----------------------------------------------------------
+## Step 4: Write our first REST service endpoint (controller)
 
 **\[me\] \>** *Write a REST controller named* `CodeGeneration`*. Use Spring conventions.*
 
@@ -492,19 +467,15 @@ public class CodeGenerationController {
 }
 ```
 
-
 *The* `CodeGenerationController` *class is annotated with* `@RestController`*, which indicates that it is a RESTful web service. The* `@RequestMapping` *annotation sets the base URL path for this controller, which is* `/api/codegeneration`*.*
 
 *The* `generateCode` *method is mapped to the* `/generate` *endpoint and accepts a POST request with a JSON payload. It takes a* `PromptRequest` *object as input and returns a* `GeneratedCodeResult` *object. The* `@RequestBody` *annotation tells Spring to deserialize the JSON payload into a* `PromptRequest` *object.*
 
 *The* `OpenAIClient` *is injected into the controller via the constructor, and its* `generateCode` *method is called to get the generated code from the OpenAI API.*
 
-
-
 I wanted to take ChatGPT step by step in the Controller code generation, instead, it already included the implementation using the client and the POJOs we previously generated! ***I am shocked.*** This was a very unexpected outcome from my prompt and made me stare at the screen for a minute realizing how it inferred the scope immediately. I salute you, my AI friend.
 
-Summary
--------
+## Summary
 
 We saw how using ChatGPT we managed to create a new Spring Boot microservice, implemented relevant classes (OpenAI API client and the request/response POJOs), and more importantly: generated our first Controller code that combines all the various components created by that point.
 

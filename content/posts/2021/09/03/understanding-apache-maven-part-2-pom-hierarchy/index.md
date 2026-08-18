@@ -20,8 +20,7 @@ frozen: false
 
 Following on from [the first article on Maven basics](https://foojay.io/today/understanding-apache-maven-part-1-the-basics/), the Project Object Model (POM) is explored, below.
 
-What is the Project Object Model?
----------------------------------
+## What is the Project Object Model?
 
 First, a maven POM is not a [popular pomegranate juice](https://www.pomwonderful.com/) nor is it related to the colorful [pom-poms](https://www.bing.com/images/search?q=pom+poms). A Maven POM is definitely is wonderful and brings as much joy to a developer as does a pom-pom to a kid.
 
@@ -35,8 +34,7 @@ A POM describes build management needs of a project:
 * **profiles** -- alternate execution pathways that can be activated on a per-execution basis
 * . . .
 
-How does Maven interact with a POM?
------------------------------------
+## How does Maven interact with a POM?
 
 Maven utilizes content in the POM for its build management. However, maven also has convention-based defaults. Maven thus has the onus of amalgamating defaults and applying overrides and additions discovered in the project's pom file (typically a `pom.xml`).
 
@@ -58,8 +56,7 @@ An effective POM is:
 
 Maven *assembles* its effective POM by traversing the layers that act as building blocks. Each layer used has the ability to override or enrich the content of what will become an **effective POM**. Maven internal defaults and the super POM are built-in to the maven installation, so ideally not subject to customization. The layers below, the global settings and user settings are, as their name suggests, inclined towards hosting and overriding any settings for maven. The parent, bill-of-material and project POM files are where maven instructions can be customized. Default values from above layers are utilized if no customization is made.
 
-The layers explained
---------------------
+## The layers explained
 
 Going through the layers:
 

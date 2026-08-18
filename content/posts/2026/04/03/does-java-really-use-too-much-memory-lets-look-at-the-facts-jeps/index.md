@@ -37,8 +37,7 @@ So let's do something different:
 
 Let's look at what modern Java actually does --- backed by real improvements in the platform and the JEPs that introduced them.
 
-The reputation didn't come out of nowhere.
-------------------------------------------
+## The reputation didn't come out of nowhere.
 
 Early versions of the JVM had:
 
@@ -56,8 +55,7 @@ But that was then.
 ![](duke_Pinocchio02-1024x640.jpg)  
 *Image 01: Pinocchio Duke on April 1st: "I swear... Java doesn't use that much memory anymore!*
 
-Modern Java: What Actually Changed?
------------------------------------
+## Modern Java: What Actually Changed?
 
 These are the JEPs that are finally helping Duke keep his nose under control
 
@@ -204,7 +202,6 @@ public class BadCache {
 }
 ```
 
-
 Problem:
 
 * Cache grows forever
@@ -231,7 +228,6 @@ public class GoodCache {
 }
 ```
 
-
 Result:
 
 * Controlled memory usage
@@ -252,7 +248,6 @@ for (int i = 0; i  {
 }
 ```
 
-
 Problem:
 
 * Each thread ≈ \~1MB stack (default)
@@ -268,7 +263,6 @@ for (int i = 0; i  {
     });
 }
 ```
-
 
 Result:
 
@@ -298,7 +292,6 @@ public class MemoryTest {
     }
 }
 ```
-
 
 What's happening?
 

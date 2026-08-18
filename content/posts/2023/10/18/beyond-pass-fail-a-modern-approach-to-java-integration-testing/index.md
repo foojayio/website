@@ -20,8 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
-----------------------------------------------------------------------------------------------------------------------------
+## Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!
 
 ![](1_JAiQsj-ez608WsovCheXVQ-1024x512.png)
 
@@ -86,8 +85,6 @@ For this example, we'll take our [forked](https://github.com/doppleware/spring-p
 
 With that out of the way, let's see what whipping up a quick integration test entails: First, we add a few dependencies. In my case, I'm using Maven so it's pretty straightforward to add the required resources to our `pom.xml`. We add some basic dependencies as well as the Postgres-specific artifact for Testcontainers. I also want to validate the API behavior so I went ahead and added the [rest-assured](https://rest-assured.io/) and [java-faker](https://github.com/DiUS/java-faker) libraries that I will use to assemble my test code.
 
-<br />
-
 ```xml
 <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -117,12 +114,7 @@ With that out of the way, let's see what whipping up a quick integration test en
     </dependency>
 ```
 
-
-<br />
-
 Next, we can create a simple class that tests that will use a real Postgres database on the backend. This project is using Spring Boot 3.1 so there are many convenience functions and handy annotations to help auto-wire everything together with minimal code. The below code is entirely of the boilerplate that had to be put together for an integration test using a real service. With the new `@`[ServiceConnection](https://spring.io/blog/2023/06/23/improved-testcontainers-support-in-spring-boot-3-1) annotation, we can very easily drop in the Postgre database container. Spring Boot's excellent testing infrastructure, also allows us to very easily start the backend service and inject the server port. We'll use that value during the test setup to make sure our `rest-assured` validations are configured properly.
-
-<br />
 
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -143,7 +135,6 @@ public class OwnerControllerTests {
 		RestAssured.baseURI = "http://localhost:" + port;
 	}
 ```
-
 
 Amazingly, the above code represents all of the required boilerplate to set up the test environment. At this point, we can assume that when our test is running the database and server are all up and accessible in our test code. It's especially impressive when I recall how years ago, I was struggling to make my Cucumber UAT tests work, investing in stabilizing and modularizing complex test setup code.
 
@@ -174,7 +165,6 @@ With the test setup out of the way, we can start focusing on what we want to tes
 
 	}
 ```
-
 
 This, with a simple request and basic validation we have black-boxed some server logic, creating an integration test. But how fast does it run?
 ![](1_z0UWlO2DNYgKCO2sPZl2Lg.png)

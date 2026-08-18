@@ -23,8 +23,7 @@ Since this month is [Hacktoberfest](https://hacktoberfest.digitalocean.com/), I 
 
 Some of the content of this article will be applicable to any of the OpenJDK projects, especially the Skara (OpenJDK on Git) bits.
 
-The OpenJDK Mission Control Project
------------------------------------
+## The OpenJDK Mission Control Project
 
 The OpenJDK Mission Control project is the observability tools suite for OpenJDK. It contains a JMX Console, a JFR visualizer and analyzer, a heap waste analysis tool, and many other little useful tools and utilities. Since it is all open source, pretty much anyone can contribute to the project.
 
@@ -37,9 +36,7 @@ The first step to contribute to JDK Mission Control is to simply [fork the repos
 git checkout -b my-jmc-test
 ```
 
-
-Building JMC
-------------
+## Building JMC
 
 First of all, ensure that you have [jdk11 active](https://sdkman.io/) in your shell, and verify that this is the case using:  
 
@@ -47,13 +44,11 @@ First of all, ensure that you have [jdk11 active](https://sdkman.io/) in your sh
 java -version
 ```
 
-
 There are multiple ways to build JMC. The easiest way is to simply use the build script (don't do this just yet):  
 
 ```
 ./build.sh –packageJmc
 ```
-
 
 There is also a way to build JMC using Docker (don't do this just yet either):  
 
@@ -68,7 +63,6 @@ cd $JMC_ROOT/core
 mvn install
 ```
 
-
 Next, build the p2 site and start jetty to expose it on a well known port:
 
 ```
@@ -76,7 +70,6 @@ cd $JMC_ROOT/releng/third-party
 mvn p2:site
 mvn jetty:run
 ```
-
 
 Then leave jetty running for as long as you are developing JMC. You will need it up and running so that it can be found both when building from the command line, as well as when compiling JMC from within the Eclipse development environment.
 
@@ -87,18 +80,15 @@ cd $JMC_ROOT
 mvn package
 ```
 
-
 After this, you can use the build script to run the built JMC product:  
 
 ```
 ./build.sh –run
 ```
 
-
 For alternative ways of launching JMC, see the platform specific documentation in the [README.md](https://github.com/openjdk/jmc/blob/master/README.md#running-the-locally-built-jmc).
 
-Developing JMC
---------------
+## Developing JMC
 
 Many that I've talked to, especially when JMC was shipped with the Oracle JDK, believed that JMC is a native application. If you've browsed the repo, you've already seen that it is a Java application, more specifically an Eclipse RCP application. Since it is an Eclipse RCP application, it's easiest to develop JMC using Eclipse.
 
@@ -133,8 +123,7 @@ Once you have a few commits under your belt, and become an OpenJDK author, you h
 
 If you end up having an issue, the details of the test run in the PR will hopefully be enough to sort it out. If not, you can run `mvn verify` locally and look at the test logs. If it is formatting, then check if the formatting problem was in core or not, and either run `mvn spotless:apply` in core or in the root of the project.
 
-Skara -- the OpenJDK Git Tooling
---------------------------------
+## Skara -- the OpenJDK Git Tooling
 
 Skara is the project name for the tooling around developing OpenJDK on Git(Hub). It actually insulates a lot of the GitHub specifics, making it possible, should the need ever arise, to move the development and development process somewhere else. The project also contains the aforementioned bot that helps, for example, to verify that there is a related JBS issue, and that there is a signed OCA. Skara also contains some useful git extensions which make working with OpenJDK on GitHub smoother.
 
@@ -146,13 +135,11 @@ Clone Skara:
 git clone <a href="https://github.com/openjdk/skara">https://github.com/openjdk/skara</a>
 ```
 
-
 Build it:  
 
 ```
 gradlew (win) or sh gradlew (mac/linux)
 ```
-
 
 Install it:
 
@@ -161,13 +148,11 @@ git config –global include.path “%CD%/skara.gitconfig” (win), or
 git config –global include.path “$PWD/skara.gitconfig” (mac/linux)
 ```
 
-
 Set where to sync your forks from:  
 
 ```
 git config –global sync.from upstream
 ```
-
 
 Here are some examples:
 
@@ -176,7 +161,6 @@ To sync your fork with upstream and pull the changes:
 ```
 git sync –pull
 ```
-
 
 > **Note:** if the sync fails with the error message "No remote provided to fetch from, please set the --from flag", remember to set the remote for your repo, e.g.
 >
@@ -188,20 +172,17 @@ To list the open PRs:
 git pr list
 ```
 
-
 To create a PR:  
 
 ```
 git pr create
 ```
 
-
 To push your committed changes in your branch to your fork, creating the remote branch:  
 
 ```
 git publish
 ```
-
 
 So, the normal workflow when working with OpenJDK JMC using the Skara tooling becomes:
 > Note: First ensure that you have a fork of JMC, and that your current directory is the root of that fork. You typically just create that one fork and stick with it.
@@ -225,8 +206,7 @@ So, the normal workflow when working with OpenJDK JMC using the Skara tooling be
 
 Once the PR is created, the bot will check that everything is okay, and the PR will be reviewed.
 
-Interacting with the Skara Bot
-------------------------------
+## Interacting with the Skara Bot
 
 Getting the PR merged is handled a bit differently in OpenJDK compared to normal GitHub projects.
 
@@ -240,15 +220,13 @@ If the PR author is not a committer on the project, the bot will inform that the
 
 When the PR is merged, the corresponding JBS issue is automatically closed.
 
-Other Related Repos
--------------------
+## Other Related Repos
 
 There are a few additional repos that are related to the OpenJDK JMC project, but that aren't currently OpenJDK projects. Two examples are the [jmc-jshell](https://github.com/thegreystone/jmc-jshell) and the [jmc-tutorial](https://github.com/thegreystone/jmc-tutorial) repositories.
 
 The [jmc-tutorial](https://github.com/thegreystone/jmc-tutorial) is a good resource for learning about JDK Mission Control. Even though it is not officially an OpenJDK repository, it can still be a good place to start contributing to the OpenJDK JMC community.
 
-Summary
--------
+## Summary
 
 * Contributing to OpenJDK is easier than ever before now that it's on GitHub.
 * [Skara](https://wiki.openjdk.java.net/display/SKARA) makes it even easier.

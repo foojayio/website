@@ -26,8 +26,7 @@ Part 2 describes how to use the new AOT capabilities offered by Leyden and prese
 
 Part 3 provides a more detailed account of how Leyden's proposed solution operates, and offers a first look at tooling that allows you to assess the benefits that result and tune your application to make the most of what Leyden offers.
 
-How to use an AOT Cache
------------------------
+## How to use an AOT Cache
 
 To use an AOT cache (on JDK 25+), you need to add some JVM arguments to your app launch command. There are two ways of doing it, in 2 or 3 steps.
 
@@ -76,8 +75,7 @@ At the moment of writing this article, you also need to deploy on the same CPU f
 
 Remember to follow these basic constraints when generating the cache: same hardware, same Java version, same Operating System, and same JVM arguments.
 
-Should I start using AOT Cache in Java already?
------------------------------------------------
+## Should I start using AOT Cache in Java already?
 
 The short answer is **yes**.
 

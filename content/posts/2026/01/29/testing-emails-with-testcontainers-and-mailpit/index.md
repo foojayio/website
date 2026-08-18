@@ -28,22 +28,19 @@ Both approaches are unsatisfying. Mocking does not test real behavior, and share
 
 This is exactly what Testcontainers and Mailpit provide.
 
-What is Mailpit?
-----------------
+## What is Mailpit?
 
 Mailpit is a small and fast SMTP testing server with a modern web UI. Instead of delivering emails, it captures them and exposes everything through an HTTP API and a browser-based inbox. Applications can send emails via SMTP as usual, while tests can inspect the captured messages programmatically or visually in the UI.
 
 This makes Mailpit ideal for automated tests and local development.
 
-Why Testcontainers fits perfectly
----------------------------------
+## Why Testcontainers fits perfectly
 
 Testcontainers allows you to start Docker containers directly from your tests. Containers are created on demand, work the same locally and in CI, and are automatically cleaned up afterwards. There is no manual setup and no shared infrastructure.
 
 Since Mailpit already provides an official Docker image, combining it with Testcontainers is a natural fit.
 
-The Mailpit Testcontainer module
---------------------------------
+## The Mailpit Testcontainer module
 
 To make this integration easy, I created a dedicated Testcontainers module for Mailpit: <https://github.com/martinellich/testcontainers-mailpit>
 
@@ -62,9 +59,7 @@ Add the dependency to your test scope:
 </dependency>
 ```
 
-
-Using Spring Boot with @ServiceConnection
------------------------------------------
+## Using Spring Boot with @ServiceConnection
 
 If you use Spring Boot 3.1 or newer, the cleanest solution is `@ServiceConnection`. Spring Boot will automatically wire the SMTP connection and also provide a `MailpitClient` bean.
 
@@ -81,7 +76,6 @@ class TestcontainersConfiguration {
   }
 }
 ```
-
 
 In your test, you can now use `JavaMailSender` as usual, and verify emails via `MailpitClient`:
 
@@ -113,11 +107,9 @@ class EmailServiceTest {
 }
 ```
 
-
 No mail properties are required. Spring Boot derives everything from the running container.
 
-Using Mailpit without Spring Boot
----------------------------------
+## Using Mailpit without Spring Boot
 
 The Mailpit container can also be used in plain JUnit tests. In this case, you configure the SMTP host and port manually and then verify messages via the container's client.
 
@@ -151,11 +143,9 @@ class PlainEmailTest {
 }
 ```
 
-
 This approach works well if you are not using Spring Boot or want full control over the mail setup.
 
-Fluent AssertJ assertions
--------------------------
+## Fluent AssertJ assertions
 
 Recent versions of the library include AssertJ-style assertions that make tests much more readable. Instead of manually fetching messages, you can express expectations directly.
 
@@ -175,7 +165,6 @@ void shouldVerifyEmailSent() {
 }
 ```
 
-
 You can also assert details of a specific message:
 
 ```java
@@ -193,9 +182,7 @@ void shouldVerifyMessageDetails() {
 }
 ```
 
-
-Waiting for asynchronous emails
--------------------------------
+## Waiting for asynchronous emails
 
 Many applications send emails asynchronously. For these cases, the assertions support waiting with timeouts and polling.
 
@@ -214,18 +201,15 @@ void shouldWaitForAsyncEmail() {
 }
 ```
 
-
 This removes the need for manual `Thread.sleep` calls and makes async tests reliable.
 
-Why this approach works well
-----------------------------
+## Why this approach works well
 
 With Mailpit and Testcontainers, you test the full email flow end-to-end. There are no mocks, no shared servers, and no environment-specific configuration. The same setup works locally and in CI, and debugging is easy thanks to the Mailpit web UI.
 
 Most importantly, you test what you actually ship.
 
-Conclusion
-----------
+## Conclusion
 
 Email testing does not need to be complex. A small Testcontainer and a lightweight SMTP server are enough to get reliable, readable, and maintainable tests. Mailpit fits naturally into modern Spring Boot and JUnit setups and removes a common source of fragile tests.
 

@@ -28,8 +28,7 @@ I**n today's fast-paced digital world, web crawling is a cornerstone technology 
 
 **This article unfolds a compelling narrative around web crawling in Java, contrasting classical threads with their newer counterpart: virtual threads.**
 
-**Environment Setup**
----------------------
+## **Environment Setup**
 
 Before diving into the code and its intricate comparisons, ensure you have JDK 21 installed on your system. If you're using a Unix-based system, SDKMAN! It makes this simple. Just open your terminal and run `curl -s "https://get.sdkman.io" | bash` to install SDKMAN!, followed by `source "$HOME/.sdkman/bin/sdkman-init.sh"` to initialize it. Finally, install JDK 21 with `sdk install java 21.0.0-<vendor>`, replacing \<vendor\> with your preferred vendor (e.g., zulu, adopt).
 
@@ -37,8 +36,7 @@ Now that your environment is ready let's move forward with our captivating tale 
 
 By having JDK 21 at your disposal, you are now well-equipped to delve into the fascinating juxtaposition of classical and virtual threads in Java's web-crawling landscape.  
 
-**The Code Overview**
----------------------
+## **The Code Overview**
 
 The Java code in focus here serves as a skeletal web crawler, a program that starts at an initial URL and recursively follows links to gather data from various web pages.
 
@@ -169,7 +167,6 @@ public class Crawler implements Runnable {
 }
 ```
 
-
 ### Key Components
 
 * **ConcurrentMap** **visited** : Our trusty guide, marking the URLs we've visited.
@@ -188,8 +185,7 @@ Inside this loop, it picks URLs from the pageQueue and submits new Crawler tasks
 
 Each Crawler task fetches the web page, parses the HTML to find links, and adds those new URLs to the pageQueue.  
 
-Running the Code: Execution Command with Dependencies
------------------------------------------------------
+## Running the Code: Execution Command with Dependencies
 
 Before running your web crawler, it's important to include its dependency: the jsoup library, specifically version 1.16.1, which is used for HTML parsing.
 
@@ -216,7 +212,6 @@ If you prefer to manage dependencies using a build tool, both Maven and Gradle o
  </dependencies>
 ```
 
-
 * **Compile and Run** : Navigate to your project directory and execute:` mvn compile exec:java -Dexec.mainClass="``Crawler``"` .
 
 ### Using Gradle
@@ -229,8 +224,7 @@ If you prefer to manage dependencies using a build tool, both Maven and Gradle o
 
 Either of these build tools will automatically download the JSoup library and include it in your project's classpath, making the compilation and execution process much smoother.
 
-**A Comparative Analysis**
---------------------------
+## **A Comparative Analysis**
 
 ### **Metrics Observed**
 
@@ -252,8 +246,7 @@ With **Classical Threads** :
 2. **Pages Crawled** : Virtual threads manage to crawl a whopping 785 pages, compared to the modest 101 by classical threads. The difference is too vast to ignore.
 3. **Resource Efficiency** : Both virtual and classical threads in this example are backed by the same number of underlying physical threads, thanks to Java's ForkJoinPool. This makes the comparison even more compelling, showing how much more you can achieve with the same resources when using virtual threads.
 
-**Drawing Conclusions**
------------------------
+## **Drawing Conclusions**
 
 The story told by this code and its performance metrics is one of stark contrast between classical and virtual threads. Virtual threads not only outperform classical threads in terms of throughput but also do so without requiring more underlying resources. It's as if they're performing a high-wire act while juggling, making the most of what they have.
 

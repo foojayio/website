@@ -33,8 +33,7 @@ Before the release of Spring Boot 4, developers needed to incorporate numerous d
 
 Before we deep dive into ***OpenTelemetry with Spring Boot 4***, let us first grasp some fundamental concepts and understand what each of them signifies.
 
-Key Terminology
----------------
+## Key Terminology
 
 * **Metrics** act as numerical representations of aggregated data that various input sources, including hardware, software, and applications, provide. This includes monitoring resource utilization, performance, and user behavior. Teams can utilize various types of metrics, specifically **application metrics, system metrics, and business metrics.** Mainly talks about **what** happens inside the system
 * **Logs** provide granular information regarding the specifics of the events, offering deeper insights into the reasons behind issues that occur at specific timestamps. Mainly talks about **why** issues occur
@@ -44,14 +43,9 @@ Key Terminology
 * The **OpenTelemetry** documentation states that OpenTelemetry is an **open-source framework for observability** that facilitates users in generating, exporting, and collecting telemetry data such as logs, metrics, and traces.
 * **Spring Boot Actuator**, a subproject of Spring Boot, facilitates the management and monitoring of our application through HTTP endpoints or JMX. It reveals multiple endpoints that provide extensive information about the application across various instrumentation details.
 
-
-
-<br />
-
 After we understand the key terminology, let's explore how and what changed in the integration of open telemetry with Spring Boot 4.
 
-Why OpenTelemetry?
-------------------
+## Why OpenTelemetry?
 
 In contemporary cloud-native applications, we will develop a sophisticated microservice architecture that integrates intricate business requirements. We find the necessity for both application and infrastructure observability to be crucial.
 
@@ -59,8 +53,6 @@ The **OpenTelemetry framework**guides us with two fundamental principles:
 
 * You own the data that you create, ensuring there is no vendor lock-in.
 * You need to familiarize yourself with only one set of APIs and conventions.
-
-
 
 Before the release of Spring Boot 4, we faced several challenges in integrating open telemetry, specifically:
 
@@ -74,8 +66,7 @@ With **Spring Boot 4** , developers provide open telemetry with either native or
 * Exports signals via OTLP protocol
 * Works seamlessly with Spring Boot 4.0
 
-Step-by-Step Guide
-------------------
+## Step-by-Step Guide
 
 If you already have an existing Spring Boot application, you can begin by incorporating the following dependency; otherwise, you can start creating a Spring Boot application using [Spring Initializr.](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.0&packaging=jar&configurationFileFormat=properties&jvmVersion=25&groupId=com.bsmlabs&artifactId=spring-boot-4-features&name=application&description=Explore%20Spring%20Boot%204%20Features%20&packageName=com.bsmlabs.features&dependencies=web,actuator,lombok,h2,data-mongodb,opentelemetry)
 
@@ -88,13 +79,11 @@ If you already have an existing Spring Boot application, you can begin by incorp
 </dependency>
 ```
 
-
 Or in the `build.gradle`
 
 ```json
 implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'
 ```
-
 
 **Note:** This starter includes
 
@@ -116,20 +105,17 @@ In Spring Boot 3, you must add the dependencies mentioned above individually to 
 </dependency>
 ```
 
-
 Or in `build.gradle`:
 
 ```json
 implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.21.0-alpha'
 ```
 
-
 2. Enable Log Export Property by adding the below property in `application.properties`
 
 ```json
 management.opentelemetry.logging.export.otlp.endpoint=http://localhost:4318/v1/logs
 ```
-
 
 Or in YAML:
 
@@ -141,7 +127,6 @@ management:
         otlp:
           endpoint: http://localhost:4318/v1/logs
 ```
-
 
 3. Configure Logback Appender
 
@@ -160,7 +145,6 @@ Create `src/main/resources/logback-spring.xml`:
     </root>
 </configuration>
 ```
-
 
 4. Install OpenTelemetry Appender
 
@@ -188,7 +172,6 @@ public class InstallOpenTelemetryAppender implements InitializingBean {
 }
 ```
 
-
 **Step 3:** Configure ***Metrics*** Export
 
 1. Enable Metrics Export
@@ -201,7 +184,6 @@ management.tracing.sampling.probability=1.0
 management.otlp.metrics.export.url=http://localhost:4318/v1/metrics
 ```
 
-
 Or in `application.yml`:
 
 ```yaml
@@ -211,7 +193,6 @@ management:
       export:
         url: http://localhost:4318/v1/metrics
 ```
-
 
 2. Configure OpenTelemetry Semantic Conventions
 
@@ -276,7 +257,6 @@ public class OpenTelemetryConfiguration {
 }
 ```
 
-
 **Step 4:** Configure ***Traces*** Export
 
 1. Add the following property to enable trace export in `application.properies`
@@ -284,7 +264,6 @@ public class OpenTelemetryConfiguration {
 ```json
 management.opentelemetry.tracing.export.otlp.endpoint=http://localhost:4318/v1/traces
 ```
-
 
 Or in `application.yml`
 
@@ -296,7 +275,6 @@ management:
         otlp:
           endpoint: http://localhost:4318/v1/traces
 ```
-
 
 Spring Boot automatically configures:
 
@@ -340,7 +318,6 @@ public class TraceIdFilter implements Filter {
 }
 ```
 
-
 This allows users to include the trace ID when reporting errors.
 
 ### Testing with Docker Compose
@@ -361,7 +338,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 ```
 
-
 2. Add Docker Compose Support (Optional)
 
 Add dependency for automatic Docker Compose integration:
@@ -374,7 +350,6 @@ Add dependency for automatic Docker Compose integration:
     <optional>true</optional>
 </dependency>
 ```
-
 
 Spring Boot will automatically:
 
@@ -399,8 +374,7 @@ Spring Boot will automatically:
 
 The complete code can be found [over on Github](https://github.com/bsmahi/spring-boot-app-with-mongodb).
 
-Conclusion
-----------
+## Conclusion
 
 Developers must incorporate observability into modern cloud-native applications, as it has become essential and significantly aids in effectively monitoring the application. With `spring-boot-starter-opentelemetry` dependency, spring boot it automcatically perform an instrumentation for:
 

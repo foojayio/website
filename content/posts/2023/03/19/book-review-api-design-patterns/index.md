@@ -27,15 +27,13 @@ This review is about [API Design Patterns](https://www.manning.com/books/api-des
 
 I [already mentioned](https://blog.frankel.ch/structured-errors-http-apis/) how I'm trying to get to speed in the API world: reading books, viewing relevant YouTube videos and reading relevant s.
 
-Facts
------
+## Facts
 
 * 30 chapters, $35.00
 * The author is a Principal Software Engineer at Google
 * He's also the author behind
 
-Chapters
---------
+## Chapters
 
 * Introduction
 * Design principles
@@ -80,8 +78,7 @@ Each *design pattern* chapter follows the same structure:
 4. Trade-offs: patterns have strong and weak points; this section describes the latter
 5. Exercises: a list of questions to verify that one has understood the pattern
 
-Pros and cons
--------------
+## Pros and cons
 
 Let's start with the good sides:
 
@@ -95,8 +92,7 @@ Now, I've some critics as well:
 * Some patterns are directly taken from [Google's API Improvement Proposals](https://google.aip.dev/). It's not a problem *per se* , but when it's the case, there's no discussion **at all** about possible alternatives. For example, the chapter on custom methods describes how to handle actions that don't map precisely to an HTTP verb: a bank transfer is such an action because it changes two resources, the "from" and the "to" accounts.The proposed [Google AIP](https://google.aip.dev/136) is for the HTTP URI to use a `:` character followed by the custom verb, *e.g.* , `/accounts/123:transfer`. That's an exciting proposal that solves the lack of mapping issue. But there are no proposed alternatives nor any motivation for why it should be this way. As an engineer, I can hardly accept implementing a solution with such far-reaching consequences without being provided with other alternatives with their pros and cons.
 * Last but not least, the book doesn't mention any relevant RFC or IETF draft. Chapter 26 describes how to manage request deduplication, the fact that one may need to send the same non-idempotent request repeatedly without being afraid of ill side effects. The proposed solution is good: the client should use a unique key, and if the server gets the same key again, it should discard the request.It's precisely what the IETF draft describes: [The Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header-02). Still, there's no mention of this draft, giving the feeling that the book is disconnected from its ecosystem.
 
-Author's replies
-----------------
+## Author's replies
 
 For once, I was already in touch with the author. I offered him an opportunity to review the post. Since his answers are open, I decided to publish them with his permission:
 
@@ -105,8 +101,7 @@ For once, I was already in touch with the author. I offered him an opportunity t
 * Why aren't there more references to IETF standards?  
   > This is a glaring oversight on my part. There are a lot of RFCs and I do mention some (e.g., RFC-6902 in Partial Updates, etc), but I haven't pulled in enough from that standards body and it's a mistake. If we do a 2nd edition, this will be at the top of the list.
 
-Conclusion
-----------
+## Conclusion
 
 Because of the couple of cons I mentioned, [API Design Patterns](https://www.manning.com/books/api-design-patterns?utm_source=frankel&utm_medium=affiliate&utm_campaign=affiliate&a_aid=frankel) falls short of being a reference book.
 

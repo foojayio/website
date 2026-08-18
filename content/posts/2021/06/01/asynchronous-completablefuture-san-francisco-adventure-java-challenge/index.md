@@ -27,8 +27,7 @@ Now that we had the intro about CompletableFuture, let's go to the Java Challeng
 
 It's time to improve your Java skills with this Completable Future San Francisco Adventure
 
-Completable Future San Francisco Adventure
-------------------------------------------
+## Completable Future San Francisco Adventure
 
 In the following code, we are using a `CompletableFuture` invoking the `completeAsync` and `thenAccept` methods to perform actions asynchronously.
 
@@ -69,7 +68,6 @@ public class CompletableFutureChallenge {
 }
 ```
 
-
 A) Rating: 14 time to go home 🙁  
 
 B) time to go home 🙁 Rating: 12  
@@ -89,7 +87,6 @@ Supplier sanFranSightSupplier = () ->
 List.of("Alcatraz", "Cable Car", "Golden Gate", "Lombard Street");
 ```
 
-
 Then the whole process will be made asynchronously. Basically what will happen in this piece of code is that the stream of String from sanFranSightSupplier will be transformed into the length of each String.
 
 ```java
@@ -100,7 +97,6 @@ return CompletableFuture.supplyAsync(() -> sights.stream()
 .collect(Collectors.toList()));
 })
 ```
-
 
 Then all Strings that are lower or equal to 12 will be dropped. In the end, the length of Lombard Street will remain on the list.
 
@@ -114,14 +110,11 @@ System.out.print("Rating: " + rating + " ");
 });
 ```
 
-
 Therefore, the right alternative will be... what do you think? 🙂
 
 If you want to watch the video explanation, check it out, but I recommend trying out the Java Challenge first:
 
 {{< youtube Oy3qWysr4rA >}}
-
-<br />
 
 To see the original post, check out the following Java Challengers link:
 

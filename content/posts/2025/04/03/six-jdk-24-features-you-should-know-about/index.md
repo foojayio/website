@@ -24,8 +24,7 @@ frozen: false
 
 JDK 24, which was released on March 18, 2025, has 24 JDK Enhancement Proposals (JEPs), the largest number of new features since the introduction of the time-based release schedule. While 10 of them are preview features, incubator modules, or experimental, that still leaves 14 new features.
 
-Six new features you want to know about
----------------------------------------
+## Six new features you want to know about
 
 A JDK enhancement doesn't always add something. As you will see, some actually remove functionality that is outdated or counterproductive. I've chosen six new features that are particularly relevant and interesting for developers and those deploying Java.
 
@@ -71,8 +70,7 @@ The final JEP of interest in this article is [JEP 501: Deprecate the 32-bit x86 
 
 JDK 24 continues moving the Java platform forward, delivering the features developers and users will find helpful. Expect more of the same in JDK 25 (the next long-term support release, September 2025) and beyond.
 
-Your choice of JDK matters
---------------------------
+## Your choice of JDK matters
 
 Azul provides Zulu Builds of OpenJDK, both in free community form and commercially supported through the [Platform Core](https://www.azul.com/products/core) product.
 

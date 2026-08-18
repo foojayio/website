@@ -25,8 +25,7 @@ It was not as straightforward as expected, so I want to share my findings.
 
 The example project is available on GitHub: <https://github.com/simasch/vaadin-appengine-demo>
 
-The Vaadin Application
-----------------------
+## The Vaadin Application
 
 First, I've created a new Vaadin application: <https://start.vaadin.com>
 
@@ -36,11 +35,9 @@ Then I did a production build:
 mvn package -Pproduction
 ```
 
-
 That will generate an executable JAR file in the target directory.
 
-First Deployment
-----------------
+## First Deployment
 
 Google AppEngine provides F2 instance type with enough memory for Spring Boot and Java 17 by default. There is no need to configure anything, and I can simply execute:
 
@@ -48,11 +45,9 @@ Google AppEngine provides F2 instance type with enough memory for Spring Boot an
 gcloud app deploy
 ```
 
-
 This work! But is there even a simpler way?
 
-Maven Plugin
-------------
+## Maven Plugin
 
 I could use a Maven plugin to deploy the application:
 
@@ -68,16 +63,13 @@ I could use a Maven plugin to deploy the application:
 </plugin>
 ```
 
-
 And now I just have to call:
 
 ```
 mvn package appengine:deploy -Pproduction
 ```
 
-
-Session State
--------------
+## Session State
 
 As you may know, Vaadin applications have server state and may also have push enabled that will use WebSockets.
 
@@ -90,7 +82,6 @@ network:
     session_affinity: true
 ```
 
-
 But what does session affinity mean? Let's check the documentation:
 
 ***session_affinity***
@@ -101,7 +92,6 @@ But what does session affinity mean? Let's check the documentation:
 
 *Note that enabling session affinity can affect your load balancing setup. This parameter is disabled by default.*
 
-Conclusion
-----------
+## Conclusion
 
 Deploying to Google App Engine is straight-forwarded using the Maven plugin, but you must analyze the log files and probably configure the Java version, the instance size, and session affinity.

@@ -34,8 +34,7 @@ YourKit Profiler
 
 We thought to use our [Continuous Feedback](https://digma.ai/how-it-works/ "Continuous Feedback") tool which is not a profiler in the classical sense but can assist in profiling efforts since it can analyze observability data. We thought that our Continuous Feedback tool could help us analyze the profiler results reach my conclusions faster and help me with what to look for in the profiler. So, I opened Digma along with the YourKit profiler to analyze the data of the profiler and come to conclusions.
 
-What is a Java profiler?
-------------------------
+## What is a Java profiler?
 
 A Java profiler is a tool for gauging and examining the performance of Java applications. It collects data on program execution, including the time taken by each function, memory usage, and frequency of function calls.
 
@@ -43,14 +42,12 @@ Java Profiling is beneficial for pinpointing performance bottlenecks in software
 
 Hence, a Java profiler is a tool that checks the Java bytecode constructs and operations at the JVM level. These programming structures and actions consist of creating objects, repeating processes (including calling functions recursively), executing methods, running threads, and performing garbage collections.
 
-Types of Java Profilers
------------------------
+## Types of Java Profilers
 
 * Sampling profilers: These profilers periodically take snapshots of the running program and analyze the call stack to identify hotspots.
 * Instrumentation profilers: These profilers modify the program's code to gather more detailed performance data.
 
-Usecase for Java Profilers
---------------------------
+## Usecase for Java Profilers
 
 Java Profiling tools can be used in three ways basically:
 
@@ -60,8 +57,7 @@ Memory management: Java profilers can assist in detecting memory leaks, where a 
 
 Testing: Java profilers can evaluate program performance across various scenarios, like varying input sizes or user counts. This can help recognize possible performance problems before the program is launched.
 
-How Do Java Profilers Work?
----------------------------
+## How Do Java Profilers Work?
 
 The JVM allows Java developers to attach an agent to a running JVM (Java Virtual Machine). When a developer attaches an agent to a JVM, the JVM will provide a class to the agent before loading it. The agent then transforms the class. The agent can make changes to the code of any class.
 
@@ -353,13 +349,8 @@ Other Solid Java Profilers
 
 Some notable mentions are Java Mission Control, New Relic, Glowroot, JMH, Arthas, XRebel/JRebel, JProbe, Pinpoint, and Stackify Prefix. While they hold a smaller portion of the market, they certainly merit recognition.
 
-Conclusion - 9 Best Java Profilers to Use in 2024
--------------------------------------------------
+## Conclusion - 9 Best Java Profilers to Use in 2024
 
 So, we found that combining YourKit, and Digma is best for the best optimization outcome: Grafana for visualizations of application logs, YourKit to profile applications for potential bottlenecks, and Digma to give seamless insights into potential problematic pieces of code.
 
 Download Digna Continuous Feedback: [Here](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "Here")
-
-<br />
-
-<br />

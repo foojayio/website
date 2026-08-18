@@ -33,8 +33,7 @@ In this second part, we'll **extend our application** to model relationships bet
 
 By the end of this tutorial, you'll see how [Hibernate and MongoDB](https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-extension-for-hibernate-orm-public-preview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-hibernate-data-modeling&utm_term=ricardo.mello) can work together to model richer, interconnected data, all while using the same familiar annotations and APIs from the ORM world.
 
-Prerequisites
--------------
+## Prerequisites
 
 Before continuing, make sure you have the project from the first article up and running.  
 
@@ -50,11 +49,9 @@ cd mongodb-hibernate-crud/
 git checkout v1.0
 ```
 
-
 Make sure your environment still meets the same requirements: Java 17+, Maven, and MongoDB 6.0+ (replica set enabled).
 
-One-to-many relationship
-------------------------
+## One-to-many relationship
 
 In the current version of our project, we have a single entity---**Book**---that represents the documents stored in the MongoDB books collection. Each book contains basic information like title and number of pages:
 
@@ -65,7 +62,6 @@ In the current version of our project, we have a single entity---**Book**---that
   "title": "Mastering MongoDB"
 }
 ```
-
 
 Now, we'll extend this model to make it more realistic. A book can have multiple reviews, and each review belongs to a specific book, forming a classic one-to-many relationship.
 
@@ -97,9 +93,6 @@ public class Review {
 }
 ```
 
-
-<br />
-
 This tells Hibernate that the class ***does not*** represent a separate collection but rather an embedded structure inside another entity.
 
 In the Book class, we can now add a list of reviews:
@@ -121,7 +114,6 @@ public class Book {
 }
 ```
 
-
 To add a review to a book, we can use a simple method that loads the Book by ID, appends the review to the list, and merges the updated document back into MongoDB. In the BookService:
 
 ```
@@ -142,7 +134,6 @@ public boolean addReview(ObjectId bookId, Review review) {
    }
 }
 ```
-
 
 Finally, in the MyApplication class, add a new menu option for inserting reviews:
 
@@ -189,7 +180,6 @@ case 6 -> {
 }
 ```
 
-
 When this code runs, Hibernate updates the document directly in the books collection. A Book document now looks like this:
 
 ```
@@ -213,7 +203,6 @@ When this code runs, Hibernate updates the document directly in the books collec
  ]
 }
 ```
-
 
 #### Evaluating the embedded model
 
@@ -253,7 +242,6 @@ public class Book {
  // getters and setters
 }
 ```
-
 
 Next, we'll turn Review into a **full entity** mapped to its own collection:
 
@@ -297,7 +285,6 @@ public class Review {
 }
 ```
 
-
 By annotating the class with @Entity and @Table("reviews"), Hibernate now treats it as a top-level document collection instead of an embedded structure. Each review references its book using the bookId field, similar to a foreign key, but in MongoDB terms, it's just an ObjectId stored inside the document.
 
 #### Updating the configuration
@@ -324,7 +311,6 @@ public final class HibernateUtil {
 }
 ```
 
-
 #### Adding a review service
 
 To handle review operations, we'll add a new service class:
@@ -348,7 +334,6 @@ public class ReviewService {
    }
 }
 ```
-
 
 #### Linking books and reviews
 
@@ -381,7 +366,6 @@ public BookWithReviews findAllBooksWithReviewsById(ObjectId id) {
 
 public record BookWithReviews(Book book, List<Review> reviews) {}
 ```
-
 
 #### Updating the console menu
 
@@ -443,7 +427,6 @@ case 7 -> {
 }
 ```
 
-
 Now, each time you insert a review, it's stored in a separate **reviews** collection while keeping a reference to the corresponding **bookId**. This approach eliminates the growth issue of embedded arrays and allows each collection to scale independently.
 
 Unlike the previous model, the Book document no longer contains a reviews list.  
@@ -462,7 +445,6 @@ Here's what the new structure looks like in MongoDB:
 }
 ```
 
-
 **reviews collection:**
 
 ```
@@ -475,7 +457,6 @@ Here's what the new structure looks like in MongoDB:
  "title": "An excellent book"
 }
 ```
-
 
 While this new structure solves the size and scalability issues of the embedded model, it also introduces a trade-off. Since Book and Review are now stored in separate collections, retrieving all reviews for a specific book requires two queries, one to load the book and another to fetch its reviews using the bookId.
 
@@ -506,7 +487,6 @@ In our case, we can apply the Subset Pattern by keeping only the **three most re
 }
 ```
 
-
 This way, whenever we load a book, we immediately get its latest feedback, without the need to query another collection or perform a join.
 
 At the same time, we'll still store **all reviews** in a separate reviews collection. That means if we ever need to display the complete review history for a book (for example, on a "See all reviews" page), we can simply query that collection directly.
@@ -521,7 +501,6 @@ At the same time, we'll still store **all reviews** in a separate reviews collec
  "title": "Practical and Insightful"
 }
 ```
-
 
 This approach offers a great balance:
 
@@ -551,7 +530,6 @@ public record RecentReview (
 {}
 ```
 
-
 #### Add the recentReview field to the Book class
 
 ```
@@ -564,7 +542,6 @@ public class Book {
    // getters and setters
 }
 ```
-
 
 #### Update the ReviewService
 
@@ -634,7 +611,6 @@ public class ReviewService {
    }
 ```
 
-
 Notice that we're using createNativeQuery() to execute a raw MongoDB command (MQL) directly through Hibernate.  
 
 This feature allows you to go beyond standard entity operations and run low-level MongoDB updates, inserts, or aggregates when you need full control.  
@@ -658,8 +634,7 @@ Each time you add a new review:
 
 After inserting a few reviews for the same book, you should see that only the three most recent entries remain in the recentReview array, confirming that the $slice: -3 operator is working as expected.
 
-Wrapping up
------------
+## Wrapping up
 
 Throughout this series, we explored three different strategies for modeling one-to-many relationships with Hibernate ORM and MongoDB. From embedding data directly inside documents to referencing separate collections and finally applying the Subset Pattern, we saw how flexible MongoDB can be when paired with a familiar ORM framework like Hibernate.
 

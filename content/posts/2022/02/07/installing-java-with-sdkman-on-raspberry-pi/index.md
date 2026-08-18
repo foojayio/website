@@ -31,8 +31,7 @@ A nice video with a [full demo of SDKMAN is available here on foojay.io](https:/
 
 SDKMAN can show you a list of available JDK-distributions based on the operating system and architecture. Until recently that didn't work on Raspberry Pi because that runs on ARM. But as this is an open-source project it is possible to request new features and help to achieve the solution. As you can see in [GitHub issue #836](https://github.com/sdkman/sdkman-cli/issues/836), this required some rework in different parts of the project. But we have a working version now!!!
 
-Try it out
-----------
+## Try it out
 
 If you want to dive in directly, grab yourself a Raspberry Pi, open a terminal and install ZIP and SDKMAN.
 
@@ -56,7 +55,6 @@ Available Java Versions for Linux ARM 32bit Hard Float
 ================================================================================
 ```
 
-
 Yep, that's right, even for the Raspberry Pi different distributions can be used! So let's try out Azul Zulu 11.
 
 ```
@@ -67,13 +65,11 @@ OpenJDK Runtime Environment Zulu11.52+13-CA (build 11.0.13+8-LTS)
 OpenJDK Client VM Zulu11.52+13-CA (build 11.0.13+8-LTS, mixed mode)
 ```
 
-
 Confirmed! Azul Zulu 11 installed with SDKMAN runs fine on a Raspberry Pi.
 
 Side note: although both Liberica and Zulu are listed for "Linux ARM 32bit Hard Float", **only Zulu works on ARMv6, e.g. the Raspberry Pi Zero 1**. At this point BellSoft has no plans to support this processor.
 
-About the processor architecture
---------------------------------
+## About the processor architecture
 
 As there are multiple Raspberry Pi versions since 2013 ([full history on Wikipedia](https://en.wikipedia.org/wiki/Raspberry_Pi#Specifications)), different ARM processor types were used. The ARMv6 only supports 32-bit, while ARMv7 is a 64-bit processor.
 
@@ -106,9 +102,7 @@ BogoMIPS:            108.00
 Flags:               half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm crc32
 ```
 
-
-64-bit Operating System
------------------------
+## 64-bit Operating System
 
 After a long time of trialing a beta version, on February 2th, Raspberry Pi officially announced a 64-bit version of their operating system. You can [read more about this release on the Raspberry Pi Blog](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/). And because this is a more used architecture, the output of SDKMAN is really impressive...
 
@@ -133,7 +127,6 @@ Available Java Versions for Linux ARM 64bit
                |     | 8.0.322      | zulu    |            | 8.0.322-zulu        
 ================================================================================
 ```
-
 
 So using the Temurin 17 version is as easy as `sdk install java 17.0.2-tem`:
 
@@ -161,9 +154,7 @@ OpenJDK Runtime Environment Temurin-17.0.2+8 (build 17.0.2+8)
 OpenJDK 64-Bit Server VM Temurin-17.0.2+8 (build 17.0.2+8, mixed mode, sharing)
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Java on Raspberry Pi has always been possible, but SDKMAN makes the getting-started process a lot easier.
 

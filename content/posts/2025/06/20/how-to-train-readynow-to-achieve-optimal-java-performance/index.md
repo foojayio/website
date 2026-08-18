@@ -25,8 +25,7 @@ frozen: false
 
 Using a profile log made from a single run is only a first step in Java warmup. ReadyNow learns from previous executions and incrementally improves the warmup time at every new invocation. By using several training runs, you can improve your application's performance even further. ReadyNow gathers data from training runs and stores it in a profile log, which ensures better performance after the first and subsequent runs.
 
-Understanding ReadyNow generations
-----------------------------------
+## Understanding ReadyNow generations
 
 When using ReadyNow, you get the best results if you perform several training runs of your application to generate an optimal profile. You must do this for each new application build to ensure the profile log aligns with the modified or extended code.
 
@@ -42,17 +41,14 @@ You want to ensure that each training run's output meets the minimum criteria to
 
 You can define these criteria based on the known properties of the expected application run to see if the collected ReadyNow profile is representative enough. You can use basic statistics like profile log duration, file size, the number of recorded compilations, the number of recorded classes, etc. If those numbers closely match the application run statistics, you can conclude that the profile is probably mature enough. For example, If your application gets restarted every 24 hours and loads 50k classes, you also want the same number of classes loaded in your ReadyNow profile.
 >
-> **TIP** When using [the ReadyNow Orchestrator feature of Optimizer Hub](https://docs.azul.com/optimizer-hub/connecting/readynow-orchestrator-generations#basic-profile-recording-with-default-generations), the creation of a promoted profile is handled automatically. This will be explained in the next blog post in this series.
-> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+> ## **TIP** When using [the ReadyNow Orchestrator feature of Optimizer Hub](https://docs.azul.com/optimizer-hub/connecting/readynow-orchestrator-generations#basic-profile-recording-with-default-generations), the creation of a promoted profile is handled automatically. This will be explained in the next blog post in this series.
 >
-Possible approaches
--------------------
+## Possible approaches
 
 Different approaches to training the ReadyNow profile can apply depending on your goals and constraints.
 >
 > **TIP**
-> To reach an optimal profile, each run needs a minimum of 10,000 executions of all critical application methods.
-> ---------------------------------------------------------------------------------------------------------------
+> ## To reach an optimal profile, each run needs a minimum of 10,000 executions of all critical application methods.
 >
 ### Optimal approach (pre-production)
 
@@ -68,7 +64,6 @@ Train the profile across two separate runs in the pre-production environment. Pe
 -XX:ProfileLogIn=first-run.log -XX:ProfileLogOut=profile.log
 ```
 
-
 The resulting profile log (`profile.log`) is the one you need to use in your production system.
 
 ### Basic approach (pre-production)
@@ -78,7 +73,6 @@ If the time for training ReadyNow is limited, perform one run of your applicatio
 ```
 -XX:ProfileLogOut=profile.log
 ```
-
 
 This will capture a very good profile but may feature a possible odd outlier on the first day of the production run. But this will improve with subsequent runs.
 
@@ -90,18 +84,15 @@ If you cannot create a profile in a pre-production environment, allow it to lear
 -XX:ProfileLogIn=profile.log -XX:ProfileLogOut=profile.log
 ```
 
-
 This results in a poor warm-up for the first run in production but gets better performance on subsequent runs as it reuses the same file as input.
 
-Understanding if training was enough
-------------------------------------
+## Understanding if training was enough
 
 Check for outliers to validate the sufficiency of ReadyNow training. The absence of outliers denotes that the training went well. Reduced start-up latency also proves that enough training data is gathered in a profile log. Otherwise, more runs are needed to enhance the profile content and get a fully optimized profile log.
 
 In one of the following posts in this series, we will examine examples of profile logs and garbage collector logs to identify common problems and configuration mistakes that can impact your application's performance or the warm-up duration with and/or without ReadyNow.
 
-Conclusion
-----------
+## Conclusion
 
 Using multiple training runs, better profile logs can be generated, leading to better performance for your Java application. Even when no training run can be executed, storing the compiler decisions in a profile log from the first run in production will improve performance in any subsequent run.
 

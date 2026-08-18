@@ -153,13 +153,9 @@ public class HelloResource {
 }
 ```
 
-
-
-
 {{< youtube i576hpXrglQ >}}
 
-Alternative approach with a Shift Register
-------------------------------------------
+## Alternative approach with a Shift Register
 
 The setup used in the example of Igor has the main advantage that you only need a Raspberry Pi and a LED number display. But it uses a lot of the GPIO pins of the Raspberry Pi which could be a problem in a project where you need other input and output components.
 
@@ -178,11 +174,8 @@ To solve this problem, a [shift register SN74HC595 IC](https://www.ti.com/lit/ds
  </ul>
 </figure>
 
-Conclusion
-----------
+## Conclusion
 
 Once again, the Raspberry Pi proves to be a real workhorse which can run Java and Quarkus to bring business-power applications to inexpensive but powerfull hardware.
-
-
 
 **Note:** Used with permission and thanks --- originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/).

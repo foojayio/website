@@ -43,8 +43,7 @@ Intelligence Cloud is designed to help engineering managers effectively deal wit
 
 And now, in an exciting new development, Intelligence Cloud works for any JVM from any Java vendor. Whether you're using a JDK distribution from Azul, Microsoft, Red Hat, IBM, Oracle, Eclipse Temurin, or any other Java provider, Intelligence Cloud works for you.
 
-Eliminate CVE false positives with Vulnerability Detection
-----------------------------------------------------------
+## Eliminate CVE false positives with Vulnerability Detection
 
 [Azul Vulnerability Detection](https://www.azul.com/products/vulnerability-detection/) is a cloud service that eliminates false positives by accurately identifying and prioritizing known vulnerabilities in Java applications in production. Unlike other tools, it has no performance penalty.
 
@@ -54,8 +53,7 @@ And unlike security scanners that report vulnerabilities on all code, including 
 
 Vulnerability Detection helps teams prioritize and de-prioritize CVEs based on whether the component loaded in production. Intelligence Cloud now goes beyond this to address the question of unused code -- do I need this code at all?
 
-Find unused code with Code Inventory
-------------------------------------
+## Find unused code with Code Inventory
 
 [Code Inventory](https://www.azul.com/products/components/code-inventory/) identifies code that exists in a company's servers but doesn't run. It's a clutter finder. It's the only solution that accurately identifies unused and dead code for removal by precisely detailing what custom and third-party code is running.
 
@@ -87,8 +85,7 @@ The longest amount of code may deal with annual reporting modules, where teams s
 
 In general, though, the benefit is from teams passively building up the list of "what's still used" to identify "what's not used anymore" without impacting standard feature work and schedules.
 
-Try a pilot of Azul Intelligence Cloud Today
---------------------------------------------
+## Try a pilot of Azul Intelligence Cloud Today
 
 Intelligence Cloud works with any JVM from any vendor or distribution including Azul, Oracle, Amazon, Microsoft, RedHat, and Temurin to dramatically slash time from unimportant tasks across an enterprise's entire Java estate.
 
@@ -96,7 +93,3 @@ It frees up developers for more important business initiatives and improves DevO
 
 Try Intelligence Cloud, including Vulnerability Detection and Code Inventory, and see if it's right for your business.  
 [![](image-4-1024x242.png)](https://www.azul.com/products/intelligence-cloud/)
-
-<br />
-
-<br />

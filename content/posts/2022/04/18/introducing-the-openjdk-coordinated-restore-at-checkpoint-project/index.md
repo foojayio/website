@@ -31,10 +31,6 @@ And this requires time, meaning to say that you cannot simply run your code and 
 
 That is because it simply takes time to warm up the JVM before your application will be able to run optimally.
 
-<br />
-
-<br />
-
 ### Modern Applications
 
 If you have a long-running application, the warm up time, which may be within the range of seconds to minutes, is usually no problem.
@@ -85,8 +81,6 @@ The results look more than promising:
 
 <img decoding="async" class="alignnone size-medium" src="https://i.ibb.co/pLg3WCb/Time-To-First-Operation.png" width="1680" height="1042">
 
-<br />
-
 As you can see, the startup times can be reduced dramatically by using the Coordinated Restore at Checkpoint proposal with the benefit of still having a JVM running with all its abilities to further optimise the running code.
 
 In addition, you also keep all the debugging features for continuous optimization of the code.
@@ -124,7 +118,6 @@ public class Main implements Resource {
 
 }
 ```
-
 
 To be able to check whether everything works as expected, the current implementation will throw exceptions when you have open resources, such as open sockets.
 

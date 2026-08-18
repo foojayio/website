@@ -29,8 +29,7 @@ A wrapper script can do a lot. Setting flags, launching a `-javaagent`, mounting
 
 Most operational requirements live well outside that boundary, and that's fine. Most requirements never need the JVM's interior. The interesting problems start when one does.
 
-Policy, mechanism, and a caveat
--------------------------------
+## Policy, mechanism, and a caveat
 
 OS research named this separation fifty years ago (the HYDRA paper). Policy names an intent; mechanism implements it. The JVM exposes mechanisms individually. e.g., -XX:+HeapDumpOnOutOfMemoryError is a mechanism. The JVM has long exposed first-class flags for some intents - like compilation (`-server`, tiered compilation) and memory. What it does not expose is a policy that says "When this process dies, it should leave enough evidence to diagnose why".
 
@@ -47,8 +46,7 @@ The argument can be stated more formally:
 
 Take an example where a requirement actually falls outside B - the PCI DSS Requirement 3.5.1, which says PAN (Primary Account Number) must be unreadable anywhere it is stored. However, a heap dump of a payment service writes live card numbers to disk in cleartext. A critic is right that you can deal with this from outside the VM by disabling heap dumps, or encrypting the volume. But look at what each one costs you. By disabling dumps you've thrown away the forensic evidence that was the whole reason for running this way, and volume encryption protects the disk while the dump still travels cleartext from memory to the writer inside the trust boundary. Redacting the dump *as the stream is written*, inside the VM, kills the dilemma instead of trading one risk for another. That's a dump-writer problem in HotSpot. You can't implement that behaviour purely by composing existing JVM flags.
 
-The flag
---------
+## The flag
 
 The whole argument comes down to one flag, which activates a policy group:
 
@@ -56,13 +54,11 @@ The whole argument comes down to one flag, which activates a policy group:
 java -XX:EliyaProfile=Production -jar app.jar
 ```
 
-
 That flag ships in [Eliya](https://asymm.systems/product/eliya) - an OpenJDK 25 LTS distribution from Asymm Systems, first GA earlier this month, built for compliance-conscious production in regulated industries: telecom, banking and financial services, healthcare, government. `EliyaProfile` is the policy point the thesis calls for: a `ccstr` enum. `Production` - the general set of production-readiness defaults - is the value that ships today (Phase 1); further values are reserved, some on the roadmap, the rest demand-gated.
 
 Quick word on the name. Eliya is short for Nuwara Eliya, the highland tea country of Sri Lanka, a few hours from where I'm writing this. The Sinhala word means *light*. Java took its name from an Indonesian island that grows coffee. Ours comes from highlands that grow tea.
 
-The Production profile
-----------------------
+## The Production profile
 
 The `Production` profile ergonomic defaults:
 
@@ -88,8 +84,7 @@ In the old access-control sense - same flag, two authority models. Naturally, ma
 
 Everything else is upstream OpenJDK 25 unchanged. `java.security` is bit-identical to upstream - TLS 1.0 / 1.1 disabled, weak ciphers blocked, and current minimum key-size requirements are already in place. GC selection is left to JDK 25's ergonomics. Outside the profile, Eliya remains intentionally close to upstream, and EliyaProfile=None preserves upstream behaviour.
 
-The 3 AM story
---------------
+## The 3 AM story
 
 None of the theory above is how anyone experiences the problem. Here's the version everyone recognises.
 
@@ -99,8 +94,7 @@ Everybody knows these flags. Most have negligible runtime cost. Yet production s
 
 If you're not in the audience that needs this - you're building an internal tool, or your team has already done the flag work - a neutral upstream build is the right answer, and there are several good ones.
 
-Where things stand, and what comes next
----------------------------------------
+## Where things stand, and what comes next
 
 Phase 1, shipped this month: one opt-in flag; Linux x86_64 and aarch64; `.tar.gz` / `.deb` / `.rpm` / multi-arch GHCR Docker; signed and reproducible; quarterly upstream-CPU refreshes within two weeks of each upstream CPU, through the JDK 25 LTS window (September 2029); GPLv2 with Classpath Exception; corresponding source attached to each release. No JDK 21 build, deliberately. JDK 29 LTS arrives at its GA with a 24-month overlap before Eliya 25 sunsets.
 
@@ -113,8 +107,7 @@ We're going to build the rest of this in public, on Foojay, one piece at a time 
 * **Signing and key hygiene** - the easy 80% (the signature) and the hard 20% (everything around the key).
 * **The structured diagnostic path** - the one genuine source patch in Phase 1, and why `${service}/${replica}` resolution belongs in the VM rather than a wrapper.
 
-Verify it yourself
-------------------
+## Verify it yourself
 
 Let's run Eliya and see:
 
@@ -139,7 +132,6 @@ sha256sum -c SHA256SUMS.txt --ignore-missing
 # Expected: "Good signature from "Eliya Releases (Asymm Systems) <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a3aaafbfa786a7b5bfababe8b5bfb5b2a3abb5">[email protected]</a>>"" + "OK" on the tarball checksum.
 ```
 
-
 The full multi-channel verification ceremony is documented at [verify download](https://asymm.systems/product/eliya/user-guide/verify-download) page.
 
 For Docker users the equivalent is pinning by digest:
@@ -151,7 +143,6 @@ docker buildx imagetools inspect ghcr.io/asymmsystems/eliya-jdk:25.0.3
 docker pull ghcr.io/asymmsystems/eliya-jdk@sha256:<digest>
 ```
 
-
 ### 2. Read the build identity
 
 ```bash
@@ -159,7 +150,6 @@ docker pull ghcr.io/asymmsystems/eliya-jdk@sha256:<digest>
 tar xzf eliya-jdk-25.0.3-linux-x64.tar.gz
 ./eliya-jdk-25.0.3/bin/java -version
 ```
-
 
 ### 3. Confirm the profile activated
 
@@ -172,10 +162,7 @@ tar xzf eliya-jdk-25.0.3-linux-x64.tar.gz
 # Re-run with -XX:EliyaProfile=None and see the difference.
 ```
 
-
 Pinning Eliya in CI is the next step after verifying the bytes. Learn about the four pinning patterns in the [Eliya Versioning](https://asymm.systems/product/eliya/user-guide/versioning) guide.
-
-
 
 References:
 

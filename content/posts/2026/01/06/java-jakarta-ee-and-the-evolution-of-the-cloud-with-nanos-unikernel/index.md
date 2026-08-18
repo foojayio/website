@@ -35,8 +35,6 @@ VMs vs. Containers vs. Unikernels
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://nanos.org/static/img/vms-vs-unikernels.png" width="600" height="379">
 
-<br />
-
 The Key Point: Cloud hypervisors already have everything you need...
 
 When you use a cloud provider, you are already relying on an advanced hypervisor that provides:

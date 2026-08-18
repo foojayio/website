@@ -21,8 +21,7 @@ frozen: false
 
 [This issue](https://github.com/redhat-developer/vscode-java/issues/618 "This issue") was reported more than three years ago and it has been there since 2018 . This blog post shares our journey of solving this problem and the final solution.
 
-A Long-Awaited Change
----------------------
+## A Long-Awaited Change
 
 With more features introduced into Java extension on Visual Studio Code, the number of our users is also steadily increasing. However, due to the problem that the Java extension generates metadata files in the project directory when importing the project, we have received a lot of frustration from the users. As the user base increases, this problem will also likely to cause negative impact for more users.
 
@@ -36,13 +35,11 @@ The official project name of the Java language service used behind the VS Code J
 
 Considering that changing the behavior of upstream modules may introduce many uncertainties, in the past we tried to provide users with some workarounds, such as hiding these metadata files in the file browser of VS Code , and guiding users to add them to .gitignore . But based from user feedback, these methods did not satisfy users. In order to completely solve this issue that has been bothering users for more than three years, we decided to take another attempt in 2021 and see if we can find a "cure".
 
-Option 1: Use Symbolic Link (Unsuccessful)
-------------------------------------------
+## Option 1: Use Symbolic Link (Unsuccessful)
 
 The first method we thought of was to use Symbolic Link . When importing a project, you can link the imported project to a place invisible to the user through Symbolic Link , so that the metadata file is generated under the linked path. But soon this solution ran into problems - creating Symbolic Link under certain operating systems requires specific permissions, otherwise FileSystemException will be thrown, which is obviously not the effect we want, so this solution was immediately abandoned.
 
-Option 2: Use Eclipse Linked Resources (Unsuccessful)
------------------------------------------------------
+## Option 2: Use Eclipse Linked Resources (Unsuccessful)
 
 And Symbolic Link ideas Similarly, we can also choose to use the Eclipse Linked Resources :
 
@@ -52,8 +49,7 @@ This is the official definition of Linked Resources. It can be used as part of t
 
 ![](mechanism.jpg)
 
-Principles of Unmanaged Folder Implementation
----------------------------------------------
+## Principles of Unmanaged Folder Implementation
 
 You can see that the actual path of the project is placed in the Language Server workspace storage, the user usually does not know this path and in the .project file we define the target path of Linked Resources , which is the folder opened by the user in VS Code Location, as a part of the project, it will participate in the construction process like other projects, and its development experience is similar.
 
@@ -68,8 +64,7 @@ The final experimental results are feasible, but the shortcomings of this approa
 
 Taking those factors into account, the team decided to temporarily abandon the Eclipse Linked Resources approach after discussion and continued to find a better solution.
 
-Discovering the "Silver Bullet"
--------------------------------
+## Discovering the "Silver Bullet"
 
 There is another reason for abandoning the second approach: Twenty years since Eclipse was released, while ensuring stable operation, it shows ability to continuously add new features and provide excellent extension capabilities, which indicates an excellent architecture in terms of design and scalability. Intuitively, we believe there must be a more elegant solution.
 
@@ -83,8 +78,7 @@ The bottom layer of Eclipse associates these nodes with files in the file system
 
 This feature brings a very important idea for the solution of the problem: as long as the input and output streams of the metadata file can be redirected to a location outside the project directory, the problem may be solved. With this assumption, we found another key clue: File System Provider.
 
-Solution: File System Provider
-------------------------------
+## Solution: File System Provider
 
 File System Provider is an extension point open to the Eclipse platform. It allows developers to implement an Eclipse file system interface (org.eclipse.core.filesystem.IFileSystem) and register it to the extension point to handle file request with specific URI scheme.
 
@@ -95,8 +89,7 @@ So we started from the extension point of File System Provider, inherited and ov
 
 Of course, this solution is not perfect, because it requires other modules to read and write metadata files through the API provided by Eclipse. We found an upstream change during implementation that Buildship directly uses I/O API in JDK to process metadata files, and we submitted a Pull Request to migrate those operations to Eclipse API.
 
-Summary
--------
+## Summary
 
 After weighing the pros and cons, we finally chose the third approach and solved this problem that has been bothering VS Code Java users for more than three years. Although the final implementation is not complicated, the process of searching for a solution is intriguing and rewarding.
 
@@ -104,8 +97,7 @@ We want to thank jdneo who was the main contributor to the solution of this prob
 
 We believe there is still a lot to improve for VS Code Java. Our goal is to provide the best possible Java development experience on VS Code, so we will continue to tackle challenges as they come.
 
-Feedback and Suggestions
-------------------------
+## Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future. There are several ways to leave us feedback
 

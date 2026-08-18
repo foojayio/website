@@ -28,8 +28,7 @@ In addition, we make some improvements for users to search for subscriptions and
 
 We hope these features could improve your user experience. So let us get started.
 
-Azure Toolkit for IntelliJ Improvements
----------------------------------------
+## Azure Toolkit for IntelliJ Improvements
 
 ### AKS Management Support
 

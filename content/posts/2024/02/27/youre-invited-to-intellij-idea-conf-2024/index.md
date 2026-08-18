@@ -33,8 +33,7 @@ You'll also learn more about IntelliJ IDEA performance enhancements, JetBrains A
 
 [Conference Details and Registration](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf "Conference Details and Registration")
 
-Agenda
-------
+## Agenda
 
 IntelliJ IDEA Conf 2024 will be held across two days, March 6--7, with 14 sessions in total. The conference has a single track on both days. Each day, we'll host seven one-hour sessions, including the Q\&A.
 
@@ -62,8 +61,7 @@ Here's a brief overview of the sessions which will be live streamed on the secon
 
 Please check out the [detailed agenda](https://lp.jetbrains.com/intellij-idea-conf-2024/?utm_source=partners&utm_medium=foojay&utm_campaign=intellijideaconf#agenda "detailed agenda") for speaker and session details.
 
-Community partnership
----------------------
+## Community partnership
 
 This conference covers a wide range of topics. As a user group (UG) leader, if you think the sessions at this conference will benefit your members, we invite you to become an IntelliJ IDEA Conf community partner and share the event details with your group members. The registration process is simple and only requires submitting a few details about your UG and one of its leaders.
 
@@ -71,8 +69,7 @@ Click [here](https://lp.jetbrains.com/intellij-idea-conf-2024-partners/?utm_sour
 
 After your registration form is processed, you will be listed as one of our community outreach partners and your UG logo will be displayed on our event page. Community partners will also receive free JetBrains IDE licenses.
 
-Why should you care about yet another virtual (live) conference?
-----------------------------------------------------------------
+## Why should you care about yet another virtual (live) conference?
 
 Given that in-person conferences have come back in force, this question is inevitable. In this case, there is no "best format" -- it depends entirely on your situation.
 
@@ -80,15 +77,13 @@ Accessibility and convenience are some of the most significant benefits of a vir
 
 This convenience comes at the cost of being unable to interact with other attendees, speakers, or others as you would at an in-person conference. However, attending an in-person conference requires you to travel to the venue and perhaps take time off work. This might not be feasible for many developers around the world, irrespective of how compelling the conference agenda is.
 
-Who is this event for?
-----------------------
+## Who is this event for?
 
 This is a developer-focused event.
 
 IntelliJ IDEA Conf 2024 includes sessions on languages and frameworks like Java, Kotlin, AI, Apache Maven 4, Spring Boot, Micronaut, Testcontainers, Secure Coding, and testing frameworks like JUnit, Mockito, and AssertJ. You'll also learn more about IntelliJ IDEA performance improvements, JetBrains AI Assistant, IntelliJ IDEA's database support, and tips and tricks to make you more productive.
 
-Attending sessions -- logistics
--------------------------------
+## Attending sessions -- logistics
 
 The first step is to register for the event!
 
@@ -98,13 +93,11 @@ None of the sessions at this conference are prerecorded. Sessions will be presen
 
 All of the sessions will be recorded and made available for you to watch again or catch up on after the event. Don't forget to subscribe to [IntelliJ IDEA's YouTube channel](https://www.youtube.com/intellijidea "IntelliJ IDEA’s YouTube channel") to view them.
 
-Hashtags
---------
+## Hashtags
 
 Don't miss the chance to hang out with us on social media! We'll use the hashtag #IntelliJIDEAConf on X (formerly Twitter), Facebook, and LinkedIn throughout the event.
 
-A special thanks to our speakers
---------------------------------
+## A special thanks to our speakers
 
 This celebration wouldn't be possible without the fantastic presenters and speakers who consistently strive to assist developers throughout their learning journey. At JetBrains, we are very appreciative to all of the speakers who graciously accepted our invitation to participate in this conference.
 

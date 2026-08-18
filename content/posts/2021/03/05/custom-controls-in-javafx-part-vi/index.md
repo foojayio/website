@@ -140,7 +140,6 @@ So here is the code for our ImageParticle:
 }
 ```
 
-
 As you can see it's not really complex. The most complex thing we have to do when creating this control is to convert the top hightlight of the button from our vector drawing code to Java code.
 
 Here is a workflow that I use to transfer a path from a drawing program into code. Let's take the following triangle as an example, here is the drawing:
@@ -156,7 +155,6 @@ It's just a simple triangle, 200px wide and 150px tall. Now I export this path t
     <path d="M100,0L200,150L0,150L100,0Z" style="fill:#bd003d;"/>
 </svg>
 ```
-
 
 The shape is defined in the element. Now I cope the string into a spreadsheet program like Excel or Numbers where I split the path string by comma and put each command in a separate line.  
 
@@ -195,7 +193,6 @@ ctx.setFill(Color.web("#BD003D"));
 ctx.fill();
 ```
 
-
 So with this code you can now draw our triangle dependent on the width and the height. Keep in mind that we did not take care about the aspect ratio here.
 
 Using this procedure to convert the top hightlight of our button will give us the following code:
@@ -210,7 +207,6 @@ ctx.beginPath();
          ctx.lineTo(width * 0.825886194029851, height * 0.0588235294117647);
          ctx.closePath();
 ```
-
 
 Now you might understand why I said this is the most complex thing we need to do when creating this control.
 
@@ -249,7 +245,6 @@ With the following line of code we can set this rectangle as a clip for the Canv
 Java canvas.setClip(clip);
 ```
 
-
 Now we only have to make sure that the clipping rectangle always has the exact same shape as the rounded rectangle that represents our button. To achieve this we resize the clip shape every time the control will be resized.
 
 With such a clipping shape in place it would like like this:
@@ -270,7 +265,6 @@ public void setOnAction(final Consumer<ActionEvent> actionConsumer)   {
 }
 ```
 
-
 ```
 
 ```
@@ -285,7 +279,6 @@ canvas.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
     actionConsumer.accept(new ActionEvent());
 });
 ```
-
 
 ```
 

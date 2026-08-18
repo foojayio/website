@@ -34,12 +34,9 @@ See video version of this post [here:](https://youtu.be/1KFlbecOmc0)
 
 {{< youtube 1KFlbecOmc0 >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-**Instant Debugging with the** `debugger` Keyword
--------------------------------------------------
+## **Instant Debugging with the** `debugger` Keyword
 
 A cool yet powerful tool in JavaScript is the `debugger` keyword. Instead of simply printing a stack trace, we can use this keyword to launch the debugger directly at the line of interest. That is a fantastic tool that instantly brings your attention to a bug, I often use it in my debug builds of the front-end instead of just printing an error log.
 
@@ -47,8 +44,7 @@ A cool yet powerful tool in JavaScript is the `debugger` keyword. Instead of sim
 
 Notice that while this is incredibly useful during development, we must remember to remove or conditionally exclude `debugger` statements in production environments. A release build should not include these calls in a production site live environment.
 
-**Triggering Debugging from the Console**
------------------------------------------
+## **Triggering Debugging from the Console**
 
 Modern browsers allow you to invoke debugging directly from the console, adding an additional layer of flexibility to your debugging process.
 
@@ -62,11 +58,9 @@ debug(hello)
 hello("Shai")
 ```
 
-
 This is particularly useful when you want to start debugging without modifying the source code, or when you need to inspect a function that's only defined in the global scope.
 
-**DOM Breakpoints: Monitoring DOM Changes**
--------------------------------------------
+## **DOM Breakpoints: Monitoring DOM Changes**
 
 DOM breakpoints are an advanced feature in Chrome and Firebug (Firefox plugin) that allow you to pause execution when a specific part of the DOM is altered.
 
@@ -78,8 +72,7 @@ DOM breakpoints are extremely powerful for tracking down issues where DOM manipu
 
 These breakpoints complement traditional line and conditional breakpoints, providing a more granular approach to debugging complex front-end issues. This is a great tool to use when the DOM is manipulated by an external dependency.
 
-**XHR Breakpoints: Uncovering Hidden Network Calls**
-----------------------------------------------------
+## **XHR Breakpoints: Uncovering Hidden Network Calls**
 
 Understanding who initiates specific network requests can be challenging, especially in large applications with multiple sources contributing to a request. XHR (`XMLHttpRequest`) breakpoints provide a solution to this problem.
 
@@ -91,8 +84,7 @@ This tool is invaluable when dealing with dynamically generated URIs or complex 
 
 Notice that you should be selective with the filters you set; leaving the filter blank will cause the breakpoint to trigger on all XHR requests, which can become overwhelming.
 
-**Simulating Environments for Debugging**
------------------------------------------
+## **Simulating Environments for Debugging**
 
 Sometimes, the issues you need to debug are specific to certain environments, such as mobile devices or different geographical locations. Chrome and Firefox offer several simulation tools to help you replicate these conditions on your desktop.
 
@@ -102,8 +94,7 @@ Sometimes, the issues you need to debug are specific to certain environments, su
 
 These are things that are normally very difficult to reproduce. E.g. touch related issues are often challenging to debug on the device. By simulating them on the desktop browser we can shorten the debug cycle and use the tooling available on the desktop.
 
-**Debugging Layout and Style Issues**
--------------------------------------
+## **Debugging Layout and Style Issues**
 
 CSS and HTML bugs can be particularly tricky, often requiring a detailed examination of how elements are rendered and styled.
 

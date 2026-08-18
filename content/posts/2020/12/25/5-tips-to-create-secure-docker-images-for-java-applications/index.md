@@ -27,8 +27,6 @@ When creating a Docker image, we make this image based on some image we pull fro
 Let's look at a popular set of Docker Java base images from Adoptopenjdk, [openjdk11](https://hub.docker.com/r/adoptopenjdk/openjdk11/). Using their default tag, this image is built on top of an ubuntu distribution. However, we can also choose tags for specific versions that are, for instance, based on Debian, Centos, or Alpine (note, alpine is not glibc based, and may not be compatible with applications that make native JNI calls).
 ![](adoptopenjdk-graph.png)
 
-<br />
-
 We can conclude that choosing the right base image is critical from a security perspective. You probably do not need all the binaries that come with a full operating system. Building your new Docker Java image for your application is preferable based on a minimal base image. Binaries that you do not have cannot harm you.
 
 Next to the security aspect, a minimal base image will reduce your newly created image's size. A smaller Docker image also means a smaller footprint and, most likely, a faster startup time.

@@ -26,8 +26,7 @@ frozen: false
 
 Enter [Hilla](https://hilla.dev/ "Hilla"), a framework that aims to simplify this landscape. If Hilla hasn't crossed your radar yet, this article will provide an overview of what it offers and how it can potentially streamline your development process when working with Spring Boot and React.
 
-Spring Boot, React, and Hilla
------------------------------
+## Spring Boot, React, and Hilla
 
 For full-stack developers, the combination of Java on the backend and React (with TypeScript) on the frontend offers a compelling blend of reliability and dynamism. Java, renowned for its robust type system, ensures data behaves predictably, catching potential errors at compile-time. Meanwhile, TypeScript brings a similar layer of type safety to the JavaScript world, enhancing React's capabilities and ensuring components handle data as expected.
 
@@ -37,15 +36,13 @@ However, while both Java and TypeScript offer individual type-safe havens, there
 2. Direct Communication Between React and Spring Services
 3. Consistent Data Validation and Type Safety
 
-End-To-End Type Safety
-----------------------
+## End-To-End Type Safety
 
 Hilla takes type safety a step further by ensuring it spans the entire development spectrum. Developers spend less time perusing API documentation and more time coding. With automatically generated TypeScript services and data types, [Hilla](https://hilla.dev/ "Hilla") allows developers to explore APIs directly within their IDE. This seamless integration means that if any code is altered, whether on the frontend or backend, any inconsistencies will trigger a compile-time error, ensuring that issues are caught early and rectified.
 
 ![](auto-complete-700x215.jpg)
 
-Direct Communication Between React and Spring Services
-------------------------------------------------------
+## Direct Communication Between React and Spring Services
 
 With [Hilla](https://hilla.dev/ "Hilla"), the cumbersome process of managing endpoints or deciphering complex queries becomes a thing of the past. Developers can directly call Spring Boot services from their React client, receiving precisely what's needed. This is achieved by making a Spring `@Service` available to the browser using Hilla's `@BrowserCallable` annotation. This direct communication streamlines data exchange, ensuring that the frontend gets exactly what it expects without any unnecessary overhead.
 
@@ -60,7 +57,6 @@ public class CustomerService {
     }
 }
 ```
-
 
 Based on this annotation, Hilla auto-generates TypeScript types and clients that enable calling the Java backend in a type-checkable way from the frontend (no need to declare any REST endpoints):
 
@@ -79,8 +75,7 @@ Based on this annotation, Hilla auto-generates TypeScript types and clients that
 }`
 ```
 
-Consistent Data Validation and Type Safety
-------------------------------------------
+## Consistent Data Validation and Type Safety
 
 One of the standout features of Hilla is its ability to maintain data validation consistency across the stack. By defining data validation rules once on the backend, Hilla auto-generates TypeScript validations for the frontend. This not only enhances developer productivity but also ensures that data remains consistent, regardless of where it's being processed.
 
@@ -101,7 +96,6 @@ public class Customer {
 }
 ```
 
-
 The Hilla `useForm` hook uses the generated TypeScript model to apply the validation rules to the form fields.
 
 ```
@@ -121,9 +115,7 @@ function CustomerForm() {
 }
 ```
 
-
-Batteries and Guardrails Included
----------------------------------
+## Batteries and Guardrails Included
 
 Hilla streamlines full-stack development by offering pre-built tools, enhancing real-time capabilities, prioritizing security, and ensuring long-term adaptability.
 
@@ -131,8 +123,7 @@ The framework provides a set of pre-built UI components designed specifically fo
 
 Hilla's design approach not only streamlines the current development process but also future-proofs your app. It ensures that all components integrate seamlessly, making updates, especially transitioning from one version to another, straightforward and hassle-free.
 
-In Conclusion
--------------
+## In Conclusion
 
 Navigating the complexities of full-stack development in Spring Boot and React can be complex. This article highlighted how Hilla can alleviate many of these challenges. From ensuring seamless type safety to simplifying real-time integrations and bolstering security, Hilla stands out as a comprehensive solution. Its forward-thinking design ensures that as the tech landscape evolves, your applications remain adaptable and updates remain straightforward.
 

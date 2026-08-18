@@ -74,7 +74,6 @@ To keep the download as small as possible, the project ships with a "core" that 
 </dependency>
 ```
 
-
 The camel-core dependency is the core camel project. The camel-endpointdsl gives you a nice, typesafe DSL for crafting your Camel routes. Then camel-cdi is a CDI integration (which doesn't fully work at the moment however).
 
 With those in place, let's take a look at a first, "hello world" example . This example reads files and moves files from one folder into the other. Though reading and writing files on the Java Platform has improved significantly over the last few years, using the file component of Apache Camel makes it even better. The following FileRoute.java class shows a simple read and move file operation.
@@ -97,7 +96,6 @@ public class FileRoute extends EndpointRouteBuilder {
 
 }
 ```
-
 
 The above class is a Camel Route that reads a file, does some processing on the read content, and then sends it to another place. This is a summary of how Camel works. This route processes a org.apache.camel.Message, wrapped in a org.apache.camel.Exchange. A lot of your Camel use will revolve around taking messages from one place, optionally doing something with the message, and then transferring the result to another place.
 
@@ -135,7 +133,6 @@ public class CamelBootstrap {
 
 }
 ```
-
 
 CamelBootstrap is a singleton EJB that starts on application boot. Within it, we inject a org.apache.camel.cdi.CdiCamelContext instance, on which we call the addRoutes method in a post construct listener of the class. We then start the context. The class also listens for the pre destroy event and within it, stops the context. With this class in place, we have a fully functional Apache Camel application.
 

@@ -24,7 +24,6 @@ ObjectInputStream in = new ObjectInputStream( inputStream );
 return (Data)in.readObject();
 ```
 
-
 There's no way to know what you're deserializing before you decoded it. Possibly, an attacker serialized a malicious object and sent it to your application. Once you call `readObject()`, the malicious objects have already been instantiated. You might believe that these kinds of attacks are impossible because you need to have a vulnerable class on you classpath. However, if you consider the amount of classes on your classpath---that includes your own code, Java libraries, third-party libraries and frameworks---it is very likely that there is a vulnerable class available.
 
 Java serialization is also called "the gift that keeps on giving" because of the many problems it has produced over the years. Oracle is planning to eventually remove Java serialization as part of Project Amber. However, this may take a while, and it's unlikely to be fixed in previous versions. Therefore, it is wise to avoid Java serialization as much as possible. If you need to implement `serializable` on your domain entities, it is best to implement its own `readObject()`, as seen below. This prevents deserialization.
@@ -35,7 +34,6 @@ private final void readObject(ObjectInputStream in) throws java.io.IOException {
 }
 ```
 
-
 If you need to Deserialize an inputstream yourself, you should use an `ObjectsInputStream` with restrictions. A nice example of this is the `ValidatingObjectInputStream` from Apache Commons IO. This `ObjectInputStream` checks whether the object that is deserialized, is allowed or not.
 
 ```java
@@ -45,7 +43,6 @@ in.accept(Foo.class);
 
 Foo foo_ = (Foo) in.readObject();
 ```
-
 
 Object deserialization problems are not restricted to Java serialization. Deserialization from JSON to Java Object can contain similar problems. An example of such a deserialization issue with the Jackson library is in the blog post ["Jackson Deserialization Vulnerability"](https://snyk.io/blog/jackson-deserialization-vulnerability/).
 

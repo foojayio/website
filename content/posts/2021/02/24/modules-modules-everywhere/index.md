@@ -39,7 +39,6 @@ Scanning 72598 files in bucket...
       2,900 unique modules
 ```
 
-
 * Over 2 (out of 5) million distinct lines were read from **72,598** CSV files downloaded from the S3 bucket. Somebody should reduce the 3 million lines overhead sometime.
 * **204,617** JAR file artifacts were analyzed, with
   * the vast majority of **189,650** JAR files were plain old JAR files,
@@ -90,7 +89,6 @@ String computeMavenGroupAlias(String group) {
   };
 }
 ```
-
 
 ...which also permits Maven Group identifiers to contain `-` characters, hence matching `org.foo-bar` to module names starting with `org.foobar`.
 

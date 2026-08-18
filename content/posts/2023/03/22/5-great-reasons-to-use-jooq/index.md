@@ -26,8 +26,7 @@ frozen: false
 
 Before discussing those reasons:
 
-What is jOOQ
-------------
+## What is jOOQ
 
 jOOQ is an internal [domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language "domain-specific language ") (DSL) modelling the SQL language as an API directly in Java.
 
@@ -43,7 +42,6 @@ ORDER BY author.first_name, author.last_name
 LIMIT 10
 ```
 
-
 ...then your equivalent jOOQ query looks like this:
 
 ```java
@@ -55,11 +53,9 @@ ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .fetch();
 ```
 
-
 So, there's (almost always) a 1:1 equivalence between SQL syntax and the jOOQ API, irrespective of whether you're coding in Java, Kotlin, or Scala.
 
-Great, so why should I use it?
-------------------------------
+## Great, so why should I use it?
 
 It has always been easy to write SQL in Java with JDBC.
 
@@ -87,7 +83,6 @@ AUTHOR.LAST_NAME.eq("Shakespeare")
 AUTHOR.LAST_NAME.eq(1)
 ```
 
-
 SQL is a type-safe language itself. When you write a view or procedure in your database, the database's compiler will type-check those objects, as well. But this luxury goes away as soon as Java developers write their SQL in String form using JDBC or other libraries that work with SQL strings.
 
 And not just SQL queries are affected. [jOOQ's code generator also generates stubs for your stored procedures](https://blog.jooq.org/the-best-way-to-call-stored-procedures-from-java-with-jooq/ "jOOQ's code generator also generates stubs for your stored procedures"). If you have a procedure like this:
@@ -110,7 +105,6 @@ BEGIN
 END my_proc;
 ```
 
-
 You can call it conveniently like this:
 
 ```java
@@ -121,7 +115,6 @@ System.out.println("o1 = " + result.getO1());
 System.out.println("o2 = " + result.getO2());
 System.out.println("io2 = " + result.getIo2());
 ```
-
 
 Using code generation and the type-safe API, it feels as if the database is a part of your Java application, which helps speed up development, just as much as it helps prevent errors as your Java code stops compiling as soon as you modify objects in your database.
 > **Note** you don't have to use the DSL API to get access to many of the remaining benefits. For example, jOOQ also has a [parser](https://www.jooq.org/doc/latest/manual/sql-building/sql-parser/ "parser") that can work as a JDBC proxy, e.g. to [lint](https://www.jooq.org/doc/latest/manual/sql-execution/diagnostics/ "lint") or [translate](https://www.jooq.org/translate/ "translate") SQL between dialects, or otherwise [transform your SQL](https://www.jooq.org/doc/latest/manual/sql-building/queryparts/sql-transformation/ "transform your SQL").
@@ -137,7 +130,6 @@ record Book (int id, String title) {}
 record Name (String firstName, String lastName) {}
 record Author (int id, Name name, List<Book> books) {}
 ```
-
 
 With jOOQ, you can easily map any level of nested data structures to your Java representation directly in the query, in a type-safe way, like so:
 
@@ -156,7 +148,6 @@ ctx.select(
    .orderBy(AUTHOR.ID)
    .fetch(mapping(Author::new))
 ```
-
 
 That's it! The above example uses a few features:
 
@@ -198,7 +189,6 @@ locate('e', 'hello')
 locate('hello', 'e')
 ```
 
-
 This goes much further when more complex SQL features are involved, such as the `LIMIT` or `FETCH` clause, which may have to be emulated using filters on `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()` or `PERCENT_RANK()` window functions, depending on the specific clause usage. Or, if you want to use SQL/JSON, which is an [ISO/IEC TR 19075:6 standard](https://www.iso.org/standard/78937.html "ISO/IEC TR 19075:6 standard"), yet [hardly anyone implements the standard](https://blog.jooq.org/standard-sql-json-the-sobering-parts/ "hardly anyone implements the standard"). But with jOOQ, you get access to the standard syntax (via Java APIs), and jOOQ handles the translation to the relevant SQL dialect.
 
 Even if you're not supporting multiple RDBMS, this approach will save you having to look up every single function's specifics, plus it works around all the little caveats of the dialect. You wouldn't believe how many there are! (Some examples about dialects not implementing the standard can be found in the above article).
@@ -217,7 +207,6 @@ ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .fetch();
 ```
 
-
 But you're really building an expression tree behind the scenes that can be constructed dynamically. For example, what if the `WHERE` clause should be dynamic?
 
 You can extract it into a local variable, and conditionally append to it:
@@ -235,7 +224,6 @@ ctx.select(AUTHOR.FIRST_NAME, AUTHOR.LAST_NAME)
    .limit(10)
    .fetch();
 ```
-
 
 jOOQ doesn't know or care how you constructed your query. But it will still type-check and prevent SQL injection, etc. (The value `"Shakespeare"` is automatically turned into a bind value.)
 
@@ -262,8 +250,7 @@ Since your schema is "eternal," your application code should have a derived vers
 
 If that's how you think as well, then you'll find jOOQ very productive. If that's not how you think, then you can still use jOOQ for dynamic SQL, SQL transformations, and many other things---jOOQ won't judge.
 
-Conclusion
-----------
+## Conclusion
 
 jOOQ makes SQL a "first-class" language in the JVM ecosystem by embedding it into Java, Kotlin, and Scala in an idiomatic way, increasing developer productivity in various ways.
 

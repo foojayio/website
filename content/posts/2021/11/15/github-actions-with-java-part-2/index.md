@@ -24,8 +24,7 @@ frozen: false
  <img fetchpriority="high" decoding="async" src="distro-choice.jpg" alt="Distro Choice 337" width="308" height="465">
 </figure>
 
-Introduction
-------------
+## Introduction
 
 Have you ever been given too many choices resulting in the feeling of indifference ("not a big deal, doesn't really matter either way")? However, when given **two** choices, somehow you feel torn or become more critical of one versus the other.
 
@@ -41,8 +40,7 @@ In **Part 1** , we used the GitHub Action `setup-java@v1` that defaults to Azul'
 
 In this article (Part 2) we will be creating a workflow from GitHub's Actions market place (a template Yaml file with defaults).
 
-Getting Started
----------------
+## Getting Started
 
 Assuming you've cloned [HelloWorldGHActions](https://github.com/carldea/HelloWorldGHActions) project or have an existing project we are going to create a GitHub workflow using the generated (suggested) Action `setup-java@v2` from the marketplace.
 
@@ -95,7 +93,6 @@ jobs:
       run: mvn -B package --file pom.xml
 ```
 
-
 1. Added is a matrix for the `java-version` attribute containing an array of fixed JDK versions, Latest LTS JDK versions, and an non-LTS JDK version (Early access release).
 
 2. Use variable substitution `${{ matrix.java-version }}` for steps in the job.
@@ -117,8 +114,7 @@ Next, click on the `Create a workflow using a JDK distribution` workflow to see 
 
 Now that you know how to use GitHub Action `setup-java@v2` to choose a particular OpenJDK build distribution let's talk a little about what's available and the differences between them.
 
-What's the difference?
-----------------------
+## What's the difference?
 
 Before we discuss the differences between `zulu` and `temurin` I want to mention changes regarding the `adopt` **AdoptOpenJDK** build distribution (specified as the default value for **distribution:** attribute). For many who are new to GitHub actions may not know the announcements made earlier in the year (Sept. 2021).
 
@@ -174,8 +170,7 @@ I'm often of the opinion when it comes to CI/CD is the mindset of **set it and f
 
 Well, there you have it! A way to pick your OpenJDK build distribution for your CI/CD pipeline on GitHub.
 
-Conclusion
-----------
+## Conclusion
 
 When picking a particular build distribution with the current version of **GitHub Actions** `setup-java@v2` you really only have two build distributions to choose from: `zulu` or `temurin`.
 

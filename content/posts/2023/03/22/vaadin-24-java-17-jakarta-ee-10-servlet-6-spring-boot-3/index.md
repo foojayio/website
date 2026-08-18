@@ -25,8 +25,7 @@ This ensures you can continue building Vaadin Flow apps with the latest Java tec
 
 It also provides several exciting improvements that help you build Java applications even faster. Let me introduce some of them.
 
-Faster build times
-------------------
+## Faster build times
 
 You can now experience significantly improved build and start-up times during development.
 
@@ -36,8 +35,7 @@ This means that there's no longer a requirement to install tools like Node.js, n
 
 [Read more](https://vaadin.com/docs/latest/configuration/development-mode/#pre-compiled-front-end-bundle-for-faster-start-up "Read more") how to configure your development build.
 
-Simplified component styling - using CSS
-----------------------------------------
+## Simplified component styling - using CSS
 
 We've added full support for ::part() selector for a simpler and more flexible approach to styling UI components. All of your CSS can be regular, non-Shadow-DOM CSS.
 
@@ -47,8 +45,7 @@ We've added full support for ::part() selector for a simpler and more flexible a
 
 Check [this post by Rolf Smeds](https://vaadin.com/blog/simplified-theming-in-vaadin-24 "this post by Rolf Smeds") explaining the details.
 
-Convert Polymer templates to Lit
---------------------------------
+## Convert Polymer templates to Lit
 
 Following our quest for continuously simplifying the client-side, Polymer support has been deprecated since Vaadin 18, November 2020, in favor of faster and much simpler Lit templates.
 
@@ -56,8 +53,7 @@ To keep you along, we created a conversion tool to assist you in converting your
 
 Check the [migration documentation](https://vaadin.com/docs/latest/upgrading#polymer-templates "migration documentation") for details.
 
-Click to find your code from the UI
------------------------------------
+## Click to find your code from the UI
 
 The handy new component locator in DevTools lets you click on any UI component directly in your application UI and instantly jump to the relevant code within your IDE.
 

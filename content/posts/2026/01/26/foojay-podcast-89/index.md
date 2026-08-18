@@ -20,13 +20,11 @@ frozen: false
 
 For this episode of the Foojay Podcast, we invited the author of three recent posts published on Foojay. And he brought a colleague to get even more expert knowledge in this podcast! We talk about Quarkus, how it is "cloud-native", how it compares to other frameworks, the advantages for developers and managers, etc. We also discussed nano businesses and how they can serve as a model for paying creators of digital content, thanks to x402 and ERC-8004.
 
-YouTube
--------
+## YouTube
 
 {{< youtube _nJCTTrnZkE >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -34,8 +32,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Michal Maléř
 
@@ -53,8 +50,7 @@ Senior Principal Software Engineer ⭐ Making Developer Joy Happen
 * <https://hollycummins.com/>
 * <https://noti.st/holly-cummins>
 
-Links
------
+## Links
 
 * Foojay posts:
   * [Quarkus: A Runtime and Framework for Cloud-Native Java](https://foojay.io/today/quarkus-a-runtime-and-framework-for-cloud-native-java/)
@@ -67,8 +63,7 @@ Links
 * [Commonhaus Foundation](https://www.commonhaus.org/)
 * [A fun trick for getting discovered by LLMs and AI tools](https://cassidoo.co/post/ai-llm-discoverability/)
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests  
 

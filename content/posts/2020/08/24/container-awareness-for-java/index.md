@@ -35,7 +35,6 @@ docker run -ti --rm --cpus=1 --memory=256M openjdk:8u141-jre \
   java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
 ```
 
-
 Because version `8u141` is not container-aware, it will output the `MaxHeapSize` (in bytes) that is calculated from the host machine and can be significantly higher than the 256MB of memory you originally assigned. This means your Java process may allocate heap aggressively and go beyond the original limit, causing the container instance to be killed, usually result in a `OOMKilled`message.
 
 Run the same command, but with a newer version of JDK:
@@ -44,7 +43,6 @@ Run the same command, but with a newer version of JDK:
 docker run -ti --rm --cpus=1 --memory=256M openjdk:8u252-jre \
    java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
 ```
-
 
 The output of `MaxHeapSize` is now `132120576` bytes, which is \~126MB, indicating that it's now respecting the 256MB limitation we assigned for the container.
 
@@ -74,7 +72,6 @@ docker run -ti --rm openjdk:8u252-jre \
   -version
 ```
 
-
 Native Memory Tracking can only print out memory usage details upon a **successful** exit.
 
 ```
@@ -83,7 +80,6 @@ java -XX:+UnlockDiagnosticVMOptions \
   -XX:+PrintNMTStatistics \
   -jar ...
 ```
-
 
 f your application was `OOMKilled`, then it's an unsuccessful exit, so the memory details may not be printed. In this case, consider first increase the amount of memory allocation, and then trigger a successful exit, to get the native memory usage details.
 
@@ -96,7 +92,6 @@ docker run -ti --rm --cpus=2 openjdk:8u141-jre java \
   -XX:+PrintFlagsFinal -XX:+UseParallelGC -version | grep ParallelGCThreads
 ```
 
-
 It will output the `ParallelGCThreads` that is calculated from the number of CPUs of the host machine and can be significantly higher than `2`.
 
 Run the same command, but with a newer version of JDK:
@@ -105,7 +100,6 @@ Run the same command, but with a newer version of JDK:
 docker run -ti --rm --cpus=2 --memory=256M openjdk:8u252-jre java \
   -XX:+PrintFlagsFinal -XX:+UseParallelGC -version | grep ParallelGCThreads
 ```
-
 
 The output of `ParallelGCThreads` is `2`.
 
@@ -120,7 +114,6 @@ Runtime.getRuntime().maxMemory()
 // Number of processors
 Runtime.getRuntime().availableProcessors()
 ```
-
 
 This is important because some libraries and applications may use `availableProcessors` to determine the size of the thread pools. So, if you allocated only `2` CPUs, but the JVM inaccurately sees `32` CPUs from the host, then the libraries may over-allocate the thread pool size, and causing your application to run more than the underlying system allows.
 

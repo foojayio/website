@@ -29,8 +29,7 @@ Note that this doesn't apply to developer observervability which is a special ca
 
 I wrote before about the scourge of over logging. The same applies to observability metrics, as we collect more and more data the costs for retention and processing quickly outweigh the benefits of observability. We end up with a bigger problem altogether. We need to pick our battles, log the "right amount" and monitor the "right amount". No more and no less than we need. For that we need to understand the risks that we're dealing with and try to maximize overlap in our investigation.
 
-Chaos Engineering as Inspiration
---------------------------------
+## Chaos Engineering as Inspiration
 
 In the tradition of Chaos Engineering we would organize a "game" orchestrated by the "master of disaster" to practice disaster readiness. This is a wonderful exercise and a great way to build that "muscle". It isn't the right fit for an observability architecture since observability deals with nuance as opposed to "fire".
 
@@ -42,8 +41,7 @@ Will we miss some things?
 
 Obviously. That's part of the process. We will need to iterate and tune this. It will probably require a reduction of volume for some expensive data points to keep the costs reasonable. We will undoubtedly run into issues that aren't covered by observability (or whose observability coverage isn't obvious). In both cases we will need some help.
 
-Do We Need Experts?
--------------------
+## Do We Need Experts?
 
 Some observability fans assume that we no longer need domain experience to debug a problem. Given a properly observable system we should be able to understand the problem without knowing anything about the system.
 
@@ -51,8 +49,7 @@ While I agree that an expert in debugging can probably solve a problem faster. P
 
 But debugging requires some familiarity with the system that we're trying to understand. It's like diagnosing through Google. We might occasionally find the cause better than our GP but probably no better than an expert. Obviously there are exceptions to the rule, but in my experience. Experience matters for any type of debugging.
 
-A Dashboard of Our Own
-----------------------
+## A Dashboard of Our Own
 
 One thing I see often is a universal "one size fits all" dashboard in a company. Grafana is a fantastic tool with remarkable flexibility, yet some expose its visualizations as a single company dashboard. There should be at least three dashboards for the application:
 
@@ -64,15 +61,13 @@ There's a lot of overlap there. But we need custom dashboards. The whole idea of
 
 When I open a new tab in my browser, I see Grafana. This should be the home page for every team member. The "healthy" view of our system should be etched into our mind so we can instantly notice small deviations in the environment and act accordingly.
 
-Growing with Observability
---------------------------
+## Growing with Observability
 
 As our system grows we need to include observability and metrics in the pull request that introduces a feature. Nothing can launch without observability on day one. It should be etched into the code review process and should be on-par with test coverage requirements.
 
 Unlike test coverage, we have no metric we can rely on to verify that observability is sufficient to the rapidly evolving needs so at this time this is a heavy load on the shoulders of the reviewers. But there's an even bigger load: cost. As we grow these changes can affect cost which can suddenly spike to bankruptcy inducing heights. Cost isn't always easy to monitor, but it's a gauge we should look at on a daily basis. By keeping track of that metric and catching spikes in cost early on. We can keep our systems stable and manageable without giving up cost effectiveness.
 
-Finally
--------
+## Finally
 
 Some engineers have an over infatuation with metrics. I'm **not** one of them. Some things can't be measured. The value of personal relationships. The value of a team. A community. Because of this obsession, observability is gaining in popularity. That's good and bad. With this obsession, we sometimes over log and observe which results in poor performance and cost overruns.
 

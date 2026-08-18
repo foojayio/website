@@ -110,7 +110,6 @@ Let's start by creating Spring Boot 2.X application using the [Spring Initializr
 </project>
 ```
 
-
 Now let's create a simple controller with a `/message` endpoint.
 
 The controller method should a return a message while accessing, we have annotated with `@RequestMapping(value="/message", method = RequestMethod.`*GET*`)` annotation, it should change to the simplified version i.e., `@GetMapping("/message")` and we intentionally declared static string code badly so that recipes will identify and migrate it.
@@ -134,15 +133,11 @@ public class SampleController {
 }
 ```
 
-
-<br />
-
 To rectify our coding errors and execute the Spring Boot upgrade, it is imperative to configure OpenRewrite to utilize the `CommonStaticAnalysis`, `JavaApiBestPractices` and `UpgradeSpringBoot_3_0` recipes in tandem.
 
 These recipes comprise numerous smaller refactoring recipes. The complete inventory of recipes encompassed within `CommonStaticAnalysis` can be accessed [here](https://docs.openrewrite.org/recipes/staticanalysis/commonstaticanalysis), `JavaApiBestPractices` can be found [here](https://docs.openrewrite.org/recipes/staticanalysis/javaapibestpractices), while the list for the `UpgradeSpringBoot_3_0`\` recipe can be found [here](https://docs.openrewrite.org/recipes/java/spring/boot3/upgradespringboot_3_0).
 
-Add the OpenRewrite Maven Plugin
---------------------------------
+## Add the OpenRewrite Maven Plugin
 
 Below is the configuration of OpenRewrite Maven Plugin for the Spring Boot Project
 
@@ -173,7 +168,6 @@ Below is the configuration of OpenRewrite Maven Plugin for the Spring Boot Proje
     </dependencies>
 </plugin>
 ```
-
 
 As mentioned in the previous blog post, as precautionary, we must always execute the `mvn rewrite:dryRun` command and OpenRewrite will generate patch file under `target/rewrite/rewrite.patch`. In this patch file, we can review the changes.
 
@@ -272,7 +266,6 @@ index 68f3220..482e848 100644
      }
 ```
 
-
 For the Maven **pom.xml**, you can observe the following changes and In the diff file itself, OpenRewrite also creates comments for each recipe that was used to modify the file
 
 * OpenRewrite changed JDK version to 17
@@ -290,7 +283,6 @@ OpenRewrite fixed many coding problems in our code, making it easier to switch t
 
 You can find the sample spring boot project [here](https://github.com/bsmahi/migrate-spring-boot-demo)
 
-References
-----------
+## References
 
 * OpenRewrite Documentation -<https://docs.openrewrite.org/>

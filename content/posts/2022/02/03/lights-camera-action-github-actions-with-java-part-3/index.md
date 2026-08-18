@@ -21,13 +21,9 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 ![Spiderman chooses GitHub Action's Disco API](Spidey_GitHub_Action_disco_latest.jpg)
 
 The Java GitHub Action that Rules them all - Disco API{#caption-attachment-51347}
-
-<br />
 
 When we ended Part 2 of this blog series Lights, Camera, Action: GitHub Actions with Java [Part 2](https://foojay.io/today/github-actions-with-java-part-2 "Part 2"), I talked about the near future of GitHub Actions. Well, today the future is now, so let's get into this!
 
@@ -49,11 +45,9 @@ steps:
     uses: actions/setup-java@v2
 ```
 
-
 Here you'll notice the actions/setup-java@v2 is the same uses value, but will now support 2 additional vendor build distributions microsoft and liberica.
 
-Specify a Supported JDK Distribution
-------------------------------------
+## Specify a Supported JDK Distribution
 
 To specify the build distribution you simply add it to the `distribution` attribute as shown below:
 
@@ -62,7 +56,6 @@ with:
   java-version: ${{ matrix.java-version }} 
   distribution: 'liberica'
 ```
-
 
 Of course you can create a matrix to specify all the available distributions like the example below:
 
@@ -84,7 +77,6 @@ build:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 ```
-
 
 Above you'll notice the workflow will build and test the repo for JDK 17 on Linux with `zulu`, `microsoft`, and `liberica` distributions.
 
@@ -117,9 +109,7 @@ steps:
     uses: foojayio/setup-java@disco
 ```
 
-
-Specify any JDK Distribution
-----------------------------
+## Specify any JDK Distribution
 
 Now that this job uses the new `foojayio/setup-java@disco` you can now specify any JDK distribution as you wish! Let's look at ways we can specify distributions in yml.
 
@@ -132,7 +122,6 @@ with:
   java-version: ${{ matrix.java-version }} 
   distribution: 'zulu_prime'
 ```
-
 
 Of course you can create a matrix to specify all the available distributions like the example below:
 
@@ -154,7 +143,6 @@ disco-build:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 ```
-
 
 Above you'll notice the workflow will build and test the repo for JDK 17 on Linux with 'zulu', 'zulu_prime', 'liberica', 'microsoft', 'corretto', 'openlogic', 'semeru', 'sap_machine', and 'dragonwell' distributions.
 

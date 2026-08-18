@@ -20,7 +20,6 @@ frozen: false
 ---
 
 ![](tornado-insight.webp)  
-<br />
 
 **TornadoInsight is an open-source IntelliJ IDEA plugin for enhancing the developer experience when working with TornadoVM.**
 
@@ -33,14 +32,7 @@ Additionally, TornadoInsight introduces a dynamic testing framework that enables
 
 TornadoInsight has been implemented by Tianyu Zuo for his master thesis at the University of Manchester and is available in the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/23309-tornadoinsight/) by the University of Manchester. The source code is available in [GitHub](https://github.com/beehive-lab/tornado-insight).
 
-<br />
-
-<br />
-
-
-
-Key Features:
--------------
+## Key Features:
 
 1. On-the-Fly Static Checker
 ----------------------------
@@ -81,10 +73,7 @@ Then, it invokes the TornadoVM runtime on the developer's machine to run the gen
 If it is not compatible, it will output an exception stack trace. In addition, the elapsed time for running the checks is displayed in the bottom right corner.
 ![](TornadoInsight_unsuccessful_compilation-1024x645.webp)
 
-
-
-How to use TornadoInsight?
---------------------------
+## How to use TornadoInsight?
 
 1. Installation
 ---------------
@@ -129,7 +118,6 @@ In **macOS Catalina** and **later,** there may be the need to remove the quarant
 ```
 $ sudo xattr -r -d com.apple.quarantine path/to/jdk
 ```
-
 
 ### 4. Utilization of the TornadoInsight On-the-Fly Static Checker
 

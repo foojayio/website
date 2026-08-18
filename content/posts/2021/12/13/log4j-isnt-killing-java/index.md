@@ -24,8 +24,7 @@ There are [many good write-ups](https://www.infoq.com/news/2021/12/log4j-zero-da
 
 Here we will cover the Java ecosystem to describe what logging frameworks are, where/why they are used, and how teams can observe and control what their JVMs are doing.
 
-What Security Efforts Should Java Developers Do
------------------------------------------------
+## What Security Efforts Should Java Developers Do
 
 Patching the JDK and libraries quickly is the most effective technique to avoid most mass exploitation.
 
@@ -77,7 +76,6 @@ jobs:
       run: java -version
 ```
 
-
 ### Regularly Detect Custom Security Flaws (Recommended in Test)
 
 Automated security tools can catch security flaws without manual security expertise. By adding an integrated agent into a Java application, you can get passive detection in your application that records security information. Unlike tools that look at dependency numbers to determine if vulnerabilities are present, these track the same dependency information byt integrated analyzers can tell you about the resulting combination of these libraries and if they're used securely together.
@@ -98,8 +96,7 @@ In addition, a free analyzer like [Contrast Community Edition](https://www.contr
 
 By monitoring Java application events with JDK Flight Recorder and streaming events into a Security Information and Event Management (SIEM) system, Java teams can monitor for anomalous behavior and/or pair known-safe classes with the [Java deserialization filters](https://openjdk.java.net/jeps/415) that prevent exploitation.
 
-What Security Efforts Yield Little Benefit
-------------------------------------------
+## What Security Efforts Yield Little Benefit
 
 In the case of log4j2 exploitation, network based defenses like Web Application Firewalls (WAFs) and similar tools may accomplish something in the short term, but generally their effectiveness is low and the amount of effort is extremely high.
 
@@ -123,8 +120,7 @@ Setting these to false will block remote loading.
 
 A dynamic patch is available that will [connect to a running JVM and patch it](https://github.com/corretto/hotpatch-for-apache-log4j2). This patch must be applied each time the JVM is started. This is decent for a couple uses but it is easier to update the library than to automate this patch.
 
-How is Java Logging Handled
----------------------------
+## How is Java Logging Handled
 
 Java developers typically choose from several logging systems or facades. Many of these logging frameworks have grown to work together over the years as communities have grown, merged, and mingled:
 

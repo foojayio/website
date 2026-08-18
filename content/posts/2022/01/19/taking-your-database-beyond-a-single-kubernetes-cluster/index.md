@@ -28,8 +28,6 @@ frozen: false
 
 By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/){#31db}
 
-<br />
-
 Global applications need a data layer that is as distributed as the users they serve. [Apache Cassandra](https://cassandra.apache.org/_/index.html) has risen to this challenge, handling data needs for the likes of Apple, Netflix and Sony. Traditionally, managing data layers for a distributed application was handled with dedicated teams to manage the deployment and operations of thousands of nodes --- both on-premises and in the cloud.
 
 To alleviate much of the load felt by DevOps teams, we evolved a number of these practices and patterns in [K8ssandra](https://k8ssandra.io/), leveraging the common control plane afforded by [Kubernetes](https://kubernetes.io/) (K8s) There has been a catch though --- running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front.{#4670}

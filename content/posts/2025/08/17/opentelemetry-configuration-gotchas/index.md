@@ -22,8 +22,7 @@ frozen: false
 
 Last week, I described [several approaches to OpenTelemetry on the JVM](https://blog.frankel.ch/opentelemetry-tracing-jvm/), their requirements, and their different results. This week, I want to highlight several gotchas found across stacks in the zero-code instrumentation.
 
-The promise of OpenTelemetry
-----------------------------
+## The promise of OpenTelemetry
 
 Since its inception, OpenTelemetry has unified the 3 pillars of observability. In the distributed tracing space, it replaced proprietary protocols Zipkin and Jaeger. IMHO, it achieved such success for several reasons:
 
@@ -41,7 +40,6 @@ environment:
   OTEL_SERVICE_NAME: foobar                                      #2
 ```
 
-
 1. Configure the endpoint to send data to
 2. Set the component's name
 
@@ -51,8 +49,7 @@ On the OpenTelemetry side, different developers contribute to different language
 
 It naturally creates differences in the different implementations.
 
-Gotchas
--------
+## Gotchas
 
 Here are a couple of gotchas I found out, but the list is not exhaustive.
 
@@ -82,7 +79,6 @@ environment:
   OTEL_SERVICE_NAME: foobar
 ```
 
-
 1. Enable logs
 
 Developers also must be involved:
@@ -90,8 +86,7 @@ Developers also must be involved:
 >
 > -- [Logs Auto-Instrumentation Example](https://opentelemetry.io/docs/zero-code/python/logs-example/)
 
-Micrometer Tracing
-------------------
+## Micrometer Tracing
 
 Before OpenTelemetry, Jaeger and Zipkin reigned supreme in the distributed tracing area. In the great Spring tradition, the project created Spring Cloud Sleuth to offer a facade over Zipkin. Over time, it evolved to be compatible with OpenTracing, one of OpenTelemetry's parents, along with OpenCensus.
 
@@ -105,13 +100,11 @@ environment:
   OTEL_SERVICE_NAME: foobar                                      #3
 ```
 
-
 1. Non-OpenTelemetry environment variable name
 2. **MUST** set the full path
 3. Conform to the OpenTelemetry spec since [Spring Boot 3.5](https://github.com/spring-projects/spring-boot/pull/44394). Before it, it used [spring.application.name](https://docs.spring.io/spring-boot/appendix/application-properties/index.html#application-properties.core.spring.application.name)
 
-Quarkus
--------
+## Quarkus
 
 Compare with [Quarkus](https://quarkus.io/guides/opentelemetry), which prefixes regular OpenTelemetry environment variables with `QUARKUS_`:
 
@@ -120,7 +113,6 @@ environment:
   QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://jaeger:4317
   QUARKUS_OTEL_SERVICE_NAME: foobar
 ```
-
 
 It's consistent. And yet, the Quarkus instrumentation has another gotcha:
 > Only the **tracing** signal is enabled by default. To enable **metrics** and **logs**, add the following configuration to your application.properties file:
@@ -135,9 +127,7 @@ environment:
   OTEL_LOGS_EXPORTER: none
 ```
 
-
-Summary
--------
+## Summary
 
 OpenTelemetry has become a *de facto* standard in a few years. However, the promise of ubiquitous configuration, if there was ever such a thing, doesn't hold. Operators of OpenTelemetry can't treat services as black boxes. They must consider the underlying stack and framework, and learn how to configure them accordingly.
 
@@ -147,7 +137,5 @@ On the JVM, I'd recommend to stick to the Java Agent as much as possible, but if
 
 * [Maven - Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 * [Effective Rust - Item 25: Manage your dependency graph](https://effective-rust.com/dep-graph.html)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-gotchas/) on August 10^th^, 2025*

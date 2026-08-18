@@ -29,10 +29,7 @@ Below is the last video in the series:
 
 {{< youtube ImOmu4GHOls >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the ninth part of debugging at scale where we really know the quality of your code. Remote debugging doesn't always deal with a remote machine, we often need it when debugging into Kubernetes or Docker.
 
@@ -88,7 +85,6 @@ Imagine placing a breakpoint where the user password is passed to authentication
 
 I discuss some of the solutions for those problems both in the low level tooling and in higher level observability solutions. This is covered in the book and in the full course.
 
-Final Word
-----------
+## Final Word
 
 With this we finished the first part of the course. If you want to check out the full course go to debugagent.com to learn more... The next video covers the strategies for debugging and the science of debugging. If you have any questions please use the comments section. Thank you!

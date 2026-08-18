@@ -30,12 +30,9 @@ Let's dive in and discover how Manifold's property support stands out.
 
 {{< youtube z-9jSMq_Yk8 >}}
 
-<br />
-
 As always, you can find the code examples and additional resources for this post on my [GitHub page](https://github.com/shai-almog/java-book/).
 
-Comparing Manifold and Lombok
------------------------------
+## Comparing Manifold and Lombok
 
 Manifold and Lombok are very different projects but they do overlap in a few areas. Properties are where the overlap is greatest and the philosophical differences between the two shine out the most.
 
@@ -65,8 +62,7 @@ While it may still face growing pains and limited IDE support, Manifold's flexib
 
 It leverages the strengths of Java's type system while providing unique features.
 
-Property Support
-----------------
+## Property Support
 
 Manifold's property support is based on a concept that has been discussed for decades in the Java community. However, reaching a consensus on the direction proved challenging so a JEP never took hold.
 
@@ -103,7 +99,6 @@ public class HelloPojo {
 }
 ```
 
-
 We can write the same code using Lombok as such:
 
 ```
@@ -115,13 +110,11 @@ public class HelloLombok {
 }
 ```
 
-
 The usage is identical:
 
 ```
 obj.setNumber(5);
 ```
-
 
 This is problematic. You will notice we define the fields as private, yet suddenly a `setNumber()` method appears out of thin air. It feels weird. I get the logic though.
 
@@ -135,7 +128,6 @@ public class HelloProperties {
     @var String str;
 }
 ```
-
 
 One notable distinction is that Manifold's properties are defined at the individual field level, rather than applying to an entire class. Although Manifold may introduce a similar feature to Lombok's Data annotation in the future, it does not currently exist. We need to explicitly define each property.
 
@@ -158,9 +150,7 @@ pojo.number = 5;
 var time = Calendar.instance.timeInMillis;
 ```
 
-
-Customizing Manifold Properties
--------------------------------
+## Customizing Manifold Properties
 
 Similar to Lombok, Manifold offers customization options for individual properties. By using `val`, a read-only property with only a getter can be defined, behaving similarly to a final field. Conversely, `set` defines a write-only property. Additionally, scoping preferences can be passed as arguments, influencing the generated methods' visibility.
 
@@ -172,7 +162,6 @@ public class HelloScoping {
     final @set String str;
 }
 ```
-
 
 Which we can use as such:
 
@@ -188,9 +177,7 @@ scoping.number = 4;
 System.out.println(scoping.str);
 ```
 
-
-Encapsulation and Method Implementation
----------------------------------------
+## Encapsulation and Method Implementation
 
 Despite the accessibility of properties in Manifold, encapsulation is not compromised. If a setter or getter method is explicitly implemented, Manifold recognizes the custom implementation and seamlessly interacts with the property.
 
@@ -207,7 +194,6 @@ public class HelloComputed {
 }
 ```
 
-
 The following code will print `4`:
 
 ```
@@ -215,9 +201,7 @@ computed.number = 5;
 System.out.println(computed.number);
 ```
 
-
-Other Considerations
---------------------
+## Other Considerations
 
 While both Lombok and Manifold offer useful features, it's important to consider some aspects that may influence your decision. Lombok provides annotations for generating equals, hashCode, and toString methods. It offers annotations that generate constructors, builder patterns, and loggers, all of which are currently missing from Manifold.
 
@@ -236,8 +220,7 @@ We can sum this up in the following table:
 | Fluid Dot Syntax         | ❌      | ✅        |
 | Smart Scoping            | ❌      | ✅        |
 
-Final Word
-----------
+## Final Word
 
 As we wrap up our exploration of property support in Manifold and Lombok, it's evident that both projects bring unique approaches to enhance Java development. While Lombok has been a popular choice, its limitations and legacy features may prompt developers to seek alternative solutions.
 

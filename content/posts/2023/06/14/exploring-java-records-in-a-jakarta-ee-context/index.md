@@ -72,7 +72,6 @@ public class Order {
 }
 ```
 
-
 For a given case, we want to return just a tiny subset of this entity. For a given date, we want to return all orders that were created before or after the given date, depending on which endpoint is called.
 
 Using Java Records, let us create an OrderSummary record with just the fields we need.
@@ -82,7 +81,6 @@ public record OrderSummary(String orderId, OrderStatus orderStatus, BigDecimal t
 
 }
 ```
-
 
 The OrderSummary has just the orderId, OrderStatus, order total and order date. This is the order summary we wish to return, based on which the client can call for details of each order using the returned orderId.
 
@@ -103,7 +101,6 @@ public List<OrderSummary> getOrderSummariesByStatus(final OrderStatus orderStatu
 }
 ```
 
-
 The above method shows the use of the typesafe Criteria API to construct a projection of order summaries based on the returned set of queried data.
 
 With the above in place, the following sample REST resource uses it to directly return the summaries to the calling client.
@@ -122,7 +119,6 @@ public class OrderResource {
     }
 }
 ```
-
 
 The REST resource method calls the getOrderSummariesByStatus method on the PersistenceService. The implementation of this method was shown earlier, using the Criteria API to return projected order summaries.
 

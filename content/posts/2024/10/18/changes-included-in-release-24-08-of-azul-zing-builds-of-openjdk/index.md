@@ -30,8 +30,7 @@ Azul Zing Builds of OpenJDK, the optimized Java runtime within [Azul Platform Pr
 As stream builds happen in a fixed schedule, all changes are included in the [release notes](https://docs.azul.com/prime/release-notes). Twice a year (in February and August), a Stream build becomes the new Stable build, providing a new version with many more improvements. In this post, we want to give you an overview of all the combined improvements in the 24.08 Stable Line.
 ![](Azul-Prime-Stable-2308-1024x400.jpg)
 
-Changes Included in the 24.08 Stable Line
------------------------------------------
+## Changes Included in the 24.08 Stable Line
 
 As Stable Builds overlap, your system should be on the 24.02 Stable line, and you have a window of four months to test and migrate to the 24.08 Stable line. Let's look at some of the most significant changes between the Stream Build releases 24.02 and 24.08. Version 24.08.0.0 is the branching point for the new Stable Build line, and includes all the following changes compared to the previous [Stable Builds based on 24.02](https://www.azul.com/blog/changes-included-in-release-24-02-of-azul-zing-builds-of-openjdk/).
 
@@ -98,7 +97,6 @@ You can find a general overview of Zing MXBeans in the [Zing MXBeans documentati
 * The MXBean PersistentProfileMXBean has been extended with `getReadyNowTier1CompilesRate()` and `getReadyNowTier2CompilesRate()`. These methods allow you to see what percentage of compiles are happening in ReadyNow, when compared to all compiles including non-ReadyNow.
 * The command line option `ProfileLogName` has been deprecated and replaced with `ProfileName`. `ProfileName` supports all existing macros available for `ProfileLogName`. It is still possible to use `ProfileLogName`, however, we recommend that you update your configuration in order to guarantee that you have access to all of the latest features implemented in `ProfileName`.Note that using `ProfileName` overrides `ProfileLogName`, `ProfileLogIn`, and `ProfileLogOut`. Also note that specifying `ProfileName` does not automatically enable ReadyNow Orchestrator processing of ReadyNow profiles. You also have to use the flag `EnableRNO`.
 
-Conclusion
-----------
+## Conclusion
 
 This new 24.08 Stable Line of Azul Zing Builds of OpenJDK includes many changes and improvements and contains all the latest security fixes.

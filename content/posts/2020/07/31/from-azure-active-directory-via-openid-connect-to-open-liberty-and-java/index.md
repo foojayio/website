@@ -20,8 +20,7 @@ Long gone are the days when you had to create your own user account management, 
 
 The code used in this blog post is hosted on this [GitHub repository](https://github.com/Azure-Samples/liberty-aad-oidc) as part of the official Azure samples - feel free to check it out and follow its user guide to run the Java EE demo application before or after reading this blog.
 
-**Set Up Azure Active Directory**
----------------------------------
+## **Set Up Azure Active Directory**
 
 Azure Active Directory (Azure AD) implements OpenID Connect (OIDC), an authentication protocol built on OAuth 2.0, which lets you securely sign in a user from Azure AD to an application. Before going into the sample code, you must first set up an Azure AD tenant and create an application registration with a redirect URL and client secret. The tenant ID, application (client) ID and client secret are used by Open Liberty to negotiate with Azure AD to complete an [OAuth 2.0 authorization code flow](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
 
@@ -31,8 +30,7 @@ Learn how to set up Azure AD from these articles:
 * [Register an application](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
 * [Add a new client secret](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-a-new-application-secret)
 
-**Configure Social Login as OpenID Connect Client**
----------------------------------------------------
+## **Configure Social Login as OpenID Connect Client**
 
 The following sample code shows how an application running on an Open Liberty server is configured with the `socialLogin-1.0` feature as an OpenID Connect client to authenticate a user from an OpenID Connect Provider, with Azure AD as the designated security provider.
 
@@ -72,7 +70,6 @@ The relevant server configuration in `server.xml`:
 </server>
 ```
 
-
 The `oidcLogin` element has a large number of configuration options. With Azure AD, most of them are not required as discovery endpoints are supported, allowing for most configuration to be automatically handled. Indeed Azure AD instances follow a known pattern for discovery endpoint URLs, allowing us to parameterize the URL using a tenant ID. In addition to that, a client ID and secret is needed. `RS256` must be used as the signature algorithm with Azure AD.
 
 The `userNameAttribute` parameter is used to map a token value from Azure AD to a unique subject identity in Liberty. There are a number of Azure AD token values you can use that are [listed here](https://docs.microsoft.com/azure/active-directory/develop/access-tokens). Do be cautious as the required tokens that exist for v1.0 and v2.0 differ (with v2.0 not supporting some v1.0 tokens). Either `preferred_username` or `oid` can be safely used, although in most cases you will probably want to use the `preferred_username`.
@@ -81,8 +78,7 @@ Using Azure AD allows your application to use a certificate with a root CA signe
 
 In our case, we assign all users authenticated via Azure AD the `users` role. More complex role mappings are possible with Liberty if desired.
 
-**Use OpenID Connect to Authenticate Users**
---------------------------------------------
+## **Use OpenID Connect to Authenticate Users**
 
 The sample application exposes a JSF client which defines a Java EE security constraint that only users with role `users` can access.
 
@@ -106,7 +102,6 @@ The relevant configuration in `web.xml`:
 </web-app>
 ```
 
-
 This is just standard Java EE security. The authentication and authorization workflow is shown in the following diagram.
 ![](https://dzone.com/storage/temp/13800230-1596136325278.png)
 
@@ -128,9 +123,7 @@ public class Cafe implements Serializable {
 }
 ```
 
-
-**Secure Internal REST Calls Using JWT RBAC**
----------------------------------------------
+## **Secure Internal REST Calls Using JWT RBAC**
 
 The `Cafe` bean depends on `CafeResource`, a REST service built with JAX-RS, to create, read, update and delete coffees. The `CafeResource` implements RBAC (role based access control) using MicroProfile JWT to verify the groups claim of the token.
 
@@ -177,7 +170,6 @@ public class CafeResource {
 }
 ```
 
-
 The `admin.group.id` is injected into the application using MicroProfile Config at the application startup using the `@ConfigProperty` annotation. MicroProfile JWT enables you to `@Inject` the JWT (Json Web Token). The `CafeResource` REST endpoint receives the JWT with the `preferred_username` and `groups` claims from the ID Token issued by Azure AD in the OpenID Connect authorization workflow. The ID Token can be retrieved using the `com.ibm.websphere.security.social.UserProfileManager` and `com.ibm.websphere.security.social.UserProfile` APIs.
 
 Here is the relevant configuration snippet in `server.xml`:
@@ -205,14 +197,12 @@ Here is the relevant configuration snippet in `server.xml`:
 </server>
 ```
 
-
 Note, the `groups` claim is not propagated by default and requires additional Azure AD configuration. To add a groups claim into the ID token, you will need to create a group with type as 'Security' and add one or more members to it in Azure AD. In the application registration created as part of Azure AD configuration, you will also need to: find 'Token configuration' \> select 'Add groups claim' \> select 'Security groups' as group types to include in ID token \> expand 'ID' and select 'Group ID' in 'Customize token properties by type' section. Learn more details from these articles:
 
 * [Create a new group and add members](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal)
 * [Configuring groups optional claims](https://docs.microsoft.com/azure/active-directory/develop/active-directory-optional-claims#configuring-groups-optional-claims)
 
-**Summary**
------------
+## **Summary**
 
 In this blog entry, we demonstrated how to effectively secure an Open Liberty application using OpenID Connect and Azure Active Directory. This write-up and the underlying [official Azure sample](https://github.com/Azure-Samples/liberty-aad-oidc) should also easily work for WebSphere Liberty.
 

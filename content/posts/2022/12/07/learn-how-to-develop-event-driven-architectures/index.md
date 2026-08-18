@@ -67,13 +67,11 @@ public class WireExamples3 {
 }
 ```
 
-
 When run, this code will print:
 
 ```
 hello world
 ```
-
 
 In summary, the class above is calling the standard console implementation of the Printer interface. So, in this simple example, we could say that the Java method call is our transport.
 
@@ -101,20 +99,17 @@ public class WireExamples4 {
 }
 ```
 
-
 As expected this code prints exactly the same text:
 
 ```
 hello world
 ```
 
-
 It takes the method call print("hello world") and serialises it to [JSON](https://en.wikipedia.org/wiki/JSON "JSON"), using the Chronicle Wire methodWriter. This JSON is then subsequently read by the methodReader, then the print method is called. We can inspect the payload of chronicle-wire, if we add the following statement:
 
 ```
 System.out.println(wire.bytes());
 ```
-
 
 By changing our code to this:
 
@@ -140,7 +135,6 @@ public class WireExamples4 {
 }
 ```
 
-
 It outputs:
 
 ```java
@@ -150,7 +144,6 @@ It outputs:
 
 hello world
 ```
-
 
 Where "print":"hello world" is the serialised form of this method call, it is this information that will be transmitted on our message bus.
 
@@ -213,7 +206,6 @@ public class QueueExamples2 {
 
 }
 ```
-
 
 The only shared configuration between the two processes is the chronicle queue directory "./myQueueDir" and the Printer interface.
 

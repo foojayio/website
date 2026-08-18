@@ -26,8 +26,7 @@ Now that we know why it's important to understand Java features well, it's time 
 
 It's time to improve your Java skills with this Stream Set Distinct Challenge...
 
-Stream Set Distinct Challenge
------------------------------
+## Stream Set Distinct Challenge
 
 Can you guess what will happen when running the following Java code?
 
@@ -63,7 +62,6 @@ public class StreamDistinctChallenge {
 }
 ```
 
-
 A) Cloud Ezio Alucard Kratos  
 
 B) IllegalArgumentException will be thrown  
@@ -80,7 +78,6 @@ The catch of this quiz is the Set.of factory method behavior. Note that we are p
 Set.of(new Warrior("Ezio"), new Warrior("Ezio"), new Warrior("Kratos"), new Warrior("Cloud"), new Warrior("Alucard"));
 ```
 
-
 The problem is that when we use two objects that are equal, the Set.of method will do something specific, because of the duplicated elements, one of the answers above. 🙂
 
 Pay attention also that if we were using the List.of factory method, this would not happen.
@@ -88,8 +85,6 @@ Pay attention also that if we were using the List.of factory method, this would 
 If you want to watch the video explanation, check it out, **but I recommend trying out the Java Challenge first**:
 
 {{< youtube xYUE665GTc8 >}}
-
-<br />
 
 That's it challenger, rock on! Keep taking action and relentlessly break your limits!
 

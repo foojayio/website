@@ -63,7 +63,6 @@ Our application may be asked to shutdown before our naturally reaches a sync() p
 Runtime.getRuntime().addShutdownHook()
 ```
 
-
 Note that Shutdown hooks run during a "soft kill" but do NOT run during a "hard kill" of the JVM.
 
 The shutdown hook is triggered by:

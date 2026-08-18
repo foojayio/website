@@ -26,8 +26,7 @@ I used rate limiting as an example, moving it from a library inside the applicat
 
 Today, I'll use another example: authentication and authorization.
 
-Securing a Spring Boot application
-----------------------------------
+## Securing a Spring Boot application
 
 I'll keep using Spring Boot in the following because I'm familiar with it. The Spring Boot application offers a REST endpoint to check employees' salaries.
 
@@ -52,7 +51,6 @@ To enable Spring Security on the app, we need to add the Spring Boot Security St
 </dependency>
 ```
 
-
 We also need to enable Spring Security to work its magic:
 
 ```kotlin
@@ -60,7 +58,6 @@ We also need to enable Spring Security to work its magic:
 @EnableWebSecurity
 class SecureBootApplication
 ```
-
 
 With those two steps in place, we can start securing the application according to the above requirement:
 
@@ -88,7 +85,6 @@ internal fun security() = beans {                                       //1
 }
 ```
 
-
 1. Use the Kotlin Beans DSL - because I can
 2. Only allow access to the endpoint to authenticated users
 3. Add a filter in the filter chain to replace regular authentication
@@ -99,7 +95,6 @@ Requests look like the following:
 ```bash
 curl -H 'Authorization: xyz'  localhost:9080/finance/salary/bob
 ```
-
 
 The filter extracts from the request the necessary data used to decide whether to allow the request or not:
 
@@ -117,7 +112,6 @@ internal class TokenAuthenticationFilter(authManager: AuthenticationManager) :
     // override fun successfulAuthentication(
 }
 ```
-
 
 1. Get the authentication token
 2. Get the path
@@ -149,7 +143,6 @@ internal class TokenAuthenticationManager(
 }
 ```
 
-
 1. Get the authorization token passed from the filter
 2. Try to find the account that has this token. For simplicity's sake, the token is stored in plain text without hashing
 3. If the account tries to access its data, allow it
@@ -167,13 +160,11 @@ Now, we can try some requests.
 curl -H 'Authorization: bob' localhost:9080/finance/salary/bob
 ```
 
-
 `bob` asks for his own salary, and it works.
 
 ```bash
 curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
 ```
-
 
 `bob` asks for the salary of one of his subordinates, and it works as well.
 
@@ -181,13 +172,11 @@ curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
 curl -H 'Authorization: bob' localhost:9080/finance/salary/alice
 ```
 
-
 `alice` asks for her manager's salary, which is not allowed.
 
 The code above works perfectly but has one big issue: there's no way to audit the logic. One must know Kotlin and how Spring Security works to ensure the implementation is sound.
 
-Introducing Open Policy Agent
------------------------------
+## Introducing Open Policy Agent
 
 Open Policy Agent, or OPA for short, describes itself as "Policy-based control for cloud native environments".
 > Stop using a different policy language, policy model, and policy API for every product and service you use. Use OPA for a unified toolset and framework for policy across the cloud native stack.
@@ -220,7 +209,6 @@ allow {
 }
 ```
 
-
 1. Get the employee hierarchy somehow (see below)
 2. If the account requests their salary, allow access
 3. If the account requests the salary of a subordinate, allow access
@@ -238,9 +226,7 @@ I used two variables in the above snippet: `input` and `data`. `input` is the pa
 }
 ```
 
-
-More Open Policy Agent goodness
--------------------------------
+## More Open Policy Agent goodness
 
 However, OPA can't decide on the input alone, as it doesn't know the employee's hierarchy.
 
@@ -280,7 +266,6 @@ internal class OpaAuthenticationManager(
 }
 ```
 
-
 1. Keep the initial *authentication* logic
 2. Replace the authorization with a call to the OPA service
 3. Serialize the data to conform to the JSON input that the OPA policy expects
@@ -292,8 +277,7 @@ The flow is now the following:
 
 [![](spring-security-opa-flow-1024x939.png)](spring-security-opa-flow.png)At this point, we moved the authorization logic from the code to OPA.
 
-Moving authentication to the API Gateway
-----------------------------------------
+## Moving authentication to the API Gateway
 
 The next and final step is to move the **authentication** logic.
 
@@ -321,7 +305,6 @@ consumers:
         key: charlie
 ```
 
-
 Now, we can protect the Spring Boot upstream:
 
 ```yaml
@@ -339,7 +322,6 @@ routes:
           set:
             X-Account: $consumer_name            #2
 ```
-
 
 1. Authenticate with `key-auth` and the `Authorization` header
 2. Sets the consumer id in the `X-Account` HTTP header for the upstream
@@ -378,7 +360,6 @@ internal fun validateOpa(
 }
 ```
 
-
 1. Get the account name from the API Gateway
 2. Nothing changes afterward
 
@@ -386,8 +367,7 @@ The final flow is the following:
 
 [![](no-spring-security-flow-1024x823.png)](no-spring-security-flow.png)
 
-Conclusion
-----------
+## Conclusion
 
 Everything looks like a nail when all you've got is a hammer.
 

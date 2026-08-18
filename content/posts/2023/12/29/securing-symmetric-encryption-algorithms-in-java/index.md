@@ -26,8 +26,7 @@ The first choice you must make as a developer is whether you need encryption. Al
 
 When looking at passwords, for instance, we do not want encryption as we do not want to be able to "decrypt" the original text. Therefore, we rely on [++hashing for passwords++](https://snyk.io/blog/password-hashing-java-applications/) and not encryption.
 
-Encryption in Java
-------------------
+## Encryption in Java
 
 Java applications often handle sensitive data, including customer information, financial details, and transaction records.
 
@@ -57,8 +56,7 @@ If we look at symmetric encryption algorithms, the [++OWASP foundation++](https:
 
 Multiple modes are available with a cipher like AES. These modes have different security and performance characteristics. When it comes to modes, avoid ECB (Electronic Codebook) mode, which [++does not provide serious message confidentiality++](https://cybergibbons.com/reverse-engineering-2/why-is-unauthenticated-encryption-insecure/). Instead, use modes like CCM (Counter with CBC-MAC) or GCM (Galois/Counter Mode). Both of these modes are [++authenticated++](https://www.ubiqsecurity.com/understanding-authenticated-encryption-an-explainer/) modes and guarantee the data's integrity, confidentiality, and authenticity.
 
-Identifying weak encryption algorithms in Java
-----------------------------------------------
+## Identifying weak encryption algorithms in Java
 
 It is relatively easy to use the `javax.crypto` APIs for implementing a small encryption service in Java. Below is an example of `EncryptionService` in Java based on the outdated DES algorithm using the ECB mode.
 
@@ -94,17 +92,12 @@ public class EncryptionServiceDes {
 }
 ```
 
-
-<br />
-
 Now that we've built a known insecure encryption algorithm into a project, we'll use the free Snyk service to detect this insecure use and guide us to a better solution.
 
 First, [++sign up for a free Snyk account++](https://app.snyk.io/login/). You can easily get started using your GitHub, Bitbucket, Azure AD, or Docker account.
 
 I then connected my GitHub repository to Snyk. Snyk Code's static analysis immediately warns me that my application uses a Broken or Risky Cryptographic Algorithm. This is spot on since I have multiple references to DES in the service above. The Snyk Code engine also advises me to consider using AES, which aligns with the advice from OWASP.
 ![blog-secure-encryption-priotity-score](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1697638240%2Fblog-secure-encryption-priotity-score.jpg&w=2560&q=75)
-
-<br />
 
 Despite using AES in the short snippet below, I am using the CBC mode which is not considered secure.
 
@@ -117,7 +110,6 @@ Despite using AES in the short snippet below, I am using the CBC mode which is n
     }
 ...
 ```
-
 
 Snyk will also identify the use of insecure modes, among other things. The screenshot below is taken from the [++Snyk plugin++](https://plugins.jetbrains.com/plugin/10972-snyk-security--code-open-source-container-iac-configurations) that scans my code inside of InteliJ IDEA and provides useful information, like external fix examples.
 ![blog-secure-encryption-vuln-broken](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1697638242%2Fblog-secure-encryption-vuln-broken.jpg&w=2560&q=75)
@@ -160,20 +152,13 @@ public class EncryptionServiceAESGCM {
 }
 ```
 
-
-<br />
-
-<br />
-
-Continuously reviewing encryption algorithms in your Java applications
-----------------------------------------------------------------------
+## Continuously reviewing encryption algorithms in your Java applications
 
 While updating outdated encryption algorithms is crucial, it's equally important to monitor your codebase for new security issues continuously. The encryption algorithms considered safe and secure at the moment of writing will most definitely be out of date in a matter of years.
 
 Proactively scanning and identifying this should, therefore, be a continuous exercise. This does not only count for encryption algorithms but obviously also for other issues in the code you maintain. Adopting and using a static analysis security testing (SAST) tool like Snyk code will help you easily recognize, identify, and mitigate these issues before actual harm is done.
 
-Snyk Code for Java can help you for free
-----------------------------------------
+## Snyk Code for Java can help you for free
 
 Snyk Code is a state-of-the-art static application security testing (SAST) tool that can identify security vulnerabilities within your codebase. It supports several programming languages, including Java, by analyzing code and providing real-time feedback to developers. Snyk Code can be integrated into your CI/CD pipeline to automatically scan your code with each commit, helping you catch and fix security issues early in the development cycle. Additionally, you can connect it to your git repository, use it on the command line using our CLI, and integrate it with all the popular IDEs for Java.
 

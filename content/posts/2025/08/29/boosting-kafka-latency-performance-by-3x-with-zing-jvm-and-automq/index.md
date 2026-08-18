@@ -24,8 +24,7 @@ frozen: false
 
 ![](kafka-with-zing-and-automq.jpg)
 
-Why is Latency so Important to Kafka?
--------------------------------------
+## Why is Latency so Important to Kafka?
 
 The importance of low latency in Kafka stems from the use cases it enables. Many applications that rely on Kafka are time-sensitive.
 
@@ -35,8 +34,7 @@ The importance of low latency in Kafka stems from the use cases it enables. Many
 
 Maintaining low latency in the cloud with traditional Kafka is challenging. Its architecture couples compute and storage, making scaling slow and expensive due to data rebalancing. This creates a complex trade-off between high costs from overprovisioning and poor performance during traffic spikes. To solve this, new cloud-native streaming systems have emerged with a different architectural approach.
 
-Introduction of AutoMQ
-----------------------
+## Introduction of AutoMQ
 
 AutoMQ is a next-generation, open-source [Kafka solution](https://automq.com?utm_source=seo_inner_link), available on [GitHub](https://github.com/AutoMQ/automq?utm_source=seo_inner_link) under the Apache 2.0 license. It is engineered to run efficiently and cost-effectively in the cloud by fundamentally re-architecting its design. The core innovation of AutoMQ is the complete separation of compute (the brokers) and storage. Unlike traditional Kafka, which ties data to broker disks, AutoMQ uses cloud object storage, such as Amazon S3, as its primary and durable data store. This allows compute and storage resources to scale independently of one another.
 ![](kafka-versus-automq-share-1024x453.png)
@@ -50,8 +48,7 @@ This modern architecture provides [several key advantages](https://www.automq.co
 
 ![](kafka-versus-automq-provisioning.png)
 
-Introducing Azul Zing Builds of OpenJDK
----------------------------------------
+## Introducing Azul Zing Builds of OpenJDK
 
 Azul Zing, part of Azul Platform Prime, is a high-performance Java Virtual Machine (JVM) specifically engineered to provide consistent, low-latency performance for Java applications. It serves as a drop-in replacement for standard JVMs, such as OpenJDK HotSpot, allowing you to use it without modifying your application code.
 
@@ -64,8 +61,7 @@ Azul Zing improves Java application performance in multiple, orthogonal ways:
 For the Kafka ecosystem, where brokers and client applications are built on Java, Azul Zing provides a direct path to superior performance. By ensuring the underlying JVM doesn't introduce random pauses and further improving the overall performance, it allows the entire data pipeline to run smoothly, predictably, and with low latency, as modern services demand.
 ![](azul-zing-jvm.png)
 
-Performance Test \& Explanation
--------------------------------
+## Performance Test \& Explanation
 
 To understand the real-world impact of the JVM on our Kafka workload, we conducted a head-to-head comparison between Azul Zing and the standard OpenJDK HotSpot. We focused on two critical metrics for any large-scale messaging system: end-to-end latency and CPU utilization.
 
@@ -99,8 +95,7 @@ Once fully optimized, **Azul Zing reduced CPU usage by approximately one-third c
 
 This reduction in CPU overhead is significant. It means more processing headroom is available for the application itself, which can translate to handling more traffic on the same hardware or reducing infrastructure costs.
 
-Future Outlook
---------------
+## Future Outlook
 
 The performance comparison showed that running AutoMQ for Kafka on the Azul Zing JVM provides **noticeable improvements** over a standard OpenJDK environment. The Azul platform **eliminates extreme tail latency spikes** , ensuring more predictable performance. Additionally, it **lowers the CPU load** required to handle the same amount of traffic, which can increase throughput or reduce infrastructure costs.
 
@@ -109,7 +104,5 @@ Ultimately, this test highlights a perfect match. **AutoMQ** provides a modern, 
 [Check here for more information about running AutoMQ or Kafka workloads on Azul Zing](https://www.azul.com/technologies/kafka/).  
 
 And if you're ready to dive in, you can [start a free trial of AutoMQ](https://console.automq.cloud/?utm_source=blog_foojay).
-
-
 
 Originally [published on the AutoMQ blog](https://www.automq.com/blog/automq-zing-boost-latency-performance) on August 21, 2025.

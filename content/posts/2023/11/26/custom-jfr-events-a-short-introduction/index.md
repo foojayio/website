@@ -65,7 +65,6 @@ public static int fib(int n) {
 }
 ```
 
-
 This is a pretty standard tiny web endpoint, minus all the user and session handling. It lets the customer query the n-th Fibonacci number by querying /fib/{n}.
 
 Our built-in logging prints n and the session ID on standard out, but what if we want to store it directly in our JFR profile while continuously profiling our application?
@@ -84,7 +83,6 @@ public class SessionEvent extends jdk.jfr.Event {
 }
 ```
 
-
 The custom event class extends the j[dk.jfr.Event](https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jfr/jdk/jfr/Event.html) class and simply define a few fields for the custom data. These fields can be annotated with `@Label("Human readable label")` and `@Description("Longer description")` to document them.
 
 We can now use this event class to record the relevant data in the `handleRequest` method:
@@ -102,7 +100,6 @@ static void handleRequest(Context ctx, int sessionId) {
     event.commit();                                                
 }
 ```
-
 
 This small addition records the timing and duration of each request, as well as `n` and the session ID in the JFR profile. The sample code, including a request generator, can be found on [GitHub](https://github.com/parttimenerd/custom-jfr-event-sample).
 

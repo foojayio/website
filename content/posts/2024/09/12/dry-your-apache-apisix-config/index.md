@@ -22,8 +22,7 @@ frozen: false
 
 is an important principle in software development. In this article, you learn how to apply it to Apache APISIX configuration.
 
-The DRY principle
------------------
+## The DRY principle
 
 > "Don't repeat yourself" (DRY) is a principle of software development aimed at reducing repetition of information which is likely to change, replacing it with abstractions that are less likely to change, or using data normalization which avoids redundancy in the first place.
 >
@@ -40,8 +39,7 @@ Most people associate DRY with code. However, it could be more limiting and cont
 
 Sound configuration systems allow DRY or even encourage it.
 
-DRY in Apache APISIX
---------------------
+## DRY in Apache APISIX
 
 Apache APISIX offers DRY configuration in two places.
 
@@ -58,7 +56,6 @@ routes:
       nodes:
         "catalog:8080": 1
 ```
-
 
 If you're familiar with APISIX, we defined a route to the catalogue under the `/products` URI. However, there's an issue: you probably want would-be customers to browse the catalogue but want to prevent people from creating, deleting, or updating products. Yet, the route matches every HTTP method by default.
 
@@ -83,7 +80,6 @@ routes:
       nodes:
         "catalog:8080": 1
 ```
-
 
 1. Match browsing
 2. Duplicated upstream!
@@ -118,7 +114,6 @@ routes:
       key-auth: ~
 ```
 
-
 1. Define an upstream with ID `1`
 2. Reference it in the route
 
@@ -152,7 +147,6 @@ routes:
         regex_uri: [ "/v1(.*)", "$1" ]                 #1
 ```
 
-
 1. Remove the `/v1` prefix before forwarding
 
 Like with `upstream` above, the `plugins` section is duplicated. We can also factor the plugin configuration in a dedicated *Plugin Config* object. The following snippet has the same effect as the one above:
@@ -179,7 +173,6 @@ routes:
     plugin_config_id: 1                                #2
 ```
 
-
 1. Factor the plugin configuration in a dedicated object
 2. Reference it
 
@@ -205,7 +198,6 @@ routes:
       key-auth: ~                                      #1
 ```
 
-
 1. Fix it!
 
 This way, you can move the shared configuration to a `plugin_config` object and keep a specific one to the place it applies to. But what if the same plugin with different configurations is used in the `plugin_config` and directly in the `route`? The [documentation](https://apisix.apache.org/docs/apisix/terminology/plugin/#plugins-merging-precedence) is pretty clear about it:
@@ -213,8 +205,7 @@ This way, you can move the shared configuration to a `plugin_config` object and 
 
 In short, the `plugin` configuration in a `route` overrules the configuration in the `plugin_config_id`. It also allows us to provide the `apikey` variable for the `key-auth` plugin in a `consumer` and only set it in a route. APISIX will find and use the key for each `consumer`!
 
-Conclusion
-----------
+## Conclusion
 
 DRY is not only about code; it's about data management in general. Configuration is data and thus falls under this general umbrella.
 
@@ -226,8 +217,6 @@ Both mechanisms should help you toward DRYing your configuration and make it mor
 
 * [The Don't repeat yourself principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 * [Configuration merging precedence](https://apisix.apache.org/docs/apisix/terminology/plugin/#plugins-merging-precedence)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/dry-apisix-config/) on September 1^st^, 2024*
 

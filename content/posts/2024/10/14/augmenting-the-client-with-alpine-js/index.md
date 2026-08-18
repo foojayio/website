@@ -26,8 +26,7 @@ This article is part of a series comparing different ways to implement asynchron
 
 I'll follow the same structure as previously.
 
-Laying out the work
--------------------
+## Laying out the work
 
 Here's the setup, server- and client-side.
 
@@ -63,7 +62,6 @@ Here is how I integrate Thymeleaf and Alpine.js in the POM:
 </dependencies>
 ```
 
-
 1. Same as last week with Vue
 2. Alpine instead of Vue
 
@@ -87,7 +85,6 @@ Here's the code on the HTML side:
 </script>
 ```
 
-
 1. [Axios](https://axios-http.com/) helps making HTTP requests
 2. Alpine itself
 3. Our client-side code
@@ -95,8 +92,7 @@ Here's the code on the HTML side:
 
 As for the POM, it's the same code for Alpine as for Vue.
 
-The Alpine code
----------------
+## The Alpine code
 
 We want to implement the same features as for Vue.
 
@@ -112,7 +108,6 @@ document.addEventListener('alpine:init', () => {                    //1
 })
 ```
 
-
 1. Run the block when the `alpine:init` event is triggered; the triggering event is specific to Alpine.
 2. Bootstrap Alpine and configure it to manage the HTML fragment identified by `app`
 
@@ -122,7 +117,6 @@ We now set the `app` id on the HTML side.
 <div id="app">
 </div>
 ```
-
 
 Until now, it's very similar to Vue.js, a straight one-to-one mapping.
 
@@ -139,7 +133,6 @@ Here's the HTML code:
 <input type="checkbox" :checked="todo.completed" @click="check" />  <!--2-->
 ```
 
-
 1. Alpine code
 2. Vue code
 
@@ -155,7 +148,6 @@ Alpine.data('app', () => ({
 }))
 ```
 
-
 ### Client-side model
 
 You might wonder where the `todo` above comes from. The answer is: from the local model.
@@ -168,7 +160,6 @@ Alpine.data('app', () => ({
     todos: window.alpineData.todos,                                 //2
 }))
 ```
-
 
 1. Initialize the `title` even if it's read-only
 2. Initialize the `todos` list;  
@@ -194,7 +185,6 @@ Here's the HTML snippet:
 </form>
 ```
 
-
 1. The `x-model` defines a model and binds the `label` property defined in `app`
 2. Define the behavior of the button, as in the previous section
 
@@ -213,14 +203,12 @@ Alpine.data('app', () => ({
 }))
 ```
 
-
 1. Define a new `label` property
 2. Send a `POST` request with the `label` value as the JSON payload
 3. Get the response payload and add it to the local model of `Todo`
 4. Reset the `label` value
 
-Conclusion
-----------
+## Conclusion
 
 Alpine is very similar to Vue, with the notable difference of the lack of templating; components are only available via a price. All other features have an equivalent.
 
@@ -231,7 +219,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 **To go further:**
 
 * [Alpine.js](https://alpinejs.dev/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/4/) on September 29^th^, 2024*

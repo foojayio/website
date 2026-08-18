@@ -25,8 +25,7 @@ Building real-time data pipelines and streaming applications just got more cost-
 
 Kafka is great because it's horizontally scalable, fault-tolerant, and runs in production for thousands of companies -- and we figured out how to help you get more mileage out of it.
 
-How We Did It
--------------
+## How We Did It
 
 In [a recent post](https://www.azul.com/blog/kafka-throughput-on-azul-platform-prime-vs-openjdk/) we compared Kafka throughput on Azul Platform Prime versus OpenJDK, noting that on our config Azul Platform Prime reaches 45% higher max throughput than OpenJDK.
 
@@ -34,8 +33,7 @@ In this experiment, we took a more practical approach.
 
 We looked at the maximum throughput that we could achieve with a 5 node Kafka cluster on OpenJDK, then looked at how many nodes we could reduce the cluster by while still hitting the same throughput on Azul Platform Prime.
 
-Less Nodes and More Throughput
-------------------------------
+## Less Nodes and More Throughput
 
 We found that a 5-node cluster on OpenJDK could reach a max throughput of 333,879 transactions per second (TPS), while Azul Platform Prime was able to **reach 346,058 TPS on only 3 nodes, for a 40% reduction in infrastructure costs.**
 ![](image-1-1024x560.png)
@@ -51,8 +49,7 @@ If you run your cluster on AWS r4x machines, your cost and ROI breakdown looks l
 | Azul Platform Prime total price | $26,490.24 |
 | Total Savings                   | $17,660.16 |
 
-New Ways to Improve Your Architecture
--------------------------------------
+## New Ways to Improve Your Architecture
 
 Reducing nodes need and improving TPS simplifies things a lot, especially for common architecture challenges. But what's really behind the ROI? [Here's how it works](https://www.azul.com/resources-hub/solution-briefs/sb-kafka):
 
@@ -62,8 +59,7 @@ Reducing nodes need and improving TPS simplifies things a lot, especially for co
 * **Infrastructure Cost Savings** Improved performance on fewer nodes means you get more out of infrastructure, use less instances
 * **ZooKeeper** In addition to Kafka, deploy for similar improvements on Apache ZooKeeper
 
-Our Benchmark Details
----------------------
+## Our Benchmark Details
 
 We used the same Azul Kafka Benchmark <https://github.com/AzulSystems/kafka-benchmark> we used in the previous article. The AMI and instance sizes were as follows:
 

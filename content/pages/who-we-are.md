@@ -23,13 +23,11 @@ On Foojay, you can find the following content (and more!):
 * **JC-AI Newsletter** - a regular briefing at the intersection of Java and AI.
 * **Event Calendar** - Java events happening worldwide.
 
-Why we're here?
----------------
+## Why we're here?
 
 Java developers shouldn't have to piece together useful information from many different sources. We wanted to create one place that's accurate, timely and vendor-neutral - where you can trust what you're reading because it's coming from the community members working on Java hands-on. So that's what we built: a home for the maintainers, contributors and everyday developers.
 
-Where the name comes from?
---------------------------
+## Where the name comes from?
 
 Foojay is the place to be for the **F** riends **O** f **O** pen**J**DK. But what is the history behind this name?
 
@@ -37,8 +35,7 @@ Foojay is the place to be for the **F** riends **O** f **O** pen**J**DK. But wha
 
 Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those names freely ofr initiatives like Foojay. So that's how "Foojay" became the name for the place for Friends of OpenJDK.
 
-Logo
-----
+## Logo
 
 The logos are stored in this [GitHub repository](https://github.com/foojayio/foojay-logo) in various formats.
 

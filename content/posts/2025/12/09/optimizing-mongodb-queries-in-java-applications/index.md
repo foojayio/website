@@ -55,7 +55,6 @@ When a query runs, MongoDB's query planner evaluates available indexes, estimate
 db.orders.find({ status: "shipped" }).explain("executionStats");
 ```
 
-
 The output shows whether MongoDB used an index (\`IXSCAN\`) or a collection scan (\`COLLSCAN\`). Key metrics include execution time, documents examined versus returned, and the execution stage. A low examined-to-returned ratio indicates efficient index usage.
 
 Common bottlenecks include missing indexes, large projections, inefficient filters like \`$regex\` or \`$nin\`, and unbounded queries. When using Spring Data MongoDB, ensure repository queries map to indexed fields:
@@ -70,7 +69,6 @@ public class User {
     private Date createdAt;
 }
 ```
-
 
 This annotation creates an index automatically, ensuring queries like \`findByEmail(String email)\` execute efficiently. Comparing a collection scan versus an indexed query shows dramatic performance differences. Without an index, \`explain()\` output shows \`COLLSCAN\` and high document counts. After adding an index, the same query shows \`IXSCAN\` and far fewer documents examined, reducing query time from hundreds of milliseconds to just a few.
 
@@ -87,7 +85,6 @@ db.setProfilingLevel(1, { slowms: 50 });
 
 db.system.profile.find().sort({ ts: -1 }).limit(5);
 ```
-
 
 Here, \`slowms\` controls which operations qualify as slow. Keeping this value conservative helps maintain a clean view of problematic queries without overwhelming the profiler log. This is a simple but essential part of diagnosing inefficient query shapes like unindexed filters, expensive \`$lookup\` stages, or wide projection fields.
 
@@ -109,7 +106,6 @@ public class QueryLoggingListener implements CommandListener {
 }
 ```
 
-
 To register this listener, add it when building your MongoClient:
 
 ```
@@ -121,7 +117,6 @@ MongoClientSettings settings = MongoClientSettings.builder()
 MongoClient client = MongoClients.create(settings);
 ```
 
-
 This pattern stays consistent with standard Java configuration approaches. You create a listener, register it in the Mongo client builder, and let Spring handle the remainder of the lifecycle. This gives you application-level telemetry that complements MongoDB's profiler. You can track latency, correlate slow commands with business events, and capture metadata that the profiler does not record by default.
 
 Many teams also rely on the explain plan built into MongoDB. Unlike relational databases where explain plans often feel abstract, MongoDB's explain output presents actionable information about index usage, examined documents, and winning plans. The two most important metrics are \`nReturned\` and \`totalDocsExamined\`. If the latter is significantly larger than the former, your query is scanning more documents than necessary. This indicates a missing or misaligned index. The explain plan is also helpful when confirming that compound indexes match your query pattern correctly.
@@ -129,7 +124,6 @@ Many teams also rely on the explain plan built into MongoDB. Unlike relational d
 ```
 db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d8d5d0dadcf9dcc1d8d4c9d5dc97dad6d4">[email protected]</a>" }).explain("executionStats");
 ```
-
 
 The \`executionStats\` mode gives the most practical insights because it includes execution time and the number of index keys scanned. Use this mode when validating a new index or comparing similar queries side by side.
 
@@ -146,7 +140,6 @@ Timer timer = Timer.builder("mongo.query.time")
 
 return timer.record(() -> mongoTemplate.find(query, User.class));
 ```
-
 
 This example wraps a repository call with a timer. The recorded duration helps track average query times and outliers. You can chart these metrics over time to understand baseline performance. Having baselines is important because performance tuning is not a one-time task. Changes in user behavior, data size, or indexing patterns all affect how queries behave, so historical comparisons are essential.
 
@@ -172,7 +165,6 @@ Query query = new Query()
 List<User> users = mongoTemplate.find(query, User.class);
 ```
 
-
 This pattern keeps payloads small and improves response times, especially when documents contain large arrays or embedded objects.
 
 Avoid using \`$or\` and \`$in\` on unindexed fields. These operators can prevent efficient index usage and force collection scans. When possible, restructure queries to use equality filters or range queries that align with your indexes. For complex filtering logic, consider using aggregation pipelines, which provide more control over execution order.
@@ -186,7 +178,6 @@ Aggregation pipeline = Aggregation.newAggregation(
     group("category").sum("total").as("revenue")
 );
 ```
-
 
 This approach filters and sorts before grouping, minimizing the data MongoDB processes in later stages. Opt for range queries over regex prefix searches. Regex patterns with leading wildcards like \`/.\*term/\` or \`/.\*term$/\` cannot use indexes effectively. If you need pattern matching, structure queries to use prefix patterns like \`/\^pattern/\`, which anchor to the beginning of the string and can leverage indexes.
 
@@ -253,7 +244,6 @@ db.orders.find(
 )
 ```
 
-
 If the index is \`{ status: 1, total: 1 }\`, this query can be fully covered. MongoDB does not need to fetch documents because all requested fields are already in the index.
 
 **When not to index**
@@ -296,7 +286,6 @@ public class Order {
 }
 ```
 
-
 And an example of programmatic creation:
 
 ```
@@ -306,7 +295,6 @@ Index index = new Index()
 
 mongoTemplate.indexOps("orders").ensureIndex(index);
 ```
-
 
 This approach helps you keep index creation inside the application's lifecycle instead of relying on manual operations.
 
@@ -320,14 +308,12 @@ Collection scan example
 db.orders.find({ status: 'completed' }).explain('executionStats')
 ```
 
-
 If the explain output shows...
 
 ```
 "stage": "COLLSCAN",
 "docsExamined": 150000
 ```
-
 
 ...it means MongoDB scanned the entire collection. This is slow and grows linearly.
 
@@ -339,7 +325,6 @@ db.orders.createIndex({ status: 1 })
 db.orders.find({ status: 'completed' }).explain('executionStats')
 ```
 
-
 Now, the output might show:
 
 ```
@@ -347,7 +332,6 @@ Now, the output might show:
 "keysExamined": 5000,
 "docsExamined": 5000
 ```
-
 
 The difference is immediate and predictable. Indexes reduce the amount of data MongoDB needs to scan and improve response time significantly.
 
@@ -368,7 +352,6 @@ Query query = new Query()
 
 List<User> results = mongoTemplate.find(query, User.class);
 ```
-
 
 This pattern reduces payload size, keeps your memory footprint predictable, and makes high-traffic endpoints more stable.
 
@@ -397,7 +380,6 @@ Query nextQuery = new Query()
 List<Order> nextPage = mongoTemplate.find(nextQuery, Order.class);
 ```
 
-
 This approach uses index boundaries instead of walking the entire result set. Since \`_id\` is always indexed, this query remains fast regardless of page depth.
 
 **Misusing $lookup in pipelines**
@@ -418,7 +400,6 @@ Query query = new Query()
     .fields().slice("tags", 10);
 ```
 
-
 Keeping arrays bounded or storing them in separate collections helps maintain predictable performance.
 
 **Using expensive operators on unindexed fields**
@@ -437,7 +418,6 @@ Define specific query methods instead:
 List<Order> results = orderRepository
     .findByStatus("PENDING", PageRequest.of(0, 50));
 ```
-
 
 This aligns your code with actual business needs and avoids scanning large collections unnecessarily.
 
@@ -479,7 +459,6 @@ MongoClientSettings settings = MongoClientSettings.builder()
 MongoClient client = MongoClients.create(settings);
 ```
 
-
 This pattern is useful when your application has mixed traffic where certain requests require strong consistency and others only need reasonably fresh data. If your application runs in multiple regions, read preferences combined with geo aware deployment can also improve latency for end users.
 
 **Cache frequently accessed queries**
@@ -503,7 +482,6 @@ public List<Product> getFeaturedProducts() {
 }
 ```
 
-
 Caching works best when used alongside efficient indexes. If you notice that many identical queries are executed per second, it is a strong signal that a cache layer will benefit your workload.
 
 **Keep projections narrow**
@@ -521,7 +499,6 @@ query.fields().include("name").include("email");
 
 List<User> users = mongoTemplate.find(query, User.class);
 ```
-
 
 Smaller payloads help both the database and your JVM. They reduce memory churn, garbage collection pressure, and serialization time. This pattern also forms a nice habit for developers: treat MongoDB as a document store, but never assume you always need the entire document.
 
@@ -547,7 +524,6 @@ for (OrderUpdate update : updates) {
 
 ops.execute();
 ```
-
 
 Unordered mode is usually faster since MongoDB does not stop the batch at the first failure. This makes it ideal for high-volume update processes such as syncing external systems, ingesting logs, or running nightly maintenance tasks.
 
@@ -580,7 +556,6 @@ MongoClient client = MongoClients.create(settings);
 MongoTemplate template = new MongoTemplate(client, "mydb");
 ```
 
-
 Or per operation:
 
 ```
@@ -588,7 +563,6 @@ UpdateResult result = mongoTemplate
     .withWriteConcern(WriteConcern.W1)
     .updateFirst(query, update, Product.class);
 ```
-
 
 Ingesting data continuously without batching can overwhelm your cluster. Instead of writing each record as soon as it arrives, many high-throughput systems group writes into batches that flush at intervals. This approach reduces the number of network operations while keeping latency predictable.
 
@@ -609,7 +583,6 @@ spring.data.mongodb.connection-pool.min-size: 10
 
 spring.data.mongodb.connection-pool.max-wait-time: 2000ms
 ```
-
 
 Here is a good starting point:
 
@@ -655,7 +628,6 @@ AggregationResults<Document> results = mongoTemplate.aggregate(
 );
 ```
 
-
 The \`match\` stage limits work early. The \`group\` stage calculates counts. The \`sort\` stage orders results. This approach performs all calculations inside MongoDB and returns only the final documents to your Java code. The \`AggregationResults\` object contains the resulting documents, which you can access using \`getMappedResults()\`.
 
 More advanced use cases include analytics dashboards, event stream summaries, content feeds, and pipelines that combine multiple collections through \`$lookup\`. For example, joining user details into an activity feed becomes a single pipeline rather than multiple queries:
@@ -669,7 +641,6 @@ Aggregation pipeline = Aggregation.newAggregation(
         .and("user.name").as("userName")
 );
 ```
-
 
 Practical performance improvements often appear once you replace chained \`find\` queries or repeated post processing with a single pipeline. A real-world case that illustrates this well is turning a multi-query analytics workflow into a single server-side pipeline. This reduces network overhead, frees JVM memory, and cuts latency, sometimes by an order of magnitude. Pipelines benefit even more when combined with indexes that support the initial \`$match\` and \`$sort\` stages.
 
@@ -701,7 +672,6 @@ public List<Order> findRecentPaidOrders() {
 }
 ```
 
-
 After a few deployments, you can compare average and p95 values for \`mongo.orders.recentPaid\` before and after a change. When you also log \`explain("executionStats")\` during profiling, you can track scanned versus returned ratios along with latency, which gives a clearer picture than timing alone.
 
 For reactive stacks, the pattern is similar but you keep the reactive flow intact. A simple approach uses \`Timer.Sample\` inside the handler:
@@ -717,7 +687,6 @@ public Flux<Order> streamRecentPaidOrders() {
         ));
 }
 ```
-
 
 This keeps the measurement at the boundary and prevents corrupting the reactive pipeline with blocking code.
 
@@ -741,7 +710,6 @@ You can create a capped collection from the MongoDB shell:
 db.createCollection("queryLogs", { capped: true, size: 10485760, max: 5000 });
 ```
 
-
 This creates a capped collection limited to 10MB or 5,000 documents, whichever limit is reached first.
 
 Many teams benefit from using a query performance checklist that developers can quickly run through before shipping new features:
@@ -760,7 +728,6 @@ Finally, make it a habit to inspect db.currentOp() during incidents or when moni
 ```
 db.currentOp({ "active": true, "secs_running": { "$gt": 5 } })
 ```
-
 
 This query returns operations that have been running for more than five seconds. The output includes the operation type, namespace, query details, and how long it has been running. It provides valuable insight into problems that are not visible at the driver layer.
 

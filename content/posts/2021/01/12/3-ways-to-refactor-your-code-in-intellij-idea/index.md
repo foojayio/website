@@ -30,8 +30,7 @@ Simplifying your code has lots of advantages, including improving readability, t
 
 The code samples are available in the [IntelliJ IDEA sample code repository](https://github.com/JetBrains/intellij-samples), specifically the [PlanetExtractions](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/PlanetExtractions.java) and [Planet](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/Planet.java) class.
 
-Extracting and Inlining
------------------------
+## Extracting and Inlining
 
 The first way to simplify your code is to extract it. There are five types of extract refactoring that you can do in IntelliJ IDEA that we will look at in this blog:
 
@@ -65,7 +64,6 @@ public class PlanetExtractions {
 }
 ```
 
-
 In IntelliJ IDEA 2020.3 this process has been simplified. You need to select the full block of code that is going to be extracted, and then you can use **⌘⌥M** on macOS, and **Ctrl** +**Alt** +**M** on Windows and Linux, to extract the method.
 
 ![Extract Method selection](extract-method.png)
@@ -97,7 +95,6 @@ public class PlanetExtractions {
 }
 ```
 
-
 You can get additional options for extract Method by using the same shortcut again.
 
 ![Extract Method Options](extract-method-extra-options.png)
@@ -112,20 +109,17 @@ We can extract the number 365 to a constant in this line of code because the ear
 System.out.println("Number of times the planet rotates around the sun is " + 365);
 ```
 
-
 We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as `NUMBER_OF_DAYS_IN_A_YEAR`. IntelliJ IDEA creates a new public static final constant at the start of our class:
 
 ```java
 public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;
 ```
 
-
 IntelliJ IDEA also replaces the original line of code with the new constant:
 
 ```java
 System.out.println("Number of times the planet rotates around the sun is " + NUMBER_OF_DAYS_IN_A_YEAR);
 ```
-
 
 ### Extract Field
 
@@ -141,7 +135,6 @@ private void getWeather() {
         }
     }
 ```
-
 
 You need to select `The weather is ` and then you can use **⌘⌥F** on macOS, or **Ctrl** +**Alt** +**F** on Windows and Linux, to extract it to a field. In the Introduce Field dialog, we can select to initialise this field in the Field declaration, give it a name such as `theWeatherIs` and select to replace all four occurrences of it in the code.
 
@@ -161,7 +154,6 @@ private void getWeather() {
         }
     }
 ```
-
 
 ### Extract Variable
 
@@ -200,7 +192,6 @@ private void getWeather() {
 }
 ```
 
-
 To do that, let's select `UK` and use **⌘⌥P** on macOS and **Ctrl** +**Alt** +**P** on Windows and Linux. We can give it a name, such as `country`. We can then ask IntelliJ IDEA to replace all four occurrences and select **Refactor**. IntelliJ IDEA updates our method signature arguments:
 
 `getWeather("UK");`
@@ -217,7 +208,6 @@ private void getWeather(String country) {
        }
    }
 ```
-
 
 ### Extract Summary
 
@@ -241,8 +231,7 @@ For example, we can inline the method that we previously extracted by placing ou
 
 ![Inline Method](inline-method.png)
 
-Change Signature
-----------------
+## Change Signature
 
 We often need to [change the signature](https://www.jetbrains.com/help/idea/change-signature-dialog.html) of a method. IntelliJ IDEA can help us with this process, and the impact of the change on your wider code base. Using our [Planet](https://github.com/JetBrains/intellij-samples/blob/main/standard-java/src/main/java/com/jetbrains/refactoring/Planet.java) class, let's refactor this constructor to take the season as an argument as well as the name:
 
@@ -251,7 +240,6 @@ public Planet(String name) {
     this.name = name;
 }
 ```
-
 
 We can use **⌘F6** on macOS, or **Ctrl** +**F6** on Windows and Linux, to change the signature of the method. Now we're in the Change Signature dialog; we can use **⌘N** on macOS or **Alt** +**Ins** on Windows and Linux, to add a second string and give it a default value like 'summer'. If we don't give it this default value, then any objects that call this method will need to be manually updated after the refactoring.
 
@@ -263,9 +251,7 @@ IntelliJ IDEA will show you where the issues are if you choose to do this. When 
 Planet myPlanet = new Planet("earth", "summer");
 ```
 
-
-Rename
-------
+## Rename
 
 Our last type of refactoring that can help you to simplify your code is [renaming](https://www.jetbrains.com/help/idea/rename-refactorings.html). We frequently need to rename files, or aspects of our code.
 
@@ -292,8 +278,7 @@ IntelliJ IDEA will also make changes everywhere that uses that class name, for e
 
 ![Alt Keyboard Shortcuts](alt-keyboard-shortcut.png)
 
-Summary
--------
+## Summary
 
 These are just some of the refactorings that you can do in IntelliJ IDEA to help you to simplify your code:
 
@@ -318,5 +303,3 @@ These are just some of the refactorings that you can do in IntelliJ IDEA to help
 
 * **Original blog** : <https://blog.jetbrains.com/idea/2020/12/3-ways-to-refactor-your-code-in-intellij-idea/>
 * **Associated screencast** : <https://youtu.be/HgWU25YwDfc>
-
-<br />

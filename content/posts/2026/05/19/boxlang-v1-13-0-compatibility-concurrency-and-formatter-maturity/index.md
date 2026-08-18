@@ -31,8 +31,7 @@ frozen: false
 
 While this release is bug-fix heavy, it still introduces several meaningful features and quality-of-life improvements: character-aware trimming, class metadata lookup by absolute path, process environment control in SystemExecute(), SOAP headers, new query column rename capabilities, and safer miniserver routing/security defaults.
 
-New Features
-------------
+## New Features
 
 Three additions that materially expand what the runtime can do.
 
@@ -47,7 +46,6 @@ The string trimming BIFs now accept an optional chars argument. Strip arbitrary 
 "//path/to/dir//".trim( "/" )  // "path/to/dir"
 ```
 
-
 Each character in `chars` is treated as an independent trim target --- the same behavior you'd expect from Python or JavaScript. One less regex workaround.
 
 ### `getClassMetadata()` by Absolute Path
@@ -60,7 +58,6 @@ writeDump( meta.name )        // "User"
 writeDump( meta.properties )  // array of property definitions
 writeDump( meta.functions )   // array of function signatures
 ```
-
 
 This is a cornerstone API for tooling. Linters, IDE integrations, documentation generators, and migration scanners can now inspect `.bx` and .`cfc` files without booting them into the runtime, firing `onApplicationStart`, or wrestling with import edge cases. The kind of unglamorous primitive that makes an ecosystem possible.
 
@@ -86,11 +83,9 @@ result = systemExecute(
 writeOutput( result.output )
 ```
 
-
 Before 1.13.0, every `systemExecute()` call inherited the full parent environment --- including secrets, tokens, and internal config. Security-conscious deployments now have an explicit, auditable way to lock that down.
 
-The [BoxLang Formatter](https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter "BoxLang Formatter") Goes Production-Ready
------------------------------------------------------------------------------------------------------------------------------------------------
+## The [BoxLang Formatter](https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter "BoxLang Formatter") Goes Production-Ready
 
 This is a flagship moment. The formatter graduates from experimental to production-grade and lands with a complete CI/CD integration surface.
 
@@ -119,9 +114,7 @@ boxlang format --initConfig
 boxlang format --convertConfig --input ./
 ```
 
-
-Async \& Concurrency Hardening
-------------------------------
+## Async \& Concurrency Hardening
 
 Concurrency bugs are the worst kind of bug --- intermittent, non-deterministic, catastrophic when they hit production. 1.13.0 closes several long-standing race conditions and lifecycle issues across the [async subsystem](https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/async/ "async subsystem") and [threading layer](https://boxlang.ortusbooks.com/boxlang-language/syntax/threading "threading layer").
 
@@ -132,15 +125,13 @@ args     = [ "Ada", "Lovelace" ]
 fullName = formatName( ...args )
 ```
 
-
 **`BoxFuture()` lifecycle** . A `BoxFuture` created during an HTTP request used to throw scope-access errors if the parent request completed before the future resolved. The context lifecycle is now properly decoupled --- background work survives request teardown without touching stale scopes.
 
 **Concurrent array iteration** . `for/in` loops over arrays no longer throw `ConcurrentModificationException` when the array is mutated from another thread.
 
 **Atomic class file writes.** Class generation now uses a temp-file-then-atomic-rename pattern. No more transient zero-byte `.class` artifacts surfacing under parallel compilation --- a race condition that produced some genuinely painful `ClassNotFoundException` reports in production.
 
-[MiniServer](https://boxlang.ortusbooks.com/getting-started/running-boxlang/miniserver "MiniServer"): Security \& Reliability
------------------------------------------------------------------------------------------------------------------------------
+## [MiniServer](https://boxlang.ortusbooks.com/getting-started/running-boxlang/miniserver "MiniServer"): Security \& Reliability
 
 **The headline** : a misconfigured miniserver no longer accidentally serves your source code or configuration over HTTP. The static-serving security filter now blocks hidden files and dotfiles, framework config artifacts (`.boxlang.json`, `boxlang.json`), and source files (`.bx`, `.cfc`) when not routed through the engine.
 
@@ -151,7 +142,6 @@ fullName = formatName( ...args )
 boxlang server start --pass-predicate "/api/*"
 ```
 
-
 ```java
 // boxlang.json
 {
@@ -161,12 +151,10 @@ boxlang server start --pass-predicate "/api/*"
 }
 ```
 
-
 ```java
 # Environment variable
 export BOXLANG_PASS_PREDICATE="/api/*"
 ```
-
 
 **Transfer reliability fixes:**
 
@@ -174,8 +162,7 @@ export BOXLANG_PASS_PREDICATE="/api/*"
 * Empty text-file uploads no longer throw illegal-state errors
 * `content-length` headers correctly computed across all response paths
 
-Compatibility Wins
-------------------
+## Compatibility Wins
 
 CFML compatibility is a continuous workstream, not a one-time port. This release closes a handful of high-impact gaps that real applications were tripping over.
 
@@ -188,7 +175,6 @@ soapService.call(
 )
 ```
 
-
 `query.setColumnNames()`. Query objects now support column renaming through a dedicated method, matching the Adobe CF and Lucee API.
 
 ```java
@@ -197,7 +183,6 @@ q.setColumnNames( [ "firstName", "lastName" ] )
 writeDump( q.columnList )  // "firstName,lastName"
 ```
 
-
 **[CLI](https://boxlang.ortusbooks.com/getting-started/configuration "CLI") `.box.env` support** . The CLI now reads `~/.box.env` on startup, loading user-level environment variables that persist across sessions.
 
 ```java
@@ -205,7 +190,6 @@ writeDump( q.columnList )  // "firstName,lastName"
 DB_HOST=localhost
 DB_PORT=5432
 ```
-
 
 Runtime Hardening  
 
@@ -228,8 +212,7 @@ The unsexy stuff that matters. A condensed view of the deeper fixes shipped in t
 | Custom tags       | this scope no longer leaks from custom-tag context                   |
 | `numberFormat()`  | Major mask compatibility sweep across multiple tickets               |
 
-Changelog Highlights
---------------------
+## Changelog Highlights
 
 #### New Features
 

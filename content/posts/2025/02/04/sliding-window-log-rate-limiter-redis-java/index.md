@@ -30,8 +30,7 @@ frozen: false
 
 By checking how many requests were made within that time frame, it ensures limits are enforced more smoothly. If the log shows too many requests, new ones are denied.
 
-How It Works
-------------
+## How It Works
 
 ![](https://cdn-images-1.medium.com/max/2160/1*tmaCfNHgzaAJNop4Aa2afA.gif)
 
@@ -51,8 +50,7 @@ Continuously clean up the log by removing entries older than the current time wi
 
 Count the remaining entries in the log. If the count exceeds the allowed limit, reject new requests; otherwise, allow them.
 
-How to Implement It with Redis and Java
----------------------------------------
+## How to Implement It with Redis and Java
 
 Implementing the **Sliding Window Log** with **Redis** involves logging each request with a timestamp and checking how many requests fall within the defined time window.
 
@@ -68,7 +66,6 @@ Use a Redis **hash** (HSET) to track each request. The hash key can represent so
 HSET bucket_name  ""
 ```
 
-
 The HSET command creates a hash where the key (bucket_name) identifies the client, and the field () marks the exact time of the request. The value related to this field is left empty since only the timestamp matters.
 
 ### 2. **Remove Expired Entries**
@@ -78,7 +75,6 @@ To make sure only requests within a specific time window are kept, we can set a 
 ```
 HEXPIRE bucket_name 3600 FIELDS 1
 ```
-
 
 This example sets the field to expire after 3600 seconds (1 hour). This way, only recent requests stay in the hash, ensuring the bucket reflects activity within the chosen time window.
 
@@ -90,13 +86,11 @@ Use HLEN bucket_name to count the existing fields in the hash. This gives you th
 HLEN bucket_name
 ```
 
-
 Compare this count to the allowed limit. **If it's over the limit, reject the new request. Otherwise, add the request to the bucket and allow it.**
 
 Cool! Now that we understand the steps, let's implement this in Java with Jedis!
 
-Implementing it with Jedis
---------------------------
+## Implementing it with Jedis
 
 **Jedis** is a popular library that makes it easy to work with **Redis** from **Java** applications.
 
@@ -111,7 +105,6 @@ redis.clients
 jedis
 5.2.0
 ```
-
 
 ### Create a SlidingWindowLogRateLimiter class:
 
@@ -142,7 +135,6 @@ private final int limit;
 }
 ```
 
-
 ### Validate the Requests
 
 The main task of this rate limiter is to determine whether a client's request falls within their allowed limit. If it does, the request is permitted, and the log is updated to include it. If it doesn't, the request is denied without updating the log.
@@ -157,7 +149,6 @@ public boolean isAllowed(String clientId) {
 }
 ```
 
-
 For example, if the client ID is user123, their key would be rate_limit:user123.
 
 **Step 2: Fetch the current count and determine if the request is allowed** !  
@@ -170,7 +161,6 @@ To determine if the request is allowed to proceed, we'll simply check if the cur
 long requestCount = jedis.hlen(key);
 boolean isAllowed = requestCount < limit;
 ```
-
 
 **Step 3: Update the bucket and return the result**   
 
@@ -185,7 +175,6 @@ if (isAllowed) {
     var result = transaction.exec();
 }
 ```
-
 
 We'll do this in a **transaction** to ensure that:
 
@@ -206,13 +195,11 @@ if (result.isEmpty()) {
 }
 ```
 
-
 Finally, the transaction is executed, and the result of isAllowed is returned.
 
 ```
 return isAllowed;
 ```
-
 
 ### Complete Implementation
 
@@ -240,11 +227,9 @@ public boolean isAllowed(String clientId) {
 }
 ```
 
-
 And we're ready to start testing its behavior!
 
-Testing our Rate Limiter
-------------------------
+## Testing our Rate Limiter
 
 To ensure our Sliding Window Log Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
@@ -275,7 +260,6 @@ assertj-core
 test
 ```
 
-
 Once you've added these dependencies, you're ready to start writing your test class.
 
 ### Setting Up the Test Class
@@ -302,7 +286,6 @@ public class SlidingWindowLogRateLimiterTest {
 }
 ```
 
-
 ### Preparing the Environment Before Each Test
 
 Before running any test, we need to ensure a clean Redis environment. Here's what we'll do:
@@ -320,7 +303,6 @@ public void setup() {
 }
 ```
 
-
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
 ### Cleaning Up After Each Test
@@ -333,7 +315,6 @@ public void tearDown() {
     jedis.close();
 }
 ```
-
 
 ### Full Setup
 
@@ -363,7 +344,6 @@ public class FixedWindowRateLimiterTest {
 }
 ```
 
-
 ### Verifying Requests Within the Limit
 
 This test ensures the rate limiter allows requests within the defined limit.
@@ -381,7 +361,6 @@ public void shouldAllowRequestsWithinLimit() {
     }
 }
 ```
-
 
 ### Verifying Requests Beyond the Limit
 
@@ -404,7 +383,6 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
             .isFalse();
 }
 ```
-
 
 ### **Verifying Requests After Sliding Window Resets**
 
@@ -440,7 +418,6 @@ public void shouldAllowRequestsAgainAfterSlidingWindowResets() throws Interrupte
 }
 ```
 
-
 ### Verifying Independent Handling of Multiple Clients
 
 This test ensures the rate limiter handles multiple clients independently.
@@ -475,7 +452,6 @@ public void shouldHandleMultipleClientsIndependently() {
     }
 }
 ```
-
 
 ### **Verifying Gradual Request Allowance in Sliding Window**
 
@@ -514,7 +490,6 @@ After waiting 2 seconds, enough of the older requests have expired to allow one 
  }
 ```
 
-
 ### Verifying Denied Requests Are Not Counted
 
 This test ensures that requests denied by the rate limiter are not included in the request count.
@@ -548,7 +523,6 @@ public void testRateLimitDeniedRequestsAreNotCounted() {
             .isEqualTo(requestCount);
 }
 ```
-
 
 Is there any other behavior we should verify? Let me know in the comments!
 

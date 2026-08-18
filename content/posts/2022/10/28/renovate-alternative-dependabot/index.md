@@ -34,8 +34,7 @@ Recently, I watched Viktor Farcic's [Automate Dependency Management With Renovat
 * On my blog
 * For a demo using Docker Compose
 
-Keeping my blog up-to-date
---------------------------
+## Keeping my blog up-to-date
 
 I've already written multiple times about my blog's infrastructure. In the context of this post, the relevant parts are:
 
@@ -63,7 +62,6 @@ include:
       file: '/templates/renovate-dind.gitlab-ci.yml'                    #1
 ```
 
-
 1. The [template](https://gitlab.com/renovate-bot/renovate-runner/-/blob/main/templates/renovate-dind.gitlab-ci.yml) provides a solid set of default values, *e.g.*, environment variables: the platform is GitLab, the log level is info, etc.
 
 By default, Renovate "sniffs" what package managers the project uses. On my blog, it checked HTML files as well. To reduce the scope, I configured only the necessary package managers:
@@ -73,7 +71,6 @@ By default, Renovate "sniffs" what package managers the project uses. On my blog
   "enabledManagers": ["gitlabci", "dockerfile", "bundler"]
 }
 ```
-
 
 It allows for managing dependencies of GitLab CI, Docker, and Bundler only.
 
@@ -107,7 +104,6 @@ It seems to be much more reasonable. I updated Jekyll's configuration file:
 }
 ```
 
-
 1. Update the range strategy to apply
 2. Only for Bundler - it doesn't make any sense for GitLab or Docker
 
@@ -131,7 +127,6 @@ I reran the Renovate job, and I had my Merge Request ready this time! Renovate c
 15 | 15 |   |   concurrent-ruby (1.1.10)
 16 | 16 |   |   cssminify2 (2.0.1)
 ```
-
 
 Here's a log snippet that shows the magic:
 
@@ -163,9 +158,7 @@ Here's a log snippet that shows the magic:
 }
 ```
 
-
-Keeping a demo up-to-date
--------------------------
+## Keeping a demo up-to-date
 
 While I host my blog on a private repository on GitLab, all my demos are public repositories on GitHub. As I mentioned, the integration of Dependabot on GitHub is excellent. However, it leaves out a few package managers I'm regularly using, Docker Compose files and Kubernetes manifests. Renovate to the rescue!
 
@@ -184,8 +177,7 @@ Even better, Renovate Bot limits the number of PRs to abide by [GitHub rate limi
 
 How to interact with the dashboard is pretty self-explanatory. Just check the relevant checkbox, and it opens a PR regarding the dependency. Renovate will also open PRs if below the rate limit.
 
-Conclusion
-----------
+## Conclusion
 
 Renovate is a great tool. It works seamlessly on GitHub; on GitLab, you need a dedicated runner.
 

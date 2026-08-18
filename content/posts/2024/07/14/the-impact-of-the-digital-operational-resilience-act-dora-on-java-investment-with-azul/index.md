@@ -68,7 +68,3 @@ Its robust uniquely comprehensive long-term support (LTS) versions ensure stabil
 With a proven track record in performance and reliability, Azul not only meets but exceeds the stringent requirements of DORA, offering financial institutions the best-in-breed Java solution that is now mandatory in the EU to navigate the complexities of digital operational resilience effectively.
 
 [How to get ready for DORA? Check it out here.](https://foojay.io/today/consequences-of-dora-on-java-and-openjdk-with-azul/)
-
-<br />
-
-<br />

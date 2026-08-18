@@ -35,7 +35,6 @@ The most commonly used jvm option that requires configuration before the Elastic
 -Xmx2g
 ```
 
-
 This would configure the heap on startup. However the configuration and parsing mechanism is more powerful. Not only you can configure options, you can also configure different options for different JDK major versions.
 
 Side note: In case you are asking yourself, why is there a `jvm.options.d` directory and not just a file: this caters properly for package upgrades of RPM or debian packages, so that the original `jvm.options` can be replaced and does not need to be edited.
@@ -59,7 +58,6 @@ So, why is this useful you might ask yourself? Well, sometimes a new Java releas
 14-:-XX:InitiatingHeapOccupancyPercent=30
 ```
 
-
 The same applies for different GC options with Java 8 and Java 9
 
 ```
@@ -76,7 +74,6 @@ The same applies for different GC options with Java 8 and Java 9
 # JDK 9+ GC logging
 9-:-Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m
 ```
-
 
 You can read more about [setting JVM options](https://www.elastic.co/guide/en/elasticsearch/reference/current/jvm-options.html) in the official Elastic docs.
 
@@ -102,7 +99,6 @@ private static String maybeShowCodeDetailsInExceptionMessages() {
 }
 ```
 
-
 But this infrastructure can go even further, and become smarter over time. How about providing different JVM options depending on configuration settings like the heap?
 
 This is exactly what has been worked on in a [recent addition](https://github.com/elastic/elasticsearch/pull/59667) to Elasticsearch.
@@ -118,7 +114,6 @@ final boolean tuneG1GCInitiatingHeapOccupancyPercent =
 final int tuneG1GCReservePercent =
     tuneG1GCReservePercent(finalJvmOptions, tuneG1GCForSmallHeap);
 ```
-
 
 So, what happens here and why? If less than 8GB of heap are configured - which is more often than you think, as many users are also running smaller instances of Elasticsearch and there is an ongoing effort of using less heap and offload this to other parts of the system - three additional options are set. Of course everything can be manually overwritten.
 

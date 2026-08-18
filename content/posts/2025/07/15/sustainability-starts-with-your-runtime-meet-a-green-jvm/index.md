@@ -35,7 +35,6 @@ Efficiency and sustainability go hand in hand, and we've built [Azul Platform Pr
 JVM Performance = Energy Efficiency
 ```
 
-
 Every CPU cycle your application burns costs money --- and energy. Traditional JVMs, while functional, are often bloated with overhead: long garbage collection pauses, unpredictable latency, and underutilized memory.
 
 Azul Platform Prime changes the game by making your Java apps more efficient at every level:
@@ -49,8 +48,7 @@ Azul Platform Prime changes the game by making your Java apps more efficient at 
 This means your Java applications do more, with less. Less compute. Less memory. Less electricity.
 ![DIAGRAM: Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.](https://azul.imgix.net/wp-content/uploads/2025-07-01-green-diagram-1024x503.jpg?auto=format&crop=faces,entropy&fit=max&q=80&s=8b8f9c85ac4a7bf6cc6a795def64b890) Faster Java apps and increased instance utilization with Azul Platform Prime lead to lower cloud costs and lower energy consumption.
 
-Sustainable engineering in action
----------------------------------
+## Sustainable engineering in action
 
 You gain several benefits by improving your JVM efficiency:
 
@@ -60,8 +58,7 @@ You gain several benefits by improving your JVM efficiency:
 
 We've seen real-world examples where customers reduced infrastructure costs by up to 50%, while also slashing energy consumption --- without rewriting a single line of code.
 
-Cost and carbon reduction: an illustrative example
---------------------------------------------------
+## Cost and carbon reduction: an illustrative example
 
 Let's take the commonly used AWS EC2 m5.large instance running your Java apps on OpenJDK. If you average (across the year) 100 of these instances:
 
@@ -84,8 +81,7 @@ This is equivalent to:
 
 *\*AWS does not publish official per-instance power consumption data. The energy usage and carbon emission figures presented here are based on publicly available instance specifications, third-party research, and community modelling tools. Actual emissions may vary depending on workload, utilization, datacentre efficiency, and regional energy mix.*
 
-Net-zero goals start at the platform level
-------------------------------------------
+## Net-zero goals start at the platform level
 
 It's a powerful reminder that sustainability gains don't always require application rewrites or architectural overhauls. Green software initiatives often focus on optimizing the application layer---but what about the platform that powers your app?
 
@@ -93,8 +89,7 @@ By simply switching to a more efficient JVM like Azul Platform Prime, organizati
 
 Just swap the runtime, and you're already on a greener path.
 
-Ready to see the difference?
-----------------------------
+## Ready to see the difference?
 
 Whether you're a sustainability lead, a FinOps architect, or a Java developer who just cares about clean code *and* a cleaner planet, Azul Platform Prime deserves a look.
 

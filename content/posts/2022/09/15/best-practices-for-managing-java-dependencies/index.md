@@ -37,8 +37,7 @@ In this article, I'll give you some advice and best practices for dealing with J
 * Update your Java dependencies
 * Removing Java dependencies from your project
 
-Why be more aware of your Java dependencies
--------------------------------------------
+## Why be more aware of your Java dependencies
 
 When it comes to managing code contributions, we generally turn to a process like [code reviews](https://snyk.io/learn/code-review/) for a first-pass quality assurance measure, before merging new code into our main branch. Check out our guide to [Java code review tools](https://snyk.io/learn/code-review/java-tools/) to learn more. Practicing pair programming is another way to cover this quality control process.
 
@@ -56,15 +55,13 @@ All of this can lead to:
 * Compatibility problems when updating libraries
 * And more
 
-Managing Java dependencies
---------------------------
+## Managing Java dependencies
 
 One of the best practices for significantly using repositories, like Maven Central, is to set up your own repositories manager. This is a dedicated proxy server between your internal development and the public repositories --- which will not only gives you faster and more stable builds, but also allows you to set up [policies](https://snyk.io/series/open-source-security/open-source-policy/) for Java packages. You can, for instance, block certain versions so they cannot be downloaded and used in your applications.
 
 For more information about repository managers and a list of possible products, take a look at the [Maven documentation](https://maven.apache.org/repository-management.html).
 
-Including new dependencies in your Java project
------------------------------------------------
+## Including new dependencies in your Java project
 
 When you need to solve a problem, and there is a library available, you'll likely want to include it in your Java dependency manifest files.
 
@@ -122,8 +119,7 @@ The Snyk CLI is a great tool for scanning your Maven or Gradle file.
 
 If your library contains a security vulnerability, you might want to pick another package to depend on.
 
-Updating your Java dependencies
--------------------------------
+## Updating your Java dependencies
 
 ### 1. Are there newer versions available?
 
@@ -185,8 +181,7 @@ Alternatively, you can add your Git repository to Snyk, so we can scan and updat
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-snyk-vuln-report-1240x1036.jpg)
 
-Removing Java dependencies from your project
---------------------------------------------
+## Removing Java dependencies from your project
 
 ### 1. Is the package still in use?
 
@@ -218,8 +213,7 @@ I have to configure the plugin accordingly to set the `gradleLint.rules`. You ca
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-lint-violation.jpg)
 
-Create a solid dependency management strategy for your Java applications
-------------------------------------------------------------------------
+## Create a solid dependency management strategy for your Java applications
 
 When developing Java applications and using dependencies like libraries or frameworks, it's wise to create a strategy for how to handle them.
 
@@ -229,8 +223,7 @@ By creating a clear strategy, we prevent surprises when a high priority security
 
 Check out [this article to learn more about managing open source dependencies](https://snyk.io/series/open-source-security/software-dependencies/).
 
-Secure your dependencies for free
----------------------------------
+## Secure your dependencies for free
 
 Create a Snyk account today for effortless scanning and secure dependencies.
 

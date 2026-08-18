@@ -31,16 +31,11 @@ December was not a good time for Java developers and even less for Ops. The form
 ](https://twitter.com/OndroMih/status/1469599938782932992)
 In short, `System.Logger` is a façade over your logging engine. Instead of using, say, SFL4J's API and the wanted implementation, you'd use `System.Logger` instead of SLF4J. It's available since Java 9, and it's a bummer that I learned about it only recently.
 
-<br />
-
-System.Logger API
------------------
+## System.Logger API
 
 The API is a bit different than other logging APIs: it avoids different logging methods such as `debug()`, `info()` in favor of a single `log()` one where you pass a logging `Level` parameter.
 
 <img decoding="async" class="size-medium wp-image-52383 aligncenter" src="system-logger-api-700x369.png" alt="" width="700" height="369">
-
-<br />
 
 If you don't provide any corresponding implementation on the classpath, `System.Logger` defaults to .
 
@@ -56,7 +51,6 @@ public class LoggerExample {
 }
 ```
 
-
 1. Get the logger
 
 Running the above snippet outputs the following:
@@ -66,9 +60,7 @@ Dec 24, 2021 10:38:15 AM c.f.b.DefaultLogger main
 INFO: Hello world!
 ```
 
-
-Compatible implementations
---------------------------
+## Compatible implementations
 
 Most applications currently use [Log4J2](https://logging.apache.org/log4j/2.x/) or [SLF4J](https://www.slf4j.org/). Both provide a compatible `System.Logger` implementation.
 
@@ -89,7 +81,6 @@ For Log4J, we need to add two dependencies:
 </dependencies>
 ```
 
-
 1. Log4J implementation
 2. Bridge from `System.Logger` to Log4J
 
@@ -98,7 +89,6 @@ The same logging snippet as above now outputs the following:
 ```
 11:00:07.373 [main] INFO  c.f.b.DefaultLogger - Hello world!
 ```
-
 
 To use SLF4J instead, use the following dependencies:
 
@@ -117,7 +107,6 @@ To use SLF4J instead, use the following dependencies:
 </dependencies>
 ```
 
-
 1. Basic SLF4J implementation. Any other implementation will do, *e.g.* Logback
 2. Bridge from `System.Logger` to Log4J
 
@@ -127,15 +116,11 @@ The snippet outputs:
 [main] INFO c.f.b.DefaultLogger - Hello world!
 ```
 
-
-Your own `System.Logger` implementation
----------------------------------------
+## Your own `System.Logger` implementation
 
 `System.Logger` relies on Java's [ServiceLoader](https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html) mechanism. Both `log4j-jpl` and `slf4j-jdk-platform-logging` contain a `META-INF/services/java.lang.System$LoggerFinder` file that points to a `LoggerFinder` implementation.
 
 <img decoding="async" class="size-medium wp-image-52384 aligncenter" src="system-loggerfinder-700x284.png" alt="" width="700" height="284">
-
-<br />
 
 We can create our own based on `System.out` for educational purposes.  
 
@@ -177,7 +162,6 @@ public class ConsoleLogger implements System.Logger {
 }
 ```
 
-
 Then, we need to code the `System.LoggerFinder`:
 
 ```java
@@ -192,7 +176,6 @@ public class ConsoleLoggerFinder extends System.LoggerFinder {
 }
 ```
 
-
 1. Keep a map of all existing loggers
 2. Create a logger if it doesn't already exist and store it
 
@@ -202,16 +185,13 @@ Finally, we create a service file:
 ch.frankel.blog.ConsoleLoggerFinder
 ```
 
-
 And now, running the same code snippet outputs:
 
 ```
 Hello world!
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 While the API is more limited than other more established logging APIs, `System.Logger` is a great idea. It offers a façade that's part of the JDK. Thus, it avoids using a third-party façade that needs to wire calls to another unrelated implementation, *e.g.* SLF4J to Log4J2.
 

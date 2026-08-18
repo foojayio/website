@@ -29,8 +29,7 @@ frozen: false
 * DialogueContext object for storing data that is local to the context in which the dialogue is being run.
 * Improvements to avoid various crashes on the Raspberry Pi.
 
-Auto-generated Changelog
-------------------------
+## Auto-generated Changelog
 
 The full changelog is given below.
 
@@ -81,7 +80,6 @@ The full changelog is given below.
 
 * ignore auto-generated changelog files [commit](https://github.com/AlmasB/FXGL/commit/6316a0c9a)
 
-Contribute
-----------
+## Contribute
 
 You can contribute to the development on [GitHub](https://github.com/AlmasB/FXGL/blob/dev/CONTRIBUTING.md).

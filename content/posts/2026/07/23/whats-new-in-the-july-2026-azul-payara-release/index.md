@@ -21,8 +21,7 @@ frozen: false
 
 The July 2026 release brings Azul Payara 7.2.0, Azul Payara Community 7.2026.7, Azul Payara 6.40.0, Azul Payara 5.89.0, and Azul Payara 4.1.2.191.57. A single security fix runs through every release, backported from the 7 line down to Payara 4: brute force attack prevention for authentication. Enterprise 6.40.0 additionally closes two Jackson CVEs that apply to the 6 line.
 
-Downloads \& Release Notes
---------------------------
+## Downloads \& Release Notes
 
 * [Azul Payara Community (free version) - download](https://payara.fish/downloads/payara-platform-community-edition/)
 
@@ -38,8 +37,7 @@ Downloads \& Release Notes
 
 * [Azul Payara 7.2.0 - release notes](https://docs.azul.com/payara-community/release-notes/release-notes-7.2026.7.html)
 
-A Security Fix, Patched Across Every Branch
--------------------------------------------
+## A Security Fix, Patched Across Every Branch
 
 Brute force attack prevention has been added across Azul Payara Server and Micro 7.2.0, 6.40.0, 5.89.0, and 4.1.2.191.57, and Azul Payara Community 7.2026.7. The fix protects authentication against repeated credential guessing.
 
@@ -47,13 +45,11 @@ This change originated in Eclipse GlassFish (eclipse-ee4j/glassfish#26026) and w
 
 Shipping the patch across the full supported lifecycle, not only the latest major release, is the practice long-running Azul customers rely on. Azul is a registered CVE Numbering Authority (CNA) under CISA and DHS oversight, with patches backported to every supported version on a published monthly schedule. There is no reason to delay upgrading based on the major-version line you run.
 
-Two Jackson CVEs Closed on the 6 Line
--------------------------------------
+## Two Jackson CVEs Closed on the 6 Line
 
 Azul Payara Server and Micro 6.40.0 also addresses CVE-2026-54512 and CVE-2026-54513, a Jackson `PolymorphicTypeValidator` bypass. The fix lands alongside the Jackson BOM upgrade on the 6 line. The 7 line is not affected.
 
-Azul Payara Server and Micro 7.2.0: The Payara 7 Line, Monthly Cadence
-----------------------------------------------------------------------
+## Azul Payara Server and Micro 7.2.0: The Payara 7 Line, Monthly Cadence
 
 Azul Payara Server and Micro 7.2.0 is the second regular monthly release on the Payara 7 line since Server 7 and Micro 7 reached general availability in May. Server 7.2.0 is Jakarta EE 11 certified across Full Platform, Web Profile, and Core Profile; Micro 7.2.0 implements the Web Profile and Core Profile APIs. Both ship MicroProfile 6.1: Config, Metrics, Health, Fault Tolerance, JWT, OpenAPI, REST Client, and Telemetry Tracing.
 
@@ -71,8 +67,7 @@ The 7 line picks up Grizzly 5.0.2 this cycle, the Jakarta EE 11 era transport. T
 
 Beyond Grizzly 5.0.2, the 7 line moves Woodstox to 7.2.1, the Jakarta MVC API to 3.0.1, JNA to 5.19.1, Reactor Core to 3.8.6, SmallRye Common to 2.19.0, JLine to 3.30.15, SmallRye Config to 3.18.0, and the Jackson BOM to 2.22.1. The full list is in the release notes.
 
-Azul Payara Community 7.2026.7
-------------------------------
+## Azul Payara Community 7.2026.7
 
 Azul Payara Community 7.2026.7 is the open-source distribution that tracks the Payara 7 development line. It carries the same security fix, bug fixes, and component upgrades as Server and Micro 7.2.0, plus three community-track items of its own.
 
@@ -80,8 +75,7 @@ SSH nodes no longer require elevated permissions. Combined with the Apache SSHD 
 
 Thanks to community contributor [Larry Primak](https://github.com/lprimak) for the JVM thread stats provider fix included in this release, which prevents stack traces from being cached.
 
-Azul Payara Server and Micro 6.40.0: Jakarta EE 10, Continued
--------------------------------------------------------------
+## Azul Payara Server and Micro 6.40.0: Jakarta EE 10, Continued
 
 Azul Payara Server and Micro 6.40.0 continue the Jakarta EE 10 and MicroProfile 6.1 line for customers not yet on Payara 7. Alongside the cross-cycle brute force fix and the two Jackson CVEs above, this release carries the shared fixes for the IBM MQ resource adapter, the deployment group restart progress, and the JVM thread stats provider stack trace caching.
 
@@ -89,8 +83,7 @@ Azul Payara Server and Micro 6.40.0 continue the Jakarta EE 10 and MicroProfile 
 
 Eclipse Persistence ASM moves to 9.10.0, the JAXB Codemodel to 4.0.9, the Jackson BOM to 2.22.0 (carrying the CVE fix), Kotlin stdlib to 2.4.0, Nimbus JOSE JWT to 10.9.1, Apache Ant to 1.10.17, and Mimepull to 1.11.0.
 
-Azul Payara Server and Micro 5.89.0: Jakarta EE 8, Continued
-------------------------------------------------------------
+## Azul Payara Server and Micro 5.89.0: Jakarta EE 8, Continued
 
 Azul Payara Server and Micro 5.89.0 retain the` javax.*` namespace, Jakarta EE 8, and MicroProfile 4.1 for long-lived applications that have not migrated to the` jakarta.*` namespace. This release picks up the brute force security fix and the shared IBM MQ, deployment group, and stack trace caching fixes.
 
@@ -98,18 +91,15 @@ Azul Payara Server and Micro 5.89.0 retain the` javax.*` namespace, Jakarta EE 8
 
 Apache Ant moves to 1.10.17, Apache BCEL to 6.12.0, and Nimbus JOSE JWT to 10.9.1. The `istack-commons-runtime` has been reverted from 4.2.0 to 3.0.12, as 4.2.0 is incompatible with Java 8, which remains a supported target on the 5 line.
 
-Azul Payara Server and Micro 4.1.2.191.57: Legacy Branch, Still Maintained
---------------------------------------------------------------------------
+## Azul Payara Server and Micro 4.1.2.191.57: Legacy Branch, Still Maintained
 
 Azul Payara Server and Micro 4.1.2.191.57 receive the cross-cycle brute force security fix. Customers on the 4 branch without contracted Lifetime Support can still access existing binaries but receive no new releases beyond security patches.
 
-Looking Ahead
--------------
+## Looking Ahead
 
 The Azul Payara product line now spans the JDK (Azul Zulu and Azul Platform Prime), the full application server (Azul Payara Server), and the cloud-native runtime (Azul Payara Micro), all from one vendor. The 7, 6, 5, and 4 lines continue to receive monthly security and bug-fix releases on the published schedule, with patches backported across every supported version. For teams on the 5 or 6 line evaluating the move to Payara 7, the `jakarta.*` namespace is stable between EE 10 and EE 11, so existing Jakarta EE 10 applications deploy on Payara 7 by upgrading the runtime, not rewriting the codebase. Migration assessments are available through your Azul account team.
 
-Upgrading and Feedback
-----------------------
+## Upgrading and Feedback
 
 We recommend upgrading to the latest release for your line. A security patch is available across every supported branch, and Enterprise 6.40.0 closes two additional Jackson CVEs on the 6 line.
 

@@ -20,8 +20,6 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 Java developers building applications for Raspberry Pi often face a common challenge: combining hardware access with modern application frameworks.
 
 [Pi4J](https://www.pi4j.com/) has become the standard way to access GPIO, I2C, SPI, UART, and other Raspberry Pi interfaces from Java applications. On the other hand, Quarkus has established itself as one of the most innovative Java frameworks, offering fast startup times, low memory consumption, and a developer-friendly experience.
@@ -50,8 +48,6 @@ While Pi4J provides excellent hardware integration, Quarkus adds the application
 
 The Quarkus Pi4J extension allows developers to use Pi4J naturally within a Quarkus application, combining hardware control with all the features available in the Quarkus ecosystem.
 ![](pi4j_quarkus.png)
-
-<br />
 
 ### What Does the Extension Provide?
 
@@ -92,7 +88,6 @@ public class LedService {
 }
 ```
 
-
 ### Configuration Without Recompilation
 
 One of the most powerful features of the Quarkus Pi4J extension is the ability to externalize hardware configuration using standard Quarkus configuration properties.
@@ -106,7 +101,6 @@ For example:
 ```
 pi4j.gpio.led.address=22
 ```
-
 
 The application can then inject and use the configured GPIO directly, keeping hardware details outside of the business logic.
 
@@ -131,7 +125,6 @@ A GPIO can be referenced by its physical address:
 DigitalOutput led;
 ```
 
-
 Or by a logical name defined in configuration:
 
 ```
@@ -139,7 +132,6 @@ Or by a logical name defined in configuration:
 @Named("led")
 DigitalOutput led;
 ```
-
 
 Using named GPIOs is particularly useful for larger projects because the application becomes independent of the actual pin assignment. If the hardware wiring changes, only the configuration needs to be updated while the Java code remains unchanged.
 
@@ -186,8 +178,6 @@ The extension is hosted within the Quarkiverse, the community ecosystem for Quar
 
 Being part of Quarkiverse makes the extension easier to discover, maintain, and integrate into existing Quarkus projects.
 ![](PrPiS-687x1024.jpg)
-
-<br />
 
 ### Looking Ahead
 

@@ -58,8 +58,6 @@ I built one of these<https://en.wikipedia.org/wiki/ZX80>, etc. So, I left colleg
 
 *Steve Poole's journey emphasizes adaptability, passion, and the value of hands-on experience in shaping a fulfilling career, even when faced with obstacles and changing paths.*   
 
-
-
 ### Bazlur: What was your first experience like working as an operator on a mini-computer for a local company, and how did it shape your career path moving forward?
 
 **Steve Poole**: It was dirty, smelly, and hard physical work. Computers were big, printers, tape drives, etc., were big too. We went through hundreds of boxes of paper (about A3 size page equivalent) per month, and my colleagues and I had to carry them all up three flights of stairs. But I loved it. I left home early and stayed late.
@@ -71,8 +69,6 @@ That's what gets me up at night, and it still does. So my career has been this m
 **Editor's note:**
 
 *Steve's journey shows how important it is to be committed and find meaning in one's work, as he feels fulfilled by using technology to make a positive difference in the lives of others.*
-
-
 
 ### Bazlur: You mentioned that you've worked in hardware, software, business development, developer relations, and education throughout your career. How has software development specifically changed since you first started working in the industry, and how have you adapted to these changes? As someone who has seen the evolution of software development firsthand, what do you think are some of the most significant changes or advancements in software development that you've seen over the course of your career that has impacted you personally and the community as a whole?
 
@@ -92,18 +88,10 @@ When I started, the code was poorly written, hardly tested (mostly by end users)
 
 And smaller in scope, machines were much less powerful (and pre-Java), so creating complex programs was hard. Modern developers have access to information and reusable code. Nowadays, we say 90% of an app is open source. It would have been 0% when I started. Everything was bought or written in-house. So productivity was pretty low. Two- to three-year delivery cycles were common.
 
-<br />
-
 **Editor's note:**   
 *Steve's experience showcases the programming landscape's evolution, emphasizing the importance of embracing change and innovation. The shift from rigid processes to agile methodologies and programming democratization highlights the need for continuous learning and adaptability in a rapidly evolving field.*
 
-
-
 ### Bazlur: Wow, how much the industry has changed over the years is incredible. With all these changes happening rapidly, what skills do you think are essential for developers to stay relevant in the industry, especially with emerging technologies like AI and machine learning? And how do you suggest developers keep up with the constant changes and advancements? Additionally, In your opinion, what are some of the biggest challenges that developers face today?
-
-<br />
-
-<br />
 
 **Steve Poole** : Keeping up to date is a continuous challenge. As developers, we should all have some expertise in <https://en.wikipedia.org/wiki/Critical_thinking> anyway. My advice is to use and grow that skill so you can apply it to new technologies when they appear. Get to the core of the concept quickly and find a suitable analogy; then, it's much easier to learn about the technology without going into the weeds. Of course, the other thing to do is to use your hands. Play with the tech. Find a suitable use case that's meaningful for you and figure out how to deliver a solution with the new technology.
 
@@ -113,11 +101,7 @@ On a non-technical note, the rising challenge of cybercrime is also going to hav
 
 ***Editor's note:**Steve's insights highlight the need for developers to cultivate critical thinking and hands-on experience, adapting to industry changes by focusing on software engineering principles and ensuring code safety in an ever-evolving landscape.*
 
-
-
 ### Bazlur: As AI continues to advance, many new developers are worried that their job prospects may be limited, and they may even lose their jobs. What advice would you give these developers, and do you share their concerns, given your experience with many technological shifts?
-
-<br />
 
 **Steve Poole:** I don't really share their concerns for four reasons at the moment.  
 
@@ -134,8 +118,6 @@ I've seen some great examples where tools like Chat-GPT help developers debug or
 **Editor's notes:**   
 *Steve points out that AI tools still need human review and input, IP ownership issues have not been solved, and developers have always been able to adapt to new technologies. Developers should view AI tools as a means to enhance their work while continuing to evolve in their roles.*
 
-
-
 ### Bazlur: Your insights on AI-generated code were fascinating! While it can be helpful for programmers, in the end, programming is ultimately a creative process that requires human expertise. Based on your experience, what advice would you give to new programmers who are uncertain about the prospects of their careers and are unsure of the steps they should take to ensure their careers are on the right track? With so much noise on the internet, it can be difficult for newcomers to navigate the field and determine which technologies to focus on.
 
 **Steve Poole**: I didn't plan to be a developer, so my initial motivations differed. However, I have been fortunate to learn that I love being one and couldn't imagine doing anything else now. Having said that, keeping your career moving, whether for love or money, is similar. There are particular patterns of career you can take; mostly, it's about balancing moving on with putting down roots.
@@ -148,15 +130,9 @@ But you can often pick up better pay because of the experience and related busin
 2. The tech world is like politics. Everything happens for a reason, and almost all reasons are driven by business. Watch and learn how our industry works, and you'll be better able to choose a valuable career path.
 3. Whatever you choose to do, whatever route you go down - make sure it's really what you want. Of course, money is essential, but so is job satisfaction. As developers, were are creative people - jobs that pay well but limit your ability to be creative will ultimately leave you empty. So choose wisely!
 
-<br />
-
 **Editor's note:** *Steve's advice on moving up in the tech industry is to stay current on market trends, understand the forces that drive the industry, and ensure that your career path makes you happy. He talks about how important it is to keep learning, know the business world, and find a balance between making money and enjoying your job. Developers are creative individuals who thrive when they can exercise their creativity.*   
 
-
-
 ### Bazlur: That's great advice! It seems like you have found a career that you truly love. I'm curious, have you ever faced a crossroads in your career where you had to choose between taking on new challenges and sticking with what you know? If so, how did you approach that decision-making process?
-
-<br />
 
 **Steve Poole:**I've had multiple occurrences. I'm unsure if there is ever a robust strategy for making these decisions, or at least how not to score the options. That is pretty unique to everyone. Almost everything is a leap of faith.
 
@@ -166,11 +142,7 @@ Whatever your personal process is, I'd say, there is one thing you must commit t
 
 If you don't take chances and don't try different things, you're actively opting out and settling for whatever you have now.
 
-<br />
-
 **Editor's note:** *Steve's reflections emphasize the importance of balancing potential benefits and risks in career decisions, embracing change, and committing to choices. This mindset encourages growth and highlights the idea that "you get what you settle for."*
-
-
 
 ### Bazlur: Thank you for sharing your valuable insight with us; I am sure our readers will benefit immensely. On a different note, could you tell us some funny or interesting stories from your time in the software industry?
 
@@ -189,10 +161,6 @@ Unfortunately, we just made assumptions before we'd even started about the probl
 </figure>
 
 **Editor's note:** *Steve's anecdote emphasizes the importance of thorough diagnosis and avoiding assumptions when tackling problems. This lesson highlights the need to step back, understand the situation, and remain open to possibilities, which is applicable across various problem-solving contexts.*
-
-<br />
-
-
 
 ### Conclusion:
 

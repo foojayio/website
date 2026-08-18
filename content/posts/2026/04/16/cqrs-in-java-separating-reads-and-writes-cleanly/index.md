@@ -34,13 +34,11 @@ Spring Boot applications generally have two main components to a repository patt
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/CQRSModelSpring) used in this article. Note the connection string in the application.properties file passes the app name of 'devrel-blog-java-cqrs' to the DB.
 
-The Spring standard repository
-------------------------------
+## The Spring standard repository
 
 The standard repo items can extend the base MongoRepository class. This greatly reduces the amount of code needed for standard CRUD operations. However, if we're using the CQRS pattern, we'll want to use custom repositories for both the read and write functions to the DB. We can still use standard Spring functions for some of our read functionality.
 
-Creating separate repositories for the read and write
------------------------------------------------------
+## Creating separate repositories for the read and write
 
 To implement CQRS, we'll need two custom repos in Spring. One for the reads and one for the writes. Although this may add a little bit of complexity up front, this will make it easier to modify going forward. Consider the following changes that may need to be made in the future:
 
@@ -63,7 +61,6 @@ public interface ItemReadRepository extends MongoRepository<GroceryItem, String>
 }
 ```
 
-
 Here, we define two different query functions plus a count function. In this case, we can use the standard MongoRepository functions by adding query annotations.
 
 * **findItemByName** : This passes the query {name: '\<value\>'} to the find function in MongoRepository. As seen by the declaration, it returns a single GroceryItem. This maps to the MongoDB *findOne* function and translates to the MongoDB query:
@@ -72,14 +69,12 @@ Here, we define two different query functions plus a count function. In this cas
 db.groceryitem.findOne({"name" : "<value passed in>"})
 ```
 
-
 * **findAllbyCategory** : This returns a list of GroceryItems by category. Since this function returns a list, the MongoDB *find* function is used to return all items that meet the criteria. In this example, we add a projection using the 'fields' parameter to only return the 'name' and 'quantity' fields. The MongoDB find method is called under the covers:
 
 ```
 db.groceryitem.find({"category" : "<value passed in>"}).
 project({"name" : 1, "quantity" : 1})
 ```
-
 
 * **count**: This simply counts the items in the collection.
 
@@ -96,7 +91,6 @@ public interface ItemWriteRepository {
    void insert(GroceryItem item);
 }
 ```
-
 
 As discussed in my previous blog regarding Spring I/O and MongoDB updates, it's best to provide your own write functionality rather than relying on Spring's brute force approach of replacing the entire document - see the section regarding the Double-Edge Sword of Spring and MongoDB below.
 
@@ -156,9 +150,7 @@ public class ItemWriteRepositoryImpl implements ItemWriteRepository {
 }
 ```
 
-
-When requirements change
-------------------------
+## When requirements change
 
 At some point in the future, we decide to add validation to the groceryItem so that the quantity must be greater than zero. Since we don't need to worry about this when reading data, we only need to modify the ItemWriteRepository in order to implement this check:
 
@@ -174,7 +166,6 @@ public boolean validate(GroceryItem itm){
    return result;
 }
 ```
-
 
 We must also call the new validator - here's the modified insert function:
 
@@ -192,11 +183,9 @@ public void insert(GroceryItem itm){
 }
 ```
 
-
 In our code example, we also have an "updateItemQuantity" function. Since this only takes a name and a new quantity, the rule regarding quantity \> 0 can be applied in this function by checking the 'newQuantity' parameter before doing the update. When using the CQRS pattern with Spring, we can be certain that we only need to update a single repository ItemWriteRepository, to ensure that ALL sources of application writes will apply the rules consistently.
 
-The double-edged sword of Spring updates in MongoDB
----------------------------------------------------
+## The double-edged sword of Spring updates in MongoDB
 
 I've discussed this previously in my article [Building Java Microservices with the Repository Pattern](https://foojay.io/today/building-java-microservices-with-the-repository-pattern/), but it bears repeating here. In the code examples above, we wrote our own update statement to change a category. This is preferred to calling the saveAll repository function for several reasons:
 
@@ -233,7 +222,6 @@ Let's see an example. The standard save() method will replace the entire documen
 }
 ```
 
-
 Using the 'updateMulti' function in our bulkUpdateItemCategories function, this translates to an update of a single field using the MongoDB $set operator. The oplog entry would be smaller, in this case:
 
 ```
@@ -245,11 +233,9 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 }
 ```
 
-
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
-Conclusion
-----------
+## Conclusion
 
 The Command Query Responsibility Segregation (CQRS) model can (and should) be used to separate read and write logic. This has several benefits:
 

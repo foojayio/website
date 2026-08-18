@@ -37,8 +37,7 @@ Erik summed up the problems with my previous JEP proposal, and in a way with Asy
 
 He proposed that walking Java threads only at safepoints while obtaining some information in the signal handler might do the trick. So I got to work, implementing an API that does just this.
 
-Idea
-----
+## Idea
 
 The current interaction between a sampler of the profiler and the Java Threads looks like the following:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/04/wall-clock-sampling-sequence.drawio.svg)
@@ -58,8 +57,7 @@ The new API exploits a few implementation details of the OpenJDK:
 1. There is a safepoint check at least at the end of every non-inlined method (and sometimes there is not, but this is a bug, see [The Inner Workings of Safepoints](https://mostlynerdless.de/blog/2023/07/31/the-inner-workings-of-safepoints/)). OpenJ9 doesn't have checks at returns, so the whole approach I am proposing doesn't work for them.
 2. When we are at the return of a non-inlined method, we have enough information to obtain all relevant information of the top inlined and the first non-inlined frame using only the program counter, stack pointer, frame pointer, and bytecode pointer obtained in the signal handler. We focus on the first non-inlined method/frame, as inlined methods don't have physical frames, and walking them would result in walking using Java internal information, which we explicitly want to avoid.
 
-Proposed API
-------------
+## Proposed API
 
 This API builds upon the API defined in [jmethodIDs in Profiling: A Tale of Nightmares](https://mostlynerdless.de/blog/2023/07/17/jmethodids-in-profiling-a-tale-of-nightmares/) and the iterator API defined in [AsyncGetCallTrace Reworked: Frame by Frame with an Iterative Touch!](https://mostlynerdless.de/blog/2023/08/07/asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch/)
 
@@ -74,7 +72,6 @@ enum ASGST_Capabilities {
   ASGST_MARK_FRAME     = 2  // frame marking related
 };
 ```
-
 
 Profilers can query the capability bit map by calling the `int ASGST_Capabilities()` and should use the signal handler-based approach whenever the capability bit `ASGST_REGISTER_QUEUE` is absent. `ASGST_MARK_FRAME` foreshadows a new feature based on stack watermarks, see [JEP 376](https://openjdk.org/jeps/376), which I cover in a follow-up blog post. Calling an unsupported API method is undefined.
 
@@ -101,7 +98,6 @@ ASGST_Queue* ASGST_RegisterQueue(JNIEnv* env, int size,
   int options, ASGST_Handler fun, void* argument);
 ```
 
-
 A queue has a fixed size and has a registered handler, which is called for every queue item in insertion order at every safepoint, after which the queue elements are removed. Be aware that you cannot obtain the top frames using the queue handler and cannot call any JVMTI methods, but also that you aren't bound to signal safe methods in the handler.
 
 The `ASGST_Enqueue` method obtains and enqueues the top frame into the passed queue, as well as triggering a thread-local handshake/safepoint:
@@ -127,7 +123,6 @@ int ASGST_Enqueue(ASGST_Queue* queue, void* ucontext,
   void* argument);
 ```
 
-
 The passed `argument` is passed directly to the last parameter of the queue handler. Be aware of handling the case that the queue is full. Typically one falls back onto walking the stack in the signal handler or compressing the queue. The elements of a queue, including the arguments, can be obtained using the `ASGST_GetQueueElement` method:
 
 ```cpp
@@ -150,7 +145,6 @@ ASGST_QueueElement* ASGST_GetQueueElement(ASGST_Queue* queue,
   int n);
 ```
 
-
 The critical detail is that modifying the arg field is supported; this allows us to do queue compression: In the signal handler, we obtain the last element in the queue using the `ASGST_GetQueueElement` method and then get the currently enqueuable element using `ASGST_GetEnqueuableElement`. We can then check whether both elements are equal and then update the argument, omitting to enqueue the current `ucontext`.
 
 Another helper method is `ASGST_ResizeQueue` which can be used to set the queue size:
@@ -164,7 +158,6 @@ Another helper method is `ASGST_ResizeQueue` which can be used to set the queue 
 // Requires ASGST_REGISTER_QUEUE capability
 void ASGST_ResizeQueue(ASGST_Queue* queue, int size);
 ```
-
 
 The current queue size and more can be obtained using `ASGST_QueueSizeInfo`:
 
@@ -182,7 +175,6 @@ typedef struct {
 // Signal safe, but only proper values in queues thread
 ASGST_QueueSizeInfo ASGST_GetQueueSizeInfo(ASGST_Queue* queue);
 ```
-
 
 This returns the defined size/capacity, the current number of elements, and the number of enqueue attempts, including unsuccessful ones. This can be used in combination with `ASGST_ResizeQueue` to dynamically adjust the size of these queues.
 
@@ -222,15 +214,13 @@ void ASGST_SetOnQueueProcessingEnd(ASGST_Queue* queue,
   ASGST_OnQueueSafepointHandler end, void* arg);
 ```
 
-
 This should enable performance optimizations, enabling the profiler to walk the whole stack, e.g., only once per queue processing safepoint.
 
 This is the whole API that can be found in my [OpenJDK fork](https://github.com/parttimenerd/jdk/tree/asgst_iterator) with the [profile2.h](https://github.com/parttimenerd/jdk/blob/asgst_iterator/src/java.base/share/native/include/profile2.h) header. The current implementation is, of course, a prototype; there are, e.g., known inaccuracies with native (C to Java) frames on which I'm currently working.
 
 But how can we use this API? I use the same profiler from the [AsyncGetCallTrace Reworked: Frame by Frame with an Iterative Touch!](https://mostlynerdless.de/blog/2023/08/07/asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch/) blog post to demonstrate using the new API.
 
-Implementing a Small Profiler
------------------------------
+## Implementing a Small Profiler
 
 The best thing: The code gets more straightforward and uses locks to handle concurrency. Writing code that runs at safepoints is far easier than code in signal handlers; the new API moves complexity from the profiler into the JVM.
 
@@ -255,7 +245,6 @@ OnThreadStart(jvmtiEnv *jvmti_env,
 }
 ```
 
-
 We then have to enqueue the last Java frames into the `queue` in the signal handler:
 
 ```cpp
@@ -279,7 +268,6 @@ static void signalHandler(int signo, siginfo_t* siginfo,
 }
 ```
 
-
 We record the total traces, the failed traces, and the number of times the queue had been full. The enqueued frames are processed using the `asgstHandler` method at every safepoint. This method obtains the current trace and stores it directly in the flame graph, acquiring the lock to prevent data races:
 
 ```cpp
@@ -302,7 +290,6 @@ void asgstHandler(ASGST_Iterator* iterator, void* queueArg,
 }
 ```
 
-
 That's all. I might write a blog post on compression in the future, as the queues tend to fill up in wall-clock mode for threads that wait in native.
 
 You can find the complete code on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/iterative_safepoint_profiler); feel free to ask any yet unanswered questions. To use the profiler, just run it from the command line as before:
@@ -312,12 +299,10 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
   -cp samples math.MathParser
 ```
 
-
 This assumes that you use the [modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). [MathParser](https://github.com/parttimenerd/writing-a-profiler/blob/iterative_safepoint_profiler/samples/math/MathParser.java) is a demo program that generates and evaluates simple mathematical expressions. The resulting flame graph should look something like this:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/08/Screenshot-2023-08-10-at-02.54.56-2000x931.png)
 
-Conclusion
-----------
+## Conclusion
 
 The new API can be used to write profilers easier and walk stacks in a safe yet flexible manner.
 

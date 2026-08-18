@@ -53,7 +53,6 @@ All the differences can be checked by comparing with the previous release 2.1.1 
 
 The new version is available in the [Maven repository](https://mvnrepository.com/artifact/com.pi4j/pi4j-core/2.2.0) and via <https://pi4j.com/download/>.
 
-Earlier release notes
----------------------
+## Earlier release notes
 
 Release notes of the previous releases of Pi4J V.2 are available on [github.com/Pi4J/pi4j-v2/releases](https://github.com/Pi4J/pi4j-v2/releases).

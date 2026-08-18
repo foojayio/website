@@ -28,8 +28,7 @@ We also know that immutable objects are easier to maintain, lead to fewer errors
 
 In this article, I will talk about two different approaches to creating objects: Builders and Withers, typically used in the context of immutable objects, along with a new type of immutable object in Java: Records.
 
-JavaBean pattern
-----------------
+## JavaBean pattern
 
 The usual way of defining classes in Java follows the [JavaBean pattern](https://en.wikipedia.org/wiki/JavaBeans "JavaBean pattern"). This involves using a default constructor with no arguments, and accessors and mutators for properties.
 
@@ -59,11 +58,9 @@ person.setAge(15);
 person.setName("Antonio");
 ```
 
-
 This approach implies that the state of the object can be "unsafe" as we could create an instance of Person without specifying any mandatory and key values. It even allows mutating the object during its lifetime, potentially making the system [less safe](https://blogs.oracle.com/javamagazine/post/java-immutable-objects-strings-date-time-records "less safe"), especially with multithreaded approaches. [Immutability brings a lot of benefits](https://dzone.com/articles/java-and-immutability-avoid "Immutability brings a lot of benefits").
 
-The path to immutability and a safe state
------------------------------------------
+## The path to immutability and a safe state
 
 So, the next step in order to fix this issue would be to create a constructor with the mandatory and key properties, and not expose mutators (setters) for them.
 
@@ -100,7 +97,6 @@ Person person = new Person("Antonio", 1566778890);
 person.setAddress("Barcelona");
 ```
 
-
 With this approach though, we face potential issues in terms of readability and adaptability when the class grows into a more complex definition.
 
 ```
@@ -108,7 +104,6 @@ public Person(String name, int age, String id, String phoneNumber, String email,
 
 Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14757a607b7a7d7b54716c75796478713a777b79">[email protected]</a>", juan, carla);
 ```
-
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.
 
@@ -121,9 +116,7 @@ public Person(String name, int age, String id, String phoneNumber, String email)
 public Person(String name, int age, String id, String phoneNumber) {...}
 ```
 
-
-The Builder approach
---------------------
+## The Builder approach
 
 To fix this we can use Builders, which will help with readability and also on future changes making it easier to add the new properties.
 
@@ -151,7 +144,6 @@ public class Person {
   }
 }
 ```
-
 
 Now we will add the inner class in charge of building the new instance and a new method that invokes the Builder.
 
@@ -194,7 +186,6 @@ public static class PersonBuilder {
 }
 ```
 
-
 And with this approach now we are able to create a new immutable instance with a validated state.
 
 ```
@@ -203,7 +194,6 @@ Person person = Person.builder()
                         .socialNumber(15546464564)
 .build();
 ```
-
 
 The above approach includes a lot of boilerplate code that can discourage us from using it. To make things easier we can use libraries with annotations that will generate the code for us: [Immutables](https://immutables.github.io/immutable.html#:~:text=.build()%3B-,Builder,-By%20default%2C%20builders), [Lombok](https://projectlombok.org/features/Builder "Lombok"), [Auto](https://github.com/google/auto/blob/main/value/userguide/autobuilder.md "Auto"), [FreeBuilder](https://freebuilder.inferred.org/ "FreeBuilder"), etc.
 
@@ -217,9 +207,7 @@ public class Person {
 Person person = Person.builder().name("Antonio").socialNumber(2023452).build();
 ```
 
-
-The Wither approach
--------------------
+## The Wither approach
 
 Another approach to having a fluent API and immutability is the usage of "withers", or with\* methods, that create a new instance on every property change.
 
@@ -248,7 +236,6 @@ public Person withAge(int age) {
 }
 ```
 
-
 We can consume this approach like this, making it very easy to apply small changes to an existing object by obtaining a new object. We are "cloning" the object and changing one property at a time.
 
 ```
@@ -256,7 +243,6 @@ Person person = new Person("Luis", 45);
 Person person2 = person.withName("Jose");
 // here we have person2 = Jose, 45
 ```
-
 
 Again in order to reduce boilerplate code, and be less error-prone, we can leverage existing libraries with annotation processors that will make the process smoother and cleaner.
 
@@ -272,18 +258,15 @@ public class Person {
 }
 ```
 
-
 The main drawback to the Withers approach is that we rely a lot on the garbage collector in order to remove intermediary objects, especially when we chain Withers:
 
 ```
 person.withName(“John”).withAge(50)
 ```
 
-
 Those objects are not used in the end and we will need to wait for the garbage collector to remove them. This can impact performance in systems with high object creation rates.
 
-Records
--------
+## Records
 
 Finally, the language itself, since Java 16, provides a struct definition called [Records](https://docs.oracle.com/en/java/javase/16/language/records.html "Records"), which is focused on immutability, mainly to store data values, reduce boilerplate code, and increase readability. With Records, we can be sure our objects are immutable as they don't provide mutators, only accessors, and fields are final.
 
@@ -295,7 +278,6 @@ record Person(String name, int age) {}
 ...
 Person person = new Person("Pedro", 66);
 ```
-
 
 This would end up in the same code for Person as we had at the beginning of this article, removing the setters and making all fields final.
 
@@ -316,11 +298,9 @@ Car car = new Car("Seat", "Ibiza", 2015);
 Car car2 = car.withModel("Cordoba");
 ```
 
-
 Despite these issues, Records are a great solution for representing data with immutable state, while also reducing the boilerplate code in order to define the structures.
 
-Conclusions
------------
+## Conclusions
 
 **Immutability** is a concept that will [provide many benefits](https://supakon-k.medium.com/the-advantages-of-using-immutable-objects-in-java-e32f6d326738 "provide many benefits") to our code, like predictability, easy testing, thread safety, and others that will impact our code's intentionality, consistency, adaptability, and responsibility.
 

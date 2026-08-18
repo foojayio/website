@@ -26,8 +26,6 @@ I hope the series would give you some insights into what is happening under the 
 
 Learning about memory management will also help us to write more performant code as the way we write code also has an impact on memory management regardless of the automatic memory management technique used by the language.
 
-
-
 ### Definitions
 
 Memory management is the process of controlling and coordinating the way a software application access **computer memory**.
@@ -71,15 +69,13 @@ Heap is used for **dynamic memory allocation** and unlike stack, the program nee
 * This is where you would encounter **out of memory errors** if your application tries to use more memory than the allocated heap (though there are many other factors at play here like GC, compacting).
 * Generally, there is **no limit** on the size of the value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.
 
-Why is it important?
---------------------
+## Why is it important?
 
 Unlike Hard disk drives, RAM is not infinite. If a program keeps on consuming memory without freeing it, ultimately it will run out of memory and crash itself or even worse crash the operating system. Hence software programs can't just keep using RAM as they like as it will cause other programs and processes to run out of memory.
 
 So instead of letting the software developer figure this out, most programming languages provide ways to do automatic memory management. And when we talk about memory management we are mostly talking about managing the Heap memory.
 
-Different approaches?
----------------------
+## Different approaches?
 
 Since modern programming languages don't want to burden (more like trust 👅) the end developer to manage the memory of his/her application most of them have devised a way to do automatic memory management.
 
@@ -122,8 +118,6 @@ It is used by [**Rust**](https://doc.rust-lang.org/book/ch04-01-what-is-ownershi
 
 ![Ownership in Rust](https://thepracticaldev.s3.amazonaws.com/i/cxs080wnnykflkmsfo9p.png)
 
-
-
 We have just scratched the surface of memory management.
 
 Each programming language uses its own version of these and employs different algorithms tuned for different goals. In the next parts of the series, we will take a closer look at the exact memory management solution in some of the popular languages.
@@ -144,8 +138,6 @@ You can read the remaining parts of this series via the links below:
 * [medium.com/computed-comparisons](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
 * [en.wikipedia.org/wiki/Automatic-Reference-Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 * [blog.sessionstack.com](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
-
-
 
 If you like this article, please leave a like or a comment.
 

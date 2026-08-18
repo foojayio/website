@@ -36,8 +36,7 @@ We can use it to query \& mutate our data, and in the case of Spring Webflux/Web
 
 Feel free to check out the code from [this repository](https://github.com/SimonVerhoeven/spring-graphql-demo/tree/main) to more easily follow along.
 
-Setup
------
+## Setup
 
 ### Dependencies
 
@@ -65,7 +64,6 @@ To get started we just need the following dependencies in our pom.xml:
     </dependency>
 </dependencies>
 ```
-
 
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note:** | We're using Spring MVC here, but we could also use web/webflux/rsocket here (see for reference: [possible starters](https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.graphql)) |
@@ -103,7 +101,6 @@ type Author {
 }
 ```
 
-
 We define a top-level `Query` type (every GraphQL service has to have one, mutations are optional), which contains the exposed operations and its arguments. Here we can see we're exposing a `bookById` query which expects an `ID` to be passed in, and will return a `Book` type.
 
 Below that we can see our `Book` and `Author` type with their fields. In this case, we're using the default scalar types, and the `!` marks the fields as non-null.
@@ -121,7 +118,6 @@ We'll also be enabling the graphical interactive GraphQL IDE ([GraphiQL](https:/
 spring.graphql.graphiql.enabled=true
 ```
 
-
 to our `application.properties`.
 
 This allows us to easily interact with \& develop GraphQL APIs.
@@ -131,7 +127,6 @@ And since we want to use Subscriptions in GraphIQL we'll also add:
 ```
 spring.graphql.websocket.path=/graphql
 ```
-
 
 ![graphiql.png](https://github.com/SimonVerhoeven/spring-graphql-demo/blob/main/raw/graphiql.png?raw=true)
 
@@ -154,7 +149,6 @@ type Article {
 }
 ```
 
-
 As you can see our `publicationDate` is of type `Date` which is not known by default.
 
 To resolve this we can add the `graphql-java-extended-scalars` dependency to our project,
@@ -167,7 +161,6 @@ To resolve this we can add the `graphql-java-extended-scalars` dependency to our
 </dependency>
 ```
 
-
 and then we can add the following to our `@Configuration` to register the `Date` scalar:
 
 ```
@@ -178,18 +171,15 @@ public RuntimeWiringConfigurer runtimeWiringConfigurer() {
 }
 ```
 
-
 And finally, also add this Scalar to our `schema.graphqls`
 
 ```
 scalar Date @specifiedBy(url:"https://tools.ietf.org/html/rfc3339")
 ```
 
-
 And then when we query for this Article, we'll get our `publicationDate` back properly.
 
-Controller configuration
-------------------------
+## Controller configuration
 
 Spring for GraphQL allows us to define handler methods using annotations in `@Controller` components.  
 
@@ -218,7 +208,6 @@ public Book bookById(@Argument String id) {
 }
 ```
 
-
 Which makes use of the implicit mapping.
 
 Now in the case of our `Book`, we'll also need to do a little bit extra. Because our `Book` itself only contains the `authorId`, but in the response we want to return the `Author` immediately, to avoid our client having to do an extra round trip, and to aggregate the data.
@@ -231,7 +220,6 @@ public Author author(Book book) {
     return Author.getById(book.authorId());
 }
 ```
-
 
 Which will act as the `DataFetcher` for the `Author` field.
 
@@ -249,13 +237,11 @@ Which we can then test using the following query in GraphiQL:
 }
 ```
 
-
 If we add the following to our schema file:
 
 ```
 authorById(id: ID): Author
 ```
-
 
 We can set up an explicit mapping using the following, in case we don't want to call our function `authorById`
 
@@ -265,7 +251,6 @@ public Author findAuthor(@Argument String id) {
     return Author.getById(id);
 }
 ```
-
 
 Note that here we've explicitly added `authorById` to our `@QueryMapping`
 
@@ -282,7 +267,6 @@ type Mutation {
   addAuthor(firstName: String!, lastName: String!, shortBio: String!): Author
 }
 ```
-
 
 As you can see, we expect the first name, last name \& a short bio for the Author to be passed in, and we'll get an `Author` response.
 
@@ -301,7 +285,6 @@ public Author createAuthor(
     return author;
 }
 ```
-
 
 As you can see, our inputs are annotated with `@Argument`.
 
@@ -324,7 +307,6 @@ mutation addAuthor {
 }
 ```
 
-
 ### Subscriptions
 
 In case we want to stay up to date, we can also set up a subscription.
@@ -340,7 +322,6 @@ type Subscription {
 }
 ```
 
-
 Then in our controller, we can add:
 
 ```
@@ -349,7 +330,6 @@ public Flux<Book> newBooks() {
 ...
 }
 ```
-
 
 And we'll get an incoming stream of new books.
 
@@ -365,9 +345,7 @@ subscription {
 }
 ```
 
-
-Testing
--------
+## Testing
 
 So it's quite easy to set up our GraphQL API, but what about the testing?  
 
@@ -396,7 +374,6 @@ void bookById() {
 }
 ```
 
-
 1. reference to the `bookInfo.graphql` file in our resources folder
 2. passing in the variable we want to use for the call
 3. in case your request has no response data use `executeAndVerify` rather than `execute` to check whether there were no errors in the response, or `executeSubscription` for Subscriptions.
@@ -414,7 +391,6 @@ final Author author = this.graphQlTester
         .get();
 ```
 
-
 ### Testing a subscription
 
 Subscriptions are a bit different in that we invoke `executeSubscription` instead of `execute` and then use `StepVerifier` to inspect the Flux.
@@ -430,7 +406,6 @@ To start we'll need to add the `reactor-test` dependency:
 </dependency>
 ```
 
-
 Then we can get our Flux using:
 
 ```
@@ -439,7 +414,6 @@ final var bookFlux = this.graphQlTester.document(document)
     .toFlux("notifyNewBook", Book.class);
 ```
 
-
 And let's add an easy-to-test to check we received Kent Beck's 9 books. (the API itself offers us a lot more options!)
 
 ```
@@ -447,7 +421,6 @@ final var bookFlux = this.graphQlTester.document(document)
     .executeSubscription()
     .toFlux("notifyNewBook", Book.class);
 ```
-
 
 ### Handling errors
 
@@ -470,7 +443,6 @@ void bookById_verify() {
 }
 ```
 
-
 If we want to suppress specific error(s) we can filter these out using:
 
 ```
@@ -478,7 +450,6 @@ If we want to suppress specific error(s) we can filter these out using:
 .filter(error -> ...)
 .path("data.bookById.name")
 ```
-
 
 We can also apply this filtering on the builder level, so they apply to all our tests using:
 
@@ -488,7 +459,6 @@ WebGraphQlTester.builder(client)
     .build()
 ```
 
-
 Additionally, we can also inspect the errors through a `Consumer` using `satisfy`, which will also mark them as filtered so that we can inspect the data in the response.
 
 ```
@@ -496,7 +466,6 @@ Additionally, we can also inspect the errors through a `Consumer` using `satisfy
 .satisfy(responseErrors -> ...)
 .verify()
 ```
-
 
 The other way around, in case we want to verify that an error exists we can use `expect` instead.  
 
@@ -508,9 +477,7 @@ This will lead to an assertion error if the expected error is not present.
 .verify()
 ```
 
-
-(Dis)advantages
----------------
+## (Dis)advantages
 
 GraphQL has its advantages, and disadvantages over REST, and one can even use both in the sample application.
 
@@ -536,8 +503,7 @@ However, if the data structure is stable, caching is critical, resource-based mo
 
 At the end of the day you need to evaluate which fits your use-cases the best, and maybe even use a mix of both.
 
-Extra
------
+## Extra
 
 ### Introspection report - detect mismatches
 
@@ -549,7 +515,6 @@ To enable it we'll need to enable introspection in our application.properties
 spring.graphql.schema.introspection.enabled
 ```
 
-
 And add a bean to our configuration to handle the reporting, for example to log it:
 
 ```
@@ -559,7 +524,6 @@ GraphQlSourceBuilderCustomizer inspectionCustomizer() {
 }
 ```
 
-
 When we then start our application we'll get a report akin to the following in our console:
 
 ```
@@ -567,7 +531,6 @@ Unmapped fields: {}
 Unmapped registrations: {}
 Skipped types: []
 ```
-
 
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | **Warning:** | Introspected should be disabled in production as it exposes quite a bit of information about your API which might not be desireable. |
@@ -584,8 +547,7 @@ It allows us a flexible and typesafe approach for our query predicates.
 
 Spring Data allows us to use our QueryDSL/Query by Example repositories for a `DataFetcher`, which will build a QueryDSL `Predicate` from GraphQL arguments. We can also to mark our repositories with `@GraphQlRepository` for automated detection and GraphQL Query registration.
 
-References
-----------
+## References
 
 * [GraphQL](https://graphql.org/)
 * [Querydsl](https://querydsl.com/)

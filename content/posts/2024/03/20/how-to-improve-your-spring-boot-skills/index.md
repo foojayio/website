@@ -28,8 +28,7 @@ I want to make sure I'm unlocking the full potential of Spring. The other day, w
 
 So I started thinking to myself, how would Spring Pros approach this? How much time do they invest in exploring the framework's features, and where do they seek this information? After researching Reddit and other platforms, talking to peers, and relying on intuition, I think I've figured out a few things that would be cool to share with fellow Java devs. And I decided to write up this blog and share my experience.
 
-Here are 9 ways to improve your Spring Boot skills:
----------------------------------------------------
+## Here are 9 ways to improve your Spring Boot skills:
 
 1. Externalize your configuration:
 ----------------------------------
@@ -54,7 +53,6 @@ app.client-id=digma-id
 app.group-id=dgma-group
 ```
 
-
 For application.yml:
 
 ```
@@ -63,7 +61,6 @@ app:
   client-id: digma-id
   group-id: dgma-group
 ```
-
 
 -- Create a Configuration Properties Class:
 
@@ -82,7 +79,6 @@ public class AppProperties {
     private String groupId;
 }
 ```
-
 
 -- Inject the Configuration:
 
@@ -107,7 +103,6 @@ public class DemoService {
     }
 }
 ```
-
 
 2. You need to keep your controllers lean
 -----------------------------------------
@@ -149,7 +144,6 @@ public class GlobalControllerAdvice {
 }
 ```
 
-
 **@RestControllerAdvice** this annotation extends the **@ControllerAdvice.** It is specifically designed for RESTful web services. You use this with an application where the response is in the form of JSON or XML. Below is what it looks like.
 
 ```
@@ -164,7 +158,6 @@ public class ControllerAdvice {
     }
 }
 ```
-
 
 **@ExceptionHandler** this annotation is used to handle specific exceptions thrown by controllers. This annotation is used to declare methods within a controller or a class annotated with**@ControllerAdvice.** This annotation allows you to customize the behavior of your applications. Below is what it looks like.
 
@@ -183,7 +176,6 @@ public class UserService {
         return response;
 }
 ```
-
 
 Using @ControllerAdvice or @RestControllerAdvice in your Spring Boot application allows you to centralize exception handling and other configurations across multiple controllers in a Spring Boot application.
 
@@ -264,7 +256,6 @@ For Maven:
 </dependency>
 ```
 
-
 For Gradle:
 
 ```
@@ -272,7 +263,6 @@ dependencies {
    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 ```
-
 
 One thing you need to know is that, Actuator comes with most of its endpoints disabled, leaving just two endpoints enabled /health and /info
 
@@ -284,7 +274,6 @@ For application.properties:
 management.endpoints.web.exposure.include=*
 ```
 
-
 For application.yml:
 
 ```
@@ -294,7 +283,6 @@ management:
       exposure:
         include: "*"
 ```
-
 
 ### Some interesting Actuator Endpoints
 
@@ -364,8 +352,7 @@ Isolation: Testcontainers automatically create isolated environments for testing
 
 Ease of Use: There is a seamlessly integration between TestContainers with popular testing frameworks such as JUnit, Mockito, TestNG etc, hence, reducing the complexity of setting up separate test environmentsPredictability: What this means is that you can use the same environment (a container) to host your software regardless of if you are building, testing, or deploying your application in production.
 
-Conclusion: Lookahead Spring Boot 3.2
--------------------------------------
+## Conclusion: Lookahead Spring Boot 3.2
 
 We're looking forward to:
 

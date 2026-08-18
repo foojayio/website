@@ -28,8 +28,7 @@ Have you ever found yourself filling out the same information on web forms over 
 
 In this article, I'll take you through my journey of creating FormPilot, a Chrome extension backed by a Java Spring Boot application that uses Retrieval-Augmented Generation (RAG), LangChain4j, and Ollama to fill out web forms intelligently. I'll share the challenges I faced, the solutions I implemented, and the lessons I learned along the way.
 
-**The Inspiration**
--------------------
+## **The Inspiration**
 
 The idea for FormPilot came to me during a conference registration season. I found myself registering for multiple tech conferences, each with their own registration forms asking for the same information. As I filled out yet another form with my name, email, and bio for the fifth time, I thought, "There has to be a better way."
 
@@ -37,8 +36,7 @@ Sure, there are password managers and form fillers out there, but they typically
 
 That's when I decided to leverage my experience with Java and my interest in AI to build FormPilot.
 
-**The Architecture**
---------------------
+## **The Architecture**
 
 I designed FormPilot with two main components:
 
@@ -54,8 +52,7 @@ This architecture allows the extension to be lightweight while offloading the he
 5. The server returns these values to the extension
 6. The extension fills the form with the generated values
 
-**Getting Started: Setting Up Your Environment**
-------------------------------------------------
+## **Getting Started: Setting Up Your Environment**
 
 Before we dive into the specific code implementation for FormPilot's backend, let's set up the necessary tools: Ollama for running the language model locally and the initial Spring Boot project structure.
 
@@ -101,7 +98,6 @@ Ollama enables you to run open-source large language models (LLMs) directly on y
 ollama list
 ```
 
-
 ```
 
 ```
@@ -122,11 +118,9 @@ Spring Initializr is a web tool that generates a basic Spring Boot project struc
 dependencies { implementation 'dev.langchain4j:langchain4j-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2:1.0.0-beta2' implementation 'dev.langchain4j:langchain4j-ollama:1.0.0-beta2' implementation 'org.springframework.boot:spring-boot-starter-web' compileOnly 'org.projectlombok:lombok' developmentOnly 'org.springframework.boot:spring-boot-devtools' annotationProcessor 'org.projectlombok:lombok' testImplementation 'org.springframework.boot:spring-boot-starter-test' testRuntimeOnly 'org.junit.platform:junit-platform-launcher' }
 ```
 
-
 With Ollama running and the basic Spring Boot project created, you're ready to start adding the FormPilot-specific code.
 
-**Implementing RAG with LangChain4j**
--------------------------------------
+## **Implementing RAG with LangChain4j**
 
 One of the most exciting parts of building FormPilot was implementing Retrieval-Augmented Generation (RAG) using [LangChain4j](https://docs.langchain4j.dev/). RAG is a technique that enhances LLM outputs by retrieving relevant information from a knowledge base before generating a response.
 
@@ -231,7 +225,6 @@ public class RAGConfig {
 }
 ```
 
-
 This configuration:
 
 1. Creates an in-memory embedding store.
@@ -240,8 +233,7 @@ This configuration:
 4. Converts these segments into vector embeddings using the configured EmbeddingModel and stores them.
 5. Creates a **ContentRetriever** that will query this embedding store to find the most relevant text segments based on semantic similarity to the input query (e.g., a form field label).
 
-**The Magic of LangChain4j's @AiService**
------------------------------------------
+## **The Magic of LangChain4j's @AiService**
 
 One of the most elegant aspects of FormPilot is how it uses LangChain4j's **@AiService** annotation to create a declarative interface for interacting with the LLM. This approach dramatically simplifies the code required to prompt the model and parse its response.
 
@@ -306,7 +298,6 @@ public interface FormAssistant {
 }
 ```
 
-
 ```
 
 ```
@@ -348,12 +339,9 @@ class Option {
 }
 ```
 
-
 ```
 
 ```
-
-<br />
 
 With just this interface and the `@AiService` annotation (from `dev.langchain4j.service.spring.AiService`), the [LangChain4j Spring Boot starter](https://docs.langchain4j.dev/tutorials/spring-boot-integration/) automatically creates a bean implementing this interface. When you call the generateForm method:
 
@@ -364,8 +352,7 @@ With just this interface and the `@AiService` annotation (from `dev.langchain4j.
 
 This declarative approach keeps the service layer clean and focuses on *what* needs to be done rather than the low-level details of LLM interaction and RAG integration.
 
-**Integrating with Ollama**
----------------------------
+## **Integrating with Ollama**
 
 I chose to use Ollama for the LLM backend, which allows for the local running of LLMs. This provides several advantages:
 
@@ -399,7 +386,6 @@ langchain4j.embedding-model.ollama.model-name=deepseek-llm:7b
 langchain4j.embedding-model.ollama.timeout=PT60S
 ```
 
-
 ```
 
 ```
@@ -408,8 +394,7 @@ Make sure you have downloaded the specified models using Ollama (e.g., `ollama r
 
 These properties tell the LangChain4j Spring Boot starter to configure both the chat model (for generating the form values) and the embedding model (for RAG) to use your local Ollama server.
 
-**Building the Chrome Extension**
----------------------------------
+## **Building the Chrome Extension**
 
 The Chrome extension acts as the user-facing part of FormPilot. It needs to:
 
@@ -641,7 +626,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 console.log("FormPilot Content Script Loaded.");
 ```
 
-
 ```
 
 ```
@@ -658,7 +642,6 @@ Build the Spring Boot application:
 ./gradlew build
 ```
 
-
 ```
 
 ```
@@ -669,7 +652,6 @@ Run the Spring Boot application:
 ./gradlew bootRun
 ```
 
-
 ```
 
 ```
@@ -679,7 +661,6 @@ The server will start on port `8080`. You can verify it's running by visiting:
 ```
 http://localhost:8080/api/form/health
 ```
-
 
 ```
 
@@ -705,7 +686,6 @@ A demo form is included in this project to help you test the Smart Form Filler e
 python -m http.server
 ```
 
-
 Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 
 1. With the Smart Form Filler extension installed and the local server running, the extension should automatically detect the form fields on the demo page.
@@ -716,8 +696,7 @@ Then visit `http://localhost:8000/demo/demo-form.html` in your browser.
 
 ![](https://bazlur.ca/wp-content/uploads/2025/04/Screenshot-2025-04-06-at-6.38.24%E2%80%AFPM-713x1024.png)
 
-**Testing with a Demo Form**
-----------------------------
+## **Testing with a Demo Form**
 
 To test FormPilot thoroughly, I created a comprehensive demo HTML form (demo.html) that included a wide variety of field types:
 
@@ -734,8 +713,7 @@ To test FormPilot thoroughly, I created a comprehensive demo HTML form (demo.htm
 
 Using this demo form locally allowed me to iterate quickly on both the backend logic (ensuring correct values were generated for each type) and the frontend JavaScript (ensuring fields were detected and filled correctly, including event triggering).
 
-**Challenges and Solutions**
-----------------------------
+## **Challenges and Solutions**
 
 Building FormPilot wasn't without its hurdles. Here are some key challenges and how I addressed them:
 
@@ -776,8 +754,7 @@ Larger models like OpenAI's GPT-4o usually follow detailed system instructions w
 
 * **Solution:** You often need to fine-tune the prompt to get better results with smaller models. This means making the system instructions clearer and simpler, giving good examples of the exact format you want, and even adding warnings like, "Don't write anything before or after the JSON." Sometimes, it also helps to add a cleanup step in your Java backend---like extracting just the JSON from the output---even if the model includes extra text. It's a balance between how powerful the model is, how complex your prompt is, and how much cleanup you're willing to do afterward.
 
-**Lessons Learned**
--------------------
+## **Lessons Learned**
 
 This project was a fantastic learning experience, reinforcing several key concepts:
 
@@ -797,8 +774,7 @@ Using Ollama provided complete control over the model and ensured user data priv
 
 Building the Chrome extension highlighted the importance of understanding the different script contexts (content, background, popup), their capabilities, and limitations (especially around DOM access and network requests). Proper event handling (triggerEvents) is essential for compatibility with modern web applications. Careful consideration of permissions and security (like CORS) is mandatory.
 
-**Conclusion**
---------------
+## **Conclusion**
 
 This a demonstration of how modern AI techniques like RAG can be combined with frameworks like LangChain4j and local LLMs via Ollama to create genuinely intelligent tools within the familiar Java ecosystem. It moves beyond simple automation to provide context-aware assistance for repetitive tasks like filling forms.
 
@@ -807,8 +783,6 @@ The journey highlighted the power of abstraction provided by libraries like Lang
 The combination of a browser extension frontend and a local AI backend offers a compelling architecture for building privacy-preserving, intelligent applications.
 
 If you're interested in exploring the code further or contributing, you can find the project on GitHub [form-pilot](https://github.com/rokon12/form-pilot).
-
-<br />
 
 Feel free to fork it, experiment, and adapt it. I'd love to hear your feedback and suggestions!
 

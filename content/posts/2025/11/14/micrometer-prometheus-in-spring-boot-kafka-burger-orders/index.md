@@ -30,17 +30,11 @@ frozen: false
 
 {{< youtube eSreg0xPGqo >}}
 
-<br />
-
 👨‍💻 GitHub: <https://github.com/vinny59200/dukeburger>
-
-
 
 🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
 This guide shows how to use **Micrometer and Prometheus in Spring Boot** to track a custom metric for a Kafka-driven Burger Orders app. You'll post a burger order to a REST endpoint, publish it to Kafka, consume the topic, and increment a counter for all "DukeBurger" orders. Copy the snippets, run, and you'll see your metric on `/actuator/prometheus`.
-
-
 
 🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -52,8 +46,6 @@ Micrometer is a vendor-neutral metrics facade. Your code records counters, timer
 * Spring Boot Actuator autoconfigures Micrometer and exposes metrics endpoints, including Prometheus format. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
 * Prometheus "scrapes," so your app just exposes a text endpoint---no push needed. [docs.micrometer.io](https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html)
 
-
-
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
 1. **Order a burger** via HTTP POST `/orders?burger=DukeBurger`.
@@ -63,8 +55,6 @@ Micrometer is a vendor-neutral metrics facade. Your code records counters, timer
 5. **Expose** metrics at `/actuator/prometheus` for Prometheus to scrape.
 
 This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka makes producing and consuming concise; Micrometer makes metrics easy. [See](https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html)
-
-
 
 🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪
 
@@ -80,10 +70,7 @@ This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka mak
 }
 ```
 
-
 **Why:** A tiny schema keeps the demo clear. Avro gives you compact messages and generated classes.
-
-
 
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪  
 
@@ -124,10 +111,7 @@ public class MetricsConfig {
 }
 ```
 
-
 *Side note:* We add consistent tags now (app, topic) so you can filter and graph later. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
-
-
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
@@ -202,10 +186,7 @@ public class OrderController {
 }
 ```
 
-
 *Side note:* The headers mimic **CloudEvents** so you can plug into event tooling later. This is optional for the metric. [Cloud Events](https://cloudevents.github.io/sdk-java/)
-
-
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
@@ -300,10 +281,7 @@ public class ConsumerApp {
 }
 ```
 
-
 *Side note:* `@KafkaListener` binds the method to the topic with minimal boilerplate. Keep consumer config small for a first run. [See](https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html)
-
-
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -334,10 +312,7 @@ public class AvroUtils {
 }
 ```
 
-
 *Side note:* Spring Kafka + Confluent deserializer already returns `BurgerOrder`, so you rarely need this. It's useful in tests or when you manually handle bytes.
-
-
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -362,10 +337,7 @@ management:
       show-details: always
 ```
 
-
 *Side note:* This exposes `/actuator/prometheus` so Prometheus can scrape. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
-
-
 
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -383,8 +355,6 @@ management:
 
 JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121487}
 
-
-
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 
 * **Small steps win:** REST → Kafka → Consumer → Metric is a powerful, simple pipeline.
@@ -393,20 +363,14 @@ JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-at
 * **Avro stays lean:** A tiny schema keeps payloads small and generated classes easy to use.
 * **CloudEvents optional:** The headers help interoperability but are not required for Micrometer. [Cloud Events](https://cloudevents.github.io/sdk-java/)
 
-
-
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 
 You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow and produced a clean, tagged counter you can graph and alert on. From here, extend the metric set (timers for latency, gauges for queue depth), add dashboards, and create an alert when `events_DukeBurger_total` stalls or spikes.
-
-
 
 * Spring Boot + Kafka Streams testing \& routing:  
   <https://foojay.io/today/spring-boot-kafka-streams-event-routing-testing/>
 * Make Spring Batch fly with native image \& GraalVM:  
   <https://foojay.io/today/speed-up-your-spring-batch-with-native-image-and-graalvm/>
-
-
 
 * **Java OCP prep (Udemy):**   
   <https://www.udemy.com/course/ocp-oracle-certified-professional-java-developer-prep/?referralCode=54114F9AD41F127CB99A>
@@ -415,10 +379,7 @@ You just wired **Micrometer and Prometheus in Spring Boot** around a Kafka flow 
 * **Spring Certification Book (Leanpub/ Kindle/ Paperback):**   
   <https://spring-book.mystrikingly.com/>
 
-
-
-References
-----------
+## References
 
 * Micrometer docs and Prometheus registry overview. [Micrometer Application Observability+1](https://micrometer.io/docs/)
 * Spring Boot Actuator metrics. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)

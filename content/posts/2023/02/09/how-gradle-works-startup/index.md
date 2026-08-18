@@ -31,8 +31,7 @@ We'll explain the first topic *How Gradle Starts Up* in this blog.
 
 Before reading on, we assume you are familiar with basic JVM/Gradle concepts (jar, classpath, wrapper, daemon, project, task, etc.).
 
-How Gradle Starts Up
---------------------
+## How Gradle Starts Up
 
 There are many ways to start a Gradle build:
 
@@ -118,8 +117,7 @@ For example, when you click `Gradle Sync` button in IntelliJ IDEA, IDEA will sta
 
 Still, all the build logic happens in a `Gradle Daemon JVM`, and the Tooling API just reads a build result and returns it to the caller.
 
-What's Next
------------
+## What's Next
 
 In the next blog post of the series we'll explain how many JVMs are involved in a Gradle build.
 

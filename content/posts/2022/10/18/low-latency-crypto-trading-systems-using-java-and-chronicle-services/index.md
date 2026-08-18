@@ -68,7 +68,6 @@ Exchange updates are provided by a [websocket connection](https://binance-docs.g
 }
 ```
 
-
 The data flow between the Binance endpoint and the trading logic follows below:  
 ![](Screen-Shot-2022-10-10-at-2.21.44-PM-1024x321.png)
 
@@ -139,7 +138,6 @@ public class BookUpdateParser implements ReadMarshallable {
     }
 }
 ```
-
 
 #### Determinism and Reproducibility
 

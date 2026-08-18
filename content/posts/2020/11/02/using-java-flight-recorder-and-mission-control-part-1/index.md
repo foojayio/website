@@ -57,7 +57,6 @@ $ jcmd $(pgrep java) VM.flags -all | grep FlightRecorder
     ccstr FlightRecorderOptions                    =                                           {product} {default}
 ```
 
-
 Just runt `JFR.start` on the running java pid.
 
 ```
@@ -67,7 +66,6 @@ Started recording 2. No limit specified, using maxsize=250MB as default.
 
 Use jcmd 6 JFR.dump name=2 filename=FILEPATH to copy recording data to file.
 ```
-
 
 The output guides the user to the next useful commands, in particular, `JFR.dump`. Also, this command tells you that a recording by default is limited to 250Mb. `jcmd` provides a `help` command that describes documents for each command options.
 
@@ -82,7 +80,6 @@ Started recording 2. The result will be written to:
 
 /tmp/app-profile-2020-03-26T16-41-48.jfr
 ```
-
 
 In production, you'll be most likely using `duration`, `maxsize`, `filename` and `settings` options. We'll briefly look at other JFR commands after discussing the `settings`.
 
@@ -119,7 +116,6 @@ Here's the first few lines of the `default` settings. As its name impies, this i
 </configuration>
 ```
 
-
 In terms of file size magnitude on a pretty busy web application server using the `default` settings and for a duration of 5 minutes, the resulting dumped file weighs 15 MiB. With this profile you'll get more than basic information, IO, GC events, locking behavior, thread events, method profiling, etc.
 
 The announced overhead is maximum 1% !$JAVA_HOME/lib/jfr/profile.jfc
@@ -144,7 +140,6 @@ The announced overhead is maximum 1% !$JAVA_HOME/lib/jfr/profile.jfc
 </configuration>
 ```
 
-
 With the `profile` settings, the dumped file takes around 35mb for a 5min duration. And it will get access to additional events like the `OldObjectSample` stacktraces, or TLS events like TLS handshakes, X509 validation, Classloading events, etc.
 
 It actually has a tad more overhead, 2%. In most workload this should be ok.
@@ -163,7 +158,6 @@ Dumped recording, 239.5 MB written to:
 /tmp/app-profile-2020-06-26T15-16-57.jfr
 ```
 
-
 If there is a single recording at the time it's possible to just use `JFR.dump`, but JFR is powerful enough to support multiple concomitant recordings, in this case you need to specify which recording to dump, obviously. Some options override those defined in the start command like `filename` or `maxage` for the current dump in particular. THe other options are certainly interesting but I found them a bit less useful in practice.
 
 #### Details of the Active Recording(s)
@@ -176,7 +170,6 @@ $ jcmd $(pgrep java) JFR.check
 Recording 2: name=2 maxsize=250.0MB (running)
 ```
 
-
 The `verbose` option allows examining which event are enabled for a recording.
 
 #### Stopping an Active Recording
@@ -188,7 +181,6 @@ $ jcmd $(pgrep java) JFR.stop \
   name=app-profile \
   filename=/tmp/app-profile-$(date +%FT%H-%M-%S).jfr
 ```
-
 
 #### Global Flight Recorder configuration
 
@@ -220,7 +212,6 @@ Max chunk size: 12.0 MB
 Sample threads: true
 ```
 
-
 Here I'm increasing the `stackdepth`, this might be useful to generate more accurate flamegraphs, or for some other analysis like with the `OldObjectSample`.
 
 The `repositorypath` is where JFR dumps regularly slices or chunks of jfr events, they have maximum size of `maxchunksize`. These files behave like a log rolling appender. By default, these chunks are stored in the temporary directory and in a subfolder with a timestamp.JFR repository
@@ -240,7 +231,6 @@ drwxr-xr-x 3 43514 root 4.0K Jun 26 16:03 ..
 -rw-r--r-- 1 43514 root 8.7M Jun 26 16:25 2020_06_26_16_21_50.part
 ```
 
-
 *I'm not sure why some chunks are over 12M (the default chunk size) at this time.*
 
 Careful however as some of these options are not well documented, and may not expose what we'd expect, e.g. `dumppath` only affects dump created when the app crashes and only if the `dumponexit` recording option is true.
@@ -255,7 +245,6 @@ Thanks to unified logging, it's easy to open the hood on any JVM runtime feature
 ```
 -Xlog:jfr
 ```
-
 
 ```
 [0.337s][info][jfr] Flight Recorder initialized
@@ -275,7 +264,6 @@ Thanks to unified logging, it's easy to open the hood on any JVM runtime feature
 [0.864s][info][jfr] Closed recording "1" (1)
 [0.866s][info][jfr] Removed repository /tmp/2020_06_19_13_08_28_6
 ```
-
 
 Increasing the log level may reveal additional details.
 
@@ -303,7 +291,6 @@ Total: reserved=5324939KB, committed=3600539KB
 ...
 ```
 
-
 |---|-----------------------------------------|
 |   | JFR's `Tracing` memory zone uses \~74MB |
 
@@ -315,7 +302,6 @@ The next output shows the committed memory for tracing, **after** a 6 min record
 -                   Tracing (reserved=21041KB, committed=21041KB)
                             (malloc=21041KB #2783)
 ```
-
 
 ______________________________________________________________________________
 

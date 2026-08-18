@@ -26,8 +26,7 @@ frozen: false
 
 Last week, Johan Vos of Gluon, released a video with a status update of JavaFX. In this post we are going to take a deeper look into one of the announcements: dual screen support on Raspberry Pi.
 
-Announcements by Gluon
-----------------------
+## Announcements by Gluon
 
 Since Java switched to a 6-month release cycle, JavaFX has done the same, so next version will be number 17. Keep in mind, although Java and JavaFX are on the same version-number, you can still use Java 11 and combine it with the JavaFX 17 runtime if you want to benefit from its improvements. Up till now, there were no breaking changes in either of the frameworks which force you to use a Java-version higher than 11.
 
@@ -45,8 +44,7 @@ Below you can find the full video, but these are the highlights:
 
 {{< youtube LoL30W0yo6g >}}
 
-A dual screen experiment on Raspberry Pi
-----------------------------------------
+## A dual screen experiment on Raspberry Pi
 
 Besides the JavaFX-in-browser, the dual-screen support for Raspberry Pi is a very nice feature that I wanted to try out myself. You can try the same, as this is already available for everyone in the latest 17-ea version of JavaFX you can [download from the Gluon website](https://gluonhq.com/products/javafx/).
 
@@ -72,7 +70,6 @@ $ cd target/distribution
 $ sudo bash run-kiosk.sh
 ```
 
-
 The script first disables desktop mode with `/sbin/init 3`, starts the compiled jar with some additional settings, and when the program exits, the desktop mode is started again with `/sbin/init 5`. With this approach, **hardware acceleration** is used for maximum performance of the JavaFX rendering. It is also possible to use the **cursor and hardware rotation**, but this still needs to be fully documented.
 
 ```java
@@ -93,9 +90,7 @@ java \
 /sbin/init 5
 ```
 
-
-New JavaFX project wizard in IntelliJ IDEA
-------------------------------------------
+## New JavaFX project wizard in IntelliJ IDEA
 
 And that wasn't the only JavaFX announcement last week! JetBrains showed a great new JavaFX project wizard in IntelliJ IDEA (version 2021.2 EAP 1)!
 
@@ -104,8 +99,7 @@ And that wasn't the only JavaFX announcement last week! JetBrains showed a great
 *Then you will have the opportunity to choose from a list of the most frequently used libraries, which come with short descriptions on the right. Once you create your new JavaFX project, your IDE will generate a fully configured sample application.*
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/05/UX_JavaFXWizard.gif)
 
-Conclusion
-----------
+## Conclusion
 
 I've always loved how easy it us to build nice user interfaces with JavaFX. And I love to see how this "old and reliable" framework on top of Java is gaining back the traction it deserves.
 

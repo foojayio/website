@@ -35,8 +35,7 @@ And before testing, there's production: how do you add logging without touching 
 
 **BoxLang AI 3.0 solves all of this with middleware**. Six battle-tested middleware classes ship out of the box, covering the most common cross-cutting concerns. And if none of them fit your use case exactly, writing your own is a matter of extending one class or defining a struct of closures.
 
-🏗️ The Middleware Architecture
--------------------------------
+## 🏗️ The Middleware Architecture
 
 Middleware sits between the agent's `run()` call and the actual LLM invocations and tool calls. Both `AiModel` and `AiAgent` support it. When an agent runs, its middleware is prepended to the model's middleware --- agent hooks fire first, then model hooks.
 
@@ -61,8 +60,7 @@ There are two hook styles:
 | ` wrapLLMCall( context, handler )` | Surround each LLM provider call |
 | `wrapToolCall( context, handler )` | Surround each tool invocation   |
 
-🎯 `AiMiddlewareResult` --- Typed Flow Control
-----------------------------------------------
+## 🎯 `AiMiddlewareResult` --- Typed Flow Control
 
 Every sequential hook must return an `AiMiddlewareResult`. The static factory methods make this expressive:
 
@@ -88,7 +86,6 @@ return AiMiddlewareResult.edit( { correctedArgs: { amount: 100 } } )
 return AiMiddlewareResult.suspend( { toolName: "transferFunds", args: toolArgs } )
 ```
 
-
 Terminal results (`cancel`, `reject`, `suspend`) stop the chain immediately. Non-terminal results continue to the next middleware.
 
 ```java
@@ -102,9 +99,7 @@ result.isSuspended()  // waiting for async input (terminal)
 result.isTerminal()   // cancelled OR rejected OR suspended
 ```
 
-
-📝 LoggingMiddleware --- Instant Observability
-----------------------------------------------
+## 📝 LoggingMiddleware --- Instant Observability
 
 Drop this in and every LLM call, tool invocation, agent run start/end, and error gets logged to BoxLang's `ai` log file and optionally to the console --- with zero code changes to your agents:
 
@@ -118,7 +113,6 @@ agent = aiAgent(
     )
 )
 ```
-
 
 The implementation is a clean example of how sequential hooks compose:
 
@@ -141,7 +135,6 @@ AiMiddlewareResult function onError( required struct context ) {
 }
 ```
 
-
 Options:
 
 |     Option     |       Default       |             Description             |
@@ -151,8 +144,7 @@ Options:
 | `logLevel`     | `"info"`            | `info`, `debug`, `warning`, `error` |
 | `prefix`       | `"[AI Middleware]"` | Prepended to every message          |
 
-🔁 `RetryMiddleware` --- Resilience Without Boilerplate
--------------------------------------------------------
+## 🔁 `RetryMiddleware` --- Resilience Without Boilerplate
 
 LLM providers have rate limits. Networks have transient failures. `RetryMiddleware` wraps both LLM calls and tool calls with exponential backoff --- transparently, without any code in your tools or agents:
 
@@ -168,7 +160,6 @@ agent = aiAgent(
 )
 ```
 
-
 It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches exceptions, sleeps, and retries up to `maxRetries` times. Non-retryable exceptions (like `InvalidInput` or `MaxInteractionsExceeded`) surface immediately:
 
 |       Option        |                 Default                  |          Description           |
@@ -179,8 +170,7 @@ It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches except
 | `maxDelay`          | `30000`                                  | Hard cap on delay              |
 | `nonRetryableTypes` | `"InvalidInput,MaxInteractionsExceeded"` | Exception types to skip        |
 
-🛡️ `GuardrailMiddleware` --- Defense in Depth
-----------------------------------------------
+## 🛡️ `GuardrailMiddleware` --- Defense in Depth
 
 Block dangerous tools entirely, or reject tool calls whose arguments match regex patterns --- before they ever reach the tool:
 
@@ -195,7 +185,6 @@ guardrail = new GuardrailMiddleware(
 
 agent = aiAgent( name: "db-assistant", middleware: guardrail )
 ```
-
 
 The hook fires in `beforeToolCall` --- it checks the tool name against `blockedTools` first, then validates each argument against the configured regex patterns:
 
@@ -220,14 +209,12 @@ AiMiddlewareResult function beforeToolCall( required struct context ) {
 }
 ```
 
-
 |     Option     | Default |                  Description                  |
 |----------------|---------|-----------------------------------------------|
 | `blockedTools` | `[]`    | Tool names always rejected (case-insensitive) |
 | `argPatterns`  | `{}`    | `{ toolName: [{ paramName: "regex" }] }`      |
 
-🙋` HumanInTheLoopMiddleware` --- Keeping Humans in Control
------------------------------------------------------------
+## 🙋` HumanInTheLoopMiddleware` --- Keeping Humans in Control
 
 This middleware intercepts specific tool calls and requires a human to approve, reject, or edit before execution proceeds. Two modes, two very different use cases.
 
@@ -243,7 +230,6 @@ agent = aiAgent(
 )
 ```
 
-
 When the LLM calls `transferFunds`, the terminal shows:
 
 ```html
@@ -256,7 +242,6 @@ When the LLM calls `transferFunds`, the terminal shows:
  [A]pprove  [R]eject  [Q]uit
  Decision:
 ```
-
 
 **Web mode** --- suspends the run and returns an `AiMiddlewareResult.suspend()`. The calling code checkpoints state and presents the approval request asynchronously --- via email, Slack, a web UI, whatever fits your workflow:
 
@@ -287,7 +272,6 @@ agent.resume( "approve", session.pendingApproval )
 agent.resume( "edit", session.pendingApproval, { correctedArgs: { quantity: 10 } } )
 ```
 
-
 The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injected by `AiAgent.resume()`, honours the decision, and either continues, rejects, or patches the tool arguments --- then clears the context so subsequent tool calls in the same run go through normal HITL flow again.
 
 |          Option          | Default |       Description        |
@@ -297,8 +281,7 @@ The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injecte
 | `showArguments`          | `true ` | Show args in CLI prompt  |
 | `approvalCallback`       | ---     | Custom approval function |
 
-🎙️ `FlightRecorderMiddleware` --- AI Testing Solved
-----------------------------------------------------
+## 🎙️ `FlightRecorderMiddleware` --- AI Testing Solved
 
 This is the one that changes how you think about testing AI agents.
 
@@ -318,7 +301,6 @@ agent.run( "What's the weather in London and should I bring an umbrella?" )
 // → Writes: .ai/flight-recorder/weather-bot-20260402-143022.json
 ```
 
-
 ```java
 // REPLAY — zero live calls, fully deterministic
 agent = aiAgent(
@@ -332,7 +314,6 @@ agent.run( "What's the weather in London and should I bring an umbrella?" )
 // → Returns the exact same response as the recorded run
 ```
 
-
 ```java
 // PASSTHROUGH (default) — no recording, calls pass through normally
 agent = aiAgent(
@@ -340,7 +321,6 @@ agent = aiAgent(
     middleware : new FlightRecorderMiddleware()  // mode: "passthrough"
 )
 ```
-
 
 **The fixture format** --- human-readable JSON that you can inspect, edit, and commit to version control:
 
@@ -373,7 +353,6 @@ agent = aiAgent(
 }
 ```
 
-
 One implementation detail worth noting: the recorder **flushes to disk after every interaction**, not just at the end. This means if your agent crashes mid-run, the partial recording is preserved and can be inspected:
 
 ```java
@@ -386,7 +365,6 @@ private void function _appendInteraction( required struct interaction ) {
 }
 ```
 
-
 **Strict vs lenient replay:**
 
 ```java
@@ -397,7 +375,6 @@ new FlightRecorderMiddleware( mode: "replay", strict: true )
 new FlightRecorderMiddleware( mode: "replay", strict: false )
 ```
 
-
 |    Option     |         Default         |              Description               |
 |---------------|-------------------------|----------------------------------------|
 | `mode`        | `"passthrough"`         | `"passthrough", "record", or "replay"` |
@@ -406,8 +383,7 @@ new FlightRecorderMiddleware( mode: "replay", strict: false )
 | `recordTools` | `true`                  | Whether to capture tool interactions   |
 | `strict`      | `true`                  | Throw on type mismatch in replay       |
 
-🔢 `MaxToolCallsMiddleware` --- Runaway Agent Prevention
---------------------------------------------------------
+## 🔢 `MaxToolCallsMiddleware` --- Runaway Agent Prevention
 
 Simple but essential in production --- caps the total number of tool invocations per agent run:
 
@@ -418,11 +394,9 @@ agent = aiAgent(
 )
 ```
 
-
 The counter resets at the start of each new `run()` call. If the cap is hit mid-run, the chain is cancelled with a clear error message. Essential for preventing infinite tool call loops in complex multi-step reasoning tasks.
 
-✍️ Writing Your Own Middleware
-------------------------------
+## ✍️ Writing Your Own Middleware
 
 Two approaches, depending on how much structure you want.
 
@@ -450,7 +424,6 @@ agent.withMiddleware( {
     }
 } )
 ```
-
 
 Structs are automatically wrapped in `StructMiddlewareAdapter` --- you only define the hooks you need.
 
@@ -483,9 +456,7 @@ class extends="BaseAiMiddleware" {
 }
 ```
 
-
-🚀 Composing Middleware
------------------------
+## 🚀 Composing Middleware
 
 Middleware stacks compose cleanly --- just pass an array:
 
@@ -502,7 +473,6 @@ agent = aiAgent(
 )
 ```
 
-
 Or fluently, one at a time:
 
 ```java
@@ -512,11 +482,9 @@ agent
     .withMiddleware( new GuardrailMiddleware( blockedTools: [ "deleteRecord" ] ) )
 ```
 
-
 In production, logging + retry + guardrails is the baseline stack. Add `MaxToolCallsMiddleware` for complex reasoning agents. Add `HumanInTheLoopMiddleware` for any agent touching money, data, or external systems. Use `FlightRecorderMiddleware` in record mode during QA and replay mode in CI.
 
-What's Next
------------
+## What's Next
 
 In **Part 5** , we close the series with a deep dive into BoxLang AI's provider architecture --- how the capability system works, how `BaseService` and `OpenAIService` are structured, how to add custom providers, and a tour of the full 17-provider ecosystem.
 

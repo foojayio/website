@@ -56,20 +56,17 @@ docker run --name postgresql \
     -v ~/postgresql_data/:/var/lib/postgresql/data -d postgres:13.8
 ```
 
-
 2. Connect to the container: 
 
 ```bash
 docker exec -it postgresql /bin/bash
 ```
 
-
 3. Connect to the database using psql tool: 
 
 ```bash
 psql -h 127.0.0.1 -U postgres
 ```
-
 
 4. Make sure the database is empty (no tables yet): 
 
@@ -78,14 +75,12 @@ postgres=# \d
 Did not find any relations.
 ```
 
-
 Next, clone and start the pizza app:
 
 ```bash
 git clone https://github.com/dmagda/java-litters-everywhere.git && cd java-litters-everywhere
 mvn spring-boot:run
 ```
-
 
 The app connects to the database via the Hikari pool and listens for our requests on port `8080`:
 
@@ -94,7 +89,6 @@ INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - 
 INFO 58081 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 INFO 58081 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path
 ```
-
 
 Go back to your psql session within the Docker container and make sure the app created an empty `pizza_order` table:
 
@@ -112,7 +106,6 @@ postgres=# select * from pizza_order;
 (0 rows)
 ```
 
-
 Now it's time to put the first order in the pizzeria queue. For that we're going to use the app's REST `putNewOrder` endpoint:
 
 1. Call the endpoint with curl: 
@@ -120,7 +113,6 @@ Now it's time to put the first order in the pizzeria queue. For that we're going
 ```bash
 curl -i -X POST  http://localhost:8080/putNewOrder --data 'id=1'
 ```
-
 
 2. The application persists the order to the database using the following SQL statement (see the app's log output): 
 
@@ -134,7 +126,6 @@ Hibernate:
  (?, ?, ?)
 ```
 
-
 3. Use your psql session to check that the row made it to PostgreSQL: 
 
 ```sql
@@ -143,7 +134,6 @@ postgres=# select * from pizza_order;
 ----+---------+-------------------------
   1 | Ordered | 2022-11-21 11:14:35.103
 ```
-
 
 PostgreSQL stores rows in pages. The default page size is 8KB, which means that a single page usually holds multiple records. The database has an extension that allows us to look into the raw page data. Let's install the extension and explore the database storage internals:
 
@@ -154,7 +144,6 @@ postgres=# CREATE EXTENSION pageinspect;
 CREATE EXTENSION
 ```
 
-
 2. Request the contents of the first page of the `pizza_order` table:
 
 ```sql
@@ -163,7 +152,6 @@ postgres=# select t_ctid,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page(
 --------+--------+--------+------------------------------------
  1      |    488 |      0 | \x0100000002400000180fd8edf7900200
 ```
-
 
 There is a single row in the page right now, and that's the row your application sees by executing the `select * from pizza_order` statement. Let's decipher the pageinspect columns:
 
@@ -180,7 +168,6 @@ Now, let's see what happens when the chef gets to this order and starts baking t
 curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=Baking'
 ```
 
-
 2. The app persists the change using the following statement: 
 
 ```java
@@ -193,7 +180,6 @@ Hibernate:
         id=?
 ```
 
-
 3. And PostgreSQL confirms the change is applied: 
 
 ```sql
@@ -202,7 +188,6 @@ id | status |       order_time
 ----+--------+-------------------------
   1 | Baking | 2022-11-21 11:14:35.103
 ```
-
 
 Now for the most interesting part, go ahead and check the storage state with the pageinspect extension:
 
@@ -213,7 +198,6 @@ postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('piz
   1 |    488 |    490 | \x0100000002400000180fd8edf7900200
   2 |    490 |      0 | \x0100000004400000180fd8edf7900200
 ```
-
 
 Even though the `select * from pizza_order` statement returns only one row, internally, PostgreSQL stores two versions for the order with `id=1`.
 
@@ -234,7 +218,6 @@ curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=D
 curl -i -X PUT http://localhost:8080/changeStatus --data 'id=1' --data 'status=YummyInMyTummy'
 ```
 
-
 2. Using the psql session, confirm that the application will see only a row version with `status=YummyInMyTummy`:
 
 ```sql
@@ -243,7 +226,6 @@ postgres=# select * from pizza_order;
 ----+----------------+-------------------------
   1 | YummyInMyTummy | 2022-11-21 11:14:35.103
 ```
-
 
 3. Check how many versions of the row are in PostgreSQL storage: 
 
@@ -257,7 +239,6 @@ postgres=# select lp,t_xmin,t_xmax,t_data from heap_page_items(get_raw_page('piz
   4 |    492 |      0 | \x0100000008400000180fd8edf7900200
 (4 rows)
 ```
-
 
 There are four versions in the storage for our pizza order with `id=1`. The only difference between those versions is the value of the `status` column!
 

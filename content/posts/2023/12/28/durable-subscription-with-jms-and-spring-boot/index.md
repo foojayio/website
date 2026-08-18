@@ -21,8 +21,7 @@ frozen: false
 
 **When using the publish-subscribe domain with JMS, we often want to use durable subscriptions. But how can this be done with Spring Boot?**
 
-What is JMS?
-------------
+## What is JMS?
 
 The Java Message Service (JMS) API is a standard for creating, sending, receiving, and reading messages. It enables distributed communication that is loosely coupled, reliable, and asynchronous.
 
@@ -34,23 +33,20 @@ In the point-to-point domain, a producer can send a message to one consumer thro
 In the publish-subscribe domain, a producer can send a message to many consumers through a destination called "topic". Consumers can subscribe to a topic and receive a copy of each message.
 ![](image-1.png)
 
-Durable Subscription
---------------------
+## Durable Subscription
 
 Durable subscriptions allow messages to remain on a topic while the message consumer is not active. A durable subscriber registers a durable subscription by specifying a unique identity that is retained by the JMS provider. You establish the unique identity of a durable subscriber by setting the following:
 
 * A client ID for the connection
 * A topic and a subscription name for the subscriber
 
-Configuration with Spring Boot and JMS
---------------------------------------
+## Configuration with Spring Boot and JMS
 
 The first thing to configure is that we want to use the publish-subscribe domain in the application.properties:
 
 ```
 spring.jms.pub-sub-domain=true
 ```
-
 
 Next we must configure durable subscription. Unfortunately this cannot be done using a simple property. We have to configure the ConnectionFactory manually:
 
@@ -72,7 +68,6 @@ public JmsListenerContainerFactory<?> artemisConnectionFactory(
 }
 ```
 
-
 The crucial lines in the configuration are line 6, where we set a client ID, which has to be unique among all active connections, and line 11, where we activate the durable subscription mode.
 
 Finally, we must configure the Listener to use this connection factory by setting the containerFactory attribute of the JmsListener annotation. We also set the subscription. If this attribute is not set, Spring JMS will generate a subscription name based on the class and method name.
@@ -87,9 +82,7 @@ public void onMessage(Message message) {
 }
 ```
 
-
-Example Code and References
----------------------------
+## Example Code and References
 
 You can find the source code on GitHub: <https://github.com/simasch/spring-boot-jms-pubsub-durable>
 

@@ -32,13 +32,11 @@ OK, but... how are these vectors crucial for the whole Artificial Intelligence e
 
 This is the last podcast of season 3, we're taking a summer break, and will be back in September with the release of Java 23 and many more OpenJDK-related topics!
 
-Video
------
+## Video
 
 {{< youtube QZAYscsyVK0 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -46,8 +44,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Jonathan Ellis
   * <https://www.linkedin.com/in/jbellis/>
@@ -56,8 +53,7 @@ Guests
   * <https://www.linkedin.com/in/alexander-chatzizacharias/>
   * <https://x.com/alex90_ch>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 

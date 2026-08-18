@@ -30,13 +30,11 @@ In this introductory article, we use an example [event-driven](https://chronicle
 say: Hello World
 ```
 
-
 Into outputs like this, by adding an exclamation point:
 
 ```
 say: Hello World! # <- adds an exclamation point
 ```
-
 
 All the code for this example is [available on GitHub](https://github.com/OpenHFT/Chronicle-Queue-Demo/tree/main/hello-world).
 
@@ -64,7 +62,6 @@ public interface Says {
    void say(String words);
 }
 ```
-
 
 This is the simplest Hello World example to get started.
 
@@ -96,7 +93,6 @@ public class SaysOutput implements Says {
 }
 ```
 
-
 These can be integrated easily as the output of one is wired to the input of the other.
 
 ```
@@ -109,7 +105,6 @@ public class RecordInputToConsoleMain {
     }
 }
 ```
-
 
 We can also record everything the producer performs to YAML to build tests later.
 
@@ -124,7 +119,6 @@ public class RecordInputAsYamlMain {
 }
 ```
 
-
 Use the following to replay the output from a file.
 
 ```
@@ -135,7 +129,6 @@ public class ReplayOutputMain {
     }
 }
 ```
-
 
 ### Unit Tests for the RecordAsYaml and Replay Methods
 
@@ -205,7 +198,6 @@ public class WiresTest extends WireTestCommon {
 }
 ```
 
-
 By recording and replaying using YAML, our microservices are written, tested and debugged easily without any involvement of the messaging layer.
 
 Let's add a microservice as a data processor as a class that can have one or more event types.
@@ -226,7 +218,6 @@ public class AddsExclamation implements Says {
 }
 ```
 
-
 ![](Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241.png)  
 *Figure 2- A microservice that adds exclamation marks to input messages.*
 
@@ -244,7 +235,6 @@ public class DirectWithExclamationMain {
 }
 ```
 
-
 ### Testing a Single Event-Driven Service
 
 Instead of embedding large amounts of text in a test, we can read resource files.
@@ -260,7 +250,6 @@ public class AddsExclamationTest {
     }
 }
 ```
-
 
 ![](Screen-Shot-2023-02-20-at-4.58.02-PM-1024x363.png)
 
@@ -278,7 +267,6 @@ say: Hello World
 say: Three
 ...
 ```
-
 
 ![](Screen-Shot-2023-02-20-at-4.58.42-PM-1024x370.png)
 

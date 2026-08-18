@@ -30,16 +30,13 @@ java.lang.invoke.*;
 java.lang.foreign.*;
 ```
 
-<br />
-
 While this article is for newbies, I assume you know the basics of the Java language, a little bash scripting, and a familiarity with C programming concepts. If you are new to C language don't worry I will go over the concepts later.
 
 For the impatient go to [Panama4Newbies](https://github.com/carldea/panama4newbies) on GitHub.
 
 In Part 1 of this series, I will give you an overview of the requirements and later go through some exercises as a primer to create memory outside of Java's heap and call into native C functions.
 
-What is Project Panama?
------------------------
+## What is Project Panama?
 
 Project Panama is a new way for the Java programming language to access native libraries that are written in native languages like C, C++, Objective-C/C++, Swift, Rust and Python (currently supports the C [ABI](https://en.wikipedia.org/wiki/Application_binary_interface)). While my description might be an oversimplification, Project Panama has been in the making for quite some time (11+ years) and continues to have great success! Kudos and a huge shout out to the OpenJDK community at large!
 
@@ -83,8 +80,7 @@ Shown below is the timeline of the roadmap:
 
 The tutorial series is based on **JEP 454** (final was released in JDK 22).
 
-Why Use Project Panama?
------------------------
+## Why Use Project Panama?
 
 Before answering why, let me ask another question, Have you heard of Minecraft? If you answered "Yes, of course", then, great! If you answered "No", then please go and visit [](https://www.minecraft.net/en-us)<https://www.minecraft.net/en-us>. Did you also know that Minecraft is written in Java using the popular open source gaming library called [LWJGL](https://www.lwjgl.org/ "LWJGL") (LightWeight Java Game Library)?
 
@@ -106,8 +102,7 @@ Okay, so now that you are convinced, how to get started?
 
 Before we begin, it is important to understand **jextract**, a command-line tool that automates the generation of the low-level Project Panama Java code. By binding native libraries to Java, jextract eliminates the tedious manual work required to invoke native functions and interact with native symbols.
 
-Where do I get the jextract tool?
----------------------------------
+## Where do I get the jextract tool?
 
 To acquire **jextract**, you can either build it from source or download a pre-compiled version:
 
@@ -137,7 +132,6 @@ Let us make sure your environment is setup before we begin. The following are th
  $ export PATH=$JAVA_HOME/bin:JEXTRACT_HOME/bin:$PATH
 ```
 
-
 **Note:** To make environment variables permanent you can set these in your `.bashrc` or `.bash_profile` files on Linux or MacOS respectively. On newer Macs you can set them in your `.zshrc` or `.zprofile`
 
 **Step 4:** Test Java runtime and the `jextract` tool are available
@@ -146,7 +140,6 @@ Let us make sure your environment is setup before we begin. The following are th
  $ java -version
  $ jextract -h
 ```
-
 
 **Windows instructions:**   
 
@@ -160,7 +153,6 @@ Step 2: Set `JAVA_HOME`, `JEXTRACT_HOME` and `PATH` environment variables
  c:\> set PATH=%JAVA_HOME%\bin;%JEXTRACT_HOME/bin%;%PATH%
 ```
 
-
 **Note:** To make environment variables permanent on the Windows platform do the following:
 
 1. Right-click the Computer icon and choose Properties, or in Windows Control Panel, choose System.
@@ -173,7 +165,6 @@ Step 2: Set `JAVA_HOME`, `JEXTRACT_HOME` and `PATH` environment variables
  c:\> java -version
  c:\> jextract -h
 ```
-
 
 After running jextract -h to display the switch options you'll know you are ready to go. You should see something like the following:
 
@@ -219,23 +210,19 @@ macOS platform options for running jextract (available only when running on macO
                                       -l :/System/Library/Frameworks/libGL.framework/libGL
 ```
 
-
 If you are seeing the `jextract` options then you are ready to go to the next section.
 
-Do I need a C compiler?
------------------------
+## Do I need a C compiler?
 
 In short, **No**. For demonstration purposes I will be using a standard C compiler on my MacOS environment. This is purely optional and I will use it to show concepts inside a C program.
 
 If you are on a Windows OS you can check out Microsoft's Visual C++ that includes a C compiler ([](https://docs.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160)<https://docs.microsoft.com/en-us/cpp/build/walkthrough-compile-a-c-program-on-the-command-line?view=msvc-160>). Also, you can download MingW at [](https://www.mingw-w64.org)<https://www.mingw-w64.org>
 
-Let's Do It!
-------------
+## Let's Do It!
 
 Before we get into using Panama's APIs let's begin by looking at a **Hello World** example in the C programming language. By understanding what a C program consists of will help us know how to invoke **native** code. Later on we will write a pure Hello World Java program that will call into standard C (native) functions.
 
-Anatomy of a Hello World in C
------------------------------
+## Anatomy of a Hello World in C
 
 **Note:** Remember, this part of the tutorial is purely *optional* if you don't have a C compiler handy for your OS just skip the compilation step.
 
@@ -251,13 +238,11 @@ int main() {
 }
 ```
 
-
 **Step 2:** Compile the code
 
 ```
 $ gcc helloworld.c
 ```
-
 
 **Step 3:** List the executable file
 
@@ -266,14 +251,12 @@ $ ls -l a.out
 -rwxr-xr-x  1 jdoe  staff  49424 Jul 29 21:06 a.out
 ```
 
-
 **Step 4:** Run or execute the program
 
 ```
 $ ./a.out
 Hello, World!
 ```
-
 
 Well that was pretty straight forward! Let's unpack what is actually going on. Below is a high-level look at what the C program is doing.
 
@@ -293,7 +276,6 @@ int main() {}
 int main(int argc, char *argv[]) {}
 ```
 
-
 In **Step 3** the `main()` function will return an integer of zero to denote **success** , and any other value is an **error status code**.
 
 In **step 4** The `stdio.h` header function `int printf(const char *format, ...)`, has a signature that takes a C string type with variable arguments (0-to-many) values to perform a string interpolation. Similar to Java's `System.out.printf("Hello, %s\n", "Hello Panama!");`.
@@ -305,8 +287,7 @@ There are two things to keep in mind when talking to C.
 
 Now that we have a good understanding of a Hello World C program let's create an equivalent Panama Java Hello World example. In other words the Java program will natively call the `printf()` function.
 
-Panama Hello World Example
---------------------------
+## Panama Hello World Example
 
 As mentioned before, the C code of our Hello World program was using the `stdio.h` library. At this point, we will generate Java code to talk to the `stdio.h` library. Instead of hand coding this (which is out of the scope of this tutorial) we will be using the `jextract` tool. This magical tool will generate pure Java code that will bind to native libraries. These class files will contain meta data and much of the lower level Panama code that will make things convenient for the user of the API (you and me).
 
@@ -314,15 +295,13 @@ As mentioned before, the C code of our Hello World program was using the `stdio.
 
 Because the C language specification is well defined `jextract` can generate Java code pretty easily. C++ on the other hand will be another effort and is not currently supported. If you have a native library written in C++ you'd have to take some additional steps which I won't cover (See [Java Panama Polyglot (C++) Part 1](https://foojay.io/today/java-panama-polyglot-part1/)).
 
-Let's jextract STDIO please!
-----------------------------
+## Let's jextract STDIO please!
 
 The `jextract` tool has been updated to make it easier for standard C libraries by specifying header files in double quotes as follows:
 
 ```
 jextract --output generatedsrc -t org.unix "<stdio.h>"
 ```
-
 
 * `--output <destination directory of generated java code>`
 * `-t` \<package namespace\>
@@ -335,7 +314,6 @@ It should look like the following:
 ```batch
 $ ls -l generatedsrc/org/unix
 ```
-
 
     __darwin_pthread_rwlock_t.java
     __darwin_pthread_rwlockattr_t.java
@@ -358,7 +336,6 @@ To use `jextract` let's locate where your `stdio.h` file is located on your loca
 $ gcc -H -fsyntax-only helloworld.c
 ```
 
-
 On MacOS (Big Sur, Monterey) the output looks something to the following:
 
 ```
@@ -367,13 +344,11 @@ On MacOS (Big Sur, Monterey) the output looks something to the following:
 ...
 ```
 
-
 Now that you know where the file is located, we can target the file when using the `jextract` tool.
 
 ```
 $ jextract [options] <path_to_file/stdio.h>
 ```
-
 
 **Step 2:** (**Optional step** ) Use `jextract` to generate Java code from a specific `stdio.h` header file location using `-I` \<include files directory\>.  
 
@@ -383,13 +358,11 @@ On MacOS do the following:
 $ jextract --output generatedsrc -t org.unix -I /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h
 ```
 
-
 **On Linux:**
 
 ```bash
 $ jextract --output generatedsrc -t org.unix -I /usr/include /usr/include/stdio.h
 ```
-
 
 Now we can use the generated code to be used in our Panama Java Hello World program.
 
@@ -410,7 +383,6 @@ void main() {
 }
 ```
 
-
 **Step 4:** Compiling **generated files** along with `HelloWorld.java`
 
 ```bash
@@ -421,7 +393,6 @@ javac generatedsrc/org/**/*.java -d classes
 javac -cp .:classes src/*.java -d classes
 ```
 
-
 **Step 5:** Running the Panama Java `HelloWorld.java`
 
 ```bash
@@ -430,16 +401,13 @@ $ java -cp .:classes \
  HelloWorld
 ```
 
-
 The output is the following:
 
 ```
 Hello World! Panama style
 ```
 
-
-How does it work?
------------------
+## How does it work?
 
 **Step 1**, the C compiler on MacOS/Linux platforms allows you to find where headers are located on a system. Often MacOS developers will use Brew (package manager) to install 3rd party libraries such as OpenCL, Tensorflow, etc.
 
@@ -486,7 +454,6 @@ $ jextract \
   ${LIBTENSORFLOW_HOME}/include/tensorflow/c/c_api.h
 ```
 
-
 You will notice on MacOS I specified the fully qualified library file `${LIBTENSORFLOW_HOME}/lib/libtensorflow.dylib` instead of the name (tensorflow). Usually, if libraries are installed in /usr/lib or /usr/local/lib you can just specify the name.
 
 **Step 3:** Java code talks to C.
@@ -502,7 +469,6 @@ You will notice on MacOS I specified the fully qualified library file `${LIBTENS
  }
 ```
 
-
 In line **(A)** the statement is where the code uses a try with resources to create an `Arena`. An Arena is type of scope [confined](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Arena.html#ofConfined()) will auto close when it's finished after the try-block. This will deallocate native memory safely. Please see the javadoc documentation for additional types of [Arenas](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Arena.html).
 
 The statement in line **(B)** calls the `allocateFrom(String)` method to allocate and convert a Java String into a C string (`char `*type). Any time you are mimicking C variables they will be of type `MemorySegment`. In [part 2](https://foojay.io/today/project-panama-for-newbies-part-2/) of this series we will look at C pointers (address), so if you find the asterisk beside the `char `* type a little odd, don't be too concerned about it for now, and just know that it is the C language's way of storing a string value (or array of characters and null terminated).
@@ -517,14 +483,12 @@ printf.makeInvoker().apply(cString);
 System.out.println("Java System.out\n");
 ```
 
-
 On some systems, (on MacOS) the following output occurs because of the C's output hasn't been flushed:
 
 ```
 Java System.out
 Hello World (Native C Called)
 ```
-
 
 So, what do you do? You need to call `fflush()`to flush C's buffer to `stdout`.
 
@@ -535,14 +499,12 @@ fflush(NULL()); // jextract generated functions in org.unix.stdio_h.*
 System.out.println("Java System.out\n");
 ```
 
-
 Now, the output will be in the correct order shown below:
 
 ```
 Hello World (Native C Called)
 Java System.out
 ```
-
 
 So, now that you know how to output a newly created C string using the printf() function let's learn how to substitute values into a **format string** or string template. Java's `System.out.printf()` also has the same calling convention as C's `stdio.h` `printf()` function. Let's examine a format string passed into the printf() function.
 
@@ -576,7 +538,6 @@ MemorySegment nameStr = arena.allocateFrom("Fred");
 printfAlpha.apply(formatCStr, nameStr); // Hello Fred!
 ```
 
-
 The following shows commonly used format specifiers (not an exhaustive list).
 
 | **Format Specifier** |   **Data Type**   |                             **Description**                              |
@@ -591,7 +552,6 @@ Let's look at a more advanced format string using different format specifiers. T
 ```c
 int charCount = printf("%s is %d years old and is %.1f feet tall.\n", "Fred", 60, 5.9d);
 ```
-
 
 Above you'll notice `%s`, `%d` and `%.1f` which tells you there are **three** format specifiers: C string, int, and double(floating point number). Now we can call the `makeInvoker()` method with the appropriate data types generated from jextract. The types would be the following: `C_POINTER`, `C_INT`, and `C_DOUBLE`.
 
@@ -620,7 +580,6 @@ Above you'll notice `%s`, `%d` and `%.1f` which tells you there are **three** fo
     }
 ```
 
-
 This time I separated the calls `makeInvoker()` and `apply()` instead of the earlier example of method chaining. By separating the calls you can see `makeInvoker()` returns an instance of a `printf` object capable of receiving 3 variadic arguments (`"Fred", 60, 5.9d`). The first parameter will be the **format string** `"%s is %d years old and is %.1f feet tall.\n"`.
 
 The output is:
@@ -628,7 +587,6 @@ The output is:
 ```
 Fred is 60 years old and is 5.9 feet tall.
 ```
-
 
 Congratulations for getting this far! While it's nice to create and output C strings. Let's look at how to create primitive data types off of the Java's memory heap.
 
@@ -690,7 +648,6 @@ printf printfFun = printf.makeInvoker(C_DOUBLE);
 printfFun.apply(formatCStr, cDouble.get(C_DOUBLE, 0)); // A slice of 3.141593
 ```
 
-
     Output:
     A slice of 3.141593
 
@@ -704,7 +661,6 @@ Of course you can also call by passing in Java's `Math.PI` (primitive double) in
 // jextract generated C_DOUBLE
 public static final ValueLayout.OfDouble C_DOUBLE = (ValueLayout.OfDouble) Linker.nativeLinker().canonicalLayouts().get("double");
 ```
-
 
 ### Creating C primitive arrays
 
@@ -727,7 +683,6 @@ for (long i = 0; i < (4*4); i++) {
 }
 ```
 
-
 The output:
 
 ```
@@ -737,7 +692,6 @@ An array of data
  3.000000  4.000000  5.000000  6.000000 
  5.000000  6.000000  7.000000  8.000000
 ```
-
 
 As demonstrated above, you can use the `MemorySegment.getAtIndex(ValueLayout, index)` method to extract and display a specific value from the array.
 
@@ -750,7 +704,6 @@ for (long i = 0; i < 16; i++) {
 }
 ```
 
-
 Output is shown below:
 
 ```
@@ -759,7 +712,6 @@ Output is shown below:
  9.000000  12.000000  15.000000  18.000000 
  15.000000  18.000000  21.000000  24.000000
 ```
-
 
 In Part 1, we learned about the what, where, and whys regarding project Panama. Next, we examined the anotomy of a typical Hello World C program. After learning how to use `jextract` to generate Java code from `stdio.h`, we were able to create a Java Hello World to access the C function `printf()`. Lastly, we learned how to create C primitive data types including arrays.
 

@@ -24,15 +24,13 @@ frozen: false
 
 This story is about how "Write Once, Run Anywhere" got broken in a specific use case. It reveals the complexity of maintaining this "Run Anywhere" principle. At the same time, it shows how the OpenJDK community already detected this issue and has a fix available for the next update.
 
-Problem on Raspberry Pi Zero 2
-------------------------------
+## Problem on Raspberry Pi Zero 2
 
 **[Dieter Holz](https://www.pi4j.com/about/team/)** was experimenting with Pi4J V3 on a Raspberry Pi Zero 2. Because this version requires Java 21 or newer, he upgraded his OS to a newer Java version and found out that no Java code could be executed. He tried with Java 21 and 24, and neither worked correctly, although Java 17 runs without problems.
 
 The same SD card with Java 24 that didn't work on the Zero 2 worked perfectly on a Raspberry Pi 4. So, what is happening under the hood? What is the difference between these two boards causing this problem? Let's dive in.
 
-Differences Between RPi Zero 2 and RPi 4
-----------------------------------------
+## Differences Between RPi Zero 2 and RPi 4
 
 As the same SD card was used to test on two different boards, the problem has to be related to the board itself, not the software. I repeated the test as Dieter did and used the latest Azul Zulu version [24.30.13, based on OpenJDK 24.0.1](https://www.azul.com/downloads/?version=java-24&os=linux&architecture=arm-64-bit&package=jdk-fx#zulu).
 
@@ -44,7 +42,6 @@ openjdk version "24.0.1" 2025-04-15
 OpenJDK Runtime Environment Zulu24.30+13-CA (build 24.0.1+9)
 OpenJDK 64-Bit Server VM Zulu24.30+13-CA (build 24.0.1+9, mixed mode, sharing)
 ```
-
 
 But trying to execute or compile the simplest "Hello World" code resulted in errors on the Zero 2:
 
@@ -64,7 +61,6 @@ Exception in thread "main" java.lang.InternalError: Cannot find requested resour
 	...
 ```
 
-
 Let's try to find the difference between the two boards by executing a few commands...
 
 |---------------------|--------------------------------------------------------|--------------------------------|
@@ -76,8 +72,7 @@ Let's try to find the difference between the two boards by executing a few comma
 
 Bingo! `lscpu` shows a different type of ARM processor. Could this be the reason for this problem?
 
-Changes in Java 21
-------------------
+## Changes in Java 21
 
 Thanks to my colleagues at **Azul**, it immediately became clear that the Cortex-A53 is indeed causing Java to fail.
 
@@ -95,8 +90,7 @@ This bug causes:
 
 If you want to explore the details of the JIT, you can read this [technical overview of the intrinsics and vector optimization systems in the OpenJDK JIT compiler (C2)](https://deepwiki.com/openjdk/jdk21u/3.2.2-intrinsics-and-vectorization).
 
-Workaround
-----------
+## Workaround
 
 As described in [Running Java 21+ on Raspberry Pi Zero 2](/documentation/java-for-arm/#running-java-21-on-raspberry-pi-zero-2), a workaround is available to execute Java code until the fix is included in the next release:
 
@@ -105,9 +99,7 @@ $ java -XX:+UnlockDiagnosticVMOptions -XX:-UseVectorizedHashCodeIntrinsic HelloW
 Hello World
 ```
 
-
-Compare Boards
---------------
+## Compare Boards
 
 To help identify these kinds of issues that behave differently on different types of Raspberry Pi boards, the Board Info Service has been extended with a [Compare view](https://api.pi4j.com/board-compare?board2=MODEL_4_B&board1=ZERO_V2) where you can easily see the differences between two boards.
 ![](compare-boards-1024x600.png)

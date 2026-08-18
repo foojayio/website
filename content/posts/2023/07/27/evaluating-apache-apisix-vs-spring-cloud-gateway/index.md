@@ -30,8 +30,7 @@ I'm cautious when comparing products because most comparisons I read are heavily
 
 As a safeguard, I've asked my friend Iván López, a Spring Cloud Gateway user, to proofread the post. Iván reviewed the post as my friend, not as a VMWare developer. Despite all my best efforts, I may appear not as objective as I'd like. I accept it, and that's fine.
 
-First steps with Spring Cloud Gateway
--------------------------------------
+## First steps with Spring Cloud Gateway
 
 All API Gateways that I know about provide a Docker image. For example, [Apache APISIX](https://hub.docker.com/r/apache/apisix) provide three flavours: Debian, CentOS, and recently, Red Hat. At this point, you can start deploying the images in your containerized architecture.
 
@@ -45,11 +44,9 @@ Spring Cloud Gateway's approach is radically different. It's just a regular depe
 </dependency>
 ```
 
-
 You can leverage all standard ways to create the project, including the popular [start.spring.io](https://start.spring.io/#!type=maven-project&language=kotlin&platformVersion=3.1.0&packaging=jar&jvmVersion=17&groupId=ch.frankel.blog&artifactId=gateway&name=gateway&description=Gateway%20Demo%20project%20for%20Spring%20Boot&packageName=ch.frankel.blog.gateway&dependencies=cloud-gateway), as for any regular Spring project. This developer-oriented approach is pervasive in everything related to Spring Cloud Gateway.
 
-Concepts and abstractions
--------------------------
+## Concepts and abstractions
 
 Apache APISIX features a rich model:
 
@@ -61,8 +58,7 @@ Here's the Spring Cloud Gateway model![](spring-gateway-model.png)
 
 The APISIX model is richer, with abstractions and the possibility of reuse.
 
-Configuration
--------------
+## Configuration
 
 Apache APISIX has two deployment modes (actually three, but let's not get into details): *traditional* and *standalone*.
 
@@ -98,7 +94,6 @@ global_rules:
       prefer_name: true
 ```
 
-
 Spring Cloud Gateway supports all configuration options of regular Spring projects, and they are [many](https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/features.html#features.external-config). However, "flat" configurations, such as `.properties` file(s) and environment variables, are error-prone:
 
 ```
@@ -110,7 +105,6 @@ spring.cloud.gateway.routes[1].uri=http://pricing:8080
 spring.cloud.gateway.routes[1].predicates[0]=Path=/prices*
 spring.cloud.gateway.routes[1].predicates[1]=Header=Referer, http://catalog.me
 ```
-
 
 IMHO, one should stick to a hierarchical configuration, such as YAML - and remember that I'm not too fond of YAML. Here's the same configuration as above:
 
@@ -129,15 +123,13 @@ spring.cloud.gateway.routes:
       - Header=Referer, http://catalog.me
 ```
 
-
 I believe the YAML version leaves less space for errors, especially regarding indices.
 
 Be warned that Spring applications don't reload their configuration by default when the latter changes. While it's possible - and indeed, a couple of options are available - it requires coding. [Here](https://www.baeldung.com/spring-reloading-properties)'s a good tutorial on how to achieve it.
 
 As for Apache APISIX, you can also create [update and delete routes dynamically](https://cloud.spring.io/spring-cloud-gateway/reference/html/#creating-and-deleting-a-particular-route) via the `/actuator` endpoint. However, the API doesn't offer a `PATCH` method: you need to update the whole route in case of updates.
 
-Features comparison
--------------------
+## Features comparison
 
 Apache APISIX implements features with *plugins* , while Spring Cloud Gateway implements them with *filters*. While an exhaustive, detailed feature-by-feature comparison is beyond the scope of a single blog post, we can still get a good overview.
 
@@ -160,8 +152,7 @@ Some plugins are Spring-specific, *e.g.* , `SaveSession` - APISIX has no such in
 
 If a feature is unavailable out of the box, developing a custom plugin in Lua for APISIX, in a JVM language for Spring is possible.
 
-Observability
--------------
+## Observability
 
 Observability implementations differ wildly between Spring Cloud Gateway and Apache APISIX.
 
@@ -175,7 +166,6 @@ The first relies on [the Actuator](https://docs.spring.io/spring-boot/docs/3.1.x
 </dependency>
 ```
 
-
 To serve metrics for Prometheus consumption, add the following Micrometer dependency:
 
 ```xml
@@ -186,7 +176,6 @@ To serve metrics for Prometheus consumption, add the following Micrometer depend
 </dependency>
 ```
 
-
 On the other hand, Apache APISIX uses the same plugin system for features for observability:
 
 1. For tracing: `zipkin`, `skywalking`, and `opentelemetry`
@@ -195,8 +184,7 @@ On the other hand, Apache APISIX uses the same plugin system for features for ob
 
 Both products cover the three pillars of Observability and provide many integrations with third-party backends.
 
-Documentation
--------------
+## Documentation
 
 IMHO, Spring's documentation is second to none; [Spring Cloud Gateway's](https://spring.io/projects/spring-cloud-gateway#overview) is no exception. It belongs to the Spring portfolio and offers the same structure: an overview, the reference documentation (exhaustive), a get-started guide, and two sample projects organized by version.
 
@@ -204,8 +192,7 @@ The only reproach I have is that everything is developer-oriented. API Gateways 
 
 I won't comment on [Apache APISIX's documentation](https://apisix.apache.org/docs/apisix/getting-started/README/) because I know the issues too well. If you have any constructive feedback, however, I'm all ears. Please comment below.
 
-Usability
----------
+## Usability
 
 Usability is quite subjective, but I didn't notice significant differences in my sample demo. Here's the general design, pretending to mimic a microservices architecture.
 
@@ -235,8 +222,7 @@ Both branches should yield the same result.
 
 I've added a Grafana dashboard. Note that the Spring one doesn't output anything usable, but it's my fault that I could not configure it properly.
 
-Conclusion
-----------
+## Conclusion
 
 Spring Cloud Gateway and Apache APISIX are two (API) Gateways offering more or less the same set of features. However, their approach is radically different.
 

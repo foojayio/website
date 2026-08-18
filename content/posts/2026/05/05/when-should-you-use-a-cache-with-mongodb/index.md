@@ -27,8 +27,7 @@ I've yet to finish a design review without recommending that the cache tier be r
 
 So to answer the question in the title of this article---when should you use a cache with MongoDB?---the answer is probably never. This article attempts to explain why, but if you get to the end and still think your application needs it, then I'd love to discuss your app with you.
 
-Why were caches like Memcached \& Redis invented, and why do they thrive?
--------------------------------------------------------------------------
+## Why were caches like Memcached \& Redis invented, and why do they thrive?
 
 Caching tiers were introduced because it was too slow for applications to read the required data directly from a relational database.
 
@@ -42,8 +41,7 @@ Relational databases were not designed with this data distribution requirement i
 
 Note that Redis and Memcached are widely used for session handling for web applications where persistence isn't a requirement. In that case, the cache is the only data store (i.e., not a cache layer between the application and MongoDB). While you can (and people do) use MongoDB for session management, that's beyond the scope of this article.
 
-So, what's wrong with having a caching tier?
---------------------------------------------
+## So, what's wrong with having a caching tier?
 
 Introducing a caching layer is often a great solution when your database can't deliver the performance and latency your application needs.
 
@@ -53,8 +51,7 @@ Less obvious is the extra load on developers. It's a new query language (and pos
 
 So, a cache tier has to pay its way by delivering tangible benefits over having your application access the database directly.
 
-What's different with MongoDB?
-------------------------------
+## What's different with MongoDB?
 
 The [MongoDB document model](https://mongodb.com/docs/manual/data-modeling/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim).
 
@@ -68,8 +65,7 @@ Note that MongoDB supports [joins](https://mongodb.com/docs/manual/reference/ope
 
 The other value-add from a caching layer is data locality in distributed architectures. MongoDB has this built in. A [MongoDB replica set](https://mongodb.com/docs/manual/replication/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim) has a single primary node that handles all writes, together with up to 49 secondary nodes---each with a copy of the data. For the lowest latency queries, you can place secondaries locally at each of your app server locations. MongoDB is responsible for keeping the data in the secondary nodes up to date with the primary, so you don't need to write and maintain any extra synchronization code.
 
-What does AI think?
--------------------
+## What does AI think?
 
 The responses created by generative AI are driven by the information that's been published by real people, and so it should represent popular opinion on a topic. I thought it would be interesting to see what an AI has come to understand as conventional wisdom on why people place a cache in front of MongoDB.
 
@@ -101,8 +97,7 @@ I'll summarize and respond to the key benefits of the cache tier identified by C
 
 Note that the response you get from ChatGPT is heavily skewed by the question you ask. If I change my prompt to "Explain why I shouldn't use a cache layer (such as Redis) rather than having my application read data from MongoDB directly," ChatGPT is happy to dissuade me from adding the cache layer, citing issues such as increased system complexity, data consistency issues, performance for write-heavy workloads, cost, query flexibility, maintenance and reliability, small data sets (where the active data set fits in MongoDB's cache), and real-time reporting.
 
-Summary
--------
+## Summary
 
 A cache layer can add much value when your RDBMS cannot deliver the query performance your application demands. When using MongoDB, the database of record and cache functionality is combined in a single layer, saving you money and developer time.
 
@@ -110,8 +105,7 @@ A distributed cache can mitigate shortfalls in your RDBMS, but MongoDB has a bui
 
 Respond to this article if you still believe your application would benefit from a cache layer between your application and MongoDB. I'd love to take a look.
 
-Learn more about MongoDB design reviews
----------------------------------------
+## Learn more about MongoDB design reviews
 
 [Design reviews](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim) are a chance for a design expert from MongoDB to advise you on how best to use MongoDB for your application. The reviews are focused on making you successful using MongoDB. It's never too early to request a review. By engaging us early (perhaps before you've even decided to use MongoDB), we can advise you when you have the best opportunity to act on it.
 

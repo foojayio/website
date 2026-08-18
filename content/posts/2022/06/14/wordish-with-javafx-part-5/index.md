@@ -46,8 +46,7 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 5: Chart Your Guesses
---------------------------
+## Part 5: Chart Your Guesses
 
 The bar chart icon in the main Wordish view takes you to the Statistics view, where a user can see game statistics accumulated during play.
 
@@ -95,7 +94,6 @@ public class WordStats {
 }
 ```
 
-
 **Note** : See **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** and **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)**.
 
 ### The Statistics View
@@ -127,7 +125,6 @@ public class StatsController {
 }
 ```
 
-
 **Note** : See **[stats.fxml](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/stats.fxml)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
 ### Adding Data to the Bar Chart
@@ -152,7 +149,6 @@ Here are the BarChart, NumberAxis, and CategoryAxis UI controls for Wordish. Fir
             = FXCollections.observableArrayList();
 ```
 
-
 ### Method `getBarChartData()`
 
 Although a Bar Chart can have multiple series, we have only one series here. We pull our data from the `guessDistribution` hashmap and fill the list as follows.
@@ -174,7 +170,6 @@ private ObservableList<XYChart.Series<Number, String>> getBarChartData() {
 }
 ```
 
-
 **Note** : See **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)**.
 
 ### Customizing the Bar Chart
@@ -193,7 +188,6 @@ A standard JavaFX Bar Chart uses default colors for each of its data series. We 
 }
 ```
 
-
 Recall that both the bar chart color and label will be green for the most recently played game. These we set in the controller code shown below. First, we locate the bar chart node corresponding to the Y-axis value of the current game. Then, we set the `-fx-bar-fill` of the bar chart node and the `-fx-background-color` of the label to `-fx-match-color` (green).
 
 ```java
@@ -204,7 +198,6 @@ if (data.getYValue().equals(String.valueOf(ws.getThisGameGuesses()))) {
 }
 . . .
 ```
-
 
 **Note** : See **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)** and **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)** (method `fixLabels()`).
 
@@ -235,7 +228,6 @@ Here's the scene property change listener with the delay. We create a Timeline w
         });
 ```
 
-
 #### Approach 2: Force JavaFX to Render the Scene
 
 But wait, there's more! If creating a delay feels wrong to you, there's another approach. Take a "snapshot" of the layout container that holds the chart and the labels. This returns a rendered image when the snapshot is complete. Importantly, JavaFX processes the CSS and layout for the scenegraph prior to rendering. And voilà! You can then query the position of the bar chart's nodes for placement purposes.
@@ -253,7 +245,6 @@ Here's the alternate scene property change listener that invokes method `snapsho
           }
        });
 ```
-
 
 And here is method `fixLabels()`. You've already seen the code that updates the CSS. We use `translateX()` and `translateY()` to move the Label to its desired place in the bar chart. We set the Label's `text` property with the data's X-value.
 
@@ -302,7 +293,6 @@ And here is method `fixLabels()`. You've already seen the code that updates the 
     }
 ```
 
-
 Note that the critical code that depends on CSS and layout rendering includes the display position of the X- and Y-axis and the bounds area of the chart.
 
 **Note** : See **[StatsController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/StatsController.java)** (method `fixLabels()`).
@@ -340,7 +330,6 @@ We style the popup with CSS as shown here.
     -fx-background-radius: 10 10 10 10;
 }
 ```
-
 
 The background is black with a white border and white text fill. The control has rounded corners and the text is center-aligned.
 
@@ -388,7 +377,6 @@ public class WordPopup {
 }
 ```
 
-
 Here is an example of how we display the WordPopup during game play. The actual message in this example depends on how many guesses the user took to submit the correct word (variable `rownum`).
 
 ```java
@@ -400,7 +388,6 @@ Here is an example of how we display the WordPopup during game play. The actual 
             updateGameState(true);
         } else . . .
 ```
-
 
 **Note** : See **[WordPopup.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/modelview/WordPopup.java)** , **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)** , and **[styles.css](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/style.css)**.
 

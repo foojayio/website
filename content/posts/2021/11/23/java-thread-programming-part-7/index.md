@@ -50,7 +50,6 @@ public class ThreadCreationDemo {
 }
 ```
 
-
 The above program creates a thread in a while loop, prints the current thread count, and disables it to not get scheduled. The purpose of the demo is just to count how many threads we can create. I ran this program with only 4 GB heap, and I was able to create 4065 threads before it ran out of memory and threw error.
 
 The count very much depends on the memory available and OS. So you may get a different count in your machine.
@@ -76,7 +75,6 @@ public interface ThreadPool {
   void shutdown();
 }
 ```
-
 
 So the idea is for there to be a ThreadPool class that we would instantiate with a pool size. And then we keep submitting our work to it. The ThreadPool will create a number of threads and keep it running inside the number. As soon as we put a task in it, they will start executing them. If they finish executing all tasks, they will wait for more tasks. When we call the shutdown method, only then the pool will stop working. Sounds simple, isn't it?
 
@@ -143,7 +141,6 @@ public class MyThreadPool implements ThreadPool {
 }
 ```
 
-
 Glance over the above code. In the constructor, we take a pool size and then create threads with it. We have an internal data structure called tasks. When we submit the task, it is stored in this list so that threads can take them from it.
 
 We have two methods here, one is, `take()`, another is `submit()`. The submit method is straightforward. We just put our tasks in the form of Runnable into the list. However, since we have a multithreaded situation here, and every thread uses this shared task variable, we must synchronize it wherever the read or write operation happens. We can use any object as a lock for synchronization, and we can even use the tasks list itself. That's what we did here.
@@ -174,6 +171,5 @@ public class Playground {
   }
 }
 ```
-
 
 That's all for today!

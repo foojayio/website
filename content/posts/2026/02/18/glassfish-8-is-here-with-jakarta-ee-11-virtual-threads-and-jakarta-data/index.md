@@ -26,15 +26,13 @@ Recently my company OmniFish published an announcement article introducing Glass
 
 Here, I'd like to report on this article and also share some behind-the-scenes stories about my involvement in GlassFish 8 and why I think the new features matter for solving real pain points in the Java community.
 
-What makes GlassFish 8 modern and developer-friendly
-----------------------------------------------------
+## What makes GlassFish 8 modern and developer-friendly
 
 First and foremost, GlassFish 8 is fully compatible with Jakarta EE Platform 11 - meaning all Jakarta EE 11 APIs are available. Runs on Java 21 and 25. And will run on Java 29 LTS too as soon as it's out, that's our plan. On disk, the size is 150 MB, the size of the runnable GlassFish JAR is 87 MB. Requires 80 MB of RAM to run a REST microservices, or just 50MB of RAM if run using the runnable JAR.
 
 GlassFish 8 brings all the modern advancements in Java and Jakarta EE. The biggest highlights are virtual threads and the new Data API. It also brings new Jakarta NoSQL support and MicroProfile Health. This empowers developers with new out-of-the-box APIs, mainly for simplified and flexible data access. And it also enable virtual threads in configuration to tune apps and monitor apps readiness and health using a standard mechanism. More functionality and options without additional dependencies in your apps and Maven/Gradle build setup.
 
-The story of Jakarta Data in GlassFish 8
-----------------------------------------
+## The story of Jakarta Data in GlassFish 8
 
 I was involved with the Jakarta Data implementation in GlassFish 8 from the very beginning and I'd be happy to share with you how it all happened. In the beginning, we had not easy way to support Data in GlassFish. None of the existing implementations were suitable. The one in Hibernate requires Hibernate ORM but GlassFish uses EclipseLink. The one in OpenLiberty is very tightly coupled with other OpenLiberty components. And JNoSQL only supported NoSQL, which was only half of the solution for GlassFish, which supports JPA.
 
@@ -62,8 +60,7 @@ Here's a simple example of a Data repository:
 
 You can find detailed info with a lot more examples in the [GlassFish Development Guide](https://glassfish.org/docs/latest/application-development-guide.html#using-jakarta-data-repositories).
 
-The story of virtual threads support in GlassFish 8
----------------------------------------------------
+## The story of virtual threads support in GlassFish 8
 
 As you probably know, virtual threads originated as generally available feature in Java 21, long before GlassFish 8 was ready. GlassFish 7 supported Java 21 in the next version after it. First, OmniFish created a plugin for GlassFish that allowed using virtual threads for HTTP listeners. Then we collaborated with the community to improve it and donate it to Grizzly project that powers HTTP listeners in GlassFish. And then we found out that the Eclipse Grizzly project was dormant, without any active committers, and the whole effort got stuck.
 
@@ -79,22 +76,19 @@ Or, when running GlassFish JAR, place the following line in `glassfish.propertie
 
 Concurrent resources like managed executors also support virtual threads via the new "`virtual`" attribute in Jakarta EE annotations. We collaborated with Payara to support virtual threads in the Concurro component, which is used in both GlassFish and Payara Server.
 
-GlassFish 8 beyond Jakarta EE 11
---------------------------------
+## GlassFish 8 beyond Jakarta EE 11
 
 GlassFish 8 is not only about Jakarta EE 11. As I mentioned earlier, it also contains some MicroProfile 7.1 APIs: Config, JWT, REST Client, and Health. The latter one is newly added to GlassFish, since 7.1, released just 2 months before GlassFish 8.0.
 
 And we went a little further to integrate Jakarta EE and MicroProfile in GlassFish. We saw a great synergy between MicroProfile JWT and Jakarta Security. In fact, MicroProfile JWT in GlassFish is already implemented as a custom Jakarta Security authentication mechanism. Jakarta EE 11 brings the ability to programmatically combine multiple built-in mechanisms exposed via standard qualifiers. However, MicroProfile JWT doesn't specify such a qualifier. So we did it. We add a qualifier to GlassFish API to allow injecting the built-in MicroProfile JWT mechanism so that you can combine it with other built-in mechanisms freely. For example, secure REST endpoints with JWT and other URLs via a login form.
 
-Production-ready and supported
-------------------------------
+## Production-ready and supported
 
 For a long time, there has been a narrative that GlassFish wasn't suitable for production environments. OmniFish has been working hard to change this. It started with GlassFish 7 where [we tremendously improved stability](https://omnifish.ee/omnifish-announces-support-for-eclipse-glassfish/). GlassFish 8, as explained in the article by OmniFish, makes it clear that this trend continued, with a lot of structural improvements in GlassFish 7.1 and 8. Since 2022, GlassFish has been on a new trajectory, with frequent updates and the backing of commercial support from OmniFish. This means companies can now confidently build and deploy mission-critical applications on GlassFish, knowing that we have a reliable and supported platform and strong partner to provide support and assistance.
 
 If you remember GlassFish from a few years ago, you might have heard it wasn't suitable for production. That changed in 2022. Since then, we've been on a mission to improve stability, release frequently, and make GlassFish a solid choice for production workloads. GlassFish 7 brought [major stability improvements](https://omnifish.ee/omnifish-announces-support-for-eclipse-glassfish/), and GlassFish 8 continues that trend with structural improvements in 7.1 and 8. For companies that need commercial support, [OmniFish](https://omnifish.ee/glassfish-support/){#https://omnifish.ee/glassfish-support/} provides that backing. But even without it, the open-source project is active, well-maintained, and has a growing community.
 
-Dive deeper
------------
+## Dive deeper
 
 Thank you for reading this far. I hope you enjoyed reading about my personal experience as a GlassFish developer and you now get my excitement from the new GlassFish release. I also highly recommend reading the GlassFish 8 announcement from OmniFish, and check out the [GlassFish website](https://glassfish.org) for more info:
 
@@ -105,8 +99,6 @@ If you want to get started with GlassFish 8 right away, here are some useful lin
 * [Download GlassFish 8](https://glassfish.org/download)
 * [OmniFish Blog](https://omnifish.ee/blog/)
 * [OmniFish on YouTube](https://www.youtube.com/@omnifishnews)
-
-
 
 More information:
 

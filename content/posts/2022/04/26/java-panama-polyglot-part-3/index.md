@@ -32,18 +32,15 @@ Today, I will show you how to write Java code that can talk to a **locally insta
 
 For the impatient the example code is at [Github.com](https://github.com/carldea/panama-polyglot/tree/main/python).
 
-Problem
--------
+## Problem
 
 As a Java developer, you want to execute Python script code. Also, you want to be able to access 3rd party Python libraries, such as Tensorflow.
 
-Solution
---------
+## Solution
 
 Use the `jextract` tool against the include file `Python.h` on the local system.
 
-Why ask Why?
-------------
+## Why ask Why?
 
 The above **problem** and **solution** is rather short, that probably begs the question **why**? Or you might ask "Can you give me a high-level use-case that will help me understand the problem you want to solve?".
 
@@ -73,9 +70,7 @@ import tensorflow as tf
 // Train HAL 9000
 ```
 
-
-Brief History
--------------
+## Brief History
 
 In the past, Java developers would use [Jython](https://www.jython.org) ([JSR 223](https://www.jcp.org/en/jsr/detail?id=223)) to execute Python code on the JVM using Jython's implementation of the Python interpreter as a JVM language.
 
@@ -87,13 +82,11 @@ Besides, most of the official tutorials and documentation relating to Tensorflow
 
 Let's get back to the article on how to execute native Python script code.
 
-Assumptions
------------
+## Assumptions
 
 To complete this tutorial I assume you have installed the EA release of OpenJDK with Project Panama and its [environment variables](https://foojay.io/today/project-panama-for-newbies-part-1/) set. Also, you should be familiar with common shell commands.
 
-Requirements
-------------
+## Requirements
 
 To get started download and install the required software as follows.
 
@@ -112,9 +105,7 @@ python3 --version
 Python 3.10.2
 ```
 
-
-Installing 3rd party packages
------------------------------
+## Installing 3rd party packages
 
 Later in the tutorial you will need to install the following libraries (packages) for Python 3:
 
@@ -133,14 +124,12 @@ pip3 install pyplot
 pip3 install matplotlib
 ```
 
-
 Before we begin you'll want to create a project directory `panama-polyglot/python/src` as shown below.
 
 ```bash
 $ mkdir -p panama-polyglot/python/src
 $ cd panama-polyglot/python
 ```
-
 
 Above you'll notice the `-p` of `mkdir` to create multiple (nested) directories all at once. If you are on the Windows OS you'll want to create each individually. To run examples you'll want to reside in the `panama-polyglot/python` directory. Later you will create a Java application named `PythonMain.java` that will reside in the `src` directory.
 
@@ -151,8 +140,7 @@ Before creating and executing our **Hello World**example lets look at the follow
 3. Create a Java program to execute Python script code
 4. Run Java program
 
-Generating Panama binding (Java) classes
-----------------------------------------
+## Generating Panama binding (Java) classes
 
 Prior to calling the Python code inside Java you will need to generate Java Panama binding classes using `jextract`. These generated class files will be used on the `classpath` e.g. `-cp classes` when running the java application. Do the following to generate Java classes.
 
@@ -165,13 +153,11 @@ jextract  -l python3.10  \
    /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/Python.h
 ```
 
-
 The above use of `jextract` I've used (`-I`) include directory paths that are located on my MacOS (Monterrey), so if you are on a Linux or Windows OS you need to locate them to be specified.
 
 Next, you'll can (optionally) create Java source code for your IDE. This allows you to preview the generated methods and functions capable of calling into the Python interpreter.
 
-Generating Panama binding (Java) source code
---------------------------------------------
+## Generating Panama binding (Java) source code
 
 Enter the following to generate source code against the header file `Python.h`:
 
@@ -185,9 +171,7 @@ jextract  -l python3.10  \
    /Library/Frameworks/Python.framework/Versions/3.10/include/python3.10/Python.h
 ```
 
-
-Create a Java Application (Python Script Runner)
-------------------------------------------------
+## Create a Java Application (Python Script Runner)
 
 After generating classes and sources you will create a single Java application file `PythonMain.java` to be executed. Please cut and past the following into a file `PythonMain.java`. The file should reside in the `panama-polyglot/python/src` directory.
 
@@ -215,11 +199,9 @@ public class PythonMain {
 }
 ```
 
-
 Above you'll notice the `var script` is assigned a Python script code of type Java string. This will be fed into the `PyRun_SimpleStringFlags(str, NULL)` function to be executed.
 
-Execute Java Python Script Runner App
--------------------------------------
+## Execute Java Python Script Runner App
 
 Assuming you are in the `panama-polyglot/python` directory let's run the `PythonMain.java` application. To run the above code enter the following:
 
@@ -231,16 +213,13 @@ java -cp classes \
    src/PythonMain.java
 ```
 
-
 The output shows the following:
 
 ```bash
 Hello World!!!
 ```
 
-
-How does it work?
------------------
+## How does it work?
 
 When generating the binding code by using `jextract` the following shows the switches and their descriptions:
 
@@ -263,8 +242,7 @@ When interacting with the function `PyRun_SimpleStringFlags()` it is similar to 
 
 Now, that you know how to run Python script code lets do something more useful. In the next example we'll be executing Python script code to build and train a neural network (graph model) using the popular Tensorflow framework.
 
-Bonus Example - Tensorflow
---------------------------
+## Bonus Example - Tensorflow
 
 In a more advanced example let's replace the `var script` value above with the official basic tutorial (script code) from Tensorflow.org [here](https://www.tensorflow.org/tutorials/keras/classification). Instead of the simple Python script code above (Hello World) lets create a **Java method** (`mnistClothes()`) that returns the Python script code as a `String`.
 
@@ -286,7 +264,6 @@ The basic Tensorflow tutorial shows you how to load and use training data to cre
 ```java
 var script = mnistClothes();
 ```
-
 
 In your the existing `PythonMain.java` file create a `private static String mnistClothes()` method that returns a Java `String` of the Python Script code verbatim from the basic Tensorflow tutorial mentioned above. Cut and paste the following method into the Java `PythonMain` class.
 
@@ -442,7 +419,6 @@ np.argmax(predictions_single[0])
     }
 ```
 
-
 Assuming you've run the `jextract` tool to generate binding code (`classes` directory) you can execute `PythonMain.java` using the following:
 
 ```bash
@@ -454,7 +430,6 @@ java -XstartOnFirstThread \
    src/PythonMain.java
 ```
 
-
 Above, you'll notice the `-XstartOnFirstThread` added for **MacOS** as a way to avoid GUI thread issues using Python's `pyplot` display windows.
 
 ```python
@@ -462,13 +437,11 @@ Above, you'll notice the `-XstartOnFirstThread` added for **MacOS** as a way to 
 print(tf.__version__)
 ```
 
-
 The above outputs the Tensorflow version number to the console as follows:
 
 ```
 2.8.0
 ```
-
 
 After loading the training data (28x28 images) of clothing and their associated labels (1-10 clothing types), the following is python code to display the first image to show color bar representing 8 bit color values.
 
@@ -479,7 +452,6 @@ plt.colorbar()
 plt.grid(False)
 plt.show()
 ```
-
 
 The output of the first training image of a tennis show `plt.imshow(train_images[0])`. Since the pyplot window blocks you'll need to click on the close button on the title bar to **close the window**.
 
@@ -519,7 +491,6 @@ Epoch 10/10
 313/313 - 0s - loss: 0.3467 - accuracy: 0.8775 - 229ms/epoch - 730us/step
 ```
 
-
 During the training phase the neural net will learn (train) by adjusting weights in each layer of the neural network graph (input, hidden, output). After training the models the code below will verify it's trained predictions:
 
 ```python
@@ -531,7 +502,6 @@ plt.subplot(1,2,2)
 plot_value_array(i, predictions[i],  test_labels)
 plt.show()
 ```
-
 
 Below shows prediction's accuracy of the test data (image of an Ankle boot) was 98% confident it was able to predict the clothing type.
 
@@ -550,7 +520,6 @@ plt.subplot(1,2,2)
 plot_value_array(i, predictions[i],  test_labels)
 plt.show()
 ```
-
 
 The output below shows a not so good prediction of a Sneaker. The model was 40% confident (red) that it was a sandal. While it was just under 40% (blue) confidence it was a sneaker.
 
@@ -576,7 +545,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-
 The following is the output of the first 15 test images and their predictions:
 ![](Screen-Shot-2022-04-24-at-8.21.19-PM-1024x690.png) Showing the first 15 test predictions
 
@@ -589,13 +557,11 @@ img = test_images[1]
 print(img.shape)
 ```
 
-
 Outputs the image's pixel dimensions:
 
 ```
 (28, 28)
 ```
-
 
 (note: Text steps are from Tensorflow.org's tutorial)
 
@@ -608,13 +574,11 @@ img = (np.expand_dims(img,0))
 print(img.shape)
 ```
 
-
 Outputs a batch containing one member.
 
 ```
 (1, 28, 28)
 ```
-
 
 Now predict the correct label for this image:
 
@@ -624,7 +588,6 @@ predictions_single = probability_model.predict(img)
 print(predictions_single)
 ```
 
-
 Below is the array of 10 values of predictions (percentages) for the 10 clothing types (labels). Each item is a prediction (percentage) of a clothing type. e.g. The third item is a value of 99.8% with a prediction (confidence) that the image is a Pullover.
 
 ```
@@ -633,7 +596,6 @@ Below is the array of 10 values of predictions (percentages) for the 10 clothing
   4.55051066e-11 3.53864888e-17]]
 ```
 
-
 The code below will display the prediction in a chart window.
 
 ```python
@@ -641,7 +603,6 @@ plot_value_array(1, predictions_single[0], test_labels)
 _ = plt.xticks(range(10), class_names, rotation=45)
 plt.show()
 ```
-
 
 Output of a single image prediction:
 
@@ -654,8 +615,7 @@ Output of a single image prediction:
 
 So, there you have it -- Java's Panama talking to Python's interpreter. Of course we've only scratched the surface in terms of interacting with the Python interpreter. This article's objective was to just get your feet wet.
 
-Conclusion
-----------
+## Conclusion
 
 We began this article by posing the problem as a question to help understand the use case of Java's ability to interoperate with a locally installed Python interpreter.
 

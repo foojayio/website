@@ -26,8 +26,7 @@ The first thing you should think through when deciding how to store sensitive pa
 
 If you *do* need to store passwords in your Java application yourself, then this article is right for you.
 
-Hashing passwords for storage
------------------------------
+## Hashing passwords for storage
 
 If you store usernames and passwords in your application, whatever you do, **do not** **store** **passwords in plain text** (I know, I know, seem obvious!)! If your system gets breached, an attacker will be able to simply read these plain text passwords and impersonate users.
 
@@ -47,12 +46,9 @@ What you need is a **strong password hashing algorithm** for your users' passwor
 
 Strong password hashing algorithms are slow to run, which makes brute force attacks less effective. There's a lot more depth we could go into here, but the TL;DR of it is this: when it comes to passwords you want to use a strong, resource-intensive password hashing algorithm to provide your users with the most possible safety.
 
-What's the best password hashing algorithm?
--------------------------------------------
+## What's the best password hashing algorithm?
 
 The first rule of password hashing algorithms is: **Don't write your own password hashing algorithm!** The exception is if you are a skilled cryptographer. If you're not, please rely on the standards provided by the industry and choose vetted algorithms and libraries to use within your application.
-
-<br />
 
 According to the [OWASP foundation](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html), only a few algorithms should be considered for modern password hashing. Let's take a look at the recommended password hashing algorithms!
 
@@ -92,7 +88,6 @@ The `spring-security-crypto` library has a `Argon2PasswordEncoder` that you can 
 </dependency>
 ```
 
-
 The `Argon2PasswordEncoder` uses the Argon2id version by default with m=4MiB, t=3, and p=1. Although the number of iterations is higher than the minimum, you probably still want to consider higher memory consumption. In the Java example below, I use the minimum requirements of m=15Mib, t=2, and p=1. I use the same values as the defaults for the salt and hash length.
 
 ```java
@@ -106,14 +101,12 @@ var validPassword = encoder.matches(myPassword, encodedPassword);
 System.out.println(validPassword);
 ```
 
-
 The output from this code will be similar to this:
 
 ```
 $argon2id$v=19$m=15360,t=2,p=1$YpRuuQhW1dHOimAnWD5TRU6Sebitu+fIrmIrenr+YOM$hkEXhhHpu2NUcPwhV4IUQelQdf4I8V+iyFsFiC8BYEisE3oWFv96zYeNA1i/awhaDo1XHz6Pp/1r55SS/I4AIA
 True
 ```
-
 
 This hash contains all the information it needs, including the settings I supplied to the encoder and the salt information. This way you can easily check if the original password matches using `encoder.matches()`. This also works with another instance of the `Argon2PasswordEncoder` with different settings.
 
@@ -133,7 +126,6 @@ You can choose to install this C library yourself using your package manager or 
 </dependency>
 ```
 
-
 **With precompiled libraries:**
 
 ```xml
@@ -143,7 +135,6 @@ You can choose to install this C library yourself using your package manager or 
     <version>2.11</version>
 </dependency>
 ```
-
 
 The usage of this library is quite straightforward. In the code example below, you can see an example equivalent to the Spring example using the same minimum parameters.
 
@@ -157,7 +148,6 @@ System.out.println(hash);
 var validPassword = argon2.verify(hash, myPassword.toCharArray());
 System.out.println(validPassword);
 ```
-
 
 ### SCRYPT
 
@@ -186,14 +176,12 @@ var validPassword = encoder.matches(myPassword, encodedPassword);
 System.out.println(validPassword);
 ```
 
-
 **Output:**
 
 ```
 e0804$8FQ4x/ntwEz2ZNu8QRyIQJlAXR+gQkiG3WulLMEq/kioVtaFiKE7sZDGgtmqUmwB8OE+f7Eagux9QXG478unLw==$RS1Bz5Uf30dWGxc+vtlkjj7tPnPdgq8YD1V8odhPW4A=
 true
 ```
-
 
 ### USING BCRYPT
 
@@ -205,11 +193,9 @@ You can use the `spring-security-crypto` library in a similar way as before. The
 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(14);
 ```
 
-
 The higher you set the work factor, the stronger the hash will be, but it will also take more CPU resources (and time!) to finish running. On my local machine, setting running BCrypt with a workload of 10 costs me about 89ms on average. For a workload of 14, it is 1033ms on average. That is almost 12x as long. This is by no means an accurate benchmark, but it does show the impact of an increased work factor.
 
-Best practices for password hashing
------------------------------------
+## Best practices for password hashing
 
 Whenever you need to implement password hashing in your application, there are a few best practices you should keep in mind.
 

@@ -24,8 +24,7 @@ Today, I'd like to provide some help on how to choose a cache solution. I will o
 * In this post, we will list what features a cache must have and which ones it can optionally provide. Most criteria are general and can be used regardless of the tech stack, while a couple is specific to the JVM.
 * In the second part, I'll list providers and verify their respective capabilities
 
-Why cache?
-----------
+## Why cache?
 
 First, let's bust a common myth. Using a cache is not the sign of a badly-designed system *per se*, though it might be the case. Like in many design decisions, a cache is a trade-off.
 
@@ -46,8 +45,7 @@ From a scientific point of view, wrong data is terrible. From an e-commerce one,
 
 Hence, caching is a trade-off where you accept stale data to have them available/fast.
 
-Mandatory cache features
-------------------------
+## Mandatory cache features
 
 You are probably familiar with the quote, "Don't roll your own cryptography library". It hints that designing such a library may look simple at first glance, but chances are you'll make a significant security mistake if you're not a security expert - and even so. You shouldn't design your own cache either, but for slightly different reasons.
 
@@ -88,8 +86,7 @@ It relates to how long the cache considers an entry valid before it removes it. 
 
 A possible implementation is to add a field to each entry: the timestamp when the entry will expire (current time + ). A thread may occasionally visit entries and remove the expired ones eagerly. Alternatively, the cache may evict the expired entries lazily when it needs more space.
 
-Other criteria
---------------
+## Other criteria
 
 Other criteria are optional but still worthy of consideration. Here they are, in no particular order.
 
@@ -149,8 +146,7 @@ The goal of a cache is to improve performance, as it's faster to access local in
 
 You need to consider several aspects; the most important one is the API used by the cache. For example, `CompletableFuture` requires Java 8. Depending on the stack you're using, you might favor a cache that integrates with RxJava, Project Reactor, Kotlin coroutines, or any combination thereof.
 
-Standard project's health indicators
-------------------------------------
+## Standard project's health indicators
 
 Besides all criteria mentioned above, I'd advise you to consider indicators that should be part of every product evaluation:
 
@@ -170,8 +166,7 @@ Besides all criteria mentioned above, I'd advise you to consider indicators that
 * **Support**: what are the support channels? Stackoverflow? Google Groups? Slack? How often do questions get an answer?
 * etc.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I described several criteria on which to base your choice of cache provider. I'll attempt to list and compare the most common Open Source cache providers in the JVM ecosystem in the next post.
 

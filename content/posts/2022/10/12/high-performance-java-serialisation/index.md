@@ -95,7 +95,6 @@ public class WireExamples {
 }
 ```
 
-
 If we run this code, it will output the following YAML:
 
 ```yaml
@@ -105,13 +104,11 @@ If we run this code, it will output the following YAML:
 }
 ```
 
-
 However, if all we did was to change the YanmlWire from:
 
 ```java
 Wire wire = new YamlWire(allocateElasticOnHeap());
 ```
-
 
 To JSON Wire:
 
@@ -119,13 +116,11 @@ To JSON Wire:
 Wire wire = new JSONWire(allocateElasticOnHeap());
 ```
 
-
 Then it would output the following JSON:
 
 ```json
 {"number":44,"driver":"Lewis Hamilton"}
 ```
-
 
 If we wanted the JSON to also include the Java types, then we can also add the setting, useTypes(true):
 
@@ -133,13 +128,11 @@ If we wanted the JSON to also include the Java types, then we can also add the s
 Wire wire = new JSONWire(allocateElasticOnHeap()).useTypes(true);
 ```
 
-
 This will now also encode the java type, Car:
 
 ```json
 {"@Car":{"number":44,"driver":"Lewis Hamilton"}}
 ```
-
 
 #### Example Compact Binary Format
 
@@ -174,13 +167,11 @@ public class WireExamples {
 }
 ```
 
-
 It outputs the following:
 
 ```
 00000000 b6 03 43 61 72 82 10 00 00 00 2c ee 4c 65 77 69 ··Car··· ··,·Lewi 00000010 73 20 48 61 6d 69 6c 74 6f 6e s Hamilt on
 ```
-
 
 #### Example Deserialisation
 
@@ -189,7 +180,6 @@ So far, all the examples have covered serialisation, so when it comes to deseria
 ```json
 {"@Car":{"number":44,"driver":"Lewis Hamilton"}}
 ```
-
 
 and we can then Deserialise this JSON back into a Java object:
 
@@ -217,7 +207,6 @@ public class WireExamples {
    }
 }
 ```
-
 
 #### Example Forwards and Backwards Compatibility
 
@@ -248,7 +237,6 @@ public class WireExamples {
    }
 }
 ```
-
 
 #### Example Encoding Strings
 
@@ -300,7 +288,6 @@ public class WireExamples2 {
    }
 }
 ```
-
 
 ### Conclusion
 

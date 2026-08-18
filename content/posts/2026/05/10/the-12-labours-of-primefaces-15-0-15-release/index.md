@@ -16,15 +16,9 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-123733" src="toge-herculer-700x394.png" alt="💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release" width="700" height="394">
 
-<br />
-
 💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release
-
-<br />
 
 ### PrimeFaces 15.0.15 has just been released. 🚀
 
@@ -50,8 +44,6 @@ This release is mostly about polish:
 Let's look at what changed, then at the most common PrimeFaces concepts with small code examples. 👇  
 [https://github.com/primefaces/primefaces/releases/tag/v15.0.15](http://https://github.com/primefaces/primefaces/releases/tag/v15.0.15 "https://github.com/primefaces/primefaces/releases/tag/v15.0.15")
 
-
-
 ### 🔵 TL;DR
 
 #### A quick overview of why PrimeFaces 15.0.15 matters and what kind of improvements it brings.
@@ -66,10 +58,7 @@ Let's look at what changed, then at the most common PrimeFaces concepts with sma
 
 ▪️ PrimeFaces remains a good fit when your application is strongly Java/server-side oriented
 
-
-
-🔵 WHAT PRIMEFACES 15.0.15 BRINGS
----------------------------------
+## 🔵 WHAT PRIMEFACES 15.0.15 BRINGS
 
 ### 🔵 1. SCHEDULE TOOLTIP ESCAPING
 
@@ -80,7 +69,6 @@ Let's look at what changed, then at the most common PrimeFaces concepts with sma
             tooltip="true"
             escape="true" />
 ```
-
 
 The escape property controls whether HTML content in schedule tooltip descriptions is escaped.
 
@@ -95,8 +83,6 @@ The escape property controls whether HTML content in schedule tooltip descriptio
 ▪️ if you explicitly need trusted HTML, you can opt out carefully
 > For newbies: do not set escape="false" just because "it looks nicer". Only do it when you fully control and sanitize the content. 🔐
 
-
-
 ### 🔵 2. SCHEDULE TOOLTIP WITH TRUSTED HTML
 
 #### HTML tooltips can still be rendered when the content is trusted and properly controlled.
@@ -106,7 +92,6 @@ The escape property controls whether HTML content in schedule tooltip descriptio
             tooltip="true"
             escape="false" />
 ```
-
 
 #### Explanation:
 
@@ -125,8 +110,6 @@ But it comes with responsibility.
 If the content comes from users, databases, imports, or external systems, escaping should stay enabled.
 > Security is not an aesthetic option. 😉
 
-
-
 ### 🔵 3. SELECTONEMENU ACCESSIBILITY
 
 #### SelectOneMenu gets improved ARIA behavior for better accessibility support.
@@ -143,7 +126,6 @@ If the content comes from users, databases, imports, or external systems, escapi
 </p:selectOneMenu>
 ```
 
-
 #### Explanation:
 
 PrimeFaces 15.0.15 restores some ARIA attributes on SelectOneMenu.
@@ -159,8 +141,6 @@ PrimeFaces 15.0.15 restores some ARIA attributes on SelectOneMenu.
 ▪️ enterprise applications become more usable for everyone ♿
 > Accessibility is not decoration. It is part of the component contract.
 
-
-
 ### 🔵 4. PANEL TOGGLE HEADER BEHAVIOR
 
 #### Panel headers now expose more accurate accessibility behavior when toggleable headers are used.
@@ -173,7 +153,6 @@ PrimeFaces 15.0.15 restores some ARIA attributes on SelectOneMenu.
     <p:inputText value="#{searchBean.keyword}" />
 </p:panel>
 ```
-
 
 #### Explanation:
 
@@ -191,8 +170,6 @@ The header should behave like a button only when the header is actually toggleab
 
 ▪️ more predictable UI behavior
 > Small fix, real UX impact.
-
-
 
 ### 🔵 5. CONFIRM BEFORE SHOW CALLBACK
 
@@ -216,7 +193,6 @@ function canShowDeleteConfirm() {
 <p:confirmDialog global="true" />
 ```
 
-
 #### Explanation:
 
 The beforeShow callback is now properly respected.
@@ -234,8 +210,6 @@ That means you can decide before the confirmation popup opens.
 ▪️ custom UX flows
 > It is a small fix, but it makes confirmation flows more reliable.
 
-
-
 ### 🔵 6. INPUTNUMBER AND AUTONUMERIC UPDATE
 
 #### Numeric inputs benefit from improvements around formatting, precision and user interaction.
@@ -247,7 +221,6 @@ That means you can decide before the confirmation popup opens.
                thousandSeparator=" "
                decimalSeparator="," />
 ```
-
 
 #### Explanation:
 
@@ -264,8 +237,6 @@ PrimeFaces 15.0.15 updates/fixes behavior around AutoNumeric, the JavaScript lib
 ▪️ undo/redo, backspace, formatting and parsing must stay consistent
 > This is the kind of fix users may never notice...because the component simply behaves correctly. ✅
 
-
-
 ### 🔵 7. TEXTEDITOR PASTE CLEANUP
 
 #### Text pasted into the editor is handled more cleanly, especially around invisible spacing issues.
@@ -274,7 +245,6 @@ PrimeFaces 15.0.15 updates/fixes behavior around AutoNumeric, the JavaScript lib
 <p:textEditor value="#{articleBean.content}"
               height="300" />
 ```
-
 
 #### Explanation:
 
@@ -291,8 +261,6 @@ The TextEditor fix handles non-breaking spaces during paste operations.
 ▪️ content editing feels less buggy
 > Rich text editors are never "just text". This fix helps reduce one of those annoying content-editing edge cases.
 
-
-
 ### 🔵 8. PANELMENU STATEFULNESS
 
 #### Nested menu items better remember their expanded or collapsed state after navigation.
@@ -307,7 +275,6 @@ The TextEditor fix handles non-breaking spaces during paste operations.
     </p:submenu>
 </p:panelMenu>
 ```
-
 
 #### Explanation:
 
@@ -324,8 +291,6 @@ The release improves statefulness for nested menu items. (submenus better rememb
 ▪️ users do not lose their navigation context
 > In back-office applications, navigation stability matters a lot.
 
-
-
 ### 🔵 9. AJAX ERROR HANDLING
 
 #### Ajax behavior is improved around redirects and error situations during partial page updates.
@@ -338,7 +303,6 @@ The release improves statefulness for nested menu items. (submenus better rememb
 
 <p:messages id="messages" />
 ```
-
 
 #### Explanation:
 
@@ -357,8 +321,6 @@ PrimeFaces apps rely heavily on partial page updates.
 ▪️ confusing user feedback
 > This fix is mostly invisible, but important for robustness.
 
-
-
 ### 🔵 10. BLOCKUI CLEANUP
 
 #### Blocked UI areas are cleaned up more reliably after Ajax updates and widget lifecycle changes.
@@ -374,7 +336,6 @@ PrimeFaces apps rely heavily on partial page updates.
                      update="formPanel" />
 </p:panel>
 ```
-
 
 #### Explanation:
 
@@ -393,8 +354,6 @@ The fix ensures the target element is properly unlocked during widget cleanup.
 ▪️ less frustration for users
 > A blocked screen after a save button is one of the fastest ways to lose user confidence.
 
-
-
 ### 🔵 11. AUTOCOMPLETE MORETEXT FIX
 
 #### Autocomplete now handles the "more results" message more consistently.
@@ -407,7 +366,6 @@ The fix ensures the target element is properly unlocked during widget cleanup.
                 itemValue="#{city}"
                 moreText="More results available..." />
 ```
-
 
 #### Explanation:
 
@@ -426,8 +384,6 @@ This fix improves how that text is rendered and exposed.
 ▪️ accessibility matters
 > Autocomplete is not only about search. It is about guiding the user.
 
-
-
 ### 🔵 12. SLIDER PRECISION
 
 #### Slider values are displayed with precision that better matches the configured step.
@@ -445,7 +401,6 @@ This fix improves how that text is rendered and exposed.
 <h:outputText id="discountOutput" />
 ```
 
-
 #### Explanation:
 
 The Slider display now uses the same precision as the configured step.
@@ -460,8 +415,6 @@ The Slider display now uses the same precision as the configured step.
 
 ▪️ better display for percentages, ratings, thresholds and numeric filters
 > Small detail. Big difference when users manipulate numbers.
-
-
 
 ### 🔵 TAKEAWAYS
 
@@ -481,8 +434,6 @@ The Slider display now uses the same precision as the configured step.
 > PrimeFaces is not the trendy kid in the frontend room. But in many Java enterprise applications, it is still doing serious work. ☕🎨
 
 ##### Java #JakartaEE #JSF #PrimeFaces #JakartaFaces #EnterpriseJava #WebDevelopment #JavaDevelopers #SoftwareEngineering #Accessibility #WebSecurity #BackendDevelopment #FullStackJava
-
-
 
 ### Go further with Java certification:
 

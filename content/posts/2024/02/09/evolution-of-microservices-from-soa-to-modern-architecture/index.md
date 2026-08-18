@@ -107,9 +107,3 @@ These examples showcase the benefits of microservices in different industries an
 * [**Microservices.io**](https://microservices.io/) --- A comprehensive resource on microservices architecture by Chris Richardson.
 
 In the next article (Part 2), to be published soon, we will explore the principles for designing and implementing microservices and the challenges and best practices for development, testing strategies, and security considerations. 🤓
-
-
-
-<br />
-
-<br />

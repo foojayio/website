@@ -34,14 +34,9 @@ Warning: This tutorial will touch the basics on how to create a JavaFX project u
 
 New comers to the JavaFX platform that want things even more basic (fundamental) such as using the command line or terminal should look at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)".
 
-<br />
-
-<br />
-
 Next, you'll need to download and install the required software.
 
-Requirements
-------------
+## Requirements
 
 The following are requirements for this tutorial.
 
@@ -52,8 +47,7 @@ When downloading IntelliJ the free version is called the community edition.
 
 To see how to install ZuluFX please refer to the section '**Installing ZuluFX** ' at "[A JavaFX App on ZuluFX in 60 Seconds](https://foojay.io/blog/a-javafx-app-on-zulufx-in-60-seconds/)".
 
-Plain JavaFX Project
---------------------
+## Plain JavaFX Project
 
 The following steps will show you how to create a new JavaFX project from scratch (aka Plain old JavaFX Project). Usually this type of project is good for quick prototypes.
 
@@ -108,7 +102,6 @@ module com.mycompany.helloworld {
 }
 ```
 
-
 After hitting Ctrl + S to save the file you will encounter errors in the editor window where the module is referencing (exports) the **com.mycompany.helloworld** package which doesn't exist yet. So in the next step let's create the package namespace.
 
 **Step 12:** Create the package name space of the Java application with the directory path of **com/mycompany/helloworld** . Right mouse click the folder **com.mycompany.helloworld**,
@@ -149,7 +142,6 @@ Here you'll notice two things, a generated JavaFX class and no errors from missi
         primaryStage.show();
 ```
 
-
 The final project in IntelliJ should look like the following:
 
 {{< img src="Final-project-editor-1024x797.png" class="size-large is-resized" width="1024" height="797" style="width:775px;height:603px" caption="Figure 18. The completed HelloWorldFX project in the IntelliJ IDE." >}}
@@ -159,15 +151,12 @@ The final project in IntelliJ should look like the following:
 Right mouse click the **HelloWorld** file in the Project tree view select **Run** as shown in figure 19
 ![](Initial-Run.png)   
 
-<br />
-
 Figure 19. Run the HelloWorld application.
 
 The following is the output of running the HelloWorld application.
 ![](Final-output-App.png) Figure 20. The output of the execution of HelloWorld JavaFX application.
 
-Maven JavaFX Project
---------------------
+## Maven JavaFX Project
 
 The following are steps to create a modular JavaFX application through IntelliJ as a Maven project.
 
@@ -250,7 +239,6 @@ Copy \& Paste to replace the following **pom.xml** into the editor and Save.
 </project>
 ```
 
-
 **Step 5:**Project Settings -\> Project - Set Language Level
 
 Below you will want to ensure the Project SDK and Project language level is at least 11 or better. In figure 25 the language level was set to Java 14 (Preview).
@@ -277,7 +265,6 @@ module com.mycompany.helloworld {
     exports com.mycompany.helloworld;
 }
 ```
-
 
 **Step 6:** Create a Java package name space **com.mycompany.helloworld**.
 ![](04-Package-namespace.png) Figure 27. New Package name space folder ![](05-New-Package-name.png) Figure 28. Entering the package name
@@ -325,7 +312,6 @@ public class HelloWorld extends Application {
 }
 ```
 
-
 **Step 8:** Reload Maven Project
 
 On the right pane there should be tabs to select **Maven** . Next, click on the reload tool bar button. This will pull down any plugins or dependencies specified in the **pom.xml**.
@@ -344,7 +330,6 @@ When using ZuluFX:
 --add-modules javafx.controls
 ```
 
-
 ![](11-VMoptions.png) Figure 33. VM Options
 
 When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and a **mods** directory (modules output directory):
@@ -353,9 +338,7 @@ When using JavaFX as separate libraries such as from GluonHQ (`$PATH_TO_FX`) and
 --module-path $PATH_TO_FX:mods --add-modules javafx.controls
 ```
 
-
-Gradle JavaFX Project
----------------------
+## Gradle JavaFX Project
 
 Because this article is getting way too long, I am only going to post the **build.gradle** file below. Because the file and directory structure of a gradle project is the same as a Maven project I trust you can simply go through creating the project in a similar manner and near the end click on the **Gradle** tab and the **reload** button to see the **run** task.
 
@@ -377,9 +360,7 @@ javafx {
 mainClassName = "com.mycompany.helloworldfx/com.mycompany.helloworldfx.HelloWorld"
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Well there you have it, a Hello World JavaFX Application that was **JPMS** based and created using the popular IntelliJ IDE in three project types **Plain** , **Maven** and **Gradle**.
 
@@ -387,8 +368,7 @@ As you get familiar with how to code and execute your application your next step
 
 As always feel free to comment if you have questions or need any help. Happy coding!
 
-References:
------------
+## References:
 
 Understanding Java 9 Modules by Paul Deitel - <https://www.oracle.com/corporate/features/understanding-java-9-modules.html>
 

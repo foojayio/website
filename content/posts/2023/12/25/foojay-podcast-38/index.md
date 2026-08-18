@@ -31,13 +31,11 @@ Cloud servers, Docker, Kubernetes, distributed systems, scaling up and down... t
 
 In this episode, we want to learn if the recent evolutions in OpenJDK, and ongoing related projects, will make Java a full Cloud member.
 
-Video
------
+## Video
 
 {{< youtube xU4rKnzkSpo >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +43,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Grace Jansen
 
@@ -65,16 +62,14 @@ Guests
 * <https://twitter.com/glaforge>[](https://twitter.com/glaforge)
 * <https://www.linkedin.com/in/glaforge/>
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 
@@ -126,10 +121,7 @@ Content
 
 58:26 Outro
 
-<br />
-
-Related Foojay Posts
---------------------
+## Related Foojay Posts
 
 * <https://foojay.io/today/java-21-and-the-upcoming-jakarta-ee-11-a-new-era-of-cloud-native-java/>
 * <https://foojay.io/today/how-to-build-and-deploy-a-real-time-cloud-based-logging-system/>
@@ -139,10 +131,7 @@ Related Foojay Posts
 * <https://foojay.io/today/why-a-cloud-native-database-must-run-on-k8s/>
 * And many more... <https://foojay.io/page/2/?s=cloud>[](https://foojay.io/page/2/?s=cloud)
 
-<br />
-
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

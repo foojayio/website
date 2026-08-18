@@ -29,8 +29,7 @@ Apache Pulsar has a powerful framework called Pulsar IO to enable this kind of u
 
 In this post, I'll describe how we built a powerful and versatile Pulsar Sink to connect data streams to Cassandra by abstracting the core logic from our Kafka Sink and expanding it to support Pulsar. This resulted in the recent release of our [Pulsar Sink Connector](https://github.com/datastax/pulsar-sink) (read the docs [here](https://docs.datastax.com/en/pulsar-connector/1.4/index.html)), which provides users with the same power and flexibility that they get with our Kafka connector.
 
-Streams of structured data
---------------------------
+## Streams of structured data
 
 Complex data flows can lead to the need to manage many types of data; this is reflected in database tables and schemas. However, you also have to deal with the same level of complexity when you exchange data using streaming technologies.
 
@@ -51,16 +50,13 @@ You can also map an existing Pulsar schema to the schema of the Cassandra table-
 * applying simple data transformations
 * handling Cassandra TTL and TIMESTAMP properties
 
-From Kafka Connect Sink to Pulsar IO Sink
------------------------------------------
+## From Kafka Connect Sink to Pulsar IO Sink
 
 The Apache Kafka Connect framework is very similar to Apache Pulsar IO in terms of APIs.
 
 The purpose of a Sink is to write to an external system (in this case Cassandra) the data that is coming from the stream.
 
 In order to leverage all of the existing features of the Kafka Cassandra Sink and keep the two projects on feature parity going forward, we created an abstraction over the two systems: the [Messaging Connectors Commons framework](https://github.com/datastax/messaging-connectors-commons).
-
-<br />
 
 The Messaging Connectors Commons framework implements:
 
@@ -74,8 +70,7 @@ We created this framework by extracting all of the common business logic from th
 
 After this pure engineering work, the road to building the Pulsar Sink was straightforward: we only had to implement the relevant APIs within the Pulsar Sink framework.
 
-Differences between Kafka Connect and Pulsar IO
------------------------------------------------
+## Differences between Kafka Connect and Pulsar IO
 
 Even if at first glance the APIs are very similar, the Pulsar IO framework offers a slightly different model, with some cool features and some tradeoffs.
 
@@ -101,8 +96,7 @@ Because in Pulsar we don't have direct access to this in the Schema, we decided 
 
 One problem arises with *null* values, because in Java from a *null* value you cannot know the original data type. In this case, we are initially supposing that the field is of the type String, and we allow it to move from String to another datatype as soon as we see a non-null value.
 
-Sample usage
-------------
+## Sample usage
 
 Here's a simple example about how to map your Pulsar Topic to a Cassandra table:
 
@@ -131,7 +125,6 @@ configs:
        unit: MILLISECONDS
 ```
 
-
 Here we are reading AVRO or JSON encoded messages from the *mytopic* topic and we are writing to the *mykeyspace.mytable* table on Cassandra. (The connection, security, and performance configurations are omitted in order to focus on the mapping features.)  
 
 You can map multiple topics to multiple tables, and for each pair you can configure a different mapping, selecting fields from the message and binding each field to a column in Cassandra.
@@ -140,15 +133,13 @@ You can also store the full payload as a UDT to Cassandra or extract nested inne
 
 The Sink automatically handles conversions and efficient writing to Cassandra.
 
-Compatibility with Cassandra versions
--------------------------------------
+## Compatibility with Cassandra versions
 
 The Cassandra Sink works well with Apache Cassandra, [Datastax Enterprise (DSE)](https://www.datastax.com/products/datastax-enterprise), and [Astra](https://www.datastax.com/products/datastax-astra).
 
 At Datastax we are running tests on CI against a matrix of many different versions of Cassandra and DSE as well as against the cloud Astra service in order to provide 100% compatibility.
 
-Wrapping up
------------
+## Wrapping up
 
 I described how we have been able to refactor the existing Kafka Connect Sink for Apache Cassandra and deliver the same level of features to Pulsar IO users.
 

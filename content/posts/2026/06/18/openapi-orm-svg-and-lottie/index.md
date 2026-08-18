@@ -22,15 +22,12 @@ frozen: false
 
 ![OpenAPI, ORM, SVG and Lottie](https://www.codenameone.com/blog/build-time-codegen.jpg)
 
-<br />
-
 This is the third follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). Saturday's was about how you iterate; yesterday's was about new platform APIs in the core; today's is about a run of pieces that change how you write the structural parts of an app.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
 The pieces are an OpenAPI client generator, a SQLite ORM, JSON and XML mappers, a component binder with validation, build-time SVG and Lottie transcoders, and a declarative router with deep links. All ride on a single **build-time codegen pipeline** : a Maven-plugin pass that reads annotations or declarative source files at build time and emits typed Java that compiles into your binary. No reflection, no service loader, no `Class.forName`. The "How it works" section at the end of this post covers the codegen plumbing once you have seen what it powers.
 
-OpenAPI client generation
--------------------------
+## OpenAPI client generation
 
 The headline of this release for any team that talks to a backend.
 
@@ -52,7 +49,6 @@ Wire it into the project's `pom.xml`:
                 https://petstore3.swagger.io/api/v3/openapi.json
                 com.example.petstore
 ```
-
 
 `mvn generate-sources` picks the spec up, downloads it, and writes one file per schema and one per tag under `target/generated-sources/`. The Petstore reference spec exercised end-to-end produces six model classes (`Pet`, `Order`, `Customer`, `Tag`, `Category`, `User`) and three Api classes (`PetApi`, `StoreApi`, `UserApi`), and the nine generated `.class` files compile cleanly against `codenameone-core`. Documented at [the OpenAPI codegen Maven goal](https://www.codenameone.com/developer-guide/#_appendix_goal_generate_openapi_client).
 
@@ -80,15 +76,13 @@ candidate.setStatus("available");
 pets.addPet(candidate).onResult((created, err) -> { /* ... */ });
 ```
 
-
 There is no hand-rolled `ConnectionRequest` setup, no manual JSON parsing, no string-typed request bodies. The generated client takes a typed `Pet`, serializes it with `Mappers.toJson(...)`, fires the right HTTP verb, deserializes the response with `Mappers.fromJson(...)`, and surfaces the result through the framework's `AsyncResource` so your callback fires on the EDT.
 
 For teams who already publish an OpenAPI spec as part of their backend (most modern backend frameworks do this automatically; FastAPI, Spring's `springdoc-openapi`, NestJS, ASP.NET Core, Go's `gnostic`), the practical effect is that the mobile client's bindings stay in sync with the backend without anyone hand-writing a single network call. Update the spec, re-run `mvn generate-sources`, and the new and changed endpoints land in your app as typed Java the IDE picks up immediately.
 
 It is the kind of change that is most useful when you do not know you have it: pull a fresh spec, rebuild, and your IDE highlights every place in the codebase that called a renamed endpoint or passed the wrong type to a parameter.
 
-SQLite ORM
-----------
+## SQLite ORM
 
 `@Entity` marks the class; `@Id` and `@Column` shape the schema; `@DbTransient` opts a field out:
 
@@ -111,13 +105,11 @@ TodoItem byId = dao.findById(42);
 dao.delete(byId);
 ```
 
-
 The generated DAO does the typed work underneath. No reflection in `insert`; the generated code calls `setString(1, e.title)` and `setLong(2, e.id)` directly against the SQLite `PreparedStatement`. Validation at build time catches missing `@Id`, fields that look like relationships but are not yet supported, and abstract entity classes; the build fails with a class name and a reason.
 
 **For JPA / Hibernate developers,** the API is intentionally familiar. `@Entity`, `@Id`, `@Column`, and `@Transient` (here renamed `@DbTransient` to avoid colliding with `java.beans.Transient`) carry the same meaning they do under `javax.persistence` / `jakarta.persistence`. The `EntityManager` name is the same. `Dao#findById`, `Dao#findAll`, `Dao#find(where, params)`, `Dao#insert`, `Dao#update`, `Dao#delete` line up with the basic JPA repository contract. The query language is plain SQL (there is no JPQL or Criteria DSL) but the annotation surface, the lifecycle, and the runtime methods will feel like a long-lost friend to anyone with server-side Java persistence experience.
 
-JSON / XML mapping
-------------------
+## JSON / XML mapping
 
 `@Mapped` marks a class as a transferable POJO. `@JsonProperty` and `@XmlElement` (plus `@XmlRoot`, `@XmlAttribute`, `@JsonIgnore`, `@XmlTransient`) shape the wire format. The runtime entry points are `Mappers.toJson(...)`, `Mappers.fromJson(...)`, `Mappers.toXml(...)`, `Mappers.fromXml(...)`:
 
@@ -135,7 +127,6 @@ String json = Mappers.toJson(user);
 User   back = Mappers.fromJson(json, User.class);
 ```
 
-
 The same `@Mapped` POJO is the type the typed `Rest` helpers accept:
 
 ```
@@ -148,13 +139,11 @@ Rest.get("https://api.example.com/users")
     .onResult((users, err) -> { /* ... */ });
 ```
 
-
 `Rest.fetchAsJsonList` (top-level JSON arrays, no `{"root":[...]}` envelope trick), `JSONWriter` (the complement of `JSONParser`, with fluent builders and streaming variants for `Writer` and `OutputStream`), and `URLImage.setDefaultBearerToken` (auth headers on image fetches) all ship alongside.
 
 **For JAXB developers,** the XML surface (`@XmlRoot`, `@XmlElement`, `@XmlAttribute`, `@XmlTransient`) is a direct port of the long-established `javax.xml.bind.annotation` surface. The same model class can be both `@XmlRoot`-decorated and `@JsonProperty`-decorated, which gives you a single source of truth for both wire formats. The JSON surface adopts the Jackson convention (`@JsonProperty`, `@JsonIgnore`) that nearly every modern JVM JSON binding (Jackson, Moshi, kotlinx-serialization) inherited.
 
-Component binding with validation
----------------------------------
+## Component binding with validation
 
 The fourth annotation processor on the same pipeline is the component binder. `@Bindable` marks a model class; `@Bind(name = "userField")` ties a field to a component on a form by the component's `name`. Field-level validation annotations compose with `@Bind` on the same field:
 
@@ -174,7 +163,6 @@ public class SignupModel {
     private String role;
 }
 ```
-
 
 The matching form sets a `name` on each component so the binder can find them:
 
@@ -196,13 +184,11 @@ Binding binding = Binders.bind(model, form);
 binding.getValidator().addSubmitButtons(submit);
 ```
 
-
 `Binding` is the handle: `refresh()` re-reads the model into the components, `commit()` writes the components back, `disconnect()` tears the listeners down. Multiple validation annotations on a single field compose via `Validator.addConstraint(Component, Constraint...)` and `GroupConstraint` (first failure wins). `@Validate(MyClass.class)` is the escape hatch for hand-written `Constraint` implementations. The validation set: `@Required`, `@Length`, `@Regex`, `@Email`, `@Url`, `@Numeric`, `@ExistIn`, `@Validate`.
 
 The new `BindAttr` enum lets `@Bind` target a specific attribute of the component (`TEXT`, `UIID`, `SELECTED`, ...) when the default ("write a `String` field into the component's text") is not what you want.
 
-SVG at build time
------------------
+## SVG at build time
 
 Drop an SVG into `src/main/css/`, alongside `theme.css`:
 
@@ -218,13 +204,10 @@ src/main/css/
     clipped_badge.svg
 ```
 
-
 After the next build, every SVG is a regular Codename One `Image`. **An SVG handled by the transcoder is a vector image, but it is still an `Image`.** Everywhere a raster `Image` works (`Label.setIcon`, `Button.setIcon`, `BorderLayout.NORTH`, the toolbar, a `MultiButton`'s leading icon, a CSS `background: url(...)` rule), the SVG works too. The difference is that it stays crisp at any size: the same source file is sharp at a 16-point list-row icon, a 64-point hero header, and a 256-point launch screen, on every DPI bucket.
 
 A grid of the static SVGs from the hellocodenameone fixture, rendered through the new pipeline:
 ![Static SVGs rendered by the build-time transcoder on iOS Metal: filled star, gradient-filled circle, path arrow, rounded button, two stroked wave paths, gradient-filled PRO badge, clipped badge](https://www.codenameone.com/blog/build-time-codegen/svg-static.png)
-
-<br />
 
 ### Sizing in millimeters
 
@@ -244,7 +227,6 @@ LogoBanner {
     cn1-svg-height: 12mm;
 }
 ```
-
 
 A 6 mm icon is 6 mm tall on a 1× desktop, 6 mm on a high-DPI handset, and 6 mm on a 4K tablet. The transcoder routes both values through `Display.convertToPixels()` at install time, the same way `font-size: 3mm` already behaves elsewhere in Codename One CSS. No design-pixel guesswork, no DPI bucket to choose, no scaling surprise when the artist re-exports the source SVG at a different resolution.
 
@@ -266,8 +248,7 @@ What is still not supported: SVG `filter` primitives, ` (treated as a clip, so a
 
 The coverage matrix and troubleshooting are at [SVG Transcoder](https://www.codenameone.com/developer-guide/#_svg_transcoder) in the developer guide.
 
-Lottie at build time
---------------------
+## Lottie at build time
 
 The same pipeline carries Lottie. Drop a Bodymovin export into the same `src/main/css/`:
 
@@ -278,7 +259,6 @@ src/main/css/
     spinner.json
 ```
 
-
 After the next build, both are real `Image` instances on every platform that exposes the shape API. The same vector-everywhere story as SVG: a Lottie animation renders crisply at any size and slots into any `Image` slot in the framework.
 
 ```
@@ -287,11 +267,8 @@ Image spinner = Resources.getGlobalResources().getImage("spinner");
 form.add(pulse).add(spinner);
 ```
 
-
 Animation runs against wall-clock time on every paint, with no `Timer` and no allocation in the hot path. A capture of the hellocodenameone Lottie fixture in motion:
 ![Animated Lottie playback: a red bar that pulses and rotates next to a blue ellipse that scales up and down](https://www.codenameone.com/blog/build-time-codegen/lottie-pulse-spinner.gif)
-
-<br />
 
 The Lottie transcoder lives in `maven/lottie-transcoder/`. It parses Bodymovin JSON with no external dependencies (the framework's built-in JSON parser carries the load) and lowers each file into the same `SVGDocument` model the SVG path uses. The same `JavaCodeGenerator` emits the same `GeneratedSVGImage` subclass, and the same `SVGRegistry` registers it under the source filename. **No new `Image` base class, no new registry, no per-port wiring**, since the SVG path's JavaSE reflective load and iOS / Android Stub weaving already cover the new format.
 
@@ -301,8 +278,7 @@ Coverage in v1: shape layers (`rc` / `el` / `sh`) with solid fills and strokes; 
 
 The same iOS caveat applies: the renderer leans on the shape API, so the deprecated GL ES 2 pipeline shows artifacts on the more elaborate Lottie animations. Use the Metal default (now on by default for new iOS builds).
 
-Deep links and routing
-----------------------
+## Deep links and routing
 
 Two pieces of plumbing for apps that handle URLs from outside themselves (notification taps, marketing links, share targets, Universal Links from Safari and the equivalent App Links from Chrome on Android).
 
@@ -323,7 +299,6 @@ Display.getInstance().setDeepLinkHandler(link -> {
     return false;
 });
 ```
-
 
 `AppArg` still works for projects that depend on it, but the new handler is what we recommend going forward. The handler runs on a consistent lifecycle path on both cold and warm starts, and the parsed `DeepLink` value carries the scheme, host, path segments, query map, and fragment so app code does not need to roll its own URL parser.
 
@@ -349,13 +324,11 @@ public class UserDetailForm extends Form {
 public class AboutForm extends Form { /* ... */ }
 ```
 
-
 `Router.navigate("/users/42")` resolves the path, instantiates `UserDetailForm`, and shows it. The deep-link handler now collapses to:
 
 ```
 Display.getInstance().setDeepLinkHandler(link -> Router.navigate(link.toString()));
 ```
-
 
 Each form owns its own routing rule. Adding or moving a screen is a one-class change. The "what screens does this app have, and at what paths?" question is answered by an IDE search for `@Route`, not by reading every form constructor in the project.
 
@@ -377,8 +350,7 @@ For the link-publishing side, an `AasaBuilder` emits the iOS `apple-app-site-ass
 
 The JavaScript port bridges the router into `window.history` so navigating the in-app router pushes a real entry into the browser's session history. Back and forward in the browser drive the router; reloading the page lands at the deep-link URL; sharing the URL out of the address bar takes a colleague to the same in-app location.
 
-How it works: the build-time codegen pipeline
----------------------------------------------
+## How it works: the build-time codegen pipeline
 
 Everything above sits on a single Maven-plugin pass.
 
@@ -392,8 +364,7 @@ cn1-core ships a no-op stub of each generated index (`RoutesIndex`, `MappersInde
 
 The SVG and Lottie transcoders sit on a parallel pipeline (declarative graphics files in place of annotations), but they emit the same shape of code and obey the same constraints. The practical effect is that the kind of code that historically required reflection at runtime (with all the obfuscation hazards and surprise allocations that come with that) now happens once at build time and produces direct, dead-code-eliminable, rename-safe symbol references.
 
-Wrapping up
------------
+## Wrapping up
 
 That closes this release's post series. We already have some pretty big features lined up for **this Friday's** release post; the headline pieces are the most substantial things to land in months and worth checking back for.
 

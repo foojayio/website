@@ -19,8 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-**1. Introduction**
--------------------
+## **1. Introduction**
 
 In our [previous article](https://www.baeldung.com/cassandra-astra-rest-dashboard-updates), we looked at augmenting our dashboard to store and display individual events from the Avengers using [DataStax Astra](https://astra.dev/3DnYCl8), a serverless DBaaS powered by [Apache Cassandra](https://cassandra.apache.org/) using [Stargate](https://stargate.io/?utm_medium=referral&utm_source=baeldung&utm_campaign=series-1-of-3&utm_content=avengers-dash-series-1) to offer additional APIs for working with it.
 
@@ -28,8 +27,7 @@ In this article, we will be making use of the exact same data in a different way
 
 In order to follow along with this article, it is assumed that you have already read the [first](https://www.baeldung.com/cassandra-astra-stargate-dashboard) and [second](https://www.baeldung.com/cassandra-astra-rest-dashboard-updates) articles in this series and that you have a working knowledge of Java 16, Spring, and at least an understanding of what Cassandra can offer for data storage and access. It may also be easier to have the code from [GitHub](https://github.com/Baeldung/datastax-cassandra/) open alongside the article to follow along.
 
-**2. Service Setup**
---------------------
+## **2. Service Setup**
 
 **We will be retrieving the data using the CQL API, using queries in the [Cassandra Query Language](https://docs.datastax.com/en/cql-oss/3.3/index.html).** This requires some additional setup for us to be able to talk to the server.
 
@@ -54,7 +52,6 @@ ASTRA_DB_CLIENT_ID=clientIdHere
 ASTRA_DB_CLIENT_SECRET=clientSecretHere
 ```
 
-
 ### **2.3. Google Maps API Key**
 
 **In order to render our map, we are going to use Google Maps. This will then need a Google API key to be able to use this API.**
@@ -73,7 +70,6 @@ We now need to add this key to our *application.properties*file:
 ```
 GOOGLE_CLIENT_ID=someRandomClientId
 ```
-
 
 3. Building the Client Layer Using Astra and CQL
 ------------------------------------------------
@@ -108,15 +104,13 @@ public class CqlClient {
 }
 ```
 
-
 This gives us a single public method that will connect to the database and execute an arbitrary CQL query, allowing for some bind values to be provided to it.
 
 **Connecting to the database makes use of our Secure Connect Bundle and client credentials that we generated earlier.** The Secure Connect Bundle needs to have been placed in *src/main/resources/secure-connect-baeldung-avengers.zip* , and the client ID and secret need to have been put into *application.properties* with the appropriate property names.
 
 Note that this implementation loads every row from the query into memory and returns them as a single list before finishing. This is only for the purposes of this article but is not as efficient as it otherwise could be. We could, for example, fetch and process each row individually as they are returned or even go as far as to wrap the entire query in a *java.util.streams.Stream* to be processed.
 
-**4. Fetching the Required Data**
----------------------------------
+## **4. Fetching the Required Data**
 
 **Once we have our client to be able to interact with the CQL API, we need our service layer to actually fetch the data we are going to display.**
 
@@ -130,7 +124,6 @@ public record Location(String avenger,
   BigDecimal status) {}
 ```
 
-
 And then we need our service layer to retrieve the data:
 
 ```
@@ -142,7 +135,6 @@ public class MapService {
   // To be implemented.
 }
 ```
-
 
 Into this, we're going to write our functions to actually query the database -- using the *CqlClient* that we've just written -- and return the appropriate details.
 
@@ -160,7 +152,6 @@ public List<String> listAvengers() {
     .collect(Collectors.toList());
 }
 ```
-
 
 **This just gets the list of distinct values in the *avenger* column from our *events* table.** Because this is our partition key, it is incredibly efficient. CQL will only allow us to order the results when we have a filter on the partition key so we are instead doing the sorting in Java code. This is fine though because we know that we have a small number of rows being returned so the sorting will not be expensive.
 
@@ -190,11 +181,9 @@ public Map<String, List<Location>> getPaths(List<String> avengers, Instant start
 }
 ```
 
-
 The CQL binds automatically expand out the IN clause to handle multiple avengers correctly, and the fact that we are filtering by the partition and clustering key again makes this efficient to execute. We then parse these into our *Location* object, group them together by the *avenger* field and ensure that each grouping is sorted by the timestamp.
 
-**5. Displaying the Map**
--------------------------
+## **5. Displaying the Map**
 
 **Now that we have the ability to fetch our data, we need to actually let the user see it.** This will first involve writing our controller for getting the data:
 
@@ -236,7 +225,6 @@ public class MapController {
   }
 }
 ```
-
 
 **This uses our service layer to get the list of avengers, and if we have inputs provided then it also gets the list of locations for those inputs.** We also have a *ModelAttribute* that will provide the Google Client ID to the view for it to use.
 
@@ -398,14 +386,12 @@ Once we've written our controller, we need a template to actually render the HTM
 </html>
 ```
 
-
 We are injecting the data retrieved from Cassandra, as well as some other details. Thymeleaf automatically handles converting the objects within the *script* block into valid JSON. Once this is done, our JavaScript then renders a map using the Google Maps API and adds some routes and markers onto it to show our selected data.
 
 **At this point, we have a fully working application. Into this we can select some avengers to display, date and time ranges of interest, and see what was happening with our data:**
 ![](avengers-map-1024x519-1.png)
 
-**6. Conclusion**
------------------
+## **6. Conclusion**
 
 Here we have seen an alternative way to visualize data retrieved from our Cassandra database, and have shown the Astra CQL API in use to obtain this data.
 

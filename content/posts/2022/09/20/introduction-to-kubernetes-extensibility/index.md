@@ -24,8 +24,7 @@ Kubernetes offers a lot of benefits: an enormous ecosystem with plenty of actors
 
 However, the more I work with Kubernetes, the more I think its most significant asset is **extensibility**. If you need something that the platform doesn't provide by default, there's an option to develop it yourself and integrate it. In this post, I'd like to list such extension points.
 
-Kubernetes 101
---------------
+## Kubernetes 101
 
 A lot of explanations on Kubernetes focus on the architecture. I believe they go into too many details and miss the big picture. Here, I only want to highlight the basic concepts.
 
@@ -37,8 +36,7 @@ The idea behind making a generic tool is to follow Pareto's Law: solve 80% of th
 
 Kubernetes designers saw this issue as the most critical obstacle to widespread adoption. Hence, Kubernetes offers many extension points.
 
-Extensible model
-----------------
+## Extensible model
 
 In the section above, I mentioned scheduling a pod. A pod is one of the many objects available in Kubernetes out-of-the-box. Other objects include: deployments, jobs, services, etc.
 
@@ -79,7 +77,6 @@ spec:
          required: ["spec"]
 ```
 
-
 1. Required header
 2. Match the following `.`
 3. Group name for REST API - `/apis//`
@@ -101,17 +98,14 @@ spec:
   bar: "whatever"
 ```
 
-
 ```java
 kubectl apply -f foo.yml
 kubectl get foo
 ```
 
-
 The above commands have updated the data model with a new `Foo` type and created a `Foo` object. But under the cover, we've only stored data in `etcd` via the Kubernetes API. Nothing will happen until we start a controller that watches for new objects and acts upon them. Note that the name for a controller that manages CRDs is *operator*.
 
-Extensible validation
----------------------
+## Extensible validation
 
 A common concern with a platform that can run third-party workloads is allowing only vetted ones. Some workloads may consume too many resources; others may be malicious.
 
@@ -140,15 +134,13 @@ They run in turn as per the following diagram:
 
 Each can solve the scenarios highlighted above.
 
-Extensible client capabilities
-------------------------------
+## Extensible client capabilities
 
 At its most basic level, the `kubectl` command line is a high-level abstraction over a REST client. You can verify it by setting the verbose option:
 
 ```java
 kubectl get pods --v=8
 ```
-
 
 ```
 loader.go:372] Config loaded from file:  /Users/nico/.kube/config
@@ -166,7 +158,6 @@ round_trippers.go:580]     Date: Sun, 04 Sep 2022 09:32:39 GMT
 round_trippers.go:580]     Audit-Id: 2f2f163d-fb6d-4149-ba44-ecf4395028aa
 request.go:1073] Response Body: {"kind":"Table","apiVersion":"meta.k8s.io/v1","metadata":{"resourceVersion":"263411"},"columnDefinitions":[{"name":"Name","type":"string","format":"name","description":"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names","priority":0},{"name":"Ready","type":"string","format":"","description":"The aggregate readiness state of this pod for accepting traffic.","priority":0},{"name":"Status","type":"string","format":"","description":"The aggregate status of the containers in this pod.","priority":0},{"name":"Restarts","type":"string","format":"","description":"The number of times the containers in this pod have been restarted and when the last container in this pod has restarted.","priority":0},{"name":"Age","type":"st [truncated 6465 chars]
 ```
-
 
 Kubernetes' REST API is (mostly?) based on operations. Sometimes, you need to run several commands to achieve the desired results. For example, we would like to query which subjects can execute an action.
 
@@ -198,7 +189,6 @@ kubectl krew update                            #3
 kubectl krew install who-can                   #4
 k who-can watch pod                            #5
 ```
-
 
 1. Install `brew` on Mac
 2. Display the auto-completion instructions
@@ -233,9 +223,7 @@ system:kube-controller-manager                 system:kube-controller-manager   
 system:kube-scheduler                          system:kube-scheduler                   User
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this post, we browsed through several extension points in Kubernetes: the data model, admission controllers, and client-side. It was a very brief introduction, both in width and depth. Yet, I hope that it gives a good entry point into further research.
 

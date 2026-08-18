@@ -32,8 +32,7 @@ The journey into this started with a question on the JDK Mission Control slack c
 
 This question essentially boils down to comparing both methods' OS time sources. We're only considering Unix systems in the following.
 
-Source of JFR timestamps
-------------------------
+## Source of JFR timestamps
 
 The JFR event time stamps are set in the JFR event constructor, which is defined in `jfrEvent.hpp` (and not in the Java code, as one might expect):
 
@@ -51,7 +50,6 @@ The JFR event time stamps are set in the JFR event constructor, which is defined
   }
 ```
 
-
 Looking further reveals that `JFRTicks` calls [`FastUnorderedElapsedCounterSource`](https://github.com/openjdk/jdk/blob/05ea083b0563ddacf3e38dc329ba00dc4bac9b29/src/hotspot/share/utilities/ticks.cpp#L75) which uses two different time sources:
 
 ```cpp
@@ -65,7 +63,6 @@ FastUnorderedElapsedCounterSource::Type FastUnorderedElapsedCounterSource::now()
   return os::elapsed_counter();
 }
 ```
-
 
 The RDTSC instruction reads the time stamp counter on x86 processors:
 > The time stamp counter (TSC) is a hardware counter found in all contemporary x86 processors. The counter is implemented as a 64-bit model-specific register (MSR) that is incremented at every clock cycle. The RDTSC ("read time stamp counter") register has been present since the original Pentium.
@@ -83,9 +80,7 @@ jlong os::elapsed_counter() {
 }
 ```
 
-
-Source of `System.nanoTime`
----------------------------
+## Source of `System.nanoTime`
 
 Now the remaining question is: Does `System.nanoTime` also call `os::javaTimeNanos`? The method is defined in the [jvm.cpp](https://github.com/openjdk/jdk/blob/05ea083b0563ddacf3e38dc329ba00dc4bac9b29/src/hotspot/share/prims/jvm.cpp#L243):
 
@@ -94,7 +89,6 @@ JVM_LEAF(jlong, JVM_NanoTime(JNIEnv *env, jclass ignored))
   return os::javaTimeNanos();
 JVM_END
 ```
-
 
 So `System.nanoTime` is just a tiny wrapper around `os::javaTimeNanos`. So this solves the original question on non-x86 CPUs. But what about x86 CPUs?
 
@@ -110,8 +104,7 @@ Now on Linux: Here, the used `os::javaTimeNanos` [is implemented](https://github
 
 I tried to find something in the Linux Kernel sources, but they are slightly too complicated to find the solution quickly, so I had to look elsewhere. Someone asked a question on `clock_gettime` on [StackOverflow](https://stackoverflow.com/questions/7935518/is-clock-gettime-adequate-for-submicrosecond-timing). The answers essentially answer our question too: `clock_gettime(CLOCK_MONOTONIC, ...)` seems to use RDTSC.
 
-Conclusion
-----------
+## Conclusion
 
 JFR timestamps and `System.nanoTime` seem to use the same time source on all Unix systems on all platforms, as far as I understand it.
 
@@ -129,10 +122,7 @@ You can stop the JVM from using RDTSC by using the `-XX:+UnlockExperimentalVMOpt
 > As other have already pointed out, there have been evolution in recent years in how operating systems provide performance counter information to user mode. It might very well be that now the access latencies are within acceptable overhead, combined with high timer resolution. If that is the case, the rdtsc() usages should be phased out due to its inherent problems. This requires a systematic investigation and some policy on how to handle older HW/SW combinations - if there needs to be a fallback to continue to use rdtsc(), it follows it is not feasible to phase it out completely.
 > [Markus Grönlund](https://mail.openjdk.org/pipermail/hotspot-gc-dev/2020-August/030581.html)
 
-<br />
-
-Difference between `System.currentTimeMillis` and `System.nanoTime`
--------------------------------------------------------------------
+## Difference between `System.currentTimeMillis` and `System.nanoTime`
 
 This is not directly related to the original question, but nonetheless interesting. `System.currentTimeMillis` is implemented using `clock_gettime(CLOCK_REALTIME, ...)` on all CPU architectures:
 > **CLOCK_REALTIME** System-wide realtime clock. Setting this clock requires appropriate privileges.

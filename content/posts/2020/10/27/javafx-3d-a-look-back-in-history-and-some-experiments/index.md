@@ -25,8 +25,7 @@ After my virtual conference talk ["Java and JavaFX on the Raspberry Pi" at the "
 
 Only one way to find out! Let's experiment!
 
-History of JavaFX 3D
---------------------
+## History of JavaFX 3D
 
 JavaFX is an open-source, next-generation Java library for rich client applications. JavaFX started with a focus on 2D UI elements.
 
@@ -70,8 +69,7 @@ Chess seems to be a popular topic for 3D-experiments as this final impressive ex
 
 {{< youtube 6uEbfeW-9Gg >}}
 
-**Let's experiment!**
----------------------
+## **Let's experiment!**
 
 ### **The code**
 
@@ -129,7 +127,6 @@ $ java --module-path /home/frank/javafx-sdk-16/lib
       -jar target/moleculesampleapp-0.0.1-jar-with-dependencies.jar
 ```
 
-
 And oh yeah it runs! As we can expect from Java's promise for backwards compatibility, this demo created for a Java version in 2013, still works many years later on a much later version of the JDK.
 
 <figure class="wp-block-embed-vimeo wp-block-embed is-type-video is-provider-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
@@ -147,7 +144,6 @@ $ java --module-path /home/frank/javafx-sdk-16/lib
      --add-modules=javafx.controls,javafx.fxml 
      -jar target/Jfx3dViewerApp-0.0.1-jar-with-dependencies.jar
 ```
-
 
 When the application has started, I opened the Duke image "allStacked_solidColors_w0005_loweredPawnHat.ma" from the Duke Chess directory. The viewer provides multiple options to change the 3D visualization, lighting, etc.
 
@@ -194,8 +190,7 @@ As this tweet of [José Pereda](https://twitter.com/JPeredaDnr) illustrates, smo
  </div>
 </figure>
 
-Conclusion
-----------
+## Conclusion
 
 **JavaFX 3D really is a hidden gem**! I've been using JavaFX already for a long time now but wasn't aware of these 3D features... And the demos presented here really impressed me.
 

@@ -64,7 +64,6 @@ out.close();
 fileOut.close();
 ```
 
-
 When reading the file `ValueObject.ser` containing the serialized object with a hex-editor the output is this:
 ![](image-7-1024x433.png)
 
@@ -76,7 +75,6 @@ FileInputStream fileIn = new FileInputStream("ValueObject2.ser");
 ObjectInputStream in = new ObjectInputStream(fileIn);
 ValueObject vo2 = (ValueObject) in.readObject();
 ```
-
 
 When deserializing the adjusted binary file, we find out that the object's `value` changed. We also see that the timestamp didn't change, proving that the constructor is never called.
 

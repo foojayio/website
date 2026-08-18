@@ -22,8 +22,7 @@ When I (re)started the JavaFX Links Of The Week on [jfx-central.com](https://www
 
 But that was a stupid mistake as you can see below in the summary of what happened in October... 🙂
 
-JavaFX 19 and 20
-----------------
+## JavaFX 19 and 20
 
 * JavaFX 19 just got released a few weeks ago, but [**Johan Vos**](https://twitter.com/johanvos) is already [looking forward](https://twitter.com/johanvos/status/1575159889994911744?t=PJn2au0k_icq2qseeLVOXA&s=09) to the next one: *a really-worth-mentioning improvement that will be in JavaFX 20 is the update to MarlinFX 0.9.4.6 by [**Laurent Bourgès**](https://twitter.com/laurent_bourges). Thank you very much Laurent for your contributions. They are an important part to the success of JavaFX. See [JDK-8287604](https://bugs.openjdk.org/browse/JDK-8287604).*
   * [Laurent is even sharing his TODO list on GitHub](https://github.com/users/bourgesl/projects/1/views/1) in case you are curious about what he is working on...
@@ -36,16 +35,14 @@ JavaFX 19 and 20
   * So the latest JavaFX will not only be available on the [Gluon website](https://gluonhq.com/products/javafx/), but also on [jdk.java.net/javafx20](https://jdk.java.net/javafx20/).
   * Curious what the impact of this announcement will be and what we can share here next week...
 
-SceneBuilder
-------------
+## SceneBuilder
 
 * [**Chad Preisler**](https://twitter.com/cpreisler) shared [a video showing how to create a form using SceneBuilder and JavaFX](https://www.youtube.com/watch?v=auao5UNrUcg), getting the form to resize the correct way.
 * [**Gluon**](https://twitter.com/GluonHQ/) announced the release of **Gluon Scene Builder 19** . You can get it from [github.com/gluonhq/scenebuilder/releases](https://github.com/gluonhq/scenebuilder/releases/tag/19.0.0).
   * It incorporates JavaFX 19 wich brings lots of improvements, so you benefit [from all these release highlights](https://openjfx.io/highlights/19/).
   * [This tweet shows a video](https://twitter.com/Raumzeitfalle/status/1578692849746718720?t=mNxAaRN22Frjkf6kTfGy-w&s=09) of a bugfix on macOS where copy\&paste often resulted in entries doubled after paste. A new preference setting "alternative paste behavior for text input" is available on macOS and is enabled by default.
 
-Devoxx Belgium
---------------
+## Devoxx Belgium
 
 * Devoxx Belgium (10-14 October) [thanks Gluon in a tweet](https://twitter.com/Devoxx/status/1577934708100456448) for their continued support for the #OSS Devoxx mobile app. Sources of the DevoxxBadges JavaFX app [are available on GitHub](https://github.com/gluonhq/DevoxxBadges).
 * The tweet wall was a crucial part of the information exchange between the visitors of Devoxx, showing the upcoming talks, highest ranked talks, etc. This tweet wall is a community effort driven by [**@jugbodensee**](https://twitter.com/jugbodensee) members, with the support of Gluon, and the [sources are on GitHub](https://github.com/TweetWallFX/TweetwallFX).
@@ -53,8 +50,7 @@ Devoxx Belgium
   * By the way (1), TweetwallFX has its own [Twitter account @TweetwallFX](https://twitter.com/TweetwallFX).
   * By the way (2), the official "Devoxx" mobile app is also a JavaFX project, created by Gluon, that you can find [on GitHub](https://github.com/devoxx/MyDevoxxGluon). Check the GitHub workflows to learn [more about how it is building and publishing to the Google and Apple stores](https://github.com/devoxx/MyDevoxxGluon/tree/main/.github/workflows).
 
-Various news from "The Web"
----------------------------
+## Various news from "The Web"
 
 * [**Dirk Lemmermann**](https://twitter.com/dlemmermann) announced [in a tweet](https://twitter.com/dlemmermann/status/1576974458761486338) version 11.12.1 of CalendarFX with new views for displaying resource allocations, improved editing behaviour, plenty of fixes and enhancements. You can [find it on GitHub](https://github.com/dlsc-software-consulting-gmbh/CalendarFX), and new link for the [documentation is here](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/).
   * Dirk also added a new custom control to [**GemsFX**](https://github.com/dlsc-software-consulting-gmbh/GemsFX) for displaying screens and windows of a JavaFX application, inspired by MacOS. For a screenshot, check [this tweet](https://twitter.com/dlemmermann/status/1578426485299449857?t=bCzbA3BPMatyoQVM362l-A&s=09) and a [demo is available on YouTube](https://www.youtube.com/watch?v=Kv7jo9fF9tc).
@@ -84,8 +80,7 @@ Various news from "The Web"
   * [Hull Point Cloud using #JavaFX 3D](https://twitter.com/SeanMiPhillips/status/1584204309956202496)
 * [**Jakob Jenkov**](https://twitter.com/jjenkov) asked [in this tweet with a lot of interesting replies](https://twitter.com/jjenkov/status/1584090714320695296): "Hi JavaFXers - do we have some JavaFX application design patterns somewhere? Advice about how to structure a #Java + #JavaFX application so the code base and application does not get messy as the app grows? I have some ideas -but I'd like to see what the rest of you have too :-)"
 
-New content on jfx-central.com
-------------------------------
+## New content on jfx-central.com
 
 * Real World App: [JabRef](https://www.jfx-central.com/real_world/jabref) is an open-source, cross-platform citation and reference management tool, see [jabref.org](https://www.jabref.org/).
 * Tool: ["Conveyor"](https://www.jfx-central.com/tools/conveyor) by [**Hydraulic**](https://twitter.com/HydraulicCorp), is an alternative/replacement for the jpackage tool but with support for (background) updates, signing, notarisation.

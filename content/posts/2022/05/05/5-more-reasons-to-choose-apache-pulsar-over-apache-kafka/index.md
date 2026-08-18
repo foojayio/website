@@ -92,8 +92,7 @@ Pulsar does [**broker load balancing**](https://pulsar.apache.org/docs/en/admini
 
 You can do broker load balancing with Kafka. But, you are going to have to install another package such as LinkedIn's [**Cruise Control**](https://github.com/linkedin/cruise-control). Or, if you like (eventually) paying for stuff, you can use Confluent's [**rebalancer**](https://docs.confluent.io/current/kafka/rebalancer/rebalancerhttps://www.confluent.io/product/auto-data-balancing/html) tool as well.
 
-Community and ecosystem
------------------------
+## Community and ecosystem
 
 One of the criticisms of my last post was that I didn't mention the size and richness of Kafka's community and ecosystem. That's a fair point.
 
@@ -103,8 +102,7 @@ All I can say is that the Pulsar community is growing, people are contributing n
 
 Actually, there is one more thing I can say: It's clear that a lot of Pulsar was inspired and informed by Kafka and that Pulsar is standing on the shoulders of a giant. The Kafka project and community deserve a lot of credit and respect. I know that it may sometimes sound like I am disrespecting Kafka, but I'm really just excited about Pulsar.
 
-Legit Kafka alternative
------------------------
+## Legit Kafka alternative
 
 Between this post and the last one, I am up to a dozen reasons to choose Pulsar over Kafka. And the cool thing is that the deeper I dive into Pulsar, the more reasons I find. So, there might need to be a third blog post on this topic in the future. Stay tuned.
 

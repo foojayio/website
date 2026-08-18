@@ -67,7 +67,6 @@ Here is the maven command you run from the top-level directory of the TiltMaze p
 $ mvn javafx:run
 ```
 
-
 At some point, though, you must test your application on the target hardware. Because native builds take much longer than Java byte code builds, you should perform as much coding, debugging, and testing as possible before you move to actual device testing.
 
 ### **iOS**
@@ -87,13 +86,11 @@ Next, set environment variable `GRAALVM_HOME` to the GraalVM JDK:
 $ export GRAALVM_HOME=/path/to/graalvm-svm-darwin-gluon-21.1.0-dev/Contents/Home
 ```
 
-
 and set `JAVA_HOME` as well:
 
 ```
 $ export JAVA_HOME=$GRAALVM_HOME
 ```
-
 
 For IOS targets, use[Homebrew](https://brew.sh) to install the following packages:
 
@@ -101,7 +98,6 @@ For IOS targets, use[Homebrew](https://brew.sh) to install the following package
 $ brew install --HEAD libusbmuxd
 $ brew install --HEAD libimobiledevice
 ```
-
 
 The GluonFX plugin lets you define profiles, so you can specify the desired target in your build/run/install commands. When you build your project from Gluon's starter page (<https://start.gluon.io/>), profiles for ios and android (as well as desktop) are predefined in the `pom.xml` file.
 
@@ -111,13 +107,11 @@ Here is the sequence we use to build and install/run TiltMaze on a connected iPh
 $ mvn -Pios gluonfx:build
 ```
 
-
 The build action performs a compile followed by a link. Next, connect your iPhone via USB to your Mac and run the following command.
 
 ```
 $ mvn -Pios gluonfx:nativerun
 ```
-
 
 This command both installs the application created by the build action and runs the application. At this point, standard output from `System.out.println` statements appear on the desktop console and any logging is written to log files in the appropriate target subdirectory. The application is installed on your phone, so you can also exit and re-run the application from the phone. Exiting the application, however, disconnects remote execution from the Mac console.
 
@@ -133,7 +127,6 @@ Note: If you're having issues getting a successful build or install, try
                     <verbose>true</verbose>
                 </configuration>
 ```
-
 
 * Return to the [Gluon Documents](https://docs.gluonhq.com/#platforms_ios) for the iOS platform to make sure your pom.xml file is configured correctly.
 
@@ -172,7 +165,6 @@ In TiltMaze, we modified **Default-Info.plist** to permit portrait mode only, us
 </dict>
 ```
 
-
 We created our own application icon, which you supply in various sizes for the App Store and the device icons. The entire icon set includes 18 different PNG images.
 
 Here are several resources to generate the icons for the various devices.
@@ -207,7 +199,6 @@ Build the project for Android with
 $ mvn -Pandroid gluonfx:build
 ```
 
-
 This runs the compilation phase and links the compiled objects into an Android executable.
 
 * Generate an Android application package (an APK):
@@ -216,20 +207,17 @@ This runs the compilation phase and links the compiled objects into an Android e
 $ mvn -Pandroid gluonfx:package
 ```
 
-
 * Install the application on a connected Android device. Note that "USB debugging" must be enabled on the connected device. To enable USB debugging follow the steps listed [here](https://developer.android.com/training/basics/firstapp/running-app#RealDevice). Install with the following action.
 
 ```
 $ mvn -Pandroid gluonfx:install
 ```
 
-
 * And finally, launch the application on the connected device with
 
 ```
 $ mvn -Pandroid gluonfx:nativerun
 ```
-
 
 The same as with the iOS target, you can configure `<verbose>true</verbose>` mode for help in identifying configuration errors.
 
@@ -242,7 +230,6 @@ In our case, we specify the application runs only in portrait mode and requires 
 ```xml
 <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
 ```
-
 
 We provide Android-specific icon resource files for TiltMaze under `src/android/res/`.
 

@@ -55,7 +55,6 @@ record DefaultSensor(String type, int value) implements VehicleSensor {
 …}
 ```
 
-
 **Example 1.**: JEP-455 increases the support of primitive types for the records and their decomposition
 
 To avoid creating a wrapper around hardware IO every time we request a specific sensor, we use a cache pattern \[3\]. Each Default sensor is created with appropriate constructor (Example 2.).
@@ -86,7 +85,6 @@ constructor double:1.5
 constructor String:platform
 ```
 
-
 **Example 2.** : Vehicle sensor cache returns as default state *NULL_SENSOR* object and each sensor uses primitive values
 
 Let's imagine we have a sequence of sensors that need to be called to obtain the value. Such a sensor may or may not be present inside the cache. The JEP-455 enables smooth code folding into a functional paradigm using various types of terminal or intermediate operations (Example 3.)
@@ -111,7 +109,6 @@ engine:DefaultSensor[type=engine, value=1]
 break:DefaultSensor[type=break, value=2]
 unknown:NullSensor{type='undefined'}
 ```
-
 
 **Example 3.**: The support of primitive types inside the switch statements simplifies the code
 

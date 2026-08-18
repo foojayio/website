@@ -27,8 +27,7 @@ Without further ado, let's go to the next Java Challenge!
 
 It's time to improve your Java skills with this Limit Stream Challenge.
 
-Limit Stream Java Challenge
----------------------------
+## Limit Stream Java Challenge
 
 What will happen after the main method below is executed?
 
@@ -53,7 +52,6 @@ public class LimitStreamChallenger {
 }
 ```
 
-
 A) 024002244  
 
 B) 02400122344  
@@ -70,7 +68,6 @@ Let's analyze the stream code:
 IntStream.iterate(0, i -> i + 1).limit(5).filter(i -> i % 2 == 0)                 
 .forEach(System.out::print);
 ```
-
 
 Note that we are using an infinite stream at the iterate line, then we limit our stream to 5 elements and filter it by even numbers and finally print all of them. Since we limit the numbers to 5, we will have our stream iterating in a range from 0 to 4 on our stream. Then we filter it by even numbers and we finally print the elements and the first result will be 024.
 

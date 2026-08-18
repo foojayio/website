@@ -168,7 +168,6 @@ public class SingleAndMultiThreadedExample {
 }
 ```
 
-
 ### Conclusion
 
 Favouring event loops over threads and adopting an [EDA single-threaded microservices architecture](https://chronicle.software/services/ "EDA single-threaded microservices architecture"), where either single or multiple microservices are striped using a single-threaded event loop has been successful in reducing the burden of concurrency.

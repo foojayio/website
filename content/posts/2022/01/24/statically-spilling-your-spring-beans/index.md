@@ -27,8 +27,7 @@ UPDATE - To make it abundantly clear:
 
 Continue reading at **your own risk**! You have been warned!  
 
-Autowiring Beans
-----------------
+## Autowiring Beans
 
 Getting instances of beans in Spring is pretty simple.  
 
@@ -48,7 +47,6 @@ public class UserServiceImpl implements UserService {
 }
 ```
 
-
 Some notes about the above code example before we continue:
 
 * *@Autowired can also be placed on a field or a setX(x) method. [Constructor injection](https://reflectoring.io/constructor-injection/) is generally accepted as the best way to inject dependencies;*
@@ -61,10 +59,7 @@ Some notes about the above code example before we continue:
  </figcaption>
 </figure>
 
-
-
-The problem
------------
+## The problem
 
 In our use-case, we don't want to create a class. We want to be able to have static access to the beans! This means the standard @Autowire is not an option. There is however another way to get beans, namely directly from the Application Context.
 
@@ -85,7 +80,6 @@ public static <T> T getBean(Class<T> clazz) {
 }
 ```
 
-
 **So all we need now is to get an ApplicationContext and we are done!** How do we get one? Well, you could @Autowire one... but we want to use it in a static context. Here is how we can do it!
 
 ```
@@ -105,7 +99,6 @@ public class StaticContextAccessor {
 }
 ```
 
-
 * *Create a class marked with @Component. This way, Spring will initialize it on startup by default.*
 * *@Autowire the ApplicationContext.*
 * *Set the ApplicationContext to a static field.*
@@ -117,19 +110,16 @@ Doing this, we can now use the **getBean()** method on the StaticContextAccessor
 UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
 ```
 
-
 ![Diagram: Initialization Order](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-wait.png) Invoking method on a bean from a static method.
 
-Timing and the looming NullPointerException
--------------------------------------------
+## Timing and the looming NullPointerException
 
 While the solution above works, there is a major problem with it. It is possible to use the StaticContextAccessor.getBean(class) method **before** the ApplicationContext is autowired. This would crash the system because you can't invoke a method on a reference pointing to null.  
 ![Diagram: Looming NullPointerException](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-nullpointer.png) The solution doesn't work if the context is not yet initialized.
 
 **We have a timing issue here.** We know the ApplicationContext will be autowired eventually, usually within seconds if not milliseconds after the application is started. But we also can't really stop anyone from invoking the static method to get the bean before that happens.
 
-Returning a Proxy
------------------
+## Returning a Proxy
 
 **To avoid the timing issue, we need to bridge the time between those two events.** What we could do is provide a temporary object, so our static getBean() returns at least something. **This can be achieved by using a Proxy object**, which is a part of the Java specification.  
 
@@ -162,7 +152,6 @@ private static <T> T getProxy(Class<T> clazz) {
 }
 ```
 
-
 The Proxy.newProxyInstance() method will return a dynamic object of the given **interface** . It creates a new Object, at runtime, which **extends Proxy** and **implements the given interface**. Since this object implements the given interface, we can return it in our getBean() method. Thanks Polymorphism!
 > Note: This method will only work when requesting a interface. If you want to be able to create a proxy-object for non-interfaces, you could use ByteBuddy. ByteBuddy is out of the scope of this post.
 
@@ -187,14 +176,10 @@ class DynamicInvocationhandler<T> implements InvocationHandler {
 }
 ```
 
-
 Now all that is left is to set the actual bean on the handler as soon as it becomes available and we are done!  
 ![Sequence Diagram: Proxy](https://www.tomcools.be/post/apr-2020-static-spring-bean/visual-proxy.png)
 
-
-
-Full Code Solution
-------------------
+## Full Code Solution
 
 ```
 @Component
@@ -253,7 +238,6 @@ public class StaticContextAccessor {
 }
 ```
 
-
 There we go! We can now get Spring components from a static context!  
 
 All we need to do is call the static *getBean* method.
@@ -262,11 +246,7 @@ All we need to do is call the static *getBean* method.
 UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
 ```
 
-
-
-
-About that RuntimeException
----------------------------
+## About that RuntimeException
 
 Even with this proxying setup, there is still a case which will not work.  
 
@@ -276,6 +256,5 @@ As you can see in the handler code above, if the actualBean isn't set yet, we th
 UserRepository userRepo = StaticContextAccessor.getBean(UserRespository.class)
 userRepo.getAll() //this will break if called before ApplicationContext is ready.
 ```
-
 
 There is no way around this. If the bean isn't created and known in the ApplicationContext, we can't call a method on it. **The proxy solves the issue with the time between requesting the Bean and the ApplicationContext being created.** However, if the real bean isn't loaded into the proxy and a method is invoked, the only option is to throw an exception.

@@ -72,7 +72,6 @@ eg.addHandler(new MySlowHandler());
 ... just let it run …
 ```
 
-
 Then, once the Event Loop Monitor has started (it delays for a few seconds to allow everything to get started and warm up), you will start to see:
 
 ```
@@ -82,7 +81,6 @@ Then, once the Event Loop Monitor has started (it delays for a few seconds to al
     at ...MySlowHandler.action(EventGroupTest2.java:40)
     at ...
 ```
-
 
 ### Real-world examples
 
@@ -99,7 +97,6 @@ Many of Java's networking APIs are described as "non-blocking" but if you run so
     at software.chronicle.enterprise.network.datagram.UdpHandler.action(UdpHandler.java:118)
     at ...
 ```
-
 
 #### Surprising synchronizeds
 
@@ -127,7 +124,6 @@ net.openhft.chronicle.threads.MediumEventLoop - event-loop thread has blocked fo
     at com.yourcompany.application.MyClass
     at ...
 ```
-
 
 In this case, the machine was heavily loaded, logging was very infrequent, and the first log caused some classloading to take place, which is an expensive (and blocking) activity.
 

@@ -40,8 +40,7 @@ I want to offer a couple of options to handle this requirement in this post.
 
 ![](initial-system-1024x309.png)
 
-Where to compute the location?
-------------------------------
+## Where to compute the location?
 
 In this section, I'll list a couple of approaches to compute the location.
 
@@ -98,8 +97,7 @@ Another approach is to compute the location in the API Gateway.
 
 Interestingly enough, part of a Gateway's regular responsibilities is to keep part of the upstreams.
 
-How to compute the location?
-----------------------------
+## How to compute the location?
 
 This section will consider what we need to compute the location. Let's examine the case of an HTTP request from a client to a system. The system as a whole, regardless of the specific component, needs to compute the location to know where to save the data.
 
@@ -111,8 +109,7 @@ Imagine a situation where data location is based on a user's living place. We co
 
 To improve security, we could keep everything server-side. The system would need to request additional data to compute the location on every request.
 
-A tentative proposal
---------------------
+## A tentative proposal
 
 We can reconcile the best of both worlds at the cost of additional complexity. Remember that everything is a trade-off; your mileage may vary depending on your context. The following is a good first draft that you can refine later.
 
@@ -128,8 +125,7 @@ Here's the sequence diagram of the second call, with location metadata already a
 
 ![](flow-across-location.png)
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we looked at data residency and designed a draft architecture to implement it. In the next post, we will delve into the technical details.
 

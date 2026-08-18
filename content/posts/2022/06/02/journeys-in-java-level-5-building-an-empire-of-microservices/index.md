@@ -38,8 +38,7 @@ Neither of these may seem daunting, but I ran into a few unexpected gotchas, whi
 
 Let's get started!
 
-Architecture
-------------
+## Architecture
 
 We began this project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). Currently, our microservices system consists of three services and a database container. While still pretty small in the microservices world, issues like coordination are already surfacing, so this is a good time to introduce orchestration tools like Docker Compose that attempt to reduce that pain.
 
@@ -51,8 +50,7 @@ Here is the updated architecture:
 
 The border around each service represents the container housing each application. All of the services are encompassed in a larger grey area that shows how Docker Compose groups these services together. Containerizing our applications means a couple of code changes to minimize environment or configuration changes later. The first of these is to create additional methods in each service for testing.
 
-Added test methods
-------------------
+## Added test methods
 
 I ran into some errors when testing endpoints, but it was hard to tell the root cause (database, authentication, Docker compose, or something else entirely). To help debugging, I added a method to each service called `liveCheck()` that elimiates a database call, returning a string to confirm our service is up.
 
@@ -64,8 +62,7 @@ All code for these methods is on Github, linked for each service below.
 * Service2: [liveCheck() method](https://github.com/JMHReif/microservices-level5/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L37)
 * Service3: [liveCheck() and getAuthor() methods](https://github.com/JMHReif/microservices-level5/blob/main/service3/src/main/java/com/jmhreif/service3/Service3Application.java#L33)
 
-Containerizing - Service 1
---------------------------
+## Containerizing - Service 1
 
 To create a container for service1, we need a Dockerfile in the application folder (`/service1`).
 
@@ -84,7 +81,6 @@ COPY target/service1-*.jar goodreads-svc1.jar
 ENTRYPOINT ["java","-jar","/goodreads-svc1.jar"]
 ```
 
-
 First, I want a Java environment in the container, so Docker will pull openjdk's version 11 image as the base layer. Next, is the author/maintainer information so users know who to contact. Lastly, there are a couple of instructions to copy the JAR file (packaged application) into the container (`COPY`) and then add commands/arguments for the build command (`ENTRYPOINT`).
 
 In the next section, we will see how to prepare for a containerized application.
@@ -101,8 +97,7 @@ Once you package the application, you can verify by navigating to the service1 `
 
 Next, we could go ahead and build this individual container, but we want to manage all of the containers together. Instead, we will use wait and use Docker compose, so let's do the same steps for service2.
 
-Containerizing - Service 2
---------------------------
+## Containerizing - Service 2
 
 Creating a container for service2 looks nearly identical to what we did above, with only differing names for the application's filename.
 
@@ -114,8 +109,7 @@ We also need to package the service2 application. From the service2 folder, we r
 
 Let's do the same for service3, for the third and final time!
 
-Containerizing - Service 3
---------------------------
+## Containerizing - Service 3
 
 Steps for service3 mirror what we have done for the previous two services, so we will condense with a link to [service3's Dockerfile](https://github.com/JMHReif/microservices-level5/blob/main/service3/Dockerfile) on Github.
 
@@ -125,8 +119,7 @@ We will run `mvn clean package` in the service3 folder, which we can verify in t
 
 Now we are ready to set up Docker Compose to manage all of our prepped services.
 
-Docker compose for everything
------------------------------
+## Docker compose for everything
 
 We need to create a [YAML](https://en.wikipedia.org/wiki/YAML) file with container details, configuration, and commands we want Compose to execute.
 
@@ -150,7 +143,6 @@ services:
       - $HOME/Projects/docker/mongoBooks/logs:/logs
       - $HOME/Projects/docker/mongoBooks/tmp:/tmp
 ```
-
 
 The first field displays the Docker compose version, though it is not required. Next, we will list our services. Instead of running our database container separately as we have been, we include it here so that Docker Compose handles everything. The child fields for each service contain a few details and configurations. We will go through those in the next subsections.
 
@@ -190,7 +182,6 @@ Now that we got through our first service definition, the following ones should 
       - SPRING_DATA_MONGODB_DATABASE=goodreads
 ```
 
-
 We use the familiar `container_name`, `image`, and `ports` fields. After that, we specify one new field called `depends_on` that lists any services service1 depends on for startup and shut down. In other words, if the database service is not up, then service1 cannot start because all of its functionality relies on making calls to the database.
 
 Next, we have the `networks` field that says we want service1 to also be on the custom network of `goodreads` (along with our database service). The last field for environment externalizes our connection details for the application to connect to the database.
@@ -216,7 +207,6 @@ Next is service2.
       - BACKEND_HOSTNAME=goodreads-svc1
 ```
 
-
 Service2 configuration looks very similar to service1, except for the environment variable. What is the `BACKEND_HOSTNAME=goodreads-svc1`? If you take a quick look at the [code for service2 in level4](https://github.com/JMHReif/microservices-level4/blob/main/service2/src/main/java/com/jmhreif/service2/Service2Application.java#L30), you might recall that we hard-coded a `localhost` value for the WebClient bean. This will not work in a Docker network because it is separate from the host machine's network. We need to reference containers by name, instead. However, we also want to be dynamic and test in local environments (localhost), as well as production environments (Docker Compose).
 
 To do this, we will create a dynamic variable with [Spring's `@Value` annotation](https://www.baeldung.com/spring-value-annotation) and set that in our Docker compose file using an environment variable. This is similar to what we did with the environment variables in service1. If Docker compose finds the environment variable, it will use that value; otherwise, it will use localhost.
@@ -237,7 +227,6 @@ public class Service2Application {
 	}
 }
 ```
-
 
 In the code above, we create a String variable with `@Value` that looks for `backend.hostname` value first. If it doesn't find it, the value falls back to localhost value. Then, in the `@Bean` definition, we insert the variable `hostname` in the middle of the URL.
 
@@ -265,7 +254,6 @@ Let's move on to service3.
       - SPRING_DATA_MONGODB_DATABASE=goodreads
 ```
 
-
 We have all of the same fields (and some of the same values) for `service3` as we did for `service1` because both services are rest apis for the database container. Both services need to depend on the database container running, and both define environment variables for connecting to it.
 
 The last piece is to define our custom network.
@@ -277,20 +265,17 @@ networks:
   goodreads:
 ```
 
-
 We need to define a high-level field that defines our custom Docker network that all of the services will join in order to communicate with one another using container names. The `networks` field states any custom network names along with any potential configurations. Since we don't need anything fancy, the network `goodreads` is the only thing required.
 
 You can view the [full `docker-compose.yml` file](https://github.com/JMHReif/microservices-level5/blob/main/docker-compose.yml) on Github.
 
-Put it to the test
-------------------
+## Put it to the test
 
 Docker compose will handle starting all of the containers in the proper order, so all we need to do is assemble the command.
 
 ```bash
 docker-compose up -d
 ```
-
 
 *\*Note:\* If you are building local images with the `build` field in docker-compose.yml, then use the command `docker-compose up -d --build`. This will build the Docker containers each time on startup from the directories.*
 
@@ -308,8 +293,7 @@ Next, we can test our endpoints.
 
 When everything looks good, we can run `docker-compose down`, which will stop each of the services in necessary order and remove those along with the custom network. Clearing everything out will help give us a clean run each time we start the services.
 
-Wrapping up!
-------------
+## Wrapping up!
 
 This post covered quite a bit of material, although we did not alter or add any more services. We added a couple extra methods to each service to help us test/debug issues with the applications, then we packaged the applications into JAR files. Next, we created Dockerfiles for each service that would allow Docker to create a container that copies and executes the service JAR.
 
@@ -319,8 +303,7 @@ Finally, we saw how to run everything with a single `docker-compose` command and
 
 There is so much more we can explore with microservices, such as adding more data sources, additional services, asynchronous communication through messaging platforms, cloud deployments, and much more. I hope to catch you in future improvements on this project. Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level5](https://github.com/JMHReif/microservices-level5) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

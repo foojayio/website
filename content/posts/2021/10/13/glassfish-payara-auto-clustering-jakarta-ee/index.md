@@ -33,8 +33,7 @@ The main advantage of this solution is in automatic interconnection of multiple 
 
 So, the article below describes how the Glassfish and Payara auto-clustering works, as well as infrastructure topology specifics and the way you can get the appropriate development and production environments up and running inside Jelastic PaaS.
 
-How the Auto-Clustering for GlassFish and Payara Works
-------------------------------------------------------
+## How the Auto-Clustering for GlassFish and Payara Works
 
 In the most general sense, any "clusterized solution" can be defined as a set of interconnected instances that run the same stack and operate the same data. In other words, this means that the corresponding server should be [horizontally scaled](https://docs.jelastic.com/app-server-scaling) and share user sessions.
 
@@ -62,8 +61,7 @@ For production, clustering is virtually a mandatory option to ensure your applic
  <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/11/glassfish-and-payara-wizard-topology-1024x445.png" alt="auto clustering topology" class="wp-image-30885" width="828" height="360">
 </figure>
 
-Session Replication Implementation
-----------------------------------
+## Session Replication Implementation
 
 To ensure high availability of your GlassFish/Payara clustering, the Jelastic PaaS automatically configures session replication across the worker nodes. This way, all user session data, that is stored during its processing, is distributed across all application server instances from the node that has actually handled the request.
 
@@ -89,8 +87,7 @@ In Payara Server 4, you had to enable Hazelcast and manually configure accessibi
 To manage Hazelcast settings, access the Administration Console and refer to the [Domain Data grid configuration page](https://docs.payara.fish/enterprise/docs/documentation/payara-server/hazelcast/configuration.html). Payara's Domain Data Grid feature is based on the Hazelcast library. It provides the required functionality for the deployment group (clustering functionality), caching functionality, single CDI cluster object and data storage monitoring in Payara.
 ![payara hazelcast configuration](https://jelastic.com/blog/wp-content/uploads/2021/09/payara-hazelcast-configuration.png)
 
-Deploy Example Application for HA Testing
------------------------------------------
+## Deploy Example Application for HA Testing
 
 Now, let's check the high availability of such automatically composed cluster with the example of scaled GlassFish server. To make sure of its fault tolerance, we'll deploy a dedicated testing application, which enables to add some custom session data and to view the detailed information on a server this session is handled by. This way, stopping particular cluster instances allows ascertaining that the already running user sessions will continue being processed even in case the corresponding server fails. So, let's see it in practice.
 
@@ -125,8 +122,7 @@ As you can see, despite of the session being handled by another instance, our cu
 
 ![glassfish replication settings](https://jelastic.com/blog/wp-content/uploads/2021/09/web-container-availability1.png)
 
-Cloning Cluster for A/B Testing
--------------------------------
+## Cloning Cluster for A/B Testing
 
 When releasing new application version or just applying some essential adjustments, it's a good practice to check how the newly implemented changes could affect the service work and your users' appeal. The Jelastic PaaS allows you to accomplish such testing 'on-fly' (i.e. without service downtime and implicitly for your customers) with the **Clone Environment** option.
 ![glassfish cluster cloning](https://jelastic.com/blog/wp-content/uploads/2021/09/cloning.png)

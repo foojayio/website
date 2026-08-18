@@ -26,8 +26,7 @@ frozen: false
 
 While writing integration tests you should test with the same type of real dependencies instead of using mocks or in-memory variations of those services.
 
-Why should you test with real dependencies?
--------------------------------------------
+## Why should you test with real dependencies?
 
 Let's assume you are building a software product that uses PostgreSQL database, Kafka message broker, ElasticSearch for search capabilities, etc.
 
@@ -42,7 +41,6 @@ INSERT INTO products(code, name, price)
 VALUES (?, ?, ?) ON CONFLICT DO NOTHING;
 ```
 
-
 When you test this query with the H2 database, by default this syntax is not supported and will throw an error. You can try to run H2 with PostgreSQL compatibility mode and get it working. But, not all the PostgreSQL features are supported by H2 and every time you are writing a query you need to verify that it works with both H2 and PostgreSQL as well. This is an unnecessary effort and leads to low productivity.
 
 ### False positives:
@@ -54,7 +52,6 @@ UPDATE products
 SET name = ?, updated_at = CURRENT_TIMESTAMP()
 where code = ?
 ```
-
 
 Both of the above mentioned problems can be resolved if you test with the same type of database (ex: PostgreSQL) that you would be using in production.
 
@@ -81,13 +78,11 @@ class ProductRepositoryTest {
 }
 ```
 
-
 By configuring the special Testcontainers JDBC URL, the Testcontainers library will spin up a PostgreSQL container using postgres-15.2-alpine image and execute your tests.  
 
 Testcontainers provides support for a wide range of SQL and NoSQL databases with easy to use modules. To view all the modules available, please take a look at the [Testcontainers Modules Catalog](https://testcontainers.com/modules/).
 
-Local Development with Testcontainers
--------------------------------------
+## Local Development with Testcontainers
 
 [Spring Boot 3.1.0 introduced excellent support for Testcontainers](https://www.atomicjar.com/2023/05/spring-boot-3-1-0-testcontainers-for-testing-and-local-development/) that not only simplifies writing tests but also helps in running the application locally during the development time. Now you can start the application dependencies such as databases, message brokers, etc as Docker containers using Testcontainers and run the application.
 
@@ -110,9 +105,7 @@ public class TestApplication {
 }
 ```
 
-
-Getting Started with Testcontainers Desktop
--------------------------------------------
+## Getting Started with Testcontainers Desktop
 
 [AtomicJar](https://www.atomicjar.com/) just introduced [Testcontainers Desktop](https://testcontainers.com/desktop/) which is a free companion app for the Testcontainers libraries that makes local development and testing with real dependencies easier.
 
@@ -149,7 +142,6 @@ ports = [
 selector.image-names = ["postgres"]
 ```
 
-
 We can configure the image selector by listing all the supported Docker image name(s). You can configure any PostgreSQL compatible images. We are mapping the PostgreSQL container's port 5432 onto the host's port 5432.
 
 Now you should be able to connect to the PostgreSQL database running as a Docker container from the command line using the following command:
@@ -157,7 +149,6 @@ Now you should be able to connect to the PostgreSQL database running as a Docker
 ```bash
 $ psql -h localhost -p 5432 -U test -d test
 ```
-
 
 The ability to use fixed ports and connect to those services is very helpful during the development time without trading off the dynamic configuration Testcontainers provide or the ability to run your tests in parallel.
 
@@ -178,15 +169,13 @@ PostgreSQLContainer<?> postgresContainer() {
 }
 ```
 
-
 When you spin up a container with reuse, a hash is calculated based on the container's configuration. When you request another container with the same configuration which yields the same hash value, then the existing container will be reused instead of creating a new container.
 
 Now if you run the test and then execute `docker ps` command you can see the Postgres container still running. If you run the same test or any other test using a Postgres container with the same specification then the existing container will be reused.
 
 Please note that, as an experimental capability, the implementation of reusable containers currently differs across Testcontainers libraries. See the [release note](https://newsletter.testcontainers.com/announcements/enable-reusable-containers-with-a-single-click) for the main limitations.
 
-Summary
--------
+## Summary
 
 Testcontainers libraries help you not only for testing your application with real dependencies but also to speed up and simplify local development. Various features of the free Testcontainers Desktop app greatly simplify running and debugging your application and Testcontainers based tests right from your IDE.
 

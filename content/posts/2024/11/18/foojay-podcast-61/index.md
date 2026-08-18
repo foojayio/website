@@ -24,13 +24,11 @@ At Devoxx and JFall, we talked with Georgios Diamantopoulos, Lutske de Leeuw, To
 
 There are many topics to handle, like the impact of AI on how valuable we feel, how COVID-19 impacted careers, how we work in and with remote teams, how to get to know new colleagues and much more. Yes, there is even a sidestep where we compared the Java and .NET communities.
 
-Video
------
+## Video
 
 {{< youtube OYX_X2x3vl8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Georgios Diamantopoulos
 
@@ -64,8 +61,7 @@ Guests
 * <https://www.linkedin.com/in/rijosam19/>
 * <https://github.com/Rijosam>
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests
 

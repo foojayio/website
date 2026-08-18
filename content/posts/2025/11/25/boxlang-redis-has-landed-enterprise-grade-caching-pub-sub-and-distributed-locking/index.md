@@ -24,13 +24,11 @@ frozen: false
 
 We're thrilled to announce the release of the **BoxLang Redis Module** (`bx-redis`) - a powerful addition to BoxLang that brings enterprise-grade Redis functionality directly into your applications. Whether you're building distributed systems, implementing real-time messaging, or need high-performance caching, this module has you covered.
 
-🎯 What is the Redis Module?
-----------------------------
+## 🎯 What is the Redis Module?
 
 The BoxLang Redis Module provides native Redis functionality, enabling you to connect to Redis instances, clusters, or Sentinel setups with ease. It seamlessly integrates with BoxLang's caching infrastructure while adding powerful new capabilities like publish/subscribe messaging and distributed locking.
 
-⚡ Key Features
---------------
+## ⚡ Key Features
 
 * **Native Redis Integration** - Connect to standalone Redis, Redis Cluster, or Redis Sentinel
 * **Built-in Cache Provider** - Drop-in replacement for any BoxLang cache
@@ -40,8 +38,7 @@ The BoxLang Redis Module provides native Redis functionality, enabling you to co
 * **High Performance** - Connection pooling and optimized operations
 * **Flexible Configuration** - Environment-based settings and multiple cache instances
 
-📦 Getting Started
-------------------
+## 📦 Getting Started
 
 Installing the Redis module is straightforward. It's available to [BoxLang +/++ subscribers](https://www.boxlang.io/plans "BoxLang +/++ subscribers") and includes a 60-day trial so you can explore all features risk-free!
 
@@ -53,9 +50,7 @@ install-bx-module bx-redis
 box install bx-redis
 ```
 
-
-🔧 Quick Configuration
-----------------------
+## 🔧 Quick Configuration
 
 Configure your Redis cache in `Application.bx`:
 
@@ -82,11 +77,9 @@ component {
 }
 ```
 
-
 That's it! Your BoxLang application is now Redis-enabled and all sessions will be distributed to Redis.
 
-💾 Powerful Caching Made Simple
--------------------------------
+## 💾 Powerful Caching Made Simple
 
 The Redis module works seamlessly with BoxLang's standard caching approaches:
 
@@ -117,7 +110,6 @@ user = cache( "redis" ).getOrSet(
 );
 ```
 
-
 #### Query Caching
 
 Speed up your database operations with transparent query caching:
@@ -146,9 +138,7 @@ function getCachedQuery( sql, params = {}, timeout = 1800 ) {
 }
 ```
 
-
-📢 Publish/Subscribe: Real-Time Messaging
------------------------------------------
+## 📢 Publish/Subscribe: Real-Time Messaging
 
 One of the most exciting features is Redis Pub/Sub support, enabling real-time event-driven architectures:
 
@@ -176,7 +166,6 @@ redisPublish(
 );
 ```
 
-
 #### Subscribing to Channels
 
 Create a subscriber using a closure:
@@ -196,7 +185,6 @@ redisSubscribe(
     [ "notifications", "alerts", "user-events" ]
 );
 ```
-
 
 Or use a listener class for complex scenarios:
 
@@ -245,7 +233,6 @@ var subscription = redisSubscribe(
 );
 ```
 
-
 Real-World Pub/Sub Example: Cache Invalidation
 
 ```java
@@ -271,9 +258,7 @@ redisSubscribe(
 );
 ```
 
-
-🔒 Distributed Locking: Coordinate Across Servers
--------------------------------------------------
+## 🔒 Distributed Locking: Coordinate Across Servers
 
 In clustered environments, you need to prevent multiple servers from executing the same code simultaneously. The `bx:RedisLock` component makes this trivial:
 
@@ -287,7 +272,6 @@ redisLock name="processOrders" cache="redis" timeout=5 expires=30 {
     }
 }
 ```
-
 
 #### Scheduled Task Coordination
 
@@ -310,7 +294,6 @@ component {
 
 }
 ```
-
 
 #### Cache Warming Without Race Conditions
 
@@ -337,7 +320,6 @@ redisLock
 }
 ```
 
-
 #### Database Migration Coordination
 
 ```java
@@ -353,7 +335,6 @@ redisLock name="dbMigration" cache="redis" timeout=30 expires=600 {
     println( "All migrations completed" );
 }
 ```
-
 
 #### Templating Syntax Support
 
@@ -372,9 +353,7 @@ redisLock name="dbMigration" cache="redis" timeout=30 expires=600 {
 </bx:RedisLock>
 ```
 
-
-🎯 Deployment Modes
--------------------
+## 🎯 Deployment Modes
 
 The Redis module supports three deployment modes to match your infrastructure:
 
@@ -392,7 +371,6 @@ this.caches[ "redis" ] = {
     }
 };
 ```
-
 
 #### Redis Cluster
 
@@ -412,7 +390,6 @@ this.caches[ "redis" ] = {
 };
 ```
 
-
 #### Redis Sentinel
 
 For automatic failover with master-slave replication:
@@ -429,9 +406,7 @@ this.caches[ "redis" ] = {
 };
 ```
 
-
-📚 Comprehensive Documentation
-------------------------------
+## 📚 Comprehensive Documentation
 
 The Redis module is fully documented with detailed guides covering:
 
@@ -451,8 +426,7 @@ Access the complete documentation at:
 You can even connect to our documentation via the Model Context Protocol (MCP):  
 [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/readme/release-history/1.6.0?q=Model+Context+Protocol#boxlang-documentation-mcp-server "https://boxlang.ortusbooks.com/~gitbook/mcp")
 
-💡 Use Cases
-------------
+## 💡 Use Cases
 
 The Redis module excels in these scenarios:
 
@@ -465,8 +439,7 @@ The Redis module excels in these scenarios:
 * **Rate Limiting** - Implement distributed rate limits
 * **Job Queues** - Coordinate background processing
 
-🎁 Get Access
--------------
+## 🎁 Get Access
 
 bx-ldap is available exclusively to **BoxLang +/++ subscribers**. Join our subscription program to access this and other premium modules that extend BoxLang's capabilities:
 

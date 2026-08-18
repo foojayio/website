@@ -22,8 +22,7 @@ frozen: false
 
 Git has become a fundamental part of our developers' daily routine that it's hard to remember our lives without it. And yet, most of us use a limited set of commands **and** options. Today, I want to focus on two commands most developers probably use **every** day and look at the defaults behind them.
 
-git push
---------
+## git push
 
 After `git commit`, `git push` is probably the second most used command. I don't think I'll teach you anything with this excerpt from the documentation:
 > git-push - Update remote refs along with associated objects
@@ -38,7 +37,6 @@ Also, the default assumes a *single* upstream named `origin`. If you want to pus
 git push other_upstream
 ```
 
-
 Likewise, the default assumes pushing to a remote branch with the same name. To push to another branch, we also must specify it along with the upstream.
 
 ```bash
@@ -46,9 +44,7 @@ git checkout my_branch
 git push other_upstream master
 ```
 
-
-git rebase
-----------
+## git rebase
 
 The default `git push` options are straightforward. The default ones for `git rebase` aren't the reason why we probably use one of them all the time.
 > git-rebase - Reapply commits on top of another base tip
@@ -65,14 +61,12 @@ o---o---o---o master
       o---o---o branch1 [HEAD]
 ```
 
-
 Nothing happens. Or more precisely, "it depends"™. If we didn't set an `origin` remote, `git` complains.
 
 ```
 There is no tracking information for the current branch.
 Please specify which branch you want to rebase against.
 ```
-
 
 Imagine the following remote repo:
 
@@ -84,14 +78,12 @@ o---o---o---o master
       o---o---o---o branch1 [HEAD]
 ```
 
-
 Let's configure the remote and bind the local branch to the remote branch.
 
 ```bash
 git fetch
 git branch --set-upstream-to=origin/branch1
 ```
-
 
 If we call `rebase` again, git tries to apply every commit from the **remote** branch, starting from the root one. Since `H` doesn't exist on the local branch, it just adds it to the tip of it.
 
@@ -100,7 +92,6 @@ Let's try with `master` and test again:
 ```bash
 git rebase -i master
 ```
-
 
 `-i` allows rebasing interactively.  
 
@@ -112,7 +103,6 @@ pick 93af602 F
 pick 7f79811 G
 pick c6f853b H
 ```
-
 
 As per the documentation, the command switched branch, got the commits from `master`, and now applies the commits in the current branch.
 
@@ -126,7 +116,6 @@ o---o---o---o master
               o---o---o---o branch1 [HEAD]
 ```
 
-
 Git is a huge beast. Most developers, including me, only use a fraction of its features. In this post, we described the default of two of the most common Git commands. I hope it sheds some light on them.
 
 **To go further:**
@@ -136,7 +125,5 @@ Git is a huge beast. Most developers, including me, only use a fraction of its f
 * [The multiple usages of git rebase --onto](https://blog.frankel.ch/multiple-usages-git-rebase-onto/)
 * [Why does git rebase with no arguments work the way that it does?](https://stackoverflow.com/questions/50643026/why-does-git-rebase-with-no-arguments-work-the-way-that-it-does)
 * [What does command 'git rebase' mean when no arguments followed?](https://superuser.com/questions/788912/what-does-command-git-rebase-mean-when-no-arguments-followed)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/git-default-options/) on July 27^th^, 2025*

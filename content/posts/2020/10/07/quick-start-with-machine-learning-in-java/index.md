@@ -53,5 +53,4 @@ BufferedImage image = ImageIO.read(new File(input.getFile()));
 Map<String, Float> results = classifier.classify(image);
 ```
 
-
 For detailed step-by-step instructions and examples, see the [getting started guide](https://github.com/JavaVisRec/visrec-api/wiki/Getting-Started-Guide).

@@ -28,8 +28,7 @@ For a quick start, we have prepared a package with [Maven](https://maven.apache.
 
 ![jelastic spring boot microservices tutorial](https://jelastic.com/blog/wp-content/uploads/2018/08/maven-microservice-package.png)
 
-Installation of Spring Boot Fat (Uber) Jar Builder
---------------------------------------------------
+## Installation of Spring Boot Fat (Uber) Jar Builder
 
 To get started, log in to Jelastic dashboard, find the *Spring Boot Fat* *Jar* *Builder* in the **Marketplace** and click **Install**.
 
@@ -53,8 +52,7 @@ Afterwards, you can make sure, that application is up and running by pressing **
 
 ![spring boot uber jar](https://jelastic.com/blog/wp-content/uploads/2018/08/fat-jar-jelastic-url.png)
 
-Running Multiple Microservices with Spring Boot Projects
---------------------------------------------------------
+## Running Multiple Microservices with Spring Boot Projects
 
 You can use just created Maven node for building extra projects and deploying them to different environments to get a set of distributed microservices.
 

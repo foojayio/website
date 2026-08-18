@@ -24,13 +24,11 @@ This is the first Foojay podcast in Spanish. It's also the shortest one and the 
 
 Stay tuned and subscribe to the podcast in your favorite app or on YouTube. We're taking a short break and will be back in September with the launch of Java 25!
 
-Video
------
+## Video
 
 {{< youtube YaOrWQqG1tk >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction  
 

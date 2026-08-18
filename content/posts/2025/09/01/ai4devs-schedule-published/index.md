@@ -24,19 +24,13 @@ From live coding sessions to hands-on workshops, from security insights to multi
 
 Whether you're already building AI-powered systems or just starting to explore what's possible, this year's edition has something for you. Let's take a look at the highlights.
 
-
-
-📅 Event Details
-----------------
+## 📅 Event Details
 
 **Date:** 19 September 2025  
 **Location:** iO Campus Amsterdam, Spaklerweg 52  
 **Time:** 10:00 -- 19:00 (Keynotes → Sessions → Drinks \& Networking)
 
-
-
-🔎 A Program for Every Developer
---------------------------------
+## 🔎 A Program for Every Developer
 
 This year's schedule brings together sessions across **Python, Java, Data Science, and JavaScript** .  
 
@@ -56,10 +50,7 @@ Attendees will also find deep dives into:
 * **Collaboration \& productivity**: AI-powered developer assistance, teamwork in the age of AI
 * **Cutting-edge tools**: MCP protocol, API endpoint generation, Brokk platform
 
-
-
-🎤 Meet the Speakers \& Sessions
---------------------------------
+## 🎤 Meet the Speakers \& Sessions
 
 Here's a quick snapshot of who's speaking and what they'll be covering:
 
@@ -83,10 +74,7 @@ Here's a quick snapshot of who's speaking and what they'll be covering:
 
 👉 Full program available on the official site: [amsterdam.ai4devs.io/program](https://amsterdam.ai4devs.io/program)
 
-
-
-🌟 Why This Year is Special
----------------------------
+## 🌟 Why This Year is Special
 
 * **Code-first learning**: Every session has at least 50% code.
 * **Top-tier speakers**: From Java Champions and CTOs to engineers shaping AI frameworks.
@@ -95,13 +83,8 @@ Here's a quick snapshot of who's speaking and what they'll be covering:
 
 This is **not** a fluffy AI hype conference---it's a developer-first gathering focused on what you can actually build and ship.
 
-
-
-🔗 Join Us
-----------
+## 🔗 Join Us
 
 Ready to dive in?  
 
 Check out the full schedule and grab your spot here: [AI4Devs Amsterdam 2025](https://amsterdam.ai4devs.io/)
-
-

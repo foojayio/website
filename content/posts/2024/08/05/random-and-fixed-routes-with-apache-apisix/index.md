@@ -57,7 +57,6 @@ routes:
     upstream_id: 1
 ```
 
-
 ```bash
 curl --resolve foo.com:127.0.0.1 http://foo.com/hello            #1
 curl -X POST --resolve foo.com:127.0.0.1 http://foo.com/hello    #2
@@ -65,7 +64,6 @@ curl -X PUT --resolve foo.com:127.0.0.1 http://foo.com/hello     #2
 curl --resolve bar.com:127.0.0.1 http://bar.com/hello            #3
 curl --resolve foo.com:127.0.0.1 http://foo.com/hello/john       #4
 ```
-
 
 1. Matches host, method as `curl` defaults to `GET`, and path
 2. Matches host, method, and path
@@ -106,7 +104,6 @@ $ curl http://127.0.0.1:9180/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f
 }'
 ```
 
-
 >
 > This route will require the request header `host` equal `iresty.com`, request cookie key `_device_id` equal `a66f0cdc4ba2df8c096f74c9110163a9`, etc. You can learn more at [radixtree-new](https://github.com/api7/lua-resty-radixtree#new).
 
@@ -123,7 +120,6 @@ routes:
     vars: [[ "cookie_site", "==", "en" ]]             #2
     upstream_id: 2
 ```
-
 
 1. Match if a cookie named `site` has value `fr`
 2. Match if a cookie named `site` has value `en`
@@ -152,7 +148,6 @@ The third route is the following:
               weight: 50                            #2
 ```
 
-
 1. The weight of the upstream `1` is `50`
 2. The upstream `2` weight is also `50` out of the total weight sum. It's a half-half chance of APISIX forwarding it to either upstream
 
@@ -167,7 +162,6 @@ For example, if APISIX evaluates the last route first, it will forward the reque
     priority: -1
 #...
 ```
-
 
 You can try the setup in a browser or with `curl`. With curl, we can set the "first" request like this:
 
@@ -196,7 +190,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Setting cookie based on a condition](https://github.com/apache/apisix/issues/11279)
 * [router-radixtree](https://apisix.apache.org/docs/apisix/router-radixtree/)
 * [Route Admin API](https://apisix.apache.org/docs/apisix/admin-api/#route-api)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/fixed-routes-apisix/) on June 9^th^, 2024*

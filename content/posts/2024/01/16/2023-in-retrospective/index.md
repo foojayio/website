@@ -22,8 +22,7 @@ frozen: false
 
 Before diving into our safe technological world, my thoughts go to Ukraine, to my friends who had to flee their own country, to other friends who fought on the front to defend it from an imperial power, and to all victims of an old kleptocrat who clings to power despite the cost to others. The free world needs to support Ukraine more. I hope 2024 will be the year of Ukrainian victory.
 
-The revolution
---------------
+## The revolution
 
 Last year, I kept the post focused on what I did. However, AI is pervasive in our tech world, if not the whole world, and deserves a dedicated section. Nobody even remotely connected to tech can ignore the buzz surrounding AI. Even friends and families who don't work near tech probably talk about it. So far, I didn't weave any AI-related thing into any of my talks, despite the huge incentive to do so: having AI in your proposal vastly increases your chances of being selected.
 
@@ -36,8 +35,7 @@ And yet, it doesn't mean that I'm not playing with it on a personal level. Here'
 
 All in all, I'm far from impressed by the current state of AI. However, I like Copilot a lot: I prefer rare advice, which is relevant, than the opposite.
 
-Technical content
------------------
+## Technical content
 
 Next February will mark the two-year milestone that I'm working for: [API7.ai](https://api7.ai/) on [Apache APISIX](https://apisix.apache.org/). I'm still very pleased about both. It allows me to do things I like a lot, such as writing posts and giving talks.
 
@@ -69,8 +67,7 @@ As above, numbers are much less important than the trend. Growth visibly happens
 
 Finally, I started a weekly newsletter, unoriginally named A Java Geek weekly. So far, I've written a [couple of them](https://blog.frankel.ch/java-geek-weekly). I list the posts and videos I found interesting during the week. Note that they contain the same links I post on [LinkedIn](https://www.linkedin.com/in/nicolasfrankel/), [Mastodon](https://mastodon.top/@frankel), and [BlueSky](https://bsky.app/profile/nfrankel.bsky.social), with a bit more content, either a summary or my opinion.
 
-Open Source contributions
--------------------------
+## Open Source contributions
 
 In 2023, after over twenty years in software, I finally became [an Apache committer](https://community.apache.org/contributors/becomingacommitter.html)! I'm both excited and impressed; it's like belonging to a group of mythical beings I'd only heard about.
 
@@ -86,10 +83,7 @@ Here's the GitHub summary:
 
 ](https://github.com/nfrankel/)
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 Last year, my resolutions were:
 > * To deepen my understanding of the Apache APISIX ecosystem
@@ -99,8 +93,6 @@ Last year, my resolutions were:
 I fulfilled the two first goals but unfortunately failed the last item. I have only created two new talks, both based on previous posts. I'll keep them secret for now; they should appear soon on my [Speaking](https://blog.frankel.ch/speaking/) page in case they are selected.
 
 I lack imagination, so I'll keep the same goals for this year as last year's and add exploring the API7.ai ecosystem as well. Let's see how it fares. Happy New Year!
-
-
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/2023-retrospective/) on January 7^th^, 2024*
 

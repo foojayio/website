@@ -24,16 +24,13 @@ I recall the C course I took during my first semester at university. I wanted to
 
 Since then, I've been curious about the internals of technologies. That way, I'll be able to appreciate it more. On that note, I'd like to talk about how the JVM works internally today.
 
-How the JVM Works
------------------
+## How the JVM Works
 
 Java code is compiled into bytecode, which is then executed by Java's virtual machine. This produces an intermediate language (IL), which is neither human-readable nor machine-executable. As a result, only the virtual machine comprehends it.
 
 The class loader is where the JVM begins and where all of the verification processes begin. Any Java class must pass through the classloader. The JVM just won't run any arbitrary bytecode. Thanks to this, the JVM will be able to avoid any runtime checking in the future. After that, it uses all of the code that is contained within the method cache area.
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-57606" src="Screen-Shot-2022-09-12-at-5.26.11-PM-700x332.png" alt="" width="700" height="332">
-
-<br />
 
 Then, the method cache feeds bytecodes into the interpreter. The Java interpreter converts or translates the bytecode into the machine-understandable format, i.e., machine code; after that, the machine code interacts with the operating system. The interpreter basically executes the byte code, and it keeps doing it. Our Java program can run indefinitely here. Java code does not necessarily require JIT compilation. The interpreter itself is quite capable of running our Java code.
 
@@ -45,8 +42,7 @@ This conclusion, while intuitive, is incorrect, but that is where the JIT compil
 
 Now the question gets to be, what does the JIT compiler do?
 
-What Does the JIT Compiler Do?
-------------------------------
+## What Does the JIT Compiler Do?
 
 Its first job is to sit around and just watch the code. It profiles code. It watches how the code is being executed. If a particular method always returns the same value, does it require calling the method at all?
 

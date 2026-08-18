@@ -9,8 +9,7 @@ Latency is the time between the initiation of a procedure and the completion of 
 
 In the realm of software, there are many types of latency. No application can possibly be truly real-time (that is, zero latency: zero time elapses between the initiation of the procedure and the delivery of the result). Still, the objective of all high-performance applications is to be as close to real-time as possible.
 
-Types of Latency
-----------------
+## Types of Latency
 
 An interesting article in InfoWorld defined [4 sources of latency](https://www.infoworld.com/article/3235340/4-sources-of-latency-and-how-to-avoid-them.html):
 
@@ -29,14 +28,11 @@ What you, as a developer, have most control over is your code. But, even here, t
 
 In addition, input data sets can affect latency, particularly in cases where the software is performing mathematical analysis of a data stream. Sometimes the input data set has an easy solution, and complex code is never entered. Other times the input data requires a much more complex path through the software, resulting in significantly higher software processing time. This can be the case, for example, in financial trading systems or scientific data analysis systems like weather forecasting or analyzing military satellite data streams. Here is where second-level JVM JIT compilers excel. Languages like C/C++ and Python cannot adapt and optimize for changing data conditions. JVMs that use adaptive compilation strategies can.
 
-Software Latency Example
-------------------------
+## Software Latency Example
 
 Here is a simple graphical example of what latency can look like for a typical high-performance application. We have a process being initiated repeatedly over time, with latency results that are mostly small, mostly within a narrow range; but occasionally very high latency occurs. For high-performance applications, grouping latency by percentile often produces a plot similar to this:
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-30904" src="https://www.azul.com/files/Application_Latency_Percentile-300x240.png" sizes="(max-width: 300px) 100vw, 300px" srcset="https://www.azul.com/files/Application_Latency_Percentile-300x240.png 300w, https://www.azul.com/files/Application_Latency_Percentile.png 489w" alt="" width="300" height="240">
-
-<br />
 
 The Y-axis represents some arbitrary units of time that represent your application's typical performance. The X-axis is the result of grouping all the latency results over a period of time into percentiles. The blue line is the latency for each percentile. The orange line is the average latency over the entire time span.
 
@@ -46,8 +42,7 @@ Here's the problem. If your application has acceptable latency the great majorit
 
 If your customers need your product's result very quickly in every instance when they use it, but sometimes they are left stranded with long waits, they'll switch to your competitor, even though the competitor's average latency might be higher than yours. Your tail latency is much higher than your competitor's tail latency, so it's safer from a business point of view for your customers who need very consistent service to switch to your competitor's product.
 
-The Cost of High Tail Latency: Use Cases
-----------------------------------------
+## The Cost of High Tail Latency: Use Cases
 
 Let's consider a few use cases where high tail latency is totally unacceptable, even intolerable.
 

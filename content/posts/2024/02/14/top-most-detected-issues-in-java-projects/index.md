@@ -29,10 +29,6 @@ From the SonarLint telemetry for the last 2 years, with more than 2.5 million is
 
 Although some issues may seem trivial, they can have a huge impact on the software delivered in terms of security, performance, and maintenance. Most of these issues are easy to follow, so it shouldn't be an issue to not implement them, considering the huge benefit of it and the low effort to put in.
 
-<br />
-
-<br />
-
 And here they are...
 
 1. Code commented out
@@ -54,7 +50,6 @@ public void println(String x) {
    }
 }
 ```
-
 
 **Hint**: check the commented-out code and remove it if it no longer applies to the submitted feature or uncomment it if it was a temporary disabling
 
@@ -81,7 +76,6 @@ SslHandler sslHandler = configureClientSSLOnDemand();
      }
 ```
 
-
 **Hint**: do not add new TODO blocks and implement the feature before submitting the code or record these tasks in the proper task manager to tackle them in the future by the team.
 
 3. String literals duplicated
@@ -98,7 +92,6 @@ public void run() {
 }
 ```
 
-
 **Hint**: use constants to store string literals, it will make refactoring easier and improve the consistency of the code base.
 
 ```
@@ -111,7 +104,6 @@ public void run() {
   release(ACTION);
 }
 ```
-
 
 4. Cognitive Complexity of functions should not be too high
 -----------------------------------------------------------
@@ -135,7 +127,6 @@ int sumOfPrimes(int max) {                        // +1
   return total;
 }
 ```
-
 
 The key takeout of this issue is that usually projects are hard to read and understand, and this will impact understanding its intention and tackling its maintenance and evolution. When you come across code that has high cognitive complexity you should invest in refactoring the code so that your code-base becomes more understandable and maintainable over time.
 
@@ -164,7 +155,6 @@ public class MyClass {
 }
 ```
 
-
 **Hint**: check the unused code and remove the one that is no longer used or consider if there's missing code that would use that dead elements.
 
 6. Raw types should not be used
@@ -178,7 +168,6 @@ List myList;
 Set mySet;
 ```
 
-
 **Hint**: use specific types that will give the right idea to the users of those variables what is really expected, and ensure no surprises appear during runtime.
 
 ```
@@ -186,7 +175,6 @@ Set mySet;
 List<String> myList;
 Set<? extends Number> mySet;
 ```
-
 
 7. Generic exceptions should never be thrown
 --------------------------------------------
@@ -206,7 +194,6 @@ public void foo(String bar) {
 }
 ```
 
-
 **Hint**: create a custom system of exceptions that will provide enough information to the caller in order to decide what to do, having a detailed and differentiated list of catches.
 
 ```
@@ -222,9 +209,7 @@ public void fooException(String bar) {
 }
 ```
 
-
-Conclusions
------------
+## Conclusions
 
 We've seen some of the issues detected on all the projects analyzed by SonarLint, that are impacting not only the intentionality of the code but also the consistency and the adaptability of the software produced.
 

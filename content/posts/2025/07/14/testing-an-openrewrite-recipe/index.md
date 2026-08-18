@@ -28,8 +28,7 @@ I then improved the [recipe to compute the root automatically](https://blog.fran
 
 However, my testing approach was wrong. In this post, I want to describe my mistakes, and how I fixed them.
 
-The naive approach
-------------------
+## The naive approach
 
 I originally approached the testing of the recipe in a very naive way, to say the least. As explained in the [first post](https://blog.frankel.ch/openrewrite-recipes/1/#testing-the-recipe), I used OpenRewrite's low-level APIs. Here's what I wrote:
 
@@ -53,7 +52,6 @@ val expectedPath = Paths.get(expectedPath)
 assertEquals(expectedPath, (result as SourceFile).sourcePath)                    //6
 ```
 
-
 1. Build the Kotlin parser
 2. Set an execution context; I had to choose and the in-memory one was the easiest.
 3. Boilerplate to get the single compilation unit from the stream
@@ -76,14 +74,12 @@ val result1 = recipe.getVisitor(acc).visit(modifiedCu1, context)                
 val result2 = recipe.getVisitor(acc).visit(modifiedCu2, context)                 //2
 ```
 
-
 1. Get the scanner and visit source files to compute the root
 2. Get the visitor and visit source files to move the file
 
 It worked, but I admit it was a lucky guess. More involved recipes would require a deeper knowledge of how OpenRewrite works, with more potential bugs. Fortunately, OpenRewrite provides the means to keep the testing code at the right level of abstraction.
 
-The nominal approach
---------------------
+## The nominal approach
 
 The nominal approach involves a couple of out-of-the-box classes; it requires a new dependency. I didn't do it before, so now is a good time: let's introduce a to align all of OpenRewrite's dependencies:
 
@@ -101,7 +97,6 @@ The nominal approach involves a couple of out-of-the-box classes; it requires a 
 </dependencyManagement>
 ```
 
-
 It's now possible to add the dependency without a version, as Maven resolves it from the above BOM.
 
 ```xml
@@ -111,7 +106,6 @@ It's now possible to add the dependency without a version, as Maven resolves it 
     <scope>test</scope>
 </dependency>
 ```
-
 
 This brings a couple of new classes to the project:
 
@@ -144,7 +138,6 @@ rewriteRun(                                                                     
 )
 ```
 
-
 1. Run the recipe
 2. `kotlin` transform the string into a `SourceSpecs`
 3. I'm using Kotlin, but `java` does the same for regular Java projects
@@ -166,16 +159,13 @@ class FlattenStructureComputeRootPackageTest : RewriteTest {
 }
 ```
 
-
-Don't forget cycles
--------------------
+## Don't forget cycles
 
 If you followed the above instructions, there's a high chance your test fails with this error message:
 
 ```
 java.lang.AssertionError: Expected recipe to complete in 0 cycle, but took 1 cycle. This usually indicates the recipe is making changes after it should have stabilized.
 ```
-
 
 We need to turn to the documentation to understand this cryptic message:
 > The recipes in the execution pipeline may produce changes that in turn cause another recipe to do further work. As a result, the pipeline may perform multiple passes (or cycles) over all the recipes in the pipeline again until either no changes are made in a pass or some maximum number of passes is reached (by default 3). This allows recipes to respond to changes made by other recipes which execute after them in the pipeline.
@@ -192,12 +182,10 @@ override fun defaults(spec: RecipeSpec) {
 }
 ```
 
-
 1. Set how many cycles the recipe should run
 2. Set to 0 if the recipe isn't expected to make changes
 
-Criticisms
-----------
+## Criticisms
 
 I like what the OpenRewrite testing classes bring, but I have two criticisms.
 
@@ -222,7 +210,6 @@ public class RecipeSpec {
 }
 ```
 
-
 1. Why two cycles by default? Shouldn't one be enough in most cases?
 2. Why `cycles - 1` by default?
 
@@ -234,8 +221,7 @@ My second criticism is about how the provided testing classes make you structure
 
 With OpenRewrite's abstractions, the structure is widely different from the above.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I migrated my *ad hoc* test code to rely on OpenRewrite's provided classes. Even though they are not exempt from criticism, they offer a solid abstraction layer and make tests more maintainable.
 
@@ -246,8 +232,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Recipe testing](https://docs.openrewrite.org/authoring-recipes/recipe-testing)
 * [Execution Cycles](https://docs.openrewrite.org/concepts-and-explanations/recipes#execution-cycles)
 * [How to resolve expected recipe cycle mismatch](https://bitflippers.dev/how-to-resolve-expected-recipe-cycle-mismatch)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/3/) on June 22^nd^, 2025*
 

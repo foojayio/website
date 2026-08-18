@@ -29,8 +29,7 @@ Yet there are three hidden gems of the Java Debugging (JDWP) agent that allow yo
 
 Before I tell you more about the specific options, I want to start with the basics of how to apply them.
 
-Option Application
-------------------
+## Option Application
 
 When you debug remotely in your IDE (IntelliJ IDEA in my case), the "Debug Configurations" dialog tells you which options you should pass to your remote JVM:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/image.png)
@@ -41,8 +40,7 @@ All options only work correctly in the server mode (server=y) of the JDWP agent 
 
 I'm now showing you how the three hidden gems work:
 
-JCmd triggered debugging
-------------------------
+## JCmd triggered debugging
 
 There are often cases where the code that you want to debug is executed later in your program's run or after a specific issue appears. So don't waste time running the debugging session from the start of your program, but use the `onjcmd=y` option to tell the JDWP agent to wait with the debugging session till it is triggered via `jcmd`:
 
@@ -58,7 +56,6 @@ Transport : dt_socket
 Address : *:5005
 ```
 
-
 [jps](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jps.html) is your friend if you want to find the process id of an already running JVM.
 
 I created a sample class in my [java-dbg](https://github.com/parttimenerd/java-dbg) repository on GitHub with [a small sample program](https://github.com/parttimenerd/java-dbg/blob/main/src/test/java/OnThrowAndJCmd.java) for this article. To use JCmd triggered with our IDE, we first have to create a remote debug configuration (see previous section); we can then start the sample program in the shell and trigger the start of the debugging session. Then, we start the remote debug configuration in the IDE and debug our program:
@@ -68,8 +65,7 @@ A similar feature [long existed](https://mail.openjdk.org/pipermail/serviceabili
 
 *Disclaimer: I'm part of this magnificent team, albeit not in 2019.*
 
-Exception triggered debugging
------------------------------
+## Exception triggered debugging
 
 Far older than `jcmd` triggered are exception-triggered debugging sessions. There are two types:
 
@@ -86,14 +82,12 @@ Using both trigger types is similar to the JCmd triggered debugging:
  ➜ java "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005,onuncaught=y,launch=exit" src/test/java/OnThrowAndJCmd.java
 ```
 
-
 If you're okay with using [jdb](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdb.html), you can also use the `launch` option to call a script that starts `jdb` in a new [tmux](https://github.com/tmux/tmux/wiki) session, in our case, [tmux_jdb.sh](https://github.com/parttimenerd/java-dbg/blob/main/tmux_jdb.sh):
 
 ```bash
 #!/bin/sh
 tmux new-session -d -s jdb -- jdb -attach $2
 ```
-
 
 We run our application using the JDWP agent with the `onthrow=Ex,launch=sh tmux_jdb.sh` option to start the `jdb` the first time the `Ex` exception is thrown and attach to the `tmux` session:
 
@@ -102,7 +96,6 @@ We run our application using the JDWP agent with the `onthrow=Ex,launch=sh tmux_
 # in another console after the exception is thrown
 ➜ tmux attach -t jdb
 ```
-
 
 ![](https://mostlynerdless.de/wp-content/uploads/2023/10/image-3.png)
 
@@ -113,8 +106,7 @@ Debugging a specific exception has never been easier.
 
 *jdb and the JDWP on\* options aren't as widely used as graphical debuggers, so you might still find some bugs. I don't know whether the stack trace in the second-to-last screenshot is a bug. Feel free to comment if you know the answer.*
 
-How to discover these features
-------------------------------
+## How to discover these features
 
 You can either be like me and just drop into the JDK source and look into the [debugInit.c file](https://github.com/openjdk/jdk/blob/287b24322135b54641f013970c4545ce069c4350/src/jdk.jdwp.agent/share/native/libjdwp/debugInit.c#L1249), the [official documentation](https://docs.oracle.com/en/java/javase/21/docs/specs/jpda/conninv.html), or you use `help` option, which prints the following with JDK 21:
 
@@ -167,11 +159,9 @@ Warnings
         java -Xrunjdwp:[help]|[<option>=<value>, ...]
 ```
 
-
 Of course, this only gives you a glance at the options, so reading the source code still revealed much of what I had before.
 
-Conclusion
-----------
+## Conclusion
 
 Hidden gems are everywhere in the Java ecosystem, even in widely used tools like debugging agents.
 

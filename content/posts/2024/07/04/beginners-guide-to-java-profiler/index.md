@@ -33,8 +33,7 @@ This is a perfect use case for profilers. They offer a bird's eye view of arbitr
 
 Many people believe that they don't need to learn how to profile as long as they don't write high-load applications. In the example, we'll see how we can benefit from profiling even when dealing with very simple apps.
 
-Example application
--------------------
+## Example application
 
 Let's say we have the following program:
 
@@ -75,9 +74,6 @@ public class CountEvents {
 }
 ```
 
-
-<br />
-
 The program repeatedly tries to create a path in the file system using `createDirectories()` from NIO2. Then we measure the throughput using an improvised benchmark.
 
 Every time a task runs, the benchmark logic stores the current timestamp to a collection and removes all timestamps that point to a time earlier than the current time minus some interval. This makes it possible to find out how many events occurred during this time interval by just querying the collection. This benchmark is supposed to help us evaluate the performance of the `createDirectories()` method.
@@ -89,11 +85,9 @@ Average count: 6623 op
 Spent time: 1462 ms
 ```
 
-
 Let's profile it and see what's wrong.
 
-Get a snapshot
---------------
+## Get a snapshot
 
 I'm using IntelliJ Profiler because it is nicely integrated with the IDE and removes the hassle of setting everything up. If you don't have IntelliJ IDEA Ultimate, you can use another profiler. In this case, the steps might be a little bit different.
 
@@ -109,8 +103,7 @@ When the app has finished running, a popup will appear, prompting us to open the
 
 Let's open the report and see what's in it.
 
-Analyze the snapshot
---------------------
+## Analyze the snapshot
 
 The first thing we see after opening the report is the flame graph. This is essentially a summary of all sampled stacks. The more samples with the same stack the profiler has collected, the wider this stack grows on the flame graph. So, the width of the frame is roughly equivalent to the share of time spent in this state.
 
@@ -134,8 +127,7 @@ This clearly needs some looking into.
  <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/hints-dark.png" alt="Profiler hints in the editor's gutter" style="width:774px">
 </figure>
 
-Optimize the benchmark
-----------------------
+## Optimize the benchmark
 
 Seems like the code responsible for removing events from the queue is doing extra work.
 
@@ -147,7 +139,6 @@ while (events.peekFirst() < nanos - interval) {
     events.removeFirst();
 }
 ```
-
 
 Let's change the code, then profile our app once again and look at the result:
 
@@ -164,9 +155,7 @@ Average count: 14788 op
 Spent time: 639 ms
 ```
 
-
-Native profiling
-----------------
+## Native profiling
 
 Having solved the problem in the benchmark, we could stop here and pat ourselves on the back. But what's going on with our `createDirectories()` method? Is it too slow?
 
@@ -198,7 +187,6 @@ if (!Files.exists(p)) {
 }
 ```
 
-
 The program becomes lightning fast!
 
 ```
@@ -206,11 +194,9 @@ Average count: 50000 op
 Spent time: 87 ms
 ```
 
-
 It is now about 16 times faster than it originally was. This exception handling was really expensive! The results may differ depending on the hardware and the environment, but they should be impressive anyway.
 
-Snapshots' diff
----------------
+## Snapshots' diff
 
 If you are using IntelliJ Profiler, there is a handy tool that lets you visually compare two snapshots. For a detailed explanation and steps, I recommend referring to the [documentation](https://www.jetbrains.com/help/idea/compare-profiler-snapshots.html).
 
@@ -224,8 +210,7 @@ Frames missing from the newer snapshot are highlighted in green, while the new o
 
 As visible in the screenshot above, the vast majority of operations originally performed by our program were unnecessary, and we were able to eliminate them. `CountEvents.update()` is completely green, which means our first change resulted in near-complete improvement in the method's runtime. Adding `Files.exists()` was not a 100% improvement, but it effectively removed `createDirectories()` from the snapshot, only adding 60 ms to the program runtime.
 
-Conclusion
-----------
+## Conclusion
 
 In this scenario, we used a profiler to detect and fix a performance problem. We also witnessed how even a well-known API may have implications that seriously affect the execution times of a Java program. This shows us why profiling is a useful skill even if you are not optimizing for millions of transactions per second.
 

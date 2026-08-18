@@ -22,8 +22,7 @@ related_posts:
 frozen: false
 ---
 
-Hone your software design skills by implementing popular design patterns in Java
---------------------------------------------------------------------------------
+## Hone your software design skills by implementing popular design patterns in Java
 
 This book is for sale on [Amazon in Kindle and Paperback editions](https://www.amazon.de/dp/180461467X).
 
@@ -41,8 +40,7 @@ This book is for sale on [Amazon in Kindle and Paperback editions](https://www.a
 
 We'll start this post with the personal verdict of two avid readers of this book:
 
-Frank Delporte's Verdict
-------------------------
+## Frank Delporte's Verdict
 
 I've been programming since I was 10y old, but I graduated from film school as a video editor, so I never learned the "official" way to be a programmer. It was only by following courses and, most importantly, learning from colleagues that I started making "readable and maintainable" code, which is precisely the topic of this book.
 
@@ -52,8 +50,7 @@ On top of that, this book also provides a lot of extra information related to th
 
 The book's goal is to break a returning pattern many programmers go through during their careers. When you start using a programming language like Python, JavaScript, or even Java, the platform allows you to create messy code. Only when you learn and understand patterns and debugging and use a strongly typed language like Java do you start writing "real" code. When someone starts a programming career with Java and has a solid understanding of design patterns, many bad practices can be avoided.
 
-Johannes Bechberger's Verdict
------------------------------
+## Johannes Bechberger's Verdict
 
 When I first read the book's title, I thought, "another book on the good old design patterns," and wondered why I should bother reading it. But I was wrong; this book gives you far more than a short descriptive compilation of design patterns.
 
@@ -61,13 +58,11 @@ It gives you a great introduction to modern Java features and common pitfalls; t
 
 The chapters on design patterns are also significant. They give a (slightly opinionated) view of all the major design patterns, complete with small examples and examples from the JDK. These chapters feel like an encyclopedia, which I'll probably revisit occasionally whenever I need to do a more complex architecture. I had courses on design patterns in university, but I wished I had this book then to guide me through these topics.
 
-About the Author
-----------------
+## About the Author
 
 Miroslav Wengner is a Java Champion and JavaOne Rockstar with an impressive career. He contributes to OpenJDK and various open-source projects (e.g., [Robo4J](http://www.robo4j.io/)) and is an executive committee member of the [Java Community Process (JCP)](https://jcp.org/). He is a principal engineer at OpenValue and a regular conference speaker and blogger.
 
-Content
--------
+## Content
 
 The book is divided into three parts:
 
@@ -127,8 +122,7 @@ The previous chapters described the "green paths" and how to improve your code. 
 
 The unwanted autoboxing anti-pattern is one I need to remember when reviewing some of my old but still-used code...
 
-Conclusion
-----------
+## Conclusion
 
 We're impressed with the knowledge Miroslav exposes in his book.
 

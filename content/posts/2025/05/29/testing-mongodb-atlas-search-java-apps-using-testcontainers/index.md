@@ -31,9 +31,7 @@ cd mongodb-atlas-local-testcontainers
 mvn test
 ```
 
-
-What is MongoDB Atlas Search, anyway?
--------------------------------------
+## What is MongoDB Atlas Search, anyway?
 
 MongoDB Atlas Search is an extension to the built-in indexing capabilities that are part of MongoDB itself, using the awesome open source indexing and query library [Lucene](https://lucene.apache.org/). MongoDB has built a wrapper around Lucene called [mongot](https://www.mongodb.com/docs/atlas/atlas-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant#fts-architecture/).
 
@@ -78,8 +76,7 @@ MongoDB Atlas Search surfaces these Lucene capabilities in a familiar MongoDB ag
 
 MongoDB Atlas Search is an Atlas-cloud hosted service which MongoDB automatically maintains for you and runs alongside your database or on dedicated search nodes in your cluster.
 
-Local development and testing with MongoDB Atlas Search
--------------------------------------------------------
+## Local development and testing with MongoDB Atlas Search
 
 If you are building an application or service based on MongoDB Atlas Search, a crucial part of the developer experience is how to debug and test locally.
 
@@ -100,8 +97,7 @@ TestContainers is a handy unit testing library that helps you write integration 
 
 Even though we're going to be using the Java TestContainers project here, TestContainers is available for lots of languages and platforms. You can check it out on [their website](https://testcontainers.com/).
 
-Let's write some code!
-----------------------
+## Let's write some code!
 
 We'll build a simple Java data access layer with unit tests, then gradually add features and more comprehensive tests as we go.
 
@@ -171,7 +167,6 @@ public class PersonDataAccess implements AutoCloseable {
    }
 }
 ```
-
 
 So let's see how we'd use TestContainers and JUnit5 to unit test this class:
 
@@ -271,7 +266,6 @@ class PersonDataAccessTest {
 }
 ```
 
-
 There are a few really nice things to notice about the code:
 
 *@TestContainers + @Container Annotations*   
@@ -301,7 +295,6 @@ Create a stub method in the data access class:
 ```
 public List<Person> findPersonByBio(String query) {return List.of();}
 ```
-
 
 Then, we'll add the test class to invoke the stub method and test our assertions about what it should do:
 
@@ -436,7 +429,6 @@ class PersonDataAccessSearchTest {
 }
 ```
 
-
 OK, so now we have 10 people in the database before the tests run, and we've created an Atlas search index with some different field types over each of the Person document fields.
 
 Let's explain what each index field type means, and what we can do with it:
@@ -490,7 +482,6 @@ public List<Person> findPersonByBio(String query) {
 }
 ```
 
-
 You can see a couple of nice capabilities of MongoDB Atlas Search demonstrated with regular match and fuzzy matches on string indexed fields.
 
 The options we are using there control just how fuzzy our fuzzy text search can be:
@@ -534,7 +525,6 @@ This is just like making a volume mapping when running a Docker container at the
 docker run --rm -it -v $(pwd):/tmp/local -w /tmp/local --entrypoint bash mongodb/mongodb-atlas-local
 ```
 
-
 To mount a resource directory, we can just add a call to withClasspathResourceMapping to the container instance we are constructing for unit tests:
 
 ```
@@ -546,7 +536,6 @@ private static final MongoDBAtlasLocalContainer mongoDBContainer = new MongoDBAt
                BindMode.READ_WRITE
        );
 ```
-
 
 So once this container is running, the resource files under the directory /seed-data will be mounted within the container under the path /tmp/seed-data.
 
@@ -561,7 +550,6 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
        .build());
 ```
 
-
 #### Running Mongo Shell scripts
 
 You can also run Mongo Shell scripts which can be helpful for performing little maintenance tasks, applying indexes, or other tasks.
@@ -575,7 +563,6 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
        .build());
 ```
 
-
 Or you can pass a JavaScript file to execute:
 
 ```
@@ -584,7 +571,6 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
        .command(toArray("mongosh", "-f", "atlas-index-utils.js"))
        .build());
 ```
-
 
 #### Running Shell scripts
 
@@ -596,7 +582,6 @@ mongoDBContainer.execInContainer(ExecConfig.builder()
        .command(toArray("bash", "seed-data.sh"))
        .build());
 ```
-
 
 ### Loading a *mongodump* BSON database and index
 
@@ -712,7 +697,6 @@ class PersonDataAccessSearchTest {
 }
 ```
 
-
 I also tweaked the data access class `findPersonByBio()` method to cope with a larger dataset:
 
 ```
@@ -754,7 +738,6 @@ public List<Person> findPersonByBio(String query, boolean fuzzy) {
 }
 ```
 
-
 So now, we are loading our data (all 15,000 documents!) from a gzip'ed archive using the mongorestore utility on a mounted volume in the container. Then, we're loading another resource file with the MongoDB Atlas Search index mapping and creating the index over the loaded data.
 
 Having the seed data external to the code is extremely flexible and useful.
@@ -772,8 +755,7 @@ Having the mappings JSON external is also useful, for instance:
 * Local index creation: In new environments (e.g., starting a new local container to test with), you can use this index mapping to initialise the MongoDB Atlas Search indexes.
 * Production index rollout: Using a source controlled index mapping and performing a (controlled) rollout ahead of changes to software which will rely on it makes sense.
 
-Wrapping up
------------
+## Wrapping up
 
 So we've been through a few examples of how you can use the awesome TestContainers projects to enhance testing of your MongoDB Atlas Search Java apps.
 

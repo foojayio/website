@@ -37,8 +37,7 @@ I don't remember how often I saw people skimming through #1 or skipping it altog
 
 Here are a couple of anecdotes to highlight my point.
 
-"I want a Drupal"
------------------
+## "I want a Drupal"
 
 At the time, I was working for a public administration. Allow me not to disclose which one specifically. Their process mandated that **every project should involve a solution architect** to implement the above workflow.
 
@@ -50,8 +49,7 @@ Because of the bureaucratic nature, he followed the process that required a solu
 
 As a side note, people whose role is only to serve as a proxy for others have very low zero negative in organizations. Some organizations tend to attract them more than others. For example, organizations with no competition don't suffer any consequences of low ROI and tend to attract them **a lot** , *e.g.*, public administrations.
 
-.env files or not
------------------
+## .env files or not
 
 I stumbled recently upon another example. A Google engineer wrote [a post](https://dev.to/gregorygaines/stop-using-env-files-now-kp0), named quite provocatively "Stop Using .env Files Now!". In the post, he explains the problems of `.env` files and how to solve them using a configuration server.
 
@@ -66,8 +64,7 @@ To be honest, the debunking post doesn't do a better job. Both focus on their mo
 
 PS: the underlying problem is that `.env` file management doesn't scale. For an organization the size of Google, that's a big issue; for a small organization, they are fine.
 
-Microservices as the solution to a problem not many have
---------------------------------------------------------
+## Microservices as the solution to a problem not many have
 
 It's hard to ignore the Microservices craze. Many people comment on microservices' pros and cons; very few write about why they implement them.
 
@@ -86,8 +83,7 @@ Perhaps others have a different experience.
 
 In any case, it's the core problem that we need to discuss. Only then can we decide what alternatives can solve the growth of development teams.
 
-Questioning the problem in technical support
---------------------------------------------
+## Questioning the problem in technical support
 
 Even in technical support, one should first discuss the problem. Support does often straightforwardly answer the asked question. I believe that's the worst thing to do: it may skip the underlying problem altogether and provide a subpar solution.
 
@@ -100,8 +96,7 @@ Answers focus on how to remove stuff from the pom.xml because that's what the pe
 
 I'd probably offer to configure a mirror in Maven's settings.
 
-Five whys
----------
+## Five whys
 
 To fix focusing on solutions instead of problems, I think one should adopt the method of the five whys:
 > Five whys is an iterative interrogative technique used to explore the cause-and-effect relationships underlying a particular problem. The primary goal of the technique is to determine the root cause of a defect or problem by repeating the question "Why?" five times. The answer to the fifth why should reveal the root cause of the problem.
@@ -112,8 +107,7 @@ IMHO, one doesn't need five whys to talk about the problem instead of the soluti
 
 Additionally, you may notice that a non-IT solution will be the best fit in some cases. Remember that the best code is no code at all.
 
-Conclusion
-----------
+## Conclusion
 
 Engineers love to talk about their pet solutions. Yet, disagreeing about solutions with no context is useless. Agreeing on a solution without discussing the problem is even worse.
 

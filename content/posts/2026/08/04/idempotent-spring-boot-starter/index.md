@@ -23,8 +23,7 @@ related_posts:
 frozen: false
 ---
 
-The problem nobody talks about until production
------------------------------------------------
+## The problem nobody talks about until production
 
 A user taps "Pay." The request times out. Their app retries. Your server charges them twice.
 
@@ -36,8 +35,7 @@ The standard fix is to have clients send an `Idempotency-Key` header. The server
 
 I got tired of writing that boilerplate, so I built an idempotent Spring Boot starter that handles it for every endpoint at once.
 
-What the idempotent Spring Boot starter does
---------------------------------------------
+## What the idempotent Spring Boot starter does
 
 `idempotency-spring-boot-starter` adds a single annotation:
 
@@ -49,8 +47,7 @@ That's it. A duplicate request carrying the same `Idempotency-Key` header gets t
 
 Two stores are available out of the box: **Redis** (the default when detected) and **JDBC/Postgres**. You swap between them with one configuration property.
 
-What happens when things go wrong
----------------------------------
+## What happens when things go wrong
 
 The happy path is straightforward. The interesting design question is what to do when the handler throws.
 
@@ -66,8 +63,7 @@ This behavior is configurable via `idempotency.release-on` if your requirements 
 
 There is also a body fingerprint check. If a client sends the same key with a different request body, that is a client bug. The library returns `422` and never silently executes the wrong payload.
 
-Idempotent Spring Boot and Concurrent Requests: the case people forget
-----------------------------------------------------------------------
+## Idempotent Spring Boot and Concurrent Requests: the case people forget
 
 Sequential duplicates are the easy case. The interesting case is two identical requests arriving at the same time, before either has completed.
 
@@ -79,8 +75,7 @@ You can also set `on-conflict=fail_fast`. This skips the polling and returns `40
 
 One thing worth knowing from testing: a burst of 20 concurrent duplicates against an 8-thread pool caused unrelated endpoints' latency to spike from sub-50ms to over a second. No requests failed. But if your thread pool is constrained and you expect frequent duplicate bursts, `fail_fast` is the safer choice.
 
-The exactly-once caveat I chose to be loud about
-------------------------------------------------
+## The exactly-once caveat I chose to be loud about
 
 Most libraries in this space either skip this entirely or bury it in fine print. I did not want to do that.
 
@@ -94,8 +89,7 @@ For the JDBC store, exactly-once is achievable. Call `IdempotencyStore.complete(
 
 But `@Idempotent` + `@Transactional` on the same method does *not* give you this for free. "Idempotent" and "exactly-once" are not the same claim. Getting the latter takes more than swapping in a dependency.
 
-Quick setup for idempotent Spring Boot endpoints
-------------------------------------------------
+## Quick setup for idempotent Spring Boot endpoints
 
 **Redis (recommended for most cases):**
 
@@ -111,8 +105,7 @@ Auto-configuration kicks in when Redis is on the classpath. No extra properties 
 
 The schema file ships inside `idempotency-store-jdbc`. The annotation and behavior are identical regardless of which store you use.
 
-Configuration worth knowing
----------------------------
+## Configuration worth knowing
 
 Most defaults are sensible. A few properties are worth calling out:
 
@@ -128,8 +121,7 @@ The `scope` property is worth a quick note.
 
 `global` means all users share the same key namespace. `user` namespaces keys per authenticated principal. Two different users can then use the same UUID without collision. `tenant` reads a claim from the JWT. You can also implement `ScopeResolver` yourself and register it as a `@Bean`.
 
-Measured overhead
------------------
+## Measured overhead
 
 I benchmarked 200 requests with 20 warmup iterations against real Redis and Postgres via Testcontainers on Docker Desktop:
 
@@ -139,8 +131,7 @@ I benchmarked 200 requests with 20 warmup iterations against real Redis and Post
 
 The aspect's own cost is sub-millisecond. Fingerprinting, key composition, JSON serialization: all fast. Everything else is two network round trips: claim and complete. The Docker Desktop numbers reflect container networking, not the library.
 
-Extending it
-------------
+## Extending it
 
 `IdempotencyStore` is a four-method interface: `claim`, `complete`, `release`, `find`. Register your own as a `@Bean` and `@ConditionalOnMissingBean` means yours wins:
 
@@ -148,8 +139,7 @@ Extending it
 
 Same pattern for `ScopeResolver` (custom key namespacing) and `IdempotencyMetrics` (plug in Micrometer or anything else). There is also `IdempotencyObjectMapperCustomizer`. Use it to register your Jackson modules without touching your app's own `ObjectMapper`.
 
-What it deliberately does not do
---------------------------------
+## What it deliberately does not do
 
 Scope creep kills small libraries. These are non-goals:
 
@@ -160,8 +150,7 @@ Scope creep kills small libraries. These are non-goals:
 * **No streaming or SSE.** Anything written directly to `HttpServletResponse` is not captured.
 * **Postgres only** for JDBC for now; MySQL is planned.
 
-Where to find it
-----------------
+## Where to find it
 
 **Maven Central:** `io.github.benhendayoussef:idempotency-spring-boot-starter:0.1.0`
 

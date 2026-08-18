@@ -30,8 +30,7 @@ frozen: false
 
 **In this article, we review how to shift an object initiation process across various parties with creational pattern builder and JEP-455.**
 
-Building a vehicle
-------------------
+## Building a vehicle
 
 It may not be obvious from a simple example, but especially when a project moves away from an coding imperative style, it pushes the requirements on the object initiation process.
 
@@ -80,7 +79,6 @@ class TestVehicle implements Vehicle {
    } ...
 ```
 
-
 **Example 1** .: JEP-455 simplifies a builder pattern removing by verbose casting steps inside *addType* method
 
 The introduced *TestVehicle* builder with final method build is not only testable, easy to understand and extensible, but can also be passed as an argument to various services or methods contributing to the vehicle composition process.
@@ -94,7 +92,6 @@ private static byte evaluateSensorByteValue(Object value) {
    return value instanceof byte b ? b : (byte) -1;
 }
 ```
-
 
 **Example 2.**: JEP-455 removes necessity of casting with information loss
 
@@ -113,18 +110,15 @@ var producedVehicle = testVehicleBuilder
        .build("testVehicle");
 ```
 
-
 **Example 3.**: Builder allows you to add required parts downstream
 
-Conclusion
-----------
+## Conclusion
 
 While a factory hides the instantiation logic behind a method, a single point of truth, which can turn out to be complex and not entirely maintainable, the Builder pattern serves to make each added component clear and testable.
 
 The factory pattern may be a good fit for the early stages of the development, but with the new enhancements coming with JDK23 \[2\], the builder pattern may be re-evaluated as it may support the functional nature of current business requirements.
 
-References
-----------
+## References
 
 [\[1\] JEP 455: Primitive Types in Patterns, instanceof, and switch (Preview)](https://openjdk.org/jeps/455)  
 [\[2\] Java 23 Has Arrived, And It Brings a Truckload of Changes](https://foojay.io/today/java-23-has-arrived-and-it-brings-a-truckload-of-changes/)  

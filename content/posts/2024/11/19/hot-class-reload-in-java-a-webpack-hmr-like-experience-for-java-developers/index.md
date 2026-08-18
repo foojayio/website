@@ -26,8 +26,7 @@ Java developers, in particular, have long dealt with this issue. But what if you
 
 In this guide, we'll walk through how to implement HCR and integrate it into your Java development workflow. By the end, you'll have a powerful new tool to cut down on those long, unproductive restart times.
 
-Understanding Hot Class Reload
-------------------------------
+## Understanding Hot Class Reload
 
 Simply put, Hot Class Reload (HCR) allows Java applications to reload classes at runtime. This is incredibly useful in development environments where you're constantly iterating and tweaking code. Think of it as real-time editing: you change some code, the application picks it up right away---no restart required.
 
@@ -53,8 +52,7 @@ Below is a simplified flow diagram illustrating the HCR process:
 4. **Custom Class Loader**: Loads the newly compiled class into the jvm.
 5. **Invoke Main Method**: Exectues the main method by executing the bytecode of the reloaded class.
 
-Implementing Hot Class Reload
------------------------------
+## Implementing Hot Class Reload
 
 Here's a breakdown of the Java program implementing HCR:
 
@@ -79,7 +77,6 @@ public HotReload(String sourceDir, String classDir) {
     }
 }
 ```
-
 
 The constructor begins by converting the provided sourceDir and classDir strings into absolute Path objects using `Paths.get().toAbsolutePath()`. This ensures that the paths are fully qualified and can be used reliably throughout the application.
 
@@ -121,7 +118,6 @@ private void watchForChanges() {
     }
 }
 ```
-
 
 #### Compiling and Reloading Classes
 
@@ -173,7 +169,6 @@ private void compileAndReload(String fileName) {
 }
 ```
 
-
 The `compile` method is designed to compile a Java source file utilizing the Java Compiler API, providing a structured approach to dynamic compilation. The method begins by accepting a `Path` object that represents the source file intended for compilation. To facilitate error handling and reporting, it creates a `DiagnosticCollector`, which collects diagnostic information such as errors and warnings encountered during the compilation process.
 
 Next, the method constructs a collection of `JavaFileObject`s from the source file using a `fileManager`, likely an instance of `StandardJavaFileManager`. This setup is crucial for the Java Compiler API to access the source files correctly. The method then specifies compilation options, particularly the output directory for the compiled classes, using the `-d` option.
@@ -215,7 +210,6 @@ private boolean compile(Path sourceFile) {
 
 }
 ```
-
 
 ### Custom Class Loader
 
@@ -275,7 +269,6 @@ public Class << ? > loadClass(String name) throws ClassNotFoundException {
 }
 ```
 
-
 Now if we want to execute the Hot Reload program, we need to do something like this
 
 ```java
@@ -303,7 +296,6 @@ Now if we want to execute the Hot Reload program, we need to do something like t
 
     }
 ```
-
 
 In this main method, we can see that we need to provide the path for the src of the code that you want to hot reload and the classes of those java files; after that, it then watches for any changes and then compiles and reloads the class so that we can see the effect immediately.
 
@@ -595,9 +587,7 @@ public class Day84 {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Hot Class Reload in Java offers a powerful way to enhance development productivity by reducing the need for full application restarts.
 
@@ -608,5 +598,3 @@ Implementing HCR can significantly speed up the development cycle, allowing for 
 As you integrate this technique into your workflow, you'll find it an invaluable tool for efficient Java development.
 
 There are some libraries, like JRebel, which provide this feature more on that in the next post!
-
-<br />

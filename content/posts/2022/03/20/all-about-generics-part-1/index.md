@@ -23,8 +23,7 @@ Generics are used to parameterize types. A piece of code can be written generica
 
 However, generics is one of the tricky ways to make it possible to use type parameterization so that one particular portion or entirely of a class or their subclass can support a variety of types if an entity such as class, interface, or method that operates on a parameterized type is said to be a generic entity.
 
-Benefits of Generics
---------------------
+## Benefits of Generics
 
 ### Type safety
 
@@ -36,8 +35,7 @@ Type erasure means, all the additional information included while using Java Gen
 
 Alternatively, we can say, we will be enforced to use a type in compile-time, but the types are discarded at runtime.
 
-Where we can use Generics
--------------------------
+## Where we can use Generics
 
 * Using Generics with wildcards
   * Unbounded wildcards
@@ -48,8 +46,7 @@ Where we can use Generics
 * Using Generic types as parameters of a class or an interface.
 * Using Generic types with method or constructor definition.
 
-Components of Generics
-----------------------
+## Components of Generics
 
 1. ***\<\>*** - Diamond operator - we put a generic type inside it.
 2. ***T*** - known as a Generic type. We can actually use any character or word instead of T here. usually used as ***\<T\>***
@@ -69,7 +66,6 @@ List<? extends Number>
 Comparator<? super String>
 ```
 
-
 #### Wildcard can be used in the following situations:
 
 * To define the type for a generic containing parameter
@@ -78,13 +74,11 @@ Comparator<? super String>
 void addAll(List<? extends Object> objects) {}
 ```
 
-
 * To define the type for a generic containing field or local variable
 
 ```java
 Set<? extends Number> numList = Set.of(3, 100_000_000_000_000L, 2.5F, 2.7);
 ```
-
 
 * To define an unknown type for a generic containing return type. But it is better to make the type-specific.
 
@@ -95,7 +89,6 @@ ResponseEntity<?> getAll() {
  //
 }
 ```
-
 
 #### Unbounded wildcard parameterized type
 
@@ -108,7 +101,6 @@ ArrayList<?>  list = new ArrayList<String>();
 //or
 ArrayList<?>  list = new ArrayList<Employee>();
 ```
-
 
 #### Bounded wildcard parameterized type
 
@@ -131,7 +123,6 @@ private static Number sum (List<? extends Number> numbers){
     return s; 
 }
 ```
-
 
 ##### Lower bounded wildcard
 
@@ -162,7 +153,6 @@ class AsianApple extends Apple {
 }
 ```
 
-
 We will also define a method that receives a ***List\<? super Apple\>*** as a parameter.
 
 ```java
@@ -171,7 +161,6 @@ public static void printApples(List<? super Apple> apples)
     System.out.println(apples);
 }
 ```
-
 
 Now observe the following example. When we pass a list of ***AsianApple*** in the method ***printApples(...)*** , it gives us compile-time error. But when we try to pass a list of ***Fruit*** , which is the super of ***Apple***, it accepts it without any error.
 
@@ -189,7 +178,6 @@ basket2.add(new Fruit());
 printApples(basket2);
 ```
 
-
 Now, let's see some limitations and exceptional cases of ***extends*** and ***super***.
 
 ##### Limitations and exceptional cases
@@ -201,7 +189,6 @@ Set<? extends Apple> appleSet = new HashSet<>();
 appleSet.add(new Apple()); // Compilation error 
 appleSet.add(new AsianApple()); // Compilation error
 ```
-
 
 The reason is that we actually don't need to mention***extends*** If we define a list of ***Apple*** , it simply can accept any child of ***Apple*** type.
 
@@ -219,7 +206,6 @@ List<? super Apple> basket = List.of(new Apple(), new AsianApple());
     List<? super Apple> basket1 = List.of(new Apple(), new AsianApple(), new Fruit(), new Object(), 123, 12.45);
 ```
 
-
 The reason is that when we define with ***List.of(...)*** it actually accepts objects and produces a list of ***Object*** . And ***List\<Object\>*** is a type of ***List\<? super Apple\>***.
 
 * Notice the following example:
@@ -231,7 +217,6 @@ basket.add(new AsianApple()); //Successful
 // basket.add(new Fruit()); //Compile time error 
 // basket.add(new Object()); //Compile time error
 ```
-
 
 The interesting fact here is, we were supposed to be able to add any supertype of ***Apple*** to the list, but it seems to happen the opposite. When we try to add items in a list demonstrated above, it only accepts the children of the ***supertype***.
 
@@ -255,7 +240,6 @@ public class GenericsExample<T> {
 }
 ```
 
-
 * We cannot instantiate any generic type
 
 ```
@@ -266,7 +250,6 @@ public class GenericsExample<T> {
 }
 ```
 
-
 * We cannot refer to primitive types with Generic type
 
 ```java
@@ -274,14 +257,12 @@ final List<int> ids = new ArrayList<>(); //Not allowed
 final List<Integer> ids = new ArrayList<>(); //Allowed
 ```
 
-
 * We cannot create Generic exception classes
 
 ```java
 // causes compiler error 
 public class GenericException<T> extends Exception {}
 ```
-
 
 That's all for this article. In our next article, we will discuss on **Arrays with Generics** , **Using Generic type as parameter of a class** and **Using Generic types with method or constructor definition**.
 

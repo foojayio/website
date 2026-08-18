@@ -76,7 +76,6 @@ public UserDashboardDTO getDashboard(long userId) throws Exception {
 }
 ```
 
-
 This code is a hidden landmine in a distributed system. 💣
 
 * **Brittle Failure Mode:** `CompletableFuture.allOf(...).join()` creates an "all-or-nothing" scenario. If just one of the services (e.g., `reviewService`) times out or throws an error, the `join()` call will throw an exception, and the entire operation fails. The user gets an error page instead of seeing their user details and orders, which were fetched successfully.
@@ -116,7 +115,6 @@ public UserDashboardDTO getDashboard(long userId) {
 }
 ```
 
-
 This professional solution is vastly superior. It handles failures gracefully within each asynchronous call using `.exceptionally()`, allowing the dashboard to render with partial data. It enforces timeouts with `.orTimeout()` to protect system resources.
 
 By explaining these choices in the PR---discussing the principles of resilient design and fault tolerance---**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
@@ -143,7 +141,6 @@ You start with a lazy prompt, giving the AI almost nothing to work with:
 // "Java method to calculate shipping cost for an order"
 ```
 
-
 The AI, having no context, will produce a generic, over-simplified method that is completely wrong for your application:
 
 ```java
@@ -155,7 +152,6 @@ public BigDecimal calculateShippingCost(Order order) {
     return baseRate.add(weightCharge);
 }
 ```
-
 
 This code is a waste of time. It doesn't know about your business rules, your customer types, or your data structures. Now, let's try again by giving the AI a proper brief.
 
@@ -186,7 +182,6 @@ This time, you treat the prompt like a mini-spec document, packing it with conte
  * that takes a User and an Order and returns the final shipping cost as a BigDecimal."
  */
 ```
-
 
 With this rich context, the AI can now generate something incredibly useful and specific to your actual codebase:
 
@@ -219,7 +214,6 @@ public BigDecimal calculateShipping(User user, Order order) {
     return shippingCost;
 }
 ```
-
 
 Look at that difference! ✨ The second version is almost production-ready. It correctly implements the complex business logic because you gave the AI a map of your world. You spent an extra minute providing context and saved yourself thirty minutes of writing boilerplate and fixing the AI's guesses. That's a massive win.
 
@@ -266,7 +260,6 @@ private User convertAndSaveUser(SignUp signup) {
 }
 ```
 
-
 This code is a maintenance nightmare. 😵
 
 * **Debugging Hell:** How do you debug this? If `sendWelcomeEmail` throws an exception for one user, the whole stream fails. You can't easily put a breakpoint inside the `peek` to inspect the state for a single user without getting swamped.
@@ -304,7 +297,6 @@ public List<User> processSignups(List<SignUp> signups) {
 }
 ```
 
-
 This version is superior in every practical way. It's easy to read, you can stick a breakpoint anywhere you want, and the `try-catch` block provides robust, granular error handling.
 
 This same principle applies at a higher level. Resist the urge to let an AI push you toward an overly complex design like microservices when a well-structured monolith or a Hexagonal Architecture would be far more maintainable for your team's size and scope. Use AI as a tool, but you are the architect.
@@ -334,7 +326,6 @@ The AI, having been trained on a vast amount of public code, including forum pos
     <version>1.10.0</version>
 </dependency>
 ```
-
 
 You, the busy developer, glance at it. "org.apache.commons" looks legit, the name seems right, and you paste it into your `pom.xml`. **You've just potentially opened the door to a typosquatting or dependency confusion attack.** 💀
 
@@ -366,16 +357,12 @@ We must analyze three distinct areas:
 2. **The Generated Code**: Its correctness, its security, and its adherence to modern practices.
 3. **The Software Supply Chain**: The third-party dependencies the AI suggests.
 
-
-
 ### **First, Analyze Your AI System**
 
 Before you even write a prompt, remember that the AI is not an oracle. It's a tool with known limitations.
 
 * **Is Your Prompt Safe?** 🔐 When you paste a chunk of your company's proprietary code into a free, public AI website, where does it go? You could be unintentionally leaking trade secrets. The habit is to **use enterprise-grade, secure tools** (like GitHub Copilot for Business or self-hosted options) that guarantee your code stays private.
 * **Is your AI architecture secure?** 👮When you use Agents and MCP servers, are you sure what they do? Have you checked their source code to know where your information goes?
-
-
 
 ### **Second, Analyze the Generated Code: Accuracy, Bugs, Security and Outdated Knowledge**
 
@@ -402,7 +389,6 @@ public void processTransaction(Transaction tx) {
 }
 ```
 
-
 Also an AI model might have a knowledge cutoff of early 2023. It knows nothing about the latest features in Java 21+. It will generate correct, but clunky and outdated code.
 
 For example, you ask it to process different shapes. It might generate this pre-Java 21 code:
@@ -422,7 +408,6 @@ public double getArea(Shape shape) {
 }
 ```
 
-
 A modern Java developer would immediately refactor this to a much cleaner and safer `switch` expression with type patterns:
 
 ```java
@@ -435,9 +420,6 @@ public double getArea(Shape shape) {
     };
 }
 ```
-
-
-
 
 ### **Third, Analyze the Dependencies (The Software Supply Chain)**
 
@@ -492,7 +474,6 @@ void testTruncation() {
 }
 ```
 
-
 **The habit:** Use AI for boilerplate, but you, the human, must write the critical assertions based on the *requirements*, not based on the code's current behavior.
 
 #### **The Human's Job: Integration Tests That Build Real Confidence**
@@ -521,7 +502,6 @@ void testUserServiceWithMock() {
     verify(mockRepo).findByStatus("ACTIVE");
 }
 ```
-
 
 **The Right Way (Real Confidence with Testcontainers):** A professional Java developer uses tools like **Testcontainers** to spin up a *real* database for the test.
 
@@ -565,7 +545,6 @@ class UserServiceIntegrationTest {
 }
 ```
 
-
 #### **The Ultimate Collaboration: AI-Powered Acceptance Tests**
 
 Here's where it all comes together. Your Product Owner or a domain expert writes the requirements in a plain-text Gherkin file. This file becomes the ultimate source of context.
@@ -582,7 +561,6 @@ Feature: User Login
     And I click the login button
     Then I should be redirected to my dashboard page
 ```
-
 
 Now, you use this as context for your AI. **The habit:** Ask the AI to be a translator. *"Given this Gherkin feature, generate the boilerplate Java step definitions for Cucumber."*
 
@@ -604,7 +582,6 @@ public class LoginSteps {
     // ... and so on for the rest of the steps.
 }
 ```
-
 
 The AI handles the tedious mapping, and you focus on implementing the meaningful automation logic. You're not just testing code anymore; you're verifying business requirements directly.
 
@@ -659,7 +636,6 @@ public class ProductService {
 }
 ```
 
-
 And here's the **human-centric review** in the PR comments:
 
 **Senior Dev:** "Hey, great job getting the caching logic in here! The AI did a nice job with the Guava cache implementation. It's super clean. 👍"
@@ -672,8 +648,7 @@ And here's the **human-centric review** in the PR comments:
 
 This review accomplishes everything a human review should. It validates the work, shares deep knowledge about distributed systems, prevents a future production issue, and does it all in a collaborative, respectful way. This is a conversation AI can't have. This is where we, the humans, provide the real value.
 
-**Conclusion: Your AI Co-Pilot Needs a Safety Net 🚀**
-------------------------------------------------------
+## **Conclusion: Your AI Co-Pilot Needs a Safety Net 🚀**
 
 The age of AI-assisted development isn't about replacing developers; it's about upgrading them.
 

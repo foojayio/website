@@ -30,8 +30,6 @@ If you are too lazy to read... check out my YouTube version of this article here
 
 {{< youtube xgViS-wlH7Q >}}
 
-<br />
-
 ### The Base Class Model
 
 Mostly, there are the respective essential components in a framework. In our case, it is a TextField, a button, and a horizontal or vertical layout. However, all of these components are embedded in an inheritance structure. In our case, I chose the following construction. Each component corresponds to the Component interface, for which there is an abstract implementation called AbstractComponent.
@@ -66,7 +64,6 @@ public class InputComponent
 }
 ```
 
-
 If you now look at how the component will behave during later use, it becomes visible that a derivation from a fundamental component brings its pitfalls with it.
 
 What exactly happened here? If an instance of the custom component InputComponent is now used, it can be viewed as a layout. But that is not the case here anymore; on the contrary, it is even wrong. All methods inherited from the layout implementation are also public available with this component. But you wanted to achieve something else. First of all, we wanted to reuse the existing code, provided in the component implementation HorizontalLayout.
@@ -89,7 +86,6 @@ public class MainM01
   } 
 }
 ```
-
 
 ### Inheritance --- Second Version
 
@@ -128,7 +124,6 @@ public class InputComponent
 }
 ```
 
-
 In use, such a component is already a little less dangerous. Only the internal methods that are visible on other components are accessible on this component.
 
 ```java
@@ -143,7 +138,6 @@ public class MainM02
   } 
 }
 ```
-
 
 But I am not happy with this solution yet. Very often, there is no requirement for new components on the technical side. Instead, they are compositions of already existing essential elements, composed in a professional, domain-specific context.
 
@@ -178,7 +172,6 @@ public final class InputComponent
 }
 ```
 
-
 Seen in this way, it is a neutral shell, but it will behave towards the outside as a minimal component since the minimum contract via the Component interface. Again, only the methods by delegation to the outside are made visible, which explicitly provided. Use is, therefore, harmless.
 
 ```java
@@ -190,7 +183,6 @@ public class MainSolution {
   } 
 }
 ```
-
 
 ### Targeted Inheritance
 

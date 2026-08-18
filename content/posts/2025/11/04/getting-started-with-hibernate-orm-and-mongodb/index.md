@@ -31,8 +31,7 @@ This [integration](https://www.mongodb.com/company/blog/product-release-announce
 
 In this article, we'll walk through the setup and first steps to get Hibernate ORM running with MongoDB, from configuration to a simple CRUD example.
 
-How MongoDB fits in
--------------------
+## How MongoDB fits in
 
 While Hibernate ORM was originally designed for relational databases, its abstraction layer makes it a great candidate for integrating with other storage systems. MongoDB fits naturally into this model because it stores data as flexible, JSON-like documents instead of rigid tables.
 
@@ -41,7 +40,6 @@ Using the new MongoDB extension, Hibernate can now map your entities to MongoDB 
 ```
 from Contact where country = ?1 and age > ?2
 ```
-
 
 When executed, Hibernate replaces the parameters (?1 and ?2) with the actual values provided in your code---for example,*CANADA* and *18* . The MongoDB Dialect then translates the query into an equivalent **MongoDB aggregation pipeline**such as:
 
@@ -58,13 +56,11 @@ When executed, Hibernate replaces the parameters (?1 and ?2) with the actual val
 }
 ```
 
-
 This translation happens transparently; developers continue using Hibernate's familiar API while the framework builds the corresponding [**MongoDB Query Language (MQL)**](https://www.mongodb.com/docs/manual/reference/mql/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) commands under the hood.
 
 As a result, you can keep your Hibernate workflow and entity mappings exactly as before, while benefiting from MongoDB's scalability, flexibility, and document-oriented design.
 
-Prerequisites
--------------
+## Prerequisites
 
 Before we start building the project, make sure your environment has a few essentials ready.
 
@@ -75,8 +71,7 @@ Before we start building the project, make sure your environment has a few essen
 
 With these prerequisites in place, we can move on to setting up the project and adding the required dependencies.
 
-Tag your Atlas cluster
-----------------------
+## Tag your Atlas cluster
 
 If you're deploying this application on MongoDB Atlas, you can use [Resource Tags](https://www.mongodb.com/docs/atlas/tags/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) to label your clusters or projects for tracking and cost visibility. For instance, I recommend tagging your cluster with values that describe this tutorial:
 
@@ -84,7 +79,6 @@ If you're deploying this application on MongoDB Atlas, you can use [Resource Tag
 Key: application
 Value: hibernate-crud
 ```
-
 
 Adding tags is a simple but powerful way to organize your MongoDB Atlas resources, especially if you manage multiple clusters, environments, or demos. Tags make it easier to:
 
@@ -101,8 +95,7 @@ To add a tag:
 
 This step won't affect your code, but it's a best practice to keep your Atlas environment organized. If you're running MongoDB locally, you can safely skip this step.
 
-Project overview
-----------------
+## Project overview
 
 In this article, we'll build a simple project that uses Hibernate ORM with MongoDB to manage a single entity---Book.  
 
@@ -127,8 +120,7 @@ The project uses **tags** to separate each stage of development:
 
 With that overview out of the way, let's set up the environment and add the necessary dependencies.
 
-Setting up the project
-----------------------
+## Setting up the project
 
 For this example, I'm using **IntelliJ IDEA** as my IDE. To create the project, go to *File* **→** *New* **→** *Project* , select *Java* , choose **Maven** as the build system, and click **Create**, as shown in the image below:  
 ![](Screenshot-2025-10-27-at-2.52.17-PM.png)
@@ -163,7 +155,6 @@ Now, open your pom.xml and add the following dependencies:
 </project>
 ```
 
-
 The **mongodb-hibernate** dependency provides the MongoDB Dialect, the piece that allows Hibernate to translate HQL queries and persistence operations into MongoDB commands.
 
 ### Configure Hibernate
@@ -189,7 +180,6 @@ Next, create a hibernate.cfg.xml file under src/main/resources to define the con
 </hibernate-configuration>
 ```
 
-
 **Important:**
 
 Make sure to replace \<REPLACE_WITH_YOUR_CONNECTION_STRING\> with your own MongoDB connection string, the one you get from your[MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello) cluster. It should look something like this:
@@ -197,7 +187,6 @@ Make sure to replace \<REPLACE_WITH_YOUR_CONNECTION_STRING\> with your own Mongo
 ```
 mongodb+srv://<username>:<password>@cluster0.mongodb.net
 ```
-
 
 The configuration also defines the property com.mongodb.hibernate.dialect.MongoDialect,  
 
@@ -245,7 +234,6 @@ public class Book {
 }
 ```
 
-
 Let's break down what's happening here:
 
 1. The class is annotated with @Entity, telling Hibernate to treat it as a persistent object.  
@@ -274,7 +262,6 @@ public final class HibernateUtil {
   public static SessionFactory getSessionFactory() { return SESSION_FACTORY; }
 }
 ```
-
 
 ### Implementing the Book service
 
@@ -349,7 +336,6 @@ public class BookService {
 }
 ```
 
-
 #### Managing the SessionFactory
 
 In this example, each method opens its own session using:
@@ -357,7 +343,6 @@ In this example, each method opens its own session using:
 ```
  try (Session session = HibernateUtil.getSessionFactory().openSession()) { }
 ```
-
 
 This is the **simplest approach** for demonstration purposes. It ensures that every operation runs independently and that sessions are properly closed after use. However, in a real-world application, you'd likely manage the SessionFactory more elegantly.
 
@@ -369,7 +354,6 @@ This is the **simplest approach** for demonstration purposes. It ensures that ev
 session.persist(book);
 ```
 
-
 This inserts a new document into the **books** collection. The MongoDB Dialect automatically generates the _id field and translates this into an insertOne command under the hood.
 
 ##### findAll
@@ -377,7 +361,6 @@ This inserts a new document into the **books** collection. The MongoDB Dialect a
 ```
 session.createQuery("from Book", Book.class).list();
 ```
-
 
 This HQL query retrieves all documents from the books collection---equivalent to db.books.find() in MongoDB.
 
@@ -387,7 +370,6 @@ This HQL query retrieves all documents from the books collection---equivalent to
 session.merge(existing);
 ```
 
-
 Hibernate detects changes to the entity and issues an update operation in MongoDB using the document's _id as a filter.
 
 ##### deleteById
@@ -395,7 +377,6 @@ Hibernate detects changes to the entity and issues an update operation in MongoD
 ```
 session.remove(book);
 ```
-
 
 This method locates a document in the **books** collection by its _id and deletes it.
 
@@ -407,7 +388,6 @@ Hibernate translates the operation into a MongoDB deleteOne command, using the d
 from Book b where b.pages >= :minPages
 ```
 
-
 This demonstrates how **HQL comparison operators** map directly to **MongoDB operators**.
 
 In this case, \>= becomes $gte, generating a pipeline similar to:
@@ -415,7 +395,6 @@ In this case, \>= becomes $gte, generating a pipeline similar to:
 ```
 { "$match": { "pages": { "$gte": 300 } } }
 ```
-
 
 #### Building the main application
 
@@ -502,9 +481,7 @@ public class MyApplication {
 }
 ```
 
-
-Running the application
------------------------
+## Running the application
 
 Once everything is configured, you can run the project directly from the command line using Maven. In the root of your project (where the pom.xml file is located), execute:
 
@@ -512,13 +489,11 @@ Once everything is configured, you can run the project directly from the command
 mvn clean package
 ```
 
-
 And then:
 
 ```
 mvn compile exec:java -Dexec.mainClass="com.mongodb.MyApplication"
 ```
-
 
 Maven will compile the code, download any missing dependencies, and execute the main() method in your MyApplication class.
 
@@ -544,11 +519,9 @@ That's it: Your application should start and display the interactive menu in the
 Choose:
 ```
 
-
 You can now test each option in the console menu to create, list, update, and delete books---and see Hibernate and MongoDB working together in action.
 
-Current limitations (Public Preview)
-------------------------------------
+## Current limitations (Public Preview)
 
 The MongoDB Hibernate ORM extension is currently in **Public Preview**, meaning it's stable for experimentation but still expanding toward full feature coverage compared to relational databases.
 
@@ -556,8 +529,7 @@ At this stage, some MongoDB-specific capabilities, such as compound indexes and 
 
 For the most up-to-date list of supported features and upcoming improvements, check the [official documentation.](https://www.mongodb.com/docs/languages/java/mongodb-hibernate/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello)
 
-Wrapping up
------------
+## Wrapping up
 
 Hibernate ORM has long been a powerful choice for Java developers who prefer working with objects instead of raw database queries.
 

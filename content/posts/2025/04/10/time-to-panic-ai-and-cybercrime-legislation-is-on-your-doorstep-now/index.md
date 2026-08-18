@@ -22,8 +22,7 @@ frozen: false
 
 If you're a developer, security engineer, or anyone responsible for the software supply chain, it's time to recalibrate. Here's what's coming, who's shaping it, and what tools are emerging to help navigate the new landscape.
 
-Accountability Cannot Be Outsourced
------------------------------------
+## Accountability Cannot Be Outsourced
 
 I am not a lawyer. This article summarises the legislation and regulations being developed or repurposed. It's imperative to get your own legal assessment when deciding if these elements apply to your situation. Having said that, some aspects are shared. The primary one is accountability.
 
@@ -33,8 +32,7 @@ That means wherever you are in the software supply chain, you have responsibilit
 
 *Blaming others without proper due diligence and safeguards is not a valid defence!*
 
-The AI Act: Europe's Regulatory Beacon
---------------------------------------
+## The AI Act: Europe's Regulatory Beacon
 
 Last month, the European Union passed the AI Act, setting the first comprehensive legal framework for artificial intelligence. Much like GDPR, this act is poised to set global expectations for how AI should be regulated.
 
@@ -46,8 +44,7 @@ Key provisions include:
 
 The phased rollout begins mid-2025, with enforcement ramping up through 2026. Developers building or integrating AI tools must revisit how data is handled, models are trained, and outputs are verified.
 
-The US: Executive Orders and Sector-Specific Push
--------------------------------------------------
+## The US: Executive Orders and Sector-Specific Push
 
 While there's no sweeping federal AI law yet, the 2023 Executive Order on AI laid serious groundwork. It directed:
 
@@ -59,8 +56,7 @@ Several bills targeting transparency, model labeling, and sector-specific AI reg
 
 The Department of Justice and CISA are doubling down on AI's dual use in cybercrime, highlighting risks like LLM-generated phishing, deepfake impersonation, and AI-assisted malware.
 
-UK and China: Innovation vs Control
------------------------------------
+## UK and China: Innovation vs Control
 
 The UK continues its light-touch approach, opting for frameworks over rules. In 2025, the government is:
 
@@ -69,8 +65,7 @@ The UK continues its light-touch approach, opting for frameworks over rules. In 
 
 Meanwhile, China has doubled down on control. AI providers must now register models and disclose training data and watermark-generated content. Misuse of AI leading to "social destabilization" can incur criminal penalties.
 
-Following the tech ...
-----------------------
+## Following the tech ...
 
 Big tech and security vendors are responding fast, offering tools that help developers comply with new expectations and defend against AI misuse.
 
@@ -98,8 +93,7 @@ Here are a few examples - note that these are just samples - I'm not endorsing a
 
 Several Big Four firms now provide AI governance-as-a-service.
 
-What's Next?
-------------
+## What's Next?
 
 Expect further developments in:
 

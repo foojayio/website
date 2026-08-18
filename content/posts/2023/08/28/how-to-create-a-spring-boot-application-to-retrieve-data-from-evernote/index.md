@@ -26,8 +26,7 @@ Since I use Evernote, I was tasked with getting my notes out of Evernote.
 
 In this article, I will show you how to use the Evernote API and SDK in a Spring Boot application to retrieve data from Evernote.
 
-Starting steps
---------------
+## Starting steps
 
 I knew nothing about what Evernote provided for developers, so I started by reading the [Evernote for Developers](https://dev.evernote.com/doc/) documentation. Evernote does seem to have some user experience bugs. Searching for answers to my questions also surfaced user frustration with missing or unreliable features. In my experience so far, things have been ok for what I need. I feel that many data APIs do not provide the best developer experience in one way or another, so I wasn't surprised by this.
 
@@ -37,8 +36,7 @@ Then, we need to utilize a provided SDK for our preferred language to call the A
 
 First, I wanted to make use of the Maven dependency to access the functionality in the SDK. I also wanted to use Spring Boot instead of the vanilla Java code. Lastly, in a future piece of this project, I will want to use the [Spring Data Neo4j](https://spring.io/projects/spring-data-neo4j) library to import the data to Neo4j. Let's start with bringing the code over to Spring Boot. The final code for this article is available in a [Github repository](https://github.com/JMHReif/evernote-api-app).
 
-Spring Boot application
------------------------
+## Spring Boot application
 
 The starting place for all of my Spring Boot applications is the [Spring Initializr](https://start.spring.io/). I only changed a couple of description fields and didn't add any dependencies yet, as I'll only need one dependency added manually for now.
 
@@ -54,7 +52,6 @@ After downloading the project, I opened it in my IDE and added the Evernote depe
 </dependency>
 ```
 
-
 Evernote's Java SDK provides a couple of sample code classes, and the [EDAMDemo one](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java) was pretty similar to what I was looking for. My initial approach for merging the sample Java code with Spring Boot was to copy/paste the entire `EDAMDemo.java` class into a new class file in the project folder, and then start tweaking broken imports and other issues. However, I quickly realized that this approach was extremely error-prone. Because of the large code blocks, I had trouble running the demo's main method with Spring Boot's `main()`. I also had issues passing the developer token around (should I put it in the Spring Boot main class or this demo class?). I needed to approach this with a different tactic.
 
 After venting about it a bit to [Mark Heckler](https://github.com/mkheck), he reminded me to start super simple and build up. One example he gave was to move the developer token string to the properties file and just return that. So, I cleared out all the copied code and placed the developer token in the `application.properties` file as shown below.
@@ -62,7 +59,6 @@ After venting about it a bit to [Mark Heckler](https://github.com/mkheck), he re
 ```
 AUTH_TOKEN=<your developer token here>
 ```
-
 
 Next, I created a new class called `EvernoteDemo` annotated as a component and implemented the `CommandLineRunner` interface, so that this class will load on startup.
 
@@ -79,13 +75,11 @@ public class EvernoteDemo implements CommandLineRunner {
 }
 ```
 
-
 When you implement the `CommandLineRunner` interface, you need to implement the `run()` method. Once that outline was there, I added [Spring's `@Value` annotation](https://www.baeldung.com/spring-value-annotation) outside the method to pull in the `AUTH_TOKEN` from the properties file into a variable `token`, so we can use it to access the API. Inside the `run()` method, I printed out the developer token to make sure it was being read from the properties file. I ran the application and saw the token string printed out in the console, so I knew I was on the right track.
 
 Now I could slowly add in pieces of the sample code from the Github project.
 
-Incorporate Evernote SDK Example Code
--------------------------------------
+## Incorporate Evernote SDK Example Code
 
 First, I copied in the [`main()` method from the sample code](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L64) to my `EvernoteDemo` class's `run()` method.
 
@@ -121,7 +115,6 @@ public void run(String... args) throws Exception {
 }
 ```
 
-
 I removed the first few lines that pull the `AUTH_TOKEN` from the environment because our `@Value` annotation handles that now. I also removed some of the method calls in the `try` block because I still want to start small and build up. Then, the EDAMDemo object (before the try block) needed renamed to match our class name `EvernoteDemo`. After importing some of the classes referenced in the block, I still had some red-highlighted text. To fix that, I needed to copy over the [`EDAMDemo` constructor](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L109) and the [`listNotes()` method](https://github.com/Evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java#L130).
 
 ```java
@@ -142,14 +135,12 @@ public EvernoteDemo(String token) throws Exception {
 }
 ```
 
-
 The EDAMDemo constructor from the sample code became the EvernoteDemo constructor in our code. After some imports, almost everything worked except that the `token` parameter was underlined red with the message `Could not autowire. No beans of 'String' type found.`. Digging into this, I found that Spring looks for an empty constructor to use when autowiring. So, I added an empty constructor to the `EvernoteDemo` class, and that solved it!
 
 ```java
 public EvernoteDemo() {
 }
 ```
-
 
 The last piece of code to add is for the `listNotes()` method.
 
@@ -177,7 +168,6 @@ private void listNotes() throws Exception {
 }
 ```
 
-
 Once I fixed all the imports, all the red highlighting and errors went away. I ran the application and saw the following output:
 
 ```
@@ -188,18 +178,15 @@ Notebook: First Notebook
  * Goodreads data cleaning for db load
 ```
 
-
 The code is working! I'm able to connect to the Evernote API and list out the notes in my account. The next piece I want to work on is getting the note contents from the note so that I can work towards importing notes into Neo4j. That will be a topic for another article, though.
 
-Wrap Up!
---------
+## Wrap Up!
 
 In this article, we took the vanilla Java code from the Evernote SDK and migrated it to a Spring Boot application. We saw how copying/pasting large amounts of code and working backwards to integrate it can sometimes be overwhelming and error-prone. Instead, creating a basic piece as a starting point, and then slowly adding in small pieces can work much better and hopefully lower frustration.
 
 In a future article, we'll work on getting the note contents from the Evernote API and customizing the application to retrieve exactly what we need. Until next time, happy coding!
 
-Resources
----------
+## Resources
 
 * Github repository: [Accompanying code for this blog post](https://github.com/JMHReif/evernote-api-app)
 * Documentation: [Evernote for Developers](https://dev.evernote.com/doc/)

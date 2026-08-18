@@ -23,8 +23,7 @@ frozen: false
 
 This tutorial uses IntelliJ IDEA Ultimate because we want to create a new project using Spring Initializr. This functionality is only available with IntelliJ IDEA Ultimate. It is based off [Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/).
 
-Creating your Spring Boot Project
----------------------------------
+## Creating your Spring Boot Project
 
 1) If you're in an IntelliJ IDEA project already, select **File** \> **Project** . Alternatively click the **New Project** button on the Welcome screen.
 
@@ -61,8 +60,7 @@ Click **Finish**.
 
 That's all we have to do to get our basic Spring project set up in IntelliJ IDEA. In the next step we'll take a look at what has been automatically created for you, and most importantly, why.
 
-Project Walk-through
---------------------
+## Project Walk-through
 
 In the previous step we asked IntelliJ IDEA to create us a Spring Boot project with **Spring Web** as a dependency. Let's now take a look at what has been automatically created, so that we can build on that understanding in the next step.
 
@@ -96,7 +94,6 @@ This file is generated with the dependencies that you selected when we created t
 </dependencies>
 ```
 
-
 The first dependency on `spring-boot-starter-web````````` is there because we selected **Spring Web** as a dependency. The second dependency on `````````spring-boot-starter-test` is something you get with any Spring application. It gives you the ability to create tests with various testing libraries.
 
 It's very easy to add dependencies to your `pom.xml` file once you have created your Project. Use **⌘N** (macOS), or **Alt+Ins** (Windows/Linux) and then browse for your dependency. However, for our demo, these are the only dependencies that we need.
@@ -122,7 +119,6 @@ public class HelloWorldApplication {
 }
 ```
 
-
 We've got our package at the top of the class as you'd expect followed by our import statements.
 
 This `@SpringBootApplication` annotation enables additional Spring Boot functionality which is useful to know in case you find yourself troubleshooting your code.
@@ -132,7 +128,6 @@ The main line here is:
 ```java
 SpringApplication.run(HelloWorldApplication.class, args);
 ```
-
 
 This makes a call to SpringBoot's `run` method, and we need to pass the main class of our project to Spring, in this case, it's the same class.
 
@@ -160,8 +155,7 @@ We're getting this page because we have support for REST Controllers with the `s
 
 Lastly, before we do any more development it's a good idea to stop your server from running. You can do this with **⌘F2** (macOS), or **Ctrl** +**F2** on Windows and Linux.
 
-Create your Spring Controller
------------------------------
+## Create your Spring Controller
 
 Now we have our functioning Spring project we need to [create a Spring Controller](https://spring.io/guides/gs/serving-web-content/#initial) to handle the web requests.
 
@@ -191,7 +185,6 @@ public class HelloWorldController {
 }
 ```
 
-
 4) Now we need to re-run our Spring application. You might need to stop it first if it's still running from the previous step. You can run it again with **Ctrl** +**R** (macOS), or **Shift** +**F10** (Windows/Linux).
 
 5) When you go to the browser, enter the following URL `localhost:8080`. You should see your text being returned:
@@ -207,13 +200,11 @@ public String helloWorld(){
 }
 ```
 
-
 7) Now run your application again. At the root you should still see *Hello World from Spring Boot* because the `MARKDOWN_HASHfe7b83329725956f76335a5a0b65595eMARKDOWN`*HASH* *is* /_ indicating root. However, if you now type in `localhost:8080/goodbye`, you should see *Goodbye from Spring Boot*.
 
 That's it! You're done, congratulations on creating your first Spring Application and serving some text in the browser! In the next section we'll create a test for our application.
 
-Creating a Test for your Spring Boot Application
-------------------------------------------------
+## Creating a Test for your Spring Boot Application
 
 Let's write a test to check that in the event of an HTTP request, we get the response that we are expecting, in this case the string *Greetings from Spring Boot*.
 
@@ -240,7 +231,6 @@ public class CheckHTTPResponse {
 }
 ```
 
-
 Passing `WebEnvironment.RANDOM_PORT` into the `@SpringBootTest` annotation starts the web server with a random port number. We can find out what that port number is by annotating an `int` field (in our case, `int port;`) with `@LocalServerPort`, the testing framework will inject this field with the random port number.
 
 We get a `TestRestTemplate` for free with tests annotated with `@SpringBootTest`. The `@Autowired` annotation tells Spring that we want to get it from the context.
@@ -255,8 +245,7 @@ It's always worth checking our assumptions, so try changing the text to somethin
 
 In the next step we will summarise what we've done up to this point and list the resources we've used.
 
-Summary and Resources
----------------------
+## Summary and Resources
 
 In this tutorial we used the [New Project Wizard](https://www.jetbrains.com/help/idea/new-project-wizard.html) in IntelliJ IDEA to create a Spring Boot project with the **Spring Web** dependency.
 

@@ -31,8 +31,7 @@ This article focuses on Cloud Native Buildpacks, an open source project that is 
 
 Let's take a closer look at what buildpacks are, why they're advantageous, and how you can use them for your cloud-native Java applications.
 
-What are cloud native buildpacks?
----------------------------------
+## What are cloud native buildpacks?
 
 The Cloud Native Buildpacks project was initiated by several organizations that were already using the concept of buildpacks. This project was donated to the Cloud Native Computing Foundation in 2018.
 
@@ -78,8 +77,7 @@ Builders consist of the following components:
 
 This combination of components allows developers to use a single builder to automatically detect and build a wide variety of applications in different languages.
 
-Advantages of using buildpacks over alternative solutions
----------------------------------------------------------
+## Advantages of using buildpacks over alternative solutions
 
 Buildpacks offer several critical advantages to developers:
 
@@ -99,8 +97,7 @@ In comparison to other similar, alternative solutions, such as source-to-image a
 
 Read [this document](https://buildpacks.io/features/ "this document") to dive deeper into the feature comparisons between all of these technologies.
 
-What are Paketo Buildpacks?
----------------------------
+## What are Paketo Buildpacks?
 
 [Paketo Buildpacks](https://github.com/paketo-buildpacks "Paketo Buildpacks") is an open source project that makes use of the Cloud Native Buildpacks specification to provide production-ready buildpacks for the most popular frameworks and languages, including Java.
 
@@ -110,8 +107,7 @@ Many runtimes and frameworks have produced their own Paketo buildpacks for devel
 
 For this buildpack, the [Open Liberty](http://openliberty.io/ "Open Liberty") runtime is provided by default, although it can provide the WebSphere Liberty runtime if preferred. We'll use this buildpack in the following instructions to show you how you can make use of buildpacks and try them out for yourself.
 
-Getting started with buildpacks in 6 easy steps
------------------------------------------------
+## Getting started with buildpacks in 6 easy steps
 
 To get started, you'll need your application source code, Docker, and the Pack CLI.
 
@@ -127,20 +123,17 @@ It is important to note that there are some difficulties with using Paketo build
 git clone https://github.com/openliberty/guide-getting-started.git
 ```
 
-
 Then, change directories to the finish directory.
 
 ```
 cd guide-getting-started/finish
 ```
 
-
 **Step 4:** Now, you'll need to set a builder. In this case, we're using the Ubuntu jammy-based builder.
 
 ```
 pack config default-builder paketobuildpacks/builder-jammy-base
 ```
-
 
 **Step 5:** Next, you need to create a *project.toml* file in the *finish* directory with the following content.
 
@@ -157,20 +150,17 @@ pack config default-builder paketobuildpacks/builder-jammy-base
   uri = "docker://gcr.io/paketo-buildpacks/java"
 ```
 
-
 **Step 6:** Finally, we're going to build the application on Liberty with IBM Semeru OpenJ9 and required Liberty features.
 
 ```
 pack build myapp
 ```
 
-
 Your application is now transformed into an OCI image! With your OCI image, you can run your application locally with the following docker run command.
 
 ```
 docker run --rm -p 9080:9080 myapp
 ```
-
 
 Or, you can deploy your application to any Kubernetes-based platform, such as [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift "Red Hat OpenShift"), by using an [Open Liberty operator](https://github.com/OpenLiberty/open-liberty-operator "Open Liberty operator").
 
@@ -181,9 +171,7 @@ pack sbom download myapp --output-dir /tmp/demo-app-sbom
 find /tmp/demo-app-sbom/layers/sbom -name "*.json"
 ```
 
-
-Summary and next steps
-----------------------
+## Summary and next steps
 
 As this article has shown, developers can easily set up and use buildpacks and their many features when they develop cloud-native applications.
 

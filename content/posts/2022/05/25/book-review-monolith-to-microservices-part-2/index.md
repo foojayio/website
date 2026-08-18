@@ -26,8 +26,7 @@ In this article, I will summarize chapter two.
 
 ![](monolith-to-microservice.jpeg)
 
-**Chapter #2: Planning to Migration**
--------------------------------------
+## **Chapter #2: Planning to Migration**
 
 In this chapter, the book discusses the goal and mindset. When we are looking for a Microservices, what should be our goal.
 
@@ -84,8 +83,6 @@ With clear boundaries and Microservices architecture, it is easy to scale develo
 Although mature organizations limit how many technology stacks they support, it opens the door to having more than one stack running for multiple services. It even makes developers happy to some extent.
 
 ***Alternately***, we can safely adopt a new language if the runtime remains the same. For example, JVM can run code written in multiple languages within the same running process. E.g. Groovy, Scala, Kotlin, Java, Clojure, JRuby, etc.
-
-
 
 Now that we have understood the goal of having Microservices, let's discuss when this isn't really a good fit.
 

@@ -37,8 +37,7 @@ Specifically, the usage of annotations for validations and similar claims.
 
 This is a far better informed article but has a couple of flaws that I'll address near the end.
 
-Getters and Setters
--------------------
+## Getters and Setters
 
 Getters and setters aren't necessary in modern Java. We have records since Java 14 and Lombok is still good despite some claims to the contrary.
 
@@ -48,8 +47,7 @@ The article builds into a tirade on the lack of syntactic sugar features in Java
 
 You can look at Kotlin if you're interested in the latest syntax nuances. Java is about "slow and steady". That's a good thing and the main reason behind Javas longevity.
 
-Syntax Sugar and Operator Overloading
--------------------------------------
+## Syntax Sugar and Operator Overloading
 
 Modern Java includes patterns in switch, var, multiline strings and much more. Some upcoming features include string templates. String template support takes a while because Java wants to "do it right".
 
@@ -58,7 +56,6 @@ There's some support for that in the API level (and has been for a while). This 
 ```
 ResultSet rs = DB."SELECT * FROM Person p WHERE p.last_name = \{name}";
 ```
-
 
 **Update:** since the publication of this post developers mistakenly assumed the code above is an SQL injection vulnerability. It isn't. This looks like string replacement but it's code that uses that syntax to generate a parameterized SQL call.
 
@@ -76,8 +73,7 @@ Java's syntax is designed for reading at scale. When you have a project with 1M 
 
 Add to that the power of tooling to parse strict simple code at a huge scale and this becomes an even bigger benefit.
 
-Checked Exceptions
-------------------
+## Checked Exceptions
 
 Checked exceptions are optional. But they're one of the BEST features in Java. So much code fails unexpectedly. When you're building stuff as a hobby it might be OK. When you want to build a professional application you need to handle every error. Checked exceptions help you avoid that nonsense.
 
@@ -85,8 +81,7 @@ People hate checked exceptions because of laziness. Java guards you against your
 
 There should be no case where I make a network connection, a DB connection, open a file, etc. and don't need to handle the potential error. I can punt it but then checked exceptions force me to keep punting it somewhere. It's an amazing feature.
 
-Dependencies
-------------
+## Dependencies
 
 I have a lot of problems with Maven and Gradle. But when you compare it to pretty much any other dependency system with some millage on it they're doing great. They have problems but you can't compare them to something young like cargo that has almost no packages by comparison.
 
@@ -96,15 +91,13 @@ Other tools like NPM demonstrate the strengths of maven perfectly. If dependenci
 
 However, one of the things maven and gradle have going for them is the tooling. In many cases the IDEs help resolve issues and find the fix right out of the box.
 
-Cultural Problems in Java
--------------------------
+## Cultural Problems in Java
 
 The second article is a more interesting one and to some degree I do agree. Java developers tend to make every problem into a more complicated problem.
 
 In some cases this is necessary, Java is the 800 pound gorilla of programming platforms and its solutions are often over-engineered. This tends to be better than under powered, but it does carry a price.
 
-Why Annotation for Validation
------------------------------
+## Why Annotation for Validation
 
 The article did bring up one interesting example that seems like the "right thing" to the casual observer but is problematic.
 
@@ -112,7 +105,6 @@ The article did bring up one interesting example that seems like the "right thin
 @NotNull @Email
 String noReplyEmailAddress
 ```
-
 
 The author claims that this is bad and one should implement custom typing e.g.:
 
@@ -129,7 +121,6 @@ public record EmailAddress(String value) {
 }
 ```
 
-
 This is entirely possible in Java as the code above is valid Java code. But it has several problems which is why we have bean validation.
 
 * This can't be optimized - Bean validation can be moved up the validation chain by the framework. It can even be validated in client side code seamlessly since it's a declarative API. Here we need to actually execute the constructor to perform the validation.
@@ -139,8 +130,7 @@ This is entirely possible in Java as the code above is valid Java code. But it h
 
 As a result, the annotations might feel weird and don't enforce typing. That's true. But they increase performance and power. There's a lot of thought and common sense behind their usage. I get the authors point, I'm not a big IoC fan either, but in this specific case he's incorrect.
 
-Finally
--------
+## Finally
 
 This article spent way too much time on the defensive. It's time to switch gears. Java has been around for nearly 30 years and is still mostly compatible to Java 1.0. That is fantastic and unrivaled!
 

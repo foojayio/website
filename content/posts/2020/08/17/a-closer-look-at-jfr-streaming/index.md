@@ -25,8 +25,7 @@ frozen: false
 
 Since JDK 14, there is a new Java Flight Recorder (JFR) kid on the block -- JFR streaming. 🙂 This blog post, written together with JP Bempel, will discuss some of the things that you can do with JFR streaming, as well as some of the things you may want to avoid.
 
-An Introduction to JFR Streaming
---------------------------------
+## An Introduction to JFR Streaming
 
 In the most recent version of the JDK, a new JFR-related feature was introduced -- JFR streaming. It is a feature allowing a developer to subscribe to select JFR data and to decide what to do with that data in the host process. JFR events can also be consumed from a separate process by pointing to the file repo of a separate JVM process -- the mechanism is the same.
 
@@ -48,7 +47,6 @@ try (var rs = new RecordingStream()) {
 }
 ```
 
-
 The RecordingStream is what you would use to control what is gathered from within the Java process, effectively also controlling the recorder.
 
 Here is another example using the default recording template, and printing out the information for garbage collection events, cpu load and the JVM information:
@@ -63,7 +61,6 @@ Configuration c = Configuration.getConfiguration("default");
    }
  }
 ```
-
 
 The EventStream class can be used together with the standard flight recorder mechanisms to gather information from ongoing recordings, even ones being done in separate processes or an already recorded file. Here is an example using the EventStream to get some other attributes of the CPU load and information from garbage collections from within the Java process (needs an ongoing recording):
 
@@ -86,7 +83,6 @@ try (var es = EventStream.openRepository()) {
    es.start();
  }
 ```
-
 
 This is the EventStream interface used to consume and filter an event stream:
 
@@ -114,13 +110,11 @@ public interface EventStream extends AutoCloseable {
 }
 ```
 
-
 The open\* methods allow you to open a specific file or a specific file repository (for example from a different process). The set\* methods allow you to filter on time and to select if you want to enforce that the events are delivered in time order. You can also allow the reuse of the event object that gets delivered, to get the memory pressure down a bit.
 
 The onEvent\* allows you to register a consumer for handling the events, either all of the events or by event name (type). The start method kicks off the processing in the current thread, startAsync is a convenience method for kicking off the process in a single separate thread.
 
-Where to use streaming
-----------------------
+## Where to use streaming
 
 There are several advantages to JFR event streaming. It is a great way to access JFR data for monitoring purposes. You get access to detailed information that was previously unavailable to you, even from different processes, should you want to.
 
@@ -146,13 +140,11 @@ try (EventStream es = new RemoteRecordingStream(conn)) {
 }
 ```
 
-
 It also allows you to skip the metadata part of a normal flight recording. The metadata in JFR contains the information about what was recorded, so that you can parse and view data that you may not even know about beforehand. In the case of monitoring a few well known data points, this is redundant information to keep sending over and over again.
 
 [Erik Gahlin](https://twitter.com/ErikGahlin) has a [neat example](https://github.com/flight-recorder/health-report) for producing health reports using JFR streaming, displaying pre-aggregation of the top frames for execution samples and allocation, as well as doing stats for some common data points, like GC metrics and CPU load.
 
-Where Not to Use Streaming
---------------------------
+## Where Not to Use Streaming
 
 This is from [JEP-349\[2\]](https://openjdk.java.net/jeps/349), the JEP where JFR streaming was introduced:
 
@@ -170,8 +162,7 @@ For example, the RecordedEvent class contains a method to get the RecordedStackT
 
 You can externalize some of that cost, i.e. how the process you are monitoring is affected, by using another process to read the data as described above. That would, for example, lessen the allocation pressure in the process you're monitoring. That is great, for example if you have a very latency sensitive process. That said, you have now created another Java process and put the costs over there (including the cpu overhead of dealing with the memory pressure as well as the memory overhead of running another JVM), typically on the same host. If you can afford to dedicate the memory and pin the event stream reader process to its own processor (cpu affinity), this can be a good solution though. Note that the same can be done for normal flight recordings, i.e. you can stream the recorded data directly from the file repository from a separate process.
 
-Benchmarks of Using JFR Streaming Wrongly
------------------------------------------
+## Benchmarks of Using JFR Streaming Wrongly
 
 For laughs and giggles, here are some benchmarks using just standard JFR to get all the data in the profiling template, compared to getting the equivalent information and serializing it to a JSon-like format using JFR Streaming. In other words, abusing JFR Streaming as a streaming replacement for getting the full JFR dataset. This is of course not what you should be using JFR Streaming for, but exemplifies how wrong you can land if you use the technology in a way it was never intended. We'll look at the latency of http requests, the CPU time spent and the allocation pressure. We'll also look at the size of the payload of information extracted. The benchmark is admittedly being a bit extra mean as well, to explore edge cases.
 
@@ -199,8 +190,7 @@ Note that the JFR file contains the full stacktraces, and that the jfr-streaming
 
 So what is the conclusion of these benchmarks? Not much, except for: "don't use technology for things it was never intended for". 😉
 
-Summary
--------
+## Summary
 
 * JFR streaming is a great new way to expose JFR data for monitoring purposes.
 * JFR streaming is available from JDK 14 and above.

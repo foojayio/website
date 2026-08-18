@@ -21,8 +21,7 @@ frozen: false
 
 **In [our last article](https://foojay.io/today/web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads/), we highlighted the impressive performance gains achieved through the use of virtual threads. However, upon diving deeper into the code, we discovered an issue caused by the jsoup library: a phenomenon known as pinning. But before we delve into solutions, let's take a moment to understand what pinning actually is.**
 
-What is Pinning?
-----------------
+## What is Pinning?
 
 In the context of virtual threads, pinning refers to the condition where a virtual thread is "stuck" to its carrier thread (the platform thread on which it runs).
 
@@ -50,8 +49,7 @@ To alleviate the effects of pinning, consider the following strategies:
 1. **Use ReentrantLocks** : Instead of synchronized blocks or methods, use ReentrantLock from `java.util.concurrent.locks` as it allows the virtual thread to be unmounted when blocked.
 2. **Code Review** : Regularly review your code to identify and minimize the use of `synchronized` methods or blocks and native methods in the context of virtual threads.
 
-Monitoring Pinning
-------------------
+## Monitoring Pinning
 
 So, you may be wondering, how do you diagnose this pinning issue in your own code? One way to get to the bottom of this problem is by utilizing specific JVM flags.
 
@@ -97,14 +95,9 @@ Thread[#421,ForkJoinPool-1-worker-51,5,CarrierThreads]
     java.base/java.io.FilterInputStream.read(FilterInputStream.java:119)
 ```
 
-
 If you scrutinize the stack trace, one line will likely grab your attention:
 
-<br />
-
     java.base/java.lang.VirtualThread$VThreadContinuation.onPinned(VirtualThread.java:185)
-
-<br />
 
 This line indicates that our virtual thread is, in fact, getting pinned to carrier threads. This isn't ideal for our application's performance. Upon closer inspection, you'll find that this pinning issue arises due to the use of the jsoup library in our code. The culprit could be a \`synchronized\` block or perhaps some sort of native function call within the library.
 
@@ -254,7 +247,6 @@ public class Crawler2 implements Runnable {
     }
 }
 ```
-
 
 To fix the pinning issue, we switched from using the jsoup library to using HttpClient. HttpClient is built into Java and is available from version 11 onwards. The best part? It doesn't have the pinning problem we saw with jsoup.
 

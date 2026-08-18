@@ -46,7 +46,6 @@ This format can store a wide variety of location like data, for our purposes we'
 }
 ```
 
-
 Note: the order matters, its \[longitude, latitude\] ... this may differ from how some map applications handle coordinate order.
 
 In this example we named our point location and it has a type and an array of coordinates (the name and category are only used for our application, not the geo data).
@@ -59,7 +58,6 @@ To enable queries on our locations we'll need to create a special type of index 
 db.places.createIndex({ location: "2dsphere" });
 ```
 
-
 This will create an index on our location field, however we likely will want to create compound index that also includes the category of our location so let's create that index too:
 
 ```
@@ -67,7 +65,6 @@ db.places.createIndex(
   { category: 1, location: "2dsphere" }
 );
 ```
-
 
 Now we can target our queries to the category of location first, before checking the distance if we wish.
 
@@ -95,7 +92,6 @@ db.places.find({
 });
 ```
 
-
 This will bring us back two of locations around London within 2,000 meters of The Tower of London:
 
 ```
@@ -119,7 +115,6 @@ This will bring us back two of locations around London within 2,000 meters of Th
 }
 ```
 
-
 Obviously within that close of a range it might not always match a lot of major landmarks, but if you were looking for a restaurant within a 1 mile walk that might be perfect!
 ![](Screenshot-2025-10-06-at-1.21.29-PM-1024x458.png)
 
@@ -136,7 +131,6 @@ db.places.find({
   }
 });
 ```
-
 
 Let's break this down a little:
 
@@ -177,7 +171,6 @@ db.places.find({
 });
 ```
 
-
 Now we might get back locations such as Shakespeare's Globe, the Tate Modern, the Imperial War Museum or even the MongoDB London HQ!
 
 **Using Geo Queries in Pipelines**
@@ -199,7 +192,6 @@ db.places.aggregate([
   { $project: { name: 1, category: 1, location: 1, distanceMeters: 1 } }
 ]);
 ```
-
 
 While rather simple, this will get the location and then limit the output, and return just the fields specified but you could have any number of steps in between.
 

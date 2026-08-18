@@ -31,13 +31,11 @@ cd mongodb-schemas-in-java
 mvn test
 ```
 
-
 And if you want to play with the example API visually (like I do!) and you have a local Mongo or an Atlas Cluster with the [Weather Sample](https://www.mongodb.com/docs/guides/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant) data, run:
 
 ```
 ./run-atlas.sh
 ```
-
 
 Put your connection string in and you'll see the sea surface temperatures displayed on a nice little browser UI:  
 
@@ -47,8 +45,7 @@ Put your connection string in and you'll see the sea surface temperatures displa
 
 (If you're a screen-reader user, there's a way for you to [read the data](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/resources/static/index.html#L187-L190) too.)
 
-Why MongoDB and Java are such good friends
-------------------------------------------
+## Why MongoDB and Java are such good friends
 
 ![Diagram showing the interaction between a loosely-typed browser client, a strongly-typed Java server, and a schemaless MongoDB database. The client and server communicate using JSON, ensuring consistent responses. The Java server validates API inputs, returns consistent structured results, filters data from MongoDB according to the defined schema, and ensures stored documents match the current schema.](Screenshot-2025-09-09-at-10.52.21-AM.png)
 
@@ -68,8 +65,7 @@ No more awkward wrangling of relational and document concepts. No more long time
 
 Suddenly, developers were in charge of the schema, defined in one place, in the Java code.
 
-The missing schema of loosely typed systems
--------------------------------------------
+## The missing schema of loosely typed systems
 
 Stepping outside of the Java world, as, sadly, we must, I have encountered a bundle of problems with untyped or loosely typed languages.
 
@@ -87,8 +83,7 @@ As a couple of examples, I've seen:
 
 JavaScript migration scripts used to update MongoDB which had no validation, intellisense, or checks which easily led to bugs (admittedly, this flexibility can also be convenient for transformations of data too---especially when adding/removing a field from a structure, but should be done with checks and balances).
 
-Bringing schema back
---------------------
+## Bringing schema back
 
 Java's hierarchical types naturally provide the missing schema for MongoDB documents. Using immutable record types which may be safely cached and passed around in concurrent services allows for highly safe and scalable applications built around MongoDB.  
 ![The image shows that an unexpected field (jank: ‘undefined’) sent from the browser is safely ignored by the Java API, preventing it from being stored in the Mongo document.](Screenshot-2025-09-09-at-10.56.01-AM.png)
@@ -99,8 +94,7 @@ The rest of the article, we will work through a code example that shows schema d
 
 We'll discuss some tips to get the most out of Java with MongoDB and some of the traps to avoid.
 
-Example: Spring Boot sea temperature service
---------------------------------------------
+## Example: Spring Boot sea temperature service
 
 In this example, we're going to build a [Spring Boot](https://spring.io/projects/spring-boot) web service using [Java 24](https://openjdk.org/projects/jdk/24/) and the [MongoDB synchronous driver (with virtual threads!)](https://www.mongodb.com/developer/products/mongodb/jdk-21-virtual-threads/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant).
 
@@ -235,7 +229,6 @@ Here's an example document from the sample data collection:
 }
 ```
 
-
 A few things about this document:
 
 1. It's very large with lots of details, and you could imagine over time, it would grow.
@@ -250,7 +243,6 @@ Here's the API I'd like to build:
 ```
 SSE /weather/sea/temperature?south={lower latitude}&west={lower longitude}&north={upper latitude}&east={upper longitude}
 ```
-
 
 E.g., /weather/sea/temperature?south=-39\&west=138\&north=-28\&east=164
 
@@ -267,13 +259,11 @@ data: [
 data: [{...}]
 ```
 
-
 ### Weather reports
 
 ```
 GET /weather?id={id}
 ```
-
 
 Returns a single weather report by ID.
 
@@ -282,7 +272,6 @@ Returns a single weather report by ID.
 ```
 GET /weather/list?[page=x]
 ```
-
 
 Returns a paged list of weather reports with a few key fields:
 
@@ -295,7 +284,6 @@ Returns a paged list of weather reports with a few key fields:
   totalPages: 42
 }
 ```
-
 
 ### Schemas
 
@@ -366,7 +354,6 @@ public record WeatherReport(
 }
 ```
 
-
 This neatly represents the whole document structure in a single .java file, with the document itself and all its subdocuments.
 
 You'll notice when you use these types, that the inner subdocuments are namespaced to the outer one so that you can clearly see the representation you are working with---e.g., WeatherReport.Position. Of course, if you wanted to, you could move some of these into shared representations outside, but I like the neatness of defining all the types for a collection in one place.
@@ -388,7 +375,6 @@ public record WeatherReportSummary(
         Double airTemperature
 ) {}
 ```
-
 
 #### Tip---BSON IDs and the _id field
 
@@ -414,7 +400,6 @@ public record WeatherReportSummaryList(
 ) { }
 ```
 
-
 And a representation for the sea temperature map API:
 
 ```
@@ -430,7 +415,6 @@ public record SeaTemperature(
         double temp
 ) {}
 ```
-
 
 We're using abbreviations for the field names---latitude = lat, longitude = lon, and temp = temperature (celcius) because we're going to stream out a *lot* of these to the map client!
 
@@ -570,7 +554,6 @@ public class WeatherDataAccess {
 }
 ```
 
-
 Let's walk through each of the methods and explain the techniques we've used in each case. Each method is going to ramp up in complexity and show you how to do simple through advanced queries to support our API and show off some Java schema record capabilities.
 
 First---get a weather report by ID. Couldn't be simpler---find, return, done.
@@ -587,7 +570,6 @@ public record WeatherReportSummaryAggregate(
         public record Summary(Integer count) {}
     }
 ```
-
 
 When you use the aggregate framework, you'll often return data in a slightly adjacent format to the one you want to return to clients. In our case, we are using the aggregate facet() stage to return a page of summary records alongside the total count of records. To support that, we've created this little record as an intermediary structure which we will convert back into the method's return value record type.
 
@@ -613,7 +595,6 @@ WeatherReportSummaryAggregate result = collection.aggregate(List.of(
         )
 ```
 
-
 #### Tip---typed queries with MongoCollection\<\> generics
 
 Each time you perform a query, you can specify the Java type you want the results serialized to.
@@ -625,14 +606,12 @@ MongoCollection<WeatherReportSummaryAggregate> collection =
    database.getCollection(COLLECTION_NAME, WeatherReportSummaryAggregate.class);
 ```
 
-
 In our other methods, we are using the full record representation WeatherReport:
 
 ```
 MongoCollection<WeatherReport> collection = 
    database.getCollection(COLLECTION_NAME, WeatherReport.class);
 ```
-
 
 Isn't it expensive to create MongoCollection all the time? No! When you declare a MongoCollection, there is very little cost to doing so. There are a few null checks and a check on the validity of the collection name. So you can create them on the fly when you need them.
 
@@ -659,7 +638,6 @@ facet(
      ))
 )
 ```
-
 
 Atlas Search also supports pagination using [pagination tokens](https://www.mongodb.com/docs/atlas/atlas-search/paginate-results/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant#std-label-paginate-results-search-sequence-token), which allows you to continue reading to the next page without doing expensive counts.
 
@@ -701,7 +679,6 @@ public record WeatherReportSummaryListNoCount(
 ) { }
 ```
 
-
 The last method in our data access streams data back using a consumer (rather than collecting and returning it).
 
 ```
@@ -737,7 +714,6 @@ public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<WeatherRepor
     }
 }
 ```
-
 
 Essentially, our data access class is producing a cut-down WeatherReport record (filtered by projection) for the given bounding coordinates. This keeps memory low whilst returning potentially huge datasets. This method supports the SSE sea temperature API.
 
@@ -812,7 +788,6 @@ public class SeaTemperatureService {
 }
 ```
 
-
 Our database schema is being translated procedurally into a more efficient schema for our API:
 
 WeatherReport (projected)
@@ -828,7 +803,6 @@ WeatherReport (projected)
 }
 ```
 
-
 -\> [SeaTemperature](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/seatemperature/datamodel/SeaTemperature.java)
 
 ```
@@ -839,14 +813,12 @@ WeatherReport (projected)
 }
 ```
 
-
 Notice that inside this method, we declare and use on the fly a little Coordinates record:
 
 ```
 record Coordinates(Double longitude, Double latitude) {}
 Set<Coordinates> uniqueCoordinates = new HashSet<>();
 ```
-
 
 Because records have built-in comparison for their values, we can use them as the key in a Set, providing a convenient way to filter out duplicates.
 
@@ -921,7 +893,6 @@ public class WeatherApi {
 }
 ```
 
-
 The first two methods are very easy---call the injected data access class, and return the result.
 
 The third one is the most fun! This uses a little helper class to send an SSE event for each batch of temperatures as MongoDB returns them to us.
@@ -955,7 +926,6 @@ if (log.isTraceEnabled()) {
 }
 ```
 
-
 What don't we want to see? [COLLSCAN](https://www.mongodb.com/docs/manual/reference/explain-results/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant)!
 
 ```
@@ -964,7 +934,6 @@ What don't we want to see? [COLLSCAN](https://www.mongodb.com/docs/manual/refere
   "inputStage": {
     "stage": "COLLSCAN",
 ```
-
 
 What do we want? Index usage!
 
@@ -975,15 +944,13 @@ What do we want? Index usage!
       "stage": "IXSCAN",
 ```
 
-
 This is also a super deep topic, but I highly recommend spending time getting to know your [query explain plans](https://www.mongodb.com/docs/manual/tutorial/analyze-query-plan/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant).
 
 ### Why not Spring Data?
 
 You might be wondering why we didn't use Spring Data in this example. I'm a big fan of Spring Boot as a web service framework, but also a little cautious of getting too tangled up in its many conventions and abstractions. It's my view that I want my services to be fairly portable between frameworks. If I decide I want to switch to Micronaut tomorrow, I want to be able to do it without too much deep surgery. I also think the MongoDB Java driver is plenty easy enough to use and configure with a simple connection string rather than relying on magical annotations to create connections and wire up your data. I'd be curious to learn if you have a strong opposing opinion on that---let me know!
 
-Java benefits
--------------
+## Java benefits
 
 Let's wrap up and talk about some of the benefits you get by defining schemas in Java in this way.
 
@@ -1041,14 +1008,12 @@ Let's say you have a field 'position', which you need to migrate from geoJSON to
 }
 ```
 
-
 -\>
 
 ```
 "longitude": -47.9,
 "latitude": 47.6
 ```
-
 
 Using the Java record representation, we can clearly indicate this change:
 
@@ -1063,7 +1028,6 @@ public record WeatherReport(
     Double longitude,
     Double latitude,
 ```
-
 
 There will be a clear marker in the git commit history indicating when this change to the schema was made. For now, we have both the old and the new fields duplicated.
 
@@ -1087,7 +1051,6 @@ db.data.updateMany({position: {$exists: true}}, [
   }}
 ])
 ```
-
 
 This has the (significant!) benefit that you don't have to maintain two copies of the data and code to manage clients who haven't upgraded yet.
 
@@ -1115,8 +1078,7 @@ Take a look through the tests here and let me know what you think about the appr
 
 I use a code coverage tool (JetBrains IntelliJ built in one) to show me what edge cases I'm missing in my tests.
 
-Other languages
----------------
+## Other languages
 
 A lot of what I have said would also apply to other strongly typed languages too---but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can't say for many other languages).
 
@@ -1124,13 +1086,10 @@ I would also say that I am a regular developer of Python, TypeScript, and JavaSc
 
 MongoDB also supports JSON Schema validation rules that enforce schemas at the database layer. This may be a useful guardrail to add if the language you are using is not enforcing the schema through the type system.
 
-Wrap
-----
+## Wrap
 
 I hope you've enjoyed (as I have!) this little exploration of managing schemas for your application with Java.
 
 I aimed to give you some food for thought about the benefits to be found using Java's excellent type system, and the nice fluent syntax it supports for querying your data with MongoDB.
 
 Happy scheming!
-
-<br />

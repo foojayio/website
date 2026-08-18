@@ -35,11 +35,7 @@ frozen: false
  </figure>
 </figure>
 
-
-
 ***Let's start with the first mystery... Who is behind the @Orango_Mango account? Can you introduce yourself?***
-
-
 
 My nickname is Orango_Mango, but my real name is Paul Kocian, and I live in Italy. I started programming at the age of 13 and learned the basics of Python by building simple programs and, later on, my first GUI applications. I started with a simple game where the computer asks a few operations, and the user must calculate the result in the shortest time possible without getting any of these wrong.
 
@@ -49,11 +45,7 @@ At this time, I loved very much building games and learning how games are built 
 
 At the age of 14, I started coding in Java, and a year later, I also started using the JavaFX framework. I started building very simple GUI apps and then games. I also joined the [GMTK game jam in 2022](https://itch.io/jam/gmtk-jam-2022/rate/1621600). Now I'm 16 and try to further extend my experience with apps like a [MySQL user interface](https://github.com/OrangoMango/MySQL-GUI-Viewer) and games like [TrisGame](https://github.com/OrangoMango/TrisGame), a [basic multiplayer game](https://github.com/OrangoMango/BasicMultiplayerGame), [Projectile](https://github.com/OrangoMango/Projectile), and [FoodDice](https://github.com/OrangoMango/FoodDice).
 
-
-
 ***That's an impressive list of projects, and on top, you're only 16 years old! How do you find the time to learn and create all this? Are you still in school? And where did you learn all this?***
-
-
 
 Yes, I go to the "Liceo Filippo Buonarroti" school in Pisa, Italy. We mainly use C++, but I don't learn to program so profoundly. That's why I learn those things mostly alone at home.
 
@@ -61,11 +53,7 @@ When I don't know how to code something, I look it up on StackOverflow or other 
 
 As I also have homework and exams, I don't have much time during the week to code my stuff. Building a 3D engine takes time, so I mostly code during the weekend and holidays.
 
-
-
 ***For many, Java is considered to be an old and boring programming language. So I'm delighted to learn that someone your age selected Java to learn more and develop games and other applications. What is the main reason for you choosing Java?***
-
-
 
 I like making games but I think the best part is to code a game on a low level, that's why I don't like to use game engines like Unity (C#), where everything is already created for you (the graphics, physics, AI,...).
 
@@ -85,11 +73,7 @@ For example, Minecraft is made in Java, and was my inspiration for a 3D engine. 
  </figure>
 </figure>
 
-
-
 ***Java and JavaFX on mobile is indeed a very nice approach and doesn't get the amount of attention it deserves. I guess you know the work Gluon is doing on this topic? If not, please take a look at [their docs](https://docs.gluonhq.com/#platforms_android).***
-
-
 
 As JavaFX is Java-based, I always asked myself if it's possible to run a JavaFX application on Android.
 
@@ -97,11 +81,7 @@ So one day, I randomly discovered ["JavaFXPorts"](https://gluonhq.com/products/m
 
 I tried with the JavaFXPorts Gradle plugin and some code changes to make the application work also on newer Android versions (the plugin is outdated right now).
 
-
-
 ***I saw on Twitter that you shared a problem you were having with your 3D engine, and [Almas Baim advised you to check with VisualVM what code was blocking your rendering](https://twitter.com/orango_mango/status/1642571365210378242). How did that work out? Was it difficult to set up and find the part of your code that was causing issues? And what problem did it reveal?***
-
-
 
 The main problem of the 3D engine is performance. Coding and understanding the math is hard, but writing the engine in an efficient way is more complex. I worked for weeks and tried many ways to make the code as efficient as possible. As I'm developing the application on a Raspberry Pi, it's tough to make it lightweight.
 
@@ -109,11 +89,7 @@ In the end, as Almas Baim suggested, I used a profiler to see what was causing a
 
 So to fix this, I cached the calculated vertices and used the data to construct the other triangles of the cube. This could still be improved by also checking adjacent cubes (2 adjacent cubes share the same 4 vertices).
 
-
-
 ***You mentioned you are developing the 3D engine on a Raspberry Pi!? Is that an extra challenge to limit the computer power and see the impact on the 3D rendering? Can you share what computer and programs you use for your development?***
-
-
 
 Yes, It's a challenging task to develop a 3D engine on a Raspberry Pi. I use a model 4B with 2GB of RAM.
 
@@ -130,11 +106,7 @@ I actually have a laptop with Windows but I don't like it for coding. For that t
  </figure>
 </figure>
 
-
-
 ***As you learned all this on your own, can you share what was the most challenging part of getting started with Java and JavaFX?***
-
-
 
 When I started learning Java, the most challenging part was to get familiar with the curly brackets, for loops, and all the class names (for example, the java.util package) as I came from Python. When I knew all the essential things of Java, I searched for a GUI API for Java that was similar to the Tkinter module of Python (I was familiar with the canvas API of Python, which is similar to the JavaFX one).
 
@@ -142,11 +114,7 @@ I found Swing and JavaFX. I chose JavaFX instead of Swing because JavaFX basics 
 
 Unfortunately, in this book, the canvas API was not explained, so I had to learn it by myself, as it's essential for 2D game development.
 
-
-
 ***What would be your ideal career?***
-
-
 
 I would like to be a Java game developer or anything else coding-related!
 

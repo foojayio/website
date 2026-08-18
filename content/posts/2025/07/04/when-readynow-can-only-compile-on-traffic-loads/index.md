@@ -26,8 +26,7 @@ ReadyNow enables applications to handle load optimally by compiling bytecode to 
 
 This post explores one such scenario and provides a detailed solution for development teams facing this challenge.
 
-Compilation only happens on traffic loads
------------------------------------------
+## Compilation only happens on traffic loads
 
 In some cases, ReadyNow does not achieve the expected warmup improvements, and many compilations are only executed when the application's first load hits. The most common cause is that the traffic triggers the code to execute for the first time, and some classes only get loaded and initialized at that moment.
 
@@ -36,15 +35,13 @@ The first chart below shows a perfect example of a first set of compilations sho
 The second chart shows an example where most of the compilations are handled after startup, and only a minimal number need to happen when traffic loads \[Figure 2\].
 ![](readynow-compile-queus.jpg)
 
-ReadyNow waits for class loading
---------------------------------
+## ReadyNow waits for class loading
 
 To compile and optimize the bytecode to native code, ReadyNow needs classes to be initialized. This happens on the "first access to a class" and performs things like calling the static initializers (`static {}` block in class) and initializing any static variables. Classes are only loaded by the class loader in the JVM when they are needed.
 
 Because of this, some code cannot be compiled upfront but only when the system's production load first needs it. This prevents ReadyNow from achieving its primary goal of compiling the code before it's needed.
 
-How to fix this?
-----------------
+## How to fix this?
 
 ### Identifying the problem
 
@@ -84,8 +81,7 @@ These methods return the total number of enqueued and in-progress compilations, 
 
 Check the [Zing MXBeans documentation](https://docs.azul.com/prime/MXBeans) for more info.
 
-Example with Spring Petclinic
------------------------------
+## Example with Spring Petclinic
 
 Let's use the well-known [Spring Petclinic demo](https://github.com/spring-projects/spring-petclinic) application to illustrate the problem and solution. With the JMeter test included in this project, we can simulate a load on the application and use the Garbage Collector log files to check the compilation queues.
 
@@ -103,8 +99,7 @@ This shows that, when we use the JMeter test as a "dummy" load, we can already p
 When executing the test above, I instructed the application to generate a ReadyNow profile with `-XX:ProfileLogOut=readynow.log` and used it as input for a second test. As expected, we get the desired effect of a larger spike of compiler queues immediately after the application's startup, making most of the code available in its native format thanks to ReadyNow. With the first JMeter test, we can trigger the compilation of the remaining methods as an improved warmup step and prepare the application for the real traffic. As you can see, the number of compiler queues was further reduced at the second test run, indicating the application was fully prepared to handle real traffic \[Figure 4\].
 ![](readynow-compile-queus-with-profile.avif)
 
-Generational ReadyNow profiles
-------------------------------
+## Generational ReadyNow profiles
 
 As explained in an earlier blog post, "How to Train ReadyNow to Achieve Optimal Java Performance", ReadyNow can take profiles as input and output a new generation with more and improved info for the next run. In the test for this blog, I did precisely that.
 
@@ -122,15 +117,13 @@ The chart you see above is the result of the third-generation profile. Below are
  </figure>
 </figure>
 
-Result
-------
+## Result
 
 Because those "missing" classes now get loaded and initialized after startup and with the warmup script, ReadyNow can execute its expected tasks from the start or before the real traffic starts, and all required native code can be compiled upfront. This will move the compilation to the very beginning of the application, but it can still take some time to finish. The exact duration can be defined through testing, combined with the Readiness Probe to allow the [Falcon Compiler in Zing](https://docs.azul.com/prime/Falcon-Compiler) or [Cloud Native Compiler in Optimizer Hub](https://docs.azul.com/optimizer-hub/about/cloud-native-compiler) to get through most optimizations.
 
 From experience with many customer production systems, achieving 100% of Tier 2 optimizations at startup is not usually necessary. The most essential compilations will be completed first, and doing the trailing optimizations after traffic starts is acceptable for most customers.
 
-Conclusion
-----------
+## Conclusion
 
 Uninitialized classes can sometimes hinder ReadyNow's effectiveness in improving Java application warm-up times. By understanding this limitation and identifying and proactively calling the static code, you can use ReadyNow's full capabilities to optimize your application performance from startup.
 
@@ -143,5 +136,3 @@ To read the whole ReadyNow series, start at the beginning and read through these
 * [How to Train ReadyNow to Achieve Optimal Java Performance](https://foojay.io/today/how-to-train-readynow-to-achieve-optimal-java-performance/)
 * [Improve Your Java Applications' Startup and Compilation Speed with Optimizer Hub](https://foojay.io/today/improve-your-java-applications-startup-and-compilation-speed-with-optimizer-hub/)
 * When ReadyNow Can Only Compile on Traffic Loads
-
-<br />

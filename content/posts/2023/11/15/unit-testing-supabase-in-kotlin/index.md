@@ -74,7 +74,6 @@ suspend fun savePerson(persons: List<Person>, client: SupabaseClient): List<Resu
 }
 ```
 
-
 The SQL definition of our table looks like this:
 
 ```
@@ -86,7 +85,6 @@ create table
                     age bigint null
 ) tablespace pg_default;
 ```
-
 
 We want to be able to test that our functions behave properly. For the sake of this minimal example, I've decided to filter all non adults, but you can imagine any other use case where the functions contain some business logic.
 
@@ -131,7 +129,6 @@ class MainKtTestMock {
 }
 ```
 
-
 Here's the final error I encountered:
 
 ```
@@ -140,7 +137,6 @@ java.lang.IllegalStateException: Plugin rest not installed or not of type Postgr
     at MainKtTestMock$setUp$1.invoke(MainKtTestMock.kt:34)
     at MainKtTestMock$setUp$1.invoke(MainKtTestMock.kt:34)
 ```
-
 
 ### Second attempt: Encapsulate the Supabase Client
 
@@ -160,7 +156,6 @@ class DatabaseClient(private val client: SupabaseClient){
     }
 }
 ```
-
 
 And my test can then look like this (see `MainKtTestSubclass`):
 
@@ -186,7 +181,6 @@ class MainKtTestSubclass {
     }
 }
 ```
-
 
 My main issue now is that because I have to indicate every single time what my output should be. It also just displaces the problem, because I don't really have any nice and clean way to check that my business logic works as intended, since I'm mocking it.
 
@@ -219,7 +213,6 @@ class MainKtTestMockEngine {
     }
 }
 ```
-
 
 This is actually not a bad idea, it's light and it gets the job done is a clear and readable way. Those tests are also fast to run.
 
@@ -313,7 +306,6 @@ networks:
     driver: bridge
 ```
 
-
 Note that a few auxiliary files are needed for this to work. You can find everything in the `test/resources` folder of [the example GitHub repository](https://github.com/jlengrand/supabase-mock-demo-kotlin/tree/main/src/test/resources?ref=lengrand.fr).
 
 There is :
@@ -391,7 +383,6 @@ class MainKtTestTestContainers {
     }
 }
 ```
-
 
 All of the magic happens at the beginning, to setup a fake Supabase URL and connect to it. Once that is done, we can write our tests as easily as ever, since we're actually interacting with an actual light Supabase clone! (For reference, the tests take about 2 seconds to run on my machine)
 

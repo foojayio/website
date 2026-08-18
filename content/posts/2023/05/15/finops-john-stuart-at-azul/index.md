@@ -15,26 +15,17 @@ related_posts:
 frozen: false
 ---
 
-FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology and their organization in the FinOps space.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+## FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology and their organization in the FinOps space.
 
 [John Stuart](https://www.linkedin.com/in/johndstu/) is an executive and leader in DevOps, FinOps, Infrastructure and Security at Azul.
 
-
-
-<br />
-
-**Tell us about the work that you've done as a FinOps Foundation member.**
---------------------------------------------------------------------------
+## **Tell us about the work that you've done as a FinOps Foundation member.**
 
 *The FinOps Foundation is a terrific group of individuals collaborating to share best practices for managing cloud spend.*
 
 *We helped develop a standard FinOps framework and maturity model.*
 
-**How do you see cloud cost optimization challenges emerging and how are companies struggling with cost overruns?**
--------------------------------------------------------------------------------------------------------------------
+## **How do you see cloud cost optimization challenges emerging and how are companies struggling with cost overruns?**
 
 *Cloud cost optimization is a challenge -- or will be soon -- for every company. As companies leverage the cloud, they benefit from engineering speed and innovation at the expense of financial control. Many companies that use AWS experience friction between finance and engineering. For example, finance questions why the AWS and Google costs are so high. [Just ask the folks at Snap](https://apple.news/A13Qnow9iO0GKrbDViK7ePA).*
 
@@ -44,15 +35,13 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 > "The FinOps Foundation is a terrific group of individuals collaborating to share best practices for managing cloud spend. We helped develop a standard FinOps framework and maturity model."
 > --- John Stuart, Azul
 
-**How have you applied the FinOps framework at Azul?**
-------------------------------------------------------
+## **How have you applied the FinOps framework at Azul?**
 
 *It's always a journey with the FinOps framework. In FinOps it's crawl, walk, and run. We are in the crawl and walk phases. It started with informing engineering leads on their spend. Teams are given full transparency on the spend, allowing them to optimize workloads.*
 
 *At Azul, we consume large amounts of compute. The teams updated workloads to use spot instances and different instance types at reduced rates. We are also improving financials (savings plans, reserved instances and negotiating discounts) to enable profitability and fund additional initiatives.*
 
-**Where do you see Azul's Cloud Native Compiler (CNC) helping?**
-----------------------------------------------------------------
+## **Where do you see Azul's Cloud Native Compiler (CNC) helping?**
 
 *As some teams progress into the run phase, understanding every cost component and its impact on the bottom line is critical. The basics are done with teams engaging both Engineering and Finance on the unit economics, and this is where [CNC](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) and [Azul Platform Prime](https://www.azul.com/products/prime/) bring significant benefit.*
 
@@ -66,8 +55,7 @@ FinOps and Cloud Cost Management, what's it all about and how does it impact us 
 > "Wouldn't it be great to use a Java Virtual Machine (JVM) to be 30% more performant? That is a win for both Engineering and Finance. Azul Platform Prime delivers higher throughput with less compute and better response times, delivering a better end user experience."
 > --- John Stuart, Azul
 
-**What is your best advice on the most important KPIs and metrics that companies need to measure to control costs? Can you give examples**
-------------------------------------------------------------------------------------------------------------------------------------------
+## **What is your best advice on the most important KPIs and metrics that companies need to measure to control costs? Can you give examples**
 
 *My counsel would be based off the best practices I see from our Azul customers:*
 

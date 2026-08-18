@@ -38,14 +38,9 @@ There are many great APIs for working with threads which I discuss in the videos
 
 {{< youtube pUnX8r-6IIo >}}
 
-<br />
-
 {{< youtube pOrhJ8o9TT0 >}}
 
-<br />
-
-Synchronized vs. ReentrantLock
-------------------------------
+## Synchronized vs. ReentrantLock
 
 A reluctance I had with leaving synchronized is that the alternatives aren't much better. The primary motivation to leave it today is that at this time synchronized can trigger thread pinning in Loom which isn't ideal. JDK 21 might fix this (when Loom goes GA), but it still makes some sense to leave it.
 
@@ -63,7 +58,6 @@ try {
     LOCK.unlock();
 }
 ```
-
 
 The first disadvantage of `ReentrantLock` is the verbosity. We need the try block since if an exception occurs within the block the lock will remain. Synchronized handles that seamlessly for us.
 
@@ -102,7 +96,6 @@ public class ClosableLock implements AutoCloseable {
 }
 ```
 
-
 Notice I don't implement the Lock interface which would have been ideal. That's because the lock method returns the auto-closable implementation instead of `void`.
 
 Once we do that, we can write more concise code such as this:
@@ -113,11 +106,9 @@ try(LOCK.lock()) {
 }
 ```
 
-
 I like the reduced verbosity but this is a problematic concept since try-with-resource is designed for the purpose of cleanup and we reuse locks. It is invoking close but we will invoke that method again on the same object. I think it might be nice to extend the try with resource syntax to support the lock interface. But until that happens, this might not be a worthwhile trick.
 
-Advantages of ReentrantLock
----------------------------
+## Advantages of ReentrantLock
 
 The biggest reason for using `ReentrantLock` is Loom support. The other advantages are nice but none of them is a "killer feature".
 
@@ -129,8 +120,7 @@ It has the option of fairness. This means that it will serve the first thread th
 
 There are edge cases where this probably matters but not something most of us will run into, even when doing advanced multi-threaded code.
 
-ReadWriteReentrantLock
-----------------------
+## ReadWriteReentrantLock
 
 A much better approach is the `ReadWriteReentrantLock`. Most resources follow the principle of frequent reads and few write operations. Since reading a variable is thread safe there's no need for a lock unless we're in the process of writing to the variable. This means we can optimize reading to an extreme while making the write operations slightly slower.
 
@@ -173,9 +163,7 @@ public boolean isInList(String name) {
 }
 ```
 
-
-StampedLock
------------
+## StampedLock
 
 The first thing we need to understand about `StampedLock` is that it isn't reentrant. Say we have this block:
 
@@ -190,7 +178,6 @@ synchronized void methodB() {
      // …
 }
 ```
-
 
 This will work. Since synchronized is reentrant. We already hold the lock so going into `methodB()` from `methodA()` won't block. This works with ReentrantLock too assuming we use the same lock or the same synchronized object.
 
@@ -212,7 +199,6 @@ public void addName(String name) {
    }
 }
 ```
-
 
 This sucks. I "paid" for a write lock only to check `contains()` in some cases (assuming there are many duplicates). We can call `isInList(name)` before obtaining the write lock. Then we would:
 
@@ -242,11 +228,9 @@ public void addName(String name) {
 }
 ```
 
-
 It is a powerful optimization for these cases.
 
-Finally
--------
+## Finally
 
 I cover many similar subjects in the video series above, check it out and let me know what you think.
 

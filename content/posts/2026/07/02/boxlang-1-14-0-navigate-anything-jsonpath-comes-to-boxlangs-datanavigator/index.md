@@ -31,8 +31,7 @@ BoxLang introduced DataNavigators in version 1 so you can use `dataNavigate()`, 
 
 BoxLang 1.14.0 changes that. The `DataNavigator` now understands **JSONPath-style path expressions** natively, and a new `query()` method lets you fan out across a structure and collect every match in a single call. Less ceremony. More signal.
 
-A Quick Refresher: What is the DataNavigator?
----------------------------------------------
+## A Quick Refresher: What is the DataNavigator?
 
 The `DataNavigator` is BoxLang's fluent helper for safely moving through nested data structures: Structs, Arrays, parsed JSON, configuration documents, runtime metadata. The key feature is that it never throws when a path doesn't exist -- it returns a null, a default, or an empty navigator depending on how you call it.
 
@@ -48,13 +47,11 @@ if ( structKeyExists( config, "database" ) ) {
 maxSize = dataNavigate( config ).get( ["database", "connection", "pool", "maxSize"], 10 )
 ```
 
-
 You create a navigator with the `dataNavigate()` BIF, which accepts a Struct, a JSON string, a file path to a JSON file, or a Java Map. From there, you use `.from()` to scope, `.has()` to check, `.get()` / `.getOrThrow()` to extract.
 
 That API still works exactly as it always did. What 1.14.0 adds is a compact expression language that you can drop directly into those same methods.
 
-What Is New in 1.14.0
----------------------
+## What Is New in 1.14.0
 
 Four focused additions to the `DataNavigator`:
 
@@ -73,8 +70,7 @@ Four focused additions to the `DataNavigator`:
 * `getOrDefault(key, value)` -- an explicit-fallback variant of `get()`. Guaranteed non-null. Cleaner than the null-check pattern.
 * `getByKey(key)` / `hasByKey(key)` -- exact key lookup where dots and brackets are literal, not separators. For payloads that have keys like `"db.host"` as an actual key name.
 
-The Path Expression Syntax
---------------------------
+## The Path Expression Syntax
 
 BoxLang's JSONPath dialect covers the operations that matter day-to-day. Here is the full reference:
 
@@ -110,8 +106,7 @@ Trigger rule:
 
 All of this syntax is available inside `get()`, `has()`, `from()`, and `query()`.
 
-Real-World Scenarios
---------------------
+## Real-World Scenarios
 
 ### Scenario 1: Processing an API Response
 
@@ -133,7 +128,6 @@ You are consuming a third-party REST API. The payload looks like this:
 }
 ```
 
-
 Before 1.14.0, pulling in-stock product names required navigating to the array and then looping:
 
 ```java
@@ -146,7 +140,6 @@ inStockNames = products
     .filter( p -> p.inStock )
     .map( p -> p.name )
 ```
-
 
 With JSONPath expressions in 1.14.0, the navigator handles the traversal and filter in a single call:
 
@@ -169,7 +162,6 @@ first = nav.get( "data.store.products[?(@.inStock == true)]" )
 count = nav.getOrDefault( "data.store.meta.count", 0 )
 // => 0 (field doesn't exist, default returned cleanly)
 ```
-
 
 Note the distinction: `get()` returns the **first match** . `query()` returns **all matches** as an Array.
 
@@ -200,7 +192,6 @@ if ( config.has( "modules.bx-ai.providers[*]" ) ) {
 jdbcUrl = config.getByKey( "datasources.main.db.url" )
 //                          ^ treated as ONE literal key, not a path
 ```
-
 
 The `getByKey()` / `hasByKey()` distinction matters whenever your data was shaped by a Java properties system, a dotted-key config library, or any payload where a key name contains` .` or `[` as real characters.
 
@@ -247,9 +238,7 @@ nav.query( "providers[?(@.models)]" )
 // => all providers that have a models field (existence check)
 ```
 
-
-Choosing the Right Method
--------------------------
+## Choosing the Right Method
 
 The four retrieval methods serve distinct purposes. Use this as a guide:
 
@@ -265,8 +254,7 @@ Use `get()` or `getOrDefault()` when a value may or may not exist, `getOrThrow()
 
 One rule of thumb: if your path expression contains` [*]`, `[n:m]`, `..`, or a filter `[?(...)]`, reach for `query()`. These operators can match zero, one, or many nodes. `get()` only returns the first hit and silently drops the rest.
 
-Putting It All Together
------------------------
+## Putting It All Together
 
 Here is a complete, realistic example: loading and validating a multi-environment application config, then extracting just what you need from each section.
 
@@ -317,11 +305,9 @@ class AppConfigLoader {
 }
 ```
 
-
 No loops. No null guard towers. No nested `structKeyExists()` chains. The path expressions describe the shape of the data you want, and the navigator handles the traversal.
 
-Upgrade and Explore
--------------------
+## Upgrade and Explore
 
 JSONPath support in the `DataNavigator` ships in **BoxLang 1.14.0** , available today. No dependencies to add, no configuration to change. If you are already using `dataNavigate()`, the new expressions are a drop-in enhancement. Existing variadic-key calls are untouched.
 
@@ -329,8 +315,7 @@ Full documentation is at [boxlang.ortusbooks.com/boxlang-language/syntax/data-na
 
 The complete 1.14.0 release notes, including Dynamic Sets, Ranges, Inner Classes, Query Transformers, and all 65 closed issues, are at [boxlang.ortusbooks.com/readme/release-history/1.14.0](https://boxlang.ortusbooks.com/readme/release-history/1.14.0 "boxlang.ortusbooks.com/readme/release-history/1.14.0").
 
-Resources
----------
+## Resources
 
 * [BoxLang Documentation](https://boxlang.ortusbooks.com/ "BoxLang Documentation")
 * [DataNavigator Reference](https://boxlang.ortusbooks.com/boxlang-language/syntax/data-navigators "DataNavigator Reference")

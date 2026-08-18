@@ -31,14 +31,9 @@ Let's explore how Kafka Streams powers a real-time city tour experience! 🧭
 
 {{< youtube s07d3SmoBMI >}}
 
-<br />
-
-
-
 🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 
-1️⃣ The Use Case: Lille City Tour
----------------------------------
+## 1️⃣ The Use Case: Lille City Tour
 
 ### Imagine you're planning a visit through Lille, France.
 
@@ -54,12 +49,9 @@ Each sightseeing spot has a specific opening and closing time.
 
 Visitors submit their visit plans, and we validate whether the visit can be scheduled within the location's allowed timetable.
 
-
-
 🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪
 
-2️⃣ The Goal
-------------
+## 2️⃣ The Goal
 
 ### What I want to do!
 
@@ -70,12 +62,9 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 * ✅ Valid visits → trip-steps topic.
 * ❌ Invalid visits → DLQ topic (dead-letter queue).
 
-
-
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪
 
-3️⃣ Tech Stack
---------------
+## 3️⃣ Tech Stack
 
 ### What I used for this demo
 
@@ -86,12 +75,9 @@ Visitors submit their visit plans, and we validate whether the visit can be sche
 * Docker for local environment
 * Java for stream logic
 
-
-
 🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
-4️⃣ Data Modeling
------------------
+## 4️⃣ Data Modeling
 
 ### What is the model of the visit data
 
@@ -115,7 +101,6 @@ Each location has its own timetable:
 ]
 ```
 
-
 Each event from the visitor looks like:
 
 ```json
@@ -124,7 +109,6 @@ Each event from the visitor looks like:
   "hour": "13:00"
 }
 ```
-
 
 The system will return:
 
@@ -136,7 +120,6 @@ The system will return:
 }
 ```
 
-
 Or, if the visit falls outside the available range:
 
 ```json
@@ -147,13 +130,9 @@ Or, if the visit falls outside the available range:
 }
 ```
 
-
-
-
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
-5️⃣ Kafka Streams Topology
---------------------------
+## 5️⃣ Kafka Streams Topology
 
 ### 🧠 Concept
 
@@ -193,7 +172,6 @@ validatedVisits.split()
     .branch((key, status) -> "KO".equals(status.getStatus()), Branched.withConsumer(ks -> ks.to("DLQ")));
 ```
 
-
 ### 🖥️ Visualization
 
 #### Using Kafka Streams Viz:[Kafka Streams Topology Visualizer](http://https://zz85.github.io/kafka-streams-viz/ "Kafka Streams Topology Visualizer"))
@@ -206,12 +184,9 @@ Or in simple way:
 
 Each branch of the stream is defined clearly, allowing easy debugging and maintainability.
 
-
-
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
-6️⃣ Tools in Action
--------------------
+## 6️⃣ Tools in Action
 
 #### 🔄 Kafka Topics: All messages are pushed and consumed in real time.
 
@@ -232,7 +207,6 @@ kafbat-ui:
     KAFKA_CLUSTERS_0_NAME: local
     KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
 ```
-
 
 #### 🧭 ValidTimetableService: A custom utility that loads all location timetables and verifies visit requests.
 
@@ -265,7 +239,6 @@ kafbat-ui:
         }
     }
 ```
-
 
 #### 🧪 Unit Tests: Every logic block is testable, ensuring accuracy before production deployment.
 
@@ -327,15 +300,11 @@ class VisitStatusTopologyTest {
     //...
 ```
 
-
 #### 👨‍💻Full repsoitory on GitHub: [vinny59200 / kstream-lille-city-tour](https://github.com/vinny59200/kstream-lille-city-tour "vinny59200 / kstream-lille-city-tour")
-
-
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪
 
-7️⃣ What I Learned
-------------------
+## 7️⃣ What I Learned
 
 This project helped solidify my understanding of:
 
@@ -346,12 +315,9 @@ This project helped solidify my understanding of:
 
 And most importantly, building a real-life use case that's both educational and fun!
 
-
-
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪
 
-8️⃣ Next Steps
---------------
+## 8️⃣ Next Steps
 
 ### Going further with SpringBoot and Kafka Streams
 
@@ -362,12 +328,9 @@ Here's what could be added next:
 * Visualize city tour analytics on a live dashboard
 * Expose REST endpoints to submit visits and query status
 
-
-
 🔵🔵🔵🔵🔵🔵🔵🔵🔵⚪
 
-9️⃣ Try It Yourself
--------------------
+## 9️⃣ Try It Yourself
 
 ### Want to explore this yourself?
 
@@ -375,12 +338,9 @@ Clone the project ([vinny59200 / kstream-lille-city-tour](https://github.com/vin
 
 🧪 Tip: Modify the timetable and see how event routing changes instantly!
 
-
-
 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 
-🔟 Conclusion
--------------
+## 🔟 Conclusion
 
 ### SpringBoot and Kafka Streams -- Event Routing \& Testing
 
@@ -401,5 +361,3 @@ Thanks for joining the tour! 🇫🇷✨
 👩‍🏫 <https://developer.confluent.io/courses/kafka-streams/get-started>  
 
 🍃 [Prepare Spring certification](https://www.udemy.com/course/spring-professional-certification-6-full-tests-2v0-7222-a/?referralCode=04B6ED315B27753236AC)
-
-<br />

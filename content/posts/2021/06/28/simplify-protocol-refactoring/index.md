@@ -36,7 +36,6 @@ void givenAccountWithBalanceReporterShouldPrintSummary() {
 }
 ```
 
-
 So far, so good. Overall, the idea of the test is pretty simple and well written. The problem is the part that I omitted.
 
 How do we set up the account?
@@ -57,7 +56,6 @@ private Account createTestAccount(String username, int balance) {
 }
 ```
 
-
 Given our domain model got lost in between annotations, DI frameworks, and other funky technologies, we had to start mocking out parts of the model. In this case, we got away with only mocking a few things tightly related to what we do. More often than not, this usually turns into a nightmare of mocking (transitive) dependencies to get the object into the state you want it in. While generally, the advice is to keep your domain model independent of technology (and not mock stuff you don't own), it's often easier said than done. So if we can't easily change our domain model, how do we use this model in our report generator?
 
 ```java
@@ -66,7 +64,6 @@ int balance = account.getSubaccounts().stream().mapToInt(Subaccount::getBalance)
 String currency = account.getSubaccounts().get(0).getCurrency();
 return String.format("%s %d %s", username, balance, currency);
 ```
-
 
 To produce a simple report, we have to navigate our way through the object graph, collect all the data we need and do some processing (e.g. sum). While this is something we have to do anyway, the question becomes: is it really what the report generation should do? What if we add another report besides our plain text? That would need to replicate the same logic. What about changes to our domain model? We'll have to go and fiddle around with the PDF reporting, which broke due to those changes (usually referred to as [Shotgun Surgery](https://refactoring.guru/smells/shotgun-surgery)).
 
@@ -89,7 +86,6 @@ void givenAccountWithBalanceReporterShouldPrintSummary() {
 }
 ```
 
-
 Hm. That's a lot easier for our test. But that doesn't entirely solve the problem in our production code that needs to call our reporter. And most of you will think:
 > "Hey Benny, a stringly-typed API is not great. You should have a strongly-typed API."
 
@@ -108,7 +104,6 @@ public record EndOfYearReportInput(String username, MoneyAmount amount) {
 }
 ```
 
-
 This makes our test a lot simpler as we can now set up different report data for the various scenarios quickly:
 
 ```java
@@ -116,7 +111,6 @@ MoneyAmount amount = new MoneyAmount(-39, "EUR");
 EndOfYearReportData reportData = new EndOfYearReportData("Benny", amount);
 EndOfYearReporter printer = new EndOfYearReporter(reportData);
 ```
-
 
 For the production code, we still need to adapt the domain model to our new record, either using an Adapter or (as shown here) a Factory method:
 
@@ -129,7 +123,6 @@ public static EndOfYearReportData fromAccount(Account account) {
     return new EndOfYearReportData(username, amount);
 }
 ```
-
 
 We already have all the patterns at hand to solve these kinds of problems. *Sometimes, you need to make code more trivial to see the higher-level patterns that solve the issue at hand more elegantly.*
 

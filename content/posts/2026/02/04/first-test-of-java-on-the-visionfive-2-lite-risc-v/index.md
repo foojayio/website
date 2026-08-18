@@ -29,13 +29,11 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube 70FYg1YzFfM >}}
 
-Why RISC-V?
------------
+## Why RISC-V?
 
 RISC-V is an open standard instruction set architecture, driving by the community. Unlike architectures from ARM, Intel, and AMD which must be licensed. This openness has lead to innovation across the industry, and boards like the VisionFive 2 Lite make it accessible to developers like us who want to experiment with (Java) applications on alternative architectures.
 
-StarFive VisionFive
--------------------
+## StarFive VisionFive
 
 The VisionFive from StarFive is a range of affordable boards for your first steps into the RISC-V world. Here's how the VisionFive's compare to the latest Raspberry Pi's:
 
@@ -73,8 +71,7 @@ I burned the Ubuntu image to an SD card, but if you want to use eMMC, you can fo
 
 On the Ubuntu website, more installation instructions are [available for a lot of different boards](https://canonical-ubuntu-hardware-support.readthedocs-hosted.com/boards/how-to/), e.g. for the [VisionFive 2 Lite](https://canonical-ubuntu-hardware-support.readthedocs-hosted.com/boards/how-to/starfive-visionfive-2-lite/).
 
-Getting Started
----------------
+## Getting Started
 
 ### Hardware Setup
 
@@ -92,8 +89,7 @@ StarFive provides several OS options, but I opted for Ubuntu 24.04.3 LTS Desktop
 
 4. The first boot took a bit longer than expected before the desktop appeared. Once up, the system felt responsive for basic tasks, though noticeably slower than a Raspberry Pi 5.
 
-Java Installation and Testing
------------------------------
+## Java Installation and Testing
 
 This is where things get interesting. RISC-V support in the Java ecosystem has improved significantly, but it's still relatively new compared to ARM and x86_64.
 
@@ -107,20 +103,17 @@ sudo apt upgrade
 sudo apt install openjdk-25-jdk
 ```
 
-
 This installed OpenJDK 25.0.1, built for RISC-V architecture. The installation was straightforward, taking only a few minutes including dependencies. To verify the installation:
 
 ```
 java -version
 ```
 
-
 ### Simple Java Tests
 
 I just wanted to quickly try out a few existing test scripts, and used my [JBang project in the Pi4J repositories](https://github.com/Pi4J/pi4j-jbang). As you can see in the video "plain" Java and libraries work as expected. [Pi4J](https://www.pi4j.com/) and JavaFX were not successful, but also that was expected. I will try Pi4J after the release of its version 4, when it uses the [Foreign Function and Memory (FFM) API](https://openjdk.org/jeps/454). As we installed a "normal OpenJDK Build", which doesn't include the JavaFX dependencies, we can't run the example.
 
-Conclusion
-----------
+## Conclusion
 
 The VisionFive 2 Lite is an intriguing board for Java developers curious about RISC-V. At around 60€, it's an accessible way to explore this "other type of" architecture without significant investment. The performance isn't going to compete with a recent Raspberry Pi, but that's not really the point. My first goal was to find out if Java works on it (of course!), and how easy it us to use. And of course, to feed my curiosity to learn new stuff...
 

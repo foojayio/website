@@ -38,14 +38,12 @@ Indexes can significantly improve query performance by allowing the database to 
 SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09686560496e64686065276a6664">[email protected]</a>';
 ```
 
-
 🟢 **Good Practice**:
 
 ```
 CREATE INDEX idx_users_email ON users (email);
 SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485888da48389858d88ca878b89">[email protected]</a>';
 ```
-
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
 
@@ -65,14 +63,12 @@ Function-based indexes can significantly improve query performance when you freq
 SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 CREATE INDEX idx_upper_last_name ON employees (UPPER(last_name));
 SELECT * FROM employees WHERE UPPER(last_name) = 'SMITH';
 ```
-
 
 This creates a function-based index on the uppercase version of the last_name column, speeding up case-insensitive searches.
 
@@ -82,7 +78,6 @@ In PostgreSQL, these are called expression indexes. Here's an example:
 CREATE INDEX idx_lower_email ON users (LOWER(email)); 
 SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdb8bea8bf8da8b5aca0bda1a8e3aea2a0">[email protected]</a>';
 ```
-
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.
 
@@ -108,13 +103,11 @@ Using `SELECT *` retrieves all columns from the table, which can be inefficient 
 SELECT * FROM users;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 SELECT name, email FROM users;
 ```
-
 
 This query retrieves only the `name` and `email` columns, reducing the amount of data transferred.
 
@@ -135,7 +128,6 @@ FROM users u, orders o
 WHERE u.id = o.user_id;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -143,7 +135,6 @@ SELECT u.name, o.order_date
 FROM users u
 JOIN orders o ON u.id = o.user_id;
 ```
-
 
 This query uses an `INNER JOIN` to combine data from the `users` and `orders` tables.
 
@@ -161,13 +152,11 @@ Filtering data as early as possible in your query can help reduce the amount of 
 SELECT name, email FROM users;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 SELECT name, email FROM users WHERE active = true;
 ```
-
 
 This query retrieves only active users, reducing the amount of data processed.
 
@@ -185,13 +174,11 @@ When you don't need all rows, use the `LIMIT` clause to restrict the number of r
 SELECT name, email FROM users WHERE active = true;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 SELECT name, email FROM users WHERE active = true LIMIT 10;
 ```
-
 
 This query retrieves the first 10 active users, reducing the amount of data processed and transferred.
 
@@ -217,13 +204,11 @@ Using functions in \`WHERE\` clauses can prevent the use of indexes, leading to 
 SELECT name, email FROM users WHERE DATE_PART('year', created_at) = 2023;
 ```
 
-
 **🟢 Good Practice:**
 
 ```
 SELECT name, email FROM users WHERE created_at >= '2023-01-01' AND created_at < '2024-01-01';
 ```
-
 
 This query filters on the \`created_at\` column without using a function, allowing the use of an index.
 
@@ -247,13 +232,11 @@ SELECT name, (
 FROM users;
 ```
 
-
 🟢 Good Practice:
 
 ```
 SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id;
 ```
-
 
 This query uses a \`JOIN\` instead of a subquery, improving performance.
 
@@ -272,13 +255,11 @@ Tips:
 SELECT user_id, COUNT(*), MAX(order_date) FROM orders GROUP BY user_id, order_date ORDER BY order_date;
 ```
 
-
 🟢 Good Practice:
 
 ```
 SELECT user_id, COUNT(*) FROM orders GROUP BY user_id ORDER BY user_id;
 ```
-
 
 This query groups and orders by indexed columns, improving performance.
 
@@ -303,7 +284,6 @@ Tips:
 );
 ```
 
-
 🟢 Good Practice:
 
 ```
@@ -316,7 +296,6 @@ Tips:
   created_at TIMESTAMP
 );
 ```
-
 
 This schema uses appropriate data types, improving performance and storage efficiency.
 
@@ -335,13 +314,11 @@ Use tools like \`EXPLAIN\` to analyze your query execution plans and identify pe
 SELECT name, email FROM users WHERE active = true;
 ```
 
-
 🟢 Good Practice:
 
 ```
 EXPLAIN SELECT name, email FROM users WHERE active = true;
 ```
-
 
 This command provides an execution plan for the query, helping identify potential performance issues.
 
@@ -362,7 +339,6 @@ Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydat
 conn.close();
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -373,7 +349,6 @@ config.setPassword("password");
 config.setMaximumPoolSize(10);
 HikariDataSource dataSource = new HikariDataSource(config);
 ```
-
 
 This sets up a connection pool with a maximum of 10 connections, reducing connection overhead.
 
@@ -398,7 +373,6 @@ stmt.close();
 conn.close();
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -415,7 +389,6 @@ pstmt.executeBatch();
 pstmt.close(); 
 conn.close();
 ```
-
 
 This Java code uses batch processing to insert multiple users efficiently.
 
@@ -434,13 +407,11 @@ Properly optimizing joins can significantly impact query performance, especially
 SELECT u.name, o.order_date FROM orders o JOIN users u ON u.id = o.user_id WHERE u.active = true;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 SELECT u.name, o.order_date FROM users u JOIN orders o ON u.id = o.user_id WHERE u.active = true;
 ```
-
 
 This query joins the \`users\` table with the \`orders\` table on an indexed column, improving performance.
 
@@ -460,7 +431,6 @@ SELECT name, email FROM users WHERE id
 IN SELECT user_id FROM orders WHERE order_date > '2023-01-01';
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -469,7 +439,6 @@ SELECT user_id FROM orders WHERE order_date > '2023-01-01'
 
 SELECT u.name, u.email FROM users u JOIN RecentOrders ro ON u.id = ro.user_id;
 ```
-
 
 This query uses a CTE to improve readability and performance.
 
@@ -486,13 +455,11 @@ When performing aggregation queries, use efficient techniques to minimize the co
 SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount FROM orders GROUP BY user_id, order_date;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 SELECT user_id, COUNT(*) AS order_count FROM orders GROUP BY user_id;
 ```
-
 
 This query is grouped by the \`user_id\` column, which should be indexed for optimal performance.
 
@@ -510,14 +477,12 @@ SELECT user_id, SUM(amount) AS total_amount
 GROUP BY user_id;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
 ALTER TABLE users ADD total_order_amount DECIMAL(10, 2);
 UPDATE users u SET total_order_amount = (SELECT SUM(amount) FROM orders o WHERE o.user_id = u.id);
 ```
-
 
 This approach adds a summary column to store the total order amount for each user.
 
@@ -535,7 +500,6 @@ SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount
 GROUP BY user_id;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -544,7 +508,6 @@ SELECT user_id, COUNT(*) AS order_count, SUM(amount) AS total_amount
 FROM orders
 GROUP BY user_id;
 ```
-
 
 This creates a materialized view that stores the pre-computed summary of user orders.
 
@@ -561,7 +524,6 @@ Regularly monitor and tune your database settings to ensure optimal performance.
 -- Default settings not tuned for workload
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -570,7 +532,6 @@ Regularly monitor and tune your database settings to ensure optimal performance.
 
 ALTER SYSTEM SET shared_buffers = '2GB';
 ```
-
 
 This command adjusts the buffer pool size in PostgreSQL, which can improve performance for read-heavy workloads.
 
@@ -592,7 +553,6 @@ SELECT u.name,
 FROM users u;
 ```
 
-
 🟢 **Good Practice:**
 
 ```
@@ -602,7 +562,6 @@ SELECT u.name, COUNT(o.id) AS order_count
  LEFT JOIN orders o ON u.id = o.user_id
 GROUP BY u.name;
 ```
-
 
 The refactored query joins \`users\` and \`orders\` and uses a \`GROUP BY\` clause, improving performance.
 

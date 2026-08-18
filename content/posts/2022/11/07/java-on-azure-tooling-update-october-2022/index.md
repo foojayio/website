@@ -30,8 +30,7 @@ Please download and install [the Azure Toolkit for IntelliJ](https://aka.ms/azur
 
 We hope you like these features and enjoy a smooth experience with our Azure toolkit. So let us get started.
 
-Roadmap Update
---------------
+## Roadmap Update
 
 Let's talk about our investments for the next few months of Java on Azure Tooling. Our goal is to provide a seamless code-to-cloud experience for Java developers on Azure.
 
@@ -87,8 +86,7 @@ Besides, we also plan to add seamless integration with Resource Connector servic
 
 In addition to the areas above, we are aiming to improve the stability of our toolkit and reduce the error rate to provide better performance and reliability for users.
 
-Azure Toolkit for IntelliJ Improvements
----------------------------------------
+## Azure Toolkit for IntelliJ Improvements
 
 ### Azure Functions Deployment Slot Support
 
@@ -97,8 +95,7 @@ In [June's update](https://devblogs.microsoft.com/java/java-on-azure-tooling-upd
 We have been hearing feedback from Java developers that they want this support in Azure Toolkit for IntelliJ as well. In October, we have further enhanced this experience for Azure Functions on IntelliJ IDEA with our latest release. You can create, select, and swap among slots directly in IDEs. Here is also a short demo of it.  
 1. [DeploymentSlot-n2](https://foojay.io/wp-content/uploads/2022/11/DeploymentSlot-n2.mp4)
 
-Feedback and Suggestions
-------------------------
+## Feedback and Suggestions
 
 Please don't hesitate to [try our product](https://aka.ms/azuretoolkit/intellijidea "try our product")! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -106,8 +103,7 @@ Please don't hesitate to [try our product](https://aka.ms/azuretoolkit/intelliji
 * [Create a feature request or submit a bug](https://github.com/microsoft/azure-tools-for-java/issues/new "Create a feature request or submit a bug") on our official GitHub Issues page
 * [Fill in our survey](https://microsoft.qualtrics.com/jfe/form/SV_b17fG5QQlMhs2up "Fill in our survey")
 
-Resources
----------
+## Resources
 
 Here is a list of links that are helpful to learn Java on Azure Tooling.
 

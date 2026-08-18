@@ -30,8 +30,7 @@ A couple of options are available.
 
 In this post, I'm going to focus on the second point.
 
-Minimal base images
--------------------
+## Minimal base images
 
 Three approaches are available for base images.  
 
@@ -56,8 +55,7 @@ Here they are:
 
 Since this post focuses on Distroless, I'll dive into it in a dedicated section.
 
-Distroless
-----------
+## Distroless
 
 I first learned about Distroless because it was the default option in Google's [Jib](https://github.com/GoogleContainerTools/jib/blob/master/README.md). Jib is a Maven plugin to create Docker containers without dependency on Docker. Note that the default has changed now.
 
@@ -81,8 +79,7 @@ Distroless images come with four standardized tags:
 * `debug`: the image contains a shell for debugging purposes
 * `debug-nonroot`
 
-Distroless debugging
---------------------
+## Distroless debugging
 
 I love the idea of Distroless, but it has a big issue. Something happens during development and sometimes during production, and one needs to log into the container to understand the problem. In general, one uses `docker exec` or `kubect exec` to run a shell: it's then possible to run commands *interactively* from inside the running container. However, Distroless images don't offer a shell **by design**. Hence, one needs to run every command from outside; it could be a better developer experience.
 
@@ -90,8 +87,7 @@ During development, one can switch the base image to a `debug` one. Then, you re
 
 Worse, you cannot do the same trick in production at all.
 
-Kubernetes to the rescue
-------------------------
+## Kubernetes to the rescue
 
 At the latest JavaLand conference, I attended a talk by my good friend [Matthias Häussler](https://twitter.com/maeddes). In the talk, he made me aware of the `kubectl debug` command, introduced in Kubernetes 1.25:
 > Ephemeral containers are useful for interactive troubleshooting when `kubectl exec` is insufficient because a container has crashed or a container image doesn't include debugging utilities, such as with distroless images.
@@ -106,21 +102,18 @@ Let's see how it works by running a Distroless container:
 kubectl run node --image=gcr.io/distroless/nodejs18-debian11:latest --command -- /nodejs/bin/node -e "while(true) { console.log('hello') }"
 ```
 
-
 The container starts an infinite NodeJS loop. We can check the logs with the expected results:
 
 ```bash
 kubectl logs node
 ```
 
-
 ```
 hello
 hello
 hello
 hello
 ```
-
 
 Imagine that we need to check what is happening inside the container.
 
@@ -128,14 +121,12 @@ Imagine that we need to check what is happening inside the container.
 kubectl exec -it node -- sh
 ```
 
-
 Because the container has no shell, the following error happens:
 
 ```
 OCI runtime exec failed: exec failed: unable to start container process: exec: "sh": executable file not found in $PATH: unknown
 command terminated with exit code 126
 ```
-
 
 We can use use `kubectl debug` magic to achieve it anyway:
 
@@ -145,7 +136,6 @@ kubectl debug -it \
               --target=node \     #2
               node                #3
 ```
-
 
 1. Image to attach. As we want a shell, we are using `bash`
 2. Name of the container to attach to
@@ -160,13 +150,11 @@ If you don't see a command prompt, try pressing enter.
 bash-5.2#
 ```
 
-
 We can now use the shell to type whatever command we want:
 
 ```bash
 ps
 ```
-
 
 The result confirms that we "share" the same container:
 
@@ -177,16 +165,13 @@ PID   USER     TIME  COMMAND
    33 root      0:00 ps
 ```
 
-
 After we finish the session, we can reattach it to the container by following the instructions:
 
 ```
 bash-5.2# Session ended, the ephemeral container will not be restarted but may be reattached using 'kubectl attach node -c debugger-tkkdf -i -t' if it is still running
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Distroless images are an exciting solution to reduce your image's size and improve its security. They achieve these advantages by providing neither a package manager nor a shell. The lack of a shell is a huge issue when one needs to debug what happens inside a container.
 

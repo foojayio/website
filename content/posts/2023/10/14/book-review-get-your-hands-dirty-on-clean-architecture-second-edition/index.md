@@ -21,14 +21,11 @@ frozen: false
 
 **Clean Architecture helps us ensure a solid foundation for our applications** ,**and helps keep our code organized and maintainable. Furthermore when properly applied it helps keep ones team on the same page and ensures our applications stay robust and flexible over time. Of course there are a lot of pitfalls to take into account, and a lot of pros/cons to each approach. There certainly is no one size fits all approach. But luckily this book by [Tom Hombergs](https://www.linkedin.com/in/thombergs/) provides a lot of valuable practical insights.**
 
-<br />
-
 <figure class="aligncenter size-large is-resized">
  <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102635" style="width:301px;height:371px" width="301" height="371">
 </figure>
 
-About the book
---------------
+## About the book
 
 **price** : €26.99 for the eBook  
 **publication date** : July 2023  
@@ -36,8 +33,7 @@ About the book
 **pages** : 168  
 **ISBN**: 9781805128373
 
-Content
--------
+## Content
 
 1. Maintainability =\> what does it mean, and how do we ensure it
 2. What's wrong with layers? =\> What are the implications \& consequences
@@ -55,10 +51,7 @@ Content
 14. A component-based approach to software architecture =\> a very nice, practical example on how to properly modularize our application through components, and how to enforce the boundaries
 15. Deciding on an Architecture style =\> what are the considerations, and how do you evolve it further?
 
-<br />
-
-My thoughts
------------
+## My thoughts
 
 Tom Hombergs does a magnificent job of walking through a lot the different architectural considerations one has to make to develop maintainable code (including pros/cons), using practical examples and demonstrations (which are also available in a GitHub repository).
 

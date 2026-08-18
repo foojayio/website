@@ -29,8 +29,7 @@ Recently I noticed that it is 8 years since Vaadin was first released in [start.
 Recent upgrade to[Java 17 and Jakarta EE 9](https://spring.io/blog/2021/09/02/a-java-17-and-jakarta-ee-9-baseline-for-spring-framework-6 " Java 17 and Jakarta EE 9") baseline. Vaadin 24 added a new [pre-compiled frontend mod](https://vaadin.com/docs/latest/configuration/development-mode#pre-compiled-front-end-bundle-for-faster-start-up "pre-compiled frontend mod")e making the initial startup matter of seconds (native compilation using GraalVM would make that even faster). And many many more. Time to grow a new project.  
 ![](plant-lines2-691x510.png)
 
-Step 1: Set Up Project
-----------------------
+## Step 1: Set Up Project
 
 The Spring Initializr will help us create a new Spring Boot application with the desired dependencies. Think of it as a `pom.xml` configurator.
 
@@ -46,8 +45,7 @@ The Spring Initializr will help us create a new Spring Boot application with the
 
 Now you have now created an empty project and are ready to start developing the User Interface (UI) and functionality.
 
-Step 2: Create a Simple HelloWorld Application
-----------------------------------------------
+## Step 2: Create a Simple HelloWorld Application
 
 Let's start with a simple HelloWorld application to make sure everything is working fine.
 
@@ -75,13 +73,11 @@ public class HelloWorld extends Div {
 }
 ```
 
-
 To start the server, just open the context menu on the SpringAppApplication.java file and click "Run Java". This will start the embedded web server and Vaadin in development mode.
 
 Now that your server is running, head to <http://localhost:8080/> to access your newly created Vaadin application.
 
-Bonus: quick links to typical configurations
---------------------------------------------
+## Bonus: quick links to typical configurations
 
 The sample application above didn't do too much, and you are likely to want to add something more. You can do this incrementally, but here are some typical setups:
 

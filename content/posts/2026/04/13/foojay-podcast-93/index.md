@@ -32,13 +32,11 @@ I spoke with Ko Turk, who organized this very conference, Johannes Bechberger, L
 
 That's a lot of people. That's a lot of opinions. And somehow, they mostly agree: update your JDK, read your code, and please talk to your actual users.
 
-YouTube
--------
+## YouTube
 
 {{< youtube Hy-Hf-G0Fp8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -46,8 +44,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction
 

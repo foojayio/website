@@ -40,13 +40,11 @@ Tip: x \<\< y means x × 2y therefore:
 1L << 40 = 1 TiB etc
 ```
 
-
 Using multiples of 10 for the shift makes them easier to read.
 
 ```
 64L << 20 is 64 × 220 = 64 × 10242 = 64 MiB.
 ```
-
 
 The virtual memory size of the above process is just over 8192 GiB at 8200.7 GiB, but the RSS (Resident Set Size) is only 122,060 KB, or 122 MB.  
 ![](Screen-Shot-2023-03-06-at-11.13.06-AM-1024x427.png)  

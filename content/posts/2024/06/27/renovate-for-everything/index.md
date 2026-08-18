@@ -48,6 +48,4 @@ The more I know about Renovate, the more I love it.
 * [Custom Manager Support using Regex](https://docs.renovatebot.com/modules/manager/regex/)
 * [Renovate: No Datasource? No problem!](https://secustor.dev/blog/renovate_custom_datasources/)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/renovate-for-everything/) on June 23^rd^, 2024*

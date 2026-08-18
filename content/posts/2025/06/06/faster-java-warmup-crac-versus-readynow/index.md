@@ -38,8 +38,7 @@ Azul has developed different solutions to help applications reach the maximum po
 
 While CRaC and ReadyNow aim to solve the same challenge, they take different approaches. In this post, I will explain the differences.
 
-What happens at Java startup
-----------------------------
+## What happens at Java startup
 
 Java application startup involves a few different tasks:
 
@@ -70,8 +69,7 @@ The Tier 2 compiler makes certain decisions based on how the code is used. But i
 
 This effect is minimal and, in most cases, not even noticeable. However, in some industries where timing is critical, for instance, financial transactions, such deoptimizations should be avoided at all costs.
 
-Solutions Provided by Azul
---------------------------
+## Solutions Provided by Azul
 
 As the largest company 100% focused on Java and the JVM, Azul developed several solutions to accelerate Java applications to their optimal speed.
 
@@ -119,8 +117,7 @@ As such, it relates to the challenges mentioned in this article but complements 
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [About Cloud Native Compiler](https://docs.azul.com/optimizer-hub/about/cloud-native-compiler) [Cloud Native Compiler: Powerful optimizations at a dramatically reduced cost](https://www.azul.com/products/prime/cloud-native-compiler/) |
 
-CRaC Compared to ReadyNow
--------------------------
+## CRaC Compared to ReadyNow
 
 Let's summarize the differences between CRaC and ReadyNow:
 
@@ -139,14 +136,11 @@ Let's summarize the differences between CRaC and ReadyNow:
 
 (\*\*\*): Unlike native compiled applications (with GraalVM), both CRaC and ReadyNow still have the original byte code to optimize the code further when needed, can dynamically load classes, etc.
 
-Conclusion
-----------
+## Conclusion
 
 Although CRaC and ReadyNow are both solutions to shorten Java applications' warmup phase, they take a very different approach. In cases where no code changes are possible, server systems need to be available as fast as possible, and increased performance and/or reduced total cost of ownership are required, ReadyNow is the perfect choice to improve Java performance!
 
 Learn more about CRaC and ReadyNow in our documentation and on our website. Keep an eye on the Azul blog for more posts exploring ReadyNow functionality.
-
-<br />
 
 **Next:** [Understanding How ReadyNow Improves Warmup Time](https://foojay.io/today/how-readynow-improves-java-warmup-time/)
 

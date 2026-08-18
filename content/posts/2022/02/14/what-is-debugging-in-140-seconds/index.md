@@ -31,12 +31,9 @@ See the video here:
 >
 > --- Shai Almog (@debugagent) [February 8, 2022](https://twitter.com/debugagent/status/1491076030295117830?ref_src=twsrc%5Etfw)
 
-<br />
-
 The source code used in the video is available here: <https://github.com/shai-almog/PrimeMain>
 
-Introduction
-------------
+## Introduction
 
 I tried to do a [debugging tutorial](https://talktotheduck.dev/debugging-tutorial-1-introduction-conditional-breakpoints) a while back. I'm not a fan of the result. I think I got ahead of myself a bit for novices and skipped ahead too soon. This time I'd like to keep it short. Even if you know the subject well enough, you won't waste much time. These videos will rise in complexity to advanced debugging as in the following weeks.
 
@@ -54,8 +51,7 @@ I plan to cover increasingly complex concepts as we work our way through the bas
 * Conditional breakpoints  
   and so much more...
 
-Debugging Process
------------------
+## Debugging Process
 
 > "Debugging is the scientific method applied to computer programming. We can observe a problem or a behavior directly within the running application."
 
@@ -65,8 +61,7 @@ The first challenge we deal with when pulling out a debugger is reproducing the 
 
 I will go into more details in the next episode of 140 second ducklings...
 
-Debugging vs. Unit Tests
-------------------------
+## Debugging vs. Unit Tests
 
 > "It isn't a replacement for testing. You often need a debugger to debug the tests or understand the missing tests. In fact, debugging and testing go hand in hand."
 
@@ -74,8 +69,7 @@ Testing and debugging go hand in hand. Debuggers are excellent tools to debug te
 
 Extracting a unit test following a debug session is a great subject for a future video focused on testing.
 
-Understand The Program Source Code
-----------------------------------
+## Understand The Program Source Code
 
 > "Debugging provides insight into our code that's normally much harder to get otherwise. You can use it to learn new code"
 
@@ -85,8 +79,7 @@ When I need to pick up a new code base, I often start with debugging. I look thr
 
 It's like looking inside an engine while it's working and pausing it to understand details. Common debugging technique can reveal the hidden nuances of a software product.
 
-Debuggers Checklist
--------------------
+## Debuggers Checklist
 
 > "We start by making the simplest assumption we can about the project
 >
@@ -96,8 +89,7 @@ I wrote about [the debuggers checklist](https://talktotheduck.dev/the-debugger-c
 
 This might be unnecessary for smaller samples like the one in the video. But as lines of code grow and complexity rises, we need a methodology for locating bugs.
 
-Next Week and Down the Line
----------------------------
+## Next Week and Down the Line
 
 I plan to post a video every week. I hope I can keep up. I have the next one ready but production is non-trivial. Hopefully, this will get easier with practice.
 

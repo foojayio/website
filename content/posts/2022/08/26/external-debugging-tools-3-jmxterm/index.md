@@ -29,8 +29,7 @@ Management tools let us traverse through clouds of machines and manage the appli
 
 This is a remarkable feature that exposes information and tuning levers, for dynamic manipulation in runtime environments. Activating JMX is outside the scope of this tutorial so I won't go too much into detail but you can check some of the basics in this Oracle article [here](https://docs.oracle.com/javadb/10.10.1.2/adminguide/radminjmxenabledisable.html). Once we have this running we can use visual tools to debug but I'll focus on command-line tooling. This is important since I can use some of this tooling directly on the production servers right from the console.
 
-How does JMX Work?
-------------------
+## How does JMX Work?
 
 JMX exposes management "beans" (MBeans), these are objects that represent control points in the application. Your application can publish its own beans which lets you expose functionality for runtime monitoring and configuration. This is very cool as you can export information that an administrator can wire directly to a dashboard (APM, Prometheus, Grafana, etc.) and use that for decision making.
 
@@ -38,8 +37,7 @@ If your server has multiple users connected concurrently you can expose that num
 
 Spring also supports exposing a lot of server details as management beans via actuator. This is a remarkably cool feature, you can read more about it [here](https://www.baeldung.com/spring-boot-actuators). It exposes very deep metrics about the application and helps you jump right into "production ready" status!
 
-JMXTerm Basics
---------------
+## JMXTerm Basics
 
 Usually one controls and reads JMX via web interface tools or dedicated administration tooling. If you have access to any of them I suggest you pick one of them up and use them as it would work pretty well. I've used some of those in some companies and I actually prefer them in some cases. I also enjoy using IntelliJ/IDEA Ultimates support for Actuator which is a pretty powerful visualization tool:
 
@@ -53,20 +51,17 @@ Once downloaded we can use it to connect to a server using:
 java -jar ~/Downloads/jmxterm-1.0.2-uber.jar --url localhost:30002
 ```
 
-
 You should update the hostname/port based on your connection. Once connected we can list the JMX domains using the prompt:
 
 ```
 > domains #following domains are available JMImplementation com.sun.management java.lang java.nio java.util.logging javax.cache jdk.management.jfr
 ```
 
-
 We can then pick a specific domain to explore. This is where the visual tool is usually beneficial as it can provide you with faster navigation through the hierarchy and quick assessment of the information. In this case I just want to set the logging level:
 
 ```
 > domain java.util.logging #domain is set to java.util.logging
 ```
-
 
 We can follow this by listing the beans within the domain. Then pick the bean that we wish to use since there's only one bean in this specific domain:
 
@@ -75,13 +70,11 @@ We can follow this by listing the beans within the domain. Then pick the bean th
 > bean java.util.logging:type=Logging #bean is set to java.util.logging:type=Logging
 ```
 
-
 What can I do with this bean? For that we have the info command that lists the operations and attributes of the bean:
 
 ```
 > info #mbean = java.util.logging:type=Logging #class name = sun.management.ManagementFactoryHelper$PlatformLoggingImpl # attributes %0 - LoggerNames ([Ljava.lang.String;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - java.lang.String getLoggerLevel(java.lang.String p0) %1 - java.lang.String getParentLoggerName(java.lang.String p0) %2 - void setLoggerLevel(java.lang.String p0,java.lang.String p1) #there's no notifications
 ```
-
 
 Once I have these I can check the current logger level, it isn't set since we didn't set it explicitly and the global default is used:
 
@@ -89,14 +82,12 @@ Once I have these I can check the current logger level, it isn't set since we di
 > run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns:
 ```
 
-
 I can explicitly set it to INFO and then get it again to verify that the operation worked as expected using this code:
 
 ```
 > run setLoggerLevel org.apache.tomcat.websocket.WsWebSocketContainer INFO #calling operation setLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer, INFO] #operation returns: null
 > run getLoggerLevel "org.apache.tomcat.websocket.WsWebSocketContainer" #calling operation getLoggerLevel of mbean java.util.logging:type=Logging with params [org.apache.tomcat.websocket.WsWebSocketContainer] #operation returns: INFO
 ```
-
 
 This is just the tip of the iceberg. We can get many things such as spring settings, internal VM information, etc. In this example I can query VM information directly from the console:
 
@@ -107,9 +98,7 @@ This is just the tip of the iceberg. We can get many things such as spring setti
 > info #mbean = com.sun.management:type=HotSpotDiagnostic #class name = com.sun.management.internal.HotSpotDiagnostic # attributes %0 - DiagnosticOptions ([Ljavax.management.openmbean.CompositeData;, r) %1 - ObjectName (javax.management.ObjectName, r) # operations %0 - void dumpHeap(java.lang.String p0,boolean p1) %1 - javax.management.openmbean.CompositeData getVMOption(java.lang.String p0) %2 - void setVMOption(java.lang.String p0,java.lang.String p1) #there's no notifications
 ```
 
-
-Finally
--------
+## Finally
 
 JMX is a remarkable tool that we mostly use to wire management consoles. It's remarkable for that and you should very much export JMX settings for your projects. Having said that, you can take it to the next level by leveraging JMX as part of your debugging process.
 

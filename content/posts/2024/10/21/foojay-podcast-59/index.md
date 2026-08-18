@@ -28,13 +28,11 @@ At Devoxx in Belgium, I got to talk to Josh Long, Baruch, Pratik Patel, and Roni
 
 I also talked with Clo Willaerts, who inspired me many years ago to become a speaker myself when I saw her presentation at a marketing conference.
 
-Video
------
+## Video
 
 {{< youtube FyL6--GsLZI >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,8 +40,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Clo Willaerts
   * <https://www.linkedin.com/in/clowillaerts/>
@@ -63,8 +60,7 @@ Guests
   * <https://www.linkedin.com/in/ronidover/>
   * <https://x.com/doppleware>
 
-Content
--------
+## Content
 
 00:57 Clo about the difference between marketing and technical conferences   
 

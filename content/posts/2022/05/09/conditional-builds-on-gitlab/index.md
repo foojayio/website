@@ -73,7 +73,6 @@ pages:                                           # 3
       - master
 ```
 
-
 1. Define the two stages
 2. Define the `build` job in the `image` stage. The job creates the Docker image (via Kaniko)
 3. Define the `pages` job in the `deploy` stage. The job generates the site via Jekyll

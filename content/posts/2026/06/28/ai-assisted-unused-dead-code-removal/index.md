@@ -20,8 +20,7 @@ related_posts:
 frozen: false
 ---
 
-Why Your Codebase Is Forcing AI to Underperform, and What to Do About It
-------------------------------------------------------------------------
+## Why Your Codebase Is Forcing AI to Underperform, and What to Do About It
 
 <figure class="alignleft size-large is-resized">
  <img fetchpriority="high" decoding="async" width="1024" height="576" src="ai-assisted-dead-code-removal-1024x576.avif" alt="" class="wp-image-124402" style="width:250px">
@@ -31,8 +30,7 @@ Your AI coding assistant is only as good as the codebase it works on. If your Ja
 
 This post walks through the problem and provides a practical workflow that uses Azul Intelligence Cloud's Code Inventory alongside an AI coding agent to find and remove dead code from production Java applications.
 
-The Context Window Is Your AI's Working Memory
-----------------------------------------------
+## The Context Window Is Your AI's Working Memory
 
 To understand why unused code hurts AI performance, you first need to understand how large language models (LLMs) process code. When you ask an AI assistant to add a feature, fix a bug, or refactor a module, it doesn't just look at the file you're pointing at. It loads your prompt, your chat history, related files, imported dependencies, and anything else it needs to reason about your request. All those files are combined into the **context window**.
 
@@ -44,8 +42,7 @@ The AI assistant's output becomes degraded and you get more hallucinations, inco
 
 In addition to the problem of bad code generation, overloading the context window also impacts your budget. The cost of using LLM models is calculated based on the number of tokens used. So, with each request dragging in a huge amount of unnecessary content, the cost of handling a request increases significantly.
 
-Unused \& Dead Code Is More Common Than You Think
--------------------------------------------------
+## Unused \& Dead Code Is More Common Than You Think
 
 In 2025, [Azul surveyed Java engineers about the state of their codebases](https://www.azul.com/newsroom/azul-2025-state-of-java-survey-report/). **62% report a loss of DevOps productivity due to dead or unused code.** For developers, that burden shows up as cognitive load. They spend time understanding code that serves no purpose. For AI assistants, it shows up as wasted tokens and degraded reasoning.
 
@@ -62,8 +59,7 @@ The real problem is the code that appears to be alive but never actually runs in
 
 Static analyzers answer the question *"Could this code be called?"* They don't answer *"Was this code actually called in production?"* For Java applications, those are very different questions.
 
-Runtime Evidence Changes the Picture
-------------------------------------
+## Runtime Evidence Changes the Picture
 
 This is where [Azul Intelligence Cloud's Code Inventory](https://www.azul.com/products/components/code-inventory/) feature comes in. The Intelligence Cloud Agent running alongside the JVM instances in your production environment forwards data that the JVM already collects to the Intelligence Cloud system. Rather than checking the reachability from source code, Code Inventory reports what actually executes at runtime in your production environment. It flags everything else as unused, regardless of how reachable it looks.
 
@@ -77,8 +73,7 @@ That distinction changes what you can act on. You can now tell the difference be
 
 For engineering managers, that means removal decisions backed by production data, not gut feel. For Java developers, it's a starting point for cleanup that your IDE can't give you.
 
-AI-Assisted Code Removal Workflow
----------------------------------
+## AI-Assisted Code Removal Workflow
 
 Identifying unused code is the easy part. Removing it safely without breaking tests or missing a hidden dependency is where most teams get stuck. That's where an AI coding agent earns its keep.
 
@@ -96,8 +91,7 @@ A typical workflow using this approach follows these steps:
    Claude Code can also handle this problem because a test that only validates deleted behavior is no longer valid. Such tests are just keeping dead code artificially alive. Removing both the code and its tests together eliminates the broken build and genuinely reduces build time, since you're no longer validating behavior that doesn't need to exist.
 5. **Iterate and Scale.** You don't have to remove everything at once. Start with the most obvious candidates, such as self-contained packages, clearly gated features, and old API endpoints you *know* are retired. Remove those in small batches, verify the build, and increase your build confidence in the process. As your observation window grows and your trust in the data increases, you can tackle larger chunks.
 
-The Business Case for Cleaning Up Unused \& Dead Code
------------------------------------------------------
+## The Business Case for Cleaning Up Unused \& Dead Code
 
 Unused \& dead code removal pays off in more places than AI performance alone:
 
@@ -106,8 +100,7 @@ Unused \& dead code removal pays off in more places than AI performance alone:
 * **Build and test cycle time.** Every test you're running against unused code is time wasted on every CI run. Removing the code also removes the test, which permanently shortens your feedback loop.
 * **Future AI scalability.** Your team generates increasing amounts of code when using AI. The new code coming in will be cleaner and more modular if the AI isn't fighting its way through a legacy tangle of unused and dead code to figure things out.
 
-Practical Considerations
-------------------------
+## Practical Considerations
 
 Not every piece of unused code is equally safe to remove. Teams working through their first cleanup run into the same questions. Here are the ones that come up most often, and how to handle them.
 
@@ -115,8 +108,7 @@ Not every piece of unused code is equally safe to remove. Teams working through 
 * **Error handling code.**Defensive code that handles rare failure modes is worth keeping even if it never ran during your observation window. Add logging to it so you know when/if it fires in the future, and extend your observation period before making a removal decision.
 * **Mistakenly removed code.**It's in your Git history. If you ever need to resurrect a removed feature, the code is one git revert away. The cost of removal is low. The cost of clutter is ongoing.
 
-The Bigger Picture
-------------------
+## The Bigger Picture
 
 The cheapest line of code is the one that isn't there. You don't have to read it, maintain it, test it, or have your AI wade through it every time you ask a question about your application.
 
@@ -126,9 +118,6 @@ Azul Intelligence Cloud's Code Inventory feature provides the runtime evidence y
 
 Start by instrumenting your application, watch the data come in and then let the AI help you find your way out.
 
-What's Next
------------
+## What's Next
 
 If you'd like to see this blog in action, register for the [AI4J Leadership Summit](https://www.azul.com/webinars/ai4j-the-ai-leadership-summit/register/) on June 30. Erik Costlow, Sr Director of Product Management for Azul Intelligence Cloud, will walk through a live demo showing you how to use Azul Code Inventory and AI coding tools together to find and delete unused code in a Java application.
-
-<br />

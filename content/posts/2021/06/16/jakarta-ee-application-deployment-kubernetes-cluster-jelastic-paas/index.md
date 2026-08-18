@@ -34,8 +34,7 @@ Jelastic team deployed the Cargo Tracker application to the Kubernetes environme
 
 In this article, we would like to show how to deploy the Jakarta EE projects to the Kubernetes cluster within Jelastic PaaS using Cargo Tracker as an example. The source code of the project can be found in our repository: <https://github.com/jelastic/cargotracker>
 
-Kubernetes Installation
------------------------
+## Kubernetes Installation
 
 First, let's create a Kubernetes cluster from the Jelastic marketplace. It's a fully automated process, so just follow our tutorial [Kubernetes Cluster Setup with Automated Scaling and Pay-per-Use Pricing](https://jelastic.com/blog/kubernetes-cluster-scaling-pay-per-use-hosting/).
 ![Kubernetes Cluster installation](https://jelastic.com/blog/wp-content/uploads/2021/06/k8s-install.png)
@@ -43,8 +42,7 @@ First, let's create a Kubernetes cluster from the Jelastic marketplace. It's a f
 The topology of a simple development cluster can look like as follows:
 ![Kubernetes Cluster](https://jelastic.com/blog/wp-content/uploads/2021/06/image6-1.png)
 
-Jakarta EE Project Deployment
------------------------------
+## Jakarta EE Project Deployment
 
 1. To deploy a project, get three config files from the repository:
 
@@ -86,8 +84,7 @@ After ingress deletion, apply all of the mentioned files in the order as follows
 **$ kubectl apply -f cargo-tracker.yaml**
 ![kubernetes files](https://jelastic.com/blog/wp-content/uploads/2021/06/image5-1.png)
 
-Jakarta EE Project Testing
---------------------------
+## Jakarta EE Project Testing
 
 Wait for a minute and check whether the mentioned above resources have been created and are running:
 

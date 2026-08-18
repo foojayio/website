@@ -25,8 +25,7 @@ frozen: false
 
 **Please help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS).**
 
-Introduction
-------------
+## Introduction
 
 **FEPCOS-J** [\[1\]](#references) enables a Java developer to declaratively program networked systems and compose them like building blocks [\[2\]](#references). For this purpose, FEPCOS-J provides Java modules and generates code to free a Java developer from network programming [\[3\]](#references).
 
@@ -44,8 +43,7 @@ It introduces how [FEPCOS-J uses GraalVM to build native executables](#concept) 
 
 I would also like to ask you to [help me to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)](#help).
 
-FEPCOS-J builds native executables by using GraalVM
----------------------------------------------------
+## FEPCOS-J builds native executables by using GraalVM
 
 In its current prototypical state, the FEPCOS-J processor ***fjp*** accepts the parameter `--native`, as follows:
 
@@ -149,8 +147,7 @@ At this point, it is important to realize that ***fjp*** is a start script that 
 
 Firstly, ***fjp*** calls ***java*** with the correct parameters so that it runs the FEPCOS-J Processor. If the *--native* parameter is set, ***fjp*** runs ***native-image***, as explained above, afterwards.
 
-Exemplary usage of FEPCOS-J to build native executables for Java-coded networked systems
-----------------------------------------------------------------------------------------
+## Exemplary usage of FEPCOS-J to build native executables for Java-coded networked systems
 
 My previous posts [\[2,3\]](#references#) explain how to use FEPCOS-J to declaratively program networked systems and how to compose them like building blocks.
 
@@ -203,8 +200,7 @@ In short, the development workflow is almost identical, solely differing in that
 
 ![Build and run the system user app: Firstly, scp copies the system import module calculator.imp.jar into the subdirectory mlib. After compiling the application with javac, native-image processes the class files. As a result, app is the generated native executable. Further, the file app.out contains the piped output for subsequent evaluation. Running app causes the expected behavior.](fuchs2023-screenshot-fepcos-j-native-build-app.png) **Fig. 6) Build and run the system user *app*:** Firstly, *scp* copies the system import module *calculator.imp.jar* into the subdirectory *mlib* . After compiling the application with ***javac*** , ***native-image*** processes the class files **(1)** . As a result, *app* is the generated native executable **(2)** . Further, the file *app.out* contains the piped output for subsequent evaluation. Running *app* **(3)** causes the expected behavior.
 
-Evaluation
-----------
+## Evaluation
 
 This section evaluates the exemplary usage of FEPCOS-J to build native executables of Java-coded networked systems based on the above-mentioned and below-listed output files *adder.out* , *multiplier.out* , *calculator.out* , and *app.out*.
 
@@ -267,7 +263,6 @@ Produced artifacts:
 Finished generating 'adder.exp' in 11m 41s.
 ```
 
-
 ```
 ========================================================================================================================
 GraalVM Native Image: Generating 'multiplier.exp' (executable)...
@@ -322,7 +317,6 @@ Produced artifacts:
 ========================================================================================================================
 Finished generating 'multiplier.exp' in 16m 32s.
 ```
-
 
 ```
 ========================================================================================================================
@@ -381,7 +375,6 @@ Produced artifacts:
 Finished generating 'calculator.exp' in 2m 23s.
 ```
 
-
 ```
 ========================================================================================================================
 GraalVM Native Image: Generating 'app' (executable)...
@@ -439,7 +432,6 @@ Produced artifacts:
 Finished generating 'app' in 2m 58s.
 ```
 
-
 ### Prepared data
 
 **Tab. 4** maps selected data from the raw outputs to the name of the executing computer. **Tab. 5** shows the technical aspects of these computers.
@@ -478,8 +470,7 @@ The rebuild of the example scenario showed that:
 * The size of the code areas that are part of the native executables was 4,41 - 4,72 MiB.
 * Thus, the code footprint of all required FEPCOS-J modules together was less than 1% of the code area, and the ***fjp***-generated code was even less.
 
-Conclusion
-----------
+## Conclusion
 
 This post explained the prototypical interaction of FEPCOS-J and GraalVM. It introduced the concept and provided an example by rebuilding the scenario from my last post [\[2\]](#references) afterwards. Finally, it presented an evaluation of the GraalVM ***native-image*** outputs.
 
@@ -491,8 +482,7 @@ As shown in this post, the prototype of FEPCOS-J can interact with ***native-ima
 
 To sum up, FEPCOS-J prototypically enables Java developers to realize networked systems without low-level network programming and to automatically build native executables by means of ***native-image***.
 
-I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)
--------------------------------------------------------------------------------
+## I need your help to make FEPCOS-J a Free/Libre and Open-Source Software (FLOSS)
 
 Have you thought about how FEPCOS-J can support your work?
 
@@ -504,8 +494,7 @@ Please let me know what you think about it and provide me with any feedback. Det
 
 Thanks for reading!
 
-References:
------------
+## References:
 
 1. fepcos.info: "*FEPCOS-J* "; <http://fepcos.info/en/fepcos-j.html> (last accessed: 2023-12-13).
 2. Gerhard Fuchs: "*FEPCOS-J (2) -- Declaratively compose networked systems in Java* "; <https://foojay.io/today/fuchs-2023-fepcos-j-02/> (last accessed: 2023-12-13).

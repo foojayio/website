@@ -29,8 +29,7 @@ Even in Java, new features are at odds with checked exceptions:the signature of 
 
 In this article, I'd like to dive deeper into how one can manage such problems.
 
-The problem in the code
------------------------
+## The problem in the code
 
 Here's a sample code to illustrate the issue:
 
@@ -39,7 +38,6 @@ Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
       .map(it -> new ForNamer().apply(it))                                     // 1
       .forEach(System.out::println);
 ```
-
 
 1. Doesn't compile: need to catch the checked `ClassNotFoundException`
 
@@ -57,11 +55,9 @@ Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
       .forEach(System.out::println);
 ```
 
-
 Adding the block defeats the purpose of easy-to-read pipelines.
 
-Encapsulate the try/catch block into a class
---------------------------------------------
+## Encapsulate the try/catch block into a class
 
 To get the readability back, we need to refactor the code to introduce a new class. IntelliJ IDEA even suggests a record:
 
@@ -84,12 +80,10 @@ record ForNamer() implements Function<String, Class<?>> {
 }
 ```
 
-
 1. Create a single record object
 2. Reuse it
 
-Trying with Lombok
-------------------
+## Trying with Lombok
 
 Project Lombok is a compile-time annotation processor that generates additional *bytecode*. One uses the proper annotation and gets the result without having to write boilerplate code.
 > Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java. Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.
@@ -100,8 +94,7 @@ Lombok offers the `@SneakyThrow` annotation:it allows one to throw checked excep
 
 If you're a Lombok user, note that there's an [opened GitHub issue](https://github.com/projectlombok/lombok/issues/3096) with the status parked.
 
-Commons Lang to the rescue
---------------------------
+## Commons Lang to the rescue
 
 [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/) is an age-old project.It was widespread at the time as it offered utilities that could have been part of the Java API but weren't.It was a much better alternative than reinventing your `DateUtils` and `StringUtils` in every project.While researching this post, I discovered it is still regularly maintained with great APIs.One of them is the `Failable` API.
 
@@ -123,9 +116,7 @@ Failable.stream(stream)
         .forEach(System.out::println);
 ```
 
-
-Fixing compile-time errors is not enough
-----------------------------------------
+## Fixing compile-time errors is not enough
 
 The previous code throws a `ClassNotFoundException` wrapped in an `UndeclaredThrowableException` at *runtime*. We satisfied the compiler, but we have no way to specify the expected behavior:
 
@@ -158,7 +149,6 @@ Stream.of("java.lang.String", "ch.frankel.blog.Dummy", "java.util.ArrayList")
       });
 ```
 
-
 1. Wrap the call into a Vavr `Try`
 2. Transform the `Try` into an `Either` to keep the exception. If we had not been interested, we could have used an `Optional` instead
 3. Act depending on whether the `Either` contains an exception, *left* , or the expected result, *right*
@@ -179,14 +169,12 @@ result._1().forEach(it -> System.out.println("not found: " + it.getMessage())); 
 result._2().forEach(it -> System.out.println("class: " + it.getName()));        // 4
 ```
 
-
 1. Partition the `Stream` of `Either` in a tuple of two `Stream`
 2. Flatten the left stream from a `Stream` of `Either` to a `Stream` of `Throwable`
 3. Flatten the right stream from a `Stream` of `Either` to a `Stream` of `Class`
 4. Do whatever we want
 
-Conclusion
-----------
+## Conclusion
 
 Java's initial design made plenty of use of checked exceptions. The evolution of programming languages proved that it was not a good idea.
 

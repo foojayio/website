@@ -26,8 +26,6 @@ As announced [last month](https://foojay.io/today/virtual-foojay-openjdk-17-jug-
 
 And here's the schedule, note that it will change as more meetups are confirmed, and if your JUG is missing, i.e., you'd like to still be included in the tour, no worries, let's see what can be done, simply contact JFrog's Ari Waller (ariw at jfrog dot com) and Payara's Jadon Ortlepp (jadon.ortlepp at payara.fish), Foojay's Event Managers, and specify a date and time ([and preferred topics](https://foojay.io/today/virtual-foojay-openjdk-17-jug-tour/)) together with some dates and times that would work for your JUG.
 
-<br />
-
 ### August
 
 * 26 August, Thursday: Manchester JUG, Frank Delporte (Toadi)  

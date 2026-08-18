@@ -29,8 +29,7 @@ For example, I never bought into blockchain, the solution still searching for pr
 
 The main focus of this post is to integrate a chatbot into my application and explore its capabilities.
 
-Choosing a LLM
---------------
+## Choosing a LLM
 
 A plethora of LLMs is available at the moment. I mentioned OpenAI, but plenty of others beg for your attention: Google Gemini, Cohere, Amazon Bedrock, ad nauseam. Each has pros and cons, which are irrelevant to this introductory post.
 
@@ -38,8 +37,7 @@ My main requirement in the context of this post is that it needs to run locally.
 
 I chose [LangChain4J](https://docs.langchain4j.dev) and [Ollama](https://ollama.com/) because they are well-known and meet my specific requirements for this project.
 
-Quick introduction to LangChain4J and Ollama
---------------------------------------------
+## Quick introduction to LangChain4J and Ollama
 
 Here's how LangChain4J introduces itself in its own words:
 > The goal of LangChain4j is to simplify integrating LLMs into Java applications.
@@ -61,8 +59,7 @@ Ollama's introduction is even shorter:
 
 One runtime, multiple models.
 
-Getting our feet wet
---------------------
+## Getting our feet wet
 
 I'll split this section into the LangChain4j app and the Ollama infrastructure.
 
@@ -84,7 +81,6 @@ LangChain4j provides a Spring Boot integration starter. Here's our minimal depen
 </dependencies>
 ```
 
-
 LangChain4j offers an abstraction API over the specifics of different LLMs. Here's a focus on what we will use in this section:
 
 ![](chat-language-model-api.png)
@@ -98,7 +94,6 @@ langchain4j.ollama.chat-model:
   base-url: http://localhost:11434                                       #1
   model-name: llama3.2                                                   #2
 ```
-
 
 1. Point to the running Ollama instance
 2. Model to use
@@ -126,7 +121,6 @@ services:
       - ./ollama:/root/.ollama                                           #3
 ```
 
-
 1. Override the URL configured in the JAR to use the Docker container on Docker Compose
 2. Use the latest images; it's not production
 3. Keep a copy of the models on the host - see below
@@ -136,7 +130,6 @@ As mentioned above, Ollama is a runtime with switchable models. There's no model
 ```bash
 ollama run llama3.2
 ```
-
 
 Be careful, `llama3.2` is a whopping 20Gb; for this reason, you want to avoid downloading the model from each `docker compose up`. This is the reason for the volume mapping above.
 
@@ -148,9 +141,7 @@ At this point, we can `curl` our app and see the results:
 curl localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
 ```
 
-
-Enhancing with streaming
-------------------------
+## Enhancing with streaming
 
 The above solution works, but the user experience has room for improvement. The command hangs, and the response comes after several seconds, unlike the traditional OpenAI UI, which streams tokens back to the user.
 
@@ -172,7 +163,6 @@ services:
     depends_on:
       - ollama
 ```
-
 
 1. Was formerly `LANGCHAIN4J_OLLAMA_CHAT_MODEL_BASE_URL`
 
@@ -206,7 +196,6 @@ class PromptHandler(private val model: StreamingChatLanguageModel) {
 }
 ```
 
-
 1. Pipe tokens and errors to the sink
 2. The function is **not** abstract and does nothing; hence, it won't close the stream. Remember to override it.
 3. Get the request body asynchronously
@@ -220,11 +209,9 @@ We can now use curl in stream mode with the `-N` flag:
 curl -N localhost:8080 -d 'Hello I am Nicolas and I am a DevRel'
 ```
 
-
 The result is already better!
 
-Remembering history
--------------------
+## Remembering history
 
 Every chatbot request is independent of others at this stage - they don't keep a context. Chat history is an important feature that we miss from off-the-shelf AI assistants. We need to refactor the app in two directions: first, store each message from the user and the model, and second, compartmentalize users' histories from each other.
 
@@ -269,7 +256,6 @@ fun beans() = beans {
 }
 ```
 
-
 1. We need a way to pass a correlation ID to group messages with the same chat history. Given we are using curl and not a browser, we explicitly pass an ID along with the user message
 2. Define an interface with no hierarchy requirements. Functions are free-form, but you can set hints
 3. `@MemoryId` marks the correlation ID
@@ -286,9 +272,7 @@ curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1
 curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "2", "message": "Hello I am Jane Doe and I am a test sample" }'
 ```
 
-
-Adding Retrieval-Augmented Generation
--------------------------------------
+## Adding Retrieval-Augmented Generation
 
 LLMs are only as good as the data they are trained on, and there's a high chance you want your chatbot to be trained on your own custom data. RAG is the answer to this problem. The idea is to index content ahead of time, store it somewhere, and add the indexed data to the search - called retrieval. For more details, LangChain4j does a great job of [explaining RAG](https://docs.langchain4j.dev/tutorials/rag).
 
@@ -332,7 +316,6 @@ fun beans() = beans {
 }
 ```
 
-
 1. Run the code when the application starts
 2. Define the embedding store. Regular applications should use a persistent data store: LangChain4j supports [more than a few](https://docs.langchain4j.dev/tutorials/embedding-stores).
 3. Inject the store in the loader code
@@ -348,14 +331,12 @@ Let's do the same on the RAG'ed app:
 curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1", "message": "What books did Nicolas Fränkel write?" }'
 ```
 
-
 The answer is much better:
 > The provided information doesn't mention specific books written by Nicolas Fränkel. It only provides metadata for his blog, which has a section dedicated to his "Books". ...​
 
 It's not really correct---I actually mentioned that I wrote the books mentioned, but it's at least not hallucinating.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I showed how to start your Langchain4j journey in several incremental steps.
 
@@ -372,7 +353,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [LangChain4j](https://docs.langchain4j.dev)
 * [Ollama](https://ollama.com/)
 * [Streaming with REST API for LangChain Applications](https://chalise-arun.medium.com/streaming-with-rest-api-for-langchain-applications-f3a164a207d7)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/langchain4j-musings/) on November 10^th^, 2024*

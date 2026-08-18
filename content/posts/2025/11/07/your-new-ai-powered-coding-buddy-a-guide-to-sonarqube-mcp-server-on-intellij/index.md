@@ -23,8 +23,6 @@ frozen: false
 
 Hey Java devs! 👋 Ever feel like you're drowning in a sea of code, trying to keep it reliable,, efficient, and secure? We've all been there. Juggling new features, bug fixes, and pull requests is a daily grind. But what if you had an AI-powered assistant to help you out? That's where the [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) comes in. Let's dive into how this cool new MCP can supercharge your daily coding routine. 🚀
 
-
-
 ### **A Day in the Life of a Java Developer ☕**
 
 Your typical day probably looks something like this:
@@ -36,8 +34,6 @@ Your typical day probably looks something like this:
 * **Dependency Check:** You need to add a new library to the project. Is it secure? Are there any known vulnerabilities? Time to investigate.
 
 Now, imagine having an AI assistant to help with these tasks. That's the power of the SonarQube MCP server.
-
-
 
 ### **Getting Started: Accessing the MCP Server from IntelliJ 🛠️**
 
@@ -77,8 +73,6 @@ Remember to use only `user` tokens not Project or Global Analysis ones in order 
 
 For other IDEs like VS Code, it's even easier ... just clicking 👇 a button and you are done 🎉  
 ![](Screenshot-2025-11-07-at-16.53.02.png)
-
-
 
 ### **Supercharge Your Daily Tasks with SonarQube MCP Server ⚡**
 
@@ -212,8 +206,6 @@ And the Assistant with the help of the MCP Server will bring a nice table to ref
 To harness the full power of AI for code analysis, it's crucial to provide detailed information and establish clear guardrails. As highlighted with the `copilot-instructions.md` file, defining specific instructions for the AI agent ensures it adheres to project standards and utilizes tools like the SonarQube MCP server effectively.
 
 Furthermore, a rich contextual understanding---derived from elements like the `pom.xml` file with Sonar project properties like `sonar.projectKey=Test`---allows the AI to make more accurate and relevant suggestions. Finally, pairing these detailed inputs with a detailed prompt (specifying the PR Id if needed) and mature AI model significantly enhances the quality of the returned results, making the AI a truly invaluable coding partner.
-
-
 
 ### **Conclusion: Your MCP for Supercharged Code ✅**
 

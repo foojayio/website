@@ -34,14 +34,11 @@ I traveled from Karlsruhe to Oslo (via Stuttgart Airport) and from Oslo to Hanov
 
 This was my second two-week-long tour giving talks, after my tour d'Europe in May/June this year (see [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/)), but this time it consisted solely of talks at conferences. The following is a short report of my trip that saw me brewing beer, giving a talk at one of my favorite conferences, and visiting Hamburg for the first time.
 
-Oslo
-----
+## Oslo
 
 I started by traveling to Oslo on Saturday before the conference, which began on Tuesday with workshops. My journey started with the 2:30 am bus from Karlsruhe to Stuttgart, where I took the 6:30 am flight to Paris and from there to Oslo. Flying in the early hours of the morning is something extraordinary:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_1940-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/paris_airport-2000x1500.jpeg)
-
-<br />
 
 I've never really been to Oslo before, except as a toddler, according to my parents, so I wanted to explore the city. I arrived in Oslo Saturday afternoon and stayed till Tuesday morning at the home of a friendly expat that I met via the couch-surfing platform [BeBelcome.org](https://bewelcome.org), staying there till Tuesday morning. It was great: I had the opportunity to visit the famous [Fram Polar Exploration Museum](https://frammuseum.no/), hike around the Vettakollen, and brew beer with my host:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2012-2000x1500.jpeg)  
@@ -57,10 +54,7 @@ I've never really been to Oslo before, except as a toddler, according to my pare
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_1956-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_1951-1500x2000.jpeg)
 
-<br />
-
-JavaZone
---------
+## JavaZone
 
 Then, on Tuesday, it was time for the workshop day of JavaZone. I've been drawn to this conference since I got introduced to their conference trailers in my first semester at university:
 
@@ -120,8 +114,6 @@ In the evening, I ate dinner with a couple of my fellow speakers, including [Mar
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2100.jpg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2084-2-1500x2000.jpeg)
 
-<br />
-
 The next day was my last in Oslo before moving to northern Germany. So I took the chance to explore the city center once more and made a photograph of the speaker's gift:  
 
 <figure class="aligncenter size-large is-resized">
@@ -133,8 +125,7 @@ The next day was my last in Oslo before moving to northern Germany. So I took th
 
 I had to say goodbye to Oslo and then traveled to Hamburg via Hanover Airport to stay with a friend in Hamburg.
 
-Hamburg
--------
+## Hamburg
 
 The problem was that JavaZone pays the hotel till Friday, and the speaker dinner for Java Forum Nord is Monday evening. I knew someone in Hamburg, so I stayed in Hamburg from Friday night till Monday afternoon. I used the time to look into Python debugging, which eventually resulted in my [Let's create a Python Debugger together: Part 1](https://mostlynerdless.de/blog/2023/09/20/lets-create-a-python-debugger-together-part-1/) blog post, went sightseeing, watched the dark comedy [Sophia, der Tod und Ich](//www.polyfilm.at/film/sophia-der-tod-und-ich/), and visited the [Hamburger Miniaturwunderland](https://www.miniatur-wunderland.de/):  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2125-2-2000x1500.jpeg)  
@@ -146,8 +137,7 @@ The problem was that JavaZone pays the hotel till Friday, and the speaker dinner
 
 While there, I had the pleasure of traveling with light luggage, as my luggage didn't arrive in Hamburg till Wednesday because it was somehow stuck in Amsterdam airport, where I had a stopover.
 
-Java Forum Nord
----------------
+## Java Forum Nord
 
 The second conference on my journey was the [Java Forum Nord](https://javaforumnord.de/2023/) in Hanover on Tuesday. This conference is a small community-run event, without many sponsors and many talks in German. It was my first German Java conference, so there were many German-only speakers that I hadn't seen at a conference before. I met a few of them at the speaker's dinner on Monday and at the after-party on Tuesday:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2157-2000x1125.jpg) Speakers' dinner with alcohol-free beer and Spätzle in Hanover
@@ -156,8 +146,7 @@ I enjoyed meeting Marit van Dijk again and getting to know [Sandra Parsick](http
 
 The day after, I traveled back to Hamburg for the [code.talks](https://codetalks.de/) conference.
 
-Code.Talks
-----------
+## Code.Talks
 
 This was the third conference in a row and the only one without a focus on Java. The talks were on various technologies, from NFTs to creativity. The most memorable of the conference was by far the speaker's dinner at the open kitchen restaurant [Hensslers Küche](https://www.hensslerskueche.de/) and visiting the [Heavens Bar \& Kitchen](https://www.clouds-hamburg.de/startseite) rooftop bar in St. Pauli with [Jacqueline Franßen](https://www.linkedin.com/in/jacqueline-franssen-0422341b1/), [Hannes Drittler](https://www.linkedin.com/in/hannes-drittler-06b57b151/), and [Samir Ar](https://www.linkedin.com/in/samir-ar-548599b0/) after the second day of the conference:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2211-2000x1500.jpeg)  
@@ -169,14 +158,11 @@ This was the third conference in a row and the only one without a focus on Java.
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2187-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2190-4-2000x1500.jpeg)
 
-<br />
-
 While there, I also started preparing an upcoming talk for JCon World with Marit van Dijk and had an online meeting with Jaroslav Bachorik and Erik Österlund on the future of my JEP, so stay tuned.
 
 I traveled back to Karlsruhe via Bonn, where I met a good friend and attended a [Haydn concert in the Kreuzkirche](https://www.kreuzkirche-bonn.de/musik/termine/termine/event/konzert-joseph-haydn-schoepfung-neu-denken-2023-09-16-21-00/), closing the eventful two weeks cooking flammkuchen together with her and one of her new flatmates.
 
-Conclusion
-----------
+## Conclusion
 
 Giving three talks at conferences in a row was an experience I'm grateful for. Talking with many new and old acquaintances was, at times, taxing, yet definitely worthwhile. Especially JavaZone was a conference I never dreamt of being able to speak at.
 

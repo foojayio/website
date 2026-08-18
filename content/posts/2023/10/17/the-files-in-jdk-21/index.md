@@ -23,8 +23,7 @@ As Java developers, we all have it installed on our computer: the Java Developme
 
 For this article, Eclipse Temurin [JDK 21](https://foojay.io/today/java-21-is-available-today-and-its-quite-the-update/) for Windows has been used.
 
-Files
------
+## Files
 
 ### The statistics
 
@@ -45,8 +44,7 @@ The class files in *lib/modules* are less compressed than in the *jmod* files th
 > **Tip:**
 > If you distribute the JDK with your software, for example in a Docker image, create a light version of the JDK with bin/jlink first. The result will be a smaller directory as it won't include files like src.zip (50 MB), jmods/\*.jmod (79 MB), tools and the modules you don't use.
 
-Classes
--------
+## Classes
 
 ### The statistics:
 
@@ -64,16 +62,14 @@ Classes
 
 Most of the largest class files are related to the internationalization with charsets and time zones but *javac* and the new vector API also have large class files.
 
-Evolution
----------
+## Evolution
 
 Contrary to what I said in the introduction, even if the JDK has grown size since 1.0, this hasn't been the case in the recent years. Post JDK 8, the largest JDK was JDK 9 (JavaFX, Nashorn) with 500 MB and the smallest was JDK 17 with 297 MB.
 
 When comparing new files in the *java.base* module with JDK 20, you see that a lot of new files are related to a new *jdk.internal.classfile* package.
 ![](jdk-21-diff-base-1024x649.png)
 
-Conclusion
-----------
+## Conclusion
 
 OpenJDK is an always evolving software mostly composed of a lot of small files. Most of them are not needed at runtime.
 

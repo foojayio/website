@@ -24,10 +24,6 @@ frozen: false
 
 {{< youtube fs6wiUqJGo8 >}}
 
-<br />
-
-
-
 #### 🔵⚪⚪⚪⚪⚪⚪⚪
 
 ### 📘 Introduction: Why Use Redocusaurus for Spring Boot?
@@ -46,8 +42,6 @@ It lowers support questions and helps new developers onboard faster.
 
 It turns your OpenAPI file into a user-friendly website. **Best of all**, no coding is needed to build the site.
 
-
-
 #### 🔵🔵⚪⚪⚪⚪⚪⚪
 
 ### 🔎 What Is Redocusaurus?
@@ -64,8 +58,6 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 
 **Therefore**, Redocusaurus is great for Spring Boot teams who want simple, up-to-date docs without writing frontend code.
 
-
-
 #### 🔵🔵🔵⚪⚪⚪⚪⚪
 
 ### Key Features of Redocusaurus
@@ -79,8 +71,6 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 **Also**, it lets you customize colors and layout easily.
 
 **Finally**, it is perfect for both private and public API documentation portals.
-
-
 
 #### 🔵🔵🔵🔵⚪⚪⚪⚪
 
@@ -98,7 +88,6 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 </dependency>
 ```
 
-
 **Then**, start your Spring Boot app.
 
 **After that** , open your browser and go to: <http://localhost:8080/v3/api-docs>  
@@ -106,8 +95,6 @@ It shows OpenAPI specs using ReDoc, a popular documentation tool.
 **Next**, you will see your API spec in JSON format.
 
 **Finally** , convert the JSON to YAML using [Swagger Editor](https://editor.swagger.io): paste the JSON, click **Convert to YAML** , and save the file as `openapi.yaml`.
-
-
 
 #### 🔵🔵🔵🔵🔵⚪⚪⚪
 
@@ -124,13 +111,11 @@ npx create-docusaurus@latest foojay-doc-site classic --typescript
 cd foojay-doc-site
 ```
 
-
 **After that**, install Redocusaurus:
 
 ```bash
 npm install redocusaurus@latest
 ```
-
 
 **Next** , add your OpenAPI YAML file(s) you saved at the root folder to the `/foojay-doc-site/static/openapi` folder *(location of the yaml file(s) is important)*:
 
@@ -139,7 +124,6 @@ mkdir -p ./static/openapi
 mv ../calculator-api.openapi.yaml ./static/openapi/calculator-api.openapi.yaml 
 mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml
 ```
-
 
 **Then** , open `docusaurus.config.js` and add this to `presets`:
 
@@ -165,7 +149,6 @@ mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml
 ],
 ```
 
-
 **Also**, add this to the navbar items in the same file:
 
 ```javascript
@@ -181,17 +164,13 @@ mv ../word-api.openapi.yaml ./static/openapi/word-api.openapi.yaml
 },
 ```
 
-
 **Finally**, start your documentation site:
 
 ```bash
 npm run start
 ```
 
-
 **Then** , visit <http://localhost:3000/api-docs> to see your API documentation.
-
-
 
 #### 🔵🔵🔵🔵🔵🔵⚪⚪
 
@@ -218,8 +197,6 @@ Since it's static, it's also `SEO`-friendly and easy to cache.
 
 You can deploy updates anytime by rebuilding and pushing the new files.
 
-
-
 #### 🔵🔵🔵🔵🔵🔵🔵⚪
 
 ### 🏁 Wrapping Up: Effortless Spring Boot Documentation with Redocusaurus
@@ -233,8 +210,6 @@ You can deploy updates anytime by rebuilding and pushing the new files.
 **Therefore**, your developer portal is easy to update and maintain.
 
 **Above all**, you don't need to write frontend code to get beautiful docs.
-
-
 
 #### 🔵🔵🔵🔵🔵🔵🔵🔵
 

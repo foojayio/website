@@ -33,8 +33,7 @@ After all, it's easy to say: "Just pick an OpenJDK, any will do!", but is it rea
 
 It also explains what OpenJDK actually entails, how a distribution is verified, and compares some of the more popular distributions, and more.
 
-Content
--------
+## Content
 
 ### 1. Replacing Oracle Java SE in the Enterprise
 
@@ -92,8 +91,7 @@ The appendix itself covers a part of the history of Java, JVM tuning, and runtim
 
 Not core to the book, but I found it an interesting read.
 
-Personal thoughts
------------------
+## Personal thoughts
 
 I found it a very useful, and educative read that's certainly worth checking out. Whilst Simon Ritter works for Azul, I found the bias to be very limited.
 

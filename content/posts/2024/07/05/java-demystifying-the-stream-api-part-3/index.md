@@ -42,8 +42,7 @@ So what are these three operations for sequences,
 
 * The **Reduce** operation collates a sequence of elements using a binary function. It requires an initial value to initialize the reduction, and if the input data is empty, the return value becomes this initial value.
 
-Streams or For Loops?
----------------------
+## Streams or For Loops?
 
 As a developer and architect, I aim to enhance the readability, functionality, and efficiency of my code. We can achieve these objectives in a more elegant manner using StreamAPI.
 
@@ -67,7 +66,6 @@ public interface LongStream extends BaseStream<Long,LongStream>
 public interface DoubleStream extends BaseStream<Double,DoubleStream>
 ```
 
-
 IntStream specializes in handling elements of primitive int type.
 
 LongStream specialized in handling elements of long-valued elements.
@@ -76,8 +74,7 @@ DoubleStream specialized in handling elements of double-valued elements.
 
 The streams mentioned above are suitable for both sequential and parallel aggregate operations.
 
-***Intermediate Operations*** in the Stream API interface
----------------------------------------------------------
+## ***Intermediate Operations*** in the Stream API interface
 
 **map:** Produces a stream containing the outcomes of implementing the specified function to the elements within the stream.
 
@@ -89,7 +86,6 @@ numbers.stream().map(Math::sqrt) // squaring each of the sequence element and ma
                 .forEach(System.out::println);
 ```
 
-
 **mapToInt:** Generates an IntStream containing the outcomes of implementing the specified function to the elements within the stream.
 
 ```
@@ -99,7 +95,6 @@ List<String> languages = List.of("Java", "Kotlin", "Scala");
 IntStream wordsLength = languages.stream().mapToInt(String::length);
 System.out.println("Sum of the words length: " + wordsLength.sum());
 ```
-
 
 **mapToLong:** Creates a LongStream containing the outcomes of implementing the specified function to the elements within the stream.
 
@@ -111,7 +106,6 @@ LongStream sumOfPrices = prices.stream().mapToLong(Long::parseLong);
 System.out.println("Sum of the prices: " + sumOfPrices.sum());
 ```
 
-
 **mapToDouble:** Yields a DoubleStream containing the outcomes of implementing the specified function to the elements within the stream.
 
 ```
@@ -122,7 +116,6 @@ DoubleStream priceDetails = pricesOne.stream().mapToDouble(Double::doubleValue);
 double averagePrice = priceDetails.average().orElse(0.0);
 System.out.println("Average Price: " + averagePrice);
 ```
-
 
 **flatMap:** useful for converting individual elements within a stream into a new stream of elements, and subsequently merging these various streams into a unified stream.
 
@@ -137,7 +130,6 @@ List<Integer> flattenedNumbers = numberDetails.stream()
 System.out.println("Flattened Number Details: " + flattenedNumbers);
 ```
 
-
 **flatMapToInt:** Use flatMapToInt to flatten the List that contains Arrays into a unified IntStream.
 
 ```
@@ -148,7 +140,6 @@ IntStream flattenedStream = numbersInfo.stream()
 
 System.out.println("Flattened Sum: " + flattenedStream.sum());
 ```
-
 
 **filter:** This stream produces a stream containing the elements that satisfy the specified predicate.
 
@@ -162,13 +153,11 @@ List<String> filteredNames = names.stream()
 System.out.println("Filtered Names: " + filteredNames);
 ```
 
-
 Additionally, **flatMapToDouble, mapMulti, mapMultiToInt, mapMultiToLong, mapMultiToDouble, and peek** are several other methods.
 
 Some of these methods are *stateful and involve short-circuiting intermediate operations* , such as **sorted, skip, limit, dropWhile, and takeWhile**, which businesses can utilize according to specific needs.
 
-*T**erminal Operations***in the Stream API interface
-----------------------------------------------------
+## *T**erminal Operations***in the Stream API interface
 
 **forEach \& forEachOrdered:** This stream performs an action for each element and display it in Order
 
@@ -182,7 +171,6 @@ numberAnother.forEach(System.out::println);
 List<Integer> numberOrdered = List.of(2, 3, 1, 5, 4);
 numberOrdered.parallelStream().forEachOrdered(System.out::println);
 ```
-
 
 **reduce:** In Java Streams, we use the **reduce** method to perform a reduction on the elements of the stream by employing an associative accumulation function. We use it for **summing numbers, concatenating strings, or combining elements** into a single result.
 
@@ -200,7 +188,6 @@ int minValue = reduceNumbers.stream().reduce(0, Integer::min);
 System.out.println("Min Value: " + minValue);
 ```
 
-
 **collect:** The Java Streams **collect** method to gather the elements of a stream into a collection or alternative data structure. It works with predefined collectors from the Collectors class, including *toList, toSet, joining,* and various others.
 
 ```
@@ -212,7 +199,6 @@ List<String> filteredNames = names.stream()
                 .collect(Collectors.toList());
 System.out.println("Filtered Names: " + filteredNames);
 ```
-
 
 **toList:** The toList default method has streamlined the process of defining the terminal operation, replacing the `collect(Collectors.toList())` syntax.
 
@@ -227,7 +213,6 @@ List<String> filteredNames = names.stream()
                 .toList();
 System.out.println("Filtered Names: " + filteredNames);
 ```
-
 
 Furthermore, there are various other terminal operations such as **min** , **max** , and **count()** available.
 
@@ -247,7 +232,6 @@ Happy Learning 🙂
 
 The complete code is available over on [Github](https://github.com/bsmahi/Java8Features/blob/master/StreamAPI.java)
 
-References
-----------
+## References
 
 <https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html>

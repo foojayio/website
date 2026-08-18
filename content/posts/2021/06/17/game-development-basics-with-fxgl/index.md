@@ -20,8 +20,7 @@ Game Development is a large field of Computer Science with a lot of underpinning
 
 However, the concepts themselves are language-agnostic and engine-agnostic. Please note that the material presented here is deliberately simplified to provide a gentle introduction. Those seeking in-depth coverage are encouraged to pursue further research.
 
-Main (Game) Loop
-----------------
+## Main (Game) Loop
 
 The main loop in games is similar to that of any other front-end application. It is an infinite loop, set to terminate when the user exits the application. The game loop, at a high-level, consists of 3 phases:
 
@@ -62,7 +61,6 @@ UserAction hitBall = new UserAction("Hit") {
 };
 ```
 
-
 Now that we have created an action `hitBall`, we can ask the input object to bind it to `KeyCode.F`:
 
 ```java
@@ -73,7 +71,6 @@ protected void initInput() {
     input.addAction(hitBall, KeyCode.F);
 }
 ```
-
 
 ### Update
 
@@ -110,14 +107,12 @@ Node node = ...
 entity.getViewComponent().addChild(node);
 ```
 
-
 Most of the time you want to use an image as the view. There is a `Texture` class which allows you to do just that, besides it is also a JavaFX node:
 
 ```java
 Node node = FXGL.texture("player.png"); 
 // same as above
 ```
-
 
 Alternatively, the entity builder provides static methods to make building entities easier, including setting their view:
 
@@ -127,14 +122,10 @@ var entity = FXGL.entityBuilder()
                  .build();
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this article, we have covered the basics of game development using FXGL as a case study.
 
 These fundamental concepts allow us to abstract away complex details that are present in modern games and help us simplify development.
 
 If you would like a more detailed overview of how a game engine works, FXGL has [comprehensive wiki pages](https://github.com/AlmasB/FXGL/wiki/FXGL-11).
-
-<br />

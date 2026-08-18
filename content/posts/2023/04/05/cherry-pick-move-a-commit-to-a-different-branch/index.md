@@ -24,8 +24,7 @@ There are several reasons why you might want to move a commit to a different bra
 
 Let's take a look at some of them.
 
-Committed to the wrong branch
------------------------------
+## Committed to the wrong branch
 
 You're working on a new feature, but an urgent bug came in.
 
@@ -34,8 +33,7 @@ You fixed the bug and committed the fix, but oops... you forgot to create a new 
 Now this bugfix is on the wrong branch. How do we fix this?
 ![IntelliJ IDEA Git log window showing a bugfix commit on a new-feature branch](CommitOnWrongBranch-1024x575.png) Bugfix commit is on the wrong branch
 
-Use cherry-pick to move the commit
-----------------------------------
+## Use cherry-pick to move the commit
 
 I could redo the work, especially if it's a small change, but ... I don't want to! Luckily, there is a better way.
 
@@ -58,8 +56,7 @@ Yes, we can do this from the command linetoo, but there's no cute cherry icon on
 As we can see, the bugfix commit is now on the bugfix branch.
 ![IntelliJ IDEA Git log showing the Bugfix commit on the bugfix branch and a message "Cherry-pick successful".](BugfixCommitOnBugfixBranch-1024x575.png) Cherry-pick successful
 
-Other use cases for cherry-picking
-----------------------------------
+## Other use cases for cherry-picking
 
 Cherry picking can be useful in other situations too. Let's take a look at some other use cases for cherry-picking.
 
@@ -89,8 +86,7 @@ In the Commit details pane on the right, select the files containing the changes
 The cherry picked changes are transferred to the change list and we can commit them from there.
 ![IntelliJ IDEA Commit window with Changes selected to be committed.](ChangeList-1024x574.png) Partial commit added to the Change List to be committed
 
-Dealing with conflicts
-----------------------
+## Dealing with conflicts
 
 So far, cherry picking went smoothly because there are no conflicting changes. What if there are conflicts?!
 
@@ -103,8 +99,7 @@ We can resolve the merge conflicts here. We want to keep some changes, and rejec
 If you're not able to resolve the merge conflicts, you can also abort the cherry pick.
 ![IntelliJ IDEA Git log showing a notification that the Cherry-pick was performed with conflicts and a popup to Abort the Cherry-Pick](Abort-1024x574.png) Abort Cherry-pick
 
-Continue after cherry-picking
------------------------------
+## Continue after cherry-picking
 
 Once we're done cherry-picking, we can go back to the "feature" branch. Since we haven't pushed these changes yet, we can remove the commit from the feature branch by selecting **Drop commit**.
 ![](DropCommit-1024x574.png) Drop Commit
@@ -114,8 +109,7 @@ What if you have pushed the changes already? Then you might want to revert it on
 
 Now we can continue working on the new feature!
 
-Conclusion
-----------
+## Conclusion
 
 Moving a commit to a different branch. Not nearly as scary as it sounds! Let the IDE help to turn this into a quick, low-stress task.
 

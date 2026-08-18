@@ -23,8 +23,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 Design patterns are great, they standardize solutions for common programming problems so you don't shoot yourself in the foot or reinvent the wheel.
 
@@ -183,8 +182,7 @@ First we'll start with an implementation using **vanilla OOP concepts**.
 
 Then, we'll reimplement this example using Data Oriented Programming techniques and showcase all the new relevant language features java 21 has to offer.
 
-What is the visitor pattern?
-----------------------------
+## What is the visitor pattern?
 
 The [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) is a design pattern that at its base allows an algorithm to be implemented *without* changing the classes upon which it acts.
 
@@ -192,8 +190,7 @@ Implementing this in java used to be **rather verbose** , however. This was most
 
 This got improved upon with the introduction of [records](https://openjdk.org/jeps/395), and [sealed classes](https://openjdk.org/jeps/409) allowing to concisely present product types \& sum types, and lastly [enhanced pattern matching for the switch statement](https://openjdk.org/jeps/441#:~:text=Enhance%20the%20Java%20programming%20language,be%20expressed%20concisely%20and%20safely).
 
-Example: A book curation system
--------------------------------
+## Example: A book curation system
 
 *Note: If you prefer just taking a look at the code, the repository can be found [here](https://github.com/wimdetroyer/visitor-pattern-with-dop).*
 
@@ -308,8 +305,6 @@ public abstract class Book {
 }
 ```
 
-<br />
-
 and the *leaf nodes* (non-fiction, children's tale, ...) are *concrete* (final) classes:
 
 ```java
@@ -396,8 +391,6 @@ public class OOPSolution {
     }
 }
 ```
-
-<br />
 
 #### The implementation of the algorithm
 
@@ -770,14 +763,11 @@ While technically still a preview feature in java 24, we can use the support for
 
 {#more-116139}
 
-Recommended further reading and watching
-----------------------------------------
+## Recommended further reading and watching
 
 * [An excellent Devoxx talk by Nicolai Parlog which inspired me to learn more about this subject](https://www.youtube.com/watch?v=8FRU_aGY4mY)
 * [Brian Goetz' seminal article on InfoQ about Data Oriented Programming in java](https://www.infoq.com/articles/data-oriented-programming-java/)
 * [An entire book (wip) by Chris Kiehl exploring Data Oriented Programming in java](https://www.manning.com/books/data-oriented-programming-in-java)
 * [A presentation by Angelos Bimpoudis discussing future java language improvements upcoming for Pattern matching](https://www.youtube.com/watch?v=GurtoM8i2TE)
 
-This blog was originally published on [my personal blog](https://wimdetroyer.com/blog/visitor-pattern-in-dop) on April 23, 2025.  
-
-<br />
+This blog was originally published on [my personal blog](https://wimdetroyer.com/blog/visitor-pattern-in-dop) on April 23, 2025.

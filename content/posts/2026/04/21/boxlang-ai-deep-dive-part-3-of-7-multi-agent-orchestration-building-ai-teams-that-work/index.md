@@ -32,8 +32,7 @@ The problem with most multi-agent frameworks is that the orchestration layer is 
 
 BoxLang AI 3.0 changes this. `AiAgent` now tracks its position in a full hierarchy tree, and sub-agents are wired as tools automatically --- the coordinator doesn't need to know how to delegate, only that it can.
 
-🌲 The Agent Tree
------------------
+## 🌲 The Agent Tree
 
 Every `AiAgent` carries a `parentAgent` property and a full set of hierarchy helpers. The relationship is bidirectional: `addSubAgent()` registers the sub-agent as a callable tool and sets the parent reference in one call.
 
@@ -54,7 +53,6 @@ println( researcherAgent.getAncestors() )      // [ coordinator ]
 println( writerAgent.getRootAgent().getAgentName() ) // coordinator
 ```
 
-
 The full hierarchy API from the source:
 
 ```java
@@ -68,7 +66,6 @@ getAgentDepth()            // 0 = root, 1 = child, 2 = grandchild, ...
 getAgentPath()             // "/coordinator/researcher"
 getAncestors()             // [immediateParent, grandparent, ..., root]
 ```
-
 
 ### Cycle Detection Built-In
 
@@ -93,9 +90,7 @@ AiAgent function setParentAgent( required AiAgent parent ) {
 }
 ```
 
-
-🤖 Sub-Agents as Tools
-----------------------
+## 🤖 Sub-Agents as Tools
 
 The magic of `addSubAgent()` is that each sub-agent is automatically wrapped as a tool the parent can call --- no manual wiring, no custom callback code.
 
@@ -117,13 +112,11 @@ private ITool function createSubAgentTool( required AiAgent subAgent ) {
 }
 ```
 
-
 When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `delegate_to_researcher`, `delegate_to_writer`, etc. The LLM sees these tools in its context and decides when to use them --- exactly the same way it decides when to call any other tool.
 
 **The coordinator doesn't need special logic. It just has more tools.**
 
-🏢 AiAgent is Now Fully Stateless
----------------------------------
+## 🏢 AiAgent is Now Fully Stateless
 
 One of the most important architectural changes in 3.0: `AiAgent` no longer holds `userId` or `conversationId` as instance state. They are resolved per-call.
 
@@ -138,7 +131,6 @@ public any function run( any input = "", struct params = {}, struct options = {}
 }
 ```
 
-
 This means **one agent instance can safely serve multiple concurrent users** --- no race conditions, no cross-user contamination, no per-user agent factory needed.
 
 ```java
@@ -151,9 +143,7 @@ sharedAgent.run( "What did I say?", {}, { userId: "alice", conversationId: "sess
 sharedAgent.run( "Hello",           {}, { userId: "bob",   conversationId: "sess-2" } ) // isolated from alice
 ```
 
-
-🧠 Per-Call Identity Routing on Memory
---------------------------------------
+## 🧠 Per-Call Identity Routing on Memory
 
 All memory types follow the same pattern --- `add()`, `getAll()`, `clear()`, and `trim()` all accept optional `userId` and `conversationId`:
 
@@ -169,11 +159,9 @@ aliceHistory = sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 bobHistory   = sharedMemory.getAll( userId: "bob",   conversationId: "conv-2" )
 ```
 
-
 When the agent calls `loadMemoryMessages()` internally, it passes the resolved per-call `userId` and `conversationId` down to all attached memories. Memory is naturally tenant-isolated without any extra wiring.
 
-🏗️ The Agent Run Lifecycle
----------------------------
+## 🏗️ The Agent Run Lifecycle
 
 Understanding what happens inside `run()` is useful when you're debugging or building middleware (more on that in Part 4). Here's the sequence:
 
@@ -193,11 +181,9 @@ Understanding what happens inside `run()` is useful when you're debugging or bui
 13. Return response
 ```
 
-
 The system message is also cached and fingerprinted --- if description, instructions, and skill pools haven't changed since the last call, the cached version is used instead of rebuilding. This matters for high-throughput scenarios where the same agent handles many requests.
 
-🌊 Streaming with Multi-Agent Teams
------------------------------------
+## 🌊 Streaming with Multi-Agent Teams
 
 Streaming works the same way in multi-agent setups --- each agent can stream independently:
 
@@ -216,11 +202,9 @@ coordinator.stream(
 )
 ```
 
-
 When the coordinator decides to delegate to the researcher, that sub-call happens synchronously inside the tool invocation --- the streaming coordinator gets back the researcher's result as a tool response, then continues streaming.
 
-🔄 Suspend and Resume
----------------------
+## 🔄 Suspend and Resume
 
 When `HumanInTheLoopMiddleware` (covered in Part 4) suspends an agent, the state needs to be preserved. The `checkpointer` property handles this:
 
@@ -250,7 +234,6 @@ agent.resume( "reject", threadId )
 agent.resume( "edit", threadId, { correctedArgs: { amount: 100, account: "#12345" } } )
 ```
 
-
 The `resume()` implementation re-runs from the saved checkpoint, injecting the human's decision into the middleware context:
 
 ```java
@@ -272,9 +255,7 @@ any function resume( required string decision, required string threadId, struct 
 }
 ```
 
-
-🔍 Introspection
-----------------
+## 🔍 Introspection
 
 The `getConfig()` method gives you full visibility into an agent's state --- useful for debugging, monitoring dashboards, and logging:
 
@@ -305,9 +286,7 @@ println( config.middlewareCount )
 println( config.middleware )    // [{ name, description }]
 ```
 
-
-🚀 A Complete Multi-Agent Example
----------------------------------
+## 🚀 A Complete Multi-Agent Example
 
 Here's a practical orchestration: a coordinator that delegates research to a specialized researcher and writing to a specialized writer, both with their own skills and tools.
 
@@ -350,11 +329,9 @@ response = coordinator.run(
 )
 ```
 
-
 The LLM driving the coordinator sees two tools: `delegate_to_researcher` and `delegate_to_writer`. It decides to call the researcher first, gets back a detailed summary, then calls the writer with that summary and the original request, and finally synthesizes the writer's output into a final response. You didn't write any of that logic --- the LLM figured it out from the tool descriptions.
 
-What's Next
------------
+## What's Next
 
 In Part 4, we tackle the middleware system --- the six built-in middleware classes, how the hook lifecycle works, writing your own middleware, and the `FlightRecorderMiddleware` that makes AI agents properly testable in CI.
 
@@ -363,5 +340,3 @@ In Part 4, we tackle the middleware system --- the six built-in middleware class
 [← Previous](https://foojay.io/today/boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem/ "← Previous")
 
 [-\> Next](https://foojay.io/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-%f0%9f%a7%b5/)
-
-<br />

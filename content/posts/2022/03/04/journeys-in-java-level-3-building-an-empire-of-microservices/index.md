@@ -27,8 +27,7 @@ This post will advance once again by upgrading our embedded MongoDB instance to 
 
 I like to think of it like a restaurant kitchen. It is usually walled off separately and hidden (though still part of the same building), but the kitchen is the heart and a critical component of the restaurant. However you want to think of it, let's get started building it!
 
-Architecture
-------------
+## Architecture
 
 Our architecture from the previous couple of blog posts started with two Spring Boot applications communicating to one another via HTTP. The project goal is to slowly assemble microservices in manageable pieces to improve understanding (yours and mine). 🙂
 
@@ -42,8 +41,7 @@ We decided on a data domain of books in the previous blog post, so we can load K
 
 That means we need to spin up a Docker container with MongoDB first, then load the data into it second before we can move to our interacting applications.
 
-Docker container
-----------------
+## Docker container
 
 Many of you are probably familiar with what [Docker](https://www.docker.com/resources/what-container) is and how to use containers, but let me spend a couple of sentences on background anyway. The term containers actually matches the design of the technology itself. It's like taking all the required components for running an application (a mini virtual machine, the application, and any other necessary tools) and putting them inside a neatly packaged box (i.e. container). Yes, I like metaphors. 🙂
 
@@ -66,7 +64,6 @@ LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-
 EXPOSE 27017
 ```
 
-
 In the first code block, we are pulling that base image (`mongo`) for MongoDB. The next section tells anyone who might use this Dockerfile who maintains it (me). The last couple of lines expose a port in order to connect to the container using MongoDB's default port is 27017.
 
 If you clone the full [microservices-level3 repository](https://github.com/JMHReif/microservices-level3), you should be able to follow the [instructions](https://github.com/JMHReif/microservices-level3/tree/main/docker-mongodb#building-and-running-the-image) in the README file in the `docker-mongodb` folder to build and run the container on your machine.
@@ -75,8 +72,7 @@ If you clone the full [microservices-level3 repository](https://github.com/JMHRe
 
 Next, we will get the data loaded to our MongoDB instance running in the container.
 
-Book data import
-----------------
+## Book data import
 
 As mentioned earlier in the architecture section, we are going to load data about books using the [Goodreads](https://www.kaggle.com/jealousleopard/goodreadsbooks) data set on Kaggle. The spreadsheet-formatted data is free to use, and it includes data such as title, author, reviews, and ratings about each book. There are several fields, but not so many to be unmanageable.
 
@@ -88,8 +84,7 @@ Then, we need to get into our container to load the data in there. All of the st
 
 Back to our microservices applications!
 
-Applications - Service 1
-------------------------
+## Applications - Service 1
 
 Our application code doesn't change much to go from an embedded to a separate instance of MongoDB. Though our database instance is becoming separate from the application, we aren't classifying it as a different service because it is the backing/support for `service1`.
 
@@ -102,7 +97,6 @@ The largest amount of work was setting up the database itself, and if you have g
 </dependency>
 ```
 
-
 We are using the official Spring Data MongoDB dependency, which means we get all the goodness of Spring's functionality interacting with a production-grade database. You may have also noticed the reactive suffix of the artifactId. Spring Data MongoDB provides a separate library for imperative-style code. Since we want to move data and events between applications for microservices as asynchronously as possible, we will use the reactive library.
 
 We will also need to make a couple of changes to the `application.properties` file to connect to the database instance and remove the test instance properties. Our updated property file looks like the one below.
@@ -114,7 +108,6 @@ server.port=8081
 spring.data.mongodb.uri=mongodb://mongoadmin:Testing123@localhost:27017
 spring.data.mongodb.database=books
 ```
-
 
 We removed the MongoDB port and embedded versioning in favor of a full URI property (includes the MongoDB port of `27017`) along with a database name on the instance. This is because a single MongoDB instance can hold multiple separate data stores with different data sets. I could have a database of books and a database of customers that exist in the same installation, but are organized in separate storage compartments of that installation.
 
@@ -141,7 +134,6 @@ class Book {
 }
 ```
 
-
 You might ask what changed? The id field went from `bookId` to `bookID`, and the author field went from `author` to `authors`. These are very minor differences, but ones that wouldn't allow the values to be mapped properly if we didn't match exactly.
 
 The `BookRepository` interface just above the domain class does not change at all and neither does the `BookController` class above that. However, the `Service1Application` class does. We actually revert back to what we had in the [Level1](https://github.com/JMHReif/microservices-level1/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java) rendition of the code with only the `main` method.
@@ -156,11 +148,9 @@ public class Service1Application {
 }
 ```
 
-
 The CommandLineRunner bean is no longer needed because we are not populating an embedded database with dummy data, but rather using a separate database with a real data set loaded. Once we remove the bean, that is all for `service1`! Time to move over to `service2`.
 
-Applications - Service 2
-------------------------
+## Applications - Service 2
 
 This service is our client-side service that calls `service1` and displays the response. Because we are not changing functionality on the frontend side of the application, we do not need to update the `pom.xml` or the `application.properties` file.
 
@@ -178,7 +168,6 @@ class Book {
 	private String authors;
 }
 ```
-
 
 Just as in service1, we updated the first and last properties to `bookID` and `authors`. This maps our data coming from service1 to the correct fields in service2.
 
@@ -200,13 +189,11 @@ class BookController {
 }
 ```
 
-
 The `@RequestMapping` annotation is the only line that has changed, so we will need to go to `localhost:8080/gooodreads` now.
 
 Let's test our changes!
 
-Put it to the test
-------------------
+## Put it to the test
 
 Just like in updating the code, I like to spin up functionality from the bottom and move up. So, we need to make sure the database is running in our Docker container. You can check whether the container is running with `docker ps`. If you don't see anything, you can start the container with `docker start mongoBooks`. Then we can use `docker ps` to check it again.
 
@@ -220,10 +207,7 @@ And here is the resulting output!
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55183" src="microservices-lvl3-results-554x510.png" alt="" width="554" height="510">
 
-<br />
-
-Wrapping up!
-------------
+## Wrapping up!
 
 This step in our microservices project took us from an embedded instance of MongoDB to a standalone database running in a Docker container. The `service1` and `service2` application code may not have changed much, but it puts us in a production-ready layout.
 
@@ -233,8 +217,7 @@ As always, there is much more to learn and many more steps to a large system of 
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level3](https://github.com/JMHReif/microservices-level3) repository
 * Documentation: [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)

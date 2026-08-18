@@ -26,8 +26,7 @@ I called them zombie dependencies.
 
 June 30th is coming. In a few weeks, Spring Boot 3.5 reaches end of open-source support. You've either got a plan or you haven't.
 
-If You're Already on 4.0
-------------------------
+## If You're Already on 4.0
 
 ### The zombie problem followed you
 
@@ -35,8 +34,7 @@ Good. I expect that migration wasn't as easy as you expected. One thing worth sa
 
 Running the [HeroDevs EOL CLI](https://www.herodevs.com/eol-dataset/eol-data?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs EOL CLI ")against your new build now is a sensible first step.
 
-If You're Still on 3.5
-----------------------
+## If You're Still on 3.5
 
 ### The technical risk is growing. The legal risk is about to change.
 
@@ -54,8 +52,7 @@ The migration from 3.5 to 4.0 isn't a version bump. Fifty-plus breaking changes,
 
 The Spring community's own guidance recommends starting nine to twelve *months* before EOL. For Spring Boot 3.5, that window opened in July 2025.
 
-What "Without Undue Delay" Actually Means Now
----------------------------------------------
+## What "Without Undue Delay" Actually Means Now
 
 ### Article 14 and the 24-hour clock
 
@@ -107,8 +104,7 @@ The migration work is the same whether you do it now or later.
 
 The difference is whether you do it on your schedule or the regulator's. Or, if you're lucky, you use the support option to keep the app safe until it times out and gets retired.
 
-The Zombie Problem Has a New Urgency
-------------------------------------
+## The Zombie Problem Has a New Urgency
 
 ### From backlog item to compliance event
 
@@ -140,16 +136,13 @@ Make sure you've aware of your options before this happens.
 
 If you're still on 3.5, start the migration conversation this week. Read the [migration guide](https://www.herodevs.com/ebooks/spring-boot-4-0-migration-guide?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "migration guide"). Run the [EOL scan](https://www.herodevs.com/eol-dataset/eol-data?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "EOL scan") against your dependency tree.
 
-Just do it
-----------
+## Just do it
 
 In fact, regardless of what software stack you have. Whether its Java or something else. Now is the time for getting a handle on what your real estate looks like from a CVE and EOL PoV. You need as much time as possible to make informed decisions on every piece of tech in your supply chain.
 
 ### Next time Next time
 
 I'll explain more about HeroDevs EOL data and how to use.
-
-
 
 #### What does "actively exploited" mean in practice, and how would you know?
 
@@ -164,7 +157,5 @@ Snyk labels vulnerabilities as "Attacked" when it has evidence of active exploit
 Sonatype Lifecycle incorporates EPSS and its own exploitation data from monitoring public repositories and threat feeds, surfacing exploitation probability alongside severity.
 
 OSV Scanner doesn't surface exploitation status directly, but cross-referencing its output with the CISA KEV catalogue gives you the combination.
-
-
 
 Steve Poole is a Developer Advocate at [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")and a Java Champion. [HeroDevs](https://www.herodevs.com/blog-posts/spring-boot-3-5-eol-migration-calculator-estimate-your-upgrade-timeline-to-spring-boot-4?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global "HeroDevs ")provides Never-Ending Support for EOL open-source software including Spring Boot 3.5. This article follows Crossing the River Styx: Spring Boot 3.5 and the Zombie Dependency Problem.

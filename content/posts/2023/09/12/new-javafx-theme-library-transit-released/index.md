@@ -24,8 +24,7 @@ frozen: false
 
 It is not meant to be JMetro 2, it will be an entirely new theme.
 
-Strengths and Key Principles
-----------------------------
+## Strengths and Key Principles
 
 This theme follows some of the design principles and has some of the key strengths of JMetro:
 
@@ -53,8 +52,7 @@ The benefits of this approach are:
 * Very easy to switch to another theme either because you want to set another theme on a different environment (OS, etc) or you just want to start using another theme altogether;
 * You'll keep having features added to the controls you're using in your application every time there's a new version of this theme with new features, without the need to change any code. All you need is to update the version of Transit.
 
-High level architecture
------------------------
+## High level architecture
 
 ![](image-1.png)
 
@@ -70,8 +68,7 @@ Adds the CSS styles to your control to make them look more modern. It also adds 
 
 If you want the whole package, add Transit Theme as a dependency and you'll get the styles and the added behavior on your controls (Transit Theme already depends on the FXSkins library).
 
-New in this release
--------------------
+## New in this release
 
 * **Conscious ScrollPane Skin and style.**This new Skin for the ScrollPane will show the scrollbars in a minimal style with just the thumb showing. When the user mouses over the thumb the scrollbars transform to show their full UI. All of this is styleable through CSS: the minimal scrollbar visuals, the full scrollbar visuals, etc.
 
@@ -83,7 +80,6 @@ New in this release
 
 * **Clear architectural separation between skins and theme CSS definitions.** As mentioned previously there's now a clear separation between the new skin definition and the CSS theme definition. Transit Theme depends on FXSkins library which is an entirely different library.
 
-Conclusion
-----------
+## Conclusion
 
 **A new theme called Transit has just been released, you can head on over to the [documentation page](https://pixelduke.com/transit-java-javafx-theme/) or [github page](https://github.com/dukke/Transit) for more information.**

@@ -30,7 +30,6 @@ OpenJDK Runtime Environment (build 11.0.8+10-post-Ubuntu-0ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04, mixed mode)
 ```
 
-
 ### Installing Azul Zulu OpenJDK 15
 
 OpenJDK Java 15 was released on 2020-09-15, check out the [Java Version Almanac](https://foojay.io/almanac/jdk-15/) for more details.
@@ -74,7 +73,6 @@ OpenJDK Runtime Environment Zulu15.27+17-CA (build 15+36)
 OpenJDK 64-Bit Server VM Zulu15.27+17-CA (build 15+36, mixed mode)
 ```
 
-
 ### Comparing Startup Speeds
 
 To compare the startup speeds, I reused the Spring and Quarkus applications [of the previous article](https://foojay.io/blog/startup-spring-quarkus-raspberry-pi/).
@@ -84,12 +82,10 @@ $ cd JavaOnRaspberryPi/Chapter_10_Spring/java-spring-rest-db/target/
 $ java -jar java-spring-rest-db-0.0.1-SNAPSHOT.jar
 ```
 
-
 ```
 $ cd JavaQuarkusRestDb/target/
 $ java -jar javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
 ```
-
 
 #### Startup Results
 
@@ -118,7 +114,6 @@ $ java -Dcom.sun.management.jmxremote \
        -Dcom.sun.management.jmxremote.ssl=false \
        -jar javaquarkusrestdb-1.0-SNAPSHOT-runner.jar
 ```
-
 
 I waited two minutes before taking each screenshot below.
 

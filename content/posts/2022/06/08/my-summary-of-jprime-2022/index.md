@@ -91,7 +91,6 @@ public static GenericContainer<?> postgres = new GenericContainer<>("postgres")
     .withNetworkAliases(postgresNetwork)
 ```
 
-
 [MicroShed testing](https://microshed.org/microshed-testing/) integrates with the Jakarta EE ecosystem to make use of Testcontainers.  
 
 It offers several implementations:
@@ -192,8 +191,6 @@ Event modeling is a blueprint for a solution. Some think that storming and model
 
 ](https://twitter.com/adymitruk/status/1443582579425230848)
 
-<br />
-
 Now, what is event-driven? Two concepts are at the foundation of event-driven: producers emit events; consumers are interested in specific events. A router is a mediator between producers and consumers, which knows how to route messages from the former to the latter.
 
 Yet, in the end, event-driven is a buzzword! It works great for product pitches, but it's not a technically accurate term. It's a false claim: if an event is a notification, then it doesn't drive anything. The driving factor is a **decision**, either made by users or by algorithms.
@@ -269,8 +266,7 @@ Finally, note that the v2 of [setup-java GitHub Action](https://github.com/actio
 
 I've already written a full-fledged blog post about [Evolving your APIs](https://blog.frankel.ch/evolve-apis/). Soon, the recording of the talk will be available.
 
-Conclusion
-----------
+## Conclusion
 
 jPrime is a great community-led conference. After two years of Covid, they were able to attract around 1k attendees and local and international speakers. Icing on the cake, all talks are in English!
 

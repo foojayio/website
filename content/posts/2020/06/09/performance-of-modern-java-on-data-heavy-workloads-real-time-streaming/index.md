@@ -75,7 +75,6 @@ source.groupingKey(n -> n % NUM_KEYS)
               wr.result() * DIAGNOSTIC_KEYSET_DOWNSAMPLING_FACTOR)));
 ```
 
-
 This pipeline represents use cases with an unbounded event stream where the engine is asked to perform sliding window aggregation. You need this kind of aggregation, for example, to obtain the time derivative of a changing quantity, remove high-frequency noise from the data (smoothing) or measure the intensity of the occurrence of some event (events per second). The engine can first split the stream by some category (for example, each distinct IoT device or smartphone) into substreams and then independently track the aggregated value in each of them. In Hazelcast Jet the sliding window moves in fixed-size steps that you configure. For example, with a sliding step of 1 second you get a complete set of results every second, and if the window size is 1 minute, the results reflect the events that occurred within the last minute.
 
 Some notes:

@@ -35,7 +35,6 @@ Even this idea, due to the previous internal architecture of the java platform, 
 File: SecureModule.java
 ```
 
-
 ```
 public class SecureModule {
    private static SecureModule INSTANCE;
@@ -55,7 +54,6 @@ public class SecureModule {
 }
 ```
 
-
 **Example 1.**: Possible gateway class SecureModule to the "secure" module providing couple of secret logic before Java 9 release
 
 The code above already provides a brief insight into the challenge of securing a module, as any member of the classpath can access the SecureModule logic without even considering bytecode generation.
@@ -70,14 +68,12 @@ secureModule.name = "maybe not wanted";
 secureModule.executeLogic();
 ```
 
-
 ```
 Output:
 Before Java 9: no modules
 SecureModule, executeLogic name:security in important
 SecureModule, executeLogic name:maybe not wanted
 ```
-
 
 **Example 2.**: Compromising of access to internal module logic due to incorrect visibility of internal fields
 
@@ -103,13 +99,11 @@ public class Jep476BaseMain {
 }
 ```
 
-
 ```
 Command: $ java --enable-preview Jep476BaseMain.java
 Output:
 list:[ONE, TWO]
 ```
-
 
 **Example 3.**: Importing a module provides access to all classes and interfaces without having to specify them
 
@@ -153,14 +147,12 @@ public class Jep476ModuleMain {
 }
 ```
 
-
 ```
 Output:
 JEP 476: Module Import Declarations (Preview)
 FactoryOne element:FactoryElement[name=factory1, value=22]
 FactoryTwo element:FactoryElement[name=factory2, value=42]
 ```
-
 
 **Example 5.**: Each factory is automatically available and can hide different implementations that remain hidden for the jep476mod1 module
 

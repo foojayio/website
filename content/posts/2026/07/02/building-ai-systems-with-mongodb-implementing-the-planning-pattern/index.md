@@ -35,9 +35,7 @@ You can find all the code presented in this tutorial in the GitHub repository:
 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email protected]</a>:soujava/mongodb-ai-planning-pattern.git
 ```
 
-
-Prerequisites
--------------
+## Prerequisites
 
 For this tutorial, you'll need:
 
@@ -53,7 +51,6 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-
 The [Planning Pattern](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) enables an AI system to decompose high-level objectives into smaller, independent actions. Rather than relying solely on internal knowledge, the agent identifies required information and selects deterministic tools, such as databases or REST services. This approach improves reliability, observability, and accuracy by combining the reasoning capabilities of Large Language Models with the predictable behavior of traditional software components.
 
 Unlike architectures that employ a dedicated planner agent or workflow graph, this implementation uses the language model itself as the planner. During execution, the model repeatedly reasons over the user's objective, selects the most appropriate tool, observes the returned data, and decides whether additional actions are required before producing the final response. This Reason--Act--Observe loop provides a lightweight yet highly effective planning architecture that is widely used in modern agentic systems.
@@ -68,8 +65,7 @@ The implementation uses [Jakarta EE](https://jakarta.ee/) as the application pla
 For example, when a user executes any question, this will be the flow that the application will follow:
 ![](foojay3-1024x691.png)
 
-Step 1: Generate the Project
-----------------------------
+## Step 1: Generate the Project
 
 Begin by generating a new Jakarta EE project using the [Jakarta EE starter](https://start.jakarta.ee/). For this example, we will use Glassfish version 8.0.3.
 
@@ -177,7 +173,6 @@ The code below shows the updated dependency.
 </project>
 ```
 
-
 Add the following configuration to the web.xml file located at src/main/webapp/WEB-INF/ to enable JSF.
 
 ```
@@ -201,7 +196,6 @@ Add the following configuration to the web.xml file located at src/main/webapp/W
 </web-app>
 ```
 
-
 In the same directory, add the beans.xml file to enable [CDI support](https://jakarta.ee/learn/docs/jakartaee-tutorial/current/cdi/cdi-basic/cdi-basic.html).
 
 ```
@@ -210,7 +204,6 @@ In the same directory, add the beans.xml file to enable [CDI support](https://ja
        bean-discovery-mode="annotated">
 </beans>
 ```
-
 
 The next step is to configure credentials in the properties file. Set the AI model class, OpenAI API key, and MongoDB connection string. You can override these settings using system environment variables, following the Twelve Factor Application methodology. Ideally, these configurations should be transparent to software developers, and sensitive information should not be hard-coded for security reasons. So create the file: src/main/resources/META-INF/microprofile-config.properties
 
@@ -223,9 +216,7 @@ jnosql.mongodb.url=mongodb+srv://admin:<db_password>@cluster0.gblhb3d.mongodb.ne
 jnosql.mongodb.application.name=devrel-article-java-jnosql
 ```
 
-
-Step 2: Generate the domain classes
------------------------------------
+## Step 2: Generate the domain classes
 
 Once the setup is complete, the next step is to create the entities: City and its attractions. The annotation approach is similar to Jakarta Persistence (formerly JPA), but each attribute must be marked with either Id or Column annotations. The overall structure remains similar. We will define two entities and one embedded class.
 
@@ -243,7 +234,6 @@ public enum AttractionType {
     RELIGIOUS
 }
 ```
-
 
 The City class serves as the entity representing the City. Notably, this approach is similar to Jakarta Persistence, where the Entity annotation marks a class as persistable. The Id and Column annotations specify which attributes are persistable and whether they serve as identifiers or standard fields.
 
@@ -299,7 +289,6 @@ public class City {
 }
 ```
 
-
 The CityReference works as an embeddable defined by the annotation of the same name. Since it can be defined as a Value Type in DDD, we will define it as an immutable class with two attributes. This information will be grouped inside the Attraction as a reference to the city.
 
 ```
@@ -314,7 +303,6 @@ import java.util.UUID;
 public record CityReference(@Column UUID id, @Column String name) {
 }
 ```
-
 
 The Attraction uses the same structure as the City. The main difference, aside from the attributes, is the inclusion of an embedded grouping that functions as a subdocument within the Attraction.
 
@@ -378,7 +366,6 @@ public class Attraction {
 }
 ```
 
-
 With the entities complete, the next step is to establish the connection between the Java and MongoDB classes. We will use Jakarta Data with Jakarta NoSQL to leverage interface-based capabilities within Jakarta EE.
 
 ```
@@ -396,7 +383,6 @@ public interface CityRepository extends BasicRepository<City, UUID> {
     List<City> findByCountry(String country);
 }
 ```
-
 
 Jakarta Data offers several ways to explore data capabilities. In our scenario, we defined repositories using BasicRepository, which provides multiple database operations. You can query data by method name, such as "findByCountry," to search by specific fields. Additionally, Jakarta Queries functionalities can be accessed using the Query annotation.
 
@@ -421,7 +407,6 @@ public interface AttractionRepository extends BasicRepository<Attraction, UUID> 
     List<Attraction> findByCityNameAndType(@Param("name") String city, @Param("type") AttractionType type);
 }
 ```
-
 
 The integration between Java and the data layer is complete, and the process was straightforward thanks to the Jakarta EE platform. Now, we will add functionality by implementing three services: an attraction service, a city service, and a setup service that will populate the database with initial data. While you may later consider adding user interface forms for data entry, this feature is not included in the scope of this tutorial.
 
@@ -464,7 +449,6 @@ public class CityService {
 }
 ```
 
-
 The AttractionService will function similarly to the CityService and will manage all attraction-related operations.
 
 ```
@@ -503,7 +487,6 @@ public class AttractionService {
     }
 }
 ```
-
 
 The data loader class generates information for our travel agency. In a real-world scenario, this could be achieved through a form or by integrating with a third-party service, such as a REST API. In our example, for simplicity, the data loader checks if the database is empty and then creates data based on three cities and their respective attractions.
 
@@ -675,9 +658,7 @@ public class DataLoader {
 }
 ```
 
-
-Step 3: Defining the AI layer over MongoDB integration
-------------------------------------------------------
+## Step 3: Defining the AI layer over MongoDB integration
 
 Once all services are available, the next step is to expose them through tools using the [Tool annotation](https://docs.langchain4j.dev/tutorials/tools/), which defines functions the language model can call. Tool classes should provide as much context as possible for these services. Langchain4j will automatically handle the response, which may be returned as JSON and passed to the language model.
 
@@ -754,7 +735,6 @@ public class AttractionTools {
 }
 ```
 
-
 CityTools has a similar structure and function, but it exposes and describes services available to AI. This allows us to identify city services that AI can utilize.
 
 ```
@@ -819,7 +799,6 @@ public class CityTools {
 }
 ```
 
-
 With the available tools, the next step is to register all TravelService components that serve as the bridge between Java and AI. This process is similar to the approach used in Jakarta Data and Spring Data, where configuration is based on the interface and a few annotations.
 
 We use the [RegisterAIService](https://github.com/langchain4j/langchain4j-cdi/blob/main/langchain4j-cdi-core/src/main/java/dev/langchain4j/cdi/spi/RegisterAIService.java) annotation to designate this interface as an AI service, similar to the Repository annotation in Jakarta Data. Additionally, we specify the available tools. The single method uses the SystemMessage annotation to define the prompt command, outlining the HTML structure to be rendered by JSF.
@@ -880,9 +859,7 @@ public interface TravelService {
 }
 ```
 
-
-Step 4: Showing the result with UI
-----------------------------------
+## Step 4: Showing the result with UI
 
 With all services and tools in place, the next step is to present them and enable user interaction. We will use Jakarta Faces, which simplifies development for those without extensive front-end experience. The TravelBean class will display information in HTML. By combining its attributes with Jakarta Expression Language, we will expose getters and setters for use as inputs and outputs on the webpage. We will also define the scope here as View.
 
@@ -956,7 +933,6 @@ public class TravelBean implements Serializable {
 }
 ```
 
-
 If you are running the sample locally [without a certificate](https://thecybersandeep.medium.com/bypassing-ssl-validation-in-a-java-application-via-truststore-f1b9ea42accd), you will need to use an SSL bypass. Please note that this approach is not recommended for production environments.
 
 ```
@@ -1013,7 +989,6 @@ public final class SSLBypass {
     }
 }
 ```
-
 
 NOTE: Don't use this class in production; use it for local testing only.
 
@@ -1181,7 +1156,6 @@ The XHTML page will render our information as HTML. With Jakarta Faces, front-en
 </html>
 ```
 
-
 Finally, the beauty with the CSS, where we will create at src/main/webapp/resources/css/travel.css:
 
 ```
@@ -1296,9 +1270,7 @@ body {
 }
 ```
 
-
-Step 5: Execute the application
--------------------------------
+## Step 5: Execute the application
 
 To complete the process, package the application and start it using the embedded GlassFish plugin:
 
@@ -1306,16 +1278,13 @@ To complete the process, package the application and start it using the embedded
 mvn clean install && mvn embedded-glassfish:run
 ```
 
-
 Next, open the application in your browser:
 
 ```
 http://localhost:8080/
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 This tutorial introduced the Planning Pattern as a practical method for integrating AI into enterprise applications. Instead of tasking a language model with solving complex problems in one step, this pattern breaks objectives into smaller actions handled by deterministic tools. This approach elevates reliability, transparency, and maintainability by enabling AI to reason about goals while delegating data access and business operations to traditional software components. As AI becomes more embedded in business workflows, patterns like Planning offer a structured way to balance autonomy and control.
 
@@ -1327,10 +1296,6 @@ Ready to explore the benefits of MongoDB Atlas? Get started now by [trying Mongo
 
 Any questions? Come chat with us in the [MongoDB Community Forum](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=data_driven_test_dev&utm_term=otavio.santana).
 
-<br />
-
 **References**:
 
 * [Source code](https://github.com/soujava/mongodb-ai-planning-pattern)
-
-<br />

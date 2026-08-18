@@ -25,8 +25,7 @@ The speakers of these meetups were composed of [Jansen Ang](https://www.linkedin
 
 The 4th meetup discusess the Microservice and Event-driven Architecture. The Bang Iguana started the talk on the history of microservices then explained the pros and cons of the two architectures. She ended the talk with a game.
 
-Microservices vs Event-driven Architecture
-------------------------------------------
+## Microservices vs Event-driven Architecture
 
 ![](jugph-meetup-4-presentation-680x510.jpg)
 
@@ -42,15 +41,13 @@ The 5th meetup discussed the topics of Spring Certification and Generative AI us
 
 The presentation of the talks can be accessed here: [Spring Certification and Gen AI in Java](https://github.com/JUGPH/java-presentations/tree/main/event-5 "Spring Certification and Gen AI in Java")
 
-Spring Certification
---------------------
+## Spring Certification
 
 Kenneth discussed the contents and expectation in taking the Spring Certification.
 
 ![](jugph-meetup-5-spring-cert-680x510.jpg)
 
-Generative AI in Java
----------------------
+## Generative AI in Java
 
 Jansen introduced to the community the LangChain4j library that is used to extend the capability of LLMs in the Java language.
 

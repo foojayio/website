@@ -25,8 +25,7 @@ enlighterjs: true
 frozen: false
 ---
 
-What is JobRunr
----------------
+## What is JobRunr
 
 ### Task scheduler in Java
 
@@ -61,8 +60,7 @@ JobRunr is **used in various industries** from retail to healthcare to marketing
 
 JobRunr is now in collaboration with MindWave to add [carbon-aware](https://www.linkedin.com/pulse/introducing-carbon-aware-jobs-jobrunr-jobrunr-wtyee/?trackingId=%2Fg1pS789Y0r6BoaHf%2B1ppg%3D%3D "carbon-aware") task scheduler in Java. The **carbon-aware job feature** aims to optimize job execution by selecting periods with the **highest availability of renewable energy** . The goal is to work towards achieving one of the [**SDGs' objectives**](https://sdgs.un.org/goals/goal12 "SDGs’ objectives").
 
-An example: Automated order fulfillment system using JobRunr
-------------------------------------------------------------
+## An example: Automated order fulfillment system using JobRunr
 
 To illustrate how JobRunr works, let's simulate an [order fulfillment](https://en.wikipedia.org/wiki/Order_fulfillment "order fulfillment") system. Order fulfillment involves tasks required to completely satisfy a customer order. It's a process where each step can affect another, which happens on several levels. For example, a confirmed order reduces stock and to avoid stock-outs it is important to monitor and replenish the inventory.
 
@@ -95,7 +93,6 @@ The setup is very easy for Spring Boot, it often consists of adding JobRunr's Sp
 </dependency>
 ```
 
-
 JobRunr requires adding database dependencies. We can skip this step as this is usually done when initializing the Spring Boot application. Nonetheless, it's worth noting that JobRunr [supports several databases](https://www.jobrunr.io/en/documentation/installation/storage/ "supports several databases"). Another DB related feature is that all JobRunr related migrations are automatically handled by default. You can always decide otherwise and [take control over the DB setup](https://www.jobrunr.io/en/documentation/installation/storage/#setting-up-the-database-yourself "take control over the DB setup").
 
 JobRunr also needs a JSON processing library, but as Spring Boot by default comes with Jackson support this is already covered.
@@ -110,7 +107,6 @@ org.jobrunr.dashboard.enabled=true
 org.jobrunr.background-job-server.enabled=true
 ```
 
-
 While we're still in `application.properties` we will also add:
 
 ```
@@ -119,7 +115,6 @@ daily-resupply.cron=0 0 * * *
 
 stock-locations=Brussels,Antwerp,Bruges,Liege
 ```
-
 
 Those will be useful to our recurring jobs as we'll see later!
 
@@ -167,7 +162,6 @@ public class OrderFulfillmentService {
 }
 ```
 
-
 *Note that we use `Thread.sleep` to simulate work, this forces us to explicitly handle `InterruptedException`, in an actual application, it's probably not needed.*
 
 The `OrderFulfillmentTasks` class makes use of the `OrderFulfillmentService`. Notice the additional `@Job`, which allows setting values to a job's attributes. This annotation is very handy! You may also use the alternative: the `JobBuilder`. We're doing exactly that in the body of the method, the jobs are configured using the `JobBuilder` and then saved atomically. This method is essentially a job that creates other jobs, so it also benefits from JobRunr's fault tolerance capabilities.
@@ -200,7 +194,6 @@ public class OrderFulfillmentTasks {
 }
 ```
 
-
 Note the use of `withAmountOfRetries(20)` for the warehouse notification task, we have to increase the amount of retries since our internal service is quite unstable.
 
 The `OrderFulfillmentController` is quite simple as it exposes a single endpoint that requests JobRunr to enqueue jobs. Once the metadata of these jobs are saved in the database, the server workers will process them asynchronously when they are ready.
@@ -218,7 +211,6 @@ public class OrderFulfillmentController {
     }
 }
 ```
-
 
 ### Creating recurring tasks
 
@@ -246,7 +238,6 @@ public class OrderFulfillmentService {
     }
 }
 ```
-
 
 We now update the `OrderFulfillmentTasks` to register those tasks. As they are recurring, we annotate them with `@Recurring` and a few attributes.
 
@@ -282,7 +273,6 @@ public class OrderFulfillmentTasks {
 }
 ```
 
-
 JobRunr will automatically register methods annotated with `@Reccuring` and schedule them for execution at the specified times!
 > Note the use of application properties, we promised to come back to them. We use them to configure the CRON expressions of our recurring jobs. The last property is used to provide the locations of our different warehouses. Here we have assumed that our imaginary company operates from Belgium and set the zoneId accordingly.
 
@@ -305,7 +295,6 @@ public class OrderFulfilmentTasksFilter implements JobServerFilter {
 }
 ```
 
-
 JobRunr does not automatically register custom job filters. We need additional code to make sure our hook will be called by JobRunr's background job servers. We can achieve this by overriding the `BackgroundJobServer` bean. Here, we illustrate another approach using Spring's `BeanPostProcessor`.
 
 ```java
@@ -326,7 +315,6 @@ public class BackgroundJobServerBeanPostProcessor implements BeanPostProcessor {
     }
 }
 ```
-
 
 ### Running the application
 
@@ -358,8 +346,7 @@ Here is a non-exhaustive list of potential things to explore:
 * **Logging job progress** : keep an eye on the [progress of a job](https://www.jobrunr.io/en/documentation/background-methods/logging-progress/ "progress of a job") by adding a progress bar. If you want to see this live in action, trigger the recurring job that with id `daily-resupply`, find the job on the jobs page, click on the job id and wait until it starts processing 👀
 * **Different ways of configuring jobs** : [check out 'Enqueueing jobs'](https://www.jobrunr.io/en/documentation/background-methods/enqueueing-jobs/ "Check out ‘Enqueueing jobs‘") for some usage examples on how to enqueue jobs configured using annotations or builders.
 
-Conclusion
-----------
+## Conclusion
 
 JobRunr is a great solution for processing your background jobs. It can be run in a distributed system and has built-in monitoring. The library is actively maintained, which means it's always getting new features and improving existing ones. That's in part thanks to the great community helping us by contributing and providing feedback. We'd love for you to contribute or provide feedback on [GitHub](https://github.com/jobrunr/jobrunr "GitHub").
 
@@ -370,7 +357,3 @@ To make open source development sustainable, we develop and maintain JobRunr Pro
 The complete source code for the example is available [over on GitHub](https://github.com/jobrunr/example-order-fulfillment "over on GitHub").
 
 Check out the video of [Josh Long's review](https://www.youtube.com/watch?v=e9POHS0BjEg&t=1s&ab_channel=SpringDeveloper%20(opens%20in%20a%20new%20tab)) of JobRunr.
-
-<br />
-
-<br />

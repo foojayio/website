@@ -36,8 +36,7 @@ That's where this useful book by [Olivier Caelen](https://www.linkedin.com/in/ol
 **pages** : 157  
 **ISBN**: 9781098152482
 
-About the book
---------------
+## About the book
 
 The book starts of with a brief introduction of the key concepts of various generative models, and the evolutions \& challenges behind Large Language Models (LLMs) and Generative Pre-trained Transformer (GPT) that led us to this point.
 
@@ -65,8 +64,7 @@ We learn about
 * the plugin system to add capabilities
 * What (not) to do
 
-My thoughts
------------
+## My thoughts
 
 It's a very interesting book which gives thorough, practical examples using a new \& rapidly evolving tool. Pro or contra, it's a very worthwhile read, so you can better evaluate the potential for your own use-cases.
 

@@ -40,8 +40,7 @@ The best choice? Well, it depends on a whole slew of factors, including your que
 
 Let's take a close look at the pros and cons of SQL vs. NoSQL to help you make the right choice.
 
-SQL pros
---------
+## SQL pros
 
 ### Standardized schema
 
@@ -68,8 +67,7 @@ Here are the ACID properties:
 * Isolation: Transactions run concurrently, without competing with each other. Instead, they behave as though they are occurring successively.
 * Durability: When a transaction is completed, its associated data is permanent and cannot be changed.
 
-SQL cons
---------
+## SQL cons
 
 ### Hardware
 
@@ -91,8 +89,7 @@ As mentioned earlier, SQL databases normally scale vertically by expanding hardw
 
 As data volume grows, scaling your SQL database is like playing a never-ending game of tag, where the perfect setup is always just out of reach. On the other hand, NoSQL databases scale-out horizontally, making it easier and more cost-effective to expand capacity. They're a good fit for cloud computing and handling extremely large and quickly growing datasets.
 
-NoSQL pros
-----------
+## NoSQL pros
 
 ### Continuous availability:
 
@@ -114,8 +111,7 @@ NoSQL databases are not one-size-fits-all. Unlike the SQL databases, they aren't
 
 NoSQL databases scale-out horizontally, making it cost-effective to expand capacity. Rather than upgrading expensive hardware, they can cheaply expand by simply adding commodity servers or cloud instances. And open-source NoSQL databases provide affordable options for many organizations. They're a good fit for cloud computing and handling extremely large and quickly growing datasets.
 
-NoSQL cons
-----------
+## NoSQL cons
 
 ### No standardized language:
 
@@ -135,8 +131,7 @@ The distributed nature of NoSQL databases enables data to be available faster. H
 
 In other words, the data will be consistent at some later point. In the real world, this is often a small delay of only a few milliseconds. For many applications, that likely won't matter, such as social media posts going live, or an online shopping cart being updated. In those situations, faster availability for most of the network outweighs the value of providing the exact same data at the same time to all users. However, it certainly could matter in some cases, such as when you make an online stock purchase. NoSQL values speed and availability over consistency. Each organization must decide if that aligns with their goals.
 
-Weighing your options
----------------------
+## Weighing your options
 
 Both SQL and NoSQL databases serve specific needs and use cases extremely well. Depending on your organization's data environment and goals, specific pros and cons of each could be amplified. You may find the best solution is to use both, letting each type of database play to its strengths. Many organizations use both SQL and NoSQL databases in their cloud architecture, sometimes even within the same application. Then again, the best option could be finding a solution, like DataStax Astra DB, that takes advantage of NoSQL's inherent benefits, such as flexibility, continuous availability, and scalability, while minimizing its drawbacks.
 

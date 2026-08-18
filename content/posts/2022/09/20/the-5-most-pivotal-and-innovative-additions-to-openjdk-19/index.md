@@ -41,7 +41,6 @@ public class Main {
 }
 ```
 
-
 Since this is a preview feature, a developer will need to provide the **--enable-preview** flag to compile this code, as shown in the following command:
 
 `javac --release 19 --enable-preview Main.java`
@@ -60,8 +59,6 @@ The [jshell](https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm#JSH
 While **Thread.startVirtualThread(Runnable)** is the convenient way to create a virtual thread, new APIs like [**Thread.Builder**](https://download.java.net/java/early_access/loom/docs/api/java.base/java/lang/Thread.Builder.html), [**Thread.ofVirtual()**](https://download.java.net/java/early_access/loom/docs/api/java.base/java/lang/Thread.html#ofVirtual()), and [**Thread.ofPlatform()**](https://download.java.net/java/early_access/loom/docs/api/java.base/java/lang/Thread.html#ofPlatform()) were added to create virtual and platform threads.
 
 If you want to know more about it, please, head over the my GitHub repository: <https://github.com/rokon12/project-loom-slides-and-demo-code>.
-
-<br />
 
 **[JEP 428: Structured Concurrency (Incubator)](https://openjdk.org/jeps/428)**   
 
@@ -82,7 +79,6 @@ Response handle() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 This API runs on top of JEP 425, [Virtual Threads (Preview)](https://openjdk.java.net/jeps/425), also targeted for JDK 19
 
 Compile the above code as shown in the following command:
@@ -100,8 +96,6 @@ However, one can directly run this using the [source code launcher](https://open
 The [jshell](https://docs.oracle.com/javase/9/jshell/introduction-jshell.htm#JSHEL-GUID-630F27C8-1195-4989-9F6B-2C51D46F52C8) option is also available, but requires enabling the preview feature as well:
 
 `jshell --enable-preview --add-modules jdk.incubator.concurrent`
-
-<br />
 
 [**JEP 427: Pattern Matching for switch (Third Preview)**](https://openjdk.org/jeps/427)
 
@@ -131,7 +125,6 @@ public class PatternMatching {
 }
 ```
 
-
 This is also a preview feature, requiring developers to add `--enable-preview`.
 
 **[JEP-424: Foreign Function \& Memory API (Preview)](https://openjdk.org/jeps/424)**
@@ -144,7 +137,6 @@ SymbolLookup stdlib = linker.defaultLookup();
 MethodHandle radixSort = linker.downcallHandle(
                              stdlib.lookup("radixsort"), ...);
 ```
-
 
 Developers who want to learn more about this JEP can leverage this series on Foojay: <https://foojay.io/today/project-panama-for-newbies-part-1/>  
 
@@ -208,7 +200,6 @@ public class Main {
   }
 }
 ```
-
 
 Since this is also a [preview feature](https://openjdk.java.net/jeps/12), developers require adding `--enable-preview` while compiling the above example.   
 

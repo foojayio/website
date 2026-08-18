@@ -47,8 +47,7 @@ Note that by JetBrains IntelliJ IDEA, I mean all JetBrains IDE's based on the sa
 
 ![Choice of shells in Eclipse](shell-eclipse-choice.png) *Choice of shells in Eclipse*
 
-More Shells for Free
---------------------
+## More Shells for Free
 
 [Applet Runner](https://www.japplis.com/applet-runner/) is a free IDE plug-in available for JetBrains [IntelliJ IDEA](https://plugins.jetbrains.com/plugin/16682-applet-runner/), [Eclipse](https://marketplace.eclipse.org/content/applet-runner-eclipse) and [Apache NetBeans](https://plugins.netbeans.apache.org/catalogue/?id=57).
 [![Shells menu in Applet Runner plug-in bookmarks](shell-menu-intellij.png)](shell-menu-intellij.png) *New Shells menu in Applet Runner plug-in bookmarks*
@@ -105,8 +104,7 @@ SSH (Secure SHell) is used to connect securely to a remote computer.
 [Bean Shell](https://beanshell.github.io/) is a script language similar to Java that can be interpreted in a console. This is very similar to JShell.
 [![Bean Shell running in JetBrains IntelliJ IDEA](shell-beanshell-intellij.png)](shell-beanshell-intellij.png) *Bean Shell running in JetBrains IntelliJ IDEA*
 
-More power
-----------
+## More power
 
 Let's see two ways to bring more power to your shell.
 
@@ -146,13 +144,8 @@ Here is what you get as extra for the terminal shells (Command line, Powershell,
 
 [![Applet Runner running Ant Commander Pro file manager](shell-ant-commander-pro-intellij-1024x576.png)](shell-ant-commander-pro-intellij.png) *Applet Runner running Ant Commander Pro file manager*
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we have seen how you could extend your IDE to provide more shells.
 
 This may help you have less terminal windows opened and stay in the flow while working in your IDE.
-
-<br />
-
-<br />

@@ -37,8 +37,7 @@ OpenRewrite features two components: recipes and the engine that runs them.
 
 Using OpenRewrite is pretty straightforward. It already provides a large corpus of existing recipes, some of which are free. What I find amazingly powerful is the ability to author new recipes. I decided to learn about it and write my own.
 
-My use case
------------
+## My use case
 
 My use case is the Kotlin package structure. In Java, a class in the `ch.frankel.blog` package must respect a rigid folder structure: from the root, `ch`, `frankel`, and then `blog`. In Kotlin, you can put the same class in the same package at the root. The official Kotlin documentation has recommendations on the source structure:
 > In pure Kotlin projects, the recommended directory structure follows the package structure with the common root package omitted. For example, if all the code in the project is in the `org.example.kotlin` package and its subpackages, files with the `org.example.kotlin` package should be placed directly under the source root, and files in `org.example.kotlin.network.socket` should be in the network/socket subdirectory of the source root.
@@ -53,8 +52,7 @@ The recipe will move the source files closer to the root packages per the above 
 
 Before diving into the code, we must learn a bit about the API.
 
-Recipe basics
--------------
+## Recipe basics
 
 OpenRewrite implements the Visitor pattern. Here's the abridged class diagram for Kotlin source code, which I'll use later.
 
@@ -64,8 +62,7 @@ Here's an excerpt of the `K` class to complement the previous diagram:
 
 ![Kotlin-specific class diagram](k-class-diagram-1024x625.png)
 
-Putting it all together
------------------------
+## Putting it all together
 
 Now that we have a clearer view of the API, it's time to think about the code.
 
@@ -107,7 +104,6 @@ class FlattenStructure(private val rootPackage: String) : Recipe() {            
 }
 ```
 
-
 1. Parameterize the recipe with the root package
 2. Attributes for documentation purposes
 3. If we can't compute the package name, return
@@ -116,8 +112,7 @@ class FlattenStructure(private val rootPackage: String) : Recipe() {            
 6. Compute the new path
 7. Return the compilation unit with the new path
 
-Testing the recipe
-------------------
+## Testing the recipe
 
 OpenRewrite's API lends itself to testing. It offers parsers in the different languages it supports and an in-memory execution context. Here's an excerpt of what I used to test the above recipe:
 
@@ -159,7 +154,6 @@ class FlattenStructureTest {
 }
 ```
 
-
 1. Parsers offer a builder pattern API
 2. Do the parsing
 3. Since we don't use the context to pass messages across recipes, we can create an in-memory instance for each test
@@ -179,16 +173,13 @@ recipeList:
       rootPackage: com.acme
 ```
 
-
-Potential future works
-----------------------
+## Potential future works
 
 I deliberately left out a recipe requirement: a recipe **MUST** be JSON-serializable. Neither Gradle nor Maven use this feature, but other tools in the ecosystem do.
 
 Also, the recipe requires to set the root package manually. We can list all available source files and their respective package and compute the root in many cases. It requires a slightly more specialized recipe. I deliberately left it out for another potential post.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I show how easy authoring an OpenRewrite simple and tested recipe is. I may perhaps compute the root package in a future post.
 
@@ -200,7 +191,5 @@ The complete source code for this post can be found on GitHub.
 
 * [Introduction to OpenRewrite](https://docs.openrewrite.org/)
 * [Writing a Java refactoring recipe](https://docs.openrewrite.org/authoring-recipes/writing-a-java-refactoring-recipe)
-
-
 
 *Originally published on [A Java Geek](https://blog.frankel.ch/openrewrite-recipes/1/) on June 8^th^, 2025*

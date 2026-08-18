@@ -26,8 +26,7 @@ Each time the application restarts, it has no record or memory of previous times
 
 As a result, it has to restart, extending valuable startup and warmup times and using precious resources.
 
-**Azul Zulu Builds of OpenJDK for Java 17 with CRaC**
------------------------------------------------------
+## **Azul Zulu Builds of OpenJDK for Java 17 with CRaC**
 
 Speeding up startup and warmup has been one of Java's perennial challenges. OpenJDK's CRaC (Coordinated Restore at Checkpoint) project is one of the most promising solutions.
 
@@ -39,20 +38,16 @@ The builds are commercially supported as part of [Azul Platform Core](https://ww
 
 **[For discussions and questions on this topic, see the CRaC Discussion Forum.](https://forums.foojay.io/forums/forum/coordinated-restore-at-checkpoint-crac/)**
 
-From Micronaut to Spring Boot
------------------------------
+## From Micronaut to Spring Boot
 
 > "***CRaC has generated immense interest among the Java developer community and provides a compelling, resource-efficient approach for improving startup and warmup times** . **Azul is well known for originating this project, so it came as no surprise that they would also deliver the world's first production-ready builds of OpenJDK with commercial CRaC support.***"
 > --- Sergio del Amo, Micronaut Product Development Lead.
 ![Time to first operation for Micronaut improved from 1 second without CRaC to 46 milliseconds with CRaC.](https://www.azul.com/wp-content/uploads/CleanShot-2023-05-15-at-08.03.52.gif) **"** ***Project CRaC's checkpoint restore approach is very promising for the immediate startup of Spring applications on the JVM. Our collaboration with Azul delivered some great initial results already**.*"
 > --- Juergen Hoeller, project lead and co-founder of the Spring Framework project.
 
-<br />
-
 ![Time to first operation for Spring Boot improved from 4 seconds without CRaC to 38 milliseconds with CRaC.](https://www.azul.com/wp-content/uploads/CleanShot-2023-05-15-at-08.04.13.gif)
 
-What Does CRaC Do?
-------------------
+## What Does CRaC Do?
 
 The OpenJDK CRaC Project defines public Java APIs that allow for coordinating application resources during checkpoint and restore operations. This is important because applications can be restored in different environments than where the checkpoint was created; they may have different time zones, database connection strings, etc.
 

@@ -13,3 +13,4 @@ aliases:
   - "/today/author/maximillian-arruda/"
 frozen: false
 ---
+

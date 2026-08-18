@@ -29,8 +29,7 @@ One of [my first posts](https://blog.frankel.ch/the-unit-test-war-junit-vs-testn
 
 Since JUnit 5 has been out for some time already, let's check if it fixed those issues.
 
-Parameterization
-----------------
+## Parameterization
 
 I wrote the initial post in 2008, and I think JUnit was available in version 3 at the time. Let's skip directly to version 4: JUnit did indeed offer parameterization. Here's a snippet from their wiki:
 
@@ -60,7 +59,6 @@ public class FibonacciTest {
 }
 ```
 
-
 1. Set the runner
 2. Define an attribute for each test parameter
 3. Define a constructor with parameters for each parameter
@@ -86,7 +84,6 @@ public class FibonacciTest {
 }
 ```
 
-
 1. Annotate with `@DataProvider`
 2. Must return a `Object[][]`, no need to be `static`
 3. `@Test` point to the data providing method - `data`
@@ -104,8 +101,7 @@ With version 5, JUnit offers the `@ParamerizedTest` annotation. Parameterized te
 
 While TestNG's approach can address all use cases, JUnit 5 multiple configuration capabilities are more custom-tailored.
 
-Grouping
---------
+## Grouping
 
 Again, the initial post mentions that with JUnit 3, one cannot run only a subset of them. JUnit 4 provides two orthogonal ways to group tests. The first one is test suites:
 
@@ -128,7 +124,6 @@ public class B {
 @SuiteClasses( { A.class, B.class })
 public class ABSuite {}
 ```
-
 
 From that point, you can run `ABSuite` to run both `A` and `B`. For more fine-grained purposes, you can also use *categories*.
 
@@ -153,7 +148,6 @@ public class B {
   public void c() {}
 }
 ```
-
 
 Here's how you can run only desired categories with Maven:
 
@@ -181,7 +175,6 @@ public class B {
 }
 ```
 
-
 ```bash
 mvn test -Dgroups=fast
 ```
@@ -208,11 +201,9 @@ public class B {
 }
 ```
 
-
 Both frameworks implement similarly running a subset of tests.
 
-Test method ordering
---------------------
+## Test method ordering
 
 This point is the most debatable of all because JUnit stems from *unit testing*. In unit testing, tests need to be independent of one another. For this reason, you can run them in parallel.
 
@@ -248,7 +239,6 @@ public class CheckoutIT {
 }
 ```
 
-
 JUnit 5 provides a couple of ways to implement test method ordering:
 
 |    Annotation     |                                 Order                                 |
@@ -282,14 +272,12 @@ public class CheckoutIT {
 }
 ```
 
-
 1. Define the order based on `@Order`
 2. Set the order for each method
 
 TestNG implements ordering via a , JUnit directly. TestNG's approach is more flexible as it allows the runtime to run some methods in parallel, but JUnit gets the job done.
 
-Conclusion
-----------
+## Conclusion
 
 Up until now, I've favoured TestNG because of the poor parameterization design and, more importantly, the complete lack of ordering in JUnit. Version 5 of JUnit fixes both issues. Even more so, its implementation offers multiple configuration capabilities.
 

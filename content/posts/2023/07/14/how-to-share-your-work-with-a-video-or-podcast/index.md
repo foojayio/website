@@ -26,8 +26,7 @@ Season 2 of the [Foojay Podcast](https://foojay.io/today/category/podcast/) has 
 
 In this article, we want to share some of the experiences of creating such podcasts, but also more generally, how you can share your work in a video with a small (or bigger) budget...
 
-Audio
------
+## Audio
 
 There is one fundamental rule for the audio: "Garbage in = Garbage out."
 
@@ -57,8 +56,7 @@ If you use audio recording software, like Audacity, adjust the level to record a
 
 Having some curtains or foam in front of you and at least on one side to prevent most of the echo.
 
-Recording Your Screen and Yourself
-----------------------------------
+## Recording Your Screen and Yourself
 
 If you use **macOS**, you don't need to install additional tools!
 
@@ -81,8 +79,7 @@ Record yourself for the explanation:
 * Hit record in the QuickTime window.
 * When done, hit stop, and save the file.
 
-Recording a podcast
--------------------
+## Recording a podcast
 
 I found out **Zoom** is an excellent tool for recording podcasts with several remote guests. If you go into the recording preferences of the program, you can select "Record a separate file of each participant."
 
@@ -91,8 +88,7 @@ When you finish the recording, you'll find a file per meeting guest, which makes
 
 Another important tip: make sure multiple people make a recording simultaneously. In case the connection of one of you drops, the file is corrupted,... Better to be safe than sorry!
 
-Additional video options
-------------------------
+## Additional video options
 
 The [**ATEM Mini**](https://www.blackmagicdesign.com/products/atemmini) is a very popular device amongst content creators. It allows connecting 4 (or 8 with the Extreme version) HDMI sources. So you can connect one or more computers and cameras with HDMI output.
 
@@ -112,8 +108,7 @@ The ATEM is recognized as a webcam when connected via USB to your computer. You 
 
 Be careful, webcams only have a USB output, so they can not be used with the ATEM. If you can find a Raspberry Pi (chip and stock problems...), you can use those as a cheap camera as [described here](https://webtechie.be/post/2021-12-20-raspberry-pi-as-hdmi-camera-for-atem-mini/).
 
-Editing
--------
+## Editing
 
 Once you have all your raw recordings, it's time to start editing... There are many options here! Let's look at a few of the most popular.
 
@@ -135,8 +130,7 @@ I also use DaVinci Resolve for podcast editing, as I bought the additional **[Sp
  </figure>
 </figure>
 
-Example Setups
---------------
+## Example Setups
 
 ### Shai Almog
 
@@ -170,8 +164,7 @@ To further improve my setup, I need to move a 19"-rack to a different room, as m
 
 **Frank used this setup for the [Foojay podcast](https://foojay.io/today/category/podcast/) and created the "[Java Quick Start](https://foojay.io/java-quick-start/)" tutorial.**
 
-Conclusion
-----------
+## Conclusion
 
 Being "nerds and tech freaks," investing in audio and video equipment could quickly get out of control.
 

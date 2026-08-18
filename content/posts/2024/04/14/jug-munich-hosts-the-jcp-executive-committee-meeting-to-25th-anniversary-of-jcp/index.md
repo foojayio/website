@@ -39,7 +39,3 @@ We are looking forward to see you all in Munich JUG \[2\]!
 
 1. Java Community Processe (JCP) Event Calendar 2024: [link](//www.jcp.org/en/whatsnew/calendar// "link")
 2. Java User Group Munich: [link](https://www.jugm.de/ "link")
-
-<br />
-
-<br />

@@ -24,13 +24,11 @@ During the day, we had a lot of exciting talks. There are way too many to fit in
 
 This is part 1, and we talk about J-Fall, of course. But also about the evolutions in Java and how it's becoming the best cloud environment while keeping systems sustainable, and reducing the ecological, financial, and security impact of applications.
 
-Video Report
-------------
+## Video Report
 
 {{< youtube MB5zhCwKuNw >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 **00:00 Intro**
 
@@ -89,8 +86,7 @@ Content
 
 **42:18 Outro**
 
-Host
-----
+## Host
 
 **Frank Delporte**
 
@@ -98,8 +94,7 @@ Host
 * <https://www.linkedin.com/in/frankdelporte/>
 * <https://foojay.io/today/author/frankdelporte/>
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

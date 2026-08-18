@@ -24,8 +24,7 @@ The Codename One JavaScript port is now open source and available on every plan,
 
 [PR #5423](https://github.com/codenameone/CodenameOne/pull/5423) makes our ParparVM-based port the default and moves its source under the same GPLv2 with Classpath Exception license as the rest of Codename One. TeaVM remains available as a fallback.
 
-TL;DR
------
+## TL;DR
 
 * [JavaScript](#why-we-built-the-parparvm-javascript-port): The ParparVM JavaScript port is now open source, free on every plan, and buildable locally without an account.
 * [Android API level 36](#android-api-36-becomes-the-default-next-week): API 36 becomes the default next week, and you can test or temporarily override it with build hints.
@@ -37,8 +36,7 @@ TL;DR
 * [Compact strings](#compact-strings-in-parparvm): Strings now use a `byte[]` when every character fits, cutting their character storage in half without adding a second backing-array pointer.
 * [Account, website, and videos](#account-website-and-video-updates): The authorization migration is complete, the redesigned site is live, and the weekly posts now generate explainer videos.
 
-Why we built the ParparVM JavaScript port
------------------------------------------
+## Why we built the ParparVM JavaScript port
 
 Our original web port used [TeaVM](https://teavm.org/), which is a fantastic project. TeaVM took Java bytecode, supported the threading model Codename One needed, and produced a browser application at a time when that combination looked close to impossible.
 
@@ -56,8 +54,7 @@ A thin message bridge connects the worker to the standard front-end `JavaScriptP
 
 Browser APIs still impose browser rules. Web Bluetooth requires HTTPS and a user gesture, for example. Those requirements stay in the port layer instead of affecting ordinary Java code.
 
-Build the web target without our cloud
---------------------------------------
+## Build the web target without our cloud
 
 Generated Maven projects now include a local JavaScript command:
 
@@ -84,8 +81,7 @@ The full selector is:
 
 TeaVM is not being removed. It remains useful for compatibility testing while ParparVM gains more production use.
 
-The proxy is part of deployment now
------------------------------------
+## The proxy is part of deployment now
 
 A browser application can call its own origin directly. Calls to another origin depend on that server's CORS policy. Codename One has traditionally handled the second case with a servlet proxy bundled into the TeaVM WAR.
 
@@ -104,8 +100,7 @@ Available targets are `jakarta-servlet`, `javax-servlet`, `node`, `php`, `aws-la
 
 Set `javascript.proxy.allowedTargets` before public deployment. An omitted allowlist produces a build warning because an open forwarding proxy is not a safe default for production. You can also point at an existing proxy with `javascript.proxy.url` or disable generation with `javascript.proxy.target=none`.
 
-Why we are making JavaScript available to everyone
---------------------------------------------------
+## Why we are making JavaScript available to everyone
 
 JavaScript builds were previously an Enterprise feature and a significant reason to purchase that plan. We expect this change to reduce some of that revenue. For a small company, that matters, and this was a difficult decision for me to make.
 
@@ -113,8 +108,7 @@ Paid plans continue to fund the cloud build machines, push service, Crash Protec
 
 We do not know whether wider adoption will replace the revenue we lose. We do know that making the port easier to use and test is the right technical direction.
 
-Android API 36 becomes the default next week
---------------------------------------------
+## Android API 36 becomes the default next week
 
 Some developers are already receiving Google Play notices about Android 16 and API level 36. [Issue #4466](https://github.com/codenameone/CodenameOne/issues/4466) gave us time to test edge-to-edge behavior, resizing, permissions, and native integrations before changing the default.
 
@@ -133,8 +127,7 @@ android.targetSDKVersion=35
 
 Issues like #4466 are how a small team keeps pace with Apple, Google, browser vendors, desktop platforms, and hardware changes. If you see a platform announcement that could affect Codename One, open an issue early. A short warning months ahead is far cheaper than an emergency migration after a store deadline.
 
-Issue #5425: Dave was right about our collector
------------------------------------------------
+## Issue #5425: Dave was right about our collector
 
 In [issue #5425](https://github.com/codenameone/CodenameOne/issues/5425), Dave reported an iOS workload that took roughly five minutes while the same code finished in seconds on Android and on the older ParparVM collector. I focused on the allocation-heavy application code and dismissed the regression. Dave reduced the temporary allocation, kept measuring, and showed that my explanation did not fit the result.
 
@@ -152,8 +145,7 @@ Dave could test each collector revision in his real application while we changed
 
 Thanks, Dave. I needed the bump on the head.
 
-Calendar API: local calendars, cloud sync, and conflicts
---------------------------------------------------------
+## Calendar API: local calendars, cloud sync, and conflicts
 
 > **TL;DR:** `com.codename1.calendar` provides one API for device calendars, Google, Microsoft, CalDAV, and `.ics` files. It includes recurrence, tasks, provider versions, incremental sync, offline mutation queues, and conflict handling.
 
@@ -172,8 +164,7 @@ if (capabilities.supports(CalendarCapability.READ_EVENTS)) {
 
 The simulator uses an isolated in-memory calendar, so tests never touch the developer's real schedule. [PR #5413](https://github.com/codenameone/CodenameOne/pull/5413) contains the implementation. [Read the calendar API article for recurrence, OAuth boundaries, conflict resolution, and provider synchronization.](https://www.codenameone.com/blog/calendar-is-not-add-event/)
 
-Bluetooth is now part of the core
----------------------------------
+## Bluetooth is now part of the core
 
 > **TL;DR:** The new core Bluetooth API supports every Codename One target, including JavaScript. It covers BLE central and peripheral roles, GATT, L2CAP streams, classic RFCOMM, browser Web Bluetooth, real desktop radios, and a scriptable simulator.
 
@@ -185,8 +176,7 @@ The API reports capabilities instead of pretending every role works everywhere. 
 
 [PR #5399](https://github.com/codenameone/CodenameOne/pull/5399) is a ground-up replacement for the Cordova-derived cn1lib. [Read the Bluetooth article for the role model, platform matrix, GATT queue, simulator, and builder behavior.](https://www.codenameone.com/blog/bluetooth-beyond-ble/)
 
-Pure Codename One text editing
-------------------------------
+## Pure Codename One text editing
 
 > **TL;DR:** `EditField`, `RichTextArea`, and `CodeEditor` can now edit and paint text entirely inside the Codename One component layer. The operating system supplies keyboard and input-method operations without placing a native field over the component.
 
@@ -209,8 +199,7 @@ This work also replaces the text-only clipboard assumption. A `ClipboardContent`
 
 [PR #5386](https://github.com/codenameone/CodenameOne/pull/5386) adds the port bindings and portable editor engine. [Read the text-input article for composition, UTF-16 offsets, bidirectional hit testing, rich clipboard negotiation, and the native-overlay tradeoff.](https://www.codenameone.com/blog/text-input-without-native-overlay/)
 
-Lightweight rich text without a web view
-----------------------------------------
+## Lightweight rich text without a web view
 
 > **TL;DR:** `RichTextComponent` renders HTML, Markdown, AsciiDoc, RTF, and styled Java runs inside ordinary Codename One layouts. It shares its document model and painter with `RichTextArea` but has no editing session or browser peer.
 
@@ -229,8 +218,7 @@ The component measures its content inside the Codename One layout. Link handling
 
 [PR #5421](https://github.com/codenameone/CodenameOne/pull/5421) contains the viewer and shared painter. [Read the rich-text article for supported formats, link and image policies, clipboard negotiation, and when to keep BrowserComponent.](https://www.codenameone.com/blog/rich-text-without-webview/)
 
-Compact strings in ParparVM
----------------------------
+## Compact strings in ParparVM
 
 > **TL;DR:** Strings now store their characters in a `byte[]` when every character fits. Text that needs wider code units continues to use `char[]`. This halves the character storage for common strings without adding a second array pointer to every `String`.
 
@@ -247,8 +235,7 @@ The implementation keeps one `Object value` field whose concrete array type iden
 
 [Read the compact-strings article for the object layout, fused-allocation changes, native-operation audit, and Unicode behavior.](https://www.codenameone.com/blog/compact-strings-parparvm/)
 
-Account, website, and video updates
------------------------------------
+## Account, website, and video updates
 
 ### Authorization migration
 

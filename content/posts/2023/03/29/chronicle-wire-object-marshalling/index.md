@@ -78,7 +78,6 @@ public class LongConversionExampleA {
 }
 ```
 
-
 We start the process by storing a String object as a long. A Base64LongConverter is used here to parse the provided CharSequence and return the results as a long.
 
 The example code can be seen in [LongConversionExampleA](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/LongConversionExampleA.java "LongConversionExampleA").
@@ -105,13 +104,11 @@ public class LongConversionExampleA {
 }
 ```
 
-
 This then prints out the house owner's name as a number, as it has been stored as a long:
 
 ```
 House{owner=670118}
 ```
-
 
 #### Printing YAML Example
 
@@ -146,7 +143,6 @@ public class LongConversionExampleB {
 }
 ```
 
-
 When running this, instead of printing a number, the following is printed:
 
 ```
@@ -154,7 +150,6 @@ When running this, instead of printing a number, the following is printed:
     Owner: Bill
 }
 ```
-
 
 #### Printing JSON Example
 
@@ -164,7 +159,6 @@ If we want the output to instead be JSON, we can remove the following line from 
 System.out.println(house);
 ```
 
-
 And replace it with Chronicle-Wire, as this is a more light weight alternative:
 
 ```
@@ -173,13 +167,11 @@ wire.getValueOut().object(house);
 System.out.println(wire);
 ```
 
-
 This outputs the following:
 
 ```
 {"owner": "Bill"}
 ```
-
 
 Now why is this helpful? Why can we not just store this originally as a String rather than a long?
 
@@ -197,7 +189,6 @@ Yet, rather than being able to represent one of 256 characters, because we used 
 .ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+
 ```
 
-
 By limiting the number of characters that can be represented in a byte, we are able to compress more characters into a long.
 
 Now what if these 64 characters do not include the characters you need? Or what if there are still too many?
@@ -214,7 +205,6 @@ This is where we can make use of @FieldGroup from [Chronicle Bytes](https://gith
 import net.openhft.chronicle.bytes.Bytes;
 import net.openhft.chronicle.bytes.FieldGroup;
 ```
-
 
 In[LongConversionExampleC](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/LongConversionExampleC.java " LongConversionExampleC") below, we walk through how to store several longs into a FieldGroup.
 
@@ -234,7 +224,6 @@ public static class House extends SelfDescribingMarshallable {
    }
 }
 ```
-
 
 The example continues below to illustrate how to firstly create a byte\[\] to store bytes, write the house object to it and to then read them.
 
@@ -264,7 +253,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 As we are using toHexString( ), this example prints out our data as seen in figure 5. This is a standard way of producing a hex dump.
 
 The section in green represents the 'offset'; the number of bytes from the beginning of the string, to the current position.
@@ -286,13 +274,11 @@ As seen in the examples above, we have used:
 @LongConversion(Base64LongConverter.class)
 ```
 
-
 It should be noted that this can be simplified to just:
 
 ```
 @Base64
 ```
-
 
 An example of this being implemented can be seen in the snippet below, whereby the section in green is replaced by an alias (in red):
 
@@ -317,7 +303,6 @@ public @interface Base64 {
                   ".ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_");
 }
 ```
-
 
 Adding a Timestamp:
 
@@ -356,7 +341,6 @@ public class NanoTimeTest {
    }
 }
 ```
-
 
 #### JLBH Benchmark Performance
 

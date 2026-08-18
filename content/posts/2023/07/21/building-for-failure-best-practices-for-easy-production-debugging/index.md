@@ -35,8 +35,6 @@ But due to privacy concerns you can't log everything, even if we could, how woul
 
 {{< youtube uz06__w2mjI >}}
 
-<br />
-
 Programs fail, that's inevitable. We strive to reduce failures but failure will happen. We also have another effort and it gets less attention: failure analysis. There are some best practices and common approaches, most famously logging. I've often said before that logs are pre-cognitive debugging, but how do we create an application that's easier to debug?
 
 How do we build the system so that when it fails like that we would have a clue of what went wrong?
@@ -45,8 +43,7 @@ A common military axiom goes "Difficult training makes combat easy". Assuming th
 
 This preparation goes beyond testing and QA. It means preparing our code and our infrastructure for that point where a problem occurs. That point is where both testing and QA fail us. By definition, this is preparation for the unexpected.
 
-Defining a Failure
-------------------
+## Defining a Failure
 
 We first need to define the scope of a failure. When I talk about production failures people automatically assume crashes, websites going down and disaster-level events. In practice those are rare. The vast majority of these cases are handled by OPS and system engineers.
 
@@ -54,15 +51,13 @@ When I ask developers to describe the last production problem they ran into they
 
 What if we could understand the problem just by looking at the way it failed, right in production?
 
-Simplicity
-----------
+## Simplicity
 
 The rule of simplicity is common and obvious but people use it to argue both sides. Simple is subjective. Is this block of code simple?
 
 ```
 return obj.method(val).compare(otherObj.method(otherVal));
 ```
-
 
 Or is this block simple?
 
@@ -71,7 +66,6 @@ var resultA = obj.method(val);
 var resultB = otherObj.method(otherVal);
 return resultA.compare(resultB);
 ```
-
 
 In terms of lines of code, the first example seems simpler and indeed many developers will prefer that. This would probably be a mistake. Notice that the first example includes multiple points of failure in a single line. The objects might be invalid. There are three methods that can fail. If a failure occurs it might be unclear what part failed.
 
@@ -89,7 +83,6 @@ var result = list.stream()
                  .collect(Collectors.toList());
 ```
 
-
 That's a pretty common code that is similar to this code:
 
 ```
@@ -98,7 +91,6 @@ for(MyClass c: list) {
     result.add(c.convert());
 }
 ```
-
 
 There are advantages to both approaches in terms of debuggability and our decision can have a significant impact on the long-term quality. A subtle change in the first example is the fact that the returned list is unmodifiable. This is a boon and a problem. Unmodifiable lists fail at runtime when we try to change them, that's a potential risk of failure. However, the failure is clear. We know what failed.
 
@@ -110,8 +102,7 @@ The read-only list is a major advantage. It promotes the fail-fast principle whi
 
 When building big applications the word "robust" gets thrown around frequently. Systems should be robust, but they should offer that outside of your code which should fail fast.
 
-Consistency
------------
+## Consistency
 
 In my talk about logging best practices, I mention the fact that every company I ever worked for had a style guide for code, or at least aligned with a well-known style. Very few had a [guide for logging](https://www.youtube.com/watch?v=CFL--dAX3FQ), where should we log, what should we log etc. This is a sad state of affairs.
 
@@ -121,8 +112,7 @@ Thankfully, with CI these consistency rules are easy to enforce without burdenin
 
 Every rule has an exception, we shouldn't be bound to overly strict rules. That's why the ability to override such tools and merge a change with a developer review is important.
 
-Double Verification
--------------------
+## Double Verification
 
 Debugging is the process of verifying assumptions as we circle the area of the bug. Typically this happens very quickly. We see what's broken, verify and fix it. But sometimes we spend an inordinate amount of time tracking a bug. Especially a hard-to-reproduce bug or a bug that only manifests in production.
 
@@ -157,8 +147,7 @@ We can verify an assumption using observability tools but we can also use more c
 
 This is very powerful, we can toggle a feature that could provide us with verification of a specific behavior if that specific code is wrapped in a flag. I don't suggest spreading feature flags all over the code, but the ability to pull levers and change the system in production is a powerful debugging tool that is often underutilized as such.
 
-Bug Debriefs
-------------
+## Bug Debriefs
 
 Back in the 90s I developed flight simulators and worked with many fighter pilots. They instilled in me a culture of debriefing. Up until that point, I thought of these things only for discussing failures but fighter pilots go to debrief immediately after the flight, whether it is successful or a failed mission.
 
@@ -180,8 +169,7 @@ If you're in R\&D you're four steps away from the customer and receive an issue 
 
 When a customer reports an issue there's a good possibility they will include the error key which R\&D can find within the logs. These are the types of process refinements that often rise through such debriefs.
 
-Review Successful Logs and Dashboards
--------------------------------------
+## Review Successful Logs and Dashboards
 
 Waiting for failure is a problematic concept. We need to review logs, dashboards, etc. regularly both to track potential bugs that aren't manifesting, but also to get a sense of a "baseline". What does a healthy dashboard or log look like...
 
@@ -189,8 +177,7 @@ We have errors in a normal log, if during a bug hunt we spend time looking at a 
 
 I went into more detail in the logging best practices post and [talk](https://www.youtube.com/watch?v=CFL--dAX3FQ).
 
-Final Word
-----------
+## Final Word
 
 A couple of years after founding Codename One our Google App Engine bill suddenly jumped to a level that would trigger bankruptcy within days. This was a sudden regression due to a change on their backend.
 

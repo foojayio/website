@@ -32,8 +32,7 @@ To learn more about the ever-changing Java ecosystem, read on. This article will
 * The Java Landscape, discussing the currently available Java distributions and multi-vendor support.
 * Which Java distributions, if any, stand above the rest.
 
-History
--------
+## History
 
 The Java programming language has a long and storied history. Developed by Sun Microsystems in 1995, Java quickly gained popularity due in large part to its portable runtime, which included a Java Virtual Machine (JVM), which allowed developers to "write once and run anywhere."
 
@@ -54,8 +53,7 @@ These changes included:
 
 All of these changes led to some confusion for both developers and businesses. Large enterprise companies were potentially facing additional costs, even if their Java usage was relatively small. Many companies turned to their software providers and partners for direction and help on how to navigate this "new" Java distribution and usage licensing model.
 
-The changing Java distribution landscape
-----------------------------------------
+## The changing Java distribution landscape
 
 This "confusion" provided an opportunity for many software vendors to re-evaluate how to provide and support their Java customers. Many saw an opportunity to:
 
@@ -79,8 +77,7 @@ Since they are all based on the same OpenJDK class libraries, there really is no
 
 Some distributions try to differentiate themselves by offering enhanced 24/7 support and technical help on any platform. Others offer a premium (for fee) version that includes additional tools and technologies.
 
-IBM Semeru Runtimes stands apart
---------------------------------
+## IBM Semeru Runtimes stands apart
 
 One Java distribution that clearly differentiates itself from the pack is IBM Semeru Runtimes.
 
@@ -88,22 +85,17 @@ First of all, like the Oracle JDK, Semeru Runtimes has a long and storied histor
 
 Semeru provides full support for all major operating systems and architectures because IBM software can and does run everywhere. That not only includes the POWER and mainframe platforms that developers commonly associate with IBM, but also x86 and ARM64 platforms used throughout industry.
 
-The OpenJ9 Advantage
---------------------
+## The OpenJ9 Advantage
 
 The other major difference is the JVM. Instead of the default "HotSpot" JVM from Oracle, Semeru Runtimes is the only Java distribution that is powered by the Eclipse OpenJ9 JVM. This JVM also has a lot of history. Originally developed by IBM over 25 years ago as the J9 JVM, it was open sourced to the Eclipse Foundation over 6 years ago. It is renowned for its small footprint, fast start-up, and fast ramp-up time. (See more in [this performance blog post](https://eclipse.dev/openj9/performance/ "this performance blog post").)
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-105640" src="EclipseOpenJ9Performance-700x304.png" alt="" width="700" height="304">
 
-<br />
-
-Foundation for Open Liberty and Websphere Liberty
--------------------------------------------------
+## Foundation for Open Liberty and Websphere Liberty
 
 Semeru Runtimes also drives the popular [Open Liberty](https://www.openliberty.io/ "Open Liberty") and [Websphere Liberty](https://www.ibm.com/products/websphere-hybrid-edition/liberty "Websphere Liberty") Java application runtimes, which means it is currently powering thousands of enterprise Java applications across the largest companies in the world, and has been for more than a decade.
 
-Benefits of Semeru Runtimes
----------------------------
+## Benefits of Semeru Runtimes
 
 To summarize, Semeru Runtimes offers the following benefits:
 
@@ -118,8 +110,7 @@ To summarize, Semeru Runtimes offers the following benefits:
 
 These performance advantages can result in significant resource and cost savings - especially when deploying containerized Java applications into a Kubernetes cloud environment.
 
-Where to get Semeru Runtimes
-----------------------------
+## Where to get Semeru Runtimes
 
 Semeru Runtimes comes in 2 flavors: an Open Edition and a Certified Edition. Both editions are free to download and use in production. The only difference between the editions is the licensing and supported platforms.
 
@@ -142,15 +133,10 @@ Semeru Runtimes Certified Edition:
 
 Commercial support for IBM Semeru Runtimes and OpenJDK is available with [IBM Runtimes for Business](https://www.ibm.com/products/support-for-runtimes "IBM Runtimes for Business").
 
-Summary and next steps
-----------------------
+## Summary and next steps
 
 The Java language has come along way in its over 25 year history. While its popularity has always remained constant, the deployment of Java has seen major changes occur over the past couple of years. With the adoption of the open source OpenJDK, a number of software vendors now distribute their own OpenJDK Java SE distributions.
 
 Leading the pack is IBM, with its Semeru Runtimes distribution, which supports all of the popular architectures and operating systems. Besides offering great support and performance, it is the only distribution powered by the Eclipse OpenJ9 JVM.
 
 Check out [IBM Semeru Runtimes](https://developer.ibm.com/articles/explore-options-for-downloading-ibm-semeru-runtimes/ "IBM Semeru Runtimes") today.
-
-<br />
-
-<br />

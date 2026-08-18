@@ -23,8 +23,7 @@ I've presented this talk several times in the previous week, both in its Java ve
 
 This post tries to explain what I discovered.
 
-Why BlockHound?
----------------
+## Why BlockHound?
 
 Reactive Programming is based on asynchronous message passing. Different frameworks/libraries will differ in their approach: for example, in Project Reactor, an API call is not a blocking request-response call but a subscription to a message(s) that the publisher will deliver in the future.
 
@@ -35,8 +34,7 @@ If one call in the chain is blocking, it "freezes" the whole chain until the wor
 
 In few words, BlockHound checks for blocking calls in places where there shouldn't be.
 
-Using BlockHound
-----------------
+## Using BlockHound
 
 Using BlockHound is straightforward:
 
@@ -51,7 +49,6 @@ public static void main(String[] args) throws InterruptedException {
     Thread.currentThread().sleep(200);
 }
 ```
-
 
 Though `sleep()` is blocking, the program executes normally.
 
@@ -69,11 +66,9 @@ public static class Builder {
 }
 ```
 
-
 So, what's the problem?
 
-Blocking calls on the "main" thread
------------------------------------
+## Blocking calls on the "main" thread
 
 Blocking calls are not a problem *per se*. A lot of calls are blocking but required anyway. It wouldn't be possible to throw on every blocking call.
 
@@ -97,7 +92,6 @@ public static void main(String[] args) throws InterruptedException {
 }
 ```
 
-
 1. The `main` thread is marked as non-blocking
 
 Running the above code expectedly throws the following:
@@ -108,7 +102,6 @@ Exception in thread "main" reactor.blockhound.BlockingOperationError: \
     at java.base/java.lang.Thread.sleep(Thread.java)
     at ch.frankel.blog.blockhound.B.main(B.java:11)
 ```
-
 
 To be entirely sure, let's tweak our code to mark another thread only as non-blocking. `sleep()` in `main` shouldn't throw while `sleep()` in this other thread should.
 
@@ -134,7 +127,6 @@ public static void main(String[] args) throws InterruptedException {
 }
 ```
 
-
 1. Flag threads with the parameterized name as non-blocking
 2. Expected to throw
 3. Start the new thread
@@ -152,9 +144,7 @@ Exception in thread "non-blocking" reactor.blockhound.BlockingOperationError: \
 Main thread finished<code></code>
 ```
 
-
-BlockHound is only as good as its configuration
------------------------------------------------
+## BlockHound is only as good as its configuration
 
 Though its artifact's `groupId` is `io.projectreactor`, BlockHound is generic:
 
@@ -172,9 +162,7 @@ For example, the `RxJava2Integration` integration configures BlockHound for RxJa
 builder.nonBlockingThreadPredicate(current -> current.or(NonBlockingThread.class::isInstance));
 ```
 
-
-But how does it work?
----------------------
+## But how does it work?
 
 It's time to get back to our original question, how does BlockHound work?
 
@@ -195,8 +183,7 @@ The snippet's code flow looks like this:
 2. If the call is dynamic, it also continues normally.
 3. Otherwise, *i.e.* , the call is blocking *and* not dynamic, BlockHound throws.
 
-Conclusion
-----------
+## Conclusion
 
 Using BlockHound *is* straightforward, *i.e.* , `BlockHound.install()`. A short explanation is that BlockHound is a Java agent.
 

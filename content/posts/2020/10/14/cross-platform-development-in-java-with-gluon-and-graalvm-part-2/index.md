@@ -16,8 +16,7 @@ frozen: false
 
 [Continued from part 1.](https://foojay.io/blog/cross-platform-development-in-java-with-gluon-and-graalvm/)
 
-Introducing Gluon
------------------
+## Introducing Gluon
 
 [Gluon](https://gluonhq.com/) is a company that enables Java on desktop, embedded, and mobile with a rich, full-featured, JavaFX user interface. Gluon embeds GraalVM and brings GraalVM to an audience hungry for performance and full-featured user experiences. Gluon enables seamless cloud integration of mobile and embedded experiences, driving increased cloud consumption.
 
@@ -26,8 +25,7 @@ In short: Gluon is the company you're looking for if you want an end-to-end Java
 
 Before we look at the different products mentioned in this overview, let's find out what GraalVM is about.
 
-GraalVM
--------
+## GraalVM
 
 Software code can be written in different languages and the choice of language often defines how the code is executed.
 
@@ -39,8 +37,7 @@ Software code can be written in different languages and the choice of language o
 
 GraalVM is the holy grail in software development. *"What keeps developers from using this holy grail?"* you might ask. The answer is simple: developers need tools that lower the threshold to adopt GraalVM. Without those tools, using GraalVM can be cumbersome. Gluon offers the tools that take away the burden.
 
-Developing mobile apps using Gluon Tools
-----------------------------------------
+## Developing mobile apps using Gluon Tools
 
 Developers use the Integrated Development Environment (IDE) of their choice to write code. C# developers use MS Visual Studio; Java developers typically use IntelliJ IDEA, Eclipse, or NetBeans IDE. Additionally, they can use Gluon's [Scene Builder](https://github.com/gluonhq/scenebuilder) as a WYSIWYG to create the User Interface.
 ![](gluon-bruno-figure05-1.png)
@@ -79,8 +76,7 @@ Most of the Gluon products ---but not all of them--- are offered as open source 
 
 Support for these products is only available for customers who engage in a business relationship with Gluon Software.
 
-Protecting the back end using Gluon CloudLink
----------------------------------------------
+## Protecting the back end using Gluon CloudLink
 
 Exposing the back end directly to such an application isn't a good idea in terms of security. It's good practice to introduce an extra layer between the front end and the back end.
 ![](gluon-bruno-figure08-1.png)
@@ -95,8 +91,7 @@ In a Gluon-based architecture, [Gluon CloudLink](https://gluonhq.com/products/cl
 
 Gluon offers CloudLink as a service. In select cases, CloudLink can be deployed on-premise on the customer's cloud infrastructure. In both cases, customers pay per use (recurring, volume-based revenue).
 
-What can Gluon do for your company?
------------------------------------
+## What can Gluon do for your company?
 
 Enterprises invest heavily in enterprise back ends. Back-end data and functionality are often exposed over the web, accessed via applications and browsers by customers, employees, partners, etc. Increasingly, these users also want access to data and functionality on mobile devices, and security is becoming an important key criterion for mobile app technology.
 

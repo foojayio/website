@@ -65,8 +65,7 @@ If you want to learn more on how to write an agent, consider reading my [Instrum
 
 More information on class loaders can be found in the Baeldung article [Class Loaders in Java](https://www.baeldung.com/java-classloaders).
 
-How to get the class loader hierarchy of your project
------------------------------------------------------
+## How to get the class loader hierarchy of your project
 
 I wanted to know the class loader hierarchy for my own projects, so of course, I wrote an agent for it: The [ClassLoader Hierarchy Agent](https://github.com/parttimenerd/classloader-hierarchy-agent) prints the class loader hierarchy at agent load time, the JVM shutdown, and in regular intervals.
 
@@ -77,7 +76,6 @@ Usage: java -javaagent:classloader-hierarchy-agent.jar[=maxPackages=10,everyNSec
   maxPackages: maximum number of packages to print per classloader
   every: print the hierarchy every N seconds (0 to disable)
 ```
-
 
 For the `finagle-http` [renaissance](https://renaissance.dev/) benchmark, the agent, for example, prints the following when the benchmark is in full swing:
 
@@ -100,7 +98,6 @@ For the `finagle-http` [renaissance](https://renaissance.dev/) benchmark, the ag
            scala.io
            scala.runtime
 ```
-
 
 The root node is the bootstrap class loader. For every class loader, it gives us a thread that uses it as its primary class loader, a short list of packages associated with the class loader, and its child class loaders.
 
@@ -130,11 +127,9 @@ Class loaders can have names, but sadly not many class loader creators use this 
            jakarta.el
 ```
 
-
 Feel free to try this agent on your applications; maybe you gain some new insights.
 
-Conclusion
-----------
+## Conclusion
 
 Understanding class loader hierarchies helps to understand subtle problems in writing instrumenting agents. Knowing how to write small agents can empower you to write simple tools to understand the properties of your application.
 

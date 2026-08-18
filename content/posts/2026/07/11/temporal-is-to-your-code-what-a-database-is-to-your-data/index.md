@@ -27,8 +27,7 @@ Then the relational database arrived and made a deal with application developers
 
 Now let's take a look at how we handle ***execution*** today...
 
-The pre-database era, replayed
-------------------------------
+## The pre-database era, replayed
 
 If you've been writing code, Java or otherwise, long enough, you've built the same system at least once: a table full of status flags, a scheduled job that scans for stuck records, a retry counter column, and a Slack channel where someone asks "why is order 48291 stuck in PROCESSING?" every other week.
 
@@ -46,8 +45,7 @@ Its proposition is the same deal the database made, aimed at a different layer: 
 
 [Temporal.io](https://temporal.io/) is to code execution what a database is to data.
 
-The write-ahead log, but for your local variables
--------------------------------------------------
+## The write-ahead log, but for your local variables
 
 Databases survive crashes because of the write-ahead log: every change is recorded before it's applied, so after a crash, the database replays the log and reconstructs its state.
 
@@ -65,8 +63,7 @@ Your `int retriesRemaining` survives a JVM crash the way a committed row survive
 
 This is also why Temporal Workflow code must be deterministic, replay only works if the code takes the same path every time. It's the same discipline event sourcing demands, applied to your program itself.
 
-Transactions that span months
------------------------------
+## Transactions that span months
 
 An ACID transaction gives you all-or-nothing over milliseconds. A Temporal Workflow gives you run-to-completion over *any* timespan. You can write:
 
@@ -74,7 +71,6 @@ An ACID transaction gives you all-or-nothing over milliseconds. A Temporal Workf
 Workflow.sleep(Duration.ofDays(30));
 sendRenewalReminder(customer);
 ```
-
 
 and no thread, no pod, no JVM sits around waiting for a month. The Temporal Workflow is durably parked, consuming essentially nothing, and gets rehydrated when the timer fires, even if you've deployed forty times and replaced every server in between.
 
@@ -86,8 +82,7 @@ In effect, a Temporal Workflow provides run-to-completion guarantees that can sp
 
 The half-finished, stuck-in-limbo state that plagues distributed systems simply stops being your problem.
 
-The same pattern, elsewhere in the stack
-----------------------------------------
+## The same pattern, elsewhere in the stack
 
 * **Virtual memory.** The OS lets you pretend you have more RAM than physically exists, paging things in and out behind your back. Temporal lets you pretend your process lives forever, suspending and resuming execution across different Workers. Think of a Temporal Workflow as durable execution: your code's progress is preserved, not the process itself.
 
@@ -105,8 +100,7 @@ In each case, a hard, error-prone concern that every application was reimplement
  <img decoding="async" src="img-5-same-pattern.svg" alt="" class="wp-image-124895" style="aspect-ratio:2.1429491307147455;width:840px;height:auto">
 </figure>
 
-What this means for your Java code
-----------------------------------
+## What this means for your Java code
 
 Concretely, adopting Temporal means deleting things:
 
@@ -126,5 +120,3 @@ Straight-line Java, with the reliability engineering underneath handled by a pla
 We stopped writing our own transaction logs decades ago. In the not too distant future, hand-rolling execution recovery out of queues, crons, and status flags will look just as archaic.
 
 Your database made your data durable. Temporal does the same for your code.
-
-<br />

@@ -47,7 +47,6 @@ public class ApplicationConfig {
 }
 ```
 
-
 Service with **@Retryable** and **@ConcurrentLimit**
 
 ```java
@@ -73,7 +72,6 @@ public class PaymentService {
     }
 }
 ```
-
 
 ### 2. Fluent JMS Client API
 
@@ -121,8 +119,6 @@ Spring Framework now supports **Jackson 3.x** and provides migration guidance fo
 
 Introduces **JSpecify** for null safety that certainly replaces the former `org.springframework.lang.*` annotation. This is going to be the standard annotation approach for ***nullness*** . For more details, see <https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away>
 
-
-
 Spring Boot 4 is a significant leap forward in modernizing how Spring applications are developed, configured, and deployed. This milestone marks the beginning of a more modular, extensible, and developer-friendly version of the framework. Let's understand some of the significant enhancements in Spring Boot 4 and how they impact developers.
 
 ### 1. Modular Codebase---A Refactored Architecture
@@ -134,7 +130,6 @@ Each module starts with a dedicated package, such as
 ```java
 org.springframework.<module>
 ```
-
 
 Depending on the module's purpose, it can include:
 
@@ -205,7 +200,6 @@ public TaskDecorator loggingDecorator() {
 }
 ```
 
-
 In the above code snippet,
 
 1. We have to do the chaining manually
@@ -236,7 +230,6 @@ public TaskDecorator loggingDecorator() {
     };
 }
 ```
-
 
 When the task runs, Spring applies decorators in order:
 

@@ -21,8 +21,7 @@ related_posts:
 frozen: false
 ---
 
-History of Services and APIs
-----------------------------
+## History of Services and APIs
 
 Enterprise application landscapes consist of inter-connected and inter-related applications.
 
@@ -34,8 +33,7 @@ Over time, we've observed a trend towards more modular and data model-focused in
 
 Beginning with EJBs in the 90s, progressing to Webservices and Service-Oriented Architecture (SOA) in the early 2000s, and finally evolving to domain-specific microservices, we are seeing a continual progression towards more efficient and effective integration solutions.
 
-Real-Time Updates and Events
-----------------------------
+## Real-Time Updates and Events
 
 As businesses integrate into the real world and approach consumers, the connections and interactions between these apps and businesses become increasingly complex, leading to issues such as component unavailability, scaling difficulties, and tight coupling.
 
@@ -55,14 +53,11 @@ A Gartner study demonstrates that the value from data and events increases with 
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-62603" src="need4speed-700x395.png" alt="Source: Gartner “Stream Processing: The New Data Processing Paradigm” 9 April 2019, Sumit Pal" width="700" height="395">
 
-<br />
-
 **Source: Gartner "Stream Processing: The New Data Processing Paradigm" 9 April 2019, Sumit Pal**
 
 Businesses and architects need to process data and events efficiently to maximize their value. This has resulted in the widespread adoption of Event-Driven Architecture (EDA) across various industries.
 
-Synchronous Microservices: Strengths and Weaknesses
----------------------------------------------------
+## Synchronous Microservices: Strengths and Weaknesses
 
 Talking about modern application architecture, Microservices stand out.
 
@@ -88,8 +83,7 @@ However, REST-based microservices may not fully meet these expectations and face
 * Obstacles in adding new services, leading to a fragmented monolithic architecture
 * The one-to-many pattern can be difficult and unsustainable.
 
-Event-Driven APIs to the Rescue
--------------------------------
+## Event-Driven APIs to the Rescue
 
 Synchronous microservice limitations can be overcome through asynchronous interaction, event-driven architecture, and event-enabling traditional microservices.
 
@@ -120,16 +114,13 @@ Events driven APIs deliver the following benefits:
 * Decoupled systems: Event-driven APIs promote decoupled systems, as they allow for loose coupling between systems. This means that systems can evolve independently, and changes in one system don't necessarily impact the other.
 * Flexibility: Event-driven APIs allow for more flexible and dynamic data flow between systems, as events can be generated and processed by different systems, at different times, in different ways.
 
-Event-Driven APIs: How to Ideate, Develop, and Operate
-------------------------------------------------------
+## Event-Driven APIs: How to Ideate, Develop, and Operate
 
 Having discussed event-driven APIs and their benefits, the next step is to explore how to design them. As with any complex system, a well-planned process is essential to create a digital value chain.
 
 At [Solace](https://solace.com/products/platform/ "Solace") we have a 5-step process to achieve this:
 
 <img decoding="async" class="size-medium wp-image-62605" src="5stepsEventAPI-700x332.png" alt="Solace steps to Event API products" width="700" height="332">
-
-<br />
 
 **Solace steps to Event API products**
 
@@ -187,8 +178,7 @@ As with any product, there is always scope to improve, processes that change, ne
 
 Managing the lifecycle of your event API product to keep up with these changes is crucial to finding and maintaining success.
 
-Summary
--------
+## Summary
 
 Transitioning from synchronous to event-driven APIs modernizes the enterprise and unlocks real-time events and information for developers, architects, product owners, and business stakeholders.
 

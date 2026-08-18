@@ -21,8 +21,7 @@ frozen: false
 **[JCON Europe](https://2024.europe.jcon.one/) in Cologne is around the corner ([and here are your free Foojay JCON tickets](https://bit.ly/3xv9yfT)), May 13 to 16. Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!**
 ![](image-2.png)
 
-**DevOps for Java Developers (Or Maybe Against Them?!) - Baruch Sadogursky**
-----------------------------------------------------------------------------
+## **DevOps for Java Developers (Or Maybe Against Them?!) - Baruch Sadogursky**
 
 Thursday, 16 May 2024 12:30 pm - 1:15 pm - Cinema BlackBox
 
@@ -30,23 +29,16 @@ Thursday, 16 May 2024 12:30 pm - 1:15 pm - Cinema BlackBox
 
 In this talk, we'll discuss why Java developers do or don't need DevOps. We'll consider arguments made by DevOps visionaries and see whether they hold water. Hopefully, by the end of the talk, we'll understand whether DevOps really helps Java developers to deploy better code to production more often or if it is just another scam made up by marketing and evangelists.
 
-Why your talk is unmissable?
-----------------------------
+## Why your talk is unmissable?
 
 Think DevOps is just a fancy new label for old-school Ops? You might be onto something---or maybe there's more to it. This talk is designed for Java developers at any knowledge level of DevOps, offering a candid look behind the buzzwords and hype.
 
 We'll explore whether DevOps is genuinely beneficial for your coding and deployment practices or if it's just ops in a DevOps disguise. Join us for a session that promises to cut through the noise with sharp insights and a bit of healthy skepticism.
 
-Why people should come to your session?
----------------------------------------
+## Why people should come to your session?
 
 If you're a Java developer curious about how DevOps might impact your work or skeptical about the constant hype, this session is for you. We'll dissect what DevOps really means for Java developers, stripping away the jargon to focus on what's practical and useful.
 
 Come ready to challenge the narrative, ask tough questions, and leave with a clear understanding of whether DevOps is a revolution in software development or just another buzzword. Don't miss a talk that's as informative as it is provocative.
 
-[Get your free Foojay JCON tickets by clicking here!](https://bit.ly/3xv9yfT)
------------------------------------------------------------------------------
-
-<br />
-
-<br />
+## [Get your free Foojay JCON tickets by clicking here!](https://bit.ly/3xv9yfT)

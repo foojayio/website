@@ -40,8 +40,7 @@ Also, [check out the brand new Foojay podcast, all the details here](https://foo
 
 <iframe src="https://app.springcast.fm/player/episode/67136?theme=springcast" width="100%" height="241" frameborder="0" scrolling="no" seamless="true" style="width:100%; height:241px;"></iframe>
 
-Content
--------
+## Content
 
 0'00 Short intro and music  
 

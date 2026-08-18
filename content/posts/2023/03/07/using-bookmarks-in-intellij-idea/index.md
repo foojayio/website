@@ -27,8 +27,7 @@ You could use Recent Files (**⌘E** on macOS, or **Control+E** on Windows/Linux
 
 Let's take a look!
 
-Add anonymous bookmarks
------------------------
+## Add anonymous bookmarks
 
 We can bookmark a line by pressing **F3** (on macOS) or **F11** (on Windows/Linux).
 
@@ -46,8 +45,7 @@ We can use the shortcut (**F3** on macOS, or **F11** on Windows/Linux) or we can
 
 ![Bookmark project item](bookmark-project-item.png)
 
-Add mnemonic bookmarks
-----------------------
+## Add mnemonic bookmarks
 
 We can also create bookmarks that are assigned to a digit (0 to 9) or letter (A to Z). To add a mnemonic line bookmark, press **⌥ F3** (on macOS) or **Control+F11** (on Windows/Linux) and press the digit or letter to use as an identifier for this bookmark.
 
@@ -67,8 +65,7 @@ If the selected digit or letter is already in use, IntelliJ IDEA will ask you wh
 
 ![Rewrite Mnemonic Bookmark](rewrite-mnemonic.png)
 
-Navigate to bookmarks
----------------------
+## Navigate to bookmarks
 
 There are several options to navigate to the bookmarks we have created.
 
@@ -146,8 +143,7 @@ We can enter a name for this list in the **Create Bookmark List** popup.
 
 ![Create Bookmark List popup](create-bookmark-list-popup.png)
 
-Summary and Shortcuts
----------------------
+## Summary and Shortcuts
 
 As we've seen, bookmarks allow us to "save" certain interesting locations in the code base, so we can easily go back to them later.
 

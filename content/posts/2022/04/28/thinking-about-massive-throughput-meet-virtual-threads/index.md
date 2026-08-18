@@ -27,8 +27,7 @@ No, no-worries, the current Java threading model remains but behind the curtains
 
 Yes, we are talking about JEP-425: Virtual Threads.
 
-Knocking on current concurrency limits
---------------------------------------
+## Knocking on current concurrency limits
 
 Let's first look at the current Java threading model. It provides an implementation of the Thread class. A Thread can be considered a Java concurrency unit which can execute so-called *Runnable* tasks. The instance of a Thread class is also an object but there is a bit more happening behind the scenes.
 
@@ -46,7 +45,6 @@ try(ExecutorService executor = Executors.newSingleThreadExecutor(THREAD_FACTORY)
 }
 ```
 
-
 Example 1. Single thread executor executing a *Runnable* task
 
 Over the past decades a concurrent program written in Java was capable of executing those *Runnable* tasks in parallel, meaning at once. Nowadays Java already provides the concepts of *Executors* (Example 1.) or *Thread Pools* (Example 2.) that help developers to administrate available platform resources and avoid unwanted system resources usage, eg. *new Thread()* and *start()*calls.
@@ -56,7 +54,6 @@ try( ExecutorService executor = Executors.newFixedThreadPool(10, THREAD_FACTORY)
    executor.submit(() -> … );   
 }
 ```
-
 
 Example 2. Pool of fixed initiated thread submitting a *Callable* task
 
@@ -84,13 +81,11 @@ DONE: thread: 'ForkJoinPool.commonPool-worker-1', cycle: '2', failedCycle:'2'
 FINISHED: cycles:'100'
 ```
 
-
 Example 3. Using *ComputableFuture* may come with drawbacks such as not terminable execution, debugging or meaningful StackTrace
 
 To be fair as Java platform is highly multi-threaded therefore we talk about the concurrency we must consider also garbage collectors, debuggers, profilers or other technologies are influenced by the "threading game".
 
-Meeting Virtual Threads
------------------------
+## Meeting Virtual Threads
 
 Okay, that's what we currently have. Something exciting is going to happen. The next upcoming big concurrency model extension. These are the Virtual Threads. I'll explain what they are, where they are coming from and why we should want them! The motivation may be obvious. Let's refresh the background.
 
@@ -114,7 +109,6 @@ for (int i = 0; i < EXECUTION_CYCLES; i++) {
 }
 ...
 ```
-
 
 Example 4. Current thread-per-request approach with fixed pool size and factory
 
@@ -143,7 +137,6 @@ try (var executor = Executors.newThreadPerTaskExecutor(threadFactory)) {
 }
 ```
 
-
 Example 5. The Java SE 19 proposed "newThreadPerTaskExecutor" method that runs a thread per executed task and thread factory that serves a virtual thread
 
 Virtual threads allow the execution of hundreds of tasks concurrently (!) which may have otherwise resulted in JVM crashes or out-of-memory exceptions by utilizing a common thread model (Example 4. With for example THREAD_NUMBER = 10_000).
@@ -169,8 +162,7 @@ There may be some potential drawbacks. One is related to the fact that VirtualTh
 
 Another challenge is a potential incompatibility with existing concurrency code as for example the ThreadGroup always returns the value "*VirtualThreads*" but the fact is that it can not be destroyed, resumed or stopped. Those methods aways cause an exception. ThreadMXBean is intended to be used only for platform threads and some other...
 
-Conclusion
-----------
+## Conclusion
 
 ![Image 3.: ComputableTaskEvent emitted by the task. It shows the Virtual Threads usage. Virtual Threads are served by the factory (Example 5.)](image_3-700x229.png) Image 3.: ComputableTaskEvent emitted by the task. It shows the Virtual Threads usage. Virtual Threads are served by the factory (Example 5.)
 
@@ -181,8 +173,7 @@ After all, JEP-425 is still under heavy development and we should be looking for
 To test the current state you can check the GitHub Project (Reference 5.)
 ![Image 4.: Traditional “request-per-thread” approach showing its limitations compared to Image 3.](image_4-700x93.png) Image 4.: Traditional "request-per-thread" approach showing its limitations compared to Image 3.
 
-References
-----------
+## References
 
 1. Project Loom Early-Access Build 19-loom+5-429 (2022/4/4), https://jdk.java.net/loom/
 2. JEP-425: Virtual Threads (Preview), <https://openjdk.java.net/jeps/425#observability>

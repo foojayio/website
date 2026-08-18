@@ -44,7 +44,6 @@ try {
 }
 ```
 
-
 Java 7 introduced the *try-with-resource* statement so that you can write something like this:
 
 ```kotlin
@@ -53,14 +52,11 @@ try (Component component = new Component()) {
 }                                                // 1
 ```
 
-
 1. `Component` is closed here in a generated `finally` block
 
 However, `Component` must implement `AutoCloseable`.
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-51028" src="auto-closeable-api-278x510.png" alt="" width="278" height="510">
-
-<br />
 
 Kotlin provides the `use()` extension function on `Closeable`.  
 
@@ -71,7 +67,6 @@ Component().use {
   // Use component as it
 }                                                // 1
 ```
-
 
 1. `Component` is closed here in a `finally` block
 
@@ -106,7 +101,6 @@ public class CloseableComponent extends Component implements Closeable {
 }
 ```
 
-
 Kotlin supports the Delegation pattern out-of-the-box via the `by` keyword. One can rewrite the above code as:
 
 ```kotlin
@@ -122,7 +116,6 @@ class CloseableComponent(component: Component) : Component by component,
 }
 ```
 
-
 1. Delegate all calls of `a()`, `b()`, and `c()` to the underlying `component`
 
 We can finally write the desired code:
@@ -133,7 +126,6 @@ CloseableComponent(RealComponent()).use {
 }
 ```
 
-
 Even better, it works with third-party code to improve an external library with this approach.
 
 The icing on the cake, one can also call the code from a *try-with-resource* Java statement:
@@ -143,7 +135,6 @@ try (CloseableComponent component = new CloseableComponent(new RealComponent()))
     // Use component
 }
 ```
-
 
 As I wrote above, one can do it in Java also. In general, however, the sheer amount of boilerplate code that one needs to write to implement delegation is a significant impediment. Kotlin makes it a breeze.
 
@@ -160,7 +151,6 @@ RealComponent().toCloseable().use {
     // Use component
 }
 ```
-
 
 In this post, we have seen how to improve the API provided by third-party libraries. We achieved it by combining Kotlin extension functions and delegation.
 

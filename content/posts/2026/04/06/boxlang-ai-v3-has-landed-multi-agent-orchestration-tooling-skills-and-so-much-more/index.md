@@ -38,10 +38,7 @@ If you've been building AI-powered apps with BoxLang, this release changes every
 
 Let's dig in. 🎉
 
-
-
-🎯 The Headline: AI Skills System
----------------------------------
+## 🎯 The Headline: AI Skills System
 
 The single biggest addition in 3.0 is the **AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills).
 
@@ -84,15 +81,11 @@ aiGlobalSkills().add( aiSkill( ".ai/skills/security-policy/SKILL.md" ) )
 
 Skills live in plain Markdown files --- which means your team can review them in pull requests, diff them, and keep them in sync with the rest of your codebase. This is the end of prompt drift.
 
-
-
-📚 Brand New Docs
------------------
+## 📚 Brand New Docs
 
 The entire documentation has been re-organized so you can go from zero to hero. Tons of new sections and more direct docs for your reading pleasure: <https://ai.ortusbooks.com/>
 
-🔌 MCP Server Seeding
----------------------
+## 🔌 MCP Server Seeding
 
 Agents can now be pointed directly at one or more **MCP servers** . All tools exposed by those servers are discovered automatically via `listTools()` and registered as `MCPTool` instances --- no manual tool construction required.
 
@@ -116,10 +109,7 @@ agent = aiAgent( "analyst" )
 
 The agent's system prompt is automatically updated so the LLM knows which tools came from which server. MCP servers are also surfaced in `getConfig()` output for full observability.
 
-
-
-🗄️ Global AI Tool Registry
----------------------------
+## 🗄️ Global AI Tool Registry
 
 New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once --- in `Application.bx` or `ModuleConfig.bx` --- and reference them as plain strings anywhere in your codebase.
 
@@ -137,10 +127,7 @@ result = aiChat(
 
 Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across modules. Two new interception points --- `onAIToolRegistryRegister` and `onAIToolRegistryUnregister` --- give you hooks for auditing and lifecycle management.
 
-
-
-🔧 Tool System Overhaul
------------------------
+## 🔧 Tool System Overhaul
 
 The tool system has been significantly redesigned around a new `BaseTool` abstract base class. All tool implementations extend it, getting the shared invocation lifecycle, result serialization, and fluent `describeArg()` annotation syntax for free.
 
@@ -163,10 +150,7 @@ Two **built-in core tools** ship with the module:
 
 `now@bxai` being auto-registered is worth calling out. No major AI framework ships built-in tools out of the box. This is a genuine differentiator --- your agents just *know what time it is* without any wiring on your part.
 
-
-
-🛡️ Provider Capability System
-------------------------------
+## 🛡️ Provider Capability System
 
 A new type-safe capability system prevents calling unsupported operations on providers and gives you clear, actionable errors instead of cryptic runtime crashes.
 
@@ -178,10 +162,7 @@ println( service.hasCapability( "chat" ) )    // false
 
 `aiChat()`, `aiChatStream()`, and `aiEmbed()` now check provider capabilities before calling and throw a clean `UnsupportedCapability` exception if the requirement isn't met. No more debugging mysterious provider errors.
 
-
-
-🌲 Parent-Child Agent Hierarchy
--------------------------------
+## 🌲 Parent-Child Agent Hierarchy
 
 Multi-agent orchestration is now a first-class concept. `AiAgent` tracks its position in an agent tree with full introspection, cycle detection, and depth tracking.
 
@@ -198,10 +179,7 @@ println( researcherAgent.getAncestors() )    // [ coordinator ]
 
 `addSubAgent()` automatically wires the parent relationship. `getConfig()` exposes `parentAgent`, `agentDepth`, and `agentPath` for full observability.
 
-
-
-🧵 Middleware Support
----------------------
+## 🧵 Middleware Support
 
 Both `AiModel` and `AiAgent` now support composable **middleware** for cross-cutting concerns --- logging, retries, guardrails, human-in-the-loop approvals, and more. Agent middleware is prepended ahead of model middleware in the execution chain.
 
@@ -234,10 +212,7 @@ agent = aiAgent(
 )
 ```
 
-
-
-🏢 Stateless Agents + Per-Call Identity Routing
------------------------------------------------
+## 🏢 Stateless Agents + Per-Call Identity Routing
 
 `AiAgent` is now **fully stateless** . `userId` and `conversationId` are resolved per-call from the `options` argument, eliminating shared-state concurrency bugs in multi-user deployments.
 
@@ -251,10 +226,7 @@ sharedMemory.add( message, userId: "bob",   conversationId: "conv-2" )
 sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 ```
 
-
-
-What Else Is New
-----------------
+## What Else Is New
 
 * 🤗 **HuggingFace Embeddings** --- new `huggingface` provider for the HuggingFace Inference API
 * 🔀 **Custom Service URLs** --- all senders now accept a `baseUrl` override for proxies, self-hosted endpoints, and OpenAI-compatible APIs
@@ -262,17 +234,11 @@ What Else Is New
 * 🐛 **Streaming event fixes** --- `beforeAIModelInvoke`/`afterAIModelInvoke` events were not firing for streaming; fixed
 * 🐛 **MCP `requestId` null crash** --- fixed a crash on JSON-RPC notifications that intentionally omit `id`
 
-
-
-No Breaking Changes
--------------------
+## No Breaking Changes
 
 3.0 is a major release but your existing code keeps working. `aiChat()`, `aiEmbed()`, and `aiAgent()` BIF signatures are unchanged. Upgrade, run your tests, and start exploring the new APIs.
 
-
-
-Get Started
------------
+## Get Started
 
 ```bash
 # Install or upgrade your OS installation via BoxLang

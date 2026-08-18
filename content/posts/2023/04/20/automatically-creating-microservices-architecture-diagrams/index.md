@@ -88,7 +88,6 @@ Chronicle Services communicate with each other using Chronicle Queues. So the fi
 }
 ```
 
-
 #### 2. Chronicle Services Configuration File to DOT format
 
 Once the services.yaml file has been read, the contents are translated into DOT and written to a file. For this translation to take place, we wrote custom code. Below is an example of what would be written to this DOT file (some sections have been excluded for simplicity).
@@ -115,7 +114,6 @@ digraph G {
     "service__simple" -> "queue__output" [penwidth=2, color="white", style="dashed", fontcolor="white", fontname="Helvetica", label=<<FONT>  OutputData </FONT>>] ;
 }
 ```
-
 
 #### 3. DOT to PNG
 

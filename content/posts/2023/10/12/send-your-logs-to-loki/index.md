@@ -25,8 +25,7 @@ Earlier this year, I spoke and attended the Observability room at FOSDEM. One of
 
 In this blog post, I want to focus on logs and Loki.
 
-Loki basics and our first program
----------------------------------
+## Loki basics and our first program
 
 At its core, Loki is a log storage engine:
 > Loki is a horizontally scalable, highly available, multi-tenant log aggregation system inspired by Prometheus. It is designed to be very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each log stream.
@@ -54,7 +53,6 @@ public static void main(String[] args) throws URISyntaxException, IOException, I
 }
 ```
 
-
 1. This is how we did String interpolation in the old days
 2. Create the request
 3. Send it
@@ -78,8 +76,7 @@ However, the code has many limitations:
   logger.info("My message with parameters {}, {}", foo, bar);
   ```
 
-Regular logging on steroids
----------------------------
+## Regular logging on steroids
 
 To use the above statement, we need to choose a logging implementation. Because I'm more familiar with it, I'll use SLF4J and Logback. Don't worry; the same approach works for Log4J2.
 
@@ -104,7 +101,6 @@ We need to add relevant dependencies:
     <scope>runtime</scope>
 </dependency>
 ```
-
 
 1. SLF4J is the interface
 2. Logback is the implementation
@@ -132,7 +128,6 @@ Now, we add a specific Loki appender:
 </root>
 ```
 
-
 1. The loki appender
 2. Loki URL
 3. As many labels as wanted
@@ -146,13 +141,11 @@ var logger = LoggerFactory.getLogger(Main.class.toString());
 logger.info("Hello from {}!", who);
 ```
 
-
 Grafana displays the following:
 
 ![](logback-1024x328.png)
 
-Docker logging
---------------
+## Docker logging
 
 I'm running most of my demos on Docker Compose, so I'll mention the Docker logging trick. When a container writes on the standard out, Docker saves it to a local file. The `docker logs ` command can access the file content.
 
@@ -177,7 +170,6 @@ services:
         loki-external-labels: container_name={{.Name}},app=demo       #3
 ```
 
-
 1. Loki logging driver
 2. URL to push to
 3. Additional labels
@@ -186,8 +178,7 @@ The result is the following. Note the default labels.
 
 ![](docker-1024x273.png)
 
-Conclusion
-----------
+## Conclusion
 
 From a bird's eye view, Loki is nothing extraordinary: it's a plain storage engine with a RESTful API on top.
 
@@ -205,7 +196,5 @@ Options are virtually unlimited. Be careful to choose the one that fits your con
 
 * [Push log entries to Loki via API](https://grafana.com/docs/loki/latest/api/#push-log-entries-to-loki)
 * [Loki Clients](https://grafana.com/docs/loki/latest/clients/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/logs-loki/) on August 27^th^, 2023*

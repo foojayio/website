@@ -34,8 +34,6 @@ A few months ago I started working on this topic and as a result, held a talk at
 
 {{< youtube Fglxqjcq4h0 >}}
 
-<br />
-
 The gist of this talk is:
 
 * Why? Profiling helps you find the parts of your code that are slow and that are worth to be fixed.
@@ -44,8 +42,6 @@ The gist of this talk is:
 While working on this talk, I collected a list of interesting conference talks on this topic:
 
 {{< youtube videoseries >}}
-
-<br />
 
 This list includes talks on a variety of profilers, ranging from deep dives to overviews. Many of these talks and people were recommended elsewhere on the internet, on blogs, on Twitter, or in private conversations. Which I present in the following.
 
@@ -88,14 +84,6 @@ Following these users, you can keep up to date in the field of open-source profi
 
 I know that these resources probably won't cover the need of everyone. The lack of entry- and mid-level tutorials and talks is still a problem. So I hope that many people from the vibrant profiler community see this outreach not as a burden, but as a virtue: Helping people to discover the joy in profiling and all the neat features that modern profilers have to offer.
 
-<br />
-
 If you think I missed a nice resource: Send me a tweet [@parttimen3rd](https://twitter.com/parttimen3rd/) or a toot [@\[email protected\]](https://mastodon.social/@parttimenerd)and open a Pull Request to the collection repo on [GitHub](https://github.com/parttimenerd/jug-profiling-talk). I'm also happy to hold a talk on the topic of profiling at your local user group.
 
-<br />
-
-<br />
-
 ***This whole endeavor is part of my work in the [SapMachine](https://sapmachine.io "SapMachine") team at [SAP](https://sap.com). This blog post first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de).***
-
-<br />

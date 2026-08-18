@@ -33,8 +33,7 @@ Each request consumes a token, and if no tokens are available, the request is re
 The bucket has a maximum capacity, so it can handle bursts of traffic as long as the burst doesn't exceed the number of tokens in the bucket.
 > Looking for a different rate limiter algorithm? [Check the essential guide.](https://foojay.io/?p=115335)
 
-How It Works
-------------
+## How It Works
 
 ![](https://cdn-images-1.medium.com/max/2160/1*7cDKq5yh5RD0ygvb3mVwfQ.gif)
 
@@ -54,8 +53,7 @@ Continuously refill the bucket at the defined rate, up to its maximum capacity, 
 
 Before processing a request, check if there are enough tokens in the bucket. If the bucket is empty, reject the request until tokens are replenished.
 
-How to Implement It with Redis and Java
----------------------------------------
+## How to Implement It with Redis and Java
 
 For the **Token Bucket Rate Limiter**, Redis provides an efficient way to track tokens and implement the algorithm. Here's how to do it:
 
@@ -68,7 +66,6 @@ GET rate_limit:<clientId>:count
 GET rate_limit:<clientId>:lastRefill
 ```
 
-
 If these keys don't exist, initialize the token count to the bucket's maximum capacity and set the current time as the last refill time using SET.
 
 ### 2. Refill tokens if necessary and update the bucket
@@ -80,7 +77,6 @@ SET rate_limit:<clientId>:count <new_token_count>
 SET rate_limit:<clientId>:lastRefill <current_time>
 ```
 
-
 ### 3. Allow or reject the request
 
 If tokens are available, allow the request and decrement the count by one using:
@@ -89,9 +85,7 @@ If tokens are available, allow the request and decrement the count by one using:
 DECR rate_limit:<clientId>:count
 ```
 
-
-Implementing it with Jedis
---------------------------
+## Implementing it with Jedis
 
 **Jedis** is a popular Java library used to interact with **Redis**and we will use it for implementing our rate limiter because it provides a simple and intuitive API for executing Redis commands from JVM applications.
 
@@ -106,7 +100,6 @@ Check the latest version [here](https://redis.io/docs/latest/develop/clients/jed
     <version>5.2.0</version>
 </dependency>
 ```
-
 
 ### Create a **TokenBucketRateLimiter** class:
 
@@ -135,7 +128,6 @@ public class TokenBucketRateLimiter {
 }
 ```
 
-
 ### Validate the Requests
 
 The main task of this rate limiter is to determine whether a client has sufficient tokens to process their request. If yes, the request is allowed, and tokens are deducted. If not, the request is blocked.
@@ -150,7 +142,6 @@ public boolean isAllowed(String clientId) {
     String keyLastRefill = "rate_limit:" + clientId + ":lastRefill";
 }
 ```
-
 
 For example, if the client ID is user123, their keys would be rate_limit:user123:count and rate_limit:user123:lastRefill.
 
@@ -174,7 +165,6 @@ public boolean isAllowed(String clientId) {
 }
 ```
 
-
 **Step 3: Refill Tokens**   
 
 Calculate how many tokens should be added based on the time elapsed since the last refill. Ensure the bucket doesn't exceed its maximum capacity.
@@ -186,7 +176,6 @@ int tokensToAdd = (int) (elapsedTimeSecs * refillRate);
 
 tokenCount = Math.min(bucketCapacity, tokenCount + tokensToAdd);
 ```
-
 
 **Step 4: Check Token Availability**   
 
@@ -200,7 +189,6 @@ if (isAllowed) {
 }
 ```
 
-
 **Step 5: Update Redis**   
 
 We update the token count and last refill time in Redis. Use a transaction to ensure atomic updates:
@@ -211,7 +199,6 @@ transaction.set(keyLastRefill, String.valueOf(currentTime)); // Update last refi
 transaction.set(keyCount, String.valueOf(tokenCount));       // Update token count
 transaction.exec();
 ```
-
 
 ### Complete Implementation
 
@@ -273,11 +260,9 @@ public class TokenBucketRateLimiter {
 }
 ```
 
-
 And we're ready to start testing it's behavior!
 
-Testing our Rate Limiter
-------------------------
+## Testing our Rate Limiter
 
 To ensure our Token Bucket Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
@@ -308,7 +293,6 @@ assertj-core
 test
 ```
 
-
 Once you've added these dependencies, you're ready to start writing your test class.
 
 ### Setting Up the Test Class
@@ -328,7 +312,6 @@ public class TokenBucketRateLimiterTest {
     private Jedis jedis;
     private TokenBucketRateLimiter rateLimiter;
 ```
-
 
 ### Preparing the Environment Before Each Test
 
@@ -353,7 +336,6 @@ void setup() {
 }
 ```
 
-
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
 ### Cleaning Up After Each Test
@@ -366,7 +348,6 @@ void tearDown() {
     jedis.close();
 }
 ```
-
 
 ### Full Setup
 
@@ -403,7 +384,6 @@ public class TokenBucketRateLimiterTest {
 }
 ```
 
-
 ### Verifying Requests Within the Bucket Capacity
 
 This test ensures the rate limiter allows requests within the defined bucket capacity.
@@ -423,7 +403,6 @@ void shouldAllowRequestsWithinBucketCapacity() {
     }
 }
 ```
-
 
 ### Verifying Requests Are Denied When Bucket is Empty
 
@@ -447,7 +426,6 @@ void shouldDenyRequestsOnceBucketIsEmpty() {
         .isFalse();
 }
 ```
-
 
 ### Verifying Bucket is Gradually Refilled
 
@@ -486,7 +464,6 @@ void shouldRefillTokensGraduallyAndAllowRequestsOverTime() throws InterruptedExc
 }
 ```
 
-
 ### Verifying Independent Handling of Multiple Clients
 
 This test ensures the rate limiter handles multiple clients independently.
@@ -519,7 +496,6 @@ void shouldHandleMultipleClientsIndependently() {
     }
 }
 ```
-
 
 ### Verifying Token Refill Does Not Exceed Bucket Capacity
 
@@ -559,7 +535,6 @@ void shouldRefillTokensUpToCapacityWithoutExceedingIt() throws InterruptedExcept
 }
 ```
 
-
 ### Verifying Denied Requests Do Not Affect Token Count
 
 This test ensures that the token bucket rate limiter does not count denied requests when updating the token count.
@@ -592,7 +567,6 @@ void testRateLimitDeniedRequestsAreNotCounted() {
         .isEqualTo(0);
 }
 ```
-
 
 Is there any other behavior we should verify? Let me know in the comments!
 

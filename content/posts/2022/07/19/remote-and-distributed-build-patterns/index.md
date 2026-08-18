@@ -29,8 +29,7 @@ This article will explore the difference between remote vs. distributed builds a
 
 Except for two JVM-specific references, these observations are generally applicable to software projects using any language or ecosystem.
 
-But Why?
---------
+## But Why?
 
 These features are typically discussed in the context of shortening build times on local developer machines.
 
@@ -156,8 +155,7 @@ In both the remote and distributed paradigms, non-trivial amounts of network tra
 
 Further, managing the pool of remote hosts or distributed agents incurs more cost and overhead. Additional engineering investment will be required to provide the standardized environments. Care should be exercised to avoid resource starvation or over-allocation by responding to peak usage cycles and downtime.
 
-Summary
--------
+## Summary
 
 In this post, we've reviewed the build patterns in which remote machines are leveraged, clarified the definition of remote and distributed builds, and discussed their variations.
 

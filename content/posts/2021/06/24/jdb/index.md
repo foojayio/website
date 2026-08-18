@@ -47,7 +47,6 @@ classname:  This represents the name of the main class to debug.
 arguments:  This represents the arguments that are passed to the main() method of the class.
 ```
 
-
 #### Sample Java App for Debugging
 
 Following is a sample Java class we are going to debug and try to understand the different features available. It is important to compile this class with the "-g" option (javac -g Test.java), which generates all the debugging information including local variables. By default, only line number and source file information is generated.
@@ -73,7 +72,6 @@ public class Test
 }
 ```
 
-
 #### Attach jdb to the Java application
 
 The command below is the most common way to start an application with the jdb debugger. Here we are not passing any jdb options, we have only passed the class name, which doesn't require any argument:
@@ -81,7 +79,6 @@ The command below is the most common way to start an application with the jdb de
 ```
 jdb Test
 ```
-
 
 In this way, we start executing the main class "Test" in a similar way to how we start in a professional IDE. jdb stops the JVM before executing that class's first instruction.
 
@@ -91,13 +88,11 @@ Another way to use the jdb command is by attaching it to a JVM that's already ru
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 Test
 ```
 
-
 To attach jdb with this remote jvm use below syntax:
 
 ```
 jdb -attach 5005
 ```
-
 
 In this article, we will not see remote debugging in detail.
 
@@ -111,7 +106,6 @@ Initializing jdb ...
 >
 ```
 
-
 Set a break point at line 5 using "stop", as follows:
 
 ```
@@ -120,7 +114,6 @@ Deferring breakpoint Test:5.
 It will be set after the class is loaded.
 >
 ```
-
 
 Start execution of application's main class using "run":
 
@@ -136,7 +129,6 @@ Breakpoint hit: "thread=main", Test.main(), line=5 bci=0
 5           System.out.println("First Line of main function");
 ```
 
-
 Execute current line using "step":
 
 ```
@@ -145,7 +137,6 @@ main[1] step
 Step completed: "thread=main", Test.main(), line=6 bci=8
 6            System.out.println("Second Line of main function");
 ```
-
 
 Execute current line using "step":
 
@@ -156,14 +147,12 @@ Step completed: "thread=main", Test.main(), line=7 bci=16
 7            System.out.println("Third Line of main function");
 ```
 
-
 Printing local variable i using "print":
 
 ```
 main[1] print i
 i = 0
 ```
-
 
 Printing all local variables in current stack frame using "locals":
 
@@ -175,14 +164,12 @@ Local variables:
 i = 0
 ```
 
-
 Dump a thread's stack using "where":
 
 ```
 main[1] where
 [1] Test.main (Test.java:10)
 ```
-
 
 List threads in running application using "threads":
 
@@ -199,7 +186,6 @@ Group InnocuousThreadGroup:
 (jdk.internal.misc.InnocuousThread)807 Common-Cleaner cond. waiting
 ```
 
-
 Continue execution from the breakpoint using `cont`:
 
 ```
@@ -208,13 +194,11 @@ main[1] cont
 i: 2
 ```
 
-
 All available commands in jdb using "help":
 
 ```
 main[1] help
 ```
-
 
 ### Command List
 
@@ -308,7 +292,6 @@ exit (or quit) -- exit debugger
 : a Java(TM) Programming Language expression.
 ```
 
-
 Most common syntax is supported.
 
 Startup commands can be placed in either "jdb.ini" or ".jdbrc" in user.home or user.dir.
@@ -318,7 +301,6 @@ Quitting jdb:
 ```
 quit
 ```
-
 
 ### Conclusion
 

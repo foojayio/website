@@ -37,12 +37,9 @@ In the last two ducklings, I talked about threading issues:
 >
 > --- Shai Almog (@debugagent) [May 3, 2022](https://twitter.com/debugagent/status/1521486750505488386?ref_src=twsrc%5Etfw)
 
-<br />
-
 Today we'll discuss the process of debugging threading issues, dealing with deadlocks and race conditions in the debugger.
 
-Multithreaded Debugging
------------------------
+## Multithreaded Debugging
 
 Debugging in a multi-threaded environment is often perceived as difficult because it's hard to know what's going on. You place a breakpoint and a thread that might deadlock is suspended in the background. As a result, you can no longer reproduce the problem with a debugger. Instead of modifying the debugging technique, developers blame the tooling.
 
@@ -82,8 +79,7 @@ Most threads you'll receive from a pool or a framework would already be grouped 
 
 ![](thread-debugging-5-700x474.png)
 
-Debugging a Deadlock Situation
-------------------------------
+## Debugging a Deadlock Situation
 
 Wikipedia defines a deadlock as:
 
@@ -105,8 +101,7 @@ This might mean nothing, but it's pretty easy to review this list and the stack 
 
 You can switch between threads and walk the stack. In this screenshot, the stack is one method deep so it isn't representative of "real-world cases". However, this is an easy way to detect such issues.
 
-Debugging Race Conditions
--------------------------
+## Debugging Race Conditions
 
 The most common issue with multi-threading is race conditions. Wikipedia defines race conditions as:
 
@@ -130,7 +125,6 @@ public Set<PetDTO> findPetDTOSet(Integer vetId) {
   }).collect(Collectors.toSet());
 }
 ```
-
 
 If we place a breakpoint on the last line, we will miss the functionality of the method. But if we place a method breakpoint that tracks method exit, it will hit after everything in the method was executed.
 
@@ -160,8 +154,7 @@ In some cases, the output might be so verbose and from a single thread. In that 
 
 We can also build a poor man's deadlock detector using a similar technique. It can give us a sense of shared resource usage so we can properly evaluate deadlock potentials.
 
-TL;DR
------
+## TL;DR
 
 Possibility of deadlock code makes debugging a process pretty challenging. A lock on resources can make things worse and the traditional usage of breakpoints just doesn't work...
 

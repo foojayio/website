@@ -27,8 +27,6 @@ In order for any technology to grow and improve, community support and feedback 
 >
 > --- Almas Baim (@AlmasBaim) [June 7, 2021](https://twitter.com/AlmasBaim/status/1401833314890178566?ref_src=twsrc%5Etfw)
 
-<br />
-
 The collated results are given below. Each entry also includes links to open-source libraries and other resources that may provide (or help develop) some of the necessary functionalities.
 
 #### 1. Fixes to Outstanding Bugs

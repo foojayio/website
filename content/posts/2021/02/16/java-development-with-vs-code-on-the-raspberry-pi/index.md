@@ -39,14 +39,12 @@ $ cd /home/pi/Downloads
 $ sudo apt install ./code_1.50.1-1602600660_armhf.deb
 ```
 
-
 And there is even an easier way, as Visual Studio Code is now available as a Raspberry Pi OS apt package (**which is very controversial, see below**)! Use the following commands:
 
 ```
 sudo apt update 
 sudo apt install code -y
 ```
-
 
 You can now start VSC from the start button and you will find it in the "Programming" list.
 
@@ -76,7 +74,6 @@ $ cd /home/pi/Downloads
 $ sudo apt install ./code_1.50.1-1602600638_arm64.deb
 ```
 
-
 Also here you'll now find Visual Studio Code in the Programming list in the start menu. Let's also here add the "Java Extension Pack" (or one from the others mentioned in [the previous post](https://foojay.io/today/welcome-to-vs-code-for-java/)), so we can test a Java application.
 ![](visualstudiocode-64bit-java-extension-pack.png) Visual Studio Code running on Raspberry Pi OS (64bit)
 
@@ -96,7 +93,6 @@ OpenJDK Runtime Environment (build 11.0.8+10-LTS)
 OpenJDK 64-Bit Server VM (build 11.0.8+10-LTS, mixed mode)
 ```
 
-
 Without any further installation, we can now try out [this demo application which you can get from GitHub](https://github.com/FDelporte/JavaOnRaspberryPi/tree/master/Chapter_07_JavaFX/javafx-dashboard).
 ![](visualstudiocode-64bit-java-testing.png) JavaFX demo application started by Visual Studio Code on the Raspberry Pi
 
@@ -115,7 +111,5 @@ A very clear overview is given in this video by [Jeff Geerling](https://twitter.
 The Raspberry Pi was already a powerful PC at a low price. Now with Visual Studio Code being released with versions for our beloved board, and all the extensions which are available for this IDE, **we can use the Raspberry Pi as a real developer PC for Java and many other programming languages**!
 
 If you don't like the changes in the Raspberry Pi OS there is a long list of alternatives as listed on "[Awesome Raspberry Pi](https://github.com/thibmaek/awesome-raspberry-pi)". Ubuntu, for example, has a 64bit version of their OS which also works great on the Pi, and you can download and install VSC yourself [as shown in this post](https://webtechie.be/post/2020-10-23-ubuntu-desktop-on-raspberrypi4/).
-
-
 
 **Note:** originally written and published on the blog of [Frank Delporte](https://webtechie.be/post/2020-10-15-visual-studio-code-on-raspberry-pi/) but updated for foojay.io with info of the last week regarding the changes in Raspberry Pi OS.

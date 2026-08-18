@@ -49,7 +49,6 @@ public class FunctionChallenge {
 }
 ```
 
-
 A) 0  
 
 B) java.lang.ArithmeticException will be thrown.  
@@ -66,7 +65,6 @@ Lets first understand the lambda expression given below:
 x -> x+1
 ```
 
-
 The lambda expression above (an anonymous function) takes an argument and returns a result after incrementing by one if x is type of Integer value.
 
 We can give the type of input value and return value by using Function. In the Lambda expression, the x would be the type of the received parameter and there will be the logic we defined. It's basically adding 2 to the x variable:
@@ -75,13 +73,11 @@ We can give the type of input value and return value by using Function. In the L
 Function add = x -> x + 2;
 ```
 
-
 Here we are subtracting 2 from the x variable:
 
 ```java
 Function sub = x -> x - 2;
 ```
-
 
 Finally here we are dividing the x by 2:
 
@@ -89,20 +85,17 @@ Finally here we are dividing the x by 2:
 Function div = x -> x / 2;
 ```
 
-
 In the line of code below, we are joining all logic to be executed in a row. That means that we are going to add and then subtract and divide:
 
 ```java
 Function func = add.andThen(sub).andThen(div);
 ```
 
-
 With all functions in the func variable, we are going to use the apply method, passing 2. In the add method, it will be `2 + 2 = 4`, in the subtract method = it will be `4 - 2 = 2` and in the divide method = it will be `2 / 2 = 1`.
 
 ```java
 System.out.println(func.apply(2));
 ```
-
 
 Therefore, the final answer will be... what do you think?
 

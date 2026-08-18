@@ -24,10 +24,6 @@ frozen: false
 
 **The subject of Java licensing and OpenJDK migration is complex and vital to many software engineers.** **I am no different. It's a topic often shrouded in legal jargon and technicalities, making it difficult to approach.**
 
-<br />
-
-<br />
-
 "OpenJDK Migration for Dummies" by[Simon Ritter](https://www.linkedin.com/in/siritter/) offers a fresh perspective, breaking down these challenges into digestible segments. ([Get it for free here.](https://www.azul.com/openjdk-migration-for-dummies/))
 
 [](https://www.azul.com/openjdk-migration-for-dummies/)
@@ -38,14 +34,11 @@ frozen: false
 
 ](https://www.azul.com/openjdk-migration-for-dummies/)
 
-<br />
-
 The book directly speaks to my core expertise in Java, providing clarity and guidance.
 
 This review below dissects the content, calls out key insights, and highlights reflections connecting with my Java-focused software engineer experiences.
 
-**Content Overview**
---------------------
+## **Content Overview**
 
 ### 1. Oracle's Licensing Transition
 
@@ -117,22 +110,19 @@ This concise yet impactful chapter presents essential questions for evaluating p
 
 These questions form a critical checklist that I personally find incredibly useful.
 
-Writing Style
--------------
+## Writing Style
 
 The book's articulate and insightful writing style appeals to the analytical and logical aspects of the professional software engineer.
 
 While exploring complex subjects, the author maintains simplicity and structure, connecting with readers on both an intellectual and emotional level.
 
-Potential Audience
-------------------
+## Potential Audience
 
 Professionals, students, educators, and anyone interested in the intricacies of Java will find this book engaging and informative.
 
 It's not just a technical manual: it's a companion on a journey through the complexities of OpenJDK migration.
 
-Critique and Considerations
----------------------------
+## Critique and Considerations
 
 The book appears to be an informative resource for those looking to understand and undertake the migration process to OpenJDK.
 
@@ -144,8 +134,7 @@ It provides an overview of key considerations, stages of migration, and answers 
 
 Nonetheless, these potential areas for improvement should be viewed in the context of the book's overall goals and the needs of its intended readership, as it evidently provides a foundational understanding of the subject matter.
 
-Conclusion
-----------
+## Conclusion
 
 **"[OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/)"** offers a guide to OpenJDK migration.
 

@@ -33,8 +33,7 @@ And Lambda, with its underlying use of the [Firecracker MicroVM](https://firecra
 
 **"AWS Lambda SnapStart for Java delivers up to 10x faster function startup performance at no extra cost,"** [the AWS announcement states](https://aws.amazon.com/about-aws/whats-new/2022/11/aws-lambda-snapstart-java-functions/). **"Lambda SnapStart is a performance optimization that makes it easier for you to build highly responsive and scalable Java applications using AWS Lambda without having to provision resources or spend time and effort implementing complex performance optimizations."**
 
-Momentum for the CRaC API is Building
--------------------------------------
+## Momentum for the CRaC API is Building
 
 ![](crac-momentum-blog-hero-1024x576.jpg)
 
@@ -46,8 +45,7 @@ The combination of framework support, the support in the OpenJDK CRaC project, a
 
 Now, with a major Cloud platform providing built-in support for the CRaC API, it's truly off to the races for CRaC.
 
-Learn more
-----------
+## Learn more
 
 Learn more about the CRaC API:
 

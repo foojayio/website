@@ -77,7 +77,6 @@ public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult res
 }
 ```
 
-
 Let's dissect, what we see in the example above:
 
 First, the developer can define an observation scope, and highlight the values that are needed to be tracked. A necessary step is to differentiate between values that tend to be highly unique (marked here as 'high cardinality') and hence inefficient to index and group by, and those items that would have a set of discrete values that are great candidates for data manipulation later on the observability pipeline.
@@ -115,7 +114,6 @@ public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owne
 }
 ```
 
-
 #### A facade for observability
 
 One of the things that are unique about Micrometer is that it aims to be a facade with support for multiple observability standards, including OTEL, Brave, and others.
@@ -149,7 +147,6 @@ public OpenTelemetry getOpenTelemetry() {
     return openTelemetrySdk;
 }
 ```
-
 
 In addition, I've learned that since it doesn't use reflection or 'magic' at all.
 

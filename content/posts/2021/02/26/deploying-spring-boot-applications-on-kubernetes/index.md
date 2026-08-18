@@ -50,7 +50,6 @@ NAME             STATUS   ROLES    AGE   VERSION
 docker-desktop   Ready    master   19d   v1.19.3
 ```
 
-
 ### How to Create a Pod
 
 A Pod in Kubernetes is the smallest possible execution unit. It can have one more container in it. However, we will test the setup by creating a simple pod with a single container image on the local Kubernetes cluster by following the below steps. This container runs an Nginx image.
@@ -72,14 +71,12 @@ ports:
 - containerPort: 80
 ```
 
-
    Use `kubectl create` and the name of the YAML file to create a pod:
 
 ```
 kubectl create -f pod.yaml
 pod/nginx created
 ```
-
 
 2. Check the status of the pod we just created: 
 
@@ -88,7 +85,6 @@ kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          2m38s
 ```
-
 
 3. To debug the pod further and it's working we can get a shell to a running container using `kubectl exec` command. Once inside the container, we will just use curl to verify Nginx setup. Let's do that now:  
 
@@ -120,7 +116,6 @@ Commercial support is available at
 </html>
 ```
 
-
 ### How to Deploy a Working Spring Boot Application on Kubernetes
 
 Let's deploy a working Spring Boot application on our local Kubernetes cluster. We will be using the Indian-states application for the demo. You can check out [this](https://github.com/yrashish/indian-states) GitHub repository to know more about this application.
@@ -148,14 +143,12 @@ NAME                                DESIRED   CURRENT   READY   AGE
 replicaset.apps/states-6664b9dbf6   1         1         1       8s
 ```
 
-
 Now just do curl and access the /states REST endpoint and see what happens.
 
 ```
 curl localhost:31238/states
 [{“name”:”Andra Pradesh”,”capital”:”Hyderabad”},{“name”:”Arunachal Pradesh”,”capital”:”Itangar”},{“name”:”Assam”,”capital”:”Dispur”},{“name”:”Bihar”,”capital”:”Patna”},{“name”:”Chhattisgarh”,”capital”:”Raipur”},{“name”:”Goa”,”capital”:”Panaji”},{“name”:”Gujarat”,”capital”:”Gandhinagar”},{“name”:”Haryana”,”capital”:”Chandigarh”},{“name”:”Himachal Pradesh”,”capital”:”Shimla”},{“name”:”Jharkhand”,”capital”:”Ranchi”},{“name”:”Karnataka”,”capital”:”Bangalore”},{“name”:”Kerala”,”capital”:”Thiruvananthapuram”},{“name”:”Madhya Pradesh”,”capital”:”Bhopal”},{“name”:”Maharashtra”,”capital”:”Mumbai”},{“name”:”Manipur”,”capital”:”Imphal”},{“name”:”Meghalaya”,”capital”:”Shillong”},{“name”:”Mizoram”,”capital”:”Aizawi”},{“name”:”Nagaland”,”capital”:”Kohima”},{“name”:”Orissa”,”capital”:”Bhubaneshwar”},{“name”:”Rajasthan”,”capital”:”Jaipur”},{“name”:”Sikkim”,”capital”:”Gangtok”},{“name”:”Tamil Nadu”,”capital”:”Chennai”},{“name”:”Telangana”,”capital”:”Hyderabad”},{“name”:”Tripura”,”capital”:”Agartala”},{“name”:”Uttaranchal”,”capital”:”Dehradun”},{“name”:”Uttar Pradesh”,”capital”:”Lucknow”},{“name”:”West Bengal”,”capital”:”Kolkata”},{“name”:”Punjab”,”capital”:”Chandigarh”}]
 ```
-
 
 ### How to Monitor and Manage Kubernetes Cluster with Lens IDE
 

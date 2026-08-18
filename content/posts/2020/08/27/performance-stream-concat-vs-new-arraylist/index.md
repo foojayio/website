@@ -33,7 +33,6 @@ List<Element> result = content.getFancyStuffs().stream()
   .collect(toList());
 ```
 
-
 Some more details here --- the `getFancyStuffs()` returns a list of `FancyStuff` elements. The `FancyStuff` class contains two getters where `getElement()` returns a single `Element` whereas the `getElements()` returns (guess what?) a list of `Element`s.
 
 The interesting part was the lambda which creates a new `ArrayList` and adds a single element `objects.add(item.getElement())` and the second part which adds several elements via `objects.addAll(item.getElements)`.
@@ -49,7 +48,6 @@ List<Element> result = content.getFancyStuffs().stream()
       )
   .collect(Collectors.toList());
 ```
-
 
 So far so good. But, after some time, I began to think about the two solutions. I asked myself: Which is faster? Which uses more memory? (The usual questions a developer is asking... don't you?)
 
@@ -73,7 +71,6 @@ public List<Element> with_new_arraylist(Container content) {
 }
 ```
 
-
 and the second part:
 
 ### Solution 2
@@ -88,7 +85,6 @@ public List<Element> with_stream_concat(Container content) {
   .collect(Collectors.toList());
 }
 ```
-
 
 while writing the above code, I thought about some parts of it and I came up with two other possible variations.
 
@@ -107,7 +103,6 @@ public List<Element> with_new_arraylist_constructor(Container content) {
 }
 ```
 
-
 ### Solution 4
 
 Finally, this one where I already calculate the size of the final list by giving the number of elements via the constructor. This will prevent the resizing of the array list at all cause the size will fit always.
@@ -124,7 +119,6 @@ public List<Element> with_new_arraylist_constructor_size(Container content) {
   }).collect(Collectors.toList());
 }
 ```
-
 
 ### Measurement
 

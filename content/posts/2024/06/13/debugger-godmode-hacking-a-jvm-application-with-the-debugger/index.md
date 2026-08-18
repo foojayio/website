@@ -36,8 +36,7 @@ This is what your character would look like when you entered 'IDDQD' -- the key 
 
 While 'god mode' is not as prevalent in games as it once was, and the era of the IDDQD meme seems to be fading, one might wonder if a contemporary equivalent exists. Personally, I have my own modern take on IDDQD. Though it's not necessarily related to games, it does evoke the same sense of having superpowers.
 
-Space Invaders
---------------
+## Space Invaders
 
 To illustrate my point, I'd like to bring in a fun scenario right here. Even if you aren't familiar with Doom, you've most probably seen this even older game called [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders). Like Doom, its plot centers around the theme of fighting invaders in space.
 
@@ -51,8 +50,7 @@ There's no god mode in this game, but if we are very determined, can we add it o
 
 Be responsible! I got Eugene's consent before tampering with his program. If you're using the debugger on code that is not yours, make sure it's ethical. Otherwise don't do that.
 
-Get the tools ready
--------------------
+## Get the tools ready
 
 Prepare for a meta experience -- we're going to debug IntelliJ IDEA using its own debugger.
 
@@ -74,8 +72,7 @@ To be able to debug the 'Space Invaders' instance, click **More** near it, then 
 
 This will make the target JVM run with the debug agent and listen to incoming debugger connections on port `5005`.
 
-Run the game
-------------
+## Run the game
 
 Run the `Space Invaders` instance, [install the game](https://www.jetbrains.com/help/idea/managing-plugins.html), and launch it by running the **Space Invaders** action. To find the action, hit Shift twice, and start typing `Space Invaders`:
 
@@ -97,8 +94,6 @@ We should see the following message in the console confirming that the debugger 
 
     Connected to the target VM, address: 'localhost:5005', transport: 'socket'
 
-
-
 We're getting to the interesting part: how do we suspend the application?
 
 Typically, one would set a breakpoint in the application code, but in this case, we lack the sources for both IntelliJ IDEA and the Space Invaders plugin. Not only does this prevent us from setting a breakpoint, it also complicates our understanding of how the program operates. At first glance, there appears to be nothing to inspect or step through.
@@ -114,8 +109,7 @@ The application gets suspended. This gives us a starting point for debugging.
 * [Debug Without Breakpoints](https://flounder.dev/posts/debug-without-breakpoints/)
 * [Debug Unresponsive Apps](https://flounder.dev/posts/debug-unresponsive-apps/)
 
-Find the relevant objects
--------------------------
+## Find the relevant objects
 
 If we look at our goal in programming terms, it boils down to preventing the spaceship's health from going down. Let's find the object that holds the corresponding state.
 
@@ -157,8 +151,7 @@ After applying the trick described above, we should be able to set the value for
 
 So we've located the object that holds the relevant state. At the very least, we can manually refill the health bar from time to time. Although it isn't a complete success just yet, it's already a significant step forward.
 
-Labels and expressions
-----------------------
+## Labels and expressions
 
 Now that we have identified the object to focus on, it would be handy to [mark](https://www.jetbrains.com/help/idea/examining-suspended-program.html#use-labels) it. For those unfamiliar with debug labels, this is what a marked object looks like:
 
@@ -189,8 +182,7 @@ Reasonably, the setter should work too: `health_object_DebugLabel.setValue(100)`
 
 After evaluating the setter, let's resume the application and verify that the changes took effect. Indeed, the health bar is full!
 
-Hook the expression
--------------------
+## Hook the expression
 
 The only remaining step for reaching our goal is to automate the modification of the state, so that the 'health refill' happens behind the scenes, letting us enjoy the gameplay without interruptions.
 
@@ -210,8 +202,7 @@ Let's return to Space Invaders and see if our home-cooked IDDQD works. It does!
 
 ![Playing Space Invaders in IntelliJ IDEA – every time that the spaceship gets hit, its health bar automatically refills](https://flounder.dev/img/debugger-god-mode/success.gif)
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we used the debugger to find out how an application works under the hood. After sorting this out, we were able to navigate in its memory and modify its functionality, all without accessing the application's sources! I hope my comparison of the debugger with IDDQD didn't come across as too audacious, and that you learned some techniques that will empower you in your debugging challenges.
 

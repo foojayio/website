@@ -75,8 +75,7 @@ In this workshop, we give you four simple "labs" that will show you how to conne
 
 There's nothing to install and no software to pay for, so flex your coding fingers and get a head start with each lab description below.{#12d3}
 
-Lab 1: Set up Apache Pulsar
----------------------------
+## Lab 1: Set up Apache Pulsar
 
 In this first lab, you'll learn how to:{#bc61}
 
@@ -89,8 +88,7 @@ To do all this without installing anything, you'll be leveraging [Katacoda](http
 
 Follow the instructions for [Lab 1 on GitHub](https://github.com/datastaxdevs/workshop-pulsar/wiki/LAB1_GettingStarted) to get started.{#f470}
 
-Lab 2: Produce and consume messages with Kesque
------------------------------------------------
+## Lab 2: Produce and consume messages with Kesque
 
 In this second lab you'll meet [Kesque](https://kesque.com/), a fully managed cloud messaging service powered by Pulsar. As a side note, [DataStax acquired Kesque](https://techcrunch.com/2021/01/27/datastax-acquires-kesque-as-it-gets-into-data-streaming/) and now includes it as part of [Luna Streaming](https://www.datastax.com/products/luna-streaming), which is a completely free, production-ready distribution of Pulsar with handy admin and monitoring tools. We'll be releasing a revamped version of this workshop using Luna Streaming, so keep an eye on our [DataStax Developers channel](https://www.youtube.com/c/DataStaxDevs/featured)!{#8998}
 
@@ -105,8 +103,7 @@ To give you a better understanding, here's a simple diagram with how all these t
 
 Go ahead and follow the instructions for [Lab 2 on GitHub](https://github.com/datastaxdevs/workshop-pulsar/wiki/LAB2_Kesque).{#6815}
 
-Lab 3: Connect Cassandra with Astra DB
---------------------------------------
+## Lab 3: Connect Cassandra with Astra DB
 
 Now it's time to connect Pulsar to Cassandra and create a database where you can store the messages sent from Pulsar/Kesque. But instead of installing Cassandra and dealing with all the operational complexity that comes with it, you can just use [Astra DB](https://astra.dev/3N3jzE2) and then connect it to Kesque.{#6e28}
 
@@ -118,8 +115,7 @@ Astra DB is a multi-cloud database-as-a-service (DBaaS) built on Cassandra. It's
 
 Follow the instructions for [Lab 3 on GitHub](https://github.com/datastaxdevs/workshop-pulsar/wiki/LAB3_Astra).{#3653}
 
-Lab 4: Stream from Pulsar to Cassandra
---------------------------------------
+## Lab 4: Stream from Pulsar to Cassandra
 
 In this fourth lab, you'll finally start streaming. Here's the big picture of what you've set up so far and what's next.{#68fe}
 ![](0_NBRezxcuPV3uHivQ.png) Figure 3: Diagram showing how the topic connects to GitPod and Astra DB.

@@ -76,7 +76,6 @@ public class PoolserviceApplication {
 }
 ```
 
-
 The @SpringBootApplication annotation is a shortcut annotation that combines the default functionality of the following three annotations:
 
 * @EnableAutoConfiguration: enables Spring Boot auto-configuration
@@ -103,7 +102,6 @@ public class HelloController {
 
 }
 ```
-
 
 The @RestController annotation wires the class up as a RESTful web service controller by combining the traditional @Controller and @ResponseBodyannotation functionality.
 
@@ -189,7 +187,6 @@ public class TemperatureReader {
 }
 ```
 
-
 #### 5. Create a Temperature Controller
 
 Finally, to make the temperature readings available via a RESTFul service, create a controller named TemperatureController and annotate it with @RestController.   
@@ -220,7 +217,6 @@ public class TemperatureController {
 
 }
 ```
-
 
 To see the temperature, visit the URL:   
 

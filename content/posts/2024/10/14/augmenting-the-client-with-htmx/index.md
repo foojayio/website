@@ -23,8 +23,7 @@ This article is part of a series comparing different ways to implement asynchron
 
 In this post, I'll focus on [HTMX](https://htmx.org/), whose approach is quite different.
 
-Laying out the work
--------------------
+## Laying out the work
 
 I'll follow the same structure as in the previous posts of the series. Here's the setup, server- and client-side.
 
@@ -55,7 +54,6 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 </dependencies>
 ```
 
-
 1. Same as with previous frameworks
 2. The HTMX dependency
 
@@ -67,11 +65,9 @@ The code on the HTML side is straightforward :
 <script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19716d746137766b7e59283720">[email protected]</a>/dist/htmx.min.js"></script> <!--1-->
 ```
 
-
 1. Add the HTMX dependency
 
-Working with HTMX
------------------
+## Working with HTMX
 
 We want to implement the same features as previously.
 
@@ -107,7 +103,6 @@ Here's the conceptual fragments design for our app:
 ---------------------------------------------
 ```
 
-
 I'll split the HTML page into these fragments. Because we render them via Thymeleaf, we can split each into their dedicated file for a cleaner separation. At initial load time, we use Thymeleaf's `replace` directive; we use HTMX for asynchronous client-side interactions.
 
 ### Our first interaction
@@ -127,7 +122,6 @@ Here's the HTML code:
 </button>
 ```
 
-
 1. Define the `lines` DOM element
 2. HTMX triggers on the `click` event
 3. HTMX will send a `DELETE` HTTP request to the URL
@@ -145,7 +139,6 @@ fun htmx(todos: MutableList<Todo>) = router {
     }
 }
 ```
-
 
 1. Regular cleanup
 2. Use the `render()` function, instead of `body()` for API calls. Because of our previous file split, we can render only the needed HTML fragment. It uses Thymeleaf for any necessary server-side rendering.
@@ -173,7 +166,6 @@ HTMX offers the `hx-vals` for the JSON payload. However, the URL is different fo
        hx-vals='js:{"checked": event.target.checked}' />            <!--4-->
 ```
 
-
 1. Regular Thymeleaf syntax to check the box if the `todo` is completed
 2. HTMX triggers on `click` events
 3. Send a `PATCH` request to the server, with Thymeleaf having replaced the `id` with the value in the HTML previously
@@ -181,8 +173,7 @@ HTMX offers the `hx-vals` for the JSON payload. However, the URL is different fo
 
 Note that, as explained above, I ignored the response. In a real-world scenario, you should check/uncheck the checkbox depending on the value returned to avoid keeping the server state and the UI in synch.
 
-Conclusion
-----------
+## Conclusion
 
 In the two previous articles, I described Vue and Alpine. We configured Spring Boot to return JSON. With HTMX, we configured it to return HTML. Additionally, we didn't need any JavaScript code to send the requests from the client.
 
@@ -193,7 +184,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 **To go further:**
 
 * [HTMX](https://htmx.org/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/5/) on October 6^th^, 2024*

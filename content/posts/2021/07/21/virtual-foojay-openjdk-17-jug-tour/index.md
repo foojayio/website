@@ -33,8 +33,6 @@ Here's the (growing) roster of topics!
 
 ### Java Core
 
-
-
 **OpenJDK 17: Get Ready for the Next LTS Java** , *Simon Ritter (Azul* ).   
 
 With the release of OpenJDK 17, all OpenJDK distributions will be providing long-term support (LTS) for this version of the Java platform. Many Java users currently running on OpenJDK 8 or OpenJDK 11 will want to migrate their production environments to OpenJDK 17. This will enable them to take advantage of the numerous new features and enhancements made possible by the six-month release cadence introduced in 2017.
@@ -44,8 +42,6 @@ This session will provide details of changes to the Java platform covering OpenJ
 By the end of this session, you'll be all set to take advantage of all the modern Java features!
 
 **Status: Booked September 9, St. Louis JUG (USA)**
-
-
 
 **Pattern Matching \& Sealed Classes: Best Features of OpenJDK 17?** *Deepu K Sasidharan (JHipster)* .   
 
@@ -57,8 +53,6 @@ Let's see all the possibilities with it first and then we will look at the new S
 
 **Status: Booked September 23, Silesia JUG (Poland)**
 
-
-
 **Say 'No' to JNI,** *Carl Dea (Azul)*
 
 As a Java developer, you may have a need to access native libraries, such as Tensorflow, SqlLite, ffmpeg, OpenGL, but later find that JNI is your default choice. JNI (Java Native Interface) requires native code to be installed. You'll quickly find that JNI wrapper code is difficult to maintain.
@@ -69,8 +63,6 @@ The aim of this talk will be to provide a friendly introduction to OpenJDK 17's 
 
 **Status: Booked September 21, KnoxJava (USA)**
 
-
-
 **Securing and Exploiting Java Applications** , *Erik Costlow (Contrast Security)*
 
 OpenJDK 17 makes the interesting decision that deprecating a security feature (the SecurityManager) can actually improve security of the platform and running applications, setting out a path to remove a feature that hasn't been used and hasn't blocked many exploits.
@@ -79,15 +71,11 @@ By understanding how modern Java applications are attacked, teams can better pos
 
 We will lay out where different defense and monitoring capabilities have gone, including new features such as serialization filters and OpenJDK Flight Recorder.
 
-
-
 ****Data Science on the JVM with Kotlin and Zeppelin**** , *Pratik Patel (Azul)*
 
 The world of Data Science heavily uses Python and Python libraries such as NumPy and Pandas. While Python is a great platform, it does have some drawbacks - one of which is performance. As Java developers, we enjoy the familiarity of the JVM and the constellation of tools and libraries available for this high-performance platform.  
 
 In this session, Pratik will introduce you to Data Science using the popular Kotlin language that runs on the JVM. We'll do this using an interactive platform called Apache Zeppelin. Similar to Jupyter Notebooks, Zeppelin allows you to write code, formatted text, and use a myriad of plugins to process, analyze, and display data. With its integration with Spark, you can also prototype and develop solutions for Big Data in a fun and interactive way!
-
-
 
 **Are All OpenJDK Builds Created Equal?** , *Simon Ritter (Azul*).
 
@@ -103,10 +91,6 @@ By the end, you'll have a clear understanding of the benefits of OpenJDK certifi
 
 **Status: Booked September 28, Garden State JUG (USA)**
 
-<br />
-
-
-
 **Your Java Code in the Fastlane: Creating a Million Virtual Threads Using Project Loom to Improve Throughput** , *Bazlur Rahman (Contrast Security)*   
 
 Project loom introduces virtual threads, lightweight threads that aim to dramatically reduce the effort of writing, maintaining, and monitoring high-throughput concurrent applications with the Java platform.
@@ -119,15 +103,11 @@ This talk will explore what virtual threads are, how they are implemented, how t
 
 ### Java Cloud
 
-
-
 ***Getting Started with Jakarta EE*** , *Rudy De Busscher (Payara).*
 
 With the release of Jakarta EE 9.0, for the first time, a major breaking change is made, the change of the namespace. This allows the evolution of the Enterprise Platform under the wings of the Eclipse Foundation. Although Java Enterprise has a history of more than 20 years, it is also experiencing a new start now that it is managed by the Eclipse Foundation.
 
 In this session, we will cover the basics of setting up a Jakarta EE 9 application, creating REST endpoints, accessing the database, and creating a rich user interface. You will learn that it is not only easy to get your application running on an Application Runtime, but bringing it into a containerized environment and Kubernetes is just as easy as writing a simple Hello World application.
-
-
 
 **Enhanced Java Elasticity with OpenJDK 17** *, Ruslan Synetsky (Jelastic)* .  
 
@@ -137,15 +117,11 @@ In this session, we'll cover the main achievements in vertical scaling of Java, 
 
 Join the session to find out how to keep Java up to date, as well as make your cloud environments more flexible and adjustable to the load while lowering total cost of ownership.
 
-
-
 **Leveraging OpenJDK 17 to Create End-to-End JavaFX-to-Cloud applications** , *Johan Vos (Gluon)* .   
 
 Real world applications don't live in silos. Cloud services process data coming from client systems. Client applications generate tons of data that need to processed by enterprise applications. The Java platform works on both enterprise and cloud systems, as well as on client systems. A client application with a modern user interface created with JavaFX can leverage modern OpenJDK 17 APIs, so that they can integrate with Java Cloud applications and share some code.   
 
 In this session, we'll show real-time data synchronization between clients and between clients and a Cloud service; remote function invocation, where a client invokes a serverless function in a serverless container; data processing on a backend system, real-time connected with a user interface on a client.
-
-
 
 **Cloud-Native Java in Times of OpenJDK 17** , *Clement Escoffier (Red Hat)* and*Georgios Andrianakis (Red Hat)* .   
 
@@ -153,15 +129,11 @@ OpenJDK 17 introduces plenty of features that significantly ease writing modern 
 
 Come see how records, pattern matching, and sealed classes help build Cloud Native Java applications and how to package and run these applications in containers.
 
-
-
 **Leveraging OpenJDK 17 features with Jakarta EE,** *Ivar Grimstad (Eclipse Foundation)* .   
 
 Jakarta EE 9 lowered the barriers of entry and established a foundation for future innovation paving the way for Jakarta EE 10. You have probably heard that the minimum runtime supported by Jakarta EE 10 will be Java SE 11. That means that the APIs will be able to use OpenJDK 11 language features, and will be compiled to OpenJDK 11. This also applies to the TCK. However, in Jakarta EE 9.1, the signature tests were updated to be able to test across multiple Java levels. This means that compatible implementations of Jakarta EE 10 may certify using OpenJDK 17.   
 
 In this session, I will show how easy it is to get started using OpenJDK 17 features in a Jakarta EE application.
-
-
 
 **Jakarta EE: Present and Future** , *Reza Rahman (Microsoft)* .   
 
@@ -171,15 +143,11 @@ You should come to this session with your thinking caps on and your sleeves roll
 
 **Status: Booked October 14, St. Louis JUG (USA)**
 
-
-
 **Why Jakarta EE Matters** , *Ryan Cuprak (Dassault Systems)*
 
 Jakarta EE is now over 20 years old and despite its age, it is as relevant today as it was back in 1999. It is one of the few open standards for developing enterprise applications with multiple independent vendor implementations. Its APIs are central to developing Java based cloud solutions. It is as relevant today as it was back in 1999.
 
 This presentation will provide context to Jakarta EE and why businesses choose to use it!
-
-
 
 **7 Reasons to Switch to OpenJDK 17 as a Jakarta EE Developer** , *Rudy De Busscher (Payara).*
 
@@ -189,8 +157,6 @@ Learn about these features and improvements including Records, Text blocks, Garb
 
 ### JavaFX
 
-
-
 **One Codebase, Six Platforms: JavaFX 17 on Every Client** , *Johan Vos (Gluon)* .   
 
 JavaFX follows the release cadence defined by the OpenJDK project. Every 6 months, a new major version of JavaFX is released.
@@ -199,8 +165,6 @@ In this session, we talk about the new features and fixes that are introduced in
 
 You will learn how the latest version of JavaFX can be used in conjunction with the latest Java release and how to create modern user interfaces that are cross-platform and that can be deployed on desktop, mobile, and embedded devices.
 
-
-
 **FXGL 17: Roadmap for the Future of JavaFX Game Development** , *Almas Baimagambetov (University of Brighton)* .  
 
 FXGL 11 has been a success among JavaFX developers, leveraging high-performance cross-platform support. FXGL seamlessly extends JavaFX to bring support for real-world game development concepts and techniques, which can be used in both Java and Kotlin.  
@@ -208,8 +172,6 @@ FXGL 11 has been a success among JavaFX developers, leveraging high-performance 
 In this session, we will cover the latest features the current version offers and outline key milestones for FXGL 17.
 
 ### Raspberry Pi
-
-
 
 **Current state of Java, JavaFX, and Pi4J on the Raspberry Pi** , *Frank Delporte (Toadi)* .   
 
@@ -220,8 +182,6 @@ But did you know that the Raspberry Pi is also a perfect match for running the l
 In this session, you will be introduced to all of these topics with references and examples to get you started and learn more.
 
 **Status: Booked August 26, Manchester JUG (UK)** and **Booked September 27, Jozi JUG**
-
-
 
 **100% Pure Java on the Raspberry Pi** , *Dieter Holz (FHNW University of Applied Sciences)* .   
 
@@ -234,8 +194,6 @@ And you just need the OpenJDK and four libraries: JavaFX, FXGL, Pi4J, and JavaCV
 In this talk, you will see all the things that are needed besides the available libraries---ready made Linux images, Maven based, well documented template projects that enable development on laptops, and remote starting and debugging of apps on the Raspberry Pi, while you will also be shown the best practices of how to combine, for example, a GUI with a PUI (Physical User Interface). The fun is back. And the fun is 100% pure Java.
 
 ### Miscellaneous
-
-
 
 **From Java Records to Quantum Computing** *, Johan Vos (Gluon)* .   
 

@@ -35,20 +35,17 @@ If you don't already have JBang installed, you can install it by following these
 brew install jbangdev/tap/jbang
 ```
 
-
 #### **On Linux**
 
 ```
 curl -Ls https://sh.jbang.dev | bash -s - app setup
 ```
 
-
 After installing JBang, you can verify the installation by running:
 
 ```
 jbang --version
 ```
-
 
 ### Step 2: Initialize Your JBang Script
 
@@ -58,7 +55,6 @@ First, we need to initialize our JBang script. You can do this by running the fo
 jbang init release-notes.java
 ```
 
-
 This will create a basic Java file. It starts with a shebang line. In Unix-like environments (macOS, Linux, etc.), the operating system tells the user how to execute the script when running it directly from the terminal. This special line tells your computer's terminal to use JBang to run the script, making it behave like a standalone command. This special line ensures that even without explicitly calling JBang, your script will execute seamlessly, handling dependencies and running the Java code effortlessly.
 
 To open it in your IDE, you can use:
@@ -66,7 +62,6 @@ To open it in your IDE, you can use:
 ```
 jbang edit --sandbox release-notes.java
 ```
-
 
 This creates a sandbox environment and sets up a Gradle project for you. You can then open it on your favourite IDE.
 
@@ -89,7 +84,6 @@ JBang's \*\*`//DEPS` directive makes dependency management a breeze. You just ne
 //DEPS io.github.openfeign:feign-jackson:11.8
 //DEPS ch.qos.logback:logback-classic:1.5.6
 ```
-
 
 When working with JBang, you can easily add dependencies to your script using the `//DEPS` directive. This format allows you to include external libraries directly in your script, simplifying the process of managing dependencies.
 
@@ -117,7 +111,6 @@ private static void configureLogback() {
    rootLogger.setLevel(Level.DEBUG);
 }
 ```
-
 
 For this, I need a custom appender.
 
@@ -152,7 +145,6 @@ static class PicoCLIColorizedAppender extends ConsoleAppender<ILoggingEvent> {
 }
 ```
 
-
 ### **Step 5: Configure ObjectMapper**
 
 Next, we configure the `ObjectMapper` for JSON serialization and deserialization:
@@ -169,7 +161,6 @@ public class release_notes {
     //Other code.
 }
 ```
-
 
 ### **Step 6: Feign-tastic GitHub Client**
 
@@ -216,7 +207,6 @@ record CommitDetails(String message, Author author) {}
 record Author(String email, Instant date) {}
 ```
 
-
 Note that we called a method getApiToken() when creating the client. We need to implement this.
 
 ```
@@ -259,7 +249,6 @@ static String getApiToken() {
    }
 }
 ```
-
 
 This code fetches your GitHub API token securely. It first checks if a cached token exists. If not, it uses the "gh" command-line tool to get your authentication status. It launches the "gh" login process if you're not logged in. Once logged in, it extracts your API token from the "gh" output and caches it for future use. If there are any errors during this process, it throws an exception.
 
@@ -330,7 +319,6 @@ class ReleaseNoteCommand implements Callable<Integer> {
 }
 ```
 
-
 This Java code defines a command-line tool (`ReleaseNoteCommand`) for generating release notes from a GitHub repository. It uses PicoCLI to handle command-line arguments, such as GitHub user, repository, commit range, output format, and optional version and output file. It fetches commit data using a `GitHubClient`, processes it to categorize changes (features, bug fixes, other), and then formats the information into either Markdown or HTML release notes.
 
 Finally, it either saves the release notes to a specified file or prints them to the console.
@@ -357,7 +345,6 @@ public class release_notes {
 }
 ```
 
-
 **Your CLI Script is Ready!**
 
 To put this creation to work, run it with the following command (adjusting the arguments to match your repository):
@@ -365,7 +352,6 @@ To put this creation to work, run it with the following command (adjusting the a
 ```
 ./release_notes.java -u rokon12 -r cargotracker -s 44e55ce -ut 50814d1 -f release -o HTML
 ```
-
 
 This will generate an HTML file in your root directory.
 
@@ -387,12 +373,9 @@ Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
   -v, --version=<version>   Release version (optional)
 ```
 
-
 It will print on the terminal if we don't want to save it in any file.
 
 <img decoding="async" class="alignnone size-medium wp-image-113687" src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.png" alt="" width="700" height="290">
-
-<br />
 
 That's it.
 
@@ -405,7 +388,3 @@ This tool, easily integrated into your CI/CD pipelines, empowers you to create d
 Feel free to tailor it further to match your specific workflow.
 
 Let me know if you'd like me to elaborate on any specific code section or aspect!
-
-<br />
-
-<br />

@@ -28,8 +28,7 @@ Many alternatives are available to configure your Spring app.
 
 I'd like to list them in this post, leaving Spring Boot out of the picture on purpose.
 
-Core concepts
--------------
+## Core concepts
 
 A couple of concepts are central in Spring. The related documentation doesn't describe most of them. Here is my understanding of them:
 
@@ -40,14 +39,11 @@ A couple of concepts are central in Spring. The related documentation doesn't de
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-49678" src="spring-concepts-700x492.png" alt="" width="700" height="492">
 
-<br />
-
 To configure a Spring application, one creates one or more contexts and registers the necessary bean definitions in the desired ones. In the following sections, we will configure the following simple model:
 
 ![](application-model.png)
 
-Property file
--------------
+## Property file
 
 Yes, you read that well: you can actually configure beans via a property file. It was the first way to do it, and though **it's deprecated**, it still works.
 
@@ -60,7 +56,6 @@ jane.(class)=ch.frankel.blog.Person       # 3
 jane.$0=Jane Doe                          # 4
 jane.$1(ref)=john                         # 5
 ```
-
 
 1. Define a new bean with name `john` and of class `Person`
 2. Set the single constructor argument to pass
@@ -79,7 +74,6 @@ reader.loadBeanDefinitions(properties);                       // 5
 context.refresh();                                            // 6
 ```
 
-
 1. Create a new empty context
 2. Get its underlying bean factory
 3. Create a reader over the bean factory
@@ -87,8 +81,7 @@ context.refresh();                                            // 6
 5. Parse the file to create bean definitions in the context
 6. Instantiate the beans from the beans definitions
 
-XML
----
+## XML
 
 XML is the way most developers think about when they configure a Spring application. It has been available for ages and still is today. To use it, we only have to transform the previous property file to XML format:
 
@@ -107,18 +100,15 @@ XML is the way most developers think about when they configure a Spring applicat
 </beans>
 ```
 
-
 Because of its widespread usage, configuring a context and populating it with beans can be implemented in a one-liner:
 
 ```java
 var context = new ClassPathXmlApplicationContext("beans.xml");   // 1
 ```
 
-
 1. Create the application context, parse the XML file, create the bean definitions, and refresh the context!
 
-Groovy DSL
-----------
+## Groovy DSL
 
 One can alternatively also use Groovy. For that, Spring provides a dedicated .
 
@@ -131,18 +121,15 @@ beans {
 }
 ```
 
-
 To use it for configuration is also a one-liner:
 
 ```java
 var context = new GenericGroovyApplicationContext("beans.groovy");
 ```
 
-
 Just remember that Groovy is not a first-class citizen in the Spring ecosystem anymore.
 
-Self-annotated classes
-----------------------
+## Self-annotated classes
 
 When Spring introduced self-annotated classes not long after Java 5, people considered them a significant improvement over XML. With this approach, you add annotations to your code that Spring recognizes at startup time. For me, it's a bit odd to use Spring to make one's code more decoupled and to end up coupling it to a third-party framework.
 
@@ -164,7 +151,6 @@ class Jane extends Person {
 }
 ```
 
-
 1. Mark the class for registration. Spring will instantiate a bean named after the class name, unqualified and uncapitalized
 2. Inject the bean of class `John`. Alternatively, we could inject *by name* by having the parameter `@Qualifier("john") person`. Note that since it's auto-wiring, we need to reduce the number of candidates to *one* , and there are two `Person` beans.
 
@@ -176,11 +162,9 @@ To create the context with self-annotated classes is straightforward:
 var context = new AnnotationConfigApplicationContext(John.class, Jane.class);
 ```
 
-
 Note that you need to explicitly list all the necessary classes you want to be part of the context. Spring Boot makes it easier for you by implementing *classpath scanning*, so you don't need explicit listing.
 
-Configuration classes
----------------------
+## Configuration classes
 
 As mentioned above, self-annotated classes have a couple of downsides:
 
@@ -205,7 +189,6 @@ public class AppConfiguration {
 }
 ```
 
-
 1. Mark the class as a configuration class
 2. The container will register the return value of this method as a bean
 3. As the context contains two `Person` beans, we need to inject *by name*
@@ -216,9 +199,7 @@ As usual, it's straightforward to create a context from the above configuration 
 var context = new AnnotationConfigApplicationContext(ClassConfigurator.class);
 ```
 
-
-Kotlin DSL
-----------
+## Kotlin DSL
 
 The Kotlin DSL is the latest newcomer to the available alternatives. It avoids the usage of annotations.
 
@@ -236,7 +217,6 @@ GenericApplicationContext().apply {             // 1
 }
 ```
 
-
 1. Instantiate a new context
 2. Create the bean definition DSL
 3. Define a named bean
@@ -244,14 +224,11 @@ GenericApplicationContext().apply {             // 1
 5. Add the bean definitions to the context
 6. Instantiate the beans from the beans definitions
 
-Bean definitions
-----------------
+## Bean definitions
 
 All the previous configuration alternatives provide an abstraction layer over bean definitions. Then, the container creates beans out of bean definitions. We can bypass these abstraction layers and directly use the bean definition API.
 
 <img decoding="async" class="aligncenter size-medium wp-image-49680" src="bean-definition-class-700x312.png" alt="" width="700" height="312">
-
-<br />
 
 Let's first define a specialized bean definition:
 
@@ -274,7 +251,6 @@ public class PersonBeanD extends GenericBeanDefinition {
 }
 ```
 
-
 1. Set the bean class
 2. Set the argument and its type
 3. Set the arguments
@@ -288,19 +264,15 @@ context.registerBeanDefinition("jane", new PersonBeanD("Jane Doe", "john")); // 
 context.refresh();                                                           // 3
 ```
 
-
 1. Create the context
 2. Register the bean definition
 3. Instantiate the beans from the beans definitions
 
-Beans
------
+## Beans
 
 Spring provides a simple API for simple bean definitions, so we don't need to create dedicated bean definition classes. This mechanism creates such a definition when necessary.
 
 <img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-49681" src="bean-registration-700x156.png" alt="" width="700" height="156">
-
-<br />
 
 Here's the code to create the sample configuration:
 
@@ -311,9 +283,7 @@ context.registerBean("jane", Person.class, "Jane Doe", "john");
 context.refresh();
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Spring is based on several core concepts: bean factories, contexts, bean definitions, and beans.
 

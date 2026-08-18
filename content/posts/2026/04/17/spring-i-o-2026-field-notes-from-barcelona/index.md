@@ -20,8 +20,7 @@ frozen: false
 
 Spring I/O 2026 wrapped in Barcelona on Wednesday. Three days at the Palau de Congressos. A thousand-plus developers, five tracks, sixty sessions (or there abouts) Here are the things I'm still thinking about..
 
-Agents everywhere
------------------
+## Agents everywhere
 
 It was a Spring AI conference with a Spring Boot conference attached.
 
@@ -29,8 +28,7 @@ That's not a complaint. Count the programme yourself. Across the two main days, 
 
 A few years ago the headline topics were reactive programming, observability, Kotlin adoption. This year the big rooms belonged to agents. Hallway conversations tracked the programme. Prompts, tool-calling, MCP clients, evaluation harnesses. The classic Java-platform conversations still happened. They were in smaller groups and later in the evening.
 
-Rod Johnson on the road
------------------------
+## Rod Johnson on the road
 
 Rod Johnson gave *Building Killer AI Agents on Your Spring Stack with Embabel*.
 
@@ -38,20 +36,17 @@ Four days earlier he gave essentially the same pitch to the London Java Communit
 
 Right now that topic is agents and AI, not Spring.
 
-The sessions that didn't get the main stage
--------------------------------------------
+## The sessions that didn't get the main stage
 
 Migration content was on the programme if you went looking. Raquel Pau ran a session on *Hybrid Modernization* , pairing OpenRewrite's precision with LLMs. Moritz Halbritter gave *Inside Spring Boot 4: Restructuring for the Future* . Tim te Beek and Merlin Bögershausen ran a full workshop on *Prepare Your Next Spring Boot Migration* . Juergen Hoeller on *Core Resilience Features in Spring Framework 7*. All worth your time when Spring I/O put the videos up.
 
-A few things from the HeroDevs corner
--------------------------------------
+## A few things from the HeroDevs corner
 
 Two colleagues on the programme. Anthony Dahanne spoke on *Paketo Buildpacks: the Spring Boot way to build images, and more!* Marcin Grzejszczak followed with *From Contracts to Confidence: Spring Cloud Contract 5 in the Age of AI*. Watch both when the videos land.
 
 Over at our booth, Wendy ran what I think is the best prize draw of the week: 3D-printed articulated dragons and dragon eggs. If you were at Spring I/O and walked past without picking one up, I'm sorry, but also: what were you doing.
 
-The documentary
----------------
+## The documentary
 
 One other thing worth flagging. A Spring documentary I appear in released its trailer yesterday. [You can watch it on YouTube.](https://youtu.be/4qTwA6Y1-OI) I'll say more about it when the full piece drops.
 
@@ -61,8 +56,7 @@ And since the topic is Spring anyway: if you want a five-minute reality check on
 
 Turns out most Spring developers are just 'ok' on things like this. Well when I say most - it was about 100 devs @ Spring IO. Next week we're at JCON and Devoxx France so maybe the answers will be different.
 
-What I'm taking home
---------------------
+## What I'm taking home
 
 The Spring ecosystem is in the middle of something bigger than a framework upgrade. The shift from "web framework" to "agent platform" is the story this year and it's going to keep getting louder through the rest of 2026. That's a genuinely interesting place to be standing, if you like being on ground that moves.
 

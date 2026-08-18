@@ -25,8 +25,7 @@ HTTP POST, on the other hand, carries the query in the request payload rather th
 
 What is missing is clear: a method that is **safe and idempotent like GET but carries content like POST**. Until June 2026, HTTP did not have such a method in standardized form.
 
-The QUERY Method
-----------------
+## The QUERY Method
 
 To address this need, the IETF introduced the QUERY method in [RFC 10008](https://www.rfc-editor.org/info/rfc10008/). QUERY is the first new HTTP method since RFC 5789 was standardized in 2010.
 
@@ -56,13 +55,11 @@ A QUERY response may include a Location header pointing to a URI that represents
 
 The RFC [recommends specific status codes](https://datatracker.ietf.org/doc/html/rfc10008#section-2.1) for the failure cases: 400 when media type information is missing, 415 when the media type is not supported by the resource, and 422 when the content is well formed but the query cannot be processed.
 
-A decade in the making
-----------------------
+## A decade in the making
 
 The RFC had a long journey. The idea traces back to [WebDAV](https://datatracker.ietf.org/doc/html/rfc4918)'s SEARCH method ([RFC 5323](https://datatracker.ietf.org/doc/rfc5323/), 2008), which demonstrated the demand for body-driven queries but remained confined to the XML-based WebDAV ecosystem. In 2021, the HTTP Working Group adopted the effort as a working group item, moving it from an individual proposal into the IETF standardization process. The method was later renamed from SEARCH to QUERY to avoid confusion with the existing WebDAV SEARCH method and to better reflect its purpose. The document was published as RFC 10008 in June 2026. Eleven years from the first draft to Proposed Standard is a useful reminder that even a seemingly simple addition to HTTP touches an enormous installed base and therefore receives extensive scrutiny.
 
-Where ecosystem support stands today
-------------------------------------
+## Where ecosystem support stands today
 
 As of July 2026, HTTP QUERY has completed the standardization phase with RFC 10008, but ecosystem adoption remains in its early stage. Many HTTP servers and proxies can forward QUERY requests without protocol changes, but native support across frameworks, browser APIs, caches, WAFs, and API tooling is still emerging. The primary barrier is no longer the protocol itself, but the large installed base of software that assumes a fixed set of HTTP methods.
 
@@ -80,15 +77,13 @@ Eclipse Jetty has an open pull request ([jetty/jetty.project#15316](https://gith
 
 There is an open issue ([jakartaee/servlet#1068](https://github.com/jakartaee/servlet/issues/1068)) proposing the addition of QUERY to the specification itself, so that `HttpServlet` gains first-class support and QUERY requests receive the same form parameter processing model currently defined for POST. This is arguably the most significant milestone for the broader Jakarta EE ecosystem, because it moves QUERY from container-specific support into the platform specification itself. Once Servlet defines QUERY, application servers such as WildFly, Payara, and Open Liberty can inherit support through their servlet containers as they move to the new specification level. As of this writing, none of them has shipped QUERY support ahead of the specification.
 
-What about Spring?
-------------------
+## What about Spring?
 
 Spring deserves its own section because of how request mapping is modeled. Spring MVC and WebFlux expose their annotation-based request mapping model through the `RequestMethod` enum, and that enum currently contains GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, and TRACE. There is no `RequestMethod.QUERY`, which means you cannot declaratively map a QUERY request through Spring's annotation-based programming model today. The available workarounds are awkward and bypass Spring's normal request-mapping model: declare a generic mapping and inspect `request.getMethod()` manually, or implement a custom `RequestMappingHandlerMapping`.
 
 Unlike the Servlet case, this is not primarily a container problem; it is primarily a framework API and abstraction problem. The Spring team is aware. A community pull request adding QUERY support ([spring-projects/spring-framework#34993](https://github.com/spring-projects/spring-framework/pull/34993)) has been open since before RFC 10008 was published. It supersedes a feature request that had remained open for nearly two years, and maintainers have indicated an intention to target Spring Framework 7.1, currently expected in November 2026. There is even a naming collision to solve first: the obvious convenience annotation `@QueryMapping` is already used by Spring for GraphQL.
 
-Why Quarkus can do it today
----------------------------
+## Why Quarkus can do it today
 
 This is where an underappreciated property of HTTP pays off: **the request method is simply a token defined by the HTTP grammar** . A server does not need to have built-in knowledge of every method to parse it. Quarkus builds its HTTP layer on Netty and Vert.x, and neither requires the method to be one of a predefined set; the request can reach the routing layer without requiring special handling for QUERY. On top of that, Jakarta REST has had a standard extension point for custom methods since JAX-RS 1.0: the `@HttpMethod` meta-annotation, the same mechanism that has enabled JAX-RS applications to expose WebDAV methods like PROPFIND for years.
 
@@ -101,11 +96,9 @@ Put the two together and RFC 10008-compatible QUERY endpoints in Quarkus require
 public @interface QUERY { }
 ```
 
-
 The remaining work is implementing RFC 10008 semantics at the application layer, which is precisely what the example project demonstrates.
 
-The example: a product catalog you can QUERY
---------------------------------------------
+## The example: a product catalog you can QUERY
 
 The demo repository is available on GitHub: [hakdogan/http-query-method](https://github.com/hakdogan/http-query-method). It is a small Quarkus application exposing a product catalog at `/products`, deliberately compact, with only a handful of classes, but each RFC 10008 concept has a concrete counterpart in the code.
 
@@ -123,7 +116,6 @@ public Response query(ProductFilter filter) { ... }
 public Response queryForm(String body) { ... }
 ```
 
-
 So both of these work, and mean the same thing:
 
 ```bash
@@ -135,7 +127,6 @@ curl -X QUERY http://localhost:8080/products \
     -H 'Content-Type: application/x-www-form-urlencoded' \ 
     -d 'category=laptop&maxPrice=2000'
 ```
-
 
 ```shell
 
@@ -157,7 +148,6 @@ Cache-Control: no-transform, max-age=60 ETag: "f675e29b"
 [{"category":"laptop","id":2,"name":"ThinkPad X1 Carbon","price":1899.00}, ...]
 ```
 
-
 Three headers carry the RFC's ideas:
 
 * **Accept-Query** advertises which media types the resource accepts as query content. In the demo it is added by a small response filter.
@@ -169,7 +159,6 @@ HTTP/1.1 304 Not Modified
 ETag: "f675e29b"
 ```
 
-
 This is the answer to "*why not just POST*": QUERY was designed to provide query semantics without giving up the cache-friendly properties associated with safe methods.
 
 ### Discovery without prior knowledge
@@ -180,7 +169,6 @@ How does a client discover that a resource supports QUERY? One OPTIONS request:
 curl -i -X OPTIONS http://localhost:8080/products
 ```
 
-
 The response answers with two headers, one listing the methods the resource accepts and one listing the media types it accepts as query content:
 
 ```bash
@@ -188,7 +176,6 @@ HTTP/1.1 200 OK
 Allow: HEAD, QUERY, GET, OPTIONS 
 Accept-Query: application/json, application/x-www-form-urlencoded
 ```
-
 
 In this case, Quarkus generated the Allow header automatically, including QUERY, simply because a resource method is bound to it.
 
@@ -198,8 +185,7 @@ The demo's test suite covers the filtering logic, the media type handling, the e
 
 The key lesson from this example is not how QUERY was implemented, but why it was possible: the HTTP extension point already existed, and the framework did not need to invent a new abstraction.
 
-Conclusion
-----------
+## Conclusion
 
 QUERY is not a revolution; it is the standardization of a pattern that many systems have implemented through POST-based query endpoints for years. That is exactly why it matters. The gap between "*works* " and "*works with the guarantees the protocol gives you*" is where caching, idempotent retries, and better tooling become possible.
 
@@ -209,8 +195,7 @@ The protocol was ready for extension; the interesting question was whether the l
 
 The complete example, including all tests, is available on GitHub: [hakdogan/http-query-method](https://github.com/hakdogan/http-query-method).
 
-References
-----------
+## References
 
 * RFC 10008, The HTTP QUERY Method: <https://www.rfc-editor.org/info/rfc10008/>
 * IETF Datatracker, document history: <https://datatracker.ietf.org/doc/rfc10008/>

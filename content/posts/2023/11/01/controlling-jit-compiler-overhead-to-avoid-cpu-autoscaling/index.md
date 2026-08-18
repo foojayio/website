@@ -36,8 +36,7 @@ Here's a teaser of what the before and after looks like. Let's check it out step
 ![](before_after-700x323.png)
 > Disclaimer: This blog post explores advanced JVM JIT tuning techniques. While these methods are not necessary for most users, they are intended to showcase how to achieve optimal hardware utilization. Default settings usually provide excellent performance for common use cases. Proceed with caution; these techniques are intended for advanced users familiar with their implications.
 
-Step 1: Starting the Journey
-----------------------------
+## Step 1: Starting the Journey
 
 Let's use the previously mentioned scenario: Start the Java workload, set 1 minute as the threshold for the JVM to stabilize the performance/CPU utilization (so-called post-warmup phase), and after 1 minute, activate the autoscaler to scale up if the CPU utilization goes above a certain threshold (e.g. 50%). As operators of the JVM, we can't control how much CPU the application itself consumes (it depends on the load). The goal is therefore to control the CPU consumed by the JIT compiler in the post-warmup phase to ensure that we're scaling because of increased load, not due to JIT activity.
 
@@ -57,8 +56,7 @@ In order to achieve our goal (minimize JIT compiler activity after 60 seconds), 
 
 Let's take a look at each of these areas in detail and see the effects step-by-step.
 
-Step 2: Compiling as Soon as Possible Using ReadyNow
-----------------------------------------------------
+## Step 2: Compiling as Soon as Possible Using ReadyNow
 
 Once the JVM is started, time is ticking. The ultimate goal is to complete as many compilations as possible, ideally all, before the autoscaler starts monitoring. In order to do that, we start with utilizing ReadyNow, which accomplishes two things:
 
@@ -73,7 +71,6 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-
 ![](step2-700x323.png)
 
 After applying ReadyNow, we see two things:
@@ -83,8 +80,7 @@ After applying ReadyNow, we see two things:
 
 As a checkpoint, we were able to achieve a minor shortening of the warmup period and noticeably better post-warmup behavior. But, we're very far from our 1 minute mark. Can we do better?
 
-Steps 3-4: Adjusting Available CPU During and Post-Warmup
----------------------------------------------------------
+## Steps 3-4: Adjusting Available CPU During and Post-Warmup
 
 ### Specifying the Warmup Period
 
@@ -123,7 +119,6 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-
 ![](step3-700x323.png)
 
 Using `-XX:CompilerTier2BudgetingWarmupCPUPercent=100` , the Falcon compiler uses all the available CPU for the duration of the warmup period. This is in contrast with the default behavior where the heuristics wouldn't assign that much CPU dedication to the Falcon compiler.
@@ -144,7 +139,6 @@ JVM flags used:
 -XX:CompilerTier2BudgetingWarmupCPUPercent=100 
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
-
 
 ![](step4-700x323.png)
 
@@ -167,8 +161,7 @@ These aspects need to be tested and assessed for the specific applications. Howe
 
 To add a cherry on top, let's try to polish the compilation activity slightly more.
 
-Step 5: Further Reducing Amount of Compilations
------------------------------------------------
+## Step 5: Further Reducing Amount of Compilations
 
 ### Introduction to Compile Threshold
 
@@ -193,15 +186,13 @@ JVM flags used:
 -XX:ProfileLogIn={path to ReadyNow profile}
 ```
 
-
 ![](step5-700x323.png)
 
 The effect of setting `-XX:TopTierCompileThresholdTriggerMillis` can be seen especially in reduction of CPU utilization of the JIT compiler later in the run. In the chart above, compare the number of spikes after \~140 seconds. This is most likely due to all of the important methods having been compiled by then and, by filtering out the not-so-hot methods, the compiler is doing less work.
 
 It goes without saying that using this option is fine-tuning. If you set the time interval too low, the compiler might drop too many methods which impacts performance. In our experience, for real-world applications like Spring Boot-based microservices, the time threshold of 60 seconds is a good starting point.
 
-Final comparison
-----------------
+## Final comparison
 
 To summarize, let's look at the before and after pictures side by side.
 
@@ -209,13 +200,11 @@ To summarize, let's look at the before and after pictures side by side.
 
 We can clearly see that after applying all of the tuning methods outlined here, we were able to closely control the compiler's CPU utilization and optimize CPU load towards our goal of lowering it after 60 seconds. While trying to get away from unwanted scaling, we also improved the total warmup time, getting to the best performance sooner.
 
-Try it yourself but don't hesitate to reach out!
-------------------------------------------------
+## Try it yourself but don't hesitate to reach out!
 
 Azul Platform Prime is [free to download](https://www.azul.com/downloads/#prime) and test in non-production. You're welcome to try it out, but even more welcome to [reach out to us](https://www.azul.com/contact/). Azul Platform Prime is more than just shaping of CPU activity as shown in this post, but Azul Platform Prime can also deliver an extraordinary performance boost to your application, making your throughputs high, latencies low and getting your infrastructure costs under control.
 
-Appendix A: Controlling CPU Spent by Compiler via Thread Counts
----------------------------------------------------------------
+## Appendix A: Controlling CPU Spent by Compiler via Thread Counts
 
 Controlling CPU resources by the JIT compiler has historically been done by adjusting thread counts (compared to CPU percent limit as shown in this post), so not mentioning these options felt incomplete. However, we chose to list the options not only for completeness. There's a very specific use-case where adjusting the CPU resources via thread counts is preferable to CPU budgeting. That is when the JVM is running in a container and is set with CPU limits causing CPU throttling. This topic itself deserves a whole article, but without doubling the scope of this post, we can describe it briefly.
 
@@ -226,10 +215,6 @@ Options which are used to control Falcon JIT compiler thread counts are:
 * `-XX:CIMaxCompilerThreads` - Defines the number of CPU threads which can be dedicated to the compiler. This tells the compiler how many threads (as a maximum value) shall be used for compilation. The default value is dependent on the CPU count.
 * `-XX:CompilerWarmupExtraThreads` - Allows the Falcon compiler to exceed the maximum number of threads during warmup. This option defines how many extra threads over `CIMaxCompilerThreads` the Falcon compiler can use during warmup. After warmup, the value of `CIMaxCompilerThreads` shall be respected. The default value is 0.
 * `-XX:ProfilePreMainTier2ExtraCompilerThreads` - Defines how many extra threads over `CIMaxCompilerThreads` the Falcon compiler can use before main() method is executed.
-
-<br />
-
-<br />
 
 ```
 

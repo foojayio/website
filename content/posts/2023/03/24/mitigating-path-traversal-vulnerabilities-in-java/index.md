@@ -32,8 +32,7 @@ In this article, we'll explore path traversal in file uploads in more detail and
 
 Whether you're a developer or simply interested in learning more about security in Java, this post will provide you with information and insights to help keep your Java applications secure.
 
-Understanding path traversal in file uploads
---------------------------------------------
+## Understanding path traversal in file uploads
 
 Imagine an application that allows users to upload profile pictures. The application stores the profile pictures in a directory on the server, such as `/images/profiles/`.
 
@@ -54,7 +53,6 @@ public String uploadImage (Model model, @RequestParam("image") MultipartFile fil
 }
 ```
 
-
 Web forms are a very common to upload images. When uploading, we use the `originalFilename` from the incoming `MultipartFile`.
 
 If we intercept and inspect the HTTP post call, we see that `filename` is just metadata in this HTTP request shown on line 24.
@@ -64,8 +62,7 @@ With the right tools, it is easy to change the filename to anything we want! Whe
 
 The path will be traversed to the root, and the file will be overwriting `/etc/passwd`.
 
-How Snyk Code detects path traversal.
--------------------------------------
+## How Snyk Code detects path traversal.
 
 Snyk Code is a real-time SAST tool that helps Java developers identify vulnerabilities in their applications --- including path traversal in file uploads. The tool uses a static analysis based on an advanced machine learning model to scan your code and identify potential security risks.
 
@@ -83,8 +80,7 @@ In summary, Snyk Code helps Java developers identify path traversal vulnerabilit
 
 This can help ensure the security of your application and protect against potential attacks.
 
-Mitigating path traversal in file uploads
------------------------------------------
+## Mitigating path traversal in file uploads
 
 The easiest way to fix a path traversal vulnerability is to avoid using the `file.getOriginalFilename()`. If you generate a name yourself, you have absolute control over the location the file gets stored because it is influenced by user input.
 
@@ -108,9 +104,7 @@ public String uploadImage (Model model, @RequestParam("image") MultipartFile fil
 }
 ```
 
-
-Preventing path traversal vulnerabilities is essential.
--------------------------------------------------------
+## Preventing path traversal vulnerabilities is essential.
 
 Path traversal vulnerabilities are a serious threat to the security of Java web applications, and are currently among the top security issues Snyk finds in Java code.
 

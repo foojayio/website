@@ -28,8 +28,7 @@ MongoDB provides strong encryption capabilities, including in transit, at rest, 
 
 In this tutorial, we'll implement this feature using Spring Data MongoDB, applying encryption to sensitive fields in a sample human resources (HR) system.
 
-Why Queryable Encryption?
--------------------------
+## Why Queryable Encryption?
 
 Imagine a common scenario in HR systems: You receive a regulatory requirement to protect employee data using encryption. At first, encrypting fields seems enough. But then comes a second requirement---you also need to search over that encrypted data.
 
@@ -44,8 +43,7 @@ To implement it, we typically follow four steps:
 
 If you're interested in seeing more advanced details about Queryable Encryption, including how to use it directly with the MongoDB Java Driver and a deeper explanation of how it works, I recommend checking out my other article: [Java Meets Queryable Encryption](https://www.mongodb.com/developer/products/atlas/java-queryable-encryption/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=query-foojay&utm_term=tony.kim).
 
-A quick look at Spring Data MongoDB
------------------------------------
+## A quick look at Spring Data MongoDB
 
 Spring Data MongoDB is a module within the Spring ecosystem that makes it easier to work with MongoDB. It provides a familiar way to interact with MongoDB using the Spring programming model.
 
@@ -53,8 +51,7 @@ Starting with version [4.5.0](https://github.com/spring-projects/spring-data-mon
 
 If you're new to using Spring Data with MongoDB or want to explore more advanced use cases, check the [Spring Data Unlocked](https://www.mongodb.com/developer/products/mongodb/springdata-getting-started-with-java-mongodb/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=query-foojay&utm_term=tony.kim) series that walks through these concepts in detail.
 
-Use case: HR system with encrypted fields
------------------------------------------
+## Use case: HR system with encrypted fields
 
 To better understand how Spring Data MongoDB works with Queryable Encryption, we'll build a simple Java application for an HR system. This application will use a document model like the one below:
 
@@ -73,7 +70,6 @@ To better understand how Spring Data MongoDB works with Queryable Encryption, we
 
 }
 ```
-
 
 In this scenario, fields such as pin, ssn, age, and salary will be encrypted using the new annotations introduced in Spring Data MongoDB 4.5, including @Encrypted, @Queryable, and @RangeEncrypted.
 
@@ -95,8 +91,7 @@ At the end, when we open a document in [MongoDB Compass](https://www.mongodb.com
  <img fetchpriority="high" decoding="async" width="535" height="278" src="Screenshot-2025-08-29-at-8.47.45-AM.png" alt="json-block-1" class="wp-image-121111" style="width:535px;height:auto">
 </figure>
 
-Setting up the project
-----------------------
+## Setting up the project
 
 TL;DR
 
@@ -113,8 +108,7 @@ For this demo, we'll add the following dependencies:
 
 Configure the project properties as shown in the image, then generate and unzip the project to get started.
 
-Configuring dependencies and properties
----------------------------------------
+## Configuring dependencies and properties
 
 ### Adding mongodb-crypt
 
@@ -131,7 +125,6 @@ The first thing we need to do is include the mongodb-crypt library in our projec
 
 </dependency>
 ```
-
 
 ### Application.yml configuration
 
@@ -158,7 +151,6 @@ logging:
 
    org.springframework.data.mongodb: DEBUG
 ```
-
 
 Alright, we can see some familiar settings here, like the uri, which defines the connection string to MongoDB, and the database/collection names where our encrypted data will live (hrsystem and employees).
 
@@ -195,11 +187,9 @@ public class AppProperties {
 }
 ```
 
-
 Note: Don't forget to generate getters and setters for all the fields in the AppProperties class.
 
-Building the application layers
--------------------------------
+## Building the application layers
 
 ### The domain model
 
@@ -245,7 +235,6 @@ public record Employee(
 ) {}
 ```
 
-
 Here's a quick look at what each encrypted field does:
 
 * pin is encrypted for confidentiality only.  
@@ -269,7 +258,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
 }
 ```
-
 
 ### The service
 
@@ -341,7 +329,6 @@ public class EmployeeService  {
 }
 ```
 
-
 ### The controller
 
 Finally, let's expose our service layer through a REST controller, allowing the application to receive a HTTP request and interact with the encrypted data:
@@ -408,9 +395,7 @@ public class EmployeeController {
 }
 ```
 
-
-Setting up encryption
----------------------
+## Setting up encryption
 
 Before we can start encrypting data, we need a [Customer Master Key (CMK)](https://www.mongodb.com/docs/manual/core/queryable-encryption/qe-create-cmk/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=query-foojay&utm_term=tony.kim), a secret key that serves as the base for encrypting other keys used by the database.
 
@@ -510,9 +495,7 @@ public class LocalCMKService {
 }
 ```
 
-
-Configuring the MongoDB encryption layer
-----------------------------------------
+## Configuring the MongoDB encryption layer
 
 To bring everything together, let's now create the MongoEncryptionConfiguration class. This is where we configure our MongoDB client to support Queryable Encryption, define how keys are loaded, and ensure our encrypted collection is created at startup:
 
@@ -544,7 +527,6 @@ public class MongoEncryptionConfiguration implements ApplicationRunner {
 }
 ```
 
-
 ### Defining the encryption configuration
 
 Great! Now, in the same **MongoEncryptionConfiguration** class, let's start adding a few methods. First, we configure the path to the native mongodb_crypt library we downloaded earlier:
@@ -560,7 +542,6 @@ private Map<String, Object> createExtraOptions() {
 
 }
 ```
-
 
 Next, we build the AutoEncryptionSettings, which defines the encryption behavior for the client:
 
@@ -582,7 +563,6 @@ private AutoEncryptionSettings getAutoEncryptionSettings() throws IOException {
 }
 ```
 
-
 We then use these settings to build the custom MongoClientSettings:
 
 ```
@@ -600,7 +580,6 @@ private MongoClientSettings getMongoClientSettings() throws IOException {
 
 }
 ```
-
 
 ### Defining Spring beans
 
@@ -626,7 +605,6 @@ MongoOperations mongoTemplate(MongoClient mongoClient) {
 
 }
 ```
-
 
 ### The encrypted collection
 
@@ -664,7 +642,6 @@ private void createCollectionFromSchema(MongoOperations template, ClientEncrypti
 }
 ```
 
-
 ### Creating the ClientEncryption
 
 To interact with the key vault and create encrypted collections, we need a ClientEncryption instance:
@@ -692,7 +669,6 @@ private ClientEncryption createClientEncryption() throws IOException {
 
 }
 ```
-
 
 ### Initializing the collection on startup
 
@@ -725,7 +701,6 @@ private void initializeEncryptedCollection(MongoOperations template) throws IOEx
 
 }
 ```
-
 
 ### Inserting sample data for testing
 
@@ -779,11 +754,9 @@ public class SampleDataLoader {
 }
 ```
 
-
 If the collection already contains data, the loader will skip the insertion to avoid duplicates.
 
-Running the application
------------------------
+## Running the application
 
 Great! With everything in place, it's time to run the app.
 
@@ -794,14 +767,12 @@ MONGODB_URI='<YOUR_CONNECTION_STRING>'
 CRYPT_PATH='/path/to/mongo_crypt_shared/lib/mongo_crypt.dylib' mvn spring-boot:run
 ```
 
-
 Note: The CRYPT_PATH should point to the full path of the native library you downloaded.
 
 Once the application is running, if everything goes well, you can check the cluster specified in your connection string. Inside the hrsystem database, look for the employees collection---it should already contain six documents with encrypted fields, ready to be queried:
 ![](Screenshot-2025-08-29-at-9.00.08-AM-1024x414.png)
 
-Testing the endpoints
----------------------
+## Testing the endpoints
 
 With the app running, we can interact with our encrypted data through simple HTTP requests. Here are some examples:
 
@@ -829,7 +800,6 @@ Content-Type: application/json
 }
 ```
 
-
 ### Find by ssn
 
 Perform an equality query on an encrypted field.
@@ -837,7 +807,6 @@ Perform an equality query on an encrypted field.
 ```
 GET http://localhost:8080/employees/ssn/1
 ```
-
 
 ### Find by age (range)
 
@@ -847,7 +816,6 @@ Return all employees younger than a given age.
 GET http://localhost:8080/employees/filter/age-less-than?age=50
 ```
 
-
 ### Find by salary (range)
 
 Return all employees with a salary above a given value.
@@ -856,9 +824,7 @@ Return all employees with a salary above a given value.
 GET http://localhost:8080/employees/filter/salary-greater-than?salary=3500
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this tutorial, we explored how to implement Queryable Encryption using Spring Data MongoDB, step by step, from setting up the project to making encrypted queries work in practice.
 

@@ -101,7 +101,6 @@ frame SharedRuntime::look_for_reserved_stack_annotated_method(JavaThread* curren
 // ...
 ```
 
-
 > *The code context is from the [JDK repository on GitHub](https://github.com/openjdk/jdk).*
 
 I then pass this prompt to GPT-3.5 and obtain the result:
@@ -121,8 +120,7 @@ Why did I choose this event, then? Because it allows you to compare the LLM gene
 You can find my implementation on [GitHub](https://github.com/parttimenerd/jfreventcollector/blob/main/src/main/kotlin/me/bechberger/collector/AIDescriptionAdder.kt) (GPLv2.0 licensed) and the generated documentation on the [JFR Event Collection](https://sap.github.io/SapMachine/jfrevents/):
 [![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-12.png)](https://sap.github.io/SapMachine/jfrevents/index.html#reservedstackactivation)
 
-Conclusion
-----------
+## Conclusion
 
 I'm unsure whether I like or dislike the results of this experiment: It's, on the one hand, great to generate descriptions for events that didn't have any, using the code as the source of truth.
 

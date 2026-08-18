@@ -35,12 +35,9 @@ The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-k
 
 ](https://twitter.com/martinbonnin/status/1622197657534857220)
 
-<br />
-
 In this post, I'd like to expand on the problem of nullability and how it's solved in Kotlin and Java and add my comments to the Twitter thread.
 
-Nullability
------------
+## Nullability
 
 I guess that everybody in software development with more than a couple of years of experience has heard the following quote:
 > I call it my billion-dollar mistake. It was the invention of the null reference in 1965. At that time, I was designing the first comprehensive type system for references in an object oriented language (ALGOL W). My goal was to ensure that all use of references should be absolutely safe, with checking performed automatically by the compiler. But I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement. This has led to innumerable errors, vulnerabilities, and system crashes, which have probably caused a billion dollars of pain and damage in the last forty years.
@@ -59,8 +56,7 @@ Null values are found in many programming languages under different names:
 
 Some languages do *not* allow uninitialized values, such as Rust.
 
-Null-safety in Kotlin
----------------------
+## Null-safety in Kotlin
 
 As I mentioned, Kotlin does allow `null` values. However, they are baked into the type system. In Kotlin, every type `X` has two indeed two types:
 
@@ -86,7 +82,6 @@ val str: String? = getNullableString()
 val int: Int? = str.toIntOrNull()           //1
 ```
 
-
 1. Doesn't compile
 
 The way to fix the above code is to check whether the variable is `null` before calling its members:
@@ -97,7 +92,6 @@ val int: Int? = if (str == null) null
           else str.toIntOrNull()
 ```
 
-
 The above approach is pretty boilerplate-y, so Kotlin offers the null-safe operator to achieve the same:
 
 ```kotlin
@@ -105,9 +99,7 @@ val str: String? = getNullableString()
 val int: Int? = str?.toIntOrNull()
 ```
 
-
-Null-safety in Java
--------------------
+## Null-safety in Java
 
 Now that we have described how Kotlin manages `null` values, it's time to check how Java does it. First, there are neither non-nullable types nor null-safe operators in Java. Thus, every variable can potentially be `null` and should be considered so.
 
@@ -119,7 +111,6 @@ if (str != null) {
 }
 ```
 
-
 1. `String` has no `toIntOrNull()` method, so let's pretend `MyString` is a wrapper type and delegates to `String`
 2. A mutable reference is necessary
 
@@ -128,7 +119,6 @@ If you chain multiple calls, it's even worse as every return value can potential
 ```java
 var baz = getFoo().getBar().getBaz();
 ```
-
 
 Here's the fixed but much more verbose version:
 
@@ -144,7 +134,6 @@ if (foo != null) {
 }
 ```
 
-
 For this reason, Java 8 introduced the [Optional](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) type. `Optional` is a wrapper around a possibly null value. Other languages call it `Maybe`, `Option`, etc.
 
 Java language's designers advise that a method returns:
@@ -159,7 +148,6 @@ final var baz = getFoo().flatMap(Foo::getBar)
                         .flatMap(Bar::getBaz)
                         .orElse(null);
 ```
-
 
 My main argument regarding this approach is that the `Optional` itself could be `null`. The language doesn't guarantee that it's not. Also, it's not advised to use `Optional` for method input parameters.
 
@@ -189,8 +177,7 @@ Thanks to [Sébastien Deleuze](https://mastodon.online/@sdeleuze) for mentioning
 
 I still hope it will work out!
 
-Conclusion
-----------
+## Conclusion
 
 Java was incepted when `null`-safety was not a big concern. Hence, `NullPointerException` occurrences are common. The only safe solution is to wrap every method call in a `null` check. It works, but it's boilerplate-y and makes the code harder to read.
 

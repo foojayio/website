@@ -30,7 +30,6 @@ You can check out the source code here:
 git clone https://github.com/mongodb/mongot
 ```
 
-
 ![](Screenshot-2026-05-08-at-3.17.36-PM-1024x548.png)
 
 MongoT is a wrapper around the amazing Java search engine: [Lucene](https://lucene.apache.org/).
@@ -39,8 +38,7 @@ Lucene is a powerful search toolkit built around an inverted token index structu
 
 Adding vector search to MongoDB was clearly a core goal for the MongoT project, as it is important to participate in the semantic search space. I think it is really worth digging into the capabilities it offers beyond vector search, too, as all the Lucene search types massively complement MongoDB database's own incredible B-tree index-based search features.
 
-Let's dive in!
---------------
+## Let's dive in!
 
 ![](Screenshot-2026-06-04-at-8.27.46-PM-1024x523.png)
 
@@ -52,8 +50,7 @@ Never fear, though! We are going to break it down and walk through a few real-wo
 
 If you (like me!) are a visual learner, have a play with the animated tour through the code packages along the way: <https://luketn.com/mongot-app-tour/index.html>
 
-Simple Example - Text Search
-----------------------------
+## Simple Example - Text Search
 
 Let's start with a real example. Here's an actual Atlas Search query:
 
@@ -70,7 +67,6 @@ db.image.aggregate([
 ]);
 ```
 
-
 -\>
 
 ```
@@ -83,7 +79,6 @@ db.image.aggregate([
   ]
 },...]
 ```
-
 
 The client application sends that as a MongoDB aggregate command through its driver to MongoD (the driver never connects to MongoT directly - it connects only to MongoD). When MongoD reaches the $search stage, it rewrites the public stage into an internal remote-search stage, builds a MongoT search command, and opens a remote cursor against MongoT.
 
@@ -109,8 +104,7 @@ The cursor is left open (if it wasn't exhausted) so that future getMore's on the
 | Encode BSON          | SearchCommand.getBatch, MongotCursorBatch.toBson                                                        | 1 us                      | 0.11%                                                   | Serializes the response payload returned on the command stream.                                                                                                         |
 | Stream lifecycle     | ServerCallHandler.onNext, ServerCallHandler.handleMessage, CommandManager                               | 8.078 ms outside command  | N/A                                                     | gRPC stream lifetime outside the initial command span, including response observer handling, client consumption, cleanup, and any later cursor work in the same stream. |
 
-Local Debugging
----------------
+## Local Debugging
 
 Next, let's get MongoT up and running locally from source code. I'm going to use IntelliJ for the IDE in this walkthrough, but the steps should be similar in any IDE.
 
@@ -125,7 +119,6 @@ cd mongot
 idea .
 ```
 
-
 3. Enable debugging by adding the following changes to the mongot-local container in community-quick-start/docker-compose.yml file:
 
 ```
@@ -138,7 +131,6 @@ idea .
       - --config=/mongot-community/config.default.yml
 ```
 
-
 ```
   mongot-local:
 ...
@@ -146,7 +138,6 @@ idea .
 ...
       - 5005:5005    # Debug port
 ```
-
 
 ![](Screenshot-2026-05-27-at-12.43.57-PM.png)
 
@@ -157,7 +148,6 @@ This will allow us to connect and debug the locally built mongot code over the 5
 ```
 make docker.up MODE=local
 ```
-
 
 Once the build is finished, and the containers are running, we can attach a debugger on port 5005.
 
@@ -176,8 +166,7 @@ You can connect to MongoDB using Compass:
 When configuring the connection you'll need to configure the TLS settings to point at the ca.pem and client-combined.pem files in the community-quick-start/tls directory:  
 ![](Screenshot-2026-05-27-at-12.50.15-PM.png)
 
-Sample Data
------------
+## Sample Data
 
 You can find great sample databases for Atlas published by MongoDB here: <https://www.mongodb.com/docs/atlas/sample-data>
 
@@ -201,8 +190,7 @@ If you explore this app, you'll find some fun things you can do with local LLMs,
 
 Create some sample databases (or real ones!), create Atlas Search indexes, and perform queries locally. Put breakpoints in the code and have fun exploring to see how it all hangs together.
 
-Interesting Example - Faceted Text Search
------------------------------------------
+## Interesting Example - Faceted Text Search
 
 Let's go a bit deeper and perform a faceted search example.
 
@@ -266,7 +254,6 @@ db.image.aggregate([
  }
 ]);
 ```
-
 
 ![](Screenshot-2026-05-08-at-3.35.37-PM-1-1024x966.png)
 
@@ -348,9 +335,7 @@ Eventually, MongoDB shows the results like this:
   ]
 ```
 
-
-Lucene Indexing Strategy + Benefits over MongoD Indexes
--------------------------------------------------------
+## Lucene Indexing Strategy + Benefits over MongoD Indexes
 
 Let's step back a moment from the detail, and ask why use Atlas Search at all?
 
@@ -454,8 +439,7 @@ If you want to go deeper on how Lucene indexes work, I highly recommend this:
 
 <https://www.slideshare.net/lucenerevolution/what-is-inaluceneagrandfinal>
 
-Vector Search Example
----------------------
+## Vector Search Example
 
 Let's set up vector search!
 
@@ -476,7 +460,6 @@ embedding:
   providerEndpoint: "https://api.voyageai.com/v1/embeddings"
   isAutoEmbeddingViewWriter: true
 ```
-
 
 And restart MongoT.
 
@@ -503,7 +486,6 @@ db.image.createSearchIndex({
 });
 ```
 
-
 MongoT will automatically hit the API in batches, and compute embeddings for the caption field using the voyage-4 model, storing them separately in an internally managed embeddings collection, which is great since it doesn't pollute the MongoDB document with index data!
 
 (although I'd argue maybe a Lucene index file would have been a better abstraction)
@@ -520,7 +502,6 @@ db.image.aggregate([{$vectorSearch: {
 }}]);
 ```
 
-
 Behind the scenes, MongoT computes the embedding for the query text 'circular flying', uses Voyage API to compute a semantic meaning as an array of floats, then uses Lucene to find the nearest matches semantically in the index.
 
 You can put a breakpoint on EmbeddingServiceManager.embed() and take a look at how the query path works:  
@@ -534,8 +515,7 @@ Having tried both the manual vector computation with LM Studio and the Voyage AP
 
 With that said, diving into vector search is something to go into with eyes open to the costs - both financial and in time and resources. It's not something that comes for free.
 
-Local Grafana Monitoring
-------------------------
+## Local Grafana Monitoring
 
 If you're feeling really adventurous, you can configure MongoT to output performance traces and metrics using OpenTelemetry, collecting trace data with Jaeger, metrics with Prometheus, and visualizing with Grafana.
 
@@ -549,8 +529,7 @@ And a few notes here:
 
 <https://github.com/luketn/mongot/blob/main/LOCAL-RUN.md>
 
-Performance
------------
+## Performance
 
 The performance of MongoT is incredible. I added a little dashboard to Grafana:
 
@@ -585,7 +564,6 @@ k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
    data_sent: 84 MB   281 kB/s
 ```
 
-
 (run on an M4 MacBook Pro)
 
 What does this mean? Well, the full round-trip of a Java HTTP Atlas Search API call as measured by the K6 client had a median response time of 12.8ms (using a large range of data scenarios drawn from the COCO image dataset).
@@ -602,7 +580,6 @@ k6 run -e K6_VUS=25 -e K6_DURATION=5m k6.js
     mongodb_time_ms: avg=7.2, min=2.0 med=6.8, max=48.7, p(90)=9.85     p(95)=11.0
     requests: 291719  972.301245/s
 ```
-
 
 I have to admit getting a bit deep down in the rabbit hole here, and spending more time further expanding the number of spans in the traces emitted by default. I created a branch of MongoT on my own fork and added a bunch of detailed tracing:
 
@@ -630,8 +607,7 @@ And then walk through the spans in a search trace:
 
 Really helps me understand the code and how it works. Of course, the additional tracing severely impacts performance, but if you want to, check out the branch and play with the Grafana dashboards!
 
-Java Code Packages
-------------------
+## Java Code Packages
 
 Here's a list of the major packages of the MongoT project as they interact with one another:
 
@@ -675,8 +651,7 @@ Digging into the most important of these packages - com.xgen.mongot.index:
 
 Ref: <https://github.com/luketn/mongot/blob/main/MONGOT_PACKAGE_TOUR.md>
 
-So what can you learn from MongoT?
-----------------------------------
+## So what can you learn from MongoT?
 
 For me, this is an incredible example of an awesome database company, MongoDB, building a production-grade search engine companion app.
 
@@ -689,13 +664,10 @@ There are many aspects that are interesting to learn from:
 
 We haven't dug too deeply here in this introduction to any of these, but hopefully it gives you a quick tour to get you started and some ideas about the goodies there are to explore.
 
-Wrap
-----
+## Wrap
 
 I've been exploring the codebase and playing with Atlas Search (both lexical and semantic) for the last few weeks. It's been a lot of fun, and I learned a lot too.
 
 I hope you get a lot out of exploring and trying it yourself, too.
 
 Happy searching!
-
-<br />

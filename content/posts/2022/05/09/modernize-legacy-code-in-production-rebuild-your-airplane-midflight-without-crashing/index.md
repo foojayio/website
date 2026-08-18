@@ -28,8 +28,7 @@ Rewriting a project isn't an immense challenge, mostly -- however, doing it whil
 
 That requires a lot of planning and coordination.
 
-Why Modernize?
---------------
+## Why Modernize?
 
 I don't think we should update projects for the sake of the "latest and greatest". There's a reason common legacy systems like COBOL are still used. Valuable code doesn't lose its shine just because of age. There's a lot to be said for "code that works". Especially if it was built by hundreds of developers decades ago. There's a lot of hidden business logic model knowledge in there...
 
@@ -43,8 +42,7 @@ You usually shouldn't migrate for better tooling but better observability, orche
 
 Modernization gives you the opportunity to rethink the original system design. However, this is a risky proposition, as it makes it pretty easy to introduce subtle behavioral differences.
 
-Challenges
-----------
+## Challenges
 
 Before we head to preparations, there are several deep challenges we need to review and mitigate.
 
@@ -74,8 +72,7 @@ Some legacy systems might rely on deeply historical approaches to coding. A grea
 
 Worse, COBOL has a complex file storage solution that isn't a standard SQL database. Moving away from something like that (or even some niche newer systems) can be challenging. Thankfully, there are solutions, but they might limit the practicality of running both the legacy and new product in parallel.
 
-Preparation
------------
+## Preparation
 
 Before we need to even consider an endeavor of this type, we need to evaluate and prepare for the migration. The migration will be painful regardless of what you do, but this stage lets you shrink the size of the band aid you need to pull off.
 
@@ -131,8 +128,7 @@ One of the great things about migrating an existing project is that we have a pe
 
 What we don't know is whether the new system can handle the peak load througput we require. We need to extract these details and create stress tests for the critical portions of the system. We need to verify performance, ideally compare it to the legacy to make sure we aren't going back in terms of performance.
 
-Targets
--------
+## Targets
 
 Which parts should we migrate and in what way?
 
@@ -173,8 +169,7 @@ That's it. Yet very few developers use enough caching. That's because proper cac
 
 Disabling caching during migration might not be a realistic option, but reducing retention might mitigate some issues.
 
-Strategy
---------
+## Strategy
 
 There are several ways we can address a large-scale migration. We can look at the "big picture" in a migration e.g. Monolith to Microservices. But more often than not, there are more nuanced distinctions during the process.
 
@@ -202,8 +197,7 @@ The enormous benefit is that we can migrate the database while keeping compatibi
 
 A major downside is that this might perpetuate the legacy code's existence. It might work against our development goals as a result of that.
 
-Implementation
---------------
+## Implementation
 
 You finished writing the code. We're ready to pull the trigger and do the migration... Now we need to update the users that the migration is going to take place. You don't want an angry customer complaining that something suddenly stopped working.
 
@@ -236,8 +230,7 @@ Agility in these situations is crucial. Responding to changes quickly can make t
 
 With small updates, we can stage our releases and push the update to a subset of users. Unfortunately, when we do a major change, I find it more of a hindrance. The source of errors becomes harder to distinguish if you have both systems running. Both systems need to run concurrently, and it might cause additional friction.
 
-Post Migration
---------------
+## Post Migration
 
 A couple of weeks had passed, things calmed down, and the migration worked. Eventually.
 
@@ -269,8 +262,7 @@ After the migration process, people often discard the compliance tests. It makes
 
 The same is true for the feature extraction spreadsheet. It's not something that's maintainable and is only a tool for the migration period. Once we're done with that, we should discard it and we shouldn't consider it as authoritative.
 
-Finally
--------
+## Finally
 
 Migrating old code is always a challenge, as agile practices are crucial when taking on this endeavor.
 

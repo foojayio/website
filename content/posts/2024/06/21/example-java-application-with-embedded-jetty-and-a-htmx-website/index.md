@@ -28,15 +28,13 @@ For this experiment, I was inspired by the book **"Modern frontends with htmx" w
 
 {{< youtube ko-tIacI-u8 >}}
 
-What is (Eclipse) Jetty?
-------------------------
+## What is (Eclipse) Jetty?
 
 As described on [eclipse.dev/jetty](https://eclipse.dev/jetty/): *"Jetty provides a web server and servlet container, additionally providing support for HTTP/2, WebSocket, OSGi, JMX, JNDI, JAAS and many other integrations. These components are open source and are freely available for commercial use and distribution."*
 
 Jetty can be run as a stand-alone webserver, or integrated in a Java application. The integrated approach is what I wanted to use and is described here.
 
-What is htmx?
--------------
+## What is htmx?
 
 As described on [htmx.org](https://htmx.org/): *"htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes, so you can build modern user interfaces with the simplicity and power of hypertext"*
 
@@ -52,9 +50,7 @@ The htmx website gives this minimal example for a webpage with the action: _"Whe
 </button>
 ```
 
-
-Example Application
--------------------
+## Example Application
 
 The [sources of this example application are available on GitHub](https://github.com/FDelporte/java-jetty-htmx). It's a Maven project that will provide two HTML pages, one with "simple" htmx, and one using a websocket.
 
@@ -71,7 +67,6 @@ org.eclipse.jetty.ee10.websocket:jetty-ee10-websocket-jakarta-server:12.0.5
 jakarta.websocket:jakarta.websocket-api:2.1.1
 net.datafaker:datafaker:2.1.0
 ```
-
 
 ### Jetty Configuration
 
@@ -109,7 +104,6 @@ public class MyWebServer implements Runnable {
 }
 ```
 
-
 #### Resource Handler
 
 The resource handler, makes all the files inside the `resources/web` directory accessible through HTTP with the following configuration:
@@ -137,7 +131,6 @@ private void addResourceHandler(ContextHandlerCollection contextHandlerCollectio
 }
 ```
 
-
 #### Rest Handler
 
 Classes that extend `HttpServlet` are exposed via the rest handler. With this configuration, they can be reached on `/rest/list` and `/rest/text`:
@@ -151,7 +144,6 @@ private void addRestHandler(ContextHandlerCollection contextHandlerCollection) {
     apiHandler.addServlet(TextService.class, "/text");
 }
 ```
-
 
 #### WebSocket Handler
 
@@ -188,7 +180,6 @@ public class MyEventSocket {
 }
 ```
 
-
 Then this endpoint can be used in the WebSocket handler:
 
 ```
@@ -202,7 +193,6 @@ private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollecti
     });
 }
 ```
-
 
 I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/en-US/firefox/addon/simple-websocket-client/) to test WebSocket communication to make sure it works, before diving into the HTML client implementation... As you can see in the screenshot, the server sends a timestamp every second and answers when you send a message starting with "echo".
 
@@ -223,7 +213,6 @@ The example application contains two test pages. The first one, available on `ht
 </button>
 ```
 
-
 Another demo requests a list item (`<li>`) with a timestamp from the API on `/rest/list` and adds it to the end of the already existing list because of the `hx-swap="beforeend" hx-target="#list"`:
 
 ```
@@ -234,7 +223,6 @@ Another demo requests a list item (`<li>`) with a timestamp from the API on `/re
     <li>Initial list item</li>
 </ul>
 ```
-
 
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
@@ -253,7 +241,6 @@ htmx makes it also very easy to communicate between client and server with WebSo
 <body hx-ext="ws" ws-connect="/websocket/ws">
 ```
 
-
 By adding `ws-send` in any HTML-element, you instruct htmx to replace it's default behavior with a call through the WebSocket. The following example is identical to the button described before, but is now handled in `MyEventSocket.onWebSocketText` instead of the API used before.
 
 ```
@@ -263,7 +250,6 @@ By adding `ws-send` in any HTML-element, you instruct htmx to replace it's defau
     Request text
 </button>
 ```
-
 
 In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp from the server back to the client every second so it can display it's still connected.
 
@@ -276,8 +262,7 @@ In `MyEventSocket` a `scheduleAtFixedRate` is implemented to send a timestamp fr
  </figure>
 </figure>
 
-Running the Application
------------------------
+## Running the Application
 
 You can start the application from your IDE, or build it first as a JAR.
 
@@ -299,8 +284,7 @@ You can start the application from your IDE, or build it first as a JAR.
 * Build the application with `mvn package`.
 * Start it with `java -jar jetty-htmx-demo.jar`
 
-Conclusion
-----------
+## Conclusion
 
 Any technology, library, or framework should be evaluated to be sure it's the right solution for the problem you need to solve.
 

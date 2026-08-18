@@ -23,8 +23,7 @@ Jenkins supports clustering via master-slave mode. A build process can be delega
 
 In this article, we'll describe how to install Jenkins cluster with slave nodes auto-discovering and self-registering inside a master node. Jelastic PaaS implemented this solution in **Jenkins DevOps Pack** that can be installed from the [Marketplace](https://docs.jelastic.com/marketplace/) or through environment setup wizard as a **New Environment**. In this tutorial we'll cover both. Also, you will find out how to build a simple Java project hosted on GitHub using Jelastic Maven plugin.
 
-Jenkins DevOps Pack Installation
---------------------------------
+## Jenkins DevOps Pack Installation
 
 ### Installation from Marketplace
 
@@ -40,16 +39,13 @@ Jenkins DevOps Pack Installation
 
 <img decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-environment-1.png" width="625" height="254">
 
-<br />
-
 ### Installation as New Environment
 
 In order to simplify cluster provisioning our team has prepared Jenkins certified templates for master and worker nodes. Once you click on the **New Environment** and add Jenkins application server, the **Auto-Clustering** functionality creates cluster topology which comprises one master node and one worker node by default. The worker nodes can be scaled out horizontally up to 16 nodes being automatically detected and registered at master node and vice versa.
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-auto-clustering.png)
 
-Jenkins Cluster Specifics
--------------------------
+## Jenkins Cluster Specifics
 
 Each worker node has an [executor](https://wiki.jenkins.io/display/JENKINS/Terminology) process that is used for building the projects. By default one job at a time can be run since there is one executor configured in a worker. You may change the number of executors. To do this click on **Build Executor Status** and press **Configure** at node you need to change the number of executors in.
 
@@ -63,8 +59,6 @@ For example you build tasks stuck in a long queue, the worker nodes can be [scal
 
 <img loading="lazy" decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-cicd-1.png" width="711" height="154">
 
-<br />
-
 Press **Change Environment Topology** and choose Workers layer (Java Engine) and do horizontal scaling with + button in the **Horizontal Scaling** section of the wizard. It's also preferable to choose **stateless** scaling mode as we do not store any important state in the workers.
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-java-engine-1.png)
@@ -73,8 +67,7 @@ Once scaling is completed, make sure the all newly created worker nodes were dis
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Workers-and-Master.png)
 
-Create a New Job through Jenkins Admin Panel
---------------------------------------------
+## Create a New Job through Jenkins Admin Panel
 
 Now let's see how to create a job that builds and publishes a simple project to a remote application server hosted on Jelastic PaaS. Here we use a [Maven](https://maven.apache.org/) to build [HelloWorld](https://github.com/jelastic/helloworld) project from GitHub and deploy it with the help of Jelastic Maven plugin.
 
@@ -119,7 +112,6 @@ The plugin's section in the **pom.xml** looks as follows:
 </plugin>
 ```
 
-
 For defining parameters via project variables click on the checkbox This project is parameterized and add the first variable clicking on **Add Parameter \> String Parameter**.
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Parameters.png)
@@ -154,8 +146,7 @@ Resulting from the **clean** and **package** phases you will get a war archive f
 
 The **jelastic:deploy** is performed by Jelastic Maven plugin on the fly during project build. The plugin allows you to deploy just built war file to Java application server in the remote environment at any available Jelastic Cloud Provider.
 
-Build Java Project with Maven Plugin
-------------------------------------
+## Build Java Project with Maven Plugin
 
 1.Click on **Build Now**. Then confirm the parameters to be passed to the Jelastic Maven plugin.
 
@@ -165,8 +156,7 @@ Build Java Project with Maven Plugin
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Build-Maven-Project-in-Jenkins-1.png)
 
-Build Debug inside Jenkins
---------------------------
+## Build Debug inside Jenkins
 
 By hovering over the sign next to the build, you can open the **Console Output** that may help you to debug project building.
 
@@ -178,16 +168,13 @@ If you want to execute project building on the specific node, go to the **Genera
 
 ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Label-Expression-1.png)
 
-Java Project Deployment via Jenkins
------------------------------------
+## Java Project Deployment via Jenkins
 
 If the build procedure succeeds, it means that Jenkins deployed the result application archive to the application server (e.g. *myenv.vip.jelastic.cloud*).
 
 Click on the **Open in Browser** button at the destination server to make sure the deployment was performed properly.
 
 <img loading="lazy" decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Java-Application-Deployment.png" width="838" height="194">
-
-<br />
 
 The *helloworld.war* application web page should be displayed as follows.
 

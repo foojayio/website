@@ -31,5 +31,3 @@ Many application frameworks in the Java ecosystem use this logging framework by 
 (Read the complete article on [Snyk.io](https://snyk.io/blog/log4j-rce-log4shell-vulnerability-cve-2021-4428/).)
 
 [Also see the full Foojay explainer here.](https://foojay.io/log4j-cve)
-
-<br />

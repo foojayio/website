@@ -31,8 +31,7 @@ Most of the time, you don't know whether it's worth it: you'd like to offer a Mi
 
 I want to show how you can achieve it without writing a single line of code.
 
-The solution
-------------
+## The solution
 
 The main requirement of the solution is to use the [PostgreSQL database](https://www.postgresql.org/). It's a well-established Open Source SQL database.
 
@@ -68,7 +67,6 @@ RUN apt-get update && \
     rm $POSTGREST_FILE                                                      #4
 ```
 
-
 1. Start from the latest Debian
 2. Parameterize the build
 3. Get the archive
@@ -97,7 +95,6 @@ services:
       - ./postgres:/docker-entrypoint-initdb.d:ro       #5
 ```
 
-
 1. Build the above `Dockerfile`
 2. Share the configuration file
 3. Run the `postgrest` executable
@@ -118,11 +115,9 @@ We immediately get the results:
  {"id":3,"name":"Tee-Shirt","description":"The classic geek product! At a conference, at home, at work, this tee-shirt will be your best friend.","price":9.99,"hero":true}]
 ```
 
-
 That was a quick win!
 
-Improving the solution
-----------------------
+## Improving the solution
 
 Though the solution works, it has a lot of room for improvement.
 
@@ -157,7 +152,6 @@ services:
       ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2397"
 ```
 
-
 1. Use Apache APISIX
 2. APISIX stores its configuration in [etcd](https://etcd.io/)
 
@@ -179,7 +173,6 @@ curl http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: 123xyz' -X PUT -d '
 }'
 ```
 
-
 1. Should be run in one of the Docker nodes, so use the Docker image's name. Alternatively, use `localhost` but be sure to expose the ports
 2. Create a reusable *upstream*
 3. Point to the PostgREST node
@@ -193,8 +186,7 @@ curl localhost:9080/product
 
 It returns the same result as above.
 
-DDoS protection
----------------
+## DDoS protection
 
 We haven't added anything, but we're ready to start the work. Let's first protect our API from attacks. Apache APISIX is designed around a plugin architecture.
 
@@ -212,7 +204,6 @@ curl http://apisix:9080/apisix/admin/global_rules/1 -H 'X-API-KEY: 123xyz' -X PU
   }
 }'
 ```
-
 
 1. `limit-count` limits the number of calls in a time window
 2. Limit to 1 call per 5 seconds; it's for demo purposes
@@ -234,9 +225,7 @@ curl localhost:9080/product
 </html>
 ```
 
-
-Per-route authorization
------------------------
+## Per-route authorization
 
 PostgREST also offers an Open API endpoint at the root. We thus have two routes: `/` for the Open API spec and `/product` for the products.
 
@@ -258,7 +247,6 @@ curl http://apisix:9080/apisix/admin/consumers -H 'X-API-KEY: 123xyz' -X PUT -d 
 }'
 ```
 
-
 1. Create a new consumer
 2. Consumer's name
 3. Consumer's key value
@@ -278,7 +266,6 @@ curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: 123xyz' -X POST -d ' 
   }
 }'
 ```
-
 
 1. Create a new route
 2. Use the `key-auth` and `consumer-restriction` plugins
@@ -312,8 +299,7 @@ curl -H "apikey: admin" localhost:9080
 
 This time, it returns the Open API spec as expected.
 
-Monitoring
-----------
+## Monitoring
 
 A much-undervalued feature of any software system is monitoring. As soon as you deploy any component in production, you must monitor its health. Nowadays, many services are available to monitor.
 
@@ -340,7 +326,6 @@ services:
       - prometheus
 ```
 
-
 1. Prometheus image
 2. Prometheus configuration to scrape Apache APISIX. See the full file [here](https://github.com/ajavageek/poor-man-api/blob/master/prometheus/prometheus.yml)
 3. Grafana image
@@ -357,7 +342,6 @@ plugin_attr:
       port: 9091                #2
 ```
 
-
 1. Bind to any address
 2. Bind to port `9091`. Prometheus metrics are available on `http://apisix:9091/apisix/prometheus/metrics` on the Docker network
 
@@ -372,15 +356,11 @@ curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PU
 }'
 ```
 
-
 Send a couple of queries and open the Grafana dashboard. It should look similar to this:
 
 <img decoding="async" class="size-medium wp-image-61082 aligncenter" src="grafana-700x288.jpg" alt="" width="700" height="288">
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 Creating a full-fledged REST(ful) API is a huge investment. One can quickly test a simple API by exposing one's database in a CRUD API via PostgREST. However, such an architecture is not fit for production usage.
 

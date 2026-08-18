@@ -25,8 +25,7 @@ This week, we will finish chapter 2 of the Learning eBPF book, learn how to use 
 
 We start with function and tail calls:
 
-Function Calls
---------------
+## Function Calls
 
 Regular C programs are divided into functions that call each other; so far in this series, all our eBPF programs consisted of just a single function that calls kernel functions. But can we call other eBPF functions? End of 2017, Daniel Borkman et al. introduced the ability to call other functions defined in eBPF:
 > It allows for better optimized code and finally allows to introduce the core bpf libraries that can be reused in different projects, since programs are no longer limited by single elf file. With function calls bpf can be compiled into multiple .o files.
@@ -41,8 +40,7 @@ The maximum stack size is limited to [512 bytes](https://github.com/torvalds/lin
 
 Declaring a variable as static, e.g. `static int x`, means that the value is stored as a global variable, existing once per program run. This is not a problem if a function doesn't transitively call itself, which is true for all functions you would typically want to write in eBPF.
 
-Tail Calls
-----------
+## Tail Calls
 
 Now to tail calls. If the function calls another function directly before returning (or as an argument to the return statement), then the call frames can be replaced. This is called a tail call and avoids growing the stack. In eBPF, it is possible to tail call one eBPF program (entry function that gets passed a context) from another program:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/02/image-1.png) From [ebpf.io](https://ebpf.io/what-is-ebpf/#tail--function-calls)'s section on tail calls
@@ -55,8 +53,7 @@ A tail call is achieved by storing the other program in a program array, which m
 
 This function only returns when it encounters an error, returning a negative error code.
 
-Tail Call Example
------------------
+## Tail Call Example
 
 Let's create, as an example, an entry function that is triggered for every system call and tail calls another function using the stored ebpf programs for each system call number, based on the example in the [Learning eBPF book](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf):
 
@@ -101,13 +98,11 @@ int ignore_nr(void *ctx) {
 }
 ```
 
-
 We can now store a function for every system call in the `syscall` program array, register the `hello` for every system call and tail call the specified function for every system call number.
 
 You can find this example in the [hello-ebpf](https://github.com/parttimenerd/hello-ebpf/blob/main/bcc/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloTail.java) repository. This includes all the Java code required to attach the eBPF program and log the result. I could just show you the example code, but let's do something different this time:
 
-Tail Example Application
-------------------------
+## Tail Example Application
 
 I recently released the hello-ebpf library, consisting mainly of the bcc and annotation libraries, in [Sonatype's snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/). Let's use these releases to create our first application. This first application is a version of the HelloTail example from before.
 
@@ -143,7 +138,6 @@ record Arguments(boolean skipOthers) {
 }
 ```
 
-
 We then define the eBPF program, as well as some system calls that come up a lot, as static variables:
 
 ```java
@@ -156,7 +150,6 @@ static final int[] IGNORED_SYSCALLS = new int[]{
         72, 73, 79, 98, 101, 115, 131, 134,
         135, 139, 172, 233, 280, 291};
 ```
-
 
 Now to the important part: The `main` and `run` methods that contain the central part of our application:
 
@@ -204,7 +197,6 @@ static void run(Arguments args) {
 }
 ```
 
-
 This code uses the [Syscalls](https://github.com/parttimenerd/hello-ebpf/blob/774e813457642430313dd498c6f1e9ca596b4cdf/bcc/src/main/java/me/bechberger/ebpf/bcc/Syscalls.java) class from the bcc library to map system calls to their number. The only part left now is the custom formatter, which takes care of the --skip-others option:
 
 ```java
@@ -230,7 +222,6 @@ static @Nullable String formatTrace(BPF.TraceFields f,
     return line;                                                                   
 }
 ```
-
 
 This gives us an application that we can build via `mvn package`, and run:
 
@@ -259,7 +250,6 @@ This gives us an application that we can build via `mvn package`, and run:
   ...
 ```
 
-
 You can run this either on a Linux machine with Java 21 and [libbcc](https://github.com/iovisor/bcc/blob/master/INSTALL.md) installed or on Mac using the [Lima VM](https://lima-vm.io/):
 
 ```bash
@@ -270,11 +260,9 @@ You can run this either on a Linux machine with Java 21 and [libbcc](https://git
 # ...
 ```
 
-
 More information and the whole implementation in the [System Call Logger](https://github.com/parttimenerd/sample-bcc-project/tree/tail-example) branch of the [sample-bcc-project](https://github.com/parttimenerd/sample-bcc-project).
 
-Conclusion
-----------
+## Conclusion
 
 In this article, I showed you how to use tail calls and develop your first standalone eBPF application using the hello-ebpf library. Most of the bcc implementation was present two weeks ago when I wrote my previous article of this series, but now it's slightly more polished. The hello-ebpf libaries' releases are currently live in the snapshot repository.
 

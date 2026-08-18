@@ -21,8 +21,7 @@ frozen: false
 
 **For scalable data workloads like Apache Cassandra, performance and capacity are simply a matter of cost. JVM choice and configuration can dramatically impact that cost. The Azul Platform Prime JVM significantly improves Cassandra performance and reduces the cost of Cassandra clusters.**
 
-Background
-----------
+## Background
 
 We set off to characterize the impact of JVM choice and configuration on Cassandra load carrying capacity: the capacity of a Cassandra cluster of a certain size to handle traffic while meeting specified service levels.
 
@@ -56,8 +55,7 @@ JVM configurations that are unable to sustain expected responsiveness levels at 
 
 Establishing the load carrying capacity of a given cluster configuration is quite simple, if somewhat time consuming: drive the cluster at various throughout levels between 0 and some highest achieved throughput level, each for sustained period of time, and determine the highest throughout that the cluster, as configured, can reliably sustain while maintaining stated service level expectations.
 
-Our Example Workload
---------------------
+## Our Example Workload
 
 For our tests, we chose to use the same tlp-cluster setup and the same TLP stress workload examples that [Datastax has previously used in benchmarking Cassandra 4.0](https://www.datastax.com/blog/apache-cassandra-benchmarking-40-brings-heat-new-garbage-collectors-zgc-and-shenandoah).
 
@@ -124,7 +122,6 @@ The following tlp-stress command was used:
 tlp-stress run BasicTimeSeries -d 150m -p 100M -c 50 --pg sequence -t 8 -r 0.2 --rate <desired rate> --populate 200000 --response-time-warmup 30m --csv ./tlp_stress_metrics_1.csv --hdr ./tlp_stress_metrics_1.hdr
 ```
 
-
 All workloads ran for 150 minutes, allowing compaction loads to be exhibited during the runs.
 
 ### Throughput Levels Tested
@@ -135,8 +132,7 @@ Armed with the knowledge of that upper bound, and with access to readily availab
 
 Altogether, these tests represent a total of 275 separate cluster runs (5 JVM configurations, 11 load levels between 20K and 120k ops, 5 runs each) lasting 2.5 hours each.
 
-Results
--------
+## Results
 
 **Raw achieved throughput (ignoring service levels):**
 
@@ -163,8 +159,7 @@ This is best depicted in a chart:
 
 Additional results detailing the client-experienced P50 Max, P90 Max, and P99 Max on queries performed under these same set of load levels, collected during the same set of test runs, [can be found here](https://www.azul.com/wp-content/uploads/CassandraBenchmarkDetails.pdf).
 
-Summary
--------
+## Summary
 
 As can be seen in these results, Azul's Platform Prime is fast. It is by far the highest throughput JVM for powering Cassandra, based on pure throughput alone. It also exhibits better response times and latencies, at pretty much any percentile, than any other JVM.
 

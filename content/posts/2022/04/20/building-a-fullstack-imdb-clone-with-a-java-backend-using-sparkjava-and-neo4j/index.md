@@ -60,8 +60,7 @@ The course also automatically integrates with the [Neo4j Sandbox](https://sandbo
 
 ![model](https://github.com/neo4j-graph-examples/recommendations/raw/main/documentation/img/model.png)
 
-Setup
------
+## Setup
 
 We went with a traditional Java dev setup, installing Java 17 and Apache Maven via sdkman.
 
@@ -73,9 +72,7 @@ sdk use java 17-open
 sdk install maven
 ```
 
-
-Web Framework - SparkJava
--------------------------
+## Web Framework - SparkJava
 
 You might not have heard of [SparkJava](https://sparkjava.com/) which has been around for quite some time and is the Express/Sinatra equivalent minimalistic web framework for Java.
 
@@ -96,7 +93,6 @@ public class HelloWorld {
     }
 }
 ```
-
 
 Our whole main app that registers the routes, adds error handling, verifies auth, serves public files formatting in JSON (using GSON), and starts the server is not more than 20 lines.
 
@@ -143,9 +139,7 @@ public class NeoflixApp {
 }
 ```
 
-
-Routes - AccountRoutes
-----------------------
+## Routes - AccountRoutes
 
 The routes can be grouped by root path and then handled in a simple DSL. Here is the route for getting the favorites list in `AccountRoutes`
 
@@ -157,11 +151,9 @@ get("/favorites", (req, res) -> {
 }, gson::toJson);
 ```
 
-
 We first parse some params from the request URL then extract the userId from the request attributes and call the FavoriteService to query the database.
 
-Fixtures
---------
+## Fixtures
 
 While going through the course, the implementation for using the database is added incrementally.  
 
@@ -177,7 +169,6 @@ public static List<Map> loadFixtureList(final String name) {
     return GsonUtils.gson().fromJson(fixture,List.class);
 }
 ```
-
 
 Which can then be used in the service with `this.popular = AppUtils.loadFixtureList("popular");`.
 
@@ -202,7 +193,6 @@ Which can then be used in the service with `this.popular = AppUtils.loadFixtureL
 }]
 ```
 
-
 To make it not completely static we used some Java Streams processing fun to at least handle some of the filtering, sorting and pagination even with the fixture data.
 
 ```java
@@ -219,7 +209,6 @@ public static List<Map> process(
 }
 ```
 
-
 Which is then used in the services, like this:
 
 ```java
@@ -233,9 +222,7 @@ public List<Map> all(Params params, String userId) {
 }
 ```
 
-
-Neo4j Driver
-------------
+## Neo4j Driver
 
 The real service implementations use the official [Neo4j Java Driver](https://neo4j.com/developer/java) to query the database.  
 
@@ -260,9 +247,7 @@ static Driver initDriver() {
 }
 ```
 
-
-Services - FavoriteService
---------------------------
+## Services - FavoriteService
 
 The driver is then passed to each service on construction and can be used from there to create sessions and interact with the database.
 
@@ -293,7 +278,6 @@ public List<Map> all(String userId, Params params) {
     }
 }
 ```
-
 
 When adding a favorite movie, we use `FavoriteService.add` with a write transaction to create the `FAVORITE` relationship between the user and the movie.
 
@@ -328,11 +312,9 @@ public Map add(String userId, String movieId) {
 }
 ```
 
-
 The `result.single()` method would fail if there is *not exactly one* result with an `NoSuchRecordException`, so we don't need to check for that within the query.
 
-Authentication
---------------
+## Authentication
 
 Our app also provides user management, to allow for personalization.  
 
@@ -371,7 +353,6 @@ public Map authenticate(String email, String plainPassword) {
 }
 ```
 
-
 For passing authentication information as [JWT tokens](https://jwt.io) to the browser and back, we use the [Auth0 Java Library](https://github.com/auth0/auth0-java) to generate the token and then also validate it.
 
 This is done with a `before` handler in SparkJava, that on successful validation stores the `sub` which contains the `userId` in a request attribute that the routes then can access, e.g. for personalization or ratings.
@@ -390,9 +371,7 @@ static void handleAuthAndSetUser(Request req, String jwtSecret) {
 before((req, res) -> AppUtils.handleAuthAndSetUser(req, jwtSecret));
 ```
 
-
-Java 17 Records
----------------
+## Java 17 Records
 
 Originally, we had planned to use Java 17 records throughout the course, but then we ran into two issues.
 
@@ -410,14 +389,11 @@ var movies = tx.run(query, params)
                             v.get("published").asLocalDate())));
 ```
 
-
 ```java
 var movies = tx.run(query, params).list(row -> row.get("movie").toMap());
 ```
 
-
-Testing
--------
+## Testing
 
 We used [JUnit 5](https://junit.org/junit5/) for testing, which was a no-brainer.
 
@@ -427,8 +403,7 @@ The course uses test execution with `mvn test -Dtest=neoflix.TestName#testMethod
 
 Some of the tests also output results that the user is expected to fill into quizzes during the course.
 
-Conclusion
-----------
+## Conclusion
 
 For a real app, we'd could have gone with one of the larger app-frameworks, as there are more needs taken care of.
 

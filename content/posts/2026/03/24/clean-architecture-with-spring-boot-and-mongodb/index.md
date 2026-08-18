@@ -25,8 +25,7 @@ In this article, you will build a product catalog with orders. Products have nam
 
 The complete source code is available in the [companion repository on GitHub](https://github.com/fhsinchy/clean-architecture-spring-boot-mongodb).
 
-Prerequisites
--------------
+## Prerequisites
 
 * Java 17 or later
 * Spring Boot 3.x (use [Spring Initializr](https://start.spring.io/) with the `Spring Data MongoDB` and `Spring Web` dependencies)
@@ -82,7 +81,6 @@ dev.farhan.catalog/
   BeanConfiguration.java
 ```
 
-
 The `domain` package has no imports from `adapter` or `application`. The `application` package imports from `domain` but not from `adapter`. The `adapter` package imports from both, but dependency arrows always point inward. If a developer accidentally imports a MongoDB class in the domain layer, the package structure makes it obvious that something is wrong.
 
 Since we already covered what a port is, the directory names should make sense. The `in` ports define what the outside world can ask the application to do (use cases). The `out` ports define what the application needs from the outside world (e.g., repositories, external services).
@@ -130,7 +128,6 @@ public class Product {
 }
 ```
 
-
 The constructor validates that the price is positive and the stock quantity is non-negative. The `decreaseStock` method enforces the business rule that you cannot order more than what is available. This rule belongs to the entity, not to a service class. If stock validation logic lived in a service, you could bypass it by calling the entity directly from somewhere else in the codebase.
 
 `OrderItem` represents a single line in an order:
@@ -156,7 +153,6 @@ public class OrderItem {
     // getters omitted for brevity
 }
 ```
-
 
 `Order` has a private constructor and a public `create` method instead. This pattern (called a static factory method) forces all callers to go through `create`, where you can enforce rules that must always hold true. In this case, every order must have at least one item, and the total is calculated from those items rather than set by the caller.
 
@@ -191,7 +187,6 @@ public class Order {
 }
 ```
 
-
 `List.copyOf(items)` creates an unmodifiable copy of the list. Without it, whoever passed the original list could add or remove items after the order is created, breaking the total calculation. Defensive copies like this are a common practice in domain objects.
 
 The repository port interfaces define what the domain needs from the outside world:
@@ -205,7 +200,6 @@ public interface ProductRepository {
 }
 ```
 
-
 ```
 public interface OrderRepository {
 
@@ -213,7 +207,6 @@ public interface OrderRepository {
     Optional<Order> findById(String id);
 }
 ```
-
 
 These are plain Java interfaces in the `domain.port.out` package. No Spring annotations, no `MongoRepository` extension. If you deleted the Spring and MongoDB dependencies from your `pom.xml`, this package would still compile. That is the whole point: the domain depends on nothing but the JDK.
 
@@ -235,14 +228,12 @@ public interface CreateOrderUseCase {
 }
 ```
 
-
 ```
 public interface GetProductCatalogUseCase {
 
     List<Product> execute();
 }
 ```
-
 
 A couple of things to unpack here. `CreateOrderCommand` and `OrderItemRequest` are Java records. A record is a compact way to define a class that just holds data. Writing `record CreateOrderCommand(List<OrderItemRequest> items)` gives you a constructor, a getter (`items()`), `equals`, `hashCode`, and `toString` automatically. You will see records used throughout this project for DTOs and command objects since they are data carriers with no behavior.
 
@@ -291,7 +282,6 @@ public class CreateOrderService implements CreateOrderUseCase {
 }
 ```
 
-
 For each item in the command, the service looks up the product, calls `product.decreaseStock()` to enforce the stock rule, builds an `OrderItem`, and saves the updated product. It then creates the `Order` from the collected items and persists it through the repository port. `UUID.randomUUID().toString()` generates a random, unique ID for the order, like `"550e8400-e29b-41d4-a716-446655440000"`. We generate IDs in the application layer rather than letting MongoDB assign them because the domain should not depend on database behavior.
 
 There is no `@Service` or `@Autowired` here. These are plain Java classes that accept interfaces through their constructors. Spring wires them later, but the application layer does not know or care about that. The service coordinates domain objects and calls repository interfaces. It does not contain business rules (stock validation is in the `Product` entity), and it does not know how data is stored (that is behind the port interface).
@@ -315,7 +305,6 @@ public class GetProductCatalogService implements GetProductCatalogUseCase {
     }
 }
 ```
-
 
 5. Building the MongoDB adapter
 -------------------------------
@@ -344,7 +333,6 @@ public class ProductDocument {
     // constructors, getters, and setters omitted for brevity
 }
 ```
-
 
 `OrderDocument` is annotated with `@Document(collection = "orders")` and contains a list of `OrderItemDocument` objects. `OrderItemDocument` is a plain class without `@Document` since it is embedded inside the order document.
 
@@ -376,7 +364,6 @@ public class ProductMapper {
     }
 }
 ```
-
 
 Simple field-by-field conversions. No mapping libraries needed for a project this size. `OrderMapper` follows the same pattern, handling the nested `OrderItem` to `OrderItemDocument` conversion.
 
@@ -414,14 +401,12 @@ public class MongoProductRepository implements ProductRepository {
 }
 ```
 
-
 `MongoProductRepository` implements the domain's `ProductRepository` interface and is annotated with `@Component` so Spring picks it up for dependency injection. Internally, it uses `SpringDataMongoProductRepository`, which is a standard Spring Data interface:
 
 ```
 public interface SpringDataMongoProductRepository extends MongoRepository<ProductDocument, String> {
 }
 ```
-
 
 This interface extends `MongoRepository<ProductDocument, String>`. The two type parameters tell Spring Data which document class to work with (`ProductDocument`) and what type the `@Id` field is (`String`). In return, you get the standard CRUD methods (save, findById, findAll, delete) without writing any implementation. Spring Data generates the implementation at runtime. The adapter wraps this generated repository and converts between document and domain objects using the mapper. Each method in `MongoProductRepository` follows the same three-step pattern: convert the input, call Spring Data, convert the output.
 
@@ -463,7 +448,6 @@ public class ProductController {
     }
 }
 ```
-
 
 `OrderController` exposes `POST /orders` and maps the incoming JSON to a `CreateOrderCommand`:
 
@@ -507,7 +491,6 @@ public class OrderController {
 }
 ```
 
-
 The `@ExceptionHandler` at the bottom catches `IllegalArgumentException` thrown by domain validation (like `Product.decreaseStock()`) and returns a 400 response with the error message. Without this, Spring would return a generic 500 error with a stack trace.
 
 Request and response DTOs are defined as Java records in the `adapter.in.web` package. `CreateOrderRequest`, `OrderItemRequest`, `CreateOrderResponse`, and `ProductResponse` are all records with no logic, just data carriers for JSON serialization. Controllers map between these DTOs and domain objects. The controllers never touch MongoDB classes directly.
@@ -530,7 +513,6 @@ public class TransactionalCreateOrderUseCase implements CreateOrderUseCase {
     }
 }
 ```
-
 
 `TransactionalCreateOrderUseCase` lives in `adapter.out.persistence` alongside the other infrastructure code. It implements the same `CreateOrderUseCase` interface, delegates to `CreateOrderService`, and adds `@Transactional` so that all database writes within `execute` either succeed together or roll back together. The `CreateOrderService` itself stays free of Spring annotations.
 
@@ -559,7 +541,6 @@ public class BeanConfiguration {
 }
 ```
 
-
 The `MongoTransactionManager` bean tells Spring how to manage transactions for MongoDB. Without it, `@Transactional` would have no effect. Note that MongoDB transactions require a replica set. Atlas clusters are replica sets by default, so this works out of the box. If you are running MongoDB locally, you will need to configure it as a replica set.
 
 The `createOrderUseCase` bean first creates the plain `CreateOrderService`, then wraps it in `TransactionalCreateOrderUseCase`. Controllers receive the transactional wrapper through the `CreateOrderUseCase` interface and never know the difference.
@@ -575,8 +556,7 @@ Each layer depends only on the layer inside it. The controller knows about use c
 
 At the bottom of that flow, Spring has injected `MongoProductRepository` and `MongoOrderRepository` behind the `ProductRepository` and `OrderRepository` interfaces. The service never sees these concrete classes. If you swapped in a different adapter, the request would flow through the same path but hit a different database at the bottom.
 
-Conclusion
-----------
+## Conclusion
 
 Clean Architecture keeps your domain and business logic independent of MongoDB and Spring Boot. The dependency rule is enforced through package structure and interfaces. MongoDB is a pluggable adapter at the outermost ring, not a concern that leaks into your business logic.
 

@@ -38,8 +38,7 @@ These are similar to refactorings, but smaller in scope and impact, or as descri
 
 The "?" in the title is certainly not an error, it's not a how-to book but it offers us premises to makes us think and his insights are shared to help us define a framework.
 
-About the book
---------------
+## About the book
 
 This book is the start of a new series, and we start with tidying which he calls "the Pringles of software design" to facilitate future (behavioural) changes.
 
@@ -98,8 +97,7 @@ And here's where we dive into metaphors from the financial market \& option trad
 
 He does a magnificent job of clearly conveying these concepts, which helps us bridge certain gaps.
 
-My thoughts
------------
+## My thoughts
 
 The book contains some very useful insights, and the small bite-sized sections made it an enjoyable, educative read whilst sipping some tea.
 

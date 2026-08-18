@@ -42,8 +42,7 @@ I blogged about [Java Stream debugging](https://debugagent.com/debugging-streams
 
 This article delves into the practicalities of using `peek()` to debug Java streams, complete with code samples and common pitfalls.
 
-Understanding Java Streams
---------------------------
+## Understanding Java Streams
 
 Java Streams represent a significant shift in how Java developers work with collections and data processing, introducing a functional approach to handling sequences of elements.
 
@@ -68,20 +67,17 @@ List<String> filteredNames = names.stream()
 System.out.println(filteredNames);
 ```
 
-
 Output:
 
 ```
 [JOHN, JACOB]
 ```
 
-
 This example demonstrates the power of Java streams: by chaining operations together, we can achieve complex data transformations and filtering with minimal, readable code.
 
 It showcases the declarative nature of streams, where we describe what we want to achieve rather than detailing the steps to get there.
 
-What is the `peek()` Method?
-----------------------------
+## What is the `peek()` Method?
 
 At its core, `peek()` is a method provided by the `Stream` interface, allowing developers a glance into the elements of a stream without disrupting the flow of its operations.
 
@@ -90,7 +86,6 @@ The signature of `peek()` is as follows:
 ```
 Stream<T> peek(Consumer<? super T> action)
 ```
-
 
 It accepts a `Consumer` functional interface, which means it performs an action on each element of the stream without altering them. The most common use case for `peek()` is logging the elements of a stream to understand the state of data at various points in the stream pipeline.
 
@@ -102,7 +97,6 @@ List<String> collected = Stream.of("apple", "banana", "cherry")
                                .collect(Collectors.toList());
 System.out.println(collected);
 ```
-
 
 This code filters a list of strings, keeping only the ones that start with "a".
 
@@ -121,13 +115,11 @@ List<String> collected = Stream.of("apple", "banana", "cherry")
 System.out.println(collected);
 ```
 
-
 By adding `peek()` both before and after the `filter` operation, we can see which elements are processed and how the filter impacts the stream. This visibility is invaluable for debugging, especially when the logic within the stream operations becomes complex.
 
 We can't step over stream operations with the debugger, but `peek()` provides a glance into the code that is normally obscured from us.
 
-Uncovering Common Bugs with `peek()`
-------------------------------------
+## Uncovering Common Bugs with `peek()`
 
 ### Filtering Issues
 
@@ -139,7 +131,6 @@ List<String> collected = Stream.of("apple", "banana", "cherry", "Avocado")
                                .collect(Collectors.toList());
 System.out.println(collected);
 ```
-
 
 Expected output might be `["apple"]`, but let's say we also wanted "Avocado" due to a misunderstanding of the `startsWith` method's behavior. Since "Avocado" is spelled with an upper case "A" this code will return false: `Avocado".startsWith("a")`.
 
@@ -153,7 +144,6 @@ List<String> debugged = Stream.of("apple", "banana", "cherry", "Avocado")
                               .collect(Collectors.toList());
 System.out.println(debugged);
 ```
-
 
 ### Large Data Sets
 
@@ -192,7 +182,6 @@ System.out.println("High-value transactions count: " +
        highValueTransactions.size());
 ```
 
-
 In this approach, `peek()` is used to inspect elements within the stream conditionally. High-value transactions that meet a specific criterion (e.g., amount \> 10,000) are collected into a separate list for further analysis.
 
 This technique allows for targeted debugging without printing every element to the console, thereby avoiding performance degradation and clutter.
@@ -205,8 +194,7 @@ Streams are designed to be side-effect-free to ensure predictability and reliabi
 
 Therefore, while the above example demonstrates a practical use of `peek()` for debugging, it's important to use such techniques judiciously. Ideally, this debugging strategy should be temporary and removed once the debugging session is completed to maintain the integrity of the stream's functional paradigm.
 
-Limitations and Pitfalls
-------------------------
+## Limitations and Pitfalls
 
 While `peek()` is undeniably a useful tool for debugging Java streams, it comes with its own set of limitations and pitfalls that developers should be aware of.
 
@@ -247,8 +235,7 @@ To navigate these pitfalls effectively:
 
 By understanding and respecting these limitations and pitfalls, developers can leverage `peek()` to enhance their debugging practices without falling into common traps or inadvertently introducing problems into their codebases.
 
-Final Thoughts
---------------
+## Final Thoughts
 
 The `peek()` method offers a simple yet effective way to gain insights into Java stream operations, making it a valuable tool for debugging complex stream pipelines.
 
@@ -259,7 +246,3 @@ As with any powerful tool, the key is to use it wisely and in moderation.
 The true value of `peek()` is in debugging massive data sets, these elements are very hard to analyze even with dedicated tools.
 
 By using `peek()` we can dig into said data set and understand the source of the issue programmatically.
-
-<br />
-
-<br />

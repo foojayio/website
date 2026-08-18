@@ -58,7 +58,6 @@ private URI getUri(String stationUicCode) {
 }
 ```
 
-
 The required data from the API response was captured as TrainInfo with the following fields.
 
 ```java
@@ -71,7 +70,6 @@ public record TrainInfo(String direction,
   String departureStatus, 
   boolean isCancelled)
 ```
-
 
 #### 2. Building the view
 
@@ -89,7 +87,6 @@ public MainView(TrainDepartureService trainDepartureService) {
 }
 ```
 
-
 We have experimented with both to show data in the columns. Lit Renderer offers quick rendering but requires writing HTML code. Components can be used in Lit Renderer through their custom HTML tags. Component Renderers are easy to build but slow to render, as they generate a component for each item in the dataset for a given column.
 
 Sample code for Lit Renderer
@@ -104,7 +101,6 @@ private static Renderer<TrainDeparture> createPlatformRenderer() {
 }
 ```
 
-
 Sample code for Component Renderer
 
 ```java
@@ -113,7 +109,6 @@ private static ComponentRenderer<Span, TrainDeparture> createStatusRenderer() {
     (span, trainDeparture) -> { span.setText(trainDeparture.status().name()); }); 
 }
 ```
-
 
 #### 3. Styling the View
 
@@ -137,7 +132,6 @@ public void updateGrid() {
 }
 ```
 
-
 Vaadin Server push is based on a client-server connection established by the client. The server can then use the connection to send updates to the client. We have used the @Push annotation on the application class to enable server push.
 
 ```java
@@ -149,7 +143,6 @@ public class Application implements AppShellConfigurator {
     SpringApplication.run(Application.class, args); } 
 }
 ```
-
 
 #### 5. Setting up the Raspberry Pi 4
 

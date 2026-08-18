@@ -23,8 +23,7 @@ frozen: false
 
 **When exposing an application to the outside world, consider a Reverse-Proxy or an API Gateway to protect it from attacks. Rate Limiting comes to mind first, but it shouldn't stop there. We can factor many features in the API Gateway and should be bold in moving them from our apps. In this post, I'll show how to implement authentication at the Gateway API stage.**
 
-Overall authentication flow
----------------------------
+## Overall authentication flow
 
 The API Gateway doesn't authenticate but delegates authentication to an authentication provider. After authentication, the Gateway forwards the request to the app. The app checks authentication and gets the associated identity and permissions.
 
@@ -36,8 +35,7 @@ Now, onto the implementation. We will implement the above flow with the followin
 * Apache APISIX for the API Gateway
 * The Spring ecosystem for developing the app
 
-Keycloak
---------
+## Keycloak
 
 Keycloak is a feature-rich Open Source identity provider:
 > Add authentication to applications and secure services with minimum effort. No need to deal with storing users or authenticating users.
@@ -60,8 +58,7 @@ Go to the *Credential* tab and note the client's secret value.
 
 The final step is to create *users* . A user is a person who can log in to the system to access the app. Let's create two users, `john` and `jane`, and set their passwords. The demo repository already has Keycloak pre-configured - both users' password is `doe`.
 
-Spring Security
----------------
+## Spring Security
 
 We secure our application via Spring Security.
 
@@ -77,7 +74,6 @@ Here are the required dependencies:
     <artifactId>spring-boot-starter-oauth2-client</artifactId>   <!--2-->
 </dependency>
 ```
-
 
 1. Protect the application
 2. Call the Keycloak server
@@ -96,7 +92,6 @@ bean {
 }
 ```
 
-
 1. Any request requires to have the `OIDC_USER` authority
 2. "Log in" via OAuth2
 
@@ -114,7 +109,6 @@ spring.security:
         issuer-uri: http://localhost:9009/realms/apisix   #2
         user-name-attribute: preferred_username           #3
 ```
-
 
 1. Use the client created in Keycloak. We pass the secret at runtime via an environment variable
 2. Keycloak realm to use. We override the domain in the Docker compose file via an environment variable
@@ -137,7 +131,6 @@ I'll use a dummy Thymeleaf page to display the logged-in user. We need additiona
 </dependency>
 ```
 
-
 1. Thymeleaf proper
 2. Thymeleaf and Spring integration
 3. Offers dedicated Spring Security tags
@@ -158,11 +151,9 @@ The view is the following:
 </html>
 ```
 
-
 1. Display the "name" of the logged-in user
 
-Apache APISIX
--------------
+## Apache APISIX
 
 Lastly, let's configure the entry point into our system. I assume you're familiar with this blog and don't need an introduction to Apache APISIX. If you do, feel free to look at the [APISIX, an API Gateway the Apache way](https://blog.frankel.ch/apisix-api-gateway/).
 
@@ -186,14 +177,12 @@ routes:
 #END
 ```
 
-
 1. Keycloak offers an endpoint that details every necessary endpoint for an OpenID integration
 2. Use the same client as the app. In real-world scenarios, we should use one client per component, but it's a demo
 3. Use the realm created in the Keycloak section
 4. Any URL that's a subpath of the protected URL will do
 
-Putting it all together
------------------------
+## Putting it all together
 
 We put everything together via Docker Compose:
 
@@ -232,7 +221,6 @@ services:
     restart: on-failure                                                              #8
 ```
 
-
 1. Configure standalone mode
 2. Routes and plugins configuration as seen in the previous section
 3. Initialize Keycloak with the existing saved realm
@@ -250,8 +238,7 @@ If we log in successfully, we are allowed to access the app. Notice that we disp
 
 ![](successful-login-1024x806.png)
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we described how to move the authentication step to the API Gateway stage, delegate authentication to an identity provider, and let the app verify the authentication status.
 
@@ -266,7 +253,5 @@ The complete source code for this post can be found on [GitHub](_wp_link_placeho
 * [Keycloak Administration Guide](https://www.keycloak.org/docs/latest/server_admin/index.html)
 * [How to Integrate Keycloak for Authentication with Apache APISIX](https://www.keycloak.org/2021/12/apisix)
 * [A Quick Guide to Using Keycloak With Spring Boot](https://www.baeldung.com/spring-boot-keycloak)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/authentication-api-gateway/) on July 30^th^, 2023*

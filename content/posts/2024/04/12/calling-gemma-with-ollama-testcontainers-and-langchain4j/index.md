@@ -27,8 +27,7 @@ Gemma is a family of lightweight, state-of-the-art open models built from the sa
 
 Gemma is available in two sizes: 2B and 7B. Its weights are freely available, and its small size means you can run it on your own, even on your laptop. So I was curious to give it a run with [LangChain4j](https://docs.langchain4j.dev/).
 
-How to run Gemma
-----------------
+## How to run Gemma
 
 There are many ways to run Gemma: in the cloud, via [Vertex AI](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/335) with a click of a button, or [GKE](https://cloud.google.com/kubernetes-engine/docs/tutorials/serve-gemma-gpu-vllm) with some GPUs, but you can also run it locally with [Jlama](https://github.com/tjake/Jlama) or [Gemma.cpp](https://github.com/google/gemma.cpp).
 
@@ -41,11 +40,9 @@ ollama run gemma:2b
 ollama run gemma:7b
 ```
 
-
 Cherry on the cake, the \[LangChain4j\]() library provides an [Ollama module](https://docs.langchain4j.dev/integrations/language-models/ollama), so you can plug Ollama supported models in your Java applications easily.
 
-Containerization
-----------------
+## Containerization
 
 After a great discussion with my colleague [Dan Dobrin](https://twitter.com/ddobrin) who had worked with Ollama and TestContainers ([#1](https://github.com/GoogleCloudPlatform/serverless-production-readiness-java-gcp/blob/main/sessions/next24/books-genai-vertex-langchain4j/src/test/java/services/OllamaContainerTest.java) and [#2](https://github.com/GoogleCloudPlatform/serverless-production-readiness-java-gcp/blob/main/sessions/next24/books-genai-vertex-langchain4j/src/test/java/services/OllamaChatModelTest.java#L37)) in his [serverless production readiness workshop](https://github.com/GoogleCloudPlatform/serverless-production-readiness-java-gcp/tree/main), I decided to try the approach below.
 
@@ -57,8 +54,7 @@ So here's the whole picture:
 
 ![](gemma-ollama-testcontainers-langchain4j-700x360.png)
 
-Time to implement this approach!
---------------------------------
+## Time to implement this approach!
 
 You'll find the code in the Github [repository](https://github.com/glaforge/gemini-workshop-for-java-developers/blob/main/app/src/main/java/gemini/workshop/CallGemma.java) accompanying my recent [Gemini workshop](https://codelabs.developers.google.com/codelabs/gemini-java-developers)
 
@@ -77,7 +73,6 @@ String response = model.generate("Why is the sky blue?");
 
 System.out.println(response);
 ```
-
 
 * You run an Ollama test container.
 * You create an Ollama chat model, by pointing at the address and port of the container.
@@ -109,20 +104,14 @@ if (listImagesCmd.isEmpty()) {
 }
 ```
 
-
 You need to create a derived Ollama container that pulls in the Gemma model. Either this image was already created beforehand, or if it doesn't exist yet, you create it.
 
 Use the Docker Java client to check if the custom Gemma image exists. If it doesn't exist, notice how TestContainers let you create an image derived from the base Ollama image, pull the Gemma model, and then commit that image to your local Docker registry.
 
 Otherwise, if the image already exists (ie. you created it in a previous run of the application), you're just going to tell TestContainers that you want to substitute the default Ollama image with your Gemma-powered variant.
 
-And voila!
-----------
+## And voila!
 
 You can **call Gemma locally on your laptop, in your Java apps, using LangChain4j**, without having to install and run Ollama locally (but of course, you need to have a Docker daemon running).
 
 Big thanks to [Dan Dobrin](https://twitter.com/ddobrin) for the approach, and to [Sergei](https://twitter.com/bsideup), [Eddú](https://twitter.com/EdduMelendez) and [Oleg](https://twitter.com/shelajev) from TestContainers for the help and useful pointers.
-
-<br />
-
-<br />

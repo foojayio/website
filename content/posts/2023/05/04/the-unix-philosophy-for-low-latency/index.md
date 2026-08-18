@@ -34,13 +34,11 @@ The above simple rules allow a system to be composed of simple components, conne
 
 The canonical example of the power of the Unix Philosophy is the famous [Knuth vs McIlroy competition to build a word count](http://www.leancrew.com/all-this/2011/12/more-shell-less-egg/) program; McIlroy builds a six command shell pipeline that is a complete (and bug-free) solution to the problem.
 
-The Unix philosophy in Enterprise IT
-------------------------------------
+## The Unix philosophy in Enterprise IT
 
 The above has arguably never really translated to Enterprise IT -- an Enterprise application tends to deal with relatively complex problems, be made up of modules with a greater scope and business functionality, and despite numerous attempts over the years to try and come up with a *high performance* standard for connection of modules together (COM, CORBA, SOAP, JSON/REST/HTTP anyone?), an effective standardised connection mechanism has never "stuck".
 
-The Chronicle solution
-----------------------
+## The Chronicle solution
 
 [Chronicle's](https://chronicle.software/) solution for the Unix Philosophy in Enterprise IT involves composing systems from
 
@@ -75,7 +73,6 @@ public interface AggregatorOut {
 }
 ```
 
-
 And
 
 ```java
@@ -83,7 +80,6 @@ public interface AggregatorIn {
    void mdi(MarketDataIncrement mdi);
 }
 ```
-
 
 In this simple example there is only one method on each, but a service can implement many interfaces with many methods and any number of arguments of all kinds, including primitives.
 
@@ -100,7 +96,6 @@ public class MarketDataSnapshot extends SelfDescribingMarshallable {
    // getters/setters ...
 }
 ```
-
 
 And the microservice:
 
@@ -127,7 +122,6 @@ public class AggregatorImpl implements AggregatorIn {
    }
 }
 ```
-
 
 You can see that there is no dependence on any Chronicle code, with the exception of the DTO, and the microservice respects the Unix philosophy -- it is simple and easy to understand, and does Just One Thing.
 
@@ -164,7 +158,6 @@ public class AggregatorTest {
 }
 ```
 
-
 And the "aggregator" folder contains an **in.yaml** file
 
 ```
@@ -185,7 +178,6 @@ mdi: {
 }
 ```
 
-
 Which the YamlTester plays into the AggregatorImpl class, automatically deserialising the MarketDataIncrement DTOs and dispatching them to the mdi method.
 
 This is all done in a single thread, allowing breakpoints to be set. The YamlTester records any output sent to the "out" interface and compares it to the contents of the **out.yaml** file. Intellij shows a friendly text diff in case of failure, making it very easy to see what was changed:
@@ -203,7 +195,6 @@ marketDataSnapshot: {
 ...
 ```
 
-
 ### Hooking it all up and running
 
 The sample code contains maven exec java stanzas to run each microservice and also stanzas to run the ChronicleReaderMain tool which reads messages from the queues, deserialises them and displays them as YAML. To run:
@@ -216,7 +207,6 @@ mvn exec:java@aggregator
 mvn exec:java@strategy
 ```
 
-
 And to watch the output from each service start up three more screens (these are the equivalent of Unix tee and tail -f)
 
 ```
@@ -224,7 +214,6 @@ mvn exec:java@tailf -Dqueue=agg-in
 mvn exec:java@tailf -Dqueue=agg-out
 mvn exec:java@tailf -Dqueue=strat-out
 ```
-
 
 We can see that it is possible to realise the Unix Philosophy in Enterprise IT using a strongly-typed Enterprise language (Java), a suitable component technology (microservices) and an appropriate mechanism to glue them together (Chronicle Queue \& Wire).
 

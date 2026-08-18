@@ -25,8 +25,7 @@ Following on from [different techniques](https://foojay.io/today/faster-maven-bu
 
 Between each run, we change the source code by adding a single blank line; between each section, we remove all built images, including the intermediate ones that are the results of the multi-stage build. The idea is to avoid reusing a previously built image.
 
-Baseline
---------
+## Baseline
 
 To compute a helpful baseline, we need a sample project. I created [one](https://github.com/nfrankel/fast-maven-builds) just for this purpose: it's a relatively small Kotlin project.
 
@@ -51,7 +50,6 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.0.jar"]     #6
 ```
 
-
 1. Start from a JDK image for the packaging step
 2. Add required resources
 3. Create the JAR
@@ -65,7 +63,6 @@ Let's execute the build:
 time DOCKER_BUILDKIT=0 docker build -t fast-maven:1.0 . #1
 ```
 
-
 1. Forget the environment variable for now, as I'll explain in the next section
 
 Here are the results of the five runs:
@@ -78,9 +75,7 @@ Here are the results of the five runs:
 * 0.38s user 0.61s system 0% cpu 2:04.68 total
 ```
 
-
-Buildkit for the win
---------------------
+## Buildkit for the win
 
 The last command line used the `DOCKER_BUILDKIT` environment variable. It's the way to tell Docker to use the legacy engine. If you didn't update Docker for some time, it's the engine that you're using. Nowadays, [BuildKit](https://github.com/moby/buildkit) has superseded it and is the new default.
 
@@ -98,7 +93,6 @@ Let's re-execute the previous command on the new engine:
 time docker build -t fast-maven:1.1 .
 ```
 
-
 Here's an excerpt of the console log of the first run:
 
 ```
@@ -114,7 +108,6 @@ Here's an excerpt of the console log of the first run:
 0.68s user 1.04s system 1% cpu 2:06.33 total
 ```
 
-
 The following executions of the same command have a slightly different output:
 
 ```
@@ -128,7 +121,6 @@ The following executions of the same command have a slightly different output:
 ...
 ```
 
-
 Remember that we change the source code between runs. Files that we do not change, namely `.mvn`, `mvnw` and `pom.xml`, are *cached* by BuildKit. But these resources are small, so that caching doesn't significantly improve the build time.
 
 ```
@@ -138,11 +130,9 @@ Remember that we change the source code between runs. Files that we do not chang
 * 0.64s user 0.95s system 1% cpu 1:59.82 total
 ```
 
-
 A fast glance at the logs reveals that the biggest bottleneck in the build is the download of all dependencies (including plugins). It occurs every time we change the source code. That's the reason why BuildKit doesn't improve the performance.
 
-Layers, layers, layers
-----------------------
+## Layers, layers, layers
 
 We should focus our efforts on the dependencies. For that, we can leverage *layers* and split the build into two steps:
 
@@ -175,7 +165,6 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.2.jar"]
 ```
 
-
 1. The `go-offline` goal downloads all dependencies and plugins
 2. At this point, all dependencies are available
 
@@ -187,13 +176,11 @@ Let's run the build:
 time docker build -t fast-maven:1.2 .
 ```
 
-
 The first run takes significantly more time than the baseline:
 
 ```
 0.84s user 1.21s system 1% cpu 2:35.47 total
 ```
-
 
 However, the subsequent builds are much faster. Changing the source code only affects the second layer and doesn't trigger the download of (most) dependencies:
 
@@ -205,9 +192,7 @@ However, the subsequent builds are much faster. Changing the source code only af
 * 0.22s user 0.37s system 5% cpu 10.454 total
 ```
 
-
-Volume mount in build
----------------------
+## Volume mount in build
 
 Layering the build improved the build time drastically. We can change the source code and keep it low. There's one remaining issue, though. Changing a single dependency invalidates the layer, so we need to download all of them again.
 
@@ -233,7 +218,6 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.3.jar"]
 ```
 
-
 1. Opt-in to experimental features
 2. Build using the cache
 
@@ -243,13 +227,11 @@ It's time to run the build:
 time docker build -t fast-maven:1.3 .
 ```
 
-
 The build time is higher than for the regular build but still lower than the layers build:
 
 ```
 0.71s user 1.01s system 1% cpu 1:50.50 total
 ```
-
 
 The following builds are on par with layers:
 
@@ -261,7 +243,6 @@ The following builds are on par with layers:
 * 0.24s user 0.35s system 5% cpu 10.283 total
 ```
 
-
 However, as opposed to layers, we only need to download updated dependencies. Here, let's change Kotlin's version from `1.5.30` to `1.5.31`:
 
 ```xml
@@ -270,16 +251,13 @@ However, as opposed to layers, we only need to download updated dependencies. He
 </properties>
 ```
 
-
 It's a huge improvement regarding the build time:
 
 ```
 * 0.41s user 0.57s system 2% cpu 44.710 total
 ```
 
-
-Considering the Maven daemon
-----------------------------
+## Considering the Maven daemon
 
 In the previous post regarding [regular Maven builds](https://blog.frankel.ch/faster-maven-builds/1/), I mentioned the Maven daemon. Let's change our build accordingly:
 
@@ -310,7 +288,6 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.4.jar"]
 ```
 
-
 1. Download the latest version of the Maven daemon
 2. Refresh the package index
 3. Install `unzip`
@@ -325,7 +302,6 @@ Let's run the build now:
 docker build -t fast-maven:1.4 .
 ```
 
-
 The log outputs the following:
 
 ```
@@ -335,7 +311,6 @@ The log outputs the following:
 * 0.76s user 1.04s system 1% cpu 1:50.35 total
 * 0.80s user 1.18s system 1% cpu 2:01.45 total
 ```
-
 
 There's no significant improvement compared to the baseline.
 
@@ -354,14 +329,12 @@ RUN --mount=type=cache,target=/var/cache/apt,rw apt-get update \
  && mv mvnd-0.6.0-linux-amd64/* /opt/mvnd
 ```
 
-
 ```dockerfile
 # docker build -t fast-maven:1.5 .
 FROM mvnd:0.6.0 as build
 
 # ...
 ```
-
 
 This approach changes the output in any significant way.
 
@@ -383,8 +356,7 @@ Here's the summary of all execution times:
 |         % gain         |   0.00%    |  -1.98%  |   91.63%   |  **91.35%**  | 5.74%  |
 |------------------------|------------|----------|------------|--------------|--------|
 
-Conclusion
-----------
+## Conclusion
 
 Speeding up the performance of Maven builds inside of Docker is pretty different from regular builds. In Docker, the limiting factor is the download speed of dependencies If you're stuck on an old version, you need to use layers to cache dependencies.
 

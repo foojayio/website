@@ -35,8 +35,7 @@ Here the original Pathfinder Applet Page: [​https://areo.info/mpf/java11.html]
 
 Instead, use the recipe explained below to create a JNLP file so you can run the Applet on current OpenJDK 11 with IcedTea-Web independently from any Web Browser.
 
-Overview
---------
+## Overview
 
 For those who consider this rocket science and just want to see the result after migration, the migrated Pathfinder application is accessible here: ​<https://areo.info/mpf>. For those who are curious about all the details, here is the general workflow with code:
 
@@ -72,7 +71,6 @@ This is the original method to include Applets.
 </applet>
 ```
 
-
 **Object-Tag**
 
 This was added later as an alternative to the Applet tag.
@@ -95,7 +93,6 @@ This was added later as an alternative to the Applet tag.
 </object>
 ```
 
-
 **Embed-Tag**
 
 This was used by the Netscape Browser.
@@ -110,7 +107,6 @@ This was used by the Netscape Browser.
   <noembed>Alternative text.</noembed> 
 </embed>
 ```
-
 
 ### **Creating a JNLP file**
 
@@ -144,7 +140,6 @@ Based on the copied \<applet\>, \<object\> or \<embed\> section, create a JNLP f
 </jnlp>
 ```
 
-
 I'm using an empty "codebase" attribute as for the first step the file will only be used locally. Because of the empty codebase, we then have to add the complete absolute URLs in the jar href attributes. Without this, IcedTea-Web would try to update the local JNLP file from the codebase URL, which will fail. We'll now try to run the newly created file on IcedTea-Web.
 
 ### **Running the Migrated Applet**
@@ -157,13 +152,11 @@ Linux / macOS:
 javaws.sh myapp.jnlp
 ```
 
-
 Windows (open a command window / Powershell first):
 
 ```
 javaws myapp.jnlp
 ```
-
 
 I'm not using the javaws -Xoffline parameter as then IcedTea-Web won't download the application JARs. If you see a JAR no found error on this first start, try again as then IcedTea-Web will have filled the local JAR cache. Depending on the further outcome of these first tries, you might need to adjust the JNLP file, like fixing jar href URLs, changing application parameters or others. For some applications you might also need to add the -nosecurity parameter (javaws -nosecurity myapp.jnlp).
 
@@ -175,13 +168,11 @@ Linux / macOS:
 itweb-settings.sh
 ```
 
-
 Windows:
 
 ```
 itweb-settings
 ```
-
 
 Then enable logging to the terminal at Debugging -\> Enable debugging. Writing the logs to a file can also enabled there. The configuration tool also allows to wipe the local JAR cache which is helpful during implementing the solution: Cache -\> View Files -\> Purge
 
@@ -199,12 +190,10 @@ Linux / macOS:
 javaws.sh http://mywebsite.domain/somepath/myapp.jnlp
 ```
 
-
 Windows:
 
 ```
 javaws http://mywebsite.domain/somepath/myapp.jnlp
 ```
-
 
 For security reasons I would refrain from registering the JNLP file type with the javaws application on the Operating System as it can be mis-used by malicious web sites and unaware users can be lured to click and download JNLP files and then get it executed locally on their system. Instead, storing a script or start menu entry with the complete javaws command as used above including the JNLP file or URL is often a good solution.

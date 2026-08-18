@@ -25,13 +25,11 @@ Welcome to another episode of the Foojay Podcast! In this episode, we're talking
 
 Now, Java 26 is not a Long Term Support (LTS) release; that was Java 25. But don't let that fool you into thinking there's nothing interesting here. This release brings ten JDK Enhancement Proposals (JEPs). They cover everything from performance improvements to long-overdue cleanups. Of those ten JEPS, five are new features, and we also get five preview/incubator features.
 
-YouTube
--------
+## YouTube
 
 {{< youtube vlVVLM4ogy0 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,16 +37,14 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Simon Ritter
   * <https://www.linkedin.com/in/siritter/>
 * Loïc Mathieu
   * <https://www.linkedin.com/in/lo%C3%AFc-mathieu-475b144/>
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests
 

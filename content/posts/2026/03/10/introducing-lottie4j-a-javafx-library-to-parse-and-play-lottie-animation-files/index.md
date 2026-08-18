@@ -21,8 +21,7 @@ At the time, I wanted to create a similar experience in JavaFX, but I couldn't f
 
 {{< youtube 6t1O7APENIo >}}
 
-What is Lottie?
----------------
+## What is Lottie?
 
 [Lottie](https://lottiefiles.com/) is a JSON-based animation file format created by Airbnb that lets designers export animations from various tools and use them on any platform (mobile, web, desktop) as easily as using static images. It's become the industry standard for vector animations because the files are small, scalable, and programmatically manipulable.
 
@@ -34,8 +33,7 @@ You see, the Lottie format, although JSON-based, is incredibly complex and hard 
 
 The specification uses nested structures for layers, shapes, effects, and animations. Understanding what each property does and how they interact requires diving deep into the documentation and lots of trial-and-error experiments.
 
-Lottie4J Project
-----------------
+## Lottie4J Project
 
 I created Lottie4J as a multi-module Maven project. I started working on this in 2022, but only now, thanks to the developments at Claude.ai, can I dive deep enough into the Lottie format to understand it and handle the data correctly, so it can be visualized and animated correctly. Turns out my data model parsing was already correct. Also, my first JavaFX rendering worked well, but with some changes in how the nested data structures are handled, I'm now convinced the library is ready to be released as version 1.0.0.
 
@@ -59,8 +57,7 @@ Lottie4J is organized into three main modules:
  </figure>
 </figure>
 
-Making Sense of the JSON
-------------------------
+## Making Sense of the JSON
 
 One of my goals was to make the cryptic Lottie format easier to understand. In the Animation class in the core library, each cryptic JSON property is mapped to a clear, descriptive name. `@JsonProperty("fr")` becomes `framesPerSecond`, `@JsonProperty("ip")` becomes `inPoint`. Java objects use human-readable names, making the code self-documenting and much easier to work with.
 
@@ -77,8 +74,7 @@ I've included several test animations in the project to showcase the capabilitie
 
 While an animation plays, you can see the complete structure in the tree view - every layer, every shape, every animated property.
 
-How to Use Lottie4J
--------------------
+## How to Use Lottie4J
 
 Using Lottie4J in your JavaFX application is straightforward. Import the fxplayer-dependency in your pom.xml:
 
@@ -90,7 +86,6 @@ Using Lottie4J in your JavaFX application is straightforward. Import the fxplaye
 </dependency>
 ```
 
-
 Then add the animation with this minimal code example:
 
 ```
@@ -98,16 +93,13 @@ LottiePlayer player = new LottiePlayer("path/to/animation.json");
 parent.getChildren().add(player);
 ```
 
-
 Load your Lottie JSON file, create a LottiePlayer component, add it to your scene or parent component. That's it! The player handles all the complexity of parsing the animation and rendering it frame by frame.
 
-Continuous Evolution
---------------------
+## Continuous Evolution
 
 The Lottie format is constantly evolving with new features and capabilities. There's always more to implement, more edge cases to handle, more animations to test. But that's what makes this project interesting - it's a continuous learning experience.
 
-Get Started
------------
+## Get Started
 
 If you're working with JavaFX and want to add beautiful, lightweight animations to your applications, check out Lottie4J. All the code is open source and available on [GitHub](https://github.com/lottie4j/lottie4j). You'll find more documentation and examples on [lottie4j.com](https://lottie4j.com).
 

@@ -24,8 +24,7 @@ I've tried Go in the past, and the least I could say is that I was not enthusias
 
 In this post, I'd like to describe how a couple of popular languages cope with errors.
 
-A time before our time
-----------------------
+## A time before our time
 
 I could probably go back a long time, but I needed to choose a baseline at some point. In this post, the baseline is C.
 
@@ -45,8 +44,7 @@ The final solution is to use a global error variable - `errno`.
 
 Every alternative has pros and cons. However, since there's no baked-in way, the biggest issue is the lack of consistency.
 
-Exceptions
-----------
+## Exceptions
 
 I don't know which language first implemented exceptions, but I'm pretty sure Java was the one to popularize them. Exceptions solve a common problem: simple error checking code intertwines the nominal path and the error-handling path:
 
@@ -71,7 +69,6 @@ if (slice < 0)
     }
 ```
 
-
 The benefit of exceptions is to separate them cleanly in different blocks to ease reading:
 
 ```java
@@ -90,7 +87,6 @@ try {
 }
 ```
 
-
 1. If the call throws a `FooException`, short-circuit and directly execute the relevant `catch` block
 2. Same for `BarException`
 3. Same for `SliceException`
@@ -99,8 +95,6 @@ try {
 Java exceptions are baked in its type system.
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-52641 aligncenter" src="java-exception-700x474.png" alt="" width="700" height="474">
-
-<br />
 
 Java provides two types of exceptions: *checked* and *unchecked*. Checked exceptions need:
 
@@ -113,13 +107,11 @@ Foo getFoo() throws FooException {
 }
 ```
 
-
 The compiler enforces this requirement. Unchecked exceptions don't need to follow this rule but can.
 
 Some languages designed later did implement exceptions too: Scala and Kotlin, since they share Java's JVM roots, but also Python and Ruby.
 
-The Try container
------------------
+## The Try container
 
 While exceptions were an improvement over plain return values, they were not exempt from criticism. The bulk of it was aimed at checked exceptions since the mechanism they're based on clutter the code. Moreover, some view *all* exceptions as a `GOTO` because of its short-circuiting nature.
 
@@ -138,22 +130,18 @@ Try.of(() -> getFoo())                      // 1
    .getOrElse(() -> 5);                     // 4
 ```
 
-
 1. Nominal path
 2. Set the return value in case the relevant exception is thrown
 3. Block to execute in all cases, nominal path or exception
 4. Get the result if there's one, or return the result of the supplier's execution
 
-The Either container
---------------------
+## The Either container
 
 While the above snippet might appeal to your FP-side, our programming-side is probably not happy. We had to assign unique return values to exceptions. We have to know the meaning of `1`, `2` and `3`.
 
 It would be better to have a dedicated structure to store either the regular result or the exception. It's the goal of the `Either` type.
 
 <img decoding="async" class="size-medium wp-image-55054 aligncenter" src="vavr-either-700x399.png" alt="" width="700" height="399">
-
-<br />
 
 By convention, the left side holds the failure, and the right the success. We can rewrite the above snippet as:
 
@@ -164,7 +152,6 @@ Try.of(() -> getFoo())
    .andFinally(() -> {})
    .toEither()                             // 1
 ```
-
 
 1. Hold either a `Throwable` *or* an `Integer`
 
@@ -184,11 +171,9 @@ var result = getFoo()
     .flatMap(bar -> checkBarSlice(bar));
 ```
 
-
 Note that the previous `andFinally()` block doesn't require special treatment.
 
-Either on steroids
-------------------
+## Either on steroids
 
 Java provides `Either` via a library, so do other languages. Yet, a couple of them integrate it in their standard library:
 
@@ -214,7 +199,6 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
-
 1. Read a file. `File::open` returns a `Result`, as it can fail.
 2. Evaluate the `Result`
 3. If `Result` is `Ok`, then proceed with its content
@@ -237,12 +221,10 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
-
 1. If `Ok`, unwrap the value, else return the `Err`
 2. Return the `Result`
 
-The curious case of Go
-----------------------
+## The curious case of Go
 
 Throughout history, programming languages have provided more and more powerful constructs to handle errors: from simple return values to `Either` via exceptions. It brings us to the Go programming language. Incepted relatively recently, it forces developers to handle errors via... multiple return values:
 
@@ -261,14 +243,12 @@ if err != nil {                           // 2
 }
 ```
 
-
 1. Return the error reference
 2. Check whether the reference points to an error
 
 Developers must check each potential error, cluttering the code with error-handling code in the nominal path. I've no clue why Go designers chose such an approach.
 
-Conclusion
-----------
+## Conclusion
 
 I'm not an expert on Functional Programming, nor a die-hard fanboy. I merely acknowledge its benefits. For example, you can design your Object-Oriented model around immutability.
 

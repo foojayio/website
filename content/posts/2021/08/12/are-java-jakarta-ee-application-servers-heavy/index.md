@@ -32,7 +32,3 @@ In this webinar:
 If you've been hearing that Java EE application servers are all resource hogs and slow to start up -- watch this webinar to see why that's not true and how you can continue using your existing Java EE development skills to modernize your application development!
 
 {{< youtube OHbRoaLgpw8 >}}
-
-<br />
-
-<br />

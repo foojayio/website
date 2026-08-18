@@ -13,3 +13,4 @@ aliases:
   - "/today/author/francois-martin/"
 frozen: false
 ---
+

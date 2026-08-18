@@ -32,8 +32,7 @@ Let's learn from experts why Java should be on your game-development-language-li
 
 {{< youtube 68sJ2lTyNv0 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +40,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests**
-----------
+## **Guests**
 
 * Chengen Zhao
   * <https://twitter.com/WhiteWoodCity>
@@ -59,8 +57,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://github.com/HanSolo/jarkanoid>
   * <https://github.com/HanSolo/SpaceFX>
 
-**Content**
------------
+## **Content**
 
 * 00'00 Intro and introduction of the guests
   * <https://foojay.io/today/foojay-podcast-9/>

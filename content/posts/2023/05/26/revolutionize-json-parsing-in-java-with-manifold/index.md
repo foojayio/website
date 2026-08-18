@@ -31,10 +31,7 @@ Manifold is a revolutionary set of language extensions for Java that completely 
 
 {{< youtube AoBnGZ7q6rk >}}
 
-<br />
-
-Getting Started with Manifold
------------------------------
+## Getting Started with Manifold
 
 The code for this tutorial can be found on my [GitHub page](https://github.com/shai-almog/java-book/). Manifold is relatively young but already vast in its capabilities. You can learn more about the project on their website and Slack channel.
 
@@ -58,7 +55,6 @@ This line needs to go into the properties section:
 <manifold.version>2023.1.5</manifold.version>
 ```
 
-
 The dependencies we use are these:
 
 ```
@@ -68,7 +64,6 @@ The dependencies we use are these:
     <version>${manifold.version}</version>
 </dependency>
 ```
-
 
 The compilation plugin is the boilerplate that weaves Manifold into the bytecode and makes it seamless for us. It's the last part of the pom setup:
 
@@ -102,11 +97,9 @@ The compilation plugin is the boilerplate that weaves Manifold into the bytecode
 </build>
 ```
 
-
 With the setup complete, let's dive into the code.
 
-Parsing JSON with Manifold
---------------------------
+## Parsing JSON with Manifold
 
 We place a sample JSON file in the project directory under the resources hierarchy. I placed this file under `src/main/resources/com/debugagent/json/Test.json`:
 
@@ -121,7 +114,6 @@ We place a sample JSON file in the project directory under the resources hierarc
   ]
 }
 ```
-
 
 In the main class, we refresh the Maven project, and you'll notice a new Test class appears. This class is dynamically created by Manifold based on the JSON file. If you change the JSON and refresh Maven, everything updates seamlessly. It's important to understand that Manifold isn't a code generator. It compiles the JSON we just wrote into bytecode.
 
@@ -140,7 +132,6 @@ Test test = Test.builder().withFirstName("Someone")
         .build();
 ```
 
-
 Which will print out the following JSON:
 
 ```
@@ -155,7 +146,6 @@ Which will print out the following JSON:
   ]
 }
 ```
-
 
 We can similarly read a JSON file using code such as this:
 
@@ -173,7 +163,6 @@ Test readObject = Test.load().fromJson("""
         }
         """);
 ```
-
 
 Note the use of Java 15 `TextBlock` syntax for writing a long string. The `load()` method returns an object that includes various APIs for reading the JSON. In this case, it is read from a `String` but there are APIs for reading it from a URL, file, etc.
 
@@ -197,14 +186,12 @@ Manifold supports various formats, including CSV, XML, and YAML, allowing you to
 </dependency>
 ```
 
-
 With these additional dependencies, this code will print out the same data as the JSON file... With `test.write().toCsv()` the output would be:
 
 ```
 "firstName","surname","active","details"
 "Someone","Surname","true","[manifold.json.rt.api.DataBindings@71070b9c]"
 ```
-
 
 Notice that the Comma Separated Values (CSV) output doesn't include hierarchy information. That's a limitation of the CSV format and not the fault of Manifold.
 
@@ -216,7 +203,6 @@ With `test.write().toXml()` the output is familiar and surprisingly concise:
 </root_object>
 ```
 
-
 With `test.write().toYaml()` we again get a familiar printout:
 
 ```
@@ -227,9 +213,7 @@ details:
 - key: Value 1
 ```
 
-
-Working with JSON Schema
-------------------------
+## Working with JSON Schema
 
 Manifold also works seamlessly with JSON schema, allowing you to enforce strict rules and constraints. This is particularly useful when working with dates and enums. Manifold seamlessly creates/updates byte code that adheres to the schema, making it much easier to work with complex JSON data.
 
@@ -270,7 +254,6 @@ This schema is copied and pasted from the [Manifold github project](https://gith
 }
 ```
 
-
 It's a relatively simple schema but I'd like to turn your attention to several things here. It defines name and email as required. This is why when we try to create a `User` object using a builder in Manifold, the `build()` method requires both parameters:
 
 ```java
@@ -286,11 +269,9 @@ User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf
        .build();
 ```
 
-
 That can be made even shorter with static imports but the gist of the idea is clear. JSON is effectively native to Java in Manifold.
 
-The Tip of The Iceberg
-----------------------
+## The Tip of The Iceberg
 
 Manifold is a powerful and exciting project. It revolutionizes JSON parsing in Java but that's just one tiny portion of what it can do!
 

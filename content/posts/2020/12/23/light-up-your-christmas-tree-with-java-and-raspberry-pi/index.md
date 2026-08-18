@@ -28,11 +28,7 @@ Or want to learn something completely new and use your Java-knowledge to control
 
 Here we go with this small project to get you introduced to the world of electronics programming!
 
-
-
 *This post was originally published on "[JVM **Advent** - The JVM Programming **Advent** Calendar](https://www.javaadvent.com/)", a month-long reading list of diverse Java-related articles. A nice addition to your daily read of Foojay!*
-
-
 
 We are going the make the "Hello World"-equivalent of an electronics project: a blinking LED. And to make it a bit more challenging, not only blinking one LED but a "full" Christmas tree, well... at least 7 blinking Christmas lights.
 
@@ -80,7 +76,6 @@ openjdk version "11.0.9" 2020-10-20
 OpenJDK Runtime Environment (build 11.0.9+11-post-Raspbian-1deb10u1)
 OpenJDK Server VM (build 11.0.9+11-post-Raspbian-1deb10u1, mixed mode)
 ```
-
 
 ### **New Products 2020**
 
@@ -159,7 +154,6 @@ Apache Maven 3.6.0
 Maven home: /usr/share/maven
 ```
 
-
 #### **Pi4J**
 
 To control the LED-lights, we are going to use the Pi4J-library, which makes the bridge between our Java-code and the GPIO-pins on the Raspberry Pi. These General-Purpose Input/Output-pins allow us to connect and control electronic components. There are 40 of those pins on the Raspberry Pi and can be used for different purposes. In this post, we are only using them as output-pins to control the LEDs but there are countless other possibilities.
@@ -168,14 +162,11 @@ To control the LED-lights, we are going to use the Pi4J-library, which makes the
  <img loading="lazy" decoding="async" src="headerpins_in_header.png" alt="" class="wp-image-36647" width="293" height="449">
 </figure>
 
-<br />
-
 For full support of the Pi4J-library, we need to install some extra software on the board. Again we only need a single command to do this:
 
 ```
 $ curl -sSL https://pi4j.com/install | sudo bash
 ```
-
 
 #### **Update of WiringPi**
 
@@ -187,7 +178,6 @@ $ sudo dpkg -i wiringpi-latest.deb
 $ gpio -v
 gpio version: 2.52
 ```
-
 
 ### **The Wiring**
 
@@ -230,7 +220,6 @@ $ mvn package
 $ sudo java -jar target/jvm-advent-2020-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
-
 #### **Maven dependency**
 
 This is a Maven project, and the Pi4J-library is added as a dependency in pom.xml:
@@ -242,7 +231,6 @@ This is a Maven project, and the Pi4J-library is added as a dependency in pom.xm
     <version>1.2</version>
 </dependency>
 ```
-
 
 #### **PWM**
 
@@ -274,7 +262,6 @@ leds.add(gpio.provisionSoftPwmOutputPin(RaspiPin.GPIO_31, "RightYellow"));  // P
 leds.add(gpio.provisionPwmOutputPin(RaspiPin.GPIO_26, "RightRed"));         // Pin 32
 ```
 
-
 As we are using software-PWM we also need to do some configuration:
 
 ```
@@ -283,7 +270,6 @@ Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
 Gpio.pwmSetRange(PWM_MAX);
 Gpio.pwmSetClock(500);
 ```
-
 
 #### **All On or Off**
 
@@ -299,7 +285,6 @@ private static void allOn() {
 }
 ```
 
-
 #### **Fading**
 
 By increasing or decreasing the PWM-value we can dim the LEDs, for example, fading one-by-one from 0 to the maximum value:
@@ -312,7 +297,6 @@ for (GpioPinPwmOutput led : leds) {
     }
 }
 ```
-
 
 ### **Building and Running**
 
@@ -347,7 +331,6 @@ Fading down GPIO 26
 All off
 Done
 ```
-
 
 And there you have it, the log of the application, controlling the LEDs as you can see in the movie at the start of this article.
 

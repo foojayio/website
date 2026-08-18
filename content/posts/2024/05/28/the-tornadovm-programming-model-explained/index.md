@@ -20,8 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Key Takeaways
--------------
+## Key Takeaways
 
 ![](https://raw.githubusercontent.com/jjfumero/jjfumero.github.io/master/files/blog/24-02-prog-model/back.jpg)
 
@@ -33,8 +32,7 @@ In this blog post, I will explain how developers can start programming with Torn
 
 I will explain the TornadoVM programming model and I will show an example from scratch that illustrates all the steps to be done to run on GPUs (or any other TornadoVM-compatible hardware).
 
-Overview of the TornadoVM Software Stack
-----------------------------------------
+## Overview of the TornadoVM Software Stack
 
 Let's start with a general overview of the TornadoVM Software stack and the main components, as shown in the following Figure.
 
@@ -54,8 +52,7 @@ Then, the TornadoVM runtime takes care of data migration, data handling and exec
 
 Thus, in a way, TornadoVM is a full-package solution that is not only used for programming on modern hardware but also for orchestrating, running, and optimising a subset of Java programs on heterogeneous hardware.
 
-How do we start programming with TornadoVM?
--------------------------------------------
+## How do we start programming with TornadoVM?
 
 So, let's focus now on the API level and how developers can start using TornadoVM to program their applications. To understand the main ideas behind each API component in TornadoVM, we need to think about the following aspects:
 
@@ -104,7 +101,6 @@ public class MySample {
 }
 ```
 
-
 A few things to highlight regarding this code snippet:
 
 1. We see a data type called `FloatArray`. This data type is provided by the TornadoVM API, and it contains (as the name suggests) an array of floating point numbers (`fp32`). The array is stored off-heap using the [Java Panama Memory API](https://github.com/openjdk/panama-foreign/blob/foreign-memaccess%2Babi/doc/panama_memaccess.md). For this tutorial, we are going to stay with our `FloatArray`, but feel free to [scan the API and Collections of TornadoVM to see all the supported types](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-api/src/main/java/uk/ac/manchester/tornado/api/types) to see all supported types.
@@ -145,7 +141,6 @@ public class HelloTornado {
 }
 ```
 
-
 Furthermore, for this step, we transform the `Math.sqrt` into `TornadoMath.sqrt`. TornadoVM offers a math library, similar to Java. The reason for having this library is that, for some GPU/FPGA devices, `double` (fp64) types are not supported for all GPUS/accelerators. For example on Intel ARC GPUs, or the latest Intel HD graphics.
 
 However, we can still compute sqrt or many of the math functions using less precision, such as in fp32 (`float` in Java), or even less. To allow this integration, TornadoVM offers this API that the JIT compiler can understand and provide the correct replacements using the narrower types (e.g., fp32 or fp16).
@@ -182,7 +177,6 @@ public class HelloTornado {
 }
 ```
 
-
 We see that, for creating and defining all data and tasks of our computation, we use mainly three methods from the Task-Graph API:
 
 1. `transferToDevice`: it defines all objects to be copied to the target accelerator. It also defines a mode for each of the objects. In this case, we specify that the `array` object must be transferred every time the whole graph is executed. TornadoVM also supports read-only copies.
@@ -210,13 +204,11 @@ Let's go back to our example and create an execution plan from the `graph` objec
 TornadoExecutionPlan plan = new TornadoExecutionPlan(graph.snapshot());
 ```
 
-
 And now, we can call the execute method:
 
 ```java
 plan.execute();
 ```
-
 
 Done! If we do not specify anything else, the execute method in a blocking call, and it will optimise, compile and run the whole task graph on the default device.
 
@@ -254,7 +246,6 @@ public class HelloTornado {
 }
 ```
 
-
 ### Interacting with the Dispatcher
 
 We can also change the default decisions of the TornadoVM runtime, and perform some actions (e.g., enable the profiler, change the hardware accelerator, enable dynamic reconfiguration, etc).
@@ -271,7 +262,6 @@ plan.withDevice(device)
     .execute();
 ```
 
-
 And we can execute again, without the need to build a new task-graph.
 
 If we want to enable dynamic reconfiguration (a feature of TornadoVM to discover the best device depending on a policy), we can enable it as follows:
@@ -280,7 +270,6 @@ If we want to enable dynamic reconfiguration (a feature of TornadoVM to discover
 plan.withDynamicReconfiguration(Policy.PERFORMANCE, DRMode.PARALLEL)
     .execute();
 ```
-
 
 In this call, we specify that we want to select the best device in terms of performance, and the TornadoVM should evaluate all permutations in parallel.
 
@@ -292,8 +281,7 @@ There are more methods in the `TornadoExecutionPlan` class. We covered just two 
 
 [![](https://markdown-videos-api.jorgenkh.no/youtube/R3gwI0qijGk)](https://youtu.be/R3gwI0qijGk)
 
-Summary
--------
+## Summary
 
 In this article, we have explained the basics of the TornadoVM programming model and the main API blocks.
 
@@ -301,8 +289,7 @@ With these tools, developers can start integrating these components into their a
 
 If you want to know more, I invite you to explore the [example suite](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples/src/main/java/uk/ac/manchester/tornado/examples) in TornadoVM to get an idea of the types of applications that can be expressed using the TornadoVM API with more complex [use cases](https://tornadovm.readthedocs.io/en/latest/resources.html#demos-artefacts).
 
-References
-----------
+## References
 
 * [TornadoVM on GitHub](https://github.com/beehive-lab/TornadoVM/)
 * [TornadoVM Website](https://www.tornadovm.org/)

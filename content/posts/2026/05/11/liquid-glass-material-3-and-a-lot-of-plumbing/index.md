@@ -27,15 +27,13 @@ It has been one of those weeks where the diff is bigger than the headline. The h
 
 The theme behind the work is simple: Codename One should look modern out of the box on every platform we ship to, and it should feel fast. Almost everything in the past week of commits is in service of one of those two goals.
 
-Try it right now in the Playground
-----------------------------------
+## Try it right now in the Playground
 
 The easiest way to see any of this is the [Playground](https://www.codenameone.com/playground). The Playground now defaults to iOS Modern when the device toggle is set to iPhone and Android Material 3 when it is set to Android, in both light and dark mode. No setup, no `pom.xml`, no build hints --- just open the page, drop in any of the standard components, and the modern look is what you get. If the past releases of Codename One looked dated to you, the Playground is where to start.
 
 The simulator is the second-easiest place. We will get to that.
 
-The new native themes
----------------------
+## The new native themes
 
 For most of Codename One's life the iOS native theme has been the venerable iOS 7 flat theme, and the Android native theme has been Holo Light. Both still ship --- backwards compatibility has always been one of our most important goals --- but they are no longer where we want a brand new app to start. We spent the bulk of this week building two new themes that target current platform aesthetics:
 
@@ -76,7 +74,6 @@ SpanLabel body = new SpanLabel("Body copy …");
 form.add(body);
 ```
 
-
 That gives you the full picture in one screen:
 
 * The `Default` button uses the stock `Button` UIID. The `Raised` button uses `RaisedButton`, which `cn1-derive`s from `Button` and adds a tinted pill on top of the iOS system blue --- that is the iOS Modern accent in both modes.
@@ -104,8 +101,7 @@ This is the `DialogTheme` capture against the screenshot suite's textured diagon
 
 The native theme is meant to be a starting point --- you can layer your own palette on top without forking the theme. Above is the `PaletteOverrideTheme` capture: the base is iOS Modern, but the test layers a magenta palette on top at runtime via `UIManager.addThemeProps(...)`. `RaisedButton`, `FlatButton`, the disabled tone, and the body-copy span all pick up the override in both light and dark --- the override seam works at the resource-bundle layer, exactly the same mechanism a user theme uses to override the native theme on a real app.
 
-In the simulator
-----------------
+## In the simulator
 
 Three pieces, all live:
 
@@ -115,8 +111,7 @@ Three pieces, all live:
 
 The "Auto" choice in the Native Theme menu defers to those build hints --- set `ios.themeMode=modern` in your project's settings and "Auto" previews iOS Modern; flip the same project to `ios.themeMode=ios7` and "Auto" previews iOS 7. The explicit menu entries (iOS Modern, iOS 7, etc.) override the hints regardless. `-Dcn1.forceSimulatorTheme` is still honored as the highest-priority override; pick "Use skin's embedded theme" to bypass the framework theme entirely and get whatever the skin shipped with.
 
-On devices
-----------
+## On devices
 
 The opt-in is the same on iOS and Android. The platform knobs follow a single naming pattern --- `ios.themeMode` and `and.themeMode` --- and accept `modern` / `liquid` / `auto` / `ios7` / `flat` on iOS, `modern` / `material` / `auto` / `hololight` / `legacy` on Android. There is a single cross-platform shortcut, `nativeTheme=modern`, which the iOS builder consults when `ios.themeMode` is unset and which the Android port reads at runtime as a default for `and.themeMode`. The legacy aliases `cn1.androidTheme` and `cn1.nativeTheme` are still honored for back-compat, as is `and.hololight=true`.
 
@@ -124,8 +119,7 @@ The default for an existing app stays on legacy on every platform. We do not fli
 
 The HTML5 port has the runtime support for the modern themes but does not bundle them with user apps yet --- that is one of the loose ends we want to close in the next round.
 
-Sticky headers
---------------
+## Sticky headers
 
 The other piece of look-and-feel that we want to highlight is `StickyHeaderContainer`, which finally has a proper home in the framework. It is the iOS-contacts-list / sectioned-material-list component: scroll past a section boundary and the previous header is replaced by the next one. New this week, the swap is animated. A directional slide moves the outgoing header up on a forward scroll and down on a reverse scroll, or you can pick a cross-fade.
 ![Sticky header sectioned scroll](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/sticky-header-slide.gif)
@@ -149,11 +143,9 @@ for (char c = 'A'; c <= 'Z'; c++) {
 form.add(BorderLayout.CENTER, sticky);
 ```
 
-
 `TRANSITION_SLIDE` is the default. `TRANSITION_FADE` cross-fades the outgoing header on top of the incoming one. `TRANSITION_NONE` keeps the prior instantaneous swap if you want it. Issue [#4807](https://github.com/codenameone/CodenameOne/issues/4807) for the original request.
 
-How we test this
-----------------
+## How we test this
 
 Every screenshot in this post is captured by a test that runs the app on a real iOS device, an Android emulator, and headless Chrome, then diffs each capture against a stored golden image. The diff *is* the test --- if the rendered pixels drift, the run fails.
 
@@ -165,8 +157,7 @@ For animations the test grabs a series of frames over a fixed-duration transitio
 
 If you want to read the source, the suite lives at [scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests/](https://github.com/codenameone/CodenameOne/tree/master/scripts/hellocodenameone/common/src/main/java/com/codenameone/examples/hellocodenameone/tests).
 
-Bugs and misc features from this week
--------------------------------------
+## Bugs and misc features from this week
 
 The theme work was the loudest thing this week, but plenty of other commits landed alongside it:
 
@@ -179,8 +170,7 @@ The theme work was the loudest thing this week, but plenty of other commits land
 * **Playground polish.** The Playground moved every `Dialog.show(...)` to `InteractionDialog` mode so user code calling `Dialog.show` does not blow away the editor chrome --- it renders into the layered pane instead. Error messages got a substantial overhaul. The preview-resolution syntax expanded so the Playground can pick previews from a much wider set of expressions, with a new harness keeping it honest in CI.
 * **Deeper `refreshTheme()`.** `Form.refreshTheme()` has been around forever --- it re-resolves the styles on a single Form. The new thing this week is `UIManager.getInstance().refreshTheme()`, which snapshots the current theme props *and* theme constants, clears the resolved-style caches, and re-applies the lot. This is what lets the screenshot suite flip dark mode mid-suite and see fresh styles, and what lets a runtime palette override take effect immediately. Most apps will never need to call it directly --- palettes typically don't change at runtime, and a `Display.setDarkMode(...)` call already triggers the right invalidation. It is there if you do change the palette and want the change to stick on the next paint without reloading the theme from disk.
 
-Where this is going --- and a thank-you
----------------------------------------
+## Where this is going --- and a thank-you
 
 [Last week's post](https://www.codenameone.com/blog/ios-density-scroll-and-accessibility/) was about Codename One *feeling* faster: corrected pixel densities, principled scroll physics, SIMD on iOS, accessibility text scaling. This week is the symbiotic other half --- Codename One *looking* like it belongs on a 2026 phone. Both halves are the same project. There is not much point in shipping a SIMD-accelerated `Base64` if the surrounding UI looks like a 2014 app, and there is not much point in shipping a glass-frosted `Dialog` if the scroll underneath it judders.
 

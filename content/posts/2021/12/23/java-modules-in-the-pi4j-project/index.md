@@ -25,8 +25,7 @@ Java modules have been a big discussion point before in many places.
 
 And this is now also causing some headaches in the Pi4J project...
 
-About Pi4J V2
--------------
+## About Pi4J V2
 
 The Pi4J project (started in 2012) aims to unite Java programming with electronics. By using the Pi4J dependency in a project, electronic components connected to the GPIO-pins (General Purpose Input/Output) of the Raspberry Pi can be controlled as objects in the Java code. Pi4J uses native libraries to control the GPIOs so you - as a programmer - donʼt need to be fully aware of all the "magic" that relates to hardware communication.
 
@@ -37,8 +36,7 @@ To have a fully "open" architecture that is extendable with providers for specif
 The code of Pi4J is based on a layered approach, visualized in the picture below ([high-res version on pi4j.com](https://pi4j.com/architecture/)).
 ![](pi4j-v2-architecture-1024x667.jpg) Pi4J modular architecture
 
-Auto detection of modules
--------------------------
+## Auto detection of modules
 
 Pi4J V2 uses `ServiceLoader` to detect which modules are available to communicate with the GPIOs. This allows to very dynamically extend the possibilities of the framework.
 
@@ -49,9 +47,7 @@ Code extract from [pi4j-core/src/.../runtime/impl/DefaultRuntime.java](https://g
 var plugins = ServiceLoader.load(Plugin.class);
 ```
 
-
-The problems with the current approach
---------------------------------------
+## The problems with the current approach
 
 **Pro**
 
@@ -67,8 +63,7 @@ The problems with the current approach
 * module.info needed
 * because of the use of the `ServiceLoader`, a FAT jar doesn't work
 
-Use of modules in a Pi4J V2 project
------------------------------------
+## Use of modules in a Pi4J V2 project
 
 The Maven projects that are created as example applications and are part of the ["Getting Started" section](https://pi4j.com/getting-started/minimal-example-application/), can be built with `mvn clean package` and create a ready-to-run application in the `target\distribution`directory. All the modules which are defined in the project, are included here.
 
@@ -87,9 +82,7 @@ total 644
 $ sudo ./run.sh
 ```
 
-
-Please join the discussion
---------------------------
+## Please join the discussion
 
 Do you have any ideas regarding this topic and how the "cons" can be converted to "pros"?
 

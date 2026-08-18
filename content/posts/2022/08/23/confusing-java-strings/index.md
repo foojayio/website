@@ -25,8 +25,7 @@ I would also like to give you a few suggestions to avoid issues with them.
 
 I also prepared a GitHub repo for you where you can find some code that you can use to try the examples out on your own: [github.com/jonatan-ivanov/java-strings-demo](https://github.com/jonatan-ivanov/java-strings-demo).
 
-Quiz
-----
+## Quiz
 
 In order to demonstrate this, let me invite you for a little quiz:  
 
@@ -41,21 +40,18 @@ What do you think, what is the `length` of the following Java Strings?
 
 By now, you might get why "Confusing Java Strings" is the title of this article. In the rest of the article, I'm going to explain why you might got unexpected results in the quiz and give you a few suggestions to avoid issues.
 
-Facts
------
+## Facts
 
 As you might know, Java uses UTF-16 to encode Unicode text. Unicode is a standard to represent text while UTF-16 is a way to encode Unicode characters. That's why the size of the Java `char` type is 2 bytes (2x8 = 16 bits).
 
-Terminology
------------
+## Terminology
 
 There are two important Unicode terms here that you need to know about: ***Code Point*** and ***Code Unit***.
 
 * *Code Point* is a unique integer value that identifies a character
 * *Code Unit* is a bit sequence used to encode a character (*Code Point*)
 
-UTF-16
-------
+## UTF-16
 
 As I mentioned above, UTF-16 is a way to encode Unicode characters. Not the only way but that is what Java uses.
 
@@ -85,8 +81,7 @@ UTF-16 Code Unit(s): `\uD835\uDD38`
 
 As you can see here **A is encoded by one *Code Unit* while 𝔸 is encoded by two.**
 
-Java String::length
--------------------
+## Java String::length
 
 Let's take a look at the Javadoc of the [length()](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html#length()) method of the `String` class; it says the followings:
 > `public int length()`  
@@ -104,7 +99,6 @@ Java -> U+004A U+0061 U+0076 U+0061    // 4 Code Points
 Java -> \u004A \u0061 \u0076 \u0061    // 4 Code Units, length: 4
 ```
 
-
 Likewise:
 
 ```
@@ -112,14 +106,12 @@ Likewise:
 我喜欢茶 -> \u6211 \u559C \u6B22 \u8336    // 4 Code Units, length: 4
 ```
 
-
 But 𝕒, 𝕓, and 𝕔 are supplementary characters:
 
 ```
 𝕒𝕓𝕔 -> U+1D552      U+1D553      U+1D554       // 3 Code Points
 𝕒𝕓𝕔 -> \uD835\uDD52 \uD835\uDD53 \uD835\uDD54  // 6 Code Units, length: 6
 ```
-
 
 ### \~Solution
 
@@ -130,9 +122,7 @@ String str = "𝕒𝕓𝕔";
 str.codePointCount(0, str.length()) // evaluates to 3
 ```
 
-
-Consequences
-------------
+## Consequences
 
 The rest of the quiz is a bit more tricky but before I go there, let me mention a couple of things that are implied from the fact that Java is using UTF-16 under the hood; let me use the `"𝔸"` String as an example:
 
@@ -143,8 +133,7 @@ The rest of the quiz is a bit more tricky but before I go there, let me mention 
 * Therefore, most of the character manipulation code we ever wrote is probably broken 🙂
 * And you probably do not want to do any character manipulation
 
-Java String::reverse
---------------------
+## Java String::reverse
 
 In Java, the `String` class does not have a `reverse` method so sometimes you can bump into methods like this:
 
@@ -159,14 +148,12 @@ String reverse(String original) {
 }
 ```
 
-
 By now, I think you might have a good idea what's wrong with this method; let's see it in action:
 
 ```java
 String str = "𝔸BC"; // Three characters, but four chars
 System.out.println(reverse(str)); // prints CB??
 ```
-
 
 The tricky part of the `"𝔸BC"` String is the `𝔸` character that consists of two Code Units: `\uD835\uDD38`.  
 
@@ -179,7 +166,6 @@ You can also get other, quite unexpected results:
 System.out.println(reverse("𝕒𝕓𝕔")); // prints ?𝕓𝕒?
 ```
 
-
 Can you tell why we got this result?  
 
 (Hint: look into the Code Units of `𝕒𝕓𝕔` above and check what you get if you read them backwards.)
@@ -189,8 +175,7 @@ Can you tell why we got this result?
 Usually, not writing code to solve problems is a good idea:  
 `new StringBuilder(original).reverse().toString()`.
 
-Emojis
-------
+## Emojis
 
 The first emoji sequence (👩❤☕) in the quiz does not have anything tricky that you haven't known by now: the first emoji in it consists of two *Code Units* the other two consist of 1-1:
 
@@ -199,7 +184,6 @@ The first emoji sequence (👩❤☕) in the quiz does not have anything tricky 
 U+1F469        U+2764   U+2615  // 3 Code Points
 \uD83D\uDC69   \u2764   \u2615  // 4 Code Units, length: 4
 ```
-
 
 The second sequence (👩‍💻❤️🍵) has two tricks:  
 
@@ -211,7 +195,6 @@ U+1F469        U+200D    U+1F4BB        // 3 Code Points
 \D83D\uDC69    \u200D    \uD83D\uDCBB   // 5 Code Units, length: 5
 ```
 
-
 ❤️ is actually a ❤ plus a [variation selector](https://emojipedia.org/variation-selector-16/) that makes it red.
 
 ```
@@ -220,7 +203,6 @@ U+2764    U+FE0F   // 2 Code Points
 \u2764    \uFE0F   // 2 Code Units, length: 2
 ```
 
-
 🍵 is *"just"* a supplementary character:
 
 ```
@@ -228,11 +210,9 @@ U+1F375       // 1 Code Point
 \uD83C\uDF75  // 2 Code Units, length: 2
 ```
 
-
 So the `length` of 👩‍💻❤️🍵 is 👩‍💻(5) + ❤️(2) + 🍵(2) = 9.
 
-Java String::substring
-----------------------
+## Java String::substring
 
 If `substring` cuts into the "wrong" place, we might get an invalid character or a new (different) character or both:
 
@@ -242,12 +222,10 @@ System.out.println("abc👩‍💻".substring(0, 5)); // prints abc👩 (new cha
 System.out.println("a👩‍💻".substring(0, 5)); // prints a👩‍? (both)
 ```
 
-
 Can you tell why this happened?  
 
 (Hint: look into the Code Units [above](https://foojay.io/today/confusing-java-strings#emojis).)
 
-Takeaway
---------
+## Takeaway
 
 As you have seen above, Strings are trickier than they seem first so try to avoid String manipulation as much as you can. 🙂

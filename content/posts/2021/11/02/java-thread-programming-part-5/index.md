@@ -53,7 +53,6 @@ public class BankAccount {
 }
 ```
 
-
 The above class is a super simple Java class. It has two methods. One deposits an amount, and the other withdraws an amount from a bank account. The balance variable is that from where we do read the value from and write to.
 
 Let's use this class in a multi-threaded code.
@@ -81,7 +80,6 @@ Execution Order: 1.1, 1.2. 2.1, 2.2
 Execution Order 2: 2.1, 2.2, 1.1, 1.2
 ```
 
-
 But we can not guaranty that the execution order would only be the these two.
 
 What if the execution order is the following:
@@ -89,7 +87,6 @@ What if the execution order is the following:
 ```
 Execution Oder: 1.1, 2.1, 2.2, 1.2
 ```
-
 
 If the code is executed with the above order, the output will not be what we expect.
 
@@ -151,7 +148,6 @@ public class BankAccount {
 }
 ```
 
-
 if you run the main method again, the output would be consistent.
 
 The other way is that every Java object has an intrinsic lock in it. It is called "monitor lock" as well. If we add the synchronized keyword in the method signature, it uses the intrinsic lock. Example:
@@ -171,7 +167,6 @@ public class Counter {
     }
 }
 ```
-
 
 Now let's summarize what we have just learned from this discussion and a few more essential notes:
 

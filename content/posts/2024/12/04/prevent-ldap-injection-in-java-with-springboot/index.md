@@ -27,18 +27,14 @@ frozen: false
 
 Following **OWASP Recommendations** , such as validating user inputs and using parameterized queries, is vital for securing your applications. In this article, we'll dive into LDAP, explore LDAP Injection, share OWASP's best practices, and demonstrate secure coding in **Spring Boot**.
 
-Summary
--------
+## Summary
 
 1. Introduction to LDAP
 2. Understanding LDAP Injection
 3. OWASP Recommendations
 4. Coding Demonstration
 
-
-
-1️⃣ Introduction to LDAP (Lightweight Directory Access Protocol)
-----------------------------------------------------------------
+## 1️⃣ Introduction to LDAP (Lightweight Directory Access Protocol)
 
 ### ☝️ What is LDAP?
 
@@ -69,10 +65,7 @@ LDAP organizes data hierarchically, making it easy to query and retrieve specifi
 * LDAP simplifies user management.
 * LDAP provides a single source of truth for user data.
 
-
-
-2️⃣ What is LDAP Injection?
----------------------------
+## 2️⃣ What is LDAP Injection?
 
 ### LDAP Injection
 
@@ -87,10 +80,7 @@ You typically input a filter like this: `cn=readers`. If the input is `cn=*` , y
 * **Sanitize User Input**
 * **Escape special** LDAP **characters** like `*, (, ), and .`
 
-
-
-3️⃣ OWASP Recommendations
--------------------------
+## 3️⃣ OWASP Recommendations
 
 According to OWASP, the distinguished name (DN) and the search filter have their own sets of meta-characters, which should be escaped to prevent injection attacks.
 
@@ -137,7 +127,6 @@ public static String escapeDN(String name) {
   }
 ```
 
-
 ### Escaping Filter:
 
 ```java
@@ -169,13 +158,9 @@ public static final String escapeLDAPSearchFilter(String filter) {
   }
 ```
 
-
 For more detailed guidelines, visit: <https://wiki.owasp.org/index.php/Preventing_LDAP_Injection_in_Java>
 
-
-
-4️⃣ Coding Demonstration
-------------------------
+## 4️⃣ Coding Demonstration
 
 **Here's a quick demo** of those escaping methods and how they function:
 
@@ -190,7 +175,6 @@ docker run --detach --rm --name openldap5 -p 1389:1389
 --env LDAP_ROOT=dc=example,dc=org 
 --env LDAP_ADMIN_DN=cn=admin,dc=example,dc=org bitnami/openldap:latest
 ```
-
 
 OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>  
 
@@ -236,10 +220,7 @@ Prevent LDAP injection in #java 💥💉with #springboot](2injection-blocked-700
 ![Injection passing through.
 Prevent LDAP injection in #java 💥💉with #springboot](2injection-done-700x248.png "Prevent LDAP injection in #java 💥💉with #springboot")
 
-
-
-**👨‍💻 The related code:**
----------------------------
+## **👨‍💻 The related code:**
 
 ```java
 @PostMapping("/submit")
@@ -272,28 +253,16 @@ Prevent LDAP injection in #java 💥💉with #springboot](2injection-done-700x24
    }
 ```
 
-
 from <https://github.com/vinny59200/java-ldap-prevention>
 
-
-
-**📺 Demo Video on YouTube:**
------------------------------
+## **📺 Demo Video on YouTube:**
 
 {{< youtube lRjzxRKfq9M >}}
 
-<br />
-
-
-
-**🙏 Thanks for Reading!**
---------------------------
+## **🙏 Thanks for Reading!**
 
 This article provided a comprehensive overview of LDAP, its importance, the risks associated with LDAP Injection, and how to prevent it. By following these guidelines, you can ensure that your LDAP implementations are secure and robust.
 
-
-
-🌐 Related
-----------
+## 🌐 Related
 
 <https://foojay.io/today/top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them/>

@@ -27,8 +27,7 @@ Fortunately, machine translation have come a long way. It's not perfect, but wit
 
 In this article , I'll walk you through the journey that led me to create [Autopo](https://autopo.ooo "Autopo"), a free and [open source](https://github.com/soberlemur/autopo/) JavaFX desktop tool for managing `.po` files and with AI-powered features to translate and validate `.po` entries.
 
-Discovering localization
-------------------------
+## Discovering localization
 
 I started [PDFsam](https://pdfsam.org "PDFsam") back in 2006, when SourceForge was still cool and my company was just moving from CVS to SVN. I was a junior developer, fresh out of university, eager to build something of my own. PDFsam seemed like the perfect project to experiment with technologies I couldn't use at work.
 
@@ -44,8 +43,7 @@ At some point PDFsam gained a bit of traction abroad and it became clear that it
 
 For the actual translation work there's, among the others, a convenient desktop application called [POEdit](https://poedit.net/ "POEdit"), which allows users to open `.po` files and translate entries easily.
 
-Building a localization workflow
---------------------------------
+## Building a localization workflow
 
 Over time, I standardized my approach to applications localization. In my projects I always create a dedicated module, usually named `project-i18n`, where I store all `.po` files. Maven is configured to automatically generate `.properties` files from these `.po` files during the build process.
 
@@ -72,7 +70,6 @@ Over time, I standardized my approach to applications localization. In my projec
 </plugin>
 ```
 
-
 I also add a [singleton class](https://github.com/soberlemur/autopo/blob/master/autopo-i18n/src/main/java/ooo/autopo/i18n/I18nContext.java) that provides methods to set the application's locale and to retrieve localized strings.
 
 I use English text as the keys in the `.po` files (and, in turn, in the resource bundles) instead of technical identifiers like `this.key`. The methods in `I18nContext` that return localized strings fall back to the key if the localized version is not found. This approach ensures that if a translation is missing, the application gracefully falls back to displaying the English text, improving the user experience even in partially translated interfaces.
@@ -84,9 +81,7 @@ To keep the translation templates up to date, I use a simple script that uses ge
 xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fad7d797899d939ed7988f9d89d79b9e9e889f8989c7979fba9f829b978a969fd4999597">[email protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
 ```
 
-
-Introducing Zanata
-------------------
+## Introducing Zanata
 
 With this setup in place, I needed an interface to simplify the translation process:
 
@@ -96,8 +91,7 @@ With this setup in place, I needed an interface to simplify the translation proc
 
 At that time, I discovered [Zanata](https://zanata.org/), an open source translation server developed by Red Hat. It fit my needs perfectly: I could hire translators and point them to Zanata's web interface, while keeping track of progress in real time. For a while, the setup worked well, but there were challenges that became more and more problematic over time.
 
-Pain points with Zanata
------------------------
+## Pain points with Zanata
 
 Several issues emerged during my experience with Zanata:
 
@@ -115,8 +109,7 @@ Point 5 eventually escalated: Zanata's server became unavailable for several mon
 
 In the end it was clear that I needed a new workflow.
 
-The Side Project
-----------------
+## The Side Project
 
 At first, I looked for a replacement for Zanata, a web based service offering similar functionality, ideally simple and not too expensive. I found a few options: some were free for opensource projects, others free if self hosted, most were available through paid subscription plans.
 
@@ -130,8 +123,7 @@ How long could it take? Two weeks, three tops.
 
 **Spoiler alert: it didn't.**
 
-From side project to pet project
---------------------------------
+## From side project to pet project
 
 Once the side project seed started to take root and sprout, a few other factors pushed me further down this path. The first was [a post on BluSky](https://bsky.app/profile/dlemmermann.bsky.social/post/3lijlscz42c2t) by Dirk Lemmermann, where he praised **AtlantaFX** for styling JavaFX applications. I thought, "Nice, I want to try that," and what better opportunity than a side project to experiment with it?
 
@@ -155,8 +147,7 @@ Since I was building **Autopo** from scratch, I wanted to tailor it to fit my ne
 8. **Multiple AI Providers**: The ability to configure and use multiple AI translation providers.
 9. **Batch Translation \& Evaluation**: I wanted to be able to translate and assess translations for multiple entries, or even the entire file, with just few clicks.
 
-Building the Pet
-----------------
+## Building the Pet
 
 **Autopo** is a JavaFX application that took around ten weeks to finalize. It was fun to build it, I learned a few new things and it turned out to be more useful than I initially expected.
 
@@ -199,7 +190,6 @@ public interface TranslationServiceAI {
 }
 ```
 
-
 And this is the implementation using AiServices to perform the call to the AI provider:
 
 ```java
@@ -229,9 +219,7 @@ public Result<TranslationAssessment> assess(PoFile poFile, PoEntry entry, AIMode
 }
 ```
 
-
-Autopo in Action
-----------------
+## Autopo in Action
 
 After all the talk, it's finally time to show Autopo at work. The interface displays the list of `.po` files in the opened project along with their translation progress. While it looks simple, it covers all the requirements I initially set and even adds a few extras.
 ![Autopo screenshot](autopo-screen-1024x581.png)
@@ -248,8 +236,7 @@ Over the past few weeks, I've used Autopo to:
 
 That last step was a bit of a surprise. The validation process caught several issues and inaccuracies in human made translations.
 
-**Takeaways**
--------------
+## **Takeaways**
 
 * **JavaFX is** ****alive and kicking**** **:** things move so make sure to follow the mailing list for updates, bug fixes and new features.
 * **AtlantaFX is** **great**: with just a few lines of code, your app can have a professional look, and you won't have to worry about CSS headaches. Kudos to the maintainers!

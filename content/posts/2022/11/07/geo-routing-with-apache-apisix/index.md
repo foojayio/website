@@ -30,8 +30,7 @@ While creating your own is always possible, it's sometimes necessary.
 
 Today, I'll show you how to route users according to their location without writing a single line of Lua code.
 
-Why geo-routing?
-----------------
+## Why geo-routing?
 
 Geo-routing is to forward HTTP requests based on a user's physical location, inferred from their IP. There are many reasons to do that, and here is a couple of them.
 
@@ -47,8 +46,7 @@ Sometimes, you don't even have a choice. A country decides you have to store you
 
 Finally, you may also want to deploy a new app version for a single country only. In this case, you should monitor not (only) technical metrics but business ones over time. Then you'll decide whether to expand the new version to other countries based on them or work more on the latest version before deploying further.
 
-Setting up Apache APISIX for geo-routing
-----------------------------------------
+## Setting up Apache APISIX for geo-routing
 
 Though I'm a developer by trade (and passion!), I'm pragmatic. I'm convinced that every line of code I don't write is a line I don't need to maintain. Apache APISIX doesn't offer geo-routing, but it's built on top of Nginx. The latter provides a [geo-routing](http://nginx.org/en/docs/http/ngx_http_geoip_module.html) feature, albeit not by default.
 
@@ -73,7 +71,6 @@ COPY --from=geoiplib /usr/lib/nginx/modules/ngx_http_geoip_module.so \      #1
                      /usr/local/apisix/modules/ngx_http_geoip_module.so
 ```
 
-
 1. Copy the library from the `nginx` image to the `apache/apisix` one
 
 The regular package install installs all the dependencies, even the ones we don't want. Because we only copy the library, we need to install the dependencies manually. It's straightforward:
@@ -83,7 +80,6 @@ RUN apt-get update \
  && apt-get install -y libgeoip1
 ```
 
-
 Nginx offers two ways to activate a module: via the command line or dynamically in the `nginx.conf` configuration file. The former is impossible since we're not in control, so the latter is our only option. To update the Nginx config file with the module at startup time, Apache APISIX offers a hook in its config file:
 
 ```dockerfile
@@ -91,7 +87,6 @@ nginx_config:
   main_configuration_snippet: |
     load_module     "modules/ngx_http_geoip_module.so";
 ```
-
 
 The above will generate the following:
 
@@ -109,7 +104,6 @@ load_module     "modules/ngx_http_geoip_module.so";
 ...
 ```
 
-
 The [GeoIP module](http://nginx.org/en/docs/http/ngx_http_geoip_module.html) relies on the [Maxmind GeoIP database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data). We installed it implicitly in the previous step; we have to configure the module to point to it:
 
 ```yaml
@@ -117,7 +111,6 @@ nginx_config:
   http_configuration_snippet: |
     geoip_country   /usr/share/GeoIP/GeoIP.dat;
 ```
-
 
 From this point on, every request going through Apache APISIX is geo-located. It translates as Nginx adding additional variables. As per the documentation:
 > The following variables are available when using this database:
@@ -134,8 +127,7 @@ From this point on, every request going through Apache APISIX is geo-located. It
 >
 > -- [Module ngx_http_geoip_module](http://nginx.org/en/docs/http/ngx_http_geoip_module.html)
 
-Testing geo-routing
--------------------
+## Testing geo-routing
 
 You may believe that the above works - and it does, but I'd like to prove it.
 
@@ -162,7 +154,6 @@ routes:
 #END
 ```
 
-
 With this snippet, every user accesses the English upstream. I intend to direct users located in France to the French upstream and the rest to the English one. For this, we need to configure the second route:
 
 ```yaml
@@ -172,7 +163,6 @@ routes:
     vars: [["geoip_country_code", "==", "FR"]]   #1
     priority: 5                                  #2
 ```
-
 
 1. The magic happens here; see below.
 2. By default, route matching rules are evaluated in arbitrary order. We need this rule to be evaluated first. So we increase the priority - the default is 10.
@@ -198,13 +188,11 @@ nginx_config:
     geoip_proxy     0.0.0.0/0;
 ```
 
-
 We can finally test the setup:
 
 ```bash
 curl localhost:9080
 ```
-
 
 ```json
 {
@@ -213,11 +201,9 @@ curl localhost:9080
 }
 ```
 
-
 ```bash
 curl -H "X-Forwarded-For: 212.27.48.10" localhost:9080 #1
 ```
-
 
 1. `212.27.48.10` is a French IP address
 
@@ -228,9 +214,7 @@ curl -H "X-Forwarded-For: 212.27.48.10" localhost:9080 #1
 }
 ```
 
-
-Bonus: logs and monitoring
---------------------------
+## Bonus: logs and monitoring
 
 It's straightforward to use the new variable in the Apisix logs. I'd advise it for two reasons:
 
@@ -245,11 +229,9 @@ nginx_config:
     access_log_format: "$remote_addr - $remote_user [$time_local][$geoip_country_code] $http_host \"$request\" $status $body_bytes_sent $request_time \"$http_referer\" \"$http_user_agent\" $upstream_addr $upstream_status $upstream_response_time" #1
 ```
 
-
 1. Keep the default log variables and add the country code
 
-Conclusion
-----------
+## Conclusion
 
 Geo-routing is a requirement for successful apps and businesses.
 

@@ -21,12 +21,9 @@ frozen: false
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-121537 aligncenter" src="boxlang-v1.6.0-1-700x467.jpg" alt="" width="700" height="467">
 
-<br />
-
 We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities. This release focuses on making BoxLang faster, smarter, and more observable than ever before.
 
-🚀 What's New in 1.6.0?
------------------------
+## 🚀 What's New in 1.6.0?
 
 ### 🤖 BoxLang Documentation Meets AI: MCP Server Integration
 
@@ -48,8 +45,7 @@ This integration enables developers to:
 
 Imagine asking Claude "How do I create a custom async executor in BoxLang?" and getting instant, accurate answers pulled directly from the official documentation. This is the future of developer assistance, and BoxLang is leading the way!
 
-⚡ Extreme Performance Optimizations: Up to 65% Faster
------------------------------------------------------
+## ⚡ Extreme Performance Optimizations: Up to 65% Faster
 
 BoxLang 1.6.0 delivers **game-changing performance improvements** across the board in comparison to our previous releases. Our second major optimization pass focuses on reducing thread contention, memory usage, and dramatically improving throughput.
 
@@ -74,8 +70,7 @@ BoxLang 1.6.0 delivers **game-changing performance improvements** across the boa
 
 We've seen performance and throughput improvements ranging from 45-65% in various benchmarks and vanilla ColdBox applications when comparing 1.6.0 to previous 1.5.x releases. Using BoxLang with our SocketBox WebSocket library and server, we've achieved capabilities of over 5,000 concurrent WebSocket connections running smoothly on modest development hardware.
 
-📊 Advanced Async Monitoring with BoxExecutor Health Checks
------------------------------------------------------------
+## 📊 Advanced Async Monitoring with BoxExecutor Health Checks
 
 The `ExecutorRecord` has evolved into a full-fledged `BoxExecutor` **class** with comprehensive health monitoring, activity tracking, and advanced statistics. This provides deep insights into your async operations like never before.
 
@@ -113,7 +108,6 @@ healthReport = stats.healthReport
 // Includes: status, summary, issues, recommendations, alerts, insights
 ```
 
-
 The new Executor Health Report provides:
 
 * **Detected issues** affecting executor health
@@ -123,8 +117,7 @@ The new Executor Health Report provides:
 
 This opens the door for future tooling around executor management and monitoring, giving you unprecedented visibility into your async operations. Especially on our new super secret coming module `bx-orion`
 
-🖥️ MiniConsole Framework \& Enhanced REPL Experience
------------------------------------------------------
+## 🖥️ MiniConsole Framework \& Enhanced REPL Experience
 
 A new `MiniConsole` **framework** brings sophisticated terminal interaction capabilities and a dramatically improved REPL experience:
 
@@ -147,11 +140,9 @@ A new `MiniConsole` **framework** brings sophisticated terminal interaction capa
 // Shows: arrayMap, arrayFilter, arrayEach, arrayReduce...
 ```
 
-
 The REPL is now a joy to use, making interactive BoxLang development feel modern and productive.
 
-📦 Module Public Mapping Support
---------------------------------
+## 📦 Module Public Mapping Support
 
 Modules now support a `publicMapping` convention for exposing module assets publicly, in addition to the existing internal `mapping` property.
 
@@ -178,11 +169,9 @@ component {
 }
 ```
 
-
 This makes it easier to organize and serve module assets like CSS, JavaScript, and images while keeping internal paths separate.
 
-🔧 Core Runtime Improvements
-----------------------------
+## 🔧 Core Runtime Improvements
 
 ### DateTime Enhancements
 
@@ -220,11 +209,9 @@ public class Http extends Component {
 }
 ```
 
-
 This improves introspection and makes auto-generated documentation more informative.
 
-🌐 Runtime Updates
-------------------
+## 🌐 Runtime Updates
 
 ### MiniServer Runtime
 
@@ -242,8 +229,7 @@ This improves introspection and makes auto-generated documentation more informat
 
 * **Upgraded AWS Lambda Java Core** from 1.3.0 to 1.4.0
 
-🛠️ Developer Tools
--------------------
+## 🛠️ Developer Tools
 
 ### CFTranspile Improvements
 
@@ -255,8 +241,7 @@ This improves introspection and makes auto-generated documentation more informat
 * **Updated feature audit** with improved output
 * **Lists missing modules** to help identify required BoxLang modules for migrations
 
-🐛 Notable Bug Fixes
---------------------
+## 🐛 Notable Bug Fixes
 
 ### Component \& Function Fixes
 
@@ -288,8 +273,7 @@ This improves introspection and makes auto-generated documentation more informat
 * Lucee JSON compatibility - unquoted keys handled consistently with Lucee
 * Duplication util now uses correct class loader when serializing classes
 
-🔧 Configuration Updates
-------------------------
+## 🔧 Configuration Updates
 
 ### Datasource Environment Variables
 
@@ -300,8 +284,7 @@ Datasource keys are now searched for environment variable replacements in config
 * Enhanced mapping registration detects between simple and complex mappings
 * Better handling of module mappings with `usePrefix` and external flags
 
-🚀 Migration \& Compatibility
------------------------------
+## 🚀 Migration \& Compatibility
 
 ### Breaking Changes
 
@@ -323,8 +306,7 @@ Numerous compatibility fixes for Adobe ColdFusion and Lucee migrations:
 * **Trusted cache behavior** - Application descriptor lookups are now cached when trusted cache is enabled.
 * Consider using the new **BoxExecutor health monitoring** to track async operation performance.
 
-🎯 What's Next?
----------------
+## 🎯 What's Next?
 
 BoxLang 1.6.0 sets a new performance baseline and enhances developer experience significantly. With AI-powered documentation access, comprehensive async monitoring, and massive performance gains, BoxLang continues to evolve as the most modern and powerful JVM language for dynamic application development.
 
@@ -335,21 +317,18 @@ This release also sets the groundwork for two new runtimes coming in fall:
 * BoxLang Desktop Applications
 * BoxLang Azure Functions
 
-📚 Resources
-------------
+## 📚 Resources
 
 * Documentation: [https://boxlang.ortusbooks.com/](https://boxlang.ortusbooks.com/ "https://boxlang.ortusbooks.com/")
 * MCP Server: [https://boxlang.ortusbooks.com/\~gitbook/mcp](https://boxlang.ortusbooks.com/~gitbook/mcp "https://boxlang.ortusbooks.com/~gitbook/mcp")
 * Source Code: [https://github.com/ortus-boxlang/boxlang](https://github.com/ortus-boxlang/boxlang "https://github.com/ortus-boxlang/boxlang")
 * Community: [https://community.ortussolutions.com/](https://community.ortussolutions.com/ "https://community.ortussolutions.com/")
 
-Download
---------
+## Download
 
 Please visit our [download](https://www.boxlang.io/download "download") page or our quick [installation guides](https://boxlang.ortusbooks.com/getting-started/installation "installation guides") to upgrade your installation.
 
-Professional Open Source
-------------------------
+## Professional Open Source
 
 BoxLang is a professional open-source product, with three different licences:
 
@@ -367,8 +346,7 @@ Join us and redefine development on the JVM **Ready to learn more?** Explore Box
 
 [Try BoxLang](https://boxlang.io/plans)
 
-Join the BoxLang Community ⚡️
------------------------------
+## Join the BoxLang Community ⚡️
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on **Into the Box 2025, product launches, tool updates, and more.**
 

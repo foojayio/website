@@ -50,7 +50,6 @@ public class ArrayChallenge2 {
 }
 ```
 
-
 a) 0  
 
 2  
@@ -109,7 +108,6 @@ int[] otherArray = anyArray; // We are assigning the reference to the same Array
 // ….we have 2 variables pointing to the same object.
 ```
 
-
 Arrays in Java are objects, so when we pass an Array to a method we are accessing the object. Any change made inside the doSum method is going to reflect the Array object. Therefore, we will be applying the sum of 2 on the same Array object twice.
 
 At the line we are printing the result of this Java Challenge, we are transforming anyArray to a stream. Then we are using the forEach method from the Stream class to print each element from anyArray. We are using the concept of method reference which is a syntax sugar to use less code and do more in Java. In short, the System.out::println code will print every element from anyArray that is being iterated in the stream.
@@ -118,12 +116,9 @@ At the line we are printing the result of this Java Challenge, we are transformi
 Arrays.stream(anyArray).forEach(System.out::println);
 ```
 
-
 If you prefer, you can watch the FULL explanation video about several Java quizzes on the Java Challengers channel:
 
 {{< youtube cj43FTLsUU0 >}}
-
-<br />
 
 Don't forget to stay constantly breaking your limits! Don't hesitate to put a comment if you have any questions!
 

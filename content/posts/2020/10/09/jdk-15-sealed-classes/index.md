@@ -42,7 +42,6 @@ A sealed class can be defined like this:
 public sealed class Foo permits A, B, C { ... }
 ```
 
-
 Only classes A, B, and C can extend class Foo, and they must be in the same package or module. The permits part of the definition can be omitted if A, B, and C are in the same compilation unit (typically file).
 
 Each permitted sub-class must have its inheritance capabilities explicitly specified. In our simple example:
@@ -54,7 +53,6 @@ Each permitted sub-class must have its inheritance capabilities explicitly speci
 ```java
 public non-sealed class C { ... }
 ```
-
 
 The Java reflection system has been updated to include sealed classes. The java.lang.Class class has two new methods, isSealed() and permittedSubclasses (which returns an array of ClassDesc objects).
 

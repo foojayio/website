@@ -31,8 +31,7 @@ We will add our MongoDB credentials to the config server, so that it will be the
 
 Since we already did this for our Neo4j microservice, there aren't too many steps, and we can use the previous code as our template. Let's get started!
 
-Architecture
-------------
+## Architecture
 
 This microservices project has grown from an [introductory step](https://foojay.io/today/journeys-in-java-level-1-building-an-empire-of-microservices/) with two Spring Boot applications to a managed, configuration-savvy [system of services](https://foojay.io/today/journeys-in-java-level-7-externalize-microservice-configuration/).
 
@@ -44,20 +43,17 @@ Updated architecture:
 
 Though we set up Docker Compose to manage all services together a few project iterations ago, we will spend this post focusing on migrating all of our configuration before adding Docker Compose back into the mix later. This means we will run our applications locally today.
 
-Spring Cloud Config
--------------------
+## Spring Cloud Config
 
 To recap Spring Cloud Config, it provides a way to externalize configuration, so that individual services can access only the properties each needs to operate. More info on the project is written on the [project overview page](https://spring.io/projects/spring-cloud-config).
 
 Our Neo4j microservice (`service4`) is already set up to use Spring Cloud Config, so we can utilize this as a template for our MongoDB services (`service1` for book data and `service3` for author data). We also have an existing `config-server` service, which means we only need to add a separate YAML file to hold our MongoDB credentials separate from the Neo4j credential file. Let's get started!
 
-Applications - Spring Cloud Config Server
------------------------------------------
+## Applications - Spring Cloud Config Server
 
 The `config-server` is the service that hosts external configuration files and serves them to requesting applications. Since we set this up [last time](https://jmhreif.com/blog/microservices-level7/), the only thing we need to add is another configuration file for this service to make available to our MongoDB services.
 
-Storing config values
----------------------
+## Storing config values
 
 We used a YAML file for our Neo4j microservice, so we will stick with this same template. However, a properties file would work, as well.
 
@@ -71,7 +67,6 @@ spring:
       database:
 ```
 
-
 We need to fill in the values for our MongoDB instance in place of the dummy URL and database shown above. Then, we need to save the file and check it into [git](https://git-scm.com/) by running the next statements from the command line.
 
 ```bash
@@ -80,11 +75,9 @@ microservices-java-config % git add
 microservices-java-config % git commit -am "Create mongodb yaml"
 ```
 
-
 Let's test our config server application with the new configuration file!
 
-Test Config Server
-------------------
+## Test Config Server
 
 Start the `config-server` application from your IDE or command line. I usually like to test the existing functionality first to ensure we haven't interfered with that before testing new functionality. We can test with the URL `localhost:8888/neo4j-client/default` to ensure our Neo4j configuration still displays.
 
@@ -98,8 +91,7 @@ Figure 1. MongoDB config results
 
 Next, we need to plug our MongoDB backing services (`service1` and `service3`) in to use the config server we just set up.
 
-Service1 - modifications
-------------------------
+## Service1 - modifications
 
 Following what we did with our Neo4j app, we need to add a dependency for the Spring Cloud Config client. Open service1's `pom.xml` file and add the following items:
 
@@ -128,7 +120,6 @@ Following what we did with our Neo4j app, we need to add a dependency for the Sp
 </dependencyManagement>
 ```
 
-
 On the [third line of the above code](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L18), we add a property for the Spring Cloud Version, which gives a single location for the pom to source this value. In the dependencies section, we need to add the config client dependency ([seventh line](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L34)). Lastly, we add a dependency management section ([line twelve](https://github.com/JMHReif/microservices-level8/blob/main/service1/pom.xml#L50)) to handle versioning of Spring Cloud.
 
 Let's move to the application properties in the `src/main/resources` folder.
@@ -140,13 +131,11 @@ spring.application.name=mongo-client
 spring.config.import=configserver:http://localhost:8888/
 ```
 
-
 The port property stays the same, but we remove the database credential properties because those are now hosted by the config server. The next two properties specify the application name and location of the config server. Our application name and the name of our config file MUST match, so the `spring.application.name` needs to be `mongo-client` (because config file name is `mongo-client.yaml`). Our config server is running locally and on the default config server port, so we use the `localhost:8888` for the last property's value.
 
 This completes the changes needed to `service1`, so we need to do the same to `service3` (our other MongoDB backing service for authors).
 
-Service3 - modifications
-------------------------
+## Service3 - modifications
 
 Here is the list of changes we need to make with links to the code repository included:
 
@@ -155,8 +144,7 @@ Here is the list of changes we need to make with links to the code repository in
 
 Let's test the updated services with our config server!
 
-Put it to the test
-------------------
+## Put it to the test
 
 Kicking things off from the bottom to the top of our stack, let's start the MongoDB instance. *Note: I am running MongoDB locally from a Docker container here. More info is available in the [`docker-mongodb` section](https://github.com/JMHReif/microservices-level8/blob/main/docker-mongodb/README.adoc) of the code repository.*
 
@@ -178,15 +166,13 @@ Figure 2. Find books
 
 Figure 3. Find authors
 
-Wrapping up!
-------------
+## Wrapping up!
 
 For today's progress, we successfully migrated all of our database-interfacing services to use Spring Cloud Config to retrieve database credentials (MongoDB or Neo4j). Next, we will take another run at Docker Compose to add the Neo4j and config services, so that all services can be managed together.
 
 In future posts, we hope to expand our microservices project to dig into service discovery and change data capture topics. Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level8](https://github.com/JMHReif/microservices-level8) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

@@ -61,7 +61,6 @@ If you are using OpenJDK 11 or higher version, you can enable flight recorder by
 java -XX:StartFlightRecording:filename=myrecording.jfr,duration=60s -jar myapp.jar
 ```
 
-
 In this example, after enabling JFR, the data is dumped to `myrecording.jfr` file and analyzed using a client-side tool JDK Mission Control. JMC has to be downloaded separately as it's not part of your JDK. It is available for download from [here](https://github.com/openjdk/jmc#downloading-builds).
 
 ### Using jcmd tool
@@ -71,7 +70,6 @@ Suppose you don't always want JFR to monitor your application as discussed in th
 ```java
 jcmd 24597 JFR.start duration=60s filename=myapprecording.jfr
 ```
-
 
 In the above example, we have started JFR recordings for 60-seconds on the running Java process with the PID 24597 and saved it to `myapprecording.jfr` file in the current directory. To view all the available commands for a running Java application, specify jcmd help. Following are some of the commands that we can use with jcmd.
 
@@ -92,7 +90,6 @@ JFR.start
 
 JFR.stop
 ```
-
 
 Here is a summary of those commands: <https://gist.github.com/yrashish/0fb966ef0294a5c336e9253ba78effe7>
 

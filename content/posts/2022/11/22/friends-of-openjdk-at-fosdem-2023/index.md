@@ -30,8 +30,7 @@ The Foojay programs for previous years at FOSDEM are listed below:
 
 Join us to enjoy a full day of talks, demos, and interesting discussions about what developers around the world are doing with the OpenJDK.
 
-How to submit
--------------
+## How to submit
 
 We welcome any talk proposals about OpenJDK-related tools and technologies.
 
@@ -66,8 +65,7 @@ When submitting your talk in Pentabarf, make sure to select "Friends of OpenJDK 
 
 Create a Pentabarf account if, and only if, you don't already have one from a previous year. Please double check if you have an account you can reuse!
 
-Important dates
----------------
+## Important dates
 
 * **Call for papers available:** 14 November 2022
 * **Call for papers closes:** 10 December 2022
@@ -76,22 +74,19 @@ Important dates
 
 Submit your talk proposal and we look forward to seeing you online!
 
-Code of conduct
----------------
+## Code of conduct
 
 Following the release of the updated code of conduct for FOSDEM, we'd like to remind all speakers and attendees that all of the presentations and discussions in our devroom are held under the guidelines set in the CoC and we expect attendees, speakers, and volunteers to follow the CoC at all times.
 
 FOSDEM CoC can be found online here: <https://fosdem.org/2023/practical/conduct/>
 
-Call for Volunteers
--------------------
+## Call for Volunteers
 
 We are also looking for volunteers to help run the devroom.
 
 We need assistance with helping speakers to record the presentation as well as helping with streaming and chat moderation for the devroom.
 
-Contacts
---------
+## Contacts
 
 Please reach out to us on the Foojay FOSDEM23 Forum, if you have any questions about the DevRoom, the submission process, or similar:
 

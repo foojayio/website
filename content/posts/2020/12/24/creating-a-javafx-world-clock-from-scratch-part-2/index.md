@@ -22,8 +22,7 @@ frozen: false
 
 > *"The only way to learn mathematics is to do mathematics."* -- Paul Halmos[\[1\]](https://en.wikipedia.org/wiki/Paul_Halmos "Mathematician Paul Halmos")
 
-Introduction
-------------
+## Introduction
 
 Welcome to *Creating a JavaFX World Clock from Scratch Part 2!*
 
@@ -37,8 +36,7 @@ In Part 2, I will show you how I animate the clock face's hands using basic trig
 
 *Creating a JavaFX World Clock from Scratch (Part 2)*{#caption-attachment-36624}
 
-Scene Builder
--------------
+## Scene Builder
 
 First lets give a quick recap of Part 1. In the first part I discussed my design workflow, then later I mention tools such as a WYSIWYG graphical editor called Scene Builder[\[5\]](https://gluonhq.com/products/scene-builder/ "Gluon Scene Builder"). Scene Builder is a tool to allows you to style shapes and to layout nodes onto the JavaFX scene graph.
 
@@ -55,8 +53,7 @@ Before I show you the code, I want to show you the world clock face and its hour
 
 *Parts of the hour hand of the world clock*{#caption-attachment-36529}
 
-Hour Hand Arc
--------------
+## Hour Hand Arc
 
 An Arc shape is really a wedge (pizza slice). As we previously described the fill color is set to be transparent and the stroke width set to 4 pixels with a stroke color of orange. This gives it the appearence of a curved piece cut from a circle. Next, we will look at the Arc's attributes that will determine how long the arc will be and how to move it around the clock circle.
 
@@ -104,7 +101,6 @@ private Function<Integer, Integer> startAngleHour = ( hours ) -> {
 };
 ```
 
-
 The following code snippet is how to call the lambda function to calculate the startAngle:
 
 ```java
@@ -136,7 +132,6 @@ private Function<Integer, Integer> extentAngleHour = ( hours ) -> {
 };
 ```
 
-
 With the lambda function (**extentAngleHour**) ready to be used, the following code statement illustrates how to invoke the function to calculate the extentAngle.
 
 ```java
@@ -159,7 +154,6 @@ private Arc hourHandArc;
 private Circle hourHandTip;
 ```
 
-
 Using the above annotation (@FXML) is JavaFX's dependency injection mechanism to reference nodes in the scene graph. This allows the application to obtain instance objects such as the **Arc** and **Circle** nodes to be injected (assigned) during runtime. This makes the nodes available to methods in the controller (WorldClockController.java) class.
 
 After referencing the Arc the controller code can now update the positions on every clock tick as shown below.
@@ -171,7 +165,6 @@ int hourExtentAngle = extentAngleHour.apply(hour);
 hourHandArc.setStartAngle(hourStartAngle);
 hourHandArc.setLength(hourExtentAngle);<code class="language-java"></code>
 ```
-
 
 Similar to a time lapse an animation of the hour hand is shown below. It doesn't show the hour hand tip, more on that next.  
 ![Hour Hand Animation without the tip](hourhand-animation-without-tip.gif)
@@ -210,7 +203,6 @@ private BiFunction<Integer, Double, double[]> tipPointXY = ( angDegrees, radius 
 };
 ```
 
-
 To use the function tipPointXY() it will return an array of type double containing two values where `hourTipPoint[0]` is the X coordinate and `hourTipPoint[1]` is the Y coordinate respectively.
 
 ```java
@@ -219,7 +211,6 @@ To use the function tipPointXY() it will return an array of type double containi
  hourHandTip.setTranslateX(hourTipPoint[0]);
  hourHandTip.setTranslateY(hourTipPoint[1] * -1);
 ```
-
 
 You should notice the method call to `setTranslateY(hourTipPoint[1] * -1)` where its value is multiplied by **-1**. This is to convert to the screen coordinate system where the Y coordinate going in a southerly direction are positive values.
 
@@ -232,8 +223,7 @@ To see the full listing of the code to move the clock arms see WorldClockControl
 
 There you have it! A way to animate the clock face. In [Part 3](https://foojay.io/today/creating-a-javafx-world-clock-from-scratch-part-3/) of this blog series I will be creating a UI form to configure the world clock such as changing timezones and locations (I will finally remove my pesky hardcoded cities).
 
-Conclusion
-----------
+## Conclusion
 
 In Part 2, you got a chance to use some math and trig skills to determine how to position parts of the hour hand.
 

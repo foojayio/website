@@ -15,8 +15,7 @@ related_posts:
 frozen: false
 ---
 
-first, a word about ecosystems
-------------------------------
+## first, a word about ecosystems
 
 Before we dive into Shai-Hulud, before we label it "sophisticated" or "advanced" or "next generation," we need to be honest about something.
 
@@ -26,8 +25,7 @@ In the book Dune, the worm is integral to the ecosystem. The planet, its environ
 
 That's true for the cyber-worm equivalent. The worm is an entirely predictable outcome of the ecosystem in which we, as developers, are part
 
-Speed first.
-------------
+## Speed first.
 
 Modern software development is not primarily about writing code. It is about assembling it. Most production systems today consist of orchestration layers that sit on top of hundreds or thousands of external components.
 
@@ -35,8 +33,7 @@ The majority of what runs in your application was written by someone else. Often
 
 And that model works extraordinarily well. It has given us leverage that would have been unimaginable twenty years ago.
 
-Still optimised for speed.
---------------------------
+## Still optimised for speed.
 
 Dependencies install automatically. Pipelines publish automatically. Credentials are injected automatically.
 
@@ -56,8 +53,7 @@ This is the architecture we normalised: install-time execution, credential-rich 
 
 Once you see that, the worm stops looking exotic.
 
-Open Source Security Doesn't Work the Way You Think It Does
------------------------------------------------------------
+## Open Source Security Doesn't Work the Way You Think It Does
 
 There's a deeper problem running underneath this.
 
@@ -71,15 +67,13 @@ Software Composition Analysis tools mostly rely on those databases. If a vulnera
 
 Attackers can read patches. They can see what changed. They can infer the bug from the fix. Older branches don't become secure just because a CVE doesn't list them.
 
-This matters more than people realise.
---------------------------------------
+## This matters more than people realise.
 
 There is an entire commercial support industry built around keeping end-of-life open source secure, and most developers I speak to don't even realise that's an option. The broader reporting gap is even less understood. We assume visibility is complete because dashboards are green. *It isn't.*
 
 This situation is so bad, so misunderstood, that the company I work for, [HeroDevs](https://bit.ly/4av8c4G "HeroDevs"), a company that provides support for EOL open source for times like these. Pretty much no one I speak to knows that this is an option. That said, most aren't aware of the broader security reporting situation either.
 
-The Inevitable AI in the Mix
-----------------------------
+## The Inevitable AI in the Mix
 
 AI Language models suggest dependencies based on prevalence and pattern similarity. They do not reason about support windows. They do not possess privileged vulnerability intelligence. If an older version appears frequently in training data and compiles successfully, it remains attractive. Humans behave in much the same way. If an installation works and triggers no alerts, it is accepted.
 
@@ -87,8 +81,7 @@ We built a system in which execution is invisible, authority is automated, lifec
 
 In that environment, a registry-native worm is not surprising, other than how long it's taken to appear.
 
-Enter Shai-Hulud
-----------------
+## Enter Shai-Hulud
 
 In September 2025, the npm ecosystem saw what is widely regarded as the first documented self-propagating registry-native worm.
 
@@ -100,8 +93,7 @@ When developers ran `npm install`, the worm ran automatically.
 
 The script harvested credentials from developer machines and CI environments. It searched for npm authentication tokens, GitHub Personal Access Tokens, and cloud provider keys. Some variants deployed TruffleHog to aggressively scrape secrets.
 
-Then it pivoted.
-----------------
+## Then it pivoted.
 
 If it found valid npm tokens, it enumerated other packages owned by the compromised maintainer, injected the malicious payload, incremented the version number, and republished them using authenticated `npm publish --force`.
 
@@ -113,8 +105,7 @@ The stolen credentials were not used solely to push a single malicious version. 
 
 The worm enumerated the maintainer's portfolio, injected itself, incremented versions, and republished. The registry itself became the replication medium.
 
-The defining shift.
--------------------
+## The defining shift.
 
 This was not typosquatting. It was not dependency confusion. It was not a one-off compromised release. It was automated, identity-driven propagation using a legitimate publishing authority. That is what makes Shai-Hulud a worm rather than simply malware in npm.
 
@@ -124,8 +115,7 @@ The attack evolved. A later wave shifted execution to the Bun runtime, likely to
 
 This was not smash-and-grab. It was automated replication using legitimate, local authority.
 
-This Is Also What Cyberwar Looks Like
--------------------------------------
+## This Is Also What Cyberwar Looks Like
 
 There's another angle here that most coverage skipped.
 
@@ -143,8 +133,7 @@ We tend to assume that if something is visible, has a name, and leaves public tr
 
 The fact that Shai-Hulud was noisy does not mean it was trivial. It may simply mean that noise was part of the experiment.
 
-History should make us cautious here.
--------------------------------------
+## History should make us cautious here.
 
 When the Equifax breach was first disclosed, the focus was on data theft. Much later, it emerged that records had also been modified. False credit ratings were inserted. The integrity impact was subtler than the headline about exfiltration.
 
@@ -154,8 +143,7 @@ A worm capable of harvesting credentials and republishing packages is also capab
 
 If you wanted to test ecosystem response, this is exactly how you would do it. And if you wanted to insert something subtle, you would hide it behind the noise.
 
-None of this requires conspiracy thinking.
-------------------------------------------
+## None of this requires conspiracy thinking.
 
 It simply requires acknowledging that software supply chains now operate within geopolitical realities. Package registries are a global infrastructure. CI systems are critical infrastructure. They are soft targets compared to hardened networks.
 
@@ -163,8 +151,7 @@ Funny names and public repositories can lull us into treating something as misch
 
 *That would be a mistake.*
 
-Why It Was So Effective
------------------------
+## Why It Was So Effective
 
 Shai-Hulud did not need to break the registry. It exploited the fact that install-time execution, credential-harvesting potential, and publish authority coexist within the same operational flow.
 
@@ -174,8 +161,7 @@ When the worm harvested tokens, it did not need to escalate privileges. The priv
 
 The truth is that we allowed the worm to behave like a developer. It authenticated, it published, it modified workflows, and it interacted with GitHub APIs. From the perspective of logs, it looked like a maintenance activity.
 
-This is why detection is hard
------------------------------
+## This is why detection is hard
 
 Traditional security models ask whether an action is authorised. In this case, it was. Once credentials were stolen, the worm operated entirely within permission boundaries.
 
@@ -183,8 +169,7 @@ The challenge lies in distinguishing malicious use of legitimate authority from 
 
 The worm hides inside the behaviours we normalise.
 
-Getting Practical: Without Pretending It's Easy
------------------------------------------------
+## Getting Practical: Without Pretending It's Easy
 
 At this point, the obvious question is: what do we actually do?  
 
@@ -198,8 +183,7 @@ Short-lived credentials reduce the blast radius, but they do not prevent phishin
 
 Network controls make exfiltration harder, but they require treating your build environment as more than a convenience tool.
 
-These measures are just friction.
----------------------------------
+## These measures are just friction.
 
 Friction works only if you accept that some workflows must slow down.
 
@@ -215,8 +199,7 @@ Provenance checks, SBOM-driven alerts, lockfiles, token rotation, and network se
 
 Without that shift, they are compliance theatre. With it, they become leverage in your favour.
 
-The Mirror
-----------
+## The Mirror
 
 Shai-Hulud did not introduce a new class of risk. It exposed the one we had already optimised for.
 

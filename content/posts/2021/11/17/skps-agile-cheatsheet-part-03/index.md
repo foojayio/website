@@ -19,8 +19,6 @@ frozen: false
 
 SKP's Agile Cheatsheet is a three part series of articles focused on daily agile terminology, ideal to be printed out and pinned up near your workstation. Part 1 is available [here](https://foojay.io/today/skps-agile-cheatsheet-part-01 "Here") and part 2 [here](https://foojay.io/today/skps-agile-cheatsheet-part-02 "Here")while the PDF cheatsheet is [here](https://rebrand.ly/skp-agile-cheat-sheet-all "Here").
 
-
-
 ![](https://imgur.com/LGzevOM.jpg)  
 
 **Release Train**. The Agile Release Train (ART) is a long-lived team of Agile teams, which, along with other stakeholders, incrementally develops, delivers, and where applicable operates, one or more solutions in a value stream. \[Type -- Agile Product Management\]
@@ -88,8 +86,6 @@ It can be succinctly described by the following set of rules:
 
 **XP (Extreme Programming)** . Extreme Programming (XP) is an agile software development framework that aims to produce higher quality software, and higher quality of life for the development team. XP is the most specific of the agile frameworks regarding appropriate engineering practices for software development. \[Type -- Agile Development\]
 
-
-
 **Asana** . Asana helps you plan, organize, and manage Agile projects and Scrum sprints in a tool that's as flexible and collaborative as your team. From Boards to Timelines and custom fields to dependencies, Asana has the features your team needs to build fast and ship often. \[Type -- Agile Project/Product Management\]
 
 **JIRA** . Jira Software is an agile project management tool that supports any agile methodology, be it scrum, kanban, or your own unique flavor. From agile boards, backlogs, roadmaps, reports, to integrations and add-ons you can plan, track, and manage all your agile software development projects from a single tool. The product name is a truncation of Gojira, the Japanese word for Godzilla. \[Type -- Agile Project/Product Management\]
@@ -103,8 +99,6 @@ It can be succinctly described by the following set of rules:
 **Zoho Sprints** . Zoho Sprints is a free online tool that is used for agile planning and tracking. It helps in creating effective user stories, scheduling agile meetings, using timesheets, and adding estimation points for tracking the work hours. The main purpose of Zoho Sprints is to bring agility to the project development lifecycle. Being agile is a project management method that helps in building an iterative process where teams can quickly react to changes. This is an approach that is entirely different from the traditional waterfall model which is much more focused on testing only after the final product is built. \[Type -- Agile Project/Product Management\]
 
 **Rally** . Rally is one of the most comprehensive agile project management tools, and it helps you track your projects' progress Iteratively, assign stories to iterations, split stories to tasks, tag defects to stories etc. The tool also helps you monitor your teams' progress. \[Type -- Agile Project/Product Management\]  
-
-
 
 Reference Link 01 : <https://www.agilealliance.org/agile101/agile-glossary/>
 

@@ -36,8 +36,7 @@ All of the source code developed for this article can be found on [GitHub](https
 
 ![1M Particles in JavaFX](https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/javafx_render_particles.png)
 
-Introduction
-------------
+## Introduction
 
 There is a number of use cases that involve rendering a huge number of individual pixels as quickly as possible, including point cloud visualizations, particle effects and simulations. As mentioned above, in JavaFX, developers have several approaches (techniques) of rendering pixels to the screen.
 
@@ -54,7 +53,6 @@ var g = canvas.getGraphicsContext2D();
 g.setFill(color);
 g.fillRect(x, y, 1, 1);
 ```
-
 
 ### PixelBuffer CPU
 
@@ -82,7 +80,6 @@ pixels[(x % width) + (y * width)] = colorARGB;
 pixelBuffer.updateBuffer(b -> null);
 ```
 
-
 ### PixelBuffer AWT
 
 As can be seen from above, in PixelBuffer, there is no high-level API to draw arbitrary shapes. Clearly, this is not ideal since the developer would need to reimplement many of the rasterization methods. To avoid this, we can make use of AWT [BufferedImage](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/image/BufferedImage.html) and its [Graphics2D](https://docs.oracle.com/en/java/javase/15/docs/api/java.desktop/java/awt/Graphics2D.html) API, since both BufferedImage and PixelBuffer can share the same pixel data. An [example implementation](https://github.com/mipastgt/JFXToolsAndDemos/blob/master/jfxtools-awtimage/src/main/java/de/mpmediasoft/jfxtools/awtimage/AWTImage.java) has been provided by [Michael Paus](https://github.com/mipastgt). The same implementation is used in our evaluation with negligble changes, which were required to incorporate the code into our framework. Sample code:
@@ -97,7 +94,6 @@ g.fillRect(x, y, 1, 1);
 // tell the buffer that the entire area needs redrawing
 image.getPixelBuffer().updateBuffer(b -> null);
 ```
-
 
 ### PixelBuffer GPU
 
@@ -133,7 +129,6 @@ gpuKernel.execute(NUM_PARTICLES);
 int[] pixels = gpuKernel.get(gpuKernel.pixels);
 ```
 
-
 ### Evaluation
 
 The model used for the evaluation is a particle system with 1M (`1_000_000`) particles. Conceptually, each particle is defined as follows:
@@ -153,7 +148,6 @@ class Particle {
 }
 ```
 
-
 The acceleration computation takes into account the mouse position in order to incorporate user interaction, as is common in many real-world applications. This model represents an [embarrassingly parallel problem](https://www.cs.iusb.edu/~danav/teach/b424/b424_23_embpar.html) and can, therefore, be computed in parallel. In our evaluation, all approaches, except for Canvas (for which the reason was outlined earlier), can be run in parallel. In total, each approach computed 1100 frames of this model, during which using `System.nanoTime()` we recorded the time the approaches took to compute each frame. The first 100 frames were discarded to account for the [JIT compiler](http://cr.openjdk.java.net/~vlivanov/talks/2015_JIT_Overview.pdf) on the JVM. Hence, the time measurements were recorded only for the last 1000 frames. In addition, we included a 10M (`10_000_000`) particle test on GPU, given that there was likely to be a sufficient performance margin.
 
 The evaluation was performed on a 6-core Intel i9-8950HK, running at a fixed 2.6GHz (without Turbo) and 32 GB of RAM, with a NVIDIA GTX 1080 graphics card. The OS and environment details are as follows:
@@ -169,8 +163,7 @@ The evaluation was performed on a 6-core Intel i9-8950HK, running at a fixed 2.6
 
 No active foreground applications, except for the IntelliJ IDE, were running at the time of the evaluation.
 
-Results
--------
+## Results
 
 The evaluation results are available from the table below, which shows the amount of time that each approach took to compute a single frame. The values are given to 2d.p. in milliseconds. Each column provides the following information:
 
@@ -194,8 +187,7 @@ We should be mindful that the results of the evaluation are limited to the imple
 
 Another potential limitation is the particle system model implementation, which could have affected the runtime performance of these techniques. Whilst the same model was used for each technique, it is not clear whether the model architecture could have favored one approach over the other.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we evaluated four different approaches to render individual pixels to the screen in JavaFX. By appealing to their runtime performance, the evaluation revealed that the PixelBuffer approach in conjunction with running on GPU is fastest among the evaluated techniques.
 
@@ -203,7 +195,6 @@ It would be interesting to see if custom rasterization methods, such as drawing 
 
 A further evaluation of such an approach against existing state-of-the-art would be needed to provide a relative ranking of techniques in terms of performance.
 
-Acknowledgements
-----------------
+## Acknowledgements
 
 Many thanks to the members of the JavaFX community on Twitter who have pointed me towards relevant sources of information. If you spot an error in implementation or have suggestions on how to improve performance, please contact me on Twitter.

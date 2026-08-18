@@ -30,8 +30,7 @@ You can find all the [code of this post on GitHub](https://gist.github.com/FDelp
 
 {{< youtube PcKRJqo-c9Q >}}
 
-The Basics: Bits
-----------------
+## The Basics: Bits
 
 Let's start with the basics: bits, 0 or 1.
 
@@ -95,9 +94,7 @@ Value   Bits    Hex
 15      1111    0xF
 ```
 
-
-Bits to Byte
-------------
+## Bits to Byte
 
 A byte consists of 8 bits and has the range of 0x00 (= 0) to 0xFF (= 255).
 
@@ -141,9 +138,7 @@ Value   Bits    Hex
 255     11111111        0xFF
 ```
 
-
-Value Ranges in Java
---------------------
+## Value Ranges in Java
 
 A bit doesn't really exist as a data type in Java. However, the closest match is a `boolean` type, which can represent two states: `true` (equivalent to `1`) and `false` (equivalent to `0`). To store numeric whole values (without decimals), Java provides different primitive types, each with its own range and characteristics.
 
@@ -180,7 +175,6 @@ System.out.println("    Min: " + Long.MIN_VALUE);
 System.out.println("    Max: " + Long.MAX_VALUE);
 ```
 
-
 As a result, we get these values:
 
 ```
@@ -198,11 +192,9 @@ Long
     Max: 9223372036854775807
 ```
 
-
 Hmm, this is unexpected! Does a byte have the range of -128 to 127, instead of 0 to 255?! That's why we need to understand the difference between signed and unsigned values.
 
-Signed versus Unsigned
-----------------------
+## Signed versus Unsigned
 
 * **Signed Byte**: The most significant bit (MSB = the most left one) is used as the sign bit, indicating whether the value is positive or negative. This results in a range for a byte of -128 to 127.
 * **Unsigned Byte**: All bits are used for the value, without a sign bit. This results in a range for a byte of 0 to 255.
@@ -229,7 +221,6 @@ Byte value 10000000: -128
 Byte value 10000001: -127
 Byte value 10001111: -113
 ```
-
 
 ### Using Masks
 
@@ -260,7 +251,6 @@ Byte value with mask: 143
 Object Type: java.lang.Integer
 ```
 
-
 ### Using Helper Methods
 
 Applying a mask is a short piece of code and you can easily add it to your code to convert a signed byte to its unsigned integer equivalent. However, there are also built-in helper methods available in Java that return the same result but are more readable. This is important for code reviews or when you or someone else need to mainten or extend the code: `Byte.toUnsignedInt(b)` and `Byte.toUnsignedLong(b)`.
@@ -287,7 +277,6 @@ Byte to unsigned long: 143
 Object Type: java.lang.Long
 ```
 
-
 ### Same Approach for Short
 
 A `short` in Java uses 16 bits (or 2 bytes) and can be handled similarly when converting from its binary representation. A short is also a signed data type, with a range of -32,768 to 32,767.
@@ -311,9 +300,7 @@ Short value 1111111111111111: -1
 Short value 1111111111111111 to unsigned: 65535
 ```
 
-
-Example use of Bits
--------------------
+## Example use of Bits
 
 A nice example of the use of bits and bytes, is included in my book. A LED number display is a typical component used in a lot of experiments with electronics and is also used in e.g. alarm clocks. Such a display has 7 segments to for the number, and one for the dot. So a total of 8 true/false values to define what must be displayed. This makes it the perfect example of how 8 booleans can be combined into one byte.
 
@@ -331,12 +318,10 @@ A nice example of the use of bits and bytes, is included in my book. A LED numbe
 
 In 2019, I even published a JavaFX library with a component to visualize such a display, as you can [read here: "LED number display JavaFX library published on Maven"](https://webtechie.be/post/2019-10-02-led-number-display-javafx-library-published-to-maven/).
 
-Conclusion
-----------
+## Conclusion
 
 Understanding how to work with bits, bytes and shorts in Java is essential for effective programming, especially when dealing with low-level data manipulation for electronic components, such as with Raspberry Pi and [Pi4J](https://www.pi4j.com/) projects. The way Java handles signed data types can sometimes be confusing, but by using masks and/or the helper methods like `Byte.toUnsignedInt()` and `Short.toUnsignedInt()`, you can efficiently convert these values.
 
-Remark
-------
+## Remark
 
 This is a returning question, so this blog post is not completely new. 😉 A [shorter version was published on October 25, 2019](https://webtechie.be/post/2019-10-25-the-mystery-of-the-negative-byte-value-in-java-a-story-of-bits-bytes-signed-and-unsigned/). I created this new post to provide a deeper explanation, a video, and more Java code examples.

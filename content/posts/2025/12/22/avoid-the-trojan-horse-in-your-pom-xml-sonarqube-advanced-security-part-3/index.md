@@ -35,10 +35,7 @@ Remember **Log4j** ? You didn't write that bug, but *you* had to fix it on a Sat
 
 This is **Part 3** . Today, we look at [**SonarQube Advanced Security**](https://docs.sonarsource.com/sonarqube-cloud/advanced-security) and how to stop the "Trojan Horses" in your dependencies.
 
-
-
-**Problem #1: "I didn't write this bug, why is it my problem?"**
-----------------------------------------------------------------
+## **Problem #1: "I didn't write this bug, why is it my problem?"**
 
 You add spring-boot-starter-web to your pom.xml. It works great. You deploy. Two months before, a hacker found a vulnerability in the underlying Tomcat server. You have no idea because you don't read CVE reports for breakfast.
 
@@ -54,10 +51,7 @@ If you are using version 2.4.0 of a library, and version 2.4.1 fixes a critical 
 
 ![](Screenshot-2025-12-22-at-11.07.33-1024x300.png)
 
-
-
-**Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥**
-------------------------------------------------------------------
+## **Problem #2: "The Dependency Hell" (Transitive Dependencies) 🔥**
 
 You check your pom.xml. "I am clean! I don't use log4j! I only use my-reporting-tool!" But SonarQube says you are vulnerable. Why?
 
@@ -79,14 +73,10 @@ You never invited **Library C**, but it's living in your house. If you run mvn d
 [INFO] |     \- org.apache.logging.log4j:log4j-core:jar:2.14.1:compile  <-- 🚨 VULNERABLE!
 ```
 
-
 SonarQube Advanced Security visualizes this chain instantly. It shows you exactly *how* the vulnerability got in, so you know you need to upgrade legacy-reporting-tool to fix the root cause.
 ![](Screenshot-2025-12-22-at-11.07.42-1024x423.png)
 
-
-
-**Problem #3: "Wait, I can't use this library? It's open source!" ⚖️**
-----------------------------------------------------------------------
+## **Problem #3: "Wait, I can't use this library? It's open source!" ⚖️**
 
 You found the perfect library to resize images. You import it. It works. Six months later, the Legal Department calls you screaming. *"You used a library with a* ***GPL-3.0*** *license! Now we have to open-source our entire proprietary banking application!"*
 
@@ -102,10 +92,7 @@ SonarQube Advanced Security scans your dependencies and allows you to define lic
 It saves you from a massive lawsuit (or a complete rewrite) later.
 ![](Screenshot-2025-12-22-at-11.07.52-1024x403.png)
 
-
-
-**Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️**
-----------------------------------------------------------------------------
+## **Problem #4: "The Sneaky Attack" (Advanced SAST \& Taint Analysis) 🕵️‍♂️**
 
 Standard dependency checkers are dumb. They just say: *"You have Library X version 1.0. It has a CVE."* But what if the vulnerability isn't a known CVE? What if the danger comes from **how you use the library**?
 
@@ -153,14 +140,10 @@ public class FileUtils {
 }
 ```
 
-
 Standard tools ignore this because they don't look *inside* the library's logic. SonarQube flags this immediately as **Command Injection**.
 ![](Screenshot-2025-12-22-at-11.08.08-1024x843.png)
 
-
-
-**Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜**
-----------------------------------------------------------------------------------
+## **Problem #5: "The Government is knocking at the door (SBOMs \& Regulations)" 📜**
 
 It is not just your manager asking for reports anymore. The world has changed. New strict regulations, like the **Executive Order 14028** in the USA and the **Cyber Resilience Act (CRA)** in Europe, are changing the game.
 
@@ -262,17 +245,13 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 ....
 ```
 
-
 You just click "Download," hand it to the auditor (or the automated compliance system), and go back to coding.
 
 <figure class="wp-block-image size-full is-resized">
  <img loading="lazy" decoding="async" width="710" height="590" src="Screenshot-2025-12-22-at-11.08.19.png" alt="" class="wp-image-122122" style="width:426px;height:auto">
 </figure>
 
-
-
-**🎯 Summary**
---------------
+## **🎯 Summary**
 
 In **Part 3** , we learned that security is not just about *writing* code, it's about *managing* the ecosystem.
 

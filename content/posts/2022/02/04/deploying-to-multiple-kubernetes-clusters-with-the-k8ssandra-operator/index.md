@@ -77,10 +77,7 @@ spec:
           heapSize: 256M
 ```
 
-
 Figure 1: Creating a cluster with two data centers deployed across two different Kubernetes clusters.
-
-<br />
 
 In this example, you can see that the Cassandra configuration is exposed very similarly to how it was previously within K8ssandra, allowing you to specify data centers, racks, and easy access to the selected version --- to name a few. This should feel very familiar for good reason. Under the hood, the K8ssandra Operator still leverages and delegates control to [Cass Operator](https://github.com/k8ssandra/cass-operator).{#fd18}
 

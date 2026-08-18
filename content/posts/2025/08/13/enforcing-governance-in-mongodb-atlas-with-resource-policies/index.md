@@ -25,15 +25,13 @@ The growing adoption of [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/t
 
 This article presents the concept and capabilities of Resource Policies, highlights their importance in enterprise environments, and demonstrates how to use them effectively via Terraform --- ensuring that essential configurations rely not only on best practices but also on enforceable and auditable constraints.
 
-**What Are Resource Policies?**
--------------------------------
+## **What Are Resource Policies?**
 
 **Resource Policies** are organization-level rules in Atlas that are automatically enforced across all projects and clusters under that organization. Their goal is straightforward yet powerful: to restrict specific actions or configurations that could compromise security, increase costs, or violate compliance standards.
 
 These policies are defined using the AWS open-source [Cedar](https://docs.cedarpolicy.com/) policy language, adopted by MongoDB for its concise and expressive syntax. Its declarative structure allows for clear and precise specification of forbidden actions based on the resource context --- including cluster configuration, networking parameters, associated projects, and security requirements such as minimum TLS versions.
 
-**Why Use Them?**
------------------
+## **Why Use Them?**
 
 Throughout the lifecycle of a MongoDB Atlas environment, it's common for different teams (developers, SREs, architects) to interact with the infrastructure. While this flexibility is desirable, it can introduce risk if well-defined *guardrails* are not in place.
 
@@ -46,8 +44,7 @@ Throughout the lifecycle of a MongoDB Atlas environment, it's common for differe
 
 In short, these policies elevate governance and operational control across any organization running MongoDB Atlas at scale.
 
-**Available Capabilities**
---------------------------
+## **Available Capabilities**
 
 Among the constraints currently supported by **Resource Policies**, the following stand out:
 
@@ -61,8 +58,7 @@ Among the constraints currently supported by **Resource Policies**, the followin
 
 These rules can be combined and fine-tuned, enabling targeted policies for critical clusters, production environments, or specific business units.
 
-**Applying Resource Policies with Terraform**
----------------------------------------------
+## **Applying Resource Policies with Terraform**
 
 Support for **Resource Policies** is available in the [MongoDB Atlas Terraform Provider](https://registry.terraform.io/providers/mongodb/mongodbatlas/latest/docs/resources/resource_policy). This allows teams to declare policies as code, apply them through CI/CD pipelines, and enforce configuration compliance continuously and audibly.
 
@@ -89,9 +85,6 @@ EOT
 }
 ```
 
-
-<br />
-
 ### **🌐 Example 2: Block public IPs (0.0.0.0/0)**
 
 This policy denies any modification to the access list that includes a wildcard public IP. It's critical to improve access control and avoid accidental exposure.
@@ -112,9 +105,6 @@ EOT
   ]
 }
 ```
-
-
-<br />
 
 ### **🔒 Example 3: Enforce TLS 1.2 or higher**
 
@@ -137,13 +127,9 @@ EOT
 }
 ```
 
-
-<br />
-
 These policies can be organized in multiple .tf files and integrated into CI pipelines. By versioning and enforcing them through automation, teams can guarantee that all cluster configurations follow approved security and architecture standards.
 
-**Validation and Testing**
---------------------------
+## **Validation and Testing**
 
 Once Resource Policies are applied via Terraform, it's possible to validate their enforcement using the Atlas UI or the administration API.
 
@@ -166,9 +152,6 @@ curl --request GET \
   --header "Accept: application/vnd.atlas.2024-08-05+json" \
   "https://cloud.mongodb.com/api/atlas/v2/orgs/<ORG_ID>/nonCompliantResources?pretty=true"
 ```
-
-
-<br />
 
 This endpoint returns a list of projects, clusters, or networks that violate current policies.
 

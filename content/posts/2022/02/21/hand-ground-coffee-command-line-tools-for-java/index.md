@@ -38,8 +38,7 @@ I would also like to refer to the book "[Productive Programmer](https://www.orei
 
 Most of the tools come with a built-in help with the `-h` parameter, or provide help pages using \`man \`. These [manpages can also be found on the Oracle website](https://docs.oracle.com/en/java/javase/14/docs/specs/man/).
 
-Managing Installations with SDKman
-----------------------------------
+## Managing Installations with SDKman
 
 As mentioned in previous articles, for me sdkman is the management genius par excellence to install Java, Groovy, Maven, Gradle, Micronaut and many other tools and to activate different versions.
 
@@ -51,8 +50,7 @@ You have a wide choice from OpenJDK over Azul Zuulu, GraalVM to Amazon and SAP J
 
 With e.g. `sdk install java 17-open` you can install new versions (up to the last EAP) and with `sdk use java 17-open` you can switch for the current shell or globally.
 
-Simple Helpers
---------------
+## Simple Helpers
 
 In every JRE and JDK there are a lot of useful helpers in the `bin` directory of the distribution besides the `javac` compiler and the `java` runtime environment.  
 
@@ -175,9 +173,7 @@ Set parse(String s) {
 }
 ```
 
-
-jar
----
+## jar
 
 To deal with jar files (Java ARchive) there is a command of the same name.  
 
@@ -193,8 +189,7 @@ Here are some useful applications:
 
 Since Java 9 `jar` can also create multi-release archives, these are then compatible with multiple JDKs and can contain optimized class files for the respective Java version.
 
-java
-----
+## java
 
 The Java command starts the Java Virtual Machine, with the given classpath (directories, files and URLs of jar and classes) and a main class whose main method is executed.
 
@@ -215,7 +210,6 @@ chmod +x hello
 ./hello JEP 330
 ```
 
-
 The JVM can be controlled with [hundreds of flags](https://foojay.io/command-line-arguments/), from memory allocation with `-Xmx` and `-Xms` to garbage collector selection with `-XG1GC` and log settings.  
 
 A collection of resources on JVM flags was published by [\[Betsy Rhodes on Foojay](https://foojay.io/today/top-10-fun-with-jvm-flags/)
@@ -228,8 +222,7 @@ A few useful flags follow, the list represents only a fraction of the JVM option
 * `+TraceClassLoading`
 * `+UseCompressedStrings`
 
-Javac
------
+## Javac
 
 The `javac` compiler translates Java source code into one or more class files, containing the bytecode of the classes, performing initial optimizations and triggering the processing of annotations by "annotation processors".  
 
@@ -237,8 +230,7 @@ To specify all classes on which the current code depends, they or their archives
 
 Going deeper into `javac` would require its own article so we leave it at the honorable mention.
 
-JavaP
------
+## JavaP
 
 Whenever you want to examine the result of `javac`, `javap` comes into play.  
 
@@ -276,7 +268,6 @@ public class Hello {
 }
 ```
 
-
 ### JMAP
 
 To create heapdumps or histograms of (referenced) objects `jmap` was helpful.  
@@ -299,7 +290,6 @@ Thereby `jcmd help`` gives information about which commands are possible.
 ```
 jcmd 14358
 ```
-
 
 Here are a few examples:
 
@@ -330,7 +320,6 @@ jcmd 15254 GC.heap_info
   class space    used 19855K, capacity 22505K, committed 22576K, reserved 1048576K
 ```
 
-
 ```
 jcmd GradleDaemon GC.class_histogram | head
 14358:
@@ -345,9 +334,7 @@ jcmd GradleDaemon GC.class_histogram | head
    6:         26119         417904  java.lang.Object
 ```
 
-
-JDK Flight Recorder (jfr)
--------------------------
+## JDK Flight Recorder (jfr)
 
 JDK Flight Recorder is a runtime tracing mechanism that allows to record various events of activities that take place in the JVM and correlate them with the activity of the application.  
 
@@ -386,7 +373,6 @@ jfr summary /tmp/test.jfr
  jdk.ThreadCPULoad                        17           357
 ```
 
-
 To limit the amount of information categories can be filtered via `--categories "GC,JVM,Java*"` and events via `--events CPULoad,GarbageCollection` or `--events "jdk.*"`.  
 
 Unfortunately this is not possible with summary or metadata, only with `print`.
@@ -395,8 +381,7 @@ The better tool to evaluate JFR records is of course [JDK Mission Control (JMC)]
 
 ![VE3MaNh](https://i.imgur.com/VE3MaNh.png)
 
-jdeprscan
----------
+## jdeprscan
 
 Since some components of the JDK have been discontinued in recent years, `jdeprscan` allows to scan classes, directories or jar files for the usage of these APIs.
 
@@ -412,7 +397,6 @@ class org/testcontainers/shaded/org/apache/commons/lang/reflect/MemberUtils uses
 class org/testcontainers/shaded/org/apache/commons/io/input/ClassLoaderObjectInputStream
   uses deprecated method java/lang/reflect/Proxy::getProxyClass(Ljava/lang/Class
 ```
-
 
 With `jdeprscan --list --release 11` you can list the APIS that were deprecated in that release.
 
@@ -430,16 +414,13 @@ jdeprscan --release 11 --list | cut -d' ' -f 3- | cut -d. -f1-3 | sort | uniq -c
    8 java.util.concurrent
 ```
 
-
-Other tools
------------
+## Other tools
 
 There are of course many more important tools for working with the JVM, from `async-profiler` and `jol` (Java Object Layout) to graphical programs for parsing and displaying GC logs (<https://gceasy.io>), JFR recordings (jmc) or heap dumps (jvisualvm, Eclipse-MAT).
 
 Other tools like the Java debugger `jdb` are not as comfortable as the capabilities of the IDEs for convenient debugging, whether on the local or remote machines.
 
-Conclusion
-----------
+## Conclusion
 
 The helpers that come with the JDK can make your life easier if you know about their capabilities and how to combine them with each other and other shell tools.
 
@@ -448,4 +429,3 @@ It is definitely worth trying them out and learning more about them.
 ```
 
 ```
-

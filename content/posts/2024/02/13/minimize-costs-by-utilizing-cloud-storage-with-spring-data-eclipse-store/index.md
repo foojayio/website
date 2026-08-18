@@ -27,8 +27,7 @@ Sooner or later any Spring application needs to store data. And of course, the f
 
 It is the easiest and most convenient way to store data (in a relational database like PostgreSQL), yet in the cloud environment it is also an expensive way. Pricing at AWS RDS starts at 30$/month with tiny-Instances and always have **fixed monthly costs regardless of its usage**.
 
-Enter EclipseStore
-------------------
+## Enter EclipseStore
 
 Relational Databases are optimized for long runtimes. They take quite some time to startup and then should run for days at a time. Then every request is computed within milliseconds.
 
@@ -57,8 +56,7 @@ In other words: **There are no working copies for your objects.** This enhances 
  </figcaption>
 </figure>
 
-Spring Integration with Spring-Data-Eclipse-Store
--------------------------------------------------
+## Spring Integration with Spring-Data-Eclipse-Store
 
 But what if you could have the best of both worlds: The **abstract storing/reading-Repositories of Spring Data JPA** and the **fast serialization** with cloud storages of your choosing?
 
@@ -71,8 +69,7 @@ This solves two issues that developers have with EclipseStore:
 
 ![Diagram showing an application that works with working copies of the java objects in memory by using Spring-Data-Eclipse-Store](WorkingCopy_2.svg) With Spring-Data-Eclipse-Store the application works with the working copies of the java objects
 
-Usage
------
+## Usage
 
 Using Spring-Data-Eclipse-Store is as easy as adding three code snippets:
 
@@ -85,7 +82,6 @@ Using Spring-Data-Eclipse-Store is as easy as adding three code snippets:
 --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED
 ```
 
-
 If you already have created your repositories, you can start your application right away. Creating a repository only requires you to create an interface that extends a Repository-Interface:
 
 ```java
@@ -95,13 +91,11 @@ public interface CustomerRepository extends CrudRepository<Customer, String>
 {...
 ```
 
-
 ~(from [CustomerRepository.java](https://github.com/xdev-software/spring-data-eclipse-store/blob/develop/spring-data-eclipse-store-demo/src/main/java/software/xdev/spring/data/eclipse/store/demo/simple/CustomerRepository.java))~
 
 This minimal effort makes the Spring-Data-Eclipse-Store library **compatible as drop in replacement**.
 
-Conclusion
-----------
+## Conclusion
 
 The Spring-Data-Eclipse-Store library helps to set up a **fast and versatile storage system** with **accustomed Spring Data JPA behavior**.
 

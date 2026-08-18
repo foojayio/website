@@ -30,8 +30,7 @@ Foojay community members and beyond discuss embedded Java:
 
 {{< youtube jtB5KLrglSY >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +38,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Topics
-------
+## Topics
 
 * [Java in Education: Combining Java with Rasperry Pi and the Pi4J Library](https://foojay.io/today/java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library/)
 * Discussion topics including:

@@ -26,8 +26,7 @@ Integrating large language models (LLMs) into your application is more accessibl
 
 This is exactly why RAG (Retrieval-Augmented Generation) has become the backbone of serious AI implementations. It's the pattern that bridges the gap between "cool AI demo" and "production-ready AI system." By combining your context with generative AI, you're teaching the model to check the provided sources before answering.
 
-Why use RAG
------------
+## Why use RAG
 
 Retrieval-Augmented Generation (RAG) is a technique that helps enhance the capabilities of large language models (LLMs) by giving them access to your own private information. Instead of relying only on what the model was trained on, which can be outdated or too general, RAG lets you bring in your own content, like documents, notes, reports, or database records, and use that as context for more accurate and relevant responses.
 
@@ -37,8 +36,7 @@ You might wonder why you can't just add that information directly into the promp
 
 This is where RAG shines: it automatically pulls in just the right information for each query, giving you better results without overwhelming the model or requiring manual effort. In short, RAG gives you the best of both worlds: intelligent language understanding combined with access to your own data in an efficient, accurate, and scalable way.
 
-How RAG Works
--------------
+## How RAG Works
 
 Now that we've explored why RAG matters, let's examine how it‌ works, both conceptually and technically.
 
@@ -127,11 +125,9 @@ private EmbeddingStore<TextSegment> embededStore(Path documentPath, EmbeddingMod
 }
 ```
 
-
 Obviously, there's a lot more to explore when you start working with multiple sources and more advanced techniques to chunk, rank, and retrieve the right data from your embeddings. But instead of going down that path, I want to focus on something just as important: the security implications of using RAG.
 
-Security implications of using RAG
-----------------------------------
+## Security implications of using RAG
 
 While RAG is a powerful pattern for making language models useful in the real world, it also introduces a new layer of security concerns. By design, RAG brings private or dynamic data into the conversation, which means your security surface grows. If you're not careful, you could end up exposing sensitive information or opening your system up to [++new forms of attack++](https://learn.snyk.io/learning-paths/owasp-top-10-llm/). This gets even more interesting and scary if the LLM in your application can autonomously execute functions or actions.
 
@@ -165,8 +161,7 @@ To improve speed, many systems cache RAG responses. If not implemented carefully
 
 Even if your data is protected from outside attacks, the quality of the content still matters. If your indexed documents contain outdated facts, conflicting details, or unclear writing, the model may start to hallucinate or generate unreliable responses. The language model does not fact-check what it retrieves. It simply uses the content as-is to shape its answer. When that content is weak or inconsistent, the results will be too. This becomes especially risky in areas like legal, healthcare, or anything involving security, where accuracy is critical. Keeping your data secure is important, but keeping it clean and consistent is just as essential.
 
-Proactive and remediation strategies for securing RAG
------------------------------------------------------
+## Proactive and remediation strategies for securing RAG
 
 To safely use RAG in production, you need to go beyond prompt engineering and model selection. Most of the strategies below may sound familiar as they are commonly used techniques but are therefore even more important when using AI or LLM-powered applications with RAG.
 
@@ -204,8 +199,7 @@ If caching is used to improve performance, ensure that cached results respect us
 
 Segment LLM assistants and data stores alike. Serve sensitive information to a local model, as some data should remain within the system. Prevent unnecessary data leak risks and limit fallout by using multiple models in a single system, each based on specific goals and information. When using a public model provider, review their terms on data storage, retention, and usage. For sensitive workloads, use models with strong privacy guarantees or host them in-house.
 
-RAG is critical, but is also an attack vector.
-----------------------------------------------
+## RAG is critical, but is also an attack vector.
 
 Retrieval-Augmented Generation (RAG) is a critical technique for building robust and reliable LLM-powered applications. By integrating external knowledge sources, RAG addresses the limitations of LLMs, ensuring more accurate and context-aware responses.
 

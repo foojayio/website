@@ -47,8 +47,7 @@ It's a no-frills, honest recount of the choices, changes, and the occasional 'ah
 
 {#introducing-gdocweb}
 
-Introducing gdocweb
--------------------
+## Introducing gdocweb
 
 Before we dive into the technical intricacies and the decision-making labyrinth of building [gdocweb](https://gdocweb.com/), let's set the stage by understanding what [gdocweb](https://gdocweb.com/) is and the problem it solves. In simple terms, [gdocweb](https://gdocweb.com/) connects Google Docs to GitHub Pages. It's a simple web builder that generates free sites with all the raw power of GitHub behind it and all the usability of Google Docs.
 
@@ -57,8 +56,6 @@ I decided to build [gdocweb](https://gdocweb.com/) to eliminate the complexities
 Here's a short video explaining [gdocweb](https://gdocweb.com/) for the general public:
 
 {{< youtube aaDBFVx6qC8 >}}
-
-<br />
 
 {#java-21-and-spring-boot-3x-innovation-and-maturity}
 
@@ -76,8 +73,7 @@ The transition to Spring Boot 3.x had its own set of challenges, particularly wi
 
 {#graalvm-native-image-for-efficiency}
 
-GraalVM Native Image for Efficiency
------------------------------------
+## GraalVM Native Image for Efficiency
 
 My interest in GraalVM native image for [gdocweb](https://gdocweb.com/) was primarily driven by its promise of reduced memory usage and faster startup times.
 
@@ -170,7 +166,6 @@ jobs:
         docker push mydockeruser/autosite:latest
 ```
 
-
 ```yaml
 
 ```
@@ -179,8 +174,7 @@ This configuration was a crucial part of my attempt to leverage GraalVM's benefi
 
 {#deployment-vps-and-docker-compose}
 
-Deployment: VPS and Docker Compose
-----------------------------------
+## Deployment: VPS and Docker Compose
 
 When it came to deploying [gdocweb](https://gdocweb.com/), I had a few paths to consider. Each option came with its pros and cons, but after careful evaluation, I settled on using a Virtual Private Server (VPS) with Docker Compose.
 
@@ -218,8 +212,7 @@ By using Docker Compose, I maintained control over the environment and kept the 
 
 {#front-end-thymeleaf-over-modern-alternatives}
 
-Front-End: Thymeleaf Over Modern Alternatives
----------------------------------------------
+## Front-End: Thymeleaf Over Modern Alternatives
 
 The front-end development of [gdocweb](https://gdocweb.com/) presented a bit of a challenge for me. In an era where React and similar frameworks are dominating the scene, opting for Thymeleaf might seem like a step back.
 
@@ -258,8 +251,7 @@ In summary, the choice of Thymeleaf was a blend of practicality, familiarity, an
 
 {#final-word}
 
-Final Word
-----------
+## Final Word
 
 The key takeaway in this post is the importance of practicality in technology choices.
 

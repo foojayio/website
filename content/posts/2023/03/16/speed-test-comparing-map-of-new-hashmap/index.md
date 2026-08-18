@@ -27,29 +27,25 @@ The Map interface is used to store data in key-value pairs, making it an essenti
 
 In this article, we will discuss the use of `Map.of()` and new `HashMap<>()` in Java, the difference between them, and the benefits of using Map.of().
 
-What is Map.of()?
------------------
+## What is Map.of()?
 
 [`Map.of()`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html#of()) is a method introduced in Java 9, which allows developers to create an immutable map with up to 10 key-value pairs.
 
 It provides a convenient and concise way of creating maps, making it easier to create small maps without having to write a lot of code. `Map.of()` is an improvement over the previous way of creating small maps using the constructor of the HashMap class, which can be cumbersome and verbose.
 
-What is new HashMap\<\>()?
---------------------------
+## What is new HashMap\<\>()?
 
 `new `[HashMap](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/HashMap.html)`<>() `is a constructor provided by the HashMap class in Java, which allows developers to create a new instance of a `HashMap`. It is used to create a mutable map, which means that the map can be modified by adding, removing, or updating key-value pairs.
 
 It is a commonly used method for creating maps in Java, especially when dealing with larger sets of data.
 
-Benchmarking Map.of() and new HashMap\<\>()
--------------------------------------------
+## Benchmarking Map.of() and new HashMap\<\>()
 
 To compare the performance of `Map.of()` and `new HashMap<>()` in Java, we can use benchmarking tools to measure the time taken to perform various operations on maps created using these methods. In our benchmark, we will measure the time taken to get a value from a map and the time taken to insert values into a map.
 
 It's worth noting that our benchmarks are limited to a small set of data, such as ten items. It's possible that the results could differ for larger data sets or more complex use cases.
 
-The benchmarking code
----------------------
+## The benchmarking code
 
 ```java
 package ca.bazlur;
@@ -154,9 +150,7 @@ public class MapBenchmark {
 }
 ```
 
-
-The results
------------
+## The results
 
 ```
 Benchmark                    Mode  Cnt   Score   Error  Units
@@ -165,7 +159,6 @@ MapBenchmark.testGetMapOf    avgt   20  16.327 ± 0.119  ns/op
 MapBenchmark.testHashMap     avgt   20  84.920 ± 1.737  ns/op
 MapBenchmark.testMapOf       avgt   20  83.290 ± 0.471  ns/op
 ```
-
 
 These are the benchmark results for comparing the performance of using `new HashMap<>()` and `Map.of()` in Java. The benchmark was conducted with a limited and small data set (e.g. 10).
 
@@ -181,12 +174,9 @@ In my opinion, the slight variations in performance may not hold much importance
 
 So let's see the benefit of using Map.of() --  
 
-Benefits of using Map.of()
---------------------------
+## Benefits of using Map.of()
 
 There are several benefits to using Map.of() over the new HashMap\<\>() in Java:
-
-<br />
 
 **Conciseness**: Map.of() provides a concise and convenient way of creating small maps in Java. This makes the code more readable and easier to maintain.
 
@@ -194,10 +184,7 @@ There are several benefits to using Map.of() over the new HashMap\<\>() in Java:
 
 **Type Safety**: Map.of() provides type safety for the keys and values of the map, which helps prevent type-related errors that can occur when using new HashMap\<\>().
 
-Conclusion
-----------
-
-<br />
+## Conclusion
 
 Map.of() is a powerful and useful method introduced in Java 9, which provides a more concise way of creating small maps in Java with added benefits such as immutability and type safety.
 
@@ -206,12 +193,6 @@ Our benchmarking shows that the latencies of Map.of() and new HashMap\<\>() for 
 The benefits of using Map.of() include its conciseness, immutability, and type safety. Although the performance difference may not be significant based on the provided benchmark results, the other advantages of Map.of() make it an appealing option.
 
 Developers should consider using Map.of() when creating small maps in Java to take advantage of these benefits.
-
-<br />
-
-<br />
-
-<br />
 
 **Edit:**   
 

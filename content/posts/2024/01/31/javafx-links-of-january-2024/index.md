@@ -21,15 +21,11 @@ frozen: false
 
 This is the first JavaFX LinksOfTheMonth review for 2024, an overview of the LinksOfTheWeek that got published on [jfx-central.com](https://www.jfx-central.com/) during January.
 
-
-
-Core
-----
+## Core
 
 * [JavaFX 21.0.2 (January 2024) is available on the Gluon website](https://gluonhq.com/products/javafx/).
 
-Applications
-------------
+## Applications
 
 * **Robert Ladstätter** added ZIP file support to LogoRRR: "[No more unzipping before analysing your latest bugs from ops](https://twitter.com/rladstaetter/status/1741795036826566704)!"
 * [A Christmas present by **Carl Dea**](https://twitter.com/carldea/status/1738937742984126795): "I wanted to give you a sneak peek at a JavaFX based clinical interface terminology system (knowledge base)."
@@ -44,8 +40,7 @@ Applications
   * [Clock drawn on the Canvas, running in the browser](https://orangomango.github.io/Clock/) with about [100 lines of code](https://github.com/OrangoMango/Clock/blob/main/src/main/java/com/orangomango/clock/Clock.java).
 * **Patrik Karlström** is "[in the middle of a major facelift of mapollage](https://twitter.com/PatrikKarlstrom/status/1750568870241280298), a KML generator. This time combining JavaFX with NetBeans Java Platform. It's great as usual, and now I'm using the "output window" with all it's goodies like folding, coloring \& links. It's all there, for free!"
 
-Games
------
+## Games
 
 * **OrangoMango** made a perfect Snake AI, [check the video](https://twitter.com/orango_mango/status/1741480547627507809)! You can find the game (and play it) with a link to the sources on [orangomango.itch.io/snake](https://orangomango.itch.io/snake).
 * **Almas Baim** published FXGL game engine 21 with:
@@ -61,8 +56,7 @@ Games
 * New [video update by **London Softworks**](https://twitter.com/LondonSoftworks/status/1742674131299000615): "Trying my best to work every day, so many exciting things to come in the near future! For now, enjoy a small demo of a few components (Texture, Mesh, Transformation) being fully implemented!"
 * [Beta preview by **Hlan Htet Kyaw** of Brain Buster](https://twitter.com/HlanHtetKyaw1/status/1742194376820814247): "Please test and provide feedback. Any help would be appreciated."
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * [**Steve Hannah**](https://twitter.com/shannah78) published a new [IntelliJ Plugin for jDeploy](https://jdeploy.substack.com/p/new-intellij-plugin-for-jdeploy) to create a new desktop app with automated releases on GitHub in under 2 minutes: "In addition to creating the project locally, the wizard will create a new GitHub repository, that is set up to generate new releases on every commit. Within 30 seconds of creating your project, you should be able to download and install the app from GitHub releases."
   * He also shared a GitHub project as a showcase for jDeploy: [Sample FXGL project deployed with jDeploy via GitHub releases](https://github.com/shannah/fxgl-test8).
@@ -71,8 +65,7 @@ Components, Libraries, Tools
 * [**Carl Dea** shared a video](https://twitter.com/carldea/status/1746712384725483585): "JavaFX with the native background blurring effect on the MacOS is now working! Thanks to [**Steve Hannah**](https://twitter.com/shannah78) for the tremendous help in understanding the native side (MacOS). [Demo here](https://github.com/carldea/windowblur). Eventually will end up in [**Pedro Duque Vieira**](https://twitter.com/P_Duke)'s FXThemes project. I also want to give a shout-out to the amazing software engineer [**Martin Fox**](https://github.com/beldenfox) (a JavaFX contributor)."
 * [**Pedro Duque Vieira** is asking for help testing out FXThemes](https://twitter.com/P_Duke/status/1750632079430189283): "If you have a machine running Windows 10 can you run the fxthemes-samples subproject and tell me if the window that shows up has a background blur? The project is using Java17 for now..."
 
-Podcast, Video, Books
----------------------
+## Podcast, Video, Books
 
 * The [recording of the live stream](https://www.youtube.com/watch?v=IufaUwDsHUA) by **Frank Delporte** and **Almas Baim** provides a code walk-through of this blog post: [A JavaFX Game Application in a Single Java File with JBang and FXGL](https://webtechie.be/post/2023-12-14-jbang-fxgl/).
 * New book by **Peter Späth** : [Frontend Development with JavaFX and Kotlin: Build State-of-the-Art Kotlin GUI Applications](https://www.amazon.nl/Frontend-Development-JavaFX-Kotlin-State/dp/1484297164).
@@ -80,15 +73,13 @@ Podcast, Video, Books
 * [**Kinsley Kajiva**](https://www.linkedin.com/in/kinsley-kajiva/) published a video: "[Ripple WebRTC - JavaFX G Streamer Demo](https://www.youtube.com/watch?v=PYv9Pp-Wu3c)."
 * [Airhacks #278: "Java at Azul: The Interesting Features"](https://airhacks.fm/#episode_278): [Adam Bien](https://twitter.com/AdamBien) talks with [Gerrit Grunwald](https://twitter.com/hansolo_) about Java desktop applications with Swing and JavaFX + many other topics.
 
-Tutorials
----------
+## Tutorials
 
 * [**Tobias Briones**](https://twitter.com/tobiasbriones_) added [support for rounded triangles](https://blog.mathsoftware.engineer/drawing-a-rounded-triangle-via-quadratic-curves-2023-12-22) to the Canvas Play JavaFX project using quadratic Bézier curves.
 * [Examples of Transformations in JavaFX](https://examples.javacodegeeks.com/examples-of-transformations-in-javafx/) by [**Omozegie Aziegbe**](https://twitter.com/OAziegbe).
 * [**Tech Buddy**](https://twitter.com/techbuddy_dev): "[Building Three-Layered JavaFX Apps with TornadoFX and Kotlin](https://techbuddy.dev/kotlin-tornadofx-three-layered-javafx)"
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * The **JFX Adopters Meeting 2024** takes place on the 6th of March at ZEISS in Munich Germany. It's a user meeting about JavaFX technology and the [registration is open](https://zeiss.com/meditec/en/news-events/events/jfx-adopters-meeting.html#register). You can still apply to be a speaker at this event!
 * **Heshan Kariyawasam** [fell in love with JavaFX canvas](https://www.linkedin.com/posts/heshanthenura_javafx-java-night-activity-7149071331672616960-gXKa/): "So I'm going to simulate night sky. I'll try to add Constellations and Meteors so it will be more realistic."
@@ -103,8 +94,7 @@ Miscellaneous
   * Computer arts
 * A [tip from **Heshan Kariyawas**](https://www.linkedin.com/posts/heshanthenura_java-javafx-debugging-activity-7156150466643468289-GcHG/): "Before the production release of a JavaFX app on Windows using JPackage, enable the console with the `--win-console` flag for easy debugging. However, after the production release, no debuggers are available. This tip proved very useful for me today."
 
-JFX Central
------------
+## JFX Central
 
 * JFX Central is on the cover page of Javamagazin 2.2024, and the article by **Frank Delporte** is eight (8!) pages. A complete walkthrough of the website and interviews with **Dirk Lemmermann** , **Li Wang Yang** , **Florian Kirmaier** , and **Mike Hearn** . The [full article is also available here](https://entwickler.de/java/jfx-central-javafx) (with login).
 * The summary of our [Links Of December are shared on Foojay](https://foojay.io/today/javafx-links-of-december-2023/).

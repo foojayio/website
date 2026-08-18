@@ -26,8 +26,7 @@ Lots of companies are eager to provide their identity provider: Twitter, Faceboo
 
 In this article, I want to demo how to use OpenID Connect using Google underneath and then switch to Azure.
 
-OpenID Connect
---------------
+## OpenID Connect
 
 The idea of an *authorization* open standard started with [OAuth](https://en.wikipedia.org/wiki/OAuth) around 2006. Because of a security issue, OAuth 2.0 superseded the initial version. OAuth 2.0 became an in 2012:
 > The OAuth 2.0 authorization framework enables a third-party  
@@ -78,8 +77,7 @@ Here are a couple of identity providers that are compatible with OpenID Connect:
 
 In the following, we will start with Google and switch to Azure to validate our setup.
 
-Setting up OpenID Connect with Apache APISIX
---------------------------------------------
+## Setting up OpenID Connect with Apache APISIX
 
 Imagine we have a web app behind Apache APISIX that we want to secure with OpenID Connect. Here's the corresponding Docker Compose file:
 
@@ -99,7 +97,6 @@ services:
   httpbin:
     image: kennethreitz/httpbin                                    #4
 ```
-
 
 1. Apache APISIX API Gateway
 2. APISIX configuration - used to configure it statically in the following line
@@ -128,7 +125,6 @@ routes:
 #END
 ```
 
-
 1. Catch-all route to the underlying web app
 2. Plugin configuration parameters. Values depend on the exact provider (see below)
 3. OpenID Connect can use a Discovery endpoint to get all necessary OAuth endpoints. See [OpenID Connect Discovery 1.0 spec](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) for more information
@@ -136,8 +132,7 @@ routes:
 5. Default scope
 6. Key to encrypt session data. Put whatever you want.
 
-Configuring Google for OIDC
----------------------------
+## Configuring Google for OIDC
 
 Like all Cloud Providers, Google offers a full-fledged Identity Management solution, which may be daunting for newcomers. In this section, I'll only detail the necessary steps required to configure it for .
 
@@ -149,19 +144,13 @@ In the project context, navigate *APIs \& Services \| Credentials*.
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-62734" src="google-cloud-credentials-526x510.jpg" alt="" width="526" height="510">
 
-<br />
-
 Then, press the *+ CREATE CREDENTIALS* button in the upper menu bar.
 
 <img decoding="async" class="aligncenter size-medium wp-image-62735" src="google-cloud-create-credentials-700x72.jpg" alt="" width="700" height="72">
 
-<br />
-
 Select *OAuth Client Id* in the scrolling menu.
 
 <img decoding="async" class="aligncenter size-medium wp-image-62736" src="google-cloud-choose-credentials-700x447.jpg" alt="" width="700" height="447">
-
-<br />
 
 Fill in the fields:
 
@@ -183,12 +172,9 @@ At this point, we can start our setup with `docker compose up`. When we navigate
 
 <img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-62739" src="google-auth-choose-account-457x510.jpg" alt="" width="457" height="510">
 
-<br />
-
 Then, I can freely access the resource.
 
-Configuring Azure for OIDC
---------------------------
+## Configuring Azure for OIDC
 
 My colleague Bobur has already [described everything](https://dev.to/apisix/api-security-with-oidc-by-using-apache-apisix-and-microsoft-azure-ad-50h3) you need to do to configure Azure for OIDC.
 
@@ -200,8 +186,7 @@ We only need to change the OIDC parameters:
 
 If you restart Docker Compose with the new parameters, the root page is now protected by Azure login.
 
-Conclusion
-----------
+## Conclusion
 
 Externalizing your authentication process to a third party may be sensible, but you want to avoid binding your infrastructure to its proprietary process. OpenID Connect is an industry standard that allows switching providers easily.
 

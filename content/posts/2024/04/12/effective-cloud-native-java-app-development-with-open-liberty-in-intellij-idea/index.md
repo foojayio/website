@@ -42,8 +42,7 @@ The Liberty Tools for IntelliJ IDEA plugin can help with all stages of the exten
 
 ![](Screenshot-2024-04-03-at-13.21.37-700x437.png)
 
-Key Capabilities of Liberty Tools
----------------------------------
+## Key Capabilities of Liberty Tools
 
 These tools introduce capabilities that really empower you to develop, test, debug, and manage applications without having to leave your IDE, including:
 
@@ -57,10 +56,7 @@ In this article, we'll dive further into these capabilities. If you want to view
 
 {{< youtube O-dN3yHSPdQ >}}
 
-<br />
-
-View and access all detected Liberty projects in your IDE in the Liberty tool window
-------------------------------------------------------------------------------------
+## View and access all detected Liberty projects in your IDE in the Liberty tool window
 
 Liberty Tools automatically detects Liberty Maven or Gradle projects. These projects are added to a special Liberty tool window in the IntelliJ IDEA. This can be accessed through the Liberty tab available in the menu on the very right-hand side of the IDE.
 
@@ -68,8 +64,7 @@ From this window, you can access a command menu to manage your Liberty projects.
 
 ![Screenshot of the Liberty Tools plugin in IntelliJ IDEA](LibertyToolsIntelliJ2-700x406.png)
 
-Rapid, iterative development with Liberty dev mode
---------------------------------------------------
+## Rapid, iterative development with Liberty dev mode
 
 Liberty's hot reload functionality, named "dev mode", enables automatic detection, recompilation, and deployment of code changes whenever you save a new change. Liberty dev mode enables rapid, iterative development in a manner that aligns with agile development practices that are recommended for cloud-native applications.
 
@@ -79,8 +74,7 @@ To try this for yourself, follow the steps in the Liberty Tools user guide to [r
 
 You can also run your application in dev mode in a container through the 'Start in container' action. When dev mode runs with container support, it builds a container image and runs the container. For more information on dev mode for containers, check out the [Liberty Maven devc goal](https://github.com/OpenLiberty/ci.maven/blob/main/docs/dev.md#devc-container-mode) or, alternatively, see the [Liberty Gradle libertyDevc task](https://github.com/OpenLiberty/ci.gradle/blob/main/docs/libertyDev.md#libertydevc-task-container-mode).
 
-Effective testing and debugging within the IDE
-----------------------------------------------
+## Effective testing and debugging within the IDE
 
 When your application is running on Liberty using dev mode, you can easily run the tests provided by your application. To do this, select the 'Run tests' command in the Liberty tool window, or alternatively, you can simply press enter in the terminal running Liberty in dev mode.
 
@@ -96,8 +90,7 @@ To do this, you'll first need to create or select a Liberty Run/Debug Configurat
 
 For more on this, you can see the steps required in the Liberty Tools user guide section: [debug your application](https://github.com/OpenLiberty/liberty-tools-intellij/blob/main/docs/user-guide.md#debug-your-application).
 
-Editing assistance for configuration files
-------------------------------------------
+## Editing assistance for configuration files
 
 You can also use Liberty Tools to get Liberty configuration editing assistance through the [Liberty Config Language Server](https://github.com/OpenLiberty/liberty-language-server#liberty-config-language-server), such as [code completion, diagnostics, and quick-fixes](https://github.com/OpenLiberty/liberty-language-server#features), in Liberty server.xml, server.env, and bootstrap.properties files.
 
@@ -105,8 +98,7 @@ To use Liberty-specific code completion, press `Ctrl + Space` or `Cmd + Space` a
 
 This hover-over support is also enabled for other xml elements too. All of this saves developers time and additionally means that they don't have to go and find the correct documentation to find this information -- promoting further productivity gains. Follow the steps in the Liberty Tools user guide for [configuring a Liberty server with configuration assistance](https://github.com/OpenLiberty/liberty-tools-intellij/blob/main/docs/user-guide.md#configure-a-liberty-server) to try this for yourself.
 
-Coding assistance for Jakarta EE and MicroProfile APIs
-------------------------------------------------------
+## Coding assistance for Jakarta EE and MicroProfile APIs
 
 Another feature offered by the Liberty Tools plugin is coding assistance. This provides helpful language-support features such as code completion, diagnostics, and quick-fixes in configuration and application files for Jakarta EE and MicroProfile APIs.
 
@@ -116,8 +108,7 @@ The Jakarta EE API coding assistance is offered through [Eclipse LSP4Jakarta](ht
 
 If you'd like further resources for this, you can explore the Liberty Tools user guide and follow the steps laid out in this to [develop with Jakarta EE and MicroProfile APIs with coding assistance](https://github.com/OpenLiberty/liberty-tools-intellij/blob/main/docs/user-guide.md#develop-with-jakarta-ee-and-microprofile-apis).
 
-Start using Liberty Tools in IntelliJ IDEA
-------------------------------------------
+## Start using Liberty Tools in IntelliJ IDEA
 
 Before you can use Liberty Tools in IntelliJ IDEA, you must satisfy these requirements:
 
@@ -141,13 +132,8 @@ Once you import an app, refresh the Liberty tool window tab by clicking the refr
 
 ![Screenshot of where to find the refresh icon in IntelliJ IDEA](Screenshot-2024-04-03-at-13.33.48-700x405.png)
 
-Summary and next steps
-----------------------
+## Summary and next steps
 
 With the Liberty Tools plugin for IntelliJ IDEA, you can efficiently develop, deploy, debug, test, and manage your cloud-native Java applications.
 
 Now that you have Liberty Tools set up in your IDE, why not try using it with some of the [Open Liberty guides or tutorials](http://openliberty.io/guides/?utm_source=ibmd&utm_medium=article&utm_content=idevscode)?
-
-<br />
-
-<br />

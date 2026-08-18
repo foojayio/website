@@ -30,8 +30,7 @@ That's why we're excited to announce our upcoming webinar:
 
 In this session, you'll discover **BoxLang AI** , an open-source library that brings unified, fluent AI orchestration to the JVM ecosystem. With a single, intuitive API, BoxLang AI lets you integrate 12+ **leading AI providers** (including OpenAI, Claude, Gemini, Grok, Ollama, Groq, and more), switch models, or combine them into advanced workflows---**without rewriting your code.**
 
-What You'll Learn
------------------
+## What You'll Learn
 
 We'll explore production-ready capabilities designed for real-world applications, including:
 
@@ -44,8 +43,7 @@ We'll explore production-ready capabilities designed for real-world applications
 
 You'll also see live demos and practical examples showing how to apply these features in everyday development.
 
-Who Should Attend
------------------
+## Who Should Attend
 
 This webinar is ideal for:
 
@@ -56,8 +54,7 @@ This webinar is ideal for:
 
 If you're building chatbots, internal tools, code assistants, content generators, or full AI-driven systems, this session will show you how to reduce complexity and avoid vendor lock-in while accelerating delivery.
 
-Register Now
-------------
+## Register Now
 
 Ready to transform how you build intelligent JVM solutions?
 
@@ -65,8 +62,7 @@ Ready to transform how you build intelligent JVM solutions?
 
 We look forward to seeing you there!
 
-Join the Ortus Community
-------------------------
+## Join the Ortus Community
 
 Be part of the movement shaping the future of web development. Stay connected and receive the latest updates on, **product launches, tool updates, promo services and much more.**
 

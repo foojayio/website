@@ -45,13 +45,11 @@ Alternatively, you can load a sample MongoDB dataset that already contains pre-g
 curl https://atlas-education.s3.amazonaws.com/sampledata.archive -o sampledata.archive
 ```
 
-
 Find the connection string for your local MongoDB Atlas cluster with:
 
 ```
 atlas deployments connect --connectWith connectionString
 ```
-
 
 You will get a connection string similar to "mongodb://localhost:55015/?directConnection=true". Then, load the sample dataset using mongorestore and the connection string:
 
@@ -59,7 +57,6 @@ You will get a connection string similar to "mongodb://localhost:55015/?directCo
 mongorestore --archive=sampledata.archive --uri 
 "mongodb://localhost:55015/?directConnection=true"
 ```
-
 
 After reconnecting to your local Atlas cluster, run show dbs to confirm that the new sample_mflix database has been added. It includes the embedded_movies collection with pre-generated vector embeddings from the MongoDB sample dataset.
 
@@ -70,7 +67,6 @@ To retrieve a document from the embedded_movies collection within this database,
 ```
 db.getSiblingDB("sample_mflix").embedded_movies.findOne()
 ```
-
 
 This command queries the sample_mflix.embedded_movies namespace and returns a single document containing standard movie metadata such as title, cast, genres, and release date. It also includes one or more vector embeddings of the plot field, which are stored as Float32Array binaries. Here is a simplified example of the returned document:
 
@@ -89,7 +85,6 @@ This command queries the sample_mflix.embedded_movies namespace and returns a si
   ]))
 }
 ```
-
 
 The example includes two different embeddings of the same plot: plot_embedding contains 1536-dimensional vectors generated using OpenAI's text-embedding-ada-002 model, while plot_embedding_voyage_3_large contains 2048-dimensional vectors from Voyage AI's voyage-3-large model.
 
@@ -119,7 +114,6 @@ db.getSiblingDB("sample_mflix").embedded_movies.createSearchIndex({
 })
 ```
 
-
 The plot_embedding_voyage_3_large field is indexed as a knnVector, a specialized vector field designed for storing high-dimensional numeric data. Cosine means the similarity between vectors is based on the angle between them; the smaller the angle, the higher the similarity, regardless of their magnitude.
 
 To confirm the index exists, run:
@@ -127,7 +121,6 @@ To confirm the index exists, run:
 ```
 db.getSiblingDB("sample_mflix").embedded_movies.getSearchIndexes()
 ```
-
 
 You're now ready to run similarity queries against this field using the $vectorSearch operator.
 

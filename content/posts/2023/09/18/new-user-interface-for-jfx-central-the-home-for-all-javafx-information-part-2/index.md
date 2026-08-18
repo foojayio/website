@@ -192,8 +192,7 @@ The big difference is it makes self-updating packages, which is essential. There
 
 With distribution now mostly solved, JavaFX apps can become more competitive against Electron, especially with the multi-language support of Truffle and GraalVM. Interestingly, in the web framework space, we're starting to see people come back around and almost rediscover some of the ideas in JavaFX since the start, like per-property binding, constraint-based layout models, and so on.
 
-Conclusion
-----------
+## Conclusion
 
 Of course, more people are involved and contributed to the [development](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2) and [data project](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data)! If you find a bug, or have extra content to be added, create a ticket or pull request.
 

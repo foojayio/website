@@ -27,8 +27,7 @@ I detailed in [my last blog post](https://mostlynerdless.de/?p=628) how the Fire
 
 But I'm of course not the only one who uses Firefox Profiler beyond the web because using it has many advantages: You're essentially getting a prototypical visualization for your data in an afternoon.
 
-Other tools that use Firefox Profiler
--------------------------------------
+## Other tools that use Firefox Profiler
 
 There are other tools that output use Firefox Profiler for their front end. A great example is the Rust profiler [samply](https://github.com/mstange/samply) by Markus Stange, the initial developer of Firefox Profiler:
 > samply is a command line CPU profiler which uses the [Firefox profiler](https://profiler.firefox.com/) as its UI.
@@ -44,7 +43,6 @@ There are other tools that output use Firefox Profiler for their front end. A gr
 % samply record ./your-command your-arguments
 ```
 
-
 > [GiTHUB](https://github.com/mstange/samply)
 
 Another example is the python profiler [FunctionTrace](https://functiontrace.com/):
@@ -57,8 +55,7 @@ Another example is the python profiler [FunctionTrace](https://functiontrace.com
 There are also non-open source uses of Firefox Profiler, Luís Oliveira, for example, works on integration with Lisp:
 > We're using the Firefox Profiler to debug performance issues at the Dutch Railways dispatching center.
 
-Basic Structure
----------------
+## Basic Structure
 
 I hope I convinced you that the Firefox Profiler is really great for visualizing profiling data, even if this data comes from the world beyond web UIs. If not, please read [my previous article](https://mostlynerdless.de/?p=628). The main part of adapting to Firefox Profiler is to convert your data into the profiler format. The data is stored as JSON in a (optionally zipped) file and can be loaded into Firefox Profiler. See [Loading in profiles from various sources](https://github.com/firefox-devtools/profiler/blob/main/docs-developer/loading-in-profiles.md) for more information.
 
@@ -98,7 +95,6 @@ type Profile = {|
   ...
 |};
 ```
-
 
 A profile consists of the metadata, shared libraries, CPU and memory counters, and the rest of the data per thread.
 
@@ -160,7 +156,6 @@ type ProfileMeta = {|
 |};
 ```
 
-
 And there is more. It might feel overwhelming, but this data structure also allows you to tailor the profiler UI slightly to your needs.
 
 ### Category
@@ -174,7 +169,6 @@ type Category = {|
   subcategories: string[],
 |};
 ```
-
 
 Categories are referenced by their index in the category list of the `ProfileMeta` data structure and subcategories by their index in the field of their parent category.
 
@@ -214,7 +208,6 @@ type Thread = {|
 |};
 ```
 
-
 The file format stores all stack traces in a space-efficient format which the front end can handle fast. It uses an array of strings (`stringTable`) to store all strings that appear in the stack traces (like function names), the other data structures only refer to strings by their index in this array.
 
 ### SampleS Table
@@ -244,7 +237,6 @@ type SamplesTable = {|
 |};
 ```
 
-
 Filling this with data from a sampling profiler is easy, just add references to the stacks and their occurrence time. For example consider you sampled the stack `A-B` at 0 and `A-B-C` at 2, then the samples table is:
 
 ```javascript
@@ -256,7 +248,6 @@ SamplesTable = {
   length: 2
 }
 ```
-
 
 Filling the `threadCPUDelta` property allows you to specify the CPU time a thread has used since the last sample. The Firefox Profiler uses this property to show the CPU usage curves in the timeline:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/image-4-2000x64.png)
@@ -276,7 +267,6 @@ type StackTable = {|
 |};
 ```
 
-
 Category and subcategory of a stack `n` gives information on the whole stack, the frame just on its topmost frame. The prefix denotes the stack related to the second-top-most frame or that this stack only has one frame if `null`. This allows the efficient storage of stacks.
 
 Now consider our example from before. We could store the stack `A-B-C` as follows:
@@ -288,7 +278,6 @@ StackTable = {
   ...
 }
 ```
-
 
 ### Frame Table
 
@@ -318,7 +307,6 @@ type FrameTable = {|
   length: number,
 |};
 ```
-
 
 Each frame is related to a function, which is in turn stored in the `FuncTable`.
 
@@ -357,7 +345,6 @@ type FuncTable = {|
 |};
 ```
 
-
 ### Resource Table
 
 The last table I'll show in this article is the resource table. It depends on you and what you map to it:
@@ -376,7 +363,6 @@ type ResourceTable = {|
   type: resourceTypeEnum[],
 |};
 ```
-
 
 This was quite a technical article, so thanks for reading till the end. I hope it helps you when you try to target the Firefox Profiler, and see you for the next blog post.
 

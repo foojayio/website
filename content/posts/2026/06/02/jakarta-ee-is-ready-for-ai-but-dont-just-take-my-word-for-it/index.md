@@ -21,8 +21,7 @@ Back in April I had the pleasure of attending Open Community Experience 2026 in 
 
 This post is a roundup of five talks I think belong well together. They don't cover the same topic but they tell a story about where enterprise Java is, where it's going and what it means to build serious software with it in 2026.
 
-**Where Jakarta EE Comes From and Where It's Headed**
------------------------------------------------------
+## **Where Jakarta EE Comes From and Where It's Headed**
 
 ### The Past, Present, and Future of Enterprise Java - Ivar Grimstad (Eclipse Foundation)
 
@@ -32,10 +31,7 @@ He is really good at explaining why Jakarta EE looks the way it does: every simp
 
 {{< youtube hKiIPDtRuvg >}}
 
-<br />
-
-**Jakarta EE Meets AI: Three Angles on the Same Problem**
----------------------------------------------------------
+## **Jakarta EE Meets AI: Three Angles on the Same Problem**
 
 The next three talks are best understood as a series. They each ask a version of the same question - *how do you integrate AI into enterprise Java systems responsibly?* - but approach it from different angles and with a slightly different focus.
 
@@ -79,8 +75,7 @@ This talk will be useful for anyone who has built an AI proof-of-concept and is 
 
 {{< youtube 46t5qxs0A6o >}}
 
-**Getting the Fundamentals Right**
-----------------------------------
+## **Getting the Fundamentals Right**
 
 ### API = Some REST and HTTP, right? RIGHT?! - Rustam Mehmandarov (Miles)
 

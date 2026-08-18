@@ -25,10 +25,7 @@ frozen: false
 
 This blog aims to explain how Java programmers can build TornadoVM with IntelliJ IDEA, and how they can run TornadoVM unit-tests or other Java programs.
 
-
-
-*Prerequisites*
----------------
+## *Prerequisites*
 
 This blog uses IntelliJ IDEA 2024.2.4 version and the list of required plugins are as follows:{#r55ph1440}
 
@@ -53,7 +50,6 @@ Additionally, the following commands must be installed in your system and should
 $ which make
 ```
 
-
 * In Windows OS, open your shell configuration (e.g. x64 Native Tools Command Prompt for VS 2022) and initialize the environment:
 
 {#7mg78166105}
@@ -63,14 +59,12 @@ $ cd <path-to-TornadoVM-directory>
 $ .\bin\windowsMicrosoftStudioTools2022.cmd
 ```
 
-
 You can verify that your system recognizes cmake, by running:{#oe9dj102289}
 
 ```
 $ where cmake
 $ where pyInstaller
 ```
-
 
 If the commands are recognized, skip the next step (Step b).
 
@@ -86,20 +80,17 @@ Assuming that you have downloaded and installed cmake in a custom directory, you
 $ vim ~/.zshrc  		# or ~/.bashrc depending on your shell
 ```
 
-
 ##### Add the following line and replace the \<custom-path\> with the path to your installation
 
 ```
 $ export PATH=<custom-path>/cmake-3.25.2-macos-universal/CMake.app/Contents/bin:$PATH
 ```
 
-
 ##### Save and apply the changes
 
 ```
 $ source ~/.zshrc  	# or source ~/.bashrc
 ```
-
 
 #### ii) Add cmake and pyInstaller in your PATH (Windows)
 
@@ -110,10 +101,7 @@ $ C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExte
 $ <path-to-TornadoVM-directory>\.venv\Scripts
 ```
 
-
 **Note:** It is recommended to use the python interpreter under the virtual environment (.venv) as the Python SDK for your TornadoVM project, since it contains all dependent modules (i.e., PyInstaller, psutil) to build TornadoVM and run the tests from IntelliJ.
-
-
 
 1. Clone \& Install TornadoVM from Shell
 ----------------------------------------
@@ -126,7 +114,6 @@ First you need to clone the source code from GitHub:{#srq4j260067}
 $ git clone https://github.com/beehive-lab/TornadoVM.git
 ```
 
-
 Then, you can invoke the tornadovm-installer script which will download the dependencies and will install TornadoVM with the defined JDK and backends (e.g., opencl, ptx, spirv):{#bnas8236281}
 
 * In macOS/Linux OS:
@@ -138,7 +125,6 @@ $ cd TornadoVM
 $ ./bin/tornadovm-installer --jdk graal-jdk-21 --backend opencl
 $ source setvars.sh
 ```
-
 
 * In Windows OS:
 
@@ -153,9 +139,6 @@ $ .\bin\tornadovm-installer --jdk graal-jdk-21 --backend opencl
 $ setvars.cmd
 ```
 
-
-
-
 2. Generate the IntelliJ Project Files
 --------------------------------------
 
@@ -169,10 +152,7 @@ Generating <path-to-tornadovm>/.build/TornadoVM-Tests.run.xml
 IntelIj Files Generated ............... [ok]
 ```
 
-
 This command will generate three files. The first two files are used to build TornadoVM from IntelliJ, while the latter is used to run the TornadoVM unit-tests. You will be able to configure those files from IntelliJ in the next step.
-
-
 
 3. Configure the generated IDE project files
 --------------------------------------------
@@ -199,14 +179,10 @@ Similarly you can update the selected interpreter for the Python configuration f
  <img decoding="async" width="1024" height="784" src="Configure-Tests-1024x784.png" alt="" class="wp-image-114762" style="width:566px;height:auto">
 </figure>
 
-
-
 4. Build TornadoVM from IntelliJ
 --------------------------------
 
 You can select the TornadoVM-Build configuration file and run. This should build TornadoVM with the JAVA_HOME and the backends that you selected in Step 1. If you run in Windows OS, this process will also invoke the pyInstaller package to create the TornadoVM executables.
-
-
 
 5. Run TornadoVM Unit-tests from IntelliJ
 -----------------------------------------
@@ -218,8 +194,6 @@ The outcome of running the unit-tests should be similar to this image:
 <figure class="aligncenter size-large is-resized">
  <img loading="lazy" decoding="async" width="1024" height="943" src="Run-Tests-1024x943.png" alt="" class="wp-image-114763" style="width:604px;height:auto">
 </figure>
-
-
 
 6. Run TornadoVM Examples/Applications from IntelliJ
 ----------------------------------------------------
@@ -248,7 +222,6 @@ $ source setvars.sh
 $ tornado --printJavaFlags
 ```
 
-
 * In Windows OS:
 
 {#per2e618615}
@@ -259,7 +232,6 @@ $ .\bin\windowsMicrosoftStudioTools2022.cmd
 $ setvars.cmd
 $ tornado --printJavaFlags
 ```
-
 
 The output of the command depends on the TornadoVM backends you've built. For example, if you build with all backends, it should be similar to this:{#mjihz571845}
 
@@ -273,7 +245,6 @@ The output of the command depends on the TornadoVM backends you've built. For ex
 @<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/spirv-exports
 @<path-to-TornadoVM-directory>/bin/sdk/etc/exportLists/ptx-exports --add-modules ALL-SYSTEM,tornado.runtime,tornado.annotation,tornado.drivers.common,tornado.drivers.opencl,tornado.drivers.opencl,tornado.drivers.ptx
 ```
-
 
 Copy the flags starting from -server to the end, and add them in the VM options field.{#t8glk631723}
 
@@ -311,14 +282,9 @@ The output should be similar to the following image, which is executed on Apple 
  <img loading="lazy" decoding="async" width="1024" height="502" src="Run-Application-1024x502.png" alt="" class="wp-image-114765" style="width:628px;height:auto">
 </figure>
 
-
-
-*Summary*
----------
+## *Summary*
 
 This blog presented how Java programmers can build and run TornadoVM applications from the IntelliJ IDEA. More information are provided in the TornadoVM [++documentation++](https://tornadovm.readthedocs.io/en/latest/ide-integration.html#build-and-run-with-ide). You may find useful to read a previous [++blog++](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea) that introduced [++TornadoInsight++](https://plugins.jetbrains.com/plugin/23309-tornadoinsight), the TornadoVM IntelliJ plugin.
-
-<br />
 
 ### Useful links
 

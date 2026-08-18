@@ -22,8 +22,6 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 I came across Docker Desktop for the first time about three years ago, when I was working as a Principal Architect (Strategic R \& D) on the Microservices Reference Architecture for a product development organization.
 
 At that time, when I was working on my corporate laptop - It became a tedious task to configure virtualization and settings to get it to work. Once I got it running smoothly, I realized that the memory requirements required to run it is quite high. At times, I found it tough to use my laptop for daily development with it running. It was also because I was working on microservices and had almost 6+ spring boot applications running.
@@ -90,7 +88,6 @@ The example Spring Boot application can be cloned/forked from this [link](https:
 </properties>
 ```
 
-
 Make sure that your Maven pom.xml that will be used to build the project has the above entries under \<properties\>.
 
 Below is the snippet for the \[dockerfile-maven-plugin\] to be added to the section of your maven pom.xml
@@ -111,7 +108,6 @@ Below is the snippet for the \[dockerfile-maven-plugin\] to be added to the sect
 <!-- dockerfile maven plugin -->
 ```
 
-
 5. Create a Dockerfile
 ----------------------
 
@@ -122,7 +118,6 @@ ARG JAR_FILE
 COPY ${JAR_FILE} spring-boot-docker.jar
 ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
 ```
-
 
 The typical dockerfile for a spring boot application will look like the above.
 
@@ -139,7 +134,6 @@ It will create and push an image to the docker for desktop that is running on po
 mvn clean install dockerfile:build
 ```
 
-
 <img decoding="async" aria-describedby="caption-attachment-57685" class="size-medium wp-image-57685" src="skp_docker_desktop_images-700x258.png" alt="Create/Push Image to Docker Desktop" width="700" height="258">
 
 Fig. 1 Create/Push Image to Docker Desktop{#caption-attachment-57685}
@@ -154,7 +148,6 @@ Then you can use the following command to create/start your docker container.
 ```batch
 docker run -p 9090:8080 -t spring-boot-docker/skp-spring-boot-docker
 ```
-
 
 <img decoding="async" aria-describedby="caption-attachment-57686" class="size-medium wp-image-57686" src="skp_docker_desktop_containers-700x200.png" alt="Create/Start the Docker Container" width="700" height="200">
 

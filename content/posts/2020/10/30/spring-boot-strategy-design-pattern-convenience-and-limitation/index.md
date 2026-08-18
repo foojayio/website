@@ -26,7 +26,6 @@ public interface IOneStrategy {
 }
 ```
 
-
 Define some implementations like this:
 
 ```java
@@ -39,7 +38,6 @@ public class OneStrategyFirst implements IOneStrategy {
   }
 }
 ```
-
 
 Now you can simply implement a service which will execute the appropriate strategy based on the given name which looks similar like this:
 
@@ -62,7 +60,6 @@ public class ExecuteStrategyOne {
 }
 ```
 
-
 In real world you make several implementations of the strategy interface like `OneStrategyFirst`, `OneStrategySecond` and `OneStrategyThird`. Sometimes the usage is to use the parameter of `executeStrategyOne` which is provided by a REST API or some other domain specific code which needs different implementations.
 
 The convenience here is that Spring Boot (Spring Framework to be more accurate) handles the injection of the different implementation into the `strategies` Map within `ExecuteStrategyOne` via the constructor. This results in a Map where the key is the value which is given by `@Service("FIRST")` and the value of the map contains an instantiates class of every implementation of the interface `IOneStrategy` which can be found.
@@ -82,7 +79,6 @@ public class TwoStrategyFirst implements ITwoStrategy {
 }
 ```
 
-
 If you try to start that Spring Boot application you will see an exception like this:
 
 ```java
@@ -93,7 +89,6 @@ conflicts with existing, non-compatible bean definition of same name and class
   at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.checkCandidate(ClassPathBeanDefinitionScanner.java:349) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
   at org.springframework.context.annotation.ClassPathB
 ```
-
 
 So what can we do to solve the problem without losing much of the convenience which Spring Boot provides us here?
 
@@ -110,7 +105,6 @@ public class TwoStrategyFirst implements ITwoStrategy {
   }
 }
 ```
-
 
 By using the key in a different annotation we prevent the duplication of the bean names in contradiction to use `@Service("FIRST")` instead. The usage of `@Qualifier("FIRST")` gives us a criteria to handle that different.
 
@@ -132,7 +126,6 @@ public class ExecuteStrategyOne {
 }
 ```
 
-
 I would like to emphasis the usage of the constructor parameter `List<IOneStrategy> strategies` instead of the previously used `Map<String, IOneStrategy> strategies` which is a convenience to get a list of all implementations off the given interface into that list by Spring Boot. Now we need to translate that into a map with the key we have defined by using `@Qualifier` annotation. The whole thing can be solved by a stream like this:
 
 ```java
@@ -142,7 +135,6 @@ this.strategies = strategies
     Collectors.toMap(k -> k.getClass().getDeclaredAnnotation(Qualifier.class).value(),
                      Function.identity()));
 ```
-
 
 We go through the implementations and extract the annotation `@Qualifier` and read out the `value()` which is the key we want to have. We collect the result by using the `Collectors.toMap` into a Map and assign the result to the instance variable `private Map<String, IOneStrategy> strategies;`. Depending on your need it is of course possible to define the instance variable as `final` and you can create an unmodifiable map by using the appropriate `Collectors.toUnmodifiableMap` instead of the `toMap(..)` if needed.
 

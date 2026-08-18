@@ -26,13 +26,11 @@ In early July, the DevBcn conference in Barcelona featured a diverse lineup of s
 
 We have more than 20 people who are passionate about the Java community and are eager to share their knowledge with you.
 
-Video
------
+## Video
 
 {{< youtube LopozI76KyA >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,8 +38,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction  
 
@@ -114,5 +111,3 @@ Content
 <https://www.linkedin.com/in/jonathanvila>  
 
 01:11:33 Outro
-
-<br />

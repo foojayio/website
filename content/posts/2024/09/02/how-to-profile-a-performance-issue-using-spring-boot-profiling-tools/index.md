@@ -29,16 +29,14 @@ This situation highlights a common but critical challenge: the need for effectiv
 
 In this article, we explore the tools available for profiling performance issues and understand the scenarios where profiling is crucial. By the end, we'll delve into features of Digma, empowering developers with insights even during the development phase.{#0b0e}
 
-Understanding Various Aspects of Profiling Performance Issues
--------------------------------------------------------------
+## Understanding Various Aspects of Profiling Performance Issues
 
 Profiling a Spring Boot performance issue involves analyzing the application's runtime behavior to identify and diagnose inefficiencies, bottlenecks, and resource constraints. This includes **monitoring CPU** and **memory usage** , **thread activity** , **garbage collection** , and **database interactions**. Profiling tools collect data on method execution times, resource usage, and other performance metrics to help pinpoint the root causes of performance issues.{#5721}  
 ![How to profile a performance issue using Spring Boot profiling tools - 1*YcY6m7k2T 2AD ymmgYq1w](https://miro.medium.com/v2/resize:fit:720/format:webp/1*YcY6m7k2T-2AD_ymmgYq1w.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
 Visualizing Spring Boot Performance Profiling Process
 
-key scenarios where Spring Boot profiling tools are essential
--------------------------------------------------------------
+## key scenarios where Spring Boot profiling tools are essential
 
 ### High Latency and Slow Response Times:
 
@@ -86,8 +84,7 @@ key scenarios where Spring Boot profiling tools are essential
 
 Profiling in these key cases helps identify and resolve performance bottlenecks, ensuring your Spring Boot application runs efficiently and reliably. By addressing these scenarios, you can enhance user experience, improve resource utilization, and maintain the overall health of your application.{#f369}
 
-Java and Spring Boot Profiling Tools
-------------------------------------
+## Java and Spring Boot Profiling Tools
 
 To effectively profile performance issues in Spring Boot applications, you can utilize a combination of tools designed for different aspects of performance analysis. [**JProfiler**](https://www.ej-technologies.com/products/jprofiler/overview.html) and [**YourKit**](https://www.yourkit.com/) provide deep insights into CPU and memory usage, helping to identify bottlenecks and memory leaks. [**VisualVM**](https://visualvm.github.io/), an open-source profiler, offers real-time monitoring and detailed performance analysis.{#89ee}
 
@@ -123,8 +120,7 @@ We wrote a great article you can check out: https://digma.ai/9-best-java-profile
 >
 > We will explore more on this article.{#3011}
 
-Spring Boot 3 built-in tools for monitoring and observability
--------------------------------------------------------------
+## Spring Boot 3 built-in tools for monitoring and observability
 
 Monitoring and performance profiling are distinct yet complementary. Monitoring provides continuous visibility and alerts to potential issues, while profiling offers the detailed analysis needed to diagnose and fix those issues. By integrating both approaches, teams can ensure their Spring Boot applications run efficiently and reliably{#b676}
 
@@ -156,8 +152,7 @@ When it comes to monitoring and maintaining the performance of Spring Boot appli
 * **Monitoring**is about tracking the health and performance of an application in real time.
 * **Observability** provides a holistic view of an application's state by combining metrics, logs, and traces to understand not just what is happening but why it is happening.
 
-Using Digma for Early Detection and Profiling of Spring Boot Performance Issues
--------------------------------------------------------------------------------
+## Using Digma for Early Detection and Profiling of Spring Boot Performance Issues
 
 [Digma](https://digma.ai/) is a Continuous Feedback platform designed to integrate observability directly into the development process. It aims to help developers gain real-time insights into their code's performance, scalability, and potential issues right from their Integrated Development Environment (IDE). By doing this, Digma enables developers to identify and address problems early in the development cycle, improving overall code quality and reducing production issues.{#12c4}
 
@@ -184,7 +179,6 @@ public class Product {
 }
 ```
 
-
 Create a repository interface with a method including a query.
 
 ```
@@ -204,7 +198,6 @@ public class ProductService {
     }
 }
 ```
-
 
 Create a controller to handle HTTP requests.
 
@@ -227,7 +220,6 @@ public class ProductController {
     }
 }
 ```
-
 
 Run your Spring Boot application and test the endpoints. You can use a tool like Postman or simply your web browser to send GET requests to:
 
@@ -305,8 +297,7 @@ The method takes 2.05 seconds to execute, which is significantly high and likely
 It is possible to create tickets for issues detected by Digma{#89f3}  
 ![An image of a Jira ticket](https://digma.ai/wp-content/uploads/2024/06/image-1.png "How To Profile A Performance Issue Using Spring Boot Profiling Tools")
 
-Final thoughts: Spring Boot Profiling Tools
--------------------------------------------
+## Final thoughts: Spring Boot Profiling Tools
 
 Profiling performance issues and establishing robust monitoring and observability are critical for maintaining the health and efficiency of your Spring Boot application. Profiling helps identify and resolve bottlenecks, inefficient code, and resource-intensive processes, ensuring the application performs optimally under various loads.{#a686}
 

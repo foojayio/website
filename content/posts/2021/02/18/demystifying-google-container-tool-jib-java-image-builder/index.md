@@ -46,8 +46,6 @@ When you do any code changes, only your changes are rebuilt, not your entire app
 
 ](https://www.youtube.com/watch?v=vizfV2opkfU)
 
-<br />
-
 <https://www.youtube.com/watch?v=vizfV2opkfU>
 
 Furthermore to dig deeper, now, we will use the simple spring boot application that was used in the previous article. The source code is available [here](https://github.com/yrashish/spring-boot-jib "here"). We will run maven in debug mode to understand these layers. However, In the following logs, you will see only dependencies, resources, and classes as separate layers, since we don't have other dependencies.
@@ -102,7 +100,6 @@ DEBUG] Containerizing application with the following files:
 [DEBUG] /Users/ashish/Downloads/spring-boot-jib/target/classes/com/jib/example/spring/Controller.class
 [DEBUG] /Users/ashish/Downloads/spring-boot-jib/target/classes/com/jib/example/spring/SpringbootApplication.class
 ```
-
 
 ### Deep-Dive Image Layer
 

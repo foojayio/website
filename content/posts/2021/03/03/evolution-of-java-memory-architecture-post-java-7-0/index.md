@@ -21,10 +21,7 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-
-
-**Java Memory Architecture (Pre Java 8.0)**
--------------------------------------------
+## **Java Memory Architecture (Pre Java 8.0)**
 
 Before we get started, you might want to take a look at Part 1. It explains the core concepts of the Java Memory Architecture, the ones that should get you started to understand this evolution better.
 
@@ -51,8 +48,7 @@ The above Java 7 changes of String handling continued into Java 8. Furthermore, 
 * The default number of Strings in the _String Pool_ is now 60013, as compared to 1009
 * At any point in time, you can check the _String Interning and Pooling_ usage statistics in the JVM by using -XX:+PrintStringTableStatistics (Symbol Table Statistics).
 
-**Java 8 Changes (PermGen to MetaSpace)**
------------------------------------------
+## **Java 8 Changes (PermGen to MetaSpace)**
 
 The most impactful change to Java has been the movement from PermGen to MetaSpace. The following are the changes in Java 8:
 
@@ -72,9 +68,5 @@ The most impactful change to Java has been the movement from PermGen to MetaSpac
 
 ![Image title](https://4.bp.blogspot.com/-03r1GS2jWlk/WPzruNno57I/AAAAAAAANQU/EghKET29INkXMH3Nrd_zNlOsF93T5xmdACLcB/s640/permgen_to_metaspace.jpg)  
 
-
-
 **\[Note\]**  
 Many authors have erroneously stated that PermGen is part of the Java Heap. You have to note this fact that PermGen was/is never a part of the Java Heap. It was only allocated as part of **Contiguous Memory as the Java Heap**. In the case of Metaspace, such a Contiguous Allocation does not exist, Metaspace lies in or is allocated in the native memory of the operating system.
-
-

@@ -29,8 +29,7 @@ To be fair, employee-count metrics are not uncommon in the technology world. Man
 
 The new pricing for Oracle Java SE is disconnected from actual Java usage and could result in a massive price increase.
 
-Do the math
------------
+## Do the math
 
 Say a company has two vCores and 25,000 desktops for 10,000 employees. Azul will save that company approximately $635,000 per year in licensing.
 
@@ -47,8 +46,7 @@ Imagine that this savvy company acquires another corporation and grows to 50,000
 
 Do the math yourself on our [Java price comparison calculator](https://www.azul.com/products/core-savings-calculator/).
 
-How did Oracle Java pricing get here?
--------------------------------------
+## How did Oracle Java pricing get here?
 
 ### September 2017
 
@@ -88,13 +86,10 @@ This gave users a chance to transition their applications to the next release. T
 
 Oracle also shortened the time between LTS releases from three years to two years. The move was generally well received, but it had little effect on OpenJDK's growing momentum.
 
-Conclusion
-----------
+## Conclusion
 
 Oracle's changes to its licensing terms and Java pricing models for Java have been a mixed bag. Oracle deserves props for continuing to develop Java as an open-source platform, but its pricing model and licensing continues to drive users away.
 
 If the hypothetical company had used Azul, it could have saved $2.8 million after its second acquisition -- without audits. If you have a high bill for Oracle Java SE at the end of Oracle's fiscal year (April 30), start planning to divest yourself completely of Oracle Java by end April 2025 so it doesn't happen again.
 
 Oracle may want to convince people that moving from its Java SE runtime to an OpenJDK distribution is difficult, time-consuming, dangerous, and expensive. For most instances, a migration is straightforward. [Learn more in the book we wrote on migrating to OpenJDK.](https://www.azul.com/openjdk-migration-for-dummies/)
-
-<br />

@@ -17,8 +17,6 @@ frozen: false
 
 *Hello and welcome to my first DevSecOps article! Here in Germany, it's winter right now, and the forests are quiet. The snow slows down everything and it's a beautiful time to move undisturbed through the woods.* *Here you can pursue your thoughts, and I started thinking about a subject that customers or participants at conferences ask me repeatedly.*
 
-
-
 The question I am asked is almost always: "What are the quick wins or low hanging fruits if you want to deal more with the topic of security in software development? And I want you to answer this question right **now!**"
 > For the lazy ones, you can see it in a YouTube video as well, the low hanging fruits of DevSecOps:  
 >
@@ -92,8 +90,7 @@ Shift Left means that Vulnerabilities must be eliminated as early as possible in
 The fastest way to get feedback regarding your dependencies is the **JFrog IDE Plugin**. This plugin will connect your IDE to your JFrog Xray Instance. The free tier will give you access to Vulnerability scanning. The Plugin is OpenSource and available for IntelliJ, VS-Code, Eclipse,... If you need some additional features, make a feature request on GitHub or fork the Repository add your changes and make a merge request.
 > Try it out by yourself: [JFrog Free Tier](https://jfrog.com/artifactory/start-free/)
 
-Using the IDE Plugin
---------------------
+## Using the IDE Plugin
 
 If you add a dependency to your project, the IDE Plugin can understand this information based on the used package manager. The IDE Plugin is connected to your JFrog Xray instance and will be queried if there is a change inside your project's dependency definition. The information provided by Xray includes the known vulnerabilities of the added dependency. If there is a fixed version of the dependency available, the new version number will be shown.
 > If you want to see the IDE Plugin in Action without registering for a Free Tier, have a look at my youtube video:  

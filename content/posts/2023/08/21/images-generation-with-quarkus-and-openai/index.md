@@ -24,8 +24,7 @@ frozen: false
 
 **In this article, we explore how to integrate OpenAI API with Quarkus. We will create a Quarkus application using the new REST Client Reactive to invoke the OpenAI DALL.E API for images generation.**
 
-OpenAI API Overview
--------------------
+## OpenAI API Overview
 
 Before jumping into the code, let's explore the OpenAI [Create Image](https://platform.openai.com/docs/api-reference/images/create) API and how it works.
 
@@ -55,7 +54,6 @@ curl https://api.openai.com/v1/images/generations \
 }'
 ```
 
-
 ### Create Image Response
 
 The response will be a JSON object with *created* and *data* fields. The *data* field will be an array of objects. Each object will have a *url* field containing the response to the prompt.
@@ -78,9 +76,7 @@ Here is a sample API response:
 }
 ```
 
-
-Setting up the Quarkus Application
-----------------------------------
+## Setting up the Quarkus Application
 
 To startup our application, go to and configure it by selecting the following extensions:
 
@@ -98,14 +94,12 @@ mvn io.quarkus.platform:quarkus-maven-plugin:3.2.3.Final:create \
 -DnoCode
 ```
 
-
 After creating the project, add your OpenAI API Key with the following line inside the *application.properties* file.
 
 ```bash
 # OpenAI properties 
 openai.api.key=$OPENAI_API_KEY
 ```
-
 
 ### The Model
 
@@ -152,7 +146,6 @@ public class CreateImageRequest {
 }
 ```
 
-
 Let's define the API response class:
 
 ```java
@@ -182,7 +175,6 @@ public class CreateImageResponse {
 }
 ```
 
-
 And finally, the *Item* class
 
 ```java
@@ -199,7 +191,6 @@ public class Item {
     }
 }
 ```
-
 
 ### REST Client
 
@@ -222,7 +213,6 @@ public interface OpenAIRestClient {
 
 }
 ```
-
 
 The `@RegisterRestClient` allows Quarkus to know that this interface should be available for CDI injection as a REST Client, the baseUri properties define the url the client point to. `@Path`, `@POST` are standard Jakarta REST annotations defining how to access the API.
 
@@ -263,7 +253,6 @@ public class OpenAIEndpoint {
 }
 ```
 
-
 We define `OpenAIEndpoint` and inject the REST client using `@RestClient` annotation. Then we create the API `generateImage` that accepts the prompt and optionally the number of images and their size.
 
 Inside the method, we build the request and pass it to our client; calling the method `generateImage`, we get the result and perform a redirect to the first URL of the response payload.
@@ -274,7 +263,6 @@ To see the result let's start our project with the command:
 quarkus dev
 ```
 
-
 and point the browser to this example url passing our prompt as the value of *description* parameters:
 
 [http://localhost:8080/quarkus-openai/generate-image?description=a%20photo%20of%20a%20happy%20corgi%20puppy%20sitting%20in%20front%20of%20sea](http://localhost:8080/quarkus-openai/generate-image?description=a%20photo%20of%20a%20happy%20corgi%20puppy%20sitting%20and%20facing%20forward,%20studio%20light,%20longshot)
@@ -284,15 +272,13 @@ and the output will be:
 
 Try with other prompts and enjoy the results.
 
-Conclusion
-----------
+## Conclusion
 
 This article we explored how to use the OpenAI DALL.E API to generate images from prompts. We created a Quarkus application that calls the API using the new REST Client Reactive and manage the result.
 
 The code examples for this tutorial are available on [GitHub](https://github.com/fushji/quarkus-openai-app).
 
-References
-----------
+## References
 
 * [OpenAI DALL.E API Reference](https://platform.openai.com/docs/api-reference/images/create)
 * [Quarkus REST Client Reactive](https://quarkus.io/guides/rest-client-reactive)

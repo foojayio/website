@@ -25,8 +25,7 @@ frozen: false
 
 In this article, we will learn about cache miss and, in general, about the caching concept and how to implement it in Spring Boot. Eventually, we will see how Digma can help us detect cache misses locally during development.
 
-The history of caching
-----------------------
+## The history of caching
 
 The concept of caching can be traced back to the early days of computing when computer systems relied on hierarchical memory architectures. Early computers used different types of memory with varying access speeds, such as registers, caches, and main memory (RAM). Programmers often employ manual caching techniques to optimize performance by storing frequently accessed data in faster memory locations.
 
@@ -34,8 +33,7 @@ In the 1960s and 1970s, with the emergence of database management systems (DBMS)
 
 The history of caching in software development reflects a continuous evolution driven by the need for efficient resource utilization, improved performance, and enhanced user experiences.
 
-Benefits of caching
--------------------
+## Benefits of caching
 
 When discussing caching, we usually think of situations where we have frequently accessed data that is expensive to compute. Caching mainly boosts availability and reliability, which are its key advantages.
 
@@ -49,8 +47,7 @@ When discussing caching, we usually think of situations where we have frequently
 * Reduced Server Load
 * Cost Saving
 
-What are caching, cache hits, cache evictions, and cache misses?
-----------------------------------------------------------------
+## What are caching, cache hits, cache evictions, and cache misses?
 
 These are key concepts in caching, Before getting deep into the code, it's a good idea to get familiar with these concepts with a practical example.
 
@@ -73,8 +70,7 @@ Every time we had a new phone number that we used a lot, we added it to the phon
 
 By exploring cache concepts through navigating a phonebook, including caching, cache hit, cache misses, and cache eviction, we can better understand how caching works in computer systems and the strategies used to optimize performance.
 
-Caching in Spring Boot
-----------------------
+## Caching in Spring Boot
 
 Spring Boot supplies caching support to make your application fast. Spring Boot caching is based on an Abstraction that can easily be enabled in a Spring Boot application. There is a starter package that can easily add to your project dependency to add caching support to your project.
 
@@ -84,7 +80,6 @@ Spring Boot supplies caching support to make your application fast. Spring Boot 
  <artifactId>spring-boot-starter-cache</artifactId>
 </dependency>
 ```
-
 
 The first two things we need to do after adding the library dependency are:
 
@@ -122,7 +117,6 @@ class PhonebookService {
     }
 }
 ```
-
 
 We simulate slowness at the repository level by sleeping the current thread for 1 second before each request.
 
@@ -167,7 +161,6 @@ class PhonebookRepository {
 }
 ```
 
-
 ### Spring Boot annotations for Caching
 
 Spring Boot supports caching concepts by introducing several annotations that can be used at the method level in a declarative way:
@@ -178,8 +171,7 @@ Spring Boot supports caching concepts by introducing several annotations that ca
 
 **Cache Eviction**: Spring Boot supports cashing an item using @CachePut and @CacheEvict annotations.
 
-Adding the cache capability to the Phonebook example
-----------------------------------------------------
+## Adding the cache capability to the Phonebook example
 
 Now we know how to use the cache concept in a Spring Boot. Let us add a cache capability to the Phonebook's service layer.
 
@@ -210,15 +202,13 @@ class PhonebookService {
 }
 ```
 
-
 By adding these annotations to the service layer, the Phonebook application performance now is improved.
 
 ### More advanced features
 
 There are some advanced features in Spring Boot caching support, like custom Key generation strategies or cashing manually (non-declarative or programmatically) using the CacheManager bean.
 
-What are the signs of detecting cache misses in observability?
---------------------------------------------------------------
+## What are the signs of detecting cache misses in observability?
 
 Traditionally, to detect when and where we need to cache data to improve performance, we have to deploy our application and use monitoring tools to see the patterns in the diagrams and charts.
 
@@ -252,7 +242,6 @@ Get all names for a phone number.
     }
 ```
 
-
 After implementing the controller, service, and repository methods, we make the repository method slow (2 seconds) to see how Digma helps us detect that.
 
 First, we need to install the Digma [IntelliJ plugin](https://plugins.jetbrains.com/plugin/19470-digma-continuous-feedback "IntelliJ plugin") in our IDE and configure its infrastructure: After that, Let's start to call the Phonebook endpoint using the [HTTPie](https://httpie.io/ "HTTPie") command line tools:
@@ -266,7 +255,6 @@ http :8080/api/phonebooks/phones/deli
 http put :8080/api/phonebooks/phones/deli name="zarin" number="+46345" 
 http :8080/api/phonebooks/phones/numbers/+46123
 ```
-
 
 One of the most important features of Digma is Insights, Digma uses OpenTelemetry behind the scenes to collect data (traces, logs, and metrics) about our code when we run it locally and then turn those Observability Data Into Insights by analyzing them.
 
@@ -291,7 +279,6 @@ public List<PhoneNumber> findByNumber(String number) {
 }
 ```
 
-
 And also, we should consider these two:
 
 1. We used a new cache (phonebook.number) for this method because our previous cache was by name, and this one is by phone number.
@@ -299,8 +286,7 @@ And also, we should consider these two:
 
 The final code for the Phonebook project is accessed at this [GitHub repository](https://github.com/zarinfam/phonebook "GitHub repository").
 
-Final thoughts
---------------
+## Final thoughts
 
 Caching is a powerful technique that can greatly improve the performance, scalability, and efficiency of any system.
 
@@ -311,7 +297,3 @@ However, caching also introduces some challenges and trade-offs, such as cache i
 Therefore, it is important to understand the benefits and drawbacks of different types of caching and to apply them appropriately to the specific needs and goals of each system.
 
 Tools like Digma allow us to find bottlenecks and slowness during development using observability tools.
-
-<br />
-
-<br />

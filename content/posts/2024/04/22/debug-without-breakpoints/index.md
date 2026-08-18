@@ -36,8 +36,7 @@ which can be extremely powerful in some scenarios, including the ones described 
 
 We'll discuss its use-cases and limitations as well as discover the *secret stepping trick*.
 
-What Is Pause?
---------------
+## What Is Pause?
 
 **Pause** is a feature in IntelliJ IDEA's debugger that enables you to arbitrarily suspend your application at any given point of time. To use it, you don't have to be familiar with the application code. In fact, you can completely ignore it!
 
@@ -47,8 +46,7 @@ What Is Pause?
 
 To pause a program, click **Pause** on the debugger's toolbar. As a result, the program gets suspended right in the middle of what it is currently doing.
 
-Limitations
------------
+## Limitations
 
 At first sight, a paused program may look exactly like the one that has been suspended at a breakpoint. However, this is only true to a certain extent.
 
@@ -58,8 +56,7 @@ At first sight, a paused program may look exactly like the one that has been sus
 
 It would be correct to consider **Pause** a sort of *thread dump plus* . You can still inspect variables and threads just as you typically would. However, some of the more advanced features, such as **Evaluate expression**, won't work.
 
-Use-cases
----------
+## Use-cases
 
 There are countless ways you can use **Pause** . Often, it can be used interchangeably with traditional breakpoints. But there are also scenarios where **Pause** fits better. Let's consider a couple of them.
 
@@ -99,8 +96,7 @@ Pause the program and inspect the thread list. It will show which threads are bl
 
 By navigating to the execution point, you will also see the critical sections they are locked in. This information might guide you towards a solution.
 
-Secret Stepping Trick
----------------------
+## Secret Stepping Trick
 
 As I pointed out earlier, **Pause** indeed limits your access to some of the advanced debugger features. Nevertheless, there is a workaround for this restriction.
 
@@ -108,8 +104,7 @@ After you have paused an application, proceed by performing any stepping action.
 
 All advanced features are now unlocked!
 
-Conclusion
-----------
+## Conclusion
 
 That's it for today! Hope you find these tips and tricks useful.
 

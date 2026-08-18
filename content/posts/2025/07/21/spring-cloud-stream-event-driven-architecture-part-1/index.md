@@ -35,8 +35,7 @@ You can choose the technology based on the specific use case and customer requir
 
 A wide array of message brokers and binder implementations available in the market is offered by Spring Cloud Stream, with each possessing its own unique strengths.
 
-The Role of MessageBrokers
---------------------------
+## The Role of MessageBrokers
 
 **Messaging brokers** simplify the complexities of event-driven systems:
 
@@ -44,8 +43,7 @@ The Role of MessageBrokers
 * Provide guarantees based on the **CAP** theorem (**C** onsistency, **A** vailability, **P**artitioning).
 * Offer client APIs to interact with them for building event-driven and stream-processing applications.
 
-Frameworks or Binder Implementations
-------------------------------------
+## Frameworks or Binder Implementations
 
 To simplify complexity, frameworks conceal the low-level specifics and provide user-friendly APIs for developers. Examples include:
 
@@ -66,8 +64,7 @@ To simplify complexity, frameworks conceal the low-level specifics and provide u
 
 Developers have the opportunity to utilize abstractions and frameworks, which allows them to concentrate on constructing business logic without needing to worry about the intricate details of messaging systems. Nevertheless, they face a degree of risk when they employ frameworks that closely integrate with the application code. If you change messaging platforms, you must rewrite and recompile your code. This situation makes applications less portable and more challenging to maintain.
 
-Spring Cloud Stream: The Solution
----------------------------------
+## Spring Cloud Stream: The Solution
 
 Developers can use **Spring Cloud Stream** to create sophisticated abstractions for event-driven applications, removing their reliance on particular messaging brokers.
 
@@ -103,8 +100,7 @@ Developers can use **Spring Cloud Stream** to create sophisticated abstractions 
 
 To incorporate Spring Cloud Stream into your current Spring Boot application, you must identify the appropriate release train cadence based on the version of Spring Boot you are utilizing. For more details you can refer to the [link](https://spring.io/projects/spring-cloud "link") under *Adding Spring Cloud To An Existing Spring Boot Application* section
 
-LightWeight Architecture with Spring Cloud Stream
--------------------------------------------------
+## LightWeight Architecture with Spring Cloud Stream
 
 In the **Spring Cloud Stream** methodology, the framework actively manages the message broker communication activities for both producer and consumer applications. This management results in a more straightforward and uniform architecture.
 

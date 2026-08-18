@@ -29,8 +29,7 @@ GraphQL approaches the problem from a different perspective. Instead of exposing
 
 In this article, we'll look at how to build a flexible, production-ready GraphQL data layer using Spring for GraphQL, Netflix DGS, and [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=graphql-mongodb-foojay&utm_term=megan.grant). We'll focus on design decisions, trade-offs, patterns, and models that are essential once a GraphQL API moves beyond the experimental phase.
 
-GraphQL fundamentals
---------------------
+## GraphQL fundamentals
 
 Conceptually, GraphQL is based on three main principles:
 
@@ -42,8 +41,7 @@ For Java developers, the most important difference from REST is that the schema 
 
 Another important change is that GraphQL APIs are client-driven. The server no longer decides the exact form of the response. Instead, it ensures that the requested fields are available and formally valid. This makes it easier for APIs to evolve, but it also places greater responsibility on backend developers to think carefully about performance and data access patterns.
 
-Why GraphQL fits well in the Spring ecosystem
----------------------------------------------
+## Why GraphQL fits well in the Spring ecosystem
 
 Spring applications are already organised according to some well-established principles: inversion of control, declarative configuration, and separation of concerns. GraphQL does not replace these ideas, but complements them.
 
@@ -56,8 +54,7 @@ Spring for GraphQL integrates GraphQL into the Spring ecosystem, allowing GraphQ
 
 Resolvers are simply Spring beans, and GraphQL requests pass through the same application context as the rest of the system. This means that GraphQL is not a foreign technology, but rather a natural extension of existing Spring-based architectures.
 
-Choosing Netflix DGS with Spring for GraphQL
---------------------------------------------
+## Choosing Netflix DGS with Spring for GraphQL
 
 Spring for GraphQL is a bridge between GraphQL Java and the Spring ecosystem, handling schema loading, request execution, and connecting the runtime naturally within Spring. For simpler GraphQL APIs, it may be sufficient on its own.
 
@@ -71,8 +68,7 @@ From a maintainability perspective, DGS is well-suited to larger codebases. Its 
 
 Finally, DGS was designed with federated GraphQL architectures in mind. Even when federation is not an immediate requirement, choosing a framework that does not limit the future evolution of the architecture is often a pragmatic decision.
 
-Project setup
--------------
+## Project setup
 
 For the creation of the prototype of this article, we assume we will use:
 
@@ -97,11 +93,9 @@ The Netflix DGS starter contains all the dependencies needed to use GraphQL on S
 </dependency>
 ```
 
-
 At this point, the application is ready to load GraphQL schemas and perform queries and mutations on them.
 
-Domain model overview
----------------------
+## Domain model overview
 
 We will work on a very simple but realistic domain:
 
@@ -111,8 +105,7 @@ We will work on a very simple but realistic domain:
 
 A user can place multiple orders, and each order can have multiple products. This model was chosen because it highlights one of the most important aspects of GraphQL, which is the ability to efficiently resolve relationships.
 
-Defining the GraphQL schema
----------------------------
+## Defining the GraphQL schema
 
 Within Netflix DGS, the scheme is the starting point.
 
@@ -151,7 +144,6 @@ input CreateUserInput {
 }
 ```
 
-
 It is important to highlight a few design choices:
 
 * Non-nullability is explicit and intentional.
@@ -160,8 +152,7 @@ It is important to highlight a few design choices:
 
 The schema already communicates API expectations much more clearly than most REST contracts.
 
-Persistence with MongoDB
-------------------------
+## Persistence with MongoDB
 
 Persistence with Spring Data MongoDB is handled traditionally.
 
@@ -175,13 +166,11 @@ public class UserDocument {
 }
 ```
 
-
 It is good practice to avoid using persistence models directly as GraphQL types. MongoDB documents tend to evolve rapidly and often contain internal fields or denormalised data that should not be exposed publicly.
 
 A dedicated mapping layer keeps responsibilities separate and makes schema evolution more secure.
 
-Query resolvers with Netflix DGS
---------------------------------
+## Query resolvers with Netflix DGS
 
 To translate a GraphQL query into a backend operation, you need to use a query resolver. Its responsibility is to orchestrate, not to apply business logic.
 
@@ -204,7 +193,6 @@ public class UserQueryResolver {
 }
 ```
 
-
 From this snippet, we note that:
 
 * The resolver is a simple Spring bean.
@@ -213,8 +201,7 @@ From this snippet, we note that:
 
 Keeping resolvers lean makes them easier to test and understand.
 
-Mutations and input validation
-------------------------------
+## Mutations and input validation
 
 Mutations represent write operations and should be treated with the same care as REST POST and PUT endpoints.
 
@@ -238,7 +225,6 @@ public class UserMutationResolver {
 }
 ```
 
-
 Input validation and validation can be handled using:
 
 * Bean Validation annotations.
@@ -247,8 +233,7 @@ Input validation and validation can be handled using:
 
 GraphQL supports partial failures, so validation errors must be precise and manageable.
 
-Resolving relationships in MongoDB
-----------------------------------
+## Resolving relationships in MongoDB
 
 Unlike relational databases, MongoDB does not support join operations. In GraphQL, relationships are resolved lazily, field by field.
 
@@ -272,11 +257,9 @@ public class UserFieldResolver {
 }
 ```
 
-
 This approach is powerful, but it carries a significant downside.
 
-The N+1 query problem
----------------------
+## The N+1 query problem
 
 This is one of those cases where GraphQL seems simple in demos, but can cause significant problems in production environments.
 
@@ -293,7 +276,6 @@ A query such as...
 }
 ```
 
-
 ...can easily lead to:
 
 * A query for users.
@@ -301,8 +283,7 @@ A query such as...
 
 This model requires consideration of the scalability of the solution.
 
-Using DataLoader in Netflix DGS
--------------------------------
+## Using DataLoader in Netflix DGS
 
 DataLoader enables GraphQL to group and cache related data retrieved within a single request.
 
@@ -319,7 +300,6 @@ public class OrderDataLoader {
 }
 ```
 
-
 The field resolver then becomes asynchronous:
 
 ```
@@ -332,11 +312,9 @@ public CompletableFuture<List<Order>> orders(DgsDataFetchingEnvironment env) {
 }
 ```
 
-
 This transforms N database calls into a single grouped query and should be considered mandatory for non-trivial schemas.
 
-Error handling in GraphQL
--------------------------
+## Error handling in GraphQL
 
 GraphQL allows for partial success: One field may fail while others continue to return data. This requires a different approach than the REST paradigm.
 
@@ -348,8 +326,7 @@ In practice:
 
 Netflix DGS offers hooks to customise error handling consistently.
 
-Security considerations
------------------------
+## Security considerations
 
 GraphQL exposes a large attack surface through a single endpoint, which makes traditional endpoint-based security insufficient. A robust security strategy usually combines several layers:
 
@@ -360,8 +337,7 @@ GraphQL exposes a large attack surface through a single endpoint, which makes tr
 
 These measures allow GraphQL to remain flexible without becoming permissive.
 
-When GraphQL is (and isn't) the right choice
---------------------------------------------
+## When GraphQL is (and isn't) the right choice
 
 GraphQL is a very powerful tool, but it is not suitable for all use cases.
 
@@ -379,8 +355,7 @@ It is not suitable when there are:
 
 Choosing GraphQL is an architectural choice, not an automatic one.
 
-Best practices recap
---------------------
+## Best practices recap
 
 Before concluding, it is important to summarise some of the concepts that have been explained:
 
@@ -393,8 +368,7 @@ Before concluding, it is important to summarise some of the concepts that have b
 
 Applying these simple practices is more important than the specific framework, and often determines the success or failure of the application itself.
 
-Conclusion
-----------
+## Conclusion
 
 Spring for GraphQL and Netflix DGS offer Java developers a mature, production-ready stack for creating flexible APIs. When used together with MongoDB, they enable expressive data access patterns, but only if performance, security, and schema design are considered priorities.
 

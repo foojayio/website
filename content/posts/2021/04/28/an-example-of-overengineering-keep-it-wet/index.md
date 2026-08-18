@@ -42,7 +42,6 @@ fun enrich(json: JsonObject, data: String?): JsonObject =
   else JsonObject(json).add("data", data)
 ```
 
-
 In the parlance of Object-Oriented Programming, this looks like the poster child for the Template Method pattern. In Functional Programming, this is plain function composition. We can move the null-check inside a shared function outside of the bi-function.
 
 ```kotlin
@@ -62,7 +61,6 @@ val unsafeEnrich = BiFunction<JsonObject, String?, JsonObject> { json, data -> /
 val safeEnrich = nullSafe(unsafeEnrich)                                        // 4
 ```
 
-
 1. Move the null-check out of the function
 2. Factor the null-check into a `BiFunction`
 3. Create a `BiFunction` variable from the function
@@ -75,14 +73,12 @@ println(safeEnrich.apply(orig, null))
 println(safeEnrich.apply(orig, "x"))
 ```
 
-
 It works:
 
 ```json
 {"foo":"bar"}
 {"foo":"bar","data":"x"}
 ```
-
 
 When I finished the code, I looked at the code and thought about the quote from Jurassic Park:
 > Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should.

@@ -24,8 +24,7 @@ This gentleman, having worked with Java some 15-20 years ago, was surprised to l
 
 However, this stereotype is not only outdated but also inaccurate. Java is no longer a slow language; in fact, it's considered one of the most performant languages, and in some scenarios, it even outperforms C++. In this article, we will tackle and dismantle such stereotypes as we explore the exciting evolution of Java.
 
-Java: From Its Inception to Now
--------------------------------
+## Java: From Its Inception to Now
 
 When James Gosling and his team at Sun Microsystems released Java in 1995, it was touted as a revolutionary step in the world of programming languages. Java's "write once, run anywhere" promise and its strong emphasis on security made it an immediate hit.
 
@@ -33,8 +32,7 @@ However, as the software landscape began to shift towards more dynamic and flexi
 
 Today, thanks to ongoing and substantial upgrades to the language, Java is shedding these stereotypes. A slew of new features, alongside important improvements in existing ones, have kept Java not only relevant but also increasingly attractive for the modern developer.
 
-Embracing Modernity: The New Features of Java
----------------------------------------------
+## Embracing Modernity: The New Features of Java
 
 The modern versions of Java have brought in several compelling features that challenge the idea of Java as an old and rigid language.
 
@@ -52,7 +50,6 @@ class HelloWorld {
 }
 ```
 
-
 We can further make the class declaration implicit. This further simplifies the "Hello, World!" program to:  
 
 ```java
@@ -60,7 +57,6 @@ void main() {
     System.out.println("Hello, World!");
 }
 ```
-
 
 If you are interested in reading more, read my news item published on infoQ: [Breaking down Barriers: Introducing JDK 21's Approach to Beginner-Friendly Java Programming](https://www.infoq.com/news/2023/05/beginner-friendly-java/)
 
@@ -120,15 +116,11 @@ public final class User {
 }
 ```
 
-
-<br />
-
 This whole code can be written in one line with Record.
 
 ```java
 public record User(Long id, String firstName, String lastName) {}
 ```
-
 
 And that's it.
 
@@ -152,7 +144,6 @@ switch (b) {
 }
 ```
 
-
 If you're interested in knowing more about it, read this article: [JEP 443: Unnamed Patterns and Variables Aims to Improve Java Code Readability](https://www.infoq.com/news/2023/06/streamlining-java-with-jep-443/)
 
 ### **String Templates**
@@ -175,7 +166,6 @@ String json = STR."""
     """;
 ```
 
-
 This produces the following output.
 
 ```
@@ -187,7 +177,6 @@ This produces the following output.
 | }
 | """
 ```
-
 
 Read the following infoQ item to know more about it: [Java Gets a Boost with String Templates: Simplifying Code and Improving Security](https://www.infoq.com/news/2023/04/java-gets-a-boost-with-string/)
 
@@ -211,8 +200,7 @@ JVMs have seen substantial advancements in efficiency through the application of
 
 Java has been the foundation of countless high-performance applications and systems. This includes high-frequency trading systems, big data processing frameworks like Apache Hadoop and Apache Spark, as well as large-scale websites such as LinkedIn and eBay. This stands as a testament to its capabilities and versatility.
 
-The Journey Ahead
------------------
+## The Journey Ahead
 
 While Java's transformation has been significant, it is far from over. With its robust ecosystem and the Java Community Process continually pushing for enhancements, the future is bright.
 

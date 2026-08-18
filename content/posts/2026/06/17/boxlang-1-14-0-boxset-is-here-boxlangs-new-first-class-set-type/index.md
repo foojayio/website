@@ -26,14 +26,11 @@ frozen: false
 
 ![](BoxLang-release-1.14.0-1-700x394.png)
 
-<br />
-
 BoxLang 1.14.0 ships with a new **dynamic first-class Set type** baked directly into the language. Not a wrapper you reach for manually, not a `createObject( "java", "java.util.HashSet" )` incantation you paste from a Stack Overflow answer years ago. A real `BoxSet` with literal syntax, operator overloads, a full functional pipeline, change listeners, JSON serialization, and deep Java interop.
 
 If you have ever deduplicated an array with a loop, compared two collections element by element, or modeled a permission system on top of a struct -- Sets are the tool you were missing. Let's dig in.
 
-Why Sets? The Problem First
----------------------------
+## Why Sets? The Problem First
 
 Arrays are ordered, indexed, and allow duplicates. Structs are key/value maps. Both are foundational, but neither models one of the most common real-world shapes: **a bag of unique things.**
 
@@ -49,8 +46,7 @@ Think about:
 
 Before BoxSet you'd approximate all of these with arrays (slow `arrayContains` lookups, manual dedup loops) or structs (keys as values, awkward serialization). Both are workarounds. BoxSet is the real answer.
 
-Meet BoxSet
------------
+## Meet BoxSet
 
 `BoxSet` is a first-class BoxLang type that wraps `java.util.Set` with full language integration. Under the hood it selects among three Java backing implementations depending on what you need:
 
@@ -62,8 +58,7 @@ Meet BoxSet
 
 Every variant enforces uniqueness automatically. Every variant supports the full member-function API, operator overloads, and functional pipeline. Java `Set` objects you get from third-party libraries slot right in -- BoxLang wraps them without copying.
 
-Creating Sets: Every Path
--------------------------
+## Creating Sets: Every Path
 
 BoxLang gives you several ergonomic creation paths depending on your context.
 
@@ -90,7 +85,6 @@ s = setNew( values=[ "Hello", "hello", "HELLO" ], caseSensitive=true )
 s.size()    // 3
 ```
 
-
 ### `setOf()` -- varargs shorthand
 
 When you know your values up front, `setOf()` is the cleanest expression:
@@ -99,7 +93,6 @@ When you know your values up front, `setOf()` is the cleanest expression:
 roles = setOf( "admin", "editor", "viewer" )
 primes = setOf( 2, 3, 5, 7, 11, 13 )
 ```
-
 
 Duplicates in the argument list are silently dropped -- no error, no fuss.
 
@@ -127,7 +120,6 @@ full = set{ "execute", ...defaults }
 digits = set{ ...(0..9) }
 // Result: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 ```
-
 
 > "
 >
@@ -165,9 +157,7 @@ depts = q.columnData( "dept" ).toSet()
 // Result: {"Engineering", "Marketing"}
 ```
 
-
-The Three Variants in Practice
-------------------------------
+## The Three Variants in Practice
 
 Choosing the right variant matters for correctness and performance.
 
@@ -188,7 +178,6 @@ if ( activeFlags.contains( "dark_mode_v2" ) ) {
 }
 ```
 
-
 ### Linked (LinkedHashSet) -- when insertion order matters
 
 ```java
@@ -207,7 +196,6 @@ for ( stage in pipeline ) {
     runStage( stage )    // validate only runs once
 }
 ```
-
 
 ### Sorted (TreeSet) -- when natural order is always required
 
@@ -228,9 +216,7 @@ arr = scores.toArray()
 writeDump( "Low: #arr[ 1 ]#, High: #arr[ arr.len() ]#" )
 ```
 
-
-Membership and Iteration
-------------------------
+## Membership and Iteration
 
 ### Testing membership
 
@@ -244,7 +230,6 @@ granted.has( "delete" )        // false (alias for contains)
 granted.containsAll( [ "read", "write" ] )    // true
 granted.containsAll( [ "read", "sudo" ] )     // false
 ```
-
 
 ### Iterating
 
@@ -262,9 +247,7 @@ tags.each( tag => {
 } )
 ```
 
-
-Set Algebra: The Real Power
----------------------------
+## Set Algebra: The Real Power
 
 This is where `BoxSet` earns its place. Four algebraic operations, available as both member methods and **overloaded operators**.
 
@@ -281,7 +264,6 @@ allSkills = backendSkills.union( frontendSkills )
 allSkills = backendSkills + frontendSkills
 ```
 
-
 ### Intersection -- only what both sets share
 
 ```java
@@ -294,7 +276,6 @@ sharedMembers = teamA.intersection( teamB )
 // Operator syntax: *
 sharedMembers = teamA * teamB
 ```
-
 
 ### Difference -- what's in A but not in B
 
@@ -309,7 +290,6 @@ inactiveUsers = allUsers.difference( activeUsers )
 inactiveUsers = allUsers - activeUsers
 ```
 
-
 ### Symmetric Difference -- what's in either but not both
 
 ```java
@@ -323,7 +303,6 @@ changed = lastWeekUsers.symmetricDifference( thisWeekUsers )
 // Operator syntax: ^
 changed = lastWeekUsers ^ thisWeekUsers
 ```
-
 
 ### Operators accept "loose" right-hand operands
 
@@ -344,7 +323,6 @@ base *= [ 3, 4 ]
 // base is now {3, 4}
 ```
 
-
 > "
 >
 > When neither operand is a `Set`, operators fall through to  
@@ -352,8 +330,7 @@ base *= [ 3, 4 ]
 > standard math: `2 + 3 = 5`, `4 ** 3 = 12`,  
 > `2 ^ 3 = 8`. Your existing arithmetic code is safe.
 
-Functional Programming Pipeline
--------------------------------
+## Functional Programming Pipeline
 
 `BoxSet` ships with the same functional vocabulary you know from Arrays. Every operation returns a new Set (or a scalar), keeping the original untouched.
 
@@ -397,7 +374,6 @@ firstHigh = scores.find( s -> s >= 90 )
 // 91 (or 100, iteration order not guaranteed for HashSet -- use sorted/linked for predictability)
 ```
 
-
 Chaining works naturally:
 
 ```java
@@ -408,9 +384,7 @@ result = setOf( 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 )
 // 220
 ```
 
-
-Real-World Scenarios
---------------------
+## Real-World Scenarios
 
 ### 1. Role-Based Access Control
 
@@ -459,7 +433,6 @@ canSeeAdmin = svc.canAccess( effective, "/admin" )
 // false
 ```
 
-
 ### 2. Tag Deduplication and Taxonomy Intersection
 
 ```java
@@ -485,7 +458,6 @@ relatedThreshold = 2
 isRelated = ( post1Tags * post2Tags ).size() >= relatedThreshold
 // true
 ```
-
 
 ### 3. Dataset Change Detection
 
@@ -517,7 +489,6 @@ diff.added.each( userId => {
     emailService.sendWelcome( userId )
 } )
 ```
-
 
 ### 4. URL Deduplication Pipeline with Functional Chaining
 
@@ -573,9 +544,7 @@ class CrawlerPipeline {
 }
 ```
 
-
-Case Sensitivity and Numeric Normalization
-------------------------------------------
+## Case Sensitivity and Numeric Normalization
 
 By default, BoxSet is **case-insensitive** for strings, matching BoxLang's general dynamic semantics:
 
@@ -586,7 +555,6 @@ s.size()    // 1
 s.contains( "HELLO" )    // true
 s.contains( "hElLo" )    // true
 ```
-
 
 Opt in to case sensitivity when you need exact-case uniqueness:
 
@@ -599,7 +567,6 @@ tokens.contains( "Bearer" )    // true
 tokens.contains( "beareR" )    // false
 ```
 
-
 Numeric normalization is independent of case sensitivity. `1`, `1L`, `1.0`, and 1.00 are always the same value in a Set:
 
 ```java
@@ -607,9 +574,7 @@ nums = setNew( values=[ 1, 1.0, 1L, 1.00 ] )
 nums.size()    // 1
 ```
 
-
-Java Interop
-------------
+## Java Interop
 
 Because `BoxSet` wraps `java.util.Set`, the integration story is clean in both directions.
 
@@ -629,7 +594,6 @@ bxSet.add( "c" )
 javaSet.contains( "c" )    // true -- same backing object
 bxSet.size()               // 3
 ```
-
 
 ### Struct key and value sets
 
@@ -654,11 +618,9 @@ hasSensitiveKeys = !keys.isDisjointFrom( forbidden )
 // false -- none of our keys are in the forbidden list
 ```
 
-
 Any Java library method returning a `java.util.Set` -- Spring Security granted authorities, JPA fetch results, Guava ImmutableSet -- works directly with BoxLang Set BIFs and member functions.
 
-Unmodifiable Sets
------------------
+## Unmodifiable Sets
 
 When you need an immutable contract -- configuration, constants, lookup tables:
 
@@ -677,7 +639,6 @@ extended.add( "HEAD" )
 extended.size()    // 6 -- ALLOWED_METHODS still has 5
 ```
 
-
 This pairs perfectly with constants declared in a BoxLang class:
 
 ```java
@@ -694,9 +655,7 @@ class HttpConstants {
 }
 ```
 
-
-JSON Serialization
-------------------
+## JSON Serialization
 
 Sets serialize to JSON arrays, which means they round-trip cleanly with any JSON-consuming API:
 
@@ -719,9 +678,7 @@ jsonSerialize( payload )
 // {"user":"alice","roles":["editor","viewer"],"tags":["premium","beta"]}
 ```
 
-
-Quick BIF Reference
--------------------
+## Quick BIF Reference
 
 | BIF                                           | Member Function                      | Purpose                |
 |:----------------------------------------------|:-------------------------------------|:-----------------------|
@@ -757,8 +714,7 @@ Quick BIF Reference
 | `boxSetToArray( set ) `                       | `s.toArray() `                       | Convert to Array       |
 | `boxSetToList( set, [delim] )`                | `s.toList( [delim] ) `               | Convert to list string |
 
-Wrap Up
--------
+## Wrap Up
 
 `BoxSet` is not a cosmetic feature. It's a fundamental collection type that was missing from the language and is now present everywhere you need it: in literal syntax, in operators, in the functional pipeline, in JSON, in Java interop, and in the type system itself.
 

@@ -38,7 +38,6 @@ Since then, other frameworks have popped up. They also provide monitoring capabi
 </dependency>
 ```
 
-
 The Actuator offers three kinds of endpoints:
 
 * Default endpoints *e.g.* `/health`, `/metrics`, `/beans`, etc.
@@ -63,7 +62,6 @@ To add management capabilities, add a single dependency:
 </dependency>
 ```
 
-
 Micronauts expose endpoints over HTTP. To also expose them over JMX, you need to add an extra dependency.
 
 ```xml
@@ -73,7 +71,6 @@ Micronauts expose endpoints over HTTP. To also expose them over JMX, you need to
     <version>2.1.0</version>
 </dependency>
 ```
-
 
 By default, all endpoints are enabled, but `/cache` and `/stop`.
 
@@ -116,7 +113,6 @@ A specific dependency implements each capability.
     <version>1.10.5.Final</version>
 </dependency>
 ```
-
 
 Also, Quarkus provides multiple endpoints specific to its CDI implementation (ArC). Because of its focus on Cloud-Native, Quarkus implements compile-time CDI. Hence, it's able to detect beans that are not used anywhere else and not instantiate them. Note that ArC endpoints are only available in development mode unless explicitly enabled.
 

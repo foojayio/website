@@ -58,7 +58,6 @@ The debugging session starts with the JVM informing the debugger of the start an
 IDSizesReply(fieldIDSize=IntValue(8), methodIDSize=IntValue(8), objectIDSize=IntValue(8), referenceTypeIDSize=IntValue(8), frameIDSize=IntValue(8))
 ```
 
-
 Typically one starts the debugging session with `suspend=y`, so that the JVM stops its execution till the debugger is ready. The debugger starts by requesting to get events for every class preparation and thread starts, some information on the debugging capabilities of the JVM and information on the loaded classes, the `sun.instrument.InstrumentationImpl` class in particular:
 
 ```
@@ -78,7 +77,6 @@ Typically one starts the debugging session with `suspend=y`, so that the JVM sto
     (= var3 (request Method LineTable ("methodID")=(get iter0 "methodID") ("refType")=(wrap "klass" 456)))))
 ```
 
-
 `InstrumentationImpl` implements the `Instrumentation` interface:
 > This class provides services needed to instrument Java programming language code. Instrumentation is the addition of byte-codes to methods for the purpose of gathering data to be utilized by tools. Since the changes are purely additive, these tools do not modify application state or behavior. Examples of such benign tools include monitoring agents, profilers, coverage analyzers, and event loggers.
 > [https://docs.oracle.com/](https://docs.oracle.com/en/java/javase/17/docs/api/java.instrument/java/lang/instrument/Instrumentation.html)
@@ -93,7 +91,6 @@ The JVM then sends two `ThreadStart` events for the main and the JVM internal no
 ((= cause (events Event Composite ("suspendPolicy")=(wrap "byte" 0) ("events" 0 "kind")=(wrap "string" "ThreadStart") ("events" 0 "requestID")=(wrap "int" 4) ("events" 0 "thread")=(wrap "thread" 1)))
 )
 ```
-
 
 The notification thread is:
 >
@@ -110,7 +107,6 @@ The JVM also sends the `ClassPrepare` event for the `URLCLassPath.FileLoader` cl
 )
 ```
 
-
 Which is a "Nested class used to represent a loader of classes and resources from a file URL that refers to a directory." used internally during the loading of classes from files.
 
 But then, finally, the JVM loaded the `SmallProgram` class and sends a `ClassPrepare` event. This causes the debugger to obtain information on the class:
@@ -124,14 +120,12 @@ But then, finally, the JVM loaded the `SmallProgram` class and sends a `ClassPre
     (= var3 (request Method LineTable ("methodID")=(get iter0 "methodID") ("refType")=(get cause "events" 0 "typeID")))))
 ```
 
-
 The debugger then sets the break-point using the mappings obtained before...
 
 ```
 ((= cause (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648)))
   (= var0 (request EventRequest Set ("eventKind")=(wrap "byte" 2) ("suspendPolicy")=(wrap "byte" 2) ("modifiers" 0 "kind")=(wrap "string" "LocationOnly") ("modifiers" 0 "loc" "codeIndex")=(wrap "long" 4) ("modifiers" 0 "loc" "declaringType")=(wrap "class-type" 1100) ("modifiers" 0 "loc" "methodRef")=(wrap "method" 105553134992648))))
 ```
-
 
 ... and requests the resuming of the program execution. The JVM then hits the break-point and requests lots of information: Information on the transitive superclasses, the current thread, the current stack trace, and every local variable in the currently executed method:
 
@@ -167,7 +161,6 @@ The debugger then sets the break-point using the mappings obtained before...
     (= var22 (request ReferenceType Interfaces ("refType")=iter1)))
   (= var25 (request StringReference Value ("stringObject")=(get var24 "values" 0))))
 ```
-
 
 This allows the debugger to show us the following:
 ![](image-1-1024x189.png)

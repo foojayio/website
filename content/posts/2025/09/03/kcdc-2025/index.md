@@ -18,8 +18,7 @@ When I first started attending conferences, I diligently tried to write down not
 
 This week, I was privileged to speak at [DevOps Days Kansas City](https://devopsdays.org/events/2025-kansas-city/program/nicolas-fr%c3%a4nkel). The event was co-located with and part of [KCDC](https://www.kcdc.info/). It was my first edition for both. As I'm returning to engineering, the number of conferences I'll attend in the near future will probably be very low, if not zero. Hence, I wanted to revive the tradition of note-taking, as well as give my opinion on the conference.
 
-The talks
----------
+## The talks
 
 At conferences, I attended talks depending on several goals:
 
@@ -92,8 +91,7 @@ Even though I love the idea of typed JavaScript, the only time I wrote Typescrip
 
 The talk doesn't lend itself very well to note-taking, as it is very visual.
 
-The side activities
--------------------
+## The side activities
 
 No conference would be considered as such if it didn't offer side activities. At KCDC, we were literally showered with activities. We started on Wednesday with a speakers' dinner, make-your-own-burger, and ice creams included. On Tuesday, we started with (light) board games, then we went to the attendee party.
 
@@ -109,13 +107,10 @@ After dinner, we went to the Crown Jewels, a master task copycat. Some participa
 
 ![Night view of a Kansas City casino](kccasino.jpg)
 
-Summary
--------
+## Summary
 
 It was my first edition of KCDC, and I loved it. KCDC is a community-organized event, and it shows: you feel that volunteers care for you and are always happy to help.
 
 I'd recommend that you attend, either as an attendee or a speaker.
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/kcdc-2025/) on August 17^th^, 2025*

@@ -67,7 +67,6 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
  </dependencies>
 ```
 
-
 #### Developing the Java Producer
 
 1. Make Sure you know the Topic Name  
@@ -140,7 +139,6 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
      }  
  }
 ```
-
 
 #### Developing the Java Consumer
 
@@ -225,7 +223,6 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
  }
 ```
 
-
 #### Create the Java Application to Demo Kafka Producer \& Consumer
 
 ```
@@ -250,7 +247,6 @@ Create a Simple JAR archetype Maven Project in Eclipse (Or IDE of Your Choice). 
      }  
  }
 ```
-
 
 Run the Above Application in your IDE or Command-Line.
 

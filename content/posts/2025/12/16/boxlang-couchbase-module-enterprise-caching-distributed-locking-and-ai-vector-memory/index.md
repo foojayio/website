@@ -24,10 +24,7 @@ frozen: false
 
 **Ortus Solutions** is thrilled to announce the official release of **bx-couchbase v1.0** , a groundbreaking module that brings native enterprise-grade Couchbase capabilities to the BoxLang language and ecosystem. Designed for modern distributed applications, **bx-couchbase** unifies high-performance caching, resilient distributed locking, and advanced AI vector memory---empowering developers to build scalable, intelligent, fault-tolerant systems with unprecedented ease.
 
-
-
-**Couchbase + BoxLang: A High-Performance Combination**
--------------------------------------------------------
+## **Couchbase + BoxLang: A High-Performance Combination**
 
 Couchbase is more than a database---it's a distributed NoSQL platform engineered for speed, flexibility, and global scale. With sub-millisecond key-value operations, built-in vector search, and multi-data-center support, it is the ideal foundation for next-generation AI-powered applications.
 
@@ -36,8 +33,7 @@ The new **bx-couchbase v1.0** module exposes all this power through an elegant, 
 📘 **Documentation:**   
 <https://boxlang.ortusbooks.com/boxlang-framework/boxlang-plus/modules/bx-couchbase>
 
-🚀 **Enterprise-Grade Distributed Caching**
--------------------------------------------
+## 🚀 **Enterprise-Grade Distributed Caching**
 
 bx-couchbase introduces a complete cache provider with replication, fault tolerance, TTL support, scopes, and collections---all optimized for BoxLang. You can easily leverage any bucket, scope or collection as a BoxLang native Cache, even store all your session scope and distribute it.
 
@@ -52,7 +48,6 @@ user = cache("default").get("user:123")
     .orElseGet( () => loadUserFromDatabase(123) )
 ```
 
-
 **Highlights:**
 
 * Sub-millisecond read/write operations
@@ -61,8 +56,7 @@ user = cache("default").get("user:123")
 * Logical grouping via scopes \& collections
 * First-class integration with BoxLang caching APIs
 
-🔐 **True Distributed Locking for Mission-Critical Workloads**
---------------------------------------------------------------
+## 🔐 **True Distributed Locking for Mission-Critical Workloads**
 
 bx-couchbase v1.0 delivers robust distributed locking---ideal for financial transactions, inventory control, batch operations, and high-traffic systems. It has introduced a semantic component to give you locking capabilities into Couchbase. You can also use the functional approach as well.
 
@@ -81,7 +75,6 @@ bx:couchbaseLock
 
 }
 ```
-
 
 ### **Callback-Based Locking**
 
@@ -103,7 +96,6 @@ result = couchbaseLock(
 )
 ```
 
-
 **Real-World Use Cases:**
 
 * 💰 Payment processing
@@ -112,8 +104,7 @@ result = couchbaseLock(
 * 👤 Serialized user updates
 * 🎫 Ticketing \& reservation systems
 
-🤖 **AI Vector Memory for BoxLang Agents**
-------------------------------------------
+## 🤖 **AI Vector Memory for BoxLang Agents**
 
 A major highlight of v1.0 is deep integration with the **bx-ai** v2 module, enabling Couchbase-backed vector memory for AI agents, chatbots, and RAG pipelines.
 
@@ -138,7 +129,6 @@ agent = aiAgent(
 response = agent.run( "What did we discuss about billing?" )
 ```
 
-
 ### **Multi-Tenant Isolation**
 
 Each user and conversation remains fully isolated:
@@ -150,7 +140,6 @@ aliceMemory = aiMemory( "cache",
     config: { cacheName: "ai_memory" }
 )
 ```
-
 
 ### **Hybrid Memory Model**
 
@@ -167,7 +156,6 @@ memory = aiMemory( "hybrid", {
 })
 ```
 
-
 **AI Features:**
 
 * Meaning-based semantic search
@@ -176,8 +164,7 @@ memory = aiMemory( "hybrid", {
 * Hybrid search models
 * Support for OpenAI, Cohere, Voyage \& more
 
-🛠️ **Direct Couchbase SDK Access**
------------------------------------
+## 🛠️ **Direct Couchbase SDK Access**
 
 For advanced use cases, developers can directly access Couchbase Java SDK primitives but with many dynamic features and automatic serialization/deserialization, and casting.
 
@@ -192,9 +179,7 @@ result = collection.query("
 ")
 ```
 
-
-📦 **Session Storage Backed by Couchbase**
-------------------------------------------
+## 📦 **Session Storage Backed by Couchbase**
 
 ```
 // Application.bx
@@ -202,7 +187,6 @@ this.sessionStorage = "couchbase"
 
 session.user = userObject;
 ```
-
 
 * Sub-millisecond KV speed
 * Automatic sharding
@@ -220,7 +204,6 @@ install-bx-module bx-couchbase
 box install bx-couchbase
 ```
 
-
 ### **Quick App Configuration**
 
 ```
@@ -237,7 +220,6 @@ this.caches[ "default" ] = {
 }
 ```
 
-
 ### **E-Commerce Inventory Protection**
 
 ```
@@ -252,7 +234,6 @@ function reserveProduct( productId, quantity ) {
 }
 ```
 
-
 ### **AI-Powered Customer Support**
 
 ```
@@ -260,13 +241,11 @@ agent = aiAgent(...)
 return agent.run(message)
 ```
 
-
 ### **Financial Transaction Processing**
 
 ```
 couchbaseLock("default", "payment-#orderId#", 5, 30, () => { ... })
 ```
-
 
 * 📘 Docs: <https://boxlang.ortusbooks.com/boxlang-framework/boxlang-plus/modules/bx-couchbase>
 * 🐞 Issues: <https://ortussolutions.atlassian.net>

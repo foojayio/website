@@ -33,7 +33,6 @@ public BigDecimal getOrderPrice(Long orderId) {
 }
 ```
 
-
 1. Provide an accumulator variable for the price
 2. Add each line's price to the total price
 
@@ -47,7 +46,6 @@ public BigDecimal getOrderPrice(Long orderId) {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 }
 ```
-
 
 Let's focus on the `orderId` variable: it may be `null`.
 
@@ -65,7 +63,6 @@ public BigDecimal getOrderPrice(Long orderId) {
 }
 ```
 
-
 The functional way is to wrap the `orderId` in an `Optional`. This is what the code looks like using `Optional`:
 
 ```java
@@ -80,7 +77,6 @@ public BigDecimal getOrderPrice(Long orderId) {
             }).orElse(BigDecimal.ZERO);                            // 5
 }
 ```
-
 
 1. Wrap the `orderId` in an `Optional`
 2. Find relevant order lines
@@ -102,7 +98,6 @@ public BigDecimal getOrderPrice(Long orderId) {
             .reduce(BigDecimal.ZERO, BigDecimal::add);
 }
 ```
-
 
 Here's the summary of the type at each line:
 

@@ -34,8 +34,7 @@ Spring Boot applications generally have two main components to a repository patt
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/RepositryModelSpring) used in this article.
 
-The Spring standard repository
-------------------------------
+## The Spring standard repository
 
 The standard repo items can extend the base MongoRepositry class. This greatly reduces the amount of code needed for standard CRUD operations. Note the use of the @Query annotation to allow for shorthanding the various functions---for example:
 
@@ -49,7 +48,6 @@ public interface ItemRepository extends MongoRepository<GroceryItem, String> {
 }
 ```
 
-
 Here, we define two different query functions:
 
 * **findItemByName** : This passes the query {name: '\<value\>'} to the find function in MongoRepository. As seen by the declaration, it returns a single GroceryItem. This maps to the MongoDB *findOne* function and translates to the MongoDB query:
@@ -57,7 +55,6 @@ Here, we define two different query functions:
 ```
    db.groceryitem.findOne({"name" : "<value passed in>"})
 ```
-
 
 * **findAll** : This returns a list of GoceryItems by category. Since this function returns a list, the MongoDB *find* function is called in order to return all items that meet the criteria. In this example, we add a projection using the 'fields' parameter to only return the 'name' and 'quantity' fields. The MongoDB find method is called under the covers:
 
@@ -67,9 +64,7 @@ db.groceryitem.find({"category" : "<value passed in>"}).
 project({"name" : 1, "quantity" : 1})
 ```
 
-
-Custom repository functions
----------------------------
+## Custom repository functions
 
 Next, we need a repository model for our specific entity/collection CRUD handling in MongoDB. This is done using the 'CustomItemRepository' class to define any functions we want to provide:
 
@@ -80,7 +75,6 @@ public interface CustomItemRepository {
    void updateItemQuantity(String itemName, float newQuantity);
 }
 ```
-
 
 Note in this case, we're only providing a single function to update the item quantity.
 
@@ -107,11 +101,9 @@ public class CustomItemRepositoryImpl implements CustomItemRepository {
 }
 ```
 
-
 In this case, we're sending an update to the database to do the actual update. We'll see why that's a good idea in the next section.
 
-When requirements change
-------------------------
+## When requirements change
 
 At some point, the requirement to change the item category was added. A developer added the function 'updateCategoryName' to the MdbSpringBootApplication app. This also moves data operations out of the repository functions and directly into the application code. In general, this is not a good idea as it breaks the abstraction between the application and the repository model:
 
@@ -133,7 +125,6 @@ if(itemsUpdated != null)
     System.out.println("Successfully updated " + itemsUpdated.size() + " items.");       
 }
 ```
-
 
 Although this uses the base repository function saveAll() to do the update, it's likely to result in poor performance for a few reasons:
 
@@ -163,7 +154,6 @@ public void bulkUpdateItemCategories(String category, String newCategory)
 }
 ```
 
-
 This makes the update in the main application much simpler as well as moving the data interface out of the main application:
 
 ```
@@ -174,9 +164,7 @@ customRepo.bulkUpdateItemCategories(category, newCategory);
 }
 ```
 
-
-The double-edged sword of Spring updates in MongoDB
----------------------------------------------------
+## The double-edged sword of Spring updates in MongoDB
 
 In the revised code examples above, we wrote our own update statement to change a category. This is preferred to the original code of reading all items to the client, updating, and then calling the saveAll repository function for several reasons:
 
@@ -213,7 +201,6 @@ Let's see an example. The standard save() method will replace the entire documen
 }
 ```
 
-
 Using the 'updateMulti' function in our bulkUpdateItemCategories function, this translates to an update of a single field using the MongoDB $set operator. The oplog entry would be smaller, in this case:
 
 ```
@@ -225,11 +212,9 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 }
 ```
 
-
 In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
-Why schema and indexing matter
-------------------------------
+## Why schema and indexing matter
 
 Regardless of what repository model you use, good schema design is key for performant operations in MongoDB. You may be tempted to embed GroceryItems in another collection as an array. This is fine as long as nearly all carts have a reasonable number of GroceryItems (\<=200). Once arrays grow beyond 200 or so items, performance can suffer. In addition, updating the category of a few items in the cart could be very inefficient if you're using the save() method to replace the entire document. Updates to individual array items would be more efficient.
 
@@ -240,8 +225,7 @@ Indexing also matters a great deal at scale. Note that we have two update functi
 
 For best performance, both the fields 'category' and 'name' should have an index. In our small example, there are only a few documents in this collection. Imagine how poorly this would perform doing these updates for thousands or even millions of items! The cost of not having an index on these fields can be catastrophic in terms of performance, when at scale.
 
-Conclusion
-----------
+## Conclusion
 
 The repository model can (and should) be used to abstract database I/O from the core application logic. This has several benefits:
 

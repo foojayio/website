@@ -33,8 +33,7 @@ Some of those tools are open source, while others have a pro license. I won't go
 
 **In this article, we'll dive into tips and tricks on how to quickly get productive with the OpenAPI Generators project so you too can work with them and generate cool stuff. Tips follow each other, in order of importance (for me).**
 
-Using the Debugging Flags
--------------------------
+## Using the Debugging Flags
 
 Typically, if you're playing with a generator, you either want to generate a model file (your data structure), an operation file (your logic), or a supporting file (basically anything else, READMEs, docs, ...).
 
@@ -49,7 +48,6 @@ $ java -cp modules/openapi-generator-cli/target/openapi-generator-cli.jar \
 org.openapitools.codegen.OpenAPIGenerator generate -g java -o out -i petstore.yaml \
 --global-property debugModels=true
 ```
-
 
 I won't print the entire output here because it's huge, but as part of the output it will basically spit a giant json representation of all the models available inside that specified yaml file. Here's a tiny part of the beginning:
 
@@ -89,9 +87,7 @@ I won't print the entire output here because it's huge, but as part of the outpu
     .........
 ```
 
-
-Running and Debugging a Generator
----------------------------------
+## Running and Debugging a Generator
 
 Whether you want to play with an existing generator or [create a new one](https://openapi-generator.tech/docs/new-generator/ "create a new one"), the existing documentation tends to offer you to compile and run the generators using the generic `./mvnw clean package` followed by `./bin/generate-samples.sh bin/configs/spring-boot.yaml` (replace with the file you want to use) command.
 
@@ -108,7 +104,6 @@ additionalProperties:
   artifactId: springboot
 ```
 
-
 will run the command
 
 ```
@@ -120,14 +115,11 @@ $./modules/openapi-generator-cli/target/openapi-generator-cli.jar org.openapitoo
 --additional-properties=artifactId=springboot
 ```
 
-
 Useful, but quite cumbersome. On top of this, you typically want to be able to run / debug code as you go directly in your IDE.
 
 Using IntelliJ, you can do it by creating a run configuration as such :
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-65426" src="runconf-700x423.png" alt="A run configuration in IntelliJ used to run a specific generator" width="700" height="423">
-
-<br />
 
 Above, a run configuration in IntelliJ used to run a specific generator.
 
@@ -137,8 +129,7 @@ Pick your generator name, input yaml file and output folder (the same as in the 
 
 Now you can go in the generator's `CodeGen` file , (for example `JMeterClientCodegen` if your generator name is `jmeter` ) and set breakpoints where you want 😊.
 
-Setting Breakpoints in the Right Locations
-------------------------------------------
+## Setting Breakpoints in the Right Locations
 
 As described above already OpenAPI generators take a specification file, transform it into a set of objects in memory, and use those objects to generates code / files using mustache template files.
 
@@ -157,17 +148,13 @@ if (GlobalSettings.getProperty("debugModels") != null) {
 }
 ```
 
-
 <img decoding="async" class="size-medium wp-image-65427" src="debugshow-700x411.png" alt="A screenshot of a debug of the model, showing the content of the &quot;allModels&quot; variable" width="700" height="411">
-
-<br />
 
 Above, a screenshot of a debug of the model, showing the content of the "allModels" variable.
 
 Once you're in there, you can dive into the data and find out what you want to do with it.
 
-Extending the Default Generator
--------------------------------
+## Extending the Default Generator
 
 (Thanks [Beppe](https://twitter.com/beppecatanese "Beppe") for the tip!)
 
@@ -186,7 +173,6 @@ public Map<String, Object> postProcessSupportingFileData(Map<String, Object> bun
 }
 ```
 
-
 Which you could then use inside a `README.mustache` template, for example:
 
 ```
@@ -195,9 +181,7 @@ Which you could then use inside a `README.mustache` template, for example:
 {{bloggingAt1AM}} // Will print "isFun" once ran
 ```
 
-
-Generating Custom Lambdas
--------------------------
+## Generating Custom Lambdas
 
 One of the super powers of mustache is its lambdas, which you can declare in the templates.
 
@@ -206,8 +190,6 @@ There is a [list available](https://mustache.github.io/mustache.5.html "list ava
 You can search the code for any class implementing the `Mustache.Lambda` interface 😊.
 
 <img decoding="async" class="size-medium wp-image-65428" src="mustache-410x510.png" alt="A list of many custom lambdas in the OpenAPI source code" width="410" height="510">
-
-<br />
 
 A screenshot showing a list of many custom lambdas in the OpenAPI source code.
 
@@ -243,7 +225,6 @@ public class JetbrainsHttpClientClientCodegen extends DefaultCodegen implements 
 }
 ```
 
-
 Two things happen here:
 
 * I create a `DoubleMustacheLambda` class that implements `Mustache.Lambda` that itself implements the execute method. The execute method does nothing else than rewriting some of the generated text.
@@ -251,8 +232,7 @@ Two things happen here:
 
 Once that is done, I can use it inside my `api.mustache` template! For example: `{{#lambda.doubleMustache}}{{path}}{{/lambda.doubleMustache}}`
 
-Finding OpenAPI Spec Files for Testing
---------------------------------------
+## Finding OpenAPI Spec Files for Testing
 
 One of my struggles when playing around with OpenAPI Generators is to find files to test stuff with. After a little while, sample files and the [PetStore](https://petstore3.swagger.io/ "PetStore") don't cut it any more.
 
@@ -267,8 +247,7 @@ Armed with those two, it's much easier to go on and try things out.
 
 Hope this helps you too!
 
-Conclusion
-----------
+## Conclusion
 
 I hope those tips will help you hit the ground running with OpenAPI generators.
 

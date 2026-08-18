@@ -27,8 +27,7 @@ That's what you will find out by trying out the following Java Challenge!
 
 It's time to improve your Java skills with this Daemon Thread Challenge...
 
-Daemon Thread Challenge
------------------------
+## Daemon Thread Challenge
 
 What will happen when running the following main method?
 
@@ -49,7 +48,6 @@ public class DaemonThreadChallenge implements Runnable {
         }
 }
 ```
-
 
 A) It will print "Forever" for an indeterminate time and the program will finish normally.  
 

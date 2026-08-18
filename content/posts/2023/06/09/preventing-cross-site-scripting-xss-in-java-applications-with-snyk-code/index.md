@@ -33,8 +33,7 @@ It is, therefore, essential for developers to take steps to ensure the security 
 
 A solution like the one below is an easy way to implement a server-side rendered page without any fancy framework that normally comes with specific instructions. However, there are obviously some downsides to this method.
 
-Writing HTML output in Spring MVC without a templating framework
-----------------------------------------------------------------
+## Writing HTML output in Spring MVC without a templating framework
 
 Suppose you have a web application that takes a product's name and displays it on a web page using the `HttpServletResponse` object. Here's an example of how you might implement this feature in a Spring MVC controller:
 
@@ -63,11 +62,9 @@ Suppose you have a web application that takes a product's name and displays it o
 22}
 ```
 
-
 Can you figure out what sorts of security vulnerabilities may be introduced with the above Java code?
 
-Finding XSS with Snyk Code
---------------------------
+## Finding XSS with Snyk Code
 
 When closely looking at the function above, you might already recognize at least one XSS vulnerability and maybe even two. When scanning my application with [++Snyk Code++](https://snyk.io/product/snyk-code/) we get notified of two different XSS problems in this method.
 
@@ -98,7 +95,6 @@ The code above retrieves the user's name from the HTTP request parameter and the
 1writer.write("<div class=\"panel-heading\"><h1>"+ param + "</h1></div>")
 ```
 
-
 This code is vulnerable to XSS attacks because it does not properly validate or sanitize the user input. For example, a malicious user could inject HTML or JavaScript code into the "name" parameter, which would then be executed by other users who view the web page.
 
 For instance: `.../direct?param=<script>alert(document.cookie);</script>` might reveil your personal cookie information. This means we can also send this information to another server without you knowing it.  
@@ -113,8 +109,7 @@ The code above retrieves a product from the `ProductService` and then displays t
 
 Snyk Code pointed out this potential XSS problem on line 103, where we insert the `product.description` into the output String without validating or sanitizing it.
 
-Mitigating XSS vulnerabilities with Snyk Code
----------------------------------------------
+## Mitigating XSS vulnerabilities with Snyk Code
 
 To prevent XSS vulnerabilities, it is important to properly validate and sanitize user input before writing it to the response. Snyk Code already helps us by pointing out possible solutions. One way to do this is to use a library like [++Apache Commons Text++](https://commons.apache.org/proper/commons-text/)to encode the input and prevent malicious code from being executed.
 ![blog-preventing-xss-string-path](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-string-path.jpg&w=2560&q=75)
@@ -151,7 +146,6 @@ When using Apache Commons text, the properly escaped code could look like this:
 23   writer.write(foot);
 ```
 
-
 ### Be careful with templating frameworks
 
 Templating frameworks like Thymeleaf can help protect agains XSS vulnerabilities. Thymeleaf is a popular templating engine for Java that includes built-in support for HTML escaping, which helps prevent XSS attacks by encoding any user input that is included in the rendered HTML.
@@ -167,11 +161,9 @@ However it strongly depends on how you create the template. For example, here's 
 6</div>
 ```
 
-
 In this example, the `th:text` attributes will be escaped, but the `th:utext` attribute won't. This `th:utext` attribute renders the comment text without escaping any HTML tags or special characters and is potentially vulnerable to XSS. When using a particular framework, knowing how certain elements behave is essential.
 
-Catching XSS before you deploy to production
---------------------------------------------
+## Catching XSS before you deploy to production
 
 Preventing XSS attacks is a critical concern for developers working on Java web applications.
 

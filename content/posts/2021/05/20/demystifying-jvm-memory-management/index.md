@@ -37,8 +37,7 @@ This is the native memory allocated by the OS and the amount depends on OS, proc
 
 Let us see what the different areas are for:
 
-Heap Memory
------------
+## Heap Memory
 
 This is where JVM stores object or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place.
 
@@ -49,27 +48,21 @@ The size of heap memory can be controlled using the `Xms`(Initial) and `Xmx`(Max
   * **Survivor Space** : This is where objects that survived the minor GC are stored. This is divided into two halves, **S0** and **S1**.
 * **Old generation** : Old generation or **"Tenured Space"** is where objects that reached the maximum tenure threshold during minor GC live. This space is managed up by **"Major GC"**.
 
-Thread Stacks
--------------
+## Thread Stacks
 
 This is the stack memory area and there is one stack memory per thread in the process. This is where thread-specific static data including method/function frames and pointers to objects are stored. The stack memory limit can be set using the `Xss` flag.
 
-Meta Space
-----------
+## Meta Space
 
 This is part of the native memory and doesn't have an upper limit by default. This is what used to be **Permanent Generation(PermGen) Space** in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that it's possible to set a limit on meta-space used with the `XX:MetaspaceSize` and `-XX:MaxMetaspaceSize` flag in which case the application might just throw out of memory errors.
 
-Code Cache
-----------
+## Code Cache
 
 This is where the **Just In Time(JIT)** compiler stores compiled code blocks that are often accessed. Generally, JVM has to interpret byte code to native machine code whereas JIT-compiled code need not be interpreted as it is already in native format and is cached here.
 
-Shared Libraries
-----------------
+## Shared Libraries
 
 This is where native code for any shared libraries used is stored. This is loaded only once per process by the OS.
-
-
 
 Now that we are clear about how memory is organized let's see how the most important parts of it are used when a program is executed.
 
@@ -111,12 +104,9 @@ public class Test {
 }
 ```
 
-
 Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the stack and heap memory is used:
 
 <iframe title="JVM Memory usage(Stack vs Heap)" id="talk_frame_595037" class="speakerdeck-iframe" src="//speakerdeck.com/player/9780d352c95f4361bd8c6fa164554afc" width="500" height="281" style="aspect-ratio:500/281; border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen></iframe>
-
-<br />
 
 *Note: If the slides look cut off at edges, then click on the title of the slide or [here](https://speakerdeck.com/deepu105/jvm-memory-usage-stack-vs-heap) to open it directly in SpeakerDeck.*
 
@@ -133,8 +123,6 @@ As you can see:
 
 The Stack as you can see is automatically managed and is done so by the operating system rather than JVM itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since it's the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where the JVM helps. It manages the Heap automatically using the garbage collection process.
 
-
-
 Now that we know how JVM allocates memory, let us see how it automatically manages the Heap memory which is very important for the performance of an application. When a program tries to allocate more memory on the Heap than that is freely available(depending on the `Xmx` config) we encounter **out of memory errors**.
 
 JVM manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.
@@ -150,8 +138,7 @@ The garbage collector in JVM is responsible for:
 
 JVM garbage collectors are generational(Objects in Heap are grouped by their age and cleared at different stages). There are many different algorithms available for garbage collection but **Mark \& Sweep** is the most commonly used one.
 
-Mark \& Sweep Garbage Collection
---------------------------------
+## Mark \& Sweep Garbage Collection
 
 JVM uses a separate daemon thread that runs in the background for garbage collection and the process runs when certain conditions are met. Mark \& Sweep GC generally involves two phases and sometimes there is an optional third phase depending on the algorithm used.
 
@@ -178,8 +165,7 @@ As of JDK 11, which is the current LTE version, the below garbage collectors are
 * **Garbage-First(G1) Collector** : The G1 collector is mostly concurrent (Means only expensive work is done concurrently). This is for multi-processor machines with a large amount of memory and is enabled as default on most modern machines and OS. It has a focus on low pause times and high throughput. This can be enabled using the `-XX:+UseG1GC` switch.
 * **Z Garbage Collector** : This is a new experimental GC introduced in JDK11. It is a scalable low-latency collector. It's concurrent and does not stop the execution of application threads, hence no stop-the-world. It is intended for applications that require low latency and/or use a very large heap(multi-terabytes). This can be enabled using the `-XX:+UseZGC` switch.
 
-GC Process
-----------
+## GC Process
 
 Regardless of the collector used, JVM has two types of GC process depending on when and where its performed, the minor GC and major GC.
 
@@ -196,8 +182,6 @@ Let us look at the minor GC process:
 Click on the slides and move forward/backward using arrow keys to see the process:
 
 <iframe title="JVM Minor GC" id="talk_frame_595537" class="speakerdeck-iframe" src="//speakerdeck.com/player/f4783404769145f4b990154d0cc05629" width="500" height="281" style="aspect-ratio:500/281; border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen></iframe>
-
-<br />
 
 *Note: If the slides look cut off at edges, then click on the title of the slide or [here](https://speakerdeck.com/deepu105/jvm-minor-gc) to open it directly in SpeakerDeck.*
 
@@ -233,15 +217,11 @@ Let us look at the major GC process, it's not as complex as minor GC:
 3. The GC now removed all orphan objects and reclaims the memory
 4. During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta-space as well by removing loaded classes from it this is also referred to as full GC
 
-
-
 This post should give you an overview of the JVM memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and tuning options available for specific use cases and you can learn about them from [https://docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/).
 
 But for most JVM (Java, Kotlin, Scala, Clojure, JRuby, Jython) developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.
 
 I hope you had fun learning about the JVM internals, stay tuned for the next post in the series.
-
-
 
 * [docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/)
 * [pythontutor.com/java.html](http://pythontutor.com/java.html)
@@ -249,8 +229,6 @@ I hope you had fun learning about the JVM internals, stay tuned for the next pos
 * [www.yourkit.com](https://www.yourkit.com/docs/kb/sizes.jsp)
 * [dzone.com](https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/)
 * [www.infoq.com](https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/)
-
-
 
 If you like this article, please leave a like or a comment.
 

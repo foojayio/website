@@ -62,5 +62,3 @@ Original press release:
 
 * <https://www.azul.com/newsroom/azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads/>
 * <https://blog.jetbrains.com/kotlin/2025/05/kotlin-and-azul-collaboration-for-enhanced-runtime-performance/>
-
-<br />

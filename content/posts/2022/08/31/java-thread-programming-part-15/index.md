@@ -23,8 +23,6 @@ This article will discuss how we do asynchronous method invocation with [Callabl
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-57278" src="Playground.java_-700x227.png" alt="" width="700" height="227">
 
-<br />
-
 Look at the code snippet. It doesn't have anything yet, but [as we learned about Java threading](https://foojay.io/today/java-thread-programming-part-14/), we know anything we put here will run on the main thread unless we spawn a new thread from here.
 
 Now consider a case where you work as a banker, and you need to calculate how much credit you can provide to a person.
@@ -42,7 +40,6 @@ private static Credit calculateCreditForPerson(Long personId) {
 }
 ```
 
-
 This is pretty sequential, and all of them are done one after one. Each method takes some time to work on. It calls the database and then waits for the result. Until the result is returned, the execution waits. This is a blocking scenario.
 
 That means when it calls the `getPerson()` method, if it makes a network call, which is usually an IO-bound task until we get the result, the main thread would just block, and nothing would progress here. Once the result is returned, we get to the next method, which is another blocking method, as it also makes a database call over the network.
@@ -58,7 +55,6 @@ new Thread(() -> {
     person.set(p);
 }).start();
 ```
-
 
 We could do something like the above. We are essentially sharing the state between the main and newly created threads. In such a case, we use [AtomicReference](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/atomic/AtomicReference.html) to update variables in a thread-safe way.
 
@@ -86,7 +82,6 @@ private static Credit calculateCreditForPerson(Long personId) throws Interrupted
 }
 ```
 
-
 Over there, the first method call is indeed a blocking call. The main thread waits for the method to finish the work. The following two methods' invocation depends on this, so even if we execute it through another thread, we need to wait for its results.
 
 So executing it from the main thread makes sense. The next three methods can be executed independently. They should not wait for each other. So we can pass them into three separate threads, which we did over here.
@@ -111,7 +106,6 @@ private static Credit calculateCreditForPerson3(ExecutorService pool)
     return calculateCredit(assetFuture.get(), liabilitiesFuture.get());
 }
 ```
-
 
 To know how the future works, read part 12 of this threading series: ​​<https://foojay.io/today/java-thread-programming-part-12/>.
 
@@ -138,7 +132,6 @@ private static Credit calculateCreditForPerson(Long personId) throws ExecutionEx
    }).get();
 }
 ```
-
 
 But I wouldn't explain this in this article because it needs some background. Please wait until the next parts come out...
 

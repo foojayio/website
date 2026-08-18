@@ -30,8 +30,7 @@ This is pretty helpful when trying to build wrappers around existing native libr
 
 Be aware that the API is still in flux. Much of the existing non-OpenJDK documentation is not in sync.
 
-Example
--------
+## Example
 
 Now to my main example: Assume you're tired of all the abstraction of the Java I/O API and just want to read a file using the traditional I/O functions of the C standard lib (like [read_line.c](https://github.com/parttimenerd/panama-examples/blob/main/misc/read_line.c)): we're trying to read the first line of the passed file, opening the file via [`fopen`](https://www.man7.org/linux/man-pages/man3/fopen.3.html), reading the first line via [`gets`](https://www.man7.org/linux/man-pages/man3/fgets.3.html), and closing the file via [`fclose`](https://www.man7.org/linux/man-pages/man3/fclose.3.html).
 
@@ -49,7 +48,6 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-
 This would have involved writing C code in the old JNI days, but we can access the required C functions directly with Panama, wrapping the C functions and writing the C program as follows in Java:
 
 ```java
@@ -61,7 +59,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 But do we implement the wrapper methods? We start with the `FILE* fopen(char* file, char* mode)` function which opens a file. Before we can call it, we have to get hold of its `MethodHandle`:
 
 ```java
@@ -72,7 +69,6 @@ private static MethodHandle fopen = Linker.nativeLinker().downcallHandle(
             /* char* mode */ ValueLayout.ADDRESS));
 ```
 
-
 This looks up the `fopen` symbol in all the libraries that the current process has loaded, asking both the `NativeLinker` and the `SymbolLookup`. This code is used in many examples, so we move it into the function `lookup`:
 
 ```
@@ -82,7 +78,6 @@ public static MemorySegment lookup(String symbol) {
                  .orElseThrow();
 }
 ```
-
 
 The look-up returns the memory address at which the looked-up function is located.
 
@@ -102,7 +97,6 @@ public static MemorySegment fopen(String filename, String mode) {
 }
 ```
 
-
 We use a confined arena for allocations, which is cleaned after exiting the try-catch. The newly allocated strings are then used to invoke `fopen`, letting us return the `FILE*`.
 
 *Older tutorials might mention MemorySessions, but they are removed in JDK 21.*
@@ -119,7 +113,6 @@ private static MethodHandle fgets = Linker.nativeLinker().downcallHandle(
                               ValueLayout.JAVA_INT, 
                               ValueLayout.ADDRESS));
 ```
-
 
 Only the wrapper method differs because we have to allocate the buffer in the arena:
 
@@ -138,7 +131,6 @@ public static String gets(MemorySegment file, int size) {
 }
 ```
 
-
 Finally, we can implement the `int fclose(FILE* file)` function to close the file:
 
 ```java
@@ -155,7 +147,6 @@ public static int fclose(MemorySegment file) {
 }
 ```
 
-
 You can find the source code in my [panama-examples](https://github.com/parttimenerd/panama-examples) repository on GitHub (file [HelloWorld.java](https://github.com/parttimenerd/panama-examples/blob/main/src/main/java/me/bechberger/panama/HelloWorld.java)) and run it on a Linux x86_64 machine via
 
 ```bash
@@ -163,11 +154,9 @@ You can find the source code in my [panama-examples](https://github.com/parttime
                                  Apache License
 ```
 
-
 which prints the first line of the license file.
 
-Errno
------
+## Errno
 
 We didn't care much about error handling here, but sometimes, we want to know precisely why a C function failed. Luckily, the C standard library on Linux and other Unixes has `errno`:
 > Several standard library functions indicate errors by writing positive integers to `errno`.
@@ -211,7 +200,6 @@ try (var arena = Arena.ofConfined()) {
 }
 ```
 
-
 To convert this error number into a string, we can use the [char* strerror(int errno)](https://www.man7.org/linux/man-pages/man3/strerror.3.html) function:
 
 ```java
@@ -235,18 +223,15 @@ static String errnoString(int errno){
 }
 ```
 
-
 When we then print the error string in our example after the `fopen` call, we get:
 
 ```
 No such file or directory
 ```
 
-
 This is as expected, as we hard-coded a non-existent file in the `fopen` call.
 
-JExtract
---------
+## JExtract
 
 Creating all the MethodHandles manually can be pretty tedious and error-prone. JExtract can parse header files, generating MethodHandles and more automatically. You can download [jextract](https://jdk.java.net/jextract/) on the project page.
 
@@ -258,7 +243,6 @@ For our example, I wrote a small wrapper around jextract that automatically down
 #include <unistd.h>
 #include <stdio.h>
 ```
-
 
 For example the `fgets` function, jextract generates as an entry point the following:
 
@@ -281,7 +265,6 @@ public static MemorySegment fopen(MemorySegment __filename, MemorySegment __mode
 }
 ```
 
-
 Of course, we still have to take care of the string allocation in our wrapper, but this wrapper gets significantly smaller:
 
 ```java
@@ -296,11 +279,9 @@ public static MemorySegment fopen(String filename, String mode) {
 }
 ```
 
-
 You can find the example code in the GitHub repository in the file [HelloWorldJExtract.java](https://github.com/parttimenerd/panama-examples/blob/main/src/main/java/me/bechberger/panama/HelloWorldJExtract.java). I integrated jextract via a wrapper directly into the Maven build process, so just `mvn package` to run the tool.
 
-More Information
-----------------
+## More Information
 
 There are many other resources on Project Panama, but be aware that they might be dated. Therefore, I recommend reading JEP 454, which describes the newly introduced API in great detail. Additionally, the talk ["The Panama Dojo: Black Belt Programming with Java 21 and the FFM API" by Per Minborg](https://www.youtube.com/watch?v=t8c1Q2wJOoM) at this year's Devoxx Belgium is a great introduction:
 
@@ -310,8 +291,7 @@ As well as the talk by Maurizio Cimadamore at this year's JVMLS:
 
 {{< youtube kUFysMkMS00 >}}
 
-Conclusion
-----------
+## Conclusion
 
 Project Panama greatly simplifies interfacing with existing native libraries. I hope it will gain traction after leaving the preview state with the upcoming JDK 22, but it should already be stable enough for small experiments and side projects.
 

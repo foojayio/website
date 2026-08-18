@@ -28,17 +28,13 @@ A few years ago, I evaluated around 10 of these frameworks for a project for a S
 It was only later that [SpringBoot](https://spring.io/projects/spring-boot) came along, which seemed to fulfill all the requirements and there was actually very little to criticize about it. Then came microservices such as [Quarkus](https://quarkus.io/) or [Micronaut](https://micronaut.io/), which are often compiled into native code for small web service applications, but which can then rarely be embedded in a more mature architecture.
 ![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-login.webp)
 
-The "Buts"
-----------
+## The "Buts"
 
 Something that has always bothered me is that with full-blown frameworks, the configuration layer of the components is too opaque and complicated and the web microservices don't really offer much out of the box.
 
 So what I want is a fully-fledged, high-performance Java web development framework like those found in the PHP world (e.g. [CakePHP](https://cakephp.org/), [Laravel](https://laravel.com/), etc.) and which already comes with ready-to-use components such as [CSRF](https://owasp.org/www-community/attacks/csrf) prevention, login with [2FA](https://dictionary.cambridge.org/dictionary/english/2fa) authentication, [CRUD](https://medium.com/geekculture/crud-operations-explained-2a44096e9c88) generator (based on the database model), compliant with other web containers such as [Tomcat](https://tomcat.apache.org/), [Jetty](https://jetty.org/index.html) and [Oracle WebLogic](https://www.oracle.com/java/weblogic/) as well as executable as a standalone web server, a simple web template engine, standard CRUD views and functions with automatic mapping of referential database integrities on the web masks, theme support, fallback mechanisms when loading web resources as well as full language management and some more features.
 
-<br />
-
-What is beetRoot?
------------------
+## What is beetRoot?
 
 beetRoot is a slim and rapid Java web development as well as a full \& secure client-server framework ready to run.
 
@@ -53,10 +49,7 @@ If you know CakePHP for web development, you'll like beetRoot. It is based on th
 
 autumo beetRoot is open source ([Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)) and is now available in version 3.1.5. It also largely forms the basis for the product [autumo ifaceX](https://products.autumo.ch/ifacex/overview).
 
-<br />
-
-How to QuickStart?
-------------------
+## How to QuickStart?
 
 ### Linux, macOS
 
@@ -74,7 +67,6 @@ rm $PACKAGE.zip
 $PACKAGE/bin/beetroot.sh start
 ```
 
-
 **Windows**
 
 Enter the following statements into your Windows terminal or PowerShell:
@@ -91,7 +83,6 @@ del %PACKAGE%.zip
 %PACKAGE%\bin\beetroot.bat start
 ```
 
-
 autumo beetRoot starting up:
 ![beetRoot starting on console](https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/master/web/img/autumo-beetroot-console.webp)
 
@@ -100,18 +91,12 @@ Now go to <http://localhost:8778> and log in:
 * **Default user**: admin
 * **Default password** : beetroot   
 
-<br />
-
-QuickStart Video
-----------------
+## QuickStart Video
 
 Take a look at the QuickStart Video if you want to play around with the framework.
 [![Quickstart Video](https://i3.ytimg.com/vi/X2_FVYiMnIE/hqdefault.jpg)](https://youtu.be/X2_FVYiMnIE)
 
-<br />
-
-Full Feature List
------------------
+## Full Feature List
 
 The Web framework is shipped with the following features ready to use:
 
@@ -149,14 +134,9 @@ The Web framework is shipped with the following features ready to use:
   algorithm for everything. As well, load resources from file system (first), then as a resource within packages (jar, war) if not found beforehand.
 * And some more stuff...
 
-<br />
-
-Links
------
+## Links
 
 * [Project website](https://github.com/autumoswitzerland/autumo-beetroot)
 * [API Docs](https://products.autumo.ch/javadoc/autumo-beetroot/index.html)
 
 **Enjoy!**
-
-<br />

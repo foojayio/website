@@ -49,7 +49,6 @@ Now each frame is diffed, instead of every 5 frames before, and measured against
     );
 ```
 
-
 New real-world test animations, like `pi4j.json`, `foojay-reporter.json` and `foojay-duke.json`, got added so the harness measures against the files I'm actually using.
 
 ### Rendering Fixes
@@ -111,8 +110,7 @@ Where are we now? Check the images below.
 Of course, the AI coding process is not free. Theia IDE luckily is free, but it needs one or more API keys to call AI services. As you can see, I burned a lot of tokens, and budget. But to be honest, I would not have achieved these improvements by myself in such a short time. Actually, I could do my "real work", and have the tools work in the background!
 ![](20260702-lottie4j-cost-ai-assisted-coding-1024x403.png)
 
-What's Next
------------
+## What's Next
 
 I'm happy with the results so will release a new version soon. The same approach with `@Architect`/`@Coder` will help me to further improve or fix the library when needed. But first I want to know which visual differences remain based on feedback from the users of the Lottie4J library!
 

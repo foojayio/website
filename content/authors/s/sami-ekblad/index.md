@@ -13,3 +13,4 @@ aliases:
   - "/today/author/sami-ekblad/"
 frozen: false
 ---
+

@@ -39,8 +39,7 @@ Some (most?) people I know planned or already had moved away. The target seems t
 
 Forewarned is forearmed. I plan to stay on Twitter as long as possible while building up my Mastodon account with the same content. Then, if (when?) all hell breaks loose, I can just jump ship.
 
-Evaluating the alternatives
----------------------------
+## Evaluating the alternatives
 
 Let's state things clearly: I believe I'm a good developer because I'm lazy. There's no way I'm going to copy-paste content on both channels. Plus, I'm using Twitter's scheduling feature, so I need something else.
 
@@ -54,8 +53,7 @@ There's no way I'd give my credentials to a third party! I searched further and 
 
 It looked exactly what I was searching for!
 
-Mastodon Twitter Sync
----------------------
+## Mastodon Twitter Sync
 
 The tool provides two execution options:
 
@@ -92,7 +90,6 @@ jobs:
           args: --release
 ```
 
-
 1. Schedule every two hours, 24 minutes after the hour
 2. Checkout the sync project's code
 3. Install the Rust toolchain
@@ -122,7 +119,6 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 ```
 
-
 At this point, we have mixed the Rust source code with our configuration file in the same Git repository. Handling such a project involves a lot of `git rebase`, which I want to avoid. Let's keep the code separate with its dedicated lifecycle locally.
 
 ```
@@ -136,7 +132,6 @@ mastodon-twitter-sync                   #4
 |_ src
 |_ ...
 ```
-
 
 1. My project
 2. GitHub action
@@ -161,7 +156,6 @@ jobs:
           path: code
 ```
 
-
 When we run the workflow, the layout is the following:
 
 ```
@@ -175,7 +169,6 @@ When we run the workflow, the layout is the following:
 |  |_ src
 |  |_ ...
 ```
-
 
 Henceforth, we should update the decrypting and run the steps accordingly:
 
@@ -196,7 +189,6 @@ jobs:
           command: run
           args: --manifest-path=./code/Cargo.toml --release                             #2
 ```
-
 
 1. Decrypt from the `job` subfolder in the current root folder
 2. Run in the current folder using the `code` subfolder
@@ -220,7 +212,6 @@ jobs:
           default_author: github_actions
           message: Update post cache
 ```
-
 
 1. Copy the `post_cache.json` in the `job` subfolder. Only succeed the step if the job synchronizes no content, and the file is generated.
 2. Commit back the file if it has changed
@@ -246,7 +237,6 @@ jobs:
         with:
           workspaces: code                 #2
 ```
-
 
 1. Must be installed after Rust install, as the cache key contains Rust-specific data
 2. Cache artifacts located in the `code` subfolder
@@ -281,13 +271,11 @@ Error connecting to Mastodon: Http(
 )
 ```
 
-
 It's not an issue *per se*; it just means that synchronization lags. Should I move to a more reliable instance or even host my own?
 
 So far, I've kept Twitter as my source of truth. I post content there, and it should appear on Mastodon. However, synchronization should happen both ways. Once I make Mastodon my main channel, I don't need to change the above work.
 
-Conclusion
-----------
+## Conclusion
 
 Twitter's new owner claims to promote "comedy" but suspends accounts that make fun of him. At the same time, he claims to be a proponent of free speech but confuses opinion with information. The advertising market may curb his misguided views, but it's still being determined.
 

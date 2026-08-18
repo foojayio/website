@@ -23,8 +23,7 @@ On Twitter - sorry, X - and Mastodon I asked the following question:
 
 This is the result of my quest...
 
-DDD, TDD, BDD
--------------
+## DDD, TDD, BDD
 
 Every few years, a new best practice appears to structure the development of software projects. **[Domain-Driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)** is one of them. It focuses on modeling software to match a domain according to input from that domain's experts. Inside a DDD project, you focus first to clearly understand the problem to be solved, leading to a structure in the code that represents the solution. The example project [DDDSample based on a book by Eric Evans](https://github.com/citerus/dddsample-core/tree/master/src/main/java/se/citerus/dddsample/domain/model) illustrates this by splitting the code of a shipping application into packages for cargo, handling, location, and voyage.
 
@@ -34,8 +33,7 @@ Another well-known abbreviation is **[Test-Driven Development (TDD)](https://en.
 
 But these are the official terms. And we all know that many good intentions and plans get replaced with others based on "the real world." Let's take a look at a few of them...
 
-Alternative DDD Versions
-------------------------
+## Alternative DDD Versions
 
 ### Deadline-Driven Development
 
@@ -69,16 +67,14 @@ As a fulltime remote worker, I am a big fan of this type of development! Our dog
 Proposed by [Post Tenebras Lire](https://diaspodon.fr/@ptl/111273811525505131) on Mastodon: **Drama-Driven Development** *.*
 > "The outcome is very often pretty bad."
 
-Alternative **TDD Versions**
-----------------------------
+## Alternative **TDD Versions**
 
 ### **Tab-Driven Development**
 
 Vlad Mihalcea seems to be a big fan of **Tab-Driven Development** as he [shared on LinkedIn](https://www.linkedin.com/posts/vladmihalcea_i-use-tab-driven-development-the-more-activity-7095402263153639424-dDhC/):
 > "The more difficult the task, the more browser tabs I open."
 
-Other Variants
---------------
+## Other Variants
 
 In alphabetic order...
 
@@ -87,8 +83,6 @@ In alphabetic order...
 In this [podcast by Adam Bien with Roni Dover](https://airhacks.fm/?hss_channel=tw-2599580401#episode_252log) you can hear a very nice discussion about **Bug-Driven Development (BDD)** vs. Continuous Observability.
 
 <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/us/podcast/airhacks-fm-podcast-with-adam-bien/id1296655154?theme=auto"></iframe>
-
-<br />
 
 [Alejandro Pablo Revilla added](https://twitter.com/apr/status/1683475102912921600) a very nice one to BDD:
 > "It plays very well with **Customer Yelling Project Management (CYPM)**".
@@ -122,8 +116,7 @@ When you find yourself in a company where this occurs frequently, it's time to c
 I found this nice one by [Tim Zöller on Mastodon](https://freiburg.social/@javahippie/110864799216854562):
 > "If psychological safety is low in your software dev team, they will default to **Stick-Driven Development (SDD)**. They will make decisions based on the probability of getting hit with a (metaphorical) stick. In most settings this will mean estimating higher efforts, avoiding risk at any cost, staying on the safe side for everything and not discussing or admitting mistakes."
 
-ChatGPT Alternatives
---------------------
+## ChatGPT Alternatives
 
 I also asked my new buddy ChatGPT to come up with a few alternatives:
 > ***PDD (Penguin Driven Development)**: Developers work in harmony with penguins, who provide testing feedback with their cute flapping and waddling.*
@@ -150,8 +143,7 @@ I also asked my new buddy ChatGPT to come up with a few alternatives:
 
 Thanks, ChatGPT, well done. And some of these are maybe not even a bad idea...
 
-Conclusion
-----------
+## Conclusion
 
 Many **Something-Driven Development**s are available nowadays! Which are your favorites and are you going to introduce to your company or team?
 

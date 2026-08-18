@@ -20,8 +20,6 @@ enlighterjs: true
 frozen: false
 ---
 
-
-
 As part of my 2026 learning goals around Java on RISC-V (see [this post about x86 versus ARM versus RISC-V](https://webtechie.be/post/2026-01-07-x86-arm-riscv/)), I've asked various suppliers to send me evaluation boards. I already published these:
 
 * [LattePanda IOTA (x86)](https://webtechie.be/post/first-experiments-with-java-on-the-lattepanda-iota-an-alternative-to-raspberry-pi/)
@@ -35,13 +33,11 @@ I got all these boards for free, but what I write here and show in the video is 
 
 {{< youtube 78Jm2sR33fI >}}
 
-ARM versus RISC-V?
-------------------
+## ARM versus RISC-V?
 
 ARM and RISC-V represent two different approaches to processor design. ARM is the established player we know from, e.g., the Raspberry Pi's. It's mature, and has a huge ecosystem of tools and support built over decades. RISC-V is the open-source alternative, free from licensing restrictions and fully transparent. While ARM still leads in performance and tooling today, RISC-V is catching up fast. The real difference isn't just about speed. It's about openness and flexibility. With RISC-V, you're not locked into a vendor's ecosystem, and you have complete visibility into how your hardware works.
 
-Banana Pi
----------
+## Banana Pi
 
 Here's how the Banana Pi's I received, compare to some of the Raspberry Pi's. If you compare the Raspberry Pi prices with my earlier articles from +-6 months ago, you'll see that the prices have gone up a lot. The shortage of memory chips is really a problem and making these single-board-computers less attractive...
 
@@ -86,8 +82,7 @@ Below are the links I found with OS images for the Banana Pi boards and burned t
 
 ![](bananapi-vs-raspberrypi-1024x971.jpg)
 
-Testing with Java and Pi4J
---------------------------
+## Testing with Java and Pi4J
 
 I started with a lot of reserves... Both OS images are pretty outdated (2024 and 2025), so I'm wondering what I will find when I boot the boards. I also have no idea if the Banana Pi BPI-F3 RISC-V board will run Java 25, as it is a very new board and the OS image is already a bit outdated.
 
@@ -112,7 +107,6 @@ cd basic
 java HelloWorld.java
 jbang JsonParsing.java
 ```
-
 
 I also executed my [SBC Java benchmark test](/sbc/) so we can compare the performance of this board with other single-board-computers. Results below...
 
@@ -154,7 +148,6 @@ Caused by: com.pi4j.exception.Pi4JException: Error during call to method 'call' 
     ... 8 more
 ```
 
-
 After some researching, I [found a newer OS for this board](https://armbian.com/boards/bananapim4zero) and downloaded a version with Xfce desktop from [here](https://dl.armbian.com/bananapim4zero/Noble_current_xfce). With this newer version of the OS, and the correctly configured user rights, we get another error. That's progress! 😉
 
 ```
@@ -182,7 +175,6 @@ Caused by: com.pi4j.exception.Pi4JException: Error during call to method 'call' 
     ... 8 more
 ```
 
-
 On a Raspberry Pi, the numbers you pass to Pi4J directly match the SoC's own "BCM" GPIO numbering, so pin 16 on the header is simply BCM 23, no translation needed. The [Banana Pi M4 Zero](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero) uses a different SoC (Allwinner H618) with its own GPIO controller and numbering scheme, so that shortcut doesn't apply, even though the board has the same 40-pin header layout as a Raspberry Pi Zero.
 
 The first clue was Banana Pi's own [pinout table](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero#_gpio_pin_define), which lists physical pin 16 as `PI15` = GPIO bank `I`, pin `15`. Allwinner chips group their GPIOs into lettered banks of 32 pins each (`PA0`-`PA31`, `PB0`-`PB31`, and so on --- see [linux-sunxi.org/GPIO](https://linux-sunxi.org/GPIO) for the general convention), and the Linux kernel exposes this hardware as character devices under `/dev/gpiochip*`. Running `gpioinfo` on the board showed two chips: `gpiochip0` with 32 lines, and `gpiochip1` with 288 lines. 288 is exactly 9 banks of 32, which matches banks A through I. This indicates that `gpiochip1` is the controller behind the 40-pin header, not `gpiochip0`.
@@ -202,7 +194,6 @@ gpiochip1 - 288 lines:
     ...
 ```
 
-
 To find the pin number to use in the code, we need to do some calculation: the index of the bank (A=0, B=1, C=2, ... I=8) multiplied by 32, plus the pin number within that bank, to calculate the absolute line offset on the chip. For `PI15`, that's `8 × 32 + 15 = 271`.
 
 We can verify this with [`libgpiod`](https://packages.debian.org/bookworm/gpiod), a command-line tools to toggle GPIO lines. As we already installed `gpiod`, we can use `gpioset` to set a line high or low. For example, to toggle the red LED connected to physical pin 16, we can run:
@@ -211,7 +202,6 @@ We can verify this with [`libgpiod`](https://packages.debian.org/bookworm/gpiod)
 $ gpioset gpiochip1 271=1   # Red on
 $ gpioset gpiochip1 271=0   # Red off
 ```
-
 
 The red LED turned on and off, confirming line 271 on `gpiochip1` really is physical pin 16. I repeated the same process for green (`PI16` → line 272) and blue --- except blue's original pin (physical pin 22) turned out to be a 3.3V power pin on this board, not a GPIO at all. So I moved that wire to a real GPIO pin (physical pin 23, `PH6`, bank H → `7 × 32 + 6 = 230`) before it could work.
 
@@ -257,15 +247,13 @@ void main() throws Exception {
 }
 ```
 
-
 Now executing `jbang RgbLed.java` finally worked, and the RGB LED started blinking in the expected colors. Success! This is my very first working Pi4J example on a non-Raspberry Pi board!!! One of my 2026-goals is achieved 🙂
 
 ### Banana Pi BPI-F3
 
 The Banana Pi BPI-F3 boots in desktop mode! So that's a lot nicer for a first test 😉 As this board has a RISC-V processor, we can't use SDKMAN to install Java as we learned from experiments with other RISC-V boards before. So I installed `openjdk-25-jdk` with `apt`, but to my surprise, this installed an `ea` (Early Access) version. Maybe because the OS is outdated and got stuck on older JDK releases? Anyhow, I could run the `HelloWorld.java` and `JsonParsing.java` examples again without a problem, and ran the SBC benchmark.
 
-Benchmark Results
------------------
+## Benchmark Results
 
 To have a fair comparison in the benchmarks, I also ran one on a Raspberry Pi Zero 2 as this is the closest competitor to the Banana Pi BPI-M4 Zero. The full results are available on the [SBC Java benchmark page](/sbc/), where you can compare them with the other boards I tested before.
 ![](sbc-benchmarks-bananapi-1024x526.png)
@@ -278,8 +266,7 @@ Some highlights:
 * Compared to the StarFive VisionFive 2 Lite, the BPI-F3 is almost twice as fast on the heavily multi-threaded `fj-kmeans` (33.0s vs 62.3s), but the VisionFive 2 edges ahead by 10-17% on the more single-threaded `scala-kmeans` and `future-genetic` tests.
 * Two benchmarks, `akka-uct` and `db-shootout`, failed to complete on the BPI-F3. Considering the outdated Bianbu OS image, take these RISC-V numbers with a grain of salt.
 
-Conclusion
-----------
+## Conclusion
 
 Performance-wise, the Banana Pi's are a pleasant surprise! The BPI-M4 Zero, the cheapest and smallest board in this whole comparison, if you take the amount of memory and eMMC into account, outran both its direct rival, the Raspberry Pi Zero 2, and the pricier BeagleY-AI on every single benchmark. And the BPI-F3 holds its own on the RISC-V side too, landing right next to the OrangePi RV2 and comfortably ahead of the BeagleV-Fire.
 

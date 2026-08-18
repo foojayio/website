@@ -80,7 +80,6 @@ population INT)
 type IMap OPTIONS('keyFormat'='varchar', 'valueFormat'='json-flat');
 ```
 
-
 ### **Step 3. Query the Cache with SQL**
 
 Now that you have some data in your cluster, you can query it, using SQL. If you're using the CLI, enter the following queries in the SQL prompt. If you're using a client library, enter the following queries in the SQL browser.
@@ -91,7 +90,6 @@ Now that you have some data in your cluster, you can query it, using SQL. If you
 SELECT * FROM cities;
 ```
 
-
 The results are in a random order because the data is distributed across the cluster.
 
 * Order the results by the key.
@@ -99,7 +97,6 @@ The results are in a random order because the data is distributed across the clu
 ```
 SELECT * FROM cities ORDER BY __key;
 ```
-
 
 Now you see the results start from key 1 and end with key 8.
 
@@ -109,13 +106,11 @@ Now you see the results start from key 1 and end with key 8.
 SELECT country FROM cities;
 ```
 
-
 * Query only the cities by filtering on the cities column.
 
 ```
 SELECT city FROM cities;
 ```
-
 
 * Change the output to display cities first in alphabetical order.
 
@@ -123,20 +118,17 @@ SELECT city FROM cities;
 SELECT city, country FROM cities ORDER BY city;
 ```
 
-
 * Use a filter to display only countries where the name of the city is at least 11 characters long.
 
 ```
 SELECT country FROM cities WHERE LENGTH(city) >= 11;
 ```
 
-
 * Use another filter to display only cities beginning with the letter 'L' where the length is greater than 6.
 
 ```
 SELECT city FROM cities WHERE city LIKE 'L%' AND LENGTH(city) > 6;
 ```
-
 
 ### **Summary**
 

@@ -36,15 +36,13 @@ Existing Jakarta EE 10 applications deploy without code changes; the jakarta.\* 
 
 This release also ships a critical security fix across every version: Azul Payara Community 7.2026.5, and Azul Payara 6.38.0, 5.87.0, and 4.1.2.191.55.
 
-A critical security fix, patched across every supported branch
---------------------------------------------------------------
+## A critical security fix, patched across every supported branch
 
 A critical security issue has been addressed across Azul Payara Community 7.2026.5 and Azul Payara 6.38.0, 5.87.0, and 4.1.2.191.55.
 
 The fix lands in Azul Payara branches dating back to 4.1.2. Shipping security patches across the full supported lifecycle, not only the latest major release, is one of the practices that long-running Azul customers rely on; this release is a clear example. Azul is a registered CVE Numbering Authority (CNA) under CISA/DHS oversight, with patches backported to all supported versions on a published monthly schedule.
 
-Azul Payara Community 7.2026.5
-------------------------------
+## Azul Payara Community 7.2026.5
 
 Community 7.2026.5 tracks the Payara 7 development line and ships additional fixes ahead of the Enterprise cadence.
 
@@ -70,8 +68,7 @@ Community 7.2026.5 tracks the Payara 7 development line and ships additional fix
 
 Docker JDK images refreshed to 21.0.11 and 25.0.3. Dependency updates for Jakarta Faces, MicroProfile Config, Project Reactor, and other libraries.\*\*\*\*
 
-Azul Payara 6.38.0: Continued Jakarta EE 10 Support
----------------------------------------------------
+## Azul Payara 6.38.0: Continued Jakarta EE 10 Support
 
 Azul Payara 6.38.0 continues the Jakarta EE 10 and MicroProfile 6.1 line for customers who are not yet on Payara 7.
 
@@ -89,8 +86,7 @@ Azul Payara 6.38.0 continues the Jakarta EE 10 and MicroProfile 6.1 line for cus
 
 Docker JDK images refreshed for JDK 21, 17, 11, and 8 (21.0.11, 17.0.19, 11.0.31, 8u492). Dependency updates for Mojarra and Project Reactor.
 
-Azul Payara 5.87.0: Jakarta EE 8 Support Continues
---------------------------------------------------
+## Azul Payara 5.87.0: Jakarta EE 8 Support Continues
 
 Azul Payara 5.87.0 retains the javax.*namespace, Jakarta EE 8, and MicroProfile 4.1 platform for customers running long-lived applications that have not yet migrated to the jakarta.* namespace.
 
@@ -108,8 +104,7 @@ Azul Payara 5.87.0 retains the javax.*namespace, Jakarta EE 8, and MicroProfile 
 
 Docker JDK images refreshed for JDK 21, 17, 11, and 8 (21.0.11, 17.0.19, 11.0.31, 8u492).
 
-Azul Payara 4.1.2.191.55: Legacy Branch Still Maintained
---------------------------------------------------------
+## Azul Payara 4.1.2.191.55: Legacy Branch Still Maintained
 
 Azul Payara 4.1.2.191.55 receives security updates and targeted bug fixes for customers still running on the Payara 4 branch.
 
@@ -118,15 +113,13 @@ Azul Payara 4.1.2.191.55 receives security updates and targeted bug fixes for cu
 * Fix Payara failing to start OpenMQ Broker in a separate JVM when using LOCAL mode on JDK 11 or later
 * Fix unclosed streams warnings from OpenMQ
 
-Looking Ahead
--------------
+## Looking Ahead
 
 With Payara 7 GA, the Azul Payara product line now covers the full enterprise Java surface: the JDK (Azul Zulu, Core and Azul Prime), the full application server (Azul Payara Server), and the cloud-native runtime (Azul Payara Micro). All three ship under one Azul contract with monthly security patches, a long term lifecycle per major release, transparent per-vCore pricing, 24-48 hour bug fix SLAs, and 2-hour critical incident response with dedicated support engineers.
 
 Azul Payara 6, 5, and 4 continue to receive monthly security and bug-fix releases on the published schedule. Migration assessments to Azul Payara 7 are available through your Azul account team for customers planning the move.
 
-Upgrading and Feedback
-----------------------
+## Upgrading and Feedback
 
 We recommend upgrading to your version's latest release in this cycle. A critical security patch is available across every supported branch, so there is no reason to delay the upgrade based on the major-version line you run.
 

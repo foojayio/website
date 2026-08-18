@@ -25,8 +25,7 @@ In this episode, Frank Delporte talks with Hector Ventura, the creator of Floci,
 
 If you're a developer who wants fast local testing, a DevOps engineer writing Terraform, or a student learning cloud without the cost, Floci is worth a look!
 
-YouTube
--------
+## YouTube
 
 <figure class="wp-block-embed">
  <div class="wp-block-embed__wrapper">
@@ -34,8 +33,7 @@ YouTube
  </div>
 </figure>
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,22 +41,19 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guest: Hector Ventura
----------------------
+## Guest: Hector Ventura
 
 * [Foojay Author page](https://foojay.io/today/author/hector-ventura/)
 * [LinkedIn](https://www.linkedin.com/in/hectorvent/)
 
-Links
------
+## Links
 
 * On Foojay: [Introducing Floci: A High-Performance, GraalVM-Powered AWS Emulator](https://foojay.io/today/introducing-floci-a-high-performance-graalvm-powered-aws-emulator/)
 * [Floci project site](https://floci.io/)
 * [Floci on GitHub](https://github.com/hectorvent/floci)
 * [Migrate from LocalStack](https://floci.io/floci/getting-started/migrate-from-localstack/)
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guest  
 

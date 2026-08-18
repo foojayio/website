@@ -40,8 +40,7 @@ And what we can still expect in the future!
 
 {{< youtube QF9x8x8loko >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -49,21 +48,18 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests**
-----------
+## **Guests**
 
 * Helen Scott (IntelliJ IDEA, [@HelenJoScott](https://twitter.com/HelenJoScott))
 * Martin Lippert (Eclipse, Spring Tools Lead at VMware, [@martinlippert](https://twitter.com/martinlippert))
 * Nick Zhu (Microsoft VSC, [@nickzhu9](https://twitter.com/NickZhu9))
 * Geertjan Wielenga (Apache NetBeans, [@GeertjanW](https://twitter.com/GeertjanW))
 
-**Host**
---------
+## **Host**
 
 * Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
-**Content**
------------
+## **Content**
 
 * 00'00 Intro and music
 * 00'15 About the topic of this podcast

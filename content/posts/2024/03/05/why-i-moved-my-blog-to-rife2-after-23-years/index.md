@@ -58,7 +58,3 @@ There are a few things I learned along the way...
 It's been almost a year, and I couldn't be any happier. Everything works very smoothly, and is low-maintenance. I've even added quite a few new backend features.
 
 If you're going to start a new project, I would highly recommend giving [RIFE2](https://rife2.com/) a try. You won't regret it. I sure haven't.
-
-<br />
-
-<br />

@@ -41,5 +41,3 @@ This talk is designed to be approachable and realistic, especially for developer
 {{< youtube 6orjtcu3Dhw >}}
 
 `
-
-<br />

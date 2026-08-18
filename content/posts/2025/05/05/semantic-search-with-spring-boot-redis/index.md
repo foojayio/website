@@ -27,8 +27,6 @@ frozen: false
 
 {{< youtube o3XN4dImESE >}}
 
-<br />
-
 A traditional searching system works by matching the words a user types with the words stored in a database or document collection. It usually looks for exact or partial matches without understanding the meaning behind the words.
 
 Semantic searching, on the other hand, tries to understand the meaning behind what the user is asking. **It focuses on the concepts, not just the keywords,** making it much easier for users to find what they really want.
@@ -43,12 +41,9 @@ Today, **we're gonna build a vector similarity search app that lets users find m
 
 To do that, we'll build a Spring Boot app from scratch and plug in **Redis OM Spring**. It'll handle turning our data into vectors, storing them in Redis, and running fast vector searches when users send a query.
 
-Redis as a Vector Database
---------------------------
+## Redis as a Vector Database
 
 {{< youtube Yhv19le0sBw >}}
-
-<br />
 
 In the last 15 years, Redis became the foundational infrastructure for realtime applications. Today, with Redis 8, it's commited to becoming the foundational infrastructure for AI applications as well.
 
@@ -56,8 +51,7 @@ Redis 8 not only turns the community version of Redis into a Vector Database, bu
 
 Learn more: <https://redis.io/blog/searching-1-billion-vectors-with-redis-8/>
 
-**Redis OM Spring**
--------------------
+## **Redis OM Spring**
 
 To allow our users and customers to take full advantage of everything Redis can do --- with the speed Redis is known for --- we decided to implement **Redis OM Spring**, a library built on top of Spring Data Redis.
 
@@ -65,8 +59,7 @@ Redis OM Spring allows our users to easily communicate with Redis, model their e
 
 Redis OM Spring on GitHub: <https://github.com/redis/redis-om-spring>
 
-Dataset
--------
+## Dataset
 
 The dataset we'll be looking is a catalog of thousands of movies. Each of these movies has metadata such as its title, cast, genre, year, and synopsis. The JSON file representing this dataset can be found in the repository that accompanies this article.
 
@@ -93,9 +86,7 @@ Sample:
 }
 ```
 
-
-Building the Application
-------------------------
+## Building the Application
 
 Our application will be built using Spring Boot with Redis OM Spring. **It will allow movies to be searched by their synopsis based on semantic search rather than keyword matching.** Besides that, our application will also allow its users to perform **hybrid search** , **a technique that combines vector similarity with traditional filtering and sorting.**
 
@@ -120,7 +111,6 @@ org.springframework.ai
 spring-ai-transformers
 1.0.0-M6
 ```
-
 
 ### 2. Define the Movie entity
 
@@ -178,13 +168,11 @@ public class Movie {
 }
 ```
 
-
 In this example, we're using OpenAI's embedding model that requires an OpenAI API Key to be set in the `application.properties` file of your application:
 
 ```
 redis.om.spring.ai.open-ai.api-key=${OPEN_AI_KEY}
 ```
-
 
 If an embedding model is not specified, Redis OM Spring will use a Hugging Face's Transformers model (all-MiniLM-L6-v2) by default. In this case, make sure you match the number of dimensions in the indexed annotation to 384 which is the number of dimensions created by the default embedding model.
 
@@ -195,7 +183,6 @@ A simple repository interface that extends RedisEnhancedRepository. This will be
 ```
 public interface MovieRepository extends RedisEnhancedRepository {}
 ```
-
 
 This provides basic CRUD operations for Movie entities, with the first generic parameter being the entity type and the second being the ID type.
 
@@ -258,7 +245,6 @@ public class SearchService {
 }
 ```
 
-
 Key features of the search service:
 
 * Uses EntityStream to create a search stream for Movie entities
@@ -312,7 +298,6 @@ public class MovieService {
 }
 ```
 
-
 ### 5. Search Controller
 
 The REST controller exposes the search endpoint:
@@ -352,7 +337,6 @@ public class SearchController {
 }
 ```
 
-
 ### 6. Application Bootstrap
 
 The main application class initializes Redis OM Spring and loads data. The @EnableRedisEnhancedRepositories annotation activates Redis OM Spring's repository support:
@@ -379,7 +363,6 @@ public class Redis8DemoVectorSimilaritySearchApplication {
 }
 ```
 
-
 ### 7. Sample Requests
 
 You can make requests to the search endpoint:
@@ -388,23 +371,19 @@ You can make requests to the search endpoint:
 GET http://localhost:8082/search?text=A movie about a young boy who goes to a wizardry school
 ```
 
-
 ```
 GET http://localhost:8082/search?numberOfNearestNeighbors=1&yearMin=1970&yearMax=1990&text=A movie about a kid and a scientist who go back in time
 ```
 
-
 ```
 GET http://localhost:8082/search?cast=Dee Wallace,Henry Thomas&text=A boy who becomes friend with an alien
 ```
-
 
 **Sample request:**
 
 ```
 GET http://localhost:8082/search?numberOfNearestNeighbors=1&yearMin=1970&yearMax=1990&text=A movie about a kid and a scientist who go back in time
 ```
-
 
 **Sample response:**
 
@@ -432,13 +411,11 @@ GET http://localhost:8082/search?numberOfNearestNeighbors=1&yearMin=1970&yearMax
 }
 ```
 
-
 ```
 
 ```
 
-Wrapping up
------------
+## Wrapping up
 
 And that's it --- you now have a working semantic search app using Spring Boot and Redis.
 

@@ -88,7 +88,6 @@ public class RegionControl extends Region {
     private Consumer<MouseEvent> mouseReleasedConsumer;
 ```
 
-
 We have defined an enum for the three different states and for each state we also created a PseudoClass. In addition to these, we also created PseudoClasses for the hovered and pressed state.
 
 For hovered and type we also created properties to be able to get/set these from outside of the control.
@@ -140,7 +139,6 @@ public RegionControl() {
     }
 ```
 
-
 In the constructor, you can see that we set the pseudo class for the type in the invalidated() method of the type property. With this you can also change the type at runtime and it will apply the correct style (even if this is not really needed here).
 
 To make sure the initial type will be set correctly, we call the pseudoClassStateChanged method for the close, minimize and zoom pseudo classes with the given type parameter from the constructor.
@@ -185,7 +183,6 @@ private void initGraphics() {
         });
     }
 ```
-
 
 As already mentioned you can see in the initGraphics() method that we set up a Circle and a Region which we add to our control. To make sure the styles in our CSS file will be used we add the "region-based" style class to our control, the "circle" class to the Circle and the "symbol" class to the Region which should show the symbol.
 
@@ -269,7 +266,6 @@ More interesting is the CSS file that we need to create because it contains all 
 }
 ```
 
-
 As mentioned earlier we know all colors that we need and for this reason we can directly define them in our CSS file. We have colors for the different states (-RED, -YELLOW, -GREEN), for the disabled state (-GRAY) and for the symbol (-DARK_GRAY).
 
 The original MacOS button looks like it either has an inner shadow or a border that is a bit darker than the fill color. For this reason we set the stroke to 0.5px. This also means we have to define a stroke color that should be a bit darker than the fill color.
@@ -279,7 +275,6 @@ This can easily be done in JavaFX CSS by using the derive method. If we would li
 ```css
 -fx-stroke: derive(-RED, -10%);
 ```
-
 
 This code will create a color based on the color defined for -RED which is 10% darker than the given color.
 

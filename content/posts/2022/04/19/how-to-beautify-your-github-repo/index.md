@@ -26,8 +26,7 @@ You or your company are probably using GitHub.
 
 In this article, I want to highlight some files that you can use to beautify your GitHub repository and make it welcoming and inspiring to those who stop by.
 
-README
-------
+## README
 
 I hope that by now, everybody is familiar with READMEs. If you place a README file at the root of your repo, GitHub will display its content on the repo's homepage.
 
@@ -48,8 +47,7 @@ Additionally, one can set a README for an organization. You first need to create
 
 For more details, check the [documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
 
-LICENSE
--------
+## LICENSE
 
 If you want people to use your code, you should tell them under which terms they can use it. It's precisely the goal of licensing your code. Traditionally, most packages have a `LICENSE` (or `LICENSE.txt`) file at their root. GitHub has adopted this practice.
 
@@ -73,8 +71,6 @@ You can choose one to check its content. GitHub displays its permissions, limita
 
 <img fetchpriority="high" decoding="async" class="aligncenter wp-image-55345 size-medium" src="license-properties-700x226.jpg" alt="" width="700" height="226">
 
-<br />
-
 You can now *Review and submit*. At this point, you are faced with three choices:
 
 1. *Cancel changes* cancels everything
@@ -85,12 +81,9 @@ After adding the license, GitHub displays it on the right of the repository's pa
 
 <img decoding="async" class="aligncenter wp-image-55346 size-medium" src="cite-sidebar-548x510.jpg" alt="" width="548" height="510">
 
-<br />
-
 For more details, check the [documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 
-CODEOWNERS
-----------
+## CODEOWNERS
 
 GitHub automatically adds the configured code owners to pull requests. You define them in a `CODEOWNERS` file, whose format is somewhat similar to `.gitignore`.
 
@@ -123,10 +116,7 @@ GitHub skips invalid configuration lines. To verify, you can use the UI:
 
 <img decoding="async" class="size-medium wp-image-55347 aligncenter" src="check-codeowners-700x291.jpg" alt="" width="700" height="291">
 
-<br />
-
-SECURITY
---------
+## SECURITY
 
 Projects want people to report security issues. But the communication channel(s) needs to be private so that hackers don't learn about the issue before it can be mitigated, fixed, or both. For this, GitHub offers a custom SECURITY file:
 
@@ -147,8 +137,7 @@ GitHub provides a default Markdown template, but of course, you can choose to ch
 
 The newly-created file appears in *Security \> View security policy* . Here's a [sample](https://github.com/ajavageek/beautifygithub/security/policy) in Asciidoctor format.
 
-Citations
----------
+## Citations
 
 If your project is good, other projects will likely use it. The project may be cited in academic works, even more so if it's of an academic nature itself. The CITATION file allows you to answer the following questions:
 
@@ -175,15 +164,11 @@ repository-code: 'https://github.com/ajavageek/beautifygithub'
 license: Unlicense
 ```
 
-
 After adding the file, a new *Cite this repository* link appears on the right sidebar. You can choose which format you want to copy, APA or BibTeX when you click it.
 
 <img loading="lazy" decoding="async" class="aligncenter wp-image-55348 size-medium" src="cite-sidebar-1-548x510.jpg" alt="" width="548" height="510">
 
-<br />
-
-Sponsorship
------------
+## Sponsorship
 
 Last but not least, let's look at how to configure sponsorship. If you provide value to third parties via your Open Source project, it makes sense to let them reward you. Note that you shouldn't count on it, though, or you're in for a surprise.
 
@@ -196,12 +181,9 @@ custom:
   - https://paypal.me/nicofrankel
 ```
 
-
 The preview tab validates your input.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-55349 aligncenter" src="validate-funding-571x510.jpg" alt="" width="571" height="510">
-
-<br />
 
 In this case, the validation fails by telling that user `nfrankel` (me) didn't enroll in the GitHub sponsors program.
 
@@ -209,8 +191,7 @@ A new "Sponsor this project" section appears on the right sidebar on the repo's 
 
 You need to check the "Sponsorships" checkbox in *Settings* for it to appear. Thus, you can prepare everything in the repo and only activate it when you're ready.
 
-Conclusion
-----------
+## Conclusion
 
 GitHub offers multiple ways to improve your repository's display and usability. A LICENSE and a README should be mandatory for any repository you want to share with others. Besides them, you should provide the other beautifications listed in this post.
 

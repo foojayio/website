@@ -35,8 +35,7 @@ Jamie Coleman then made sure there were no soggy bottoms (one for the Mary Berry
 
 So I guess now it's time for me to add the covering to the layers, some glacé cherries, and maybe some of those ornate flowers made of icing, who knows!
 
-Tier 1.... The large base layer. Funfetti.
-------------------------------------------
+## Tier 1.... The large base layer. Funfetti.
 
 Vulnerabilities! Nasty things aren't they?! As nasty as funfetti cake, [ranked one of the world's worst cake flavours](https://www.tastingtable.com/1155106/ranking-popular-cake-flavors-from-worst-to-best/), controversial, I know! They've been around for a long time, almost as long as computers. Steve also mentioned earlier that they are ever increasing and getting difficult to manage.  
 
@@ -52,8 +51,7 @@ That's a statistic that I read as saying, assuming you do everything right, it i
 
 OK, let's go to the next layer. As for this cake, it's OK, you can spit it out and put it in the bin.
 
-Tier 2.... The middle layer.. Chocolate.
-----------------------------------------
+## Tier 2.... The middle layer.. Chocolate.
 
 Now we get to a good one! Chocolate cake tastes great and is simple to make! Much like good security tools!   
 
@@ -69,8 +67,7 @@ While tools that stop vulnerabilities getting into your local development reposi
 
 Goodies make our lives easier and hopefully catch a lot of the bad things before we hit our staging servers, let alone production deployment! If only they actually tasted like chocolate cake...
 
-Tier 3.... The top layer.. Genoise Sponge.
-------------------------------------------
+## Tier 3.... The top layer.. Genoise Sponge.
 
 Now we go for a showstopper! Sophisticated, rich and tasty! Mmmmmmm!
 
@@ -111,8 +108,4 @@ I hope over the series we have highlighted the problem of vulnerabilities, highl
 
 If you're thinking that this might be hard, then good! Security is hard, it's definitely not a piece of cake, but hopefully these tips will make it a little easier. If you still feel that this might not be for you though, then I urge you to reconsider. The [US National Cyber Strategy](https://blog.sonatype.com/white-house-national-cybersecurity-strategy-landmark-action-for-a-critical-threat) released last week might be a moonshot and wishlist for now, but already we have the Executive Order in the US, the forthcoming Cyber Resilience Act in the EU, the update of secure coding to ISO 27001:2022 which may already make this your problem, even if you don't want it to be.
 
-So why not get ahead of the curve?  
-
-<br />
-
-<br />
+So why not get ahead of the curve?

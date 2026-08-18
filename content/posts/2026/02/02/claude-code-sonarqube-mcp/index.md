@@ -30,10 +30,7 @@ But what if you didn't have to leave? What if your AI assistant in the terminal 
 
 Today, I want to show you a powerful integration: **Claude Code** combined with the **SonarQube MCP Server** . It is the "pure integration" we have been waiting for to keep **Code Quality** high without ever touching the mouse.
 
-
-
-**First things first: What is Claude Code? 🤖**
------------------------------------------------
+## **First things first: What is Claude Code? 🤖**
 
 If you haven't tried it yet, Claude Code, developed by Anthropic, is an agentic, terminal-based AI coding tool that helps with coding and is based on natural language prompts.
 
@@ -43,17 +40,13 @@ It basically turns your terminal into a conversational agentic coding partner. Y
 
 ![](Screenshot-2026-02-02-at-15.07.01-656x510.png)
 
-**The Old Way: The Context-Switching Tax 💸**
----------------------------------------------
+## **The Old Way: The Context-Switching Tax 💸**
 
 Typically, a developer's workflow looks like this: Code in your IDE, commit the changes, and then break flow to check the full spectrum of issues on the SonarQube Server or Cloud dashboard.
 
 Interacting with those issues---analyzing the details, setting statuses, or just reviewing the documentation---requires navigating the web UI. You then come back to the IDE to apply the fixes. This back-and-forth context switching happens multiple times, constantly breaking your coding flow, increasing frustration, and adding unnecessary friction to the development phase. You lose focus, and productivity drops.
 
-
-
-**The Missing Piece: SonarQube MCP Server 🧩**
-----------------------------------------------
+## **The Missing Piece: SonarQube MCP Server 🧩**
 
 Claude Code is smart, but it doesn't know *your* specific project rules or do the deep static analysis that **SonarQube** has been perfecting for years.
 
@@ -69,10 +62,7 @@ Because now, the workflow is seamless. You stay in the CLI. Claude Code generate
 
 ![](Screenshot-2026-02-02-at-15.18.03-539x510.png)
 
-
-
-**Close the AI trust gap with a "vibe, then verify" approach 🔄**
------------------------------------------------------------------
+## **Close the AI trust gap with a "vibe, then verify" approach 🔄**
 
 The main use case here is simple but powerful: **Verify before you trust.**
 
@@ -100,8 +90,6 @@ claude mcp add sonarqube \
 Once this is running, Claude will have [25 SonarQube tools](https://github.com/SonarSource/sonarqube-mcp-server?tab=readme-ov-file#tools) in its belt that will allow the Agent to interact with SonarQube to get issues, quality gate status, analyze snippets, and more.
 
 ![](https://foojay.io/wp-content/uploads/2026/02/Screenshot-2026-02-02-at-15.46.22-700x470.png)
-
-
 
 ### **Step 2: The Action (Java Example) ☕**
 
@@ -171,10 +159,7 @@ public class SecurityUtil {
 
 Do you see what happened? You didn't leave the terminal. You didn't have to be a security expert. The **SonarQube MCP server** caught the weak algorithm and the encoding issue, and Claude Code applied the fix immediately.
 
-
-
-**Interacting with your Project 🏗️**
--------------------------------------
+## **Interacting with your Project 🏗️**
 
 The integration isn't just for new snippets. Since you are already in the command line, you can query your existing project status without opening the dashboard.
 
@@ -188,10 +173,7 @@ Claude Code queries the SonarQube Cloud/Server via MCP and prints the answer rig
 
 ![](Screenshot-2026-02-02-at-15.50.31-700x470.png)
 
-
-
-**Why this matters**
---------------------
+## **Why this matters**
 
 We developers love tools that make us faster. But speed without control is dangerous.
 

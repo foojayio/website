@@ -27,13 +27,11 @@ I talked with the people behind these conferences and developers at different st
 
 You'll hear practical advice about what makes a good CFP, why conference organizers actively want new speakers, and how the Java community is set up to help you get started. Whether you're thinking about submitting your first talk or curious about what goes into organizing a conference, there's something here for you.
 
-YouTube
--------
+## YouTube
 
 {{< youtube PYp0eHS3va4 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction of topic and guests
 

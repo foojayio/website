@@ -97,7 +97,6 @@ There are two ways of integrating the automatic version check in your current pi
 </build>
 ```
 
-
 You need to run at least the package phase to be able to have valid results of the semver-check
 
 The output of this run will be something like this:
@@ -115,7 +114,6 @@ Downloaded from central: https://.../some-module/0.4.1/some-module-core-0.4.1.ja
 [INFO] File META-INF/MANIFEST.MF has been changed
 [INFO] Determined SemVer type as patch and is currently none, next version should be: 0.4.2
 ```
-
 
 The output gives us a summary of what the next version should be and a summary of why. Please note that the plugin stops searching for *patch* changes if it already detects a *minor* update for example. This keeps execution time as low as possible.
 

@@ -25,8 +25,7 @@ frozen: false
 
 We're excited to announce the release of the BoxLang NeoVim Plugin - a comprehensive syntax highlighting solution designed specifically for BoxLang developers working in Vim and NeoVim environments. This isn't a port or adaptation of existing CFML syntax files; it's a ground-up implementation built for BoxLang's modern feature set. Coming soon as well will be our runners, syntax validators, and integration with our LSP for live previews, insights, and much more.
 
-Why a Dedicated BoxLang Plugin?Why a Dedicated BoxLang Plugin?
---------------------------------------------------------------
+## Why a Dedicated BoxLang Plugin?Why a Dedicated BoxLang Plugin?
 
 ![](vim-boxlang-class-400x510.png)
 
@@ -43,8 +42,7 @@ BoxLang is a modern dynamic JVM language that combines features from Java, CFML,
 * Exception Marking
 * So much more
 
-Dual-Syntax Architecture
-------------------------
+## Dual-Syntax Architecture
 
 BoxLang supports two complementary syntax modes, and our plugin provides complete support for both:
 
@@ -102,7 +100,6 @@ class UserService {
     }
 }
 ```
-
 
 2. BoxLang Templates (`.bxm`)
 -----------------------------
@@ -163,9 +160,7 @@ Markup-based syntax for views, layouts, and content generation:
 </bx:script>
 ```
 
-
-Feature Highlights
-------------------
+## Feature Highlights
 
 ### Comprehensive Language Support
 
@@ -202,7 +197,6 @@ var calculation = "Result: #2 + 2#";
 var nested = "Status: #user.isActive() ? 'Active' : 'Inactive'#";
 ```
 
-
 In templates:
 
 ```java
@@ -210,7 +204,6 @@ In templates:
     #user.displayName#
 </div>
 ```
-
 
 ### Code Folding Support
 
@@ -230,8 +223,7 @@ Folding commands:
 * `zo` - Open fold under cursor
 * `zc` - Close fold under cursor
 
-Installation
-------------
+## Installation
 
 ### Lazy.nvim (Recommended for NeoVim)
 
@@ -249,7 +241,6 @@ return {
 }
 ```
 
-
 ### vim-plug
 
 Add to your `.vimrc` or `init.vim`:
@@ -257,7 +248,6 @@ Add to your `.vimrc` or `init.vim`:
 ```java
 Plug 'ortus-boxlang/vim-boxlang'
 ```
-
 
 Then run `:PlugInstall`
 
@@ -268,7 +258,6 @@ Add to your `.vimrc`:
 ```java
 Plugin 'ortus-boxlang/vim-boxlang'
 ```
-
 
 Then run `:PluginInstall`
 
@@ -293,9 +282,7 @@ cp -r vim-boxlang/syntax ~/AppData/Local/nvim/
 cp -r vim-boxlang/ftdetect ~/AppData/Local/nvim/
 ```
 
-
-File Extension Detection
-------------------------
+## File Extension Detection
 
 The plugin automatically detects BoxLang files based on extensions:
 
@@ -313,21 +300,17 @@ If automatic detection fails, manually set the filetype:
 :setfiletype boxlangTemplate
 ```
 
-
 Or add a modeline to your file:
 
 ```java
 // vim: set filetype=boxlang:
 ```
 
-
 ```java
 <!--- vim: set filetype=boxlangTemplate: --->
 ```
 
-
-Customization
--------------
+## Customization
 
 Personalize syntax colors by adding to your `.vimrc` or `init.vim`:
 
@@ -350,9 +333,7 @@ hi boxlangFunction ctermfg=yellow guifg=#FFF500
 hi boxlangComment ctermfg=darkgray guifg=#666666
 ```
 
-
-Advanced Configuration
-----------------------
+## Advanced Configuration
 
 ### Enable Folding
 
@@ -362,7 +343,6 @@ set foldenable
 set foldmethod=syntax
 set foldlevelstart=10
 ```
-
 
 ### BoxLang-Specific Keybindings
 
@@ -382,9 +362,7 @@ endfunction
 nnoremap <leader>bt :call ToggleBoxLangSyntax()<CR>
 ```
 
-
-What's Next?
-------------
+## What's Next?
 
 This release establishes the foundation for BoxLang's Vim/NeoVim ecosystem. Future enhancements include:
 
@@ -394,8 +372,7 @@ This release establishes the foundation for BoxLang's Vim/NeoVim ecosystem. Futu
 * **Enhanced Folding**: Context-aware folding for complex structures
 * **Semantic Highlighting**: Advanced token-based coloring using TreeSitter
 
-Community \& Support
---------------------
+## Community \& Support
 
 The BoxLang NeoVim plugin is professionally maintained by Ortus Solutions with community contributions welcome:
 
@@ -404,8 +381,7 @@ The BoxLang NeoVim plugin is professionally maintained by Ortus Solutions with c
 * **Issues \& Feature Requests**: GitHub Issues
 * **Community Forums** : <https://community.ortussolutions.com>
 
-Try BoxLang Today
------------------
+## Try BoxLang Today
 
 If you haven't explored BoxLang yet, now is the perfect time:
 
@@ -415,8 +391,7 @@ If you haven't explored BoxLang yet, now is the perfect time:
 * **Examples** : <https://github.com/ortus-boxlang/boxlang-examples>  
   BoxLang combines the rapid development capabilities of dynamic languages with the performance and reliability of the JVM. Whether you're building web applications, serverless functions, CLI tools, or enterprise systems, BoxLang provides the modern syntax and features you need.
 
-Conclusion
-----------
+## Conclusion
 
 The BoxLang NeoVim plugin delivers professional-grade syntax highlighting specifically designed for BoxLang's modern feature set. With comprehensive language support, dual-syntax architecture, and intelligent HTML integration, it provides the foundation for productive BoxLang development in Vim and NeoVim environments.
 

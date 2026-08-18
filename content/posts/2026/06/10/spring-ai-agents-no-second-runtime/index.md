@@ -25,8 +25,6 @@ frozen: false
 
 ![](hero-700x350.jpg)
 
-<br />
-
 *A JVM-native runtime for building, governing and operating AI agents on existing Spring infrastructure.*
 
 Every time a Spring team decides to add AI agents to a production system, the story tends to follow the same arc. A few prototypes are built, several frameworks are evaluated, and then a new reality emerges: the project is no longer just about adding agents. It is about operating a new platform.
@@ -41,10 +39,7 @@ For most Spring teams, the challenge is not infrastructure. They already have se
 
 What is missing is not a new platform. It is a runtime that connects agent execution directly to the operational capabilities Spring teams already use every day.
 
-
-
-What agents actually need in production
----------------------------------------
+## What agents actually need in production
 
 Forget the demos. In production, an agent system needs to answer six questions:
 
@@ -59,10 +54,7 @@ Most agent runtimes introduce their own operational model for these concerns. A 
 
 What is missing is a runtime that connects those existing capabilities directly to agent execution.
 
-
-
-What Spring already gives you
------------------------------
+## What Spring already gives you
 
 |  Production concern   | Existing Spring capability |
 |-----------------------|----------------------------|
@@ -82,10 +74,7 @@ What Spring already gives you
 
 None of this requires a second operational stack. What it requires is a runtime that can build, govern and operate agents using the capabilities Spring teams already have.
 
-
-
-BUILD: Create agent teams
--------------------------
+## BUILD: Create agent teams
 
 [AgentFlow4J](https://github.com/datallmhub/agentflow4j) is that runtime. It gives you the building blocks to create agents and compose them into multi-agent systems.
 
@@ -122,13 +111,9 @@ AgentGraph graph = AgentGraph.builder()
     .build();
 ```
 
-
 Three agents, dynamic routing, typed state shared across nodes. Each agent is a standard Spring bean.
 
-
-
-GOVERN: Budget, approvals, permissions, checkpoints
----------------------------------------------------
+## GOVERN: Budget, approvals, permissions, checkpoints
 
 Agents are not implicitly trusted. AgentFlow4J lets you define exactly what each agent can call, what it can spend, when a human must approve, and how execution state is preserved across restarts.
 
@@ -148,13 +133,9 @@ AgentGraph graph = AgentGraph.builder()
     .build();
 ```
 
-
 The `processor` agent cannot run until a human approves. The graph cannot spend more than $0.50 per run. If the server restarts mid-execution, the next run picks up from the last completed node. No Python. No YAML DSL. No new infrastructure. The datasource is the one your Spring Boot application already configures.
 
-
-
-OPERATE: Observe, recover and run safely
-----------------------------------------
+## OPERATE: Observe, recover and run safely
 
 ### Retry that understands cost
 
@@ -170,7 +151,6 @@ RetryPolicy policy = RetryPolicy.exponential(3, Duration.ofSeconds(2))
             : FailureClassification.TRANSIENT));
 ```
 
-
 `TRANSIENT` means retry. `PERMANENT` means fail fast. `OVER_BUDGET` means route to a cheaper fallback agent instead of retrying. The retry policy is no longer blind to cost.
 
 ### Operational sovereignty
@@ -181,10 +161,7 @@ Operational sovereignty is not only about where models run. It is also about how
 
 A JVM-native agent runtime lets organizations build governed agent systems without introducing a second execution platform. Spring AI supports Ollama for local inference, so the agent layer does not need to reach outside the perimeter. The security controls, observability stack, and deployment model already in place stay as the single source of operational truth.
 
-
-
-One stack, one runtime
-----------------------
+## One stack, one runtime
 
 There is no second runtime to deploy, no second security model to audit, no second monitoring stack to maintain. AgentFlow4J integrates natively into an ecosystem millions of developers already operate, not as a Spring abstraction layer, but as a dedicated JVM-native runtime for governed agent execution.
 
@@ -200,10 +177,7 @@ If your organization already runs on Spring, the goal is not to introduce anothe
 
 If you are an architect or open-source contributor interested in what a production-grade JVM agent runtime looks like at the language level, the governance model, the checkpoint contract, the failure classification API, that conversation lives on [GitHub](https://github.com/datallmhub/agentflow4j).
 
-
-
-Getting started
----------------
+## Getting started
 
 AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
 
@@ -221,7 +195,6 @@ AgentFlow4J is available on JitPack, built on Java 17+ and Spring AI 1.0:
     <version>v0.7.0</version>
 </dependency>
 ```
-
 
 * **[GitHub](https://github.com/datallmhub/agentflow4j)**: source, docs, samples
 * **[Cookbook](https://github.com/datallmhub/agentflow4j-cookbook)**: six self-contained Maven recipes: RAG, ticket triage, web research, Slack bot, batch processing, cost-aware routing

@@ -10,8 +10,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  
 [What's Next? \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next)
 
@@ -25,7 +23,6 @@ First, we need to add extra imports:
 import java.util.IntSummaryStatistics;
 import java.util.stream.Collectors;
 ```
-
 
 And we change the main method to this:
 
@@ -49,7 +46,6 @@ public static void main (String[] args) {
 }
 ```
 
-
 Of course, we need to add the methods "countFirstName" and "getAgeStats" which are used in this extra code in the "main"-method:
 
 ```java
@@ -64,7 +60,6 @@ public static IntSummaryStatistics getAgeStats(List<Person> persons) {
         .summaryStatistics();
 }
 ```
-
 
 As you see, we start by converting the list into a stream, by adding ".stream()" behind the "persons"-list. We can further handle that stream step-by-step to obtain certain results.
 
@@ -87,8 +82,6 @@ As you see, we start by converting the list into a stream, by adding ".stream()"
  </div>
 </div>
 
-
-
 When we run this same application again now, we get this output:
 
 ```
@@ -103,9 +96,6 @@ Minimum age: 18
 Maximum age: 65
 Average age: 42.78
 ```
-
-
-
 
 Java 25 version:
 
@@ -193,7 +183,5 @@ public class ReadTextFile {
 }
 ```
 
-
-  
 [\<\< Reading a Text File](https://foojay.io/java-quick-start/quick-start-tutorial/reading-a-text-file/)  
 [What's Next? \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/whats-next)

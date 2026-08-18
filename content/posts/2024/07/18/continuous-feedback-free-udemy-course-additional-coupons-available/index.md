@@ -19,8 +19,7 @@ frozen: false
 
 We've added extra coupons for our free Continuous Feedback Udemy course! We're glad to see it's been valuable for some of you.
 
-Introduction to Continuous Feedback
------------------------------------
+## Introduction to Continuous Feedback
 
 What do you know about the code changes that were just introduced into the codebase?
 
@@ -52,7 +51,3 @@ Who is the course for:
 [Why is OpenTelemetry important for Java applications](https://digma.ai/why-is-opentelemetry-important-for-java-applications/ "Why is OpenTelemetry important for Java applications")
 
 We would love to hear your feedback on how it went or if you have any questions/suggestions. Join our [community](https://continuous-feedback.slack.com/ssb/redirect#/shared-invite/email).
-
-<br />
-
-<br />

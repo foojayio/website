@@ -64,7 +64,6 @@ public void newOrderSingle() {
 }
 ```
 
-
 As in previous examples, if the output is incorrect, we can quickly see this in the data.
 
 ### What do we see when a test fails?

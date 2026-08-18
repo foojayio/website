@@ -26,8 +26,7 @@ There's a lot we can learn from the people who have achieved this!
 
 {{< youtube qzDjJljbN6w >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -35,8 +34,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests**
-----------
+## **Guests**
 
 * Otavio Santana
   * <https://twitter.com/otaviojava>
@@ -52,8 +50,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://code4.life/>
   * Free book: <http://jav.mn/bestyear>
 
-Podcast host
-------------
+## Podcast host
 
 * Frank Delporte
   * [@\[email protected\]](https://foojay.social/@frankdelporte)
@@ -61,15 +58,13 @@ Podcast host
 
 ![](podcast-guests-brazil-jug-1024x577.png)
 
-Links
------
+## Links
 
 * <http://soujava.org.br/>
 * <https://www.meetup.com/SouJava/>
 * <https://en.wikipedia.org/wiki/SouJava>
 
-Content
--------
+## Content
 
 * 00'00 Intro
 * 00'26 Introduction of the guests

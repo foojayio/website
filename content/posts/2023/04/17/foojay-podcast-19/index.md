@@ -36,8 +36,7 @@ Today we are talking to people who achieved such a transition and became famous 
 
 {{< youtube FDOFRTj1UVI >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -45,8 +44,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Tim te Beek
   * <https://twitter.com/TimteBeek>
@@ -58,8 +56,7 @@ Guests
   * <https://twitter.com/lukaseder>
   * <https://www.jooq.org/>
 
-Podcast host
-------------
+## Podcast host
 
 * Frank Delporte
   * <https://twitter.com/FrankDelporte>
@@ -67,8 +64,7 @@ Podcast host
 
 ![](podcast-guests-rich-and-famous-1024x577.png)
 
-Content
--------
+## Content
 
 * 00'00 Intro
 * 00'31 Introduction of the guests

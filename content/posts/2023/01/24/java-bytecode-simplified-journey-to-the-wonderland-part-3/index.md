@@ -38,7 +38,6 @@ public class Greetings {
 }
 ```
 
-
 Let's say we have this class and would like to add a method to it but through bytecode manipulation.
 
 ```java
@@ -90,7 +89,6 @@ public class BytecodeInjector {
 }
 ```
 
-
 In this code, we had a class called `Greetings`. We wanted to add a new method. To do that, we had to read the original class into a byte array, import it into a `ClassPool`, and then modify it by adding a new method. Then, the modified class is written back to a byte array and loaded into the JVM using a custom `ClassLoader`. Finally, the new method is invoked on an instance of the modified class.
 
 ```java
@@ -103,13 +101,11 @@ public class MyClassLoader extends ClassLoader {
 }
 ```
 
-
 If we run the above class, we will see that the functionality has been added to the Greetings class and also executed. It will print:
 
 ```java
 Hello, world!
 ```
-
 
 There is also a program known as "[Byte Buddy](https://bytebuddy.net/)" and we can make use of it to do a similar thing.
 
@@ -138,7 +134,6 @@ public class MyAgent {
 }
 ```
 
-
 And the `TimerAdvice`class is here:
 
 ```java
@@ -164,7 +159,6 @@ public class TimerAdvice {
 }
 ```
 
-
 The full source code is available here: <https://github.com/rokon12/bytecode-tutorials>
 
 Once we've built it and generated a jar, we can use it in the CLI by issuing the following command:
@@ -172,7 +166,6 @@ Once we've built it and generated a jar, we can use it in the CLI by issuing the
 ```
 java -javaagent:myagent-1.0-SNAPSHOT.jar MyAwesomeJavaProgram
 ```
-
 
 The `MyAwesomeJavaProgram` looks like this:
 
@@ -192,7 +185,6 @@ public class MyAwesomeJavaProgram {
 }
 ```
 
-
 Once we run it in the CLI, we will get the output as follows:
 
 ```
@@ -202,7 +194,6 @@ Method public static int MyAwesomeJavaProgram.doCalculation() took 41ms
 887459712
 Method public static void MyAwesomeJavaProgram.main(java.lang.String[]) took 45ms
 ```
-
 
 Here are some libraries for manipulating Java bytecode:
 

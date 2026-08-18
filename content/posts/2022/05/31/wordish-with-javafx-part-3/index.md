@@ -47,8 +47,7 @@ Before we start, here's an example screenshot of Wordish.
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
-Part 3: JavaFX Controller Code
-------------------------------
+## Part 3: JavaFX Controller Code
 
 Let's now turn our attention to the controller code that maintains game state and responds to user input with appropriate updates to the UI. We'll first examine the idea of sharing data between views.
 
@@ -118,13 +117,11 @@ public class GameStatus {
 }
 ```
 
-
 In both **WordishController.java** and **StatsController.java**, we access the shared GameStatus instance with the following.
 
 ```java
 private static final GameStatus gameStatus = GameStatus.getInstance();
 ```
-
 
 **Note** : See **[GameStatus.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/GameStatus.java)** , **[WordStats.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/WordStats.java)** , and **[LetterState.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/model/LetterState.java)** for the above described code. ***Bonus***: LetterState uses the Java 17 record feature.
 
@@ -149,7 +146,6 @@ statsButton.disableProperty().bind(gameReset.not());
 infoButton.disableProperty().bind(gameReset.not());
 ```
 
-
 Likewise, we bind the `disable` property of the Enter and Delete buttons and each of the KeyButtons. That is, if either the row is not filled with letters or if the game is over, we disable the Enter button. Similarly, we disable the Delete button if there are no letters to delete or the game is over. And finally, if we're processing the word, the row is filled, or the game is over, we disable the buttons in the virtual keyboard.
 
 ```java
@@ -164,7 +160,6 @@ keyLetters.values()
                     .or(squarenum.isEqualTo(ROW_FILLED))
                     .or(gameOver)));
 ```
-
 
 **Note** : See **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)**.
 
@@ -204,7 +199,6 @@ private void processWord(List<LetterLabel> list) {
         animateLabelGroup(list);
 }
 ```
-
 
 First, we first collect the individual letters from `list` into a String using `stream()`, `map()`, and `reduce()`.
 
@@ -249,7 +243,6 @@ private void doProcessMatching(List<LetterLabel> list) {
 }
 ```
 
-
 First, we use `stream()` to filter the LetterLabel objects that correspond to matching characters. For the characters that match, we set the LetterLabel property `matchResult` enum to `MATCHING` and replace the corresponding character in both the guess and target words with a hyphen.
 
 #### Method `doProcessPartial()`
@@ -280,7 +273,6 @@ private void doProcessPartial(List<LetterLabel> list) {
 }
 ```
 
-
 #### Method `doProcessNoMatch()`
 
 And lastly, here is method `doProcessNoMatch()`. Each LetterLabel corresponding to a character that was not previously replaced with a hyphen has its `matchResult` property set to enum `NOMATCH`.
@@ -294,7 +286,6 @@ private void doProcessNoMatch(List<LetterLabel> list) {
         .forEach(ll -> ll.setMatchResult(NOMATCH));
 }
 ```
-
 
 The row is now ready for animation and for displaying the color-coded result maintained by property `letterDisplay`, which we explain in the next section.
 
@@ -334,7 +325,6 @@ private void animateSuccessGroup(List<LetterLabel> list) {
 }
 ```
 
-
 #### Method `animateBadWord()`
 
 Next, let's show you `animateBadWord()`. This code animates a row of LetterLabel tiles when the user submits an invalid word. Here, a TranslateTransition moves the LetterLabel tile along the X axis by 20 pixels. (Positive values move the node to the right.) Again, we set `autoReverse` to true and the count to six. This makes the LetterLabel tile "shake" back and forth three times.
@@ -356,7 +346,6 @@ private void animateBadWord(List<LetterLabel> list) {
    para.play();
 }
 ```
-
 
 #### Method `animateLabelGroup()`
 
@@ -405,7 +394,6 @@ private void animateLabelGroup(List<LetterLabel> list) {
         seq.play();
 }
 ```
-
 
 In the fade transition's `setOnFinished()`, the event handler sets the text to the empty string and sets the `letterDisplay` property. This `letterDisplay` property automatically updates the style (our CSS pseudo-class scaffolding code), so the result of the matching process is now revealed.
 

@@ -17,6 +17,4 @@ Epsilon is not suitable for long-running applications or workloads with signific
 
     -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC
 
-<br />
-
 See also: [GC Algorithms](https://foojay.io/pedia/gc-algorithms-g1-zgc-and-shenandoah/), [Garbage Collection](https://foojay.io/pedia/garbage-collection/)

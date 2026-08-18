@@ -20,8 +20,7 @@ The Java SE landscape is strewn with acronyms that it has picked up over the las
 * OpenJDK
 * Java Development Kits (JDKs)
 
-What is 'OpenJDK'?
-------------------
+## What is 'OpenJDK'?
 
 The phrase *OpenJDK* is used to describe at least three fundamental things in the Java ecosystem.
 
@@ -54,8 +53,7 @@ A [Java Specification Request (JSR)](https://jcp.org/en/jsr/all) may detail pote
 
 The [Java Community Process (JCP)](https://www.jcp.org/en/home/index) is a process to facilitate the review and ultimate inclusion of changes to the [Java specifications](https://docs.oracle.com/javase/specs/).
 
-What are JDKs?
---------------
+## What are JDKs?
 
 [Java Development Kits (JDKs)](https://en.wikipedia.org/wiki/Java_Development_Kit) are implementations of the [Java SE platform specification](https://www.oracle.com/java/technologies/java-se-glance.html) by different vendors and groups of people, such as the open source community. Some of them are built from the [OpenJDK code on GitHub](https://github.com/openjdk). JDKs include the Java Runtime Environment (JRE), as well as other tools that help you develop Java.
 
@@ -81,8 +79,7 @@ There are lots of JDKs out there. They all vary in terms of license, support, br
 
 It is also possible to build your own JDK, but that's a whole other blog! Talking of blogs, [this one from the Java Champions](https://medium.com/@javachampions/java-is-still-free-2-0-0-6b9aa8d6d244) is excellent and helps fill in some of the gaps as well.
 
-Summary
--------
+## Summary
 
 'OpenJDK' is either:
 

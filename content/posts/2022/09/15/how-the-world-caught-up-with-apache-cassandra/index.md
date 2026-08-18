@@ -66,5 +66,4 @@ Carl Olofson, research vice president at IDC, noted: "A core benefit of the clou
 
 While Cassandra is more than a decade young, it is a database for today. If the argument of 2010 was "Cassandra may be the future," and 2017 "Cassandra is mature," the 2021 version is "Cassandra is an essential part of any modern data platform." The developments in Cassandra and its surrounding ecosystem point to a coming wave of new developers and enterprises worldwide for whom Cassandra is not just a sensible choice, but an obvious one.
 
-Want to learn more about DataStax Astra DB, built on Apache Cassandra? [Sign up](https://www.datastax.com/products/astra/demo) for a free demo.
------------------------------------------------------------------------------------------------------------------------------------------------
+## Want to learn more about DataStax Astra DB, built on Apache Cassandra? [Sign up](https://www.datastax.com/products/astra/demo) for a free demo.

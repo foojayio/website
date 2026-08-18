@@ -24,7 +24,3 @@ In Spring Boot 3.1, Docker Compose support was added to simplify local developme
 In this video, I show you how this works and how to use it!
 
 {{< youtube BQkvCxmaiqU >}}
-
-<br />
-
-<br />

@@ -25,8 +25,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Managing Payara Server Just Got Smarter
----------------------------------------
+## Managing Payara Server Just Got Smarter
 
 Imagine managing your Jakarta EE applications not just with Maven goals, but by asking natural questions.
 
@@ -36,8 +35,7 @@ Thanks to this integration, developers can inspect, query and even execute serve
 
 In this post, I'll walk you through how it works, with real examples that show just how seamless the AI-powered CLI experience can be.
 
-What Is the Payara Server Maven Plugin?
----------------------------------------
+## What Is the Payara Server Maven Plugin?
 
 The Payara Server Maven Plugin simplifies server lifecycle management and app deployment via Maven goals like:
 
@@ -46,8 +44,7 @@ The Payara Server Maven Plugin simplifies server lifecycle management and app de
 
 Now, with the AI Agent, it goes a step further, bringing intelligence control directly to your terminal.
 
-Meet the AI Agent (Experimental)
---------------------------------
+## Meet the AI Agent (Experimental)
 
 The AI Agent listens to natural language queries typed in your terminal. Instead of memorizing asadmin commands, you can now just ask:
 
@@ -58,8 +55,7 @@ The AI Agent listens to natural language queries typed in your terminal. Instead
 
 It interprets your questions, queries internal APIs (JMX, domain.xml, logs, etc.), and responds intelligently. Perfect for speeding up diagnostics and reducing context switching.
 
-Demo #1 -- Memory \& Threads, in Plain English
-----------------------------------------------
+## Demo #1 -- Memory \& Threads, in Plain English
 
 In the first clip below, I ran the mvn payara-server:dev goal and started typing natural queries into the CLI:
 
@@ -76,10 +72,7 @@ No need to dig through JMX or logs manually. The AI Agent fetches and summarizes
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://blog.payara.fish/hs-fs/hubfs/AIAgent2.gif?width=2067&amp;height=1119&amp;name=AIAgent2.gif" width="1378" height="746">
 
-<br />
-
-Demo #2 -- JDBC, JMX, and JMS Made Easy
----------------------------------------
+## Demo #2 -- JDBC, JMX, and JMS Made Easy
 
 In the second demo, I explored resource management features:
 
@@ -96,8 +89,6 @@ See it in action:
 Instead of navigating the admin console or writing XML config, AI does the heavy lifting.
 
 <img decoding="async" class="alignnone size-medium" src="https://blog.payara.fish/hs-fs/hubfs/AIAgent1.gif?width=2067&amp;height=1119&amp;name=AIAgent1.gif" width="1378" height="746">
-
-<br />
 
 ### Configuring the AI Agent
 
@@ -121,7 +112,6 @@ export PAYARA_AI_PROVIDER=OPEN_AI
 export PAYARA_AI_MODEL=gpt-4o-mini
 ```
 
-
 Or via Maven:
 
 ```
@@ -132,7 +122,6 @@ mvn payara-server:dev \
 -Dpayara.ai.model=gpt-4o-mini
 ```
 
-
 #### How to Enable the AI Agent
 
 By default, the AI Agent is enabled in [dev mode](https://blog.payara.fish/stratospheric-developer-productivity-unveiling-payara-dev-mode "dev mode"). Otherwise, enable it explicitly using:
@@ -141,13 +130,11 @@ By default, the AI Agent is enabled in [dev mode](https://blog.payara.fish/strat
 -Dpayara.ai.agent=true
 ```
 
-
 Or set the environment variable:
 
 ```
 export PAYARA_AI_AGENT=true
 ```
-
 
 The AI Agent currently supports a variety of providers, so you can integrate with the one that best fits your setup:
 
@@ -157,8 +144,7 @@ The AI Agent currently supports a variety of providers, so you can integrate wit
 
 This gives you flexibility to run models locally (e.g., Ollama, LM Studio), via API (e.g., OpenAI, Google, Mistral), or even from custom endpoints.
 
-Final Thoughts
---------------
+## Final Thoughts
 
 The Payara Server Maven Plugin already simplified the Jakarta EE development lifecycle but with the AI Agent, it becomes an intelligent assistant. Whether you're inspecting memory, managing JDBC pools, or just experimenting, it drastically reduces friction and boosts productivity.
 

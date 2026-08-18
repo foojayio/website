@@ -88,12 +88,10 @@ record SuperVehicle(Part engine, Part cabin) implements Vehicle {
 }
 ```
 
-
 ```java
 System.out.println output:
 SuperVehicle[engine=RecordPart[name=super_engine], cabin=RecordPart[name=super_cabin]]
 ```
-
 
 **Example 1** .: Implementation of the builder pattern using a record class type You may spot the private constructor that denies the instantiation from "outside" and that the class contains a static final ***Builder*** class.
 

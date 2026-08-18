@@ -23,8 +23,7 @@ frozen: false
 
 *This is a rather short article, but the implementation and fixing all the bugs took far more time then expected.*
 
-Generating Struct Definitions
------------------------------
+## Generating Struct Definitions
 
 We saw in the last article how powerful Java annotation processing is for generating Java code; this week, we'll tackle the generation of C code: In the previous article, we still had to write the C struct and map definitions ourselves, but writing
 
@@ -36,7 +35,6 @@ struct event {
 };
 ```
 
-
 when we already specified the data type properly in Java
 
 ```java
@@ -44,7 +42,6 @@ record Event(@Unsigned int pid,
              @Size(FILE_NAME_LEN) String filename,
              @Size(TASK_COMM_LEN) String comm) {}
 ```
-
 
 seems to be a great place to improve our annotation processor. There are only two problems:
 
@@ -76,15 +73,13 @@ public interface CAST {
 }
 ```
 
-
 We can then create a hierarchy of extending interfaces (PrimaryExpression, ...) and implementing records (ConstantExpression, ...). You can find the whole C AST on [GitHub](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf-processor/src/main/java/me/bechberger/cast/CAST.java).
 
 This leads us to an annotation processor that can add automatically insert struct definitions into the C code of our eBPF program, reducing the amount of hard-to-debug errors as it is guaranteed that both the Java specification and C representation of every type are compatible.
 
 But can we do more with annotation processing?
 
-Generating Map Definitions
---------------------------
+## Generating Map Definitions
 
 There is another definition that we can auto-generate: Map definitions like
 
@@ -96,7 +91,6 @@ There is another definition that we can auto-generate: Map definitions like
  } rb SEC (".maps");
 ```
 
-
 which define maps like hash maps and ring buffers that allow the communication between user- and kernel-space.
 
 With a little of annotation processor, we can define the same ring buffer from above in Java:
@@ -105,7 +99,6 @@ With a little of annotation processor, we can define the same ring buffer from a
 @BPFMapDefinition(maxEntries = 256 * 4096)
 BPFRingBuffer<Event> rb;
 ```
-
 
 Our annotation-processor then turns this into the C definition from above and inserts code into the constructor of the Java program that properly initializes `rb`.
 
@@ -126,11 +119,9 @@ public class BPFRingBuffer<E> extends BPFMap {
 }
 ```
 
-
 Here `$field` is the Java field name, `$maxEntries` the value in the BPFMapDefinition annotation and `$class` the name of the Java class. `$cX`, `$bX`, `$jX` give the C type name, BPFType and Java class names related to the `X`^th^ type parameter.
 
-Ring Buffer Sample Program
---------------------------
+## Ring Buffer Sample Program
 
 When we combine all this together we can have a much simpler ring buffer sample program (see [TypeProcessingSample2](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/TypeProcessingSample2.java) on GitHub):
 
@@ -189,11 +180,9 @@ public abstract class TypeProcessingSample2 extends BPFProgram {
 }
 ```
 
-
 There are two other things missing in the C code that are also auto-generated: Constant defining macros and the license definition. Macros are generated for all static final fields in the program class that are defined at compile time.
 
-Conclusion
-----------
+## Conclusion
 
 Using annotation processing allows to reduce the amount of C code we have to write and reduces errors by generating all definitions from the Java code. This simplifies writing eBPF applications.
 
@@ -201,8 +190,7 @@ See you in two weeks when we tackle global variables, moving closer and closer t
 
 *This will also be the topic of a talk that I submitted together with Mohammed Aboullaite to several conferences for autumn.*
 
-Addendum
---------
+## Addendum
 
 The more I work on writing my own ebpf library, the more I value the effort that the developers of other libraries like bcc, the Go or Rust ebpf libraries put it in to create usable libraries.
 
@@ -211,7 +199,3 @@ They do this despite the lack of of proper documentation.
 A simple example is the deattaching of attached ebpf programs: There are multiple (undocumented) methods in libbpf that might be suitable; `bpf_program__unload`, `bpf_link__detach`, `bpf_link__destroy`, `bpf_prog_detach`, but only `bpf_link__destroy` properly detached a program.
 
 *This article is part of my work in the [SapMachine](https://sapmachine.io/) team at [SAP](https://sap.com/), making profiling and debugging easier for everyone. This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de).*
-
-<br />
-
-<br />

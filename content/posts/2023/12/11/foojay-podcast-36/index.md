@@ -25,13 +25,11 @@ But on that single-day conference, we had many more interesting interviews.
 
 This is part 3 in which my guests talk about Maven, contributing to Open Source projects, JOOQ, Desktop Applications, Thymeleaf, htmx, and Security.
 
-Video report
-------------
+## Video report
 
 {{< youtube sA54m2bketo >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,8 +37,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 **00:00 Introduction**
 
@@ -83,17 +80,13 @@ Content
 
 **38:02 Outro**
 
-<br />
-
-**Host: Frank Delporte**
-------------------------
+## **Host: Frank Delporte**
 
 * <https://foojay.social/@frankdelporte>
 * <https://www.linkedin.com/in/frankdelporte/>
 * <https://foojay.io/today/author/frankdelporte/>
 
-**Music**
----------
+## **Music**
 
 * Barbershop John
 * Hermine Deurloo

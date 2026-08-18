@@ -24,8 +24,7 @@ In [Part 3](https://foojay.io/today/understanding-apache-maven-part-3-maven-coor
 
 Maven uses the **version as a coordinate** in identifying an artifact.
 
-Common Version naming conventions
----------------------------------
+## Common Version naming conventions
 
 ### Development cycle
 
@@ -62,8 +61,7 @@ Ideally, since a POM is modified during development, it is best to use the -SNAP
 Typically projects start with a `0.0.1-SNAPSHOT` or a `1.0.0-SNAPSHOT`. Following **Semver 2.0** rules is heavily recommended for the numeric portion of the POM, since it provides visual cues for a developer's understanding.
 ![Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.](https://cgunturme.files.wordpress.com/2020/07/mavenversionstrategy.png?w=1024) Common Version Strategy in Maven. Development cycles re-use the SNAPSHOT version, Release produces immutable artifact version.
 
-Controlling Versions in Maven
------------------------------
+## Controlling Versions in Maven
 
 ### Version Ranges in Maven
 
@@ -121,8 +119,7 @@ Enforcer provides built-in rules for `bannedDependencies`, `dependencyConvergenc
 
 Link to built-in rules: <http://maven.apache.org/enforcer/enforcer-rules/index.html>
 
-Handling Backward Compatibility
--------------------------------
+## Handling Backward Compatibility
 
 Projects, especially libraries, strive not to break **backward compatibility** . Backward compatibility is a guarantee that upgrading to the newer version of the library **WILL NOT** break existing usage. While this goal is utopian, there is a necessity to, at times, break backward compatibility, due to either security constraints or to allow enhancements that are not possible without such a breaking change.
 

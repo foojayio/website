@@ -27,8 +27,7 @@ frozen: false
 
 The course required a different set of scenarios than outlined in my [previous SDN update blog post](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/), so I wanted to cover those scenarios, as well.
 
-Spring save() method
---------------------
+## Spring save() method
 
 First up is the out-of-the-box `save()` method that is provided by Spring as a default. This method takes an input of the entity object you want to save to the database.
 
@@ -54,7 +53,6 @@ public class Movie {
 }
 ```
 
-
 Movie controller class:
 
 ```java
@@ -70,7 +68,6 @@ public class MovieController {
 }
 ```
 
-
 This works well to save a new movie, as you can provide a subset of properties or all properties, as long as the `id` is present, and anything you don't provide will be set to `null`. However, the issue arises when you need to update an existing entity because it means any attributes you do not provide will be *overwritten* to `null`.
 
 To better understand how this works, let's see it in action by saving a movie, and then trying to update it.
@@ -83,7 +80,6 @@ Movie request object:
   "title": "MyMovie"
 }
 ```
-
 
 Save Movie object:
 
@@ -102,7 +98,6 @@ Save Movie object:
 }
 ```
 
-
 Now let's use the same method to try to update the movie with a `year` property.
 
 MovieUpdated object:
@@ -113,7 +108,6 @@ MovieUpdated object:
   "year": 2018
 }
 ```
-
 
 Save updated Movie object:
 
@@ -132,15 +126,13 @@ Save updated Movie object:
 }
 ```
 
-
 In the output above, you can see that the `title` property is `null`, and the `year` property is populated. This is because the title is not specified in the updated JSON object, so it is overwritten to `null`.
 
 This may not be too big of an effort if you have only a few attributes in your domain class, although I would still find it frustrating to include all properties for only updating one or two properties. In that case, I would need to resort to the [POJO method outlined in my previous SDN update blog post](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/) where you pull the database entity, set each property, and then save the entity. The added business logic seems like an unnecessary maintenance headache.
 
 What if you wanted to preserve what was already there without providing all the properties defined in the domain class to the request? In these scenarios, there are a couple of other options at your disposal, though neither allow dynamic updates to random properties per request.
 
-Patch Year
-----------
+## Patch Year
 
 The first option is that you don't have to set all properties if you use a PATCH method and only set the values you want to update. Here is an example.
 
@@ -162,7 +154,6 @@ public class MovieController {
 }
 ```
 
-
 PatchYear object:
 
 ```json
@@ -171,7 +162,6 @@ PatchYear object:
   "year": 2024
 }
 ```
-
 
 Patch movie year:
 
@@ -198,15 +188,13 @@ Patch movie year:
 }
 ```
 
-
 This allows you to set specific values without overwriting other property values to `null`. You also don't need to set all the values in the movie object programmatically. If you modified the initial `save()` method to just include the `setYear()` line, it would still overwrite other values. This approach prevents that, although you still have to call `setProperty()` for each field you want to update.
 
 **Note:** For this approach to work, your domain entity must be a class (not a record) because records are immutable, which means you cannot change (or set/update) fields on the entity instance. For immutable objects, you have to create a new instance of the object and copy property values to the new object before saving.
 
 You can avoid setting each property on an object and retain existing values with a couple of options covered next.
 
-Custom Cypher
--------------
+## Custom Cypher
 
 One of the more flexible options is to use [custom Cypher](https://docs.spring.io/spring-data/neo4j/reference/appendix/custom-queries.html). For this, you would write a Cypher statement that sets the new values to the properties you want to update. You can even add/set properties that do not exist on the application's domain class. The negative is that you would need to make changes to the application (Cypher statement) if you wanted to update different properties, so it is not fully dynamic.
 
@@ -223,7 +211,6 @@ interface MovieRepository extends Neo4jRepository {
 }
 ```
 
-
 Movie controller class:
 
 ```java
@@ -238,7 +225,6 @@ public class MovieController {
     }
 }
 ```
-
 
 Then, the following request calls the method and updates the movie's year property.
 
@@ -260,15 +246,13 @@ Update movie year:
 }
 ```
 
-
 It worked! The movie's title remained the same (not overwritten to `null`), and a value was saved for the `year` property.
 
 This ad hoc Cypher approach could work well when values or property updates occur somewhat frequently, as updating the Cypher statement makes updates flexible. You could also make the incoming property generic (`value`) and pass in any value (or multiple values) and set whichever properties you'd like by changing the Cypher. While still not completely dynamic, this option is probably the most flexible and dynamic of the list.
 
 A custom Cypher approach might work well when you need to update certain properties, but if you have a subset of properties that operate together, another option is to create a projection of the domain class.
 
-Projections
------------
+## Projections
 
 To provide a consistent set of values for update and leave other properties as-is, [projections](https://docs.spring.io/spring-data/neo4j/reference/projections/sdn-projections.html) are probably the nicest option I've found so far. This approach still requires setting consistent properties (like with custom Cypher), but avoids overwriting consistent values by creating a "view" of the larger entity, only working with those values and leaving other field values alone.
 
@@ -301,7 +285,6 @@ public class MovieDTOProjection {
 }
 ```
 
-
 MovieController class method:
 
 ```java
@@ -318,7 +301,6 @@ public class MovieController {
 }
 ```
 
-
 ProjectionAsMovie object (request object):
 
 ```json
@@ -327,7 +309,6 @@ ProjectionAsMovie object (request object):
   "plot": "Here is the plot."
 }
 ```
-
 
 Update Movie with a projection object:
 
@@ -340,7 +321,6 @@ Update Movie with a projection object:
 }
 ```
 
-
 Full database entity:
 
 ```json
@@ -351,7 +331,6 @@ Full database entity:
     "title": "MyMovie"
 }
 ```
-
 
 The request successfully updated the entity with the new plot value ("Here is the plot.") without overwriting the title or year properties on the existing entity! The method in the controller class takes the projection object input and saves it as a `Movie` class entity.
 
@@ -379,7 +358,6 @@ public class MovieController {
 }
 ```
 
-
 MovieAsProjection object:
 
 ```json
@@ -390,7 +368,6 @@ MovieAsProjection object:
   "year": 2025
 }
 ```
-
 
 Send Movie object (only save projection values):
 
@@ -403,7 +380,6 @@ Send Movie object (only save projection values):
 }
 ```
 
-
 Full database entity:
 
 ```json
@@ -415,20 +391,17 @@ Full database entity:
 }
 ```
 
-
 This also worked! The controller method accepts a `Movie` request object as input and saves it as the projection entity, which only retains the subset of values defined in the projection and ignores the rest.
 
 This approach would be helpful if you have request objects with varying fields of a `Movie` entity, but only want to update a certain subset each time. In terms of the incoming request object, this option seems to be the most flexible in allowing you to provide all kinds of fields as input, and it will only save the relevant ones defined in the projection.
 
-Wrapping Up!
-------------
+## Wrapping Up!
 
 In this post, we delved a bit deeper into updating entities using Spring Data and Neo4j. A [previous blog post on the topic](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/) outlined some examples for that use case at the time (microservices), but I learned about a few more options after working on the [GraphAcademy Spring Data Neo4j course](https://graphacademy.neo4j.com/courses/app-spring-data/). These options included custom Cypher statements and projections.
 
 There are still other pieces of the puzzle to explore and integrate, such as optimistic locking (with the `@Version` field) and custom repository implementations for extending repositories (e.g. to combine `Neo4jRepository`, `Neo4jTemplate`, and/or `Neo4jClient` levels of abstraction), but we will save those for a future blog post. Happy coding!
 
-Resources
----------
+## Resources
 
 * Code: [sdn-update-entity-round2](https://github.com/JMHReif/sdn-update-entity-round2)
 * Blog post: [previous SDN update article](https://jmhreif.com/blog/2023/sdn-cypher-update-entity/)

@@ -33,14 +33,12 @@ fun execute(color: String, availability: String) {
 }
 ```
 
-
 1. Set the event's color. Valid values are "0", "1", ... to "11"
 2. Set the event's availability. Valid values are `"transparent"` and `"opaque"`
 
 However, my experience has taught me to favor strong typing. I also want to avoid typos. I want to list some alternatives to using `String` in this post.
 
-Constants
----------
+## Constants
 
 The oldest trick in the book, available in most languages, is to define constants. Before Java 5, developers used this alternative *a lot* as it was the only one available. It would look like this:
 
@@ -52,13 +50,11 @@ const val Free = "transparent"
 const val Busy = "opaque"
 ```
 
-
 We can now call the function accordingly:
 
 ```kotlin
 execute(Blue, Busy)
 ```
-
 
 Constants help with typos. The flip side is that they cannot enforce strong typing:
 
@@ -67,12 +63,10 @@ execute(Blue, Red)        // 1
 execute(Free, Red)        // 2
 ```
 
-
 1. Pass two colors, but the compiler is fine
 2. Invert the arguments; the compiler is still fine
 
-Type aliases
-------------
+## Type aliases
 
 The idea behind type aliases is to alias the name of an existing type to something more meaningful.
 
@@ -80,7 +74,6 @@ The idea behind type aliases is to alias the name of an existing type to somethi
 typealias Color = String
 typealias Availability = String
 ```
-
 
 With this, we can change the signature of the function:
 
@@ -90,7 +83,6 @@ fun execute(color: Color, availability: Availability) {
 }
 ```
 
-
 Unfortunately, type aliases are just cosmetic. Whatever the alias, a `String` stays a `String`. We can still write incorrect code:
 
 ```kotlin
@@ -98,11 +90,9 @@ execute(Blue, Red)       // 1
 execute(Free, Red)       // 1
 ```
 
-
 1. Nothing has improved
 
-Enumerations
-------------
+## Enumerations
 
 Whether in Java or Kotlin, enumerations are the first step toward strong typing. I believe most developers know about them. Let's change our code to use enums:
 
@@ -119,7 +109,6 @@ enum class Availability(val value: String) {
 }
 ```
 
-
 We need to change the function accordingly, both the signature and the implementation:
 
 ```kotlin
@@ -133,7 +122,6 @@ fun execute(color: Color, availability: Availability) {
 }
 ```
 
-
 1. Extract the value wrapped by the `enum`
 
 The usage of enumerations enforces strong-typing:
@@ -144,12 +132,10 @@ execute(Color.Blue, Color.Red)                  // 2
 execute(Availability.Free, Color.Blue)          // 2
 ```
 
-
 1. Compile
 2. Doesn't compile!
 
-Inline classes
---------------
+## Inline classes
 
 A recent Kotlin feature is fully dedicated to strong typing: inline classes. An inline class wraps a single "primitive" value, such as `Int` or `String`. Picture the following class:
 
@@ -157,13 +143,11 @@ A recent Kotlin feature is fully dedicated to strong typing: inline classes. An 
 data class Person(givenName: String, familyName: String)
 ```
 
-
 Callers of this class would have to remember whether the first parameter is the given name or the family name. Kotlin already helps by allowing named parameters:
 
 ```kotlin
 val p = Person(givenName = "John", familyName = "Doe")
 ```
-
 
 However, we can improve the snippet above by wrapping the `String` in two different value types, one for each role.
 
@@ -173,7 +157,6 @@ However, we can improve the snippet above by wrapping the `String` in two differ
 
 val p = Person(GivenName("John"), FamilyName("Doe"))
 ```
-
 
 At this point, one cannot swap a given name for a family name, or *vice versa*. Likewise, we can use value classes in our example and define possible values in a companion object.
 
@@ -200,12 +183,10 @@ execute(Color.Blue, Color.Red)                  // 2
 execute(Availability.Free, Color.Blue)          // 2
 ```
 
-
 1. Compile
 2. Doesn't compile!
 
-Sealed classes
---------------
+## Sealed classes
 
 Sealed classes are another possible way to enforce strong typing. The limitation is we need to define all subclasses of a sealed class in the same file. There can't be any inheritance by third parties. In effect, it makes the class `open` for your code and `final` for client code.
 
@@ -228,7 +209,6 @@ execute(Color.Blue, Color.Red)                  // 2
 execute(Availability.Free, Color.Blue)          // 2
 ```
 
-
 1. Compile
 2. Doesn't compile!
 
@@ -247,9 +227,7 @@ object Busy : Availability("opaque")
 execute(Blue, Busy)
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Kotlin offers several options to enforce strong typing on one's APIs: enumerations, value classes, and sealed classes.
 

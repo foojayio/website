@@ -28,8 +28,7 @@ And probably for of the same reason, I recently read that Spring is bad... *beca
 
 In this article, I'd like to show you how to remove annotations for different features that Spring provides.
 
-Annotation-free beans
----------------------
+## Annotation-free beans
 
 The first place where we tend to set annotations is to register beans. Let's see how to move away from them. It involves several steps. We shall start from the following code:
 
@@ -37,7 +36,6 @@ The first place where we tend to set annotations is to register beans. Let's see
 @Service
 public class MyService {}
 ```
-
 
 The `@Service` stereotype annotation serves two functions:
 
@@ -67,7 +65,6 @@ public class MyApplication {
 }
 ```
 
-
 Because `@SpringBootApplication` is itself annotated with `@Configuration`, we can simplify the code further:
 
 ```java
@@ -84,7 +81,6 @@ public class MyApplication {
     // Run the app
 }
 ```
-
 
 At this point, the `MyService` class is free of annotations. For me, that would be enough. However, my earlier promise was to remove annotations altogether.
 
@@ -107,12 +103,10 @@ fun main(args: Array<String>) {
 class MyApplication
 ```
 
-
 1. Create a new bean without annotation
 2. Single annotation to start the Spring Boot application; see below for how to remove it
 
-Controllers to routes
----------------------
+## Controllers to routes
 
 Our next feature focuses on web endpoints. The traditional Spring way to provide them is via the `@Controller` annotation:
 
@@ -127,7 +121,6 @@ public class MyController {
     }
 }
 ```
-
 
 1. Register the class as a controller
 2. Register the method as a request handler
@@ -146,7 +139,6 @@ public class MyController {
 }
 ```
 
-
 1. Compound `@Controller` and `@ResponseBody`
 2. `@RequestMapping` with the `method` attribute set to `GET`
 
@@ -160,7 +152,6 @@ RouterFunction<ServerResponse> hello() {
 }
 ```
 
-
 You could object that there's still one annotation - `@Bean` but we handled this case in the previous paragraph with the help of Kotlin. Spring also provides a dedicated DSL for routes. By using both the above Beans DSL and the Routes DSL, we can rid of all annotations:
 
 ```kotlin
@@ -171,9 +162,7 @@ bean {
 }
 ```
 
-
-Cross-cutting concerns
-----------------------
+## Cross-cutting concerns
 
 A lot (all?) of Spring cross-cutting concerns are configurable with annotations. Such concerns include transaction management and caching. In this paragraph, I'll use caching as an example, but all related features are similar.
 
@@ -183,7 +172,6 @@ public Thing getAddress(String key) {
     // Get the relevant Thing from the data store
 }
 ```
-
 
 Spring wraps methods annotated with `@Cacheable` in a proxy. When you call the proxied method, it first checks whether the object is in the cache:
 
@@ -211,7 +199,6 @@ public class ThingRepository {
 }
 ```
 
-
 If you're a Functional Programming fan, you can refactor the above code to something more suitable to your tastes:
 
 ```java
@@ -230,9 +217,7 @@ public class ThingRepository {
 }
 ```
 
-
-Error handling
---------------
+## Error handling
 
 Spring provides a rich error handling mechanism to ease developers' life via annotations. It makes no sense to paraphrase [the documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-exceptionhandler) as it's pretty well documented:
 
@@ -265,7 +250,6 @@ public class MyController {
     }
 }
 ```
-
 
 1. May throw an unchecked `ServiceException`
 2. Spring calls this method if a `ServiceException` class is thrown in one of the above methods
@@ -306,7 +290,6 @@ public class MyController {
 }
 ```
 
-
 I consider it a bit noisy. Of course, we can also use routes:
 
 ```java
@@ -334,7 +317,6 @@ private ServerResponse handle(ServiceException e) {
 }
 ```
 
-
 But I don't think the above snippet is a significant improvement. Kotlin Router DSL doesn't help much either:
 
 ```java
@@ -356,7 +338,6 @@ router {
     }
 }
 ```
-
 
 We don't have any annotations, but IMHO, it's not much more readable than the initial snippet.
 
@@ -385,9 +366,7 @@ var routes = router {
 }
 ```
 
-
-Starting the application
-------------------------
+## Starting the application
 
 So far, we have been able to remove every annotation, but the main one: `@SpringBootApplication` compounds `@SpringBootConfiguration`, `@EnableAutoConfiguration`, and `@ComponentScan`. If you dislike annotations, it's a nightmare come true as it does a lot of "magic" under the cover.
 
@@ -429,12 +408,10 @@ fun main() {
 }
 ```
 
-
 1. Configure the context
 2. Start the application with no annotations
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I've shown you how to move away from annotations in Java and Kotlin, using stable and experimental APIs.
 

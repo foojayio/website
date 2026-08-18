@@ -26,8 +26,7 @@ As developers, we write testcases all the time to help us in our development pro
 
 Now ideally we want our testcases to be as efficient as possible, and ideally to require as few reruns as possible. And this is where Soft Assertions come into play.
 
-Hard Assertions vs Soft Assertions
-----------------------------------
+## Hard Assertions vs Soft Assertions
 
 ### "Hard" assertion
 
@@ -44,7 +43,6 @@ assertEquals(person1.getPhoneNumber(), personRecord1.phoneNumber());
 assertEquals(person1.getDateOfBirth().toString(), personRecord1.dateOfBirth());
 ```
 
-
 If, for example, our e-mail assertion were to fail we would receive no information on the validity of the address, phone number or date of birth.
 
 Or even earlier, if our main language was wrong we'd just receive something like:
@@ -54,7 +52,6 @@ org.opentest4j.AssertionFailedError:
 Expected :French
 Actual   :English
 ```
-
 
 ### "Soft" assertion
 
@@ -70,8 +67,7 @@ Ideally when you're performing more than one assertion on the same object.
 
 I dislike flaky tests, and having to run the same test multiple times just to figure out what's wrong with for example the mapping of a single object.
 
-Library support
----------------
+## Library support
 
 Some of the most commonly used Assertion libraries have out of the box support for soft assertions, sadly, not all of them do.
 
@@ -106,7 +102,6 @@ assertAll("Person 2",
 );
 ```
 
-
 And then we get a clear output:
 
 ```
@@ -130,7 +125,6 @@ org.opentest4j.MultipleFailuresError: Person 2 (3 failures)
 		...
 ```
 
-
 ### AssertJ
 
 AssertJ has a couple different soft assertion methods as can be seen in [their documentation](https://assertj.github.io/doc/#assertj-core-soft-assertions).  
@@ -149,7 +143,6 @@ assertSoftly(softAssertions -> {
     softAssertions.assertThat(personRecord1.dateOfBirth()).isEqualTo(person2.getDateOfBirth().toString());
 });
 ```
-
 
 Rather than immediately failing on the second assertion, we'll get an error on the 2nd, 5th and 6th assertion.
 
@@ -170,7 +163,6 @@ but was: "1980-12-01"
 at AssertJSoftTest.lambda$softAssert$1(AssertJSoftTest.java:54)
 ```
 
-
 ### TestNG
 
 We can make use of the `SoftAssert` class to group our assertions, and then verify them as a group by invoking `assertAll`.
@@ -185,7 +177,6 @@ personSoftAssert2.assertEquals(person2.getPhoneNumber(), personRecord1.phoneNumb
 personSoftAssert2.assertEquals(person2.getDateOfBirth().toString(), personRecord1.dateOfBirth());
 personSoftAssert2.assertAll();
 ```
-
 
 Which results in a very clean
 
@@ -203,9 +194,7 @@ java.lang.AssertionError: The following asserts failed:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 ```
 
-
-Takeaway
---------
+## Takeaway
 
 Using the concept of soft-assertions makes testing the impact of our changes on a single object a lot more convenient, and reduces the potential need for reruns.
 
@@ -241,9 +230,7 @@ public class CustomAssertJSoftAssertions extends SoftAssertions {
 }
 ```
 
-
-References
-----------
+## References
 
 * [The article repository](https://github.com/SimonVerhoeven/soft-assertions) containing the code snippets
 * [JUnit](https://junit.org/junit5/)

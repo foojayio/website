@@ -39,8 +39,7 @@ Throughout this article, we'll use a 'report card' metaphor with these metrics t
 
 IBM Semeru Runtimes JDK is a free, production-ready Java distribution built with the OpenJDK class libraries and the Eclipse OpenJ9 JVM. It is designed as a drop-in replacement for any other JDK to help developers build and run Java applications efficiently and effectively. It can be easily [downloaded](https://developer.ibm.com/languages/java/semeru-runtimes/downloads/ "downloaded") or installed using, for example, [SDKman](https://sdkman.io/ "SDKman") (run sdk install java 25.0.1-sem).
 
-Performance for typical Java applications
------------------------------------------
+## Performance for typical Java applications
 
 The following figure shows a typical transactional Java application and its typical performance over time across the four key metrics:
 
@@ -64,8 +63,7 @@ Each of the recent Java performance innovations discussed in this article has a 
 
 These grades might seem somewhat arbitrary, but we've assigned them based loosely on our own qualitative view of the competitive picture of the Java deployment technologies available across the entire Java ecosystem, including other JDKs like [Eclipse Temurin](https://adoptium.net/en-GB/temurin "Eclipse Temurin") and [GraalVM native images](https://www.graalvm.org/ "GraalVM native images"). We'll see throughout this article how to improve the grade for each of these key metrics.
 
-Improving an application's startup and rampup time
---------------------------------------------------
+## Improving an application's startup and rampup time
 
 Three key Semeru JDK innovations can help with both startup time and rampup time: shared classes cache, InstantOn, and Cloud Compiler.
 
@@ -185,8 +183,7 @@ If you're using Semeru Runtimes, but you haven't yet tried the Cloud Compiler te
 
 Our startup and rampup scores are now looking great, both with scores of A. However, our other important performance factors, throughput and memory footprint, aren't looking as good yet. Let's look at how we can improve our throughput grade first.
 
-Improving an application's throughput
--------------------------------------
+## Improving an application's throughput
 
 To improve our application's throughput, the trend line on our graph needs to be higher on our y-axis. Investing in further JIT compiler optimizations in Semeru Runtimes can help here.
 
@@ -213,8 +210,7 @@ For throughput, we've been able to improve throughput from a grade B to an A as 
 
 However, we still have a low score for memory footprint. Let's look at this last element of our score card and see what we can do to improve this and turn our Java distribution into a "straight A student."
 
-Improving an application's memory footprint
--------------------------------------------
+## Improving an application's memory footprint
 
 The following figure shows a typical memory graph when an application starts: when the application first starts, memory use rapidly increases as the application starts compiling, hence the large spikes at the start of our graph as these resources are used. When these compilations are complete, the application's memory usage settles down and reaches a relatively steady memory footprint.
 
@@ -264,8 +260,7 @@ Semeru's memory footprint characteristics even without the Cloud Compiler are qu
 | Throughput                                                     | A     |
 | Memory Footprint                                               | B → A |
 
-Summary
--------
+## Summary
 
 Overall, by making use of the innovations and improvements discussed in this article---Semeru Runtimes, shared classes cache, InstantOn, and Semeru Cloud Compiler---we've transformed our imaginary JDK performance report card to a straight-A student.
 
@@ -282,8 +277,7 @@ Now, our two performance graphs for throughput and memory footprint have vastly 
 
 The exciting thing is that this work is ongoing and we're continuing to investigate and research how we can continue to improve these critical metrics (just like any good straight A student) and make our Java applications even more performant with IBM Semeru Runtimes. So keep an eye on this space, there's more to come.
 
-Next Steps
-----------
+## Next Steps
 
 Hopefully this article has helped to inspire you to consider how you could make your own Java applications more performant with IBM Semeru Runtimes, whether it be your startup time, rampup time, throughput, or memory footprint.
 

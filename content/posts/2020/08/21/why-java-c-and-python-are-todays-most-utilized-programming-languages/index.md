@@ -40,9 +40,3 @@ Now, how about **Python**? Python is runable on all the major hardware and opera
 But Java still has an advantage here: the Java Virtual Machine. Anyone who needs to develop a new language for a specific purpose can simply develop it on top of the JVM. You cannot do that with Python. Python is Python, but the JVM is an open platform open to any language concept.
 
 For these reasons, I believe Java, C, and Python are going to be our most prominent programming platforms for a long time to come, with the Java Virtual Machine being the preferred platform for newly emerging special purpose languages.
-
-<br />
-
-<br />
-
-<br />

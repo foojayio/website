@@ -29,8 +29,7 @@ This was pretty amazing and actually worked reasonably well (with caveats obviou
 
 I was talking with a Node based startup in the banking industry a few years ago. They said banks were very open to working with Node. I since understood they're rewriting their stuff in a more "mature" environment. When I use some "newer" tools like Node, I'm always amazed by the basic stuff that's just missing. Sure it's simpler and smaller if you don't build into it everything that we need. It's easy to build simple stuff when you throw away core functionality.
 
-The NoSQL Drama of 2010s
-------------------------
+## The NoSQL Drama of 2010s
 
 Back in 1999 I was forming my consulting company, and a friend asked me to meet his boss. I went to this office where the "boss" said he had the most amazing idea that no one thought about. They have funding and will launch in 6 months to one million users on day one!
 
@@ -61,8 +60,7 @@ To be clear: there are valid uses for NoSQL. But most common uses for these DBs 
 * Reinventing these complexities
 * New stuff becomes the old and clunky complexity that needs reinventing... Rinse/repeat
 
-Serverless as the New Mainframes
---------------------------------
+## Serverless as the New Mainframes
 
 I've been doing a lot of serverless work in the past month and I feel this is a big step backward. It's a rehash of the problems we had with PaaS. It's practically a mainframe. Back in the days we used to pay for our work to run on a mainframe where we shared time. This was a bit more like a virtualization environment but the idea was similar: we don't own the environment. Arguably that's true for cloud SaaS too, but serverless takes that concept pretty far.
 
@@ -74,8 +72,7 @@ People spend so much time checking and measuring throughput yet just using one s
 
 Containers are good progress and they made this so much simpler, yet we dropped the ball on this and went all in on complexity with stuff like Kubernetes. Don't get me wrong. K8s is great. But 98% of us don't really need it and shouldn't use it. If you're a small startup, Kubernetes is a waste of your time and energy.
 
-Back to Java and Into Rust
---------------------------
+## Back to Java and Into Rust
 
 Java is an example where the amnesia portion is good. We had smalltalk, and it was great. When Java came along it was an inferior solution with weird C like syntax. The evolutionary aspect wasn't clear. Java threw away many great ideas in both smalltalk and C++. It adopted some controversial ideas (checked exceptions, primitives, etc.). Yet it succeeded. It grabbed mind share; it was able to leverage that.
 
@@ -83,8 +80,7 @@ It started as a small language that threw away all the garbage and over-engineer
 
 Rust seems to be one of those few exceptions too. It reinvents C in a way that contributes something completely new. It's hard to tell if it will survive in the long term. But undoubtedly it will need to pick up a lot of complexity along the way.
 
-Conscious Reinvention
----------------------
+## Conscious Reinvention
 
 What makes a reinvention of an existing language or tool into a mass market success and what leaves such tools in the sidelines?
 

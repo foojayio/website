@@ -51,20 +51,17 @@ You will find three script files
 bash build_app_macos.sh
 ```
 
-
 After the script has finished you will find the dmg, the pkg and the app file in the folder
 
 ```
 fxmodules/build/installer
 ```
 
-
 In addition the project also comes with a github action in the folder
 
 ```
 fxmodules/.github/workflows
 ```
-
 
 The `ci.yml` file will build the native packages for each platform on GitHub after each push to the project. The artifacts will be attached to the build so that you can download it from there.
 

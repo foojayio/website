@@ -53,8 +53,7 @@ Here is a small program I use for this. The program works with Java 11 and above
 
 *Note that the following classes can be copied into a single file **MainMethodFinder.java** for ease of use.*
 
-MainMethodFinder
-----------------
+## MainMethodFinder
 
 The class **MainMethodFinder** is the main driver of our scanning tool. It detects the current execution environment and checks if the current JDK or a different JDK should be analyzed. The `Path` of the current JDK is derived via `ProcessHandle.current().info().command()`.
 
@@ -152,9 +151,7 @@ public class MainMethodFinder {
 }
 ```
 
-
-MainMethod
-----------
+## MainMethod
 
 The class **MainMethod** is a data-holder class that captures the name of a found Class with a main-method and the library containing it.
 
@@ -174,9 +171,7 @@ class MainMethod {
 }
 ```
 
-
-MainMethodVisitor
------------------
+## MainMethodVisitor
 
 The class **MainMethodVisitor** is an ASM `ClassVisitor` which analyzes the class byte code to detect executable main methods. An executable main-Method obviously has the name `"main"` and is `public static` and has a `String[]` as single parameter.
 
@@ -271,9 +266,7 @@ class MainMethodVisitor extends ClassVisitor {
 }
 ```
 
-
-MainMethodReportingVisitor
---------------------------
+## MainMethodReportingVisitor
 
 The actual scanning of JDK `.jar`-Files and `.jmods` is performed by the **MainMethodReportingVisitor** class, which is a `SimpleFileVisitor` used in combination with `Files.walkFileTree(jdkHomePath, visitor)` in the `MainMethodFinder` main-method.
 
@@ -340,7 +333,6 @@ class MainMethodReportingVisitor extends SimpleFileVisitor<Path> {
 }
 ```
 
-
 If you want to try it yourself, take a look at [this Github Gist](https://gist.github.com/thomasdarimont/1d91117aca91be5b6e8151388d671c66) which combines everything in one file for your convenience.
 
 Now let's see the tool in action!
@@ -350,7 +342,6 @@ Thanks to the support for single-file source-code programs from Java 11 onwards,
 ```
 java --show-version -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java
 ```
-
 
 Running the command with JDK 21-ea+27-2343 yields the following output:
 
@@ -455,7 +446,6 @@ java -m jdk.security.auth/com.sun.security.auth.module.Crypt
 java -m jdk.zipfs/jdk.nio.zipfs.ZipInfo
 ```
 
-
 The listed classes contain the known tools from the `$JDK_HOME/bin` directory and many small debugging tools and test programs. Just have a look for yourself 🙂
 
 Did you ever want to know how the pattern node tree looks for a compiled regex pattern? Just run:
@@ -481,7 +471,6 @@ Pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
 12: <END>
 ```
 
-
 Another tool that many Java developers are not familiar with is the HotSpot Debugger UI, which allows you to look and poke at some JVM internals. The tool itself is actually not so hidden, as it can be started via `jhsdb hsdb`, but [I discovered it a few years](https://www.tutorials.de/threads/mit-debugger-interne-hotspot-jvm-informationen-auslesen-in-java-7.387020/) ago by scanning for main methods.
 
 You can also start the hsdb ui via: `java -m jdk.hotspot.agent/sun.jvm.hotspot.HSDB`.  
@@ -495,7 +484,6 @@ Tip: If we want to analyze an older JDK, e.g., JDK8 we can do it like this:
 ```
 java -DshowCommand=true --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED MainMethodFinder.java /path/to/jdk
 ```
-
 
 *Note an easy way to install and manage different JDKs for experiments is [sdkman](https://sdkman.io/).*
 
@@ -648,7 +636,6 @@ OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/lib/tools.jar sun.tools.serialver.SerialVer
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/jre/lib/ext/zipfs.jar com.sun.nio.zipfs.ZipInfo
 ```
-
 
 In this article we have learned that the JDK contains many more programmes than the `$JDK_HOME/bin` directory would suggest at first glance. We also learned about efficient ways to analyse Java classes with ASM.
 

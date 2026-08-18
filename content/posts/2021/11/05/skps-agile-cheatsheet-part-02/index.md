@@ -94,8 +94,4 @@ The combination of these three factors is the story's size. Second, the size is 
 
 The Agile retrospective can be thought of as a "lessons learned" meeting. The team reflects on how everything went and then decides what changes they want to make in the next iteration. The retrospective is team-driven, and team members should decide together how the meetings will be run and how decisions will be made about improvements. (Credits to TechTarget). \[Type -- Agile Product Management\]
 
-<br />
-
-
-
 Here's wishing a productive time with Agile.

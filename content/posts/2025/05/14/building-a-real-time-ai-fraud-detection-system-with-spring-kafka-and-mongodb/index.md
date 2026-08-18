@@ -27,8 +27,7 @@ Our solution will monitor MongoDB Change Streams using the Java synchronous driv
 
 If you want to view the completed code for this tutorial, you can find it on [GitHub](https://github.com/mongodb-developer/frauddetector).
 
-What we are building
---------------------
+## What we are building
 
 Our real-time fraud detection pipeline will work like this:
 
@@ -45,8 +44,7 @@ Our real-time fraud detection pipeline will work like this:
 
 This pipeline ensures real-time anomaly detection using AI-powered embeddings and vector search.
 
-Prerequisites
--------------
+## Prerequisites
 
 To follow along, you'll need:
 
@@ -56,8 +54,7 @@ To follow along, you'll need:
 * [OpenAI API key](https://platform.openai.com/docs/overview) (for embeddings).
 * [Maven 3.9+](https://maven.apache.org/download.cgi).
 
-Create our MongoDB database
----------------------------
+## Create our MongoDB database
 
 Log into MongoDB Atlas and create a free-forever M0 cluster. Create a new database called fraud. In this database, we need to create two collections.
 
@@ -66,8 +63,7 @@ Log into MongoDB Atlas and create a free-forever M0 cluster. Create a new databa
 
 For this simple demo, we are just going to create basic collections because, as of writing this, time series collections do not support search indexes. If you want to learn more about setting these up for your Java application, check out our tutorial [Handle Time Series Data with MongoDB](https://www.mongodb.com/developer/products/mongodb/time-series-data-java/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant).
 
-Create a Vector Search index
-----------------------------
+## Create a Vector Search index
 
 We are going to create a [vector search index](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant) on our transactions collection. This will allow us to find semantically similar documents, to help us identify anomalies in our customer transactions, and mark these as fraud.
 
@@ -95,15 +91,13 @@ You can learn the in-depth steps to set up a Vector Search index in [Atlas Vecto
 }
 ```
 
-
 4. Click create index.
 
 We are using 1536 for our number of dimensions because of the embedding model we will be using. OpenAI provides the text-embedding-3-small for embedding (among others). This is a general purpose model embedding text, but using a model tailored for financial fraud detection, especially a custom model tailored for and trained on your data, will lead to better results. Whether you're looking for faster embeddings or more accurate predictions, you can gain some control of that here.
 
 Since OpenAI embeddings are optimized for using the dot product algorithm, that is the similarity method we will stick with. It's also worth noting that if fraudulent transactions tend to have stronger signals (e.g., very different merchants, categories, amounts), dot product helps capture that magnitude, along with the direction. Essentially, it naturally emphasises these stronger signals. In contrast, cosine similarity normalizes all vectors to unit length, effectively discarding this useful magnitude information. This means it would treat a small anomaly and a large one as equally "different" in direction, which can dilute the signal strength we care about when identifying fraud.
 
-Create a Spring application
----------------------------
+## Create a Spring application
 
 We are going to create our application using [Spring Initializr](https://start.spring.io/). Here, we need to set our project to Maven, our language to Java, and our Spring Boot version to 3.4.2 (most recent stable release as of writing). We'll also set our app name---mine is frauddetector---and for packaging, we are going to make a jar, and Java version 21.
 
@@ -126,9 +120,7 @@ Download and unzip your Spring application. Open the application in the IDE of y
 </dependency>
 ```
 
-
-Setting up configuration
-------------------------
+## Setting up configuration
 
 Now, open up the application and go to the application.properties. Here, we'll add the various connection strings, tokens, and configuration settings for our dependencies.
 
@@ -144,7 +136,6 @@ spring.data.mongodb.uri=<YOUR_CONNECTION_STRING>
 spring.data.mongodb.database=fraud
 ```
 
-
 Just add your connection string and the database name and we're ready to go.
 
 ### Spring AI configuration
@@ -156,7 +147,6 @@ spring.ai.openai.api-key=<YOUR_OPEN_AI_API_KEY>
 
 spring.ai.openai.embedding.options.model=text-embedding-3-small
 ```
-
 
 text-embedding-3-small is a lightweight embedding model optimized for low-latency vector generation. Alternatively, you could use "text-embedding-3-large" for higher accuracy but at increased cost and latency.
 
@@ -190,7 +180,6 @@ public class MongoDBConfig {
 }
 ```
 
-
 Here, we will add some methods to connect to our MongoDB database that we can reuse through our application.
 
 ### Kafka configuration
@@ -210,7 +199,6 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
 spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
 spring.kafka.consumer.properties.spring.json.trusted.packages=com.mongodb.frauddetector.model
 ```
-
 
 If you are unfamiliar with Apache Kafka, this might look like a wall of gibberish, so let's break down what each property does
 
@@ -261,8 +249,7 @@ How it all comes together:
 3. Kafka Consumer reads these messages, deserializes them into Transaction objects, and stores them in MongoDB.
 4. MongoDB Change Streams detect new transactions and trigger fraud detection.
 
-Generate our synthetic customer profiles
-----------------------------------------
+## Generate our synthetic customer profiles
 
 To make our life simple, we're going to start by adding a few enums. We'll be using these when you're generating our transactions, and defining what is "normal" behaviour for our sample customers. Create a package enums in the Spring app to store these.
 
@@ -276,7 +263,6 @@ public enum Category {
 }
 ```
 
-
 Next, a Currency enum.
 
 ```
@@ -286,7 +272,6 @@ public enum Currency {
     EUR, USD, GBP;  
 }
 ```
-
 
 And finally, a slightly more exciting Merchant enum.
 
@@ -321,7 +306,6 @@ public enum Merchant {
     }  
 }
 ```
-
 
 Here, we have a bit of logic to map our merchants to different categories, and a function to get a random merchant, to help with our transaction generation later (for testing and demo purposes).
 
@@ -373,7 +357,6 @@ public class Customer {
 }
 ```
 
-
 Each customer in our system has:
 
 * A unique user ID: This lets us associate transactions with a specific person.
@@ -390,7 +373,6 @@ This allows us to establish a baseline for their spending behavior. If a new tra
         return categories.get(random.nextInt(categories.size()));  
     }
 ```
-
 
 We'll also add the getUnfrequentCategory() method, to pick a category they don't usually spend money on---which could be a red flag.
 
@@ -417,7 +399,6 @@ We'll also add the getUnfrequentCategory() method, to pick a category they don't
 
     }
 ```
-
 
 If a user who only shops at grocery stores suddenly makes a high-ticket tech purchase, we might need to flag that as fraud.
 
@@ -446,7 +427,6 @@ Currency changes can be another strong indicator of fraud. If a user always tran
 
     }
 ```
-
 
 This method helps simulate a realistic fraud scenario, where someone might steal a card and use it overseas.
 
@@ -536,7 +516,6 @@ public class CustomerSeeder {
 }
 ```
 
-
 Now, let's walk through the implementation.
 
 You might be wondering why we're not using MongoRepository for this. While MongoRepository is great for simple CRUD operations, it doesn't provide full control over how we seed our database.
@@ -549,7 +528,6 @@ We use Spring's @PostConstruct annotation to run the seedCustomers() method auto
 @PostConstruct
 public void seedCustomers() {
 ```
-
 
 * If customer data already exists in the MongoDB collection, we skip seeding.
 * Otherwise, we generate 10 customers, each with:
@@ -564,7 +542,6 @@ Once the data is created, we use:
 ```
 mongoTemplate.insertAll(customers);
 ```
-
 
 Thanks to the magic of Spring and our @PostContruct annotation, mongoTemplate will bulk insert everything into our MongoDB database just by running the application.
 
@@ -710,7 +687,6 @@ public class Transaction {
 }
 ```
 
-
 Each transaction has:
 
 * A unique transaction ID: Used to track and reference individual transactions.
@@ -732,7 +708,6 @@ public String generateEmbeddingText() {
     return userId + " " + amount + " " + currency + " " + merchant + " " + category;
 }
 ```
-
 
 ### Generating random transactions
 
@@ -769,7 +744,6 @@ public static Transaction generateRandom(Customer customer) {
 }
 ```
 
-
 This method randomly decides whether the transaction is suspicious (10% chance). Feel free to adjust this to suit your use case you want to test for. It then sets the amount to either a normal range or an unusually high value. Next, we choose a category and merchant based on the user's normal spending behavior (or select a category they don't usually shop in if the transaction is suspicious). Lastly, we select a currency, potentially choosing an unusual one for suspicious transactions.
 
 This Transaction model is the backbone of our fraud detection pipeline. Once generated, transactions will be sent to Kafka, processed, and stored in MongoDB, where we'll use MongoDB Change Streams and Vector Search to flag potential fraud.
@@ -804,7 +778,6 @@ public class OpenAIConfig {
 }
 ```
 
-
 Now, our embedding model is ready to be called upon for generating our vectors to store alongside our transactions in MongoDB.
 
 With our embedding model set up, in our Service package, we can add our new class, EmbeddingGenerator.
@@ -830,7 +803,6 @@ public class EmbeddingGenerator {
 }
 ```
 
-
 This will take the information we want to include in our embedding for each transaction, and generate this embedding using our embedding model.
 
 The @Component notation allows Spring to detect our custom beans automatically. Basically, it lets us instantiate a class and inject any specified dependencies into it, and inject them wherever needed.
@@ -851,7 +823,6 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
 }
 ```
 
-
 Next, we'll create a TransactionRepository interface.
 
 ```
@@ -863,7 +834,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface TransactionRepository extends MongoRepository<Transaction, String> {  
 }
 ```
-
 
 We don't need to do anything else. MongoRepository provides us with all the CRUD operations we need. We don't need to create any custom query implementations. If you want to see more about what MongoRepository provides, and the differences between MongoRepository and MongoTemplate, check out our article about [getting started with Spring Data MongoDB](https://www.mongodb.com/developer/products/mongodb/springdata-getting-started-with-java-mongodb/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant).
 
@@ -912,7 +882,6 @@ public class TransactionSeeder {
 }
 ```
 
-
 This service is responsible for generating sample transactions for each customer and creating the embeddings, then storing them in MongoDB.
 
 It is also responsible for starting the Change Stream listener to detect real-time transactions after the database has been seeded. We make sure to do this after the database has been seeded. We are again accessing the MongoDB Java driver directly, to allow us to verify if the collection has already been seeded.
@@ -947,7 +916,6 @@ Next, we need a post construct method, seedTransactions().
         logger.info("Change Stream Listener Started.");
     }
 ```
-
 
 Once the service is initialized, the @PostConstruct method runs, ensuring that our transactions are created before the system starts processing new ones. We check if the transactions collection already contains data. If it does, we skip the seeding process. Otherwise, we generate 10 transactions per customer.
 
@@ -1001,7 +969,6 @@ public class TransactionProducer {
 }
 ```
 
-
 Spring's Kafka template is used to send messages to a Kafka topic. Next, we need a method to fetch customer data to create transactions. Create a @PostConstruct method.
 
 ```
@@ -1015,7 +982,6 @@ Spring's Kafka template is used to send messages to a Kafka topic. Next, we need
         }  
     }
 ```
-
 
 We cache customer data in memory when the application starts. This avoids repeated database lookups and speeds up transaction generation. Now, we need a method to generate our synthetic transactions. We will use the @Scheduled annotation to create a generateAndSendTransaction() method to run every 100ms.
 
@@ -1033,7 +999,6 @@ We cache customer data in memory when the application starts. This avoids repeat
         logger.info("Transaction sent to topic {}", TOPIC);  
     }
 ```
-
 
 This randomly selects a customer, creates a transaction, and generates an embedding. It then sends the transaction to Kafka.
 
@@ -1057,11 +1022,9 @@ public class FrauddetectorApplication {
 }
 ```
 
-
 Now that our Kafka Producer is generating transactions and sending them to a Kafka topic, we need a way to consume them and store them in MongoDB. This is where the Kafka Consumer comes in.
 
-Ingest our transactions
------------------------
+## Ingest our transactions
 
 This step is fairly simple using spring-kafka. In the service package, add a TransactionConsumer class. We'll set up a simple Kafka listener to automatically process incoming transaction messages.
 
@@ -1089,7 +1052,6 @@ public class TransactionConsumer {
 }
 ```
 
-
 ### How Kafka Consumers work
 
 Kafka follows a publish-subscribe model:
@@ -1106,8 +1068,7 @@ For our system:
 
 With our transactions being produced and consumed, we can now look at how we will monitor incoming transactions on our MongoDB database.
 
-Monitor our database with Change Streams
-----------------------------------------
+## Monitor our database with Change Streams
 
 Once transactions are stored in MongoDB, we need a way to detect new transactions in real time and trigger fraud detection immediately. Instead of repeatedly querying the database for new data, we can use [MongoDB Change Streams](https://www.mongodb.com/docs/manual/changeStreams/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Tim-foojay&utm_term=megan.grant) to efficiently listen for changes.
 
@@ -1158,7 +1119,6 @@ public class TransactionChangeStreamListener {
 }
 ```
 
-
 We need to create a method startListening() to begin monitoring our database.
 
 ```
@@ -1189,18 +1149,15 @@ We need to create a method startListening() to begin monitoring our database.
     }
 ```
 
-
 Now, the change stream monitors all operations on our collection. We don't care about the updates or deletes for our use case, so we use the aggregation pipeline to filter for only inserts.
 
 ```
 List<Bson> pipeline = List.of(Aggregates.match(Filters.eq("operationType", "insert")));
 ```
 
-
 With each incoming transaction, we extract the embedding and use it to run a vector search (we are going to implement this next). If this returns similar transactions marked fraud, we are going to mark this new transaction as fraud. If we don't find any similar transactions for that customer, we are also going to mark it as fraud. We will go more into the implementation of this logic in the next section.
 
-Fraud detection with vector search
-----------------------------------
+## Fraud detection with vector search
 
 Fraud detection in this system relies on MongoDB Atlas Vector Search, which allows us to compare transaction embeddings against historical transactions to determine if a new transaction is suspicious. Create a class TransactionVectorSearchService in the service package.
 
@@ -1239,7 +1196,6 @@ public class TransactionVectorSearchService {
 }
 ```
 
-
 The TransactionVectorSearchService is responsible for:
 
 1. Running vector search on each new transaction.
@@ -1267,7 +1223,6 @@ Now, this first method we will create is the method we are calling in our Change
     }
 ```
 
-
 First, we're going to extract our transactionId, our UserId, and our Embedding. Next, we'll call a helper function findSimilarTransactions(), and pass in our embeddings and the user.
 
 ```
@@ -1287,14 +1242,12 @@ First, we're going to extract our transactionId, our UserId, and our Embedding. 
     }
 ```
 
-
 In findSimilarTransactions(), we create an aggregation pipeline. Here, we set up our vector search to return the top five similar transactions, and filter by the user. We return this to our evaluateTransactionFraud() method, where we run some fraud detection logic.
 
 ```
  boolean isFraud = similarTransactions.isEmpty() ||  
                 similarTransactions.stream().anyMatch(doc -> doc.getBoolean("isFraud", false));
 ```
-
 
 This will return isFraud = True if we can't find any similar transactions for that user, or if any of the returned transactions are marked as fraud. If this is the case, we call the method, markTransactionAsFraud(), and pass in the transactionId.
 
@@ -1307,7 +1260,6 @@ This will return isFraud = True if we can't find any similar transactions for th
         logger.info("Transaction marked as fraud: {}", transactionId);  
     }
 ```
-
 
 This will update the document in our MongoDB collection.
 
@@ -1379,8 +1331,7 @@ To reduce latency and avoid excessive document transfers between the application
 
 When it comes to your application, it is likely going to be a hybrid approach. Each application will have its own considerations, needs, and limitations. In any case, a hybrid approach could work---using triggers to flag transactions and the application for deeper fraud analysis.
 
-Run our application
--------------------
+## Run our application
 
 So with our fraud detection pipeline set up, it's time to run our application. First, we need to start our Kafka.
 
@@ -1393,13 +1344,11 @@ export KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 bin/kafka-storage.sh format --standalone -t $KAFKA_CLUSTER_ID -c config/server.properties
 ```
 
-
 This initializes the internal metadata quorum and sets up Kafka's KRaft storage directory. Now, we start the Kafka broker, using our config.
 
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
-
 
 The broker handles all messaging: storing, forwarding, and distributing messages between producers and consumers. Since we're running Kafka in standalone mode, this single broker is responsible for everything. If everything starts successfully, you should see Kafka logs indicating that the broker is up and running.
 
@@ -1413,7 +1362,6 @@ bin/kafka-topics.sh --create \
   --replication-factor 1
 ```
 
-
 This command creates a topic named transactions. It uses one partition for simplicity, but in production, you would likely want more for scalability. It also sets the replication factor to 1, since we're running only a single broker.
 
 ### Run our Spring app
@@ -1423,7 +1371,6 @@ Now that we have our Kafka up and running, time to run our app.
 ```
 mvn clean spring-boot:run
 ```
-
 
 There will be some start-up time, about 100 seconds, to generate the sample data and populate the database. If everything is working, you should see logs indicating:
 
@@ -1445,9 +1392,7 @@ hangeStreamListener  : Performing vector search
 2025-02-24T15:29:57.050Z  INFO 81047 --- [frauddetector] [   scheduling-1] c.m.f.service.TransactionProducer        : Transaction sent to topic transactions
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 So, we now have a Spring app that can stream in financial transactions from Apache Kafka, and upon insertion into the database, can use Atlas Vector Search to indicate whether they appear to be fraudulent.
 

@@ -39,8 +39,7 @@ In this first post I'd like to discuss two heavyweight champions: dtrace and str
 
 Both tools will let you debug anything without the source code. You could detect problems and gain a level of understanding you never imagined.
 
-Dtrace
-------
+## Dtrace
 
 Back in 2004, I first heard about DTrace while working at Sun Microsystems. It became all the rage in the hallways as it was an innovation that Sun Microsystems was promoting. Dtrace was ported later into MacOS X (it originated on Solaris). Today there are ports on Windows and Linux as well.
 
@@ -88,7 +87,6 @@ As mentioned before, dtrace is a very powerful tool. There are whole books writt
 sudo dtrace -qn 'syscall::write:entry, syscall::sendto:entry /pid == $target/ { printf("(%d) %s %s", pid, probefunc, copyinstr(arg1)); }' -p [PID]
 ```
 
-
 The code snippet passed to the dtrace command listens to the sendto callback on the target process ID. Then prints out the information to the console, e.g.: `(pid) text`
 
 If this seems like a bit too much and too hard to get started with... You're 100% right. It's a powerful tool when you need it. But for most of our day-to-day usage, it's just too powerful. What we want is to know a bit of basic stuff and this is just too much!
@@ -101,7 +99,6 @@ As luck would have it, we have a simple solution:
 man -k dtrace
 ```
 
-
 This prints out a list of tools that's worth reading just to get a sense of how extensive this thing is. Here are a few interesting lines of output from that command:
 
 ```
@@ -111,7 +108,6 @@ errinfo(1m)              - print errno for syscall fails. Uses DTrace
 iotop(1m)                - display top disk I/O events by process. Uses DTrace
 plockstat(1)             - front-end to DTrace to print statistics about POSIX mutexes and read/write locks
 ```
-
 
 It's worth your time going over this list to realize what you can truly do here.
 
@@ -126,7 +122,6 @@ Just run:
 ```
 sudo rwbypid.d
 ```
-
 
 It will print out the reads/writes to the disk:
 
@@ -143,7 +138,6 @@ It will print out the reads/writes to the disk:
    343 sentineld                   W   100287
 ```
 
-
 The security software is really holding performance down...
 
 You can also use `bitesize.d` to get more specific results on the number of bytes written/distribution.
@@ -154,7 +148,6 @@ That's pretty high level though. What if you want specifics: file name, process 
 sudo iosnoop -a
 ```
 
-
 Prints out output that includes pretty much everything you would need:
 
 ```
@@ -164,7 +157,6 @@ STRTIME              DEVICE  MAJ MIN   UID   PID D      BLOCK     SIZE          
 2022 Jun 30 12:16:57 ??        1  17   499   342 W  150777294     4096 ??/persistent/.dat.nosync0156.ztvXap sentineld\0
 ```
 
-
 I can see the process id and how many bytes it wrote to the specific file!
 
 Let's say your program spans processes and you want to see what's going on. E.g. I run a source code build in a server I built:
@@ -172,7 +164,6 @@ Let's say your program spans processes and you want to see what's going on. E.g.
 ```
 sudo errinfo
 ```
-
 
 Lets me detect the error returned from system calls to and the command that originally triggered that:
 
@@ -188,11 +179,9 @@ SentinelAgent workq_kernreturn   -2
        Google           Chrome    0
 ```
 
-
 These are just the tip of the iceberg. I suggest checking out this old [dtrace tutorial](https://www.oracle.com/solaris/technologies/dtrace-tutorial.html) from Oracle or [the book](https://www.bookdepository.com/DTrace-Brendan-Gregg/9780132091510?ref=grid-view&qid=1656581174175&sr=1-1). Disclaimer: I didn't read the book...
 
-strace
-------
+## strace
 
 Amusingly enough, the strace tool also originated at Sun Microsystems in this case in the 90s. This isn't surprising though as the list of technologies originating from Sun Microsystems is absolutely mind numbing.
 
@@ -212,7 +201,6 @@ The most basic usage of strace is just passing the command line to it:
 strace java -classpath. PrimeMain
 ```
 
-
 The output of strace for this is pretty long, lets go over a few of the lines:
 
 ```
@@ -227,13 +215,11 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/libpthread.so.0", O_RD
 stat("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls", 0x7fff37af09a0) = -1 ENOENT (No such file or directory)
 ```
 
-
 Every one of these lines is a Linux system call. We can google each one of them to get a sense of what's going on. Here's a simple example:
 
 ```
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 ```
-
 
 Java tries to load the `pthread` library from the `tls` directory using a system open call to load the file. The exit code of the system call is `-1`, which means that the file isn't there. Under normal circumstances, we should get back a file descriptor value from this API. Looking in the directory, it seems the `tls` directory is missing. I'm guessing that this is because of a missing JCE installation. This is probably OK but might have been interesting in some cases.
 
@@ -242,7 +228,6 @@ Obviously, the amount of output is overwhelming sometimes. We usually just want 
 ```
 strace -e open java -classpath . PrimeMain
 ```
-
 
 Will only show the open system calls:
 
@@ -261,7 +246,6 @@ open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libjli.so", O_RDONLY|O_CLO
 open("/home/ec2-user/jdk1.8.0_45/bin/../lib/amd64/jli/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 ```
 
-
 There are many system calls you can learn and use to track many behaviors such as this: connect, write, etc. This is only the tip of the iceberg of what you can do using strace. Julia Evans wrote some of the most [exhaustive and entertaining posts on strace](https://jvns.ca/categories/strace/). If you want to learn more about it, there's probably no better place (also check out her other stuff... Amazing resources!).
 
 ![](Screen-Shot-2022-07-04-at-7.26.35-700x278.png)
@@ -274,8 +258,7 @@ A good example is allocations. System tools use malloc, which maps to kernel all
 
 At the time of this writing, threading works well with strace. But this might not be the case moving forward as [project Loom](https://cr.openjdk.java.net/~rpressler/loom/Loom-Proposal.html) might change the one-to-one mapping between Java threads and system threads. This might make strace output harder to pinpoint in heavily threaded applications.
 
-Finally
--------
+## Finally
 
 There's an alphabet soup of "\*trace" utilities in various forms that keep borrowing ideas from one another. It's a significant challenge to keep up with all of that noise. There are just too many great tools to cover, I would like to discuss btrace in a future installment though. It's very similar to dtrace but also very JVM specific so probably worth a different post.
 

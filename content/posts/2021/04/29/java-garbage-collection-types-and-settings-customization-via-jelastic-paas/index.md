@@ -24,8 +24,7 @@ Performance and price are two big considerations in application hosting that alw
 
 Let's clarify what garbage collection is, what it does for Java applications and how it works within Jelastic PaaS.
 
-Java Garbage Collection Overview
---------------------------------
+## Java Garbage Collection Overview
 
 **Garbage Collection** is a form of automatic memory management. Its aim is to find data objects in memory that are no longer demanded and make their space available for reuse.
 
@@ -57,8 +56,7 @@ Jelastic supports the following GCs:
 * [-XX:IdleTuningMinIdleWaitTime=180](https://www.eclipse.org/openj9/docs/xxidletuningminidlewaittime/)
 * [-Xjit:waitTimeToEnterDeepIdleMode=50000](https://www.eclipse.org/openj9/docs/xjit/)
 
-Default JVM Options in Jelastic PaaS
-------------------------------------
+## Default JVM Options in Jelastic PaaS
 
 By default Jelastic PaaS uses G1 GC for JVM 8+ versions. For lower versions it employs the ParNew GC. Also, for JVM versions below 12 Jelastic attaches [jelastic-gc-agent.jar](https://github.com/jelastic-jps/java-memory-agent) which enables vertical scaling for older releases.
 
@@ -92,8 +90,7 @@ If JVM version is higher than 12, the platform additionally configures the follo
 
 For more details, you can review the following script that manages [automatic configuration of the Java options](https://github.com/jelastic-jps/java-memory-agent/blob/master/scripts/memoryConfig.sh).
 
-Customization of GC Settings in Jelastic PaaS
----------------------------------------------
+## Customization of GC Settings in Jelastic PaaS
 
 If you believe that customization of default settings can improve performance or memory consumption, you can tune them according to the requirements of your application. We recommend customizing these configurations only if you fully understand the impact of such changes on your application behaviour.
 

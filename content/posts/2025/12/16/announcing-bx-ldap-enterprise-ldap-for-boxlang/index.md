@@ -26,13 +26,11 @@ frozen: false
 We're excited to announce the release of **bx-ldap**, a comprehensive LDAP module that brings enterprise-grade directory access to BoxLang! This module goes above and beyond traditional CFML LDAP implementations, offering modern features like connection pooling, event-driven programming, multiple return formats, and a clean, intuitive API.
 > **Note:** bx-ldap is a premium module available exclusively to BoxLang +/++ **subscribers**.
 
-🎯 Why?
--------
+## 🎯 Why?
 
 Whether you're integrating with Active Directory, OpenLDAP, or any LDAP-compliant directory service, **bx-ldap** makes it simple and powerful. From basic queries to complex directory operations, this module handles it all with grace and performance.
 
-✨ Amazing Features
-------------------
+## ✨ Amazing Features
 
 ### 🔍 Seven Powerful Actions
 
@@ -81,7 +79,6 @@ apiResponse = {
 return jsonSerialize( apiResponse );
 ```
 
-
 ### 🔌 Smart Connection Pooling
 
 Forget about managing connections manually! bx-ldap includes automatic connection pooling and tracking, ensuring optimal performance and resource management:
@@ -119,7 +116,6 @@ bx:ldap
     connection="myLdap";
 ```
 
-
 ### 📢 Event-Driven Programming
 
 Monitor and react to LDAP operations with built-in event announcements! bx-ldap integrates seamlessly with BoxLang's interception system:
@@ -147,7 +143,6 @@ class {
 }
 ```
 
-
 Perfect for:
 
 * Audit logging
@@ -156,8 +151,7 @@ Perfect for:
 * Resource management
 * Custom metrics
 
-💡 Code Samples
----------------
+## 💡 Code Samples
 
 Quick User Lookup
 
@@ -180,7 +174,6 @@ if ( user.recordCount > 0 ) {
 }
 ```
 
-
 Complex Search with Pagination
 
 ```java
@@ -199,7 +192,6 @@ bx:ldap
 
 println( "Found #itUsers.recordCount# active IT users" );
 ```
-
 
 Create a New User
 
@@ -226,7 +218,6 @@ bx:ldap
 println( "User created successfully!" );
 ```
 
-
 Secure SSL Connection
 
 ```java
@@ -242,7 +233,6 @@ bx:ldap
     filter="(objectClass=person)"
     result="secureUsers";
 ```
-
 
 Group Management
 
@@ -268,9 +258,7 @@ bx:ldap
     attributes=newGroup;
 ```
 
-
-🔒 Enterprise-Grade Security
-----------------------------
+## 🔒 Enterprise-Grade Security
 
 * **SSL/TLS Support** - Secure connections with server authentication
 * **Mutual TLS** - Client certificate authentication
@@ -278,8 +266,7 @@ bx:ldap
 * **Credential Management** - Secure handling of authentication
 * **Access Control** - Fine-grained permission handling
 
-🚀 Performance Optimized
-------------------------
+## 🚀 Performance Optimized
 
 * **Connection Pooling** - Automatic connection reuse and management
 * **Result Pagination** - Handle large datasets efficiently
@@ -287,8 +274,7 @@ bx:ldap
 * **Scope Control** - Optimize searches with base/onelevel/subtree scopes
 * **Query Caching** - Cache frequently accessed data
 
-📦 Installation
----------------
+## 📦 Installation
 
 **Remember that in order to get started you will need a BoxLang +/++ subscription as this is an enterprise module professionally supported.**
 
@@ -298,16 +284,13 @@ For CommandBox Users
 box install bx-ldap@ortus
 ```
 
-
 For BoxLang OS Binary Users
 
 ```java
 install-bx-module bx-ldap@ortus
 ```
 
-
-📚 Documentation
-----------------
+## 📚 Documentation
 
 [https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+](https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+ "https://boxlang.ortusbooks.com/boxlang-framework/modularity/ldap-+")
 
@@ -321,8 +304,7 @@ Comprehensive documentation is available with:
 
 Check out the full documentation in the module's README for everything you need to get started!
 
-🎁 Get Access
--------------
+## 🎁 Get Access
 
 bx-ldap is available exclusively to **BoxLang +/++ subscribers**. Join our subscription program to access this and other premium modules that extend BoxLang's capabilities:
 

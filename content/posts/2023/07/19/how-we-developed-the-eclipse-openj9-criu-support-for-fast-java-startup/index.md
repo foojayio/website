@@ -36,8 +36,7 @@ In serverless cloud applications, container orchestrators like Kubernetes and Op
 
 If you just want to quickly and easily try this out with your own app (or with a sample app), stop reading now and instead see [How to package your cloud-native Java application for rapid startup](https://openliberty.io/blog/2023/06/29/rapid-startup-instanton.html?utm_source=foojay&utm_medium=article&utm_content=criu "How to package your cloud-native Java application for rapid startup"). If, however, you want to find out more about the technical challenges that the [OpenJ9](https://www.eclipse.org/openj9/?utm_source=foojay&utm_medium=article&utm_content=criu "OpenJ9") teams faced and addressed with the CRIU project, read on.
 
-OpenJ9 CRIU Support
--------------------
+## OpenJ9 CRIU Support
 
 Over the Eclipse OpenJ9 JVM's long history we first made the JVM start as fast as possible. Then we implemented a shared class cache (SCC) and ahead-of-time (AOT) compilation, saving class data and compiled code on disk so we didn't have to process and compute them again next time.
 
@@ -57,8 +56,7 @@ One change that might be necessary to the application itself is to ensure that t
 
 If you can do that you're most of the way there. You also have to make sure that the files your program depends on (program files such as libraries, and data files) don't change between the checkpoint and restore steps. This naturally works very well in containerized environments in which each instance of the container has its own copy of all the files needed by the application and kept separately from any other instance.
 
-Checkpoint/restore challenges that we resolved in OpenJ9 CRIU Support
----------------------------------------------------------------------
+## Checkpoint/restore challenges that we resolved in OpenJ9 CRIU Support
 
 Much of our work on OpenJ9 CRIU Support has been spent testing, uncovering problems, and finding solutions to them.
 
@@ -86,8 +84,7 @@ The new unprivileged mode handles a subset of the cases that a fully privileged 
 
 Both Docker and Podman support the checkpointing and restoring of containers using CRIU, which is ultimately a very similar process to our own, which gives us added confidence that we're not compromising security in any way.
 
-Creating a slick developer experience with Liberty InstantOn
-------------------------------------------------------------
+## Creating a slick developer experience with Liberty InstantOn
 
 An essential part of making the OpenJ9 CRIU Support available was ensuring that it has a slick developer experience so that developers want to use it. It would be counterproductive to require developers to have a deep understanding of OpenJ9 CRIU Support, the JVM and its implementation, and how to use it with a Java runtime just to be able to make their apps start faster.
 
@@ -101,8 +98,7 @@ The Liberty Docker images have been updated with Liberty InstantOn to provide ch
 
 You can try out Liberty InstantOn with your own app (or a sample app); see [How to package your cloud-native Java application for rapid startup](https://openliberty.io/blog/2023/06/29/rapid-startup-instanton.html?utm_source=foojay&utm_medium=article&utm_content=criu "How to package your cloud-native Java application for rapid startup").
 
-What next for OpenJ9 CRIU Support?
-----------------------------------
+## What next for OpenJ9 CRIU Support?
 
 There are some other challenges to the checkpoint/restore approach that we plan to address in future developments.
 
@@ -120,18 +116,15 @@ Restored processes continue to be owned by the original user, which means that t
 
 In the near future we aim to be able to restore processes to any UID, thereby freeing users from having to recreate UIDs on every machine or disabling random UIDs in OpenShift, and so on.
 
-Try it out
-----------
+## Try it out
 
 You can try checkpoint and restore with your own application with the latest release of Open Liberty, which includes the IBM Semeru Runtimes distribution of OpenJ9, by following the steps outlined in [How to package your cloud-native Java application for rapid startup](https://openliberty.io/blog/2023/06/29/rapid-startup-instanton.html?utm_source=foojay&utm_medium=article&utm_content=criu "How to package your cloud-native Java application for rapid startup"). Let us know what you think in the comments.
 
-Ask a question
---------------
+## Ask a question
 
 If you want to ask questions directly to the OpenJ9 and Open Liberty development teams, you are welcome to [register for our live webinar on July 20, 1pm-2:30pm (ET)](https://community.ibm.com/community/user/wasdevops/events/event-description?CalendarEventKey=3566b086-bbbb-4da2-9ace-0187390632c1&CommunityKey=5c4ba155-561a-4794-9883-bb0c6164e14e&Home=%2fcommunity%2fuser%2fwasdevops%2fcommunities%2fcommunity-home%2frecent-community-events&utm_source=foojay&utm_medium=article&utm_content=criu "register for our live webinar on July 20, 1pm-2:30pm (ET)"). If you can't make it to the live webinar, the session will be recorded for watching later (register to access the recording).
 
-Conclusion
-----------
+## Conclusion
 
 Java startup performance has come a long way in the last two decades. The checkpoint and restore model represents a radically different way of thinking about how Java programs are built, deployed, and executed. It's an approach tailored to modern Java and the cloud. It allows us to effectively start our programs "offline" and to restore them on demand, when needed, in a fraction of the time a conventional JVM would take, and takes full advantage of modern containerization.
 

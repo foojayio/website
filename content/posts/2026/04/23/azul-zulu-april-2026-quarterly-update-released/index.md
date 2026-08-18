@@ -22,8 +22,7 @@ frozen: false
 
 The **April 2026 quarterly update for Azul Zulu Builds of OpenJDK** is now available. This quarterly release brings **security and bug fixes**, along with a few notable new changes, to all currently supported Java versions.
 
-The Quarterly Update Cycle
---------------------------
+## The Quarterly Update Cycle
 
 Every three months (in January, April, July, and October), the OpenJDK project releases security updates, bug fixes, and improvements for all supported Java versions. This predictable schedule helps organizations plan their Java updates and maintain secure, stable production environments.
 
@@ -41,8 +40,7 @@ PSU releases provide a more comprehensive update. They incorporate **all securit
 
 In an ideal scenario, you install a CPU as soon as possible after a brief test to secure your environment. After that, you test with the PSU release for a longer time. Once all your tests are green, switch your environment to the PSU version. This must be completed before the next quarterly update, so you can easily repeat the cycle.
 
-Difference With the Six-Month Release Cycle
--------------------------------------------
+## Difference With the Six-Month Release Cycle
 
 The six-month release cycle, introduced with OpenJDK 9, brings a new major OpenJDK version in March and September. This April 2026 quarterly update is the first update to Java 26, which was released on March 17, 2026.
 
@@ -56,8 +54,7 @@ The quarterly cycle brings updates to existing releases. This April CPU/PSU rele
 
 Remember: to keep your systems secure, you need to install an update of your JDK every three months. Run `java -version` to check how far behind you are.
 
-Security and Bug Fixes in This Release
---------------------------------------
+## Security and Bug Fixes in This Release
 
 In this release, there are [11 Common Vulnerabilities and Exposures (CVE) fixes](https://docs.azul.com/core/release-notes#fixed-common-vulnerabilities-and-exposures) of which three got a high-severity severity score of 7.5 and one is not applicable to Azul Zulu.
 
@@ -72,8 +69,7 @@ Besides these security problems, this release fixes the following number of issu
 
 The number of fixes in Azul Zulu includes OpenJDK non-security fixes, Azul-specific fixes, and security fixes, so the total number may differ slightly from the OpenJDK numbers.
 
-Azul Zulu April 2026 Release Notes
-----------------------------------
+## Azul Zulu April 2026 Release Notes
 
 Azul released Azul Zulu Builds of OpenJDK (Zulu) in versions 26, 25, 21, 17, 11, 8, 7, and 6. You can check the [full Azul release notes here](https://docs.azul.com/core/release-notes). A few highlights are worth calling out.
 
@@ -86,7 +82,6 @@ docker pull azul-zulu:21
 docker pull azul-zulu:21-jre
 docker pull azul-zulu:25
 ```
-
 
 What does "Official Image" mean in practice? It means the Docker team has reviewed and verified the images, they follow Docker's best practices, and they will show up in Docker Hub search results alongside other official images like `ubuntu` or `node`. For Java developers running containers, it is a stronger trust signal out of the box.
 
@@ -118,8 +113,7 @@ This release ships with [IANA Time Zone Database](https://www.iana.org/time-zone
 
 There is one known issue in this release: if you use AWT with the Security Manager, your application may fail to start with an `AccessControlException` related to `jdk.awt.Desktop.bypassBrowserForURI`. A workaround is available using a custom Java policy file. Check the [release notes](https://docs.azul.com/core/release-notes#known-issues) for the exact steps.
 
-Next Steps
-----------
+## Next Steps
 
 Plan your testing and deployment schedule to ensure your Java applications benefit from the latest security patches and bug fixes. And mark your calendar, the next quarterly updates and releases arrive on:
 

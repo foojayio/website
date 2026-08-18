@@ -30,8 +30,7 @@ However, there are many situations that can benefit from other deployment option
 
 In this series of articles, we'll examine different deployment patterns and show how to implement them using K8ssandra.
 
-Flexible topologies with Cassandra
-----------------------------------
+## Flexible topologies with Cassandra
 
 From its earliest days, Cassandra has included the ability to assign nodes to datacenters and racks. A rack was originally conceived as mapping to a single rack of servers connected to shared resources, like power, network, and cooling.
 
@@ -45,8 +44,7 @@ Another common pattern takes advantage of the fact that datacenters and racks do
 
 For example, when running heavy analytics workloads it may make sense to spin up a separate logical data center for those queries. Transactional workloads will not be affected by the surge in queries as Spark jobs are submitted and run against the dedicated analytics datacenter.
 
-Separate K8ssandra install per Cassandra datacenter
----------------------------------------------------
+## Separate K8ssandra install per Cassandra datacenter
 
 Let's look at how you can use Kubernetes namespaces to perform separate K8ssandra installations in the same cloud region.
 
@@ -73,7 +71,6 @@ kubectl create secret generic cassandra-admin-secret --from-literal=username=cas
 kubectl create namespace analyticsdc
 kubectl create secret generic cassandra-admin-secret --from-literal=username=cassandra-admin --from-literal=password=cassandra-admin-password -n analyticsdc
 ```
-
 
 For the purpose of this blog, let's keep things simple and let `kubectl` encode the credentials. You may want to use a more complex password for production deployments.
 
@@ -106,7 +103,6 @@ cassandra:
         failure-domain.beta.kubernetes.io/zone: us-west4-c
 ```
 
-
 In addition to requesting 3 nodes in the datacenter, this configuration specifies a specific storage class which uses `volumeBindingMode: WaitForFirstConsumer`, and uses affinity to specify how the racks are mapped to GCP zones. This configuration also uses the secret you created previously for the Cassandra superuser account.
 
 Create a release for the datacenter using this command:
@@ -114,7 +110,6 @@ Create a release for the datacenter using this command:
 ```
 helm install txndc k8ssandra/k8ssandra -f dc1.yaml -n txndc
 ```
-
 
 This causes the K8ssandra release to be installed in the `txndc` namespace, which is just a name picked to indicate this is a Cassandra datacenter intended for transactional work.
 
@@ -131,7 +126,6 @@ mixed-workload-dc1-rack1-sts-0
 mixed-workload-dc1-rack3-sts-0
 ```
 
-
 As you can see, `rack1` maps to zone `us-west4-a`, `rack2` to zone `us-west4-b`, and `rack3` to zone `us-west4-c`, as requested.
 
 As would be the case for any Cassandra cluster deployment, you will want to wait for the first datacenter to be completely up before adding a second datacenter. One simple way to do this is to watch until the Stargate pod shows as initialized, since it depends on Cassandra being ready:
@@ -142,7 +136,6 @@ watch kubectl get pods -n txndc
 NAME                                                  READY   STATUS             RESTARTS   AGE
 txndc-dc1-stargate-58bf5657ff-ns5r7                     1/1     Running            0          15m
 ```
-
 
 ### Adding a second datacenter
 
@@ -158,13 +151,11 @@ The seed service provides a stable DNS address that resolves IP addresses during
 kubectl get services -n txndc | grep seed
 ```
 
-
 Which produces output such as:
 
 ```
 mixed-workload-seed-service  ClusterIP    None    <none>    <none>    30m
 ```
-
 
 As you can see, the name for the service is `mixed-workload-seed-service`. To reference it as a seed provider in the other namespace, you'll need to include the namespace as part of the DNS name: `mixed-workload-seed-service.txndc`. Create a configuration with the values just described, in a file called `dc2.yaml`:
 
@@ -192,13 +183,11 @@ cassandra:
         failure-domain.beta.kubernetes.io/zone: us-west4-a
 ```
 
-
 Similar to the configuration for `dc1`, this configuration also uses affinity. A similar allocation of racks can be used to make sure Cassandra nodes are evenly spread across the remaining workers. Deploy the release using this command:
 
 ```
 helm install analyticsdc k8ssandra/k8ssandra -f dc2.yaml -n analyticsdc
 ```
-
 
 This causes the K8ssandra release to be installed in the `analyticsdc` namespace. If you look at the resources in this namespace using a command such as `kubectl get services,pods -n analyticsdc`, you'll note that there are a similar set of pods and services as for `txndc`, including Stargate, Prometheus, Grafana, and Reaper. Depending on how you wish to manage your application, this may or may not be to your liking, but you are free to tailor the configuration to disable any components you don't need.
 
@@ -209,7 +198,6 @@ Once the second datacenter comes online, you'll want to configure Cassandra keys
 ```
 kubectl exec mixed-workload-dc1-rack1-sts-0 -n txndc -it -- cqlsh -u cassandra-admin -p cassandra-admin-password
 ```
-
 
 Use the `DESCRIBE KEYSPACES` command to list the keyspaces and `DESCRIBE KEYSPACE <name>` to identify those using the `NetworkTopologyStrategy`. For example:
 
@@ -224,13 +212,11 @@ CREATE KEYSPACE system_auth WITH replication = {'class': 'NetworkTopologyStrateg
 …
 ```
 
-
 Typically you'll find that the `system_auth`, `system_traces`, and `system_distributed` keyspaces use `NetworkTopologyStrategy`. You can then update the replication strategy to ensure data is replicated to the new datacenter. You'll execute something like the following for each of these keyspaces:
 
 ```
 ALTER KEYSPACE system_auth WITH replication = {'class': 'NetworkTopologyStrategy', 'dc1': 3, 'dc2': 3};
 ```
-
 
 **Important:**Remember to create or alter the replication strategy for any keyspaces you need for your application so that you have the desired number of replicas in each datacenter.
 
@@ -241,7 +227,6 @@ After exiting `cqlsh`, make sure existing data is properly replicated to the new
 ```
 kubectl exec mixed-workload-dc2-rack1-sts-0 -n analyticsdc -- nodetool --username cassandra-admin --password cassandra-admin-password rebuild dc1
 ```
-
 
 Repeat for the other nodes `mixed-workload-dc2-rack2-sts-0` and `mixed-workload-dc2-rack3-sts-0`.
 
@@ -254,7 +239,6 @@ Because K8ssandra configures Cassandra nodes to require login by default, you'll
 ```
 kubectl exec mixed-workload-dc1-rack1-sts-0 -n txndc -- nodetool --username cassandra-admin --password cassandra-admin-password status
 ```
-
 
 This will produce output similar to the following:
 
@@ -279,12 +263,10 @@ UN  10.120.4.14  182.44 KiB  256          16.8%             791b70d3-5c69-4101-8
 UN  10.120.3.7   158.64 KiB  256          17.8%             9e686277-9a78-49f6-bb5f-4322733c60d6  rack3
 ```
 
-
 If everything has been configured correctly, you'll be able to see both datacenters in the cluster output. Here's a picture that depicts what you've just deployed, focusing on the Cassandra nodes:
 ![](k8ssandra-docs-architecture-Multi-cluster-1.png)
 
-Multiple Cassandra datacenters in a single K8ssandra install?
--------------------------------------------------------------
+## Multiple Cassandra datacenters in a single K8ssandra install?
 
 One question that might have occurred to you: why not do a single K8ssandra installation with multiple datacenters? For example, you might try a configuration like this:
 
@@ -302,7 +284,6 @@ cassandra:
     - name: rack1
 ```
 
-
 However, if you attempt an installation like this and inspect the results using kubectl get cassdc, you'll only see a single datacenter in the resulting deployment:
 
 ```
@@ -310,13 +291,11 @@ NAME   AGE
 dc1    1m
 ```
 
-
 What's the issue? It turns out that K8ssandra 1.x releases only support deployment of a single datacenter. While [cass-operator](https://github.com/k8ssandra/cass-operator) does support multiple datacenters, releases of K8ssandra prior to 2.0 rely heavily on Helm's templating feature to provide additional infrastructure around Cassandra.
 
 Configuration of this additional infrastructure to incorporate addition or removal of datacenters will require significant effort to implement in Helm templates, as discussed in issue [#566](https://github.com/k8ssandra/k8ssandra/issues/566). The 2.0 release will provide a K8ssandra operator, where it will be much simpler to implement multi-datacenter deployments. You can read more about these plans in issue [#485](https://github.com/k8ssandra/k8ssandra/issues/485).
 
-What's next
------------
+## What's next
 
 In the next post in this series, we'll take our first steps in multi-datacenter topologies that span Kubernetes clusters.
 

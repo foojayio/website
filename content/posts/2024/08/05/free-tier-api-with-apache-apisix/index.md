@@ -24,8 +24,7 @@ frozen: false
 
 In this day and age, most services are online and accessible via an API. Today, we will implement a free tier with [Apache APISIX](https://apisix.apache.org/).
 
-A naive approach
-----------------
+## A naive approach
 
 I implemented a free tier in my post [Evolving your RESTful APIs, a step-by-step approach](https://blog.frankel.ch/evolve-apis/#know-your-users), albeit in a very naive way. I copy-pasted the [limit-count](https://apisix.apache.org/docs/apisix/plugins/limit-count/) plugin and added my required logic.
 
@@ -49,7 +48,6 @@ function _M.access(conf, ctx)
 -- rest of the logic
 ```
 
-
 1. Get the configured request header value
 2. Get the consumer's `key-auth` configuration
 3. Get consumers
@@ -58,8 +56,7 @@ function _M.access(conf, ctx)
 
 The downside of this approach is that the code is now my own. It has evolved since I copied it, and I'm stuck with the version I copied. We can do better, with the help of the `vars` parameter on routes.
 
-APISIX route matching
----------------------
+## APISIX route matching
 
 APISIX delegates its matching rule to a [router](https://apisix.apache.org/docs/apisix/terminology/router/).  
 
@@ -81,7 +78,6 @@ routes:
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v1+json" ]]
 ```
 
-
 The above route will match if, and only if, the HTTP `Accept` header is equal to `vnd.ch.frankel.myservice.v1+json`. You can find the complete list of supported operators in the [lua-resty-expr](https://github.com/api7/lua-resty-expr) project.
 
 APISIX matches routes in a non-specified order by default. If URIs are *disjointed*, that's not an issue.
@@ -96,7 +92,6 @@ routes:
     vars: [[ "http_accept", "==", "vnd.ch.frankel.myservice.v2+json" ]]
 ```
 
-
 Problems arise when URIs are somehow not disjointed. For example, imagine I want to set a default route for unversioned calls.
 
 ```yaml
@@ -110,7 +105,6 @@ routes:
   - uri: /*
     upstream_id: 1
 ```
-
 
 We need the third route to be evaluated last. If it's evaluated first, it will match all requests, regardless of their HTTP headers. APISIX offers the `priority` parameter to order route evaluation. By default, a route's priority is 0. Let's use `priority` to implement the versioning correctly:
 
@@ -128,11 +122,9 @@ routes:
     upstream_id: 1
 ```
 
-
 1. Evaluated first. The order is not relevant since the URIs are disjointed.
 
-Implementing free tier with matching rules
-------------------------------------------
+## Implementing free tier with matching rules
 
 We are now ready to implement our free tier with matching rules.
 
@@ -146,7 +138,6 @@ routes:
     plugins:
       key-auth: ~                                             #2
 ```
-
 
 1. Match if the request has an HTTP header named `apikey`
 2. Authenticate the request
@@ -164,7 +155,6 @@ The other route is evaluated afterward.
       rejected_code: 429
 ```
 
-
 1. Rate limit this route
 
 When you configure APISIX with the above snippets, and it receives a request to `/get`, it tries to match the first route *only* if it has an `apikey` request header:
@@ -175,8 +165,7 @@ When you configure APISIX with the above snippets, and it receives a request to 
    * If it fails, APISIX returns a 403 HTTP status code
 2. If it has no such request header, it matches the second route with a rate limit.
 
-Conclusion
-----------
+## Conclusion
 
 A free tier is a must for any API service provider worth its salt. In this post, I've explained how to configure such free tier with Apache APISIX.
 
@@ -189,10 +178,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [router-radixtree](https://apisix.apache.org/docs/apisix/router-radixtree/)
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/free-tier-api-apisix/) on July 28^th^, 2024*
-
-<br />
-
-<br />

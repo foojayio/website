@@ -102,7 +102,6 @@ public class TraditionalConcurrencyExample {
 }
 ```
 
-
 When you run this code, several issues typically emerge:
 
 * **Complex error handling:** If one task fails, we must manually cancel the other task. Otherwise, it will continue running despite no longer being required, leading to resource leakage.
@@ -121,7 +120,6 @@ try (var scope = StructuredTaskScope.open()) {
   // ...
 }
 ```
-
 
 The zero-argument open() returns a scope that waits for all subtasks to succeed or any to fail---the default "all-or-fail" policy. If you need something fancier, call the overloaded open(joiner) variant and supply a custom completion policy via a Joiner (more on that in a minute). Why the factory? It packages sensible defaults and, critically, gives the implementation room to evolve without breaking your code. I find this change beneficial: using a single keyword is more concise, and it reduces potential complications.
 
@@ -142,7 +140,6 @@ public static String getUserInfoTraditional(String userId) throws Exception {
   }
 }
 ```
-
 
 The difference is striking. With structured concurrency, the cleanup is automatic and guaranteed. If any task fails, all other tasks in the scope are cancelled. If the scope exits (normally or exceptionally), all resources are cleaned up. This is comparable to having a try-with-resources mechanism for concurrent tasks.
 
@@ -167,7 +164,6 @@ try (var scope = StructuredTaskScope.open(Joiner.<String>anySuccessfulResultOrTh
 }
 ```
 
-
 **"All must succeed and I want their results"**
 
 ```
@@ -178,7 +174,6 @@ try (var scope = StructuredTaskScope.open(Joiner.<Result>allSuccessfulOrThrow())
                  .toList();
 }
 ```
-
 
 These little helpers make common patterns---"race", "gather", "wait-for-all"---painless.
 
@@ -228,13 +223,11 @@ class MyCollectingJoiner<T> implements StructuredTaskScope.Joiner<T, Stream<T>> 
 }
 ```
 
-
 The interface is tiny---`onFork`, `onComplete`, and `result()`---yet powerful enough for most custom logic. To run this, we need JDK 25, and we can execute it from the CLI using the following command:
 
 ```
 java --enable-preview CollectingJoiner.java
 ```
-
 
 ### **Better cancellation and deadlines**
 
@@ -250,7 +243,6 @@ try (var scope = StructuredTaskScope.open(
 }
 ```
 
-
 If the timeout fires, the scope cancels, and `join()` throws `TimeoutException`. In practice, I attach a timeout to every external call to keep runaway tasks under control.
 
 You can also swap the default virtual-thread factory for one that sets names or thread-locals:
@@ -264,7 +256,6 @@ try (var scope = StructuredTaskScope.open(
     // ...
 }
 ```
-
 
 Thread naming alone makes thread dumps far more readable.
 
@@ -337,7 +328,6 @@ public class ThreeSixtyProductView {
 }
 ```
 
-
 #### **Example 2 -- "Race the Mirrors" File Downloader**
 
 Large binaries are hosted on several CDN mirrors. Latency varies, so we fire requests to every mirror simultaneously and use `Joiner.anySuccessfulResultOrThrow()` to stream the first successful `InputStream`, cancelling the rest. Bandwidth and connection slots are freed instantly, and users perceive the fastest possible download without manual cancellation plumbing.
@@ -381,7 +371,6 @@ public class MirrorDownloaderDemo {
   }
 }
 ```
-
 
 #### **Example 3 -- Batched Thumbnail Generator with Nested Scopes**
 
@@ -430,7 +419,6 @@ public class ThumbnailBatchDemo {
     return null;
   }
 ```
-
 
 #### **Example 4 -- Real-Time Quote Service with Timed Fallback**
 
@@ -482,7 +470,6 @@ public class QuoteServiceDemo {
   }
 }
 ```
-
 
 ### **Final thoughts**
 

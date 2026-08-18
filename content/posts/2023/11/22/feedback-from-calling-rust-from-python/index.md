@@ -29,8 +29,7 @@ I got plenty of feedback on my post about [Calling Rust from Python](https://blo
 
 Many comments mentioned `pyo3`, and I should use it instead of cooking my own. Thanks to the authors, I checked: in this post, I explain what it is and how I migrated my code.
 
-What is pyo3?
--------------
+## What is pyo3?
 
 > Rust bindings for Python, including tools for creating native Python extension modules. Running and interacting with Python code from a Rust binary is also supported.
 >
@@ -38,8 +37,7 @@ What is pyo3?
 
 Indeed, `pyo3` fits my use case, calling Rust from Python. Even better, it handles converting Python types to Rust types and back again. Finally, it offers the `maturin` utility to make the interaction between the Python project and the Rust project seamless.
 
-Maturin
--------
+## Maturin
 
 > Build and publish crates with pyo3, rust-cpython, cffi and uniffi bindings as well as rust binaries as python packages.
 >
@@ -54,15 +52,13 @@ Maturin
 
 Note that Maturin started as a companion project to `pyo3` but now offers rust-cpython, cffi and uniffi bindings.
 
-Migrating the project
----------------------
+## Migrating the project
 
 The term migrating is a bit misleading here since we will start from scratch to fit Maturin's usage. However, we will achieve the same end state. I won't paraphrase [the tutorial](https://pyo3.rs/v0.20.0/#using-rust-from-python) since it works seamlessly. Ultimately, we have a fully functional Rust project with a single `sum_as_string()` function, which we can call in a Python shell. Note the dependency to `pyo3`:
 
 ```bash
 pyo3 = "0.20.0"
 ```
-
 
 The second step is to re-use the material from the previous project. First, we add our `compute()` function at the end of the `lib.rs` file:
 
@@ -78,7 +74,6 @@ fn compute(command: &str, a: Complex<f64>, b: Complex<f64>) -> PyResult<Complex<
 }
 ```
 
-
 1. The `pyfunction` macro allows the use of the function in Python
 2. Use regular Rust types for parameters; `pyo3` can convert them
 3. We need to return a `PyResult` type, which is an alias over `Result`
@@ -90,7 +85,6 @@ fn compute(command: &str, a: Complex<f64>, b: Complex<f64>) -> PyResult<Complex<
 pyo3 = { version = "0.20.0" , features = ["num-complex"]}
 num-complex = "0.4.4"
 ```
-
 
 To convert custom types, you must implement traits `FromPyObject` for parameters and `ToPyObject` for return values.
 
@@ -105,7 +99,6 @@ fn rust_over_pyo3(_py: Python, m: &PyModule) -> PyResult<()> {
 }
 ```
 
-
 1. Add the function to the module
 
 At this point, we can use Maturin to test the project:
@@ -113,7 +106,6 @@ At this point, we can use Maturin to test the project:
 ```bash
 maturin develop
 ```
-
 
 After the compilation finishes, we can start a Python shell in the virtual environment:
 
@@ -127,9 +119,7 @@ python
 (1+8j)
 ```
 
-
-Finishing touch
----------------
+## Finishing touch
 
 The above setup allows us to use Rust from a Python shell but not in a Python file. To leverage the default, we must create a Python project inside the Rust project, whose name matches the Rust module name. Since I named my lib `rust_over_pyo3`, here's the overall structure:
 
@@ -143,13 +133,11 @@ my-project
     └── lib.rs
 ```
 
-
 To use the Rust library in Python, we need first to build the library.
 
 ```bash
 maturin build --release
 ```
-
 
 We manually move the artifact from `/target/release/maturin/librust_over_pyo3.dylib` to `rust_over_pyo3.so` under the Python package. We can also run `cargo build --release` instead; in this case, the source file is directly under `/target/release`.
 
@@ -177,12 +165,10 @@ if __name__ == '__main__':
     cli()
 ```
 
-
 1. Regular Python import
 2. Look, ma, it works!
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I improved the low-level integration with `ctypes` to the generic ready-to-use `pyo3` library. I barely scratched the surface, though; `pyo3` is a powerful, well-maintained library with plenty of features.
 
@@ -194,7 +180,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [PyO3 user guide](https://pyo3.rs/v0.20.0/)
 * [maturin](https://github.com/PyO3/maturin)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/feedback-rust-from-python/) on October 29^th^, 2023*

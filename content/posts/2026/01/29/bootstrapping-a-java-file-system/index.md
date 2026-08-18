@@ -27,8 +27,7 @@ Java provides a file system abstraction that enables solution-specific implement
 
 In this post, I'll explain the basics of Java's file systems to get you started. I created a [starter project](https://github.com/scsosna99/java-file-system-starter) which is a bare-bones Java file system with two operation implemented ([create directory](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/spi/FileSystemProvider.html#createDirectory(java.nio.file.Path,java.nio.file.attribute.FileAttribute...)) and [exists](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/spi/FileSystemProvider.html#exists(java.nio.file.Path,java.nio.file.LinkOption...))) are used via a [demo class](https://github.com/scsosna99/java-file-system-starter/blob/main/src/main/java/dev/scottsosna/sandbox/javafs/Runner.java). If you're a glutton for punishment, you can also clone/fork my [neo4j-filesystem](https://github.com/scsosna99/neo4j-filesystem) project which is an almost fully-functioning file system minus some edge cases.
 
-History of File Systems Within Java
------------------------------------
+## History of File Systems Within Java
 
 A short, flippant, perhaps not even completely correct history of the Java APIs for [file systems](https://en.wikipedia.org/wiki/File_system). Not required reading, jump ahead if you're getting antsy to start actual work!
 > ![](gosling-507x510.png)
@@ -43,8 +42,7 @@ Prior to a recent project, I had not used (actually avoided) Java NIO and did no
 
 Most important are the Java NIO.2 changes which allow solutions to implement *their* file systems based on *their* requirements that seamlessly integrate with the JVM. Third-party or customized implementations are no longer necessary which should greatly simplifying many aspects of your solution.
 
-Before You Start
-----------------
+## Before You Start
 
 Implementing your first custom file system will not be quick, straight-forward nor painless, so I recommend you consider the following to create a high-level, conceptual design before you start coding. The design is not immutable; in fact, I fully expect course corrections and refinements as you get deeper. Even an in-your-head design makes future decisions easier to contextualize and implement. You'll thank me later!
 
@@ -90,8 +88,7 @@ Your solution may require functionality not always available to your file storag
 
 File storage is as simple or as complicated as defined by your requirements.
 
-The Bare Minimum
-----------------
+## The Bare Minimum
 
 Four components must be present to bootstrap your Java file system. Clone the [starter file system](https://github.com/scsosna99/java-file-system-starter) repository if you want to follow along in your IDE: after reviewing you'll understanding how little magic is actually involved.
 
@@ -125,8 +122,7 @@ Four components must be present to bootstrap your Java file system. Clone the [s
 
 That's it. Really. Review the starter project. You now have a working Java file system which does absolutely nothing. At this point, you are ready to implement the functionality required by your custom file system. So far, so good!
 
-Next Steps
-----------
+## Next Steps
 
 Implement, implement, implement. Now the real \~fun\~ work begins. Some suggestions:
 
@@ -137,8 +133,7 @@ Implement, implement, implement. Now the real \~fun\~ work begins. Some suggesti
 * *Local File System Testing*: My file system is intended to be a fully-functioning POSIX-based file system, so dug deep into code for working with a local file for better understanding: method return values, exceptions thrown, edge cases, enum interpretation, how attributes are implemented, etc. Create demos/tests using Files and see what works, what doesn't, debug, refactor, etc., etc.
 * *Patience* : Frustrating initially, rewarding later. The abstraction makes some things much more difficult than I expected/wanted, but little by little the pieces start fitting together. This is **not** an afternoon's work!
 
-Final Thoughts
---------------
+## Final Thoughts
 
 Now with a better understanding, I have additional ideas on unique ways to leverage Java file systems. Could I have asked AI to do this for me? Sure, but what fun would that have been! Creating a custom Java file system was both geeky and fun, perhaps more fun than I have had in a while, plus I have a deeper understanding of a core Java concept. Score!
 

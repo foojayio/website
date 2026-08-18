@@ -99,9 +99,7 @@ This is the "dmesg" info which is logged when this drive is connected while the 
 [  567.293640] scsi host1: uas
 ```
 
-
-Comparing Disk Speed
---------------------
+## Comparing Disk Speed
 
 On this post ["Disk Speed Test (Read/Write): HDD, SSD Performance in Linux (shellhacks.com)"](https://www.shellhacks.com/disk-speed-test-read-write-hdd-ssd-perfomance-linux/) I found several test commands to test the speed of the discs. Let's use them with the different discs.
 
@@ -113,13 +111,11 @@ Write a file:
 $ sync; dd if=/dev/zero of=tempfile bs=1M count=1024; sync
 ```
 
-
 Read a file, but using the cached file, so not the real speed:
 
 ```
 $ dd if=tempfile of=/dev/null bs=1M count=1024
 ```
-
 
 Read a file, but first clear the cache to get the real speed:
 
@@ -128,7 +124,6 @@ $ sudo /sbin/sysctl -w vm.drop_caches=3
 $ dd if=tempfile of=/dev/null bs=1M count=1024
 ```
 
-
 Test with hdparm as benchmarking tool for the read speed:
 
 ```
@@ -136,7 +131,6 @@ $ sudo apt-get install hdparm
 $ sudo hdparm -Tt /dev/sda           # For the USB disc
 $ sudo hdparm -Tt /dev/mmcblk0       # For the SD card
 ```
-
 
 ### Results
 
@@ -148,11 +142,8 @@ $ sudo hdparm -Tt /dev/mmcblk0       # For the SD card
 | hdparm cached   | 960 MB/s    | 980 MB/s          | 891 MB/s        |
 | hdparm buffered | **44 MB/S** | **216 MB/s**      | 32 MB/s         |
 
-Conclusion
-----------
+## Conclusion
 
 Switching from SD to USB Boot is **very easy if you have a Flash Drive which is supported** and the **read speed is a lot higher** ! Combined with the **higher reliability**, this makes the switch a go go go... 😉
-
-
 
 **Note:** Used with permission and thanks --- originally written and published on [Frank Delporte](https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/)'s blog.

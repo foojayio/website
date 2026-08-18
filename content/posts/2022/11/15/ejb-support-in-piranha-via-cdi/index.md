@@ -68,7 +68,6 @@ public class TxBean {
 }
 ```
 
-
 and
 
 ```java
@@ -98,7 +97,6 @@ public class TestBean {
 }
 ```
 
-
 As can be seen, those beans are far from trivial from a technical perspective. The fact that OmniBeans is already able to pass such a test bodes well for the future.
 
 Hopefully at some point it will be able to fully pass the entire EJB Lite TCK this way, which would make for a very interesting Enterprise Beans implementation.
@@ -115,8 +113,7 @@ More information:
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts
------------------------------
+## OmniFish - Jakarta EE experts
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

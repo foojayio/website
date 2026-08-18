@@ -40,7 +40,6 @@ To start with, add the below dependency in pom.xml
 </dependency>
 ```
 
-
 ### 2. Add the below class.
 
 ```java
@@ -113,9 +112,6 @@ public class BuiltInToolsAgent {
 }
 ```
 
-
-<br />
-
 This BuiltInToolsAgent class is a Spring service that integrates the Spring AI SDK with Amazon Bedrock AgentCore built-in tools, specifically the Browser tool. It uses ChatClient to interact with the LLM and enables tool execution through ToolCallbackProvider.
 
 This class acts as an AI agent service that processes prompts and invokes AgentCore tools.
@@ -143,7 +139,6 @@ public BuiltInToolsAgent(
 }
 ```
 
-
 Spring injects all required dependencies through the constructor. **@Qualifier("browserToolCallbackProvider")**
 
 * Injects the Browser tool callback provider bean.
@@ -158,7 +153,6 @@ this.chatClient = chatClientBuilder
                 .defaultToolCallbacks(browserTools)
                 .build();
 ```
-
 
 * Registers the browser tool with the **ChatClient**.
 * Whenever the model requires browser actions, it can automatically invoke the tool callback.
@@ -239,7 +233,6 @@ The key concept here is ***.defaultToolCallbacks(browserTools)***. This line ena
 | Returned to User  |
 +-------------------+
 ```
-
 
 ### 3. Create a Controller
 
@@ -323,7 +316,6 @@ public class SummaryController {
 }
 ```
 
-
 ### 4. Create a Thymeleaf UI page
 
 #### 4.1. Add the thymeleaf dependency
@@ -334,7 +326,6 @@ public class SummaryController {
     <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
 ```
-
 
 #### 4.2 Add the below entries in the application.yaml
 
@@ -347,7 +338,6 @@ spring:
     encoding: UTF-8
     cache: false
 ```
-
 
 #### 4.3 Add the below html page
 
@@ -498,7 +488,6 @@ under ***/src/main/resources/template*s** folder add the below ***summary.html**
 </html>
 ```
 
-
 ### 5. Verify
 
 Start the application and then access the following: <http://localhost:8080> and verify using the below URL.
@@ -588,7 +577,6 @@ Return only HTML.
 </ul>
 ```
 
-
 Happy Learning!
 
 ### References
@@ -596,5 +584,3 @@ Happy Learning!
 * <https://aws.amazon.com/blogs/machine-learning/spring-ai-sdk-for-amazon-bedrock-agentcore-is-now-generally-available>
 * <https://www.thymeleaf.org/>
 * <https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html>
-
-<br />

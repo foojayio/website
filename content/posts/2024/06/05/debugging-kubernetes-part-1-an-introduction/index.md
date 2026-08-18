@@ -37,12 +37,9 @@ This part of the debugging series is designed for developers looking to effectiv
 
 {{< youtube sWclLQgbIUQ >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Introduction to Kubernetes and Distributed Systems
---------------------------------------------------
+## Introduction to Kubernetes and Distributed Systems
 
 Kubernetes, while often discussed in the context of cloud computing and large-scale operations, is not just a tool for managing containers. Its principles apply broadly to all large-scale distributed systems. In this post I want to explore Kubernetes from the ground up, emphasizing its role in solving real-world problems faced by developers in production environments.
 
@@ -89,8 +86,7 @@ While containers are incredibly efficient and portable, they introduce complexit
 
 To address these challenges, the concept of container orchestration was developed. Orchestration automates the scheduling, deployment, scaling, networking, and lifecycle management of containers, which are often organized into microservices. Efficient orchestration tools help ensure that the entire container ecosystem is healthy and that applications are running as expected.
 
-Enter Kubernetes
-----------------
+## Enter Kubernetes
 
 Among the orchestration tools, Kubernetes emerged as a frontrunner due to its robust capabilities, flexibility, and strong community support. Kubernetes offers several features that address the core challenges of managing containers:
 
@@ -106,12 +102,9 @@ Kubernetes not only solves practical, operational problems associated with runni
 
 There used to be a site called "doyouneedkubernetes.com" when you visited that site it said "No". Most of us don't need Kubernetes and it is often a symptom of Resume Driven Design (RDD). However, even when we don't need its scaling capabilities the advantages of its standardization are tremendous. Kubernetes became the de-facto standard and created a cottage industry of tools around it. Features such as, observability and security can be plugged in easily. Cloud migration becomes arguably easier. Kubernetes is now the "lingua franca" of production environments.
 
-Kubernetes For Developers
--------------------------
+## Kubernetes For Developers
 
 {{< youtube 4_uSwwGEK58 >}}
-
-<br />
 
 Understanding Kubernetes architecture is crucial for debugging and troubleshooting. The following image shows the high level view of a Kubernetes deployment. There are far more details in most tutorials geared towards DevOps engineers, but for a developer the point that matters is just "Your Code": that tiny corner at the edge.
 
@@ -146,8 +139,7 @@ $ kubectl logs -f <pod>
 
 Most typical large scale applications logs are ingested by tools such as Elastic, Loki etc. As such, the logs command isn't as useful in production except for debugging edge cases.
 
-Final Word
-----------
+## Final Word
 
 This introduction to Kubernetes has set the stage for deeper exploration into specific debugging and troubleshooting techniques, which we will cover in the upcoming posts. The complexity of Kubernetes makes is much harder to debug, but there are facilities in place to workaround some of that complexity.
 

@@ -21,8 +21,7 @@ frozen: false
 
 This is the second part of the series "The Cost of Not Knowing MongoDB," where we go through many ways we can model our MongoDB schemas for the same application and have different performances. In the [first part](https://www.mongodb.com/developer/products/mongodb/cost-of-not-knowing-mongodb/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim) of the series, we concatenated fields, changed data types, and short-handed field names to improve the application performance. In this second part, as discussed in the [issues and improvement of appV4](https://www.mongodb.com/developer/products/mongodb/cost-of-not-knowing-mongodb/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim#issues-and-improvements:~:text=than%20appV3.-,Issues%20and%20improvements,-Enough%20of%20focusing), the performance gains will be achieved by analyzing the application behavior and how it stores and reads its data, leading us to the use of the [Bucket Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-bucket-pattern/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim) and the [Computed Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-computed-pattern/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim).
 
-Application Version 5 Revision 0 and Revision 1 (appV5R0 and appV5R1): A simple way to use the Bucket Pattern
--------------------------------------------------------------------------------------------------------------
+## Application Version 5 Revision 0 and Revision 1 (appV5R0 and appV5R1): A simple way to use the Bucket Pattern
 
 When generating the oneYear totals report, the Get Reports function will need to retrieve an average of 60 documents and, in the worst-case scenario, 365 documents. To access each document, one index entry must be visited, and one disk read operation must be performed.
 
@@ -138,8 +137,7 @@ A clear optimization here is one that we have been using from appV1 to appV4, wh
 
 Applying this optimization, we'll reduce the size of the documents because the array of items will have fewer elements. We'll also reduce the computational cost of generating the reports because we are pre-computing the status totals by day. This [build pattern](https://www.mongodb.com/company/blog/building-with-patterns-a-summary/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim) of pre-computing is quite common in that it has its own name, [Computed Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-computed-pattern/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim).
 
-Application Version 5 Revision 2 (appV5R2): Using the Bucket Pattern with the Computed Pattern
-----------------------------------------------------------------------------------------------
+## Application Version 5 Revision 2 (appV5R2): Using the Bucket Pattern with the Computed Pattern
 
 As discussed in the issues and improvements of appV5R0 and appV5R1, we can use the [Computed Pattern](https://www.mongodb.com/blog/post/building-with-patterns-the-computed-pattern/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cost-part2-foojay&utm_term=tony.kim) to pre-compute the total status by day in the items array field when inserting a new event. This reduces the computation cost of generating the reports and also reduces the document size by having fewer elements in the items array field.
 
@@ -245,8 +243,7 @@ This combination of stages can hurt the performance of the aggregation pipeline 
 
 In the next application revision, we'll see how we can achieve the same final result using only one stage and without having an intermediate stage with more documents.
 
-Application Version 5 Revision 3 (appV5R3): Removing an aggregation pipeline anti-pattern
------------------------------------------------------------------------------------------
+## Application Version 5 Revision 3 (appV5R3): Removing an aggregation pipeline anti-pattern
 
 As presented in the issues and improvements of appV5R2, we have an anti-pattern in the aggregation pipeline of Get Reports that can reduce the query performance. This anti-pattern is characterized by a $unwind stage followed by a $match. This combination of stages will first increase the number of documents, $unwind, to later filter them, $match. In a simplified way, to get to a final state, we're going through a costly intermediary state.
 
@@ -342,8 +339,7 @@ As the goal of this series is to show how much performance we can achieve with t
 
 For appV5R4, we will double down on the Computed Pattern and pre-compute the status totals by quarter, not just day. Even though we know it probably won't provide better performance for things discussed [in the "Load test result" of \`appV5R2\`](https://docs.google.com/document/d/1dpI27GNTE4Z4QHEbP-oLzOneH4ZimGSvTqjuYUQ-pFE/edit?tab=t.0#heading=h.6vfvgbgd9a7h), let's flex our MongoDB and aggregation pipeline knowledge and also provide a reference code example for the cases where the Computed Pattern is a good fit.
 
-Application Version 5 Revision 4 (appV5R4): Doubling down on the Computed Pattern
----------------------------------------------------------------------------------
+## Application Version 5 Revision 4 (appV5R4): Doubling down on the Computed Pattern
 
 As presented in the issues and improvements of appV5R3, for this revision, we'll double down on the Computed Pattern even though we have good evidence that it won't provide a better performance---but, you know, for science.
 
@@ -435,8 +431,7 @@ You may think it is not possible to reduce our document size and overall collect
 
 In the Dynamic Schema, the values of a field become field names. Thus, field names also store data and, as a consequence, reduce the document size. As this pattern will require big changes in our current application schema, we'll start a new version, appV6Rx, which we'll play around with in the third part of this series.
 
-Conclusion
-----------
+## Conclusion
 
 That is the end of the second part of the series. We covered Bucket Pattern and Computed Pattern and the many ways we can use these patterns to model how our application stores its data in MongoDB and the big performance gains it can provide when used properly.
 

@@ -70,7 +70,6 @@ module worldclock {
 // Listing 3.1
 ```
 
-
 You'll notice all the `requires` such as `javafx.controls` and `javafx.fxml` that enables us to import classes in code. For those who didn't catch it, but the `javafx.*` modules also depend on the module `javafx.base`. So, you may ask "Should we specify a `requires javafx.base`?" The answer is "no".
 
 Modules such as `javafx.base` are not needed because the module system will automatically pull in any transitive dependencies, thus simplifying the definition above. Another transitive dependency not listed is the module `javafx.graphics`.
@@ -86,7 +85,6 @@ The following is how to open the world clock's package namespace to the `javafx.
 opens com.carlfx.worldclock to javafx.fxml;
 ```
 
-
 In the module-info above, you'll also notice the `opens com.carlfx.worldclock` to the Jackson Serialization library module also. Jackson will need to have access to POJOs in the world clock's package namespace. I use Jackson's module to save clock configuration info as a JSON file in the home directory under `$home/worldclock`.
 
 #### Exports {package}
@@ -98,7 +96,6 @@ The basic syntax to export world clock's package namespace:
 ```java
 exports com.carlfx.worldclock;
 ```
-
 
 Now that you know a little more about the basics of Java modules let's look at a high-level view on how to go about creating a JavaFX UI Form.
 
@@ -118,7 +115,6 @@ Parent configPane = configLocationLoader.load();
 ConfigLocationsController configController = configLocationLoader.getController();
 // Listing 3.2
 ```
-
 
 Another nice feature of the `FXMLLoader` class is to get the **controller** instance by calling the `FXMLLoader.getController()` method.
 
@@ -225,7 +221,6 @@ In the Scene Builder tool the `gmtErrorOverlayIcon` Button is styled with `.erro
 }
 ```
 
-
 Here you'll notice the vector shape specified for the `-fx-shape` attribute to appear as an 'x' inside of a circle shape:
 
 ![Overlay icon](overlay-icon.png)
@@ -243,7 +238,6 @@ The FXML or the view will contain the XML markup generated from the Scene Builde
    </tooltip>
 </Button>
 ```
-
 
 ### Validation Overlay Icons: Behavior
 
@@ -263,7 +257,6 @@ public Button gmtErrorOverlayIcon;
 public TextField gmtOffset;
 ```
 
-
 #### The initialize() method
 
 When the form is loaded and instance variables are associated (injected) with UI elements, the `initialize()` method will be called as shown below:
@@ -275,7 +268,6 @@ public void intitialize() {
     // The rest of the code ...
 }
 ```
-
 
 Above you'll notice the method `addValidationRangeCheckInt()` that will attach a listener onto the `gmtOffset` (TextField) control with the ability to show and hide the `gmtErrorOverlayIcon` (Button) during input validation.
 
@@ -300,7 +292,6 @@ private void addValidationRangeCheckInt(int min, int max, TextField field, Butto
     });
 }
 ```
-
 
 #### Output
 

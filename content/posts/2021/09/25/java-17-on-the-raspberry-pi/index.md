@@ -24,10 +24,6 @@ frozen: false
 
 As part of the [Foojay Virtual OpenJDK 17+ JUG Tour](https://foojay.io/today/schedule-for-foojay-virtual-openjdk-17-jug-tour/), I was asked to present the state of Java and JavaFX 17 on the Raspberry Pi.
 
-<br />
-
-<br />
-
 So, a perfect opportunity to freshen up my [#JavaOnRaspberryPi](https://twitter.com/hashtag/JavaOnRaspberryPi) presentation with some hot-off-the-press versions.
 
 ***UPDATE 2021-08-30: the recording of the presentation has been published on YouTube.***
@@ -53,7 +49,6 @@ $ uname -a
 Linux raspberrypi 5.10.17-v8+ #1414 SMP PREEMPT Fri Apr 30 13:23:25 BST 2021 aarch64 GNU/Linux
 ```
 
-
 ### SDKMAN
 
 [SDKMAN](https://sdkman.io/) is very useful tool to quickly install a new Java version, or switch between already installed versions. With a few terminal commands, we can install it on our Raspberry Pi.
@@ -71,7 +66,6 @@ $ sdk version
 
 SDKMAN 5.12.2
 ```
-
 
 OK nice, we have SDKMAN running on the Raspberry Pi now! There is an impressive list of Java editions you can install! This is the list on 23th of September 2021 you get with the command `sdk list java`:
 
@@ -139,7 +133,6 @@ Use the Identifier for installation:
 ================================================================================
 ```
 
-
 Let's install the Temurin version 17 provided by [adoptium.net](https://adoptium.net) (formerly known as adoptopenjdk.net).
 
 ```
@@ -162,7 +155,6 @@ OpenJDK Runtime Environment Temurin-17+35 (build 17+35)
 OpenJDK 64-Bit Server VM Temurin-17+35 (build 17+35, mixed mode, sharing)
 ```
 
-
 Indeed `sdk install java 17.0.0-tem` is all that's needed to switch to Java 17!
 
 ### Early Access Java 17
@@ -181,7 +173,6 @@ OpenJDK Runtime Environment (build 17+35-2724)
 OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)
 ```
 
-
 Now let's make it easier to start Java:
 
 ```
@@ -191,7 +182,6 @@ openjdk version "17" 2021-09-14
 OpenJDK Runtime Environment (build 17+35-2724)
 OpenJDK 64-Bit Server VM (build 17+35-2724, mixed mode, sharing)
 ```
-
 
 Look at that, Java 17 on the Raspberry Pi! 😉
 
@@ -204,7 +194,6 @@ $ sudo apt update
 $ sudo apt install code
 ```
 
-
 Now let's try the smallest Java program you can write to check and print the Java version...
 
 ```java
@@ -216,7 +205,6 @@ public class HelloWorld {
 }
 ```
 
-
 And, finally, as we can run Java files without compiling them, since Java 11, we can just run it like this:
 
 ```
@@ -224,11 +212,9 @@ $ java HelloWorld.java
 Hello World, greeting you with Java version: 17
 ```
 
-
 ![](Screenshot-2021-08-21-at-15.40.18.png) Hello World Java code running on Raspberry Pi with JDK 17
 
-Run a Pi4J project
-------------------
+## Run a Pi4J project
 
 Now let's see if we can run the minimal example project of the Pi4J project to control a LED and read a button state with some basic electronic components.
 ![](led-button_bb-1024x378.png) Minimal electronic setup for a Pi4J demo project
@@ -257,8 +243,6 @@ LED high
 Button was pressed for the 5th time
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 As always, Java runs everywhere so no surprises here with version 17 on the Raspberry Pi! The Pi4J example application also runs without problems!

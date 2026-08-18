@@ -36,20 +36,17 @@ But worry no more: My new [*vsreg*](https://github.com/parttimenerd/vsreg) utili
 git clone https://github.com/parttimenerd/vsreg
 ```
 
-
 Then pass the make test command to it, which you use to run the test that you want to debug:
 
 ```bash
 vsreg/vsreg.py "ASGCT debug" -- make test TEST=jtreg:test/hotspot/jtreg/serviceability/AsyncGetCallTrace JTREG="VERBOSE=all"
 ```
 
-
 Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses the output, and adds a launch config with the label "ASGCT debug" to the `.vscode/launch.json` file in the current folder.
 
 *The utility is MIT licensed and only tested on Linux.*
 
-Example Usage
--------------
+## Example Usage
 
 You're now able to select "ASGCT debug" in "Run and Debug":  
 
@@ -75,8 +72,7 @@ The debugger pauses on a segfault, but there are always a few at the beginning o
  <img loading="lazy" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-13-18.png" alt="" class="wp-image-906" width="767" height="545">
 </figure>
 
-Recompilation
--------------
+## Recompilation
 
 If you want to recompile the tests, use `make images test-image`. You can add a task to your `.vscode/tasks.json` file and pass the label to the `--build-task` option:
 
@@ -99,9 +95,7 @@ If you want to recompile the tests, use `make images test-image`. You can add a 
 }
 ```
 
-
-Options
--------
+## Options
 
 vsreg has a few options:
 
@@ -124,7 +118,6 @@ options:
   -b TASK, --build-task TASK
                         Task to run before the command
 ```
-
 
 An example template looks like this:
 
@@ -157,11 +150,9 @@ An example template looks like this:
 }
 ```
 
-
 vsreg fills in `$NAME` (with the label), `program` (with the used Java binary), `args`, `cwd`, environment and `preLaunchTask`.
 
-Conclusion
-----------
+## Conclusion
 
 vsreg is one of these utilities that solve one specific itch: I hope it also helps others; feel free to contribute to this tool, adding new templates and other improvements on [GitHub](https://github.com/parttimenerd/vsreg).
 

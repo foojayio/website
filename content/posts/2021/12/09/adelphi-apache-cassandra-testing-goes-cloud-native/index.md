@@ -75,13 +75,11 @@ helm/adelphi \ # path to the chart folder
 -f my-settings.yaml # your custom settings with the CQL schema
 ```
 
-
 That will immediately start the workflow and you can watch the progress either in the command-line:
 
 ```
 $ argo watch -n cass-operator @latest
 ```
-
 
 ![](argo-cli-1024x482.gif)
 
@@ -94,7 +92,6 @@ deployment/argo-server \ # the service we want to access
 2746:2746 # port mapping from local to remote
 ```
 
-
 open the browser at [http://localhost:2746](http://localhost:2746/)
 ![](argo-ui.gif)
 
@@ -106,7 +103,6 @@ port-forward \ # opens a tunnel to a pod in the k8s cluster
 grafana \ # the service we want to access
 3000:3000 # port mapping from local to remote
 ```
-
 
 open the browser at [http://localhost:3000](http://localhost:3000/) (first-time credentials: admin/admin)
 ![](Grafana-1024x367.png)
@@ -122,13 +118,11 @@ results-server \ # web server containing the result files in text format
 8080:8080 # port mapping from local to remote
 ```
 
-
 In a separate terminal window you can recursively download all the files at once with a little help of [wget](https://www.gnu.org/software/wget/):
 
 ```
 $ wget -r http://localhost:8080/
 ```
-
 
 By default Adelphi is configured with a short execution duration such that you can try the whole process quickly, but for a thorough validation of your schema, we recommend that you let it run for a few hours to allow the data generators to explore a larger distribution space. You can tweak the execution duration with `gemini_test_duration` and `nosqlbench_cycles`. Other parameters you may want to change are clusterSize, to set the number of C\* nodes per cluster, and the `storageClassName` according to the storage class offered by the cloud service of your choice.
 
@@ -138,13 +132,11 @@ For a complete list of the configuration parameters currently available, run:
 $ helm show values helm/adelphi
 ```
 
-
 When you are done, you can safely delete the running instances with:
 
 ```
 $ helm uninstall adelphi -n cass-operator
 ```
-
 
 That will clear all the Pods, Services and Volumes created by Adelphi with the exception of the CRDs (Custom Resource Definitions) which are not managed by Helm after the initial installation, but if you created an exclusive k8s cluster for Adelphi, you can safely delete it now.
 
@@ -187,7 +179,5 @@ For more details check the workflow [definition](https://github.com/datastax/ade
 Adelphi is still being developed, it currently has some known limitations around UDT/UDF support with respect to the workload generators and it doesn't automatically migrate schemas across major versions (in case they are incompatible).
 
 We are planning a new UI for Adelphi with a concise snapshot view of the results and a better user experience around data archival and schema contribution, so stay tuned for the next posts!
-
-<br />
 
 If you are interested in contributing or learning more, we invite you to visit the Adelphi [GitHub repository](https://github.com/datastax/adelphi). If you'd like to play with Cassandra quickly off K8s, try the managed DataStax [Astra DB](http://astra.datastax.com/), which is built on Apache Cassandra.

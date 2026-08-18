@@ -24,8 +24,7 @@ Again, some exciting developments seem to be happening in the Java world! There'
 
 Let me explain what's happening and why this could be a game-changer for the Java ecosystem.
 
-History: Why JavaFX Got Separated From The JDK
-----------------------------------------------
+## History: Why JavaFX Got Separated From The JDK
 
 JavaFX was part of the JDK till Java 10. But with Java 11, more than seven years ago, it became a separate library. You can find its [sources on GitHub within the OpenJDK project](https://github.com/openjdk/jfx). At the time, there were three main reasons for this separation:
 
@@ -35,8 +34,7 @@ JavaFX was part of the JDK till Java 10. But with Java 11, more than seven years
 
 For many developers, this separation meant having to make two separate installations and then wrestling with IDE configurations to get everything working together, or install a build which combines them (e.g. from Azul or BellSoft). Not exactly the smooth developer experience we all hope for...
 
-Time to Reunite
----------------
+## Time to Reunite
 
 Bruce Haddon posted a compelling argument on the OpenJDK discussion list about why it's time to bring JavaFX back into the fold. His reasoning makes a lot of sense as the original concerns were largely solved.
 
@@ -52,8 +50,7 @@ For students and beginners especially, having JavaFX integrated with the JDK wou
 
 In the [article on InfoWorld](https://www.infoworld.com/article/4082709/will-javafx-return-to-java.html), Donald Smith, Oracle's vice president of Java product management, states: "*Oracle continues to lead and be active in the OpenJFX Project. While we don't have specific announcements or plans currently, we are investigating options for improving the approachability of JavaFX with the JDK.*"
 
-Enter Java on Mobile: The Perfect Timing
-----------------------------------------
+## Enter Java on Mobile: The Perfect Timing
 
 Here's what I find fascinating: while the JavaFX integration discussion is happening, Johan Vos and the team at Gluon are pushing forward another fantastic initiative: bringing full OpenJDK to mobile platforms!
 
@@ -76,8 +73,7 @@ They already have a [working pipeline that runs a HelloWorld application on iOS]
 * Full JavaFX applications to run as native iOS/Android apps.
 * Exposing Java libraries as native mobile libraries.
 
-Why These Two Initiatives Complement Each Other Perfectly
----------------------------------------------------------
+## Why These Two Initiatives Complement Each Other Perfectly
 
 In my opinion, "Java on Mobile" and "OpenJFX in OpenJDK" are a perfect match. If OpenJFX gets integrated again in OpenJDK, and OpenJDK becomes a first-class citizen on mobile, then JavaFX automatically becomes mobile-ready as part of the standard Java distribution.
 
@@ -88,8 +84,7 @@ This would mean:
 * **For the Ecosystem**: A unified, consistent experience across all platforms. The Java ecosystem would finally have a modern, complete, and integrated GUI solution that works everywhere Java runs.
 * **For Maintainability**: With JavaFX in the JDK and mobile support directly in OpenJDK, there would be less fragmentation, fewer separate patches to maintain, and a clearer path forward for updates and improvements.
 
-A Community Effort
-------------------
+## A Community Effort
 
 There is one crucial point: this is a community effort. Gluon can't do the mobile work alone, and the JavaFX integration won't happen without community support and involvement.
 
@@ -97,8 +92,7 @@ The [openjdk-mobile project on GitHub](https://github.com/openjdk-mobile/) is op
 
 As [Johan Vos wrote](https://gluonhq.com/bringing-openjdk-to-mobile-a-community-effort/): "We believe that no miracle is needed -- Java was designed to be portable, and it should run on mobile as a first-class citizen. It's just a matter of making it happen, together."
 
-What's Next?
-------------
+## What's Next?
 
 These are still early days. The JavaFX integration discussion is just beginning, and while there's positive sentiment, there are no official announcements yet. The Java on Mobile project is making progress but still has significant work ahead.
 

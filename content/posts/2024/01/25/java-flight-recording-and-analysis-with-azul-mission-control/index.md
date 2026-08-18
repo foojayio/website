@@ -29,8 +29,7 @@ By utilizing JFR, you gain valuable insights into the runtime behavior of your J
 You can use a JFR recording to examine your application with various tools, such as Azul Mission Control.
 ![](azul-mission-control-screenshot-1024x534.png)
 
-Azul Mission Control
---------------------
+## Azul Mission Control
 
 Based on the open-sourced "JDK Mission Control" tool, Azul Mission Control monitors, profiles, and troubleshoots Java applications running in a JVM.
 
@@ -40,8 +39,7 @@ As Azul Mission Control is Azul's preferred tool for analyzing events within Jav
 
 This article summarizes that information with direct links to learn more.
 
-Making a Recording
-------------------
+## Making a Recording
 
 Azul Mission Control provides you insights into your Java application based on recordings. These can be made as files for later analysis or with live insights into a running application.
 
@@ -67,8 +65,7 @@ When the JVM is configured to allow remote JMX connections, you can connect dire
 
 More information: <https://docs.azul.com/azul-mission-control/recording/jfr-recording-with-amc>
 
-Docker Specific Info
---------------------
+## Docker Specific Info
 
 As Docker is a "closed environment," creating a JFR recording of an application running in a Docker or Kubernetes environment can be challenging. You can use different approaches, depending on your available connections and where you can store the recording:
 
@@ -78,8 +75,7 @@ As Docker is a "closed environment," creating a JFR recording of an application 
 
 More information: <https://docs.azul.com/azul-mission-control/recording/jfr-recording-in-docker>
 
-Analyze a Recording with Azul Mission Control
----------------------------------------------
+## Analyze a Recording with Azul Mission Control
 
 When a recording is finished in Azul Mission Control, or a pre-recorded file is opened, an automated analysis result is shown:
 ![](azul-mission-control-automated-analysis-results-1024x346.png)
@@ -93,8 +89,7 @@ The overview screen displays recorded data split into categories. Click a node t
 
 More information: <https://docs.azul.com/azul-mission-control/analyzing/introduction>
 
-Conclusion
-----------
+## Conclusion
 
 Thanks to the possibilities of recording to a file with JFR or making a remote connection through JMX, you can tailor a solution that fits your use case and how your Java applications are deployed.
 

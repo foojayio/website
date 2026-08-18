@@ -25,8 +25,7 @@ frozen: false
 
 **The NODES 2024 conference is approaching fast, and we have a lot of exciting activities, including talks, workshops, and more. Here's what you need to know to get ready for NODES 2024.**
 
-What is NODES?
---------------
+## What is NODES?
 
 NODES is a free, virtual conference run by Neo4j for developers, data scientists, and other technical roles who want to learn more about graph databases and how they can be used to solve complex problems. This year, it's on November 7th, and we would be so excited to see you there (virtually, of course)!
 
@@ -37,15 +36,13 @@ At NODES, you'll have the opportunity to hear from the graph community, learning
 * Data Science - Advanced techniques in data curation and maintenance specifically designed to fuel AI models.
 * Graphs - Data solutions enriched by graph capabilities and the latest advancements in visualization techniques to bring data to life.
 
-Pre-Conference Workshops
-------------------------
+## Pre-Conference Workshops
 
 In the weeks leading up to the event, there is also [Road to NODES](https://neo4j.com/video/road-to-nodes-2024/) - a series of hands-on workshops to jumpstart or deepen your graph skills. These workshops are designed to help you get hands-on experience with specific graph database topics, and they're a great way to prepare for the conference.
 
 This year's topics include an introduction to Neo4j, building applications with integration to a messaging platform, building GraphRAG applications with Neo4j, and graph visualization with Neo4j Bloom. These sessions begin soon, so don't wait to [register](https://neo4j.com/video/road-to-nodes-2024/)!
 
-Session highlights
-------------------
+## Session highlights
 
 To kick off each region, we'll hear an introduction from a technical and community leader within Neo4j. When you think it can't get better, Ben Lorica will keynote to talk about tracking the pulse of generative AI. Next, Neo4j's own Chief Product Officer, Sudhir Hasbe, will share all the exciting things being built at Neo4j and provide insight on what's coming for graphs. Wrapping up the opening ceremonies, a panel will discuss trends they're seeing in the generative AI space.
 
@@ -78,15 +75,13 @@ There are so many more amazing speakers and topics, so peruse the [NODES 2024 fu
 
 Each region segment will wrap up with a Q\&A session with Neo4j's CEO, Emil Eifrem. This is a great opportunity to hear insights about the company, products, and history. Neo4j appreciates the outstanding graph community (both inside and outside Neo4j), and this closing session is a great way to recognize the efforts and contributions that allow graph technology to positively impact the world around us.
 
-Wrapping Up!
-------------
+## Wrapping Up!
 
 Now that you have information about NODES 2024 - what it is, track overviews, pre-conference workshop details, exciting keynote topics, and session highlights - what are you waiting for?! [Register for NODES 2024](https://dev.neo4j.com/nodes24) and find out what valuable skills you can learn on November 7.
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * [NODES 2024 event webpage](https://dev.neo4j.com/nodes24)
 * [Road to NODES: pre-conference workshops](https://neo4j.com/video/road-to-nodes-2024/)

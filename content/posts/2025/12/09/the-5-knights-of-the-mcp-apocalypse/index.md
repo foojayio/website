@@ -30,8 +30,6 @@ This "black box" is now a central hub with the keys to your entire kingdom (or p
 
 Let's look at the five big risks and how to *analyze* and mitigate them.
 
-
-
 ### **1. The "My Prompt is Leaking Secrets" Problem 🔑**
 
 **The Threat:** A developer on your team is debugging. They paste this into their Agent-powered chat:
@@ -47,8 +45,6 @@ This prompt goes *straight* to the Agent, and it could be associated with an MCP
 * Analyze the MCP server code to check if they are logging all information sent
 * Create a proxy for your Agent-MCP calls using PII/PHI redaction libraries like [Philleas from Philterd](https://www.philterd.ai/)
 * Use guardrails tools like [Lakera Guard](https://www.lakera.ai/lakera-guard) that can help prevent (reducting) data leakage.
-
-
 
 ### **2. The "Is My Server a Double Agent?" Problem 🕵️**
 
@@ -83,7 +79,6 @@ $ iptables -A DOCKER-USER -s <container_ip> -d <allowed_ip> -j ACCEPT
 $ iptables -A DOCKER-USER -s <container_ip> -j DROP
 ```
 
-
 * Kubernetes: deploy the MCP server container with network policies on the Egress side  
 
 ```yaml
@@ -107,12 +102,9 @@ spec:
           port: 443
 ```
 
-
 * Use tools like [ToolHive](https://toolhive.dev/): they add proxies and egress containers routing the network and allowing us to configure the allowed network destinations for each container (MCP server)  
 
 ![](Screenshot-2025-12-09-at-16.58.56.png)
-
-
 
 ### **3. The "Black Box of Vulnerabilities" Problem 🐛**
 
@@ -172,7 +164,6 @@ spec:
 }
 ```
 
-
 * **Explicit mention of the tool:** If we rely on the assistant to decide the tool, sometimes it can decide to use the one that retrieves a long list and then filter the right row, instead of using the tool that retrieves only the row we are interested in. We can explicitly mention the tool to be used to reduce pollution.  
 
 #Vague
@@ -196,8 +187,6 @@ with the sonarqube mcp server using analyze_code_snippet tool
 
 * **Centralized Tool Registry/Gateway:** Implement a single, organization-wide **AI Gateway** or **Tool Orchestrator** (like ToolHive, as mentioned before). This central service acts as the *only* official point of connection between Agents and tools. All individual MCPs are consolidated or replaced by a single, hardened gateway that manages all credentials and applies uniform security policies (e.g., rate limiting, logging, egress control).
 * **Service Catalog and Governance:** Create a mandatory internal **Service Catalog** for all AI-enabled tools. Before a team can deploy a new MCP, they must check the catalog to see if an existing, approved, and audited MCP/Gateway already provides the necessary function.
-
-
 
 ### **Final Check: You're an Auditor**
 

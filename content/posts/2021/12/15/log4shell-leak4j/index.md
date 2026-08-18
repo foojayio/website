@@ -26,8 +26,7 @@ Log4J has, for a long time, been the most used logging framework in the Java lan
 
 The payload can be delivered in a LOT of ways, as long as it gets in a log statement. Either through user-controlled fields, HTTP requests, URLs, **ANYTHING**.
 
-The attack
-----------
+## The attack
 
 After writing some code (a malicious embedded LDAP server) I was able to reproduce the RCE ("Remote Code Execution") attack on even the most basic project.
 
@@ -38,8 +37,7 @@ As you can see it downloads and executes a classfile I'm serving from the malici
 
 I'll not be sharing the malicious code, it's just too simple to set up and abuse. There are better and easier ways to check if your software is vulnerable. For example using this tool by [Trend Micro](https://log4j-tester.trendmicro.com/).
 
-Possible risks: 🚨
-------------------
+## Possible risks: 🚨
 
 Risks of this vulnerability are:
 
@@ -50,8 +48,7 @@ Risks of this vulnerability are:
 * Loss of AWS/Kubernetes keys/secrets
 * And the list goes on, and on, and on...
 
-The fix
--------
+## The fix
 
 **Option 1**: If you haven't already: upgrade log4j-core to version \>= 2.16.0
 
@@ -65,7 +62,6 @@ Use version **2.16.0** instead of 2.15.0, this fixes the problem a bit more rigo
     </dependency>
 ```
 
-
 Do this for all transitive dependencies as well (!).
 
 **Option 2**: Another option is to launch the JRE with.
@@ -73,7 +69,6 @@ Do this for all transitive dependencies as well (!).
 ```
     -Dlog4j2.formatMsgNoLookups=true
 ```
-
 
 But be **AWARE** this flag was put into log4j2 from 2.10.0 onwards. If you have an older version, this does not work.
 
@@ -95,8 +90,7 @@ To show this I've taken the latest version of Java 8 (1.8.311) and I'm using the
 
 Again: The payload is still being deserialized, on the latest Java version.
 
-You've been compromised
------------------------
+## You've been compromised
 
 Great, you've upgraded and fixed the issue. However: Don't stop there, that's just step one.
 
@@ -116,16 +110,14 @@ Step 4: **Redeploy** all your **applications**
 
 We *HAVE* to take this one seriously. I don't want to hear or read a couple of months from now that some company forgot to patch their software. Not another
 
-Join our meetup
----------------
+## Join our meetup
 
 * "Understanding Log4Shell: vulnerability, attacks and mitigations (livestream)"
 * Wednesday, 15 December 2021, 20:00 CET
 
 <https://www.meetup.com/OpenValue/events/282682468/>
 
-Further reading:
-----------------
+## Further reading:
 
 Here are some links for more information:
 

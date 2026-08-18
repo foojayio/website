@@ -32,8 +32,7 @@ Owning the component stack also lets us work below the pixels. [PR #5363](https:
 
 We will never make every pixel of every Codename One component land in exactly the same place as every native widget on every device. That is a fool's errand. The useful target is a point where 98% or 99% of people cannot tell which side is Codename One, and where we notice when a later change pulls us away from that level. We are not there on every component yet. These changes get us much closer, and now the gap is measured instead of argued over.
 
-The themes were modern, but they were not finished
---------------------------------------------------
+## The themes were modern, but they were not finished
 
 We introduced the [iOS Modern and Android Material 3 themes](https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/) in May. They gave new projects a current starting point, but the first iOS implementation used translucent colors where iOS 26 uses a live glass material. Several controls still carried general Codename One geometry. The Material floating action button was a good example: it inherited the old circular shape and icon-derived size instead of Material 3's fixed 56dp rounded rectangle.
 
@@ -47,8 +46,7 @@ The iOS theme changed just as visibly. Buttons became full capsules, state glyph
 
 Why is the floating action button still circular on iOS? iOS has no native floating action button equivalent. Importing Material's rounded rectangle into the iOS theme would make it less native, not more. Android follows Material 3. iOS keeps the established circular accent action until there is an iOS component we can target.
 
-A native app produces the answer sheet
---------------------------------------
+## A native app produces the answer sheet
 
 The fidelity suite contains two standalone reference applications. One is written with UIKit and Swift. The other uses Android's Material components. We run those apps locally on pinned native toolchains and capture real controls in light and dark appearances, including normal, pressed, selected, and disabled states.
 
@@ -71,8 +69,7 @@ CI never invents the native side. It renders the Codename One component under th
 
 The iOS golden set is pinned to iOS 26. The Android set is pinned to Material 3 on API 36 at 160dpi. When iOS 27 arrives, we will capture a new `ios-27` set, add a theme variant and a CI matrix row, then test both generations until we deliberately retire the older one. We will not silently replace the iOS 26 answer sheet and call the movement an improvement.
 
-What the percentage means, and what it does not
------------------------------------------------
+## What the percentage means, and what it does not
 
 The current Android baseline contains 54 pairs. Its median tolerant visual score is 95.5%. The worst pair is the dark outlined button in its pressed state at 91.25%. The iOS baseline contains 68 pairs with a 94.4% median. Its worst pair is the dark tab bar at 83.45%.
 
@@ -92,8 +89,7 @@ The Android report uses the same layout and divider. The floating action button 
 
 The suite deliberately stops at the component boundary. Screen spacing, hierarchy, and composition are application design decisions whether you use SwiftUI, Compose, or Codename One. The themes should provide sensible defaults that work across devices. The final layout still belongs to the developer building the product.
 
-The tab bar became a rendering project
---------------------------------------
+## The tab bar became a rendering project
 
 The iOS 26 tab selection is not a tinted pill sliding under icons. During a touch-driven transition, the selection becomes a magnifying lens. It travels across the bar, refracts the background and glyphs under it, stretches during flight, and settles with a small spring overshoot.
 
@@ -113,8 +109,7 @@ The public theme surface is intentionally smaller than the internal model. A the
 
 The test freezes the animation at 0%, 10%, 25%, 50%, 75%, 90%, and 100%. It checks that the frames are distinct, travel is monotonic, and overshoot stays bounded. The committed intermediate frames are Codename One goldens, not native intermediate-frame comparisons. We still review native motion from the captured video because the intermediate frames are not compared automatically yet.
 
-Glass is a typed material, not a pile of constants
---------------------------------------------------
+## Glass is a typed material, not a pile of constants
 
 The first glass pass exposed saturation, blur, scale, offset, refraction, and specular values as unrelated theme constants. That did not look good. A toolbar, panel, button, and moving lens could each be tuned into a different material by accident.
 
@@ -135,8 +130,7 @@ JavaSE originally had no `glassRegion` implementation. It silently reduced the b
 
 There is still a platform tradeoff. The iOS path uses the native Metal shader. JavaSE and JavaScript reproduce the pixels in software. They do not get the same GPU path, so a complex moving backdrop can look less smooth there. The component and its state model remain portable. The implementation cost is not identical.
 
-CSS had to grow with the themes
--------------------------------
+## CSS had to grow with the themes
 
 Several differences could not be fixed by editing a color. The framework and CSS compiler gained new vocabulary:
 
@@ -169,8 +163,7 @@ The follow-ups matter as much as the headline PR:
 
 The suite also found a 14-year-old iOS gradient bug. The on-screen `fillLinearGradientGlobal` path had horizontal and vertical axes reversed since 2012. The mutable-image path was correct. A controlled gradient backdrop finally made the difference attributable.
 
-Most of the week was invisible backend work
--------------------------------------------
+## Most of the week was invisible backend work
 
 While the theme diff was easy to photograph, most of our time went into replacing the Codename One account login system.
 
@@ -178,8 +171,7 @@ The new [Account Security page](https://cloud.codenameone.com/account/security) 
 
 This work changes no pixel in your app, but it changes how we protect build credentials, signing assets, and account data. It also removes several account responsibilities from the desktop Settings tool. Saturday's post explains that smaller tool.
 
-Three smaller changes with large failure modes
-----------------------------------------------
+## Three smaller changes with large failure modes
 
 Three other PRs deserve a note because each fixes a problem that can waste hours.
 
@@ -195,8 +187,7 @@ The compiled application classes are inconsistent.
 Run 'mvn clean' and rebuild.
 ```
 
-The rest of this release series
--------------------------------
+## The rest of this release series
 
 The fidelity work could fill the week, but five other changes need their own explanations:
 

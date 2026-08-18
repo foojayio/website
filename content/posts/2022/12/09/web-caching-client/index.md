@@ -28,8 +28,7 @@ Web resource caching can happen in two different places: client-side - on the br
 
 This article is dedicated to the former; the next article will focus on the latter.
 
-Caching 101
------------
+## Caching 101
 
 The idea behind caching is simple: if a resource is a time- or resource-consuming to compute, do it once and store the result.
 
@@ -46,8 +45,7 @@ On the Web, the resource you requested yesterday may be different if you request
 >
 > -- [RFC 7234 - 4.2. Freshness](https://www.rfc-editor.org/rfc/rfc7234#section-4.2)
 
-Early Web resource caching
---------------------------
+## Early Web resource caching
 
 Remember that the WWW was relatively simple at its beginning compared to nowadays. The client would send a request, and the server would return the requested resource. When the resource was a page, whether it was a static page or a server-rendered page was unimportant. Hence, early client-side caching was pretty "rustic".
 
@@ -63,8 +61,7 @@ The benefit of `Expire` is that it's a purely local decision. It doesn't need to
 * The decision to use the locally cached resource (or not) is based on heuristics. The resource may have changed server-side despite the `Expiry` value being in the future, so the browser serves an out-of-date resource. Conversely, the browser may send a request because the time has expired, but the resource hasn't changed.
 * Moreover, `Expire` is pretty basic. A resource is either fresh or stale; either return it from the `Cache` or send the request again. We may want to have more control.
 
-Cache-Control to the rescue
----------------------------
+## Cache-Control to the rescue
 
 The `Cache-Control` header aims to address the following requirements:
 
@@ -84,8 +81,7 @@ The [Cache Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Ca
 
 As `Expire`, `Cache-Control` is also **local**: the browser serves the resource from its cache, if needed, without any request to the server.
 
-Last-Modified and ETag
-----------------------
+## Last-Modified and ETag
 
 To avoid the risk of serving an out-of-date resource, the browser **must** send a request to the server. Enters the `Last-Modified` response header. `Last-Modified` works in conjunction with the `If-Modified-Since` *request* header:
 > The `If-Modified-Since` request HTTP header makes the request conditional: the server sends back the requested resource, with a `200` status, only if it has been last modified after the given date. If the resource has not been modified since, the response is a `304` without any body; the `Last-Modified` response header of a previous request contains the date of last modification. Unlike `If-Unmodified-Since`, `If-Modified-Since` can only be used with a `GET` or `HEAD`.
@@ -96,8 +92,6 @@ Let's use a diagram to make clear how they interact:
 
 <img decoding="async" class="size-medium wp-image-61153 aligncenter" src="last-modified-sequence-498x510.png" alt="" width="498" height="510">
 
-<br />
-
 Note: the `If-Unmodified-Since` has the opposite function for `POST` and other non-idempotent methods. It returns a `412 Precondition Failed` HTTP error to avoid overwriting resources that have changed.
 
 The problem with timestamps in distributed systems is that it's impossible to guarantee that all clocks in the system have the same time. Clocks drift at different paces and need to [synchronize](https://en.wikipedia.org/wiki/Clock_synchronization) to the same time at regular intervals. Hence, if the server that generated the `Last-Modified` header and the one that receives the `If-Modified-Since` header are different, the results could be unexpected depending on their drift. Note that it also applies to the `Expire` header.
@@ -106,8 +100,7 @@ Etags are an alternative to timestamps to avoid the above issue. The server comp
 
 It has the slight overhead of computing the hash vs. just handing the timestamp, but it's nowadays considered a good practice.
 
-The Cache API
--------------
+## The Cache API
 
 The most recent way to cache on the client side is via the [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache). It offers a general cache interface: you can think of it as a local key-value provided by the browser.
 
@@ -130,8 +123,7 @@ The Cache API works in conjunction with [Service Workers](https://developer.mozi
 
 It allows us to put resources in the cache after the initial load so that the client can work offline - depending on the use case.
 
-Summary
--------
+## Summary
 
 Here's a summary of the above alternatives to cache resources client-side.
 
@@ -145,8 +137,7 @@ Here's a summary of the above alternatives to cache resources client-side.
 
 Note that those alternatives aren't exclusive. You may have a short `Expire` header and rely on `ETag`. You should probably use both a level 2 alternative and a level 3.
 
-A bit of practice
------------------
+## A bit of practice
 
 Let's put the theory that we have seen above into practice. I'll set up a two-tiered HTTP cache:
 
@@ -173,13 +164,11 @@ routes:
             Cache-Control: "max-age=10"
 ```
 
-
 Let's do it *without a browser* first.
 
 ```bash
 curl -v localhost:9080
 ```
-
 
 ```
 HTTP/1.1 200 OK
@@ -194,13 +183,11 @@ Server: APISIX/3.0.0
 Cache-Control: max-age=10
 ```
 
-
 To prevent the server from sending the same resource, we can use the `ETag` value in an `If-None-Match` request header:
 
 ```bash
 curl -H 'If-None-Match: "637e271f-93"' -v localhost:9080
 ```
-
 
 The result is a `304 Not Modified` as expected:
 
@@ -217,11 +204,9 @@ Server: APISIX/3.0.0
 Cache-Control: max-age=10
 ```
 
-
 Now, we can do the same inside a browser. If we use the *resend* feature a second time before 10 seconds have passed, the browser returns the resource from the cache without sending the request to the server.
 
-Conclusion
-----------
+## Conclusion
 
 In this post, I described several alternatives to cache web resources: `Expiry` and `Cache-Control`, `Last-Modified` and `ETag`, and the Cache API and web workers.
 

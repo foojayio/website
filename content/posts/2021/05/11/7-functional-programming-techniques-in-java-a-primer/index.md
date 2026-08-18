@@ -26,10 +26,7 @@ There is a lot of hype around functional programming (FP) and a lot of cool kids
 
 I'm not going to dive into all functional programming concepts in detail, instead, I'm going to focus on things that you can do in Java which are in line with functional programming concepts. I'm also not going to discuss the pros and cons of functional programming in general.
 
-
-
-What is functional programming?
--------------------------------
+## What is functional programming?
 
 As per Wikipedia,
 > Functional programming is a programming paradigm---a style of building the structure and elements of computer programs---that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
@@ -55,10 +52,7 @@ Apart from these there are functional programming concepts below that can be app
 
 Using functional programming doesn't mean its all or nothing, you can always use functional programming concepts to complement Object-oriented concepts, especially in Java. The benefits of functional programming can be utilized whenever possible regardless of the paradigm or language you use. And that is exactly what we are going to see.
 
-
-
-Functional programming in Java
-------------------------------
+## Functional programming in Java
 
 So let us see how we can apply some of the functional programming concepts above in Java. We will be using Java 11 as it is the LTS version currently.
 
@@ -103,7 +97,6 @@ public class HocSample {
 }
 ```
 
-
 Fortunately, we can actually simplify the above example further using the built-in `Function` interface and using the lambda expression syntax.
 
 ```java
@@ -125,7 +118,6 @@ public class HocSample {
     }
 }
 ```
-
 
 Using these concepts along with lambda expressions we can write closures and currying like below:
 
@@ -161,7 +153,6 @@ public class ClosureSample {
 }
 ```
 
-
 We can simplify this further with lambda expressions, like the below:
 
 ```java
@@ -188,7 +179,6 @@ public class ClosureSample {
 }
 ```
 
-
 There are also many built-in higher-order-functions in Java for example here is the sort method from `java.util.Collections`
 
 ```java
@@ -201,7 +191,6 @@ Collections.sort(list, (String a, String b) -> {
 
 System.out.println(list); // [Apple, Banana, Grape, Orange]
 ```
-
 
 The Java stream API also provides many interesting higher-order-functions like forEach, map and so on.
 
@@ -217,7 +206,6 @@ public static int sum(int a, int b) {
 }
 ```
 
-
 If we add an extra line in this function, the behavior becomes unpredictable as it now has a side effect that affects an external state.
 
 ```java
@@ -229,7 +217,6 @@ public static int sum(int a, int b) {
     return c;
 }
 ```
-
 
 So try to keep your functions pure and simple.
 
@@ -258,7 +245,6 @@ public class FactorialSample {
 }
 ```
 
-
 The same can be done using recursion as below which is favored in functional programming.
 
 ```java
@@ -273,7 +259,6 @@ public class FactorialSample {
     }
 }
 ```
-
 
 The downside of the recursive approach is that it will be slower compared to an iterative approach most of the times(The advantage we are aiming for is code simplicity and readability) and might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame need not be saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. Java compiler, unfortunately, does not do this optimization 🙁
 
@@ -296,7 +281,6 @@ public class FactorialSample {
 }
 ```
 
-
 We can also use the Java stream library for recursion but its slower than normal recursion at the moment.
 
 ```java
@@ -312,7 +296,6 @@ public class FactorialSample {
     }
 }
 ```
-
 
 Consider using stream API or recursion when writing Java code for readability and immutability, but if performance is critical or if the number of iterations will be huge use standard loops.
 
@@ -345,7 +328,6 @@ public class EagerSample {
 }
 ```
 
-
 This will produce the below output and we can see that both functions are executed always.
 
 ```
@@ -356,7 +338,6 @@ executing add
 executing multiply
 16
 ```
-
 
 We can use lambda expressions and higher-order-functions to rewrite this into a lazily evaluated version:
 
@@ -389,7 +370,6 @@ public class LazySample {
 }
 ```
 
-
 This outputs the below and we can see that only required functions were executed:
 
 ```
@@ -398,7 +378,6 @@ executing add
 executing multiply
 16
 ```
-
 
 ### Type system
 
@@ -419,7 +398,6 @@ final var list = Arrays.asList("Apple", "Orange", "Banana", "Grape");
 list = Arrays.asList("Earth", "Saturn");
 ```
 
-
 But this will not help when variables are holding references to other objects, for example, the below mutation will work irrespective of the final keyword.
 
 ```java
@@ -429,7 +407,6 @@ list.add("Test");
 list.add("Test 2");
 ```
 
-
 `final` keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective `final` keyword is useful only for constants and to catch reassignments.
 
 ### [Data structures](https://en.wikipedia.org/wiki/Purely_functional_data_structure)
@@ -438,10 +415,7 @@ When using functional programming techniques it is encouraged to use functional 
 
 Hence maps are better than arrays or hash sets in functional programming as data stores.
 
-
-
-Conclusion
-----------
+## Conclusion
 
 This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on.
 
@@ -450,10 +424,6 @@ As I said earlier, functional programming is not a silver bullet but it offers a
 Here is a video from a meetup, I presented, covering this content.
 
 {{< youtube 5dBw4madIpo >}}
-
-<br />
-
-
 
 I hope you find this useful. If you have any question or if you think I missed something please add a comment.
 

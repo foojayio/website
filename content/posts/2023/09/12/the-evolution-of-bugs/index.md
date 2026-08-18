@@ -75,12 +75,9 @@ As a sidenote, if you like the content of this and the other posts in this serie
 
 {{< youtube KTtpr0JNn_o >}}
 
-<br />
-
 {#memory-management-the-past-and-the-present}
 
-Memory Management: The Past and The Present
--------------------------------------------
+## Memory Management: The Past and The Present
 
 Memory management, with its intricacies and nuances, has always posed unique challenges for developers. Debugging memory issues, in particular, has transformed considerably over the decades. Here's a dive into the world of memory-related bugs and how debugging strategies have evolved.
 
@@ -112,8 +109,7 @@ Some profilers can also detect potential concurrency issues, making them invalua
 
 {#concurrency-a-double-edged-sword}
 
-Concurrency: A Double-Edged Sword
----------------------------------
+## Concurrency: A Double-Edged Sword
 
 Concurrency, the art of making software execute multiple tasks in overlapping periods, has transformed how programs are designed and executed. However, with the myriad of benefits it introduces, like improved performance and resource utilization, concurrency also presents unique and often challenging debugging hurdles. Let's delve deeper into the dual nature of concurrency in the context of debugging.
 
@@ -155,8 +151,7 @@ One of the most notorious concurrency-related bugs is the race condition. It occ
 
 {#the-pervasiveness-of-state-bugs}
 
-The Pervasiveness of State Bugs
--------------------------------
+## The Pervasiveness of State Bugs
 
 Software, at its core, represents and manipulates data. This data can represent everything from user preferences and current context to more ephemeral states, like the progress of a download. The correctness of software heavily relies on managing these states accurately and predictably. State bugs, which arise from incorrect management or understanding of this data, are among the most common and treacherous issues developers face. Let's delve deeper into the realm of state bugs and understand why they're so pervasive.
 
@@ -207,8 +202,7 @@ To tackle state bugs, developers have an arsenal of tools and strategies:
 
 {#exceptions-the-noisy-neighbor}
 
-Exceptions: The Noisy Neighbor
-------------------------------
+## Exceptions: The Noisy Neighbor
 
 When navigating the labyrinth of software debugging, few things stand out quite as prominently as exceptions. They are, in many ways, like a noisy neighbor in an otherwise quiet neighborhood: impossible to ignore and often disruptive. But just as understanding the reasons behind a neighbor's raucous behavior can lead to a peaceful resolution, diving deep into exceptions can pave the way for a smoother software experience.
 
@@ -256,8 +250,7 @@ Like most issues in software, prevention is often better than cure. Static code 
 
 {#faults-beyond-the-surface}
 
-Faults: Beyond the Surface
---------------------------
+## Faults: Beyond the Surface
 
 When a software system falters or produces unexpected results, the term "fault" often comes into the conversation. Faults, in a software context, refer to the underlying causes or conditions that lead to an observable malfunction, known as an error. While errors are the outward manifestations we observe and experience, faults are the underlying glitches in the system, hidden beneath layers of code and logic. To understand faults and how to manage them, we need to dive deeper than the superficial symptoms and explore the realm below the surface.
 
@@ -303,8 +296,7 @@ Every fault presents a learning opportunity. By analyzing faults, their origins,
 
 {#thread-bugs-unraveling-the-knot}
 
-Thread Bugs: Unraveling the Knot
---------------------------------
+## Thread Bugs: Unraveling the Knot
 
 In the vast tapestry of software development, threads represent a potent yet intricate tool. While they empower developers to create highly efficient and responsive applications by executing multiple operations simultaneously, they also introduce a class of bugs that can be maddeningly elusive and notoriously hard to reproduce: thread bugs.
 
@@ -349,8 +341,7 @@ Addressing thread bugs often requires a blend of preventive and corrective measu
 
 {#race-conditions-always-a-step-ahead}
 
-Race Conditions: Always a Step Ahead
-------------------------------------
+## Race Conditions: Always a Step Ahead
 
 The digital realm, while primarily rooted in binary logic and deterministic processes, is not exempt from its share of unpredictable chaos. One of the primary culprits behind this unpredictability is the race condition, a subtle foe that always seems to be one step ahead, defying the predictable nature we expect from our software.
 
@@ -391,8 +382,7 @@ Given the unpredictable nature of race conditions, traditional debugging techniq
 
 {#performance-pitfalls-monitor-contention-and-resource-starvation}
 
-Performance Pitfalls: Monitor Contention and Resource Starvation
-----------------------------------------------------------------
+## Performance Pitfalls: Monitor Contention and Resource Starvation
 
 Performance optimization is at the heart of ensuring that software runs efficiently and meets the expected requirements of end users. However, two of the most overlooked yet impactful performance pitfalls developers face are monitor contention and resource starvation. By understanding and navigating these challenges, developers can significantly enhance software performance.
 
@@ -447,8 +437,7 @@ Both monitor contention and resource starvation can degrade system performance i
 
 {#final-word}
 
-Final Word
-----------
+## Final Word
 
 Bugs, in their many forms, will always be a part of programming. But with a deeper understanding of their nature and the tools at our disposal, we can tackle them more effectively. Remember, every bug unraveled adds to our experience, making us better equipped for future challenges.
 

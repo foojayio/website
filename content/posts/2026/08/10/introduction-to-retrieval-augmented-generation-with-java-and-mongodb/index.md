@@ -23,8 +23,6 @@ Retrieval-Augmented Generation (**RAG**) tackles this challenge by combining the
 
 This tutorial introduces the RAG pattern and demonstrates how to implement it with [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=hugh.murray).
 
-<br />
-
 In this tutorial, you'll:
 
 * Model a simple HR Policy system.
@@ -37,9 +35,7 @@ You can find all the code presented in this tutorial in the GitHub repository:
 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e69677a4e69677a667b6c206d6163">[email protected]</a>:soujava/mongodb-rag.git
 ```
 
-
-Prerequisites
--------------
+## Prerequisites
 
 For this tutorial, you'll need:
 
@@ -53,10 +49,7 @@ Retrieval-Augmented Generation (RAG) is an architectural approach that merges a 
 Vector databases aid this process by storing text as numerical representations known as embeddings. Unlike classic lexical indexes that search for exact words or phrases, vector indexes retrieve information based on semantic context and meaning. For example, a query about "working from home" can locate documents mentioning "remote work," even if the exact words differ. MongoDB Atlas supports this architecture by allowing application data, document content, metadata, and embeddings to remain on a single platform. This enables Java applications to combine operational queries, contextual filtering, and semantic retrieval when building effective RAG solutions.
 ![](fri1.png)
 
-<br />
-
-Step 1: Generate the Project
-----------------------------
+## Step 1: Generate the Project
 
 In this tutorial, we will build a JAX-RS application designed to answer questions using the context of a human resources policy. Users will be able to both ask questions and provide context through the resource. To begin, create a new project using Helidon, as in[the previous article](https://www.mongodb.com/community/forums/t/introduction-to-mongodb-and-helidon/303061/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=versioning-foojay&utm_term=hugh.murray). Visit[Helidon Starter](https://helidon.io/starter/), select Microprofile and Quickstart, then download the project.
 
@@ -105,11 +98,9 @@ After downloading the project, we will add the required dependencies, including 
         </dependencies>
 ```
 
-
 The next step is to add credentials, including the LLM provider and API key, to src/main/resources/META-INF/microprofile-config.properties. Please ensure you update the Open API key or MongoDB Atlas configuration as needed.
 
-Step 2: Create the Service
---------------------------
+## Step 2: Create the Service
 
 With the project and credentials set up, we can begin by creating the agent that will serve as the bridge between Java and the LLM. Using Langchain4J with CDI, this can be achieved through a single interface. Our implementation will include one method to handle questions, utilizing SystemMessage for the prompt and UserMessage for user input.
 
@@ -139,7 +130,6 @@ public interface HRPolicyAgent {
 }
 ```
 
-
 With the Agent set up, we can now define the Data Transfer Objects (**DTOs**) that will carry request and response messages within our REST API. In this context, we will use Java records.
 
 The first DTO represents a request containing an HR question. This question is a String text field that must not be blank, enforced by a single Bean Validation annotation.
@@ -154,7 +144,6 @@ public record HRPolicyQuestion(
 }
 ```
 
-
 The response DTO includes both the original question and its corresponding answer.  
 
 ```
@@ -165,7 +154,6 @@ public record HRPolicyAnswer(
 }
 ```
 
-
 For the context category, we use a similar request/response structure. The request contains a text field that will be inserted into the MongoDB Atlas Vector Database. This information is essential for enhancing our LLM's knowledge and is central to the application's functionality.
 
 ```
@@ -175,14 +163,12 @@ public record HRPolicyContextRequest(@NotBlank String context) {
 }
 ```
 
-
 The response indicates whether the information was successfully inserted and provides a relevant message to the user.
 
 ```
 public record HRPolicyContextResponse(boolean inserted, String message) {
 }
 ```
-
 
 To begin implementing the services, start with HRPolicyService, which manages project-related questions. This class injects the agent and submits questions to the LLM.
 
@@ -210,7 +196,6 @@ public class HRPolicyService {
    }
 }
 ```
-
 
 The Context service includes additional logic. It inserts information into the database, prevents duplicate entries, and returns the relevant data from the database.
 
@@ -275,7 +260,6 @@ public class HRPolicyContextService {
    }
 }
 ```
-
 
 The final service in this tutorial ensures the database contains the minimum required information. It checks if the database is empty and, if so, inserts an initial HR policy context.
 
@@ -345,9 +329,7 @@ public class HRPolicyLoader {
 }
 ```
 
-
-Step 3: Create the producers
-----------------------------
+## Step 3: Create the producers
 
 The purpose of these producers is to demonstrate how to create and inject instances, or make them available to CDI containers. The following example uses the @Produces method in CDI.
 
@@ -424,7 +406,6 @@ class VectorStoreProducer {
 }
 ```
 
-
 The EmbeddingModelProducer class defines the model used for vector operations. Configuration values can be overridden, and default values are provided.
 
 ```
@@ -459,7 +440,6 @@ class EmbeddingModelProducer {
    }
 }
 ```
-
 
 Finally, the ContentRetrieverProducer configures the retriever with minimum score and maximum result parameters.
 
@@ -502,9 +482,7 @@ class ContentRetrieverProducer {
 }
 ```
 
-
-Step 4: Define Resources
-------------------------
+## Step 4: Define Resources
 
 The configuration, credentials, services, and producers are ready. The remaining step is to expose this service to users. We will use a REST API by creating a resource class with JAX-RS. This resource class will expose both question and context endpoints using the POST method. JAX-RS provides a straightforward API for our REST application, allowing us to easily identify operations through annotations such as POST for the HTTP verb and Path to define the URL.
 
@@ -561,15 +539,11 @@ public class HRPolicyResource {
 }
 ```
 
-
 Once the application is running, you can test it locally or deploy it to a cloud environment. If testing locally, ensure your IP address is included to allow access to the MongoDB Atlas database.
 
-Conclusion
-----------
+## Conclusion
 
 This tutorial showed how to implement Retrieval-Augmented Generation in Java using Jakarta EE, LangChain4j, and MongoDB Atlas. We demonstrated how to convert contextual information into embeddings, store them in a vector database, retrieve them through semantic similarity, and provide them to a Large Language Model for grounded responses. MongoDB Atlas adds value by keeping operational data, document content, metadata, and vector embeddings on a single managed platform. This reduces architectural complexity and enables scalable semantic search. As a result, Java applications can move beyond isolated AI integrations and use RAG to make organizational knowledge more accessible, up-to-date, and practical for business needs.
-
-<br />
 
 Ready to explore the benefits of MongoDB Atlas? Get started now by [trying MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=data_driven_test_dev&utm_term=otavio.santana).
 

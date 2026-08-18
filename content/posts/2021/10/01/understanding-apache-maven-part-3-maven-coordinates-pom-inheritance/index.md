@@ -20,8 +20,7 @@ frozen: false
 
 In Part 3 of the series, an explanation of dependency coordinates and "distinguishers" as well as a more detailed look at POM hierarchies are covered.
 
-What are dependency coordinates?
---------------------------------
+## What are dependency coordinates?
 
 There are hundreds or thousands of projects that produce artifacts. Some such artifacts can potentially be used in a current project as libraries. For instance, a project may depend on a logging framework or a JSON library. It is possible to host many such dependency artifacts on a central repository. Maven's primary such repository is called **Maven Central**. Many other such repositories also exist. More on this later!
 
@@ -70,8 +69,7 @@ Once all testing is complete, the POM no longer needs the `-SNAPSHOT` suffix and
 
 A common way of communicating an artifacts coordinates is with a colon separation. Together the coordinates are referred to as **Group-Artifact-Version** or **GAV** coordinates. The GAV coordinates for commons-lang3 version 3.1.0 will be: **org.apache.commons:commons-lang3:3.1.0**.
 
-Additional distinguishers
--------------------------
+## Additional distinguishers
 
 Often times, a project's build may include more than one format of artifacts. A Maven execution on a project could emit a jar file, a zip file a tarball and many other artifacts. An execution could also emit different outputs such as a binary, a zip file of sources, a zip file of javadoc files etc.
 
@@ -89,8 +87,7 @@ A **type** is used to distinguish the artifact format. Artifacts emitted from a 
 
 A combination of GAV coordinates and distinguishers can be used to locate the exact artifact needed for the project.
 
-POM Hierarchies
----------------
+## POM Hierarchies
 
 This section describes the hierarchy in Maven POMs.
 ![](https://cgunturme.files.wordpress.com/2020/05/mavenhierarchies.png?w=1024)

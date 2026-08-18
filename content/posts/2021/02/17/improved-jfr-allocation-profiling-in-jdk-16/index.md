@@ -37,8 +37,7 @@ Well, it turns out that some applications can generate a huuuuge amount of TLAB 
 
 In addition to this performance regression the TLAB events contributed to a very significant increase in the recording size - again causing problems for our continuous profiler which needs to deal with hundreds of thousands such profiles daily. And to solve the size problem we would need a new way of collecting allocation samples which would guarantee a maximum number of samples per recording (to have a predictable recording size) while still providing statistically accurate picture.
 
-Rate Limited Allocation Profiling
----------------------------------
+## Rate Limited Allocation Profiling
 
 This is an incremental improvement on top of the TLAB based allocation profiling. It is using the same data source (TLAB filled up, outside of TLAB allocation) but is applying an adaptive throttling mechanism to guarantee the maximum number of samples per recording (or time unit, more generally speaking).
 
@@ -89,7 +88,5 @@ The introduction of a throughput management mechanism in JFR allows getting fine
 The results of our preliminary tests of the setups previously completely unable to run with the allocation profiling events turned on are very exciting - JFR with event emission rate controller is able to provide a clear statistical picture of the allocation activity while keeping the recording size at a very manageable level thanks to the limit imposed on the number of captured TLAB events.
 
 Also, let's ponder the fact that the event rate emission control (throttling) is not TLAB event specific and can be used for other event types as well if there is such demand. Although I am quite sure there will be no more throttled events in JDK 16 which is in its stabilisation phase as of writing of this blog it might be the good time to take a look at the potential candidates for JDK 17.
-
-
 
 Originally published by the [author in his blog](https://withent.blogspot.com/2021/01/improved-jfr-allocation-profiling-in.html).

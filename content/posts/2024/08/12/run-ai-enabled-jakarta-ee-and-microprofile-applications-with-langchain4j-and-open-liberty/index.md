@@ -39,8 +39,7 @@ In this post, we'll explore what LLMs are and how to use them in Java applicatio
 
 {#WhatAreLLMs?}
 
-What are LLMs?
---------------
+## What are LLMs?
 
 A language model is a model of natural language based on probabilities. They are able to generate probabilities of a series of words together. [Large language models (LLMs)](https://www.ibm.com/topics/large-language-models) are simply language models that are categorized by their large size.
 
@@ -50,14 +49,11 @@ See the following introductory video for more information on LLMs, including wha
 
 {{< youtube 5sLYAQS9sWQ >}}
 
-<br />
-
 You can find LLMs in the service offerings of almost all of the major cloud service providers. For example, IBM offers models through its [WatsonX](https://www.ibm.com/watsonx) services, [Microsoft Azure](https://azure.microsoft.com/en-us/solutions/ai) offers LLMs like Llama 2 and OpenAI GPT-4, and [Amazon Bedrock](https://aws.amazon.com/bedrock/) offers models from a range of AI companies.
 
 {#Java_LLMs?}
 
-How can we take advantage of LLMs in Java applications?
--------------------------------------------------------
+## How can we take advantage of LLMs in Java applications?
 
 Integrating AI/LLM capabilities into an application can be challenging. The open source LangChain framework was developed in 2022 to help streamline the process of creating generative AI apps.
 
@@ -71,8 +67,7 @@ Although LangChain is primarily available in Python and JavaScript/TypeScript ve
 
 {#using_Langchain4j}
 
-How to use LangChain4j in a Jakarta EE and MicroProfile application
--------------------------------------------------------------------
+## How to use LangChain4j in a Jakarta EE and MicroProfile application
 
 Langchain4j has a useful open source [langchain4j-examples](https://github.com/langchain4j/langchain4j-examples) GitHub repository where it stores example applications. However, we could not find any examples showcasing how you could experience these AI technologies in a Jakarta EE or MicroProfile based application.
 
@@ -80,8 +75,7 @@ So, we decided to build one ourselves called `jakartaee-microprofile-example`, w
 
 {#tryout}
 
-Try out the jakartaee-microprofile-example application
-------------------------------------------------------
+## Try out the jakartaee-microprofile-example application
 
 To see how you can apply LangChain4j to your own Jakarta EE and MicroProfile applications, check out this example project for yourself.
 
@@ -103,7 +97,6 @@ To access the repository remotely, install [Git](https://git-scm.com/book/en/v2/
 git clone https://github.com/langchain4j/langchain4j-examples.git
 ```
 
-
 ### Environment setup
 
 To run the application, navigate to the `jakartaee-microprofile-example` directory:
@@ -112,14 +105,12 @@ To run the application, navigate to the `jakartaee-microprofile-example` directo
 cd langchain4j-examples/jakartaee-microprofile-example
 ```
 
-
 Set the following environment variables:
 
 ```
 export JAVA_HOME=<your Java 17 home path>
 export HUGGING_FACE_API_KEY=<your Hugging Face read token>
 ```
-
 
 ### Start the application
 
@@ -128,7 +119,6 @@ To start the application, use the provided Maven wrapper to run Open Liberty in 
 ```
 ./mvnw liberty:dev
 ```
-
 
 After you see the following message, the application is ready:
 
@@ -145,7 +135,6 @@ After you see the following message, the application is ready:
 *        Liberty debug port: [ 7777 ]
 ************************************************************************
 ```
-
 
 To ensure that the application started successfully, you can run the tests by pressing the `enter/return` key from the command-line session. If the tests pass, you can see output similar to the following example:
 
@@ -164,7 +153,6 @@ To ensure that the application started successfully, you can run the tests by pr
 [INFO]
 ```
 
-
 ### Access the application
 
 After the application is running, you can access it through a browser of your choice at <http://localhost:9080/> and start experimenting with it.
@@ -179,8 +167,7 @@ You can type in any text that you want to chat with the AI agent. Here are some 
 
 {#how_app_work}
 
-How does the application work?
-------------------------------
+## How does the application work?
 
 The application demonstrates how to use the LangChain4j APIs, [Jakarta Contexts and Dependency Injection](https://openliberty.io/docs/ref/feature/#cdi-4.0.html), [Jakarta WebSocket](https://openliberty.io/docs/latest/reference/feature/websocket-2.1.html), [MicroProfile Config](https://openliberty.io/docs/ref/feature/#mpConfig-3.0.html), and [MicroProfile Metrics](https://openliberty.io/docs/latest/reference/feature/mpMetrics-5.1.html) features.
 
@@ -210,7 +197,6 @@ public Assistant getAssistant() {
 }
 ```
 
-
 Through the customized `Assistant` interface, the application can send messages to the LLM by its `chat()` method.
 
 ```
@@ -218,7 +204,6 @@ interface Assistant {
    String chat(@MemoryId String sessionId, @UserMessage String userMessage);
 }
 ```
-
 
 ### Externalizing the configuration
 
@@ -252,7 +237,6 @@ private Double TEMPERATURE;
 private Integer MAX_MESSAGES;
 ```
 
-
 To fine tune the LangChain4j model or even try out another LLM, you simply update the values in the [src/main/resources/META-INF/microprofile-config.properties](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example/src/main/resources/META-INF/microprofile-config.properties "microprofile-config.properties") file or provide them through the environment variables.
 
 ```
@@ -263,7 +247,6 @@ chat.model.max.token=200
 chat.model.temperature=1.0
 chat.memory.max.messages=20
 ```
-
 
 ### Communicating between the client and LLM
 
@@ -284,7 +267,6 @@ function sendMessage() {
     ...
 }
 ```
-
 
 The service receives the user messages through the WebSocket `onMessage()` method, forwards them to the LLM by calling the `ChatAgent.chat()` method, and then broadcasts the LLM answers back to the client session through the `sendObect()` method.
 
@@ -310,7 +292,6 @@ public void onMessage(String message, Session session) {
 }
 ```
 
-
 ### Enabling metrics
 
 To determine the performance and health of the application, it uses the MicroProfile Metrics feature to collect how much processing time is needed for a chat by applying the `@Timed` annotation to the `onMessage()` method.
@@ -325,7 +306,6 @@ See the [src/main/java/dev/langchain4j/example/chat/ChatService.java](https://gi
 public void onMessage(String message, Session session) {
     ...
 ```
-
 
 Visit the <http://localhost:9080/metrics?scope=application> URL to check out the metrics.
 
@@ -345,11 +325,9 @@ chatProcessingTime_seconds_sum{mp_scope="application",} 31.674357666
 chatProcessingTime_seconds_max{mp_scope="application",} 13.191547042
 ```
 
-
 If you are interested in other ways to use the LangChain4j APIs, you can study the REST APIs that are provided by the [src/main/java/dev/langchain4j/example/rest/ModelResource.java](https://github.com/langchain4j/langchain4j-examples/tree/main/jakartaee-microprofile-example/src/main/java/dev/langchain4j/example/rest/ModelResource.java "ModelResource.java") file.
 
-Where to next?
---------------
+## Where to next?
 
 Check out the [Open Liberty guides](https://openliberty.io/guides) for more information and interactive tutorials that walk you through using more Jakarta EE and MicroProfile APIs with Open Liberty.
 

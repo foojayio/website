@@ -32,8 +32,7 @@ The cloud is the logical progression for providing compute resources. Rather tha
 
 Users see the potential benefits immediately. There is no capital expenditure to build a data center and reduced operation spending, as only those resources used are paid for.
 
-Controlling overspending is hard
---------------------------------
+## Controlling overspending is hard
 
 Unfortunately, many users never realize those cost savings, and cloud costs often prove even more expensive.
 ![Cloud Cost Optimization is hard for Java Workloads: reasons for overspending](https://www.azul.com/wp-content/uploads/Screenshot-2023-12-13-at-9.49.27%E2%80%AFAM-1024x592.png) Source: S\&P Global
@@ -42,8 +41,7 @@ In fact, in a [recent survey by S\&P Global Market Research](https://www.youtube
 
 Why is this, and why is this more frequently the case when running JVM-based workloads?
 
-What's Java got to do with cloud costs?
----------------------------------------
+## What's Java got to do with cloud costs?
 
 We need more background on how the Java platform works to understand how Java can impact application performance and help curb over-provisioning.
 
@@ -55,8 +53,7 @@ The time to compile all the frequently used sections of code is called warmup ti
 
 With JVM-based applications, when new service instances start, the warmup time delays the instance's ability to handle requests. To enable mission-critical enterprise applications to meet their SLAs, DevOps teams frequently keep a pool of running services in reserve. These services are fully warmed up and ready to be used immediately when required. Of course, the downside is that they consume resources even when they are not being used. If they are only needed infrequently, they produce considerable waste and additional cloud costs.
 
-Switching your Java runtime helps reduce cloud waste
-----------------------------------------------------
+## Switching your Java runtime helps reduce cloud waste
 
 The good news is that Azul is adapting the Java platform to make applications run faster and address these issues.
 ![Cloud Cost Optimization is hard for Java Workloads: ReadyNow Latency Line Chart](https://www.azul.com/wp-content/uploads/Latency-Line-Chart-min.jpg)
@@ -73,8 +70,7 @@ Azul Platform Prime includes three areas of change:
 
 ![Cloud Cost Optimization is hard for Java Workloads: Unused operational compute capacity](https://www.azul.com/wp-content/uploads/CCO-Blog-Chart-2-768x668.png)
 
-Ready for a deeper dive?
-------------------------
+## Ready for a deeper dive?
 
 There's a lot of great information about key cloud cost trends that you need to know [from our conversation](https://www.youtube.com/watch?v=nAP3bYxdsZw&t=1s).
 
@@ -83,7 +79,3 @@ There's a lot of great information about key cloud cost trends that you need to 
 * **How do your cloud spending shifts compare:** the top cloud-attached services trends in the market may surprise you.
 
 You are going to want to hear the full conversation between William and myself. A Java runtime that delivers more performance can make a big difference.
-
-<br />
-
-<br />

@@ -36,8 +36,6 @@ The idea behind server-side caching is to compute the resource once and serve it
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-61200 aligncenter" src="server-cache-557x510.png" alt="" width="557" height="510">
 
-<br />
-
 A couple of dedicated server-side resource caching solutions have emerged over the years: [Memcached](https://memcached.org/), [Varnish](https://varnish-cache.org/), [Squid](http://www.squid-cache.org/), etc. Other solutions are less focused on web resource caching and more generic, *e.g.* , [Redis](https://redis.io/) or [Hazelcast](https://hazelcast.com/).
 
 If you want to dive deeper into generic caching solutions, please check these [two](https://blog.frankel.ch/choose-cache/1/) [posts](https://blog.frankel.ch/choose-cache/2/) on the subject.
@@ -58,7 +56,6 @@ routes:
       proxy-cache: ~
 ```
 
-
 Note that the default cache key is the host and the request URI, which includes query parameters.
 
 The default `proxy-cache` configuration uses the default disk-based [configuration](https://github.com/apache/apisix/blob/master/conf/config-default.yaml#L53-L69):
@@ -78,13 +75,11 @@ proxy_cache:                      # Proxy Caching configuration
       memory_size: 50m
 ```
 
-
 We can test the setup with `curl`:
 
 ```bash
 curl -v localhost:9080/cache
 ```
-
 
 The response is interesting:
 
@@ -101,7 +96,6 @@ The response is interesting:
 < Accept-Ranges: bytes
 ```
 
-
 1. Because the cache is empty, APISIX has a cache miss. Hence, the response is from the upstream
 
 If we `curl` again before the default cache expiration period (300 seconds), the response is from the cache:
@@ -112,7 +106,6 @@ If we `curl` again before the default cache expiration period (300 seconds), the
 < Apisix-Cache-Status: HIT
 ```
 
-
 After the expiration period, the response is from the upstream, but the header is explicit:
 
 ```
@@ -121,13 +114,11 @@ After the expiration period, the response is from the upstream, but the header i
 < Apisix-Cache-Status: EXPIRED
 ```
 
-
 Note that we can explicitly purge the entire cache by using the custom `PURGE` HTTP method:
 
 ```bash
 curl localhost:9080/cache -X PURGE
 ```
-
 
 After purging the cache, the above cycle starts anew.
 
@@ -141,13 +132,11 @@ routes:
         cache_bypass: ["$arg_bypass"]       #1
 ```
 
-
 1. Bypass the cache if you send a `bypass` query parameter with a non-`0` value
 
 ```bash
 curl -v localhost:9080/cache?bypass=please
 ```
-
 
 It serves the resource from the upstream regardless of the cache status:
 
@@ -157,11 +146,9 @@ It serves the resource from the upstream regardless of the cache status:
 < Apisix-Cache-Status: BYPASS
 ```
 
-
 For more details on all available configuration parameters, check the [proxy-cache](https://apisix.apache.org/docs/apisix/plugins/proxy-cache/) plugin.
 
-Conclusion
-----------
+## Conclusion
 
 This post was relatively straightforward. The most challenging issue with server-side caching is the configuration: what to cache, for how long, etc.
 

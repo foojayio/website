@@ -37,7 +37,3 @@ There are only 25 questions in total, including the screener questions, so this 
 The survey will close in two weeks time, so if you could complete this report within that timeframe that would be great!
 
 You will all receive a copy of this report once finalized.
-
-<br />
-
-<br />

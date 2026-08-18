@@ -64,8 +64,7 @@ To understand pattern matching for switch, it will be beneficial to have an unde
 
 If you are already familiar with all of the preceding topics, feel free to skip to the section 'Welcome to pattern matching for switch'.
 
-**What is pattern matching?**
------------------------------
+## **What is pattern matching?**
 
 [Wikipedia](https://en.wikipedia.org/wiki/Pattern_matching) states pattern matching is "the act of checking a given sequence of tokens for the presence of the constituents of some pattern".
 
@@ -78,8 +77,7 @@ There are different types of patterns. In this blog post, I'll cover type patter
 
 Pattern matching for instanceof uses type pattern. Let's look at how it works.
 
-**Pattern matching for instanceof**
------------------------------------
+## **Pattern matching for instanceof**
 
 This feature extends the `instanceof` operator with the possibility to use a type pattern. It checks whether an instance is of a certain type. If the test passes, it casts and assigns the value to a pattern variable. This removes the need to define an additional variable, or for explicit casting, to use members of the instance being compared.
 
@@ -93,7 +91,6 @@ void outputValueInUppercase(Object obj) {
    }
 }
 ```
-
 
 In IntelliJ IDEA, you can invoke context-sensitive actions on the variable s (by using Alt+Enter or by clicking the light bulb icon) and selecting *Replace 's' with pattern variable* to use pattern matching for instanceof:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-1.gif)
@@ -138,14 +135,12 @@ public class Planet {
 }
 ```
 
-
 Let's see how switch expressions can help. The following gif demonstrates some of the benefits of switch expressions such as concise code, improved code semantics, no redundant break statements, exhaustive iteration, and more:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-3.gif)
 
 With a basic understanding of pattern matching, pattern matching for instanceof, and switch expressions, let's look at what pattern matching is and why you need it?
 
-**Welcome to Pattern matching for switch**
-------------------------------------------
+## **Welcome to Pattern matching for switch**
 
 Imagine being able to replace long if-else statement chains with concise switch statements *or* expressions. Yes, you read that correctly. Pattern matching for switch applies to both switch statements and switch expressions.
 
@@ -180,7 +175,6 @@ public class Deforestation {
 }
 ```
 
-
 Imagine a class `MyEarth`, with a method, say, `getDamage()` that accepts a method parameter of type `Object`. Depending on the type of the object passed to this method, it calls the relevant method on the method parameter to get a quantifiable number for the amount of harm it is causing to our planet:
 
 ```java
@@ -205,7 +199,6 @@ public class MyEarth {
 }
 ```
 
-
 Let's look at how we can use switch expressions and IntelliJ IDEA to make this code more concise:
 ![](https://blog.jetbrains.com/wp-content/uploads/2021/09/java17-4.gif)
 
@@ -223,7 +216,6 @@ public class MyEarth {
     }
 }
 ```
-
 
 The power of this construct lies in how often it helps to reduce the cognitive complexity in the code, as I discuss in the following section.
 
@@ -283,7 +275,6 @@ case Discrimination d -> {
 }
 ```
 
-
 ### **Scope of pattern variables**
 
 Pattern variables are local variables, which are casted and initialized when a type pattern tests true. Their scope is limited to the case labels in which they are declared -- it doesn't make sense for a pattern variable to be available in a switch branch in which its argument doesn't match.
@@ -311,7 +302,6 @@ public class MyEarth {
 }
 ```
 
-
 Imagine you want to return the value 5000, if the `getAQI()` method on an `AirPollution` instance returns a value of more than 200. We are talking about two conditions here:
 
 1. The variable obj is an instance of `AirPollution`
@@ -330,7 +320,6 @@ public class MyEarth {
     }
 }
 ```
-
 
 It is interesting to note that when you pass an `AirPollution` instance with `getAQI()` value \<= 200, `getDamage()` method will execute the default branch and return -1.
 
@@ -351,7 +340,6 @@ public class MyEarth {
 }
 ```
 
-
 If I modify the placement of the parentheses from the preceding code (as shown in the following code snippet), calling `getDamage()` passing it an instance of `AirPollution` would return -1:
 
 ```java
@@ -368,7 +356,6 @@ public class MyEarth {
     }
 }
 ```
-
 
 ### **Parenthesized patterns**
 
@@ -398,7 +385,6 @@ class WaterPollution extends Pollution {}
 class AirPollution extends Pollution {}
 ```
 
-
 Defining a case label which handles instances of type Pollution as the last case label might look obvious in the following code, since switch is returning a value. Since the switch is switching over a reference variable of type pollution, it can be assigned a value of type Pollution or one of its subclasses. In this case a default label is not required:
 
 ```java
@@ -413,7 +399,6 @@ class MyEarth {
 }
 ```
 
-
 Also, you would need to handle all the possible values for method parameter pollution, even when the switch-statement is not returning a value:
 
 ```java
@@ -427,7 +412,6 @@ class MyEarth {
     }
 }
 ```
-
 
 Or when using an old-style colon syntax:
 
@@ -449,7 +433,6 @@ class MyEarth {
 }
 ```
 
-
 Adding a null case to switch is not mandatory to ensure that it handles all the possible values.
 
 ### **Using sealed classes as type patterns -- are they treated differently to non-sealed classes?**
@@ -463,7 +446,6 @@ sealed abstract class Pollution {}
 final class WaterPollution extends Pollution {}
 non-sealed class AirPollution extends Pollution {}
 ```
-
 
 Now the compiler is sure that the abstract class Pollution has exactly *two* subclasses. So you can handle values passed to method parameter pollution, as follows:
 
@@ -479,7 +461,6 @@ class MyEarth {
 }
 ```
 
-
 This rule applies to the hierarchy of an interface too.
 
 ### **Freedom from defining code that might never execute**
@@ -491,7 +472,6 @@ sealed interface Expandable {}
 record Circle(int radius) implements Expandable {}
 record Square(int side) implements Expandable {}
 ```
-
 
 Without pattern matching for switch, the if statement in the following code would require you to define an else part even though you have handled both the implementing classes of the interface `Expandable`, that is, `Circle` and `Square`:
 
@@ -511,7 +491,6 @@ public class Geometry {
 }
 ```
 
-
 However, this changes when you use pattern matching for switch, as follows:
 
 ```java
@@ -524,7 +503,6 @@ public class Geometry {
     }
 }
 ```
-
 
 ### **Running inspection** **'if' can be replaced with 'switch' on your code base**
 
@@ -539,8 +517,7 @@ We have talked a lot about the pattern matching for switch. Now let's cover seal
 
 The language syntax of Sealed types enables you to restrict the classes or interfaces that can extend or implement them. The goal of this language feature is to let you define the possible hierarchies in your business domain in a declarative manner. But why would you ever need to create restricted hierarchies?
 
-**Need for creating restricted hierarchies**
---------------------------------------------
+## **Need for creating restricted hierarchies**
 
 Imagine you are creating an application that helps its users with gardening activities. Depending on the type of plant, a gardener might need to do different activities. Let's model the plant hierarchy as follows (I'm not detailing the classes on purpose):
 
@@ -553,7 +530,6 @@ class Climber extends Plant {}
 
 class Cucumber extends Climber {}
 ```
-
 
 The following code is an example of how the `Gardener` class might use this hierarchy:
 
@@ -581,11 +557,9 @@ public class Gardner {
 }
 ```
 
-
 The problem code is the assumption that a developer has to deal with in the last else construct - defining actions even though the developer knows that all possible types of the method parameters plant have been addressed. Though it might look unreachable now, what happens if another developer adds a class to this hierarchy? Sealed classes can impose this restriction on the hierarchies at the language level.
 
-**Define secure hierarchies with sealed classes**
--------------------------------------------------
+## **Define secure hierarchies with sealed classes**
 
 With the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) sealed, you can **declare** a class as a sealed class. A sealed class uses the [contextual keyword](https://openjdk.java.net/jeps/8223002#:~:text=Contextual%20keyword%3A%20A%20sequence%20of,declarations%2C%20since%20Java%209) permits to list the classes that can extend it directly. Its subclasses can either be final, non-sealed*,* or sealed.
 
@@ -605,7 +579,6 @@ public sealed class Climber extends Plant permits Cucumber{}
 public final class Cucumber extends Climber {}
 ```
 
-
 By allowing a predefined set of classes to extend your class, you can **decouple accessibility from extensibility**. You can make your sealed class accessible to other packages and modules, and you can still control who can extend it.
 
 In the past, to prevent classes from being extended, developers created package-private classes. But, this also meant that these classes had limited accessibility. Another approach to prevent extension was to create public classes with private or package-private constructors. Though it enabled a class to be visible, it gave limited control on the exact types that could extend your class.
@@ -617,8 +590,7 @@ You can't create another class, say, `AquaticPlant`, that tries to extend the se
 
 Let's quickly check the configuration of IntelliJ IDEA on your system to ensure you can get the code to run it.
 
-**Revisiting processing of Plant types in class Gardner**
----------------------------------------------------------
+## **Revisiting processing of Plant types in class Gardner**
 
 After creating a sealed hierarchy, you will be able to process an instance from the hierarchy in a precise way, and won't need to deal with any unknown implementations. The `process` method in class `Gardner` will work with no chance of running the `else` clause. However, the syntax of the if-else construct will still need you to define the else part (this may change in a future Java version).
 
@@ -635,9 +607,7 @@ int process(Plant plant) {
 }
 ```
 
-
-**Package and module restrictions**
------------------------------------
+## **Package and module restrictions**
 
 Sealed classes and their implementations can't span across multiple Java modules.
 
@@ -645,13 +615,11 @@ If a sealed base class is declared in a named Java module, all its implementatio
 
 For a sealed class declared in an unnamed Java module, all its implementations must be defined in the same package.
 
-**Rules for base and extended classes**
----------------------------------------
+## **Rules for base and extended classes**
 
 The classes that extend a sealed class must either be final, non-sealed, or sealed. A final class prohibits further extension. A non-sealed class allows other classes to extend it. And a sealedsubclass must follow the same set of rules as the parent base class -- it could be extended by an explicit list of other classes.
 
-**Abstract sealed base class**
-------------------------------
+## **Abstract sealed base class**
 
 A sealed class can be abstract too. The extended classes could be defined as abstract or concrete classes. Here's the modified code which adds an abstract method `grow()` to the class `Plant`:
 
@@ -677,15 +645,12 @@ public sealed class Climber extends Plant permits Cucumber{
 final class Cucumber extends Climber {}
 ```
 
-
-**Implicit subclasses**
------------------------
+## **Implicit subclasses**
 
 If you define a sealed class and its derived classes in the same source file, you can omit the contextual keyword permits and the name of the derived classes that are included in the declaration of a sealed class. In this case, the compiler can infer the hierarchy.
 ![](https://lh4.googleusercontent.com/xzlgIYLYBNICSpdXjJgWCCb5C4slW5LLoRF9Dq9NB-Q7WuwUdqR7bdToJkbs-pyVH_nQbbOQy-DChZRHSxnuz6_pRZJbug8dPzyiKen4uyILnQg4eSN4Ml_JocWKKQ-9WczN8yy9=s0)
 
-**Sealed interfaces**
----------------------
+## **Sealed interfaces**
 
 Unlike classes, interfaces can not define constructors. Before the introduction of *sealed classes*, a public class could define a private or package-private constructor to limit its extensibility, but interfaces couldn't do that.
 
@@ -707,9 +672,7 @@ sealed interface Kick extends Move permits Karate {}
 final class Karate implements Kick {}
 ```
 
-
-**Stronger code analysis with closed list of subclasses**
----------------------------------------------------------
+## **Stronger code analysis with closed list of subclasses**
 
 With sealed classes and interfaces, you can have an explicit list of inheritors that is known to the compiler, IDE and the runtime (via reflection). This closed list of subclasses makes the code analysis more powerful.
 
@@ -724,7 +687,6 @@ sealed class Pen extends WritingDevice permits Marker {}
 final class Marker extends Pen {}
 ```
 
-
 Now, instanceof and casts can check the complete hierarchy statically. Code on line1 and line2 are compilation errors. The compiler checks all the inheritors from the permits list and finds that no one of them implements the `Erasable` or the `CharSequence` interface:
 
 ```java
@@ -736,7 +698,6 @@ class UseWritingDevice {
    }
 }
 ```
-
 
 The following gif demonstrates it in IntelliJ IDEA:
 ![](https://lh6.googleusercontent.com/tHpt2ZISzzPS4hYpuSiXaWTrTiz7vUufr6xq7LOvuyrlOB4pSG_MrRll_IcFI_QbXIpKUpDcW15_1Ib0J4eFdtE87btbBakLOrPa2iYeyB96xe26QbMgf2pq0eBAbkje7bF-S887=s0)
@@ -756,5 +717,3 @@ IntelliJ IDEA 2021.2.1 supports basic support for the pattern matching for switc
 We love to hear from our users. Don't forget to submit your feedback regarding the support for these features in IntelliJ IDEA.
 
 Happy Developing!
-
-<br />

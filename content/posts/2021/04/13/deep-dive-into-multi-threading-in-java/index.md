@@ -21,8 +21,6 @@ frozen: false
 **\[About SKP's Core Java/Java EE Roots\]**  
 Series of Articles on Rooted Concepts in Core Java and J2EE. They Revolve Around Memory Architecture, Connection \& Memory Leaks, Core Java Syntax \& Semantics, Java Object Layout/Anatomy, Multi-Threading, Asynchronous Task Execution, Design Patterns, Java Agents, Class Loading, API Design, OOPs \& SOLID.  
 
-
-
 Multi-threading represents a very intriguing topic, even after years of research and development for high quality, robust, and efficient software. With equal emphasis on hardware improvements and the software that runs on it -- we have newer paradigms for parallelism. The most important yet basic concepts are the ones which I present here. I then explain the intricacies of multi-threading in the Java programming language. Some of these are newer features and supported only from the Java Platform Standard Edition 5.0. Let us start with a quick overview and understanding of the core concepts.
 
 ### Thread Concepts in Operating Systems
@@ -44,8 +42,6 @@ Multi-threading represents a very intriguing topic, even after years of research
 **Deadlock Handling:** Detection of deadlocks and its removal constitute Deadlock Handling.
 
 **Reentrancy:** When a method or subroutine can be reentered without completing its previous invocation.
-
-<br />
 
 ![Image title](https://dzone.com/storage/temp/4926946-4.png)
 
@@ -106,7 +102,6 @@ public class CSIDecrementer implements Runnable {
 }
 ```
 
-
 ```java
 package org.csi_india.programming.workbench.multithreading;
 
@@ -124,7 +119,6 @@ public class CSIIncrementer implements Runnable {
 }
 ```
 
-
 ```java
 package org.csi_india.programming.workbench.multithreading;
 
@@ -138,7 +132,6 @@ public class CSIWorkbench extends Thread {
     }
 }
 ```
-
 
 ```java
 package org.csi_india.programming.workbench.multithreading;
@@ -172,7 +165,6 @@ public class CSISharedObject {
     }
 }
 ```
-
 
 You may refer to the following section, as these tools were introduced only since JDK 5 and 6. They provide a more granular or controlled access for asynchronous task execution in Java.
 

@@ -35,8 +35,7 @@ This is the result, notice the Foojay.io startup artwork 😉
  </div>
 </figure>
 
-Wiring
-------
+## Wiring
 
 The Raspberry Pi in the video is attached to a custom PCB used by [Robert in medical cabinets](https://pi4j.com/featured-projects/soft-real-time-plc-written-in-strolch/).
 
@@ -55,8 +54,7 @@ For a simple Raspberry Pi-only setup, connect the wires of the LED strip to:
 
 In this case make sure to only use a short LED strip, as the board can not provide enough power for a large number of LEDs.
 
-Code
-----
+## Code
 
 As this is a JBang project, all the dependencies and code are combined into one single file.
 
@@ -163,9 +161,7 @@ class LedStrip {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 The Raspberry Pi, Pi4J and JBang are a perfect combination to experiment with electronics!   
 

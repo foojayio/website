@@ -29,8 +29,7 @@ Oracle encourages companies to get paid [support](https://www.oracle.com/java/ja
 
 In this article, I will show you how to use a popular distribution from [Azul](https://www.azul.com/) to build a JavaFX HelloWorld Application in 60 seconds!
 
-Requirements
-------------
+## Requirements
 
 * Java 11 SDK or above. The following are some of the vendors that have binary distributions of the JDK:
   * [Oracle OpenJDK](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -44,8 +43,7 @@ Requirements
 
 Before we start the stopwatch (60 seconds), let's install the ZuluFX distribution. Below are instruction on how to install the ZuluFX distribution. If you've already installed **Java/JavaFX** 11 or greater (from elsewhere) you can skip to the **Getting Started** section.
 
-Installing ZuluFX
------------------
+## Installing ZuluFX
 
 [Azul](https://www.azul.com/downloads/zulu-community) creates a free and user-friendly distribution of the JDK bundled with JavaFX. Azul provides a simple user interface shown in figure 1 that allows you to pick and choose an appropriate version of the JDK and JavaFX in one compressed file to be downloaded. To get paid commercial Java support check out Azul's [support](https://www.azul.com/products/zulu-enterprise/) subscriptions.
 
@@ -106,11 +104,7 @@ $ java --list-modules
 ...
 ```
 
-
-<br />
-
-Getting Started
----------------
+## Getting Started
 
 On your mark, get set, **GO!**
 
@@ -137,7 +131,6 @@ C:\Users\myusername>md helloworld\src
 /Users/myusername$ mkdir -p helloworld/src
 ```
 
-
 **\*Note:** After creating the project folder *helloworld/src* be sure to change your directory to reside inside the ***helloworld*** directory prior to the next steps. This is needed in order to **compile** and **run** the code such that the **module path** is recognized properly. This tutorial assumes your project (helloworld) is in the user's home directory.
 
 ```bash
@@ -148,7 +141,6 @@ C:\Users\myusername>cd helloworld
 $ cd ~/helloworld
 ```
 
-
 ***Step 2:*** Create a module directory that will later contain the **module-info.java** file.
 ![](initial-proj-directory2.png) The module directory named using the reverse domain convention.
 
@@ -158,9 +150,6 @@ Create a directory using a preferred *naming convention* based on Java Module Sy
 mkdir src/com.mycompany.helloworld
 ```
 
-
-<br />
-
 ***Step 3:*** Create the directory structure **com/mycompany/helloworld** that follows a package namespaces for ***`HelloWorld.java`***
 ![](https://carlfx.files.wordpress.com/2020/08/project_directories.png?w=285) Figure 2. Project Directory structure for HelloWorld.java file.
 
@@ -169,9 +158,6 @@ Under the directory **com.mycompany.helloworld** you will create the following d
 ```bash
 mkdir -p src/com.mycompany.helloworld/com/mycompany/helloworld
 ```
-
-
-<br />
 
 ***Step 4:*** Create a ***module-info.java*** file.
 
@@ -184,7 +170,6 @@ Copy and paste the code from Listing 1 into the **module-info.java** file. Use v
 vim src/com.mycompany.helloworld/module-info.java
 ```
 
-
 Listing 1. The module definition file module-info.java
 
 ```java
@@ -194,14 +179,11 @@ module com.mycompany.helloworld {
 }
 ```
 
-
 This lets the compiler know which core module dependencies the application needs to compile and run such as JavaFX modules.
 
 The module-info.java defined above doesn't need to include (**requires** ) the modules **javafx.base** and **javafx.graphics** , because the **javafx.controls** module already has them as transitive dependencies so, including them would be redundant. In this example a JavaFX button depends on the **javafx.controls** module.
 
 The **exports** keyword exposes the **com.mycompany.helloworld** module to the runtime system.
-
-<br />
 
 ***Step 5:*** Create the JavaFX **HelloWorld.java** application file.
 
@@ -220,10 +202,7 @@ Use **[vim](https://www.vim.org/)** for those who despise those other wimpy edit
 vim src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java
 ```
 
-
 Copy and paste the code below (Listing 2) into the a file called **HelloWorld.java**.
-
-<br />
 
 Listing 2. JavaFX HelloWorld application code for **HelloWorld.java**
 
@@ -268,9 +247,6 @@ public class HelloWorld extends Application {
 }
 ```
 
-
-<br />
-
 ***Step 6:***Compile your code!
 
 Compile the source code with the **-d** option with the location of compiled module. The directory for the new helloworld module is ***mods/com.mycompany.helloworld*** .
@@ -278,7 +254,6 @@ Compile the source code with the **-d** option with the location of compiled mod
 ```bash
 javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.java src/com.mycompany.helloworld/com/mycompany/helloworld/HelloWorld.java
 ```
-
 
 After compiling your code the class files the mods directory should look like the following:
 
@@ -289,8 +264,6 @@ After compiling your code the class files the mods directory should look like th
  </figcaption>
 </figure>
 
-<br />
-
 ***Step 7:***Execute the JavaFX HelloWorld application!
 
 Execute the Hello World application as a module. After compiling the module into the **mods** directory you will now use Java 9 or above's new ***--module-path***` `option to specify a compiled module's directory. Also, you will specify the***-m*** option to execute the module and its main class **HelloWorld**. Use the following command:
@@ -298,7 +271,6 @@ Execute the Hello World application as a module. After compiling the module into
 ```bash
 java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.HelloWorld
 ```
-
 
 The following is the output of the previous command:
 
@@ -309,10 +281,7 @@ The following is the output of the previous command:
  </figcaption>
 </figure>
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 I'm not sure if you've taken more than 60 seconds to complete the steps, but assuming your environment is setup and the JDK 11+ and JavaFX is installed you should be able to cut and paste the code in seconds.
 
@@ -322,8 +291,7 @@ While we are living in strange times I still believe there are more exciting tim
 
 Happy coding and stay safe!
 
-References:
------------
+## References:
 
 * OpenJFX.io - A community driven site to help developer get started with JavaFX [https://openjfx.io](https://openjfx.io/)
 * Project Jigsaw: Module System Quick-Start Guide: <http://openjdk.java.net/projects/jigsaw/quick-start>

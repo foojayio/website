@@ -66,7 +66,6 @@ Knowing all of this and combining that knowledge with the tpstats output I decid
 7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)
 ```
 
-
 This showed that `Native-Transport-Requests-2 `was currently in the SPINNING state and sleeping prior to checking for more work one last time before sleeping permanently. The only problem was, no matter how many times I ran jstack, this thread never*exited* `parkNanos()` which meant no other threads would ever be woken up to help process the backlog of work!{#e4a9}
 
 This finally explained why throughput dropped whenever we hit the bug. The next step was understanding how `parkNanos()` was behaving.{#686d}
@@ -89,7 +88,6 @@ Tracing pid 14469…
 Sending SIGSTOP
 55880730777795 expires
 ```
-
 
 The expires value for high-resolution timers in the kernel is in nanoseconds since boot. Doing a quick bit of math (5880730777795/1000000000 / 60 = 98.012 or 98 minutes of uptime) I could tell that the expire value looked correct because it was within the four hours that the test usually took. And the real issue was that a wakeup had never been sent to the sleeping `Native-Transport-Requests` thread. At this point, I was convinced that our test was hitting a kernel bug.{#5906}
 
@@ -116,7 +114,6 @@ node=0000000085e65b06, expires=86608220562558, function=hrtimer_wakeup+0x0/0x30
 node=00000000049a0b4d, expires=100000159000051377, function=hrtimer_wakeup+0x0/0x30
 ```
 
-
 Before I started this part, I wasn't even sure that Fallout would allow me to boot into a custom kernel. Sure enough, it was trivial to do.{#ac36}
 
 After rebooting into my custom kernel I saw the warnings triggering immediately on startup so I naturally assumed that something was broken with my patch. But after a closer look, I realized that it was possible to trigger my bug within two minutes of booting the VM! I no longer had to wait up to four hours to see if I had reproduced the issue. What was even better was that I was able to hit this warning every single time I booted the VM. With the reproduction time cut by around 99%, I quickly made progress understanding the kernel bug that caused the red-black tree to become inconsistent.{#0fdc}
@@ -130,8 +127,6 @@ It's helpful when debugging these multi-layered issues to have a bag of tools an
 Secondly, there is no way I could have taken on this problem without a service to automatically deploy and provision virtual machines for running the test. [Fallout](https://github.com/datastax/fallout) was the key to unlocking this bug because even though the bug could only be reproduced intermittently, I managed to parallelize the test runs and reduce the time to trigger the issue. The whole investigation took several weeks, and that's despite my being able to analyze test results to make a little bit of progress every day.{#4d3f}
 
 If any of this sounds like the kind of problem you'd enjoy working on, check out the open roles on the [DataStax careers](https://www.datastax.com/company/careers) page. We're always on the lookout for tenacious developers and software engineers!{#7fb0}
-
-<br />
 
 <figure class="wp-block-embed">
  <div class="wp-block-embed__wrapper">

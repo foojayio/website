@@ -27,8 +27,7 @@ It reduces complexity, the code is nice and explicit, and it eliminates certain 
 
 But there are a few things that I wanted to discuss regarding functional programming.
 
-Object Orientation vs. Functional Programming
----------------------------------------------
+## Object Orientation vs. Functional Programming
 
 Let me start off with the Object Oriented vs. Functional Programming discussion.
 
@@ -40,8 +39,7 @@ In the end, I personally try to see the underlying engineering principles and tr
 
 Brian Goetz really words this well in his [talk](https://www.youtube.com/watch?v=8GWZE2Y2O9E) when he ends with (spoiler) "Don't be an OO programmer, don't be a FP programmer, be a better programmer."
 
-Available Information / Terminology
------------------------------------
+## Available Information / Terminology
 
 Another big problem with functional programming is its terminology, and most importantly, how it is explained.
 
@@ -57,8 +55,7 @@ It is nice that there is mathematical proof, but people do not need that to unde
 
 This way people can start using and benefiting from monads today, and they might get curious about mathematics in the future.
 
-Dogmatic
---------
+## Dogmatic
 
 In general, I notice that people can get quite dogmatic about certain paradigms.
 
@@ -86,8 +83,7 @@ But, I do think that this way of thinking helped me in becoming less dogmatic an
 
 So, I hope this idea might also help you!
 
-Conclusion
-----------
+## Conclusion
 
 I love Functional Programming, but I do feel we can and should make the concepts more accessible to the average programmer.
 

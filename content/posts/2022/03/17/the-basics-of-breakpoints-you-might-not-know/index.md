@@ -31,10 +31,7 @@ In episodes 4 and 5 of "140 Second Ducklings", I got deeper into the more advanc
 >
 > --- Shai Almog (@debugagent) [March 8, 2022](https://twitter.com/debugagent/status/1501229232994676739?ref_src=twsrc%5Etfw)
 
-<br />
-
-Types of Breakpoints
---------------------
+## Types of Breakpoints
 
 There are four basic types of breakpoints.
 
@@ -68,8 +65,7 @@ This is a remarkable feature that can work with one small toggle. The crux of th
 
 I'll release the video discussing the solution next week, so be sure to [follow along](https://twitter.com/debugagent/status/1491075324805001219?s=20&t=f7CFUaRwU0UpCCXP_akBjA). The next post in the series will cover that.
 
-Conditional Breakpoints
------------------------
+## Conditional Breakpoints
 
 Conditions can apply to any breakpoint type mentioned above. In the video above, I went back to my [previous post in this series where I discussed object marking](https://talktotheduck.dev/debugging-tutorial-java-return-value-intellij-jump-to-line-and-more#heading-object-marking). Object marking effectively lets me define a new global variable label. So I could save `Thread.currentThread()` as a variable with a new name `MyThread`. Then I used a condition:
 
@@ -83,8 +79,7 @@ This is an amazing tool...
 
 ![Conditional Breakpoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852537167/ek78x3KEy.png)
 
-Managing Breakpoints
---------------------
+## Managing Breakpoints
 
 When we're debugging a complex application, we often spread breakpoints all over the place trying to reproduce a scenario where a specific set of breakpoints will lead us on the right "journey".
 
@@ -120,8 +115,7 @@ We can use a breakpoint as an ad hoc log that doesn't suspend execution. You can
 
 ![Tracepoint](https://cdn.hashnode.com/res/hashnode/image/upload/v1646852640259/g7bVJy9ie.png)
 
-TL;DR
------
+## TL;DR
 
 Many of us work with debuggers practically every day and yet so much remains unknown. We're operating this fantastically complex tool while using 4 or 5 big features: line breakpoint, step over, step into, continue and watch.
 

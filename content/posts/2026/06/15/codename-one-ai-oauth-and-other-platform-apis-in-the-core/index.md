@@ -21,13 +21,10 @@ frozen: false
 
 ![AI, OAuth, And Other Platform APIs In The Core](https://www.codenameone.com/blog/platform-apis-in-the-core.jpg)
 
-<br />
-
 This is the second follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/). It covers the platform APIs that moved into the framework core this release. There are two headline pieces (AI / LLM and the modern OAuth / OIDC stack), and two smaller pieces (WiFi / connectivity and share-sheet result callbacks). This continues the direction the previous release set when we moved NFC, biometrics, and cryptography into the framework core. The full background on that earlier set is in [NFC, Crypto, Biometrics, And A New Build Cloud](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/).
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-AI: a first-class LLM client and a ChatView component
------------------------------------------------------
+## AI: a first-class LLM client and a ChatView component
 
 [PR #5035](https://github.com/codenameone/CodenameOne/pull/5035) lands the `com.codename1.ai` package, the `ChatView` UI component, the speech and TTS additions, and the build-time dependency injection that wires the native pieces in. [PR #5057](https://github.com/codenameone/CodenameOne/pull/5057) lands the developer-guide chapter and the agent-skill addition so any project generated from the [Initializr](https://www.codenameone.com/initializr/) inherits the new APIs through its bundled `AGENTS.md`.
 
@@ -53,7 +50,6 @@ client.chat(req).onResult((resp, err) -> {
     Log.p(resp.firstChoice().content());
 });
 ```
-
 
 `LlmClient.openai(...)`, `LlmClient.anthropic(...)`, `LlmClient.gemini(...)`, `LlmClient.ollama(...)`, and `LlmClient.openAiCompatible(baseUrl, apiKey)` are the factories. All five are fully implemented native clients. The OpenAI client also drives Ollama, vLLM, llama.cpp, and any other endpoint that speaks the OpenAI wire format, so most local-model stacks plug in through `LlmClient.openAiCompatible(...)` without a separate driver.
 
@@ -82,7 +78,6 @@ client.chatStream(req, new ChatStreamListener() {
     }
 });
 ```
-
 
 Under the hood this is a custom `ConnectionRequest` subclass that parses SSE line-by-line and dispatches each delta through `Display.callSerially`. `AsyncResource.cancel()` kills the socket. So a chat UI that has a cancel button is a one-line cancellation.
 
@@ -118,7 +113,6 @@ client.chat(req).onResult((resp, err) -> {
 });
 ```
 
-
 The shape mirrors the OpenAI function-calling contract one for one, so anything you have written against the OpenAI API directly maps across without rethinking.
 
 ### Embeddings
@@ -137,7 +131,6 @@ client.embed(er).onResult((emb, err) -> {
 });
 ```
 
-
 ### Image generation
 
 DALL-E and a Replicate scaffold are surfaced through `ImageGenerator`:
@@ -152,7 +145,6 @@ gen.generate("A red bicycle leaning against an olive tree", "1024x1024")
    });
 ```
 
-
 ### Working against Ollama in the simulator (no API charges)
 
 `JavaSEPort` pings `localhost:11434` at startup. If it finds Ollama, it sets the `cn1.ai.ollamaDetected` property. With `cn1.ai.simulatorRedirect=auto` (or `=ollama`) every `LlmClient.openai(...)` call routes through the local Ollama endpoint instead of OpenAI's. Production code does not change. The iteration loop, your tests, and your offline debugging stop costing money and stop needing an internet connection.
@@ -162,7 +154,6 @@ In `common/codenameone_settings.properties`:
 ```
 simulator.cn1.ai.simulatorRedirect=auto
 ```
-
 
 (The `simulator.` prefix scopes the property to the JavaSE simulator path.) Then run Ollama locally with whichever model your code expects (`ollama run llama3.2` or similar) and your existing `LlmClient.openai(...)` calls go to localhost.
 
@@ -194,7 +185,6 @@ private static AsyncResource getOpenAiKey() {
 }
 ```
 
-
 Your server gates the credential request behind the user's session, your app caches the result on the keychain, and the key never sits anywhere a reverse-engineering pass could find it. If your server rotates the key, invalidate the cache and refetch.
 
 Existing biometric-gated `SecureStorage` calls keep working unchanged. The new overloads are additive.
@@ -219,11 +209,8 @@ f.add(BorderLayout.CENTER, view);
 f.show();
 ```
 
-
 The result is a standard mobile chat layout, picked up from whichever native theme the project uses:
 ![ChatView running against gpt-4o-mini, showing assistant and user bubbles plus a streaming response and the bottom input bar](https://www.codenameone.com/blog/platform-apis-in-the-core/chatview.png)
-
-<br />
 
 If you want more control than `bindToLlm(...)` gives you (custom message styling, a "thinking" placeholder, hand-rolled retry, persistence to your own model class), drive the view by hand:
 
@@ -266,7 +253,6 @@ view.setInputListener(userText -> {
 });
 ```
 
-
 `appendToLastMessage(...)` is the streaming entry point; it marshals through `callSerially` so deltas land on the EDT in order. `ConversationStore` persists the thread (the default backing is `Storage`; pluggable via a custom implementation if you would rather keep it in SQLite or push it to your server).
 
 ### The AI cn1libs
@@ -283,7 +269,6 @@ For each cn1lib below, the dependency block is identical in shape; only the \`\`
     ${cn1.version}
 ```
 
-
 #### `cn1-ai-mlkit-text`: text recognition (OCR)
 
 **TL;DR.** Pull printed or handwritten text out of an image (a photo of a page, a sign, a receipt) entirely on-device.
@@ -298,7 +283,6 @@ TextRecognizer.recognize(jpeg).onResult((text, err) -> {
     if (err == null) Log.p("OCR: " + text);
 });
 ```
-
 
 #### `cn1-ai-mlkit-barcode`: barcode and QR scanning
 
@@ -317,7 +301,6 @@ BarcodeScanner.scan(jpeg).onResult((codes, err) -> {
 });
 ```
 
-
 #### `cn1-ai-mlkit-face`: face detection
 
 **TL;DR.** Returns bounding boxes for human faces detected in an image. Each face is reported as a packed `int[4]` (`x`, `y`, `width`, `height`).
@@ -334,7 +317,6 @@ FaceDetector.detect(jpeg).onResult((boxes, err) -> {
 });
 ```
 
-
 #### `cn1-ai-mlkit-translate`: on-device translation
 
 **TL;DR.** Translate short text between supported language pairs entirely on-device; no server round-trip, no API key, works offline.
@@ -349,7 +331,6 @@ Translator.translate("Where is the train station?", "en", "fr")
         if (err == null) Log.p(fr);   // "Où est la gare ?"
     });
 ```
-
 
 #### `cn1-ai-mlkit-smartreply`: short reply suggestions
 
@@ -371,7 +352,6 @@ SmartReply.suggest(thread).onResult((suggestions, err) -> {
 });
 ```
 
-
 #### `cn1-ai-mlkit-langid`: language identification
 
 **TL;DR.** Returns the most likely ISO 639-1 code for a given text, or `und` (undetermined) when the input is too short or ambiguous.
@@ -385,7 +365,6 @@ LanguageIdentifier.identify("Bonjour le monde").onResult((code, err) -> {
     if (err == null) Log.p(code);   // "fr"
 });
 ```
-
 
 #### `cn1-ai-mlkit-pose`: pose detection
 
@@ -402,7 +381,6 @@ PoseDetector.detect(jpeg).onResult((landmarks, err) -> {
 });
 ```
 
-
 #### `cn1-ai-mlkit-docscan`: document scanner
 
 **TL;DR.** Detects a rectangular document in a photo, perspective-corrects it, and writes the cropped JPEG to a temporary file. Returns the file path.
@@ -416,7 +394,6 @@ DocumentScanner.scanToFile(jpeg).onResult((path, err) -> {
     if (err == null) uploadDocument(path);
 });
 ```
-
 
 #### `cn1-ai-tflite`: TensorFlow Lite interpreter
 
@@ -433,7 +410,6 @@ Interpreter.run(modelBytes, input).onResult((output, err) -> {
     if (err == null) Log.p("model returned " + output.length + " values");
 });
 ```
-
 
 #### `cn1-ai-whisper`: speech-to-text via whisper.cpp
 
@@ -452,7 +428,6 @@ WhisperRecognizer.transcribe(modelPath, audioPath)
     });
 ```
 
-
 #### `cn1-ai-stablediffusion`: on-device image generation
 
 **TL;DR.** Generates a JPEG from a text prompt using a bundled Stable Diffusion model. Multi-gigabyte payload, **local build only**.
@@ -469,7 +444,6 @@ StableDiffusion.generate("a teal hot-air balloon over Lisbon, watercolour",
     });
 ```
 
-
 ### Why these are cn1libs and not part of the core
 
 The core gets the AI plumbing every app that adopts AI at all wants: the LLM client, streaming, the chat UI, the secure storage primitive for credentials, the simulator Ollama redirect for offline iteration.
@@ -480,8 +454,7 @@ The Stable Diffusion cn1lib in particular is large enough that the cloud build s
 
 The corresponding chapter, including the full `LlmClient` API table, the `ChatView` reference, the `SecureStorage` overloads, the simulator Ollama redirect, and the full cn1lib coverage, is at [AI, Chat UI, and Speech](https://www.codenameone.com/developer-guide/#_ai_chat_ui_and_speech) in the developer guide.
 
-OAuth and OIDC: the modern identity stack
------------------------------------------
+## OAuth and OIDC: the modern identity stack
 
 The in-app-WebView `Oauth2` flow that Codename One has shipped since approximately forever was the way every cross-platform mobile framework solved "sign in with Google / Facebook / Microsoft" in the 2010s. It is also the way every one of those identity providers stopped wanting you to solve it. Google has been blocking embedded user agents for years. Apple does not want third-party apps wrapping the Apple ID flow in a `WKWebView`. Microsoft and Facebook joined the chorus. The right answer is the system browser: `ASWebAuthenticationSession` on iOS, Custom Tabs on Android, with PKCE on the wire. That is what [PR #5018](https://github.com/codenameone/CodenameOne/pull/5018) lands. [PR #5039](https://github.com/codenameone/CodenameOne/pull/5039) adds a portable WebAuthn / passkey client on top.
 
@@ -512,7 +485,6 @@ client.signIn().onResult((tokens, err) -> {
 });
 ```
 
-
 Discovery JSON parsed and cached. PKCE S256 challenge generated and verified. State and nonce checked on the callback. ID-token claims decoded for you (we deliberately do not verify the signature client-side; the dev guide is explicit about why and points at the "re-validate on your backend" remedy). Refresh and revoke are first-class. The token store is pluggable via `TokenStore`; the default is `Storage`-backed, but a Keychain-backed or in-memory variant is a small class.
 
 On iOS the system-browser piece routes through `ASWebAuthenticationSession`. On Android through `androidx.browser.customtabs` with a plain `ACTION_VIEW` fallback for the rare device with no Custom Tabs provider. `AuthenticationServices.framework` and `androidx.browser:browser` are auto-linked when the classpath scanner sees `OidcClient` in use.
@@ -537,7 +509,6 @@ Auth0Connect.signIn("tenant.auth0.com", clientId, redirectUri,
     .onResult((tokens, err) -> { /* ... */ });
 ```
 
-
 `FacebookConnect.signIn(...)` follows the same shape against the Facebook OIDC endpoint. `FirebaseAuth` covers the REST-based Firebase auth surface (email / password, IdP token exchange, refresh) which sits underneath any provider hand-off you might want to drive from app code.
 
 ### Sign in with Apple
@@ -554,7 +525,6 @@ AppleSignIn.signIn()
     });
 ```
 
-
 On iOS 13 and later this drops directly into the native Apple sheet via `ASAuthorizationAppleIDProvider`. On non-iOS platforms it falls through to the same OIDC web flow as everything else, so a single line of app code does the right thing on every port. The Maven plugin injects the `com.apple.developer.applesignin` entitlement on iOS when it sees `AppleSignIn` in use; Android does not see it because it is not there.
 
 ### Migration from the legacy Oauth2
@@ -570,7 +540,6 @@ oauth.setBrowserComponent(myBrowserComponent);   // tied to a WKWebView
 String token = oauth.authenticate();             // blocks, opens the web view
 ```
 
-
 ```
 // After
 OidcClient.builder()
@@ -582,7 +551,6 @@ OidcClient.builder()
         .signIn()
         .onResult((tokens, err) -> proceed(tokens.getIdToken().raw()));
 ```
-
 
 You stop owning the browser. The OS owns it. The cookies live in the platform's authentication session. The user gets the same login experience they have everywhere else on their device.
 
@@ -601,15 +569,13 @@ client.create(opts).onResult((cred, err) -> {
 });
 ```
 
-
 W3C JSON wire format in both directions, so the response can be POSTed verbatim to any standard server-side WebAuthn library. iOS 16+ routes through `ASAuthorizationPlatformPublicKeyCredentialProvider`; Android API 28+ through `androidx.credentials.CredentialManager`. Provider helpers: `Auth0Connect.signInWithPasskey(...)` / `.registerPasskey(...)` and `FirebaseAuth.signInWithPasskey(...)` / `.registerPasskey(...)`.
 
 One thing worth pulling out before you reach for it: if you sign in via OIDC against Google, Apple, Microsoft, Auth0, or Firebase, you usually already *get* passkeys for free. The identity provider runs the WebAuthn ceremony inside the system browser; OIDC just hands you the resulting tokens. So you do not need `WebAuthnClient` for that case. You need it for apps that run their own relying-party backend, and for apps driving the Auth0 or Firebase passkey grants directly.
 
 Full chapter: [Authentication and Identity](https://www.codenameone.com/developer-guide/#_authentication_and_identity).
 
-Connectivity: WiFi, Bonjour, USB, network-type listeners
---------------------------------------------------------
+## Connectivity: WiFi, Bonjour, USB, network-type listeners
 
 [PR #5021](https://github.com/codenameone/CodenameOne/pull/5021) lands four packages for apps that need to do more with the network than open an HTTP socket. The shape:
 
@@ -627,7 +593,6 @@ wifi.connect("MyNetwork", "hunter2", Security.WPA2_PSK)
    .onResult((success, err) -> { /* ... */ });
 ```
 
-
 `com.codename1.io.wifi` for WiFi info, scan, and connect. `com.codename1.io.wifi.WiFiDirect` for peer-to-peer (Android only by platform reality). `com.codename1.io.bonjour` for mDNS / Zeroconf via `BonjourBrowser` and `BonjourPublisher`. `com.codename1.io.usb` for USB host (Android only). And `NetworkManager.addNetworkTypeListener(...)` plus `NETWORK_TYPE_*` constants so an app can react to a transition between cellular, WiFi, ethernet, or "none":
 
 ```
@@ -639,15 +604,13 @@ NetworkManager.getInstance().addNetworkTypeListener(evt -> {
 });
 ```
 
-
 iOS does not expose programmatic WiFi scanning to third-party apps; `scan()` throws `UnsupportedOperationException` on iOS. iOS also does not expose WiFi Direct or general USB host. None of those are Codename One limitations; they are Apple's. The dev guide is explicit about each platform's limits.
 
 Three new compile-time defines (`CN1_INCLUDE_WIFI_INFO`, `CN1_INCLUDE_HOTSPOT`, `CN1_INCLUDE_BONJOUR`) wrap the iOS native code, set only when the classpath scanner sees the matching Java API in use. Apps that do not use these APIs do not pay for them at App Store review time. Same pattern as the NFC gating from the previous release.
 
 Full reference: [Network Connectivity](https://www.codenameone.com/developer-guide/#_network_connectivity).
 
-Share-sheet result callbacks
-----------------------------
+## Share-sheet result callbacks
 
 [PR #5036](https://github.com/codenameone/CodenameOne/pull/5036) closes a small but persistent gap: `Display.share(...)` and `ShareButton` finally tell you what the user did with the share sheet:
 
@@ -663,7 +626,6 @@ btn.setShareResultListener(result -> {
     }
 });
 ```
-
 
 iOS routes through `UIActivityViewController.completionWithItemsHandler`; Android through `Intent.createChooser` with an `IntentSender` callback (API 22+). The framework normalizes the platform values into `SHARED_TO(packageName)`, `DISMISSED`, or `FAILED`.
 
@@ -686,7 +648,6 @@ The same PR ships an `IOSShareExtensionBuilder` Mojo that does all of that for y
         PUBLIC_TEXT
 ```
 
-
 Run `mvn cn1:generate-ios-share-extension` and the Mojo writes a complete `.ios.appext` bundle into `ios/app_extensions/`: the `Info.plist` with the right `NSExtension` activation rules for the content types you declared, the App Group entitlement, a minimal `ShareViewController.swift` that lands the payload in the App Group's `UserDefaults(suiteName:)`, and the matching `buildSettings.properties`. The result feeds straight into the existing `IPhoneBuilder.extractAppExtensions` pipeline, so apps that already have a hand-rolled extension keep working unchanged.
 
 On the host-app side you read the payload on launch:
@@ -700,11 +661,9 @@ if (shared != null) {
 }
 ```
 
-
 After the next cloud or local build, your app appears in the iOS share sheet for the content types you declared. No Xcode work, no hand-rolled plist, no App Group string typed in three places. The build-time tooling owns it.
 
-Wrapping up
------------
+## Wrapping up
 
 [Tomorrow's post](https://www.codenameone.com/blog/build-time-codegen/) covers the architectural change in this release: a build-time bytecode annotation framework, the declarative router that is its first consumer, the SQLite ORM and JSON / XML mappers and component binder built on the same SPI, and the build-time SVG / Lottie transcoder that ships in the same release for related reasons.
 

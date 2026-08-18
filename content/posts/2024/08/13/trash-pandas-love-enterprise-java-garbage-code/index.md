@@ -32,8 +32,7 @@ Although removing the unused and dead code makes the test go red, developers can
 
 {{< youtube 1rVP8JcoHRU >}}
 
-Unused and dead code is clutter
--------------------------------
+## Unused and dead code is clutter
 
 Many teams have a "why worry" attitude: How much unused and dead code can there actually be, and why does it matter? Unused and dead code is clutter that slows down the present and future. Every time someone works on the application, they have to work around that code. When a [major change is made](https://thenewstack.io/java-22-making-java-more-attractive-for-ai-apps-workloads/), like upgrading from Java 11 to 17 or 21, all that unnecessary code needs to be maintained. The build pipeline takes time to ensure that the code works, regardless of whether the code matters.
 
@@ -41,8 +40,7 @@ When a major U.S. financial institution set out to identify and remove unused co
 
 A similar IEEE study of an industrial software system found that [up to 50 percent of a large codebase was unused or dead](https://www.cs.wm.edu/~denys/pubs/TSE%2718-DeadCode.pdf), and the overall average was 5% to 10% of code was unused or dead. The larger and older an application is, the higher the percentage.
 
-Unused and dead code in Java
-----------------------------
+## Unused and dead code in Java
 
 [![Find your garbage code with Azul Vulnerability Detection](https://www.azul.com/wp-content/uploads/blog-2024-06-27-teaser-253x300.jpg)](https://www.azul.com/wp-content/uploads/Azul-Code-Inventory-Infographic.pdf) Find your garbage code with Azul Vulnerability Detection. See the infographic
 
@@ -52,21 +50,15 @@ Monitoring code to see what you can throw away requires the added dimension of t
 
 Developers may be suspicious that certain parts of the code are unused or dead, but not confident enough to delete it. The path would be to track code inventory, perform some actions in the application and see if those methods were reported as running. If they were, then the code is live; if not, it's probably unused or dead. Other functionality, like a year-end report, needs to run its course to do detection. This is why monitoring the live-ness of code is best done over time. The short victories can be won early, then more code can be tossed aside later.
 
-Code Inventory Reduces Code
----------------------------
+## Code Inventory Reduces Code
 
 [Azul's Code Inventory](https://www.azul.com/products/components/code-inventory/), a feature of [Azul Intelligence Cloud](https://www.azul.com/products/intelligence-cloud/), differs from typical static analysis tools and IDEs that detect unreachable code. The monitoring from Code Inventory occurs from the running JVM to identify entire classes or public methods that are present but don't run. It's a clutter finder --- a raccoon repellant. It accurately identifies unused and dead code for removal by precisely detailing what custom and third-party code is running.
 
 Dead code detection improves developer productivity and developer happiness. It's a burdensome chore to maintain garbage code whose sole purpose is to satisfy a test that ensures that the unnecessary code works. By detecting unused and dead code, developers can safely throw it into the trash --- a tasty treat for our raccoon friends.
 
-Free Live Demo
---------------
+## Free Live Demo
 
 [Join in with a free live demo](https://azul.com/ic-demo/) at your convenience and with an expert who'll happily go much further into these topics.  
 [![](barcode-1024x1022.png)](https://azul.com/ic-demo)
 
 **Note:** This is an edited version of an article that [originally ran on The New Stack on May 23, 2024](https://thenewstack.io/does-garbage-collection-logging-affect-app-performance/).
-
-<br />
-
-<br />

@@ -28,8 +28,7 @@ More specifically, about better JIT performance compared to a native compiled AO
 
 In this post, I give a quick update on both strategies to clarify why you will get different performance results.
 
-What is Just-In-Time?
----------------------
+## What is Just-In-Time?
 
 The **Java Virtual Machine** executes bytecode, which was generated from the code you wrote in Java (or other supported languages like Kotlin). This bytecode is typically packaged into a JAR file that the runtime can execute on any platform.
 
@@ -40,8 +39,7 @@ The disadvantage of this approach is that at startup, the virtual machine execut
 In this graph, you can see this process of using bytecode (yellow), C1 native code (green), up to C2 optimal compiled native code (blue).
 ![](chart-speed-optimization-level-1024x538.png) Code speed comparison during different cycles of startup of an application
 
-What is Ahead-Of-Time?
-----------------------
+## What is Ahead-Of-Time?
 
 Java code can also be compiled into native applications, for instance with GraalVM. In such an approach, your Java code is static compiled, and the compiler creates native code in an executable for a specific platform.
 
@@ -58,8 +56,7 @@ The disadvantages are that you need to compile for all the platforms you want to
  </figcaption>
 </figure>
 
-Different approaches, different performance
--------------------------------------------
+## Different approaches, different performance
 
 If all code is compiled before running it (AOT), how can it perform worse than JIT-compiled code? Here lies the true strength of the JIT approach! It can adapt the compiled native code to handle the data or perform its action based on the actual needs.
 
@@ -70,8 +67,7 @@ These are just a few examples of what is known as **Speculative Optimization**:
 
 At Azul, we have seen that such **speculative optimizations can lead to up to 50% performance gains**!
 
-Comparison of AOT and JIT compilation
--------------------------------------
+## Comparison of AOT and JIT compilation
 
 Let's put the pros and cons in an overview:
 
@@ -85,15 +81,11 @@ Let's put the pros and cons in an overview:
 | + Full speed from the start                   | - Requires warmup time                               |
 | + No CPU overhead to compile code at runtime  | - CPU overhead to compile code at runtime Conclusion |
 
-Conclusion
-----------
+## Conclusion
 
 Both AOT and JIT provide good ways to execute Java code. But although AOT offers a set of advantages regarding startup, the impact of the JIT compiler should not be underestimated to achieve the best performing code during runtime.
 
-
-
-More learning resources
------------------------
+## More learning resources
 
 To learn more about this topic, we recommend the following:
 

@@ -20,14 +20,12 @@ frozen: false
 
 Here is the overview of the JavaFX LinksOfTheMonth of May 2024, published on [jfx-central.com](https://www.jfx-central.com/) during this month.
 
-Core
-----
+## Core
 
 * When [**Johan Vos** shares his notes](https://mastodon.social/@johanvos/112477892809739391), you may want to keep on eye on them...: "While working on Java on Mobile, I [keep my notes here](https://download2.gluonhq.com/mobile/) (best viewed with lynx). This is not user/developer documentation, but people interested/familiar with OpenJDK building might keep an eye to see how far we are."
 * [Nice visualization by **afoo**](https://x.com/afoo_me/status/1795340765469855915) to illustrate the flow of event phases (capturing with EventFilter versus bubbling with EventHandler) in JavaFX.
 
-Applications
-------------
+## Applications
 
 * [**Robert Ladstätter** announced a new release of LogoRRR](https://twitter.com/logorrr/status/1785790043451249020): "This update is a maintenance release with visual improvements and bugfixes. Internally, substiantial work was done to improve test coverage (End2End tests and performance tests)."
   * And a [video shows a new viewport visualisation](https://twitter.com/logorrr/status/1789428827828974030) of the current visible text in the box view on the left.
@@ -44,31 +42,26 @@ Applications
 * [**Heshan Kariyawasam**](https://x.com/Heshantk) is [working on Libro](https://www.linkedin.com/posts/heshanthenura_java-javafx-library-activity-7200502273158885376-uak0/): Open Source Library Management App. The sources are on [GitHub](https://github.com/heshanthenura/Libro).
 * [**Xiong Chun** shared a video](https://x.com/DaXiong008/status/1795857529894781252): "Since I started using EventBus in JavaFX, my UI element and content changes are entirely event-driven/data-driven, making development more streamlined. I've recently completed my Datacollie's interaction effect with selected tree node and the data displayed in the right-pane."
 
-Games
------
+## Games
 
 * [**Auron** started work on a new Pixelart Game project](https://x.com/WigglyGull/status/1791292994064396793): "There's lots of placeholder stuff right now but the main logic this there."
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * [**Pedro Duque Vieira** announced FXThemes Version 1.5](https://twitter.com/P_Duke/status/1786017713283817828) which introduces macOS support. Thanks to contributions by [**Carl Dea**](https://twitter.com/carldea). Read more in this [blog post](https://pixelduke.com/2024/05/02/fxthemes-version-1-5-released/).
 * [**Dirk Lemmermann** announced support for search "history" in the SearchTextField control of GemsFX](https://twitter.com/dlemmermann/status/1788958790416556511). Available with release 2.17.0, thanks to [**Li Wang Yang**](https://twitter.com/LeeWyatt_7788).
 * [**Carl Dea** shared a video](https://twitter.com/carldea/status/1747046776765284445), showing "A JavaFX background blur effect library for the MacOS is now able to support Light and Dark Mode!". You can find it on [GitHub](https://github.com/carldea/windowblur).
 * [**Carl Dea** also published a lightweight JavaFX MVVM library "Cognitive"](https://x.com/carldea/status/1796344316618817798) on GitHub and Maven Central, with [a lot of info and examples here](https://github.com/carldea/cognitive/wiki).
 
-Podcast, Video, Books
----------------------
+## Podcast, Video, Books
 
 * **Frank Delporte** [wrote a review of the book "Frontend Development with JavaFX and Kotlin"](https://webtechie.be/post/2024-05-06-book-review-javafx-kotlin/), written by **Peter Späth**.
 
-Tutorials
----------
+## Tutorials
 
 * A complete set of video tutorials by [**Tim Buchalka**](https://twitter.com/timbuchalka), all combined into a single YouTube video of more than five hours, yes indeed, 5 hours: [Java Programming Masterclass Updated To Java 17: JavaFX part 1](https://www.youtube.com/watch?v=YX9ad_9jtXQ)
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**Tobias Briones** entered the Matrix...](https://www.linkedin.com/posts/tobiasbriones_computerscience-javafx-art-activity-7190393026538536960-CZMY).
 * [**DaShaun Carter** wants to create a JavaFX Chat Buddy](https://twitter.com/dashaun/status/1788735171514028142).
@@ -85,8 +78,7 @@ Miscellaneous
   * [**Daniel Zimmermann**](https://x.com/DystopianSnow/status/1793140611773554938): "To your dismay I have to tell you I write all my desktop applications using Kotlin and JavaFX..."
 * **Dirk Lemmermann** has created a new repository for utility classes related to using the [Retrofit framework](https://square.github.io/retrofit/) (a type-safe HTTP client for Android and Java) in a JavaFX applications: "Obviously it is called [RetrofitFX (on GitHub)](https://github.com/dlsc-software-consulting-gmbh/RetrofitFX) and currently contains a total of two classes 🙂 Most importantly a class called ServiceInvocation which runs async server calls via Retrofit and then returns the result on †the JavaFX thread via various handlers that can be attached to the ServiceInvocation class. Hope some of you will find it useful ... although pretty specific."
 
-JFX Central
------------
+## JFX Central
 
 * New libraries
   * [FxForm2](https://www.jfx-central.com/libraries/fxform2) to easily creating forms.

@@ -34,13 +34,11 @@ In this episode #55, we look into the history of the Java Micro Edition and how 
 
 Let's find out what can be done with Java in the embedded world.
 
-Video
------
+## Video
 
 {{< youtube FoTyfWogspI >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -48,8 +46,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Robert von Burg
   * <https://www.linkedin.com/in/eitchme/>
@@ -61,8 +58,7 @@ Guests
 * Pavel Petroshenko
   * <https://www.linkedin.com/in/pavel-petroshenko-5220092/>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 

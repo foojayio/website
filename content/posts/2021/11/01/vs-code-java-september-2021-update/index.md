@@ -22,13 +22,11 @@ Hi everyone, welcome to the September edition of the Visual Studio Code Java upd
 
 In this article, we are going cover the new release of Gradle extension, more convenient Code Actions and the recent 1.0 language server release.
 
-Language Server for Java™ 1.0 Release
--------------------------------------
+## Language Server for Java™ 1.0 Release
 
 The 1.0 release of the Language Server for Java™ was officially released recently! We believe this is an important milestone and result of a multi-year collaboration between Microsoft and Red Hat. Please visit this [special announcement here on Foojay](https://foojay.io/today/announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code/) to see the release highlights as well as future plans in detail.
 
-Gradle for Java Extension Release
----------------------------------
+## Gradle for Java Extension Release
 
 Better Gradle support has been one of the top asks in the community. To better address the Gradle needs for developers, we are excited to announce that we have now released the "[Gradle for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle)" extension (previously called "Gradle Tasks" extension). This extension was originally started by [@badsyntax](https://github.com/badsyntax) and is now maintained by Microsoft. Please note that this extension is not yet part of [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) and you may need to download it separately.
 

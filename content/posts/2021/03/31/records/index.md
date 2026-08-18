@@ -44,7 +44,6 @@ class Point
 }
 ```
 
-
 ```
 
 ```
@@ -54,7 +53,6 @@ class Point
 ```java
 record Point(int x, int y){}
 ```
-
 
 In this example, the Record class name is Point, and it has two components x and y that describe a state. The Record class can have a body as well, later in this post we have such examples.
 
@@ -76,7 +74,6 @@ final class com.jfeatures.jdk16.records.Point extends java.lang.Record {
   public int y();
 }
 ```
-
 
 In the above output of the javap command we can see the record classes have:
 
@@ -106,7 +103,6 @@ Following code shows compilation error in extends, because Record classes are im
 record Base(int a) { }
 record Child(int a, int b) extends Base { }
 ```
-
 
 Similarly, we have a few more restrictions to follow for record classes.
 
@@ -138,7 +134,6 @@ record Employee(String name, int id) {
 }
 ```
 
-
 2. **Compact canonical constructor** doesn't have any parameter, it is always called when defined. The compact form helps developers focus on validating and normalizing parameters. Here parameters are declared implicitly, and the private fields corresponding to record components are automatically assigned (this.x = x) at the end of the constructor.
 
 ```java
@@ -150,7 +145,6 @@ record Employee(String name, int id) {
 }
 ```
 
-
    For a Record class, only one out of canonical constructor or compact canonical constructor can be defined. Defining both results into compilation failure.
 3. **Custom constructor** lets us create custom constructors as well as having only a few parameters from the Record header. Since this is not a canonical constructor, its first statement must invoke another constructor of the record class.
 
@@ -161,7 +155,6 @@ record Employee(String name, int id) {
    }
 }
 ```
-
 
    Starting from Java 15, assigning any of the instance fields (record components) in the constructor body became a compile-time error. Only the canonical constructor is allowed to do this.
 
@@ -185,7 +178,6 @@ public record Employee(String name, int id) {
     }
 }
 ```
-
 
 ```
 
@@ -219,7 +211,6 @@ public class LocalComponents {
 }
 ```
 
-
 For versions before Java15, above code will not compile. Following is a compilation error for local enum in above example.
 
 ```java
@@ -228,7 +219,6 @@ enum LocalEnum {
 ^
 1 error
 ```
-
 
 #### Inner class can declare static members
 
@@ -249,7 +239,6 @@ public class RecordInInnerClass {
 }
 ```
 
-
 This code shows below compilation error with Java 15, it works fine with Java16 or later.
 
 ```java
@@ -261,7 +250,6 @@ Note: com/jfeatures/jdk16/records/RecordInInnerClass.java uses preview language 
 Note: Recompile with -Xlint:preview for details.
 1 error
 ```
-
 
 ### Why Records, Why Not Just Tuples?
 

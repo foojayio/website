@@ -27,8 +27,7 @@ Understanding the shared steps in the project setup is crucial before delving in
 
 It's important to note that the technology I'll be detailing, except Vaadin, follows a similar approach. Vaadin, with its unique paradigm, really stands out among the approaches.
 
-WebJars
--------
+## WebJars
 
 WebJars is a technology [designed in 2012 by James Ward](https://jamesward.com/2012/04/25/introducing-webjars-web-libraries-as-managed-dependencies/) to handle these exact requirements.
 > WebJars are client-side web libraries (e.g. jQuery \& Bootstrap) packaged into JAR (Java Archive) files.
@@ -54,7 +53,6 @@ A WebJar is a regular JAR containing web assets. Adding a WebJar to a project's 
 </dependencies>
 ```
 
-
 The framework's responsibility is to expose the assets under a URL. For example, Spring Boot does it in the `WebMvcAutoConfiguration` class:
 
 ```java
@@ -75,7 +73,6 @@ public void addResourceHandlers(ResourceHandlerRegistry registry) {
 }
 ```
 
-
 1. The default is `"/webjars/**"`
 
 Inside the JAR, you can reach assets by their respective path and name. The agreed-upon structure is to store the assets inside `resources/webjars//`. Here's the structure of the `alpinejs-3.14.1.jar`:
@@ -92,7 +89,6 @@ META-INF
     |_ src
     |_ package.json
 ```
-
 
 Within Spring Boot, you can access the non-minified version with `/webjars/alpinejs/3.14.1/dist/cdn.js`.
 
@@ -115,11 +111,9 @@ The WebJars Locator project aims to avoid all these issues by providing a path w
 </dependencies>
 ```
 
-
 I'll use this approach for every front-end technology. I'll also add the [Bootstrap](https://getbootstrap.com/) CSS library to provide a better-looking user interface.
 
-Thymeleaf
----------
+## Thymeleaf
 
 Thymeleaf is a server-side rendering technology.
 > **Thymeleaf** is a modern server-side Java template engine for both web and standalone environments.
@@ -155,7 +149,6 @@ Here's the demo sample from the website:
 </table>
 ```
 
-
 Here is a Thymeleaf 101, in case you need to familiarise yourself with the technology.
 
 * When you open the HTML file, the browser displays the regular value inside the tags, *i.e.* , `Name` and `Price`. When you use it in the server, Thymeleaf kicks in and renders the value computed from `th:text`, `#{msgs.headers.name}` and `#{msgs.headers.price}`.
@@ -163,8 +156,7 @@ Here is a Thymeleaf 101, in case you need to familiarise yourself with the techn
 * The `#` calls a function.
 * `th:each` allows for loops
 
-Thymeleaf integration with the front-end framework
---------------------------------------------------
+## Thymeleaf integration with the front-end framework
 
 Most, if not all, front-end frameworks work with a client-side model. We need to bridge between the server-side model and the client-side one.
 
@@ -193,7 +185,6 @@ fun config() = beans {
   }
 }
 ```
-
 
 1. Define the `Todo` class
 2. Add an in-memory list to the bean factory. In a regular app, you'd use a `Repository` to read from the database
@@ -232,7 +223,6 @@ If we apply the above to our code, we can get the model attributes passed by Spr
 </script>
 ```
 
-
 When rendered server-side, the result is:
 
 ```html
@@ -244,9 +234,7 @@ When rendered server-side, the result is:
 </script>
 ```
 
-
-Summary
--------
+## Summary
 
 In this post, I've described two components I'll be using throughout the rest of this series:
 
@@ -260,8 +248,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [WebJars](https://www.webjars.org/)
 * [WebJars Instructions for Spring Boot](https://www.webjars.org/documentation#springboot)
 * [Introduction to WebJars](https://www.baeldung.com/maven-webjars)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/2/) on September 15^th^, 2024*
 

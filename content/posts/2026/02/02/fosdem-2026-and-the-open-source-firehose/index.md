@@ -20,8 +20,7 @@ frozen: false
 
 I'm back from four days in Brussels and the uniquely exhausting experience that is FOSDEM. Mentally fried. Physically wrecked. Entirely glad I went.
 
-The Chaos and the Crowd
------------------------
+## The Chaos and the Crowd
 
 Around 8,000 people made the trip this year. Some arrived for the first time; many returned as annual pilgrims.
 
@@ -33,8 +32,7 @@ Its official description, *"a free event for software developers to meet, share 
 
 In 2026, that snapshot featured 1,000+ sessions and nearly 1,200 speakers across \~70 tracks. Organizers squeezed them into 37 rooms on the Université Libre de Bruxelles Solbosch campus. Do the maths, and you quickly realise something important: you are not there to consume everything. You are there to sample the firehose.
 
-Navigating the Firehose
------------------------
+## Navigating the Firehose
 
 The organizers stream and record most talks (<https://video.fosdem.org/2026/>), which is a mercy. Physically moving between rooms is often futile. Staff strictly enforce capacity limits; you can arrive 30 minutes early and still lose out. The organisers never compromise on safety or timing. That discipline is the only reason the whole thing works at all.
 
@@ -46,10 +44,7 @@ No one pitches here. You get progress, blockers, failed experiments, and difficu
 
 FOSDEM is the heartbeat of open source. It is a reliable way to distinguish what's real from what's hype. Ideas that survive here tend to matter. Ideas that don't... don't.
 
-
-
-Trends and Tensions in 2026
----------------------------
+## Trends and Tensions in 2026
 
 ### What did FOSDEM 2026 actually tell us?
 
@@ -65,15 +60,13 @@ For 2027, we're considering a proposal for a Java Users room. We want to focus d
 
 The hardest problems aren't language features anymore. They are how we build, ship, and sustain software. AI included.
 
-Security as Engineering, Not Defense
-------------------------------------
+## Security as Engineering, Not Defense
 
 Security conversations threaded the event, though they often appeared indirectly. Speakers framed them as good engineering rather than reactive cyber defence. We talked about hardening build systems, reducing attack surfaces, and improving dependency hygiene. It felt less like "panic patching" and more like "this is how things should have been built."
 
 A noticeable urgency accompanied this, occasionally bordering on anxiety or a shared weariness. Technical collaboration is losing the race against legal obligation. The work needed to make software ecosystems safer is real and ongoing, but compliance deadlines now drive it more than shared engineering goals.
 
-The Economics of "Free"
------------------------
+## The Economics of "Free"
 
 ### Open source is approaching a watershed moment.
 
@@ -91,10 +84,7 @@ Organisations are becoming more selective about what they use. Pay-to-download m
 
 AI accelerates this pressure; legislation compounds it. Together, they are distorting the economics of open source consumption in ways we are only beginning to understand.
 
-
-
-A Practical Call to Action
---------------------------
+## A Practical Call to Action
 
 ### So what should you actually do?
 
@@ -118,10 +108,7 @@ If upgrading is too risky or too slow, more commercial support is appearing to h
 
 Whatever path you choose: planning for frequent upgrades, yearly modernisation, the draconian withdrawal of applications, or simply buying a support contract, you must be able to deliver. Auditors will not accept hand-waving or "we'll figure it out when it happens" type of answers.
 
-
-
-Silver Linings
---------------
+## Silver Linings
 
 The points above all come down to having solid engineering foundations. New tools are arriving to make things easier and many were on display at FOSDEM. They will , eventually, help you take the drama out of delivering secure software, whether AI is included or not.
 

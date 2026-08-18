@@ -27,13 +27,11 @@ The way we search for information and develop software has changed a lot since t
 
 What can we expect in the near future, and how can we program AI ourselves with Java? Let's find out...
 
-Video
------
+## Video
 
 {{< youtube E1gBwWFpfUA >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Lize Raes
 
@@ -59,8 +56,7 @@ Guests
 * <https://foojay.social/@frankdelporte>
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Content
--------
+## Content
 
 * 00:00 Introduction of the topic and guests
 * 01:25 AI and ML, where to begin?
@@ -93,13 +89,8 @@ Content
   * <https://foojay.io/today/foojay-podcast-45/>
 * 43:10 Conclusions
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo
 * Synapse by Shane Ivers - <https://www.silvermansound.com>
-
-<br />
-
-<br />

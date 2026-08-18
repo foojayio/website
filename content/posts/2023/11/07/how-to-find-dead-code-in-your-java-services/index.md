@@ -94,7 +94,6 @@ java -jar "${JACOCO_CLI_LOCAL}" merge --destfile jacoco.exec jacoco-*.exec
 popd
 ```
 
-
 Source: [Gist on GitHub](https://gist.github.com/Badbond/0f685d133763864a0760bbfc477e1f82)
 > *Note: This script assumes that selected pods run the same software source-code revision. This is necessary as later we will combine coverage data with source code to have the coverage visualized, and JaCoCo can otherwise not distinguish between revisions. As such, as long as the pods run the same revision, it is also possible to run this multiple times and combine the data as the script does.*{#fd29}
 
@@ -143,7 +142,6 @@ java -jar "${JACOCO_CLI_LOCAL}" report jacoco.exec --html report \
   $(find "${@:1}" -path "${SOURCEFILES_MATCHER}" | sed 's/^/--sourcefiles /')
 popd
 ```
-
 
 Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c792416535940e0#file-jacoco_generate_report-sh)
 

@@ -62,7 +62,6 @@ public static void checkDirectoryPermissions() {
 }
 ```
 
-
 This check has drastically reduced reported issues of this kind for us as users now understand why the access is failing. Of course, you can also adapt it to fit your needs and targeted directories. You can make use of this approach in basically all desktop applications, it is not specific to Java. It is very simple but very effective.
 
 2. Adapt tray icons to the OS
@@ -113,13 +112,11 @@ if (isLinux()) {
 }
 ```
 
-
 To make this work, you also have to add this to your JVM args for Linux builds:
 
 ```
 --add-opens "java.desktop/sun.awt.X11=my.module"
 ```
-
 
 ### Choosing the right resolution
 
@@ -135,7 +132,6 @@ var image = switch (OsType.getLocal()) {
     case OsType.MacOs _ -> "img/logo/logo_macos_tray_24x24.png";
 };
 ```
-
 
 The images should also be adapted in terms of their padding. On Windows, the input image looks good without any padding, but on macOS you have to apply around 4px of padding to the tray icon image to make it look like other macOS icons. Furthermore, many tray icons are usually designed as black and white images, so you might have to convert your colorful logo to some form of grayscale image to integrate them better into the existing tray.
 
@@ -175,7 +171,6 @@ allprojects { p ->
 }
 ```
 
-
 Then define the custom module information for non-modular dependencies in your `modules.gradle` like this:
 
 ```java
@@ -200,13 +195,11 @@ extraJavaModuleInfo {
 }
 ```
 
-
 Whenever you now refer to any listed dependency, e.g. with
 
 ```
 implementation 'org.apache.commons:commons-lang3:<version>'
 ```
-
 
 , it will automatically pick up the generated module. And with only that you're already good to go! With all dependencies now automatically modularized, you never have to worry about the classpath ever again. It took only 75 lines to fully modularize all 10 non-modular dependencies of [XPipe](https://github.com/xpipe-io/xpipe) as you can see in the [modules.gradle](https://github.com/xpipe-io/xpipe/blob/1.7.4/modules.gradle). I was even able to integrate [Flexmark](https://github.com/vsch/flexmark-java), which has split packages across like 15 dependency jars.
 
@@ -214,7 +207,6 @@ Now you just have to create the tasks to build your application images with jlin
 
 Using this approach, the benefits of the module system easily outweigh the effort it takes to adapt to it. Of course, you need to spend a few minutes setting up the plugin and providing module information, but you get a standalone application right out of the box in return.
 
-Outlook
--------
+## Outlook
 
 I hope you liked the tips and can maybe implement some of them in your own projects. This may become a somewhat regular series as I have a lot of items in the backlog. So stay tuned for that!

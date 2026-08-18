@@ -56,7 +56,6 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ```
 
-
 Notice the extra annotations and the `externalTrafficPolicy` set to `Local`.
 
 Next, we need `cert-manager` to automatically provision SSL certificates from Let's Encrypt; we will just need a valid email address for the ClusterIssuer:
@@ -87,14 +86,12 @@ spec:
 EOF
 ```
 
-
 Last but not least, we will add a DNS record for our ingress Loadbalancer IP, so it will be seamless to get public FQDNs for our endpoints for Thanos receive and Thanos Query.
 
 ```
 az network dns record-set a add-record  -n "*.thanos" -g dns -z cookingwithazure.com \
 --ipv4-address $(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 ```
-
 
 Note how we use `kubectl` with `jsonpath` type output to get the ingress public IP. We can now leverage the wildcard FQDN `*.thanos.cookingwithazure.com` in our ingresses and cert-manager will be able to obtain the relative certificate seamlessly.
 
@@ -108,7 +105,6 @@ Once you have created or identified the storage account to use and created a con
 clientid=$(az aks show -g <rg> -n <cluster_name> -o json --query identityProfile.kubeletidentity.clientId)
 ```
 
-
 Now, assign the role of `Reader and Data Access` to the **Storage account** (you need this so the cloud controller can generate access keys for the containers) and the `Storage Blob Data Contributor` role **to the container only** (there's no need to give this permission at the storage account level, because it will enable writing to *every* container, which we don't need. Always remember to apply the [principles of least privileges](https://www.cisa.gov/uscert/bsi/articles/knowledge/principles/least-privilege)!)
 
 ```
@@ -116,7 +112,6 @@ az role assignment create --role "Reader and data access" --assignee $clientid -
 
 az role assignment create --role "Storage Blob Data Contributor" --assignee $clientid --scope /subscriptions/<subID>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account_name>/containers/<container_name>
 ```
-
 
 ### Create basic auth credentials
 
@@ -140,7 +135,6 @@ kubectl create secret generic -n prometheus remotewrite-secret \
 --from-literal=password=$(cat pass)
 ```
 
-
 We now have the secrets in place for the ingresses and for deploying Prometheus.
 
 ### Deploying Thanos
@@ -150,7 +144,6 @@ We will use the [Bitnami chart](https://github.com/bitnami/charts/tree/master/bi
 ```
 helm upgrade -i thanos -n monitoring --create-namespace --values thanos-values.yaml bitnami/thanos
 ```
-
 
 Let's go thru the relevant sections of the [values file](https://github.com/ams0/ams0/blob/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/files/thanos-values.yaml):
 
@@ -165,7 +158,6 @@ objstoreConfig: |-
     user_assigned_id: "5c424851-e907-4cb0-acb5-3ea42fc56082"
 ```
 
-
 (replace the `user_assigned_id` with the object id of your kubeletIdentity, for more information about AKS identities, check out [this article](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#use-a-pre-created-kubelet-managed-identity)) This section instructs the Thanos Store Gateway and Compactor to use an Azure Blob store, and to use the kubelet identity to access it. Next, we enable the ruler and the query components:
 
 ```
@@ -178,7 +170,6 @@ query:
 queryFrontend:
   enabled: true
 ```
-
 
 We also enable autoscaling for the stateless query components (the `query` and the `query-frontend`; the latter helps aggregating read queries), and we enable simple authentication for the Query frontend service using `ingress-nginx` annotations:
 
@@ -197,7 +188,6 @@ queryFrontend:
     tls: true
 ```
 
-
 The annotation references the `basic-auth` secret we created before from the `htpasswd` credentials.
 
 Note that the same annotations are also under the `receive` section, as we're using the exact same secret for pushing metrics *into* Thanos (although with a different `hostname`).
@@ -210,7 +200,6 @@ Until full support for Agent mode lands in the Prometheus operator (follow this 
 helm  upgrade -i -n prometheus promremotewrite -f prom-remotewrite.yaml prometheus-community/kube-prometheus-stack
 ```
 
-
 Let's go thru the [values file](https://github.com/ams0/ams0/blob/main/blog/dev.to/posts/stateless-monitoring-with-aks-thanos-prometheus-grafana/assets/files/prometheus-values.yaml) to explain the options we need to enable remote-write:
 
 ```
@@ -221,7 +210,6 @@ prometheus:
       datacenter: westeu
       cluster: playground
 ```
-
 
 This enables Prometheus and attaches two extra labels to every metrics, so it becomes easier to filter data coming from multiple sources/clusters later in Grafana.
 
@@ -237,7 +225,6 @@ remoteWrite:
       name: remotewrite-secret
       key: password
 ```
-
 
 This section points to the remote endpoint (secured via SSL using Let's Encrypt certificates, thus trusted by the certificate store on the AKS nodes; if you use a non-trusted certificate, refer to the [TLSConfig](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#tlsconfig) section of the PrometheusSpec API). Note how the credentials to access the remote endpoint are coming from the secret created beforehand and stored in the `prometheus` namespace.
 

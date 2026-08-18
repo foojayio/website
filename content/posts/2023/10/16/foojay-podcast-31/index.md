@@ -34,8 +34,7 @@ Not all of them, as there were just too many people and too many exciting sessio
 
 {{< youtube VJJmoiP7e-I >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +42,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction with the Father of Java  
 
@@ -84,8 +82,7 @@ Content
 
 36:14 Outro
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

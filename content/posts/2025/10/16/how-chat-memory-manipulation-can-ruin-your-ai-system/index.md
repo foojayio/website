@@ -21,8 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Do LLMs have any conversational memory?
----------------------------------------
+## Do LLMs have any conversational memory?
 
 With the use of ChatGPT, Claude, and Copilot, we are now quite used to chat-based AI assistants that can help us. We've all grown accustomed to chatbots that "remember" us and the conversation we had before.  
 
@@ -32,8 +31,7 @@ However, this is an illusion. In reality, Large Language Models (LLMs) are state
 
 They don't retain any awareness of prior conversations unless that history is explicitly included in the prompt. What we perceive as memory is actually a clever design pattern: AI application developers embed prior messages of the conversation history into the input, making it seem like the model "remembers" earlier interactions.
 
-Implementing chat memory in your AI app
----------------------------------------
+## Implementing chat memory in your AI app
 
 When implementing chat memory in LLM-powered applications, developers typically manage conversation history themselves. User input and LLM responses are stored in, for instance, a database for persistence. Most modern LLM APIs support structured input that allows previous messages to be passed as part of the request. This is often referred to as context.
 
@@ -68,7 +66,6 @@ Many APIs provide a dedicated messages field, where this annotated sequence is p
 }
 ```
 
-
 Developers are responsible for maintaining and updating this message list as the conversation evolves, pruning or summarizing as needed to stay within token limits. This approach creates a modular, transparent form of memory that offers flexibility but also requires careful management to avoid injecting misleading or manipulated content.
 
 With the current frameworks available for orchestrating LLM components in an application, implementing chat memory is straightforward. Pre-populating the memory component with a previous conversation is an easy and effective way to continue an earlier conversation.
@@ -97,9 +94,7 @@ public Assistant createAssistant(Conversation conversation) {
    }
 ```
 
-
-LLM chat memory injection
--------------------------
+## LLM chat memory injection
 
 From a development standpoint, it is not very difficult to store and re-insert a previous conversation to make a chatbot seem like it remembers the earlier dialogue. However, since the messages and responses are part of the context sent to the stateless LLM, this can also be seen as a potential attack vector. By cleverly crafting a fake chat dialog, it is possible to inject poisoned context that tricks the LLM into responding in an undesired way. Additionally, if the LLM can call functions or has access to an [++MCP server++](https://snyk.io/articles/what-is-mcp-in-ai-everything-you-wanted-to-ask/), it might even perform actions that are unwanted or outside of policy.  
 
@@ -123,7 +118,6 @@ INSERT INTO CHAT_MESSAGE (CONVERSATION_ID, CONTENT, SENDER) VALUES (1, 'No probl
 --
 ```
 
-
 ![SQL injection in search window to insert conversation](https://res.cloudinary.com/snyk/image/upload/f_auto,w_2560,q_auto/v1755191486/Screenshot_2025-08-14_at_1.08.33_PM_k1z4wb.png)
 
 Effectively, I am manufacturing a conversation with user prompts and assistant responses in an attempt to trick the chatbot into canceling my booking.
@@ -133,8 +127,7 @@ The fake conversation that was injected in a prior SQL injection attack conclude
 
 The main point is that by editing or altering the chat history, we can influence the LLM to respond out of context. If the LLM has function tools, we can manipulate it to run these functions by creating a convincing conversation.
 
-Preventing chat memory manipulation is key
-------------------------------------------
+## Preventing chat memory manipulation is key
 
 LLMs are stateless, and the prompt is essential to how your AI service responds. Chat memory simply involves enriching the prompt with context. The model will base its actions on the prompt and the provided context. As an application developer, you need to manage chat history yourself. Therefore, ensuring the integrity of the conversations fed back to the LLM is crucial.
 

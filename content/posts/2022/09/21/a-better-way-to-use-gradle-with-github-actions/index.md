@@ -20,8 +20,7 @@ related_posts:
 frozen: false
 ---
 
-Running Gradle builds on GitHub Actions
----------------------------------------
+## Running Gradle builds on GitHub Actions
 
 GitHub Actions provides a convenient and powerful CI platform for projects hosted on GitHub. To enhance the experience of building Gradle projects on GitHub Actions, the Gradle team has developed the `gradle-build-action`.
 

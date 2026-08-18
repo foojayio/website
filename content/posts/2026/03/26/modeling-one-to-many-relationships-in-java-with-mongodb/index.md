@@ -27,8 +27,7 @@ Consider a common scenario: a BlogPost that has many Comment objects. In Java, t
 
 This tutorial walks you through both approaches --- **embedded documents** and **references** --- using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the **Subset Pattern** that combines the best of both worlds.
 
-**What You'll Learn**
----------------------
+## **What You'll Learn**
 
 * What a one-to-many relationship is and how it maps from Java objects to MongoDB documents.
 * When to embed documents vs. when to use references, and the trade-offs of each.
@@ -36,8 +35,7 @@ This tutorial walks you through both approaches --- **embedded documents** and *
 * How to query and update each pattern effectively.
 * Best practices for avoiding common schema design pitfalls.
 
-**Prerequisites**
------------------
+## **Prerequisites**
 
 To follow along, you'll need:
 
@@ -80,13 +78,11 @@ Create a Maven project with the following dependencies in your pom.xml:
 </dependencies>
 ```
 
-
 Create a .env file at the project root with your MongoDB connection string:
 
 ```
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrites=true&w=majority
 ```
-
 
 ### **Configuring the MongoClient with POJO Support**
 
@@ -151,11 +147,9 @@ public class MongoConfig {
 }
 ```
 
-
 The key line here is PojoCodecProvider.builder().automatic(true).build(). Setting automatic(true) tells the driver to handle any POJO it encounters, not just ones you register explicitly. This is what makes the entire POJO-to-BSON mapping work seamlessly throughout the examples that follow.
 
-**What Is a One-to-Many Relationship in Java?**
------------------------------------------------
+## **What Is a One-to-Many Relationship in Java?**
 
 In object-oriented terms, a one-to-many relationship means that one object contains or is associated with a collection of other objects. A BlogPost has many Comment objects. In Java, this is typically expressed as a List:
 
@@ -166,13 +160,11 @@ public class BlogPost {
 }
 ```
 
-
 This is intuitive and familiar. But how does this translate to a document database? In MongoDB, a document is a rich, hierarchical data structure --- similar to a JSON object. Unlike relational tables, a single MongoDB document can hold nested objects and arrays. That flexibility gives you options that don't exist in the relational world.
 
 The core question becomes: should those Comment objects live *inside* the BlogPost document, or should they live in a separate collection with a pointer back to the post?
 
-**How Does MongoDB Store Documents Differently Than a Relational Database?**
-----------------------------------------------------------------------------
+## **How Does MongoDB Store Documents Differently Than a Relational Database?**
 
 In a relational database, data is normalized into tables. A blog_posts table and a comments table are connected by a post_id foreign key. To read a post with its comments, you write a JOIN query. The database enforces referential integrity, and the schema is fixed.
 
@@ -185,8 +177,7 @@ This flexibility means MongoDB lets you *choose* your relationship strategy per 
 
 Neither is universally "better. The right choice depends on your data access patterns, update frequency, and growth expectations. Let's explore both.
 
-**Pattern 1: Embedded Documents**
----------------------------------
+## **Pattern 1: Embedded Documents**
 
 ### **When Should You Embed?**
 
@@ -232,7 +223,6 @@ public class Comment {
 }
 ```
 
-
 And the embedded User, representing the post author:
 
 ```
@@ -258,7 +248,6 @@ public class User {
     // Getters and setters omitted for brevity
 }
 ```
-
 
 Now, the BlogPost itself. It holds the author as an embedded User and the comments as an embedded List\<Comment\>:
 
@@ -294,7 +283,6 @@ public class BlogPost {
     // Getters and setters omitted for brevity
 }
 ```
-
 
 The @BsonProperty annotation maps each Java field to its corresponding BSON field name. The @BsonId annotation marks the id field as the document's _id. Every POJO needs a no-argument constructor for the PojoCodecProvider to deserialize documents back into Java objects.
 
@@ -371,7 +359,6 @@ public class EmbeddedExample {
 }
 ```
 
-
 The resulting MongoDB document looks like this:
 
 ```
@@ -393,13 +380,11 @@ The resulting MongoDB document looks like this:
 }
 ```
 
-
 Everything --- the post content, the author profile, and all comments --- lives in a single document. One find() call returns it all. Adding a new comment is an atomic $push operation on the parent document, with no need to touch a second collection.
 
 You can also query into the embedded data using dot notation. Filters.eq("comments.author", "Bob") finds all posts that have at least one comment authored by Bob, and Filters.eq("author.username", "alice") filters by the embedded author's username.
 
-**Pattern 2: References**
--------------------------
+## **Pattern 2: References**
 
 ### **When Should You Use References?**
 
@@ -455,7 +440,6 @@ public class User {
 }
 ```
 
-
 The Comment also becomes an independent document, referencing both the post and the author by ObjectId:
 
 ```
@@ -486,7 +470,6 @@ public class Comment {
     // Getters and setters omitted for brevity
 }
 ```
-
 
 And the BlogPost holds references instead of embedded objects:
 
@@ -522,7 +505,6 @@ public class BlogPost {
     // Getters and setters omitted for brevity
 }
 ```
-
 
 Notice the difference: instead of private User author and private List\<Comment\> comments, we now have private ObjectId authorId and private List\<ObjectId\> commentIds. The data itself lives elsewhere.
 
@@ -650,7 +632,6 @@ public class ReferencedExample {
 }
 ```
 
-
 The resulting MongoDB documents span three collections:
 
 ```
@@ -692,15 +673,13 @@ The resulting MongoDB documents span three collections:
 }]
 ```
 
-
 The trade-off is visible in the code. Assembling the full object graph requires fetching the post, then the author, then the comments, and then the comment authors. That's multiple round-trips. However, the Filters.in() operator lets us batch-load related documents efficiently --- notice how we collect all unique commentAuthorIds and resolve them in a single query rather than one query per comment.
 
 A key advantage shows up in step 6: you can query the comments collection directly. Finding all comments by a specific user, or the most recent comments across all posts, is a simple query --- no need to scan through embedded arrays in every blog post document.
 
 **Note:** For scenarios where you'd rather resolve references on the server side, MongoDB's [$lookup](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) aggregation stage can perform left-outer-join-like operations between collections. This is useful for analytics queries or dashboards, but for most application reads, the multi-step approach shown here gives you more control over what gets loaded and when.
 
-**Best Practices for Schema Design in MongoDB**
------------------------------------------------
+## **Best Practices for Schema Design in MongoDB**
 
 Now that you've seen both patterns in action, here are the principles that should guide your schema design decisions.
 
@@ -768,7 +747,6 @@ public class CommentSnapshot {
 }
 ```
 
-
 And the BlogPost that combines both:
 
 ```
@@ -791,7 +769,6 @@ public class BlogPost {
     // Constructor, getters, and setters omitted for brevity
 }
 ```
-
 
 The key maintenance operation occurs when a new comment is added. You insert the full Comment into the comments collection, then atomically update the post using $push with $slice to keep only the most recent entries:
 
@@ -825,7 +802,6 @@ private void addComment(ObjectId postId, User author, String body) {
 }
 ```
 
-
 The resulting document gives you the best of both worlds --- a single read for the most common view, with the full dataset available in a separate collection when needed:
 
 ```
@@ -849,7 +825,6 @@ The resulting document gives you the best of both worlds --- a single read for t
 }
 ```
 
-
 The AuthorSnapshot carries the user's _id alongside the display fields, so it serves as both a reference and a read-optimized cache. When the reader navigates to the full author profile, you resolve that _id against the users collection. The comment_count field lets the UI display "View all 5 comments" without a count query.
 
 The trade-off is clear: if a user changes their display name, you need to update the embedded snapshots in every post where they appear. For a blogging platform where profile changes are infrequent compared to post reads, this is usually an excellent trade-off.
@@ -858,8 +833,7 @@ The trade-off is clear: if a user changes their display name, you need to update
 
 This is MongoDB's hard constraint on document size. If your embedded arrays could push a document past this limit, use references. The Subset Pattern is particularly useful here: you get the read performance of embedding for the most common view while the full dataset lives safely in its own collection.
 
-**Choosing the Right Relationship Model for Your Java App**
------------------------------------------------------------
+## **Choosing the Right Relationship Model for Your Java App**
 
 The choice between embedded documents and references comes down to your application's access patterns:
 
@@ -877,9 +851,7 @@ The full working code for all three patterns is available on [GitHub](https://gi
 mvn compile exec:java
 ```
 
-
-**FAQs**
---------
+## **FAQs**
 
 ### **Can I mix embedded and referenced documents in the same MongoDB schema?**
 

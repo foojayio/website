@@ -25,10 +25,7 @@ At **Omnifish**, we're proud supporters of the open-source enterprise Java ecosy
 
 Let's dive in.
 
-
-
-![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE
----------------------------------------------------------------------------------------------
+## ![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE
 
 Before building complex enterprise apps, it's important to get the basics right. These starter guides will help you build a solid foundation --- with real code examples and clear explanations.
 
@@ -48,10 +45,7 @@ You'll eventually need to persist data --- and this guide has you covered. Learn
 
 Security is never an afterthought. This guide walks you through adding authentication and authorization to your REST endpoints using Jakarta Security --- including how to protect resources and validate user credentials.
 
-
-
-![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes
-----------------------------------------------------------------------------------------------------
+## ![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes
 
 Now that you've built something with Jakarta EE, it's time to go deeper. These **specification guides** break down the key technologies behind the platform --- not just how to use them, but how they work under the hood.
 
@@ -83,10 +77,7 @@ Want to scale your apps? You need to understand concurrency. This guide covers m
 
 Finally, this high-level overview ties everything together --- showing how all the specs in Jakarta EE fit into a cohesive platform for building robust, cloud-ready enterprise applications.
 
-
-
-![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow.
-------------------------------------------------------------------------------------------
+## ![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow.
 
 Jakarta EE is a mature, powerful platform --- but it's also approachable, thanks to resources like these. Whether you're just starting out or looking to sharpen your enterprise Java chops, these guides will take you step-by-step from beginner to seasoned developer.
 

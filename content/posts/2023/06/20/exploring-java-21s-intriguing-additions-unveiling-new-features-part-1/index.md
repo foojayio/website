@@ -21,17 +21,13 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction:
--------------
+## Introduction:
 
 Java 21 is going to introduce several intriguing additions that enhance the language's capabilities.
 
 This article aims to discuss a few notable features that stand out, providing an overview of their functionalities and potential use cases.
 
-<br />
-
-Character Enhancements:
------------------------
+## Character Enhancements:
 
 1. `Character.isEmoji(int codePoint)`: This method determines whether a character is considered an emoji based on its Unicode properties defined in Unicode Emoji ([Unicode Emoji Technical Standard #51](https://unicode.org/reports/tr51/#Emoji_Properties_and_Data_Files)). For example, executing `Character.isEmoji(9203)` would return `true` for the character ⏳, which has the code point 9203.
 2. `Character.isEmojiPresentation(int codePoint)`: Similar to `isEmoji()`, this method checks if a character has the Emoji Presentation property. It helps identify characters that display as emojis when rendered.
@@ -43,15 +39,11 @@ boolean isEmoji = Character.isEmoji(9203);
 System.out.println(isEmoji);
 ```
 
-
 The output will be `true` because the character with code point 9203 (⏳) is considered an emoji.
 
 You can find more details about these methods in the [Java documentation](https://download.java.net/java/early_access/jdk21/docs/api/java.base/java/lang/Character.html#isEmoji(int)).
 
-<br />
-
-StringBuffer and StringBuilder Improvements:
---------------------------------------------
+## StringBuffer and StringBuilder Improvements:
 
 Java 21 enhances the `StringBuffer` and `StringBuilder` classes with the `repeat()` method, which allows repetitive concatenation of characters or character sequences. The two overloaded versions of `repeat()` are as follows:
 
@@ -66,22 +58,14 @@ buffer.repeat(9203, 5);
 System.out.println(buffer);
 ```
 
-
-<br />
-
 The output will be `⏳⏳⏳⏳⏳`, as the code point 9203 (⏳) is repeated five times using the `repeat()` method.
 
-<br />
-
-String Enhancements:
---------------------
+## String Enhancements:
 
 Java 21 introduces two new methods in the `String` class, namely `indexOf(String str, int beginIndex, int endIndex)` and `indexOf(int ch, int beginIndex, int endIndex)`, which expand the searching capabilities within a specified range of a string.
 
 1. `String.indexOf(String str, int beginIndex, int endIndex)`: Returns the index of the first occurrence of the specified substring within the given index range of the string. This method provides the same result as invoking `s.substring(beginIndex, endIndex).indexOf(str) + beginIndex`. If the `indexOf(String)` method returns a non-negative index, it is returned; otherwise, -1 is returned.
 2. `String.indexOf(int ch, int beginIndex, int endIndex)`: Returns the index of the first occurrence of the specified character within the given range of the string. The search starts at `beginIndex` and stops before `endIndex`. This method supports characters in the range from 0 to 0xFFFF, as well as other Unicode code points.
-
-<br />
 
 Java 21 also enhances the `String` class with a `splitWithDelimiters(String regex, int limit)` method. This method splits a string based on a given regular expression and returns both the strings and the matching delimiters. For example:
 
@@ -91,13 +75,9 @@ String[] splits = booAndFoo.splitWithDelimiters(":+", 3);
 System.out.println("splits = " + Arrays.toString(splits));
 ```
 
-
 The output will be: `splits = [boo, :::, and, ::, foo]`, where the string is split around the `:+` delimiter, limiting the result to a maximum of three splits.
 
-<br />
-
-Collections Framework Enhancements:
------------------------------------
+## Collections Framework Enhancements:
 
 Java 21 introduces several new methods in the `Collections` class that enhance the Collections Framework's functionality.
 
@@ -111,22 +91,14 @@ SequencedCollection and SequencedMap are new interfaces introduced in Java 21 th
 
 To know more about Sequence Collection, read my news item on infoQ: [Collections Framework Makeover](https://www.infoq.com/news/2023/03/collections-framework-makeover/).
 
-<br />
-
-HashMap and HashSet Improvements:
----------------------------------
+## HashMap and HashSet Improvements:
 
 Java 21 introduces convenient factory methods for creating `HashMap` and `HashSet` instances.
 
 1. `Collections.newHashMap(int numMappings)`: Creates a new, empty `HashMap` suitable for the expected number of mappings. The map uses a default load factor of 0.75, and its initial capacity is typically large enough to accommodate the expected number of mappings without requiring resizing.
 2. `Collections.newHashSet(int numElements)`: Creates a new, empty `HashSet` suitable for the expected number of elements. The set also uses a default load factor of 0.75, with an initial capacity that can accommodate the expected number of elements efficiently.
 
-<br />
-
-Conclusion
-----------
-
-<br />
+## Conclusion
 
 If you want to experiment with these new features can download the OpenJDK from the [OpenJDK JDK 21 Early-Access Builds](https://jdk.java.net/21/).
 

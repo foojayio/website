@@ -31,7 +31,6 @@ ObjectMessage message = session.createObjectMessage( obj );
 producer.send( message );
 ```
 
-
 However, what is different here, is that the routing information is serialised alongside but separate to the business message and away from the messaging layer, where this data structure can later be read and dispatched.
 
 In this example, we will route a product to a country:
@@ -42,7 +41,6 @@ routing.to("Italy").product(new Product("Coffee"));
 routing.to("France").product(new Product("Cheese"));
 routing.to("America").product(new Product("Popcorn"));
 ```
-
 
 You can see the full code example here: [net.openhft.chronicle.wire.examples.MessageRoutingExample](https://github.com/OpenHFT/Chronicle-Wire/blob/develop/src/test/java/net/openhft/chronicle/wire/examples/MessageRoutingExample.java "net.openhft.chronicle.wire.examples.MessageRoutingExample")
 
@@ -56,7 +54,6 @@ class Product extends SelfDescribingMarshallable {
         }
  }
 ```
-
 
 The Product class extends *net.openhft.chronicle.wire.SelfDescribingMarshallable;* this is the Chronicle-Wires standard base class used for all Data-Transfer-Objects. However, if you don't wish to extend SelfDescribingMarshallable, you could instead implement the [marker interface](https://en.wikipedia.org/wiki/Marker_interface_pattern "marker interface ") *net.openhft.chronicle.wire.Marshallable* , which almost does the same thing as *SelfDescribingMarshallable* apart from providing default *toString() equals()* and *hashCode()* implementations.
 
@@ -76,7 +73,6 @@ interface ProductHandler {
 }
 ```
 
-
 To keep our example simple, we will build a *HashMap* , keyed on the destination, and we will then use a lambda expression that outputs a String for the *ProductHandler*.
 
 ```java
@@ -90,13 +86,11 @@ destinationMap.put("France", product -> System.out.println("Sends the product to
 destinationMap.put("America", product -> System.out.println("Sends the product to America, product=" + product));
 ```
 
-
 Below, we use Chronicle Wire for our serialisation.
 
 ```java
 private final Wire wire = new TextWire(Bytes.allocateElasticOnHeap());
 ```
-
 
 The code above will allow us to serialise our data structure into a human-readable text format. If we were to use Java to write the following:
 
@@ -107,13 +101,11 @@ routing.to("France").product(new Product("Cheese"));
 routing.to("America").product(new Product("Popcorn"));
 ```
 
-
 and then dump the output of the wire, using:
 
 ```
 System.out.println(wire);
 ```
-
 
 The following will get logged to the console:
 
@@ -135,13 +127,11 @@ product: {
 ...
 ```
 
-
 Above, you can see how easily the data structure can be read and debugged.
 
 ```
 CLASS_ALIASES.addAlias(Product.class, ProductHandler.class);
 ```
-
 
 Using aliases (above) allows Chronicle-Wire serialisation to use the short name of the class rather than the entire pathname. Taking this approach helps us reduce the number of bytes used in encoding these classes; it also has the advantage of producing a more concise, less verbose output when viewed as text.
 
@@ -151,13 +141,11 @@ However, if performance was a concern, we can use a more efficient compact encod
 private final Wire wire = new BinaryWire(new HexDumpBytes());
 ```
 
-
 Below is a hex-dump of exactly the same data encoded using binary wire; it's more compact but nowhere near as easy to read. This can be done using:
 
 ```
 System.out.println(wire.bytes().toHexString())
 ```
-
 
 Chronicle Wire will automatically add in the #comment on the right-hand side.
 
@@ -185,13 +173,11 @@ b9 07 70 72 6f 64 75 63 74                      # product: (event)
    e7 50 6f 70 63 6f 72 6e                         # Popcorn
 ```
 
-
 Now that we have written data, this could be sent as a streaming event over an Event-Driven-Architecture, for example by using a Chronicle Queue. Then to read these streaming events, we can use a MethodReader.
 
 ```
 MethodReader reader = wire.methodReader((Routing) destinationMap::get);
 ```
-
 
 To continuously process messages using the current thread, the code would look like this:
 
@@ -202,7 +188,6 @@ for (; ; ) {
 }
 ```
 
-
 or if we only want to run until there were no more messages to read, then the code would look like this:
 
 ```
@@ -212,7 +197,6 @@ do {
     success = reader.readOne();
 } while (success);
 ```
-
 
 Running the code outputs:
 
@@ -229,7 +213,6 @@ Sends the product to America, product=!Product {
   name: Popcorn
 }
 ```
-
 
 ### Summary
 
@@ -252,4 +235,3 @@ Then, Dispatching events with associated metadata over an event-driven architect
 "to":"websocketClient2","product":{"name":"Cheese"}
 "to":"websocketClient3","product":{"name":"Popcorn"}
 ```
-

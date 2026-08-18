@@ -24,8 +24,7 @@ Smartphones are more powerful then ever, with processors rivaling old laptops. S
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
 
-Termux
-------
+## Termux
 
 We first need a proper Linux environment with a package manager and more. The most popular app that facilitates this is [Termux](https://termux.dev/):
 > Termux is an **Android terminal emulator and Linux environment app** that works directly with no rooting or setup required. A minimal base system is installed automatically - additional packages are available using the APT package manager.
@@ -39,8 +38,7 @@ We have now two ways to go forward, we could
 2. Use an emulated Ubuntu in Termux
 3. Use the new Linux Terminal App
 
-Develop Directly in Termux
---------------------------
+## Develop Directly in Termux
 
 We start by using pure Termux, as it's [faster](https://www.reddit.com/r/termux/comments/hvzp9x/cpu_battle_termux_vs_linux_proot/) and more integrated into Android than the second approach. But we'll also see soon, why running in Ubuntu can have it's benefits.
 
@@ -51,13 +49,11 @@ apt install git zsh wget htop
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-
 Now we want to install Java. Termux lacks the [pthread library and a few others](https://github.com/termux/termux-app/issues/3261) so simply getting the Linux aarch64 built of my favourite JDK, [SapMachine](https://sapmachine.io/), running on my phone seemed too much work, so I'm using OpenJDK which already available in the Termux packages.
 
 ```bash
 apt install openjdk-21
 ```
-
 
 Now we have a proper OpenJDK JVM running on our phone:  
 
@@ -76,13 +72,11 @@ apt upgrade
 apt install build-essential python nodejs code-server
 ```
 
-
 Now just start it:
 
 ```bash
 nohup code-server --auth none &
 ```
-
 
 This launches a local version and ignores the shell output. Code-server is by default password-protected, which is great. But we don't need authentication as the device is in home WIFI where nobody from the outside can access it anyway. If for what-ever reason, you want to password protect it, then remove `--auth none` and you'll find the auto-generated password in `$PREFIX/.config/code-server/config.yaml`.
 
@@ -99,8 +93,7 @@ You can still install the Java extensions from file by downloading the latest Li
 
 This is why I looked for other possibilities.
 
-Use an Emulated Ubuntu
-----------------------
+## Use an Emulated Ubuntu
 
 The problem with trying to run the official VSCode directly in Termux is that the Termux environment is too different from a normal Linux. Using [proot](https://wiki.termux.com/wiki/PRoot) we can emulate an Ubuntu environment and use it to install VSCode ([dev.to](https://dev.to/junaid_dev/setup-official-vs-code-on-android-5a)) and even a proper SapMachine on our phone.
 
@@ -115,13 +108,11 @@ pkg install proot-distro
 proot-distro install ubuntu
 ```
 
-
 Now you can login via the following to run as root and use the Termux home folder as home:
 
 ```bash
 proot-distro login ubuntu --termux-home
 ```
-
 
 Running in this environment is, as I told you before, slower than running directly in Termux. To quote a reddit user:
 > Proot is slower. It uses Linux debugging interface (ptrace) to control the process execution and hijack arguments and return values of system calls, so it can simulate a different file system layout and user/group ids. This cause a lot overhead. In my experience the biggest performance penalty can be observed when working with a lot of files (e.g. extracting tarball).
@@ -134,7 +125,6 @@ apt install git zsh wget htop
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-
 Now we can install SapMachine as explained in the [SapMachine Wiki](https://github.com/SAP/SapMachine/wiki/Installation):
 
 ```bash
@@ -146,7 +136,6 @@ echo "deb https://dist.sapmachine.io/debian/$(dpkg --print-architecture)/ ./" | 
 apt update
 apt install sapmachine-21-jdk
 ```
-
 
 Resulting in a proper JVM:  
 
@@ -164,7 +153,6 @@ apt --fix-broken install
 rm code.deb
 ```
 
-
 Installing the missing packages to around half an hour on my Pixel 8a.
 
 Starting the VSCode backend is as easy as before with code-server:
@@ -172,7 +160,6 @@ Starting the VSCode backend is as easy as before with code-server:
 ```bash
 nohup code serve-web --port 8080 --without-connection-token &
 ```
-
 
 Now we have a proper official VSCode and can view it in the browser at [localhost:8080](8080):  
 
@@ -184,8 +171,7 @@ In this we can install all the extensions we want and can start developing appli
 
 I would recommend to use "Add to Home screen" in your browser menu to create a VSCode web app on your home screen. This app then omits the browser menu bar, giving you more space to see your code.
 
-SAP CAP SFlight
----------------
+## SAP CAP SFlight
 
 Let's start running and developing our application. You can of course create any application to your hearts content and use either Termux or the emulated Ubuntu. But I'll choose the latter and as a sample application the [SAP CAP SFlight application](https://github.com/SAP-samples/cap-sflight).
 
@@ -202,8 +188,7 @@ Let's start running and developing our application. You can of course create any
 
 I'm neither a CAP nor an SAP Fiori expert, but CAP is really important in the SAP context and can be used to write Java web applications. The initial idea for this whole blog post came out-of a discussion with the CAP Java folks (Robin de Silva Jayasinghe), which is why I'm choosing SFlight.
 
-Building and Running SAP CAP SFlight
-------------------------------------
+## Building and Running SAP CAP SFlight
 
 Let's start by building SFlight on device. First we clone it:
 
@@ -215,7 +200,6 @@ cd cap-sflight
 # install the Maven build system and npm
 apt install maven npm
 ```
-
 
 For those curious, this took:
 
@@ -230,7 +214,6 @@ For those curious, this took:
 1.47s user 0.55s system 58% cpu 3.457 tota
 ```
 
-
 Now we build and run it.
 
 ```bash
@@ -238,7 +221,6 @@ npm ci # NodeJS based CAP tools
 npm run build:ui
 mvn spring-boot:run
 ```
-
 
 But the CAP tools run into a problem:  
 
@@ -266,20 +248,17 @@ git pull fork
 git checkout cap-in-the-pocket
 ```
 
-
 Now we can build and run the application again:
 
 ```bash
 mvn spring-boot:run
 ```
 
-
 It might exclaim that `JAVA_HOME` is not set correctly, this can be remedied by
 
 ```bash
 export JAVA_HOME=/usr/lib/jvm/sapmachine-21
 ```
-
 
 You might want to add this to your `.zshrc` to make it permament.
 
@@ -303,8 +282,7 @@ Leading you to:
  <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_55_39-PM-1-900x2000.png" alt="" class="wp-image-2118" style="width:300px">
 </figure>
 
-Modifying the Application via VSCode
-------------------------------------
+## Modifying the Application via VSCode
 
 We can use the VSCode instance that we launched before to access our SFlight project (`nohup code serve-web --port 8080 --without-connection-token &` to start it again if you stopped yours) and work with the code:
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_27_10-PM-2000x900.png)
@@ -324,7 +302,6 @@ BigDecimal deductedTotalPrice = travel.totalPrice()
         .subtract(travel.totalPrice().multiply(discount));
 ```
 
-
 We can now introduce the bug by dividing `context.percent()` in the first two lines not by 100, but by 10.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
 
@@ -336,8 +313,7 @@ Decreases the price to 0 USD:
 
 Nothing prevents us from using git to commit our change to some repo. This shows how we can easily modify our CAP/Spring-Boot application locally on our phone.
 
-Android Linux Terminal
-----------------------
+## Android Linux Terminal
 
 In March Google [launched](https://www.androidpolice.com/android-15-linux-terminal-app/?ref=news.itsfoss.com) the native Linux Terminal app for Android on Google Pixel devices. Luckily the Android phone I use for all these tests is Pixel 8a which is one of the supported devices. The app offers essentially the same experience as the emulated Ubuntu in Termux:
 > The Terminal app operates by launching a Debian Linux environment within a virtual machine, powered by Android's Virtualization Framework (AVF). Rather than exposing the underlying Android file system, it gives you an isolated Linux shell---much like what ChromeOS has offered developers and enthusiasts for years.
@@ -373,7 +349,6 @@ apt install sapmachine-21-jdk
 exit # exit root
 ```
 
-
 And of course you should set `JAVA_HOME` as before to prevent maven from complaining later.
 
 We now have a SapMachine:  
@@ -393,7 +368,6 @@ sudo apt install ./code.deb
 sudo apt --fix-broken install
 rm code.deb
 ```
-
 
 During the installation I got asked whether I want to add the Microsoft apt repository, having this prompt on my phone just looks funny:  
 
@@ -422,7 +396,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install 22
 ```
 
-
 Now we can run the commands as before:
 
 ```bash
@@ -440,7 +413,6 @@ npm run build:ui
 mvn spring-boot:run
 ```
 
-
 And well, it worked... Which I find surprising. The UI of the new Linux Terminal App might be lacking and the partition size limit might be limiting, but I can build and run the stock CAP SFlight application without any changes.
 
 Well it worked till I opened the browser and then the Linux Terminal App crashed. I'm happy that I documented everything. I tried it two times more. But this means that despite it's apparent benefits, it's basically unusuable for this specific use case for now.  
@@ -453,8 +425,7 @@ Hopefully I can revisit this in a few months and it's fixed.
 
 **Update:** This terminal works much better with Android 16. It's still flaky, but it can run a proper CAP build-pipeline and VSCode without any issues.
 
-Extra: CAP-in-the-Pocket VSCode Extension
------------------------------------------
+## Extra: CAP-in-the-Pocket VSCode Extension
 
 Switching between VSCode for editing and the shell for killing the previous SFlight server instance is too cumbersome for my demo. So I created the [CAP-in-the-Pocket](https://github.com/parttimenerd/cap-in-the-pocket-extension) extension for VSCode:  
 
@@ -473,7 +444,6 @@ The "(Re)Launch CAP App" button tries to kill the previous running instance and 
 mvn spring-boot:run
 ```
 
-
 *Did I say this extension is highly experimental?*
 
 Below the button, you see the output of the commands and links to the CAP application. By default I show buttons that open the two main views of SFlight. But you can configure it via the `settings.json` file. The default configuration is equivalent to:
@@ -491,21 +461,17 @@ Below the button, you see the output of the commands and links to the CAP applic
 ]
 ```
 
-
 Creating this little plugin (with the help of Claude Sonnet and GitHub Copilot) allows me to have a more immersive demo.
 
 Please be aware that you should only use the extension when you access VSCode in the normal browser, as opening links in the web-app added to the home-screen doesn't work properly.
 
-Conclusion
-----------
+## Conclusion
 
 In this blog post, I showed you how to install and use VSCode and Java on your Android phone and develop applications, using three different options. Of course there a cloud-offerings that allow you to develop applications from mobile devices too, but I like the simplicity of running the web application directly on your phone, with full control. All of this is possible because Android phones use Linux as their base level operating system.
 
 You could go even further and use the [newly introduced Android Desktop Mode](https://www.androidauthority.com/android-desktop-mode-leak-3550321/) with an external screen, connect a keyboard and a mouse to your device and you come close to a basic Linux computer. And if you use the phone directly, you have a laptop with really good battery life, albeit not the best performance. It probably won't become my daily Linux driver but to do coding when I'm on the go.
 
 Thank you for joining me on this journey to learn how to develop your web applications on your phone.
-
-<br />
 
 P.S.: I tried compiling the OpenJDK on my phone but Termux killed the process and the Linux Terminal App ran out of disk memory.
 

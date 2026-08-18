@@ -34,13 +34,9 @@ Of course, I don't want to lock customers into JDK maintenance contracts; for ba
 
 Besides all these good reasons, I also want to be faster at creating front-ends and creating nice user interfaces is easier than with Java Swing, I think:
 
-<br />
-
 <https://foojay.io/wp-content/uploads/2022/12/FinalLoginFromSpace.mp4>
 
 *A good reason to use JavaFX: FX and nice GUIs can be created fast!*   
-
-<br />
 
 My front-end applications are based on other Maven projects whose builds I install in my local Maven repository.
 
@@ -52,8 +48,7 @@ There may also be other stumbling blocks encountered when trying to create modul
 
 I know I could probably solve everything properly by excluding certain JARs from the Maven dependencies and going through each one, but at the end of the day I just don't want to spend time doing that, so I decided to create two Gradle build scripts that apply to modular and non-modular projects.  
 
-Modular
--------
+## Modular
 
 First, let's have a look at the modular version of the build-script `build.gradle`; see comments for explanations:  
 
@@ -226,11 +221,7 @@ jpackage {
 }
 ```
 
-
-<br />
-
-Non-Modular
------------
+## Non-Modular
 
 When it comes to building non-modular JavaFX applications, we use the "The Badass Runtime Plugin" instead the "The Badass JLink Plugin" from Serban Iordache.
 
@@ -424,11 +415,7 @@ jpackage {
 }
 ```
 
-
-<br />
-
-Does it work?
--------------
+## Does it work?
 
 Yes it does, and it works on all platforms!
 
@@ -436,8 +423,7 @@ I'm pretty sure there are still things "under the lid" in the build scripts that
 
 The day is saved, you might want to use these scripts as templates! Enjoy 💫  
 
-References
-----------
+## References
 
 Some more references to this article:
 

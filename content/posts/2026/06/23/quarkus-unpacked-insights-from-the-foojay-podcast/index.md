@@ -42,15 +42,13 @@ If you have been following this blog series, note that the third installment on 
 
 {{< youtube _nJCTTrnZkE >}}
 
-What is Quarkus?
-----------------
+## What is Quarkus?
 
 Quarkus is a cloud-native Java framework for any cloud, hyperscalers included, that combines efficiency and cost savings with a great developer experience. It features innovations such as Dev Mode and Continuous Testing, while it keeps the enterprise stability that Java is known for.
 
 Quarkus is designed for cloud-native Java developers who need quick cold starts, high-density deployments, and an efficient workflow with live reload. At the same time, it keeps standard APIs and offers the option of running on the JVM or in native mode.
 
-How does Quarkus compare to Spring, Micronaut, or other frameworks?
--------------------------------------------------------------------
+## How does Quarkus compare to Spring, Micronaut, or other frameworks?
 
 Broadly speaking, Quarkus, Spring Boot, and Micronaut all serve the enterprise market, but Quarkus stands out for its focus on cloud-native defaults. While Spring Boot has traditionally relied on runtime reflection and classpath scanning, it has been adding AOT processing support in recent versions. Quarkus, by contrast, was designed from the start around build-time processing and native compilation with GraalVM, which results in faster startup times and reduced memory usage.
 
@@ -58,22 +56,19 @@ From a day-to-day perspective, Quarkus also enhances the developer experience wi
 
 On top of that, Quarkus integrates both imperative and reactive models by using Eclipse Vert.x, and it still adheres to solid standards like MicroProfile and Jakarta EE.
 
-Is Quarkus more modern because it is newer?
--------------------------------------------
+## Is Quarkus more modern because it is newer?
 
 Quarkus is newer than many established Java frameworks, but "newer" does not automatically mean "more modern." In practice, its design avoids legacy constraints and stays away from older patterns that do not fit cloud-native deployments. Instead, Quarkus focuses on build-time processing and a streamlined developer loop.
 
 It also applies lessons from earlier frameworks, and you can see that in its efficient extension model and configuration. Quarkus feels more modern not just because it is newer, but because it embraces cloud paradigms at a fundamental level.
 
-Does Quarkus replace the JVM?
------------------------------
+## Does Quarkus replace the JVM?
 
 No, it does not replace the JVM. In JVM mode, Quarkus runs on the JVM like other Java frameworks, while leveraging its GraalVM integration. In native mode, Quarkus compiles the application into a native executable, so the JVM is not required at runtime. In this context, "runtime" refers to the execution stack that boots the application and integrates the frameworks, configuration, and runtime services the application relies on.
 
 In other words, Quarkus works as an intelligent layer that manages the application lifecycle, whether it runs on a standard OpenJDK or as a native binary.
 
-What is Quarkus live reload?
-----------------------------
+## What is Quarkus live reload?
 
 Live reload is a core, game-changing feature. In Quarkus Dev Mode, live reload applies code, configuration, and resource changes while the application runs, so you see results right away without a rebuild or restart. It removes the slow turnaround that people often associate with Java and brings more of a scripting-style workflow to enterprise Java development.
 
@@ -83,8 +78,7 @@ Continuous Testing runs relevant tests in the background as soon as you save a f
 
 More recently, Quarkus introduced Dev MCP (Model Context Protocol), which lets local AI-coding agents connect to the running application so they get more context for debugging and writing code.
 
-How does build-time optimization work?
---------------------------------------
+## How does build-time optimization work?
 
 Build-time optimization is the mechanism by which Quarkus shifts costly startup procedures, like scanning classes for annotations, parsing configuration files, and building application metamodels, to the build phase.  
 
@@ -108,8 +102,7 @@ With JIT, the JVM optimizes hot code paths into machine code while the applicati
 
 With AOT work like Project Leyden, the goal is to shift general JVM mechanics, such as class loading and heap archiving, to build time. Quarkus focuses on semantic framework optimization instead. It understands the frameworks you use, such as Hibernate or Camel, and resolves their wiring before the JVM even starts. That is why Quarkus can deliver these benefits today on standard OpenJDK releases, independent of Leyden's timeline and its constraints.
 
-What are the other key advantages?
-----------------------------------
+## What are the other key advantages?
 
 Here we can talk about how Quarkus connects a productive developer workflow with operational requirements in production.
 
@@ -135,8 +128,7 @@ Here we can talk about how Quarkus connects a productive developer workflow with
 
 Quarkus has the Quarkiverse ecosystem, a community extension catalog that provides a large set of extensions connecting Quarkus to common Java libraries and platforms. The [Quarkus extensions catalog](https://quarkus.io/extensions/) lists a large and growing number of extensions, including community contributions from the Quarkiverse.
 
-JVM mode versus native mode
----------------------------
+## JVM mode versus native mode
 
 JVM mode is, or should be, the first choice for most teams. Quarkus on the JVM already improves startup time and memory efficiency compared to traditional stacks, without changing the runtime. Native compilation is a specialized tool for specific requirements, such as very fast startup and very tight resource limits, for example, running a full stack with under 100 megabytes of RAM.
 
@@ -144,8 +136,7 @@ At the same time, it is not accurate to say native mode cannot handle long-runni
 
 There are also other AOT approaches, such as snapshotting, which capture a prepared process image and restore it quickly, including work in Project Leyden and AWS Lambda SnapStart. These approaches improve startup time close to native, but they do not deliver the same memory reduction. In practice, the JVM often delivers the best peak throughput for compute-heavy workloads, while native delivers better density and memory efficiency in constrained environments.
 
-How can Quarkus help reduce cloud costs?
-----------------------------------------
+## How can Quarkus help reduce cloud costs?
 
 Quarkus reduces cloud spend through resource density and elasticity.
 
@@ -155,8 +146,7 @@ To make that concrete, you can often run a Quarkus service in JVM mode on smalle
 
 Then there is the serverless angle. When startup time is low, the cold-start penalty gets smaller, so teams can scale to zero more aggressively. That reduces payments for idle capacity, because you pay mainly when the service actually runs.
 
-Are Vert.x and Virtual Threads complementary or competitive?
-------------------------------------------------------------
+## Are Vert.x and Virtual Threads complementary or competitive?
 
 They are highly complementary, not competitive. Virtual Threads solve the concurrency problem: they allow you to write simple, blocking-style code that can handle massive concurrency with very little memory. However, Virtual Threads do not solve the I/O problem. You still need a high-performance non-blocking layer to actually move bytes in and out of the network efficiently.
 
@@ -164,8 +154,7 @@ Vert.x provides that foundation. It acts as the underlying I/O engine for Quarku
 
 The result: you get the developer experience of blocking code with the runtime performance of a reactive stack.
 
-Conclusion
-----------
+## Conclusion
 
 This post captures the essence of the Foojay podcast conversation. Quarkus brings together build-time optimization, a productive developer loop, and cloud-native operational characteristics in a single framework. Whether you start with JVM mode for its throughput and diagnostics or reach for native mode when density and startup latency matter most, Quarkus adapts to the workload.
 

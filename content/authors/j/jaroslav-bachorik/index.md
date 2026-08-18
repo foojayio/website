@@ -13,3 +13,4 @@ aliases:
   - "/today/author/jaroslav-bachorik/"
 frozen: false
 ---
+

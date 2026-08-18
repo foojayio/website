@@ -38,15 +38,13 @@ I discuss this post in [this video](https://youtu.be/Qi7S98HNhYY).
 
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers this subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/).
 
-**Understanding Front-End Logging vs. Back-End Logging**
---------------------------------------------------------
+## **Understanding Front-End Logging vs. Back-End Logging**
 
 Front-end logging differs significantly from back-end logging, and understanding this distinction is crucial. Unlike back-end systems, where persistent logs are vital for monitoring and debugging, the fluid nature of front-end development introduces different challenges. When debugging backends I'd often go for tracepoints which are far superior in that setting. However the front-end with its constant need to refresh, reload, contexts switch etc. is a very different beast. In the front-end relying heavily on elaborate logging mechanisms can become cumbersome.
 
 While tracepoints remain superior to basic print statements, the continuous testing and browser reloading in front-end workflows lessen their advantage. Moreover, features like logging to a file or structured ingestion are rarely useful in the browser, diminishing the need for a comprehensive logging framework. However, using a logger is still considered best practice over the typical `Console.log` for long term logging... For short term logging `Console.log` has some tricks up its sleeve.
 
-**Leveraging Console Log Levels**
----------------------------------
+## **Leveraging Console Log Levels**
 
 One of the hidden gems of the browser console is its support for log levels, which is a significant step up from rudimentary print statements. The console provides five levels:
 
@@ -64,8 +62,7 @@ While log and debug can be indistinguishable, these levels allow for a more orga
 
 ![Log Levels](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jma0r3v5y0pfqbiipmdd.png)
 
-**Customizing Console Output with CSS**
----------------------------------------
+## **Customizing Console Output with CSS**
 
 Front-end development allows for creative solutions, and logging is no exception. Using CSS styles in the console can make logs more visually distinct. By utilizing `%c` in a console message, you can apply custom CSS:
 
@@ -80,13 +77,11 @@ This approach is helpful when you need to make specific logs stand out or organi
 
 ![CSS Styling](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h2lr6p4dj2t67lyqt37y.png)
 
-**Stack Tracing with console.trace()**
---------------------------------------
+## **Stack Tracing with console.trace()**
 
 The `console.trace()` method can print a stack trace at a particular location, which can sometimes be helpful for understanding the flow of your code. However, due to JavaScript's asynchronous behavior, stack traces aren't always as straightforward as in back-end debugging. Still, in specific scenarios, such as synchronous code segments or event handling, it can be quite valuable.
 
-**Assertions for Design-by-Contract**
--------------------------------------
+## **Assertions for Design-by-Contract**
 
 Assertions in front-end code allow developers to enforce expectations and promote a "fail-fast" mentality. Using `Console.assert()`, you can test conditions:
 
@@ -98,8 +93,7 @@ In the browser, a failed assertion appears as an error, similar to console.error
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/py7ikkhsp14yr95g3ptp.png)
 
-**Printing Tables for Clearer Data Visualization**
---------------------------------------------------
+## **Printing Tables for Clearer Data Visualization**
 
 When working with arrays or objects, displaying data as tables can significantly enhance readability. The console.table() method allows you to output structured data easily:
 
@@ -111,20 +105,17 @@ This method is especially handy when debugging arrays of objects, presenting a c
 
 ![Tables](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n5ki2d0rsggehjtq2ans.png)
 
-**Copying Objects to the Clipboard**
-------------------------------------
+## **Copying Objects to the Clipboard**
 
 Debugging often involves inspecting objects, and the `copy(object)` method allows you to copy an object's content to the clipboard for external use. This feature is useful when you need to transfer data or analyze it outside the browser.
 
-**Inspecting with console.dir() and dirxml()**
-----------------------------------------------
+## **Inspecting with console.dir() and dirxml()**
 
 The `console.dir()` method provides a more detailed view of objects, showing their properties as you'd see in a debugger. This is particularly helpful for inspecting DOM elements or exploring API responses. Meanwhile, `console.dirxml()` allows you to view objects as XML, which can be useful when debugging HTML structures.
 
 ![Console Dir](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pkdbguve69cnlocorjqm.png)
 
-**Counting Function Calls**
----------------------------
+## **Counting Function Calls**
 
 Keeping track of how often a function is called or a code block is executed can be crucial. The `console.count()` method tracks the number of times it's invoked, helping you verify that functions are called as expected:
 
@@ -138,8 +129,7 @@ You can reset the counter using `console.countReset()`. This simple tool can hel
 
 ![Count Function Calls](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jehd0jyc638vmmw8e6sn.png)
 
-**Organizing Logs with Groups**
--------------------------------
+## **Organizing Logs with Groups**
 
 To prevent log clutter, use console groups to organize related messages. `console.group()` starts a collapsible log section, and `console.groupEnd()` closes it:
 
@@ -154,8 +144,7 @@ Grouping makes it easier to navigate complex logs and keeps your console clean.
 
 ![Grouping](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1466uy16dzgwwxoahnna.png)
 
-**Chrome-Specific Debugging Features**
---------------------------------------
+## **Chrome-Specific Debugging Features**
 
 **Monitoring Functions** : Chrome's `monitor()` method logs every call to a function, showing the arguments and enabling a method-tracing experience.
 
@@ -169,8 +158,7 @@ Grouping makes it easier to navigate complex logs and keeps your console clean.
 
 ![Query Object Instance](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/alfl1l1zy3zxzs8pfjih.png)
 
-**Final Word**
---------------
+## **Final Word**
 
 Front-end debugging tools have come a long way. These tools provide a rich set of features that go far beyond simple `console.log()` statements. From log levels and CSS styling to assertions and event monitoring, mastering these techniques can transform your debugging workflow.
 

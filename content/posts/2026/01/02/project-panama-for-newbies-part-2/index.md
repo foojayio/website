@@ -26,8 +26,7 @@ frozen: false
  <img fetchpriority="high" decoding="async" width="218" height="407" src="panama_part2.png" alt="" class="wp-image-46434" style="width:140px;height:261px">
 </figure>
 
-Introduction
-------------
+## Introduction
 
 Welcome back to Part 2 of Project Panama for Newbies! If you are new to this series, check out [Part 1](https://foojay.io/today/project-panama-for-newbies-part-1/) first.
 
@@ -37,8 +36,7 @@ In Part 2, below, we will look at C language's concept of **pointers** and **str
 
 For the impatient, check out the source code of [Part 2](https://github.com/carldea/panama4newbies/tree/main/part02) on GitHub.
 
-What is a C pointer?
---------------------
+## What is a C pointer?
 
 Pointers explained according to the *C Programming Language* book by Brian W. Kernighan \& Dennis M. Ritchie:
 > C supports the use of pointers, **a type of reference that records the address or location of an object or function in memory**. Pointers can be dereferenced to access data stored at the address pointed to, or to invoke a pointed-to function. Pointers can be manipulated using assignment or pointer arithmetic.
@@ -58,7 +56,6 @@ public static int doubleIt(int a) {
    return 2 * a;
 }
 ```
-
 
 In the Java language, there are two places to store *things* in memory, in the JVM **heap** and in the JVM **stack** . The heap is responsible for holding **objects** along with their primitive values. While inside a method the variables declared as primitive data types are stored in **stack** memory.
 
@@ -102,20 +99,17 @@ int doubleIt(int *a) {
 }
 ```
 
-
 To compile `pointers.c` file use the following:
 
 ```bash
 $ clang -o pointers_exe pointers.c
 ```
 
-
 To run the executable file type the following:
 
 ```bash
 $ ./pointers_exe
 ```
-
 
 The output is the following:
 
@@ -125,7 +119,6 @@ The output is the following:
                Address of the variable x. Call doubleIt(): 10
 Pointer to the address of the variable x. Call doubleIt(): 10
 ```
-
 
 In the example a you will notice the output showing the actual address in memory for `&x` and `ptr`. The last two output lines show how to pass parameters to C functions **by reference** as opposed to **by value**.
 
@@ -151,8 +144,7 @@ To keep confusion to a minimum keep the following in mind:
 
 Now that we know how to talk to a C function that accepts a variable by reference let's look at how to perform this in Panama.
 
-C Pointers Panama-fied
-----------------------
+## C Pointers Panama-fied
 
 Whenever you think of a C pointer think of it as just an **address** location in memory, that stores data (in bytes). Since Pointers point to data in memory, how do you know how much data to retrieve?   
 **Answer:** `MemoryLayout` and `ValueLayout`s
@@ -167,7 +159,6 @@ try (var arena = Arena.ofConfined()) {
    long address = x.address();
 }
 ```
-
 
 ### Dereferencing a Pointer
 
@@ -191,7 +182,6 @@ int value = x.get(C_INT, 0L);
 
 // value = 5
 ```
-
 
 Let's piece things all together.
 
@@ -227,7 +217,6 @@ try (var arena = Arena.ofConfined()) {
 }
 ```
 
-
 The output of listing above:
 
 ```
@@ -238,7 +227,6 @@ The output of listing above:
  ptr's value = 10    address = 7fedece135e0
 ```
 
-
 In Java there is no notion of a C pointer but simply thought of as a 64 bit memory address (modern hardware). To obtain the address and value at a specified memory location you will call the `ofAddress(long)` and `reinterpret(byte size)` to generate a `MemorySegement` object.
 
 `MemorySegment.ofAddress(ptr).reinterpret(4);`
@@ -247,8 +235,7 @@ To display the long representing the address in memory in hexadecimal we use the
 
 Now that you know how to deal with pointers to primitive types let's look at complex datatypes better known as C's concept of **structs**.
 
-What is a C struct?
--------------------
+## What is a C struct?
 
 To put it simply, this is the ancestor to Java's concept of classes or [records](https://foojay.io/today/records/). If you would like to go deeper into a detailed explanation such as the history of C structs, etc... head over to [Wikipedia](https://en.wikipedia.org/wiki/Struct_(C_programming_language)).
 
@@ -270,13 +257,11 @@ int main () {
 }
 ```
 
-
 The output is the following:
 
 ```
 Point pt = (100, 50)
 ```
-
 
 In the above example you will notice the keyword `struct` is used to define complex datatypes. In this scenario a Point is defined as two `int` variables named `x` and `y`. To declare a variable of type point the keyword is also specified or prefixed i.e. `struct Point pt;`.
 
@@ -287,11 +272,9 @@ pt.x = 100;
 pt.y = 50;
 ```
 
-
 An interesting thing to note that in C there isn't the keyword "`new`" like in Java. Actually, in C++ it introduces the keyword `new`.
 
-C Structs Panama-fied
----------------------
+## C Structs Panama-fied
 
 Now that we know how things work in the C world, let's look at how to mimic C's concept of structs in Java Panama. To create C language's `struct` using Panama, we'll be invoking the static method `MemoryLayout.structLayout()`. This method creates an object of type `GroupLayout`. A `GroupLayout` object will describe a memory layout similar to the `Point` struct defined in C above. The method accepts `ValueLayout` and other `MemoryLayout` instances such as `C_INT` variables used for `x` and `y` coordinates of the `Point` struct. Shown below is how to create one C `Point` struct.
 
@@ -303,7 +286,6 @@ GroupLayout pointStruct = MemoryLayout.structLayout(
 
 var cPoint = arena.allocate(pointStruct);
 ```
-
 
 Next, we need to **set** and **get** values from the `cPoint` instance. Below we use the method `varHandle()` to describe the path to the bytes in memory. I will describe it in more detail later, but for now think of it as a way to walk through memory to set and get data based on a memory layout.
 
@@ -317,16 +299,13 @@ VHy.set(cPoint, 0L, 200);
 System.out.printf("cPoint = (%d, %d) \n",  VHx.get(cPoint, 0L), VHy.get(cPoint, 0L));
 ```
 
-
 This will output the following:
 
 ```
 cPoint = (100, 200)
 ```
 
-
-What's a java.lang.invoke.[VarHandle](https://openjdk.java.net/jeps/193)?
--------------------------------------------------------------------------
+## What's a java.lang.invoke.[VarHandle](https://openjdk.java.net/jeps/193)?
 
 According to the Javadoc documentation:
 > A `VarHandle` is a dynamically strongly typed reference to a variable, or to a parametrically-defined family of variables, including static fields, non-static fields, array elements, or components of an off-heap data structure. Access to such variables is supported under various *access modes*, including plain read/write access, volatile read/write access, and compare-and-set.
@@ -340,8 +319,7 @@ Important Note: the API to get and set values in structs or sequence are enhance
 
 Getting back to structs, Let's learn how to create a sequence of them!
 
-Sequence of Structs
--------------------
+## Sequence of Structs
 
 Before we look at how to create an array of structs let's look at how to define them in C. Below is a sequence or an array of 5 `Point` `struct`s. The array variable is named `points`.
 
@@ -351,7 +329,6 @@ struct Point {
   int y;
 } points[5];
 ```
-
 
 To iterate over an array of structs in C code the following code sets and gets data.
 
@@ -368,7 +345,6 @@ for (int i=0; i<5; i++) {
 }
 ```
 
-
 Output is the following:
 
 ```
@@ -380,7 +356,6 @@ Point pt = (103, 203)
 Point pt = (104, 204)
 ```
 
-
 Now that you know how to declare, create and access an array of structs in C, let's look at how to create a sequence of struct instances in Java Panama. To create a sequence of structs in Panama you will need the handy method `MemoryLayout.sequenceLayout()`.
 
 Again, these methods help you create `MemoryLayout` objects responsible for describing how space should be allocated in memory. The code snipet below creates a memory layout (`SequenceLayout`) ready for the allocator.
@@ -389,13 +364,11 @@ Again, these methods help you create `MemoryLayout` objects responsible for desc
 SequenceLayout seqStruct = MemoryLayout.sequenceLayout(5, pointStruct);
 ```
 
-
 The `seqStruct` describes a memory layout as a sequence of 5 Point structs. Notice that the code reuses the already defined `pointStruct` instance defined earlier (of type `GroupLayout`). Now, let's allocate the space in memory.
 
 ```java
 MemorySegment points = arena.allocate(seqStruct);
 ```
-
 
 Similar to using `VarHandle` and `PathElement`s to access variables in memory (getters/setters) the code below creates a `VarHandle` instance that is able to access the sequence of structs and their x and y fields in memory:
 
@@ -408,7 +381,6 @@ var VHSeq_y = seqStruct.varHandle(
                 MemoryLayout.PathElement.groupElement("y"));
 ```
 
-
 Now we can iterate through the sequence to set point instances and their x and y coordinates. The code listing below uses a random number generator to supply values to be set for coordinates `(x, y)`.
 
 ```java
@@ -418,7 +390,6 @@ for(long i=0; i<seqStruct.elementCount().getAsLong(); i++) {
   VHSeq_y.set(points, 0L, i, random.nextInt(100));
 }
 ```
-
 
 Above you'll notice the call to `seqStruct.elementCount().getAsLong()`. This allows you to obtain the number of items in the sequence of structs (`SequenceLayout`).
 
@@ -430,7 +401,6 @@ for(long i=0; i<seqStruct.elementCount().getAsLong(); i++) {
 }
 ```
 
-
 The output is the following:
 
 ```
@@ -441,11 +411,9 @@ The output is the following:
  points[4] = (55,  12)
 ```
 
-
 There you have it, C pointers and C structs in Java!
 
-Conclusion
-----------
+## Conclusion
 
 In Part 2, above, we got a chance to create (mimic) C's concept of pointers.
 

@@ -19,12 +19,9 @@ enlighterjs: true
 frozen: false
 ---
 
-The Motivation: Why Another AWS Emulator?
------------------------------------------
+## The Motivation: Why Another AWS Emulator?
 
 ![](perf-chart-light-700x394.png)
-
-<br />
 
 As Java developers, we are used to local-first development. Tools that emulate the cloud environment have become essential for keeping feedback loops tight and costs at zero. However, the ecosystem has shifted. Many of us have felt the friction of:
 
@@ -34,8 +31,7 @@ As Java developers, we are used to local-first development. Tools that emulate t
 
 I created Floci (from the floccus cloud formation) to solve these specific pain points. It is a 100% open-source, MIT-licensed alternative designed for speed, privacy, and simplicity.
 
-Technical Edge: Built with Java and GraalVM
--------------------------------------------
+## Technical Edge: Built with Java and GraalVM
 
 Floci isn't just another wrapper. It is built using a modern Java stack (leveraging JAX-RS and Quarkus, Vert.x) and is compiled into a native binary using GraalVM. This technical choice provides several benefits that are immediately noticeable:
 
@@ -62,8 +58,7 @@ Floci is built on the principle of Zero Friction.
 * **No Auth Gates:** There are no API keys, no telemetry, and no accounts required.
 * **Drop-in Compatibility:** It works seamlessly with the standard AWS SDKs and CLI.
 
-Feature Coverage
-----------------
+## Feature Coverage
 
 Despite its small size, Floci is powerful. It currently supports over 25 AWS services, including:
 
@@ -73,15 +68,13 @@ Despite its small size, Floci is powerful. It currently supports over 25 AWS ser
 
 It has been rigorously tested, passing over [400+ AWS SDK](https://github.com/hectorvent/floci-compatibility-tests) tests to ensure that your local code behaves exactly as it will in production.
 
-Getting Started
----------------
+## Getting Started
 
 You can start Floci with a single Docker command:
 
 ```
 docker run -p 4566:4566 hectorvent/floci
 ```
-
 
 Or via docker-compose.yml:
 
@@ -93,11 +86,9 @@ services:
       - "4566:4566"
 ```
 
-
 Full documentation [here](https://hectorvent.dev/floci/)
 
-Join the Floci Community
-------------------------
+## Join the Floci Community
 
 Floci is 100% open-source and community-driven. Whether you want to contribute code, report a bug, or suggest a new service implementation, your input is welcome.
 

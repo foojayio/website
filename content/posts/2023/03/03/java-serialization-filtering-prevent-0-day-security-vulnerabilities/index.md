@@ -28,8 +28,6 @@ Fast forward a couple of decades and today when most developers discuss serializ
 
 {{< youtube xLXFhRLkxLc >}}
 
-<br />
-
 In fact, just after I created [this video](https://www.youtube.com/watch?v=xLXFhRLkxLc), a new [deserialization vulnerability in SnakeYaml](https://snyk.io/blog/unsafe-deserialization-snakeyaml-java-cve-2022-1471/) was exposed. Serialization is one of the biggest security problems in many programming languages, it isn't just a JVM problem. Hackers can use tools designed to deliver a serialization exploit chain.
 
 You can then generate a gadget used to deliver the exploit without too much knowledge of the system. That is scary stuff...
@@ -38,15 +36,13 @@ I'm not a security expert, I care more about the solution. How do we make sure t
 
 How do we harden our server code against serialization attacks?
 
-Do we need Serialization?
--------------------------
+## Do we need Serialization?
 
 We rarely need serialization. Ideally, if you can remove serialization entirely from your code and can avoid 3rd party code that uses serialization, you can just block it completely. This will mean that even if a zero-day comes up, the serialization portion will fail. You might have a bug, but it won't be an exploitable vulnerability.
 
 Sometimes we need a bit of serialization. In that case, we can include only the well-known classes needed and block everything else out.
 
-JEP 290: Serialization Filtering
---------------------------------
+## JEP 290: Serialization Filtering
 
 The solution came in Java 9 in the form of serialization filtering as part of JEP 290. There are critical patch updates for older JDKs such as JDK 8u121. So if you must stay in an older version it's still possible to use this feature.
 
@@ -54,8 +50,7 @@ It is possible to use this feature with no code changes, although we might want 
 
 A cache might serialize objects to synchronize them between nodes over the network. We might miss that dependency when running tests locally, but fail in production. In those cases, you can follow the strategies listed below to solve the problems.
 
-Whitelist vs. Blacklist
------------------------
+## Whitelist vs. Blacklist
 
 There are two approaches we can take when filtering specific serializable objects:
 
@@ -70,7 +65,6 @@ We can set the filter on the JDK itself by editing the [java.security](http://ja
 java “-Djdk.serialFilter=!*” -jar MyJar.jar
 ```
 
-
 This command will block all serialization. Notice I need to use the quotes to prevent bash from expanding the star sign. The exclamation point means we wish to block and the star means we block everything.
 
 The following code is a blacklist. We're blocking a specific package. We can also narrow it down to a specific class. But as I said before, this isn't ideal:
@@ -78,7 +72,6 @@ The following code is a blacklist. We're blocking a specific package. We can als
 ```
 java “-Djdk.serialFilter=!mypackage.*” -jar MyJar.jar
 ```
-
 
 Besides the inherent problems with the blacklist, a major problem is knowing what to block. There are obvious targets like classes that have been vulnerable in the past e.g.:
 
@@ -96,9 +89,7 @@ Finally, we have a whitelist where we allow the classes under the package `mypac
 java “-Djdk.serialFilter=mypackage.*;!*” -jar MyJar.jar
 ```
 
-
-What about Complexity?
-----------------------
+## What about Complexity?
 
 How do you know which classes are serialized in the code? How do you get an alert if your code blocked a serialization attempt? This might be something you would want to track since it might be the system breaking or it might be an attempted hack. Both are valid reasons for an alert. You can't do that declaratively but you can write code that can use sophisticated logic to determine whether serialization should succeed.
 
@@ -108,9 +99,7 @@ This is a sample from the Oracle documentation of a simple serialization filter.
 ObjectInputFilter.Config.setSerialFilter(info -> info.depth() > 10 ? Status.REJECTED : Status.UNDECIDED);
 ```
 
-
-TL;DR
------
+## TL;DR
 
 You should always use serialization filtering when running a JVM deployment. This should always be the case.
 

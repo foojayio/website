@@ -27,8 +27,7 @@ The previous articles of this series were dedicated to frameworks that adopted t
 3. [The state of JVM desktop frameworks: SWT](https://blog.frankel.ch/state-jvm-desktop-frameworks/3/)
 4. [The state of JVM desktop frameworks: TornadoFX](https://blog.frankel.ch/state-jvm-desktop-frameworks/4/)
 
-Getting your feet wet
----------------------
+## Getting your feet wet
 
 Originally, Jetpack Compose is a framework for the Android runtime. Compose for Desktop is its port to the .
 
@@ -44,7 +43,6 @@ fun main() = Window {
 }
 ```
 
-
 1. `TextField` is not a call to a constructor but the invocation of a function
 
 The source code does indeed dispel any potential misunderstanding:
@@ -57,9 +55,7 @@ fun TextField(
 )
 ```
 
-
-State hoisting
---------------
+## State hoisting
 
 To remove the state from the component is known as *state hoisting*.
 
@@ -81,7 +77,6 @@ fun main() = Window {                                               // 1
   }
 }
 ```
-
 
 This deserves some explanation:
 
@@ -114,13 +109,11 @@ fun main() = Window {
 }
 ```
 
-
 1. First value field
 2. Second value field
 3. Whenever `first` or `second` value changes, `sum` is re-computed
 
-Your own Compose component
---------------------------
+## Your own Compose component
 
 Creating your own Compose component is as easy as implementing a function and annotating it with `@Composable`.
 > Composable can be applied to a function or lambda to indicate that the function/lambda can be used as part of a composition to describe a transformation from application data into a tree or hierarchy.
@@ -147,7 +140,6 @@ fun main() = Window {
 }
 ```
 
-
 1. Look, ma, a new custom component!
 
 Annotating a component with `@Composable` has an important consequence: it changes the signature of the function in the *bytecode*. In this, it's similar to coroutines.
@@ -161,13 +153,11 @@ public static final void IntField(
 );
 ```
 
-
 Note the additional `Composer` parameter. This is where the magic of Compose lies.
 
 While the compiler itself handles coroutines, Compose needs a dedicated compiler plugin to achieve the same result.
 
-The Compose loop
-----------------
+## The Compose loop
 
 So far, we have focused the post on how to develop with Compose. We avoided how Compose works. Still, I believe that developing with Compose is so different from working with other frameworks that it deserves a section.
 
@@ -181,8 +171,7 @@ Interestingly enough, Compose for Desktop relies on a GUI class that inherits fr
 
 ![compose window class diagram](compose-window-class-diagram.png)
 
-Remembering state
------------------
+## Remembering state
 
 Now is the time to write about the `remember` function. We know that Compose invokes functions for each state change. The state is stored in variables inside those functions. Thus, when Compose invokes a function, the state *is* lost and is reset to its initial value.
 
@@ -196,8 +185,7 @@ The first `remember()` function will only run `calculation` during the initial c
 
 Overloaded functions allow passing one or more parameters. If parameters have changed since the previous composition, Compose will invoke the `calculation` function and set the state to its return value. Otherwise, it will behave as above - cache the value.
 
-Other considerations
---------------------
+## Other considerations
 
 * Alpha:First of all, note that Compose for Desktop is alpha. It's subject to change. You've been warned.
 * Gradle plugin:Because of its Android roots, the Compose plugin that does the magic of changing function signatures in the bytecode is only available in Gradle. Make your peace with this, I'm pretty sure no Maven plugin is ever going to be officially published. Unless you write one.
@@ -214,7 +202,6 @@ TextField(
 )
 ```
 
-
   With no value, Compose display text labels as placeholders. With a value or when they receive focus, it will move them just above.
 
   ![Displaying labels](text-compose.jpg)
@@ -227,8 +214,7 @@ This is the final result:
 
 ![Resulting application](result-compose.jpg)
 
-Conclusion
-----------
+## Conclusion
 
 Jetpack Compose for Desktop seems to be an interesting initiative. The framework is in its early stage. But the functional approach is original compared to all other Java desktop frameworks.
 

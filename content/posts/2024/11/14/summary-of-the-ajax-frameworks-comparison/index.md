@@ -28,8 +28,7 @@ In previous weeks, I've analyzed several libraries and frameworks that augment t
 
 In this post, I'll compare them across several axes.
 
-Analysis
---------
+## Analysis
 
 * Frontend skills:Remember that I started this series from the point of view of a backend developer. In this section, I grade how much you need to know about client technologies to complete the job.
 * Team organization:In the introduction, I hinted that the decoupling of frontend and backend teams profoundly impacted projects. Each team is fast on its own, and they can parallelize their work, but integrating the two can double the initial development time. Here, I grade how easy it is to integrate frontend and backend.
@@ -45,8 +44,7 @@ For all intents and purposes, Vue.js and Alpine.js are similar; I'll refer to th
 |  Ease of styling  |                       No default; one needs to use an existing library, *e.g.*, Bootstrap or create their own                        || Vaadin comes bundled with the Lumo theme. Other themes are available in the [Vaadin Add-ons Directory](https://vaadin.com/directory)z, such as the [Parity Theme](https://vaadin.com/directory/component/parity-theme). Applying a theme is as easy as setting it as a dependency and adding an annotation.Creating a custom theme is no small potatoes, though. You can ease the task by starting from an existing one and changing it bit by bit. Vaadin, the company, also provides custom themes for a fee. |
 |-------------------|--------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-Time to choose
---------------
+## Time to choose
 
 If you are still unsure how to proceed, here are my recommendations.
 
@@ -63,7 +61,5 @@ If you're in none of these situations, it's time to go into more detail. Are you
 This post concludes my series on AJAX and SSR. I hope you had as much fun reading it as I did writing it.
 
 The complete source code for this post can be found on [GitHub](https://github.com/ajavageek/compare-frontends).
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/ajax-ssr/7/) on October 20^th^, 2024*

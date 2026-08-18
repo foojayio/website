@@ -26,8 +26,7 @@ I explained the concepts and theory behind Data Residency in a [previous post](h
 
 It's time to get our hands dirty and implement it in a simple demo.
 
-The sample architecture
------------------------
+## The sample architecture
 
 In the last section of the previous post, I proposed a sample architecture where location-based routing happened at two different stages:
 
@@ -58,7 +57,6 @@ INSERT INTO usa.owner VALUES ('wayne', 'us', 'John Wayne');
 INSERT INTO usa.thingy VALUES (2, 'Lasso', 'wayne');
 ```
 
-
 Finally, we develop a straightforward RESTful API to fetch thingies:
 
 * `GET /thingies/`
@@ -66,8 +64,7 @@ Finally, we develop a straightforward RESTful API to fetch thingies:
 
 Now that we have set the stage, let's check how to implement routing at the two levels.
 
-Routing on Apache ShardingSphere
---------------------------------
+## Routing on Apache ShardingSphere
 
 Apache ShardingSphere offers two approaches: as a library inside the application, ShardingSphere-JDBC, or as a full-fledged deployable component, ShardingSphere-Proxy. You can also combine both. I chose the former because it's the easiest to set up. For a comparison between them, please check [this table](https://shardingsphere.apache.org/document/5.0.0-alpha/en/user-manual/shardingsphere-proxy/#comparison).
 
@@ -81,7 +78,6 @@ The first step is to add the dependency to the POM:
 </dependency>
 ```
 
-
 ShardingSphere-JDBC acts as an indirection layer between the application and the data sources. We must configure the framework to use it. For Spring Boot, it looks like the following:
 
 ```yaml
@@ -90,7 +86,6 @@ spring:
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver     #1
     url: jdbc:shardingsphere:absolutepath:/etc/sharding.yml                      #2-3
 ```
-
 
 1. JDBC-compatible ShardingSphere driver
 2. Configuration file
@@ -129,7 +124,6 @@ rules:                                                                       #2
           algorithmClassName: ch.frankel.blog.dataresidency.LocationBasedSharding #7
 ```
 
-
 1. Define the two data sources, `europe` and `usa`
 2. Define rules. Many rules are available; we will only use sharding to split data between Europe and USA locations
 3. Sharding happens on the `country` column of the `owner` table
@@ -153,14 +147,12 @@ class LocationBasedSharding : StandardShardingAlgorithm<String> {    //1
 }
 ```
 
-
 1. Inherit from `StandardShardingAlgorithm`, where `T` is the data type of the sharding column. Here, it's `country`
 2. Based on the sharding column's value, return the name of the data source to use
 
 With all of the above, the application will fetch thingies in the relevant data source based on the owner's country.
 
-Routing on Apache APISIX
-------------------------
+## Routing on Apache APISIX
 
 We should route as early as possible to avoid an application instance in Europe fetching US data. In our case, it translates to routing at the API Gateway stage.
 
@@ -175,7 +167,6 @@ upstreams:
     nodes:
       "appusa:8080": 1
 ```
-
 
 Now, we shall define the routes where the magic happens:
 
@@ -197,7 +188,6 @@ routes:
     priority: 1                              #3
 ```
 
-
 1. Define the route to the Europe-located app
 2. APISIX matches the HTTP methods, the URI *and* conditions. Here, the condition is that the `X-Country` header has the `fr` value
 3. APISIX evaluates matching in priority order, starting with the highest priority. If the request doesn't match, *e.g.*, because the header doesn't have the set value, it evaluates the next route in the priority list.
@@ -208,8 +198,7 @@ The first request carries no header; APISIX forwards it to the default route, wh
 
 Subsequent requests set the `X-Country` header because the response to the first request carries the information, and the client has stored it. Remember that it's outside the scope of the demo. In most cases, it's set to the correct location; hence, the request will stay "in its lane". If not, the configured routing will still find the data in the appropriate location at the cost of increased latency to fetch data in the other lane.
 
-Observing the flow in practice
-------------------------------
+## Observing the flow in practice
 
 It's always a good idea to check that the design behaves as expected. We can use OpenTelemetry for this. For more information on how to set up OpenTelemetry in such an architecture, please refer to [End-to-end tracing with OpenTelemetry](https://blog.frankel.ch/end-to-end-tracing-opentelemetry/).
 
@@ -239,13 +228,11 @@ Finally, imagine a malicious actor changing the header to get their hands on dat
 curl -H 'X-Country: us' localhost:9080/thingies/1
 ```
 
-
 APISIX forwards it to the USA-located app according to the header. However, Shardingsphere still fetches data from Europe.
 
 ![](request-with-incorrect-header.jpg)
 
-Conclusion
-----------
+## Conclusion
 
 In the previous article, I explained the concepts behind Data Residency.
 

@@ -26,8 +26,7 @@ As supported by the [12 factor](https://foojay.io/today/creating-cloud-native-ja
 
 However, in this article, we aim to make this a much easier task by introducing you to the testing framework [Testcontainers](https://testcontainers.com/ "TestContainers"). We'll take a look at what this framework is, how it enables true-to-production testing and how we can make use of it in our own Java applications and get hands-on experience with it.
 
-Why use TestContainers?
------------------------
+## Why use TestContainers?
 
 [Testcontainers](https://testcontainers.com/ "Testcontainers") is an open source framework that provides containers as a resource at test time, creating consistent and portable testing environments. This is especially useful for applications that have external resource dependencies such as databases, message queues, or web services. By encapsulating these dependencies in containers, Testcontainers simplifies the configuration process and ensures a uniform testing setup that closely mirrors production environments. This testing framework works with many different runtimes, such as [Open Liberty](https://openliberty.io/ "Open Liberty"), and provides integration with applications using Apache Kafka for messaging.
 
@@ -50,8 +49,7 @@ As well as this increased reliability and reproducibility of tests, there are ad
 * **Wait strategies**
   * To prevent your tests from trying to run before any required containers are set up, Testcontainers has a helpful, built-in wait strategy. This particularly important for services with tests that rely on services that can take significant time to initialise (for example, databases).
 
-How to use Testcontainers in your own applications
---------------------------------------------------
+## How to use Testcontainers in your own applications
 
 To walk you through how you can add Testcontainers to an existing Java application, the Open Liberty team have created an interactive, hands-on guide.
 
@@ -63,7 +61,6 @@ As Testcontainers is a black-box form of testing, you need a REST client to trig
 
 By completing this guide with the demo application propvided, it should give you a good understanding of how you can then use TestContainers effectively in your own applications. You can try it out for yourself, either running locally on your own machine or using the cloud-hosted development environment offered for these Open Liberty guides: [Testcontainers guide](https://openliberty.io/guides/testcontainers.html "Testcontainers guide").
 
-Summary
--------
+## Summary
 
 Testing in containers with TestContainers can save developers time and stress by making the testing environment they use as close to production as possible. This enables us to use Docker files to easily configure local Docker containers that act as throw away testing environments.

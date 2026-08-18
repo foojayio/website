@@ -33,29 +33,19 @@ Profile:
 * 📚Medium:[Nicolas Fränkel](https://nfrankel.medium.com/)
 * 💡Hashnode:[Nicolas Fränkel](https://hashnode.com/@nfrankel)
 
-
-
 ***Bazlur: Can you tell us about your background and how you got started in the software industry?***
 
 **Nicolas:** This definitely needs a long answer! After I finished high school, I had no clue what I'd study. I had graduated in Math-Physics but loved drawing, so I entered an architecture "school" (it's the name in France, though it's higher education).
 
-<br />
-
 After two years, I understood it was not "my thing." However, I found a class where you'd code a virtual 3D scene through a [dedicated language](http://www.povray.org/). I fell in love with the class and spent an insane amount of time reading through the documentation and experimenting with all the options. I became the go-to student for it, and the year afterwards, I was assisting the teacher. I have found my way: I wanted to be a developer.
 > ***"I fell in love with the class and spent an insane amount of time reading through the documentation and experimenting with all the options. I became the go-to student for it, and the year afterwards, I was assisting the teacher. I have found my way. I wanted to be a developer."***
 > ***- Nicolas on discovering his passion for coding.***
-
-<br />
 
 Now I must stop a bit and explain some interesting facts about France and the French culture that may surprise people from other countries. Napoléon founded the first engineering school in France, l'Ecole Polytechnique, and to this date, engineering schools are held as the "elite path" in Higher Education compared to Universities - exactly the opposite of every other country I know. Also, engineering degrees are master's level (and not bachelor's level). For this reason, French companies easily hire engineers from specialties different from the job's requirements - they are supposed to learn fast.
 
 I knew I couldn't become a developer with only an MSc in Architecture and that I should become an engineer. Fortunately, the year I realized it was the year a "bridge" opened from the Architecture School to the nearby Civil Engineering School. I applied to the program, was selected, chose every IT-related option I could (not that many), and graduated with high honours.
 
 Every engineering school requires an internship of three months or more. I chose an IT consultancy company and was hired afterwards.  
-
-
-
-<br />
 
 ***Bazlur: That's a fascinating journey, and it's impressive how you found your passion for coding while studying architecture. I'm curious to know, what specifically about coding and developing software appealed to you the most?***
 
@@ -70,8 +60,6 @@ Every engineering school requires an internship of three months or more. I chose
 > ***"A language has rules, and as long as you play by the rules, you'll get the expected results; humans, not so much. I guess it's easier for me (and probably for most developers) to interact with computers than with humans for this reason." .***
 > ***- Nicolas on his inclination towards coding***
 
-
-
 ***Bazlur: In an article, my good friend Bruno Souza once suggested that programmers should explore their creative side outside of coding, whether it's through writing poetry or enjoying kite-flying. How many years of coding experience do you have---more than 20 perhaps? As the topic of art came up, what were your thoughts on it? Have you found any non-coding inspirations in your life?***
 
 **Nicolas:** Actually, for me, it's the opposite. When I was younger, I drew a lot (and painted a bit). When I started working, I had to catch up with people who had a computer science/engineering education and spent a lot of time on it. It meant stopping most unrelated activities, including drawing. I tried to start again a couple of years ago, but I didn't have the same fun as before, plus it was time-consuming. Nowadays, I prefer taking pictures of places I visit via my job.
@@ -84,20 +72,14 @@ I've noticed that it frees my conscious mind. In general, I try to have a long p
 
 On an unrelated note, I do love real-world languages and learning them. I don't know if it can be called inspiration, but I always try to learn a few sentences of the language where I travel to.
 
-
-
 ***Bazlur: Let's shift gears and talk about the current state of software development. As someone with extensive experience in the software development industry, what do you believe are the major challenges that developers currently encounter? Given your extensive career in this area, you have likely witnessed a range of strategies and solutions employed to tackle various issues, many of which have created new difficulties. Could you also offer advice on how these challenges can be effectively addressed?***
 
 **Nicolas:** My opinion is that our industry is plagued by herd mentality and cargo cults. Let me develop.
 
 We are supposed to be engineers. Engineering is finding the "best" solution in a specific context. Best is defined by the requirements: it can be the cheapest, the fastest, the most resilient, etc. Most likely, it's a combination of prioritized requirements. For example, the business wants to hold a worldwide event in Q2. In this case, the most essential requirement is that the solution must be implemented before the deadline. Then, it should be as cheap as possible since we don't need to re-use the code base afterwards.
 
-<br />
-
 > ***"My opinion is that our industry is plagued by herd mentality and cargo cults. We are supposed to be engineers. Engineering is finding the "best" solution in a specific context."***
 > ***- Nicolas on the issues in the software industry.***
-
-<br />
 
 The context could be that we are already working with an externalized workforce, but we are not happy about it. Yet, given the schedule, it's not feasible to interview and hire developers to replace the ones we have. The pragmatic way is to keep using the workforce, at least for this one project - better the devil, you know.
 
@@ -106,10 +88,6 @@ However, our industry is full of injunctions that completely ignore both require
 Another current favourite of mine is: migrate to microservices, and you'll solve your scalability and maintainability problems! It completely ignores the fact that most real-world companies don't have scalability problems, are not mature enough to tackle distributed system issues introduced by microservices, and will face the exact same maintainability problems with microservices as with monoliths.
 
 To be complete, I should also mention the possible turmoil that AI can bring to IT. Whether it's a forest fire that will drastically revolutionize the way we work or just a spark with no potential, I cannot judge. I intend to spend some time evaluating the subject in the near future, though.  
-
-
-
-<br />
 
 ***Bazlur: You mentioned the potential impact of AI on the IT industry and your interest in evaluating the subject in the near future. In your opinion, what are some key areas within software development that AI could have a significant influence on, and how do you envision AI potentially changing the way developers work in those areas?***
 
@@ -121,8 +99,6 @@ Likewise, I asked OpenAI to refactor a block of code with nested when to a more 
 
 I've had direct experience with a developer who copy-pasted StackOverflow answers to write code without understanding the context. I can assure you that I'll never work with this person again. On the other hand, StackOverflow is an awesome tool for developers who know how to use it. At the moment, I see these AI tools as StackOverflow on steroids, nothing more, nothing less.
 
-
-
 ***Bazlur: We can certainly view it as a tool that facilitates our work. However, considering its unprecedented rate of improvement, do you not think that AI will have a significant impact on our lives in 5 to 10 years? Would it be wise for programmers to begin learning about data science, machine learning, and AI development?***
 
 **Nicolas:** Again, I reserve my judgment, as most of my previous forecasts have been dead wrong, as they underestimated the possibility of a cog in the machine.
@@ -130,8 +106,6 @@ I've had direct experience with a developer who copy-pasted StackOverflow answer
 Developers should always learn as much as possible. However, does a car driver need to understand how a car works? With what level of detail? I have to admit that I'm happy to know languages that allow me to develop code with high-level abstractions. Some other developers get a kick out of going down the rabbit hole of low-level abstractions.  
 
 In short: it depends on what you like and at what level you want to use AI.
-
-
 
 ***Bazlur: What advice would you give someone new to the software industry who is unsure about which career path to take? Could you also provide insights into the various roles within the industry, such as developer, quality assurance, manager, and developer advocacy, and the specific skills and interests needed for each of these roles?***
 
@@ -145,22 +119,14 @@ Managers are special in my world: most of the managers I had in my life had litt
 
 However, I've had a couple of managers who actually had lots of value: they handled all of the crappy company stuff so I could do my job. These people are indeed priceless. If you want to become one, you need to love people genuinely, look forward to interacting with them on a daily basis, and accept to stay in the shadows while putting the people who are doing the work in the limelight.
 
-
-
 ***Bazlur: Thank you so much for sharing your insights with us. We really appreciate your time. If we have any further questions, we will be sure to reach out to you. Before we end, is there any parting advice or resources you would like to share with our readers, such as a list of recommended books or any other helpful information?***
 
 **Nicolas:** Be passionate about what you do. Once you lose passion, it becomes a regular job. If you're not passionate about your job, change it! We (technical people) are very fortunate that there are more positions than the available workforce.
 
-<br />
-
 > ***"Be passionate about what you do. Once you lose passion, it becomes a regular job. If you're not passionate about your job, change it! We (technical people) are very fortunate that there are more positions than the available workforce."***
 > ***- Nicolas's parting advice.***
 
-<br />
-
 If you leave bad companies to join the good ones, the former will wither and die, and the latter will grow and thrive. Vote with your feet!
-
-
 
 **Conclusion:**
 

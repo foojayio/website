@@ -27,10 +27,7 @@ In this weeks post we'll talk about breakpoints. It's a long one since what we m
 
 {{< youtube eXRqKqSp7x0 >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the forth part of debugging at Scale where we kick ass and take names. Variable names!
 

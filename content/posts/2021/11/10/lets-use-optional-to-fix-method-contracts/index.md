@@ -33,7 +33,6 @@ public static Optional<Book> findBookByName(String name) {
 }
 ```
 
-
 The method above specified Optional as a return type. It may return the book that I'm looking for or may not. I'm aware of this, and I can deal with it when I invoke it. For example:
 
 ```java
@@ -47,7 +46,6 @@ if (bookOpt.isPresent()) {
 }
 ```
 
-
 Or we can do the same thing with the functional construct, e.g:
 
 ```java
@@ -57,6 +55,5 @@ findBookByName("Java Programming")
         -> System.out.println("Java Programming was published in " + releasedYear),
 () -> System.out.println("Book was not found"));
 ```
-
 
 The bottom line is, we should fix our method contract and use optional rather than returning null.

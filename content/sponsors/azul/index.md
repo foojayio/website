@@ -51,5 +51,3 @@ Azul is the trusted leader in enterprise Java for today's AI and cloud-first wor
 **[Data Sheet - Azul Platform Core - Download](https://foojay.io/wp-content/uploads/2025/02/DS-Platform-Core-for-Distribution-Use-Cases.pdf)**
 
 {{< youtube 1KjEmAieIMo >}}
-
-<br />

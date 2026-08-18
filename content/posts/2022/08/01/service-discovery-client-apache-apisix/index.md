@@ -41,15 +41,13 @@ curl http://localhost:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
 1. Every request has a 50/50 chance of being sent to either node
 
 It worked for a long time, but in this day and age, nodes are probably not pets but cattle: they come, and they go. Hence, it's essential to dynamically update the nodes list when it happens.
 
 In this article, I'd like to explain how to do it.
 
-Existing service discovery registries
--------------------------------------
+## Existing service discovery registries
 
 Please don't reinvent the wheel! Apache APISIX comes with a bunch of existing service discovery registries out-of-the-box.
 
@@ -64,8 +62,7 @@ Please don't reinvent the wheel! Apache APISIX comes with a bunch of existing se
 
 Before you write your own, make sure your platform is not listed above.
 
-Setting up the environment
---------------------------
+## Setting up the environment
 
 To ease my life and make it easier to reproduce the steps, I chose to use Docker and Docker Compose. Here's the sample that you're welcome to reuse **for development purposes**:
 
@@ -96,7 +93,6 @@ services:
       - "2397:2397"                                                     # 6
 ```
 
-
 1. Use the latest image at the time of this writing  
 
 2. Minimal configuration, see the [complete file](https://github.com/ajavageek/apisix-yaml-service-discovery/blob/master/config/config.yaml) for more details  
@@ -109,8 +105,7 @@ services:
 
 6. If running on Docker Desktop with Kubernetes enabled, a port conflict occurs with the default port. We need to change it.
 
-The use-case
-------------
+## The use-case
 
 Let's imagine a YAML file that references the available nodes. An *ad hoc* process listens to changes to the topology: it re-generates the file with the new nodes. Our client reads the file regularly and updates its internal nodes list.
 
@@ -122,9 +117,7 @@ nodes:
 #END
 ```
 
-
-Developing the discovery service client
----------------------------------------
+## Developing the discovery service client
 
 To create a discovery client, the following structure is required:
 
@@ -133,7 +126,6 @@ yaml                             # 1
   |_ schema.lua                  # 2
   |_ init.lua                    # 3
 ```
-
 
 1. Give it a name; `yaml` is as good as any other  
 
@@ -167,7 +159,6 @@ function dump_data()
 end
 ```
 
-
 Let's start with the easy part:
 
 ```lua
@@ -177,7 +168,6 @@ function _M.nodes(service_name)
   return nodes                         -- 1
 end
 ```
-
 
 1. Return the `nodes` table. We fill the nodes in the `_M.init()` function
 
@@ -195,7 +185,6 @@ function _M.init_worker()
     ngx_timer_every(20, read_file)             -- 2
 end
 ```
-
 
 1. Call the `read_file` function immediately  
 
@@ -234,7 +223,6 @@ local function read_file()
 end
 ```
 
-
 1. Import the library to read file  
 
 2. Import the library to convert YAML content to Lua tables  
@@ -251,8 +239,7 @@ end
 
 8. Insert it into the `nodes` file local variable
 
-Putting the code to the test
-----------------------------
+## Putting the code to the test
 
 I used the default Apache web server available on my Mac to test the code.
 
@@ -266,7 +253,6 @@ nodes:
   "192.168.1.62:81": 1
 #END
 ```
-
 
 * I started the Docker Compose containers - `docker compose up`
 
@@ -283,7 +269,6 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-
 1. Matches the `service_name` parameter in the `_M.nodes(service_name)` function. It potentially allows returning different nodes based on it. We didn't use it here, so anything works.  
 
 2. The magic happens here. The label must match the name of the discovery folder in `/usr/local/apisix/apisix/discovery/`.  
@@ -296,16 +281,13 @@ Let's test it:
 curl localhost:9080
 ```
 
-
 It returns the root page served by the Apache Server as expected:
 
 ```
 <html><body><h1>It works!</h1></body></html>
 ```
 
-
-Nitpicking
-----------
+## Nitpicking
 
 While the above code works as expected, we can improve it.
 
@@ -324,7 +306,6 @@ local function read_file(premature)
     end
 ```
 
-
 1. Trace the error
 
 ### Parameterization
@@ -341,7 +322,6 @@ return {
 }
 ```
 
-
 1. Parameters with their type and default value. None of them are mandatory.
 
 On the code side, we can use them accordingly.
@@ -356,7 +336,6 @@ function _M.init_worker()
                            local_conf.discovery.yaml.fetch_interval
     ngx_timer_every(fetch_interval, read_file)
 ```
-
 
 ### Premature
 
@@ -373,9 +352,7 @@ local function read_file(premature)
 end
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Most modern infrastructures are dynamic - servers are cattle, not pets. In this case, it doesn't make much sense to configure the nodes of an upstream statically.
 

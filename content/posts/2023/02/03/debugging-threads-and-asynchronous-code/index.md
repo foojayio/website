@@ -29,10 +29,7 @@ We discuss why that is and how debuggers solve that problem. We also explain how
 
 {{< youtube fPiTRdkJ6AQ >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the seventh part of debugging at scale where we don't treat debugging like taking out the garbage.
 

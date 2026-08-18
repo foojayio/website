@@ -27,8 +27,7 @@ For instance, Client C1's read operation might observe the effects of a write pe
 
 In this article, we'll look at some of the causes of these issues and how we can both resolve and avoid them entirely.
 
-Lost updates
-------------
+## Lost updates
 
 Writes to a single document in MongoDB are [atomic](https://www.mongodb.com/docs/manual/core/write-operations-atomicity/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Java+Concurrency+Best+Practices&utm_term=tim.kelly#:~:text=In%20MongoDB%2C%20a%20write%20operation,the%20query%20condition%20still%20matches.). However, if an application reads a document, modifies it, and then writes it back, this entire read-modify-write cycle is not atomic. This scenario can result in a lost update situation, where two clients concurrently read the same document and then update it with different values, causing one client's changes to overwrite the other's changes.
 
@@ -100,18 +99,15 @@ public class InventoryUpdate {
 }</code>
 ```
 
-
 To avoid lost updates, it's best to shift the responsibility for concurrency control to the database itself, where possible. For example, using atomic update operators like [`$inc`](https://www.mongodb.com/docs/manual/reference/operator/update/inc/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Java+Concurrency+Best+Practices&utm_term=tim.kelly#mongodb-update-up.-inc) allows MongoDB to apply changes directly without requiring a read-modify-write cycle in the application. This reduces the chance of conflicting updates and helps maintain data integrity even under concurrent access.
 
-Dirty reads
------------
+## Dirty reads
 
 A dirty read occurs when an application reads data that might later be rolled back or overwritten. In MongoDB, this can happen outside of transactions when clients read data that hasn't yet been confirmed as durable across the replica set. For example, if a client writes to the primary and another client reads that data immediately, the read might return a value that hasn't been replicated to a majority of nodes. If the primary crashes or steps down before replication completes, the write may be rolled back during the election process, meaning the read saw data that was effectively "undone."
 
 While MongoDB prevents dirty reads within transactions by only making data visible after the transaction is committed, dirty reads can still occur outside of transactions if the application uses the default `readConcern: "local"`. To avoid this, applications should use `readConcern: "majority"` to ensure that reads only return data that has been acknowledged by a majority of replica set members and is unlikely to be rolled back.
 
-Non-repeatable reads
---------------------
+## Non-repeatable reads
 
 A non-repeatable read occurs when a client reads the same document multiple times within a session and receives different values because another client has modified the document in between reads.
 
@@ -197,7 +193,6 @@ public class NonRepeatableRead {
 }</code>
 ```
 
-
 * At time t1, Client A issues `findOne({ \_id: 'PIZZA\_001' })` on the products collection to retrieve product details.
 * At time t2, Client B updates all documents in the products collection where `category = 'PIZZA'` by incrementing their price by 10% using `{ $mul: { price: 1.10 } }`.
 * At time t3, Client A places an order by inserting a document into the orders collection with the price fetched at t1.
@@ -205,15 +200,13 @@ public class NonRepeatableRead {
 
 At t4, **Client A** observes a different version of the document compared to the initial read at t1. This happens because the sequence of operations was not properly isolated. To avoid this, the entire sequence should be encapsulated within a multi-document transaction using a stronger read isolation level, ensuring the client always sees a consistent view of data throughout the session.
 
-Phantom reads
--------------
+## Phantom reads
 
 A non-repeatable read occurs when the value of a document changes between two reads within the same session due to a concurrent write operation. A phantom read occurs when the result set of a query changes between executions in the same session because another client has inserted, deleted, or modified documents that affect the query's outcome. As a result, the subsequent execution of the query returns a different result set than the first, even though no changes were made by the reading client.
 
 In non-transactional operations, if a client uses a "cursor" to iterate over a result set, the same document can be returned in a result set more than once, or missed entirely, if another client modifies the underlying data while the cursor is still active. This behavior leads to an unstable result set and is a manifestation of either phantom or non-repeatable reads.
 
-How to avoid these issues
--------------------------
+## How to avoid these issues
 
 To avoid these kinds of anomalies, MongoDB provides concurrency control mechanisms and configurable isolation properties, allowing clients to control the degree to which they observe the effects of concurrent operations.
 
@@ -413,7 +406,6 @@ public class InventoryUpdateWithTransaction {
     }
 }</code>
 ```
-
 
 Using SNAPSHOT isolation ensures the client observes a consistent view throughout the transaction, even if a concurrent write operation happens outside. The second read shows the same price as the first, despite Client B's concurrent update.
 

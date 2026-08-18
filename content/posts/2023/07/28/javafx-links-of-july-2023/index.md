@@ -23,8 +23,7 @@ Although I skipped a few weeks because of busy schedules, holiday interruptions,
 
 Have fun reading and clicking, and see you end of August for one long #LinksOfTheMonth...
 
-Core
-----
+## Core
 
 * Early-Access Builds of JavaFX 21 are available from
   * [jdk.java.net](https://jdk.java.net/javafx21/)
@@ -32,8 +31,7 @@ Core
   * *JavaFX 21-ea is designed to work with JDK 21-ea, but it is known to work with JDK 17 and later versions*.
 * And JavaFX 22 Early-Access Builds, Build 1 is [also available](https://jdk.java.net/javafx22/)!
 
-Applications
-------------
+## Applications
 
 * [**Mark Baird** wrote a post to describe how the beta release of the ArcGIS Maps SDK for Java (with ARM Linux support) can be used for IoT data recording apps](https://www.esri.com/arcgis-blog/products/sdk-java/developers/how-to-use-the-arcgis-maps-sdk-for-java-in-a-raspberry-pi-for-recording-gps-tracks/). He uses a GPS Unit, Raspberry Pi, Pi4J, and JavaFX.
 * [**yos** shared a video demonstrating a text editor engine implemented in #JavaFX (without WebView)](https://twitter.com/yosbits/status/1676159349377617922): "I'm testing loading and scrolling performance on a huge 5.4MB of source code. Scrolling is possible at 100FPS or more in the Apple M1 environment. This is one of Snowflower Controls."
@@ -46,8 +44,7 @@ Applications
 * [**Mark J Koch** is writing an application for EagleCAD schematics](https://mastodon.social/@maehem/110743557437273863): "Still lots of work to do (like view and print PC board files) but this is a wonderful milestone in my development of this app. Hope to open source it in about a month or two."
   * His first experiments [looked more like "generative art"](https://mastodon.social/@maehem/110708951041214410).
 
-Games
------
+## Games
 
 * [**WhiteWoodCity** made the FXGL version of zombie vs plants open source](https://twitter.com/WhiteWoodCity/status/1676959035596341248) and shared the source code.
   * [**Almas Baim**: "Had a quick look, it's awesome!"](https://twitter.com/AlmasBaim/status/1677002981483347995)
@@ -55,28 +52,24 @@ Games
 * [**Almas Baim** sees that FXGL is getting some interest on GitHub recently](https://twitter.com/AlmasBaim/status/1679096264988696576).The next release (21) will match Java / JavaFX 21. What would you like to see supported?
 * [**OrangoMango** coded a game in 48h for the GMTK game jam](https://twitter.com/orango_mango/status/1678428149233639424). If you get to the boss, let him know (It could be difficult).
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * [**Carl Dea** is prototyping a new JavaFX-based Dockable windowing library](https://twitter.com/carldea/status/1675689706313379843): "I'm getting the mechanics down (more on L\&F / skins later)."
 * [**Gerrit Grunwald** extended his Charts library with a "WaferMap"](https://twitter.com/hansolo_/status/1674799050225483779).
 * [**Gluon** is launching GluonFX](https://techhub.social/@gluonhq/110786277544214779): "A growing set of JavaFX tools/components that we maintain on github, targeting all platforms. GPL license, free for developers. If you use them in a commercial product, we have licenses for that as well". See [gluonhq.com/introducing-gluonfx](https://gluonhq.com/introducing-gluonfx/).
   * [**Johan Vos** adds](https://twitter.com/johanvos/status/1684563837188739072): "Streamlining our software, adding consistency in approach, on github (e.g. badges, javadoc, maven approach), and licensing. Gradually, more of our software will be in this umbrella, and it will work on all platforms -- including mobile."
 
-Podcast, Video, Books
----------------------
+## Podcast, Video, Books
 
 * [Jetbrains Java Annotated Monthly -- July 2023](https://blog.jetbrains.com/idea/2023/07/java-annotated-monthly-july-2023/) lists the ["Foojay Podcast #25: Game Development with Java, JavaFX, and FXGL"](https://foojay.io/today/foojay-podcast-25/).
 * [**Frank Delporte** discovered that an image he created for his book "Getting Started with Java on the Raspberry Pi" with a JavaFX application](https://foojay.social/@frankdelporte/110790391834861143) is used in the 2nd edition of "The Definitive Guide to Modern Java Clients with JavaFX 17" by **Stephen Chin** , **Johan Vos** , **Jeames Weaver**, and many others.
 
-Tutorials
----------
+## Tutorials
 
 * [**Mukul Saini** shared a video](https://www.youtube.com/watch?v=T4ftPFmis0E): "Property Binding in Javafx, How to bind one javafx property with another javafx property".
 * [**Princy Victor**](https://twitter.com/princyvictor_16) wrote a tutorial about the use of ["JavaFX Timer"](https://www.educba.com/javafx-timer/).
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**JetBrains** is advising how to build self-contained standalone applications](https://twitter.com/jetbrains/status/1674008633770737664).
 * [**Geertjan Wielenga** started a "Twitter battle" about desktop versus web](https://twitter.com/GeertjanW/status/1674902079515631617): "Desktop applications are dead, history, a thing of the past, except maybe for some niche use cases. Yet... every time I open a browser, I'm in fact starting up... a desktop application."
@@ -88,8 +81,7 @@ Miscellaneous
   * And [managed to fully automate a GitHub Actions workflow for both testing and releasing JavaFX Applications](https://twitter.com/C0DEDEAD/status/1677397519066603528) (both portable and installers) using Gradle.
 * [**Foojay** shared a list of its top 10 articles](https://twitter.com/foojayio/status/1681578734002864131): "JavaFX is well represented!"
 
-JFX-Central
------------
+## JFX-Central
 
 * Version 2 will let you [perform a name-based search for individual icons in 100+ icon packs](https://twitter.com/dlemmermann/status/1676201042168410113). **Dirk Lemmermann** shares screenshots showing the search result for "arrow left". This feature is brought to you by [**Lee Wyatt**](https://twitter.com/LeeWyatt_7788).
 * Final bugs and testing are being handled before announcing V2!

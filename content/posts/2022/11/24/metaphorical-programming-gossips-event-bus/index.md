@@ -31,13 +31,11 @@ I chose an analogy for the entire thing: **Gossips**;\\
 
 It fits with the nature of the library, and the way it'll be used. A global pub-sub component to enable cross-component communication.
 
-Just, why?
-----------
+## Just, why?
 
 > The intention of this "experiment" is to explore how expressive programming languages can be. And how close can we model our real world using logical statements and constructs. It really is amusing how software engineers have created such expressive constructs that we use in our code. This experiment is heavily triggered and inspired by [JavaFX's Theater analogy](https://medium.com/@juliemmasam/javafx-and-the-theatre-metaphor-179243704581).
 
-Show me the code
-----------------
+## Show me the code
 
 The spine of almost every event bus out there is a form of the [Observer Pattern](https://en.wikipedia.org/wiki/Observer_pattern). And we won't be any different.
 
@@ -52,7 +50,6 @@ interface Gossips<T> {
 }
 ```
 
-
 Here we define our interface for the source of gossips. Like any respected event bus, Gossips should be able to `publish`/**`spread()`** `events`/**`gossips`** . We also want users to be able to `subscribe`/**`listen()`** to `events`/**`gossips`** the moment they come out, so that they can react accordingly. For the convenience of our users, we want them to be able to unsubscribe from these types of gossips.
 
 Next, we want to implement the mechanism by which users can interact with our source of gossip. We need to create the `Subscription` and the `Receiver` components:
@@ -64,7 +61,6 @@ interface Subscription {
 }
 ```
 
-
 Here we provide our `subscriber`s/**`listener`s** with a way to cancel their subscriptions.
 
 ```kotlin
@@ -72,7 +68,6 @@ interface Receiver<in T> {
     fun psst(gossip: T)
 }
 ```
-
 
 And here, we provide our nosy neighbors with a way to stay up to date with the latest screw-ups in the neighborhood. By the social act of whispering and an eloquent `psst()` function.
 
@@ -93,7 +88,6 @@ internal class Neighbor<in T>(private val source: Gossips<T>, private val react:
     }
 }
 ```
-
 
 Our `Neighbor`s thrive on a `source` of gossips. They also have their own way/function of `react`ing to them. Since a `Neighbor` is both a `Receiver` and a `Subscription` to our gossips, it implements their qualities: `psst()`, and `cancel()`.
 
@@ -126,11 +120,9 @@ internal class GossipsImpl<T> : Gossips<T> {
 }
 ```
 
-
 We store a set of `Neighbor`s, and we keep them up to date whenever a new `gossip` is out. We add new neighbors to this set whenever they are interested in `listen`ing to our gossips. We also remove them whenever they feel they had enough and want to `unsubscribe`.
 
-Tying it all together
----------------------
+## Tying it all together
 
 An example of how it looks like in action is quite amusing:
 
@@ -140,7 +132,6 @@ object State {
 }
 ```
 
-
 We define a State object, that lives the entirety of our app's life-cycle. and houses all our gossips, so that we can easily spread and `listen` to them (don't judge):
 
 ```kotlin
@@ -148,7 +139,6 @@ fun onAttach(){
     resultGossips.listen { showResults(it) }
 }
 ```
-
 
 We listen to our gossips of interest, in an entry point in our app's life-cycle. Similarly, we can unsubscribe when we feel like it:
 
@@ -159,7 +149,6 @@ fun onDetach() {
 }
 ```
 
-
 We can spread gossips when we need to communicate (or realistically when we're bored):
 
 ```kotlin
@@ -167,7 +156,6 @@ fun onButtonClick(){
     resultGossips.spread(GenericResult("something something"))
 }
 ```
-
 
 And we're done! A full-fledged Event-Bus in a really tiny codebase.
 

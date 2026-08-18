@@ -80,7 +80,6 @@ $ jfr summary /tmp/app-profile-2020-03-26T16-57-14.jfr
  jdk.TLSHandshake                          0             0
 ```
 
-
 But other interesting things could be done using this tool. The `print` sub-command can extract these events, in XML or in JSON. From there it's possible to perform other type of aggregation using other tools.
 
 ```
@@ -90,7 +89,6 @@ $ jfr print \
   /gclogs/startup.jfr \
   | jq '.recording.events[] | .values.duration'
 ```
-
 
 It's also possible to assemble `jfr` files or break them in smaller parts. As a side note, the files in the *repository* can be exploited this way. Keep in mind these files may be removed as soon as they are expired or as soon as every recording stops.
 
@@ -111,7 +109,6 @@ Duration: 35 s
  jdk.ClassLoaderStatistics              2620         81098
 ...
 ```
-
 
 ______________________________________________________________________________
 

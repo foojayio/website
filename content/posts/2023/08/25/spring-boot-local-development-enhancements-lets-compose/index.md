@@ -39,8 +39,7 @@ Both of these functionalities are built atop the [ConnectionDetails abstraction]
 
 Feel free to clone [the demo repository](https://github.com/SimonVerhoeven/sbldi), to run the samples!
 
-Docker compose support
-----------------------
+## Docker compose support
 
 This method allows us to leverage our existing `docker-compose.yml` files, with some extra quality of live functionality.
 
@@ -58,7 +57,6 @@ Maven:
 </dependencies>
 ```
 
-
 Gradle:
 
 ```groovy
@@ -66,7 +64,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 }
 ```
-
 
 **note** : the docker-compose support is limited at the moment (such as no Kafka) when we're using `spring-boot-testcontainers` we can use any container with the programmatic API.
 
@@ -91,8 +88,7 @@ There are a slew of configuration options, but some useful ones to know:
   * start-and-stop
 * making use of spring profile-specific docker compose files (`docker--compose-{profile}.yaml`) can be done using: `spring.docker.compose.profiles.active`
 
-Testcontainers at development time
-----------------------------------
+## Testcontainers at development time
 
 ### The setup
 
@@ -110,7 +106,6 @@ Maven:
 </dependencies>
 ```
 
-
 Gradle:
 
 ```groovy
@@ -118,7 +113,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
 }
 ```
-
 
 The application itself is a very simple one that allows us to [get a die result](http://localhost:8080/rollDie) which is then stored in our `Redis` instance, and to [retrieve all these rolls](http://localhost:8080/listRolls)
 
@@ -134,7 +128,6 @@ GenericContainer<?> redisContainer() {
 }
 ```
 
-
 Now in `TestTestcontainersDemoApplication` you'll see that we are making use of the new `SpringApplication.from` method to delegate to our actual application, and we are passing in our Test configuration.
 
 ```java
@@ -144,7 +137,6 @@ public static void main(String[] args) {
             .run(args);
 }
 ```
-
 
 This way we can run our application for development purposes.  
 
@@ -173,7 +165,6 @@ public GenericContainer mailhogContainer(DynamicPropertyRegistry registry) {
 }
 ```
 
-
 To provide the required information at development time.
 
 ### Keeping our data
@@ -199,7 +190,6 @@ GenericContainer<?> redisContainer() {
             .withReuse(true);
 }
 ```
-
 
 ```
 Given the experimental state there are still some limitations which you will have to keep in mind which are document in the
@@ -227,7 +217,6 @@ For devtools we'll need to add this to our pom.xml file:
 </dependency>
 ```
 
-
 or our Gradle build file:
 
 ```groovy
@@ -235,7 +224,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 ```
-
 
 and then we just need to annotate our container(s)
 
@@ -249,9 +237,7 @@ GenericContainer<?> redisContainer() {
 }
 ```
 
-
-**Testcontainers desktop app**
-------------------------------
+## **Testcontainers desktop app**
 
 This software is not needed, but it's still a nice extra utility to get even more mileage out of your testcontainer usage.
 
@@ -265,8 +251,7 @@ There are some quite useful features in there such as:
 * tweak Testcontainer behaviour such as freezing containers on shutdown/enable reusable testcontainers
 * ...
 
-Wrap up
--------
+## Wrap up
 
 I hope this brief showcase was helpful and offered some new insights as to how to ease local development.
 
@@ -274,8 +259,7 @@ In case of any questions, feel free to reach out.
 
 The people at the [testcontainers slack](https://slack.testcontainers.org/) are also very kind, and always willing to help out.
 
-References
-----------
+## References
 
 * [Testcontainers](https://testcontainers.com/): the official Testcontainers website
 * [Testcontainers in the cloud](https://testcontainers.com/cloud/)

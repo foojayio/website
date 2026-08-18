@@ -23,10 +23,7 @@ frozen: false
 **\[About SKP's Definitive Microservices Primer\]**  
 Series of Articles on Microservices Architecture. They Revolve Around Microservices Strategy, Decision Making, Monolithic vs Microservices, Microservices Infrastructure, Failures \& Pitfalls of Microservices, Microservices Design Patterns, Database Design, Security, Logging, Messaging, Containerization, Cloud Providers and Everything that is Microservices and More!  
 
-
-
-Intro to Microservices Adoption in Real World
----------------------------------------------
+## Intro to Microservices Adoption in Real World
 
 Microservices Adoption is almost becoming the normal in almost all software product and it services organizations. Hereby, i am taking this opportunity to make you aware of the Real-World Issues (Case Studies) that are faced by organizations (small, mid, large) of all sizes in migrating or adopting microservices. Since learning from other's mistakes and knowing the pitfalls upfront help us prepare and plan better - this article will be helpful for those planning a shift to the Microservices Strategy organization-wide or simply making a move from Monolithic to Microservices Architecture.
 
@@ -36,8 +33,7 @@ Adopting Microservices has Been a Great Challenge for All -- Netflix, Amazon, Ub
 
 \[So, The Idea is that You Do Not Make the Same Mistakes, Learn from the Below and Try to Get it Right the First Time -- Hence, We Need to Invest Time in Quality Research and Development to build the Initial and Robust Architectural Pieces. Also, To Create a Meaningful and a More Realistic Plan for Organization-Wide Microservices Adoption in a Software Product Company. These are also valid for Adoption / Evangelizing to your Customers in an IT Services Organization.\]
 
-Practical Challenges in Adoption of Microservices
--------------------------------------------------
+## Practical Challenges in Adoption of Microservices
 
 #### **Overhead**
 
@@ -67,14 +63,11 @@ The communication between External World and Microservices or within Microservic
 
 So, Once the Initial Part is Over - Even If the Microservices Strategy and Implementation Turns out to be a Success - It still means a Heavy Hit on the Pocket for Maintenance. Even though all of the Current Generation Organizations Rely on an External Cloud Provider, It still means more Expenditure on Hardware, 'Software', Cloud, DevOps Engineers. Also, the Total Cost of Ownership (TCO) of Such an Infrastructural Masterpiece is only bound to Increase as More Abstractions are added over Time - Also, the Maintenance itself could be a complicated process.
 
-<br />
-
 [![](https://1.bp.blogspot.com/-sQgs_D2r0gM/YNb_PUeOkYI/AAAAAAAA9dU/TcRqW71TP6wYIN78FBDsVLO4_qyzTmlwQCLcBGAsYHQ/w640-h350/skp_microservices_complexity_001.png)](https://1.bp.blogspot.com/-sQgs_D2r0gM/YNb_PUeOkYI/AAAAAAAA9dU/TcRqW71TP6wYIN78FBDsVLO4_qyzTmlwQCLcBGAsYHQ/w640-h350/skp_microservices_complexity_001.png)
 
 **FIG. 1** : INDICATIVE COMPLEXITY OF MICROSERVICES ARCHITECTURE IN THE ENTERPRISE
 
-Articles from Online Developer Magazines (By Topic)
----------------------------------------------------
+## Articles from Online Developer Magazines (By Topic)
 
 ### Challenges of Moving from Monolithic to Microservices
 
@@ -136,8 +129,7 @@ Articles from Online Developer Magazines (By Topic)
 
 [Unraveling Microservices: Higher Agility or Hype?](https://www.infosys.com/digital/insights/documents/higher-agility-hype.pdf "Unraveling Microservices: Higher Agility or Hype?")
 
-Conclusion and 'Gyan' for Real-World Adoption
----------------------------------------------
+## Conclusion and 'Gyan' for Real-World Adoption
 
 Let us take a look a Uber's Microservices Dependency Graph (Source : Online Presentation by an Uber Engineer - All Rights Reserved by Uber - Solely Used to Demostrate Complexity). It seems like an Outer Space Image from a Hubble Telescope! 🙂
 
@@ -152,8 +144,6 @@ Individually, I have worked in 3 Organizations where Microservices Adoption or M
 Kindly take time to Internalize these thoughts as Microservices Architecture is the Current Big Bet for Software Product Organizations and IT Services Organizations in 2021. It will continue to be the same for a few years from now! Organizations are going to spend a maximum part of their IT/R\&D Budget in Adopting Microservices - So, Upfront Identification by Stakeholders will give the Bang for the Buck!
 
 So, Here's Wishing you a Lot of Skill, Focus, Pragmatism, Understanding, Reasoning and Continued Experience to get the Best Out of Microservices for your Organization and Needs!
-
-
 
 #### **Disclaimer**
 

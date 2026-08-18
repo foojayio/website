@@ -28,8 +28,7 @@ frozen: false
 
 ***Note:** This is an updated article to the one published on the [JAVAPRO's magazine - "04-2025 \| Java 25 - Special Edition"](https://javapro.io/2025/10/28/04-2025-java-25-special-edition/). Since the release of LangChain4J-CDI version 1.0.0, there's been minor changes, but the fundamental architecture and usage of the library is the same.*
 
-What is LangChain4J-CDI?
-------------------------
+## What is LangChain4J-CDI?
 
 Langchain4J is a Java library that simplifies the integration of AI and LLMs easier, and with their feature of AI services it provides a declarative and type-safe API for developers to define interfaces that represent AI services, abstracting away the complexities of direct LLM communication
 
@@ -51,8 +50,7 @@ The **Key features** provided by Langchain4J Microprofile:
 
 ***Please note:** Langchain4J-CDI is a module developed by the Microprofile members, initially called SmallRye-LLM. It has since been donated to Langchain. The SmallRye-LLM repo on GitHub has been retired.*
 
-Getting started with LangChain4J-CDI
-------------------------------------
+## Getting started with LangChain4J-CDI
 
 Langchain4J-CDI provides a [working example](https://github.com/langchain4j/langchain4j-cdi/tree/main/examples) on building a conversational AI agent for a car booking system. This demonstration is inspired by the insightful ["Java meets AI" talk from Lize Raes at Devoxx Belgium 2023](https://youtu.be/BD1MSLbs9KE?si=yBeR8-3IJUYMWd8v) (with further contributions from [Jean-François James](http://jefrajames.fr/). The original demo is from [Dmytro Liubarskyi](https://www.linkedin.com/in/dmytro-liubarskyi/)). Developers can view how the same example are implemented on popular Jakarta EE 10 application servers.
 
@@ -81,7 +79,6 @@ We always import the **langchain4j-cdi-core** library as your `dependency`:
 </dependency>
 ```
 
-
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. The LangChain4J-CDI core module automatically depends on the `langchain4j-core` module, so you do not need to explicitly add it as a dependency (unless you want to explicitly specify your own langchain4j-core version yourself).
 
 You also need to import a LangChain4J model provider. For this example we'll use Azure Open AI, thus its LangChain4J Maven artifact ID is `langchain4j-azure-open-ai`.
@@ -93,7 +90,6 @@ You also need to import a LangChain4J model provider. For this example we'll use
     <version>${dev.langchain4j.version}</version>
 </dependency>
 ```
-
 
 where *${dev.langchain4j.version}* is the latest Langchain4J main version (in this case `1.10.0`).
 
@@ -111,7 +107,6 @@ Firstly, we need to add the `langchain4j-cdi-config` module on our Maven project
 </dependency>
 ```
 
-
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Config.
 
 The Langchain4J-CDI **class** configuration follow this pattern:
@@ -119,7 +114,6 @@ The Langchain4J-CDI **class** configuration follow this pattern:
 ```
 dev.langchain4j.cdi.plugin.<beanName>.<key>=<value>
 ```
-
 
 The `dev.langchain4j.cdi.plugin..class` property is **mandatory** as it tells CDI which concrete implementation of the LangChain4J AIServices component is to be assigned it to upon CDI registration.
 
@@ -129,13 +123,11 @@ Optionally, to apply the CDI scope to each of your AI service component, set key
 dev.langchain4j.cdi.plugin.<beanName>.scope=jakarta.enterprise.context.ApplicationScoped
 ```
 
-
 And the class builder **config** configuration follow this pattern:
 
 ```
 dev.langchain4j.cdi.plugin.<beanName>.config.<key>=<value>
 ```
-
 
 Every AI service requires (first and foremost) a `ChatModel` as this interfaces with your LLM. Each model provider provides an implementation of the LangChain4J `ChatModel` interface. For example, LangChain4J Azure Open AI provider provides its implementation to `ChatModel`, `AzureOpenAiChatModel`. Each model provider provides a `Builder`, which is builder pattern to build their corresponding `ChatModel` object. For LangChain4J Azure Open AI, `AzureOpenAiChatModel.Builder` build its `AzureOpenAiChatModel` and the builder config properties uses its builder, where ` is the builder method of the same name, and the ` is the corresponding value that is passed to the builder's method.
 
@@ -154,7 +146,6 @@ dev.langchain4j.cdi.plugin.chat-model.config.max-retries=2
 dev.langchain4j.cdi.plugin.chat-model.config.logRequestsAndResponses=true
 ```
 
-
 The ` is the CDI bean name that will be assigned to the object ``class`` key ``dev.langchain4j.cdi.plugin..``. In this example, the bean name for our chat model is ``chat-model`` and it's assigned to the chat model class ``dev.langchain4j.model.azure.AzureOpenAiChatModel`.
 
 All the properties found within the `langchain4j.cdi.plugin..config.` property, LangChain4J CDI will populate the value to its corresponding Langchain4J `ChatModel` declared. In this case the `dev.langchain4j.model.azure.AzureOpenAiChatModel.Builder` class (this is done for you internally).
@@ -167,13 +158,11 @@ For example, should you want to log all chat request you will need to set the `l
 dev.langchain4j.cdi.plugin.chat-model.config.log-requests=true
 ```
 
-
 Is equivalent to the config property:
 
 ```
 dev.langchain4j.cdi.plugin.chat-model.config.logRequests=true
 ```
-
 
 The config creator (internally) will identify config values that contains dashes and rework it to its camel-case property and match it to the Builder and then assign the value accordingly.
 
@@ -204,7 +193,6 @@ public interface Assistant {
 }
 ```
 
-
 The interface describes what we want: a `Assistant` object with one method: `answer(String)`. We specify a `SystemMessage` (this is optional).
 
 * The input is a `String`, so LangChain4J will infer that this is the `UserMessage`.
@@ -230,13 +218,11 @@ dev.langchain4j.cdi.plugin.chat-memory.scope=jakarta.enterprise.context.Applicat
 dev.langchain4j.cdi.plugin.chat-memory.config.maxMessages=10
 ```
 
-
 which is equivalent to physically write the code as:
 
 ```
 ChatMemory chatMemory = MessageWindowChatMemory.withMaxMessages(10);
 ```
-
 
 Now, we update our existing `Assistant` `@RegisterAIService` to include `ChatMemory` with `chatMemoryName` property to bean `chat-memory`:
 
@@ -246,7 +232,6 @@ Now, we update our existing `Assistant` `@RegisterAIService` to include `ChatMem
     chatMemoryName = "chat-memory"
 )
 ```
-
 
 #### 3.4) Adding Tools
 
@@ -276,7 +261,6 @@ dev.langchain4j.cdi.plugin.docRagRetriever.config.maxResults=3
 dev.langchain4j.cdi.plugin.docRagRetriever.config.minScore=0.6
 ```
 
-
 The `lookup:default` value will cause CDI to lookup the default `EmbeddingStore` or `EmbeddingModel` registered in the CDI container. Otherwise, provide a fully-qualified class name of the specified interface class type.
 
 Our `EmbeddingModel` and `EmbeddingStore` are CDI produced using CDI producer fields.
@@ -297,7 +281,6 @@ public class DocRagIngestor {
 }
 ```
 
-
 Then we register it to `@RegisterAIService` by providing the CDI name of the `ContentRetriever` as follows:
 
 ```java
@@ -307,7 +290,6 @@ Then we register it to `@RegisterAIService` by providing the CDI name of the `Co
     contentRetrieverName = "docRagRetriever"
 )
 ```
-
 
 ### 4) Inject and use it
 
@@ -335,7 +317,6 @@ public class AssistantResource {
     }
 }
 ```
-
 
 Your `AnswerDto` and `QuestionDto` are standard POJO.
 
@@ -380,7 +361,6 @@ public class AnswerDto implements Serializable {
     }
 }
 ```
-
 
 Now, you can run your application by deploying it to your application server and do an HTTP POST to your RESTful endpoint.
 
@@ -431,7 +411,6 @@ public interface ChatAiService {
 }
 ```
 
-
 Please note that LangChain4J `ChatModel` has a retry policy built inside the `ChatModel.chat()` method. Thus, adding a `@Retry` to your AI Service will add additional retry `maxRetries` to its existing LangChain4J ChatModel `maxRetries`. Some LangChain4J AI providers do provide the ability to configure the `maxRetries` so we suggest to set the `ChatModel.maxRetries = 0` in order to fully rely on Microprofile's Fault Tolerance retry mechanism.
 
 To apply fault tolerance to our AI services, we need to add the `langchain4j-cdi-fault-tolerance` module on our Maven project.
@@ -443,7 +422,6 @@ To apply fault tolerance to our AI services, we need to add the `langchain4j-cdi
     <version>${langchain4j.cdi.version}</version>
 </dependency>
 ```
-
 
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Fault Tolerance.
 
@@ -461,7 +439,6 @@ To apply Generative AI telemetry to our AI services, we need to add the `langcha
 </dependency>
 ```
 
-
 where *${langchain4j.cdi.version}* is the latest LangChain4J CDI version. This requires that your application server supports Microprofile Telemetry.
 
 The LangChain4J-CDI Telemetry provides 2 implementation of the `ChatModelListener`:
@@ -475,7 +452,6 @@ Using the configurable properties method, we can apply the following `ChatModelL
 dev.langchain4j.cdi.plugin.<beanName>.config.listeners=@all
 ```
 
-
 The value set to `@all` tells CDI to inject all CDI discoverable `ChatModelListener` to the `ChatModel` that supports listeners.
 
 Alternatively, you can specify your `ChatModel` individually as follows:
@@ -484,16 +460,13 @@ Alternatively, you can specify your `ChatModel` individually as follows:
 dev.langchain4j.cdi.plugin.<beanName>.config.listeners=dev.langchain4j.cdi.telemetry.SpanChatModelListener,dev.langchain4j.cdi.telemetry.MetricsChatModelListener
 ```
 
-
 The value are comma separated, fully qualified class name. The class must implement the `ChatModelListener` interface.
 
-In Summary
-----------
+## In Summary
 
 LangChain4J-CDI simplifies the process of integrating LangChain4J components into AI services. Its strong CDI integration and pluggability to MicroProfile, LangChain4J-CDI makes it an attractive choice for Jakarta EE and Microprofile developers who want to add LangChain4J AI capabilities without the usual overhead and boilerplate code. Thus, LangChain4J-CDI lets you focus on the value that generative AI can bring to your business logic.
 
-Important Links
----------------
+## Important Links
 
 * LangChain4J-CDI GitHub Repo: <https://github.com/langchain4j/langchain4j-cdi/>
 * LangChain4J-CDI Examples GitHub Repo: <https://github.com/langchain4j/langchain4j-cdi/tree/main/examples>

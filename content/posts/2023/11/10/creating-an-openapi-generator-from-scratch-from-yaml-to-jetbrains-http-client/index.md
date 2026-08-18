@@ -40,7 +40,6 @@ X-GitHub-Api-Version: 2022-11-28
 Authorization: Bearer {{github_key}}
 ```
 
-
 With an environment file that looks like this:
 
 ```
@@ -51,7 +50,6 @@ With an environment file that looks like this:
     "repo": "elm-firebase"
   }}
 ```
-
 
 Now, that is very nice, but it requires a lot of manual work. **Wouldn't it be nice to be able to automate this?** Fortunately, most of us developing APIs also generate [OpenAPI](https://www.openapis.org/?ref=lengrand.fr) Specifications for them. When I looked however, there was no OpenAPI generator yet available for the Jetbrains HTTP Client. This is the story of how I've implemented it from scratch, and how you could too if you find yourself in the same situation! We'll use the JetBrains HTTP Client as a practical example, but the knowledge is transferable 🙂.
 
@@ -79,7 +77,6 @@ Each of those is illustrated by a method, and takes separate objects as inputs:
 …
 ```
 
-
 You can find [the actual source file on GitHub](https://github.com/OpenAPITools/openapi-generator/blob/78f3b19b58df699ef883b89a7a44531407377719/modules/openapi-generator/src/main/java/org/openapitools/codegen/DefaultGenerator.java?ref=lengrand.fr#L433). The objects for each of those methods are large `Map` classes that contain the necessary data in a semi-structured format. Here is an example of how `allModels` looks like:
 
 ![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/NVgYf1bDqjbDEuvOkdmDReLlE0pVj2M3A64JpNQncZmFvosFOlA4tGzb1idJWD8cWexTV-tlzd18VJwJ0lgkqHYi80GZFqmj3S-oJtXwa9Y2LrRG1mU-gdlKfBIV0hZsIBm2arP9QlVTQlfIvuwS_Tc)
@@ -94,7 +91,6 @@ To create our own client, we will take advantage of this nice work. Let's dive i
 $ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f68667b4f68667b677a6d216c6062">[email protected]</a>:OpenAPITools/openapi-generator.git; cd openapi-generator
 ```
 
-
 We can then use the `/new.sh` script to generate a few placeholder files for us. We'll be generating a client, and since we're not creating any bugs we won't be generating test files.
 
 ```
@@ -107,7 +103,6 @@ Creating modules/openapi-generator/src/main/resources/java-magazine-client/api.m
 Creating bin/configs/java-magazine-client-petstore-new.yaml
 Finished.
 ```
-
 
 The library nicely generates a client generator for us, as well as some template files and even a config so we can test it easily! The config uses the well known [petstore](https://spring-framework-petclinic-qctjpkmzuq-od.a.run.app/?ref=lengrand.fr) by default.
 
@@ -122,7 +117,6 @@ additionalProperties:
   hideGenerationTimestamp: "true"
 ```
 
-
 It nicely mentions to the OpenAPI generator library which generator to use, which sample OpenAPI file to use as input, where the mustache template files are located and where to store the output.
 
 **Let's run it!**
@@ -131,7 +125,6 @@ It nicely mentions to the OpenAPI generator library which generator to use, whic
 $ ./mvnw clean package # package once to have the generator inside the generated jar
 $ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
 ```
-
 
 Let's see what the generated output looks like:
 
@@ -175,7 +168,6 @@ public class JavaMagazineClientClientCodegen extends DefaultCodegen implements C
 }
 ```
 
-
 *Note: At first glance, the method and variable names may look a bit like magic. It is because most of the logic comes from DefaultGenerator, and CodeGenConfig. If you feel lost, those two classes are where it's at.*
 
 Now that we have our baseline, what we want to do is work on our mustache files. Those files are basically templates that will be fed into the processing pipeline to generate our `.http` files.
@@ -198,7 +190,6 @@ If we look at the data object available for operations, we end up with this, whe
 {{/operations}}
 ```
 
-
 We can see it clearly if we look at the object during processing.
 
 ![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/LW_g2JLAtaj1yq2LJeg0LBb0yTOy4ufSyurPNWW6XjKcdsv5GhVSASr6yWS7vYv3vmEuS9xmbZqzBa4Mqt76dg_Bv47gMoifUjxInC0-z1WkJYJRU3grz4RBApXJAZl4ZCx1irLQ69axWx5CQAe1fM0)  
@@ -212,7 +203,6 @@ Let's rerun the generation and see what we get now:
 $ ./mvnw package 
 $ ./bin/generate-samples.sh bin/configs/java-magazine-client-petstore-new.yaml
 ```
-
 
 ![Creating an OpenAPI generator from scratch : From YAML to JetBrains HTTP Client](https://lh7-us.googleusercontent.com/hJ-53Q53ibGC0DuCaqu7yuoWpnLJB3d6g9SYUQ26-XeAVLW5JgavLfljBo08hnuyMwUsQo4Hgz5aBthp8L8jqFCpq1RBFWCz-PWFvpdofXDgR4o7QI_iyFKYMz4Afbet38-rEnzAuCXL4aCaL7ZUnZE)
 
@@ -234,7 +224,6 @@ Content-Type: application/xml
 DELETE http://petstore.swagger.io/v2/pet/{petId}
 Looks great to me! Let's try to run one of the calls
 ```
-
 
 Looks great to me! Let's try to run one of the calls.
 
@@ -261,7 +250,6 @@ public static class DoubleMustacheLambda implements Mustache.Lambda {
     }
 ```
 
-
 In order to make it available in our Generator, the openapi generator library offers the same mechanism as for the rest: We have to override a ready-made method.
 
 ```
@@ -272,7 +260,6 @@ protected ImmutableMap.Builder<String, Mustache.Lambda> addMustacheLambdas() {
             .put("doubleMustache", new JavaMagazineClientClientCodegen.DoubleMustacheLambda());
 }
 ```
-
 
 The code above is added to our `JavaMagazineClientClientCodegen` class.
 
@@ -292,7 +279,6 @@ Next, we also need to modify our mustache template to add that lambda at the rig
 {{/operations}}
 ```
 
-
 Et voilà! Running the sample again, we can now use variables as they are meant to be inside IntelliJ!
 
 In the sample below, I'm using the following local environment file:
@@ -304,7 +290,6 @@ In the sample below, I'm using the following local environment file:
   }
 }
 ```
-
 
 There is still a lot more to do with this generator. READMEs, payload, auth, headers, ... But now it's a matter of updating the mustache files as we want.
 

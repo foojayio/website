@@ -21,15 +21,13 @@ enlighterjs: true
 frozen: false
 ---
 
-Takeaways
----------
+## Takeaways
 
 * RISC-V is an open standard instruction set architecture that anyone can use to build new processors and accelerators, for example, for AI.
 * oneAPI Construction Kit (OCK) is a new framework that allows software developers and system designers to bridge the gap between hardware accelerators and open standards, by enabling a programming system to implement domain specific instructions for modern hardware such as RISC-V accelerators and custom processors.
 * TornadoVM, a parallel programming framework for Java, can take advantage of OCK to offload and accelerate Java workloads on RISC-V chips. This post shows how to run on RISC-V CPUs with vector extensions.
 
-Introduction
-------------
+## Introduction
 
 [RISC-V](https://riscv.org/ "RISC-V") is an open standard instruction set architecture (ISA) based on the principles of reduced instruction sets (RISC). RISC-V is freely available under open licences, allowing anyone to design, modify and implement RISC-V processors.
 
@@ -43,8 +41,7 @@ Furthermore, OCK could also be used as a runtime dispatcher of OpenCL and SPIR-V
 
 But, can we run Java workloads on these accelerators? Well, with the help of TornadoVM, a parallel programming framework for acceleration of Java workloads, it is possible. This post explains how to configure and install OCK to work as a backend for TornadoVM, allowing Java developers to access CPUs from different vendors, including RISC-V accelerators. Are you curious? Let's find out how this is possible.
 
-OCK for TornadoVM
------------------
+## OCK for TornadoVM
 
 OCK is in active development, and it is built based on the LLVM compiler. This post explains how to obtain the main dependencies from source files and Linux systems. All components explained in this post are fully open source.
 
@@ -56,7 +53,6 @@ If you use Fedora or Red Hat-based distributions, you will need to install the f
 sudo dnf install dtc ninja doxygen python3-pip git cmake spirv-tools 
 sudo pip3 install lit cmakelint
 ```
-
 
 ### Installation of OCK for TornadoVM
 
@@ -77,7 +73,6 @@ cd llvm-project
 llvmDIR=$PWD
 ```
 
-
 At the time of writing this post, the supported LLVM version for OCK is 18. Thus, we need to configure LLVM using the 18.x branch:
 
 ```
@@ -94,7 +89,6 @@ cmake llvm -GNinja \
 
 ninja -C build-riscv install
 ```
-
 
 #### Configuring oneAPI Construction Kit for RISC-V
 
@@ -113,7 +107,6 @@ cmake -GNinja -Bbuild-riscv \
 ninja -C build-riscv install
 ```
 
-
 ```
 
 ```
@@ -124,13 +117,11 @@ Next, we need to configure the Linux system to use the new OpenCL installation. 
 sudo vim /etc/OpenCL/vendors/ock.icd
 ```
 
-
 And we add the following line to the file: use your absolute path to the `libCL.so` file.
 
 ```bash
 /home/juan/repos/ock/oneapi-construction-kit/build-x86_64/install/lib/libCL.so
 ```
-
 
 #### Installing TornadoVM
 
@@ -142,13 +133,11 @@ cd TORNADOVM_ROOT
 source setvars.sh
 ```
 
-
 Let's explore all devices available:
 
 ```bash
 tornado --devices
 ```
-
 
 And we will get the following output. Note that the number of devices and the ordering depends on your local configuration. In my case, I have two GPUs that can be used with the OpenCL backend, namely an NVIDIA RTX 3070 and an Intel Integrated GPU (UHD 770). Additionally, we get a new device called **RefSi G1 RV64**. This is our RISC-V device we have just configured with OCK.
 
@@ -183,7 +172,6 @@ Driver: OpenCL
         Max WorkGroup Configuration: [1024, 1024, 1024]
         Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
 ```
-
 
 The **RefSi G1 RV64** device runs on a simulator. Let's run an example, a simple vector addition to illustrate the usage of TornadoVM on RISC-V with some debug information tell us which device was used.
 
@@ -223,7 +211,6 @@ public static void main(String[] args) throws TornadoExecutionPlanException {
 }
 ```
 
-
 The **add** method is the actual method to be accelerated on the RISC-V device. Note that, in the Java code, there is no information about which device to use, how to offload or which backend to use. TornadoVM will perform compilation, data handling and runtime scheduling automatically.
 
 To run the application:
@@ -231,7 +218,6 @@ To run the application:
 ```batch
 tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
 ```
-
 
 And the output:
 
@@ -250,11 +236,9 @@ b: [2, 2, 2, 2, 2, 2, 2, 2]
 c: [3, 3, 3, 3, 3, 3, 3, 3]
 ```
 
-
 ```batch
 
 ```
-
 
 **We just offloaded a Java method to a RISC-V accelerator!** This example is a simple vector addition, and, as we can see from the task-info, the device selected was a RISC-V with RVV vector extensions. We can go a step further and emit the RISC-V assembly code for our generated OpenCL kernel. Todo do so, we need to reconfigure OCK with debug information enabled using `-DCA_ENABLE_DEBUG_SUPPORT=ON -DCA_DEBUG_SUPPORT=ON` as follows:
 
@@ -273,20 +257,17 @@ cmake -GNinja -Bbuild-riscv-debug \
 ninja -C build-riscv-debug install
 ```
 
-
 Then, before we run TornadoVM, we need to export the following env variable:
 
 ```bash
 export CA_RISCV_DUMP_ASM=1    ## Print Assembly code
 ```
 
-
 We run the same application:
 
 ```bash
 tornado --jvm="-Ds0.t0.device=0:2" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
 ```
-
 
 And we will obtain the following output:
 
@@ -406,13 +387,11 @@ Task info: s0.t0
     Number of workgroups  : [1]
 ```
 
-
 **This is the RISC-V code for our example**, that was executed with the RefSi RISC-V Simulator from Codeplay. However, if we pay attention, there are no RISC-V Vector (RVV) instructions being generated. This is because we need to export the following variable with the vector width:
 
 ```bash
 export CA_RISCV_VF=4
 ```
-
 
 If we run TornadoVM again with the OCK debug information on, we obtain the following:
 
@@ -479,13 +458,11 @@ Task info: s0.t0
     Number of workgroups  : [1]
 ```
 
-
 And, if we export the following variable:
 
 ```
 export SPIKE_SIM_DEBUG=1
 ```
-
 
 We can even run step by step with a debugger that is included within the RefSi Simulator. How cool is this?
 
@@ -498,13 +475,11 @@ TornadoVM, as in version 1.0.7, supports three different backends: OpenCL, NVIDI
 source setvars.sh
 ```
 
-
 Then, we can query all accelerators that TornadoVM can run with the following command:
 
 ```bash
 tornado --devices
 ```
-
 
 And we get the following output:
 
@@ -560,7 +535,6 @@ Driver: OpenCL
         Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
 ```
 
-
 ```
 
 ```
@@ -572,7 +546,6 @@ RefSi supports SPIR-V 1.0, but TornadoVM requires, at least, SPIR-V 1.2. We can 
 ```bash
 tornado --jvm="-Dtornado.spirv.version=1.0" --devices
 ```
-
 
 And we will get the following output:
 
@@ -637,7 +610,6 @@ Driver: OpenCL
         Device OpenCL C version: OpenCL C 1.2 Clang 18.1.8
 ```
 
-
 ```
 
 ```
@@ -647,7 +619,6 @@ And we can use this SPIR-V backend and device to run our Java programs with Torn
 ```bash
 tornado --jvm="-Dtornado.spirv.version=1.0 -Ds0.t0.device=0:1" --threadInfo -m tornado.examples/uk.ac.manchester.tornado.examples.arrays.ArrayAddInt
 ```
-
 
 ```asm
 [ ASSEMBLY CODE  … ]
@@ -681,9 +652,7 @@ Task info: s0.t0
     Number of workgroups  : [1]
 ```
 
-
-Conclusions
------------
+## Conclusions
 
 Hardware specialisation is now everywhere and modern computing systems contain a wide range of processors for computing specialised tasks more efficiently, such as processors for AI and deep learning.
 
@@ -691,7 +660,6 @@ However, we also need to program and access new hardware accelerators and exploi
 
 This post just scratches the surface of the possibilities of execution and optimization of Java programs on modern hardware. I have written [a more detailed blogpost](https://jjfumero.github.io/posts/2024/09/10/tornadovm-ock "a more detailed blogpost") in which I also compared OCK on Intel and ARM CPUs with Java threads, and shows the potential for these types of solutions to run on modern and parallel CPUs.
 
-Acknowledgments
----------------
+## Acknowledgments
 
 I would like to thank [Colin Davidson](https://www.linkedin.com/in/colin-davidson-6a4b042/ "Colin Davidson") from [Codeplay](https://codeplay.com/ "Codeplay") for the support regarding the oneAPI Construction Kit for TornadoVM.

@@ -28,8 +28,7 @@ You are given minimum [starter code](https://github.com/wlnirvana/jtest) (\~20 l
 
 Are you ready? Let's go! 🚀
 
-Task 0: The Big Picture
------------------------
+## Task 0: The Big Picture
 
 Before getting your hands dirty, it is a good idea to get a big picture of what you will code up.
 
@@ -50,8 +49,7 @@ The answer is the runner. In the ["Run the test"](https://github.com/junit-team/
 
 So three main components in total, in nine steps below.
 
-Task 1: `@JTest` - Marker for Test Cases
-----------------------------------------
+## Task 1: `@JTest` - Marker for Test Cases
 
 Annotation is a new language construct introduced in Java 1.5. It is somewhat similar to comment in that it does not contain executable code directly, and is mainly used to provide some additional information to the program.
 
@@ -66,8 +64,7 @@ In case you haven't written any annotation before, here are some tips:
 
 After completing this task, run `T1.java` to check your implementation.
 
-Task 2: Finding Marked Methods
-------------------------------
+## Task 2: Finding Marked Methods
 
 To run the tests, we need to find all the methods annotated by the `@JTest` and execute them one by one. Let's create a dedicated class for this.
 
@@ -86,11 +83,9 @@ In this newly created `JTestRunner` class, please implement the **static** metho
 public static List<Method> getTestMethods(Class<?> clazz)
 ```
 
-
 After completing this task, run `T2.java` to check your implementation.
 
-Task 3: Running A Method
-------------------------
+## Task 3: Running A Method
 
 Now if anyone develops tests based on your JTest framework, you can successfully find the test case methods annotated by `@JTest`. The next step, of course, is to run them.
 
@@ -108,11 +103,9 @@ Please continue editing `JTestRunner` and implement the **static** method below.
 public static void runMethod(Method method)
 ```
 
-
 After completing this task, run `T3.java` to check your implementation.
 
-Task 4: Assertions
-------------------
+## Task 4: Assertions
 
 During the development of `runMethod` in task 3, you may have noticed that `invoke` can throw exceptions. These exceptions can be categorized into two types:
 
@@ -126,8 +119,7 @@ To distinguish between there two cases, you must first implement the assertions.
 
 After completing this task, run `T4.java` to check your implementation.
 
-Task 5: Test Result Class
--------------------------
+## Task 5: Test Result Class
 
 Our goal is to find the test methods with `getTestMethods`, and then execute them with `runMethod`. Each test method may produce several possible results:
 
@@ -145,8 +137,7 @@ Fow now only the method signature matters, so you can return whatever placeholde
 
 After completing this task, run `T5.java` to check your implementation.
 
-Task 6: Returning Test Results
-------------------------------
+## Task 6: Returning Test Results
 
 Update `runMethod` from task 3 so that after invoking the method passed in, it returns a `JTestResult` object containing proper information about the test result.
 
@@ -154,8 +145,7 @@ You may want to use [`getCause`](https://docs.oracle.com/en/java/javase/17/docs/
 
 **After completing this task, run `T6.java` to check your implementation.**
 
-Task 7: Running A Test Class
-----------------------------
+## Task 7: Running A Test Class
 
 `runMethod` executes only a single method. To run a test class containing multiple test methods, please add the following function `JTestRunner.`
 
@@ -170,11 +160,9 @@ Task 7: Running A Test Class
 public static List<JTestResult> runTestClass(String testClassName)
 ```
 
-
 After completing this task, run `T7.java` to check your implementation.
 
-Task 8: Entrance
-----------------
+## Task 8: Entrance
 
 Add `public static void main` to `JTestRunner` that starts the test. The `main` method should behave like what JUnit runner does, namely taking the first argument from commandline as the test class, running it, and printing the results.
 
@@ -188,11 +176,9 @@ Failed tests are: [assertTrueFail]
 Errored tests are: [shouldError]
 ```
 
-
 After completing this task, run `T8.java` to check your implementation.
 
-Task 9: JAR
------------
+## Task 9: JAR
 
 JTest is already a working framework now, but why not go even further to package it as a standalone JAR? This way, downstream developers can use it almost identically with JUnit.
 
@@ -204,8 +190,7 @@ If you are familiar with maven, `mvn package` should generate a jar package in `
 
 After completing this task, run `T9.java` to check your implementation.
 
-Next Steps
-----------
+## Next Steps
 
 Congratulations! You have successfully grown a 20-line skeleton project to a self-contained testing framework. But in case you want to dive deeper, here are some topics you may be interested in:
 
@@ -213,8 +198,7 @@ Congratulations! You have successfully grown a 20-line skeleton project to a sel
 2. In task 3, we did a simplification that `@JTest` only be annotated on `static` methods. JUnit takes a different approach, for [a good reason](https://martinfowler.com/bliki/JunitNewInstance.html). Can you modify your framework to support this as well?
 3. Write more powerful runners. E.g. one that can run all test classes in a package, instead of a single test class.
 
-Credits
--------
+## Credits
 
 This project is inspired by the following efforts.
 

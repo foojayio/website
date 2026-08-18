@@ -9,7 +9,6 @@ frozen: false
 ---
 
 ![](/images/pages/java-almanac/almanac-java-25.png)  
-<br />
 
 **Ever needed to quickly check what changed between Java 17 and Java 21?**
 
@@ -17,8 +16,7 @@ frozen: false
 
 **[javaalmanac.io](https://javaalmanac.io/) is the site to have in your bookmarks**!
 
-History
--------
+## History
 
 Created by Marc R. Hoffmann and [maintained by the Java community](https://github.com/marchof/java-almanac/graphs/contributors), the Java Version Almanac is exactly what the name suggests: a systematic, well-organized collection of information about every Java version, from the pre-1.0 days all the way to the latest LTS and the versions currently in development.
 
@@ -30,8 +28,7 @@ Everything is open source, managed in a [public GitHub repository](https://githu
 
 If you work with Java daily --- or even occasionally --- the Java Version Almanac is one of those quietly indispensable resources you'll find yourself reaching for more often than you expect.
 
-Long Term Support Versions
---------------------------
+## Long Term Support Versions
 
 * [Java 25](https://javaalmanac.io/jdk/25/)
 * [Java 21](https://javaalmanac.io/jdk/21/)

@@ -28,16 +28,14 @@ I started [my blog](https://blog.frankel.ch/) as a hobby seventeen years ago, in
 
 I was curious to compare what I learned by doing to the structured approach of a book. I ordered the book last year when it was still being written. It was published only early this year, and I was already reading (and reviewing!) [DuckDB in action](https://blog.frankel.ch/duckdb-in-action/). I put it on the top of my reading pile list; I finally finished it: here's my review.
 
-Facts
------
+## Facts
 
 * 17 chapters, divided into four parts
 * 2 appendices
 * 345 pages
 * $39.99 (eBook)
 
-Chapters
---------
+## Chapters
 
 Part 1 - Fundamentals
 
@@ -68,8 +66,7 @@ Part 4 - Promotion, adaptation, and expansion
 17. From blog post to conference talk
 18. So you want to write a book
 
-Pros and cons
--------------
+## Pros and cons
 
 * In the first chapter, the authors list the most common reasons developers mention not to write posts. I have heard many of these reasons and can confirm their existence. Then, the authors address each of them and provide multiple counter-arguments.
 * Part three is dedicated to blog post *patterns* ; each chapter describes a pattern in detail. Reading this made me realize that most blog posts fall into a specific and easily identifiable category. The authors structured each pattern-chapter into the following sections:
@@ -83,13 +80,10 @@ Pros and cons
 * I found part four less relevant, especially since cross-posting has been part of my workflow for ages, and I reuse writing content for conference talks. If you never considered these options, you'll benefit from these chapters.
 * The only con I found is that the authors remind us that you should ask your company before you reveal trade secrets. I understand that you would like to warn people, but when it's repeated several times throughout the book, I got the feeling they're writing to dummies--not something I'm fond of.
 
-Summary
--------
+## Summary
 
 If you're a technical writer, a Developer Advocate tasked with technical writing, or a regular developer who wants to start a blog or contribute to a company blog, I recommend getting this book.
 
 The exhaustive description of common patterns is a huge asset for beginning writers and can help even seasoned ones.
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/writing-for-developers/) on May 25^th^, 2025*

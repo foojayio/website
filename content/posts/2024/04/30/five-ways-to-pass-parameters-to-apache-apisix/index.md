@@ -26,8 +26,7 @@ Though the title is a bit misleading, as it's unrelated to REST, it does an exce
 
 I want to do the same for Apache APISIX; it's beneficial when you write a custom plugin.
 
-General setup
--------------
+## General setup
 
 The general setup uses Docker Compose and static configuration.  
 
@@ -47,7 +46,6 @@ services:
       - "9080:9080"
 ```
 
-
 1. Local httpbin for more reliable results and less outbound network traffic
 2. Static configuration file
 3. Plugins folder, one file per plugin
@@ -65,14 +63,12 @@ plugins:
 # ...
 ```
 
-
 1. Set static configuration
 2. Use every Lua file under `/opt/apisix/plugins` as a plugin
 3. Regular plugin
 4. Custom plugin, one per alternative
 
-Path variables
---------------
+## Path variables
 
 Path variables are a straightforward way to pass data. Their main issue is that they are limited to simple values, *e.g.* , `/links/{n}/{offset}`. The naive approach is to write the following Lua code:
 
@@ -87,7 +83,6 @@ function _M.access(_, ctx)
 end
 ```
 
-
 1. APISIX stores the URI in `ctx.var.uri`
 2. Nginx offers a regular expression API
 
@@ -97,7 +92,6 @@ Let's try:
 curl localhost:9080/path/15/3
 ```
 
-
 The log displays:
 
 ```
@@ -105,7 +99,6 @@ Order-Value pair: 0=/path/15/3
 Order-Value pair: 1=15
 Order-Value pair: 2=3
 ```
-
 
 I didn't manage errors, though. Alternatively, we can rely on Apache APISIX features: a specific [router](https://apisix.apache.org/docs/apisix/terminology/router/). The default router, `radixtree_host_uri`, uses both the host and the URI to match requests. `radixtree_uri_with_parameter` lets go of the host part but also matches parameters.
 
@@ -115,7 +108,6 @@ apisix:
   router:
     http: radixtree_uri_with_parameter
 ```
-
 
 We need to update the route:
 
@@ -128,7 +120,6 @@ routes:
       path-variables: ~
 ```
 
-
 1. Store `n` and `offset` in the context, under `ctx.curr_req_matched`
 
 We keep the plugin just to log the path variables:
@@ -139,16 +130,13 @@ function _M.access(_, ctx)
 end
 ```
 
-
 The result is as expected with the same request as above:
 
 ```
 n: 15, offset: 3
 ```
 
-
-Query parameters
-----------------
+## Query parameters
 
 Query parameters are another regular way to pass data. Like path variables, you can only pass simple values, *e.g.* , `/?foo=bar`. The Lua code doesn't require regular expressions:
 
@@ -163,13 +151,11 @@ function _M.access(_, _)
 end
 ```
 
-
 Let's try:
 
 ```bash
 curl localhost:9080/query\?foo=one\&bar=three
 ```
-
 
 The log displays:
 
@@ -177,7 +163,6 @@ The log displays:
 Key-Value pair: bar=three
 Key-Value pair: foo=one
 ```
-
 
 Remember that query parameters have no order.
 
@@ -206,9 +191,7 @@ function _M.access(_, ctx)
 end
 ```
 
-
-Request headers
----------------
+## Request headers
 
 Request headers are another way to pass parameters. While they generally only contain simple values, you can also use them to send structured values, *e.g.*, JSON. Depending on your requirement, APISIX can list all request headers or a specific one. Here, I get all of them:
 
@@ -223,13 +206,11 @@ function _M.access(_, _)
 end
 ```
 
-
 We test with a simple request:
 
 ```bash
 curl -H 'foo: 1' -H 'bar: two'  localhost:9080/headers
 ```
-
 
 And we got more than we expected because curl added default headers:
 
@@ -241,9 +222,7 @@ Key-Value pair: host=localhost:9080
 Key-Value pair: accept=*/*
 ```
 
-
-Request body
-------------
+## Request body
 
 Setting a request body is the usual way to send structured data, *e.g*, JSON. Nginx offers a simple API to collect such data.
 
@@ -257,7 +236,6 @@ function _M.access(_, _)
 end
 ```
 
-
 1. Access the body as a regular Lua table
 2. A table is necessary in case of multipart payloads, *e.g.*, file uploads. Here, we assume there's a single arg, the content body.
 
@@ -267,16 +245,13 @@ It's time to test:
 curl  localhost:9080/body -X POST -d '{ "foo": 1, "bar": { "baz": "two" } }'
 ```
 
-
 The result is as expected:
 
 ```
 Body: { "foo": 1, "bar": { "baz": "two" } }
 ```
 
-
-Cookies
--------
+## Cookies
 
 Last but not least, we can send parameters via cookies. The difference with previous alternatives is that cookies persist on the client side, and the browser sends them with each request. On the Lua side, we need to know the cookie name instead of listing all query parameters or headers.
 
@@ -289,7 +264,6 @@ function _M.access(_, ctx)
 end
 ```
 
-
 1. The cookie is named `foo` and is case-insensitive
 
 Let's test:
@@ -298,16 +272,13 @@ Let's test:
 curl --cookie "foo=Bar"  localhost:9080/cookies
 ```
 
-
 The result is correct:
 
 ```
 Cookie value: Bar
 ```
 
-
-Summary
--------
+## Summary
 
 In this post, we listed five alternatives to pass parameters server-side and explained how to access them on Apache APISIX. Here's the API summary:
 
@@ -327,7 +298,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [6 Ways To Pass Parameters to Spring REST API](https://javabulletin.substack.com/p/6-ways-to-pass-parameters-to-spring)
 * [How to Build an Apache APISIX Plugin From 0 to 1?](https://api7.ai/blog/how-to-build-an-apache-apisix-plugin-from-0-to-1)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/pass-parameters-apisix/) on April 28^th^, 2024*

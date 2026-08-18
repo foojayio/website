@@ -29,20 +29,17 @@ List<Employee> employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
                 , new Employee(3, "Abhishek", 29, 10000));
 ```
 
-
 ```java
 Map<Integer, String> map = employees
   .stream()
   .collect(Collectors.toMap(Employee::getId,Employee::getName));
 ```
 
-
 ```java
 Map<Long, List<Employee>> listMap = employees
   .stream()
   .collect(Collectors.groupingBy(Employee::getSalary));
 ```
-
 
 After refactoring, as per Java 10 local variable type inference:
 
@@ -52,18 +49,15 @@ var employees = Arrays.asList(new Employee(1, "Ashish", 28, 10000)
                 , new Employee(3, "Abhishek", 29, 10000));
 ```
 
-
 ```java
 var employeeMap = employees.stream()
   .collect(Collectors.toMap(Employee::getId,Employee::getName));
 ```
 
-
 ```java
 var groupedMap = employees.stream()
   .collect(Collectors.groupingBy(Employee::getSalary));
 ```
-
 
 In the above refactored code, the compiler can infer the declared type itself by looking at the RHS declaration. These are just some examples to help you understand the feature and how we can use local variable type inference.
 
@@ -95,7 +89,6 @@ var path = Paths.get("/src/main/resources/app.log");
 }
 ```
 
-
 #### Where it cannot be used
 
 1. Fields
@@ -116,7 +109,6 @@ var g = null;
 //Array initializer is not allowed here
 var k = {1, 2};
 ```
-
 
 #### What's the benefit?
 

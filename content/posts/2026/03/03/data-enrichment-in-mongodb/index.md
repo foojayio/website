@@ -34,8 +34,7 @@ The RiskReducer insurance company provides insurance for commercial structures. 
 
 Note that not all of these enrichment steps are occurring in the sequence shown above. Some may be happening in parallel and others may depend on prior steps. This gets even more complicated when we consider concurrency, workflow dependencies, etc...
 
-Concurrency in data enrichment
-------------------------------
+## Concurrency in data enrichment
 
 Data enrichment often needs to occur in a specific order to fulfill dependencies in the workflow. A status indicator would normally be used to ensure that each step of the workflow happens in the proper sequence. RiskReducer insurance uses the following statuses for their workflow above:
 
@@ -110,8 +109,7 @@ In the case that two people try to lock the same document at the same time, only
 
 In our example, 35 minutes after Mary's last update to the document, the TTL index will automatically remove the lock. At this point, the person assigned the job of completing the asset valuation in Mary's absence can then take the lock on the Asset section and complete the work. Note that the application should release the lock as part of the completion process.
 
-Schema design patterns
-----------------------
+## Schema design patterns
 
 When enriching data, it's important to keep schema design patterns in mind. In our insurance policy example, there are many things to take into account. We typically recommend embedding data that is needed for most reads in a single document within reason. However, this is not always the case. For example, a policy can apply to any number of buildings. The needs of a single location business may differ widely from Starbucks, which has approximately one million\* locations. There is no way we can embed all of these locations in a document given the 16mb document size limit as well as other performance considerations.
 
@@ -145,8 +143,7 @@ Be sure to keep the following in mind:
 * Create an index starting with policyID in the Assets collection to ensure a quick retrieval of assets for the given policy.
 * Depending how you decide to track enrichment status, you may need to create an empty array of assets in the collection in order to use the $exists clause for optimistic locking of that section. If you are using separate fields to control workflow, then the externalFlag operation may not be needed as you can use $exists on the Assets array to determine if they are in-document or in a separate collection.
 
-Best practices
---------------
+## Best practices
 
 ### Plan for concurrency
 
@@ -169,8 +166,7 @@ Although the user may not have changed any data, the application should periodic
 
 In most cases, the lock should be released when the user logs out of the application. The exception here is when a long, multi-day lock is needed. For short locks, release the lock regardless of whether the user logs out, or the application automatically logs them out after a time of inactivity. For longer, multi-day locks, rely on the TTL index to release the lock if the user has not.
 
-Anti-patterns
--------------
+## Anti-patterns
 
 ### Using separate (temporary) collections to enrich data
 
@@ -204,7 +200,6 @@ On the first attempt, one of the workers will update the document and three will
 
 When processing is being done at scale via multiple workers, it's best to try and organize these workers so that any given document is processed sequentially by a single worker, rather than randomly by multiple workers. This will avoid the multiple failed attempts to update the document.
 
-Conclusion
-----------
+## Conclusion
 
 Data enrichment can be a complex process, especially when fingers and eyeballs are part of the mix. Use a solid concurrency strategy to ensure updates are not overwritten and any human can lock the document (or part of the document) they need in order to edit the data without worry of someone else obliterating their changes. A lock taken by a human (or a machine) may need to be forcibly released for a variety of reasons. Using a separate lock collection with a TTL index can do this for you without the need to manually intervene. Finally, enriching a document in-place using status indicators will consume fewer resources on the DB server than creating the document in one collection and then moving it to another after enrichment is complete.

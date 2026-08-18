@@ -40,7 +40,6 @@ public class HelloWorld {
 }
 ```
 
-
 But what if we want to send more information from our eBPF program to our userland application than just some logs?
 
 For example, to share the accumulated number of `execve` calls, the processes of a specific user called and transmits information akin to:
@@ -55,11 +54,9 @@ record Data(
      @Unsigned int counter) {}
 ```
 
-
 This is what this week's article is all about.
 
-Communication
--------------
+## Communication
 
 When two regular programs want to share information, they either send data via sockets or use shared memory that both programs can access:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/01/sockets_and_shared_mem-2000x865.png)
@@ -83,8 +80,7 @@ But how can we then communicate? This is where eBPF maps come in:
 
 These fixed-size data structures form the backbone of every eBPF application, and their support is vital to creating any non-trivial tool.
 
-Using basic eBPF maps
----------------------
+## Using basic eBPF maps
 
 Using these maps, we can implement our execve-call-counter eBPF program. We start with the simple version that just stores the counter in a simple user-id-to-counter hash map:
 
@@ -113,7 +109,6 @@ int hello(void *ctx) {
    return 0;
 }
 ```
-
 
 *This example is from the [Learning eBPF book](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) by Liz Rice, pages 21 to 23, where you can find a different take. And if you're wondering why we're using `u64` instead of the more standard `uint64_t`, this is because the Linux kernel predates the definition of `u64` (and other such types) in `stdint.h` (see [StackOverflow](https://stackoverflow.com/a/30896945)), although today it's possible to use both.*
 
@@ -160,7 +155,6 @@ public class HelloMap {
 }
 ```
 
-
 This program attaches the eBPF program to the `execve` system call and uses the HashTable map mirror to access the map `counter_table`.
 
 You can run the [example](https://github.com/parttimenerd/hello-ebpf/blob/de6d87babd85aa4e2313cbd45f4c6e417cb7fc6c/bcc/src/main/java/me/bechberger/ebpf/samples/chapter2/HelloMap.java) using the `run.sh` script (after you built the project via the `build.sh` script) as root on an x86 Linux:
@@ -176,7 +170,6 @@ ID 0: 1 ID 1000: 12
 ...
 ID 0: 22 ID 1000: 176
 ```
-
 
 Here, user 0 is the root user, and user 1000 is my non-root user, I called `ls` in the shell with both users a few times to gather some data.
 
@@ -202,7 +195,6 @@ But maybe my map mirror is broken, and this data is just a fluke? It's always go
 ]
 ```
 
-
 We can see that our examples are in the correct ballpark.
 
 *To learn more about the features of bpftool, I highly recommend reading the article ["Features of bpftool: the thread of tips and examples to work with eBPF objects"](https://qmonnet.github.io/whirl-offload/2021/09/23/bpftool-features-thread/) by Quentin Monnet.*
@@ -211,8 +203,7 @@ Storing simple numbers in a map is great, but what if we want to keep more compl
 
 The most recent addition to the hello-ebpf project is the support of record/struct values in maps:
 
-Storing more complex structs in maps
-------------------------------------
+## Storing more complex structs in maps
 
 The eBPF code for this [example](https://github.com/parttimenerd/hello-ebpf/blob/a5e7f979b0560d9603b6736b9beb8874618d93fb/bcc/src/main/java/me/bechberger/ebpf/samples/own/HelloStructMap.java) is a slight extension of the previous example:
 
@@ -249,7 +240,6 @@ int hello(void *ctx) {
 }
 ```
 
-
 The Java application is slightly more complex, as we have to model the `data_t` struct in Java. We start by defining the record Data as before:
 
 ```java
@@ -261,7 +251,6 @@ record Data(
      /** count of execve calls */
      @Unsigned int counter) {}
 ```
-
 
 *The @Unsigned annotation is part of the [ebpf-annotations](https://github.com/parttimenerd/hello-ebpf/tree/main/annotations) module and allows you to document type properties that aren't present in Java.*
 
@@ -287,7 +276,6 @@ record BPFStructType(String bpfName,
     implements BPFType
 ```
 
-
 Which model struct members as follows:
 
 ```
@@ -304,7 +292,6 @@ record BPFStructMember(String name,
                        int offset, 
                        Function<?, Object> getter)
 ```
-
 
 With these classes, we can model our `data_t` struct as follows:
 
@@ -331,7 +318,6 @@ BPFType.BPFStructType DATA_TYPE =
                        (int) objects.get(2)));
 ```
 
-
 *This is cumbersome, I know, but it will get easier soon, I promise.*
 
 The `DATA_TYPE` type can then be passed to the `BPFTable.HashTable` to create the `UINT64T_DATA_MAP_PROVIDER`:
@@ -349,7 +335,6 @@ BPFTable.TableProvider<BPFTable.HashTable<@Unsigned Long, Data>>
                      /* value type */ DATA_TYPE, 
                      name);
 ```
-
 
 We use this provider to access the map with `BPF#get_table`:
 
@@ -383,7 +368,6 @@ public class HelloStructMap {
 }
 ```
 
-
 We can run the example and get the additional information:
 
 ```bash
@@ -413,11 +397,9 @@ ID 0 (GID 0): 5 ID 1000 (GID 1000): 14
 ]
 ```
 
-
 Granted, it doesn't give you more insights into the observed system, but it is a showcase of the current state of the map support in hello-ebpf.
 
-Conclusion
-----------
+## Conclusion
 
 eBPF maps are the primary way to communicate information between the eBPF program and the userland application.
 

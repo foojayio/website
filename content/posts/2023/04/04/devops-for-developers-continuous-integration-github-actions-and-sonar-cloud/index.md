@@ -39,16 +39,13 @@ Let's start with the basics!
 
 {{< youtube NaL5il6cLGQ >}}
 
-<br />
-
 Continuous Integration is a software development practice in which code changes are automatically built and tested in a frequent and consistent manner. The goal of CI is to catch and resolve integration issues as soon as possible, reducing the risk of bugs and other problems slipping into production.
 
 CI often goes hand in hand with Continuous Delivery (CD) which aims to automate the entire software delivery process, from code integration to deployment in production. The goal of CD is to reduce the time and effort required to deploy new releases and hotfixes, enabling teams to deliver value to customers faster and more frequently.
 
 With CD, every code change that passes the CI tests is considered ready for deployment, allowing teams to deploy new releases at any time with confidence. I won't discuss continuous delivery in this post but I will go back to it as there's a lot to discuss. I'm a big fan of the concept but there are some things we need to monitor.
 
-Continuous Integration Tools
-----------------------------
+## Continuous Integration Tools
 
 There are many powerful continuous integration tools. Here are some commonly used tools:
 
@@ -114,7 +111,6 @@ When defining dependencies we need to focus on specific versions. There are many
 </dependency>
 ```
 
-
 This is very specific and great for repeatability. However, this might become out of date quickly. We can replace the version number with `LATEST` or `RELEASE` which will automatically get the current version. This is bad as the builds will no longer be repeatable. However, the hard-coded three-number approach is also problematic. It's often the case that a patch version represents a security fix for a bug. In that case, we would want to update all the way to the latest minor update but not newer versions.
 
 E.g. For that previous case I would want to use version `2.3.2` implicitly and not `2.4.1`. This trades off some repeatability for minor security updates and bugs. But a better way would be to use the [Maven Versions Plugin](http://www.mojohaus.org/versions-maven-plugin/) and periodically invoke the `mvn versions:use-latest-releases` command. This updates the versions to the latest to keep our project up to date.
@@ -147,8 +143,7 @@ This contributes to a less than stellar developer experience, especially as a te
 
 Ultimately, this connects directly to the productivity of the developers. But we don't have profilers for these sorts of optimizations. We have to measure each time, this can be painstaking.
 
-GitHub Actions
---------------
+## GitHub Actions
 
 GitHub Actions is a continuous integration/continuous delivery (CI/CD) platform built into GitHub. It is stateless although it allows the self-hosting of agents to some degree. I'm focusing on it since it's free for open-source projects and has a decent free quota for closed-source projects.
 
@@ -198,7 +193,6 @@ jobs:
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
 ```
 
-
 The last three lines update the dependency graph. But this feature fails or at least it failed for me. Removing them solved the problem. The rest of the code is standard YAML configuration.
 
 The `pull_request` and `push` lines near the top of the code, declare that builds will run on both a pull request and a push to the master. This means we can run our tests on a pull request before committing. If the test fails, we will not commit. We can disallow committing with failed tests in the project settings.
@@ -246,11 +240,9 @@ void testActivateAccount() throws Exception {
 }
 ```
 
-
 This means the assert call failed. `isActivated()` returned `false` and failed the test. This should help a developer narrow down the issue and understand the root cause.
 
-Going Beyond
-------------
+## Going Beyond
 
 As we mentioned before CI is about developer productivity. We can go much further than merely compiling and testing. We can enforce coding standards, lint the code, detect security vulnerabilities and much more. In this example let's integrate Sonar Cloud which is a powerful code analysis tool (linter). It finds potential bugs in your project and helps you improve code quality.
 
@@ -297,7 +289,6 @@ We now need to integrate this into the project. First, we need to add these two 
 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 ```
 
-
 Notice that the JHipster project we created already has SonarQube support which [should be removed from the pom file](https://github.com/shai-almog/HelloJHipster/pull/8) before this code will work.
 
 After this we can replace the "Build with Maven" portion of the `maven.yml` file with the following version:
@@ -309,7 +300,6 @@ After this we can replace the "Build with Maven" portion of the `maven.yml` file
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=shai-almog_HelloJHipster package
 ```
-
 
 Once we do that, SonarCloud will provide reports for every pull request merged into the system as shown here:
 
@@ -323,8 +313,7 @@ Notice that we have tabs that explain exactly why the issue is a problem, how to
 
 Two additional interesting elements we saw before are the coverage and duplication reports. SonarCloud expects that tests will have 80% code coverage (trigger 80% of the code in a pull request), this is high and can be configured in the settings. It also points out duplicate code which might indicate a violation of the Don't Repeat Yourself (DRY) principle.
 
-Finally
--------
+## Finally
 
 CI is a huge subject with many opportunities to improve the flow of your project.
 

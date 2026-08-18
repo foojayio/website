@@ -39,7 +39,6 @@ JakartaTransformer
 <path_to_local_mvn_repo>/⁨org⁩/eclipse⁩/microprofile/config⁩/microprofile-config-api⁩/1.1⁩/microprofile-config-api-1.1-jakarta.jar
 ```
 
-
 Using the above command, you create a converted JAR file that can be picked up by Maven very easily by just adding the classifier element to the dependency:
 
 ```xml
@@ -51,7 +50,6 @@ Using the above command, you create a converted JAR file that can be picked up b
     <classifier>jakarta</classifier>
 </dependency>
 ```
-
 
 But in most cases, a bit of extra work is required. So in the next paragraph we explain in more detail what is needed for a few frameworks and libraries.
 
@@ -68,7 +66,6 @@ When you need some MicroProfile functionality in your application, you typically
     <scope>provided</scope>
 </dependency>
 ```
-
 
 When you look at the POM file itself, you see that it makes references to some of the Java EE specifications like CDI, JAX-RS, and JSON. The other dependencies are related to the MicroProfile specification itself.
 
@@ -96,8 +93,6 @@ As already mentioned, in the end, the library maintainers will create a version 
 
 When you want to try it out, use the following dependency block in Maven and refer to the repository where it is available.
 
-<br />
-
 ```xml
 <dependency>     
      <groupId>com.github.primefaces</groupId>     
@@ -113,7 +108,6 @@ When you want to try it out, use the following dependency block in Maven and ref
     </repository>  
 </repositories>
 ```
-
 
 ### Start Experimenting with the Eclipse Transformer Project on the Payara Platform
 

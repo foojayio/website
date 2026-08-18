@@ -28,8 +28,7 @@ And the feature that immediately grabs the attention this time is *stable values
 This post takes you on a tour of everything that is part of this release, giving you a brief introduction to each of them. Where applicable the differences with Java 24 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 > Short descriptions of the repreviewed and finalized features are provided to prevent this article from becoming too lengthy. Each of these features comes with a link to a longer description should you wish to learn more.
 
-JEP Overview
-------------
+## JEP Overview
 
 To start off, let's look at an overview of the JEPs that ship with Java 25. This table contains the preview status for all JEP's, to which project they belong, what kind of features they add and the things that have changed since Java 24.
 
@@ -54,8 +53,7 @@ To start off, let's look at an overview of the JEPs that ship with Java 25. This
 | **520** | JFR Method Timing \& Tracing                        |                 | HotSpot / JFR | Profiling        | New feature                            |
 | **521** | Generational Shenandoah                             |                 | HotSpot / GC  | Performance      | Stability and performance improvements |
 
-New features
-------------
+## New features
 
 Let's start with the JEP's that add brand-new features to Java 25.
 
@@ -92,7 +90,6 @@ class OrderController {
 }
 ```
 
-
 Whenever an instance of `OrderController` is created, the `logger` field is initialized eagerly, which potentially makes creating an `OrderController` slow.  
 
 And this might not be the only place in our guitar store application where a `logger` field is being initialized eagerly:
@@ -104,7 +101,6 @@ class GuitarStore {
     static final ManufacturerService MANUFACTURERS = new ManufacturerService();
 }
 ```
-
 
 All this initialization work causes the application to start up more slowly, and the worst thing is: it may not even be necessary! If a user is simply browsing the guitar store, with no intention of ordering a new guitar, the `OrderController` won't even be called and we will have initialized the `logger` field for nothing.
 
@@ -132,7 +128,6 @@ class OrderController {
     }
 }
 ```
-
 
 This improves application startup, but comes with a few drawbacks of its own:
 
@@ -176,7 +171,6 @@ class OrderController {
 }
 ```
 
-
 After the call to `StableValue.of()`, the stable value holds no content.  
 
 When it is accessed through the `getLogger()` method, `logger.orElseSet(...)` returns its content if the stable value was already set.  
@@ -215,7 +209,6 @@ class GuitarStore {
 }
 ```
 
-
 The application's startup time improves because it no longer initializes its components, such as `OrderController`, up front. Rather, it initializes each component on demand, via the `orElseSet` method of the corresponding stable value. Each component, moreover, initializes its sub-components, such as its logger, on demand in the same way.
 
 Under the hood, the JVM will treat the content of any stable value that is declared as `final` as a constant, allowing constant-folding optimizations to happen.
@@ -242,7 +235,6 @@ class OrderController {
 }
 ```
 
-
 Here, `logger` is no longer a stable value, but a stable `Supplier`. When a stable supplier is first created via `StableValue.supplier(...)`, the content of the underlying stable value is not yet initialized. To access the logger, clients call `logger.get()`, of which the first invocation will invoke the supplier and use its result to initialize the stable value. Subsequent invocations of `logger.get()` will return the content immediately.  
 
 The resulting code is arguably more readable, because we no longer need a separate `getLogger` method.
@@ -262,7 +254,6 @@ class GuitarStore {
     }
 }
 ```
-
 
 Here, `ORDERS` is no longer a stable value, but a stable list, where each element is the content of an underlying stable value. To access the content, clients call `ORDERS.get(...)`, passing it an index, of which the first invocation will invoke the lamdba function that ignores the index and invokes the `OrderController()` constructor. Subsequent invocations of `ORDERS.get(...)` with the same index will return the element's content immediately.
 
@@ -368,7 +359,6 @@ public class HelloStreamWarmup {
 }
 ```
 
-
 This program runs in 90 milliseconds with an AOT cache that contains no profiles. After collecting profiles into the AOT cache, it runs in 73 milliseconds --- an improvement of 19%. The AOT cache with profiles occupies an additional 250 kilobytes, about 2.5% more than the AOT cache without profiles.
 
 A short program such as this has only a short warmup period, but with cached profiles that warmup goes even faster as a result of timely and accurate JIT activity. More complex and longer-running programs are also likely to warm up more quickly, for the same reason.
@@ -393,7 +383,6 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
 -----END PUBLIC KEY-----
 ```
-
 
 The Java Platform currently doesn't include an easy-to-use API for decoding and encoding text in the PEM format, which means that decoding a PEM-encoded key can be a tedious job that involves careful parsing of the source PEM text. To further illustrate this point, encrypting and decrypting a private key currently requires over a dozen lines of code.
 
@@ -452,7 +441,6 @@ PrivateKey key = pemDecoder.decode(pem, PrivateKey.class);
 // this decodes an encrypted cryptographic object
 PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);
 ```
-
 
 ##### Preview Warning
 
@@ -561,7 +549,6 @@ jdk.MethodTrace {
 }
 ```
 
-
 As you can see, the filter is specified just like a [method reference](https://docs.oracle.com/javase/specs/jls/se24/html/jls-15.html#jls-15.13).  
 
 As the JVM starts up, it instruments the targeted method by injecting bytecode to emit a `MethodTrace` event.
@@ -593,7 +580,6 @@ sun.security.util.KnownOIDs.<clinit>()                           1  7.550000 ms
 ...
 ```
 
-
 ##### Filtering on Classes and Annotations
 
 To time or trace multiple methods, a filter can mention a class or an annotation.  
@@ -614,8 +600,7 @@ This new approach comes with both performance and usability benefits. As we have
 
 For more information on this feature, read [JEP 520](https://openjdk.org/jeps/520).
 
-Repreviews and Finalizations
-----------------------------
+## Repreviews and Finalizations
 
 Now it's time to take a look at a few features that may already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed (or finalized) in Java 25, with only minor changes compared to Java 24 in most cases. Therefore, to avoid a very lengthy article, we'll outline these changes and link to a previous article for a full feature description, should you wish to refresh your memory.
 
@@ -789,8 +774,7 @@ This means the `-XX:+UnlockExperimentalVMOptions` option that was required in Ja
 
 For more information on this feature, read [JEP 521](https://openjdk.org/jeps/521) or the [full feature description](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-404-generational-shenandoah-experimental) from a previous article.
 
-Deprecations, Removals \& Restrictions
---------------------------------------
+## Deprecations, Removals \& Restrictions
 
 Java 25 comes with a single removal.
 
@@ -804,7 +788,6 @@ Supporting multiple platforms has been the focus of the Java ecosystem since the
 
 For more information on this removal, read [JEP 503](https://openjdk.org/jeps/503).
 
-Final thoughts
---------------
+## Final thoughts
 
 And that concludes our discussion of the 18 JEP's that come with Java 25. But that's not even all that's new: [many other updates](https://jdk.java.net/25/release-notes) were included in this release, including various performance, stability and security updates. One thing is for sure: this version of Java is ready to perform to the limit. So what are you waiting for? It's time to take this brand-new Java release for a high-performance spin!

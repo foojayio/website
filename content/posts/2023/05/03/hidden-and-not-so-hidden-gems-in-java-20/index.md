@@ -40,7 +40,6 @@ I am using the Java 20 jshell tool to demonstrate the code in this article. To f
 Jshell>
 ```
 
-
 Three JEPs in Java 20 are published as incubator modules to solicit developer feedback. An incubator module's API could be altered or disappear entirely---that is, not be released in future JDK releases. Therefore, you shouldn't use incubator features in production code. To use the incubator modules, use the `--add-modules` JVM flag.
 
 The other JEPs in Java 20 are preview features. Those features are fully specified and implemented but are provided in an early release to gather feedback. You should assume that preview features will change and not use them in production code. Use the `--enable-preview` switch to use such features.
@@ -51,8 +50,7 @@ In this article, I'll describe those seven JEPs and then dive into other changes
 
 By the way, my previous "[Java 20 sneak peek](https://blogs.oracle.com/javamagazine/post/java-20-preview)" article goes into the JEPs with coding examples, which are not duplicated here. This article is long enough without them!
 
-The JEPs in Java 20
--------------------
+## The JEPs in Java 20
 
 Seven successful JEPs made it into the Java 20 release (one more than predicted in my previous article). Scoped values are a new incubating feature, while the remaining six JEPs are resubmissions and updates of already-known incubator and preview features that appeared in Java 19 or earlier.
 
@@ -117,8 +115,7 @@ There have been several versions of this feature since Java 17. Initially two se
 
 **Vector API (fifth incubator), JEP 438**. This API helps you express vector computations that reliably compile at runtime to optimal vector instructions on supported CPU architectures. The goal is to achieve much faster performance than with scalar computations. Versions of this API have been incubated since Java 16. This fifth version has a small set of bug fixes and performance enhancements.
 
-Hidden gems: The most important non-JEP changes
------------------------------------------------
+## Hidden gems: The most important non-JEP changes
 
 Java 20 shipped with hundreds of performance, stability, and security improvements beyond the seven JEPs described earlier. Here are the most significant non-JEP changes.
 
@@ -131,7 +128,6 @@ a = a + b;
 a += b;
 ```
 
-
 Many Java developers will say there is no difference. However, these two operations are not always equivalent in Java. If a is a short and b is an int, the second operation will result in the following compiler error because a + b returns an int that cannot be assigned to the short variable a without an explicit cast:
 
 ```
@@ -139,7 +135,6 @@ LossyConversions.java:8: error: incompatible types: possible lossy conversion fr
                a = a + b;
                      ^
 ```
-
 
 By contrast, a += b is allowed because the compiler inserts an implicit cast in a compound assignment. The statement a += b is equivalent to a = (short) (a + b), where the left 16 bits of the int result are truncated when casting to a short, resulting in the potential loss of information. The following interface will compile without any warning; however, when you run it, you may get unexpected results:
 
@@ -161,7 +156,6 @@ public interface LossyConversions {
     9464
 ```
 
-
 Notice that the result isn't the expected 75,000. It's the truncated result of conversion loss: 9,464.
 
 To help with this issue, Java 20 introduced a [compiler (javac) lint option](https://docs.oracle.com/en/java/javase/20/docs/specs/man/javac.html#options) called lossy-conversions, which generates warnings about type casts in compound assignments (such as += or \*=) that could result in data loss. Warnings such as the following alert developers about potentially undesirable behavior:
@@ -174,7 +168,6 @@ LossyConversions.java:8: warning: [lossy-conversions] implicit cast from int to 
 1 warning
 ```
 
-
 You can silence these warnings using the `@SuppressWarnings("lossy-conversions")` annotation, but you shouldn't.
 
 **New APIs for TLS and DTLS key-exchange named groups**. Java 20 added two new APIs to allow customization of the named groups of key-exchange algorithms used in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) connections on a per-connection basisNew APIs for TLS and DTLS key-exchange named groups. Java 20 added two new APIs to allow customization of the named groups of key-exchange algorithms used in Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) connections on a per-connection basis\*.
@@ -183,7 +176,6 @@ You can silence these warnings using the `@SuppressWarnings("lossy-conversions")
 javax.net.ssl.SSLParameters.getNamedGroups()
 javax.net.ssl.SSLParameters.setNamedGroups()
 ```
-
 
 The underlying key provider may define the default named groups for each connection. However, the named groups can be customized by setting the jdk.tls.namedGroups system property or by using the setNamedGroups() method. If the system property is not null and the setNamedGroups() method is used, the named groups that are passed will override the default named groups for the specified connection.
 
@@ -212,7 +204,6 @@ As a result, the old command-line options that were used to provide parameter va
 -XX:G1ConcRefinementServiceIntervalMillis=msec
 ```
 
-
 These options will be removed entirely in the future, and their use after that time will terminate the startup of the JVM.
 
 **Preventive garbage collections disabled by default**. The G1 garbage collector in Java 17 introduced preventive garbage collections, thereby avoiding costly evacuation failures caused by allocation bursts when the heap was almost full.
@@ -234,8 +225,7 @@ Also in Java 20, the locale data has been upgraded to use the [Unicode Consortiu
 
 **Time zone data updated to IANA version 2023c** . [Version 2023c tz](https://mm.icann.org/pipermail/tz-announce/2023-March/000079.html) incorporates modifications from the 2022b and 2022a releases, which have combined various regions with identical time stamp data post-1970 into a single time zone database. While all time zone IDs remain the same, the combined time zones refer to a shared zone database.
 
-Hidden gems: Java 20 enhancements
----------------------------------
+## Hidden gems: Java 20 enhancements
 
 **Optimized intrinsic features for encryption algorithms** . Java 20 provides two new intrinsic features. Remember that flags controlling intrinsics require the option `-XX:+UnlockDiagnosticVMOptions`.
 
@@ -270,16 +260,13 @@ To prevent the JIT compiler from optimizing these methods, use the following com
 -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_floatToFloat16,_float16ToFloat
 ```
 
-
-Hidden gems: Java 20 bug fixes and related changes
---------------------------------------------------
+## Hidden gems: Java 20 bug fixes and related changes
 
 **Java XSL Template limitations**. Suppose you use the JDK's XSLT processor to convert stylesheets to Java objects. If the XSL template is too large, you may encounter an exception.
 
 ```
 com.sun.org.apache.xalan.internal.xsltc.compiler.util.InternalError: Internal XSLTC error: a method in the translet exceeds the Java Virtual Machine limitation on the length of a method of 64 kilobytes. This is usually caused by templates in a stylesheet that are very large. Try restructuring your stylesheet to use smaller templates.
 ```
-
 
 To avoid this issue, you can restructure your stylesheet to smaller templates or use third-party JAR files in the classpath to override the JDK's XSLT processor.
 
@@ -327,8 +314,7 @@ The filter pattern is set in the `JDK/conf/management/management.properties` fil
 
 The serialization filtering and the filter pattern format are described in detail in the Java Core Libraries Developer Guide. If any additional Java types need to be passed, the default filter can be overridden by using the `-Dcom.sun.management.jmxremote.serial.filter.pattern= option`.
 
-Hidden gems: Java 20 deprecation and removals
----------------------------------------------
+## Hidden gems: Java 20 deprecation and removals
 
 **Methods changed to throw an UnsupportedOperationException** . Java 20 removes the ability to suspend or resume a thread using the `Thread.suspend()` and `Thread.resume()` methods. Those methods were prone to deadlock and have been deprecated since JDK 1.2. They have been changed to throw an UnsupportedOperationException.
 
@@ -342,13 +328,11 @@ For example, here's the old code.
 URL url = new URL("https://blogs.oracle.com/authors/mohamed-taman");
 ```
 
-
 And here's the new code.
 
 ```
 URL url = URI.create("https://blogs.oracle.com/authors/mohamed-taman").toURL();
 ```
-
 
 When a custom stream handler is required to construct a URL, use the new `URL::of(URI, URLStreamHandler)` methods.
 
@@ -370,11 +354,8 @@ You can re-enable these cipher suites at your own risk by removing `ECDH` from t
 
 This change is intended to make misconfigurations more obvious and avoid potential security issues caused by unexpected behavior.
 
-Conclusion
-----------
+## Conclusion
 
 There's a lot more to a new Java release than the widely publicized JEPs. Study all these changes; even if you don't use the preview and incubator features, there are sufficient bug fixes and other enhancements to make Java 20 worth testing and using on production systems today.
-
-
 
 Originally posted on [Java Magazine on April 20, 2023](https://blogs.oracle.com/javamagazine/post/java-20-gems-jdks).

@@ -26,8 +26,7 @@ Part 2 described how to use the new capabilities offered by Leyden and presented
 
 Part 3 provides a more detailed account of how Leyden's proposed solution operates and presents a first look at tooling that allows you to assess the benefits that result and tune your application to make the most of what Leyden offers.
 
-What is inside the Ahead of Time Cache?
----------------------------------------
+## What is inside the Ahead of Time Cache?
 
 Ideally, an AOT cache would simply include everything needed to allow a production run to skip straight through to its warmed up state. However, in practice training runs don't always cover all the things that can happen at runtime and hence that the assets contained in any generated AOT cache will be more or less complete.
 
@@ -85,8 +84,7 @@ Leyden premain also includes CompiledMethods, i.e. pre-compiled Java methods, in
 
 Training data is part of the Leyden specific code. It tracks which methods have actually been loaded, executed, and used during the training run and how they have been used. Normally all loaded classes have associated class training data, but these may be omitted if, say, the class is loaded by a custom (user-defined) loader, is modified by an agent or fails to resolve because of linkage errors.There is a usage threshold which means that only methods that have been executed above that threshold will have associated method training data. Likewise, compiled method training data only exists for methods actually compiled during training. This helps both in keeping a smaller footprint in the cache and removing less useful data so processing the cache is faster.
 
-How Do I Know Leyden Is Helping?
---------------------------------
+## How Do I Know Leyden Is Helping?
 
 Depending on how well you train your deployment you may see different improvements in time to reach application start (startup time) and time to reach peak performance (warmup time). Log output is one useful way to measure these two metrics but the details will depend on what monitoring capabilities are available in your test or production environment. However, simply measuring these two times (or even recording warmup profiles) doesn't help with the problem of explaining why, for some given training regime, you get a specific improvement or perhaps, in some cases, no measurable improvement.
 
@@ -102,8 +100,7 @@ The first thing we need to do is to compile this application on the root folder:
 
 ![mvn clean package](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tm6pz4hlp6od2017a0s7.gif)
 
-Training the application
-------------------------
+## Training the application
 
 Once we have the jar created, we use it to start a training run:
 
@@ -144,8 +141,7 @@ The arguments we are going to use are the following:
 
 On this run, we created the *production.log* file.
 
-Analyzing the Cache
--------------------
+## Analyzing the Cache
 
 After using it, we can stop it and analyze how the AOT Cache behaved with our AOT Cache diagnostics tool: <https://github.com/Delawen/leyden-analyzer>
 

@@ -35,12 +35,9 @@ Debugging network communication issues is a critical skill for any front-end dev
 
 {{< youtube _DfNti1q6ec >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-**Network Debugging Powerhouse**
---------------------------------
+## **Network Debugging Powerhouse**
 
 Modern browsers come equipped with developer tools that rival standalone IDE debuggers in capability and convenience. Both Chrome and Firefox have robust network monitoring features that allow developers to observe/analyze requests and responses without leaving the browser.
 
@@ -56,8 +53,7 @@ While this post focuses on debugging techniques, it's worth noting that these to
 
 ![](image19-chrome-network-monitor-614x510.png)
 
-**Re-Issuing and Modifying Requests**
--------------------------------------
+## **Re-Issuing and Modifying Requests**
 
 One of the most powerful debugging features is the ability to re-issue requests. Instead of switching to external tools like cURL or Postman, browsers allow us to modify and resend requests directly.
 
@@ -75,8 +71,7 @@ Both browsers let you copy a request as a cURL command via the context menu. Thi
 
 If you prefer Postman, you can copy request headers and payloads from the browser and paste them into Postman to replicate requests.
 
-**Throttling and Debugging Race Conditions**
---------------------------------------------
+## **Throttling and Debugging Race Conditions**
 
 Network throttling is a highly underrated feature that can be a game-changer for debugging specific classes of bugs. Both Chrome and Firefox allow developers to simulate various network speeds, from 2G connections to fast 4G.
 
@@ -98,8 +93,7 @@ We then use the "No throttling" dropdown to select pre-configured speeds or crea
 
 In Firefox we have similar functionality is available under the Network Monitor.
 
-**Managing State with Storage Tools**
--------------------------------------
+## **Managing State with Storage Tools**
 
 Local storage, session storage, and indexedDB often hold data critical to reproducing bugs, especially those tied to specific user states or devices.
 
@@ -123,8 +117,7 @@ This functionality has many powerful uses for debugging:
 2. **Share Local State:** Users can export their local storage, cookies, or indexedDB entries, allowing developers to reproduce issues locally.
 3. **Clear Cache Strategically:** Clear only the relevant entries instead of a blanket cache clear, preserving useful state for debugging.
 
-**Analyzing Request and Response Headers**
-------------------------------------------
+## **Analyzing Request and Response Headers**
 
 Request and response headers often hold the key to understanding network issues. We can use the network monitor to inspect:
 
@@ -134,15 +127,13 @@ Request and response headers often hold the key to understanding network issues.
 
 These tools are especially useful when debugging missing headers: Look for required headers like `Content-Type` or `Authorization`. Debugging Authentication: Use the "Copy as cURL" feature to test API calls with modified headers directly in the terminal.
 
-**Debugging in Incognito Mode: Limitations and Best Practices**
----------------------------------------------------------------
+## **Debugging in Incognito Mode: Limitations and Best Practices**
 
 Incognito mode can help isolate issues by providing a clean slate, however it has some limitations. Multiple incognito windows share the same state, which can lead to unintentional persistence of local data.
 
 I suggest using **storage management tools** to manually clear or modify local data instead of relying solely on incognito mode. Keep only one incognito window open during testing to avoid unintended state sharing.
 
-**Connecting the Front-End to the Database**
---------------------------------------------
+## **Connecting the Front-End to the Database**
 
 The front-end is often a transition point between user interaction and back-end data processing. While this post focuses on debugging the network layer, it's important to remember that:
 
@@ -151,8 +142,7 @@ The front-end is often a transition point between user interaction and back-end 
 
 We can use **custom response headers** to include diagnostic information from the back end, such as query execution time or error codes. We can leverage **server logs** in conjunction with front-end debugging to get a complete picture of the issue.
 
-Final Word
-----------
+## Final Word
 
 Browser developer tools are indispensable for debugging network communication issues, offering features like request replay, throttling, and storage management that simplify the debugging process. By mastering these tools, front-end developers can efficiently identify and resolve issues, ensuring a smoother user experience.
 

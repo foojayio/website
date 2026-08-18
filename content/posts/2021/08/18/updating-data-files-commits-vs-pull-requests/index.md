@@ -52,7 +52,6 @@ jobs:
           add_options: '-u'
 ```
 
-
 1. Run the action weekly
 2. Checkout the repository
 3. Get the static data files archive
@@ -95,7 +94,6 @@ jobs:
           title: Refresh data files to latest version
           body: ""
 ```
-
 
 1. Run the action *daily*
 2. Checkout the repository

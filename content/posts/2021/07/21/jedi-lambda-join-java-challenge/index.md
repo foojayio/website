@@ -25,8 +25,7 @@ Are you ready for this Java Challenge? Less introduction, more action, try out t
 
 It's time to improve your Java skills with this Join Jedi Lambda
 
-Join Jedi Lambda Java Challenge
--------------------------------
+## Join Jedi Lambda Java Challenge
 
 By analyzing the following code, what do you think will happen when running it?
 
@@ -68,7 +67,6 @@ public class JediLambdaJoinChallenge {
 }
 ```
 
-
 A) SLukeFSYoda  
 
 B) Compilation error at line 28  
@@ -89,7 +87,6 @@ System.out.println(new Jedi() {
 	}.attack() + Jedi.useSaber() + Jedi.MASTER);
 ```
 
-
 Note that the useForce method is being overridden inside an anonymous inner class. An anonymous inner class is basically a class that doesn't have a name implementing in our case the Jedi interface. Then we are invoking the attack method.
 
 ```java
@@ -98,7 +95,6 @@ default String attack() {
 }
 ```
 
-
 There is a trick here in the join method. The first argument of the join method is a delimiter. As we are returning Luke in this code:
 
 ```java
@@ -106,7 +102,6 @@ private String jump(Function function) {
 	return function.apply("Luke");
 }
 ```
-
 
 Luke will be the delimiter, and the useSaber, useForce methods are going to simply return a String. So the first part of the String will be: `SLukeF`. Then the `Jedi.useSaber()` method will be invoked, and note that this method is being invoked in a static way. So the method we overrode won't be invoked, this method will return `S`. Finally, the constant `Jedi.MASTER` will be printed with the final input: `SLukeFSYoda`
 

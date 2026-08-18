@@ -23,13 +23,11 @@ Once a month in this podcast, we talk about the history of a Java User Group and
 
 Today, we are traveling to the Dominican Republic to learn more about the country and its Java community.
 
-Video
------
+## Video
 
 {{< youtube AKNjwn0yPow >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -47,14 +45,10 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://twitter.com/eudriscabrera>
 * <https://www.linkedin.com/in/eudriscabrera/>
 
-<br />
-
 ### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
-
-<br />
 
 00:00 Introduction  
 

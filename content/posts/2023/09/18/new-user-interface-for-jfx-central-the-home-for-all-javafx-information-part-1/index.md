@@ -26,8 +26,7 @@ First and foremost, it's a complete JavaFX project running in the browser. Thank
 
 Both the [site/app source code](https://github.com/dlsc-software-consulting-gmbh/jfxcentral2), and all the [jfxcentral-data](https://github.com/dlsc-software-consulting-gmbh/jfxcentral-data) are available on GitHub, so anyone can contribute and see how the project is built. This same GitHub data is also fetched by the website and app, so no databases or complicated hosting services are needed.
 
-JFX Central Content
--------------------
+## JFX Central Content
 
 ### Homepage
 
@@ -135,8 +134,7 @@ This section shows the power (and a bit of its weakness) of JFX Central, as it i
 The search box helps you to jump to the correct section of the website for all the different parts of the content.
 ![Search box with an example search](search.png)
 
-**Conclusion**
---------------
+## **Conclusion**
 
 JFX Central is a continuously evolving website and application.
 

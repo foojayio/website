@@ -19,8 +19,7 @@ I haven't always been lazy; it's a fairly recent addition to my repertoire of sk
 
 ![Lazy cat](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/lazy-cat.jpg)
 
-It's all IntelliJ IDEA's Fault
-------------------------------
+## It's all IntelliJ IDEA's Fault
 
 No, really, it is. Back when I was a *cough* younger adult, we had to type out ***all the code***, we also thought it was cool to mix drinks that turned into something akin to gorilla snot. Maybe we weren't that smart, but I am discovering one thing at a rapid rate, IntelliJ IDEA was smarter than me, even 20 years ago (I'd like to say it was a low bar).
 
@@ -160,8 +159,7 @@ You get the idea, it's very useful, and here is the keyboard shortcut that you n
 
 ![Smart Completion Shortcuts](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/smart-completion-shortcuts.png)
 
-Did IntelliJ IDEA Make You Lazy Too?
-------------------------------------
+## Did IntelliJ IDEA Make You Lazy Too?
 
 There's a lot of advantages to being lazy. It affords you more time for yourself, and your loved ones for a start. However, it's more than that, being a developer isn't all about writing code; there's also:
 
@@ -172,5 +170,3 @@ There's a lot of advantages to being lazy. It affords you more time for yourself
 * So much more!
 
 Being lazy isn't a bad thing, it's an efficiency gain that allows me to focus on the things that matter, which isn't checking my parentheses are correct or remembering to put a semi-colon after my statement. No, it's taking time for myself and those around me. Sure, it's IntelliJ IDEA's fault, but I am happy that we're here!
-
-<br />

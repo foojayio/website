@@ -41,7 +41,6 @@ boolean isValid() {
 }
 ```
 
-
 **After:**
 
 ```java
@@ -49,7 +48,6 @@ boolean isValid() {
    return missions >= 0 && name != null && !name.trim().isEmpty();
 }
 ```
-
 
 If you, dear reader, are wondering why and how to transform the former into the latter, then this book is for you. The authors imagine their audience as someone who knows the basics of the Java language, perhaps from a university curriculum, and who can pass [Fizz Buzz](https://blog.codinghorror.com/why-cant-programmers-program/).
 
@@ -65,7 +63,6 @@ String entry = author.toUpperCase() + ": [" + formattedMonth + "-" +
    (ChronoUnit.DAYS.between(start, today) + 1) + ")> " +
    message + System.lineSeparator();
 ```
-
 
 ...using `String.format`, or, as of Java 15, the `formatted` method of the `String` class.
 
@@ -109,7 +106,6 @@ class HullRepairUnit {
 }
 ```
 
-
 When I first saw this code snippet, it didn't remind me of anything I had seen before. In my experience, students don't commonly write code that puts the data in one class and the methods into another. Maybe some enterprise pattern???
 
 The suggested refactoring is:
@@ -131,7 +127,6 @@ class Hull {
 }
 ```
 
-
 Sure, that's better. The authors must have seen this in the wild, since they write with passion to **Combine State and Behavior** .
 
 The book has all the right guidance about `Optional`: Favor `Optional` over `null`. Avoid `Optional` fields. Use `filter` and `map`/`flatMap` with `Optional`. But I was baffled by the title of the last item. It's called **Use Optionals as Streams**. Of length 0 or 1, that is. I am not sure that title works well for beginners. Optionals aren't streams. There are only three common methods. I'd just name the methods, as in fact I just did.
@@ -148,7 +143,6 @@ var regex = """
 :([0-5][0-9])) #minutes
 [ap]m)""";
 ```
-
 
 It had never occurred to me to do that, but it seems like a good idea. And of course, as the authors point out, with a complex regular expressions, a few examples do wonders: `11:59am`, `1:05pm`. Here is one more thing I like. It's a book! Carefully edited, cross-referenced, reviewed, and typeset. Not a bunch of blog articles.
 

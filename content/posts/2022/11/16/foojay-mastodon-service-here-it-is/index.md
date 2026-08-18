@@ -26,8 +26,7 @@ And thanks to [toot.io](https://toot.io/mastodon_hosting.html) we don't need to 
 If you were already following me on Mastodon, you may have noticed that I moved my own account to this new instance, so you can find me now on [foojay.social/@frankdelporte](https://foojay.social/@frankdelporte/).
 ![](foojay-on-mastodon-1024x604.png) Homepage of the Mastodon server on foojay.social
 
-What Is It All About?
----------------------
+## What Is It All About?
 
 Mastodon is a-kind-of-Twitter-alternative, free of advertisements and based on an opensource project.
 
@@ -36,8 +35,7 @@ Jeroen Baert has written a few very nice articles with more info:
 * [](https://www.forceflow.be/2022/11/07/mastodon-qa/)[Mastodon Q\&A](https://www.forceflow.be/2022/11/07/mastodon-qa/)
 * [Moving from Twitter to Mastodon](https://www.forceflow.be/2022/11/11/moving-from-twitter-to-mastodon/)
 
-Where Is It?
-------------
+## Where Is It?
 
 You can find the Foojay Mastodon server at <https://foojay.social/>.
 
@@ -63,8 +61,7 @@ That's why we ask not to upload videos on it, but use a dedicated service, so th
 
 **TIP!** After you've created a Mastodon account, fill in the "Bio" in your profile. This will make it very clear for other users what your interests are, so they can decide to follow you back.
 
-Do You Want To Move?
---------------------
+## Do You Want To Move?
 
 If you already have a Mastodon account and want to move, these are the steps to be taken:
 
@@ -76,8 +73,7 @@ If you already have a Mastodon account and want to move, these are the steps to 
 
 Keep in mind, your followers will be transferred to this new account automatically, but your old posts will not be moved! So you start from a "blank sheet".
 
-Tips \& Tricks
---------------
+## Tips \& Tricks
 
 * A few cool features:
   * Mastodon accounts all include **built-in RSS** feeds, just add .rss at the end of an URL, for example: <https://foojay.social/@frankdelporte.rss>
@@ -87,8 +83,7 @@ Tips \& Tricks
 * Take a look at the list created by Marc R. Hoffmann on [**javabubble.org**](https://javabubble.org/) to keep track of all the people sharing Java-knowledge on Twitter, Mastodon and GitHub. This is a good starting point if you want to start following some of these people. And you can add yourself or others via the [GitHub project](https://github.com/marchof/javabubble).
 * If you want to use both Twitter and Mastodon and **cross-post** your messages automatically from one to another, take a look at [this project](https://crossposter.masto.donte.com.br/).
 
-What Can We Handle?
--------------------
+## What Can We Handle?
 
 That's a very good question!
 

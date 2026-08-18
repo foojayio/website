@@ -29,7 +29,6 @@ Although such a server is very simple and even without the ability to define a d
 $ python -m SimpleHTTPServer 9999
 ```
 
-
 ***Example 1.**: Executing simple python web-server in the current directory to serve a content*
 
 This was not possible in Java out of the box. Luckily this has changed with Java 18. It came with similar features as Python through JEP-408 (Reference 2.). Yes, a Simple Web Server.
@@ -57,7 +56,6 @@ The most obvious option is that the server allows you to specify a served direct
 └── index.html
 ```
 
-
 ***Example 2.**: Directory structure for the command-line usage*
 
 ```
@@ -67,7 +65,6 @@ Output:
 <PROJECT_PATH>/http-static and subdirectories on 0.0.0.0 (all interfaces) port 8880 URL http://<IP_ADDRESS>:8880/
 ```
 
-
 ***Example 3.**: Command to start the server with options "-b" for binding interfaces, "-p" specified port, "-d" served directory or "-o" logging level none,info,verbose*
 
 ```
@@ -76,7 +73,6 @@ $ curl -X GET http://localhost:8880
 <html>
 <body>
 ```
-
 
 ***Example 4.**: http GET method request*
 
@@ -89,7 +85,6 @@ Content-type: text/html
 Content-length: 465
 ```
 
-
 ***Example 5.**: http head request*
 
 ```
@@ -101,7 +96,6 @@ Content-type: application/json
 Content-length: 50
 ```
 
-
 ***Example 6**.: http method GET* *with JSON response*
 
 ```
@@ -111,7 +105,6 @@ Date: Fri, 08 Apr 2022 17:39:21 GMT
 Allow: HEAD, GET
 Content-length: 0
 ```
-
 
 ***Example 7.**: Not supported command line methods POST, PUT, DELETE etc.*
 
@@ -126,21 +119,17 @@ There are some limitations to command-line usage, let us highlight some of them:
 * Default logging is set to INFO, option "**-o**" (Example 3.)
 * Other HTTP methods result in 405 - Method Not Allowed state (Example 7.)
 
-<br />
-
 It may be useful to point out that the "*jwebserver* " command is the wrapper to the Java executable "*main()* " method of the class "*sun.net.httpserver.simpleserver.Main* ". The Java class is resides in the module "*jdk.httpserver*".
 
 ```
 $ java -m jdk.httpserver  -b 0.0.0.0 -p 8880 -d <PROJECT_PATH>/http-static -o verbose
 ```
 
-
 ***Example 8.**: Using Java to execute the "jdk.httpserver" default module method "main" with options similar to Example 3.*
 
 Let us explore a bit the programmatic possibilities as command-line ones may already be pretty useful, IMHO.
 
-Starting "*SimpleFileServer*" Programmatically
-----------------------------------------------
+## Starting "*SimpleFileServer*" Programmatically
 
 The class "*SimpleFileServer* " resides in the module "*com.sun.net.httpserver*".
 
@@ -162,7 +151,6 @@ It means that the started server has access to the all available content inside 
     └── post_request.json
 ```
 
-
 ***Example 9.**: "http-static" folder structure*
 
 ```
@@ -171,7 +159,6 @@ var server = SimpleFileServer.createFileServer(
        new InetSocketAddress(SIMPLE_SERVER_PORT), servedPath, OutputLevel.VERBOSE);
 server.start();
 ```
-
 
 ***Example 10.**: Programmatic simple file server initiation and start*
 
@@ -206,13 +193,11 @@ server.start();
 ...
 ```
 
-
 ***Example 11.**: Starting HttpServer with custom Handlers and output Filters*
 
 A closer look at the custom handlers (Example 10., *getHandler,h1, postHandler,h2,* notAllowedHandler) shows their concatenation.
 
-Running in Docker
------------------
+## Running in Docker
 
 The "*jwebserver* " can be pretty handy as it allows to execute it just as a command "*$ docker run*" (Example 10.) or create Docker containers with a mounted directory that can be used in a docker-compose file (Example 11.).
 
@@ -221,7 +206,6 @@ The mounted directory content can be continually updated based on your needs (ad
 ```
 $ docker run  -p 8000:8000 -t -i -v <PROJECT_PATH>/http-static:/http-static -w /http-static openjdk:18-jdk-slim jwebserver -b 0.0.0.0
 ```
-
 
 ***Example 12.**: running command line "jwebserver" version from the docker image with mounted directory*
 
@@ -242,7 +226,6 @@ jserver_one:
 ...
 ```
 
-
 ***Example 13.**: docker-compose file snipped, created image by Dockerfile(Example 12.) and mounting directory*
 
 ```
@@ -254,11 +237,9 @@ WORKDIR /http-static
 CMD ["sh", "-c", "jwebserver -b 0.0.0.0"]
 ```
 
-
 ***Example 14.**: Dockerfile snippet*
 
-Conclusion
-----------
+## Conclusion
 
 The newly added "*jwebserver*" is a pretty neat feature.
 
@@ -268,8 +249,7 @@ The "*jwebserver*" comes with Java 18.
 
 It is a hot candidate for cases where only simple content or responses are required and reduces the necessity to search for more complicated solutions like Jetty and Netty.
 
-References
-----------
+## References
 
 1. [GitHub Project, JVM-Lanuage-Examples](https://github.com/mirage22/jvm-language-examples) : https://github.com/mirage22/jvm-language-examples
 2. [JEP 408: Simple Web Server](https://openjdk.java.net/jeps/408): https://openjdk.java.net/jeps/408

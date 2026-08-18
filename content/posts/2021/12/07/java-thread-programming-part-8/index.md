@@ -43,7 +43,6 @@ public class Counter {
 }
 ```
 
-
 Let's assume the above code is the most straightforward implementation of our counter. It can increment and decrement a value. Now the question is, is the above code is thread-safe?
 
 The answer can be tricky. First of all, we have to define what we mean by thread safety. There could be many formal definitions, but in simplest terms, thread safety is, if the above class is used in a multithreaded environment, no matter what happens with the thread scheduler or how the threads are getting executed, the program will produce a correct result. It means that if the method incrementAndGet() is called 100 times from different threads, the counter's value has to be 100, not a different one. If this class guarantees this, then we can call this class a thread-safe class.
@@ -80,7 +79,6 @@ public class CounterDemo {
   }
 }
 ```
-
 
 In the above code, we have created two threads, and each of them calls the incrementAndGet() method 1000 times. So the expected correctness of this program would be, the count variable will be 2000 when it finishes.
 
@@ -131,7 +129,6 @@ public class Counter {
 }
 ```
 
-
 So we fixed our problem using a locking mechanism. I have discussed different synchronization mechanisms and thread-related problems in previous articles of the series. You will get to know more if you read them.
 
 Nonetheless, this seems, whenever we write a piece of code, we have to make sure its correctness. This could seem daunting for our day-to-day work. What if we have a set of the library already there built-in, and we can just use them for our purpose? The good news is that we have that set of library classes readily available in JDK. We can just use them without being involved in making sure of correctness.
@@ -176,7 +173,6 @@ public class AtomicIntegerDemo {
   }
 }
 ```
-
 
 Similarly, if we need a large counter, we can use AtomicLong.
 

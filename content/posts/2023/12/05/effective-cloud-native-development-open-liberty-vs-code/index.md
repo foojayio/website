@@ -33,8 +33,7 @@ What you need is a way in which you could complete this diverse set of tasks, wi
 
 Liberty Tools is a set of intuitive developer tools that provide a simplified yet powerful development experience. They support popular integrated development environments (IDEs) including Visual Studio Code, available as an [extension](https://ibm.biz/LibertyToolsVSCodeMarketplace).
 
-Key Capabilities of Liberty Tools
----------------------------------
+## Key Capabilities of Liberty Tools
 
 These tools introduce capabilities that really empower you to develop, test, debug, and manage applications without having to leave your IDE, including:
 
@@ -86,8 +85,7 @@ The MicroProfile EE API coding assistance is offered through [Eclipse LSP4MP](ht
 
 You can follow the steps in the Liberty Tools user guide to [develop with Jakarta EE and MicroProfile APIs with coding assistance](https://github.com/OpenLiberty/liberty-tools-vscode/blob/main/docs/user-guide.md#develop-with-jakarta-ee-and-microprofile-apis).
 
-Start using Liberty Tools in Visual Studio Code
------------------------------------------------
+## Start using Liberty Tools in Visual Studio Code
 
 Before you can use Liberty Tools in Visual Studio Code, you must satisfy these requirements:
 
@@ -102,8 +100,7 @@ When installed, the Liberty dashboard displays in the Project Explorer. Projects
 
 Projects that are already properly configured to run on Liberty and use Liberty dev mode are automatically added to the Liberty dashboard when it opens.
 
-Summary and next steps
-----------------------
+## Summary and next steps
 
 With the Liberty Tools extension in Visual Studio Code, you can efficiently develop, deploy, debug, test, and manage your cloud-native Java applications.
 

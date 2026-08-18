@@ -24,8 +24,7 @@ frozen: false
 
 But first, what are eBPF ring buffers:
 
-Ring buffers
-------------
+## Ring buffers
 
 In [Hello eBPF: Recording data in event buffers (3)](https://foojay.io/today/hello-ebpf-recording-data-in-event-buffers-3/), I showed you how to use perf event buffers, which are the predecessor to ring buffers and allow us to communicate between kernel and user-land using events. But perf buffers have problems:
 > It works great in practice, but due to its per-CPU design it has two major short-comings that prove to be inconvenient in practice: inefficient use of memory and event re-ordering.
@@ -42,7 +41,6 @@ Their usage is similar to the perf event buffers we've seen before. The signific
 BPF_PERF_OUTPUT(rb);
 ```
 
-
 Libbcc compiles the C code with macros. With libbpf, we have to write all that ourselves:
 
 ```cpp
@@ -57,7 +55,6 @@ struct
 } rb SEC (".maps") /* placed in maps section */;
 ```
 
-
 More on the specific syntax in the [mail for the patch specifying it](https://lwn.net/ml/netdev/20190531202132.379386-7-andriin@fb.com/), more in the [ebpf-docs](https://ebpf-docs.dylanreimerink.nl/linux/concepts/maps/).
 
 On the eBPF side in the kernel, ring buffers have several important helper functions that allow their easy use:
@@ -68,7 +65,6 @@ On the eBPF side in the kernel, ring buffers have several important helper funct
 long bpf_ringbuf_output(void *ringbuf, void *data, __u64 size, __u64 flags)
 ```
 
-
 Copy the specified number of bytes of data into the ring buffer and send notifications to user-land. This function returns a negative number on error and zero on success.
 
 ### [bpf_ringbuf_reserve](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_reserve/)
@@ -77,7 +73,6 @@ Copy the specified number of bytes of data into the ring buffer and send notific
 void* bpf_ringbuf_reserve(void *ringbuf, __u64 size, __u64 flags)
 ```
 
-
 Reserve a specified number of bytes in the ring buffer and return a pointer to the start. This lets us write events directly into the ring buffer's memory ([source](https://www.kernel.org/doc/html/latest/bpf/ringbuf.html)).
 
 ### [bpf_ringbuf_submit](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_submit/)
@@ -85,7 +80,6 @@ Reserve a specified number of bytes in the ring buffer and return a pointer to t
 ```cpp
 void *bpf_ringbuf_submit(void *data, __u64 flags)
 ```
-
 
 Submit the reserved ring buffer event (reserved via `bpf_ringbuf_reserve`).
 
@@ -118,13 +112,11 @@ BPF_CALL_4(bpf_ringbuf_output, struct bpf_map *, map,
 }
 ```
 
-
 ### [bpf_ringbuf_discard](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_discard/)[](https://ebpf-docs.dylanreimerink.nl/linux/helper-function/bpf_ringbuf_query/)
 
 ```cpp
 void bpf_ringbuf_discard(void *data, __u64 flags)
 ```
-
 
 Discard the reserved ring buffer event.
 
@@ -133,7 +125,6 @@ Discard the reserved ring buffer event.
 ```cpp
 __u64 bpf_ringbuf_query(void *ringbuf, __u64 flags)
 ```
-
 
 > Query various characteristics of provided ring buffer. What exactly is queries is determined by *flags*:
 >
@@ -154,8 +145,7 @@ You can find more information in these resources:
 * [bpf-helpers(7) man-page](https://man7.org/linux/man-pages/man7/bpf-helpers.7.html)
 * [Linux kernel source code](https://github.com/torvalds/linux/blob/855684c7d938c2442f07eabc154e7532b4c1fbf9/kernel/bpf/ringbuf.c#L498), as you saw above, can give us insights that no documentation can provide us with
 
-Ring Buffer eBPF Example
-------------------------
+## Ring Buffer eBPF Example
 
 After I've shown you what ring buffers are on the eBPF side, we can look at the eBPF example that writes an event for every `openat call, capturing the process id, filename, and process name and comes as an addition` from Ansil H's blog post [eBPF for Linux Admins: Part IX](https://ansilh.com/posts/09-ebpf-for-linux-admins-part9/):
 
@@ -221,9 +211,7 @@ SEC ("kprobe/do_sys_openat2")
 char _license[] SEC ("license") = "GPL";
 ```
 
-
-Ring Buffer Java Example
-------------------------
+## Ring Buffer Java Example
 
 With this in hand, we can implement the [RingSample](https://github.com/parttimenerd/hello-ebpf/blob/main/bpf/src/main/java/me/bechberger/ebpf/samples/RingSample.java) using the newly added functionality in hello-ebpf:
 
@@ -280,7 +268,6 @@ public abstract class RingSample extends BPFProgram {
 }
 ```
 
-
 You can run the example via `./run_bpf.sh RingSample`:
 
 ```bash
@@ -289,9 +276,7 @@ do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-100
 do_sys_openat2 called by:java file:/home/i560383/.sdkman/candidates/java/21.0.2-sapmchn/lib/libjimage.so pid:69797
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 The libbpf part of hello-ebpf keeps evolving. With this article, I added support for the first kind of eBPF maps and ring buffers, with a simplified Java API and five unit tests. I'll most likely work on the libbpf part in the future, as it is far easier to work with than with libbcc.
 

@@ -40,15 +40,13 @@ frozen: false
 
 Let's now look at the remaining practices.
 
-Encryption and Data Redaction
------------------------------
+## Encryption and Data Redaction
 
 First, we must protect the communication channel between our APIs and clients from unwanted reads and writes. That's the realm of TLS. In this regard, mutual TLS is state-of-the-art. Please read this [previous post](https://blog.frankel.ch/mtls-everywhere/) about mTLS in Apache APISIX.
 
 I can't guess what the author meant by "Obscures sensitive data for protection". If data exchanges are encrypted, it doesn't make sense to obfuscate any payload.
 
-Error Handling
---------------
+## Error Handling
 
 The list mentions avoiding revealing sensitive info when an error happens. Indeed, some poorly coded upstreams can disclose such data. Here's an example of Tomcat when developers forgot to configure an error page:
 
@@ -65,7 +63,6 @@ routes:
         body: { "error" : "An unknown exception happened"}   #2
 ```
 
-
 1. Triggered only in case of HTTP status code 500 returned by the upstream. You can add additional status codes if necessary
 2. The body to return
 
@@ -80,9 +77,7 @@ global_rules:
         body: { "error" : "An unknown exception happened"}
 ```
 
-
-Security Headers
-----------------
+## Security Headers
 
 The OWASP lists plenty of [HTTP Headers](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html) you can set to improve the security of your web apps and APIs. Apache APISIX provides two dedicated plugins for specific security risks:
 
@@ -103,13 +98,11 @@ global_rules:                               #1
             - Server                        #3
 ```
 
-
 1. Do on every route - security by default! It still can be overridden on a per-route basis, in case of need
 2. Tell the browser not to infer the content type if it's not explicitly set
 3. Don't advertise the server
 
-WAF and API versioning
-----------------------
+## WAF and API versioning
 
 I've addressed these two points in previous posts:
 
@@ -120,8 +113,7 @@ In short, Apache APSIX allows embedding the [Coraza WAF](https://coraza.io/) as 
 
 On the versioning side, one can choose three different approaches: path-based, query parameter-based, and header-based. APISIX supports all of them.
 
-Other items
------------
+## Other items
 
 The remaining items are:
 
@@ -131,17 +123,10 @@ The remaining items are:
 
 I'm afraid that APISIX cannot help with any of them. You need to address them on the upstream side.
 
-Conclusion
-----------
+## Conclusion
 
 In this two-post series, I've addressed most of the 16 practices to secure APIs with Apache APISIX.
 
 While I don't claim the list is exhaustive, it's a solid basis to improve the security of one's system.
-
-<br />
-
-<br />
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/2/) on February 25^th^, 2024*

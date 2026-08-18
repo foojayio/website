@@ -35,8 +35,7 @@ However, often teams struggle with it, due to a lack of standardized testing sol
 
 Here, I present an effective method for Jakarta EE integration testing, using [Payara Platform](https://www.payara.fish/) and [Testcontainers](https://www.testcontainers.org/) in my example.
 
-What Are Integration Tests and What Are Their Common Problems?
---------------------------------------------------------------
+## What Are Integration Tests and What Are Their Common Problems?
 
 Integration tests are designed to make sure that an application and its dependencies, for example database engines, third-party services, data processors, work correctly together. They are intended to discover flaws in how interfaces are designed and how the multiple components communicate with each other.
 
@@ -48,8 +47,7 @@ In some cases, sloppy tests may even complicate the "works on my machine" scenar
 
 What to do then? In recent years, new technology has come out to leverage the amazing power of containers: [Testcontainers.](https://www.testcontainers.org/)
 
-What are Testcontainers?
-------------------------
+## What are Testcontainers?
 
 Testcontainers is, simply put, a library that provides object-oriented abstractions of a software component running in a [Docker](https://www.docker.com/) container that is quickly provisioned and discarded, often within the boundaries of a test. Any kind of software that has a Docker image available can be quickly plugged into Testcontainers. And if this isn't the case, these components can be easily wrapped in a custom image and be plugged in any way!
 
@@ -64,8 +62,7 @@ The goals of Testcontainers can be summarized in the following:
 
 The focus of this article will be to illustrate how quickly and easy it is to set up a Testcontainers test suite for a small Jakarta EE application using [JUnit 5](https://junit.org/junit5/) and run it with the help of the Payara Platform. After following the instructions outlined in the next sections you should be able to give it a try!
 
-Getting Started
----------------
+## Getting Started
 
 The only requirement needed to run Testcontainers is for your environment to have a valid Docker installation, whether on Windows, Linux, or Mac systems. We'll assume that you are familiar with how JUnit 5 Maven projects are structured in the following sections.
 
@@ -92,7 +89,6 @@ To start using Testcontainers in a Maven project, you'll have to add the Testcon
 </dependency>
 ```
 
-
 Now, let's define a very basic Junit 5 test class like follows:
 
 ```java
@@ -109,7 +105,6 @@ public class BasicApplicationIT{
   }
 }
 ```
-
 
 Let's do a short breakdown of how this test class is structured:
 
@@ -159,7 +154,6 @@ Total Memory: 12642 MB
 [main] INFO 🐳 [payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 started in PT21.6437706S
 ```
 
-
 The Testcontainers engine will inform of the following details and/or events:
 
 * Details of the local Docker environment
@@ -169,8 +163,7 @@ The Testcontainers engine will inform of the following details and/or events:
 
 All of this is done with a couple of lines of code!
 
-Payara Platform and Testcontainers
-----------------------------------
+## Payara Platform and Testcontainers
 
 As mentioned before, any software component can be quickly plugged into Testcontainers, and the Payara Platform is no exception to this rule as its main distributions have up-to-date official Docker images:
 
@@ -235,7 +228,6 @@ To build our sample application, we'll use Maven 3.x. Here's a quick outlook of 
 </project>
 ```
 
-
 The core of our sample will be the `SpeakerJPA` entity that is used to model the data stored by the application (equals and hashcode methods omitted for brevity's sake):
 
 ```java
@@ -275,7 +267,6 @@ public class Speaker implements Serializable{
 }
 ```
 
-
 As we are using JPA, we must define a persistence unit in its corresponding deployment descriptor:
 
 ```xml
@@ -289,7 +280,6 @@ As we are using JPA, we must define a persistence unit in its corresponding depl
   </persistence-unit>
 </persistence>
 ```
-
 
 You can observe that the data source used for this persistence unit is the `java:comp/DefaultDataSource`, which by definition of the JPA specification must be provided by the Jakarta EE runtime as a default data store for development purposes. In addition to this, we instruct the JPA engine to create the database tables when the application is deployed.
 
@@ -329,7 +319,6 @@ public class SpeakerResource {
 }
 ```
 
-
 The boundary is extremely simple. It defines the following method endpoints:
 
 1. a GET method that retrieves speaker's data based on its ID
@@ -343,7 +332,6 @@ Lastly, let's not forget the corresponding JAX-RS configuration class:
 public class SpeakerApplication extends Application{
 }
 ```
-
 
 And with this, our application is ready to be tested!
 
@@ -368,7 +356,6 @@ public class SpeakerIT{
   .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
 }
 ```
-
 
 Let's breakdown what's new:
 
@@ -403,7 +390,6 @@ GenericContainer microContainer = new GenericContainer("payara/micro-jdk11")
                                       .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
 ```
 
-
 **PRO-TIP:** The Wait class has additional convenient methods that can be used to get a valid Wait Strategy.
 
 Our First Test
@@ -420,7 +406,6 @@ Let's add their dependency to the project's POM:
     <scope>test</scope>
 </dependency>
 ```
-
 
 Our first test would be to add a new speaker and check that the endpoint's response corresponds to a `201 - OK` HTTP code:
 
@@ -441,13 +426,11 @@ public void addSpeaker() {
 }
 ```
 
-
 You will notice that the test is marked as ***ordered*** and will execute first. The reason for this will be cleared up later, but it is important to understand that in most cases, integration tests will benefit from being run in order, *especially when data manipulation is involved.*
 
 There's a big question mark with our test and it is simple: *How do we reach the server instance running in the container?*
 
-Reaching the Container
-----------------------
+## Reaching the Container
 
 Remember that the Payara Micro instance is running inside a container, so it cannot be directly contacted using port **8080**, as this port will get mapped automatically to an available port in the host system by Testcontainers. To retrieve this port, we'll use the getMappedPort method:
 
@@ -457,7 +440,6 @@ post(String.format("http://localhost:%d/speaker", microContainer.getMappedPort(8
 then().
 ```
 
-
 There's another detail to keep in mind though: On some environment arrangements, the Docker daemon may be located on a completely different host from the test process themself, so it is recommended to use the getHost method instead:
 
 ```java
@@ -465,7 +447,6 @@ when().
 post(String.format("http://%s:%d/speaker", microContainer.getHost(), microContainer.getMappedPort(8080))).
 then().
 ```
-
 
 And with this, our test is complete! Running the test now should start the container, call the speaker registration endpoint and create a new speaker, yielding a positive test result!
 
@@ -488,7 +469,6 @@ public void getSpeakers(){
 }
 ```
 
-
 But unfortunately, this test will fail and it will yield this error:
 
 ```
@@ -498,7 +478,6 @@ JSON path $ doesn't match.
 Expected: a collection with size <1>
   Actual: []
 ```
-
 
 What is happening in this instance? Why is the speaker set empty even after one was created on the first test? In addition to this, you may notice that the Testcontainers engine will report 2 containers being started:
 
@@ -513,7 +492,6 @@ What is happening in this instance? Why is the speaker set empty even after one 
 [main] INFO docker[payara/micro:5.2021.10-jdk11] - Container payara/micro:5.2021.10-jdk11 is starting: 24034b1101c3a1a10369f60b88796bae0bb80bd5598f3b780b86902434b19f0f
 ```
 
-
 This is by design: A new container will be started and stopped for each**individual test** defined in the class if the Testcontainer definition is done *on an instance field*! If you need the container to be started once and then be used and re-used for all tests within the class, its definition must be done on a class member instead:
 
 ```java
@@ -525,13 +503,11 @@ static GenericContainer microContainer = new GenericContainer("payara/micro-jdk1
                                                 .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
 ```
 
-
 Running the tests again will generate a successful result, since the first test will create a new speaker, and the second one will verify that the speaker has been successfully stored in the database as intended.
 
 In most scenarios, re-using the same container will be the best solution, as it will speed up the overall time needed to complete the test suite. Although Payara Micro's official container is fast to start, running sequential tests on one container will be enough to test most Jakarta EE features. There are also different patterns that allow to reuse the same container across different test classes, such as the [Singleton Container Pattern](https://www.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers).
 
-A Real-World Test Scenario
---------------------------
+## A Real-World Test Scenario
 
 Now that we understand the extent of what we can do with testcontainers, how about we do a real-world integration test? You may recall that our application's persistence unit uses the default data source provided by the Payara Platform, which relies on an embedded H2 database. This setting is certainly useful for a quick test and validation of the persistence layer, but in no way reflects good practices, as H2 is not recommended for production use.
 
@@ -558,7 +534,6 @@ public class SpeakerApplication extends Application{
 }
 ```
 
-
 The corresponding data source will use a **MySQL 8** compatible database driver, so our application's POM file should add it as a compile-scoped dependency too:
 
 ```xml
@@ -568,7 +543,6 @@ The corresponding data source will use a **MySQL 8** compatible database driver,
     <version>8.0.21</version>
 </dependency>
 ```
-
 
 You may notice that the database user credentials and the JDBC URL are configured using environment variable placeholders (this is a specific feature of the Payara Platform). This allows the transition of the application between environments but also simplifies how the setup of this data source is done on our test suite.
 
@@ -586,14 +560,12 @@ Our `persistence.xml` deployment descriptor will use this new data source in pla
 </persistence>
 ```
 
-
 Now that our application is ready, we'll need to create a Testcontainer that will host the MySQL database used to test the application. To this effect, we'll use the `MySQLContainer` class like this:
 
 ```java
 @Container
 private static MySQLContainer dbContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0"));
 ```
-
 
 The container can be created by specifying a valid DockerImageName, which in this example corresponds to the **MySQL 8.0** version tag. Since this is not much different from the usual container instantiation, what is the point of using this class? Simple, this class provides the following utility methods that we can use to simplify the usual connection management:
 
@@ -634,7 +606,6 @@ static GenericContainer microContainer = new GenericContainer(DockerImageName.pa
                                               .withCommand("--deploy /opt/payara/deployments/app.war --contextRoot /");
 ```
 
-
 Let's re-run our tests and observe that the Testcontainers engine will also report details on the lifecycle of the newly declared MySQL Testcontainer:
 
 ```
@@ -644,11 +615,9 @@ Let's re-run our tests and observe that the Testcontainers engine will also repo
 [testcontainers-lifecycle-0] INFO docker[mysql:8.0] - Container mysql:8.0 started in PT32.2550699S
 ```
 
-
 And both tests should be executed without issues. With this, we have demonstrated that our integration tests are closely mirroring what a potential production environment would look like!
 
-Testcontainers Cloud
---------------------
+## Testcontainers Cloud
 
 Testing with Testcontainers will make you extremely productive, but there's an interesting challenge to consider: as your applications grow, so will the overall size and number of integration tests needed to establish a good quality threshold.
 
@@ -680,11 +649,9 @@ Operating System: Ubuntu 20.04.3 LTS
 Total Memory: 11.145 MB
 ```
 
-
 You might be surprised by the benefits of using this solution. It allows for truly portable tests that can run anywhere with zero impact on the development environment and the ability to test the full extent of any Jakarta EE application and ecosystem in detail!
 
-In Conclusion
--------------
+## In Conclusion
 
 Testcontainers is a powerful testing framework that simplifies the provisioning of test environments, so you can effectively and quickly run real-world integration tests.
 

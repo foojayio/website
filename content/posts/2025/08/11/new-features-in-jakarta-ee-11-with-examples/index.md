@@ -22,13 +22,11 @@ enlighterjs: true
 frozen: false
 ---
 
-Jakarta EE 11 is a major update in the enterprise Java world. It offers key changes that enhance developer productivity and modernize the platform.
----------------------------------------------------------------------------------------------------------------------------------------------------
+## Jakarta EE 11 is a major update in the enterprise Java world. It offers key changes that enhance developer productivity and modernize the platform.
 
 This release introduces several new features and improvements. These streamline workflows and integrate the latest Java advancements.
 
-**Key Features of Jakarta EE 11**
----------------------------------
+## **Key Features of Jakarta EE 11**
 
 {{< youtube TUc_oOJb2PA >}}
 
@@ -42,8 +40,7 @@ These updates focus on streamlining workflows. They improve performance and inte
 
 [Eclipse GlassFish](https://omnifish.ee/glassfish/) is the first runtime that provide all Jakarta EE features. You can [download the 8.0.0-M12](https://download.eclipse.org/ee4j/glassfish/) or a newer milestone version to try out all these new features, until the final GlassFish 8 version is released. Note that Jakarta Data is not yet supported natively in 8.0.0-M12 and will be supported in the 8.0.0-M13 version soon, with an implementation provided by the OmniFish engineering team. Besides that, the [OmniFish company is leading the whole development of Eclipse GlassFish](https://omnifish.ee/), ensuring that it's reliable, secure and production-ready, and yet bringing joy to developers when they build applications with GlassFish.
 
-**Jakarta Data: Simplified Data Access**
-----------------------------------------
+## **Jakarta Data: Simplified Data Access**
 
 Jakarta Data is introduced in Jakarta EE 11. It simplifies database operations by providing a streamlined abstraction layer over Jakarta Persistence, Jakarta NoSQL, and other data sources.
 
@@ -76,7 +73,6 @@ public interface ProductRepository {
 }
 ```
 
-
 The above repository definition will create a repository with 3 methods, which can be called to find or delete entities. For faster bootstrapping, Jakarta Data provides several repositories to add commonly used methods. For example, if you extend from the [BasicRepository](https://jakarta.ee/specifications/platform/11/apidocs/jakarta/data/repository/basicrepository) interface, you get additional methods for finding, deleting, and saving entities out of the box:
 
 ```
@@ -92,7 +88,6 @@ public interface ProductRepository extends BasicRepository<Product, Long> {
 }
 ```
 
-
 With the above definition, we get a few more methods to call, without defining them in our custom interface. For example, we can find all entities as a Stream result:
 
 ```
@@ -104,7 +99,6 @@ With the above definition, we get a few more methods to call, without defining t
 
 Stream<Product> products = productRepository.findAll();
 ```
-
 
 Or we can save a product entity:
 
@@ -118,7 +112,6 @@ Or we can save a product entity:
 Product product = new Product();
 productRepository.save(product);
 ```
-
 
 **Entity Definition:**
 
@@ -136,7 +129,6 @@ productRepository.save(product);
 }
 ```
 
-
 **CRUD Operations:**
 
 ```
@@ -151,11 +143,9 @@ productRepository.save(product);
 }
 ```
 
-
 These example shows how to create a repository that inherits various common CRUD operations from the Crudrepository interface, while adding more domain-specific methods createOrder and updateOrder, and a custom query method defined by a Jakarta Data Query Language (JDQL). This is roughly a subset of the Jakarta Persistence Query Language (JPQL) plus it allows some to omit some parts of the query which can be derived from the method name or the repository definition (e.g. "SELECT" or "FROM" clauses can be omitted if the entity type is defined by the return type.
 
-**Updated APIs and Programming Model**
---------------------------------------
+## **Updated APIs and Programming Model**
 
 Jakarta EE 11 modernizes enterprise development by transitioning from older patterns to contemporary Java features. This simplifies and strengthens the development process.
 
@@ -197,13 +187,11 @@ public class CustomerResource {
 }
 ```
 
-
 ### **Removing SecurityManager References**
 
 Jakarta EE 11 simplifies security by removing all references to the outdated SecurityManager. This aligns with Java's broader ecosystem changes and prepares for removal of Security Manager support in future Java versions. Developers are encouraged to adopt modern security practices. These include container-based sandboxing, OS-level security features, static analysis tools, and secure coding practices.
 
-**New Java Features and Performance Improvements**
---------------------------------------------------
+## **New Java Features and Performance Improvements**
 
 Jakarta EE 11 integrates advanced Java features, aligning with Java 17 and beyond and introducing enhancements tailored for Java 21.
 
@@ -226,13 +214,11 @@ Virtual Threads, introduced through Jakarta Concurrency 3.1, revolutionize concu
 @ApplicationScoped public class VirtualThreadAsyncConfig { }
 ```
 
-
 ### **Impact on Modern Development**
 
 Virtual Threads enhance scalability and efficiency in cloud-native and serverless environments. Virtual threads improve service-to-service communication in microservices and optimize resource utilization in distributed systems, without introducing reactive programming, which itself brings a lot of issues with debugging, troubleshooting, incompatibilities and maintenance.
 
-**Enhancements in the current APIs**
-------------------------------------
+## **Enhancements in the current APIs**
 
 Here's the full list of APIs that received updates:
 ![](image-4-1024x707-1.png)
@@ -281,7 +267,6 @@ var tigers = em.createQuery("from Animal where type = 'tiger'", Animal.class).ge
 var animalTypes = em.createQuery("select distinct (this.type) from Animal", String.class).getResultList();
 ```
 
-
 For more examples and details, refer to [this article](https://in.relation.to/2024/04/01/jakarta-persistence-3/) about Jakarta Persistence 3.2 by one of its project leads, Gavin King.
 
 ### **Context and Dependency Injection (CDI)**
@@ -309,7 +294,6 @@ injected as the first argument (the invoker must be configured
 in the CDI extension to inject the argument */
 invoker.invoke(null, null)
 ```
-
 
 ### **Security**
 
@@ -353,7 +337,6 @@ public class SelectableAuthenticationMechanismHandler implements HttpAuthenticat
                 ...
 ```
 
-
 ### **Concurrency**
 
 Besides support for virtual threads in concurrency resources, the Concurrency API brings some more enhancements:
@@ -394,7 +377,6 @@ public class AtStartup {
 }
 ```
 
-
 Check out the following video presentation with more details and demos of new features in Jakarta Concurrency:
 
 {{< youtube jtNqZz-WkDk >}}
@@ -407,8 +389,7 @@ Check out the following video presentation with more details and demos of new fe
 
 More info about the changes in Jakarta Faces 4.1 in [this article](https://balusc.omnifaces.org/2024/06/whats-new-in-faces-41.html#uiRepeatRowStatePreserved) by one of the most active members of the Jakarta Faces specification team, Bauke Scholtz.
 
-**Conclusion**
---------------
+## **Conclusion**
 
 Launched on June 26, 2025, Jakarta EE 11 introduces one brand-new specification and updates 16 existing ones. It addresses technical challenges and modernizes the platform. Jakarta EE 11 balances innovation with stability. Features like Jakarta Data and Virtual Threads are introduced while maintaining backward compatibility.
 
@@ -418,8 +399,7 @@ For enterprises, Jakarta EE 11 offers flexibility to support both cloud-native m
 
 Looking ahead, [**Jakarta EE 12**](https://jakartaee.github.io/platform/jakartaee12/JakartaEE12ReleasePlan)is scheduled for 2026. It promises support for Java SE 21 and 25, and it plans to focus on unification of aspects like Java modules (JPMS) support, and improved consistency between APIs by introducing common specifications for query languages, HTTP protocol to Java bindings, etc. It's also expected that MicroProfile will blend into Jakarta EE, which will bring a common configuration API to Jakarta EE as well as reunite some APIs that naturally fit together and could be better integrated if under the same Jakarta EE roof (e.g. MicroProfile REST Client and Jakarta RESTful WEb Services).
 
-**FAQs**
---------
+## **FAQs**
 
 ### **What new features in Jakarta EE 11 boost developer productivity?**
 
@@ -432,5 +412,3 @@ Virtual Threads, introduced in Jakarta EE 11, are lightweight and managed by the
 ### **What are the benefits of switching from Managed Beans to CDI in Jakarta EE 11 for enterprise applications?**
 
 Switching from Managed Beans to CDI in Jakarta EE 11 offers several benefits. These include type-safe dependency injection, better lifecycle management, and a unified model for enterprise applications. CDI enhances modularity, maintainability, and testability. This improves developer efficiency and application stability.
-
-<br />

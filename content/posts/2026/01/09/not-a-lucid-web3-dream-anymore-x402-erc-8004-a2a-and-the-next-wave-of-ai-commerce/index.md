@@ -40,8 +40,7 @@ frozen: false
 > * **x402:** x402 is an HTTP-based payment protocol for APIs. A server responds with status `402 Payment Required`, the price, and a payment route, and the client pays by using stablecoins on-chain and then retries the request to get the result.
 > * **ERC-8004 (8004):** ERC-8004 standard is an on-chain registry for agents. It gives each agent an identity and a place to store reputation data, so other agents and tools can decide whom to trust and which services to call.
 
-Foreword
---------
+## Foreword
 
 **x402** and **ERC-8004** .  
 
@@ -87,8 +86,7 @@ Finally, I will look at an example development team, *DayDreams.Systems*, that b
 
 The goal is not to promote any specific team, but to show why this kind of plumbing is likely to matter if the agent economy becomes real.
 
-Part 1 - **Bringing companies on-chain with x402**
---------------------------------------------------
+## Part 1 - **Bringing companies on-chain with x402**
 
 Today, most x402 experiments start with crypto-native builders, but the long-term impact sits with traditional companies.  
 
@@ -166,8 +164,7 @@ From this perspective, when people talk about "bringing companies on-chain," the
 
 It shifts to something more mundane and more powerful: moving the billing layer for everyday AI APIs and SaaS endpoints onto x402, so the internet can support billions of sub-cent payments per day without collapsing under its own business model.
 
-Part 2- Introduction: Beyond Ads and Subscriptions: Agent Commerce on x402 and ERC-8004
----------------------------------------------------------------------------------------
+## Part 2- Introduction: Beyond Ads and Subscriptions: Agent Commerce on x402 and ERC-8004
 
 Imagine you run a website with real value.  
 
@@ -370,8 +367,7 @@ They have something stronger.
 
 They have a business model and an interface that speaks the native language of the new internet: **agents, APIs, and fine-grained payments**.
 
-Part 3 - Tech that will change the internet
--------------------------------------------
+## Part 3 - Tech that will change the internet
 
 ### **Agent commerce, x402, and ERC-8004: from ad-funded web to paid APIs**
 
@@ -744,8 +740,7 @@ Disclosure: I hold positions on projects working on the x402/8004 ecosystems.
 
 This article is for educational purposes and is not investment advice.
 
-Part 4 - DayDreams.Systems: an x402 / 8004 implementation example
------------------------------------------------------------------
+## Part 4 - DayDreams.Systems: an x402 / 8004 implementation example
 
 The current article discusses AI agents that do real work, pay each other for APIs, and build an economy on top of standards such as x402 and ERC-8004.
 

@@ -68,7 +68,6 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
 }
 ```
 
-
 In another thread, the consumer thread is running this code in its inner loop (shortened code):
 
 ```
@@ -103,7 +102,6 @@ try (ChronicleQueue cq = SingleChronicleQueueBuilder.binary(tmp)
 }
 ```
 
-
 As can be seen, the consumer thread will read each nano timestamp and record the corresponding latency in an array. These timestamps are later put in a histogram which is printed when the benchmark completes. Measurements will start only after the JVM has warmed up properly and the C2 compiler has JIT:ed the hot execution path.
 
 ### JVM Variants
@@ -132,7 +130,6 @@ For each Java variant, the benchmarks are run like this:
 mvn exec:java@QueuePerformance
 ```
 
-
 Remember that our producer and consumer threads will be locked down to run on the isolated CPU cores 2 and 4, respectively.
 
 Here is what a typical process looks like after it has run for a while:
@@ -143,7 +140,6 @@ $ top
     PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                    
 3216555 per.min+  20   0   92.3g   1.5g   1.1g S 200.0   2.3   0:50.15
 ```
-
 
 As can be seen, the producer and consumer thread spin-waits between each message and therefore consumes an entire CPU core each. If CPU consumption is a concern, latency and determinism can be traded against lowered power consumption by parking threads for a short period (e.g. LockSupport.parkNanos(1000)) when no messages are available.
 

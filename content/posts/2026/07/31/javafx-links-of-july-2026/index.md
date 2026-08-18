@@ -19,8 +19,7 @@ frozen: false
 
 Here are the JavaFX LinksOfTheMonth of July 2026. You can find the weekly lists on [jfx-central.com](https://www.jfx-central.com/links). Did we miss anything? Is there anything you want to have included in one of the next overviews? Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
-Core
-----
+## Core
 
 * From the OpenJFX mailing list: [**Marius Hanl** was appointed as a new OpenJFX Reviewer](https://mail-archive.com/openjfx-dev@openjdk.org/msg27455.html), as announced by **Michael Strauß** on July 4, 2026. Marius has been an active contributor to the OpenJFX project, most recently submitting the [Stylesheet/StyleClass lazy initialization PR](https://github.com/openjdk/jfx/pull/2191) and leading tests improvements.
 * From the OpenJFX mailing list: **Kevin Rushforth** [opened the review for the JavaFX 26.0.2 release notes](https://mail-archive.com/openjfx-dev@openjdk.org/msg27475.html) for the upcoming update release (planned July 21, 2026).
@@ -32,8 +31,7 @@ Core
 * New builds of JavaFX are also available from [jdk.java.net/javafx26](https://jdk.java.net/javafx26/).
 * Fixes and more info are also available in the [Azul Core quarterly update release notes](https://docs.azul.com/core/release-notes#openjfx-fixes-enhancements).
 
-Applications
-------------
+## Applications
 
 * [Cryptomator Desktop 1.19.3 is available](https://mastodon.online/@cryptomator/116834045668158756) and includes JavaFX 25.0.3 for improved graphics handling and simplifies Windows file signing. "*[Cryptomator](https://cryptomator.org/) secures and encrypts your sensitive data in your favorite cloud service. So you can rest assured that only you can access your data.*"
 * [**Eduardo Díaz Sánchez** announced Jylos 2.2.0](https://bsky.app/profile/rgiskard7.bsky.social/post/3mpeoz2ahns2u): "*The biggest addition is a full Obsidian-compatible Canvas editor. [This release](https://github.com/RGiskard7/jylos/releases/tag/v2.2.0) also adds note transclusion, rich links, CSS snippets and a redesigned private notes system.*"
@@ -42,13 +40,11 @@ Applications
 * [**RGiskard7** announced Jylos 2.4.6](https://bsky.app/profile/rgiskard7.bsky.social/post/3mqrooiiask2k), the local-first knowledge management app with Markdown notes: "*The app is much more polished: better Canvas support, cleaner themes, improved PDFs, vault switching without restart, GitHub update checks and smoother Markdown workflows.* " Check the [release notes on GitHub](https://github.com/RGiskard7/jylos/releases/tag/v2.4.6).
 * [**nlisker** shared on Reddit](https://www.reddit.com/r/java/comments/1va4vsm/jextractgui_a_javafx_gui_wrapper_for_the_jextract/): jextractGUI - A JavaFX GUI wrapper for the jextract tool. "*It's written in JavaFX and embeds jextract (and its libclang) within it. Since jextract is in early-access, newer versions broke it and I needed to do some rewrites since I first conjured it a couple of years ago. It's now aligned with the current latest build - 25-jextract+2-4 (2025/11/25).* " Project is [available on GitHub](https://github.com/nlisker/jextractGUI).
 
-Games
------
+## Games
 
 * [**Nice Application 1 (Udit)** submitted Daybreak Protocol to the DEV June Solstice Game Jam](https://dev.to/nice_application1_812753/daybreak-protocol-june-solstice-game-jam-submission-11fl): "*A short, replayable JavaFX code-breaking game where daylight is both the player's timer and reward. Repair six symbolic Bombe relays by solving puzzles based on Caesar shifts, XOR logic, run-length encoding, parity bits, contradiction elimination, and binary search. Every wrong answer visibly pushes the sun toward the horizon. The game celebrates Alan Turing's legacy by presenting algorithms as creative tools.* " Source code on [GitHub](https://github.com/Nice-AU/Daybreak-Protocol).
 
-Components, Libraries, Tools
-----------------------------
+## Components, Libraries, Tools
 
 * [**Frank Delporte** blogged about a big rendering upgrade for Lottie4J](https://webtechie.be/post/closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j/): "*My goal was to make the JavaFX output match the official LottieFiles web player as closely as possible, pixel for pixel. ... After the improvements, most of the animations used in the test now hit 99.5%+ similarity with the reference!*"
 * [**Frank Delporte** released Lottie4J v1.2.5](https://foojay.social/@lottie4j/116890414437899888) with many rendering accuracy fixes: "*The JavaFX animations are now more closely aligned with the official LottieFiles web player. Most test files reach the 99,5% similarity goal.* " All info [on the website](https://lottie4j.com/status/2026/20260709-release-1.2.5/).
@@ -62,21 +58,18 @@ Components, Libraries, Tools
 * **Eliezer Assunção De Paulo** [announced Megalodonte](https://www.reddit.com/r/JavaFX/comments/1v8j29r/megalodonte_a_small_reactive_ui_framework_on_top/), a small reactive UI framework on top of JavaFX. "*I've been building JavaFX desktop apps for a while and got tired of the usual boilerplate (manual listeners, imperative styling, no real component model), so I built Megalodonte: a thin reactive layer on top of JavaFX --- React-ish component composition, State /ComputedState for reactivity, and a Props/Theme system so styling isn't scattered setStyle() calls everywhere.* " The project is [available on GitHub](https://github.com/eliezer-dev-software-enginner/megalodonte-libs).
 * [**Dirk Lemmermann** shared](https://bsky.app/profile/dlemmermann.bsky.social/post/3mrmm435rt22t): "*GemsFX 4.3.2 is out now with fixes for the PopOver control, with i18n resource bundles, and accessibility support. I was always too lazy for the last two things but with AI that has become a no-brainer ... literally .... "no brain required".* " Check the project [on GitHub](https://github.com/dlsc-software-consulting-gmbh/GemsFX).
 
-Podcasts, Videos, Books
------------------------
+## Podcasts, Videos, Books
 
 * **Helal Anwar** published a new [video with the progress he made in his student management app](https://www.youtube.com/watch?v=XiHcp-WseBE).
 * [**Austin Lehman** announced](https://bsky.app/profile/cupofcode.bsky.social/post/3mqadlpurrc2y): "*Aussom CLI 1.2.0 is now available for download along the first free [PDF book 'Building Desktop Applications in Aussom with JavaFX'](https://aussom-lang.com/books)!*"
 * [**Johannes Rabauer** shared a video](https://bsky.app/profile/rabauer.dev/post/3mqyzcln42w24): "*If you are interested in playing around with midi devices and files, check out melodymatrix.rocks. It's free and quite fun 🙂 **Frank Delporte** built this with his son, which is such a great idea on it's own! #JavaFX #MIDI #Piano*"
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**markehammons** shared "Kyo-JFX Hello World template" on Reddit](https://www.reddit.com/r/scala/comments/1usp835/kyojfx_hello_world_template/): "*I was asked in another thread if I could provide an example of this, so [here it is](https://codeberg.org/markhammons/kyo-jfx-hello-world). This template is a hello world app using JavaFx + Kyo + Scala 3. It uses Gluon substrate as well as a Gluon fork of GraalVM to create native image builds that can run on Linux and Android.*"
 * Keep an eye on the messages by [**Austin Lehman** on Bluesky](https://bsky.app/profile/cupofcode.bsky.social) as he is sharing more info about the Aussom Programming Language, new releases, his book about Aussom, and scripts he is using to create documentation.
 
-JFX Central
------------
+## JFX Central
 
 * New content on JFX Central:
   * Library: [Sheetmusic4J](https://www.jfx-central.com/libraries/sheetmusic4j), a Java library to parse MusicXML and render sheet music natively in JavaFX.

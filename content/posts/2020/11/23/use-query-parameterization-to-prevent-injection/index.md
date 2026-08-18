@@ -30,7 +30,6 @@ public void selectExample(String parameter) throws SQLException {
 }
 ```
 
-
 If the parameter in this example is something like `'' OR 1=1`, the result contains every single item in the table. This could be even more problematic if the database supports multiple queries and the parameter would be `''; UPDATE USERS SET lastname=''`.
 
 To prevent this in Java, we should parameterize the queries by using a prepared statement. This should be the only way to create database queries. By defining the full SQL code and passing in the parameters to the query later, the code is easier to understand. Most importantly, by distinguishing between the SQL code and the parameter data, the query can't be hijacked by malicious input.
@@ -47,7 +46,6 @@ public void prepStatmentExample(String parameter) throws SQLException {
    printResult(result);
 }
 ```
-
 
 In the example above, the input binds to the type String and therefore is part of the query code. This technique prevents the parameter input from interfering with the SQL code.
 

@@ -90,7 +90,6 @@ non-sealed class Square implements Shape {
 }
 ```
 
-
 **Pattern Matching and Switch Statements**
 
 ```
@@ -102,7 +101,6 @@ public static String getShapeDescription(Shape shape){
    };
 }
 ```
-
 
 ### **Functional Paradigm and Its Relevance**
 
@@ -138,7 +136,6 @@ public static String getShapeDescription(Shape shape) {
 
 }
 ```
-
 
 ### **Conclusion**
 

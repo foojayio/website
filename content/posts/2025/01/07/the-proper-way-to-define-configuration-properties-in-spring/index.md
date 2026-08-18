@@ -21,8 +21,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 I recently did a (long overdue) **migration from Spring Boot 2 to 3** on one of our larger applications.
 
@@ -49,11 +48,9 @@ app:
     foo: 'foonest'
 ```
 
-
 And you can run the `DemoApp` to see what the `ApplicationProperties` contain at run time.
 
-The initial set-up in Spring Boot 2.
-------------------------------------
+## The initial set-up in Spring Boot 2.
 
 Let's take a look at the configuration properties in the initial setup of module-spring2:
 
@@ -73,7 +70,6 @@ public class ApplicationProperties {
 }
 ```
 
-
 Nothing special here except maybe some *lombok magic* 🪄
 
 Running the `DemoApp` gives us what we expect, though:
@@ -87,8 +83,7 @@ Running the `DemoApp` gives us what we expect, though:
 > )
 > ```
 
-Spring boot 3: Some of my properties are suddenly empty!
---------------------------------------------------------
+## Spring boot 3: Some of my properties are suddenly empty!
 
 **Module-spring3-wrong** contains the **exact same setup** we've just seen in **module-spring2** but running the `DemoApp` gives us:
 > ApplicationProperties(  
@@ -122,7 +117,6 @@ public ApplicationProperties(NestedApplicationProperties nested) {
 }
 ```
 
-
 That worked fine for Spring Boot 2 because the fields were all still bound via the *setters* .  
 
 But Spring Boot 3 strongly favours *constructor binding* , and **if a single parameterized constructor is found** , it will **assume** you want constructor binding.  
@@ -137,8 +131,7 @@ The **easy** solution I first saw was to just replace the `@RequiredArgsConstruc
 
 But while we're busy upgrading, you might as well do some [code gardening](https://blog.codinghorror.com/tending-your-software-garden/) and look for the more **proper and maintainable** solution instead of the easy one.
 
-The proper way to define your configuration properties
-------------------------------------------------------
+## The proper way to define your configuration properties
 
 Let's take a look at the refined ApplicationProperties in **module-spring3**:
 
@@ -164,7 +157,6 @@ public record ApplicationProperties(
 ) {
 }
 ```
-
 
 ### 1. Simplify your code \& get rid of lombok: use records instead of classes
 
@@ -207,7 +199,6 @@ Action:
 Update your application's configuration
 ```
 
-
 Note also that to cascade the validation to the nested properties, we had to add `@Valid` , which is in line with what the Bean Validation specification lays out, but which spring boot [did not follow](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes#bean-validation-of-configuration-properties%0A) up until recently.
 
 To start using bean validation, just add the following dependency:
@@ -218,7 +209,6 @@ To start using bean validation, just add the following dependency:
     <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 ```
-
 
 ### 3. Bonus: Document your configuration and let your IDE help you.
 
@@ -271,7 +261,6 @@ This metadata is then stored under a /META-INF/spring-configuration-metadata.jso
 }
 ```
 
-
 Note that we also used the annotation `@NestedConfigurationProperty` in the revised example, which provides a *hint* to the annotation processor to view `com.example.NestedApplicationProperties` as [a nested type](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/context/properties/NestedConfigurationProperty.html).
 
 Now... the good thing is that your IDE probably supports reading out this JSON file and can give you neat things like:
@@ -295,14 +284,10 @@ To start using configuration processing, it's as simple as adding:
 </dependency>
 ```
 
-
 and enabling annotation processing in your favorite IDE.
 
-Read more
----------
+## Read more
 
 * <https://docs.spring.io/spring-boot/specification/configuration-metadata/index.html>
-
-
 
 This blog was originally published on [my personal blog](https://wimdetroyer.com/blog/the-proper-way-of-using-configuration-properties-in-spring) the 1st of January, 2025.

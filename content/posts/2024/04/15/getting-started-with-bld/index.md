@@ -24,13 +24,11 @@ frozen: false
 
 **bld is an up-and-coming build tool for the Java ecosystem. This article guides you through getting set up to use it in your own projects.**
 
-What is `bld`?
---------------
+## What is `bld`?
 
 `bld` is a build tool for the Java ecosystem.
 
-Why use `bld`?
---------------
+## Why use `bld`?
 
 `bld` is a very simple build tool.
 
@@ -42,8 +40,7 @@ If you know Java, you already have the needed skill-set.
 
 Once you try it, you'll get it.
 
-Installation
-------------
+## Installation
 
 The easiest way to install `bld` is to use [`SDKMAN!`](https://sdkman.io/).
 
@@ -51,20 +48,17 @@ The easiest way to install `bld` is to use [`SDKMAN!`](https://sdkman.io/).
 sdk install bld
 ```
 
-
 Other installation methods including `brew`, `jbang` are [documented in the bld repo](Installation).
 
 If you have an aversion to package management tools, you can also download the JAR [directly from the releases page](https://github.com/rife2/bld/releases/latest).
 
-Make a Project
---------------
+## Make a Project
 
 If you installed `bld` with your package manager, then you should run:
 
 ```
 bld create
 ```
-
 
 After which you will be prompted for the kind of project you want to create.
 
@@ -76,7 +70,6 @@ Please enter a number for the project type:
   4: rife2  (RIFE2 web application)
 ```
 
-
 For the purposes of following along, select an `app` project.
 
 If you downloaded `bld` as a jar from the releases page, then you should instead run:
@@ -84,7 +77,6 @@ If you downloaded `bld` as a jar from the releases page, then you should instead
 ```
 java -jar bld-1.9.0.jar create
 ```
-
 
 > **NOTE:** By the time you read this it is likely that the latest version is not `1.9.0`,  
 >
@@ -102,7 +94,6 @@ Please enter a number for the project type:
 2
 Please enter a package name (for instance: com.example):
 ```
-
 
 If you aren't familiar with the Java ecosystem, generally projects put their code in a package hierarchy.
 
@@ -122,11 +113,9 @@ com.example
 Please enter a project name (for instance: myapp):
 ```
 
-
 Choose whatever you want for this. If you are just following along, use `myapp`.
 
-Working with a `bld` Project
-----------------------------
+## Working with a `bld` Project
 
 Once you've run the commands above, a folder should be generated which is structured like the following.
 
@@ -181,7 +170,6 @@ Once you've run the commands above, a folder should be generated which is struct
         └── resources
 ```
 
-
 > **NOTE:** Just like the version number of `bld` will evolve, so will the version  
 >
 > numbers of the test dependency jars in the listing above.
@@ -201,7 +189,6 @@ public class MyappMain {
     }
 }
 ```
-
 
 And `src/bld/java/com/example/MyappBuild.java` should look like this.
 
@@ -234,7 +221,6 @@ public class MyappBuild extends Project {
     }
 }
 ```
-
 
 > **NOTE:** `bld` supports different ways to describe dependencies, dependency("org.junit.jupiter", "junit-jupiter", version(5,10,2)) can for instance also be written as dependency("org.junit.jupiter:junit-jupiter:5.10.2"). Which format you use, is a matter of personal taste.
 
@@ -279,7 +265,6 @@ The following commands are supported.
   -s, --stacktrace  Print out the stacktrace for exceptions
 ```
 
-
 The most immediately useful commands will be `./bld compile` and `./bld run`.
 
 You need to run `./bld compile` before `./bld run`.
@@ -291,16 +276,13 @@ Compilation finished successfully.
 Hello World!
 ```
 
-
 Of course, commands can also be combined.
 
 ```
 ./bld compile run
 ```
 
-
-Adding a Dependency
--------------------
+## Adding a Dependency
 
 To add a dependency to your project, you need to edit your build file. If you have been following along, that will be  
 `src/bld/java/com/example/MyappBuild.java`.
@@ -311,7 +293,6 @@ The line you need to add will look like:
 scope(compile)
     .include(dependency("com.fasterxml.jackson.core", "jackson-databind", version(2,16,0)))
 ```
-
 
 If you don't have a familiarity with the terminology of maven scopes, you can safely use `scope(compile)` for most things without issue.
 
@@ -347,15 +328,13 @@ public class MyappBuild extends Project {
 }
 ```
 
-
 Then you need to run `./bld download` to get any new dependencies. This is similar to the JavaScript  
 
 world where you need to run `npm install`.
 
 After this, you can start to use any classes brought in by those dependencies in your project.
 
-Writing a Test
---------------
+## Writing a Test
 
 An example test should have been generated under `src/test/`:
 
@@ -373,7 +352,6 @@ public class MyappTest {
     }
 }
 ```
-
 
 [`JUnit`](https://junit.org/junit5/) is included by default, and you can run any tests you write with `./bld test`.
 
@@ -409,9 +387,7 @@ Test run finished after 124 ms
 [         0 tests failed          ]
 ```
 
-
-Writing Custom Commands
------------------------
+## Writing Custom Commands
 
 If you have any custom logic you want to run, you need to add a method to the build class and annotate it with `@BuildCommand`.
 
@@ -453,7 +429,6 @@ public class MyappBuild extends Project {
 }
 ```
 
-
 Your new command should show up when you run `./bld`.
 
 ```
@@ -473,7 +448,6 @@ The following commands are supported.
   ...
 ```
 
-
 And you can run it with `./bld methodName`:
 
 ```
@@ -481,9 +455,7 @@ And you can run it with `./bld methodName`:
 Hello
 ```
 
-
-Spring Boot Integration
------------------------
+## Spring Boot Integration
 
 Chances are you are a [Spring](https://spring.io) developer.
 
@@ -494,7 +466,6 @@ To use it, edit the `lib/bld/bld-wrapper.properties` file and add this line:
 ```
 bld.extensions=com.uwyn.rife2:bld-spring-boot:0.9.3
 ```
-
 
 Then add a task to your project like that uses the classes the extension gives you.
 
@@ -507,23 +478,16 @@ public void bootjar() throws Exception {
 }
 ```
 
-
 And you can use it like so.
 
 ```
 ./bld compile bootjar
 ```
 
-
 The [repository for the extension](https://github.com/rife2/bld-spring-boot) has further code samples as well as links to example projects.
 
-Conclusion
-----------
+## Conclusion
 
 Maven has been around since 2004, Gradle since 2008.
 
 Take some time out of your day to try `bld`. It's new, it's different, and you might like it --- a lot.
-
-<br />
-
-<br />

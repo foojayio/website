@@ -34,8 +34,7 @@ Brokk is a standalone application, not a VSCode or IntelliJ plugin, because it's
 
 Part of effective supervision is being able to understand why the AI (inevitably) makes mistakes, so you can prevent and fix them. Since category 2 errors are caused by the AI not having enough information to make optimal decisions, to fix them you need to know what information the AI sees. Here's how Brokk makes this possible.
 
-Sidebar: Under the Hood
------------------------
+## Sidebar: Under the Hood
 
 Brokk is built with Java Swing for the UI, [Joern](https://docs.joern.io/) for advanced code analysis, [Jlama](https://github.com/tjake/Jlama) for local inference, and [langchain4j](https://docs.langchain4j.dev/) to access LLM APIs. Read more about what makes Brokk tick [here](https://brokk.ai/blog/brokk-under-the-hood), or check out the source [on GitHub](https://github.com/BrokkAi/brokk).
 
@@ -85,8 +84,7 @@ The other main tool that Brokk uses to slim down the Workspace is summarization.
 
 Brokk extracts the signatures and declarations to show the LLM how to use this class without hallucinating. Brokk also includes private fields and methods to give a hint of how the implementation works under the hood. This means that you almost never need to include full source files in the Workspace unless they are going to be actively edited.
 
-Recommendations
----------------
+## Recommendations
 
 Brokk's goal is to make context management *explicit* (you always know what's in the Workspace) but not *manual* (you don't have to add each file by hand or even know what the right files are).
 
@@ -147,8 +145,7 @@ The Instructions panel is where you provide your textual input to Brokk. The but
    * **How it works:** The Architect agent can plan and execute a sequence of actions, potentially calling other tools (like Code, Ask, Search) and manipulating the Workspace (adding/removing/summarizing files) to achieve a larger goal. For example, "Refactor the OrderProcessingService to use the new AsyncEventBus for notifications. Break this into steps that keep the build green; when you are done, update relevant sequence diagrams in the documentation."
    * **Best for:** Larger refactorings, implementing new features that touch multiple parts of the codebase, or tasks that require a combination of understanding, searching, and coding.
 
-Sidebar: LLM Models
--------------------
+## Sidebar: LLM Models
 
 Brokk allows configuring both default models for each of the main actions, and a selection of commonly-used overrides. This allows the best of both worlds with a default you use most frequently, without having to reconfigure things (or worse, restart) when you want to use a different option.
 
@@ -160,8 +157,7 @@ Brokk allows configuring both default models for each of the main actions, and a
 
 See [this article](https://brokk.ai/blog/the-best-llm-for-code) for more on how to choose which models to use.
 
-The Edit Loop
--------------
+## The Edit Loop
 
 After each set of changes to your code (whether via manual invocation of Code, or via the Architect), Brokk attempts to compile your code and run tests; it then automatically takes build and test failures back to the LLM for revision.
 

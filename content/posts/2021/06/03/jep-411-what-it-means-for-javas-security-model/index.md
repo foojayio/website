@@ -20,8 +20,7 @@ frozen: false
 
 Java, like most platforms or languages has layers of security, this article intends to look at Java's Authorization layer, which is unlike in other languages, and to distinguish between two different ways this layer is typically utilized, why one is effective while the other isn't and investigate why JEP 411 only considers the least effective method and hopefully increase awareness of the Principle of Least Privilege as it's applied to Java Authorization, improve adoption, encourage people to take advantage of the improved security it provides, as well as prolong its support and possibly even improve it in future.
 
-Each security layer is intended to prevent an attacker gaining access to information or obtaining control of the JVM
---------------------------------------------------------------------------------------------------------------------
+## Each security layer is intended to prevent an attacker gaining access to information or obtaining control of the JVM
 
 Authorization compliments and enforces other access controls like visibility of packages, classes and methods, modules have restricted reflection access in more recent versions of Java.
 
@@ -35,8 +34,7 @@ Authorization compliments and enforces other access controls like visibility of 
 5. Type Safety
 6. Atomic failure of objects during construction (Java Serialization breaks atomic failure, objects can be created in a state that doesn't satisfy an objects invariants.)
 
-JEP 411 Focuses on Item 4.1, Authorization.
--------------------------------------------
+## JEP 411 Focuses on Item 4.1, Authorization.
 
 Currently Java's authorization API's are part of the Java virtual machine specification, are cross platform and allow the application of the principles of least privilege to those who wish to apply it at a fine grained level within Java.
 
@@ -72,15 +70,13 @@ Software developers can also create their own permissions.
 5. The administrator, development or deployment teams only need worry about what they are allowing, they don't need to worry about things they don't authorize, or are unaware of like an Agent attaching from another process, that might be hidden in a Trojan downloaded by a user.
 6. It defends against low probably high consequence attacks.
 
-What the Principle of Least Privilege is and is not
----------------------------------------------------
+## What the Principle of Least Privilege is and is not
 
 The principle of least privilege is not a broad brush application of privileges granted to an application, by OS process. While this may be the principle of least privilege from the OS's perspective, it is not from the Java Virtual Machine's perspective, which is sufficiently powerful and complex that it is comparable in complexity to an Operating System.
 
 https://youtu.be/2rCgA3IbTg4
 
-When other security layers fail, what are some things Java's authorization security layer is designed to prevent?
------------------------------------------------------------------------------------------------------------------
+## When other security layers fail, what are some things Java's authorization security layer is designed to prevent?
 
 1. It prevents access to system properties, such as the keystore and truststore locations and passwords.
 2. It prevents unauthorized access to networks.
@@ -88,8 +84,7 @@ When other security layers fail, what are some things Java's authorization secur
 4. It prevents reflection from bypassing other access controls.
 5. It prevents Agent's from attaching to the process and modifying running bytecode using the Attach API. <https://docs.oracle.com/javase/8/docs/technotes/guides/attach/>
 
-Criticisms of the existing authorization layer
-----------------------------------------------
+## Criticisms of the existing authorization layer
 
 1. OpenJDK developers claim it's excessively costly to maintain.
 2. OpenJDK developers don't believe it is functional, or is too difficult to understand.
@@ -99,8 +94,7 @@ Criticisms of the existing authorization layer
 6. OpenJDK developers claim removing SecurityManager will improve security (for people who use it incorrectly).
 7. Many complain (including myself) the policy files are extremely difficult to construct by hand.
 
-Tooling exists that address all existing criticisms except for 01. development cost.
-------------------------------------------------------------------------------------
+## Tooling exists that address all existing criticisms except for 01. development cost.
 
 1. Tools that generate the policy file based on the principle of least privilege are freely available.
 2. The Principle of Least Privilege (POLP) combined with tooling significantly reduces complexity, improves auditability and significantly increases the effectiveness of the Authorization layer to constrain an application to its intended function, significantly restricting the attack surface of applications and their dependencies (it doesn't reduce the attack surface of the JVM as this typically runs with AllPermission).
@@ -118,8 +112,7 @@ Java's new security model is based on the Castle and moat approach, which focuse
 7. JPMS will be relied upon to control reflective access and tighten visibility.
 8. StackWalker will replace similar functionality provided by SecurityManager.
 
-Criticisms of the as yet to be developed new Authorization Layer
-----------------------------------------------------------------
+## Criticisms of the as yet to be developed new Authorization Layer
 
 1. Java developers must figure out themselves what is to be monitored with JFR. JFR cannot prevent access, only monitor it.
 2. Special command line flags are required to disable Agents, however with the previous approach, this could have been protected by an authenticating administrator using an encrypted connection, and run as the Subject of that administrator, in the same process that the user has, but where only the administrator has the permission to use the Agent. This would have prevented a user from downloading a Trojan, that contained an Agent, in future Java versions the feature must be disabled, or OS level controls used. The application vendor has little control.
@@ -137,12 +130,9 @@ Criticisms of the as yet to be developed new Authorization Layer
 14. The maintenance burden will be shifted from OpenJDK developers to downstream applications.
 15. The way OpenJDK is handling JEP 411 is already leading to issues, Spotbugs is considering removing static analysis related to Security API's, when replacement API's are yet to be developed and deployments on Java 8 are still greater than 50%, this will definitely harm Java security, rather than move it forward. <https://github.com/spotbugs/spotbugs/issues/1515>
 
-The original architects of Java 2 platform security intended the principle of least privilege to be applied.
-------------------------------------------------------------------------------------------------------------
+## The original architects of Java 2 platform security intended the principle of least privilege to be applied.
 
 {{< youtube Bgo7dcCbqV8 >}}
-
-<br />
 
 Security Policy Tool and implementation practices didn't fit the original designers intent.
 
@@ -161,8 +151,7 @@ Security Policy Tool and implementation practices didn't fit the original design
 11. <https://db.apache.org/derby/docs/10.15/security/csecjavasecurity.html#csecjavasecurity>
 12. <https://www.ibm.com/docs/en/was-nd/9.0.5?topic=security-javapolicy-file-permissions>
 
-Developers have created tools to assist the implementation the Principle of Least Privilege in policy files themselves
-----------------------------------------------------------------------------------------------------------------------
+## Developers have created tools to assist the implementation the Principle of Least Privilege in policy files themselves
 
 1. <https://github.com/floyd-fuh/TMSJSPGE>
 2. <https://github.com/SimonHGR/JVMprotector>
@@ -171,10 +160,7 @@ Developers have created tools to assist the implementation the Principle of Leas
 
 {{< youtube RXziP10wvn8 >}}
 
-<br />
-
-What do POLP generated policy files look like?
-----------------------------------------------
+## What do POLP generated policy files look like?
 
 1. <https://www.dropbox.com/s/nq0n1vyb8qfeidn/defaultnonactvm-policy.txt?dl=0>
 2. <https://www.dropbox.com/s/qcgl0q1ywtisj0y/defaultsecuretest-policy-new.txt?dl=0>
@@ -201,21 +187,17 @@ First add the following dependency to your project:
 </dependency>
 ```
 
-
 Then add the following property when running your program:
 
 ```
 -Djava.security.manager=org.apache.river.tool.SecurityPolicyWriter
 ```
 
-
 Whatever the name and location of your current policy file is, the tool will create one with the same name, with the word ".new" appended.
 
 Run your application and log in as the user role you want to make the policy for, then only the permissions required for you to run your program as that user, performing the tasks you just performed are added to the policy file. You might also do this with a test suite that performs the necessary tasks, then remove the grant statements in the generated policy file for test code.
 
 You do need to read the policy file, following generation, to identify any permissions that library dependencies have been granted, that you don't want those libraries to have and remove them. Such as network connections, if they were unnecessary, for example, if it's reporting heuristics to an unrecognized network address, if you remove that specific SocketPermission that grants it access, it can no longer open a network connection to that address.
-
-<br />
 
 Now move your old policy file out of the way, and rename the new policy file.
 
@@ -224,7 +206,6 @@ Run your program again this time with:
 ```
 -Djava.security.manager=java.lang.SecurityManager,\
 ```
-
 
 Confirm that the user cannot do anything they are not authorized to do.
 
@@ -241,13 +222,11 @@ Now if you're experiencing performance issues, because you have developed high s
 </dependency>
 ```
 
-
 Then set the following property:
 
 ```
 -Dpolicy.provider=org.apache.river.api.security.ConcurrentPolicyFile,\
 ```
-
 
 This replaces the built-in horribly slow Java policy provider with a modern performant and highly scalable implementation, with identical functionality.
 
@@ -257,11 +236,7 @@ If you want to go even faster still because your program makes a lot of repeated
 -Djava.security.manager=org.apache.river.api.security.CombinerSecurityManager,\
 ```
 
-
-<br />
-
-Is Java positioned as the best platform to comply with new regulations?
------------------------------------------------------------------------
+## Is Java positioned as the best platform to comply with new regulations?
 
 Is OpenJDK about to remove POLP Authorization, at a time when POLP Authorization is in demand? Is POLP support Java's best kept secret?
 

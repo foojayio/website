@@ -30,8 +30,7 @@ Initially we planned the speaker dinner on Thursday, but Friday was a better fit
 
 ![](dubai-jug-running.png)
 
-Meetup day
-----------
+## Meetup day
 
 After a late breakfast and some work, I went to the PWC office for the meetup preparations. I met up with Jad Salhani, the JUG organizer, and Chris Thalinger, the other speaker. After testing the equipment, we had some time for lunch and our final preparations. Fun fact: we used an Apple TV for the presentations, quite convenient if you have a speaker that just uses their iPhone for slides.
 

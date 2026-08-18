@@ -57,8 +57,6 @@ When you need to display the cost:
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-44918" src="flow-319x510.png" alt="" width="319" height="510">
 
-<br />
-
 The only con is more complex logic.
 
 It's precisely how JDK developers handled the legacy mutable `java.util.Calendar` class. Check the `complete()` method [source code](https://github.com/openjdk-mirror/jdk7u-jdk/blob/master/src/share/classes/java/util/Calendar.java#L1555-L1563) for more details.

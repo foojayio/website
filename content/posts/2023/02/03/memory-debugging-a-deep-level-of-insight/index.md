@@ -24,10 +24,7 @@ Modern debuggers let us gain a level of insight into the application that's unri
 
 {{< youtube dFOFOEg2W4k >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the eighth part of debugging at scale where we know exactly which object was allocated by whom and why.
 
@@ -65,7 +62,6 @@ I discussed this before but these updates don't just work for step over. Everyth
 
 This is very powerful. You can slowly narrow the gap between two points as you discover which area of the code is taking up memory. Notice that memory allocation directly correlates to performance as garbage collection is a major source of performance overhead. This lets us narrow down the root cause.
 
-Final Word
-----------
+## Final Word
 
 In the next video we'll discuss remote debugging and its risks. I know what you might be thinking. I already know how to use remote debugging... This is a different video, we'll discuss tunneling, port-forwarding and the risks involved in doing all of that. If you have any questions please use the comments section. Thank you!

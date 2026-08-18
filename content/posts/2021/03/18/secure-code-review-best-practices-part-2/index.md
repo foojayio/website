@@ -65,8 +65,6 @@ The core premise behind a [Cross-site Scripting (XSS) attack](https://snyk.io/le
 | "           | \&quot;       |
 | '           | '             |
 
-<br />
-
 Similarly, we can achieve that with tag attributes, event handlers, or even style properties. It's common to use sanitization libraries to help us whitelist what characters that we should allow. Using existing sanitization libraries also means that we don't have to be security gurus to make sure we pick up every eventuality. This is particularly good for more junior developers.
 
 #### SQL and NoSQL injection

@@ -27,8 +27,7 @@ In the previous articles ([part 1](https://foojay.io/today/microstream-part-1-wh
 
 In this article, we go a bit more in detail about the next generation Java serialisation that we have built to achieve the MicroStream Java Object database and how you can use it outside the functionality of storing the root object that makes up your database.
 
-Java Serialisation
-------------------
+## Java Serialisation
 
 Serialisation is integrated within the JVM and Java since the early days. By adding the Serializable interface to the class definition, an instance can be passed to an *ObjectOutputStream* and it will be converted to some binary format.
 
@@ -44,8 +43,7 @@ Mark Reinhold, currently the chief architect of the Java Platform, called the cu
 
 With Java 17 and the Context-specific deserialisation filters option, the security vulnerabilities are fixed but it still is not an easy-to-use piece of functionality with some limitations.
 
-MicroStream Serialisation
--------------------------
+## MicroStream Serialisation
 
 Using the standard Java serialisation functionality was not an option as it must be possible to serialise any Java class or instance, MicroStream created a new serialisation engine from the ground up.
 
@@ -55,8 +53,7 @@ For each Java instance, we look at the instance variables and store only data to
 
 We use the low-level Java API for that to create instances without actually calling constructors and setting instance variable values directly. By just handling the data, we make sure that no code is executed during deserialisation which makes it safe. Even when the Type Dictionary is compromised, which holds the mapping between the ids used in the binary representation and the actual class and instance variable names, unexpected classes might be created but since no code is executed, this does not harm your environment in any way. And once such an instance is accessed by your code there will be fatal exceptions as the class is not as expected.
 
-Advanced Features
------------------
+## Advanced Features
 
 But the engine can do more than just store and read java instances. Two additional features make it suitable for using the JVM memory as your database.
 
@@ -66,8 +63,7 @@ The second functionality is the ability to transform the data when it is loaded.
 
 The engine can even detect some small changes automatically, like a change in name or an additional variable. For more complex changes, you define the Type Mapping where you indicate the old and the new structure and how the conversion needs to be performed.
 
-Using the MicroStream Serialisation
------------------------------------
+## Using the MicroStream Serialisation
 
 The MicroStream serialisation is part of the entire framework and is used to store the Java instances to the storage.
 
@@ -83,7 +79,6 @@ To do that, you need the following artefact that exposes the required methods.
 </dependency>
 ```
 
-
 Suppose you have an Employee class where you model the company structure and hierarchy. The following snippets create a serialised and convert the objects, even with the circular reference, to a byte array.
 
 ```java
@@ -97,15 +92,13 @@ try (Serializer<byte[]> serializer = Serializer.Bytes(foundation)) {
 }
 ```
 
-
 And you can deserialise the bytes to create the Object instances again.
 
 ```
 
 ```
 
-Conclusion
-----------
+## Conclusion
 
 To have a generic serialisation solution that can persist any Java instance, without any restrictions like implementing an interface or requiring annotations that define the mapping, a new algorithm was implemented.  
 

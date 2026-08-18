@@ -25,8 +25,7 @@ E.g., my machine tried to recover from a failure which sent it into an infinite 
 
 Which approach should we take and how does that impact our long-term reliability?
 
-Fail-Fast vs. Fail-Safe Approach
---------------------------------
+## Fail-Fast vs. Fail-Safe Approach
 
 In case you aren't familiar with the terms, **fail-fast means a system that would quickly fail** in an unexpected condition. A **fail-safe system will try to recover and proceed even with bad input**.
 
@@ -62,8 +61,7 @@ A more common "strategy" for handling failure is to combine the best aspects of 
 
 The core assumptions behind this direction is that we can control our local environment and test it well. Businesses can't rely on a random service in the cloud. They can build fault-tolerant systems by avoiding external risks but taking the calculated risks of a fail-fast system.
 
-Defining Failure
-----------------
+## Defining Failure
 
 When discussing failure the assumptions we make focus around a 500 error page, crash, etc. Those are serious P1 failures. But by no means are they the only type of failures or even the worst types of failure... A crash usually marks a problem we can fix and even workaround by spinning up a new server instance automatically. This is actually a failure we can handle relatively elegantly.
 
@@ -73,8 +71,7 @@ With cloud computing, we're seeing a rise in defensive programming such as circu
 
 An important part of a good QA process is long running tests that take hours to run and stress the system. When reviewing the logs of these tests, we can sometimes notice issues that didn't fail but conflict with our assumptions about the system. This can help find the insidious bugs that went through.
 
-Don't Fix the Bug
------------------
+## Don't Fix the Bug
 
 Not right away. Well, unless it's in production, obviously...
 
@@ -82,8 +79,7 @@ We should understand bugs before we fix them. Why didn't the testing process fin
 
 When developers resolve a bug, they should be able to answer that question on the issue tracker. Then comes the hard problem, find the root cause of the failure and fix the process so such issues won't happen again. This is obviously an extreme approach to take on every bug, so we need to apply some discretion when we pick the bugs to focus on. But this must always apply to a bug in production. We must investigate bugs in production thoroughly since failure in the cloud can be very problematic to the business, especially when experiencing exponential growth.
 
-Debugging Failure
------------------
+## Debugging Failure
 
 Now that we have a general sense of the subject, let's get into the more practical aspects of a blog focused on debugging. There's no special innovation here. Debugging a fail-fast system is pretty darn easy.
 
@@ -108,8 +104,7 @@ The problem here is that users might get out-of-date information and this might 
 
 The obvious tip here is to log and alert on every failure and mitigation so we can address them. But there's another hybrid approach that isn't as common but might be interesting to some.
 
-Hybrid Fail-Safe
-----------------
+## Hybrid Fail-Safe
 
 A hybrid fail-safe environment starts as a fail-fast environment. This is also true for the testing environment and staging. The core innovation is wrappers that enclose individual components and provide a failsafe layer. This can be very similar to CloudFlare or Amazon cloud front providing a cached version of the website.
 
@@ -121,8 +116,7 @@ A simplistic example like the Amazon example from above will include a quick fai
 
 This has the downside of adding a production component that's mostly missing in development and QA. But it includes many of the advantages of fail-fast and keeps the code relatively clean.
 
-Additional Best Practices for all
----------------------------------
+## Additional Best Practices for all
 
 Here are some best practices you should keep in mind, regardless of the strategy you pick:
 
@@ -131,8 +125,7 @@ Here are some best practices you should keep in mind, regardless of the strategy
 * **Proper code review - I can't stress this enough.** I love code reviews. I despise nitpicking!  
   When I get a response on variable naming, code styling etc. it pushes my buttons... Sometimes comments like that ignore an actual bug. People hate code review because of that type of nitpicking. Companies should train developers in substantive processes and evaluation.
 
-TL;DR
------
+## TL;DR
 
 Failure can come in many shapes and forms. We should accept that failure happens. It happens to Amazon, Facebook and Google despite all their efforts to avoid it. We need to decide on a strategy. Make assumptions and get support from senior management all the way through engineering.
 

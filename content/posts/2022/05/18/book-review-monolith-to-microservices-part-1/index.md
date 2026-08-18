@@ -24,8 +24,6 @@ I have just finished reading ["Monolith to Microservices: Evolutionary Patterns 
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55937" src="monolith-to-microservice-388x510.jpeg" alt="" width="388" height="510">
 
-<br />
-
 This book is undoubtedly great. It explains the critical aspects applicable when moving away from a monolith to a microservices architecture.
 
 In this article, I will try to summarize some of the key elements from the book that impacted me.
@@ -34,8 +32,7 @@ This book contains five chapters, each of which has a great deal of context and 
 
 So I will go through each chapter, one by one.
 
-**Chapter 1:**Just Enough Microservices
----------------------------------------
+## **Chapter 1:**Just Enough Microservices
 
 This chapter starts with defining the concept, "Microservice" itself, the benefits and the problems it creates.
 

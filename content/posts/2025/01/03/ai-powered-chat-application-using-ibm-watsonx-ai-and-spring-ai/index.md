@@ -48,14 +48,11 @@ In this article, we will focus on Language Models and Chat applications. Resurfa
 
 {{< youtube videoseries >}}
 
-<br />
-
 The flagship AI and machine learning platform by IBM. It is designed to empower business to build, deploy, scale AI models effectively. This technology is not the foundation model of IBM rather a platform that incorporates multiple foundation models plus the IBM's flagship model called IBM Granite.
 
 To see the table of all supported foundation models, you can check it out [here](https://www.ibm.com/products/watsonx-ai/foundation-modelshttp:// "here").
 
-Pricing
--------
+## Pricing
 
 If you're an organization interested in trying IBM watsonx.ai, you can check-out its [pricing table](https://www.ibm.com/products/watsonx-ai/pricing "pricing table")
 
@@ -90,8 +87,7 @@ Additional functionalities that Spring AI supports which is significant for AI c
 
 In this demonstration, we will not deal in-depth of these concepts. We will show only the features that IBM watsonx.ai API supports on how quickly we can create a simple chat application.
 
-IBM watsonx.ai
---------------
+## IBM watsonx.ai
 
 The IBM watsonx.ai API supports chat and embedding models in Spring AI context. For chat it supports *WatsonxAiChatModel* which is both a text generation and text stream generation.
 
@@ -101,8 +97,7 @@ To generate embeddings, the platform supports *WatsonxAiEmbeddingModel*.
 
 The image above is the UML Diagram of WatsonxAi API. The chat model implements the provided abstraction of Spring AI for basic chat and streaming chat. To provide implementations of these methods, the WatsonxAiChatModel needs to call the corresponding watsonx.ai platform API via REST and HTTP protocol.
 
-Creating IBM watsonx.ai Chat-based Application
-----------------------------------------------
+## Creating IBM watsonx.ai Chat-based Application
 
 ### Prerequisites
 
@@ -136,7 +131,6 @@ spring:
         // The streaming text endpoint of watsonx.ai service
         stream-endpoint: "/ml/v1/text/generation_stream?version=2024-05-31"
 ```
-
 
 All Spring AI properties starts with a prefix of `spring.ai.`. Every AI platform has their own specific options. For chat properties, watsonx.ai API provides a Chat Options with default values and can be overriden in the properties or yaml file. Below is an example override of the chat options.
 
@@ -174,7 +168,6 @@ spring:
             repetition-penalty: 1.0
 ```
 
-
 To see the token limits of all available foundation models in watsonx.ai platform, please check the [documentation](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-details.html?context=wx&locale=en&audience=wdp "documentation").
 
 ### Chatbot
@@ -199,7 +192,6 @@ public class ChatConfiguration {
     }
 }
 ```
-
 
 I've created a configuration class that creates a ChatClient bean and consumes the WatsonxAiChatModel. I instructed the ChatClient to behave as a helpful AI assistant.
 
@@ -231,7 +223,6 @@ public class ChatEndpoint {
 }
 ```
 
-
 Since we're using Hilla, the controller is called an endpoint. These endpoint class will be converted to a TypeScript file upon invocation of bootRun task.
 
 Below is the example conversion to a TypeScript file. The file is called *ChatEndpoint.ts*
@@ -243,7 +234,6 @@ async function generateMessage_1(userInput: string | undefined, init?: EndpointR
 function generateStreamingMessage_1(userInput: string | undefined): Subscription_1<string | undefined> { return client_1.subscribe("ChatEndpoint", "generateStreamingMessage", { userInput }); }
 export { generateMessage_1 as generateMessage, generateStreamingMessage_1 as generateStreamingMessage };
 ```
-
 
 If you inspect both generateMessage and generateStreamingMessage and Java methods were converted to a JavaScript method. In this case, we don't need to have a network call via REST since we can now call the method from the TypeScript conversion. Below is the example usage of these methods.
 
@@ -276,7 +266,6 @@ const ChatView = () => {
     };
 }
 ```
-
 
 *StreamingChatView.tsx*
 
@@ -314,9 +303,7 @@ const StreamingChatView = () => {
 }
 ```
 
-
-Chat Application
-----------------
+## Chat Application
 
 I've showed how quickly it is to create a custom chat application and integrate it to watsonx.ai using Spring AI and Hilla.
 

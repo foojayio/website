@@ -36,8 +36,6 @@ QCon London was a great experience, albeit I traveled via TGV and Eurostar on my
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_1138-2000x1500.jpg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_1164-2000x1500.jpg)
 
-<br />
-
 But this wasn't actually my first conference talk if you include my two 15-minute talks at [FOSDEM 2023](https://archive.fosdem.org/2023/) in February, one of which was based on my work on Firefox Profiler:
 
 {{< youtube HWPnzbCvua0 >}}
@@ -63,8 +61,6 @@ I originally just wanted to give a talk at the JUG Milano while I was there any 
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_1288-1500x2000.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/06/IMG_1344-3-2000x1500.jpg)
 
-<br />
-
 It was where I gave my first presentation in Italy. It was the first time I've ever been to Italy, but I hope to return with a new talk next year.
 
 After my stop in Italy, I spoke at a [meet-up in Munich](https://www.meetup.com/openvaluemuenchen/events/293736106/), [a small conference in the Netherlands](https://jdriven.com/full-stack-conference-2023), and gave three new talks at two small conferences in Karlsruhe. All in all, I gave eight talks in around two weeks. You can read more about this endeavor in my [Report of my small Tour d'Europe](https://mostlynerdless.de/blog/2023/06/15/report-of-my-small-tour-deurope/). This was quite exhausting, so I only gave a single talk at a user group until September. But I met someone at one of the Karlsruhe conferences who told me at a dinner a month later that I should look into a new topic...
@@ -78,8 +74,6 @@ In the meantime, I used August to go on a sailing vacation in Croatia (couch sai
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_1660-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_1928-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-16-2000x1500.png)
-
-<br />
 
 Before the vacation, I carelessly applied to a few conferences in the fall, including [JavaZone](https://2023.javazone.no/) in Oslo and [Devoxx Belgium](https://devoxx.be/). Still, I would have never dreamed of being a speaker at both in my first year as a proper speaker. Being at JavaZone in September, followed by two smaller conferences in northern Germany, was excellent, especially with all the gorgeous food and getting my first duke:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/09/IMG_2091-2000x1500.jpeg)
@@ -122,8 +116,6 @@ After these two JUGs, I went to Basel to give a talk at [Basel One](https://base
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_2482-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_2392-2000x1500.jpeg)  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/IMG_2557-2000x1500.jpeg)
-
-<br />
 
 Then, at the beginning of November, I gave a talk at [J-Fall](https://jfall.nl) in the Netherlands, the biggest one-day conference in Europe:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/12/image-18-2000x1500.png)

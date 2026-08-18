@@ -24,8 +24,7 @@ frozen: false
 
 In celebration of that I thought I'd write about some of the tricks we discussed amongst ourselves in the past to give you a sense of what to expect when joining us for the workshop but also a useful tool in its own right.
 
-The Problem
------------
+## The Problem
 
 Before we begin I'd like to take a moment to talk about production and the role of developers within a production environment. As a hacker I often do everything. That's OK for a small company but as companies grow we add processes.
 
@@ -67,8 +66,7 @@ I recently posted to a reddit thread where this comment was also present:
 
 Again, logging is great. But it doesn't solve the core problem.
 
-Agility
--------
+## Agility
 
 Our development team needs to be fast and responsive. We need to respond quickly to issues. Sure, we need to try and prevent them in the first place... But like most things in life the law of diminishing returns is in effect here too. There are limits to tests, logs, etc.
 
@@ -82,8 +80,7 @@ But most of these tools are geared towards DevOps. It makes sense. DevOps are th
 
 Developers observability is a pillar of observability targeted at developers instead of DevOps. With tools in this field we can instantly get feedback that's tailored for our needs and reduce the churn of discovering the problem. Before these tools if a log didn't exist in the production and we didn't understand the problem... We had to redeploy our product with "more logs" and cross our fingers...
 
-In Practice and The Workshop...
--------------------------------
+## In Practice and The Workshop...
 
 I got a bit ahead of myself explaining the problem longer than I will explain the solution. I tend to think that's because the solution is so darn obvious once we "get it". It's mostly a matter of details.
 
@@ -109,8 +106,7 @@ But as I said before. Production is where it's at. I can't just stick micro meas
 
 So developer observability tools added the ability to measure things. Count the number of times a line of code was reached. Or literally perform a tictoc measurement which is equivalent to that `currentTimeMillis()` approach.
 
-See You There
--------------
+## See You There
 
 "Only when the tide goes out do you discover who's been swimming naked." -- Warren Buffett
 

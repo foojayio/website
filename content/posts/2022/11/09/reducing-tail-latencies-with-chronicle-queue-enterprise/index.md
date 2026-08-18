@@ -64,7 +64,6 @@ builder.readBufferMode(BufferMode.Asynchronous);
 builder.writeBufferMode(BufferMode.Asynchronous);
 ```
 
-
 which configures Chronicle Queue Enterprise in asynchronous mode to absorb any latencies from the OS/hardware.
 
 Below we see results with the same workload and asynchronous mode configured (qe1 -- 4) overlaid on the same graph. We can see that latencies are slightly worse at low percentiles but are very well contained at the higher percentiles -- even at 99.99 all latencies are less than 4μs.

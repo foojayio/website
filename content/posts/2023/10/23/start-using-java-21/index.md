@@ -26,8 +26,6 @@ frozen: false
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-102813" src="OL_logo_green_on_white-700x120.png" alt="Open Liberty logo" width="700" height="120">
 
-<br />
-
 In this release of Open Liberty, in addition to support for Java 21, we also have an update to Liberty's `featureUtility` command, which you use to install modular features in the core Liberty runtime; the command now verifies feature authenticity by default when you install a new feature into Liberty.
 
 In [Open Liberty](https://openliberty.io/?utm_source=foojay&utm_medium=news&utm_content=java21) 23.0.0.10:
@@ -39,13 +37,11 @@ View the list of fixed bugs in [23.0.0.10](https://github.com/OpenLiberty/open-l
 
 Check out [previous Open Liberty GA release blog posts](https://openliberty.io/blog/?search=release&search!=beta&utm_source=foojay&utm_medium=news&utm_content=java21).
 
-Try Java 21 on Open Liberty 23.0.0.10 now
------------------------------------------
+## Try Java 21 on Open Liberty 23.0.0.10 now
 
 Available through [Maven, Gradle, Docker, and as a downloadable archive](#run).
 
-Support for Java 21
--------------------
+## Support for Java 21
 
 Try out the new changes in Java 21 now and test your applications, microservices, and runtime environments.
 
@@ -85,8 +81,7 @@ For more information on Java 21, see:
 * [API Javadoc page](https://docs.oracle.com/en/java/javase/21/docs/api/index.html)
 * [migration guide](https://docs.oracle.com/en/java/javase/21/migrate/getting-started.html)
 
-featureUtility now verifies feature signatures by default
----------------------------------------------------------
+## featureUtility now verifies feature signatures by default
 
 The `featureUtility` command now verifies feature signatures before installing the feature into the Liberty runtime. It identifies whether the feature originated from the Liberty development team or is a third-party user feature.
 
@@ -106,8 +101,7 @@ For more information, see:
 * [featureUtility installServerFeature command docs](https://openliberty.io/docs/latest/reference/command/featureUtility-installServerFeatures.html?utm_source=foojay&utm_medium=news&utm_content=java21)
 * [featureUtility commands](https://openliberty.io/docs/latest/reference/command/featureUtility-commands.html?utm_source=foojay&utm_medium=news&utm_content=java21)
 
-Develop and run your apps using Open Liberty 23.0.0.10
-------------------------------------------------------
+## Develop and run your apps using Open Liberty 23.0.0.10
 
 If you're using [Maven](https://openliberty.io/guides/maven-intro.html?utm_source=foojay&utm_medium=news&utm_content=java21), include the following in your `pom.xml` file:
 
@@ -118,7 +112,6 @@ If you're using [Maven](https://openliberty.io/guides/maven-intro.html?utm_sourc
     <version>3.8.2</version>
 </plugin>
 ```
-
 
 Or for [Gradle](https://openliberty.io/guides/gradle-intro.html?utm_source=foojay&utm_medium=news&utm_content=java21), include the following in your `build.gradle` file:
 
@@ -134,13 +127,11 @@ buildscript {
 apply plugin: 'liberty'
 ```
 
-
 Or if you're using [container images](https://openliberty.io/docs/latest/container-images.html?utm_source=foojay&utm_medium=news&utm_content=java21):
 
 ```
 FROM icr.io/appcafe/open-liberty
 ```
-
 
 Or take a look at our [Downloads page](https://openliberty.io/start/?utm_source=foojay&utm_medium=news&utm_content=java21).
 

@@ -25,10 +25,6 @@ Sometimes you need to modify multiple lines of code on separate lines inside Int
 * Create multiple carets at the end of lines
 * Create multiple carets at any point in your code
 
-<br />
-
-<br />
-
 ### Create Multiple Carets in a Vertical Line
 
 [Creating carets](https://www.jetbrains.com/help/idea/working-with-source-code.html?keymap=primary_windows#multiple_cursor) that are stacked vertically where you have content on different lines, like a list, can save you a lot of time when you're editing your code.
@@ -43,7 +39,6 @@ public String oak = "Oak";
 public String sycamore = "Sycamore";
 public String pine = "Pine";
 ```
-
 
 You could click each one and replace `public` with `private` but there's a faster way in IntelliJ IDEA. You can press **Option** (macOS), or **Ctrl** (Windows/Linux) twice, holding it down the second time you press it and then use arrow keys to create a tower of vertical carets. You can then replace public with private just once, not three times. You can also add `final` since you're here:
 
@@ -74,7 +69,6 @@ public final String lion = "Lives in Africa";
 public final String stoat = "Lives in the United Kingdom";
 public final String wolf = "Lives in Europe";
 ```
-
 
 ```
 

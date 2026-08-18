@@ -24,8 +24,7 @@ Last month [we were in Dubai](https://foojay.io/today/foojay-podcast-10/)... and
 
 {{< youtube iHzmxTAWckM >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -33,8 +32,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Greg Ostravich
   * <https://www.linkedin.com/in/gregostravich/>
@@ -47,13 +45,11 @@ Guests
   * <https://twitter.com/mraible>
   * <https://raibledesigns.com>
 
-Podcast host
-------------
+## Podcast host
 
 * Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
-Links
------
+## Links
 
 * Denver JUG
   * <https://www.meetup.com/DenverJavaUsersGroup/>
@@ -65,8 +61,7 @@ Links
   * <https://www.meetup.com/colorado-kubernetes-cloud-native>
   * <https://www.meetup.com/boulderjavausersgroup/>
 
-Content
--------
+## Content
 
 * 00'00 Intro and music
 * 00'14 About the topic of this podcast

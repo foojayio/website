@@ -29,13 +29,11 @@ As I was doing interviews at Devoxx in October, I met several of these people, a
 
 This podcast will teach you more about Devoxx, VoxxedDays, Devoxx4Kids, JobRunr, Timefold, OpenJDK Mobile, OpenJFX, Thymelead, htmx, and more!
 
-Video
------
+## Video
 
 {{< youtube zWs35DyF8sE >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -43,8 +41,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Stephan Janssen
 
@@ -83,8 +80,7 @@ Guests
 * <https://www.wimdeblauwe.com/books/taming-thymeleaf/>
 * <https://www.wimdeblauwe.com/projects/>
 
-Content
--------
+## Content
 
 00:00 Introduction
 

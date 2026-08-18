@@ -27,10 +27,7 @@ I'd say Java's driving philosophy is that the early bird is swallowed by a snake
 
 {{< youtube cWdkMfmpsps >}}
 
-<br />
-
-Checked Exceptions
-------------------
+## Checked Exceptions
 
 One of the most universally hated features in Java is checked exceptions. They are the only innovative feature Java introduced as far as I recall. Most of the other concepts in Java existed in other languages, checked exceptions are a brand new idea that other languages rejected. They aren't a "fun" feature, I get why people don't like them. But they are an amazing tool.
 
@@ -43,7 +40,6 @@ api.call1()
     .finalCall();
 ```
 
-
 The compiler could force us to write the `errorHandler` callback if it was missing which would satisfy the spirit of the checked exceptions perfectly. This is possible because checked exceptions are a feature of the compiler, not the JVM. A compiler could detect a checked exception in the lambda and require a specially annotated exception handling callback.
 
 Why wasn't something like this added?
@@ -54,8 +50,7 @@ This is, to a great extent, a mistake... We can declare that main throws an exce
 
 I think a lot of the hate towards the API comes from bad versions of this exception such as `MalformedURLException` or encoding exceptions. These exceptions are often thrown for constant input that should never fail. That's just redundant and a bad use of language capabilities. Checked exceptions should only be thrown when there's cleanup we can do. That's an API problem, not a problem with the language feature.
 
-Null
-----
+## Null
 
 Pouring hate on null has been trending for the past 15+ years. Yes, I know [that quote](https://en.wikipedia.org/wiki/Tony_Hoare). I think people misuse it.
 
@@ -107,8 +102,7 @@ This means we have duplication. Every concept related to objects is expressed tw
 
 This in itself would be fine if the complexity paid off. Unfortunately, such features only resolve the most trivial non-issue cases of null. The complex objects aren't supported since they contain null retrieved from external sources. We're increasing language complexity for limited benefit.
 
-Boilerplate
------------
+## Boilerplate
 
 This used to be a bigger issue in the past but looking at a typical Java file vs. TypeScript or JavaScript the difference isn't as big. Still, people nitpick. A smart engineer I know online called the use of semicolons in languages: "Laziness".
 
@@ -119,27 +113,20 @@ if(..) x();
 else y();
 ```
 
-
 That's terrible. I block these in my style requirements; they are a recipe for disaster with an unclear beginning or end.
 
 Java forces organization, this is a remarkable thing. Classes must be in a specific file and packages map to directories. This might not matter when your project is tiny, but as you handle a huge code base, this becomes a godsend. You would instantly know where to look for clues. That is a powerful tool. Yet, it leads to some verbosity and some deep directory structures. But Java was designed by people who build 1M LoC projects, it scales nicely thanks to the boilerplate. We can't say the same for some other languages.
 
-Moving Fast
------------
+## Moving Fast
 
 Many things aren't great in Java, especially when building more adventurous startup projects. That's why I'm so [excited about Manifold](https://debugagent.com/series/manifold). I think it's a way to patch Java with all the "cool stuff" we want while keeping the performance, compatibility and stability we love.
 
 This can let the community move forward faster and experiment, while Java as a platform can take the slow and steady route.
 
-Final Word
-----------
+## Final Word
 
 Conventional wisdom is problematic. Especially when it is so one-sided and presents a single-dimension argument in which a particular language feature is inferior. There are tradeoffs to be made and my bias probably shines through my words.
 
 However, the cookie cutter counterpoints don't cut it. The facts don't present a clear picture to their benefit. There's always a tradeoff and Java has walked a unique tightrope. Even a slight move in the wrong direction can produce a fast tumbling-down effect. Yet it maintains its traction despite the efforts of multiple different groups to display it as antiquated. This led to a ridiculous perception among developers of Python and JavaScript as "newer" languages.
 
 I think the solution for that is two-fold. We need to educate about the benefits of Java's approach to these solutions. We also need solutions like Manifold to explore potential directions freely. Without the encumberment of the JCP. Having a working proof of concept will make integrating new ideas into Java much easier.
-
-<br />
-
-<br />

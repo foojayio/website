@@ -33,7 +33,6 @@ new URL("http://127.0.0.1/").equals(new URL("http://localhost/"));
 new URL("http://127.0.0.1/").hashcode() == new URL("http://localhost/").hashcode();
 ```
 
-
 This is a bug in the specification. Notice this applies to all domains, so lookup is necessary to perform hashing or equals. That can be very expensive.
 
 **TIP:** performance of equals/hashcode must be very efficient for usage in key values containers such as maps and other hash-based collections
@@ -44,8 +43,7 @@ How can you tell if a hash function is slow in production?
 
 How do you even find out that it's the fault of the hash function?
 
-Measuring Performance
----------------------
+## Measuring Performance
 
 For most intents and purposes, we wouldn't know the problem is in the equals method or hash code. We would need to narrow the problem down. It's likely that a server process would take longer than we would expect and possibly show up on the APM.
 
@@ -82,7 +80,6 @@ INFO: 13 Feb 2022, 14:50:06 TicToc Stats::
          "timestamp" : 1644756606939 } }
 ```
 
-
 You can review these printouts to get a sense of the overhead incurred by these lines. You can also use the counter to see the frequency at which we invoke a method.
 
 **NOTE:** You can pipe these results to [Prometheus/Grafana](https://docs.lightrun.com/integrations/prometheus/) for better visualization, but that requires some configuration that's outside of the scope of this tutorial.
@@ -93,8 +90,7 @@ This is very similar to the way in which we would often debug these things local
 
 Furthermore, we can do that on a set of servers using the tag feature. In this way we can scale our measurements as we scale our servers.
 
-Checking Thread Safety
-----------------------
+## Checking Thread Safety
 
 Mutable objects can be changed from multiple threads while we try to debug them. This might trigger problems that appear to be performance issues. By verifying that we have single thread access, we can also reduce synchronization in critical sections.
 
@@ -110,11 +106,9 @@ The problem is that a condition like this can trigger output that's hard to foll
 !Thread.currentThread().getName().equals("threadName")
 ```
 
-
 This will only log access from different threads. This is something I discussed in my previous post [here](https://lightrun.com/tutorials/debug-race-condition-production/).
 
-TL;DR
------
+## TL;DR
 
 The performance metrics of the equals and hashcode methods in Java SE are crucial. They have a wide reaching impact on the Java collection API, especially in the key values related calls. Objects must implement this efficiently, but it's often hard to determine the Java class that's at fault.
 

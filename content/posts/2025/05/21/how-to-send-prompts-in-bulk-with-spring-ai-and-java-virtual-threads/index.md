@@ -32,8 +32,7 @@ When calling LLM APIs like OpenAI, you're dealing with a high-latency, network-b
 
 This is particularly useful when you want the LLM to perform actions such as summarizing or extracting information from lots of documents.
 
-Here's the flow:
-----------------
+## Here's the flow:
 
 1. Get your list of text inputs.
 2. Filter the ones that need processing.
@@ -43,8 +42,7 @@ Here's the flow:
    --- Wait for all calls to finish (using CompletableFuture)  
    --- Save the results
 
-Virtual Threads for Massive Parallelism
----------------------------------------
+## Virtual Threads for Massive Parallelism
 
 Java Virtual Threads are perfect for this. They're lightweight, run on the JVM, and don't block OS threads. Ideal for I/O-heavy operations like talking to APIs.
 
@@ -52,11 +50,9 @@ Java Virtual Threads are perfect for this. They're lightweight, run on the JVM, 
 ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()
 ```
 
-
 Each OpenAI request runs in its own thread, but without the overhead of real threads.
 
-Spring AI Prompt Call
----------------------
+## Spring AI Prompt Call
 
 You create a Prompt, then send it to the model:
 
@@ -69,16 +65,13 @@ ChatResponse response = chatModel.call(
 );
 ```
 
-
 You get back a structured response. From there, you just extract the output:
 
 ```
 String summary = response.getResult().getOutput().getText();
 ```
 
-
-Processing in Batches
----------------------
+## Processing in Batches
 
 Sending all prompts at once isn't a good idea (rate limits, reliability, memory). Instead, chunk them into smaller batches (e.g., 300 items):
 
@@ -87,15 +80,13 @@ int batchSize = 300;
 int totalBatches = (inputs.size() + batchSize — 1) / batchSize;
 ```
 
-
 For each batch:
 
 * Launch a CompletableFuture for every input
 * Wait for all with CompletableFuture.allOf(...).join()
 * Collect the results
 
-Handling Errors Gracefully
---------------------------
+## Handling Errors Gracefully
 
 Each task is wrapped in a try/catch block. So if one OpenAI call fails, it doesn't crash the batch. You just skip that result.
 
@@ -110,9 +101,7 @@ Each task is wrapped in a try/catch block. So if one OpenAI call fails, it doesn
 }))
 ```
 
-
-Process Results in Bulk
------------------------
+## Process Results in Bulk
 
 After processing each batch:
 
@@ -126,9 +115,7 @@ List processed = futures.stream()
 .toList();
 ```
 
-
-Full Implementation
--------------------
+## Full Implementation
 
 In this example, we get a list of text, and send them to OpenAI in batches to get a summary. We do that in parallel, which makes the process much faster. After getting the summaries, we saves the results. Everything runs in a way that handles errors and avoids overloading the system.
 
@@ -204,8 +191,6 @@ public class BulkSummarizationService {
 }
 ```
 
-
 And that's it! You now have a fully async, high-throughput pipeline that can send hundreds of prompts to OpenAI --- safely and efficiently --- using nothing but Spring AI, Java Virtual Threads, and good batching.
 
-Stay curious!
--------------
+## Stay curious!

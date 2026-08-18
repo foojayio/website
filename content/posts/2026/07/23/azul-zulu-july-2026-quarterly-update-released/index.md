@@ -20,8 +20,7 @@ frozen: false
 
 Every three months your production JDKs fall further behind on security patches. Azul closes that gap today with the July 2026 quarterly update for Azul Zulu Builds of OpenJDK, covering Java 26, 25, 21, 17, 11, 8, 7, and 6.
 
-The Quarterly Update Cycle
---------------------------
+## The Quarterly Update Cycle
 
 Every three months, in January, April, July, and October, the OpenJDK project ships security patches, bug fixes, and improvements for all supported Java versions. This predictable schedule lets teams plan Java updates and keep production environments secure.
 
@@ -39,8 +38,7 @@ PSU releases include every fix from the matching CPU, plus additional non-securi
 
 Install the CPU release quickly, after a short test, to close security gaps fast. Test the PSU release over a longer period afterward. Move your environment to the PSU version once your tests pass, and do this before the next quarterly update arrives. Repeat the cycle every quarter.
 
-Version Bumps in This Release
------------------------------
+## Version Bumps in This Release
 
 This July 2026 update moves the OpenJDK versions forward:
 
@@ -55,8 +53,7 @@ This July 2026 update moves the OpenJDK versions forward:
 
 Run `java -version` to check how far behind your JDK sits.
 
-Security and Bug Fixes in This Release
---------------------------------------
+## Security and Bug Fixes in This Release
 
 This security update release delivered [patches for 4 high-severity CVEs for a total of 18 CVEs](https://docs.azul.com/core/release-notes#fixed-common-vulnerabilities-and-exposures).
 
@@ -71,8 +68,7 @@ Beyond the CVE list, this quarter brings a large batch of non-security fixes and
 
 The fix count for Azul Zulu includes OpenJDK fixes, Azul-specific fixes, and JavaFX fixes. The totals differ from the plain OpenJDK numbers you see elsewhere.
 
-Azul Zulu July 2026 Release Notes
----------------------------------
+## Azul Zulu July 2026 Release Notes
 
 Azul releases Azul Zulu Builds of OpenJDK in versions 26, 25, 21, 17, 11, 8, 7, and 6 this quarter. Check the [full Azul release notes](https://docs.azul.com/core/release-notes) for every detail. A few changes stand out.
 
@@ -114,8 +110,7 @@ Azul also removes the deprecated `CRaCKeepRunning` and `CRaCConcurrentMemoryLoad
 
 This release ships [IANA Time Zone Database](https://www.iana.org/time-zones) version 2026b.
 
-Next Steps
-----------
+## Next Steps
 
 Plan your testing and rollout so your Java applications pick up the July 2026 security patches and bug fixes without a rushed deployment. Mark the next dates on your calendar:
 

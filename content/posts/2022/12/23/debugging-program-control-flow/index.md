@@ -34,10 +34,7 @@ Don't forget to check out my [book](https://www.amazon.com/dp/1484290410/) and s
 
 {{< youtube GSeg5L31XXw >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the second part of debugging at Scale where you can learn the secret tricks of debugging.
 

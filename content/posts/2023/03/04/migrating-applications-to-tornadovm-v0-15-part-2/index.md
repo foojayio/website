@@ -48,7 +48,6 @@ taskGraph.transferToHost(DataTransferMode.EVERY_EXECUTION, output);
 ImmutableTaskGraph itg = taskGraph.snapshot();
 ```
 
-
 2. Build, Optimize and Execute an Execution Plan
 ------------------------------------------------
 
@@ -66,7 +65,6 @@ A **TornadoExecutionPlan** object accepts one or multiple immutable task graphs,
 TornadoExecutionPlan executionPlan = new TornadoExecutionPlan(itg);
 ```
 
-
 ### 2.1. **What can be done with an execution plan?**
 
 An execution plan can be executed directly, in which case TornadoVM will apply a list of default optimizations (e.g., it will run on the default device, using the default thread scheduler).
@@ -74,7 +72,6 @@ An execution plan can be executed directly, in which case TornadoVM will apply a
 ```java
 executionPlan.execute();
 ```
-
 
 **Note:** The **default device** is the first device that is identified by the TornadoVM runtime. This device is identified with the \`0:0\` identifier if a programmer runs the command: tornado --devices.
 
@@ -101,13 +98,11 @@ executionPlan.withProfiler(ProfilerMode.SILENT) // Enable the TornadoVM Profiler
        .withDevice(device); // Select a specific device
 ```
 
-
 And the execution is launched as follows:
 
 ```java
 executionPlan.execute();
 ```
-
 
 **Note for migration:** The **execute()** method that was exposed in the **TaskSchedule** object of TornadoVM API (prior to v0.15) needs to be replaced with: i) the creation of a **TornadoExecutionPlan** object that accepts the corresponding **ImmutableTaskGraph** object as input; and ii) the invocation of the **execute** method of the generated execution plan.
 
@@ -127,7 +122,6 @@ An execution result can be used, as follows:
 TornadoExecutionResult executionResult = executionPlan.execute();
 TornadoProfilerResult profilerResult = executionResult.getProfilerResult();
 ```
-
 
 4. Further reading and examples
 -------------------------------

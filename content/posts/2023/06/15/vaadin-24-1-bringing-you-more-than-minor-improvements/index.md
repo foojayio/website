@@ -25,8 +25,7 @@ While [Vaadin 24.0](http://https://foojay.io/today/vaadin-24-java-17-jakarta-ee-
 
 Here are the best of them!
 
-Visual View Builder
--------------------
+## Visual View Builder
 
 [![Vaadin View Builder](https://vaadin.com/docs/latest/static/37d22f0783d625059a3b94ed276b7d7a/cfb07/view-builder-start.webp "Vaadin View Builder")](https://vaadin.com/docs/latest/tools/view-builder "Vaadin View Builder")
 
@@ -34,8 +33,7 @@ Built into start.vaadin.com, Visual View Builder helps you to create application
 
 [Try it out →](https://vaadin.com/docs/latest/tools/view-builder "Try it out -&gt;")
 
-Visual Theme Editor
--------------------
+## Visual Theme Editor
 
 [![Vaadin Real-time Theme Editor](https://vaadin.com/docs/latest/static/c50310949470420af2bc09943c940a4f/5f228/theme-editor.webp "Vaadin Real-time Theme Editor")](https://vaadin.com/docs/latest/tools/theme-editor "Vaadin Real-time Theme Editor")
 
@@ -43,8 +41,7 @@ Visually fine-tune the appearance of your UI components in-app while in real-tim
 
 [Read more →](https://vaadin.com/docs/latest/tools/theme-editor "Read more -&gt;")
 
-Faster, easier production builds
---------------------------------
+## Faster, easier production builds
 
 Pre-compiled production bundle eliminates the need to run front-end tools like npm and Vite.
 
@@ -52,8 +49,7 @@ Faster, error-free process, if no add-ons or front-end files are used in the app
 
 [Read more about production builds →](https://vaadin.com/docs/latest/production/production-build "Read more -&gt;")
 
-Code splitting for component loading
-------------------------------------
+## Code splitting for component loading
 
 Faster initial load time of the application by only loading components when they are needed.
 
@@ -63,8 +59,7 @@ For other routes, components are first loaded when navigating to these routes.
 
 [Read more about bundle optimizations →](https://vaadin.com/docs/latest/production/production-build#bundle-component-loading-optimizations "Read more -&gt;")
 
-Faster Grids and lazyloading for columns
-----------------------------------------
+## Faster Grids and lazyloading for columns
 
 Significant improvements to enhance the performance of all Vaadin grids, including Grid, Tree Grid, Grid Pro, and CRUD components.
 
@@ -81,8 +76,6 @@ New SideNav component provides a vertical list of navigation links with support 
 Added ARIA label APIs needed by screen readers as well as a number of other accessibility improvements to conform with Web Content Accessibility Guidelines.
 
 [Vaadin WCAG compatibility matrix →](https://docs.google.com/spreadsheets/d/1VJuzr1H2BWxPAGdtLxTe7yj12_vn0RcTu-UO79WOp8w/edit#gid=1281315720 "Read more -&gt;")
-
-
 
 Have I missed anything important that you were anticipating to hear from us?
 

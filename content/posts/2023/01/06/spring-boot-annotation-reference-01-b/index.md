@@ -67,7 +67,6 @@ public class BookServiceImpl implements BookService {
     ....
 ```
 
-
 **@Controller
 @RestController**
 
@@ -115,7 +114,6 @@ public class SBASampleController {
     ...
 ```
 
-
 **@Component**
 
 @Component is used to create any Spring managed component. It can be used as a Spring Bean. Any bean with @Bean that is created within a component will have a 'Prototype' scope, as opposed to a 'Singleton' scope of beans that is created within a @Configuration annotated class. @Repository and @Controller are all specialized components.
@@ -148,7 +146,6 @@ package xyz.sumithpuri.spring.boot.annotation.component;
  }
 ```
 
-
 **@Repository**
 
 @Repository is a specialized @Component that is used to mark a class that provides persistence or storage operations. It will provide operations like create, update, retrieve, delete and search type of operations. It is mostly used in conjunction with RDBMS or any other Database.
@@ -163,7 +160,6 @@ This annotation is from MVC/Web that will associate a given URI with a method in
 @RequestMapping(method = RequestMethod.PATCH)
 ```
 
-
 **@GetMapping**
 
 This annotation is used to map a HTTP GET request to a specific handler method in the controller. It is equivalent to the following alternative.
@@ -171,7 +167,6 @@ This annotation is used to map a HTTP GET request to a specific handler method i
 ```java
 @RequestMapping(method = RequestMethod.GET)
 ```
-
 
 **@PostMapping**
 
@@ -181,7 +176,6 @@ This annotation is used to map a HTTP POST request to a specific handler method 
 @RequestMapping(method = RequestMethod.POST)
 ```
 
-
 **@DeleteMapping**
 
 This annotation is used to map a HTTP DELETE request to a specific handler method in the controller. It is equivalent to the following alternative.
@@ -189,7 +183,6 @@ This annotation is used to map a HTTP DELETE request to a specific handler metho
 ```java
 @RequestMapping(method = RequestMethod.DELETE)
 ```
-
 
 **@PutMapping**
 
@@ -199,7 +192,6 @@ This annotation is used to map a HTTP PUT request to a specific handler method i
 @RequestMapping(method = RequestMethod.PUT)<code> </code>
 ```
 
-
 **@PatchMapping**
 
 This annotation is used to map a HTTP PATCH request to a specific handler method in the controller. It is equivalent to the following alternative.
@@ -207,7 +199,6 @@ This annotation is used to map a HTTP PATCH request to a specific handler method
 ```java
 @RequestMapping(method = RequestMethod.PATCH)
 ```
-
 
 **@RequestBody**   
 
@@ -288,6 +279,5 @@ package xyz.sumithpuri.spring.boot.annotation.controller;
       }  
  }
 ```
-
 
 ( @RestController, @GetMapping, @PostMapping, @DeleteMapping, @Autowired, @Pathvariable )

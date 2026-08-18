@@ -20,10 +20,6 @@ frozen: false
 
 **Ah, the halcyon days of Java development, where coding was king and APIs were the castle! From the nitty-gritty of the Java VM and garbage collection to the euphoria of leveraging new APIs, life was straightforward. With each Java update, you could expect nothing but improvements, a far cry from other ecosystems where every new version turned into a mini-project just to keep your codebase relevant. And with DevOps in the picture, version constraints felt like a thing of the past. Come 2017, Oracle promised us an accelerated release cycle, and life was good.**
 
-<br />
-
-<br />
-
 But then, the landscape began to shift. Starting with Java 10, APIs started disappearing, presenting a new challenge for developers. Then, in 2019, Oracle dropped the bombshell: commercial use of Java 8 would no longer be free. Oracle's changes and the subsequent tumult in the JDK universe made the future look darker.
 
 Amidst all this, the global pandemic eclipsed our JDK concerns. But as we emerged, we were greeted yet again by changing license landscapes. The once-clear waters had turned murky; making an informed decision about your JDK distribution became a necessity. Keeping up with constant licensing changes is tiring, not to mention unproductive and this looks set to continue. Unless you enjoy this type of thing, in the words of Sweet Brown, "Ain't no one got time for that".

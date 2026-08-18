@@ -33,8 +33,7 @@ Where applicable the differences with Java 19 are highlighted and a few typical 
 
 **Note:** See [the whole list of everything included in Java 20 here on Foojay.io](https://foojay.io/java-20/?quarter=032023&version=20&tab=component) and you can vote on those that you find most useful or interesting and also check out the [Java 20 Foojay Podcast](https://foojay.io/today/foojay-podcast-16/)!
 
-From Project Amber
-------------------
+## From Project Amber
 
 Java 20 contains two features that originated from [Project Amber](https://openjdk.org/projects/amber/):
 
@@ -70,7 +69,6 @@ static String apply(Effect effect) {
 }
 ```
 
-
 This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? So in the spirit of this JEP (and its predecessors), let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
 ```java
@@ -85,7 +83,6 @@ static String apply(Effect effect) {
     };
 }
 ```
-
 
 Pattern matching for switch made our code far more elegant here. We're even able to address possible `null`s by defining a specific case for them or combining it with the default case (which is what we've done here).
 
@@ -104,7 +101,6 @@ static String apply(Effect effect, Guitar guitar) {
     };
 }
 ```
-
 
 Here, the guard makes sure that intricate boolean logic can still be expressed in a concise way. Having to nest `if` statements to test this logic within a case branch would not only be more verbose, but also potentially introduce subtle bugs that we set out to avoid in the first place.
 
@@ -138,7 +134,6 @@ static String apply(Effect effect) {
 }
 ```
 
-
 `Delay(int timeInMs)` is a record pattern here, deconstructing the `Delay` instance into its components. And this mechanism can become even more powerful when we apply it to a more complicated object graph by using *nested* record patterns:
 
 ```java
@@ -154,7 +149,6 @@ class TunerApplier {
 }
 ```
 
-
 #### Inference of type arguments
 
 Nested record patterns also benefit from *inference of type arguments*. For example:
@@ -168,7 +162,6 @@ class TunerApplier {
     }
 }
 ```
-
 
 Here the type arguments for the nested pattern `Tuner(var pitch, Note(var note))` are inferred. This only works with nested patterns for now; type patterns do not yet support implicit inference of type arguments. So the type pattern `Tuner tu` is always treated as a raw type pattern.
 
@@ -188,7 +181,6 @@ class DelayPrinter {
 }
 ```
 
-
 #### What's Different From Java 19?
 
 The following changes were made to this feature compared to Java 19:
@@ -200,8 +192,7 @@ The following changes were made to this feature compared to Java 19:
 
 For more information on this feature, see [JEP 432](https://openjdk.org/jeps/432).
 
-From Project Loom
------------------
+## From Project Loom
 
 Java 20 contains three features that originated from [Project Loom](http://openjdk.java.net/projects/loom/):
 
@@ -241,7 +232,6 @@ var virtualThread = Thread.startVirtualThread(() -> {
 virtualThread.start();
 ```
 
-
 When your code uses the `ExecutorService` interface already, switching to virtual threads will take even less effort:
 
 ```java
@@ -257,7 +247,6 @@ try (var virtualThreadsExecutor = Executors.newVirtualThreadPerTaskExecutor()) {
     });
 } // close() is called implicitly
 ```
-
 
 Note that the `ExecutorService` interface was adjusted in Java 19 to extend `AutoCloseable`, so it can now be used in a try-with-resources construct.
 
@@ -309,7 +298,6 @@ ScopedValue.where(V, <value>)
 ... V.get() ...
 ```
 
-
 We see that `ScopedValue.where(...)` is called, presenting a scoped value and the object to which it is to be bound. The call to `run(...)` binds the scoped value, providing an incarnation that is specific to the current thread, and then executes the lambda expression passed as argument. During the lifetime of the `run(...)` call, the lambda expression, or any method called directly or indirectly from that expression, can read the scoped value via the value's `get()` method. After the `run(...)` method finishes, the binding is destroyed.
 
 #### Typical Use Cases
@@ -340,7 +328,6 @@ Response handle() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 When the `user.get()` call results in an error, there is no way for us to cancel the second task when we want to prevent getting a result that won't be used anyway.  
 
 Though when we would rewrite this code to use just a single thread, the situation would become a lot simpler:
@@ -352,7 +339,6 @@ Response handle() throws IOException {
     return new Response(theUser, theOrder);
 }
 ```
-
 
 See? Here we would be able to prevent the second call once the first one has failed.
 
@@ -375,7 +361,6 @@ Response handle() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 In structured concurrency, subtasks work on behalf of a task. The task awaits the subtasks' results and monitors them for failures. The `StructuredTaskScope` class allows developers to structure a task as a family of concurrent subtasks, and to coordinate them as a unit. Subtasks are executed in their own threads by forking them individually and then joining them as a unit and, possibly, cancelling them as a unit. The subtasks' successful results or exceptions are aggregated and handled by the parent task.
 
 In contrast to the original example, understanding the lifetimes of the threads involved here is easy. Under all conditions their lifetimes are confined to a lexical scope, namely the body of the try-with-resources statement. Furthermore, the use of `StructuredTaskScope` ensures a number of valuable properties:
@@ -396,8 +381,7 @@ The only change is an update to `StructuredTaskScope` to make it support the inh
 
 For more information on this feature, see [JEP 437](https://openjdk.org/jeps/437).
 
-From Project Panama
--------------------
+## From Project Panama
 
 Java 20 contains two features that originated from [Project Panama](http://openjdk.java.net/projects/panama/):
 
@@ -447,7 +431,6 @@ try (Arena offHeap = Arena.openConfined()) {
 } // 8. All off-heap memory is deallocated here
 assert Arrays.equals(javaStrings, new String[] {"car", "cat", "dog", "mouse"});  // true
 ```
-
 
 Let's look at some of the types this code uses in more detail to get a rough idea of their function and purpose within the Foreign Function \& Memory API:
 
@@ -516,7 +499,6 @@ void vectorComputation(float[] a, float[] b, float[] c) {
 }
 ```
 
-
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being slightly more verbose, but on the other hand it can bring spectacular performance gains.
 
 #### Typical Use Cases
@@ -534,8 +516,7 @@ Once the features of Project Valhalla are available, the Vector API will be adap
 
 For more information on this feature, see [JEP 438](https://openjdk.org/jeps/438).
 
-Final thoughts
---------------
+## Final thoughts
 
 So, these are exciting times for Java programmers!
 

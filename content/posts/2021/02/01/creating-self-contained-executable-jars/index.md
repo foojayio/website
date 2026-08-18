@@ -28,7 +28,6 @@ A JAR is just a collection of class files. To be executable, its `META-INF/MANIF
 Main-Class: path.to.MainClass
 ```
 
-
 In the above, `MainClass` has a `static main(String...​ args)` method.
 
 ### Handling the Classpath
@@ -38,7 +37,6 @@ Most applications depend on existing code. Java provides the concept of the **cl
 ```
 java -cp lib/one.jar;lib/two.jar;/var/lib/three.jar path.to.MainClass
 ```
-
 
 The Java runtime creates the classpath by aggregating all classes from all referenced JARs and adding the main class.
 
@@ -88,7 +86,6 @@ The plugin manages common use-cases by providing pre-defined assemblies. The dis
 </plugin>
 ```
 
-
 1. Reference the pre-defined self-contained JAR configuration
 2. Set the main class to execute
 3. Execute the `single` goal
@@ -105,7 +102,6 @@ The first JAR has the same content as the one that would have been created witho
 java -jar target/executable-jar-0.0.1-SNAPSHOT.jar
 ```
 
-
 Depending on the project, it may execute successfully...​ or not. For example, it fails in the sample Spring Boot project with the following message:
 
 ```
@@ -113,7 +109,6 @@ Depending on the project, it may execute successfully...​ or not. For example,
   No auto configuration classes found in META-INF/spring.factories.
   If you are using a custom packaging, make sure that file is correct.
 ```
-
 
 The reason is that different JARs provide **different resources under the same path** *e.g.* `META-INF/spring.factories`. The plugin follows a last write wins strategy. The order is based on the name of the JAR.
 
@@ -173,7 +168,6 @@ The Shade plugin configuration to the Assembly's above is the following:
 </plugin>
 ```
 
-
 1. The `shade` goal is bound to the `package` phase by default
 2. This transformer is dedicated to generating manifest files
 3. Set the `Main-Class` entry
@@ -231,7 +225,6 @@ To configure these transformers, we need to add the above libraries as dependenc
 </plugin>
 ```
 
-
 1. Merge Log4J2 `.dat` files
 2. Merge `/META-INF/spring.factories` files
 3. Add the required transformers code
@@ -268,7 +261,6 @@ Configuring the Spring Boot plugin is straightforward:
 </plugin>
 ```
 
-
 <figure class="wp-block-image size-large is-resized">
  <img fetchpriority="high" decoding="async" src="image-12.png" alt="" class="wp-image-37601" width="269" height="233">
 </figure>
@@ -284,7 +276,6 @@ Main-Class: org.springframework.boot.loader.JarLauncher
 Start-Class: ch.frankel.blog.executablejar.ExecutableJarApplication
 ```
 
-
 As you can see, the main class is a Spring Boot specific class while the "real" main class is referenced under another entry.
 
 For more information on the structure of the JAR, please check the [reference documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-executable-jar-format.html).
@@ -299,8 +290,7 @@ In this post, we've described 3 different ways to create self-contained executab
 
 The complete source code for this post can be found on [Github](https://github.com/ajavageek/executable-jar) in Maven format.
 
-To go further:
---------------
+## To go further:
 
 * [Maven Assembly plugin](https://maven.apache.org/plugins/maven-assembly-plugin/)
 * [Maven Shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)

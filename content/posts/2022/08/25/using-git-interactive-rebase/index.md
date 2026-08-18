@@ -27,8 +27,7 @@ Open the Git window in IntelliJ IDEA using **⌘+9** on Mac (or **Alt+9** on Win
 
 We will use a Git demo project available on [GitHub](https://github.com/mlvandijk/gitdemo). This example uses [TDD (Test Driven Development)](https://martinfowler.com/bliki/TestDrivenDevelopment.html) to add a new feature. In TDD, we start by adding a failing test, writing the minimum of code we need to get that test to pass and finally do some refactoring. Even though we made the necessary changes in multiple commits, we don't need to keep all these individual commits for future reference.
 
-Using Git interactive rebase in the UI
---------------------------------------
+## Using Git interactive rebase in the UI
 
 We can use Git Interactive Rebase in IntelliJ IDEA as follows:
 
@@ -102,8 +101,7 @@ This will open a "**Edit Commit Message** " popup, where you can edit the commit
 
 To see which Git commands IntelliJ IDEA performed, open the "Console" tab in the Git window.
 
-Using Git interactive rebase from the command line
---------------------------------------------------
+## Using Git interactive rebase from the command line
 
 Let's take a look at how to use Git interactive rebase from the command line.
 
@@ -177,8 +175,7 @@ In vi, we can remove a line by placing the cursor anywhere on the line we want t
 
 Save the file by typing `:wq` and the interactive rebase will be applied. We see in the Git log that the commit is dropped.
 
-Summary
--------
+## Summary
 
 Now we know how to use git interactive rebase either from the IntelliJ IDEA UI or from the command line. Give them a try and use whichever way you prefer.
 

@@ -44,13 +44,11 @@ Annelore Egger mentors people who think they do not know enough to speak at conf
 
 Foojay is more than a blog. It is a Mastodon server, a Slack community, the Disco API, a book on sustainability, a podcast, and now an education catalog. Six years in, it is still growing, still community-driven, and still very much a place where anyone who works with Java is welcome.
 
-YouTube
--------
+## YouTube
 
 {{< youtube no5HAfb4De0 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -58,8 +56,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction
 

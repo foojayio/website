@@ -28,8 +28,7 @@ Quarkus is a Java runtime that seamlessly integrates popular frameworks and libr
 
 Quarkus itself can also work as a framework, as it constitutes a higher-level layer that provides structure and APIs.
 
-Why Quarkus stands out?
------------------------
+## Why Quarkus stands out?
 
 In modern software development, runtimes and frameworks form the foundation of productivity and consistency. Frameworks promote uniformity, simplify infrastructure, and enable automation at scale.
 
@@ -43,8 +42,7 @@ But beyond speed and live reload, Quarkus integrates established Java specificat
 
 In this sense, Quarkus is a development framework and runtime for cloud-native Java applications. It adheres to industry standards and offers compatibility with technologies such as Spring, Apache Kafka, and Apache Camel to support familiar, flexible development models.
 
-Quarkus as a versatile framework
---------------------------------
+## Quarkus as a versatile framework
 
 Beyond staple traits of modern frameworks, Quarkus introduces two platform-defining features: buildtime optimization and deep extensibility.
 
@@ -164,8 +162,7 @@ By packaging Quarkus extensions, curated defaults, and service templates into an
 
 For more information, see the [Logicdrop customer story](https://quarkus.io/blog/logicdrop-customer-story/) and their [GitLab automation write-up](https://quarkus.io/blog/logicdrop-automating-quarkus-with-gitlab/?utm_source=chatgpt.com).
 
-Conclusion
-----------
+## Conclusion
 
 Quarkus unifies the strengths of a development framework and a runtime. As a framework, it provides structure, conventions, and a cohesive developer experience. As a runtime, it delivers fast startup, low memory use, and operational consistency in the cloud. This dual role helps teams standardize practices, reduce costs, and ship resilient cloud-native services.
 

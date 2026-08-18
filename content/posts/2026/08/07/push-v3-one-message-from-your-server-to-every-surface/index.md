@@ -29,8 +29,7 @@ There is also one thing every existing push developer should do now:
 
 Next week we plan to bring down the old push service and direct `push.codenameone.com` traffic to the new implementation. The compatibility endpoint accepts the existing request format, so existing code should keep working. It is still a completely new server, and "should" is not a test result. Please test before the cutover while both routes are easy to compare.
 
-TL;DR
------
+## TL;DR
 
 Push is the lead story today. Over the next four posts, I will unpack the other changes in this release:
 
@@ -39,8 +38,7 @@ Push is the lead story today. Over the next four posts, I will unpack the other 
 * [Health data](#health-data-without-fake-certainty): A new API covers HealthKit, Health Connect, workouts, nutrition, eight Bluetooth health sensor profiles, and a deterministic simulator. The design preserves denied reads, missing values, source overlap, and compliance boundaries instead of flattening them into convenient answers.
 * [Road-following map routes](#a-polyline-is-not-a-route): `Routing.showRoute(...)` can now turn two coordinates into road geometry, distance, duration, legs, and steps. OSRM provides the default test path, while `RouteService` keeps production provider choice in application code.
 
-Test the new push server now
-----------------------------
+## Test the new push server now
 
 If your server currently sends through the classic endpoint, keep the request exactly as it is and change only the host:
 
@@ -55,8 +53,7 @@ The new server contains a classic compatibility layer. Existing applications do 
 
 The queue records a provider response for each target. "Accepted" means APNs, FCM, or another provider accepted the request. It does not prove that the operating system displayed the notification, that the user saw it, or that the application opened. The console keeps those states separate because a comforting number with the wrong definition is worse than no number.
 
-V3 makes the message a real type
---------------------------------
+## V3 makes the message a real type
 
 The classic API encoded behavior into numeric push types and positional strings. It worked, but it made provider differences and new destinations increasingly hard to express.
 
@@ -114,8 +111,7 @@ Create one client in `init()`, retain it, and call `register()` from `start()`. 
 
 Applications that run their own push infrastructure are not trapped behind the managed service. `PushTransport` is a public seam for custom registration and delivery, while `PushRegistrationSink` lets an application mirror registration changes to its own backend.
 
-One push can update a notification or a Surface
------------------------------------------------
+## One push can update a notification or a Surface
 
 A lock-screen notification is only one destination. Widgets, Live Activities, the Dynamic Island, watch complications, and other [Surfaces](https://www.codenameone.com/blog/widgets-live-activities-dynamic-island/) also need fresh state.
 
@@ -127,8 +123,7 @@ Consider a delivery application that is not running while the customer waits for
 
 The message view still shows whether APNs or another provider accepted each update. That is useful when the Surface changes while no `PushListener` is running inside the application.
 
-The certificate stops being your server's problem
--------------------------------------------------
+## The certificate stops being your server's problem
 
 The old arrangement often made an application team generate a push certificate, place it on its own server, watch its expiry date, and repeat the process. That is fragile infrastructure disguised as setup.
 
@@ -138,8 +133,7 @@ The new console stores provider credentials for each application and environment
 
 Credentials are encrypted at rest and treated as write-only secrets in the console. Reading application settings does not return the secret value. This removes certificate hosting from your application server, but it does not remove normal secret hygiene: use a narrowly scoped provider key, rotate it when a team member or system boundary changes, and separate production from development.
 
-Segmentation without handing identity to a device
--------------------------------------------------
+## Segmentation without handing identity to a device
 
 The console separates applications, environments, subscriptions, audiences, messages, campaigns, and analytics.
 
@@ -155,8 +149,7 @@ This is segmentation for application behavior, not an advertising profile. Coden
 
 Never place a password, access token, medical result, or other secret in a notification payload. Providers and operating systems participate in delivery, lock screens can expose visible text, and notification data may outlive the screen where you intended to show it.
 
-Monitoring that answers operational questions
----------------------------------------------
+## Monitoring that answers operational questions
 
 The new message view exposes queued, accepted, failed, and dead targets, including provider error information.
 
@@ -172,8 +165,7 @@ This makes several operational checks possible:
 
 Analytics are retained for 30 days. They are operational delivery analytics, not proof of attention. Application opens or business outcomes still belong in consent-aware product analytics under your control.
 
-What each plan includes
------------------------
+## What each plan includes
 
 Push sending and managed provider credentials are available on every subscription level, including Free. The plans differ in monthly volume, rate limits, and persistent campaign tooling:
 
@@ -188,8 +180,7 @@ Free and Basic applications can send through the same durable provider pipeline.
 
 These numbers are the initial policy, not a claim that every application needs a million notifications. Start with a small, explicit audience. A precise notification that helps 200 people is better than a vague blast that trains 200,000 people to turn notifications off.
 
-Phase one of our Maven repository move
---------------------------------------
+## Phase one of our Maven repository move
 
 We have also merged [phase one of a move from Maven Central to a Codename One repository on Cloudflare R2](https://github.com/codenameone/CodenameOne/pull/5497).
 
@@ -222,8 +213,7 @@ R2 object storage and Cloudflare's edge should improve dependency resolution and
 
 [The Maven article publishes on August 4 with the full payload audit, cutover plan, R2 release safeguards, retention policy, and failure modes we are testing during dual publication.](https://www.codenameone.com/blog/maven-central-cloudflare-r2/)
 
-On-device AI and MCP on every port
-----------------------------------
+## On-device AI and MCP on every port
 
 [PR #5467](https://github.com/codenameone/CodenameOne/pull/5467) brings vision, language, and LiteRT inference into the core. The API covers OCR, barcode recognition, face detection, image labels, pose detection, selfie segmentation, document correction, language identification, translation, smart reply, and application-owned `.tflite` models.
 
@@ -256,8 +246,7 @@ MCP refuses to start in a release build by default. An explicit override exists 
 
 [The AI and MCP article publishes on August 2 with the capability matrix, portable inference model, semantic debugging loop, and the reasons loopback still needs a release-build gate.](https://www.codenameone.com/blog/on-device-ai-mcp-loopback/)
 
-Health data without fake certainty
-----------------------------------
+## Health data without fake certainty
 
 [PR #5475](https://github.com/codenameone/CodenameOne/pull/5475) adds a first-class API for HealthKit, Health Connect, recorded workouts, sparse nutrition data, deterministic simulation, and eight adopted Bluetooth health sensor profiles.
 
@@ -299,8 +288,7 @@ This API does not make an application HIPAA compliant. It never uploads health d
 
 [The Health article publishes on August 1 with the platform matrix, authorization trap, sample model, change cursors, workouts, Bluetooth sensors, simulator failure modes, build configuration, and HIPAA boundary.](https://www.codenameone.com/blog/health-api-false-certainty/)
 
-A polyline is not a route
--------------------------
+## A polyline is not a route
 
 A map polyline joins coordinates that already exist. It cannot discover the roads, travel time, maneuvers, or alternate paths between them.
 

@@ -28,8 +28,7 @@ The project is written in Java using Maven as the build tool. So, the process wi
 
 You can follow this article if you need to publish a Java Maven-based library or artifact to Maven.
 
-Get Ready for Publishing Packages
----------------------------------
+## Get Ready for Publishing Packages
 
 Publishing a Java artifact is not as trivial as Python or JavaScript packages can be deployed.
 
@@ -133,15 +132,13 @@ Your file will look like this:
 </settings>
 ```
 
-
 You will add your credentials. I would like to store encrypted passwords instead, but that would be another step to add tho this guide.
 
 **TIP:** Run `gpg --list-secret-keys --keyid-format=long` to check the GPG keys installed on your machine. Then you can get your key's id. You will copy the long HEX number, read the PG guide given above to check more details.
 
 This process can be tricky, so you will likely have to solve some issues in the way.
 
-Set Up Maven in the Project
----------------------------
+## Set Up Maven in the Project
 
 This is the configuration that was applied to the project. It has many things, so it is exhausting. Once this is done properly, the release without errors will be trivial.
 
@@ -178,7 +175,6 @@ As you can see, the first tags are just general project information:
 </project>
 ```
 
-
 Then, other information about the project's repository:
 
 ```xml
@@ -195,7 +191,6 @@ Then, other information about the project's repository:
     </scm>
 </project>
 ```
-
 
 ```
 
@@ -223,7 +218,6 @@ Add the maven plugin for source code:
 </plugin>
 ```
 
-
 and the other for the javadocs, the javadoc binary has to be set to match your system's javadoc:
 
 ```xml
@@ -247,7 +241,6 @@ and the other for the javadocs, the javadoc binary has to be set to match your s
 </plugin>
 ```
 
-
 ```
 
 ```
@@ -262,7 +255,6 @@ Then, we need two more plugins:
 </plugin>
 ```
 
-
 ```xml
 <plugin>
     <groupId>org.sonatype.plugins</groupId>
@@ -276,7 +268,6 @@ Then, we need two more plugins:
     </configuration>
 </plugin>
 ```
-
 
 The final build configuration will look like this:
 
@@ -334,7 +325,6 @@ The final build configuration will look like this:
 </build>
 ```
 
-
 ### Distribution Management Config
 
 Add this child to the project's root:
@@ -355,7 +345,6 @@ Add this child to the project's root:
     </repository>
 </distributionManagement>
 ```
-
 
 That way, you set the repositories for snapshots, and final release. If you go to the snapshot repository link, you will literally find the directory for all the repositories added with their reverse DNS.
 
@@ -399,7 +388,6 @@ We'll want to run a profile called ci-cd with the following configuration:
 </profiles>
 ```
 
-
 Visit [Introduction to Build Profiles \| Apache Maven](https://maven.apache.org/guides/introduction/introduction-to-profiles.html) to learn more about Maven profiles.
 
 This configuration is tricky. It's useful for verification of the GPG signature, and it looks like it'll prevent some issues.
@@ -418,15 +406,13 @@ This is the profile to run when deploying the artifact.
 
 The final `pom.xml` file ends up [like this](https://github.com/tobiasbriones/jdesk/blob/v0.2.0/pom.xml).
 
-Deploy the Project
-------------------
+## Deploy the Project
 
 In this last step, if everything is all right, we can now deploy the artifact. Add "-SNAPSHOT" if you will deploy to the snapshot repository. For example:
 
 ```xml
 <version>0.1.0-SNAPSHOT</version>
 ```
-
 
 ```
 or else:
@@ -436,7 +422,6 @@ or else:
 ```xml
 <version>0.1.0</version>
 ```
-
 
 Open Git Bash into the project's directory and run the deploy-command with the " ci-cd" profile:
 
@@ -450,8 +435,7 @@ Recall that the production release takes some 4 waiting hours to complete the
 
 deployment and be available at [Maven Search](https://search.maven.org).
 
-Result
-------
+## Result
 
 After deploying to the main repository, which took more than 4 hours to get it  
 
@@ -459,8 +443,7 @@ done, the result is there:
 
 [![JDesk 0.2.0 Deployed](jdesk-0.2.0-deployed.png)](jdesk-0.2.0-deployed.png)
 
-Conclusion
-----------
+## Conclusion
 
 The deployment of a Java Maven-based library to the Maven Central Repository was documented so users can import the library into their Java projects.
 

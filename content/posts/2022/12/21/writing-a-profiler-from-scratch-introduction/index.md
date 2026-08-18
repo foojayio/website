@@ -67,7 +67,6 @@ void AsyncGetCallTrace(ASGCT_CallTrace *trace, // pre-allocated trace to fill
                        void* ucontext);        // signal context
 ```
 
-
 One typically uses this API by pinging a thread using a signal, stopping the thread, and invoking the signal handler, which in turn calls AsyncGetCallTrace with the execution context of the stopped thread (the `ucontext`) so that AsyncGetCallTrace can walk the thread, skipping all C/C++ frames on the stack and only storing the native (from `native` methods) and Java frames in the `frames` array.
 
 The signal handler has to process the trace, but this is for another post. We will just store the number of times that AsyncGetCallTrace was successful and unsuccessful.
@@ -95,7 +94,6 @@ public class BasicSample {
     }
 }
 ```
-
 
 During profiling, we call AsyncGetCallTrace often, but let's visualize a trace when the JVM runs one of the `println` lines.
 [![](asgct-1024x576.png)](https://github.com/parttimenerd/asgct2-demo) AsyncGetCallTrace on a small example, using [the demo code for JEP 435](https://github.com/parttimenerd/asgct2-demo)
@@ -127,7 +125,6 @@ static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
 }
 ```
 
-
 We use atomic variables here to increment the two counting variables in parallel. We cannot use any locks as creating locks is not signal-safe.
 
 You see in line 13 that we cannot call AsyncGetCallTrace directly, as it is not exported in any JVM header. So we have to obtain the pointer to this function via [dlsym](https://man7.org/linux/man-pages/man3/dlsym.3.html) at the beginning, which is a bit brittle:
@@ -141,7 +138,6 @@ static void initASGCT() {
   }
 }
 ```
-
 
 Additionally, we have to copy the declarations for ASGCT_CallFrame, ASGCT_CallTrace, and AsyncGetCallTrace into our project.
 
@@ -162,7 +158,6 @@ static bool startITimerSampler() {
 }
 ```
 
-
 Our code uses the timers in `PROF` mode: "A profiling timer that counts both processor time used by the process, and processor time spent in system calls on behalf of the process. This timer sends a `SIGPROF` signal to the process when it expires." (see [gnu.org](https://www.gnu.org/software/libc/manual/html_node/Setting-an-Alarm.html)) The result is roughly similar to the CPU and itimer modes of the async-profiler. It is inaccurate, but we'll tackle this problem in another blog post.
 
 You can find the final code in the [GitHub](https://github.com/parttimenerd/writing-a-profiler) repo as [libSmallProfiler.cpp](https://github.com/parttimenerd/writing-a-profiler/blob/main/cpp/libSmallProfiler.cpp). It includes all the boiler-plate code for JVMTI agents that I omitted in this blog post for brevity. Feel free to file issues or PRs with improvements or suggestions there. When we finally run the tool with a JVM and the example Java program, we get the following output via `java -agentpath:cpp/libSmallProfiler.dylib=interval=0.001s -cp samples BasicSample`:
@@ -173,7 +168,6 @@ Failed traces:          5
 Total traces:          15
 Failed ratio:       33.33%
 ```
-
 
 This tool might seem to be rather useless, but one can adjust its sampling interval by specifying the `interval` option: This makes it quite helpful in testing the stack walking code of AsyncGetCallTrace.
 

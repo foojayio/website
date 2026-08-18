@@ -23,12 +23,9 @@ frozen: false
 
 On the personal and technical side, here's a summary of the past year from my perspective.
 
-Job change
-----------
+## Job change
 
 <img fetchpriority="high" decoding="async" class="alignright size-full wp-image-61589" src="apache-apisix.jpeg" alt="" width="300" height="300">
-
-<br />
 
 First and foremost, I changed jobs. I worked for [Hazelcast](https://hazelcast.com/) for 3½ years.
 
@@ -52,8 +49,7 @@ When I joined Hazelcast, I had to *understand* distributed systems and concepts 
 
 It means I had to shift the subjects I write about: you won't find any Java and hardly any Kotlin.
 
-My blog
--------
+## My blog
 
 In 2022, I published 50 blog posts on : one each week on Sunday, but on Christmas and the New Year - for obvious reasons. Here are the top 5 most viewed pages:
 
@@ -84,8 +80,7 @@ You can notice a couple of huge spikes. They are [Hacker News](https://news.ycom
 | 4    | [What I miss in Java, the perspective of a Kotlin developer](https://blog.frankel.ch/miss-in-java-kotlin-developer/) | 2,180  | 7.70  |
 | 5    | [Toying with Kotlin's context receivers](https://blog.frankel.ch/kotlin-context-receivers/)                          | 1,023  | 3.61  |
 
-Cross-posting
--------------
+## Cross-posting
 
 2022 also saw consistent cross-posting on third-party content aggregator sites, which allow linking to the original post. As a reminder, Google (and other search sites) flag similar content as duplicate.
 
@@ -102,16 +97,13 @@ That being said, here are my followers depending on the site:
 
 It's interesting to see that though I thought dev.to focused on web and front-end, I got many followers though I rarely write on such subjects. Conversely, I still need to understand why my follower base on Hashnode doesn't take off.
 
-Public speaking
----------------
+## Public speaking
 
 [![](Screenshot-2023-01-02-at-15.32.08-752x1024.png)](https://twitter.com/nicolas_frankel/status/1608043464146710528)
 
 Indeed, 2022 was not my best year in terms of conference attendance. Here's a comparison of the previous years:
 
 <img decoding="async" class="aligncenter wp-image-61591 size-medium" src="public-speaking-700x438.png" alt="" width="700" height="438">
-
-<br />
 
 Raw numbers are a bit misleading: Because of Covid, I spoke at many events online in 2020 and 2021. It's **much** easier to do so than traveling to another country (or continent!); on the other hand, engagement is much lower, not to mention the lack of social interactions.
 
@@ -124,19 +116,15 @@ Regarding content, I mainly did two talks:
 
 It's below the number of talks I usually try to achieve, but they were pretty popular, especially the first one. I'm working on more diversity for 2023.
 
-GitHub contributions
---------------------
+## GitHub contributions
 
 As a Developer Advocate, my [GitHub contributions](https://github.com/nfrankel/) are different from the ones of a regular software developer, especially one working on Open Source.
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-61592 aligncenter" src="github-analytics-700x480.png" alt="" width="700" height="480">
 
-<br />
-
 Most of my contributions are commits because I'm the only one working on my demos. Furthermore, I regularly update them with the latest version of whatever dependency I use. I'm trying to open issues on Apache APISIX since I'm a huge user. Eating one's dog food is a great way to uncover either bugs or usability improvements. Finally, pull requests are for blog posts and reviews for my colleagues' blog posts.
 
-Conclusion
-----------
+## Conclusion
 
 Years when one changes jobs are always challenging but very interesting; 2022 was no different. My resolution for 2023 are:
 

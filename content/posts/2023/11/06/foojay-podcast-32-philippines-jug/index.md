@@ -28,8 +28,7 @@ Let's talk about the history and future of the Java community in the Philippines
 
 {{< youtube eo8m4Kia-hU >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -37,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Tristan Mahinay
 
@@ -61,16 +59,14 @@ Guests
 * <https://www.linkedin.com/in/kerbymartino/>
 * <https://twitter.com/kerbymart>
 
-Podcast
--------
+## Podcast
 
 ### Host: Frank Delporte
 
 * <https://foojay.social/@frankdelporte>
 * <https://twitter.com/FrankDelporte>
 
-Links
------
+## Links
 
 * <https://www.meetup.com/java-user-group-ph/>
 * <https://www.linkedin.com/company/jugph/>[](https://www.linkedin.com/company/jugph/)
@@ -78,8 +74,7 @@ Links
 * <https://github.com/JUGPH>
 * <https://softconph.com/>
 
-Content
--------
+## Content
 
 00:00 Intro and introduction of the guests  
 
@@ -121,7 +116,3 @@ Content
 32:21 New upcoming website for the JUG  
 
 35:43 Outro
-
-<br />
-
-<br />

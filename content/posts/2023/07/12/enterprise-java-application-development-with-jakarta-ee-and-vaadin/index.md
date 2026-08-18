@@ -37,8 +37,6 @@ Jakarta EE, formerly known as Java EE on the other hand, provides a robust and s
 
 {{< youtube Qyz_ewRgo4A >}}
 
-<br />
-
 In this video, you will learn:
 
 * What Vaadin is and what you can use it for

@@ -37,8 +37,7 @@ Lastly, we must concentrate on implementing best practices. In our case, this me
 
 This article focuses on this last point and what the author has learned working with NiFi developers. It gives you some actionable strategies that will increase the probability that your NiFi data pipeline function without unwanted interruptions and using quality data. However, these strategies are simple enough that the concepts can apply outside of the Apache NiFi, to other data pipelining or data flow tools, like Google Data Flow, AWS Kinesis, and Azure Data Factory.
 
-What is Apache NiFi
--------------------
+## What is Apache NiFi
 
 Apache NiFi is an end-to-end platform that allows us to collect and act on our data pipeline in real-time. Its advantages are many. From providing a visual programming interface based on directed graphs that enables rapid development and testing, to the capacity to modify our NiFi pipeline at runtime, to its data provenance functionality that helps us track what happens with our data from beginning to end. As a consequence, businesses can start from a simple model that provides insights and results from the very beginning, and that expands into a comprehensive NiFi data pipeline.
 
@@ -143,8 +142,7 @@ Some problems just need our intervention, no way around it. An example would be 
 
 Logging errors for manual intervention with Apache Nifi
 
-Conclusion
-----------
+## Conclusion
 
 > **"Most improved things can be improved."**
 >
@@ -164,5 +162,3 @@ Error handling planning becomes more essential as models become more complex. Ap
 * [Data Modeling by Example with Apache Cassandra](https://www.datastax.com/learn/data-modeling-by-example)
 * [Apache NiFi Website](https://nifi.apache.org/)
 * [DataStax Astra DB Website](https://docs.datastax.com/en/astra/docs/index.html)
-
-<br />

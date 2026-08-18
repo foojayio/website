@@ -37,8 +37,7 @@ Our simple smart home assistant features the ability to:
 
 The complete code is accessible at this GitHub [link](https://github.com/jmgang/SmartHomeAssistant), which also includes speech-to-text and text-to-speech capabilities using Amazon Polly and Transcribe.
 
-Creating a simple conversational chatbot
-----------------------------------------
+## Creating a simple conversational chatbot
 
 To start, we use the `AiServices` class from Langchain4j, a declarative approach to creating customizable AI interactions through an interface. This integration allows for interaction with prompts, models, memory, and tools, as we'll explore further.
 
@@ -49,7 +48,6 @@ var assistant = AiServices.builder(Assistant.class)
 
 System.out.println(assistant.chat("Hello"));
 ```
-
 
 LLMs are stateless by default and cannot remember previous prompts and responses. To address this, we introduce memory using the `MessageWindowChatMemory` class, with a maximum message retention of about 10 messages.
 
@@ -63,11 +61,9 @@ var assistant = AiServices.builder(Assistant.class)
 System.out.println(assistant.chat("Hello"));
 ```
 
-
 With these few lines of code, we're able to implement the user conversation feature.
 
-Utilizing Function Calling for External Actions
------------------------------------------------
+## Utilizing Function Calling for External Actions
 
 A remarkable aspect of Langchain4j and LLMs is their ability to create agent-like workflows that orchestrate complex tasks through planning, memory, and the use of external tools. This is achieved through function calling, which enables the LLM to automatically invoke your methods as needed.
 
@@ -99,7 +95,6 @@ public class CurrentInformationRetrieverService {
 }
 ```
 
-
 These are then incorporated into our `AiServices` instance using the `.tools()` method.
 
 ```java
@@ -110,9 +105,7 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
                 .build();
 ```
 
-
-Capturing and Analyzing an image
---------------------------------
+## Capturing and Analyzing an image
 
 To recognize and analyze an image, we first capture an image, in which the image will be saved to a predetermined file location. It then will retrieve this image and pass it to a multimodal LLM capable of image recognition.
 
@@ -135,7 +128,6 @@ public class EnvironmentRecognizerService {
     }
 }
 ```
-
 
 Once captured, the image is retrieved from the specified path and analyzed by the Gemini Pro Vision model with a prompt that adds context. In the `analyzeImage` method, the image is read and converted into a byte array. This is then passed directly to the `generateContent` method of an instance of `GenerativeModel`, where we can provide both the prompt and the data.
 
@@ -160,7 +152,6 @@ public static String analyzeImage(String filePath) throws Exception {
 }
 ```
 
-
 We can then add the `EnvironmentRecognizerService` class on our `AiServices` assistant by the same way we added the `CurrentInformationRetrieverService` class.
 
 ```java
@@ -172,9 +163,7 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
                 .build();
 ```
 
-
-Controlling an External Smart Device
-------------------------------------
+## Controlling an External Smart Device
 
 For external smart device integration, I used [Home Assistant](https://www.home-assistant.io/), an open-source home automation platform that centralizes control of various smart devices within a single user interface.
 
@@ -212,7 +201,6 @@ public String turnOnSpecificOutlet(String outletNumber) {
 }
 ```
 
-
 Behind the scenes, the `turn_on` method is simply sending a POST request to the HomeAssistant `switch/` API to turn on the outlet.
 
 ```java
@@ -233,7 +221,6 @@ private static void sendCommand(String service, HomeAssistantCommand command) th
 }
 ```
 
-
 As noted before, we can add the class to our `AiServices` instance using the `tools()` method. Now, we have three distinct classes capable of observing the environment, retrieving information from external APIs, and even controlling a smart strip!
 
 ```java
@@ -246,9 +233,7 @@ var assistant = AiServices.builder(ActionAIAssistant.class)
                 .build();
 ```
 
-
-Using our own data for Question-Answering
------------------------------------------
+## Using our own data for Question-Answering
 
 Currently, we can either engage in conversation with the LLM or direct it to perform external actions, but it remains unable to answer questions about new information or topics not previously known to it. To empower the LLM to respond to queries based on our data, we utilize [Retrieval Augmented Generation](https://docs.langchain4j.dev/tutorials/rag/).
 
@@ -278,7 +263,6 @@ EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
 ingestor.ingest(transformedDocument);
 ```
 
-
 In the above code, the `BgeSmallEnV15QuantizedEmbeddingModel` is designed to generate embeddings for text segments. These embeddings map text data to a vector representation that can be efficiently searched and compared. `DocumentSplitters.recursive` is used to recursively split the document into chunks of up to 300 tokens, which is crucial for managing large documents by breaking them into manageable pieces for processing and retrieval.
 
 The `EmbeddingStoreIngestor` is configured with the document splitter, embedding model, and an embedding store --- [Weaviate](https://weaviate.io/), in this case, which offers a free sandbox environment lasting 14 days. The `ingest` method processes the document by splitting it, generating embeddings for each chunk, and storing these embeddings in an embedding store for quick retrieval during the question-answering phase.
@@ -302,9 +286,7 @@ public class DocumentRetriever {
 }
 ```
 
-
-Revisiting the Current Architecture
------------------------------------
+## Revisiting the Current Architecture
 
 ![Model Bottleneck](https://smart-assistant-langchain4j-blog.s3.amazonaws.com/smart+assistant+archi+bottleneck.PNG)
 
@@ -331,7 +313,6 @@ public enum Intent {
 }
 ```
 
-
 Furthermore, we employ Few-Shot prompting in our Intent Classifier Assistant to minimize errors and ensure the correct intent classification. In this case, I've explained to the LLM its role, the context and two examples of the expected input and output, each with their own explanations.
 
 ```java
@@ -346,7 +327,6 @@ Furthermore, we employ Few-Shot prompting in our Intent Classifier Assistant to 
             "Explanation: The intent was asking your location and thus where you are right now.")
 Intent specifyIntent(String text);
 ```
-
 
 The query method is the entry point of the user's message and it first goes through the Intent Assistant before deciding whether it's conversational or actionable.
 
@@ -364,9 +344,7 @@ public String query(String query) {
 }
 ```
 
-
-Adding Moderation Models
-------------------------
+## Adding Moderation Models
 
 We include moderation models to monitor both user queries and LLM responses, ensuring content remains appropriate and free from harmful material. This is true for both the user query and the LLM responses. The `Moderator` interface defines a single method moderate, marked with the `@Moderate` annotation, which suggests it applies specific content moderation rules to the input string.
 
@@ -376,7 +354,6 @@ public interface Moderator {
     String moderate(String query);
 }
 ```
-
 
 In the code below, we create an instance of the `Moderator` via `AiServices`, which integrates both a moderation model along with a chat language model. The query method uses this service to first moderate the user's input.
 
@@ -418,9 +395,7 @@ public String query(String query) {
     }
 ```
 
-
-Final Thoughts
---------------
+## Final Thoughts
 
 The journey to creating a smart home assistant showcases the power of modern AI tools like Langchain4j and accessible hardware such as the Raspberry Pi.
 

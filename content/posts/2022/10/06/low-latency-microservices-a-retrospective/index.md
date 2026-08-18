@@ -58,7 +58,6 @@ newOrder: {
 # more messages</code>
 ```
 
-
 The output looks very similar as this is an Order Management Service. The job of OMS and it's job is to normalise, filter and track orders.
 
 ```
@@ -84,7 +83,6 @@ newOrder: {
 # more results</code>
 ```
 
-
 Building variations on tests to explore all the things which could go wrong and check how they are handled is easy.
 
 ### What we Needed to Add
@@ -99,7 +97,6 @@ To ensure our services produced the same results every time, whether in tests or
 <code class="language-java">periodicUpdate: 2017-04-27T07:26:51
 ---</code>
 ```
-
 
 This ensured that all time outs or events triggered by the clock could be tested, but also ensure each redundant system did the same things at the same point, and produced the same output.
 

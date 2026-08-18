@@ -38,8 +38,7 @@ Our search service provides the three-tier benefits outlined above in these ways
 
 In this article, we are going to detail an HTTP Java search service designed to be called from a presentation tier, and in turn, it translates the request into an aggregation pipeline that queries our Atlas data tier. This is purely a service implementation, with no end-user UI; the user interface is left as an exercise for the reader. In other words, the author has deep experience providing search services to user interfaces but is not a UI developer himself. 🙂
 
-Prerequisites
--------------
+## Prerequisites
 
 The code for this article lives in the [GitHub repository](https://github.com/mongodb-developer/atlas-search-java-server).
 
@@ -52,8 +51,7 @@ Standard Java and servlet APIs are used and should work as-is or port easily to 
 
 In order to run the examples provided here, the Atlas sample data needs to be loaded and a movies_index, as described below, created on the sample_mflix.movies collection. If you're new to Atlas Search, a good starting point is [Using Atlas Search from Java](https://foojay.io/today/atlas-searching-with-the-java-driver/).
 
-Search service design
----------------------
+## Search service design
 
 The front-end presentation layer provides a search box, renders search results, and supplies sorting, pagination, and filtering controls. A middle tier, via an HTTP request, validates and translates the search request parameters into an aggregation pipeline specification that is then sent to the data tier.
 
@@ -67,15 +65,13 @@ Also, a performant query should only search and return a small number of fields,
 
 Additionally, a search service must provide a way to constrain search results to, say, a specific category, genre, or cast member, without affecting the relevancy ordering of results. This filtering capability could also be used to enforce access control, and a service layer is an ideal place to add such constraints that the presentation tier can rely on rather than manage.
 
-Search service interface
-------------------------
+## Search service interface
 
 Let's now concretely define the service interface based on the design. Our goal is to support a request, such as *find "Music" genre movies for the query "purple rain" against the \`title\` and \`plot\` fields*, returning only five results at a time that only include the field's title, genres, plot, and year. That request from our presentation layer's perspective is this HTTP GET request:
 
 ```
 http://service_host:8080/search?q=purple%20rain&limit=5&skip=0&project=title,genres,plot,year&search=title,plot&filter=genres:Music
 ```
-
 
 These parameters, along with a \`debug\` parameter, are detailed in the following table:
 
@@ -96,8 +92,7 @@ Given the specified request, let's define the response JSON structure to return 
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | { "request": { "q": "purple rain", "skip": 0, "limit": 5, "search": "title,plot", "project": "title,genres,plot,year", "filter": \[ "genres:Music" \] }, "docs": \[ { "plot": "A young musician, tormented by an abusive situation at home, must contend with a rival singer, a burgeoning romance and his own dissatisfied band as his star begins to rise.", "genres": \[ "Drama", "Music", "Musical" \], "title": "Purple Rain", "year": 1984 }, { "plot": "Graffiti Bridge is the unofficial sequel to Purple Rain. In this movie, The Kid and Morris Day are still competitors and each runs a club of his own. They make a bet about who writes the ...", "genres": \[ "Drama", "Music", "Musical" \], "title": "Graffiti Bridge", "year": 1990 } \], "meta": \[ { "count": { "total": 2 } } \] } |
 
-Search service implementation
------------------------------
+## Search service implementation
 
 Code! That's where it's at. Keeping things as straightforward as possible so that our implementation is useful for every front-end technology, we're implementing an HTTP service that works with standard GET request parameters and returns easily digestible JSON. And Java is our language of choice here, so let's get to it. Coding is an opinionated endeavor, so we acknowledge that there are various ways to do this in Java and other languages --- here's one opinionated (and experienced) way to go about it.
 
@@ -165,8 +160,7 @@ Pretty straightforward at the end of the parameter wrangling and stage building,
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | AggregateIterable\<Document\> aggregation_results = collection.aggregate(List.of( searchStage, facet_stage )); Document response_doc = new Document(); response_doc.put("request", new Document() .append("q", q) .append("skip", skip) .append("limit", limit) .append("search", search_fields_value) .append("project", project_fields_value) .append("filter", filters==null ? Collections.EMPTY_LIST : List.of(filters))); if (debug) { response_doc.put("debug", aggregation_results.explain().toBsonDocument()); } // When using $facet stage, only one "document" is returned, // containing the keys specified above: "docs" and "meta" Document results = aggregation_results.first(); for (String s : results.keySet()) { response_doc.put(s,results.get(s)); } response.setContentType("text/json"); PrintWriter writer = response.getWriter(); writer.println(response_doc.toJson()); writer.close(); |
 
-Taking it to production
------------------------
+## Taking it to production
 
 This is a standard Java servlet extension that is designed to run in Tomcat, Jetty, or other servlet API-compliant containers. The build runs [Gretty](https://gretty-gradle-plugin.github.io/gretty-doc/index.html), which smoothly allows a developer to either \`jettyRun\` or \`tomcatRun\` to start this example Java search service.
 
@@ -174,8 +168,7 @@ In order to build a distribution that can be deployed to a production environmen
 
 ./gradlew buildProduct
 
-Future roadmap
---------------
+## Future roadmap
 
 Our search service, as is, is robust enough for basic search use cases, but there is room for improvement. Here are some ideas for the future evolution of the service:
 
@@ -186,8 +179,7 @@ Our search service, as is, is robust enough for basic search use cases, but ther
 
 And with the service layer being a middle tier that can be independently deployed without necessarily having to make front-end or data-tier changes, some of these can be added without requiring changes in those layers.
 
-Conclusion
-----------
+## Conclusion
 
 Implementing a middle-tier search service provides numerous benefits from security, to scalability, to being able to isolate changes and deployments independent of the presentation tier and other search clients. Additionally, a search service allows clients to easily leverage sophisticated search capabilities using standard HTTP and JSON techniques.  
 

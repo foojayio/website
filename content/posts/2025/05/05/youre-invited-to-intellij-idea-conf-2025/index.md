@@ -20,8 +20,7 @@ related_posts:
 frozen: false
 ---
 
-We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event.
-------------------------------------------------------------------------------
+## We are excited to invite you to IntelliJ IDEA Conf 2025, a free virtual event.
 
 IntelliJ IDEA Conf is a celebration of the developer community, bringing together professionals who strive for excellence in software development. Join us for this free, live online conference and learn from industry leaders and experts on June 3--4, 2025.
 

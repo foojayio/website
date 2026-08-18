@@ -26,8 +26,7 @@ frozen: false
 
 {#more-103351}
 
-Tracing \> Debugging
---------------------
+## Tracing \> Debugging
 
 There are many benefits to being able to follow what your Spring Boot code is doing using tracing. When used effectively, traces can reveal a lot about the inner workings of complex systems, or provide early feedback when you make mistakes in introducing new code changes.
 
@@ -35,8 +34,7 @@ Unlike debugging, which basically allows you to pause at a specific moment in ti
 
 The main reason most developers use debugging over tracing is that it is more available, immediate, and does not require any complicated setup. However, technologies such as Micrometer and OpenTelemetry are receiving wider support and deeper integration in existing libraries, changing the parameters of this equation.
 
-How to get to fully observed code with Spring Boot and Micrometer
------------------------------------------------------------------
+## How to get to fully observed code with Spring Boot and Micrometer
 
 Thankfully, it's extremely easy to get started with Micrometer. These capabilities are even easier with Spring Boot 3.2 but are available in Spring 3.x releases. To make it even easier, we (Digma) invested in a free IDE plugin (IntelliJ only for now, though other IDEs coming soon!) that can reduce the amount of work required to start getting information about your code with tracing ---  to a few clicks. Digma also runs locally! So there is no issue about sending observability data to the cloud.
 
@@ -70,8 +68,7 @@ Behind the scenes, the plugin will add the required dependencies to the build.gr
 
 That's it! All that remains now is to launch your application and run some traffic through it, you should be seeing data appear almost immediately.
 
-What we do with observability matters
--------------------------------------
+## What we do with observability matters
 
 It is tempting to look at the ability to quickly navigate from the code to the relevant trace as the holy grail of leveraging tracing and observability while coding. However, if you try to go down that path you'll soon find that the individual trace is just not that important.
 
@@ -93,8 +90,7 @@ In this sense, the first and most important priority is to actually find these i
 
 ![](digma-insights.png)
 
-Adding more observability
--------------------------
+## Adding more observability
 
 Beyond automated instrumentation available for Spring Boot, JDBC, and other libraries, you may want to inspect the behavior of specific functions in your code. Micrometer provides some great ways to do that (with the DSL syntax or annotations). With the plugin implementation, we wanted to make that extra easy from the context of any function.
 
@@ -122,8 +118,7 @@ High cardinality can increase your metrics data to unmanageable proportions. It 
 
 Please be aware of the cardinality of the dimensions you use and always consider user input as high cardinality data (normalize it). You can never know if the user has a random generator handy just to bring your app down. If you need to record high cardinality data, instead of trying to attach this data to your metrics, try to use a different output that was designed to handle high cardinality data, e.g.: logging, distributed tracing, event store, etc. Also, here's an article about high cardinality if you want to learn more: <https://develotters.com/posts/high-cardinality/>
 
-Tell us what observability reveals for you
-------------------------------------------
+## Tell us what observability reveals for you
 
 Observability is an important part of the development cycle in dev, test, and production.
 

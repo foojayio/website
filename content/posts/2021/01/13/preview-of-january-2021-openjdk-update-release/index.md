@@ -34,8 +34,6 @@ By default, the Highlights page is empty. That is for us all to fill out! Pick t
  <img decoding="async" src="image-5-1024x625.png" alt="" class="wp-image-37415" width="1046" height="638">
 </figure>
 
-<br />
-
 In this way, the Java community can, together, provide a clear indication of the items that are most meaningful. For example, just because a fix is a P3, does not mean that it is unimportant, in fact, many P3s and P4s turn out to be more important than you might think, for every day Java developers.
 
 Let's join in and for each OpenJDK release, vote for the items that you find most useful or interesting for the January 2021 OpenJDK Update release and we'll build up a community-based perspective of the January 2021 OpenJDK Update release together.

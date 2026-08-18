@@ -22,8 +22,7 @@ frozen: false
 
 Let's continue our exploration of Python's magic methods in this second part of the series. This part will focus on numbers and containers, *i.e.* , collections. You can read the first part [here](https://foojay.io/today/python-magic-methods-part-1/).
 
-Container-related methods
--------------------------
+## Container-related methods
 
 Python provides the usual containers, *e.g.*, lists, sets, and dictionaries. You can use the following methods when you want to implement your own.
 
@@ -94,7 +93,6 @@ print('---')
 print('foo' in container)                              #9
 ```
 
-
 1. Delegate on the `items` dictionary
 2. Check if the key belongs to `items`
 3. Get the keys' iterator
@@ -105,8 +103,7 @@ print('foo' in container)                              #9
 8. Print `bar: bar` since the `foo` key has been deleted
 9. Implicitly calls the `__contains__()` method
 
-Number-related methods
-----------------------
+## Number-related methods
 
 Just as we can emulate containers, we can emulate numbers as well.
 
@@ -229,7 +226,6 @@ print(stocklevel111 + stocklevel112)                   #8
 stocklevel111 + stocklevel121                          #9
 ```
 
-
 1. Define necessary classes
 2. Override equality to compare ids
 3. Override representation
@@ -269,7 +265,6 @@ what = array[foo]                                      #2
 print(what)                                            #3
 ```
 
-
 1. Define the fallback method
 2. Coerce `foo` into an `int`. We didn't implement any conversion method; Python falls back to `index()`
 3. Print `b`
@@ -285,8 +280,7 @@ Finally, Python delegates to a magic method when your code calls a specific numb
 | `object.__floor__(self)`            | `floor()`         |
 | `object.__ceil__(self)`             | `ceil()`          |
 
-Context managers' methods
--------------------------
+## Context managers' methods
 
 Python's context managers allow fine-grained control over resources that must be acquired and released. It works with the `with` keyword. For example, here's how you open a file to write to:
 
@@ -295,7 +289,6 @@ with open('file', 'w') as f:                           #1
     f.write('Hello world!')
                                                        #2
 ```
-
 
 1. Open the file
 2. At this point, Python has closed the file
@@ -309,7 +302,6 @@ try:
 finally:
   f.close()
 ```
-
 
 To write your context manager requires to implement two methods: one for opening the context and one for closing it, respectively, `object.__enter__(self)` and `object.__exit__(self, exc_type, exc_value, traceback)`.
 
@@ -338,9 +330,7 @@ with Connection() as connection:
   connection.do_something()
 ```
 
-
-Callable objects
-----------------
+## Callable objects
 
 I was first exposed to callable objects in Kotlin. A callable object looks like a function but is an object:
 
@@ -348,7 +338,6 @@ I was first exposed to callable objects in Kotlin. A callable object looks like 
 hello = Hello()
 hello('world')
 ```
-
 
 The method to implement to make the above code run is `object.__call__(self[, args...])`.
 
@@ -359,9 +348,7 @@ class Hello:
     print(f'Hello {who}!')
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 The post concludes our 2-part series on Python "magic" methods. I didn't mention some of them, though, as they are so many. However, they cover the majority of them.
 
@@ -371,7 +358,5 @@ Happy Python!
 
 * [Special method names](https://docs.python.org/3/reference/datamodel.html#special-method-names)
 * [PEP 560 -- Core support for typing module and generic types](https://peps.python.org/pep-0560/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/2/) on October 22^nd^, 2023*

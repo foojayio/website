@@ -26,8 +26,7 @@ Then, because it's such a great quote, it evolved:
 
 [![](Screenshot-2022-06-26-at-10.28.24.png)](https://twitter.com/codinghorror/status/506010907021828096)However, I think that the initial quote is misleading. A lot of things are hard in computer science. This post aims to describe some of them.
 
-Cache invalidation
-------------------
+## Cache invalidation
 
 I had a few use-cases for caching in my professional career. When I did, it was mostly to cache Hibernate entities. Only once did I implement my own cache. I used a simple `HashMap` as it was for a batch job as the cache size was small: no invalidation was needed.
 
@@ -44,8 +43,7 @@ The tricky thing, in this case, is to choose the correct TTL:
 
 In essence, the smaller the TTL, the less chance to read stale data, but the less useful is the cache.
 
-Naming things
--------------
+## Naming things
 
 If you have any experience as a developer, you probably are convinced that naming things is challenging indeed. If not, let's introduce another quote:
 > Programs are meant to be read by humans and only incidentally for computers to execute
@@ -71,7 +69,6 @@ data class Qux(val quux: Double, val foo: Foo) {
 }
 ```
 
-
 Thanks to the usage of APIs, namely `IllegalArgumentException` and `plus()`, you may infer somewhat what the code does. However, correctly renaming classes and fields reveals our intent:
 
 ```kotlin
@@ -87,7 +84,6 @@ data class Amount(val number: Double, val currency: Currency) {
 }
 ```
 
-
 When I worked on projects, I always cautioned about the following issues when talking with the business:
 
 1. Using different words to cover the same reality
@@ -99,8 +95,7 @@ Within the scope of verbal communication, it's possible to ask questions about t
 
 It's hard because you need to be precise without being verbose.
 
-Dates, times, and timezones
----------------------------
+## Dates, times, and timezones
 
 I already wrote about [Date and time gotchas](https://blog.frankel.ch/date-time-gotchas/). To sum up:
 
@@ -110,8 +105,7 @@ I already wrote about [Date and time gotchas](https://blog.frankel.ch/date-time-
 * Countries sometimes change their timezones. While it's not frequent, it happens more frequently than most think.
 * Not all timezones are separated by one hour. For example, India is UTC+5:30, but three timezones are spaced by 45 minutes.
 
-Estimates
----------
+## Estimates
 
 Estimates in software development projects are so hard to get right that some people working on the development side started the "No Estimate" movement. I won't delve into the pros and cons of not doing estimates; my point is just that estimating a non-trivial software project is challenging.
 
@@ -123,8 +117,7 @@ I think that entire books have been written on why estimates are demanding and h
 
 ![We will ask for estimates and treat them as deadlines!](estimates-deadlines.jpg)
 
-Distributed systems
--------------------
+## Distributed systems
 
 There's so much one can do with a single computer, even a multicore one. Adding more resources to a computer rapidly hits the point of diminishing returns. You can do nothing at this point but distribute the load across several computers. Welcome to the realm of distributed systems!
 
@@ -165,8 +158,7 @@ Most modern implementations are leader-based: it seems leaderless implementation
 
 It's why the [Paxos](https://en.wikipedia.org/wiki/Paxos_(computer_science)) algorithm, or the Paxos family of algorithms, was invented. However, experts seem to think that Paxos is error-prone to implement: the [Raft](https://en.wikipedia.org/wiki/Raft_(algorithm)) algorithm is an attractive easier-to-implement alternative. In any case, easier doesn't mean [easy](https://groups.google.com/g/raft-dev/c/JEtBYaPpHXo).
 
-Proving code is bug-free
-------------------------
+## Proving code is bug-free
 
 Traditional software engineering mandates testing to avoid bugs. Unfortunately, whatever approach you favor - unit, integration, end-to-end, or a mix of the three - doesn't guarantee your code has no bugs. It's, in fact, quite widespread to find bugs in production despite the infamous [100% code coverage](https://blog.frankel.ch/100-code-coverage/). The only reliable way to have bug-free code is to prove it. It requires solid mathematical foundations and a programming language that allows [formal proofs](https://en.wikipedia.org/wiki/Formal_proof).
 
@@ -174,8 +166,7 @@ A couple of [such languages](https://en.wikipedia.org/wiki/Proof_assistant) exis
 
 Until any of them makes it into the mainstream industry, writing bug-free code will be part of one the hard things in computer science.
 
-Summary
--------
+## Summary
 
 Writing there are *only* two hard things in computer science is a strong claim.
 

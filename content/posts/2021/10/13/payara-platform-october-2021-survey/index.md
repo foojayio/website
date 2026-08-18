@@ -26,8 +26,6 @@ frozen: false
 
 ](https://www.payara.fish/Survey)
 
-<br />
-
 We are inviting all Payara Platform community users to [answer a few questions](https://www.payara.fish/Survey) about your use of the Payara Platform and ecosystem components.
 
 We want to know what you like, what you want to see improved, and we're giving you the opportunity to vote on new features you'd like to see added to the Payara Platform.

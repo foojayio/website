@@ -31,8 +31,7 @@ In [Gradle 7.3](https://docs.gradle.org/7.3/release-notes.html#new-features-and-
 
 Using this feature makes it much easier to manage different types of tests within a single Gradle JVM project without worrying about low level "plumbing" details.
 
-Why Test Suites?
-----------------
+## Why Test Suites?
 
 Normally - whether or not you're practicing strict Test Driven Development - as you develop a project you will continuously add new unit tests alongside your production classes.
 
@@ -106,8 +105,7 @@ The bottom line is that this is simply too complex.
 
 **You shouldn't have to be a build expert just to set up thorough testing!**
 
-Test Suites - a better way forward
-----------------------------------
+## Test Suites - a better way forward
 
 Thinking about the difficulties involved in properly handling this scenario, we realized the current situation was inadequate.
 
@@ -162,15 +160,13 @@ After adding just this minimal block of DSL, you are ready to write integration 
 
 No contact with low-level DSL blocks like `configurations` is required.
 
-Try it out now
---------------
+## Try it out now
 
 Test Suites is still an [`@Incubating` feature](https://docs.gradle.org/7.5.1/userguide/feature_lifecycle.html) as we explore and refine the API, but it's here to stay, and we encourage everyone to try it out now.
 
 For a new project, the easiest way to get started is to use the [Gradle Init task](https://docs.gradle.org/7.5.1/samples/sample_incubating_jvm_multi_project_with_additional_test_types.html) and opt-in to using incubating features when prompted; this will generate a sample project using the new DSL.
 
-Customizing your Suites
------------------------
+## Customizing your Suites
 
 The rationale behind Test Suites, just like Gradle in general, is to abstract the details of configuration and use sensible conventions as defaults - but to also allow you to change those defaults as necessary.
 
@@ -187,8 +183,7 @@ For more Test Suite custom configuration examples, see the [JVM Test Suite Plugi
 
 For adding an additional test suite to a more complex and realistic build, see the [Multi-Project sample](https://docs.gradle.org/7.5.1/samples/sample_incubating_jvm_multi_project_with_additional_test_types.html).
 
-The future of testing in Gradle
--------------------------------
+## The future of testing in Gradle
 
 We have many exciting ideas for evolving Test Suites in the future.
 

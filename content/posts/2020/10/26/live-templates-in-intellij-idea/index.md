@@ -19,8 +19,7 @@ Okay, I did the math. If you use all 38 of the Live Templates for Java that are 
 
 I will caveat this by saying that I counted the unresolved variables, yours may be longer or shorter. Still, it's impressive!
 
-What are Live Templates?
-------------------------
+## What are Live Templates?
 
 Java has had its fair share of grief over boilerplate code and verbosity. You could type it out manually (boring), switch to Kotlin (it's an option), or take a look at using IntelliJ IDEA to save you both time and effort.
 
@@ -52,22 +51,19 @@ By default, IntelliJ IDEA will put the caret on the first instance of `i`, and t
 
 Other live templates for user input constructs include `itar` to iterate over elements of an array, `itco` to iterate over elements of a Collection as well as may other iteration operations. `lazy` is another win, quite literally, to perform a lazy initialisation.
 
-Identifying a Live Template
----------------------------
+## Identifying a Live Template
 
 IntelliJ IDEA is always trying to be helpful. One thing I struggled with was working out what was what when I was typing code. You can spot a live template from the lack of parenthesis and a helpful description. For example, the last four here are live templates, but only one is strictly from Java - `fori`.
 
 ![List of live templates for 'f'](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/live-template-list.png)
 
-Poking around Live Templates
-----------------------------
+## Poking around Live Templates
 
 You can take a look at Live Templates from your Preferences using ***⌘,*** on macOS and ***Ctrl*** +***Alt*** +***S*** on Windows and Linux then start typing in Live Templates. You'll see the list split by language.
 
 You can have a dig around in here until your heart's content turning them off (and on again). I found it interesting to check out not only what Java Live Templates there were but also the Live Templates available in the other languages.
 
-Making/Editing/Duplicating a Live Template
-------------------------------------------
+## Making/Editing/Duplicating a Live Template
 
 Manipulating Live Templates is easy to do in IntelliJ IDEA. As above, find your Live Templates in Preferences and then click this little plus icon:
 
@@ -109,8 +105,7 @@ Our `fori` example has a context of *Statement* which makes sense for a `for` lo
 
 Now you can go forth and create all the Live Templates that your heart desires and save even more finger taps!
 
-How to Feel Good (about Live Templates)
----------------------------------------
+## How to Feel Good (about Live Templates)
 
 It's 2020, to be honest, we all need a little extra help with that warm fuzzy feeling this year. I found this thing called [Productivity Guide](https://www.jetbrains.com/help/idea/productivity-guide.html) in IntelliJ IDEA. It doesn't just cover Live Templates; it covers everything that IntelliJ IDEA does to save your finger pads from wear and tear.
 

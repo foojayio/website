@@ -34,10 +34,7 @@ We plan to do a second part of this talk because there were so many things we ne
 
 {{< youtube 43qd9vLiajA >}}
 
-<br />
-
-The Problem with show-sql
--------------------------
+## The Problem with show-sql
 
 After the brief introduction, we dove right into the problem with `show-sql`. It's pretty common for developers to enable the `spring.jpa.show-sql` setting in the configuration file.
 
@@ -99,8 +96,7 @@ If there are many people working on the source code and you want to investigate 
 
 Log piping lets us determine where we want the log to go. We can choose to pipe logs to the plugin and in such a case, the log won't appear with the other application logs. This way, a developer can track an issue without polluting the sanctity of the log.
 
-Spring Boot Connection Acquisition
-----------------------------------
+## Spring Boot Connection Acquisition
 
 ![](vlad5-spring-boot-connection-acquisition-700x322.png)
 
@@ -116,8 +112,7 @@ If this log is printed, we have a problem in our auto-commit configuration. Once
 
 ![](vlad7-disable-auto-commit-700x116.png)
 
-Query Plan Cache
-----------------
+## Query Plan Cache
 
 ![](vlad8-query-plan-cache-700x311.png)
 
@@ -143,8 +138,7 @@ Conditional snapshots let us trigger the snapshot only if a particular condition
 
 ![](vlad11-snapshot-view-700x192.png)
 
-Eager Fetch
------------
+## Eager Fetch
 
 When we look at logs for SQL queries, we can often see that the database fetches a lot more than what we initially asked for. That's because of the default setting of JPA relations which is EAGER. This is a problem in the specification itself. We can achieve significant performance improvement by explicitly defining the fetch type to LAZY.
 
@@ -164,8 +158,7 @@ As you can see, this got triggered with a full stack trace and the information a
 
 You can use this approach to detect incorrect lazy fetches as well. Multiple lazy fetches can be worse than a single eager fetch, so we need to be vigilant.
 
-Open Session in View Anti-Pattern
----------------------------------
+## Open Session in View Anti-Pattern
 
 ![](vlad15-session-in-view-700x324.png)
 
@@ -181,8 +174,7 @@ Now that we see the problem is happening we can solve the problem by defining `s
 
 It will block you from using this approach.
 
-Q\&A
-----
+## Q\&A
 
 There were many brilliant questions as part of the session. Here are the answers.
 
@@ -302,8 +294,7 @@ With the agent, we have this:
 
 At these scales, a difference of 17mb is practically within the margin of error. It's unclear what overhead the agent has, if at all.
 
-Finally
--------
+## Finally
 
 This has been so much fun and we can't wait to do it again. Please follow [Vlad](https://twitter.com/vlad_mihalcea), [Tom](https://twitter.com/tomGranot/), and [myself](https://twitter.com/debugagent) for updates on all of this.
 

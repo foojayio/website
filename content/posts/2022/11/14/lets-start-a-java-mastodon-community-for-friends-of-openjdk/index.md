@@ -30,8 +30,7 @@ Many years ago I already created an account on Mastodon, but was not very active
 But all that has changed in the last weeks since Elon Musk became Twitters owner and CEO, and started with some very aggressive changes.
 > The goal of this post is not to start a pro or contra Twitter discussion! No, the real goal is to investigate if the Java community is interested in joining a dedicated Mastodon instance.
 
-What is Mastodon
-----------------
+## What is Mastodon
 
 To be clear: it's not a Twitter replacement! It doesn't have all the same features and doesn't work completely the same. But ... that's actually a good thing!
 > How Mastodon explains what they are: "Do you have an email? If you do, you already understand how Mastodon works."
@@ -50,8 +49,7 @@ Main facts about Mastodon:
 
 Want to learn more? [Jeroen Baert has written this very nice overview](https://www.forceflow.be/2022/11/07/mastodon-qa/).
 
-Recent growth of Mastodon
--------------------------
+## Recent growth of Mastodon
 
 Since the last weeks, Mastodon has seen an enormous growth as you can see in the hourly generated graph on [@\[email protected\]](https://mastodon.social/@mastodonusercount@bitcoinhackers.org).
 
@@ -65,15 +63,13 @@ Since the last weeks, Mastodon has seen an enormous growth as you can see in the
 This is an other graph shared by [Mike Masnik](https://twitter.com/mmasnick/status/1589400288712359936), that gives you a similar idea related to what is happening at Twitter:
 ![](new-mastodon-users.jpg)
 
-Community on Twitter and Mastodon
----------------------------------
+## Community on Twitter and Mastodon
 
 A list has been created by Marc R. Hoffmann on [javabubble.org](https://javabubble.org/) to keep track of all the people sharing Java-knowledge on Twitter, Mastodon and GitHub.
 
 This is a good starting point if you want to start following some of these people. And you can add yourself or others via the [GitHub project](https://github.com/marchof/javabubble).
 
-A Mastodon service for the Java community
------------------------------------------
+## A Mastodon service for the Java community
 
 foojay.io is willing to cover the costs of a Java Mastodon server, if within certain not-yet-defined limits, but how do we handle this?
 
@@ -106,8 +102,7 @@ Questions to be answered:
 * Who gets invited?
 * Who wants to monitor the service and be moderator?
 
-Conclusion
-----------
+## Conclusion
 
 As you understand, no decision has been made yet.
 

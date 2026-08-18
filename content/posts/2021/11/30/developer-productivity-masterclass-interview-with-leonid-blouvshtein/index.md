@@ -30,8 +30,6 @@ frozen: false
 
 ](https://www.linkedin.com/events/developerproductivitymasterclas6870717107772907520/)
 
-<br />
-
 I got a chance to grab Leonid and make him sit down for this quick interview...
 
 ### Q: Tell us a bit about yourself?
@@ -65,7 +63,6 @@ I'm very excited about the panel we've brought together. Netflix, Hashicorp, and
 
 I think through consensus we can uncover underlying truths of developing that might be less obvious.
 
-Join Us
--------
+## Join Us
 
 Thanks Leonid for this great insight. Please [join us on Tuesday, December 7th](https://go.lightrun.com/developer-productivity-masterclass "join us on Tuesday, December 7th") for this master class to learn more.

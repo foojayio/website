@@ -25,8 +25,7 @@ frozen: false
 
 I want to compare these three different ways in this post: Java agent v1, Java agent v2, and Micrometer Tracing.
 
-The base application and its infrastructure
--------------------------------------------
+## The base application and its infrastructure
 
 I'll use the same base application: a simple Spring Boot application, coded in Kotlin. It offers a single endpoint.
 
@@ -67,11 +66,9 @@ class MicrometerController {
 }
 ```
 
-
 For every setup, I'll check two stages: the primary stage, with OpenTelemetry enabled, and a customization stage to create additional internal spans.
 
-Micrometer Tracing
-------------------
+## Micrometer Tracing
 
 Micrometer Tracing stems from [Micrometer](https://micrometer.io/), a "vendor-neutral application observability facade".
 > Micrometer Tracing provides a simple facade for the most popular tracer libraries, letting you instrument your JVM-based application code without vendor lock-in. It is designed to add little to no overhead to your tracing collection activity while maximizing the portability of your tracing effort.
@@ -105,7 +102,6 @@ services:
       SPRING_APPLICATION_NAME: micrometer-tracing                       #3
 ```
 
-
 1. Enable the OpenTelemetry collector for Jaeger
 2. Full URL to the Jaeger OpenTelemetry gRPC endpoint
 3. Set the OpenTelemetry's service name
@@ -126,7 +122,6 @@ class MicrometerTracingApplication {
         builder.baseUrl("http://localhost:8080/done").build()
 }
 ```
-
 
 We can create manual spans in several ways, one via the OpenTelemetry API itself. However, the setup requires a lot of boilerplate code. The most straightforward way is the Micrometer's [Observation API](https://docs.micrometer.io/micrometer/reference/observation.html). Its main benefit is to use a single API that manages both *metrics* and *traces*.
 
@@ -162,20 +157,17 @@ class MicrometerController(
 }
 ```
 
-
 The added observation calls reflect upon the generated traces:
 
 image:{assetsdir}/trace-micrometer-custom.webp\[Micrometer traces on Jaeger with the Observation API,840\]
 
-OpenTelemetry Agent v1
-----------------------
+## OpenTelemetry Agent v1
 
 An alternative to Micrometer Tracing is the generic [OpenTelemetry Java Agent](https://github.com/open-telemetry/opentelemetry-java-instrumentation). Its main benefit is that it impacts neither the code nor the developers; the agent is a pure runtime-scoped concern.
 
 ```bash
 java -javaagent:opentelemetry-javaagent.jar agent-one-1.0-SNAPSHOT.jar
 ```
-
 
 The agent abides by OpenTelemetry's configuration with environment variables:
 
@@ -192,7 +184,6 @@ services:
     ports:
       - "8081:8080"
 ```
-
 
 1. Set the protocol, the domain, and the port. The library appends `/v1/traces`
 2. Set the OpenTelemetry's service name
@@ -222,13 +213,11 @@ fun intermediate() {
 }
 ```
 
-
 It yields the expected new `intermediate()` trace:
 
 ![](trace-agent-1x-custom.png)
 
-OpenTelemetry Agent v2
-----------------------
+## OpenTelemetry Agent v2
 
 OpenTelemetry released a new major version of the agent in January of this year. I updated my demo with it; traces are now only created when the app receives and sends requests.
 
@@ -238,8 +227,7 @@ As for the previous version, we can add traces with the `@WithSpan` annotation. 
 
 ![Agent v2 traces on Jaeger with annotations](trace-agent-2x-custom.png)
 
-Discussion
-----------
+## Discussion
 
 Spring became successful for two reasons: it simplified complex solutions, *i.e.*, EJBs 2, and provided an abstraction layer over competing libraries. Micrometer Tracing started as an abstraction layer over Zipkin and Jaeger, and it made total sense. This argument becomes moot with OpenTelemetry being supported by most libraries across programming languages and trace collectors. The Observation API is still a considerable benefit of Micrometer Tracing, as it uses a single API over Metrics and Traces.
 
@@ -256,7 +244,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [OpenTelemetry Java examples](https://github.com/open-telemetry/opentelemetry-java-examples#java-opentelemetry-examples)
 * [Distributed Tracing with Spring Boot 3 --- Micrometer vs OpenTelemetry](https://itnext.io/distributed-tracing-with-spring-boot-3-micrometer-vs-opentelemetry-b3593546f61b)
 * [Observability With Spring Boot 3](https://www.baeldung.com/spring-boot-3-observability)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-tracing-spring-boot/) on August 3^rd^, 2024*

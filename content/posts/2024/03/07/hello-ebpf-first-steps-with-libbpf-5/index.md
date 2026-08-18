@@ -38,9 +38,7 @@ public class HelloWorld {
 }
 ```
 
-
-Problems with Libbcc
---------------------
+## Problems with Libbcc
 
 Using libbcc and porting the Python wrapper made it easy to start developing a user-land Java library and offers some syntactic sugar, but it has major disadvantages, to quote [Andrii Nakryiko](https://twitter.com/anakryiko):
 > * Clang/LLVM combo is a big library, resulting in big fat binaries that need to be distributed with your application.
@@ -51,8 +49,7 @@ Using libbcc and porting the Python wrapper made it easy to start developing a u
 
 Additionally, the libbcc binaries in the official Ubuntu package repositories are outdated, so we're accumulating technical debt using them.
 
-BPF-based Library
------------------
+## BPF-based Library
 
 So what is the alternative? We compile the embedded C code in our application to eBPF bytecode at build time using a custom annotation processor and load the bytecode using libbpf at run-time:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/02/bcc_vs_bpf-1-2000x1125.png)
@@ -68,8 +65,7 @@ With this new chapter of the [hello-ebpf](https://github.com/parttimenerd/hello-
 
 The annotation processor for this lives in the [bpf-processor](https://github.com/parttimenerd/hello-ebpf/tree/main/bpf-processor), and the central part of the library is in the [bpf](https://github.com/parttimenerd/hello-ebpf/tree/main/bpf) folder. It is in its earliest stages, but you can expect more features and tests in the following months.
 
-HelloWorld Example
-------------------
+## HelloWorld Example
 
 Writing programs with libbpf is not too dissimilar to using my libbcc wrapper:
 
@@ -106,7 +102,6 @@ public abstract class HelloWorld extends BPFProgram {
 }
 ```
 
-
 Running this class via `./run_bpf.sh HelloWorld` will then print the following:
 
 ```
@@ -119,7 +114,6 @@ Running this class via `./run_bpf.sh HelloWorld` will then print the following:
 3385: irqbalance: Hello, World from BPF and more!
 3385: C2 CompilerThre: Hello, World from BPF and more!
 ```
-
 
 The annotation processor created an implementation of the HelloWorld class, which overrides the `getByteCode` method:
 
@@ -137,9 +131,7 @@ public final class HelloWorldImpl extends HelloWorld {
 }
 ```
 
-
-Compiler Errors
----------------
+## Compiler Errors
 
 But what happens when you make a mistake in your eBPF program, for example, not writing a semicolon after the `bpf_printk` call? Then, the annotation processor throws an error at build-time and prints the following error message when calling `mvn package`:
 
@@ -154,11 +146,9 @@ HelloWorld.java:[19,66]  error: expected ';' after expression
 1 error generated.
 ```
 
-
 The annotation processor compiles the eBPF program using Clang and post-processes the error messages to show the location in the Java program. Using libbcc, we only get this error at run-time, which makes finding these issues far harder.
 
-Conclusion
-----------
+## Conclusion
 
 Using libbpf instead of libbcc has many advantages: Smaller, self-contained JARs, better developer support, and a more modern library. The hello-ebpf project will evolve to focus on libbpf to become a fully functional and tested eBPF user-land library. Using an annotation processor offers so many possibilities, so stay tuned.
 

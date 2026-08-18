@@ -63,7 +63,6 @@ $ sudo apt update
 $ sudo apt install -y ansible sshpass
 ```
 
-
 Now clone this project:
 
 ```
@@ -71,13 +70,11 @@ $ git clone https://github.com/FDelporte/RaspberryPiAnsible.git
 $ cd RaspberryPiAnsible
 ```
 
-
 Create the inventory file `hosts` for which the Ansible scripts will run, with 'localhost' as content:
 
 ```
 $ nano hosts
 ```
-
 
 Check the content of this 'hosts' file:
 
@@ -86,13 +83,11 @@ $ cat hosts
 localhost
 ```
 
-
 You can now execute the Ansible playbook with the following command (this will take some time...):
 
 ```
 $ ansible-playbook -c local -i hosts all_for_java.yml
 ```
-
 
 When finished, check the installed versions:
 
@@ -110,7 +105,6 @@ Default locale: en_GB, platform encoding: UTF-8
 OS name: "linux", version: "5.10.17-v7l+", arch: "arm", family: "unix"
 ```
 
-
 ### Get the Example Project
 
 The Pi4J project and website provide multiple example projects. Let's use the "minimal JavaFX example". This application is fully documented on the [Pi4J website \> "Getting Started" \> "User interface with JavaFX"](https://pi4j.com/getting-started/user-interface-with-javafx/). We can get the sources from GitHub and build it with Maven.
@@ -121,7 +115,6 @@ $ git clone https://github.com/Pi4J/pi4j-example-javafx.git
 $ cd pi4j-example-javafx
 $ mvn package
 ```
-
 
 When the build is finished, we will find all the required files to run the application in "/home/pi/pi4j-example-javafx/target/distribution".
 
@@ -137,11 +130,9 @@ slf4j-api-2.0.0-alpha0.jar
 slf4j-simple-2.0.0-alpha0.jar
 ```
 
-
 ![](maven-build-finished-1024x675.png)
 
-Run Modes
----------
+## Run Modes
 
 ### Desktop Mode
 
@@ -158,14 +149,12 @@ java \
   --module com.pi4j.example/com.pi4j.example.JavaFxExample
 ```
 
-
 To run the application, use the the provided script `run.sh`:
 
 ```
 $ cd /home/pi/pi4j-example-javafx/target/distribution
 $ sudo bash run.sh
 ```
-
 
 <figure class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">
@@ -201,14 +190,12 @@ java \
 /sbin/init 5
 ```
 
-
 By using the provided script, we can also start the kiosk approach with the following command. Do this via SSH so you can still interact with the terminal and see the application log in case something goes wrong. Press `CONTROL+C` to stop the application from the SSH terminal.
 
 ```
 $ cd /home/pi/pi4j-example-javafx/target/distribution
 $ sudo bash run-kiosk.sh
 ```
-
 
 <figure class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio">
  <div class="wp-block-embed__wrapper">
@@ -235,7 +222,6 @@ Another great addition for a kiosk approach is [Unclutter](https://wiki.archlinu
 ```
 sudo apt install unclutter
 ```
-
 
 ### Conclusion
 

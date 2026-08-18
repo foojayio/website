@@ -25,8 +25,7 @@ Since the start of the Friends of OpenJDK community in April 2020, we've had hal
 
 What's good about all this is that we can now look at more meaningful measures of the impact of the Friends of OpenJDK community such as...
 
-...FOSDEM 2023
---------------
+## ...FOSDEM 2023
 
 Over the past 6 months, the activity that most clearly highlights all the key strengths and relevance of the Friends of OpenJDK community was [FOSDEM 2023](https://fosdem.org/2023/schedule/track/friends_of_openjdk/).
 
@@ -35,8 +34,7 @@ After having collaborated with and supported FOSDEM during the two virtual years
 
 We fully intend to continue the tradition next year. Maybe we could try to use both FOSDEM days, since we have so much content, and 20 minute sessions are entertaining and fun, though occasionally also a bit stressful.
 
-Advisory Board Growth
----------------------
+## Advisory Board Growth
 
 Next, a key aspect to highlight right away is that the [Foojay.io Advisory Board](https://foojay.io/board/) has grown over the past 6 months, with 5 new organizations being added, [and now there are 17 in total](https://foojay.io/board/). Here they are, together with a great quotation from each organization, really showing how well aligned we all are in relation to the Friends of OpenJDK community.
 > [Chronicle Software](https://chronicle.software/): "**Foojay is an open and independent marketplace of ideas and curated information relating to the JVM, and as such is immensely useful for the entire community. We are very happy to support Foojay however we can and are delighted to be part of the Foojay Board.** " *--- Jerry Shea, Chronicle Software MD, APAC*
@@ -51,16 +49,14 @@ How does an organization become a Foojay.io Advisory Board member? The mechanism
 
 That means that there's an organization-level commitment to the community goals underpinning Foojay, such as is clear from the quotes above, together with a regular cadence of content finding its way from that organization to Foojay. No money is involved at all, no "pay for play", simply an alignment of intentions with those of Foojay, with the logo of the organization being published together with an affirming quotation, sealing the already existing relationship that one or more individuals in the organization have with the intentions of the Foojay community.
 
-Foojay Today
-------------
+## Foojay Today
 
 Probably the most successful aspect of the Foojay site, at least in terms of broad usage, are [the daily articles](https://foojay.io/today). Every day, Monday to Friday, of the week one or more articles are published by the community on [Foojay Today](https://foojay.io/today).
 [![](image-11-1024x693.png)](https://foojay.io/today/)
 
 Since Foojay Today is the one part of Foojay that changes on a daily basis, with continual new content coming in, which is discussed and worked on collaboratively via [the Foojay Slack channels, including a publicly discussed weekly schedule](https://bit.ly/join-foojay-slack), it is also the part that drives the majority of the unique views, shown in the stats section below.
 
-Calendar
---------
+## Calendar
 
 A lot of work has been done by the Yelk team in Ukraine in collaboration with the Foojay.io community. Of course, Foojay.io is a WordPress site. In a way, that's sad, that we're not (yet?) using an OpenJDK technology for the Friends of OpenJDK site. On the other hand, everyone knows (loves?) WordPress, so onboarding new collaborators is trivial.
 
@@ -71,8 +67,7 @@ The intention is for this calendar to list ALL conferences and JUG events or rel
 
 A lot more work will be done on the calendar to make it even more useful, e.g., the ability to select periods and geographies, etc, will be added, as well as... we should definitely explore integrating with the Meetup API, so that any events on a JUG's meetup page will automatically be entered into the Foojay.io calendar's moderation queue.
 
-Java User Groups
-----------------
+## Java User Groups
 
 Related to the above, clearly the purpose of the community project that is Foojay.io is not the millions of Java developers out there, since the millions of Java developers are mostly simply daily worker bees rather than actively involved in the Java community as such. That is easy to see when you go to a JUG meeting. Despite JUGs being held in major cities all over the world, you'll never find more than around, at most 80 (which is really quite a lot) actually attending JUG meetings.
 
@@ -82,8 +77,7 @@ One can also imagine there being a listing of speakers, i.e., some kind of datin
 
 Are you involved in a JUG in any way and are there any resources that you need and that the Foojay community can help you with? Just speak up, that's a key reason for the Friends of OpenJDK to exist in the first place.
 
-Foojay.io Disco API
--------------------
+## Foojay.io Disco API
 
 Also related to Foojay.io is the "Universal OpenJDK Discovery API" (Disco API) for discovering JDK distributions and integrating them into any tools and technologies where that makes sense. Those that use it love it because it takes away a lot of their problems in finding and updating JDK distributions. Although there's no direct dependencies between Foojay.io and Disco, they're indirectly related other as community projects that fill a gap in the Java ecosystem and both are initiated and driven by/from Azul.
 
@@ -102,8 +96,7 @@ The Disco API is now integrated in or used by the following:
 
 A separate article on interesting analysis relating to the Disco API will be published separately.
 
-Podcast
--------
+## Podcast
 
 A really cool addition to the Foojay.io "franchise" is the [Foojay.io Podcast](https://foojay.io/today/category/podcast/), with its cool jingle (thanks Erik Costlow), great host (first Erik, then Frank Delporte, and now sometimes others too, i.e., really sharing the fun/load).
 [![](image-15-1024x634.png)](https://foojay.io/today/category/podcast/)
@@ -114,8 +107,7 @@ Check it out:
 
 <https://foojay.io/today/category/podcast/>
 
-Certification Program
----------------------
+## Certification Program
 
 Something rather wonderful has been happening on the [Foojay.io Slack](https://bit.ly/join-foojay-slack) over the last few months. Initiated by well known Dutch Java luminaries Roy Wasse and Bert Jan Schrijver, and others from [OpenValue](https://www.openvalue.eu/), a Java certification is being worked out that actually measures programming skills (rather than the ability to complete multiple choice questions, etc).
 
@@ -124,8 +116,7 @@ This will be the Java community validating Java skills and anyone certified via 
 
 Join in with the above [at the OpenValue meetup here](https://www.meetup.com/openvalue/events/294280905/) and, of course, [join the Foojay Slack](https://bit.ly/join-foojay-slack), where there's a channel dedicated to the above discussion, a cadence of meetings, experimentation, demos, etc, i.e., a vibrant project that's great to be able to host and encourage via Foojay.
 
-OpenJDK Information
--------------------
+## OpenJDK Information
 
 The first impulse for the creation of Foojay.io back in April 2020 was the absence of a clear place listing all the issues making it into a quarterly update or LTS release. That content continues to be added to the site each quarter, [as shown below](https://foojay.io/java-17/?tab=component&version=17.0.1&quarter=102021), with the option for anyone to vote on their favorite fixes for addition to the Highlights tab.
 [![](image-12-1024x601.png)](https://foojay.io/java-17/?tab=component&version=17.0.1&quarter=102021)
@@ -135,8 +126,7 @@ A key collaborator with Foojay.io is Chris Newland, whose range of tools on [chr
 
 A core aspect of Foojay.io is these kinds of reference materials, though they may be of relevance to a smaller subset of Java developers than initially thought. I.e., this is not daily changing content and therefore may attract less views, while the fact that this reference material is out there is something that could be better known. Still, bottom line, this content may be more relevant for specialists rather than the daily worker bee putting applications together as specified by architects and other team leaders who are of a smaller number and may be the ones who find this kind of content of greater relevance to them.
 
-Everybody Wants Stats
----------------------
+## Everybody Wants Stats
 
 Below you can see that the trend breaks midway through last year, referred to in the note in small script above, purely because of the change in cookie policies, which means that any discussion of the number of unique views across the Foojay.io site is now meaningless. Also the total unique visitors and sessions has been impacted by this.
 ![](image-4-1024x767.png)
@@ -165,8 +155,7 @@ It helps to take two equivalent periods and compare them to each other, before t
 
 Other stats that may be of interest are that Foojay.io now has over 10K followers on Twitter (though that number goes up and down quite wildly and erratically), 1101 subscribers on [Foojay.io Slack](https://bit.ly/join-foojay-slack), and the number of Foojay.io Today authors [is publicly listed here](https://foojay.io/today/author).
 
-Skin in the Game
-----------------
+## Skin in the Game
 
 A recurring question in the context of Foojay.io relates to who has "skin in the game" here. As indicated in the Foojay.io Advisory Board Growth section above, there's no "pay for play" here, the downside of which is the loosely coupled commitment of the organizations involved in the Foojay community. I.e., the "skin in the game" is of a collaborative nature, i.e., content is introduced from the organization to the Foojay.io, which is fantastic and shows the level of support the organization has for Foojay.
 
@@ -185,8 +174,7 @@ In this way, there's now a placeholder for sponsorships or, at least, the ad spa
 
 By making this opportunity available, organizations can be offered, also whether they are part of the Foojay.io board or not, to have "skin in the game", i.e., to invest in larger or smaller amounts to contribute to the continued growth and maintenance of the Foojay.io community.
 
-Upcoming Features and Enhancements
-----------------------------------
+## Upcoming Features and Enhancements
 
 In terms of roadmap, I see the following happening in the coming months.
 

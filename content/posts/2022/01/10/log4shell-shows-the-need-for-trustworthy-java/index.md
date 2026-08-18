@@ -18,8 +18,7 @@ related_posts:
 frozen: false
 ---
 
-What Just Happened?
--------------------
+## What Just Happened?
 
 I believe Log4Shell is Java's biggest crisis. I reported on it in the "[New \& Noteworthy](https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-new-noteworthy)" section of [my newsletter](https://bpfnl.substack.com). A quick recap: The US cybersecurity and infrastructure agency director [called Log4Shell](https://www.zdnet.com/article/log4j-flaw-this-new-threat-is-going-to-affect-cybersecurity-for-a-long-time/) "one of the most serious that I've seen in my entire career, if not the most serious". Exploiting it may be as easy as sending an HTTP request to a Java application, with a JNDI link in the HTTP header. The last wide-spread software vulnerability of this magnitude [scored 7.5](https://nvd.nist.gov/vuln/detail/CVE-2014-0160) - Log4Shell [scored a 10](https://nvd.nist.gov/vuln/detail/CVE-2021-44228#).
 
@@ -30,8 +29,7 @@ It seems that we know how to fix Log4Shell and are busy applying the fixes. So I
 
 These are my answers. I hope they can contribute to the discussion of Log4Shell in the Java community. I'm not a security expert, and I don't have unique insights into Log4Shell. So if I wrote something wrong, or if you disagree with me, then please let me know!
 
-How Did We Handle Log4Shell?
-----------------------------
+## How Did We Handle Log4Shell?
 
 In politics, there's a saying: "It's not the crisis that kills you. It's how you handle it." The good thing is we know how to handle a crisis like Log4Shell:
 
@@ -61,8 +59,7 @@ Put another way: When you fly, they always tell you how to evacuate in case of a
 
 **Summary:** I think the Java community handled this crisis poorly and needs to do much better next time.
 
-How Can We Prevent Another Log4Shell?
--------------------------------------
+## How Can We Prevent Another Log4Shell?
 
 In a community as big as the Java one, we **can't** prevent all vulnerabilities. What we **can** do is reduce the probability of a future crisis and lessen its impact. I'll get back to this later.
 
@@ -215,7 +212,5 @@ I would then ask every Java champion and developer advocate in the Java communit
 Finally, select representatives should discuss this with mainstream media. Since Log4Shell was a topic there, "Trustworthy Java" would be a follow-up story.
 
 **Summary:** I propose seven actions for the "Trustworthy Java" initiative. Making Java \& Java applications more secure and regularly auditing Java security will reduce the probability of another crisis like Log4Shell. Creating a Java Crisis Response Team \& a Java Security Website and improving Java application patching will lessen the impact of the next crisis. Communicating "Trustworthy Java" to Java developers and mainstream media will help this initiative to succeed.
-
-
 
 *Originally published at [Better Projects Faster](https://betterprojectsfaster.com/guide/java-full-stack-report-2022-01-editorial) on January 5, 2022*

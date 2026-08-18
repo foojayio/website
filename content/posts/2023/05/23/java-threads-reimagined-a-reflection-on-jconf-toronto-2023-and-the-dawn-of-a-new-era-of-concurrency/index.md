@@ -31,8 +31,6 @@ Venkat's keynote, titled "**Know Your Java**," was a deep dive into the intricac
 Neal Ford closed the conference with a keynote on architecture, emphasizing the importance of thinking beyond the code when constructing a comprehensive application.
 ![](PXL_20230503_132727732-1024x771.jpg)
 
-<br />
-
 I had the unique opportunity to present a talk titled "**Virtual Threads: Ushering in a New Era of Concurrency**". This presentation was one of the highlights of my speaking career, as it was met with a great deal of interest from the audience. The discussion centred around Project Loom and how it introduces virtual threads.
 
 These lightweight threads aim to significantly reduce the complexity of writing, maintaining, and monitoring high-throughput concurrent applications on the Java platform. The interactive Q\&A session was particularly engaging, with many attendees continuing the discussion even after the session had concluded.

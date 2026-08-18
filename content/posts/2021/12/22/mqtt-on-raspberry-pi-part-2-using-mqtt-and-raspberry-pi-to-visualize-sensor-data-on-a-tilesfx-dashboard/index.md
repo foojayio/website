@@ -29,8 +29,7 @@ Now we will take the next step and subscribe to these topics to receive the data
 
 {{< youtube D2znouG4Hqw >}}
 
-About JavaFX
-------------
+## About JavaFX
 
 JavaFX is a set of graphics and media packages that enables developers to design, create, test, debug, and deploy rich client applications that operate consistently across diverse platforms.
 
@@ -55,8 +54,7 @@ This great library is developed by [Gerrit Grunwald](https://twitter.com/hansolo
 You can find [the sources of TilesFX on GitHub](https://github.com/HanSolo/tilesfx) and it is available as a [Maven dependency](https://mvnrepository.com/artifact/eu.hansolo/tilesfx). As part of the sources of TilesFX, a Demo application is provided to show how to use all the available Tiles.
 ![](tilesfx-1024x589.png)
 
-Java Project
-------------
+## Java Project
 
 Let's create a JavaFX application to visualize all the sensor values we pushed to HiveMQ Cloud with the application we created in the previous part.
 
@@ -93,7 +91,6 @@ This project requires a few different dependencies compared to the message sende
     <version>${tilesfx.version}</version>
 </dependency>
 ```
-
 
 ### Full code on GitHub
 
@@ -158,7 +155,6 @@ public class HiveMqClient extends Application {
 }
 ```
 
-
 #### Visualizing the data in a dashboard
 
 In the DashboardView all the tiles are defined we want to add to our screen. Please have a look at the full sources for all the tiles. Here you find the code of two of them:
@@ -218,7 +214,6 @@ public class DashboardView extends FlowGridPane {
 }
 ```
 
-
 ##### GaucheTemperature
 
 The temperature is one of the sensor values which is sent with an interval from the CrowPi. After subscribing to the sensor-topic, we will receive this data. By using the same Sensor-class as we used in the sender-application, we can easily map the received String to a Java-object.
@@ -250,7 +245,6 @@ The GaucheTemperature-tile and the other ones we initialized in the constructor,
         }
     }
 ```
-
 
 ##### SensorSwitchTile
 
@@ -292,7 +286,6 @@ public class SensorSwitchTile extends BaseTile {
 }
 ```
 
-
 The subscription to the topic is handled in the BaseTile-class to avoid duplicate code.
 
 ```
@@ -322,7 +315,6 @@ public class BaseTile extends Pane {
 }
 ```
 
-
 As you can see, subscribing to a HiveMQ Cloud message only needs a minimal amount of code.
 
 ### Building and running the application
@@ -351,7 +343,6 @@ OpenJDK Runtime Environment (build 11.0.13+8-post-Raspbian-1deb11u1)
 OpenJDK Server VM (build 11.0.13+8-post-Raspbian-1deb11u1, mixed mode)
 ```
 
-
 Nice! Now we can already run Java-code on our Raspberry Pi. But for JavaFX we need the runtime which is compiled specifically for the Raspberry Pi. Gluon provides these versions via [their website gluonhq.com/products/javafx](https://gluonhq.com/products/javafx/). We only need to download a file, unzip it, and put in a place which we will reference when we start the application.
 
 ```
@@ -359,7 +350,6 @@ $ wget -O openjfx.zip https://gluonhq.com/download/javafx-17-ea-sdk-linux-arm32/
 $ unzip openjfx.zip
 $ sudo mv javafx-sdk-17/ /opt/javafx-sdk-17/
 ```
-
 
 As this dashboard application is a Maven project, we still need to install it, after which we can get the full project and build it on the Raspberry Pi. Follow these steps:
 
@@ -372,18 +362,14 @@ $ cd target/distribution
 $ bash run.sh
 ```
 
-
 The `run.sh` script combines the compiled application jars, with the platform-specific JavaFX runtime and starts the application.
 
-Conclusion
-----------
+## Conclusion
 
 TilesFX is only one of the many open-source libraries you can use in your application, or you can create your own components. Gerrit Grunwald and other writers have explained this approach on [foojay.io](https://foojay.io/?s=javafx+controls) in multiple posts.
 
 By using JavaFX, you can quickly develop beautiful user interfaces, and combined with HiveMQ Cloud this results in a nice dashboard application to visualize sensor data.
 
 By running this application on the Raspberry Pi, you can have an always-on dashboard screen for a very low price.
-
-
 
 **This blog post series has been written on request of HiveMQ and was originally* published on the [HiveMQ Blog](https://www.hivemq.com/blog/mqtt-raspberrypi-part02-visualizing-sensor-data-on-a-tilesfx-dashboard/).*

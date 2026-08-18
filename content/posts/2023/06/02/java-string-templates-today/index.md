@@ -26,8 +26,6 @@ Today, we will take a look at another exciting feature of the Manifold project: 
 
 {{< youtube ite6a5y50yQ >}}
 
-<br />
-
 But before we get to that, some of the feedback I got from the previous post was that I was unclear about Manifold. Manifold is a combination of an IDE plugin and plugins to Maven or Gradle.
 
 Once used we can enhance the Java language (or environment) almost seamlessly in a fluid way.
@@ -47,8 +45,7 @@ Manifold also has some drawbacks:
 
 These partially relate to the age of Manifold which is a new project by comparison. But it also relates to the different focus. Manifold focuses on language functionality and a single working fluid result.
 
-JEP 430 String Interpolation
-----------------------------
+## JEP 430 String Interpolation
 
 One of the big features coming to JDK 21 is [JEP 430](https://openjdk.org/jeps/430), which is a string interpolation language change. It will allow writing code like this:
 
@@ -57,13 +54,11 @@ String name = "Joan";
 String info = STR."My name is \{name}";
 ```
 
-
 In this case, `info` will have the value `"My name is Joan"`. This is just the tip of the iceberg in this JSR as the entire architecture is pluggable. I will discuss this in a future video but for now, the basic functionality we see here is pretty fantastic.
 
 Unfortunately, it will take years to use this in production. It will be in preview in JDK 21, then it will be approved. We will wait for an LTS, and then wait for the LTS to reach critical mass. In the meantime, can we use something as nice as this today?
 
-Maven Dependencies
-------------------
+## Maven Dependencies
 
 Before we dive into the code, I want to remind you that all the code for this and other videos in this series is available on [GitHub](https://github.com/shai-almog/java-book/) (feel free to star it and follow).
 
@@ -112,9 +107,7 @@ String templating has no dependencies. We still need to make changes to the pom 
 </build>
 ```
 
-
-Manifold String Interpolation
------------------------------
+## Manifold String Interpolation
 
 To begin, we can create a new variable that we can use to get external input. In the second line, we integrate that variable into the printout:
 
@@ -123,14 +116,11 @@ String world = args.length > 0 ? args[0] : "world";
 System.out.println("Hello $world! I can write \$world as the variable...");
 ```
 
-
 The backslash syntax implicitly disables the templating behavior, just like in other string elements in Java. This will print `"Hello world! I can write $world as the variable..."`.
 
 There's something that you can't really see in the code, you need to look at a screenshot of the same code:
 
 <img decoding="async" class="alignnone size-medium wp-image-98591" src="84f52be2-30c3-435f-bbf6-4a53937b3859-700x59.png" alt="" width="700" height="59">
-
-<br />
 
 It's subtle, do you see it?
 
@@ -145,9 +135,7 @@ private static void noTemplate(String word) {
 }
 ```
 
-
-Templates
----------
+## Templates
 
 The Manifold project allows us to create JSP-like templates without all of the baggage. We can define a base class to a template to create generic code for the templates and place common functionality in a single location. We can create a file called HelloTemplate.html.mtl in the resources/templates directory with the following content. Notice the params we define in the template file can be anything:
 
@@ -165,13 +153,11 @@ The Manifold project allows us to create JSP-like templates without all of the b
 </html>
 ```
 
-
 This will seem very familiar to those of us with a JSP background. We can then use the file in the Java code like this, we can pass the parameters and they will replace the appropriate blocks in the HTML file:
 
 ```
 System.out.println(HelloTemplate.render("My Title", "My Body"));
 ```
-
 
 Notice the generated template it compiled to a class, similarly to JSP. Unlike JSP this template isn't a servlet and can be used in any context. A local application, a server, etc. The templating language is more lightweight and doesn't depend on various server APIs. It is also less mature. The main value is in using such an API to generate arbitrary files like Java source files or configuration files.
 
@@ -184,7 +170,6 @@ The templating capabilities are powerful yet simple. Just like we could in JSP, 
 
 <% } %>
 ```
-
 
 ### Why Not: JSP, Velocity, Thymeleaf or Freemarker?
 
@@ -202,7 +187,6 @@ We can import Java packages just like we can in every Java class using code like
 <%@ import com.debugagent.stringtemplates.* %>
 ```
 
-
 Once imported we can use any class within the code. Notice that this import statement must come above other lines in the code, just like a regular import statement.
 
 ### Include
@@ -213,7 +197,6 @@ We can use include to simply include another template into the current template,
 <%@ include JavaCode("ClassName", classBody) %>
 ```
 
-
 Notice that we can include an entry with parameters and pass them along to the underlying template. We can pass hardcoded strings or variables along the include chain.
 
 ### A Lot More
@@ -222,8 +205,7 @@ I skipped extends because of a documentation issue, which has since been fixed. 
 
 When I define a dependency on a class and remove it from the code the error appears even in the template file. This doesn't happen in Thymeleaf.
 
-Final Word
-----------
+## Final Word
 
 In conclusion, with the Manifold project, we can write fluent text processing code today without waiting for a future JVM enhancement. The introduction of String templates can help Java developers generate files that aren't a web application, which is useful in several cases e.g. where code generation is needed.
 

@@ -29,8 +29,7 @@ Designing an ETL pipeline today that operates at scale means tackling issues suc
 
 In this article, we will explore how to design a high-throughput ETL pipeline architecture using Java, focusing on concurrency models, error recovery strategies, and practical implementation techniques. To do this, we will leverage tools such as Project Reactor to build scalable, non-blocking pipelines. In the loading stage, we will consider [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=etl-foojay&utm_term=hugh.murray) as the sink for transformed data.
 
-Rethinking ETL for modern systems
----------------------------------
+## Rethinking ETL for modern systems
 
 Conceptually, the ETL (Extract, Transform, Load) model remains unchanged. It is not in opposition to the emerging ELT model, but rather complements it. Its implementation, however, has evolved significantly. Instead of monolithic batch processes, today's pipelines are, by their very nature:
 
@@ -43,8 +42,7 @@ At scale, to achieve high throughput goals, each stage of the pipeline must be i
 
 What is the main challenge? Coordinating these stages efficiently and effectively, without introducing bottlenecks or single points of failure.
 
-Architectural building blocks
------------------------------
+## Architectural building blocks
 
 A robust architecture for an ETL pipeline must consist of several loosely coupled layers, interconnected through well-defined and clear interfaces and boundaries. Each layer is a modular unit with its own specific responsibility.
 
@@ -58,8 +56,7 @@ In general, the architecture looks like this:
 
 The layers must communicate with one another, avoiding, where possible, heavy synchronous synchronization. The advantage is the ability to leverage asynchronous communication that accounts for backpressure mechanisms.
 
-Embracing concurrency with reactive pipelines
----------------------------------------------
+## Embracing concurrency with reactive pipelines
 
 One of the most effective ways to build high-throughput pipelines is to adopt reactive, non-blocking processing. We can use libraries like Project Reactor, which provide abstractions such as Flux and Mono that allow us to model data as streams and process them concurrently.
 
@@ -73,7 +70,6 @@ Flux<DataRecord> pipeline =
         .doOnError(error -> log.error("Pipeline error", error));
 ```
 
-
 To the casual observer, this flow might appear to be a sequential process. The secret lies in using \`flatMap\`, which enablesthe simultaneous processing of multiple records. Each stage can process the elements independently, and the pipeline naturally adapts to the available resources.
 
 First point to note: concurrency. Concurrency must be controlled. Unrestricted parallelism can overload downstream systems, causing a cascade of problems.
@@ -83,11 +79,9 @@ First point to note: concurrency. Concurrency must be controlled. Unrestricted p
 .flatMap(this::load, 5)
 ```
 
-
 We always balance system throughput and stability by appropriately adjusting the levels of concurrency that are both possible and necessary for each layer.
 
-Backpressure: the hidden hero
------------------------------
+## Backpressure: the hidden hero
 
 In this type of system, producers often overwhelm consumers with the speed at which they generate data and events. Without proper control, this leads to memory overload and system instability.
 
@@ -100,13 +94,11 @@ extract()
     .flatMap(this::load, 5);
 ```
 
-
 In this case, when the downstream system is slower, we try to accumulate up to 1,000 elements in the buffer. Alternatively, instead of accumulating, we can discard or limit the elements, depending on the use case.
 
 Choosing the right backpressure management strategy is critical and depends heavily on the use case: for financial or transactional data, discarding records is unacceptable, whereas for telemetry or log data, it is acceptable.
 
-Designing for failure: error handling strategies
-------------------------------------------------
+## Designing for failure: error handling strategies
 
 Let's start with a basic premise: failures in this type of pipeline are inevitable. Network issues, invalid data, timeouts, and downstream service interruptions are all events that occur regularly. The goal is not to eliminate failures, but to manage them properly.
 
@@ -116,7 +108,6 @@ A simple pipeline like the one below fails immediately:
 .flatMap(this::transform)
 .flatMap(this::load)
 ```
-
 
 If a single record fails, the entire flow could be interrupted and leave the system in an undefined state: generally speaking, that's not the outcome we'd like.
 
@@ -133,11 +124,9 @@ Instead, let's try to isolate failures at the individual record level:
 )
 ```
 
-
 This ensures that one bad record does not stop the entire pipeline.
 
-Retry and recovery patterns
----------------------------
+## Retry and recovery patterns
 
 Some types of failures are temporary, and the operation can be safely retried once the outage has ended. Other types of failures, however, require compensation or manual intervention.
 
@@ -151,7 +140,6 @@ Here is a simple example of a retry:
 )
 ```
 
-
 The system makes a total of three attempts, applying an exponential backoff between each attempt. However, these attempts must be used with great caution and care to avoid cascading errors.
 
 To ensure more reliable recovery, we can also use a dead letter queue (DLQ). Failed records are retained to allow for subsequent analysis:
@@ -162,11 +150,9 @@ To ensure more reliable recovery, we can also use a dead letter queue (DLQ). Fai
 )
 ```
 
-
 This allows the pipeline to continue processing while preserving problematic data.
 
-Idempotency: the cornerstone of safe retries
---------------------------------------------
+## Idempotency: the cornerstone of safe retries
 
 Retry attempts have one mandatory prerequisite: they only work if they are idempotent. Without idempotence, repeated execution can lead to duplicate data and inconsistent states.
 
@@ -192,11 +178,9 @@ return Mono.from(
 }
 ```
 
-
 This ensures that reprocessing the same record does not corrupt data.
 
-Batching vs streaming
----------------------
+## Batching vs streaming
 
 Another key decision in designing this type of pipeline is the processing model. Should data be processed in batches or as a continuous stream?
 
@@ -207,7 +191,6 @@ Batch processing improves efficiency by reducing the I/O workload:
 .flatMap(this::bulkLoad)
 ```
 
-
 Streaming, on the other hand, reduces latency and improves overall responsiveness.
 
 In practice, hybrid approaches work best: this means, for example, processing small batches continuously:
@@ -216,7 +199,6 @@ In practice, hybrid approaches work best: this means, for example, processing sm
 .bufferTimeout(100, Duration.ofSeconds(1))
 .flatMap(this::bulkLoad)
 ```
-
 
 This balances throughput and latency effectively.
 
@@ -245,11 +227,9 @@ public Mono<BulkWriteResult> bulkLoadToMongo(List<DataRecord> records) {
 }
 ```
 
-
 Using unordered bulk operations improves throughput because individual write failures do not necessarily block the rest of the batch.
 
-Parallelizing transformations
------------------------------
+## Parallelizing transformations
 
 Processing operations often place a heavy load on the CPU; we can try to maximize performance by parallelizing them wherever possible:
 
@@ -262,7 +242,6 @@ extract()
     .flatMap(this::load);
 ```
 
-
 This allows you to distribute the work across multiple CPU cores: the more processors I have available, the sooner my work will be completed. However, parallelization introduces a certain level of complexity that must be understood and managed, especially when order matters.
 
 If order matters, the first thing to do is preserve it:
@@ -271,11 +250,9 @@ If order matters, the first thing to do is preserve it:
 .flatMapSequential(this::transform, 10)
 ```
 
-
 This maintains order while still allowing some concurrency.
 
-Integrating with messaging systems
-----------------------------------
+## Integrating with messaging systems
 
 High-throughput ETL architectures often rely on messaging systems such as Apache Kafka. Instead of retrieving data in batches, the pipelines process events as they occur. This produces a continuous stream of data, and in the case of Kafka, a consumer can be implemented as follows:
 
@@ -288,13 +265,11 @@ receiver.receive()
     )
 ```
 
-
 This approach enables real-time processing and horizontal scalability, allowing the system to handle the incoming data flow.
 
 Kafka also offers durability and reproducibility through its durable logs mechanism, as well as parallelism through its partitioning mechanism: these are essential features for large-scale ETL systems.
 
-Observability and monitoring
-----------------------------
+## Observability and monitoring
 
 In distributed systems---and this is nothing new---observability is just as important as correctness. Without adequate observability processes and mechanisms, debugging becomes slow, complicated, or even impossible.
 
@@ -312,11 +287,9 @@ How can we achieve all this? Tools like Micrometer integrate seamlessly with rea
 .doOnError(error -> metrics.incrementErrors())
 ```
 
-
 When we talk about observability, it's essential to also discuss logging and tracing. Every record should include a correlation ID to track its path through the pipeline and make troubleshooting easier.
 
-Putting it all together
------------------------
+## Putting it all together
 
 Let's combine the concepts into a more complete pipeline:
 
@@ -340,7 +313,6 @@ public Flux<Void> buildPipeline() {
 }
 ```
 
-
 This pipeline:
 
 * Controls concurrency
@@ -350,8 +322,7 @@ This pipeline:
 * Uses batching for efficiency
 * Preserves system stability
 
-Trade-offs and practical considerations
----------------------------------------
+## Trade-offs and practical considerations
 
 As with any architectural discussion, there is no universally optimal choice. There are several options, each with its own advantages and disadvantages, as well as trade-offs that must be accepted and understood.
 
@@ -363,8 +334,7 @@ Batch processing improves overall throughput but increases latency.
 
 The key is to align architectural decisions with the requirements of the solution being built: a real-time fraud detection system has very different constraints compared to a nightly reporting process.
 
-Conclusion
-----------
+## Conclusion
 
 Designing large-scale ETL pipelines involves addressing and understanding the associated complexities: concurrency, integration patterns, error handling, and observability.
 

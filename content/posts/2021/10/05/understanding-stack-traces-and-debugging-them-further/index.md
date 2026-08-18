@@ -29,7 +29,6 @@ Despite all the hate it got over the years, `NullPointerException` is one of my 
 myList.get(offset).invokeMethod();
 ```
 
-
 So which one triggered the `NullPointerException`?
 
 If you're using the latest version of Java it would tell you, which is pretty cool. But if we're still at Java 11 (or 8) there's more than one option. At least 3 or maybe 4 if we cheat a bit:
@@ -41,8 +40,7 @@ If you're using the latest version of Java it would tell you, which is pretty co
 
 So without knowing anything about the code we can pretty much guess what failed at a line just by knowing the exception type. But this doesn't lead us directly to the bug in all cases.
 
-There Was a Null
-----------------
+## There Was a Null
 
 That `NullPointerException` probably happened due to a null in the list. Assuming you verified that you might still not know how that null got into the list in the first place...
 
@@ -56,8 +54,7 @@ Now this won't catch all the cases of `null` sneaking into the list. It can do s
 
 Since `addAll()` accepts a `Collection` we can use the standard `contains()` method to check if we have a `null` element in the `Collection` and if so stop.
 
-What if this is "sometimes" OK?
--------------------------------
+## What if this is "sometimes" OK?
 
 So we run this code and bingo it stops at a breakpoint... But unfortunately this isn't the right case. That breakpoint is related to a different list which we aren't debugging right now. Apparently in that list a `null` value is OK and expected.
 
@@ -69,8 +66,7 @@ So there are several ways around this problem. The most ideal one is to avoid th
 
 This isn't ideal but it works around the problem assuming it's localized enough.
 
-Nested Stack Traces
--------------------
+## Nested Stack Traces
 
 So this is one of the "pains" in modern frameworks. The framework catches an exception and propagates it, wrapping it in its own exception. Rinse repeat. You end up with a Matryoshka doll of stack traces.
 
@@ -170,7 +166,6 @@ Caused by: java.net.ConnectException: Connection refused (Connection refused)
     ... 74 common frames omitted
 ```
 
-
 Can someone tell me what I did wrong here when trying to run our server locally...
 
 Let's try to break it down starting from the lowest exception which is usually the root cause:
@@ -187,7 +182,6 @@ Caused by: java.net.ConnectException: Connection refused (Connection refused)
     at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:142)
 ```
 
-
 There's a problem connecting. A connection is refused which means our server is trying to connect to some other server but it's failing.
 
 So this gave us some basic information but nothing else.
@@ -199,7 +193,6 @@ Caused by: org.apache.http.conn.HttpHostConnectException: Connect to localhost:8
     at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:156)
     at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376)
 ```
-
 
 Again nothing here. This is Apache connection code. But no information about who triggered it or why.
 
@@ -219,15 +212,13 @@ javax.ws.rs.ProcessingException: RESTEASY004655: Unable to invoke request: org.a
     at org.keycloak.admin.client.resource.BearerAuthFilter.filter(BearerAuthFilter.java:52)
 ```
 
-
 If you'll look a bit below you will see `org.keycloak` packages. This essentially means I forgot to launch keycloak before launching the server. This was well hidden in that stack and required a lot of domain knowledge (we use keycloak) to figure that out.
 
 This sucks. If I was new to the team trying to get stuff to launch (which is exactly when this sort of exception happens), I would have been baffled by the exception. At least it would have taken me a while to figure it out. Unfortunately, I have no silver bullet for that specific problem.
 
 Just keep reading the stack, the answer is usually in the edge (bottom or top). Don't give up if something isn't instantly clear.
 
-TL;DR
------
+## TL;DR
 
 In many cases we can glean the cause of an exception we see in the log or get from the user by just reviewing the stack trace and digging deeper. Obviously, keep in mind nested exceptions and other such issues.
 

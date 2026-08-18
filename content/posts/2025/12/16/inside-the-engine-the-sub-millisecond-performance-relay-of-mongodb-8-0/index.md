@@ -38,7 +38,6 @@ db.trades.find({ symbol: "AAPL" })
          .limit(10);
 ```
 
-
 The NIC DMA's the encrypted packet into kernel memory and, within microseconds, MongoDB's ASIO reactor (`mongo::transport::ServiceEntryPoint`) zero-copies it into a pre-allocated `SocketFrame`. That frame lands on the TaskExecutor's lock-free queue, waking a parked worker thread in under 10 µs. With network I/O complete, control transfers seamlessly to scheduling.{#0af9}
 
 ### Stage 2: OperationContext \& ACL/Parsing
@@ -77,7 +76,6 @@ sh.splitAt("market.trades", { symbol: "M" });
 // …and so forth through "Z"
 ```
 
-
 eliminating runtime page splits. A VIP partial index on high-price trades:{#96f5}
 
 ```
@@ -86,7 +84,6 @@ db.trades.createIndex(
   { partialFilterExpression: { price: { $gt: 1000 } } }
 );
 ```
-
 
 ensures premium fetches hit a covered-index probe, bypassing the document layer entirely. With index probes optimized, replication and transactional guarantees take over.{#7137}
 

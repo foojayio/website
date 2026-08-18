@@ -29,8 +29,7 @@ Java instances in memory are your database but the *StorageManager* makes sure t
 
 In this article, we look more in detail at how you can structure the data and what you need to do so that data is stored binary safely.
 
-The Root object
----------------
+## The Root object
 
 Java objects have references to other objects which may in turn have references to more objects including the starting object. All references and the objects that are part of it are called object graph. A Java program can contain several objects graph but your data typically is included in one graph. If we think about products, stock, orders, customer, address, etc.. they are all linked together.
 
@@ -46,11 +45,9 @@ public class StorageRoot {
 }
 ```
 
-
 In this example, the root object has 2 lists to access the data in a certain fashion. This creates some circular references but MicroStream can handle this without any problem as it also uses references in the binary representation.
 
-Storing the Root Object
------------------------
+## Storing the Root Object
 
 When you start your application for the first time, the *StorageManager* points to an empty directory or storage system so it can't load anything in memory. So you have to provide an initial instance of the root object. And this can be done when you start the StorageManager or explicitly through the `setRoot()` method.
 
@@ -60,7 +57,6 @@ When you provide an instance of the root object when you start the *EmbeddedStor
 try (StorageManager storageManager = EmbeddedStorage.start(root, Paths.get("target/data"))) {
 }
 ```
-
 
 This might be confusing and is dependent on the state of the external storage (empty or already containing data). An alternative is to explicitly define the root and store it when no data is present yet.
 
@@ -76,9 +72,7 @@ try (StorageManager storageManager = EmbeddedStorage.start(Paths.get("target/dat
 }
 ```
 
-
-Store what is Changed
----------------------
+## Store what is Changed
 
 After the initial storage of the root object with the `storeRoot()` method, we no longer use this method to store some changes later on. And this has several reasons.
 
@@ -94,7 +88,6 @@ user.setEmail(newEmailAddress);
 storageManage.store(user);
 ```
 
-
 Since the *User* object was already persisted previously, as part of the *ArrayList* variable of *DataStorage* for example, storing it will make sure that we have the updated information for that user when the *StorageManager* reads the data again.
 
 If we have a new user that is added to the *ArrayList*, make sure that you store the List variable.
@@ -104,11 +97,9 @@ users.add(newUser);
 storageManage.store(users);
 ```
 
-
 The rule is rather simple, store what is changed, the *User* instance where we have to change the email address or the *List* where we have added an entry. If we do not store the correct object, or forget to store the changes, we will no longer have the data available when we restart the application.
 
-Stored Data Format
-------------------
+## Stored Data Format
 
 We already mentioned that data is stored in a binary format. If you compare it with a database with the very strict format of tables and columns, and even with NoSQL solutions that still have some structure, it can be a bit awkward that you don't need to define any structure at all with MicroStream. You store a Java instance and it works all the time, with any kind of instance as there is no requirement on interfaces, annotations that define a mapping, or DSL like SQL queries.
 
@@ -116,8 +107,7 @@ Every time MicroStream writes some data, it just appends it to the existing stru
 
 Since data is only appended, the disk usage would only increase and a lot of old data is kept that is no longer needed. This would mean that the startup would become very slow as it needs to find out which data is still relevant and what can be ignored. For that reason, a house holding process is running in combination with the Storer that writes the data. It checks which of the old data block became obsolete and can be removed. It makes sure that the data is kept manageable over time. The amount of time this householding process can take the time of the Storer Thread can be configured but has a reasonable default.
 
-Lazy data
----------
+## Lazy data
 
 You might not need all the data available in memory all the time. Or maybe the data set became too large to keep in memory.  
 
@@ -131,13 +121,11 @@ When your Object Graph contains the following definition
 private Lazy<List> stringData = Lazy.Reference(new ArrayList());
 ```
 
-
 The data, the list of strings in this example, is not loaded when the *StorageManager* is started. Only when we explicitly access the object within a *Lazy* reference, the data is retrieved.
 
 ```java
 stringData.get().size();
 ```
-
 
 It is like the Schrödinger's cat thought experiment, as long as you don't open the box and explicitly ask for the status, like the size of the *ArrayList*, the status of that list is not known by the JVM.
 
@@ -150,11 +138,9 @@ private Map<String, Lazy<List>> ordersByCustomer;
 private Map<YearMonth, Lazy<List>> ordersByMonth;
 ```
 
-
 If you assign an Order once to the Customer identification and once based on the Month the order was placed, you can retrieve it efficiently either by the customer reference or the month to create a summary for example.
 
-Storing Data
-------------
+## Storing Data
 
 In summary, the MicroStream framework can serialize an Object graph to the storage by indicating a certain root object that can be used to traverse the entire graph. The entire root object is normally only stored when it creates the storage for the first time and populates it with the data found in the JVM. Afterward, only changes detected by the Lazy evaluator are stored.
 

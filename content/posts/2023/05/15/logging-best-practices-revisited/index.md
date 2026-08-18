@@ -23,16 +23,13 @@ As I write this my interview on [DevCentral](https://www.youtube.com/@devcentral
 
 {{< youtube CFL--dAX3FQ >}}
 
-<br />
-
 Either way, this isn't the first time I wrote about or talked about logging and the common pitfalls we see when logging in production or debugging. I covered this extensively in [the old blog](https://talktotheduck.dev/logging-best-practices-mdc-ingestion-and-scale). I also [did a video](https://www.youtube.com/watch?v=53qCLRFcBSs) covering these ideas. But my ideas somewhat evolved around some of the concepts I discussed.
 
 In my original post, I was a bit harsh on AOP logging. My [opinion on this has evolved](https://debugagent.com/spring-boot-debugging-with-aspect-oriented-programming-aop). I think the main problem with AOP logging is that it is often used as a sledgehammer when debugging. Another problem is leaving it on in production. But when it is used surgically it can uncover problems that would be much harder to uncover in any other way.
 
 The main message of the original post is still the most important part: we need company-wide standardization of logging. Without that our code review process is useless.
 
-Logging is Precognitive Debugging
----------------------------------
+## Logging is Precognitive Debugging
 
 In my [debugging book](https://www.amazon.com/Practical-Debugging-Scale-Kubernetes-Production/dp/1484290410/), I spent quite a bit of time talking about logging. First, it's important to understand that logging is very different from print debugging. When you use print statements for debugging they are ephemeral, in a bad way. You should [use tracepoints](https://debugagent.com/the-massive-hidden-power-of-breakpoints). But more importantly, logging is about the bug that hasn't happened yet. Print debugging is about the bug that is already there.
 
@@ -50,8 +47,7 @@ These are all questions that we can answer for the general case. I answered them
 
 Let me qualify that last statement. We need standards. I love that we can measure coverage and then standardize the amount of test coverage. I think that can be very helpful. However, standardizing a fixed number like test coverage without flexibility leads to terrible code that's only designed to reach the unattainable metric. We need flexibility, and a baseline to align against. Not rigid rules.
 
-Costs, Energy and Performance
------------------------------
+## Costs, Energy and Performance
 
 While managers might look at the financial bottom line for overlogging. To me, the more significant aspect is the environmental impact. This has a cascading effect throughout our industry. More logging and ingestion require more computing services. If big companies take up more computing resources it drives up pricing for all of us due to scarcity.
 
@@ -59,8 +55,7 @@ We can do our part for the environment, the company's bottom line and our indust
 
 It is often that a request that would have been served only by the cache is forced to perform an IO operation to satisfy logging. The impact on overall system performance can be tremendous yet hard to notice. If our production and dev environments differ these subtle differences can further mask such inconsistencies.
 
-Join Us
--------
+## Join Us
 
 I hope to see your questions in the live stream or here before/after the fact. When I gave my logging talk before, I got amazing and highly engaging feedback from the audience. Either way, the recording should be there after the fact so check it out.
 

@@ -25,5 +25,3 @@ In this video I show how simple it can be to add drag and drop to a Vaadin appli
 More information about drag and drop can be found in the [documentation](https://vaadin.com/docs/latest/create-ui/dnd).
 
 {{< youtube WIyT9PqhbqA >}}
-
-<br />

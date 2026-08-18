@@ -37,8 +37,7 @@ One has to resort to synchronizing threads to avoid issues like data races and t
 
 I wrote more about Java concurrency in my [Concurrency in modern programming languages: Java](https://deepu.tech/concurrency-in-modern-languages-java/) post.
 
-What is Project Loom?
----------------------
+## What is Project Loom?
 
 > Project Loom aims to drastically reduce the effort of writing, maintaining, and observing high-throughput concurrent applications that make the best use of available hardware.
 >
@@ -70,7 +69,6 @@ Thread.startVirtualThread(() -> {
 });
 ```
 
-
 **Goroutine**
 
 ```
@@ -78,7 +76,6 @@ go func() {
     println("Hello, Goroutines!")
 }()
 ```
-
 
 **Kotlin coroutine**
 
@@ -89,7 +86,6 @@ runBlocking {
     }
 }
 ```
-
 
 Fun fact: before JDK 1.1, Java had support for green threads (aka virtual threads), but the feature was removed in JDK 1.1 as that implementation was not any better than platform threads.
 
@@ -123,7 +119,6 @@ while (true) {
 }
 ```
 
-
 On my machine, the code crashed after **32_539** platform threads.
 
 **Virtual threads**
@@ -138,7 +133,6 @@ while (true) {
     });
 }
 ```
-
 
 On my machine, the process hung after **14_625_956** virtual threads but didn't crash, and as memory became available, it kept going slowly. You may be wondering why this behavior! It's due to the parked virtual threads being garbage collected, and the JVM is able to create more virtual threads and assign them to the underlying platform thread.
 
@@ -156,7 +150,6 @@ try (var executor = Executors.newThreadPerTaskExecutor(Executors.defaultThreadFa
 }
 ```
 
-
 This uses the `newThreadPerTaskExecutor` with the default thread factory and thus uses a thread group. When I ran this code and timed it, I got the numbers shown here. I get better performance when I use a thread pool with `Executors.newCachedThreadPool()`.
 
 ```
@@ -165,7 +158,6 @@ This uses the `newThreadPerTaskExecutor` with the default thread factory and thu
 # 'newCachedThreadPool' with 'defaultThreadFactory'
 0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem
 ```
-
 
 Not so bad. Now, let's do the same using virtual threads.
 
@@ -179,13 +171,11 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 }
 ```
 
-
 If I run and time it, I get the following numbers.
 
 ```
 0:02.62 real,   6.83 s user,    1.46 s sys,     316% 14840pu,   0 amem,         350268 mmem
 ```
-
 
 This is far more performant than using platform threads with thread pools. Of course, these are simple use cases; both thread pools and virtual thread implementations can be further optimized for better performance, but that's not the point of this post.
 
@@ -204,7 +194,6 @@ LoomBenchmark.platformThreadPerTask   avgt    5  5.600 ± 0.768   s/op
 LoomBenchmark.platformThreadPool      avgt    5  3.887 ± 0.717   s/op
 LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
 ```
-
 
 You can find the benchmark [source code on GitHub](https://github.com/deepu105/java-loom-benchmarks). Here are some other meaningful benchmarks for virtual threads:
 
@@ -234,7 +223,6 @@ void handleOrder() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 We want `updateInventory()` and `updateOrder()` subtasks to be executed concurrently. Each of those can succeed or fail independently. Ideally, the `handleOrder()` method should fail if any subtask fails. However, if a failure occurs in one subtask, things get messy.
 
 * Imagine that `updateInventory()` fails and throws an exception. Then, the `handleOrder()` method throws an exception when calling `inventory.get()`. So far this is fine, but what about `updateOrder()`? Since it runs on its own thread, it can complete successfully. But now we have an issue with a mismatch in inventory and order. Suppose the `updateOrder()` is an expensive operation. In that case, we are just wasting the resources for nothing, and we will have to write some sort of guard logic to revert the updates done to order as our overall operation has failed.
@@ -260,15 +248,13 @@ void handleOrder() throws ExecutionException, InterruptedException {
 }
 ```
 
-
 Unlike the previous sample using `ExecutorService`, we can now use `StructuredTaskScope` to achieve the same result while confining the lifetimes of the subtasks to the lexical scope, in this case, the body of the *try-with-resources* statement. The code is much more readable, and the intent is also clear. `StructuredTaskScope` also ensures the following behavior automatically.
 
 * **Error handling with short-circuiting** --- If either the `updateInventory()` or `updateOrder()` fails, the other is canceled unless its already completed. This is managed by the cancellation policy implemented by `ShutdownOnFailure()`; other policies are possible.
 * **Cancellation propagation** --- If the thread running `handleOrder()` is interrupted before or during the call to `join()`, both forks are canceled automatically when the thread exits the scope.
 * **Observability** --- A thread dump would clearly display the task hierarchy, with the threads running `updateInventory()` and `updateOrder()` shown as children of the scope.
 
-State of Project Loom
----------------------
+## State of Project Loom
 
 The Loom project started in 2017 and has undergone many changes and proposals. Virtual threads were initially called fibers, but later on they were renamed to avoid confusion.
 
@@ -276,8 +262,7 @@ Today with Java 19 getting closer to release, the project has delivered the two 
 
 One as a preview and another as an incubator. Hence the path to stabilization of the features should be more precise.
 
-What does this mean to regular Java developers?
------------------------------------------------
+## What does this mean to regular Java developers?
 
 When these features are production ready, it should not affect regular Java developers much, as these developers may be using libraries for concurrency use cases.
 
@@ -289,15 +274,13 @@ This will increase performance and scalability in most cases based on the benchm
 
 Structured concurrency can help simplify the multi-threading or parallel processing use cases and make them less fragile and more maintainable.
 
-What does this mean to Java library developers?
------------------------------------------------
+## What does this mean to Java library developers?
 
 When these features are production ready, it will be a big deal for libraries and frameworks that use threads or parallelism. Library authors will see huge performance and scalability improvements while simplifying the codebase and making it more maintainable. Most Java projects using thread pools and platform threads will benefit from switching to virtual threads.
 
 Candidates include Java server software like Tomcat, Undertow, and Netty; and web frameworks like Spring and Micronaut. I expect most Java web technologies to migrate to virtual threads from thread pools. Java web technologies and trendy reactive programming libraries like RxJava and Akka could also use structured concurrency effectively. This doesn't mean that virtual threads will be the one solution for all; there will still be use cases and benefits for asynchronous and reactive programming.
 
-Learn more about Java, multi-threading, and Project Loom
---------------------------------------------------------
+## Learn more about Java, multi-threading, and Project Loom
 
 Check out these additional resources to learn more about Java, multi-threading, and Project Loom.
 

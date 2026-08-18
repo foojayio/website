@@ -33,8 +33,7 @@ Probing is hard without a proper way to obtain traces.
 
 The JVM offers us two different mechanisms:
 
-GetStackTrace
--------------
+## GetStackTrace
 
 You could use the official and well defined `GetStackTrace` JVMTI API, which OpenJ9 and every other JVM out there also Implement:
 > 
@@ -49,7 +48,6 @@ GetStackTrace(jvmtiEnv* env,
             jint* count_ptr)
 ```
 
-
 >
 > Get information about the stack of a thread. If `max_frame_count` is less than the depth of the stack, the `max_frame_count` topmost frames are returned, otherwise the entire stack is returned. The topmost frames, those most recently invoked, are at the beginning of the returned buffer.
 > [JVMTI Documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/jvmti.html#GetStackTrace)
@@ -63,7 +61,6 @@ typedef struct {
 } jvmtiFrameInfo;
 ```
 
-
 So what is the problem? This API is safe-point biased. This means that you can only obtain a stack trace using `GetStackTrace` only at certain points in time where the JVM state is well-defined, called safe points. This bias significantly reduces the accuracy of your profiler, as we can only observe a subset of locations in a program using these stack traces. More on this in blog posts like ["Java Safepoint and Async Profiling"](https://seethawenner.medium.com/java-safepoint-and-async-profiling-cdce0818cd29) by Seetha Wenner.
 
 We, therefore, cannot in all earnest use this API, except if we're constrained to official APIs like [VisualVM](https://github.com/oracle/visualvm/blob/e9aa62460fef715760665d636c872ee76d586b56/visualvm/libs.profiler/lib.profiler/native/src-jdk15/Stacks.c#L176), which despite everything, uses it.
@@ -74,13 +71,10 @@ So what are our other options? Writing a custom perf agent, we could obtain the 
 
 He never implemented anything into his async-profiler.
 
-AsyncGetCallTrace
------------------
+## AsyncGetCallTrace
 
 The only other option left is to use `AsyncGetCallTrace`, an API added on the 19th of November 2002 in the JVMTI draft and removed two months later. This API is the asynchronous, non-safepoint-biased ([kind-of](https://jpbempel.github.io/2022/06/22/debug-non-safepoints.html)) version of `GetStackTrace`, called from signal handlers at any point of time:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgct_2-2000x1125.png)
-
-<br />
 
 ```cpp
 void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth, 
@@ -112,15 +106,13 @@ void AsyncGetCallTrace(ASGCT_CallTrace *trace, jint depth,
 //    } ASGCT_CallFrame;
 ```
 
-
 *Consider reading my [blog series on writing a profiler from scratch](https://mostlynerdless.de/blog/tag/writing-a-profiler-from-scratch/) if you want to learn more.*
 
 The [honest-profiler](https://github.com/jvm-profiling-tools/honest-profiler/) was probably the first open-source profiler that used it, starting in early 2014. After this, many other profilers, commercial and open-source, followed, not because it is an ideal API, but because it was the only one available.
 
 Albeit *available* is a strong word, as Sun removed the API from JVMTI, it now lives in a C++ source file without any exported header. The JVM exports the symbol `AsyncGetCallTrace`, because Sun probably used the API in their Sun Studio, which contained a profiler. To use it, one must use dlsym and hope that it is still there: It's an internal API that might disappear in the blink of an eye, although being rather unlikely. Other JVMs are not required to have this API, e.g., OpenJ9 only got this API in [2021](https://github.com/eclipse-openj9/openj9/issues/5654).
 
-History of AsyncGetStackTrace
------------------------------
+## History of AsyncGetStackTrace
 
 So where do I come into this story? I started in the [SapMachine](https://sapmachine.io) team at [SAP](https://sap.com) at the beginning of last year after only [minor academic](https://pp.info.uni-karlsruhe.de/person.php?id=159) success. One of my first tasks was to help my colleague Gunter Haug fix a bug in the PPC64le support of async-profiler, resulting in my first contribution to this project.
 
@@ -130,8 +122,7 @@ I started working on a new API with the working title `AsyncGetCallTrace2`, late
 
 These discussions eventually led to the proposal of `AsyncGetStackTrace` that is currently out in the open as [JEP Candidate 435](https://openjdk.org/jeps/435). waiting for feedback from the JFR and supportability community (and the related teams at Oracle).
 
-AsyncGetStackTrace
-------------------
+## AsyncGetStackTrace
 
 The proposed API is essentially an extended, official, and well-tested version of `AsyncGetCallTrace`:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/01/asgst-2000x1125.png)
@@ -156,7 +147,6 @@ void AsyncGetStackTrace(ASGST_CallTrace *trace, jint depth,
                         void* ucontext, uint32_t options);
 ```
 
-
 It stores the stack frames in the pre-allocated `trace`, up to the specified depth, obtain the start frame from the passed `ucontext`. The only real difference is here that we can configure the stack walking. Currently, the API supports two features which the caller can enable by setting the bits of the `options` argument:
 
 ```cpp
@@ -167,7 +157,6 @@ enum ASGST_Options {
   ASGST_INCLUDE_NON_JAVA_THREADS = 2,
 };
 ```
-
 
 Both options make writing simple profilers which also walk C/C++ frames and threads far more straightforward. The first option allows us to see frames that we could not see before (even with the advanced processing of async-profiler): C/C++ frames between Java frames.
 
@@ -183,7 +172,6 @@ This is quite useful when you work with JNI code which in turn calls Java code. 
   private static boolean checkJavaInner() { return checkNativeLeaf(); }
   private static native boolean checkNativeLeaf();
 ```
-
 
 With the old API you would never observe the `checkCMethod` in a stack trace, even if it would take lots of time to execute. But we disabled the options to mimic the behavior (and number of obtained frames), of `AsyncGetCallTrace`.
 
@@ -202,7 +190,6 @@ typedef struct {
   void* frame_info;               // more information on frames
 } ASGST_CallTrace;
 ```
-
 
 There are two new fields: The kind of trace and the `frame_info` field for additional information on every frame, which could later be added depending on the configuration, without changing the API.
 
@@ -226,7 +213,6 @@ enum ASGST_TRACE_KIND {
 };
 ```
 
-
 We encode the error code as negative numbers in the num_frames field because it keeps the data structures simple and `AsyncGetCallTrace` does it too. Every trace with `num_frames > 0` is valid.
 
 ### Frames
@@ -244,7 +230,6 @@ typedef union {
 } ASGST_CallFrame;
 ```
 
-
 The type here is more fine-grained than just two options:
 
 ```cpp
@@ -258,7 +243,6 @@ enum ASGST_FrameTypeId {
 };
 ```
 
-
 The first three types map to `ASGST_JavaFrame` and others to `ASGST_NonJavaFrame`, as hinted before.
 
 We don't store too much information for non-Java frames not to increase the size of every frame.
@@ -271,7 +255,6 @@ typedef struct {
   void *pc;          // current program counter inside this frame
 } ASGST_NonJavaFrame; // used for FRAME_STUB, FRAME_CPP
 ```
-
 
 We store the compilation level, the bytecode index, and the method id for Java frames, encoding the information on inlining in the type:
 
@@ -287,7 +270,6 @@ typedef struct {
                            //   FRAME_JAVA_INLINED and FRAME_NATIVE
 ```
 
-
 Although the API provides more information, the amount of space required per frame (e.g., 16 bytes on x86) is the same as for the existing `AsyncGetCallTrace` API.
 
 ### Testing
@@ -296,8 +278,7 @@ Although the API provides more information, the amount of space required per fra
 
 The code of the draft implementation contains several of these to ensure that calling the API is safe enough. It will never be entirely safe, as asynchronously walking stacks in a signal handler of a thread while all the other threads are still running is inherently risky. The aim is to reduce the risk to a level where the possibility of anything happening in real-world settings is minuscule.
 
-Conclusion
-----------
+## Conclusion
 
 Working on this JEP, with the help of my team and Jaroslav Bachorik, almost exactly a year now, gave me a glimpse into the inner workings of the OpenJDK.
 

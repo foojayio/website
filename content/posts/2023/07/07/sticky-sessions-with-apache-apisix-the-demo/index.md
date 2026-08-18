@@ -26,8 +26,7 @@ We've described the concept behind [sticky sessions](https://foojay.io/today/sti
 
 However, if necessary, you should replicate the data to other upstreams because this one might go down. In this post, we are going to illustrate it with a demo.
 
-The overall design
-------------------
+## The overall design
 
 Design options are limitless. I'll keep myself to a familiar stack, the JVM. Also, as mentioned in the previous post, one should only implement sticky sessions with session replication.
 
@@ -50,8 +49,7 @@ The design looks like the following:
 
 `app1` and `app2` are two instances of the same app; I didn't want to overcrowd the diagram with redundant data.
 
-The heart of the application
-----------------------------
+## The heart of the application
 
 The heart of the application is a session-scoped bean that wraps a counter, which can only be incremented:
 
@@ -71,7 +69,6 @@ public class Counter implements Serializable {              //1
     }
 }
 ```
-
 
 1. Necessary for Hazelcast serialization to work
 
@@ -96,7 +93,6 @@ public class IndexController {
 }
 ```
 
-
 1. Inject the session-scoped bean in the singleton controller thanks to Spring's magic
 2. When we send a `GET` request to the root, increment the counter value and pass it to the model
 
@@ -109,9 +105,7 @@ Finally, we display the bean's value on the Thymeleaf page:
 <div th:text="${counter}">3</div>
 ```
 
-
-Configuring Spring Session with Hazelcast
------------------------------------------
+## Configuring Spring Session with Hazelcast
 
 Spring Session offers a filter that wraps the original `HttpServletRequest` to override the `getSession()` method. This method returns a specific `Session` implementation backed by the implementation configured with Spring Session, in our case, Hazelcast.
 
@@ -126,7 +120,6 @@ public class SessionApplication {
     ...
 }
 ```
-
 
 Hazelcast requires a specific configuration as well. We can use XML, YAML, or code.  
 
@@ -156,13 +149,11 @@ public Config hazelcastConfig() {
 }
 ```
 
-
 1. Choose a random port to avoid port conflict
 2. Allow Hazelcast to search for other instances and automagically form a cluster. It's going to be necessary when deployed as per our design
 3. Copy-pasted from the Spring Session documentation
 
-Configuring Spring Security
----------------------------
+## Configuring Spring Security
 
 Most Spring Session examples somehow use Spring Security, and though it's not strictly necessary, it makes the design easier. I want to explain why first.
 
@@ -184,15 +175,13 @@ public SecurityFilterChain securityFilterChain(UserDetailsService service, HttpS
 }
 ```
 
-
 1. The default in-memory user details service doesn't allow custom user details classes. I had to provide my own.
 2. Allow everybody to access static resources at "common" locations
 3. All other requests must be authenticated
 4. Allow everybody to access the authentication form
 5. Redirect to the root if successful, which maps the above controller
 
-Putting our design to the test
-------------------------------
+## Putting our design to the test
 
 Beside the counter, I want to display two additional pieces of data: the hostname and the logged-in user.
 
@@ -205,7 +194,6 @@ private String hostname() throws UnknownHostException {
 }
 ```
 
-
 Displaying the logged-in user requires an additional dependency:
 
 ```xml
@@ -214,7 +202,6 @@ Displaying the logged-in user requires an additional dependency:
     <artifactId>thymeleaf-extras-springsecurity6</artifactId>
 </dependency>
 ```
-
 
 On the page, it's straightforward:
 
@@ -225,7 +212,6 @@ On the page, it's straightforward:
 <body>
 <td sec:authentication="principal.label">Me</td>                    <!--2-->
 ```
-
 
 1. Add the `sec` namespace. It's not necessary but may help the IDE to help you
 2. Require the underlying `UserDetail` implementation to have a `getLabel()` method
@@ -244,7 +230,6 @@ routes:
       key: cookie_JSESSIONID
 #END
 ```
-
 
 Here's the design implemented on Docker Compose:
 
@@ -267,7 +252,6 @@ services:
     build: ./webapp
     hostname: webapp2                                                #3
 ```
-
 
 1. Use the previous configuration file
 2. Only expose the API Gateway to the outside world
@@ -296,8 +280,7 @@ The only side-effect is an increased latency because of Apache APISIX timeout. I
 
 When we start `webapp2` again, everything works as expected again.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, I've described a possible setup for sticky sessions with Apache APISIX and replication involving the Spring ecosystem and Hazelcast.
 
@@ -309,7 +292,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 
 * [Spring Session and Spring Security with Hazelcast](https://docs.spring.io/spring-session/reference/guides/java-hazelcast.html)
 * [Spring Session Hazelcast](https://docs.hazelcast.com/tutorials/spring-session-hazelcast)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/sticky-sessions-apache-apisix/2/) on July 2^nd^, 2023*

@@ -30,8 +30,7 @@ In this article, I want to focus on the declarative transaction management angle
 
 But I'm getting ahead of myself!
 
-What is Spring's Method Declarative Transaction Management?
------------------------------------------------------------
+## What is Spring's Method Declarative Transaction Management?
 
 When writing a spring method or class, we can use annotations to declare that a method or a bean (class) is transactional. This annotation lets us tune transactional semantics using attributes. This lets us define behavior such as:
 
@@ -61,7 +60,6 @@ public void myMethod() {
 }
 ```
 
-
 I used the annotation on the method level, but I could have placed it on the class level. The class defines the default and the method can override it.
 
 This allows for extreme flexibility and is great for separating business code from low level JDBC transaction details.
@@ -72,8 +70,7 @@ The key to debugging transactions is the way spring implements this logic. Sprin
 
 Spring routes your invocation through the proxy types which implement all the declarative annotations. As such, a transactional proxy takes care of validating the transaction status and enforcing it.
 
-Debugging a Spring Transaction Management using Lightrun
---------------------------------------------------------
+## Debugging a Spring Transaction Management using Lightrun
 
 **IMPORTANT: I assume you're familiar with Lightrun basics. If not, please read [this](https://docs.lightrun.com/).**
 
@@ -106,15 +103,13 @@ To limit the scope only to `findById` we add the condition:
 method.getName().equals("findById")
 ```
 
-
 Once the method is hit, we can see the details of the transaction in the stack.
 
 If you scroll further in the method, you can see ideal locations to set snapshots in case of an exception in thread, etc. This is a great central point to debug transaction failures.
 
 One of the nice things with snapshots is that they can easily debug concurrent transactions. Their non-blocking nature makes them the ideal tool for that.
 
-TL;DR
------
+## TL;DR
 
 Declarative configuration in Spring makes transactional operations much easier. This significantly simplifies the development of applications and separates the object logic from low level transactional behavior details.
 

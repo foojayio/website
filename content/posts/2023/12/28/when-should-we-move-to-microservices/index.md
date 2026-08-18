@@ -26,10 +26,7 @@ Before we get into these problems, we need to understand what it means to have a
 
 {{< youtube PrFZB9NqZ5E >}}
 
-<br />
-
-Small Monoliths
----------------
+## Small Monoliths
 
 A common misconception is that microservices are simply broken down monoliths. This isn't the case. I've talked to quite a few people who still hold that notion, to be fair they might have a point. This is how AWS defines Microservices:
 > Microservices are an architectural and organizational approach to software development where software is composed of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams.
@@ -120,8 +117,7 @@ Tolerance means that everything will keep working even if many messages get drop
 
 This differs greatly from our historic approach to failure with transactions.
 
-Should We Pick Microservices?
------------------------------
+## Should We Pick Microservices?
 
 Hopefully, you now understand how hard it is to deploy Microservices properly. We need to make some big compromises. This new way isn't necessarily better, in some regards, it is worse. But the proponents of Microservices still have a point, we can gain a lot through Microservices and should focus on those benefits too.
 
@@ -189,8 +185,7 @@ The trade-offs of monolith vs. microservice are illustrated nicely in the follow
 
 Notice that Microservices deliver a benefit in larger projects in fault tolerance and team independence. But they pay a price in cost. They can reduce R\&D spend but they mostly shift it to DevOps so that isn't a major benefit.
 
-Final Word
-----------
+## Final Word
 
 The complexity of Microservices is immense and sometimes ignored by the implementing teams. Developers use Microservices as a cudgel to throw away parts of the system they don't want to maintain, instead of building a sustainable, scalable architecture worthy of replacing a monolith.
 

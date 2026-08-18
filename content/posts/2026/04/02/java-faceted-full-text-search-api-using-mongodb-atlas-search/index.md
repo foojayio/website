@@ -34,7 +34,6 @@ cd atlas-search-coco
 docker compose up java-app
 ```
 
-
 (You'll need [Docker Desktop](https://www.docker.com/products/docker-desktop/){#https://www.docker.com/products/docker-desktop/} installed.)
 
 Then, you can try it out with the little sample UI:
@@ -45,13 +44,11 @@ Then, you can try it out with the little sample UI:
 Or directly use the API: http://localhost:8222/image/search?text=kite\&animal=dog  
 ![](Screenshot-2026-03-12-at-1.39.50-PM.png)
 
-Let's build!
-------------
+## Let's build!
 
 Alright, let's walk through building this solution step by step. By the end, you will have all the tools you need to build your own awesome faceted search APIs. We'll leverage the powerful capabilities of MongoDB Atlas Search combined with the strong data modeling and high performance of Java to build it.
 
-Prerequisites
--------------
+## Prerequisites
 
 You'll need the following on your machine:
 
@@ -94,7 +91,6 @@ When you're modeling data in MongoDB, the primary consideration is how your appl
 /search?vehicle=car&text=red
 ```
 
-
 In the results, we are going to want all the details of the images matching the facets (categories) and the full text (caption) parameters.
 
 To support this intended query pattern, we are going to collapse all of these entities into a single hierarchical document schema, "Image," that makes searching efficient and simple.
@@ -134,7 +130,6 @@ public record Image(
 ) { }
 ```
 
-
 We'll have two collections in our MongoDB:
 
 * Image: Will have documents in the schema above
@@ -148,7 +143,6 @@ public record Category(
 ) { }
 ```
 
-
 Create the two records above in your Java project (feel free to use whichever namespace you like):  
 ![](Screenshot-2026-03-12-at-1.45.48-PM.png)
 
@@ -160,13 +154,11 @@ You can choose whether you'd like to run MongoDB Atlas locally in a Docker conta
 docker run -d --name mongodb-atlas -p 27017:27017 mongodb/mongodb-atlas-local:8.2.6
 ```
 
-
 Local connection string:
 
 ```
 mongodb://localhost:27017/?directConnection=true
 ```
-
 
 Or create yourself a [free MongoDB Atlas cluster](https://www.mongodb.com/docs/atlas/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) in the cloud. (Keep a note of the connection string to the cluster for the next step.)
 
@@ -240,7 +232,6 @@ Leave the name as default, and paste in the index definition:
 }
 ```
 
-
 Click **Create Search Index**. After a moment, you should see the status change to READY, indicating the index is created and ready to search:  
 ![](Screenshot-2026-03-12-at-1.53.37-PM.png)
 
@@ -249,7 +240,6 @@ Here are the index fields, and what their type definition(s) each do: caption
 ```
      "caption": [{"type": "string"}],
 ```
-
 
 This field's type definition is deceptively simple: string.
 
@@ -266,7 +256,6 @@ Using a string type index allows you to perform advanced text searches like fuzz
 ```
      "hasPerson": {"type": "boolean"},
 ```
-
 
 This field is a very simple type of index, essentially dividing the documents into three groups: boolean true, false, and undefined.
 
@@ -286,13 +275,11 @@ This field is a very simple type of index, essentially dividing the documents in
      "vehicle": [{"type": "token"}, {"type": "stringFacet"}]
 ```
 
-
 These fields all have string array values in the collection. For example, in the animal array:
 
 ```
     "animal": ["dog"]
 ```
-
 
 They are indexed with Atlas Search in two different ways: token: Token type indexes are on values which can be used for exact match filtering but cannot be used for advanced text searches. This is perfect for our use-case here because we will be allowing the API to include certain categories as filters.
 
@@ -359,7 +346,6 @@ By combining these fields into a single index we can (all at once!) perform an a
  }
 ]
 ```
-
 
 Example result:
 
@@ -433,7 +419,6 @@ Example result:
 }
 ```
 
-
 ![](Screenshot-2026-03-12-at-1.56.21-PM.png)
 
 3. Java service implementation
@@ -468,7 +453,6 @@ First, add the dependencies for MongoDB, a JSON serializer (Jackson), and a simp
    </dependency>
 </dependencies>
 ```
-
 
 The JSON serializer will be used to return our data from the API, and the MongoDB driver will use the SL4J logger to write its logs to the console (or wherever you configure it to write). Then, create your EntryPoint class:
 
@@ -552,7 +536,6 @@ public class Main {
 }
 ```
 
-
 Run the application and you should then be able to load the URLs in the browser: [](http://localhost:8080/categories)<http://localhost:8080/categories>  
 ![](Screenshot-2026-03-12-at-1.57.43-PM.png)
 
@@ -568,7 +551,6 @@ There are a few things to notice about the main class implementation: The Mongo 
        MongoCollection<Category> categoryCollection = database.getCollection("category", Category.class);
        MongoCollection<Image> imageCollection = database.getCollection("image", Image.class);
 ```
-
 
 The Category and Image types are the records we created earlier, which represent the COCO domain model for our project. We also create an ObjectMapper which is the Jackson JSON serializer we'll use to write JSON to the client. Next, we used Java's built-in HTTP server to create an API server, query the database, and return JSON:
 
@@ -587,7 +569,6 @@ The Category and Image types are the records we created earlier, which represent
 …
        httpServer.start();
 ```
-
 
 Of course, we could use a framework like Springboot here, but to keep the focus on MongoDB Atlas Search, we'll just use this little basic HTTP server implementation for our project. One of my favourite things about Java's client for MongoDB is that we can easily take advantage of the strength of the type system. Our domain model as defined by the immutable Category record is strongly enforced here in all logic interacting with the database. Whilst our schema in MongoDB is free to evolve, the place we are controlling that evolution is here in our Java code. Any changes to the model will be deliberate and enforced at compile time and runtime in our service. Typically, our client---let's say a browser UI---would also be loosely typed JSON (not enforcing the data model). For me, the service is the right place for such control to be enforced, so our schema evolves with our API. Next, we have our placeholder for the image search:
 
@@ -619,7 +600,6 @@ httpServer.createContext("/images", exchange -> {
    exchange.close();
 });
 ```
-
 
 Here, we are adding a nice safe ingestion of the query params into a map, and for now, just return the first image. Note that the map is from String to List, which is important because our query params may include 1-n instances of the same parameter. We'll use that in the next step to filter on multiple values in the search.
 
@@ -653,7 +633,6 @@ public record ImageSearchResult(List<Image> docs, List<ImageMeta> meta) {
    public record ImageMetaFacetBucket (String _id, long count) { }
 }
 ```
-
 
 Save this as a new record in your project alongside Image and Category. This record represents the result document which will be returned by our aggregate search query. The first field, docs, is a single page of image documents, and the second field, meta, contains the metadata for all the documents which match the search criteria. The metadata shows the total count of all documents that match, as well as the counts per facet. In our case, we have facets for each category of object which may be in the image. As an example, let's say we had searched for "dog" in the caption of an image. We might expect to see a high value on the animal-\>dog facet count, but we'll see a lot of other facets with counts too. For example, you might notice a count of 68 on the sports-\>surfboard facet.  
 ![](Screenshot-2026-03-12-at-2.01.11-PM.png)
@@ -747,7 +726,6 @@ private static SearchOperator equals(String fieldName, Object value) {
 }
 ```
 
-
 Next, let's call the new function from our /image service handler. Replace the TODO you left earlier:
 
 ```
@@ -755,7 +733,6 @@ Next, let's call the new function from our /image service handler. Replace the T
 List<Image> images = imageCollection.find().limit(1).into(new ArrayList<>());
 //----------------
 ```
-
 
 With:
 
@@ -777,7 +754,6 @@ ImageSearchResult images = search(imageCollection,
        params.get("vehicle")
 );
 ```
-
 
 This will take the query parameters passed to the API and call our search function. Let's give it a spin, and then we'll come back and break down the search method piece by piece. You can now start to see how the facets work. Let's search for the term "riding" in our image caption, and further filter down to only images having a horse and a suitcase: [](http://localhost:8080/images?caption=riding&accessory=suitcase&animal=horse)[http://localhost:8080/images?caption=riding\&accessory=suitcase\&animal=horse](http://localhost:8080/images?caption=riding&accessory=suitcase&animal=horse)  
 ![](Screenshot-2026-03-12-at-2.02.28-PM.png)
@@ -805,7 +781,6 @@ Amazing. 🙂 If you had any trouble following the steps, [refer to the tutorial
 ]
 ```
 
-
 You can see the composition of each stage in the Java code:
 
 ### Paging
@@ -817,7 +792,6 @@ You can see the composition of each stage in the Java code:
        skip = page * pageSize;
    }
 ```
-
 
 First up, we calculate the number of documents to skip for paging, and set the page size to 5. These are passed to the skip and limit stages.
 
@@ -858,7 +832,6 @@ In this section of the search method, we put together a List which will be the f
    addConditional.accept("vehicle", vehicle);
 ```
 
-
 We use a little helper method, addConditional, which checks if the parameter was null, and if not, adds each value with an equals clause for the categories. Another small helper method, equals(), constructs the Document for our equals clause.
 
 The first clause uses the text search operator. There is a huge depth to this operator, which we won't cover in full here, but you can customize this to support:
@@ -892,7 +865,6 @@ Then, we put together a list of the facets we want to return:
    );
 ```
 
-
 Here, we are saying that we want all of the fields we've indexed with stringFacet in our Atlas Search index, allowing them to be counted. We're also specifying 10 as the maximum number of buckets to count in. This means we'll get the top 10 results per super category, with their counts. For example, let's say there were 15 animals which had a count for a search on the caption "grass." In that case, we would receive only the top 10 animal counts---the five least significant would be omitted.
 
 ### Search
@@ -921,16 +893,13 @@ ImageSearchResult imageSearchResult = imageCollection.aggregate(aggregateStages,
 return imageSearchResult;
 ```
 
-
 The most interesting part, and perhaps also the most confusing part, is the use of the final aggregate stage, facet. This is a different use of the term facet, wherein we are creating two facets for our aggregate result. This is a little piece of Atlas Search magic that allows us to return the paged documents of the search, alongside the meta data for the facets. Best not to think about it too much. Grit your teeth and put it in there. If you really must know, you can find the documentation for using the facet collector with the [$$SEARCH_META aggregation framework variable](https://www.mongodb.com/docs/atlas/atlas-search/facet/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim#search_meta-aggregation-variable).
 
-(Optional) Refactoring to a better structure
---------------------------------------------
+## (Optional) Refactoring to a better structure
 
 If you'd like to, you can check out the [same code refactored](https://github.com/luketn/atlas-search-coco) out into a few separate classes in a better overall structure which could be the foundation of a real API server. This project also has the code used to download and transform the COCO dataset into our domain model and create the index. There are some goodies if you go exploring around unit testing for Atlas Search using the incredible Test Containers project.
 
-Wrapping up
------------
+## Wrapping up
 
 So there you have it. The beginnings of an awesome service using Atlas Search to perform advanced text search, filtering, and facet counting! The use of the COCO dataset here shows an interesting example of how data generated using machine learning can be combined with more traditional lexical text searching. This provides repeatable, consistent, and intuitive search results to consumers of your API. Faceting allows us to create filterable result sets with counts on each filterable category returned. This supports advanced user interfaces in a highly performant single search query. Using the Java language and the Java Virtual Machine (JVM) as the runtime provides a highly consistent, strongly typed, and reliable platform for building scalable APIs. The language features in particular pair well with MongoDB. Java is a great language to enforce your schema with and evolve it over time. This combination of compile time and runtime checks for consistency in the code schema, along with flexible changes in the MongoDB database schema as you evolve it over time, is a great match.   
 

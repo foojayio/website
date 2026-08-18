@@ -112,8 +112,6 @@ The full project is described [in this blog post](https://webtechie.be/post/2020
 If you need more JavaFX-inspiration to build beautiful user interfaces, check out the many JavaFX tools and frameworks listed on [openjfx.io](https://openjfx.io/index.html#fh5co-work). There is even a full game engine based on Java and JavaFX in that list: [FXGL](https://github.com/AlmasB/FXGL).
 ![](javafx-community.png)
 
-
-
 ***Do you have a project on Raspberry Pi using Java (and JavaFX) you want to share?***
 
 ***Let me know (javaonraspberrypi at webtechie.be) as it would be big fun to be able to publish this kind of list on a regular basis!***

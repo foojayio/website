@@ -30,8 +30,7 @@ This is the second article of the series *How Gradle Works*.
 
 In this article, we'll explain what happens inside the `Gradle Daemon JVM`.
 
-Why Do We Need Gradle Daemon?
------------------------------
+## Why Do We Need Gradle Daemon?
 
 In [the last article](https://foojay.io/today/how-gradle-works-startup/), we mentioned that Gradle starts a `Gradle Daemon JVM` ("the daemon") to run the build.
 
@@ -42,8 +41,7 @@ The Gradle daemon was introduced in Gradle 3.0 and matured over the years.
 
 It's enabled by default, and we don't recommend disabling it under any circumstances.
 
-What Happens in the Daemon?
----------------------------
+## What Happens in the Daemon?
 
 After `Gradle Client JVM` ("the client") connects to a compatible idle daemon, it sends the necessary build information (command line arguments, project directory, env variables, etc.) to the daemon.
 
@@ -91,7 +89,6 @@ repositories {
 }
 ```
 
-
 Don't worry if you don't fully understand build script execution at this stage. We'll explain the details of build script execution in the next blog of this series.
 
 For now, we can simply understand Gradle as [an interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)) that executes the build script line by line, top to bottom.
@@ -111,7 +108,6 @@ tasks.register("hello") {
     }
 }
 ```
-
 
 After the build script execution finishes, the build data structures are configured with the necessary data for the build.
 
@@ -140,7 +136,6 @@ class Test {
 }
 ```
 
-
 When we say "a task is executed," we mean "the code in its actions is executed in the daemon JVM."
 
 The task actions are always executed in the daemon JVM, but the actions can decide to fork some new JVMs and run some code in the forked JVMs.
@@ -159,8 +154,7 @@ After that, the `Gradle Client JVM` disconnects from the daemon and exits.
 
 The daemon is now ready for the next build invocation.
 
-What's Next
------------
+## What's Next
 
 In the next article in the series, we'll explain what happens under the hood of build script execution.
 

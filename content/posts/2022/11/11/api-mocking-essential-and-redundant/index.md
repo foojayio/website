@@ -37,8 +37,7 @@ My answer was:
 
 It would seem we are both saying the exact opposite but in fact that isn't necessarily the case. I get what Maxi is saying here and his point is very valid. Mocks are problematic.
 
-The Problems with Mocks
------------------------
+## The Problems with Mocks
 
 Mocks hide external dependencies on the real API and as a result they don't test them.
 
@@ -52,7 +51,6 @@ public int countUserCities() {
 }
 ```
 
-
 We can mock the db function executeInt since the returned result will be bad.
 
 But this will break if we change the original API call to something like this:
@@ -63,15 +61,13 @@ public int countUserCities() {
 }
 ```
 
-
 This covers nothing. A far better approach is to add fake data to a temporary database which is exceedingly easy to do thanks to projects such as [Testcontainers](https://www.testcontainers.org/).
 
 We can spin up containers dynamically and "properly" check the method with a database similar to the one we have in production. This performs the proper check, it will fail for bugs like a typo in the query and doesn't rely on internal implementation.
 
 Unfortunately, this approach is problematic. Loading a fresh database takes time. Even with containers. Doing it for every suite can become a problem as the scope of testing grows. That's why we separate the unit and integration tests. Performance matters.
 
-The Performance Problem
------------------------
+## The Performance Problem
 
 You know what's the worst type of testing?
 
@@ -87,8 +83,7 @@ Unfortunately, there's no other way I'm aware of at this time. I tried to think 
 
 Because of this I think it's important to check coverage of integration tests only. The unit test coverage is interesting but not as crucial as the integration coverage. I'm not in favor of 100% coverage. But it is an important statistic to monitor.
 
-What Should We Mock?
---------------------
+## What Should We Mock?
 
 I gave the database example but I'm not in favor of mocking databases. For Java I typically use a light in-memory database which works well with most cases. Fakers accept CSV formats to fill up the database and can even come up with their own fake data. This is better than mocking and lets us get close to integration test quality with unit test performance.
 
@@ -96,8 +91,7 @@ However, we can't constantly connect to Web Service dependencies without mocking
 
 Over-mocking is the process of applying mocks too liberally to too many API calls. A developer might engage in that in order to increase the coveted coverage metric. This further strengthens my claim that coverage shouldn't apply to unit tests as it might lead to such a situation. Behavior shouldn't be mocked for most local resources accessed by a framework.
 
-Finally
--------
+## Finally
 
 I love mocking. It made the development of some features possible. Without it I couldn't properly check plugins, APIs, servers, etc. However, like all good sweets. Too much of a "good thing" can corrupt our code. It's also a small part of a balanced meal (stretching the metaphors but it works). We can just build functional tests and call it the day, we can't just rely on mocking. On the contrary, they aren't the "real" badge of quality we seek.
 

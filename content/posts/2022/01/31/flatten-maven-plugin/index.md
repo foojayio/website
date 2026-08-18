@@ -61,7 +61,6 @@ Usage is very straightforward. Just add the following snippet in the `plugins` s
 </plugin>
 ```
 
-
 Now, if you execute the Maven `process-resources` phase, the plugin will create a shortened version of the POM, named `.flattened-pom.xml`. Compared to the initial POM, the flattened POM has only three sections in addition to the coordinates: `licenses`, `dependencies`, and `repositories`. Additionally, Maven has resolved all variables. If you run the `install` phase and then check your local Maven repository, you'll notice the POM matches the flattened POM, not the main one. If you want to generate the flattened POM but not replace the main one, use `-DupdatePomFile=false`.
 
 By default, the plugin keeps only the `licenses`, `dependencies`, and `repositories` sections. You can configure which sections you keep and don't via the POM. For example, the plugin removes `name`, but you can keep it easily if needed. Just add the relevant configuration:
@@ -73,7 +72,6 @@ By default, the plugin keeps only the `licenses`, `dependencies`, and `repositor
     </pomElements>
 </configuration>
 ```
-
 
 The above method gives you the most flexibility. However, developers of the plugins have already thought about which configuration bundles make sense and offer them out-of-the-box. Here's an excerpt from the documentation that describes them:
 
@@ -87,8 +85,7 @@ The above method gives you the most flexibility. However, developers of the plug
 | `fatjar`                  | Removes all `FlattenDescriptor` optional POM elements and all `dependencies`.                                                                                                                                                                                                                                                                  |
 | `resolveCiFriendliesOnly` | Only resolves variables revision, sha1 and changelist. Keeps everything else. See Maven CI Friendly for further details.                                                                                                                                                                                                                       |
 
-Conclusion
-----------
+## Conclusion
 
 The Maven Flatten plugin separates between build and consumer POMs. You don't need to wait until the release of Maven 5. It's a freebie, so if you're a library provider, you should probably consider using it.
 

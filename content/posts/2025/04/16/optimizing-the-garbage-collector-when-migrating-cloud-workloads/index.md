@@ -31,8 +31,7 @@ Thanks to Java's "write once, run anywhere" promise, your applications generally
 
 To achieve optimal flight performance, the pilot needs to adjust or recalibrate certain controls, ensuring everything goes smoothly. Without tuning, you'll still fly, but you won't fully benefit from the improved handling and efficiency of the upgraded aircraft.
 
-Why GC Tuning Matters on Arm
-----------------------------
+## Why GC Tuning Matters on Arm
 
 One of the most important controls in your metaphorical performance cockpit is Garbage Collection (GC). The Arm Neoverse architecture---the backbone of many Arm-based cloud instances---is known for its scalable core counts and can leverage those cores to deliver strong GC performance, though it often requires some fine-tuning to reach peak efficiency.
 
@@ -72,8 +71,7 @@ Your Java application's garbage collection behavior may not always match your ex
 
 To guide your tuning, make use of diagnostic tools: enable GC logging with `-Xlog:gc` or use Java Flight Recorder (JFR) to monitor GC activity and make informed adjustments.
 
-Developer Education for the Java Community
-------------------------------------------
+## Developer Education for the Java Community
 
 Of course, theory only goes so far---real-world experience is where the learning truly happens. That's why I've put together a simple tutorial to help developers experiment with various GC tuning options using a basic Java example. You can [follow along here for a hands-on walkthrough](https://learn.arm.com/learning-paths/servers-and-cloud-computing/java-gc-tuning/).
 

@@ -37,8 +37,7 @@ Apache Pulsar is the right choice to meet today's developer criteria across two 
 
 **SEE ALSO: [Moving to cloud-native applications and data with Kubernetes and Apache Cassandra](https://jaxenter.com/cloud-native-cassandra-172909.html)**
 
-Microservices and Pulsar
-------------------------
+## Microservices and Pulsar
 
 When you put together applications based on a microservices model, you decouple all the components that make up the service and have them communicate with each other through messages conforming to well-defined APIs. Each component will then create and manage its own data based on the activities and requirements it supports.
 
@@ -56,8 +55,7 @@ Multi-tenancy is also growing in importance for single organizations, where diff
 
 Adding multi-tenancy support to infrastructure software after the fact is incredibly hard. Kafka doesn't supply this capability; it was designed to run as a single user service, rather than to be multi-tenant. Pulsar, on the other hand, was developed to support multi-tenant deployments from the start and as part of the open source version. The alternative is to stand up a separate streaming deployment for each and every use case, which can quickly grow much more expensive as well as more difficult to manage consistently.
 
-How Pulsar fits into the open source mindset
---------------------------------------------
+## How Pulsar fits into the open source mindset
 
 Software developers today prefer to work with open source. Open source makes it easier for developers to look at their components and use the right ones for their projects. Using a modular, flexible, open architecture not only enables the right mix of best-of-breed tools as the business -- and the technology -- evolves; it also simplifies the ability to scale.
 
@@ -71,8 +69,7 @@ Pulsar also fits into a broader approach to open source infrastructure that deve
 
 **SEE ALSO: [Five Data Models for IoT: Managing the Latest IoT Events Based on a State in Apache Cassandra](https://jaxenter.com/apache-cassandra-iot-174970.html)**
 
-Pulsar's role
--------------
+## Pulsar's role
 
 Companies want to support their customers, and today's customers expect their applications to deliver results instantly. Companies that put the right infrastructure in place to enable that immediacy will unlock their development teams' innovation and grow their businesses.
 

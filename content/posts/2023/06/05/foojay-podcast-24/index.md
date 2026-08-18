@@ -33,8 +33,7 @@ So there's a lot we can talk about to learn more about communities and conferenc
 
 {{< youtube NU6oRvx7EkU >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,8 +41,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests**
-----------
+## **Guests**
 
 * Olivier Hubaut, BruJUG
   * [https://www.linkedin.com/in/olivierhubaut/](https://www.linkedin.com/in/olivierhubaut)
@@ -56,16 +54,14 @@ You can listen and subscribe to the Foojay Podcast on:
   * <https://twitter.com/TCoolsIT>
   * <https://mastodon.social/@TCoolsIT>
 
-**Links**
----------
+## **Links**
 
 * <https://www.meetup.com/belgian-java-user-group/>
 * <https://www.meetup.com/BruJUG/>
 * <https://devoxx.be/>
 * [https://even](https://events.voxxeddays.com/)[ts.voxxeddays.com/](https://events.voxxeddays.com/)
 
-**Content**
------------
+## **Content**
 
 * 00'00 Introduction of the topic and guests
 * 02'19 History of BeJUG and the start of JavaPolis (Devoxx)

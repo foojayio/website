@@ -59,7 +59,6 @@ cd wirequery
 docker-compose up
 ```
 
-
 Open a browser and log in at `localhost:8090` using `admin` / `admin`.
 
 Next, head over to Applications and create two of them:
@@ -119,8 +118,7 @@ In many cases, these screens should provide you with all the information you nee
 
 Now that we've seen how to set up a demo environment, let's take a closer look into how the demo applications were set up to communicate with WireQuery.
 
-Backend
--------
+## Backend
 
 In the `application.yml`, a few properties were added, such as the Api Key, the name of the application and the location of the WireQuery server. Similarly, the following dependencies were added to the `build.gradle.kts` file that are relevant for using WireQuery:
 
@@ -128,7 +126,6 @@ In the `application.yml`, a few properties were added, such as the Api Key, the 
 implementation("com.wirequery:wirequery-spring-boot-3-starter:${project.version}")
 implementation("io.micrometer:micrometer-tracing-bridge-brave")
 ```
-
 
 The former dependency is the WireQuery Spring Boot Starter and the latter is used for making sure that each request is traced, which is required for using WireQuery effectively.
 
@@ -152,9 +149,7 @@ class WireQueryConfig {
 }
 ```
 
-
-Frontend
---------
+## Frontend
 
 On the frontend, the following dependencies were added:
 
@@ -165,13 +160,11 @@ On the frontend, the following dependencies were added:
 "rrweb-snapshot": "^2.0.0-alpha.11",
 ```
 
-
 The recorder is initiatialized using the following code:
 
 ```javascript
 const recorder = new RecorderClass(<wireQueryBackendPath>, <templateId>, '<apiKey>')
 ```
-
 
 When the "Start Recording" button is clicked, the following logic is executed:
 
@@ -179,13 +172,11 @@ When the "Start Recording" button is clicked, the following logic is executed:
 recorder.startRecording({ accountId: '123' })
 ```
 
-
 And when the recording ends, the following logic is executed:
 
 ```javascript
 recorder.stopRecording()
 ```
-
 
 In this article, we covered the main use case of WireQuery: debugging user-reported incidents in distributed systems. However, there is a lot more to cover.
 

@@ -17,8 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Overview
---------
+## Overview
 
 **Durable Execution** is a way of running code so that its progress survives failure. A normal program keeps its state in memory: if the process crashes, the machine reboots, or a network call times out halfway through a multi-step operation, that state is gone and the work is left half-done.
 
@@ -26,8 +25,7 @@ Temporal, the Durable Execution platform, persists every step of a process to it
 
 That makes it possible to write long-running, multi-step processes (ones that wait days for a Timer, call flaky external services, or must never run a step twice) as ordinary, linear code, while the platform guarantees they complete reliably and exactly once.
 
-What makes a process a good candidate for durability?
------------------------------------------------------
+## What makes a process a good candidate for durability?
 
 But what makes a process a good candidate for durability? The processes that benefit most are the ones that are:
 
@@ -41,8 +39,7 @@ A plain, single-step database write that either commits or doesn't gets nothing 
 
 The interesting question is where a real application hides processes of the first three kinds.
 
-Spring PetClinic as an Exploratory Device
------------------------------------------
+## Spring PetClinic as an Exploratory Device
 
 To answer it concretely, let's take the canonical [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) sample application and interrogate its source code.
 
@@ -60,13 +57,11 @@ The result is a single and very clear recommendation in the context of the Sprin
 
 The other candidates are real, but they are either lower-stakes (owner onboarding), require inventing new capabilities (billing / payment), or add distributed-system complexity (external registries) before the core value is demonstrated. Visit booking is the shortest path to seeing durability earn its keep.
 
-Step 1 --- Download the Spring PetClinic source
------------------------------------------------
+## Step 1 --- Download the Spring PetClinic source
 
 The first step of this project is to download the official [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) sample application.
 
-Step 2 --- Analyze the application for durability candidates
-------------------------------------------------------------
+## Step 2 --- Analyze the application for durability candidates
 
 Pointing Claude Code (or a similar AI) at the source of an application you already have and asking it where a technology you're interested in --- adopting, integrating, or simply learning about --- would fit is a natural first step.
 
@@ -157,8 +152,7 @@ There are no external calls, queues, timers, background jobs, or multi-step orch
 
 Wiring uses `temporal-spring-boot-starter`: keep `@WorkflowInterface` / `@ActivityInterface` on interfaces, add `@WorkflowImpl` / `@ActivityImpl` on implementations, and inject the auto-configured `WorkflowClient` bean into `VisitController` to start the booking workflow after the save.
 
-Step 3 --- Conclusions
-----------------------
+## Step 3 --- Conclusions
 
 Sections 2a and 2b reach the **same conclusions** --- identical candidates, identical ranking, and the same #1 pick (visit booking + reminder). They differ only in framing and sourcing:
 

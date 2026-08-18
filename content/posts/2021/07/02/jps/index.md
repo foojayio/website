@@ -39,7 +39,6 @@ options:    This represents the jps command-line options.
 pid:        The process ID for which the information specified by the options is to be printed.
 ```
 
-
 #### Java program we will be debugging in this post
 
 Following is the sample class we are going to debug and try to understand the different features available.
@@ -56,7 +55,6 @@ public class Test
 }
 ```
 
-
 For all our examples we will be using Java 17, as of writing this post it is built using [JDK master branch](https://github.com/openjdk/jdk/). [This post](https://jfeatures.com/blog/OpenJDK_Contribution) explains how to build JDK from the source.
 
 ```
@@ -66,13 +64,11 @@ OpenJDK Runtime Environment (build 17-internal+0-adhoc.vipin.jdk)
 OpenJDK 64-Bit Server VM (build 17-internal+0-adhoc.vipin.jdk, mixed mode)
 ```
 
-
 We are running the Java process using the following command. For the rest of this article we will use jps on this process.
 
 ```
 java -XX:ConcGCThreads=6 -Xmx256m -Xms8m -Xss256k Test argument1 argument2
 ```
-
 
 #### Print Java process ids
 
@@ -81,7 +77,6 @@ Following command shows process ids.
 ```
 jps -q
 ```
-
 
 Output:
 
@@ -93,7 +88,6 @@ Output:
 10366
 ```
 
-
 #### Print process id along with the class name
 
 This is the command to list Java processes with main class names, it is same as command `jps -V`.
@@ -101,7 +95,6 @@ This is the command to list Java processes with main class names, it is same as 
 ```
 jps
 ```
-
 
 Output:
 
@@ -113,7 +106,6 @@ Output:
 10366 Test
 ```
 
-
 #### Print Java process ids along with full package name
 
 `jps -l` displays the full package name for the application's main class or the full pathname to the application's JAR file.
@@ -123,7 +115,6 @@ command:
 ```
 jps -l
 ```
-
 
 Output:
 
@@ -135,7 +126,6 @@ Output:
 10366 Test
 ```
 
-
 #### Print process ids along with class name and arguments passed to the main method.
 
 In the below, running with command `java Test argument1 argument2`, `jps -m` displays the arguments passed to the main method:
@@ -143,7 +133,6 @@ In the below, running with command `java Test argument1 argument2`, `jps -m` dis
 ```
 jps -m
 ```
-
 
 Output:
 
@@ -155,7 +144,6 @@ Output:
 10366 Test argument1 argument2
 ```
 
-
 #### Print JVM arguments passed to Java process
 
 In the below, running with command `java -XX:ConcGCThreads=6 -Xmx256m -Xms8m -Xss256k Test`, `jps -v` displays the arguments passed to the JVM.
@@ -163,7 +151,6 @@ In the below, running with command `java -XX:ConcGCThreads=6 -Xmx256m -Xms8m -Xs
 ```
 jps -v
 ```
-
 
 Output:
 
@@ -174,7 +161,6 @@ Output:
 7470 Launcher -Xmx700m -Djava.awt.headless=true -Djdt.compiler.useSingleThread=true -Dpreload.project.path=/home/vipin/githubprojects/jdk -Dpreload.config.path=/home/vipin/.config/JetBrains/IdeaIC2020.3/options -Dcompile.parallel=false -Drebuild.on.dependency.change=true -Dio.netty.initialSeedUniquifier=4046065713679813272 -Dfile.encoding=UTF-8 -Duser.language=en -Duser.country=IN -Didea.paths.selector=IdeaIC2020.3 -Didea.home.path=/home/vipin/.local/share/JetBrains/Toolbox/apps/IDEA-C/ch-0/203.7148.57 -Didea.config.path=/home/vipin/.config/JetBrains/IdeaIC2020.3 -Didea.plugins.path=/home/vipin/.local/share/JetBrains/IdeaIC2020.3 -Djps.log.dir=/home/vipin/.cache/JetBrains/IdeaIC2020.3/log/build-log -Djps.fallback.jdk.home=/home/vipin/.local/share/JetBrains/Toolbox/apps/IDEA-C/ch-0/203.7148.57/jbr -Djps.fallback.jdk.version=11.0.9.1 -Dio.netty.noUnsafe=true -Djava.io.tmpdir=/home/vipin/.cache/JetBrains/IdeaIC2020.3/compile-server/jdk_5c2ba8e3/_temp_ -Djps.backward.ref.index.builder=true -Dkotlin.incremental.compilation=true
 10366 Test -XX:ConcGCThreads=6 -Xmx256m -Xms8m -Xss256k
 ```
-
 
 #### `jcmd` to list Java processes
 

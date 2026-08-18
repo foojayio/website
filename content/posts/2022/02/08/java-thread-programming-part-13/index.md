@@ -57,7 +57,6 @@ public class Experiment {
 }
 ```
 
-
 In the above ThreadPool, the minimum threads count is 5, which is when we would create the Pool, 5 threads will be created immediately, and they will be kept around, waiting for tasks, even if they are idle. If we submit a task, these existing threads will pick it up.
 
 The ThreadPoolExecutor has multiple constructors and the Executors factory class uses the combination of these constructors and creates ThreadPool for us and makes our life a bit easy.
@@ -66,8 +65,7 @@ However, the question still remains: what would be the minimum and the maximum n
 
 Let's discuss this a bit further.
 
-**Setting Up the Maximum Number**
----------------------------------
+## **Setting Up the Maximum Number**
 
 So the first question would be, what would be the maximum number? Well, the answer isn't straightforward. It depends on the nature of the workload we are putting in and the hardware the application is running. It also depends on how often the individual task will block.
 
@@ -105,11 +103,9 @@ N = 8 * ( 1 + 100/20)
   = 48
 ```
 
-
 However, this is an oversimplification; adequate testing is always critical to figure out the number.
 
-Setting Up the Minimum Number
------------------------------
+## Setting Up the Minimum Number
 
 Once the maximum number of threads in the ThreadPool has been determined, we can think about the minimum. Honestly, it doesn't even matter; in most cases, we will put the same number as the maximum number.
 

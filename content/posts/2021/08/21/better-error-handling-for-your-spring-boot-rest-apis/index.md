@@ -55,7 +55,6 @@ This is for example what is returned for a validation error on a `@RestControlle
 }
 ```
 
-
 Another example is when an `ObjectOptimisticLockingFailureException` happens:
 
 ```json
@@ -67,9 +66,7 @@ Another example is when an `ObjectOptimisticLockingFailureException` happens:
 }
 ```
 
-
-Custom Application Exceptions
------------------------------
+## Custom Application Exceptions
 
 For the Exception classes that you create in your own application, the library will generate an error `code` using the name of the Exception class. For instance, if you have `UserNotFoundException`, then a `USER_NOT_FOUND` error code will be generated.
 
@@ -84,7 +81,6 @@ public class UserNotFoundException extends RuntimeException {
 }
 ```
 
-
 The following JSON would be returned:
 
 ```json
@@ -93,7 +89,6 @@ The following JSON would be returned:
   "message": "Could not find user with id 123"
 }
 ```
-
 
 The library also honors the `@ResponseStatus` annotation to determine the HTTP response code that is used.
 
@@ -111,7 +106,6 @@ Using the `error.handling.codes` key and the full qualified name of the exceptio
 error.handling.codes.com.company.app.user.UserNotFoundException=COULD_NOT_FIND_USER
 ```
 
-
 Applying this will change the response body to something like this:
 
 ```json
@@ -120,7 +114,6 @@ Applying this will change the response body to something like this:
   "message": "Could not find user with id 123"
 }
 ```
-
 
 If you don't own the Exception type, this might be the only way to influence the error code. If you *do* own the Exception type, then using the `@ResponseErrorCode` annotation is probably easier.
 
@@ -140,7 +133,6 @@ public class UserNotFoundException extends RuntimeException {
 }
 ```
 
-
 Will generate the following response:
 
 ```json
@@ -149,7 +141,6 @@ Will generate the following response:
   "message": "Could not find user with id 123"
 }
 ```
-
 
 ### Additional fields in response
 
@@ -175,7 +166,6 @@ public class UserNotFoundException extends RuntimeException {
 }
 ```
 
-
 Will generate the following response:
 
 ```json
@@ -186,17 +176,14 @@ Will generate the following response:
 }
 ```
 
-
 Note the extra `userId` field in the response.
 
-Testing
--------
+## Testing
 
 One of the advantages of using the library is also the testing support. The exact same error responses are returned when using the actual application, or when using a full integration test with `@SpringBootTest`, or using a [web test slice](https://rieckpil.de/spring-boot-test-slices-overview-and-usage/) with `@WebMvcTest`.
 
 This is [not the case in Spring Boot by default](https://github.com/spring-projects/spring-boot/issues/7321). When using MockMvc, you don't get the error handling. Using Error Handling Spring Boot Starter, you can test the error handling with MockMvc, no need to start a complete `@SpringBootTest`.
 
-Conclusion
-----------
+## Conclusion
 
 The [Error Handling Spring Boot Starter](https://github.com/wimdeblauwe/error-handling-spring-boot-starter) can really simplify correct and consistent implementation of errors in your REST API. Check out [the documentation](https://wimdeblauwe.github.io/error-handling-spring-boot-starter) for more detailed information on all the things that are possible.

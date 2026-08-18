@@ -38,7 +38,3 @@ There was also an ongoing Java survey, more about that later when the Java surve
 **And the winner is, plus he has already been notified, [Jan Brekelmans](https://www.linkedin.com/in/jan-brekelmans/), senior consultant at [SynTouch in Eindhoven](https://www.syntouch.nl/)!**
 
 It was a great day, with a lot of reconnecting to new and existing (not old!) friends, a solid basis for more Foojay.io booths at conferences, just like this and last year at JFall, with many thanks to NLJUG, the organizer, and especially Richelle Bussenius and Sander Aarts, both from [Reshift](https://www.reshift.nl/), for the fantastic support at the booth.
-
-<br />
-
-<br />

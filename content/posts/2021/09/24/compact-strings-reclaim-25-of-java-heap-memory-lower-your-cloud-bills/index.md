@@ -37,7 +37,6 @@ The total size of a String
 = 22 bytes
 ```
 
-
 However, most Western locales nowadays need only 8 bits byte array to encode them. That's why Java 11 (see [JEP 254](https://openjdk.java.net/jeps/254)) introduces the new compact Strings that encode a string with an 8-bit byte array instead of a char array. Unless they explicitly need 16-bit characters. These strings are known as compact strings. Hence, the size of an average string in Java 11 is roughly half the size of the same in Java 8.
 
 On average, 50% of a typical Java heap may be consumed by String objects. This will vary from application to application, but on average, the heap requirement for such a program running with Java 11 is only 75% of that same program running in Java 8.

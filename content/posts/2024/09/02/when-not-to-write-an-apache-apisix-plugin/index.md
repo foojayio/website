@@ -26,8 +26,7 @@ One of the key features of Apache APISIX is its flexibility. If a feature is mis
 
 In this article, I aim to provide practical alternatives to writing a custom plugin, offering solutions you can quickly implement in your projects.
 
-Cons of writing a plugin
-------------------------
+## Cons of writing a plugin
 
 Before describing alternatives, let me explain the issues of writing a plugin.
 
@@ -42,7 +41,6 @@ apisix:
   extra_lua_path: /opt/?.lua
 ```
 
-
 Moreover, some plugins may require additional configuration. For example, in my previous version of [Evolving your APIs](https://www.youtube.com/watch?v=wNg__YYiybo&t=1035s), I set a custom nginx snippet to add a Lua shared dictionary to use it in the code's plugin:
 
 ```yaml
@@ -52,11 +50,9 @@ nginx_config:
       plugin-unauth-limit: 100m
 ```
 
-
 Finally, writing a custom plugin requires a fairly advanced understanding of Apache APISIX and its inner workings. This knowledge is a good idea, but it's not great to make it a requirement.
 
-The `vars` and `filter_func` parameters
----------------------------------------
+## The `vars` and `filter_func` parameters
 
 In my earlier blog post [Free tier API with Apache APISIX](https://blog.frankel.ch/free-tier-api-apisix/), I implemented an API-free tier with the help of the `vars` parameter. As a reminder, `vars` is an additional matching condition on your route besides the usual ones: URI, HTTP method, and host.
 
@@ -68,7 +64,6 @@ routes:
     upstream_id: 1
     vars: [[ "http_apikey", "~~", ".*"]]                      #1
 ```
-
 
 1. Match only if the request has an HTTP header named `apikey`
 
@@ -98,8 +93,7 @@ With `filter_func`, we can write a dedicated Lua function:
 * It accepts a `vars` arg, allowing you to access [APISIX built-in variables](https://apisix.apache.org/docs/apisix/apisix-variable/), including nginx variables, *e.g.*, HTTP headers.
 * It must return a boolean value. As for `vars`, APSIX uses the value to decide whether the route matches or not.
 
-The `serverless` plugin
------------------------
+## The `serverless` plugin
 
 The [serverless](https://apisix.apache.org/docs/apisix/plugins/serverless/) plugin actually consists of two plugins: `serverless-pre-function` and `serverless-pre-function`. As their name implies, the former executes before any other plugin in that phase and the latter after any other plugin in that phase. Note that it's because of their respective default `priority`. While it's technically possible to override the priority, common sense should prevent you from ever thinking about doing so.
 
@@ -134,7 +128,6 @@ routes:
             end
 ```
 
-
 1. Execute at the start of the `rewrite` phase
 2. Serialize the configuration to JSON and write it in the log. We use the `warn` level because it's the default one
 3. Serialize the context to JSON and write it in the log
@@ -143,16 +136,14 @@ routes:
 
 The APISIX model only allows **a unique plugin per route** . It's a limitation of this approach: while you can have multiple functions per phase, you can't span more than two phases, one for `pre` and one for `post`.
 
-The `script` parameter
-----------------------
+## The `script` parameter
 
 I must admit that I learned about [script](https://apisix.apache.org/docs/apisix/terminology/script/) when researching for this post. With `script`, you can write Lua code directly in your config without needing a full-fledged plugin! `script` comes with a huge limitation, though: it's exclusive with `plugins`.
 > Scripts and Plugins are mutually exclusive, and a Script is executed before a Plugin. This means that after configuring a Script, the Plugin configured on the Route will not be executed.
 
 I believe that, at this point, you'd better write a plugin instead.
 
-The `_meta.filter` parameter
-----------------------------
+## The `_meta.filter` parameter
 
 So far, our scope has been the `route` (or the `service` if you prefer the latter). However, an alternative is to execute a plugin *conditionally* . For example, imagine a route configured with the `limit-count` plugin to rate limit the number of requests. We want to test the infrastructure in a stress test. Instead of creating our own plugin, we can bypass the plugin if a specific header is present.
 
@@ -171,12 +162,10 @@ routes:
           filter: [["http_Secret-Header", "~=", "MySuperDuperSecretBypassKey"]] #2
 ```
 
-
 1. Configure the `limit-count` plugin
 2. Execute it only if the HTTP header has a different value
 
-Summary
--------
+## Summary
 
 Writing a custom plugin entails lots of downsides. I showed a couple of other alternatives in this post:
 
@@ -195,7 +184,5 @@ Before writing a plugin, I suggest you design your feature using one of the abov
 * [Script](https://apisix.apache.org/docs/apisix/terminology/script/)
 * [lua-resty-expr](https://github.com/api7/lua-resty-expr)
 * [Plugin Common Configurations](https://docs.api7.ai/apisix/reference/plugin-common-configurations)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/when-write-apisix-plugin/) on August 25^th^, 2024*

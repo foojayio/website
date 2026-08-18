@@ -41,8 +41,7 @@ A couple of months ago, I stumbled upon this list [16 practices to secure your A
 
 While it's debatable whether some points relate to security, *e.g.,*, versioning, the list is a good starting point anyway. In this two-post series, I'd like to describe how we can implement each point with Apache APISIX (or not).
 
-Authentication
---------------
+## Authentication
 
 Authentication is about identifying yourself with a system. It requires a proof.
 
@@ -74,11 +73,9 @@ consumers:
         key: mykey
 ```
 
-
 Every request containing the header `apikey` with the key `mykey` will be assigned to the consumer `john`.
 
-Authorization
--------------
+## Authorization
 
 Authentication alone isn't enough. Once a request to a URL has been authenticated, we need to decide whether it's allowed to proceed further. That's the role of authorization.
 > Authorization \[...\] is the function of specifying access rights/privileges to resources, which is related to general information security and computer security, and to access control in particular. More formally, "to authorize" is to define an access policy.
@@ -102,7 +99,6 @@ routes:
         whitelist:                        #3
           - johndoe
 ```
-
 
 1. Define a consumer
 2. Reference an already existing upstream
@@ -131,13 +127,11 @@ routes:
           - accountants
 ```
 
-
 1. Define a consumer group
 2. Assign the consumer to the previously defined consumer group
 3. Restrict the access to members of the defined consumer group, *i.e.* , `accountants`
 
-Input validation
-----------------
+## Input validation
 
 With Apache APISIX, you can define a set of JSON schemas and validate a request against any of them. My colleague Navendu has written an exhaustive blog post on the subject: [Your API Requests Should Be Validated](https://navendu.me/posts/request-validation/).
 
@@ -145,8 +139,7 @@ I think it's not the API Gateway's responsibility to handle request validation. 
 
 In any case, the checkbox is ticked.
 
-IP Whitelisting
----------------
+## IP Whitelisting
 
 Apache APISIX implements IP Whitelisting via the [ip-restriction](https://apisix.apache.org/docs/apisix/plugins/ip-restriction/) plugin. You can define either regular IPs or CIDR blocks.
 
@@ -160,9 +153,7 @@ routes:
           - 13.74.26.106/24
 ```
 
-
-Logging and Monitoring
-----------------------
+## Logging and Monitoring
 
 Logging and Monitoring fall into the broader *Observability* category, also encompassing *Tracing*. Apache APISIX offers a broad range of Observability plugins in each category.
 
@@ -189,8 +180,7 @@ Logging and Monitoring fall into the broader *Observability* category, also enco
 | Logging | `google-cloud-logging` | Push access logs to Google Cloud Logging Service                               |
 | Logging | `tencent-cloud-cls`    | Push access logs to Tencent Cloud CLS                                          |
 
-Rate Limiting
--------------
+## Rate Limiting
 
 Rate Limiting protects upstreams from Distributed Denial of Services attacks, *a.k.a* DDoS. It's one of the main features of reverse proxies and API Gateways. APISIX implements rate limiting through three different plugins:
 
@@ -210,7 +200,6 @@ routes:
         rejected_code: 429
 ```
 
-
 The above configuration snippet protects the upstream from being hit by more than ten requests per second. It applies to every IP address because of the default configuration. The complete snippet would look like the following:
 
 ```yaml
@@ -224,7 +213,6 @@ routes:
         key_type: var
         key: remote_addr
 ```
-
 
 When dealing with APIs, there's a considerable chance you want to differentiate between your clients. Some might get a better rate for different reasons: they paid a premium offer; they are considered strategic; they are internal clients, etc. The same consumer could also use different IP addresses because they run on various machines with other APIs. Allowing the same consumer more calls because they execute their requests on a distributed infrastructure would be unfair.
 
@@ -263,20 +251,12 @@ routes:
       key-auth: ~
 ```
 
-
 Now, `johndoe` can only send a request every second, as he's part of the `basic` plan, while `janedoe` can request ten times as much as part of the premium plan.
 
-Conclusion
-----------
+## Conclusion
 
 We've seen how to configure Apache APISIX to secure your APIs against 7 of the 16 rules in the original list.
 
 The rules left could be less straightforward to implement; [we will cover them in the second installment](https://foojay.io/today/secure-your-api-with-these-16-practices-with-apache-apisix-part-2/).
-
-<br />
-
-<br />
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/secure-api-practices-apisix/1/) on February 18^th^, 2024*

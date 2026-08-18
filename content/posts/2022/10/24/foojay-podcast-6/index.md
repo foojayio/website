@@ -30,8 +30,7 @@ Let's look back and what has happened on Foojay during the **2,5 years** since t
 
 {{< youtube cwJXTTYzsGU >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -39,20 +38,17 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * [**Geertjan Wielenga**](https://twitter.com/GeertjanW) (Azul)
 * [**A N M Bazlur Rahman**](https://twitter.com/bazlur_rahman) (Contrast Security)
 * [**Roy Wasse**](https://twitter.com/roywasse) (OpenValue)
 
-Podcast host
-------------
+## Podcast host
 
 * [**Frank Delporte**](https://twitter.com/FrankDelporte) (Azul)
 
-Content
--------
+## Content
 
 0'00 Short intro and music  
 

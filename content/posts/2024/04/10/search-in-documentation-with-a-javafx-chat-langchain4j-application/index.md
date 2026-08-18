@@ -26,8 +26,7 @@ At the Fosdem conference in Brussels on February 3rd, I gave a presentation abou
 
 The [video and links of that presentation are available here](https://webtechie.be/post/2024-02-02-links-presentation-experiment-ai-llm-chat-with-docs/), and this post is a more detailed explanation of that application.
 
-What is LangChain4j
--------------------
+## What is LangChain4j
 
 The goal of LangChain4j is to simplify the integration of AI and LLM capabilities into Java applications. The [project lives on GitHub](https://github.com/langchain4j/langchain4j/), and has a separate [repository with demo applications](https://github.com/langchain4j/langchain4j-examples).
 
@@ -86,7 +85,6 @@ public class SearchAction {
 }
 ```
 
-
 The `CustomStreamingResponseHandler.java` appends the incoming answer by using `Platform.runLater` to prevent thread issues between the code interacting with OpenAI and the JavaFX User Interface thread.
 
 ```
@@ -117,7 +115,6 @@ public class CustomStreamingResponseHandler {
 }
 ```
 
-
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
   <a href="langchain4j-code.png" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" width="1024" height="566" data-id="106477" src="langchain4j-code-1024x566.png" alt="" class="wp-image-106477"></a>
@@ -130,8 +127,7 @@ public class CustomStreamingResponseHandler {
  </figure>
 </figure>
 
-Chat With the Azul Documentation
---------------------------------
+## Chat With the Azul Documentation
 
 As a docs writer, and someone who loves to experiment with code from time to time, I wanted to find out if I could have an application that uses a real documentation set and provide answers based on it. The solution described here is not unique, as a lot of people are researching this kind of project.
 
@@ -169,7 +165,6 @@ As it contains a data block per HTML-header element, it's fine-grained with a li
 }
 ```
 
-
 By using FasterXML Jackson, a record, and an ObjectMapper, this JSON can easily be converted to a list of Java objects:
 
 ```
@@ -189,7 +184,6 @@ String json = Files.readString(Paths.get(fileUrl.toURI()));
 ObjectMapper objectMapper = new ObjectMapper();
 List<ContentSection> contentSections = objectMapper.readValue(json, new TypeReference<>() {});
 ```
-
 
 ### Java Application
 
@@ -232,7 +226,6 @@ private void initChat(SearchAction action, List<ContentSection> contentSections)
     appendAnswer(action, "\nChat model is ready", true);
 }
 ```
-
 
 #### Handling a Question
 
@@ -300,7 +293,6 @@ void ask(SearchAction action) {
 }
 ```
 
-
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped wp-block-gallery-2 is-layout-flex wp-block-gallery-is-layout-flex">
  <figure class="wp-block-image size-large">
   <a href="langchain4j-docs-azul-home.png" target="_blank" rel="noopener"><img loading="lazy" decoding="async" width="1024" height="722" data-id="106480" src="langchain4j-docs-azul-home-1024x722.png" alt="" class="wp-image-106480"></a>
@@ -313,8 +305,7 @@ void ask(SearchAction action) {
  </figure>
 </figure>
 
-Conclusion
-----------
+## Conclusion
 
 In this example, LangChain4j interacts with the OpenAI API. But the library can also interact with other LLM providers (like Google Vertex AI) and embedding (vector) stores (such as Pinecone or Vespa).
 
@@ -323,7 +314,3 @@ It's an easy way to get started with Artificial Intelligence and Large Language 
 Thanks to the many examples provided in a separate repository, you can start easily and get results in a fast way.
 
 At the time of writing, the main LangChain4j repository has almost 70 contributors and many daily commits. It's a very active project that keeps evolving and is worth trying out and keeping an eye on.
-
-<br />
-
-<br />

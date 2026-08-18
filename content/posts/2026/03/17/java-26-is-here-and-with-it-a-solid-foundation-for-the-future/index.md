@@ -23,8 +23,7 @@ Java 26 is here! Six months ago, we welcomed Java 25 into our hearts, which mean
 
 Regardless of any future plans, this post focuses on everything that has been added in this release, giving you a brief introduction to each of the features. Where applicable the differences with Java 25 are highlighted and a few typical use cases are provided, so that you'll be more than ready to start using these features after reading this.
 
-JEP Overview
-------------
+## JEP Overview
 
 To start off, let's see an overview of the JEPs that ship with Java 26. This table contains their preview status, to which project they belong, what kind of features they add and the things that have changed since Java 25.
 
@@ -41,8 +40,7 @@ To start off, let's see an overview of the JEPs that ship with Java 26. This tab
 | **[529](#jep-529-vector-api-eleventh-incubator)**                                    | Vector API                                            | Eleventh Incubator | Panama        | New API      | None                                |
 | **[530](#jep-530-primitive-types-in-patterns-instanceof-and-switch-fourth-preview)** | Primitive Types in Patterns, instanceof, and switch   | Fourth Preview     | Amber         | Language     | Minor                               |
 
-New features
-------------
+## New features
 
 Let's start with the JEPs that add brand-new features to Java 26.
 
@@ -141,7 +139,6 @@ String htmlText = response.body();
 assert htmlText.contains("Java");
 ```
 
-
 As you can see, we didn't specify any HTTP version in this code example--the API assumes HTTP/2 by default.
 
 ##### HTTP/3: HTTP's Next Version
@@ -161,7 +158,6 @@ var http3Request = HttpRequest.newBuilder(URI.create("https://foojay.io"))
     .version(HttpClient.Version.HTTP_3)
     .GET().build();
 ```
-
 
 Once HTTP/3 has been chosen---either in the request itself or in the client---you transmit the request just as you normally would. If the destination server lacks HTTP/3 support, the request is automatically and transparently rolled back to HTTP/2 or, if necessary, to HTTP/1.1.
 
@@ -187,8 +183,7 @@ HTTP/3 is not as widely deployed as its older counterparts, which is why no sing
 
 For more information on this feature, read [JEP 517](https://openjdk.org/jeps/517).
 
-Repreviews
-----------
+## Repreviews
 
 Now it's time to take a look at a few features that might already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed in Java 26, with only minor changes compared to Java 25 in most cases.
 
@@ -202,7 +197,6 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEi/kRGOL7wCPTN4KJ2ppeSt5UYB6u
 cPjjuKDtFTXbguOIFDdZ65O/8HTUqS/sVzRF+dg7H3/tkQ/36KdtuADbwQ==
 -----END PUBLIC KEY-----
 ```
-
 
 The Java Platform currently doesn't include an easy-to-use API for decoding and encoding text in the PEM format, which means that decoding a PEM-encoded key can be a tedious job that involves careful parsing of the source PEM text. To further illustrate this point, encrypting and decrypting a private key currently requires over a dozen lines of code.
 
@@ -262,7 +256,6 @@ PrivateKey key = pemDecoder.decode(pem, PrivateKey.class);
 PrivateKey decryptedkey = pemDecoder.withDecryption(password).decode(pem, PrivateKey.class);
 ```
 
-
 ##### Preview Warning
 
 Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
@@ -306,7 +299,6 @@ public class MultiWaiterRestaurant implements Restaurant {
 }
 ```
 
-
 Note that the `announceCourse(..)` method in the `Waiter` class sometimes fails with an `OutOfStockException`, because one of the ingredients for the course might not be in stock. This can lead to some problems:
 
 * If `zoe.announceCourse(CourseType.MAIN)` takes a long time to execute but `grover.announceCourse(CourseType.STARTER)` fails in the meantime, the `announceMenu(..)` method will unnecessarily wait for the main course announcement by blocking on `main.get()`, instead of cancelling it (which would be the sensible thing to do).
@@ -331,7 +323,6 @@ public class SingleWaiterRestaurant implements Restaurant {
     }
 }
 ```
-
 
 Here, we don't have *any* of the problems we had before.  
 
@@ -370,7 +361,6 @@ public class StructuredConcurrencyRestaurant implements Restaurant {
 }
 ```
 
-
 The scope's purpose is to keep the threads together. At `1`, we wait (`join`) until all threads are done with their work. If one of the threads is interrupted, an `InterruptedException` is thrown. A `RuntimeException` can also be thrown here, if an exception occurs in one of the spawned threads. Once we reach `2`, we can be sure everything has gone well, and we can retrieve and process the results.
 
 Actually, the main difference with the code we had before is the fact that we create threads (`fork`) within a new `scope`. Now we can be certain that the lifetimes of the three threads are confined to this scope, which coincides with the body of the try-with-resources statement.
@@ -401,7 +391,6 @@ public class StructuredConcurrencyBar implements Bar {
     }
 }
 ```
-
 
 In this example the waiter is responsible for getting a valid `DrinkOrder` object based on guest preference and the drinks supply at the bar.  
 
@@ -461,7 +450,6 @@ class OrderController {
 }
 ```
 
-
 Whenever an instance of `OrderController` is created, the `logger` field is initialized eagerly, which potentially makes creating an `OrderController` slow.  
 
 And this might not be the only place in our application where a `logger` field is initialized eagerly:
@@ -473,7 +461,6 @@ class GuitarStore {
     static final ManufacturerService MANUFACTURERS = new ManufacturerService();
 }
 ```
-
 
 All this initialization work causes the application to start up more slowly, and the worst thing is: it may not even be necessary!  
 
@@ -503,7 +490,6 @@ class OrderController {
     }
 }
 ```
-
 
 This improves application startup, but comes with a few drawbacks of its own:
 
@@ -543,7 +529,6 @@ class OrderController {
 }
 ```
 
-
 Initially, the lazy constant is uninitialized. When it is accessed for the first time through the `get()` method, it is initialized by invoking the lambda expression that was passed to the `of()` factory method.  
 
 If the lazy constant was already initialized, then the `get` method simply returns its content.  
@@ -580,7 +565,6 @@ class GuitarStore {
 }
 ```
 
-
 The application's startup time improves because it no longer initializes its components, such as `OrderController`, up front.  
 
 Rather, it initializes each component on demand, via the `get` method of the corresponding lazy constant.  
@@ -607,7 +591,6 @@ class GuitarStore {
 }
 ```
 
-
 Here, `ORDERS` is no longer a lazy constant, but a lazy list, in which each element is stored in a lazy constant.  
 
 To access the content, clients call `ORDERS.get(...)`, passing it an index, of which the first invocation will invoke the lambda function that ignores the index and invokes the `OrderController()` constructor.  
@@ -627,7 +610,6 @@ class GuitarStore {
     }
 }
 ```
-
 
 In this example, `OrderController` instances are associated with thread names ("Customers", "Internal", and "Testing" in this case) rather than integer indexes computed from thread identifiers. Lazy maps allow for more expressive access idioms than lazy lists, but otherwise have all the same benefits.
 
@@ -690,7 +672,6 @@ void vectorComputation(float[] a, float[] b, float[] c) {
 }
 ```
 
-
 From the perspective of the Java developer, this is just another way of expressing scalar computations. It might come across as being more verbose, but on the other hand it can bring spectacular performance gains.
 
 #### Typical Use Cases
@@ -724,7 +705,6 @@ switch (reverb.roomSize()) {
 }
 ```
 
-
 ...to be written as follows:
 
 ```java
@@ -735,7 +715,6 @@ switch (reverb.roomSize()) {
     case int i -> "Unsupported int value: " + i;
 }
 ```
-
 
 This also allows guards to inspect the matched value, like so:
 
@@ -749,7 +728,6 @@ switch (reverb.roomSize()) {
     case int i -> "Unsupported int value: " + i;
 }
 ```
-
 
 #### Record Patterns
 
@@ -776,7 +754,6 @@ if (tuner instanceof Tuner(double p)) {
 }
 ```
 
-
 To put it differently, the Java compiler widens the provided `int` to a `double`, but it doesn't narrow it back to an `int`. This limitation exists because narrowing could lead to data loss: the value of the `double` at runtime might exceed the range of an `int` or have more precision than an `int` can accommodate. However, one significant advantage of pattern matching is its ability to automatically reject invalid values by not matching them at all. If the `double` component of a `Tuner` is either too large or too precise to safely convert back to an `int`, then `instanceof Tuner(int p)` would simply return `false`, allowing the program to manage the large `double` component in a different code branch.
 
 This is analogous to how pattern matching currently behaves for reference type patterns. For example:
@@ -793,7 +770,6 @@ if (singleEffect instanceof SingleEffect(Delay d)) {
     // ...
 }
 ```
-
 
 `instanceof` can be used here to try to match a `SingleEffect` with a `Delay` or a `Reverb` component; it automatically narrows if the pattern matches.
 
@@ -812,7 +788,6 @@ if (roomSize >= -128 && roomSize < 127) {
 }
 ```
 
-
 The JEP proposes the possibility to replace these constructs with simple `instanceof` checks that operate on primitives. Let's rewrite the code example to make use of this feature:
 
 ```java
@@ -822,7 +797,6 @@ if (roomSize instanceof byte r) {
     // now it's safe to use r
 }
 ```
-
 
 The pattern `roomSize instanceof byte r` will match only if `roomSize` fits into a `byte`, eliminating the need for casts and range checks.
 
@@ -839,7 +813,6 @@ if (roomSize instanceof byte) { // check if value of roomSize fits in a byte
     ... (byte) roomSize ... // yes, it fits! but cast is required
 }
 ```
-
 
 The JEP proposes to support this construct, which makes it easier to change the `instanceof` check to take a type pattern and vice versa.
 
@@ -861,7 +834,6 @@ String guitaristResponse = switch (guitar.isInTune()) {
 }
 ```
 
-
 #### What's Different From Java 25?
 
 One minor change was made compared to Java 25: tighter dominance checks in `switch` constructs were applied.  
@@ -880,8 +852,7 @@ Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so yo
 
 For more information on this feature, read [JEP 530](https://openjdk.org/jeps/530).
 
-Deprecations
-------------
+## Deprecations
 
 Java 26 also deprecates a few older features. Let's see which ones were involved in this effort to improve stability and clarity.
 
@@ -918,7 +889,6 @@ void main() throws ReflectiveOperationException {
 }
 ```
 
-
 This example shows that, in practice, final fields can be as mutable as non-final fields.
 
 ##### Reasons For Mutating a Final Field
@@ -940,7 +910,6 @@ Application developers can avoid these warnings and expections by opting-in to f
 ```bash
 $ java --enable-final-field-mutation=module1,module2
 ```
-
 
 Additional techniques are also available, such as setting environment variables, adding it to a JAR's manifest or configuring it in a custom runtime using `jlink`. Refer to [JEP 500](https://openjdk.org/jeps/500) for more details on these techniques.
 
@@ -975,8 +944,6 @@ For more information on this feature, read [JEP 500](https://openjdk.org/jeps/50
 When the Java Platform rose to fame in the late 1990s and early 2000s, one of its main catalysts were Java applets and the Applet API. Java applets were small Java programs that could be embedded in web pages and run in a web browser, allowing developers to create interactive web applications. They were widely used for things like games, animations, and other interactive content on the web. People who weren't Java programmers at all at least knew the name 'Java' from their browser because of applets! (in roughly the same way as kids these days know about Java's existence because of a game called Minecraft.)
 ![Hello! I am an applet!](/assets/images/blog/java-applet.png)
 
-<br />
-
 However, over time, Java applets became less popular due to security concerns and the rise of alternative technologies such as JavaScript and HTML5. As a result, many browser vendors have removed support for them. This is why the Applet API [was deprecated in Java 9](https://openjdk.org/jeps/289), [deprecated for removal in Java 17](https://openjdk.org/jeps/398) and it's one of the reasons why it will be removed in its entirety in Java 26. On top of that, a necessary foundation for running applets by sandboxing untrusted code, the Security Manager, [was permanently disabled in Java 24](https://openjdk.org/jeps/486), providing another reason to finally sunset the Applet API.
 
 ##### Removals
@@ -1003,9 +970,6 @@ Given that the Applet API in its current form is largely unusable, there is no s
 
 For more information on this removal, read [JEP 504](https://openjdk.org/jeps/504).
 
-Final thoughts
---------------
+## Final thoughts
 
 And that concludes our discussion of the 10 JEPs that come with Java 26. But that's not even all that's new: [many other updates](https://jdk.java.net/26/release-notes) were included in this release, including various performance, stability and security updates. One thing is for sure: this version of Java is primed and ready for more additions later this year. So what are you waiting for? It's time to take this brand-new Java release for a spin!
-
-<br />

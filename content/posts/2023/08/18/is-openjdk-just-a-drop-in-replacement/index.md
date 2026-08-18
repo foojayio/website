@@ -29,8 +29,7 @@ Following the [review from Bazlur](https://foojay.io/today/book-review-openjdk-m
 * It's a corporate book - Simon is the Deputy CTO at Azul. This creates the justified concern that the book is a promotion for Azul products. It has those. But having read through it, the material seems objective and valuable.  
   It does give one advantage: we're getting the book for free.
 
-Unique Analysis
----------------
+## Unique Analysis
 
 There are many Java books but this is the first time I read a book that explains these specific subjects. The first chapter discusses licensing, TCK (Test Compatibility Kit) and similar issues. I'm familiar with all of them since I worked for Sun Microsystems and Oracle, I had a team composing TCKs for the mobile platform at Sun Microsystems. However, even experienced engineers outside of Sun might be unfamiliar with these tests.
 > The TCK is how we verify that our port of OpenJDK is still compatible with Java. The book illustrates why a reputable OpenJDK distribution can be trusted due to the TCK. This is knowledge that's probably not available elsewhere if you aren't deeply involved in the JVM.
@@ -43,8 +42,7 @@ As a side note, the whole TCK creation process is pretty insane. The engineers i
 
 Then devise tests to verify in isolation that every statement is indeed true. In that sense, TCK doesn't test quality. It tests compliance to a uniform, consistent standard. A JDK can fail after running for a week and we might not be able to tell from running the TCK alone, early releases of JDK 8 did exactly that at that time...
 
-Learning from a For Dummies Book
---------------------------------
+## Learning from a For Dummies Book
 
 I mentioned at the top of this post that I treat the OpenJDK migration casually as a drop-in replacement. This book convinced me that this is not always the case, there are some nuances. I was casually aware of most of them, e.g., I worked a lot with Pisces back in the day, but I never saw all of these nuances in a single place.
 
@@ -55,16 +53,14 @@ I am missing the Microsoft VM in the comparison but I guess it's a bit too new t
 
 ![](Screenshot-2023-08-07-at-14.54.36-411x510.png)
 
-Business Related Aspects
-------------------------
+## Business Related Aspects
 
 I did consulting work for major organizations quite often; such as banks, insurance companies etc. In these organizations commercial support is crucial. I used to scoff at that notion but as I ran into some of the edge cases those organizations run into, I get it. We had a senior engineer from IBM debug AIX and Websphere issues.
 
 Similarly, a bank I worked with was having issues with RTL support in newer versions of Swing. As the older JDKs were nearing the end of their life cycle they were forced to migrate but had no way of addressing these issues. Oracle's support for those issues was a dud in that case. Commercial support for the JVM isn't something I ever needed or wanted to buy, but I understand the motivation.
 > At the end of the book, Simon goes into more detail on the extra value that can be layered on top of an OpenJDK distribution. This was interesting to me as I often don't understand the "it's free" business model. It helped me both in understanding the motivation for offering (and maintaining) an OpenJDK release. It's also valuable when I work with larger organizations, I can advise better on the value they can deliver for Java (e.g. fast response to zero-days, etc).
 
-Who Should Read This Book?
---------------------------
+## Who Should Read This Book?
 
 > It's not a book for everyone. However, if you're using the Oracle JDK then you need to pick this up and review it. Make sure the reasons you picked Oracle JDK are still valid, they probably aren't. If your job includes picking the JDKs for provisioning or development then you should make sure you're familiar with the materials in the book.
 

@@ -36,7 +36,6 @@ extra                 httpd.conf.pre-update mime.types            other
 httpd.conf            magic                 original              users
 ```
 
-
 The following modules are necessary:
 
 ```apache
@@ -45,7 +44,6 @@ LoadModule proxy_module libexec/apache2/mod_proxy.so
 LoadModule proxy_http_module libexec/apache2/mod_proxy_http.so
 LoadModule proxy_balancer_module libexec/apache2/mod_proxy_balancer.so
 ```
-
 
 The requirement is straightforward: proxy calls from to . For this, we need to configure a virtual host:
 
@@ -59,7 +57,6 @@ The requirement is straightforward: proxy calls from to . For this, we need to c
 </VirtualHost>
 ```
 
-
 To make sure everything works fine, we can use `apachectl -S`:
 
 ```
@@ -67,14 +64,12 @@ VirtualHost configuration:
 *:80           zerodowntime.hz (/private/etc/apache2/extra/httpd-vhosts.conf:40)
 ```
 
-
 Last but not least, let's configure the host file:
 
 ```
 #./etc/hosts
 127.0.0.1        zerodowntime.hz
 ```
-
 
 At this point, we can access the application using the `zerodowntime.hz` URL:
 
@@ -89,7 +84,6 @@ I'm using Spring Boot, so that is just a matter of configuration:
 server:
   forward-headers-strategy: native
 ```
-
 
 At this point, everything works as expected!
 

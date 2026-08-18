@@ -29,8 +29,7 @@ Java 24 brings a diverse set of features, delivering performance improvements li
 Apart from these, a few new features from older releases have been repreviewed.
 > Short descriptions of the repreviewed features are provided to prevent this article from becoming a bit too lengthy. Each repreviewed feature has a link to a longer description of the feature should you wish to learn more.
 
-JEP Overview
-------------
+## JEP Overview
 
 To start off, let's look at an overview of the JEPs that ship with Java 24. This table contains the preview status for all JEP's, to which project they belong, what kind of features they add and the things that have changed since Java 23.
 
@@ -61,8 +60,7 @@ To start off, let's look at an overview of the JEPs that ship with Java 24. This
 | **499** | Structured Concurrency                                             | Fourth Preview  | Loom          | Concurrency      | None                      |
 | **501** | Deprecate the 32-bit x86 Port for Removal                          |                 | HotSpot       | Deprecation      | Deprecation               |
 
-New features
-------------
+## New features
 
 Let's start with the JEP's that add brand-new features to Java 24.
 
@@ -94,13 +92,11 @@ Shenandoah used to behave in a non-generational way only. Running it required th
 $ java ... -XX:+UseShenandoahGC
 ```
 
-
 To run your workload with generational Shenandoah in Java 24, the following configuration is needed:
 
 ```java
 $ java ... -XX:+UseShenandoahGC -XX:+UnlockExperimentalVMOptions -XX:ShenandoahGCMode=generational
 ```
-
 
 As you can see, generational Shenandoah has been introduced alongside non-generational Shenandoah. In a future release we can expect generational Shenandoah to become the default configuration.
 
@@ -125,7 +121,6 @@ Mark Word (normal):
          (Unused)                      (Hash Code)     (GC Age)(Tag)
 ```
 
-
 The class word comes after the mark word. It takes one of two shapes, depending on whether compressed class pointers are enabled:
 
 ```
@@ -139,7 +134,6 @@ Class Word (compressed):
  [CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC]
      (Compressed Class Pointer)
 ```
-
 
 The class word is never overwritten, which means that an object's type information is always available, so no additional steps are required to check a type or invoke a method.
 
@@ -155,7 +149,6 @@ Header (compact):
                               (Valhalla-reserved bits) (Self Forwarded Tag)
 ```
 
-
 As you can see, the size of the hash code does not change.
 > Note that four bits are reserved for future use by [Project Valhalla](https://openjdk.org/projects/valhalla/).
 
@@ -170,7 +163,6 @@ Compact object headers can be enabled as follows:
 ```
 $ java ... -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders
 ```
-
 
 ##### More Information
 
@@ -234,7 +226,6 @@ First, you should run the application once in a training run, to record its AOT 
 $ java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf -cp app.jar com.example.App ...
 ```
 
-
 > Generally speaking, a production run is a good candidate for the training run, as training runs aim to capture application configuration and execution history. In cases where using a production run is impractical (due to activities or accessing databases), it's recommended to create a synthetic training run that closely resembles production runs, fully configuring itself and testing typical code paths. This can be done by adding a second main class, which invokes the production main class while using a temporary log directory, local network settings, and a mocked database if necessary. You might already have such a main class in the form of an integration test.
 
 Second, use the configuration to create the cache, in the file `app.aot`:
@@ -243,13 +234,11 @@ Second, use the configuration to create the cache, in the file `app.aot`:
 $ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot -cp app.jar
 ```
 
-
 Subsequently, to run the application with the cache:
 
 ```
 $ java -XX:AOTCache=app.aot -cp app.jar com.example.App ...
 ```
-
 
 The AOT cache moves the tasks of reading, parsing, loading, and linking (typically performed just-in-time during program execution) to an earlier stage when the cache is created.  
 
@@ -273,7 +262,6 @@ public class HelloStream {
     }
 }
 ```
-
 
 This program runs in 0.031 seconds on JDK 23.  
 
@@ -323,7 +311,6 @@ class CustomerCounter {
     }
 }
 ```
-
 
 If the `storeRepo.fetchCapacity()` method call blocks, it would be nice if the running virtual thread would unmount from its carrier, releasing a platform thread for other virtual threads to be mounted.  
 
@@ -402,7 +389,6 @@ SecretKey key = hkdf.deriveKey("AES", params);
 // Additional deriveKey calls can be made with the same KDF object
 ```
 
-
 ##### Preview Warning
 
 Note that this JEP is in the [preview](https://openjdk.org/jeps/12) stage, so you'll need to add the `--enable-preview` flag to the command-line to take the feature for a spin.
@@ -443,7 +429,6 @@ KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-KEM-1024");
 KeyPair keyPair = generator.generateKeyPair(); // an ML-KEM-1024 key pair
 ```
 
-
 ##### keytool
 
 The `keytool` command will support generating ML-KEM key pairs and certificates:
@@ -455,14 +440,12 @@ $ keytool -keystore ks -storepass changeit -genkeypair -alias mlkem \
           -keyalg ML-KEM -groupname ML-KEM-768 -dname CN=ML-KEM -signer ec
 ```
 
-
 The parameter-set name (`ML-KEM-768`) can also be provided directly with the `-keyalg` option:
 
 ```
 $ keytool -keystore ks -storepass changeit -genkeypair -alias mlkem2 \
           -keyalg ML-KEM-768 -dname CN=ML-KEM2 -signer ec
 ```
-
 
 ##### Encapsulating and Decapsulating Keys
 
@@ -478,7 +461,6 @@ byte[] msg = encap.encapsulation();     // send this to receiver
 SecretKey sks = encap.key();
 ```
 
-
 A receiver can then call the decapsulation function to recover the secret key from the key encapsulation message sent by the sender:
 
 ```java
@@ -487,7 +469,6 @@ KEM kr = KEM.getInstance("ML-KEM");
 KEM.Decapsulator dec = kr.newDecapsulator(privateKey);
 SecretKey skr = dec.decapsulate(msg);
 ```
-
 
 Both `sks` and `skr` now contain the same key material, which is known only to the sender and the receiver.
 
@@ -519,7 +500,6 @@ KeyPairGenerator generator = KeyPairGenerator.getInstance("ML-DSA-87");
 KeyPair keyPair = generator.generateKeyPair(); // an ML-DSA-87 key pair
 ```
 
-
 ##### keytool
 
 The `keytool` command will support generating ML-DSA key pairs and certificates:
@@ -532,14 +512,12 @@ $ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
           -keyalg ML-DSA-65 -dname CN=ML-DSA2
 ```
 
-
 The parameter-set name (`ML-DSA-65`) can also be provided directly with the `-keyalg` option:
 
 ```bash
 $ keytool -keystore ks -storepass changeit -genkeypair -alias mldsa \
           -keyalg ML-DSA-65 -dname CN=ML-DSA2
 ```
-
 
 ##### Signing with ML-DSA Keys
 
@@ -555,7 +533,6 @@ ss.update(msg);
 byte[] sig = ss.sign();
 ```
 
-
 To verify a signature with a public key:
 
 ```java
@@ -566,7 +543,6 @@ sv.initVerify(publicKey);
 sv.update(msg);
 boolean verified = sv.verify(sig);
 ```
-
 
 ##### More Information
 
@@ -612,7 +588,6 @@ $ configure [ ... other options ... ] --enable-linkable-runtime
 $ make images
 ```
 
-
 The `jlink` tool in any JDK build can consume both JMOD files and modular JAR files.  
 
 In addition, in JDK builds with this feature enabled, `jlink` can consume modules from the run-time image of which it is part.  
@@ -626,7 +601,6 @@ Usage: jlink <options> --module-path <modulepath> --add-modules <module>[,<modul
 Capabilities:
       Linking from run-time image enabled
 ```
-
 
 So this new capability can be enabled only when building a JDK.  
 
@@ -652,8 +626,7 @@ Note that the JEP also states that the feature may be enabled by default in a fu
 
 For more information on this feature, read [JEP 493](https://openjdk.org/jeps/493).
 
-Repreviews and finalizations
-----------------------------
+## Repreviews and finalizations
 
 Now it's time to take a look at a few features that might already be familiar to you, because they were introduced in a previous version of Java. They have been repreviewed (or finalized) in Java 24, with only minor changes compared to Java 23 in most cases. Therefore, to avoid a very lengthy article, we'll outline these changes and link to a previous article for a full feature description, should you wish to refresh your memory.
 
@@ -800,8 +773,7 @@ If you're interested in the future of this feature, [JEP draft #8340343](https:/
 
 If you prefer to get more information on the current state of this feature, then read [JEP 499](https://openjdk.org/jeps/499) or the [full feature description](https://hanno.codes/2024/09/17/java-23-has-arrived/#jep-480-structured-concurrency-third-preview) from a previous article.
 
-Deprecations \& Restrictions
-----------------------------
+## Deprecations \& Restrictions
 
 Java 24 also deprecates a few older features that weren't used that much and restricts a few other features that came with certain risks. Let's see which ones were involved in this effort to improve stability.
 
@@ -841,13 +813,11 @@ In Java 23, the following command would use generational mode by default:
 $ java -XX:+UseZGC ...
 ```
 
-
 This behavior is still the same in Java 24. Also, in Java 24, if you would run Java with the now-obsolete option `ZGenerational`...
 
 ```bash
 $ java -XX:+UseZGC -XX:-ZGenerational ...
 ```
-
 
 ...an obsolete-option warning will be printed.
 
@@ -881,7 +851,6 @@ WARNING: Please consider reporting this to the maintainers of com.foo.bar.Server
 WARNING: sun.misc.Unsafe::setMemory will be removed in a future release
 ```
 
-
 A future release of Java will start throwing exceptions in these situations. In an even later Java release the methods will be removed entirely. According to the JEP text the entire process won't be completed until after the release of JDK 26, giving developers ample time to adjust to the new situation.
 
 #### More Information
@@ -914,7 +883,6 @@ This JEP removes the Windows 32-bit x86 port, which was to be expected after [it
 
 For more information on this removal, read [JEP 479](https://openjdk.org/jeps/479).
 
-Final thoughts
---------------
+## Final thoughts
 
 And that concludes our discussion of the 24 JEP's that come with Java 24. But that's not even all that's new: [many other updates](https://jdk.java.net/24/release-notes) were included in this release, including various performance, stability and security updates. So what are you waiting for? Time to take this brand-new Java release for a spin!

@@ -25,8 +25,7 @@ frozen: false
 > [This article is also available on YouTube!](https://youtu.be/Ki3WKSNpdRU)
 The **Fixed Window Counter** is the simplest and most straightforward rate-limiting algorithm. It divides time into fixed intervals (e.g., seconds, minutes, or hours) and counts the number of requests within each interval. If the count exceeds a predefined threshold, the requests are rejected until the next interval begins. Looking for a more precise algorithm? Take a look at the [Sliding Window Log implementation](https://foojay.io/today/sliding-window-log-rate-limiter-redis-java/).
 
-**How It Works**
-----------------
+## **How It Works**
 
 ![](https://cdn-images-1.medium.com/max/2160/1*VsdNn5KGd1A0rIfbczGy8Q.gif)
 
@@ -46,8 +45,7 @@ At the end of the time window, reset the counter to zero and start counting agai
 
 Compare the counter against the allowed limit. If it exceeds the limit, reject further requests until the next window.
 
-How to Implement It with Redis and Java
----------------------------------------
+## How to Implement It with Redis and Java
 
 There are two ways to implement the Fixed Rate Limiter with Redis. The simplest way is by:
 
@@ -56,7 +54,6 @@ There are two ways to implement the Fixed Rate Limiter with Redis. The simplest 
 ```
 INCR my_counter
 ```
-
 
 If there's no counter set yet, the INCR command will create one as zero and then increment it to one. If the counter is already set, the INCR commany will simply increment it by one.
 
@@ -68,7 +65,6 @@ If the counter doesn't exist, we need to set a time-to-live to ensure the time w
 EXPIRE my_counter 60 NX
 ```
 
-
 ### 3. Check the counter for each new request
 
 When a new request comes in, check the counter to see how many requests have been made. If it's below the threshold, allow the process and increment the counter. If not, block the process from proceeding. If the key doesn't exist, assume the counter starts at 0.
@@ -77,11 +73,9 @@ When a new request comes in, check the counter to see how many requests have bee
 GET my_counter
 ```
 
-
 Cool! Now that we understand the basics of our implementation, let's implement it in Java with Jedis.
 
-Implementing it with Jedis
---------------------------
+## Implementing it with Jedis
 
 **Jedis** is a popular Java library used to interact with **Redis** and we will use it for implementing our rate because it provides a simple and intuitive API for executing Redis commands from JVM applications.
 
@@ -94,7 +88,6 @@ redis.clients
 jedis
 5.2.0
 ```
-
 
 ### Create a FixedWindowRateLimiter class:
 
@@ -125,7 +118,6 @@ public class FixedWindowRateLimiter {
 }
 ```
 
-
 ### Validate the Requests
 
 The main job of this rate limiter is to check if a client is within their allowed request limit. If yes, the request is allowed, and the counter is updated. If not, the request is blocked. **Step 1: Generate a key** We'll store each client's request count as a Redis key. To make keys unique for each client, we'll format them like this:
@@ -135,7 +127,6 @@ public boolean isAllowed(String clientId) {
     String key = "rate_limit:" + clientId;
 }
 ```
-
 
 For example, if the client ID is user123, their key would be rate_limit:user123. **Step 2: Fetch the Current Counter** We'll use Redis's GET command to check how many requests the client has made so far. If the key doesn't exist, we assume the client hasn't made any requests, so the counter is 0.
 
@@ -147,7 +138,6 @@ public boolean isAllowed(String clientId) {
 }
 ```
 
-
 **Step 3: Check the Request Limit** Next, we compare the current count to the allowed limit. If the counter is less than the limit, the request is allowed. Otherwise, it's blocked.
 
 ```
@@ -158,7 +148,6 @@ public boolean isAllowed(String clientId) {
 
     boolean isAllowed = currentCount   The first request marks the start of the time window. Any subsequent requests during this window’s lifespan will increment the counter.
 ```
-
 
 > Once the window expires, the key is automatically removed from Redis. The next request after that will define the start of a new window. If we didn't set the NX flag, the expiration would be reset everytime the counter is incremented, increasing the lifespan of the window.
 
@@ -204,11 +193,9 @@ public class FixedWindowRateLimiter {
 }
 ```
 
-
 And we're ready to start testing it's behavior!
 
-Testing our Rate Limiter
-------------------------
+## Testing our Rate Limiter
 
 To ensure our Fixed Window Rate Limiter behaves as expected, we'll write tests for various scenarios. For this, we'll use three tools:
 
@@ -239,7 +226,6 @@ assertj-core
 test<code></code>
 ```
 
-
 Once you've added these dependencies, you're ready to start writing your test class.
 
 ### Setting Up the Test Class
@@ -268,7 +254,6 @@ public class FixedWindowRateLimiterTest {
 }
 ```
 
-
 ### **Preparing the Environment Before Each Test**
 
 Before running any test, we need to ensure a clean Redis environment. Here's what we'll do:
@@ -286,7 +271,6 @@ public void setup() {
 }
 ```
 
-
 > FLUSHALL is an actual Redis command that deletes all the keys of all the existing databases. [Read more about it in the official documentation](https://redis.io/docs/latest/commands/flushall/).
 
 ### **Cleaning Up After Each Test**
@@ -299,7 +283,6 @@ public void tearDown() {
     jedis.close();
 }
 ```
-
 
 ### **Full Setup**
 
@@ -330,7 +313,6 @@ public class FixedWindowRateLimiterTest {
 }
 ```
 
-
 ### **Verifying Requests Within the Limit**
 
 This test ensures the rate limiter allows requests within the defined limit. We configure it with a **limit of** **5 requests** and a **10-second window** , then call isAllowed("client-1") **5 times** . Each call should return true, confirming the rate limiter correctly tracks and permits requests under the limit.
@@ -346,7 +328,6 @@ public void shouldAllowRequestsWithinLimit() {
     }
 }
 ```
-
 
 ### Verifying **Requests Beyond the Limit**
 
@@ -367,7 +348,6 @@ public void shouldDenyRequestsOnceLimitIsExceeded() {
             .isFalse();
 }
 ```
-
 
 ### **Verifying Requests After Window Reset**
 
@@ -399,7 +379,6 @@ public void shouldAllowRequestsAgainAfterFixedWindowResets() throws InterruptedE
 }
 ```
 
-
 ### **Verifying Independent Handling of Multiple Clients**
 
 This test ensures the rate limiter handles multiple clients independently. Configured with a **limit of 5 requests** and a **10-second window** , the first 5 requests from **client-1** are allowed (true), while the 6th is denied (false). Simultaneously, all 5 requests from **client-2** are allowed (true), confirming the rate limiter maintains separate counters for each client.
@@ -430,7 +409,6 @@ public void shouldHandleMultipleClientsIndependently() {
     }
 }
 ```
-
 
 ### **Verifying Requests Are Denied Until Fixed Window Resets**
 
@@ -468,7 +446,6 @@ public void shouldDenyAdditionalRequestsUntilFixedWindowResets() throws Interrup
 }
 ```
 
-
 ### **Verifying Denied Requests Are Not Counted**
 
 This test ensures that requests denied by the rate limiter are not included in the request count. Configured with a limit of 3 requests and a 5-second window, the first 3 requests (isAllowed("client-1")) are allowed (true), while the 4th is denied (false). Afterward, the Redis key for the client is checked to confirm the stored count equals the limit (3), ensuring denied requests do not increase the counter.
@@ -498,7 +475,6 @@ public void testRateLimitDeniedRequestsAreNotCounted() {
             .isEqualTo(limit);
 }
 ```
-
 
 Is there any other behavior we should verify? Let me know in the comments! The Fixed Window Rate Limiter is a simple yet effective way to manage request rates, and **Redis** makes it incredibly fast and reliable. By using commands like INCR and EXPIRE, we created a solution that tracks and limits requests while automatically resetting counters when the time window expires. With **Jedis** , we built an easy-to-understand Java implementation, and thanks to thorough testing with Redis TestContainers, JUnit 5, and AssertJ, we can trust it works as expected. This approach is a great starting point for handling request limits and can easily be adapted for more complex scenarios if needed.
 

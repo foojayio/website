@@ -296,5 +296,3 @@ But (and it's a big but!), remember those warnings we sprinkled throughout. AI i
 And remember : **➡️ 𝑨𝑰 gives you ✅ 𝐓𝐈𝐌𝐄 not ❌𝐂𝐎𝐍𝐅𝐈𝐃𝐄𝐍𝐂𝐄**
 
 Happy coding!
-
-<br />

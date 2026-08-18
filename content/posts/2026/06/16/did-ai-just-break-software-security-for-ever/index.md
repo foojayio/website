@@ -63,8 +63,7 @@ Look at these numbers
 
 None of those numbers is compatible with the others. *Unless* your stack is already current.
 
-Think about Y2K
----------------
+## Think about Y2K
 
 Whether midnight on 1 January 2000 would actually have brought down global infrastructure is still debated. What isn't debated is what happened before that date: governments legislated, boards signed off on nine-figure remediation budgets. I certainly had a fun time leading up to the EVENT. Entire IT departments spent person-years auditing and patching. Hundreds of billions were spent globally. Driven not by actual failures but by the credible possibility of them.
 
@@ -76,8 +75,7 @@ The credible possibility of the flood is already reshaping how boards think abou
 
 The CRA didn't materialise from nowhere. It's a legislative response to an acceleration that is now visibly happening.
 
-The asymmetry that should worry you
------------------------------------
+## The asymmetry that should worry you
 
 AI-assisted vulnerability research is genuinely good news for well-maintained projects. More bugs found, more patches shipped, faster. For major frameworks, maintainers often have the fix out before the CVE is even public.
 
@@ -95,8 +93,7 @@ And AI makes the gap wider faster.
 
 This is not a theoretical risk creeping toward you. It is already the pattern in the exploitation data.
 
-What this means for you right now
----------------------------------
+## What this means for you right now
 
 The upgrade cadence that felt OK two years ago is probably too slow for 2026.
 
@@ -119,7 +116,5 @@ Did AI break software security for ever? Not permanently. But it broke the old e
 ### Next Up
 
 This is Part 1 of a four-part series. Next: Why You Can't Migrate Your Way Out of a CVE. The real cost of a major migration, and why it cannot be your emergency response plan.
-
-
 
 *If you want to see your actual exposure before deciding anything, the HeroDevs EOL Dataset tool is free. scan your dependency manifest and you'll know exactly where you stand. [herodevs.com/eol-dataset](https://www.herodevs.com/eol-dataset/overview?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)*

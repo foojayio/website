@@ -28,8 +28,7 @@ Want to get started with Java programming on the Raspberry Pi?
 
 JBang is a great way to create your first program to control electronic components connected to the GPIO pins.
 
-What is JBang?
---------------
+## What is JBang?
 
 As described on their [website](https://www.jbang.dev/):
 
@@ -46,8 +45,7 @@ This video shows you all the steps described further in this article.
 
 {{< youtube 33CWAN1dQvA >}}
 
-Prepare a Raspberry Pi
-----------------------
+## Prepare a Raspberry Pi
 
 For this manual you can use the following approach:
 
@@ -62,9 +60,7 @@ $ java -version
 bash: java: command not found
 ```
 
-
-Installing JBang
-----------------
+## Installing JBang
 
 As described on [jbang.dev/download](https://www.jbang.dev/download/) installing JBang is enough to get started, even if you don't have Java installed already, as JBang will also take care of this.
 
@@ -76,9 +72,7 @@ OpenJDK Runtime Environment Temurin-11.0.14+9 (build 11.0.14+9)
 OpenJDK Server VM Temurin-11.0.14+9 (build 11.0.14+9, mixed mode)
 ```
 
-
-Minimal JBang example
----------------------
+## Minimal JBang example
 
 A minimal JBang Java-file looks like the following code block, take note of the special first line that tricks the system to run this as a script while still being valid Java-code.
 
@@ -96,7 +90,6 @@ class HelloWorld {
 }
 ```
 
-
 By saving this file as `HelloWorld.java` it can be started with:
 
 ```
@@ -104,9 +97,7 @@ $ jbang HelloWorld.java
 Hello World!
 ```
 
-
-JBang Pi4J example
-------------------
+## JBang Pi4J example
 
 If your project needs dependencies - which is the case for a Pi4J project - you can [define them in the java-file with the following gradle-style locators format](https://www.jbang.dev/documentation/guide/latest/dependencies.html), for example:  
 `//DEPS com.pi4j:pi4j-core:2.1.1`.
@@ -183,7 +174,6 @@ class JBangPi4JExample {
 }
 ```
 
-
 Without the need of any further configuration, installation, dependency download, or compiling, we should now be able to run this code with:
 
 ```
@@ -196,7 +186,6 @@ $ jbang JBangPi4JExample.java
 [main] INFO com.pi4j.platform.impl.DefaultRuntimePlatforms - adding platform to managed platform map [id=raspberrypi; name=RaspberryPi Platform; priority=5; class=com.pi4j.plugin.raspberrypi.platform.RaspberryPiPlatform]
 [main] WARN com.pi4j.library.pigpio.impl.PiGpioNativeImpl - PIGPIO ERROR: PI_INIT_FAILED; pigpio initialisation failed
 ```
-
 
 Auch, an error...?! But this is a known one! At this moment, PiGpio - the underlying native library which interacts with the GPIOs - needs to be called as `sudo`. This is not ideal, and we are investigating how we can rework this. But with some additional steps this can be fixed easily!
 
@@ -228,7 +217,6 @@ Downloading JDK 11. Be patient, this can take several minutes...
 [Thread-8] INFO com.pi4j.util.Console - Button was pressed for the 5th time
 ```
 
-
 Yep, we have a working example, with dependencies, without the need to compile anything!
 
 And both commands can even be combined to make things even more easy, allowing you to start the application simply with:
@@ -237,14 +225,10 @@ And both commands can even be combined to make things even more easy, allowing y
 $ sudo `which jbang` JBangPi4JExample.java
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 JBang is a great way to simply run Java-files, helps you to quickly get started with Pi4J on the Raspberry Pi, and can be the ideal getting-started method to experiment with electronics and Java.
 
 Thanks to [Max Rydahl Andersen](https://twitter.com/maxandersen) and the many contributors for creating JBang and to propose the [solution how `sudo` can be combined with JBang](https://github.com/jbangdev/jbang/discussions/1229).
-
-
 
 *Originally posted as [one of the build and run examples on the Pi4J website](https://pi4j.com/documentation/building/jbang/).*

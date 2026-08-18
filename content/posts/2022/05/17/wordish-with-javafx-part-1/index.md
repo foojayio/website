@@ -22,8 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Building Games and Having Fun with Java and JavaFX
---------------------------------------------------
+## Building Games and Having Fun with Java and JavaFX
 
 Wordish is a JavaFX implementation of the game Wordle. It's like Wordle. It is Wordle-ish. It's Wordish.
 ![](playgame5-308x510.png) Figure 1. Wordish main layout view
@@ -42,8 +41,7 @@ Wordish is a JavaFX implementation of Wordle. Wordish is a bit different from Wo
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>. Let's get started!
 
-Wordish Roadmap
----------------
+## Wordish Roadmap
 
 We present this discussion in the following five parts:
 
@@ -53,8 +51,7 @@ We present this discussion in the following five parts:
 4. What's in a Word, Anyway: Getting the target word, is a word valid? Coming soon.
 5. Chart Your Guesses: Customizing charts with orientation and colors, adding nodes to the chart scene graph, implementing a customized Popup control. Coming soon.
 
-Part 1: The Main UI Layout
---------------------------
+## Part 1: The Main UI Layout
 
 JavaFX typically uses FXML to describe a UI scene. FXML, an XML-based markup language, is well-suited to define a JavaFX scenegraph, since both have a hierarchical structure. [Scene Builder](https://gluonhq.com/products/scene-builder/), an open-source drag-and-drop tool, lets you build your view visually and produces FXML. Figure 2 shows the view we built using Scene Builder for the Wordish main application view, **wordish.fxml** and Figure 3 shows the layout containers that hold the scene graph. Let's start with the layout.
 
@@ -126,8 +123,7 @@ Normally, when you increase the width of a TilePane or FlowPane control, the lay
 
 **Note** : See file [**wordish.fxml**](https://github.com/gailasgteach/Wordish/blob/master/src/main/resources/com/asgteach/wordish.fxml)in the github repository for the above UI code.
 
-**Controller Class**
---------------------
+## **Controller Class**
 
 Each view described by an FXML file has an associated controller class specified in the fxml. JavaFX includes an FXMLLoader class that builds the scene graph from the JavaFX controls you specify in your FXML file. The FXMLLoader class also instantiates the controller class and injects any of the FXML-defined controls that your controller class needs to access.
 
@@ -137,7 +133,6 @@ There is a straightforward mechanism for this access. For example, to access the
 <Button fx:id="resetButton" onAction="#resetGame" >            
 </Button>
 ```
-
 
 Then, in the controller class, you annotate the Java declaration with `@FXML`. Note that you do not instantiate this object; rather the FXMLLoader instantiates (injects) it for you.
 
@@ -149,7 +144,6 @@ public class WordishController {
     . . . 
 }
 ```
-
 
 ### Accessing the Letter Label \& Key Button Controls
 
@@ -203,7 +197,6 @@ public class WordishController {
 }
 ```
 
-
 First, we populate `List<LetterLabel> letters` by invoking the TilePane's `getChildren()` method. After converting to a stream, we cast each Node to a LetterLabel and collect them in a List.
 
 Similarly, we populate the `Map<String, KeyButton> keyLetters` in the same way. Here, we cast each Node to a KeyButton and use `filter()` to select only KeyButton objects that correspond to the lettered keys (that is, not Enter and not Delete). After `filter()`, we collect these KeyButton objects in a Map, where the key is the button's `getText()` string (the letter) . The value is the KeyButton object itself, returned with the static method `Function.identity()`.
@@ -214,8 +207,7 @@ The lettered keys are the ones that reflect the game-playing status. As shown in
 
 **Note** : See **[WordishController.java](https://github.com/gailasgteach/Wordish/blob/master/src/main/java/com/asgteach/WordishController.java)** for the above described code.
 
-**Mobile Phone Settings: iOS and Android**
-------------------------------------------
+## **Mobile Phone Settings: iOS and Android**
 
 While it's easy and quick to run this program on the desktop using the standard JVM, we'd also like to target the application for a mobile environment. Using the [Gluon Substrate GraalVM](https://start.gluon.io/) plugin, which uses an ahead-of-time compiler and bundles all the support libraries you need to run the application natively, we can install the application on both an iPhone and Android device. We discussed how to do this in a separate three-part article [here](https://foojay.io/today/creating-mobile-apps-with-javafx-part-1/).
 
@@ -242,7 +234,6 @@ To limit the layout to portrait mode only requires limiting the supported orient
 </plist>
 ```
 
-
 Next, we create an icon for our app. We use [Inkscape](https://inkscape.org/) to create a 1024 x 1024 PNG image. The web site: <https://appicon.co/> generates a set of icons from a single 1024 x 1024 PNG file for both iOS and Android.
 
 <figure class="wp-block-image size-large is-resized">
@@ -266,7 +257,6 @@ For Android, modify file **AndroidManifest.xml** to customize the Android applic
        </activity>
 </application>
 ```
-
 
 The [applicon.co](https://appicon.co/) website generates Android icons for us too, so we're all set. For Android, copy the default files to **src/android** to retain these customizations.
 

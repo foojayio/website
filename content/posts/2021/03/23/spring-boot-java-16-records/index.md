@@ -31,14 +31,10 @@ I have picked Records because they are definitely the most favored feature added
 >
 > --- Mala Gupta (@eMalaGupta) [March 4, 2021](https://twitter.com/eMalaGupta/status/1367274033184575497?ref_src=twsrc%5Etfw)
 
-<br />
-
 I also conducted a similar survey, but it was focused on features from Java 8 onwards. The results were not unexpected as Java 8 is still widely used, which is very unfortunate, though, as tons of new features and improvements have been added to newer Java versions. But in terms of features, Java 8 was definitely a game-changer from a developer perspective.
 > Which feature from [@java](https://twitter.com/java?ref_src=twsrc%5Etfw) 8 and onwards do you like the most?[@javarevisited](https://twitter.com/javarevisited?ref_src=twsrc%5Etfw) [@Java_Champions](https://twitter.com/Java_Champions?ref_src=twsrc%5Etfw) [@java_masters](https://twitter.com/java_masters?ref_src=twsrc%5Etfw) [@Oraclejavamag](https://twitter.com/Oraclejavamag?ref_src=twsrc%5Etfw) [@javacodegeeks](https://twitter.com/javacodegeeks?ref_src=twsrc%5Etfw) [@piotr_minkowski](https://twitter.com/piotr_minkowski?ref_src=twsrc%5Etfw) [@vlad_mihalcea](https://twitter.com/vlad_mihalcea?ref_src=twsrc%5Etfw)[#100DaysOfCode](https://twitter.com/hashtag/100DaysOfCode?src=hash&ref_src=twsrc%5Etfw) [#MovedByJava](https://twitter.com/hashtag/MovedByJava?src=hash&ref_src=twsrc%5Etfw) [#100daysofjava](https://twitter.com/hashtag/100daysofjava?src=hash&ref_src=twsrc%5Etfw) [#java](https://twitter.com/hashtag/java?src=hash&ref_src=twsrc%5Etfw)
 >
 > --- Ashish Choudhary 👨🏻‍💻🧔🏻👨‍👩‍👦 (@iASHeeesh) [January 24, 2021](https://twitter.com/iASHeeesh/status/1353207204761899010?ref_src=twsrc%5Etfw)
-
-<br />
 
 For some more Java and tech-related stuff, follow me on [Twitter](https://twitter.com/iASHeeesh)
 
@@ -81,7 +77,6 @@ class Point {
 }
 ```
 
-
 Another option that we developers use most often is to leave the handling of the boilerplate to the IDE. For example, with Intellij, you can generate constructors, getters, setters, equals, hashCode, and toString, etc., by simply pressing Command + N shortcut key. But the boilerplate code is still there.
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1616085356856/X6aLicL5f.png)
@@ -91,7 +86,6 @@ With Java 16 Records, it's just one line of code. Cool, isn't it:
 ```java
 record Point(int x, int y) { }
 ```
-
 
 Here a record class declaration consists of a name, optional type parameters, a header, and a body.
 
@@ -103,13 +97,11 @@ The internals of the Java Record class can be checked using a decompiler that co
 public record State(String name, String capital) {}
 ```
 
-
 Following is the decompiled Java Record class. I have used the `javap` command-line utility to check class file internals.
 
 ```
 $ javap State.class
 ```
-
 
 Following is the output:
 
@@ -124,7 +116,6 @@ public final class com.example.indianstates.State extends java.lang.Record {
   public java.lang.String capital();
 }
 ```
-
 
 You can conclude the following from the above output.
 
@@ -167,7 +158,6 @@ You can further validate these points by writing tests as well:
      Assert.assertEquals(state1.hashCode(), state2.hashCode());
  }
 ```
-
 
 ```
 
@@ -218,7 +208,6 @@ public class Controller {
 }
 ```
 
-
 We can focus on the getAllStates() method, which returns a list of State record class objects.
 
 We have already seen the State record class. There is no change in that.
@@ -226,7 +215,6 @@ We have already seen the State record class. There is no change in that.
 ```java
 public record State(String name, String capital) {}
 ```
-
 
 Following is the `StateRepository` interface implemented by the `StateService` class:
 
@@ -265,7 +253,6 @@ public class StateService implements StateRepository{
 }
 ```
 
-
 `StateService` is autowired using the constructor of the `Controller` class. It has a method named findAll() that uses Spring JdbcTemplate to query and returns a `State` record class list from the in-memory H2 database. As you can see, we have used the `RowMapper` functional interface, which JdbcTemplate uses for mapping rows of a ResultSet on a per-row basis, and it returns the Row object for the current row. We have also used the `new` keyword to initialize the record class, which means we can initialize the record class like normal classes in Java. I have also used the Java 15 [Text Blocks](https://openjdk.java.net/jeps/378) feature, which helps in the readability of SQL queries and JSON string values.
 
 However, there were some issues when I started using records with this application. Earlier I was using `BeanPropertyRowMapper,` which resulted in the following exception when I disabled Lombok and used Records instead for the `State` class.
@@ -273,7 +260,6 @@ However, there were some issues when I started using records with this applicati
 ```
 2021-03-19 02:01:55.434 ERROR 66059 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.indianstates.State]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.example.indianstates.State.<init>()] with root cause
 ```
-
 
 ```
 
@@ -290,7 +276,6 @@ public record State(String name, String capital) {
 }
 ```
 
-
 But, that resulted in the following compilation error.
 > Non-canonical record constructor must delegate to another constructor
 
@@ -303,7 +288,6 @@ public record State(String name, String capital) {
     }
 }
 ```
-
 
 Then I took the help of the IntelliJ feature to generate the constructor for this record class. It provided me with the following options.
 

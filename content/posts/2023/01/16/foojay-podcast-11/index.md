@@ -26,8 +26,7 @@ In this Foojay Podcast episode, we talk about these predictions, and we even fou
 
 {{< youtube xP4By-Nsdh0 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -35,18 +34,15 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Ted Neward ([@\[email protected\]](https://hachyderm.io/@tedneward), [@tedneward](https://twitter.com/tedneward))
 
-Podcast host
-------------
+## Podcast host
 
 * Frank Delporte ([@\[email protected\]](https://foojay.social/@frankdelporte), [@frankdelporte](https://twitter.com/frankdelporte))
 
-Content
--------
+## Content
 
 * 00'00 Intro and music
 * 00'13 About the topic of this podcast

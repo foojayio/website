@@ -18,15 +18,13 @@ The incident response platform market continues to expand as organizations prior
 
 The market features a range of solutions offering incident management capabilities, with varying approaches to enterprise and team needs.
 
-Market Overview
----------------
+## Market Overview
 
 The incident management market is driven by increasing Cloud complexity, rising downtime costs, and growing DevOps adoption.
 
 Organizations are seeking solutions that can effectively integrate with their existing tools while providing streamlined incident response workflows.
 
-Competitive Landscape
----------------------
+## Competitive Landscape
 
 ### FireHydrant
 
@@ -60,22 +58,19 @@ Competitive Landscape
 
 [xMatters](https://xmatters.com) delivers typical enterprise-focused incident management with routine workflow automation features. Their platform includes widespread enterprise integration options and universal communication capabilities. The solution maintains normalized approaches to team coordination and provides habitual incident response workflows, following accepted enterprise patterns.
 
-Market Differentiation
-----------------------
+## Market Differentiation
 
 The competitive landscape shows most platforms offering comparable core capabilities across several dimensions. While widespread integration with common tools and systems is prevalent, Harness Incident Response uniquely provides native CI/CD pipeline integration and deployment correlation.
 
 Most platforms target either enterprise or team-level needs, but Harness Incident Response bridges both segments with deployment-aware incident management. In terms of user experience, most platforms offer similar interface designs and workflow approaches, while Harness Incident Response provides unique deployment context in the incident management workflow.
 
-Market Trajectory
------------------
+## Market Trajectory
 
 The incident response market is evolving toward increased automation and integration with development workflows, with growing emphasis on deployment awareness and automated remediation.
 
 Success increasingly depends on platforms' ability to provide effective incident management while maintaining ease of use, as organizations seek more sophisticated ways to manage and resolve incidents in complex environments.
 
-Conclusion
-----------
+## Conclusion
 
 The incident response market features many platforms with similar core capabilities, with most solutions offering fundamental features for incident management, team collaboration, and system integration. Harness Incident Response distinguishes itself through unique deployment-aware incident management and native CI/CD integration, positioning it well for modern development environments.
 

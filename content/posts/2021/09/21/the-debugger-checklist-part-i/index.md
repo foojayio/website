@@ -84,7 +84,6 @@ public class DebugUtil {
 }
 ```
 
-
 We can use this code in our logs which we can then instantly scan through to find whether a bug correlates to invocation through a specific stack.
 
 3. Conditional Breakpoints
@@ -117,8 +116,7 @@ Couple that with the ability to edit variable values in the watch window and you
 
 ![Jump to the line plugin](screenshot_22984-700x280.gif)
 
-To be Continued...
-------------------
+## To be Continued...
 
 Next time I'll go over the process of debugging an application. It's a very simple process but as usual "the devil is in the details".
 

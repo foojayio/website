@@ -28,8 +28,7 @@ In the current literature, REST is generally promoted as the best thing since sl
 
 In each of these steps, issues lurk. This blog post focuses on listing some of them and providing hints at ways to solve them.
 
-Resources
----------
+## Resources
 
 REST emerged from the cons of SOAP. SOAP provides a single endpoint and executes code depending on the payload. The idea of REST is to provide multiple endpoints, which each executes different code.
 
@@ -37,8 +36,7 @@ I'll be honest; there are few issues at this stage. The biggest one relates to g
 
 Let's walk up the REST maturity model.
 
-HTTP verbs
-----------
+## HTTP verbs
 
 HTTP verbs are the next step toward the glory of REST. They come from interactions with HTML "back in the days". Interactions came from operations.
 
@@ -69,8 +67,7 @@ It changes the identified resource indeed, but it has "side-effects": it also ch
 
   What's the best alternative? "It depends".
 
-Hypermedia
-----------
+## Hypermedia
 
 Fowler describes Hypermedia Controls as the ultimate step to reaching the glory of REST. It's nowadays known as :
 > With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia.
@@ -98,7 +95,6 @@ HATEOAS is a concept; here's a possible implementation taken from Wikipedia. Whe
 }
 ```
 
-
 If the balance is negative, only the deposit link will be available:
 
 ```json
@@ -117,14 +113,11 @@ If the balance is negative, only the deposit link will be available:
 }
 ```
 
-
 A common issue with REST is the lack of standards; HATEOAS is no different. The first attempt to bring some degree of standardization was the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-08), *aka* HAL. Note that it was incepted in 2012; the latest version dates from 2016, and it's still in draft.
 
 Here's a quick diagram that summarizes the proposal:
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-62221 aligncenter" src="hal-700x291.png" alt="" width="700" height="291">
-
-<br />
 
 We can rework the above with HAL as the following:
 
@@ -156,7 +149,6 @@ Content-Type: application/hal+json
 }
 ```
 
-
 1. Available links
 2. Link to self
 3. Tell which HTTP verb can be used
@@ -185,7 +177,6 @@ Link: </accounts/a1b2c3d4e5f6> rel="self";
 }
 ```
 
-
 1. Link to the current resource with the non-standard `self` relation type
 2. Link to deposit with the extension `https://my.bank/deposit` relation type and an arbitrary `title` target attribute
 
@@ -199,8 +190,7 @@ Other alternative media types specifications are available.
 | [Siren](https://github.com/kevinswiber/siren)                                                                                | > Siren is a hypermedia specification for representing entities. > As HTML is used for visually representing documents on a Web site, Siren is a specification for presenting entities via a Web API. > Siren offers structures to communicate information about entities, actions for executing state transitions, and links for client navigation. | Individual  |
 | [Application-Level Profile Semantics](https://datatracker.ietf.org/doc/html/draft-amundsen-richardson-foster-alps-07)        | > An ALPS document can be used as a profile to explain the application semantics of a document with an application-agnostic media type (such as HTML, HAL, Collection+JSON, Siren, etc.). > This increases the reusability of profile documents across media types.                                                                                  | IETF        |
 
-Bonus: HTTP response status
----------------------------
+## Bonus: HTTP response status
 
 What Fowler's post doesn't mention is the HTTP response status. Most readers are familiar with the status ranges:
 
@@ -234,8 +224,7 @@ It's not a straightforward answer; there was a lot of debate around the alternat
 
 That's already a lot on the designer side, but the client side contains a lot of uncertainty, too, as some big APIs providers use their [own HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#Unofficial_codes).
 
-Conclusion
-----------
+## Conclusion
 
 The "glory of REST" doesn't mean much.
 

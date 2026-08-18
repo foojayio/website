@@ -28,8 +28,7 @@ The OWASP regularly publishes a Top 10 vulnerability report. The report targets 
 
 In this post, I'd like to describe how to fix some of them via the [Apache APISIX API Gateway](https://apisix.apache.org/).
 
-The OWASP Top 10 2021
----------------------
+## The OWASP Top 10 2021
 
 In 2021, the report mentions:
 
@@ -48,8 +47,7 @@ For more details, please check the complete [report](https://owasp.org/www-proje
 
 Fixing a vulnerability depends on its exact nature. For example, fixing *Vulnerable and Outdated Components* is process-driven, requiring discipline in managing versions and retiring older ones. Some, however, are technical and only require proper configuration in the reverse proxy or API Gateway, *e.g.* , *Server Side Request Forgery*.
 
-Nobody cares about security
----------------------------
+## Nobody cares about security
 
 Security is a touchy subject because hardening security doesn't bring any value to the business. Career-driven managers won't care about security as they won't be able to showcase they increased the company's profit by X% on their next yearly evaluation. Unless the board considers security seriously, chances are nobody will care. For this reason, most organizations implement checkbox-based security, aka plausible deniability. If you're interested in implementing security properly, I've written some thoughts in a previous blog post: [Treat security as a risk](https://blog.frankel.ch/treat-security-as-risk/).
 
@@ -60,8 +58,7 @@ All in all, securing applications will not get a lot of budget, if any. Hence, w
 
 While it's theoretically possible to configure Nnginx via Apache APISIX configuration, there's another more straightforward way.
 
-The OWASP Core Ruleset and Coraza
----------------------------------
+## The OWASP Core Ruleset and Coraza
 
 The description of the Core Ruleset is pretty relevant to our needs:
 > The OWASP® ModSecurity Core Rule Set (CRS) is a set of generic attack detection rules for use with ModSecurity or compatible web application firewalls. The CRS aims to protect web applications from a wide range of attacks, including the OWASP Top Ten, with a minimum of false alerts. The CRS provides protection against many common attack categories, including:
@@ -83,8 +80,7 @@ The description of the Core Ruleset is pretty relevant to our needs:
 
 OWASP also provides [Coraza](https://coraza.io/), a port of ModSecurity available as a Go library. [Coraza Proxy Wasm](https://github.com/proxy-wasm/spec) is built on top of Coraza and implements the [proxy-wasm ABI](https://github.com/proxy-wasm/spec), which specifies a set of Wasm interfaces for proxies. Finally, Apache APISIX offers proxy-wasm integration.
 
-Putting it all together
------------------------
+## Putting it all together
 
 Let's sum up:
 
@@ -119,7 +115,6 @@ EOF
 USER apisix                                                                 #5
 ```
 
-
 1. Define variables for better maintainability
 2. Get the Coraza Wasm release
 3. In recent APISIX versions, the user is `apisix` to harden security. As we need to install packages, we must switch to `root`.
@@ -135,7 +130,6 @@ wasm:
       priority: 7999                                                        #2
       file: /usr/local/apisix/proxywasm/coraza-proxy-wasm.wasm              #3
 ```
-
 
 1. Filter's name set in Wasm code
 2. Set the highest priority so it runs before any other plugin
@@ -158,7 +152,6 @@ global_rules:
           default_directives: default                                       #7
 ```
 
-
 1. Configure the `coraza-filter` plugin now that it's available
 2. Define configurations. Here, we define a single one, `default`, but we could define several and use different ones in different routes
 3. Increase the log level to see what happens in logs
@@ -172,7 +165,6 @@ We proceed to define routes to to test our setup. Let's call the route to `/get`
 ```bash
 curl localhost:9080?user=foobar
 ```
-
 
 The response is as expected:
 
@@ -193,13 +185,11 @@ The response is as expected:
 }
 ```
 
-
 Now, let's try to send JavaScript in the query string. There's no way this request is expected server-side, so our infrastructure should protect us from it.
 
 ```bash
 curl 'localhost:9080?user=<script>alert(1)</script>'
 ```
-
 
 The response is a 403 HTTP status code. If we look at the log, we can see the following hints:
 
@@ -210,11 +200,9 @@ Coraza: Warning. Javascript method detected
 Coraza: Access denied (phase 1). Inbound Anomaly Score Exceeded in phase 1
 ```
 
-
 Coraza did the job!
 
-Conclusion
-----------
+## Conclusion
 
 Most organizations don't incentivize for security. Hence, we need to be smart about it and use existing components as much as possible.
 
@@ -228,7 +216,5 @@ We can harden Apache APISIX against the OWASP Top 10 by using Coraza and the Cor
 * [APISIX - Integrate with Coraza](https://docs.api7.ai/apisix/how-to-guide/security/waf/integrate-with-coraza)
 
 The complete source code for this post can be found on [GitHub](https://github.com//ajavageek/apisix-coraza).
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/apisix-owasp-coraza-core-ruleset/) on February 4^th^, 2024*

@@ -17,8 +17,6 @@ frozen: false
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-36467" src="foojay-prim-1-700x157.png" alt="Set Operations Venn Diagrams" width="700" height="157">
 
-<br />
-
 [Eclipse Collections](https://www.eclipse.org/collections/) has a rich assortment of data structures, and one of them is a Set.
 
 Recently, I worked on an issue to implement union, intersect, and difference operations in sets for primitive types.
@@ -27,8 +25,6 @@ The sections below cover each operation's objective, design considerations, and 
 
 The last section covers the takeaways.
 
-
-
 ### Union: What Does This Operation Do?
 
 Method signature: `setA.union(setB)`
@@ -36,8 +32,6 @@ Method signature: `setA.union(setB)`
 Union as the name indicates, it takes elements from two sets and combines them into one.
 
 <img decoding="async" class="size-full wp-image-36470 alignleft" src="foojay-prim-union.png" alt="" width="250" height="125">
-
-<br />
 
 Set A --- 1, 2, 3, 4.
 
@@ -113,8 +107,6 @@ public void union()
 `
 ```
 
-
-
 ### Intersect: What Does This Operation Do?
 
 Method signature: `setA.intersect(setB)`
@@ -154,8 +146,6 @@ Eclipse Collections has an existing API that allows us to select all elements th
 
 Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse-collections/blob/00557933f648e2c3a2112bcfc7cfb349a7609844/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L502) for equal-sized, unequal-sized, and empty sets.
 
-
-
 ### Difference: What Does This Operation Do?
 
 Method signature: `setA.difference(setB)`
@@ -185,8 +175,6 @@ Eclipse Collections has an existing API that allows us to reject which returns a
 ```
 
 Unit tests for difference covering scenarios for equal-sized, unequal-sized, and empty sets.
-
-
 
 ### Takeaways
 

@@ -129,7 +129,6 @@ System.out.printf("Pressure: %.1f hPa%n", sensor.pressure());
 pi4j.shutdown();
 ```
 
-
 Instead of dealing with low-level communication details, developers can immediately focus on using the sensor data within their applications. This approach reduces complexity, improves readability, and allows projects to move from prototype to production much faster.
 
 Another important aspect of Pi4J Drivers is that the project goes beyond individual sensor drivers. In addition to providing drivers for standalone components such as environmental sensors, displays, and I/O expanders, it also includes a dedicated [HATs](https://dev.to/igoriot/what-is-a-raspberry-pi-hat-1c8d "HATs") section. The goal of this module is to offer higher-level libraries for popular Raspberry Pi HATs, bundling multiple sensors and features into a single, easy-to-use API. Instead of configuring and managing each device separately, developers can work directly with the HAT as a complete platform. This approach further simplifies development and makes it easier to get started with feature-rich expansion boards such as the Sense HAT and other Raspberry Pi add-ons.
@@ -155,7 +154,6 @@ System.out.println("Pressure: " + pressureSensor.readPressure());
 
 pi4j.shutdown();
 ```
-
 
 Behind the scenes, the driver handles the communication with the hardware, allowing developers to focus on application logic instead of device-specific protocols and register management.
 

@@ -43,7 +43,3 @@ Something that's really important to us in the Manchester Java Community is maki
 For more details about JManc you can check out our website: [jmanc.org](https://jmanc.org/).
 
 If you are already convinced that attending JManc is for you, you can register via [Eventbrite](https://jmanc.eventbrite.co.uk).
-
-<br />
-
-<br />

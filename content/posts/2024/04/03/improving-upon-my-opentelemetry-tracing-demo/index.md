@@ -29,8 +29,7 @@ Last year, I wrote a [post](https://blog.frankel.ch/end-to-end-tracing-opentelem
 
 I've recently improved the demo to deepen my understanding and want to share my learning.
 
-Using a regular database
-------------------------
+## Using a regular database
 
 In the initial demo, I didn't bother with a regular database. Instead:
 
@@ -42,8 +41,7 @@ I replaced all of them with a regular PostgreSQL database, with a dedicated sche
 
 The OpenTelemetry agent added a new span when connecting to the database on the JVM and in Python. For the JVM, it's automatic when one uses the Java agent. One needs to install the relevant package in Python - see next section.
 
-OpenTelemetry integrations in Python libraries
-----------------------------------------------
+## OpenTelemetry integrations in Python libraries
 
 Python requires you to explicitly add the package that instruments a specific library for OpenTelemetry. For example, the demo uses Flask; hence, we should add the Flask integration package. However, it can become a pretty tedious process.
 
@@ -54,7 +52,6 @@ pip install opentelemetry-distro
 
 opentelemetry-bootstrap -a install
 ```
-
 
 For the demo, it installs the following:
 
@@ -74,13 +71,11 @@ opentelemetry_instrumentation_urllib3-0.41b0.dist-info
 opentelemetry_instrumentation_wsgi-0.41b0.dist-info
 ```
 
-
 The above setup adds a new automated trace for connections.
 
 ![](connect-span-1024x511.jpg)
 
-Gunicorn on Flask
------------------
+## Gunicorn on Flask
 
 Every time I started the Flask service, it showed a warning in red that it shouldn't be used in production. While it's unrelated to OpenTelemetry, and though nobody complained, I was not too fond of it. For this reason, I added a "real" HTTP server. I chose [Gunicorn](https://gunicorn.org/), for no other reason than because my knowledge of the Python ecosystem is still shallow.
 
@@ -92,15 +87,13 @@ RUN pip install gunicorn
 ENTRYPOINT ["opentelemetry-instrument", "gunicorn", "-b", "0.0.0.0", "-w", "4", "app:app"]
 ```
 
-
 * The `-b` option refers to binding; you can attach to a specific IP. Since I'm running Docker, I don't know the IP, so I bind to any.
 * The `-w` option specifies the number of workers
 * Finally, the `app:app` argument sets the module and the application, separated by a colon
 
 Gunicorn usage doesn't impact OpenTelemetry integrations.
 
-Heredocs for the win
---------------------
+## Heredocs for the win
 
 You may benefit from this if you write a lot of `Dockerfile`.
 
@@ -120,7 +113,6 @@ RUN pip install pip-tools \
   && opentelemetry-bootstrap -a install
 ```
 
-
 The first snippet creates five layers, while the second only one; however, the first is more readable than the second. With [heredocs](https://www.docker.com/blog/introduction-to-heredocs-in-dockerfiles/), we can access a more readable syntax that creates a single layer:
 
 ```dockerfile
@@ -135,11 +127,9 @@ RUN <<EOF
 EOF
 ```
 
-
 Heredocs are a great way to have more readable and more optimized Dockerfiles. Try them!
 
-Explicit API call on the JVM
-----------------------------
+## Explicit API call on the JVM
 
 In the initial demo, I showed two approaches:
 
@@ -156,7 +146,6 @@ First, we need to add the OpenTelemetry API dependency to the project. We inheri
     <artifactId>opentelemetry-api</artifactId>
 </dependency>
 ```
-
 
 At this point, we can access the API. OpenTelemetry offers a static method to get an instance:
 
@@ -180,7 +169,6 @@ val span = tracer.spanBuilder("AnalyticsFilter.filter")                //3
 span.end()                                                             //6
 ```
 
-
 1. Get the underlying `OpenTelemetry`
 2. Get the tracer builder and "build" the tracer
 3. Get the span builder
@@ -188,8 +176,7 @@ span.end()                                                             //6
 5. Start the span
 6. End the span; after this step, send the data to the OpenTelemetry endpoint configured
 
-Adding a message queue
-----------------------
+## Adding a message queue
 
 When I did the talk based on the post, attendees frequently asked whether OpenTelemetry would work with messages such as MQ or Kafka. While I thought it was the case in theory, I wanted to make sure of it: I added a message queue in the demo under the pretense of analytics.
 
@@ -208,7 +195,6 @@ First, let's add MQTT API to the project.
     <version>1.2.5</version>
 </dependency>
 ```
-
 
 Interestingly enough, the API doesn't allow access to the `traceparent` directly. However, we can reconstruct it via the `SpanContext` class.
 
@@ -231,7 +217,6 @@ val message = MqttMessage().apply {
 val client = MqttClient(mqtt.serverUri, mqtt.clientId)                            //5
 client.publish(mqtt.options, message)                                             //6
 ```
-
 
 1. Get the span context
 2. Construct the `traceparent` from the span context, according to the W3C Trace Context specification
@@ -256,7 +241,6 @@ const sdk = new NodeSDK({
 
 sdk.start()
 ```
-
 
 The next step is to read the metadata, recreate the context from the `traceparent`, and create a span.
 
@@ -288,7 +272,6 @@ client.on('message', (aTopic, payload, packet) => {
 })
 ```
 
-
 1. Read the metadata
 2. Recreate the context from the `traceparent`
 3. Create the span
@@ -296,8 +279,7 @@ client.on('message', (aTopic, payload, packet) => {
 
 For the record, I tried to migrate to TypeScript, but when I did, I didn't receive the message. Help or hints very welcome!
 
-Apache APISIX for messaging
----------------------------
+## Apache APISIX for messaging
 
 Though it's not common knowledge, Apache APISIX can proxy HTTP calls as well as UDP and TCP messages. It only offers a few plugins at the moment, but it will add more in the future. An OpenTelemetry one will surely be part of it. In the meantime, let's prepare for it.
 
@@ -311,7 +293,6 @@ apisix:
       - addr: 9100                                                              #2
         tls: false
 ```
-
 
 1. Configure APISIX for both modes
 2. Set the TCP port
@@ -333,7 +314,6 @@ stream_routes:                                                                  
         protocol_level: 5                                                       #4
 ```
 
-
 1. Define the MQTT queue as the upstream
 2. Define the "streaming" route. APISIX defines everything that's not HTTP as streaming
 3. Use the MQTT proxy. Note APISIX offers a Kafka-based one
@@ -341,13 +321,10 @@ stream_routes:                                                                  
 
 Finally, we can replace the MQTT URLs in the Docker Compose file with APISIX URLs.
 
-Conclusion
-----------
+## Conclusion
 
 I've described several items I added to improve my OpenTelemetry demo in this post. While most are indeed related to OpenTelemetry, some of them aren't. I may add another component in another different stack, a front-end.
 
 The complete source code for this post can be found on [GitHub](https://github.com/nfrankel/opentelemetry-tracing).
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/improve-otel-demo/) on January 28^th^, 2024*

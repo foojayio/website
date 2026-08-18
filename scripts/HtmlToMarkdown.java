@@ -2,6 +2,7 @@
 //DEPS com.vladsch.flexmark:flexmark-html2md-converter:0.64.8
 
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -90,6 +91,25 @@ public final class HtmlToMarkdown {
     // that add nothing. Dropped rather than converted to `---`.
     private static final Pattern FLEXMARK_THEMATIC_BREAK =
             Pattern.compile("(?m)^[ \\t]*\\*\\*\\* \\*\\* \\* \\*\\* \\*\\*\\*[ \\t]*$");
+
+    // A line holding nothing but <br> tags. WordPress bodies use these as
+    // vertical spacers -- after an image, after a video embed, at the end of the
+    // body -- and they arrive here as a bare `<br />` line that renders as an
+    // empty <br> between paragraphs. Same story as the decorative <hr>s above:
+    // the WP theme gave them meaning, this one doesn't. Dropped for the same
+    // reason and at the same point, BEFORE the preserved placeholders are
+    // restored, so a <br> inside a raw-HTML block (a table cell, inline SVG) is
+    // never touched. A <br> with text on the line is a real hard break and stays.
+    private static final Pattern STANDALONE_BREAK =
+            Pattern.compile("(?im)^[ \\t]*(?:<br\\s*/?>[ \\t]*)+$");
+
+    // ATX headings (`## Title`) rather than Flexmark's default, which underlines
+    // h1/h2 with ==== / ---- and only uses ### from h3 down. That split leaves
+    // content/ written in two styles at once, and the underline is the worse of
+    // the two here: contributors send posts as PRs and type `##`, and an 80-dash
+    // rule under every h2 is noise in a diff. Levels 3-6 are unaffected.
+    private static final MutableDataSet CONVERTER_OPTIONS = new MutableDataSet()
+            .set(FlexmarkHtmlConverter.SETEXT_HEADINGS, false);
 
     // Images hosted on foojay.io die at cutover, so they are pulled local.
     // Third-party images (youtube thumbs, badges, ...) are left untouched.
@@ -220,12 +240,15 @@ public final class HtmlToMarkdown {
             el.replaceWith(new Element("p").text(token));
         }
 
-        String md = FlexmarkHtmlConverter.builder().build().convert(content.html()).trim();
+        String md = FlexmarkHtmlConverter.builder(CONVERTER_OPTIONS).build()
+                .convert(content.html()).trim();
 
-        // Drop the <hr> rules the converter just emitted. Done BEFORE the
-        // placeholders are restored, so a code sample that happens to contain
-        // the same run of asterisks can never be hit.
+        // Drop the <hr> rules and the <br> spacers the converter just emitted.
+        // Done BEFORE the placeholders are restored, so a code sample that
+        // happens to contain the same run of asterisks -- or a raw-HTML block
+        // with a <br> on its own line -- can never be hit.
         md = FLEXMARK_THEMATIC_BREAK.matcher(md).replaceAll("");
+        md = STANDALONE_BREAK.matcher(md).replaceAll("");
 
         for (int i = 0; i < preserved.size(); i++) {
             md = md.replace(PRESERVE_TOKEN + i + PRESERVE_TOKEN_END,

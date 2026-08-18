@@ -34,10 +34,7 @@ We are drowning in a backlog of "Technical Debt," "Code Smells," and "Security H
 
 This is **Part 4** . Today, we stop "finding" and start **"auto-remediating"** using the new AI superpowers in SonarQube.
 
-
-
-**Problem #1: "I see the bug, but I'm too lazy (or busy) to fix it"**
----------------------------------------------------------------------
+## **Problem #1: "I see the bug, but I'm too lazy (or busy) to fix it"**
 
 You are in IntelliJ. SonarQube highlights a block of code with high Cognitive Complexity.
 
@@ -64,10 +61,7 @@ And the solution suggested by SonarQube AI CodeFix feature
 
 And finally this is the way we see the change coming from SonarQube AI CodeFix in IntelliJ IDE
 
-
-
-**Problem #2: "My AI Assistant writes buggy code because it doesn't know our rules"**
--------------------------------------------------------------------------------------
+## **Problem #2: "My AI Assistant writes buggy code because it doesn't know our rules"**
 
 You are using Cursor, Windsurf, or Claude Desktop to generate a new Spring Boot Service.
 
@@ -96,10 +90,7 @@ Read these extended articles about [MCP](https://foojay.io/today/lets-talk-about
 
 Asking the agent to produce code but connecting it to SonarQube MCP Server in order to be sure it doesn't contain issues.
 
-
-
-**Problem #3: "How do I know if this Project with AI-generated code is actually good?"**
-----------------------------------------------------------------------------------------
+## **Problem #3: "How do I know if this Project with AI-generated code is actually good?"**
 
 Your team is using GitHub Copilot heavily. Productivity is up 30%. But... are they generating high-quality code, or just generating more bugs faster?
 
@@ -119,10 +110,7 @@ It will assign the "Sonar way" quality profile to the project, that checks for:
 When a project passes this strict gate, it earns the **"AI Code Assurance"** badge. It's a seal of approval that tells management: *"Yes, we used AI, and yes, we verified it's safe."*
 ![](Screenshot-2026-01-19-at-15.24.49-1024x197.png)
 
-
-
-**🎯 Series Summary: The Complete Cycle**
------------------------------------------
+## **🎯 Series Summary: The Complete Cycle**
 
 We have come a long way.
 

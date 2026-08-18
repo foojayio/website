@@ -33,8 +33,7 @@ Example code for many programming languages is available on [the HiveMQ website]
 
 {{< youtube U28uSrY63XY >}}
 
-Setting up a HiveMQ Cloud account
----------------------------------
+## Setting up a HiveMQ Cloud account
 
 Let's start with our free HiveMQ Cloud account. Go to [auth.hivemq.cloud](https://auth.hivemq.cloud) \> "Sign Up Now" and create a login. Once logged in, you will be presented with your clusters. By pressing the "Manage Cluster" button, you will be directed to a view containing the details of your HiveMQ Cloud instance.
 ![](hivemq-your-clusters.png) Your clusters
@@ -42,8 +41,7 @@ Let's start with our free HiveMQ Cloud account. Go to [auth.hivemq.cloud](https:
 Go to the "Access Management" section and create a user name and password for the credentials we will use in our applications.
 ![](hivemq-access-management-1024x582.png) Access Management
 
-About Raspberry Pi
-------------------
+## About Raspberry Pi
 
 The Raspberry Pi isn't just a small, inexpensive computer-for-everyone. No, the latest version 4 has evolved to a powerful machine that can replace a full-size desktop or notebook for many use-cases.
 
@@ -71,7 +69,6 @@ OpenJDK Runtime Environment (build 11.0.12+7-post-Raspbian-2deb10u1)
 OpenJDK Server VM (build 11.0.12+7-post-Raspbian-2deb10u1, mixed mode)
 ```
 
-
 This means we are fully prepared to develop and run Java applications on our Raspberry Pi!
 
 ### Pi4J
@@ -94,8 +91,7 @@ Since 2019 work was ongoing for a completely new version 2 of Pi4J to bring modu
 
 Together with this V2, a new [documentation website was published](https://pi4j.com) where you can find a lot of information about electronics and how to use Java and JavaFX on the Raspberry Pi.
 
-Java project
-------------
+## Java project
 
 The first application we will create is a data-publisher and the full sources are available on [GitHub](https://github.com/FDelporte/HiveMQ-examples). We will read from different sensors and send their values to HiveMQ Cloud. Because every "maker" will have his/her own ideas and wishes for a project, we will not focus on components and wiring, but use an easy starter kit that is perfect for this demo project: the [CrowPi](https://www.elecrow.com/crowpi.html). This pre-wired kit makes it very easy to get started with electronics programming as all the components are pre-assembled and  
 
@@ -157,7 +153,6 @@ public class HiveMqSender {
 }
 ```
 
-
 #### Publishing to HiveMQ topics
 
 In the file `HiveMqManager.java` we find all the code needed to connect to HiveMQ Cloud and publish messages.
@@ -204,7 +199,6 @@ public class HiveMqManager {
 }
 ```
 
-
 To make it easy for our sensors to send data, we extend this class with a `sendMessage` method. To see if our messages published successfully, or what went wrong, we use the `whenComplete` method.
 
 ```
@@ -223,7 +217,6 @@ public void sendMessage(String topic, String message) {
             });
 }
 ```
-
 
 #### Reading data from the sensors
 
@@ -305,7 +298,6 @@ public class SensorManager {
 }
 ```
 
-
 #### Configuration of Pi4J
 
 As you can see in the previous class, the Pi4J Context is initialized with `CrowPiPlatform.buildNewContext()`. Pi4J uses a plugin structure so it is easy to maintain and extend with additional functionality. In most cases, we can rely on `Pi4J.newAutoContext()` for the initialization, but because we explicitly need the functionality of the PiGpio plugin, we use a helper class to make sure Pi4J loads the correct plugins. PiGpio is the native library (written in C) which is used under-the-hood by Pi4J to handle the GPIOs.
@@ -331,7 +323,6 @@ public static Context buildNewContext() {
 }
 ```
 
-
 #### Sensor code
 
 Take a look at the [full sources of this pro](https://github.com/FDelporte/HiveMQ-examples)ject or the Pi4J CrowPi project if you are looking for a specific sensor.
@@ -351,7 +342,6 @@ protected DigitalInputConfig buildDigitalInputConfig(Context pi4j, int address, 
             .build();
 }
 ```
-
 
 Pi4J also provides a builder-pattern to configure the GPIOs. For this sensor which is a `DigitalInput`, we need to configure:
 
@@ -388,7 +378,6 @@ $ cd target/distribution
 $ sudo bash run.sh
 ```
 
-
 After some startup logging, you will see the scheduled messages and events of different sensors, e.g. below the motion and noise sensors events.
 
 ```
@@ -402,7 +391,6 @@ After some startup logging, you will see the scheduled messages and events of di
 [RxComputationThreadPool-4] INFO com.pi4j.util.Console - Message sent to 'crowpi/noise': {"value":true}
 ```
 
-
 ### WebSocket test page
 
 The logging of our application shows data is published to HiveMQ Cloud, but we want to be sure before we continue to create a client... Luckily there is a websocket client we can use to do this test very easily! Head over to [hivemq.com/demos/websocket-client/](http://www.hivemq.com/demos/websocket-client/) and fill in all the fields with your credentials. Make sure to select the `SSL` check box! When all is filled in correctly, and you hit the `Connect` button, you will get a green `connected` indication on top.
@@ -413,15 +401,12 @@ Now we can define the topics we want to subscribe to, e.g. "crowpi/motion", "cro
 
 Great! We have data flowing from our Raspberry Pi to HiveMQ Cloud!!!
 
-Conclusion
-----------
+## Conclusion
 
 As always, when you combine Java with Maven, a project like this can be achieved with minimal code and still be easy to understand and manage. Pi4J adds the required tools to hide the complexity of dealing with GPIOs and 'converts' the electronic components to Java objects.
 
 Thanks to the HiveMQ Cloud service, we can publish the data of up to 100 devices to an always-on, maintenance-free message broker for free! Combined with the inexpensive Raspberry Pi, a world of opportunities is open for all makers.
 
 In the next article in this series, we are going to visualize the data of our sensors in a dashboard. And of course, again with Java (and JavaFX) on a Raspberry Pi!
-
-
 
 *This series has been written on request of HiveMQ and was originally published on the [HiveMQ Blog](https://www.hivemq.com/blog/mqtt-raspberrypi-part01-sensor-data-hivemqcloud-java-pi4j/).*

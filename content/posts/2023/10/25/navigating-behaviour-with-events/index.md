@@ -20,8 +20,7 @@ related_posts:
 frozen: false
 ---
 
-Two Approaches
---------------
+## Two Approaches
 
 There's little doubt that modern software architectures lean towards asynchronous models for communication between distributed components (where "distributed" means components that are not part of the same process, be they on the same or on different physical machines). Synchronous models such as Remote Procedure Call (RPC) are now largely discredited \[[Waldo](https://www.researchgate.net/profile/Ellen-Isaacs/publication/220168963_Why_do_users_like_video/links/02e7e5186b67219c70000000/Why-do-users-like-video.pdf#page=89 "Waldo"), [Vinoski](http://steve.vinoski.net/blog/2008/07/01/convenience-over-correctness/ "Vinoski")\]; even asynchronous variants of these are not seen as desirable.
 
@@ -122,8 +121,7 @@ Results can be displayed in a terminal, or within an IDE such as IntelliJ. Faili
 
 Having input and output events kept separately makes it easier to keep track of output for variations of invalid input, which in turn makes regression testing easier.
 
-Summary
--------
+## Summary
 
 The practices of Event-Driven Architecture and Behaviour-Driven Development have more in common than may at first be apparent. At [Chronicle](https://chronicle.software/ "Chronicle"), we have embraced both of these approaches and implemented them through our Chronicle Services Framework.
 

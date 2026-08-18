@@ -29,15 +29,13 @@ Before DevOps practices were commonplace, production used to fail. A lot. We don
 
 ![The Twitter Fail Whale Demonstrated the need for DevOps](https://cdn.hashnode.com/res/hashnode/image/upload/v1646648317259/r4Exr4vOY.png)
 
-Everything's Perfect in our Development Process, Right?
--------------------------------------------------------
+## Everything's Perfect in our Development Process, Right?
 
 Well... No. Software is hard, especially at the fast pace of continuous delivery cycles. We will always make some bugs and unfortunately some will make it into production. That's unavoidable.
 
 The problem is that these bugs that made it into production made it past our continuous integration pipeline. They made it past the testing environment. They are typically tough to detect/reproduce bugs -- Uber Bugs... The DevOps practices we worked so hard to establish suddenly turned against us.
 
-That Thin (possibly blue) Line
-------------------------------
+## That Thin (possibly blue) Line
 
 DevOps teams are typically siloed from the dev teams. There's a line that separates them. This isn't too bad and fits well with agile development processes. But it falls flat when the development team needs to debug. This noticeably affects software quality. The DevOps approach indeed raised uptime significantly, but bugs in production are still abundant and they take longer to fix.
 
@@ -55,8 +53,7 @@ That line that separates DevOps engineers from R\&D is a good line. It's an impo
 
 Developers just want to connect a "debugger" and step over the code. This obviously doesn't scale and would crash production systems. Then there are the obvious security issues involved... That's why we have DevOps workflow and the silos are important.
 
-Collaboration Between Development and Operations Teams
-------------------------------------------------------
+## Collaboration Between Development and Operations Teams
 
 This isn't a fresh problem. Rapid delivery and reliability engineering work great under normal conditions, but fall flat when we need to track an error. At that point, we have two options: logs and observability tools. Before I proceed, I would like to stress that we use both and love them. They are crucial pieces of the software development lifecycle!
 
@@ -77,8 +74,7 @@ Most of these tools are focused on Metrics and Errors. That makes sense for a De
 
 Finally, the performance of applications can be affected by such observability tools. These tools work by monitoring widely and receiving application events. Their overhead is often noticeable in intense production environments.
 
-Continuous Observability Tools to Save the Day
-----------------------------------------------
+## Continuous Observability Tools to Save the Day
 
 The problems aren't new. As a result, the market grew to offer a tool for developers that respects DevOps processes. A debugger that respects security practices and reliability engineers.
 
@@ -109,8 +105,7 @@ Logs, let us add logs and integrate with existing ones seamlessly. That's a key 
 
 Metrics let us measure small blocks of code or methods. These are very fine grained measurements even things as simple as a counter can be very useful.
 
-TL;DR Applying Continuous Observability into your Agile Practices
------------------------------------------------------------------
+## TL;DR Applying Continuous Observability into your Agile Practices
 
 Modern cloud environments are remarkably complex. As we're all adopting cloud-native development, we can't give developers the level of access they used to enjoy into production. That's just not tenable. Everything must follow key practices through the DevOps Lifecycle.
 

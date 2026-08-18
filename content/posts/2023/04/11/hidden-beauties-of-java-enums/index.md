@@ -28,8 +28,7 @@ I also created a video describing the same topics based on this article, so you 
 
 {{< youtube U09ZQ3kjuqM >}}
 
-What is an Enum?
-----------------
+## What is an Enum?
 
 Enums are the preferred way to define fixed values you want to use in your code. They are a special type of Java class and contain a group of unchangeable variables.
 
@@ -43,9 +42,7 @@ enum Level {
 }
 ```
 
-
-Projects Using Enums
---------------------
+## Projects Using Enums
 
 A few of my "pet projects" make extensive use of Java enums, and while working on these, I learned that it's not clear to everyone that these are really powerful and can contain much more than just a list of fixed values.
 
@@ -107,9 +104,7 @@ public enum VideoCategory {
 }
 ```
 
-
-Examples of Enum Usage
-----------------------
+## Examples of Enum Usage
 
 Let's look at some examples, step-by-step. The full code is available on [GitHub as EnumExtended.java](https://github.com/foojayio/getting_started_with_java/blob/main/EnumExtended.java) and can be executed with [JBang!](https://www.jbang.dev/) with `jbang EnumExtended.java`.
 
@@ -127,13 +122,11 @@ enum Level {
 System.out.println("Error level: " + Level.WARNING);
 ```
 
-
 Output:
 
 ```
 Error level: WARNING
 ```
-
 
 Enums were introduced to replace the use of int constants as seen in other languages, which would look like this in Java:
 
@@ -145,7 +138,6 @@ class MyProgram {
    ...
 }
 ```
-
 
 But an enum can do a lot more! Let's take a look at some examples...
 
@@ -167,7 +159,6 @@ public int getLevelValue(Level level) {
 }
 ```
 
-
 But as we will see further, this code can still be improved a lot, by extending the Level enum...
 
 ### Use Enum Instead of Boolean
@@ -181,7 +172,6 @@ class Customer {
     ...
 }
 ```
-
 
 But a bit later, your use-case changes and customers could also be suspended because they stopped paying the bills. Would you then add and extra `boolean suspended`? This could lead to a lot of changes in your program which could be avoided by using an enum for the customer state, like this:
 
@@ -198,7 +188,6 @@ class Customer {
     ...
 }
 ```
-
 
 ### Extra Data in an Enum Value
 
@@ -236,7 +225,6 @@ enum Level {
 }
 ```
 
-
 We can now get the data of all the Level values with the following code:
 
 ```java
@@ -247,7 +235,6 @@ for (Level level : Level.values()) {
             + "\n\tColor: " + level.getColor());
 }
 ```
-
 
 Which will produce this output:
 
@@ -265,7 +252,6 @@ Level ERROR
     Label: Error message
     Color: 10682368
 ```
-
 
 So this means `level.getSeverity()` fully replaces the `getLevelValue(Level level)` method with `switch-case` we've seen before.
 
@@ -297,7 +283,6 @@ Let's take for example this JSON file that contains a few log messages. The leve
 ]
 ```
 
-
 #### Record to Load the JSON data
 
 We want to read these messages into Java objects, by using the Jackson library and a record:
@@ -310,7 +295,6 @@ record LogMessage(Level level, Long timestamp, String message) {
     }
 }
 ```
-
 
 The additional method `getZonedDateTime` will convert the `Long timestamp` value to be used in our code, but because of the `@JsonIgnore` attribute, this value will not be converted back to JSON as you will see later.
 
@@ -349,7 +333,6 @@ for (LogMessage logMessage : logMessages) {
 }
 ```
 
-
 This will generate the following output. As you can see, the numeric level value from the JSON has been converted to a Level-enum-value:
 
 ```
@@ -364,7 +347,6 @@ Log message at 2023-02-08T14:39:46.357Z[UTC]
         Message: Error at line Y
 ```
 
-
 #### Converting Java Object to JSON data
 
 Because in the previous changes, we already added the `@JsonValue` attribute to the `severity` variable of the enum, the ObjectMapper will use the correct value to convert the level back to JSON. Let's use the `PrettyPrinter` to generate formatted JSON from our `logMessages` array:
@@ -374,7 +356,6 @@ System.out.println(objectMapper
     .writerWithDefaultPrettyPrinter()
     .writeValueAsString(logMessages));
 ```
-
 
 This will create the following output, which contains the same content as our source JSON data.
 
@@ -393,7 +374,6 @@ This will create the following output, which contains the same content as our so
   "message" : "Error at line Y"
 } ]
 ```
-
 
 #### Converting ZonedDateTime to JSON
 
@@ -414,7 +394,6 @@ System.out.println(objectMapper
     .writerWithDefaultPrettyPrinter()
     .writeValueAsString(logMessages));
 ```
-
 
 This generates JSON with the ZonedDateTime in the defined format:
 
@@ -437,9 +416,7 @@ This generates JSON with the ZonedDateTime in the defined format:
 } ]
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Java enums can contain much more than just a list of definitions, but also data and extended functionality!
 

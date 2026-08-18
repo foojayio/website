@@ -32,7 +32,6 @@ If, for instance, we want to encrypt something like credit card details, we prob
 </dependency>
 ```
 
-
 Below, there's a short example of how to use Authenticated Encryption with Associated Data (AEAD) with AES. This allows us to encrypt plaintext and provide associated data that should be authenticated but not encrypted.
 
 ```java
@@ -52,7 +51,6 @@ String decr = new String(decrypted);
 System.out.println(decr);
 ```
 
-
 For passwords, it is safer to use a strong cryptographic hashing algorithm as we don't need to retrieve the original passwords but just match the hashes. Argon2id, BCrypt, and SCrypt are the most suitable for this job according to the [OWASP password storage cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html). All are cryptographic hashes (one-way functions) and computationally difficult algorithms that consume a lot of time. This is exactly what you want, because brute force attacks take ages this way.
 
 Spring security provides excellent support for a wide variety of algorithms. Try using for instance the `BCryptPasswordEncoder` that Spring Security tool 5 provides for the purpose of password hashing.
@@ -65,7 +63,6 @@ Spring security provides excellent support for a wide variety of algorithms. Try
 </dependency>
 ```
 
-
 ```java
 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); //default strength is 10
 String password = "ThisIsMyPassword";
@@ -76,7 +73,6 @@ String hash = encoder.encode(password);
 //matching
 Boolean match = encoder.matches(password, hash));
 ```
-
 
 What is a strong encryption algorithm today, might be a weak algorithm a year from now. Therefore, encryption needs to be reviewed regularly to make sure you use the right algorithm for the job. Use vetted security libraries for these tasks and keep your libraries up to date. Furthermore, make sure to scan your open source libraries for security vulnerabilities often with a tool like [Snyk Open Source](https://snyk.io/product/open-source-security-management/) to prevent unpleasant surprises.
 

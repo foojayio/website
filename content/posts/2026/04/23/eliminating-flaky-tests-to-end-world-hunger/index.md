@@ -31,10 +31,7 @@ However, everyone has at least once experienced a test that failed and then pass
 
 What if we lived in a world where we could solve massive global problems like world hunger by eliminating flaky tests in software development? While it may seem exaggerated, it is closer to the truth than you might think, and it highlights the enormous cost and resources that flaky tests drain in development teams worldwide.
 
-
-
-Why Do Flaky Tests Matter?
---------------------------
+## Why Do Flaky Tests Matter?
 
 1. **Waste of Time and Money** : When a test fails, it can be difficult to tell at first glance if there is a real bug or if the test is just flaky. Developers often have to rerun tests, sift through logs, and add extra debugging code to confirm the issue is genuine. Over time, these continued efforts add up to an enormous cost. Brian Demers and I estimated in our talk ["Testing on Thin Ice: Chipping Away at Test Unpredictability"](https://youtu.be/kwxwHuScmLk) that **$36 billion** are wasted every year due to flaky tests worldwide---shockingly close to the **$40 billion** it would take to **[end world hunger by 2030](https://www.wfpusa.org/articles/how-much-would-it-cost-to-end-world-hunger/)**.
 
@@ -44,10 +41,7 @@ Why Do Flaky Tests Matter?
 
 Like a junk drawer that becomes more daunting with each new item you toss in, allowing flaky tests to accumulate makes it more likely that you'll put off fixing them.
 
-
-
-Common Causes of Flaky Tests
-----------------------------
+## Common Causes of Flaky Tests
 
 To effectively address flaky tests, you have to understand why tests become flaky in the first place. The most common reasons include:
 
@@ -71,10 +65,7 @@ To effectively address flaky tests, you have to understand why tests become flak
 
    If one test relies on the state left behind by another test, parallel or out-of-order execution can lead to failures. Each test should be able to run independently.
 
-
-
-Strategies to Keep Tests Reliable
----------------------------------
+## Strategies to Keep Tests Reliable
 
 ### 1. Awareness of Flaky Tests
 
@@ -87,7 +78,6 @@ void testSomething() {
     //...
 }
 ```
-
 
 Encourage everyone on the team to do this. The consistent keyword makes it easy to find all flaky tests in the code and gives you a quick overview of how many you have and where they are located.
 
@@ -118,12 +108,9 @@ void cleanUpData() {
 }
 ```
 
-
 ### 4. Wait for Conditions to Be Met
 
 Avoid hard-coded delays by waiting for specific events or conditions. For various popular end-to-end testing frameworks:
-
-<br />
 
 **Selenium** : Use `WebDriverWait` to wait until an element is present or clickable:
 
@@ -132,12 +119,7 @@ WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='submit-button']")));
 ```
 
-
-<br />
-
 **Cypress** : Utilize built-in commands like `.should('be.visible')` to [wait for elements](https://learn.cypress.io/cypress-fundamentals/waiting-and-retry-ability).
-
-<br />
 
 **Playwright** : Use Playwright's [auto-retrying assertions](https://playwright.dev/docs/test-assertions), like `toHaveText` and `toBeVisible`. They wait for conditions to be satisfied and will fail if not met within a certain time (timeout). For example, when you click a button and expect an element's text to change:
 
@@ -149,9 +131,6 @@ expect(await this.textarea.textContent()).toBe('expected text');
 await expect(this.textarea).toHaveText('expected text');
 ```
 
-
-<br />
-
 **WebdriverIO** : Similar to Playwright, [built-in assertions](https://webdriver.io/docs/bestpractices/#use-the-built-in-assertions) automatically wait for conditions to be met within a configurable timeout:
 
 ```javascript
@@ -161,7 +140,6 @@ expect(await $('[data-testid="submit-button"]').isDisplayed()).toBe(true);
 // ✅ Reliable: waits until the button is displayed
 await expect($('[data-testid="submit-button"]')).toBeDisplayed();
 ```
-
 
 This approach makes tests more resilient to variations in system performance and load.
 
@@ -188,7 +166,6 @@ void flakyTest() {
 }
 ```
 
-
 ```
 // Jest
 // quarantine: reason or link to issue here
@@ -196,7 +173,6 @@ it.skip('should throw an error', () => {
   expect(response).toThrowError(expected_error);
 });
 ```
-
 
 Use a consistent prefix (e.g., `quarantine:`) to easily find and track these tests. However, **do not** let quarantined tests remain ignored forever---make fixing them a priority.
 
@@ -209,10 +185,7 @@ End-to-end and integration tests are often slower and more prone to flakiness be
 
 Teams often default to adding new integration tests because it *seems* more straightforward: fewer, broader tests can cover more code. However, this approach leads to larger, slower test suites that are harder to maintain. One practical approach to address this issue is to refactor complex, multi-purpose methods so each method has a specific purpose. This simplifies methods and makes them easier to test with unit tests. For instance, in one project, I took a monolithic integration test suite that ran for **five minutes** and restructured it so that most logic was covered by unit tests instead. This ended up reducing the total runtime to **just 11 seconds**.
 
-
-
-Building a Reliable Test Suite: A Cultural Shift
-------------------------------------------------
+## Building a Reliable Test Suite: A Cultural Shift
 
 Eliminating flaky tests isn't just a technical challenge. It requires a cultural shift within your team:
 
@@ -221,15 +194,10 @@ Eliminating flaky tests isn't just a technical challenge. It requires a cultural
 * **Set Clear Goals**: Commit to fixing a specific number or percentage of flaky tests within a set timeframe.
 * **Celebrate progress**: Recognize and appreciate those who fix flaky tests. Positive feedback motivates the team to continue improving the test suite.
 
-
-
-Conclusion
-----------
+## Conclusion
 
 Flaky tests are not just minor annoyances. They waste valuable time, break your team's trust, and slow development. The good news is you don't have to tackle everything at once. Start with one of these ideas: fix a single flaky test each sprint, ensure your tests use isolated data, wait for specific conditions instead of using fixed delays, run tests in parallel, quarantine problematic tests, or replace extensive end-to-end tests with smaller, more focused tests. Adopting just one is a big step toward making your test suite more reliable.
 
 Think of your test suite like that junk drawer: if you clean it up regularly, it stays helpful and easy to manage. Pick one flaky test that causes frequent trouble and fix it first. That small success will motivate your team and make your testing smoother.
 
 For more details, you can watch my talk ["Testing on Thin Ice: Chipping Away at Test Unpredictability"](https://youtu.be/kwxwHuScmLk) or you can get a free copy of my eBook ["Stop Rerunning, Start Shipping: 7 Strategies to Eliminate Flaky Tests"](https://fm.ht/foojay).
-
-<br />

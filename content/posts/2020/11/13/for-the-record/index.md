@@ -38,13 +38,9 @@ As mentioned earlier, data-carrier classes can now be simplified to just a few l
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-36285 aligncenter" src="public-record-donut-700x510.png" alt="" width="700" height="510">
 
-<br />
-
 Refactoring this code resulted in 58 changes (2 additions, 56 deletions).{#ca2c}
 
 <img decoding="async" class="size-medium wp-image-36286 aligncenter" src="donut-code-refactoring-700x51.png" alt="" width="700" height="51">
-
-<br />
 
 ![](donut-code-refactored-1024x522.png)
 

@@ -22,8 +22,7 @@ enlighterjs: true
 frozen: false
 ---
 
-What is load testing?
----------------------
+## What is load testing?
 
 **Load testing entails testing how our application performs under a significant load so we can be certain it behaves as expected when there's an influx of users.**
 
@@ -33,15 +32,13 @@ After all, it might not (only) be the code that's the issue.
 
 This is a process that requires quite a bit of cooperation between testers, developers, and those using it to properly determine the scenarios, and a smooth \& swift feedback loop is important to make sure our solutions work properly. And it will likely be some of the most expensive tests given both the people involved and the need for a testing environment that's representative of the production configuration.
 
-What is Gatling?
-----------------
+## What is Gatling?
 
 It is a performance load-testing tool that easily allows us to simulate traffic, and perform load testing as code, so we can integrate it with CI/CD and automation.
 
 We can make use of the [Recorder](https://gatling.io/docs/gatling/tutorials/quickstart/#using-the-recorder) to record a scenario or write our own using the Java/Scala DSL.
 
-Introduction
-------------
+## Introduction
 
 Gatling has a couple of core concepts we should know:
 
@@ -56,8 +53,7 @@ Gatling has a couple of core concepts we should know:
 
 Also, keep in mind that in Gatling the default unit for Duration parameters is 1 second.
 
-Getting started
----------------
+## Getting started
 
 To follow along, feel free to clone this code from [this repository](https://github.com/SimonVerhoeven/gatling-demo/tree/main).
 
@@ -71,7 +67,6 @@ final HttpProtocolBuilder httpProtocol = http
     .acceptHeader("application/json")
     .userAgentHeader("Gatling performance Test");
 ```
-
 
 This is the base configuration we'll be using for our API.  
 *note: Gatling also supports JMS \& MQTT*
@@ -91,7 +86,6 @@ ScenarioBuilder scenario = CoreDsl.scenario("Load Test greeting")
     );
 ```
 
-
 The scenario that we'll be executing.  
 
 In this case, we're invoking the greeting call, verifying that it's returning OK, waiting 5 seconds, invoking another endpoint, and checking the status of that one.  
@@ -106,11 +100,9 @@ public GreetingSimulation() {
 }
 ```
 
-
 The simulation ties it all together. We set up our performance test for our given scenario, and define the amount of users and the duration of the test using the given protocol.
 
-Using the recorder
-------------------
+## Using the recorder
 
 Once you've downloaded the recorder [from the website](https://gatling.io/open-source/) you can start the Gatling recorder using the `recorder.sh` or `recorder.bat` within `$GATLING_HOME/bin/`
 
@@ -202,7 +194,6 @@ We need to add:
 </plugin>
 ```
 
-
 **note:** If your scenario was written/recorded as Scala you will need to use the `scala-maven-plugin`!
 
 #### Gradle project
@@ -220,7 +211,6 @@ plugins {
   id 'io.gatling.gradle' version "MANUALLY_REPLACE_WITH_LATEST_VERSION"
 }
 ```
-
 
 #### Execution
 
@@ -248,8 +238,7 @@ This shows us:
 
 **note** : a lot of the ranges/percentiles can be configured in `gatling.conf`
 
-Diving a bit deeper
--------------------
+## Diving a bit deeper
 
 This all was quite a basic setup, now of course when we want to do this kind of testing we generally want to configure a lot more.  
 
@@ -276,7 +265,6 @@ ScenarioBuilder sampleScenario = scenario("Load Test greeting")
     );
 ```
 
-
 to
 
 ```java
@@ -293,7 +281,6 @@ ChainBuilder slowcall = exec(http("Randomly slow")
 
 ScenarioBuilder sampleScenario2 = scenario("Load test greeting").exec(greeting, slowcall);
 ```
-
 
 ### Configuring the protocol
 
@@ -317,7 +304,6 @@ private HttpProtocolBuilder httpProtocol = http
     .disableCaching()
     .upgradeInsecureRequestsHeader("1");
 ```
-
 
 For a full list, you can check:
 
@@ -351,7 +337,6 @@ sampleScenario.injectOpen(
 )
 ```
 
-
 This allows us to mimic behaviours like call centers/morning rush/...​
 
 A full list of details can be found on the [injection](https://gatling.io/docs/gatling/reference/current/core/injection/) page.
@@ -374,7 +359,6 @@ We have three options:
 .check(status().is(200).saveAs("Status"))
 ```
 
-
 2) using the `Session` API
 
 ```
@@ -382,7 +366,6 @@ ChainBuilder sessionStep = exec(session -> {
     return session.set("someField", "value");
 });
 ```
-
 
 **note** : keep in mind `Session` instances are immutable!
 
@@ -407,7 +390,6 @@ But a basic one can be as easy as:
 ```
 Iterator<Map> feeder = Stream.generate((Supplier<Map>) () -> Collections.singletonMap("dieRoll", ThreadLocalRandom.current().nextInt(1, 7))).iterator();
 ```
-
 
 We can then `feed(feeder)` which we call at the same place as `exec`.  
 
@@ -437,8 +419,7 @@ Now in case we're making use of interrupt mechanisms offered by Gatling such as 
 
 This can be achieved using `session.markAsSucceeded()` or `session.markAsFailed()`.
 
-Validation
-----------
+## Validation
 
 Besides just gathering insights into the performance we might also want to do some validation.  
 
@@ -470,7 +451,6 @@ For example, if we want to check that less than 1% of each request fails we can 
 this.setUp(sampleScenario.injectOpen(constantUsersPerSec(100).during(Duration.ofSeconds(60))))
     .assertions(forAll().failedRequests().percent().lte(1D))
 ```
-
 
 A full list of possible assertions can be found on the [Assertions](https://gatling.io/docs/gatling/reference/current/core/assertions/) page.
 
@@ -510,7 +490,6 @@ Then we could do something akin to:
 )
 ```
 
-
 Here we're:
 
 1. checking our body text
@@ -525,11 +504,9 @@ Then in subsequent checks, we can use this value:
 .checkIf(session -> session.getString("loudMessage") != null).then(status().not(404))
 ```
 
-
 To learn more about Checks you can visit the [documentation](https://gatling.io/docs/gatling/reference/current/core/check/).
 
-Scaling
--------
+## Scaling
 
 Now we might want to test quite a big load, and our device might not quite be able to cope with this.
 
@@ -542,8 +519,7 @@ We can also achieve something akin using the free version with the following ste
 * place all the generated logfiles in the results folder of one of the instances
 * generate the reports using `-ro {reportFolderName}` (ro = reports only flag)
 
-Realtime monitoring
--------------------
+## Realtime monitoring
 
 By default, only Gatling provides live feedback in the console but there in case you're interested in a more visually appealing way you can use:
 
@@ -563,16 +539,13 @@ gatling {
 }
 ```
 
-
-Notes
------
+## Notes
 
 * Gatling as a standalone bundle can be used for Scala and Java, for Kotlin you'll need a `Maven` or `Gradle` project.
 * Gatling requires Java 8 or higher
 * there are other interesting tools such as Element, Selenium, and Apache JMeter
 
-References
-----------
+## References
 
 * [The official website](https://gatling.io/)
 * [Extensions](https://gatling.io/docs/gatling/reference/current/extensions/)

@@ -38,7 +38,6 @@ To be able to use Deep Netts in Maven based Java project, add the following depe
 </dependency>
 ```
 
-
 You can also clone the entire library and examples from the GitHub: <https://github.com/deepnetts/deepnetts-communityedition>
 
 ### Hello World: Iris Flowers Classifiction
@@ -118,7 +117,6 @@ public class IrisFlowersClassifier {
 }
 ```
 
-
 Full source code of the example is available on the [GitHub](http://https://github.com/deepnetts/deepnetts-communityedition/blob/community-visrec/deepnetts-examples/src/main/java/deepnetts/examples/IrisFlowersClassifier.java "GitHub").
 
 After running this you'll get something like this:
@@ -149,7 +147,6 @@ CONFUSION MATRIX
 versicolor         0         0        20         2
  virginica         0         0         0        17
 ```
-
 
 More examples like this that you can use as starter templates for your own AI/machine learning projects in Java are available at:
 

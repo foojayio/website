@@ -44,20 +44,17 @@ helm repo update
 helm install catalog svc-cat/catalog --namespace catalog --create-namespace
 ```
 
-
 Next, create a Kubernetes secret with the service account information from Astra. For this, you will need to go to the service account area of Astra and copy the credentials ([instructions](https://docs.astra.datastax.com/docs/creating-a-new-service-account-for-your-database)). What you get is a small snippet of JSON with all the important info needed to create the secret in Kubernetes. It requires a little Command-line Fu but rest-assured, you only have to do this once. You just need to replace the part labeled `<service_account_creds>`
 
 ```
 kubectl create secret generic astra-creds --from-literal=username=unused --from-literal=password=`echo '<service_account_creds>'| base64`
 ```
 
-
 You then register the broker via a ServiceBroker custom resource. For brevity we will leverage the helpful svcat command-line tool.
 
 ```
 $ svcat register astra --url https://broker.astra.datastax.com/ --basic-secret astra-creds
 ```
-
 
 With this information, Service Catalog automatically queries for available services on Astra and displays all the plans or service tiers.
 
@@ -89,7 +86,6 @@ $ svcat get plans
                                        	storage, free forever.
 ```
 
-
 *Note the information here is a small subset of what is available. Listings have been reduced for space.*
 
 With this information you may now provision your database instance using svcat or kubectl:
@@ -102,7 +98,6 @@ $ svcat provision devdb --class astra-database --plan developer --params-json '{
   "keyspace": "sample_keyspace"
 }'
 ```
-
 
 You should see the following output:
 
@@ -119,7 +114,6 @@ Parameters:
   keyspace: sample_keyspace
   region: us-east1
 ```
-
 
 For `kubectl` create a file called `astra.yaml` to describe the type of instance you need:
 
@@ -141,7 +135,6 @@ spec:
 kubectl apply -f astra.yaml
 ```
 
-
 Service catalog handles the provisioning and communication with Astra. After a couple minutes you can check the instance status with svcat and kubectl:
 
 ```
@@ -153,7 +146,6 @@ $ kubectl get serviceinstances devdb
 NAME	CLASS                                           	PLAN                               	STATUS   AGE
 devdb   ServiceClass/26b3fbe6-0c18-5140-8ac6-87d03b5b4148   1c9bb5ac-6609-5af5-a747-ecf1d093cc7f   Ready	3m20s
 ```
-
 
 The process of retrieving service credentials is known as binding. Here's how you bind the devdb instance:
 
@@ -168,7 +160,6 @@ $ svcat bind devdb
 Parameters:
   No parameters defined
 ```
-
 
 With kubectl this may be described with a ServiceBinding resource, such as: `astra-service-binding.yaml`:
 
@@ -185,7 +176,6 @@ spec:
 
 kubectl apply -f astra-service-binding.yaml
 ```
-
 
 After receiving this request Service Catalog handles retrieving the credentials from Astra and placing them within a local kubernetes secret at the same name as our binding. In this example, this is called `devdb`:
 
@@ -211,7 +201,6 @@ metadata:
   name: devdb
 type: Opaque
 ```
-
 
 This is all of the information required to configure the Cassandra driver for secure connectivity to Astra. Instead of manually spinning up nodes, wiring up monitoring, and sourcing infrastructure, Apache Cassandra is available on-demand through a simple GitOps interface. If you need to update the cluster to increase capacity, it is a simple YAML change which is checked into your repository and deployed with CD tools. The only "hard work" here is a call to `kubectl apply`. With a running database head over to the [Spring Reactive Pet Clinic](https://github.com/spring-petclinic/spring-petclinic-reactive/) for a reference Java application which is configured to use the Secret returned by Astra Service Broker.
 

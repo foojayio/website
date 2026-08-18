@@ -45,8 +45,7 @@ The decomposition patterns can be further categorized into four distinct pattern
 
 In the upcoming section, let us engage in a sequential discussion of each topic individually.
 
-1.1 Decompose by business capability
-------------------------------------
+## 1.1 Decompose by business capability
 
 In a microservice architecture, we will decompose the services based on business capabilities.  
 
@@ -58,8 +57,7 @@ Nowadays most of the enterprise applications developed through the Agile methodo
 
 One of the challenges tasks is to identity the business capabilities for the service. It is neccessary to utilize the bounded context based on the organizational strucuture and high-level domain model.
 
-1.2 Decompose by business subdomain
------------------------------------
+## 1.2 Decompose by business subdomain
 
 Decomposing based on business subdomain which is extension to the business capabilty one. In Domain-Driven Design (DDD) pertains to the problem space of the application, specifically the business domain. A domain comprises various sub domains, each representing a distinct aspect of the business.
 
@@ -67,8 +65,7 @@ Each of the subdomain service also developed through the Agile methodlogy, each 
 
 Like identifying business capabilities, identifying sub domains is quite challenging task.
 
-1.3 Self-contained service
---------------------------
+## 1.3 Self-contained service
 
 In both monolithic and microservices architectures, services requests are typically executed either synchronously or asynchronously.
 
@@ -78,8 +75,7 @@ In order to circumvent synchronous communications, one can depend on design patt
 
 On the contrary, in an asynchronous request, a service request is executed intermittently by first transmitting a status update concerning the availability of the service, and subsequently processing the remaining request.
 
-1.4 Service per team
---------------------
+## 1.4 Service per team
 
 Currently, a majority of enterprise applications operate on Agile Methodologies such as Scrum. Through the utilization of Scrum, a dedicated team can be established to assume responsibility for a specific business capability-based and sub domains.
 
@@ -91,8 +87,7 @@ The Integration Patterns can be further categorized into three distinct patterns
 2. Service Aggregator Pattern
 3. Client-Side UI Composition Pattern
 
-2.1 API Gateway Pattern
------------------------
+## 2.1 API Gateway Pattern
 
 Nowadays, the majority of the applications we are currently developing are designed for various user interface (UI) interfaces, such as desktop, mobile, and tablet versions. Consequently, users can access these applications from any of these UI interfaces. Depending on the UI interface being used, the response from the underlying services may vary, as desktop applications may require more fields compared to their mobile counterparts.
 
@@ -100,15 +95,13 @@ In order to achieve this functionality, it is necessary to implement the API Gat
 
 In fact, it is possible to create separate API Gateway services for web applications, mobile applications, and third-party applications.
 
-2.2 Service Aggregator Pattern
-------------------------------
+## 2.2 Service Aggregator Pattern
 
 The aggregator pattern, within the context of microservice architecture, serves to amalgamate the responses obtained from various autonomous microservices. By adopting this pattern, the burden of communication between the client and services is diminished. Moreover, it enables the consolidation of distinct functionalities in a manner that is readily understandable from an architectural perspective.
 
 This particular pattern finds extensive application in e-commerce applications, particularly for the purpose of retrieving data from the backend systems.
 
-2.3 Client-Side UI Composition Pattern
---------------------------------------
+## 2.3 Client-Side UI Composition Pattern
 
 In the microservices architecture, the majority of applications are constructed using business capabilities or sub-domains, with each respective team being accountable for the user experience.
 

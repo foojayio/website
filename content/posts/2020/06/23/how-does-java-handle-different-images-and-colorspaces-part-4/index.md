@@ -32,8 +32,7 @@ There are lots of image formats which ImageIO will not read and write.
 
 ImageIO uses native memory so it runs out of memory even if there is lots of Java heap. This can be a big issue with server software being shared between multiple users.
 
-Alternatives?
--------------
+## Alternatives?
 
 Luckily there are options. Below we give you some reasons to use the excellent Open Source Apache Imaging library or own commercial JDeli image library. We think they provide the two best options if you need something more than ImageIO. Which one is best will depend on your exact requirements.
 

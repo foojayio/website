@@ -37,8 +37,6 @@ For those dabbling in microservices, GlassFish now natively supports **MicroProf
 [Get started with GlassFish
 with this guide](https://omnifish.ee/developer-resources/)
 
-<br />
-
 ![](https://omnifish.ee/wp-content/uploads/2024/09/Screenshot-from-2024-09-06-16-08-30-1024x393.png)
 
 **A Developer's Best Friend**
@@ -69,8 +67,6 @@ From just a servlet container that can programmatically turn request objects int
 
 Thanks to OmniFish, GlassFish isn't just an application server alone. Our contributions include **[Docker images](https://omnifish.ee/developers/glassfish-server/docker-image/)** optimized for faster start and lower memory use, an [enhanced **Arquillian container**](https://omnifish.ee/developers/glassfish-server/arquillian-containers/) with simpler configuration and debugging options, and even an **[Eclipse IDE plugin](https://omnifish.ee/developers/glassfish-server/ide-plugins-for-glassfish/eclipse-ide/)** that supports the latest GlassFish versions.
 
-<br />
-
 * [GlassFish Docker Images](https://omnifish.ee/developers/glassfish-server/docker-image/)
 * [Arquillian containers for GlassFish](https://omnifish.ee/developers/glassfish-server/arquillian-containers/)
 * [IDE plugins for GlassFish](https://omnifish.ee/developers/glassfish-server/ide-plugins-for-glassfish/)
@@ -84,14 +80,8 @@ Eclipse GlassFish is an open source server maintained by project members in the 
 OmniFish actively contributes to the development of the GlassFish project, more than all other companies and individual contributors together. OmniFish engineers have years of experience with solving production issues, improving performance and usability of GlassFish, and adding new features in GlassFish and the ecosystem of GlassFish tooling. On top of that, we at OmniFish have a vision of turning GlassFish into a productive development platform and production runtime to write and run Java apps like a god!  
 [Need help with GlassFish? Ask OmniFish for help...](https://omnifish.ee/contact-us/)
 
-<br />
-
 **Final Thoughts**
 
 So, what's next for GlassFish? It's not about survival anymore---it's about thriving in a modern development landscape. OmniFish and the whole GlassFish team have more plans for the future. More features to simplify app development and configuration. More ways to run apps in different environments and architectures. And, of course, even more reliable, more secure, and faster production runtime.
 
 **Whether you're maintaining legacy systems or embracing the latest in Jakarta EE, GlassFish has the tools and updates you need to stay ahead.**
-
-<br />
-
-<br />

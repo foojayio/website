@@ -38,9 +38,7 @@ You can find all the code presented in this tutorial in the [GitHub repository](
 git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73141a0733141a071b06115d101c1e">[email protected]</a>:soujava/helidon-mongodb-cqrs.git
 ```
 
-
-Prerequisites
--------------
+## Prerequisites
 
 For this tutorial, you'll need:
 
@@ -56,12 +54,9 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-
 By decoupling read and write operations, CQRS assigns each its own responsibility. Instead of using one model to manage both state changes and data retrieval, CQRS separates these into commands and queries. Commands represent actions and enforce business rules, while queries retrieve information from purpose-built data models. This separation avoids conflicts and allows each side to evolve independently.
 
 This tutorial focuses on a specific, instructional use case: authorizing card usage. Instead of building a complete financial system, we concentrate on authorizing transactions and retrieving transaction history. This limited scope helps demonstrate the process of creating both command and query components.To maintain consistency with the previous post, we will use [Helidon with MicroProfile](https://www.mongodb.com/community/forums/t/introduction-to-mongodb-and-helidon/303061/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=hugh.murray). You may define the groupId, artifactId, version, and package name as you prefer. After downloading the project, include the MongoDB integration---Eclipse JNoSQL---in the pom.xml file at the project root:
-
-<br />
 
 ![](mon1-1024x540.png)
 
@@ -75,7 +70,6 @@ To maintain consistency [with the previous post](https://dev.to/mongodb/introduc
 </dependency>
 ```
 
-
 With the project defined, the next step is to set the database configuration. You can either use a local database or explore MongoDB Atlas; either is fine. We will use locally, thus, run this Docker command to start a MongoDB instance:
 
 Include those new properties:
@@ -88,11 +82,9 @@ jnosql.document.database=cards
 jnosql.mongodb.application.name=devrel-article-java-jnosql
 ```
 
-
 PRO TIP: MongoDB Atlas is a valuable Database-as-a-Service option. It simplifies operations by delegating database management to MongoDB experts.
 
-Step 1: Create the entities
----------------------------
+## Step 1: Create the entities
 
 The first step is to create the necessary entities. We need entities for managing status and a separate entity for queries, which can serve as an aggregator or summary. On the command side, we define two entities: Card, which holds the current status and available amount, and OperationResult, which records each card operation attempt. OperationResult is immutable and cannot be changed once it is stored in the database.
 
@@ -190,7 +182,6 @@ public class Card {
 }
 ```
 
-
 ```java
 package com.acme.cards.command;
 
@@ -210,7 +201,6 @@ public record OperationResult(@Id UUID id,
 }
 ```
 
-
 ```java
 package com.acme.cards.command;
 
@@ -219,7 +209,6 @@ public enum CardOperationStatus {
 }
 ```
 
-
 ```java
 package com.acme.cards.command;
 
@@ -227,7 +216,6 @@ public enum OperationStatus {
     APPROVED, DECLINED
 }
 ```
-
 
 After creating the command operations, the next step is to define the entity where we will store the transactions and operations. This entity will define where the user will read. This one is where we will process the data and make it available to the read operations.
 
@@ -250,7 +238,6 @@ public record TransactionView(@Id UUID id,
                               @Column Instant createdAt) {
 }
 ```
-
 
 To simplify the structure, we will create a REST API to generate cards. Based on these cards, we will handle debit operations and check if a card has sufficient available balance.
 
@@ -338,11 +325,9 @@ public class CardResource {
 }
 ```
 
-
 With this structure, we can now work with cards. In a real-world scenario, additional card statuses such as frozen or canceled would be included. Here, we focus on a small part of the problem to highlight the architectural pattern.
 
-Step 2: Creating Command
-------------------------
+## Step 2: Creating Command
 
 The next step is to create the command responsible for write operations. Here, we use the AuthorizeCardCommand, which encapsulates the attributes needed for card operations. This approach avoids handling numerous parameters by using a single class.
 
@@ -355,7 +340,6 @@ import java.util.UUID;
 public record AuthorizeCardCommand(UUID cardId, BigDecimal amount, String reason) {
 }
 ```
-
 
 The next class is the handler responsible for processing authorizations. When a debit is requested, it checks if sufficient funds are available. If so, it processes the transaction and updates the TransactionView, as addressed in the query section.
 
@@ -453,7 +437,6 @@ public class AuthorizeCardCommandHandler {
 }
 ```
 
-
 Finally, we define the resource that initiates the command operation:
 
 ```java
@@ -498,9 +481,7 @@ public class CardCommandResource {
 }
 ```
 
-
-Step 3: Create Query
---------------------
+## Step 3: Create Query
 
 The final step is to create the query resource. While the command writes transactions, the query retrieves processed transactions for a given card.
 
@@ -551,9 +532,7 @@ public class CardQueryResource {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 CQRS is not simply about dividing code for architectural reasons. It recognizes that reads and writes have distinct purposes. Separating commands from queries allows each to focus on its role: commands enforce business rules and generate decisions, while queries deliver optimized views of the system's state. In this tutorial, we demonstrated this approach using a basic card authorization flow, highlighting the difference between a decision (OperationResult) and the data used for reading (TransactionView).
 
@@ -562,8 +541,6 @@ This example uses a limited scope to clarify the concept. CQRS is not a default 
 Ready to explore the benefits of MongoDB Atlas? Get started now by [trying MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=data_driven_test_dev&utm_term=otavio.santana).
 
 [Access the source code](https://github.com/soujava/helidon-mongodb-cqrs) used in this tutorial. Any questions? Come chat with us in the [MongoDB Community Forum](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=data_driven_test_dev&utm_term=otavio.santana).
-
-<br />
 
 **References**:
 

@@ -28,8 +28,7 @@ However, the cost becomes relatively high if we end up with two or more tools to
 
 Simply put, you need to multiply development time, deployment time, and maintenance costs by the number of tools.
 
-Kafka
------
+## Kafka
 
 Kafka is great for event streaming architectures, continuous data integration (ETL), and messaging systems of record (database).
 
@@ -37,8 +36,7 @@ However, Kafka has some challenges, such as a complex architecture with many mov
 
 Moreover, Kafka does not offer batch processing and all intermediate steps are materialised to disk in Kafka. This leads to enormous disk space usage.
 
-Hazelcast
----------
+## Hazelcast
 
 Hazelcast is a real-time stream processing platform that can enhance Kafka (and many more sources).
 
@@ -50,16 +48,14 @@ Hazelcast can process real-time and batch data in one platform, making it the ri
 
 ![](1683707203791-700x289.png)
 
-Prerequisites
--------------
+## Prerequisites
 
 * If you are new to Kafka or you're just getting started, I recommend you start with [Kafka Documentation](https://kafka.apache.org/documentation/)
 * If you are new to Hazelcast or you're just getting started, I recommend you start with [Hazelcast Documentation](https://docs.hazelcast.com/home/)
 * For Kafka, you need to download Kafka, start the environment, create a topic to store events, write some events to your topic, and finally read these events. Here's a [Kafka Quick Start](https://kafka.apache.org/quickstart).
 * For Hazelcast, you can use either the [Platform](https://docs.hazelcast.com/hazelcast/latest/) or the [Cloud](https://docs.hazelcast.com/cloud/overview). I will use a local cluster.
 
-Step 1
-------
+## Step 1
 
 Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/server mode and an instance of Management Center running on your local network.
 
@@ -72,7 +68,6 @@ hz -V
 
 hz start
 ```
-
 
 To add more members to your cluster, open another terminal window and rerun the start command.
 
@@ -88,7 +83,6 @@ hz-mc -V
 hz-mc start
 ```
 
-
 We will use the SQL shell, the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics.
 
 The Results can be sent directly to the client or inserted into maps or Kafka topics. You can do so by running the following command:
@@ -97,16 +91,13 @@ The Results can be sent directly to the client or inserted into maps or Kafka to
 bin/hz-cli sql
 ```
 
-
 We need a Kafka Broker, I'm using a Docker image to run it (on the same cluster/device as my Hazelcast member).
 
 ```
 docker run --name kafka --network hazelcast-network --rm hazelcast/hazelcast-quickstart-kafka
 ```
 
-
-Step 2
-------
+## Step 2
 
 Once we have all components up and running, we need to create a Kafka mapping to allow Hazelcast to access messages in the trades topic.
 
@@ -132,7 +123,6 @@ OPTIONS (
 );
 ```
 
-
 Here, you configure the connector to read JSON values with the following fields:
 
 ```
@@ -149,7 +139,6 @@ Here, you configure the connector to read JSON values with the following fields:
 }
 ```
 
-
 You can write a streaming query to filter messages from Kafka:
 
 ```
@@ -159,7 +148,6 @@ SELECT ticker, ROUND(price * 100) AS price_cents, amount
 
   WHERE price * amount > 100;
 ```
-
 
 This will return an empty table, we need to insert some data:
 
@@ -171,13 +159,11 @@ INSERT INTO trades VALUES
   (2, 'EFGH', 14, 20);
 ```
 
-
 Go back to the terminal where you created the streaming query.
 
 You should see that Hazelcast has executed the query and filtered the results.
 
-Step 3
-------
+## Step 3
 
 While the previous step is possible to execute with Kafka only, this step will enrich the data in Kafka message, taking your Kafka processing to the next step. Kafka messages are often small and contain minimal data to reduce network latency. For example, the trades topic does not contain any information about the company that's associated with a given ticker.
 
@@ -209,7 +195,6 @@ INSERT INTO companies VALUES
 (2, 'EFGH', 'The EFGH', 5000000);
 ```
 
-
 Use the JOIN clause to merge results from the companies map and trades topic so you can see which companies are being traded.
 
 ```
@@ -222,7 +207,6 @@ JOIN companies
 ON companies.ticker = trades.ticker;
 ```
 
-
 In another SQL shell, publish some messages to the trades topic.
 
 ```
@@ -233,11 +217,9 @@ INSERT INTO trades VALUES
   (2, 'EFGH', 14, 20);
 ```
 
-
 Go back to the terminal where you created the streaming query that merges results from the companies map and trades topic.
 
-Step 4
-------
+## Step 4
 
 Finally, we will ingest query results into a Hazelcast map. We create a mapping to a new map in which to ingest your streaming query results.
 
@@ -261,7 +243,6 @@ OPTIONS (
 'valueFormat'='json-flat');
 ```
 
-
 Submit a streaming job to your cluster that will monitor your trade topic for changes and store them in a map, you can check running jobs by running SHOW JOBS;
 
 ```
@@ -284,19 +265,15 @@ INSERT INTO trades VALUES
 (2, 'EFGH', 14, 20);
 ```
 
-
 Now you can query your trade_map map to see that the Kafka messages have been added to it.
 
 ```
 SELECT * FROM trade_map;
 ```
 
-
 The following diagram explains our demo setup; we have a Kafka topic called trades which contains a collection of trades that will be ingested into a Hazelcast cluster.
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-98378" src="Hazelcast-Kafka-700x289.png" alt="" width="700" height="289">
-
-<br />
 
 Additionally, a companies map represents companies' data stored in the Hazelcast cluster.
 

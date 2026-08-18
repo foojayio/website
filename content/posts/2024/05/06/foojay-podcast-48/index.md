@@ -27,13 +27,11 @@ In this episode, we are in Oberpfalz, Germany, for a particular reason: the orga
 
 Let's also learn more about this Java community in Germany!
 
-Video
------
+## Video
 
 {{< youtube PIpQbo-1DnQ >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-**Guests**
-----------
+## **Guests**
 
 ### Richard Fichtner
 
@@ -59,8 +56,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * <https://foojay.social/@frankdelporte>
 * <https://www.linkedin.com/in/frankdelporte/>
 
-Links
------
+## Links
 
 * JUG Oberpfalz
   * <https://www.meetup.com/JUG-Oberpfalz/>
@@ -74,8 +70,7 @@ Links
   * <https://www.linkedin.com/company/javapro/>
   * <https://www.youtube.com/channel/UCc446MPHdM41L8lFK47KS7A>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 
@@ -113,13 +108,8 @@ Content
 
 38:03 Conclusion
 
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo
 * Synapse by Shane Ivers - <https://www.silvermansound.com>
-
-<br />
-
-<br />

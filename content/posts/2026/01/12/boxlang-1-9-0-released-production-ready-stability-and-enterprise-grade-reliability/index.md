@@ -24,8 +24,7 @@ frozen: false
 
 **Houston, Texas -- January 2025** -- Ortus Solutions, a leading innovator in professional open-source development, today announced the release of BoxLang 1.9.0, a major stability and compatibility release focused on production-readiness. This release resolves over 50 critical bugs and introduces significant enhancements to datasource management, context lifecycle handling, and web form processing for mission-critical enterprise applications.
 
-Production-Ready Enhancements
------------------------------
+## Production-Ready Enhancements
 
 BoxLang 1.9.0 delivers critical improvements based on real-world client migrations and production deployments:
 
@@ -35,8 +34,7 @@ BoxLang 1.9.0 delivers critical improvements based on real-world client migratio
 * **Enterprise Database Support**: Comprehensive Oracle, MySQL, and PostgreSQL improvements including named parameters, ref cursors, and query-of-queries enhancements
 * **Fluent SOAP Integration**: Enhanced SOAP client with automatic WSDL discovery and intelligent type conversion
 
-Key Features and Code Examples
-------------------------------
+## Key Features and Code Examples
 
 ### Array-Based Form Field Parsing
 
@@ -52,7 +50,6 @@ BoxLang now automatically parses query parameters and form fields as arrays usin
 </form>
 ```
 
-
 Then it can read them when submitted:
 
 ```
@@ -65,7 +62,6 @@ selectedColors = form.colors;
 tags = url.tags;
 // Result: ["boxlang", "java", "modern"]
 ```
-
 
 ### Datasource Lifecycle Management
 
@@ -93,7 +89,6 @@ class {
 }
 ```
 
-
 ### Oracle Database Improvements
 
 Named parameters and ref cursors now work correctly:
@@ -115,7 +110,6 @@ bx:storedproc procedure="getUserData" datasource="oracle_ds" {
     bx:procparam type="out" variable="result" type="refcursor";
 }
 ```
-
 
 ### Enhanced SOAP Client with Fluent API
 
@@ -142,7 +136,6 @@ if ( ws.hasOperation( "ProcessOrder" ) ) {
 }
 ```
 
-
 **Key SOAP Improvements:**
 
 * **Automatic WSDL Discovery**: Parses operations, parameters, and types automatically
@@ -151,8 +144,7 @@ if ( ws.hasOperation( "ProcessOrder" ) ) {
 * **Operation Inspection**: Programmatically discover and validate operations
 * **Enhanced Reliability**: Improved error handling and connection management
 
-Technical Specifications
-------------------------
+## Technical Specifications
 
 **50+ Critical Bug Fixes** including:
 
@@ -167,8 +159,7 @@ Technical Specifications
 
 The complete engineering release notes are available at:
 
-Availability and Licensing
---------------------------
+## Availability and Licensing
 
 BoxLang 1.9.0 is available immediately for download at with installation guides at
 
@@ -180,13 +171,11 @@ BoxLang operates under a transparent three-tier licensing model:
 
 All tiers feature straightforward pricing with no hidden fees or complex calculation models.
 
-About BoxLang
--------------
+## About BoxLang
 
 BoxLang is a modern, dynamic, multi-runtime JVM language and productivity framework. With it's multi-parser architecture it can be also used to run CFML applications. Backed by Ortus Solutions' 20 years of professional open-source expertise, BoxLang delivers enterprise-grade reliability for mission-critical applications.
 
-About Ortus Solutions
----------------------
+## About Ortus Solutions
 
 Ortus Solutions is a leading provider of professional open-source software with two decades of experience in enterprise application development. The company specializes in JVM languages, web frameworks, and modern development tooling for Fortune 500 companies and government agencies.
 

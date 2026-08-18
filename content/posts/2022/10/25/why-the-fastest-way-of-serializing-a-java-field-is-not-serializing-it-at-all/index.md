@@ -45,7 +45,6 @@ abstract class MarketData extends SelfDescribingMarshallable {
 }
 ```
 
-
 ### Default Serialization
 
 Java's *Serializable* marker interface provides a default way to serialize Java objects to/from the binary format, usually via the *ObjectOutputStream* and *ObjectInputStream* classes. The default way (whereby the magic ***writeObject()*** and ***readObject()*** are not explicitly declared) entails reflecting over an object's non-transient fields and reading/writing them one by one, which can be a relatively costly operation.
@@ -124,7 +123,6 @@ public final class ExplicitMarketData extends MarketData {
 }
 ```
 
-
 It can be concluded that this scheme relies on reading or writing each field explicitly and directly, eliminating the need to resort to slower reflection. Care must be taken to ensure fields are referenced in a consistent order, and class fields must also be added to the methods above.
 
 ### Trivially Copyable Serialization
@@ -165,7 +163,6 @@ public final class TriviallyCopyableMarketData extends MarketData {
     }
 }
 ```
-
 
 This pattern lends itself well to scenarios where the DTO is reused. Fundamentally, It relies on invoking *Unsafe* under the covers for improved performance.
 
@@ -237,7 +234,6 @@ public class BenchmarkRunner {
     }
 }
 ```
-
 
 This produced the following output on a MacBook Pro (16-inch, 2019) with a 2.3 GHz 8-Core Intel Core i9 CPU under JDK 1.8.0_312, OpenJDK 64-Bit Server VM, 25.312-b07:
 

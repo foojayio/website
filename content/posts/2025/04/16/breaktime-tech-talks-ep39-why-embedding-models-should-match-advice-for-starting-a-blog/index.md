@@ -27,8 +27,7 @@ I'm at a conference this week presenting on a variety of different topics, but I
 
 I'll chat about a hands-on experience that helped me understand why embedding models for vectors and search should actually match. Then I came across an article with advice for creating a blog that outlines a lot of the practices I myself follow when I write tech blogs. I hope you enjoy it as well.
 
-Why embedding models should match
----------------------------------
+## Why embedding models should match
 
 The first thing I wanted to talk about is embedding models need to match when you are creating the embeddings and then when you're searching them.
 
@@ -54,8 +53,7 @@ So again, every implementation of every database vector similarity search might 
 
 Just to be aware of that. This was a case that I had to see firsthand with my own data and my own experience in order for me to understand what was going on and see, oh, it, this really does make a difference. There's a lot of variables when you're talking about AI and this really is no different. Just more to add to the mix.
 
-Advice for starting a blog
---------------------------
+## Advice for starting a blog
 
 I also came across an article that really resonated with me because I really love to tech blog, and it was an article that's called ["Advice for a Friend Who Wants to Start a Blog"](https://www.henrikkarlsson.xyz/p/start-a-blog). I thought this was really great for anyone interested in starting their own blog, whether that's technical blog or something else.
 
@@ -101,8 +99,7 @@ So I like this almost anonymous, a little bit more efficient maybe, when you're 
 
 And that's you included, right? You come back across that problem, ah, there's still nothing on Google for the problem I'm trying to solve. Write that content and fill in those gaps so that way hopefully you or somebody else can benefit from that. It's gonna help fill the gap and hopefully help the next person down the road.
 
-Wrapping up!
-------------
+## Wrapping up!
 
 This week I talked through my hands-on experience of what happens when embedding models for creating vectors and searching them don't match, and why it's important to align those models for both. Then I highlighted some advice from an article for starting a blog that applies to tech blogging as well, and that I consistently use.
 

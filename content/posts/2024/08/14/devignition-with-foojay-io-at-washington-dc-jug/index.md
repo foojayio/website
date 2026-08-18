@@ -34,7 +34,3 @@ Links:
 * [Tickets](https://devignition.ticketleap.com/devignition2024/)
 
 ![](grouppic-1024x257.png)
-
-<br />
-
-<br />

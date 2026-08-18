@@ -29,8 +29,6 @@ frozen: false
 
 Java : Functional Programming
 
-<br />
-
 Before delving into the concept of functional programming, we must first explore *Object-Oriented Programming* , which revolves around the fundamental abstraction of *Class/Object*.
 
 This foundational component for computation leads us to delve into *imperative programming* , which is all about defining **what to do and how to do it**
@@ -43,8 +41,7 @@ As I mentioned, Functional Programming has its roots in Mathematics and it draws
 
 So,
 
-What is Lambda(λ) Calculus?
----------------------------
+## What is Lambda(λ) Calculus?
 
 **Lambda calculus** is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution.
 
@@ -61,8 +58,7 @@ Enough on Maths. Let's discuss about functional programming now...
 
 So,
 
-What is Functional Programming?
--------------------------------
+## What is Functional Programming?
 
 In computer science, functional programming is a programming paradigm that considers computation as the evaluation of mathematical functions and emphasizes the use of expressions or declarations over statements. This approach focuses on constructing the structure and components of computer programs without modifying state or utilizing mutable data.
 
@@ -94,8 +90,7 @@ A *function* is a fundamental concept that represents a mapping from input value
 3. **First-Order Function:** A function which receive or give inputs and cannot assigned to another functions.
 4. **First-Class Function:** A function that can be assigned to a variable, passed as an argument to another function, or returned from a function
 
-Features of Functional Programming in Java
-------------------------------------------
+## Features of Functional Programming in Java
 
 1. Functional Interfaces
 2. Lambda Expressions
@@ -109,7 +104,3 @@ Functional programming, which draws inspiration from mathematics, centers around
 In the context of Java, the inclusion of lambda expressions and streams simplifies the application of functional programming principles. By delving deeper into these concepts through practical illustrations, we can gain a better understanding of how functional programming enhances the quality and scalability of code.
 
 Stay tuned for additional insights on this subject!
-
-<br />
-
-<br />

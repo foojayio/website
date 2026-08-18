@@ -26,8 +26,7 @@ Rate-limiting is an age-old Reverse Proxy feature focused on protecting against 
 
 In this post, I want to detail how to do it with Apache APISIX. Note I take most of the material from the [workshop](https://nfrankel.github.io/apisix-workshop/).
 
-Rate-limiting for the masses
-----------------------------
+## Rate-limiting for the masses
 
 Apache APISIX offers no less than three plugins to rate limit requests:
 
@@ -53,7 +52,6 @@ routes:
 #END
 ```
 
-
 1. Set the `limit-count` plugin
 2. Limit requests to one every 60 seconds
 3. Override the default HTTP response code, *i.e.* , `503`
@@ -64,7 +62,6 @@ At this point, we configured regular rate limiting.
 curl -v http://localhost:9080/get
 curl -v http://localhost:9080/get
 ```
-
 
 If we execute the second request before a minute has passed, the result is the following:
 
@@ -88,13 +85,11 @@ Server: APISIX/3.9.1
 </html>
 ```
 
-
 1. Configured limit
 2. Remaining quota
 3. Waiting time in seconds before quota replenishment
 
-Per-consumer rate limiting
---------------------------
+## Per-consumer rate limiting
 
 To configure per-consumer rate limiting, we first need to implement request authentication. APISIX offers many authentication plugins; we shall use the simplest one, [key-auth](https://apisix.apache.org/docs/apisix/plugins/key-auth/). `key-auth` checks a specific HTTP request header - `apikey` by default.
 
@@ -112,7 +107,6 @@ consumers:
         key: jane                      #2
 ```
 
-
 1. Users
 2. HTTP header request value
 
@@ -120,7 +114,6 @@ consumers:
 curl -H 'apikey: john' localhost:9080/get #1
 curl -H 'apikey: jane' localhost:9080/get #2
 ```
-
 
 1. Authenticate as `johndoe`
 2. Authenticate as `janedoe`
@@ -156,7 +149,6 @@ consumers:
 #END
 ```
 
-
 1. The route is only accessible to requests authenticating with `key-auth`
 2. `johndoe` has a lower limit count than `janedoe`. Did he forget to pay his subscription fees?
 
@@ -167,11 +159,9 @@ curl -H 'apikey: jane' localhost:9080/get
 curl -H 'apikey: jane' localhost:9080/get
 ```
 
-
 The second request gets rate-limited.
 
-Per-group rate limiting
------------------------
+## Per-group rate limiting
 
 We never attach permissions directly to identities in Identity Management systems. It's considered bad practice because when a person moves around the organization, we need to add and remove permissions one by one. The good practice is to attach permissions to groups and set the person in that group. When the person moves, we change their group; the person loses permissions from the old group and gets permissions from the new group. People get their permissions *transitively* via their groups.
 
@@ -195,7 +185,6 @@ consumer_groups:
         rejected_code: 429
 ```
 
-
 The next step is to attach consumers to these groups:
 
 ```yaml
@@ -212,14 +201,12 @@ consumers:
         key: jane
 ```
 
-
 ```bash
 curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: jane' localhost:9080/get
 curl -H 'apikey: jane' localhost:9080/get
 ```
-
 
 The second request gets rate-limited.
 
@@ -247,7 +234,6 @@ consumers:
         key: jane
 ```
 
-
 1. Move `johndoe` to group 2
 2. Limit him individually
 
@@ -256,11 +242,9 @@ curl -H 'apikey: john' localhost:9080/get
 curl -H 'apikey: john' localhost:9080/get #1
 ```
 
-
 1. `johndoe` hits the limit here, but `janedoe` now only has four requests left from this minute, as the former used one request
 
-Conclusion
-----------
+## Conclusion
 
 In this post, we implement rate limiting with Apache APISIX. We set the rate limit on a route and moved it to individual consumers. Then we moved it to consumer groups, so all consumers in a group share the same "pool".
 
@@ -272,12 +256,6 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Consumer Group](https://apisix.apache.org/docs/apisix/terminology/consumer-group/)
 * [Apache APISIX Hands-on Lab](https://nfrankel.github.io/apisix-workshop/)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/different-rate-limits-apisix/) on July 21^st^, 2024*
-
-<br />
-
-<br />
 
 *[DDoS]: Distributed Denial of Service

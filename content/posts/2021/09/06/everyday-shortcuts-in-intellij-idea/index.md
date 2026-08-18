@@ -22,8 +22,7 @@ Let's take a look at some of my favourite keyboard shortcuts in [IntelliJ IDEA](
 
 It's really helpful to use keyboard shortcuts because it speeds you up and keeps you in the flow of coding!
 
-Intention Actions - ⌥⏎ / Alt+Enter
-----------------------------------
+## Intention Actions - ⌥⏎ / Alt+Enter
 
 You can use [this shortcut](https://www.jetbrains.com/help/idea/intention-actions.html) in a number of places, even when it's not an error or when IntelliJ IDEA has not given you any indication that you could use it. It's always worth trying it just to see what your options are.
 
@@ -37,8 +36,7 @@ When you press **⏎** / **Enter**, you have three separate declarations:
 
 You can use **⌥⏎** / **Alt\&Enter** in a number of different scenarios. It's always worth trying it to see what IntelliJ IDEA suggests in that respect.
 
-Search Everywhere - ⇧⇧ or Shift+Shift
--------------------------------------
+## Search Everywhere - ⇧⇧ or Shift+Shift
 
 You can tap **Shift** twice to display the [Search Everywhere](https://www.jetbrains.com/help/idea/searching-everywhere.html) dialogue:
 
@@ -50,8 +48,7 @@ In this dialog, you can search for pretty much anything right across your projec
 
 The Git view is fairly new and really helpful for searching through your Git commits.
 
-Statement Completion - ⇧⌘⏎ / Ctrl+Shift+Enter
----------------------------------------------
+## Statement Completion - ⇧⌘⏎ / Ctrl+Shift+Enter
 
 [Statement completion](https://www.jetbrains.com/help/idea/auto-completing-code.html#statements_completion) is a great habit to get into because it means that IntelliJ IDEA will do the best it can to keep your code compiling. That includes not only putting semicolons in places where semicolons should be, but also opening and closing your brackets and putting your caret in the right place.
 
@@ -63,8 +60,7 @@ Let's look at another example, you can type `private void newMethod(` and Intell
 
 [![Statement Completion - add brackets](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/statement-completion-brackets-image.png)](https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/statement-completion-brackets.mp4)
 
-Reformat Code - ⌥⌘L / Ctrl+Alt+L
---------------------------------
+## Reformat Code - ⌥⌘L / Ctrl+Alt+L
 
 If you have some code that is badly formatted such as this one, there is a really easy way to [fix it up](https://www.jetbrains.com/help/idea/reformat-and-rearrange-code.html#reformat_code). You can use **⌥⌘L** / **Ctrl+Alt+L** to get IntelliJ IDEA to reformat the class for you:
 
@@ -72,8 +68,7 @@ If you have some code that is badly formatted such as this one, there is a reall
 
 IntelliJ IDEA will then reformat your code to adhere to your coding and your style guidelines, which is really nice, especially if you've just been hammering away at the code!
 
-Summary
--------
+## Summary
 
 Here are the four shortcuts that you can try in IntelliJ IDEA:
 

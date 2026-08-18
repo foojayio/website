@@ -23,8 +23,7 @@ Then I kept walking. And it turns out I'd just been looking past it. The "agenti
 
 Here's what I found, grouped by what these organizations are actually trying to do, which, for those who build the systems underneath all this, is the more interesting question than the word count itself.
 
-Core banking, reimagined as "AI-native"
----------------------------------------
+## Core banking, reimagined as "AI-native"
 
 The platforms that run the actual ledgers are rebranding speed and adaptability as AI:
 
@@ -32,8 +31,7 @@ The platforms that run the actual ledgers are rebranding speed and adaptability 
 * [Mambu](https://www.mambu.com/) --- "Banking at the speed of AI"
 * [SaaScada](https://saascada.com/) --- "AIdaptive Core Banking"
 
-Payments and money movement
----------------------------
+## Payments and money movement
 
 Unsurprisingly for Money20/20, payments showed up --- now with agents that initiate and settle:
 
@@ -43,8 +41,7 @@ Unsurprisingly for Money20/20, payments showed up --- now with agents that initi
 
 A recurring idea here --- *agents that pay* --- is interesting. It implies AI agents *initiating* transactions, which is a new design problem for anyone building payment rails.
 
-Lending, credit, and collections
---------------------------------
+## Lending, credit, and collections
 
 The decisioning side of finance in the context of agents:
 
@@ -53,8 +50,7 @@ The decisioning side of finance in the context of agents:
 * [Taktile](https://taktile.com/) --- "Powering critical decisions with AI agents"
 * [Acclaim AI](https://www.acclaim.ai/) --- "AI Agents for 10x More Efficient Collections"
 
-Risk, fraud, and compliance
----------------------------
+## Risk, fraud, and compliance
 
 There's a lot going on here: the part of fintech where "auditable" and "agentic" have to coexist:
 
@@ -65,8 +61,7 @@ There's a lot going on here: the part of fintech where "auditable" and "agentic"
 * [DataWhisper](https://datawhisper.co.uk/) --- "Agentic AI for Regulated Industries"
 * [Trustpilot](https://www.trustpilot.com/) --- "The future of commerce runs on AI --- and trust"
 
-Build-your-own-agent platforms and tooling
-------------------------------------------
+## Build-your-own-agent platforms and tooling
 
 Another relevant area --- the tools you'd actually use to create the AI agents themselves:
 
@@ -75,32 +70,28 @@ Another relevant area --- the tools you'd actually use to create the AI agents t
 * [Camunda](https://camunda.com/) --- "Build AI agents trusted for high-stakes work."
 * [SoundHound AI](https://www.soundhound.com/) --- "AI Agents Built for Trust, Reliability and Security First"
 
-Data and infrastructure underneath it all
------------------------------------------
+## Data and infrastructure underneath it all
 
 Agents are only as good as what they read and how fast:
 
 * [ClickHouse](https://clickhouse.com/) --- "The Leading Database for AI"
 * [acaisoft](https://www.acaisoft.com/) --- "Sovereign AI for European finance"
 
-Content, language, and trust
-----------------------------
+## Content, language, and trust
 
 The parts that make agent output usable, legible, and credible:
 
 * [AD VERBUM](https://www.adverbum.com/) --- "AI Translations. Auditable. Every Word."
 * [CKEditor](https://ckeditor.com/) --- "Bring AI where content happens"
 
-Services and talent
--------------------
+## Services and talent
 
 And the people-and-delivery layer:
 
 * [HCLTech](https://www.hcltech.com/) --- "Move fast. Govern smart. Deliver with AI."
 * [Karat](https://karat.com/) --- "Unlock Talent for the Human + AI Era"
 
-Conclusions
------------
+## Conclusions
 
 My takeaway changed along the way between the start and the end of my walk through Money 20/20. Plus, of course, a lot of technologies use words such as "intelligent" or "intelligence", rather than explicitly calling out AI, though I was most interested in those explicitly calling out AI in their key slogan or biggest message at their booth.
 

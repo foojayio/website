@@ -25,8 +25,7 @@ frozen: false
 
 ![](dancardWorkshop-700x394.png)
 
-Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock
--------------------------------------------------------------------------------
+## Build Secure AI Chat Applications with BoxLang, RAG, Ollama, and Amazon Bedrock
 
 AI demos are everywhere. Building an AI-powered feature that can securely work with your documents, databases, and real application data is a very different challenge.
 
@@ -46,8 +45,7 @@ This full-day workshop is designed to help you work through those challenges by 
 
 You will begin with a simple, ongoing conversation and progressively enhance it with real application capabilities, including access to documents and database data through code you control.
 
-What You Will Learn
--------------------
+## What You Will Learn
 
 **During the workshop, you will learn how to:**
 
@@ -65,8 +63,7 @@ Rather than stopping at theory, you will write and control the code responsible 
 
 By the end of the day, you will have a clearer understanding of how the pieces fit together and how these techniques can be adapted to real enterprise web applications.
 
-Build with More Control Over Your AI Stack
-------------------------------------------
+## Build with More Control Over Your AI Stack
 
 **Choosing an AI provider is only one part of building an effective solution.**
 
@@ -76,8 +73,7 @@ In this workshop, you will explore both approaches and learn how BoxLang can hel
 
 BoxLang will be the primary development language, using the bx-ai module to provide a consistent way to interact with AI services, including Amazon Bedrock and the many engines and models it supports.
 
-Who Should Attend?
-------------------
+## Who Should Attend?
 
 **This workshop is ideal for:**
 
@@ -89,8 +85,7 @@ Who Should Attend?
 
 Basic knowledge of BoxLang or ColdFusion is encouraged. **You do not need to be an AI expert to participate.**
 
-Prerequisites and Workshop Support
-----------------------------------
+## Prerequisites and Workshop Support
 
 **To participate in the hands-on exercises, you will need:**
 
@@ -99,8 +94,7 @@ Prerequisites and Workshop Support
 
 If you need help getting ready, you will have support before the workshop. Participants will receive access to a **private pre- and post-workshop Slack channel** for assistance with prerequisites and follow-up questions after the session.
 
-Get Your Early Bird Ticket and Save $50
----------------------------------------
+## Get Your Early Bird Ticket and Save $50
 
 Early Bird tickets are currently available for **$349, saving you $50 on the regular General Admission price of $399.**
 
@@ -113,8 +107,7 @@ Want to learn alongside your team? Discounted ticket packs are also available:
 
 Learning together makes it easier to apply what you build during the workshop to your own projects, systems, and client needs.
 
-Turn AI Ideas into Working Applications
----------------------------------------
+## Turn AI Ideas into Working Applications
 
 If you have been wondering how to move from experimenting with prompts to building secure, data-driven AI features, this workshop will give you a practical place to start.
 
@@ -122,8 +115,7 @@ Build the application. Connect your own data. Compare local and cloud-based AI s
 
 [**Get your ticket today and join Dan Card on August 28 for this hands-on BoxLang AI workshop here!**](https://www.eventbrite.com/e/creating-simple-and-complex-chat-application-with-a-locally-based-ai-system-tickets-1993889866264?aff=oddtdtcreator "Get your ticket today and join Dan Card on August 28 for this hands-on BoxLang AI workshop.")
 
-Join the Ortus Community
-------------------------
+## Join the Ortus Community
 
 Be part of the movement shaping the future of modern web development.
 

@@ -46,7 +46,6 @@ public class MarketData extends SelfDescribingMarshallable {
 }
 ```
 
-
 Note: In real-world scenarios, great care must be taken when using float and double for holding monetary values as this could otherwise cause rounding problems \[Bloch18, Item 60\]. However, in this introductory article, I want to keep things simple.
 
 There is also a small utility function MarketDataUtil::create that will create and return a new random MarketData object when invoked:
@@ -68,7 +67,6 @@ static MarketData create() {
 }
 ```
 
-
 Now, the objective is to create a queue that is durable, concurrent, low-latency, accessible from several processes and that can hold billions of objects.
 
 ### The Naïve Approach
@@ -83,7 +81,6 @@ public static void main(String[] args) {
     }
 }
 ```
-
 
 This will fail for several reasons:
 
@@ -118,7 +115,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 Using a MacBook Pro 2019 with a 2.3 GHz 8-Core Intel Core i9, north of 3,000,000 messages per second could be inserted using only a single thread.
 
 The queue is persisted via a memory mapped file in the given directory "*market-data*". One would expect a MarketData object to occupy 4 (int securityId) + 8 (long time) + 4\*3 (float last, high and low) = 24 bytes at the very least.
@@ -143,7 +139,6 @@ static MarketData recycle(MarketData marketData) {
 }
 ```
 
-
 ### Reading from a Chronicle Queue
 
 Reading from a Chronicle Queue is straightforward. Continuing the example from above, the following shows how the first two MarketData objects can be read from the queue:
@@ -167,7 +162,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 This might produce the following output:
 
 ```
@@ -187,7 +181,6 @@ This might produce the following output:
   low: 31.281
 }
 ```
-
 
 There are provisions to efficiently seek the tailer's position, for example, to the end of the queue or to a certain index.
 

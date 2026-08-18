@@ -36,7 +36,6 @@ public class MovieApplication {
 }
 ```
 
-
 The `@ComponentScan` annotation instructs Spring to perform a scan of the specified package when you provide it with arguments, as indicated by the `basePackages` attribute. For instance:
 
 ```
@@ -45,7 +44,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.bsmlabs.microservices")
 public class MovieApplication {}
 ```
-
 
 The `@ComponentScan` annotation acts as a substitute for the \<context:component-scan/\> XML tag. While it includes an annotation-config attribute, the XML version lacks this feature. In most scenarios where developers utilize `@ComponentScan`, they presume that default annotation configuration processing is in effect, such as the handling of `@Autowired`.
 
@@ -59,7 +57,6 @@ The component scan interface looks like
 public @interface ComponentScan {
 }
 ```
-
 
 Since the `RetentionPolicy` of ComponentScan is Runtime, it will only execute during the **runtime** phase. You can apply this annotation at the *class level* , as well as at the *interface or enum declaration levels* . Therefore, you specify its `@Target` as ElementType with Type, specifically `@Target(ElementType.TYPE)`.
 
@@ -84,11 +81,7 @@ public @interface SpringBootApplication {
 }
 ```
 
-
-
-
-Attributes used with ComponentScan annotation
----------------------------------------------
+## Attributes used with ComponentScan annotation
 
 The `value()` function acts as an alias for basePackages, allowing developers to make more specific annotation declarations when they do not require additional attributes. For instance, developers can use `@ComponentScan("com.bsmlabs.microservices")` as an alternative to `@ComponentScan(basePackages = "com.bsmlabs.microservices")`.
 
@@ -96,7 +89,6 @@ The `value()` function acts as an alias for basePackages, allowing developers to
 @AliasFor("basePackages")
 String[] value() default {};
 ```
-
 
 1. 
 
@@ -107,7 +99,6 @@ The `basePackages()` identifies annotated components, using the value as an alia
 String[] basePackages() default {};
 ```
 
-
 For example:
 
 ```
@@ -116,7 +107,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class MovieApplication {
 }
 ```
-
 
 The `basePackageClasses()` method outlines the process of scanning all packages that contain annotated components. This indicates that the scanning procedure will be applied to the package associated with each specified class.
 
@@ -129,14 +119,12 @@ public class MovieApplication {
 }
 ```
 
-
 `nameGenerator()`: The Spring container specifically designates the `BeanNameGenerator` class for assigning names to the components it identifies within the `ApplicationContext`.
 
 ```
 Class<? extends BeanNameGenerator> nameGenerator()
 default BeanNameGenerator.class;
 ```
-
 
 The inherent value of the `BeanNameGenerator` interface signifies that the scanner responsible for processing the `@ComponentScan` annotation should use its inherited bean name generator.
 
@@ -151,13 +139,11 @@ public class MovieApplication {
 }
 ```
 
-
 `scopeResolver`: The `ScopeMetadataResolver` is utilized for determining the scope of identified components.
 
 ```
 Class<? extends ScopeMetadataResolver> scopeResolver() default AnnotationScopeMetadataResolver.class;
 ```
-
 
 For example:
 
@@ -170,7 +156,6 @@ public class MovieApplication {
 }
 ```
 
-
 **scopedProxy:** This specifies whether spring framework should create proxies for identified components, which may be essential when they employ scopes in a proxy-oriented manner.
 
 ```
@@ -182,13 +167,11 @@ public class MovieApplication {
 }
 ```
 
-
 **useDefaultFilters:** This specifies the automatic detection of classes that are annotated with `@Component`, `@Controller`, `@Service`, and `@Repository`. The values can be set to either *false* or *true* , with the default being *true*.
 
 ```
 boolean useDefaultFilters() default true;
 ```
-
 
 For example:
 
@@ -199,13 +182,11 @@ public class MovieApplication {
 }
 ```
 
-
 **includeFilters:** It delineates the types that qualify for component scanning.
 
 ```
 Filter[] includeFilters() default {};
 ```
-
 
 For example:
 
@@ -217,7 +198,6 @@ import org.springframework.context.annotation.FilterType;
 public class MovieApplication {
 }
 ```
-
 
 *5 Types of filter available for* **ComponentScan.Filter**
 
@@ -238,15 +218,12 @@ public class MovieApplication {
 }
 ```
 
-
 **lazyInit():** It specifies whether scanned beans should be registered for lazy initiation.
 
-Conclusion
-----------
+## Conclusion
 
 The \`@ComponentScan\` annotation streamlines the configuration process of Spring applications by minimizing the need for developers to manually define beans, promoting a convention-over-configuration methodology, and ensuring that the application context contains the essential components.
 
-Reference
----------
+## Reference
 
 <https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html>

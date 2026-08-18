@@ -13,3 +13,4 @@ aliases:
   - "/today/author/lukas-eder/"
 frozen: false
 ---
+

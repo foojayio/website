@@ -32,8 +32,7 @@ But what if we would only need to deal with the object graph in memory, and woul
 
 That is the main idea of the [MicroStream framework](https://microstream.one/), the realization of ultra-fast in-memory data processing with pure Java. The Java object graph is stored in a storage location using a fundamentally new serialization concept designed from scratch.
 
-Object-Relational Impedance Mismatch
-------------------------------------
+## Object-Relational Impedance Mismatch
 
 In the most simple cases, the structure of the data within memory matches the data structure in the database relatively well. We have Entities that map to tables and properties that match fields in the database. But sometimes the ideal structure in both systems does not match. And in all cases, the data needs to be retrieved from the relational system using a specific protocol.
 
@@ -47,8 +46,7 @@ So that is why at MicroStream we believe the Java memory itself must be the data
 
 A newly designed serialisation framework, build from the ground up, will make sure that those Java instances in the Object Graph that you have indicated as your primary data are stored by the Storage Manager. That component is also responsible for reading all the information back into the memory when you start up your process again.
 
-User Scenarios
---------------
+## User Scenarios
 
 Since MicroStream is just written in plain Java, it can be used in a variety of scenarios as there are no limitations. The objects that are serialised don't have any restrictions, any plain POJO can be used. There is no requirement related to an interface that must be implemented, annotations that are present, or restrictions on the Java class itself.
 
@@ -82,8 +80,7 @@ But a lot of work is required to set up this connection, perform the mapping and
 
 From now on, you only have to deal with the Java objects and instances as data is stored in regular POJOs and MicroStream makes sure the objects are persisted in the storage of the device and available the next time the user accessed the application or the device gets online.
 
-MicroStream Highlights
-----------------------
+## MicroStream Highlights
 
 With [MicroStream](https://microstream.one/), data is stored within the Java Heap as plain POJOs. You don't have any annoying restrictions as any class is supported, without the need to have annotations or interface or markers or parent class that needs to be applied.
 

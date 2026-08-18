@@ -25,8 +25,7 @@ In the following Java Challenge, we will explore the use of parallel streams wit
 
 It's time to improve your Java skills with this Parallel Stream Java Challenge
 
-Parallel Stream Java Challenge
-------------------------------
+## Parallel Stream Java Challenge
 
 What will happen in the following code when running the main method?
 
@@ -62,7 +61,6 @@ public class ParallelChallenge {
 }
 ```
 
-
 A) 11,15,20,22, 15,11,20,22,
 
 B) 11,15,20,22, Random values will be printed in the second Stream
@@ -82,11 +80,9 @@ simpsons.stream().parallel()
                  .forEachOrdered(System.out::print);
 ```
 
-
 ```java
 
 ```
-
 
 The parallel method means that the Stream will iterate the elements concurrently for improved performance.
 
@@ -103,7 +99,6 @@ simpsons.stream().parallel()
                  .forEach(System.out::print);
 ```
 
-
 The only difference here is that we are printing the elements without any order. When we use the parallel method, the order of the elements will be changed, because it's a parallel process by means of which elements are processed at the same time, for better performance.
 
 So the output of the second will be... what do you think?
@@ -113,8 +108,6 @@ In conclusion, the correct alternative between A, B, C, and D above is... what d
 You can also watch the full video explanation in the following video, but I encourage you to try the Java Challenge by yourself first!
 
 {{< youtube gamlYJU2abY >}}
-
-<br />
 
 That's it challenger, rock on! Keep taking action and relentlessly break your limits! Don't hesitate to leave a comment with a question if anything is not clear!
 

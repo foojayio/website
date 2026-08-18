@@ -24,8 +24,7 @@ When you ask an AI coding assistant to debug a Java application, it almost alway
 
 What if the agent could just... use a real debugger?
 
-The JDK ships a perfectly good debugger. Nobody uses it.
---------------------------------------------------------
+## The JDK ships a perfectly good debugger. Nobody uses it.
 
 Every JDK installation since the beginning of time includes `jdb` --- the Java Debugger. It's a command-line tool that lets you set breakpoints, step through code, inspect variables, catch exceptions, and examine threads. It speaks the same JDWP protocol that IntelliJ and Eclipse use under the hood.
 
@@ -33,8 +32,7 @@ And it's **purely text-based**, which makes it a perfect tool for AI agents that
 
 The problem is that no agent knows how to use it. Until now.
 
-Agent Skills: Teaching new tricks through Markdown
---------------------------------------------------
+## Agent Skills: Teaching new tricks through Markdown
 
 Anthropic's [Agent Skills](https://agentskills.io/specification) framework lets you package instructions, scripts, and reference material into a structured directory that AI agents can load dynamically. The format is simple: a `SKILL.md` file with YAML frontmatter and Markdown instructions, plus optional helper scripts and reference docs.
 
@@ -42,8 +40,7 @@ Think of a skill as a runbook that the agent reads just-in-time when it recogniz
 
 I decided to build one that teaches agents how to operate JDB.
 
-Building the skill: a conversation with Copilot
------------------------------------------------
+## Building the skill: a conversation with Copilot
 
 The entire skill was built in a [single conversation session](https://gist.github.com/brunoborges/3b2f883c62409b6ceeacd0fb5a8dc811) with GitHub Copilot CLI. The process was surprisingly natural --- I described what I wanted, and we iterated through research, design, implementation, and testing together.
 
@@ -83,8 +80,7 @@ The `SKILL.md` opens with a **decision tree** --- a pattern borrowed from Anthro
 
 Then it provides concrete debugging workflow patterns --- how to investigate a `NullPointerException`, how to watch a method's behavior, how to diagnose a deadlock --- written as step-by-step JDB command sequences the agent can follow.
 
-The real test: debugging a buggy Swing app, live
-------------------------------------------------
+## The real test: debugging a buggy Swing app, live
 
 To prove this wasn't just theoretical, we built a sample Swing application with four intentional bugs:
 
@@ -150,8 +146,7 @@ One interesting moment in the session: the first time we tried `locals`, JDB res
 
 The agent immediately recognized the issue, quit JDB, recompiled with `javac -g` (which includes debug symbols), and relaunched. This is exactly the kind of practical knowledge that a skill should encode --- and that we later made sure to document in the SKILL.md.
 
-Why this matters
-----------------
+## Why this matters
 
 ### Beyond `println` debugging
 
@@ -195,8 +190,7 @@ Most AI coding tools today work with **static** information --- source code, typ
 * **Exception investigation** --- catching exceptions at the throw site rather than reading stack traces after the fact
 * **Integration issues** --- attaching to running services to observe behavior with real data
 
-Try it yourself
----------------
+## Try it yourself
 
 The skill is open source: **[github.com/brunoborges/jdb-debugger-skill](https://github.com/brunoborges/jdb-debugger-skill)**
 
@@ -208,8 +202,7 @@ To get started:
 
 Then just ask: *"Debug my Java application --- there's a NullPointerException I can't figure out."*
 
-What's next
------------
+## What's next
 
 This is a starting point. The skill currently covers the core JDB workflow, but there are natural extensions:
 

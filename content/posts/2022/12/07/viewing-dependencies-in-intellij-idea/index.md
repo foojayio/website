@@ -22,8 +22,7 @@ frozen: false
 
 In this article, we're going to take a look at different ways to view your external dependencies in IntelliJ IDEA.
 
-Introduction
-------------
+## Introduction
 
 If you're working on a real-world application, your project will probably use external libraries and frameworks.
 
@@ -33,8 +32,7 @@ There are several ways to view dependencies in [IntelliJ IDEA](https://www.jetbr
 
 Each view has a different focus.
 
-Dependency management config file
----------------------------------
+## Dependency management config file
 
 You can find direct dependencies in the dependency management config file. Direct dependencies are the dependencies that your project depends on directly.
 
@@ -50,8 +48,7 @@ Another example is the build.gradle in a Gradle project.
 
 Note that the dependency management config file includes only declared dependencies and not their transitive dependencies (or the dependencies that these declared dependencies depend on).
 
-Project tool window
--------------------
+## Project tool window
 
 In the Project tool window, **⌘1** (on Mac) or **Alt+1** (on Windows/Linux), under External Libraries we can see all the JAR files needed by our application, including the transitive dependencies.
 
@@ -59,8 +56,7 @@ However, we cannot tell the difference between direct dependencies and transitiv
 
 [![Project tool window](project-tool-window.png "Project tool window")](project-tool-window.png "Project tool window")
 
-Build tool window
------------------
+## Build tool window
 
 To see direct dependencies and their transitive dependencies, we can look in the Build tool window. There is no shortcut to open the Build tool window.
 
@@ -84,8 +80,7 @@ We can expand our dependencies to see their transitive dependencies.
 
 [![Maven Build Tool Window showing dependencies](build-tool-window-maven.png "Maven Build Tool Window showing dependencies")](build-tool-window-maven.png "Maven Build Tool Window showing dependencies")
 
-Dependency tool window
-----------------------
+## Dependency tool window
 
 Finally, we can view and manage dependencies in the Dependencies tool window. The Dependencies tool window becomes available when the current project has at least one supported module.
 
@@ -120,8 +115,7 @@ The dependency details pane displays the information about the selected dependen
 * Authors if available
 * Supported Kotlin or Multiplatform platforms if it is a Kotlin Multiplatform dependency
 
-Summary and Shortcuts
----------------------
+## Summary and Shortcuts
 
 Now we know the different ways in which we can view our project's dependencies in IntelliJ IDEA, and the different focus for each view.
 

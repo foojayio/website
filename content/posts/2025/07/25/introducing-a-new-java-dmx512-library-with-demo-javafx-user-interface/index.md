@@ -29,8 +29,7 @@ In this post, I would like to inform you about a new Java library that is now av
 
 But first...
 
-A Personal Story
-----------------
+## A Personal Story
 
 I've always been fascinated by sound and light equipment. As a teenager (over 30 years ago...), I built two disco bars and used them as "DJ Franky" to bring ambiance to many weddings and other parties. I loved the DJ-ing, but I loved even more the technique of getting all the devices together and finding the best way to connect them, building custom housing, and creating the best possible connections. But there was one problem with this hobby, it all cost a lot of money...
 ![](https://webtechie.be/images/2025/dmx/djfranky-1.jpg)
@@ -39,8 +38,7 @@ Fast forward to now. Thanks to modern technology and improved production process
 
 As I wanted to control a few of these from a JavaFX user interface, but couldn't find a suitable Java library to do so, I created one myself.
 
-About DMX512 and OFL
---------------------
+## About DMX512 and OFL
 
 Let's start by explaining the standards used in this project.
 
@@ -61,7 +59,6 @@ var data = new byte[]{0xff, 0x00, 0x00, 0xff, 0x00,
 //                    Red   Green Blue  Dim   Effect 
                       0x00, 0x00, 0xff, 0x7f, 0x00};
 ```
-
 
 #### DMX512 Control from PC
 
@@ -101,8 +98,7 @@ In my library, you can use OFL exports in the "Open Fixture Library JSON" format
 
 The OFL project is [well documented on GitHub](https://github.com/OpenLightingProject/open-fixture-library/tree/master/docs) with more [details about the data model of the JSON files here](https://github.com/OpenLightingProject/open-fixture-library/blob/master/docs/model-api.md).
 
-DMX512 Java Library
--------------------
+## DMX512 Java Library
 
 The library I created is open-source with its [sources on GitHub](https://github.com/codewriterbv/DMX512/) and [releases on Maven Central](https://central.sonatype.com/artifact/be.codewriter/dmx512).
 
@@ -113,7 +109,6 @@ The library I created is open-source with its [sources on GitHub](https://github
     <version>${dmx512.version}</version>
 </dependency>
 ```
-
 
 ### My Test Setup
 
@@ -158,7 +153,6 @@ sleep(2_000);
 // Set color wheel to 44 and dimmer full op
 controller.render(new byte[]{0, 0, 0, 0, 0, (byte) 44, 0, (byte) 255, 0, 0, 0});
 ```
-
 
 ### Using Fixtures and Modes
 
@@ -207,7 +201,6 @@ for (int i = 0; i <= 100; i++) {
 controller.close();
 ```
 
-
 ### Detecting USB-to-DMX and IP-to-DMX interfaces
 
 Two tools in the library can be used to detect these interfaces:
@@ -220,15 +213,12 @@ List<SerialConnection> serialDevices = DMXSerialDiscoverTool.getAvailablePorts()
 List<DMXIPDevice> ipDevices = DMXIPDiscoverTool.discoverDevices();
 ```
 
-
-DMX512 JavaFX Demo Project
---------------------------
+## DMX512 JavaFX Demo Project
 
 To demonstrate how the DMX data can be controlled from a user interface and what gets loaded from the OFL JSON files, a separate project has been created. It's also [available as open-source on GitHub](https://github.com/codewriterbv/DMX512-Demo).
 ![](https://webtechie.be/images/2025/dmx/demo-app-picospot-channels.png)
 
-Next Steps
-----------
+## Next Steps
 
 At this moment, with V0.0.1 of the library, devices can be successfully controlled with IP-to-DMX with the ArtNet protocol. My first USB experiments didn't succeed. That's why I focused on the DMX data handling, IP-to-DMX, and OFL integration to reach a first milestone.
 

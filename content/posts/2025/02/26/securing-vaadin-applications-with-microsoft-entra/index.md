@@ -24,8 +24,7 @@ frozen: false
 
 Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin applications using Microsoft Entra for authentication and authorization and explains how Karibu Testing must be configured.
 
-Step 1: Create an Application in Entra
---------------------------------------
+## Step 1: Create an Application in Entra
 
 The first step is to create an application, configure roles, assign users, and set the redirect URI.
 
@@ -58,8 +57,7 @@ Make sure to copy the value of the client secret; we'll need that in the applica
 We also need to copy the ClientId and the TenantId. The ClientId (Application (client) ID) can be found on the App registration overview page (below), and the TenantId is located on the Entra overview page.
 ![](image-6-1024x380.png)
 
-Step 2: Configure OAuth2 with Entra in our Application
-------------------------------------------------------
+## Step 2: Configure OAuth2 with Entra in our Application
 
 As we have a Vaadin application, we will use the [OAuth 2.0 authorization code grant flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow).
 
@@ -78,7 +76,6 @@ First, add the Microsoft starter dependencies and the OAuth2 client starter. Don
 </dependency>
 ```
 
-
 ### Configure the Application
 
 There are four properties to set. For simplicity, the snippet below shows them as Java properties. But you must be careful with secret values.  
@@ -92,7 +89,6 @@ spring.cloud.azure.active-directory.profile.tenant-id=<teanantId>
 spring.cloud.azure.active-directory.credential.client-id=<clientId>
 spring.cloud.azure.active-directory.credential.client-secret=<clientSecret>
 ```
-
 
 ### Enable Entra Security
 
@@ -120,7 +116,6 @@ public class SecurityConfiguration extends VaadinWebSecurity {
 }
 ```
 
-
 ### Configure Role Prefix
 
 The security configuration will prefix the roles with APPROLE_. To use the role name that we set in Microsoft Entra, we must configure the default prefix because ROLE_ is the prefix by default.
@@ -135,7 +130,6 @@ public class RolePrefixConfiguration {
 }
 ```
 
-
 ### Roles in Action
 
 The setup is completed, and we can use role-based security in the Vaadin application.   
@@ -148,9 +142,7 @@ It's convenient to define the roles as constants, like in the example, in case t
 public class EventRegistrationView extends Div implements HasUrlParameter<Long>, HasDynamicTitle {
 ```
 
-
-Step 3: Setup Karibu Testing
-----------------------------
+## Step 3: Setup Karibu Testing
 
 To use [Browserless Testing of Vaadin Applications with Karibu Testing](https://martinelli.ch/browserless-testing-of-vaadin-applications-with-karibu-testing/), we must fake the Entra setup's security context.
 
@@ -235,14 +227,10 @@ public abstract class KaribuTest {
 }
 ```
 
-
-Summary
--------
+## Summary
 
 Thanks to the spring-cloud-azure-starter-active-directory, the setup is straightforward. The Karibu Testing setup was more difficult, but thanks to Martin Mysny's help, I was able to make it work.
 
 To learn more, check out the official documentation: [Spring Boot Starter for Microsoft Entra developer's guide](https://learn.microsoft.com/en-us/azure/developer/java/spring-framework/spring-boot-starter-for-entra-developer-guide?tabs=SpringCloudAzure5x).
 
 *This blog post was first published on <https://martinelli.ch/securing-vaadin-applications-with-microsoft-entra/>*
-
-<br />

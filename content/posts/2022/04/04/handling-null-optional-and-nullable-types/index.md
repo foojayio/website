@@ -27,14 +27,12 @@ Java has long been infamous for its `NullPointerException`. The reason for the i
 var value = foo.getBar().getBaz().toLowerCase();
 ```
 
-
 Running this snippet may result in something like the following:
 
 ```
 Exception in thread "main" java.lang.NullPointerException
   at ch.frankel.blog.NpeSample.main(NpeSample.java:10)
 ```
-
 
 At this point, you have no clue which part is `null` in the call chain: `foo`, or the value returned by `getBar()` or `getBaz()`?
 
@@ -47,11 +45,9 @@ Exception in thread "main" java.lang.NullPointerException:
   at  ch.frankel.blog.NpeSample.main(NpeSample.java:10)
 ```
 
-
 On JVM 15, it becomes the default behavior: you don't need a specific flag.
 
-Handling NullPointerException
------------------------------
+## Handling NullPointerException
 
 In the above snippet, the developer assumed that every part had been initialized.
 
@@ -74,14 +70,12 @@ if (foo != null) {
 }
 ```
 
-
 It fixes the problem but is far from the best developer experience - to say the least:
 
 1. Developers need to be careful about their coding practice
 2. The pattern makes the code harder to read.
 
-The Option wrapper type
------------------------
+## The Option wrapper type
 
 On the JVM, Scala's `Option` was the first attempt that I'm aware of of a sane `null` handling approach, even if the concept is baked into the foundations of Functional Programming. The concept behind `Option` is indeed quite simple: it's a wrapper around a value that can potentially be `null`.
 
@@ -90,7 +84,6 @@ You can call type-dependent methods on the object inside the wrapper, and the wr
 ```scala
 def map[B](f: A => B): Option[B] = if (isEmpty) None else Some(f(this.get))
 ```
-
 
 If the wrapper is empty, *i.e.* , contains a `null` value, return an empty wrapper; if it's not, call the passed function on the underlying value and return a wrapper that wraps the result.
 
@@ -103,11 +96,9 @@ var option = Optional.ofNullable(foo)
     .map(String::toLowerCase);
 ```
 
-
 If any of the values in the call chain is `null`, `option` is `null`. Otherwise, it returns the computed value. In any case, gone are the NPEs.
 
-Nullable types
---------------
+## Nullable types
 
 Regardless of the language, the main problem with *Option* types is its chicken-and-egg nature. To use an *Option* , you need to be sure it's not `null` in the first place. Consider the following method:
 
@@ -117,14 +108,12 @@ void print(Optional<String> optional) {
 }
 ```
 
-
 What happens if we execute this code?
 
 ```java
 Optional<String> optional = null;
 print(optional);                       // 1
 ```
-
 
 1. Oops, back to our familiar NPE
 
@@ -138,14 +127,12 @@ void print(Optional<String> optional) {
 }
 ```
 
-
 Kotlin chose another route with **nullable** types and their counterparts, non-nullable types. In Kotlin, each type `T` has two flavors, a trailing `?` hinting that it can be `null`.
 
 ```kotlin
 var nullable: String?          // 1
 var nonNullable: String        // 2
 ```
-
 
 1. `nullable` can be `null`
 2. `nonNullable` cannot
@@ -157,13 +144,11 @@ val nullable: String? = "FooBar"
 nullable.toLowerCase()
 ```
 
-
 The above snippet throws an exception at *compile-time* , as the compiler cannot assert that `nullable` is not `null`:
 
 ```
 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type String?
 ```
-
 
 The null safe operator, *i.e.* , `?.`, is very similar to what `map` does: if the object is `null`, stop and keep `null`; if not, proceed with the function call. Let's migrate the code to Kotlin, replacing `Optional` with a null safe call:
 
@@ -171,9 +156,7 @@ The null safe operator, *i.e.* , `?.`, is very similar to what `map` does: if th
 val value = foo?.bar?.baz?.lowercase()
 ```
 
-
-Option or nullable type?
-------------------------
+## Option or nullable type?
 
 You have no choice if you're using a language where the compiler does not enforce null safety. The question raises only within the scope of languages that do, *e.g.* , Kotlin. Kotlin's standard library doesn't offer an Option type. However, the [Arrow](https://arrow-kt.io/docs/apidocs/arrow-core/arrow.core/-option/) library does. Alternatively, you can still use Java's `Optional`.
 
@@ -192,7 +175,6 @@ val option = Some(foo).map(Foo::bar)            // 2
                       .orNull()
 ```
 
-
 1. The Java API returns a platform type; you need to set the correct type, which is nullable
 2. Arrow correctly infers the nullable `Foo?` type
 
@@ -203,8 +185,6 @@ Besides inferring the correct type, Arrow's `Option` offers:
 * Additional functions
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-55237 aligncenter" src="arrow-option-508x510.png" alt="" width="508" height="510">
-
-<br />
 
 For example, `fold()` allows to provide two lambdas, one to run when the `Option` is `Some`, the other when it's `None`:
 
@@ -218,9 +198,7 @@ val option = Some(foo).map(Foo::bar)
                       )
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 If `null` was a million-dollar mistake, modern engineering practices and languages could cope with it. Compiler-enforced null safety, as found in Kotlin, is a great start.
 

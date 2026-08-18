@@ -21,13 +21,10 @@ frozen: false
 
 ![Metal and Skins](https://www.codenameone.com/blog/metal-and-skins.jpg)
 
-<br />
-
 This post has a lot to cover. Before we get to any of it I want to take on the uncomfortable subject first: quality. Two incidents from the past two weeks deserve a public explanation, one was a bug that fits into our normal iteration loop and one was a serious mistake on my part. Both deserve the kind of explanation I would want if I were on the other side of the import.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-How we think about quality
---------------------------
+## How we think about quality
 
 Codename One is a small open source company. We are not a 200-engineer platform team with a dedicated SRE rotation and a separate QA org. We move fast, fast enough that we ship meaningful new code every week, and we put a lot of effort into making sure that speed does not come at the cost of breaking your apps.
 
@@ -67,8 +64,7 @@ We are also actively brainstorming the next generation of crash protection insid
 
 With the quality conversation out of the way, the rest of this post is about the things that actually shipped.
 
-Metal is here
--------------
+## Metal is here
 
 [PR #4799](https://github.com/codenameone/CodenameOne/pull/4799) is the largest single change we have landed in months: a complete Metal rendering backend for iOS. It sits next to the existing OpenGL ES 2 path, behind a single build hint, with its own CI job and its own pixel-diff goldens.
 
@@ -86,7 +82,6 @@ To enable Metal in your project, set the build hint:
 ios.metal=true
 ```
 
-
 Everything else stays the same. The Java surface is unchanged, your existing code keeps working.
 
 **We plan to flip Metal to be the default within two weeks** , assuming no major issues surface. The `ios.metal` hint will stay around (set it to `false` to opt back into GL), but new projects and the build server's default behaviour will move over. If you ship an iOS app, please set the hint *now* and put your real flows through it. We want regressions to surface against your real screens, not the day after the default changes.
@@ -97,13 +92,9 @@ The most user-visible improvement from the Metal port is text. Here is the `Show
  <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-light.png" alt="Metal showcase, light" style="width:200px">
 </figure>
 
-<br />
-
 <figure class="wp-block-image is-resized">
  <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-dark.png" alt="Metal showcase, dark" style="width:200px">
 </figure>
-
-<br />
 
 And the `SpanLabelTheme` capture, which is the real test for body-copy rendering, multiple lines, variable widths, the kind of paragraphs that show up in real apps:
 
@@ -111,18 +102,13 @@ And the `SpanLabelTheme` capture, which is the real test for body-copy rendering
  <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-spanlabel-light.png" alt="Metal SpanLabel theme" style="width:200px">
 </figure>
 
-<br />
-
 The Metal `Dialog` capture is also worth showing because the translucent surface composites correctly against the textured backdrop:
 
 <figure class="wp-block-image is-resized">
  <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-dialog-light.png" alt="Metal Dialog over textured backdrop" style="width:200px">
 </figure>
 
-<br />
-
-The end of the skin downloader
-------------------------------
+## The end of the skin downloader
 
 [PR #4758](https://github.com/codenameone/CodenameOne/pull/4758) ships the Skin Designer as a JavaScript bundle, embedded into the website at [/skindesigner/](https://www.codenameone.com/skindesigner/) the same way the Playground and Initializr are embedded. You can build a skin in the browser, save it, and use it in your simulator without installing anything.
 
@@ -146,8 +132,6 @@ If you only want a skin and don't care how it is built, pick a device, accept th
 **Stage 1, pick a device.** The first step shows a card per device from the bundled catalog. The search box filters by name (it matches both the model and the brand) and the chips below narrow by form factor: All / Phones / Tablets / Foldables. Picking a device pulls in its resolution, PPI, screen size, default safe-area insets, and the iOS or Android system font names from the catalog, then seeds a sensible starting frame: notch, island, or hole presets are applied automatically based on the device's hardware. The catalog is large, the grid is capped to the most recent matches by default, type into the search field to find older or less-common devices.
 ![Skin Designer stage 1, device picker](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-1-device.png)
 
-<br />
-
 **Stage 2, pick a starting source.** There are three ways to seed the skin's body image:
 
 * *Pick a shape* generates the device frame procedurally from a small preset library (rounded rect, notch, dynamic island, punch-hole, corner hole, classic home-button). The frame is rendered as a dark gradient with the screen rect (and any cutouts) carved into it. Best when you want a generic-looking iPhone or Android frame and don't care about exact hardware fidelity.
@@ -156,29 +140,19 @@ If you only want a skin and don't care how it is built, pick a device, accept th
 
 ![Skin Designer stage 2, source picker](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-2-source.png)
 
-<br />
-
 **Stage 3, the editor.** The editor is split into two panes: a live preview on the left that paints the device frame, screen tint, cutouts, and home indicator, and a sidebar on the right with three tabs.
 
 The *Shape* tab shows a preset grid (Rounded rect, Notch, Dynamic Island, Punch-hole, Corner hole, Classic home) and dimension fields for corner radius, bezel thickness, and a toggle for the bottom home indicator. iPhones from X onward and most modern Androids should leave the indicator on, classic devices with a hardware home button should turn it off.
 ![Skin Designer stage 3, Shape tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-shape.png)
 
-<br />
-
 The *Cutouts* tab lists every cutout currently on the skin. Tap a row to expand its width, height, and offset fields. The three add buttons at the bottom seed a sensible default of each type. *Notch* (180 x 30 viewbox px) is a physical hardware cutout drawn in the device frame above the screen rect, mirroring iPhone X / 11 / 12 / 13 hardware. *Island* (120 x 35) is a Dynamic Island, software-reserved space rendered as an opaque pill inside the screen rect, floating on top of the iOS status bar. *Hole* (28 x 28) is an Android punch-hole camera, rendered like the island. When the wizard generates the `.skin`, it automatically extends `safePortraitTop` to cover any in-screen cutouts so app content lands below the floating shape.
 ![Skin Designer stage 3, Cutouts tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-cutouts.png)
-
-<br />
 
 The *Info* tab is mostly read-only and shows what is about to be written into `skin.properties`: name, width, height, PPI, pixels-per-millimeter, and the user-editable safe-area insets. The wizard intentionally does *not* write `smallFontSize`, `mediumFontSize`, or `largeFontSize`, when those are absent the simulator auto-derives them from `pixelMilliRatio`, which is what you want on high-PPI screens.
 ![Skin Designer stage 3, Info tab](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-3-editor-info.png)
 
-<br />
-
 **Stage 4, finish and download.** Clicking *Finish* renders the portrait skin image at the device's actual resolution with rounded corners, transparent screen, opaque cutouts, and a home indicator if enabled. It synthesises the landscape skin by 90-degree rotation, writes the `skin_map.png` overlays that mark the screen rectangle for the simulator's screen-position detection, bundles the appropriate native theme inside the skin zip, and writes `skin.properties` with the platform metadata, safe-area, PPI, and display rect. Clicking *Download skin* hands the file to the browser's download dialog. After the file is on disk, drop it into your simulator's skins folder (or use the *Add* command in the simulator's *Skins* menu) and your new device should appear in the picker.
 ![Skin Designer stage 4, finish and download](https://www.codenameone.com/developer-guide/img/skin-designer/skin-designer-stage-4-done.png)
-
-<br />
 
 A generated `.skin` is just a renamed zip:
 
@@ -192,7 +166,6 @@ Apple-iPhone-16-Pro.skin/
   skin.properties     # platform metadata, safe-area, PPI, display rect
 ```
 
-
 The full developer-guide chapter at [Skin-Designer.asciidoc](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Skin-Designer.asciidoc) walks through every stage with annotated screenshots and documents the `skin.properties` keys the wizard writes (`roundScreen`, `displayX/Y/Width/Height`, `safePortrait*`, `safeLandscape*`, `overrideNames`, system font families, PPI, and pixel ratio).
 
 ### Eating our own dog food
@@ -205,8 +178,7 @@ These three tools are the most direct demonstration we can give of what Codename
 
 The source for all three lives in the same [CodenameOne](https://github.com/codenameone/CodenameOne) repository the framework itself does. If you want to see how a non-trivial Codename One app is structured, those are three good places to start reading.
 
-iOS multi-line TextArea: Return as Done
----------------------------------------
+## iOS multi-line TextArea: Return as Done
 
 [PR #4859](https://github.com/codenameone/CodenameOne/pull/4859), driven by issue [#4854](https://github.com/codenameone/CodenameOne/issues/4854), gives multi-line `TextArea` an opt-in flag that makes the iOS keyboard's Return key act as Done. It closes the editor and fires the Done listener instead of inserting a newline. This is the iOS Reminders-app behaviour: a growing, multi-line task-title field where Return finishes the entry.
 
@@ -218,11 +190,9 @@ ta.putClientProperty("iosReturnExitsEditing", Boolean.TRUE);
 ta.setDoneListener(e -> { /* Return / Done was tapped */ });
 ```
 
-
 While the flag is set, the keyboard's Return key is relabelled to **Done** (`UIReturnKeyDone`). Default behaviour is unchanged: the flag defaults to off, only takes effect on multi-line `TextArea`s, and only intercepts an exact `"\n"` replacement so pasted multi-line text is unaffected.
 
-Diagnostics for status-bar tap scroll-to-top
---------------------------------------------
+## Diagnostics for status-bar tap scroll-to-top
 
 [PR #4868](https://github.com/codenameone/CodenameOne/pull/4868), driven by issue [#3589](https://github.com/codenameone/CodenameOne/issues/3589), adds three complementary diagnostics for the iOS status-bar tap path. We shipped a fix earlier ([#4857](https://github.com/codenameone/CodenameOne/pull/4857)) and the reporter still saw no scroll on device. Rather than another sweep in the dark, we built tools to make the path observable.
 
@@ -230,8 +200,7 @@ Diagnostics for status-bar tap scroll-to-top
 * **Device-side properties.** `Display.getProperty("cn1.iosStatusBarTap.count")`, `cn1.iosStatusBarTap.lastEpochMillis`, `cn1.iosStatusBarTap.lastX/Y`, and `cn1.iosStatusBarTap.proxyInstalled` let you inspect the path on a real iPhone. Run your app on the device, tap the status bar, and read the property. That distinguishes "iOS never delivered the message" from "iOS delivered it but a CodenameOne component intercepted the tap".
 * **Regression coverage.** `StatusBarTapDiagnosticScreenshotTest` exercises the exact same code path through a 2x3 frame grid, with the visible counter rising and the scroll position alternating, so future regressions surface in CI.
 
-Simulator: Dark / Light mode toggle
------------------------------------
+## Simulator: Dark / Light mode toggle
 
 [PR #4871](https://github.com/codenameone/CodenameOne/pull/4871) adds a **Dark / Light Mode** submenu under the simulator's **Simulate** menu with three options: Dark Mode, Light Mode, and Unsupported (the default).
 
@@ -239,27 +208,23 @@ Selecting an option flips `Display.isDarkMode()` (`Boolean.TRUE` / `Boolean.FALS
 
 Combined with the **Native Theme** menu we shipped two weeks ago, you can now sit on a single skin and flip between iOS Modern, Material 3, iOS 7, and Holo Light, in light, dark, and unsupported, in seconds. The everyday win is being able to verify your own theme looks right in dark mode without restarting the simulator.
 
-Heads-up: weekend backend maintenance
--------------------------------------
+## Heads-up: weekend backend maintenance
 
 This weekend we will be doing some maintenance on our build backend servers. The work is mostly invisible from the outside but it touches enough of the infrastructure that you might see intermittent build issues during the window: slower-than-usual builds, the occasional retry, possibly a short period where new builds are queued.
 
 We are doing it because the underlying backend needs to move forward, and the cost of putting that work off keeps compounding. We will keep the disruption as short as we can. If you have a hard release deadline that lands this weekend, please plan around it. Otherwise the impact should be small and you can build through it normally.
 
-Warning: Android 16 will effectively disallow locking orientation
------------------------------------------------------------------
+## Warning: Android 16 will effectively disallow locking orientation
 
 Thanks to **Durank** for flagging [#4879](https://github.com/codenameone/CodenameOne/issues/4879). The [Android 16 behavior changes](https://developer.android.com/about/versions/16/behavior-changes-16) include a meaningful change to how Android handles orientation, in short, on large-screen devices the platform will ignore an app's request to lock orientation. If your app calls `Display.lockOrientation(...)` or sets a fixed orientation in the Android manifest, that lock will be honoured on phones but effectively ignored on tablets and foldables once the device targets Android 16.
 
 There is not much we can do about this on the framework side. It is a platform-level decision and there is no public opt-out for general apps. The realistic path forward is to design layouts that work in both orientations, and to test your app against both portrait and landscape on a tablet before Android 16 reaches your users. We will keep watching for any opt-in path Google publishes, but for the moment please plan accordingly.
 
-Why the version jumped to 7.0.242
----------------------------------
+## Why the version jumped to 7.0.242
 
 A small note on versioning: the current release is **7.0.242** , not 7.0.238 as you might expect from the cadence. The gap is real and worth explaining. We made a fix to the Maven archetype that brings over the features we added in the Codename One Initializr to projects created from the command line. The change itself is straightforward, but it interacted badly with our release build automation and we had to delete several releases along the way to get the pipeline back on its feet. The version numbers we burned in the process are the visible scar. The bright side is that command-line `mvn archetype:generate` now produces projects that line up with what the Initializr generates, which is what we wanted all along.
 
-Wrapping up
------------
+## Wrapping up
 
 We closed **24 issues** in the past week, a meaningful share of them direct beneficiaries of the Metal port. Old GL-only rasterisation diffs, font sizing on retina, polygon drawing artefacts, perspective transform issues, things that the Metal pipeline simply renders correctly out of the box. Migrating the rendering layer turned out to be the cleanest way to retire a long tail of small bugs at once. With the new Skin Designer landing in the same week, two long-running structural problems went from "we should fix this someday" to "this is fixed and shipping".
 

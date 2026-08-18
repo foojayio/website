@@ -27,8 +27,7 @@ The Philippine Java Community were involved in two big conferences namely, Softw
 
 Members of the Foojay community were included as the speakers of the conferences, including me (Tristan Mahinay). This is the first time that the Friends of OpenJDK is involved in these big conferences. Thanks to [Azul](https://www.azul.com/ "Azul") for being a sponsor of both events.
 
-Software Conference Philippines
--------------------------------
+## Software Conference Philippines
 
 ### What is SOFTCON PH?
 
@@ -87,8 +86,7 @@ The speakers in the event were given a hoodie merchandise from the organizers as
 
 ![](softcon-2023-hoodie-383x510.jpg)
 
-Samsung Open Source Conference
-------------------------------
+## Samsung Open Source Conference
 
 ### What is SOSCON PH?
 

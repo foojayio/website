@@ -65,7 +65,6 @@ public class StackTrace extends Throwable {
 }
 ```
 
-
 Some important side notes to get out of the way first
 
 * Yes, I really do use a proportional font in my IDE. I use Verdana on Windows, which I got used to very easily and haven't wanted to go back.
@@ -115,7 +114,6 @@ public class EgMain {
 }
 ```
 
-
 Produces the following Exception when run:
 
 ![](Screen-Shot-2022-11-14-at-4.00.07-PM-1024x152.png)
@@ -159,7 +157,6 @@ public class CreatedMain {
 }
 ```
 
-
 Prints the following:
 
 ![](Screen-Shot-2022-11-14-at-4.01.22-PM-1024x202.png)
@@ -201,7 +198,6 @@ public class JitteryMain implements Runnable {
    }
 }
 ```
-
 
 Prints the following, which again you can see is easy to navigate the stack in your IDE.
 
@@ -245,7 +241,6 @@ public class ConcurrentUsageMain {
 }
 ```
 
-
 Prints the following:
 
 ![](Screen-Shot-2022-11-14-at-4.07.24-PM-1024x158.png)
@@ -261,7 +256,6 @@ createdHere = Jvm.isResourceTracing()
                         ? new StackTrace(getClass().getName() + " created here")
                         : null;
 ```
-
 
 This use of a *null* doesn't require much special handling as loggers will ignore a Throwable which is *null* , and you can give a *null* cause to an Exception and it's the same as not providing one.
 

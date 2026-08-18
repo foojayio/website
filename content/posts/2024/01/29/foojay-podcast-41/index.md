@@ -24,13 +24,11 @@ When starting to build a new website, you are facing a major challenge. Which fr
 
 But... do you really need one of these frameworks? Why would you not just stick to Java and use one of the many great libraries that are available for it?
 
-Video
------
+## Video
 
 {{< youtube aaYs7zqaBO8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -38,8 +36,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 ### Martijn Dashorst
 
@@ -55,8 +52,7 @@ Guests
 * <https://twitter.com/marcushellberg>
 * <https://marcushellberg.dev/>
 
-Podcast
--------
+## Podcast
 
 Host: Frank Delporte
 
@@ -65,8 +61,7 @@ Host: Frank Delporte
 
 ![](podcast-guests-web-development-1024x576.png)
 
-Links
------
+## Links
 
 ### Wicket
 
@@ -99,8 +94,7 @@ Links
 * <https://foojay.io/today/new-book-taming-thymeleaf/>
 * <https://foojay.io/today/controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi/>
 
-Content
--------
+## Content
 
 00:00 Introduction of the topic and guests  
 
@@ -145,10 +139,7 @@ Content
 
 51:21 Conclusions
 
-<br />
-
-Music
------
+## Music
 
 * Barbershop John
 * Hermine Deurloo

@@ -23,8 +23,7 @@ When I released [Lottie4J 1.1.0](https://lottie4j.com/releases/#2026-03-10-110),
 
 [JavaFX 26 was released on March 17, 2026](https://gluonhq.com/javafx-26-is-now-available/) and includes a new headless platform, allowing me to get the test running on GitHub Actions without a display.
 
-The Test, and Why It Mattered
------------------------------
+## The Test, and Why It Mattered
 
 The core challenge with Lottie4J is correctness. The Lottie format is complex with a lot of nested data, and my JavaFX renderer has to produce output that matches what a JavaScript player would show. Pixel-perfect is too ambitious, but "is this a close enough match" is a reasonable bar.
 
@@ -45,9 +44,7 @@ This was all working fine locally. The problem was GitHub Actions. The CI runner
 @DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 ```
 
-
-What Changed in JavaFX 26
--------------------------
+## What Changed in JavaFX 26
 
 JavaFX 26 added a [Headless Platform Prototype](https://openjfx.io/highlights/26/) built directly into the `javafx.graphics` module. No extra dependencies, no native libraries, no Monocle setup. You pass a single JVM flag:
 
@@ -55,11 +52,9 @@ JavaFX 26 added a [Headless Platform Prototype](https://openjfx.io/highlights/26
 -Dglass.platform=headless
 ```
 
-
 That is it. JavaFX starts up, you get a functional toolkit, you can create scenes, render nodes, take snapshots, and run animations, all without a display attached. The [Gluon team](https://gluonhq.com/) did the heavy lifting on this for JavaFX 26, and it makes CI testing of JavaFX components much more practical. The flag works the same way as running your application normally. The difference is that there is nothing being drawn to a screen. For testing purposes, that is exactly what you want. It also opens the door to server-side rendering, for example, to generate a snapshot of a UI component without a display.
 
-The Catch: JavaFX 26 Requires Java 24
--------------------------------------
+## The Catch: JavaFX 26 Requires Java 24
 
 Lottie4J targets [Java 21 and JavaFX 21](https://github.com/lottie4j/lottie4j/blob/main/pom.xml#L38). That is the LTS version most projects are still running on. As this version is widely adopted, I don't want to force users of the library to jump to a newer version just because I want fancier test infrastructure. So the main project stays on 21 (for now).
 
@@ -95,7 +90,6 @@ But JavaFX 26 [requires Java 24 or higher](https://openjfx.io/highlights/26/) to
 </profile>
 ```
 
-
 When this profile is active, Maven bumps `java.version` to 25 and `javafx.version` to 26, so the dependency resolution picks up JavaFX 26 for the test classpath while the main source still compiles to Java 21 targets. The surefire plugin then passes two JVM arguments to the test JVM:
 
 * `-Dglass.platform=headless` tells JavaFX to use the new headless glass backend instead of trying to connect to a display.
@@ -105,8 +99,7 @@ The `--add-opens` line gives the test runner access to the fxfileviewer module i
 
 The [fxfileviewer/pom.xml](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/pom.xml#L95) and [fxplayer/pom.xml](https://github.com/lottie4j/lottie4j/blob/main/fxplayer/pom.xml#L52) pick up the overridden `javafx.version` property through normal Maven inheritance, so those modules automatically get JavaFX 26 on the test classpath when the profile is active.
 
-The GitHub Actions Side
------------------------
+## The GitHub Actions Side
 
 The [Maven workflow](https://github.com/lottie4j/lottie4j/blob/main/.github/workflows/maven.yml#L26) sets up the environment with a Java 25 JDK so the JavaFX 26 runtime can load, and invokes Maven with the profile:
 
@@ -114,18 +107,15 @@ The [Maven workflow](https://github.com/lottie4j/lottie4j/blob/main/.github/work
 mvn test -Pheadless-tests
 ```
 
-
 The rest of the build still compiles against Java 21 targets, so the library artifact itself is not affected. The profile only kicks in for the test run. The workflow does not need any display setup, no `Xvfb`, no `DISPLAY` environment variable tweaks. The headless flag handles all of that!
 
-What This Actually Tests
-------------------------
+## What This Actually Tests
 
 The [unit test compares screenshots](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java) of Lottie animations rendered by the JavaFX player against the pre-generated reference images from the JavaScript player. It loads a set of known animation files, renders specific frames from each one, takes a snapshot using `WritableImage` and `SnapshotParameters`, and then does a pixel-level comparison with a configurable tolerance.
 
 The result is a regression test that runs on every push. If someone changes the rendering logic in a way that visibly breaks an animation, CI will catch it. This is more useful than it sounds, because Lottie rendering involves a lot of layered transformations, easing functions, and shape operations where subtle bugs are easy to introduce.
 
-Would I Recommend This Pattern?
--------------------------------
+## Would I Recommend This Pattern?
 
 Yes, with some caveats.
 
@@ -136,8 +126,6 @@ The reference image approach also requires discipline. The references need to be
 But the payoff is real. The test that I had marked "can not run on CI" now runs on CI. No virtual framebuffer, no Docker tricks, no manual intervention. JavaFX starts up, renders the animations, and the comparison happens cleanly.
 
 For any library that does visual rendering in JavaFX, this is the kind of testing infrastructure that was genuinely missing before. Good work, OpenJFX contributors!
-
-
 
 Links:
 

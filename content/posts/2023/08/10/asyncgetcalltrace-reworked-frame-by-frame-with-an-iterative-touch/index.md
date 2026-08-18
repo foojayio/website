@@ -35,8 +35,7 @@ The new API should be more flexible, safer, and future-proof than the current ve
 
 This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling.
 
-Iterators
----------
+## Iterators
 
 AsyncGetCallTrace fills a preallocated list of frames, which has the most profound expected stack trace length, and many profilers just store away this list.
 
@@ -56,8 +55,7 @@ This API can be used to develop your version of AsyncGetCallTrace, allowing seam
 
 Using the API in a signal handler and writing it using C declarations imposes some constraints, which result in a slightly more complex API which I cover in the following section.
 
-Proposed API
-------------
+## Proposed API
 
 When running in a signal handler, a significant constraint is that we have to allocate everything on the stack. This includes the iterator. The problem is that we don't want to specify the size of the iterator in the API because this iterator is based on an internal stack walker and is subject to change.
 
@@ -73,7 +71,6 @@ int ASGST_RunWithIterator(void* ucontext,
     ASGST_IteratorHandler fun, 
     void* argument);
 ```
-
 
 The iterator handler is a pointer to a method in which the `ASGST_RunWithIterator` calls with an iterator and the `argument`. Yes, this could be nicer in C++, which lambdas and more, but we are constrained to a C API. It's easy to develop a helper library in C++ that offers zero-cost abstractions, but this is out-of-scope for the initial proposal.
 
@@ -92,7 +89,6 @@ Now to the iterator itself. The main method is `ASGST_NextFrame`:
 // }
 int ASGST_NextFrame(ASGST_Iterator* iterator, ASGST_Frame* frame);
 ```
-
 
 The frame data structure, as explained in the previous section, contains all required information and is far simpler than the previous proposal (without any union):
 
@@ -121,7 +117,6 @@ typedef struct {
 } ASGST_Frame;
 ```
 
-
 This uses `ASGST_Method` instead of `jmethodID`, see [jmethodIDs in Profiling: A Tale of Nightmares](https://mostlynerdless.de/blog/2023/07/17/jmethodids-in-profiling-a-tale-of-nightmares/) for more information.
 
 The error codes used both by ASGST_RunWithIterator and ASGST_NextFrame are defined as:
@@ -141,7 +136,6 @@ enum ASGST_Error {
 };
 ```
 
-
 `ASGST_ENQUEUE_NO_QUEUE` and `ASGST_ENQUEUE_FULL_QUEUE` are not relevant yet, but their importance will be evident in my next blog post.
 
 This API wouldn't be complete without a few helper methods. We might want to start from an arbitrary frame; for example, we use a custom stack walker for the top C/C++ frames:
@@ -153,14 +147,12 @@ int ASGST_RunWithIteratorFromFrame(void* sp, void* fp, void* pc,
   int options, ASGST_IteratorHandler fun, void* argument);
 ```
 
-
 The ability to rewind an iterator is helpful too:
 
 ```cpp
 // Rewind an interator to the top most frame
 void ASGST_RewindIterator(ASGST_Iterator* iterator);
 ```
-
 
 And just in case you want to get the state of the current iterator or thread, there are two methods for you:
 
@@ -180,11 +172,9 @@ int ASGST_State(ASGST_Iterator* iterator);
 int ASGST_ThreadState();
 ```
 
-
 But how can we use this API? I developed a small profiler in my writing, a profiler from scratch series, which we can now use to demonstrate using the methods defined before. Based on my Writing a Profiler in 240 Lines of Pure Java blog post, I added a flame graph implementation. In the meantime, you can also find the base implementation on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/live_coding).
 
-Implementing a Small Profiler
------------------------------
+## Implementing a Small Profiler
 
 First of all, you have to build and use [my modified OpenJDK](https://github.com/parttimenerd/jdk/tree/asgst_iterator). This JDK has been tested on x86 and aarch64. The profiler API implementation is still a prototype and contains known errors, but it works well enough to build a small profiler. Feel free to review the code; I'm open to help, suggestions, or sample programs and tests.
 
@@ -220,7 +210,6 @@ static void JNICALL OnVMInit(jvmtiEnv *jvmti,
 }
 ```
 
-
 is reduced to just
 
 ```cpp
@@ -232,7 +221,6 @@ static void JNICALL OnVMInit(jvmtiEnv *jvmti, JNIEnv *jni_env,
   startSamplerThread();
 }
 ```
-
 
 improving the start-up/attach performance of the profiler along the way. To get from the new `ASGST_Method` identifiers to the method name we need for the flame graph, we don't use the JVMTI methods but ASGST methods:
 
@@ -268,7 +256,6 @@ static std::string methodToString(ASGST_Method method) {
 }
 ```
 
-
 This method is then used in the profiling loop after obtaining the traces for all threads. But of course, by then, the ways may be unloaded. This is rare but something to consider as it may cause segmentation faults. Due to this, and for performance reasons, we could register class unload handlers and obtain the method names for the methods of unloaded classes therein, as well as obtain the names of all still loaded used ASGST_Methods when the agent is unattached (or the JVM exits). This will be a topic for another blog post.
 
 Another significant difference between the new API to the old API is that it misses a pre-defined trace data structure. So the profiler requires its own:
@@ -288,7 +275,6 @@ struct CallTrace {
 };
 ```
 
-
 We still use the pre-defined frame data structure in this example for brevity, but the profiler could customize this too. This allows the profiler only to store the relevant information.
 
 We fill the related `global_traces` entries in the signal handler. Previously we just called:
@@ -301,7 +287,6 @@ static void signalHandler(int signo, siginfo_t* siginfo,
   stored_traces++;
 }
 ```
-
 
 But now we have to use the `ASGST_RunWithIterator` with a callback. So we define the callback first:
 
@@ -317,7 +302,6 @@ void storeTrace(ASGST_Iterator* iterator, void* arg) {
   trace->num_frames = count;
 }
 ```
-
 
 We use the argument pass-through from `ASGST_RunWithIterator` to the callback to pass the CallTrace instance where we want to store the traces. We then walk the trace using the ASGST_NextFrame method and iterate till the maximum count is reached, or the trace is finished.
 
@@ -339,7 +323,6 @@ static void signalHandler(int signo, siginfo_t* siginfo,
 }
 ```
 
-
 You can find the complete code on GitHub; feel free to ask any yet unanswered questions. To use the profiler, just run it from the command line:
 
 ```bash
@@ -347,14 +330,10 @@ java -agentpath:libSmallProfiler.so=output=flames.html \
   -cp samples math.MathParser
 ```
 
-
 This assumes that you use the modified OpenJDK. MathParser is a demo program that generates and evaluates simple mathematical expressions. I wrote this for a compiler lab while I was still a student. The resulting flame graph should look something like this:  
 ![](https://mostlynerdless.de/wp-content/uploads/2023/08/image-2000x953.png)
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 Using an iterator-based profiling API in combination with better method ids offers flexibility, performance, and safety for profiler writers.
 
@@ -367,5 +346,3 @@ So it will all come together.
 Thank you for coming this far, I hope you enjoyed this article, and I'm open to any suggestions on my profiling API proposal.
 
 *This project is part of my work in the [SapMachine](https://sapmachine.io) team at [SAP](https://sap.com), making profiling easier for everyone. This article first appeared on my personal blog [mostlynerdless.de](https://mostlynerdless.de).*
-
-<br />

@@ -30,8 +30,7 @@ We all know what the author means. We all Google coding stuff all the time. Obvi
 
 After reading [these](https://yieldcode.blog/how-to-be-a-great-technical-interviewer/) [articles](https://levelup.gitconnected.com/software-interviews-suck-here-is-how-to-fix-them-ea587f89db89) on the subject, I felt I needed to write something of my own that reflects my perspective on a good technical interview.
 
-What's the Goal in a Technical Interview
-----------------------------------------
+## What's the Goal in a Technical Interview
 
 When I conduct a technical interview, I'm hiring a teammate. This teammate should be a person I want to work with. As a result, I focus on:
 
@@ -45,8 +44,7 @@ When I conduct a technical interview, I'm hiring a teammate. This teammate shoul
 
 When I tell this to people I get the knee jerk reaction of "so what the hell do you ask" or "why not X?". I'll start with the positive first, the things I ask...
 
-Debugging as a Technical Interview Technique
---------------------------------------------
+## Debugging as a Technical Interview Technique
 
 I don't care about programming experience in a specific company. I care about programming experience, it can be in open source, university or elsewhere. If you did any real world programming, then you had bugs and you dealt with them.
 
@@ -100,8 +98,7 @@ Then I would guide them through the process verbally to see if they pick up my i
 
 Obviously, people had to locate the part that handles event dispatching to place a breakpoint there. Following that thought process was very illuminating. Far more valuable than a bubble sort.
 
-Why Common Technical Interview Questions are Problematic
---------------------------------------------------------
+## Why Common Technical Interview Questions are Problematic
 
 So it's time to get negative. Previously, I instantly discarded many technical interview techniques as being flawed. Your favorite might have been there, so it's time to explain why I don't like them.
 
@@ -168,8 +165,7 @@ So why don't I recommend this?
 
 Because we're not Google. Without the branding surrounding a hiring process like that, you just have another filter that will block excellent candidates. All of that for a redundant question that makes no sense. A major faceless organization can play to its made up "exclusive club" as a strength. Smaller companies need to have a more personal touch when hiring (hence one on ones).
 
-TL;DR
------
+## TL;DR
 
 In technical interviews don't:
 

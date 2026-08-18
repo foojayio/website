@@ -54,8 +54,7 @@ OK. Enough theory let's get started.
 
 In this tutorial, I will be using a Spring Boot application which when accessed via /states REST endpoint shows Indian states and their capitals. This application uses an in-memory H2 database which inserts rows at the start of the application and keeps it in memory. The source code is available [here](https://github.com/yrashish/indian-states).
 
-Prerequisite
-------------
+## Prerequisite
 
 For this demo following are required to be installed.
 
@@ -315,8 +314,6 @@ Following are the screenshots from Cloud Shell.
 <img decoding="async" src="Screenshot-2021-01-16-at-2.48.36-AM-700x92.png" alt="curl output" width="700" height="92" class="size-medium wp-image-37429">
 
 Final Output
-
-<br />
 
 As you can see above we were able to run our Spring Boot application with Cloud Shell also and got the expected output.
 

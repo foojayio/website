@@ -24,8 +24,7 @@ When you are new to a project, the Dependency Matrix can help you get an overvie
 
 It offers a matrix of the components in our project to help you and highlights the usage flow between them. Let's take a look!
 
-Opening the Dependency Matrix
------------------------------
+## Opening the Dependency Matrix
 
 You can open the Dependency Matrix from the main menu by going to **Code \| Analyze Code \| Dependency Matrix**.
 
@@ -51,8 +50,7 @@ If the project's class files are out of date, the analysis may result in incompl
 
 The **DSM tool window** will open in a popup, showing a matrix of your project's components.
 
-Interpreting the Dependency Matrix
-----------------------------------
+## Interpreting the Dependency Matrix
 
 Let's take a look at how to interpret the Dependency Matrix.
 
@@ -160,8 +158,7 @@ In a large application with multiple cyclic dependencies, you don't need to expa
 
 ![Dependency Matrix - Go to Next Cycle](go-to-next-cycle.png)
 
-Summary
--------
+## Summary
 
 In this tutorial you've seen how the Dependency Matrix can help visualize and explore dependencies between components in  
 

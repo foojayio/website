@@ -27,11 +27,9 @@ This week, we'll use this work together with new support for XDP to create a sim
 ./run_bpf.sh XDPPacketFilter twitter.com
 ```
 
-
 This blocks all incoming IPv4 packages from `twitter.com`. We see how it works in this blog post. First, we start with some background on networking and explain what XDP is.
 
-Network Packet
---------------
+## Network Packet
 
 All networking is packet-based, with multiple layers of protocol from shared medium (e.g., Ethernet) to application level (e.g., HTTP):
 ![](https://mostlynerdless.de/wp-content/uploads/2024/04/network_stack-2000x517.png)
@@ -45,7 +43,6 @@ struct ethhdr {
     __be16 h_proto;
 };
 ```
-
 
 Today, Ethernet is routed on switch level, but it was initially used to communicate between devices that shared the same medium, typically cable.
 
@@ -76,15 +73,13 @@ struct iphdr {
 };
 ```
 
-
 This misses the last field officially specified field, the options field, but it is, according to Wikipedia, usually not used:
 > The [options field](https://en.wikipedia.org/wiki/Internet_Protocol_Options) is not often used. Packets containing [some options may be considered as dangerous](https://en.wikipedia.org/wiki/Internet_Protocol_Options_Considerations) by some routers and be blocked.^[](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#cite_note-40)^
 > [wikipedia](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#Options)
 
 Above the IP protocol is the TCP protocol, which essentially adds ports and acknowledged package delivery, and on the web, the topmost layer is usually HTTP, which adds URL paths and more.
 
-eXpress Data Path (XDP)
------------------------
+## eXpress Data Path (XDP)
 
 XDP is one of the most essential parts of the eBPF kernel land. It allows users to write firewalls, load balancers, and more, such as the packet filter of this blog post. To quote Jonathan Corbet:
 > The core idea behind the XDP initiative is to get the network stack out of the way as much as possible. While the network stack is highly flexible, XDP is built around a bare-bones packet transport that is as fast as it can be. When a decision needs to be made or a packet must be modified, XDP will provide a hook for a user-supplied BPF program to do the work. The result combines minimal overhead with a great deal of flexibility, at the cost of a little "some assembly required" label on the relevant man pages.
@@ -98,7 +93,6 @@ int xdp_drop(struct xdp_md *ctx) {
     return XDP_DROP:
 }
 ```
-
 
 *But please don't attach this program, as it would also drop Address Resolution Protocol (ARP) packages,* which other members of your local ethernet network can map IP addresses to MAC addresses. Dropping all ARP packages*can effectively disconnect your machine from the local network*.
 
@@ -115,13 +109,11 @@ struct xdp_md {
 };
 ```
 
-
 We're just focusing on the content that can be found between `data` and `data_end`. In fact, the header data structures I showed you in the previous section are precisely the structures that describe the content.
 
 Armed with this knowledge, we can now create a package filter:
 
-Writing a Packet Filter
------------------------
+## Writing a Packet Filter
 
 The basic structure of our packet filter application consists of a Java part that handles the configuration and logging and an eBPF part that uses an XDP hook that is called for every received packet. As explained above, The XDP hook decides what to do with every packet. So the structures are as follows:
 ![](https://mostlynerdless.de/wp-content/uploads/2024/04/xdp_filter-1-2000x1005.png)
@@ -135,7 +127,6 @@ BPFHashMap<Integer, Boolean> blockedIPs;
 @BPFMapDefinition(maxEntries = 256 * 4096)
 BPFHashMap<Integer, Integer> blockingStats;
 ```
-
 
 Now we move on to the eBPF program that checks for the IPv4 addresses and drops the packet if the address is in the `blockedIPs` map (based on the program from a blog post of [sematext](https://sematext.com/blog/ebpf-and-xdp-for-processing-packets-at-bare-metal-speed/)):
 
@@ -226,7 +217,6 @@ int xdp_pass(struct xdp_md *ctx) {
     return XDP_DROP;
 }
 ```
-
 
 Now we use it with some [picocli](https://picocli.info/)-based command line handling to build our application:
 
@@ -320,7 +310,6 @@ public abstract class XDPPacketFilter
 }
 ```
 
-
 This is all we need, now we can use it:
 
 ```bash
@@ -345,11 +334,9 @@ Retrying.
 # and so on
 ```
 
-
 So we can't access twitter.com anymore till we stop our application.
 
-Conclusion
-----------
+## Conclusion
 
 Using XDP and eBPF, we can create a partial packet filter that is easily extended into a firewall and blocks incoming packets. The filtering overhead is low, as the packets are processed directly in the kernel. Using hello-ebpf, we can wrap the filter program in a neat command-line application.
 

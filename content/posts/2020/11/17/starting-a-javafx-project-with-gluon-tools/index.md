@@ -82,7 +82,6 @@ Use the Identifier for installation:
 ================================================================================
 ```
 
-
 For JavaFX-development, select a version with ".fx", e.g. `sdk install java 15.0.1.fx-zulu` and use this version in your IDE.
 
 #### Use JavaFX as a Separate Library
@@ -99,8 +98,6 @@ In that case you'll need to follow these steps:
 ![](Screenshot-from-2020-11-16-08-33-50-1024x434.png) Adding openjfx as a dependency ![](Screenshot-from-2020-11-16-08-41-09-1024x194.png) Defining the VM options to run your application
 
 ### Create a New Project with start.gluon.io
-
-<br />
 
 Gluon has created the website [start.gluon.io](https://start.gluon.io/) to start a new JavaFX project, the same way you can also do for Spring with [start.spring.io](https://start.spring.io/), or Quarkus with [code.quarkus.io](https://code.quarkus.io/).
 

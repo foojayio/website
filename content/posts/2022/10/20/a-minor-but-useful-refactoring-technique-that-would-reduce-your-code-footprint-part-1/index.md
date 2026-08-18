@@ -34,8 +34,7 @@ Anyway, since we have already moved to 11, I was wondering what smaller changes 
 
 I was looking for smaller changes, not major ones. So this article is about the first step of some smaller changes that I made.
 
-Immutable collections
----------------------
+## Immutable collections
 
 For many reasons, we often need immutable collections.
 
@@ -55,14 +54,12 @@ The option in our code repository appeared as follows:
   }
 ```
 
-
 Interestingly, Java 9 introduced the Factory method `List.of()` that can be used to remove the entire block.
 
 ```java
    private static final List<RuleType> OUR_FAVORITE_RULES = List.of(RuleType.RULE_ONE,
       RuleType.RULE_TWO, RuleType.RULE_ETC);
 ```
-
 
 There are similar methods available for set and map. Example:
 
@@ -73,9 +70,7 @@ Map.of("bazlur", "Bangladesh",
         "Geertjan", "Netherlands");
 ```
 
-
-Null checking if blocks
------------------------
+## Null checking if blocks
 
 In the huge projects that have accumulated code over many years, you will find many if blocks that only check whether the object is null or not. Based on that, it takes specific actions.
 
@@ -89,7 +84,6 @@ Example:
  }
 ```
 
-
 There are multiple ways to turn it into oneliners.
 
 ```java
@@ -100,18 +94,15 @@ builder.append(fileName == null ? "Unknown Source" : fileName);
 builder.append(Objects.requireNonNullElse(fileName, "Unknown Source"));
 ```
 
-
 Or, optionally, we can use an `Optional` idiom as well.
 
 ```java
  builder.append(Optional.ofNullable(fileName).orElse("Unknown Source"));
 ```
 
-
 All of them are just fine, but however, I like the new method, Objects.requireNonNullElse(), which makes it more descriptive, and thus the code becomes more readable as well as shorter.
 
-Repeating strings
------------------
+## Repeating strings
 
 In many cases, you want to repeat the same string multiple times.
 
@@ -124,13 +115,11 @@ for (int i = 0; i < padRequired; i++) {
 }
 ```
 
-
 The above code can be rewritten as follows:
 
 ```
 builder.append("&nbsp;".repeat(padRequired));
 ```
-
 
 That's all for today.
 

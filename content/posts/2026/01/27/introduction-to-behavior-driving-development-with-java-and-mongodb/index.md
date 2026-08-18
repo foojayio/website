@@ -41,9 +41,7 @@ You can find all the code presented in this tutorial in the [GitHub repository](
 git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88f819ca88f819c809d8ac68b8785">[email protected]</a>:soujava/behavior-driven-development-mongodb.git
 ```
 
-
-Prerequisites
--------------
+## Prerequisites
 
 For this tutorial, you'll need:
 
@@ -59,11 +57,9 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-
 In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
-Step 1: Create the project structure
-------------------------------------
+## Step 1: Create the project structure
 
 The first step is generating the project using Maven. To make it easier, we have the Maven Archetype. Thus, generate the following command:
 
@@ -86,7 +82,6 @@ mvn archetype:generate                     \
 
 "-DinteractiveMode=false"
 ```
-
 
 The next step is to include Eclipse JNoSQL with MongoDB, the Jakarta EE components implementations: CDI, JSON, and the Eclipse Microprofile implementation.
 
@@ -242,7 +237,6 @@ The next step is to include Eclipse JNoSQL with MongoDB, the Jakarta EE componen
     </build>
 </project>
 ```
-
 
 To simplify the scope of the tutorial, we will reuse the modeling and entity from the previous post about data-driven testing with MongoDB and Java. Thus, we will use the same hotel management at the org.soujava.demos.mongodb.document package:
 
@@ -427,7 +421,6 @@ public class RoomBuilder {
 }
 ```
 
-
 The next step is to create an interface of communication between MongoDB and Java. We will simplify our lives using Jakarta Data. Thus, we will have a single interface, where we will connect to MongoDB as a repository interface, and the Jakarta provider will handle the implementation.
 
 ```
@@ -450,7 +443,6 @@ public interface RoomRepository {
 }
 ```
 
-
 We will enable CDI and the proper files, thus generating the bean.xml and the configuration properties file at the src/main/resources/META-INF.
 
 beans.xml
@@ -469,7 +461,6 @@ http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
 </beans>
 ```
 
-
 microprofile-config.properties
 
 ```
@@ -479,7 +470,6 @@ jnosql.mongodb.url=mongodb://localhost:27017
 
 jnosql.document.database=hotels
 ```
-
 
 Exploring the methodology, we should start with the behavior and then do the implementation. Therefore, at the test, we will generate our first feature file at the resource. We will create a *room.feature* at the src/test/resources/org/soujava/demos/mongodb folder.
 
@@ -507,9 +497,7 @@ Feature: Manage hotel rooms
     Then the room 101 should be marked as OUT_OF_SERVICE
 ```
 
-
-Step 2: Create the test infrastructure
---------------------------------------
+## Step 2: Create the test infrastructure
 
 As we will need to generate a MongoDB instance for the test, we will use a container and run the test on it. We will create a DatabaseContainer as a singlethon instance. At the src/test/java/org/soujava/demos/mongodb/config, make the class DatabaseContainer.
 
@@ -557,7 +545,6 @@ public enum DatabaseContainer {
 }
 ```
 
-
 The next step is making this database available to the CDI container. We will create a ManagerSupplier that teaches the CDI how to generate a MongoDB instance. In this case, we will use the properties from the MongoDB test container.
 
 ```
@@ -587,7 +574,6 @@ public class ManagerSupplier implements Supplier<DatabaseManager> {
     }
 }
 ```
-
 
 Cucumber has the feature to allow injection using an ObjectFactory. Once we are using CDI, we will generate an implementation to create those classes using CDI. In this case, at the src/test/java/org/soujava/demos/mongodb/config, generate the WeldCucumberObjectFactory class.
 
@@ -626,13 +612,11 @@ public class WeldCucumberObjectFactory implements ObjectFactory {
 }
 ```
 
-
 SPI loads this class, so we need to register our new class to be executed by Cucumber. Create the src/test/resources/META-INF/services and put the io.cucumber.core.backend.ObjectFactory file.
 
 ```
 org.soujava.demos.mongodb.config.WeldCucumberObjectFactory
 ```
-
 
 Also, at the src/test/resources/META-INF, generate the beans.xml file:
 
@@ -644,7 +628,6 @@ Also, at the src/test/resources/META-INF, generate the beans.xml file:
        bean-discovery-mode="annotated>
 </beans>
 ```
-
 
 The class on configuration is the class that will convert the table into the Room entities, where at the src/test/java/org/soujava/demos/mongodb, we will create the RoomDataTableMapper class:
 
@@ -673,9 +656,7 @@ public class RoomDataTableMapper {
 }
 ```
 
-
-Step 3: Generate our first scenario test
-----------------------------------------
+## Step 3: Generate our first scenario test
 
 The code infrastructure is ready, where we set the ObjectFactory using Weld, and the table mapper to convert the table into our entities. The next step is the test generation itself. As it's necessary to highlight in the BDD methodology, we start with the test. Then we start the implementation, but once the focus is more on showing the tool with MongoDB than the methodology itself, we finalize this tutorial with what should be the first step. We will create our last class in this tutorial: the HotelRoomSteps.
 
@@ -775,9 +756,7 @@ public class HotelRoomSteps {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Behavior-driven development (BDD) encourages us to look beyond code and concentrate on a shared understanding among stakeholders. By integrating Jakarta Data, Eclipse JNoSQL, and Cucumber, we have learned how to articulate business expectations through executable scenarios. These scenarios are written in plain language and linked to actual database operations. This approach not only guarantees technical accuracy but also fosters alignment among developers, testers, and domain experts. Furthermore, it links more with another methodology that I enjoyed that is about[domain driven design](https://bpbonline.com/products/domain-driven-design-with-java), which I've written a new book about.
 

@@ -29,8 +29,6 @@ This framework enables the creation of complex enterprise applications in a more
 
 Spring RestClient
 
-<br />
-
 [Spring Boot 3.2](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.2-Release-Notes#restclient-support "Spring Boot 3.2") launched and introduced a range of captivating functionalities. Notably, the release includes the RestClient feature, which offers a contemporary approach to developing REST endpoints.
 
 Before implementing the RestClient feature, we had several options available for creating REST endpoints, namely:
@@ -63,7 +61,6 @@ You can utilize RestClient in various ways namely,
      var defaultClient = RestClient.create();
 ```
 
-
 2. You can also utilize the **builder pattern** , which allows for additional customization. This includes specifying the **HTTP library, message converters, setting the default URI, path variables, request headers, UriBuilderFactory, as well as registering interceptors and initializers**.
 
 ```
@@ -77,7 +74,6 @@ RestClient customRestClient = RestClient.builder()
   .requestInitializer(myCustomInitializer) (7)
   .build();
 ```
-
 
 Let's analyze what each line does:
 
@@ -157,7 +153,6 @@ In this article, we will connect to retrieve data on universities by providing t
 </project>
 ```
 
-
 **Step:2**The RestClient configuration in the spring boot project is as follows.
 
 ```
@@ -197,7 +192,6 @@ public class RestClientConfig {
 }
 ```
 
-
 **Step:3** Create Response class as follows using **Record** feature
 
 ```
@@ -214,7 +208,6 @@ public record UniversityDataResponse(String alpha_two_code,
 }
 ```
 
-
 **Step:4**Create UniversityDataService and its Implementation class
 
 ```java
@@ -228,7 +221,6 @@ public interface UniversityDataService {
     List<UniversityDataResponse> getUniversityDataWithBuilder(String countryName);
 }
 ```
-
 
 ```java
 package com.bsmlabs.restclient;
@@ -290,7 +282,6 @@ public class DefaultUniversityDataService implements UniversityDataService {
 }
 ```
 
-
 **Step:5** Run the application and access the URL and it will fetch you the university data based on the country
 
 ***http://localhost:8080/api/universities/united%20kingdom***
@@ -315,11 +306,7 @@ var restTemplate = new RestTemplate();
 var response = RestClient.builder(restTemplate);
 ```
 
-
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 `RestClient` is poised to replace `RestTemplate` as it provides a more intuitive and concise method for developing Restful Services, built on top of WebClient.
 
@@ -328,7 +315,3 @@ The complete code can be found [over on Github](https://github.com/bsmahi/spring
 ### References
 
 <https://docs.spring.io/spring-framework/reference/integration/rest-clients.html>
-
-<br />
-
-<br />

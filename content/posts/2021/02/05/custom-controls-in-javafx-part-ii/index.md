@@ -100,7 +100,6 @@ public class CombinedControl extends HBox {
 }
 ```
 
-
 If we would use this control without applying a CSS file it would look as follows:
 
 ![](Combined-Control-2021-01-26-15-13-25.png)
@@ -126,7 +125,6 @@ The CSS style for the TextField looks as follows:
 }
 ```
 
-
 As you can see, we set the background radius for the right two corners of the `TextField` to 0.
 
 For the `Button`, the CSS styles now look as follows:
@@ -142,7 +140,6 @@ For the `Button`, the CSS styles now look as follows:
     -fx-background-insets: 0, 1, 2, 2;
 }
 ```
-
 
 With these CSS styles in place, our control looks as follows:
 
@@ -167,7 +164,6 @@ Now the hard part is to style the focus correctly, to be honest I was lazy and j
     -fx-background-radius: 0 3 3 0, 0 2 2 0, 0 1 1 0, 0 4 4 0, 0 1 1 0;
 }
 ```
-
 
 If we focus now on our new control it will look as follows:
 

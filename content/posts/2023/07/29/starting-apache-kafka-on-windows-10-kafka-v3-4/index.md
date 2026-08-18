@@ -50,15 +50,11 @@ Create a folder to hold Zookeeper Data by modifying the file zookeper.properties
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEgzsc5xL2Lk86WYnajF_5MxDpZhWzg3g4fg3j2gyFH8m8zXruQu3V9Kd-t-6zwzpMePLZo1dE6Z5uflQUEKkL47o-h4xrmLBuEJQ1iQn6CNq9iJUjqCIDziwilh9WJ1-CpYO4YqH0nz7kFOHW-SIj2NJ2iYrSwn1kxWP1JaeGgdtwGW4iUuj6tmv-lhDulD=w640-h333)
 
-
-
 #### 0. Configure Kafka (Kafka Logs)
 
 For the purpose of kafka logs, you can create a folder with the name kafka-logs. In my case, I created this under {KAFKA_HOME}. You may then modify your properties file as show in the image below. The property to be modified is log.dirs in server.properties that should now point to the newly created folder.
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEj9NXAyXlj-enEDvFT75mgGDcZaEmGb5hwB5AoznlWpfEzW1zKJOZIBLv2MiAgo3XrGrEsRHq0dyIuun8T4jdSvNNDAGPnThretMD2knm3nkrMVVhcPqTT3kvPvHh0nIRGIISJPzgW5ONh60QWJw3FaeHnMNAYu5xI4k8plohQJAX-yT-rqX2MlCv6lXaeD=w640-h557)
-
-
 
 #### 1. Starting Zookeeper
 
@@ -68,10 +64,7 @@ First, Zookeeper has to be started using the following command.
 zookeeper-server-start.bat ..\..\config\zookeeper.properties
 ```
 
-
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEgN6T9mXaYRzYuRSC76JIVveE6aF3qO49HQfzcQXavStVBRHWXZaats4_UHK4LZDAMUHPnoszFFCE0b-6B99YMiwjyuVNmdlI9nJs3ech6Na8If09XG3tzJJr8mGUogZWjrv1_0iF5gcCBe77-yQ5vrQZ0bLkClq72mSIZ0pLR4TvmPUX8_OrcVQRttNh6h=w640-h340)
-
-
 
 #### 2. Starting Kafka Server
 
@@ -81,10 +74,7 @@ Next, we will start the Kafka Server using the following command.
 kafka-server-start.bat ..\..\config\server.properties
 ```
 
-
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEgtQI7iKLLbbqtLjhsxDjKVhT-C9wYjkVIy9tyEUNKrDQof6D4vxk4sRRBnGXnW-e08VWmq-r381h41Tku99M7ffPlCkFJerLIwGGyrxEgkOat5GIcJJtjgODdwHYgIMBxT041Rt60NFypFRL9VzU1AnZdY840AI1gD4gWI0-VdwydZQPFLB-UHAK82s-bS=w640-h338)
-
-
 
 #### 3. Creating a Test Topic
 
@@ -93,7 +83,6 @@ Create a Kafka Topic to test out the Kafka Installation using the following comm
 ```
 kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test<code></code>
 ```
-
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEjjiMOt1XyY3YkmDdyfZsg5_7CcUCp7-6jHcaayMx54busg9nf_d1fe7jypHXifPX5vYmTOwb4cy0Ei5ad1kVwlwQ1TeInPct2NUzGsx-lig7rF09dropGBcYv3r2Q7JzciqlAitenBAsxJ24tb6dCqi9OVrGO_rMc2h32zmVj0-tinLeuhm8ZDM6z6Nq_1=w640-h44)
 
@@ -107,18 +96,13 @@ For the version 3.\* the zookeeper is not any more a parameter, you should use -
 
 [Documentation](https://kafka.apache.org/30/documentation.html#quickstart "Documentation")
 
-
-
 #### 4. Create Kafka Producer
 
 ```
 kafka-console-producer.bat --broker-list localhost:9092 --topic test
 ```
 
-
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEixfqIFVylNlbpptv-p8Y-ksVmCnHmxsPzcV0n__BPATcuflsftgEf4ZNR-pu7_pEVTKzkiJWIPKxp8fIDnQLba1fU7GYpNd3IhqyY24tQrdxBD6wu6n8GfkisiQ7wXASQPusWJQ8PVC-YD2_bB44ORR5AFXBrzsc7scwxN2rRQs7uf0uuYsNgmqbZTaGYv=w640-h106)
-
-
 
 #### 5. Create Kafka Consumer
 
@@ -126,9 +110,6 @@ kafka-console-producer.bat --broker-list localhost:9092 --topic test
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
 
-
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEgKCyhyDTcZdiQZzlKthGwXauQFBgndg3OB87_SEES3C2GVDUsidUKYwszYuOYNZOnC6pylFG6j733LFASd4jjjMkNXDI35Y6dg_u9KF6c8P2S77l5hkldYvVc-63-3n7Rh-trUIo-4zEx7VkfQNqIw2-92H29JEZ0eenHzgraRCwPa2toQdzvRxOJ9ZfRN=w640-h104)
-
-
 
 Next in this series of articles will be the demonstration of a Core Java Kafka Producer and Consumer followed by an article on Spring Boot based Kafka Integration.

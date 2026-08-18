@@ -28,8 +28,7 @@ Conversely, Python was not initially built on OOP principles and is dynamically 
 
 The documentation is pretty exhaustive, but it needs examples for beginners. The goal of this post is to list most of these methods and provide these examples so that I can remember them. I've divided it into two parts to make it more digestible.
 
-Lifecycle methods
------------------
+## Lifecycle methods
 
 Methods in this section are related to the lifecycle of new objects.
 
@@ -47,7 +46,6 @@ class FooStr(str):                                     #1
 
 print(FooStr('Hello'))                                 #3
 ```
-
 
 1. Inherit from `str`
 2. Create a new `str` instance, whose value is the value passed to the constructor, suffixed with `Foo`
@@ -71,7 +69,6 @@ foo = Foo('one', 'two', 'three')
 print(f'a={foo.a}, b={foo.b}, c={foo.c}')              #3
 ```
 
-
 1. The first parameter is the instance itself
 2. Initialize the instance
 3. Print `a=one, b=two, c=three`
@@ -80,8 +77,7 @@ print(f'a={foo.a}, b={foo.b}, c={foo.c}')              #3
 
 If `__init()__` is akin to an *initializer* , then `__del__()` is it's *finalizer* . As in Java, finalizers are unreliable, *e.g.*, there's no guarantee that the interpreter finalizes instances when it shuts down.
 
-Representation methods
-----------------------
+## Representation methods
 
 Python offers two main ways to represent objects: one "official" for debugging purposes and the other "informal". You can use the former to reconstruct the object.
 
@@ -101,7 +97,6 @@ class Foo:
 foo = Foo('one', 'two', 'three')
 print(foo)                                             #1
 ```
-
 
 1. Print `Foo(a=one, b=two, c=three)`
 
@@ -133,13 +128,11 @@ foo = Foo('one', 'two', 'three')
 print(bytes(foo))                                     #3
 ```
 
-
 1. Use the [pickle](https://docs.python.org/3/library/pickle.html) serialization library
 2. Delegage to the [dumps()](https://docs.python.org/3/library/pickle.html#pickle.dumps) method
 3. Print the byte representation of `foo`
 
-Comparison methods
-------------------
+## Comparison methods
 
 Let's start with similarities with Java: Python has two methods `object.__eq__(self, other)` and `object.__hash__(self)` that work in the same way. If you define `__eq__()` for a class, you **must** define `__hash__()` as well. Contrary to Java, if you don't define the former, you *must not* define the latter.
 
@@ -169,7 +162,6 @@ print(hash(foo3))
 print(foo1 == foo2)                                   #4
 print(foo2 == foo3)                                   #5
 ```
-
 
 1. Objects that are not of the same type are not equal by definition
 2. Compare the equality of attributes
@@ -210,7 +202,6 @@ print(foo1 <= foo1)                                   #4
 print(foo2 <= foo2)                                   #5
 ```
 
-
 1. Compare the single attribute
 2. Print `True`
 3. Print `False`
@@ -219,8 +210,7 @@ print(foo2 <= foo2)                                   #5
 
 Note that comparison methods may return something other than a boolean. In this case, Python will transform the value in a boolean using the `bool()` function. I advise you not to use this implicit conversion.
 
-Attribute access methods
-------------------------
+## Attribute access methods
 
 As seen above, Python allows accessing an object's attributes via the dot notation. If the attribute doesn't exist, Python complains: `'Foo' object has no attribute 'a'`. However, it's possible to define *synthetic* accessors on a class, via the `object.__getattr__(self, name)` and `object.__setattr__(self, name, value)` methods. The rule is that they are fallbacks: if the attribute doesn't exist, Python calls the method.
 
@@ -242,7 +232,6 @@ print(foo.a)                                          #3
 print(foo.b)                                          #4
 print(foo.c)                                          #5
 ```
-
 
 1. Return the string if the requested attribute is `a`
 2. Return the string if the requested attribute is `b`
@@ -271,7 +260,6 @@ print(foo.b)                                          #4
 print(foo.c)                                          #5
 ```
 
-
 1. Return the string if the requested attribute is `a`
 2. Return the string if the requested attribute is `b`
 3. Print `getattr a`
@@ -294,12 +282,10 @@ foo = Foo('one')
 print(dir(foo))                                       #2
 ```
 
-
 1. Implement the method
 2. Display `['a', 'foo']`; Python sorts the list. Note that there's no `foo` member, though.
 
-Descriptors
------------
+## Descriptors
 
 Python descriptors are accessors delegates, akin to Kotlin's [delegated properties](https://kotlinlang.org/docs/delegated-properties.html). The idea is to factor a behavior somewhere so other classes can reuse it. In this way, they are the direct consequence of favoring composition over inheritance. They are available for getters, setters, and finalizers, respectively:
 
@@ -342,17 +328,13 @@ print(foo2.lazy)                                      #9
 print(foo2.lazy)                                      #9
 ```
 
-
 1. Define the descriptor
 2. Initialize the cache
 3. Call the intensive computation.
 
-Conclusion
-----------
+## Conclusion
 
 This concludes the first part of Python magic methods. The [second part](https://foojay.io/today/python-magic-methods-part-2/) will focus on class, container, and number-related methods.
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/python-magic-methods/1/) on October 15^th^, 2023*
 

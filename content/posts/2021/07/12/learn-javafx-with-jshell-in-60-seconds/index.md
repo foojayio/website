@@ -34,8 +34,7 @@ In the classic science fiction movie, The Matrix, there's a cool special effect 
 
 In this article, I will demonstrate how to use JShell and JavaFX in an interactive way. No IDE or Build tools are needed.
 
-Requirements
-------------
+## Requirements
 
 Java 11 or greater (JDK builds containing JavaFX modules).
 
@@ -45,8 +44,7 @@ To jump right into the code, as a Maven project you'll want to clone the project
 
 Before we start the stop watch here's a quick introduction to jshell.
 
-Introduction to JShell
-----------------------
+## Introduction to JShell
 
 Once you've installed Java 11 or greater the JDK provides a command line tool for the Java language called `jshell`. Similar to Python's command line REPL tool, you will be able to interact with a Java runtime environment.
 
@@ -58,7 +56,6 @@ $ jshell
 |  For an introduction type: /help intro
 ```
 
-
 **Note:** Assuming your system's `JAVA_HOME` environment variable is properly set the typical executables should be available at the command line prompt: `java`, `javac`, and `jshell`.
 
 What's nice about using jshell is you don't have to create any Java specific coding ceremony such as a `public static void main (String[] args)` method or having to create a class surrounding the main() method. You can simply do the following:
@@ -67,7 +64,6 @@ What's nice about using jshell is you don't have to create any Java specific cod
 jshell> System.out.println("JavaFX Rocks!")
 JavaFX Rocks!
 ```
-
 
 Another nice feature is the **autocomplete** ability when hitting the tab key to show available method signatures.
 
@@ -90,14 +86,12 @@ void PrintStream.println(Object x)
 <press tab again to see documentation>
 ```
 
-
 Next, let's try a simple variable assignment by assigning a primitive **5** into a variable **x**.
 
 ```
 jshell> var x = 5
 x ==> 5
 ```
-
 
 After an assignment you can do arithmetic statements like the following:
 
@@ -106,14 +100,12 @@ jshell> x + 1
 $2 ==> 6
 ```
 
-
 Whenever you don't assign a variable to a result as shown above (after hitting the carrage return), JShell will assign a reference variable (a number prefixed with a $ dollar sign) such as `$2`. To verify the result (`$2`) again just enter the reference variable and hit enter to output the value inside as shown below:
 
 ```
 jshell> $2
 $2 ==> 6
 ```
-
 
 So, how do you know what packages and classes are available in the current `jshell` session?
 
@@ -133,13 +125,11 @@ jshell> /imports
 |    import java.util.stream.*
 ```
 
-
 How do you import a class not among the ones shown above. You either use `/open` (load Java file) or add a 3rd party library to your classpath before you launch `jshell` as shown below:
 
 ```
 $ jshell --class-path /opt/libs/log4j.jar:/opt/libs/commons-lang3.jar
 ```
-
 
 After 3rd party libraries are on the classpath you can now import them.
 
@@ -149,7 +139,6 @@ Shown below is an example of how to import the `StringUtils` class from [Apache 
 jshell> import org.apache.commons.lang3.StringUtils
 ```
 
-
 You can now perform the following:
 
 ```
@@ -157,11 +146,9 @@ jshell> StringUtils.isEmpty("")
 $6 ==> true
 ```
 
-
 Now that you are more familiar with jshell let's see how to launch a JavaFX application.
 
-JShell in 60 Seconds
---------------------
+## JShell in 60 Seconds
 
 In the following steps you will learn how to run a JavaFX application and interact with it during runtime using JShell.
 
@@ -172,7 +159,6 @@ Do the following to check to make sure:
 ```
 java --list-modules | grep javafx
 ```
-
 
 You should see something like the following:
 
@@ -185,7 +171,6 @@ You should see something like the following:
 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e389829582859bcd90948a8d84a3d2d2cdd3cdda">[email protected]</a>
 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59f948394938ddb829097b5c4c4dbc5dbcc">[email protected]</a>
 ```
-
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)
 
@@ -333,7 +318,6 @@ public class Main extends Application {
 }
 ```
 
-
 **Things to notice:**
 
 * No package namespace at the top
@@ -352,13 +336,11 @@ $ jshell Main.java
 jshell>
 ```
 
-
 Or just type jshell , then on the command prompt type the following:
 
 ```
 jshell> /open Main.java
 ```
-
 
 This will simply load the file into the current `jshell` session.
 
@@ -370,7 +352,6 @@ To see more commands, type `/help`.
 jshell> Main app = new Main()
 ```
 
-
 Here you'll notice there is no semicolon at the end of the statement. Semicolons are optional for simple one line statements.
 
 In the JavaFX Matrix application, I created one `public static String` variable named `color` that will allow us to change its value dynamically all the while the application is running. The string variable will have a hex value representing an RGB color. The color is used to paint (fill) the characters on the canvas. Below is the code that will convert the string hex value color into a `javafx.scene.paint.Color` instance.
@@ -378,7 +359,6 @@ In the JavaFX Matrix application, I created one `public static String` variable 
 ```
 gc.setFill(Color.web(color));
 ```
-
 
 Next, you'll check the current color value used.
 
@@ -388,14 +368,12 @@ Do the following:
 jshell> System.out.println(app.color)
 ```
 
-
 You should see the hex value for the color green:
 
 ```
 jshell> System.out.println(app.color)
 #00ff00
 ```
-
 
 Since it's using the `RGB` color model the hex `FF` bits are turned on for green, red and blue bytes are set to zero. The format of the hex value is prefixed with the hash '#' symbol.
 
@@ -407,13 +385,11 @@ Later, we will change the color from green to red during runtime, but let's lear
 jshell> new Thread(() -> app.main(null)).start()
 ```
 
-
 Or you can do the following:
 
 ```
 jshell> new Thread(() -> app.main(null))
 ```
-
 
 Then you'll see a reference variable assigned to the new `Thread` instance (dollar symbol and number). It should output something similar to the following:
 
@@ -421,13 +397,11 @@ Then you'll see a reference variable assigned to the new `Thread` instance (doll
 $13 ==> Thread[Thread-0,5,main]
 ```
 
-
 To start the thread instance type the following into the command prompt:
 
 ```
 jshell> $13.start()
 ```
-
 
 Since the application starts on a new thread JShell's command prompt will not be blocked thus allowing you to interact with the runtime environment (main thread).
 
@@ -436,7 +410,6 @@ Since the application starts on a new thread JShell's command prompt will not be
 ```
 jshell> app.color = “#ff0000”
 ```
-
 
 This should dynamically output the following while the application is running.
 
@@ -451,7 +424,6 @@ jshell> /reset
 |  Resetting state.
 ```
 
-
 A reset will kill the JavaFX Application thread and clear all objects in the current `jshell` session.
 
 To rerun the application simply type the following:
@@ -460,13 +432,11 @@ To rerun the application simply type the following:
 jshell> /open Main.java
 ```
 
-
 Another convenience is the ability to recall previously used commands. By using the **up** and **down** arrow keys you can cycle through commands or statements previously entered. This will help you save some time typing ;-).
 
 To do simple edits, you can also type the command `/edit`. This will launch an simple text editor type UI allowing you to edit the current program in memory (current session). Subsequently, you can type the command `/save` to save changes.
 
-Observations
-------------
+## Observations
 
 If you run the application by entering `new Main().main(null)` on the jshell prompt instead of a `new Thread(...).start()` you'll notice the jshell command line will **block** (not allowing you to type or interact). Therefore, I included a step to create a thread instance to run separately.
 
@@ -482,13 +452,11 @@ jshell> Main.main(null)
 |        at (#13:1)
 ```
 
-
 ```
 
 ```
 
-Conclusion
-----------
+## Conclusion
 
 We started with an introduction of the basics of using jshell. Next, you got a chance to learn how to run a JavaFX application file from a terminal command prompt and from within jshell's command prompt.
 

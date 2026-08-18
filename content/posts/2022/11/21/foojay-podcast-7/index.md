@@ -33,8 +33,7 @@ That's what we want to find out...
 
 {{< youtube ATXMizsu1Rc >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -42,20 +41,17 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Steve Poole (Sonatype, [@spool167](https://twitter.com/spoole167))
 * Brian Vermeer (Snyk, [@BrianVerm](https://twitter.com/BrianVerm), [@\[email protected\]](https://mastodon.social/@brianverm))
 * Anastasiia Voitova (Cossack Labs, [@vixentael](https://twitter.com/vixentael), [@\[email protected\]](https://mastodon.social/@vixentael))
 
-Host
-----
+## Host
 
 * Erik Costlow (Azul, [@costlow](https://twitter.com/costlow), [@\[email protected\]](https://mastodon.social/@costlow))
 
-Content
--------
+## Content
 
 * 00'00 Short intro and music
 * 00'15 Introduction about the topic of this podcast

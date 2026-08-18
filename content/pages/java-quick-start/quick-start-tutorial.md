@@ -8,8 +8,6 @@ aliases:
 frozen: false
 ---
 
-
-
 From Java version 11 onwards, you can run simple Java code in a single source file without compiling it, just like you can run a Python or Bash script.
 
 And that's precisely what we will do in this high-speed Java programming course.
@@ -38,10 +36,6 @@ If you haven't checked that you have Java on your computer, go to [Install Java]
 
 Each section has a video demonstrating the example code, and the [entire playlist is available on YouTube](https://www.youtube.com/playlist?list=PL-3Bf_FLNZLCI7MEiWscgdIwSB8p2Z7Xb).
 
-
-
 Sidenote: this tutorial is based on a section of the book "[Getting Started with Java on the Raspberry Pi](https://webtechie.be/books/)" by Frank Delporte.
-
-
 
  {{< img src="/images/pages/java-quick-start/quick-start-tutorial/ebook-paperbook.jpg" alt="" width="300" height="200" >}}

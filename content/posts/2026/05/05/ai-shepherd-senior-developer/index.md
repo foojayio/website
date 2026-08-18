@@ -13,8 +13,7 @@ related_posts:
 frozen: false
 ---
 
-The doorman in a hoodie
------------------------
+## The doorman in a hoodie
 
 There's a story Rory Sutherland tells in his book *Alchemy* . A consultant is hired to find savings at a luxury hotel. He watches a doorman for twenty minutes and writes in his report: *this man opens doors*. Automatic doors also open doors. Automatic doors are cheaper. So the hotel removes him.
 
@@ -26,8 +25,7 @@ That is the argument I want to make, and I want to make it specifically to other
 
 The headline isn't that AI is replacing developers. The headline is that AI made the rest of the job, the part that was always the actual job, finally visible.
 
-The shepherd
-------------
+## The shepherd
 
 I have started using a particular word for the role I think senior developers are evolving into: shepherd. Not prompt engineer. Not vibe coder. Not "developer who uses AI." A shepherd guides AI through terrain it cannot see: the codebase's history, the team's constraints, the deployment realities, the business context that lives nowhere in any training set. The shepherd's value is not speed. It is judgement about where to apply speed.
 
@@ -35,8 +33,7 @@ It is worth grounding this in numbers, because the surrounding hype is loud. A S
 
 So the question is not whether to use the tool. It is how to use it well. And the answer comes apart, I think, into four things a shepherd does. Read the terrain. Choose the path. Watch for predators. Tend the flock.
 
-Read the terrain
-----------------
+## Read the terrain
 
 A shepherd's first job is knowing the ground.
 
@@ -48,8 +45,7 @@ That is the shepherd's first contribution. Not the prompt. The *framing*. Knowin
 
 The skill is unglamorous. It is the same skill senior developers have always used to onboard new hires and unblock stuck juniors. It just turns out to be the load-bearing skill for AI work too.
 
-Choose the path
----------------
+## Choose the path
 
 A shepherd decides what to delegate and what to keep close.
 
@@ -61,8 +57,7 @@ The shape of the work is what matters. I owned the design, delegated the propaga
 
 That is the move I think senior developers are best positioned to make. The interesting question for a senior is no longer *can AI do this* . It is *should I be the one doing this, and if not, what does it need from me to do it well*. The first question is mostly about the tool. The second is mostly about you.
 
-Watch for predators
--------------------
+## Watch for predators
 
 A shepherd verifies. Always.
 
@@ -74,8 +69,7 @@ We tried feeding the agent the relevant Jakarta Data documentation. It did not h
 
 The lesson is not don't trust AI. The lesson is sharper. A model produces fluent output with the same tone whether it is right or wrong, so confidence is not a signal. It is noise. And the moment when it is most dangerous is precisely the moment a senior developer is in the best position to handle: when the answer pattern-matches to something common but the actual problem sits just outside the model's training. You have to know enough to smell it. The smell is the moat.
 
-Tend the flock
---------------
+## Tend the flock
 
 A shepherd does not work alone.
 
@@ -85,8 +79,7 @@ So I started sharing that explicitly. Not as a productivity hack but as a re-sta
 
 That is the framing I think is most useful for the people you work with. AI did not break engineering. It made the gap between teams with a real process and teams without one suddenly very visible, because the tool magnifies whatever habits it lands on. A shepherd's job is not to police prompts. It is to make those habits explicit, share what is working, and help less experienced developers build the instincts that would otherwise take ten years and a few production outages to acquire.
 
-The doorman's dignity
----------------------
+## The doorman's dignity
 
 The doorman in Sutherland's story was not insecure about his role. He knew what he was actually doing. The consultant was the one who was confused.
 
@@ -95,7 +88,5 @@ Right now, a lot of senior developers are letting consultants confuse them. The 
 The typing was always the door opening. The job was reading the terrain, choosing the path, watching for predators, tending the flock. AI did not take any of that away. It just made it the part that obviously matters now, because the part it could automate has been automated.
 
 Your seniority is not a liability in this transition. It is the moat. It always was.
-
-
 
 *This article expands on the AI Shepherd concept from a conference talk Elma Westergren and I have given on developer identity in the AI era. The core framing comes from Elma's work as an occupational therapist. What is really at stake when our tools change is occupational identity, not just productivity, and I am grateful for that perspective.*

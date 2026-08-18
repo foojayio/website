@@ -66,14 +66,11 @@ More information:
 * [OmniFaces Jakarta EE 2020 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 * [OmniFaces Jakarta EE 2018 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 
-<br />
-
 <figure class="alignleft size-full is-resized">
  <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
 </figure>
 
-OmniFish - Jakarta EE experts
------------------------------
+## OmniFish - Jakarta EE experts
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

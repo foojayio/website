@@ -40,12 +40,9 @@ This guide explores prevalent Kubernetes errors and provides troubleshooting tip
 
 {{< youtube Q3cy8i4tsyQ >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Identifying Configuration Issues
---------------------------------
+## Identifying Configuration Issues
 
 When you encounter configuration issues in Kubernetes, the first place to check is the status column using the `kubectl get pods` command. Common errors manifest here, requiring further inspection with `kubectl describe pod`.
 
@@ -55,7 +52,6 @@ NAME                     READY    STATUS     RESTARTS   AGE
 my-first-pod-id-xxxx      1/1     Running    0          13s
 my-second-pod-id-xxxx     1/1     Running    0          13s
 ```
-
 
 ### Common Causes and Solutions
 
@@ -77,8 +73,7 @@ We can use `kubectl describe pod`: This command provides a detailed description 
 
 Another important step is resource quota analysis. Sometimes, resource constraints are due to namespace-level resource quotas. Use `kubectl get resourcequotas` to check if quotas are limiting pod creation.
 
-Dealing with Image Pull Errors
-------------------------------
+## Dealing with Image Pull Errors
 
 Errors like `ErrImagePull` or `ImagePullBackOff` indicate issues with fetching container images. These errors are typically related to image availability or access permissions.
 
@@ -89,7 +84,6 @@ The first step is checking the image name which we can do with the following com
 ```
 docker pull <image-name>
 ```
-
 
 We then need to verify the image name for typos or invalid characters. I pipe the command through grep to verify the name is 100% identical, some typos are just notoriously hard to spot.
 
@@ -103,8 +97,7 @@ There are quite a few additional pitfalls such as problems with image tags. Ensu
 
 If you're using a private registry you might be experiencing access issues. Make sure your credentials are up-to-date and the registry is accessible from all nodes in all regions.
 
-Handling Node Issues
---------------------
+## Handling Node Issues
 
 Node-related errors often point to physical or virtual machine issues. These issues can disrupt the normal operation of the Kubernetes cluster and need prompt attention.
 
@@ -113,7 +106,6 @@ To check node status use the command:
 ```
 kubectl get nodes
 ```
-
 
 We can then identify problematic nodes in the resulting output.
 
@@ -125,7 +117,6 @@ To investigate node conditions we can use the command:
 kubectl describe node <node-name>
 ```
 
-
 We should look for conditions such as `MemoryPressure`, `DiskPressure`, or `NetworkUnavailable`. These conditions provide clues about the underlying issue we should address in the node.
 
 ### Preventive Measures
@@ -134,8 +125,7 @@ Node monitoring should be used to with tools such as Prometheus, Grafana to keep
 
 There are some automated healing tools such as the Kubernetes Cluster Autoscaler that we can leverage to automatically manage the number of nodes in your cluster based on workload demands. Personally, I'm not a huge fan as I'm afraid of a cascading failure that would trigger additional resource consumption.
 
-Managing Missing Configuration Keys or Secrets
-----------------------------------------------
+## Managing Missing Configuration Keys or Secrets
 
 Missing configuration keys or secrets are common issues that disrupt Kubernetes deployments. Proper management of these elements is crucial for smooth operation.
 
@@ -147,7 +137,6 @@ Inspect pod descriptions using the command:
 kubectl describe pod <pod-name>
 ```
 
-
 Review the output and look for missing configuration details. Rectify any misconfigurations.
 
 ConfigMap and secret creation can be verified using the command:
@@ -156,20 +145,17 @@ ConfigMap and secret creation can be verified using the command:
 kubectl get configmaps
 ```
 
-
 and:
 
 ```
 kubectl get secrets
 ```
 
-
 Ensure that the required ConfigMaps and Secrets exist in the namespace and contain the expected data.
 
 It's best to keep non-sensitive parts of ConfigMaps in version control while excluding Secrets for security. Furthermore, you should use different ConfigMaps and Secrets for different environments (development, staging, production) to avoid configuration leaks.
 
-Utilizing Buildg for Interactive Debugging
-------------------------------------------
+## Utilizing Buildg for Interactive Debugging
 
 Buildg is a relatively new tool that enhances the debugging process for Docker configurations by allowing interactive debugging.
 
@@ -181,8 +167,7 @@ To install buildg follow the instructions on the [Buildg GitHub page](https://gi
 
 ![](https://github.com/ktock/buildg/raw/main/docs/images/vscode-dap.png)
 
-Conclusion
-----------
+## Conclusion
 
 Debugging Kubernetes can be challenging, but with the right knowledge and tools, developers can effectively identify and resolve common issues.
 

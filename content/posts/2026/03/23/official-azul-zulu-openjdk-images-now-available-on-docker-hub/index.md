@@ -26,8 +26,7 @@ frozen: false
 You can browse and pull the images here:  
 <https://hub.docker.com/_/azul-zulu>
 
-Why should you care about official images?
-------------------------------------------
+## Why should you care about official images?
 
 With the official Docker images you get:
 
@@ -44,8 +43,7 @@ This is especially useful if you are:
 
 * Reducing the noise from ad‑hoc "java:latest" images in different teams.
 
-Which versions and variants can you use?
-----------------------------------------
+## Which versions and variants can you use?
 
 The Azul Zulu Official Images cover multiple Java releases, including the key LTS versions many teams already rely on:
 
@@ -67,8 +65,7 @@ Example tags include:
 
 This is just the start - more tags and base images are planned. As new Java releases and additional base images are introduced, they are expected to show up under the same Official Images namespace so you can keep a consistent pattern across services.
 
-Where to start?
----------------
+## Where to start?
 
 Getting the images into your workflow should be straightforward if you already use Docker for Java.
 
@@ -84,7 +81,6 @@ Basic steps:
 docker pull azul-zulu:17-jdk-debian13
 ```
 
-
 4. Use it in your Dockerfile:
 
 ```
@@ -95,13 +91,11 @@ COPY target/app.jar app.jar
 CMD ["java", "-jar", "app.jar"]
 ```
 
-
 5. Wire it into your CI/CD templates so all new services share the same trusted base.
 
 For more details, Dockerfiles and tag information, [check the GitHub repo.](https://github.com/AzulSystems/azul-zulu-images "check the GitHub repo.")
 
-What's next and how to stay involved?
--------------------------------------
+## What's next and how to stay involved?
 
 This is just the beginning, here's what's coming next:
 

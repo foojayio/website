@@ -26,8 +26,7 @@ frozen: false
 
 **For an upcoming event, I was asked to give a demo of how to run Neo4j on Kubernetes. I had very little experience with Kubernetes, so I decided to document my journey for later reference.**
 
-What is Kubernetes?
--------------------
+## What is Kubernetes?
 
 Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation.
 
@@ -39,8 +38,7 @@ For a glimpse, check out the [Google's Kubernetes Comic](https://cloud.google.co
 
 ![Google Kubernetes Comic](google-k8s-comic.png)
 
-Neo4j on Kubernetes
--------------------
+## Neo4j on Kubernetes
 
 Neo4j is a graph database and it is an excellent choice for applications that require complex data and relationships. Running a database on Kubernetes is a bit more complex than other services because there are a few more components involved (such as persistent storage, stateful sets, etc.).
 
@@ -54,13 +52,11 @@ There are config maps, stateful set, persistent volume, and services containers.
 
 This is the approach we will use for this post. Let's start there!
 
-Setting Up Kubernetes
----------------------
+## Setting Up Kubernetes
 
 We need a few things set up for our environment. However, the Neo4j documentation is very thorough, and I was able to follow all the steps on [this page](https://neo4j.com/docs/operations-manual/current/kubernetes/quickstart-standalone/prerequisites/) to get everything ready (I used Docker Desktop for the Kubernetes environment).
 
-Helm Chart for Neo4j Kubernetes
--------------------------------
+## Helm Chart for Neo4j Kubernetes
 
 Once the environment is ready, we can create our [Helm deployment for Neo4j](https://neo4j.com/docs/operations-manual/current/kubernetes/quickstart-standalone/create-value-file/). Neo4j publishes a Helm chart for running Neo4j on Kubernetes, so we need to set the config with a `values.yaml` file, which the documentation also provides a great starter file for us to use and customize as needed.
 
@@ -88,13 +84,11 @@ volumes:
         storage: 2Gi
 ```
 
-
 This file sets up the resources, password, and storage for the database. You can customize this file with many more configurations (full list on [Github](https://github.com/neo4j/helm-charts/blob/dev/neo4j/values.yaml)). Once you have the `values.yaml` file set up, we can deploy the Helm chart with the following command:
 
 ```bash
 helm install my-neo4j-release neo4j/neo4j --namespace neo4j -f my-neo4j.values.yaml
 ```
-
 
 Now you have Neo4j running on Kubernetes! You can test it out by opening the Neo4j browser at <http://localhost:7474> and running some queries like ones listed below.
 
@@ -106,11 +100,9 @@ CALL apoc.meta.graph();
 MATCH (b:Book)<-[r:AUTHORED]-(a:Author) RETURN * LIMIT 20;
 ```
 
-
 The next step is to run an application alongside the database. For that, we'll use Spring Boot with Spring Data Neo4j to interact with the database.
 
-Spring Data Neo4j application
------------------------------
+## Spring Data Neo4j application
 
 The application is not anything fancy. It creates an API that allows us to hit an endpoint to retrieve some data from the Neo4j database. All of the code is available on the repository under the `book-service` folder.
 
@@ -172,7 +164,6 @@ spec:
   type: NodePort
 ```
 
-
 The first config for `apiVersion` and `kind` is for the deployment of the application. You can have YAML files for services (as seen toward the bottom of the file) and other parts of Kubernetes setup, but this first part contains deployment configurations. Within our `kube-neo4j-books` deployment, we will have one application with the same name and only a single instance/container running (replica: 1).
 
 The container will use the image `jmreif/kube-neo4j-books` (which is the image built from the Dockerfile) and will run on port 8080. We also set some environment variables for the application to connect to the Neo4j database. Externalizing this configuration makes it easier to change the database connection without changing the application code. We just need to re-deploy containers with the new environment variables.
@@ -187,11 +178,9 @@ Once you have the deployment YAML file set up, you can deploy the application wi
 kubectl apply -f deployment.yaml
 ```
 
-
 Let's test our Neo4j cluster with the Spring Boot application.
 
-Testing everything!
--------------------
+## Testing everything!
 
 First, I like to check the status of the pods and services to make sure everything is running as expected. You can do this by running `kubectl get all`, which should show a list of all the resources in the cluster. You should see the Neo4j pod (along with related services like load balancer), as well as the Spring Boot application pod and service.
 
@@ -205,7 +194,6 @@ http :30080/authors/J%2ER%2ER%2E%20Tolkien
 http :30080/authors/J%2EK%2E%20Rowling
 http :30080/authors/Timothy%20Zahn
 ```
-
 
 **Note:** I use the `httpie` tool for testing APIs, but you can use `curl` or any other tool you prefer.
 
@@ -221,9 +209,7 @@ kubectl delete deploy kube-neo4j-books
 kubectl delete pvc --all --namespace neo4j
 ```
 
-
-Wrapping Up!
-------------
+## Wrapping Up!
 
 Today, we deployed Neo4j and a Spring Boot application to Kubernetes.
 
@@ -241,8 +227,7 @@ Happy coding!
 
 ![Feelings of Power: Kubernetes](feelings-of-power.jpeg)
 
-Resources
----------
+## Resources
 
 * Code (today's Github repository): [Neo4j on Kubernetes](https://github.com/JMHReif/kubernetes-neo4j-java)
 * For fun: [Google's Kubernetes Comic](https://cloud.google.com/kubernetes-engine/kubernetes-comic)

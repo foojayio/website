@@ -167,8 +167,6 @@ Learning Scala Chapter 9 (eBook - O'Reilly): [Here](https://www.oreilly.com/libr
 
 Pattern Matching is used to check a value against a specific pattern. It can be used in place of several if-else statements.
 
-<br />
-
 **Useful Links**
 
 * Walk-through of Pattern Matching with Case Class Pattern Matching: [Here](https://docs.scala-lang.org/tour/pattern-matching.html) and [Here](https://www.baeldung.com/scala/pattern-matching)

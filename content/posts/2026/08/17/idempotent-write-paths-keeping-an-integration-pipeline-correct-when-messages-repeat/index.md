@@ -15,8 +15,7 @@ enlighterjs: true
 frozen: false
 ---
 
-A reconciliation that didn't add up
------------------------------------
+## A reconciliation that didn't add up
 
 Let me start with a real one. After a big sales promo, during reconciliation, finance said a batch of orders had the wrong status: on our side it showed "paid", but the finance system hadn't booked it.
 
@@ -28,8 +27,7 @@ It wasn't a big deal, but it made one thing clear: in a distributed environment,
 
 The only thing you can do is make the system behave the same whether it gets a message once or five times. That's idempotency.
 
-What you key idempotency on is the whole game
----------------------------------------------
+## What you key idempotency on is the whole game
 
 A lot of people think idempotency is just "add a unique key". Yes and no. What matters is what you actually key on.
 
@@ -77,8 +75,7 @@ Rolling this standard out wasn't all smooth sailing either. Some upstream teams 
 
 If you try to patch it in the middle layer, you'll never finish patching, because you don't know the upstream's business semantics.
 
-Where the dedup check actually lives
-------------------------------------
+## Where the dedup check actually lives
 
 Early on we did dedup in the business code: before processing a message, check whether this key has been handled. Functionally there's nothing wrong with it, but there's a race condition.
 
@@ -86,8 +83,6 @@ When the consumer's processing logic is complex (one event writes three tables a
 
 Later we pushed dedup down to the database layer and let a unique constraint be the backstop. First, a dedup table:
 ![SQL schema for the event_dedup_log dedup table](A1_sql_event_dedup_log.png)
-
-<br />
 
 The handling logic is roughly this: the dedup record and the business data are written in the same transaction, so they either both succeed or both roll back:
 
@@ -118,8 +113,7 @@ By the way, this dedup table grows over time, so it needs periodic cleanup. We s
 
 If your business write spans multiple data sources (after writing the database you still have to call an external API), the database transaction alone can't cover it, and you need a compensation mechanism. I'll get into that in the resilience part later.
 
-When a duplicate arrives: ignore, overwrite, or merge
------------------------------------------------------
+## When a duplicate arrives: ignore, overwrite, or merge
 
 How you handle it depends on the business semantics; there's no standard answer. In practice we ran into three strategies.
 
@@ -156,15 +150,12 @@ It's essentially a simplified Last-Write-Wins: only a higher version can overwri
 
 Merge is the most complex: you combine the old and new data. It suits incremental data (appending a note to an order, adding items to a cart, that kind of thing). It has the highest implementation complexity and is the most bug-prone. Take "append a note": what if the same note gets appended twice because of a duplicate delivery? Then you have to do another layer of dedup inside the merge logic. Nesting dolls, basically. So avoid it if you can.
 
-Stitching identities together across systems
---------------------------------------------
+## Stitching identities together across systems
 
 Anyone who does integration has probably hit this: different systems have different IDs for the same entity. A customer is CRM-00123 in CRM, becomes ERP-C456 in ERP, and WMS-CUST-789 in WMS, and our platform has its own internal ID on top of that.
 
 When an event flows from CRM to ERP, you need to know which record CRM-00123 maps to in ERP. Inside the integration platform we keep an ID mapping table that uses a platform-internal internal_id to string together each system's external_id:
 ![SQL schema for the entity_id_mapping table plus a cross-system ID lookup query](A1_sql_entity_id_mapping.png)
-
-<br />
 
 The first thing an event does when it enters the pipeline is look up the mapping table to get the target system's ID. If it's not found (say a create event, where the downstream has no matching record yet), it's marked "to be created", and once the downstream finishes creating it, we write the mapping back.
 
@@ -174,8 +165,7 @@ Another very important thing is the correlation ID. Each business process (say "
 
 When you're tracking down a problem, one grep can string together information scattered across dozens of systems and hundreds of log lines. Anyone who's used it knows how much it matters when something breaks. Without it, you're staring at the separate logs of dozens of systems with no idea what connects to what, and locating one problem goes from half an hour to half a day.
 
-How do you prove you didn't lose anything
------------------------------------------
+## How do you prove you didn't lose anything
 
 Every few days the boss asks the same question: "how do you prove the pipeline hasn't lost data?" With a distributed system you really can't prove it mathematically, but you can use engineering to push the confidence very high.
 
@@ -207,5 +197,3 @@ Real-time reconciliation scans every five minutes for events that were "received
 Offline reconciliation runs a full comparison every night. It diffs the list of events the upstream says it sent against the list we actually finished processing, and finds "upstream sent it but we didn't finish" and "we processed it but upstream never sent it". The former means it was lost; the latter is a possible duplicate or ghost record. The two kinds complement each other: real-time is fast but has limited coverage, offline is slow but catches the edge cases.
 
 With this tracing system in place, the answer to the boss is no longer "it can't lose data". It's "if we lose one, we know in five minutes, locate it in ten, and recover it in half an hour".
-
-<br />

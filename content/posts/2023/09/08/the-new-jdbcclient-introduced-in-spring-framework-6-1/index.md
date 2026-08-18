@@ -35,8 +35,7 @@ First, let's go to <https://start.spring.io/> and create a Spring Boot applicati
 >
 > so we are going to select 3.2.0 (M2) as the Spring Boot version.
 
-Create Bookmark domain class
-----------------------------
+## Create Bookmark domain class
 
 Let's start with creating a Java record representing a **Bookmark** as follows:
 
@@ -46,9 +45,7 @@ import java.time.Instant;
 public record Bookmark(Long id, String title, String url, Instant createdAt) {}
 ```
 
-
-Create Flyway Migration Script
-------------------------------
+## Create Flyway Migration Script
 
 Let's add the following migration script under **src/main/resources/db/migration** directory.
 
@@ -64,9 +61,7 @@ create table bookmarks
 );
 ```
 
-
-Implementing CRUD operations using JdbcClient
----------------------------------------------
+## Implementing CRUD operations using JdbcClient
 
 Let's implement CRUD operations on **Bookmark** domain class using **JdbcClient** API.
 
@@ -85,7 +80,6 @@ public class BookmarkRepository {
 }
 ```
 
-
 ### Fetch all bookmarks
 
 We can fetch all bookmarks using **JdbcClient** as follows:
@@ -96,7 +90,6 @@ public List<Bookmark> findAll() {
     return jdbcClient.sql(sql).query(Bookmark.class).list();
 }
 ```
-
 
 The **JdbcClient** API will take care of dynamically creating a **RowMapper** by using **SimplePropertyRowMapper**. It will perform the mapping between bean property names to table column names by converting camelCase to underscore notation.
 
@@ -121,7 +114,6 @@ static class BookmarkRowMapper implements RowMapper<Bookmark> {
 }
 ```
 
-
 ### Find bookmark By ID
 
 We can fetch a bookmark by **id** using **JdbcClient** as follows:
@@ -135,7 +127,6 @@ public Optional<Bookmark> findById(Long id) {
     //return jdbcClient.sql(sql).param("id", id).query(new BookmarkRowMapper()).optional();
 }
 ```
-
 
 ### Create a new bookmark
 
@@ -157,7 +148,6 @@ public Long save(Bookmark bookmark) {
 }
 ```
 
-
 ### Update a bookmark
 
 We can update a bookmark as follows:
@@ -177,7 +167,6 @@ public void update(Bookmark bookmark) {
 }
 ```
 
-
 In the **update(...)** method, I have used positional parameters **(?)** instead of using named parameters **(:title)** for the demonstration purpose. I highly recommend using named parameters over positional parameters.
 
 ### Delete a bookmark
@@ -195,9 +184,7 @@ public void delete(Long id) {
 }
 ```
 
-
-Test Repository using Testcontainers
-------------------------------------
+## Test Repository using Testcontainers
 
 We should always make sure that the database is in a known state so that we can write predictable assertions. So, let's create **src/test/resources/test_data.sql** file with the following content:
 
@@ -214,7 +201,6 @@ INSERT INTO bookmarks(title, url, created_at) VALUES
 ('Testing SpringBoot Applications','https://sivalabs.in/spring-boot-testing', CURRENT_TIMESTAMP)
 ;
 ```
-
 
 Now, we can add the annotation **@Sql("/test-data.sql")** to our test class so that before running each test, the specified SQL script will be executed.
 
@@ -315,11 +301,9 @@ class BookmarkRepositoryTest {
 }
 ```
 
-
 We have used the Testcontainers special JDBC URL to start PostgreSQL database and run the tests using it.
 
-Summary
--------
+## Summary
 
 The new **JdbcClient** API provides a nice fluent API to implement data access layer using JDBC.
 

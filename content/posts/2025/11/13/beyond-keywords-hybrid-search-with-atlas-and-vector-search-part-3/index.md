@@ -30,8 +30,7 @@ Now, in this final installment, we're taking our search capability to its ultima
 
 Welcome to hybrid search.
 
-One search might not be enough
-------------------------------
+## One search might not be enough
 
 Think about how people actually search for movies. Sometimes, they only remember fragments---such as, "a ship that sinks at night after hitting an iceberg"---and hope the app can figure it out. Other times, they know exactly what they want---like "Titanic"---and expect to see it right away.
 
@@ -56,15 +55,13 @@ Let's see how this plays out in our examples:
 
 Clearly, both methods have their strengths. Full-text is unbeatable for exact matches and well-known titles, while vector search excels when the query is descriptive or fuzzy. The challenge is that if we rely on only one, we risk leaving users frustrated.
 
-Merging the best of both worlds
--------------------------------
+## Merging the best of both worlds
 
 That's where **hybrid search** comes in. By combining the precision of full-text search with the intelligence of semantic search, we can deliver results that understand both what the user wrote and what they meant. MongoDB Atlas makes this possible with the new $rankFusion operator, which merges and re-ranks results from multiple pipelines.
 
 For more details, take a look at the [Hybrid Search Explained](https://www.mongodb.com/resources/products/capabilities/hybrid-search/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-atlas-foojay-part3&utm_term=tony.kim).
 
-Prerequisites
--------------
+## Prerequisites
 
 If you've been following from Part 1, you should already have everything set up: a MongoDB Atlas cluster, Java 17+, a Voyage AI API token, and the embedded_movies collection.
 
@@ -72,8 +69,7 @@ For this final part, there's one more requirement:
 
 * **MongoDB Atlas 8.1 or higher**, since hybrid search relies on the $rankFusion operator introduced in this version.
 
-The vector search
------------------
+## The vector search
 
 So far, our application uses **vector search with pre-filters**. That means we can run semantic queries while narrowing the search space by year, genres, and IMDb rating. Under the hood, the query looks something like this:
 
@@ -100,11 +96,9 @@ So far, our application uses **vector search with pre-filters**. That means we c
 ]
 ```
 
-
 This works well for descriptive searches, because the embeddings capture meaning beyond exact words.
 
-The full-text search
---------------------
+## The full-text search
 
 But there's a catch. In the *Titanic* example, vector search is perfect when the user types a descriptive query like, "a ship that sinks at night after hitting an iceberg", since it understands intent. However, if the user knows the exact title and types simply "Titanic", vector search may return other sinking-ship movies like *Poseidon*.
 
@@ -122,7 +116,6 @@ db.embedded_movies.createSearchIndex(
   { mappings: { dynamic: true } }
 )
 ```
-
 
 Note on indexing: The **dynamic: true** parameter is ideal for prototyping as it automatically indexes every field in your documents. For production, consider a custom mapping to optimize performance and cost by indexing only necessary fields. Review the [documentation on mapping](https://www.mongodb.com/docs/atlas/atlas-search/define-field-mappings/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-atlas-foojay-part3&utm_term=tony.kim) for guidance.
 
@@ -144,7 +137,6 @@ db.embedded_movies.aggregate([
 ])
 ```
 
-
 You should see something like this:
 
 ```
@@ -160,7 +152,6 @@ You should see something like this:
  ...
 }
 ```
-
 
 ### Improving the experience with fuzzy search
 
@@ -185,7 +176,6 @@ db.embedded_movies.aggregate([
 ])
 ```
 
-
 In short: With **maxEdits: 1**, our search for "titani" becomes more flexible. It will now match not only the intended "Titanic" (adding one character, "c") but also other titles like "Titans" (replacing "i" with "s") or "Titan" (removing one character, "i"). Possible results would be:
 
 ```
@@ -197,7 +187,6 @@ title="Raise the Titanic"
 
 title="Clash of the Titans"
 ```
-
 
 ### Refining results with score boosting
 
@@ -265,7 +254,6 @@ db.embedded_movies.aggregate(
 )
 ```
 
-
 With this setup, the search engine understands our priorities: A movie with a matching title like **Titanic** will always rank higher than another movie where the query only appears in a long description.
 
 **Note:** You can also project the computed relevance score in your results by adding to your $project stage.
@@ -274,11 +262,9 @@ With this setup, the search engine understands our priorities: A movie with a ma
 { "score": { "$meta": "searchScore" } }
 ```
 
-
 This will include the boosted score.
 
-Combining forces with hybrid search
------------------------------------
+## Combining forces with hybrid search
 
 We now have both components in place:
 
@@ -318,7 +304,6 @@ Here's the basic structure of a hybrid query using $rankFusion:
 ]
 ```
 
-
 Let's break it down:
 
 1. The **pipelines** section defines the individual search strategies you want to combine (full-text and vector, in our case).  
@@ -334,8 +319,7 @@ In some cases, giving more weight to full-text search makes sense (when exact ti
 
 The key is to**experiment with your own data and queries**, adjusting the weights until you find the balance that delivers the best user experience.
 
-Refactoring the application
----------------------------
+## Refactoring the application
 
 ### The full-text search pipeline
 
@@ -362,11 +346,9 @@ private BsonDocument buildFullTextSearchPipeline(String query) {
 }
 ```
 
-
 This method does exactly what we saw previously: It builds the full-text search pipeline. Notice how we're using **compound** , **should,** **fuzzy** , **text** , and **boost**, just like before.
 
-The vector search pipeline
---------------------------
+## The vector search pipeline
 
 Now, let's create the method for the vector search pipeline inside MovieService:
 
@@ -382,7 +364,6 @@ private Bson buildVectorSearchPipeline(MovieSearchRequest req) {
          .toDocument(Aggregation.DEFAULT_CONTEXT);
 }
 ```
-
 
 What we did here was simply move the vector search code out of the searchMovies method and place it into its own dedicated method, making the code cleaner and easier to reuse.
 
@@ -413,9 +394,6 @@ Aggregation aggregation = Aggregation.newAggregation(rankFusion);
 }
 ```
 
-
-<br />
-
 Here, we combine the two pipelines we created before:
 
 1. The **full-text search** pipeline
@@ -436,7 +414,6 @@ logging:
      mongodb: DEBUG
 ```
 
-
 With logging enabled, the application will print out the exact aggregation pipeline being sent to MongoDB. Next, run the following request:
 
 ```
@@ -455,7 +432,6 @@ Content-Type: application/json
  "excludeGenres": false
 }
 ```
-
 
 You'll see both the **full-text search** pipeline (with fuzzy, should, and boost as we defined earlier) and the **vector search** pipeline (with filters on genres, year, and IMDb rating).
 
@@ -556,9 +532,7 @@ You'll see both the **full-text search** pipeline (with fuzzy, should, and boost
 ]
 ```
 
-
-Imprecise results without proper filtering
-------------------------------------------
+## Imprecise results without proper filtering
 
 So far, we've been testing step by step by running the aggregation pipeline directly (via curl). Now, let's move to the application itself and run the same query through the web interface.
 
@@ -576,8 +550,7 @@ If we look closely at the results, we notice that some movies don't satisfy the 
 
 This happens because the filters were applied only inside the **vector search pipeline** . The **full-text pipeline** doesn't have those restrictions, so when $rankFusion merges the results, movies that score highly in full-text (like *Night at the Museum*) can still appear, even if they don't match the vector filters.
 
-Making results accurate again
------------------------------
+## Making results accurate again
 
 To make sure filters are applied consistently, we need to add them not only in the **vector pipeline** , but also in the **full-text pipeline**.
 
@@ -613,7 +586,6 @@ should: [ { ... } ]
 }
 ```
 
-
 ### Adjusting the index for filters
 
 If we look closely at the previous pipeline, we notice the use of the **"in"** operator on the genres field. For this to work correctly, we need to update our MongoDB Atlas Search index. String fields must be indexed as token type for operators like **"equals"** or **"in"** to function properly.
@@ -634,9 +606,7 @@ Here's the update to the full-text search index:
 }
 ```
 
-
-Refactoring the pipeline in code
---------------------------------
+## Refactoring the pipeline in code
 
 Now that we've seen how the aggregation works in the shell, let's bring it into our Java code. To make things cleaner, we'll refactor the logic into small helper methods.
 
@@ -667,7 +637,6 @@ private List<SearchOperator> buildFilters(MovieSearchRequest req) {
 }
 ```
 
-
 The buildFilters() method collects all the filtering rules based on the MovieSearchRequest. It optionally adds filters for genres, year range, and IMDb rating, if they're provided.
 
 ### 2. Including search boost
@@ -690,7 +659,6 @@ private List<SearchOperator> buildSearchClauses(MovieSearchRequest req) {
 }
 ```
 
-
 ### 3. The final pipeline
 
 Still in the MovieService, replace the buildFullTextSearchPipeline() with the following code:
@@ -708,7 +676,6 @@ private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
    ).toBsonDocument();
 }
 ```
-
 
 **In short** : This method builds a compound query where the **filters** go into the filter() clause and the **text matches** go into the should() clause.
 
@@ -737,7 +704,6 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
   ).getMappedResults();
 }
 ```
-
 
 ### 4. Testing the refactored pipeline
 
@@ -786,9 +752,7 @@ The updated pipeline will look something like this:
 }
 ```
 
-
-Adding exclusion logic to the application
------------------------------------------
+## Adding exclusion logic to the application
 
 The final step is to update our application code so that it builds the mustNot clause. First, create the buildMustNot() method:
 
@@ -803,7 +767,6 @@ private List<SearchOperator> buildMustNot(MovieSearchRequest req) {
 }
 ```
 
-
 Next, update the buildFilters() method so it only adds genres when the **exclude selected genres** option is **not** selected. Open the method and replace the current block...
 
 ```
@@ -812,7 +775,6 @@ if (req.genres() != null && !req.genres().isEmpty()) {
 }
 ```
 
-
 ...with this version:
 
 ```
@@ -820,7 +782,6 @@ if (req.genres() != null && !req.genres().isEmpty() && !req.excludeGenres()) {
   filters.add(in(SearchPath.fieldPath("genres"), req.genres()));
 }
 ```
-
 
 And finally, replace the buildFullTextSearchPipeline() with this:
 
@@ -846,12 +807,10 @@ private BsonDocument buildFullTextSearchPipeline(MovieSearchRequest req) {
 }
 ```
 
-
 Once that adjustment is made, we can restart the app and run the same query again. This time, you'll see that movies tagged with **Drama** or **Action** are no longer returned, ensuring the results respect the exclusion filter.  
 ![](Screenshot-2025-11-11-at-2.04.10-PM.png)
 
-Prioritizing the vector pipeline
---------------------------------
+## Prioritizing the vector pipeline
 
 When we first run the hybrid query with equal weights (0.5 for vector and 0.5 for full-text), the results look interesting: **Titanic** shows up first, followed by **A Knight's Tale**.
 
@@ -886,14 +845,12 @@ public List<Movie> searchMovies(MovieSearchRequest req) {
 }
 ```
 
-
 Then, run the search again with the same inputs:  
 ![](Screenshot-2025-11-11-at-2.05.52-PM.png)
 
 Now, we can see that the top results make more sense for this descriptive query. Try yourself by changing the weights and boost, and see the results.
 
-Conclusion
-----------
+## Conclusion
 
 We've reached the end of the Beyond Keywords series, where we explored how to go beyond traditional search approaches and build smarter applications with MongoDB.
 
@@ -906,5 +863,3 @@ It's important to remember: there's no universal rule for the "right" weights, b
 This is just the beginning, real-world applications will always require experimentation, fine-tuning, and iteration to balance precision and recall.
 
 If you want to learn more join the[MongoDB Community](https://www.mongodb.com/community/forums/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=hybrid-search-atlas-foojay-part3&utm_term=tony.kim) to ask questions and share your experience. And if you'd like to check the full source code from this series, you can find it [here](https://github.com/mongodb-developer/spring-data-mongodb-vector-search).
-
-<br />

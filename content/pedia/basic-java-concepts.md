@@ -24,8 +24,6 @@ As Java is fully standardized, the JVM (within a major version) is interchangeab
 
 {{< img src="/images/pedia/basic-java-concepts/image2020-11-4_13-5-7-700x359.png" class="size-medium" width="700" height="359" >}}
 
-<br />
-
 ### JDK
 
 [Java Development Kits (JDKs)](https://en.wikipedia.org/wiki/Java_Development_Kit) are implementations of the [Java SE platform specification](https://www.oracle.com/java/technologies/java-se-glance.html) by different vendors and groups of people, such as the open source community. Some of them are built from the [OpenJDK code on GitHub](https://github.com/openjdk). JDKs include the Java Runtime Environment (JRE), as well as other tools that help you develop Java.

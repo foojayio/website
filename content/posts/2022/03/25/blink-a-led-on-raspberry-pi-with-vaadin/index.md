@@ -41,8 +41,7 @@ And yes, there are some projects ongoing to bring JavaFX fully to the browser, b
 Let's look at another approach: Vaadin Flow and run it on a Raspberry Pi to control a LED and show the state of a button.
 ![](https://dz2cdn1.dzone.com/storage/temp/15731206-screenshot-2022-03-17-at-164350.jpg)
 
-About Vaadin
-------------
+## About Vaadin
 
 Only recently, I re-discovered [Vaadin to build Web User Interfaces](https://vaadin.com/), and this really feels like JavaFX in the browser.
 
@@ -54,8 +53,7 @@ In this tutorial, I'm using Vaadin Flow combined with **Pi4J** to create a web i
 
 [The finished project is available on GitHub](https://github.com/FDelporte/Vaadin-examples).
 
-About Pi4J
-----------
+## About Pi4J
 
 [Pi4J, the Java I/O library for the Raspberry Pi](https://pi4j.com/), aims to unite Java programming with electronics.
 
@@ -67,8 +65,7 @@ By using the Pi4J-dependency in a project, controlling electronic components con
 
 Pi4J uses native libraries to control the GPIOs so you as a programmer don't need to fully be aware of all the "magic" which relates to hardware communication.
 
-Why run Java on a Raspberry Pi?!
---------------------------------
+## Why run Java on a Raspberry Pi?!
 
 The goal of the Raspberry Pi project was to build an inexpensive PC (starting at 15$) that is affordable for all. You can connect it to your TV if you don't have a computer screen and different versions are available, depending on your budget. The Raspberry Pi is a "full" Linux PC and offers different versions of the Raspberry Pi Operating System to get you started easily with all programming languages, yes also Java.
 
@@ -78,8 +75,7 @@ These GPIOs pins are the main factors to make the Raspberry Pi such a success! Y
 
 And one final pro for the Raspberry Pi: its power! The 4-version is fast and has a lot of memory. I wrote a full book on it and created a lot of different Java applications with it. You can connect up to two 4K monitors, which means a lot of space to have different applications, terminals, file explorer, etc. open at once.
 
-Example Spring + Vaadin + Pi4J application
-------------------------------------------
+## Example Spring + Vaadin + Pi4J application
 
 Let's create a Spring-based demo project to illustrate how a Vaadin User Interface (website) can interact with the GPIOs of a Raspberry Pi by using the [Pi4J library](https://www.pi4j.com). The GPIO interaction is based on the [Pi4J minimal example application](https://pi4j.com/getting-started/minimal-example-application/) and uses a button and a LED to demonstrate the digital input and output interaction. The wiring is very simple and only needs a few components.
 ![Wiring diagram](https://dz2cdn1.dzone.com/storage/temp/15731188-led-button-bb.png) Breadboard wiring
@@ -120,7 +116,6 @@ public Pi4JService() {
     pi4j = Pi4J.newAutoContext();
     buttonListeners = new ConcurrentLinkedQueue<>();
 ```
-
 
 Once we have the context, we can use it to configure and initialize a DigitalOutput for the LED, and DigitalInput for the button. In our example application, we only have one component that changes based on the button state, but by using a ButtonListener-interface and a list of implementations, we can link an unlimited number of components with the state of the button.
 
@@ -180,7 +175,6 @@ public void addButtonListener(ButtonListener buttonListener) {
 }
 ```
 
-
 Additionally, there are some helper methods to show the state of the Pi4J library. This is only one of them, please check the sources for the full implementations:
 
 ```java
@@ -197,7 +191,6 @@ public String getProviders() {
             .collect(Collectors.joining(","));
 }
 ```
-
 
 ### UI to toggle the LED
 
@@ -230,7 +223,6 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
     }
 }
 ```
-
 
 ![](https://dz2cdn1.dzone.com/storage/temp/15731191-ui-led.png)
 
@@ -266,7 +258,6 @@ public class ButtonView extends HorizontalLayout implements ButtonListener {
 }
 ```
 
-
 ![](https://dz2cdn1.dzone.com/storage/temp/15731192-ui-button.png)
 
 An additional change is needed in the main class. Because we want to send changes from the `backend` to the `user interface` we need to add the [@Push attribute](https://vaadin.com/docs/latest/flow/advanced/server-push). This tiny change, allows you to update the UI from the server, without the user explicitly requesting updates. This is based on a client-server connection (WebSocket if supported, or alternative) which the client establishes and the server can then use to send updates to the client.
@@ -278,7 +269,6 @@ An additional change is needed in the main class. Because we want to send change
 @Push
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 ```
-
 
 ### UI with Pi4J Information
 
@@ -303,11 +293,9 @@ public class AboutView extends VerticalLayout {
 }
 ```
 
-
 ![](https://dz2cdn1.dzone.com/storage/temp/15731197-ui-about.png)
 
-Build and upload to Raspberry Pi
---------------------------------
+## Build and upload to Raspberry Pi
 
 If you are developing on a PC, you can build the application with the following command
 
@@ -318,8 +306,7 @@ and upload to your Raspberry Pi with the following command (replace login `pi` a
 
 `$ scp target/pi4jdemo-1.0-SNAPSHOT.jar `[[email protected]](/cdn-cgi/l/email-protection)`://home/pi`
 
-Run on Raspberry Pi
--------------------
+## Run on Raspberry Pi
 
 We can now start the application on our Raspberry Pi, but need to run with `sudo` as Pi4J (still) needs this to be able
 
@@ -368,13 +355,11 @@ INFO 1807 --- [       Thread-8] b.w.vaadin.pi4j.service.Pi4JService      : Butto
 INFO 1807 --- [       Thread-8] b.w.vaadin.pi4j.views.button.ButtonView  : Button event in listener: HIGH - Is on: true
 ```
 
-
 In this video, you can see the logs of the running application on the Raspberry Pi, a browser on a PC in the same network to illustrate the responsive web interface, and a camera view of the breadboard and Raspberry Pi with the LED and button:
 
 {{< youtube pvfHbqp8igw >}}
 
-Conclusion
-----------
+## Conclusion
 
 Thanks to the start-site provided by Vaadin, you can get a fully running application with a few clicks.
 

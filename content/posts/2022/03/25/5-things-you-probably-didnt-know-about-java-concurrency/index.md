@@ -69,7 +69,6 @@ public class ExecutionOrderDemo {
 }
 ```
 
-
 The above code seems straightforward. We have two shared data ("sharedData1" and "sharedData2") and two threads use them.
 
 When we execute the code, we assume the output would be:
@@ -78,7 +77,6 @@ When we execute the code, we assume the output would be:
 Thread 2: 3
 Thread 1: 0,0,0
 ```
-
 
 But if you run it a few times, you will see different outputs:
 
@@ -98,7 +96,6 @@ Thread 1: 0,3,0
 Thread 2: 3
 Thread 1: 0,3,3
 ```
-
 
 I'm not claiming all of them can be reproducible on your machine, but all of them are possibilities.
 
@@ -132,7 +129,6 @@ public class Playground {
     }
 }
 ```
-
 
 The above is simple.
 
@@ -183,7 +179,6 @@ In "[Java Concurrency in Practice](https://www.amazon.ca/Java-Concurrency-Practi
 Number of threads = Number of Available Cores * (1 + Wait time / Service time)
 ```
 
-
 Waiting time could IO, e.g., waiting for an HTTP response, acquiring Lock, and so on.
 
 Service Time is the time of computation, e.g., processing the HTTP response, marshalling/unmarshalling, etc.
@@ -194,7 +189,6 @@ For example, an application calls an API and then processes it. If we have 8 pro
 N = 8 * ( 1 + 100/20)
   = 48
 ```
-
 
 However, this is an oversimplification because adequate testing is always critical to figuring out the number.
 
@@ -249,7 +243,6 @@ public class Main {
 }
 ```
 
-
 To run this program, you need to have Java 18, [which can be downloaded here](https://foojay.io/download/).
 
 You can run using the following command -
@@ -257,4 +250,3 @@ You can run using the following command -
 ```java
 java --source 18 --enable-preview Main.java
 ```
-

@@ -24,8 +24,7 @@ frozen: false
 **Let's see in this article different ways to replace the synchronized keyword to make our code more virtual threads friendly.**  
 ![](synchronized-loc.png) Lines of code of the different solutions discussed in this article
 
-Synchronized and pinning threads
---------------------------------
+## Synchronized and pinning threads
 
 Since Java 21, we can enjoy virtual threads and have more than 1 million threads in Java.  
 
@@ -39,8 +38,7 @@ The solution of synchronized block is to replace them with re-entrant locks. Thi
 > Note that if your synchronized block is not doing IO operations like a network call or pauses, they is no need to replace the synchronized block as the virtual thread is not suspended.
 > Note also that the OpenJDK project is working on making synchronized not to pin virtual threads but no date has been announced and if it will ever be shipped in a future release.
 
-1️⃣ReentrantLock
-----------------
+## 1️⃣ReentrantLock
 
 Using `java.util.concurrent.locks.`[ReentrantLock](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html) is the official replacement for `synchronized` (from [JEP-425](https://openjdk.org/jeps/425)).
 
@@ -56,13 +54,11 @@ public List<LocalDateTime> getReservedDates(String userId) {
 }
 ```
 
-
 Now let's see how to get this code simplified.
 
 [**Virtually**](https://github.com/japplis/Virtually) is an open source library released under the Apache license meant to ease the migration of code to be more virtual threads friendly.
 
-2️⃣ BlockLock
--------------
+## 2️⃣ BlockLock
 
 `com.japplis.virtually.sync.`[BlockLock](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/sync/BlockLock.java) is an [AutoCloseable](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/AutoCloseable.html) `ReentrantLock`. This means that you can get rid of the finally block.
 
@@ -75,9 +71,7 @@ public List<LocalDateTime> getReservedDates(String userId) {
 }
 ```
 
-
-3️⃣ SyncUtils
--------------
+## 3️⃣ SyncUtils
 
 `com.japplis.virtually.sync.`[SyncUtils](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/sync/SyncUtils.java) contains a set of static methods that makes it easier to run synchronized blocks using a `ReentrantLock` by levering lambda calls.
 
@@ -91,7 +85,6 @@ public List<LocalDateTime> getReservedDates(String userId) {
 }
 ```
 
-
 This call will synchronized on the class (like `synchronized` on methods). You can also synchronize based for example on the user id.
 
 ```java
@@ -99,7 +92,6 @@ public List<LocalDateTime> getReservedDates(String userId) {
     return runSynchronized(userId, () -> databaseRepo.getDatesForUser(userId));
 }
 ```
-
 
 User id will be mapped to a `ReentrantLock`. You can also pass a `ReentrantLock` object if you prefer.
 
@@ -111,11 +103,9 @@ public List<LocalDateTime> getReservedDates(String userId) throws Exception {
 }
 ```
 
-
 In this `callSynchronized` the lambda is a `Callable` instead of a `Supplier`.
 
-4️⃣ AspectJ
------------
+## 4️⃣ AspectJ
 
 Aspect Oriented Programming allows to execute code before or after specified methods for example for logging or caching.
 
@@ -132,11 +122,9 @@ public List<LocalDateTime> getReservedDates(String userId) {
 }
 ```
 
-
 Note that you will need to add [AspectJ](https://en.wikipedia.org/wiki/AspectJ) to the build and decide when to do the the bytecode transformation.
 
-5️⃣ Hidden synchronized
------------------------
+## 5️⃣ Hidden synchronized
 
 Sometimes your virtual thread will not be pinned by a direct synchronized block but by a JDK method call that uses a synchronized block.
 
@@ -145,8 +133,7 @@ Virtually offers classes and methods replacements that are more virtual threads 
 `Map.computeIfAbsent()` -\> `com.japplis.virtually.Maps.`[computeIfAbsent](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/Maps.java#L53)`(Map map, E key, CallableFunction mapper)`  
 `ReadableByteChannel` -\> `com.japplis.virtually.`[ReadByteChannel](https://github.com/japplis/Virtually/blob/main/src/main/java/com/japplis/virtually/ReadByteChannel.java)
 
-Conclusion
-----------
+## Conclusion
 
 Virtual threads are a major improvement in Java. In some cases, it will allow much more requests per server, reducing costs and CO^2^ emissions.
 

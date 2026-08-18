@@ -32,15 +32,13 @@ So, for instance, pauses in the garbage collection of the Java virtual machine, 
 
 In my search for a good solution to use LED strips with Java, I stumbled on the Pixelblaze Output Expander. This small device is controlled through a serial interface, and handles the control of the LED strip. As it turns out, this is a perfect solution to offload the timing-critical operations from the Raspberry Pi and have reliable output on a LED strip.
 
-Video Explanation
------------------
+## Video Explanation
 
 Based on the created example code and documentation on the Pi4J website, Robert von Burg and I did a live stream to explain the approach and walk through the code.
 
 {{< youtube eToIXACqSuY >}}
 
-How LED Strips Work
--------------------
+## How LED Strips Work
 
 The LED strips used in the examples of this post, contain LEDs of the WS2812B type, which means they have SMD 5050-LEDs with an integrated IC-driver, so they can be addressed separately.
 
@@ -75,8 +73,7 @@ Again, the second LED will take the first 3 values and output the remaining part
 
 For this system to work correctly, a strict timing of the data signal is needed. Otherwise the IC will handle parts of the data as being a new package, and you'll get unexpected results.
 
-About the Pixelblaze
---------------------
+## About the Pixelblaze
 
 The Pixelblaze is a product created by [ElectroMage](https://electromage.com/), with the aim to bring the creation of art, costumes, celebrations, and maker projects to a whole new level. Their two basic components, the "Pixelblaze V3 Standard - WiFi LED Controller" and "Pixelblaze V3 Pico - Tiny WiFi LED Controller" are Wi-Fi-enabled, live-codable LED controllers with a web-based development environment. Fifty light patterns are included, and over 200 more are shared in a community library.
 
@@ -116,8 +113,7 @@ The following pictures show you the connections with one LED strip on channel 0 
  </figure>
 </figure>
 
-Sample Application
-------------------
+## Sample Application
 
 Although the [sources used in this post are part of the Pi4J GitHub repository](https://github.com/Pi4J/pi4j-jbang), no Pi4J library is used in this example!
 
@@ -152,7 +148,6 @@ public void closePort() {
 }
 ```
 
-
 ### PixelblazeOutputExpander Example Application
 
 This is the main demo application that is configured to control three different LED strips:
@@ -171,7 +166,6 @@ To configure our Java-file to be executable with JBang, we need these extra line
 //DEPS com.fazecast:jSerialComm:2.10.2
 //SOURCES helper/PixelBlazeOutputExpanderHelper.java
 ```
-
 
 #### Highlight the LEDs One By One
 
@@ -201,7 +195,6 @@ private static void sendOneByOne(int channel, int numberOfLeds,
     }
 }
 ```
-
 
 #### Main Method
 
@@ -260,7 +253,6 @@ public class PixelblazeOutputExpander {
 }
 ```
 
-
 #### Executing the Application
 
 No `sudo` is needed for serial communication with the `jSerialComm` library, so the application can be started in the terminal with the following command and gives you the output of what is happening with the strips:
@@ -290,9 +282,7 @@ All red on LED matrix on channel 2
 Closing /dev/ttyS0
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 This is only a short introduction, the [Pi4J website offers more detailed information and extra examples](https://pi4j.com/examples/jbang/), including the use of LED matrixes and a JavaFX user interface to define the colors being displayed on a LED strip.
 

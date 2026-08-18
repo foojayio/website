@@ -56,7 +56,6 @@ Once we have set up ready with IDE, we can proceed with the next step.
 </plugin>
 ```
 
-
 For Maven, you can paste the above content in your pom.xml plugin section, and you are good to go. But I will try to explain `from` and `image` tags here.
 
 `from`
@@ -82,7 +81,6 @@ To push an image, we would need to add registry credentials to maven settings.xm
     <password>password</password>
 </server>
 ```
-
 
 #### Building an Image
 
@@ -193,7 +191,6 @@ mvn compile jib:build
 [INFO] — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 ```
 
-
 ```shell
 
 ```
@@ -205,8 +202,6 @@ We have successfully pushed the image(image name:spring-boot-jib-image) to a doc
 <img decoding="async" class="size-medium wp-image-36688" src="Screenshot-2020-12-28-at-11.41.02-PM-700x147.png" alt="" width="700" height="147">
 
 As you can see that our application is running inside a container. Now just run the curl command, and you can see that we got a hello message from our containerized spring-boot application.
-
-<br />
 
 ```shell
 curl localhost:8080/hello

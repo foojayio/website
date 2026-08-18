@@ -19,8 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-And why MongoDB might be a better relational database than you ever realized.
------------------------------------------------------------------------------
+## And why MongoDB might be a better relational database than you ever realized.
 
 <figure class="wp-block-image size-full is-resized">
  <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="width:840px;height:auto">
@@ -29,10 +28,6 @@ And why MongoDB might be a better relational database than you ever realized.
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
-
-
-
-<br />
 
 MongoDB is often described as a non-relational database, but whenever we store data in a database, there are relationships within that data. Depending on the type of database we use, though, how we model those relationships may change. As my colleague Rick Houlihan [has often pointed out](https://www.youtube.com/watch?v=ThmU8a2eVnw), there really is no such thing as non-relational data.
 
@@ -44,8 +39,7 @@ In this series of articles, we'll present a fictional scenario using a data mode
 
 If you wish to repeat the testing described in this series, the source code used to build the test data set and then measure the performance of each modification is available on [GitHub](https://github.com/mongodb-developer/pipeline-optimization-blog).
 
-The video streaming service use case: profiles, devices, and device types
--------------------------------------------------------------------------
+## The video streaming service use case: profiles, devices, and device types
 
 For our example scenario, we created a database for a fictional video streaming service. The part of the system we were focused on dealt with user profiles and devices and contained three collections:
 
@@ -91,13 +85,9 @@ Using this data model, the query that we were trying to perform was designed to 
 }
 ```
 
-
-Understanding the query aggregation pipeline
---------------------------------------------
+## Understanding the query aggregation pipeline
 
 To carry out the query, a MongoDB aggregation pipeline was used. Aggregation pipelines are used in MongoDB to perform a sequence of query, manipulation, and transformation steps on documents and are defined as an array of "stages." Each stage receives an input set of documents, performs an operation on those documents, then passes its output to the next stage in the "pipeline."
-
-<br />
 
 In this case, the initial pipeline was run against the profiles collection and included 10 stages:
 ![](tue13.png)
@@ -109,7 +99,6 @@ In this case, the initial pipeline was run against the profiles collection and i
   "contact.address.city": "Austin"
 }
 ```
-
 
 This is typically the first stage in a pipeline. A $match stage performs a query against the input documents and outputs only the matching documents. If this is the first stage in the pipeline, the query is run against the underlying collection---in this case, profiles---and will make use of an index on the collection if one exists supporting the query. In the example above, we were searching the profiles collection for all documents where the contact address city was set to "Austin."
 
@@ -123,7 +112,6 @@ This is typically the first stage in a pipeline. A $match stage performs a query
   as: "mappingData"
 }
 ```
-
 
 This was the first of two $lookup stages in the pipeline. A $lookup stage is MongoDB's equivalent of a SQL join. In this case, the pipeline was joining the "Austin" profile documents identified in the prior stage, to corresponding entries in the "Mappings" collection. The join was based on a primary/foreign key relationship from the profileID field in the profile documents, to the profileID field in the mappings documents. The matched mappings documents were added to a new array in the profile documents called mappingData. For example, a profile document with two matched entries in the mappings collection might look as follows:
 
@@ -161,7 +149,6 @@ This was the first of two $lookup stages in the pipeline. A $lookup stage is Mon
 }
 ```
 
-
 [**$unwind**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-unwind--aggregation-)
 
 ```
@@ -169,7 +156,6 @@ This was the first of two $lookup stages in the pipeline. A $lookup stage is Mon
     $unwind: "$mappingData"
 }
 ```
-
 
 The first of two $unwind stages in the pipeline, these are used whenever we want to flatten an array in our pipeline documents, usually so that the data can be reorganised or grouped by a different field in subsequent stages. If a document contained three elements in the array being unwound, it would be replaced with three documents where the array was replaced with a sub-document representing one of each of the three array elements.
 
@@ -211,7 +197,6 @@ In this case, the pipeline was unwinding the array of mapping documents so they 
 }
 ```
 
-
 This results in documents that are very similar to the format that a SQL join would produce, with the data from the "parent" table repeated for each linked row in the child table.  
 
 [**$lookup**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim)
@@ -236,7 +221,6 @@ This results in documents that are very similar to the format that a SQL join wo
   as: "deviceData"
 }
 ```
-
 
 The second $lookup stage in the pipeline carried out the join from the mappings documents to the corresponding device documents. Unlike the last lookup that uses a direct local and foreign key to perform the collation, this form of the lookup stage used an embedded sub-pipeline to allow us to specify more complex criteria for the join, and also to re-shape the matched documents as needed.
 
@@ -294,7 +278,6 @@ If the two member documents from the prior $unwind stage both mapped to a device
 }
 ```
 
-
 [**$unwind**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-unwind--aggregation-)
 
 ```
@@ -302,7 +285,6 @@ If the two member documents from the prior $unwind stage both mapped to a device
     $unwind: "$deviceData"
   }
 ```
-
 
 $lookup (join) stages anticipate that multiple child documents might have to be added to the parent document and so add the matched child documents to an array in the parent document ---deviceData in our pipeline.  
 
@@ -358,7 +340,6 @@ The example output documents would now look like this (note deviceData is now a 
 }
 ```
 
-
 [**$group**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-group--aggregation-)
 
 ```
@@ -381,7 +362,6 @@ The example output documents would now look like this (note deviceData is now a 
   }
 }
 ```
-
 
 At this point, the pipeline had one document for every combination of profile and device matching our selected city and device name. A $group stage was now used to merge documents so that we had a single document for each profile, with an array of their matching devices. This also had the effect of removing fields not needed in our final output.
 
@@ -415,7 +395,6 @@ At this point, the pipeline had one document for every combination of profile an
 }
 ```
 
-
 [**$set**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/set/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-set--aggregation-)
 
 ```
@@ -427,7 +406,6 @@ At this point, the pipeline had one document for every combination of profile an
     }
  }
 ```
-
 
 A $set stage was now added to rename the _id field created by the prior $group stage back to profileID for readability.
 
@@ -447,11 +425,9 @@ A $set stage was now added to rename the _id field created by the prior $group s
 }
 ```
 
-
 The final stages in the pipeline sorted the documents by profileID and then used $skip and $limit stages to return the required page of ten results.
 
-The pipeline performance problem
---------------------------------
+## The pipeline performance problem
 
 While the initial pipeline design was returning correct results, and its design could even be considered perfectly reasonable when thought of in terms of how an equivalent SQL query might have been structured, its performance was problematic.
 
@@ -465,5 +441,3 @@ With missing indexes eliminated as the source of the slow performance, we turned
 | Pipeline Description | Average time per query | Total elapsed time (300 query iterations, 15 concurrent threads) |
 | Initial Design       | 11.8 seconds           | 260 seconds                                                      |
 | Final Design         | 14 milliseconds        | 655 milliseconds                                                 |
-
-<br />

@@ -29,8 +29,7 @@ Adding more CPU, memory, or storage to a single server is known as vertical scal
 
 This is where [sharding](https://www.mongodb.com/resources/products/capabilities/sharding/?%20utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) becomes relevant.
 
-Sharding as a horizontal scaling strategy
------------------------------------------
+## Sharding as a horizontal scaling strategy
 
 Consider a common e-commerce application scenario. On regular days, the volume of traffic and transactions is predictable and easily supported by the existing infrastructure. During events like Black Friday, however, this volume can increase significantly in a short period of time. When this happens, the database is often one of the first components to become a bottleneck. More concurrent writes, more reads, and larger datasets start to push a single server to its limits, making it necessary to take action to keep the system responsive and available.
 
@@ -45,8 +44,7 @@ So, what is the alternative? Instead of making a single server bigger, we scale 
 
 Let's walk through each of these, starting from the basics.
 
-Understanding a sharded cluster architecture
---------------------------------------------
+## Understanding a sharded cluster architecture
 
 Sharding doesn't exist in isolation. It is built on top of a few core MongoDB concepts, one of which is [replication](https://www.mongodb.com/docs/manual/replication/?%20utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello).
 
@@ -84,8 +82,7 @@ The client always connects to [mongos](https://www.mongodb.com/docs/manual/refer
 
 In production environments, MongoDB automatically provisions and manages multiple mongos instances in Atlas, while in self-managed deployments, it is common to run multiple mongos processes for high availability and scalability.
 
-Distributing data in a sharded cluster
---------------------------------------
+## Distributing data in a sharded cluster
 
 Data distribution across shards is usually done by spreading the data of a collection across multiple shards. For example, in a cluster with two shards, a *books* collection with 10 million documents can be split between those two shards:  
 ![](Screenshot-2026-02-09-at-9.49.35-AM.png)
@@ -101,14 +98,12 @@ By default, this collection is assigned to the database's primary shard. You can
 > db.databases.find({_id: "<DATABASE_NAME>"}, {primary: 1})
 ```
 
-
 Since this primary shard may host multiple unsharded collections, they all end up sharing the same resources. As these collections grow, this can lead to resource contention.
 
 Starting with MongoDB 8.0, this unsharded collection can be moved to a specific shard using [moveCollection](https://www.mongodb.com/docs/manual/tutorial/move-a-collection/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello). This allows the collection to benefit from dedicated resources and avoids competing with other collections on the same shard:  
 ![](Screenshot-2026-02-09-at-9.50.56-AM.png)
 
-When should you shard a collection?
------------------------------------
+## When should you shard a collection?
 
 Sharding a collection is not something you do on day one. In most cases, a single replica set is enough for a long time. Sharding a collection becomes relevant when you start approaching the limits of what a single replica set can handle, either in terms of data size, throughput, or operational constraints.
 
@@ -139,8 +134,7 @@ When applications need to separate data by region, customer type, or compliance 
 * Customers from Brazil stored on shards in one region  
 * Customers from the USA stored on shards in another
 
-Choosing a shard key
---------------------
+## Choosing a shard key
 
 So you've decided that sharding makes sense for your workload. The next question is: *How does MongoDB decide which data goes to which shard?*
 
@@ -156,7 +150,6 @@ sh.shardCollection(
  { publishedYear: 1 }
 )
 ```
-
 
 In this example, the publishedYear field is used as the shard key. If the collection is empty, MongoDB can create this index as part of the sharding operation. If the collection already contains data, you must create the index first, and only then shard the collection.
 
@@ -207,7 +200,6 @@ Let's use a books collection as an example:
 }
 ```
 
-
 #### Cardinality
 
 Cardinality is about how many different values a field can have. The more unique the values are, the higher the cardinality.
@@ -236,8 +228,7 @@ using publishedYear as part of the shard key can be beneficial. In this case, ra
 
 However, this comes with an important trade-off: Writes for new data will still be routed to a single shard. For write-heavy or insert-heavy workloads, this makes publishedYear a poor shard key choice, as it can easily lead to write hotspots.
 
-Distribution options
---------------------
+## Distribution options
 
 Another aspect that defines how effectively data is distributed across shards is the sharding strategy itself.
 
@@ -253,8 +244,7 @@ The shard key value is [hashed](https://www.mongodb.com/docs/manual/core/hashed-
 
 This [zone](https://www.mongodb.com/docs/manual/tutorial/sharding-distribute-collections-with-zones/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) strategy allows you to control where data lives by assigning ranges or values to specific shards. It can be combined with range or hashed sharding and is especially useful for separating data by region, such as customers from Brazil versus customers from the USA.
 
-A quick lab: Range vs. hashed sharding
---------------------------------------
+## A quick lab: Range vs. hashed sharding
 
 To make this more concrete, let's walk through a simple experiment. For this experiment, the sharded cluster is composed of two shards:
 
@@ -292,7 +282,6 @@ private void insertBooksBulk(MongoCollection<Document> col) {
 }
 ```
 
-
 This is simply a way to simulate a cluster that already contains a large amount of data. You can check the entire code [here](https://github.com/ricardohsmello/mongodb-java-sample/blob/de430e9ebb734dc3eef9f9d9faad276570b796ec/src/main/java/com/example/mongodb/DataInitializer.java#L68).
 
 After this step, we connect to mongos and inspect the *books* collection:
@@ -306,7 +295,6 @@ Enterprise [direct: mongos] bookstore> db.books.countDocuments()
 
 10000000
 ```
-
 
 At this point, we have a collection with 10 million documents. The data is in place, but the collection is still not sharded.
 
@@ -323,7 +311,6 @@ Enterprise [direct: mongos] bookstore> db.books.createIndex({ publishedYear: 1 }
 
 publishedYear_1
 ```
-
 
 With the index in place, we can shard the collection:
 
@@ -343,7 +330,6 @@ Enterprise [direct: mongos] bookstore> sh.shardCollection("bookstore.books", { p
  operationTime: Timestamp({ t: 1768281083, i: 44 })
 }
 ```
-
 
 At this point, MongoDB starts splitting the collection into chunks based on ranges of publishedYear values and distributing those chunks across the shards.
 
@@ -379,7 +365,6 @@ One of the first things worth checking is the **sharded data distribution**, whi
 ]
 ```
 
-
 Here, the numOrphanedDocs field stands out. **Orphaned documents** are temporary leftovers created during chunk migrations. They appear when ownership of a chunk has moved to another shard, but the old copy hasn't been cleaned up yet.
 
 This is normal behavior while the balancer is working and resolves automatically. A healthy state is when all shards eventually report numOrphanedDocs: 0.
@@ -411,7 +396,6 @@ collections: {
    }
 ```
 
-
 At this stage:
 
 * Most historical ranges were placed on *shardRS1.*
@@ -426,7 +410,6 @@ As the balancer runs, MongoDB starts reorganizing chunks to reach a more stable 
 ```
 Enterprise [direct: mongos] bookstore> db.books.getShardDistribution();
 ```
-
 
 The output shows the percentage of documents and data size per shard. As these percentages change, it indicates chunks being moved between shards.
 
@@ -450,7 +433,6 @@ Totals
 }
 ```
 
-
 After the balancer settles, the chunk layout simplifies to:
 
 ```
@@ -459,7 +441,6 @@ chunks: [
          { min: { publishedYear: 2005 }, max: { publishedYear: MaxKey() }, 'on shard': 'shardRS2', 'last modified': Timestamp({ t: 6, i: 1 }) }
  ]
 ```
-
 
 **Note**: When a collection is sharded, MongoDB relies on the balancer to distribute chunks over time, which can be slow for large datasets.
 
@@ -506,7 +487,6 @@ private Document makeDoc(long i) {
 }
 ```
 
-
 After the insert, checking the sh.status() again shows:
 
 ```
@@ -538,7 +518,6 @@ collections: {
    }
 ```
 
-
 Two important observations:
 
 * MongoDB split older ranges into many chunks.
@@ -546,8 +525,7 @@ Two important observations:
 
 **Important** : The*jumbo: 'yes'* flag indicates that this chunk became too large to split or move easily, making balancing harder. Read more in the [jumbo flag](https://www.mongodb.com/docs/manual/tutorial/clear-jumbo-flag/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) documentation.
 
-Hashed
-------
+## Hashed
 
 In this second experiment, we could use ISBN, but it's not a good example because ISBN already has high cardinality and is naturally well distributed. In many cases, *{ isbn: 1 }*would already do the job.
 
@@ -565,13 +543,11 @@ Before sharding the collection, MongoDB requires an index on the shard key. Sinc
 Enterprise [direct: mongos] bookstore> db.books.createIndex({ createdAt: "hashed" })
 ```
 
-
 With the index in place, we can shard the collection:
 
 ```
 Enterprise [direct: mongos] bookstore> sh.shardCollection("bookstore.books", { createdAt: "hashed" } )
 ```
-
 
 Because the shard key is hashed, MongoDB doesn't use the natural ordering of the timestamps. Instead, it hashes each createdAt value and distributes documents based on the resulting hash ranges.
 
@@ -589,12 +565,9 @@ The result is an even distribution across shards: roughly 5 million documents pe
 * \~1.5M docs from *2009*
 * \~1.0M docs from *2027*
 
-<br />
-
 This is exactly the behavior we want when dealing with monotonically increasing fields. New inserts no longer pile up on a single shard. Instead, writes are spread evenly across the cluster, avoiding hotspots.
 
-Tuning shard keys based on access patterns
-------------------------------------------
+## Tuning shard keys based on access patterns
 
 Choosing a shard key is not a one-time decision. As applications evolve, access patterns change, and shard keys often need to evolve as well. These changes usually show up in data distribution, balancing behavior, and query performance.
 
@@ -618,7 +591,6 @@ Imagine our books collection is sharded by:
 { publishedYear: 1 }
 ```
 
-
 So the data is split between *shardRS1* and *shardRS2*.
 
 Now, from the application side, a query like this looks innocent:
@@ -631,13 +603,11 @@ public interface BookRepository extends MongoRepository<Book, String> {
 }
 ```
 
-
 But notice: Title is **not** the shard key. So when the app sends a query like...
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" })
 ```
-
 
 ...mongos can't know which shard owns that document. It has no way to "target" a shard based on title. The result: The query becomes a **broadcast query**.
 
@@ -646,7 +616,6 @@ If you run...
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ title: "Learning MongoDB" }).explain("executionStats")
 ```
-
 
 ...you'll typically see a winning plan with something like:
 
@@ -680,13 +649,11 @@ Given what we've just seen, the real issue isn't the lack of an index, but the l
 { publishedYear: 1}
 ```
 
-
 So a query like this...
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.find({ publishedYear: 2020 })
 ```
-
 
 ...can be routed directly to the shard that owns the range for 2020. This turns the operation into a **targeted query**, typically showing up in the execution plan as:
 
@@ -698,7 +665,6 @@ Enterprise [direct: mongos] bookstore> db.books.find({ publishedYear: 2020 })
  ]
 }
 ```
-
 
 ### When does refining the shard key make sense?
 
@@ -712,13 +678,11 @@ In these situations, [refining the shard key](https://www.mongodb.com/docs/manua
 { publishedYear: 1, title: 1 }
 ```
 
-
 To refine a shard key, you first need to create an index that matches the new shard key:
 
 ```
 Enterprise [direct: mongos] bookstore> db.books.createIndex({ publishedYear: 1, title: 1 })
 ```
-
 
 Once the index is in place, you can refine the shard key using the refineCollectionShardKey command:
 
@@ -729,13 +693,11 @@ Enterprise [direct: mongos] bookstore> db.adminCommand({
 })
 ```
 
-
 After the operation completes, you can verify that the shard key was updated by inspecting the collection metadata:
 
 ```
 Enterprise [direct: mongos] bookstore> db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })
 ```
-
 
 Expected output:
 
@@ -746,7 +708,6 @@ Expected output:
    }
 ]
 ```
-
 
 ### Application takeaway
 
@@ -759,18 +720,15 @@ That means repository methods should reflect that decision. For example, instead
 List<Book> findByTitle(String title);
 ```
 
-
 ...you might prefer something like:
 
 ```
 List<Book> findByPublishedYearAndTitle(int publishedYear, String title);
 ```
 
-
 This approach allows MongoDB to continue routing queries efficiently using publishedYear, while also supporting more specific filters like title, without changing the shard key entirely.
 
-Resharding a collection
------------------------
+## Resharding a collection
 
 Refining a shard key helps in many cases, but it doesn't solve every problem.
 
@@ -782,7 +740,6 @@ Resharding is a powerful, online operation, but it comes with important requirem
 ( ( collection_storage_size + index_size ) * 2 ) / shard_count = storage_req
 ```
 
-
 Keep in mind that resharding is an online operation, but it [requires extra disk](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/#before-you-begin/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=sharding_mongodb_foojay&utm_term=ricardo.mello) space on the shards and a short write pause during the final step.
 
 ### Executing the reshard operation
@@ -792,7 +749,6 @@ Once you've decided that a new shard key is required, you can reshard the collec
 ```
 Enterprise [direct: mongos] bookstore> sh.reshardCollection("bookstore.books", { isbn: 1 } )
 ```
-
 
 After running the reshardCollection command, MongoDB goes through a series of internal steps to complete the operation:
 
@@ -815,13 +771,11 @@ Enterprise [direct: mongos] bookstore> db.getSiblingDB("admin").aggregate([
 ])
 ```
 
-
 Once the operation completes, you can verify the new shard key by inspecting the collection metadata:
 
 ```
 Enterprise [direct: mongos] bookstore> db.getSiblingDB("config") .collections.find({ _id: "bookstore.books" }, { key: 1 })
 ```
-
 
 Expected output:
 
@@ -829,9 +783,7 @@ Expected output:
 [ { _id: "bookstore.books", key: { isbn: 1 } } ]
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this article, we walked through some of the core concepts behind MongoDB clustering, starting with replication and moving all the way to sharded clusters. Along the way, we explored how sharding works, how data is distributed, and how different shard key strategies behave in practice.
 

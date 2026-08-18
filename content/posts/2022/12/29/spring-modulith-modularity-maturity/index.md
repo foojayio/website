@@ -34,8 +34,7 @@ Many flocks to microservices because the application they work on resembles a sp
 
 If their application were better designed, the pull of microservices wouldn't be so strong.
 
-Why modularity?
----------------
+## Why modularity?
 
 Modularity is a way to reduce the impact of change on a codebase. It's very similar to how one designs (big) ships.
 
@@ -49,8 +48,7 @@ Designing boundaries that follow the principle of least privilege is a constant 
 
 We need a more advanced way to enforce boundaries.
 
-Modules, modules everywhere
----------------------------
+## Modules, modules everywhere
 
 In the long history of Java, "modules" have been a solution to enforce boundaries. The thing is, there are many definitions of what a module is, even today.
 
@@ -66,8 +64,7 @@ On the build side, I need to cite Maven modules. They allow splitting one's code
 
 There are other module systems on the JVM, but these three are the most well-known.
 
-A tentative approach to enforce boundaries
-------------------------------------------
+## A tentative approach to enforce boundaries
 
 As mentioned above, microservices provide the ultimate boundary during development and deployment. They are overkill in most cases. On the other side, there's no denying that projects rot over time. Even the most beautifully crafted one, which values modularity, is bound to become a mess without constant care.
 
@@ -90,13 +87,11 @@ HexagonalArchitecture.boundedContext("io.reflectoring.buckpal.account")
                          .importPackages("io.reflectoring.buckpal.."));
 ```
 
-
 Note that the `HexagonalArchitecture` class is a custom-made DSL façade over the ArchUnit API.
 
 Overall, ArchUnit is better than nothing, but only marginally so. Its main benefit is automation via tests. It would significantly improve if the architectural rules could be automatically inferred. That's the idea behind the Spring Modulith project.
 
-Spring Modulith
----------------
+## Spring Modulith
 
 Spring Modulith is the successor of Oliver Drotbohm's [Moduliths project](https://github.com/moduliths/moduliths) (with a trailing S). It uses both ArchUnit and [jMolecules](https://github.com/xmolecules/jmolecules). At the time of this writing, it's *experimental*.
 
@@ -120,7 +115,6 @@ By default, a Modulith module is a package located at the same level as the `Spr
           |_ subpackagez      // 3
 ```
 
-
 1. Application class
 2. Modulith module
 3. Not a module
@@ -134,16 +128,13 @@ var modules = ApplicationModules.of(DummyApplication.class);
 new Documenter(modules).writeModulesAsPlantUml();
 ```
 
-
 To break the build if a module accesses a regular package, call the `verify()` method in a test.
 
 ```java
 var modules = ApplicationModules.of(DummyApplication.class).verify();
 ```
 
-
-A sample to play with
----------------------
+## A sample to play with
 
 I've created a [sample app](https://github.com/ajavageek/spring-modulith-sample) to play with: it emulates the home page of an online shop. The home page is generated server-side with Thymeleaf and displays catalog items and a newsfeed. The latter is also accessible via an HTTP API for client-side calls (that I was too lazy to code). Items are displayed with a price, thus requiring a pricing service.
 
@@ -151,13 +142,9 @@ Each feature - page, catalog, newsfeed, and pricing - sits in a package, which i
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-61030 aligncenter" src="architecture-480x510.png" alt="" width="480" height="510">
 
-<br />
-
 Let's check the design of the pricing feature:
 
 <img decoding="async" class="size-medium wp-image-61031 aligncenter" src="pricing-original-576x510.png" alt="" width="576" height="510">
-
-<br />
 
 The current design has two issues:
 
@@ -168,8 +155,6 @@ We shall fix the design by encapsulating types that shouldn't be exposed. We mov
 
 <img decoding="async" class="size-medium wp-image-61032 aligncenter" src="pricing-improved-526x510.png" alt="" width="526" height="510">
 
-<br />
-
 If we call the `verify()` method, it throws and breaks the build because `Pricing` is not accessible from outside the `pricing` module:
 
     Module 'home' depends on non-exposed type ch.frankel.blog.pricing.internal.Pricing within module 'pricing'!
@@ -178,10 +163,7 @@ Let's fix the violations with the following changes:
 
 <img loading="lazy" decoding="async" class="size-medium wp-image-61033 aligncenter" src="pricing-final-700x422.png" alt="" width="700" height="422">
 
-<br />
-
-Conclusion
-----------
+## Conclusion
 
 By toying with a sample application, I did like Spring Modulith.
 

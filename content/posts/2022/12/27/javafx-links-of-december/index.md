@@ -24,14 +24,12 @@ Although I'm trying to get of Twitter - for my own mental health 🙂 - I'm stil
 
 Here is the result of the #LinksOfTheWeek that were published on jfx-central.com in December!
 
-Podcasts
---------
+## Podcasts
 
 * In the Bootiful Podcast ["Java Champion, legendary engineer, and author Trisha Gee"](https://bootifulpodcast.fm/#/episodes/3259c661-0524-46dc-805d-2388011030b9), [**Josh Long**](https://twitter.com/starbuxman) talks with [**Trisha Gee**](https://twitter.com/trisha_gee) about a lot of topics, including JavaFX.
 * Here on [**Foojay.io**](https://twitter.com/foojayio), we published the podcast ["The State of JavaFX Framework, Libraries, and Projects"](https://foojay.io/today/foojay-podcast-9/). These guests spoke about the JavaFX framework itself, but also about the libraries and applications that are built with it: [**Pedro Duque Vieira**](https://twitter.com/P_Duke), [**Sean Phillips**](https://twitter.com/SeanMiPhillips), [**Johan Vos**](https://mastodon.social/@johanvos), [**Gail Anderson**](https://twitter.com/gail_asgteach), [**Dirk Lemmermann**](https://twitter.com/dlemmermann), host: [**Frank Delporte**](https://foojay.social/@frankdelporte).
 
-Various News
-------------
+## Various News
 
 * In an interview, [**Frank Delporte**](https://foojay.social/@frankdelporte) spoke with [**Sean Phillips**](https://twitter.com/SeanMiPhillips). Every single thing he touches in his programming life turns into awesomeness. Read more about his work with [Trinity, a tool to visualize Brain Computer Interface data](https://foojay.io/today/visualizing-brain-computer-interface-data-using-javafx/).
 * On Wednesday, 7th of December 2022, the annual JavaFX user meeting "JFX Adopters Meeting 2022" hosted by ZEISS as online event took place. [Registration page](https://www.zeiss.com/meditec/en/news-events/events/jfx-adopters-meeting.html).
@@ -59,8 +57,7 @@ Various News
   * [FXTools by @LeeWyatt_7788](https://twitter.com/LeeWyatt_7788/status/1605225007239417856): many tools, such as image tools, which support the generation of icons for various OS; multi-image cutting function supports iOS, Android, PC; image format conversion.
   * [A friend of @LeeWyatt_7788](https://twitter.com/LeeWyatt_7788/status/1580958504369602560) was interested in FXGL and made a demo of the game Plants vs. Zombies.
 
-Learning JavaFX
----------------
+## Learning JavaFX
 
 * [**Donald Raab**](https://twitter.com/TheDonRaab) shared a series of posts:
   * Part 1: [Building his very first JavaFX application with IntelliJ IDEA](https://donraab.medium.com/my-first-javafx-application-ee70a1d48cb3)
@@ -69,26 +66,22 @@ Learning JavaFX
   * Part 4: ["Using the Jackson library to persist my JavaFX ToDo List to JSON"](https://donraab.medium.com/using-the-jackson-library-to-persist-my-javafx-todo-list-to-json-8a4b31917c09)
   * Conclusion: [overview of his experiments with JavaFX](https://medium.com/javarevisited/my-weird-and-wonderful-first-adventures-with-javafx-6efe3b1923c8).
 
-Games
------
+## Games
 
 * A few weeks ago we shared this [video showing a Space Invaders game](https://www.youtube.com/watch?t=1337&v=jCBBCBCUt9E&feature=youtu.be) by [**Charles T. (A Bit's Odyssey)**](https://www.youtube.com/@chalodss), but [**Gerrit Grunwald**](https://twitter.com/hansolo_) also created a JavaFX version of this classic game! The [video is here](https://www.youtube.com/watch?v=GajccpyHyFM) and the [sources are shared on GitHub](https://github.com/HanSolo/spaceinvadersfx).
 
-JavaFX Job
-----------
+## JavaFX Job
 
 * [**Dirk Lemmermann**](https://twitter.com/dlemmermann) is looking to [hire a JavaFX developer in Switzerland for his startup in the energy business](https://twitter.com/dlemmermann/status/1603692027601879040).
 
-New content on [jfx-central.com](https://www.jfx-central.com)
--------------------------------------------------------------
+## New content on [jfx-central.com](https://www.jfx-central.com)
 
 * ["QFive"](https://www.jfx-central.com/real_world/qfive): an e-learning platform for enterprise customers, running on desktop, browser and mobile.
 * ["NERstar"](https://www.jfx-central.com/real_world/nerstar): a cross-platform media application, used to create subtitles for live television, running on desktop and browser.
 * ["ModellusX"](https://www.jfx-central.com/real_world/modellusx): enables students and teachers to use mathematics to create or explore models interactively. The latest release dates from 2012, but you can still find a [lot of videos created with it on YouTube](https://www.youtube.com/results?search_query=modellus).
 * Over 40 "real world apps" is now listed on the website!
 
-New Releases
-------------
+## New Releases
 
 * [**PDFsam**](https://twitter.com/PDFsamOSS) released the first milestone of PDFsam Basic 5, [more details are available here](https://blog.pdfsam.org/java/pdfsam-basic-version-5-milestone-release/2366/#more-2366).
 * [**Mapton**](https://twitter.com/mapton_app), "some kind of map application", announced a new release for Windows \& Linux, built on NetBeans 16 Platform, bundled with Java \& JavaFX from Azul. [You can get it here](https://github.com/trixon/mapton/releases/tag/v3.0.0).

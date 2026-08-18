@@ -75,7 +75,6 @@ public class JfrUnitTest {
 }
 ```
 
-
 |-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | `@JfrEventTest` marks this as a JfrUnit test, activating its extension                                                                                                                                               |
 | *2* | All JFR event types to be recorded must be enabled via `@EnableEvent`                                                                                                                                                |
@@ -177,7 +176,6 @@ public void retrieveTodoBaseline() throws Exception {
 }
 ```
 
-
 |-----|-------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` JFR events                                               |
 | *2* | Every 10,000 events, wait for all the JFR events produced so far                                                                          |
@@ -203,7 +201,6 @@ Requests executed: 80000, memory allocated: 31624 bytes/request
 Requests executed: 90000, memory allocated: 31703 bytes/request
 Requests executed: 100000, memory allocated: 31682 bytes/request
 ```
-
 
 As we see, there's some warm-up phase during which allocation rates still go down, but after \~20 K requests, the allocation per request is fairly stable, with a volatility of \~1% when averaged out over 10K requests. This means that this initial phase should be excluded during the actual test.
 
@@ -246,7 +243,6 @@ public void retrieveTodo() throws Exception {
 }
 ```
 
-
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Warm-up phase                                                                                                                                                                                                                                                                               |
 | *2* | The actual test phase                                                                                                                                                                                                                                                                       |
@@ -262,7 +258,6 @@ to be less than:
  <33000L>
 ```
 
-
 Ugh, it's suddenly allocating about ten times more memory per request than before! What has happened? To find the answer, we can take a look at the test's JFR recording, which JfrUnit persists under *target/jfrunit*:
 
 ```
@@ -271,7 +266,6 @@ ls target/jfrunit
 dev.morling.demos.quarkus.TodoResourcePerformanceTest-createTodo.jfr
 dev.morling.demos.quarkus.TodoResourcePerformanceTest-retrieveTodo.jfr
 ```
-
 
 Let's open the \*.jfr file for the failing test in JDK Mission Control (JMC) in order to analyse all the recorded events (note that the recording will always contain some JfrUnit-internal events which are needed for synchronizing the recording stream and the events exposed to the test).
 
@@ -304,7 +298,6 @@ public Response get(@PathParam("id") long id) throws Exception {
 }
 ```
 
-
 Gasp, it looks like a developer on the team has been taking the microservices mantra a bit too far, and has changed the code so it invokes another service in order to obtain some additional data associated to the user who created the retrieved todo.
 
 While that's problematic in its own right due to the inherent coupling between the two services (how should the Todo Manager service react if the user service isn't available?), they made matters worse by using the [REST Assured API](https://rest-assured.io/) as a REST client, in a less than ideal way. The API's simplicity and elegance makes it a great solution for testing (and indeed that's its primary use case), but this particular usage seems to be not such a good choice for production code.
@@ -322,7 +315,6 @@ public void retrieveTodo() throws Exception {
   // ...
 }
 ```
-
 
 Note that the pre-defined configurations imply minimum durations for certain event types; e.g. the I/O events discussed in the next section will only be recorded if they have a duration of 20 ms or longer. Depending on your testing requirements, you may have to adjust and tweak the configuration to be used.
 
@@ -387,7 +379,6 @@ private long getBytesReadOrWritten(RecordedEvent re) { // 5
 }
 ```
 
-
 |-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *1* | Enable the `jdk.SocketRead` and `jdk.SocketWrite` event types; by default, those don't contain the stacktrace for the events, so that needs to be enabled explicitly |
 | *2* | There should be four events per invocation of the API method                                                                                                         |
@@ -406,7 +397,6 @@ to be equal to:
 but was not.
 ```
 
-
 Also the number of bytes read and written has substantially increased:
 
 ```
@@ -416,7 +406,6 @@ Expecting:
 to be less than:
  <250L>
 ```
-
 
 That's definitely something to look into. So let's open the recording of the failed test in Flight Recorder and take a look at the socket read and write events. Thanks to enabling stacktraces for the two JFR event types we can quite quickly identify the events asssociated to an invocation of the `GET /todo/{id}` API:  
 [![Socket read and write events after the performance regression](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png "Socket read and write events after the performance regression")](https://www.morling.dev/images/continuous_perf_testing_socket_regression.png)
@@ -437,7 +426,6 @@ public class Todo extends PanacheEntity {
   public byte[] image;
 }
 ```
-
 
 |-----|------------------------|
 | *1* | This looks suspicious! |

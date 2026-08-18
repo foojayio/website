@@ -25,8 +25,7 @@ This Java Challenge is one of the hardest ones, are you ready for this one? Now 
 
 It's time to improve your Java skills with this Hidden Dracula Polymorphism Challenge...
 
-Hidden Dracula Polymorphism Challenge
--------------------------------------
+## Hidden Dracula Polymorphism Challenge
 
 What will happen after running the following code?
 
@@ -58,7 +57,6 @@ public class DraculaPolymorphism {
 }
 ```
 
-
 A) AlucardAlucardbat  
 
 B) DraculaAlucardwerewolf  
@@ -77,13 +75,11 @@ The very first thing to notice is that we are using polymorphism in the line of 
 Dracula dracula = new Alucard();
 ```
 
-
 Then we will be using the `name` attribute but remember that attributes will never be overridden and there is no polymorphism with attributes, only with instance methods. Therefore the name that will be printed will be from the Dracula class since we declared the `dracula` variable with the type of `Dracula`. And the `getName` method will be from the `Alucard` class, since we are using polymorphism and `getName` is an instance method:
 
 ```java
 System.out.print(dracula.name + dracula.getName());
 ```
-
 
 Therefore it will print... what do you think?
 
@@ -92,7 +88,6 @@ Finally, we invoke the static method, keeping in mind that a static method is no
 ```java
 System.out.print(dracula.metamorphosis());
 ```
-
 
 The information from the `Dracula` class will be printed then... and that information is... what do you think?
 
@@ -103,8 +98,6 @@ If you want to go deeper into polymorphism, you can check out the following arti
 You can also watch the video explanation of this Java Challenge, however, I recommend trying out the Java Challenge yourself first, before watching the below!
 
 {{< youtube X6V7RH8tIOw >}}
-
-<br />
 
 Keep learning and stay consistent.
 

@@ -29,8 +29,7 @@ It is namely also the idea to use this config specification for the configuratio
 
 We look a bit more in detail in this article about this plain Java SE aspect of MicroProfile config and 2 libraries that implement recent versions of the specification.
 
-Programmatic access
--------------------
+## Programmatic access
 
 The programmatic access of the `Config` object allows you to get the configuration values from the sources that are available for your application.
 
@@ -38,14 +37,12 @@ The programmatic access of the `Config` object allows you to get the configurati
 Config config = ConfigProvider.getConfig();
 ```
 
-
 This *Config* object has methods to retrieve and convert a value from the environment.
 
 ```java
 String value = config.getValue("key", Integer.class);
 Boolean flag = config.getOptionalValue("otherKey", Boolean.class);
 ```
-
 
 The class type on the method determines the *Converter* that is used to transform the String value obtained from the *ConfigSource* to the desired type.
 
@@ -61,9 +58,7 @@ public class MyConverter implements Converter {
 }
 ```
 
-
-Supported features
-------------------
+## Supported features
 
 Some MicroProfile Config implementations have split up their project into 2 parts. A part that only contains those features that can be used in Java SE, and another artifact that adds the CDI integration on top of the first part.
 
@@ -79,8 +74,7 @@ What features are supported when using the pure Java SE version?
 
 Other like the `@ConfigProperty` and `@ConfigProperties` which clearly required the CDI engine to function, are not included in those artifacts.
 
-Testing
--------
+## Testing
 
 How can you test code that makes use of the *ConfigProvider*? Since the Config is created once, for each Classloader, you might think it is difficult to have several tests where various values or the absence of a value for a key can be tested.
 
@@ -88,8 +82,7 @@ But you can actually work around this relatively easily. You can create a custom
 
 The gist of that solution can be found in this [Github gist](https://gist.github.com/rdebusscher/f344ec2c6eb777f799ee775425745627).
 
-Use Case
---------
+## Use Case
 
 What are typical use cases for MicroProfile Config on Java SE? Defining configuration values can be important for any kind of application, not only web applications. So all applications that you have, might benefit from a proven reusable framework to define the configuration, not only when running web applications on a runtime.
 
@@ -98,8 +91,7 @@ What are typical use cases for MicroProfile Config on Java SE? Defining configur
 
 The implementations that I will discuss next, also support native compilation with GraalVM, so also your native compiled programs can make use of it.
 
-Implementations
----------------
+## Implementations
 
 I cover two implementations that have an artifact available that cover the MicroProfile Config functionality that can run on pure Java SE.
 
@@ -121,7 +113,6 @@ The Configuration framework that is used within Quarkus and OpenLiberty can use 
 </dependency>
 ```
 
-
 The jakarta annotation api one is needed since the order of the converters is defined through the `@Priority` annotation as mentioned above and is not included within the core SmallRye config dependency.
 
 ### Atbash MP Config
@@ -138,9 +129,7 @@ You only need to add the following dependency to your Java SE project to have it
 </dependency>
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Configuration is a very important aspect of any application, not only your web application.
 

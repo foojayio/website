@@ -26,8 +26,7 @@ frozen: false
 
 Right from the start, we planned on including community members in the creative process that is necessary to create the tasks that will be used to certify the skill level of a developer. In such a process, it is important to maintain a balance between openness and quality. In order to make sure the certification can be held to the highest standards, we are proposing a process that allows you to submit your idea for a task.
 
-The Process
------------
+## The Process
 
 Any community member can come up with an idea for a task. This allows for everyone to contribute ideas from their own expertise and help build the variety of tasks that makes up a good certification test. At this point we are not yet offering any categories to which tasks must conform, so any idea really is welcome.
 
@@ -46,8 +45,7 @@ To bring your idea into the certification exams, it will have to go through thes
 5. **GrepS Review** - If the task has been selected for inclusion, it will go through one final round of review at the GrepS-platform. Changes here will be to make sure the task can operate properly inside the platform
 6. **Incorporation** - The task has been incorporated into the platform. When the task is new, it will enter a phase of calibration and finally become part of the scoring process
 
-The Task Format
----------------
+## The Task Format
 
 Since we are using the GrepS platform to determine the skills of candidates, we need to create tasks that fit into this platform. At the FCC (Foojay Certification Committee), we are in the process of providing a repository containing a skeleton project with the basic layout. It will also include a README explaining the structure in more depth than this post allows.
 
@@ -62,8 +60,7 @@ In this post, I will provide an overview of the components inside a task-project
 * Score definition -- A file containing the description of the scoring of a task. This is defined using a DSL that allows for the use of different "graders", able to assign a partial score through analysis of the solution (e.g. number of correct tests, specific test outcomes, etc).
 * Workflow definition -- A file containing the flow of the entire task. A DSL allows you to define the number of sub-tasks, which instruction file to show, which files to copy into the candidate's workspace, how much time they have etc.
 
-Your Contributions
-------------------
+## Your Contributions
 
 The above description should be enough to give you the ability to generate ideas for tasks. That then raises the question of what sort of tasks would be good submissions. The GrepS-platform is based on the science that developer skill is best tested using regular, everyday tasks that any developer would do as part of their day job. While some consider it fun to create algorithms for balanced trees, those tasks actually are not the best indicators.
 

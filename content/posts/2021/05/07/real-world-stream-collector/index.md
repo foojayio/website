@@ -26,8 +26,6 @@ Let's imagine an e-commerce platform that implements a shopping cart. The cart i
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-44825" src="cart-700x332.png" alt="" width="700" height="332">
 
-<br />
-
 This diagram might translate into the following (abridged) code:
 
 ```java
@@ -50,7 +48,6 @@ public class Product {
     public int hashCode() { ... }                    // 2
 }
 ```
-
 
 1. Getters
 2. Only depend on `id`
@@ -82,7 +79,6 @@ public class Cart {
 }
 ```
 
-
 1. Organize products into a map. The key is the `Product`; the value is the quantity.
 2. Remember to return a read-only copy of the collection to maintain encapsulation.
 
@@ -106,7 +102,6 @@ public record CartRow(Product product, int quantity) {                // 1
 }
 ```
 
-
 1. `CartRow` is a value object.  
    We can model it as a Java 16 `record`.
 
@@ -124,7 +119,6 @@ var price = cart.getProducts()
     .map(CartRow::getRowPrice)                                        // 2
     .reduce(BigDecimal.ZERO, BigDecimal::add);                        // 3
 ```
-
 
 1. Collect the list of rows.
 2. Compute the price for each row.
@@ -155,15 +149,12 @@ public class PriceAndRows {
 }
 ```
 
-
 1. Total cart price.
 2. List of cart rows that can display the product's label, the product's price, and the row price.
 
 Here's a summary of the `Collector` interface. For more details, please check [this previous post](https://blog.frankel.ch/custom-collectors-java-8/).
 
 <img decoding="async" class="aligncenter size-medium wp-image-44826" src="class-diagram-700x473.png" alt="" width="700" height="473">
-
-<br />
 
 |      Interface      |                                                 Description                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------|
@@ -215,7 +206,6 @@ private static class PriceAndRowsCollector
 }
 ```
 
-
 1. The mutable container is an instance of `PriceAndRows`.
 2. For each map entry containing the product and the quantity, accumulate both into the `PriceAndRows`.
 3. Two `PriceAndRows` can be combined by summing their total price and aggregating their respective rows.
@@ -230,9 +220,7 @@ var priceAndRows = cart.getProducts()
                        .collect(new PriceAndRowsCollector());
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 You can solve most use cases with one of the out-of-the-box collectors provided in the `Collectors` class. However, some require to implement a custom `Collector`, *e.g.*, when you need to collect more than a single collection or a single scalar.
 

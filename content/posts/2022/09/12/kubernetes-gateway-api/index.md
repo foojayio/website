@@ -29,8 +29,7 @@ Finally, I mentioned the `Ingress` object, which also allows routing.
 
 I deliberately left out the new kid on the block, the Gateway API. It's the subject of this post.
 
-From Ingress to the Gateway API
--------------------------------
+## From Ingress to the Gateway API
 
 External access to Kubernetes pods went through several evolutionary steps, *e.g.* , `Ingress` is the answer to the problem of the lack of routing in `LoadBalancer`.
 
@@ -61,7 +60,6 @@ spec:
         servicePort: 80
 ```
 
-
 1. Proprietary objects
 
 Proprietary objects are a problem when migrating. While migration from one provider to another is probably uncommon, it should be as seamless as possible. When using proprietary objects, you first need to map from the old object to the new ones.
@@ -70,8 +68,7 @@ Chances are that it's not a one-to-one mapping. Then, you need to translate the 
 
 The idea behind the Gateway API is to have a clean separation between standard objects and the proprietary implementation.
 
-The Gateway API
----------------
+## The Gateway API
 
 > Gateway API is an open source project managed by the SIG-NETWORK community. It is a collection of resources that model service networking in Kubernetes. These resources - `GatewayClass`, `Gateway`, `HTTPRoute`, `TCPRoute`, `Service`, etc - aim to evolve Kubernetes service networking through expressive, extensible, and role-oriented interfaces that are implemented by many vendors and have broad industry support. -- <https://gateway-api.sigs.k8s.io>
 
@@ -85,8 +82,7 @@ Indeed, the concerns of a cluster operator and a developer are pretty different.
 
 IMHO, the most significant difference is that the specification was focused mainly on the developer experience; the rest was up to the implementors. The Gateway API seems to care about all personas.
 
-Configuring pod access via the Gateway API
-------------------------------------------
+## Configuring pod access via the Gateway API
 
 Let's replace the `Ingress` we previously configured with the Gateway API. Several steps are necessary.
 
@@ -95,7 +91,6 @@ Let's replace the `Ingress` we previously configured with the Gateway API. Sever
 ```bash
 k apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.0/standard-install.yaml
 ```
-
 
 ### Install an implementation
 
@@ -113,7 +108,6 @@ helm install apisix apisix/apisix \
   --set ingressPublishService="ingress-apisix/apisix-gateway"              #4
 ```
 
-
 1. Without the `--devel` option, Helm installs the *latest* release, which *doesn't* work with the Gateway API
 2. The Gateway needs to be accessible outside the cluster anyway
 3. The magic happens here!
@@ -124,7 +118,6 @@ Let's check that everything works:
 ```bash
 k get all -n ingress-apisix
 ```
-
 
 ```
 pod/apisix-5fc9b45c69-cf42m                      1/1     Running   0          14m         #1
@@ -140,7 +133,6 @@ service/apisix-etcd-headless        ClusterIP   None            <none>        23
 service/apisix-gateway              NodePort    10.96.101.224   <none>        80:30800/TCP#4
 service/apisix-ingress-controller   ClusterIP   10.96.141.230   <none>        80/TCP
 ```
-
 
 1. Apache APISIX itself
 2. Apache APISIX stores its configuration in `etcd`. The chart schedules three pods by default, a good practice to handle failures in distributed systems
@@ -161,7 +153,6 @@ metadata:
 spec:
   controllerName: apisix.apache.org/gateway-controller  #4
 ```
-
 
 1. We don't use the latest version on purpose, as Apache APISIX uses this version. Be aware that it will evolve in the (near) future
 2. `GatewayClass` object
@@ -186,7 +177,6 @@ spec:
       protocol: HTTP
       port: 80
 ```
-
 
 1. Same namespace as above
 2. `Gateway` object
@@ -221,7 +211,6 @@ spec:
           port: 80                                      #5
 ```
 
-
 1. Same namespace as above
 2. `HTTPRoute` object
 3. Reference the `Gateway` created above
@@ -236,16 +225,13 @@ Now that we have configured our routes, we can check it works.
 curl localhost:30800/left
 ```
 
-
 When we installed the Helm chart, we told Apache APISIX to create a `NodePort` service on port `30800`. Hence, we can use the port to access the service outside the cluster.
 
 ```
 left
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Many alternatives are available to access a pod from outside the cluster. The CNCF added most of them to improve on the previous one.
 

@@ -20,8 +20,6 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 *If you're joining us from [Part 1](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/) or need a quick refresher on the architecture, listen to this brief overview of how Spring AI and Amazon Bedrock work together.*
 *Generated using Notebook LLM for my previous [article](https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/){#https://foojay.io/today/spring-ai-amazon-bedrock-sdk-guide/}*
 
@@ -33,8 +31,6 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
 
 ### Step 1: Add the Ai model and AgentCore memory dependencies
 
-<br />
-
 ```xml
 <dependency>
     <groupId>org.springframework.ai</groupId>
@@ -45,7 +41,6 @@ To begin, enable **AgentCore memory** for the agent you built earlier.
     <artifactId>spring-ai-agentcore-memory</artifactId>
 </dependency>
 ```
-
 
 ### Step 2: Create Short/Long Term in AWS Management Console
 
@@ -66,7 +61,6 @@ agentcore:
     ignore-unknown-roles: false
 ```
 
-
 `application.properties`
 
 ```powershell
@@ -76,7 +70,6 @@ agentcore.memory.default-session=default
 agentcore.memory.page-size=50
 agentcore.memory.ignore-unknown-roles=false
 ```
-
 
 ### Step 4: Add the below `MemoryConfig` class.
 
@@ -115,7 +108,6 @@ public class MemoryConfig {
 }
 ```
 
-
 Let's break down the structure of the beans defined in the above `configuration` class.
 
 #### 4.1. ChatMemory Bean -- The Core
@@ -128,7 +120,6 @@ public ChatMemory chatMemory() {
                 .build();
 }
 ```
-
 
 This creates a ***sliding window memory*** that retains only the last 20 messages. Benefits include:
 
@@ -146,7 +137,6 @@ public MessageChatMemoryAdvisor messageChatMemoryAdvisor(ChatMemory chatMemory) 
 }
 ```
 
-
 This advisor acts as an intermediary that:
 
 * Integrates the *ChatMemory* into Spring AI's advisor chain
@@ -161,7 +151,6 @@ public AgentCoreMemory agentCoreMemory(MessageChatMemoryAdvisor advisor) {
    return new AgentCoreMemory(advisor, List.of());
 }
 ```
-
 
 This combines the ***advisor*** with an empty list of additional strategies. It:
 
@@ -180,14 +169,12 @@ public record ChatRequest(String message) {
 }
 ```
 
-
 ```java
 package com.bsmlabs.springai.models;
 
 public record ChatResponse(String response) {
 }
 ```
-
 
 ### Step 6: Add the below `ShortTermController` class.
 
@@ -256,12 +243,9 @@ public class ShortTermMemoryController {
 }
 ```
 
-
 * **ChatClient:**Send prompts to the LLM
 * **ChatMemory:** Manages the conversation window/sliding window (20 messages)
 * **AgentCoreMemory:** Orchestrates memory across operations
-
-<br />
 
 #### POST `/api/short` -- Chat Endpoint
 
@@ -278,7 +262,6 @@ public ChatResponse shortTermChat(@RequestBody ChatRequest chatRequest) {
    return new ChatResponse(response);
 }
 ```
-
 
 **What happens:**
 
@@ -301,7 +284,6 @@ public List<Message> getHistory() {
 }
 ```
 
-
 This method returns all messages (up to 20) for the given conversation ID. It is useful for:
 
 * Displaying chat history in the UI
@@ -316,7 +298,6 @@ public void clearHistory() {
    chatMemory.clear(CONVERSATION_ID);
 }
 ```
-
 
 ### Step 7: verify
 
@@ -344,7 +325,6 @@ GET http://localhost:8080/api/history
 DELETE http://localhost:8080/api/history
 ```
 
-
 Using ***curl*** commands
 
 ```powershell
@@ -366,7 +346,6 @@ curl http://localhost:8080/api/history
 curl -X DELETE http://localhost:8080/api/history
 ```
 
-
 ### End-to-End Flow
 
 ```
@@ -384,7 +363,6 @@ Exchange stored in ChatMemory (sliding window)
     ↓
 Response returned to user
 ```
-
 
 ***In the next part, I will discuss the inclusion of the remaining AgentCore services adding built-in tools like browser, code interpreter, and deployment to Amazon Bedrock AgentCore runtime.***
 

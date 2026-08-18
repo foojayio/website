@@ -29,8 +29,7 @@ In this article, I'd like to describe how to add new behavior to an existing obj
 
 I apologize in advance that the below implementations are pretty simple: they are meant to highlight my point, not to handle corner cases, *e.g.*, empty strings, non-UTF 8, etc.
 
-JavaScript
-----------
+## JavaScript
 
 JavaScript is an interpreted dynamically- and weakly-typed language, which runs the World Wide Web - until WASM takes over? As far as I know, its design is unique, as it's prototype-based. A prototype is a mold for new "instances" of that type.
 
@@ -48,11 +47,9 @@ Object.defineProperty(String.prototype, "toTitleCase", {
 console.debug("OncE upOn a tImE in thE WEst".toTitleCase());
 ```
 
-
 Note that objects created from this prototype *after* the call to `defineProperty` will offer the new property; objects created *before* won't.
 
-Ruby
-----
+## Ruby
 
 Ruby is an interpreted dynamically- and strongly-typed language. While not as popular as it once was with the Ruby On Rails framework, I still use it with the Jekyll system that powers this blog.
 
@@ -73,9 +70,7 @@ end
 puts "OncE upOn a tImE in thE WEst".to_camel_case()
 ```
 
-
-Python
-------
+## Python
 
 Python is an interpreted dynamically- and strongly-typed language. I guess every developer has heard of Python nowadays.
 
@@ -95,7 +90,6 @@ setattr(str, 'to_title_case', to_title_case)
 print("OncE upOn a tImE in thE WEst".to_title_case())
 ```
 
-
 Unfortunately, the above code fails during execution:
 
 ```
@@ -103,7 +97,6 @@ Traceback (most recent call last):
   File "<string>", line 9, in <module>
 TypeError: can't set attributes of built-in/extension type 'str'
 ```
-
 
 Because `str` is a *built-in* type, we cannot dynamically add behavior. We can update [the code](https://www.online-python.com/w4G0We7EYh) to cope with this limitation:
 
@@ -124,13 +117,11 @@ setattr(String, 'to_title_case', to_title_case)
 print(String("OncE upOn a tImE in thE WEst").to_title_case())
 ```
 
-
 It now becomes possible to extend `String`, because it's a class we have created. Of course, it defeats the initial purpose: we had to extend `str` in the first place. Hence, it works with third-party libraries.
 
 With interpreted languages, it's reasonably easy to add behavior to types. Yet, Python already touches the limits because the built-in types are implemented in C.
 
-Java
-----
+## Java
 
 Java is a compiled-statically and strongly-typed language that runs on the JVM. Its static nature makes it impossible to add behavior to a type.
 
@@ -147,18 +138,15 @@ public class StringUtils {
 }
 ```
 
-
 I hope that by now, using Apache Commons and Guava have replaced all those classes:
 
 ```java
 System.out.println(WordUtils.capitalize("OncE upOn a tImE in thE WEst"));
 ```
 
-
 In both cases, *the usage of static methods prevents fluent API usage* and thus impairs developer experience. But other JVM languages do offer exciting alternatives.
 
-Scala
------
+## Scala
 
 Like Java, Scala is a compiled, statically- and strongly-typed language that runs on the JVM. It was initially designed to bridge between Object-Oriented Programming and Functional Programming. Scala provides many powerful features. Among them, *implicit* classes allow adding behavior and state to an existing class. [Here](https://scastie.scala-lang.org/razUhHKRRcqamn9qlA0mhw) is how to add the `toCamelCase()` function to `String`:
 
@@ -177,7 +165,6 @@ object Utils {
 println("OncE upOn a tImE in thE WEst".toCamelCase())
 ```
 
-
 Though I dabbled a bit in Scala, I was never a fan. As a developer, I've always stated that a big part of my job was to make *implicit* requirements *explicit* . Thus, I frowned upon the on-purpose usage of the `implicit` keyword. Interestingly enough, it seems that I was not alone. Scala 3 keeps the [same capability](https://scastie.scala-lang.org/18abIFMKSvWiz8gpbVx2gg) using a more appropriate syntax:
 
 ```scala
@@ -188,11 +175,9 @@ extension(thiz: String)
   )
 ```
 
-
 Note that the *bytecode* is somewhat similar to Java's *static* method approach in both cases. Yet, API usage is fluent, as you can chain method calls one after another.
 
-Kotlin
-------
+## Kotlin
 
 Like Java and Scala, Kotlin is a compiled, statically- and strongly-typed language that runs on the JVM. Several other languages, including Scala, inspired its design.
 
@@ -212,14 +197,12 @@ fun String.toCamelCase() = "\\w\\S*"
 println("OncE upOn a tImE in thE WEst".toCamelCase())
 ```
 
-
 If you wonder why the Kotlin code is more verbose than the Scala one despite my earlier claim, here are two reasons:
 
 1. I don't know Scala well enough, so I didn't manage corner cases (empty capture, etc.), but Kotlin leaves you no choice
 2. The Kotlin team removed the `capitalize()` function from the `stdlib` in Kotlin 1.5
 
-Rust
-----
+## Rust
 
 Last but not least in our list, Rust is a compiled language, statically and strongly typed. It was initially designed to produce native binaries. Yet, with the relevant configuration, it also allows to generate . In case you're interested, I've taken link:/focus/start-rust/\[a couple of notes\] while learning the language.
 
@@ -248,14 +231,12 @@ impl StringExt for str {                                           // 2
 println!("{}", "OncE upOn a tImE in thE WEst".to_camel_case());
 ```
 
-
 1. Create the abstraction to hold the function reference. It's known as a *trait* in Rust.
 2. Implement the trait for an existing structure.
 
 Trait implementation has one limitation: our code must declare at least one of either the trait or the structure. You cannot implement an existing trait for an existing structure.
 
-Conclusion
-----------
+## Conclusion
 
 Before writing this article, I thought that interpreted languages would allow extending external APIs, while compiled languages wouldn't, with Kotlin being the exception. After gathering the material, my understanding has changed drastically.
 

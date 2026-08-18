@@ -20,8 +20,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 Artificial intelligence has rapidly expanded across every industry since the inception of ChatGPT. It represents a breakthrough in how we build and use software. Moreover, this breakthrough technology has driven major transformation. At the same time, it has created significant noise and hype.
 
@@ -44,8 +43,6 @@ Meanwhile, the Amazon Bedrock SDK handles the underlying infrastructure capabili
 
 In this article, we focus on Spring AI and its integration with the generally available Amazon Bedrock SDK. Specifically, the Spring AI AgentCore SDK enables developers to build production-ready AI agents. Furthermore, they can run these agents on the highly scalable AgentCore Runtime.  
 ![Spring AI SDK](springaiagentcore-700x394.png "Spring AI SDK")
-
-<br />
 
 ### What is Spring AI and Spring AI SDK?
 
@@ -169,7 +166,6 @@ simple-spring-boot-agent/
 └── pom.xml
 ```
 
-
 **1. Add the below Bill of Materials(BOM) SDK Dependencies and then include `runtime starter` to pom.xml**
 
 ```xml
@@ -199,7 +195,6 @@ simple-spring-boot-agent/
          </dependency>
      </dependencies>
 ```
-
 
 complete `pom.xml`
 
@@ -298,13 +293,11 @@ complete `pom.xml`
 </project>
 ```
 
-
 ### 2. Add the below class
 
 ```java
 public record PromptRequest(String prompt){};
 ```
-
 
 ### 3. Add the below Mathematical Tool class
 
@@ -404,7 +397,6 @@ public class MathematicalTools {
 }
 ```
 
-
 ### 4. Create a Sample Agent
 
 ```java
@@ -454,7 +446,6 @@ public class SampleChatAgent {
 }
 ```
 
-
 * **`PromptRequest`** --- a custom model (likely a Java record) that wraps the user's input prompt.
 * **`MathematicalTools`** --- a custom tool class that exposes functions (like addition, square root, etc.) that the AI can invoke during reasoning.
 * **`AgentCoreInvocation`, `AgentCoreContext`, `AgentCoreHeaders`** --- annotations and utilities from the [spring-ai-community/agent-core](https://github.com/spring-ai-community/spring-ai-agentcore) library, which adds agent orchestration capabilities on top of Spring AI.
@@ -474,7 +465,6 @@ return chatClient.prompt()
                 .content();
 ```
 
-
 If the LLM determines it needs a tool (e.g., to compute something), Spring AI handles the **tool-call loop automatically** behind .call() --- invoking `MathematicalTools`, feeding the result back to the model, and returning the final answer.
 
 ### 5. Configure Amazon Bedrock Properties
@@ -486,7 +476,6 @@ spring.application.name=sample-spring-boot-agent
 spring.ai.bedrock.aws.region=ap-south-1                                
 spring.ai.bedrock.converse.chat.options.model=global.amazon.nova-2-lite-v1:0
 ```
-
 
 ```yaml
 spring:
@@ -501,7 +490,6 @@ spring:
           options:
              model: global.amazon.nova-2-lite-v1:0
 ```
-
 
 ### 6. Verify
 
@@ -519,7 +507,6 @@ curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/j
 curl -X POST http://localhost:8080/invocations \ -H "Content-Type: application/json" \ -d '{"prompt": "What is 14+13?"}'
 ```
 
-
 *This is an AgentCore-compatible AI agent. It requires no custom controllers, no protocol handling, and no health check implementation.*
 
 ### 7. Add Streaming
@@ -533,9 +520,6 @@ Add the *`spring-boot-starter-webflux`* dependency and comment *spring-boot-star
 </dependency>
 ```
 
-
-<br />
-
 To stream responses as they are generated, change the return type to `Flux<String>`. The SDK then automatically switches to Server-Sent Events (SSE) output.
 
 ```java
@@ -547,7 +531,6 @@ public Flux<String> streamingChat(PromptRequest request) {
                 .content();
 }
 ```
-
 
 ![Streaming](Screenshot-2026-04-19-at-4.18.34-PM-1024x513.png) Streaming
 
@@ -570,7 +553,6 @@ ChatClient.prompt()
 Final LLM response returned as String
 ```
 
-
 ***In the next part, I will discuss the inclusion of the remaining AgentCore services like memory, adding built-in tools like browser, code interpreter, and deployment to Amazon Bedrock AgentCore runtime.***
 
 **You can find the complete code [here](https://github.com/bsmahi/simple-spring-boot-agent/)**.
@@ -584,5 +566,3 @@ Final LLM response returned as String
 * **Amazon Bedrock AgentCore:** <https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html>
 * **Spring AI:** <https://spring.io/projects/spring-ai>
 * **AWS Blog Spring AI SDK:** <https://aws.amazon.com/blogs/machine-learning/spring-ai-sdk-for-amazon-bedrock-agentcore-is-now-generally-available/>
-
-<br />

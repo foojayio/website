@@ -38,8 +38,7 @@ In this article, we will walk through how to set up a service that hosts the Spr
 
 Let's dive in!
 
-Architecture
-------------
+## Architecture
 
 We began this microservices project with minimum functionality explained in the [level 1 blog post](https://jmhreif.com/blog/microservices-level1/). In our last post ([level6](https://jmhreif.com/blog/microservices-level6/)), we added a graph database to our microservices system to take advantage of data relationships between books, authors, and reviews.
 
@@ -53,8 +52,7 @@ We haven't incorporated our Neo4j service to the rest of our Docker Compose syst
 
 Until then, our intermediary step is to add the `config-server` service and plug that into our existing `service4` that connects to Neo4j.
 
-Spring Cloud Config
--------------------
+## Spring Cloud Config
 
 The [project overview for Spring Cloud Config](https://spring.io/projects/spring-cloud-config) has a good explanation of design and usage, but I'll briefly put it into my own words here.
 
@@ -62,8 +60,7 @@ Spring Cloud Config gives us a way to externalize configuration, so that individ
 
 Without further ado, let's start coding!
 
-Applications - Spring Cloud Config Server
------------------------------------------
+## Applications - Spring Cloud Config Server
 
 As we have done with our previous services, we will use the Spring Initializr at [start.spring.io](https://start.spring.io/) to set up the outline for our config server application.
 
@@ -81,7 +78,6 @@ The `pom.xml` contains the dependencies and software versions we set up on the S
 server.port=8888
 spring.cloud.config.server.git.uri=${HOME}/Projects/config/microservices-java-config
 ```
-
 
 Just like with our other services, we need to specify a port number for this application to use so that its traffic doesn't conflict with our other services. The default port for Spring Cloud Config server is `8888`, so we will use that. Next, we will use [git](https://git-scm.com/) to version-track our local configuration file, so we need to specify the folder (or public repository URL, if we had that instead) as the value for the second property.
 
@@ -101,13 +97,11 @@ public class ConfigServerApplication {
 }
 ```
 
-
 The `@EnableConfigServer` annotation notifies Spring that this application needs to operate as the config server.
 
 Now we need to add our configuration file that will contain the database credentials!
 
-Storing config values
----------------------
+## Storing config values
 
 We need an externalized place for our configuration values to reside, i.e. a file with our database credentials for config server to retrieve. Most of the tutorials you find on Spring Cloud Config recommend starting with a local config folder containing either a `.properties` or `.yaml` file. I went with the YAML file for this project.
 
@@ -123,7 +117,6 @@ spring:
       password: <insert Neo4j password here>
 ```
 
-
 We will need to fill in the values for our Neo4j AuraDB free instance in place of the dummy URL, database, username, and password shown above. **Note:** Database should be `neo4j`, unless you have specifically used commands to change the default. Then, we need to save the file and check it into to [git](https://git-scm.com/) by running the next statements from the command line.
 
 ```bash
@@ -132,11 +125,9 @@ microservices-java-config % git add
 microservices-java-config % git commit -am "Initial commit"
 ```
 
-
 Let's test our config server application!
 
-Test Config Server
-------------------
+## Test Config Server
 
 Start the application from your IDE or command line. To test, we need to figure out the correct URL to ping. First, we are running the application locally and set the port to `8888`, so the first part of the URL is `localhost:8888`. The rest of the URL is what confused me in most of the tutorials, but once you know what the application is looking for, it isn't as intimidating.
 
@@ -152,8 +143,7 @@ Figure 2. Neo4j config results
 
 Next, we need to plug our client service (`service4`) in to use the config server we just set up.
 
-Service4 - modifications
-------------------------
+## Service4 - modifications
 
 To start, we need to add a dependency to `service4` for the Spring Cloud Config client. Open the `pom.xml` and add the following items:
 
@@ -182,7 +172,6 @@ To start, we need to add a dependency to `service4` for the Spring Cloud Config 
 </dependencyManagement>
 ```
 
-
 On the [third line of the above code](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L18), we add a property for the Spring Cloud Version. This allows us to source this value anywhere it's needed in the pom. In the dependencies section, we need to add the config client dependency ([seventh line](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L34)), making this application a client that will use the config server. Last, but not least, we add a dependency management section ([line twelve](https://github.com/JMHReif/microservices-level7/blob/main/service4/pom.xml#L50)) to handle versioning of Spring Cloud.
 
 Now we need to update the application properties in the `src/main/resources` folder.
@@ -194,15 +183,13 @@ spring.application.name=neo4j-client
 spring.config.import=configserver:http://localhost:8888/
 ```
 
-
 We leave the port property alone, but we can remove the database credential properties because those are being stored in the config server now. The next two properties specify the application name and where the config server is running. Remember that our application name and the name of our config file MUST match. So, that means our `spring.application.name` needs to be `neo4j-client`, as our config file name is `neo4j-client.yaml`. This is also the name that would be referenced between microservices or for service discovery, though we haven't delved into that part of microservices yet. 😉 Our config server is running locally and on the default config server port, so the value of the last property should look familiar.
 
 This actually wraps up all of our changes to the Neo4j service! We don't need to change anything in the `Service4Application.java` class because all of our config values are injected as part of the environment, so everything operates in the background.
 
 Let's test it!
 
-Put it to the test
-------------------
+## Put it to the test
 
 As always, we will kick things off from the bottom to the top. First, ensure the Neo4j AuraDB instance is still running. *\*Note:\* AuraDB free tier pauses automatically after 3 days. You can resume with the `play` icon on the instance.*
 
@@ -223,8 +210,7 @@ Figure 3. Find 1000 reviews
 
 Figure 4. Find reviews by book
 
-Wrapping up!
-------------
+## Wrapping up!
 
 Today, we incorporated the Spring Cloud Config project to manage and provide database credentials to our Neo4j microservice.
 
@@ -241,8 +227,7 @@ There are still a few things that we can do on this topic.
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level7](https://github.com/JMHReif/microservices-level7) repository
 * Github: [Meta repository for all related content](https://github.com/JMHReif/microservices-java)

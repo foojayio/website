@@ -33,8 +33,7 @@ If you are following along, I recommend that you use IntelliJ IDEA Ultimate, how
 
 Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) and see the application. If you enter a name and fruit, they should successfully be persisted in the database. This application is currently running Apache Tomcat 9.0 which uses the `javax` namespace.
 
-Updating your Apache Tomcat version
------------------------------------
+## Updating your Apache Tomcat version
 
 This project uses Docker, so you can update the version of Apache Tomcat from 9 to 10 in your Docker file:
 
@@ -45,7 +44,6 @@ EXPOSE 8080
 CMD ["catalina.sh", "run"]
 ```
 
-
 Now your Docker file will look like this:
 
 ```
@@ -54,7 +52,6 @@ ADD target/MyWebApp.war /usr/local/tomcat/webapps/MyWebApp.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 ```
-
 
 Before we start the migration from `javax` to `jakarta` let's run the project again from the run icon in the gutter of the`docker-compose.yml` file adjacent to services because we want the image to be rebuilt.
 
@@ -67,11 +64,9 @@ You can check the logs for your container to ensure you're running Tomcat 10.0 i
 [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name: Apache Tomcat/10.0.17
 ```
 
-
 Now we're confident that we're using Apache Tomcat 10.0, let's go to the webserver front end and see what happens. In your browser, go to [localhost:8080/MyWebApp](8080/MyWebApp) and try to enter a name and fruit - you will get a 404 error. We're getting this error because Tomcat 9 used Java Servlet 4.0 which uses `javax.*` and Apache Tomcat 10 uses Jakarta Servlet 5.0 which uses `jakarta.*`. Let's fix the problem now!
 
-Updating your dependencies
---------------------------
+## Updating your dependencies
 
 The first thing we need to do is update our dependencies. This project uses Maven so that's the `pom.xml` file. If you're using Gradle in your project, you need to update your `build.gradle` file.
 
@@ -91,7 +86,6 @@ Look for the following dependencies:
 </dependency>
 ```
 
-
 The first step is to replace the dependency for `javax.servlet` with `jakarta.servlet`:
 
 ```
@@ -102,7 +96,6 @@ The first step is to replace the dependency for `javax.servlet` with `jakarta.se
    <scope>provided</scope>
 </dependency>
 ```
-
 
 However, the `org.hibernate` dependency has a transitive dependency on `javax.persistence-api` as well which is part of the old Java Persistence API so this needs to be updated as well. You can see this dependency in the Maven window in IntelliJ IDEA if you expand the Dependencies node. Alternatively, in IntelliJ IDEA Ultimate, you can right-click on the dependency name and select Show Dependencies Popup or **⌥⌘U** (macOS), **Ctrl+Alt+U** (Windows/Linux).
 
@@ -120,7 +113,6 @@ We need to change the version number here:
 </dependency>
 ```
 
-
 To this beta version:
 
 ```
@@ -131,13 +123,11 @@ To this beta version:
 </dependency>
 ```
 
-
 Next, we need to reload our `pom.xml` file with **⇧⌘I** (macOS), or **Ctrl+Shift+O** (Windows/Linux), or click the little Maven icon to reload your project.
 
 Now open your Project window with **⌘1** (macOS) or **Alt+1** (Windows/Linux) and note that your two Java files are underlined in red because they are now in an error state. Let's fix that next.
 
-Using IntelliJ IDEA's migration tool
-------------------------------------
+## Using IntelliJ IDEA's migration tool
 
 One common question you might have at this stage is "why don't I just do a find and replace for `javax` to `jakarta`?" The answer is that not all `javax` packages have been migrated to the `jakarta` namespace. For example, `javax.transaction.xa` package is not using Jakarta.
 
@@ -153,8 +143,7 @@ Press **Do Refactor** . Your Java classes should no longer be in a state of erro
 
 Now you should be able to navigate to [localhost:8080/MyWebApp](8080/MyWebApp) again and see the application. Your error should be gone and your migration is nearly complete.
 
-Updating your persistence file
-------------------------------
+## Updating your persistence file
 
 Now if you do a search across your whole project with **⌘⇧F** or **Crl+Shift+F** for *javax* you will see that it still appears in your `persistence.xml` file.
 
@@ -165,7 +154,6 @@ We need to update the `persistence.xml` file and change the namespace from:
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
 ```
 
-
 to:
 
 ```
@@ -173,7 +161,6 @@ to:
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 ```
-
 
 Now you need to change the property names from `javax` to `jakarta`:
 
@@ -187,7 +174,6 @@ Now you need to change the property names from `javax` to `jakarta`:
 </properties>
 ```
 
-
 to:
 
 ```
@@ -200,15 +186,13 @@ to:
 </properties>
 ```
 
-
 Now let's rebuild our application again with **⌘F9** (macOS), or **Ctrl+F9** (Windows/Linux) and then run it with **Shift** +**F10** \|**⌃R**.
 
 Your application should still be available at [localhost:8080/MyWebApp](8080/MyWebApp).
 
 Your code should now be the same as the `jakarta` branch in the project. You can verify this by navigating to the *src* directory in IntelliJ IDEA then right-click and select Git \> Compare with Branch... and select the `jakarta` branch.
 
-Summary and shortcuts
----------------------
+## Summary and shortcuts
 
 Congratulations, you've successfully migrated the project from the `javax` namespace to `jakarta` using IntelliJ IDEA's migration tool. You also updated your `persistence.xml` file as part of that migration. Here are some helpful links and a summary of the shortcuts we used.
 

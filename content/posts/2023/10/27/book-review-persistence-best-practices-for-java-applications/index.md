@@ -29,8 +29,7 @@ Luckily all these topics, and so many more are covered in the magnificent new bo
  <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102342" style="width:456px;height:563px" width="456" height="563">
 </figure>
 
-About the book
---------------
+## About the book
 
 price: €27.99 for the eBook  
 
@@ -42,8 +41,7 @@ pages: 202
 
 ISBN: 9781837631278
 
-Content
--------
+## Content
 
 The book itself consist of 3 overarching sections:
 
@@ -68,8 +66,7 @@ The book itself consist of 3 overarching sections:
 * modernization strategies \& data integration: anti-patterns \& bad practices to avoid, change data capture, cloud technologies \& offerings
 * the power of documentation, data-domain testing and the importance of proper architecture
 
-My thoughts
------------
+## My thoughts
 
 I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience.
 

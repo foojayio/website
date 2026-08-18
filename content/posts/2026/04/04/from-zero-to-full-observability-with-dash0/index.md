@@ -27,8 +27,7 @@ The setup is divided into two distinct phases. The first phase establishes the "
 
 The entire workflow runs without a local Docker installation. The Docker image is built and pushed via GitHub Actions, and the Kubernetes cluster runs inside a GitHub Codespace.
 
-Before: A Service with No Observability
----------------------------------------
+## Before: A Service with No Observability
 
 ### Part 1: Build the Application
 
@@ -44,7 +43,6 @@ The starting point is a minimal Spring Boot REST API with no observability confi
   </dependency>
 </dependencies>
 ```
-
 
 One dependency, no telemetry --- this is intentional. The absence of any OpenTelemetry or metrics libraries is the purpose of the "before" state.
 
@@ -63,7 +61,6 @@ public class DemoApplication {
     }
 }
 ```
-
 
 This is the standard Spring Boot entry point --- nothing beyond the minimum needed to start the application.
 
@@ -90,7 +87,6 @@ public class OrderController {
 }
 ```
 
-
 Two endpoints with no logging, no instrumentation, and no tracing --- when this service is running, you have no visibility into what it is doing.
 
 **4. Build the app**
@@ -98,7 +94,6 @@ Two endpoints with no logging, no instrumentation, and no tracing --- when this 
 ```
 mvn package -DskipTests
 ```
-
 
 This packages the application into a single executable JAR in the `target/` directory, which gets copied into the Docker image in the next step.
 
@@ -113,7 +108,6 @@ FROM azul-zulu:25-jre
 COPY target/order-service.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
-
 
 **2. Create the GitHub Actions workflow.** Create `.github/workflows/build.yml`. The workflow builds the Maven project, logs in to Docker Hub using repository secrets, and pushes the image. It triggers automatically on every push to main.
 
@@ -154,7 +148,6 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/order-service:latest
 ```
 
-
 **3. Add Docker Hub secrets to GitHub.** Go to the GitHub repo Settings → Secrets and variables → Actions and add:
 
 * `DOCKER_USERNAME` --- your Docker Hub username
@@ -181,7 +174,6 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 kind create cluster
 ```
-
 
 **3. Create the Kubernetes manifest.** The manifest defines a Deployment with one replica and a Service that exposes it on port 80. The image reference points directly to the Docker Hub image pushed in the previous step.
 
@@ -220,7 +212,6 @@ spec:
       targetPort: 8080
 ```
 
-
 **4. Deploy the app.** Apply the manifest and update the image reference to point to the correct Docker Hub image:
 
 ```
@@ -228,7 +219,6 @@ kubectl apply -f deployment.yaml
 kubectl set image deployment/order-service order-service=your-name/order-service:latest
 kubectl get pods
 ```
-
 
 Wait until the pod shows `Running`.
 
@@ -247,16 +237,13 @@ Because we are inside a Codespace rather than running locally, the service is no
 kubectl port-forward svc/order-service 8080:80
 ```
 
-
 **2. Start the traffic loop (terminal 2).** Open a second terminal and run:
 
 ```
 while true; do curl http://localhost:8080/orders; sleep 1; done
 ```
 
-
-After: Adding Observability with the Dash0 Operator
----------------------------------------------------
+## After: Adding Observability with the Dash0 Operator
 
 ### Part 5: Install the Dash0 Operator
 
@@ -272,13 +259,11 @@ helm repo update dash0-operator
 helm install dash0-operator dash0-operator/dash0-operator --namespace dash0-system --create-namespace --set operator.dash0Export.endpoint=ingress.<your-region>.dash0.com:4317 --set operator.dash0Export.token=<your-auth-token>
 ```
 
-
 **2. Verify the operator is running**
 
 ```
 kubectl get pods -n dash0-system
 ```
-
 
 Wait until the operator pod shows `Running`.
 
@@ -309,7 +294,6 @@ spec:
 EOF
 ```
 
-
 **2. Enable monitoring for the namespace.** This is the resource that switches on instrumentation for all workloads in the default namespace. The export configuration must be included directly in the resource.
 
 ```
@@ -328,7 +312,6 @@ spec:
 EOF
 ```
 
-
 **Further Reading:**
 
 * <https://www.dash0.com/docs/dash0/dash0-kubernetes-operator>
@@ -344,7 +327,6 @@ kubectl rollout restart deployment/order-service
 kubectl get pods
 ```
 
-
 Wait until the new pod shows `Running`.
 
 **2. Restart the port-forward (terminal 1).** Kill the existing port-forward with Ctrl+C and restart it:
@@ -352,7 +334,6 @@ Wait until the new pod shows `Running`.
 ```
 kubectl port-forward svc/order-service 8080:80
 ```
-
 
 The curl loop in terminal 2 will resume automatically.
 
@@ -375,5 +356,3 @@ Check the following:
 **Further Reading:**
 
 * <https://www.dash0.com/docs/dash0/monitoring/kubernetes/about-kubernetes>
-
-<br />

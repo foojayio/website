@@ -32,7 +32,6 @@ public sealed class PaymentMethod permits CreditCard, PayPal, Bitcoin {
 }
 ```
 
-
 In this example, PaymentMethod is a sealed class that permits CreditCard, PayPal, and Bitcoin to extend it. A sealed class can permit any number of classes to extend it by specifying them in a comma-separated list after the permits keyword.
 
 There are plenty of other use cases where the sealed class can be used to make our life easy.
@@ -61,7 +60,6 @@ public final class Dog extends Animal {
 }
 ```
 
-
 In this example, Animal is a sealed class that only permits Cat and Dog to extend it.
 
 Any other attempt to extend Animal will result in a compilation error.
@@ -83,7 +81,6 @@ public final class Square implements Shape {
     // Class definition
 }
 ```
-
 
 In this example, Shape is a sealed interface that only permits Circle and Square to implement it.
 
@@ -118,7 +115,6 @@ public class PaymentProcessor {
 }
 ```
 
-
 In this example, PaymentMethod is a sealed class that permits CreditCard, DebitCard, and PayPal to extend it.
 
 The processPayment method in the PaymentProcessor class uses a switch statement with pattern matching to process different payment methods.
@@ -149,7 +145,6 @@ public final class ErrorState extends State {
 }
 ```
 
-
 In this example, State is a sealed class that permits the extend of IdleState, ActiveState, and ErrorState.
 
 The transition method is responsible for transitioning between states based on the input provided.
@@ -173,7 +168,6 @@ public final class QueryException extends DatabaseException {
     // Class definition
 }
 ```
-
 
 In this example, DatabaseException is a sealed class that permits ConnectionException and QueryException to extend it.
 
@@ -213,7 +207,6 @@ public sealed class Person {
 }
 ```
 
-
 In this example, a Person is a sealed class with two subclasses: Child and Adult.
 
 The constructors for Child and Adult are marked as public, but the constructor for Person is marked as private, ensuring all Person instances are created through its subclasses.
@@ -239,7 +232,6 @@ public final class UntrustedCode extends SecureCode {
     // Class definition
 }
 ```
-
 
 In this example, SecureCode is a sealed class that only permits TrustedCode to extend it.
 
@@ -272,7 +264,6 @@ public void drawShape(Shape shape) {
 }
 ```
 
-
 In this example, Shape is a sealed class that permits Circle and Square to extend it.
 
 The drawShape method uses pattern matching to draw the shape, ensuring that all possible subtypes of Shape are covered in the switch statement.
@@ -300,7 +291,6 @@ public final class Orange extends Fruit {
     // Class definition
 }
 ```
-
 
 In this example, Fruit is a sealed class that permits Apple, Banana, and Orange to extend it.
 
@@ -330,7 +320,6 @@ public final class Motorcycle extends Vehicle {
 }
 ```
 
-
 In this example, Vehicle is a sealed class that permits Car, Truck, and Motorcycle to extend it.
 
 By using a sealed class to define the set of possible vehicle types, API providers can ensure that the API contract is well-defined and enforceable.
@@ -347,7 +336,6 @@ public sealed class PaymentMethod {
 }
 ```
 
-
 ```java
 final class CreditCard extends PaymentMethod {
     // Class definition in the same file
@@ -361,7 +349,6 @@ public class StolenCard extends PaymentMethod {
     // Class definition in another file
 }
 ```
-
 
 The `PaymentMethod` class is defined as `sealed`, which means that it cannot be extended beyond the classes defined within the file.
 
@@ -393,7 +380,6 @@ public final class Bird implements Animal {
 }
 ```
 
-
 In this example, Animal is a sealed interface that permits Dog, Cat, and Bird to implement it.
 
 By using sealed classes to define the set of possible animals, developers can ensure that a collection of animals is type-safe and can enforce certain invariants.
@@ -401,7 +387,6 @@ By using sealed classes to define the set of possible animals, developers can en
 ```java
 List<!--? extends Animal--> animals = List.of(new Dog(), new Cat(), new Bird());
 ```
-
 
 In this example, animal is a List of elements that extend the Animal interface.
 
@@ -431,14 +416,11 @@ public final class Bird extends Animal {
 }
 ```
 
-
 In this example, Animal is a sealed class that permits Dog and Cat to extend it.
 
 Because Animal is a sealed class, adding a new subtype, Bird would be a breaking change and would require an API version bump.
 
 This ensures that API changes are compatible with existing code and can help maintain the stability of the codebase.
-
-
 
 Here are a few more concrete and real-life examples of how sealed classes can be used in Java development:
 
@@ -461,7 +443,6 @@ public final class ResponseMessage implements Message {
     // Class definition
 }
 ```
-
 
 In this example, Message is a sealed interface that permits RequestMessage and ResponseMessage to implement it.
 
@@ -486,7 +467,6 @@ public final class ServiceItem implements OrderItem {
     // Class definition
 }
 ```
-
 
 In this example, OrderItem is a sealed interface that permits ProductItem and ServiceItem to implement it.
 
@@ -513,7 +493,6 @@ public final class Admin extends User {
     // Class definition
 }
 ```
-
 
 In this example, User is a sealed class that permits Customer, Employee, and Admin to extend it.
 
@@ -543,7 +522,6 @@ public final class SecurityError extends Error {
 }
 ```
 
-
 In this example, Error is a sealed class that permits NetworkError, DatabaseError, and SecurityError to extend it.
 
 By using sealed classes to define a limited set of error types, developers can ensure that each error type is well-defined and has a limited set of possible subtypes, which can help make the code more maintainable and easier to reason about.
@@ -572,7 +550,6 @@ public final class PutMethod extends HttpMethod {
 }
 ```
 
-
 In this example, HttpMethod is a sealed class that permits GetMethod, PostMethod, and PutMethod to extend it.
 
 By using sealed classes to define a limited set of HTTP methods, developers can ensure that each method is well-defined and has a limited set of possible subtypes.
@@ -598,7 +575,6 @@ public final class LoggingLevel extends ConfigurationParameter {
     // Class definition
 }
 ```
-
 
 In this example, ConfigurationParameter is a sealed class that permits DebugMode and LoggingLevel to extend it.
 
@@ -630,7 +606,6 @@ public final class HibernateStrategy extends DatabaseAccessStrategy {
 }
 ```
 
-
 In this example, DatabaseAccessStrategy is a sealed class that permits JdbcStrategy, JpaStrategy, and HibernateStrategy to extend it.
 
 By using sealed classes to define a limited set of database access strategies, developers can ensure that each strategy is well-defined and has a limited set of possible subtypes, which can help make the code more maintainable and easier to reason about.
@@ -658,7 +633,6 @@ public final class BiometricMethod extends AuthenticationMethod {
     // Class definition
 }
 ```
-
 
 In this example, AuthenticationMethod is a sealed class that permits PasswordMethod, TokenMethod, and BiometricMethod to extend it.
 

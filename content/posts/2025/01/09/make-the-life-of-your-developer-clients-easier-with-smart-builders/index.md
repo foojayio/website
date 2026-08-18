@@ -74,7 +74,6 @@ public class Notification {
 }
 ```
 
-
 Some developers would argue: "We can use the default constructor and setters to set the optional attributes". Let's try to follow this argument:
 
 ```java
@@ -148,7 +147,6 @@ public class Notification {
 }
 ```
 
-
 Analyzing the code above, we can see that the developer must call the setters to set the attributes. The code to create a `Notification` object would be like this:
 
 ```java
@@ -165,7 +163,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 Let's analyze the code above, we can highlight some drawbacks and issues with this approach:
 
@@ -257,7 +254,6 @@ public class Notification {
 }
 ```
 
-
 Let's update the `NotificationProgram` that creates a `Notification` object:
 
 ```java
@@ -271,7 +267,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 It looks like we solved the first issue, right? Well, let's analyze the code again:
 
@@ -357,7 +352,6 @@ public class Notification {
 }
 ```
 
-
 Now, let's update the `NotificationProgram` that creates a `Notification` object:
 
 ```java
@@ -374,7 +368,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 Now, the `Notification` objects are immutable and thread-safe. The developer can instantiate the object with all mandatory and optional attributes in a single line of code. The object will be created in a valid state, and the developer cannot change its state after creation.
 
@@ -404,7 +397,6 @@ public record Notification(
     }
 }
 ```
-
 
 Less code, more readability, and more maintainability. That's the power of Java Records.
 
@@ -447,7 +439,6 @@ public record Notification(
 }
 ```
 
-
 Now developers will be able to create `Notification` objects with only the mandatory attributes. The optional attributes will be set to default values. The `Notification` objects are immutable and thread-safe.
 
 Let's update the `NotificationProgram` that creates a `Notification` object:
@@ -473,7 +464,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 Great! Let's review the issues we had and how we solved them:
 
@@ -544,7 +534,6 @@ public record Notification(
 }
 ```
 
-
 Now, developers can create `Notification` objects using static factory methods. The static factory methods have names that describe the object being returned, making it easier for developers to know which constructor should be used. The `Notification` objects are immutable and thread-safe.
 
 Let's update the `NotificationProgram` that creates a `Notification` object:
@@ -569,7 +558,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 Great! We're improving our code step by step. Maybe it's even good shape for some cases already, but I'm sure that we can do better!
 
@@ -609,7 +597,6 @@ public record Notification(
     }
 }
 ```
-
 
 Behind of scenes, Lombok will generate to you all the builder class for the `Notification` class. At the end, we will have a similar result like below:
 
@@ -688,7 +675,6 @@ public record Notification(
 }
 ```
 
-
 Lombok provides many annotations to generate boilerplate code for you. The `@Builder` annotation generates a builder class for the annotated class. The generated builder class by Lombok has a fluent interface where developers can call in chaining way the methods to set the attributes of the annotated class and a `build()` method to create an instance of the annotated class.
 
 Builders can be implemented in many ways, like using the traditional setter style, but it's commonly implemented following the **Fluent API** design style.
@@ -724,7 +710,6 @@ public class NotificationProgram {
 }
 ```
 
-
 Now, developers can create `Notification` objects using the Builder pattern. The Builder pattern allows developers to construct complex objects step by step, making the object creation more readable and maintainable.
 
 Well, such builder like that may even help some developers to get their life easier, it means, the developers whose are creating the builder actually, but what about the developers whose will go to use the builder?
@@ -742,7 +727,6 @@ public class NotificationProgram {
     }
 }
 ```
-
 
 You may say: "*It is not a big problem! The class will respect their constraints and no invalid instance will be created! It will throw exceptions to the caller!*". Well, it's true but such exceptions will be thrown in runtime only. It's not a good for anyone!
 
@@ -857,7 +841,6 @@ public record Notification(
     }
 }
 ```
-
 
 Now, developers must follow the order of method calls to create a `Notification` object. The `NotificationBuilderWithTitle` class is responsible for setting the `title` attribute. The `NotificationBuilderWithTitleMessage` class is responsible for setting the `message` attribute. The `NotificationBuilderWithTitleMessageRecipient` class is responsible for setting the `recipient` attribute. The `NotificationBuilderWithTitleMessageRecipient` class has a `build()` method to create a `Notification` object. Let's highlight some points:
 
@@ -1028,7 +1011,6 @@ public record Notification(
 }
 ```
 
-
 Now, developer can create `Notification` objects defining the optional attributes in any order. The `NotificationBuilderWithTitleMessageRecipientAndMore` class is responsible for setting the optional attributes. Also, at this point, developers can set the optional attributes or call the `build()` method to create a `Notification` object arbitrarily. Let's highlight some points:
 
 1. **This builder allows developers to set the optional attributes in any order** , which means, developers can create `Notification` objects with the optional attributes in any order;
@@ -1076,7 +1058,6 @@ public class NotificationProgram {
 
 }
 ```
-
 
 This builder implementation go beyond the traditional Builder pattern.  
 

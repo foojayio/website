@@ -69,7 +69,6 @@ public class Person extends SelfDescribingMarshallable {
 }
 ```
 
-
 The full code for the class can be found in the [Chronicle Wire Github repo.](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo.")
 
 The parent type `SelfDescribingMarshallable` contains the necessary functionality to interact with Wire -- it's loosely equivalent to the `java.io.Serializable` tagging interface used with Java serialisation, although it is much more powerful and does not contain security flaws. As the name suggests, a `SelfDescribingMarshallable` object requires no additional facilities to support marshalling and unmarshalling -- such as a schema for XML, or code generator for Protobuf or SBE. Additionally, the interface provides implementations of "core" Java data object methods `equals()`, `hashcode()` and `toString()`.
@@ -82,7 +81,6 @@ Let's set up an instance of Chronicle Wire that will marshall and unmarshall to/
 Wire yWire = Wire.newYamlWireOnHeap();
 ```
 
-
 To create and initialise an instance of the Person class we would write:
 
 ```
@@ -92,7 +90,6 @@ Person p1 = new Person()
        .userName(Base85.INSTANCE.parse("georgeb"));
 System.out.println("p1: " + p1);
 ```
-
 
 We use overloaded methods and a flow style, rather than `get...()` and `set...()` methods, for accessing and mutating properties. Output from the code shows the initialised state of the `Person` object, demonstrating the `toString()` method from the `SelfDescribingMarshallable` parent type:
 
@@ -104,7 +101,6 @@ p1: !Person {
 }
 ```
 
-
 Now we serialise the object to the Wire. As the Wire has been created to use text/YAML, its contents can easily be displayed:
 
 ```
@@ -113,7 +109,6 @@ p1.writeMarshallable(yWire);
 System.out.println(yWire);
 ```
 
-
 We can see the properties serialised appropriately:
 
 ```
@@ -121,7 +116,6 @@ name: George Ball
 timestampNS: 2022-11-11T10:11:54.7071341
 userName: georgeb
 ```
-
 
 We can now create an empty instance of the Person class, populate it by reading back from the Wire, and print it out:
 
@@ -138,7 +132,6 @@ p2: !Person {
 }
 ```
 
-
 The code that demonstrates this can be found in the [Chronicle Wire Github repo](https://github.com/OpenHFT/Chronicle-Wire/blob/ea/src/test/java/net/openhft/chronicle/wire/examples/Person.java "Chronicle Wire Github repo").
 
 ### Method Writers and Readers
@@ -153,7 +146,6 @@ timestampNS: 2022-11-11T10:11:54.7071341
 userName: georgeb
 ```
 
-
 If we generalise this further, we have a means of encoding and sending, using Wire, a request to invoke a method with a supplied argument. Due to the unidirectional nature of our message transport, these methods have to be void, i.e. they cannot return a value. To illustrate this, consider an Interface that contains definitions of operations to be performed on `Person` objects. The implementation(s) of the method(s) is not provided at this time:
 
 ```
@@ -161,7 +153,6 @@ public interface PersonOps {
    void addPerson(Person p);
 }
 ```
-
 
 Only one method is specified here, for simplicity. It's intended to take a single argument which is of type `Person`, and add it to some collection. Based on the previous example, we can expect an instance of this type to be encoded to a Wire as
 
@@ -173,7 +164,6 @@ addPerson: {
 }
 ```
 
-
 and decoded to a form that can be considered a method invocation:
 
 ```
@@ -184,7 +174,6 @@ personOps.addPerson(
                "userName: alices\n"));
 ```
 
-
 Chronicle Wire offers the capability to encode and decode method invocations just like this. The sender uses a type called `MethodWriter`, and the receiver uses a type called `MethodReader`.
 
 As an example, for the `PersonOps` type shown above, we can create a method writer:
@@ -192,7 +181,6 @@ As an example, for the `PersonOps` type shown above, we can create a method writ
 ```
 final PersonOps personOps = yWire.methodWriter(PersonOps.class);
 ```
-
 
 The result of this method call is an instance of the interface type that has a stub implementation of the method `addPerson()`, which encodes the request to the Wire. We can invoke this method as
 
@@ -204,7 +192,6 @@ personOps.addPerson(new Person()
        .timestampNS(CLOCK.currentTimeNanos())
        .userName(Base85.INSTANCE.parse("bobs")));
 ```
-
 
 and if we look at the Wire, we will see the invocation request encoded as a message:
 
@@ -229,7 +216,6 @@ addPerson: {
 ...
 ```
 
-
 At the receiving side, we can create a `MethodReader` object, providing an implementation of the method that is to be invoked upon decoding:
 
 ```
@@ -237,14 +223,12 @@ MethodReader reader = yWire.methodReader(
        (PersonOps) p -> System.out.println("added " + p));
 ```
 
-
 When the message is read and decoded, the method will be called:
 
 ```
 for (int i = 0; i < 3; i++)
    reader.readOne();
 ```
-
 
 As the method is invoked, we will see the output from the call to `System.out.println()`:
 
@@ -267,7 +251,6 @@ added !Person {
   userName: bobj
 }
 ```
-
 
 This is potentially very powerful, as it gives us a highly flexible and efficient means of encoding events or messages, and associating them with handlers. All of the flexibility of Wire encoding is available -- text formats, or highly efficient binary formats -- as are the many different types of underlying transports with which Wire operates.
 
@@ -325,7 +308,6 @@ public class Channel1ReadWrite {
 }
 ```
 
-
 1. Critical to the setup of the channel is a URL string. Currently  
    only TCP/IP is available as a transport but more can and will be supported in due course. The semantics of this string as understood by Chronicle Channel setup is summarised in the following table:
 
@@ -351,7 +333,6 @@ says.say("Well hello there");
 …
 ```
 
-
 4. We can then use Chronicle Wire to read the echoed event back from the channel and display its details.
 
 When this simple example is run, we can see the output:
@@ -360,7 +341,6 @@ When this simple example is run, we can see the output:
 [main] INFO run.chronicle.wire.channel.demo1.Channel1 - Channel set up on port: 3334
 [main] INFO run.chronicle.wire.channel.demo1.Channel1 - >>>> say: Well hello there
 ```
-
 
 #### Example 2: Separate Client and Server
 
@@ -376,7 +356,6 @@ public class ChannelService {
    }
 }
 ```
-
 
 Notice that this is now very short, thanks to our having used the utility class `ChronicleGatewayMain`, which encapsulates the functionality of setting up the server-side (a channel acceptor), removing boilerplate code and using default settings as much as possible.
 
@@ -405,7 +384,6 @@ public class ChannelClient {
 }
 ```
 
-
 1. The URL string contains a hostname and port number, which informs the channel creation logic that we are initiating the setup of the channel from the client side, providing the full address of the acceptor for the service.
 2. The Context is set up as an initiator/client, because of the URL string format. When creating a channel from an initiator/client context, we specify which handler to be used at the receiving end. This forms part of the requested channel specification, which is sent to the service during the setup of the channel.
 
@@ -419,7 +397,6 @@ When both client and server applications are run the output is the same as above
 [main] INFO run.chronicle.wire.channel.demo2.ChannelClient - Channel set up on port: 4441
 [main] INFO run.chronicle.wire.channel.demo2.ChannelClient - >>>> say: Well hello there
 ```
-
 
 #### Example 3: Simple Request/Response Interaction
 
@@ -444,7 +421,6 @@ public interface PersonOps {
 }
 ```
 
-
 The `Person` type is as defined earlier.
 
 Messaging in Chronicle is unidirectional, so service API methods are void. We therefore need to define a second interface that defines the message for used for the response:
@@ -455,7 +431,6 @@ public interface ResponseSender {
 }
 ```
 
-
 The `ReqStatus` type indicates the success or otherwise of the method, and is defined as:
 
 ```
@@ -464,7 +439,6 @@ public enum ReqStatus {
    ERROR
 }
 ```
-
 
 The two interfaces are wired together to form a "handler" for incoming requests:
 
@@ -484,7 +458,6 @@ public class PersonOpsProcessor implements PersonOpsHandler {
    }
 }
 ```
-
 
 1. This field will hold a reference to the output for this service to which response messages are posted.
 2. In this example, the ResponseSender is injected using a setter method, this could also be done through a constructor.
@@ -520,7 +493,6 @@ public class PersonSvcHandler extends AbstractHandler<PersonSvcHandler> {   // =
 }
 ```
 
-
 1. The base class is where generic platform functionality is implemented. Our class will supply the necessary specifics for our service.
 2. A reference to the implementation of the handler methods.
 3. The `PersonOpsHandler` implementation is injected into the handler through the constructor.
@@ -542,7 +514,6 @@ public class PersonSvcMain {
    }
 }
 ```
-
 
 **The Client**   
 
@@ -578,7 +549,6 @@ public class PersonClient {
    }
 }
 ```
-
 
 1. The URL is by default configured with the port number that was configured in the server.
 2. The channel is created and an instance of our custom handler injected.

@@ -48,7 +48,6 @@ public class Gadget implements Serializable {
 }
 ```
 
-
 This gadget class overrides the default `readObject` method. As a result, every time an Object of class Gadget gets deserialized, the `Runnable` object command is executed. When a command class looks something like the example below, it is easy to manipulate this serialized object and perform code injection.
 
 ```java
@@ -70,7 +69,6 @@ public class Command implements Runnable, Serializable {
    }
 ```
 
-
 Also, note that if an application accepts serialized objects, the object is deserialized first before it is cast to the desired type. This means that even if casting fails, deserialization is already completed and the `readObject()` method is executed.
 
 ```java
@@ -78,7 +76,6 @@ FileInputStream fileIn = new FileInputStream("Gadget.ser");
 ObjectInputStream in = new ObjectInputStream(fileIn);
 var obj = (ValueObject)in.readObject();
 ```
-
 
 #### Gadget Chain Deserialization Attack
 
@@ -89,7 +86,6 @@ In our example:
 ```
 Gadget -> readObject() -> command.run() -> Runtime.getRuntime().exec()
 ```
-
 
 For a more real life example, take a look at the implementation of `java.util.HashMap`. This class has a custom implementation of the `readObject()` method that triggers every key's `hashcode()` function.
 
@@ -109,7 +105,6 @@ private final void readObject(ObjectInputStream in) throws java.io.IOException {
 }
 ```
 
-
 If your application relies on serialized objects, you can consider inspecting your `ObjectInputStream` before deserializing. A library that can help you with this is the [Apache Commons IO](https://commons.apache.org/proper/commons-io/) library. This library provides a `ValidatedObjectInputStream` where you can explicitly allow the objects you want to deserialize. Now you prevent that unexpected types are deserialized at all.
 
 ```java
@@ -118,7 +113,6 @@ ValidatingObjectInputStream in = new ValidatingObjectInputStream(fileIn);
 in.accept(ValueObject.class);
 var obj = (ValueObject)in.readObject();
 ```
-
 
 A tool like [ysoserial](https://github.com/frohoff/ysoserial) is also extremely useful in finding Java deserialize vulnerabilities in your code. It is a tool that generates payload to discover gadget chains in common Java libraries that can, under the right conditions, exploit Java applications performing unsafe deserialization of objects.
 

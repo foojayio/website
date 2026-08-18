@@ -28,8 +28,7 @@ frozen: false
 
 For a personal pet project, I started experimenting with JavaFX and Kotlin to create a user interface with a lot of Java / Kotlin background processing. As I knew there is a book available on this specific topic, Apress was so kind to send me a review copy of [Frontend Development with JavaFX and Kotlin: Build State-of-the-Art Kotlin GUI Applications](https://www.amazon.nl/Frontend-Development-JavaFX-Kotlin-State/dp/1484297164) by Peter Späth (152 pages, 48€ on paper, 35.5€ for ebook on Amazon.nl).
 
-Content
--------
+## Content
 
 I received both a PDF and paper version of the book. The biggest difference is full color (PDF) versus black-white, which is unfortunate for a book about user interfaces with IDE and other screenshots.
 
@@ -50,7 +49,6 @@ btn.setOnAction(new EventHandler<ActionEvent>() {
 });
 ```
 
-
 In Kotlin, the same can be achieved with:
 
 ```
@@ -61,7 +59,6 @@ val btn = Button().apply {
     }
 }
 ```
-
 
 That's a reduction from 222 to 120 characters!
 
@@ -111,13 +108,11 @@ A user interface always needs to be "snappy" and react immediately to any user i
 
 A short starting point is given about Kotlin Coroutines, which provide a new concurrent programming approach. This is explained with a quick example in which intermediate results of an ever-running PI calculator are displayed.
 
-Sources of the Examples
------------------------
+## Sources of the Examples
 
 In a few places, a link to the sources of the code examples in the book is given, but these seem to be wrong (there is even a remaining "TODO" about this on page 18). The book's sources can be found here: [github.com/Apress/Frontend-Development-with-JavaFX-and-Kotlin](https://github.com/Apress/Frontend-Development-with-JavaFX-and-Kotlin).
 
-Conclusion
-----------
+## Conclusion
 
 I'm probably a bit old-fashioned, but I still prefer paper books. I'm always disappointed that publishers still print this kind of book in black and white. Screenshots and effect examples are so much clearer when you check the ebook version, which has these images in full color. As there are only a few of these images in this book, I can't understand why they were not printed in color.
 

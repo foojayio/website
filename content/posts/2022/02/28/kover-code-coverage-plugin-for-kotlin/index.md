@@ -30,8 +30,7 @@ If you're a JVM developer, you're probably used to those HTML/XML report files s
 
 Let's give Kover a spin and see what we can do with it! For this experiment, I'll be using the Kotlin flavor of the very famous [Spring Pet Clinic](https://github.com/jlengrand/spring-petclinic-kotlin/actions).
 
-Installing the plugin
----------------------
+## Installing the plugin
 
 The setup to add the plugin to you project can hardly be simpler if you use gradle. You have to add the Kover plugin to your `build.gradle(.kts)` file.
 
@@ -42,7 +41,6 @@ plugins {
     ...
 }
 ```
-
 
 Once that is done, you will have access to several new gradle tasks, which you can find in the verification section
 
@@ -58,15 +56,13 @@ koverVerify - Verifies code coverage metrics based on specified rules.
 koverXmlReport - Generates code coverage XML report for all module's test tasks.
 ```
 
-
 Running `./gradlew koverReport` will generate coverage files in XML and HTML format, in the same way you'd be doing it using JaCoCo. After running the task, you'll find your new reports in `build/reports/kover`. Opening up `html/index.html` will give you information in a human readable format.
 
 This is how the report look like when running the task on the spring pet clinic project :
 
 ![An HTML report with total coverage, and coverage breakdown per package](kover1-700x152.png)
 
-About the Kover gradle tasks
-----------------------------
+## About the Kover gradle tasks
 
 As we can see by using the `taskinfo` gradle [plugin](https://plugins.gradle.org/plugin/org.barfuin.gradle.taskinfo) (which is used to see the relations between gradle tasks), there is no need to specifically run the kover tasks because they are transitively called by other tasks already.
 
@@ -86,7 +82,6 @@ BUILD SUCCESSFUL in 826ms
 1 actionable task: 1 executed
 ```
 
-
 Relations between gradle tasks, and kover tasks being run automatically when building the project  
 
 Of course, this is something we may not want, for example to avoid slowing down the build for large projects (or as we'll see later to avoid the build form failing). We can skip those targets when build like this :
@@ -95,9 +90,7 @@ Of course, this is something we may not want, for example to avoid slowing down 
 ./gradlew build -x koverVerify -x koverReport # skipping koverReport and koverVerify when building the project
 ```
 
-
-A look at KoverVerify
----------------------
+## A look at KoverVerify
 
 One of the nice goodies that I really like from Kover is the `koverVerify` task.
 
@@ -116,13 +109,11 @@ tasks.koverVerify {
 }
 ```
 
-
 This basically tells `koverVerify` to make the build fail in case the code coverage of the project goes under 98%. Whether or not setting hard values is a discussion for another day, but at least there is a simple way to go about it.
 
 In case you rather want to look into trends ( this new pull requests lowers the code coverage), then you'll have to rely on external tools like [CodeCov](https://codecov.io/). That's what we'll look into now.
 
-Uploading Coverage information
-------------------------------
+## Uploading Coverage information
 
 Having code coverage in your project is nice by itself, but seeing trends over time and using that information as part of your workflow is much more interesting.
 
@@ -161,7 +152,6 @@ jobs:
       run: ./gradlew koverVerify
 ```
 
-
 Not much to say here. I am setting up a typical build for a gradle project, the other thing I am doing is run the `koverVerify` task at the end.
 
 Now for the actual build action file:
@@ -195,7 +185,6 @@ jobs:
       with:
         files: build/reports/kover/report.xml
 ```
-
 
 Again, not very much happening here. A couple of noticeable things though :
 
@@ -232,15 +221,13 @@ The IntelliJ website has a whole page dedicated to code coverage so I'm not goin
 
 The good thing to know though is that when running code coverage straight from IntelliJ, well by definition it isn't part of the build and it runs only on your system. But there (to my knowledge) also isn't an easy way to set a set of rules for success/failure.
 
-Why not run JaCoCo?
--------------------
+## Why not run JaCoCo?
 
 Some folks might wonder why Kover is actually needed. After all, Kotlin runs on the JVM and you could run straight JaCoCo on your Kotlin projects before. Well, JetBrains has a video that explains it better than I can [in this video](https://youtu.be/jNu5LY9HIbw?t=215), but in short the support for Kotlin specific feature is subpar when running the tool on bytecode.
 
 Anyone that has tried to run static code analysis on bytecode knows what I'm talking about I think :).
 
-Final words
------------
+## Final words
 
 In short I'm super happy that this 1.6 release doesn't only focus on the ecosystem but also the tooling. Having a dedicated code coverage tool makes a lot of sense for Kotlin and I'm sure it will fill a gap in a lot of teams.
 

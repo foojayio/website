@@ -54,8 +54,7 @@ The UpgradeSpringBoot_3_2 recipe combines multiple recipes that fulfill our requ
 6. Enabling [Virtual Threads](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html#GUID-DC4306FC-D6C1-4BCC-AECE-48C32C1A8DAA "Virtual") on Java21
 7. Switching to a more up-to-date qualifiedTypeName, replacing the older version
 
-Usage of Recipes
-----------------
+## Usage of Recipes
 
 I have used it for Maven projects, and I have employed this approach to accomplish it.
 
@@ -76,14 +75,12 @@ I have used it for Maven projects, and I have employed this approach to accompli
 </plugin>
 ```
 
-
 ### **2. Under the activeRecipes tag, please add the following UpgradeSpringBoot_3_2 recipe**
 
 ```
 <recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
 <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
 ```
-
 
 ### 3. And the above recipes can be activated by adding the following dependency
 
@@ -101,7 +98,6 @@ I have used it for Maven projects, and I have employed this approach to accompli
  </dependency>
 </dependencies>
 ```
-
 
 ### **4. Finally configuration would be**
 
@@ -137,7 +133,6 @@ I have used it for Maven projects, and I have employed this approach to accompli
 </project>
 ```
 
-
 ### **5. Perform the dryRun**
 
 Performing a `rewrite:dryRun` and verifying the generated file rewrite.patch under the target/rewrite folder is considered the recommended approach.
@@ -145,7 +140,6 @@ Performing a `rewrite:dryRun` and verifying the generated file rewrite.patch und
 ```
 mvn rewrite:dryRun
 ```
-
 
 <https://github.com/bsmahi/migratespring/blob/master/target/rewrite/rewrite.patch>
 
@@ -165,9 +159,7 @@ After gaining confidence in using the dryRun feature, you should proceed to exec
 mvn rewrite:run
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In summary, OpenRewrite recipes will reduce the time required for framework migration. Ultimately, numerous enterprise organizations need to consider cost optimization as a crucial factor.
 
@@ -176,7 +168,3 @@ As usual, the complete code available [over on Github](https://github.com/bsmahi
 ### Reference
 
 <https://docs.openrewrite.org/>
-
-<br />
-
-<br />

@@ -47,7 +47,6 @@ if (selectionArrowEnabled) { setGraphic(selectionArrow); }
 setContentDisplay(ContentDisplay.RIGHT);
 ```
 
-
 To the added Region named selectionArrow I've added the style class named "selection-arrow".
 
 Now let's take a look at the CSS code that is involved here:
@@ -73,7 +72,6 @@ Now let's take a look at the CSS code that is involved here:
     -fx-background-insets: -1 0 -1 0, 0 0 0 2.5;
 }
 ```
-
 
 So first we add a simple svg shape (the triangle) to the Region (.selection-arrow) which will be filled with the transparent color to hide it as default. We also shift the path 4px to the right.
 
@@ -122,7 +120,6 @@ Some of you (probably the ones working on Mac) might already wonder why JDK Butl
 ```java
 stage.initStyle(StageStyle.TRANSPARENT);
 ```
-
 
 The thing you have to keep in mind is that, if you set the stage style to transparent, you also lose the ability to resize and move the window. So that's another thing you have to take care of on your own. Lucky us because there are solutions to handle this, [in the tools package of JDK Butler](https://github.com/HanSolo/jdkbutler/blob/main/src/main/java/eu/hansolo/fx/jdkbutler/tools/ResizeHelper.java) you will find a class called ResizeHelper which has a method called addResizeListener(). You simply call this method and pass your stage object to it and resizing is done. 🙂 The window dragging can simply be realized by adding a listener to the MousePressed and MouseDragged events on the header.
 

@@ -8,8 +8,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/)
 
 **Have fun, experiment, and extend and break the examples!**   
@@ -21,10 +19,6 @@ And discover one of the many posts here on Foojay.io or the tutorials on the web
 * [Learn more from the Foojay blogs](https://foojay.io/today/category/java-beginner/)
 * [Learn more from online tutorials](https://foojay.io/java-quick-start/other-tutorials/)
 
-
-
 {{< youtube c0lr979nTT4 >}}
-
-
 
 [\<\< Using Streams](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams/)

@@ -31,8 +31,7 @@ I reached out to several suppliers to see if I could get evaluation copies, and 
 
 {{< youtube jCOv1gXSzCA >}}
 
-Unboxing the LattePanda IOTA
-----------------------------
+## Unboxing the LattePanda IOTA
 
 The box contained multiple smaller boxes, but the most important one was the LattePanda IOTA board itself, based on an Intel Twin Lake N150 quad-core processor (up to 3.6GHz). It has a clear warning on the packaging: **"Do not operate without a heatsink"**. This thing will definitely get hot if you ignore that warning I guess 😉
 
@@ -56,13 +55,11 @@ In the same box, I also received:
 
 The cooling fan has a nice logo and excellent build quality. The PoE shield connects directly to a new network connector on the board, unlike Raspberry Pi expansion boards that use the Pi's existing network connection.
 
-Assembly
---------
+## Assembly
 
 Following the documentation, I applied thermal paste to the processor, attached the cooling fan, and connected the M2 expansion board.
 
-Setting Up The Board
---------------------
+## Setting Up The Board
 
 ### First Boot: Windows Pre-installed
 
@@ -90,7 +87,6 @@ Using the second option, `curl` downloads and executes the script for non-Raspbe
 curl -sL https://raw.githubusercontent.com/Pi4J/pi4j-os/main/script/prepare-for-java-non-rpi.sh | bash
 ```
 
-
 This performs:
 
 * System update
@@ -105,8 +101,7 @@ I also installed **Visual Studio Code**, the preferred Java editor for this kind
 * Extension Pack for Java: Installs many tools for Java development
 * JBang: To execute JBang code directly from VS Code
 
-Testing Java, JavaFX, and Pi4J
-------------------------------
+## Testing Java, JavaFX, and Pi4J
 
 I cloned the [Pi4J JBang examples project](https://github.com/Pi4J/pi4j-jbang) and opened it in Visual Studio Code, to execute code in an easy way.
 
@@ -133,8 +128,7 @@ This is something I'll dive into further and post follow-up videos about what ca
 
 With `htop`, I checked the CPU usage. Compared to Windows using 100% CPU, we have here in an idle state almost nothing. There's a lot of room for applications we can run on this board. Great!!!
 
-Conclusion
-----------
+## Conclusion
 
 This was the first quick test, and it only took me about an hour to unbox everything, assemble it, and record this. Very promising results:
 

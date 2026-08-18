@@ -33,8 +33,7 @@ We will try to keep the details short on data loading, so that we can focus on t
 
 Without further ado, let's get started!
 
-Architecture
-------------
+## Architecture
 
 The first microservices architecture we started with in the [level 1 version](https://jmhreif.com/blog/microservices-level1/) of this project comprised of two Spring Boot applications trading a single message string between them. In the next two levels, we added an embedded and then a separate MongoDB database with imported book data set for the applications to host and call.
 
@@ -46,8 +45,7 @@ Here is the updated architecture:
 
 We also have a few changes in services 1 and 2 due to switching data sets in the database. A couple of field names are different, and the data has more information. While we won't spend a lot of time on that, the new data set is a trimmed-down subset of the [UCSD Book Graph](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home?authuser=0).
 
-New data load
--------------
+## New data load
 
 The above-mentioned UCSD Book Graph data set we are using is very thorough and diverse, which makes it great for larger projects.
 
@@ -59,8 +57,7 @@ Once the data was in, I ran a couple queries to verify the format looked as I ex
 
 *\*Note:\* For more info about trimming the data set for this project, check out my [blog post on picking data cleaning tools](https://jmhreif.com/blog/data-cleaning-goodreads/). Detailed steps on importing the data to the database are provided in the [Github project's docker folder](https://github.com/JMHReif/microservices-level4/tree/main/docker-mongodb).*
 
-Applications - Service 1
-------------------------
+## Applications - Service 1
 
 Since we are adding a separate service to interact with a different entity (author vs. book), the only changes needed for `service1` are to align properties with the new data set.
 
@@ -69,7 +66,6 @@ The `pom.xml` file does not need any updates, as we are not changing the technol
 ```
 spring.data.mongodb.database=goodreads
 ```
-
 
 Changes in the application class code will also be very few. Let's take a look at that next.
 
@@ -90,13 +86,11 @@ class Book {
 }
 ```
 
-
 If you are looking at the [previous version of the code](https://github.com/JMHReif/microservices-level3/blob/main/service1/src/main/java/com/jmhreif/service1/Service1Application.java), we have added a couple more fields and removed the `authors` field. Since authors are now a separate entity (and database collection), this field will end up in our new service.
 
 With those changes to the data domain, let's see what changes to `service2` entail.
 
-Applications - Service 2
-------------------------
+## Applications - Service 2
 
 There are no changes to the dependencies, properties, or other configuration pieces of the application, so we can skip straight to the application class.
 
@@ -113,11 +107,9 @@ class Book {
 }
 ```
 
-
 On to the new service for the book authors!
 
-Applications - Service 3
-------------------------
+## Applications - Service 3
 
 This will be the real core of this step in the microservices project. We are adding a separate service to manage and interact with author data. The code will look very similar to service1 for books because we are essentially creating the same functionality, except for author objects.
 
@@ -145,7 +137,6 @@ spring.data.mongodb.uri=mongodb://mongoadmin:Testing123@localhost:27017
 spring.data.mongodb.database=goodreads
 ```
 
-
 On to the code!
 
 ### Service 3 - project code
@@ -165,7 +156,6 @@ class Author {
 }
 ```
 
-
 The `@Data` and `@Document` annotations create our getter and setter methods for the class fields and map the class to document objects in the database, respectively. Then, we have our `@Id` annotation followed by the related id field for the class, along with other fields we want to capture about the author below that.
 
 In the [`AuthorRepository` interface](https://github.com/JMHReif/microservices-level4/blob/main/service3/src/main/java/com/jmhreif/service3/Service3Application.java#L34), we extend the `ReactiveCrudRepository`, just like we did in service1. We don't define any methods here because (for now) we are sticking with the default ones provided out-of-the-box in Spring Data.
@@ -184,7 +174,6 @@ class AuthorController {
 }
 ```
 
-
 We annotate this class as a rest controller using `@RestController` and `@RequestMapping` and define the base endpoint as `/db`, just like in service1. On [line 5 of the controller class](https://github.com/JMHReif/microservices-level4/blob/main/service3/src/main/java/com/jmhreif/service3/Service3Application.java#L28), we inject the `AuthorRepository` interface, so we can access the methods for the database.
 
 Next, we set up a nested endpoint of `/authors` that will be mapped to the `getAuthors()` method. This method returns a `Flux` (one or more objects) of authors and calls the author repository's built-in `findAll()` method, retrieving all authors in the database.
@@ -193,8 +182,7 @@ Moving to the `Service3Application` class, no changes are needed. It already inc
 
 Let's test all the services together!
 
-Put it to the test
-------------------
+## Put it to the test
 
 As usual, we will spin up our project from top to bottom, starting with the database in the Docker container. Running `docker ps` will show us whether the container is running. If not started, use `docker start mongoBooks` to kick it off.
 
@@ -210,8 +198,7 @@ And here is the resulting output from authors api results from service3!
 
 ![microservices lvl4 results](microservices-lvl4-results.png)
 
-Wrapping up!
-------------
+## Wrapping up!
 
 In this post, we took another big leap by adding a separate, new service that hosts a REST API for authors in the database.
 
@@ -227,8 +214,7 @@ We ran and tested all of these changes together by starting all three of our app
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * Github: [microservices-level4](https://github.com/JMHReif/microservices-level4) repository
 * Previous blog posts: [Microservices Level 1](https://jmhreif.com/blog/microservices-level1/), [Microservices Level 2](https://jmhreif.com/blog/microservices-level2/), [Microservices Level 3](https://jmhreif.com/blog/microservices-level3/)

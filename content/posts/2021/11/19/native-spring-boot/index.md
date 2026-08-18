@@ -50,8 +50,7 @@ For that, I'll create a Kotlin-based application that can query the Marvel API u
 
 This post is dedicated to explaining the application and Spring Boot.
 
-The Marvel API
---------------
+## The Marvel API
 
 Marvel offers a [REST API](https://developer.marvel.com/docs) to query their data. It requires the generation of an API key **and** a private key.
 
@@ -65,17 +64,13 @@ To authenticate, one needs to pass the following as query parameters:
 curl http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150
 ```
 
-
 For more detailed information, please refer to the [documentation](https://developer.marvel.com/documentation/authorization).
 
-Creating a new project
-----------------------
+## Creating a new project
 
 The Spring team was the first to offer a Web UI to configure one's project, the [Spring Initializr](https://start.spring.io/).
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-50718" src="spring-initializr-700x331.jpg" alt="" width="700" height="331">
-
-<br />
 
 With it, you can configure the following parameters:
 
@@ -89,12 +84,9 @@ Additionally, the application also offers a REST API to use the CLI and automate
 
 <img decoding="async" class="aligncenter size-medium wp-image-50719" src="spring-intellij-689x510.jpg" alt="" width="689" height="510">
 
-<br />
-
 Finally, while it's hosted, the underlying code is [available on GitHub](https://github.com/spring-io/initializr) under the Apache v2 license so that you can clone and configure it. It's designed with extensibility in mind to allow for upgrades.
 
-Bean configuration
-------------------
+## Bean configuration
 
 I've already written a [dedicated post](https://blog.frankel.ch/multiple-ways-configure-spring/) on the different ways one can create beans in Spring.
 
@@ -111,7 +103,6 @@ class MarvelConfig {
 }
 ```
 
-
 Spring will automatically discover this class at startup time thanks to the `@SpringBootApplication` annotation, and instantiate the beans:
 
 ```kotlin
@@ -119,9 +110,7 @@ Spring will automatically discover this class at startup time thanks to the `@Sp
 class BootNativeApplication
 ```
 
-
-Controller configuration
-------------------------
+## Controller configuration
 
 Spring was the first to introduce the annotation-based controller configuration on top of the Servlet API. Since then, there has been some pushback against annotations. For that reason, Spring introduced declarative routes. Kotlin makes it even more pleasant with the Route DSL:
 
@@ -132,7 +121,6 @@ fun routes() = router {
     }
 }
 ```
-
 
 We also need to register the router as a bean:
 
@@ -150,9 +138,7 @@ class MarvelConfig {
 }
 ```
 
-
-Non-blocking HTTP client
-------------------------
+## Non-blocking HTTP client
 
 For ages, Spring has offered a *blocking* HTTP client in the form of `RestTemplate` as part of Web MVC. With its version 5, Spring introduced WebFlux, the reactive counterpart to Web MVC. WebFlux builds on top of Project Reactor, which itself builds upon Reactive Streams. You're probably familiar with Project Reactor's foundation primitives:
 
@@ -175,7 +161,6 @@ fun routes() = router {
 }
 ```
 
-
 We also want to get some parameters and propagate them further. Among all offered by the Marvel API, I chose to expose three: `limit`, `offset` and `orderBy`.
 
 The `GET` function accepts a `(ServerRequest) -> ServerResponse` as its second parameter. `ServerRequest` offers the `queryParam(String)` to check the existence of a query parameter. It returns a Java `Optional`. On the other side, `UriBuilder` allows setting query parameters with the `queryParam(String, String)` function.
@@ -191,7 +176,6 @@ fun UriBuilder.queryParamsWith(request: ServerRequest) = apply {
     }
 }
 ```
-
 
 1. For each of the parameters
 2. If it's present in the request
@@ -215,9 +199,7 @@ fun routes(client: WebClient, props: MarvelProperties, digest: MessageDigest) = 
 }
 ```
 
-
-Parameterization
-----------------
+## Parameterization
 
 The next step is to parameterize the application: the Marvel API requires us to authenticate, and we don't want to hardcode our credentials. Also, for testing purposes, we want to change the URL of the server we send request to quickly.
 
@@ -231,7 +213,6 @@ app:
     server-url: https://gateway.marvel.com:443
 ```
 
-
 To use parameters in the application, we also have several choices. One is to annotate fields with `@Value` and let Spring inject the values at runtime. Alternatively, we can group them in a dedicated class (or several) and let Spring do the binding again. I believe unless you've only a single value, a property class is an excellent way to go.
 
 ```kotlin
@@ -244,13 +225,11 @@ data class MarvelProperties(
 )
 ```
 
-
 1. Manage the prefix to read from
 2. Integrate with Kotlin data class
 3. Spring is lenient and allows several cases: kebab-, snake- or camel-case
 
-Testing
--------
+## Testing
 
 The size of the codebase doesn't lend itself to a lot of testing, especially unit testing. However, we can add an integration test that makes sure that the response from the API is unmarshalled to a class and marshalled back again from the application. In tests, we want to avoid relying on third-party infrastructure: a test shouldn't fail because a dependency out of our control fails.
 
@@ -266,7 +245,6 @@ For integration tests, we can use the `@SpringBootTest` annotation on the class:
 )
 class BootNativeApplicationTests
 ```
-
 
 1. Start the application on a random port to avoid failure because of a port conflict
 2. `MarvelProperties` requires the parameter, but it's unused for testing. We pass anything as long as the parameter exists.
@@ -285,7 +263,6 @@ class BootNativeApplicationTests {
         )
 }
 ```
-
 
 1. Integrate with Testcontainers
 2. In Java, we need to have a `static` member.  
@@ -315,7 +292,6 @@ companion object {
 }
 ```
 
-
 1. Required for Java compatibility
 2. Magic!
 3. Spring Test injects it at runtime
@@ -343,7 +319,6 @@ fun `should deserialize JSON payload from server and serialize it back again`() 
     // Test code
 }
 ```
-
 
 1. Kotlin allows having descriptive text for test method names
 2. Create the stub
@@ -374,7 +349,6 @@ class BootNativeApplicationTests {
 }
 ```
 
-
 1. Spring Test injects `WebTestClient` for you
 2. Assertions on the response
 
@@ -395,11 +369,9 @@ class TestConfigInitializer : ApplicationContextInitializer<GenericApplicationCo
 class BootNativeApplicationTests {
 ```
 
-
 1. Reference the initialization class
 
-Docker and GraalVM integration
-------------------------------
+## Docker and GraalVM integration
 
 NOTE: This section assumes you're already familiar with GraalVM native.
 
@@ -434,7 +406,6 @@ As an alternative, Spring offers annotation-based configuration. Let's do it:
 class BootNativeApplication
 ```
 
-
 1. Keep TLS-related code
 2. Keep classed and allow for reflection at runtime
 
@@ -444,7 +415,6 @@ With the second approach, the result is the following:
 REPOSITORY      TAG       IMAGE ID         CREATED         SIZE
 native-boot     1.0       c9284b7f99a6     41 years ago    104MB
 ```
-
 
 If we dive into the image, we can see the following layers:
 
@@ -460,7 +430,6 @@ Cmp   Size  Command
        0 B                                      <6>
 ```
 
-
 1. Parent image
 2. System permissions
 3. Paketo buildpacks CA certificates
@@ -474,7 +443,6 @@ The generated image accepts parameters, just as if you'd run the Java applicatio
 docker run -it -p8080:8080 native-boot:1.0 --app.marvel.apiKey=xyz --app.marvel.privateKey=abc --logging.level.root=DEBUG
 ```
 
-
 We can now send requests to play with the application:
 
 ```bash
@@ -483,9 +451,7 @@ curl 'localhost:8080?limit=1'
 curl 'localhost:8080?limit=1&offset=50'
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 Spring has a long history of taking care of boilerplate code and letting developers focus on business code. In latter years, it has successfully integrated the Kotlin language to provide a fantastic developer experience.
 

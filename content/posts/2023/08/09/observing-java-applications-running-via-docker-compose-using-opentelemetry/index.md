@@ -19,8 +19,7 @@ enlighterjs: true
 frozen: false
 ---
 
-An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files!
---------------------------------------------------------------------------------------------------------------------------------------
+## An easy non-obtrusive way to collect data about your dockerized app without changing your existing docker-compose.yml or docker files!
 
 This is just a neat trick that I discovered when I was trying to collect [OTEL](https://opentelemetry.io/docs/instrumentation/java/automatic/) data about my application which was running via Docker Compose. I was trying to understand more about the code using tracing. However, I definitely didn't want to modify any of the code or deployment-related artifacts, or risk checking in any changes by mistake.
 
@@ -33,7 +32,6 @@ For convenience, you can download the files into a path that is relative to the 
 ```bash
 curl --create-dirs -O -L --output-dir ./otel https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 ```
-
 
 #### 2. Add a docker-compose override file
 
@@ -56,13 +54,11 @@ services:
         - "host.docker.internal:host-gateway"
 ```
 
-
 #### 3. Run the original docker-compose file along with the extended file we just created
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.override.otel.yml up -d
 ```
-
 
 ### WHAT CAN YOU DO WITH THE DATA?
 
@@ -77,16 +73,11 @@ curl -L -O https://raw.githubusercontent.com/doppleware/developer-observability-
 docker compose -f docker-compose.trace.yml up -dDownload and start the stack:
 ```
 
-
 Start your application with the `docker-composer.override.otel.yml` file.
 
 After running a few actions on your application, open the Jaeger interface to see the traces at [http://localhost:166868](http://localhost:16686/)
 
-<br />
-
 ![](1_cIrJepyqUHnnTxbhc5TFfw-1024x558.png)
-
-<br />
 
 Traces provide a good means to see into the working of your app and services and understand exactly what the code is doing, without having to actively debug it.
 
@@ -109,7 +100,6 @@ curl --create-dirs -O -L --output-dir ./otel
 https://github.com/digma-ai/otel-java-instrumentation/releases/latest/download/digma-otel-agent-extension.jar
 ```
 
-
 We then modify our override file, adding the extension as well as an environment variable. As before, please update \[your-service\] with your application name.
 
 ```yaml
@@ -130,16 +120,11 @@ services:
         - "host.docker.internal:host-gateway"
 ```
 
-
 After running our application and triggering some actions, we'll be able to see the observability info in the IDE, closely integrated with your code:
 
 The idea of Digma is to get [Continuous Feedback](https://digma.ai/blog/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)between code and observability so that you're always aware of how your changes affect the application.
 
-<br />
-
 ![](0_RpOJWYz_jV1P4y0V-1024x677.png)
-
-<br />
 
 ![](0_2fYOaC2TR6hdT6cd.png)
 

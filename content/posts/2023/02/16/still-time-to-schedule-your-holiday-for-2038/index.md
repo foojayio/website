@@ -32,8 +32,7 @@ Let's investigate what could happen in that year with `jshell`...
 
 {{< youtube -CPrq3NxPOE >}}
 
-What was the Y2K problem?
--------------------------
+## What was the Y2K problem?
 
 In the last years before 2000, there was a growing concern for computer systems using dates and how they would handle the transition from 1999 to 2000.
 
@@ -47,7 +46,6 @@ October 23st of 1982    -->     821023
 January 1st of 2000     -->     000101
 ```
 
-
 <figure class="wp-block-image size-medium">
  <img fetchpriority="high" decoding="async" width="454" height="510" src="y2k-454x510.jpg" alt="" class="wp-image-61216">
  <figcaption class="wp-element-caption">
@@ -57,8 +55,7 @@ January 1st of 2000     -->     000101
 
 Luckily, most systems were patched before the world was able to collapse and the Y2K-bug disappeared very quickly.
 
-What is jshell?
----------------
+## What is jshell?
 
 The `jshell` tool was added to the Java Development Kit (JDK) with version 9.
 
@@ -78,7 +75,6 @@ $ jshell
 
 jshell>
 ```
-
 
 To find out what you can do, type `/help intro`:
 
@@ -100,7 +96,6 @@ jshell> /help intro
 |  For a list of commands: /help
 ```
 
-
 A simple example:
 
 ```
@@ -117,7 +112,6 @@ jshell> txt.substring(2, 5)
 $4 ==> "llo"
 ```
 
-
 To end `jshell`, use `/exit`
 
 ```
@@ -125,9 +119,7 @@ jshell> /exit
 |  Goodbye
 ```
 
-
-What will happen in 2038?
--------------------------
+## What will happen in 2038?
 
 A new Y2K-bug seems to be approaching, but luckily we still have time to prevent it!
 
@@ -142,7 +134,6 @@ jshell> import java.time.Instant
 jshell> import java.time.ZoneId
 jshell> import java.time.ZonedDateTime
 ```
-
 
 As you may know, a lot of date formats, started on January 1st in 1970. This is very nicely explained by [Matt Howells](https://stackoverflow.com/users/16881/matt-howells) and community contributions in this [StackOverflow answer](https://stackoverflow.com/questions/1090869/why-is-1-1-1970-the-epoch-time):
 
@@ -163,7 +154,6 @@ testDate ==> 1970-01-01T00:00Z[UTC]
 jshell> testDate.toEpochSecond()
 $4 ==> 0
 ```
-
 
 Indeed 1970-01-01 returns the value 0 as epoch. Now let's travel to the future and assign the maximum integer value to our test date:
 
@@ -187,7 +177,6 @@ jshell> testDate.toEpochSecond()
 $7 ==> 2147483648
 ```
 
-
 Everything still seems to be OK, but as `toEpochSecond()` returns a long, the problem becomes clear when we convert that last value to an integer.
 
 It becomes a negative value, that when used as an instant to recreate the date, makes us travel back into time to December 13th of 1901!
@@ -200,9 +189,7 @@ jshell> testDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(-2147483648), Z
 testDate ==> 1901-12-13T20:45:52Z[UTC]
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In the past, when storage space was limited and expensive, it made sense to select the smallest variable type to store data.
 

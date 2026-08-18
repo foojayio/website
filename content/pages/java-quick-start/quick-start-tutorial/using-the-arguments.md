@@ -10,8 +10,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< Hello World!](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/)  
 [Working with Numbers \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)
 
@@ -24,8 +22,6 @@ We need to create another new Java file and call it `MainArguments.java`. The `a
 <div data-pym-src="https://www.jdoodle.com/plugin" data-language="java" data-version-index="6" data-libs="mavenlib1, mavenlib2">
  public class MainArguments { public static void main (String[] args) { System.out.println("Number of arguments: " + args.length); if (args.length &gt; 0) { System.out.println("First argument: " + args[0]); } for (int i = 0; i &lt; args.length; i++) { System.out.println("Argument " + (i + 1) + ": " + args[i]); } } }
 </div>
-
-
 
 Now we can start the application and provide it any number of extra arguments.
 
@@ -42,7 +38,5 @@ Argument 1: Hello World
 Argument 2: Bye
 ```
 
-
-  
 [\<\< Hello World!](https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/)  
 [Working with Numbers \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/working-with-numbers/)

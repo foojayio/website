@@ -31,8 +31,7 @@ In addition, we have added support for Managed Identity Authentication.
 
 Let's see what these new features are.
 
-Azure Toolkit for IntelliJ Improvements
----------------------------------------
+## Azure Toolkit for IntelliJ Improvements
 
 ### New Guided Getting Started Experience
 
@@ -70,8 +69,7 @@ When you're done, you will have your first application successfully running on A
 
 Azure Toolkit for IntelliJ has supported the IntelliJ 2022.2 EAP version. Besides, the latest release of the Azure Toolkit for IntelliJ also brings support for snapshot and beta versions. Now, if you want to try some new features that haven't been released, you can download and install the newest version from [the marketplace page](https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij/versions/dev "the marketplace page").
 
-Maven Plugin/Gradle Plugin Improvements
----------------------------------------
+## Maven Plugin/Gradle Plugin Improvements
 
 ### Support for Managed Identity Authentication
 
@@ -81,8 +79,7 @@ To use it, you can simply configure your system-assigned or user-assigned manage
 
 ![](managed-identity-full.gif)
 
-Feedback and Suggestions
-------------------------
+## Feedback and Suggestions
 
 Please don't hesitate to try our product! Your feedback and suggestions are very important to us and will help shape our product in future.
 
@@ -92,8 +89,7 @@ Please don't hesitate to try our product! Your feedback and suggestions are very
 
 ![](feedback-new.png)
 
-Resources
----------
+## Resources
 
 Here is a list of links that are helpful to learn Java on Azure Tooling.
 

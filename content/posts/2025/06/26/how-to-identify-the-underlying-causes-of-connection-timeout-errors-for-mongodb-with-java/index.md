@@ -31,8 +31,7 @@ In this article, we're cracking open the mystery box of MongoDB connection timeo
 * Connection pool misconfiguration
 * The incorrect MongoDB URI
 
-Network Configuration Issues
-----------------------------
+## Network Configuration Issues
 
 The first kind of timeout issue which we are going to explore is about MongoDB timeout exceptions caused in the applications due to configuration issues related to network access. We know `27017` is the [default port](https://www.mongodb.com/docs/manual/reference/default-mongodb-port/) on which MongoDB runs, so if Abu (`MongoClient`) has to fetch the data we talked about from the database, the door to the palace (MongoDB) should not be locked for him. A [firewall block](https://www.geeksforgeeks.org/firewall-configuration-mongodb/) would mean a locked door which would deny the client's entry to connect to the database and would result in timeout piling up. The access to the port `27017` (or the port to which your database is assigned) is critical for traffic to pass through and make connections. Developers would only get a clue when they dig into the network logs that the culprit lies in the configurations in network whitelisting.
 
@@ -56,8 +55,7 @@ Here, you can see log snippets for an exception for connection refused in a Java
 
 This is similar to a connection timeout as it leads to exception at the driver end in application and results in an immediate connection rejection and socket exception. In case of a MongoDB timeout exception, which can be due to a host/port misconfiguration, there would be a similar exception happening only after a small duration until it reaches the network issue of unable to find the database instance.
 
-Server Load
------------
+## Server Load
 
 It's Aladdin and Jasmine's wedding day in Agrabah---a grand celebration.The Sultan's palace is buzzing with guests, and the Sultan's chef (your MongoDB server) is tasked with preparing a feast for everyone. On a typical day, the chef whips up meals for the royal family with ease, much like your MongoDB server handling routine queries from your Java app. But today, it's a user spike of epic proportions, like a Black Friday sale day for an e-commerce application. Thousands of guests (your app's users) flood the palace, each expecting a plate piled high with delicacies. The chef, already sweating in the kitchen, is now under siege, trying to cook more food than ever before. When the orders pile up faster than he can plate them, the feast slows to a crawl, and some guests (new API requests) get nothing at all---this is what leads to the infamous server load crisis.
 
@@ -69,8 +67,7 @@ This kind of overload isn't just a fairy tale---it's a real-world problem. Take 
 
 During the release of Fortnite 3.5, millions of players rushed to log in, overwhelming their unprepared MongoDB-backed account service. It was like Aladdin and Jasmine's wedding, but for gamers---new API calls flooded the system, and cache pressure slowed everything down. Connection storms knocked database nodes offline, and the primary node couldn't handle the load, leading to a 17-hour outage where no one could log in. Epic had to reduce query counts, shift reads to secondary nodes, and tune performance with MongoDB's team, proving that even a great "chef" can struggle if he is not prepared well for the workload.
 
-Resource Exhaustion
--------------------
+## Resource Exhaustion
 
 Let's return to Agrabah, where Aladdin and Jasmine's wedding feast is in full swing. The Sultan's palace is a whirlwind of activity, with the royal staff (your Java app) and the kitchen crew (MongoDB server) working overtime to keep the celebration going. But behind the scenes, resources are stretched. The staff's workspace (your app's Java Virtual Machine, or JVM) is cluttered with too many tasks, and the kitchen's pantry (MongoDB's server resources) is running out of supplies. When either side hits its limit, the whole operation grinds to a halt---guests go hungry, and your app throws a `MongoTimeoutException`. This is [resource exhaustion](https://www.mongodb.com/docs/manual/reference/limits/): when your Java app or MongoDB server runs out of the essentials needed to keep the connection alive.
 
@@ -91,8 +88,7 @@ Here's a real-world parallel from your Spring Boot app: Imagine a microservice m
 Below is a screenshot from [Java Visual VM](https://visualvm.github.io/download.html) showing the high memory usage by Java threads for the Spring Boot application, leading to `MongoDBConnectionTimeoutException`.
 ![Java Visual VM](https://dz2cdn1.dzone.com/storage/temp/18398887-1747071135135.png)
 
-Connection Pool Misconfiguration
---------------------------------
+## Connection Pool Misconfiguration
 
 To keep Agrabah safe from thieves, Aladdin makes his Genie to multiply into clones to chase down multiple thieves at once. Each Genie clone (a connection in MongoDB's [connection pool](https://www.mongodb.com/docs/manual/tutorial/connection-pool-performance-tuning/)) tracks a thief (a request from your Java app), and redirects them to the city's jail (your MongoDB server). Aladdin has set a limit on how many Genie clones can be active at once which is the `maxPoolSize` for your MongoDB connection pool. If the clones are less, some thieves would escape, and if clones are too many, the jail might get overwhelmed, or Genie's lamp (your JVM) might not be able to handle that strain. This is the challenge in connection pool configuration: finding the right number for the `maxPoolSize`.
 
@@ -126,7 +122,6 @@ public MongoClient mongoClient() {
 }
 ```
 
-
 Following are the parameters you can consider to fine-tune your connection pool to mitigate a connection timeout exception.
 
 Set `maxPoolSize` Based on Load: The default `maxPoolSize` of 100 may be too high or too low depending on your traffic. For moderate traffic, a value of 50 might suffice, but during high-traffic events like a sale, you might increase it to 150. Use MongoDB server metrics (e.g., current connections via `db.serverStatus().connections`) and application latency to determine the optimal size.
@@ -137,8 +132,7 @@ Tune `maxWaitTime`: Lower the `maxWaitTime` (e.g., two seconds) to fail fast if 
 
 Monitor and Scale: Use tools like MongoDB Atlas or server logs to monitor connection usage (`mongostat` can show active connections). Adjust `maxPoolSize` dynamically based on traffic patterns, and consider scaling your MongoDB server (e.g., adding replicas) if connection demand consistently exceeds capacity.
 
-Incorrect MongoDB URI
----------------------
+## Incorrect MongoDB URI
 
 For Aladdin to go from being a small-time thief to marrying the Princess of Agrabah, he had to find the cave with the Genie's lamp.To get there, Aladdin needs a simple map (the MongoDB URI), written as `mongodb://user:pass@host:port/db`. This map tells him the secret password (`user:pass`), the cave's spot (`host:port`), and the room with the lamp (`db`). If the map is wrong---like the wrong spot (bad hostname), a mixed-up step (wrong port), or no password (missing credentials)---Aladdin gets lost, just like your app fails when the MongoDB URI is wrong. If any part of the URI is incorrect, the MongoDB Java driver cannot establish a connection, resulting in errors such as `MongoTimeoutException` or `MongoSocketException`.
 
@@ -162,8 +156,7 @@ database: The target database (e.g., `mydb`)
 
 `replicaSet`: The name of the replica set (e.g., `myReplicaSet`)
 
-**Conclusion**
---------------
+## **Conclusion**
 
 Throughout this article, we've explored the common culprits behind MongoDB connection timeouts in Java applications. Network hiccups, such as packet loss or firewall blocks, can sever your app's link to the MongoDB server, leading to `MongoTimeoutException` errors. Overloaded servers---whether due to high query loads or insufficient CPU and memory---cause delays, making your app wait longer than its timeout threshold. Resource shortages, like maxed-out Java threads, exhausted heap memory, or MongoDB running out of file descriptors, prevent new connections from being established. Connection pool slip-ups, such as setting `maxPoolSize` too low or too high, either queue up requests or overwhelm the server and JVM. Finally, URI typos, like incorrect hostnames, wrong ports, or missing credentials, stop your app from even finding the MongoDB server, resulting in immediate connection failures.
 

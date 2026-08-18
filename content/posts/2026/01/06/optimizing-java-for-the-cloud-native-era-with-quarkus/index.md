@@ -34,8 +34,7 @@ After evaluating multiple frameworks, Orange chose Quarkus as the optimal soluti
 
 For a collection of user stories from the community, see the [Quarkus user stories blog](https://quarkus.io/userstories/) series. These stories highlight how different teams and organizations are using Quarkus in the real world.
 
-What does Quarkus have to offer?
---------------------------------
+## What does Quarkus have to offer?
 
 ### Developer joy with live coding and dev mode
 
@@ -75,7 +74,6 @@ public class PriceConverter {
 }
 ```
 
-
 In this example, prices are received from one channel (`prices`), converted, and sent to another channel (`converted-prices`). This pattern supports high-throughput, event-driven processing with clean and efficient logic.
 
 An example of a reactive HTTP endpoint using reactive routes in Quarkus:
@@ -91,11 +89,9 @@ public class GreetingRoute {
 }
 ```
 
-
 This route handles HTTP GET requests reactively using `Uni` from Mutiny, making it easy to build non-blocking, low-latency APIs.
 
-Which of your current development pains could Quarkus solve?
-------------------------------------------------------------
+## Which of your current development pains could Quarkus solve?
 
 One often-overlooked benefit of Quarkus is how it improves onboarding and standardization across teams.
 
@@ -135,8 +131,7 @@ Need assistance getting started? You're not alone. The Quarkus team offers exper
 
 All it takes is a decision to move forward. Your team deserves a faster, leaner, and cloud-native future.
 
-Concluding note
----------------
+## Concluding note
 
 Quarkus is redefining Java development by combining modern features with the robustness of the Java ecosystem.
 

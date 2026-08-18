@@ -22,8 +22,7 @@ Version 1.2.0 of [Lottie4J](https://lottie4j.com) is out, and it's again a big r
 
 {{< youtube 9lE6UO8XNpU >}}
 
-dotLottie File Support
-----------------------
+## dotLottie File Support
 
 Until now, Lottie4J only supported the plain JSON format (`.json`). That's the original Lottie format, but LottieFiles also introduced a newer container format: `.lottie`. It's essentially a ZIP archive that can hold one or more animations, embedded images, sounds, and a manifest file that describes the contents.
 
@@ -37,11 +36,9 @@ LottieAnimation animation = FileLoader.load(path);
 DotLottie lottie = FileLoader.loadDotLottie(path);
 ```
 
-
 The `Lottie` object gives you access to the manifest (author, version metadata) and the full list of animations. At the moment, most real-world `.lottie` files I found, only bundle a single animation, but the API is ready for multi-animation files when they appear.
 
-New Player Features
--------------------
+## New Player Features
 
 ### Play Between Markers
 
@@ -57,8 +54,7 @@ The new `play(startMarker, endMarker)` method makes the player start at frame 1,
 
 `LottiePlayer` is now properly resizable and adjusts its rendering accordingly. Resizing also has a secondary effect: smaller sizes reduce the rendering load, so you can trade size for performance when needed.
 
-Performance Improvements
-------------------------
+## Performance Improvements
 
 Rendering speed has improved significantly in this release. The main gains come from reducing the number of rendering passes per frame and adding a caching layer for layer and precomp render metadata, which avoids redundant recalculation on heavy animations.
 
@@ -70,8 +66,7 @@ A new adaptive rendering toggle `setAdaptiveOffscreenScalingEnabled(enabled)` tr
 
 Which mode works better depends on the animation: simpler animations often look fine in adaptive mode and benefit from the speed, while text-heavy or detail-rich animations are better left in the default mode. The toggle is exposed in both the `LottiePlayer` and the file viewers so you can test your specific animations.
 
-Core Model Improvements
------------------------
+## Core Model Improvements
 
 A lot of work went into the core library this release, driven by testing more complex real-world Lottie files:
 
@@ -87,15 +82,13 @@ The core library has been upgraded to Jackson 3. This is a major version bump: t
 
 Note that `jackson-annotations` has not yet moved to the `tools.jackson` group ID and remains on its previous coordinates for now.
 
-Debug Tooling Updates
----------------------
+## Debug Tooling Updates
 
 The `LottieFileDebugViewer` has been refactored to extract the duplicated WebView JavaScript bridge code into reusable components. The FX versus JS side-by-side views are improved, and the comparison test has better frame synchronization. A new validation mode tests the player at a resized dimension to verify that rendering holds up under scaling.
 
 The automated `CompareFxViewWithWebViewTest`, which renders both the JavaFX and JavaScript players frame by frame and checks visual similarity, now also uses `.lottie` files.
 
-Trying It Out
--------------
+## Trying It Out
 
 Update your Maven dependency:
 
@@ -115,11 +108,9 @@ Update your Maven dependency:
 </dependency>
 ```
 
-
 The full list of changes is [available on GitHub](https://github.com/lottie4j/lottie4j/compare/v1.1.0...v1.2.0).
 
-What's Next
------------
+## What's Next
 
 The automated comparison test still can't run on GitHub Actions because it requires a display. JavaFX 26 (released alongside Java 26 this week) includes headless rendering support, which may make it possible to run the visual regression tests on GitHub Actions. That's the next thing to investigate...
 

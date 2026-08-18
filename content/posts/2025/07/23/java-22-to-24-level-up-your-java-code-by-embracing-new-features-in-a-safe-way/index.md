@@ -53,7 +53,6 @@ for (String element : myList) { // "element" is unused
 }
 ```
 
-
 In Java 22, you can use an unnamed variable. However, explicitly declaring the type is unnecessary.
 
 **Noncompliant Code Example:**
@@ -64,7 +63,6 @@ for (String _ : myList) { // The type "String" is redundant
     count++;
 }
 ```
-
 
 This is where rule S7466 comes in, suggesting a cleaner, more concise approach.
 
@@ -77,10 +75,7 @@ for (var _ : myList) {
 }
 ```
 
-
 By using `var`, the code becomes less verbose and the intent remains clear.
-
-
 
 ### **Rule S7467: Unused exception parameters should use the unnamed variable pattern**
 
@@ -98,7 +93,6 @@ try {
 }
 ```
 
-
 While functional, the declaration of `e` is noise. Using an unnamed variable is a better approach, and this is what SonarQube now recommends.
 
 **Compliant Solution:**
@@ -111,10 +105,7 @@ try {
 }
 ```
 
-
 This compliant solution is cleaner and explicitly communicates that the exception object itself is not important for the handling logic.
-
-
 
 ### **Rule S7475: Types of unused record components should be removed from pattern matching**
 
@@ -132,7 +123,6 @@ if (obj instanceof ColoredPoint(Point p, Color c)) { // "c" is unused
 }
 ```
 
-
 In Java 22, you can use an unnamed pattern for the `Color` component. However, including the type is not necessary if the component is completely ignored.
 
 **Noncompliant Code Example:**
@@ -143,7 +133,6 @@ if (obj instanceof ColoredPoint(Point p, Color _)) { // The type "Color" is redu
 }
 ```
 
-
 The most concise and readable version, as enforced by SonarQube, omits the type for the unused component entirely.
 
 **Compliant Solution:**
@@ -153,7 +142,6 @@ if (obj instanceof ColoredPoint(Point p, _)) {
     // logic that only uses p
 }
 ```
-
 
 This approach makes the code more focused on the relevant data, improving maintainability.
 
@@ -192,7 +180,6 @@ public class Calculator {
 }
 ```
 
-
 In the example above, both the decorative block comment and the `///` comment would be incorrectly processed as Javadoc in Java 23. **Compliant Solution:**
 
 ```
@@ -207,7 +194,6 @@ public class Calculator {
   }
 }
 ```
-
 
 The compliant solution is to ensure regular comments use the standard `//` syntax.
 
@@ -234,7 +220,6 @@ public class StringManipulator {
 }
 ```
 
-
 This Javadoc mixes bold HTML tags with Javadoc's `{@link}` and `{@code}` tags. The clean, modern approach is to use Markdown for all formatting.
 
 **Compliant Solution:**
@@ -251,7 +236,6 @@ public class StringManipulator {
   // ...
 }
 ```
-
 
 By adopting a consistent Markdown style, your documentation becomes cleaner, easier to write, and future-proof.
 
@@ -287,7 +271,6 @@ ClassBuilder addMethod(ClassBuilder builder) {
 }
 ```
 
-
 This code uses `withMethod`, which introduces a `methodBuilder`. This then requires a call to `withCode` and an additional nested lambda (`codeBuilder -> ...`) just to define the method's body, making the code unnecessarily verbose.
 
 **Compliant Solution:**
@@ -304,10 +287,7 @@ ClassBuilder addMethod(ClassBuilder builder) {
 }
 ```
 
-
 The compliant solution uses `withMethodBody`, which directly accepts the code-building lambda. This removes the intermediate `methodBuilder`, resulting in flatter, more readable, and more maintainable code that clearly expresses the intent of defining a method and its body in a single, streamlined operation.
-
-
 
 ### **Rule S7477: The simpler `transformClass` overload should be used when the class name is unchanged**
 
@@ -334,7 +314,6 @@ public static void transformClassFile(Path path) throws IOException {
 }
 ```
 
-
 In this example, the class name is explicitly passed to `transformClass`, even though it remains unchanged. This adds unnecessary code and can make the transformation's intent harder to grasp at a glance.
 
 **Compliant Solution:**
@@ -352,7 +331,6 @@ public static void transformClassFile(Path path) throws IOException {
       });
 }
 ```
-
 
 The compliant solution uses the simpler, two-argument overload of `transformClass`. By removing the redundant class name parameter, the code becomes more direct and effectively communicates that the transformation modifies the class in place without renaming it.
 
@@ -385,7 +363,6 @@ public static void transformClassFile(Path path) throws IOException {
 }
 ```
 
-
 This code manually rebuilds the class using `build`, requiring an explicit loop to copy over the elements that are being kept. This boilerplate distracts from the actual goal: filtering out debug methods.
 
 **Compliant Solution:**
@@ -405,7 +382,6 @@ public static void transformClassFile(Path path) throws IOException {
   Files.write(path, newBytes);
 }
 ```
-
 
 The compliant solution uses `transformClass`, which handles the iteration implicitly. The provided lambda is applied to each `ClassElement`, allowing the developer to focus solely on the transformation logic. The resulting code is more concise, readable, and less error-prone.
 
@@ -446,7 +422,6 @@ public static List<Integer> diffWithFirstPositive(List<Integer> list) {
 }
 ```
 
-
 In this code, the presence of a combiner that unconditionally throws an `IllegalStateException` is a clear indicator that the gatherer cannot function in a parallel stream.
 
 **Compliant Solution:**
@@ -466,7 +441,6 @@ public static List<Integer> diffWithFirstPositive(List<Integer> list) {
   return list.stream().gather(gatherer).toList();
 }
 ```
-
 
 By switching to `Gatherer.ofSequential`, the code becomes more obvious about its intent. It clearly communicates that the operation is sequential-only and eliminates the unnecessary and misleading throwing combiner, resulting in a cleaner implementation.
 
@@ -494,7 +468,6 @@ private static Gatherer inRange(int start, int end) {
 }
 ```
 
-
 Here, the `() -> null` initializer serves no purpose other than to satisfy the signature of the factory method. This adds unnecessary boilerplate and obscures the fact that the operation does not depend on a state.
 
 **Compliant Solution:**
@@ -511,7 +484,6 @@ private static Gatherer inRange(int start, int end) {
     );
 }
 ```
-
 
 The compliant solution uses the appropriate `Gatherer.ofSequential` overload that does not require an initializer. This removes the redundant code and clearly signals to anyone reading it that the gatherer is stateless by design.
 

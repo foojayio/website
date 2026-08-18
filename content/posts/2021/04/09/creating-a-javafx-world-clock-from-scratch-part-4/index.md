@@ -51,7 +51,6 @@ $ sdk install java 16.0.0.fx-zulu
 $ sdk use java 16.0.0.fx-zulu
 ```
 
-
 For see more information on newer Java distros go to: <https://www.azul.com/downloads/zulu-community/?package=jdk-fx>
 
 ### Clone JFX World Clock repo
@@ -66,7 +65,6 @@ $ git clone https://github.com/carldea/worldclock
 $ cd worldclock
 ```
 
-
 #### Windows (Power shell)
 
 ```
@@ -78,7 +76,6 @@ $ cd worldclock
 > cd worldclock
 ```
 
-
 #### Updating an upstream Repo
 
 Whenever I make a change to the JFX World Clock repo your locally cloned repo can be stale (out of date). So, every now and then you could update from the upstream repo (mine). Below, is how to add the original repo as a remote upstream branch so you can do a pull to get the latest.
@@ -88,7 +85,6 @@ $ git remote add upstream https://github.com/carldea/worldclock
 $ git remote -v
 $ git pull upstream main
 ```
-
 
 If you ever want to suggest a fix or change code locally (assuming you've forked), you'll want to do a rebase, which will put your changes on top of the latest. That way you could create a pull request if you so choose. 😉
 
@@ -103,7 +99,6 @@ After cloning the project, and sitting in the `worldclock` directory you can exe
 ```
 $ ./bach/bin/bach build
 ```
-
 
 You're probably wondering, "I don't remember installing Bach!", Where did it come from? Well it was checked into the world clock git repo project. A little more on that later, but for now it just works when you are sitting in the `worldclock` directory.
 
@@ -125,7 +120,6 @@ Out of convenience you can set-up your PATH environment variable so you can perf
 $ bach build
 ```
 
-
 ### Setup Environment Variables
 
 After building the world clock with the above command you will inevitably perform builds often, so let's make it more convenient by setting your PATH environment.
@@ -137,14 +131,12 @@ Add to your .bashrc or .bash_profile as the following:
 export PATH=$PATH:./bach/bin
 ```
 
-
 On Windows you'll add to your environment variables as the following:
 
 ```
 # Windows
 set PATH=%PATH%;.bach\bin
 ```
-
 
 ### Learning from Bach
 
@@ -168,13 +160,11 @@ Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logboo
 cdea$
 ```
 
-
 Above you'll notice Bach 17-ea+ce2b495, which is the version \& build of Bach. It's neat to also know that Bach builds itself with Bach (yeah, I know right?!). This is nice to know whenever Bach gets new features or bug fixes, I can simply perform the following:
 
 ```
 $ bach init 17-ea
 ```
-
 
 I believe once Bach is GA (general availability) it'll be `bach init 17`. Bach's binaries (itself), resides in the `.bach/bin` directory. As the owner of the JFX World Clock repo(project), I would need to check-in these Bach binary files. This is why Bach is available without having to install Bach. Like other build tools I want to make sure I can exclude the build artifact such that they don't get pushed in Git. But most importantly check-in these Bach binaries in as `.bach/bin/`.
 
@@ -189,7 +179,6 @@ $ cat .bach/.gitignore
 !bin/*.jar
 ```
 
-
 Continuing our look at the above output of the command `bach build` you'll see the steps that Bach had performed to build the JFX World Clock as a modular app. You'll notice it used javac to compile, jar to create the module, and jlink to build a custom image of Java runtime. Lastly in the last line outputted is further details in a log file in a file called `logbook.md`:
 
 ```
@@ -198,7 +187,6 @@ Build took 3.739s
 Logbook written to file:///Users/cdea/projects/worldclock/.bach/workspace/logbook.md
 ```
 
-
 ### Running JFX World Clock as a Module
 
 After the application is built let's run it as a Java module as shown below:
@@ -206,7 +194,6 @@ After the application is built let's run it as a Java module as shown below:
 ```
 java --add-modules worldclock --module-path .bach/workspace/modules/:.bach/external-modules/ com.carlfx.worldclock.Launcher
 ```
-
 
 To run an executable on the command line do the following:
 
@@ -217,7 +204,6 @@ $ .bach/workspace/image/bin/worldclock
 # Windows 
 $ .bach\workspace\image\bin\worldclock
 ```
-
 
 #### How does Bach work?
 
@@ -246,7 +232,6 @@ module bach.info {
 }
 ```
 
-
 Bach's API is in the form of Java annotations. A Bach annotation called `@ProjectInfo` allows me to specify what JDK tools to use and the project's external module dependencies. Any transitive dependencies would be resolved and placed into the `external-modules` directory. There are other attributes that I'm still learning about and so by the time you read this the documentation should be updated at Bach's site ;-).
 
 Now that you know how to build a modular app using Bach let's create an installer to distribute to others.
@@ -274,7 +259,6 @@ $ jpackage --verbose \
       --module worldclock/com.carlfx.worldclock.Launcher \
       --dest .bach/workspace/package
 ```
-
 
 After, it is completed the output of the distro would be in the `.bach/workspace/package` directory as shown below:  
 ![JFX World Clock dmg](Screen-Shot-2021-03-28-at-4.02.54-PM.png)
@@ -306,7 +290,6 @@ This project originally used Maven to build the project. While Maven and Gradle 
 $ mvn clean
 $ mvn javafx:run
 ```
-
 
 ### Conclusion
 

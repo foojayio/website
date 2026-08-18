@@ -24,8 +24,6 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 The K8ssandra [Quick start](https://k8ssandra.io/get-started/) is a excellent guide for doing a full installation of K8ssandra on a dev laptop and trying out the various components of the K8ssandra stack. While this is a great way to get your first hands-on experience with K8ssandra, let's state the obvious: running K8ssandra locally on a dev laptop is not aimed at performance. In this blog post, we will start Apache Cassandra® locally then explain how to run benchmarks to help evaluate what level of performance (especially throughput) you can expect from a dev laptop deployment.
 
 Our goal was to achieve the following:
@@ -51,8 +49,7 @@ Cassandra can run with fairly limited resources as long as you don't put too muc
 
 If we want to run K8ssandra with limited resources, we'll need to set these appropriately in our Helm values files.
 
-Setting heap sizes in K8ssandra
--------------------------------
+## Setting heap sizes in K8ssandra
 
 The K8ssandra Helm charts allow us to set heap sizes for both the Cassandra and Stargate pods separately.
 
@@ -81,13 +78,11 @@ cassandra:
       #newGenSize:
 ```
 
-
 By default, these values aren't set, which lets Cassandra perform its own computations based on the available RAM, applying the following formula:
 
 ```
 max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
 ```
-
 
 The catch when you run several Cassandra nodes on the same machine is that they will all see the same total available RAM but won't be aware that other Cassandra nodes could be running as well. When allocating 8GB RAM to Docker, each Cassandra node will compute a 2GB heap. With a 3 nodes cluster, it's already 6GB of RAM used, not accounting for the additional off heap memory that can be used by each JVM. That doesn't leave much RAM for the other components K8ssandra includes, such as Grafana, Prometheus and Stargate.
 
@@ -112,7 +107,6 @@ cassandra:
     size: 3
 ```
 
-
 ### Stargate
 
 Because Stargate nodes are special coordinator-only Cassandra nodes and run in the JVM, it is also necessary to set their max heap size:
@@ -126,7 +120,6 @@ stargate:
   ...
   heapMB: 256
 ```
-
 
 Stargate nodes will follow the same rule when it comes to off heap memory: the JVM will be allowed to use as much RAM for off heap memory as the configured heap size.
 
@@ -185,7 +178,6 @@ medusa:
   storageSecret: medusa-bucket-key
 ```
 
-
 We want Stargate to be our Cassandra gateway and enabling Medusa requires us to set up a secret (remember, we want to run the whole stack).
 
 You'll have to adjust the Medusa storage settings to match your requirements (bucket and region) or disable it if you don't have access to an AWS bucket at all by disabling Medusa:
@@ -194,7 +186,6 @@ You'll have to adjust the Medusa storage settings to match your requirements (bu
 medusa:
   enabled: false
 ```
-
 
 Adjust the Medusa storage settings to match your requirements (bucket and region). You will need to disable Medusa if AWS usages when an S3 bucket is not available. In addition to AWS, future versions of Medusa will provide support for S3/MinIO and local storage configurations.
 
@@ -210,7 +201,6 @@ stringData:
  # Note that this currently has to be set to medusa_s3_credentials!
  medusa_s3_credentials: |-
 ```
-
 
 \[default\]
 
@@ -234,20 +224,17 @@ You can wait for the `cassandradatacenter` to be ready with the following `kubec
 kubectl wait --for=condition=Ready cassandradatacenter/dc1 --timeout=900s -n k8ssandra
 ```
 
-
 Then wait for Stargate to be ready:
 
 ```
 kubectl rollout status deployment k8ssandra-dc1-stargate -n k8ssandra
 ```
 
-
 Once Stargate is ready, the above command should output something like this:
 
 ```
 deployment "k8ssandra-dc1-stargate" successfully rolled out.
 ```
-
 
 You can execute a NoSQLBench stress run by creating a k8s [job](https://kubernetes.io/docs/concepts/workloads/controllers/job/). You'll need the superuser credentials so that NoSQLBench can connect to the Cassandra cluster. You can get those credentials with the following commands ( requires [`jq`](https://stedolan.github.io/jq/) to be installed):
 
@@ -256,7 +243,6 @@ SECRET=$(kubectl get secret "k8ssandra-superuser" -n k8ssandra -o=jsonpath='{.da
 echo "Username: $(jq -r '.username' <<< "$SECRET" | base64 -d)"
 echo "Password: $(jq -r '.password' <<< "$SECRET" | base64 -d)"
 ```
-
 
 Then create the NoSQLBench job which will start automatically:
 
@@ -268,7 +254,6 @@ kubectl create job --image=nosqlbench/nosqlbench nosqlbench -n k8ssandra \
     hosts=k8ssandra-dc1-stargate-service --progress console:1s -v
 ```
 
-
 This will run a 10k cycle stress run with 100 ops/s with 70% writes and 30% reads, allowing 100 in-flight async queries. Note that we're providing the Stargate service as the contact host for NoSQLBench (the exact name will differ depending on your Helm release name).
 
 While the job is running, you can tail its logs using the following command:
@@ -277,14 +262,12 @@ While the job is running, you can tail its logs using the following command:
 kubectl logs job/nosqlbench -n k8ssandra --follow
 ```
 
-
 Latency metrics can be found at the end of the run, and since we're running at a fixed rate we'll be interested in the response time which takes coordinated omission ([video](https://www.youtube.com/watch?v=lJ8ydIuPFeU&ab_channel=StrangeLoopConference), [paper](http://btw2017.informatik.uni-stuttgart.de/slidesandpapers/E4-11-107/paper_web.pdf)) into account:
 
 ```
 kubectl logs job/nosqlbench -n k8ssandra 
   |grep cqliot_default_main.cycles.responsetime
 ```
-
 
 Which should output something like this:
 
@@ -298,7 +281,6 @@ Which should output something like this:
   m1=101.58021531751795, m5=105.18698132587139, m15=106.3340149754869, rate_unit=events/second, 
   duration_unit=microseconds
 ```
-
 
 As Cassandra operators, we usually focus on p99 latencies: `p99=263397.375`. That's 263ms at p99, which is fine considering our environment (a laptop) and our performance requirements (very low).
 

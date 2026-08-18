@@ -29,15 +29,13 @@ We will be using the latest (currently 11.15) version of FXGL via Maven (or Grad
 </dependency>
 ```
 
-
 The full source code is available at the end of this page. The game will look like this:
 
 ![](https://raw.githubusercontent.com/AlmasB/git-server/master/storage/images/fxgl_pong.png)
 
 Whilst this tutorial is meant to teach basic concepts, building on them will allow us to produce much more [complex examples](https://youtu.be/yhr1b4061os?t=496).
 
-Imports
--------
+## Imports
 
 Create a file `PongApp.java` and let us import all of these and forget about them for the rest of the tutorial.
 
@@ -58,9 +56,7 @@ import java.util.Map;
 import static com.almasb.fxgl.dsl.FXGL.*;
 ```
 
-
-Code
-----
+## Code
 
 This section will go through each method and explain the major parts of the code. By default FXGL sets the game size to 800x600, which works for our game. You can change these and various other settings via `settings.setXXX()`. For now, we will just set the title and add the entry point - `main()`.
 
@@ -78,7 +74,6 @@ public class PongApp extends GameApplication {
 }
 ```
 
-
 Next, we will define some constants, which are self-explanatory.
 
 ```java
@@ -89,7 +84,6 @@ private static final int PADDLE_SPEED = 5;
 private static final int BALL_SPEED = 5;
 ```
 
-
 We have three game objects: two paddles and a ball. A game object in FXGL is called an `Entity`. So, let's define our entities:
 
 ```java
@@ -97,7 +91,6 @@ private Entity paddle1;
 private Entity paddle2;
 private Entity ball;
 ```
-
 
 Next, we will look at input. Unlike in some frameworks, there is no need to manually query the input state. In FXGL we handle input by defining actions (what the game should do) and binding them to input triggers (when something is pressed). For example:
 
@@ -110,7 +103,6 @@ protected void initInput() {
 }
 ```
 
-
 The above means, when `W` is pressed, move `paddle` in Y axis by `-PADDLE_SPEED`, which essentially means move the paddle up. The remaining input:
 
 ```java
@@ -118,7 +110,6 @@ onKey(KeyCode.S, () -> paddle1.translateY(PADDLE_SPEED));
 onKey(KeyCode.UP, () -> paddle2.translateY(-PADDLE_SPEED));
 onKey(KeyCode.DOWN, () -> paddle2.translateY(PADDLE_SPEED));
 ```
-
 
 We will now add game variables to keep score for player 1 and player 2. We could just use `int score1;`. However, FXGL provides a powerful concept of properties, which builds on JavaFX properties. To clarify, each variable in FXGL is internally stored as a JavaFX property and is, therefore, observable and bindable. We declare variables as follows:
 
@@ -129,7 +120,6 @@ protected void initGameVars(Map<String, Object> vars) {
     vars.put("score2", 0);
 }
 ```
-
 
 FXGL will infer the type of each variable based on the default value. In this case 0 is of type `int`, so `score1` will be assigned `int` type. We will later see how powerful these variables are compared to primitive Java types.
 
@@ -160,7 +150,6 @@ private Entity spawnBall(double x, double y) {
 }
 ```
 
-
 We ask the `entityBuilder()` to:
 
 1. create a new entity at given x, y
@@ -184,7 +173,6 @@ protected void initUI() {
     addUINode(textScore2, getAppWidth() - 30, 50);
 }
 ```
-
 
 The last piece of this game is the update tick. Typically, FXGL games will use `Component`s to provide functionality for entities on each frame. So the update code may not be required at all. In this case, being a simple example, we will use the traditional update method, seen below:
 
@@ -228,7 +216,6 @@ protected void onUpdate(double tpf) {
 }
 ```
 
-
 We grab the "velocity" property of the ball and use it to translate (move) the ball on each frame. We then do a variety of checks regarding the ball's position against the game window and the paddles. If the ball hits the top or the bottom of the window, then we reverse in Y axis. Similarly, if the ball hits a paddle, then we reverse the X axis. Finally, if the ball misses the paddle and hits the side of the screen, then the opposite paddle scores and the ball is reset. The reset method is as follows:
 
 ```java
@@ -238,11 +225,9 @@ private void resetBall() {
 }
 ```
 
-
 That is all! You've now got a simple clone of Pong. You can get the full source code below. Stay tuned for a more complex Pong tutorial involving physics and particle effects!
 
-Full source code
-----------------
+## Full source code
 
 ```java
 import com.almasb.fxgl.app.GameApplication;
@@ -372,7 +357,6 @@ public class PongApp extends GameApplication {
     }
 }
 ```
-
 
 ```
 

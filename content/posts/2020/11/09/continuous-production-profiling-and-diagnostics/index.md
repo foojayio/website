@@ -21,8 +21,7 @@ I've gotten a lot of questions about continuous production profiling lately. Why
 
 Trigger warning: this blog will not contain code samples.
 
-Profiling?
-----------
+## Profiling?
 
 So what is software profiling then? It's the ancient black magic art of trying to figure out how something is performing, for some aspect of performing. In American TV-series, the profiler is usually some federal agent who is adept at understanding the psychology of the criminal mind. The profiler attempts to understand key aspects of the criminal to make it easier for the law enforcement agents to catch him. In software profiling we're kind of doing the same thing, but for software -- your code as well as all the third party code you might be depending on.
 
@@ -32,8 +31,7 @@ In comparison to other observability tools, like metrics and logs, profilers wil
 
 It used to take painting a red pentagram on the floor, and a healthy stock of black wax candles, to do profiling right. Especially in production. Overhead of early profilers weren't really a design criteria; it was assumed you'd run the process locally, and in development. And, since it was assumed you'd be running the profiling frontend on the same machine, profiling remote processes were somewhat tricky and not necessarily secure. Production profilers, like JFR/JMC came along, but they usually focus on a single process, and since security is a bit tricky to set up properly, most people sidestep the problem altogether and run (yep, in production) with authentication and encryption off.
 
-Different Kinds of Profiling
-----------------------------
+## Different Kinds of Profiling
 
 Profiling means different things to different people. There are various types of resources that you may be interested in knowing more about, such as CPU or locks, and there are different ways of profiling them.
 
@@ -95,8 +93,7 @@ There are plenty of more examples, wait, sleep, park etc. To learn more, open [J
 
 This kind of profiling attempts to answer questions about what's on your heap and, sometimes, why. This information can be used to reduce the amount of heap required to run your application, or help you solve memory leaks. Information may range from heap histograms showing you the number of instances of each type on the heap, to leak candidates, their allocation times and allocation stack traces, together with the reference chains still holding on to them.
 
-Continuous Production Profiling
--------------------------------
+## Continuous Production Profiling
 
 Assuming that your application always has the same performance profile, which implies always having exactly the same load and never being updated, with no edge cases or failure modes, and assuming perfectly random sampling, your profiler could simply take a few samples (let's say 100 to get a nice distribution) over whichever time period you are interested in (let's say 24 hours), and call it a day. You would have a very cheap breakdown over whatever profiling information you're tracking.
 
@@ -128,8 +125,7 @@ When something happens in production, you will always have data at hand with a c
 
 Of course, the cure must not be worse than the ailment. If the performance overhead you pay for the information costs you too much, it will not be worth it. Therefore this rather detailed information must be collected rather inexpensively for a continuous production profiler.
 
-Low-overhead Production Profiling
----------------------------------
+## Low-overhead Production Profiling
 
 So, how can one go about producing this information at a reasonable cost? Also, we can't introduce too much observer effect, as this will skew the data, and not truly represent the application behaviour without the instrumentation.
 
@@ -167,8 +163,7 @@ You would be excused for believing that Errors would happen very rarely, and tha
 These techniques, and more, can be used together to provide a best-of-all-worlds profiling environment. Just be careful, as with most things in life a balance must be found. Just like there is (trigger warning) no single energy source that will solve our energy problems in a carbon neutral way (we should use all at our disposal -- including nuclear power -- to have a chance to go carbon neutral in a reasonable time \[2\]\[3\]), a balance must be struck between sampling and execution tracing, and a balance for how much data to capture for the various types of profiling you're doing.
 
 Continuous Profiling in Large Deployments
-Or, Finding What You're Looking For
------------------------------------
+## Or, Finding What You're Looking For
 
 In a way this part of the blog will be a shameless plug for the work I've been involved with at Datadog, but it may offer insights into what matters for a continuous profiler to be successful. Feel free to skip if you dislike me talking about a specific commercial solution.
 
@@ -238,15 +233,13 @@ So, nothing terribly interesting going on in our services right now. The one bel
 
 That said, if you're interested in the kind of patterns we can detect, check out the JDK Mission Control rules. The ones at Datadog are a superset, and work similarly.
 
-Summary
--------
+## Summary
 
 Profiling these days is no longer limited to high overhead development profilers. The capabilities of the production time profilers are steadily increasing and their value is becoming less controversial, some preferring them for complex applications even during development.
 
 Today, having a continuous production profiler enabled in production will offer unparalleled performance insights into your production environment, at an impressively low performance overhead. Data will always be at your fingertips when you need it.
 
-Additional Reading
-------------------
+## Additional Reading
 
 <https://www.datadoghq.com/blog/datadog-continuous-profiler/>
 

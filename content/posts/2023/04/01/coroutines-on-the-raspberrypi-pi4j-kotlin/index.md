@@ -51,7 +51,6 @@ pi4jAsync {
 }
 ```
 
-
 Feel free to visit the [docs](https://pi4j.com/kotlin/coroutines/) on coroutines support, and the full example.
 
 2. I²C DSL
@@ -67,7 +66,6 @@ i2c(1, 0x3f) {
   // use here. Will auto close
 }
 ```
-
 
 Feel free to visit the [docs](https://pi4j.com/kotlin/i2c/) on `I²C` support, and the full example.
 
@@ -88,7 +86,6 @@ serial(“/dev/ttyS0”) {
   // use here. 
 }
 ```
-
 
 You know the drill, feel free to visit the [docs](https://pi4j.com/kotlin/serial/) on Serial support, and the full example.
 

@@ -24,8 +24,7 @@ There are many excellent articles on Java Garbage Collection, Java Memory usage 
 
 In this post I won't go into memory leaks. They're important but this is a different subject I would like to discuss in a post on its own.
 
-Garbage Collector Tradeoff
---------------------------
+## Garbage Collector Tradeoff
 
 GCs are amazing, unreferenced objects are collected in an automatic process. But garbage collection still makes some tradeoff:
 
@@ -37,8 +36,7 @@ Pick two of those. A garbage collector can tradeoff RAM to provide faster perfor
 
 Normally, when we want to pick a library we just do a benchmark. But benchmarking a GC is much harder. If we overload a GC we might end up with a GC that handles stress well but isn't optimal for typical memory allocation. It's crucial to understand how the garbage collectors work and that we profile the GC with "real world" workloads.
 
-Not your Fathers Stop the World Mark Sweep
-------------------------------------------
+## Not your Fathers Stop the World Mark Sweep
 
 Java GC's have come a long way since Java 1.0's stop the world GC. While there are many types of garbage collectors most of the new ones are generational and parallel/concurrent. This might not seem important when working on our local machines. But the difference is very noticeable when GCing very large heaps.
 
@@ -99,8 +97,7 @@ One of its biggest features is that it doesn't pause the execution of the applic
 
 ZGC can be enabled using the `-XX:+UseZGC` JVM option.
 
-Picking and Debugging a Garbage Collector
------------------------------------------
+## Picking and Debugging a Garbage Collector
 
 Java 8 used the `-verbose:gc` flag to generate GC logs and the `-XX:+PrintGCDetails` flag.
 
@@ -122,8 +119,7 @@ As I mentioned before, GCs are terrible for application performance benchmarks. 
 
 Then we can decide on the tradeoffs we're willing to live with based on the statistics each GC provides. Notice we can also limit ourselves to external metrics only such as CPU and RAM usage. That can be a perfectly fine approach. However, doing a heavy load test might not be the best representation of a GC performance. To be clear, you should still do a heavy load tests.
 
-GC Tuning
----------
+## GC Tuning
 
 The first thing pretty much any Java developer does when tuning memory is define the maximum size and minimum size. The initial heap size is easily determined using `-Xmx` and -`Xms` JVM arguments that have been with us for decades.
 
@@ -146,8 +142,7 @@ A big source of stalls is full GC cycles which can happen if the GC fails to bui
 
 You can also tune the -XX:NewSize value which specifies the amount of RAM dedicated to the new generation.
 
-Metaspace, Permanent Generation, Stack Size, etc.
--------------------------------------------------
+## Metaspace, Permanent Generation, Stack Size, etc.
 
 These aren't technically a part of the GC but they often get mixed up with Java heap memory related issues so it's a good place to discuss them.
 
@@ -159,8 +154,7 @@ We can still set the size of the meta-space using the hint `-XX:MaxMetaspaceSize
 
 It's important to tune the application properly to GC. Reducing usage of native code (and finalizers), weak references, soft and phantom references. All of these features create an overhead to the GC. Although to be fair, in most cases on the server, these aren't the determining factor.
 
-The Future at Valhalla
-----------------------
+## The Future at Valhalla
 
 GCs are amazing, but there are some edge cases in Java heap memory performance.
 
@@ -192,8 +186,7 @@ The impact on the GC would also be huge. Imagine an array of 2000 Point objects 
 
 This is a big change to Java SE both in the language and the virtual machine. As such I used to be on the fence about it. But after reading some of the [materials related to the project](https://mail.openjdk.java.net/pipermail/valhalla-spec-experts/2021-December/001747.html) I'm cautiously optimistic.
 
-TL;DR
------
+## TL;DR
 
 Garbage collector threads are rarely the reason your app performs badly or even runs out of memory. For `99.9%` of the cases the cause would be in the application code. Don't expect command-line options that would fix an issue magically.
 

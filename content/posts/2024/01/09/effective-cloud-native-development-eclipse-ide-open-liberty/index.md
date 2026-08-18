@@ -33,10 +33,7 @@ The Liberty Tools for Eclipse IDE plugin can help with all stages of the extende
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-105528 aligncenter" src="EclipseLibertyTools1-700x397.png" alt="" width="700" height="397">
 
-<br />
-
-Key capabilities of Liberty Tools
----------------------------------
+## Key capabilities of Liberty Tools
 
 These tools introduce capabilities that really empower you to develop, test, debug, and manage applications without having to leave your IDE, including:
 
@@ -94,8 +91,7 @@ You can see this coding assistance in action with Liberty Tools for Eclipse IDE 
 
 You can follow the steps in the Liberty Tools user guide to [developing with Jakarta EE](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#developing-with-jakarta-ee) and [developing with MicroProfile](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#developing-with-microprofile) APIs with coding assistance.
 
-Start using Liberty Tools in the Eclipse IDE
---------------------------------------------
+## Start using Liberty Tools in the Eclipse IDE
 
 Before you can use Liberty Tools in the Eclipse IDE, you must make sure that you satisfy the necessary [software requirements](https://github.com/OpenLiberty/liberty-tools-eclipse/blob/main/docs/user-guide.md#software-requirements), which you can find in the User Guide. These requirements include the minimum version of Java and the Eclipse IDE that are needed. You'll also need to ensure that you have either the [Liberty Maven plugin](https://github.com/OpenLiberty/ci.maven#configuration) or [Liberty Gradle plugin](https://github.com/OpenLiberty/ci.gradle#adding-the-plugin-to-the-build-script) configured in the `pom.xml` or `build.gradle` file for your application project. Use the most recent version of the plugin to get the latest enhancements and fixes.
 
@@ -107,8 +103,7 @@ If you do not have any applications in your current workspace, you can [create
 
 ![Screenshot of Liberty Tools dashboard refresh icon highlighted in the Eclipse IDE](EclipseLibertyTools4-700x420.png)
 
-Summary and next steps
-----------------------
+## Summary and next steps
 
 With the Liberty Tools plugin, you can efficiently develop, deploy, debug, test, and manage your cloud-native Java applications all within your favourite Eclipse IDE.
 

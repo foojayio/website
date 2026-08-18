@@ -25,8 +25,7 @@ The Apache Web Server is built around a modular architecture. Developers created
 
 Then, people began to think that a web server's core responsibility was not to generate content but to serve it. This separation of concern split the monolithic web server into two parts: the web server on the front serves static content, and the application server generates dynamic content, generally from data stored in a database.
 
-Reverse proxies
----------------
+## Reverse proxies
 
 Organizations kept this architecture, even though application servers could serve static content. I remember that around 2007, I read an article that benchmarked the performance of the Apache Web Server and Apache Tomcat (a Java-based application server): to serve purely static content, the latter was on par with the former, if not a bit faster.
 
@@ -38,8 +37,7 @@ Meanwhile, websites that were focused on communication evolved to full-fledged w
 
 After introducing load balancing, adding more and more features was easy. The entry point started to handle cross-cutting responsibilities: authentication (but not always authorization), caching, IP blocking, etc. The webserver became a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy).
 
-The rise of APIs
-----------------
+## The rise of APIs
 
 Over time, the number of services grew exponentially along with their need to communicate with one another. Inside the same organization, the long-standing tradition was to keep as few technology stacks as possible, the exact number depending on the organization's size.
 
@@ -51,16 +49,14 @@ While SOAP's popularity waned, HTTP's popularity (I dare not write REST) waxed. 
 
 With that in mind, our faithful web server evolved into its current form, the API gateway. It makes a lot of sense: the web server already serves as a central entry point as a Reverse Proxy. Now, we only need to add capabilities that are specific to APIs. Which ones are they?
 
-The need for API gateways
--------------------------
+## The need for API gateways
 
 Here are two essential capabilities that highlight the need for APIs for something that regular web servers cannot provide.
 
 * Complex rate-limiting: Rate limiting is a general-purpose capability to protect one's information system from DDoS attacks. However, when you differentiate between consumers, e.g., free vs. paying, you need to move from a simple rate to a more complex business logic rule.
 * Billing: You might access a resource with regular content if you paid a subscription fee. However, when your business is to sell data, you probably sell them based on volume consumption. While it's possible for the service itself to embed the billing capability, it prevents more distributed architectures that rely on several services to serve the required data. At this point, only a central access point can reliably measure and charge usage.
 
-Apache APISIX
--------------
+## Apache APISIX
 
 A non-exhaustive list of the most widespread API gateways includes:
 
@@ -86,14 +82,11 @@ APISIX provides several core objects:
 
 <img fetchpriority="high" decoding="async" class="size-medium wp-image-55145 aligncenter" src="apisix-objects-479x510.png" alt="" width="479" height="510">
 
-<br />
-
 Objects are stored in [etcd](https://etcd.io/), a distributed key-value store also used by Kubernetes. Apache APISIX exposes a REST API so that you can access the configuration in a technical-agnostic way. Here, we request all existing routes:
 
 ```bash
 curl http://apisix:9080/apisix/admin/routes -H 'X-API-KEY: xyz' # 1
 ```
-
 
 1. Configuration access is protected by default. One needs to pass the API key.
 
@@ -112,7 +105,6 @@ curl http://apisix:9080/apisix/admin/routes/1 -H 'X-API-KEY: xyz' -X PUT -d '
 }'
 ```
 
-
 Or, first, define an `Upstream`:
 
 ```bash
@@ -125,7 +117,6 @@ curl http://apisix:9080/apisix/admin/upstreams/1 -H 'X-API-KEY: xyz' -X PUT -d '
 }'
 ```
 
-
 We can now reference the newly created `Upstream` in a new `Route`:
 
 ```bash
@@ -136,9 +127,7 @@ curl http://apisix:9080/apisix/admin/routes/2 -H 'X-API-KEY: xyz' -X PUT -d '
 }'
 ```
 
-
-Getting your feet wet
----------------------
+## Getting your feet wet
 
 The quickest way to try Apache APISIX is via Docker. Apache APISIX relies on etcd for its configuration, so let's use Docker Compose:
 
@@ -170,7 +159,6 @@ services:
       - "2397:2397"
 ```
 
-
 1. Apache APISIX image
 2. Trick to wait until etcd is fully initialized, and not only started. The `depends_on` attribute is not enough
 3. etcd image
@@ -194,7 +182,6 @@ etcd:
   timeout: 30
 ```
 
-
 We can now create a simple route. We will proxy the httpbin.org service:
 
 ```bash
@@ -212,13 +199,11 @@ curl http://localhost:9080/apisix/admin/routes -H 'X-API-KEY: edd1c9f034335f136f
 }'
 ```
 
-
 We can now test the route. `httpbin` offers a couple of endpoints. The aptly-named `/anything` endpoint returns anything passed in the request data. We can use this endpoint to check everything works as expected:
 
 ```bash
 curl 'localhost:9080/anything?foo=bar&baz' -X POST -d '{ "hello": "world" }' -H 'Content-Type: application/json'
 ```
-
 
 The output should closely resemble the following:
 
@@ -249,9 +234,7 @@ The output should closely resemble the following:
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In this post, I've explained the evolution of web servers. In the beginning, their sole responsibility was to serve static content. Then, they added routing and load balancing capabilities and became reverse proxies. At this point, it was an easy step to add additional cross-cutting features.
 

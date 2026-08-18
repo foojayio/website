@@ -26,10 +26,6 @@ frozen: false
 
 I have gained popularity as a template engine for developing user interface applications that use Java syntax within Spring Boot applications, alongside other engines such as Freemarker, Thymeleaf, Mustache, and Velocity. Many developers widely use Spring Boot, a framework that simplifies Java application development, and incorporating a template engine like mine streamlines the process of creating dynamic and responsive user interfaces.
 
-<br />
-
-<br />
-
 Here's my definition:
 > **The JTE documentation highlights that the **Java Template Engine(jte)** offers a secure and efficient solution tailored for Java and Kotlin. JTE aims to minimize the introduction of new keywords and uses existing language features, simplifying the understanding of a template's functionality.**
 
@@ -68,13 +64,11 @@ The respective build tools need to integrate the following dependency in the `po
 </dependency>
 ```
 
-
 ### Gradle
 
 ```
 implementation("gg.jte:jte:3.1.13")
 ```
-
 
 To render any template, you must utilize an instance of the `gg.jte.TemplateEngine` for an entire application.
 
@@ -90,7 +84,6 @@ CodeResolver codeResolver = new DirectoryCodeResolver(Path.of("jte")); // This i
 TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
 ```
 
-
 Once we fully initialize the template engine instance, we can begin rendering the template.
 
 ```
@@ -102,7 +95,6 @@ import gg.jte.output.StringOutput;
 TemplateOutput templateOutput = new StringOutput();
 templateEngine.render("home.jte", model, templateOutput);
 ```
-
 
 Here, the term `templateOutput` indicates where the template renders. We have different template output implementation as follows
 
@@ -221,7 +213,6 @@ Now it's time for us to get involved with a practical Spring Boot example. To st
 </project>
 ```
 
-
 Unzip the project and import into IntelliJ /Eclipse IDE
 
 Let's create a simple controller called **IndexController and create Page Layout with instance fields**
@@ -246,14 +237,12 @@ public class IndexController {
 }
 ```
 
-
 ```
 <br>package com.bsmlabs.jte;
 
 public record Page(String title, String description) {
 }
 ```
-
 
 The next step involves creating a template **index.jte** within the **/src/main/jte** folder, a directory that is established during the generation process at start.spring.io.  
 
@@ -291,7 +280,6 @@ The next step involves creating a template **index.jte** within the **/src/main/
 </html>
 ```
 
-
 ```
 
 ```
@@ -316,21 +304,16 @@ gg.jte.templateLocation=src/main/jte
 gg.jte.templateSuffix=.jte
 ```
 
-
 As we are developing with Spring Boot and incorporating the `spring-boot-starter-web starter`, both `org.springframework.web.servlet.ViewResolver` and **templateEngine** will be automatically configured.
 
-Conclusion
-----------
+## Conclusion
 
 By integrating the **Java Template Engine (JTE)** into various frameworks, one can experience a novel approach that provides significant benefits, including superior performance, increased concurrency, and quicker template rendering.
 
 The complete code can be found [over on Github](https://github.com/bsmahi/spring-boot-jte).
 
-References
-----------
+## References
 
 <https://jte.gg>
 
 Dan Vega Youtube link: <https://www.youtube.com/watch?v=KoWgHSWA1cc>
-
-<br />

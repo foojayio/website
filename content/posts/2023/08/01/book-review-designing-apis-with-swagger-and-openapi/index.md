@@ -28,14 +28,12 @@ I'm continuing my API journey by reading books, viewing relevant YouTube videos,
 
 Today is a book review.
 
-Facts
------
+## Facts
 
 * 21 chapters
 * $38.39 (eBook)
 
-Chapters
---------
+## Chapters
 
 * Part 1: Describing APIs
   1. Introducing APIs and OpenAPI
@@ -64,8 +62,7 @@ Chapters
 
 The book goes through designing a complete API via a demo project, the [Farmstall API](https://github.com/designapis/farmstall).
 
-Pros and cons
--------------
+## Pros and cons
 
 The review is concise, to say the least.
 
@@ -73,14 +70,11 @@ The book's main benefit is also its main issue: it focuses on beginners. Everyth
 
 I'm not an API expert, but I didn't learn anything. Hence, I don't have a lot to say.
 
-Conclusion
-----------
+## Conclusion
 
 If you're a true newbie, *i.e.*, you know nothing about HTTP, requests and responses, OpenAPI, and Postman, this book is for you. It goes into great detail in explaining everything from scratch.
 
 If you have more than a passing familiarity with any of the above, I'm afraid it will be a loss of your money and time.
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/designing-apis-swagger-openapi/) on July 16th, 2023*
 

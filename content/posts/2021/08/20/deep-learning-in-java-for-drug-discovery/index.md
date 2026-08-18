@@ -32,8 +32,7 @@ Yet at the same time, such experimental throughput has opened the door to levera
 
 Labs, especially those with a purely experimental focus, might understandably feel overwhelmed with not knowing what to do with all this accumulated data, but this highlights the need for having big-data analytics professionals on hand along with flexible tools that can analyze such data. This in turn can help point researchers in the direction they need to go that will most likely be productive.
 
-High-Throughput Screening
--------------------------
+## High-Throughput Screening
 
 One such scenario can be found in experimental high-throughput screening (HTS) campaigns where tens of thousands of data points can be generated in one experimental session. Such data is mostly already properly curated insofar as having the appropriate controls and experimental conditions guaranteed and being in a consistent format, which can be an issue when attempting to compare many data points across different experiments.
 
@@ -41,21 +40,17 @@ This consequently makes HTS data extremely attractive for a computational data-a
 
 Presently, I am doing ongoing work analyzing such data for an HTS screen that seeks to identify particular molecular species from a compound library that effect a favourable signal, such signals that lie within a certain range indicate a molecular candidate from the compound library that effects a desired protein conformational change, i.e., a hit.
 
-Java and Deep Netts as Data-Analytics Engine
---------------------------------------------
+## Java and Deep Netts as Data-Analytics Engine
 
 The data-analytics engine that has proven extremely useful for this endeavour is [Deep Netts](https://www.deepnetts.com/)®, a deep learning suite written in Java, with the help of Apache NetBeans for its infrastructure and JFreeChart for graphing, which has the benefit of running purely off of the Java Virtual Machine (JVM) without the hassle of relying on native libraries, which can make obtaining deep learning software for unique hardware architectures and operating systems next to impossible, a consideration rendered moot by Deep Nett's® complete harmony with the JVM:
 ![](DeepNettsManyWindows-1024x550.png)
-
-<br />
 
 In addition to architecture independence, Deep Netts® has also afforded my research the flexibility of finetuning the hyperparameters that best suit the nature of the data in order to maximize model prediction accuracy.
 
 This is especially useful since documenting hyperparameter values can provide valuable insight into the computational conditions most appropriate for a given experimental method, in this case, HTS. A tantalizing research question would be to investigate if hyperparameter values depend on the experimental phenomena probed for a given protein if the specific experimental physics that yields the data changes, while the protein and molecular candidates don't.
 ![](Code_screen_shot-1-1024x640.jpg)
 
-Freedom from Quantitative Structure Activity Relationship Input
----------------------------------------------------------------
+## Freedom from Quantitative Structure Activity Relationship Input
 
 Though perhaps one of the most appealing abilities that DeepNetts® has to contribute is its freedom from quantitative structure activity relationship (QSAR) input as an obligatory predictor variable.
 
@@ -67,8 +62,7 @@ This has already shown itself to be a relevant consideration in my current work.
 
 It is for these reasons that I see tremendous potential for this suite in the drug discovery pipeline and why I feel it is necessary to share Deep Netts'® existence with the scientific community. As a Java developer, I have especially come to appreciate having a tool in my language that I could immediately use out of the box and not have to add on weeks, or even months, of training in order to become proficient in another language in order to use other deep learning suites, that, and worrying about architecture compatibility for native dependencies.
 
-COVID-19 and Deep Netts
------------------------
+## COVID-19 and Deep Netts
 
 Now is the time to leverage all the power of deep learning and data-analytics to address health concerns at the molecular level. With an international public health crisis, such as the ongoing COVID-19 pandemic ravaging the planet - which has already claimed 4.27 million lives as of the time of this writing - it is absolutely crucial that a powerful tool such as Deep Netts® be used to its fullest in order to speed up the search for cures and treatments for the ever-increasing list of pathologies that afflict humanity.
 

@@ -31,8 +31,7 @@ It depends:
 * The JVM
 * The data in the file
 
-It works on my machine
-----------------------
+## It works on my machine
 
 or to be more precise, it's faster on my machine.
 
@@ -59,8 +58,7 @@ This was confirmed with my test of reading and parsing the file -\> 18 seconds, 
 On my laptop, it was even less significant, reading and parsing the file -\> 5.6 seconds, reading the file and do nothing with the data -\> 5.1 seconds.
 > Lesson 3️⃣: The published results are not including file I/O which may be the most time consuming on your machine.
 
-Hack coding
------------
+## Hack coding
 
 The goal of the challenge is to get the result as fast as possible with most of the hacks allowed.
 
@@ -87,8 +85,7 @@ Preview API's such as Foreign Function Memory (FFM) and incubator API such as th
 
 I joined the challenge to see how fast I could get the job done without any hacks. The answer is 10 seconds.
 
-The JVM
--------
+## The JVM
 
 ### The JVM parameters
 
@@ -120,8 +117,7 @@ The fastest "no hacks" implementation from Sam Pullara is faster with GraalVM CE
 Specifying the JVM was quite easy as [SDKMAN](https://sdkman.io/) was used.
 > Lesson 6️⃣: You have many JVM distributions at your disposal, maybe one will better suit your needs.
 
-The Data
---------
+## The Data
 
 Some of the very fast implementations are a few times slower when using the 10K station names, instead of the default 500. Some of the submissions even failed.
 > Lesson 7️⃣: Different input data will result in different performances.
@@ -129,8 +125,7 @@ Some of the very fast implementations are a few times slower when using the 10K 
 The 1BRC project includes a [weather_stations.csv](https://github.com/gunnarmorling/1brc/blob/main/data/weather_stations.csv) as example, I guess that most of the implementations would fail with this file as it starts with comment lines and has 4 digits after the comma for temperatures.
 > Lesson 8️⃣: Be aware that optimization could come to the prize of flexibility.
 
-My implementation
------------------
+## My implementation
 
 My strategy here was to start with the K.I.S.S. (Keep It Simple Stupid) optimization first and profile for bottlenecks. Using JFR to profile gave me some ideas on where to profile but it didn't result in the expected win quite often.  
 ![](1brc-flameview2-1024x421.png) *-XX:StartFlightRecording=duration=15s,settings=profile,name=CalculateAverage_japplis,filename=flight-recorder.jfr,dumponexit=true*   
@@ -145,8 +140,7 @@ So here are the lessons learned on my implementation:
 > * 1️⃣2️⃣ Put a `try {} catch {}` outside a loop is way faster than having it in the loop
 [![](1brc-total-1024x246.png)](1brc-total.png)
 
-Conclusion
-----------
+## Conclusion
 
 * Performance depends on a lot of factors
 * Collaboration of ideas between participants gave the best results
@@ -170,7 +164,3 @@ The community was also great to either help Gunnar in organizing it or each othe
 * [InfoQ interview](https://www.infoq.com/news/2024/01/1brc-fast-java-processing/)
 * [Gunnar Morling on the 1BRC](https://www.youtube.com/watch?v=m0dZ_f48fzA) (live from Voxxed Days CERN) - YouTube
 * [1 Billion Row Challenge Top Contenders](https://www.twitch.tv/videos/2050175537) - Twitch
-
-<br />
-
-<br />

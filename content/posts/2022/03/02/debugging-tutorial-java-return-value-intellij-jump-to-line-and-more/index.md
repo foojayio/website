@@ -39,10 +39,7 @@ But before we proceed, here are the videos (the 2nd and 3rd):
 >
 > --- Shai Almog (@debugagent) [February 22, 2022](https://twitter.com/debugagent/status/1496126856692645894?ref_src=twsrc%5Etfw)
 
-<br />
-
-Java Return Value
------------------
+## Java Return Value
 
 Placing the return value from the method we just stepped out of is remarkably easy. Yet it's off by default. We can enable the "Show method return values" settings option in IntelliJ and it just "magically" works.
 
@@ -56,8 +53,7 @@ If the application feels slow, disable such instrumentations. If possible, inves
 
 ![Show Method Return Values](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613449451/H9UUmLn9w.png)
 
-IntelliJ Jump to Line
----------------------
+## IntelliJ Jump to Line
 
 So how do I know less than 46 thousand developers used this feature?
 
@@ -69,8 +65,7 @@ This is super useful if you want to re-try something. You step over a method, ob
 
 It's also useful for testing. We can try a method with different values again and again, then generate use cases for that. We can understand code coverage semantics better without restarting the app.
 
-Object Marking
---------------
+## Object Marking
 
 Another feature that's absolutely remarkable and I just don't see in "the real world" is marking. Maybe it's because people just don't understand what it means...
 
@@ -84,8 +79,7 @@ You can use this in conditional breakpoints to stop at the right location. It's 
 
 ![Mark Objects Menu](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613600378/Ajtf6FNyK.png)
 
-Return Immediately
-------------------
+## Return Immediately
 
 One of the common problems we see when we manipulate state during debugging is the side effects. A method can trigger errors because of that and effectively pollute the entire chain of debugging. It's a waste.
 
@@ -95,8 +89,7 @@ This is a pretty niche feature, but when you need it, it's cool!
 
 ![Return Immediately](https://cdn.hashnode.com/res/hashnode/image/upload/v1645613199855/m3wMBWi1M.png)
 
-Drop Frame
-----------
+## Drop Frame
 
 This is something I didn't have time for. I plan to cover it in a future video. It's essentially an "undo" of a step into operation. The stack is just unwinded by it. It doesn't restore the state though, so it isn't an exact "undo" operation.
 
@@ -104,15 +97,13 @@ This is something I didn't have time for. I plan to cover it in a future video. 
 
 Eagle eyed readers will also notice a feature called "Throw Exception" which does exactly that. Its useful for some edge cases as validating code robustness and failure behavior. I'll try to address that too in the future.
 
-Changing State
---------------
+## Changing State
 
 Unlike the other features here, many developers change the state of properties during debugging. It's something most developers know about but don't do enough.
 
 We need to keep this in mind when debugging source code and try to use it more.
 
-TL;DR
------
+## TL;DR
 
 There are so many features in control flow and debugging. This article barely scratches the surface of what's available to us.
 

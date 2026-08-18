@@ -23,8 +23,7 @@ In [the previous article](https://foojay.io/today/java-thread-programming-part-3
 
 We will discuss another similar situation in this article. However, we will use symbols and pseudocode to explain this.
 
-Symbols
--------
+## Symbols
 
 Let's define the symbols first.
 
@@ -39,8 +38,7 @@ In pseudocode, we will use thread number and line number as well. For example, `
 
 The local variables will have defaults unless they are initialized with a value. For example, for `Boolean`, the default value is `false`; for `integer`, the default value is `0`.
 
-Pseudocode
-----------
+## Pseudocode
 
 If we turn the program that we discussed [in the last article](https://foojay.io/?p=50525&preview_id=50525&preview_nonce=2c6db1d17c&preview=true) into symbols and pseudocode, we have the following:
 
@@ -56,7 +54,6 @@ Execution order 1 # 1.1, 2.1, 1.2, 2.2
 Execution order 2 # 1.1, 2.1, 2.2, 1.2
 Execution order 3 # 1.1, 2.1, 2.2
 ```
-
 
 Now that we are familiar with the symbol and pseudocode let's see another problem:
 
@@ -75,14 +72,12 @@ Execution order 1 # 1.1, 1.2. 1.3, 2.1, 2.2, 2.3
 Execution order 2 # 2.1, 2.2, 2.3, 1.1, 1.2. 1.3
 ```
 
-
 If the first execution order succeeds, then the output would be:
 
 ```
 Thread1: 0
 Thread2: 2
 ```
-
 
 And if the second execution order succeeds, then the output would be:
 
@@ -91,13 +86,11 @@ Thread1: 1
 Thread2: 0
 ```
 
-
 However, apart from the above two, there is another possible execution order:
 
 ```
 Execution order 3:  1.1, 2.1, 1.2, 2.2, 1.3, 2.3
 ```
-
 
 If the above execution order succeeds, then the output would be:
 
@@ -106,13 +99,11 @@ Thread1: 0
 Thread2: 0
 ```
 
-
 The above output doesn't depend on the last two executions, `1.3`. or `2.3`.
 
 So the output will remain the same if though `2.3` executes first.
 
-Execution Order Optimization
-----------------------------
+## Execution Order Optimization
 
 So far, we have have three execution orders, and it seems only the three outputs mentioned above are possible.
 
@@ -123,7 +114,6 @@ Thread1: 1
 Thread2: 1
 ```
 
-
 ...or...
 
 ```
@@ -131,20 +121,17 @@ Thread1: 2
 Thread2: 2
 ```
 
-
 These outputs may not seem logical, however, they are possible. And the execution order could be:
 
 ```
 Execution order 4: 2.1, 1.1, 1.2, 2.1, 1.3, 2.3
 ```
 
-
 ...or...
 
 ```
 Execution order 5: 1.2, 2.1,2.2, 1.1, 1.3, 2.3
 ```
-
 
 Now the question is how this is even possible?
 
@@ -173,7 +160,6 @@ If the second thread runs first, what would be the output of thread 2?
 Thread2: 3
 ```
 
-
 The reason is, in `2.3` we have set `L6.X = 3`. However, if execution order is different than the program order, the output would be different. That's why here the Java compiler won't change it.
 
 Now let's look at the first thread. What would be the output?
@@ -182,13 +168,11 @@ Now let's look at the first thread. What would be the output?
 Thread1: 000
 ```
 
-
 In this case, `1.2`, `1.4`, and `1.5` must have run before `2.2`. if `2.2` executes first, then the output would be:
 
 ```
 Thread1: 333
 ```
-
 
 If `1.2` execute before `2.2` and then `1.4` and 1.5 execute, the output would be:
 
@@ -196,13 +180,11 @@ If `1.2` execute before `2.2` and then `1.4` and 1.5 execute, the output would b
 Thread1: 033
 ```
 
-
 If `1.2` and `1.4` executes before `2.2` and then `1.5` executes, the output would be:
 
 ```
 Thread1: 003
 ```
-
 
 Now, look at the following output:
 
@@ -210,13 +192,11 @@ Now, look at the following output:
 Thread1: 030
 ```
 
-
 Do you think the above output is possible? The reason is if `1.2` executes first and then `2.2` executes, and then it doesn't matter whatever the execution order for the rest of the exception, the output should be:
 
 ```
 Thread1: 033
 ```
-
 
 And we know `S1` and `S2` refer to the same Object.
 
@@ -232,8 +212,7 @@ The above example can be found in [the Java language specification](https://docs
 
 From the above discussion, we have understood that the execution order can be different to the program order. The execution order depends on the compiler's optimization technique; it can further rely on the Java virtual machine and the CPU itself. Thus the output of a program becomes uncertain. In a multithread environment, we call this a **data race**.
 
-Benefits and Drawbacks of Volatility
-------------------------------------
+## Benefits and Drawbacks of Volatility
 
 Now the question is, what can be the solution to this problem. Well, the solution is relatively straightforward: [we simply use the keyword "volatile"](https://foojay.io/today/java-thread-programming-part-3/).
 

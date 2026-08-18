@@ -23,8 +23,7 @@ frozen: false
 Congratulations! You will never forget this day. It's the day you become a real developer, and all senior developers will welcome you into their world, as they all have made a similar mistake at least once.
 [![](fail-deleted-production.png)](https://twitter.com/IanColdwater/status/1706306286684454932)
 
-Database Disasters
-------------------
+## Database Disasters
 
 Dropping a table or a complete database is a mistake that can happen very quickly. Another one is forgetting the `WHERE` part of your SQL statement. There is a big difference between `DELETE FROM clients` and `DELETE FROM clients WHERE id = 1`...
 
@@ -33,8 +32,7 @@ But the main mistake happens when you have multiple connections defined in your 
 Another database disaster waiting to happen is when you forget to validate the input. SQL injection should be a well-known problem by now, but still, a lot of errors happen in this field, causing not only disasters but also security nightmares. Or, as XKCD nicely illustrates it:
 [![](xkcd_exploits_of_a_mom.png)](https://xkcd.com/327/)
 
-Dates and Times
----------------
+## Dates and Times
 
 Working with dates and times is the real test that distinguishes beginners from experienced developers. The defining factor is not only their ability to handle them correctly but also the number of "yes, I have seen this problem before" moments.
 
@@ -54,8 +52,7 @@ Here are some interesting situations related to dates, times, and time zones.
  <a target="_blank" href="https://www.reddit.com/r/ProgrammerHumor/comments/16l4ng2/thesunisannoying/"><img loading="lazy" decoding="async" width="511" height="510" src="fail-timezone-issue-511x510.jpg" alt="" class="wp-image-103006" style="object-fit:cover;width:300px;height:300px"></a>
 </figure>
 
-Computer System Breakdowns
---------------------------
+## Computer System Breakdowns
 
 But be aware, we can not only make mistakes in our code and database! Our whole computer infrastructure is prone to errors!
 > Many years ago, I was working on my first big multimedia project for a light fixtures manufacturer to bring their expensive thick catalogs to CD-ROM (for young people, a blinking disk that could contain a whopping 640 MB of data...). We had a strict deadline and had a first working version after three weeks of hard work. But then disaster struck! The hard disk of my fancy blue iMac broke.
@@ -82,8 +79,7 @@ But be aware, we can not only make mistakes in our code and database! Our whole 
 
 Another system disaster: never, never, NEVER, type the command `rm -rf /`. The remove command parameter `f` removes all prompts, so you let it go ahead without asking for any confirmations. The `r` lets the remove command work recursively, meaning it will go through all nested directories. Combine this with `/`, being the very root of your hard disk, and you are heading towards a total nightmare...
 
-Testing Mistakes
-----------------
+## Testing Mistakes
 
 In the same category of testing versus production databases: mailing lists! The number of stories of test emails reaching thousands of clients is incredibly long.
 
@@ -93,15 +89,12 @@ Another well-known example is sending test messages in production, like the time
 > I can remember a story, in the early days of the internet, when networks were not that fast, and servers were smaller. Most companies had their own internal email server. But when someone mailed a big PDF report or other file to everyone at the company, the complete system could crash. Suddenly too much storage was needed, and a ping-pong of email error replies, led to a total breakdown of the server.
 > \~ Frank
 
-<br />
-
 Similarly, I remember several situations where we've had to (re)upload batches of data and somehow miscalculated the size and processing time, leading to queues being full and data processing to be severely delayed.
 > <br />
 >
 > \~ Marit
 
-Conclusions
------------
+## Conclusions
 
 While some of the mistakes mentioned here are honest mistakes made by developers, some of the bad events described here actually reveal a problem within the organization. Do developers need unrestricted access to the production database? Why are they able to access the entire production mailing list for a test? Some data (especially personal data) should be behind heavily closed doors with minimal access. But in many companies, all this data is widely accessible to the whole developer team (or worse). If this is not guarded by the organization, developers should always be professional and handle data with care.
 

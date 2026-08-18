@@ -10,8 +10,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  
 [Using Streams \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams)
 
@@ -29,7 +27,6 @@ The file in the source code contains comma-separated values for counter, firstna
 ...
 ```
 
-
 We can read this CSV-file line by line and convert each line to an object which is added to a list of persons:
 
 <div data-pym-src="https://www.jdoodle.com/plugin" data-version-index="6" data-language="java" data-client-id="34d6e81ae45d88cdb9fb98fed1415b81" data-has-files="true">
@@ -42,8 +39,6 @@ We can read this CSV-file line by line and convert each line to an object which 
   </xmp>
  </div>
 </div>
-
-
 
 Just like in the UsingObjects-example, we use an object to store the data of each line in the CSV file, in this case, the object `Person`.
 
@@ -69,9 +64,6 @@ Mittie Vaughn, age: 64
 Miguel Clarke, age: 39
 ...
 ```
-
-
-
 
 Also in this example a `Record` can be used for the `Person` object:
 
@@ -135,7 +127,5 @@ public class ReadTextFile {
 }
 ```
 
-
-  
 [\<\< Using Objects](https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/)  
 [Using Streams \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-streams)

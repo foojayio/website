@@ -32,15 +32,11 @@ In a travel assistant scenario, for example, if a user mentions "I'm allergic to
 
 {{< youtube 0U1S0WSsPuE >}}
 
-<br />
-
 > Video: [What is an embedding model?](https://youtu.be/0U1S0WSsPuE)
 
 Behind the scenes, this works thanks to vector similarity search. It turns text into vectors (embeddings) --- lists of numbers --- stores them in a vector database, and then finds the ones closest to your query when relevant information needs to be recalled.
 
 {{< youtube o3XN4dImESE >}}
-
-<br />
 
 > Video: [What is semantic search?](https://youtu.be/o3XN4dImESE)
 
@@ -48,12 +44,9 @@ Today, we're gonna build a memory-enabled AI agent that helps users plan travel.
 
 To do that, we'll build a Spring Boot app from scratch and use Redis as our memory store. It'll handle both short-term memory (conversation history) and long-term memory (facts and preferences as vector embeddings), enabling our agent to provide truly personalized assistance.
 
-Redis as a Memory Store for AI Agents
--------------------------------------
+## Redis as a Memory Store for AI Agents
 
 {{< youtube Yhv19le0sBw >}}
-
-<br />
 
 > Video: [What is a vector database?](https://youtu.be/Yhv19le0sBw)
 
@@ -68,8 +61,7 @@ For AI agents, Redis serves as both:
 1. A short-term memory store using Redis Lists to maintain conversation history
 2. A long-term memory store using Redis JSON and the Redis Query Engine that enables vector search to store and retrieve facts and experiences
 
-Spring AI and Redis
--------------------
+## Spring AI and Redis
 
 Spring AI provides a unified API for working with various AI models and vector stores. Combined with Redis, it allows our users to easily build memory-enabled AI agents that can:
 
@@ -78,8 +70,7 @@ Spring AI provides a unified API for working with various AI models and vector s
 3. Extract and deduplicate memories from conversations
 4. Summarize long conversations to prevent context window overflow
 
-Building the Application
-------------------------
+## Building the Application
 
 Our application will be built using Spring Boot with Spring AI and Redis. It will implement a travel assistant that remembers user preferences and past trips, providing personalized recommendations based on this memory.
 
@@ -98,7 +89,6 @@ implementation("org.springframework.ai:spring-ai-starter-model-openai")
 
 implementation("com.redis.om:redis-om-spring:1.0.0-RC3")
 ```
-
 
 ### 2. Define the Memory model
 
@@ -119,7 +109,6 @@ enum class MemoryType {
     SEMANTIC   // General knowledge and facts
 }
 ```
-
 
 ### 3. Configure the Vector Store
 
@@ -151,7 +140,6 @@ class MemoryVectorStoreConfig {
     }
 }
 ```
-
 
 Let's break this down:
 
@@ -280,7 +268,6 @@ class MemoryService(
 }
 ```
 
-
 Key features of the memory service:
 
 * Stores memories as vector embeddings in Redis
@@ -351,7 +338,6 @@ class LongTermMemoryRetrievalAdvisor(
   }
 }
 ```
-
 
 ### 5.2 Advisor for Long-term memory recording
 
@@ -445,7 +431,6 @@ class LongTermMemoryRecorderAdvisor(
 }
 ```
 
-
 ### 6. Plugging the advisors in our ChatClient
 
 In our `ChatConfig` class, we will configure our `ChatClient` as:{#0f6b}
@@ -466,7 +451,6 @@ fun chatClient(
         ).build()
 }
 ```
-
 
 ### 7. Implement the Chat Service
 
@@ -517,7 +501,6 @@ class ChatService(
 }
 ```
 
-
 ### 8. Configure the Agent System Prompt
 
 The agent is configured with a system prompt that explains its capabilities and access to different types of memory:
@@ -543,7 +526,6 @@ fun travelAgentSystemPrompt(): Message {
     return SystemMessage(promptText)
 }
 ```
-
 
 ### 9. Create the REST Controller
 
@@ -590,9 +572,7 @@ class ChatController(private val chatService: ChatService) {
 }
 ```
 
-
-Running the Demo
-----------------
+## Running the Demo
 
 The easiest way to run the demo is with Docker Compose, which sets up all required services in one command.
 
@@ -603,7 +583,6 @@ git clone https://github.com/redis/redis-springboot-recipes.git
 cd redis-springboot-recipes/artificial-intelligence/agent-long-term-memory-with-spring-ai
 ```
 
-
 ### Step 2: Configure your environment
 
 Create a `.env` file with your OpenAI API key:
@@ -612,13 +591,11 @@ Create a `.env` file with your OpenAI API key:
 OPENAI_API_KEY=sk-your-api-key
 ```
 
-
 ### Step 3: Start the services
 
 ```
 docker compose up --build
 ```
-
 
 This will start:
 
@@ -654,8 +631,7 @@ If you reenter the same user ID, the long-term memories will be reloaded on the 
 
 ![Animated screen recording of a cleared chat session in the Redis Agent Memory demo. The “Episodic Memories” panel still shows two past memories about a trip to Paris. In the chat panel, the message “Conversation cleared. How can I assist you today?” appears, indicating that the short-term memory has been reset. The user is about to start a new conversation. This demonstrates that although the short-term context is gone, the agent retains access to long-term memories, allowing it to respond with relevant information from past interactions.](https://github.com/redis-developer/redis-springboot-recipes/raw/main/artificial-intelligence/agent-memory-with-spring-ai/readme-assets/5_starting_new_chat.gif)
 
-Exploring the Data in Redis Insight
------------------------------------
+## Exploring the Data in Redis Insight
 
 RedisInsight provides a visual interface for exploring the data stored in Redis. Access it at `localhost:5540` to see:
 
@@ -673,8 +649,7 @@ If you run the `FT.INFO memoryIdx` command in the RedisInsight workbench, you'll
 
 ![Screenshot of RedisInsight Workbench showing the schema details of the memoryIdx vector index. The result of the FT.INFO memoryIdx command displays an index on JSON documents prefixed with memory:. The schema includes: • $.content as a TEXT field named content • $.embedding as a VECTOR field using HNSW with 384-dimension FLOAT32 vectors and COSINE distance • $.memoryType and $.userId as TAG fields • $.metadata and $.createdAt as TEXT fields This shows how memory data is structured and searchable in Redis using RediSearch vector similarity.](https://github.com/redis-developer/redis-springboot-recipes/raw/main/artificial-intelligence/agent-memory-with-spring-ai/readme-assets/redis_insight_index_details.png)
 
-Wrapping up
------------
+## Wrapping up
 
 And that's it --- you now have a working AI agent with memory using Spring Boot and Redis.
 

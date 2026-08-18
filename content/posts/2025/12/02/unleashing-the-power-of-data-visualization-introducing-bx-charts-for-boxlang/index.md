@@ -22,8 +22,7 @@ frozen: false
 
 In the world of modern web applications, data is king---but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, transforming complex datasets into intuitive, compelling narratives. Today, we're thrilled to introduce BX-Charts, a game-changing charting module that brings professional-grade data visualization directly into the BoxLang ecosystem. 🌟
 
-The Visualization Challenge 🧩
-------------------------------
+## The Visualization Challenge 🧩
 
 Developers have long struggled with creating meaningful charts:
 
@@ -34,18 +33,15 @@ Developers have long struggled with creating meaningful charts:
 
 **BX-Charts** demolishes these barriers, offering a seamless, powerful charting solution that's both developer-friendly and enterprise-ready. 💪
 
-Fully Documented
-----------------
+## Fully Documented
 
 We love ❤️ docs! We have fully documented our module: [https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts](https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts "https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts")
 
-Fully Supported
----------------
+## Fully Supported
 
 If you have one of our +/++ licenses, you will get personalized support and implementation advice: [https://www.boxlang.io/plans](https://www.boxlang.io/plans "https://www.boxlang.io/plans")
 
-Code Samples: Bringing Data to Life
------------------------------------
+## Code Samples: Bringing Data to Life
 
 1. Multi-Series Performance Analysis with Per-Series Border Styling  
    ![](bx-charts-1-700x324.png)
@@ -82,7 +78,6 @@ Code Samples: Bringing Data to Life
 </bx:chart>
 ```
 
-
 2. Line Chart with Variable Border Widths  
    ![](bx-charts-2-700x316.png)
 
@@ -117,7 +112,6 @@ Code Samples: Bringing Data to Life
 </bx:chart>
 ```
 
-
 3. Responsive Dashboard Layout  
    ![](bx-charts-3-700x449.png)
 
@@ -150,7 +144,6 @@ Code Samples: Bringing Data to Life
 </div>
 ```
 
-
 4. Background and Font Styling  
    ![](bx-charts-4-700x296.png)
 
@@ -175,7 +168,6 @@ Code Samples: Bringing Data to Life
 </bx:chart>
 ```
 
-
 5. Bubble Chart for Multi-Dimensional Analysis  
    ![](bx-charts-5-700x349.png)
 
@@ -197,9 +189,7 @@ Code Samples: Bringing Data to Life
 </bx:chart>
 ```
 
-
-Exploring the Possibilities 🔍
-------------------------------
+## Exploring the Possibilities 🔍
 
 ![](boxlang-charts-explorer-700x372.png)  
 
@@ -221,7 +211,6 @@ box install bx-charts
 # Core OS or Other Runtimes
 install-bx-module bx-charts
 ```
-
 
 ### Key Features
 

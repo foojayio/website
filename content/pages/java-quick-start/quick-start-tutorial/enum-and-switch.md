@@ -10,8 +10,6 @@ aliases:
 frozen: false
 ---
 
-
-
 [\<\< If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)  
 [Using Methods \>\>](https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/)
 
@@ -45,7 +43,6 @@ Do something specific for Type 2
 Do something specific for Type 3
 No action defined for this type: TYPE_2
 ```
-
 
 That does not what we wanted to achieve! All the cases after the valid one are returned now... That's also the reason we don't need to add a break in the `default` block, as this is the last one anyhow.  
 [\<\< If, Then, Else](https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/)  

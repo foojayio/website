@@ -25,8 +25,7 @@ Without further ado, let's go to the Java Challenge!
 
 It's time to improve your Java skills with this Neo Stream Search Challenge
 
-Neo Stream Search Challenge
----------------------------
+## Neo Stream Search Challenge
 
 What do you think will happen when running the following code?
 
@@ -53,7 +52,6 @@ public class NeoSearch {
 
 }
 ```
-
 
 A) Agent Smith is looking for Neo...​  
 
@@ -92,7 +90,6 @@ Predicate neoSearch = str -> {
 };
 ```
 
-
 Then we are reducing our List from 1, 0, 1 and 1 to 3 because we are adding all elements basically:
 
 ```java
@@ -101,14 +98,12 @@ Integer binarySum = binaryNumbers.reduce(Integer::sum)
 .orElseThrow(StackOverflowError::new);
 ```
 
-
 Then here we filter all elements that have the size greater or equals to binarySum and then we use the allMatch function. Note that this function has to have all elements matching to return true. Since the first element is true, the allMatch method from the Stream will go to the next element printing again "Agent Smith is looking for Neo...​", as this method requires all elements to be true, there is no point in continuing the looping so the looping will break.
 
 ```java
 boolean neoFound = ls.stream().filter(str -> str.length() >= binarySum).allMatch(neoSearch);
 System.out.println(neoFound);
 ```
-
 
 To conclude, the output will be:
 
@@ -117,7 +112,6 @@ B) Agent Smith is looking for Neo...
     Agent Smith is looking for Neo...
     false
 ```
-
 
 To fully understand this Java Challenge, you can also watch the FULL explanation video:
 

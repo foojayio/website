@@ -55,7 +55,6 @@ routes:
         "imgproxy:8080": 1                                                       #5
 ```
 
-
 1. Catch-all route that forwards to the web server
 2. Watermark images route
 3. Rewrite the URL...
@@ -74,10 +73,4 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [imgproxy documentation](https://docs.imgproxy.net/)
 * [imgproxy interactive demo](https://imgproxy.net/)
 
-
-
 *Originally published at [A Java Geek](https://blog.frankel.ch/dynamic-watermarking/2/) on July 7^th^, 2024*
-
-<br />
-
-<br />

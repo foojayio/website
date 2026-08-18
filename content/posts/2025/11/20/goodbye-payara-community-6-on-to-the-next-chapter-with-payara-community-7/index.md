@@ -24,8 +24,7 @@ With the November 2025 release, Payara community reached an important milestone.
 
 See what this transition means and how it benefits Java and Jakarta EE developers today and long term.
 
-The next chapter, Payara 7 with Jakarta EE 11
----------------------------------------------
+## The next chapter, Payara 7 with Jakarta EE 11
 
 Jakarta EE 11 represents a major step forward for enterprise Java. Centering the community around Payara 7 allows developers like you gain access to a modern foundation that supports current standards, stronger security and a forward looking feature set.
 
@@ -39,13 +38,11 @@ Core features of Payara Platform Community 7 include:
 
 * A platform that aligns with where the Java ecosystem is heading instead of where it has been
 
-A refreshed container experience with new Docker images
--------------------------------------------------------
+## A refreshed container experience with new Docker images
 
 In case [you missed it](https://payara.fish/blog/new-docker-images-payara-7/ "you missed it"), the new Payara Platform Community 7 Docker images are now publicly available [on Docker Hub](https://hub.docker.com/u/payara/ "on Docker Hub"), giving you easier access to container ready builds that run on updated JDK versions and the latest Jakarta EE specifications.
 
-What the end of Payara Platform Community 6 means for you
----------------------------------------------------------
+## What the end of Payara Platform Community 6 means for you
 
 Ending the Payara 6 community line was a carefully considered decision, driven by the realities of the evolving Java ecosystem and the need to maintain security and quality. For users, this change has clear implications:
 
@@ -59,8 +56,7 @@ Ending the Payara 6 community line was a carefully considered decision, driven b
 
 It is important to highlight that version 6 is still available as part of the Payara Platform Enterprise Edition ([get the trial here](https://payara.fish/free-trials/ "get the trial here")) for teams that need long term Jakarta EE 10 support, guaranteed patches and production ready support. This option ensures that organisations running mission critical workloads can continue to rely on Payara Platform Enterprise 6 while planning their upgrade path at a comfortable pace.
 
-Why this transition is positive for the community
--------------------------------------------------
+## Why this transition is positive for the community
 
 While some users may have ongoing projects running on Payara Platform Community 6, the overall shift is beneficial for the health and growth of the entire Payara community.
 
@@ -76,8 +72,7 @@ The net positive effects include:
 
 Payara Platform Community 7 gives the community a platform that is ready for the future. Instead of maintaining a legacy line, energy can go into advancing the platform in meaningful ways.
 
-How to prepare for the upgrade
-------------------------------
+## How to prepare for the upgrade
 
 To ensure a smooth transition, project teams should begin evaluating their workloads on Payara 7. Typical next steps include:
 
@@ -91,8 +86,7 @@ To ensure a smooth transition, project teams should begin evaluating their workl
 
 The earlier you begin testing, the easier the transition will be.
 
-Looking ahead
--------------
+## Looking ahead
 
 The Payara community has always grown through collaboration, curiosity and a shared commitment to improving the platform. As we move forward with Payara Platform Community 7, community members and contributors remain at the heart of that progress. Your testing, ideas and feedback shape the direction of each release, and your contributions help keep the ecosystem strong.
 

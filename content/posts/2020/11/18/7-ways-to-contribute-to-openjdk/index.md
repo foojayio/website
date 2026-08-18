@@ -70,7 +70,3 @@ One option in this area is to write blog posts about specific areas of new OpenJ
 There are numerous opportunities for developers to contribute to OpenJDK development.
 
 If you think you have some extra bandwidth after your daily work that involves OpenJDK development, and you're interested, you might want to consider contributing to the next OpenJDK version in one or more of the ways described.
-
-<br />
-
-<br />

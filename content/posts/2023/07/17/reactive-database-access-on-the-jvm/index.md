@@ -32,15 +32,13 @@ Even though I'm not providing consulting services regularly, I wanted to keep up
 
 The base application uses Project Reactor and its types - `Flux` and `Mono`. For an added twist, I use Kotlin (without coroutines). Most code snippets have unnecessary type hints for better understanding.
 
-The demo model
---------------
+## The demo model
 
 I don't want a complicated demo model, but I don't want it to be too simple. I'll use a single many-to-many relationship and a field with `LocalDate`:
 
 ![](demo-model-1024x204.png)
 
-Spring Data R2DBC
------------------
+## Spring Data R2DBC
 
 As far as I remember, the Spring ecosystem was the first to offer a reactive database access API. At first, it was limited to H2 - not very useful in production. However, new reactive drivers were easy to integrate.
 
@@ -60,7 +58,6 @@ data class Person(
 
 interface PersonRepository : ReactiveCrudRepository<Person, Long>
 ```
-
 
 R2DBC repositories look similar to regular Spring Data repositories with one big difference. They integrate Project Reactor's reactive types, `Mono` and `Flux`. Note that it's easy to use Kotlin's coroutines with an additional bridge dependency.
 
@@ -89,7 +86,6 @@ data class Person(
 }
 ```
 
-
 We also need to define the `Address` repository, as well as a query to list all addresses of a person:
 
 ```kotlin
@@ -99,7 +95,6 @@ interface AddressRepository : ReactiveCrudRepository<Address, Long> {
     fun findAddressForPersonById(id: Long): Flux<Address>
 }
 ```
-
 
 Now comes the least tasteful part: Spring Data R2DBC doesn't support many-to-many relationships at the moment. We need a hook that queries the addresses after loading a person.
 
@@ -116,7 +111,6 @@ class PersonLoadOfficeListener(@Lazy private val repo: AddressRepository)   //1
       .single(person)                                                       //5
 }
 ```
-
 
 1. Annotate with `@Lazy` to avoid running into circular dependencies exception during injection
 2. Use the above query
@@ -135,9 +129,7 @@ spring.r2dbc:
   password: root
 ```
 
-
-Hibernate Reactive
-------------------
+## Hibernate Reactive
 
 If you're familiar with regular Hibernate, you'll feel right at home with Hibernate Reactive. The mapping is the same in both cases:
 
@@ -164,7 +156,6 @@ class Person(
 }
 ```
 
-
 1. Define the table and the schema if necessary
 2. Define column names, if necessary
 3. Define the join column
@@ -189,7 +180,6 @@ We also need to configure the database. Hibernate Reactive uses the traditional 
 </persistence>
 ```
 
-
 1. The only difference so far from the regular Hibernate configuration
 
 Here's the source for the query itself:
@@ -203,15 +193,13 @@ val people: Mono<MutableList<Person>> = sessionFactory
         }.convert().with(UniReactorConverters.toMono())                                   //3
 ```
 
-
 1. Regular `EntityManagerFactory`
 2. Unwrap the underlying session factory implementation. Because we configured a `ReactivePersistenceProvider` in the `persistence.xml`, it's a `Mutiny.SessionFactory`
 3. Hibernate Reactive integrates with [Vert.x](https://vertx.io/), but an extension allows to bridge to Project Reactor if wanted
 
 Note that Hibernate Reactive is the only library among the three to return a `Mono<List>` instead of a `Flux`. In layman's terms, it means you get the whole list at once instead of getting the elements one by one and being able to do something on each one individually.
 
-jOOQ Reactive
--------------
+## jOOQ Reactive
 
 As for the two above frameworks, jOOQ Reactive is similar to its non-reactive version. You first generate the code from the database schema, then use it.
 
@@ -255,7 +243,6 @@ As for the two above frameworks, jOOQ Reactive is similar to its non-reactive ve
 </plugin>
 ```
 
-
 1. The version is defined in the parent Spring Boot Starter parent POM
 2. Set the necessary database driver(s). Note that one should use the **non-reactive** driver
 3. There's a Kotlin generator!
@@ -295,7 +282,6 @@ fun findAll(): Flux<PersonWithAddresses> {                       //1
 }
 ```
 
-
 1. Return a regular Project Reactor's `Flux`
 2. Use `multiset`, see below.
 3. Convert the row to an ordinary Java object via a function
@@ -314,8 +300,7 @@ I'm not a SQL master, so `multiset` is hard at first glance. However, I confirm 
 
 Note that **nested collections are fetched eagerly on a per-record basis, whereas top-level records are streamed reactively**.
 
-Conclusion
-----------
+## Conclusion
 
 We have browsed the surface of the main three reactive database access: Spring Data R2DBC, Hibernate, and jOOQ. So, which one should one choose?
 
@@ -338,7 +323,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [How to Turn a List of Flat Elements into a Hierarchy in Java, SQL, or jOOQ](https://blog.jooq.org/how-to-turn-a-list-of-flat-elements-into-a-hierarchy-in-java-sql-or-jooq/)
 * [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 * [Comment bien s'entendre avec avec Spring Data R2DBC... ou pas](https://blog.ippon.fr/2022/03/02/comment-bien-sentendre-avec-avec-r2dbc-ou-pas/)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/reactive-database-access/) on July 9^th^, 2023*

@@ -21,8 +21,6 @@ enlighterjs: true
 frozen: false
 ---
 
-<br />
-
 > This is the second post in the series, building a profiler from scratch using AsyncGetCallTrace. Today, we're covering wall-clock profiling and how to collect the obtain stack traces. If you're unfamiliar with AsyncGetCallTrace, please check out my previous article in the series [here](https://foojay.io/today/writing-a-profiler-from-scratch-introduction/).
 
 Our goal today is to essentially write the primary loop of a profiler and do the following every n milliseconds (where n is our chosen profiling interval):
@@ -80,7 +78,6 @@ class ThreadMap {
 };
 ```
 
-
 Obtaining the thread id for the current thread leads to our first platform-dependent code, using a syscall on Linux and a non-posix pthread method on mac:
 
 ```cpp
@@ -94,7 +91,6 @@ pid_t get_thread_id() {
   #endif
 }
 ```
-
 
 *Yes, we could quickly implement our profiler for other BSDs like FreeBSD, but MacOS is the only one I have at hand.*
 
@@ -111,7 +107,6 @@ bool is_thread_running(jthread thread) {
 }
 ```
 
-
 This leads us to a list of threads that we can sample. It is usually not a good idea to sample all available threads: With wall-clock profiling, the list of threads can be so large that sampling all threads is too costly. Therefore one typically takes a random subset of the list of available threads. Async-profiler, for example, takes 8, which we use too.
 
 Taking a random subset is quite cumbersome in C, but C++ has a neat library function since C++11: [`std:shuffle`](https://en.cppreference.com/w/cpp/algorithm/random_shuffle). We can use it to implement the random selection:
@@ -126,7 +121,6 @@ std::vector<pid_t> get_shuffled_threads() {
   return std::vector(threads.begin(), threads.begin() + std::min(MAX_THREADS_PER_ITERATION, (int)threads.size()));
 }
 ```
-
 
 *Be aware that we had to change the mutex to a mutex which allows recursive reentrance, as `get_all_threads` also acquires the mutex.*
 
@@ -157,7 +151,6 @@ static void startSamplerThread() {
 }
 ```
 
-
 The `initSampler` function preallocates the traces for `N=8 `threads, as we decided only to sample as many at every loop. The signal handlers can later use these preallocated traces to call `AsyncGetCallTrace`:
 
 ```cpp
@@ -175,7 +168,6 @@ static void initSampler() {
 }
 ```
 
-
 The `sampleThreads` the function sends the signals to each thread using pthread_signal. This is why store the pthread for every thread. But how does a signal handler know which of the traces to use? And how does the `sampleThreads` function know when all signal handlers are finished?
 
 It uses two atomic integer variables for this purpose:
@@ -191,7 +183,6 @@ static void signalHandler(int signo, siginfo_t* siginfo, void* ucontext) {
   stored_traces++;
 }
 ```
-
 
 The `sampleThreads` function has to only wait till `stored_traces` is as expected:
 
@@ -216,7 +207,6 @@ static void sampleThreads() {
 }
 ```
 
-
 We keep the processing of the traces from the last blog post and just store the total number of traces as well as the number of failed traces:
 
 ```cpp
@@ -230,7 +220,6 @@ static void processTraces(size_t num_threads) {
   }
 }
 ```
-
 
 The two global variables don't have to be atomic anymore, as only the sampler thread modifies them. A regular profiler would of course use the traces to obtain information on the run methods, but this is a topic for the next blog post in this series, so stay tuned. You can find the source code for the project on [GitHub](https://github.com/parttimenerd/writing-a-profiler/tree/post-1).
 

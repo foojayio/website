@@ -20,8 +20,7 @@ frozen: false
 
 The JavaFX links of the week are back on [jfx-central.com](https://www.jfx-central.com/home), and here we collect the complete month for you in an excellent overview.
 
-JavaFX 19 is released
----------------------
+## JavaFX 19 is released
 
 * On the JavaFX mailinglist this thrilling message appeared: "Create release notes for JavaFX 19." And yes, they are [available now on GitHub](https://github.com/openjdk/jfx/blob/205b7211bde0e468e81a135fe37952b7f2b11d45/doc-files/release-notes-19.md)!
 * If you want to keep following what's happening inside the JavaFX community, you can suscribe to the mailinglist via [mail.openjdk.org/mailman/listinfo/openjfx-dev](https://mail.openjdk.org/mailman/listinfo/openjfx-dev).
@@ -32,8 +31,7 @@ JavaFX 19 is released
 * [**Johan Vos**](https://twitter.com/johanvos) added [the message](https://twitter.com/johanvos/status/1569682888915836928): "*We did our first JavaFX release in September 2018 (JavaFX 11). We planned a 6-months cadence, similar to the JDK releases. Four years later, we still keep the train moving forward. It takes blood, sweat and tears, but seeing what developers are doing with JavaFX makes it worth.*"
 * With [a very nice reply](https://twitter.com/errcraft/status/1569727660032692230) of [**James Gosling**](https://twitter.com/errcraft) (the [father of Java!](https://en.wikipedia.org/wiki/James_Gosling)): "*Wonderful! I'm a happy JavaFX user. Thanks for all the wonderful work you do.*"
 
-News from "The Web"
--------------------
+## News from "The Web"
 
 * **Pavlo Iatsiuk** announced the first release of DynamoIt --- a JavaFX GUI client application for AWS DynamoDB - [on Reddit](https://www.reddit.com/r/JavaFX/comments/xbdi2u/the_first_release_of_dynamoit_gui_client_for_aws/).
   * You can find the release [on GitHub](https://github.com/bykka/dynamoit/releases/tag/1.0.0).
@@ -54,13 +52,11 @@ News from "The Web"
 * [**WebFX**](https://twitter.com/WebFXProject) - a JavaFX to JavaScript transpiler - announced a [new demo on their website](https://demofx.webfx.dev/), based on the excellent [DemoFX library](https://github.com/chriswhocodes/DemoFX) by [**Chris Newman**](https://twitter.com/chriswhocodes). The demo starts with an introductory animation, asking to click in order to play the actual demo, because in the browser sandbox, playing sound is not permitted before interacting with the user. The resulted demo is just one single java source file. Warning, looking at the demo for too long time can cause brain damage or hypnosis 😉
 * The demos of the visual modeler, written in JavaFX and integrating OpenCV, by [**Alessio Vinerbi**](https://twitter.com/Alessio_Vinerbi) are really amazing. Look at [the video in this tweet](https://twitter.com/Alessio_Vinerbi/status/1573971580409061376) where he modifies two videos on the fly with different visual effects.
 
-JavaFX Jobs
------------
+## JavaFX Jobs
 
 * [**Hendrik Ebbers**](https://twitter.com/hendrikEbbers) is [looking for a developer](https://twitter.com/hendrikEbbers/status/1570026452355096576) to work on a crypto desktop application.
 
-New content on jfx-central.com
-------------------------------
+## New content on jfx-central.com
 
 * FXSkins and FXRibbon by [**Pedro Duque Vieira**](https://twitter.com/P_Duke) were added to the Libraries on jfx-central.com, see [Pedro's profile](https://www.jfx-central.com/people/p.vieira).
 * New Real World App: [**WrapperRFID**](https://twitter.com/wrapperrfid), a 3-layer software solution, using a JavaFX application as the user interface, used to control the loading and unloading of products by one of the largest retailers in Brazil, [more info on jfx-central.com](https://www.jfx-central.com/real_world/wrapperrfid).

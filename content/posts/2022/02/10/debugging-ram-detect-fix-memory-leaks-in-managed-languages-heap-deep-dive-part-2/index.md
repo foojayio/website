@@ -23,8 +23,7 @@ frozen: false
 
 In the [previous installment](https://foojay.io/today/debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1/), I talked about the Java garbage collector. In this part, I'll discuss the most common memory issue: the memory leak. I focus on managed languages, specifically Java, but I will mention some native code tools which are interesting. A memory leak contributes to heap size, which isn't the most pressing bug in most cases. But when left alone, memory usage can become a problem and, by that point, finding the issue is hard. Unlike a crash dump, where we get a reference to a specific line, a memory leak can remain hidden.
 
-What are the Consequences of Memory Leaks?
-------------------------------------------
+## What are the Consequences of Memory Leaks?
 
 Unfortunately, this often means that memory leaks can carry into production and even cause problems to end users. E.g. This recent story about [memory leaks hobbling Apples latest M1 computers](https://www.macworld.com/article/549755/m1-macbook-app-memory-leaks-macos.html). Virtual memory effectively means operating systems can carry memory leaks for a very long time. The performance overhead will be noticeable, though.
 
@@ -32,8 +31,7 @@ With the garbage collector, we often rely on the automatic memory management to 
 
 There are powerful tools for application memory profiling, but even they often show data as byte arrays. This doesn't bring us any closer to solving the issue. In this article, I'll walk you through debugging memory usage. I'm assuming that you already know there's a leak after reviewing memory usage. So the focus here is on narrowing it down.
 
-Types of Heap RAM
------------------
+## Types of Heap RAM
 
 One problem with tracking heap memory is managing expectations. You would expect that a memory allocation will cause an equivalent growth in memory and freeing the memory would restore things. This isn't always the case.
 
@@ -45,8 +43,7 @@ Most memory leaks happen in the heap, but there are rare cases where the source 
 
 Notice that this isn't accurate, since a leak in native memory can deplete the Java heap and vice versa. We'll need to check both, but it will give us a sense of where to start...
 
-Your Tool Box
--------------
+## Your Tool Box
 
 There are **MANY** profiling tools for tracking/fixing memory leaks. It's impossible to give a proper review for even a small segment of the available richness. I won't go even into a fraction of what's available. Instead, I'll focus on two tools: VisualVM and Chrome DevTools (with a focus on Node).
 
@@ -75,8 +72,7 @@ If you did front end work with Chrome, surely you ran into the "everything but t
 
 ![Chrome Dev Tools](https://cdn.hashnode.com/res/hashnode/image/upload/v1643110058053/wtfbmQZ07.png)
 
-How to detect Leaks?
---------------------
+## How to detect Leaks?
 
 Leaks are pretty obvious when you see the memory grow and you don't see it shrinking back. But how can you pinpoint the source of the leak?
 
@@ -97,7 +93,6 @@ void leakUnitTest() {
     assertThat(Math.abs(r.freeMemory() - free) < validThreshold);
 }
 ```
-
 
 There are a lot of things going on here, so let's go over them individually:
 
@@ -141,8 +136,7 @@ This is a very similar process to the one in VisualVM or pretty much any monitor
 
 You can also make use of verbose GC (trace GC in NodeJS) to see details about the collected object. I often feel that this is a bit like drinking from a firehose. It's very hard to debug even a simple application with that output. But it can be useful if you're looking for something very specific.
 
-Common Types of Memory Leaks
-----------------------------
+## Common Types of Memory Leaks
 
 Leaks in managed platforms are effectively references to an element that is no longer necessary. There are many samples of this, but they all boil down to discarding said reference. The most common problem is caching. Creating an efficient caching solution without leaking is almost impossible.
 
@@ -162,7 +156,6 @@ A good example here is Swing code like this:
 new JTable(myModel);
 ```
 
-
 Developers often discard the `JTable` object and keep the model. But because of the way MVC works in some UI frameworks (like Swing, [Codename One](https://www.codenameone.com/) etc.) a view registers itself as a listener to the model. This means that if you keep a reference to the model, the `JTable` can't be removed.
 
 Since frameworks like this rely on hierarchy, this means all the elements in the Window containing the `JTable` can't be removed as well.
@@ -181,7 +174,6 @@ E.g. this pseudo-code might look harmless:
 session.store(myUserData);
 ```
 
-
 But if `myUserData` includes a reference to global data or other users, then we might leak those users with every new session.
 
 Worse, this is a security vulnerability. A hacker can start opening sessions until our server crashes.  
@@ -196,8 +188,7 @@ This is a separate problem. File resource leaks used to be a problem 20 years ag
 
 However, database connections should be recycled to the pool and leaking them is indeed an issue. The problem is that those aren't exactly a leak like the other ones mentioned here. You will run into a different error, such as a problem connecting to the database since connection resources were exhausted. Despite having a lot of RAM. So I don't think this is the right article to discuss those.
 
-How can we Prevent Leaks?
--------------------------
+## How can we Prevent Leaks?
 
 The most ideal situation is to never run into the problem. Obviously, having unit tests that check for RAM (with the reasonable stipulations above) is helpful. But as I mentioned above, they are flaky.
 
@@ -211,8 +202,7 @@ Finally, run a memory monitor on your app. Review the objects, do they make sens
 
 Try to explain the logic of the objects you see in RAM. E.g. if your app has a lot of `byte[]` objects but doesn't use images or primitive data, there might be a leak.
 
-TL;DR
------
+## TL;DR
 
 Memory profilers are almost identical across platforms. We can look at the graph of memory growth and grab snapshots for the current memory state. We can then compare the snapshots to narrow down the general location of a leak.
 

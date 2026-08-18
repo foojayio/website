@@ -30,8 +30,6 @@ This is actually material from four separate videos because I wanted to pool som
 >
 > --- Shai Almog (@debugagent) [May 17, 2022](https://twitter.com/debugagent/status/1526578220174393345?ref_src=twsrc%5Etfw)
 
-<br />
-
 > 🦆 Duckling the 17th:  
 >
 > Add metrics to measure production performance and usage for a specific line or block of code. Without code changes!
@@ -40,10 +38,7 @@ This is actually material from four separate videos because I wanted to pool som
 >
 > --- Shai Almog (@debugagent) [May 31, 2022](https://twitter.com/debugagent/status/1531653268639825923?ref_src=twsrc%5Etfw)
 
-<br />
-
-Remote Debugging Session
-------------------------
+## Remote Debugging Session
 
 A remote debugger is a feature of pretty much any programming language or platform, but it's pretty common in Java using the [JDWP protocol which we discussed in the past](https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging). As a refresher, JDWP standard for Java Remote Debugging Protocol. It's a wire agnostic protocol that defines the connection between the IDE and the JVM when debugging.
 
@@ -71,12 +66,9 @@ Once we do that, we can use the usual debugging features by connecting directly 
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-56241" src="remote-debugging-700x188.png" alt="" width="700" height="188">
 
-<br />
-
 We now have a debug session of the application as if we launched it directly from the IDE!
 
-Production Debugging
---------------------
+## Production Debugging
 
 Now we might be tempted to just open a JDWP port, but this approach has many problems:
 
@@ -182,8 +174,7 @@ This might violate regulations and laws. It's also disallowed by credit card pro
 
 Blocklists let us block specific files/classes from action insertion. That means we can prohibit a developer from adding a snapshot/log etc. to a file that might be risky. E.g. a file that handles the login process should be blocked by default. With these two features, we can harden the deployment further.
 
-Summary
--------
+## Summary
 
 In the section titled "Production Debugging" above, I listed a few problems in remote debugging. This is how developer observability solves these problems:
 

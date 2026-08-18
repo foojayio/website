@@ -23,8 +23,7 @@ Last week was about defaults. This week is about device APIs moving into the fra
 
 ***What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).*
 
-A new Build Cloud UI --- preview
---------------------------------
+## A new Build Cloud UI --- preview
 
 The single most visible change this week sits behind the Build Cloud login. The console we have been serving for years is being replaced. The new UI is **live now** [here](https://cloud.codenameone.com/console/index.html), alongside the current console you can still find [here](https://cloud.codenameone.com/secure/index.html). We want eyes and feedback on it before we flip the default.
 ![](https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/build-cloud-preview.png)
@@ -33,8 +32,7 @@ The whole console is written in Java 17 against the Codename One UI framework, t
 
 This is the same playbook the Initializr, the Playground, and the Skin Designer already follow. Four non-trivial Codename One apps shipping to the browser as production tooling. If you wondered whether the JavaScript port could carry a complex application UI, this is the most direct answer we can give.
 
-Device APIs become first-class
-------------------------------
+## Device APIs become first-class
 
 The bigger structural change this week is that three new APIs that used to live in cn1libs or weren't available at all are now built into the framework core: **biometrics, cryptography, and NFC**. The unifying idea is that you should not have to add a cn1lib to do work this fundamental. The cn1lib model is still useful for genuinely third-party functionality and for features that make less sense in the core. The existing cn1libs that we are subsuming continue to work unchanged on projects that already depend on them --- but the bar for what lives in core just moved.
 
@@ -63,7 +61,6 @@ b.authenticate("Unlock your account").onResult((success, err) -> {
 });
 ```
 
-
 On iOS this wraps `LocalAuthentication.framework`; on Android API 29+ it uses `BiometricPrompt` and on API 23-28 it keeps the legacy `FingerprintManager` path through a reflection adapter. The build servers and local build handle permissions and framework linking seamlessly so you don't need to do anything and don't need to add a build hint. It **just works**.
 
 The Java SE simulator has a new **Simulate -\> Biometric Simulation** submenu with an *Available* toggle, per-modality enrollment, and a configurable outcome for the next `authenticate(...)` call. So you can exercise every code branch --- success, user cancel, locked-out, no-hardware --- without leaving the simulator.
@@ -84,14 +81,12 @@ byte[] enc = Cipher.aesEncrypt(Cipher.AES_GCM, key, nonce, null,
 byte[] dec = Cipher.aesDecrypt(Cipher.AES_GCM, key, nonce, null, enc);
 ```
 
-
 A SHA-256 hash:
 
 ```
 byte[] digest = Hash.sha256("hello".getBytes("UTF-8"));
 String hex = Hash.toHex(digest);
 ```
-
 
 A signed JWT:
 
@@ -106,7 +101,6 @@ Jwt parsed = Jwt.verifyHs256(token, hsKey); // throws on bad signature
 String sub = parsed.getClaim("sub").asString();
 ```
 
-
 And a TOTP that lines up with Google Authenticator / Authy:
 
 ```
@@ -114,7 +108,6 @@ byte[] sharedSecret = Base32.decode("JBSWY3DPEHPK3PXP");
 String code = Otp.totp(sharedSecret); // current 30s window
 boolean ok = Otp.verifyTotp(code, sharedSecret, /* drift */ 1);
 ```
-
 
 The PR also ships a matching UI widget --- `com.codename1.components.OtpField` --- a segmented, auto-advancing OTP input with paste distribution and a completion listener, so the "enter your 6-digit code" screen is now half a dozen lines of glue:
 
@@ -129,7 +122,6 @@ otp.setCompleteListener(code -> {
 });
 form.add(otp);
 ```
-
 
 We deliberately chose conservative defaults: `AES/GCM/NoPadding` for new authenticated AES, `RSA/ECB/OAEPWithSHA-256AndMGF1Padding` for new RSA, constant-time HMAC compare, a bias-free `intBelow(n)` on `SecureRandom`. The MD5 / SHA-1 / PKCS#1 / ECB transformations are still there because real apps still need to interoperate with legacy systems, but the documentation calls them out as interop-only.
 
@@ -157,7 +149,6 @@ nfc.readTag(new NfcReadOptions()
   });
 ```
 
-
 Exchanging APDUs with an EMV / transit card:
 
 ```
@@ -176,7 +167,6 @@ nfc.readTag(new NfcReadOptions()
   });
 ```
 
-
 Acting as a contactless card via Host Card Emulation:
 
 ```
@@ -190,13 +180,11 @@ class LoyaltyCard extends HostCardEmulationService {
 Nfc.getInstance().registerHostCardEmulationService(new LoyaltyCard());
 ```
 
-
 Android uses `NfcAdapter` foreground dispatch / reader-mode and `HostApduService`; both manifest entries are auto-injected by the Maven plugin and the build daemon when this class is referenced. iOS uses `Core NFC` (`NFCNDEFReaderSession`, `NFCTagReaderSession`) for reading and `CardSession` (iOS 17.4+, EU only) for HCE; the `NFCReaderUsageDescription` plist entry and entitlements are auto-injected by the build server and local builds (again seamless is the key). The Java SE simulator has a **Simulate -\> NFC** menu (I feel like I'm repeating myself), that lets you tap a virtual tag, edit its NDEF payload, and fire APDUs at any registered `HostCardEmulationService`, so you can sit at your desk and drive every code path without a card or a reader.
 
 On platforms that do not have NFC (desktop deploy, the JavaScript port) the base class is returned and reports the device as unsupported, so application code does not need platform `if` statements --- always gate on `canRead()` and you are fine.
 
-cn1libs can now own simulator menus --- and that changes Bluetooth
-------------------------------------------------------------------
+## cn1libs can now own simulator menus --- and that changes Bluetooth
 
 [PR #4988](https://github.com/codenameone/CodenameOne/pull/4988) is one of those small-looking changes that opens up a whole category of UX. The Java SE simulator now scans every jar on its classpath for `META-INF/codenameone/simulator-hooks.properties` and lets any cn1lib contribute its own menu items. The cn1lib does not reference any Swing types --- the data file just names a `name=...` for the menu group and a series of `itemN` entries pointing at public static no-arg methods, each with an optional `labelN`. The simulator does the rest.
 
@@ -212,7 +200,6 @@ label1=Toggle adapter on/off
 item2=com.example.bt.sim.Hooks#addDemoPeripheral
 label2=Add demo peripheral
 ```
-
 
 Drop that file inside a cn1lib's `javase/` module and the next time the simulator starts you get a **Bluetooth** menu with two items in it, each running on the CN1 EDT, with `Toggle adapter on/off` and `Add demo peripheral` doing exactly what their names say. Each entry is also callable cross-platform via `CN.execute("bluetooth:item1")`, which is what makes the same hook usable from a screenshot test or a scripted demo. Items without a `labelN` are API-only --- registered with the executor but hidden from the menu --- which is what test suites use to prime scripted state.
 
@@ -239,7 +226,6 @@ Bluetooth
 └── Switch backend → simulator
 ```
 
-
 So a typical Bluetooth iteration loop looks like this:
 
 1. Open your app in the Java SE simulator. The simulator backend is on by default.
@@ -254,8 +240,7 @@ With the cn1-bluetooth simulator backend, the first four of those variables coll
 
 If you have a cn1lib of your own that would benefit from a "Simulate → Whatever" menu --- fake GPS coords, scripted push notifications, deterministic camera frames --- the hook file is the simplest way to ship it. Two lines of properties, one public static no-arg method, and the simulator has the affordance built in.
 
-In-app purchase consistency --- [PR #4990](https://github.com/codenameone/CodenameOne/pull/4990)
-------------------------------------------------------------------------------------------------
+## In-app purchase consistency --- [PR #4990](https://github.com/codenameone/CodenameOne/pull/4990)
 
 A forum report of `submitReceipt` being invoked repeatedly turned into three closely related fixes in `Purchase.synchronizeReceipts`. All three had the same root cause: code that worked when the App Store / Play Store filled in every field, and quietly misbehaved when one of them was null.
 
@@ -265,8 +250,7 @@ A forum report of `submitReceipt` being invoked repeatedly turned into three clo
 
 None of this is dramatic in isolation, but the symptom --- a subscription that gets re-validated against the server every few seconds --- looks identical to a server bug, and it has cost real developers real hours. The fix is shipped and the regression tests cover the null-transactionId path so this exact shape does not come back.
 
-UTF-8: JDK-compatible replace semantics + a NEON ASCII fast path --- [PR #4989](https://github.com/codenameone/CodenameOne/pull/4989)
--------------------------------------------------------------------------------------------------------------------------------------
+## UTF-8: JDK-compatible replace semantics + a NEON ASCII fast path --- [PR #4989](https://github.com/codenameone/CodenameOne/pull/4989)
 
 `String.getBytes("UTF-8")` and `new String(bytes, "UTF-8")` on iOS were behind the standard JDK in two ways. The decoder threw `RuntimeException("Decoding Error")` on malformed input --- the rest of the Java world emits `U+FFFD` per maximal subpart and keeps going. The encoder dropped through to a 1-byte-per-char stub on non-Apple builds, and there was a silent `ISO-8859-2 → NSISOLatin1` alias that hid encoding errors when `NSString` rejected the input.
 
@@ -276,8 +260,7 @@ The fun part is the SIMD work. The ASCII prefix scan (`vmaxvq_u8`) and the `u8 �
 
 If your app parses a lot of UTF-8 --- and most apps do, because most network APIs are JSON over HTTP --- this lands as a quiet but measurable speedup, and as one fewer place where iOS behaves subtly differently from the simulator.
 
-Two long-standing JVM fixes
----------------------------
+## Two long-standing JVM fixes
 
 ### [PR #4980](https://github.com/codenameone/CodenameOne/pull/4980) --- Iterative GC mark to fix iOS stack overflow on deep graphs
 
@@ -293,8 +276,7 @@ The fix is unglamorous: hoist the operand evaluations into named local variables
 
 I am calling these out separately from the rest because both are issues you have probably bumped into without realising it, and both are the kind of plumbing that does not show up in a feature list but quietly raises the floor under every app on iOS.
 
-Hardware keyboard and mouse on iOS and Android --- [PR #4982](https://github.com/codenameone/CodenameOne/pull/4982)
--------------------------------------------------------------------------------------------------------------------
+## Hardware keyboard and mouse on iOS and Android --- [PR #4982](https://github.com/codenameone/CodenameOne/pull/4982)
 
 [Issue #3498](https://github.com/codenameone/CodenameOne/issues/3498) has been on the wishlist since iPadOS started shipping with proper trackpad support and since Android pivoted to position itself as the OS Google wants on Chromebooks. The framework already exposed `pointerHover*` and the full keyboard event surface, but the *ports* did not deliver hover events at all and dropped a depressing number of hardware-keyboard keystrokes --- F-keys, Esc, Tab, Home / End, PgUp / PgDn, Insert all arrived as `keyPressed(0)` on Android, and Enter was silently dropped unless you set `sendEnterKey=true`.
 
@@ -302,8 +284,7 @@ This PR forwards `ACTION_HOVER_ENTER/MOVE/EXIT` on Android into the framework's 
 
 This is structural for two reasons. Android wants to replace ChromeOS for the laptop form factor, which means our Android apps are going to land on laptop-shaped devices with attached keyboards and trackpads more often than they ever have, and they need to behave like real desktop apps when they do. And iPad apps with a Magic Keyboard are increasingly indistinguishable from desktop apps in user expectation. Codename One's whole pitch is "write once, run on every screen" --- the screen got a keyboard, and now we handle it.
 
-Expanded CSS gradients and blurs --- [PR #4957](https://github.com/codenameone/CodenameOne/pull/4957)
------------------------------------------------------------------------------------------------------
+## Expanded CSS gradients and blurs --- [PR #4957](https://github.com/codenameone/CodenameOne/pull/4957)
 
 The CSS compiler used to reject anything past two-stop linear gradients at the four cardinal angles and two-stop radial gradients at the center, falling back to a CEF-rasterised bitmap for everything else. `filter` and `backdrop-filter` were ignored entirely. The bitmap fallback worked but it cost you the GPU path and it could not scale with the component.
 
@@ -323,11 +304,9 @@ This PR moves the full CSS gradient range and `filter: blur(...)` into native pr
 }
 ```
 
-
 The above is the kind of thing you would write today on a modern web stack. Codename One now compiles it down to the Metal / GL / Android `Canvas` / Swing path on the platform you are targeting, without an offscreen bitmap in the middle. Combined with the iOS Modern and Material 3 native themes we shipped three weeks ago and the accent palette overrides we shipped last week, you can put together a genuinely modern UI in pure CSS now.
 
-On Metal: the community got there first
----------------------------------------
+## On Metal: the community got there first
 
 I said previously that I wanted to flip `ios.metal=true` to the default *this* week. That flip did not happen --- and I want to be clear about why, because the reason is the best version of what we are trying to be.
 
@@ -337,8 +316,7 @@ So instead of forcing the flip on a deadline, we are now going to flip it when t
 
 If you are one of the developers who flipped the hint, took screenshots, and filed issues over the past two weeks: **thank you** . Keep doing it. The Metal pipeline is going to ship as the default in materially better shape than it would have without you. If you have not flipped it yet, [the build hint is still](https://github.com/codenameone/CodenameOne/blob/master/docs/developer-guide/Working-With-iOS.asciidoc) `ios.metal=true`. We would still love your screens through it.
 
-Wrapping up
------------
+## Wrapping up
 
 This was a week about lifting the floor. NFC, biometrics, and cryptography are no longer optional add-ons. The simulator-hook framework opens up a class of cn1lib UX --- Bluetooth being the first and largest beneficiary --- that is genuinely hard to assemble on either native platform out of the box. Two of the JVM's longest-standing iOS-only bugs are finally retired. UTF-8 behaves like the standard JDK and is faster where it matters. Hardware keyboards and trackpads behave like real desktop apps would. CSS covers what a modern web stack covers.
 

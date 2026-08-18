@@ -99,5 +99,3 @@ Don't forget to update your Payara Platform to the new version! You can [Downloa
 As usual: if you have any questions, feedback or suggestions, please post them in the comments below or email us at [\[email protected\]](/cdn-cgi/l/email-protection#72111d1f1f071c1b060b3202130b1300135c141b011a)
 
 Original blog can be found here, reused with thanks and permission: <https://blog.payara.fish/whats-new-in-payara-platform-october-2020>
-
-<br />

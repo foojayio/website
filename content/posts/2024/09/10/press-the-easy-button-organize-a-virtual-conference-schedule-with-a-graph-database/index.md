@@ -32,8 +32,7 @@ While any tool won't completely make the pain go away, my colleague and I used t
 
 Let's dive in!
 
-Platform + Data
----------------
+## Platform + Data
 
 A very common platform for managing events is called [Sessionize](https://sessionize.com/). Sessionize has a lot of really nice features, and the platform feels intuitive to use. Events are a complex beast, with each person/company/event probably having their own custom approach or features to handle certain things. Pair this with individual events vying for audience appeal, and you end up with unique challenges all over.
 
@@ -41,8 +40,7 @@ The NODES 2024 event is a completely virtual and free conference, focusing on li
 
 Sessionize houses data for sessions (topics to present), speakers (bio, social links, timezone), and evaluation results (scoring how well a submitted session fits for that event). As organizers, we can view each of these aspects and start assembling them into an event schedule, right?
 
-The Problem
------------
+## The Problem
 
 *Right??* Not quite...​
 
@@ -54,8 +52,7 @@ We have 15-minute talks and 30-minute sessions, so we don't know how many of eac
 
 As a developer and data lover, I automatically turn to databases. They store and manage all kinds of structures, filtering, number crunching, and more every day. Why should conference scheduling be the exception?
 
-(Graph) Database to the Rescue
-------------------------------
+## (Graph) Database to the Rescue
 
 While many databases could probably solve this problem, there are a couple of reasons for choosing a graph in this scenario.
 
@@ -63,8 +60,7 @@ While many databases could probably solve this problem, there are a couple of re
 2. Flexible schema. Many graph databases don't require a schema definition upfront, allowing you to dump data in and refactor it as you go. This avoids manipulating data by hand and looking at multiple data views.
 3. Visualization. Seeing the data can help you explore and analyze what is there. This is good for understanding the data, but also for showing others how the data is connected.
 
-How-To
-------
+## How-To
 
 Here's what we did...​
 
@@ -93,7 +89,6 @@ MERGE (s:Session {sessionId: row.`Session Id`})
 RETURN count(s);
 ```
 
-
 That Cypher statement gives us 200 `Session` nodes. We left out a few fields due to not needing them for scheduling purposes, so we can always import later if requirements change. There are also a couple fields that need special attention because the values are lists. Let's add those to our existing session nodes.
 
 ```cypher
@@ -113,7 +108,6 @@ MERGE (l:Level {level: trim(level)})
 MERGE (s)-[r3:CATEGORIZED_IN]->(l)
 RETURN count(row);
 ```
-
 
 Next, we need to hydrate the `Speaker` entities with a little more data - specifically, timezone, company affiliation, and whether they are a part of Neo4j or a special Neo4j community program.
 
@@ -143,7 +137,6 @@ CALL {
 RETURN count(row);
 ```
 
-
 Next, I'll add an extra label for each timezone to make it easier to filter sessions by region.
 
 ```cypher
@@ -160,7 +153,6 @@ YIELD node
 RETURN count(node);
 ```
 
-
 **Side note:** The offset numbers for each timezone would be different for daylight savings time.
 
 Last, but not least, we need to import session ratings so that we can filter sessions by rating.
@@ -172,7 +164,6 @@ MERGE (r:Rating {rating: toFloat(row.`Final Evaluation`)})
 MERGE (s)-[r2:HAS_RATING]->(r)
 RETURN count(row);
 ```
-
 
 With all the data in, let's see what the data model looks like!
 
@@ -194,7 +185,6 @@ WHERE r.rating >= 4.0
 RETURN s.sessionId, s.title, sp.lastName, sp.firstName, collect(t.timezone), r.rating;
 ```
 
-
 This query returned a list of sessions that met the criteria, which we used to start building a schedule. I was able to export to a CSV straight from Neo4j Browser tool. Then we did similar queries for Europe and Americas regions.
 
 The custom spreadsheets included session details, speaker data, and the rating in a single view, which was what we had trouble getting from Sessionize. Then we could review the data and drag and drop these sessions into the schedule. We were able to rearrange the sessions into the time blocks and determine whether we needed more or less content to fill in any gaps.
@@ -213,9 +203,7 @@ AND COUNT { (s)-[:GIVEN_BY]->(:Speaker) } = 1
 RETURN sp.firstName+" "+sp.lastName as speakerName, sp.tagline as tagline, sp.profilePic as profilePicture, s.title as sessionTitle
 ```
 
-
-Wrapping Up!
-------------
+## Wrapping Up!
 
 In the end, Neo4j allowed us to create custom data views that we couldn't get from Sessionize. There were three different tasks we were able to easily accomplish this way.
 
@@ -229,8 +217,7 @@ Do you want to be a part of the event and learn more about problems you can solv
 
 Happy coding!
 
-Resources
----------
+## Resources
 
 * [NODES 2024 event](https://dev.neo4j.com/nodes24)
 * [Neo4j Cypher CASE](https://neo4j.com/docs/cypher-manual/current/queries/case/)

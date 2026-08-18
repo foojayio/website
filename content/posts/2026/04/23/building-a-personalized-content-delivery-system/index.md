@@ -28,8 +28,7 @@ In this article, you will build an indie game discovery platform with two comple
 
 By the end, you will have a working recommendation API built with Java 21+, Spring Boot 3.x, Spring Data MongoDB, and Spring AI, combining both approaches into a single ranked result. The embedding layer uses OpenAI's `text-embedding-3-small` model, but any embedding provider that Spring AI supports will work. The complete source code is available in the [companion repository on GitHub](https://github.com/fhsinchy/indie-game-discovery).
 
-Prerequisites
--------------
+## Prerequisites
 
 * Java 21 or later
 * Spring Boot 3.x (use [Spring Initializr](https://start.spring.io/) with the `Spring Data MongoDB` and `Spring Web` dependencies; Spring AI is added manually later in the article)
@@ -74,7 +73,6 @@ public class Game {
 }
 ```
 
-
 The `genres`, `tags`, and `mechanics` fields are all `List<String>` rather than single values. A game like *Hades* is both a roguelike and an action game. It has tags like "fast-paced" and "mythology" and mechanics like "permadeath" and "procedural-generation." Storing these as arrays works well with MongoDB because you can match and filter on array fields directly in queries and aggregation pipelines. The recommendation engine you will build in section 3 relies on this to find games that overlap with a user's preferences.
 
 Next, the `UserProfile` document:
@@ -99,7 +97,6 @@ public class UserProfile {
 }
 ```
 
-
 The `Preferences` class is an embedded object that holds three weighted maps:
 
 ```
@@ -119,7 +116,6 @@ public class Preferences {
     // getters and setters
 }
 ```
-
 
 Each map key is an attribute (like "roguelike" or "pixel-art"), and the value is a weight between 0 and 1 representing how strongly the user prefers it. This is a deliberate choice over plain lists. A plain list of preferred genres tells you that someone likes roguelikes and platformers equally. A weighted map like `{"roguelike": 0.9, "platformer": 0.4}` tells you they strongly favor roguelikes but only have mild interest in platformers. When the scoring engine computes recommendations, it multiplies matched attributes by their weights, so higher-affinity preferences produce higher-ranked results.
 
@@ -141,7 +137,6 @@ public class GameRating {
     // getters and setters
 }
 ```
-
 
 To make the document structure concrete, here is what a couple of game documents look like in MongoDB:
 
@@ -172,7 +167,6 @@ To make the document structure concrete, here is what a couple of game documents
 ]
 ```
 
-
 Notice how each game has multiple genres, tags, and mechanics. When a user's preference map contains `{"roguelike": 0.9, "strategy": 0.6}`, the recommendation engine can match both keys against *Slay the Spire*'s genres array and sum the weights to compute a relevance score.
 
 The companion repository includes a `DataSeeder` component implemented as a `CommandLineRunner` that loads approximately 25 indie games into the `games` collection on startup. This gives you a meaningful dataset to test recommendations against without manual data entry.
@@ -190,13 +184,11 @@ To connect the application to your MongoDB Atlas cluster, open `src/main/resourc
 spring.data.mongodb.uri=${MONGODB_URI:mongodb://localhost:27017/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery}
 ```
 
-
 The `${MONGODB_URI:...}` syntax reads the connection string from an environment variable called `MONGODB_URI`. The value after the colon is a fallback that points to a local MongoDB instance if the variable is not set. The `appName` query parameter identifies your application in Atlas connection logs and monitoring dashboards. To use your Atlas cluster, set the environment variable before starting the application:
 
 ```
 export MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>/indie-game-discovery?appName=devrel-tutorial-indie-game-discovery"
 ```
-
 
 Replace the placeholders with your Atlas credentials and cluster URL. If you followed the Atlas getting started guide linked in the prerequisites, you already have these values.
 
@@ -215,7 +207,6 @@ Create a `CreateUserRequest` record that captures the data needed to build a new
 public record CreateUserRequest(String username, Preferences preferences) {
 }
 ```
-
 
 The controller exposes two endpoints: one to create a profile and one to retrieve it by ID.
 
@@ -246,14 +237,12 @@ public class UserProfileController {
 }
 ```
 
-
 The `UserProfileRepository` is a standard Spring Data MongoDB interface:
 
 ```
 public interface UserProfileRepository extends MongoRepository<UserProfile, String> {
 }
 ```
-
 
 Constructor injection is used throughout the codebase. Spring resolves the single constructor automatically without needing an `@Autowired` annotation.
 
@@ -267,7 +256,6 @@ public interface GameRepository extends MongoRepository<Game, String> {
     List<Game> findByGenresIn(List<String> genres);
 }
 ```
-
 
 The `findByGenresIn` method queries the `genres` array field and returns any game where at least one genre appears in the provided list. You will not use this method for the main recommendation pipeline, but it is useful for quick filtering when you want to narrow results to a specific genre subset.
 
@@ -367,7 +355,6 @@ public class RecommendationService {
 }
 ```
 
-
 The `buildScoreExpression` method constructs the aggregation expression for a single preference category. It takes the user's preference map and the game's array field name as parameters, then works through four steps:
 
 1. Convert the preference map to a BSON `Document` and wrap it in `$objectToArray` to get a key-value pair array.
@@ -400,7 +387,6 @@ public class RecommendationController {
 }
 ```
 
-
 The `GameRecommendation` response DTO includes the game fields along with the computed score:
 
 ```
@@ -424,7 +410,6 @@ public class GameRecommendation {
 }
 ```
 
-
 MongoDB's aggregation result maps directly into this class because `$addFields` attaches the `score` field alongside the existing game fields. Spring Data MongoDB deserializes the output documents into `GameRecommendation` objects automatically.
 
 ### Manual test
@@ -444,13 +429,11 @@ curl -X POST http://localhost:8080/api/users \
   }'
 ```
 
-
 Copy the returned `id` field and hit the recommendations endpoint:
 
 ```
 curl http://localhost:8080/api/recommendations/<user-id>
 ```
-
 
 The response is a list of games sorted by score. Take *Slay the Spire* as an example. It matches on multiple fronts:
 
@@ -475,7 +458,6 @@ public record RatingRequest(String gameId, int score) {
 }
 ```
 
-
 Add a new endpoint to `UserProfileController` that accepts a rating for a specific user:
 
 ```
@@ -486,7 +468,6 @@ public ResponseEntity<UserProfile> rateGame(@PathVariable String userId,
     return ResponseEntity.ok(updatedProfile);
 }
 ```
-
 
 The controller delegates all the work to a `RatingService`. Inject it through the constructor alongside the existing `UserProfileRepository`:
 
@@ -501,7 +482,6 @@ public UserProfileController(UserProfileRepository userProfileRepository,
 }
 ```
 
-
 ### Affinity adjustment logic
 
 The `RatingService` handles the core adjustment logic. When a user rates a game, the service looks up the game's genres, tags, and mechanics, then adjusts the corresponding weights in the user's preference maps according to these rules:
@@ -515,7 +495,6 @@ The adjustment uses an exponential moving average formula that naturally keeps w
 ```
 newWeight = oldWeight + learningRate * (targetDirection - oldWeight)
 ```
-
 
 The `learningRate` is set to 0.15, which means each rating shifts the weight by 15% of the remaining distance toward the target. The `targetDirection` is 1.0 for high ratings (the user wants more of this attribute) and 0.0 for low ratings (the user wants less).
 
@@ -611,7 +590,6 @@ public class RatingService {
 }
 ```
 
-
 The `adjustWeights` method iterates over the game's attributes and applies the formula to each matching weight. If the user does not already have a weight for a particular attribute (for example, a genre they have never encountered before), it defaults to 0.5 as a neutral starting point and adjusts from there.
 
 ### MongoDB update
@@ -634,7 +612,6 @@ curl -X POST http://localhost:8080/api/users/<user-id>/ratings \
 # get recommendations after rating
 curl http://localhost:8080/api/recommendations/<user-id>
 ```
-
 
 Compare the two responses. Games that share genres, tags, or mechanics with the highly rated game will have moved up in the rankings because their matching weights increased. Games that do not share those attributes remain at their previous scores. Each rating nudges the profile slightly, and over several ratings, the preference weights settle into a profile that matches what the user actually enjoys.
 
@@ -670,14 +647,12 @@ Add the Spring AI OpenAI starter to your `pom.xml`. You also need the Spring AI 
 </dependencies>
 ```
 
-
 Then add the OpenAI configuration to `application.properties`:
 
 ```
 spring.ai.openai.api-key=${OPENAI_API_KEY}
 spring.ai.openai.embedding.options.model=text-embedding-3-small
 ```
-
 
 The `text-embedding-3-small` model produces 1536-dimensional vectors. Store your API key in an environment variable rather than hardcoding it.
 
@@ -698,7 +673,6 @@ public class Game {
     public void setEmbedding(float[] embedding) { this.embedding = embedding; }
 }
 ```
-
 
 Then create a helper method that builds the text representation and generates the embedding:
 
@@ -721,7 +695,6 @@ public class EmbeddingService {
     }
 }
 ```
-
 
 The `embed()` method sends the text to OpenAI's embedding API and returns a `float[]` with 1536 values. Concatenating all of a game's metadata into one string gives the model enough context to produce a meaningful vector.
 
@@ -756,7 +729,6 @@ public class DataSeeder implements CommandLineRunner {
 }
 ```
 
-
 The `null` check prevents re-generating embeddings on every restart. Each API call costs money, so you only want to embed games that do not already have a vector stored.
 
 ### Atlas Vector Search index
@@ -775,7 +747,6 @@ Before you can query the embeddings, you need to create a Vector Search index in
   ]
 }
 ```
-
 
 Name the index `vector_index`. The `numDimensions` value must match the output of your embedding model, which is 1536 for `text-embedding-3-small`. Cosine similarity is the standard choice for text embeddings because it measures the angle between vectors regardless of their magnitude.
 
@@ -838,7 +809,6 @@ private String buildPreferenceText(Preferences prefs) {
 }
 ```
 
-
 The `buildPreferenceText` method extracts the user's top-weighted genres, tags, and mechanics and combines them into a natural-language string like "Games with roguelike, metroidvania, difficult, atmospheric, replayable, permadeath, procedural-generation." This string is embedded into a query vector, and `$vectorSearch` finds the game embeddings closest to it using cosine similarity.
 
 The `numCandidates` parameter controls how many candidates the search considers internally before returning the final `limit` results. Setting `numCandidates` higher than `limit` improves accuracy at the cost of slightly more processing.
@@ -858,7 +828,6 @@ public RecommendationService(MongoTemplate mongoTemplate,
     this.embeddingModel = embeddingModel;
 }
 ```
-
 
 ### Results
 
@@ -885,7 +854,6 @@ public class GameRecommendation {
     // getters and setters for all three score fields
 }
 ```
-
 
 The combined score uses a weighted formula: `0.6 * contentScore + 0.4 * similarityScore`. Content-based scoring gets the higher weight because it reflects explicit user intent. When a user sets `"roguelike": 0.9`, they are telling you directly what they want. Similarity scores can surface unexpected results that drift from stated preferences, so giving content-based recommendations to the majority share keeps recommendations grounded in what the user asked for while still benefiting from semantic matches.
 
@@ -935,7 +903,6 @@ public List<GameRecommendation> getCombinedRecommendations(String userId) {
 }
 ```
 
-
 Both scoring methods operate on different scales. Content-based scores are unbounded sums of matched weights, while similarity scores are cosine distances between 0 and 1. The method normalizes each set of scores by dividing each score by the maximum value in that set, bringing both into the 0 to 1 range before combining them. Games that appear in both result sets get both scores populated. Games that only appear in one set receive a zero for the missing score.
 
 ### Unified response
@@ -950,7 +917,6 @@ public ResponseEntity<List<GameRecommendation>> getRecommendations(@PathVariable
     return ResponseEntity.ok(recommendations);
 }
 ```
-
 
 The response now includes all three scores for each game:
 
@@ -982,7 +948,6 @@ The response now includes all three scores for each game:
     }
 ]
 ```
-
 
 *Slay the Spire* leads because it scores well on both signals. *Hollow Knight* has a strong similarity score but a weaker content match. *Outer Wilds* has a low content score, but still appears because its high similarity score pulls it up.
 
@@ -1018,13 +983,11 @@ curl -X POST http://localhost:8080/api/users \
   }'
 ```
 
-
 The response includes the generated user ID. Copy it and request recommendations:
 
 ```
 curl http://localhost:8080/api/recommendations/682f1a3b5e4d
 ```
-
 
 ```
 [
@@ -1035,7 +998,6 @@ curl http://localhost:8080/api/recommendations/682f1a3b5e4d
     {"title": "Outer Wilds", "contentScore": 0.12, "similarityScore": 0.81, "combinedScore": 0.396}
 ]
 ```
-
 
 *Slay the Spire* leads because it hits roguelike (0.9), replayable (0.7), permadeath (0.9), and procedural-generation (0.6) all at once. *Outer Wilds* ranks low on content score since its tags do not literally match the user's preferences, but embeddings still pull it into the list.
 
@@ -1055,13 +1017,11 @@ curl -X POST http://localhost:8080/api/users/682f1a3b5e4d/ratings \
   -d '{"gameId": "64a1b2c3d4e5f6a7b8c9d0e5", "score": 4}'
 ```
 
-
 The first rating pushes metroidvania, action, and platformer weights upward. The second pulls roguelike and card-game weights down. The third boosts adventure and exploration. Fetch recommendations again:
 
 ```
 curl http://localhost:8080/api/recommendations/682f1a3b5e4d
 ```
-
 
 ```
 [
@@ -1073,11 +1033,9 @@ curl http://localhost:8080/api/recommendations/682f1a3b5e4d
 ]
 ```
 
-
 *Hollow Knight* jumped from fourth to first. Its content score increased from 0.68 to 0.91 because the 5-star rating boosted the weights for metroidvania, platformer, and atmospheric. *Slay the Spire* dropped because the 2-star rating pulled down roguelike and card-game weights. *Outer Wilds* moved up thanks to the 4-star rating increasing adventure and exploration weights, which also shifted the embedding query to favor similar games. Each rating adjusts the preference profile incrementally, and the combined scoring reflects those changes immediately.
 
-Conclusion
-----------
+## Conclusion
 
 You built a recommendation engine with two layers. Content-based preference scoring uses MongoDB aggregation pipelines to match games against weighted user preferences. Embedding-based similarity uses Spring AI and MongoDB Atlas Vector Search to surface games that are semantically related to a user's tastes, even when tags do not literally overlap. User ratings close the feedback loop by adjusting preference weights over time.
 

@@ -25,10 +25,7 @@ frozen: false
 
 {{< youtube cj--cJrYqhQ >}}
 
-<br />
-
-Cloud-Native Applications
--------------------------
+## Cloud-Native Applications
 
 There's practically an alphabet soup of terms covering public cloud, hybrid cloud, etc. There's also a lot of overlap between the various terms. The nice thing about this topic is that it applies, regardless. You will run into problems with microservices, architecture and monolithic applications or serverless.
 
@@ -52,8 +49,7 @@ Container orchestration, microservice architecture, serverless, etc. made scalin
 
 Troubleshooting cloud-native applications is harder. We have amazing observability tools but they're dealing with complex underlying infrastructure.
 
-Cloud Native Logs
------------------
+## Cloud Native Logs
 
 In recent years, cloud-native apps rely more and more on modern logging infrastructure. These aren't our old log files. Cloud provider logging solutions handle ingestion, search, meta-data, PII reduction, etc. at scale. I can't imagine running a major deployment without one of those solutions.
 
@@ -75,8 +71,7 @@ Performance hit of over-logging can compound this problem. Ingesting more data c
 
 When we observe, we affect the observer. It's as true for Schrödinger's cat as it is for scalable applications.
 
-Observability Tools/APMs
-------------------------
+## Observability Tools/APMs
 
 Modern observability tools are a marvel. I feel there should be a German word to describe the satisfaction one gets from a detailed APM dashboard. These tools enable the production of complex applications like nothing we've seen before.
 
@@ -94,8 +89,7 @@ For most apps, the overhead of observability is acceptable and well worth it. Bu
 
 This is usually a problematic notion that brings us back to the discussion of scaling infrastructure to support observability.
 
-Debugging
----------
+## Debugging
 
 When we native applications we can debug them using existing native technologies such as platform debuggers. Those work great for local debugging but at scale (especially horizontal scaling) they have some problems:
 
@@ -105,8 +99,7 @@ When we native applications we can debug them using existing native technologies
 
 If we work around those issues, debuggers are the perfect tool. R\&D knows how to use them as they are a core tenant in software development.
 
-Debugging in the Cloud Environment
-----------------------------------
+## Debugging in the Cloud Environment
 
 This is where continuous observability steps in. Observability tools work by monitoring the entire system and exposing relevant information.
 
@@ -152,8 +145,7 @@ That can be exactly what I want, but what if I want to debug a problem that happ
 
 Debuggers solved this problem before by coming up with conditional breakpoints. This applies to every action on a continuous observability platform. You can place a condition on any action within the platform, e.g. I can set a snapshot that would only be triggered by a user with the given ID.
 
-Modern Applications
--------------------
+## Modern Applications
 
 We sometimes tread more lightly when building in the cloud-native world. We know how a minor change can have a cascading effect and we know how hard it is to track such issues. Continuous observability changes that dynamic, high-impact changes can be made more easily as we now have the tools to deal with them. In that sense, a debugger serves as a safety net for faster code to production cycles.
 
@@ -167,8 +159,7 @@ With continuous observability, you can find out right from the comfort of your I
 
 In that sense, it's the realization of cloud-native computing by giving developers a direct channel to the applicable information.
 
-Polyglot, Cross Platform, Cross Language
-----------------------------------------
+## Polyglot, Cross Platform, Cross Language
 
 Most observability tools are platform agnostic at the system level. Continuous observability tools are a bit more complex. A continuous observability tool works at the code level and needs deep access to the language runtime. As such, it's deeply adopted in each programming language on every platform. It's technically possible to support all languages, but there are challenges involved.
 
@@ -176,8 +167,7 @@ In the demo video above, I show debugging a snapshot in NodeJS which leads me to
 
 With a continuous observability tool, we can use tags creatively to monitor serverless services as they come online and bind the right actions to the function.
 
-TL;DR
------
+## TL;DR
 
 Continuous observability is already revolutionizing the cloud native industry in the same way observability, modern logging and docker containers did more than a decade ago. It fills an important blind spot in our current set of native technologies: a tool for developers that lets them deep dive production issues in the finished application code.
 

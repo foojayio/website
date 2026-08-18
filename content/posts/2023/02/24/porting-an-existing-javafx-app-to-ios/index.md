@@ -215,7 +215,6 @@ Here is the Maven pom file for JArkanoid:
 </project>
 ```
 
-
 #### iOS
 
 To make the project work, you will need some specific settings for iOS.
@@ -264,7 +263,6 @@ switch(enemySpawnPosition) {
 }
 ```
 
-
 So you have to make sure that you change all those switch-case statements.
 
 #### Scaling
@@ -288,14 +286,12 @@ protected static final double INSET      = 22;
 protected static final Font   SCORE_FONT = Fonts.emulogic(20);
 ```
 
-
 needs to be modified to this:
 
 ```
 protected static final double INSET      = 22 * SCALE_FACTOR;
 protected static final Font   SCORE_FONT = Fonts.emulogic(20 * SCALE_FACTOR);
 ```
-
 
 I know that this does not look really nice...but it works and does the job 🙂
 

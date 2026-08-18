@@ -24,8 +24,7 @@ Is there a cost to running Apache Cassandra in containers? How about on Kubernet
 
 While there were many challenges in designing a fair benchmark in a world (the cloud) where apples could very well be oranges, we managed to come up with a solid comparison and results that matched our expectations: running Cassandra in Kubernetes brings flexibility and ease of use without performance penalty.
 
-Benchmarking methodology
-------------------------
+## Benchmarking methodology
 
 ### Infrastructure
 
@@ -53,7 +52,6 @@ We ran the following test using `sysbench` to evaluate CPU performance:
 ```
 sysbench cpu --threads=8 --time=120 run
 ```
-
 
 For disk performance benchmarking, we used [Cassandra inspired fio profiles](https://github.com/ibspoof/cassandra-fio) that attempt to emulate Leveled Compaction Strategy and Size Tiered Compaction Strategy behaviors (the numbers below are only representative in the context of these profiles, they're not absolute performance numbers):
 
@@ -107,7 +105,6 @@ Cassandra's default settings were applied with the exception of garbage collecti
 -XX:InitiatingHeapOccupancyPercent=70 -Xms31G -Xmx31G
 ```
 
-
 ### Baseline infrastructure setup
 
 [tlp-cluster](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) was used to provision our baseline VM infrastructure in AWS. The following command was used to spin up the instances and the Cassandra cluster:
@@ -115,7 +112,6 @@ Cassandra's default settings were applied with the exception of garbage collecti
 ```
 build_cluster.sh -n K8SSANDRA_BENCH_BASELINE_r5 -g 0 -s 1 -v 4.0~beta4 -c 3 -i r5.2xlarge --gc=G1 --heap=31 -y
 ```
-
 
 The stress instance deployed by [this branch](https://github.com/thelastpickle/tlp-cluster/tree/alex/stargate-updates) of tlp-cluster contains both [tlp-stress](https://github.com/thelastpickle/tlp-stress) and [nosqlbench](https://github.com/nosqlbench/nosqlbench).
 
@@ -182,7 +178,6 @@ kube-prometheus-stack:
   enabled: false
 ```
 
-
 ### Stress Workloads
 
 We ran two types of tests using [nosqlbench](https://github.com/nosqlbench/nosqlbench), DataStax's sponsored open source benchmarking suite. The first one was an unthrottled throughput test, which evaluated the maximum ops rate the infrastructure could handle. We then ran a rate limited test at 35% of the maximum throughput of our baseline infrastructure to evaluate the latency of Cassandra under low/moderate pressure.
@@ -242,7 +237,6 @@ spec:
       restartPolicy: Never
 ```
 
-
 ##### **Latency test**
 
 ```
@@ -294,11 +288,9 @@ spec:
       restartPolicy: Never
 ```
 
-
 Note that the latency test uses a **striderate** instead of a **cyclerate** . A **striderate** of 10 with a **stride** value of 800 would generate 8000 cycles (operations) per second. Initially we used a **cyclerate** of 8000 but the rate limiter was failing to reach the desired throughput, while strides (an over ensemble of cycles in nosqlbench) succeeded.
 
-Benchmark results
------------------
+## Benchmark results
 
 ### Throughput test
 
@@ -333,8 +325,7 @@ While AWS keeps latencies at a very solid level, GCP and Azure managed to cut th
 
 Thanks to the numerous improvements Cassandra 4.0 brings, p99 and p999 latencies reached very low values overall, which weren't notably affected by running in Kubernetes compared to VM results.
 
-Wrapping up
------------
+## Wrapping up
 
 Running Cassandra in Kubernetes using K8ssandra does not introduce any notable performance impacts in throughput nor in latency. We were thrilled to see that K8ssandra dramatically simplified the deployment of Cassandra clusters, making it mostly transparent to run on premises or on cloud managed Kubernetes services, while offering the same level of performance.
 

@@ -70,7 +70,6 @@ mvn io.quarkus.platform:quarkus-maven-plugin:3.22.1:create
 cd quarkus-local-sentiment
 ```
 
-
 You now have a Quarkus project with:
 
 * `rest-jackson` for creating JSON-based REST endpoints.
@@ -88,7 +87,6 @@ quarkus.langchain4j.ollama.chat-model.model-id=phi3:mini
 quarkus.langchain4j.ollama.timeout=120s
 ```
 
-
 That's all. Quarkus Dev Services will handle pulling the Docker image, downloading the model, and wiring up the service when you run in dev mode.
 
 ### Define the Sentiment Enum
@@ -99,7 +97,6 @@ Create `src/main/java/org/acme/Sentiment.java`:
 package org.acme; 
 public enum Sentiment { POSITIVE, NEGATIVE, NEUTRAL }
 ```
-
 
 Just a simple enum class with the sentiments.
 
@@ -135,7 +132,6 @@ public interface SentimentAnalyzer {
 @UserMessage("Analyze sentiment of {{text}}") Sentiment classifySentiment(String text); 
 @UserMessage("Does {{text}} have a positive sentiment?") boolean isPositive(String text); }
 ```
-
 
 This is where the magic happens. With a few lines, you've created an AI-powered sentiment classifier.
 
@@ -186,7 +182,6 @@ public class SentimentResource {
 }
 ```
 
-
 This class provides a simple GET endpoint for testing in the browser or via `curl`.
 
 ### Run It!
@@ -196,7 +191,6 @@ Ensure Podman is running, then launch the app in dev mode:
 ```
 ./mvnw quarkus:dev
 ```
-
 
 On first startup, Quarkus will:
 
@@ -214,7 +208,6 @@ Try some sample requests:
 curl "http://localhost:8080/sentiment?text=Quarkus+Dev+Services+are+so+convenient!"
 ```
 
-
 Sample output:
 
 ```
@@ -223,14 +216,12 @@ Predicted Sentiment: POSITIVE
 (Model: Ollama/phi3:mini)
 ```
 
-
 Try negative or neutral examples too:
 
 ```
 curl "http://localhost:8080/sentiment?text=This+local+model+is+slow+sometimes." 
 curl "http://localhost:8080/sentiment?text=The+Ollama+container+started+successfully."
 ```
-
 
 > **Note:** While local models like Phi-3 Mini are fast and private, they're also smaller and less instruction-tuned than cloud-hosted LLMs, so sentiment predictions might occasionally be off, especially for nuanced or ambiguous text. Fine-tuning examples and careful prompting help, but results may vary.
 

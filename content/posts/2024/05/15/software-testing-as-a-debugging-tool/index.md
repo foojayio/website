@@ -32,12 +32,9 @@ Debugging is not just about identifying errors---it's about instituting a reliab
 
 {{< youtube yap509UZz6M >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-The Intersection of Debugging and Testing
------------------------------------------
+## The Intersection of Debugging and Testing
 
 Debugging and testing play distinct roles in software development. Debugging is the targeted process of identifying and fixing known bugs. Testing, on the other hand, encompasses a adjacent scope, identifying unknown issues by validating expected software behavior across a variety of scenarios.
 
@@ -63,8 +60,7 @@ Coverage is a metric that helps quantify the effectiveness of testing by indicat
 
 It is my opinion that unit tests should be excluded from coverage metrics due to the importance of integration tests to overall quality. To get a sense of quality coverage should focus on integration and end to end tests.
 
-The Debug-Fix Cycle
--------------------
+## The Debug-Fix Cycle
 
 The debug-fix cycle is a structured approach that integrates testing into the debugging process. The stages include identifying the bug, creating a test that reproduces the bug, fixing the bug, verifying the fix with the test, and finally, running the application to ensure the fix works in the live environment. This cycle emphasizes the importance of testing in not only identifying but also in preventing the recurrence of bugs.
 
@@ -72,8 +68,7 @@ The debug-fix cycle is a structured approach that integrates testing into the de
 
 Notice that this is a simplified version of the cycle with a focus on the testing aspect only. The full cycle includes discussion of the issue tracking and versioning as part of the whole process. I discuss this more in-depth in other posts in the series and my book.
 
-Composing Tests with Debuggers
-------------------------------
+## Composing Tests with Debuggers
 
 A powerful feature of using debuggers in test composition is their ability to "[jump to line](https://debugagent.com/debugging-program-control-flow)" or "[set value](https://debugagent.com/watch-and-evaluate)." Developers can effectively reset the execution to a point before the test and rerun it with different conditions, without recompiling or rerunning the entire suite. This iterative process is invaluable for achieving desired test constraints and improves the quality of unit tests by refining the input parameters and expected outcomes.
 
@@ -83,8 +78,7 @@ In this case you will notice that the next line in the body is a rejectValue cal
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e68vok14tqn9irjxbkl8.png)
 
-Test-Driven Development
------------------------
+## Test-Driven Development
 
 How does all of this fit with disciplines like Test-Driven Development (TDD)?
 
@@ -98,16 +92,13 @@ This rigorous cycle guarantees that new code is continually tested and refactore
 
 {{< youtube yImkjlm08Cw >}}
 
-<br />
-
 TDD can be especially advantageous for scripting and loosely typed languages. In environments lacking the rigid structure of compilers and linters, TDD steps in to provide the necessary checks that would otherwise be performed during compilation in statically typed languages. It becomes a crucial substitute for compiler/linter checks, ensuring that type and logic errors are caught early.
 
 In real-world application development, TDD's utility is nuanced. While it encourages thorough testing and upfront design, it can sometimes hinder the natural flow of development, especially in complex systems that evolve through numerous iterations. The requirement for 100% test coverage can lead to an unnecessary focus on fulfilling metrics rather than writing meaningful tests.
 
 The biggest problem in TDD is its focus on unit testing. TDD is impractical with integration tests as the process would take too long. But as we determined in the start of this post, integration tests are the true benchmark for quality. In that test TDD is a methodology that provides great quality for arbitrary tests, but not necessarily great quality for the final product. You might have the best cog in the world, but if doesn't fit well into the machine then it isn't great.
 
-Final Word
-----------
+## Final Word
 
 Debugging is a tool that not only fixes bugs but also actively aids in crafting tests that bolster software quality. By utilizing debuggers in test composition and increasing coverage, developers can create a suite of tests that not only identifies existing issues but also guards against future ones, thus ensuring the delivery of reliable, high-quality software.
 

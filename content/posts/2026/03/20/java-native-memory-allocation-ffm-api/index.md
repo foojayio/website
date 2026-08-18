@@ -22,13 +22,11 @@ enlighterjs: true
 frozen: false
 ---
 
-What is the Memory API
-----------------------
+## What is the Memory API
 
 The Foreign Function \& Memory (FFM) API is Java's new way of interacting with native code and memory. It is mostly useful when storing data off-heap or passing arguments to a native method. Handling this native memory comes down to balancing how much control you need against the risk of memory leaks. You can rely on the provided `Arena`s to bind memory to safe scopes, or you do it yourself using `malloc` and `free` for absolute control, or implement custom pools and slices to optimize allocations for your use case.
 
-Arenas
-------
+## Arenas
 
 `Arena`s are the built-in way to allocate and manage native memory. Arenas work with a scope, meaning that an `Arena` gets opened, allocates memory, and gets closed again. The Arena acts as a guard to make sure the memory is valid while the scope is open and freed when it is closed.
 
@@ -52,14 +50,12 @@ Arena arena = Arena.global();
 MemorySegment segment = arena.allocate(42);
 ```
 
-
 In the example, we allocate 42 bytes and create a `MemorySegment` that you can use. Next up is the `Arena.ofAuto()` that uses the garbage collector to decide when to free memory.
 
 ```java
 Arena arena = Arena.ofAuto();
 MemorySegment segment = arena.allocate(42);
 ```
-
 
 The previous two examples showed Arenas that are not explicitly closed. You can see that we didn't call any close method. The next Arena is closeable, it also implements the `Closeable` interface. As you can see in the next example with the try-with-resources statement:
 
@@ -68,7 +64,6 @@ try (Arena arena = Arena.ofShared()) {
     MemorySegment segment = arena.allocate(42);
 } // The segment is deallocated here
 ```
-
 
 Here we explicitly opened and closed the `Arena`. The `MemorySegment` is only valid inside that scope, because when we exit the `try` the arena is closed and the memory freed. `ofShared` and `ofConfined` work mostly the same. The only difference is that the `MemorySegment` created with a `Confined` arena can't be shared by different threads. You can only use it in the thread that created the arena.
 
@@ -102,11 +97,9 @@ public class LoggingArena implements Arena {
 }
 ```
 
-
 Yeah... it's not a true allocator because it doesn't manage memory itself. That is something you can't really do because the actual allocation of memory is closed off to the outside. When you create your own arena you are always wrapping an existing Arena like `ofConfined`. With that being said, let's see how we can break free from these limitations and manage the memory ourselves.
 
-Native Memory allocation methods
---------------------------------
+## Native Memory allocation methods
 
 When you need more control, you can opt to use the allocation methods provided by C. Meaning that you use methods like `malloc`, `calloc` and `free` just as you would in C, but without leaving Java! This gives you the most control over the memory lifetimes. The downside is that you have to manage the `MemorySegment` yourself, meaning there is a chance that you go out of bounds, or introduce a memory leak if you forget to free a segment.
 
@@ -128,7 +121,6 @@ MethodHandle free = linker.downcallHandle(
 );
 ```
 
-
 Now all you need to do is call these methods to allocate and free memory. In the following example you can see how these downcalls are used.
 
 ```java
@@ -136,13 +128,11 @@ MemorySegment segment =  ((MemorySegment) malloc.invokeExact(size)).reinterpret(
 free.invokeExact(segment.address());
 ```
 
-
 The return value of malloc is cast to a `MemorySegment`. This segment now has the correct address but a size of zero... it is basically a pointer. So we have to call the reinterpret method to set the correct size and make it usable. The second line in the example frees the memory that was just allocated.
 
 Small side note: You don't have to use `MemorySegment`s if you want to work with addresses as `long`s and pass those around in your code; that is also totally fine. It saves you from having to create two `MemorySegment` instances. The `malloc` call itself and `reinterpret` both create a new `MemorySegment` instance. If you want to work with a `long`, you need to use this descriptor for malloc: `FunctionDescriptor.of(JAVA_LONG, JAVA_LONG)`.
 
-Pool of reusable memory
------------------------
+## Pool of reusable memory
 
 Memory pools in this context aren't provided by a specific built-in FFM API class. Instead, they are an architectural pattern you implement yourself. The two most common types are:
 
@@ -196,11 +186,9 @@ public class SegmentPool implements AutoCloseable {
 }
 ```
 
-
 We are trading complexity and memory usage for performance. This pool is holding onto memory even when you aren't actively using it, and you have to trust your application logic to actually return the segments to the pool to avoid running out of memory. The example uses a `ConcurrentLinkedQueue`. This isn't necessarily the most performant way, but can work. The most performant way totally depends on your use case.
 
-Slicing
--------
+## Slicing
 
 Slicing is taking an existing, already-allocated block of memory and working with a section of it. The Memory API gives you a few ways to do this:
 
@@ -223,7 +211,6 @@ try (Arena arena = Arena.ofConfined()) {
 }
 ```
 
-
 You could also use a slicing allocator to hand out segments sequentially:
 
 ```java
@@ -239,11 +226,9 @@ try (Arena arena = Arena.ofConfined()) {
 }
 ```
 
-
 The trade off with `asSlice` and `slicingAllocator` is that they still instantiate Java `MemorySegment` objects, causing GC pressure. If you want zero allocation overhead, just calculate and pass the `long` offsets manually, in essence it is just adding up two `long` values. At that point you are doing [pointer arithmetic in Java](https://davidvlijmincx.com/posts/pointer-arithmetic-in-java/).
 
-TL;DR
------
+## TL;DR
 
 |           Strategy            | Allocation Speed |               Lifetime / Safety                |                              Best Used For                              |
 |-------------------------------|------------------|------------------------------------------------|-------------------------------------------------------------------------|
@@ -254,8 +239,7 @@ TL;DR
 | **Memory Pools**              | Very Fast        | Manual (must return segments)                  | High-frequency allocations, avoiding OS overhead and GC pressure.       |
 | **Slicing Allocator**         | Very Fast        | Bound to parent segment                        | Breaking up large allocations, parsing sequential structs.              |
 
-Conclusion
-----------
+## Conclusion
 
 Managing native memory in Java used to be a hassle, but the Memory API makes it standard and manageable. The built-in `Arena` classes provide a balance between safety and control, catching out-of-bounds access and handling cleanup for you based on the scope. When those don't fit your use case, you can bypass them entirely and use `malloc` calls or build your own memory pools to cut down on allocation overhead.
 

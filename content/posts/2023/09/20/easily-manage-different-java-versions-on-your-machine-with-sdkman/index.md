@@ -30,15 +30,13 @@ And let's not even get started on the difference between JRE and JDK. It's easy 
 
 Tired of all this complexity? Let me introduce you to SDKMan!, a version manager that streamlines the process, making it a breeze to manage multiple Java versions on your machine. Not just Java, SDKMan! can be used to manage a lot more kits and tools such as Maven. In this blog post however, we see how to use SDKMan! to effortlessly manage different versions of Java on the same machine.
 
-What is SDKMan?
----------------
+## What is SDKMan?
 
 [SDKMan!](https://sdkman.io/) stands for Software Development Kit Manager, a shell script that allows you to manage parallel versions of multiple Software Development Kits for JVM-based languages like Java, Groovy, and Kotlin.
 
 With a simple command, you can switch between different versions, set a default version, and do much more.
 
-Installing SDKMan!
-------------------
+## Installing SDKMan!
 
 To get started, you'll first need to install SDKMan! on your system, with the following command:
 
@@ -50,8 +48,7 @@ After the installation is complete, open a new terminal window and type the foll
 
 You should see the SDKMan! version displayed, confirming that the installation was successful.
 
-Managing Java Versions
-----------------------
+## Managing Java Versions
 
 To see all the versions available for installation, including those you have already installed on your machine, you can run:
 
@@ -81,8 +78,7 @@ You can do all this without messing around with environment variables or system 
 
 You can also see the list of all available tools, SDKs and libraries you can install with SDKMan! with the command:sdk list
 
-Wrapping Up
------------
+## Wrapping Up
 
 Managing multiple Java versions doesn't have to be a headache. SDKMan! has you covered, offering a straightforward way to handle different versions without the hassle of juggling configurations manually. With just a few commands, you can install, switch between, or even uninstall different versions of Java (JDK or JRE, it doesn't matter!).  
 

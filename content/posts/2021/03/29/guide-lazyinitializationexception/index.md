@@ -50,7 +50,6 @@ FROM Customer customer0_
 WHERE customer0_.id = 1L
 ```
 
-
 On the other hand, one-to-many relationships are lazy by default. For such relationships, Hibernate doesn't fetch the data at query-time. Instead, it initializes the attribute that references the lazy relationship with a **proxy** . This proxy holds a reference to the Hibernate `Session` that loaded the root entity. Hibernate executes a new query when you access the attribute using the referenced `Session` (a JPA `EntityManager` wraps a `Session`).
 
 It has two significant consequences:
@@ -75,7 +74,6 @@ anotherManager.detach(customer);                                  // 7
 var orders = customer.getOrders();                                // 8
 assertThrows(LazyInitializationException.class, orders::isEmpty); // 9
 ```
-
 
 1. Get a JPA `EntityManager` assuming that `factory` is an `EntityManagerFactory`.
 2. Begin the transaction.
@@ -109,7 +107,6 @@ public class Customer {
 }
 ```
 
-
 1. Query the set of `orders` eagerly when loading a `Customer` instance
 
 The following is the new generated query:
@@ -126,7 +123,6 @@ FROM Customer customer0_
          LEFT OUTER JOIN "ORDER" orders2_ ON customer0_.id = orders2_.CUSTOMER_ID
 WHERE customer0_.id = ?
 ```
-
 
 Setting your associations to be eager is a terrible idea! Here are three good reasons why one-to-many associations are lazy by default - and should stay that way:
 
@@ -204,7 +200,6 @@ query.setParameter("id", id);
 var customer = (Customer) query.getSingleResult();
 ```
 
-
 * In the Criteria API: 
 
 ```java
@@ -213,7 +208,6 @@ var criteria = builder.createQuery(Customer.class);
 var root = criteria.from(Customer.class);
 root.fetch("orders", JoinType.LEFT);<code class="language-java"></code>
 ```
-
 
 By running one of the above snippets, Hibernate fetches the `orders` attribute of the `Customer` instance in the same query that loads the `Customer` itself. Here's the corresponding SQL query:
 
@@ -227,7 +221,6 @@ FROM Customer customer0_
          LEFT OUTER JOIN "ORDER" orders1_ ON customer0_.id = orders1_.CUSTOMER_ID
 WHERE customer0_.id = 1
 ```
-
 
 ### Entity Graph
 
@@ -256,7 +249,6 @@ public class Customer {
 }
 ```
 
-
 You can use an entity graph via both JPQL and the Criteria API. More importantly, you can use it in plain `find()` methods.
 
 ```java
@@ -264,7 +256,6 @@ var entityGraph = em.getEntityGraph("orders");
 var props = Map.<String, Object>of("javax.persistence.loadgraph", entityGraph);
 var customer = anotherManager.find(Customer.class, id, props);
 ```
-
 
 ### Conclusion
 

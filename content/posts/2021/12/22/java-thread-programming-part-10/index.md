@@ -38,7 +38,6 @@ java.util.concurrent.PriorityBlockingQueue
 java.util.concurrent.SynchronousQueue
 ```
 
-
 Etc.
 
 `BlockingQueue` can be bounded and unbounded:
@@ -47,7 +46,6 @@ Etc.
 BlockingQueue<Integer> queue = new LinkedBlockingDeque<>();
 ```
 
-
 The above Queue is unbounded. Therefore, it usually will not block any thread if we keep putting items. The reason is, it can hold `Integer.MAX_VALUE` items. This is enough for our typical use cases.
 
 We can, however, create a bounded queue using one of its constructors:
@@ -55,7 +53,6 @@ We can, however, create a bounded queue using one of its constructors:
 ```java
 BlockingQueue<Integer> queue = new LinkedBlockingDeque<>(10);
 ```
-
 
 Now it will only be able to hold ten items at a time. If a thread wants to put more items, it will put the thread into a waiting state.
 
@@ -92,7 +89,6 @@ public class Buffer {
     }
 }
 ```
-
 
 This class is now pretty simple, with no locking, no low-level thread constructs.
 
@@ -150,6 +146,5 @@ public class ProducerConsumerExample {
     }
 }
 ```
-
 
 That's it for today!

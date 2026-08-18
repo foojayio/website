@@ -24,8 +24,7 @@ enlighterjs: true
 frozen: false
 ---
 
-Introduction
-------------
+## Introduction
 
 Binary trees are fundamental data structures, ubiquitous in computer science and software engineering. We use them to represent hierarchical data and implement more complex data structures, such as search trees, syntax trees, cryptographic hash trees, space partitioning trees, heaps, and so on. Common binary tree operations include insertion, deletion, traversal, and rotation.
 
@@ -46,19 +45,13 @@ Below is a simple illustration of a binary tree (T1) and its clockwise-rolled co
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/q7ZXwMfj/BTROLL1-SM.png" alt="binary_tree_roll_example_1" width="790" height="480">
 
-<br />
-
 In some cases, when the topology of the tree is such that when viewed at a ±90° angle it appears as though certain nodes have two parents, the visual effect of the roll transformation may lose its acuity. Nevertheless, **the equivalence between the correlated traversals always holds**. For instance, consider the binary tree T2 from the previous example and its clockwise-rolled counterpart T3 shown below.
 
 <img decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/BQhDPrtJ/BTROLL2-SM.png" alt="binary_tree_example_2" width="790" height="608">
 
-<br />
-
 If we compare T3 to a literal -90° view of T2, the subtrees rooted at nodes **④** and **⑥** appear to be "pulled down" to create a proper binary tree structure. A similar thing happens when we take T3 from the example above and roll it clockwise.
 
 <img decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/9FXZMmmx/BTROLL3-SM.png" alt="binary_tree_example_3" width="790" height="609">
-
-<br />
 
 This time we get a rolled tree that has the same root as the original tree, since T3's root node is also its leftmost node. And the subtrees rooted at **④** and **⑥** appear to be adjusted again, to correct for the aforementioned double-parent "anomaly."
 
@@ -78,7 +71,6 @@ def cRoll(root, parent = null)
             cRoll(root.right, root)
 ```
 
-
 ```
 
 ```
@@ -89,8 +81,7 @@ The algorithm has a time complexity of **Θ(𝑛)** , where 𝑛 is the number o
 
 For a detailed analysis of this algorithm and its complexity, please refer to the following paper: [**A linear time algorithm for rolling binary trees**](https://ieeexplore.ieee.org/document/8011115).
 
-Implementation
---------------
+## Implementation
 
 In this section, we are going to present a step by step implementation of the binary tree roll algorithm in Java, by following basic design principles of object-oriented programming and implementing a few design patterns along the way.
 
@@ -109,7 +100,6 @@ Let's start by bootstrapping a new Java project using Maven. We are going to use
 </dependencies>
 ```
 
-
 Now let's define the basic building blocks of our implementation, i.e., the binary tree data structure and the tree traversal algorithms. We begin by creating a simple, recursively defined `Node` class that holds a value of a generic type `T` and references to its left and right children.
 
 ```java
@@ -121,7 +111,6 @@ public class Node<T> {
     /* constructors, getters, setters, etc. */
 }
 ```
-
 
 ### Static factory methods
 
@@ -136,7 +125,6 @@ With the recursive `Node` structure in place, we create a `BinaryTree` class tha
    \  
     6
 ```
-
 
 The way we can implement the static factory method is by using a queue to store the nodes of the tree as we parse them from the input sequence. First, we add the root node to the queue. Then, we read the next two values from the input sequence and create the left and right children of the node. If a node value is `null`, we do not create a child node. We add the newly created children to the queue and repeat this process until we reach the end of the input sequence.
 
@@ -183,7 +171,6 @@ public class BinaryTree<T> {
 }
 ```
 
-
 For convenience, we also create an overloaded version of the static factory method `of` that uses `null` as the default null identifier value, and a single, varargs input parameter:
 
 ```java
@@ -191,7 +178,6 @@ public static <T> BinaryTree<T> of(T... values) {
   return of(values, null);
 }
 ```
-
 
 ### The Visitor pattern
 
@@ -204,7 +190,6 @@ public interface Visitor<T> {
   void visit(Node<T> node);
 }
 ```
-
 
 Then, we create three concrete implementations of the `Visitor` interface, one for each of the three traversal orders. We want these visitors to store the nodes in a list in the order in which they are visited. And since the action we want to perform on the nodes (i.e., adding them to a list) is the same for all traversals, we implement it with a separate interface, called `VisitorAction`, and pass it to the visitors as a constructor argument. This design decouples the traversal logic from the action we perform on the visited nodes, which makes the code even cleaner and more flexible.
 
@@ -219,7 +204,6 @@ public interface VisitorAction<T> extends Consumer<Node<T>> {
   }
 }
 ```
-
 
 ```java
 public final class PreorderVisitor<T> implements Visitor<T> {
@@ -244,7 +228,6 @@ public final class PreorderVisitor<T> implements Visitor<T> {
 }
 ```
 
-
 We can now define the concrete action for adding the visited nodes to a list:
 
 ```java
@@ -267,7 +250,6 @@ public class NodeCollectorVisitorAction<T> implements VisitorAction<T> {
 }
 ```
 
-
 To complete our traversal functionality, we introduce another level of abstraction and make the `Node` and the `BinaryTree` classes traversable by our visitors through a generic interface, as follows:
 
 ```java
@@ -275,7 +257,6 @@ public interface Traversable<T> {
   void traverse(Visitor<T> visitor);
 }
 ```
-
 
 ```java
 public class Node<T> implements Traversable<T> {
@@ -288,7 +269,6 @@ public class Node<T> implements Traversable<T> {
 }
 ```
 
-
 ```java
 public class BinaryTree<T> implements Traversable<T> {
   /* ... */
@@ -300,7 +280,6 @@ public class BinaryTree<T> implements Traversable<T> {
   }
 }
 ```
-
 
 Before we move on to the implementation of the roll operation, let's create a simple test for the `BinaryTree` class to make sure that the tree is created correctly from the input sequence:
 
@@ -328,7 +307,6 @@ void testTraversals() {
 }
 ```
 
-
 Let's also show the flexibility of our visitors by refactoring our test with lambda expressions:
 
 ```java
@@ -349,7 +327,6 @@ void testTraversalsWithLambdas() {
   assertEquals(List.of(2, 6, 4, 5, 3, 1), postorderList);
 }
 ```
-
 
 ### The binary tree roll algorithm
 
@@ -373,7 +350,6 @@ abstract class RollHandler<T> {
   abstract void roll(Node<T> root, Node<T> parent);
 }
 ```
-
 
 We will implement the `roll` method for the clockwise and the counterclockwise roll variants separately, and have these implementations use the `rolledRoot` field to assign a reference to the rolled tree's root node.
 
@@ -408,7 +384,6 @@ class ClockwiseRollHandler<T> extends RollHandler<T> {
 }
 ```
 
-
 ```java
 class CounterclockwiseRollHandler<T> extends RollHandler<T> {
 
@@ -436,7 +411,6 @@ class CounterclockwiseRollHandler<T> extends RollHandler<T> {
 }
 ```
 
-
 ### To mutate or not to mutate?
 
 Aside from the two different roll variants, there is another important implementation aspect we need to consider. And that is the fact that mutating the original data structure might not always be desirable.
@@ -454,7 +428,6 @@ public interface RollStrategy<T> {
   BinaryTree<T> roll(BinaryTree<T> tree);
 }
 ```
-
 
 Then, we create two abstract classes that implement the `RollStrategy` interface and provide two different templates for implementing the roll algorithm. This approach is also known as the **Template Method** pattern, where an abstract superclass defines the high-level skeleton of an algorithm.
 
@@ -476,7 +449,6 @@ abstract class DefaultRollStrategy<T> implements RollStrategy<T> {
 }
 ```
 
-
 ```java
 abstract class ImmutableRollStrategy<T> implements RollStrategy<T> {
 
@@ -494,7 +466,6 @@ abstract class ImmutableRollStrategy<T> implements RollStrategy<T> {
 }
 ```
 
-
 The `deepCopy` method runs recursively on the root node and creates a deep clone of the tree.
 
 ```java
@@ -502,7 +473,6 @@ public BinaryTree<T> deepCopy() {
   return new BinaryTree<>(root != null ? root.deepCopy() : null);
 }
 ```
-
 
 ```java
 public Node<T> deepCopy() {
@@ -519,7 +489,6 @@ public Node<T> deepCopy() {
   return copy;
 }
 ```
-
 
 To combine the mutable and immutable strategy templates with the clockwise and counterclockwise roll handlers, we create concrete roll strategies which extend the abstract `RollStrategy` classes and implement the `getRollHandler` method. For simplicity, we nest the immutable roll strategies inside the default (mutable) roll strategy classes:
 
@@ -541,7 +510,6 @@ final class ClockwiseRollStrategy<T> extends DefaultRollStrategy<T> {
 }
 ```
 
-
 ```java
 final class CounterclockwiseRollStrategy<T> extends DefaultRollStrategy<T> {
 
@@ -560,7 +528,6 @@ final class CounterclockwiseRollStrategy<T> extends DefaultRollStrategy<T> {
 }
 ```
 
-
 Next, we create a factory interface that we can use to obtain instances of the roll strategies. We use **switch expressions** to return a strategy in a concise and elegant way.
 
 ```java
@@ -569,7 +536,6 @@ public enum RollDirection {
   COUNTER_CLOCKWISE
 }
 ```
-
 
 ```java
 public interface RollStrategyFactory {
@@ -590,7 +556,6 @@ public interface RollStrategyFactory {
 }
 ```
 
-
 Finally, we add a `roll` method to the `BinaryTree` class that accepts a `RollStrategy` instance as an argument and invokes its `roll` method on the tree:
 
 ```java
@@ -602,7 +567,6 @@ public class BinaryTree<T> {
   }
 }
 ```
-
 
 Note that the `BinaryTree` class does not have to be aware of the roll strategies, so if we want to keep the code as loosely coupled as possible, we can skip this step, and let the user invoke the `RollStrategy.roll` method directly and pass the tree they want to roll as an argument.
 
@@ -617,14 +581,12 @@ public sealed interface RollStrategy<T>
 }
 ```
 
-
 ```java
 abstract sealed class DefaultRollStrategy<T> implements RollStrategy<T> 
     permits ClockwiseRollStrategy, CounterclockwiseRollStrategy {
   /* ... */
 }
 ```
-
 
 ```java
 abstract sealed class ImmutableRollStrategy<T> implements RollStrategy<T> 
@@ -633,7 +595,6 @@ abstract sealed class ImmutableRollStrategy<T> implements RollStrategy<T>
 }
 ```
 
-
 ```java
 abstract sealed class RollHandler<T> 
     permits ClockwiseRollHandler, CounterClockwiseRollHandler {
@@ -641,9 +602,7 @@ abstract sealed class RollHandler<T>
 }
 ```
 
-
-Testing
--------
+## Testing
 
 We can now use our roll algorithm implementation to roll binary trees clockwise and counterclockwise. But before we do that, let's create a simple helper class that we can use to print binary trees to the console. We will use a basic recursive algorithm that prints the tree in a sideways, left-to-right fashion.
 
@@ -690,7 +649,6 @@ public class BinaryTreePrinter<T> {
 }
 ```
 
-
 Next, let's set up a test class that we can use to test our complete implementation.
 
 ```java
@@ -712,7 +670,6 @@ class IntegrationTests<T> {
   }
 }
 ```
-
 
 Now, let's create a small binary tree, roll it clockwise, and print the results to the console.
 
@@ -747,7 +704,6 @@ void testClockwiseRoll() {
 }
 ```
 
-
 ```
                      JDK
             Open ————┤
@@ -773,7 +729,6 @@ Foo ————┘
 [Foo, IO, Jay, Of, JDK, Open, Friends]
 [IO, JDK, Open, Of, Friends, Jay, Foo]
 ```
-
 
 Let's also test the immutable strategy, this time with the counterclockwise roll variant:
 
@@ -810,7 +765,6 @@ void testImmutableCounterClockwiseRoll() {
 }
 ```
 
-
 ```
                      JDK
             Open ————┤
@@ -845,11 +799,9 @@ Friends ————┤
                     Foo
 ```
 
-
 As we can see, the immutable strategy constructed the rolled tree properly, while preserving the state of the original tree.
 
-Summary
--------
+## Summary
 
 In this article, we introduced a **linear time algorithm for rolling binary trees** and implemented it in Java. We relied on common design patterns and principles to make the implementation clean and flexible, while ensuring appropriate encapsulation and loose coupling between the components.
 

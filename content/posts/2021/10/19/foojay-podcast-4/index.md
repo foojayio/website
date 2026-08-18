@@ -24,8 +24,7 @@ Quick summary---the role of Java as a central system runtime lead to multiple im
 
 {{< youtube 9FVfBcq81Oc >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -33,8 +32,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * **Simon Ritter**, Deputy CTO of Azul Systems, making the Azul Platform, including the Azul Zulu builds of OpenJDK.
 * **Dmitry Chuyko**, Senior Performance Engineer of Bellsoft, making the Liberica builds of OpenJDK.
@@ -42,7 +40,6 @@ Guests
 * **Ashley Williams**, founder and open-source strategist for the Rust Foundation.
 * **Erik Costlow**, Developer Relations for Contrast Security, securing Java and non-Java applications.
 
-Foojay Articles
----------------
+## Foojay Articles
 
 [Fantastic JVMs and Where to Find Them](https://foojay.io/today/fantastic-jvms-and-where-to-find-them/)

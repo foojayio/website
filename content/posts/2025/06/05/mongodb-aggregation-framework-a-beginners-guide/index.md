@@ -49,7 +49,6 @@ System.out.println(count);
 // output = 3
 ```
 
-
 ```
 
 ```
@@ -67,8 +66,7 @@ This is the essence of a pipeline: chaining operations that refine data step by 
 
 In MongoDB, we do something very similar.
 
-Aggregation pipeline
---------------------
+## Aggregation pipeline
 
 An [aggregation pipeline](https://www.mongodb.com/resources/products/capabilities/aggregation-pipeline) consists of one or more stages. Each stage represents a step that will be executed.
 
@@ -87,7 +85,6 @@ For example, consider a `transactions` collection where we want to count how man
 ]
 ```
 
-
 ```
 
 ```
@@ -96,8 +93,7 @@ Here, we apply a `$match` filter to select only the documents with `status` equa
 
 Each stage in the pipeline is executed in order, and each one only processes the results from the previous stage. So in the example above, even if there are 1,000 transactions in total, the `$count` stage only counts the transactions that matched the `"error"` status from the `$match` stage.
 
-Aggregation stages
-------------------
+## Aggregation stages
 
 As mentioned earlier, [stages](https://www.mongodb.com/docs/manual/reference/operator/aggregation-pipeline/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) are used to build a pipeline. In this section, let's take a look at some stages that are useful for our day-to-day work.
 
@@ -136,7 +132,6 @@ db.articles.insertMany(
 )
 ```
 
-
 ```
 
 ```
@@ -151,7 +146,6 @@ db.articles.aggregate([
 ])  
 // This will return Beyond Basics's article
 ```
-
 
 ```
 
@@ -169,7 +163,6 @@ db.articles.aggregate([
 ])
 ```
 
-
 ```
 
 ```
@@ -185,7 +178,6 @@ The result would look like this:
  //.. Others..
 ```
 
-
 ### $Unwind
 
 The [$unwind stage](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) is used to deconstruct an array into multiple documents. For example:
@@ -195,7 +187,6 @@ db.articles.aggregate([
    { $unwind: "$tags" }
 ])
 ```
-
 
 ```
 
@@ -226,7 +217,6 @@ This way, you can analyze or process each tag individually:
 },
   // other Documents...
 ```
-
 
 ```
 
@@ -266,7 +256,6 @@ The result would look like this:
 ]
 ```
 
-
 ```
 
 ```
@@ -280,7 +269,6 @@ db.articles.aggregate([
    { $sort: { publishedAt: -1 } }  
 ])
 ```
-
 
 ```
 And if we want to reverse the order—showing the oldest articles first—we just use `1` instead of `-1`.
@@ -302,7 +290,6 @@ db.articles.aggregate([
  ])
 ```
 
-
 ```
 Our result would look something like this:
 ```
@@ -314,11 +301,9 @@ Our result would look something like this:
 // Other fields ..
 ```
 
-
     Here, you can see that we’re using an operator called $year to extract the year from our publishedAt field. To learn about other operators, check out our official documentation page on aggregation operators.
 
-Combining stages
-----------------
+## Combining stages
 
 As we explored earlier, a pipeline can combine multiple stages. Let's say we want to know the total number of articles published in 2025 and beyond. We can combine the `$match` and [`$count`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) stages for this:
 
@@ -337,11 +322,9 @@ db.articles.aggregate(
 )
 ```
 
-
     Notice that we’re using the $gt operator to filter for years greater than the specific date.
 
-Wrapping up
------------
+## Wrapping up
 
 Aggregation Pipeline is a powerful alternative that MongoDB offers for combining stages and extracting data in an accurate and efficient way. There's a whole world of stages and operators for you to explore.
 

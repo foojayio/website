@@ -32,8 +32,7 @@ I assume that every reader is familiar with the `switch case` syntax inherited f
 * `case` clauses are evaluated in order. The first clause that matches gets its block executed
 * In C, `case` clauses are fall-through; you need to explicitly `break` to escape the `switch`, otherwise, the next `case` is evaluated
 
-Java's pattern matching
------------------------
+## Java's pattern matching
 
 I'll start with Java, as it was the first programming language I used in a professional context.
 
@@ -62,7 +61,6 @@ public class Main {
 }
 ```
 
-
 1. Reference the `Shape` parameter as `s`
 2. Evaluate whether `s` is a `Rectangle` *and* whether the `Rectangle` is a square
 3. Evaluate whether `s` is a `Rectangle`
@@ -71,8 +69,7 @@ public class Main {
 
 This Java version will be our baseline.
 
-Characteristics of the new `switch` syntax
-------------------------------------------
+## Characteristics of the new `switch` syntax
 
 The new syntax has some advantages over the legacy non-arrow `switch` inherited from C.
 
@@ -86,8 +83,7 @@ On the flip side, in the old C syntax, the runtime jumps directly to the correct
 
 In the next sections, we will port the code to other languages.
 
-Scala's pattern matching
-------------------------
+## Scala's pattern matching
 
 Scala's pattern matching has been second to none since its inception. Kotlin drew a lot of inspiration from it.
 
@@ -108,7 +104,6 @@ def getPerimeter(s: Shape) = {
 }
 ```
 
-
 1. Use the `s` reference directly
 2. Evaluate whether `s` is a `Rectangle` and whether the `Rectangle` is a square
 3. Scala additionally matches the class attributes
@@ -116,8 +111,7 @@ def getPerimeter(s: Shape) = {
 5. Evaluate whether `s` is a `Circle`
 6. If none of the previous clauses match, default to throwing an exception
 
-Kotlin's pattern matching
--------------------------
+## Kotlin's pattern matching
 
 Let's translate Java's code to Kotlin. For that, we *must* activate the *experimental* `Xwhen-guards` compilation feature described in [KEEP 371](https://github.com/Kotlin/KEEP/issues/371).
 
@@ -138,7 +132,6 @@ fun getPerimeter(s: Shape) = when (s) {                                     //1
 }
 ```
 
-
 1. Reference the `Shape` parameter as `s`
 2. Evaluate whether `s` is a `Rectangle` **and** whether the `Rectangle`'s `width` is equal to its `height`
 3. Evaluate whether `s` is a `Rectangle`
@@ -151,8 +144,7 @@ The comparative evolution of Kotlin vs. Java in pattern matching is quite enligh
 
 The experimental nature of Kotlin's `if` means Java has overtaken Java--at least in this area! It's rare enough to be noted.
 
-Python's pattern matching
--------------------------
+## Python's pattern matching
 
 Before, Python didn't offer anything similar to the `switch` statement of the above JVM languages. From version 3.10, it does offer the same capability in an elegant way:
 
@@ -182,11 +174,9 @@ def get_perimeter(s: Shape) -> float:
             raise ValueError("Unknown shape")
 ```
 
-
 The runtime evaluates the `case` clauses sequentially, as in the JVM languages.
 
-Rust's pattern matching
------------------------
+## Rust's pattern matching
 
 Rust's approach to memory management doesn't play well with checking types. In short, Rust offers two base concepts:
 
@@ -245,7 +235,6 @@ fn get_perimeter(s: Box<dyn Shape>) -> f64 {
 }
 ```
 
-
 1. Rust's type system doesn't offer a way to get the type of a variable. We must create a dedicated function for that.
 2. Implement the function for structures
 3. Match on the underlying structure type
@@ -254,8 +243,7 @@ fn get_perimeter(s: Box<dyn Shape>) -> f64 {
 
 This artificial code port above misrepresents Rust's pattern-matching abilities. It applies in [many places](https://doc.rust-lang.org/book/ch19-01-all-the-places-for-patterns.html).
 
-Conclusion
-----------
+## Conclusion
 
 Among all languages described in the post, Scala was the first to provide pattern-matching in `switch` clauses. For many years, it was the Grail that others tried to catch up with; Kotlin and Java have finally reached this stage.
 
@@ -272,7 +260,5 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [Pattern matching in Scala](https://docs.scala-lang.org/tour/pattern-matching.html)
 * [Match statement in Python](https://docs.python.org/3.10/tutorial/controlflow.html?highlight=match#match-statements)
 * [Pattern matching in Rust](https://doc.rust-lang.org/book/ch19-01-all-the-places-for-patterns.html)
-
-
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/pattern-matching-different-languages/) on July 20^th^, 2025*

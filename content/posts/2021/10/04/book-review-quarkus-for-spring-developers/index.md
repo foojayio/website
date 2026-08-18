@@ -18,11 +18,9 @@ related_posts:
 frozen: false
 ---
 
-[![](quarkus-book-340x510.png)](https://developers.redhat.com/e-books/quarkus-spring-developers)
-------------------------------------------------------------------------------------------------
+## [![](quarkus-book-340x510.png)](https://developers.redhat.com/e-books/quarkus-spring-developers)
 
-Key Take-Aways
---------------
+## Key Take-Aways
 
 * Quarkus and Spring are both powerful frameworks.
 * Developers with years of Spring experience can consult side-by-side examples to quickly shift code and tests to Quarkus.
@@ -38,8 +36,7 @@ The recent [Snyk/Azul Java community survey](https://www.infoq.com/news/2021/07/
 
 The book provides many annotated and numbered examples of how common development tasks are performed in both frameworks, using numbers to indicate how a developer can connect the code samples between projects. Rather than writing straw-man arguments or contrived hype-squad material that always shows why one framework is always better, the examples represent a proper level of knowledge transfer and comparison between how things are done. While the book is published by Red Hat Developer (the company behind Quarkus), opinionated statements about which technology is "better" is left out in favor of strong technical writing.
 
-Knowing Where to Look
----------------------
+## Knowing Where to Look
 
 Where applicable, the authors make side-by-side tables that can steer developers towards where to look for certain capabilities:
 
@@ -49,8 +46,7 @@ The book additionally explains how developers can use [an optional automated mig
 
 Quarkus also provides base implementations, Quarkus Extensions for Spring Boot, that help Spring applications migrate slowly rather than requiring an all-at-once replacement.
 
-Clear Annotated Code in Both Frameworks
----------------------------------------
+## Clear Annotated Code in Both Frameworks
 
 Quarkus for Spring Developers is broken into several chapters, each of which lays out the similarities and differences of each framework. Chapters select a particular development topic and highlight how the work is handled in Spring and how it is handled in Quarkus.
 
@@ -64,8 +60,7 @@ Chapter 5 on Event Driven Services discusses the role of libraries like Spring E
 
 ![](https://lh3.googleusercontent.com/vyTdejqa7k2ElQKEvjm6iVZCDrnTx4QzcLR8DbVaFqqn3SX_R3-kplx4abGh3ZqCmptzD8pASEDIPvuDKv5KnFZhP6LGZZ8DDCuZyt1TEa2YNXpcv4DuMLa24kuPZEvPlBv2Dh6H=s0)
 
-Focus on Details and Testing
-----------------------------
+## Focus on Details and Testing
 
 The authors focus on good development practices overall rather than stopping when the sample code runs. Many chapters provide additional context of how to run Quarkus code via automated tests and what to look for in Quarkus log messages.
 
@@ -77,8 +72,7 @@ Chapter 2 on Getting Started with Quarkus summarizes the ability to perform thre
 * Unit Testing is similar in both frameworks, however the section explains the role of what's needed in an **@QuarkusTest** with regards to dependency injection, mocking, and the connection to Spring's **@SpyBean**.
 * Native Image Testing represents any additional tests to verify the Continuous Tests and Unit Tests of the application after it has been compiled to a full native machine binary.
 
-Cloud Native Applications
--------------------------
+## Cloud Native Applications
 
 Quarkus for Spring Developers dedicates a chapter to creating cloud-native applications that run on Kubernetes, Google Cloud, Azure, AWS, and many other cloud environments. The focus of the cloud native chapter is deploying and running applications in the cloud. While Quarkus guides users toward native compilation for faster startup with lower memory, this is not a requirement for deployment and code can still be run with a standard JRE.
 
@@ -88,8 +82,7 @@ Instead the chapter focuses more on fully supported similarities between Spring 
 
 Developers working on cloud native applications may find more helpful information by looking at relevant guides on the Quarkus and Spring documentation, where preview features may play a role.
 
-Get Building with Quarkus
--------------------------
+## Get Building with Quarkus
 
 Developers can get to work immediately, prototyping new systems or testing how Quarkus can fit in with existing Spring applications:
 

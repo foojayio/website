@@ -87,7 +87,6 @@ public class ExtendedControl extends TextField {
     }
 ```
 
-
 You can see in the code above that we also created some styleable properties for the materialDesignColor and the promptTextColor. I won't go into detail about how to use styleable properties in JavaFX. If you would like to know more about it you might want to check the interwebz for that.
 
 Now that we have defined the variables we need it's time to add them to the existing control (which I always do in a method called initGraphics()).
@@ -116,7 +115,6 @@ private void initGraphics() {
 }
 ```
 
-
 In this method we set the style class "material-field" to th component itself, create the Text, put it in an HBox and add this HBox to the TextField component. The reason for not simply adding the Text only but putting it into an HBox is mainly for layout reasons. It might also come in handy if we want to add an icon to the Text.
 
 The most important thing in our control is changing the state from not focused to focused. Because when this happens we need to animate the Text.
@@ -139,7 +137,6 @@ private void registerListeners() {
     });
 }
 ```
-
 
 We added listeners to textProperty, promptTextProperty, focusedProperty, promptTextColorProperty and fontSize.
 
@@ -199,7 +196,6 @@ private void handleTextAndFocus(final boolean isFocused) {
     }
 }
 ```
-
 
 This method is checking if the TextField is focused or contains text, is disabled or is not editable. In all of these cases it will create an animation where the Text component will move up. In all other cases where the Text is already at the upper position, the Text will move down. In the animation not only the position of the Text component will change but also the font size and the color.
 
@@ -271,7 +267,6 @@ And here is the final piece...the CSS code...
     -fx-border-color: transparent transparent black transparent;
 }
 ```
-
 
 Well that's a lot of CSS but unfortunately it is needed to get the final result. I won't go through all the lines because it is simply too much. The important parts should be easy to understand. We define the styles for the standard .text-input so that it has no full border, no background color, transparent prompt-text, no corner radii etc.
 

@@ -34,8 +34,7 @@ Memory is what separates a useful AI application from a toy. BoxLang AI ships wi
 
 This post is a complete tour.
 
-🧠 Two Categories of Memory
----------------------------
+## 🧠 Two Categories of Memory
 
 ```html
            +-----------------------------------+
@@ -68,7 +67,6 @@ This post is a complete tour.
          +-------------------------------------------+
 ```
 
-
 BoxLang AI memory breaks into two fundamentally different categories, solving two different problems.
 
 **Standard Memory** stores conversation history --- the sequential messages between user and assistant. It's what lets the agent remember "my name is Luis" from three messages ago.
@@ -77,8 +75,7 @@ BoxLang AI memory breaks into two fundamentally different categories, solving tw
 
 Both categories share the same `IAiMemory` interface, the same `aiMemory()` BIF, and the same per-call identity routing --- your application code barely changes between them.
 
-📋 Standard Memory Types
-------------------------
+## 📋 Standard Memory Types
 
 Create any memory with our lovely global function: `aiMemory( type, config: {} )`. Our default memory type is a `window` memory of `20` messages:
 
@@ -109,7 +106,6 @@ mem = aiMemory( "jdbc", config: {
 } )
 ```
 
-
 |   Type    |                           Best For                           |
 |-----------|--------------------------------------------------------------|
 | `window`  | Quick chats, cost-conscious apps, stateless APIs             |
@@ -134,9 +130,7 @@ agent = aiAgent(
 )
 ```
 
-
-🔍 Vector Memory Types
-----------------------
+## 🔍 Vector Memory Types
 
 Vector memory stores embeddings and retrieves by semantic similarity --- the right tool when "find relevant context" matters more than "recall what was said recently."
 
@@ -173,7 +167,6 @@ mem = aiMemory( "opensearch", config: {
 } )
 ```
 
-
 Full vector memory roster:
 
 |     Type     |                 Description                 |
@@ -202,11 +195,9 @@ mem = aiMemory( "hybrid", config: {
 } )
 ```
 
-
 For most production support-bot or assistant scenarios, `hybrid` is the sweet spot --- recent context for coherence, semantic retrieval for depth.
 
-🏢 Per-Call Multi-Tenant Identity Routing
------------------------------------------
+## 🏢 Per-Call Multi-Tenant Identity Routing
 
 This is the architectural feature that makes BoxLang AI memory extensible. Memory instances are stateless and safe to use as singletons --- `userId` and `conversationId` route each operation to the correct isolated conversation. Or you can create memories with seeded identities if you want a specific agent with specific memory; your choice.
 
@@ -227,7 +218,6 @@ bobHistory   = sharedMemory.getAll( userId: "bob",   conversationId: "sess-2" )
 sharedMemory.clear( userId: "alice", conversationId: "sess-1" )
 ```
 
-
 In practice, you pass identity through `AiAgent.run()` options and it flows automatically to all memory operations:
 
 ```java
@@ -239,11 +229,9 @@ sharedAgent.run( "What did I just ask about?",          {}, { userId: "alice", c
 sharedAgent.run( "Can you help me reset my password?",  {}, { userId: "bob",   conversationId: "sess-2" } ) // isolated
 ```
 
-
 No per-user agent factories. No thread-local hacks. No shared-state concurrency bugs. One instance, many tenants.
 
-📚 Document Loaders
--------------------
+## 📚 Document Loaders
 
 Document loaders are the ingestion layer for RAG pipelines. They normalize content from 30+ source types into the `Document` format that vector memory understands.
 
@@ -287,7 +275,6 @@ docs = aiDocuments(
 ).load()
 ```
 
-
 **Built-in loaders:**
 
 |       Loader       |     Type     |               Handles                |
@@ -306,8 +293,7 @@ docs = aiDocuments(
 | `DirectoryLoader`  | `directory`  | Batch file processing                |
 | `WebCrawlerLoader` | `webcrawler` | Multi-page crawl                     |
 
-🔗 Building a Complete RAG Pipeline
------------------------------------
+## 🔗 Building a Complete RAG Pipeline
 
 Here's the full picture --- ingest documents into vector memory, then use an agent with that memory to answer questions grounded in your content.
 
@@ -342,7 +328,6 @@ println( "Duplicates skipped: #result.deduped#" )
 println( "Estimated cost   : $#result.estimatedCost#" )
 ```
 
-
 The `toMemory()` method handles chunking via `aiChunk()`, embedding via the configured provider, deduplication, and storage --- everything in one fluent call with a detailed report back.
 
 ### Step 2: Query
@@ -362,7 +347,6 @@ response = agent.run(
     { userId: "support-team", conversationId: "ticket-12345" }
 )
 ```
-
 
 When the agent runs, vector memory retrieves the most semantically similar document chunks for the query and injects them as context before the LLM call. The LLM answers based on your actual content --- not hallucinations.
 
@@ -385,11 +369,9 @@ agent = aiAgent(
 )
 ```
 
-
 The first 8 messages keep conversations coherent. The semantic layer ensures relevant documentation is always surfaced. Together they handle both "what did I just ask?" and "what does our policy say about X?"
 
-🔧 Token Management
--------------------
+## 🔧 Token Management
 
 Two BIFs help you reason about context window usage:
 
@@ -404,11 +386,9 @@ chunks = aiChunk( largeText, {
 } )
 ```
 
-
 `aiChunk()` is used internally by `toMemory()`, but you can call it directly when building custom ingestion pipelines.
 
-🏗️ Multiple Memories Per Agent
--------------------------------
+## 🏗️ Multiple Memories Per Agent
 
 Agents can have multiple memory instances simultaneously --- useful when you want different retention policies for different types of information:
 
@@ -430,11 +410,9 @@ agent = aiAgent(
 agent.addMemory( aiMemory( "file", config: { filePath: "/audit/" } ) )
 ```
 
-
 All memories are read from and written to in parallel. Messages retrieved from all memories are merged before each LLM call.
 
-📦 The `aiPopulate()` BIF --- Structured Memory Without Live Calls
-------------------------------------------------------------------
+## 📦 The `aiPopulate()` BIF --- Structured Memory Without Live Calls
 
 One often-overlooked feature: `aiPopulate()` fills a typed BoxLang class from JSON without making any LLM call. This is essential for caching and testing:
 
@@ -459,11 +437,9 @@ restoredProfile = aiPopulate( new CustomerProfile(), cachedJson )
 println( restoredProfile.getName() ) // "John Doe"
 ```
 
-
 Perfect for: pre-populated test fixtures, cached AI extractions, converting existing JSON data to typed objects.
 
-What's Next
------------
+## What's Next
 
 In **Part 7** --- the final post in the series --- we go deep on MCP: how to consume tools from any MCP server, how `MCPTool` proxies work, and how to expose your own BoxLang functions as an enterprise MCP server with full security, CORS, API key validation, and rate limiting.
 

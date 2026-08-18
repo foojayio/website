@@ -30,8 +30,6 @@ I flew from Geneva the day before my talk and crashed into my hotel bed. Of cour
 >
 > --- Scott McAllister (@stmcallister) [February 21, 2024](https://twitter.com/stmcallister/status/1760397694282121559?ref_src=twsrc%5Etfw)
 
-<br />
-
 The talk is heavily based on a demo. When I tried to start the latter, I noticed the issue immediately and realized my mistake, but it was too late. Even though I had a Docker Compose file with `build` statements, one of the components is in Rust---there was no time to compile it.
 
 Long story short, it was an epic fail. I apologize again for this to the attendees if any of them read this post; I hope the explanations and slides were enough for them to play with the GitHub repository.
@@ -48,8 +46,6 @@ I had two talks there: Open Telemetry (again) and [Chopping](https://blog.franke
 > [@nicolas_frankel](https://twitter.com/nicolas_frankel?ref_src=twsrc%5Etfw) talking about decomposing the monolith. The first step on the micro services journey is reorg /cc [@adrianco](https://twitter.com/adrianco?ref_src=twsrc%5Etfw) [pic.twitter.com/YU6yFR8IJF](https://t.co/YU6yFR8IJF)
 >
 > --- Spencer Gibb (@[\[email protected\]](/cdn-cgi/l/email-protection)) (@spencerbgibb) [February 23, 2024](https://twitter.com/spencerbgibb/status/1761046658303877615?ref_src=twsrc%5Etfw)
-
-<br />
 
 Over the weekend, my friend [Anthony](https://framapiaf.org/@anthonydahanne) invited me to ski in Sutton. The temperature was very low compared to what I'm used to, around-10°C. Fortunately, Anthony was prepared and gave me self-heating thingies for my hands; unfortunately, he only had one - but it was enough nonetheless. Anthony also connected me with all the meetups I have the pleasure of presenting at in Canada, so I'm fortunate to count him as a friend.
 
@@ -68,14 +64,10 @@ The next step in my journey was the [Ottawa Java User Group](https://www.meetup.
 >
 > --- Theresa Mammarella (@t_mammarella) [February 27, 2024](https://twitter.com/t_mammarella/status/1762628620193775717?ref_src=twsrc%5Etfw)
 
-<br />
-
 Ottawa is located between Montréal and Toronto, so the [Toronto JUG](https://www.meetup.com/toronto-java-users-group/events/298952265/) was a logical step in my tour. I stayed for a couple of days, including the weekend, so I had time to explore the city, including the CN Tower, as it was my first time there. [Therese Mammarella](https://mastodon.social/@t_mammarella) is the organizer there, and I'm sure she'll be happy to host you. You may have noticed she liked my talks so much that she drove to Ottawa on purpose the week before to attend the one I did at the JUG. The talk was well-attended but less than I expected for a city of this size. Anyway, I had a lot of fun presenting Evolving your APIs - I hope the attendees had too.
 > Great have [@nicolas_frankel](https://twitter.com/nicolas_frankel?ref_src=twsrc%5Etfw) drop into the [#Toronto](https://twitter.com/hashtag/Toronto?src=hash&ref_src=twsrc%5Etfw) JUG on his [#APISIXNorthAmericaTour](https://twitter.com/hashtag/APISIXNorthAmericaTour?src=hash&ref_src=twsrc%5Etfw)! [pic.twitter.com/KcRhA2nOpm](https://t.co/KcRhA2nOpm)
 >
 > --- Shaun Smith 🇨🇦❤️🇺🇦 (@shaunmsmith) [March 5, 2024](https://twitter.com/shaunmsmith/status/1764812180992426409?ref_src=twsrc%5Etfw)
-
-<br />
 
 Toronto is quite close to Niagara Falls. It would have been a shame not to go there, but I felt sick the weekend, so I decided to skip it. Yet, some things are just bound to happen. After the talk, a couple of us went to have dinner. There, I met a Ukrainian guy who had moved to Toronto years before the war and knew about me and my support for Ukraine. After talking together, we realized we had friends in common. He offered to drive me there as he was not working the next day. I happily took a day off myself and didn't regret it one bit! Thanks, Ihor, for the drive and the conversation.
 
@@ -86,8 +78,6 @@ Afterward, I returned to the USA, namely Chicago, Illinois, to speak at [Chicago
 >
 > --- Mary Grygleski (@mgrygles) [March 8, 2024](https://twitter.com/mgrygles/status/1765903150668517579?ref_src=twsrc%5Etfw)
 
-<br />
-
 [Matt Raible](https://github.com/mraible) is a familiar face in the Java community - and beyond. He's also the leader of the Denver Java User Group. I was lucky to know him, as he also arranged a double hit: [Boulder](https://www.meetup.com/boulderjavausersgroup/events/299454075/), then [Denver](https://www.meetup.com/denverjavausersgroup/events/gjngbtygcfbrb/). Even better, [Venkat Subramaniam](https://mastodon.social/@venkats), whom I don't need to introduce, lives close to Boulder **and** was there to invite me for a hike. But before that, I spend my weekend hiking according to his suggestion. First, I went to Boulder Moutain Park, and then, the day after, I went to Lake Bernard.
 
 ![](GIbjAqvXEAA3Is2.jpg)
@@ -96,8 +86,6 @@ The not-so-fun part about the second hike: for a reason unknown, mid-way, my hea
 > March [@denverjug](https://twitter.com/denverjug?ref_src=twsrc%5Etfw) - [@nicolas_frankel](https://twitter.com/nicolas_frankel?ref_src=twsrc%5Etfw) discussing "Evolving your APIs, a pragmatic approach" at Thrive in Cherry Creek. [pic.twitter.com/cOksUDihVm](https://t.co/cOksUDihVm)
 >
 > --- Greg Ostravich (@GregOstravich) [March 14, 2024](https://twitter.com/GregOstravich/status/1768070218855612800?ref_src=twsrc%5Etfw)
-
-<br />
 
 It was time for me to leave for the last leg of my journey, the [Southern California Linux Expo](https://www.socallinuxexpo.org/scale/21x/presentations/back-basics-getting-traffic-your-kubernetes-cluster) in Pasadena. Before that, life took an interesting turn of events: the forecast warned about a snowstorm in the area. The airline rebooked me twice: from 6 AM to 7 AM, then from 7 AM to 11 AM. I was lucky enough to get a seat, and though spraying the plane with unfreezing liquid took a bit of time, it managed to leave anyway. I left Denver under the snow and landed a handful of hours later in Los Angeles under the sun.
 
@@ -112,8 +100,6 @@ For the record, on Sunday, the whole world stopped. The Australian conference wa
 >
 > --- Steve Wong (@cantbewong) [March 15, 2024](https://twitter.com/cantbewong/status/1768725626306150526?ref_src=twsrc%5Etfw)
 
-<br />
-
 Before leaving for home, though, I met with my friends from Yugabites: [Denis Magda](https://github.com/dmagda) and [Franck Pachot](https://mastodon.social/@FranckPachot). We had lunch, then enjoyed an hour or so walking on the shore of Venice Beach. Here, you can see them counting on their fingers:
 
 ![](GIwX6QxWUAALNkz.jpg)
@@ -126,10 +112,4 @@ See you soon [somewhere](https://blog.frankel.ch/speaking/)!
 
 PS: I tried to document my journey via #APISIXNorthAmericaTour. Find more pictures on [Twitter](https://twitter.com/search?q=%23APISIXNorthAmericaTour&src=typed_query&f=live), [LinkedIn](https://www.linkedin.com/search/results/all/?keywords=%23APISIXNorthAmericaTour&origin=GLOBAL_SEARCH_HEADER), [Mastodon](https://mastodon.top/tags/APISIXNorthAmericaTour) and [BlueSky](https://bsky.app/search?q=%23APISIXNorthAmericaTour).
 
-
-
 *Originally published at [A Java Geek](https://blog.franke.ch/apisix-north-america-tour/) on March 24^th^, 2024*
-
-<br />
-
-<br />

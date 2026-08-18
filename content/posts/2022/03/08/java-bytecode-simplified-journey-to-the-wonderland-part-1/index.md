@@ -45,7 +45,6 @@ public class Calculator {
 }
 ```
 
-
 That's the simplest Java program we could ever write. It's a class with a public method, "add", which takes two integer arguments and then returns, summing them. That's it.
 
 Let's compile it.
@@ -54,7 +53,6 @@ Let's compile it.
 javac Calculator.java
 ```
 
-
 The above command will produce a class file named "Calculator. class". This file contains a series of bytes and it's not readable. You won't be able to open it with a text file or anything.
 
 However, an excellent Java command-line tool called "javap" allows us to read this bytecode from a class file. Let's read them, as follows:
@@ -62,7 +60,6 @@ However, an excellent Java command-line tool called "javap" allows us to read th
 ```
 javap -c Calculator
 ```
-
 
 If we run the above command in our terminal, we will get the following output.
 
@@ -84,7 +81,6 @@ public class Calculator {
 }
 ```
 
-
 Look, we can see a constructor here. However, we haven't added that in our Java source code. Well, the Java compiler did that. That's our default constructor. The Java compiler added it.
 
 Let's change gears a bit.
@@ -97,13 +93,9 @@ If we want to evaluate this using the following images:
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-52514" src="page-272-700x250.png" alt="" width="700" height="250">
 
-<br />
-
 Firstly, we will push 1 and 2 to the stack. And then we will pop these two, add them, and put them in the stack again. The same thing is done in JVM by two instructions: **iconst_\<\>** and **iadd**.
 
 <img decoding="async" class="alignnone size-medium wp-image-52515" src="page-273-700x239.png" alt="" width="700" height="239">
-
-<br />
 
 *iconst_1* and *iconst_2* , these two opcodess push 1 and 2 to the stack, and `iadd` opcode pops them from the stack and puts them back after adding them. The *iconst_1* and *iconst_2*are two special opcodes for loading 1 and 2 as they are constant.
 
@@ -127,7 +119,6 @@ int add(int a, int b) {
  }
 ```
 
-
  | iload_1 <br /> iload_2 iadd ireturn | 1B <br /> 1C 60 AC | 0001 1011 <br /> 0001 1100 0110 0000 1010 1100 |
 
 In the above table, we have a method which takes two integers arguments and then adds them. Over here, `a` and `b` are not constant; that's why `iload_1` and `iload_2`, these two opcodes are used. The generic format of this bytecode for loading integers is: `iload_<n>`. It essentially means that the is an index of the array of the local variables. The parameters are, in fact, local variables. `iload_1` loads the `a` and `iload_2` loads the `b`.
@@ -140,14 +131,12 @@ public int add() {
 }
 ```
 
-
 However, here is a caveat. If you write the above method, then compile it and try **javap** to read it, you will find something like this -
 
 ```
 0: iconst_3
 1: ireturn
 ```
-
 
 The reason is that the Java compiler does a bit of optimization; when it sees we are just adding 1 and 2 and then returning their value, it can just load the 3 into the stack with one instruction rather than using 3 instructions. We will know much more about these sorts of optimization later.
 
@@ -178,7 +167,6 @@ public class BytecodeReader {
   }
 }
 ```
-
 
 If you run this program, you will get a series of 1 and 0. Those are bits. Every 8 bits make a byte, and each byte represents an opcode. The list of all opcode can be found here:
 

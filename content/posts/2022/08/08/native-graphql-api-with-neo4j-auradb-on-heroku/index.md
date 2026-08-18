@@ -32,15 +32,13 @@ What I don't want to cover is a discussion about REST or GraphQL, exposing a dat
 
 In general, my litmus test usually goes into the direction of whether I can follow along with a framework or architecture to achieve my purpose or do I need to work against it. In the latter case, it's often better to pick something that works better, even if it is only in a personal perception of things.
 
-The use case
-------------
+## The use case
 
 A while back I started a README in this [repository](https://github.com/michael-simons/goodreads) containing a bunch of CS/IT books I liked. It grew to kinda append only database (`all.csv`) in which I kep track of books I buy and read so that I don't end up with duplicates. A book has a title, one or more authors, a state and a type.
 
 I wanted to have a simple, searchable API and the result is online [here](https://neo4j-aura-quarkus-graphql.herokuapp.com/).
 
-"Schema-First" vs "Object-First"
---------------------------------
+## "Schema-First" vs "Object-First"
 
 Any [GraphQL](https://graphql.org) API requires a schema. If you look at the official web page you'll see three steps:
 
@@ -59,7 +57,6 @@ type Book {
 }
 ```
 
-
 or - when using an appropriate tool - as the following Java record:
 
 ```java
@@ -71,7 +68,6 @@ public record Book(
 ) {}
 ```
 
-
 On the first look, there's hardly a difference. I personally prefer the Java version as I am familiar in that ecosystem and can find my way around - even without the amazing IDE support we have these days.
 
 Things get a bit more interesting when defining queries:
@@ -82,13 +78,11 @@ type Query {
 }
 ```
 
-
 This has not per-se a direction pendant in the model world.
 
 In GraphQL, the same types are used for querying as for the model. Hence, I think GraphQL is more a modelling language than a query language.
 
-A graph-database and it's issues with GraphQL
----------------------------------------------
+## A graph-database and it's issues with GraphQL
 
 Neo4j is a graph database. It stores related objects as an actual graph, in which relationships between objects are first-class entities. They can have properties the same way as other entities but especially, they can be traversed very efficiently. "Graph database" and "GraphQL" have both a whole word in common, so why does a Graph database not come with GraphQL built in?
 
@@ -101,7 +95,6 @@ MATCH (b:Book {title: 'Sleeping Beauties'})<-[w:WROTE]-(a)
 RETURN b, w, a
 ```
 
-
 or created like this:
 
 ```cypher
@@ -113,11 +106,9 @@ MERGE (k2) -[:WROTE] ->(b)
 RETURN *
 ```
 
-
 In case you are interested, Neo4j offers an official solution rooted in the JavaScript ecosystem, called \` @neo4j/graphql\` and documented [here](https://neo4j.com/docs/graphql-manual/current/), OGM included. There's also [neo4j-graphql-java](https://github.com/neo4j-graphql/neo4j-graphql-java), which does the translation from GraphQL models to Cypher on the JVM. Both these tools are "schema first" approaches, hence, I don't want to use either. Those are great tools, but they wouldn't fit my personal interest, so - as said in the beginning - I would rather use something else than working against a solution.
 
-Quarkus
--------
+## Quarkus
 
 I chose Quarkus for a couple of reasons for this project:
 
@@ -168,7 +159,6 @@ Eventually, your dependencies should look like this, test-dependencies omitted. 
 </dependencies>
 ```
 
-
 I have some static configuration in the project, looking like this:
 
 ```properties
@@ -189,7 +179,6 @@ quarkus.http.port=${PORT:8080}
 %test.org.neo4j.migrations.locations-to-scan=classpath:neo4j/migrations,classpath:neo4j/example-data
 ```
 
-
 Before we highlight some things in the project, let's have a look what is included with those dependencies and the bit of configuration. With **Git** , **JDK 17** and a working **Docker** environment on your machine, you can execute the following commands:
 
 ```bash
@@ -201,7 +190,6 @@ cd neo4j-aura-quarkus-graphql
 # Start Quarkus in development mode
 ./mvnw compile quarkus:dev
 ```
-
 
 In case you never developed with Quarkus before, Maven will download a chunk of the internet for you and after a while, starting up a Neo4j instance in a Docker container, setup the connection, populate the database for you and greet you like this:
 
@@ -225,8 +213,7 @@ or call the GraphQL UI:
 
 Which is exactly what we want. For the rest of this post I'm gonna walk through the most important pieces of implementation. I am not going touch the actual frontend, I leave that task up to someone with more Vue knowledge than I have. Regarding `frontend-maven-plugin`: Many things that [Jonas Hecht](https://twitter.com/jonashackt) describes in his post at [Codecentric](https://blog.codecentric.de/en/2018/04/spring-boot-vuejs/) applies to a Quarkus backend too.
 
-Implementation
---------------
+## Implementation
 
 The whole API my application offers is in a class called `BooksAndMovies`. From a domain perspective, I always wanted to add more content of Neo4j's movie graph but haven't done yet. That class is declared as application scoped `GraphQLApi`:
 
@@ -277,7 +264,6 @@ public class BooksAndMovies {
     }
 }
 ```
-
 
 Every method on that class annotated with `@Query` will be a query in the GraphQL schema. There is a similar annotation for mutations. As you see the method returns a `CompletableFuture<>`, making it asynchronous. This is important under several aspects: On the API side of things it won't block a thread and it allows for an easy combination of methods, domain objects and fields.
 
@@ -334,7 +320,6 @@ public CompletableFuture<List<Book>> findBooks(
 }
 ```
 
-
 There are two scenarios in which we must traverse the `WROTE` relationship: In case of filtering on the authors name and when the author is in the selection set. A builder like the Cypher-DSL makes this possible in a type safe fashion. Fun fact: If you don't insist on doing this manually like me here, the neo4j-graphql-java implementation uses the Cypher-DSL under the hood for the exact same purpose.
 
 The generated query will look very similar to what I have shown earlier in matching a book.
@@ -352,7 +337,6 @@ public record Person(
 ) {}
 ```
 
-
 The GraphQL schema however has this:
 
 ```graphql
@@ -366,7 +350,6 @@ type Person {
 }
 ```
 
-
 Where does that `shortBio` come from? It is another asynchronous method on the `BooksAndMovies` class:
 
 ```java
@@ -376,11 +359,9 @@ public CompletionStage<String> shortBio(@Source Person person) {
 }
 ```
 
-
 It takes in a source argument - the person - and asynchronously gets their biography and adds it to the result. It won't work with the example data yet, since I don't have a Wikipedia entry and that's where the `PeopleService` is looking at right now. I am not recommending doing such things without proper circuit breaker in production, but it is rather simple to build a federated GraphQL API based on the given stack.
 
-Deployment
-----------
+## Deployment
 
 We have seen how to run the project in developer mode in which the [dev services](https://quarkus.io/guides/dev-services) will use the amazing [Testcontainers](https://www.testcontainers.org) to spin up a database for you. In production however, I want to have something different and opted for [Neo4j AuraDB](https://neo4j.com/cloud/platform/aura-graph-database/). You can sign up there for an always free account.
 
@@ -397,7 +378,6 @@ The application itself is hosted on Heroku deployed by following the official gu
   -Dquarkus.container-image.name=web\
   -Dquarkus.container-image.tag=latest
 ```
-
 
 By using a container build, I can delegate the compute intensive task to another machine and also don't need to have all the Graal tooling installed.
 

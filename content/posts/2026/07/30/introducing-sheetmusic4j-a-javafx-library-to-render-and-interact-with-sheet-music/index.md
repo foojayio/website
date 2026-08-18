@@ -26,15 +26,13 @@ A static PDF of the sheet doesn't work for that. Great PDF viewer components exi
 
 {{< youtube D2uaHpvC9ao >}}
 
-Same Approach as Lottie4J
--------------------------
+## Same Approach as Lottie4J
 
 The problem matched one I'd already solved. With [Lottie4J](https://lottie4j.com/), I ran into the same gap: solid animation players exist for the browser and mobile, none for JavaFX. Sheetmusic4J follows the same path: an open file format on one side, a JavaFX rendering component on the other, with AI doing a large part of the implementation work.
 
 To be clear, this isn't vibe coding. I define the tasks, describe what I want to achieve, review what comes back, and iterate from there. The library wouldn't exist this fast without that collaboration, but the direction and the decisions stay mine.
 
-Built on MusicXML
------------------
+## Built on MusicXML
 
 Sheetmusic4J reads [MusicXML](https://www.w3.org/2021/06/musicxml40/), an open standard for representing sheet music. MIDI stores notes and timing, MusicXML stores a lot more: how a piece is structured, how it should look on the page, lyrics under a melody line for a song with a singer. MusicXML also ships an official set of example files, and I use those to compare what Sheetmusic4J renders against the reference PDF for each file.
 
@@ -45,8 +43,7 @@ The image above comes straight from the library and maps MusicXML terms to the c
 
 [Open Sheet Music Display](https://opensheetmusicdisplay.org/) already renders MusicXML in the browser and served as a reference here, the same role the official Lottie web player played for Lottie4J. A WebView could show the same result inside MelodyMatrix, but a WebView doesn't give me a way to talk to the rendering from JavaFX code. Sheetmusic4J does: it exposes the hooks to move a marker, highlight a note, and drive the view from a MIDI stream, which is exactly what MelodyMatrix needs to sync a piano performance with the sheet.
 
-Four Repositories, One Library
-------------------------------
+## Four Repositories, One Library
 
 Everything lives in the [sheetmusic4j](https://github.com/sheetmusic4j) organization on GitHub, with the [library project](https://github.com/sheetmusic4j/sheetmusic4j) structured close to Lottie4J:
 
@@ -59,8 +56,7 @@ Everything lives in the [sheetmusic4j](https://github.com/sheetmusic4j) organiza
 
 The demo app renders the same MusicXML file two ways side by side: a static PDF (using [Derek Lemmerman's PDF viewer component](https://github.com/dlsc-software-consulting-gmbh/PDFViewFX)) next to the Sheetmusic4J FX Viewer. The PDF stays fixed to its page size. The FX Viewer reflows the layout as the window resizes, which occasionally shifts a line differently than the PDF does. The demo also includes tools to simulate playback and highlight notes, without any sound, purely to test the visual sync. A diff tab compares the FX Viewer output pixel by pixel against the reference PDF. It surfaces real differences, though I'm still figuring out how useful that comparison is given that a static PDF and an interactive viewer solve different problems.
 
-Using the Library
------------------
+## Using the Library
 
 Add the FX Viewer dependency to a JavaFX project:
 
@@ -71,7 +67,6 @@ Add the FX Viewer dependency to a JavaFX project:
     <version>0.0.1</version>
 </dependency>
 ```
-
 
 Load a MusicXML file into a sheet view with a few lines of code:
 
@@ -85,11 +80,9 @@ stage.setScene(new Scene(new ScrollPane(sheetView), 900, 600));
 stage.show();
 ```
 
-
 The FX Viewer module also ships a `StripView` for a horizontal, scrolling layout of the same score.
 
-Version 0.0.1, and What's Next
-------------------------------
+## Version 0.0.1, and What's Next
 
 This [first release carries version 0.0.1](https://sheetmusic4j.com/releases/), not a stable release. A lot of the API and the rendering can still change. From here, MelodyMatrix's Learn section drives most of the requirements: following a marker across the sheet, highlighting the note currently played, keeping the view in sync with MIDI input from a real piano.
 

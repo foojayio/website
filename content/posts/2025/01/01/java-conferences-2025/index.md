@@ -93,7 +93,3 @@ Also see [javaconferences.org](https://javaconferences.org/), a subset of which 
 * 12 - 14: [Devoxx Morocco](https://devoxx.ma/)
 
 **December**
-
-<br />
-
-<br />

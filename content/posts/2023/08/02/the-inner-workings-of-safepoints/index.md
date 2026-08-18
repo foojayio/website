@@ -30,8 +30,7 @@ But this article isn't about what (global) safepoints are. Fr this, please refer
 
 I'll cover in this article the actual implementation of safepoints in the OpenJDK and present a related bug that I found along the way.
 
-Implementing Safepoint Checks
------------------------------
+## Implementing Safepoint Checks
 
 Global safepoints are implemented using thread-local safepoints by stopping the threads at thread-local safepoints till all threads reach a barrier (source code), so we only have thread-local checks. Therefore I'll only cover thread-local safepoints here and call them "safepoints."
 
@@ -42,7 +41,6 @@ if (thread->at_safepoint()) {
   SafepointMechanism::process();
 }
 ```
-
 
 to every location where a safepoint check should occur. The main problem is its performance. We either add lots of code or wrap it in a function and have a function call for every check. We can do better by exploiting the fact that the check often fails, so we can optimize for the fast path of "thread not at safepoint". The OpenJDK does this by exploiting the page protection mechanisms of modern CPUs ([source](https://github.com/openjdk/jdk/blob/020552355574ab428019e663c762a3496c4613c7/src/hotspot/share/runtime/safepointMechanism.cpp#L45)) in JIT compiled code:
 ![](https://mostlynerdless.de/wp-content/uploads/2023/07/safepoint-2000x726.png)
@@ -61,7 +59,6 @@ _poll_page_armed_value    =
 _poll_page_disarmed_value = 
   reinterpret_cast<uintptr_t>(good_page);
 ```
-
 
 The *good page* can be accessed without issues, but accessing the protected *bad page* causes an error. `os::protect_memory` uses the [mprotect](https://man7.org/linux/man-pages/man2/mprotect.2.html) method under the hood:
 
@@ -82,7 +79,6 @@ a bitwise-or of the other values in the following list:
 [...]
 ```
 
-
 Now every thread has a field `_polling_page` which points to either the *good page* (safepoint check fails) or the *bad page* (safepoint check succeeds). The segfault handler of JVM then calls the safepoint handler code. Handling segfaults is quite expensive, but this is only used on the slow path; the fast path consists only of reading from the address that `_polling_page` points to.
 
 In addition to simple safepoints, which trigger indiscriminate of the current program state, Erik Österlund added functionality to parametrize safepoints with [JEP 376](https://openjdk.org/jeps/376): The safepoint can be configured to cause a successful safepoint only if the current frame is older than the specified frame, based on the frame pointer. The frame pointer of the specified frame is called a watermark.
@@ -95,8 +91,7 @@ More on watermarks and how they can be used to reduce the latency of garbage col
 
 {{< youtube zsrSUs65xZA >}}
 
-Bug with Interpreted Aarch64 Methods
-------------------------------------
+## Bug with Interpreted Aarch64 Methods
 
 The OpenJDK uses multiple compilation tiers; methods can be interpreted or compiled; see Mastering the Art of Controlling the JIT: Unlocking Reproducible Profiler Tests for more information. A common misconception is that "interpreted" means that the method is evaluated by a kind of interpreter loop that has the basic structure:
 
@@ -108,7 +103,6 @@ for (int i = 0; i < byteCode.length; i++) {
   }
 }
 ```
-
 
 The bytecode is actually compiled using a straightforward *TemplateInterpreter*, which maps every bytecode instruction to a set of assembler instructions. The compilation is fast because there is no optimization, and the evaluation is faster than a traditional interpreter.
 
@@ -145,7 +139,6 @@ void TemplateTable::_return(TosState state) {
 }
 ```
 
-
 This adds the safepoint check using the simple method without page faults (for some reason, I don't know why), ensuring that a safepoint check is done at the return of every method.
 
 We can therefore expect that when a safepoint is triggered in the `interpreted_method` in
@@ -155,10 +148,7 @@ interpreted_method();
 compiled_method();
 ```
 
-
 that the safepoint is handled at least at the end of the method; in our example, the method is too small to have any other safepoints. Yet on my M1 MacBook, the safepoint is only handled in the `compiled_method`. I found this while trying to fix a bug in safepoint-dependent serviceability code. The cause of the problem is that the `TemplateTable::_return(TosState state)` is missing the safepoint check generation on aarch64 ([source](https://github.com/openjdk/jdk/blob/5d193193a3a4c519e7b3d77b27e6b2bf1b11c7f9/src/hotspot/cpu/aarch64/templateTable_aarch64.cpp#L2174C27-L2174C27)):
-
-<br />
 
 ```
 void TemplateTable::_return(TosState state)
@@ -180,7 +170,6 @@ void TemplateTable::_return(TosState state)
 }
 ```
 
-
 The same issue is prevalent in the OpenJDK's riscv and arm ports. The real-world implications of this bug are minor, as the interpreted methods without any inner safepoint checks (in loops, calls to compiled methods, ...) seldom run long enough to matter.
 
 I'm neither an expert on the TemplateInterpreter nor on the different architectures. Maybe there are valid reasons to omit this safepoint check on ARM. But if there are not, then it should be fixed; I propose adding something like the following directly before `if (_desc->bytecode() == Bytecodes::_return)` for aarch64 ([source](https://github.com/openjdk/jdk/commit/eea42bc29a131340dbf210d7dd151ffd32a64ec9)):
@@ -199,11 +188,9 @@ I'm neither an expert on the TemplateInterpreter nor on the different architectu
   }
 ```
 
-
 I'm happy to hear the opinion of any experts on this topic, the related bug is [JBS-8313419](https://bugs.openjdk.org/browse/JDK-8313419).
 
-Conclusion
-----------
+## Conclusion
 
 Understanding the implementation of safepoints can be helpful when working on the OpenJDK. This article has shown the inner workings, focusing on a bug in the TemplateInterpreter related to the safepoints checks.
 

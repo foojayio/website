@@ -25,8 +25,7 @@ Foojay community members discuss the modernization of Jakarta EE applications fr
 
 {{< youtube OgafP0YeoTE >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -34,8 +33,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Guests
-------
+## Guests
 
 * Rudy De Busscher, product manager of [Payara](https://www.payara.fish/solutions/cloud-and-payara-platform/) and EE contributor.
 * Josh Juneau, consultant and author of [Jakarta EE Recipes](https://www.amazon.com/Jakarta-EE-Recipes-Problem-Solution-Approach/dp/1484255860/ref=sr_1_3?dchild=1&qid=1630357538&refinements=p_27%3AJosh+Juneau&s=books&sr=1-3).

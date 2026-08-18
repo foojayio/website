@@ -27,13 +27,11 @@ frozen: false
 
 In the second part of our JCON interviews, recorded at the conference in May, we focuses on general evolutions within the Java world and how they influence how we write code and develop applications. We take a look back at the history of Java, discuss new features in the latest release, how Java evolves with OpenJDK projects and JEPS, how Java is used in education, and much more...
 
-Video
------
+## Video
 
 {{< youtube T9_5LYsFZn8 >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -41,8 +39,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction
 

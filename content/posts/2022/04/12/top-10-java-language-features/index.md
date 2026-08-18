@@ -25,8 +25,7 @@ Some are unique to that particular language and some are common to many other pr
 
 In this article, I will explore ten Java programming features used frequently by developers in their day-to-day programming jobs.
 
-Collection's factory method
----------------------------
+## Collection's factory method
 
 Collections are the most frequently used feature in our daily coding. They are used as a container where we store objects and pass them along.
 
@@ -42,13 +41,11 @@ That's why Java 9 introduced a few very concise factory methods.
 List countries = List.of("Bangladesh", "Canada", "United States", "Tuvalu");
 ```
 
-
 **Set:**
 
 ```java
  Set countries = Set.of("Bangladesh", "Canada", "United States", "Tuvalu");
 ```
-
 
 **Map:**
 
@@ -59,13 +56,11 @@ Map<String, Integer> countriesByPopulation = Map.of("Bangladesh", 164_689_383,
                                                             "Tuvalu", 11_792);
 ```
 
-
 These are very convenient when we want to create immutable containers. However, if we're going to create mutable collections, the traditional approach is advised.
 
 If you want to learn more about the collection framework, please visit here: <https://dev.java/learn/the-collections-framework/>.
 
-Local Type Inference
---------------------
+## Local Type Inference
 
 Java 10 introduced type inference for local variables, which is super convenient for developers.
 
@@ -75,7 +70,6 @@ Traditionally Java is a strongly typed language, and developers have to specify 
 Map<String, Map<String, Integer>> properties = new HashMap<>();
 ```
 
-
 We specified the type of information on both sides in the above statement. If we define it in one place, our eyes can easily interpret that this has to be a Map type. The Java language has matured enough, and the Java compiler should be smart enough to understand that. The Local Type inference does precisely that.  
 
 The above code can now be written as follows-
@@ -84,20 +78,17 @@ The above code can now be written as follows-
 var properties = new HashMap<String, Map<String, Integer>>();
 ```
 
-
 Now we have to write type once. The above code may not look a lot less. However, it makes a lot shorter when we call a method and store the result in a variable. Example:
 
 ```java
 var properties = getProperties();
 ```
 
-
 Similarly,
 
 ```java
  var countries = Set.of("Bangladesh", "Canada", "United States", "Tuvalu");
 ```
-
 
 Although this seems a handy feature, there is some criticism as well. Some developers would argue that this may reduce readability, which is more important than this little convenience.
 
@@ -106,8 +97,7 @@ To know more about it, visit:
 <https://openjdk.java.net/projects/amber/guides/lvti-faq>  
 <https://openjdk.java.net/projects/amber/guides/lvti-style-guide>
 
-Enhanced Switch Expression
---------------------------
+## Enhanced Switch Expression
 
 The traditional switch statement has been in Java from the beginning, which resembled C and C++. It was ok, but as the language evolved, it hasn't offered us any improvement until Java 14. It certainly has some limitations as well. The most infamous was the [fall-through](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html.):
 
@@ -124,11 +114,9 @@ String result = switch (day) {
 };
 ```
 
-
 Read more about it: <https://dev.java/learn/branching-with-switch-expressions/>
 
-Records
--------
+## Records
 
 Although records are relatively new features in Java, released in Java 16, many developers find it super helpful to create immutable objects.
 
@@ -188,7 +176,6 @@ public final class Point {
 }
 ```
 
-
 The class seems super verbose and has little to do with our whole intention. This entire code can be replaced with the following code -
 
 ```
@@ -198,11 +185,9 @@ public record Point(int x, int y, int z) {
 }
 ```
 
-
 Read more about records here: <https://nipafx.dev/java-record-semantics/>.
 
-Optional
---------
+## Optional
 
 A method is a contract: we put thought into it when defining one. We specify parameters with their type and also a return type. We expect it to behave according to the contract when we invoke a method. If it doesn't, it's a violation of the contract.
 
@@ -223,7 +208,6 @@ public class Playground {
     }
 }
 ```
-
 
 Look at the above code. The findName() method is supposed to return a String value, but it returns null. The invoker now has to check nulls first to deal with it. If an invoke forgets to do so, they will end up getting NullPointerException which is not expected behaviour.
 
@@ -247,7 +231,6 @@ public class Playground {
 }
 ```
 
-
 Now we have rewritten the findName() method with Optional, which specified the possibility of not returning any value, and we can deal with it. That gives an upfront warning to the programmers and fixes the violation.
 
 Read more about Optional:
@@ -256,8 +239,7 @@ Read more about Optional:
 <https://dzone.com/articles/optional-in-java>  
 <https://www.baeldung.com/java-optional>
 
-Java Date Time API
-------------------
+## Java Date Time API
 
 Every developer is confused with date-time calculation to some degree. This isn't an overstatement. This was mainly due to not having a good Java API for dealing with Dates and times in Java for a long time.
 
@@ -290,7 +272,6 @@ public class Playground3 {
 }
 ```
 
-
 Similarly, LocalTime has all the methods required for calculating time.
 
 ```java
@@ -301,14 +282,12 @@ time = time.withSecond(6);
 time = time.plusMinutes(3);
 ```
 
-
 We can combine both of them -
 
 ```java
 LocalDateTime dateTime1 = LocalDateTime.of(2022, Month.APRIL, 4, 20, 30);
 LocalDateTime dateTime2 = LocalDateTime.of(date, time);
 ```
-
 
 How we include timezone -
 
@@ -318,14 +297,12 @@ LocalDate localDate = LocalDate.of(2022, Month.APRIL, 4);
 ZonedDateTime zonedDateTime = date.atStartOfDay(zone);
 ```
 
-
 Read more about Java Date Time:
 
 <https://www.infoq.com/articles/java.time>  
 <https://docs.oracle.com/javase/tutorial/datetime/TOC.html>
 
-Helpful NullPointerException
-----------------------------
+## Helpful NullPointerException
 
 Every developer hates the Null Pointer Exception. It becomes challenging when StackTrace doesn't provide helpful information it. To demonstrate the problem, let's see an example:
 
@@ -371,7 +348,6 @@ class Name {
 }
 ```
 
-
 Look at the main method of the above code. We can see that we will get a null pointer exception. If we run and compile the code with pre Java 14, we will get the following StackTrace:
 
 ```
@@ -379,7 +355,6 @@ Exception in thread "main" java.lang.NullPointerException
 at com.bazlur.Main.getLengthOfUsersName(Main.java:11)
 at com.bazlur.Main.main(Main.java:7)
 ```
-
 
 This StackTrace is okay, but it has not much information about where and why this NullPointerException happened.
 
@@ -391,11 +366,9 @@ at ca.bazlur.playground.Main.getLengthOfUsersName(Main.java:12)
 at ca.bazlur.playground.Main.main(Main.java:8)
 ```
 
-
 Read more about it: <https://openjdk.java.net/jeps/358>
 
-CompletableFuture
------------------
+## CompletableFuture
 
 We write program line and line, and typically it gets executed line by line. However, there are times when we want relatively parallel execution to make the program faster. To accomplish that, we usually consult Java Thread.
 
@@ -465,13 +438,11 @@ public class SocialMediaService {
 }
 ```
 
-
 Read more about it:
 
 <https://www.linkedin.com/pulse/asynchronous-programming-java-completablefuture-aliaksandr-liakh/>
 
-Lambda Expression
------------------
+## Lambda Expression
 
 Lambda Expression is probably the most powerful feature in the Java language. It reshaped the way we write code. A Lambda expression is like an anonymous function that can take arguments and return a value.
 
@@ -491,7 +462,6 @@ String[] list = directory.list(new FilenameFilter() {
 });
 ```
 
-
 If you carefully look at the piece of the code, we passed an anonymous inner class to the method list(). In the inner class, we put the logic to filter out the files.
 
 Essentially we are interested in this piece of logic, not the boilerplate around the logic.
@@ -503,13 +473,11 @@ var directory = new File("./src/main/java/ca/bazlur/playground");
 String[] list = directory.list((dir, name) -> name.endsWith(“.java"));
 ```
 
-
 Well, I have just shown you one example here, but there are plenty of other benefits of the lambda expression.
 
 Read more about it: <https://dev.java/learn/lambda-expressions/>
 
-Stream API
-----------
+## Stream API
 
 > "Lambda Expressions are the gateway drug to Java 8, but Streams are the real addiction."  
 >
@@ -532,7 +500,6 @@ public static String getJavaBooks(List<Book> books) {
             .collect(Collectors.joining(", "));
 }
 ```
-
 
 The above code is simple, readable and concise. The alternative imperative code would be-
 
@@ -559,7 +526,6 @@ public static String getJavaBooksImperatively(List<Book> books) {
     return joiner.toString();
 }
 ```
-
 
 Although both methods return the same value, we see the difference clearly.
 

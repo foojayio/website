@@ -23,8 +23,7 @@ Almost to the day, one and a quarter years ago, I published my blog post called 
 
 To quote my own article:{#block-a9c8a1e1-3105-4ea3-80ff-84fea4726402}
 >
-> JCmd triggered debugging
-> ------------------------
+> ## JCmd triggered debugging
 >
 > There are often cases where the code that you want to debug is executed later in your program's run or after a specific issue appears. So don't waste time running the debugging session from the start of your program, but use the `onjcmd=y` option to tell the JDWP agent to wait with the debugging session till it is triggered via `jcmd`.{#block-19cdbfac-1c23-4648-af2f-6bd2f85951c2}
 >
@@ -51,18 +50,15 @@ After the feature had been merged, it was decided that it needed a [CSR](https:/
 
 So, it was decided to remove it with [JDK-8226608](https://bugs.openjdk.org/browse/JDK-8226608), as Joe Darcy mentions in his comment with the CSR [JDK-8227078](https://bugs.openjdk.org/browse/JDK-8227078):{#block-e017e73f-b8b5-4f07-ba97-b4f6d78d0076}
 >
-> Summary
-> -------
+> ## Summary
 >
 > Hide the onjcmd option of the jdwp agent and the corresponding VM.start_java_debugging command, without removing the functionality outright.{#block-e3693c23-7b86-42cb-ae93-abdbba91549b}
 >
-> Problem
-> -------
+> ## Problem
 >
 > According to JDK-8223456 the onjcmd option and the corresponding diagnostic command should be hidden as far as possible.{#block-97ef9322-75ff-4853-81ec-733b449cd764}
 >
-> Solution
-> --------
+> ## Solution
 >
 > The onjcmd option is not mentioned in the help output of the JDWP agent anymore. The corresponding diagnostic command VM.start_java_debugging is now registered as hidden, so it would not be included in the list of supported commands by jcmd or via the mbeans.{#block-db02fc36-4ce3-4be4-88ff-992cab61d3fd}
 >
@@ -88,8 +84,7 @@ So, the feature has been hidden and has offered no benefits since mid-2020. It's
 For such CSRs, one also needs to state the compatibility risks. As explained before, there are possibly none outside of SAP. Together with my related [PR](https://github.com/openjdk/jdk/pull/21387), this will remove the feature from the OpenJDK, and JDK 24 will most probably be the first JDK since JDK 12 without the onjcmd debugger feature. RIP.{#block-bdf2ffcb-e639-4c35-a1b9-eb7c6d31ffc5}
 ![This image has an empty alt attribute; its file name is image.png](https://mostlynerdless.de/wp-content/uploads/2024/10/image.png)
 
-Conclusion
-----------
+## Conclusion
 
 In this week's artilce, we saw the life cycle of the onjcmd feature, from its inception to its removal. As software developers, we shouldn't be too afraid to remove features we or our teams implemented. Every unused removed feature is a good feature. Large projects, like the OpenJDK, tend to collect lots of features that were great years ago but fell out of use and clog the source code. In my opinion, this also includes other JDWP agent features like onthrow. To be slightly more controversial, why not start deprecating the UI stack and moving it into a separate project like JFX?{#block-162b6682-0cfa-425d-bb25-b26651e7edf9}
 

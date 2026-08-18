@@ -29,15 +29,13 @@ The large cloud providers understood this a long time ago and so the term "cloud
 
 As serverless methodologies have burned through the application tiers, databases have turned out to be the last big thing to feel the heat of progress. No surprise though. Stateful workloads --- as in information I really want to keep --- is a much harder problem to solve than stateless workloads. The cloud providers have all released their own version of a serverless database, provided you agree to be locked into their walled garden. Open source has always served as the antidote for the dreaded lock-in, and there are really exciting things happening in the Apache Cassandra community in that regard.
 
-The Oracle That Foretold the Future
------------------------------------
+## The Oracle That Foretold the Future
 
 In the early days of distributed databases, a groundbreaking paper changed everything: the [Dynamo paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) from Amazon, published in 2007. In it, a team of researchers and engineers described how an ideal system would be built to maximize performance and data consistency while balancing scale and operations. To quote the paper: "A highly available key-value storage system that some of Amazon's core services use to provide an 'always-on' experience." It served as the basis for several database implementations, including what would become Apache Cassandra.
 
 Dynamo assumed the availability of cheap, commodity hardware in the coming cloud era. As our industries have slowly morphed into building cloud native applications, the definition of commodity hardware has changed. Instead of units being bare-metal or virtual machines, we consume individual scale components of network, compute and storage. Building a serverless Cassandra database continues the work of the Dynamo paper inside this new paradigm; and with it, new scaling and deployment options that fit our cloud native world.
 
-Defining Commodity
-------------------
+## Defining Commodity
 
 In 2007 when the paper was first published, the definition of a commodity was much different than today. Most server-class systems were bulky and incredibly complex to provide the compute power needed and uptime required. "Commodity" entailed very inexpensive, small servers with the most basic CPU, disk and memory. The first time I deployed Cassandra in my infrastructure, I was able to use the commodity servers to scale out and in the process save a lot of money to achieve better results.
 
@@ -47,8 +45,7 @@ Now we are at a time when Kubernetes is advancing the pointer of what we can do 
 
 Software-defined networks do all the complicated virtual wiring in our data centers dynamically. All of which creates an environment that is elastic, scalable, and self-healing. We also get the added benefit of fine-grained cost controls. Goodbye over-provisioning, hello cloud economics.
 
-Open Source: Now More Important Than Ever
------------------------------------------
+## Open Source: Now More Important Than Ever
 
 Just like the majority of data infrastructure innovations in the past 10 years, the breadth and depth of the needed changes can only be addressed by an engaged community of users. The revolution in serverless databases will happen in open source. Clouds moved fast on early serverless implementations, but as we in open source know: to go far, we go together. The cloud economics of using a vendor-specific serverless database works great, right up until it doesn't. Free as in freedom means you should be able to use it anywhere. In a cloud, in your own datacenter, or even on your laptop.
 

@@ -31,8 +31,7 @@ I like my tests fast, the same way I like fast road bikes. Therefore, I am gonna
 
 In case you prefer a video, here's an animated version of this text in form of [amateur cycling-nutrition and pro-testing tips](https://www.youtube.com/watch?v=737xm5He8aU).
 
-The simple test
----------------
+## The simple test
 
 Have a look at the following simple test:
 
@@ -102,7 +101,6 @@ class SimpleTest {
 }
 ```
 
-
 It uses `@Testcontainers` from the Testcontainers JUnit extension `org.testcontainers:junit-jupiter:jar:1.17.3` to mark this test as test depending on Docker and the `@Container` annotation from the same library to mark a final class field as container. The annotation ensures that the container is started before all tests (so that it can be used in a `@BeforeAll` method to retrieve URLs or credentials) and that it gets shutdown after all tests have run.
 
 Apart from that the only thing sticking out is the naive time keeping: It turns out that - at least my IDE - doesn't display the time the whole class initialization took while running the test.
@@ -115,8 +113,7 @@ On my rather fast machine this test takes about 10 seconds in total... Compared 
 
 But, fear not, there is...
 
-The Optimized test
-------------------
+## The Optimized test
 
 I left out the imports in the following listing. They are the same as the above.
 
@@ -164,7 +161,6 @@ class OptimizedTest {
 }
 ```
 
-
 The important differences are:
 
 * Don't use `@Container`
@@ -177,7 +173,6 @@ For the latter to work, you will need to prepare your environmenet for Testconta
 ```properties
 testcontainers.reuse.enable=true
 ```
-
 
 That is all. The above test will run the same 10 seconds on the first run and after that, it takes roughly 200ms per run. Testcontainers monitor will keep the Neo4j container around and reuse it for all containers based on the same image and the configuration. There is nothing more todo.
 
@@ -260,7 +255,6 @@ The Maven build descriptor for the above classes looks like this:
   </build>
 </project>
 ```
-
 
 Again, this works of course will all the Testcontainers modules. You do need to make sure however that your test data accross your testsuite does not have interdependencies or if so, make sure you tag the containers with dedicated labels.
 

@@ -58,12 +58,10 @@ When you reach the limit, a warning is emitted on the standard output:
 Java HotSpot(TM) Server VM warning: CodeCache is full. Compiler has been disabled"
 ```
 
-
 with -XX:+PrintCompilation you will also get:
 
 ```
 7383 COMPILE SKIPPED: code cache is full
 ```
-
 
 **Note:** Used with permission and thanks --- [originally written and published by Jean-Philippe Bempel](https://jpbempel.github.io/2012/11/15/the-useful-jvm-options.html).

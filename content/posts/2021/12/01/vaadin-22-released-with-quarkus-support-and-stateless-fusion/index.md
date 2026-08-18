@@ -29,8 +29,7 @@ Vaadin is an open source development platform for building modern web applicatio
 
 Visit [vaadin.com](https://vaadin.com/) to get started.
 
-New and Noteworthy Since Vaadin 21
-----------------------------------
+## New and Noteworthy Since Vaadin 21
 
 Here are the highlighted new and improved features in vaadin 22. To see the full list of bug fixes and improvements, check Included Projects and Change Log.
 
@@ -76,25 +75,21 @@ Fixes to accessibility issues in Vaadin components, so that they can be used wit
 
 * Official Quarkus support for Vaadin Flow
 
-Special thanks
---------------
+## Special thanks
 
 Special thanks to @knoobie, for the invaluable help with testing, feedback, and guidance with the accessibility work!
 
-Support
--------
+## Support
 
 Vaadin 22 is supported for one month after Vaadin 23 has been released. The latest LTS (long term support) version is Vaadin 14. More details of our release model are available on our [roadmap page](https://vaadin.com/roadmap).
 
 Vaadin also provides [commercial support and warranty](https://vaadin.com/support).
 
-App starters
-------------
+## App starters
 
 The best way to get started with Vaadin is to go to <https://start.vaadin.com> and configure your new application by setting up your views, entities, styles, and the technology stack you're interested in.
 
-Maven Archetypes
-----------------
+## Maven Archetypes
 
 Maven is the de-facto build tool for Java web applications. Major IDEs also support Maven out of the box and most often you'll be using Maven via your favorite IDE.  
 
@@ -123,9 +118,7 @@ mvn -B archetype:generate \
                 && mvn
 ```
 
-
-Manually changing Vaadin version for Java projects
---------------------------------------------------
+## Manually changing Vaadin version for Java projects
 
 Add the following dependency to dependencyManagement in pom.xml.
 
@@ -138,7 +131,6 @@ Add the following dependency to dependencyManagement in pom.xml.
     <scope>import</scope>
 </dependency>
 ```
-
 
 Read more about upgrading to Vaadin 22 from [vaadin.com](https://vaadin.com/docs/latest/guide/upgrading).
 

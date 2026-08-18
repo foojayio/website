@@ -42,16 +42,14 @@ Materialized views are useful for speeding up queries that are repeated.
 
 Instead of performing resource-intensive queries against large datasets in different sources, your applications can query a materialized view and retrieve a precomputed result.
 
-Before you Begin
-----------------
+## Before you Begin
 
 You need the following:
 
 * A Hazelcast Viridian cluster. This tutorial assumes that you have a production cluster: <https://docs.hazelcast.com/cloud/create-serverless-cluster>
 * A basic understanding of Kafka: <https://hazelcast.com/glossary/kafka/>
 
-Step 1. Set Up the Hazelcast CLI
---------------------------------
+## Step 1. Set Up the Hazelcast CLI
 
 You need to use the Hazelcast CLI in later steps to open connections to the SQL shell of your Viridian cluster: <https://docs.hazelcast.com/hazelcast/latest/getting-started/get-started-cli>
 
@@ -68,9 +66,7 @@ Next, you need to add the credentials that allow the Hazelcast CLI to connect to
 bin/hz-cli -f hazelcast-client-with-ssl.yml sql
 ```
 
-
-Step 2. Create a Free Confluent Cloud Kafka Cluster
----------------------------------------------------
+## Step 2. Create a Free Confluent Cloud Kafka Cluster
 
 1. Create a Confluent Cloud account: <https://confluent.cloud/signup>
 2. Create a Basic cluster.
@@ -84,8 +80,7 @@ Step 2. Create a Free Confluent Cloud Kafka Cluster
 10. Click **Download and continue**. The configuration snippet now includes your API key and secret.
 11. Copy the code in your configuration snippet from the top to session.timeout.ms=45000. You won't use the Schema Registry in this tutorial.
 
-Step 3. Create a Mapping to the Confluent Cloud Cluster
--------------------------------------------------------
+## Step 3. Create a Mapping to the Confluent Cloud Cluster
 
 To allow Hazelcast to access the trades topic that you created in your Confluent Cloud Kafka cluster, you need to create a mapping to it.
 
@@ -119,7 +114,6 @@ OPTIONS (
 );
 ```
 
-
 The trades topic accepts trades in JSON format, using the following schema:  
 
 ```
@@ -131,7 +125,6 @@ The trades topic accepts trades in JSON format, using the following schema:
 }
 ```
 
-
 * Publish some new trades to the topic.
 
 ```
@@ -140,13 +133,11 @@ INSERT INTO trades VALUES
   (2, 'EORG', 14, 20);
 ```
 
-
 * If you haven't started the SQL prompt on your Viridian cluster, do it now:
 
 ```
 hz-cli -f hazelcast-client-with-ssl.yml sql
 ```
-
 
 * In the SQL prompt, write a streaming query that filters trade messages, where the total trade order is more than $100.
 
@@ -155,7 +146,6 @@ SELECT ticker, price_usd, amount
   FROM trades
   WHERE price_usd * amount > 100;
 ```
-
 
 * Stop the streaming query by pressing Ctrl+C to close the connection to the SQL prompt.
 * Back in the SQL browser, create the mapping to the topic again, but this time add the 'auto.offset.reset'='earliest' configuration. This configuration tells the Kafka consumer to read all data in the topic from the beginning, not just from the latest offset.
@@ -186,7 +176,6 @@ OPTIONS (
 );
 ```
 
-
 * In the SQL prompt, enter the same streaming query that gave no results the last time you ran it.
 
 ```
@@ -195,9 +184,7 @@ SELECT ticker, price_usd, amount
   WHERE price_usd * amount > 100;
 ```
 
-
-Step 4. Enrich the Data in the Kafka Messages
----------------------------------------------
+## Step 4. Enrich the Data in the Kafka Messages
 
 To reduce network latency, Kafka messages are often small and contain minimal data.
 
@@ -220,7 +207,6 @@ OPTIONS (
 'valueFormat'='json-flat');
 ```
 
-
 * Add some entries to the companies map.
 
 ```
@@ -228,7 +214,6 @@ INSERT INTO companies VALUES
 (1, 'SORG', 'Example Startup Organization', 100000),
 (2, 'EORG', 'Example Enterprise Organization', 5000000);
 ```
-
 
 * Merge results from the companies map and trades topic so you can see the company name that's associated with each ticker.
 
@@ -239,9 +224,7 @@ JOIN companies
 ON companies.ticker = trades.ticker;
 ```
 
-
-Step 5. Create a Materialized View
-----------------------------------
+## Step 5. Create a Materialized View
 
 You can set up an automated job to continuously run the streaming query and cache the results in a Hazelcast map.
 
@@ -260,7 +243,6 @@ OPTIONS (
 'valueFormat'='json-flat');
 ```
 
-
 * Submit a job to your cluster that will monitor your trade topic for changes and store them in a map. The processing guarantee tells Hazelcast to save the current offsets so that the cluster can resume the job even if the cluster restarts.
 
 ```
@@ -275,20 +257,17 @@ JOIN companies
 ON companies.ticker = trades.ticker;
 ```
 
-
 * List your job to make sure that it was successfully submitted.
 
 ```
 SHOW JOBS;
 ```
 
-
 * Query your materialized view to see that results have been added to it.
 
 ```
 SELECT * FROM trade_map;
 ```
-
 
 * Publish some more trades to the topic.
 
@@ -298,16 +277,13 @@ INSERT INTO trades VALUES
   (4, 'EORG', 12, 54);
 ```
 
-
 * Query your materialized view to see that results have been added to it.
 
 ```
 SELECT * FROM trade_map;
 ```
 
-
-Summary
--------
+## Summary
 
 You've learned how to connect Hazelcast Viridian to a Confluent Cloud Kafka cluster as well as the following:
 

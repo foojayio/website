@@ -38,9 +38,7 @@ You can find all the code presented in this tutorial in the [GitHub repository](
 git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12757b6652757b667a67703c717d7f">[email protected]</a>:soujava/data-driven-test-mongodb.git
 ```
 
-
-Prerequisites
--------------
+## Prerequisites
 
 For this tutorial, you'll need:
 
@@ -56,7 +54,6 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-
 Data-driven testing is a technique where a single test is executed with different input data sets to validate multiple scenarios. Instead of writing repetitive test methods, you define combinations of inputs and expected outcomes, making it easier to test edge cases, business rules, and regression scenarios with clarity and efficiency.
 
 In this age, data is the heart of any software system. Ensuring consistency and validating the code based on several data conditions will increase your quality. In this process, we can use a database to inject the data as input, to check the queries themselves, and also store the results as a report.
@@ -65,8 +62,7 @@ This approach aligns naturally with MongoDB, where application logic frequently 
 
 In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
-Step 1: Create the entities
----------------------------
+## Step 1: Create the entities
 
 The first step is to create a plain Maven project, where we can use Maven Archetype[quick start](https://maven.apache.org/archetypes/maven-archetype-quickstart/). After making the Maven project, the next step is to include Jupiter, Mockito, AssertJ, and Testcontainers for test proposals. For the Java integration and MongoDB, we will explore it using the Java Enterprise specification, Jakarta EE, where we will utilize both specifications, Jakarta NoSQL and Jakarta Data, both of which are implemented by Eclipse JNoSQL. We don't need to spend a considerable amount of time setting it up; you can clone the GitHub repository. The pom.xml shows the dependencies using Java with the Apache Maven Project:
 
@@ -157,7 +153,6 @@ The first step is to create a plain Maven project, where we can use Maven Archet
     </dependencies>
 ```
 
-
 With the project done, the next step is setting and defining the entities. In our sample, we will explore a simple hotel management system, where we will extract some use cases to further explore the data-driven test. Naturally, a hotel management system brings way more complexity than that. Thus, we won't cover points such as payment. Therefore, we will create a Room entity and its enums that will bring the Value Object perspective.
 
 In the src/main/java directory, create a *Room* class:
@@ -216,9 +211,7 @@ public enum CleanStatus {
 }
 ```
 
-
-Explanation of annotations:
----------------------------
+## Explanation of annotations:
 
 * **@Entity**: Marks the Room class as a database entity for management by Jakarta NoSQL.
 * **@Id:** Indicates the primary identifier for the entity, uniquely distinguishing each document in the MongoDB collection.
@@ -254,11 +247,9 @@ public interface RoomRepository {
 }
 ```
 
-
 We have those queries that explore Jakarta Data Queries, but are they properly working? In the next step, we will generate some tests to check it.
 
-Step 2: Create a database container
------------------------------------
+## Step 2: Create a database container
 
 After the entity and repository are done, the next step is to generate the test structure. Use Testcontainer to ensure that the database is running when we use this container. We will generate an enum to implement the Singleton pattern, which will create a MongoDB database container and start a MongoDB instance for testing purposes.
 
@@ -309,7 +300,6 @@ public enum DatabaseContainer {
 }
 ```
 
-
 In the code, we will generate a MongoDB database instance by container that we have a DatabaseConfiguration.
 
 With the database container ready, the next step is to instruct CDI to use a MongoDB container from Testcontainer during testing, rather than any production configuration. We can do this by exploring the CDI capability of alternatives.
@@ -346,11 +336,9 @@ public class ManagerSupplier implements Supplier<DatabaseManager> {
 }
 ```
 
-
 On this class, we can see that we are overwriting the behavior at test where we are using the DatabaseContainer where the database is called hotel. With the structure done, the next step is playing with tests and DDT.
 
-Step 3: Generate our first DDT
-------------------------------
+## Step 3: Generate our first DDT
 
 One of the goals of data-driven testing is to achieve test coverage across various input combinations and capture the expected output. The first test we will generate is to verify that we are saving the information properly in the database. In this case, it does not matter which room is selected; it should insert and also generate an ID for it.
 
@@ -411,7 +399,6 @@ private static <T extends Enum<?>> T randomEnum(Class<T> enumClass) {
 }
 ```
 
-
 At the header of RoomService, we have a couple of annotations to activate Weld, the CDI implementation, in addition to which classes and packages the CDI should scan. It facilitates and makes the test startup lighter than scanning the whole class. Here, we are using AssertJ to further explore the fluent API for checking the database. We are using soft assertions that execute the whole validations and then show which conditions have break. It is way more useful when we need to do several validations in a single method.
 
 We will generate a new test scenario that allows us to find rooms by type. Naturally, we want to ensure that it works for any kind of search. At the same class, we will generate a method where we will inject the enum by parameter, as you can see in the code below:
@@ -424,7 +411,6 @@ void shouldFindRoomByType(RoomType type) {
     SoftAssertions.assertSoftly(softly -> softly.assertThat(rooms).allMatch(room -> room.getType().equals(type)));
 }
 ```
-
 
 We are injecting several inputs to validate the tests, and we can explore it even further to see if the tests qualify:
 
@@ -626,9 +612,7 @@ class RoomServiceTest {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 In software development, the gap between business rules and database logic is often where subtle bugs and misunderstandings live. By adopting data-driven testing, we shift the focus from checking technical details to validating actual business behavior---across a wide range of scenarios and edge cases.
 

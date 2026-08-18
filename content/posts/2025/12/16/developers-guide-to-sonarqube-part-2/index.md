@@ -37,10 +37,7 @@ The CI/CD pipeline rejected your code. Why?
 
 This is **Part 2**. Today, we solve this "configuration drift" and learn how to automate the analysis so your Quality Gate actually protects you without becoming a burden.
 
-
-
-**Problem #1: "It works on my machine, but fails on the server"**
------------------------------------------------------------------
+## **Problem #1: "It works on my machine, but fails on the server"**
 
 You have a local plugin configuration. The DevOps team or Tech Lead has a different Quality Profile on the server.
 
@@ -50,7 +47,6 @@ You have a local plugin configuration. The DevOps team or Tech Lead has a differ
 @Autowired
 private UserRepository userRepository; // Your IDE says this is fine
 ```
-
 
 But the server has the rule **"Dependency Injection with annotations should be used on constructors"** enabled to ensure testability.
 
@@ -97,10 +93,7 @@ Click on the + icon to add the connection
 
 **Result:** You will see a notification: *"Project bound successfully."* Now, your IDE rules are perfectly synced with the cloud or server that you have connected with. No more surprises.
 
-
-
-**Problem #2: "Why did the server catch a SQL Injection my IDE missed?"**
--------------------------------------------------------------------------
+## **Problem #2: "Why did the server catch a SQL Injection my IDE missed?"**
 
 You are running SonarQube for IDE, but the server still found a critical vulnerability. You feel betrayed. *"Why didn't you highlight this line?"*
 
@@ -120,7 +113,6 @@ public List<User> searchUsers(String userName) {
 }
 ```
 
-
 **The Solution:** **Speed vs. Depth (Taint Analysis).**
 
 Your IDE needs to be snappy. If the plugin paused your typing to trace how userName travelled from the Controller @RequestParam, through the Service, into this Repository, your laptop would freeze.
@@ -132,10 +124,7 @@ Your IDE needs to be snappy. If the plugin paused your typing to trace how userN
 
 ![](Screenshot-2025-12-16-at-10.24.13-1024x675.png)
 
-
-
-**Problem #3: "I hate switching windows to check why the build failed"**
-------------------------------------------------------------------------
+## **Problem #3: "I hate switching windows to check why the build failed"**
 
 You pushed your code. The GitHub Actions build failed. Now you have to log in to the SonarQube dashboard, find your project, find your branch... too many clicks.
 
@@ -151,10 +140,7 @@ SonarQube Cloud checks on the CI/CD
 
 Comments from SonarQube Cloud directly appearing in the PR changes
 
-
-
-**Problem #4: "The Quality Gate is unreasonable! We are a startup!"**
----------------------------------------------------------------------
+## **Problem #4: "The Quality Gate is unreasonable! We are a startup!"**
 
 This is a common complaint. *"I cannot merge because the server asks for 80% coverage on the whole project, but we have a huge legacy monolith with 0% tests. I can't fix 5 years of debt in one day!"*
 
@@ -183,10 +169,7 @@ We see in our profile we have one more rule activated
 By tuning the gate, the tool becomes a helper, not a blocker. We can define our thresholds that resonate better with our maturity and goals.
 ![](Screenshot-2025-12-16-at-10.25.14-1024x703.png)
 
-
-
-**Problem #5: "Context is King: When a 'Bug' is actually a Feature"**
----------------------------------------------------------------------
+## **Problem #5: "Context is King: When a 'Bug' is actually a Feature"**
 
 General rules are great, but sometimes they don't fit your specific reality.
 
@@ -208,8 +191,7 @@ You have the final say. You can override the tool's judgment in the SonarQube Cl
  <img loading="lazy" decoding="async" width="1024" height="454" src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" alt="" class="wp-image-122056" style="width:571px;height:auto">
 </figure>
 
-**Problem #6: "I'm lost in the details: How is the project actually doing?"**
------------------------------------------------------------------------------
+## **Problem #6: "I'm lost in the details: How is the project actually doing?"**
 
 You fixed the PR issues, but your manager asks: *"Is the application getting better or worse?"* You need the helicopter view.
 
@@ -231,8 +213,7 @@ The dashboard gives you the famous Ratings (A, B, C, D, E) for:
 It's the report card for your code.
 ![](Screenshot-2025-12-16-at-10.25.30-1024x361.png)
 
-**🛠️ How to Feed the Monster (Maven \& CI/CD)**
-------------------------------------------------
+## **🛠️ How to Feed the Monster (Maven \& CI/CD)**
 
 So, how do we actually send the analysis reports to SonarQube Cloud? You don't need complex scripts.
 
@@ -254,7 +235,6 @@ Add this to your \<properties\> section:
 </properties>
 ```
 
-
 Now, you can run the analysis manually from your terminal (great for debugging):
 
 ```bash
@@ -262,7 +242,6 @@ Now, you can run the analysis manually from your terminal (great for debugging):
 
 mvn verify sonar:sonar -Dsonar.token=your_generated_token_here
 ```
-
 
 ![](Screenshot-2025-12-16-at-10.54.48-1024x317.png)
 
@@ -340,7 +319,6 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
 ```
 
-
 **Why is this cool?** Because of the pull_request trigger and the GITHUB_TOKEN, SonarQube Cloud knows exactly where to post those comments on your PR.
 
 <figure class="wp-block-image size-medium is-resized">
@@ -349,10 +327,7 @@ jobs:
 
 ![](Screenshot-2025-12-16-at-10.25.50.png)
 
-
-
-**🎯 Summary**
---------------
+## **🎯 Summary**
 
 In Part 2, we moved from "My Code" to "Our Code."
 

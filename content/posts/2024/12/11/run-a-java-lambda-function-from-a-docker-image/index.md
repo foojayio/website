@@ -30,16 +30,14 @@ Here follows instructions from AWS Document on building [Lambda for Java](https:
 
 The sample code seen below can be found in my GitHub repository: [hello-lambda](https://github.com/charlfasching/hello-lambda).
 
-Prerequisites
--------------
+## Prerequisites
 
 * Java JDK (Archetype supplies 8, but we use 21 in this example)
 * Apache Maven
 * Docker
 * AWS CLI
 
-Development
------------
+## Development
 
 ### Maven Archetype
 
@@ -55,7 +53,6 @@ mvn archetype:generate \                                                        
 -Dservice=s3  \
 -DinteractiveMode=false
 ```
-
 
 We will not be using AWS S3 buckets or files, but the service parameter is mandatory. The examples show s3.
 
@@ -88,7 +85,6 @@ Most of the Dockerfile can be left as is, but some adjustment is need on CMD in 
 mvn compile dependency:copy-dependencies -DincludeScope=runtime
 ```
 
-
 The copy-dependency command helps to make the needed aws dependencies available for the Dockerfile to copy
 
 #### Docker
@@ -99,15 +95,13 @@ Building it locally is simplest for demo purposes. Ideally this should be done b
 docker build . --platform linux/amd64 -t hello-lambda-java:latest
 ```
 
-
 The build command specifies the *--platform linux/amd64* option to ensure that your container is compatible with the Lambda execution environment regardless of the architecture of your build machine.
 
 #### Adding more AWS SDK clients
 
 To add more service clients, you need to add the specific services modules in `pom.xml` and create the clients in `DependencyFactory` following the same pattern as s3Client.
 
-Deployment
-----------
+## Deployment
 
 The default template included wit the mvn archetype suggests to deploy with SAM, but I don't like it for simple demos where we want to understand the steps.  
 
@@ -128,7 +122,6 @@ An Elastic Container Registry (ECR) is needed for a place to push the local dock
 ```
 export AWS_PROFILE=chosen-profile
 ```
-
 
 1) Let's start with a simple check, by listing all available ECR repositories.
 
@@ -152,7 +145,6 @@ $ aws ecr describe-repositories
 }
 ```
 
-
 Note: This response would be empty if you have never created a repository in this account and region combination.
 
 2) Now, we want to create a ecr repo for the Lambda.
@@ -175,7 +167,6 @@ $ aws ecr create-repository --repository hello-lambda-java
 }
 ```
 
-
 3) Verify the repo, it should be empty.
 
 ```
@@ -184,7 +175,6 @@ $ aws ecr list-images --repository-name hello-lambda-java
     "imageIds": []
 }
 ```
-
 
 #### AM
 
@@ -206,7 +196,6 @@ cat > trust-policy.json <<EOF
 }
 EOF
 ```
-
 
 2) Create the role for Lambda to use.
 
@@ -234,7 +223,6 @@ $ aws iam create-role   --role-name hello-lambda-java    --assume-role-policy-do
     }
 }
 ```
-
 
 3) Attaching permissions to new Role.
 
@@ -267,7 +255,6 @@ $ aws ecr set-repository-policy \
     }'
 ```
 
-
 ### Upload Docker
 
 1) Login to ECR  
@@ -284,7 +271,6 @@ export password=$(aws ecr get-login-password )
 docker login --username AWS --password $password 000000000000.dkr.ecr.eu-west-1.amazonaws.com
 ```
 
-
 2) Prepare Docker image
 
 To upload the docker image into ECR, it needs to be retagged to the "repositoryUri" from the ecr repo.
@@ -293,13 +279,11 @@ To upload the docker image into ECR, it needs to be retagged to the "repositoryU
 docker tag hello-lambda-java:latest 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java
 ```
 
-
 You can verify the full name of the docker by listing docker images and filtering the result.
 
 ```
 docker images | grep ecr
 ```
-
 
 3) Upload
 
@@ -313,7 +297,6 @@ Finally, you may push the image to the ecr.
 docker push 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java 
 ...
 ```
-
 
 If everything was done successfully, the docker image should now be available on ECR
 
@@ -330,7 +313,6 @@ aws ecr list-images --repository-name hello-lambda-java
     ]
 }
 ```
-
 
 ### Lambda Deployment
 
@@ -379,7 +361,6 @@ aws lambda create-function \
 }
 ```
 
-
 2) Verify Function.
 
 ```
@@ -421,13 +402,11 @@ aws lambda list-functions                                                       
 }
 ```
 
-
 3) Update the Image with new version.
 
 ```
 aws lambda update-function-code --function-name hello-lambda-java --image-uri 000000000000.dkr.ecr.eu-west-1.amazonaws.com/hello-lambda-java:2
 ```
-
 
 ### SAM Deployment (Alternative)
 
@@ -443,11 +422,9 @@ To deploy the application, you can run the following command:
 sam deploy --guided
 ```
 
-
 See [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) for more info.
 
-Testing
--------
+## Testing
 
 ### Local Testing
 
@@ -466,7 +443,6 @@ If you use the lambda docker image provided by AWS, it will have the Lambda Inte
 docker images | grep hello-lambda-java
 ```
 
-
 2) Running the docker image with port exposed.  
 
 1) Internal port is 8080 and the host port is 9000  
@@ -481,7 +457,6 @@ docker images | grep hello-lambda-java
 docker run -ti -p 9000:8080 hello-lambda-java
 24 Nov 2024 09:10:33,413 [INFO] (rapid) exec '/var/runtime/bootstrap' (cwd=/var/task, handler=)
 ```
-
 
 3) A payload can be sent to the Function  
 
@@ -515,7 +490,6 @@ docker run -ti -p 9000:8080 hello-lambda-java
 "hello world!"%
 ```
 
-
 You may use any HTTP Client to make the call, I included a http request for IntelliJ in the src/test directory.  
 
 Here is a curl for reference.
@@ -542,9 +516,7 @@ aws lambda invoke \
     file-response.json
 ```
 
-
-References
-----------
+## References
 
 Here are some documentation links for further reading, also where the some content for this post originated from.
 

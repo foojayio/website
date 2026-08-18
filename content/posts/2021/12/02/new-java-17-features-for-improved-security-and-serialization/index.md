@@ -52,16 +52,12 @@ JVM argument:
 -Djdk.serialFilter=nl.brianvermeer.example.*;!*
 ```
 
-
-<br />
-
 Code:
 
 ```
 ObjectInputFilter filter = ObjectInputFilter.Config.createFilter("nl.brianvermeer.example.*;!*");
 ObjectInputFilter.Config.setSerialFilter(filter);
 ```
-
 
 You can also set a filter for a specific stream like below.
 
@@ -70,7 +66,6 @@ ObjectInputStream in = new ObjectInputStream(fileIn);
 ObjectInputFilter filesOnlyFilter = ObjectInputFilter.Config.createFilter("nl.brianvermeer.example2.Object;!*");
 in.setObjectInputFilter(filesOnlyFilter);
 ```
-
 
 Up to Java 17, when I set a filter on a specific stream, the global filter is overridden for that stream. It doesn't combine the global filter with the stream-specific filter whatsoever. This is not a very flexible way of working. Moreover, it introduces the issue that your global filter might not work when a library you include does deserialization for you.
 
@@ -85,7 +80,6 @@ In the example below, I set a very basic factory to the `Config` that uses the d
 ```
 ObjectInputFilter.Config.setSerialFilterFactory((f1, f2) -> ObjectInputFilter.merge(f2,f1));
 ```
-
 
 Next to the Filter Factory, Java 17 also gives you some nice convenience methods for easy filter creation. Function like `allowFilter()` and `rejectFilter()` on `ObjectInputFilter` are in my opinion a more declarative and readable way of creating filters.
 
@@ -124,7 +118,6 @@ public static void deserialize(String filename) throws IOException, ClassNotFoun
    System.out.println(tv);
 ```
 
-
 3. Java Flight Recorder Deserialization Events
 ----------------------------------------------
 
@@ -142,19 +135,15 @@ All the information is handy to see if there is deserialization somewhere in you
 </configuration>
 ```
 
-
 Let use the previous code example, but now deserializing the Gadget class. I get the following result when I execute the code in my IntelliJ IDEA with the Java Flight Recorder and the custom configuration.
 ![](https://snyk.io/wp-content/uploads/blog-java-17-deserialization-1240x827.jpg)
 
 You see the event captures the actual object type when deserializing and that the filter rejects this object. If you want to know more in-depth how to use this specific Deserialisation event for the JFR, take a look at the blog post: [Monitoring Deserialization to Improve Application Security](https://inside.java/2021/03/02/monitoring-deserialization-activity-in-the-jdk/) by Chris Hegarty
 
-Upgrade to Java 17 for more powerful tools against insecure deserialization exploits
-------------------------------------------------------------------------------------
+## Upgrade to Java 17 for more powerful tools against insecure deserialization exploits
 
 The Java 17 LTS release brings you significant improvements to prevent malicious deserialization in your Java applications. Therefore, upgrading to a newer version like 17 is essential if you want to adopt these practices. Still, with regards to Java's custom serialization, it is better to avoid it at all in my opinion. However, if you are forced to do this or rely on a library that executed Java's custom deserialization, you know how to protect yourself.
 
 Also, be aware not to import libraries that contain either known deserialization gadget chains or have other deserialization security issues.
-
-<br />
 
 This article was originally posted on the Snyk.io blog: [https://snyk.io/blog/new-java-17-features-for-improved-security-and-serialization/](https://snyk.io/blog/docker-for-java-developers/) and is used with permission.

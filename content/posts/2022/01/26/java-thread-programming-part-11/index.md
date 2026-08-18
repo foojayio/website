@@ -49,7 +49,6 @@ public class Playground {
 }
 ```
 
-
 The above program is a simple one. It creates threads in a loop and then parks them, which means the thread gets disabled for further use, but it certainly does the system call and allocates memory. It keeps creating threads until it cannot create anymore, throwing an exception, OutOfMemoryError. We are interested in the number we get until the program throws an exception.
 
 On my machine, I was able to create only 2020 threads with the following configurations.
@@ -59,7 +58,6 @@ Chip: Apple M1
 Memory 8GB
 OS: macOS Monterey
 ```
-
 
 As you can see, we cannot create many threads as the request comes along. Also, spawning a new thread on each request is costly; it takes up memory and time to create a thread. If too many requests come to the server, and the response time between a request and response is shorter, then many threads will be created within a short window of time. And creating threads and stoping them, we will have to use CPU resources.
 
@@ -80,7 +78,6 @@ public interface Executor {
     void execute(Runnable command);
 }
 ```
-
 
 This interface has only one method; `execute ()` takes an instance of Runnable interface.  
 
@@ -122,7 +119,6 @@ public class MultiThreadedServer {
   }
 }
 ```
-
 
 The above program is a fully multithreaded web server, but we didn't create any threads by ourselves. Instead, we created a thread pool using Executors. We specified the number of threads we required, and then the executors provided us with a thread pool with that number. Whenever we get a request from a client, we call a method, `handleRequest()`, to handle the request and send a response. We wrap the `handleRequest()` method in a runnable and submit it to the thread pool.
 

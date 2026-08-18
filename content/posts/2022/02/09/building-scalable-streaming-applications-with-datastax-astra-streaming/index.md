@@ -37,8 +37,7 @@ Here's what you will learn:{#27be}
 
 To illustrate, we'll use [Astra Streaming](https://astra.dev/3SZLxE1) to replicate the streaming object tracking information normally provided by the Federal Aviation Authority (FAA) to each airport. This stream reports the location of every piece of equipment at the airport (planes, fuel trucks, aircraft tow tractors, baggage carts, etc).{#a2c7}
 
-Let's start building!
----------------------
+## Let's start building!
 
 With [Astra Streaming](https://astra.dev/3SZLxE1), not only can you feed information into the streaming "pipe", but you can also store those events into an [Astra](https://astra.dev/3SZLxE1) database for later analysis. This allows us to view our object tracking information in two ways:{#f46d}
 
@@ -57,8 +56,7 @@ In our object tracking example, a single topic will feed data into two different
 
 This approach is not only applicable to object tracking, it can be used for any use case that requires the ability to see both real-time streaming data and historical data, for example, tracking stock prices where one table holds the current stock price while another table holds the historical stock prices.{#924b}
 
-Create the database
--------------------
+## Create the database
 
 Now back to our object tracking example. Our first step will be to create the database. This is a very simple database with only two tables, which we'll create in a keyspace called `airport` to keep things simple. The tables in the `airport` keyspace is `object_location` which tracks where every object is at the moment (well, really, the last known location), and `object_location_history` which tracks the location of the object over time with the most recent update listed first.{#2932}
 
@@ -66,8 +64,7 @@ If you are following along with your own [Astra](https://astra.dev/3SZLxE1) inst
 
 You can create your [Astra Streaming](https://astra.dev/3SZLxE1) on one cloud provider even if your [Astra](https://astra.dev/3SZLxE1) database is hosted by another. However, you'll get better performance if they are both hosted by the same cloud provider and in the same region.{#4cdc}
 
-Create a custom role
---------------------
+## Create a custom role
 
 While it is possible to create an access token that grants you access to all of your databases, I highly recommend creating database-specific tokens based on custom roles. On more than one occasion, I've accidentally leaked security tokens into GitHub (errors that I corrected within minutes). The only thing that's saved my bacon is the fact that the token was restricted to a single database. If you're not familiar with the process for creating a token, I'll show you how to do that in this section.{#ae33}
 
@@ -88,27 +85,23 @@ Now you can create a security token that is specific to your customer role and d
 You'll need to exercise some caution here because the dialog box that pops up will never be displayed again. You'll need this token information in your source code to connect to the database from Astra Streaming. So, you might want to press the ***Download Token Details*** button to download a CSV file with your token.{#be2d}
 ![](0_BAvmShLukcYXe-8v.png) Figure 6: This information will never be shown to you again! Take this opportunity to download it.
 
-Create the Astra Streaming components
--------------------------------------
+## Create the Astra Streaming components
 
 Now we're going to shift gears and create the [Astra Streaming](https://astra.dev/3SZLxE1) components. Here we will create a tenant, namespace, and a topic.{#718f}
 
-Create the Astra Streaming tenant
----------------------------------
+## Create the Astra Streaming tenant
 
 An Astra tenant is the top-level object for streaming. You can think of a tenant as akin to an application or a database. Create a new streaming tenant in the [Astra DB](https://astra.dev/3SZLxE1) web console and name it `airport-events`. When the tenant is fully created and running you will see a small green dot to the left of its name and the dashboard for the tenant will show up in your browser, as shown in the following image.{#5559}
 ![](0_rsPw9QwfIaRBaIwf.png) Figure 7: The airport-events tenant dashboard.
 
-Create the Astra Streaming namespace
-------------------------------------
+## Create the Astra Streaming namespace
 
 This step is optional because there is a default namespace created for you when you create a tenant. However, I like to keep things organized and isolated so I strongly recommend that you create a namespace for the airport-demo. Click on the `Namespaces` tab.{#ed46}
 ![](0_0G4pEBJXCoivo2qL.png) Figure 8: Creating a namespace in Astra Streaming.
 
 Set the namespace to `airport` and press the `create` button. It's just that easy!{#2dfd}
 
-Create the Astra Streaming Topic
---------------------------------
+## Create the Astra Streaming Topic
 
 Our next step is to create the topic for our object location events. Click on the `Topics` tab in the dashboard. By default, you will see both the new `airport` namespace and the default namespace listed in the dashboard. Click the `Add Topic` button in the `airport` namespace to create the new topic.{#d760}
 ![](0__15XVK-Ro0DQYFal.png) Figure 9: Creating a topic in the airport namespace.
@@ -118,13 +111,11 @@ You only need to specify the name of the topic, `object-location` as shown in th
 
 Press the `Save` button. At this point, we have a topic on which we can publish events. However, those events don't go anywhere just yet. Next, we will create two "sinks'' that will consume the events and store them in a database. A "sink" in streaming terms is either an [Astra DB](https://astra.dev/3SZLxE1) or an [ElasticSearch](https://www.elastic.co/elasticsearch/) instance. For this article, we will use the [Astra DB](https://astra.dev/3SZLxE1) to store our events.{#9111}
 
-Create the Astra DB sinks
--------------------------
+## Create the Astra DB sinks
 
 The mechanism that [Astra Streaming](https://astra.dev/3SZLxE1) uses to store events to a database is a "sink". We will need to create two sinks, one for each of our tables.{#1a21}
 
-Create the object-location sink
--------------------------------
+## Create the object-location sink
 
 Our first sink will store the event on the `object_location` table. This table is different from the `object_location_history` table in that it does **not** have the `ts` (timestamp) field. Click on the `Sinks` tab and then press the `Create Sink` button.{#64eb}
 ![](0_ncYrW0W6ZiHh5aGf.png) Figure 11: Creating the sink for the object_location table in our Astra DB.
@@ -143,8 +134,7 @@ The field mapping is done automatically for you. Notice that the automatic mappi
 
 Press the `Create` button to create the sink.{#4659}
 
-Create the objloc-history sink
-------------------------------
+## Create the objloc-history sink
 
 Now to create our second sink, the one that will capture information into the `object_location_history` table. You will perform essentially the same steps that you did for the first sink, with some key differences:{#d977}
 
@@ -157,8 +147,7 @@ This time when you enter the database token and TAB out of the field, the mappin
 
 You see here the `ts` or `timestamp` field (a Java long data type) is included in the mapping. Press the `Create` button to create this sink.{#c653}
 
-Create a Java producer
-----------------------
+## Create a Java producer
 
 Things that generate messages on a topic are called "[producers](https://pulsar.apache.org/docs/en/security-encryption/#producer)" in [Apache Pulsar](https://pulsar.apache.org/) (and by extension in [Astra Streaming](https://astra.dev/3SZLxE1)). We need to create a producer that will send messages to the `object-location` topic. In fact, we don't want to send simple string messages like many of the Pulsar, "Hello World" level examples do. We want to send an object that can be stored in database tables.{#62be}
 
@@ -191,7 +180,6 @@ now.getTime());
    }
 ```
 
-
 No messages are sent to the topic until the run() method is invoked. Here is the run() method implementation:{#2f7b}
 
 ```
@@ -209,7 +197,6 @@ public void run() {
 }
 ```
 
-
 The `producer.send(objLoc)` takes a native Java POJO that watches the schema expected and sends it over the topic. Note that you don't have to serialize your object. The Pulsar libraries are smart enough to take care of that for you! Also, the very first time you run this code (which we will do next), [Astra Streaming](https://astra.dev/3SZLxE1) will record the schema for the message type. You can view that schema by navigating to your topic and clicking on the ***Schema*** tab, as shown next.{#2cbe}
 ![](0_9gll9LTr_rtwEtyl.png) Figure 17: Viewing a topic schema.
 
@@ -224,8 +211,7 @@ Remember, the purpose of this table is to record the last known location of an o
 Now let's take a look at our `object_location_history` table:{#4e09}
 ![](0_HSvIZalTAr3p4rUF.png) Figure 20: Our object_location_history table's data.
 
-Try it yourself!
-----------------
+## Try it yourself!
 
 As you can see, making real use of [Astra Streaming](https://astra.dev/3SZLxE1) is easy to do. Despite the many screenshots and the level of detail provided here, building this application requires just a few simple steps:{#bb7c}
 

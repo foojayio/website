@@ -30,10 +30,7 @@ Finally, I finished scripting all the videos for the full debugging course. It c
 
 {{< youtube fok4Icxsl2k >}}
 
-<br />
-
-Transcript
-----------
+## Transcript
 
 Welcome back to the fifth part of debugging at Scale where we no longer stare blankly at the screen. We know where to look for that bug!
 

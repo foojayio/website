@@ -21,8 +21,7 @@ frozen: false
 
 In this, [part 5 of the series](https://foojay.io/today/author/c-guntur/), a walkthrough of the topic of Maven dependencies is covered!
 
-What are dependencies
----------------------
+## What are dependencies
 
 Dependencies are the basic building blocks of a Maven project.
 
@@ -67,11 +66,9 @@ An sample of a dependency block in an XML format POM file is listed below:
 </project>
 ```
 
-
 This excerpt is **not exhaustive** in how a dependency excerpt can look. Time to dig in!
 
-A dependency in a POM
----------------------
+## A dependency in a POM
 
 Dependencies for a project are declared in a **dependencies** element. This element represents a set of unique **dependency** elements. As exemplified above and described in earlier blogs, a **dependency** can contain the G-A-V coordinates and additional optional distinguishers as needed. In addition to the location coordinates, a dependency can contain **exclusions** , a **scope** and an **optional** tag.
 
@@ -116,8 +113,7 @@ An anecdotal example of depending on a ***metrics*** library: The current projec
 
 ![A graphical representation of a dependency tree showing different depths of transitive dependencies as well as possible exclusions and non-inclusion via an optional attribute on a sample transitive.](https://cgunturme.files.wordpress.com/2020/06/mavendependencygraph.png?w=1024) Basic dependency graph example
 
-How to view the dependency tree
--------------------------------
+## How to view the dependency tree
 
 It is possible to view the dependency tree of the project POM via a command line as well as via most modern IDEs. Command line options for viewing the dependency tree:
 
@@ -143,8 +139,7 @@ OR
 OR  
 `mvn dependency:tree -Dverbose=true -Dincludes=<groupId>:<artifactId>`
 
-How Maven resolves transitive dependency versions
--------------------------------------------------
+## How Maven resolves transitive dependency versions
 
 A project POM can include several dependencies, which may further have varying depths of transitive dependencies. It is very possible that a few dependencies share transitive dependencies but depend on different versions. Maven is thus tasked with electing the right transitive dependency to use for its effective POM, to avoid duplication. Since ***Maven cannot sort version strings*** (*versions are arbitrary strings and may not follow a strict semantic sequence* ), Maven takes the approach of ***nearest transitive dependency in the tree depth***. This is very similar to how Java picks up the first jar in the class path when looking for a fully qualified class name.
 
@@ -162,8 +157,7 @@ Maven creates a dependency tree during its ***effective POM*** generation that i
 
 the above example shows V1.2.0 of Dx as the transitive dependency of choice since it is ***nearest in depth and first in resolution in this dependency tree***.
 
-Helping Maven pick a different version
---------------------------------------
+## Helping Maven pick a different version
 
 ### Add a direct dependency
 

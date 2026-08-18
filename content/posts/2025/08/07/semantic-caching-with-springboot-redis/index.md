@@ -87,7 +87,6 @@ implementation("org.springframework.ai:spring-ai-starter-vector-store-redis")
 implementation("org.springframework.ai:spring-ai-starter-model-openai")
 ```
 
-
 2. Configure the Semantic Cache Vector Store
 --------------------------------------------
 
@@ -115,7 +114,6 @@ class SemanticCacheConfig {
     }
 }
 ```
-
 
 Let's break this down:
 
@@ -172,7 +170,6 @@ class SemanticCachingService(
     }
 }
 ```
-
 
 Key features of the semantic caching service:
 
@@ -261,7 +258,6 @@ class RagService(
 }
 ```
 
-
 Key features of the integrated RAG service:
 
 * Checks semantic cache before expensive LLM calls
@@ -271,17 +267,14 @@ Key features of the integrated RAG service:
 
 The easiest way to run the demo is with Docker Compose, which sets up all required services in one command.
 
-Step 1: Clone the repository
-----------------------------
+## Step 1: Clone the repository
 
 ```
 git clone https://github.com/redis-developer/redis-springboot-resources.git
 cd redis-springboot-resources/artificial-intelligence/semantic-caching-with-spring-ai
 ```
 
-
-Step 2: Configure your environment
-----------------------------------
+## Step 2: Configure your environment
 
 Create a `.env` file with your OpenAI API key:
 
@@ -289,14 +282,11 @@ Create a `.env` file with your OpenAI API key:
 OPENAI_API_KEY=sk-your-api-key
 ```
 
-
-Step 3: Start the services
---------------------------
+## Step 3: Start the services
 
 ```
 docker compose up --build
 ```
-
 
 This will start:
 
@@ -304,8 +294,7 @@ This will start:
 * **redis-insight**: a UI to explore the Redis data
 * **semantic-caching-app**: the Spring Boot app that implements the semantic caching system
 
-Step 4: Use the application
----------------------------
+## Step 4: Use the application
 
 When all services are running, go to `localhost:8080` to access the demo. You'll see a beer recommendation interface:
 
@@ -345,5 +334,4 @@ Whether you're building chatbots, recommendation engines, or question-answering 
 
 Try it out, experiment with different similarity thresholds, explore other embedding models, and see how much you can save on LLM costs while delivering faster responses!
 
-**Stay Curious!**
------------------
+## **Stay Curious!**

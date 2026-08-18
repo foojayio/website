@@ -28,15 +28,13 @@ Some weeks ago we checked here with the Java community if there was an interest 
 
 Today, Nicolas Frankel, also explained how he [moved from Twitter to Mastodon and has set up a cross-posting solution](https://foojay.io/today/preparing-to-move-away-from-twitter/) (automated of course, as a true good and lazy developer).
 
-Learn about Mastodon
---------------------
+## Learn about Mastodon
 
 With the following video, I try to give a quick introduction to Mastodon. It can help you to get started, if this is completely new to you.
 
 {{< youtube cEn6Yp7CHOw >}}
 
-Foojay.social status
---------------------
+## Foojay.social status
 
 It has been one month since we announced [foojay.social](https://foojay.social). Let's share some insights what happened since then...
 
@@ -62,8 +60,7 @@ In this overview you can also see the list of Mastodon instances that were most 
 In the administrator UI, the used space storage is also shown. The media storage contains the timeline for all the members of this instance and has been "fluctuating" between 12 and 20GB as this data gets cleaned and updated continuously.
 ![](20221212-mastodon-info.png)
 
-Conclusion
-----------
+## Conclusion
 
 We started with a small instance to host foojay.social via [toot.io](https://toot.io/mastodon_hosting.html) that provides us 200Gb of storage space and should be able to handle **250 active users**.
 

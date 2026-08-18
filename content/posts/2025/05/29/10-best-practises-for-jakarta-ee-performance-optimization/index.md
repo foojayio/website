@@ -41,10 +41,7 @@ To make your [Jakarta EE](https://jakarta.ee/) applications faster and more effi
 
 These strategies directly impact user experience, scalability, and operational costs, helping you build applications that perform well under pressure.
 
-
-
-Quick Comparison
-----------------
+## Quick Comparison
 
 |     **Performance Area**      |                              **Key Practice**                              |                       **Impact**                        |
 |-------------------------------|----------------------------------------------------------------------------|---------------------------------------------------------|
@@ -59,15 +56,13 @@ Quick Comparison
 | Streamline Code               | Use efficient code patterns                                                | Faster execution, lower memory use                      |
 | New \& Standard Java Features | Streams API, JCache                                                        | Enhanced responsiveness                                 |
 
-Secrets of Performance Tuning Java on Kubernetes by Bruno Borges
-----------------------------------------------------------------
+## Secrets of Performance Tuning Java on Kubernetes by Bruno Borges
 
 Before we go into details about each best practice in the next articles, I'd like to leave this video for you get an interesting perspective on performance tuning of Java apps from **Bruno Borges** , an amazing Java developer advocate, [Java Champion](https://javachampions.org/), and a person I deeply respect and admire.
 
 {{< youtube wApqCjHWF8Q >}}
 
-Next Steps
-----------
+## Next Steps
 
 To put these ideas into action, you should start with **Continuously Monitoring** your applications. Set up monitoring of your applications and collect metrics about what's going on. Track CPU usage, memory, garbage collection, speed of processing requests, etc.. This data helps identify bottlenecks early and will prove invaluable to understand what's happening once you have performance issues and how to address them. They will also show the impact of the optimizations you implement in the future
 

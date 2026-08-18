@@ -28,8 +28,7 @@ We should not wait until something happens top-down. What if we as developers ca
 
 With JobRunr v8's Carbon Aware Job Processing feature, you can fire off smart jobs that will be processed when the least amount of CO2 is being generated. Let's explore new features of JobRunr v8 and how to schedule jobs in a smart way to reduce instead of further increase your carbon footprint.
 
-What is JobRunr?
-----------------
+## What is JobRunr?
 
 JobRunr is an modern background job scheduling library that runs on the Java Virtual Machine. With JobRunr, firing off jobs becomes trivial:
 
@@ -41,7 +40,6 @@ BackgroundJob.schedule(now().plusHours(1), () -> service.process());
 // will process in an hour
 ```
 
-
 The following Foojay articles explore the basics of JobRunr:
 
 * [Getting Started with JobRunr: Powerful Background Job Processing Library](https://foojay.io/today/getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja/)
@@ -49,8 +47,7 @@ The following Foojay articles explore the basics of JobRunr:
 
 This article focuses on the latest release of JobRunr: v8, that is packed with a slew of new features: from Kotlin data serialisation, Kubernetes autoscaling integration possibilities with KEDA, several database optimisations to Carbon Aware Job Processing. Let us take a closer look using a real-life example.
 
-Carbon Aware Job Processing
----------------------------
+## Carbon Aware Job Processing
 
 As mentioned in the introduction, almost all modern web-based applications that are deployed in some kind of cloud environment make heavy use of asynchronous data processing as part of their core business. Many of these calculations or "serverless funcs" are not time bound. That is, they do not have to be processed immediately. JobRunr makes use of this to schedule these jobs in such a way that their energy consumption impact is minimised by relying on energy forecast information of energy data providers such as the [ENTSO-E](https://www.entsoe.eu/) services for the European Union (EU).
 
@@ -65,7 +62,6 @@ BackgroundJob.scheduleRecurrently("0 18 * * *",
    () -> surveyController.calculateAndSend());
 ```
 
-
 We do not know when this job ends (it could be a small survey or a big one), but we do know when `calculateAndSend()` starts: at 18h. But is that really needed at exactly 18h? Maybe it could trigger a few hours earlier or later, when less CO2 is being generated (e.g. when solar panels start generating more energy as the sun comes up).
 
 With Carbon Aware Job Processing, we can add a margin to this precise moment. Sending out the survey an hour earlier and four hours later is still perfectly fine, as long as the job is started after our shop closes at 17h, we're all good. Adding a margin is just a matter of altering the cron string to add the slack in [ISO 8601 duration standard format](https://en.wikipedia.org/wiki/ISO_8601):
@@ -74,7 +70,6 @@ With Carbon Aware Job Processing, we can add a margin to this precise moment. Se
 BackgroundJob.scheduleRecurrently("0 18 * * * [PT1H/PT4H]", 
    () -> surveyController.calculateAndSend());
 ```
-
 
 We can specify the flexibility of the schedule as an interval between square brackets, but we obviously have to stay within the 24h duration.
 
@@ -90,7 +85,6 @@ BackgroundJob.scheduleRecurrently(CarbonAware.cron("0 18 * * *", Duration.of(1, 
    () -> surveyController.calculateAndSend());
 ```
 
-
 In case that survey generation was a one-time thing instead of a recurring thing, simply replace `scheduleRecurrently()` with `schedule()` and pass in a `CarbonAwarePeriod`:
 
 ```java
@@ -104,7 +98,6 @@ BackgroundJob.schedule(CarbonAwarePeriod.between(Instant.now().plus(1, HOURS), I
 
 // ...
 ```
-
 
 More examples and the exact API usage can be found in [the JobRunr documentation](https://www.jobrunr.io/en/documentation/background-methods/carbon-aware-jobs/).
 
@@ -127,14 +120,12 @@ JobRunr
     // ...
 ```
 
-
 Is your application bootstrapped with Spring Boot, Quarkus, or Micronaut? Great, JobRunr supports these as well! In that case, just add two new entries in your trusty `application.properties`:
 
 ```
 jobrunr.background-job-server.carbon-aware-job-processing.enabled=true
 jobrunr.background-job-server.carbon-aware-job-processing.area-code=BE
 ```
-
 
 See the [Carbon Aware Configuration documentation](https://www.jobrunr.io/en/documentation/configuration/carbon-aware/) for all possible configuration properties and their default values.
 
@@ -161,8 +152,7 @@ In the screenshot above, our example job is initially planned to run between 17h
 
 Additionally, you can see for which area the energy data was pulled from (in this case Belgium). It is very sunny and summertime right now, but in a few hours everyone will return home and start consuming more energy: as you can see from 19h and on, energy consumption will have a much bigger carbon impact.
 
-Conclusion
-----------
+## Conclusion
 
 By leveraging JobRunr on the JVM, scheduling background jobs becomes a piece of cake.
 

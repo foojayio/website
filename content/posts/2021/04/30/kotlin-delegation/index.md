@@ -23,22 +23,18 @@ frozen: false
 
 Kotlin offers many exciting features. In general, developers tend to cite null safety as their favorite. For me, it's function extensions. But delegation comes a close second.
 
-The delegation pattern
-----------------------
+## The delegation pattern
 
 The delegation pattern is described in the book:
 > *Delegation* is a way to make composition as powerful for reuse as inheritance \[Lie86, JZ91\]. In delegation, *two* objects are involved in handling a request: a receiving object delegates operations to its *delegate* . This is analogous to subclasses deferring requests to parent classes. But with inheritance, an inherited operation can always refer to the receiving object through the `this` member variable in C++ and `self` in Smalltalk. To achieve the same effect with delegation, the receiver passes itself to the delegate to let the delegated operation refer to the receiver.
 
 <img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-43993" src="window-rectangle-700x117.png" alt="" width="700" height="117">
 
-<br />
-
 Delegation is critical when one chooses *composition* over *inheritance*.
 
 ![](composition-inheritance.png)
 
-Manual and native delegation
-----------------------------
+## Manual and native delegation
 
 In Java, you need to code delegation manually. The example above translates into the following code:
 
@@ -67,7 +63,6 @@ class Composition implements A {
 }
 ```
 
-
 Kotlin handles the delegation natively using the keyword `by`. You can write the same code in Kotlin like this:
 
 ```kotlin
@@ -82,7 +77,6 @@ class B : A {
 class Delegate(b: B) : A by b  // 1
 ```
 
-
 1. With this, you can call `foo()` on any `Delegate` instance
 
 As explained in the docs:
@@ -90,8 +84,7 @@ As explained in the docs:
 >
 > -- [Delegation](https://kotlinlang.org/docs/reference/delegation.html)
 
-Delegated properties
---------------------
+## Delegated properties
 
 Kotlin also offers **delegated properties** , a property that delegates its getter (and its setter if a `var`) to "something else". A delegated property also uses the `by` keyword.
 
@@ -103,13 +96,11 @@ A couple of out-of-the-box delegates are available through the standard library.
 var notNull: String by Delegates.notNull()
 ```
 
-
 * Lazy delegate: A lazy delegate computes the value *on the first access* , stores it, and then returns the stored value. As its name implies, you use `lazy` when the value is expensive to compute and doesn't change after computation.
 
 ```kotlin
 val lazy: String by lazy { "An expensive computation" }
 ```
-
 
 * Observable: An observable delegate offers a hook when the value is accessed so you can execute code **afterward** .
 
@@ -120,7 +111,6 @@ val observable: String by Delegates.observable(observed) {
 }
 ```
 
-
 * Vetoable: A vetoable delegate is the opposite of the observable. It offers a hook that executes **before** . If this hook returns `true`, the set of the value executes as expected; if it returns `false`, the set doesn't happen.
 
 ```kotlin
@@ -129,11 +119,9 @@ val vetoable: String by Delegates.vetoable(observed) {
 }
 ```
 
-
   Here, the set fails randomly 50% of the time. It's not helpful but fun to debug for your colleagues.
 
-Your own delegated property
----------------------------
+## Your own delegated property
 
 If you want to create your own delegated property, it needs to point to a class that has:
 
@@ -166,7 +154,6 @@ class HazelcastDelegate<T>(private val key: String) {
 }
 ```
 
-
 1. Create a reference to a Hazelcast `IMap`
 2. Get the value from the `IMap`
 3. Set the value in the `IMap`
@@ -185,9 +172,7 @@ fun main() {
 }
 ```
 
-
-Conclusion
-----------
+## Conclusion
 
 The delegate pattern is ubiquitous in the Object-Oriented Programming world. Some languages, such as Kotlin, provides a native implementation.
 

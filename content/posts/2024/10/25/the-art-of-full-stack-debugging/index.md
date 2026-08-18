@@ -39,12 +39,9 @@ Notice that this is an introductory post focusing mostly on the front end debugg
 
 {{< youtube mM8p2VrrEaE >}}
 
-<br />
-
 As a side note, if you like the content of this and the other posts in this series check out my [Debugging book](https://www.amazon.com/dp/1484290410/) that covers **t** his subject. If you have friends that are learning to code I'd appreciate a reference to my [Java Basics book.](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack-ebook/dp/B0CCPGZ8W1/) If you want to get back to Java after a while check out my [Java 8 to 21 book](https://www.amazon.com/Java-21-Explore-cutting-edge-features/dp/9355513925/)**.**
 
-Full Stack Development, A Shifting Definition
----------------------------------------------
+## Full Stack Development, A Shifting Definition
 
 The definition of full stack development is as fluid as the technology stacks themselves. Traditionally, full stack developers were defined as those who could work on both the frontend and backend of an application. However, as the industry evolves, this definition has expanded to include aspects of operations (OPS) and configuration. The modern full stack developer is expected to submit pull requests that cover all parts required to implement a feature---backend, database, frontend, and configuration. While this does not make them an expert in all these areas, it does require them to navigate across domains, often relying on domain experts for guidance.
 
@@ -58,8 +55,7 @@ However, the full quote probably better represents the reality:
 
 Just as full stack development involves working across various domains, full stack debugging requires a similar approach. A symptom of a bug may manifest in the frontend, but its root cause could lie deep within the backend or database layers. Full stack debugging is about tracing these issues through the layers and isolating them as quickly as possible. This is no easy task, especially when dealing with complex systems where multiple layers interact in unexpected ways. The key to successful full stack debugging lies in understanding how to track an issue through each layer of the stack and identifying common pitfalls that developers may encounter.
 
-Frontend Debugging: Tools and Techniques
-----------------------------------------
+## Frontend Debugging: Tools and Techniques
 
 ### It isn't "Just Console.log"
 
@@ -99,8 +95,7 @@ For this to work in Chrome we need to ensure that "Enable JavaScript source maps
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3l1ixd5iuyunrvh9ru15.png)
 
-Debugging Across Layers
------------------------
+## Debugging Across Layers
 
 ### Isolating Issues Across the Stack
 
@@ -122,8 +117,7 @@ One of the key strengths of full stack development is the ability to collaborate
 
 As tools continue to evolve, so too do the tools and techniques available for debugging. Developers should strive to stay up-to-date with the latest advancements in debugging tools and best practices. Whether it's learning to use new features in browser developer tools or mastering system-level debugging techniques, continuous learning is essential for success in full stack development.
 
-Conclusion
-----------
+## Conclusion
 
 Full stack debugging is a critical skill for modern developers, we mistakenly think it requires deep understanding of both the application and its surrounding environment. I disagree... By mastering the tools and techniques discussed in this post/upcoming posts, developers can more effectively diagnose and resolve issues that span multiple layers of the stack. Whether you're dealing with obfuscated frontend code, misconfigured backend services, or system-level issues, the key to successful debugging lies in a methodical, collaborative approach.
 

@@ -34,7 +34,6 @@ I found that having this startup recording very useful to tune the readiness of 
 -XX:StartFlightRecording=settings=profile,duration=6m,name=app-startup,filename=/var/log/jfr/app-startup.jfr
 ```
 
-
 Eventually it's possible to tweak this recording with, other parameters like:
 
 * `path-to-gc-roots=true`, which allows to identify leaks using the `OldObjectSample` (enabled in the `profile` settings)
@@ -56,7 +55,6 @@ Use jcmd 6 JFR.start to start a recording.
 -rw-r--r--   1 root root 57M May  6 22:35 /var/log/jfr/app-startup.jfr
 ```
 
-
 |---|----------------------------------------------------|
 | 1 | Indicates the configured 30s recording is ongoing. |
 | 2 | No more recording once the duration is over.       |
@@ -71,7 +69,6 @@ Once startup has been recording, it's useful to set up a continuous recording. T
 -XX:StartFlightRecording=settings=profile,delay=5m,maxage=10m,name=post-startup,filename=/var/log/jfr/post-startup.jfr
 ```
 
-
 This will register a continuous profiling that will start 5m after the JVM starts. And it sets a retention of 10 minutes, or a retention of the default maximum size which is `250 MiB` in JDK11.
 
 If this is the only recording, `JFR.check` will output something like that.In the container, checking JFR:
@@ -84,7 +81,6 @@ Recording 1: name=post-startup maxage=10m (delayed) [1]
 6:
 Recording 1: name=app-startup maxage=10m (running) [2]
 ```
-
 
 |---|----------------------------------------------------------------------------|
 | 1 | Indicates there's a recording that will start at some point in the future. |
@@ -107,6 +103,5 @@ Putting it all together, let's put these in the `JDK_JAVA_OPTIONS`. Record start
 -XX:StartFlightRecording=settings=profile,delay=5m,maxage=10m,name=post-startup,dumponexit=true,filename=/var/log/jfr/post-startup.jfr
 -XX:FlightRecorderOptions=stackdepth=96
 ```
-
 
 After acquiring the record files, you are ready to exploit them. We've seen `jfr` on which it's possible to build upon, now in the upcoming sections, we'll briefly present the other elephant in the room (in a positive way), **JDK Mission Control** which empowers its users with remarkable diagnosis skills!

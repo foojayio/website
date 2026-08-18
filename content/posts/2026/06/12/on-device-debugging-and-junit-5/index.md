@@ -21,13 +21,10 @@ frozen: false
 
 ![On-Device Debugging And JUnit 5](https://www.codenameone.com/blog/developer-workflow-debug-and-junit.jpg)
 
-<br />
-
 This is the first follow-up to [Friday's release post](https://www.codenameone.com/blog/metal-default-new-build-cloud-and-a-new-format/) and it covers the two changes from this release that affect how you iterate on a Codename One app rather than what the app itself does. On-device debugging that treats Java as Java on a real iPhone or a real Android device, and standard JUnit 5 against the JavaSE simulator. The first is the one we have been wanting for a long time, and is the one that takes the most explaining, so most of the post is about it.
 | **What is Codename One?** Codename One is an open-source framework for building native iOS, Android, desktop, and web apps from a single Java or Kotlin codebase. Learn more at [codenameone.com](https://www.codenameone.com/).
 
-On-device debugging that treats Java as Java
---------------------------------------------
+## On-device debugging that treats Java as Java
 
 Codename One has always supported on-device debugging in the strict technical sense. You could attach Xcode to a `.ipa`, you could attach Android Studio to a running APK, you could read the native call stack, you could step through Objective-C or the C that ParparVM emits. What you could not do was set a breakpoint in `MyForm.java`, hit it on a real iPhone, and inspect a Java field on a Java object as a Java object. You also could not debug an iOS app without a Mac in the loop somewhere, because the only debugger that understood the binary was Xcode. The translation step between the Java you wrote and the C that ParparVM produces left no way back across the gap on the device.
 
@@ -55,8 +52,6 @@ The Android attach uses standard `adb`, so you need the Android SDK platform too
 A breakpoint inside an iOS app, hit on the iOS Simulator next to IntelliJ IDEA:
 ![IntelliJ stopped at a breakpoint inside a Codename One iOS app, with locals and the running simulator visible](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-debugger-on-device.png)
 
-<br />
-
 The same Debug tool window you use for any other Java project. Frames panel on the left has the full Java call stack. The Variables panel shows `this` and the locals as Java values, with the same drill-down you would get on a regular JVM. The simulator on the right is the real iOS app, paused at the breakpoint, waiting for the next step.
 
 ### How the pieces fit together
@@ -83,7 +78,6 @@ ios.onDeviceDebug.proxyHost=127.0.0.1
 ios.onDeviceDebug.proxyPort=55333
 ios.onDeviceDebug.waitForAttach=true
 ```
-
 
 `ios.onDeviceDebug=true` flips the iOS build into the instrumented variant. The other three configure the proxy connection.
 
@@ -113,7 +107,6 @@ On-device-debug proxy starting:
 [jdwp]   listening on port 8000 for debugger (jdb) to attach
 ```
 
-
 When the `[jdwp]` line appears, the proxy is ready.
 
 **4. Attach the debugger.**
@@ -138,7 +131,6 @@ In `common/codenameone_settings.properties`:
 android.onDeviceDebug=true
 ```
 
-
 This single hint flips the manifest to `debuggable="true"` and turns R8 / Proguard off for this build. Release builds without the hint are unaffected.
 
 **2. Run CN1 Android On-Device Debug.**
@@ -159,8 +151,7 @@ The dev guide has the full reference, including the wireless-pairing flows, the 
 
 For most bugs the JavaSE simulator is still by a large margin the fastest loop. Reach for on-device debugging when the bug is platform-specific: ParparVM-specific threading, an iOS-only layout glitch under the modern native theme, a real-radio Bluetooth interaction, a Touch ID gate, an Android-only manifest interaction, anything that only reproduces under iOS background memory pressure. The kind of bug that previously sent you reaching for `Log.p` and a rebuild loop. That bug now has a debugger pointed at it.
 
-JUnit 5 against the simulator
------------------------------
+## JUnit 5 against the simulator
 
 The other change in this release is the new JUnit 5 integration in the JavaSE port ([PR #5032](https://github.com/codenameone/CodenameOne/pull/5032)).
 
@@ -202,18 +193,13 @@ class GreetingFormTest {
 }
 ```
 
-
 That is more useful than constructing a `Form` directly in the test because it exercises the same startup path the simulator runs. The assertions check the form your app opens, not a form the test wrote.
 
 The natural way to run it is from the IntelliJ gutter. Click the green ▶ icon next to the class declaration:
 ![IntelliJ gutter run menu showing Run, Debug, Run with Coverage for GreetingFormTest](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-gutter-run-menu.png)
 
-<br />
-
 The results land in the standard Run tool window:
 ![IntelliJ test results showing GreetingFormTest passed, 1 test total, 520 ms](https://www.codenameone.com/blog/developer-workflow-debug-and-junit/intellij-test-results.png)
-
-<br />
 
 Click the green icon next to a specific `@Test` method to run just that method. The same flow works in VS Code's Test Explorer and in Eclipse's JUnit view.
 
@@ -224,7 +210,6 @@ mvn -Ptest test                                  # run the JUnit suite
 mvn -Ptest test -Dtest=GreetingFormTest          # one class
 mvn -Ptest test -Dtest=GreetingFormTest#formShowsExpectedTitle
 ```
-
 
 `@CodenameOneTest` is the class-level entry point. It wires the simulator extension into the JUnit Jupiter lifecycle, boots `Display.init(null)` once per JVM (idempotent, so subsequent classes share the same `Display`), and skips the class with a `TestAbortedException` if the JVM is genuinely headless (so CI runners that have no display do not poison the rest of the run).
 
@@ -250,7 +235,6 @@ class EmailValidatorTest {
 }
 ```
 
-
 This is the "pure model code" shape. No `@RunOnEdt`, no UI, runs on the JUnit worker thread, fast.
 
 A test of a form under a specific visual configuration:
@@ -273,7 +257,6 @@ class GreetingFormVisualTest {
 }
 ```
 
-
 The visual-config annotations (`@Theme`, `@DarkMode`, `@LargerText`, `@Orientation`, `@RTL`) apply on the EDT in one batch, followed by a single theme refresh, so the test body sees the simulator in the exact configuration you asked for without flicker.
 
 A test that injects a custom property for the duration of one method:
@@ -289,13 +272,11 @@ void newCodePathRunsWhenFlagIsOn() {
 }
 ```
 
-
 Class-level `@SimulatorProperty` applies to every method in the class. Method-level overrides class-level. Use the container `@SimulatorProperties` for more than one (the package source level rules out `@Repeatable`).
 
 The full reference, including the dependency-block YAML for `common/pom.xml` and `javase/pom.xml` and the `@Theme` / `@Orientation` / `@RTL` details, is at [Testing with JUnit 5](https://www.codenameone.com/developer-guide/#_testing_with_junit_5) in the developer guide.
 
-Wrapping up
------------
+## Wrapping up
 
 That is the workflow half of this release. [Tomorrow's post](https://www.codenameone.com/blog/platform-apis-in-the-core/) covers the new platform APIs that moved into the core this week: AI and OAuth / OIDC are the headline pieces, with WiFi / connectivity and a few smaller items alongside them.
 

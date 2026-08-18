@@ -34,25 +34,21 @@ After a tombstone has been in the system for a certain period of time, which is 
 
 Of course, the best way to deal with tombstones is to not create them in the first place. There are several ways to accomplish this, and most of them happen in the data model.{#d2b5}
 
-No DELETEs
-----------
+## No DELETEs
 
 The simplest way to avoid tombstones is to never do the one operation guaranteed to create them --- deleting data. Of course, this isn't always possible and will definitely be applicable by use case. But by and large, if you have a data model which doesn't require data to be deleted on a regular basis, you'll avoid most of the pain that leads to tombstones right there.{#9069}
 
-No writing NULL values
-----------------------
+## No writing NULL values
 
 Writing a NULL value into Cassandra creates a tombstone. Having a NULL in a pre-built query variable is probably the most common way that tombstones are inadvertently created in the system. This used to be a bigger problem until the DataStax Java Driver "unset" all NULL values by default in a prepared statement with its driver version 3 and CQL protocol (sometimes referred to as the "native binary" protocol) version 4. With the most recent versions of the [DataStax Java drivers](https://docs.datastax.com/en/developer/java-driver/index.html%20rel=), this stands as a good reminder to always write with [prepared statements](https://docs.datastax.com/en/developer/java-driver/3.0/manual/statements/prepared/).{#9606}
 
 In some use cases, delete operations and their resulting tombstones are unavoidable. The best path forward, in this case, is to adjust the data model and usage pattern so that the fewest possible tombstones are returned.{#4b1d}
 
-Collection operations
----------------------
+## Collection operations
 
 The implementation of [collections](https://www.datastax.com/blog/collections-cassandra) (sets, lists, and maps) is a good addition to the [Cassandra data modeling](https://www.datastax.com/blog/basic-rules-cassandra-data-modeling) paradigm. But it's important to remember that frequently adding, removing, or updating collection items can lead to tombstone generation. When using collections, you'll find success by changing their contents as little as possible.{#0da0}
 
-Using TTLs
-----------
+## Using TTLs
 
 Setting a time-to-live (TTL) on a table is a great way to keep the size of a data set from getting out of control. But it's important to remember that once a TTL activates and deletes the data in question, it creates a tombstone. TTLs are best used with time series models that care more about recent data.{#595c}
 
@@ -68,8 +64,7 @@ In the table definition shown above, messages are partitioned by day. Within eac
 
 The advantage here is that if the application only really cares about querying the most recent data, it should never query the tombstones. This is important because tombstones are mostly problematic when returned as a part of a result set. They are much less likely to cause problems if they are never queried.{#db0a}
 
-Compaction strategy selection
------------------------------
+## Compaction strategy selection
 
 The default compaction strategy for Apache Cassandra is `SizeTieredCompactionStrategy`. It makes for a good default because it works well with many use cases and access patterns. However, there are use cases where it makes sense to use either `TimeWindowCompactionStrategy` or `LeveledCompactionStrategy`.{#56e6}
 
@@ -80,8 +75,7 @@ A popular alternative to `SizeTieredCompactionStrategy` is `LeveledCompactionStr
 
 So let's say that you're at a point where a table has a large number of tombstones. Queries are noticeably slowing down and an occasional `TombstoneOverwhelmingException` is being returned. At this point, what can you do?{#d49d}
 
-`Compaction options`
---------------------
+## `Compaction options`
 
 The default `SizeTieredCompactionStrategy` does provide some options to assist with cleaning up tombstones. The most effective one is tombstone_threshold, which takes a percentage as a value, for example:{#2b5b}
 
@@ -89,8 +83,7 @@ The default `SizeTieredCompactionStrategy` does provide some options to assist w
 
 In this scenario, a single-SSTable compaction will be initiated when the percentage of expired data in the file exceeds 30%. However, the percentage of expired data does not take the `gc_grace_seconds` setting into account, and only the *eligible* expired data will be removed.{#6b08}
 
-nodetool garbagecollect
------------------------
+## nodetool garbagecollect
 
 Tombstones can be removed with single-table compaction by invoking:{#a9b8}
 
@@ -99,8 +92,7 @@ Tombstones can be removed with single-table compaction by invoking:{#a9b8}
 This command can be used to reclaim some space and get rid of expired data. It's important to remember that this command is also bound by the `gc_grace_seconds` setting.{#eb8a}
 > Note: Be careful not to confuse the `garbagecollect` keyword with the garbage collection process which manages memory use inside the Java heap.
 
-Lowering gc_grace_seconds
--------------------------
+## Lowering gc_grace_seconds
 
 One obvious way to cycle through tombstones faster is to lower the table's value for `gc_grace_seconds`. This has the effect of marking tombstones as eligible for collection in a shorter period of time. By default, `gc_grace_seconds` is set to 10 days (864,000 seconds).{#cb23}
 

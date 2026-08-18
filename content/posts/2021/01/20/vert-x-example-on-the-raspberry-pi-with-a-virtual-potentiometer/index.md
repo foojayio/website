@@ -36,8 +36,7 @@ You can go ahead and use this idea to start your project without wasting more ti
 
 More details here: [potentiometers basic principles](https://passive-components.eu/resistors-potentiometers-basic-principles).
 
-The Idea
---------
+## The Idea
 
 The idea is to create a simple web application that I can use as a potentiometer:
 ![](20210115_121231-1024x1024-1-1024x1024.jpg)
@@ -61,8 +60,7 @@ I can combine it with my [Christmas hats](http://www.igfasouza.com/blog/raspberr
 I can do a simple Led example:
 ![](01_Blinking-LED_bb-1024x777-1.jpg)
 
-Code
-----
+## Code
 
 I simply used the Vert.X web "hello world" example:
 
@@ -87,13 +85,10 @@ I simply used the Vert.X web "hello world" example:
     }
 ```
 
-
 Disclaimer -- I got the CSS from [here](https://codepen.io/jean-emmanuel/pen/GpxYdg).
 
 You can get the full code on my [GitHub](https://github.com/igfasouza/Vert.x-Potentiometer-web-Starter-example).
 
 {{< youtube Lyd8RQ2WS-I >}}
-
-
 
 Originally posted on [Igor Souza](http://www.igfasouza.com/blog/raspberry-pi-vert-x-web-potentiometer/ "Igor Zouza")'s blog.

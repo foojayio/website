@@ -20,8 +20,7 @@ Every Monday at 10 AM Eastern, [@javaevolved](https://x.com/javaevolved) now twe
 
 Here's how it works, and how you can do the same for your own project.
 
-The Problem
------------
+## The Problem
 
 [Java Evolved](https://javaevolved.github.io) is a static site with 113 code patterns showing the old way vs. the modern way to write Java. Each pattern has a title, summary, old/modern approach labels, JDK version, and a link to its detail page.
 
@@ -33,8 +32,7 @@ I wanted to promote each pattern on Twitter --- one per week, in random order, c
 * **Auditable** --- git history shows what was posted and when
 * **Zero infrastructure** --- no servers, no databases, no paid services
 
-The Architecture
-----------------
+## The Architecture
 
 The system has three components:
 
@@ -48,11 +46,9 @@ social/* → [Post Script] → Twitter API v2 → updated state
 GitHub Actions cron → runs Post Script every Monday
 ```
 
-
 Everything lives in the repository. State is tracked via committed files, not external databases.
 
-Component 1: The Queue \& Tweet Generator
------------------------------------------
+## Component 1: The Queue \& Tweet Generator
 
 **File:** `html-generators/generatesocialqueue.java`
 
@@ -76,7 +72,6 @@ The tweet template looks like this:
 #Java #JavaEvolved
 ```
 
-
 The generator also validates that every tweet fits within Twitter's 280-character limit. If a summary is too long, it's automatically truncated with an ellipsis. Of the 113 patterns, 12 needed truncation.
 
 ### Handling New Patterns
@@ -85,8 +80,7 @@ When you re-run the generator after adding new content files, it detects new pat
 
 Use `--reshuffle` to force a full reshuffle when the cycle is exhausted.
 
-Component 2: The Post Script
-----------------------------
+## Component 2: The Post Script
 
 **File:** `html-generators/socialpost.java`
 
@@ -121,7 +115,6 @@ var signature = Base64.getEncoder().encodeToString(
     mac.doFinal(baseString.getBytes(UTF_8)));
 ```
 
-
 The script also supports `--dry-run` to preview the next tweet without posting:
 
 ```
@@ -144,9 +137,7 @@ Nested if → when Clause (JDK 21+)
 DRY RUN — not posting.
 ```
 
-
-Component 3: The GitHub Actions Workflow
-----------------------------------------
+## Component 3: The GitHub Actions Workflow
 
 **File:** `.github/workflows/social-post.yml`
 
@@ -187,7 +178,6 @@ jobs:
           git push
 ```
 
-
 A few details worth noting:
 
 * **`concurrency` group** prevents double-posts if a manual dispatch overlaps with the cron
@@ -195,8 +185,7 @@ A few details worth noting:
 * **Social files live in `social/`** , not `content/` --- the deploy workflow watches `content/**`, so keeping state separate avoids unnecessary site rebuilds
 * **`git pull --rebase`** before push handles the rare case where another commit lands between checkout and push
 
-The Economics
--------------
+## The Economics
 
 Twitter's API pricing means each tweet costs about $0.01. With 113 patterns posted weekly:
 
@@ -205,8 +194,7 @@ Twitter's API pricing means each tweet costs about $0.01. With 113 patterns post
 
 That's essentially free for a perpetual social media presence.
 
-Built in a Single Copilot CLI Session
--------------------------------------
+## Built in a Single Copilot CLI Session
 
 This entire feature --- the queue generator, the post script, the GitHub Actions workflow, the tweet drafts, the documentation updates --- was built in a single interactive session with [GitHub Copilot CLI](https://githubnext.com/projects/copilot-cli). From planning to the first live tweet, everything happened in the terminal.
 
@@ -214,14 +202,12 @@ The session included planning the architecture, getting a rubber-duck critique (
 
 You can read the full session transcript here: [gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11](https://gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11)
 
-What I'd Do Differently
------------------------
+## What I'd Do Differently
 
 * **Add Bluesky support** --- the AT Protocol API is simpler than Twitter's OAuth 1.0a. The architecture already supports it; just add a second API call in the post script.
 * **Content hash tracking** --- if a pattern's title or summary changes, the pre-drafted tweet goes stale. A hash per entry would flag which drafts need regeneration.
 
-Try It Yourself
----------------
+## Try It Yourself
 
 The entire implementation is open source at [github.com/javaevolved/javaevolved.github.io](https://github.com/javaevolved/javaevolved.github.io). You'll need:
 
@@ -230,7 +216,5 @@ The entire implementation is open source at [github.com/javaevolved/javaevolved.
 3. Content in YAML with `title`, `summary`, `oldApproach`, `modernApproach`, `jdkVersion`, `category`, and `slug` fields
 
 Generate the queue, review the drafts, push, and let GitHub Actions handle the rest.
-
-
 
 *Follow [@javaevolved](https://x.com/javaevolved) for a new modern Java pattern every Monday.*

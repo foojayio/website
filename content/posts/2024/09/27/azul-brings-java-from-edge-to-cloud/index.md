@@ -31,8 +31,7 @@ Azul and its Zulu Build of OpenJDK (Zulu) are the ideal partners in this part of
 Let's expand and look at the cloud part of a typical end-to-end solution with sensors, edge devices, client applications, and cloud services.
 ![](edge-diagram.png)
 
-Azul Platform Core for edge devices and client applications
------------------------------------------------------------
+## Azul Platform Core for edge devices and client applications
 
 Because Java delivers fast development speed thanks to its amazing methods and tools and its impressive performance in handling massive amounts of data, it's the ideal programming language for building applications for edge devices that collect data from various sensors.
 
@@ -53,8 +52,7 @@ Desktop and other client-side applications can also be developed and distributed
 
 Check the [Azul Platform Core Documentation website](https://docs.azul.com/core/) to get started with Azul Zulu.
 
-Azul Platform Prime for cloud services
---------------------------------------
+## Azul Platform Prime for cloud services
 
 Where Zulu shines on edge, desktop, and multiple platforms, Azul Zing Builds of OpenJDK (Zing) is built to run in the cloud. It's a Java runtime based on OpenJDK, but Azul improved it to handle bigger data loads with a better compiler and garbage collector. It's available for [free for evaluation](https://www.azul.com/downloads/#prime) and as part of [Azul Platform Prime](https://www.azul.com/products/prime/) for our customers. Prime brings a lot of value:
 
@@ -79,8 +77,7 @@ To learn more about Azul Platform Prime, check these documentation sources:
 
 [Many tools](https://www.azul.com/downloads/#platform-components), [documentation](https://docs.azul.com/prime/), and [support](https://www.azul.com/support/): Azul is [recognized by its many customers and in different articles](https://www.azul.com/newsroom/) for its ongoing research and high customer satisfaction.
 
-Conclusion
-----------
+## Conclusion
 
 Azul is your one-stop partner for all questions related to using Java, from edge devices over client applications to cloud services.
 

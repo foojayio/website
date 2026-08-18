@@ -64,9 +64,6 @@ public class Playground {
 }
 ```
 
-
-<br />
-
 The above code will print time, and it would look like a digital watch and it will keep running until we stop it. We used the **scheduleAtFixedRate()** method, which takes a task as its first argument, and then it takes another two integer arguments, initial delay and period, and the unit of time. It has several other methods, which deserve a complete article only for it. So stay tuned; perhaps in the future one, I will dig deep into it.
 
 **Executors.newWorkStealingPool():** java 8 introduced this new ThreadPool, and it uses a particular framework called Fork/Join framework. This one also deserves a complete article, so that I will discuss it later.
@@ -86,9 +83,6 @@ public interface Callable {
 
 }
 ```
-
-
-<br />
 
 It is also a functional interface like Runnable; the only difference is that it can return a result and throw exceptions.
 
@@ -129,9 +123,6 @@ public class Playground {
 }
 ```
 
-
-<br />
-
 In the above code, we submitted a job to calculate the 50th Fibonacci number. To submit the job, we have used the callable interface. Since the interface is a functional interface, we can also use a lambda expression.
 
 `Future fibonacciNumber = threadPool.submit(() -> fibonacci(50));`
@@ -158,12 +149,9 @@ public interface Future<V> {
 }
 ```
 
-
 However, we usually use the get() and isDone() methods for most of the use cases. The idea is that when we submit a task through Callable, it immediately returns a Future. The Future will hold the result when it's done, not immediately. That means, when we get the reference of the future, the work may not be done yet. We can check that using the isDone() method. We get the result using the get() method. We have to keep in mind that the get() method is blocking operation. The get() method is called from the thread and will be blocked until the result is computed.
 
 <img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-52224" src="ThreadPool-vs-Main-Threads-700x421.png" alt="" width="700" height="421">
-
-<br />
 
 If you look at the image, the main thread executes the green parts. A worker thread from the **ThreadPool** runs the area with pink colour. It turns out we call the get() method from the main thread. Thus, the main thread will be blocked until we get the result.
 
@@ -173,10 +161,6 @@ One important thing, once we have done with the ThreadPool, we must shut down th
 
 The shutdown() method tells the ThreadPool that we are not supposed to take any more tasks, and once the existing tasks are done, terminate. On the other hand, the shutdownNow() method terminates the ThreadPool immediately, even if some tasks are still being executed.
 
-<br />
-
 I hope this article gives you a glips of how we can use ThreadPool in java.  
 
 That's all for today, cheers!
-
-<br />

@@ -22,13 +22,11 @@ frozen: false
 
 [This article is also available on YouTube!](https://www.youtube.com/watch?v=YV4ePyW3DO8) Rate limiting --- it's something you've likely encountered, even if you haven't directly implemented one. For example, have you ever been greeted by a "429 Too Many Requests" error? That's a rate limiter in action, protecting a resource from overload. Or maybe you've used a service with explicit request quotas based on your payment tier --- same concept, just more transparent. ![ChatGPT warning user that they have reached the limit of messages they can send in 24 hours.](https://cdn-images-1.medium.com/max/3412/1*YKz05kbmkzQdws-DUsvhdw.png) Rate limiting isn't just about setting limits; it serves a variety of purposes. Take Figma, for instance. Their rate limiter, built with Redis, saved them from a spam attack where bad actors sent massive document invitations to random email addresses. Without it, Figma could have faced skyrocketing email delivery costs and damaged reputation. Or look at Stripe: as their platform grew, they realized they couldn't just throw more infrastructure at the problem. They needed a smarter solution to prevent resource monopolization by misconfigured scripts or bad actors. These stories show just how versatile rate limiting is. It prevents abuse, ensures fair access, manages load, cuts costs, and even protects against downtime. But here's the kicker: the hard part isn't knowing *why* you need a rate limiter. The real challenge is building one that's both efficient and tailored to your needs.
 
-**Why Redis for Rate Limiting?**
---------------------------------
+## **Why Redis for Rate Limiting?**
 
 Redis has become a go-to tool for implementing rate limiters, and for good reason. It's fast, reliable, and packed with features like atomic operations, data persistence, and Lua scripting. Just ask GitHub. When they migrated to a Redis-backed solution with client-side sharding, they solved tough challenges like replication, consistency, and scalability while ensuring reliable behavior across their infrastructure. So, why Redis? Its speed, versatility, and built-in capabilities make it perfect for handling distributed traffic patterns. But what's even more important is *how* you use it. Let's break down the most common rate-limiting patterns you can implement with Redis and what each one brings to the table.
 
-**Popular Rate-Limiting Patterns**
-----------------------------------
+## **Popular Rate-Limiting Patterns**
 
 Choosing the right rate-limiting algorithm can be challenging. Here's a breakdown of the most popular options, when to use them, and their trade-offs, with practical examples to help you decide:
 
@@ -52,8 +50,7 @@ Choosing the right rate-limiting algorithm can be challenging. Here's a breakdow
 
 **How It Works:** Divides the time window into smaller intervals (e.g., 10-second buckets) and aggregates request counts to approximate a rolling window. ![](https://i0.wp.com/raphaeldelio.com/wp-content/uploads/2024/12/Sliding-Window-Counter.gif?resize=1080%2C608&ssl=1) **Use Cases:** APIs that need a balance between accuracy and efficiency, like chat systems or lightweight rate-limiting for microservices. **Example:** A messaging app limits users to 30 messages per minute but divides the minute into 6 buckets, allowing more flexibility in traffic patterns. **Drawback:** Small inaccuracies can occur, especially during highly bursty traffic patterns.
 
-**Choosing the Right Tool for the Job**
----------------------------------------
+## **Choosing the Right Tool for the Job**
 
 Selecting a rate-limiting strategy isn't just about matching patterns to scenarios; it's about understanding the trade-offs and the specific needs of your application. Here's how to make a more informed choice:
 

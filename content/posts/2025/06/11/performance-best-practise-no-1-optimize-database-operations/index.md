@@ -42,8 +42,7 @@ You can address the above issues and boost Jakarta EE database performance by le
 
 > "Connection establishment is the most expensive database operation; the obvious optimization that Java developers have been using for ages is connection pooling which avoids creating connections at runtime (unless you exhaust the pool capacity)." -- Kuassi Mensah [^\[1\]^](https://medium.com/oracledevs/revisiting-java-applications-performance-scalability-with-rdbms-68d9f85466ca)
 
-How GlassFish helps with improving database performance
--------------------------------------------------------
+## How GlassFish helps with improving database performance
 
 [GlassFish](https://omnifish.ee/) provides built-in connection pools. If an application uses a datasource defined in GlassFish, connections are managed by GlassFish via the built-in connection pooling mechanism and can be configured externally, outside of your application, via GlassFish Admin Console or admin commands.
 
@@ -62,7 +61,6 @@ resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.idle-timeout-in-seconds=30
 resources.jdbc-connection-pool.{CONNECTION_POOL_NAME}.statement-cache-size=10
 ```
 
-
 If you define the datasource in an application in web.xml:
 
 ```
@@ -74,7 +72,6 @@ If you define the datasource in an application in web.xml:
 </data-source>
 ```
 
-
 Or using in an application using an annotation:
 
 ```
@@ -85,7 +82,6 @@ Or using in an application using an annotation:
     maxStatements = 10
 )
 ```
-
 
 ### JDBC batching
 
@@ -101,7 +97,6 @@ statement.addBatch("INSERT INTO CITIES(ID, NAME, COUNTRY) "
  + "VALUES ('2','Dublin', 'Ireland')");
 statement.executeBatch();
 ```
-
 
 ### Jakarta Persistence (JPA) batching
 
@@ -119,7 +114,6 @@ For example, in `persistence.xml`:
 <property name="eclipselink.jdbc.batch-writing.size" value="150"/>
 ```
 
-
 This will enable batching for all data-writing JPA operations. If you want to invoke a certain statement in a JPA query without the batching behavior, you can then disable batching with the [jdbc.batch-writing](https://eclipse.dev/eclipselink/documentation/4.0/jpa/extensions/jpa-extensions.html#jdbc-batch-writing) query hint.
 
 For example:
@@ -127,7 +121,6 @@ For example:
 ```
 query.setHint("jdbc.batch-writing", false);
 ```
-
 
 Or, if you compile your application against EclipseLink API:
 
@@ -137,7 +130,6 @@ import org.eclipse.persistence.config.QueryHints;
 ...
 query.setHint(QueryHints.BATCH_WRITING, HintValues.FALSE);
 ```
-
 
 ### Next Steps
 

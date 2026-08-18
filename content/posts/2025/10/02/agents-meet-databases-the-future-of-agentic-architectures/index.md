@@ -24,8 +24,7 @@ With 2025 hailed as "the year of agents" by [NVIDIA CEO Jensen Huang](https://ww
 
 Enter the Model Context Protocol (MCP), originally developed by Anthropic. MCP has quickly become popular as a standardized method for connecting tools and data to agentic systems, offering a new approach to agent-database interoperability. But this raises key questions for AI developers: What do agentic architectures involving databases actually look like? And what should you consider when building one?
 
-A Quick Overview of Agents
---------------------------
+## A Quick Overview of Agents
 
 Agents are LLM-based systems that have access to tools: functionalities or resources they can use to perform tasks beyond their native capabilities. What defines them is the ability to autonomously decide when and how to use these tools, whether independently, within a structured workflow, or with a human in the loop.
 
@@ -36,8 +35,7 @@ Granting agents the ability to directly query and interact with database data en
 
 This introduces several architectural design decisions to ensure performance, scalability, and security. In particular, how database querying tools are exposed plays a critical role. When providing database querying capabilities to AI agents, two main paths emerge: leveraging standardized tools with MCP or building a custom integration tailored to specific needs.
 
-Path 1: Standardized Integration with MCP servers
--------------------------------------------------
+## Path 1: Standardized Integration with MCP servers
 
 MCP servers offer a plug-and-play approach to integrating agents with databases. As someone working at [MongoDB](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agents-foojay&utm_term=tony.kim), I may be biased, but the MongoDB MCP Server is a great example. It simplifies connecting to a MongoDB database and querying data through MCP, making it easy for various agent-based assistants like Cursor, Windsurf, Claude Desktop, or any MCP-enabled agentic system to interact with your data.
 
@@ -54,8 +52,7 @@ The upsides of this approach are:
 
 The primary tradeoff with using pre-built MCP servers is limited customization; compared to building a custom integration, you have less control over precisely how the tools behave under the hood. Although MCP simplifies integrating predefined tools with agents, it still requires careful consideration, as MCP isn't inherently secure (more about this later).
 
-Path 2: Custom Integrations for Control and Flexibility
--------------------------------------------------------
+## Path 2: Custom Integrations for Control and Flexibility
 
 Building a custom implementation offers a more flexible route for teams requiring more fine-grained control over their database interactions. Frameworks like LangChain simplify and accelerate this process. For instance, the [MongoDB-LangChain integration package](https://github.com/langchain-ai/langchain-mongodb) provides tools for implementing natural language queries, allowing developers to build AI applications and agents that interact with MongoDB. This enables intuitive interfaces for data exploration and autonomous agents, such as customer support assistants, to retrieve data. This toolkit is customizable and extensible. Developers building agents can precisely define which database operations are exposed to the agent, including schema inspection, query generation, validation, or more complex scenarios, and specifically design how those tools are called.
 
@@ -67,8 +64,7 @@ The main advantages of this approach are:
 
 However, custom development typically comes with tradeoffs like higher development overhead and full ownership responsibility for the integration. This path is ideal for teams building agents tailored to unique workflows, where agents are the core product, or where compliance, privacy, or performance requirements exceed what standard solutions can support.
 
-Accuracy, Security, and Performance Considerations
---------------------------------------------------
+## Accuracy, Security, and Performance Considerations
 
 Granting agents direct database access, whether through MCP or custom tools, introduces significant challenges related to accuracy, security, and performance. As these technologies evolve, implementing preventive measures and adhering to best practices is critical for reliable and scalable agentic operations.
 
@@ -101,8 +97,7 @@ The non-deterministic nature of LLMs makes agent workload patterns inherently un
 
 A recommended approach for agentic workloads is to isolate them from other database operations. This type of isolation offers two key benefits: first, it ensures that only designated instances handle agent workloads, preserving production performance while enabling flexible agent scalability. Second, it allows for tailored configurations on these instances, such as setting them to read-only mode, to optimize for specific use cases. With MongoDB, this translates to using [replica sets](https://www.mongodb.com/docs/manual/core/workload-isolation/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agents-foojay&utm_term=tony.kim), which support independent scaling of read and write operations. In addition, [autoscaling](https://www.mongodb.com/docs/atlas/cluster-autoscaling/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agents-foojay&utm_term=tony.kim), along with [dedicated, optimized search nodes](https://www.mongodb.com/company/blog/product-release-announcements/search-nodes-now-public-preview-performance-scale-dedicated-infrastructure/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agents-foojay&utm_term=tony.kim), further enhances agent performance for search-intensive tasks. Combining workload isolation with autoscaling is critical for deploying reliable and scalable agents.
 
-The Agentic Future Depends on Databases
----------------------------------------
+## The Agentic Future Depends on Databases
 
 As AI agents continue to evolve into powerful, autonomous systems, their ability to interact directly with enterprise data becomes essential. With databases housing the majority of the world's information, enabling access is no longer optional. The MCP offers a standardized, fast path to agent-database integration, ideal for common use cases. For deeper customization, building bespoke integrations provides granular control and extensibility.
 

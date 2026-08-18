@@ -28,13 +28,11 @@ frozen: false
 
 Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce **BoxLang AI v2**---a massive leap forward that positions BoxLang as one of the most powerful and versatile AI framework on the JVM. This release is 9-months in the making, with over 100 new features! This would have not been possible without all the new features that the BoxLang JVM language exposes to developers like: Server Side Events, HTTP Streaming, HTTP pooling, Caching, and so much more.
 
-What Makes This Release Groundbreaking?
----------------------------------------
+## What Makes This Release Groundbreaking?
 
 BoxLang AI v2 isn't an incremental update---it's a complete transformation. We've added **over 100 new features** that make building production-grade AI applications faster, simpler, and more powerful than ever.
 
-🎯 Summary
-----------
+## 🎯 Summary
 
 BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 
@@ -57,8 +55,7 @@ BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 * ⏰ **Autonomous Scheduling** - Create self-running agents on any OS with BoxLang Scheduler  
   This release transforms BoxLang into the most comprehensive AI development platform available, with zero vendor lock-in and production-grade reliability.
 
-🤖 Autonomous AI Agents
------------------------
+## 🤖 Autonomous AI Agents
 
 Build intelligent agents that think, remember, and act independently. Agents are the crown jewel of BoxLang AI v2---capable of multi-step reasoning, tool usage, memory management, and delegation.
 
@@ -89,7 +86,6 @@ agent = aiAgent(
 response = agent.run( "Find John's order, check inventory, and update shipping" );
 ```
 
-
 **Agent Capabilities:**
 
 **- Multiple Memories** - Combine vector, cache, conversation, and database memories  
@@ -99,8 +95,7 @@ response = agent.run( "Find John's order, check inventory, and update shipping" 
 **- Context Awareness** - Maintain conversation history across sessions  
 **- Error Handling** - Automatic retry logic and graceful degradation
 
-⚡ Serverless AI Agents on AWS Lambda
-------------------------------------
+## ⚡ Serverless AI Agents on AWS Lambda
 
 Deploy AI agents as **serverless functions** using the [BoxLang AWS Runtime](https://boxlang.ortusbooks.com/getting-started/running-boxlang/aws-lambda "BoxLang AWS Runtime"):
 
@@ -117,7 +112,6 @@ function handler( event, context ) {
 }
 ```
 
-
 **Benefits:**
 
 * Zero server management
@@ -126,8 +120,7 @@ function handler( event, context ) {
 * Enterprise-grade reliability  
   Get started with our AWS Lambda Starter Template.
 
-🔄 Autonomous Agents with BoxLang Scheduler
--------------------------------------------
+## 🔄 Autonomous Agents with BoxLang Scheduler
 
 Create truly autonomous agents that run on schedules---no servers required:
 
@@ -151,11 +144,9 @@ class {
 }
 ```
 
-
 Deploy autonomous agents on **any OS** with the [BoxLang Scheduler](https://boxlang.ortusbooks.com/boxlang-framework/asynchronous-programming/scheduled-tasks "BoxLang Scheduler").
 
-🧬 Multi-Tenant Vector Memory \& RAG
-------------------------------------
+## 🧬 Multi-Tenant Vector Memory \& RAG
 
 Enterprise-grade isolation with 10+ vector databases:
 
@@ -181,11 +172,9 @@ agent = aiAgent(
 response = agent.run( "What did we discuss about Q4 projections?" );
 ```
 
-
 **Supported Vector DBs**: ChromaDB, Pinecone, PostgreSQL+pgvector, Weaviate, Qdrant, Milvus, and more.
 
-📚 Document Loaders for 30+ Formats
------------------------------------
+## 📚 Document Loaders for 30+ Formats
 
 Load and process documents from any source:
 
@@ -207,11 +196,9 @@ result = aiDocuments( "/docs", { type: "markdown" } )
     .toMemory( [ chromaMemory, pgVectorMemory ], { async: true } )
 ```
 
-
 **Supported formats**: PDF, Word, CSV, JSON, XML, Excel, Markdown, HTML, databases, web scraping, and more.
 
-🔌 12+ AI Provider Support
---------------------------
+## 🔌 12+ AI Provider Support
 
 One API for all major providers:
 
@@ -231,11 +218,9 @@ response = aiChat(
 );
 ```
 
-
 **Providers:** OpenAI, Claude, Gemini, Grok, Groq, DeepSeek, Ollama, Mistral, Cohere, Perplexity, OpenRouter, HuggingFace.
 
-📡 Model Context Protocol (MCP)
--------------------------------
+## 📡 Model Context Protocol (MCP)
 
 Full MCP support for building distributed AI systems. Create your own MCP servers or integrate with ANY external MCP-compatible system using the fluent `MCP()` function.
 
@@ -253,7 +238,6 @@ server = mcpServer(
     .addTool( forecastingTool )
     .start();
 ```
-
 
 **Consume ANY MCP Server:**
 
@@ -274,7 +258,6 @@ agent = aiAgent(
 response = agent.run( "Get Q4 sales from CRM and create forecast report" );
 ```
 
-
 **Multiple MCP Servers:**
 
 ```java
@@ -288,7 +271,6 @@ pipeline = aiModel( "grok" )
     .invoke( "Create GitHub issue, notify in Slack, and update Jira ticket" );
 ```
 
-
 **MCP Features:**
 
 * Build custom MCP servers to expose your tools
@@ -297,8 +279,7 @@ pipeline = aiModel( "grok" )
 * Mix MCP tools with local function tools
 * Full protocol compliance for interoperability
 
-📦 Native Structured Output
----------------------------
+## 📦 Native Structured Output
 
 Get type-safe, validated responses directly from AI models. No more parsing JSON strings or handling malformed responses.
 
@@ -325,7 +306,6 @@ println( invoice.getInvoiceNumber() );
 println( invoice.getTotal() );
 ```
 
-
 **Structured Output Options:**
 
 * BoxLang classes with properties
@@ -334,8 +314,7 @@ println( invoice.getTotal() );
 * Array responses
 * Nested complex objects
 
-🌊 Streaming Support
---------------------
+## 🌊 Streaming Support
 
 Real-time token streaming for responsive applications thanks to BoxLang:
 
@@ -360,9 +339,7 @@ pipeline = aiModel( "openai" )
     );
 ```
 
-
-⚡ Async Operations
-------------------
+## ⚡ Async Operations
 
 Non-blocking futures for concurrent AI requests:
 
@@ -385,9 +362,7 @@ future1.thenApply( ( result ) => processResult( result ) )
     .thenAccept( ( summary ) => println( summary ) );
 ```
 
-
-🔗 AI Pipelines
----------------
+## 🔗 AI Pipelines
 
 Build composable workflows with models, transformers, and custom logic:
 
@@ -408,7 +383,6 @@ pipeline = aiDocuments( pdfFiles )
 result = pipeline.invoke( inputData );
 ```
 
-
 **Pipeline Features:**
 
 * Chain multiple AI models
@@ -417,8 +391,7 @@ result = pipeline.invoke( inputData );
 * Handle errors gracefully
 * Monitor execution time
 
-🎯 Event-Driven Architecture
-----------------------------
+## 🎯 Event-Driven Architecture
 
 25+ lifecycle events for observability and control:
 
@@ -445,7 +418,6 @@ interceptorService.listen( "onAIError", ( data ) => {
 });
 ```
 
-
 **Available Events:**
 
 * Request/Response lifecycle
@@ -458,8 +430,7 @@ interceptorService.listen( "onAIError", ( data ) => {
 * Model invocation
 * Pipeline execution
 
-🏭 Production-Ready Features
-----------------------------
+## 🏭 Production-Ready Features
 
 Built for enterprise deployment:
 
@@ -473,7 +444,6 @@ response = aiChat(
 );
 ```
 
-
 **Error Handling:**
 
 ```java
@@ -485,7 +455,6 @@ try {
 }
 ```
 
-
 **Rate Limiting:**
 
 ```java
@@ -496,7 +465,6 @@ interceptorService.listen( "onAIRateLimitHit", ( data ) => {
     retry( data.provider );
 });
 ```
-
 
 **Debugging:**
 
@@ -513,9 +481,7 @@ response = aiChat(
 );
 ```
 
-
-🦙 Local AI with Ollama
------------------------
+## 🦙 Local AI with Ollama
 
 Zero API costs, complete privacy, offline capability:
 
@@ -533,7 +499,6 @@ agent = aiAgent(
 response = agent.run( "Analyze this confidential document" );
 ```
 
-
 **Local AI Benefits:**
 
 * Zero API costs
@@ -542,8 +507,7 @@ response = agent.run( "Analyze this confidential document" );
 * No rate limits
 * Full control
 
-🎯 Real-World Use Cases
------------------------
+## 🎯 Real-World Use Cases
 
 **Customer Support Automation:**
 
@@ -556,7 +520,6 @@ agent = aiAgent(
 );
 ```
 
-
 **Data Analysis Pipeline:**
 
 ```java
@@ -567,7 +530,6 @@ pipeline = aiModel( "openai" )
 
 result = pipeline.invoke( csvData );
 ```
-
 
 **Scheduled Report Generation:**
 
@@ -585,9 +547,7 @@ scheduler.task( "Weekly Report" )
     .at( "09:00" );
 ```
 
-
-📖 Comprehensive Learning Resources
------------------------------------
+## 📖 Comprehensive Learning Resources
 
 We've built a complete ecosystem to help you master BoxLang AI:
 
@@ -611,15 +571,13 @@ We've built a complete ecosystem to help you master BoxLang AI:
 
 [ai.ortussolutions.com](https://ai.ortussolutions.com/ "ai.ortussolutions.com") - Enterprise consulting and support
 
-🚀 Getting Started
-------------------
+## 🚀 Getting Started
 
 ### **OS Applications**
 
 ```bash
 install-bx-module bx-ai
 ```
-
 
 ### **AWS Lambda**
 
@@ -628,13 +586,11 @@ cd src/resources
 install-bx-module bx-ai --local
 ```
 
-
 ### Web Applications
 
 ```bash
 box install bx-ai
 ```
-
 
 ### Your First Agent
 
@@ -649,9 +605,7 @@ response = agent.run( "How do I use BoxLang AI?" );
 println( response );
 ```
 
-
-Why BoxLang AI v2 Matters
--------------------------
+## Why BoxLang AI v2 Matters
 
 ### For Developers:
 
@@ -674,8 +628,7 @@ Why BoxLang AI v2 Matters
 * Extensive documentation
 * Real-world examples
 
-The Year Ahead
---------------
+## The Year Ahead
 
 In just 12 months, we've transformed BoxLang AI from a simple chat wrapper into a comprehensive AI platform. But we're not stopping here.
 
@@ -700,8 +653,7 @@ In just 12 months, we've transformed BoxLang AI from a simple chat wrapper into 
 
 **The future of AI development is here. It's written in BoxLang.**
 
-Get Started TodayGet Started Today
-----------------------------------
+## Get Started TodayGet Started Today
 
 * Documentation: [ai.ortusbooks.com](https://ai.ortusbooks.com/ "ai.ortusbooks.com")
 * Website: [ai.boxlang.io](https://ai.boxlang.io/ "ai.boxlang.io")

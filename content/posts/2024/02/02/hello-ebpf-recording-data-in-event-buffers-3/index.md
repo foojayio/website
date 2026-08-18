@@ -27,8 +27,7 @@ This week, I'll show you briefly how to use another kind of eBPF maps, the perf 
 
 *This article is shorter than the previous one as I'm preparing for the OpenJDK committers workshop in Brussels and my [Python and Java DevRoom talks](https://fosdem.org/2024/schedule/speaker/WS77F8/) at FOSDEM. I'm happy to meet my readers; say hi when you're there.*
 
-Perf Event Buffer
------------------
+## Perf Event Buffer
 
 Data structures, like the hash map described in the previous article, are great for storing data but have their limitation when we want to pass new bits of information continuously from the eBPF program to our user-land application. This is especially pertinent when recording performance events. So, [in 2015, the Linux kernel got a new map type](https://github.com/torvalds/linux/commit/457f44363a8894135c85b7a9afd2bd8196db24ab): `BPF_MAP_TYPE_PERF_EVENT_ARRAY`.
 
@@ -39,8 +38,7 @@ This map type functions as a fixed-size ring buffer that can store elements of a
 
 You can read more about Perf Event Buffers in the [Learning eBPF](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) book by Liz Rice, pages 24 to 28.
 
-Example
--------
+## Example
 
 Now, to a small example, called [chapter2.HelloBuffer](https://github.com/parttimenerd/hello-ebpf/blob/main/bcc/src/test/java/me/bechberger/ebpf/bcc/HelloWorldTest.java), which records for every `execve` call the calling process id, the user id, and the current task name and transmits it to the Java application:
 
@@ -61,7 +59,6 @@ Now, to a small example, called [chapter2.HelloBuffer](https://github.com/partti
 2852760 1000 jspawnhelper Hello World
 2852760 1000 jspawnhelper Hello World
 ```
-
 
 This gives us already much more information than the simple counter from my [last article](https://mostlynerdless.de/blog/2024/01/12/hello-ebpf-recording-data-in-basic-ebpf-maps-2/). The eBPF program to achieve this is as follows:
 
@@ -100,7 +97,6 @@ int hello(void *ctx) {
 }
 ```
 
-
 You can get more information on `bpf_get_current_com`, `bpf_probe_read_kernel` in the [bpf-helpers(7) man-page](https://www.man7.org/linux/man-pages/man7/bpf-helpers.7.html).
 
 The Java application that reads the buffer and prints the obtained information is not too dissimilar from the example in [my previous article](https://mostlynerdless.de/blog/2024/01/12/hello-ebpf-recording-data-in-basic-ebpf-maps-2/). We first define the `Data` type:
@@ -132,7 +128,6 @@ static final BPFType.BPFStructType<Data> DATA_TYPE =
                                 (String) objects.get(2),
                                 (String) objects.get(3)));
 ```
-
 
 *You might recognize that the BPF types now have the matching Java type in their type signature. I added this to have more type safety and less casting.*
 
@@ -167,16 +162,13 @@ try (var b = BPF.builder("""
 }
 ```
 
-
-Tests
------
+## Tests
 
 I'm happy to announce that [hello-ebpf](https://github.com/parttimenerd/hello-ebpf) now has its own test runner, which uses [virtme](https://github.com/amluto/virtme) and docker to run all tests in their own runtime with their own kernel. All this is wrapped in my [testutil/bin/java](https://github.com/parttimenerd/hello-ebpf/blob/main/testutil/bin/java) wrapper so that you can run the tests using `mvn test`:
 
 ```bash
 mvn -Djvm=testutil/bin/java
 ```
-
 
 And the best part? All tests are written using plain [JUnit 5](https://junit.org/junit5/). As an example, here is the [HelloWorld](https://github.com/parttimenerd/hello-ebpf/blob/df7feea50f8ae126de6f436fbc960ea66f8baa39/bcc/src/test/java/me/bechberger/ebpf/bcc/HelloWorldTest.java) test:
 
@@ -202,11 +194,9 @@ public class HelloWorldTest {
 }
 ```
 
-
 There are currently only two tests, but I plan to add many more.
 
-Conclusion
-----------
+## Conclusion
 
 In this article, we learned about Perf Event Buffers, a valuable data structure for repeatedly pushing information from the eBPF program to the user-land application. Implementing this feature, we're getting closer and closer to completing chapter 2 of the [Learning eBPF](https://cilium.isovalent.com/hubfs/Learning-eBPF%20-%20Full%20book.pdf) book.
 

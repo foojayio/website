@@ -34,8 +34,7 @@ In cloud environments with auto-scaling, a "scaling loop" can make Java applicat
 
 Let me explain what's happening and show you some solutions.
 
-What's actually happening during warmup?
-----------------------------------------
+## What's actually happening during warmup?
 
 When you start a Java application, the JVM can't run at full speed immediately. It needs to do a few things first.
 
@@ -49,8 +48,7 @@ This chart from Azul shows how performance improves over time in seconds \[Figur
 
 But while all these compilations are happening, your app also needs to handle requests. The JVM is conservative and prevents the compilations from interfering too much with your application. So warmup can take a while.
 
-Is Java warmup actually your problem?
--------------------------------------
+## Is Java warmup actually your problem?
 
 Before you start troubleshooting, check whether the warmup is actually causing issues in your use case. The easiest way? Analyze your [Garbage Collector](https://www.azul.com/products/components/pgc/) (GC) logs! These logs are available from any OpenJDK runtime. But when using Azul Zing Builds of OpenJDK (Azul Zing), you get much more detailed logs than with standard OpenJDK.
 
@@ -61,7 +59,6 @@ java -Xlog:gc,safepoint:/my_log_dir/gc.log::filecount=0 \
     -jar my-application.jar
 ```
 
-
 Then open the log with the [Azul GC Log Analyzer](https://docs.azul.com/gc-log-analyzer/). Check these charts to find potential bottlenecks:
 
 * **Compiler Queues**: Big backlog? The compiler can't keep up.
@@ -69,8 +66,7 @@ Then open the log with the [Azul GC Log Analyzer](https://docs.azul.com/gc-log-a
 * **Tier 2 Compile Counts**: Shows compilation activity and queue evictions.
 * **Tier 2 Wait Time**: How long methods wait to get compiled.
 
-How the scaling loop works
---------------------------
+## How the scaling loop works
 
 Here's a typical scenario in cloud environments:
 
@@ -85,8 +81,7 @@ We've seen both scenarios. They're not fun. Here are four solutions for the Java
 |----------------------------------------------------------------------------------------------------------------|
 | **Pro Tip:** Links to documentation for the features in this article are listed at the bottom of this article. |
 
-Solution 1: Give the compiler more resources
---------------------------------------------
+## Solution 1: Give the compiler more resources
 
 The simplest fix? Let the compiler use more CPU to finish faster.
 
@@ -103,7 +98,6 @@ java -XX:C1MaxCompilerThreads=2 \
     -jar my-application.jar
 ```
 
-
 You can also add extra compilers for a fixed duration. The following example adds two extra compiler threads for the first 60 seconds. After that, they're freed up for your application. If the number of seconds is less than your alert threshold, it won't trigger your scaling monitoring.
 
 ```
@@ -111,7 +105,6 @@ java -XX:CompilerWarmupPeriodSeconds=60 \
      -XX:CompilerWarmupExtraThreads=2 \
      -jar my-application.jar
 ```
-
 
 **When this works:**
 
@@ -126,8 +119,7 @@ java -XX:CompilerWarmupPeriodSeconds=60 \
 * You're reserving resources you only need at startup.
 * It doesn't stop aggressive auto-scaling.
 
-Solution 2: Lower the compilation threshold
--------------------------------------------
+## Solution 2: Lower the compilation threshold
 
 Instead of waiting for 10,000 invocations, you can also decide to start the JIT sooner:
 
@@ -141,7 +133,6 @@ java -XX:C1CompileThreshold=500 \
     -jar my-application.jar
 ```
 
-
 **When this works:**
 
 * You have clear "hot" methods that get called frequently.
@@ -153,8 +144,7 @@ java -XX:C1CompileThreshold=500 \
 * Higher CPU during warmup (compiling more methods faster).
 * Wasted work on methods that aren't actually hot.
 
-Solution 3: ReadyNow to learn once and start fast forever
----------------------------------------------------------
+## Solution 3: ReadyNow to learn once and start fast forever
 
 This is where things get interesting. ReadyNow is an Azul Zing feature that changes the game. Instead of learning from scratch every time, it saves what it learned from previous runs.
 
@@ -169,7 +159,6 @@ java -XX:ProfileLogOut=/var/app/profiles/readynow.profile \
 java -XX:ProfileLogIn=/var/app/profiles/readynow.profile \
      -jar my-application.jar
 ```
-
 
 The first run creates a profile that includes all compiler decisions. Subsequent runs read this profile and immediately compile all methods to produce the optimal code based on the information from the previous run. No waiting for invocation thresholds. The warmup time drops dramatically \[Figure 2\].
 ![](CHART-ReadyNow-Warmup-1024x585-1.avif)
@@ -189,8 +178,7 @@ You can update the profile across multiple runs when you specify both a `Profile
 * The profiles are version-specific. When you deploy a new version, you'll need to create a new profile.
 * When the workload changes, you need to generate a new profile.
 
-Solution 4: Optimizer Hub as the full solution
-----------------------------------------------
+## Solution 4: Optimizer Hub as the full solution
 
 If you're running at scale, [Optimizer Hub](https://www.azul.com/products/components/azul-optimizer-hub/) is worth looking at. It's part of [Azul Platform Prime](https://www.azul.com/products/prime/) and provides two services: [Cloud Native Compiler](https://www.azul.com/products/intelligence-cloud/cloud-native-compiler/) and [ReadyNow Orchestrator](https://www.azul.com/products/components/readynow/).
 
@@ -229,7 +217,6 @@ java -XX:OptHubHost=<optimizer-hub-host>[:<port>] \
      -jar my-application.jar
 ```
 
-
 Your JVM automatically sends compilation requests to the Cloud Native Compiler and synchronizes profiles through the ReadyNow Orchestrator. If Optimizer Hub is unavailable, it falls back to local compilation.
 
 **Best for:**
@@ -245,8 +232,7 @@ Your JVM automatically sends compilation requests to the Cloud Native Compiler a
 * Monitor network latency for compilation requests (typically minimal).
 * It is overkill for small deployments.
 
-What should you do?
--------------------
+## What should you do?
 
 Start simple. If you're beginning to address warmup issues, try increasing the CPU first. It's one command-line flag.
 
@@ -254,8 +240,7 @@ If you're running multiple instances of the same application, especially in cont
 
 If you're at scale, running hundreds of JVM instances, managing frequent deployments, or dealing with auto-scaling policies, Optimizer Hub makes sense. The setup investment pays off quickly, as proven in this post by Simon Ritter: [What Happens When 10,000 JVMs Collaborate in One Production Environment](https://www.azul.com/blog/what-happens-when-10000-jvms-collaborate-in-one-production-environment/).
 
-Conclusion
-----------
+## Conclusion
 
 The warmup scaling loop is annoying and expensive. But you don't have to accept it. Modern Java runtimes, such as Azul Zing, provide practical tools to address this.
 

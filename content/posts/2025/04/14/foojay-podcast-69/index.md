@@ -26,13 +26,11 @@ This is the first Foojay podcast ever to feature more than 20 guests! Geertjan a
 
 As you might expect, there's a lot of talk about AI and machine learning, but you'll also hear about new Java features, profiling, open source, security, code reviews, and much more!
 
-Video
------
+## Video
 
 {{< youtube NV1ageVrt5Q >}}
 
-Podcast Apps
-------------
+## Podcast Apps
 
 You can listen and subscribe to the Foojay Podcast on:
 
@@ -40,8 +38,7 @@ You can listen and subscribe to the Foojay Podcast on:
 * [Apple Podcasts](https://podcasts.apple.com/be/podcast/foojay-io-the-friends-of-openjdk/id1652281304)
 * And most others...
 
-Content
--------
+## Content
 
 00:00 Introduction  
 

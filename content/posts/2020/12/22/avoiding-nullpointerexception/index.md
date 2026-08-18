@@ -21,8 +21,7 @@ frozen: false
 
 The terrible `NullPointerException` (NPE for short) is the most frequent Java exception occurring in production, according to [a 2016 study](https://www.overops.com/blog/the-top-10-exceptions-types-in-production-java-applications-based-on-1b-events/). In this article we'll explore the main techniques to fight it: the self-validating model and the `Optional` wrapper.
 
-Self-Validating Model
----------------------
+## Self-Validating Model
 
 Imagine a business rule: every Customer has to have a birth date set. There are a number of ways to implement this constraint: validating the user data on the create and update use-cases, enforcing it via `NOT NULL` database constraint and/or implementing the null-check right in the constructor of the Customer entity. In this article we'll explore the last one.
 
@@ -37,7 +36,6 @@ public Customer(@NonNull Date birthDate) { // 3
   this.birthDate = Objects.requireNonNull(birthDate); // 2
 }
 ```
-
 
 The code above contains 4 *alternative* ways to do the same thing, any single one is of course enough:
 
@@ -57,8 +55,7 @@ So, in general, whenever a null represents a data inconsistency case, throw exce
 
 But what if that `null` is indeed a valid value? For example, imagine our Customer might not have a Member Card because she didn't yet create one or maybe she didn't want to sign up for a member card. We'll discuss this case in the following section.
 
-Getters returning Optional
---------------------------
+## Getters returning Optional
 
 > **Best-practice** : Since Java 8, whenever a function needs to return `null`, it should declare to return `Optional` instead
 
@@ -77,7 +74,6 @@ public Optional getMemberCardOpt() {
 }
 ```
 
-
 Secondly, change the original getter to delegate to the new one:
 
 ```java
@@ -85,7 +81,6 @@ public String getMemberCard() {
     return getMemberCardOpt().orElse(null); 
 }
 ```
-
 
 Thirdly, make sure all the Java projects using the owner class are loaded in your workspace.
 
@@ -103,7 +98,6 @@ if (customer.getMemeberCard() != null) { // Line X
 }
 ```
 
-
 After applying the refactoring steps above, the code gets refactored to
 
 ```java
@@ -112,20 +106,17 @@ if (customer.getMemeberCard().orElse(null) != null) { // Line X
 }
 ```
 
-
 The `if` condition can be simplified by using `.isPresent()` and the second line by using `.get()`. Then one could even shorten the code to a single line:
 
 ```java
 customer.getMemberCard().ifPresent(card -> applyDiscount(order, card.getPoints()));
 ```
 
-
 This means that you still need to go through all the places the getter is called to *improve* the code as we saw above. Furthermore, I bet that in large codebases you'll also discover places where the null-check (// Line X) was forgotten because the developer was tired/careless/rushing back then:
 
 ```java
 applyDiscount(order, customer.getMemeberCard().orElse(null).getPoints());
 ```
-
 
 **Tip**: IntelliJ will hint you about the possible NPE in this case, so make sure the inspection 'Constant conditions and exceptions' is turned on.
 
@@ -144,8 +135,7 @@ All modern object-mapper frameworks (eg Hibernate, Mongo, Cassandra, Jackson, JA
 You should consider making null-safe the objects you write logic on: Entities and Value Objects. As I explained in my [Clean Architecture talk](https://www.youtube.com/watch?v=tMHO7_RLxgQ&list=PLggcOULvfLL_MfFS_O0MKQ5W_6oWWbIw5&index=3), you should avoid writing logic on API data objects (aka Data Transfer Objects). Since no logic uses them, null-protection is overkill.
 > Use `Optional` in your Domain Model not in your DTO/API Model.
 
-Pre-instantiate sub-structures
-------------------------------
+## Pre-instantiate sub-structures
 
 Never do this:
 
@@ -153,13 +143,11 @@ Never do this:
 private List<String> labels;
 ```
 
-
 > Always initialize the collection fields with an empty one!
 
 ```java
 private List<String> labels = new ArrayList<>();
 ```
-
 
 Those few bytes allocated beforehand almost never matter. On the other hand, the risk for doing `.add` on a `null` list is just too dangerous. In some other cases you might want to make the field `final` and take it via the constructor. Never leave collections references to have a `null`value.
 
@@ -169,11 +157,9 @@ Many teams choose to decompose larger entities into smaller parts. When those pa
 private BillingInfo billingInfo = new BillingInfo();
 ```
 
-
 This would allow the users of your model to do `e.getBillingInfo().setCity(city);` without worrying about nulls.
 
-Conclusion
-----------
+## Conclusion
 
 You should consider upgrading your entity model to either reject a `null` via self-validation or present the nullable field via a getter that returns `Optional`. The effort of changing the getters of the core entities in your app is considerable, but along the way, you may find many dormant NPEs.
 

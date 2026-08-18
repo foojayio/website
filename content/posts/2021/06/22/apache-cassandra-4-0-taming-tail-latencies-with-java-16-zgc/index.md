@@ -25,8 +25,7 @@ This is a big deal because with Cassandra 4.0, you not only get the direct impro
 
 Here, I'd like to focus on improvements in Java garbage collection that Cassandra 4.0 coupled with Java 16 offers over Cassandra 3.11 on Java 8.
 
-The garbage collection challenge
---------------------------------
+## The garbage collection challenge
 
 In 2012, I gave a talk titled, "Dealing with JVM Limitations in Apache Cassandra." Here is the first slide from that presentation:
 
@@ -50,8 +49,7 @@ To show how well ZGC improves Cassandra performance, we compared both throughput
  <img decoding="async" src="JAX_LDN21_728x90_61392_v1.jpg" alt="" class="wp-image-45222" width="716">
 </figure>
 
-ZGC performance results
------------------------
+## ZGC performance results
 
 My colleague Jonathan Shook benchmarked the performance characteristics of Cassandra 3.11 and 4.0 in detail across three workloads: simple key/value, a time series workload with many rows per partition, and a tabular workload with one row per partition but many columns per row.
 
@@ -78,8 +76,7 @@ For these results, we limited each test scenario to the slowest system's through
 
 Cassandra 4.0's latencies are virtually identical to 3.11's with the same GC settings, but ZGC is consistently better, up to a solid factor of 5 to 10 better at p99 and p999 percentiles.
 
-The NoSQLBench performance testing suite
-----------------------------------------
+## The NoSQLBench performance testing suite
 
 Most benchmarks of non-relational databases are done with either product-specific tooling (like [cassandra-stress](https://cassandra.apache.org/doc/latest/tools/cassandra_stress.html)), or with [YCSB](https://github.com/brianfrankcooper/YCSB), which gives you a lowest-common-denominator key-value workload across dozens of systems.
 
@@ -87,8 +84,7 @@ Jonathan Shook created [NoSQLBench](https://github.com/nosqlbench/nosqlbench) to
 
 The NoSQLBench workload descriptions for the tests in this post can be found [here](https://github.com/nosqlbench/nosqlbench/tree/main/driver-cql-shaded/src/main/resources/activities/baselinesv2).
 
-Conclusion
-----------
+## Conclusion
 
 Without switching to ZGC, Cassandra 4.0 offers modest but real throughput improvements for key/value and tabular workloads.
 
@@ -96,8 +92,7 @@ Combining Cassandra 4.0 with ZGC in Java 16 results in further improvements to t
 
 ZGC is production-ready starting with Java 15; for enterprises that want to stick with LTS releases, ZGC will be one of the headlining reasons to upgrade to the Java 17 LTS release later this year. ZGC is one of the most significant performance "free lunches" available, and it Just Works---the results shown here are out-of-the-box for ZGC with no extra tuning.
 
-Appendix: Test environment
---------------------------
+## Appendix: Test environment
 
 All tests were run on the same physical cluster of AWS i3.4xl nodes: 16 vCPUs, 122GB RAM, 10Gb network, 5 nodes in the cluster. Storage was configured as XFS on direct NVMe, single volume. All data was stored at RF3. Assigned tokens were used to ensure consistent data distribution across the tested versions. Consistency level for all operations was set as LOCAL_QUORUM. Concurrency from the client side was set at 960 (20x client cores) for the keyvalue test, and 480 (10x client cores) for the time-series and tabular tests.
 

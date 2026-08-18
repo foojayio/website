@@ -26,27 +26,23 @@ frozen: false
 
 In this post, I'll show you step-by-step how I did it.
 
-Step 1: Download Tomcat 11
---------------------------
+## Step 1: Download Tomcat 11
 
 First, download Tomcat 11 from the [official Apache Tomcat website](https://tomcat.apache.org/download-11.cgi). After extracting it to a local folder, you have a clean Tomcat installation ready to use.
 
-Step 2: Create a New Vaadin Project
------------------------------------
+## Step 2: Create a New Vaadin Project
 
 Next, create a new Vaadin project. You can easily do this by either using [https://start.vaadin.com](https://start.vaadin.com/) or [https://start.spring.io](https://start.spring.io/).
 
 By default, the project is configured to create a JAR file and run using the embedded Spring Boot server.
 
-Step 3: Adjust the `pom.xml`
-----------------------------
+## Step 3: Adjust the `pom.xml`
 
 To prepare the project for deployment to Tomcat, I changed the packaging from `jar` to `war` in the `pom.xml`. This tells Maven to build a WAR file instead of a standalone JAR.
 
 ```xml
 <packaging>war</packaging>
 ```
-
 
 You also want to exclude the embedded Tomcat because we will deploy the WAR to Tomcat. This can be done by marking the dependency as provided.
 
@@ -58,9 +54,7 @@ You also want to exclude the embedded Tomcat because we will deploy the WAR to T
 </dependency>
 ```
 
-
-Step 4: Update the Spring Boot Application Class
-------------------------------------------------
+## Step 4: Update the Spring Boot Application Class
 
 A WAR needs a special entry point for the servlet container.
 
@@ -79,11 +73,9 @@ public class VaadinWarApplication extends SpringBootServletInitializer {
 }
 ```
 
-
 This setup makes sure that Tomcat can start the Spring Boot application correctly when the WAR is deployed.
 
-Step 5: Build the Application for Production
---------------------------------------------
+## Step 5: Build the Application for Production
 
 Vaadin applications must be built in production mode to create an optimized production-ready bundle. I used Maven to build the project with the production profile:
 
@@ -91,11 +83,9 @@ Vaadin applications must be built in production mode to create an optimized prod
 ./mvnw package -Pproduction
 ```
 
-
 This command generates a WAR file in the `target` directory.
 
-Step 6: Deploy the WAR to Tomcat
---------------------------------
+## Step 6: Deploy the WAR to Tomcat
 
 Copie the generated `.war` file into the `webapps` folder of my Tomcat installation.
 
@@ -103,13 +93,11 @@ Copie the generated `.war` file into the `webapps` folder of my Tomcat installat
 cp target/vaadin-war-application.war /path/to/tomcat/webapps/
 ```
 
-
 When starting Tomcat (with `bin/startup.sh` or `bin/startup.bat`), it automatically unpacked the WAR and started the application.
 
 The Vaadin application is up and running without any additional configuration!
 
-Conclusion
-----------
+## Conclusion
 
 Running a Vaadin application as a WAR in Tomcat 11 is straightforward:
 

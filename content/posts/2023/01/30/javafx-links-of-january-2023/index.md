@@ -21,20 +21,17 @@ frozen: false
 
 Here is a summary of the Links Of The Week that were published in January on [jfx-central.com](https://www.jfx-central.com/).
 
-JavaFX Versions
----------------
+## JavaFX Versions
 
 * [**Gluon** announced the first set of JavaFX releases in 2023](https://techhub.social/@gluonhq/109710794664474768):
   * JavaFX 19.0.2: public release containing some updates and security patches to JavaFX 19.
   * JavaFX 11.0.18 and JavaFX 17.0.6: for LTS customers who keep supporting the development, and who make it possible to move JavaFX forward.
 
-Podcast
--------
+## Podcast
 
 * This was already mentioned the last time, but maybe you missed this 😉 Here on [**Foojay.io**](https://twitter.com/foojayio), we published the podcast ["The State of JavaFX Framework, Libraries, and Projects"](https://foojay.io/today/foojay-podcast-9/). Pedro Duque Vieira, Sean Phillips, Johan Vos, Gail Anderson, Dirk Lemmermann, and Frank Delporte spoke about the JavaFX framework itself, but also about the libraries and applications that are built with it.
 
-Games
------
+## Games
 
 * [**Almas Baim**](https://twitter.com/AlmasBaim/status/1610762162850463744) started the new year with eco-friendly fireworks. Powered by the FXGL particle system.
   * [He also published a video tutorial](https://www.youtube.com/watch?v=UAGRgntpliI) in which he uses snow particles to outline an arbitrary String.
@@ -49,8 +46,7 @@ Games
   * The sources [are available on GitHub](https://github.com/OrangoMango/Snake).
   * And [another video](https://twitter.com/orango_mango/status/1617918969025015809) showing a 3D animation only using matrices and vectors.
 
-JavaFX Applications
--------------------
+## JavaFX Applications
 
 * [**Zoran Sevarac**](https://twitter.com/zsevarac/status/1610634951321346050) shared a screenshot of a Neural network visual Weights Analysis tool under development for the next DeepNetts release. It helps understanding what's going on inside layers, and debugging trained networks.
 * **Mohammed Saied** demonstrates a [JavaFX GUI to control a car (via YouTube Shorts)](https://www.youtube.com/shorts/fA56jf05M84).
@@ -62,22 +58,19 @@ JavaFX Applications
 * [**Sundar Krishnamachari**](https://twitter.com/Tksrajan/status/1610985730200989701) shared a small project that creates a UI client for communication over MQ Telemetry Transport or MQTT, a messaging protocol popular in IOT devices.
 * [**JavaFX3D** found a nice Car Rental System](https://twitter.com/JavaFX3D/status/1612944735752310784) with a JavaFX user interface. Code with screenshots and videos is [available on GitHub](https://github.com/yuenci/Java-Car-Rental-System).
 
-JavaFX Development
-------------------
+## JavaFX Development
 
 * Setting up your JavaFX development environment can be challenging. [**Andreas Fester**](https://twitter.com/a_fester/status/1606385362728849415) shared the solution that helped him to fix "Module not found", thanks to [**José Pereda**](https://twitter.com/JPeredaDnr) and [**Jeanette Winzenburg**](https://twitter.com/kleopatra_jx).
 * [**Johan Vos** is looking for help with the JavaFX plugin for Eclipse 2022-12](https://twitter.com/johanvos/status/1611354561863614465): "Who has #Eclipse experience and wants to help the #JavaFX community?"
 
-To Read...
-----------
+## To Read...
 
 * [**Nikos Vaggalis**](https://twitter.com/nikosvg/status/1603462643670519823) wrote an article about WebFX, a new way to develop modern web-based Java applications with rich desktop-like GUIs.
 * [**Autumo**](https://twitter.com/autumo) shared an article on Foojay: ["Modular and non-modular Gradle build scripts for JavaFX-based projects"](https://foojay.io/today/building-javafx-with-gradle/).
 * [**Siegfried Steiner** wrote a very detailed, clear, step-by-step post](https://twitter.com/MetacodesPro/status/1612477239249047552): "Write once, run anywhere: An Android game using JavaFX and the GraalVM".
 * [Another step-by-step by **Jesse Watson**](https://twitter.com/jessals04/status/1611842000965505025) on how to start a JavaFX project using Eclipse IDE and SceneBuilder. [Read it here](https://www.jessejwatson.com/posts/javafx-how-i-made-my-first-java-gui).
 
-Miscellaneous
--------------
+## Miscellaneous
 
 * [**Thanhpv**](https://twitter.com/realThanhpv/status/1610996195182415874) is impressed by the performance of JavaFX on a 10y old computer. The screen recorder couldn't catch up...
 * According to ChatGPT [there are several advantages to using JavaFX over Swing or SWT](https://twitter.com/lofidewanto/status/1610646563285524481).
@@ -101,8 +94,7 @@ Miscellaneous
 * During the JChampions Conference, [**Gail Anderson**](https://twitter.com/gail_asgteach) and [**Paul Anderson**](https://twitter.com/Paul_ASGTeach) presented ["Say the Words: Modern Java with JavaFX for Rich Client UIs"](https://www.youtube.com/watch?v=I2p4ojzV5TE).
 * [**Matt Coley** shared his wish-list to extend RichText](https://twitter.com/MattColey6/status/1618550397198827520). You want to join the discussion?
 
-New releases
-------------
+## New releases
 
 * [17.0.45 of JDKMon by **Gerrit Grunwald**](https://foojay.social/@hansolo_@mastodon.social/109743119204551594): minor bugfix.
 * [1.6.4 of SmartFinder by **Serendipity**](https://twitter.com/SerendigityInfo/status/1616487713074446355) with a new quick search view: filter the search results by categories (Documents, Ebooks, Images,...).
