@@ -61,16 +61,19 @@ public class ValidateFrontmatter {
         });
         Set<String> postSlugs = slugDirs.keySet();
 
+        Set<String> authorSlugs = authorSlugs();
+
         problems.addAll(checkDir(Path.of("content/posts"), List.of("title", "description", "authors")));
         problems.addAll(checkDir(Path.of("content/authors"), List.of("title")));
         problems.addAll(checkDir(Path.of("content/pages"), List.of("title", "url")));
         problems.addAll(checkDir(Path.of("content/sponsors"), List.of("title", "tier")));
         problems.addAll(checkTitleEmoji(postsDir));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
-        problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs()));
+        problems.addAll(checkDrafts(Path.of("draft"), postSlugs, authorSlugs));
+        problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
         problems.addAll(checkSeriesWeights(Path.of("content/pages")));
-        problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs()));
+        problems.addAll(checkFeaturedAuthors(Path.of("hugo.toml"), authorSlugs));
 
         if (problems.isEmpty()) {
             System.out.println("Frontmatter check passed.");
@@ -94,12 +97,183 @@ public class ValidateFrontmatter {
                     problems.add(file + ": no frontmatter block found");
                     continue;
                 }
-                for (String field : requiredFields) {
-                    Object v = fm.get(field);
-                    if (v == null || (v instanceof String s && s.isBlank())) {
-                        problems.add(file + ": missing/empty required field '" + field + "'");
+                problems.addAll(checkRequired(file, fm, requiredFields));
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * The required-field rule itself, split out so the draft check below applies
+     * exactly the same one -- a draft becomes a post by being moved, so anything
+     * the two disagree about is a rule that only bites AFTER the contributor has
+     * gone.
+     *
+     * An empty list counts as missing: `authors: []` and `categories: []` are
+     * what a half-filled template looks like, and both render as silently
+     * missing rather than as an error.
+     */
+    static List<String> checkRequired(Path file, Map<String, Object> fm, List<String> requiredFields) {
+        List<String> problems = new ArrayList<>();
+        for (String field : requiredFields) {
+            Object v = fm.get(field);
+            boolean empty = v == null
+                    || (v instanceof String s && s.isBlank())
+                    || (v instanceof List<?> l && l.isEmpty());
+            if (empty) problems.add(file + ": missing/empty required field '" + field + "'");
+        }
+        return problems;
+    }
+
+    /**
+     * Leftover template text. `template/post.md` ships these exact strings, so
+     * a copy that still carries one is a template the author started from and
+     * did not finish -- worth naming as such rather than reporting the field as
+     * present, which it technically is.
+     */
+    static final Map<String, String> PLACEHOLDERS = Map.of(
+            "title", "Your Article Title Here",
+            "description", "A short, one- or two-sentence summary of the article.",
+            "authors", "your-author-slug");
+
+    /**
+     * A contributor's submission, which lands in draft/<slug>/index.md.
+     *
+     * This is the one place the PR check was blind, and the worst place to be
+     * blind: `draft/` sits OUTSIDE `content/` on purpose (drafts must not
+     * publish themselves), which means the `hugo --gc --minify` step in
+     * pr-check.yml never reads a draft at all -- so before this, a submission
+     * could be missing every required field, name an author who doesn't exist
+     * and collide with a published URL, and the PR would go green. The one PR
+     * most likely to be wrong is a first-time contributor's, and it was the
+     * only one nothing checked.
+     *
+     * The rules are deliberately the SAME ones a published post is held to
+     * (checkRequired, SLUG_FMT, the `slug:`-matches-folder rule, TITLE_EMOJI,
+     * related_posts), because publishing is nothing more than a maintainer
+     * moving the folder into content/posts/<y>/<m>/<d>/ -- a rule that applies
+     * only after the move is one that fails when the author is no longer around
+     * to fix it. Required fields are the four `template/post.md` marks
+     * "Required", all of which hold across every one of the published posts.
+     *
+     * Two checks go beyond what content/posts gets, because both are silent
+     * failures a contributor cannot see and a maintainer would have to know to
+     * look for: an `authors:` slug with no author bundle (the post renders, but
+     * it never appears on the author's profile and the byline links nowhere),
+     * and a hero `image:` naming a file that isn't in the folder (a remote URL
+     * is left alone -- 76 published posts legitimately use one).
+     */
+    static List<String> checkDrafts(Path draftDir, Set<String> postSlugs, Set<String> authorSlugs)
+            throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(draftDir)) return problems;
+
+        // A submission is a FOLDER, because the folder name is the URL slug and
+        // the images sit next to the index.md. Copying template/post.md straight
+        // to draft/my-article.md is the obvious near-miss, and it would other-
+        // wise be skipped by every check below rather than reported.
+        try (Stream<Path> loose = Files.list(draftDir)) {
+            for (Path file : loose.filter(Files::isRegularFile).sorted().toList()) {
+                String name = file.getFileName().toString();
+                if (!name.endsWith(".md") || name.equals("README.md")) continue;
+                problems.add(file + ": a submission is a folder, not a loose file"
+                        + " -- move it to draft/" + stripExt(name) + "/index.md"
+                        + " (the folder name becomes the URL slug)");
+            }
+        }
+
+        List<Path> bundles;
+        try (Stream<Path> dirs = Files.list(draftDir)) {
+            bundles = dirs.filter(Files::isDirectory).sorted().toList();
+        }
+
+        Set<String> draftSlugs = new TreeSet<>();
+        for (Path dir : bundles) draftSlugs.add(dir.getFileName().toString());
+        Set<String> knownSlugs = new TreeSet<>(postSlugs);
+        knownSlugs.addAll(draftSlugs);
+
+        for (Path dir : bundles) {
+            String slug = dir.getFileName().toString();
+            Path index = dir.resolve("index.md");
+            if (!Files.isRegularFile(index)) {
+                problems.add(dir + ": no index.md (the article itself goes in"
+                        + " draft/" + slug + "/index.md, images alongside it)");
+                continue;
+            }
+            if (!SLUG_FMT.matcher(slug).matches()) {
+                problems.add(index + ": folder name '" + slug + "' is not a clean URL slug"
+                        + " (lowercase letters, digits, dashes and underscores only)");
+            }
+            // The folder name is the URL, so a draft sharing a slug with a
+            // published post collides on /today/<slug>/ the moment it is moved.
+            if (postSlugs.contains(slug)) {
+                problems.add(index + ": slug '" + slug + "' is already used by a published post"
+                        + " -- both would claim /today/" + slug + "/");
+            }
+
+            Map<String, Object> fm = readFrontmatter(index);
+            if (fm == null) {
+                problems.add(index + ": no frontmatter block found"
+                        + " (start from template/post.md)");
+                continue;
+            }
+
+            problems.addAll(checkRequired(index, fm,
+                    List.of("title", "description", "authors", "image", "categories")));
+
+            Object declared = fm.get("slug");
+            if (declared != null && !declared.toString().isBlank()
+                    && !declared.toString().equals(slug)) {
+                problems.add(index + ": frontmatter slug '" + declared
+                        + "' does not match folder name '" + slug + "'");
+            }
+
+            if (fm.get("title") instanceof String title) {
+                Matcher m = TITLE_EMOJI.matcher(title);
+                if (m.find()) {
+                    problems.add(index + ": title contains emoji (" + m.group()
+                            + ") -- titles are used as cards, RSS items and link previews;"
+                            + " put it in the body instead: \"" + title + "\"");
+                }
+            }
+
+            PLACEHOLDERS.forEach((field, placeholder) -> {
+                Object v = fm.get(field);
+                boolean unchanged = v instanceof List<?> list
+                        ? list.stream().anyMatch(e -> placeholder.equals(String.valueOf(e)))
+                        : placeholder.equals(String.valueOf(v));
+                if (unchanged) {
+                    problems.add(index + ": '" + field + "' still holds the template placeholder"
+                            + " (\"" + placeholder + "\")");
+                }
+            });
+
+            if (fm.get("authors") instanceof List<?> list) {
+                for (Object author : list) {
+                    if (author == null) continue;
+                    String a = author.toString();
+                    if (a.equals(PLACEHOLDERS.get("authors")) || authorSlugs.contains(a)) continue;
+                    problems.add(index + ": authors references unknown author slug '" + a
+                            + "' -- add content/authors/" + a.charAt(0) + "/" + a + "/index.md"
+                            + " in this same PR (start from template/author.md)");
+                }
+            }
+
+            if (fm.get("related_posts") instanceof List<?> list) {
+                for (Object related : list) {
+                    if (related != null && !knownSlugs.contains(related.toString())) {
+                        problems.add(index + ": related_posts references unknown slug '" + related + "'");
                     }
                 }
+            }
+
+            // A bare filename means the file next to index.md; a URL is somebody
+            // else's server and not ours to verify.
+            if (fm.get("image") instanceof String image && !image.isBlank()
+                    && !image.startsWith("http") && !image.startsWith("/")
+                    && !Files.isRegularFile(dir.resolve(image))) {
+                problems.add(index + ": image '" + image + "' is not in the folder"
+                        + " (put it next to index.md and reference it by filename)");
             }
         }
         return problems;

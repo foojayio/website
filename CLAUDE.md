@@ -360,6 +360,35 @@ should catch a mistake at PR time rather than letting it fail silently.
   two pages in a folder claiming the same series `weight`), run by
   `.github/workflows/pr-check.yml` in lieu of a visual preview (GitHub Pages
   has no per-PR preview URLs).
+
+  **`checkDrafts` covers `draft/`, which the rest of the PR check cannot see.**
+  Drafts live outside `content/` so they don't publish themselves, which also
+  means the `hugo --gc --minify` step never reads one — so a submission missing
+  every required field, naming an author who doesn't exist and colliding with a
+  published URL went green. The first-time contributor's PR was the only one
+  nothing checked. It applies the same rules a published post gets
+  (`checkRequired`, `SLUG_FMT`, `slug:`-matches-folder, `TITLE_EMOJI`,
+  `related_posts`), because publishing is only a maintainer moving the folder
+  into `content/posts/<y>/<m>/<d>/` — a rule that applies after the move fails
+  when the author is gone. Required fields are the four `template/post.md`
+  marks "Required" (plus `categories`), each verified to hold across all 2147
+  published posts before being required. Two checks go further than
+  `content/posts` gets, both silent failures nobody would look for: an
+  `authors:` slug with no author bundle (the post renders but never appears on
+  the author's profile), and a hero `image:` naming a file that isn't in the
+  folder (a remote URL is left alone — 76 published posts use one). It also
+  catches the near-miss of copying `template/post.md` to `draft/<slug>.md`
+  instead of `draft/<slug>/index.md`, and leftover template placeholder text.
+
+  This is why **`.github/PULL_REQUEST_TEMPLATE.md` is not a checklist.** It was
+  one, unchanged since the scaffold commit, and every item had rotted: it asked
+  for `tags` (no such taxonomy), for images under `static/images/` with absolute
+  paths (they go in the bundle), for `draft: false` (no such mechanism), and for
+  a preview with `hugo server -D` (which cannot render a draft — `draft/` isn't
+  mounted). Asking an author to self-certify five things is a tax on the
+  publishing goal, and four-fifths of it was wrong. Derive it, don't ask: the
+  checks moved into the script above, and the template is now the one question
+  a machine can't answer — what's in this PR.
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
   GitHub Pages on push to `main`. Also refreshes and commits `data/jugs.yaml`,
   `data/java-champions.yaml` and `data/views.json` before building

@@ -1,11 +1,16 @@
 ## What's in this PR
 
-<!-- New post, author profile, page edit, script/theme change, etc. -->
+<!--
+  A new article? An edit to an existing one? A new author profile? A change to
+  the theme or scripts? One line is plenty.
+-->
 
-## Checklist (for post/author/page contributions)
+<!--
+  Submitting an article? Everything else is checked for you when you open this
+  PR -- required frontmatter, your author profile, the hero image, the URL slug.
+  Read what it says if it goes red; it names the file and the fix.
 
-- [ ] Frontmatter includes title, description, and (for posts) author + categories/tags
-- [ ] `related_posts` reflects posts I'd genuinely recommend (not auto-generated)
-- [ ] Images live under `static/images/...` and are referenced with absolute paths
-- [ ] Previewed locally with `hugo server -D` and it looks right
-- [ ] `draft: false` if this is ready to publish
+  Start from `template/post.md` (copied to `draft/<your-article-slug>/index.md`,
+  with the images next to it) and see `draft/README.md`. The full guide:
+  https://foojay.io/today/how-to-submit-your-next-article-on-foojay-io/
+-->
