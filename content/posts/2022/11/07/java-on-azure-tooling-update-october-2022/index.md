@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "VS Code"
-tags:
 related_posts:
   - "java-on-azure-tooling-update-september-2022"
   - "java-on-azure-tooling-update-august-2022"

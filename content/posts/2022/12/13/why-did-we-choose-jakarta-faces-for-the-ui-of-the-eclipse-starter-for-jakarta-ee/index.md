@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2022-12-12-at-10.49.06-AM.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

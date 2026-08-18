@@ -9,7 +9,6 @@ authors:
 image: "pinky-swear-g6402e3105.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "journeys-in-java-level-1-building-an-empire-of-microservices"

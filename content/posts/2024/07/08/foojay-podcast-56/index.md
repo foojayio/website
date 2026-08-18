@@ -14,7 +14,6 @@ categories:
   - "Machine Learning"
   - "Podcast"
   - "Project Panama"
-tags:
 related_posts:
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "foojay-podcast-55"

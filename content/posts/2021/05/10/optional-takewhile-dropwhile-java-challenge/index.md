@@ -8,7 +8,6 @@ authors:
 image: "optional.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "soprano-ofnullable-stream-java-challenge"
   - "daemon-thread-java-code-quiz"

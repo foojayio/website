@@ -12,7 +12,6 @@ categories:
   - "Databases"
   - "DevOps"
   - "Kubernetes"
-tags:
 related_posts:
 frozen: false
 ---

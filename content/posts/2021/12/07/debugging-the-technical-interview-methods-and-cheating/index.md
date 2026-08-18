@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt1.jpg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "the-debugger-checklist-part-i"
   - "the-debugger-checklist-part-ii"

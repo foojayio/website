@@ -9,7 +9,6 @@ authors:
 image: "strong-50597.jpg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "an-example-of-overengineering-keep-it-wet"

@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-blogpost-cover-low-level-bare-metal-debugging-02.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "the-debugger-checklist-part-ii"

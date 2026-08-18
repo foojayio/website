@@ -9,7 +9,6 @@ image: "foojay2022.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "foojay-status-report-july-december-2021"
   - "foojay-status-report-january-june-2021"

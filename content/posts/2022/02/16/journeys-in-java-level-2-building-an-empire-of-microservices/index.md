@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Microservices"
   - "Neo4J"
-tags:
 related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "book-review-quarkus-for-spring-developers"

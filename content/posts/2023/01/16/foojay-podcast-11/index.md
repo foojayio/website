@@ -10,7 +10,6 @@ categories:
   - "Interviews"
   - "Opinion"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-10"
   - "foojay-podcast-9"

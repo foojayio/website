@@ -10,7 +10,6 @@ image: "payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"
-tags:
 related_posts:
   - "payara-launches-payara-cloud-serverless-approach-for-jakarta-ee"
   - "what-is-an-application-server-in-3-minutes"

@@ -9,7 +9,6 @@ image: "image-6-1.png"
 categories:
   - "Kafka"
   - "Tutorials"
-tags:
 related_posts:
   - "starting-docker-desktop-with-spring-boot"
   - "clean-shutdown-of-spring-boot-applications"

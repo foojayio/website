@@ -9,7 +9,6 @@ authors:
 image: "adoptopenjdk-graph-1.png"
 categories:
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

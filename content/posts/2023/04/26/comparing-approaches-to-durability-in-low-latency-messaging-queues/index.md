@@ -9,7 +9,6 @@ image: "Screenshot-2023-04-17-at-9.23.55-AM-1024x563-1.png"
 categories:
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "challenges-when-developing-a-gui-for-fix"

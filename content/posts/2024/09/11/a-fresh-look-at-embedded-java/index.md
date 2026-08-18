@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "foojay-podcast-55"
   - "foojay-podcast-2"

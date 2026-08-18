@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-85"
   - "foojay-podcast-84"

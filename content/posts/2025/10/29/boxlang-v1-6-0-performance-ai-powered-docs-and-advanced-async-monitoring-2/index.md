@@ -9,7 +9,6 @@ image: "boxlang-v1.6.0-1.jpg"
 categories:
   - "BoxLang"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-76"
   - "javafx-links-of-september-2025"

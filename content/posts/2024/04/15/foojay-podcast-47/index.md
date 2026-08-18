@@ -11,7 +11,6 @@ categories:
   - "Podcast"
   - "Project Panama"
   - "TornadoVM"
-tags:
 related_posts:
   - "search-in-documentation-with-a-javafx-chat-langchain4j-application"
   - "foojay-podcast-34"

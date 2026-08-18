@@ -9,7 +9,6 @@ authors:
 image: "VSCodium_Logo.png"
 categories:
   - "VS Code"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

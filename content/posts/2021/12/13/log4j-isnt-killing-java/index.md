@@ -8,7 +8,6 @@ authors:
 image: "car.jpeg"
 categories:
   - "Security"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "java-logging-what-to-log-what-not-to-log"

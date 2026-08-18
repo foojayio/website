@@ -11,7 +11,6 @@ categories:
   - "Opinion"
   - "Testing"
   - "Tutorials"
-tags:
 related_posts:
   - "java-testing-with-vs-code"
   - "junit-5-testing-basics"

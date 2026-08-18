@@ -9,7 +9,6 @@ image: "booth-1-jfall-2023-1024x768.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

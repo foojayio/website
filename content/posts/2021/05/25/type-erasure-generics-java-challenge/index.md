@@ -8,7 +8,6 @@ authors:
 image: "generics.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "daemon-thread-java-code-quiz"
   - "function-calculation-java-challenge"

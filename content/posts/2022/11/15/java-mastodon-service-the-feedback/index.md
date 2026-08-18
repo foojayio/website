@@ -9,7 +9,6 @@ image: "new-mastodon-users.jpg"
 categories:
   - "Developer Tools"
   - "Foojay"
-tags:
 related_posts:
   - "lets-start-a-java-mastodon-community-for-friends-of-openjdk"
   - "foojay-podcast-6"

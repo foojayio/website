@@ -8,7 +8,6 @@ image: "duke_sw_01.jpg"
 categories:
   - "Java"
   - "Java Beginner"
-tags:
 related_posts:
   - "the-java-in-education-catalog-now-has-a-beautiful-home"
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"

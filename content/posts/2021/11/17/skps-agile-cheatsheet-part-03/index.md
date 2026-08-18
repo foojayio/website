@@ -8,7 +8,6 @@ authors:
 image: "istockphoto-683500488-1024x1024-1.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "skps-agile-cheatsheet-part-01"
   - "skps-agile-cheatsheet-part-02"

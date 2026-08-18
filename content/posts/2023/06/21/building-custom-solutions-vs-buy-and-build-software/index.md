@@ -13,7 +13,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "automatically-creating-microservices-architecture-diagrams"

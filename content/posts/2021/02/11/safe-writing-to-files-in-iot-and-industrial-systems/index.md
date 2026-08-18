@@ -10,7 +10,6 @@ categories:
   - "Embedded"
   - "Performance"
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

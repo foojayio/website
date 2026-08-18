@@ -10,7 +10,6 @@ image: "doppleware_a_software_developer_in_a_cubicle_full_of_threads_d29b9c00-90
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "the-systemic-process-of-debugging"
   - "eliminating-bugs-using-the-tong-motion-approach"

@@ -16,7 +16,6 @@ categories:
   - "Opinion"
   - "Performance"
   - "Research"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"

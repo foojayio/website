@@ -8,7 +8,6 @@ authors:
 image: "Extended-Control-2021-01-27-12-52-07.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "java-for-desktop-applications-part-1"

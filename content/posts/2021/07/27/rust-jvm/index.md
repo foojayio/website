@@ -9,7 +9,6 @@ authors:
 image: "rust-java.png"
 categories:
   - "Research"
-tags:
 related_posts:
   - "the-try-block-in-rust"
   - "feedback-from-calling-rust-from-python"

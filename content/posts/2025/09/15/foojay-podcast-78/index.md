@@ -10,7 +10,6 @@ image: "episode-78-java-25.jpg"
 categories:
   - "Java"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-71"
   - "foojay-podcast-68"

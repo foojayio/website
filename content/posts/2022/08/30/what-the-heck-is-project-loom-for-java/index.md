@@ -10,7 +10,6 @@ image: "threads.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"

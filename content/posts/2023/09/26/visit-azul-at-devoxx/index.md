@@ -10,7 +10,6 @@ image: "2023-9-14b-devoxx-hero.jpg"
 categories:
   - "Books"
   - "Events"
-tags:
 related_posts:
   - "book-announcement-openjdk-migration-guide-for-dummies"
   - "is-openjdk-just-a-drop-in-replacement"

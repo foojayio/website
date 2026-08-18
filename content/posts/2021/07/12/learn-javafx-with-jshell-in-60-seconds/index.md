@@ -9,7 +9,6 @@ image: "matrix-rain-effect.gif"
 categories:
   - "JavaFX"
   - "JShell"
-tags:
 related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-6"
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"

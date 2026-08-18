@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "JEPs"
-tags:
 related_posts:
   - "your-tls-stack-is-lying-about-zero-copy"
   - "banned-threadlocal-java-scoped-values"

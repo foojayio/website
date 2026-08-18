@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Kotlin"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-53"
   - "foojay-podcast-52"

@@ -10,7 +10,6 @@ image: "security-g85f9e284f.jpg"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "geo-routing-with-apache-apisix"

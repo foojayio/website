@@ -10,7 +10,6 @@ image: "flamegraph-example-2.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"

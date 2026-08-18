@@ -9,7 +9,6 @@ image: "jitwatch-triview.png"
 categories:
   - "Performance"
   - "Use Cases"
-tags:
 related_posts:
   - "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
   - "mastering-the-art-of-controlling-the-jit-unlocking-reproducible-profiler-tests"

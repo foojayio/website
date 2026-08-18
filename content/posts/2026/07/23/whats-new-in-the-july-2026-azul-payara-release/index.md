@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Release Notes"
-tags:
 related_posts:
   - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"

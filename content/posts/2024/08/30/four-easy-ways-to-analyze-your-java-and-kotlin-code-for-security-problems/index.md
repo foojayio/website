@@ -11,7 +11,6 @@ categories:
   - "Security"
   - "Snyk"
   - "Tools"
-tags:
 related_posts:
   - "preventing-cross-site-scripting-xss-in-java-applications-with-snyk-code"
   - "sanitize-all-input"

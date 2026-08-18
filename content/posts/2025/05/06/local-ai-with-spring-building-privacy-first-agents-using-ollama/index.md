@@ -9,7 +9,6 @@ image: "3wm66Vp.md_.png"
 categories:
   - "Java"
   - "Spring"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "calling-gemma-with-ollama-testcontainers-and-langchain4j"

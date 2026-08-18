@@ -10,7 +10,6 @@ image: "snykvulnxxcode-1.png"
 categories:
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application"
   - "exploring-cve-2022-33980-the-apache-commons-configuration-rce-vulnerability"

@@ -8,7 +8,6 @@ authors:
 image: "ebpf_maps-2000x425-1.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "hello-ebpf-developing-ebpf-apps-in-java-1"
   - "continuous-production-profiling-and-diagnostics"

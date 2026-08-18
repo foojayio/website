@@ -19,7 +19,6 @@ categories:
   - "Research"
   - "Testing"
   - "Tutorials"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

@@ -9,7 +9,6 @@ authors:
 image: "hilla-react-featured-logo.webp"
 categories:
   - "Hilla"
-tags:
 related_posts:
   - "hilla-1-3-faster-react-spring-boot-development"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

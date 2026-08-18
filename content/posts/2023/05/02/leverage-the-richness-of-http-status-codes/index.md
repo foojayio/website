@@ -8,7 +8,6 @@ authors:
 image: "money-2724241_1280.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-functional-programming-techniques-in-java-a-primer"

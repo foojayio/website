@@ -10,7 +10,6 @@ image: "1_zB4tm16eE9QotLZZAads7g.png"
 categories:
   - "Java"
   - "Tools"
-tags:
 related_posts:
   - "why-picnic-picked-java"
   - "embracing-java-17-heres-what-we-learned-at-picnic"

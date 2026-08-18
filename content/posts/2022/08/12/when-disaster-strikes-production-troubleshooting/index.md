@@ -10,7 +10,6 @@ image: "Lightrun-developer-productivity-dark-29.png"
 categories:
   - "Spring"
   - "sql"
-tags:
 related_posts:
   - "debugging-java-equals-hashcode-performance-in-production"
   - "debugging-jaxb-production-issues"

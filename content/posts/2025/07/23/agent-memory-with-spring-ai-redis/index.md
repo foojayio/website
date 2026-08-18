@@ -11,7 +11,6 @@ categories:
   - "Spring"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "semantic-caching-with-springboot-redis"
   - "checking-out-junie-a-coding-agent-by-jetbrains"

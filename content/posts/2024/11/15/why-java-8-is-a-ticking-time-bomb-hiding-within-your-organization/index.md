@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Opinion"
   - "Performance"
-tags:
 related_posts:
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"
   - "java-22-whats-new"

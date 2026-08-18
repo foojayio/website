@@ -8,7 +8,6 @@ authors:
 image: "CW51-software-ecg-deaths-oceania.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
 frozen: false
 ---

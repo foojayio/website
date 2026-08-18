@@ -8,7 +8,6 @@ authors:
 image: "https://blog.idrsolutions.com/wp-content/uploads/2019/11/Screenshot-2019-11-19-at-10.43.30-134x300.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "learning-java-as-a-first-language"
   - "running-single-file-java-source-code-without-compiling-part-1"

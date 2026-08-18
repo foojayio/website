@@ -9,7 +9,6 @@ image: "social-post-banner.png"
 categories:
   - "Foojay"
   - "Java"
-tags:
 related_posts:
 frozen: false
 ---

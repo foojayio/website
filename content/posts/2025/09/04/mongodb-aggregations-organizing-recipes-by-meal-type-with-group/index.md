@@ -9,7 +9,6 @@ image: "mongologo.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb"

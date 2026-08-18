@@ -8,7 +8,6 @@ image: "Screenshot_20250901_220109.png"
 categories:
   - "AI"
   - "Conference"
-tags:
 related_posts:
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
   - "jc-ai-newsletter-4"

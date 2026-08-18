@@ -11,7 +11,6 @@ categories:
   - "Debugging"
   - "Kubernetes"
   - "Tools"
-tags:
 related_posts:
   - "software-testing-as-a-debugging-tool"
   - "debugging-streams-with-peek"

@@ -8,7 +8,6 @@ authors:
 image: "20260702-lottie4j-after.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
   - "lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost"

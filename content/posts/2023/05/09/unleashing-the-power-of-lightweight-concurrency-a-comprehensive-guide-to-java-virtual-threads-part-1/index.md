@@ -9,7 +9,6 @@ image: "2945feb6-1c67-4a75-9dd9-4b8d0cd1f6e5.jpeg"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "what-the-heck-is-project-loom-for-java"

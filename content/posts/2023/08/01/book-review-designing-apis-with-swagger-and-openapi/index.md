@@ -10,7 +10,6 @@ image: "Designing_APIs_with_Swagger_and_OpenAPI_large.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-announcement-openjdk-migration-guide-for-dummies"
   - "book-review-api-design-patterns"

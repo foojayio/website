@@ -12,7 +12,6 @@ categories:
   - "Embedded"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer"
   - "electronics-quarkus-qute-on-raspberry-pi"

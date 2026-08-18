@@ -9,7 +9,6 @@ image: "Screenshot-2023-10-19-at-12.28.35-2000x1509-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"

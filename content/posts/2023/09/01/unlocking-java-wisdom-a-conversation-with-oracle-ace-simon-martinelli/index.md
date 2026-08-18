@@ -8,7 +8,6 @@ authors:
 image: "Simon-Martinelli.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "interview-with-a-java-champion-reflections-on-a-storied-career-and-insights-for-the-next-generation"
   - "journey-of-a-java-champion-bert-jan-schrijvers-path-to-mastery-and-community-leadership"

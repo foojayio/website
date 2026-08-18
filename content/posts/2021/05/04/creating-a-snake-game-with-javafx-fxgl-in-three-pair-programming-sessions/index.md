@@ -11,7 +11,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "Pi4J"
-tags:
 related_posts:
   - "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
   - "the-javafx-revival"

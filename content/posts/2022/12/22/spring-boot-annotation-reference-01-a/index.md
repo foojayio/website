@@ -10,7 +10,6 @@ categories:
   - "Microservices"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "spring-boot-annotation-reference-01-b"
   - "a-simple-service-with-spring-boot"

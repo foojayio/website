@@ -12,7 +12,6 @@ categories:
   - "Research"
   - "Security"
   - "Tools"
-tags:
 related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"

@@ -9,7 +9,6 @@ authors:
 image: "JDK_Mission_Control_logo.png"
 categories:
   - "JDK Flight Recorder"
-tags:
 related_posts:
   - "jdk-mission-control-8-1-0-released"
   - "jmc-8-0-1-released"

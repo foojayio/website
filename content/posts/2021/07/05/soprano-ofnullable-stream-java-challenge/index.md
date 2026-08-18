@@ -8,7 +8,6 @@ authors:
 image: "soprano_challenge.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "stream-limit-filter-java-challenge"
   - "neo-stream-search-java-challenge"

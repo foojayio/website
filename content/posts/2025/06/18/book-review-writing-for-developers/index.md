@@ -10,7 +10,6 @@ image: "cover_large.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-monolith-to-microservices-part-2"
   - "book-review-openjdk-migration-for-dummies-2"

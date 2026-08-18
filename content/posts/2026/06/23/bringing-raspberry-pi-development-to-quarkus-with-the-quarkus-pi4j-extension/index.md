@@ -9,7 +9,6 @@ categories:
   - "Java Beginner"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "foojay-podcast-44"
   - "controlling-led-strips-with-java-and-jbang"

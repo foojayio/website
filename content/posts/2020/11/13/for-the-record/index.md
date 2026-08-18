@@ -9,7 +9,6 @@ authors:
 image: "records.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

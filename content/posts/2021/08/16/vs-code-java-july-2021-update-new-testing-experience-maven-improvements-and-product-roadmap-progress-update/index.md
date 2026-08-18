@@ -8,7 +8,6 @@ authors:
 image: "Testing-Decoration.gif"
 categories:
   - "VS Code"
-tags:
 related_posts:
 frozen: false
 ---

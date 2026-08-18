@@ -12,7 +12,6 @@ categories:
   - "Microservices"
   - "Payara"
   - "Spring"
-tags:
 related_posts:
   - "idempotent-spring-boot-starter"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"

@@ -9,7 +9,6 @@ image: "springbootdashboard-1.png"
 categories:
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "two-million-java-developers-on-visual-studio-code-november-2022-update"
   - "java-on-azure-tooling-update-october-2022"

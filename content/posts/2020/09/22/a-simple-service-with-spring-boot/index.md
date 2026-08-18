@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "baeldung-series-part-2-build-a-dashboard-with-cassandra-astra-and-cql-mapping-event-data"

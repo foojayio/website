@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Gradle"
   - "Spring"
-tags:
 related_posts:
   - "chopping-monolith"
   - "chopping-monolith-demo"

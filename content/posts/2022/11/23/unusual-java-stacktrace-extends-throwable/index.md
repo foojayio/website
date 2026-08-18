@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Java Core"
-tags:
 related_posts:
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
   - "creating-terabyte-sized-queues-with-low-latency"

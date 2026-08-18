@@ -9,7 +9,6 @@ image: "Screen-Shot-2021-03-28-at-4.05.45-PM.png"
 categories:
   - "Bach"
   - "JavaFX"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "building-javafx-with-gradle"

@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "avoiding-nullpointerexception"
   - "beginning-javafx-with-intellij"

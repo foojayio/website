@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Library"
   - "Release Notes"
-tags:
 related_posts:
   - "announcing-bx-ldap-enterprise-ldap-for-boxlang"
   - "boxlang-couchbase-module-enterprise-caching-distributed-locking-and-ai-vector-memory"

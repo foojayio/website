@@ -10,7 +10,6 @@ image: "dependency.png"
 categories:
   - "DevOps"
   - "Java Core"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "a-simple-service-with-spring-boot"

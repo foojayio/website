@@ -7,7 +7,6 @@ authors:
 image: "Technical_MDB_CreateMemory.png"
 categories:
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"

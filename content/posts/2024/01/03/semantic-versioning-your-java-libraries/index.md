@@ -9,7 +9,6 @@ image: "maven.png"
 categories:
   - "Java"
   - "Maven"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "5-great-reasons-to-use-jooq"

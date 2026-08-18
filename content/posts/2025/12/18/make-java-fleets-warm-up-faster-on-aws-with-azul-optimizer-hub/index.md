@@ -11,7 +11,6 @@ image: "Azul-Prime-Stable-2308.jpg"
 categories:
   - "Cloud"
   - "Performance"
-tags:
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "azul-brings-java-from-edge-to-cloud"

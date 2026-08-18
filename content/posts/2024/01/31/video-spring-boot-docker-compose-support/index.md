@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Spring"
   - "Videos"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"

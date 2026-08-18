@@ -12,7 +12,6 @@ categories:
   - "Campaigns"
   - "Pi4J"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

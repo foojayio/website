@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "OpenRewrite"
   - "Tutorials"
-tags:
 related_posts:
   - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
   - "ejb-support-in-piranha-via-cdi"

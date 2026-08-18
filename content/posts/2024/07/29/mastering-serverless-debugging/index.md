@@ -10,7 +10,6 @@ image: "ff47ff1d20fcebaea29f4f4afaf6bccf.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "why-is-kubernetes-debugging-so-problematic"
   - "debugging-kubernetes-part-1-an-introduction"

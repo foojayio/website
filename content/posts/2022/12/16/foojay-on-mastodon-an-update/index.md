@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Foojay"
   - "Tutorials"
-tags:
 related_posts:
   - "preparing-to-move-away-from-twitter"
   - "lets-start-a-java-mastodon-community-for-friends-of-openjdk"

@@ -14,7 +14,6 @@ categories:
   - "Java Beginner"
   - "Microservices"
   - "Tools"
-tags:
 related_posts:
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
   - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"

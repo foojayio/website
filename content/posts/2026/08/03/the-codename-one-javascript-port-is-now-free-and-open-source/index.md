@@ -8,7 +8,6 @@ authors:
 image: "javascript-free-open-source.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "own-your-pixels-native-fidelity-on-your-schedule"

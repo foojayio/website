@@ -11,7 +11,6 @@ categories:
   - "Microservices"
   - "Performance"
   - "Release Notes"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "foojay-podcast-17"

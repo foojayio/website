@@ -9,7 +9,6 @@ image: "Gemini_Generated_Image_6ad3g46ad3g46ad3.webp"
 categories:
   - "Java"
   - "LangChain4j"
-tags:
 related_posts:
   - "book-review-developing-apps-with-gpt-4-and-chatgpt"
   - "building-simple-home-assistant-langchain4j-raspberry-pi"

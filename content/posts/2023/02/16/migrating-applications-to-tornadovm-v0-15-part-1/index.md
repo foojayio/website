@@ -10,7 +10,6 @@ categories:
   - "Release Notes"
   - "Tools"
   - "TornadoVM"
-tags:
 related_posts:
   - "hardware-acceleration-for-java-tornadovm-can-do-it"
   - "a-flavour-of-tornadovm-on-apple-m1-pro"

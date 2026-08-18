@@ -10,7 +10,6 @@ image: "Spring-Digma.png"
 categories:
   - "Developer Tools"
   - "Observability"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "boldness-in-refactoring"

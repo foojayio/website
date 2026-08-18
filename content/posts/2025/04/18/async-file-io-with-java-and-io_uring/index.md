@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Project Panama"
-tags:
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "using-async-profiler-and-jattach-programmatically-with-ap-loader"

@@ -13,7 +13,6 @@ categories:
   - "Kotlin"
   - "Maven"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

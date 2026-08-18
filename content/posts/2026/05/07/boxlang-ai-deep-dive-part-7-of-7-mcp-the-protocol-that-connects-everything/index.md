@@ -12,7 +12,6 @@ categories:
   - "GenAI"
   - "LLM"
   - "Tutorials"
-tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"

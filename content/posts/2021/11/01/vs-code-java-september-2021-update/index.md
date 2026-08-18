@@ -9,7 +9,6 @@ image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2021/10/
 categories:
   - "Release Notes"
   - "VS Code"
-tags:
 related_posts:
   - "announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code"
   - "vs-code-java-august-updates-springone-updates-ux-improvements-community-feedback"

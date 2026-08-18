@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Research"
-tags:
 related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "augmenting-the-client-with-vue-js"

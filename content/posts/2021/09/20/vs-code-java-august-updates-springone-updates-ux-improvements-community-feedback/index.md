@@ -10,7 +10,6 @@ categories:
   - "Kotlin"
   - "Spring"
   - "VS Code"
-tags:
 related_posts:
   - "java-testing-with-vs-code"
   - "vs-code-java-july-2021-update-new-testing-experience-maven-improvements-and-product-roadmap-progress-update"

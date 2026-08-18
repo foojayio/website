@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "debugging-program-control-flow"
   - "debug-like-a-senior-developer"

@@ -12,7 +12,6 @@ categories:
   - "IntelliJ IDEA"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "viewing-dependencies-in-intellij-idea"
   - "migrating-from-java-ee-to-jakarta-ee-with-intellij-idea"

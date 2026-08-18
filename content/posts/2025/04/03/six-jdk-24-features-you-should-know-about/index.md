@@ -10,7 +10,6 @@ image: "six-jdk24-features.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-68"
   - "java-24-rolls-out-today-find-out-why-its-aptly-named"

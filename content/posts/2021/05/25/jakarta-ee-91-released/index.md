@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Microservices"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

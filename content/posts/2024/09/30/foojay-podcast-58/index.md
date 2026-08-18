@@ -18,7 +18,6 @@ categories:
   - "Observability"
   - "Podcast"
   - "Security"
-tags:
 related_posts:
   - "the-persistent-threat-why-major-vulnerabilities-like-log4shell-and-spring4shell-remain-significant"
   - "top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them"

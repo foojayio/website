@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Java Core"
   - "Microservices"
-tags:
 related_posts:
   - "peter-lawrey-latency-performance"
   - "a-closer-look-at-jfr-streaming"

@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"

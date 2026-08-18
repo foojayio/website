@@ -8,7 +8,6 @@ authors:
 image: "intellij-idea-default-changelist-nothing-selected.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "foojay-podcast-91"

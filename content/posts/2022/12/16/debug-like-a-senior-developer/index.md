@@ -12,7 +12,6 @@ categories:
   - "Tools"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "why-i-dont-do-tdd"
   - "internal-security-hardening-internal-systems"

@@ -11,7 +11,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Game Development"
   - "JavaFX"
-tags:
 related_posts:
   - "foojay-podcast-25"
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"

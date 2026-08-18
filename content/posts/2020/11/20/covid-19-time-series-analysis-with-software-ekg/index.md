@@ -9,7 +9,6 @@ image: "software-ekg-covid-01-1024x555.png"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

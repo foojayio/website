@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Java Core"
-tags:
 related_posts:
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"

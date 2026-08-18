@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "JUGs"
-tags:
 related_posts:
 frozen: false
 ---

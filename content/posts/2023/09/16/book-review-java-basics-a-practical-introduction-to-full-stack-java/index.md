@@ -9,7 +9,6 @@ image: "B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

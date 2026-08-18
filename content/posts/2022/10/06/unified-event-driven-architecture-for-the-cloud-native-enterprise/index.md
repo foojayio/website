@@ -13,7 +13,6 @@ categories:
   - "Databases"
   - "DataStax"
   - "Microservices"
-tags:
 related_posts:
   - "full-stream-ahead-astra-streaming-powered-by-apache-pulsar"
   - "event-driven-architecture-and-change-data-capture-made-easy"

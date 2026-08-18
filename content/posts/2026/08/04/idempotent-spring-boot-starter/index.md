@@ -14,7 +14,6 @@ categories:
   - "Performance"
   - "Redis"
   - "Tutorials"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "spring-ai-agents-no-second-runtime"

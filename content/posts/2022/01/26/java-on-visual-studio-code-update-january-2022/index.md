@@ -8,7 +8,6 @@ authors:
 image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/01/roadmap2022-1.png"
 categories:
   - "VS Code"
-tags:
 related_posts:
   - "say-goodbye-to-project-files-in-visual-studio-code"
   - "vs-code-java-september-2021-update"

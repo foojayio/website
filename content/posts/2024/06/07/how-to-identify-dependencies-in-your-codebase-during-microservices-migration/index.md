@@ -9,7 +9,6 @@ image: "Digmo-and-teelscope.jpeg"
 categories:
   - "Microservices"
   - "Tools"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"

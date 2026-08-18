@@ -8,7 +8,6 @@ authors:
 image: "19d24567-abd1-47f8-ab6d-1a8f05cd3801.jpeg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "foojay-all-about-java-and-the-openjdk-i-programmer"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

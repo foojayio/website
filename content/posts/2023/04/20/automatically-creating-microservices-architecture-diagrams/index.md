@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Cloud"
   - "Microservices"
-tags:
 related_posts:
   - "chronicle-wire-object-marshalling"
   - "creating-terabyte-sized-queues-with-low-latency"

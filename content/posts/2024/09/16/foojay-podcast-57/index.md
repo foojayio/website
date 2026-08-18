@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "JDK 23"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-56"
   - "foojay-podcast-55"

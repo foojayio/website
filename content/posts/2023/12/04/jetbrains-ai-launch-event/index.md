@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "Machine Learning"
   - "Tools"
-tags:
 related_posts:
   - "analyzing-dependencies-in-intellij-idea"
   - "beginning-javafx-with-intellij"

@@ -11,7 +11,6 @@ categories:
   - "Microservices"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

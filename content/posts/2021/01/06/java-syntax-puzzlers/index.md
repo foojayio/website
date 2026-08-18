@@ -8,7 +8,6 @@ authors:
 image: "muskallatweet-700x129.png"
 categories:
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

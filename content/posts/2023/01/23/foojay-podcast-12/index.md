@@ -18,7 +18,6 @@ categories:
   - "Podcast"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "java-on-visual-studio-code-update-december-2022"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

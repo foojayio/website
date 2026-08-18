@@ -9,7 +9,6 @@ image: "omnifish-logo-transparent-400px-margin.png"
 categories:
   - "Jakarta EE"
   - "Surveys"
-tags:
 related_posts:
   - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
   - "ejb-support-in-piranha-via-cdi"

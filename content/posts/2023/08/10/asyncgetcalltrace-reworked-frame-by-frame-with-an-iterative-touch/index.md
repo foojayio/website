@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "JEPs"
   - "Performance"
-tags:
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "class-loader-hierarchies"

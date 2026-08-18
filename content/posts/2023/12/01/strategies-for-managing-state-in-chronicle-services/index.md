@@ -14,7 +14,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Microservices"
-tags:
 related_posts:
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "automatically-creating-microservices-architecture-diagrams"

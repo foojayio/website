@@ -11,7 +11,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "Use Cases"
-tags:
 related_posts:
   - "deep-learning-in-java-for-drug-discovery"
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"

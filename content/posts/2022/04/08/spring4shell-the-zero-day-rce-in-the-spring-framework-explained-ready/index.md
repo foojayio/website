@@ -10,7 +10,6 @@ image: "blog-hero-code-vulnerability-warning-1536x384-1.jpeg"
 categories:
   - "Security"
   - "Spring"
-tags:
 related_posts:
   - "log4j-isnt-killing-java"
   - "log4shell-leak4j"

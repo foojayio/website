@@ -9,7 +9,6 @@ image: "distro-choice.jpg"
 categories:
   - "DevOps"
   - "Microservices"
-tags:
 related_posts:
   - "github-actions-with-java-part-1"
   - "container-awareness-for-java"

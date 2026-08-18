@@ -10,7 +10,6 @@ categories:
   - "Conference"
   - "Events"
   - "Trip Reports"
-tags:
 related_posts:
 frozen: false
 ---

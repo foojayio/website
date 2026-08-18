@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Java Core"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

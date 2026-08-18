@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "faster-maven-builds-1"
   - "faster-maven-builds-part-2"

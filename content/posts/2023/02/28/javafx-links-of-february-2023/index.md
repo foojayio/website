@@ -9,7 +9,6 @@ image: "newreleases.png"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "javafx-links-of-january-2023"
   - "javafx-links-of-december"

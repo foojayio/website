@@ -10,7 +10,6 @@ categories:
   - "Jelastic"
   - "Microservices"
   - "Tutorials"
-tags:
 related_posts:
   - "5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile"
   - "fantastic-jvms-and-where-to-find-them"

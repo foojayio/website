@@ -8,7 +8,6 @@ authors:
 image: "54521451118_839e4e684e_o.jpg"
 categories:
   - "Events"
-tags:
 related_posts:
 frozen: false
 ---

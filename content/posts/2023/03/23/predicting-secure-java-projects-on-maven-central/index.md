@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Maven"
   - "Security"
-tags:
 related_posts:
   - "sboms-first-steps-in-a-new-journey-for-developers"
   - "how-to-create-sboms-in-java-with-maven-and-gradle"

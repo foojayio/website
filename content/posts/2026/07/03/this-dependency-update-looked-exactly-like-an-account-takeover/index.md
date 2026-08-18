@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Maven"
   - "Security"
-tags:
 related_posts:
   - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"

@@ -14,7 +14,6 @@ categories:
   - "Java"
   - "Machine Learning"
   - "Microservices"
-tags:
 related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"
   - "calling-gemma-with-ollama-testcontainers-and-langchain4j"

@@ -14,7 +14,6 @@ categories:
   - "Microservices"
   - "Spring"
   - "Testing"
-tags:
 related_posts:
   - "book-review-help-your-boss-help-you"
   - "book-review-openjdk-migration-for-dummies-2"

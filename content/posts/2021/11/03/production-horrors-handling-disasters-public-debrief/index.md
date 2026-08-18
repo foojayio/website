@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Production-Horrors_Halloween.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "the-debugger-checklist-part-i"
   - "the-debugger-checklist-part-ii"

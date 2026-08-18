@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "Release Notes"
-tags:
 related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "book-review-practical-design-patterns-for-java-developers"

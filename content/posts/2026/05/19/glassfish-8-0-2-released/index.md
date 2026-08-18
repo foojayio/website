@@ -7,7 +7,6 @@ authors:
 image: "glassfish-802-banner-2-smaller.png"
 categories:
   - "Jakarta EE"
-tags:
 related_posts:
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
   - "glassfish-is-rolling-forward-whats-new"

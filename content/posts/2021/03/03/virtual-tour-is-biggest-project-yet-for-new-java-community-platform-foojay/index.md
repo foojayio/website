@@ -10,7 +10,6 @@ image: "Foojay-Tour_Monitor-Twitter_Dark-1150x647-1.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
 frozen: false
 ---

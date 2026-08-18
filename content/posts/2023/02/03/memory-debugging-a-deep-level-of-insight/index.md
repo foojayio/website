@@ -9,7 +9,6 @@ authors:
 image: "thumbnail-8.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "debugging-streams-and-collections"
   - "the-massive-hidden-power-of-breakpoints"

@@ -10,7 +10,6 @@ image: "Screen-Shot-2022-07-17-at-10.38.24-700x418-1.png"
 categories:
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "external-debugging-tools-1-dtrace-and-strace"
   - "understand-the-root-cause-of-regressions-with-git-bisect"

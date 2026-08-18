@@ -9,7 +9,6 @@ authors:
 image: "cover-1024x683.png"
 categories:
   - "Observability"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

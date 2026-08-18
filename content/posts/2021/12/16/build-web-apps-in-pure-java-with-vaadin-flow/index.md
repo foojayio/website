@@ -9,7 +9,6 @@ image: "VaadinLogo_RGB_500x155.png"
 categories:
   - "Tutorials"
   - "Vaadin"
-tags:
 related_posts:
   - "new-book-practical-vaadin"
   - "vaadin-22-released-with-quarkus-support-and-stateless-fusion"

@@ -10,7 +10,6 @@ image: "concrete-block.jpeg"
 categories:
   - "Kotlin"
   - "Testing"
-tags:
 related_posts:
   - "my-final-take-on-gradle-vs-maven"
   - "my-first-steps-with-playwright"

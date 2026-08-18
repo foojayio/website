@@ -10,7 +10,6 @@ image: "Lightrun_-_blog_banner_How_to_Debug_Race_Conditions_Between_Threads_in_J
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "the-basics-of-breakpoints-you-might-not-know"

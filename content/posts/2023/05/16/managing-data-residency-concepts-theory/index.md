@@ -12,7 +12,6 @@ categories:
   - "DataEngineering"
   - "Microservices"
   - "Research"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "a-list-of-cache-providers"

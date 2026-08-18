@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Kubernetes"
   - "OpenTelemetry"
-tags:
 related_posts:
 frozen: false
 ---

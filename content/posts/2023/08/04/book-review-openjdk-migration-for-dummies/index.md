@@ -13,7 +13,6 @@ categories:
   - "OpenJDK Migration"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

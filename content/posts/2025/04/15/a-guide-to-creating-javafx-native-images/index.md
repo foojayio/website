@@ -8,7 +8,6 @@ authors:
 image: "graalvm-docs.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "speed-up-your-spring-batch-with-native-image-and-graalvm"
   - "web-app-startup-in-3ms-with-rife2-and-graalvm"

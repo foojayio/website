@@ -10,7 +10,6 @@ image: "java-jetty-htmx.png"
 categories:
   - "Developer Tools"
   - "Videos"
-tags:
 related_posts:
   - "book-review-modern-frontends-with-htmx"
   - "foojay-podcast-41"

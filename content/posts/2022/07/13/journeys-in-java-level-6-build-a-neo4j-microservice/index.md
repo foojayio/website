@@ -12,7 +12,6 @@ categories:
   - "Microservices"
   - "Neo4J"
   - "Spring"
-tags:
 related_posts:
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "journeys-in-java-level-2-building-an-empire-of-microservices"

@@ -9,7 +9,6 @@ image: "1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Cloud"
   - "Spring"
-tags:
 related_posts:
   - "starting-docker-desktop-with-spring-boot"
   - "a-simple-service-with-spring-boot"

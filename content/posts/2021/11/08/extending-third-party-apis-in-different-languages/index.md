@@ -10,7 +10,6 @@ image: "puzzle-g3926dee11_1280.jpg"
 categories:
   - "Kotlin"
   - "Research"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "annotation-free-spring"

@@ -11,7 +11,6 @@ categories:
   - "Spring"
   - "Testcontainers"
   - "Testing"
-tags:
 related_posts:
   - "unit-testing-supabase-in-kotlin"
   - "api-mocking-essential-and-redundant"

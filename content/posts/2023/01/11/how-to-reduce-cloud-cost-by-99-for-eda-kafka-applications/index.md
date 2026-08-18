@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Kafka"
   - "Performance"
-tags:
 related_posts:
   - "kafka-vs-chronicle-for-microservices-which-is-750-times-faster"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"

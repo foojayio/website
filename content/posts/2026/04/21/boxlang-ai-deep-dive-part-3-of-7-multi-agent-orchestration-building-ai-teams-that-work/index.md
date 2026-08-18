@@ -11,7 +11,6 @@ categories:
   - "BoxLang"
   - "GenAI"
   - "Java"
-tags:
 related_posts:
   - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"

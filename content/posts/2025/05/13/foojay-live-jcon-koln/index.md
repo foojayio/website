@@ -8,7 +8,6 @@ authors:
 image: "foojay-at-jcon-booth-1-scaled.jpg"
 categories:
   - "Interviews"
-tags:
 related_posts:
 frozen: false
 ---

@@ -8,7 +8,6 @@ authors:
 image: "gauge-510x510.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-vi"

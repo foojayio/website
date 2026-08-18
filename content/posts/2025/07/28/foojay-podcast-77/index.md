@@ -10,7 +10,6 @@ image: "episode-77-decbcn-part-2.jpg"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-76"
   - "foojay-podcast-75"

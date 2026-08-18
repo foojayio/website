@@ -10,7 +10,6 @@ image: "intellij-autocomplete-1.png"
 categories:
   - "Java"
   - "Spring"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"

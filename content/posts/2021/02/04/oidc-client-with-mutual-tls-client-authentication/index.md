@@ -9,7 +9,6 @@ image: "image-9.png"
 categories:
   - "Security"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

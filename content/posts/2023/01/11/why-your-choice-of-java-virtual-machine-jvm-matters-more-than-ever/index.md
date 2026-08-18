@@ -10,7 +10,6 @@ image: "blog-image-platform-prime.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "JEPs"
   - "Sealed Classes"
-tags:
 related_posts:
   - "project-panama-for-newbies-part-1"
   - "java-17-on-the-raspberry-pi"

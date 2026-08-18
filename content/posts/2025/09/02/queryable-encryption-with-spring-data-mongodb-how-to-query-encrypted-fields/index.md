@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Mongo"
   - "Spring"
-tags:
 related_posts:
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"

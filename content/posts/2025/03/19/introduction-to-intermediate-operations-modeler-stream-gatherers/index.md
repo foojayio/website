@@ -8,7 +8,6 @@ authors:
 image: "gatherer.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
   - "foojay-podcast-68"

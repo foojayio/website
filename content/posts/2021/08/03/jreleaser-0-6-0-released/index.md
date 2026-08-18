@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"
-tags:
 related_posts:
   - "jreleaser-0-10-0-released"
   - "jreleaser-0-9-0-released"

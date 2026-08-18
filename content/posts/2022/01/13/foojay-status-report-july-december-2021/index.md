@@ -9,7 +9,6 @@ image: "first-half-second-half.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "foojay-status-report-january-june-2021"
   - "friends-of-openjdk-at-fosdem-2022"

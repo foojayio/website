@@ -8,7 +8,6 @@ authors:
 image: "buttons.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-vi"

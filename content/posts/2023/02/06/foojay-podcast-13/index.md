@@ -9,7 +9,6 @@ image: "denver-and-boulder-jug-guests-1024x394-1.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-12"
   - "foojay-podcast-11"

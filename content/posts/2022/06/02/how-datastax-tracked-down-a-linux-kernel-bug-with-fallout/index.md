@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "Databases"
   - "Performance"
-tags:
 related_posts:
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
   - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"

@@ -12,7 +12,6 @@ categories:
   - "Databases"
   - "DevOps"
   - "Use Cases"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

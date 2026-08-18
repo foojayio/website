@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Time-Travel-Debuggers-01.jpg"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "book-review-why-programs-fail"

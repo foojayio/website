@@ -18,7 +18,6 @@ categories:
   - "Opinion"
   - "Research"
   - "Tutorials"
-tags:
 related_posts:
   - "jc-ai-newsletter-16"
   - "jc-ai-newsletter-14"

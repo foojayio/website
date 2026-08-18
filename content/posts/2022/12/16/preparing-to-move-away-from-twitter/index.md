@@ -9,7 +9,6 @@ authors:
 image: "Mastodon_Logotype_Simple.svg.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "foojay-on-mastodon-an-update"
   - "foojay-mastodon-service-here-it-is"

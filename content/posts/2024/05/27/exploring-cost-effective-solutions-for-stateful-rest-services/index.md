@@ -15,7 +15,6 @@ categories:
   - "Performance"
   - "Research"
   - "Spring"
-tags:
 related_posts:
   - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
   - "microstream-part-1-what-is-it"

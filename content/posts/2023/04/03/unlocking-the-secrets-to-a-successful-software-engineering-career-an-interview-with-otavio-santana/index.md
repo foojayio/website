@@ -8,7 +8,6 @@ authors:
 image: "Otavio-Santana-.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

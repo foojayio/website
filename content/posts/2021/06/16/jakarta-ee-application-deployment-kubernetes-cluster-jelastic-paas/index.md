@@ -12,7 +12,6 @@ categories:
   - "Jelastic"
   - "Kubernetes"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "building-java-microservices-with-the-repository-pattern"
   - "building-rest-apis-in-java-with-spring-boot"

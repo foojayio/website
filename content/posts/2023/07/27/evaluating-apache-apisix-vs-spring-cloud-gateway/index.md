@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Opinion"
   - "Research"
-tags:
 related_posts:
   - "guide-lazyinitializationexception"
   - "kotlin-delegation"

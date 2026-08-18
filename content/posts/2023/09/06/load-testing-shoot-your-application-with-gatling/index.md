@@ -11,7 +11,6 @@ categories:
   - "Testing"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "pitest-do-you-test-your-tests"
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"

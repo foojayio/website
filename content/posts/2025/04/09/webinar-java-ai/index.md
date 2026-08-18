@@ -11,7 +11,6 @@ image: "20250428_Java_AI.png"
 categories:
   - "Events"
   - "Machine Learning"
-tags:
 related_posts:
   - "foojay-podcast-29"
   - "getting-started-with-deep-learning-in-java-using-deep-netts"

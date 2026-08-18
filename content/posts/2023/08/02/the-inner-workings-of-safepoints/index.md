@@ -8,7 +8,6 @@ authors:
 image: "safepoint-2000x726-1.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "class-loader-hierarchies"

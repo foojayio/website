@@ -12,7 +12,6 @@ categories:
   - "Performance"
   - "Project Panama"
   - "Tutorials"
-tags:
 related_posts:
   - "project-panama-for-newbies-part-1"
   - "project-panama-for-newbies-part-2"

@@ -9,7 +9,6 @@ authors:
 image: "hand-g44f04ca75.jpg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "comparison-fault-tolerance-libraries"

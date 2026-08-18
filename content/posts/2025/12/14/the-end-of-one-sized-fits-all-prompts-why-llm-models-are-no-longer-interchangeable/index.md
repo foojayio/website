@@ -13,7 +13,6 @@ categories:
   - "Developer Tools"
   - "GenAI"
   - "Machine Learning"
-tags:
 related_posts:
   - "coderabbit-tutorial-for-java-developers"
   - "how-coderabbits-agentic-code-validation-helps-with-code-reviews"

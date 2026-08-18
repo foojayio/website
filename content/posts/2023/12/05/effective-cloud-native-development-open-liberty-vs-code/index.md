@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "start-using-java-21"
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"

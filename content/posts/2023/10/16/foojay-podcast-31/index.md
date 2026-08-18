@@ -14,7 +14,6 @@ categories:
   - "Machine Learning"
   - "Podcast"
   - "Videos"
-tags:
 related_posts:
   - "foojay-podcast-30"
   - "foojay-podcast-29"

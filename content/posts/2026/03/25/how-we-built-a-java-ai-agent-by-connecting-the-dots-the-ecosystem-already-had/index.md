@@ -8,7 +8,6 @@ image: "ThumbClawRunr.png"
 categories:
   - "AI"
   - "Java"
-tags:
 related_posts:
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"

@@ -22,7 +22,6 @@ categories:
   - "Podcast"
   - "Security"
   - "Tutorials"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"

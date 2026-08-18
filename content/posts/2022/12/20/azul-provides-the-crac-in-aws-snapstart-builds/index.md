@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
   - "java-performance-ahead-of-time-versus-just-in-time"

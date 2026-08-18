@@ -11,7 +11,6 @@ categories:
   - "JavaFX"
   - "Raspberry Pi"
   - "Tutorials"
-tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
   - "dive-into-the-openjdk-top-10-reads-on-foojay-io"

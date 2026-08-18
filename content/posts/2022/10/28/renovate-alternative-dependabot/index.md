@@ -13,7 +13,6 @@ categories:
   - "DevOps"
   - "Renovate"
   - "Tools"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

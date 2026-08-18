@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "building-javafx-with-gradle"

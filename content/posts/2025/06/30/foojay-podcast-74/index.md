@@ -10,7 +10,6 @@ categories:
   - "Conference"
   - "LangChain4j"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-73"
   - "foojay-podcast-72"

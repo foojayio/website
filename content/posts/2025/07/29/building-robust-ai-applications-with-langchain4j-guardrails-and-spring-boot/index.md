@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "LangChain4j"
   - "Machine Learning"
-tags:
 related_posts:
   - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Java"
   - "Microservices"
-tags:
 related_posts:
   - "achieving-high-throughput-without-sacrificing-latency"
   - "automatically-creating-microservices-architecture-diagrams"

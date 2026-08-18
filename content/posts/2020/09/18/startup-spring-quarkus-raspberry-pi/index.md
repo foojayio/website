@@ -10,7 +10,6 @@ image: "db_sensor.jpg"
 categories:
   - "Performance"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "azul-zulu-openjdk-15-on-raspberry-pi"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"

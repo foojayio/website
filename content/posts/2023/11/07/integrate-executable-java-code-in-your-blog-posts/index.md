@@ -10,7 +10,6 @@ categories:
   - "Foojay"
   - "Java Beginner"
   - "Tutorials"
-tags:
 related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
   - "how-to-add-an-event-to-the-foojay-event-calendar"

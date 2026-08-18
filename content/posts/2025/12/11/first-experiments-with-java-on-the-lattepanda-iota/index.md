@@ -14,7 +14,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Videos"
-tags:
 related_posts:
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "javafx-links-of-november-2025"

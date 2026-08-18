@@ -14,7 +14,6 @@ categories:
   - "Foojay"
   - "Java"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-71"
   - "foojay-podcast-70"

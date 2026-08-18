@@ -10,7 +10,6 @@ image: "thumbnail-6.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "debug-like-a-senior-developer"
   - "debugging-program-control-flow"

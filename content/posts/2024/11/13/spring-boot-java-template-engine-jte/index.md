@@ -12,7 +12,6 @@ categories:
   - "Maven"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

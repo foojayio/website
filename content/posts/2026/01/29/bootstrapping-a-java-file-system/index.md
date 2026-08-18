@@ -9,7 +9,6 @@ image: "disk-controller.jpg"
 categories:
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "semantic-versioning-your-java-libraries"
   - "7-habits-of-highly-effective-java-coding"

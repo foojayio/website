@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Observability"
   - "OpenTelemetry"
-tags:
 related_posts:
   - "how-to-detect-cache-misses-using-observability"
   - "effective-coding-with-java-observability"

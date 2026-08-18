@@ -10,7 +10,6 @@ image: "pexels-james-wheeler-1578750.jpg"
 categories:
   - "DevOps"
   - "GitLab"
-tags:
 related_posts:
   - "gitlab-continuous-deployment-one-stop-shop"
   - "how-to-beautify-your-github-repo"

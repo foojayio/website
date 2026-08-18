@@ -12,7 +12,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "Tutorials"
-tags:
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"

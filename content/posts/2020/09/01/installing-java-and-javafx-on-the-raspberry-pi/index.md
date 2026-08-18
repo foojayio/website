@@ -10,7 +10,6 @@ image: "https://webtechie.be/images/2020-04-08/java-versions-on-pi.png"
 categories:
   - "JavaFX"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"

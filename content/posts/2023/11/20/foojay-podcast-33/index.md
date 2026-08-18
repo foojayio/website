@@ -9,7 +9,6 @@ image: "foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-32-philippines-jug"
   - "foojay-podcast-31"

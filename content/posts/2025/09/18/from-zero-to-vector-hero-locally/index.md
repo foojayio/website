@@ -9,7 +9,6 @@ image: "Screenshot-2025-09-18-at-10.22.30-AM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "building-rest-apis-in-java-with-spring-boot"

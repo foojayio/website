@@ -8,7 +8,6 @@ authors:
 image: "cover_large.jpg"
 categories:
   - "Conference"
-tags:
 related_posts:
 frozen: false
 ---

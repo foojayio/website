@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "changes-included-in-the-stable-release-23-08-of-azul-zulu-prime-builds-of-openjdk"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

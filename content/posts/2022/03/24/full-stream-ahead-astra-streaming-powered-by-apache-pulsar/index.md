@@ -12,7 +12,6 @@ categories:
   - "DataStax"
   - "DevOps"
   - "Microservices"
-tags:
 related_posts:
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"

@@ -13,7 +13,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-82"
   - "foojay-podcast-81"

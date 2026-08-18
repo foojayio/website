@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Microservices"
   - "Performance"
-tags:
 related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"
   - "java-performance-ahead-of-time-versus-just-in-time"

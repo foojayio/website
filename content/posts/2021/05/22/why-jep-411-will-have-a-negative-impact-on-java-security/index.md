@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "JEPs"
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

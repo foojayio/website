@@ -9,7 +9,6 @@ image: "azullogo.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
   - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"

@@ -9,7 +9,6 @@ authors:
 image: "cover-testing-1024x683.png"
 categories:
   - "OpenRewrite"
-tags:
 related_posts:
   - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
   - "authoring-an-openrewrite-recipe"

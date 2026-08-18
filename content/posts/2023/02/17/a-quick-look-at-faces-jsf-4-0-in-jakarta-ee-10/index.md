@@ -11,7 +11,6 @@ image: "Screenshot_20230110_135104.png"
 categories:
   - "Jakarta EE"
   - "Tools"
-tags:
 related_posts:
   - "easy-jakarta-ee-integration-testing"
   - "evolution-of-microservices"

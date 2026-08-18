@@ -10,7 +10,6 @@ image: "6799d702e1bf5cdf944ca20059345fd8.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "unleashing-the-power-of-git-bisect"
   - "debugging-kubernetes-troubleshooting-guide"

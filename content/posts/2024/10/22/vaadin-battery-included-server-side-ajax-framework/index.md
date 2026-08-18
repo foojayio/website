@@ -9,7 +9,6 @@ authors:
 image: "reindeer-5635891.jpg"
 categories:
   - "Vaadin"
-tags:
 related_posts:
   - "browserless-testing-of-vaadin-applications-with-karibu-testing"
   - "video-vaadin-drag-drop-support-its-so-easy"

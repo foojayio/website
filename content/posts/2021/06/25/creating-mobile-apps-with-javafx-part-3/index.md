@@ -9,7 +9,6 @@ image: "TiltMaze-android-small.png"
 categories:
   - "Game Development"
   - "JavaFX"
-tags:
 related_posts:
   - "creating-mobile-apps-with-javafx-part-1"
   - "creating-mobile-apps-with-javafx-part-2"

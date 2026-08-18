@@ -10,7 +10,6 @@ image: "slip-up-gfc8436d7a_large.jpg"
 categories:
   - "Java Core"
   - "Kotlin"
-tags:
 related_posts:
   - "much-ado-about-nothing-in-java"
   - "handling-null-optional-and-nullable-types"

@@ -11,7 +11,6 @@ categories:
   - "Eclipse"
   - "IntelliJ IDEA"
   - "NetBeans"
-tags:
 related_posts:
   - "write-once-run-embedded-in-any-ide"
   - "hand-ground-coffee-command-line-tools-for-java"

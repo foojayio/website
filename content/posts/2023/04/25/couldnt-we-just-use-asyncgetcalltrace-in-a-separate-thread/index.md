@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "do-you-trust-profilers-i-once-did-too"
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"

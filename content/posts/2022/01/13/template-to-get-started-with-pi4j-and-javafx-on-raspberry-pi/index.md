@@ -12,7 +12,6 @@ categories:
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "pi4j-v-2-released"
   - "java-17-on-the-raspberry-pi"

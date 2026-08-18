@@ -12,7 +12,6 @@ image: "episode-59-devrel-2.jpg"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-58"
   - "foojay-podcast-57"

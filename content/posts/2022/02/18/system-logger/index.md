@@ -9,7 +9,6 @@ authors:
 image: "logs-g95e68d9dc.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-functional-programming-techniques-in-java-a-primer"

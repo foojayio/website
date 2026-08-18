@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "peter-lawrey-latency-performance"

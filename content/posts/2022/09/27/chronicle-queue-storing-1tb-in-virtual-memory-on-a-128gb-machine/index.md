@@ -10,7 +10,6 @@ categories:
   - "DataEngineering"
   - "DevOps"
   - "Java Core"
-tags:
 related_posts:
   - "building-reactive-java-applications-with-spring-framework"
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"

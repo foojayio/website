@@ -13,7 +13,6 @@ categories:
   - "nosql"
   - "Redis"
   - "Tutorials"
-tags:
 related_posts:
   - "fixed-window-counter-rate-limiter-redis-java"
   - "token-bucket-rate-limiter-redis-java"

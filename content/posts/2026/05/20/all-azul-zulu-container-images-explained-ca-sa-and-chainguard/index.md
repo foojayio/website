@@ -9,7 +9,6 @@ image: "azul-zulu-ca-sa-chainguard.avif"
 categories:
   - "Cloud"
   - "Java"
-tags:
 related_posts:
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
   - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"

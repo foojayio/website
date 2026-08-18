@@ -10,7 +10,6 @@ image: "idea.png"
 categories:
   - "Cloud"
   - "Use Cases"
-tags:
 related_posts:
   - "2024-in-retrospective-nicolas-frankel"
   - "blockhound-how-it-works"

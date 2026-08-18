@@ -13,7 +13,6 @@ categories:
   - "JavaFX"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "wordish-with-javafx-part-1"
   - "beginning-javafx-with-intellij"

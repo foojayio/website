@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-thread-programming-part-9"
   - "java-thread-programming-part-8"

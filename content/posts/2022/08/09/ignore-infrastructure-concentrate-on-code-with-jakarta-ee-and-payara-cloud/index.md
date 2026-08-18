@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Jakarta EE"
   - "Payara"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

@@ -9,7 +9,6 @@ authors:
 image: "notebook-1840276.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

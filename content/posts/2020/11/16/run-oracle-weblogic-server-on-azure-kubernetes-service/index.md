@@ -9,7 +9,6 @@ image: "weblogic-architecture-aks.png"
 categories:
   - "Kubernetes"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

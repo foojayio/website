@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Machine Learning"
   - "Tutorials"
-tags:
 related_posts:
   - "book-review-quarkus-for-spring-developers"
   - "native-graphql-api-with-neo4j-auradb-on-heroku"

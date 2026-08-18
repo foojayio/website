@@ -14,7 +14,6 @@ categories:
   - "Java"
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "azul-zulu-openjdk-15-on-raspberry-pi"
   - "running-javafx-applications-on-arm-with-azul-zulu"

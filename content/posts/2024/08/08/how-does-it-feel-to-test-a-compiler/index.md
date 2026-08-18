@@ -10,7 +10,6 @@ image: "icon.png"
 categories:
   - "Kotlin"
   - "Testing"
-tags:
 related_posts:
   - "foojay-podcast-54"
   - "book-review-frontend-development-with-javafx-and-kotlin"

@@ -8,7 +8,6 @@ authors:
 image: "aaron-burden-6jYoil2GhVk-unsplash-scaled.jpg"
 categories:
   - "Agile"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "an-example-of-overengineering-keep-it-wet"

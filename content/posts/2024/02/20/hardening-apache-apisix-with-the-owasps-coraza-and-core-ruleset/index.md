@@ -10,7 +10,6 @@ image: "img-HDlf4Xx9m1iqS0Ico3oBZ-1024x683.png"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"

@@ -8,7 +8,6 @@ authors:
 image: "cap-1024x767.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"

@@ -9,7 +9,6 @@ authors:
 image: "DALL-E-2022-08-17-13.51.17-mainframe-in-the-clouds-artistic-epic.png"
 categories:
   - "Cloud"
-tags:
 related_posts:
   - "what-is-debugging-in-140-seconds"
   - "production-horrors-handling-disasters-public-debrief"

@@ -9,7 +9,6 @@ image: "question-mark-1872665_1280.jpg"
 categories:
   - "Research"
   - "Surveys"
-tags:
 related_posts:
   - "join-slack-com-t-foojay-signup"
   - "book-review-effortless-cloud-native-app-development-using-skaffold"

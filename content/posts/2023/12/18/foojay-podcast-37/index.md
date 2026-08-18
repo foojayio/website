@@ -9,7 +9,6 @@ image: "podcast-jfall-4.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-36"
   - "foojay-podcast-34"

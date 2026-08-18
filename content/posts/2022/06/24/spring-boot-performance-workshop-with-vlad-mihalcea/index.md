@@ -12,7 +12,6 @@ categories:
   - "Spring"
   - "sql"
   - "Trip Reports"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "debugging-jaxb-production-issues"

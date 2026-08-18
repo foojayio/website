@@ -11,7 +11,6 @@ categories:
   - "JEPs"
   - "Performance"
   - "Project Panama"
-tags:
 related_posts:
   - "foojay-all-about-java-and-the-openjdk-i-programmer"
   - "7-ways-to-contribute-to-openjdk"

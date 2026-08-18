@@ -9,7 +9,6 @@ image: "tamingthymeleaf.png"
 categories:
   - "Book Announcement"
   - "Books"
-tags:
 related_posts:
   - "book-review-modern-frontends-with-htmx"
   - "foojay-podcast-67"

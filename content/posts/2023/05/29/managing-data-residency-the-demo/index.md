@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "DataEngineering"
   - "DevOps"
-tags:
 related_posts:
   - "managing-data-residency-concepts-theory"
   - "a-list-of-cache-providers"

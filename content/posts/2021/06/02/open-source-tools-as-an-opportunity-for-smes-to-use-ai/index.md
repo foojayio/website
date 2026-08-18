@@ -10,7 +10,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "Research"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "introduction-to-maven-toolchains"
   - "git-archeology"

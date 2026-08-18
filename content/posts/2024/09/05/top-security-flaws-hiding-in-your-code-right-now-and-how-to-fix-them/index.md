@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Security"
-tags:
 related_posts:
   - "ensuring-the-right-usage-of-java-21-new-features"
   - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"

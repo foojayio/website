@@ -9,7 +9,6 @@ image: "java17.png"
 categories:
   - "Release Notes"
   - "VS Code"
-tags:
 related_posts:
   - "java-testing-with-vs-code"
   - "vs-code-getting-better-and-better-for-java"

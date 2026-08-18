@@ -12,7 +12,6 @@ categories:
   - "nosql"
   - "Redis"
   - "Tutorials"
-tags:
 related_posts:
   - "agent-memory-with-spring-ai-redis"
   - "semantic-search-with-spring-boot-redis"

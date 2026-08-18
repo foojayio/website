@@ -9,7 +9,6 @@ image: "Release-Thumbail-October-09-e1602683979477.jpg"
 categories:
   - "Microservices"
   - "Release Notes"
-tags:
 related_posts:
   - "whats-new-in-the-july-2026-azul-payara-release"
 frozen: false

@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "DevOps"
   - "Release Notes"
-tags:
 related_posts:
   - "jreleaser-looking-for-translation-contributions"
   - "jreleaser-0-7-0-released"

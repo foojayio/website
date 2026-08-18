@@ -9,7 +9,6 @@ authors:
 image: "img-BuLDzx81CexYQAzkaF36h-1.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "secure-your-api-with-these-16-practices-with-apache-apisix-part-1"
   - "apisix-api-gateway"

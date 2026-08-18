@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "java-panama-polyglot-part-3"
   - "idempotent-spring-boot-starter"

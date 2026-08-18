@@ -9,7 +9,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Release Notes"
-tags:
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
   - "azul-zulu-april-2026-quarterly-update-released"

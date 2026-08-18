@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-1-14-0-introducing-inner-classes"
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"

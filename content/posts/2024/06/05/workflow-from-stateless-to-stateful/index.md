@@ -9,7 +9,6 @@ authors:
 image: "work-6671449.jpg"
 categories:
   - "Use Cases"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

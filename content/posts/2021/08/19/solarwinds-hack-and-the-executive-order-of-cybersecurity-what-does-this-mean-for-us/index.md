@@ -12,7 +12,6 @@ categories:
   - "JFrog Xray"
   - "Security"
   - "Videos"
-tags:
 related_posts:
   - "spring-remote-code-execution-vulnerability"
   - "detecting-investigating-and-verifying-fixes-for-security-incidents-and-zero-day-issues-using-lightrun"

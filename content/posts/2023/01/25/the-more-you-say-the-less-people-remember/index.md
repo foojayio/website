@@ -10,7 +10,6 @@ categories:
   - "Agile"
   - "Chronicle Software"
   - "Opinion"
-tags:
 related_posts:
   - "book-review-why-programs-fail"
   - "high-performance-java-serialisation"

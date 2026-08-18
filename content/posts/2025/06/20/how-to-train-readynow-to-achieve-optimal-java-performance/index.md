@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "faster-java-warmup-crac-versus-readynow"

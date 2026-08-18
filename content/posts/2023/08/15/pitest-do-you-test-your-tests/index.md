@@ -9,7 +9,6 @@ image: "report5-1024x601-1.png"
 categories:
   - "Testing"
   - "Tutorials"
-tags:
 related_posts:
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
   - "exhaustive-junit5-testing-with-combinations-permutations-and-products"

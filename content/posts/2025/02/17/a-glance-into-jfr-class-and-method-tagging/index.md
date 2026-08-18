@@ -9,7 +9,6 @@ image: "tag-1-2000x1086-1.png"
 categories:
   - "Developer Tools"
   - "Performance"
-tags:
 related_posts:
   - "a-closer-look-at-jfr-streaming"
   - "using-java-flight-recorder-and-mission-control-part-2"

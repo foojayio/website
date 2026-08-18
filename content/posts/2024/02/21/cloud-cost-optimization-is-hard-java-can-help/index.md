@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Videos"
-tags:
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"

@@ -15,7 +15,6 @@ categories:
   - "Security"
   - "Testcontainers"
   - "Testing"
-tags:
 related_posts:
   - "what-should-i-know-about-garbage-collection-as-a-java-developer"
   - "foojay-podcast-51"

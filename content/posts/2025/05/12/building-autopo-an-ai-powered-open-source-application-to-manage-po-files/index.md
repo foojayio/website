@@ -10,7 +10,6 @@ categories:
   - "Desktop"
   - "JavaFX"
   - "LangChain4j"
-tags:
 related_posts:
   - "langchain4j-musings"
   - "localize-apps-with-ai"

@@ -9,7 +9,6 @@ authors:
 image: "Screen-Shot-2021-05-17-at-12.15.51-AM.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-march-2023"
   - "javafx-links-of-february-2023"

@@ -9,7 +9,6 @@ image: "Decorator_UML_class_diagram.png"
 categories:
   - "Java"
   - "Tutorials"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

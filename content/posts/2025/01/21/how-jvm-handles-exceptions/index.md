@@ -10,7 +10,6 @@ image: "try-catch-finally-700x506-1.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-64"
   - "understanding-jvm-memory-layout-with-openjdk24s-new-printmemorymapatexit-vm-option"

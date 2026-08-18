@@ -9,7 +9,6 @@ authors:
 image: "thumbnail-4.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "debug-like-a-senior-developer"
   - "debugging-program-control-flow"

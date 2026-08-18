@@ -11,7 +11,6 @@ categories:
   - "Performance"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "web-caching-client"
   - "a-list-of-cache-providers"

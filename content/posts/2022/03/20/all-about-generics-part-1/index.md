@@ -8,7 +8,6 @@ authors:
 image: "hello.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "book-review-seriously-good-software"

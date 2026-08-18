@@ -12,7 +12,6 @@ categories:
   - "nosql"
   - "Performance"
   - "Spring"
-tags:
 related_posts:
   - "microstream-part-1-what-is-it"
   - "exploring-file-storage-solutions-in-spring-boot-database-local-systems-cloud-services-and-beyond"

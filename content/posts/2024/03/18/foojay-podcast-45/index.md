@@ -15,7 +15,6 @@ categories:
   - "JEPs"
   - "Podcast"
   - "Release Notes"
-tags:
 related_posts:
   - "java-22-whats-new"
   - "foojay-podcast-28"

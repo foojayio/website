@@ -9,7 +9,6 @@ authors:
 image: "engineer-4690505_1280.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "teeing-java-api"
   - "lets-use-optional-to-fix-method-contracts"

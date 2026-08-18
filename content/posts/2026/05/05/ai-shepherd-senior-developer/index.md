@@ -7,7 +7,6 @@ authors:
 image: "image.png"
 categories:
   - "Java"
-tags:
 related_posts:
 frozen: false
 ---

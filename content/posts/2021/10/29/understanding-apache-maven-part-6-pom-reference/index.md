@@ -8,7 +8,6 @@ authors:
 image: "https://cgunturme.files.wordpress.com/2020/06/mavenpomproject.png?w=1024"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "understanding-apache-maven-part-3-maven-coordinates-pom-inheritance"
   - "understanding-apache-maven-part-4-maven-lifecycle"

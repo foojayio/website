@@ -9,7 +9,6 @@ authors:
 image: "ebook_upd.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "jdkmon-your-friendly-jdk-distribution-updater"
   - "jdb"

@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Performance"
   - "Release Notes"
-tags:
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "apple-silicon-with-zulu-openjdk-and-intellij-idea"

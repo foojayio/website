@@ -11,7 +11,6 @@ categories:
   - "LangChain4j"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
   - "log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0"

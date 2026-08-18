@@ -9,7 +9,6 @@ authors:
 image: "image-764x1024-dummies.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "video-if-i-decide-to-stay-with-oracle-java-what-issues-will-i-face"
   - "cloud-cost-optimization-is-hard-java-can-help"

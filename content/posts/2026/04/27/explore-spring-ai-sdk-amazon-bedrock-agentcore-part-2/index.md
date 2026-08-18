@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Maven"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

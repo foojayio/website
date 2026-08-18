@@ -10,7 +10,6 @@ image: "Lightrun-Talk-to-the-duck-Book-Review-Recovered-01.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "the-debugger-checklist-part-ii"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

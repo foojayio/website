@@ -8,7 +8,6 @@ authors:
 image: "aspectj.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"

@@ -8,7 +8,6 @@ authors:
 image: "https://cgunturme.files.wordpress.com/2020/07/mavenplugins.png?w=1024"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "understanding-apache-maven-part-7-configuring-apache-maven"
   - "understanding-apache-maven-part-6-pom-reference"

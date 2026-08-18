@@ -7,7 +7,6 @@ authors:
 image: "bx-chart-release.jpg"
 categories:
   - "BoxLang"
-tags:
 related_posts:
   - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"
   - "boxlang-redis-has-landed-enterprise-grade-caching-pub-sub-and-distributed-locking"

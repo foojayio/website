@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-89"
   - "what-should-i-know-about-garbage-collection-as-a-java-developer"

@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Performance"
   - "Use Cases"
-tags:
 related_posts:
 frozen: false
 ---

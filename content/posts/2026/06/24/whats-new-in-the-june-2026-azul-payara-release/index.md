@@ -13,7 +13,6 @@ categories:
   - "Microservices"
   - "Payara"
   - "Release Notes"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"

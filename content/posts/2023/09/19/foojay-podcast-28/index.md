@@ -14,7 +14,6 @@ categories:
   - "JDK21"
   - "Podcast"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-28"
   - "foojay-podcast-27"

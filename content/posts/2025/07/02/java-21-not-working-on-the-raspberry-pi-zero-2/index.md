@@ -11,7 +11,6 @@ categories:
   - "Embedded"
   - "Java"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "controlling-a-led-strip-with-pi4j-and-jbang"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"

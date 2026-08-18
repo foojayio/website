@@ -9,7 +9,6 @@ image: "factory_pattern.png"
 categories:
   - "Java Core"
   - "Kotlin"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

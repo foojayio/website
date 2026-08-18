@@ -17,7 +17,6 @@ categories:
   - "Maven"
   - "Microservices"
   - "Podcast"
-tags:
 related_posts:
   - "why-i-prefer-trunk-based-development"
   - "foojay-podcast-25"

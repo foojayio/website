@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Observability"
   - "Performance"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "better-error-handling-for-your-spring-boot-rest-apis"

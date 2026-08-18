@@ -8,7 +8,6 @@ image: "Gemini_Generated_Image_4mkc4s4mkc4s4mkc-1024x559.png"
 categories:
   - "Java"
   - "Spring"
-tags:
 related_posts:
   - "spring-ai-agents-no-second-runtime"
   - "idempotent-spring-boot-starter"

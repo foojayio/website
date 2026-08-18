@@ -12,7 +12,6 @@ categories:
   - "Research"
   - "Security"
   - "Tools"
-tags:
 related_posts:
   - "sboms-first-steps-in-a-new-journey-for-developers"
   - "fixing-vulnerabilities-in-maven-projects"

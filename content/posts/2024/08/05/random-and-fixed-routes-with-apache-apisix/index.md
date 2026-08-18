@@ -9,7 +9,6 @@ authors:
 image: "tower-1897536.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

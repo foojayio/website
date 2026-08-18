@@ -13,7 +13,6 @@ categories:
   - "Performance"
   - "Podcast"
   - "TornadoVM"
-tags:
 related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
   - "migrating-applications-to-tornadovm-v0-15-part-1"

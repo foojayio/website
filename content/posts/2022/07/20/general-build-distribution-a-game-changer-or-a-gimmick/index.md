@@ -9,7 +9,6 @@ image: "1_0FUueLptBTH-g9orqUngWg.png"
 categories:
   - "DevOps"
   - "Performance"
-tags:
 related_posts:
   - "remote-and-distributed-build-patterns"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

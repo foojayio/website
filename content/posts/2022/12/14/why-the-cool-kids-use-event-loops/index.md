@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "how-object-reuse-can-reduce-latency-and-improve-performance"
   - "low-latency-crypto-trading-systems-using-java-and-chronicle-services"

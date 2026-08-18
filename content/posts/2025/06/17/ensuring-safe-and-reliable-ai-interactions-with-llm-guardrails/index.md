@@ -10,7 +10,6 @@ image: "snyk-logo-2.png"
 categories:
   - "LangChain4j"
   - "Security"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "8-best-practices-to-prevent-sql-injection-attacks"

@@ -10,7 +10,6 @@ categories:
   - "Conference"
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-35"
   - "foojay-podcast-32-philippines-jug"

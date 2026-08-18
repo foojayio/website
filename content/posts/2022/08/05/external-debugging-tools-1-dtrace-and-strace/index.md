@@ -10,7 +10,6 @@ image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-01.jpg"
 categories:
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "what-is-debugging-in-140-seconds"

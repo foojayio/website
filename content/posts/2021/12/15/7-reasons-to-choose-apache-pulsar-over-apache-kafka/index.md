@@ -13,7 +13,6 @@ categories:
   - "Databases"
   - "DataStax"
   - "Microservices"
-tags:
 related_posts:
   - "fast-jms-for-apache-pulsar-modernize-and-reduce-costs-with-blazing-performance"
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"

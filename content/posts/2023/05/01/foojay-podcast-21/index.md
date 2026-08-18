@@ -9,7 +9,6 @@ image: "podcast-guests-brazil-jug.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-18"
   - "foojay-podcast-15"

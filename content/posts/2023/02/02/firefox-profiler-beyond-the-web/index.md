@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Performance"
-tags:
 related_posts:
   - "a-short-primer-on-java-debugging-internals"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

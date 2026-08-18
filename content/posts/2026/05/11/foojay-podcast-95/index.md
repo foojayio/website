@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "Security"
-tags:
 related_posts:
   - "foojay-podcast-94"
   - "foojay-podcast-93"

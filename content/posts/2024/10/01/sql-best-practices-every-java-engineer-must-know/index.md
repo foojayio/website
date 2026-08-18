@@ -9,7 +9,6 @@ image: "1.png"
 categories:
   - "Databases"
   - "Java"
-tags:
 related_posts:
   - "effective-java-logging"
   - "calling-microservices-in-java"

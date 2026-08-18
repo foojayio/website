@@ -9,7 +9,6 @@ authors:
 image: "teamwork-gbacc0987f.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "a-list-of-cache-providers"
   - "kotlin-delegation"

@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Java"
   - "Redis"
-tags:
 related_posts:
   - "rate-limiting-with-redis-an-essential-guide"
   - "fixed-window-counter-rate-limiter-redis-java"

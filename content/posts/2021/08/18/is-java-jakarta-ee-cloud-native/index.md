@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Microservices"
   - "Videos"
-tags:
 related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud"

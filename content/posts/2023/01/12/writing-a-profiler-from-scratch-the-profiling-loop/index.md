@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "writing-a-profiler-from-scratch-introduction"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

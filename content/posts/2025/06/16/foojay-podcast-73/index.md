@@ -15,7 +15,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-72"
   - "foojay-podcast-71"

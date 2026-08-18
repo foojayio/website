@@ -9,7 +9,6 @@ authors:
 image: "ai-generated-8709325.jpg"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

@@ -10,7 +10,6 @@ image: "key-g6ee02b699_1280.jpg"
 categories:
   - "Kotlin"
   - "Use Cases"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "annotation-free-spring"

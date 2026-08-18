@@ -8,7 +8,6 @@ authors:
 image: "Image1-700x330.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "journeys-in-java-level-9-docker-compose-all-the-things"

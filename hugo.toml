@@ -20,13 +20,17 @@ enableRobotsTXT = true
   # this pattern reproduces the legacy path exactly and no alias is needed.
   sponsors = "/sponsor/:slugorcontentbasename/"
   # Taxonomy term pages live under /today/ too, matching the links the theme and
-  # the WordPress site use (default would be /categories/… and /tags/…).
+  # the WordPress site use (default would be /categories/…).
   categories = "/today/category/:slug/"
-  tags = "/today/tag/:slug/"
 
+# Only categories. WordPress DOES tag its posts, but its theme never renders
+# tags on a page, so the scrapers (which read the public site) could never see
+# them and every post landed with an empty `tags:`. Rather than keep a taxonomy
+# that produced 0 term pages against categories' 752, it was dropped -- along
+# with the frontmatter key, so authors have one less empty field to wonder
+# about. Recoverable from /wp-json/wp/v2/posts?_fields=tags if ever wanted.
 [taxonomies]
   category = "categories"
-  tag = "tags"
 
 [markup]
   [markup.goldmark]

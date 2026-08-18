@@ -9,7 +9,6 @@ authors:
 image: "dockable.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "foojay-podcast-25"
   - "javafx-links-of-june-2023"

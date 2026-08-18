@@ -10,7 +10,6 @@ categories:
   - "Book Announcement"
   - "Books"
   - "OpenJDK Migration"
-tags:
 related_posts:
   - "new-book-fxgl-17-learn-javafx-game-and-app-development"
   - "unlocking-java-secrets-with-frank-delporte-insights-stories-and-tips-for-success"

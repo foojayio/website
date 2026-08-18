@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "OpenRewrite"
   - "Tools"
-tags:
 related_posts:
   - "foojay-podcast-19"
   - "3-ways-to-refactor-your-code-in-intellij-idea"

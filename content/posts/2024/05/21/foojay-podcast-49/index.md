@@ -16,7 +16,6 @@ categories:
   - "JUGs"
   - "Machine Learning"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-48"
   - "foojay-podcast-47"

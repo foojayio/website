@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
   - "get-your-jdk-as-easily-as-possible"

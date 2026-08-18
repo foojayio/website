@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JUGs"
   - "Trip Reports"
-tags:
 related_posts:
   - "jug-ph-1-day-modern-java-development-bootcamp"
   - "jmanc-2024-trip-report"

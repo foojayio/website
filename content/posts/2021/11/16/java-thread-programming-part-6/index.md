@@ -8,7 +8,6 @@ authors:
 image: "thread-lifecycle-700x379.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-thread-programming-part-5"
   - "java-thread-programming-part-4"

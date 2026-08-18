@@ -9,7 +9,6 @@ image: "1_2RyMETT6diUSVGKdJPoQgQ.webp"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "best-practices-for-deploying-mongodb-in-kubernetes"

@@ -10,7 +10,6 @@ authors:
 image: "https://github.com/mariadb-developers/blog-images/blob/main/ops-sec1.png?raw=true"
 categories:
   - "Databases"
-tags:
 related_posts:
   - "k8ssandra-performance-benchmarks-on-cloud-managed-kubernetes"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"

@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

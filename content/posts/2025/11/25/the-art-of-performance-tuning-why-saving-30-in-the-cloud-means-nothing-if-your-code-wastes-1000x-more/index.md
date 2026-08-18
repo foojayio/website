@@ -12,7 +12,6 @@ categories:
   - "Kafka"
   - "Performance"
   - "Profiler"
-tags:
 related_posts:
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
   - "7-functional-programming-techniques-in-java-a-primer"

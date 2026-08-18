@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Java"
   - "Payara"
-tags:
 related_posts:
   - "whats-new-in-the-january-2026-payara-platform-release"
   - "whats-new-in-the-may-2026-azul-payara-release"

@@ -9,7 +9,6 @@ authors:
 image: "opa-horizontal-color.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "the-right-feature-at-the-right-place"
   - "blockhound-how-it-works"

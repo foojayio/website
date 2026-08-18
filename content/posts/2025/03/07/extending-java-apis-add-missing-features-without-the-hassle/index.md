@@ -9,7 +9,6 @@ authors:
 image: "thumbnail-20.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "logging-best-practices-revisited"
   - "spring-boot-debugging-with-aspect-oriented-programming-aop"

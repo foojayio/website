@@ -9,7 +9,6 @@ image: "Azul-Payara-Community-New-Release-1.png"
 categories:
   - "Jakarta EE"
   - "Payara"
-tags:
 related_posts:
   - "whats-new-in-the-january-2026-payara-platform-release"
   - "scalable-enterprise-java-for-the-cloud"

@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "AI"
   - "Mongo"
-tags:
 related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "building-rest-apis-in-java-with-spring-boot"

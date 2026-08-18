@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Spring"
   - "Use Cases"
-tags:
 related_posts:
   - "is-it-time-to-go-back-to-the-monolith"
   - "when-should-we-move-to-microservices"

@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "Graph"
   - "Neo4J"
-tags:
 related_posts:
   - "how-to-run-neo4j-on-kubernetes"
   - "native-graphql-api-with-neo4j-auradb-on-heroku"

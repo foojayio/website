@@ -10,7 +10,6 @@ image: "kstan.png"
 categories:
   - "Java"
   - "Trip Reports"
-tags:
 related_posts:
   - "time-zone-and-currency-database-in-jdk"
   - "creating-a-javafx-world-clock-from-scratch-part-5"

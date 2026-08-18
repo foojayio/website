@@ -12,7 +12,6 @@ categories:
   - "GitLab"
   - "Tools"
   - "Use Cases"
-tags:
 related_posts:
   - "intro-to-the-boxlang-formatter"
   - "dockerizing-a-java-26-project-with-docker-init"

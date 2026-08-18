@@ -10,7 +10,6 @@ image: "MicrosoftTeams-image-12-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
   - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
   - "new-features-in-jakarta-ee-11-with-examples"

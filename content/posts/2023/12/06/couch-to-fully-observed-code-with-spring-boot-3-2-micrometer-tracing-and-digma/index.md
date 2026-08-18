@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Observability"
   - "Spring"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023"

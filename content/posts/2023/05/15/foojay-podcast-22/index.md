@@ -13,7 +13,6 @@ categories:
   - "Podcast"
   - "Raspberry Pi"
   - "Student"
-tags:
 related_posts:
   - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
   - "vert-x-example-on-the-raspberry-pi-with-a-virtual-potentiometer"

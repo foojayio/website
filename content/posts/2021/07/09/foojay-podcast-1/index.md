@@ -12,7 +12,6 @@ image: "foojay_podcast.png"
 categories:
   - "Foojay"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-2"
   - "foojay-podcast-3"

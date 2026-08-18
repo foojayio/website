@@ -8,7 +8,6 @@ authors:
 image: "icon256x256.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
   - "what-is-jvm-bytecode"

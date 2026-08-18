@@ -16,7 +16,6 @@ categories:
   - "Machine Learning"
   - "Research"
   - "Videos"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "speed-up-your-spring-batch-with-native-image-and-graalvm"

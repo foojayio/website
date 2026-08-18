@@ -10,7 +10,6 @@ image: "training-maria-training.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"
   - "how-is-leyden-improving-java-performance-part-1-of-3"

@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "DevOps"
   - "Kubernetes"
-tags:
 related_posts:
   - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
   - "backing-up-k8ssandra-with-minio"

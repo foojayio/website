@@ -9,7 +9,6 @@ image: "jobrunr-carbon-foojay.png"
 categories:
   - "Java"
   - "Tutorials"
-tags:
 related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"

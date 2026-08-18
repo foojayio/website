@@ -9,7 +9,6 @@ image: "opted.png"
 categories:
   - "Performance"
   - "TornadoVM"
-tags:
 related_posts:
   - "hardware-acceleration-for-java-tornadovm-can-do-it"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

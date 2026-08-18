@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Kotlin"
   - "Tutorials"
-tags:
 related_posts:
   - "java-functional-programming"
   - "spring-internals-of-restclient"

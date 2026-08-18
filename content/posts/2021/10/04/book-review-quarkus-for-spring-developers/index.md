@@ -9,7 +9,6 @@ image: "quarkus-book-340x510.png"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-help-your-boss-help-you"
   - "book-review-java-by-comparison"

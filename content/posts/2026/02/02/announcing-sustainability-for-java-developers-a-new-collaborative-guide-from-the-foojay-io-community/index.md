@@ -15,7 +15,6 @@ image: "sustainabilitybook-1.png"
 categories:
   - "Book Announcement"
   - "Books"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "42-practical-java-design-patterns-builder-and-more"

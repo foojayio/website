@@ -9,7 +9,6 @@ image: "panel.png"
 categories:
   - "Security"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

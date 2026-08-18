@@ -9,7 +9,6 @@ authors:
 image: "https://www.royvanrijn.com/images/leak4j1.png"
 categories:
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

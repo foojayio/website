@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "DataStax"
   - "Performance"
-tags:
 related_posts:
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

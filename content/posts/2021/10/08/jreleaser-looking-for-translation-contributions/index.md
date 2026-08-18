@@ -8,7 +8,6 @@ authors:
 image: "jreleaser-duke-2.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "jreleaser-0-7-0-released"
   - "jreleaser-0-6-0-released"

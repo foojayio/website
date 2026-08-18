@@ -9,7 +9,6 @@ authors:
 image: "snyk-logo-2.png"
 categories:
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

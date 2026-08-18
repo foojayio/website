@@ -9,7 +9,6 @@ authors:
 image: "blog-3ways_bodyImage.jpg"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "foojay-podcast-26"
   - "seven-reasons-you-should-not-ignore-flaky-tests"

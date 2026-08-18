@@ -10,7 +10,6 @@ image: "podcast-guests-swiss-jug.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-44"
   - "foojay-podcast-42"

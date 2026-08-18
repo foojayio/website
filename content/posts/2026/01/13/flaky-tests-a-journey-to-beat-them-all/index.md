@@ -8,7 +8,6 @@ image: "Flaky-test.jpg"
 categories:
   - "Java"
   - "Testing"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "idempotent-spring-boot-starter"

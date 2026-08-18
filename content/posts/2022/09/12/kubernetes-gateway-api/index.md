@@ -10,7 +10,6 @@ image: "shinto-shrine-gates-gd37b765bc.jpg"
 categories:
   - "DevOps"
   - "Kubernetes"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "apisix-api-gateway"

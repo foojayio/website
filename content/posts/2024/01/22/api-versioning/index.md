@@ -9,7 +9,6 @@ authors:
 image: "signpost-3691159.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "poor-mans-api"
   - "a-list-of-cache-providers"

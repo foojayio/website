@@ -11,7 +11,6 @@ categories:
   - "BoxLang"
   - "GenAI"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"

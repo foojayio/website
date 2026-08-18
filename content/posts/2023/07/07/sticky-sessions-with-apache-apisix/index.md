@@ -9,7 +9,6 @@ authors:
 image: "bubble-gum-438404.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "sticky-sessions-with-apache-apisix-the-demo"
   - "blockhound-how-it-works"

@@ -9,7 +9,6 @@ authors:
 image: "https://miro.medium.com/max/1400/0*QMIuX6OHkdzv3HGM"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "real-world-stream-collector"

@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "JUGs"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

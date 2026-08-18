@@ -8,7 +8,6 @@ authors:
 image: "Sebastian-Daschner.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "DataEngineering"
   - "Machine Learning"
-tags:
 related_posts:
   - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-1"
   - "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"

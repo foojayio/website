@@ -9,7 +9,6 @@ image: "scrum.webp"
 categories:
   - "Agile"
   - "DevOps"
-tags:
 related_posts:
   - "devops-101-part-i-ci-cd"
   - "devops-for-developers-introduction-version-control"

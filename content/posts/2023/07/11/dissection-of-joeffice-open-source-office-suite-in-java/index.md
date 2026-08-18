@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "NetBeans"
   - "Use Cases"
-tags:
 related_posts:
   - "write-once-run-embedded-in-any-ide"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

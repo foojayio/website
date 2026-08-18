@@ -12,7 +12,6 @@ categories:
   - "Kotlin"
   - "Opinion"
   - "Use Cases"
-tags:
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
   - "extending-third-party-apis-in-different-languages"

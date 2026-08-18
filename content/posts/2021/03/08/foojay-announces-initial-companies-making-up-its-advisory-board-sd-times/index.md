@@ -8,7 +8,6 @@ authors:
 image: "image-3-1024x385.png"
 categories:
   - "Press"
-tags:
 related_posts:
 frozen: false
 ---

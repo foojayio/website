@@ -10,7 +10,6 @@ categories:
   - "Events"
   - "Java"
   - "JEPs"
-tags:
 related_posts:
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

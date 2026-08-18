@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Tools"
   - "TornadoVM"
-tags:
 related_posts:
   - "foojay-podcast-17"
   - "a-flavour-of-tornadovm-on-apple-m1-pro"

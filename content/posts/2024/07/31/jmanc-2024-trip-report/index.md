@@ -10,7 +10,6 @@ image: "110677_image_676x380.webp"
 categories:
   - "Events"
   - "Trip Reports"
-tags:
 related_posts:
   - "springone-tlv-world-tour-trip-report"
   - "trip-report-dubai-jug-2nd-meetup"

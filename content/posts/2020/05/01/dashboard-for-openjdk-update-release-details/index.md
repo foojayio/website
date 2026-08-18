@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2020-08-20-at-17.19.43-1-1024x647.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
   - "changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk"
   - "javafinder-keeping-track-of-java-inventories"

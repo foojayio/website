@@ -11,7 +11,6 @@ categories:
   - "Apache Pulsar"
   - "DataStax"
   - "Microservices"
-tags:
 related_posts:
   - "why-developers-should-use-apache-pulsar"
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"

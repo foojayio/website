@@ -14,7 +14,6 @@ categories:
   - "Testcontainers"
   - "Testing"
   - "Tools"
-tags:
 related_posts:
   - "foojay-podcast-52"
   - "five-ways-to-use-gradle-enterprise-to-identify-and-manage-flaky-tests"

@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Redis"
   - "Tools"
-tags:
 related_posts:
   - "sliding-window-log-rate-limiter-redis-java"
   - "token-bucket-rate-limiter-redis-java"

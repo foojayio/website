@@ -8,7 +8,6 @@ authors:
 image: "jconpic.png"
 categories:
   - "Conference"
-tags:
 related_posts:
 frozen: false
 ---

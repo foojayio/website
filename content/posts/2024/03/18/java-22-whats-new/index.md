@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JEPs"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-45"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

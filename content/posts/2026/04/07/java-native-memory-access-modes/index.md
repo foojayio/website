@@ -9,7 +9,6 @@ image: "0407.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "unsafe-is-finally-going-away-embracing-safer-memory-access-with-jep-471"
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"

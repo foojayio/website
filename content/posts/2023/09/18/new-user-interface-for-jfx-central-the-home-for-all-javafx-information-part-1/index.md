@@ -9,7 +9,6 @@ authors:
 image: "homepage-intro-1024x769-1.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-august-2023"
   - "foojay-podcast-9"

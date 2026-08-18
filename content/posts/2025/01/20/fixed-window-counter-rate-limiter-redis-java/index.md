@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Java"
   - "Java Beginner"
-tags:
 related_posts:
   - "rate-limiting-with-redis-an-essential-guide"
   - "back-to-basics-accessing-kubernetes-pods"

@@ -9,7 +9,6 @@ image: "Screen-Shot-2022-05-08-at-4.59.40-AM.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"
-tags:
 related_posts:
   - "everyday-shortcuts-in-intellij-idea"
   - "fix-java-security-issues-while-coding-in-intellij-idea"

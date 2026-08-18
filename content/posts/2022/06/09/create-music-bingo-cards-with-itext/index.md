@@ -9,7 +9,6 @@ authors:
 image: "frank.png"
 categories:
   - "Library"
-tags:
 related_posts:
   - "10-basic-questions-about-pdf-files-for-java-developers"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"

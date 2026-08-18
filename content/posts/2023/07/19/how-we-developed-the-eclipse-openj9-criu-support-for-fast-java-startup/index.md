@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Microservices"
   - "Performance"
-tags:
 related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"
   - "foojay-podcast-17"

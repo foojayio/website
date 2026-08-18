@@ -9,7 +9,6 @@ image: "9e77b5a4-f3dc-46ae-a3d3-a318471f9b96.jpeg"
 categories:
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

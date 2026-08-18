@@ -12,7 +12,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "reactive"
-tags:
 related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "java-17-on-the-raspberry-pi"

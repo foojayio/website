@@ -9,7 +9,6 @@ authors:
 image: "desert-279862.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

@@ -14,7 +14,6 @@ categories:
   - "Maven"
   - "Performance"
   - "Spring"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

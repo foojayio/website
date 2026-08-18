@@ -9,7 +9,6 @@ image: "image-7-1024x768.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "foojay-io-at-fosdem-2023-trip-report"
   - "friends-of-openjdk-schedule-at-fosdem-2021"

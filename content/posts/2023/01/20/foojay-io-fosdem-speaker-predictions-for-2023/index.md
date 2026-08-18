@@ -9,7 +9,6 @@ image: "fosdem.png"
 categories:
   - "Events"
   - "Opinion"
-tags:
 related_posts:
   - "more-foojay-io-fosdem-speaker-predictions-for-2023"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

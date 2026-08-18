@@ -8,7 +8,6 @@ authors:
 image: "erik.jpeg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

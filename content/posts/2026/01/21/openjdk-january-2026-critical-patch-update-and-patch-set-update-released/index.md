@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-71"
   - "foojay-podcast-78"

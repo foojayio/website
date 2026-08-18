@@ -10,7 +10,6 @@ image: "MP-metrics.jpg"
 categories:
   - "Microservices"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

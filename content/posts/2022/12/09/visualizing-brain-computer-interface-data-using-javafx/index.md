@@ -11,7 +11,6 @@ categories:
   - "Research"
   - "Use Cases"
   - "Videos"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "creating-cad-applications-with-java-and-javafx"

@@ -10,7 +10,6 @@ categories:
   - "Events"
   - "Hazelcast"
   - "Streaming"
-tags:
 related_posts:
   - "real-time-stream-processing-with-hazelcast-and-streamnative"
   - "hazelcast-from-embedded-to-client-server"

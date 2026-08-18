@@ -11,7 +11,6 @@ categories:
   - "Kotlin"
   - "Microservices"
   - "Spring"
-tags:
 related_posts:
   - "modular-monolithic-in-practice"
   - "openrewrite-automatic-code-refactoring-and-maintenance-part-2"

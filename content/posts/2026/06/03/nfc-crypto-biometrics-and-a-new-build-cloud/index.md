@@ -8,7 +8,6 @@ authors:
 image: "nfc-crypto-biometrics-and-build-cloud.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
   - "skills-java-17-and-theme-accents-with-codename-one"

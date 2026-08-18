@@ -9,7 +9,6 @@ image: "image-1.png"
 categories:
   - "JMS"
   - "Spring"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

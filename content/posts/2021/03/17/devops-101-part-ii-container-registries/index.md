@@ -8,7 +8,6 @@ authors:
 image: "index.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "devops-101-part-iii-package-management"
   - "devops-101-part-i-ci-cd"

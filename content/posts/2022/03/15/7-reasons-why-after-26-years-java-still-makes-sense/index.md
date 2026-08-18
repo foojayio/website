@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Java Core"
   - "Opinion"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "java-where-the-wild-code-isnt"

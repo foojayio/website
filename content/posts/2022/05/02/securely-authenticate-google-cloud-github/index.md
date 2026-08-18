@@ -10,7 +10,6 @@ image: "shaking-hands-g46cb6ec78.jpg"
 categories:
   - "Cloud"
   - "DevOps"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

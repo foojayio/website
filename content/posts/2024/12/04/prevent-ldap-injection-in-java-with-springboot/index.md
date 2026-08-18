@@ -12,7 +12,6 @@ categories:
   - "Security"
   - "Spring"
   - "Videos"
-tags:
 related_posts:
   - "top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them"
   - "a-simple-service-with-spring-boot"

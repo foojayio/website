@@ -9,7 +9,6 @@ image: "structure2.png"
 categories:
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "firefox-profiler-beyond-the-web"
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"

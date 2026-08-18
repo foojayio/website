@@ -10,7 +10,6 @@ image: "Screenshot-2023-05-14-at-15.27.56.png"
 categories:
   - "Events"
   - "Videos"
-tags:
 related_posts:
   - "spring-boot-debugging-with-aspect-oriented-programming-aop"
   - "relearning-java-thread-primitives"

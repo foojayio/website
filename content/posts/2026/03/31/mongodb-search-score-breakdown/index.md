@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "inside-the-engine-the-sub-millisecond-performance-relay-of-mongodb-8-0"
   - "java-concurrency-best-practices-for-mongodb"

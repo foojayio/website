@@ -7,7 +7,6 @@ authors:
 image: "stripdemo-0.0.3.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
   - "create-music-bingo-cards-with-itext"

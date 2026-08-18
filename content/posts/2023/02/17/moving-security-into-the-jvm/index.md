@@ -10,7 +10,6 @@ image: "Screen-Shot-2022-10-25-at-8.33.15-PM.png"
 categories:
   - "Release Notes"
   - "Security"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "java-where-the-wild-code-isnt"

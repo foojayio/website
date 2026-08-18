@@ -11,7 +11,6 @@ image: "episode-67-write-a-book.jpg"
 categories:
   - "Books"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-66"
   - "foojay-podcast-65"

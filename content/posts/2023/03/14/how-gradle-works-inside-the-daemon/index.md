@@ -11,7 +11,6 @@ categories:
   - "Gradle"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "how-gradle-works-startup"
   - "a-better-way-to-use-gradle-with-github-actions"

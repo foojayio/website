@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "Databases"
   - "DevOps"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes"

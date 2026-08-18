@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "elevating-java-development-in-visual-studio-code-experience-the-new-build-server-for-gradle"
   - "java-on-visual-studio-code-july-2023"

@@ -10,7 +10,6 @@ categories:
   - "Interviews"
   - "Java"
   - "Podcast"
-tags:
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"

@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "where-do-you-get-your-java"
   - "semeru-v11-beyond-oct-2024"

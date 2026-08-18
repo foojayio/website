@@ -10,7 +10,6 @@ image: "shaialmog_A_software_developers_desk_cluttered_with_notes_diagr_6b092aec
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "the-evolution-of-bugs"
   - "debugging-as-a-process-of-isolating-assumptions"

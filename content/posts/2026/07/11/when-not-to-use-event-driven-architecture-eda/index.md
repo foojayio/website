@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Kafka"
   - "Streaming"
-tags:
 related_posts:
   - "event-driven-architecture-and-change-data-capture-made-easy"
   - "navigating-behaviour-with-events"

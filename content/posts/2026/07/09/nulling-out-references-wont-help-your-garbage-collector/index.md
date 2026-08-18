@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-07-09-at-15.41.30.png"
 categories:
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

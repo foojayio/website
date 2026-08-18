@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Kotlin"
   - "Use Cases"
-tags:
 related_posts:
   - "agent-memory-with-spring-ai-redis"
   - "debug-unresponsive-apps"

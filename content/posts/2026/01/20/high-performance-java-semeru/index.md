@@ -10,7 +10,6 @@ authors:
 image: "image05.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "five-java-developer-must-haves"
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"

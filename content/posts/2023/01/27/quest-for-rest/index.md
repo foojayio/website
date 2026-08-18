@@ -9,7 +9,6 @@ authors:
 image: "heaven-g78b17aeb8.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "kubernetes-gateway-api"
   - "real-world-stream-collector"

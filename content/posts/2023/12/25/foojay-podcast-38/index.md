@@ -15,7 +15,6 @@ categories:
   - "Observability"
   - "Podcast"
   - "Testcontainers"
-tags:
 related_posts:
   - "foojay-podcast-37"
   - "foojay-podcast-36"

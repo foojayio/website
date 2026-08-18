@@ -8,7 +8,6 @@ authors:
 image: "distro-choice.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
 frozen: false
 ---

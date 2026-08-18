@@ -9,7 +9,6 @@ image: "log-1.webp"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "smarter-logging-in-spring-boot-with-aop"
   - "logging-best-practices-revisited"

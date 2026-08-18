@@ -11,7 +11,6 @@ categories:
   - "Books"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "book-review-monolith-to-microservices-part-1"
   - "book-review-java-by-comparison"

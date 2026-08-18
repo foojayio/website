@@ -10,7 +10,6 @@ image: "DALL-E-2024-01-23-12.51.14-A-stylized-digital-artwork-representing-the-c
 categories:
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "cant-reproduce-a-bug"
   - "external-debugging-tools-1-dtrace-and-strace"

@@ -9,7 +9,6 @@ image: "cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg"
 categories:
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

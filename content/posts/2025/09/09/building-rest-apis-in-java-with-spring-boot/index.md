@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Mongo"
   - "Spring"
-tags:
 related_posts:
   - "run-an-atlas-cluster-locally-in-minutes"
   - "testing-mongodb-atlas-search-java-apps-using-testcontainers"

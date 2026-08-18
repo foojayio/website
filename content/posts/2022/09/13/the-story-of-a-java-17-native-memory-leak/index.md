@@ -10,7 +10,6 @@ image: "twitter-java-17.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "7-functional-programming-techniques-in-java-a-primer"

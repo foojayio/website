@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Microservices"
   - "Videos"
-tags:
 related_posts:
   - "do-java-jakarta-ee-standards-matter"
   - "do-you-really-need-kubernetes"

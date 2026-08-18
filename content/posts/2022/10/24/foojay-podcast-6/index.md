@@ -12,7 +12,6 @@ image: "foojay_podcast.png"
 categories:
   - "Foojay"
   - "Podcast"
-tags:
 related_posts:
   - "join-slack-com-t-foojay-signup"
   - "how-to-submit-your-next-article-on-foojay-io"

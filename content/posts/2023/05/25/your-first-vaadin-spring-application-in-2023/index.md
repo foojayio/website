@@ -9,7 +9,6 @@ image: "reindeer-lines-474x510-1.png"
 categories:
   - "Cloud"
   - "Vaadin"
-tags:
 related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "build-web-apps-in-pure-java-with-vaadin-flow"

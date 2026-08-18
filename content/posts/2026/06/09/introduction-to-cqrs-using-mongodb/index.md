@@ -7,7 +7,6 @@ authors:
 image: "Technical_ATLAS_QueryOptimization10x.png"
 categories:
   - "Mongo"
-tags:
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"

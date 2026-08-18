@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "how-to-beautify-your-github-repo"
   - "is-it-time-to-go-back-to-the-monolith"

@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

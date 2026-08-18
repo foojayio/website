@@ -9,7 +9,6 @@ image: "jvm.png"
 categories:
   - "Jelastic"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

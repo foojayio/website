@@ -12,7 +12,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

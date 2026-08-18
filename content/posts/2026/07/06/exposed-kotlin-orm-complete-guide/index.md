@@ -16,7 +16,6 @@ categories:
   - "sql"
   - "Student"
   - "Tutorials"
-tags:
 related_posts:
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

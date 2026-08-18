@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "sboms-first-steps-in-a-new-journey-for-developers"
   - "sboms-and-software-composition-analysis"

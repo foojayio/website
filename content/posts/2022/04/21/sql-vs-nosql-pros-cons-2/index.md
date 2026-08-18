@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "nosql"
   - "sql"
-tags:
 related_posts:
   - "8-best-practices-to-prevent-sql-injection-attacks"
   - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"

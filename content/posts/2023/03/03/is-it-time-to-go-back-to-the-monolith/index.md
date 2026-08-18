@@ -11,7 +11,6 @@ categories:
   - "Opinion"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "what-are-you-missing-by-debugging-in-vs-code"
   - "remote-debugging-dangers-and-pitfalls"

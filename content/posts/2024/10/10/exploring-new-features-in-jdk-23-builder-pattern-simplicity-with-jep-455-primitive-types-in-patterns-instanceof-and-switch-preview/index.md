@@ -11,7 +11,6 @@ categories:
   - "Java Beginner"
   - "JDK 23"
   - "JEPs"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"

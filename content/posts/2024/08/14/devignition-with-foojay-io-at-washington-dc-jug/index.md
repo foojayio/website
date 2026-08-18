@@ -10,7 +10,6 @@ authors:
 image: "devignition.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "foojay-podcast-49"
   - "foojay-podcast-50"

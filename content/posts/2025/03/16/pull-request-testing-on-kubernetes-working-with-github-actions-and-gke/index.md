@@ -9,7 +9,6 @@ authors:
 image: "concrete-block.jpeg"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

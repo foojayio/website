@@ -9,7 +9,6 @@ image: "foojay-2-featured.png"
 categories:
   - "Eclipse"
   - "Use Cases"
-tags:
 related_posts:
   - "boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang"
   - "get-started-with-allocation-profiling"

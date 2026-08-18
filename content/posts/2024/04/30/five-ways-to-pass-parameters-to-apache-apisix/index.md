@@ -9,7 +9,6 @@ authors:
 image: "american-football-63109.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "apache-apisix-north-america-tour"

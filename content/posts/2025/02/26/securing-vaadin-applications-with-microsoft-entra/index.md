@@ -11,7 +11,6 @@ categories:
   - "Security"
   - "Spring"
   - "Vaadin"
-tags:
 related_posts:
   - "browserless-testing-of-vaadin-applications-with-karibu-testing"
   - "build-web-apps-in-pure-java-with-vaadin-flow"

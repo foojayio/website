@@ -9,7 +9,6 @@ authors:
 image: "technology-7111798.jpg"
 categories:
   - "Vaadin"
-tags:
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "guide-lazyinitializationexception"

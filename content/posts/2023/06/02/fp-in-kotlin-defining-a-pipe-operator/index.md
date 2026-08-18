@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "comparison-fault-tolerance-libraries"

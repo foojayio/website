@@ -9,7 +9,6 @@ authors:
 image: "jib-ashish-700x400.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
 frozen: false
 ---

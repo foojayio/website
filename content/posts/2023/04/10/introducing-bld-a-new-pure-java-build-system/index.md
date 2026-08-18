@@ -11,7 +11,6 @@ categories:
   - "Release Notes"
   - "RIFE2"
   - "Tools"
-tags:
 related_posts:
   - "getting-started-with-rife2-java-web-framework-v1-0-0"
   - "web-app-startup-in-3ms-with-rife2-and-graalvm"

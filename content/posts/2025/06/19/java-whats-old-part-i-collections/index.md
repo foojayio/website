@@ -9,7 +9,6 @@ image: "old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
   - "immutable-records"

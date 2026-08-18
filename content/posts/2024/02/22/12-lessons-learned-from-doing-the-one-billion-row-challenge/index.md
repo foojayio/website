@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "JDK21"
   - "Performance"
-tags:
 related_posts:
   - "sorting-text-in-java-how-complicated-can-it-be"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"

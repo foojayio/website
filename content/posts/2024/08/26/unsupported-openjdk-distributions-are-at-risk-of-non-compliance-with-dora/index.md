@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "connecting-resilience-to-performance-in-relation-to-openjdk"
   - "the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations"

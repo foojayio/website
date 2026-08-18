@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Release Notes"
   - "Tools"
-tags:
 related_posts:
 frozen: false
 ---

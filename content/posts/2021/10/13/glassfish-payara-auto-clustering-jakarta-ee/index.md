@@ -12,7 +12,6 @@ categories:
   - "Jelastic"
   - "Payara"
   - "Tutorials"
-tags:
 related_posts:
   - "getting-started-with-jakarta-ee-9-jakarta-ee-9-1"
   - "payara-platform-october-2021-survey"

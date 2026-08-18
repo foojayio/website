@@ -9,7 +9,6 @@ image: "duke-intellij-shirt.png"
 categories:
   - "IntelliJ IDEA"
   - "JavaFX"
-tags:
 related_posts:
   - "a-javafx-app-on-zulufx-in-60-seconds"
   - "creating-a-javafx-world-clock-from-scratch-part-1"

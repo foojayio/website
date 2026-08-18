@@ -9,7 +9,6 @@ authors:
 image: "javafx-community.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-april-2023"
   - "javafx-links-of-march-2023"

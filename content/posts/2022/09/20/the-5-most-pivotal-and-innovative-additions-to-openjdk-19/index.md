@@ -8,7 +8,6 @@ authors:
 image: "cafe-g56e2bcea6_1920.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-5"
   - "openjdk-19-released"

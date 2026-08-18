@@ -8,7 +8,6 @@ authors:
 image: "Steve-Poole-1.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
   - "from-law-degree-to-java-champion-geertjan-wielenga-on-the-success-of-java-and-navigating-the-software-industry"

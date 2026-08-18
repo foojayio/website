@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-03-09-at-09.33.06-scaled.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"

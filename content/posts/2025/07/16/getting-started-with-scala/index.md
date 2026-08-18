@@ -9,7 +9,6 @@ image: "Scala1.png"
 categories:
   - "Data Engineering"
   - "Scala"
-tags:
 related_posts:
   - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
   - "sboms-and-software-composition-analysis"

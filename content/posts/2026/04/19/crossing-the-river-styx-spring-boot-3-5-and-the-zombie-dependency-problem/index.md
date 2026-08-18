@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Security"
   - "Spring"
-tags:
 related_posts:
   - "did-ai-just-break-software-security-for-ever"
   - "foojay-podcast-95"

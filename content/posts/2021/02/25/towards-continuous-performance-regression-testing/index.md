@@ -11,7 +11,6 @@ categories:
   - "JDK Flight Recorder"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "a-glance-into-jfr-class-and-method-tagging"
   - "soft-assertions-testing-kindly"

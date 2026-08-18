@@ -10,7 +10,6 @@ image: "Blog---16.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "what-is-debugging-in-140-seconds"

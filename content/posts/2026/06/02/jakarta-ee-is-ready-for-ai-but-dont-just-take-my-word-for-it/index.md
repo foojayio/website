@@ -11,7 +11,6 @@ categories:
   - "Conference"
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
 frozen: false
 ---

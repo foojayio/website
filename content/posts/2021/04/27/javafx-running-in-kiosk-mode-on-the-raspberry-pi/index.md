@@ -12,7 +12,6 @@ categories:
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
   - "azul-brings-java-from-edge-to-cloud"

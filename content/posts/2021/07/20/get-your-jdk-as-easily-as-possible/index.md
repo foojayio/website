@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "JavaFX"
   - "VS Code"
-tags:
 related_posts:
   - "jdkmon-your-friendly-jdk-distribution-updater"
   - "java-on-azure-tooling-update-july-2022"

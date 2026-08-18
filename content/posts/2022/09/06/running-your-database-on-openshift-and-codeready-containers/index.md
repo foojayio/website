@@ -14,7 +14,6 @@ categories:
   - "DevOps"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "running-spring-boot-applications-on-openshift"
   - "run-websphere-liberty-and-open-liberty-on-openshift"

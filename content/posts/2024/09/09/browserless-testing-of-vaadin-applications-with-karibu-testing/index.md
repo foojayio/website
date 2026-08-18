@@ -9,7 +9,6 @@ image: "pexels-tomas-malik-793526-26690667.jpg"
 categories:
   - "Testing"
   - "Vaadin"
-tags:
 related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "book-review-modern-frontends-with-htmx"

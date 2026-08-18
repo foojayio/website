@@ -8,7 +8,6 @@ authors:
 image: "BoxLang-Logo-Dark.png"
 categories:
   - "BoxLang"
-tags:
 related_posts:
 frozen: false
 ---

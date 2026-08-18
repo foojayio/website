@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "LangChain4j"
   - "Testcontainers"
-tags:
 related_posts:
   - "book-review-developing-apps-with-gpt-4-and-chatgpt"
   - "building-simple-home-assistant-langchain4j-raspberry-pi"

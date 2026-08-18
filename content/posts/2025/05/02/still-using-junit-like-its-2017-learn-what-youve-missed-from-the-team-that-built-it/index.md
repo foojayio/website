@@ -9,7 +9,6 @@ image: "53726451134_a501889f5f_o-700x239-1.jpg"
 categories:
   - "Conference"
   - "Events"
-tags:
 related_posts:
   - "foojay-podcast-70"
   - "java-conferences-2025"

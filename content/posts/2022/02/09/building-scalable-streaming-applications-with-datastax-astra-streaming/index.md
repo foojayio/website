@@ -12,7 +12,6 @@ categories:
   - "Apache Pulsar"
   - "Databases"
   - "Microservices"
-tags:
 related_posts:
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"
   - "announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes"

@@ -11,7 +11,6 @@ image: "payara_square_logo.jpg"
 categories:
   - "Java Core"
   - "JEPs"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "deserialization-exploits-in-java-why-should-i-care"

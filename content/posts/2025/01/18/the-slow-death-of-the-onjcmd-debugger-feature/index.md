@@ -9,7 +9,6 @@ image: "https://mostlynerdless.de/wp-content/uploads/2024/02/Figure_1-2-2000x150
 categories:
   - "Debugging"
   - "Java"
-tags:
 related_posts:
   - "is-jdwps-onjcmd-feature-worth-using"
   - "level-up-your-java-debugging-skills-with-on-demand-debugging"

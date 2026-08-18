@@ -11,7 +11,6 @@ categories:
   - "Press"
   - "Research"
   - "Security"
-tags:
 related_posts:
   - "foojay-podcast-7"
   - "how-to-create-sboms-in-java-with-maven-and-gradle"

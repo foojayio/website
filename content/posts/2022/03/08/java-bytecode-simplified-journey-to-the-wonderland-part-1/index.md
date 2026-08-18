@@ -8,7 +8,6 @@ authors:
 image: "page-272-700x250.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-bytecode-simplified-journey-to-the-wonderland-part-2"
   - "compiling-java-code-executing-bytecode"

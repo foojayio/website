@@ -9,7 +9,6 @@ image: "e3e3ed8c-25e7-4088-b504-9f70c219eec1.jpeg"
 categories:
   - "Java"
   - "JDK21"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

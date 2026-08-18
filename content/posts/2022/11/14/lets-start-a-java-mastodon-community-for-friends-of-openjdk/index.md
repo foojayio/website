@@ -9,7 +9,6 @@ image: "Screenshot-2022-11-14-at-13.47.07.png"
 categories:
   - "Developer Tools"
   - "Foojay"
-tags:
 related_posts:
   - "foojay-podcast-6"
   - "foojay-a-place-for-friends-of-openjdk"

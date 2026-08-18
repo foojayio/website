@@ -8,7 +8,6 @@ authors:
 image: "gitlab-asciidoc-documentation-as-code-result.png"
 categories:
   - "GitLab"
-tags:
 related_posts:
   - "gitlab-pages-preview"
   - "foojay-podcast-26"

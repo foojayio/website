@@ -10,7 +10,6 @@ image: "roger_stone.jpg"
 categories:
   - "Microservices"
   - "Opinion"
-tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "deploying-spring-boot-applications-on-kubernetes"

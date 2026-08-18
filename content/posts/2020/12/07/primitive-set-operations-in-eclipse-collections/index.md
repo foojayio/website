@@ -8,7 +8,6 @@ authors:
 image: "foojay-prim-1-700x157.png"
 categories:
   - "Eclipse"
-tags:
 related_posts:
 frozen: false
 ---

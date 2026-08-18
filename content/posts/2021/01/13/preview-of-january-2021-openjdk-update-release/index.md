@@ -8,7 +8,6 @@ authors:
 image: "image-4-1024x206.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

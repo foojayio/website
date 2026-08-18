@@ -10,7 +10,6 @@ image: "thumbnail-2.png"
 categories:
   - "IntelliJ IDEA"
   - "Videos"
-tags:
 related_posts:
   - "springone-tlv-world-tour-trip-report"
   - "why-i-dont-do-tdd"

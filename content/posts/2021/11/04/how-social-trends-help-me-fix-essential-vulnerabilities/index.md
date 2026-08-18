@@ -10,7 +10,6 @@ image: "https://snyk.io/wp-content/uploads/blog-social-trends-usage-vuln-1240x36
 categories:
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "avoid-java-serialization"
   - "fix-java-security-issues-while-coding-in-intellij-idea"

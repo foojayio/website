@@ -8,7 +8,6 @@ authors:
 image: "type-hierarchy.gif"
 categories:
   - "VS Code"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ image: "Blog---20.png"
 categories:
   - "DevOps"
   - "Tutorials"
-tags:
 related_posts:
   - "logging-best-practices-mdc-ingestion-and-scale"
   - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"

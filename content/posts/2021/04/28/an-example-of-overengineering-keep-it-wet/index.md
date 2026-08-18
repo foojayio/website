@@ -9,7 +9,6 @@ authors:
 image: "complexity-5902955_1280.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
 frozen: false
 ---

@@ -9,7 +9,6 @@ authors:
 image: "book-8858593.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "server-side-rendering-with-spring-boot"
   - "book-review-modern-frontends-with-htmx"

@@ -9,7 +9,6 @@ image: "55a4556f-11e5-4259-8d35-760a02911362.jpeg"
 categories:
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "getting-started-with-java-17-and-intellij-idea"

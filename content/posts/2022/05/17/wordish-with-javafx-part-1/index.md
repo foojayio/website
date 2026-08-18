@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "game-development-basics-with-fxgl"
   - "creating-a-javafx-world-clock-from-scratch-part-1"

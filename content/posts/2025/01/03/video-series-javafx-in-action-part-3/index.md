@@ -11,7 +11,6 @@ image: "jfxinaction-part-3.png"
 categories:
   - "Interviews"
   - "JavaFX"
-tags:
 related_posts:
   - "video-series-javafx-in-action-part-2"
   - "new-video-series-javafx-in-action-part-1"

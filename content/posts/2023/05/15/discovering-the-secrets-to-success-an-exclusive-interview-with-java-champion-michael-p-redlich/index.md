@@ -8,7 +8,6 @@ authors:
 image: "michael-redlich.jpg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "three-mistakes-junior-software-developers-make-preventing-getting-hired-on-amazing-projects"
   - "why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever"

@@ -9,7 +9,6 @@ authors:
 image: "image-7-1024x433.png"
 categories:
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

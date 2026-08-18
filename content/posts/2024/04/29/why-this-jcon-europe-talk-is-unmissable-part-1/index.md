@@ -9,7 +9,6 @@ image: "Baruch-Sadogursky-1.jpg"
 categories:
   - "DevOps"
   - "Events"
-tags:
 related_posts:
   - "devops-for-developers-introduction-version-control"
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"

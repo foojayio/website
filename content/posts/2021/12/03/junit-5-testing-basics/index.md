@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "junit-5-introduction"
   - "equals-and-hashcode-implementation-considerations"

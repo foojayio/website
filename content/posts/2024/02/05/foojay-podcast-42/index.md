@@ -9,7 +9,6 @@ image: "podcast-guests-south-africa-jugs.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-41"
   - "foojay-podcast-40"

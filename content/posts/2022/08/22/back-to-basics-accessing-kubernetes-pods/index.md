@@ -9,7 +9,6 @@ authors:
 image: "earth-g7f5d45a7d.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "cassandra-database-migration-to-kubernetes-with-zero-downtime"

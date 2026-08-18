@@ -9,7 +9,6 @@ authors:
 image: "anonymous-2768825_1280.jpg"
 categories:
   - "Security"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"

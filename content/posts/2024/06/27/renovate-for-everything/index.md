@@ -9,7 +9,6 @@ authors:
 image: "paint-brush-1034901.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"

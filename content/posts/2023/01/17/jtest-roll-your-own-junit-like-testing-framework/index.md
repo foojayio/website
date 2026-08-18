@@ -9,7 +9,6 @@ image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
   - "Tutorials"
-tags:
 related_posts:
   - "api-mocking-essential-and-redundant"
   - "7-ways-to-improve-your-code-reading-skills"

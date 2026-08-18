@@ -10,7 +10,6 @@ image: "pexels-pixabay-260600.jpg"
 categories:
   - "Performance"
   - "Research"
-tags:
 related_posts:
 frozen: false
 ---

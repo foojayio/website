@@ -9,7 +9,6 @@ authors:
 image: "https://i.imgur.com/R0mdaId.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "demystifying-jvm-memory-management"
   - "7-functional-programming-techniques-in-java-a-primer"

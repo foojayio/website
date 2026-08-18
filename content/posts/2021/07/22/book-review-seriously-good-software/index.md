@@ -9,7 +9,6 @@ image: "https://horstmann.com/unblog/2021-07-05/Faella-SGS-HI.jpeg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-help-your-boss-help-you"
   - "book-review-java-by-comparison"

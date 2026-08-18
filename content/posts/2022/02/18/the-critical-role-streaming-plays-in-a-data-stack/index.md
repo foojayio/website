@@ -12,7 +12,6 @@ categories:
   - "Apache Pulsar"
   - "Databases"
   - "Microservices"
-tags:
 related_posts:
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"

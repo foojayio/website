@@ -10,7 +10,6 @@ image: "pexels-alexandre-saraiva-carniato-2049755.jpg"
 categories:
   - "Kotlin"
   - "Performance"
-tags:
 related_posts:
   - "five-java-developer-must-haves"
   - "kicking-spring-natives-tires"

@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Kubernetes"
   - "Security"
-tags:
 related_posts:
   - "beetroot-yet-another-web-framework"
   - "book-review-persistence-best-practices-for-java-applications"

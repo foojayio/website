@@ -15,7 +15,6 @@ categories:
   - "LLM"
   - "Security"
   - "Testing"
-tags:
 related_posts:
   - "spring-ai-agents-no-second-runtime"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"

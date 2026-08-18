@@ -9,7 +9,6 @@ image: "image-7-2000x462-1.png"
 categories:
   - "Maven"
   - "Performance"
-tags:
 related_posts:
   - "my-final-take-on-gradle-vs-maven"
   - "build-rot-tech-debt"

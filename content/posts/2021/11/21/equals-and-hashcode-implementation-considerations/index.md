@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "for-the-record"

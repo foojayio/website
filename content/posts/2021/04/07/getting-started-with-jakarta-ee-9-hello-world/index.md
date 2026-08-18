@@ -10,7 +10,6 @@ authors:
 image: "Getting-Started-with-Jakarta-EE.jpg"
 categories:
   - "Jakarta EE"
-tags:
 related_posts:
   - "2021-jakarta-ee-developer-survey"
   - "are-java-jakarta-ee-application-servers-heavy"

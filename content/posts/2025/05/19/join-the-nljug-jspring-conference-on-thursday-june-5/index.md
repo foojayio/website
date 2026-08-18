@@ -9,7 +9,6 @@ image: "nljugjspring2025.png"
 categories:
   - "Conference"
   - "Events"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-improve-your-code-reading-skills"

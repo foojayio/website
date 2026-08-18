@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "new-javafx-theme-library-transit-released"
   - "new-java-javafx-library-fxskins-released"

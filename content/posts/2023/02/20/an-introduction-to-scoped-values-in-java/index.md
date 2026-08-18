@@ -9,7 +9,6 @@ image: "scopedvalues.png"
 categories:
   - "Java Core"
   - "JEPs"
-tags:
 related_posts:
   - "embracing-jvm-unified-logging"
   - "for-the-record"

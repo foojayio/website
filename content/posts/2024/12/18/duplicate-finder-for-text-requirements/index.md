@@ -9,7 +9,6 @@ authors:
 image: "duplicate-finder-banner-1024x538-1.jpg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "profile-intellij-idea-with-its-own-profiler"
   - "get-started-with-allocation-profiling"

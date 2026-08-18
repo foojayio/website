@@ -8,7 +8,6 @@ authors:
 image: "cover.png"
 categories:
   - "Developer Tools"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"

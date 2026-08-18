@@ -9,7 +9,6 @@ image: "Screenshot-2024-08-29-at-13.07.44.png"
 categories:
   - "Cloud"
   - "Tools"
-tags:
 related_posts:
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

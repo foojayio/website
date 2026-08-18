@@ -9,7 +9,6 @@ image: "foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-34"
   - "foojay-podcast-33"

@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "relearning-java-thread-primitives"
   - "boldness-in-refactoring"

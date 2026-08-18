@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Performance"
-tags:
 related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "do-java-jakarta-ee-standards-matter"

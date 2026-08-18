@@ -8,7 +8,6 @@ authors:
 image: "java.jpg"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "java-roots-1-java-memory-architecture"
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"

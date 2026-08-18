@@ -10,7 +10,6 @@ categories:
   - "JavaFX"
   - "Performance"
   - "Research"
-tags:
 related_posts:
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"

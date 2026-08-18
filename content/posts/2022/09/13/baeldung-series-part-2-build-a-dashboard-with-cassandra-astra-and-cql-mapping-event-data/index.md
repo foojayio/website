@@ -12,7 +12,6 @@ categories:
   - "Databases"
   - "DataStax"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

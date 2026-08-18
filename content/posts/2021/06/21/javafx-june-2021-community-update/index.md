@@ -10,7 +10,6 @@ categories:
   - "JavaFX"
   - "Research"
   - "Surveys"
-tags:
 related_posts:
 frozen: false
 ---

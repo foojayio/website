@@ -10,7 +10,6 @@ image: "pizza-service.png"
 categories:
   - "Microservices"
   - "Tutorials"
-tags:
 related_posts:
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

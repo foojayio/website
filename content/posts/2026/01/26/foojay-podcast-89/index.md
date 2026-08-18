@@ -8,7 +8,6 @@ authors:
 image: "episode-89-quarkus.jpg"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "quarkus-a-runtime-and-framework-for-cloud-native-java"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"

@@ -9,7 +9,6 @@ image: "https://github.com/HanSolo/JDKMon/raw/main/screenshot.png"
 categories:
   - "JavaFX"
   - "Tools"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"

@@ -10,7 +10,6 @@ categories:
   - "Conference"
   - "Events"
   - "Java"
-tags:
 related_posts:
   - "foojay-io-at-fosdem-2023-trip-report"
   - "springone-tlv-world-tour-trip-report"

@@ -10,7 +10,6 @@ image: "shaialmog_a_person_wearing_a_tshirt_sitting_on_a_chair_working__cfb7bedb
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "eliminating-bugs-using-the-tong-motion-approach"
   - "the-evolution-of-bugs"

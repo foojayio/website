@@ -9,7 +9,6 @@ image: "foojay_podcast.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
   - "openrewrite-automatic-code-refactoring-and-maintenance"

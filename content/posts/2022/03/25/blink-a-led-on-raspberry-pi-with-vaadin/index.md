@@ -13,7 +13,6 @@ categories:
   - "Raspberry Pi"
   - "Spring"
   - "Vaadin"
-tags:
 related_posts:
   - "pi4j-v-2-released"
   - "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"

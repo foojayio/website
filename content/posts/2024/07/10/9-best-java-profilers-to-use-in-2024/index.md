@@ -9,7 +9,6 @@ authors:
 image: "WhatsApp-Image-2024-03-18-at-11.42.39-AM.jpeg"
 categories:
   - "Profiler"
-tags:
 related_posts:
   - "a-short-primer-on-java-debugging-internals"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

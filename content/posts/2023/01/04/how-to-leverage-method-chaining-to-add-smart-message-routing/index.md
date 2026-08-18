@@ -9,7 +9,6 @@ image: "method-chaining-chronicle.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "challenges-when-developing-a-gui-for-fix"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"

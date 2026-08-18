@@ -10,7 +10,6 @@ image: "blog-image-platform-prime.png"
 categories:
   - "Kafka"
   - "Performance"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

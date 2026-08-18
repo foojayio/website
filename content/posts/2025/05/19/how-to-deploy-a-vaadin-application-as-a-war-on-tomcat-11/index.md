@@ -11,7 +11,6 @@ categories:
   - "Spring"
   - "Tutorials"
   - "Vaadin"
-tags:
 related_posts:
   - "browserless-testing-of-vaadin-applications-with-karibu-testing"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

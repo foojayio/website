@@ -8,7 +8,6 @@ authors:
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "book-review-quarkus-for-spring-developers"

@@ -9,7 +9,6 @@ authors:
 image: "Kempelen_chess1.jpg"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "internal-security-hardening-internal-systems"
   - "api-mocking-essential-and-redundant"

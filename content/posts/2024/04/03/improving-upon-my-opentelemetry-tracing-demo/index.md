@@ -9,7 +9,6 @@ authors:
 image: "blacksmith-2740128.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "effective-coding-with-java-observability"
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"

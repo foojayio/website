@@ -9,7 +9,6 @@ authors:
 image: "orangepi-connections-scaled.jpg"
 categories:
   - "Raspberry Pi"
-tags:
 related_posts:
 frozen: false
 ---

@@ -9,7 +9,6 @@ image: "https://raw.githubusercontent.com/autumoswitzerland/autumo-beetroot/mast
 categories:
   - "Developer Tools"
   - "Release Notes"
-tags:
 related_posts:
   - "building-javafx-with-gradle"
   - "getting-started-with-rife2-java-web-framework-v1-0-0"

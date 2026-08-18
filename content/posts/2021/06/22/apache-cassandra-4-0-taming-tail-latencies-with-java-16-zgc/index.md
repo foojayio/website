@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "Apache Pulsar"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

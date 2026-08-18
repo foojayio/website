@@ -10,7 +10,6 @@ image: "https://www.morling.dev/images/jmfrx_mission_control_configuration.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

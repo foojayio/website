@@ -11,7 +11,6 @@ categories:
   - "Performance"
   - "Project Panama"
   - "Research"
-tags:
 related_posts:
   - "java-panama-polyglot-part-3"
   - "java-panama-polyglot-swift-part-2"

@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Java Core"
   - "JEPs"
-tags:
 related_posts:
 frozen: false
 ---

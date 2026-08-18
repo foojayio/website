@@ -9,7 +9,6 @@ image: "image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

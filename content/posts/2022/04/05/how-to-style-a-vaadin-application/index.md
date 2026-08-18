@@ -8,7 +8,6 @@ authors:
 image: "ij7493vc0zx9vxhoza3p.png"
 categories:
   - "Vaadin"
-tags:
 related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "build-web-apps-in-pure-java-with-vaadin-flow"

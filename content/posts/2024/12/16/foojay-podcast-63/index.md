@@ -17,7 +17,6 @@ categories:
   - "OpenRewrite"
   - "Podcast"
   - "Security"
-tags:
 related_posts:
   - "why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization"
   - "how-organizations-became-stuck-on-outdated-java-versions"

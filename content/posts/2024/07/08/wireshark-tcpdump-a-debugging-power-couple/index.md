@@ -10,7 +10,6 @@ image: "DALL-E-2024-03-31-12.25.28-Create-an-illustration-for-a-blog-post-about-
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-streams-with-peek"
   - "dtrace-revisited-advanced-debugging-techniques"

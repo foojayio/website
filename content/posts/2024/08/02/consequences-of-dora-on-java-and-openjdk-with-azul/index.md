@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul"
   - "are-java-security-updates-important"

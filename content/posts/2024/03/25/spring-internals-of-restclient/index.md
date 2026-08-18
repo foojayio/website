@@ -11,7 +11,6 @@ categories:
   - "Microservices"
   - "reactive"
   - "Spring"
-tags:
 related_posts:
   - "spring-6-1-restclient"
   - "how-to-improve-your-spring-boot-skills"

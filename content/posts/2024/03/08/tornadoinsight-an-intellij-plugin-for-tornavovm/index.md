@@ -9,7 +9,6 @@ image: "Static_Check_Fig1-1024x671-1.webp"
 categories:
   - "IntelliJ IDEA"
   - "Tools"
-tags:
 related_posts:
   - "foojay-podcast-17"
   - "hardware-acceleration-for-java-tornadovm-can-do-it"

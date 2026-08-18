@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Research"
   - "Tools"
-tags:
 related_posts:
   - "why-home-assistant"
   - "why-i-love-intellij-idea-for-java-development"

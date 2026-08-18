@@ -14,7 +14,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Tools"
-tags:
 related_posts:
   - "jdkmon-your-friendly-jdk-distribution-updater"
   - "foojay-podcast-4"

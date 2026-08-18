@@ -10,7 +10,6 @@ image: "performance.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "java-24-rolls-out-today-find-out-why-its-aptly-named"
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"

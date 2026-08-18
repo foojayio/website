@@ -10,7 +10,6 @@ image: "GlassFish-embedded-e1698251860666.png"
 categories:
   - "Jakarta EE"
   - "Java"
-tags:
 related_posts:
   - "glassfish-is-rolling-forward-whats-new"
   - "ejb-support-in-piranha-via-cdi"

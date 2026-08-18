@@ -8,7 +8,6 @@ authors:
 image: "When-Should-we-Migrate-to-Microservices.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "is-it-time-to-go-back-to-the-monolith"
   - "devops-for-developers-introduction-version-control"

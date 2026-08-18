@@ -8,7 +8,6 @@ authors:
 image: "liquid-glass-material-3-modern-native-themes-2.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

@@ -9,7 +9,6 @@ authors:
 image: "falling-5472195.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apache-apisix-loves-rust"
   - "apisix-api-gateway"

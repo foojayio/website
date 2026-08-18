@@ -10,7 +10,6 @@ image: "jdwp-is-a-security-risk.jpg"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "the-debugger-checklist-part-i"
   - "the-debugger-checklist-part-ii"

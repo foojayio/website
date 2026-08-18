@@ -9,7 +9,6 @@ image: "hot-reload-code-ant-commander-pro-1024x391-1.png"
 categories:
   - "Java"
   - "JShell"
-tags:
 related_posts:
   - "java-21-jep-445-unnamed-classes-and-instance-main-methods"
   - "class-loader-hierarchies"

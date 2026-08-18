@@ -9,7 +9,6 @@ image: "OpenRewrite.gif"
 categories:
   - "Java"
   - "OpenRewrite"
-tags:
 related_posts:
   - "openrewrite-automatic-code-refactoring-and-maintenance"
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"

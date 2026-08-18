@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JEPs"
   - "Performance"
-tags:
 related_posts:
   - "how-is-leyden-improving-java-performance-part-3-of-3"
   - "how-is-leyden-improving-java-performance-part-2-of-3"

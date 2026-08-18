@@ -14,7 +14,6 @@ categories:
   - "DevOps"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "adelphi-apache-cassandra-testing-goes-cloud-native"

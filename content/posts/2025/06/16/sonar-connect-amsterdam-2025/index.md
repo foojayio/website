@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Events"
   - "Security"
-tags:
 related_posts:
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "foojay-podcast-49"

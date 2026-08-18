@@ -8,7 +8,6 @@ authors:
 image: "jekov.jpeg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

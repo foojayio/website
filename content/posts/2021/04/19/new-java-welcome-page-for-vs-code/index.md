@@ -8,7 +8,6 @@ authors:
 image: "feature-tour1.gif"
 categories:
   - "VS Code"
-tags:
 related_posts:
 frozen: false
 ---

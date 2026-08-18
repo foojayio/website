@@ -11,7 +11,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "Vaadin"
-tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"

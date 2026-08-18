@@ -8,7 +8,6 @@ authors:
 image: "duke30.png"
 categories:
   - "Events"
-tags:
 related_posts:
 frozen: false
 ---

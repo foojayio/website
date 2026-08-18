@@ -9,7 +9,6 @@ authors:
 image: "Screenshot-2020-12-07-at-7.29.06-PM-700x219.png"
 categories:
   - "Kubernetes"
-tags:
 related_posts:
 frozen: false
 ---

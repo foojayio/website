@@ -10,7 +10,6 @@ image: "DALL-E-2024-03-10-13.01.01-A-conceptual-illustration-for-a-blog-post-hea
 categories:
   - "Java"
   - "Tutorials"
-tags:
 related_posts:
   - "dtrace-revisited-advanced-debugging-techniques"
   - "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"

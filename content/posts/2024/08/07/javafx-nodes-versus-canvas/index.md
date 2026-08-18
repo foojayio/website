@@ -10,7 +10,6 @@ image: "canvas-nodes-javafx.png"
 categories:
   - "JavaFX"
   - "Use Cases"
-tags:
 related_posts:
   - "a-javafx-app-on-zulufx-in-60-seconds"
   - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"

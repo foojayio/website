@@ -9,7 +9,6 @@ authors:
 image: "bird-5285011.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

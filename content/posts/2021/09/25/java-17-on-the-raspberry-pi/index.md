@@ -11,7 +11,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "VS Code"
-tags:
 related_posts:
   - "schedule-for-foojay-virtual-openjdk-17-jug-tour"
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"

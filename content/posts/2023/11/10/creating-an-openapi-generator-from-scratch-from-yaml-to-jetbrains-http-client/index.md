@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Kotlin"
   - "Testing"
-tags:
 related_posts:
   - "getting-started-with-openapi-generators-tips-tricks"
   - "book-review-api-design-patterns"

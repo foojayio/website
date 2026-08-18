@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "DevOps"
   - "Microservices"
-tags:
 related_posts:
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"
   - "building-scalable-streaming-applications-with-datastax-astra-streaming"

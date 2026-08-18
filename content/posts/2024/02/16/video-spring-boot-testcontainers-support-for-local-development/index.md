@@ -10,7 +10,6 @@ categories:
   - "Spring"
   - "Testcontainers"
   - "Videos"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

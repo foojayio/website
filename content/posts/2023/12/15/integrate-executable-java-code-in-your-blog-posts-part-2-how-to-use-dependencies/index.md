@@ -9,7 +9,6 @@ image: "defdeps.png"
 categories:
   - "Foojay"
   - "Tutorials"
-tags:
 related_posts:
   - "integrate-executable-java-code-in-your-blog-posts"
   - "how-to-submit-your-next-article-on-foojay-io"

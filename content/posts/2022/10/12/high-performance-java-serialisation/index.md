@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "low-latency-microservices-a-retrospective"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"

@@ -10,7 +10,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

@@ -11,7 +11,6 @@ categories:
   - "Machine Learning"
   - "Podcast"
   - "Project Panama"
-tags:
 related_posts:
   - "quick-start-with-machine-learning-in-java"
   - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"

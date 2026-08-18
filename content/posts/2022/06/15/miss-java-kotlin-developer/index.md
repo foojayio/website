@@ -10,7 +10,6 @@ image: "cat-g641127bfa.jpg"
 categories:
   - "Java Core"
   - "Kotlin"
-tags:
 related_posts:
   - "chopping-monolith"
   - "blockhound-how-it-works"

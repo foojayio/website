@@ -9,7 +9,6 @@ authors:
 image: "Shai_Almog_a_rube_goldberg_machine_drawing_bb1e8dd8-b6bb-4518-8175-6834556eedf4-1024x585.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "operator-overloading-in-java"
   - "the-reason-java-is-still-popular"

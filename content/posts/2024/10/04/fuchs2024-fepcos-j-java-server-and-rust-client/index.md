@@ -9,7 +9,6 @@ image: "fuchs2024-java-server-and-rust-client-example.png"
 categories:
   - "Developer Tools"
   - "Use Cases"
-tags:
 related_posts:
   - "fuchs-2024-fepcos-j-multithreaded-server"
   - "fuchs-2023-fepcos-j-02"

@@ -9,7 +9,6 @@ authors:
 image: "water-ocean-technology-boat-wheel-ship.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "kubernetes-gateway-api"

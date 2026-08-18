@@ -11,7 +11,6 @@ categories:
   - "Spring"
   - "Testcontainers"
   - "Tools"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"

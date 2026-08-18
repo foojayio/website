@@ -14,7 +14,6 @@ categories:
   - "DevOps"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "why-k8ssandra"
   - "kubernetes-data-simplicity-getting-started-with-k8ssandra"

@@ -13,7 +13,6 @@ categories:
   - "Microservices"
   - "nosql"
   - "Payara"
-tags:
 related_posts:
   - "whats-new-in-the-july-2026-azul-payara-release"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"

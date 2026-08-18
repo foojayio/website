@@ -9,7 +9,6 @@ authors:
 image: "otel-component-model.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"

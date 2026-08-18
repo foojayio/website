@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "debugging-openjdk-tests-in-vscode-without-losing-your-mind"
   - "java-on-visual-studio-code-may-2023"

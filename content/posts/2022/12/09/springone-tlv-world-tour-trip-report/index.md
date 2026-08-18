@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Spring"
   - "Trip Reports"
-tags:
 related_posts:
   - "internal-security-hardening-internal-systems"
   - "api-mocking-essential-and-redundant"

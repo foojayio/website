@@ -9,7 +9,6 @@ image: "social_16-9.png"
 categories:
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "building-javafx-with-gradle"

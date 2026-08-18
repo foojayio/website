@@ -9,7 +9,6 @@ authors:
 image: "https://cgunturme.files.wordpress.com/2020/05/maveneffectivepom.png?w=1024"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "understanding-apache-maven-part-1-the-basics"
   - "a-simple-service-with-spring-boot"

@@ -15,7 +15,6 @@ categories:
   - "Java"
   - "Microservices"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

@@ -8,7 +8,6 @@ authors:
 image: "foojay_podcast.png"
 categories:
   - "Events"
-tags:
 related_posts:
 frozen: false
 ---

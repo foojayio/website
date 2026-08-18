@@ -10,7 +10,6 @@ image: "dependency-matrix-menu.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

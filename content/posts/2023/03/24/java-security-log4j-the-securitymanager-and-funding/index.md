@@ -9,7 +9,6 @@ image: "contrast-security.png"
 categories:
   - "Security"
   - "Videos"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "project-panama-for-newbies-part-1"

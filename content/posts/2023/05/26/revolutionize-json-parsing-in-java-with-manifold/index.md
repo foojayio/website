@@ -10,7 +10,6 @@ image: "thumbnail-18.png"
 categories:
   - "Developer Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "relearning-java-thread-primitives"
   - "boldness-in-refactoring"

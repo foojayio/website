@@ -9,7 +9,6 @@ authors:
 image: "https://jfeatures.com/img/ebook_upd.png"
 categories:
   - "Records"
-tags:
 related_posts:
   - "the-visitor-pattern-revisited-using-data-oriented-programming-techniques"
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"

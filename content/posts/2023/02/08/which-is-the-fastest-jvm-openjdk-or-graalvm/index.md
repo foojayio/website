@@ -9,7 +9,6 @@ image: "Screen-Shot-2023-01-31-at-9.45.13-AM-1024x602-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever"

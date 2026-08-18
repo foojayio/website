@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Foojay"
   - "Tutorials"
-tags:
 related_posts:
   - "devops-101-part-i-ci-cd"
   - "jenkins-cluster-continuous-integration-delivery-in-jelastic-paas"

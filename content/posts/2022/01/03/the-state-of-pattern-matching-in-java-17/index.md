@@ -9,7 +9,6 @@ authors:
 image: "https://i.imgur.com/M6xKDas.jpeg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "immutable-collections-in-java-with-sealed-types"
   - "getting-started-with-java-17-and-intellij-idea"

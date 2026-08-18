@@ -8,7 +8,6 @@ authors:
 image: "image-7.png"
 categories:
   - "Trip Reports"
-tags:
 related_posts:
   - "foojay-podcast-14"
   - "a-short-primer-on-java-debugging-internals"

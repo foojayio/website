@@ -9,7 +9,6 @@ image: "IntelliJ_IDEA_AI_Assistant_Webinar.jpeg"
 categories:
   - "Developer Tools"
   - "Machine Learning"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

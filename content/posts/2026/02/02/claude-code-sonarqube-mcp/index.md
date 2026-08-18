@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "GenAI"
   - "Java"
-tags:
 related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "context-is-code-a-tour-of-apm-and-agentrc"

@@ -12,7 +12,6 @@ categories:
   - "Developer Tools"
   - "Jakarta EE"
   - "Tools"
-tags:
 related_posts:
   - "5-great-reasons-to-use-jooq"
   - "3-ways-to-refactor-your-code-in-intellij-idea"

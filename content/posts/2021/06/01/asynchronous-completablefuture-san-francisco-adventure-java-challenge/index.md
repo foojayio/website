@@ -8,7 +8,6 @@ authors:
 image: "completable_future-1024x801-1.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "function-calculation-java-challenge"
   - "neo-stream-search-java-challenge"

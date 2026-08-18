@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "effective-cloud-native-development-open-liberty-vs-code"
   - "what-are-you-missing-by-debugging-in-vs-code"

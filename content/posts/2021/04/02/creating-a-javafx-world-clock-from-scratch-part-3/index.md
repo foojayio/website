@@ -9,7 +9,6 @@ image: "Screen-Shot-2021-03-25-at-4.04.43-PM.png"
 categories:
   - "Bach"
   - "JavaFX"
-tags:
 related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-6"
   - "creating-a-javafx-world-clock-from-scratch-part-5"

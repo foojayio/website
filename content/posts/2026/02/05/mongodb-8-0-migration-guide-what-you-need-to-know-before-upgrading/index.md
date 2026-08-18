@@ -9,7 +9,6 @@ image: "1_rM-JIRWo49QIKv-vZ4taEQ.webp"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "atlas-searching-with-the-java-driver"

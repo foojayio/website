@@ -10,7 +10,6 @@ image: "chris.png"
 categories:
   - "Interviews"
   - "Performance"
-tags:
 related_posts:
   - "foojay-all-about-java-and-the-openjdk-i-programmer"
   - "foojay-a-place-for-friends-of-openjdk-adt-magazine"

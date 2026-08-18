@@ -8,7 +8,6 @@ authors:
 image: "grid_0.webp"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

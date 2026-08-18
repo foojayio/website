@@ -11,7 +11,6 @@ categories:
   - "Raspberry Pi"
   - "Research"
   - "Use Cases"
-tags:
 related_posts:
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

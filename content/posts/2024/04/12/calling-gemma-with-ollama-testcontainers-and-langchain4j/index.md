@@ -10,7 +10,6 @@ image: "gemma-ollama-testcontainers-langchain4j-700x360-1.png"
 categories:
   - "Java"
   - "Machine Learning"
-tags:
 related_posts:
   - "quick-start-with-machine-learning-in-java"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

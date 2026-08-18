@@ -13,7 +13,6 @@ categories:
   - "Java Beginner"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "video-sdkman-explained"

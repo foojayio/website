@@ -8,7 +8,6 @@ authors:
 image: "compiling-java-1024x357.png"
 categories:
   - "Raspberry Pi"
-tags:
 related_posts:
   - "crafting-your-own-railway-display-with-java"
   - "a-fresh-look-at-embedded-java"

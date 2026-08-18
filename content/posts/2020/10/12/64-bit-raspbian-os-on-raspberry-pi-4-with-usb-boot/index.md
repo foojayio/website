@@ -10,7 +10,6 @@ image: "imager_eeprom.png"
 categories:
   - "Embedded"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
   - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"

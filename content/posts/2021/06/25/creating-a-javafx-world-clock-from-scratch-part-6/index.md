@@ -9,7 +9,6 @@ image: "JFX-World-Clock-Part-6.png"
 categories:
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"

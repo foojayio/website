@@ -8,7 +8,6 @@ authors:
 image: "lottie4j-v1.1.0-scaled.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
   - "javafx-links-of-february-2024"

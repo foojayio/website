@@ -10,7 +10,6 @@ image: "Screenshot-2025-10-29-at-11.47.54-AM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "domain-driven-design-in-java-a-practical-guide"
   - "enforcing-governance-in-mongodb-atlas-with-resource-policies"

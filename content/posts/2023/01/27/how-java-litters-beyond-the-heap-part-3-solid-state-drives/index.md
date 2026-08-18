@@ -9,7 +9,6 @@ image: "ssd_image5-700x359-1.png"
 categories:
   - "Databases"
   - "Tutorials"
-tags:
 related_posts:
   - "how-java-litters-beyond-the-heap-relational-databases"
   - "how-java-litters-beyond-the-heap-part-2-distributed-databases"

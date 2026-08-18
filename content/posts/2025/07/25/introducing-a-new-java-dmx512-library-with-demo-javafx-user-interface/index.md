@@ -12,7 +12,6 @@ categories:
   - "JavaFX"
   - "Library"
   - "Videos"
-tags:
 related_posts:
   - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "idempotent-spring-boot-starter"

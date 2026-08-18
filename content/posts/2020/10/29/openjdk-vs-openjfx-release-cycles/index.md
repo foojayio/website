@@ -9,7 +9,6 @@ image: "history_java_releases.png"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "a-javafx-app-on-zulufx-in-60-seconds"

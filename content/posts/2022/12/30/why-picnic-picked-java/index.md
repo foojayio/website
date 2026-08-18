@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Java Core"
   - "Opinion"
-tags:
 related_posts:
   - "embracing-java-17-heres-what-we-learned-at-picnic"
   - "the-quest-to-the-os-java-native-memory-foojay-today"

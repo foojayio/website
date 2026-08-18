@@ -10,7 +10,6 @@ image: "cover.jpg"
 categories:
   - "Kotlin"
   - "OpenRewrite"
-tags:
 related_posts:
   - "brokk-for-java-developers"
   - "build-rot-tech-debt"

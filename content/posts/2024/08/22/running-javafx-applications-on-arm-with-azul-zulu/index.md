@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Performance"
-tags:
 related_posts:
   - "consequences-of-dora-on-java-and-openjdk-with-azul"
   - "improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm"

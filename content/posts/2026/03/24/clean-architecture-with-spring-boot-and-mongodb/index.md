@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
 frozen: false
 ---

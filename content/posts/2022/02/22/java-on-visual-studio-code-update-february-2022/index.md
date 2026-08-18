@@ -9,7 +9,6 @@ image: "https://devblogs.microsoft.com/java/wp-content/uploads/sites/51/2022/02/
 categories:
   - "Release Notes"
   - "VS Code"
-tags:
 related_posts:
   - "java-development-with-vs-code-on-the-raspberry-pi"
   - "say-goodbye-to-project-files-in-visual-studio-code"

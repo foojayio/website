@@ -18,7 +18,6 @@ categories:
   - "Podcast"
   - "Raspberry Pi"
   - "Spring"
-tags:
 related_posts:
   - "foojay-podcast-2"
   - "controlling-a-led-strip-with-pi4j-and-jbang"

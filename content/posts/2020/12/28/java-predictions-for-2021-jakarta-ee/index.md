@@ -9,7 +9,6 @@ image: "image.png"
 categories:
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
 frozen: false
 ---

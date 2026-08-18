@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Kotlin"
   - "Tools"
-tags:
 related_posts:
   - "getting-started-with-openapi-generators-tips-tricks"
   - "building-command-line-interfaces-with-kotlin-using-picocli"

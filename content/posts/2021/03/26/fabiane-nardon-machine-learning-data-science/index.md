@@ -9,7 +9,6 @@ image: "fabiane-tailtarget.com_8314_small-2-700x467.jpg"
 categories:
   - "Interviews"
   - "Machine Learning"
-tags:
 related_posts:
 frozen: false
 ---

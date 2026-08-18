@@ -10,7 +10,6 @@ categories:
   - "Embedded"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "pi4j-v-2-released"
   - "light-up-your-christmas-tree-with-java-and-raspberry-pi"

@@ -8,7 +8,6 @@ authors:
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"

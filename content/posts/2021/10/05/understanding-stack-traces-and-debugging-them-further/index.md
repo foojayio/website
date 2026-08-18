@@ -9,7 +9,6 @@ authors:
 image: "Understanding-Stack-Traces1.jpg"
 categories:
   - "Debugging"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "java-logging-what-to-log-what-not-to-log"

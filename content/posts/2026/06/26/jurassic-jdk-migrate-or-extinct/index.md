@@ -12,7 +12,6 @@ categories:
   - "Maven"
   - "Performance"
   - "Spring"
-tags:
 related_posts:
   - "foojay-podcast-78"
   - "foojay-podcast-28"

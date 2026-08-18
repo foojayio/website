@@ -8,7 +8,6 @@ authors:
 image: "dead-code-workflow-2.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "instrumenting-java-code-to-find-and-handle-unused-classes"
   - "validating-java-profiling-apis"

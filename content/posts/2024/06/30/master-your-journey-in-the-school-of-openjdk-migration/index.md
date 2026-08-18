@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "OpenJDK Migration"
   - "Tutorials"
-tags:
 related_posts:
   - "book-announcement-openjdk-migration-guide-for-dummies"
   - "mastering-the-challenges-of-openjdk-migration"

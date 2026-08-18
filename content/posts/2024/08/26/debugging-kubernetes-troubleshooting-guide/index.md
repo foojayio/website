@@ -9,7 +9,6 @@ authors:
 image: "c46a56605ff1dccf303be0b4eddc49ef.webp-copy.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-kubernetes-part-1-an-introduction"
   - "software-testing-as-a-debugging-tool"

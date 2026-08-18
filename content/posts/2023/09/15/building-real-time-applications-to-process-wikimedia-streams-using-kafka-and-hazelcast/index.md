@@ -14,7 +14,6 @@ categories:
   - "Performance"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "increasing-event-streaming-with-kafka-and-azul"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"

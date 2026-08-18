@@ -10,7 +10,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Jakarta EE"
-tags:
 related_posts:
 frozen: false
 ---

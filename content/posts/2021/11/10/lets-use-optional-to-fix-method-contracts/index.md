@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "avoiding-nullpointerexception"

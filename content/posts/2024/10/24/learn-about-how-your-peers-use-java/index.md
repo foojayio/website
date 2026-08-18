@@ -9,7 +9,6 @@ image: "image002-1.jpg"
 categories:
   - "Java Core"
   - "Surveys"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "java-where-the-wild-code-isnt"

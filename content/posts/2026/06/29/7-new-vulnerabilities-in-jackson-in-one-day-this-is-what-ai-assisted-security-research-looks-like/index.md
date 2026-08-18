@@ -8,7 +8,6 @@ image: "ChatGPT-Image-Jun-29-2026-12_44_59-PM.png"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"

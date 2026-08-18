@@ -8,7 +8,6 @@ authors:
 image: "Restyled-Control-2021-01-15-12-58-55.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "custom-controls-in-javafx-part-ii"
   - "custom-controls-in-javafx-part-iii"

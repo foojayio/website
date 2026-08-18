@@ -10,7 +10,6 @@ image: "eye-2771174.jpg"
 categories:
   - "DevOps"
   - "Spring"
-tags:
 related_posts:
   - "apache-apisix-loves-rust"
   - "apisix-api-gateway"

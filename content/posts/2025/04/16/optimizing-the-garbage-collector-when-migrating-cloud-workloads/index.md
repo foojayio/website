@@ -13,7 +13,6 @@ categories:
   - "Java Beginner"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "running-javafx-applications-on-arm-with-azul-zulu"
   - "achieving-high-throughput-without-sacrificing-latency"

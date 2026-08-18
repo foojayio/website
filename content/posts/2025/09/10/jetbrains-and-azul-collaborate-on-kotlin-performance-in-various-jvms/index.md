@@ -12,7 +12,6 @@ categories:
   - "Events"
   - "Performance"
   - "Webinar"
-tags:
 related_posts:
   - "apple-silicon-with-zulu-openjdk-and-intellij-idea"
   - "are-java-security-updates-important"

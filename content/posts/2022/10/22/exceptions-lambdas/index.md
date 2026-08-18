@@ -10,7 +10,6 @@ image: "gears-3160715.jpg"
 categories:
   - "Developer Tools"
   - "Research"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-functional-programming-techniques-in-java-a-primer"

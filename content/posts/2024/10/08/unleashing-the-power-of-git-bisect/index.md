@@ -10,7 +10,6 @@ image: "DALL-E-2024-02-13-11.18.34-Create-an-engaging-blog-post-header-image-tha
 categories:
   - "Developer Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "dtrace-revisited-advanced-debugging-techniques"
   - "when-should-we-move-to-microservices"

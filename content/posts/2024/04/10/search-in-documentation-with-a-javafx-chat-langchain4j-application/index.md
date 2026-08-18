@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Machine Learning"
   - "Research"
-tags:
 related_posts:
   - "foojay-podcast-32-philippines-jug"
   - "foojay-podcast-29"

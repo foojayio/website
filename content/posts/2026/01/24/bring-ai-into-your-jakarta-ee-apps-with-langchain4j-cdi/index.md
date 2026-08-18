@@ -13,7 +13,6 @@ categories:
   - "LangChain4j"
   - "Library"
   - "LLM"
-tags:
 related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"

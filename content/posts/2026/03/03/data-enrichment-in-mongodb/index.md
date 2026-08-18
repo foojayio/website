@@ -9,7 +9,6 @@ image: "Screenshot-2025-12-30-at-10.48.52-PM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "atlas-searching-with-the-java-driver"

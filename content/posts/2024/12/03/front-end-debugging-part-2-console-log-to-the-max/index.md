@@ -10,7 +10,6 @@ image: "65198e695ec5906a9b9db9b873f71bc55a6b1161d3776b2efa03a5a7b5ce6b54.jpg"
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "front-end-debugging-part-1-not-just-console-log"
   - "strace-revisited-simple-is-beautiful"

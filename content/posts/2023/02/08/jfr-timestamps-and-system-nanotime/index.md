@@ -9,7 +9,6 @@ image: "jfr.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-closer-look-at-jfr-streaming"

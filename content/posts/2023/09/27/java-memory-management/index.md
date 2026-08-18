@@ -9,7 +9,6 @@ image: "Screenshot-2023-09-22-at-5.40.01-PM.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "efficient-memory-mapping-for-terabyte-sparse-files-in-java"
   - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"

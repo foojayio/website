@@ -8,7 +8,6 @@ authors:
 image: "1024px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

@@ -9,7 +9,6 @@ image: "omnifish-logo-turquise-bg-400px-e1663869726664.png"
 categories:
   - "Jakarta EE"
   - "Press"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"

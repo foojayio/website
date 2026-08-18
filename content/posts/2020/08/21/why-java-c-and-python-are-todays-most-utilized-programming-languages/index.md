@@ -8,7 +8,6 @@ authors:
 image: "tiobe_20200820.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "whats-new-in-the-june-2026-azul-payara-release"

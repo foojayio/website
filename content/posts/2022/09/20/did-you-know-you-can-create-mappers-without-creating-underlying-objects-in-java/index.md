@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "peter-lawrey-latency-performance"
   - "the-unix-philosophy-for-low-latency"

@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "the-costs-of-hidden-logging"

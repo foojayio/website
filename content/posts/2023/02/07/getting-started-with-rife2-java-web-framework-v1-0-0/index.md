@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Release Notes"
   - "RIFE2"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-functional-programming-techniques-in-java-a-primer"

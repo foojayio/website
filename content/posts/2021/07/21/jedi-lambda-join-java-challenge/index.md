@@ -8,7 +8,6 @@ authors:
 image: "lambda_join.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "daemon-thread-java-code-quiz"
   - "method-reference-vs-lambda-java-challenge"

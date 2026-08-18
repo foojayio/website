@@ -10,7 +10,6 @@ image: "superhero-534120.jpg"
 categories:
   - "Databases"
   - "Kotlin"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "backpressure-in-reactive-systems"

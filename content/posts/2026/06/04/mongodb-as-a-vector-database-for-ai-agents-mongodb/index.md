@@ -7,7 +7,6 @@ authors:
 image: "Brand-Shape-Yes-Shape-Color-Lavender-7-e1780489356637.png"
 categories:
   - "Mongo"
-tags:
 related_posts:
   - "agent-memory-with-spring-ai-redis"
   - "agents-meet-databases-the-future-of-agentic-architectures"

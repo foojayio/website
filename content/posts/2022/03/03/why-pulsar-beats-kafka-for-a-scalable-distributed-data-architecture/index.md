@@ -13,7 +13,6 @@ categories:
   - "Databases"
   - "Kafka"
   - "Microservices"
-tags:
 related_posts:
   - "simplify-migrating-from-kafka-to-pulsar-with-kafka-connect-support"
   - "why-developers-should-use-apache-pulsar"

@@ -10,7 +10,6 @@ image: "podcast-quarkus-club-guests.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-43"
   - "foojay-podcast-42"

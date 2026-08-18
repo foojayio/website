@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Machine Learning"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

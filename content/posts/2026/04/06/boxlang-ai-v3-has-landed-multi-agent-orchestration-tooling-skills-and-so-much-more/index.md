@@ -9,7 +9,6 @@ categories:
   - "AI"
   - "BoxLang"
   - "GenAI"
-tags:
 related_posts:
 frozen: false
 ---

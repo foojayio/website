@@ -9,7 +9,6 @@ authors:
 image: "playwright-logo.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "2024-in-retrospective-nicolas-frankel"
   - "blockhound-how-it-works"

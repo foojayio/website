@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Hazelcast"
   - "Tutorials"
-tags:
 related_posts:
   - "how-to-get-started-with-the-hazelcast-viridian-serverless"
   - "how-to-create-a-failover-client-using-the-hazelcast-viridian-serverless"

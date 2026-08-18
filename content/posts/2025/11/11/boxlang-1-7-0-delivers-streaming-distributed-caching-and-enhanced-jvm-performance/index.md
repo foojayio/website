@@ -10,7 +10,6 @@ categories:
   - "BoxLang"
   - "Press"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-76"
 frozen: false

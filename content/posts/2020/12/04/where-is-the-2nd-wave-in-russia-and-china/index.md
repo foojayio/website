@@ -8,7 +8,6 @@ authors:
 image: "https://foojay.io/1-europe-2/"
 categories:
   - "JavaFX"
-tags:
 related_posts:
 frozen: false
 ---

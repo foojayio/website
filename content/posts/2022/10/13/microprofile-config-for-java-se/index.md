@@ -9,7 +9,6 @@ image: "microprofile.png"
 categories:
   - "Java Core"
   - "Microservices"
-tags:
 related_posts:
   - "evolution-of-microservices"
   - "how-to-bring-your-java-microservices-to-the-cloud"

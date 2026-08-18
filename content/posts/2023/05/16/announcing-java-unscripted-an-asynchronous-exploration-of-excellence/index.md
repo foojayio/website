@@ -8,7 +8,6 @@ authors:
 image: "1a5ed3b2-d6fe-4017-aab5-5c1919f1fa2f.jpeg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
   - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"

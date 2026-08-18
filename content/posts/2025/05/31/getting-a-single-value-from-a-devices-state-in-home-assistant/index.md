@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Research"
   - "Tools"
-tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"

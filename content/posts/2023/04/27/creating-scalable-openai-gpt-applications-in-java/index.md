@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Machine Learning"
   - "Tutorials"
-tags:
 related_posts:
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
   - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"

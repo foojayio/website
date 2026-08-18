@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "TornadoVM"
-tags:
 related_posts:
   - "foojay-podcast-81"
   - "foojay-podcast-80"

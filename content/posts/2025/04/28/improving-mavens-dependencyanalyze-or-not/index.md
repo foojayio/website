@@ -10,7 +10,6 @@ image: "cover.jpg"
 categories:
   - "Maven"
   - "Spring"
-tags:
 related_posts:
   - "analyzing-dependencies-in-intellij-idea"
   - "a-short-history-of-ajax-and-ssr"

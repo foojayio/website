@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"

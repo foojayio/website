@@ -8,7 +8,6 @@ authors:
 image: "Gemini_Generated_Image_cuv3ntcuv3ntcuv3-scaled.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "5-great-reasons-to-use-jooq"

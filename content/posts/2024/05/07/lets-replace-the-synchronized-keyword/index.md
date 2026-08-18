@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Core"
   - "JDK21"
-tags:
 related_posts:
   - "benchmark-jdbc-connectors-and-java-21-virtual-threads"
   - "how-to-diagnose-and-mitigate-pinning-in-javas-virtual-thread-execution"

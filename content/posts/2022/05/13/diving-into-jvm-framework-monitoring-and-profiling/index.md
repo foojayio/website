@@ -10,7 +10,6 @@ categories:
   - "Java Core"
   - "Kotlin"
   - "Performance"
-tags:
 related_posts:
   - "book-review-quarkus-for-spring-developers"
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"

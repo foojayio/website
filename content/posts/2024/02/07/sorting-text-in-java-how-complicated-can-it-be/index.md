@@ -9,7 +9,6 @@ image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "playing-practically-with-stream-api"

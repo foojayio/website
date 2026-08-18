@@ -11,7 +11,6 @@ image: "episode-70-foojay-5.png"
 categories:
   - "Foojay"
   - "Podcast"
-tags:
 related_posts:
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
   - "foojay-podcast-69"

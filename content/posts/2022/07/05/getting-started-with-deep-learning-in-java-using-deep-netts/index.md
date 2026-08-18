@@ -10,7 +10,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "NetBeans"
-tags:
 related_posts:
   - "quick-start-with-machine-learning-in-java"
   - "deep-learning-in-java-for-drug-discovery"

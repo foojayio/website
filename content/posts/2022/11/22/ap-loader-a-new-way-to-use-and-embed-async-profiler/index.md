@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "contributing-to-openjdk-mission-control"

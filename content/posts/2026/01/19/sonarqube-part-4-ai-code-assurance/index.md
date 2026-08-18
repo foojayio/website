@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Developer Tools"
   - "Security"
-tags:
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"

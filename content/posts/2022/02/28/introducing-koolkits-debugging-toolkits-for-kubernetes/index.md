@@ -10,7 +10,6 @@ image: "lightrun-koolkits.png"
 categories:
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "the-debugger-checklist-part-ii"

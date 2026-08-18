@@ -12,7 +12,6 @@ categories:
   - "Performance"
   - "Testcontainers"
   - "Testing"
-tags:
 related_posts:
   - "native-graphql-api-with-neo4j-auradb-on-heroku"
   - "easy-jakarta-ee-integration-testing"

@@ -13,7 +13,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "Release Notes"
-tags:
 related_posts:
   - "java-24-rolls-out-today-find-out-why-its-aptly-named"
   - "java-24-whats-new"

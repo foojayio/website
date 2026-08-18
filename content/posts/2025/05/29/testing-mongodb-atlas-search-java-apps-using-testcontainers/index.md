@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Mongo"
   - "Testcontainers"
-tags:
 related_posts:
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"

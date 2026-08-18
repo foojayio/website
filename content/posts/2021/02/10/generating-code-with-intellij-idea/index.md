@@ -9,7 +9,6 @@ authors:
 image: "generate-code.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "apple-silicon-with-zulu-openjdk-and-intellij-idea"
   - "intellij-idea-made-me-lazy"

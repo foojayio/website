@@ -11,7 +11,6 @@ categories:
   - "Graph"
   - "Machine Learning"
   - "nosql"
-tags:
 related_posts:
   - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-1"
   - "breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag"

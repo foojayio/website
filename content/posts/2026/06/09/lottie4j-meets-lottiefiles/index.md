@@ -8,7 +8,6 @@ authors:
 image: "edit-lottiefiles-naail-scaled.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
   - "testing-lottie4j-javafx-animations-in-github-actions-with-javafx-26-headless"

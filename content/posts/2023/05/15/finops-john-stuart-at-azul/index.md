@@ -9,7 +9,6 @@ image: "1672961010501.jpeg"
 categories:
   - "FinOps"
   - "Research"
-tags:
 related_posts:
 frozen: false
 ---

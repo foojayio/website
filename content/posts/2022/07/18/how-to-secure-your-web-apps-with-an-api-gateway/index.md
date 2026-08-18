@@ -10,7 +10,6 @@ image: "safe-g188ed805c.jpg"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "kotlin-delegation"

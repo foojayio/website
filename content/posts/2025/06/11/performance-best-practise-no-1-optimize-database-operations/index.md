@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Jakarta EE"
   - "Java"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "a-dissection-of-java-jdbc-to-postgresql-connections"

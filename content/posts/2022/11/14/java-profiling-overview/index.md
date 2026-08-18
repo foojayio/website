@@ -12,7 +12,6 @@ categories:
   - "Performance"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "external-debugging-tools-1-dtrace-and-strace"

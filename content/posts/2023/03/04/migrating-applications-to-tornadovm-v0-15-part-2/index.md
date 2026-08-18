@@ -10,7 +10,6 @@ categories:
   - "Performance"
   - "Release Notes"
   - "TornadoVM"
-tags:
 related_posts:
   - "migrating-applications-to-tornadovm-v0-15-part-1"
   - "a-flavour-of-tornadovm-on-apple-m1-pro"

@@ -13,7 +13,6 @@ categories:
   - "Microservices"
   - "Performance"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-14"
   - "continuous-production-profiling-and-diagnostics"

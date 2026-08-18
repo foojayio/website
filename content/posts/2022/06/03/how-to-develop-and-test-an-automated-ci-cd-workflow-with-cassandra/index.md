@@ -12,7 +12,6 @@ categories:
   - "Apache Cassandra"
   - "DevOps"
   - "Testing"
-tags:
 related_posts:
   - "adelphi-apache-cassandra-testing-goes-cloud-native"
   - "bring-streaming-to-apache-cassandra-with-apache-pulsar"

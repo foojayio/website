@@ -11,7 +11,6 @@ categories:
   - "Foojay"
   - "Java Beginner"
   - "Student"
-tags:
 related_posts:
   - "bringing-java-closer-to-education-a-community-driven-initiative"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

@@ -10,7 +10,6 @@ image: "devops4devs-02.jpg"
 categories:
   - "DevOps"
   - "Tutorials"
-tags:
 related_posts:
   - "devops-for-developers-introduction-version-control"
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"

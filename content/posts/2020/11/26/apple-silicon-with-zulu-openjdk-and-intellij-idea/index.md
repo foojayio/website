@@ -9,7 +9,6 @@ image: "Azul_systems_logo.png"
 categories:
   - "IntelliJ IDEA"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

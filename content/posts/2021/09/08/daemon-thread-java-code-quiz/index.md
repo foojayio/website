@@ -8,7 +8,6 @@ authors:
 image: "daemon_thread.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "java-thread-programming-part-1"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

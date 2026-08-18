@@ -17,7 +17,6 @@ categories:
   - "Streaming"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "spring-boot-kafka-streams-event-routing-testing"
   - "idempotent-spring-boot-starter"

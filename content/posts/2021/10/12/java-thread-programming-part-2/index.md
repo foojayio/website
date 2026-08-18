@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2021-09-30-at-9.30.24-PM-635x510.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-thread-programming-part-1"
   - "java-thread-programming-part-3"

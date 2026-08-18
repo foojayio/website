@@ -8,7 +8,6 @@ authors:
 image: "visionfive-front.jpg"
 categories:
   - "Embedded"
-tags:
 related_posts:
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "first-test-of-java-on-the-orange-pi-arm-and-risc-v"

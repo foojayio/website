@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Release Notes"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"

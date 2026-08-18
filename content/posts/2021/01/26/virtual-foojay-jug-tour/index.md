@@ -13,7 +13,6 @@ categories:
   - "Events"
   - "Foojay"
   - "Pi4J"
-tags:
 related_posts:
 frozen: false
 ---

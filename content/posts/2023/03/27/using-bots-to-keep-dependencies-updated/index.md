@@ -13,7 +13,6 @@ categories:
   - "Renovate"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "renovate-alternative-dependabot"
   - "fixing-vulnerabilities-in-maven-projects"

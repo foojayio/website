@@ -9,7 +9,6 @@ image: "https://foojay.io/wp-content/uploads/2024/05/Screenshot-1445-10-05-at-7.
 categories:
   - "Java"
   - "Microservices"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "book-review-monolith-to-microservices-part-1"

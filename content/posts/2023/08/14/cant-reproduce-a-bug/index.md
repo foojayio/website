@@ -9,7 +9,6 @@ authors:
 image: "shaialmog_Woman_at_a_crossroads_with_her_back_to_the_camera_try_38986eec-685c-40b5-adb8-10e4c6b10751.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "graphql-javascript-preprocessor-sql-and-more-in-manifold"

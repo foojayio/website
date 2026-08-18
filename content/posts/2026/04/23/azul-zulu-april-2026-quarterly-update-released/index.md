@@ -9,7 +9,6 @@ image: "Azul-Prime-Stable-2308.jpg"
 categories:
   - "Java"
   - "Release Notes"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "azul-brings-java-from-edge-to-cloud"

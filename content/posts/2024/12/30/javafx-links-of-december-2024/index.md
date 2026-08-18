@@ -9,7 +9,6 @@ authors:
 image: "jfxcentral.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-november-2024"
   - "javafx-links-of-october-2024"

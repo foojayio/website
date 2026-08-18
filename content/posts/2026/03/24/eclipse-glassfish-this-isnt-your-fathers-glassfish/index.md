@@ -8,7 +8,6 @@ authors:
 image: "oracle_glassfish_comparison_infographic-1024x682.png"
 categories:
   - "Jakarta EE"
-tags:
 related_posts:
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
   - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"

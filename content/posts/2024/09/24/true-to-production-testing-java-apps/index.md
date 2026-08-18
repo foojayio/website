@@ -13,7 +13,6 @@ categories:
   - "Testcontainers"
   - "Testing"
   - "Tools"
-tags:
 related_posts:
   - "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
   - "faster-integration-tests-with-reusable-testcontainers"

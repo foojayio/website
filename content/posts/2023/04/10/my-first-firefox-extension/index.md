@@ -10,7 +10,6 @@ image: "mozilla-firefox.webp"
 categories:
   - "Developer Tools"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "code-reviews-with-ai-a-developer-guide"

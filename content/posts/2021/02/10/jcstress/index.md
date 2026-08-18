@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "new-jdkmonitor"

@@ -8,7 +8,6 @@ authors:
 image: "social-metrics-532x510-1.jpeg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "2023-in-retrospective"
   - "2022-in-retrospective"

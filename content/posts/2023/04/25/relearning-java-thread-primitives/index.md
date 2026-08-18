@@ -9,7 +9,6 @@ image: "threads.jpg"
 categories:
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"

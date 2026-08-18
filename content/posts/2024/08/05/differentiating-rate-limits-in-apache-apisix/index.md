@@ -9,7 +9,6 @@ authors:
 image: "speedometer-1249610.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "backend-for-frontend-the-demo"

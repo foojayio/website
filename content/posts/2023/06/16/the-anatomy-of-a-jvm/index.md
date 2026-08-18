@@ -10,7 +10,6 @@ image: "FY24-Q2-Oracle-Compete-Anatomy-of-a-JDK-hero-1.jpg"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "what-should-i-know-about-garbage-collection-as-a-java-developer"
   - "what-does-a-modern-jvm-look-like-and-how-does-it-work"

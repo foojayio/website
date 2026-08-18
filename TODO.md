@@ -5,7 +5,7 @@
 * [ ] Search for `[\[email protected\]](/cdn-cgi/l/email-protection)`
   * If JFX Central -> links@jfx-central.com
 * [ ] Image galleries
-* [ ] Tags
+* [X] Tags -> won't do as we have fixed list of categories
 
 ## Missing Content
 

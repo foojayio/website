@@ -9,7 +9,6 @@ authors:
 image: "587131dc76555712343a86003c0e777949669b82b49a29d50ca9310de383431b.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "front-end-debugging-part-2-console-log-to-the-max"
   - "front-end-debugging-part-1-not-just-console-log"

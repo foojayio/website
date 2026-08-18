@@ -9,7 +9,6 @@ image: "Screenshot-2022-12-01-at-12.23.11.png"
 categories:
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
   - "jdb"

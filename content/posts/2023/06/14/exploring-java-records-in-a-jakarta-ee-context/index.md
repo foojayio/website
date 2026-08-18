@@ -12,7 +12,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Records"
-tags:
 related_posts:
   - "a-quick-look-at-faces-jsf-4-0-in-jakarta-ee-10"
   - "a-simple-service-with-spring-boot"

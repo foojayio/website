@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Microservices"
   - "Spring"
-tags:
 related_posts:
   - "creating-scalable-openai-gpt-applications-in-java"
   - "getting-started-with-deep-learning-in-java-using-deep-netts"

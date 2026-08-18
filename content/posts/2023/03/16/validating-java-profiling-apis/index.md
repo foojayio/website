@@ -9,7 +9,6 @@ image: "layers.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

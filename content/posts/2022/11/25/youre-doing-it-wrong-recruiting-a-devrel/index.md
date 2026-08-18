@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt2.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "book-review-help-your-boss-help-you"
   - "discuss-problem-not-solution"

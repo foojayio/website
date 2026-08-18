@@ -10,7 +10,6 @@ categories:
   - "Embedded"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "evolutions-in-the-pi4j-library-by-tom-aarts-and-robert-von-burg"

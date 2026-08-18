@@ -9,7 +9,6 @@ image: "Screenshot-2026-02-13-at-07.38.45.png"
 categories:
   - "Developer Tools"
   - "Testing"
-tags:
 related_posts:
   - "kover-code-coverage-plugin-for-kotlin"
   - "pitest-do-you-test-your-tests"

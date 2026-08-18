@@ -10,7 +10,6 @@ categories:
   - "Book Review"
   - "Books"
   - "OpenJDK Migration"
-tags:
 related_posts:
   - "book-announcement-openjdk-migration-guide-for-dummies"
   - "is-openjdk-just-a-drop-in-replacement"

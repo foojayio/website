@@ -10,7 +10,6 @@ image: "Cost-Saving-with-Lightrun.png"
 categories:
   - "Opinion"
   - "Performance"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "what-is-debugging-in-140-seconds"

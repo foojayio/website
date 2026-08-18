@@ -10,7 +10,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "Java"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "building-for-failure-best-practices-for-easy-production-debugging"

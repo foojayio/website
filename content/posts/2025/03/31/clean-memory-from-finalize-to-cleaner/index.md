@@ -10,7 +10,6 @@ image: "java_references.png"
 categories:
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "builders-withers-and-records-javas-path-to-immutability"
   - "code-reviews-with-ai-a-developer-guide"

@@ -8,7 +8,6 @@ authors:
 image: "ajda-atz-Dz4iJ3v4-X4-unsplash-scaled.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "new-java-17-features-for-improved-security-and-serialization"
   - "java-where-the-wild-code-isnt"

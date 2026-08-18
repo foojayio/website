@@ -10,7 +10,6 @@ image: "Screenshot-2023-10-29-at-21.31.31.png"
 categories:
   - "Research"
   - "Tutorials"
-tags:
 related_posts:
   - "rust-jvm"
   - "apache-apisix-loves-rust"

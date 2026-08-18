@@ -12,7 +12,6 @@ categories:
   - "Jakarta EE"
   - "Tools"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

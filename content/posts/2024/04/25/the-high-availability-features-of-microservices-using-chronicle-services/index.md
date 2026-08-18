@@ -10,7 +10,6 @@ categories:
   - "Chronicle Software"
   - "Java"
   - "Microservices"
-tags:
 related_posts:
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "achieving-high-throughput-without-sacrificing-latency"

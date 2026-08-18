@@ -9,7 +9,6 @@ image: "foojay-don-1-1-469x510.png"
 categories:
   - "Sealed Classes"
   - "Tutorials"
-tags:
 related_posts:
   - "idempotent-spring-boot-starter"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"

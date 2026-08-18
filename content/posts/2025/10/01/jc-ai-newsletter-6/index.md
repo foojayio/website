@@ -14,7 +14,6 @@ categories:
   - "LLM"
   - "Machine Learning"
   - "Tutorials"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

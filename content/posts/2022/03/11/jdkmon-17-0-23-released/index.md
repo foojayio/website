@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Release Notes"
   - "Tools"
-tags:
 related_posts:
   - "get-your-jdk-as-easily-as-possible"
   - "jdkmon-your-friendly-jdk-distribution-updater"

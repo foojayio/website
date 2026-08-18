@@ -13,7 +13,6 @@ categories:
   - "Java Beginner"
   - "Java Core"
   - "JDK21"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"

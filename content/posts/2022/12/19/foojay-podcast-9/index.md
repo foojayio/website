@@ -12,7 +12,6 @@ image: "podcast-javafx-guests-1024x393.png"
 categories:
   - "JavaFX"
   - "Podcast"
-tags:
 related_posts:
   - "wordish-with-javafx-part-5"
   - "creating-cad-applications-with-java-and-javafx"

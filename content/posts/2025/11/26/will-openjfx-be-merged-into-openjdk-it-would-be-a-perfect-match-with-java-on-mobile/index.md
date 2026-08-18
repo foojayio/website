@@ -8,7 +8,6 @@ authors:
 image: "jfxcentral.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "a-javafx-app-on-zulufx-in-60-seconds"
   - "beginning-javafx-with-intellij"

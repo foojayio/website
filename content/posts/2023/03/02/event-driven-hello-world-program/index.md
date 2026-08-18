@@ -9,7 +9,6 @@ image: "Screen-Shot-2023-02-20-at-4.56.42-PM-1024x241-1.png"
 categories:
   - "DevOps"
   - "Microservices"
-tags:
 related_posts:
   - "how-behaviour-driven-development-works-well-with-event-driven-architectures"
   - "the-evolution-of-apis-from-restful-to-event-driven"

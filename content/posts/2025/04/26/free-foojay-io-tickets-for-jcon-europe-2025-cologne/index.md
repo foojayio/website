@@ -8,7 +8,6 @@ authors:
 image: "jcon25.png"
 categories:
   - "Conference"
-tags:
 related_posts:
   - "foojay-podcast-70"
   - "foojay-podcast-53"

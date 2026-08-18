@@ -9,7 +9,6 @@ image: "PeterLawrey.jpg"
 categories:
   - "Interviews"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

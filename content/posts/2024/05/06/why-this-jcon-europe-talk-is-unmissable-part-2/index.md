@@ -9,7 +9,6 @@ image: "image.png"
 categories:
   - "Events"
   - "Jakarta EE"
-tags:
 related_posts:
   - "free-foojay-io-tickets-for-jcon-europe-cologne"
   - "foojay-podcast-48"

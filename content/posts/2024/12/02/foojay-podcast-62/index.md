@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Podcast"
   - "Project Panama"
-tags:
 related_posts:
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
   - "foojay-podcast-61"

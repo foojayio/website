@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Java"
   - "Kotlin"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-habits-of-highly-effective-java-coding"

@@ -10,7 +10,6 @@ image: "play-toy-cube-magic-stress-rubiks-cube.jpg"
 categories:
   - "DataEngineering"
   - "Use Cases"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

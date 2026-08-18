@@ -9,7 +9,6 @@ image: "old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "java-whats-old-part-i-collections"
   - "sorting-text-in-java-how-complicated-can-it-be"

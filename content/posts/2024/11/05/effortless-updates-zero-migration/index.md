@@ -9,7 +9,6 @@ authors:
 image: "openliberty.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"

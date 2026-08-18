@@ -12,7 +12,6 @@ categories:
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
   - "the-javafx-revival"

@@ -13,7 +13,6 @@ categories:
   - "OpenJDK Migration"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul"
   - "the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations"

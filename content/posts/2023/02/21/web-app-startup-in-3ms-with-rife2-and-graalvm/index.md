@@ -12,7 +12,6 @@ categories:
   - "Release Notes"
   - "RIFE2"
   - "Tutorials"
-tags:
 related_posts:
   - "getting-started-with-rife2-java-web-framework-v1-0-0"
   - "which-is-the-fastest-jvm-openjdk-or-graalvm"

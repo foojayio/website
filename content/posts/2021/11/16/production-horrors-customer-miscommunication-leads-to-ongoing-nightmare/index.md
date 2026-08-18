@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Production-Horrors.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "production-horrors-handling-disasters-public-debrief"
   - "the-debugger-checklist-part-ii"

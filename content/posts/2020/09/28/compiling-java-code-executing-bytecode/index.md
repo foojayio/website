@@ -8,7 +8,6 @@ authors:
 image: "SumNumbers.class.png"
 categories:
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

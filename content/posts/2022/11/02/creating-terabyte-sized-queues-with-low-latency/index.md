@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"

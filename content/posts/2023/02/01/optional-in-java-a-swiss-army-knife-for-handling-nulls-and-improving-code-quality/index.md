@@ -9,7 +9,6 @@ image: "Bazlur_Rahman_a_Swiss_Army_Knife_with_the_word_Optional_on_it_a_fbcd5137
 categories:
   - "Java Beginner"
   - "Java Core"
-tags:
 related_posts:
   - "top-10-java-language-features"
   - "virtual-thread-pinning-field-guide"

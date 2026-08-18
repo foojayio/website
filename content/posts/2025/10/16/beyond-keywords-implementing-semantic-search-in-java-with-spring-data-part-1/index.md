@@ -12,7 +12,6 @@ categories:
   - "Mongo"
   - "Spring"
   - "Tools"
-tags:
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
   - "introduction-to-data-driven-testing-with-java-and-mongodb"

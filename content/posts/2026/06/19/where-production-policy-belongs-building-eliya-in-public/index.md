@@ -9,7 +9,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "OpenJDK Migration"
-tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "a-glance-into-jfr-class-and-method-tagging"

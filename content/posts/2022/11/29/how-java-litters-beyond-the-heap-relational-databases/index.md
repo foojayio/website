@@ -9,7 +9,6 @@ image: "image1.png"
 categories:
   - "Databases"
   - "Tutorials"
-tags:
 related_posts:
   - "how-java-litters-beyond-the-heap-part-2-distributed-databases"
   - "how-java-litters-beyond-the-heap-part-3-solid-state-drives"

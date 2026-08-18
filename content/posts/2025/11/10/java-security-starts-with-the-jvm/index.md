@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "sustainability-starts-with-your-runtime-meet-a-green-jvm"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

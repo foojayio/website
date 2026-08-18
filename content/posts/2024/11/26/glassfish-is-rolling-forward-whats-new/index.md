@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
   - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
   - "foojay-podcast-51"

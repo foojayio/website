@@ -8,7 +8,6 @@ authors:
 image: "hp-koch-2OuTr9_VaUg-unsplash-scaled.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-thread-programming-part-12"
   - "java-thread-programming-part-11"

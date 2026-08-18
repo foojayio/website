@@ -12,7 +12,6 @@ categories:
   - "Foojay"
   - "Java"
   - "Microservices"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"

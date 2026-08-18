@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
   - "the-road-to-docker-official-images-for-java-the-azul-zulu-story"

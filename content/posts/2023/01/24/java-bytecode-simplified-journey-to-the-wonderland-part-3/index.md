@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-bytecode-simplified-journey-to-the-wonderland-part-2"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"

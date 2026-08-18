@@ -9,7 +9,6 @@ image: "Unknown-300x260-1.jpeg"
 categories:
   - "Developer Tools"
   - "Security"
-tags:
 related_posts:
   - "sboms-first-steps-in-a-new-journey-for-developers"
   - "sboms-and-software-composition-analysis"

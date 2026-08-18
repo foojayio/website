@@ -10,7 +10,6 @@ categories:
   - "Java Core"
   - "JDK Flight Recorder"
   - "Performance"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "java-thread-programming-part-1"

@@ -12,7 +12,6 @@ categories:
   - "JavaFX"
   - "Kotlin"
   - "Videos"
-tags:
 related_posts:
   - "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-1"
   - "book-review-frontend-development-with-javafx-and-kotlin"

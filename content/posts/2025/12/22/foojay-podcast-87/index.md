@@ -8,7 +8,6 @@ authors:
 image: "podcast.png"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-86"
   - "foojay-podcast-85"

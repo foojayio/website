@@ -9,7 +9,6 @@ authors:
 image: "thumbnail-24.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "manifold-vs-lombok-enhancing-java-with-property-support"
   - "operator-overloading-in-java"

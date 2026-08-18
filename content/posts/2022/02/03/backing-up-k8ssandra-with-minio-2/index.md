@@ -14,7 +14,6 @@ categories:
   - "DevOps"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
 frozen: false
 ---

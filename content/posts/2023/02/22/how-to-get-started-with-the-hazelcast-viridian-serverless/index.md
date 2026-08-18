@@ -9,7 +9,6 @@ image: "hz-unconf-social-2.jpg"
 categories:
   - "Hazelcast"
   - "Tutorials"
-tags:
 related_posts:
   - "real-time-stream-processing-with-hazelcast-and-streamnative"
   - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"

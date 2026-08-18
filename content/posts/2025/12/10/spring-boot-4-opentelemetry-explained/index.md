@@ -15,7 +15,6 @@ categories:
   - "OpenTelemetry"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

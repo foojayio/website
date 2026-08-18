@@ -8,7 +8,6 @@ authors:
 image: "Technical_STORAGE_Archive2_Thumbnail_BS_Lavender.png"
 categories:
   - "Databases"
-tags:
 related_posts:
   - "contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news"
   - "foojay-all-about-java-and-the-openjdk-i-programmer"

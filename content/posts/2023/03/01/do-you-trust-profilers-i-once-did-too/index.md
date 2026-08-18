@@ -9,7 +9,6 @@ image: "loop.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
-tags:
 related_posts:
   - "foojay-podcast-14"
   - "writing-a-profiler-from-scratch-introduction"

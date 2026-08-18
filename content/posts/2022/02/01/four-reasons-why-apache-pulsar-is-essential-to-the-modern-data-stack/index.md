@@ -11,7 +11,6 @@ categories:
   - "Apache Pulsar"
   - "DataStax"
   - "Microservices"
-tags:
 related_posts:
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "building-microservices-spring-boot-fat-uber-jar"

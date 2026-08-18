@@ -15,7 +15,6 @@ categories:
   - "Tools"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "a-short-primer-on-java-debugging-internals"
   - "boldness-in-refactoring"

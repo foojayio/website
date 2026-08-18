@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JavaPro"
   - "JEPs"
-tags:
 related_posts:
   - "virtual-thread-pinning-field-guide"
   - "foojay-podcast-64"

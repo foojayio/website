@@ -9,7 +9,6 @@ image: "Screen-Shot-2023-02-06-at-12.53.45-PM-1024x406-1.png"
 categories:
   - "Java Core"
   - "Research"
-tags:
 related_posts:
   - "learn-how-to-develop-event-driven-architectures"
   - "unified-event-driven-architecture-for-the-cloud-native-enterprise"

@@ -9,7 +9,6 @@ image: "lambda.gif"
 categories:
   - "Release Notes"
   - "VS Code"
-tags:
 related_posts:
   - "java-development-with-vs-code-on-the-raspberry-pi"
   - "java-on-visual-studio-code-update-february-2022"

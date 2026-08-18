@@ -10,7 +10,6 @@ image: "blood-g7e6bb5b41.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

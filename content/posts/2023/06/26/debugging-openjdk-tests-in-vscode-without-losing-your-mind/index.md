@@ -11,7 +11,6 @@ categories:
   - "Testing"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "7-ways-to-contribute-to-openjdk"
   - "are-java-security-updates-important"

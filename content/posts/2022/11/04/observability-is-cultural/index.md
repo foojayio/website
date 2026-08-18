@@ -10,7 +10,6 @@ image: "DALL-E-2022-09-27-07.37.13-all-seeing-eye-in-the-sky.jpg"
 categories:
   - "Developer Tools"
   - "Observability"
-tags:
 related_posts:
   - "great-time-at-javazone-2022"
   - "open-source-bait-and-switch"

@@ -10,7 +10,6 @@ image: "devops4devs-01.jpg"
 categories:
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
   - "is-it-time-to-go-back-to-the-monolith"

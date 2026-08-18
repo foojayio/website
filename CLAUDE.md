@@ -345,6 +345,19 @@ should catch a mistake at PR time rather than letting it fail silently.
   and `writePost()` look up a post's existing file by slug recursively
   (`findExistingPostFile()`) so it stays put across re-runs even if date
   parsing is imperfect.
+- **There is no `tags` taxonomy — deliberately.** WordPress *does* tag its
+  posts, but its theme never renders them on a page (the `.article__tags`
+  container holds only categories), so the scrapers — which read the public
+  site, with no admin/DB access — never saw one. Every post landed with an empty
+  `tags:`, producing 0 term pages against categories' 752, a `{{ with
+  .Params.tags }}` block in `posts/single.html` that could never fire, and a
+  frontmatter field authors had to look at and wonder about. All of it removed:
+  the taxonomy and permalink in `hugo.toml`, the template block, the CSS, the
+  scraper's `SELECTOR_TAG_LINKS`, and the key from 2146 files. `guessCategory`
+  used to take tags as extra signal and now takes only the title, since the
+  signal was always empty. If tags are ever wanted, they are recoverable from
+  `/wp-json/wp/v2/posts?slug=…&_fields=tags` plus `/wp-json/wp/v2/tags?include=…`
+  (both open, verified) — but only until cutover. Categories are the taxonomy.
 - **`related_posts` is manual**, chosen by the author — never replace it
   with an automated tag-similarity algorithm.
 - **Sponsors ↔ articles is an author list, and it's hand-maintained.**

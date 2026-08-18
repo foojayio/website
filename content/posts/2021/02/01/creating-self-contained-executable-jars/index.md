@@ -9,7 +9,6 @@ authors:
 image: "image-12.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
 frozen: false
 ---

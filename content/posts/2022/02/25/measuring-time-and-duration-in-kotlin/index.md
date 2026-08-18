@@ -9,7 +9,6 @@ authors:
 image: "photo-1512856246663-647a81ef198e.jpeg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "beautify-third-party-api-kotlin"
   - "building-command-line-interfaces-with-kotlin-using-picocli"

@@ -9,7 +9,6 @@ image: "A1_featured_image.png"
 categories:
   - "Observability"
   - "Streaming"
-tags:
 related_posts:
 frozen: false
 ---

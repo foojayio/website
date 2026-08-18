@@ -9,7 +9,6 @@ authors:
 image: "light-bulbs-3958844.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

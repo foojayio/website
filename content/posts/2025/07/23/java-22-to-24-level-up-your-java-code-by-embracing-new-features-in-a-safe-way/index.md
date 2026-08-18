@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Developer Tools"
   - "Java"
-tags:
 related_posts:
   - "builders-withers-and-records-javas-path-to-immutability"
   - "code-reviews-with-ai-a-developer-guide"

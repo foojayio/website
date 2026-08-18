@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "Databases"
   - "DevOps"
-tags:
 related_posts:
   - "kubernetes-data-simplicity-getting-started-with-k8ssandra"
   - "k8ssandra-production-ready-platform-for-running-apache-cassandra-on-kubernetes"

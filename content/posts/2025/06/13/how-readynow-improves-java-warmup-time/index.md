@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "faster-java-warmup-crac-versus-readynow"
   - "superfast-application-startup-java-on-crac"

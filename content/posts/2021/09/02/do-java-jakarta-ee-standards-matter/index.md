@@ -10,7 +10,6 @@ image: "5-Do-Java-EE-Standards-Matter-01-scaled.jpg"
 categories:
   - "Jakarta EE"
   - "Videos"
-tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "foojay-podcast-3"

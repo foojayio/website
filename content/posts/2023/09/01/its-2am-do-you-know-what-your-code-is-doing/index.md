@@ -9,7 +9,6 @@ authors:
 image: "doppleware_a_developer_programming_in_pijamas_from_bed_with_a_s_7abdabf7-a4ec-47e5-8733-78b85aac2cf7.jpg"
 categories:
   - "Observability"
-tags:
 related_posts:
   - "is-openjdk-just-a-drop-in-replacement"
   - "cant-reproduce-a-bug"

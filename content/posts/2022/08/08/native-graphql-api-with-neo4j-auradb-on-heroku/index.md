@@ -11,7 +11,6 @@ categories:
   - "Graph"
   - "Neo4J"
   - "nosql"
-tags:
 related_posts:
   - "book-review-quarkus-for-spring-developers"
   - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"

@@ -8,7 +8,6 @@ authors:
 image: "image-1-2000x745-1.png"
 categories:
   - "Trip Reports"
-tags:
 related_posts:
   - "apache-apisix-north-america-tour"
   - "gerrit-and-ivars-north-america-jug-tour"

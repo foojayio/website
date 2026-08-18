@@ -9,7 +9,6 @@ image: "jdk21-files-feature-image.png"
 categories:
   - "Java"
   - "JDK21"
-tags:
 related_posts:
   - "foojay-podcast-28"
   - "java-21-is-available-today-and-its-quite-the-update"

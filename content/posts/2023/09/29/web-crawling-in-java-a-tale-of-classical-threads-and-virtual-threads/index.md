@@ -9,7 +9,6 @@ image: "83ea75d7-d979-46cc-a848-8cc082f8aba1.jpeg"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "42-practical-java-design-patterns-builder-and-more"

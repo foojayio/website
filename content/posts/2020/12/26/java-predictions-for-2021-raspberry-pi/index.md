@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "JavaFX"
   - "Pi4J"
-tags:
 related_posts:
 frozen: false
 ---

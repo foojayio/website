@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Jelastic"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

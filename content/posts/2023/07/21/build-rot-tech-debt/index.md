@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Gradle"
   - "Maven"
-tags:
 related_posts:
   - "how-to-create-sboms-in-java-with-maven-and-gradle"
   - "building-javafx-with-gradle"

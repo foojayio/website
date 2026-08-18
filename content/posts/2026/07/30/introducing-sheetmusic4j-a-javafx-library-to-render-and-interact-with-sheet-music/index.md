@@ -9,7 +9,6 @@ image: "screenshot-melodymatrix.png"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-54"
   - "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"

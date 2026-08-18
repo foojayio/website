@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-1"
   - "foojay-podcast-2"

@@ -10,7 +10,6 @@ image: "EclipseOpenJ9Performance.png"
 categories:
   - "Java"
   - "Opinion"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "book-review-openjdk-migration-for-dummies-3"

@@ -9,7 +9,6 @@ authors:
 image: "Monolith-to-Microservices-in-Practice---2.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-jaxb-production-issues"
   - "debugging-java-collections-framework-issues-in-production"

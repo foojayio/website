@@ -10,7 +10,6 @@ image: "boot-data.png"
 categories:
   - "Research"
   - "Tools"
-tags:
 related_posts:
   - "semantic-search-with-spring-boot-redis"
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"

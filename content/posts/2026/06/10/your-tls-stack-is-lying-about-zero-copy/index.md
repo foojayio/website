@@ -14,7 +14,6 @@ categories:
   - "Performance"
   - "Project Panama"
   - "Tutorials"
-tags:
 related_posts:
   - "virtual-thread-pinning-field-guide"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"

@@ -10,7 +10,6 @@ categories:
   - "Kotlin"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "a-simple-service-with-spring-boot"

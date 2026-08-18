@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "github-actions-with-java-part-1"
   - "github-actions-with-java-part-2"

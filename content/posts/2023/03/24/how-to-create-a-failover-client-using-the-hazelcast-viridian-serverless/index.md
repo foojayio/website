@@ -11,7 +11,6 @@ categories:
   - "Hazelcast"
   - "Performance"
   - "Streaming"
-tags:
 related_posts:
   - "how-to-get-started-with-the-hazelcast-viridian-serverless"
   - "streaming-real-time-data-on-the-hazelcast-viridian-serverless"

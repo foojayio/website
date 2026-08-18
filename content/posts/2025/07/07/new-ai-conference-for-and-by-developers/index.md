@@ -9,7 +9,6 @@ authors:
 image: "ai4devs.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
   - "foojay-podcast-69"

@@ -10,7 +10,6 @@ image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
 categories:
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-ram-detect-fix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"

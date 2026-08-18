@@ -9,7 +9,6 @@ image: "Blog-Header-1200x600-px1.jpeg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "the-debugger-checklist-part-ii"

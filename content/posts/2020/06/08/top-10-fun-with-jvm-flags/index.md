@@ -8,7 +8,6 @@ authors:
 image: "Logo.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "jurassic-jdk-migrate-or-extinct"
   - "how-is-leyden-improving-java-performance-part-3-of-3"

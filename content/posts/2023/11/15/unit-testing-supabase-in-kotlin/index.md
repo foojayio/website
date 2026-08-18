@@ -9,7 +9,6 @@ image: "Screenshot-2023-10-11-at-23.57.36.png"
 categories:
   - "Kotlin"
   - "Testing"
-tags:
 related_posts:
   - "creating-an-openapi-generator-from-scratch-from-yaml-to-jetbrains-http-client"
   - "replacing-postman-with-the-jetbrains-http-client"

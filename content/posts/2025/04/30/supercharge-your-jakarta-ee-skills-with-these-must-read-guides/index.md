@@ -9,7 +9,6 @@ image: "omnifish-logo-transparent-400px-margin.png"
 categories:
   - "Jakarta EE"
   - "Tutorials"
-tags:
 related_posts:
   - "foojay-status-report-july-2023"
   - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"

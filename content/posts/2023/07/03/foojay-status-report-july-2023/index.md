@@ -10,7 +10,6 @@ categories:
   - "Events"
   - "Foojay"
   - "Press"
-tags:
 related_posts:
   - "foojay-status-report-january-june-2022"
   - "foojay-status-report-july-december-2021"

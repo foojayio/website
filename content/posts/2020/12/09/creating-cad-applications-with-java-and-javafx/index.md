@@ -9,7 +9,6 @@ image: "showcase-model-view-1024x555.png"
 categories:
   - "JavaFX"
   - "Use Cases"
-tags:
 related_posts:
 frozen: false
 ---

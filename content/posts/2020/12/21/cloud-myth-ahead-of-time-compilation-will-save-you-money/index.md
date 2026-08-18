@@ -9,7 +9,6 @@ authors:
 image: "cloud2.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "why-a-serverless-data-api-might-be-your-next-database"
   - "is-java-jakarta-ee-cloud-native"

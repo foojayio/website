@@ -11,7 +11,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "Release Notes"
-tags:
 related_posts:
   - "pi4j-v-2-released"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"

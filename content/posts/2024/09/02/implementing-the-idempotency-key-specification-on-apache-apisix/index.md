@@ -10,7 +10,6 @@ image: "stormtrooper-2899993.jpg"
 categories:
   - "DevOps"
   - "Use Cases"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"

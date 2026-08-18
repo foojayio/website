@@ -12,7 +12,6 @@ categories:
   - "Spring"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "using-ai-to-create-jfr-event-descriptions"
   - "state-of-open-source-and-free-ai-a-fosdem-recap"

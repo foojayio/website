@@ -12,7 +12,6 @@ categories:
   - "Microservices"
   - "Security"
   - "Videos"
-tags:
 related_posts:
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"

@@ -11,7 +11,6 @@ categories:
   - "Gradle"
   - "Maven"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-80"
   - "foojay-podcast-79"

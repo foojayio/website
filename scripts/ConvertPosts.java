@@ -130,7 +130,6 @@ public class ConvertPosts {
     // a[href*=/today/category/] also matches the nav/sidebar menu (every post
     // would get "Podcast", "JC-AI Newsletter", ...) and related-post cards.
     static final String SELECTOR_CATEGORY_LINKS = ".article__tags a[href*=/today/category/]";
-    static final String SELECTOR_TAG_LINKS = ".article__tags a[href*=/today/tag/]";
     // Authors: scope to the post's own author bio block(s). A bare
     // a[href*=/today/author/] also matches the nav "Authors" link (slug "authors")
     // and the related-post cards' author links -- both wrong. A post can carry
@@ -384,7 +383,6 @@ public class ConvertPosts {
         }
 
         d.categories = linksToNames(doc, SELECTOR_CATEGORY_LINKS, "/today/category/");
-        d.tags = linksToNames(doc, SELECTOR_TAG_LINKS, "/today/tag/");
         normalizeCategories(d);
         d.relatedSlugs = relatedPostSlugs(doc);
 
@@ -470,8 +468,8 @@ public class ConvertPosts {
 
     // WordPress's catch-all "Uncategorized" is noise on a category page, so we
     // drop it everywhere. Posts that had NO other category would then vanish
-    // from every category listing, so we guess a fitting one from the title +
-    // tags instead (best-effort keyword match, first rule wins; see RULES).
+    // from every category listing, so we guess a fitting one from the title
+    // instead (best-effort keyword match, first rule wins; see RULES).
     // These categories all exist in template/categories.md.
     static final String CATEGORY_UNCATEGORIZED = "Uncategorized";
     static final String CATEGORY_FALLBACK = "Java";
@@ -509,13 +507,17 @@ public class ConvertPosts {
 
     static void normalizeCategories(PostData d) {
         d.categories.removeIf(c -> c != null && c.strip().equalsIgnoreCase(CATEGORY_UNCATEGORIZED));
-        if (d.categories.isEmpty()) d.categories.add(guessCategory(d.title, d.tags));
+        if (d.categories.isEmpty()) d.categories.add(guessCategory(d.title));
     }
 
-    /** Best-effort category from a post's title + tags, for posts WordPress left
-     *  uncategorized. First matching rule wins; falls back to "Java". */
-    static String guessCategory(String title, List<String> tags) {
-        String hay = " " + ((title == null ? "" : title) + " " + String.join(" ", tags))
+    /** Best-effort category from a post's title, for posts WordPress left
+     *  uncategorized. First matching rule wins; falls back to "Java".
+     *
+     *  This used to take the post's tags as extra signal. It never had any:
+     *  WordPress's theme doesn't render tags, so the scraper never saw one and
+     *  the list was always empty. Tags are gone entirely now (see hugo.toml). */
+    static String guessCategory(String title) {
+        String hay = " " + (title == null ? "" : title)
                 .toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", " ") + " ";
         for (String[] rule : CATEGORY_GUESS_RULES) {
             for (int i = 1; i < rule.length; i++) {
@@ -603,8 +605,6 @@ public class ConvertPosts {
         fm.append("image: ").append(yamlString(d.image)).append("\n");
         fm.append("categories:\n");
         for (String c : d.categories) fm.append("  - ").append(yamlString(c)).append("\n");
-        fm.append("tags:\n");
-        for (String t : d.tags) fm.append("  - ").append(yamlString(t)).append("\n");
         fm.append("related_posts:\n");
         for (String r : d.relatedSlugs) fm.append("  - ").append(yamlString(r)).append("\n");
         if (d.jdoodle) fm.append("jdoodle: true\n");
@@ -713,7 +713,6 @@ public class ConvertPosts {
         boolean jdoodle;
         List<String> authors = new ArrayList<>();
         List<String> categories = new ArrayList<>();
-        List<String> tags = new ArrayList<>();
         List<String> relatedSlugs = new ArrayList<>();
     }
 }

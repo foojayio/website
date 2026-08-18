@@ -10,7 +10,6 @@ image: "1647358638476.jpg"
 categories:
   - "Interviews"
   - "Kubernetes"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "the-debugger-checklist-part-ii"

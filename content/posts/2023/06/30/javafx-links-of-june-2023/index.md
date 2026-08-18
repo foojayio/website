@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-may-2023"
   - "javafx-links-of-april-2023"

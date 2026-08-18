@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Kotlin"
   - "Tutorials"
-tags:
 related_posts:
   - "debug-without-breakpoints"
   - "duplicate-finder-for-documentation"

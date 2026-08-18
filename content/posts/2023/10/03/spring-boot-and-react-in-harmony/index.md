@@ -10,7 +10,6 @@ image: "hilla-logo.png"
 categories:
   - "Hilla"
   - "Spring"
-tags:
 related_posts:
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
   - "hilla-1-0-a-new-frontend-framework-for-springboot"

@@ -9,7 +9,6 @@ authors:
 image: "evgeniya-litovchenko-3whkjP9a9ZI-unsplash-700x467.jpg"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"

@@ -13,7 +13,6 @@ image: "podcast-60-belgium-thumbnail.jpg"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-59"
   - "foojay-podcast-58"

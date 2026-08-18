@@ -10,7 +10,6 @@ image: "allocation-paced-delays-count-smaller-1024x426-1-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "moving-security-into-the-jvm"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"

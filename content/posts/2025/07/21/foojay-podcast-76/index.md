@@ -12,7 +12,6 @@ categories:
   - "Conference"
   - "Java"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-75"
   - "foojay-podcast-74"

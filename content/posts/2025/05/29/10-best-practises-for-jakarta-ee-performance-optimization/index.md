@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "ejb-support-in-piranha-via-cdi"
   - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"

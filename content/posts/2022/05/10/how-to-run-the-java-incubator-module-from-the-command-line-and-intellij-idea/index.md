@@ -9,7 +9,6 @@ image: "Screen-Shot-2022-05-09-at-11.43.12-PM-1024x917.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "how-to-run-project-loom-from-intellij-idea"

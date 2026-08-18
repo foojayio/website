@@ -9,7 +9,6 @@ image: "log_plus_text_green-1.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail"
   - "foojay-podcast-98"

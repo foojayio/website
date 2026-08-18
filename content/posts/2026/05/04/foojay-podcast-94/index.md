@@ -24,7 +24,6 @@ categories:
   - "Java Core"
   - "JavaPro"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-93"
   - "foojay-podcast-92"

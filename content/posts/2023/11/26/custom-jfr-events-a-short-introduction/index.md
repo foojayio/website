@@ -9,7 +9,6 @@ image: "custom_jfr_event-2000x1203-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "a-closer-look-at-jfr-streaming"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

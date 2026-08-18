@@ -10,7 +10,6 @@ categories:
   - "DataEngineering"
   - "Kafka"
   - "Microservices"
-tags:
 related_posts:
   - "when-not-to-use-event-driven-architecture-eda"
   - "unified-event-driven-architecture-for-the-cloud-native-enterprise"

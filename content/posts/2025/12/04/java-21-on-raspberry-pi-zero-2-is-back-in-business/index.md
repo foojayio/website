@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "JDK21"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "azul-zulu-openjdk-15-on-raspberry-pi"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

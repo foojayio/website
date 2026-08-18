@@ -8,7 +8,6 @@ authors:
 image: "index.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "devops-101-part-ii-container-registries"
   - "devops-101-part-i-ci-cd"

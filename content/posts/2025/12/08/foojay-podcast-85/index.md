@@ -11,7 +11,6 @@ categories:
   - "Java Beginner"
   - "Podcast"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "foojay-podcast-84"
   - "foojay-podcast-83"

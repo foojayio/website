@@ -9,7 +9,6 @@ authors:
 image: "Electronic-Component-Potentiometer-624x631-1.jpg"
 categories:
   - "Raspberry Pi"
-tags:
 related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"

@@ -9,7 +9,6 @@ image: "beans.jpg"
 categories:
   - "Jakarta EE"
   - "Opinion"
-tags:
 related_posts:
   - "top-7-features-in-jakarta-ee-10"
   - "getting-started-with-jakarta-ee-9-context-and-dependency-injection-cdi"

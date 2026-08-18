@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "trash-pandas-love-enterprise-java-garbage-code"
   - "improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm"

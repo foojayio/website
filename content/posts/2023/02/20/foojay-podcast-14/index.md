@@ -15,7 +15,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "Testing"
-tags:
 related_posts:
   - "debug-like-a-senior-developer"
   - "a-short-primer-on-java-debugging-internals"

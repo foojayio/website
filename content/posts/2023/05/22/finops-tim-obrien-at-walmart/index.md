@@ -9,7 +9,6 @@ image: "1683981616677.jpeg"
 categories:
   - "FinOps"
   - "Research"
-tags:
 related_posts:
   - "finops-john-stuart-at-azul"
 frozen: false

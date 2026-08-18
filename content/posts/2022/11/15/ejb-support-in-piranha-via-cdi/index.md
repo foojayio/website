@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
   - "the-future-of-ejb"
   - "omnifish-announces-enterprise-support-for-eclipse-glassfish"

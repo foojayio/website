@@ -9,7 +9,6 @@ authors:
 image: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/219398iA7387D785C15171B/image-size/large?v=1.0&px=999"
 categories:
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ image: "kuber.jpg"
 categories:
   - "Kubernetes"
   - "Videos"
-tags:
 related_posts:
   - "deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator"
   - "do-you-really-need-kubernetes"

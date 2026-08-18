@@ -10,7 +10,6 @@ image: "OL_logo_green_on_white.png"
 categories:
   - "JDK21"
   - "Release Notes"
-tags:
 related_posts:
   - "from-azure-active-directory-via-openid-connect-to-open-liberty-and-java"
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"

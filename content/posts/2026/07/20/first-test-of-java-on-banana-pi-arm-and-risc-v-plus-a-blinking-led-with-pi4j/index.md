@@ -9,7 +9,6 @@ image: "thumb-bananapi.png"
 categories:
   - "Embedded"
   - "Java"
-tags:
 related_posts:
   - "java-benchmarks-on-single-board-computers"
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"

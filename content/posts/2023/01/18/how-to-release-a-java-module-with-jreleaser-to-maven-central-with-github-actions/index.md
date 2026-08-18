@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "jreleaser-looking-for-translation-contributions"

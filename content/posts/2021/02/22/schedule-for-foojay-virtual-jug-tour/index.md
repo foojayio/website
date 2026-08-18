@@ -11,7 +11,6 @@ categories:
   - "Campaigns"
   - "Events"
   - "Foojay"
-tags:
 related_posts:
 frozen: false
 ---

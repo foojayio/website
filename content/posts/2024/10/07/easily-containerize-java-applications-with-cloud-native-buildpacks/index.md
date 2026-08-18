@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Developer Tools"
   - "Kubernetes"
-tags:
 related_posts:
   - "container-awareness-for-java"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

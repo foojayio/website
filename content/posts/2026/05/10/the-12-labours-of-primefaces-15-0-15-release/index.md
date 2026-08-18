@@ -9,7 +9,6 @@ image: "toge-herculer-1024x576.png"
 categories:
   - "Jakarta EE"
   - "Java"
-tags:
 related_posts:
 frozen: false
 ---

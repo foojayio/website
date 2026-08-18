@@ -9,7 +9,6 @@ image: "Screenshot-2023-06-20-at-2.12.53-PM-1024x632-1.png"
 categories:
   - "Chronicle Software"
   - "Performance"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "automatically-creating-microservices-architecture-diagrams"

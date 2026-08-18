@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2022-09-12-at-5.26.11-PM.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-bytecode-simplified-journey-to-the-wonderland-part-1"
   - "java-bytecode-simplified-journey-to-the-wonderland-part-2"

@@ -9,7 +9,6 @@ image: "eclipse-ai-brussels-jonas-scaled.jpg"
 categories:
   - "AI"
   - "Events"
-tags:
 related_posts:
   - "foojay-podcast-99"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"

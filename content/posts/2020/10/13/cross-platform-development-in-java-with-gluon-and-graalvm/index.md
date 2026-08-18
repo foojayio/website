@@ -8,7 +8,6 @@ authors:
 image: "gluon-bruno-figure01.png"
 categories:
   - "Gluon"
-tags:
 related_posts:
 frozen: false
 ---

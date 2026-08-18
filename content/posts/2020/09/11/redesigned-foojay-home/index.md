@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2020-09-11-at-20.12.58-620x1024.png"
 categories:
   - "Foojay"
-tags:
 related_posts:
 frozen: false
 ---

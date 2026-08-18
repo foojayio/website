@@ -16,7 +16,6 @@ categories:
   - "JBang"
   - "Neo4J"
   - "Spring"
-tags:
 related_posts:
   - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-2"
   - "jc-ai-newsletter-9"

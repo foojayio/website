@@ -11,7 +11,6 @@ image: "Azul-Prime-Stable-2308.jpg"
 categories:
   - "Java"
   - "Release Notes"
-tags:
 related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "apple-silicon-with-zulu-openjdk-and-intellij-idea"

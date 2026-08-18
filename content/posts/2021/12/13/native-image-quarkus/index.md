@@ -11,7 +11,6 @@ categories:
   - "Kotlin"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "book-review-quarkus-for-spring-developers"
   - "native-spring-boot"

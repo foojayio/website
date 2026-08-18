@@ -9,7 +9,6 @@ image: "Shai_Almog_hacker_with_his_back_to_the_camera_wide_angle_shot_7c4fd868-3
 categories:
   - "Security"
   - "Tutorials"
-tags:
 related_posts:
   - "manifold-vs-lombok-enhancing-java-with-property-support"
   - "operator-overloading-in-java"

@@ -10,7 +10,6 @@ categories:
   - "Release Notes"
   - "Tools"
   - "Vaadin"
-tags:
 related_posts:
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

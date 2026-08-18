@@ -8,7 +8,6 @@ authors:
 image: "tidyfirst.jpeg"
 categories:
   - "Book Review"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "creating-a-kubernetes-operator-in-java"

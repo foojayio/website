@@ -13,7 +13,6 @@ categories:
   - "Research"
   - "Tools"
   - "Use Cases"
-tags:
 related_posts:
   - "predicting-secure-java-projects-on-maven-central"
   - "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"

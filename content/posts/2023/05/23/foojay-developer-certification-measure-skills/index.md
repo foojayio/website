@@ -9,7 +9,6 @@ image: "task-screenshot.png"
 categories:
   - "Java Beginner"
   - "Java Core"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "java-where-the-wild-code-isnt"

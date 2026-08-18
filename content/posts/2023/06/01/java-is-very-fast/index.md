@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "peter-lawrey-latency-performance"
   - "the-more-you-say-the-less-people-remember"

@@ -8,7 +8,6 @@ authors:
 image: "function.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
   - "daemon-thread-java-code-quiz"

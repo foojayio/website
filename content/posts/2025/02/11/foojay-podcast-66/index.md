@@ -14,7 +14,6 @@ categories:
   - "Java"
   - "Podcast"
   - "Spring"
-tags:
 related_posts:
   - "foojay-podcast-65"
   - "foojay-podcast-64"

@@ -12,7 +12,6 @@ categories:
   - "GitLab"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "a-javafx-app-on-zulufx-in-60-seconds"
   - "beginning-javafx-with-intellij"

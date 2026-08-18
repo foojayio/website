@@ -8,7 +8,6 @@ authors:
 image: "Cay-Horstmann.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "virtual-tour-is-the-biggest-project-yet-for-the-new-java-community-platform-foojay-dzone"

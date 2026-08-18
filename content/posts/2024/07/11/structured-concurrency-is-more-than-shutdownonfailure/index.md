@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Core"
   - "JDK21"
-tags:
 related_posts:
   - "lets-replace-the-synchronized-keyword"
   - "java-22-is-here-and-its-ready-to-rock"

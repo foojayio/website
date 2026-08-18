@@ -9,7 +9,6 @@ image: "Screenshot-2023-05-09-at-11.00.15-AM-1024x813-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "automatically-creating-microservices-architecture-diagrams"

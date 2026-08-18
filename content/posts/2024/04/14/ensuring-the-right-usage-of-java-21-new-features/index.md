@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "JDK21"
-tags:
 related_posts:
   - "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"
   - "benchmark-jdbc-connectors-and-java-21-virtual-threads"

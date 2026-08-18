@@ -10,7 +10,6 @@ image: "utrechtjug.jpg"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-29"
   - "foojay-podcast-28"

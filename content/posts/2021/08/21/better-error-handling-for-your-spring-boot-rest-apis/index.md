@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"
   - "building-microservices-spring-boot-fat-uber-jar"

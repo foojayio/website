@@ -12,7 +12,6 @@ categories:
   - "JDK21"
   - "JUGs"
   - "Student"
-tags:
 related_posts:
   - "jmanc-2024-trip-report"
   - "springone-tlv-world-tour-trip-report"

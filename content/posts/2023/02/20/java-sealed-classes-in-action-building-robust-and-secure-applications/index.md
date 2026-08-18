@@ -10,7 +10,6 @@ categories:
   - "Java Core"
   - "JEPs"
   - "Sealed Classes"
-tags:
 related_posts:
   - "jdk-15-sealed-classes"
   - "immutable-collections-in-java-with-sealed-types"

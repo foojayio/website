@@ -13,7 +13,6 @@ categories:
   - "Maven"
   - "Release Notes"
   - "Tutorials"
-tags:
 related_posts:
   - "java-on-azure-tooling-update-june-2022"
   - "azure-toolkit-for-intellij-april-2022-update"

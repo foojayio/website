@@ -17,7 +17,6 @@ categories:
   - "JDK21"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

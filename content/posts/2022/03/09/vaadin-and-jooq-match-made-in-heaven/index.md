@@ -9,7 +9,6 @@ image: "vqs.png"
 categories:
   - "jOOQ"
   - "Vaadin"
-tags:
 related_posts:
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "create-a-crud-ui-in-pure-java"

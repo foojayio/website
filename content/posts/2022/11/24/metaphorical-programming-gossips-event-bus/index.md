@@ -12,7 +12,6 @@ categories:
   - "Opinion"
   - "reactive"
   - "Tutorials"
-tags:
 related_posts:
   - "kotlin-on-the-raspberrypi-pi4j-kotlin"
   - "kotlin-delegation"

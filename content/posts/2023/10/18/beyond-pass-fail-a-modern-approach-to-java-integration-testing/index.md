@@ -10,7 +10,6 @@ image: "1_JAiQsj-ez608WsovCheXVQ-1024x512-1.png"
 categories:
   - "Developer Tools"
   - "Observability"
-tags:
 related_posts:
   - "announcing-the-digma-beta-first-runtime-linter-for-java-code"
   - "effective-coding-with-java-observability"

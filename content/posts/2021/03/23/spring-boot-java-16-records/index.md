@@ -9,7 +9,6 @@ authors:
 image: "jan-kopriva-AAMaDdDHLFg-unsplash.jpg"
 categories:
   - "Records"
-tags:
 related_posts:
 frozen: false
 ---

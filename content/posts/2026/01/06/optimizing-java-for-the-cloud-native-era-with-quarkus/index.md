@@ -15,7 +15,6 @@ categories:
   - "Performance"
   - "reactive"
   - "Security"
-tags:
 related_posts:
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
   - "chronicle-services-building-fast-microservices-with-java"

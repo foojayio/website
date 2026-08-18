@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
   - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"

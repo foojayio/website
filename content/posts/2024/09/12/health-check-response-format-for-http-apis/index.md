@@ -10,7 +10,6 @@ image: "pexels-puwadon-sangngern-5340274.jpg"
 categories:
   - "DevOps"
   - "Spring"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "back-to-basics-accessing-kubernetes-pods"

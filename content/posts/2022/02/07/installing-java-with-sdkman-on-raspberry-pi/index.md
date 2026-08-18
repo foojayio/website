@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Embedded"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "video-sdkman-explained"
   - "installing-java-and-javafx-on-the-raspberry-pi"

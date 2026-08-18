@@ -8,7 +8,6 @@ authors:
 image: "new-java-15-foojay-1024x617.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "java-24-whats-new"

@@ -10,7 +10,6 @@ categories:
   - "JDK Flight Recorder"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "a-closer-look-at-jfr-streaming"
   - "using-java-flight-recorder-and-mission-control-part-2"

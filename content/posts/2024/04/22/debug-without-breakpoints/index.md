@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Kotlin"
   - "Use Cases"
-tags:
 related_posts:
   - "7-ways-to-improve-your-code-reading-skills"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

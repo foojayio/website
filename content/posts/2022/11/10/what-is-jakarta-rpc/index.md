@@ -10,7 +10,6 @@ image: "payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Payara"
-tags:
 related_posts:
   - "google-remote-procedure-call-grpc-example-in-payara-server"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

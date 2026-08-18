@@ -8,7 +8,6 @@ authors:
 image: "duke_azul_jfx_shirt.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "creating-mobile-apps-with-javafx-part-1"
   - "custom-controls-in-javafx-part-i"

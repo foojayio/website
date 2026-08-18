@@ -10,7 +10,6 @@ image: "Screen-Shot-2022-08-24-at-11.13.09-AM.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "building-microservices-spring-boot-fat-uber-jar"

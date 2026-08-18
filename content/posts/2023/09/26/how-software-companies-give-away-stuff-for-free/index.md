@@ -9,7 +9,6 @@ image: "Free-software-article.jpg"
 categories:
   - "Developer Tools"
   - "Tools"
-tags:
 related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

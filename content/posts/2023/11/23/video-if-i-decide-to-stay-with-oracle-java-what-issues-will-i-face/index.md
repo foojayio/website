@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java Core"
   - "Videos"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "java-where-the-wild-code-isnt"

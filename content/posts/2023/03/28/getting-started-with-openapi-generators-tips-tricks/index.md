@@ -10,7 +10,6 @@ image: "postman.jpg"
 categories:
   - "Java Beginner"
   - "Tools"
-tags:
 related_posts:
   - "building-reactive-java-applications-with-spring-framework"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"

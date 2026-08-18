@@ -9,7 +9,6 @@ image: "sonarlint.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "top-most-detected-issues-in-java-projects"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

@@ -16,7 +16,6 @@ categories:
   - "Java"
   - "Maven"
   - "Tools"
-tags:
 related_posts:
   - "effective-cloud-native-development-open-liberty-vs-code"
   - "effective-cloud-native-development-eclipse-ide-open-liberty"

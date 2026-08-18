@@ -9,7 +9,6 @@ authors:
 image: "apisix.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "2022-in-retrospective"
   - "apisix-api-gateway"

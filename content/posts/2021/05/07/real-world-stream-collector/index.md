@@ -9,7 +9,6 @@ authors:
 image: "pexels-joshua-woroniecki-2607956.jpg"
 categories:
   - "Use Cases"
-tags:
 related_posts:
   - "boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang"
   - "get-started-with-allocation-profiling"

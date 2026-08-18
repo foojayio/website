@@ -9,7 +9,6 @@ authors:
 image: "cropped-ddprofiling-banner.png"
 categories:
   - "JDK Flight Recorder"
-tags:
 related_posts:
   - "a-closer-look-at-jfr-streaming"
   - "jfr-timestamps-and-system-nanotime"

@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"

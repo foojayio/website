@@ -8,7 +8,6 @@ authors:
 image: "ekg-2-1.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
 frozen: false
 ---

@@ -11,7 +11,6 @@ image: "Undead-Code-Time-Vampire-Ad-1-768x432-1.png"
 categories:
   - "Developer Tools"
   - "Events"
-tags:
 related_posts:
 frozen: false
 ---

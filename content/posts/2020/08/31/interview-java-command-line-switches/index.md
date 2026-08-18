@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2020-08-29-at-23.09.05-1024x514.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
 frozen: false
 ---

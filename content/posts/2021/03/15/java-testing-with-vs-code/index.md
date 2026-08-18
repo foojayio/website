@@ -8,7 +8,6 @@ authors:
 image: "test-explorer-running-test2.gif"
 categories:
   - "VS Code"
-tags:
 related_posts:
   - "vs-code-getting-better-and-better-for-java"
   - "vs-code-java-july-2021-update-new-testing-experience-maven-improvements-and-product-roadmap-progress-update"

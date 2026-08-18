@@ -9,7 +9,6 @@ authors:
 image: "cover_large-1.jpg"
 categories:
   - "Developer Tools"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

@@ -10,7 +10,6 @@ image: "compass-g781aadc6c.jpg"
 categories:
   - "Developer Tools"
   - "Tools"
-tags:
 related_posts:
   - "guide-lazyinitializationexception"
   - "kotlin-delegation"

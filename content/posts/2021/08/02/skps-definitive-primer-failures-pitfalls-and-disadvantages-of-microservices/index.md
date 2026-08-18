@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Microservices"
   - "Use Cases"
-tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "idempotent-spring-boot-starter"

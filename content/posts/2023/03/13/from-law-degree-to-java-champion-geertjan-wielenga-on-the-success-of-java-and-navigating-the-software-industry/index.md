@@ -8,7 +8,6 @@ authors:
 image: "Wielenga.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "interview-frank-delporte-foojay-raspberry-pi-community-manager"

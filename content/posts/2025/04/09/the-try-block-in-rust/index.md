@@ -9,7 +9,6 @@ authors:
 image: "812441_A_dwarf_jedi_master_is_in_a_foggy_marsh.png"
 categories:
   - "Research"
-tags:
 related_posts:
   - "achieving-high-throughput-without-sacrificing-latency"
   - "a-javafx-app-on-zulufx-in-60-seconds"

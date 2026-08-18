@@ -9,7 +9,6 @@ image: "book-help-your-boss-help-you-415x510.png"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-seriously-good-software"
   - "book-review-java-by-comparison"

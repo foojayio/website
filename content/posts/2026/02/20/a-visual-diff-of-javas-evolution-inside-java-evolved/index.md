@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-02-20-at-6.28.07-AM-scaled.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
   - "announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community"

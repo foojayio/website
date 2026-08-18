@@ -9,7 +9,6 @@ image: "Screen-Shot-2022-02-02-at-10.49.28-AM.png"
 categories:
   - "Tutorials"
   - "Vaadin"
-tags:
 related_posts:
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "delegation-vs-inheritance-in-graphical-user-interfaces"

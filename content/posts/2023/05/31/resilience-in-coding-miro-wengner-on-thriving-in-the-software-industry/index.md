@@ -8,7 +8,6 @@ authors:
 image: "miro.jpeg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
   - "decoding-success-an-industry-experts-guide-to-thriving-in-software-development-and-security"

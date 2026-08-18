@@ -9,7 +9,6 @@ authors:
 image: "pexels-marius-ispas-3994380.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "rust-jvm"
   - "apache-apisix-loves-rust"

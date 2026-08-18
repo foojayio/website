@@ -9,7 +9,6 @@ authors:
 image: "beer-2439237.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apache-apisix-loves-rust"
   - "advanced-url-rewriting-with-apache-apisix"

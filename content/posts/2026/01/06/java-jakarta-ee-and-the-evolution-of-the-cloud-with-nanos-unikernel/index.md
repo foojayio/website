@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Microservices"
   - "Performance"
-tags:
 related_posts:
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"

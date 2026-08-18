@@ -11,7 +11,6 @@ categories:
   - "Performance"
   - "Release Notes"
   - "Security"
-tags:
 related_posts:
   - "moving-security-into-the-jvm"
   - "log4j-isnt-killing-java"

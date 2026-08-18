@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Eclipse"
   - "Tools"
-tags:
 related_posts:
   - "effective-cloud-native-development-open-liberty-vs-code"
   - "keeping-pace-with-java-using-eclipse-ide"

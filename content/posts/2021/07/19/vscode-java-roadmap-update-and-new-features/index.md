@@ -8,7 +8,6 @@ authors:
 image: "juneblogfoojay.png"
 categories:
   - "VS Code"
-tags:
 related_posts:
 frozen: false
 ---

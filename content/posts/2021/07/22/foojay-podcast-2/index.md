@@ -12,7 +12,6 @@ categories:
   - "Foojay"
   - "Pi4J"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-1"
   - "foojay-podcast-3"

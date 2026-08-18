@@ -9,7 +9,6 @@ authors:
 image: "https://cgunturme.files.wordpress.com/2019/07/dukejunit5.png"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "book-review-seriously-good-software"
   - "java-testing-with-vs-code"

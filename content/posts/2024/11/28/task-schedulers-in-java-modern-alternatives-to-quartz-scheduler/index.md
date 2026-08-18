@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Spring"
   - "Tools"
-tags:
 related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "foojay-podcast-60"

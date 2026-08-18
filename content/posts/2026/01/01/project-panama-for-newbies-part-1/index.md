@@ -9,7 +9,6 @@ image: "duke_and_panama.png"
 categories:
   - "JEPs"
   - "Project Panama"
-tags:
 related_posts:
   - "project-panama-for-newbies-part-2"
   - "project-panama-for-newbies-part-3"

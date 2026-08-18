@@ -9,7 +9,6 @@ image: "hacktober.png"
 categories:
   - "Events"
   - "Java Beginner"
-tags:
 related_posts:
   - "guide-lazyinitializationexception"
   - "are-java-security-updates-important"

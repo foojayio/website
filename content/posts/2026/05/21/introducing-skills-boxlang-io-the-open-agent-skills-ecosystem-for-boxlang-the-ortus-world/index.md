@@ -13,7 +13,6 @@ categories:
   - "GenAI"
   - "LLM"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
@@ -57,7 +56,6 @@ Each skill is a Markdown file (`SKILL.md`) with optional YAML frontmatter:
 description: Use this skill when writing, reviewing, or formatting any
   Ortus Solutions code (BoxLang, CFML, or Java) to ensure it follows
   the official Ortus coding standards.
-tags: [boxlang, cfml, java, coding-standards, ortus]
 ---
 
 # Ortus Coding Standards

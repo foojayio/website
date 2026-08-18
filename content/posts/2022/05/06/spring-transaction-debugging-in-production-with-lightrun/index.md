@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-collections-streams-and-watch-renderers"
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"

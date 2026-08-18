@@ -10,7 +10,6 @@ image: "camera-514992.jpg"
 categories:
   - "DevOps"
   - "Performance"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "apache-apisix-loves-rust"

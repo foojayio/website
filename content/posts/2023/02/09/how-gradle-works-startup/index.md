@@ -11,7 +11,6 @@ categories:
   - "Gradle"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "how-gradle-works-inside-the-daemon"
   - "compilation-avoidance-with-gradle"

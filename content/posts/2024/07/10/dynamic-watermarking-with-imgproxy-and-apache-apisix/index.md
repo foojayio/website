@@ -9,7 +9,6 @@ authors:
 image: "faucet-1684902.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "dynamic-watermarking-on-the-jvm"
   - "an-example-of-overengineering-keep-it-wet"

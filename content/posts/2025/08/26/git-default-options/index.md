@@ -9,7 +9,6 @@ authors:
 image: "tree-3097419.jpg"
 categories:
   - "Developer Tools"
-tags:
 related_posts:
   - "a-list-of-cache-providers"
   - "poor-mans-api"

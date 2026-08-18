@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "NetBeans"
   - "OpenTelemetry"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ image: "thumbnail-23.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "java-string-templates-today"
   - "revolutionize-json-parsing-in-java-with-manifold"

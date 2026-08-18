@@ -11,7 +11,6 @@ categories:
   - "GitLab"
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

@@ -9,7 +9,6 @@ image: "blank-sticky-notes-scaled.jpg"
 categories:
   - "Java"
   - "Spring"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

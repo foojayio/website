@@ -19,7 +19,6 @@ categories:
   - "Maven"
   - "Podcast"
   - "Security"
-tags:
 related_posts:
   - "foojay-podcast-49"
   - "foojay-podcast-48"

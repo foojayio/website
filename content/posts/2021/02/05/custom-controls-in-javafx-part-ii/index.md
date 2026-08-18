@@ -8,7 +8,6 @@ authors:
 image: "Combined-Control-2021-01-26-15-13-25.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "java-for-desktop-applications-part-1"

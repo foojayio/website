@@ -9,7 +9,6 @@ authors:
 image: "2022-09-07-11.09.34-copy-1.jpg"
 categories:
   - "Trip Reports"
-tags:
 related_posts:
   - "serverless-is-the-new-timeshare"
   - "migrating-monoliths-to-microservices-in-practice"

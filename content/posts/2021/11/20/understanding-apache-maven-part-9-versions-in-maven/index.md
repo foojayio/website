@@ -9,7 +9,6 @@ authors:
 image: "https://cgunturme.files.wordpress.com/2020/07/mavenversionstrategy.png?w=1024"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "understanding-apache-maven-part-8-maven-plugins"
   - "understanding-apache-maven-part-7-configuring-apache-maven"

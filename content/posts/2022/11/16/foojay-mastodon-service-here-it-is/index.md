@@ -9,7 +9,6 @@ image: "foojay-social-home.png"
 categories:
   - "Developer Tools"
   - "Foojay"
-tags:
 related_posts:
   - "lets-start-a-java-mastodon-community-for-friends-of-openjdk"
   - "java-mastodon-service-the-feedback"

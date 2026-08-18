@@ -11,7 +11,6 @@ categories:
   - "Graph"
   - "Neo4J"
   - "Tutorials"
-tags:
 related_posts:
   - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
   - "journeys-in-java-level-1-building-an-empire-of-microservices"

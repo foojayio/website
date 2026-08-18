@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "aspect-oriented-programming-aop"
   - "monkey-patching-in-java"

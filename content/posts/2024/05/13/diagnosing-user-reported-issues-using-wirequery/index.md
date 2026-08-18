@@ -10,7 +10,6 @@ categories:
   - "Debugging"
   - "Developer Tools"
   - "Use Cases"
-tags:
 related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

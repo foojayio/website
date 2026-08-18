@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "OpenTelemetry"
   - "Spring"
-tags:
 related_posts:
   - "even-more-opentelemetry"
   - "improving-upon-my-opentelemetry-tracing-demo"

@@ -13,7 +13,6 @@ categories:
   - "Tools"
   - "Tutorials"
   - "Vaadin"
-tags:
 related_posts:
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
   - "spring-ai-how-to-write-genai-applications-with-java"

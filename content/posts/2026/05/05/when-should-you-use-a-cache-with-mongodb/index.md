@@ -9,7 +9,6 @@ image: "Screenshot-2026-04-21-at-1.44.45-PM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "agents-meet-databases-the-future-of-agentic-architectures"

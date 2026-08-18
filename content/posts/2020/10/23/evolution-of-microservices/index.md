@@ -9,7 +9,6 @@ authors:
 image: "microservices.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
 frozen: false
 ---

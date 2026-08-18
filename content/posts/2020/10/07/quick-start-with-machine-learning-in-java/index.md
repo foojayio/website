@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Deep Netts"
   - "Machine Learning"
-tags:
 related_posts:
   - "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
   - "deep-learning-in-java-for-drug-discovery"

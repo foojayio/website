@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2026-02-25-at-22.43.09.png"
 categories:
   - "AI"
-tags:
 related_posts:
 frozen: false
 ---

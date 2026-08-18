@@ -9,7 +9,6 @@ authors:
 image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "debugging-the-technical-interview-methods-and-cheating"

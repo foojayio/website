@@ -8,7 +8,6 @@ authors:
 image: "github-copilot-profiling.png"
 categories:
   - "AI"
-tags:
 related_posts:
 frozen: false
 ---

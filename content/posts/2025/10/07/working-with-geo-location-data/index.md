@@ -9,7 +9,6 @@ image: "Screenshot-2025-10-06-at-1.23.35-PM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"

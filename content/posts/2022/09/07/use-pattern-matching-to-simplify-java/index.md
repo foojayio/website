@@ -9,7 +9,6 @@ authors:
 image: "pattern-matching-image-li.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "jdk-7-an-extended-hello-and-farewell"
   - "are-java-security-updates-important"

@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Observability"
   - "Tools"
-tags:
 related_posts:
   - "hello-ebpf-developing-ebpf-apps-in-java-1"
   - "hello-ebpf-recording-data-in-basic-ebpf-maps-2"

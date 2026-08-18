@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "Java"
   - "JUGs"
-tags:
 related_posts:
   - "the-story-of-a-java-17-native-memory-leak"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

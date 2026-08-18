@@ -9,7 +9,6 @@ image: "panama_part2.png"
 categories:
   - "JEPs"
   - "Project Panama"
-tags:
 related_posts:
   - "project-panama-for-newbies-part-1"
   - "project-panama-for-newbies-part-3"

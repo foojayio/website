@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Kubernetes"
   - "Mongo"
-tags:
 related_posts:
   - "mongodb-schemas-in-java"
   - "run-an-atlas-cluster-locally-in-minutes"

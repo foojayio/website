@@ -14,7 +14,6 @@ categories:
   - "DevOps"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
   - "scalable-enterprise-java-for-the-cloud"

@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Microservices"
   - "Tools"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "how-to-secure-your-web-apps-with-an-api-gateway"

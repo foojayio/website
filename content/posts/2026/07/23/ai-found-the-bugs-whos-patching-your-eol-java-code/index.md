@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "did-ai-just-break-software-security-for-ever"
   - "foojay-podcast-95"

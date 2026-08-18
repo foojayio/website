@@ -12,7 +12,6 @@ categories:
   - "GenAI"
   - "Java"
   - "LLM"
-tags:
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"

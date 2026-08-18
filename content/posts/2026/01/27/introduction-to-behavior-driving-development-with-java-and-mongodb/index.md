@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Mongo"
   - "Spring"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "atlas-searching-with-the-java-driver"

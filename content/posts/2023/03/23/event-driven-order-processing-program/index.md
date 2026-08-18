@@ -9,7 +9,6 @@ image: "Screen-Shot-2023-03-13-at-2.53.19-PM-1024x651-1.png"
 categories:
   - "Events"
   - "Java Core"
-tags:
 related_posts:
   - "event-driven-hello-world-program"
   - "how-behaviour-driven-development-works-well-with-event-driven-architectures"

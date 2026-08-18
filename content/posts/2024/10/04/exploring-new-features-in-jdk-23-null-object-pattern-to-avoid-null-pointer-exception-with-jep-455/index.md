@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "JEPs"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"
   - "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"

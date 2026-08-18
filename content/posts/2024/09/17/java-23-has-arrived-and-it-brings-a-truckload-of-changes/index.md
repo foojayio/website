@@ -12,7 +12,6 @@ categories:
   - "JDK 23"
   - "JEPs"
   - "Records"
-tags:
 related_posts:
   - "foojay-podcast-57"
   - "java-23-whats-new"

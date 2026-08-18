@@ -10,7 +10,6 @@ image: "1280px-Spring_Framework_Logo_2018.svg.png"
 categories:
   - "Kotlin"
   - "Spring"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"

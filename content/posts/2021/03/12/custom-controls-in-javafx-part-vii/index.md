@@ -8,7 +8,6 @@ authors:
 image: "JDK-Butler-2021-02-10-11-57-56-700x504.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "java-for-desktop-applications-part-1"

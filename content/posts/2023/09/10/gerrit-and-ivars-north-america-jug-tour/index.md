@@ -10,7 +10,6 @@ categories:
   - "CRaC"
   - "Jakarta EE"
   - "JUGs"
-tags:
 related_posts:
   - "book-review-openjdk-migration-for-dummies-2"
   - "get-your-jdk-as-easily-as-possible"

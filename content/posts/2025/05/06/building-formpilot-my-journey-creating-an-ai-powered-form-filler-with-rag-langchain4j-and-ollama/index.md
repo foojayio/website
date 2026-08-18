@@ -11,7 +11,6 @@ categories:
   - "LangChain4j"
   - "Machine Learning"
   - "Spring"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"

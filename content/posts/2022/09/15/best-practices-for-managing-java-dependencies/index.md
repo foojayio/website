@@ -12,7 +12,6 @@ categories:
   - "Security"
   - "Snyk"
   - "Tutorials"
-tags:
 related_posts:
   - "building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application"
   - "exploring-cve-2022-33980-the-apache-commons-configuration-rce-vulnerability"

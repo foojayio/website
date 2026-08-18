@@ -9,7 +9,6 @@ image: "Screen-Shot-2023-03-20-at-11.34.03-AM-1024x616-1.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "challenges-when-developing-a-gui-for-fix"
   - "chronicle-fix-designed-not-to-skip-a-message-even-if-your-data-centre-fails"

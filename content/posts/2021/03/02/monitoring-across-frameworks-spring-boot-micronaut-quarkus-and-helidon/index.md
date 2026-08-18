@@ -9,7 +9,6 @@ authors:
 image: "pexels-mike-887843.jpg"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "prevent-ldap-injection-in-java-with-springboot"

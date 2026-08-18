@@ -9,7 +9,6 @@ authors:
 image: "pexels-tom-fisk-3063470.jpg"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "web-caching-server"
   - "blockhound-how-it-works"

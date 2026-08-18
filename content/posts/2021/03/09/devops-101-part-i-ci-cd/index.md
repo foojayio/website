@@ -8,7 +8,6 @@ authors:
 image: "index.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "enterprise-java-quality-gates-ai"
   - "lights-camera-action-github-actions-with-java-part-3"

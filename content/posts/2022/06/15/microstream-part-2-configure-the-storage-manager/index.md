@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "DataEngineering"
   - "nosql"
-tags:
 related_posts:
   - "microstream-part-1-what-is-it"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

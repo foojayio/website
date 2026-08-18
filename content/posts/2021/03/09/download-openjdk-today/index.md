@@ -8,7 +8,6 @@ authors:
 image: "image-1-1024x748.png"
 categories:
   - "Foojay"
-tags:
 related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
   - "join-slack-com-t-foojay-signup"

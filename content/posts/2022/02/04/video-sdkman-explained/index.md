@@ -8,7 +8,6 @@ authors:
 image: "bird.png"
 categories:
   - "Videos"
-tags:
 related_posts:
   - "contributing-to-openjdk-mission-control"
   - "starting-a-javafx-project-with-gluon-tools"

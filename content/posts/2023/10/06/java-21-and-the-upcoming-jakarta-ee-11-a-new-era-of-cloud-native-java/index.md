@@ -11,7 +11,6 @@ image: "payara_square_logo.jpg"
 categories:
   - "Jakarta EE"
   - "Java"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile"

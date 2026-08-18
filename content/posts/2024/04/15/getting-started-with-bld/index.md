@@ -12,7 +12,6 @@ categories:
   - "Java Beginner"
   - "RIFE2"
   - "Tools"
-tags:
 related_posts:
   - "introducing-bld-a-new-pure-java-build-system"
   - "spring-boot-local-development-enhancements-lets-compose"

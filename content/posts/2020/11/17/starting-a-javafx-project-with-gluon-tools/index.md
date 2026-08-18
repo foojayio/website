@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "the-javafx-revival"
   - "wordish-with-javafx-part-5"

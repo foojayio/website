@@ -14,7 +14,6 @@ categories:
   - "Tools"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "java-thread-programming-part-1"
   - "unleashing-the-power-of-lightweight-concurrency-a-comprehensive-guide-to-java-virtual-threads-part-1"

@@ -8,7 +8,6 @@ authors:
 image: "PXL_20230223_210951111-700x394-1.jpeg"
 categories:
   - "Trip Reports"
-tags:
 related_posts:
   - "foojay-io-at-fosdem-2023-trip-report"
   - "springone-tlv-world-tour-trip-report"

@@ -9,7 +9,6 @@ authors:
 image: "basic-compose.jpg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "exposed-kotlin-orm-complete-guide"
   - "checking-out-junie-a-coding-agent-by-jetbrains"

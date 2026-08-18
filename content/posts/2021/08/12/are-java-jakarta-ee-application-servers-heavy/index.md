@@ -9,7 +9,6 @@ authors:
 image: "MicrosoftTeams-image-8-scaled.jpg"
 categories:
   - "Videos"
-tags:
 related_posts:
   - "build-flexible-jakarta-ee-applications-with-apache-couchdb-nosql-database"
   - "can-java-jakarta-ee-do-microservices"

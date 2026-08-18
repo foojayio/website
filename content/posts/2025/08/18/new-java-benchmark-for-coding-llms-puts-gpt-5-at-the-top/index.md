@@ -12,7 +12,6 @@ categories:
   - "GenAI"
   - "Machine Learning"
   - "Tools"
-tags:
 related_posts:
   - "brokk-for-java-developers"
   - "5-things-you-probably-didnt-know-about-java-concurrency"

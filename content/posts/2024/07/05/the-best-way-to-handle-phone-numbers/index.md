@@ -9,7 +9,6 @@ image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-36"
   - "foojay-podcast-46"

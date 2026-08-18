@@ -10,7 +10,6 @@ image: "SoJ26-Download.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-78"
   - "foojay-podcast-28"

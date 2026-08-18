@@ -8,7 +8,6 @@ authors:
 image: "banner1.png"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "foojay-podcast-43"
   - "browserless-testing-of-vaadin-applications-with-karibu-testing"

@@ -9,7 +9,6 @@ image: "image-764x1024-dummies.png"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-announcement-openjdk-migration-guide-for-dummies"
   - "book-review-openjdk-migration-for-dummies-2"

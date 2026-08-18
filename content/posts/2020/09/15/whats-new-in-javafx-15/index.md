@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
   - "foojay-podcast-83"

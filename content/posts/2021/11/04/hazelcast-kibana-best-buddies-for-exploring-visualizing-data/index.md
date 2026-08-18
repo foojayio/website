@@ -11,7 +11,6 @@ categories:
   - "Hazelcast"
   - "Kotlin"
   - "Use Cases"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "blockhound-how-it-works"

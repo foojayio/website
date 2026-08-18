@@ -10,7 +10,6 @@ categories:
   - "Hazelcast"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
   - "hazelcast-from-embedded-to-client-server"

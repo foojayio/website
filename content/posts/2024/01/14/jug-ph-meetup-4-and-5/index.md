@@ -9,7 +9,6 @@ image: "jugph.png"
 categories:
   - "Events"
   - "JUGs"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"

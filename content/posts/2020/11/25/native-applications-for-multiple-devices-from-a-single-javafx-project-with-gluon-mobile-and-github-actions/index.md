@@ -11,7 +11,6 @@ categories:
   - "JavaFX"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
   - "the-javafx-revival"

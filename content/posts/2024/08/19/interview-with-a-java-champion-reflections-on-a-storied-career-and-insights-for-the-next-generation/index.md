@@ -8,7 +8,6 @@ authors:
 image: "Ben-Evans-.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
   - "unlocking-the-secrets-to-a-successful-software-engineering-career-an-interview-with-otavio-santana"

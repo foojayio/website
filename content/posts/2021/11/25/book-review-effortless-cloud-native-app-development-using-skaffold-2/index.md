@@ -11,7 +11,6 @@ categories:
   - "Book Review"
   - "Books"
   - "DevOps"
-tags:
 related_posts:
   - "production-horrors-handling-disasters-public-debrief"
   - "book-review-why-programs-fail"

@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Jakarta EE"
   - "Tools"
-tags:
 related_posts:
   - "10-best-practises-for-jakarta-ee-performance-optimization"
   - "are-java-jakarta-ee-application-servers-heavy"

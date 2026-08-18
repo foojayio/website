@@ -10,7 +10,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "Maven"
-tags:
 related_posts:
   - "creating-mobile-apps-with-javafx-part-1"
   - "creating-mobile-apps-with-javafx-part-3"

@@ -7,7 +7,6 @@ authors:
 image: "lottie4j-v1.2.0-scaled.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "lottie4j-meets-lottiefiles"
   - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"

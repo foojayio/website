@@ -9,7 +9,6 @@ image: "github_smothie.jpg"
 categories:
   - "DevOps"
   - "Microservices"
-tags:
 related_posts:
   - "git-archeology"
   - "ci-cd-workflow-for-spring-boot-applications-on-kubernetes-via-skaffold"

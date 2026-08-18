@@ -10,7 +10,6 @@ authors:
 image: ""
 categories:
   - "Foojay"
-tags: []
 related_posts:
   - "how-to-add-an-event-to-the-foojay-event-calendar"
 frozen: true

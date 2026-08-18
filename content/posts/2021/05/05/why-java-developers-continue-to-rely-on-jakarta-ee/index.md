@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "2021-jakarta-ee-developer-survey"
   - "whats-new-in-the-july-2026-azul-payara-release"

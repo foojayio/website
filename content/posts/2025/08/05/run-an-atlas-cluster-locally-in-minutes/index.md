@@ -9,7 +9,6 @@ image: "mongologo.png"
 categories:
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
   - "java-on-azure-tooling-update-september-2022"

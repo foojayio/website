@@ -12,7 +12,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Release Notes"
-tags:
 related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "are-java-jakarta-ee-application-servers-heavy"

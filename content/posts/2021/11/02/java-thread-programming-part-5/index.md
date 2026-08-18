@@ -8,7 +8,6 @@ authors:
 image: "Threading-432x510.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "java-thread-programming-part-2"
   - "java-thread-programming-part-3"

@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Testing"
-tags:
 related_posts:
   - "fantastic-jvms-and-where-to-find-them"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"

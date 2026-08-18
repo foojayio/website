@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "billions-of-messages-tcp-ip"

@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Neo4J"
   - "Spring"
-tags:
 related_posts:
   - "foojay-podcast-47"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JEPs"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

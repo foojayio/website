@@ -12,7 +12,6 @@ categories:
   - "IntelliJ IDEA"
   - "Observability"
   - "Release Notes"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "analyzing-dependencies-in-intellij-idea"

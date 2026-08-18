@@ -9,7 +9,6 @@ authors:
 image: "new-years-day-g64dc8b542.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "chopping-monolith"
   - "foojay-on-mastodon-an-update"

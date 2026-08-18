@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "learning-java-as-a-first-language"
   - "running-single-file-java-source-code-without-compiling-part-1"

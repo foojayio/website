@@ -10,7 +10,6 @@ image: "https://blog.arkey.fr/assets/jfr/java-flight-recorder-big-picture2.svg"
 categories:
   - "JDK Flight Recorder"
   - "Tools"
-tags:
 related_posts:
 frozen: false
 ---

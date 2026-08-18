@@ -8,7 +8,6 @@ authors:
 image: "Steve-Poole.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "developer-productivity-masterclass-interview-with-leonid-blouvshtein"

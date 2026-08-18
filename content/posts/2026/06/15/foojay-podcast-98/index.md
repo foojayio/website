@@ -9,7 +9,6 @@ authors:
 image: "edit-98-webassembly.png"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail"
   - "foojay-podcast-97"

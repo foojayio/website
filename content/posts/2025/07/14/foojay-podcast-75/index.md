@@ -10,7 +10,6 @@ categories:
   - "Java Beginner"
   - "Java Core"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-73"
   - "foojay-podcast-72"

@@ -9,7 +9,6 @@ image: "http://img.youtube.com/vi/lNqADishl8w/mqdefault.jpg"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

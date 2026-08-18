@@ -9,7 +9,6 @@ authors:
 image: "redissmall.png"
 categories:
   - "Redis"
-tags:
 related_posts:
   - "back-to-basics-accessing-kubernetes-pods"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"

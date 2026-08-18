@@ -10,7 +10,6 @@ image: "9d94n4orpjxb2gyr6tgy.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "how-is-leyden-improving-java-performance-part-2-of-3"
   - "virtual-thread-pinning-field-guide"

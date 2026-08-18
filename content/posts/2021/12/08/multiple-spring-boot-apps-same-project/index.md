@@ -10,7 +10,6 @@ image: "benches-ge9601ea94_1280.jpg"
 categories:
   - "Spring"
   - "Use Cases"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

@@ -11,7 +11,6 @@ categories:
   - "CRaC"
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"

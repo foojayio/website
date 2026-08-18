@@ -9,7 +9,6 @@ authors:
 image: "F97tAeWagAAEk0K.jpeg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-october-2023"
   - "javafx-links-of-september-2023"

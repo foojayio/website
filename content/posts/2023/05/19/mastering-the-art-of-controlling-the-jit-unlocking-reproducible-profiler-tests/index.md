@@ -8,7 +8,6 @@ authors:
 image: "tiered_states4-2000x1415-1.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "validating-java-profiling-apis"
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"

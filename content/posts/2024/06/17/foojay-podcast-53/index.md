@@ -21,7 +21,6 @@ categories:
   - "OpenRewrite"
   - "Podcast"
   - "Vaadin"
-tags:
 related_posts:
   - "foojay-podcast-52"
   - "foojay-podcast-51"

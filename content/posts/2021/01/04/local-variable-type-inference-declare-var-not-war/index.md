@@ -9,7 +9,6 @@ authors:
 image: "https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
 categories:
   - "JEPs"
-tags:
 related_posts:
 frozen: false
 ---

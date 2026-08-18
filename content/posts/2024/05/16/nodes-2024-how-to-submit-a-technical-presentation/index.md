@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "Graph"
   - "Neo4J"
-tags:
 related_posts:
   - "native-graphql-api-with-neo4j-auradb-on-heroku"
   - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"

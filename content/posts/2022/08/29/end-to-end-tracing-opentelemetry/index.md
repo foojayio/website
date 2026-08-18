@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Kotlin"
   - "Spring"
-tags:
 related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "book-review-why-programs-fail"

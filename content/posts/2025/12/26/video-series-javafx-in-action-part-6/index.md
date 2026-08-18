@@ -8,7 +8,6 @@ image: "jfxinaction-part-6-scaled.jpg"
 categories:
   - "Interviews"
   - "JavaFX"
-tags:
 related_posts:
   - "video-series-javafx-in-action-part-5"
   - "video-series-javafx-in-action-part-4"

@@ -8,7 +8,6 @@ authors:
 image: "CW50-1-1.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
 frozen: false
 ---

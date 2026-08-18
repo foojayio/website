@@ -15,7 +15,6 @@ categories:
   - "Java"
   - "LLM"
   - "Use Cases"
-tags:
 related_posts:
 frozen: false
 ---

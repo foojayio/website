@@ -10,7 +10,6 @@ categories:
   - "Performance"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "writing-a-profiler-from-scratch-introduction"
   - "do-you-trust-profilers-i-once-did-too"

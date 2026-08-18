@@ -8,7 +8,6 @@ authors:
 image: "first-test-beagleboard.jpg"
 categories:
   - "Embedded"
-tags:
 related_posts:
   - "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"

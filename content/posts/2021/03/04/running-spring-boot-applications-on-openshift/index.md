@@ -9,7 +9,6 @@ authors:
 image: "New_OpenShift_Featured_Image.png"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring"

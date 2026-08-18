@@ -10,7 +10,6 @@ image: "thumbnail-crac-data-in-memory.jpg"
 categories:
   - "CRaC"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"
   - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"

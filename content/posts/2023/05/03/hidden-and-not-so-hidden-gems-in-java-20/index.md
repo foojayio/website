@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "JEPs"
   - "Release Notes"
-tags:
 related_posts:
   - "its-java-20-release-day-heres-whats-new"
   - "foojay-podcast-16"

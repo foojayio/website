@@ -8,7 +8,6 @@ authors:
 image: "microservices-part2-1.jpeg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "evolution-of-microservices-from-soa-to-modern-architecture"
   - "unlocking-scrum-a-software-engineers-journey-part-1"

@@ -10,7 +10,6 @@ image: "DALL-E-2022-10-04-12.24.32-driving-fast-without-breaks.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "the-reason-java-is-still-popular"
   - "great-time-at-javazone-2022"

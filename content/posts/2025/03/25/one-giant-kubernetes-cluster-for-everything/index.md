@@ -10,7 +10,6 @@ image: "giant-kubernetes-1650x927-1.png"
 categories:
   - "DevOps"
   - "Kubernetes"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "kubernetes-gateway-api"

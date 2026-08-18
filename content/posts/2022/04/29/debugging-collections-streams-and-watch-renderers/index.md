@@ -10,7 +10,6 @@ image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3-copy.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "what-is-debugging-in-140-seconds"

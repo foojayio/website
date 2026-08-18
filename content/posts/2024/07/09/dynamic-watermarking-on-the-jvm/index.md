@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Kotlin"
-tags:
 related_posts:
   - "dynamic-watermarking-with-imgproxy-and-apache-apisix"
   - "a-list-of-cache-providers"

@@ -10,7 +10,6 @@ categories:
   - "Durability"
   - "Performance"
   - "Temporal"
-tags:
 related_posts:
 frozen: false
 ---

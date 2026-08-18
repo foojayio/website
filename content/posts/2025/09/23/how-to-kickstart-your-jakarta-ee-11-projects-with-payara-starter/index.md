@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Maven"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

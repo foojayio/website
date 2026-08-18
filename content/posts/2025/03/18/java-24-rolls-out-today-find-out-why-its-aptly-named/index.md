@@ -9,7 +9,6 @@ image: "basketball-24.jpg"
 categories:
   - "Java"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-68"
   - "java-24-whats-new"

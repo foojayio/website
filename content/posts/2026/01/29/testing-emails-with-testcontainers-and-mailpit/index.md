@@ -11,7 +11,6 @@ categories:
   - "Spring"
   - "Testcontainers"
   - "Testing"
-tags:
 related_posts:
   - "browserless-testing-of-vaadin-applications-with-karibu-testing"
   - "foojay-podcast-36"

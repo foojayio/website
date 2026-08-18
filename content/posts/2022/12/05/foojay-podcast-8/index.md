@@ -10,7 +10,6 @@ categories:
   - "Foojay"
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-7"
   - "foojay-podcast-6"

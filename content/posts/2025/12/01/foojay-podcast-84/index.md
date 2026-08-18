@@ -11,7 +11,6 @@ authors:
 image: "episode-84-sustainable-engineering.jpg"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "the-art-of-performance-tuning-why-saving-30-in-the-cloud-means-nothing-if-your-code-wastes-1000x-more"
   - "foojay-podcast-83"

@@ -9,7 +9,6 @@ image: "VaadinLogo_RGB_1000x310.png"
 categories:
   - "Java"
   - "Vaadin"
-tags:
 related_posts:
   - "5-great-reasons-to-use-jooq"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"

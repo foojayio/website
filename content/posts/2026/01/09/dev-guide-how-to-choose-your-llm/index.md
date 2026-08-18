@@ -8,7 +8,6 @@ authors:
 image: "Gemini_Generated_Image_z9j355z9j355z9j3-2.png"
 categories:
   - "AI"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "spring-ai-agents-no-second-runtime"

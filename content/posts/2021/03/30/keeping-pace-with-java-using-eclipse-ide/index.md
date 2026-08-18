@@ -9,7 +9,6 @@ image: "eclipse-logo.png"
 categories:
   - "Eclipse"
   - "Sealed Classes"
-tags:
 related_posts:
   - "foojay-podcast-12"
   - "effective-cloud-native-development-eclipse-ide-open-liberty"

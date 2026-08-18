@@ -9,7 +9,6 @@ image: "https://upload.wikimedia.org/wikipedia/commons/0/07/Swiss_cheese_model.s
 categories:
   - "JEPs"
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

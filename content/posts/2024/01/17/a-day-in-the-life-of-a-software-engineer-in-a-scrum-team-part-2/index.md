@@ -8,7 +8,6 @@ authors:
 image: "grovemade-RvPDe41lYBA-unsplash-scaled.jpg"
 categories:
   - "Agile"
-tags:
 related_posts:
   - "unlocking-scrum-a-software-engineers-journey-part-1"
   - "patterns-for-the-design-of-microservices-part-1"

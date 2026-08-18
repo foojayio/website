@@ -8,7 +8,6 @@ authors:
 image: "2020-08-05-dag1-700x387.png"
 categories:
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

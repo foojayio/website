@@ -11,7 +11,6 @@ image: "Debugging-tips_comp.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "beginning-javafx-with-intellij"

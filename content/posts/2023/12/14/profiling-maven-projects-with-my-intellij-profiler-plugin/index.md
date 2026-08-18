@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Performance"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

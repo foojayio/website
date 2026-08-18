@@ -9,7 +9,6 @@ authors:
 image: "native-linux-apple-watch-game-builder-crash-protection.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

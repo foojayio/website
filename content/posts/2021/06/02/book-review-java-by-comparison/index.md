@@ -9,7 +9,6 @@ image: "javabycomparison.png"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-help-your-boss-help-you"
   - "book-review-seriously-good-software"

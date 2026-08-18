@@ -8,7 +8,6 @@ authors:
 image: "Affinity-Designer-AquaButton-100.0-2021-02-03-17-12-12-700x444.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-v"

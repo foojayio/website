@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "fix-java-security-issues-while-coding-in-intellij-idea"

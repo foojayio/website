@@ -9,7 +9,6 @@ image: "https___dev-to-uploads.s3.amazonaws.com_uploads_articles_9a39wkc2svq2rm6
 categories:
   - "Developer Tools"
   - "Java"
-tags:
 related_posts:
   - "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
   - "my-final-take-on-gradle-vs-maven"

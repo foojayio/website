@@ -9,7 +9,6 @@ image: "photo_2-700x340-1.jpeg"
 categories:
   - "Events"
   - "JUGs"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

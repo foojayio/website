@@ -9,7 +9,6 @@ image: "atlantajug-screenshot-zoom-1024x577-1.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-15"
   - "foojay-podcast-13"

@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Microservices"
   - "Surveys"
-tags:
 related_posts:
   - "why-java-developers-continue-to-rely-on-jakarta-ee"
   - "whats-new-in-the-july-2026-azul-payara-release"

@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JDK21"
   - "Spring"
-tags:
 related_posts:
   - "running-a-crac-java-application-on-raspberry-pi"
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"

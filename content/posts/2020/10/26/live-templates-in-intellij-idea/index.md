@@ -9,7 +9,6 @@ image: "1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
   - "Tools"
-tags:
 related_posts:
 frozen: false
 ---

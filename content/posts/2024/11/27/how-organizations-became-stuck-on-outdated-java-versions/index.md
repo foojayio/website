@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Opinion"
   - "Performance"
-tags:
 related_posts:
   - "why-java-8-is-a-ticking-time-bomb-hiding-within-your-organization"
   - "mastering-the-challenges-of-openjdk-migration"

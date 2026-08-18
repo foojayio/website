@@ -9,7 +9,6 @@ image: "Screenshot-2025-11-11-at-1.26.29-PM.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "keywords-meet-vectors-hybrid-search-on-mongodb"
   - "multi-cloud-strategies-with-mongodb-atlas"

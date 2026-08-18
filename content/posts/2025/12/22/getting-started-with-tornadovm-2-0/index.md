@@ -10,7 +10,6 @@ categories:
   - "Maven"
   - "Tools"
   - "TornadoVM"
-tags:
 related_posts:
   - "this-dependency-update-looked-exactly-like-an-account-takeover"
   - "tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide"

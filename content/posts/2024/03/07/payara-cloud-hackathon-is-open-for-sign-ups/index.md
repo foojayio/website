@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "Payara"
   - "Tools"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "are-java-jakarta-ee-application-servers-heavy"

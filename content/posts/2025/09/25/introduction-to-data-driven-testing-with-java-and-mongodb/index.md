@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "java-virtual-threads-in-action-optimizing-mongodb-operation"
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"

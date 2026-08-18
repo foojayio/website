@@ -12,7 +12,6 @@ categories:
   - "Microservices"
   - "Observability"
   - "Spring"
-tags:
 related_posts:
   - "patterns-for-the-design-of-microservices-part-1"
   - "patterns-for-the-design-of-microservices-part-2"

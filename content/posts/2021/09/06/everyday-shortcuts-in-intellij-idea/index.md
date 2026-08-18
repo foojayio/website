@@ -8,7 +8,6 @@ authors:
 image: "1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "javafx-gluon-status-update-dual-screen-on-raspberry-pi-sample-intellij-new-javafx-project-wizard"

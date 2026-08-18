@@ -9,7 +9,6 @@ image: "Screen-Shot-2022-05-30-at-1.01.58-AM.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "how-to-submit-your-next-article-on-foojay-io"
   - "friends-of-openjdk-at-fosdem-2022"

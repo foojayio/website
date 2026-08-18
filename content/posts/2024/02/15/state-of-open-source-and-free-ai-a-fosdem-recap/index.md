@@ -11,7 +11,6 @@ categories:
   - "Machine Learning"
   - "Opinion"
   - "Trip Reports"
-tags:
 related_posts:
   - "friends-of-openjdk-hangout-at-fosdem-2024"
   - "foojay-io-at-fosdem-2023-trip-report"

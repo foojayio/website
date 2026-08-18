@@ -11,7 +11,6 @@ categories:
   - "Opinion"
   - "Streaming"
   - "Use Cases"
-tags:
 related_posts:
   - "learn-how-to-develop-event-driven-architectures"
   - "unified-event-driven-architecture-for-the-cloud-native-enterprise"

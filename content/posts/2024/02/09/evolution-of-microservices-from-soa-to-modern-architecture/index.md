@@ -8,7 +8,6 @@ authors:
 image: "think-samll-microservices.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "azul-provides-the-crac-in-aws-snapstart-builds"

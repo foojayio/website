@@ -8,7 +8,6 @@ authors:
 image: "manual-comparison.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
   - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"

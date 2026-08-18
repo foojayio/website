@@ -10,7 +10,6 @@ categories:
   - "JEPs"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "writing-a-profiler-from-scratch-introduction"
   - "writing-a-profiler-from-scratch-the-profiling-loop"

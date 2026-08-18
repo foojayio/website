@@ -11,7 +11,6 @@ categories:
   - "AI"
   - "BoxLang"
   - "Podcast"
-tags:
 related_posts:
   - "boxlang-ai-series-complete-guide-to-building-ai-agents"
   - "boxlang-ai-v3-has-landed-multi-agent-orchestration-tooling-skills-and-so-much-more"

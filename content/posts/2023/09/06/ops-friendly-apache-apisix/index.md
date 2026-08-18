@@ -9,7 +9,6 @@ image: "apache-apisix.jpeg"
 categories:
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

@@ -13,7 +13,6 @@ categories:
   - "IntelliJ IDEA"
   - "Java"
   - "Testing"
-tags:
 related_posts:
   - "explore-project-structure-with-intellij-ideas-dependency-matrix"
   - "3-ways-to-refactor-your-code-in-intellij-idea"

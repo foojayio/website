@@ -10,7 +10,6 @@ image: "man-g90bbc5746.jpg"
 categories:
   - "DevOps"
   - "Opinion"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

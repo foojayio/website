@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "prime-time-the-high-performance-java-event"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"

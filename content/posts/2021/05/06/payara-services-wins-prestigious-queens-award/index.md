@@ -8,7 +8,6 @@ authors:
 image: "4.-Payara-Services-QA-Logo-2021-1-3-593x1024.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

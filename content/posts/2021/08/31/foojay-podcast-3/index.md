@@ -12,7 +12,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-2"
   - "foojay-podcast-1"

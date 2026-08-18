@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Spring"
   - "Tools"
-tags:
 related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "server-side-rendering-with-spring-boot"

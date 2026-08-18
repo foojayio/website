@@ -9,7 +9,6 @@ image: "javafinder.png"
 categories:
   - "Release Notes"
   - "Tools"
-tags:
 related_posts:
   - "get-your-jdk-as-easily-as-possible"
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"

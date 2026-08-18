@@ -8,7 +8,6 @@ image: "Gemini_Generated_Image_pa4tufpa4tufpa4t-1024x559.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"

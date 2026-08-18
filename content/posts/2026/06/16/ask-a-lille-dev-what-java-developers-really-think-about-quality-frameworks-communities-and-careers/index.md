@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "JUGs"
   - "Spring"
-tags:
 related_posts:
   - "idempotent-spring-boot-starter"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"

@@ -8,7 +8,6 @@ authors:
 image: "Simon-Martinelli-2.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
   - "unlocking-java-wisdom-a-conversation-with-oracle-ace-simon-martinelli"

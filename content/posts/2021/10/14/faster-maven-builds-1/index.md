@@ -10,7 +10,6 @@ image: "Apache_Maven_logo.svg.png"
 categories:
   - "Maven"
   - "Performance"
-tags:
 related_posts:
   - "faster-maven-builds-part-2"
   - "understanding-apache-maven-part-1-the-basics"

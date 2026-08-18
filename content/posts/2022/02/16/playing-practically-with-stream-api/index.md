@@ -8,7 +8,6 @@ authors:
 image: "steve-bittinger-GXasHuHbDmY-unsplash-scaled.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "book-review-java-by-comparison"

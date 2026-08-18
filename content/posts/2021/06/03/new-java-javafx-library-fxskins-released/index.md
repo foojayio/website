@@ -9,7 +9,6 @@ image: "ScrollPane4.gif"
 categories:
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JEPs"
   - "Release Notes"
-tags:
 related_posts:
   - "java-24-rolls-out-today-find-out-why-its-aptly-named"
   - "foojay-podcast-68"

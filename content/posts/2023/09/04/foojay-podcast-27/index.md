@@ -12,7 +12,6 @@ categories:
   - "JUGs"
   - "Kotlin"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-24"
   - "foojay-podcast-21"

@@ -10,7 +10,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

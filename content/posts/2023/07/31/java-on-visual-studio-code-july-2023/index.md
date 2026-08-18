@@ -9,7 +9,6 @@ image: "decompile_debugging.gif"
 categories:
   - "Developer Tools"
   - "VS Code"
-tags:
 related_posts:
   - "foojay-podcast-12"
   - "java-on-visual-studio-code-june-2023"

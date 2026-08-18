@@ -9,7 +9,6 @@ image: "1780385104999.jpeg"
 categories:
   - "AI"
   - "Machine Learning"
-tags:
 related_posts:
 frozen: false
 ---

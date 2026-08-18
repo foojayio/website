@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Machine Learning"
-tags:
 related_posts:
   - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
   - "foojay-podcast-69"

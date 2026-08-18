@@ -9,7 +9,6 @@ image: "GetYourHandsDirtyOnCleanArchitecture-1.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

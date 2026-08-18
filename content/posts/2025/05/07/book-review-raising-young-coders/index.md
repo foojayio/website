@@ -9,7 +9,6 @@ image: "6187sWf3qUL._SY522_.jpg"
 categories:
   - "Book Review"
   - "Books"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

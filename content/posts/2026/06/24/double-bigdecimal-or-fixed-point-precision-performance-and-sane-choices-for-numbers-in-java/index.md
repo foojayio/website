@@ -8,7 +8,6 @@ authors:
 image: "cover_large-1.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "7-habits-of-highly-effective-java-coding"
   - "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"

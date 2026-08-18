@@ -8,7 +8,6 @@ authors:
 image: "launch-lottie4j-scaled.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
 frozen: false
 ---

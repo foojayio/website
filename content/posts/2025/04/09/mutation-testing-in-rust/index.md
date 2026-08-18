@@ -9,7 +9,6 @@ authors:
 image: "cover-2.jpg"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "azul-datadog-datastax-jfrog-payara-and-snyk-form-inaugural-foojay-advisory-board"
   - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"

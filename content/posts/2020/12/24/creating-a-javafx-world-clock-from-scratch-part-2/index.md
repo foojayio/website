@@ -9,7 +9,6 @@ image: "Screen-Shot-2020-12-19-at-9.35.09-PM.png"
 categories:
   - "JavaFX"
   - "Tutorials"
-tags:
 related_posts:
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"

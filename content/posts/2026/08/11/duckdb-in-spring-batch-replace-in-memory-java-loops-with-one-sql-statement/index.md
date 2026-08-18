@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Performance"
   - "Spring"
-tags:
 related_posts:
 frozen: false
 ---

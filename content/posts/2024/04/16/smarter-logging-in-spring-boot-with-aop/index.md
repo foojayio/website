@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "aspect-oriented-programming-aop"
   - "microservices-design-principles-for-well-crafted-architecture"

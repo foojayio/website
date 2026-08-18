@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Tutorials"
-tags:
 related_posts:
   - "java-functional-programming"
   - "java-functional-programming-fx-part2"

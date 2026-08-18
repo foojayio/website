@@ -9,7 +9,6 @@ authors:
 image: "homepage.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "javafx-links-of-july-2023"
   - "javafx-links-of-may-2023"

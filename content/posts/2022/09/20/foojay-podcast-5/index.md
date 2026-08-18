@@ -15,7 +15,6 @@ categories:
   - "Project Panama"
   - "Records"
   - "Sealed Classes"
-tags:
 related_posts:
   - "what-the-heck-is-project-loom-for-java"
   - "what-can-we-expect-in-openjdk-19"

@@ -10,7 +10,6 @@ categories:
   - "Performance"
   - "Press"
   - "Release Notes"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"

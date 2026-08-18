@@ -10,7 +10,6 @@ image: "podcast-guests-web-development.png"
 categories:
   - "Podcast"
   - "Vaadin"
-tags:
 related_posts:
   - "foojay-podcast-40"
   - "foojay-podcast-39"

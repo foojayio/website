@@ -10,7 +10,6 @@ image: "image-866x1024.png"
 categories:
   - "Microservices"
   - "Surveys"
-tags:
 related_posts:
 frozen: false
 ---

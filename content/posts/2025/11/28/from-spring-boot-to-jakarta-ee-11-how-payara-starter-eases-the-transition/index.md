@@ -15,7 +15,6 @@ categories:
   - "Payara"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "10-best-practises-for-jakarta-ee-performance-optimization"
   - "do-java-jakarta-ee-standards-matter"

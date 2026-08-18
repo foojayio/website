@@ -9,7 +9,6 @@ authors:
 image: "pexels-prakhar-bansal-732183.jpg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "beautify-third-party-api-kotlin"
   - "blockhound-how-it-works"

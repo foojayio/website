@@ -9,7 +9,6 @@ image: "546a7b8392ade39f6930ae5605b54327b1d73306_2_690x362.png"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"

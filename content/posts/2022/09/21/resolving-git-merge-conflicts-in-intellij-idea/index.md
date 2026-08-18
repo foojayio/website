@@ -9,7 +9,6 @@ image: "merge-feature-into-main-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "a-better-way-to-use-gradle-with-github-actions"

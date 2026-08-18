@@ -9,7 +9,6 @@ authors:
 image: "metal-default-new-build-cloud-and-a-new-format.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "push-v3-one-message-from-your-server-to-every-surface"
   - "the-codename-one-javascript-port-is-now-free-and-open-source"

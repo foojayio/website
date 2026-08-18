@@ -10,7 +10,6 @@ image: "ebook_upd.png"
 categories:
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "introducing-the-boxlang-ide-plugin-for-intellij"
   - "tornadovm-for-risc-v-accelerators"

@@ -9,7 +9,6 @@ authors:
 image: "fractal-g5ca5fa693.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

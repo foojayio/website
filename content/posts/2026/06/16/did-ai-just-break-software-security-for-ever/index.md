@@ -9,7 +9,6 @@ image: "Gemini_Generated_Image_oayu0aoayu0aoayu-1024x541.png"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "spring-boot-migration-and-the-cra-when-good-enough-isnt"

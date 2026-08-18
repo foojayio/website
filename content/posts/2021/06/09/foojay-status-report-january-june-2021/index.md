@@ -9,7 +9,6 @@ image: "first-6-months-2021-1024x844.png"
 categories:
   - "Foojay"
   - "Press"
-tags:
 related_posts:
 frozen: false
 ---

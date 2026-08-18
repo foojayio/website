@@ -9,7 +9,6 @@ image: "1_rM-JIRWo49QIKv-vZ4taEQ.webp"
 categories:
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"

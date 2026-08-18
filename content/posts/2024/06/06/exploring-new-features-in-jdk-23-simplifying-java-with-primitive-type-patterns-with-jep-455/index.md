@@ -8,7 +8,6 @@ authors:
 image: "DALL-E-2024-06-01-05.25.07-A-detailed-and-accurate-image-of-the-Java-Duke-mascot.-Duke-is-a-triangular-character-with-a-white-body-black-arms-and-legs-and-a-red-nose.-The-ima.webp"
 categories:
   - "Java"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

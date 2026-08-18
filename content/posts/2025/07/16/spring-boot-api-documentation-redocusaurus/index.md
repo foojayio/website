@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Spring"
-tags:
 related_posts:
   - "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"
   - "containerizing-spring-boot-applications-with-jib"

@@ -13,7 +13,6 @@ categories:
   - "Payara"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

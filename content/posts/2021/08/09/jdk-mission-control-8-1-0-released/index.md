@@ -10,7 +10,6 @@ image: "image-1.png"
 categories:
   - "Performance"
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

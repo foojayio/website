@@ -8,7 +8,6 @@ authors:
 image: "Serialization-Filter.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "foojay-podcast-14"
   - "what-are-you-missing-by-debugging-in-vs-code"

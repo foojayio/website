@@ -29,12 +29,6 @@
       {{ .Content }}
     </div>
 
-    {{ with .Params.tags }}
-    <div class="post-tags">
-      {{ range . }}<a href="{{ printf "today/tag/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}
-    </div>
-    {{ end }}
-
     {{ $authors := .Params.authors }}
     {{ if and (not $authors) .Params.author }}{{ $authors = slice .Params.author }}{{ end }}
     {{ range $authors }}

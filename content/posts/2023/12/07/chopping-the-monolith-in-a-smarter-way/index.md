@@ -11,7 +11,6 @@ categories:
   - "Microservices"
   - "Performance"
   - "Use Cases"
-tags:
 related_posts:
   - "chopping-monolith"
   - "chopping-monolith-demo"

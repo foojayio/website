@@ -8,7 +8,6 @@ authors:
 image: "DALL-E-2024-07-18-21.31.00-A-clean-and-simple-illustration-featuring-a-command-line-interface-with-Java-code-on-the-screen.-The-background-shows-small-minimalist-logos-of-JBang.webp"
 categories:
   - "Java"
-tags:
 related_posts:
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"

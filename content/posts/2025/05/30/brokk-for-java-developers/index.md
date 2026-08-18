@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "Tools"
-tags:
 related_posts:
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "java-logging-what-to-log-what-not-to-log"

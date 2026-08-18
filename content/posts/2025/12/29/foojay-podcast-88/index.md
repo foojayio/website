@@ -9,7 +9,6 @@ image: "fromcode.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-86"
   - "foojay-podcast-85"

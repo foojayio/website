@@ -49,9 +49,6 @@ image: ""
 categories:
   - "Java"
 
-# Free-form tags. Optional — leave as [] if you have none.
-tags: []
-
 # Slugs (folder names) of related foojay articles to show at the bottom. Optional.
 related_posts: []
 

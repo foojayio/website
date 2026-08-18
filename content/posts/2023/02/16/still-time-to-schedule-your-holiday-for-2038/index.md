@@ -10,7 +10,6 @@ image: "y2k.jpg"
 categories:
   - "Java Core"
   - "JShell"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "hand-ground-coffee-command-line-tools-for-java"

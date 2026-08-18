@@ -8,7 +8,6 @@ authors:
 image: "Frank.png"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "debugging-threads-and-asynchronous-code"

@@ -8,7 +8,6 @@ authors:
 image: "foojaypanic.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "crowd-publishing-the-10x-java-dev-book"
   - "foojay-podcast-50"

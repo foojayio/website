@@ -10,7 +10,6 @@ categories:
   - "Embedded"
   - "Java"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "foojay-podcast-55"

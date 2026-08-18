@@ -11,7 +11,6 @@ categories:
   - "Gradle"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

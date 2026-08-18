@@ -8,7 +8,6 @@ image: "banner2.png"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
 frozen: false
 ---

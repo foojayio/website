@@ -8,7 +8,6 @@ authors:
 image: "ht_vs_vt_pyramid-1-2000x1125-1.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "foojay-podcast-14"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"

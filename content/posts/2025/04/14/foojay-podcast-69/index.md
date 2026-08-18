@@ -10,7 +10,6 @@ image: "episode-69-voxxeddays-amsterdam.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-68"
   - "foojay-podcast-67"

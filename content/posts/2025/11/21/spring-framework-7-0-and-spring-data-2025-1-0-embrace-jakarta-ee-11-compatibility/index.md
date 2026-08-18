@@ -11,7 +11,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Spring"
-tags:
 related_posts:
   - "whats-new-in-the-may-2026-azul-payara-release"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

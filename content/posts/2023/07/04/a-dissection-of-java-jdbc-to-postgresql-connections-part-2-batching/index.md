@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Performance"
   - "sql"
-tags:
 related_posts:
   - "a-dissection-of-java-jdbc-to-postgresql-connections"
   - "a-list-of-cache-providers"

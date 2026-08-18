@@ -8,7 +8,6 @@ image: "duke_Pinocchio01.jpg"
 categories:
   - "Java"
   - "Student"
-tags:
 related_posts:
   - "foojay-podcast-92"
   - "foojay-podcast-90"

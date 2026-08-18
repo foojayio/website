@@ -8,7 +8,6 @@ authors:
 image: "https://dzone.com/storage/temp/13800230-1596136325278.png"
 categories:
   - "Azure"
-tags:
 related_posts:
   - "java-on-azure-tooling-update-july-2022"
 frozen: false

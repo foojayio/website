@@ -10,7 +10,6 @@ categories:
   - "Events"
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
   - "azul-brings-java-from-edge-to-cloud"

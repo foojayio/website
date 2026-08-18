@@ -9,7 +9,6 @@ authors:
 image: "refactor-1.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "creating-a-simple-spring-boot-application-in-intellij-idea"

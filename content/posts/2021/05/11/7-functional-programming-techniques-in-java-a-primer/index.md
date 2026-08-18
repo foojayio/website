@@ -9,7 +9,6 @@ authors:
 image: "https://thepracticaldev.s3.amazonaws.com/i/zf8mvgix8icaz64mgj89.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "new-to-java-some-resources"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"

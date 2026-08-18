@@ -10,7 +10,6 @@ image: "pexels-alessandro-oliverio-1472443.jpg"
 categories:
   - "DevOps"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"

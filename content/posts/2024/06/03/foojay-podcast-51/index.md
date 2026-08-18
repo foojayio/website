@@ -15,7 +15,6 @@ categories:
   - "JUGs"
   - "Microservices"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-50"
   - "foojay-podcast-49"

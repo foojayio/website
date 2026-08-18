@@ -13,7 +13,6 @@ categories:
   - "Microservices"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "achieving-high-throughput-without-sacrificing-latency"
   - "billion-events-per-second-with-millisecond-latency"

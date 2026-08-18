@@ -10,7 +10,6 @@ categories:
   - "Gradle"
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "vs-code-getting-better-and-better-for-java"
   - "five-ways-to-use-gradle-enterprise-to-identify-and-manage-flaky-tests"

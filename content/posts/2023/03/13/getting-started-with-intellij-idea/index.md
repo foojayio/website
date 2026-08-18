@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "everyday-shortcuts-in-intellij-idea"
   - "3-ways-to-refactor-your-code-in-intellij-idea"

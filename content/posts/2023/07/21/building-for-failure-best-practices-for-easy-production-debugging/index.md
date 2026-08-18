@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "understanding-security-vulnerabilities-a-first-step-in-preventing-attacks"
   - "manifold-vs-lombok-enhancing-java-with-property-support"

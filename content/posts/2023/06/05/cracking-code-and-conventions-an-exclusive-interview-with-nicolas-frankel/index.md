@@ -8,7 +8,6 @@ authors:
 image: "nicols.jpeg"
 categories:
   - "Interviews"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"

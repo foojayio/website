@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
 frozen: false
 ---

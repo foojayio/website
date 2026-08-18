@@ -9,7 +9,6 @@ image: "japan-jug-guests-1024x575-1.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-13"
   - "foojay-podcast-10"

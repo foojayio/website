@@ -9,7 +9,6 @@ authors:
 image: "car-accident.jpg"
 categories:
   - "Research"
-tags:
 related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "demystifying-memory-management-in-modern-programming-languages"

@@ -11,7 +11,6 @@ categories:
   - "Debugging"
   - "Java Core"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-as-a-process-of-isolating-assumptions"
   - "cant-reproduce-a-bug"

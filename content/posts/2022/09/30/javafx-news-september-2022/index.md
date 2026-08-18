@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2021-05-17-at-12.15.51-AM.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "beginning-javafx-with-intellij"
   - "wordish-with-javafx-part-5"

@@ -13,7 +13,6 @@ categories:
   - "Spring"
   - "Testing"
   - "Tools"
-tags:
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "foojay-podcast-94"

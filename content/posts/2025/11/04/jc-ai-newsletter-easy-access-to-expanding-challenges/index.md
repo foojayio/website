@@ -18,7 +18,6 @@ categories:
   - "Performance"
   - "Research"
   - "Tutorials"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

@@ -12,7 +12,6 @@ categories:
   - "Spring"
   - "Streaming"
   - "Videos"
-tags:
 related_posts:
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
   - "building-real-time-applications-to-process-wikimedia-streams-using-kafka-and-hazelcast"

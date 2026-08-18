@@ -15,7 +15,6 @@ categories:
   - "Spring"
   - "Student"
   - "Tutorials"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "azul-provides-the-crac-in-aws-snapstart-builds"

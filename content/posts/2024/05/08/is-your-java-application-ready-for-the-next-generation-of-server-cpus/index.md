@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Cloud"
   - "DevOps"
-tags:
 related_posts:
   - "java-11-javafx-11-on-raspberry-pi-with-armv6-processor"
   - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"

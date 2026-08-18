@@ -10,7 +10,6 @@ image: "https://jfeatures.com/img/ebook_upd.png"
 categories:
   - "JEPs"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

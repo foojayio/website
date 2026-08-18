@@ -11,7 +11,6 @@ categories:
   - "Performance"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "creating-terabyte-sized-queues-with-low-latency"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"

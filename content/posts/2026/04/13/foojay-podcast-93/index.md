@@ -14,7 +14,6 @@ categories:
   - "Conference"
   - "Interviews"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-92"
   - "foojay-podcast-91"

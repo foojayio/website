@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Spring"
   - "Videos"
-tags:
 related_posts:
 frozen: false
 ---

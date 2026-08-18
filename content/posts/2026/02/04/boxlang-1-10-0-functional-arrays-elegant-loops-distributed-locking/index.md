@@ -11,7 +11,6 @@ categories:
   - "Design Patterns"
   - "Java"
   - "Microservices"
-tags:
 related_posts:
 frozen: false
 ---

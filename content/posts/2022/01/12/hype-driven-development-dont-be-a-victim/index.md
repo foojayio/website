@@ -9,7 +9,6 @@ authors:
 image: "FaceMask_mockup_Front_Mens_White.png"
 categories:
   - "Videos"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"

@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Maven"
-tags:
 related_posts:
   - "7-habits-of-highly-effective-java-coding"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

@@ -9,7 +9,6 @@ authors:
 image: "fail-timezone-issue.jpg"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "hard-things-computer-science"

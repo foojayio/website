@@ -11,7 +11,6 @@ categories:
   - "Performance"
   - "Project Panama"
   - "Tutorials"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "project-panama-for-newbies-part-1"

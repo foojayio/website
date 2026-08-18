@@ -9,7 +9,6 @@ authors:
 image: "DALL-E-2022-08-23-18.47.43-unicorn-running-away-from-men-in-suits-through-wide-open-field.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability"
   - "fail-fast-best-strategy-for-reliable-software"

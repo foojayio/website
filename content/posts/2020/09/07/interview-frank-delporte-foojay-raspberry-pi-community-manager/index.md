@@ -11,7 +11,6 @@ categories:
   - "JavaFX"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "chronicle-wire-object-marshalling"
   - "creating-terabyte-sized-queues-with-low-latency"

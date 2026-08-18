@@ -9,7 +9,6 @@ image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Testing"
   - "Tools"
-tags:
 related_posts:
   - "archunit-testing-your-architecture"
   - "load-testing-shoot-your-application-with-gatling"

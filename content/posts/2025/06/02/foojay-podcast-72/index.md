@@ -13,7 +13,6 @@ image: "episode-72-jcon-part-1.png"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-71"
   - "foojay-podcast-70"

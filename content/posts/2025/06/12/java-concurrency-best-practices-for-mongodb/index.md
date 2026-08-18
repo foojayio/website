@@ -9,7 +9,6 @@ image: "mongologo.png"
 categories:
   - "Java"
   - "Mongo"
-tags:
 related_posts:
 frozen: false
 ---

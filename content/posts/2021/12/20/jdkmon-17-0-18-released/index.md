@@ -9,7 +9,6 @@ image: "JDKMon-2021-12-19-05-08-12-700x385.png"
 categories:
   - "Release Notes"
   - "Tools"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "are-java-security-updates-important"

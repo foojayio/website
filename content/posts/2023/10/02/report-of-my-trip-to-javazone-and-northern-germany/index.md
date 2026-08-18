@@ -8,7 +8,6 @@ authors:
 image: "image-14.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "trip-report-dubai-jug-2nd-meetup"
   - "report-of-my-small-tour-deurope"

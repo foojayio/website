@@ -12,7 +12,6 @@ categories:
   - "sql"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "vaadin-and-jooq-match-made-in-heaven"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

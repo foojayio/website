@@ -8,7 +8,6 @@ authors:
 image: "image-11-1024x825.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
 frozen: false
 ---

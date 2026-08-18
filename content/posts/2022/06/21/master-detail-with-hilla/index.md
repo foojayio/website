@@ -9,7 +9,6 @@ image: "structure.png"
 categories:
   - "Hilla"
   - "Vaadin"
-tags:
 related_posts:
   - "hilla-1-0-a-new-frontend-framework-for-springboot"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

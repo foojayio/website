@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Project Panama"
   - "Records"
-tags:
 related_posts:
   - "foojay-podcast-45"
   - "java-22-whats-new"

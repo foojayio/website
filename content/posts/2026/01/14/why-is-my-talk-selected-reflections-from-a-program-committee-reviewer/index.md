@@ -10,7 +10,6 @@ categories:
   - "Conference"
   - "Events"
   - "JUGs"
-tags:
 related_posts:
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "api-versioning"

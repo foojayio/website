@@ -8,7 +8,6 @@ authors:
 image: "DataRange-Scheme-1024x786-1.png"
 categories:
   - "TornadoVM"
-tags:
 related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
   - "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"

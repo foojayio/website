@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Kafka"
   - "Performance"
-tags:
 related_posts:
   - "how-to-train-readynow-to-achieve-optimal-java-performance"
   - "changes-included-in-release-24-08-of-azul-zing-builds-of-openjdk"

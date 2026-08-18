@@ -10,7 +10,6 @@ image: "Redis_Video_RateLimiterImplementations_Part1_YoutubeThumbnail.png"
 categories:
   - "Databases"
   - "nosql"
-tags:
 related_posts:
   - "archunit-testing-your-architecture"
   - "back-to-basics-accessing-kubernetes-pods"

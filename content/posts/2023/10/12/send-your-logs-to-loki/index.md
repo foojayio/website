@@ -9,7 +9,6 @@ authors:
 image: "viking-5996459.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "chopping-monolith"
   - "blockhound-how-it-works"

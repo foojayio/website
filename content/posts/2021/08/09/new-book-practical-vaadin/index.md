@@ -10,7 +10,6 @@ categories:
   - "Book Announcement"
   - "Books"
   - "Vaadin"
-tags:
 related_posts:
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

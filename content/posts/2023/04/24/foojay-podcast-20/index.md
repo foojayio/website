@@ -12,7 +12,6 @@ image: "guests-podcast-functional-programming-1024x575-1.png"
 categories:
   - "Opinion"
   - "Podcast"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "the-problem-with-functional-programming"

@@ -9,7 +9,6 @@ image: "https://mostlynerdless.de/wp-content/uploads/2023/11/image-2.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "custom-jfr-events-a-short-introduction"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

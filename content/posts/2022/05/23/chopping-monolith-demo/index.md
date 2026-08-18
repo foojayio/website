@@ -10,7 +10,6 @@ image: "roger_stone.jpg"
 categories:
   - "Kotlin"
   - "Microservices"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "book-review-monolith-to-microservices-part-1"

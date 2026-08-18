@@ -10,7 +10,6 @@ image: "Screen-Shot-2022-12-02-at-11.17.40-AM.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "creating-terabyte-sized-queues-with-low-latency"

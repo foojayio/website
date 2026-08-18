@@ -9,7 +9,6 @@ authors:
 image: "web-3876081.jpg"
 categories:
   - "Research"
-tags:
 related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"

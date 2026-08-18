@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

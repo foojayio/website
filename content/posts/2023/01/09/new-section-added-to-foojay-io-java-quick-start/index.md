@@ -10,7 +10,6 @@ categories:
   - "Foojay"
   - "Java Beginner"
   - "Tutorials"
-tags:
 related_posts:
   - "welcome-to-vs-code-for-java"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"

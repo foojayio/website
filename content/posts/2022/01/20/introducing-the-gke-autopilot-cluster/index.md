@@ -10,7 +10,6 @@ image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbq
 categories:
   - "Books"
   - "Kubernetes"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "book-review-effortless-cloud-native-app-development-using-skaffold"

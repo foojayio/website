@@ -12,7 +12,6 @@ categories:
   - "Books"
   - "Java Core"
   - "OpenJDK Migration"
-tags:
 related_posts:
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "understanding-security-vulnerabilities-a-first-step-in-preventing-attacks"

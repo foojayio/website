@@ -13,7 +13,6 @@ categories:
   - "Payara"
   - "Research"
   - "Surveys"
-tags:
 related_posts:
   - "ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud"
   - "how-to-kickstart-your-jakarta-ee-11-projects-with-payara-starter"

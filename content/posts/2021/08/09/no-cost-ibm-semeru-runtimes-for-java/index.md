@@ -9,7 +9,6 @@ authors:
 image: "ibm-logo.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "billion-events-per-second-with-millisecond-latency"

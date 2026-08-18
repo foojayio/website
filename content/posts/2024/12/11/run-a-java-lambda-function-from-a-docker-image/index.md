@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Microservices"
-tags:
 related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"
   - "exceptions-lambdas"

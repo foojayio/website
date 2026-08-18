@@ -10,7 +10,6 @@ image: "pexels-scott-webb-1544944.jpg"
 categories:
   - "Performance"
   - "Research"
-tags:
 related_posts:
   - "a-list-of-cache-providers"
   - "the-right-feature-at-the-right-place"

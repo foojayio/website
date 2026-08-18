@@ -8,7 +8,6 @@ image: "old-coffee.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "java-whats-old-part-ii-utils"
   - "java-whats-old-part-i-collections"

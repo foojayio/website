@@ -9,7 +9,6 @@ authors:
 image: "business-1845350_1280.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "starting-docker-desktop-with-spring-boot"
   - "dockerizing-a-java-26-project-with-docker-init"

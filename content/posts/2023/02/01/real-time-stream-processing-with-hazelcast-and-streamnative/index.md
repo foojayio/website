@@ -12,7 +12,6 @@ categories:
   - "Hazelcast"
   - "Streaming"
   - "Tutorials"
-tags:
 related_posts:
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"

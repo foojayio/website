@@ -9,7 +9,6 @@ authors:
 image: "cover.jpeg"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "a-list-of-cache-providers"
   - "poor-mans-api"

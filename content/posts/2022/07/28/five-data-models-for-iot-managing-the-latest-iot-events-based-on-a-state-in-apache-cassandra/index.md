@@ -11,7 +11,6 @@ categories:
   - "Apache Cassandra"
   - "Databases"
   - "DataStax"
-tags:
 related_posts:
 frozen: false
 ---

@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "jdkmon-your-friendly-jdk-distribution-updater"
   - "jdkmon-17-0-23-released"

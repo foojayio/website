@@ -11,7 +11,6 @@ categories:
   - "Java Beginner"
   - "JBang"
   - "Tutorials"
-tags:
 related_posts:
   - "new-section-added-to-foojay-io-java-quick-start"
   - "learning-java-as-a-first-language"

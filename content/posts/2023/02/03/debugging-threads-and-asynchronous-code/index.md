@@ -10,7 +10,6 @@ image: "thumbnail-7.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-streams-and-collections"
   - "the-massive-hidden-power-of-breakpoints"

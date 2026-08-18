@@ -11,7 +11,6 @@ categories:
   - "Book Review"
   - "Books"
   - "Java Core"
-tags:
 related_posts:
   - "book-review-practical-design-patterns-for-java-developers"
   - "book-review-seriously-good-software"

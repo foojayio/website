@@ -9,7 +9,6 @@ authors:
 image: "10-11-unsupported-java-1024x400-1.jpeg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "what-java-version-are-you-running-lets-take-a-look-under-the-hood-of-the-jdk"

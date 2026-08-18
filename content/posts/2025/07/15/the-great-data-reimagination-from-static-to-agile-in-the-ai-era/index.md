@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Machine Learning"
   - "Mongo"
-tags:
 related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "clean-and-modular-java-a-hexagonal-architecture-approach"

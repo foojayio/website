@@ -9,7 +9,6 @@ authors:
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "are-java-security-updates-important"

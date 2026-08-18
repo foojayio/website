@@ -10,7 +10,6 @@ image: "cover_large-3.jpg"
 categories:
   - "Java"
   - "Use Cases"
-tags:
 related_posts:
   - "apache-apisix-north-america-tour"
   - "apache-apisix-loves-rust"

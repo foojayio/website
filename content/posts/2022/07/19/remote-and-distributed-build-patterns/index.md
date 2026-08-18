@@ -9,7 +9,6 @@ image: "1_Pxqa8hcF86VYD159umwkKw.png"
 categories:
   - "DevOps"
   - "Performance"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"

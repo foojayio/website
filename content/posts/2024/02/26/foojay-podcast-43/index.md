@@ -12,7 +12,6 @@ categories:
   - "Testcontainers"
   - "Testing"
   - "Tools"
-tags:
 related_posts:
   - "foojay-podcast-42"
   - "foojay-podcast-41"

@@ -10,7 +10,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "Release Notes"
-tags:
 related_posts:
   - "game-development-basics-with-fxgl"
   - "getting-started-with-fxgl-game-development"

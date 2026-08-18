@@ -9,7 +9,6 @@ image: "thumnail-aidevs-part-2.jpg"
 categories:
   - "Conference"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-79"
   - "foojay-podcast-78"

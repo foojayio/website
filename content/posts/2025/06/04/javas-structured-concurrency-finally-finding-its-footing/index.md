@@ -10,7 +10,6 @@ image: "shutterstock_1111260050-350x233-1.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-64"
   - "java-21-is-available-today-and-its-quite-the-update"

@@ -9,7 +9,6 @@ image: "jakarta-ee-11-web-1.png"
 categories:
   - "Cloud"
   - "Jakarta EE"
-tags:
 related_posts:
   - "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
   - "ejb-support-in-piranha-via-cdi"

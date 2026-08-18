@@ -11,7 +11,6 @@ categories:
   - "Hazelcast"
   - "Performance"
   - "Streaming"
-tags:
 related_posts:
   - "boosting-similarity-search-with-real-time-stream-processing"
   - "hazelcast-from-embedded-to-client-server"

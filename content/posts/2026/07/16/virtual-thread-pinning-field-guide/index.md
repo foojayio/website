@@ -9,7 +9,6 @@ image: "foojay-featured-virtual-thread-pinning.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "banned-threadlocal-java-scoped-values"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"

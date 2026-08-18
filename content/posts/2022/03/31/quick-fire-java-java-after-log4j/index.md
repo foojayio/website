@@ -11,7 +11,6 @@ categories:
   - "Payara"
   - "Security"
   - "Videos"
-tags:
 related_posts:
   - "java-logging-what-to-log-what-not-to-log"
   - "log4j-isnt-killing-java"

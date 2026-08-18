@@ -8,7 +8,6 @@ authors:
 image: "547386585-b25e6389-9134-42f1-aa0d-f7d941ca5c47.webp"
 categories:
   - "AI"
-tags:
 related_posts:
 frozen: false
 ---

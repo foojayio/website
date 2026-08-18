@@ -14,7 +14,6 @@ categories:
   - "Java Beginner"
   - "Maven"
   - "Tutorials"
-tags:
 related_posts:
   - "whats-new-in-the-july-2026-azul-payara-release"
   - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"

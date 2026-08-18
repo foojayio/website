@@ -11,7 +11,6 @@ image: "logo-social.png"
 categories:
   - "DataStax"
   - "Jakarta EE"
-tags:
 related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "whats-new-in-the-july-2026-azul-payara-release"

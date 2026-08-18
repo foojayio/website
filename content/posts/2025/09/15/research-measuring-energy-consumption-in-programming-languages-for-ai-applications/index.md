@@ -14,7 +14,6 @@ categories:
   - "JDK21"
   - "Pi4J"
   - "Research"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

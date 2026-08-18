@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-collections-streams-and-watch-renderers"
   - "debugging-java-equals-hashcode-performance-in-production"

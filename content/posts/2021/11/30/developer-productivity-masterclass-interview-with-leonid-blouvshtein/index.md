@@ -10,7 +10,6 @@ image: "1638188701445.jpg"
 categories:
   - "DevOps"
   - "Interviews"
-tags:
 related_posts:
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
   - "book-review-why-programs-fail"

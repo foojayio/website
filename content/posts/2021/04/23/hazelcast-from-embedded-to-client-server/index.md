@@ -11,7 +11,6 @@ categories:
   - "Hazelcast"
   - "Research"
   - "Tools"
-tags:
 related_posts:
   - "building-real-time-applications-to-process-wikimedia-streams-using-kafka-and-hazelcast"
   - "chronicle-services-building-fast-microservices-with-java"

@@ -9,7 +9,6 @@ image: "Gemini_Generated_Image_fkvuf4fkvuf4fkvu-scaled.png"
 categories:
   - "AI"
   - "Security"
-tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"

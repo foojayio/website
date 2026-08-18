@@ -13,7 +13,6 @@ categories:
   - "Spring"
   - "Tools"
   - "Videos"
-tags:
 related_posts:
   - "prevent-ldap-injection-in-java-with-springboot"
   - "springboot-3-2-crac"

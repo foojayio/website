@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Neo4J"
   - "Spring"
-tags:
 related_posts:
   - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"
   - "how-to-run-neo4j-on-kubernetes"

@@ -13,7 +13,6 @@ categories:
   - "Databases"
   - "Kafka"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"

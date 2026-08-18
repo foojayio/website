@@ -8,7 +8,6 @@ image: "boxlings-banner.jpg"
 categories:
   - "BoxLang"
   - "Testing"
-tags:
 related_posts:
 frozen: false
 ---

@@ -12,7 +12,6 @@ categories:
   - "Kotlin"
   - "Research"
   - "Scala"
-tags:
 related_posts:
   - "kubernetes-gateway-api"
   - "real-world-stream-collector"

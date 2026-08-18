@@ -9,7 +9,6 @@ image: "image-10.png"
 categories:
   - "Developer Tools"
   - "Observability"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "effective-coding-with-java-observability"

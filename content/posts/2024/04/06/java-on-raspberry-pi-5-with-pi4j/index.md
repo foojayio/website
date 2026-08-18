@@ -12,7 +12,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "Release Notes"
-tags:
 related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"

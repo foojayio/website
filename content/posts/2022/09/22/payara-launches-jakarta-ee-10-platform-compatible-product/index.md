@@ -10,7 +10,6 @@ categories:
   - "Payara"
   - "Press"
   - "Release Notes"
-tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "do-java-jakarta-ee-standards-matter"

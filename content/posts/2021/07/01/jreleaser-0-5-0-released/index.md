@@ -8,7 +8,6 @@ authors:
 image: "jreleaser-duke.png"
 categories:
   - "Release Notes"
-tags:
 related_posts:
   - "jreleaser-0-10-0-released"
   - "jreleaser-0-9-0-released"

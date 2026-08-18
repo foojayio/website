@@ -9,7 +9,6 @@ authors:
 image: "letter-3038384_1280.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "optional-stream"
 frozen: false

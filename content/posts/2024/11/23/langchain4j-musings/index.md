@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "comparison-fault-tolerance-libraries"

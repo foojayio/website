@@ -10,7 +10,6 @@ image: "DALL-E-2022-09-20-19.49.55-steaming-coffee-cups-as-far-as-the-eye-can-se
 categories:
   - "Java Core"
   - "Opinion"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "great-time-at-javazone-2022"

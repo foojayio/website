@@ -9,7 +9,6 @@ image: "calendar_preview.jpeg"
 categories:
   - "Foojay"
   - "Tutorials"
-tags:
 related_posts:
   - "foojay-podcast-25"
   - "foojay-podcast-24"

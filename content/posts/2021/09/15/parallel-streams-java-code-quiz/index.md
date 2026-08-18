@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2021-03-24-at-18.57.16-1128x484-1.png"
 categories:
   - "Books"
-tags:
 related_posts:
   - "transitioning-to-java-my-first-book"
   - "arrays-and-object-reference-java-challenge-code-quiz"

@@ -16,7 +16,6 @@ categories:
   - "Research"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "jc-ai-newsletter-10"
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"

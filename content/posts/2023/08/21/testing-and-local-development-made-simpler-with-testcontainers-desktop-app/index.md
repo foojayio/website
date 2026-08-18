@@ -9,7 +9,6 @@ image: "tcd-switch-runtimes-700x259-1.png"
 categories:
   - "Testcontainers"
   - "Testing"
-tags:
 related_posts:
   - "faster-integration-tests-with-reusable-testcontainers"
   - "pitest-do-you-test-your-tests"

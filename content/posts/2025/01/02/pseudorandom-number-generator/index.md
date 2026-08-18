@@ -9,7 +9,6 @@ image: "Santa-Claus-1.jpg"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "securing-symmetric-encryption-algorithms-in-java"
   - "crafting-your-own-railway-display-with-java"

@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-81"
   - "command-completion-intellij-idea"

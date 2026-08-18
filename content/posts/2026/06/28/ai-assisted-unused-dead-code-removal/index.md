@@ -14,7 +14,6 @@ categories:
   - "Developer Tools"
   - "Events"
   - "Java"
-tags:
 related_posts:
 frozen: false
 ---

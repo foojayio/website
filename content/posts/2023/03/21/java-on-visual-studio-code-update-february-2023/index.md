@@ -9,7 +9,6 @@ image: "parallel-test.gif"
 categories:
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "java-development-with-vs-code-on-the-raspberry-pi"

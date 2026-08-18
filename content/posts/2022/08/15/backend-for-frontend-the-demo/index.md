@@ -9,7 +9,6 @@ authors:
 image: "pinky-swear-g6402e3105.jpg"
 categories:
   - "Microservices"
-tags:
 related_posts:
   - "backend-for-front-end"
   - "a-simple-service-with-spring-boot"

@@ -39,7 +39,7 @@
   var pagefindUrl = {{ "pagefind/pagefind.js" | relURL }};
 
   // Matches Hugo's page Type (content/authors, content/pedia, content/posts,
-  // content/pages, plus the "categories"/"tags" taxonomies, and "jugs" for
+  // content/pages, plus the "categories" taxonomy, and "jugs" for
   // the /jugs/ page specifically -- see baseof.html), tagged onto every page
   // via data-pagefind-filter="section:..." on <main>. Order here is the
   // section-header order in results, and only sections that actually have a
@@ -50,7 +50,7 @@
   var SECTION_ORDER = ['authors', 'pedia', 'posts', 'pages', 'categories', 'jugs'];
   var SECTION_LABELS = {
     authors: 'Author', pedia: 'Pedia', posts: 'Post', pages: 'Page',
-    categories: 'Category', tags: 'Tag', jugs: 'JUGs'
+    categories: 'Category', jugs: 'JUGs'
   };
 
   var pagefindPromise = import(pagefindUrl).catch(function () { return null; });

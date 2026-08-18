@@ -10,7 +10,6 @@ image: "jgraphlets.jpg"
 categories:
   - "Java"
   - "Library"
-tags:
 related_posts:
   - "semantic-versioning-your-java-libraries"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

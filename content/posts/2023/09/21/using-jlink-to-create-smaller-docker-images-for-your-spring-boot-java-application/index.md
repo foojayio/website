@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

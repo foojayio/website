@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Payara"
   - "Release Notes"
-tags:
 related_posts:
   - "glassfish-8-0-2-released"
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"

@@ -11,7 +11,6 @@ categories:
   - "CodeRabbit"
   - "Developer Tools"
   - "Machine Learning"
-tags:
 related_posts:
   - "coderabbit-tutorial-for-java-developers"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

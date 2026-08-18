@@ -10,7 +10,6 @@ categories:
   - "Book Announcement"
   - "Game Development"
   - "JavaFX"
-tags:
 related_posts:
   - "game-development-basics-with-fxgl"
   - "getting-started-with-fxgl-game-development"

@@ -9,7 +9,6 @@ image: "Screenshot-2026-08-05-at-11.35.28.png"
 categories:
   - "AI"
   - "Jakarta EE"
-tags:
 related_posts:
   - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
 frozen: false

@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Performance"
   - "Surveys"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"

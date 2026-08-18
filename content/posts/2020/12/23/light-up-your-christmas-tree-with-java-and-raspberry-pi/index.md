@@ -11,7 +11,6 @@ categories:
   - "Embedded"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"

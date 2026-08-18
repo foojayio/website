@@ -10,7 +10,6 @@ image: "compare-gbadd095f0.jpg"
 categories:
   - "Java Core"
   - "Kotlin"
-tags:
 related_posts:
   - "much-ado-about-nothing-in-java"
   - "better-error-handling-for-your-spring-boot-rest-apis"

@@ -12,7 +12,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Testcontainers"
-tags:
 related_posts:
 frozen: false
 ---

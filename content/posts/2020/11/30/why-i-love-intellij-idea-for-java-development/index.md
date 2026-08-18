@@ -9,7 +9,6 @@ image: "idea-2020.2.3-700x455.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

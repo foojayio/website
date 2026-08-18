@@ -10,7 +10,6 @@ image: "cassandra-throughput-2048x810-1.png"
 categories:
   - "Microservices"
   - "Performance"
-tags:
 related_posts:
   - "increasing-event-streaming-with-kafka-and-azul"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"

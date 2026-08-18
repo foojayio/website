@@ -8,7 +8,6 @@ authors:
 image: "foojay-featured-authors.png"
 categories:
   - "Foojay"
-tags:
 related_posts:
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "own-your-pixels-native-fidelity-on-your-schedule"

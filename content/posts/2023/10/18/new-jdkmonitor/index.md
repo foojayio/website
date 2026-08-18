@@ -8,7 +8,6 @@ authors:
 image: "JDKMonitor-644x510.png"
 categories:
   - "Tools"
-tags:
 related_posts:
   - "device-monitoring-with-javafx-and-fxgl"
   - "book-review-openjdk-migration-for-dummies-2"

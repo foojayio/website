@@ -10,7 +10,6 @@ authors:
 image: "jakarta-ee-9.1.png"
 categories:
   - "Jakarta EE"
-tags:
 related_posts:
   - "payara-platform-october-2021-survey"
   - "are-java-jakarta-ee-application-servers-heavy"

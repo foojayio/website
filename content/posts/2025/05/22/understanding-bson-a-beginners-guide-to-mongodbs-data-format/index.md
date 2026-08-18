@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Developer Tools"
   - "Mongo"
-tags:
 related_posts:
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"

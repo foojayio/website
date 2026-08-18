@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2023-02-27-at-9.52.42-AM-1.png"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "challenges-when-developing-a-gui-for-fix"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"

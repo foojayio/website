@@ -12,7 +12,6 @@ categories:
   - "Pi4J"
   - "Raspberry Pi"
   - "reactive"
-tags:
 related_posts:
   - "kotlin-on-the-raspberrypi-pi4j-kotlin"
   - "metaphorical-programming-gossips-event-bus"

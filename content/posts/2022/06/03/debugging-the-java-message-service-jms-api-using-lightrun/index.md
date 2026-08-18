@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "JMS"
   - "Tutorials"
-tags:
 related_posts:
   - "debugging-java-equals-hashcode-performance-in-production"
   - "debugging-jaxb-production-issues"

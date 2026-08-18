@@ -9,7 +9,6 @@ authors:
 image: "header_light.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "apache-apisix-loves-rust"
   - "poor-mans-api"

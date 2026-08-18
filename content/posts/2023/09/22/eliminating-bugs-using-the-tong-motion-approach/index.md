@@ -9,7 +9,6 @@ authors:
 image: "shaialmog_A_pair_of_metal_tongs_in_motion_capturing_the_intrica_184316ea-7c79-4104-9604-c3659517b6bc.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "the-evolution-of-bugs"
   - "debugging-as-a-process-of-isolating-assumptions"

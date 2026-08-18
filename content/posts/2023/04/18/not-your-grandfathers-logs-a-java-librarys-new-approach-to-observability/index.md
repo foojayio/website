@@ -11,7 +11,6 @@ categories:
   - "Developer Tools"
   - "Java Core"
   - "Observability"
-tags:
 related_posts:
   - "observability-is-cultural"
   - "remote-debugging-and-developer-observability"

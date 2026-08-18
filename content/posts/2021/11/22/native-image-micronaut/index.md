@@ -10,7 +10,6 @@ image: "sally.jpeg"
 categories:
   - "Kotlin"
   - "Performance"
-tags:
 related_posts:
   - "native-spring-boot"
   - "kicking-spring-natives-tires"

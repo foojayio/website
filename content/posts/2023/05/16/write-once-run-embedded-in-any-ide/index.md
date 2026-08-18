@@ -11,7 +11,6 @@ categories:
   - "Eclipse"
   - "IntelliJ IDEA"
   - "Java Core"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "java-where-the-wild-code-isnt"

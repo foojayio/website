@@ -9,7 +9,6 @@ image: "image-1024x631-1.png"
 categories:
   - "Java Core"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-5"
   - "what-the-heck-is-project-loom-for-java"

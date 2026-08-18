@@ -9,7 +9,6 @@ image: "panama-2000x981-1.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "java-panama-polyglot-part1"
   - "java-panama-polyglot-swift-part-2"

@@ -8,7 +8,6 @@ authors:
 image: "toolchain-minipoll-550x510.png"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "fixing-vulnerabilities-in-maven-projects"
   - "faster-maven-builds-1"

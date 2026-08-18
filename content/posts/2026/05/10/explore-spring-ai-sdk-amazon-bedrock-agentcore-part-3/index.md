@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

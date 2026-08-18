@@ -10,7 +10,6 @@ categories:
   - "Apache Cassandra"
   - "Machine Learning"
   - "Release Notes"
-tags:
 related_posts:
   - "adelphi-apache-cassandra-testing-goes-cloud-native"
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"

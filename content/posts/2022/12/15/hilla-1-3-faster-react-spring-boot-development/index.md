@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Hilla"
   - "Release Notes"
-tags:
 related_posts:
   - "master-detail-with-hilla"
   - "hilla-1-3-faster-react-spring-boot-development"

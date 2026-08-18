@@ -14,7 +14,6 @@ categories:
   - "NetBeans"
   - "Research"
   - "Use Cases"
-tags:
 related_posts:
   - "getting-started-with-deep-learning-in-java-using-deep-netts"
   - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"

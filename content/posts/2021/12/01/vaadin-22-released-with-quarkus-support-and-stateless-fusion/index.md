@@ -9,7 +9,6 @@ image: "1200x630-vaadin-release-v22-700x368.jpg"
 categories:
   - "Release Notes"
   - "Vaadin"
-tags:
 related_posts:
   - "delegation-vs-inheritance-in-graphical-user-interfaces"
   - "evolution-of-microservices"

@@ -21,7 +21,6 @@ categories:
   - "Tutorials"
   - "Use Cases"
   - "Videos"
-tags:
 related_posts:
   - "jc-ai-newsletter-15"
   - "jc-ai-newsletter-14"

@@ -8,7 +8,6 @@ authors:
 image: "zelda01.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
 frozen: false
 ---

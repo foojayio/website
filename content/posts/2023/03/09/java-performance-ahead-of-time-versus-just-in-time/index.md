@@ -10,7 +10,6 @@ image: "chart-speed-optimization-level.png"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "cloud-myth-ahead-of-time-compilation-will-save-you-money"

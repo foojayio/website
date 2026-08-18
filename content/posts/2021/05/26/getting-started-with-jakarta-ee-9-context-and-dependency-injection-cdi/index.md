@@ -11,7 +11,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Jakarta EE"
   - "Microservices"
-tags:
 related_posts:
   - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"

@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Release Notes"
-tags:
 related_posts:
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
   - "are-java-security-updates-important"

@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Java"
   - "Java Beginner"
-tags:
 related_posts:
   - "starting-docker-desktop-with-spring-boot"
   - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"

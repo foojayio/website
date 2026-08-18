@@ -10,7 +10,6 @@ categories:
   - "Java Core"
   - "JEPs"
   - "Records"
-tags:
 related_posts:
   - "thinking-about-massive-throughput-meet-virtual-threads"
   - "are-java-security-updates-important"

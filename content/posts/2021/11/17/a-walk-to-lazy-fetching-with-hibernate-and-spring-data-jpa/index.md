@@ -8,7 +8,6 @@ authors:
 image: "oie_koKWLHXsUxuL.jpg"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"

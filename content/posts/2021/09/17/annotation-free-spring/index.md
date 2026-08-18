@@ -11,7 +11,6 @@ categories:
   - "Kotlin"
   - "Research"
   - "Spring"
-tags:
 related_posts:
   - "exposed-kotlin-orm-complete-guide"
   - "agent-memory-with-spring-ai-redis"

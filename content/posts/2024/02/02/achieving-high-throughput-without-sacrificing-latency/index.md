@@ -12,7 +12,6 @@ categories:
   - "Java Beginner"
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "building-custom-solutions-vs-buy-and-build-software"

@@ -8,7 +8,6 @@ authors:
 image: "opportunity-2105406_1280.jpg"
 categories:
   - "Research"
-tags:
 related_posts:
   - "create-a-crud-ui-in-pure-java"
   - "get-your-jdk-as-easily-as-possible"

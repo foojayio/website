@@ -10,7 +10,6 @@ image: "7reasonsopenjdk.png"
 categories:
   - "Jakarta EE"
   - "Videos"
-tags:
 related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "automatic-wildfly-clustering-managed-domain-scaling-containers"

@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
   - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"

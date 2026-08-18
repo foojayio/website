@@ -9,7 +9,6 @@ authors:
 image: "foojay_linkedin_banner.png"
 categories:
   - "Foojay"
-tags:
 related_posts:
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
   - "announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community"

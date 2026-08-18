@@ -15,7 +15,6 @@ categories:
   - "Java Core"
   - "Podcast"
   - "Security"
-tags:
 related_posts:
   - "how-to-use-java-dtos-to-stay-secure"
   - "best-practices-for-managing-java-dependencies"

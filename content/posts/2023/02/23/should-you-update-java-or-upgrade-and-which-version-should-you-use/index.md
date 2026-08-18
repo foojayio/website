@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Security"
-tags:
 related_posts:
   - "foojay-podcast-4"
   - "foojay-podcast-5"

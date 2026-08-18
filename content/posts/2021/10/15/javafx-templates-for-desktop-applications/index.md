@@ -8,7 +8,6 @@ authors:
 image: "Screenshot-2021-10-10-at-22.08.21.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "creating-mobile-apps-with-javafx-part-1"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"

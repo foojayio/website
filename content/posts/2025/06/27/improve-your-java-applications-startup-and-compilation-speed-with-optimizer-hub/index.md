@@ -10,7 +10,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Java"
   - "Performance"
-tags:
 related_posts:
   - "faster-java-warmup-crac-versus-readynow"
   - "how-readynow-improves-java-warmup-time"

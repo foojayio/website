@@ -7,7 +7,6 @@ authors:
 image: "1070125507.png"
 categories:
   - "Mongo"
-tags:
 related_posts:
   - "contrast-security-joins-foojay-advisory-board-to-accelerate-java-developer-community-growth-raise-security-perspective-pr-news"
   - "foojay-all-about-java-and-the-openjdk-i-programmer"

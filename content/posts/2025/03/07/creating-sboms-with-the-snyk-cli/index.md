@@ -11,7 +11,6 @@ categories:
   - "Security"
   - "Snyk"
   - "Tools"
-tags:
 related_posts:
   - "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
   - "how-to-create-sboms-in-java-with-maven-and-gradle"

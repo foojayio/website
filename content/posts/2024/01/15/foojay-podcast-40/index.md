@@ -11,7 +11,6 @@ image: "podcast-java-for-beginners-guests.png"
 categories:
   - "Java Beginner"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-39"
   - "foojay-podcast-38"

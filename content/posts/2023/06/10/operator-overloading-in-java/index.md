@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "revolutionize-json-parsing-in-java-with-manifold"
   - "spring-boot-debugging-with-aspect-oriented-programming-aop"

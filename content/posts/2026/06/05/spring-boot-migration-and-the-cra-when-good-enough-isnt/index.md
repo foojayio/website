@@ -8,7 +8,6 @@ image: "Gemini_Generated_Image_jf93u3jf93u3jf93.png"
 categories:
   - "Java"
   - "Security"
-tags:
 related_posts:
   - "did-ai-just-break-software-security-for-ever"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

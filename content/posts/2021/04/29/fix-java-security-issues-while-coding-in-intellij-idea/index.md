@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Security"
   - "Snyk"
-tags:
 related_posts:
 frozen: false
 ---

@@ -9,7 +9,6 @@ authors:
 image: "cassandra-performance-4.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"

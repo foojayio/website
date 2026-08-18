@@ -9,7 +9,6 @@ image: "DuckDB_in_Action_large.jpg"
 categories:
   - "Book Review"
   - "Databases"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

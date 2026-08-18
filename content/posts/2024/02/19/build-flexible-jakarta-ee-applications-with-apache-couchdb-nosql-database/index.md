@@ -12,7 +12,6 @@ categories:
   - "nosql"
   - "Payara"
   - "Videos"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "can-java-jakarta-ee-do-microservices"

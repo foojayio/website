@@ -9,7 +9,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
   - "idempotent-spring-boot-starter"

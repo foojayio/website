@@ -11,7 +11,6 @@ categories:
   - "Microservices"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "clean-shutdown-of-spring-boot-applications"
   - "containerizing-spring-boot-applications-with-jib"

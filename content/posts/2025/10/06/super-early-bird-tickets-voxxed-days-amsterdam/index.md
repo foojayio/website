@@ -10,7 +10,6 @@ image: "keynote_slide.001.jpeg"
 categories:
   - "Conference"
   - "Events"
-tags:
 related_posts:
   - "foojay-podcast-24"
   - "foojay-podcast-46"

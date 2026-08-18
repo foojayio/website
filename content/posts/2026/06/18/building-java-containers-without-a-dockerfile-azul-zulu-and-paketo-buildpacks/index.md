@@ -8,7 +8,6 @@ image: "azul-docker-formats.avif"
 categories:
   - "Cloud"
   - "Java"
-tags:
 related_posts:
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
   - "using-the-azul-zulu-docker-official-images-from-simple-pull-to-lean-container"

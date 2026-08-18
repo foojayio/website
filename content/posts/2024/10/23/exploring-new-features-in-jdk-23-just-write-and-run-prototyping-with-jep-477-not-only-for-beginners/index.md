@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "JDK 23"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"

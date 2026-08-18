@@ -8,7 +8,6 @@ authors:
 image: "image-15-2000x1333-1.png"
 categories:
   - "Trip Reports"
-tags:
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"

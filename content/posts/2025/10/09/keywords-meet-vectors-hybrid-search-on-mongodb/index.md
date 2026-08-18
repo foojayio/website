@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Databases"
   - "Mongo"
-tags:
 related_posts:
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"

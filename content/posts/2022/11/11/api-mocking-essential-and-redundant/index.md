@@ -9,7 +9,6 @@ authors:
 image: "DALL-E-2022-10-25-19.40.58-Mocking-bird-standing-on-a-computer.png"
 categories:
   - "Testing"
-tags:
 related_posts:
   - "the-reason-java-is-still-popular"
   - "great-time-at-javazone-2022"

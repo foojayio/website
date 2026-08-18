@@ -9,7 +9,6 @@ image: "https://media.jfrog.com/wp-content/uploads/2021/02/08172937/Common-Confi
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "prevent-ldap-injection-in-java-with-springboot"
   - "foojay-podcast-7"

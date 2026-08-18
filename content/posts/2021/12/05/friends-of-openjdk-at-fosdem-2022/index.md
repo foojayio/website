@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "java-thread-programming-part-1"
   - "understanding-apache-maven-part-1-the-basics"

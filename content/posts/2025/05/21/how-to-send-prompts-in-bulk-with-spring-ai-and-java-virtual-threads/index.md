@@ -11,7 +11,6 @@ categories:
   - "JDK21"
   - "Spring"
   - "Tutorials"
-tags:
 related_posts:
   - "back-to-basics-accessing-kubernetes-pods"
   - "building-autopo-an-ai-powered-open-source-application-to-manage-po-files"

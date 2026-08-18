@@ -10,7 +10,6 @@ categories:
   - "JEPs"
   - "Project Panama"
   - "Tutorials"
-tags:
 related_posts:
   - "java-panama-polyglot-part1"
   - "java-panama-polyglot-swift-part-2"

@@ -9,7 +9,6 @@ image: "interactively-rebase-from-here.png"
 categories:
   - "Developer Tools"
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "lntellij-idea-selectively-commit-changes-to-a-file"
   - "intellij-idea-changelists-and-git-staging"

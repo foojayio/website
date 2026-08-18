@@ -10,7 +10,6 @@ image: "GoBackToMain-1024x575-1.png"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "managing-dependencies-in-intellij-idea"
   - "3-ways-to-refactor-your-code-in-intellij-idea"

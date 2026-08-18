@@ -9,7 +9,6 @@ image: "java-crac.jpeg"
 categories:
   - "CRaC"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

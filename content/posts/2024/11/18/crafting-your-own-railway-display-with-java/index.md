@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Raspberry Pi"
   - "Vaadin"
-tags:
 related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

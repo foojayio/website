@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Kubernetes"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "book-review-effortless-cloud-native-app-development-using-skaffold"

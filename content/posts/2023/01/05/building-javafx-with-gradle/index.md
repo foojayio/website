@@ -10,7 +10,6 @@ categories:
   - "Eclipse"
   - "Gradle"
   - "JavaFX"
-tags:
 related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "compilation-avoidance-with-gradle"

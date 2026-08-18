@@ -9,7 +9,6 @@ image: "image-1-1024x631.png"
 categories:
   - "Events"
   - "Foojay"
-tags:
 related_posts:
   - "managing-dependencies-in-intellij-idea"
   - "firefox-profiler-beyond-the-web"

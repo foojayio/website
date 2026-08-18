@@ -9,7 +9,6 @@ image: "http://img.youtube.com/vi/sW7mTNVIUhE/mqdefault.jpg"
 categories:
   - "DevOps"
   - "Security"
-tags:
 related_posts:
   - "spring-remote-code-execution-vulnerability"
   - "detecting-investigating-and-verifying-fixes-for-security-incidents-and-zero-day-issues-using-lightrun"

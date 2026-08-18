@@ -10,7 +10,6 @@ image: "pi4j-overview-scaled.jpg"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "foojay-podcast-83"
   - "project-panama-for-newbies-part-4"

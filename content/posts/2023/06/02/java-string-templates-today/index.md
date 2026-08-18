@@ -10,7 +10,6 @@ image: "thumbnail-19.png"
 categories:
   - "Developer Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "spring-boot-debugging-with-aspect-oriented-programming-aop"
   - "relearning-java-thread-primitives"

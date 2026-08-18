@@ -10,7 +10,6 @@ image: "image-3.png"
 categories:
   - "Payara"
   - "Tools"
-tags:
 related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "can-java-jakarta-ee-do-microservices"

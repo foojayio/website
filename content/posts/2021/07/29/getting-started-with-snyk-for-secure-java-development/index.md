@@ -11,7 +11,6 @@ categories:
   - "Security"
   - "Snyk"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

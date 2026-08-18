@@ -8,7 +8,6 @@ authors:
 image: "image-9.png"
 categories:
   - "Events"
-tags:
 related_posts:
   - "foojay-at-fosdem-2022-on-youtube"
   - "friends-of-openjdk-at-fosdem-2022"

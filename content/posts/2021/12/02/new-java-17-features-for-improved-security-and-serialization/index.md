@@ -10,7 +10,6 @@ image: "https://snyk.io/wp-content/uploads/blog-java-17-deserialization-1240x827
 categories:
   - "JEPs"
   - "Security"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "jep-411-what-it-means-for-javas-security-model"

@@ -12,7 +12,6 @@ categories:
   - "JDK 23"
   - "JDK21"
   - "Tutorials"
-tags:
 related_posts:
   - "foojay-podcast-64"
   - "loom-is-just-hyperthreading-in-java"

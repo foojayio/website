@@ -9,7 +9,6 @@ image: "sealed-classes-benefits.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

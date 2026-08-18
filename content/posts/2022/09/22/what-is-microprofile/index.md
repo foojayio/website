@@ -11,7 +11,6 @@ image: "microprofile.png"
 categories:
   - "Cloud"
   - "Microservices"
-tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "evolution-of-microservices"

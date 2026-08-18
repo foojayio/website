@@ -9,7 +9,6 @@ authors:
 image: "Shai_Almog_corporate_programmer_with_his_back_to_the_camera_in__c9d7c7b9-5cb5-4464-8b75-96b8ecdd3190.png"
 categories:
   - "Opinion"
-tags:
 related_posts:
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "watch-area-and-renderers"

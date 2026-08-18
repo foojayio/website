@@ -11,7 +11,6 @@ categories:
   - "IntelliJ IDEA"
   - "Tutorials"
   - "VS Code"
-tags:
 related_posts:
   - "debugging-threads-and-asynchronous-code"
   - "debugging-streams-and-collections"

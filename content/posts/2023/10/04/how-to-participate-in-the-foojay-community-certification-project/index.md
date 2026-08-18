@@ -10,7 +10,6 @@ categories:
   - "Foojay"
   - "Java"
   - "Java Beginner"
-tags:
 related_posts:
   - "foojay-developer-certification-measure-skills"
   - "42-practical-java-design-patterns-builder-and-more"

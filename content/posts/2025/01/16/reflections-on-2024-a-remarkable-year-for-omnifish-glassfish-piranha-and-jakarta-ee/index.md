@@ -10,7 +10,6 @@ image: "freepik__adjust__85845_2025-1024x574-1.png"
 categories:
   - "Jakarta EE"
   - "Opinion"
-tags:
 related_posts:
   - "glassfish-is-rolling-forward-whats-new"
   - "ejb-support-in-piranha-via-cdi"

@@ -10,7 +10,6 @@ image: "DALL-E-2024-05-26-20.26.54-A-futuristic-technical-illustration-of-Kubern
 categories:
   - "Kubernetes"
   - "Tutorials"
-tags:
 related_posts:
   - "software-testing-as-a-debugging-tool"
   - "debugging-using-jmx-revisited"

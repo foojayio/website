@@ -8,7 +8,6 @@ authors:
 image: "neo.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "soprano-ofnullable-stream-java-challenge"
   - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"

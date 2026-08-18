@@ -9,7 +9,6 @@ image: "dublin-jug-podcast-guest.png"
 categories:
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-34"
   - "foojay-podcast-33"

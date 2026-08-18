@@ -10,7 +10,6 @@ categories:
   - "Book Review"
   - "Books"
   - "Machine Learning"
-tags:
 related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"

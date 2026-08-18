@@ -9,7 +9,6 @@ authors:
 image: "1636542639252_Moby-logo.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"

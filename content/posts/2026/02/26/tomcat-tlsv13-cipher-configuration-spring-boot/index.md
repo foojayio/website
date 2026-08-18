@@ -12,7 +12,6 @@ categories:
   - "Java"
   - "Security"
   - "Spring"
-tags:
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"

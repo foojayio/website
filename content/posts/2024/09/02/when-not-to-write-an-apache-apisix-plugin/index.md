@@ -9,7 +9,6 @@ authors:
 image: "man-5723449.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "advanced-url-rewriting-with-apache-apisix"

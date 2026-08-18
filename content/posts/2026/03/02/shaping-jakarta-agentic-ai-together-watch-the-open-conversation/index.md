@@ -13,7 +13,6 @@ categories:
   - "Java"
   - "Payara"
   - "Videos"
-tags:
 related_posts:
   - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
   - "boost-developer-productivity-with-payara-server-maven-plugin-ai-agent"

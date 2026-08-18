@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "Microservices"
   - "Surveys"
-tags:
 related_posts:
 frozen: false
 ---

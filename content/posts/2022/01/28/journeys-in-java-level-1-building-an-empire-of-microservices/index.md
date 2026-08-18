@@ -9,7 +9,6 @@ image: "unsplash-footbridge-scaled.jpeg"
 categories:
   - "Microservices"
   - "Neo4J"
-tags:
 related_posts:
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
   - "skps-definitive-primer-failures-pitfalls-and-disadvantages-of-microservices"

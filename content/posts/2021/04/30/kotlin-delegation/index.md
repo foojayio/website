@@ -10,7 +10,6 @@ image: "startup-883575_1280.jpg"
 categories:
   - "Kotlin"
   - "Research"
-tags:
 related_posts:
   - "examining-the-switch-statement-and-the-factory-pattern-in-three-jvm-languages"
   - "exposed-kotlin-orm-complete-guide"

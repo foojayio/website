@@ -9,7 +9,6 @@ authors:
 image: "sylvester-g44a15a609.jpg"
 categories:
   - "Developer Tools"
-tags:
 related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-ways-to-contribute-to-openjdk"

@@ -10,7 +10,6 @@ categories:
   - "Book Review"
   - "Books"
   - "Microservices"
-tags:
 related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "chopping-monolith"

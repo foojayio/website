@@ -10,7 +10,6 @@ categories:
   - "IntelliJ IDEA"
   - "Tools"
   - "TornadoVM"
-tags:
 related_posts:
   - "build-and-run-tornadovm-with-intellij-idea"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"

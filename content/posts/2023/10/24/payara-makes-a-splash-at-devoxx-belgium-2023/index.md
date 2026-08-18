@@ -9,7 +9,6 @@ authors:
 image: "payara_square_logo.jpg"
 categories:
   - "Events"
-tags:
 related_posts:
   - "do-java-jakarta-ee-standards-matter"
   - "can-java-jakarta-ee-do-microservices"

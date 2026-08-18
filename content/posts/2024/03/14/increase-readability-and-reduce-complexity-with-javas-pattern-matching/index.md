@@ -9,7 +9,6 @@ image: "instanceof.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "top-most-detected-issues-in-java-projects"
   - "builders-withers-and-records-javas-path-to-immutability"

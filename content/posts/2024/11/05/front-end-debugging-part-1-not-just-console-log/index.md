@@ -10,7 +10,6 @@ image: "bc0c6cc72cdd01372f0495cd7bdd464e.webp-copy.jpg"
 categories:
   - "Debugging"
   - "Tutorials"
-tags:
 related_posts:
   - "front-end-debugging-part-2-console-log-to-the-max"
   - "debugging-kubernetes-part-1-an-introduction"

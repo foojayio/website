@@ -10,7 +10,6 @@ image: "Lightrun_-_Talk_to_the_duck_blog_-_memory_management-02.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"

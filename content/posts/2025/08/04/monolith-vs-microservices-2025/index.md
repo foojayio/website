@@ -10,7 +10,6 @@ categories:
   - "Cloud"
   - "Microservices"
   - "Videos"
-tags:
 related_posts:
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "backend-for-frontend-the-demo"

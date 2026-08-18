@@ -12,7 +12,6 @@ image: "episode-25-guests.png"
 categories:
   - "JavaFX"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-9"
   - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"

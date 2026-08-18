@@ -9,7 +9,6 @@ image: "Screenshot-2024-01-19-at-17.18.11.png"
 categories:
   - "Chronicle Software"
   - "Microservices"
-tags:
 related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "chronicle-wire-object-marshalling"

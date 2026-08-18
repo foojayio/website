@@ -9,7 +9,6 @@ authors:
 image: "Code-exploration.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "what-is-debugging-in-140-seconds"
   - "the-debugger-checklist-part-ii"

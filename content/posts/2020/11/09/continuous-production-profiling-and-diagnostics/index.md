@@ -11,7 +11,6 @@ categories:
   - "JDK Flight Recorder"
   - "Observability"
   - "Performance"
-tags:
 related_posts:
 frozen: false
 ---

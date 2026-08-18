@@ -12,7 +12,6 @@ categories:
   - "Project Panama"
   - "Records"
   - "Release Notes"
-tags:
 related_posts:
   - "foojay-podcast-16"
   - "what-the-heck-is-project-loom-for-java"

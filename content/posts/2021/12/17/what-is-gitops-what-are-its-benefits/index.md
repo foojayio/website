@@ -10,7 +10,6 @@ image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636304168731/qHmKbq
 categories:
   - "Books"
   - "DevOps"
-tags:
 related_posts:
 frozen: false
 ---

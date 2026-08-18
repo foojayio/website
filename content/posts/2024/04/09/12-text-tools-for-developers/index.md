@@ -10,7 +10,6 @@ categories:
   - "Desktop"
   - "Developer Tools"
   - "DevOps"
-tags:
 related_posts:
   - "write-once-run-embedded-in-any-ide"
   - "a-javafx-app-on-zulufx-in-60-seconds"

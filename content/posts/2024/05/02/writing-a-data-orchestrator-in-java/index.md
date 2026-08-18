@@ -10,7 +10,6 @@ categories:
   - "DataEngineering"
   - "Java"
   - "Kafka"
-tags:
 related_posts:
   - "effective-coding-with-java-observability"
   - "journeys-in-java-level-10-service-discovery-with-eureka"

@@ -10,7 +10,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "Tools"
-tags:
 related_posts:
   - "foojay-webinar-live-stream-javas-place-in-the-ai-revolution"
   - "deep-learning-in-java-for-drug-discovery"

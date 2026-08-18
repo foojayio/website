@@ -14,7 +14,6 @@ categories:
   - "Maven"
   - "Security"
   - "Tutorials"
-tags:
 related_posts:
   - "are-java-security-updates-important"
   - "exploring-cve-2022-33980-the-apache-commons-configuration-rce-vulnerability"

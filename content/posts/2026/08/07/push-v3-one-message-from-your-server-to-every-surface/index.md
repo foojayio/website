@@ -8,7 +8,6 @@ authors:
 image: "push-v3-new-cloud.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"

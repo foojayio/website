@@ -8,7 +8,6 @@ authors:
 image: "image-1024x825.png"
 categories:
   - "Foojay"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "java-where-the-wild-code-isnt"

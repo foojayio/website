@@ -8,7 +8,6 @@ authors:
 image: "chemical-scientist-test-chemistry-chemist-student.jpg"
 categories:
   - "Developer Tools"
-tags:
 related_posts:
 frozen: false
 ---

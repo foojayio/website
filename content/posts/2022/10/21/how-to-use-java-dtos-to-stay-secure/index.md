@@ -10,7 +10,6 @@ image: "snyk-logo-2.png"
 categories:
   - "Java Core"
   - "Security"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

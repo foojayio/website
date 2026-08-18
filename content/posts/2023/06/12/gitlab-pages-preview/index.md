@@ -10,7 +10,6 @@ image: "pexels-noelle-otto-906018.jpg"
 categories:
   - "DevOps"
   - "GitLab"
-tags:
 related_posts:
   - "gitlab-continuous-deployment-one-stop-shop"
   - "conditional-builds-on-gitlab"

@@ -9,7 +9,6 @@ image: "Digmo-and-Java-.png"
 categories:
   - "Java"
   - "Observability"
-tags:
 related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"

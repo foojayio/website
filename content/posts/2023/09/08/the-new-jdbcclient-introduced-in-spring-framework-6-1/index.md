@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Spring"
   - "Testcontainers"
-tags:
 related_posts:
   - "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
   - "spring-6-1-restclient"

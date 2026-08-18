@@ -16,7 +16,6 @@ categories:
   - "Performance"
   - "Release Notes"
   - "Tools"
-tags:
 related_posts:
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"

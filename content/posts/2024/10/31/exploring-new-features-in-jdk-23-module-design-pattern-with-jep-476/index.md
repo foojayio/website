@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "Java Core"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
   - "exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners"

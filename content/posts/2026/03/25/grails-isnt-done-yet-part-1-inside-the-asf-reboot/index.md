@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Spring"
   - "Tools"
-tags:
 related_posts:
   - "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"

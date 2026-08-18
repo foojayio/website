@@ -12,7 +12,6 @@ categories:
   - "Kafka"
   - "sql"
   - "Streaming"
-tags:
 related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "how-does-kafka-perform-when-you-need-low-latency"

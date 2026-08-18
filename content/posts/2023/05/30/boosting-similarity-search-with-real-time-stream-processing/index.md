@@ -9,7 +9,6 @@ image: "qdrant.png"
 categories:
   - "Hazelcast"
   - "Tutorials"
-tags:
 related_posts:
   - "billion-events-per-second-with-millisecond-latency"
   - "enriching-kafka-applications-with-contextual-data"

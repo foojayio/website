@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "IntelliJ IDEA"
   - "Tools"
-tags:
 related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "java-on-azure-tooling-update-july-2022"

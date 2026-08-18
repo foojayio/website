@@ -9,7 +9,6 @@ authors:
 image: "boost.png"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-64"
   - "foojay-podcast-63"

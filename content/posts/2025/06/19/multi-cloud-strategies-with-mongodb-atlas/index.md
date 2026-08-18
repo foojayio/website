@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "Developer Tools"
   - "Mongo"
-tags:
 related_posts:
   - "testing-mongodb-atlas-search-java-apps-using-testcontainers"
   - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"

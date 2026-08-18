@@ -9,7 +9,6 @@ image: "MicrosoftTeams-image-33.jpg"
 categories:
   - "Jakarta EE"
   - "Surveys"
-tags:
 related_posts:
   - "getting-started-with-jakarta-ee-9-jakarta-ee-9-1"
   - "getting-started-with-jakarta-ee-9-hello-world"

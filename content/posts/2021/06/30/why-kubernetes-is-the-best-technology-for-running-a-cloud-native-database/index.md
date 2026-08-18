@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "DevOps"
   - "Kubernetes"
-tags:
 related_posts:
 frozen: false
 ---

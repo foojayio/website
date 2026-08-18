@@ -10,7 +10,6 @@ image: "https___res.cloudinary.com_snyk_image_upload_v1678125740_blog-mitigating
 categories:
   - "Security"
   - "Snyk"
-tags:
 related_posts:
   - "8-best-practices-to-prevent-sql-injection-attacks"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

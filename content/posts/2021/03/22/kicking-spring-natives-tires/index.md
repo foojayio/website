@@ -10,7 +10,6 @@ image: "logo.png"
 categories:
   - "Performance"
   - "Research"
-tags:
 related_posts:
   - "diving-into-jvm-framework-monitoring-and-profiling"
   - "kotlin-faas-impossible-union"

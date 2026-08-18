@@ -8,7 +8,6 @@ authors:
 image: "edit-melodymatrix-bentofx.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "video-series-javafx-in-action-part-6"
   - "javafx-links-of-october-2025"

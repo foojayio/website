@@ -15,7 +15,6 @@ categories:
   - "Kubernetes"
   - "Maven"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "kubernetes-and-apache-cassandra-what-works-and-what-doesnt"

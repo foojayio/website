@@ -13,7 +13,6 @@ categories:
   - "Project Panama"
   - "Records"
   - "Sealed Classes"
-tags:
 related_posts:
   - "foojay-podcast-28"
   - "its-java-20-release-day-heres-whats-new"

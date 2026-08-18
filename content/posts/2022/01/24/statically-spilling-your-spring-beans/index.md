@@ -8,7 +8,6 @@ authors:
 image: "https://www.tomcools.be/post/apr-2020-static-spring-bean/spilling-the-beans.jpg"
 categories:
   - "Spring"
-tags:
 related_posts:
   - "a-simple-service-with-spring-boot"
   - "a-walk-to-lazy-fetching-with-hibernate-and-spring-data-jpa"

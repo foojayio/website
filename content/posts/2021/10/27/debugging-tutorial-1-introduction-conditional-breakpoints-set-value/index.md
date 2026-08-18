@@ -12,7 +12,6 @@ categories:
   - "Kotlin"
   - "Tutorials"
   - "VS Code"
-tags:
 related_posts:
   - "the-debugger-checklist-part-i"
   - "the-debugger-checklist-part-ii"

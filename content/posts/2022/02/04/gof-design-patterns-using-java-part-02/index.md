@@ -8,7 +8,6 @@ authors:
 image: "https://1.bp.blogspot.com/-hKI50AxF4-E/YTtUtL05bfI/AAAAAAAA-cc/WHuoaObj0W0uErR_5nwcEBIG33ggDqtKQCLcBGAsYHQ/s16000/W3sDesign_Adapter_Design_Pattern_UML.jpg"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "gang-of-four-design-patterns-using-core-java-part-01"
   - "evolution-of-java-memory-architecture-post-java-7-0"

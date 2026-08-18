@@ -10,7 +10,6 @@ image: "c1kwxzrhvt40nuulijge-2.png"
 categories:
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "project-panama-for-newbies-part-1"
   - "project-panama-for-newbies-part-2"

@@ -9,7 +9,6 @@ image: "edit-96-floci.jpg"
 categories:
   - "Cloud"
   - "Podcast"
-tags:
 related_posts:
   - "introducing-floci-a-high-performance-graalvm-powered-aws-emulator"
   - "foojay-podcast-95"

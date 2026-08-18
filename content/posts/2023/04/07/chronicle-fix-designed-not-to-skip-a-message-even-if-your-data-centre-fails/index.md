@@ -10,7 +10,6 @@ categories:
   - "Jakarta EE"
   - "JavaFX"
   - "Use Cases"
-tags:
 related_posts:
   - "chronicle-wire-object-marshalling"
   - "creating-terabyte-sized-queues-with-low-latency"

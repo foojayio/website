@@ -10,7 +10,6 @@ categories:
   - "Databases"
   - "DataEngineering"
   - "nosql"
-tags:
 related_posts:
   - "microstream-part-1-what-is-it"
   - "microstream-part-2-configure-the-storage-manager"

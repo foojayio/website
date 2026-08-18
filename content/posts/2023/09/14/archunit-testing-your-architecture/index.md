@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Testing"
   - "Tutorials"
-tags:
 related_posts:
   - "load-testing-shoot-your-application-with-gatling"
   - "pitest-do-you-test-your-tests"

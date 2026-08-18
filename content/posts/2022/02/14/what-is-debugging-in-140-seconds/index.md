@@ -10,7 +10,6 @@ image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "Developer Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "book-review-quarkus-for-spring-developers"

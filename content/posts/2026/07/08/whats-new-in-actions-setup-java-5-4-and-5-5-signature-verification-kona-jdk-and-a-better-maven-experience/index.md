@@ -8,7 +8,6 @@ authors:
 image: "new-actions-setup-java.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "foojay-podcast-81"
   - "a-better-way-to-use-gradle-with-github-actions"

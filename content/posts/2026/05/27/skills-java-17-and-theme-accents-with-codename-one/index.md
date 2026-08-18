@@ -8,7 +8,6 @@ authors:
 image: "skills-java17-and-theme-accents.jpg"
 categories:
   - "Java"
-tags:
 related_posts:
   - "liquid-glass-material-3-and-a-lot-of-plumbing"
   - "metal-and-skins"

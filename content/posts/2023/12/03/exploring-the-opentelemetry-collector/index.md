@@ -9,7 +9,6 @@ authors:
 image: "opentelemetry-horizontal-color-scaled.jpg"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

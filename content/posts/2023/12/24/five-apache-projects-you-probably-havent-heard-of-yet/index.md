@@ -8,7 +8,6 @@ authors:
 image: "2560px-Apache_Software_Foundation_Logo.svg.png"
 categories:
   - "DevOps"
-tags:
 related_posts:
   - "5-great-reasons-to-use-jooq"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"

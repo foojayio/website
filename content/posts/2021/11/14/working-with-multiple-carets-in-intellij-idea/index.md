@@ -8,7 +8,6 @@ authors:
 image: "1200px-IntelliJ_IDEA_Logo.svg_.png"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
   - "creating-a-simple-spring-boot-application-in-intellij-idea"
   - "generating-code-with-intellij-idea"

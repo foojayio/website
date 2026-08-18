@@ -8,7 +8,6 @@ authors:
 image: "Top-10-Java-Language-features.png"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "are-java-security-updates-important"

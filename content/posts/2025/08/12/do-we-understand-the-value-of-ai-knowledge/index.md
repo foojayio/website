@@ -11,7 +11,6 @@ categories:
   - "Design Patterns"
   - "LLM"
   - "Research"
-tags:
 related_posts:
   - "ai-newsletter-1"
   - "jc-ai-newsletter-2"

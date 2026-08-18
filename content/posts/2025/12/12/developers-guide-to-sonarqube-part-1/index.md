@@ -9,7 +9,6 @@ image: "Gemini_Generated_Image_p9ar60p9ar60p9ar-scaled.png"
 categories:
   - "IntelliJ IDEA"
   - "Java"
-tags:
 related_posts:
   - "developers-guide-to-sonarqube-part-2"
   - "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij"

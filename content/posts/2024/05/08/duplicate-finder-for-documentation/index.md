@@ -10,7 +10,6 @@ image: "duplicate-finder-banner.png"
 categories:
   - "Java"
   - "Kotlin"
-tags:
 related_posts:
   - "debug-without-breakpoints"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"

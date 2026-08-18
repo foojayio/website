@@ -11,7 +11,6 @@ categories:
   - "Cloud"
   - "Security"
   - "Tools"
-tags:
 related_posts:
   - "apisix-api-gateway"
   - "kubernetes-gateway-api"

@@ -12,7 +12,6 @@ categories:
   - "Events"
   - "GenAI"
   - "Webinar"
-tags:
 related_posts:
 frozen: false
 ---

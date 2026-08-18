@@ -11,7 +11,6 @@ categories:
   - "Databases"
   - "Java"
   - "Mongo"
-tags:
 related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "best-practices-for-deploying-mongodb-in-kubernetes"

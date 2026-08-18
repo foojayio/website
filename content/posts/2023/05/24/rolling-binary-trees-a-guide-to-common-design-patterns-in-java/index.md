@@ -13,7 +13,6 @@ categories:
   - "Sealed Classes"
   - "Tutorials"
   - "Use Cases"
-tags:
 related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

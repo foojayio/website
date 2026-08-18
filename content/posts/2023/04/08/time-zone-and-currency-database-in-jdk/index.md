@@ -10,7 +10,6 @@ categories:
   - "Java Core"
   - "Release Notes"
   - "Testing"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "should-you-update-java-or-upgrade-and-which-version-should-you-use"

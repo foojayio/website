@@ -10,7 +10,6 @@ image: "Lightrun-Talk-to-the-duck-Debugging-Tutorial-Opt3.jpg"
 categories:
   - "IntelliJ IDEA"
   - "Tutorials"
-tags:
 related_posts:
   - "what-is-debugging-in-140-seconds"
   - "memory-debugging-and-watch-annotations"

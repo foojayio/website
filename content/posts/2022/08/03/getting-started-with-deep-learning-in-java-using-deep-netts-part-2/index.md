@@ -10,7 +10,6 @@ categories:
   - "Deep Netts"
   - "Machine Learning"
   - "NetBeans"
-tags:
 related_posts:
   - "getting-started-with-deep-learning-in-java-using-deep-netts"
   - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"

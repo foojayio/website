@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2021-06-30-at-18.27.27-1024x674-1.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "function-calculation-java-challenge"
   - "jedi-lambda-join-java-challenge"

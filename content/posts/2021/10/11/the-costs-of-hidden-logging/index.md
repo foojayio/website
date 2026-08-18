@@ -9,7 +9,6 @@ image: "pic1-700x416.png"
 categories:
   - "JDK Flight Recorder"
   - "Performance"
-tags:
 related_posts:
   - "java-logging-what-to-log-what-not-to-log"
   - "introduction-to-jvm-unified-logging-jep-158-jep-271"

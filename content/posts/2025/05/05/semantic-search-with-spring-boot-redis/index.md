@@ -12,7 +12,6 @@ categories:
   - "Redis"
   - "Tools"
   - "Use Cases"
-tags:
 related_posts:
   - "fixed-window-counter-rate-limiter-redis-java"
   - "foojay-podcast-69"

@@ -10,7 +10,6 @@ categories:
   - "AI"
   - "Developer Tools"
   - "OpenTelemetry"
-tags:
 related_posts:
 frozen: false
 ---

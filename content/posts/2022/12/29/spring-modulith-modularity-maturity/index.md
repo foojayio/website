@@ -10,7 +10,6 @@ image: "lockers-ge502cd01e.jpg"
 categories:
   - "Microservices"
   - "Spring"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

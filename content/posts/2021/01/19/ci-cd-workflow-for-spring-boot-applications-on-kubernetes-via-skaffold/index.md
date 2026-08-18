@@ -10,7 +10,6 @@ image: "Screenshot-2020-12-08-at-8.26.16-AM.png"
 categories:
   - "Kubernetes"
   - "Maven"
-tags:
 related_posts:
 frozen: false
 ---

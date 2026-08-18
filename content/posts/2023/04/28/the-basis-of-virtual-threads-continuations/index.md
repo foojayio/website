@@ -9,7 +9,6 @@ image: "images.jpeg"
 categories:
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "what-the-heck-is-project-loom-for-java"
   - "an-introduction-to-scoped-values-in-java"

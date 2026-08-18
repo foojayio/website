@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Hazelcast"
   - "Spring"
-tags:
 related_posts:
   - "sticky-sessions-with-apache-apisix"
   - "5-great-reasons-to-use-jooq"

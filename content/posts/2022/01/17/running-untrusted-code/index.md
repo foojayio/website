@@ -10,7 +10,6 @@ image: "wolf-in-sheeps-clothing.jpg"
 categories:
   - "JEPs"
   - "Security"
-tags:
 related_posts:
   - "jep-411-what-it-means-for-javas-security-model"
   - "why-jep-411-will-have-a-negative-impact-on-java-security"

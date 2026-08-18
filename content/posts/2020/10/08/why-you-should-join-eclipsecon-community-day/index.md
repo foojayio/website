@@ -10,7 +10,6 @@ image: "jakartaee_logo-1024x308.jpg"
 categories:
   - "Eclipse"
   - "Tools"
-tags:
 related_posts:
 frozen: false
 ---

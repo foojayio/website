@@ -8,7 +8,6 @@ authors:
 image: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/237460iF9EBF07D3DE5E671/image-size/large?v=1.0&px=999"
 categories:
   - "Release Notes"
-tags:
 related_posts:
 frozen: false
 ---

@@ -9,7 +9,6 @@ image: "image-2.png"
 categories:
   - "Performance"
   - "Release Notes"
-tags:
 related_posts:
   - "java-where-the-wild-code-isnt"
   - "are-java-security-updates-important"

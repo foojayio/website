@@ -9,7 +9,6 @@ authors:
 image: "https://helenjoscott-blogs.s3.eu-west-2.amazonaws.com/lazy-cat.jpg"
 categories:
   - "IntelliJ IDEA"
-tags:
 related_posts:
 frozen: false
 ---

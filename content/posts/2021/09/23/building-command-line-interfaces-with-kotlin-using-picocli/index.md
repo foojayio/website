@@ -9,7 +9,6 @@ authors:
 image: "image1-700x135.png"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "annotation-free-spring"

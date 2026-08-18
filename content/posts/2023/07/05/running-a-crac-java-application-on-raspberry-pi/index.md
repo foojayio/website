@@ -10,7 +10,6 @@ image: "azul-download.png"
 categories:
   - "CRaC"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"

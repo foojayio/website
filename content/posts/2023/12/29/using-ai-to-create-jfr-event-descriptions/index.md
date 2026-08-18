@@ -9,7 +9,6 @@ image: "image-10-2000x1604-1.png"
 categories:
   - "Developer Tools"
   - "Machine Learning"
-tags:
 related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"

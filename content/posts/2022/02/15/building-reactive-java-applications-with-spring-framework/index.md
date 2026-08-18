@@ -13,7 +13,6 @@ categories:
   - "DataStax"
   - "reactive"
   - "Spring"
-tags:
 related_posts:
   - "the-search-for-a-cloud-native-atabase"
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"

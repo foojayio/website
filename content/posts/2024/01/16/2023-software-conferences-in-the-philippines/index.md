@@ -11,7 +11,6 @@ categories:
   - "Events"
   - "JUGs"
   - "Trip Reports"
-tags:
 related_posts:
   - "foojay-podcast-32-philippines-jug"
   - "jugph-continuing-the-connection-with-the-java-enthusiasts"

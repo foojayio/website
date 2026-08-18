@@ -10,7 +10,6 @@ categories:
   - "Java"
   - "Java Beginner"
   - "JDK 23"
-tags:
 related_posts:
   - "exploring-new-features-in-jdk-23-builder-pattern-simplicity-with-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview"
   - "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"

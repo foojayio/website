@@ -9,7 +9,6 @@ image: "image_2024-10-03_111134341_fwi3rh.png"
 categories:
   - "Java"
   - "Java Core"
-tags:
 related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-why-after-26-years-java-still-makes-sense"

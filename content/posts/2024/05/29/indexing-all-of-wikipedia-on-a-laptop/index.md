@@ -10,7 +10,6 @@ categories:
   - "DataStax"
   - "Performance"
   - "Tools"
-tags:
 related_posts:
   - "jvector-1-0"
   - "spring-ai-how-to-write-genai-applications-with-java"

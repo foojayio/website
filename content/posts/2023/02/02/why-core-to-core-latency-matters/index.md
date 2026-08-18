@@ -8,7 +8,6 @@ authors:
 image: "Screen-Shot-2023-01-24-at-9.30.29-AM-1024x507-1.png"
 categories:
   - "Performance"
-tags:
 related_posts:
   - "how-does-kafka-perform-when-you-need-low-latency"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"

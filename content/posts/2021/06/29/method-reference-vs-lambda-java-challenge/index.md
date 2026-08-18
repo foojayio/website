@@ -8,7 +8,6 @@ authors:
 image: "method_reference.png"
 categories:
   - "Tutorials"
-tags:
 related_posts:
   - "jedi-lambda-join-java-challenge"
   - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"

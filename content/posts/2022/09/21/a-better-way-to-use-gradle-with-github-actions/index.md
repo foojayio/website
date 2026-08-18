@@ -10,7 +10,6 @@ image: "189988848-386c3d6b-d93d-4b4b-8c76-3f62a13ba3bf.png"
 categories:
   - "DevOps"
   - "Gradle"
-tags:
 related_posts:
   - "java-on-azure-tooling-update-june-2022"
   - "5-tips-to-create-secure-docker-images-for-java-applications"

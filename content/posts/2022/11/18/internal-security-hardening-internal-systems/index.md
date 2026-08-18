@@ -9,7 +9,6 @@ authors:
 image: "DALL-E-2022-10-11-21.48.44-hacking-into-a-system.jpg"
 categories:
   - "Security"
-tags:
 related_posts:
   - "the-reason-java-is-still-popular"
   - "great-time-at-javazone-2022"

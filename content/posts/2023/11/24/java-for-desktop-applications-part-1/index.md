@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "JavaFX"
   - "Use Cases"
-tags:
 related_posts:
   - "9-outdated-ideas-about-java"
   - "state-jvm-desktop-frameworks-jetpack-compose-for-desktop"

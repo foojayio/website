@@ -10,7 +10,6 @@ authors:
 image: "episode-61-thumbnail.png"
 categories:
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-60"
   - "foojay-podcast-59"

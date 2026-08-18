@@ -11,7 +11,6 @@ categories:
   - "Java"
   - "Use Cases"
   - "Videos"
-tags:
 related_posts:
   - "fuchs-2024-fepcos-j-multithreaded-server"
   - "fuchs-2023-fepcos-j-02"

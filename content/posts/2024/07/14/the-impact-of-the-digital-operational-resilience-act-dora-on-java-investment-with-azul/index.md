@@ -12,7 +12,6 @@ categories:
   - "Java Core"
   - "Performance"
   - "Security"
-tags:
 related_posts:
   - "consequences-of-dora-on-java-and-openjdk-with-azul"
   - "java-where-the-wild-code-isnt"

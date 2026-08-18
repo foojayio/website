@@ -9,7 +9,6 @@ authors:
 image: "java.png"
 categories:
   - "Java"
-tags:
 related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"

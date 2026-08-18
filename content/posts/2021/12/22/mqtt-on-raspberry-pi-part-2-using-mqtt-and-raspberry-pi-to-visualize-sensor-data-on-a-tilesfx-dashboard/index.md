@@ -12,7 +12,6 @@ categories:
   - "MQTT"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "mqtt-on-raspberry-pi-part-1-send-sensor-data-to-hivemq-cloud-with-java-and-pi4j"
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"

@@ -10,7 +10,6 @@ authors:
 image: "spring_lcd.jpg"
 categories:
   - "Raspberry Pi"
-tags:
 related_posts:
   - "foojay-podcast-55"
   - "blink-a-led-on-raspberry-pi-with-vaadin"

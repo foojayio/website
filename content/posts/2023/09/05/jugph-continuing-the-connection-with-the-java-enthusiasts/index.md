@@ -9,7 +9,6 @@ image: "jugph_3_group_photo-scaled.jpg"
 categories:
   - "Events"
   - "JUGs"
-tags:
 related_posts:
   - "java-user-group-ph-report-2023"
   - "friends-of-openjdk-at-fosdem-2023"

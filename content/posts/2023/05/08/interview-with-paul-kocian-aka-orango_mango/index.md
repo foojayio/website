@@ -11,7 +11,6 @@ categories:
   - "Interviews"
   - "Java Core"
   - "JavaFX"
-tags:
 related_posts:
   - "foojay-podcast-9"
   - "game-development-basics-with-fxgl"

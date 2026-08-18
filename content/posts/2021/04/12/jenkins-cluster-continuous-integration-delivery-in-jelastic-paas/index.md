@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Jelastic"
   - "Tutorials"
-tags:
 related_posts:
 frozen: false
 ---

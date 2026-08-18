@@ -9,7 +9,6 @@ image: "Favicon-3-2.png"
 categories:
   - "Records"
   - "Sealed Classes"
-tags:
 related_posts:
 frozen: false
 ---

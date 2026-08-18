@@ -9,7 +9,6 @@ authors:
 image: "image-10-1024x463.png"
 categories:
   - "Maven"
-tags:
 related_posts:
   - "understanding-apache-maven-part-2-pom-hierarchy"
   - "a-simple-service-with-spring-boot"

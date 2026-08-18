@@ -12,7 +12,6 @@ categories:
   - "Game Development"
   - "JavaFX"
   - "JBang"
-tags:
 related_posts:
   - "javafx-links-of-june-2024"
   - "javafx-links-of-may-2024"

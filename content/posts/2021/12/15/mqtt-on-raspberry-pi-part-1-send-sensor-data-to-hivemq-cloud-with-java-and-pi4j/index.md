@@ -12,7 +12,6 @@ categories:
   - "MQTT"
   - "Pi4J"
   - "Raspberry Pi"
-tags:
 related_posts:
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
   - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"

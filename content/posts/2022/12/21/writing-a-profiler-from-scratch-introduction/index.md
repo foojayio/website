@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Performance"
   - "Tutorials"
-tags:
 related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "a-flavour-of-tornadovm-on-apple-m1-pro"

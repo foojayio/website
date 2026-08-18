@@ -11,7 +11,6 @@ categories:
   - "DevOps"
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "chopping-monolith"
   - "blockhound-how-it-works"

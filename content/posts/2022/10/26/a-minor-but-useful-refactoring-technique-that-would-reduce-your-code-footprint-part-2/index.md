@@ -8,7 +8,6 @@ authors:
 image: "michiel-leunens-0wIHsm2_1fc-unsplash-scaled.jpg"
 categories:
   - "Java Core"
-tags:
 related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "comparison-fault-tolerance-libraries"

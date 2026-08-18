@@ -9,7 +9,6 @@ authors:
 image: "Logo.png"
 categories:
   - "Security"
-tags:
 related_posts:
   - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"

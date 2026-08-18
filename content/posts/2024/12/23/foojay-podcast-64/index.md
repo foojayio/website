@@ -19,7 +19,6 @@ categories:
   - "JavaFX"
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-63"
   - "foojay-podcast-62"

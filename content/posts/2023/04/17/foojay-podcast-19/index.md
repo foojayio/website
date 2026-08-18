@@ -16,7 +16,6 @@ categories:
   - "OpenRewrite"
   - "Opinion"
   - "Podcast"
-tags:
 related_posts:
   - "5-great-reasons-to-use-jooq"
   - "introduction-to-maven-toolchains"

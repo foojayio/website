@@ -11,7 +11,6 @@ categories:
   - "Java Core"
   - "Kafka"
   - "Performance"
-tags:
 related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "kafka-vs-chronicle-for-microservices-which-is-750-times-faster"

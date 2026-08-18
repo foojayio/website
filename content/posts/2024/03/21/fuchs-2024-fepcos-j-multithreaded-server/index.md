@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "Use Cases"
-tags:
 related_posts:
   - "fuchs-2023-fepcos-j-01"
   - "fuchs-2023-fepcos-j-02"

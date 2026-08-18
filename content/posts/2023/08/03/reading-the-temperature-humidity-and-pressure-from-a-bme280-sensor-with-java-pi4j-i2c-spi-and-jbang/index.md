@@ -14,7 +14,6 @@ categories:
   - "Raspberry Pi"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "controlling-a-led-strip-with-pi4j-and-jbang"

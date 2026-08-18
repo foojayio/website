@@ -11,7 +11,6 @@ categories:
   - "Apache Pulsar"
   - "DataStax"
   - "Microservices"
-tags:
 related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar"

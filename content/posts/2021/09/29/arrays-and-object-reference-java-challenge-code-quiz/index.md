@@ -8,7 +8,6 @@ authors:
 image: "Favicon-3-2.png"
 categories:
   - "Books"
-tags:
 related_posts:
   - "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
   - "daemon-thread-java-code-quiz"

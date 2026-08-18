@@ -8,7 +8,6 @@ authors:
 image: "edit-melodymatrix-jdeploy-release.jpg"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "foojay-podcast-54"
   - "video-series-javafx-in-action-part-3"

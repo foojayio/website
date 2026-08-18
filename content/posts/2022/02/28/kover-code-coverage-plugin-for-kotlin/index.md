@@ -9,7 +9,6 @@ authors:
 image: "kover6.jpeg"
 categories:
   - "Kotlin"
-tags:
 related_posts:
   - "kotlin-delegation"
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"

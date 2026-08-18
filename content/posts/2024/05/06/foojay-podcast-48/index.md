@@ -11,7 +11,6 @@ categories:
   - "Conference"
   - "JUGs"
   - "Podcast"
-tags:
 related_posts:
   - "foojay-podcast-19"
   - "foojay-podcast-47"

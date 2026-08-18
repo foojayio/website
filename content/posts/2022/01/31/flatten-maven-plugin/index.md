@@ -10,7 +10,6 @@ image: "flatten-5964529.jpg"
 categories:
   - "Maven"
   - "Tools"
-tags:
 related_posts:
   - "faster-maven-builds-1"
   - "fixing-vulnerabilities-in-maven-projects"

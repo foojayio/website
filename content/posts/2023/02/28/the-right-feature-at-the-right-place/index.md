@@ -11,7 +11,6 @@ categories:
   - "Kotlin"
   - "Research"
   - "Use Cases"
-tags:
 related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"

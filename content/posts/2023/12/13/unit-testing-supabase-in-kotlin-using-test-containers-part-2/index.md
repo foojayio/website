@@ -9,7 +9,6 @@ image: "Screenshot-2023-10-11-at-23.57.36-1.png"
 categories:
   - "Kotlin"
   - "Testing"
-tags:
 related_posts:
   - "unit-testing-supabase-in-kotlin"
   - "api-mocking-essential-and-redundant"

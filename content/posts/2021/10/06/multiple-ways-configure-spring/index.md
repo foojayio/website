@@ -11,7 +11,6 @@ categories:
   - "Kotlin"
   - "Research"
   - "Spring"
-tags:
 related_posts:
   - "annotation-free-spring"
   - "a-simple-service-with-spring-boot"

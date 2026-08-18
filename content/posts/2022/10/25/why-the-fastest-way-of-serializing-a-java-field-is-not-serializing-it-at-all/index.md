@@ -10,7 +10,6 @@ categories:
   - "DevOps"
   - "Java Core"
   - "Performance"
-tags:
 related_posts:
   - "foojay-podcast-6"
   - "how-to-use-java-dtos-to-stay-secure"

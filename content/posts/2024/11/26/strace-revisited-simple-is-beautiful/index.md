@@ -10,7 +10,6 @@ image: "DALL-E-2024-01-30-08.36.40-A-full-width-dynamic-and-colorful-digital-ill
 categories:
   - "Tools"
   - "Tutorials"
-tags:
 related_posts:
   - "cant-reproduce-a-bug"
   - "the-theory-of-debugging"

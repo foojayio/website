@@ -9,7 +9,6 @@ image: "postfix.gif"
 categories:
   - "Tools"
   - "VS Code"
-tags:
 related_posts:
   - "java-on-azure-tooling-update-october-2022"
   - "java-on-azure-tooling-update-september-2022"

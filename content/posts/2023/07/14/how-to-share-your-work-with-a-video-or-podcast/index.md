@@ -12,7 +12,6 @@ categories:
   - "Developer Tools"
   - "Tutorials"
   - "Videos"
-tags:
 related_posts:
   - "foojay-podcast-26"
   - "foojay-podcast-25"

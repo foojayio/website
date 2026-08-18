@@ -9,7 +9,6 @@ authors:
 image: "21_d3cvM_400x400.png"
 categories:
   - "Kubernetes"
-tags:
 related_posts:
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
   - "creating-a-kubernetes-operator-in-java"

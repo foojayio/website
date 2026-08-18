@@ -9,7 +9,6 @@ image: "GlassFish-embedded-e1698251860666.png"
 categories:
   - "Jakarta EE"
   - "Use Cases"
-tags:
 related_posts:
   - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
   - "how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think"

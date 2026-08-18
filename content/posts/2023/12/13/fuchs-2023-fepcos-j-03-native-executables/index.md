@@ -10,7 +10,6 @@ categories:
   - "Developer Tools"
   - "Java"
   - "Use Cases"
-tags:
 related_posts:
   - "native-image-micronaut"
   - "native-spring-boot"

@@ -8,7 +8,6 @@ authors:
 image: "podcast-javafx-guests-1024x393.png"
 categories:
   - "JavaFX"
-tags:
 related_posts:
   - "foojay-podcast-9"
   - "javafx-links-of-november"
