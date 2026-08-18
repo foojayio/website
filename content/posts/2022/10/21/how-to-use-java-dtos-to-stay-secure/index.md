@@ -89,7 +89,7 @@ For now, we have to create a POJO to do the work for us.
 
 ## Implementing a Data Transfer Object
 
-A DTO can be implemented as a POJO --- or a Java Bean for that matter. The most important thing is that a DTO separates concerns between entities like the presentation layer and the domain model, for example.
+A DTO can be implemented as a POJO — or a Java Bean for that matter. The most important thing is that a DTO separates concerns between entities like the presentation layer and the domain model, for example.
 
 Let's take a small rest service to explain this. Say we have a coffee store with coffees and customers. Both of these are separate domain entities in the system. If I want to know a customer's favorite coffee, I'll create an API that provides the aggregate data represented in the FavoriteCoffeDTO.
 
@@ -157,7 +157,7 @@ The purpose of a DTO is to carry data between processes. Therefore, a good DTO o
 
 In our API example, we only need to return the name of the customer and their favorite coffee order. There is no need to add anything else, such as business logic. The general advice is to keep your DTOs as simple, small, and straightforward as possible.
 
-Also after a DTO is initialized, its state shouldn't change or evolve. This means that an immutable data structure would be a great fit for a DTO. As a DTO only carries data that should be unaltered, a Java Record would be a great fit --- especially because JSON serialization libraries like Jackson support Java Records.
+Also after a DTO is initialized, its state shouldn't change or evolve. This means that an immutable data structure would be a great fit for a DTO. As a DTO only carries data that should be unaltered, a Java Record would be a great fit — especially because JSON serialization libraries like Jackson support Java Records.
 
 ## DTO security considerations
 
@@ -214,7 +214,7 @@ If you are reusing your DTOs for different functions, you should clearly underst
 
 In general, keep your DTOs concise, free of business logic if possible, and only provide the data needed for specific functions.
 
-Lastly, I believe that immutability is a natural fit for DTOs, making Java Records --- which was fully released in Java 16 --- a great way to implement DTOs in Java.
+Lastly, I believe that immutability is a natural fit for DTOs, making Java Records — which was fully released in Java 16 — a great way to implement DTOs in Java.
 
 Check out the following resources to learn more about Java security:
 

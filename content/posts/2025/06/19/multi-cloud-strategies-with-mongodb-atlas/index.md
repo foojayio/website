@@ -34,7 +34,7 @@ As mentioned earlier, one of the reasons you might want to use multiple cloud pr
 
 Another consideration is region availability. Regions are data center locations where your services are hosted. Each cloud provider has their own regions in different locations. They are usually available across various continents and countries. But not every country has an equal number of regions. In fact, some countries only have one.
 
-This can be an issue where data sovereignty laws exist---for example, in Germany. Data cannot leave Germany which means you cannot use multiple regions from the same provider. But the cloud provider might not have more than one data center in a country. So what happens if the region goes down? Cloud providers going down and becoming unavailable can happen and there have been many outages in recent years. If there is only one region available and it goes down, your applications will not have access to the data.
+This can be an issue where data sovereignty laws exist—for example, in Germany. Data cannot leave Germany which means you cannot use multiple regions from the same provider. But the cloud provider might not have more than one data center in a country. So what happens if the region goes down? Cloud providers going down and becoming unavailable can happen and there have been many outages in recent years. If there is only one region available and it goes down, your applications will not have access to the data.
 
 You can get around this issue with multi-cloud, by using regions from multiple cloud providers within the same country, avoiding sovereignty issues. If one cloud goes down, it will just fall back to another and your users will be none the wiser!
 

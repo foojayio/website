@@ -37,7 +37,7 @@ Dataset: default (via Dash0-Dataset header)
 Service name: dash0-java-demo
 Service version and namespace as appropriate resource attributes**
 
-**Use the OpenTelemetry Java agent (-javaagent:opentelemetry-javaagent.jar) --- download it into the project. Don't hardcode the token in source; put env vars in a run.sh script that's gitignored, and document everything in a README. Follow OpenTelemetry semantic conventions for any custom spans or attributes you add.**   
+**Use the OpenTelemetry Java agent (-javaagent:opentelemetry-javaagent.jar) — download it into the project. Don't hardcode the token in source; put env vars in a run.sh script that's gitignored, and document everything in a README. Follow OpenTelemetry semantic conventions for any custom spans or attributes you add.**   
 **When done, show me the exact commands to run the app and generate some traffic.**
 
 (All you need to run this prompt is to get your endpoint and token from your Dash0 Settings dialog, and put them in the placeholders above.)
@@ -46,11 +46,11 @@ Service version and namespace as appropriate resource attributes**
 
 A few things in there are deliberate:
 
-* **"using the otel-instrumentation skill"** --- naming it explicitly nudges the agent to load it. Skills are supposed to auto-trigger on description match, but being explicit removes ambiguity, especially in tools where skill triggering is less aggressive than in Claude Code.
-* **Concrete config values** --- agents do much better with copy-pasteable specifics than "set up Dash0." You'd otherwise spend two turns answering "what's your endpoint?"
+* **"using the otel-instrumentation skill"** — naming it explicitly nudges the agent to load it. Skills are supposed to auto-trigger on description match, but being explicit removes ambiguity, especially in tools where skill triggering is less aggressive than in Claude Code.
+* **Concrete config values** — agents do much better with copy-pasteable specifics than "set up Dash0." You'd otherwise spend two turns answering "what's your endpoint?"
 * **gRPC protocol callout**--- port 4317 needs OTEL_EXPORTER_OTLP_PROTOCOL=grpc; without it, the agent might wire up the default HTTP protocol and silently fail. Worth pinning.
-* **run.sh + gitignore** --- keeps your token out of source control. The agent will do this if asked; less reliably if not.
-* **"show me the commands to run"** --- forces it to surface the verification path, not just dump files.
+* **run.sh + gitignore** — keeps your token out of source control. The agent will do this if asked; less reliably if not.
+* **"show me the commands to run"** — forces it to surface the verification path, not just dump files.
 
 ### After The Agent Finishes
 
@@ -64,7 +64,7 @@ Then run it (also fine to do in your AI prompt):
 for i in {1..50}; do curl -s localhost:8080/hello; curl -s localhost:8080/work; done
 ```
 
-Then in Dash0 go to the **Trace Explorer** --- filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10--30 seconds.
+Then in Dash0 go to the **Trace Explorer** — filter by `service.name = dash0-java-demo`, you should see `GET /hello` and `GET /work` spans within 10--30 seconds.
 ![](dash0-foojay-2-1024x545.png)
 
 Next, go to **Integrations → Java → Install all dashboards** if you haven't yet, then open **JVM Metrics** for the heap/GC/thread charts.
@@ -74,7 +74,7 @@ Next, go to **Integrations → Java → Install all dashboards** if you haven't 
 Once data is flowing, these are the natural next asks (each triggers a different skill):
 
 * ***"Add a custom span around the work logic in `/work` with a `work.difficulty` attribute that follows semantic conventions."*** → triggers `otel-semantic-conventions` for naming guidance.
-* ***"My span names look wrong --- they're showing the full URL instead of the route. Fix that."*** → common Spring Boot gotcha, the instrumentation skill covers it.
+* ***"My span names look wrong — they're showing the full URL instead of the route. Fix that."*** → common Spring Boot gotcha, the instrumentation skill covers it.
 * ***"Set up an OpenTelemetry Collector in front of the app instead of exporting directly to Dash0."*** → triggers `otel-collector`.
 
 That's pretty cool, get it here: <https://github.com/dash0hq/agent-skills>

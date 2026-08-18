@@ -21,11 +21,11 @@ frozen: false
 
 Let's be honest: When was the last time you really looked at what's new in JUnit?
 
-If you're still using JUnit the way you did years ago, you're not alone. But here's the thing---JUnit 5 has evolved massively since its first release. Over the last 8 years and 12 feature-packed updates, it's become a powerful, expressive, and extensible platform... if you know how to use it right.
+If you're still using JUnit the way you did years ago, you're not alone. But here's the thing—JUnit 5 has evolved massively since its first release. Over the last 8 years and 12 feature-packed updates, it's become a powerful, expressive, and extensible platform... if you know how to use it right.
 
 That's exactly what you'll get in this hands-on 2-hour workshop at [JCON EUROPE 2025](http://europe.jcon.one "JCON EUROPE 2025"):  
 
-"Catching up with JUnit 5" is your opportunity to finally catch up---with guidance from the very people who built it.
+"Catching up with JUnit 5" is your opportunity to finally catch up—with guidance from the very people who built it.
 
 ![](53726451134_a501889f5f_o-700x239.jpg)
 
@@ -34,14 +34,14 @@ That's exactly what you'll get in this hands-on 2-hour workshop at [JCON EUROPE 
 * **Marc Philipp** -- Longtime JUnit core committer, team lead, and key figure for JUnit 5 existence.
 * **Christian Stein** -- JDK Tooling developer at Oracle, active JUnit and Maven contributor.
 
-They're not just here to demo features---you'll sit down and write real code with them. You'll learn:
+They're not just here to demo features—you'll sit down and write real code with them. You'll learn:
 
-* How the test lifecycle really works---and how to control it.
+* How the test lifecycle really works—and how to control it.
 * How to use tags, timeouts, order, and display names effectively.
 * The full potential of parameterized tests with custom arguments.
 * How to tap into (or extend!) the JUnit Jupiter extension model.
 
-By the end of this workshop, you won't just be up to date---you'll be ahead of the curve, with a toolkit of techniques you can bring straight back to your team and projects.
+By the end of this workshop, you won't just be up to date—you'll be ahead of the curve, with a toolkit of techniques you can bring straight back to your team and projects.
 
 **If you're using JUnit, this is the workshop you can't afford to miss.**   
 [Grab your ticket now](https://pretix.eu/impuls/europe2025/ "Grab your ticket now") and learn from the source.

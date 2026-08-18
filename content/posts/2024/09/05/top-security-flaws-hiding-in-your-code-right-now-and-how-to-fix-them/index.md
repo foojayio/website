@@ -19,7 +19,7 @@ frozen: false
 
 ### Recent years have seen numerous injection attacks causing significant damage, including a 2019 SQL injection breach in the Fortnite video game and a 2018 attack on Tesla's systems.
 
-Other serious incidents involve the Log4Shell logging injection and a deserialization attack on Atlassian Jira. These examples show that various code vulnerabilities can affect any organization. This article will examine the three most common attack types---SQL injection, Deserialization Injection, and Logging Injection---and discuss ways to prevent them.
+Other serious incidents involve the Log4Shell logging injection and a deserialization attack on Atlassian Jira. These examples show that various code vulnerabilities can affect any organization. This article will examine the three most common attack types—SQL injection, Deserialization Injection, and Logging Injection—and discuss ways to prevent them.
 
 In 2019, a famous [breach in Fortnite](https://medium.com/@sashni/dont-play-games-with-your-cybersecurity-c3dbea71685b "breach in Fortnite") , the famous game, reportedly put millions of players at risk of malware. The incident highlighted the importance of properly securing SQL databases.
 

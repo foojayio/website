@@ -21,7 +21,7 @@ Whether the answer is yes or no (read on for my opinion) , something fundamental
 
 ### First: The rate of CVE arrivals
 
-More than 40,000 CVEs were published in 2024, rising to just under 50,000 in 2025. FIRST --- the Forum of Incident Response and Security Teams, [projects](https://www.first.org/blog/20260522-vulnerability-forecast-update "projects") a median of 68,000 for 2026, with realistic scenarios reaching 70,000 to 100,000.
+More than 40,000 CVEs were published in 2024, rising to just under 50,000 in 2025. FIRST — the Forum of Incident Response and Security Teams, [projects](https://www.first.org/blog/20260522-vulnerability-forecast-update "projects") a median of 68,000 for 2026, with realistic scenarios reaching 70,000 to 100,000.
 
 That's rapid acceleration at least, a horrible trend maybe.
 
@@ -49,7 +49,7 @@ The infrastructure the world depends on is maintained by fewer people than you t
 
 The EU's Cyber Resilience Act really kicks in this September. The US has CISA mandates and FedRAMP obligations tightening. The UK's Cyber Security and Resilience Bill is working through Parliament. PCI-DSS 4.0, SOC 2, and HIPAA now treat end-of-life software as a named audit finding.
 
-For years, security advice came with an implicit escape clause: best practice, strongly recommended, industry standard. That clause is gone. Shipping software with a known exploited vulnerability is now a legal event in many jurisdictions --- with a 24-hour reporting clock and fines that scale with your revenue.
+For years, security advice came with an implicit escape clause: best practice, strongly recommended, industry standard. That clause is gone. Shipping software with a known exploited vulnerability is now a legal event in many jurisdictions — with a 24-hour reporting clock and fines that scale with your revenue.
 
 ### The maths no longer works
 
@@ -83,7 +83,7 @@ End-of-life versions sit largely outside that loop. No maintainer. No upstream f
 
 Attackers know that most bugs in current versions are present in older versions too. The codebase may have diverged, but the vulnerabilities travelled with it.
 
-CISA added 245 vulnerabilities to its KEV [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ")in 2025 --- more than 30% above the previous two-year trend. Of those, 94 were from 2024 and earlier, a 34% increase in exploitation of older vulnerabilities. The oldest dated back to 2007. (CISA KEV catalogue, 2025.)
+CISA added 245 vulnerabilities to its KEV [catalogue](https://www.cisa.gov/known-exploited-vulnerabilities-catalog "catalogue ")in 2025 — more than 30% above the previous two-year trend. Of those, 94 were from 2024 and earlier, a 34% increase in exploitation of older vulnerabilities. The oldest dated back to 2007. (CISA KEV catalogue, 2025.)
 
 ### Current versions get patched. EOL versions get exploited.
 
@@ -95,7 +95,7 @@ This is not a theoretical risk creeping toward you. It is already the pattern in
 
 The upgrade cadence that felt OK two years ago is probably too slow for 2026.
 
-If you can stay current, stay current. Keep the minor upgrades flowing. The compound effect is a codebase that can respond quickly when a CVE drops --- and that often already has the fix before the CVE exists.
+If you can stay current, stay current. Keep the minor upgrades flowing. The compound effect is a codebase that can respond quickly when a CVE drops — and that often already has the fix before the CVE exists.
 
 ### If you're on EOL software, the clock is already running
 

@@ -282,4 +282,3 @@ javafx-ui-1024x589.png
 matrix-line-1024x473.jpg
 matrix-test-1024x473.jpg
 {{< /gallery >}}
-

@@ -26,7 +26,7 @@ And I'm here to announce the [latest release `v2.4.0`](https://github.com/Pi4J/p
 
 ## 1. Coroutines
 
-If the `pi4j { ... }` wasn't good enough for ya, and you want to use coroutines instead of weaving fat threads on your precious precious Pi, you can now use the new `pi4jAsync { ... }` block---It can do everything `pi4j { ... }` does + you can run `suspend`ed functions within.
+If the `pi4j { ... }` wasn't good enough for ya, and you want to use coroutines instead of weaving fat threads on your precious precious Pi, you can now use the new `pi4jAsync { ... }` block—It can do everything `pi4j { ... }` does + you can run `suspend`ed functions within.
 
 I know you guys just want to use coroutines so that you can call `delay()` instead of `Thread::sleep`. And I won't disappoint you. Here's a blinking LED example with coroutines:
 

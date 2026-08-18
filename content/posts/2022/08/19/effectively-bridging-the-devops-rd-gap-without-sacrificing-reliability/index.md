@@ -21,7 +21,7 @@ frozen: false
 DevOps culture revolutionized our industry. Continuous Delivery and Continuous Integration made six sigma reliability commonplace. 20 years ago we would kick the production servers and listen to the hard drive spin, that was observability. Today's DevOps teams deploy monitoring tools that provide development teams with deep insight into the production environment.
 > "O brave new world That has such people in't!"
 >
-> --- William Shakespeare
+> — William Shakespeare
 
 Before DevOps practices were commonplace, production used to fail. A lot. We don't want to go back to the time before DevOps tools were commonplace...
 

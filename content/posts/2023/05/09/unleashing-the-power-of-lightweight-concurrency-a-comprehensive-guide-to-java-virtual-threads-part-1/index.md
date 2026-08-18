@@ -31,7 +31,7 @@ Java is made of threads. When we run a Java program, its main method is invoked 
 
 It makes our lives easier by providing exception handling with informative stack traces and serviceability tools that let us observe what's happening in each thread, providing remote debugging, and creating an illusion of sequentiality that makes our code easier to reason.
 
-Most JVM implementations today implement Java threads as thin wrappers around operating system threads. We call these heavyweight, OS-managed threads "platform threads." Operating systems typically allocate thread stacks as monolithic memory blocks at thread creation time that cannot be resized later---generally 2 MB (on Linux). One million threads would require two terabytes of memory! It essentially means that we can't have a lot of them.
+Most JVM implementations today implement Java threads as thin wrappers around operating system threads. We call these heavyweight, OS-managed threads "platform threads." Operating systems typically allocate thread stacks as monolithic memory blocks at thread creation time that cannot be resized later—generally 2 MB (on Linux). One million threads would require two terabytes of memory! It essentially means that we can't have a lot of them.
 
 In a server application, a thread is assigned to each incoming request. This approach scales well for moderate-scale applications, e.g., 1000 concurrent requests, but cannot survive 1M concurrent requests, even though we have adequate CPU capacity and IO bandwidth.
 

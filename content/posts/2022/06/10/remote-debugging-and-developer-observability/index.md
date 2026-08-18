@@ -26,7 +26,7 @@ This is actually material from four separate videos because I wanted to pool som
 >
 > Remote debugging is a powerful yet risky tool. In this video I explain the process, the risks and a partial workaround of SSH tunneling [#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/nPZaJuKeIs](https://t.co/nPZaJuKeIs)
 >
-> --- Shai Almog (@debugagent) [May 17, 2022](https://twitter.com/debugagent/status/1526578220174393345?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [May 17, 2022](https://twitter.com/debugagent/status/1526578220174393345?ref_src=twsrc%5Etfw)
 
 > 🦆 Duckling the 17th:  
 >
@@ -34,7 +34,7 @@ This is actually material from four separate videos because I wanted to pool som
 >
 > Harden your production with PII reduction and blocklists.[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/0nhJz03iXe](https://t.co/0nhJz03iXe)
 >
-> --- Shai Almog (@debugagent) [May 31, 2022](https://twitter.com/debugagent/status/1531653268639825923?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [May 31, 2022](https://twitter.com/debugagent/status/1531653268639825923?ref_src=twsrc%5Etfw)
 
 ## Remote Debugging Session
 

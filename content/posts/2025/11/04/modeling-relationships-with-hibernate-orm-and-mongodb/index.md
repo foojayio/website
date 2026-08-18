@@ -22,7 +22,7 @@ In the[previous article](https://foojay.io/today/getting-started-with-hibernate-
 
 If you haven't read that first part yet, I recommend starting there before continuing. It covers the project setup, dependencies, and the fundamentals that we'll build upon here.
 
-In this second part, we'll **extend our application** to model relationships between entities---introducing a Review entity and linking it to our existing Book class. This will allow us to explore more advanced capabilities of the MongoDB Hibernate integration, including:
+In this second part, we'll **extend our application** to model relationships between entities—introducing a Review entity and linking it to our existing Book class. This will allow us to explore more advanced capabilities of the MongoDB Hibernate integration, including:
 
 * Representing one-to-many relationships.  
 * Storing embedded data structures.  
@@ -205,10 +205,10 @@ When this code runs, Hibernate updates the document directly in the books collec
 
 This embedded approach offers some clear advantages.
 
-1. Each Book document always contains its reviews, meaning that fetching a single book also retrieves all its related data---no extra queries or joins needed.
+1. Each Book document always contains its reviews, meaning that fetching a single book also retrieves all its related data—no extra queries or joins needed.
 2. It also keeps the relationship consistent: If a book is deleted, all of its reviews are removed along with it, since they live inside the same document.
 
-However, this strategy has an important limitation: If a book becomes extremely popular---a real **best-seller** ---the number of reviews may grow significantly, causing the document to become very large. In MongoDB, this can lead to a massive array known as an *unbounded array*, where an ever-growing array field negatively impacts performance and eventually hits the document size limit (16 MB).
+However, this strategy has an important limitation: If a book becomes extremely popular—a real **best-seller** ---the number of reviews may grow significantly, causing the document to become very large. In MongoDB, this can lead to a massive array known as an *unbounded array*, where an ever-growing array field negatively impacts performance and eventually hits the document size limit (16 MB).
 
 To address that, the next step is to **move the reviews to their own collection**, allowing them to scale independently while still keeping a logical relationship to their book.
 
@@ -635,8 +635,8 @@ After inserting a few reviews for the same book, you should see that only the th
 
 Throughout this series, we explored three different strategies for modeling one-to-many relationships with Hibernate ORM and MongoDB. From embedding data directly inside documents to referencing separate collections and finally applying the Subset Pattern, we saw how flexible MongoDB can be when paired with a familiar ORM framework like Hibernate.
 
-The key takeaway is that working with MongoDB requires a shift in mindset. Instead of thinking in rows and joins, we design around documents---taking advantage of powerful features such as embedded data, flexible schemas, and modeling patterns that align with real-world access needs. Each approach offers its own trade-offs, and choosing the right one depends on how your application reads, writes, and scales its data.
+The key takeaway is that working with MongoDB requires a shift in mindset. Instead of thinking in rows and joins, we design around documents—taking advantage of powerful features such as embedded data, flexible schemas, and modeling patterns that align with real-world access needs. Each approach offers its own trade-offs, and choosing the right one depends on how your application reads, writes, and scales its data.
 
 Whenever you need more control, remember that you can always fall back to the MongoDB Java Driver to run native MQL commands directly. It's a great option for edge cases where ORM abstractions might not yet expose certain MongoDB capabilities.
 
-You can find the complete project---including all three strategies (*tags v1.0, v2.0, v3.0,* and*v4.0* )---on [GitHub](https://github.com/mongodb-developer/mongodb-hibernate-crud).
+You can find the complete project—including all three strategies (*tags v1.0, v2.0, v3.0,* and*v4.0* )---on [GitHub](https://github.com/mongodb-developer/mongodb-hibernate-crud).

@@ -52,7 +52,7 @@ One node acts as the primary, receiving all write operations and replicating thi
 
 Now, imagine a simple scenario. You have one node running in São Paulo, another one in New York, and a third one in Bengaluru. All three nodes store the same data.
 
-If the node in São Paulo becomes unavailable due to a hardware failure or a regional outage, MongoDB automatically elects one of the remaining nodes---for example, the one in New York or Bengaluru---to become the new primary. Write operations continue to work, and the application remains available.
+If the node in São Paulo becomes unavailable due to a hardware failure or a regional outage, MongoDB automatically elects one of the remaining nodes—for example, the one in New York or Bengaluru—to become the new primary. Write operations continue to work, and the application remains available.
 
 When the São Paulo node comes back online, it rejoins the replica set as a secondary node and synchronizes its data again.
 

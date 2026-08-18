@@ -41,7 +41,7 @@ Here is the overview of the JavaFX LinksOfTheMonth of June 2025. You can find th
 ## Games
 
 * [JediTermFX and DOOM -- Running the Legendary Game in JavaFX](https://www.linkedin.com/pulse/jeditermfx-doom-running-legendary-game-javafx-techsenger-xqiic/) by **Pavel Castornii** : "*About a year ago, we introduced our terminal emulator for JavaFX -- JediTermFX. One of its key features is that it uses a Canvas for rendering, which allows it to work with almost any terminal-based program. Recently, we decided to test how the emulator handles something a bit unusual -- the iconic game DOOM.*"
-* Relesed on Steam on May 30th by **Gavin Lee Moutoux** : [Nocturne FX](https://store.steampowered.com/app/3739280/Nocturne_FX/). "*A high-intensity arcade game built entirely in JavaFX. Dodge pipes, harness unpredictable power-ups, and survive a world that unravels the longer you last---including secrets no one prepared you for.*"
+* Relesed on Steam on May 30th by **Gavin Lee Moutoux** : [Nocturne FX](https://store.steampowered.com/app/3739280/Nocturne_FX/). "*A high-intensity arcade game built entirely in JavaFX. Dodge pipes, harness unpredictable power-ups, and survive a world that unravels the longer you last—including secrets no one prepared you for.*"
 * [**Gerrit Grunwald** on Bluesky](https://bsky.app/profile/did:plc:5bvlreuyymd7itwoucylq63e/post/3lrbnqeqkn22g): "*I did not check for quite some time but SpaceFX runs superfast on my M4 MBP with #JDK24 #JavaFX #Java.* " You can find it [on GitHub](https://github.com/hanSolo/spacefx).
 
 ## Components, Libraries, Tools
@@ -65,7 +65,7 @@ Here is the overview of the JavaFX LinksOfTheMonth of June 2025. You can find th
 
 * Short [video tutorial by **TechHiveHQ**](https://www.youtube.com/watch?v=NU2ntGrV-Yc): "*How to Enable Dark Mode in JavaFX App*"
 * **Hidekazu Kubota** shared a "*[guide for beginners in Java and JavaFX to help them get started with development using VSCode](https://www.docswell.com/s/sosuisen/56VX4X-2025-06-16-234846). All 100 of my students have successfully learned JavaFX using this guide without any problems.*"
-* Video tutorial by **TheCodeGenerator** : [Build a Weather App That Looks INSANE in 2025 (JavaFX + REST API)](https://www.youtube.com/watch?v=sXfOEJ4FY84): "*In this full tutorial, we'll build a real-time weather app using JavaFX, WeatherAPI.com, and modern development tools --- from the user interface to the API layer, all wrapped in clean architecture. Whether you're learning JavaFX or just want a project that actually looks good in 2025, this is for you.* " Sources [on GitHub](https://github.com/TheCodeGen/weatherlyFX).
+* Video tutorial by **TheCodeGenerator** : [Build a Weather App That Looks INSANE in 2025 (JavaFX + REST API)](https://www.youtube.com/watch?v=sXfOEJ4FY84): "*In this full tutorial, we'll build a real-time weather app using JavaFX, WeatherAPI.com, and modern development tools — from the user interface to the API layer, all wrapped in clean architecture. Whether you're learning JavaFX or just want a project that actually looks good in 2025, this is for you.* " Sources [on GitHub](https://github.com/TheCodeGen/weatherlyFX).
 
 ## Miscellaneous
 

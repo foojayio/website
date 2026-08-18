@@ -40,11 +40,11 @@ Follow the series in order to go from fundamentals to advanced implementations:
 
 * [Part 1: The Skills Revolution](https://foojay.io/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-%f0%9f%8e%93/ "Part 1")
 * [Part 2: Building a Production-Grade AI Tool Ecosystem](https://foojay.io/today/boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem/ "Part 2")
-* [Part 3: Multi-Agent Orchestration --- Building AI Teams That Work](https://foojay.io/today/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work/ "Part 3")
-* [Part 4: Middleware --- The Missing Layer in Every AI Framework](https://foojay.io/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-%f0%9f%a7%b5/ "Part 4")
-* [Part 5: One API, 17 Providers --- The Provider Architecture Deep Dive](https://foojay.io/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive/ "Part 5")
-* [Part 6: Memory Systems \& RAG --- Building AI That Remembers](https://foojay.io/today/boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers/ "Part 6")
-* [Part 7: MCP --- The Protocol That Connects Everything](https://foojay.io/today/boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything/ "Part 7")
+* [Part 3: Multi-Agent Orchestration — Building AI Teams That Work](https://foojay.io/today/boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work/ "Part 3")
+* [Part 4: Middleware — The Missing Layer in Every AI Framework](https://foojay.io/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-%f0%9f%a7%b5/ "Part 4")
+* [Part 5: One API, 17 Providers — The Provider Architecture Deep Dive](https://foojay.io/today/boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive/ "Part 5")
+* [Part 6: Memory Systems \& RAG — Building AI That Remembers](https://foojay.io/today/boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers/ "Part 6")
+* [Part 7: MCP — The Protocol That Connects Everything](https://foojay.io/today/boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything/ "Part 7")
 
 ## What You'll Learn
 

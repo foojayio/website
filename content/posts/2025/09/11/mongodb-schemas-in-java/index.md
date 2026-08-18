@@ -46,9 +46,9 @@ Put your connection string in and you'll see the sea surface temperatures displa
 
 I remember when I first tried MongoDB out as a potential new database for a project. We had been using Microsoft SQL Server until that point, and dealing with the headaches of:
 
-* Infrastructure downtime---while servers were upgraded and patched.
+* Infrastructure downtime—while servers were upgraded and patched.
 * Object to relational schema mapping (ORM)---awkwardly trying to manage the Java class hierarchy representation of the data translating to and from normalised data tables in SQL Server.
-* Schema changes---DBAs co-ordinating with developers' simultaneous releases of Java services and database for ongoing changes in schema.
+* Schema changes—DBAs co-ordinating with developers' simultaneous releases of Java services and database for ongoing changes in schema.
 
 I used to dread making a change to the database schema, because of the long timeframes it would take to co-ordinate all the activities needed. Sometimes, you would make do with an imperfect schema and muddle along as you accumulated technical debt. Changes were worked around rather than cleanly dealt with. When you did need to change an SQL database, you knew you had challenges ahead.
 
@@ -76,7 +76,7 @@ As a couple of examples, I've seen:
 
 ![The image shows an AI-generated tool request with a JSON string of arguments that, once parsed, mismatches the expected TypeScript interface due to a naming inconsistency (xAxisColumn vs xAxis). Ask ChatGPT](Screenshot-2025-09-09-at-10.53.57-AM.png)
 
-JavaScript migration scripts used to update MongoDB which had no validation, intellisense, or checks which easily led to bugs (admittedly, this flexibility can also be convenient for transformations of data too---especially when adding/removing a field from a structure, but should be done with checks and balances).
+JavaScript migration scripts used to update MongoDB which had no validation, intellisense, or checks which easily led to bugs (admittedly, this flexibility can also be convenient for transformations of data too—especially when adding/removing a field from a structure, but should be done with checks and balances).
 
 ## Bringing schema back
 
@@ -284,7 +284,7 @@ Returns a paged list of weather reports with a few key fields:
 
 Let's get into the schema definitions for the weather report document to support our APIs.
 
-Let's start with the main one---the [WeatherReport](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/datamodel/mongodb/WeatherReport.java).
+Let's start with the main one—the [WeatherReport](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/java/com/luketn/datamodel/mongodb/WeatherReport.java).
 
 ```
 package com.luketn.datamodel.mongodb;
@@ -351,7 +351,7 @@ public record WeatherReport(
 
 This neatly represents the whole document structure in a single .java file, with the document itself and all its subdocuments.
 
-You'll notice when you use these types, that the inner subdocuments are namespaced to the outer one so that you can clearly see the representation you are working with---e.g., WeatherReport.Position. Of course, if you wanted to, you could move some of these into shared representations outside, but I like the neatness of defining all the types for a collection in one place.
+You'll notice when you use these types, that the inner subdocuments are namespaced to the outer one so that you can clearly see the representation you are working with—e.g., WeatherReport.Position. Of course, if you wanted to, you could move some of these into shared representations outside, but I like the neatness of defining all the types for a collection in one place.
 
 As well as the main WeatherReport record, I'm also going to define a summary representation of the same data which we can use to return from the /list API:
 
@@ -371,7 +371,7 @@ public record WeatherReportSummary(
 ) {}
 ```
 
-#### Tip---BSON IDs and the _id field
+#### Tip—BSON IDs and the _id field
 
 Handling IDs: You'll notice that I am not representing the _id field of the document as an [ObjectID](https://www.mongodb.com/docs/manual/reference/method/objectid/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant) type. I don't like those. I prefer simple string types for IDs everywhere, and to use the name 'id' for the field. We're keeping the implementation detail so that id is not a string and is named _id in the database from the rest of the code and from the API clients using these nice annotations for the plain old Java object (POJO) converter (codec) built into the MongoDB Java driver:
 
@@ -411,9 +411,9 @@ public record SeaTemperature(
 ) {}
 ```
 
-We're using abbreviations for the field names---latitude = lat, longitude = lon, and temp = temperature (celcius) because we're going to stream out a *lot* of these to the map client!
+We're using abbreviations for the field names—latitude = lat, longitude = lon, and temp = temperature (celcius) because we're going to stream out a *lot* of these to the map client!
 
-#### Traps---record definitions for POJO codec
+#### Traps—record definitions for POJO codec
 
 A couple more things might catch you out when implementing these record types:
 
@@ -551,11 +551,11 @@ public class WeatherDataAccess {
 
 Let's walk through each of the methods and explain the techniques we've used in each case. Each method is going to ramp up in complexity and show you how to do simple through advanced queries to support our API and show off some Java schema record capabilities.
 
-First---get a weather report by ID. Couldn't be simpler---find, return, done.
+First—get a weather report by ID. Couldn't be simpler—find, return, done.
 
 Next, we are going to implement a paged list of weather reports. This is a little more tricky, because we want to return the results as well as a total page count.
 
-You'll notice under this method there is a cheeky little extra schema definition---a record for the structure of the aggregate query result:
+You'll notice under this method there is a cheeky little extra schema definition—a record for the structure of the aggregate query result:
 
 ```
 public record WeatherReportSummaryAggregate(
@@ -590,7 +590,7 @@ WeatherReportSummaryAggregate result = collection.aggregate(List.of(
         )
 ```
 
-#### Tip---typed queries with MongoCollection\<\> generics
+#### Tip—typed queries with MongoCollection\<\> generics
 
 Each time you perform a query, you can specify the Java type you want the results serialized to.
 
@@ -610,9 +610,9 @@ MongoCollection<WeatherReport> collection =
 
 Isn't it expensive to create MongoCollection all the time? No! When you declare a MongoCollection, there is very little cost to doing so. There are a few null checks and a check on the validity of the collection name. So you can create them on the fly when you need them.
 
-#### Trap---pagination and aggregate facets
+#### Trap—pagination and aggregate facets
 
-We're taking an interesting approach to paging here---using the facet() aggregate stage. There are some performance issues and a potential error to watch out for:
+We're taking an interesting approach to paging here—using the facet() aggregate stage. There are some performance issues and a potential error to watch out for:
 
 1. Using facets in this way may be slower than performing two queries (for results and for count).
 2. If the total size of the single document produced is \>16MB, the method will throw an exception.
@@ -888,7 +888,7 @@ public class WeatherApi {
 }
 ```
 
-The first two methods are very easy---call the injected data access class, and return the result.
+The first two methods are very easy—call the injected data access class, and return the result.
 
 The third one is the most fun! This uses a little helper class to send an SSE event for each batch of temperatures as MongoDB returns them to us.
 
@@ -899,15 +899,15 @@ What is really interesting from a MongoDB performance point of view is the scala
 
 We are streaming batches of 10 documents from MongoDB into the Java driver's cursor, having the POJO codec convert the BSON into Java WeatherReport records, using our logic to batch and convert those into SeaTemperature records and then streaming them to our API client. All the while using very little memory and supporting very high scale for requests in parallel.
 
-#### Tip---indexing
+#### Tip—indexing
 
 We support latitude/longitude filters in our sea temperature query based on the geoJSON Point type data in the position field of the data collection.
 
 To make these efficient, avoid scanning the collection, and improve the performance of the query, we could use [MongoDB geospatial indexes](https://www.mongodb.com/docs/manual/core/indexes/index-types/index-geospatial/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-schemas-java&utm_term=megan.grant). I'm leaving this out of the scope of the article as it's a big subject (and one I don't fully understand!).
 
-Full disclosure---I did try out a few of these index types (as you'll see in the Git commit history if you dig!), but I wasn't happy with the performance and couldn't achieve a fully covered query like I wanted. I suspect the data structure would need to change (putting fields on the root) to achieve this, and in the interests of time, I'm moving on. If you know how we could refactor the Java code, the database schema, or indexes (or, I suspect, all three) to achieve a highly selective, fully covered query for sea temperatures, let me know!
+Full disclosure—I did try out a few of these index types (as you'll see in the Git commit history if you dig!), but I wasn't happy with the performance and couldn't achieve a fully covered query like I wanted. I suspect the data structure would need to change (putting fields on the root) to achieve this, and in the interests of time, I'm moving on. If you know how we could refactor the Java code, the database schema, or indexes (or, I suspect, all three) to achieve a highly selective, fully covered query for sea temperatures, let me know!
 
-#### Trap---check your explain plans!
+#### Trap—check your explain plans!
 
 Another thing that can catch you out is, having optimised your query and checked your indexes are all tippy-top, your actual code may not be using your index! So how can you check? Throw this little bit of code into your data access, and (not in production!) explain your query:
 
@@ -943,7 +943,7 @@ This is also a super deep topic, but I highly recommend spending time getting to
 
 ### Why not Spring Data?
 
-You might be wondering why we didn't use Spring Data in this example. I'm a big fan of Spring Boot as a web service framework, but also a little cautious of getting too tangled up in its many conventions and abstractions. It's my view that I want my services to be fairly portable between frameworks. If I decide I want to switch to Micronaut tomorrow, I want to be able to do it without too much deep surgery. I also think the MongoDB Java driver is plenty easy enough to use and configure with a simple connection string rather than relying on magical annotations to create connections and wire up your data. I'd be curious to learn if you have a strong opposing opinion on that---let me know!
+You might be wondering why we didn't use Spring Data in this example. I'm a big fan of Spring Boot as a web service framework, but also a little cautious of getting too tangled up in its many conventions and abstractions. It's my view that I want my services to be fairly portable between frameworks. If I decide I want to switch to Micronaut tomorrow, I want to be able to do it without too much deep surgery. I also think the MongoDB Java driver is plenty easy enough to use and configure with a simple connection string rather than relying on magical annotations to create connections and wire up your data. I'd be curious to learn if you have a strong opposing opinion on that—let me know!
 
 ## Java benefits
 
@@ -955,7 +955,7 @@ Here are a few of the benefits I've found using Java APIs with a schemaless Mong
 
 ### Schema in one place
 
-When using MongoDB with Java, you define your schema in a single place---the Java code.
+When using MongoDB with Java, you define your schema in a single place—the Java code.
 
 This compares favourably in my experience with relational databases, in which you define the schema both in the relational database and the Java code.
 
@@ -973,7 +973,7 @@ If your API accepts data and stores it in the database, Java's type strictness w
 
 This works for incorrect data types being passed into a field (say, an integer into a floating point, or worse, a string into a boolean).
 
-It also works for additional data---if you were to pass an extra field to an API endpoint (either as a query string parameter or a post body), this will get safely ignored and have no side effects.
+It also works for additional data—if you were to pass an extra field to an API endpoint (either as a query string parameter or a post body), this will get safely ignored and have no side effects.
 
 ### Compile-time and runtime checks for transformation
 
@@ -985,7 +985,7 @@ Having the schema of a collection defined in the way we have demonstrated gives 
 
 This can be important when managing the evolution of it over time and managing how changes are rolled out into production safely.
 
-Most of the time, I try to keep schema changes backward compatible---especially for API clients, but also in the database. This means that addition of fields is fine, but changing the meaning of a field or dropping a field requires thought and planning.
+Most of the time, I try to keep schema changes backward compatible—especially for API clients, but also in the database. This means that addition of fields is fine, but changing the meaning of a field or dropping a field requires thought and planning.
 
 #### Zero-downtime breaking changes
 
@@ -1055,7 +1055,7 @@ One possible mitigation of that risk would be to change your API database creden
 
 In either case, having a clear place which documents the schema of the collection in a strictly typed version controlled way will help you manage schema evolution over time.
 
-##### Tip---single responsibility principle for schemas
+##### Tip—single responsibility principle for schemas
 
 One thing that will help you immeasurably in maintaining schemas is to have a single API (or microservice) take responsibility for the schema and be the sole means of reading data from and writing data to the collection or database.
 
@@ -1075,7 +1075,7 @@ I use a code coverage tool (JetBrains IntelliJ built in one) to show me what edg
 
 ## Other languages
 
-A lot of what I have said would also apply to other strongly typed languages too---but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can't say for many other languages).
+A lot of what I have said would also apply to other strongly typed languages too—but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can't say for many other languages).
 
 I would also say that I am a regular developer of Python, TypeScript, and JavaScript solutions. I love some of the flexibility and simplicity they have. When I build things with those languages, I like to spend even more effort on testing than I will with Java, to try to safeguard against the inadequacies of the type systems they use.
 

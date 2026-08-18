@@ -33,7 +33,7 @@ This elegantly addresses common scenarios where a variable is required by syntax
 
 By replacing these placeholder names with a simple underscore, developers can reduce code clutter, eliminate "unused variable" warnings, and more clearly express their intent. This ultimately leads to higher-quality,more maintainable Java code.
 
-SonarQube introduces a suite of new rules to ensure proper adoption of Java 22's unnamed variables and patterns. These rules --- including [S7466](https://rules.sonarsource.com/java/RSPEC-7466/), [S7467](https://rules.sonarsource.com/java/RSPEC-7467), and [S7475](https://rules.sonarsource.com/java/RSPEC-7475) --- guide developers in leveraging this feature for more maintainable code. Adhering to these guidelines enables teams to significantly improve code clarity and address redundant warnings.
+SonarQube introduces a suite of new rules to ensure proper adoption of Java 22's unnamed variables and patterns. These rules — including [S7466](https://rules.sonarsource.com/java/RSPEC-7466/), [S7467](https://rules.sonarsource.com/java/RSPEC-7467), and [S7475](https://rules.sonarsource.com/java/RSPEC-7475) --- guide developers in leveraging this feature for more maintainable code. Adhering to these guidelines enables teams to significantly improve code clarity and address redundant warnings.
 
 ### **Rule S7466: Unnamed variable declarations should use the `var` identifier**
 
@@ -150,7 +150,7 @@ By leveraging Markdown, developers can more easily format their JavaDoc comments
 
 This streamlines the documentation process, making it more intuitive and encouraging the creation of better-formatted and more accessible API documentation.
 
-SonarQube has introduced new rules to assist developers in adopting Java 23's Javadoc and Markdown enhancements. These rules --- including [S7476](https://rules.sonarsource.com/java/RSPEC-7476) and [S7474](https://rules.sonarsource.com/java/RSPEC-7474) --- ensure that documentation is consistently formatted, easy to read, and free from common migration pitfalls.
+SonarQube has introduced new rules to assist developers in adopting Java 23's Javadoc and Markdown enhancements. These rules — including [S7476](https://rules.sonarsource.com/java/RSPEC-7476) and [S7474](https://rules.sonarsource.com/java/RSPEC-7474) --- ensure that documentation is consistently formatted, easy to read, and free from common migration pitfalls.
 
 By leveraging these rules, developers can seamlessly integrate Markdown into their Javadoc comments to improve clarity and maintainability, ensuring that the old code is completely aligned with the new features.
 
@@ -240,7 +240,7 @@ Java 24 introduces the Class-File API ([JEP 457](https://openjdk.org/jeps/457)),
 
 It's particularly beneficial for tools that perform static analysis, bytecode instrumentation, or code generation, enabling them to operate directly on the structured representation of class files. By standardizing this access, the Class-File API simplifies development for such tools and ensures greater compatibility across different Java versions.
 
-SonarQube provides a new set of rules to help developers effectively utilize the Class-File API. These rules --- including [S7479](https://rules.sonarsource.com/java/RSPEC-7479), [S7477](https://rules.sonarsource.com/java/RSPEC-7477), and [S7478](https://rules.sonarsource.com/java/RSPEC-7478) --- are designed to ensure that you use the API efficiently and correctly, leading to more concise, readable, and maintainable bytecode generation and transformation code.
+SonarQube provides a new set of rules to help developers effectively utilize the Class-File API. These rules — including [S7479](https://rules.sonarsource.com/java/RSPEC-7479), [S7477](https://rules.sonarsource.com/java/RSPEC-7477), and [S7478](https://rules.sonarsource.com/java/RSPEC-7478) --- are designed to ensure that you use the API efficiently and correctly, leading to more concise, readable, and maintainable bytecode generation and transformation code.
 
 Adhering to these guidelines helps developers avoid common pitfalls and leverage the full potential of Java 24's Class-File API.
 
@@ -386,7 +386,7 @@ Java 24 also introduces Stream Gatherers ([JEP 461](https://openjdk.org/jeps/461
 
 This allows developers to implement operations like grouping, windowing, or de-duplication directly within the stream pipeline, leading to more expressive, efficient, and readable code for advanced data processing scenarios.
 
-SonarQube continues its commitment to code quality by introducing new rules specifically for Java 24's Stream Gatherers. These rules --- including [S7481](https://rules.sonarsource.com/java/RSPEC-7481) and [S7482](https://rules.sonarsource.com/java/RSPEC-7482) --- are designed to guide developers in effectively leveraging this powerful new Stream API feature.
+SonarQube continues its commitment to code quality by introducing new rules specifically for Java 24's Stream Gatherers. These rules — including [S7481](https://rules.sonarsource.com/java/RSPEC-7481) and [S7482](https://rules.sonarsource.com/java/RSPEC-7482) --- are designed to guide developers in effectively leveraging this powerful new Stream API feature.
 
 They ensure that your custom intermediate stream operations are implemented efficiently and clearly, promoting best practices and helping to avoid common pitfalls associated with stateful and stateless gatherers, leading to more robust and readable stream pipelines.
 
@@ -394,7 +394,7 @@ They ensure that your custom intermediate stream operations are implemented effi
 
 The introduction of Stream Gatherers ([JEP 461](https://openjdk.org/jeps/461)) in Java provides a powerful way to create custom intermediate operations in stream pipelines. When creating a gatherer, the API offers two main factories: `Gatherer.of(...)` for gatherers that can be used in both sequential and parallel streams, and `Gatherer.ofSequential(...)` for those designed exclusively for sequential processing.
 
-A common pattern for a sequential-only gatherer is to provide a combiner function---the third argument in `Gatherer.of(...)`---that simply throws an exception, as it's never expected to be called. This, however, is a signal that the gatherer is not truly parallel-capable.
+A common pattern for a sequential-only gatherer is to provide a combiner function—the third argument in `Gatherer.of(...)`---that simply throws an exception, as it's never expected to be called. This, however, is a signal that the gatherer is not truly parallel-capable.
 
 This rule helps improve code clarity by guiding you to use the more specific `Gatherer.ofSequential(...)` factory in these cases. Doing so makes the intended processing model explicit, removes the need for a dummy or throwing combiner, and makes the code cleaner and easier to understand.
 
@@ -443,7 +443,7 @@ By switching to `Gatherer.ofSequential`, the code becomes more obvious about its
 
 ### **Rule S7482: Stateless gatherers should be created without a null initializer**
 
-Stream Gatherers can be either stateful---maintaining a state across elements---or stateless, processing each element independently. For stateless gatherers, there is no need to initialize a state object. The `java.util.stream.Gatherer` API reflects this distinction by providing overloaded factory methods, including versions that do not take an `initializer` function.
+Stream Gatherers can be either stateful—maintaining a state across elements—or stateless, processing each element independently. For stateless gatherers, there is no need to initialize a state object. The `java.util.stream.Gatherer` API reflects this distinction by providing overloaded factory methods, including versions that do not take an `initializer` function.
 
 When creating a stateless gatherer, it is a common mistake to use a factory method that requires an initializer and simply provide a dummy one, such as `() -> null`. This practice, while functional, makes the code less clear and fails to communicate the gatherer's stateless nature effectively.
 
@@ -484,7 +484,7 @@ private static Gatherer inRange(int start, int end) {
 
 The compliant solution uses the appropriate `Gatherer.ofSequential` overload that does not require an initializer. This removes the redundant code and clearly signals to anyone reading it that the gatherer is stateless by design.
 
-By embracing the new features in Java 22, 23, and 24---such as unnamed variables and patterns, Markdown in Javadoc, the Class-File API, and Stream Gatherers---developers can write more efficient, and more maintainable code resulting in a higher-quality code.
+By embracing the new features in Java 22, 23, and 24—such as unnamed variables and patterns, Markdown in Javadoc, the Class-File API, and Stream Gatherers—developers can write more efficient, and more maintainable code resulting in a higher-quality code.
 
 However, staying abreast of these evolving language enhancements and consistently applying best practices can be challenging.
 

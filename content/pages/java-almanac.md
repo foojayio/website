@@ -26,7 +26,7 @@ Beyond the version table, the site covers Java bytecode, a catalog of language f
 
 Everything is open source, managed in a [public GitHub repository](https://github.com/marchof/java-almanac), and published under Creative Commons BY-SA 4.0.
 
-If you work with Java daily --- or even occasionally --- the Java Version Almanac is one of those quietly indispensable resources you'll find yourself reaching for more often than you expect.
+If you work with Java daily — or even occasionally — the Java Version Almanac is one of those quietly indispensable resources you'll find yourself reaching for more often than you expect.
 
 ## Long Term Support Versions
 

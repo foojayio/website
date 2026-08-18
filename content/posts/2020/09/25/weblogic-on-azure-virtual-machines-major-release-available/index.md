@@ -53,4 +53,4 @@ You have a choice of pre-validated, supported OS/JDK/WLS stacks. The offers enab
 
 Customers interested in WLS on Azure Virtual Machines should [explore the solutions](https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=oracle%20weblogic%20server&page=1), provide feedback and stay informed of the roadmap, including upcoming WLS enablement on AKS. Customers can also take advantage of [hands-on help from the engineering team](https://aka.ms/migration-survey) behind these offers. The opportunity to collaborate on a migration scenario is completely free while the offers are under active initial development.
 
-**Note:** Used with permission and thanks --- originally written by and published [by Reza Rahman at Microsoft.](https://techcommunity.microsoft.com/t5/azure-marketplace/weblogic-on-azure-virtual-machines-major-release-available/ba-p/1681175)
+**Note:** Used with permission and thanks — originally written by and published [by Reza Rahman at Microsoft.](https://techcommunity.microsoft.com/t5/azure-marketplace/weblogic-on-azure-virtual-machines-major-release-available/ba-p/1681175)

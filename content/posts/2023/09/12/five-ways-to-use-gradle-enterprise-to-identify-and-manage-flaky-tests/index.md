@@ -22,7 +22,7 @@ frozen: false
 
 Fortunately, tools such as Gradle Enterprise can aid in tracking down and mitigating these issues. Here are five ways you can use Gradle Enterprise to better manage flaky tests.
 
-**1. Flag Potential Flaky Tests:** Gradle Enterprise [Test Failure Analytics](http://https://gradle.com/gradle-enterprise-solutions/failure-analytics/ "Test Failure Analytics") provide a streamlined way to flag flaky tests. By monitoring a build's test results, it identifies potential flaky tests---ones that fail initially and pass when re-run. You can see this data in the Tests dashboard---whenever you look at the test results, you can see whether you have flaky tests in your builds.
+**1. Flag Potential Flaky Tests:** Gradle Enterprise [Test Failure Analytics](http://https://gradle.com/gradle-enterprise-solutions/failure-analytics/ "Test Failure Analytics") provide a streamlined way to flag flaky tests. By monitoring a build's test results, it identifies potential flaky tests—ones that fail initially and pass when re-run. You can see this data in the Tests dashboard—whenever you look at the test results, you can see whether you have flaky tests in your builds.
 
 ![Screenshot of Gradle enterprise test dashboard](harnessing-gradle-enterprise-to-identify-flaky-tests-01-700x304.png)
 

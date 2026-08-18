@@ -57,7 +57,7 @@ Providing API access via SDKs, in addition to drivers, can make data more access
 
 As it turns out, there are other benefits to re-architecting a database engine so that the functions of a database aren't all performed in a single process. Using specialized hardware for individual database subsystems improves performance and lowers costs since they run more efficiently. Before Stargate, Apache Cassandra nodes had peer-to-peer architecture - no specialized node types. Stargate effectively introduces compute (query coordination) node and data (persistent storage) [node types](https://www.youtube.com/watch?v=K0sQvaxiDH0).
 
-There is no free lunch of course---breaking things into separate processes creates new issues. However, the benefits, like with FaaS, may very well outweigh the drawbacks in the long run. Besides, new techniques emerge every day to mitigate those drawbacks.
+There is no free lunch of course—breaking things into separate processes creates new issues. However, the benefits, like with FaaS, may very well outweigh the drawbacks in the long run. Besides, new techniques emerge every day to mitigate those drawbacks.
 
 DBaaS hasn't historically been considered serverless, but that has been changing. An increasing number of public cloud services are either offering serverless alternatives, or moving to this architecture altogether. As one might expect, stateless services like compute are a bit more straightforward to make serverless, relative to stateful ones. It's only recently that databases and data services have begun to move in this direction.
 
@@ -138,7 +138,7 @@ So what business problems can such a system solve? With the storage engines [sup
 * High velocity time series data (e.g. logging, metrics, APM, tracing data)
 * Logistical tracking - order status, packages
 * Health tracker data, weather service history
-* Email envelopes---not the contents
+* Email envelopes—not the contents
 
 You can test drive it locally with a download, but it's much easier with [Docker](https://stargate.io/docs/stargate/1.0/developers-guide/install/install_overview.html), and easiest as-a-service on [astra.datastax.com](https://dtsx.io/3r6FOke) - a serverless DBaaS API built on [Apache Cassandra](http://cassandra.apache.org/), [K8ssandra](https://k8ssandra.io/), [Stargate](https://stargate.io/), [Apache Pulsar](https://pulsar.apache.org/), [Envoy](https://www.envoyproxy.io/) and other modern open source.
 

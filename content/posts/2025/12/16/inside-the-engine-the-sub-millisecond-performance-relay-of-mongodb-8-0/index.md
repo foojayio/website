@@ -63,7 +63,7 @@ Meanwhile, per-CPU TCMalloc caches minimize fragmentation on your multi-socket s
 
 ### Stage 6: Index Mastery \& Pre-Splits
 
-Your compound index `{ symbol: 1, timestamp: -1, price: 1 }` adheres to the ESR (Equality → Sort → Range) rule, allowing the SBE engine to satisfy the query with a single index scan. You pre-split hot key ranges---invoking:{#cbdb}
+Your compound index `{ symbol: 1, timestamp: -1, price: 1 }` adheres to the ESR (Equality → Sort → Range) rule, allowing the SBE engine to satisfy the query with a single index scan. You pre-split hot key ranges—invoking:{#cbdb}
 
 ```
 sh.splitAt("market.trades", { symbol: "H" });
@@ -116,7 +116,7 @@ An on-prem "Atlas-style" backup engine employs a hidden change stream to capture
 
 Throughout this relay, Prometheus scrapes `serverStatus()`, `queryStats()`, `indexStats()`, and your custom UDF-exported history-store metrics. Automated alerts trigger on WT eviction \> 500 events/sec, slow operations exceeding 1 % of total queries, or oplog lag \> 5 s.{#c23c}
 
-Your CI pipeline---powered by YCSB profiles that mimic peak traffic gates every schema, index, and configuration change so that any regression over 10 % in 99th-percentile latencies fails the build. Nightly drift-detection jobs SSH into each mongod, pull the live `mongod.conf`, diff it against the Git master branch, and auto-file tickets for any deviations.{#c23c}
+Your CI pipeline—powered by YCSB profiles that mimic peak traffic gates every schema, index, and configuration change so that any regression over 10 % in 99th-percentile latencies fails the build. Nightly drift-detection jobs SSH into each mongod, pull the live `mongod.conf`, diff it against the Git master branch, and auto-file tickets for any deviations.{#c23c}
 
 ### **Conclusion**
 

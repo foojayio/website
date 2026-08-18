@@ -22,7 +22,7 @@ Gatherers is a powerful extension of the Stream API that introduces support for 
 
 ### What are Gatherers?
 
-Gatherers were developed to model intermediate operations in the Stream API. Just as a collector models a terminal operation, a gatherer is an object that models an intermediate operation. Gatherers support the characteristics of intermediate operations---they can push any number of elements to the stream they produce, maintain an internal mutable state, short-circuit a stream, delay consumption, be chained, and execute in parallel.
+Gatherers were developed to model intermediate operations in the Stream API. Just as a collector models a terminal operation, a gatherer is an object that models an intermediate operation. Gatherers support the characteristics of intermediate operations—they can push any number of elements to the stream they produce, maintain an internal mutable state, short-circuit a stream, delay consumption, be chained, and execute in parallel.
 
 For this reason, as stated in [JEP 485](https://openjdk.org/jeps/485 "JEP 485")
 > In fact every stream pipeline is, conceptually, equivalent to  

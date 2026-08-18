@@ -27,7 +27,7 @@ In this tutorial, we'll implement this feature using Spring Data MongoDB, applyi
 
 ## Why Queryable Encryption?
 
-Imagine a common scenario in HR systems: You receive a regulatory requirement to protect employee data using encryption. At first, encrypting fields seems enough. But then comes a second requirement---you also need to search over that encrypted data.
+Imagine a common scenario in HR systems: You receive a regulatory requirement to protect employee data using encryption. At first, encrypting fields seems enough. But then comes a second requirement—you also need to search over that encrypted data.
 
 That's exactly where [Queryable Encryption](https://www.mongodb.com/docs/v7.0/core/queryable-encryption/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=query-foojay&utm_term=tony.kim) comes in. MongoDB currently supports several query types over encrypted fields, including Equality, Range, Prefix, and Suffix.
 
@@ -764,7 +764,7 @@ CRYPT_PATH='/path/to/mongo_crypt_shared/lib/mongo_crypt.dylib' mvn spring-boot:r
 
 Note: The CRYPT_PATH should point to the full path of the native library you downloaded.
 
-Once the application is running, if everything goes well, you can check the cluster specified in your connection string. Inside the hrsystem database, look for the employees collection---it should already contain six documents with encrypted fields, ready to be queried:
+Once the application is running, if everything goes well, you can check the cluster specified in your connection string. Inside the hrsystem database, look for the employees collection—it should already contain six documents with encrypted fields, ready to be queried:
 ![](Screenshot-2025-08-29-at-9.00.08-AM-1024x414.png)
 
 ## Testing the endpoints

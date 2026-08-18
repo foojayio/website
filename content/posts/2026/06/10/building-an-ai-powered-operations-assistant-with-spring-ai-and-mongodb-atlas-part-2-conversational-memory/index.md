@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-This is the second article in a three-part series. Part 1 covered the RAG foundation --- loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume.
+This is the second article in a three-part series. Part 1 covered the RAG foundation — loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume.
 
 ## The Problem with Stateless Chat
 

@@ -114,7 +114,7 @@ Popular extensions include:
 * `quarkus-micrometer` and `quarkus-opentelemetry` for observability, metrics, and tracing.
 * `quarkus-container-image-docker` and `quarkus-kubernetes` for containerization and deployment to Kubernetes platforms.
 
-These extensions are widely adopted because they reduce boilerplate, provide reliable default configurations out of the box, and follow cloud-native best practices---making it easy to plug Quarkus into real-world architectures.
+These extensions are widely adopted because they reduce boilerplate, provide reliable default configurations out of the box, and follow cloud-native best practices—making it easy to plug Quarkus into real-world architectures.
 
 ### "OK, I would like to try it, but is it easy enough to migrate my workflow to Quarkus?"
 

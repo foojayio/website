@@ -76,7 +76,7 @@ To change the stack size to 10 MB, the following JVM option was used:
 
     -XX:ThreadStackSize=10240
 
-The program yielded a similar result---16,300 threads---before the OutOfMemoryError occurred again.
+The program yielded a similar result—16,300 threads—before the OutOfMemoryError occurred again.
 
 Number of threads created so far: 16300
 

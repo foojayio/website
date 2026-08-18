@@ -42,7 +42,7 @@ It basically turns your terminal into a conversational agentic coding partner. Y
 
 Typically, a developer's workflow looks like this: Code in your IDE, commit the changes, and then break flow to check the full spectrum of issues on the SonarQube Server or Cloud dashboard.
 
-Interacting with those issues---analyzing the details, setting statuses, or just reviewing the documentation---requires navigating the web UI. You then come back to the IDE to apply the fixes. This back-and-forth context switching happens multiple times, constantly breaking your coding flow, increasing frustration, and adding unnecessary friction to the development phase. You lose focus, and productivity drops.
+Interacting with those issues—analyzing the details, setting statuses, or just reviewing the documentation—requires navigating the web UI. You then come back to the IDE to apply the fixes. This back-and-forth context switching happens multiple times, constantly breaking your coding flow, increasing frustration, and adding unnecessary friction to the development phase. You lose focus, and productivity drops.
 
 ## **The Missing Piece: SonarQube MCP Server 🧩**
 

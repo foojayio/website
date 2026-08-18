@@ -82,7 +82,7 @@ The status array above indicates that the Claims step is complete and the Assets
 Whenever data is to be modified by a set of fingers and eyeballs (i.e., a human), concurrency is a bit of a different concern. A common approach in this case is pessimistic locking. In short, the user updating a section of the document can check out the entire document, or just a portion of it. This has some implications as humans work in a completely different timescale than computers do. In addition, humans can be interrupted in the middle of their work. When designing a locking mechanism for human data enrichment, ensure the following:
 
 * One and only one person can take a lock at any given time.
-* The application (or database) must be able to forcibly release that lock---preferably without any intervention.
+* The application (or database) must be able to forcibly release that lock—preferably without any intervention.
 
 Let's take Mary as an example. Mary locks the Asset portion of the policy for review and starts to make changes. Mary gets pulled into a customer emergency. She leaves her desk in a hurry and does not unlock the Asset part of the document. Underwriting needs this policy first thing in the morning to meet the customer deadline, so asset review needs to be completed today by someone else. Mary still has the lock on the Asset portion of the policy. How do we handle this in an automated way?
 
@@ -191,7 +191,7 @@ When using an optimistic locking strategy for machine enrichment, be mindful of 
 |----------------------------------------------------------------------------------------------------|
 | db.policy.updateOne( {_id: 322326, version: 1}, {$set: {\<fields to set\>}, $inc: {"version": 1}}) |
 
-On the first attempt, one of the workers will update the document and three will fail. On the second try, the three remaining threads will need to re-read data, apply changes, and attempt an update with the latest version---only one will succeed. The third attempt will be two workers reading data and attempting an update with one failing. Finally, on the fourth pass, only one worker is left to read and update the document. In this case, four threads going after the same document at the same time result in:
+On the first attempt, one of the workers will update the document and three will fail. On the second try, the three remaining threads will need to re-read data, apply changes, and attempt an update with the latest version—only one will succeed. The third attempt will be two workers reading data and attempting an update with one failing. Finally, on the fourth pass, only one worker is left to read and update the document. In this case, four threads going after the same document at the same time result in:
 
 * 4+3+2+1 (10) reads.
 * 4+3+2+1 (10) update attempts, with only four succeeding.

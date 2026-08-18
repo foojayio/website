@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-Java serialization is a mechanism to transform an object into a byte stream. Java deserialization is exactly the other way around and allows us to recreate an object from a byte stream. Java serialization---and more specifically deserialization in Java---is also known as "the gift that keeps on giving". This relates to the many security issues and other problems it has produced over the years.
+Java serialization is a mechanism to transform an object into a byte stream. Java deserialization is exactly the other way around and allows us to recreate an object from a byte stream. Java serialization—and more specifically deserialization in Java—is also known as "the gift that keeps on giving". This relates to the many security issues and other problems it has produced over the years.
 
 * [Explaining Java Deserialization Vulnerabilities (Part 1)](https://foojay.io/today/explaining-java-deserialization-vulnerabilities-part-1/)
 
@@ -25,7 +25,7 @@ Tampering with the data in an object is harmful already. However, this can also 
 
 #### Gadgets
 
-A gadget---as used by Lawrence \& Frohoff in their talk [Marshalling Pickles](https://frohoff.github.io/appseccali-marshalling-pickles/) at AppSecCali 2015---is a class or function that has already existing executable code present in the vulnerable process. This existing executable code can be reused for malicious purposes. If we look at Java serializable objects, some magic methods---like the private `readObject()`method---are reflectively called when deserializing.
+A gadget—as used by Lawrence \& Frohoff in their talk [Marshalling Pickles](https://frohoff.github.io/appseccali-marshalling-pickles/) at AppSecCali 2015—is a class or function that has already existing executable code present in the vulnerable process. This existing executable code can be reused for malicious purposes. If we look at Java serializable objects, some magic methods—like the private `readObject()`method—are reflectively called when deserializing.
 
 Let's look at the simplified gadget below:
 

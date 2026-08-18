@@ -46,7 +46,7 @@ FOSDEM is the heartbeat of open source. It is a reliable way to distinguish what
 
 ### What did FOSDEM 2026 actually tell us?
 
-The familiar themes all appeared: AI, software supply chains, security, and the CRA. We saw robotics, compilers, Linux distros, and embedded systems. If it's open source---from QA and mobile to radio and model railways---it was likely there.
+The familiar themes all appeared: AI, software supply chains, security, and the CRA. We saw robotics, compilers, Linux distros, and embedded systems. If it's open source—from QA and mobile to radio and model railways—it was likely there.
 
 I learnt a lot and met new people. I discussed the latest developments with experts in the areas I care about and came away with plenty to think about.
 
@@ -92,7 +92,7 @@ This article started as an ode to open source, and it still is. But nostalgia wo
 
 Not approximately. Not via a quarterly report. You must know what's in production well enough to find vulnerabilities before regulators or attackers do.
 
-FOSDEM saw intense discussion regarding supply chain security, SBOMs, and PURLs. Simplistically---since I am not a lawyer---demonstrating control over what you ship requires knowing what you ship. That 'demonstration' is quickly becoming a hard compliance requirement.
+FOSDEM saw intense discussion regarding supply chain security, SBOMs, and PURLs. Simplistically—since I am not a lawyer—demonstrating control over what you ship requires knowing what you ship. That 'demonstration' is quickly becoming a hard compliance requirement.
 
 ### 2. Make your CI/CD pipelines boringly efficient
 

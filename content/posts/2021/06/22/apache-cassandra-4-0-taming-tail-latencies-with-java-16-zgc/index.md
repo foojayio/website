@@ -35,7 +35,7 @@ But performing garbage collection means having to briefly pause the JVM to deter
 
 Not all requests are affected by this--only the handful of requests that are in flight while Cassandra's request-handling threads are paused for the GC. The performance impact is thus only visible in tail latencies, that is, the 99th percentile or 99.9th percentile measurements, corresponding to the slowest 1% or 0.1% of requests.
 
-As with so many things, optimizing GC involves tradeoffs, and the original Java GC designs focused more on improving throughput than on reducing pause times. Fast forward to 2021 and we have common server-class CPUs with 64 cores/128 threads---we have plenty of throughput on tap. It's time to spend some of those cycles on lower pause times.
+As with so many things, optimizing GC involves tradeoffs, and the original Java GC designs focused more on improving throughput than on reducing pause times. Fast forward to 2021 and we have common server-class CPUs with 64 cores/128 threads—we have plenty of throughput on tap. It's time to spend some of those cycles on lower pause times.
 
 The Z Garbage Collector (ZGC) was created to address this situation, and specifically to guarantee pause times under 10ms. ZGC was added to Java 11 as an experimental feature, [promoted to production in Java 15](https://openjdk.java.net/jeps/377), and [further improved](https://malloc.se/blog/zgc-jdk16) in Java 16.
 
@@ -82,7 +82,7 @@ Without switching to ZGC, Cassandra 4.0 offers modest but real throughput improv
 
 Combining Cassandra 4.0 with ZGC in Java 16 results in further improvements to throughput for key/value and time series workloads as well as convincingly demonstrating ZGC's design goals to make GC pause time a non-issue across all tested workloads for Cassandra 4.0.
 
-ZGC is production-ready starting with Java 15; for enterprises that want to stick with LTS releases, ZGC will be one of the headlining reasons to upgrade to the Java 17 LTS release later this year. ZGC is one of the most significant performance "free lunches" available, and it Just Works---the results shown here are out-of-the-box for ZGC with no extra tuning.
+ZGC is production-ready starting with Java 15; for enterprises that want to stick with LTS releases, ZGC will be one of the headlining reasons to upgrade to the Java 17 LTS release later this year. ZGC is one of the most significant performance "free lunches" available, and it Just Works—the results shown here are out-of-the-box for ZGC with no extra tuning.
 
 ## Appendix: Test environment
 

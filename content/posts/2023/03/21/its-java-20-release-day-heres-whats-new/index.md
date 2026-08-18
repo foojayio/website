@@ -66,7 +66,7 @@ static String apply(Effect effect) {
 }
 ```
 
-This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? So in the spirit of this JEP (and its predecessors), let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
+This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs — what if you added an else-if branch that didn't assign anything to `formatted`? So in the spirit of this JEP (and its predecessors), let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
 ```java
 static String apply(Effect effect) {
@@ -339,7 +339,7 @@ Response handle() throws IOException {
 
 See? Here we would be able to prevent the second call once the first one has failed.
 
-In general, multithreaded programming in Java would be easier, more reliable, and more observable if the parent-child relationships between tasks and their subtasks were expressed syntactically --- just as for single-threaded code. The syntactic structure would delineate the lifetimes of subtasks and enable a runtime representation of the inter-thread hierarchy, enabling error propagation and cancellation as well as meaningful observation of the concurrent program.
+In general, multithreaded programming in Java would be easier, more reliable, and more observable if the parent-child relationships between tasks and their subtasks were expressed syntactically — just as for single-threaded code. The syntactic structure would delineate the lifetimes of subtasks and enable a runtime representation of the inter-thread hierarchy, enabling error propagation and cancellation as well as meaningful observation of the concurrent program.
 
 Enter *structured concurrency* . We've now rewritten the code example to make use of the new `StructuredTaskScope` API:
 
@@ -364,7 +364,7 @@ In contrast to the original example, understanding the lifetimes of the threads 
 
 * *Error handling with short-circuiting* . If one of the subtasks fail, the other is cancelled if it has not yet completed. This is managed by the cancellation policy implemented by `ShutdownOnFailure`; other policies like `ShutdownOnSuccess` are also available.
 * *Cancellation propagation* . If the thread running `handle()` is interrupted before or during the call to `join()`, both forks are cancelled automatically when the thread exits the scope.
-* *Clarity* --- The above code has a clear structure: Set up the subtasks, wait for them to either complete or be cancelled, and then decide whether to succeed (and process the results of the child tasks, which are already finished) or fail (and the subtasks are already finished, so there is nothing more to clean up).
+* *Clarity* — The above code has a clear structure: Set up the subtasks, wait for them to either complete or be cancelled, and then decide whether to succeed (and process the results of the child tasks, which are already finished) or fail (and the subtasks are already finished, so there is nothing more to clean up).
 
 By the way: it is by no means coincidental that structured concurrency is coming to Java at the same time as virtual threads. Modern Java programs will likely use an abundance of threads, and they need to be correctly and robustly coordinated. Structured concurrency can provide exactly that, while also enabling observability tools to display threads as they are understood by the developer.
 

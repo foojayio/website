@@ -24,7 +24,7 @@ frozen: false
 I keep hearing the same question in architecture reviews, slack threads, and conference Hallways:
 > **"If AI is writing the code, does language even matter anymore?"**
 
-It does. More than ever, actually --- just not for the reasons we've been arguing about for the last decade.
+It does. More than ever, actually — just not for the reasons we've been arguing about for the last decade.
 
 ## The Bottleneck Has Moved
 
@@ -34,11 +34,11 @@ That math doesn't hold anymore.
 
 ## AI Produces Code Faster Than Teams Can Review It
 
-I've watched teams adopt Copilot and immediately drown in PRs. The code looks plausible. It even compiles. But nobody has time to actually verify it. Authoring is no longer the bottleneck --- understanding and verification is.
+I've watched teams adopt Copilot and immediately drown in PRs. The code looks plausible. It even compiles. But nobody has time to actually verify it. Authoring is no longer the bottleneck — understanding and verification is.
 
 ## Why Verbose Languages Are Making a Comeback
 
-Languages we spent years complaining about --- Java, C# --- are turning into strategic assets. Not because they're faster to write --- they never were. What changed is they're easier to *read under pressure*.
+Languages we spent years complaining about — Java, C# — are turning into strategic assets. Not because they're faster to write — they never were. What changed is they're easier to *read under pressure*.
 
 When you're reviewing AI-generated code at scale, you need:
 
@@ -52,7 +52,7 @@ What we used to call "boilerplate" is now signal. A Java method signature tells 
 
 ### The research backs this up
 
-[Atlassian published a study at ICSME'25](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm){#https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm} across 118 practitioners and production code. They found that 81% of developers say readability is still crucial --- even with LLMs in the loop. The top motivation? Reducing long-term maintenance costs.
+[Atlassian published a study at ICSME'25](https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm){#https://www.atlassian.com/blog/artificial-intelligence/atlassian-research-developers-on-code-readibility-llm} across 118 practitioners and production code. They found that 81% of developers say readability is still crucial — even with LLMs in the loop. The top motivation? Reducing long-term maintenance costs.
 
 They also found something more specific. AI-generated code in TypeScript and Python tended to be slightly longer and less maintainable. Java, Kotlin, Go, and Scala showed negligible differences from human-written code.
 
@@ -60,8 +60,8 @@ That last point is worth sitting with. AI-generated Java looks like human-writte
 
 ### What this means in practice
 
-* Readability is no longer a preference --- it's a gate on delivery speed
-* Verbosity is no longer a flaw --- it's a verification accelerator
+* Readability is no longer a preference — it's a gate on delivery speed
+* Verbosity is no longer a flaw — it's a verification accelerator
 * Clarity determines how fast AI-generated code can ship
 
 ![](foojay-700x467.png)
@@ -82,7 +82,7 @@ Data from [programming-language-benchmarks.vercel.app](https://programming-langu
 | knucleotide (2.5M) | 1,059ms | ---           | 219ms | ---             | 4.8x faster  |
 | mandelbrot (5K)    | 1,153ms | ---           | 292ms | ---             | 3.9x faster  |
 
-Java runs 5-6x faster than Python on compute-intensive work. Rust beats Java by 2-5x. Not synthetic micro-benchmarks either --- these are algorithmic workloads that show up in real backend systems.
+Java runs 5-6x faster than Python on compute-intensive work. Rust beats Java by 2-5x. Not synthetic micro-benchmarks either — these are algorithmic workloads that show up in real backend systems.
 
 ### Where Java lands in the performance stack
 
@@ -112,9 +112,9 @@ Previously these were a single decision. Now they're decoupled. Optimizing for o
 
 We're not choosing between readability and performance anymore. We're sequencing them.
 
-1. **Clarity comes first** --- If a reviewer can't validate AI-generated code quickly, it doesn't ship. The fastest code in the world is useless sitting in a PR queue.
+1. **Clarity comes first** — If a reviewer can't validate AI-generated code quickly, it doesn't ship. The fastest code in the world is useless sitting in a PR queue.
 
-2. **Performance comes next** --- Once deployed, inefficiency becomes your AWS bill.
+2. **Performance comes next** — Once deployed, inefficiency becomes your AWS bill.
 
 ## Code Examples: Same Intent, Different Review Experience
 
@@ -182,7 +182,7 @@ Strong structural guarantees. Best runtime performance of the three. The tradeof
 
 ## Where Language Still Matters
 
-Language matters more than ever --- just not as a tool for writing code faster.
+Language matters more than ever — just not as a tool for writing code faster.
 
 It matters as the interface between AI output and human trust. The languages that win are the ones that make verification cheap, intent obvious, and mistakes visible.
 

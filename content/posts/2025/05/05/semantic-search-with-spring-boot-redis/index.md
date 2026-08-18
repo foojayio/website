@@ -30,11 +30,11 @@ Semantic searching, on the other hand, tries to understand the meaning behind wh
 
 In a movie streaming service, for example, if a movie's synopsis is stored in a database as **"A cowboy doll feels threatened when a new space toy becomes his owner's favorite,"** but the user searches for **"jealous toy struggles with new rival,"** a traditional search system might not find the movie because the exact words don't line up.
 
-But a semantic a semantic search system can still connect the two ideas and bring up the right movie. It understands the *meaning* behind your query --- not just the exact words.
+But a semantic a semantic search system can still connect the two ideas and bring up the right movie. It understands the *meaning* behind your query — not just the exact words.
 
-Behind the scenes, this works thanks to **vector similarity search**. It turns text (or images, or audio) into vectors --- lists of numbers ---store them in a vector database and then finds the ones closest to your query.
+Behind the scenes, this works thanks to **vector similarity search**. It turns text (or images, or audio) into vectors — lists of numbers ---store them in a vector database and then finds the ones closest to your query.
 
-Today, **we're gonna build a vector similarity search app that lets users find movies based on the *meaning*of their synopsis --- not just exact keyword matches**. So that even if they don't know the title, they can still get the right movie based on a generic description of the synopsis.
+Today, **we're gonna build a vector similarity search app that lets users find movies based on the *meaning*of their synopsis — not just exact keyword matches**. So that even if they don't know the title, they can still get the right movie based on a generic description of the synopsis.
 
 To do that, we'll build a Spring Boot app from scratch and plug in **Redis OM Spring**. It'll handle turning our data into vectors, storing them in Redis, and running fast vector searches when users send a query.
 
@@ -50,7 +50,7 @@ Learn more: <https://redis.io/blog/searching-1-billion-vectors-with-redis-8/>
 
 ## **Redis OM Spring**
 
-To allow our users and customers to take full advantage of everything Redis can do --- with the speed Redis is known for --- we decided to implement **Redis OM Spring**, a library built on top of Spring Data Redis.
+To allow our users and customers to take full advantage of everything Redis can do — with the speed Redis is known for — we decided to implement **Redis OM Spring**, a library built on top of Spring Data Redis.
 
 Redis OM Spring allows our users to easily communicate with Redis, model their entities as **JSONs** or Hashes, efficiently query them by levaraging the **Redis Query Engine** and even take advantage of probabilistic data structures such as **Count-min Sketch, Bloom Filters, Cuckoo Filters**, and more.
 
@@ -414,9 +414,9 @@ GET http://localhost:8082/search?numberOfNearestNeighbors=1&yearMin=1970&yearMax
 
 ## Wrapping up
 
-And that's it --- you now have a working semantic search app using Spring Boot and Redis.
+And that's it — you now have a working semantic search app using Spring Boot and Redis.
 
-Instead of relying on exact keyword matches, your app understands the meaning behind the query. Redis handles the heavy part: embedding storage, similarity search, and even traditional filters --- all at lightning speed.
+Instead of relying on exact keyword matches, your app understands the meaning behind the query. Redis handles the heavy part: embedding storage, similarity search, and even traditional filters — all at lightning speed.
 
 With Redis OM Spring, you get an easy way to integrate this into your Java apps. You only need two annotations: @Vectorize and @Indexed and two Beans: EntityStream and Embedder.
 

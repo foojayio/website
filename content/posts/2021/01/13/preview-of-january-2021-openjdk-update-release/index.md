@@ -22,7 +22,7 @@ For each major release where there's an update for January 2021, you'll find an 
 
 {{< img src="image-6-1024x677.png" class="size-large is-resized" width="553" height="366" >}}
 
-By default, the Highlights page is empty. That is for us all to fill out! Pick the fixes you like from the All Issues tab or Component View tab and then vote for them---simply click on the star, no login is needed for this---and once you've refreshed the page, you'll see that the Highlights page is updated with a card for each item with high votes.
+By default, the Highlights page is empty. That is for us all to fill out! Pick the fixes you like from the All Issues tab or Component View tab and then vote for them—simply click on the star, no login is needed for this—and once you've refreshed the page, you'll see that the Highlights page is updated with a card for each item with high votes.
 
 {{< img src="image-5-1024x625.png" class="size-large is-resized" width="1046" height="638" >}}
 

@@ -27,7 +27,7 @@ It took some time, but once the benefits of tests finally sunk into the collecti
 
 Deceptively, the phrase 'automated testing' includes a wide gamut of testing techniques and methodologies. From unit tests, often just an echo of your coding assumptions, to integration tests, user-acceptable end-to-end testing, load testing, and more. In fact, early on developers were plagued by hard questions with no definitive answers around exactly that topic: 'how much' and 'what' exactly should be tested. How do you know you've tested enough?
 > 2 unit tests. 0 integration tests. [pic.twitter.com/Io3gNI2QwR](https://t.co/Io3gNI2QwR)
-> --- DEV Community (@ThePracticalDev) [April 13, 2017](https://twitter.com/ThePracticalDev/status/852508104914874369?ref_src=twsrc%5Etfw)
+> — DEV Community (@ThePracticalDev) [April 13, 2017](https://twitter.com/ThePracticalDev/status/852508104914874369?ref_src=twsrc%5Etfw)
 
 I doubt there was never a question that 'real' tests were better. Tests with 'more integration' ended up catching way more escape defects, revealing issues that would not reproduce in isolation. API breakage, component interactions, timing miscalculations, and more. They also had a much better coverage-to-test ratio, so you can write a single test to validate an entire workflow involving many classes and components.
 

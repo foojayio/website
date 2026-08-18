@@ -67,13 +67,13 @@ There are operators for most popular databases, such as the Zalando [Postgres-op
 
 Of course, even with an operator, running a database in K8s yourself may be more than you want to take on, especially if you're a smaller team looking to maximize your leverage.{#3ec0}
 
-If this is you, you can still take advantage of one of the many managed database services available. If you need a highly scalable database combined with a great developer experience, [DataStax Astra DB](https://astra.dev/3ARx46y) is a great choice. Astra DB is a managed Cassandra service that itself happens to be built on top of Kubernetes, and the Stargate APIs are available by default --- even with a [free Astra DB account](https://astra.dev/3ARx46y).{#9a86}
+If this is you, you can still take advantage of one of the many managed database services available. If you need a highly scalable database combined with a great developer experience, [DataStax Astra DB](https://astra.dev/3ARx46y) is a great choice. Astra DB is a managed Cassandra service that itself happens to be built on top of Kubernetes, and the Stargate APIs are available by default — even with a [free Astra DB account](https://astra.dev/3ARx46y).{#9a86}
 
 No matter what choices you end up making for your K8s-deployed applications, you can find a group of passionate developers pushing the state of the art forward in the [Data on Kubernetes Community](https://dok.community/) (DoKC). If you're attending KubeCon North America, join us for [DoK Day](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/program/colocated-events/#data-on-kubernetes-day) on Tuesday, October 12.{#d602}
 
 *Register* [*here*](https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/register/)*to join KubeCon North America 2021 and* [*subscribe to our event alert*](https://docs.google.com/forms/d/e/1FAIpQLSfEtzzVauuFpFJWUiepYndqchBpNsaOwm6raPJDsMt9nTvMbw/viewform)*to get notified about new DataStax workshops for developers, by developers. For exclusive posts on Cassandra, streaming, Kubernetes, and more; follow* [*DataStax on Medium*](https://datastax.medium.com/)*.*{#1970}
 
-1. [Astra DB --- Managed Apache Cassandra as a Service](https://astra.dev/3ARx46y)
+1. [Astra DB — Managed Apache Cassandra as a Service](https://astra.dev/3ARx46y)
 2. [Stargate APIs \| GraphQL, REST, Document](https://stargate.io/)
 3. [GitHub: Examples for Managing Cloud-Native Data on Kubernetes](https://github.com/data-on-k8s-book/examples)
 4. [k8ssandra/cass-operator: The DataStax Kubernetes Operator for Apache Cassandra](https://github.com/k8ssandra/cass-operator)

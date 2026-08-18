@@ -18,7 +18,7 @@ As a practical, more challenging example around this question, I used a 20 year 
 
 **To cut to the chase for those who fear this may be too long to read: yes it runs!** 🙂
 
-And to provide more detail---it now runs outside of any Web Browser and without modifying its decades-old JAR. The Applet was once created and offered to browse through all raw color images uploaded by the Mars Pathfinder Lander which settled down on the planet on July 4th, 1997.  
+And to provide more detail—it now runs outside of any Web Browser and without modifying its decades-old JAR. The Applet was once created and offered to browse through all raw color images uploaded by the Mars Pathfinder Lander which settled down on the planet on July 4th, 1997.  
 
 {{< img src="image-11-1024x825.png" class="alignright size-large is-resized" width="417" height="336" >}}
 

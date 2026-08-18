@@ -8,17 +8,30 @@
     * content/posts/2020/08/23/a-javafx-app-on-zulufx-in-60-seconds/index.md
     * content/posts/2026/07/31/javafx-links-of-july-2026/index.md
   * For instance, for JFX Links of the month posts it should link to links@jfx-central.com
-* [ ] Em dashes became `---` in the conversion
-  * Flexmark's html2md converter applies typographic replacements, so a `—` in a
-    WP body is stored as `---` (and `–` as `--`, `…` as `...`). Goldmark doesn't
-    turn those back, so the site renders a literal `---` mid-sentence: 295 files
-    have one, against 93 that kept a real em dash.
-  * Fix is one option on `HtmlToMarkdown.CONVERTER_OPTIONS` (Flexmark's
-    typographic smarts) plus a one-off pass over `content/` — same shape as
-    `NormalizeMarkdown.java`. Watch out for `---` that is really a thematic
-    break or YAML separator inside a fence.
-  * Worth doing **before** `ImportWpComments.java` runs: it shares the converter,
-    and a comment already posted to GitHub won't be fixed by a re-run.
+* [X] Em dashes became `---` in the conversion — real fix was for GitHub comments
+  * Flexmark's html2md converter rewrites the characters WP serves (`—` → `---`,
+    `–` → `--`, `…` → `...`). **But Hugo turns them back**: Goldmark's typographer
+    extension is on by default and renders `---` as `&mdash;`, so the site was
+    never showing a literal `---`. The earlier note here claiming otherwise was
+    wrong.
+  * Where it DID reach a reader is outside Hugo: GitHub Discussions have no
+    typographer, so the comment import would have posted `Fair challenge --- JEP
+    491` verbatim. Fixed at the source — `HtmlToMarkdown.CONVERTER_OPTIONS` now
+    sets `TYPOGRAPHIC_SMARTS = false`, so every imported comment (and every future
+    scrape) keeps the real character. `TYPOGRAPHIC_QUOTES` stays ON deliberately:
+    ASCII quotes are easier to type and diff and render identically.
+  * `content/` was normalized too (`NormalizeMarkdown.java` pass 3: 2207 stand-ins
+    in 499 files) — **cosmetic**, done so a re-scrape of an old post doesn't show
+    a dash change on top of the real edits. Verified render-neutral: of 10,021
+    built files every HTML page is byte-identical once `&mdash;` is decoded, and
+    the 145 RSS feeds differ only in entity-vs-character form.
+  * Left alone: ` -- ` (1185) and `...` (1782). The typographer renders them
+    correctly, and an author really does type `--` (every long CLI flag written
+    outside backticks), so rewriting the source would destroy intent while
+    changing no page. A re-scrape fixes them properly.
+  * Watch out when diffing builds in this repo: `sidebar.html` shuffles its author
+    and JUG widgets per page, so 1483 files differ build-to-build with identical
+    content. Exclude the `<aside class="sidebar">` block or you'll chase ghosts.
 * [X] Image galleries -> `{{< gallery >}}` shortcode, migrated with `scripts/MigrateGalleriesToShortcode.java`
 * [X] Tags -> won't do as we have fixed list of categories
 

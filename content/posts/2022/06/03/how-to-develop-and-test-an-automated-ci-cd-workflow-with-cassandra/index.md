@@ -22,7 +22,7 @@ frozen: false
 
 ***In this post, we'll show you how to develop a CI/CD workflow using Apache Cassandra* ™*with a GitHub Actions runner. See for yourself how much time and effort you can save by deploying Cassandra cloud-natively while you test and deploy your cloud-native applications!***{#6067}
 
-If you have projects that depend on [Apache Cassandra](https://cassandra.apache.org/_/index.html)™ and you want to develop an automated continuous integration and continuous delivery (CI/CD) flow, you're going to need to create Cassandra clusters dynamically for your tests to make sure that your app works after each code change. [DataStax](https://www.datastax.com/) does this every day --- we run Cassandra in [Kubernetes](https://kubernetes.io/) to power [Astra DB](https://astra.dev/38xbdFI). And, we use continuous testing of our Cassandra deployments to make sure Astra DB works reliably.{#8d10}
+If you have projects that depend on [Apache Cassandra](https://cassandra.apache.org/_/index.html)™ and you want to develop an automated continuous integration and continuous delivery (CI/CD) flow, you're going to need to create Cassandra clusters dynamically for your tests to make sure that your app works after each code change. [DataStax](https://www.datastax.com/) does this every day — we run Cassandra in [Kubernetes](https://kubernetes.io/) to power [Astra DB](https://astra.dev/38xbdFI). And, we use continuous testing of our Cassandra deployments to make sure Astra DB works reliably.{#8d10}
 
 In this post, we'd like to show you how you can develop and test your own CI/CD workflows with Cassandra using a GitHub Actions runner.{#7fbd}
 
@@ -54,7 +54,7 @@ Here's a brief rundown of the basic steps you can use for building and testing a
 2. Deploy [cass-operator](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorAbout.html) and three-node Cassandra cluster.
 3. Deploy frontend app and backend app.
 4. Load up your data and run your tests.
-5. Then fold the whole thing up when your test run is over. We get this for free by using helm's kind-action --- It's automatic!
+5. Then fold the whole thing up when your test run is over. We get this for free by using helm's kind-action — It's automatic!
 
 The approach to developing and testing CI/CD workflows that we've described here is one that DataStax uses routinely to test its Astra DB workflows (though not necessarily on GitHub). In production, we run our CI flows with GitHub and [Jenkins.io](https://www.jenkins.io/), and [Harness.io](https://harness.io/).{#931e}
 
@@ -70,7 +70,7 @@ Check it out now on our [GitHub repo](https://github.com/DataStax-Examples/cassa
 4. [Astra DB](https://astra.dev/38xbdFI)
 5. [GitHub Documentation: About Self-Hosted Runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security-with-public-repositories)
 6. [GitHub Documentation: Self-Hosted Runner Security with Public Repositories](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security-with-public-repositories)
-7. [Quick Start --- kind --- Kubernetes](https://kind.sigs.k8s.io/docs/user/quick-start/)
+7. [Quick Start — kind — Kubernetes](https://kind.sigs.k8s.io/docs/user/quick-start/)
 8. [DataStax Documentation: What is Cass Operator?](https://docs.datastax.com/en/cass-operator/doc/cass-operator/cassOperatorAbout.html)
 9. [GitHub repo for the DataStax Cassandra CI/CD Example](https://github.com/DataStax-Examples/cassandra-cicd-example)
 10. [Jenkins.io](https://www.jenkins.io/)

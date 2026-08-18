@@ -118,7 +118,7 @@ Inserting the 500 million event documents for the initial scenario in the collec
 | Collection | Documents   | Data Size | Document Size | Storage Size | Indexes | Index Size |
 | appV1      | 359.639.622 | 39,58GB   | 119B          | 8.78GB       | 2       | 20.06GB    |
 
-Another interesting metric that we can keep an eye on through the application versions is the storage size needed, data, and index, to store one of the 500 million events---let's call it \`event stats\`. We can obtain this value by dividing the Data Size and Index Size of the initial scenario stats by the amount of events documents. For the \`appV1\`, we have the following \`event stats\`:
+Another interesting metric that we can keep an eye on through the application versions is the storage size needed, data, and index, to store one of the 500 million events—let's call it \`event stats\`. We can obtain this value by dividing the Data Size and Index Size of the initial scenario stats by the amount of events documents. For the \`appV1\`, we have the following \`event stats\`:
 
 |------------|------------------|-------------------|-------------------|
 | Collection | Data Size/events | Index Size/events | Total Size/events |
@@ -373,7 +373,7 @@ Calculating the \`event stats\` for \`appV4\` and also presenting the values fro
 | appV3      | 61.6B            | 35.2B             | 96.8B             |
 | appV4      | 42.2B            | 20.4              | 62.6B             |
 
-Analyzing the tables above, we can see that from \`appV3\` to \`appV4\`, we reduced data size by 32% and index size by 42%---big numbers---and we also have one less index to maintain now.
+Analyzing the tables above, we can see that from \`appV3\` to \`appV4\`, we reduced data size by 32% and index size by 42%---big numbers—and we also have one less index to maintain now.
 
 Looking at the \`event stats\`, the total size per event value decreased by 35%, from 96.8B to 62.6B. We'll probably see some improvements in this implementation.
 

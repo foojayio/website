@@ -18,7 +18,7 @@ frozen: false
 
 In this podcast, we explore the topic of why there are so many JDKs, how are they the same, and how they are different. We balance the Java perspective with a special guest from the Rust foundation to learn how a peer ecosystem works.
 
-Quick summary---the role of Java as a central system runtime lead to multiple implementations and the companies that make different distributions offer support and sponsor different work. For example Azul and Microsoft worked on Apple M1, and Bellsoft and Microsoft worked on Alpine Musl. All JREs are compatible through the TCK and vendors work together on security patches for the entire ecosystem.
+Quick summary—the role of Java as a central system runtime lead to multiple implementations and the companies that make different distributions offer support and sponsor different work. For example Azul and Microsoft worked on Apple M1, and Bellsoft and Microsoft worked on Alpine Musl. All JREs are compatible through the TCK and vendors work together on security patches for the entire ecosystem.
 
 {{< youtube 9FVfBcq81Oc >}}
 

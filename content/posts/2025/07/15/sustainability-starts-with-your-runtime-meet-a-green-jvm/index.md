@@ -32,7 +32,7 @@ Efficiency and sustainability go hand in hand, and we've built [Azul Platform Pr
 JVM Performance = Energy Efficiency
 ```
 
-Every CPU cycle your application burns costs money --- and energy. Traditional JVMs, while functional, are often bloated with overhead: long garbage collection pauses, unpredictable latency, and underutilized memory.
+Every CPU cycle your application burns costs money — and energy. Traditional JVMs, while functional, are often bloated with overhead: long garbage collection pauses, unpredictable latency, and underutilized memory.
 
 Azul Platform Prime changes the game by making your Java apps more efficient at every level:
 
@@ -53,7 +53,7 @@ You gain several benefits by improving your JVM efficiency:
 * Consume fewer resources over time, whether in cloud environments or on-prem data centres.
 * Improve overall power efficiency per transaction, aligning directly with corporate sustainability goals.
 
-We've seen real-world examples where customers reduced infrastructure costs by up to 50%, while also slashing energy consumption --- without rewriting a single line of code.
+We've seen real-world examples where customers reduced infrastructure costs by up to 50%, while also slashing energy consumption — without rewriting a single line of code.
 
 ## Cost and carbon reduction: an illustrative example
 
@@ -80,9 +80,9 @@ This is equivalent to:
 
 ## Net-zero goals start at the platform level
 
-It's a powerful reminder that sustainability gains don't always require application rewrites or architectural overhauls. Green software initiatives often focus on optimizing the application layer---but what about the platform that powers your app?
+It's a powerful reminder that sustainability gains don't always require application rewrites or architectural overhauls. Green software initiatives often focus on optimizing the application layer—but what about the platform that powers your app?
 
-By simply switching to a more efficient JVM like Azul Platform Prime, organizations can make a low-effort, high-impact move toward carbon-conscious computing. You get better performance, lower cloud costs, and a smaller environmental footprint --- all without changing a single line of code.
+By simply switching to a more efficient JVM like Azul Platform Prime, organizations can make a low-effort, high-impact move toward carbon-conscious computing. You get better performance, lower cloud costs, and a smaller environmental footprint — all without changing a single line of code.
 
 Just swap the runtime, and you're already on a greener path.
 

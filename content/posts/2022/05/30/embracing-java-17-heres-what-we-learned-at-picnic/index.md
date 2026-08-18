@@ -18,13 +18,13 @@ frozen: false
 
 Java 17? Count us in! At [Picnic](https://picnic.app/nl/), we're more than a grocery delivery company.{#eb88}
 
-There's a lot of tech behind the scenes that enables us to provide the affordable, sustainable service our customers have come to expect --- and the back end of most of that tech is written in Java.{#eb88}
+There's a lot of tech behind the scenes that enables us to provide the affordable, sustainable service our customers have come to expect — and the back end of most of that tech is written in Java.{#eb88}
 
 So when the new Java 17 release was announced, we were excited to get started.{#eb88}
 
-Having moved to Java 11 within the quarter after its release, we stepped it up a gear this time and are proudly running Java 17 in production in the same quarter it was released --- we like to move fast!{#eb88}
+Having moved to Java 11 within the quarter after its release, we stepped it up a gear this time and are proudly running Java 17 in production in the same quarter it was released — we like to move fast!{#eb88}
 
-Staying up to date with the latest technology helps keep our awesome tech colleagues engaged and motivated, but it also means we never run the risk of running business-critical applications on unsupported or unmaintained tech --- that's just not us.{#1e2b}
+Staying up to date with the latest technology helps keep our awesome tech colleagues engaged and motivated, but it also means we never run the risk of running business-critical applications on unsupported or unmaintained tech — that's just not us.{#1e2b}
 
 Incremental performance gains when moving to newer JDK versions are another welcome benefit, without having to change a single line of code.{#1e2b}
 
@@ -48,7 +48,7 @@ Our approach to upgrading was to ensure that PSM, our shared build system, and s
 
 **a)** We made the PSM foundation compatible with JDK 17 without requiring immediate adoption. This mainly entails upgrading all dependencies to be Java 17 compatible.{#7cbd}
 
-**b)** Our product teams then adopted JDK 17 as a runtime JDK --- a relatively straightforward process due to the compatibility provided by the foundation, and of course, Java itself.{#1632}
+**b)** Our product teams then adopted JDK 17 as a runtime JDK — a relatively straightforward process due to the compatibility provided by the foundation, and of course, Java itself.{#1632}
 
 **c)** Once the vast majority of downstream users have upgraded, we will update the foundation itself to require JDK 17, enabling it to reap the benefits itself, and start using Java 17 features in the implementation.{#aa2b}
 
@@ -70,7 +70,7 @@ Yes, our applications now run on JDK 17 in production. This means we'll automati
 
 Some features also spur discussion on established patterns we're using. For example, we're avid users of [Immutables](https://immutables.github.io/) to efficiently model immutable data classes. Java now features Records, a language-native way of defining such data classes. How we will adopt Records, and what the impact of our Immutables usage will be, is still an open discussion within the tech team. If you're using [Lombok](https://projectlombok.org/)'s `@Value`, you may face a similar question.{#d247}
 
-So, all in all, we're super excited to get to know the new features over time and will be sure to keep you updated with our progress --- watch this space! {#1cb5}
+So, all in all, we're super excited to get to know the new features over time and will be sure to keep you updated with our progress — watch this space! {#1cb5}
 
 *This post was co-written by [Sander Mak](https://medium.com/@sander.mak),* [*Nathan Kooij*](https://medium.com/u/e52ce2e1a997?source=post_page-----69779d95fdf2--------------------------------)*,* [*Stephan Schroevers*](https://medium.com/u/f691c947a256?source=post_page-----69779d95fdf2--------------------------------)*, and* [*Ryan Whitmore*](https://medium.com/u/c37ce8652748?source=post_page-----69779d95fdf2--------------------------------)*.*{#c03d}
 

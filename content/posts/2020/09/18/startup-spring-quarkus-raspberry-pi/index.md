@@ -135,4 +135,4 @@ The average startup speed of Quarkus JAR is 3 to 4 times faster compared to Spri
 * (32b): Raspbian OS 32-bit
 * (64b): Ubuntu server OS 20.04 LTS 64-bit
 
-**Note:** Used with permission and thanks --- originally written by Frank Delporte and published on [webtechie.be](https://webtechie.be) in the posts "[A Spring REST and H2 database application on the Raspberry Pi](https://webtechie.be/post/2020-07-13-spring-rest-h2-raspberry-pi/)" and "[Comparing a REST H2 Spring versus Quarkus application on Raspberry Pi](https://webtechie.be/post/2020-07-28-spring-versus-quarkus-rest-h2-db-on-raspberry-pi/)".
+**Note:** Used with permission and thanks — originally written by Frank Delporte and published on [webtechie.be](https://webtechie.be) in the posts "[A Spring REST and H2 database application on the Raspberry Pi](https://webtechie.be/post/2020-07-13-spring-rest-h2-raspberry-pi/)" and "[Comparing a REST H2 Spring versus Quarkus application on Raspberry Pi](https://webtechie.be/post/2020-07-28-spring-versus-quarkus-rest-h2-db-on-raspberry-pi/)".

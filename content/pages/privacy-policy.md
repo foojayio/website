@@ -255,7 +255,7 @@ Information we automatically collect when you use our Services: Some Personal Da
 * Page view statistics
 * Company's web pages visited and assets you have accessed or downloaded
 * Usage information
-* Cookies and other tracking technologies (e.g. web beacons, pixel tags, SDKs, etc.) --- For more information, please review our Cookie Policy which is a located above in the section "What About Cookies?".
+* Cookies and other tracking technologies (e.g. web beacons, pixel tags, SDKs, etc.) — For more information, please review our Cookie Policy which is a located above in the section "What About Cookies?".
 * Location information (e.g. IP address, postal code, city, state or province, country)
 * Log data (e.g. access times, hardware and software information)
 * The language used by your browser

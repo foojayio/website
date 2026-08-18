@@ -262,13 +262,13 @@ public class HelloStream {
 
 This program runs in 0.031 seconds on JDK 23.  
 
-After doing the small amount of additional work required to create an AOT cache it runs in in 0.018 seconds on JDK 24 --- an improvement of 42%. The AOT cache occupies 11.4 megabytes.
+After doing the small amount of additional work required to create an AOT cache it runs in in 0.018 seconds on JDK 24 — an improvement of 42%. The AOT cache occupies 11.4 megabytes.
 
 For a representative server application, consider [Spring PetClinic](https://github.com/spring-projects/spring-petclinic) (v3.2.0).  
 
 It loads and links about 21,000 classes at startup.  
 
-It starts in 4.486 seconds on JDK 23 and in 2.604 seconds on JDK 24 when using an AOT cache --- coincidentally also an improvement of 42%. Here the AOT cache occupies 130 megabytes.
+It starts in 4.486 seconds on JDK 23 and in 2.604 seconds on JDK 24 when using an AOT cache — coincidentally also an improvement of 42%. Here the AOT cache occupies 130 megabytes.
 
 ##### More Information
 
@@ -601,7 +601,7 @@ Capabilities:
 
 So this new capability can be enabled only when building a JDK.  
 
-This also means that any `jlink` invocation that wants to make use of it doesn't need any additional options --- it can remain exactly the same.  
+This also means that any `jlink` invocation that wants to make use of it doesn't need any additional options — it can remain exactly the same.  
 
 From Java 24 on, `jlink` will use JMOD files if it can find them on the module path.  
 

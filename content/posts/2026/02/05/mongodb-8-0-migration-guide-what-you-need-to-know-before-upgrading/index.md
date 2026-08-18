@@ -68,7 +68,7 @@ The query shape in MongoDB represents a set of attributes that group similar que
 
 One such behavior is the reject: true setting. When applied, MongoDB will automatically reject any query matching this shape, regardless of its specific values.
 
-**Use case:** Imagine you're managing a database receiving queries from third-party applications. One application starts sending heavy queries that perform a collection scan (COLLSCAN), significantly slowing down the system---for example, a query like:
+**Use case:** Imagine you're managing a database receiving queries from third-party applications. One application starts sending heavy queries that perform a collection scan (COLLSCAN), significantly slowing down the system—for example, a query like:
 
 ```
 db.pizzaOrders.find({price: 10})
@@ -142,7 +142,7 @@ Result:
 ]
 ```
 
-However, if you want to inspect query shapes---i.e., the different types of queries that have been executed---you have two options:
+However, if you want to inspect query shapes—i.e., the different types of queries that have been executed—you have two options:
 
 1. Use**$queryStats** .
    * This aggregation stage provides statistics on queries run **since the last server restart**.
@@ -180,7 +180,7 @@ This approach is valuable as it ensures the database won't be affected by third-
 
 ### Query behavior
 
-Before version 8.0, if you searched for values equal to null, fields with the value undefined would also be returned. However, in this new version, data stored as undefined will no longer be returned in queries with null equality---for example:
+Before version 8.0, if you searched for values equal to null, fields with the value undefined would also be returned. However, in this new version, data stored as undefined will no longer be returned in queries with null equality—for example:
 
 ```
 // People collection
@@ -324,7 +324,7 @@ Your upgrade plan should be customized to align with your organization's specifi
 
 ## How complex is your upgrade?
 
-Now that we've outlined the key steps for a successful upgrade---including pre-migration assessment, staging cluster testing, and checking driver compatibility---let's evaluate how complex your upgrade might be. The effort required to upgrade to MongoDB 8.0 depends on multiple factors, including your current version, driver compatibility, data size, and experience level.
+Now that we've outlined the key steps for a successful upgrade—including pre-migration assessment, staging cluster testing, and checking driver compatibility—let's evaluate how complex your upgrade might be. The effort required to upgrade to MongoDB 8.0 depends on multiple factors, including your current version, driver compatibility, data size, and experience level.
 
 ### Straightforward upgrades
 
@@ -336,7 +336,7 @@ If you're on an older version (e.g., 5.0 or 6.0), you'll need to upgrade increme
 
 Since upgrade time varies significantly based on these factors, using a staging cluster as a reference (discussed in the previous section) **can help estimate the duration.** While this approach won't provide an exact time, it can give you an approximate idea of the total upgrade duration, allowing you to plan accordingly.
 
-Regardless of complexity, following best practices---such as testing a staging environment and monitoring cluster health---ensures a smooth and reliable transition. The effort is well worth it, as upgrading unlocks better performance, security improvements, and new features.
+Regardless of complexity, following best practices—such as testing a staging environment and monitoring cluster health—ensures a smooth and reliable transition. The effort is well worth it, as upgrading unlocks better performance, security improvements, and new features.
 
 ## Conclusion
 

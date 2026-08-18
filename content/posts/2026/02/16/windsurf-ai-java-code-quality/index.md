@@ -34,7 +34,7 @@ What makes this IDE stand out from other tools is how it handles "Flows":
 
 * **Action-Oriented Agent:** It can perform tasks like running mvn test, creating new files, or debugging a stack trace by itself.
 * **Unified Flow:** You don't have to copy-paste code. You work alongside the agent in "Write Mode," where it can directly apply changes to your files while you watch.
-* **Real-time Awareness (Flow State)** : Cascade is aware of your real-time actions in the editor---no need to re-prompt with context about what you just did. Simply say "Continue" and it picks up where you left off.
+* **Real-time Awareness (Flow State)** : Cascade is aware of your real-time actions in the editor—no need to re-prompt with context about what you just did. Simply say "Continue" and it picks up where you left off.
 * **Deep Context Engine**: Windsurf uses an optimized RAG approach with proprietary M-Query techniques to index your entire codebase, open files, terminal activity, clipboard, and even your recent code changes for highly relevant suggestions.
 * **Fast Context with SWE-grep** : A specialized subagent retrieves relevant code up to 20x faster than traditional agentic search using custom SWE-grep models trained for rapid parallel code retrieval.
 * **Windsurf Tab (Supercomplete)** : A custom in-house model powers diff-aware suggestions that can edit before and after your cursor, plus "Tab to Jump" and "Tab to Import" features for seamless navigation.
@@ -78,7 +78,7 @@ Instructions:
 
 Skills are powerful, but they have a "spatial" limitation: they need to be stored **locally** in your project or IDE configuration.
 
-If you work across different machines or teams, managing these local files becomes a headache. Also, if the logic to connect to **SonarQube** is complex, you don't want a massive script sitting in every project folder. This is where we need something that can run anywhere---even remotely---without leaving a local trace. Enter **MCP servers**.
+If you work across different machines or teams, managing these local files becomes a headache. Also, if the logic to connect to **SonarQube** is complex, you don't want a massive script sitting in every project folder. This is where we need something that can run anywhere—even remotely—without leaving a local trace. Enter **MCP servers**.
 
 ## **What is MCP technology?**
 
@@ -96,7 +96,7 @@ The adaptability of the MCP standard means that a Windsurf agent isn't limited t
 
 The [**SonarQube MCP Server**](https://github.com/SonarSource/sonarqube-mcp-server) is a specialized remote service designed to bridge the powerful code analysis capabilities of SonarQube directly into the Windsurf agentic IDE via the **Model Context Protocol (MCP)** .  
 
-It acts as a secure, stateless middleware, allowing the Windsurf agent (Cascade) to communicate with a designated SonarQube Cloud or Server environment without needing to install complex client libraries or massive scripts within the local project repository. By running typically as a Docker container, it encapsulates all the necessary logic---authentication, API communication, and issue parsing---for interacting with SonarQube's Web API.
+It acts as a secure, stateless middleware, allowing the Windsurf agent (Cascade) to communicate with a designated SonarQube Cloud or Server environment without needing to install complex client libraries or massive scripts within the local project repository. By running typically as a Docker container, it encapsulates all the necessary logic—authentication, API communication, and issue parsing—for interacting with SonarQube's Web API.
 
 This remote approach resolves the "local trace" problem associated with Agent Skills, enabling consistent, enterprise-grade code quality checks across all developer environments.
 

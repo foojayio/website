@@ -23,7 +23,7 @@ Last time, we created a [vector search index](https://www.linkedin.com/pulse/fro
 
 🎯 The challenge
 
-This demo will be entirely based on the pre-generated vector embeddings already stored in the [sample_mflix](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=tony.kim#std-label-sample-mflix) dataset---no API calls and no new model runs. Everything will remain local. If you haven't done it yet, learn how in this article 👉 [Loading embeddings into MongoDB](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D)
+This demo will be entirely based on the pre-generated vector embeddings already stored in the [sample_mflix](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=tony.kim#std-label-sample-mflix) dataset—no API calls and no new model runs. Everything will remain local. If you haven't done it yet, learn how in this article 👉 [Loading embeddings into MongoDB](https://www.linkedin.com/pulse/from-zero-vector-hero-locally-arek-borucki-w5otf/?trackingId=xNlcCImhQCC0HsnlThlQFg%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3B1MUlV%2B0kQm%2BvelL3UScxcA%3D%3D)
 
 🧠 *The Matrix* scenario
 
@@ -64,7 +64,7 @@ The document includes standard fields like title, plot, and genres, plus two vec
 
 These embeddings encode meaning, not just words. You can use them so MongoDB finds movies with a similar concept, even when plots share no obvious keywords.
 
-For this tutorial, let's use *The Matrix* 's [plot_embedding](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies) as your query vector. Since this embedding is already stored in the document, you simply retrieve it and pass it to the [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#syntax) stage as a query parameter---no extra model calls required.
+For this tutorial, let's use *The Matrix* 's [plot_embedding](https://www.mongodb.com/docs/atlas/sample-data/sample-mflix/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#std-label-mflix-embedded_movies) as your query vector. Since this embedding is already stored in the document, you simply retrieve it and pass it to the [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#syntax) stage as a query parameter—no extra model calls required.
 
 🔍 Validating the search index
 
@@ -119,9 +119,9 @@ Result:
 
 The $vectorSearch can search BSON Binary vector fields directly inside MongoDB because the index is built on that binary Float32 data.
 
-However, when you run $vectorSearch from the MongoDB shell (mongosh) or from application code, you must pass the query vector as a plain JavaScript array of numbers---not as raw BSON binary.
+However, when you run $vectorSearch from the MongoDB shell (mongosh) or from application code, you must pass the query vector as a plain JavaScript array of numbers—not as raw BSON binary.
 
-MongoDB [stores embeddings in documents as BSON Binary](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant) (Float32) because it's compact and efficient for indexing. The vector search index uses this binary data internally without conversion. But the [queryVector](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#fields) parameter is an input to the search operation. It isn't read from the indexed data---it's sent from your code. This means you need to decode the BSON Binary into a standard JavaScript array before passing it to $vectorSearch.
+MongoDB [stores embeddings in documents as BSON Binary](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant) (Float32) because it's compact and efficient for indexing. The vector search index uses this binary data internally without conversion. But the [queryVector](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#fields) parameter is an input to the search operation. It isn't read from the indexed data—it's sent from your code. This means you need to decode the BSON Binary into a standard JavaScript array before passing it to $vectorSearch.
 
 As shown below, you fetch the plot_embedding BSON Binary for *The Matrix*, convert it to a Float32Array, and then convert that to a plain JavaScript array for $vectorSearch.
 
@@ -150,7 +150,7 @@ Now, you can use the qv variable as the queryVector parameter in a $vectorSearch
 
 🚀 Running semantic search
 
-Pass qv into [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#mongodb-pipeline-pipe.-vectorSearch) as the query vector---the reference point used to compare against all indexed vectors. The search engine uses cosine similarity to measure how close each stored embedding is to qv, ranking results from most to least similar. This returns movies that are conceptually close to *The Matrix*, even if they don't share obvious keywords.
+Pass qv into [$vectorSearch](https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-stage/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=semantic-foojay&utm_term=megan.grant#mongodb-pipeline-pipe.-vectorSearch) as the query vector—the reference point used to compare against all indexed vectors. The search engine uses cosine similarity to measure how close each stored embedding is to qv, ranking results from most to least similar. This returns movies that are conceptually close to *The Matrix*, even if they don't share obvious keywords.
 
 ```
 db.getSiblingDB("sample_mflix").embedded_movies.aggregate([

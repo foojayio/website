@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-If you're working with Jakarta EE --- or just starting to explore the power of enterprise Java --- there's never been a better time to level up your skills. Whether you're building your first servlet, designing secure REST APIs, or diving deep into dependency injection, the Jakarta EE community has been busy crafting an outstanding collection of [starter](https://jakarta.ee/learn/starter-guides/) and [specification](https://jakarta.ee/learn/specification-guides/) guides to help you get up to speed.
+If you're working with Jakarta EE — or just starting to explore the power of enterprise Java — there's never been a better time to level up your skills. Whether you're building your first servlet, designing secure REST APIs, or diving deep into dependency injection, the Jakarta EE community has been busy crafting an outstanding collection of [starter](https://jakarta.ee/learn/starter-guides/) and [specification](https://jakarta.ee/learn/specification-guides/) guides to help you get up to speed.
 
 At **Omnifish**, we're proud supporters of the open-source enterprise Java ecosystem, and we're constantly pointing developers toward the best resources. So we've gathered up some of the most practical and insightful Jakarta EE guides to help you go from "Hello, World" to production-ready applications with confidence.
 
@@ -25,7 +25,7 @@ Let's dive in.
 
 ## ![🚀](https://s.w.org/images/core/emoji/15.0.3/svg/1f680.svg) Getting Started with Jakarta EE
 
-Before building complex enterprise apps, it's important to get the basics right. These starter guides will help you build a solid foundation --- with real code examples and clear explanations.
+Before building complex enterprise apps, it's important to get the basics right. These starter guides will help you build a solid foundation — with real code examples and clear explanations.
 
 ### 1. [How to Start with Servlets](https://jakarta.ee/learn/starter-guides/how-to-start-with-servlets/)
 
@@ -33,19 +33,19 @@ The humble Servlet is at the heart of Jakarta EE. If you're new to the platform 
 
 ### 2. [How to Build a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-build-a-restful-web-service/)
 
-Once you're comfortable with servlets, it's time to move into REST APIs. This hands-on guide shows how to use Jakarta RESTful Web Services (JAX-RS) to create your first API, define endpoints, and return JSON data --- a must for any modern application.
+Once you're comfortable with servlets, it's time to move into REST APIs. This hands-on guide shows how to use Jakarta RESTful Web Services (JAX-RS) to create your first API, define endpoints, and return JSON data — a must for any modern application.
 
 ### 3. [How to Store and Retrieve Data Using Jakarta Persistence](https://jakarta.ee/learn/starter-guides/how-to-store-and-retrieve-data-using-jakarta-persistence/)
 
-You'll eventually need to persist data --- and this guide has you covered. Learn how to map entities, perform CRUD operations, and interact with relational databases using Jakarta Persistence (JPA).
+You'll eventually need to persist data — and this guide has you covered. Learn how to map entities, perform CRUD operations, and interact with relational databases using Jakarta Persistence (JPA).
 
 ### 4. [How to Secure a RESTful Web Service](https://jakarta.ee/learn/starter-guides/how-to-secure-a-restful-web-service/)
 
-Security is never an afterthought. This guide walks you through adding authentication and authorization to your REST endpoints using Jakarta Security --- including how to protect resources and validate user credentials.
+Security is never an afterthought. This guide walks you through adding authentication and authorization to your REST endpoints using Jakarta Security — including how to protect resources and validate user credentials.
 
 ## ![🧠](https://s.w.org/images/core/emoji/15.0.3/svg/1f9e0.svg) Understand the Specs Behind the Scenes
 
-Now that you've built something with Jakarta EE, it's time to go deeper. These **specification guides** break down the key technologies behind the platform --- not just how to use them, but how they work under the hood.
+Now that you've built something with Jakarta EE, it's time to go deeper. These **specification guides** break down the key technologies behind the platform — not just how to use them, but how they work under the hood.
 
 ### 5. [Servlet, Faces, and Server Pages Explained](https://jakarta.ee/learn/specification-guides/servlet-faces-and-server-pages-explained/)
 
@@ -53,7 +53,7 @@ This guide connects the dots between Jakarta Servlet, Jakarta Faces (JSF), and J
 
 ### 6. [Persistence Explained](https://jakarta.ee/learn/specification-guides/persistence-explained/)
 
-If you're curious about how Jakarta Persistence really works --- including the EntityManager lifecycle, transactions, and querying --- this is the deep dive you need.
+If you're curious about how Jakarta Persistence really works — including the EntityManager lifecycle, transactions, and querying — this is the deep dive you need.
 
 ### 7. [RESTful Web Services Explained](https://jakarta.ee/learn/specification-guides/restful-web-services-explained/)
 
@@ -73,11 +73,11 @@ Want to scale your apps? You need to understand concurrency. This guide covers m
 
 ### 11. [Jakarta EE Platform Explained](https://jakarta.ee/learn/specification-guides/jakarta-ee-platform/)
 
-Finally, this high-level overview ties everything together --- showing how all the specs in Jakarta EE fit into a cohesive platform for building robust, cloud-ready enterprise applications.
+Finally, this high-level overview ties everything together — showing how all the specs in Jakarta EE fit into a cohesive platform for building robust, cloud-ready enterprise applications.
 
 ## ![📚](https://s.w.org/images/core/emoji/15.0.3/svg/1f4da.svg) Wrap-Up: Learn. Build. Grow.
 
-Jakarta EE is a mature, powerful platform --- but it's also approachable, thanks to resources like these. Whether you're just starting out or looking to sharpen your enterprise Java chops, these guides will take you step-by-step from beginner to seasoned developer.
+Jakarta EE is a mature, powerful platform — but it's also approachable, thanks to resources like these. Whether you're just starting out or looking to sharpen your enterprise Java chops, these guides will take you step-by-step from beginner to seasoned developer.
 
 And if you're building apps with projects **OmniFish** supports like Piranha Cloud or [GlassFish](https://omnifish.ee/glassfish/), all these technologies are already deeply integrated. That means you can spend less time setting things up, and more time solving real problems.
 

@@ -76,13 +76,13 @@ spec:
 
 Figure 1: Creating a cluster with two data centers deployed across two different Kubernetes clusters.
 
-In this example, you can see that the Cassandra configuration is exposed very similarly to how it was previously within K8ssandra, allowing you to specify data centers, racks, and easy access to the selected version --- to name a few. This should feel very familiar for good reason. Under the hood, the K8ssandra Operator still leverages and delegates control to [Cass Operator](https://github.com/k8ssandra/cass-operator).{#fd18}
+In this example, you can see that the Cassandra configuration is exposed very similarly to how it was previously within K8ssandra, allowing you to specify data centers, racks, and easy access to the selected version — to name a few. This should feel very familiar for good reason. Under the hood, the K8ssandra Operator still leverages and delegates control to [Cass Operator](https://github.com/k8ssandra/cass-operator).{#fd18}
 
 So, what's different? How does this add anything to the current K8ssandra experience?{#1ccd}
 
 One key element of this new configuration is the *k8sContext*, which is the connection between the CassandraDatacenter and the Kubernetes cluster that is to be its home. With this small yet powerful setting, you can simply define a remote Kubernetes cluster that a particular data center should be deployed to.{#a92f}
 
-You know you can tell the K8ssandraCluster what remote cluster to install a data center within --- but how? The association of a remote cluster is made possible through the addition of another new custom resource: the *ClientConfig*.{#0e10}
+You know you can tell the K8ssandraCluster what remote cluster to install a data center within — but how? The association of a remote cluster is made possible through the addition of another new custom resource: the *ClientConfig*.{#0e10}
 
 A ClientConfig is essentially the definition of a remote cluster a `kubeconfig` that the K8ssandra Operator can use to remotely access it. Deploying a data center onto the local Kubernetes cluster, where the "control plane" operator is deployed, doesn't require any additional settings.{#13b2}
 
@@ -129,7 +129,7 @@ To learn even more about the K8ssandra Operator, give it a spin, and get involve
 *Follow* [*DataStax on Medium*](https://datastax.medium.com/)*for exclusive posts and the latest announcements about Cassandra, Kubernetes, streaming, and much more.*{#625e}
 
 1. [k8ssandra-operator: The Kubernetes operator for K8ssandra](https://github.com/k8ssandra/k8ssandra-operator)
-2. [K8ssandra --- Apache Cassandra® on Kubernetes](https://k8ssandra.io/)
+2. [K8ssandra — Apache Cassandra® on Kubernetes](https://k8ssandra.io/)
 3. [cass-operator: The DataStax Kubernetes Operator for Apache Cassandra](https://github.com/k8ssandra/cass-operator)
 4. [Why we decided to build a K8ssandra operator](https://k8ssandra.io/blog/articles/why_k8ssandra_operator_part_1/)
 5. [Deploy a multi-datacenter Cassandra cluster in Kubernetes](https://k8ssandra.io/blog/tutorials/multi-cluster-cassandra-deployment-with-google-kubernetes-engine/)

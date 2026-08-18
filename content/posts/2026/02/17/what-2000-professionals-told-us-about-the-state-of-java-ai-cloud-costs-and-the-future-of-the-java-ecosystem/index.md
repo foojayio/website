@@ -46,7 +46,7 @@ The Java ecosystem is keeping pace. Libraries like JavaML and Deep Java Library 
 * Scalable data access
 * Strong integration with large language models
 
-If your teams are running AI at scale --- or plan to --- you're going to want your Java expertise in the room.
+If your teams are running AI at scale — or plan to — you're going to want your Java expertise in the room.
 
 ## Enterprises are rapidly moving away from Oracle Java
 
@@ -69,7 +69,7 @@ This isn't a small shift. It's a structural change in the Java market. Vendors w
 
 ## Cloud costs are still too high, and Java efficiency is a powerful lever
 
-Cost optimization in the cloud is no longer a "nice to have." It's a strategic imperative. And the data shows that Java is one of the most effective---and overlooked---ways to reduce those costs.
+Cost optimization in the cloud is no longer a "nice to have." It's a strategic imperative. And the data shows that Java is one of the most effective—and overlooked—ways to reduce those costs.
 
 * **97% of organizations have taken action to cut public cloud spend** \[Figure 2\]**.**
 * **41% use a high‑performance Java platform specifically to reduce cloud compute costs.**

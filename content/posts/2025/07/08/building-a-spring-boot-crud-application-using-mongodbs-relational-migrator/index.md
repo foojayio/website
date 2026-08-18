@@ -35,11 +35,11 @@ Let's get started!
 
 Before we get into the actual implementation to build the application, below are the pre-requisites that you need to have:
 
-1. Relational Migrator---you can download the tool available for free using the [MongoDB Tools](https://www.mongodb.com/try/download/relational-migrator?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) download page
+1. Relational Migrator—you can download the tool available for free using the [MongoDB Tools](https://www.mongodb.com/try/download/relational-migrator?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe) download page
 2. The [SQL schema script](https://github.com/mongodb-developer/relational-migrator-lab/blob/main/docker/sample-postgres-library/init/1-library-schema-and-data.sql) to create the Postgres database and tables
 3. [Java 21](https://www.oracle.com/in/java/technologies/downloads/) or above
 4. The IDE of your choice
-5. A free Atlas cluster---create your first[Atlas cluster for free](https://account.mongodb.com/account/register?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe)
+5. A free Atlas cluster—create your first[Atlas cluster for free](https://account.mongodb.com/account/register?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Building%20a%20Spring%20Boot%20CRUD%20Application%20Using%20MongoDB%E2%80%99s%20Relational%20Migrator&utm_term=aasawari.sahasrabuddhe)
 
 ## Relational Migrator
 
@@ -114,7 +114,7 @@ After selecting the appropriate migration job based on your requirements, the ne
 
 Once the migration is complete, you'll find your data seamlessly transferred to the MongoDB Atlas cluster. However, this is often the point where developers encounter uncertainty about what to do next.
 
-But don't worry---MongoDB Relational Migrator eliminates that confusion.
+But don't worry—MongoDB Relational Migrator eliminates that confusion.
 
 The tool's Code Converter feature is designed to simplify your journey further by providing boilerplate code in the programming language of your choice. This makes it easy to jumpstart your application development, so you can focus on building great features without worrying about the groundwork.
 

@@ -19,11 +19,11 @@ related_posts:
 frozen: false
 ---
 
-**Ortus Solutions** is thrilled to announce the official release of **bx-couchbase v1.0** , a groundbreaking module that brings native enterprise-grade Couchbase capabilities to the BoxLang language and ecosystem. Designed for modern distributed applications, **bx-couchbase** unifies high-performance caching, resilient distributed locking, and advanced AI vector memory---empowering developers to build scalable, intelligent, fault-tolerant systems with unprecedented ease.
+**Ortus Solutions** is thrilled to announce the official release of **bx-couchbase v1.0** , a groundbreaking module that brings native enterprise-grade Couchbase capabilities to the BoxLang language and ecosystem. Designed for modern distributed applications, **bx-couchbase** unifies high-performance caching, resilient distributed locking, and advanced AI vector memory—empowering developers to build scalable, intelligent, fault-tolerant systems with unprecedented ease.
 
 ## **Couchbase + BoxLang: A High-Performance Combination**
 
-Couchbase is more than a database---it's a distributed NoSQL platform engineered for speed, flexibility, and global scale. With sub-millisecond key-value operations, built-in vector search, and multi-data-center support, it is the ideal foundation for next-generation AI-powered applications.
+Couchbase is more than a database—it's a distributed NoSQL platform engineered for speed, flexibility, and global scale. With sub-millisecond key-value operations, built-in vector search, and multi-data-center support, it is the ideal foundation for next-generation AI-powered applications.
 
 The new **bx-couchbase v1.0** module exposes all this power through an elegant, intuitive, and fully integrated BoxLang API. Not only that, it is fully documented.
 
@@ -32,7 +32,7 @@ The new **bx-couchbase v1.0** module exposes all this power through an elegant, 
 
 ## 🚀 **Enterprise-Grade Distributed Caching**
 
-bx-couchbase introduces a complete cache provider with replication, fault tolerance, TTL support, scopes, and collections---all optimized for BoxLang. You can easily leverage any bucket, scope or collection as a BoxLang native Cache, even store all your session scope and distribute it.
+bx-couchbase introduces a complete cache provider with replication, fault tolerance, TTL support, scopes, and collections—all optimized for BoxLang. You can easily leverage any bucket, scope or collection as a BoxLang native Cache, even store all your session scope and distribute it.
 
 ```
 cache("default").set("user:123", {
@@ -55,7 +55,7 @@ user = cache("default").get("user:123")
 
 ## 🔐 **True Distributed Locking for Mission-Critical Workloads**
 
-bx-couchbase v1.0 delivers robust distributed locking---ideal for financial transactions, inventory control, batch operations, and high-traffic systems. It has introduced a semantic component to give you locking capabilities into Couchbase. You can also use the functional approach as well.
+bx-couchbase v1.0 delivers robust distributed locking—ideal for financial transactions, inventory control, batch operations, and high-traffic systems. It has introduced a semantic component to give you locking capabilities into Couchbase. You can also use the functional approach as well.
 
 ### **Component-Based Locking (Recommended)**
 

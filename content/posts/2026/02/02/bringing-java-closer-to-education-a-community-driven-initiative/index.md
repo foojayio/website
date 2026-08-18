@@ -27,7 +27,7 @@ This initiative was born from a simple but powerful idea: to aggregate Java-rela
 
 The ["Java Education Catalog" Foojay GitHub repository](https://github.com/foojayio/java-education-catalog "GitHub repository") represents the starting point of that initiative. The idea emerged from conversations within the Code Club Slack, where educators and community members discussed the lack of visible, accessible Java resources for educational contexts. From those discussions came a simple but meaningful realization: there is already valuable Java educational content available, but it is fragmented and hard to discover.
 
-The repository intentionally starts small and evolves openly, serving as an initial hub to gather, organize, and curate Java-related educational materials in one accessible place. Rather than presenting a finished or centrally defined curriculum, it embraces a community-driven approach---collecting learning paths, project ideas, and practical examples, especially those aligned with Raspberry Pi and physical computing.
+The repository intentionally starts small and evolves openly, serving as an initial hub to gather, organize, and curate Java-related educational materials in one accessible place. Rather than presenting a finished or centrally defined curriculum, it embraces a community-driven approach—collecting learning paths, project ideas, and practical examples, especially those aligned with Raspberry Pi and physical computing.
 
 As the initiative grows through real usage and contributions, this shared space aims to lower the barrier to entry, reduce duplicated effort, and provide a clear starting point for mentors and learners interested in Java in education, while also helping demonstrate real impact over time.
 
@@ -83,7 +83,7 @@ This initiative exists precisely to help change that perception, not through con
 
 Another important aspect of this initiative is recognizing that many people are already creating high-quality Java educational content around the world. Educators, developers, mentors, and enthusiasts are writing tutorials, recording videos, building sample projects, and sharing their knowledge independently.
 
-This initiative helps connect these efforts by creating a stronger network where ideas, materials, and experiences can be shared. By bringing contributors together, we increase visibility, reduce duplicated effort, and significantly accelerate progress---allowing the community to achieve far greater impact together than any individual effort alone.
+This initiative helps connect these efforts by creating a stronger network where ideas, materials, and experiences can be shared. By bringing contributors together, we increase visibility, reduce duplicated effort, and significantly accelerate progress—allowing the community to achieve far greater impact together than any individual effort alone.
 
 ### A Call to the Community
 
@@ -93,7 +93,7 @@ By aggregating content, sharing best practices, and supporting milestones like J
 
 If you believe in the power of education and in Java as a tool for learning, this is an open invitation: join the conversation, contribute content, and help shape the future of Java in education.
 
-Together, we can grow Java where it matters most --- **at the beginning.**
+Together, we can grow Java where it matters most — **at the beginning.**
 
 Recently, I had the pleasure of discussing this initiative in an interview on the Foojay Podcast You can listen to the [episode #85 "Code, Community, and Opportunity: Making Tech Accessible for Everyone" here](https://foojay.io/today/foojay-podcast-85/).
 

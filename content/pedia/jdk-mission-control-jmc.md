@@ -11,10 +11,10 @@ JMC was originally developed by BEA Systems as JRockit Mission Control, acquired
 
 Key capabilities:
 
-* **JFR Analyser** --- Opens and analyses `.jfr` recordings. Provides built-in rules that flag common performance issues (excessive GC, high lock contention, thread starvation) with descriptions and recommendations.
-* **JVM Browser** --- Connects to local or remote JVMs over JMX, showing live heap usage, thread counts, CPU load, and class loading stats.
-* **Flight Recorder Control** --- Start, stop, and configure JFR recordings on a live JVM directly from the GUI.
-* **Heap Dump analysis** --- Basic heap dump viewing; for deep heap analysis a dedicated tool like Eclipse Memory Analyser (MAT) is typically used alongside.
+* **JFR Analyser** — Opens and analyses `.jfr` recordings. Provides built-in rules that flag common performance issues (excessive GC, high lock contention, thread starvation) with descriptions and recommendations.
+* **JVM Browser** — Connects to local or remote JVMs over JMX, showing live heap usage, thread counts, CPU load, and class loading stats.
+* **Flight Recorder Control** — Start, stop, and configure JFR recordings on a live JVM directly from the GUI.
+* **Heap Dump analysis** — Basic heap dump viewing; for deep heap analysis a dedicated tool like Eclipse Memory Analyser (MAT) is typically used alongside.
 
 JMC download and documentation: [github.com/openjdk/jmc](https://github.com/openjdk/jmc)
 

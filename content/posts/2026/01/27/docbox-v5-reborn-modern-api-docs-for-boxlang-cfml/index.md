@@ -27,7 +27,7 @@ frozen: false
 
 Welcome to DocBox v5! We didn't just update DocBox. We rebuilt it from the ground up.
 
-**DocBox v5.0.0** represents a complete architectural rewrite---modern syntax, blazing performance, and a stunning new look that finally brings API documentation into 2025. Gone are the clunky HTML pages of yesteryear. Say hello to a gorgeous, theme-driven single-page application that makes browsing your API docs feel like using a premium developer tool. We have also released a dedicated module for BoxLang: **BX-DOCBOX**. A fully interactive CLI tool for generating your docs from the command line using pure BoxLang.
+**DocBox v5.0.0** represents a complete architectural rewrite—modern syntax, blazing performance, and a stunning new look that finally brings API documentation into 2025. Gone are the clunky HTML pages of yesteryear. Say hello to a gorgeous, theme-driven single-page application that makes browsing your API docs feel like using a premium developer tool. We have also released a dedicated module for BoxLang: **BX-DOCBOX**. A fully interactive CLI tool for generating your docs from the command line using pure BoxLang.
 
 ## What's Included
 

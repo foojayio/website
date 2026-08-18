@@ -25,7 +25,7 @@ Please help Ukraine and help the civilized world by doing so. Here are two organ
 
 First and foremost, I suffered quite a blow this year. It was a complete surprise when my company unexpectedly let me go due to budget reasons. To tell you I was unhappy is quite an understatement. It was also a complete surprise, as my CEO had assured me everything was okay a few months before he notified me.
 
-Upon receiving the news on a Thursday morning in mid-August, I didn't let it deter me. I took a one-day break and immediately started my job search on Friday, determined to find a new opportunity. I thought I would get a new job quickly. However, my optimism met reality---it took me 3.5 months to return to work. Here's a couple of stats that may be interesting if you're facing the same issue:
+Upon receiving the news on a Thursday morning in mid-August, I didn't let it deter me. I took a one-day break and immediately started my job search on Friday, determined to find a new opportunity. I thought I would get a new job quickly. However, my optimism met reality—it took me 3.5 months to return to work. Here's a couple of stats that may be interesting if you're facing the same issue:
 
 * I listed 147 job offers over the months; including asking people in my network
 * I submitted my application to 130 of them
@@ -89,12 +89,12 @@ For example, I've published the same content on Twitter, Bluesky, Mastodon, and 
 Here they are:
 > Another year of [#conferences](https://twitter.com/hashtag/conferences?src=hash&ref_src=twsrc%5Etfw) in one picture. Thanks everybody who invited me. I wish 2025 will be even better 🎆🎆🎆 [pic.twitter.com/PJJMNm9NxO](https://t.co/PJJMNm9NxO)
 >
-> --- Nicolas Frankel 🇺🇦🇬🇪 (@nicolas_frankel) [December 31, 2024](https://twitter.com/nicolas_frankel/status/1874143229198696786?ref_src=twsrc%5Etfw)
+> — Nicolas Frankel 🇺🇦🇬🇪 (@nicolas_frankel) [December 31, 2024](https://twitter.com/nicolas_frankel/status/1874143229198696786?ref_src=twsrc%5Etfw)
 > Another year of #conferences in one picture. Thanks everybody who invited me. I wish 2025 will be even better 🎆🎆🎆
 >
 > [\[image or embed\]](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3lemmp3vffk2y?ref_src=embed)
 >
-> --- Nicolas Fränkel 🇺🇦🇬🇪 ([@frankel.ch](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x?ref_src=embed)) [December 31, 2024 at 5:57 PM](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3lemmp3vffk2y?ref_src=embed)
+> — Nicolas Fränkel 🇺🇦🇬🇪 ([@frankel.ch](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x?ref_src=embed)) [December 31, 2024 at 5:57 PM](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3lemmp3vffk2y?ref_src=embed)
 
 We can't compare LinkedIn since it's mostly about people you know personally; there's a higher social incentive to interact with others. When I wrote this post, I had slightly more likes on Twitter (13) than on Bluesky (11), but with more than ten times the followers on the former. Twitter is going down, and that's without even mentioning all the alerts that it has become a massive vector of hate and disinformation.
 

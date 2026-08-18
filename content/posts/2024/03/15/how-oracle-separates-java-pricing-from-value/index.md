@@ -48,7 +48,7 @@ Do the math yourself on our [Java price comparison calculator](https://www.azul.
 
 ### September 2017
 
-Oracle announced significant changes to the Java release process. The new model provided a new release every six months (in March and in September). Developers had been requesting a more agile approach to developing the core Java platform, and this change led to more features being added to Java --- and more rapidly --- than ever before.
+Oracle announced significant changes to the Java release process. The new model provided a new release every six months (in March and in September). Developers had been requesting a more agile approach to developing the core Java platform, and this change led to more features being added to Java — and more rapidly — than ever before.
 
 Oracle also changed how it delivers updates and support. Instead of providing extended maintenance and support for all Java versions, only Long-Term Support (LTS) releases would qualify for that.
 
@@ -62,7 +62,7 @@ A Java SE subscription included:
 * Security-only updates (curated updates)
 * Technical support
 
-Paid support is a familiar component of open-source communities, and the change was accepted --- but a move Oracle made three months later wasn't.
+Paid support is a familiar component of open-source communities, and the change was accepted — but a move Oracle made three months later wasn't.
 
 ### September 2018
 

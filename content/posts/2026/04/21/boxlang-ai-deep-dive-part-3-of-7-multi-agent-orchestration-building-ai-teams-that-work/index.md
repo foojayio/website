@@ -25,9 +25,9 @@ frozen: false
 
 A single agent is useful. An orchestra of agents is powerful.
 
-The problem with most multi-agent frameworks is that the orchestration layer is bolted on --- you're managing agent references manually, passing outputs between them by hand, and hoping you haven't introduced a cycle. There's no concept of hierarchy. No cycle detection. No way to ask "who's in charge here?" or "how deep in the tree am I?"
+The problem with most multi-agent frameworks is that the orchestration layer is bolted on — you're managing agent references manually, passing outputs between them by hand, and hoping you haven't introduced a cycle. There's no concept of hierarchy. No cycle detection. No way to ask "who's in charge here?" or "how deep in the tree am I?"
 
-BoxLang AI 3.0 changes this. `AiAgent` now tracks its position in a full hierarchy tree, and sub-agents are wired as tools automatically --- the coordinator doesn't need to know how to delegate, only that it can.
+BoxLang AI 3.0 changes this. `AiAgent` now tracks its position in a full hierarchy tree, and sub-agents are wired as tools automatically — the coordinator doesn't need to know how to delegate, only that it can.
 
 ## 🌲 The Agent Tree
 
@@ -66,7 +66,7 @@ getAncestors()             // [immediateParent, grandparent, ..., root]
 
 ### Cycle Detection Built-In
 
-Setting a parent that would create a cycle throws immediately --- no silent infinite loops:
+Setting a parent that would create a cycle throws immediately — no silent infinite loops:
 
 ```java
 // From AiAgent.bx — setParentAgent()
@@ -89,7 +89,7 @@ AiAgent function setParentAgent( required AiAgent parent ) {
 
 ## 🤖 Sub-Agents as Tools
 
-The magic of `addSubAgent()` is that each sub-agent is automatically wrapped as a tool the parent can call --- no manual wiring, no custom callback code.
+The magic of `addSubAgent()` is that each sub-agent is automatically wrapped as a tool the parent can call — no manual wiring, no custom callback code.
 
 ```java
 // From AiAgent.bx — createSubAgentTool()
@@ -109,7 +109,7 @@ private ITool function createSubAgentTool( required AiAgent subAgent ) {
 }
 ```
 
-When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `delegate_to_researcher`, `delegate_to_writer`, etc. The LLM sees these tools in its context and decides when to use them --- exactly the same way it decides when to call any other tool.
+When `addSubAgent()` is called, the parent's `AiModel` gets a new tool named `delegate_to_researcher`, `delegate_to_writer`, etc. The LLM sees these tools in its context and decides when to use them — exactly the same way it decides when to call any other tool.
 
 **The coordinator doesn't need special logic. It just has more tools.**
 
@@ -128,7 +128,7 @@ public any function run( any input = "", struct params = {}, struct options = {}
 }
 ```
 
-This means **one agent instance can safely serve multiple concurrent users** --- no race conditions, no cross-user contamination, no per-user agent factory needed.
+This means **one agent instance can safely serve multiple concurrent users** — no race conditions, no cross-user contamination, no per-user agent factory needed.
 
 ```java
 // One shared agent — many concurrent users
@@ -178,11 +178,11 @@ Understanding what happens inside `run()` is useful when you're debugging or bui
 13. Return response
 ```
 
-The system message is also cached and fingerprinted --- if description, instructions, and skill pools haven't changed since the last call, the cached version is used instead of rebuilding. This matters for high-throughput scenarios where the same agent handles many requests.
+The system message is also cached and fingerprinted — if description, instructions, and skill pools haven't changed since the last call, the cached version is used instead of rebuilding. This matters for high-throughput scenarios where the same agent handles many requests.
 
 ## 🌊 Streaming with Multi-Agent Teams
 
-Streaming works the same way in multi-agent setups --- each agent can stream independently:
+Streaming works the same way in multi-agent setups — each agent can stream independently:
 
 coordinator = aiAgent( name: "coordinator" )
 
@@ -199,7 +199,7 @@ coordinator.stream(
 )
 ```
 
-When the coordinator decides to delegate to the researcher, that sub-call happens synchronously inside the tool invocation --- the streaming coordinator gets back the researcher's result as a tool response, then continues streaming.
+When the coordinator decides to delegate to the researcher, that sub-call happens synchronously inside the tool invocation — the streaming coordinator gets back the researcher's result as a tool response, then continues streaming.
 
 ## 🔄 Suspend and Resume
 
@@ -254,7 +254,7 @@ any function resume( required string decision, required string threadId, struct 
 
 ## 🔍 Introspection
 
-The `getConfig()` method gives you full visibility into an agent's state --- useful for debugging, monitoring dashboards, and logging:
+The `getConfig()` method gives you full visibility into an agent's state — useful for debugging, monitoring dashboards, and logging:
 
 ```java
 config = agent.getConfig()
@@ -326,11 +326,11 @@ response = coordinator.run(
 )
 ```
 
-The LLM driving the coordinator sees two tools: `delegate_to_researcher` and `delegate_to_writer`. It decides to call the researcher first, gets back a detailed summary, then calls the writer with that summary and the original request, and finally synthesizes the writer's output into a final response. You didn't write any of that logic --- the LLM figured it out from the tool descriptions.
+The LLM driving the coordinator sees two tools: `delegate_to_researcher` and `delegate_to_writer`. It decides to call the researcher first, gets back a detailed summary, then calls the writer with that summary and the original request, and finally synthesizes the writer's output into a final response. You didn't write any of that logic — the LLM figured it out from the tool descriptions.
 
 ## What's Next
 
-In Part 4, we tackle the middleware system --- the six built-in middleware classes, how the hook lifecycle works, writing your own middleware, and the `FlightRecorderMiddleware` that makes AI agents properly testable in CI.
+In Part 4, we tackle the middleware system — the six built-in middleware classes, how the hook lifecycle works, writing your own middleware, and the `FlightRecorderMiddleware` that makes AI agents properly testable in CI.
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ "Full Documentation") 📦Install Today: `install-bx-module bx-ai` 🫶[Professional Support](https://ai.ortussolutions.com/ "Professional Support")
 

@@ -21,7 +21,7 @@ frozen: false
 
 #### In a zero-copy runtime designed for 1-VT-per-Stream density, ThreadLocal is a performance serial killer. Here is the forensic analysis and how JEP 506 Scoped Values changed everything.
 
-When I started designing the **Exeris Kernel** --- a next-generation, zero-copy runtime built for Java 26+ --- I established one non-negotiable architectural law: **"No Waste Compute."**
+When I started designing the **Exeris Kernel** — a next-generation, zero-copy runtime built for Java 26+ — I established one non-negotiable architectural law: **"No Waste Compute."**
 
 In a system designed to handle extreme density by mapping exactly one Virtual Thread to every network stream (1-VT-per-Stream), every byte of memory and every CPU cycle must be intentional.
 
@@ -33,7 +33,7 @@ Here is why I enforced a strict, kernel-wide ban on `ThreadLocal` in Exeris, and
 
 ## The Forensic Analysis: The 3 Sins of ThreadLocal
 
-Treating Virtual Threads like OS threads discards most of their scalability advantages --- especially around context propagation and allocation behavior. When you combine `ThreadLocal` with a highly concurrent, thread-per-request architecture, you introduce three critical flaws:
+Treating Virtual Threads like OS threads discards most of their scalability advantages — especially around context propagation and allocation behavior. When you combine `ThreadLocal` with a highly concurrent, thread-per-request architecture, you introduce three critical flaws:
 
 ### 1. The Spaghetti State (Unconstrained Mutability)
 
@@ -70,7 +70,7 @@ Instead of a globally mutable variable, a `ScopedValue` defines a **Dynamic Scop
 | **Lifetime**         | Unbounded (Requires manual cleanup) | Lexically bounded (tied to the `.run()` block)                 |
 | **Inheritance Cost** | O(N) memory copy                    | O(1) constant-time inheritance with negligible allocation cost |
 
-## Exhibit B: "Show, Don't Tell" --- The Exeris Implementation
+## Exhibit B: "Show, Don't Tell" — The Exeris Implementation
 
 In the Exeris Kernel, context propagation is strictly separated. The Security module authenticates, and the Persistence module applies Row-Level Security. They never talk directly. They communicate purely through an **"Invisible Wall"** using `ScopedValue`.
 ![Figure 3: Context propagation in the Exeris Kernel. Security and Persistence modules remain completely decoupled, sharing identity strictly through an immutable dynamic scope.](https://blog.arkstack.dev/blog/scopedvalue/fig3_context_scope.png)
@@ -126,6 +126,6 @@ Java 26 is not just *"Java 8 with `var`"* . Features like Project Loom, Panama (
 
 ## Explore the Exeris Kernel
 
-The zero-allocation architecture described in this article isn't just theory --- it's running code. Exeris is an open-core, post-container cloud kernel built for extreme density. If you're tired of GC pauses and want to see how native I/O, Panama FFM, and Virtual Thread orchestration look in practice, explore the Exeris Kernel:
+The zero-allocation architecture described in this article isn't just theory — it's running code. Exeris is an open-core, post-container cloud kernel built for extreme density. If you're tired of GC pauses and want to see how native I/O, Panama FFM, and Virtual Thread orchestration look in practice, explore the Exeris Kernel:
 
 🔗 **GitHub Repository:** [exeris-systems/exeris-kernel](https://github.com/exeris-systems/exeris-kernel)

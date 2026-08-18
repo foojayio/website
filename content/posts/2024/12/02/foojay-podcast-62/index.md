@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-AI, LLMs, ChatGPT---these are just a few of the buzzwords of the massive revolution unfolding right now.
+AI, LLMs, ChatGPT—these are just a few of the buzzwords of the massive revolution unfolding right now.
 
 These tools are reshaping how we work, but they come with a catch: while they help us work faster and smarter, we need to be careful about placing too much trust in them.
 

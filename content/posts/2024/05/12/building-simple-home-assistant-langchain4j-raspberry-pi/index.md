@@ -262,7 +262,7 @@ ingestor.ingest(transformedDocument);
 
 In the above code, the `BgeSmallEnV15QuantizedEmbeddingModel` is designed to generate embeddings for text segments. These embeddings map text data to a vector representation that can be efficiently searched and compared. `DocumentSplitters.recursive` is used to recursively split the document into chunks of up to 300 tokens, which is crucial for managing large documents by breaking them into manageable pieces for processing and retrieval.
 
-The `EmbeddingStoreIngestor` is configured with the document splitter, embedding model, and an embedding store --- [Weaviate](https://weaviate.io/), in this case, which offers a free sandbox environment lasting 14 days. The `ingest` method processes the document by splitting it, generating embeddings for each chunk, and storing these embeddings in an embedding store for quick retrieval during the question-answering phase.
+The `EmbeddingStoreIngestor` is configured with the document splitter, embedding model, and an embedding store — [Weaviate](https://weaviate.io/), in this case, which offers a free sandbox environment lasting 14 days. The `ingest` method processes the document by splitting it, generating embeddings for each chunk, and storing these embeddings in an embedding store for quick retrieval during the question-answering phase.
 
 For retrieval, the `DocumentRetriever` class configures a `get` method that sets up an `EmbeddingStoreContentRetriever`. This setup involves retrieving an embedding store instance, which he had initialized earlier, then initializing the embedding model, and specifying retrieval parameters to return up to three results with a minimum relevance score of 0.8.
 

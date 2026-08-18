@@ -7,7 +7,7 @@ frozen: false
 
 Garbage Collection (GC) is the process by which the JVM automatically reclaims memory occupied by objects that are no longer reachable by the running application. Java developers do not call `free()` or `delete()` as in C or C++; the garbage collector handles memory management automatically.
 
-Most JVM garbage collectors divide the heap into *generations*. The assumption --- the "generational hypothesis" --- is that most objects die young. New objects are allocated in the young generation, which is collected frequently and cheaply. Objects that survive long enough are promoted to the old generation, which is collected less often but at greater cost.
+Most JVM garbage collectors divide the heap into *generations*. The assumption — the "generational hypothesis" — is that most objects die young. New objects are allocated in the young generation, which is collected frequently and cheaply. Objects that survive long enough are promoted to the old generation, which is collected less often but at greater cost.
 
 GC involves a trade-off between throughput (how much work the application gets done per unit of time) and latency (how long GC pauses interrupt the application). Choosing the right garbage collector for your workload is one of the most impactful performance decisions you can make.
 

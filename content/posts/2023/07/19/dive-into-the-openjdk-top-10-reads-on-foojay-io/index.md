@@ -42,4 +42,4 @@ We invite you to read these insightful articles and join the conversation on our
 
 Stay updated with the latest in Java and join a community of enthusiastic Java developers!
 
-Note that, you're not just getting updates---you're joining a network of software engineers, book authors, pioneers, and thought leaders in this space.
+Note that, you're not just getting updates—you're joining a network of software engineers, book authors, pioneers, and thought leaders in this space.

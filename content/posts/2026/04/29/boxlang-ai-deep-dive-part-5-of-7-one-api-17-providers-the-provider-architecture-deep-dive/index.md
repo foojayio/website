@@ -28,7 +28,7 @@ Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build every
 
 Every time the answer to "can we switch providers?" is "it would take months," something went wrong architecturally.
 
-BoxLang AI was designed from the start to eliminate this problem. One API, one set of BIFs, 17 providers --- and 3.0 makes the architecture underneath significantly more robust with a proper capability system, a cleaner provider hierarchy, and type-safe capability checking that prevents cryptic runtime crashes.
+BoxLang AI was designed from the start to eliminate this problem. One API, one set of BIFs, 17 providers — and 3.0 makes the architecture underneath significantly more robust with a proper capability system, a cleaner provider hierarchy, and type-safe capability checking that prevents cryptic runtime crashes.
 
 ## 🗺️ The Full Provider Matrix
 
@@ -106,7 +106,7 @@ interface {
 }
 ```
 
-That's it. No `chat()`. No `embeddings()`. No operation methods at all. Those live in capability interfaces --- because not every provider supports every operation.
+That's it. No `chat()`. No `embeddings()`. No operation methods at all. Those live in capability interfaces — because not every provider supports every operation.
 
 ## 🛡️ The Capability System
 
@@ -145,7 +145,7 @@ class extends="BaseService" implements="IAiEmbeddingsService" {
 
 ### Runtime Capability Detection
 
-`BaseService` uses `isInstanceOf()` to detect implemented interfaces --- which means capability detection is always in sync with the `implements` declarations with nothing to maintain manually:
+`BaseService` uses `isInstanceOf()` to detect implemented interfaces — which means capability detection is always in sync with the `implements` declarations with nothing to maintain manually:
 
 ```java
 // From BaseService.bx — getCapabilities()
@@ -201,9 +201,9 @@ No more cryptic 404s or malformed response errors when you call the wrong operat
 `BaseService` owns everything that's truly provider-agnostic:
 
 * **HTTP transport** --- `sendChatRequest()`, `sendStreamRequest()`, `sendEmbeddingRequest()`
-* **Lifecycle events** --- fires `onAIChatRequest`, `onAIChatResponse`, `onAIEmbedRequest`, `onAIEmbedResponse`, `onAIRateLimitHit`, `onAIError`
-* **Logging** --- request/response logging with detailed, human-readable log messages
-* **Configuration** --- merges module defaults, provider-specific config, and per-request options
+* **Lifecycle events** — fires `onAIChatRequest`, `onAIChatResponse`, `onAIEmbedRequest`, `onAIEmbedResponse`, `onAIRateLimitHit`, `onAIError`
+* **Logging** — request/response logging with detailed, human-readable log messages
+* **Configuration** — merges module defaults, provider-specific config, and per-request options
 * **Pre/post hooks** --- `preRequest()` and `postResponse()` for provider-specific normalization  
   The pre/post hook pattern is worth understanding. Instead of overriding the entire `sendChatRequest()` method to add a custom header or normalize a response, providers override two lightweight hooks:
 
@@ -221,7 +221,7 @@ This keeps the HTTP transport code in `BaseService` and isolates provider-specif
 
 ## ⚙️ Provider Configuration
 
-Every provider auto-detects its API key from environment variables using a convention: `_API_KEY`. So `OPENAI_API_KEY`, `CLAUDE_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`, etc. --- you never commit keys to source control.
+Every provider auto-detects its API key from environment variables using a convention: `_API_KEY`. So `OPENAI_API_KEY`, `CLAUDE_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`, etc. — you never commit keys to source control.
 
 Full provider configuration in `boxlang.json`:
 
@@ -259,7 +259,7 @@ Provider-specific params override the global `defaultParams`. Per-request params
 
 ## 🔀 Custom Base URLs
 
-All senders in `BaseService` now accept a `baseUrl` override --- making it trivial to use proxies, self-hosted endpoints, and OpenAI-compatible APIs:
+All senders in `BaseService` now accept a `baseUrl` override — making it trivial to use proxies, self-hosted endpoints, and OpenAI-compatible APIs:
 
 ```java
 // Via config
@@ -276,9 +276,9 @@ model = aiModel( provider: "openai", options: { baseUrl: "http://my-proxy/v1" } 
 model = aiModel( provider: "ollama", options: { baseUrl: "http://my-ollama-server:11434" } )
 ```
 
-This is how you use any OpenAI-compatible API --- LM Studio, vLLM, LocalAI, Amazon Bedrock with proxy, etc. --- without writing a custom provider class.
+This is how you use any OpenAI-compatible API — LM Studio, vLLM, LocalAI, Amazon Bedrock with proxy, etc. — without writing a custom provider class.
 
-## 🏠 Ollama --- Local AI, Zero API Cost
+## 🏠 Ollama — Local AI, Zero API Cost
 
 Ollama deserves a special mention. With BoxLang AI, running fully local AI is as simple as:
 
@@ -314,7 +314,7 @@ Docker Compose setup for development teams that want a shared Ollama instance is
 
 ## 🤗 New in 3.0: HuggingFace Embeddings
 
-`HuggingFaceService` now supports embeddings via the HuggingFace Inference API --- useful for semantic search, RAG pipelines, and clustering workflows where you want to use community-hosted models:
+`HuggingFaceService` now supports embeddings via the HuggingFace Inference API — useful for semantic search, RAG pipelines, and clustering workflows where you want to use community-hosted models:
 
 ```java
 embeddings = aiEmbed(
@@ -357,7 +357,7 @@ class extends="OpenAIService" implements="IAiChatService,IAiEmbeddingsService" {
 }
 ```
 
-For providers with fully custom API formats (like Claude's or Gemini's native APIs), extend `BaseService` directly and implement the capability interfaces you need --- you own the full `chat()`, `chatStream()`, and `embeddings()` implementations.
+For providers with fully custom API formats (like Claude's or Gemini's native APIs), extend `BaseService` directly and implement the capability interfaces you need — you own the full `chat()`, `chatStream()`, and `embeddings()` implementations.
 
 Register your custom provider via the `onMissingAiProvider` event:
 
@@ -386,7 +386,7 @@ Every operation through `BaseService` fires BoxLang global events you can interc
 | `beforeAIModelInvoke` | Before AiModel.run() calls the service                   |
 | `afterAIModelInvoke`  | After AiModel.run() returns                              |
 
-The `onAITokenCount` event includes `tenantId` and `usageMetadata` for multi-tenant billing --- you can attribute every token to a specific customer, project, or cost center:
+The `onAITokenCount` event includes `tenantId` and `usageMetadata` for multi-tenant billing — you can attribute every token to a specific customer, project, or cost center:
 
 ```java
 bxEvents.listen( "onAITokenCount", ( data ) => {
@@ -403,7 +403,7 @@ bxEvents.listen( "onAITokenCount", ( data ) => {
 
 ## 🔄 Switching Providers in Practice
 
-To drive the point home --- here's what switching from OpenAI to Claude looks like in your code:
+To drive the point home — here's what switching from OpenAI to Claude looks like in your code:
 
 **Config change:**
 
@@ -421,18 +421,18 @@ To drive the point home --- here's what switching from OpenAI to Claude looks li
 (none)
 ```
 
-Your `aiChat()`, `aiEmbed()`, `aiAgent()`, and `aiModel()` calls are all identical. The provider-specific formatting, authentication, and response normalization live entirely inside the provider classes --- your application code never sees it.
+Your `aiChat()`, `aiEmbed()`, `aiAgent()`, and `aiModel()` calls are all identical. The provider-specific formatting, authentication, and response normalization live entirely inside the provider classes — your application code never sees it.
 
 ## 🎯 Wrapping Up the Series
 
 Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 
 * **Part 1**--- AI Skills System: versioned, composable knowledge blocks that end prompt drift
-* **Part 2** --- Tool Ecosystem: `BaseTool`, `ClosureTool`, the Global Registry, and `now@bxai`
-* **Part 3** --- Multi-Agent Orchestration: hierarchy trees, stateless agents, per-call identity routing
-* **Part 4** --- Middleware: six built-in classes, the hook lifecycle, and FlightRecorderMiddleware for CI
-* **Part 5** --- Provider Architecture: 17 providers, the capability system, and zero-vendor-lock-in design  
-  The common thread across all five: BoxLang AI is designed so that the hard parts --- lifecycle management, observability, multi-tenancy, provider compatibility --- are handled by the framework. Your code stays focused on what you're building.
+* **Part 2** — Tool Ecosystem: `BaseTool`, `ClosureTool`, the Global Registry, and `now@bxai`
+* **Part 3** — Multi-Agent Orchestration: hierarchy trees, stateless agents, per-call identity routing
+* **Part 4** — Middleware: six built-in classes, the hook lifecycle, and FlightRecorderMiddleware for CI
+* **Part 5** — Provider Architecture: 17 providers, the capability system, and zero-vendor-lock-in design  
+  The common thread across all five: BoxLang AI is designed so that the hard parts — lifecycle management, observability, multi-tenancy, provider compatibility — are handled by the framework. Your code stays focused on what you're building.
 
 ## Get Started
 
@@ -446,7 +446,7 @@ install-bx-module bx-ai
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ai) 📦 [ForgeBox Package](https://forgebox.io/view/bx-ai) 🎓 [AI BootCamp](https://github.com/ortus-boxlang/bx-ai-bootcamp) 🐛 [Report Issues](https://github.com/ortus-boxlang/bx-ai/issues) 💬 [Community Slack](https://boxteam.ortussolutions.com/) 💼 [BoxLang+ Plans](https://www.boxlang.io/plans)
 
-*Thank you to the entire Ortus team and everyone in the BoxLang community who contributed to 3.0. This is the release we're most proud of --- and we're just getting started. 🙏*
+*Thank you to the entire Ortus team and everyone in the BoxLang community who contributed to 3.0. This is the release we're most proud of — and we're just getting started. 🙏*
 
 [← Previous](https://foojay.io/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-%f0%9f%a7%b5/ "← Previous")
 

@@ -19,7 +19,7 @@ frozen: false
 
 Recently, Snyk added [social trends](https://snyk.io/blog/social-media-for-security-intelligence/) to its [vulnerability data](https://snyk.io/product/vulnerability-database/). This new indicator shows you what vulnerabilities are trending so you can better prioritize remediation. Our research team found a strong correlation between socially trending vulnerabilities and the existence of exploits that can actually harm your application.
 
-Following the social trends of security vulnerabilities makes practical sense. When a specific vulnerability is gaining a lot of interest in social --- Twitter, for instance --- it means a lot of people are aware of the problem. Statistically, this also means more people that want to do you harm. Therefore, it can be important to put some extra focus on the vulnerabilities in your system that are socially trending.
+Following the social trends of security vulnerabilities makes practical sense. When a specific vulnerability is gaining a lot of interest in social — Twitter, for instance — it means a lot of people are aware of the problem. Statistically, this also means more people that want to do you harm. Therefore, it can be important to put some extra focus on the vulnerabilities in your system that are socially trending.
 
 Let's take a look at vulnerability social trends (sentiment analysis) in action.
 
@@ -54,9 +54,9 @@ You might say that this vulnerability has a bunch of prerequisites before it can
 
 Some people might say, because of these prerequisites not many cases are actually exploitable and dismiss it. However, because of the large amount of attention on Twitter, I took a good look and saw that it was *not that hard* to change the session manager to the `PersistentManger` with `FileStore`. Also with the amount of dependencies I am using in my application the change of having a gadget in there is quite possible.  
 
-So, if for some reason someone in my team decides to use the `PersistentManger` with `FileStore` the only thing missing is arbitrary file uploads. Given the fact that security breaches are almost always a chain of events that lead to a disaster --- and not just a single event or vuln --- I don't think you can just dismiss a vuln like this. Especially not if fixes are available.  
+So, if for some reason someone in my team decides to use the `PersistentManger` with `FileStore` the only thing missing is arbitrary file uploads. Given the fact that security breaches are almost always a chain of events that lead to a disaster — and not just a single event or vuln — I don't think you can just dismiss a vuln like this. Especially not if fixes are available.  
 
-More importantly, if a vuln is trending, this means a lot of people know and talk about it --- including people with bad intentions. For me, it is a marker that I have to investigate such a vuln even more closely than I already do to see if I am vulnerable now or will be in the future.
+More importantly, if a vuln is trending, this means a lot of people know and talk about it — including people with bad intentions. For me, it is a marker that I have to investigate such a vuln even more closely than I already do to see if I am vulnerable now or will be in the future.
 
 Including the trending marker in the Snyk UI not only puts a spotlight on the vuln but also increases the priority score for that reason. Therefore, we believe that searching social media to determine the popularity of a specific vulnerability is a powerful tool so I will not get caught by obvious and well-known security mistakes. So when you see ![](https://snyk.io/wp-content/uploads/blog-social-trends-usage-trending.png), we encourage you to take a second look at a vuln you may have ignored before.
 

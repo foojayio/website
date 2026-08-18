@@ -45,7 +45,7 @@ The number of people who have died of or with Covid-19 is also flattening out in
 
 It is interesting to note that Italy has almost three times as high a death rate as Germany.{#40c3}
 
-The curves are smooth --- this smooth metric makes a lot of sense, because the curves fluctuate a lot on a daily basis, which has to do not only with statistical and medical reasons, but also with organizational reasons of data transfer from laboratories and authorities. The non flattend peek values are also available (new_deaths).{#40c3}
+The curves are smooth — this smooth metric makes a lot of sense, because the curves fluctuate a lot on a daily basis, which has to do not only with statistical and medical reasons, but also with organizational reasons of data transfer from laboratories and authorities. The non flattend peek values are also available (new_deaths).{#40c3}
 
 ### Summary
 

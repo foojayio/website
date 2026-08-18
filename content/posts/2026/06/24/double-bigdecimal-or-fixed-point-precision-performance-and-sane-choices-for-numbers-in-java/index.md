@@ -679,7 +679,7 @@ The real engineering mistake is not choosing `double` over `BigDecimal`. It is c
 * [JEP 306: Restore Always-Strict Floating-Point Semantics](https://openjdk.org/jeps/306)
 * [JEP 401: Value Classes and Objects (Preview)](https://openjdk.org/jeps/401)
 * [JSR 354: Java Money and Currency API](https://javamoney.github.io/)
-* [decimal4j --- Fast Fixed-Point Decimal Arithmetic](https://github.com/tools4j/decimal4j)
+* [decimal4j — Fast Fixed-Point Decimal Arithmetic](https://github.com/tools4j/decimal4j)
 * [Apache Commons Numbers](https://commons.apache.org/proper/commons-numbers/)
 * [Joda-Money](https://www.joda.org/joda-money/)
 

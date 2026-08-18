@@ -21,7 +21,7 @@ JDK 25 has arrived as the latest long-term support (LTS) release for Java, bring
 
 ## Why Upgrade?
 
-Each new LTS release represents years of refinements, optimizations, and new capabilities. JDK 25 builds on the foundation of JDK 21 while delivering the reliability that enterprise applications demand. But understanding what's changed---and what might break---is essential for a smooth transition.
+Each new LTS release represents years of refinements, optimizations, and new capabilities. JDK 25 builds on the foundation of JDK 21 while delivering the reliability that enterprise applications demand. But understanding what's changed—and what might break—is essential for a smooth transition.
 
 ## Upcoming Webinar: Your Migration Guide
 

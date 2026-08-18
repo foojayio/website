@@ -51,14 +51,14 @@ In Kafka, the unit of storage is a segment file, but the unit of replication is 
 
 This means that *adding capacity to a Kafka cluster makes it slower before it makes it faster.* If your capacity planning is on point, then this is fine, but if business needs to change faster than you expected then it could be a serious problem.
 
-Pulsar adds a layer of indirection. (Pulsar also splits apart compute and storage, which is managed by the broker and the bookie, respectively, but the important part here is how Pulsar, via Bookkeeper, increases the granularity of replication.) In Pulsar, partitions are split up into ledgers, but unlike Kafka segments, ledgers can be replicated independently of one another. Pulsar keeps a map of which ledgers belong to a partition in Zookeeper. So when we add a new storage node to the cluster, all we have to do is start a new ledger on that node. Existing data can stay where it is---no extra work needs to be done by the cluster.
+Pulsar adds a layer of indirection. (Pulsar also splits apart compute and storage, which is managed by the broker and the bookie, respectively, but the important part here is how Pulsar, via Bookkeeper, increases the granularity of replication.) In Pulsar, partitions are split up into ledgers, but unlike Kafka segments, ledgers can be replicated independently of one another. Pulsar keeps a map of which ledgers belong to a partition in Zookeeper. So when we add a new storage node to the cluster, all we have to do is start a new ledger on that node. Existing data can stay where it is—no extra work needs to be done by the cluster.
 ![](0_JhvLbXvXI016-V3H.png)
 
 See [**Jack Vanlightly's blog**](https://jack-vanlightly.com/blog/2018/10/2/understanding-how-apache-pulsar-works) for an in-depth explanation of Pulsar's architecture and storage model.
 
 Multi-tenant infrastructure can be shared across multiple users and organizations while isolating them from each other. The activities of one tenant should not be able to affect the security or the SLAs of other tenants.
 
-Fundamentally, multi-tenancy reduces costs in two ways. First, simply by sharing infrastructure that isn't maxed out by a single tenant --- the cost of that component can be amortized across all users. Second, by simplifying administration --- when there are dozens or hundreds or thousands of tenants, managing a single instance offers significant simplification. Even in a containerized world, "get me an account on this shared system" is much easier to fulfill than "stand me up a new instance of this service." And global problems may be obscured by being scattered across many instances.
+Fundamentally, multi-tenancy reduces costs in two ways. First, simply by sharing infrastructure that isn't maxed out by a single tenant — the cost of that component can be amortized across all users. Second, by simplifying administration — when there are dozens or hundreds or thousands of tenants, managing a single instance offers significant simplification. Even in a containerized world, "get me an account on this shared system" is much easier to fulfill than "stand me up a new instance of this service." And global problems may be obscured by being scattered across many instances.
 
 Like geo-replication, multi-tenancy is hard to graft on to a system that wasn't designed for it. Kafka is a single-tenant design, but Pulsar builds multi-tenancy in at the core.
 ![](0_b_mAQ1iBm0rcm8hk.png)
@@ -69,7 +69,7 @@ DataStax's Admin Console for Pulsar makes this even easier.
 
 ## Queuing (as well as streaming)
 
-Kafka offers a classic pub/sub (publish/subscribe) messaging model --- publishers send messages to Kafka, which orders them by partition within a topic, and sends a copy to every subscriber (or "consumer").
+Kafka offers a classic pub/sub (publish/subscribe) messaging model — publishers send messages to Kafka, which orders them by partition within a topic, and sends a copy to every subscriber (or "consumer").
 ![](0_DPuwhv3ObpTKaFVT.png)
 
 Kafka records which messages a consumer has seen with an offset into the log. This means that messages cannot be acknowledged out-of-order, which in turn means that a subscription cannot be shared across multiple consumers. (Kafka enables mapping multiple partitions to a single consumer in its consumer group design, but not the other way around.)

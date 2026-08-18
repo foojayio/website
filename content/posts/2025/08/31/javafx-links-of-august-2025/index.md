@@ -38,7 +38,7 @@ Did we miss anything? Is there anything you want to have included in one of the 
   * [Opensourced: Yet another labyrinth using JavaFX and FXGL](https://www.youtube.com/watch?v=NgOb9DGl8pA)
   * [1.0.1 - new updates](https://www.youtube.com/watch?v=6qFd9VvMIec)
 * [Computerized Garden, a.k.a. GardenSim](https://github.com/gardensim/GardenSim), is a Java 17 + JavaFX 22 project that simulates a small garden by **Wineel Wilson Dasari**. You can plant (Rose, Tomato, Orange), simulate weather, spawn/control pests, and watch plants survive or die over days.
-* [Released on Steam: Nocturne FX](https://store.steampowered.com/app/3739280/Nocturne_FX/). "*Built entirely in JavaFX, Nocturne FX™ is a high-intensity arcade game where survival warps reality. Power-ups destabilize, patterns shift, and hidden systems awaken---the longer you last, the more the world unravels.*"
+* [Released on Steam: Nocturne FX](https://store.steampowered.com/app/3739280/Nocturne_FX/). "*Built entirely in JavaFX, Nocturne FX™ is a high-intensity arcade game where survival warps reality. Power-ups destabilize, patterns shift, and hidden systems awaken—the longer you last, the more the world unravels.*"
 
 ## Components, Libraries, Tools
 

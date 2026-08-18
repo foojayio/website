@@ -164,7 +164,7 @@ This remarkable improvement stems from two key factors:
 
 We are looking to further improve this trend and shift this whole graph to the left even further (by \~10 seconds). We call this 'InstantHot'. Just as InstantOn will enable us to rapidly start up applications, InstantHot will enable us to both rapidly start up and rapidly ramp up applications, providing a powerful combination for our Java applications.
 
-Using the Cloud Compiler with our application significantly changes the shape of the rampup graph, and improves rampup time---converting our rampup grade from a B to an A.
+Using the Cloud Compiler with our application significantly changes the shape of the rampup graph, and improves rampup time—converting our rampup grade from a B to an A.
 
 ![](image11-700x359.png)
 
@@ -260,7 +260,7 @@ Semeru's memory footprint characteristics even without the Cloud Compiler are qu
 
 ## Summary
 
-Overall, by making use of the innovations and improvements discussed in this article---Semeru Runtimes, shared classes cache, InstantOn, and Semeru Cloud Compiler---we've transformed our imaginary JDK performance report card to a straight-A student.
+Overall, by making use of the innovations and improvements discussed in this article—Semeru Runtimes, shared classes cache, InstantOn, and Semeru Cloud Compiler—we've transformed our imaginary JDK performance report card to a straight-A student.
 
 | Java application report card with all innovations | Grade |
 |---------------------------------------------------|-------|

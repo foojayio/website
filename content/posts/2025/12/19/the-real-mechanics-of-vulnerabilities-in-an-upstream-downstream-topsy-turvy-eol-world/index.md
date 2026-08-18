@@ -134,7 +134,7 @@ None of this is malice. It's not incompetence. It is simply what happens when th
 
 The truth is that nothing in the ecosystem enforces upstream notification. It happens because maintainers, vendors, and researchers believe in the value of shared signals.
 
-The entire system works only if everyone believes disclosure helps defenders more than attackers --- which it does.
+The entire system works only if everyone believes disclosure helps defenders more than attackers — which it does.
 
 ### Summary
 

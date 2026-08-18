@@ -28,7 +28,7 @@ But it's also tedious. Before we continue, if you prefer, I cover most of these 
 >
 > With a literal stack trace directly to the allocating code![#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/6HNPH4pv0Y](https://t.co/6HNPH4pv0Y)
 >
-> --- Shai Almog (@debugagent) [April 19, 2022](https://twitter.com/debugagent/status/1516497057573388294?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [April 19, 2022](https://twitter.com/debugagent/status/1516497057573388294?ref_src=twsrc%5Etfw)
 
 ## Watch Annotations
 

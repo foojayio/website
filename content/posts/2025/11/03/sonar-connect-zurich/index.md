@@ -18,7 +18,7 @@ frozen: false
 
 **When?** November 18, 13:00 - 17:00
 
-Generative AI projects---especially code assistants---introduce new complexities. Maintaining code quality and security is paramount to control the exponential growth of technical debt and ensure you achieve the desired return on investment (ROI). Join us at the AWS offices to:
+Generative AI projects—especially code assistants—introduce new complexities. Maintaining code quality and security is paramount to control the exponential growth of technical debt and ensure you achieve the desired return on investment (ROI). Join us at the AWS offices to:
 
 Gain insights on the key success factors for Gen AI coding projects, based on data from thousands of customers.  
 

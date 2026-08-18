@@ -49,7 +49,7 @@ Now, even though you are a Spring aficionado, for a number of reasons you may be
 
 In any case, while Spring and Jakarta EE share some commonalities as[enterprise Java frameworks,](https://payara.fish/blog/jakarta-ee-vs.-spring-boot-choosing-the-right-framework-for-your-project/ " enterprise Java frameworks,") if you've never touched Jakarta EE, you may feel out of your depth. You might think Jakarta EE is heavyweight, XML-heavy and bound to large application servers. But the good news is the platform has evolved. Modern runtimes like Payara Micro run lean, start fast and work beautifully with container deployments.
 
-And the even better news? The latest**Payara Starter** , a free online developer tool to generate entity relationship diagrams and code, makes scafollding a Jakarta EE project as easy --- dare I say, easier than creating a Spring Boot project with [Spring Initializr](https://start.spring.io/ "Spring Initializr").
+And the even better news? The latest**Payara Starter** , a free online developer tool to generate entity relationship diagrams and code, makes scafollding a Jakarta EE project as easy — dare I say, easier than creating a Spring Boot project with [Spring Initializr](https://start.spring.io/ "Spring Initializr").
 
 ## Meet Payara Starter: The Equivalent to Spring Initializr for Jakarta EE
 

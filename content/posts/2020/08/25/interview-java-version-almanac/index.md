@@ -28,15 +28,15 @@ And, let's meet Marc, here's a quick interview with him about the Java Version A
 
 I somehow accidentally stepped into Java at the very beginning, back in 1996, and I did a couple of projects already on the very first Java version 1.0.2 and then 1.1.
 
-Over the years, I continued to work with Java in very different contexts --- also in various open source projects. Probably the best known is the [JaCoCo code coverage tool](https://www.jacoco.org/jacoco/) which I started in 2009.
+Over the years, I continued to work with Java in very different contexts — also in various open source projects. Probably the best known is the [JaCoCo code coverage tool](https://www.jacoco.org/jacoco/) which I started in 2009.
 
 As I'm always eager to learn new things, I visited many conferences and happened to become a conference speaker myself. This helped me to make many friends in the Java community. And since 10 years I co-unorganize the JCrete unconference on the beautiful island of Crete.
 
-All this is mostly spare time activity --- in my day job I design and implement software for railroad networks together with my wonderfu[l mtrail](https://www.mtrail.ch/) team, in Switzerland.  
+All this is mostly spare time activity — in my day job I design and implement software for railroad networks together with my wonderfu[l mtrail](https://www.mtrail.ch/) team, in Switzerland.  
 
 **At some point, you created [javaalmanac.io](http://javaalmanac.io/), how did that come about?**   
 
-As always, things started small --- I used a collection of markdown documents in a Github repo to keep track of recent Java features and prepare talks.
+As always, things started small — I used a collection of markdown documents in a Github repo to keep track of recent Java features and prepare talks.
 
 One day, I realized that this repo has more than 500 stars on GitHub. So, it appears to me that this collection of information seems to be somewhat useful.
 
@@ -53,7 +53,7 @@ As the repository became more and more popular, people started to contribute wit
 
 **Maybe the data can be exposed as a REST endpoint?**   
 
-Nice idea! While I started out with markdown files, over time I converted most of the content into JSON files. This makes the content machine readable and can be used in other contexts --- [like on foojay](https://foojay.io/almanac/jdk-8/). I really like the idea of sharing knowledge and data!
+Nice idea! While I started out with markdown files, over time I converted most of the content into JSON files. This makes the content machine readable and can be used in other contexts — [like on foojay](https://foojay.io/almanac/jdk-8/). I really like the idea of sharing knowledge and data!
 
 Currently, the JSON files can be simply obtained from the [GitHub repository](https://github.com/marchof/java-almanac/tree/master/site/data). The next step would to provide a proper API from that data.
 
@@ -71,6 +71,6 @@ Simply the fact several collaborations were triggered with this little site. For
 
 **Yes, and now it's hosted on foojay, too, what do you think about this direction?**   
 
-For me this is wonderful proof of the concept that data and knowledge can be shared when information is provided in a well structured way and --- most importantly --- with an open license that allows the re-use of information.
+For me this is wonderful proof of the concept that data and knowledge can be shared when information is provided in a well structured way and — most importantly — with an open license that allows the re-use of information.
 
 And maybe [foojay is the place](https://foojay.io/blog/foojay-a-place-for-friends-of-openjdk/) where we, the Java community, will be collecting and maintaining all knowledge about OpenJDK!

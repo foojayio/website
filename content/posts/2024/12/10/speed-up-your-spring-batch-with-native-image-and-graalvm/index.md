@@ -247,4 +247,4 @@ By **using GraalVM Native Imag** e, you can build **batch jobs** that **are fast
 
 * <https://foojay.io/today/prevent-ldap-injection-in-java-with-springboot/>
 * <https://foojay.io/today/a-simple-service-with-spring-boot/>
-* <https://youtu.be/_oXnnQcD_wc> (Legal JVM Dopes For Your Apps 🇬🇧 --- Dmitri Chuyko)
+* <https://youtu.be/_oXnnQcD_wc> (Legal JVM Dopes For Your Apps 🇬🇧 — Dmitri Chuyko)

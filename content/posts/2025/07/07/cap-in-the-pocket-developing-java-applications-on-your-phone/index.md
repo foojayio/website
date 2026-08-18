@@ -295,7 +295,7 @@ Nothing prevents us from using git to commit our change to some repo. This shows
 ## Android Linux Terminal
 
 In March Google [launched](https://www.androidpolice.com/android-15-linux-terminal-app/?ref=news.itsfoss.com) the native Linux Terminal app for Android on Google Pixel devices. Luckily the Android phone I use for all these tests is Pixel 8a which is one of the supported devices. The app offers essentially the same experience as the emulated Ubuntu in Termux:
-> The Terminal app operates by launching a Debian Linux environment within a virtual machine, powered by Android's Virtualization Framework (AVF). Rather than exposing the underlying Android file system, it gives you an isolated Linux shell---much like what ChromeOS has offered developers and enthusiasts for years.
+> The Terminal app operates by launching a Debian Linux environment within a virtual machine, powered by Android's Virtualization Framework (AVF). Rather than exposing the underlying Android file system, it gives you an isolated Linux shell—much like what ChromeOS has offered developers and enthusiasts for years.
 > [ikkaro.net](https://www.ikkaro.net/android-linux-terminal-features-setup/)
 
 To enable it, you have to setup Developer Mode (by repeatedly clicking the Build Number in the settings) and activate the Linux Development Environment in the settings, as described at [ikkaro.net](https://www.ikkaro.net/android-linux-terminal-features-setup/).
@@ -303,7 +303,7 @@ To enable it, you have to setup Developer Mode (by repeatedly clicking the Build
 But of course the app has limitations compared to Termux:
 > * **Slow startup times:** Booting the Terminal can take 10-20 seconds since it loads a full virtual machine (especially on mid-range hardware).
 > * **Limited file system access:** By default, you can only access your phone's Downloads directory (via `cd /mnt/shared`), not the entire Android file system. For privacy and security, other folders remain off-limits. \[...\]
-> * **Resource constraints:** The VM's allotted disk space is adjustable (from the Terminal app settings), but heavy use---like AI models or large database systems---can quickly fill storage.
+> * **Resource constraints:** The VM's allotted disk space is adjustable (from the Terminal app settings), but heavy use—like AI models or large database systems—can quickly fill storage.
 >
 > [ikkaro.net](https://www.ikkaro.net/android-linux-terminal-features-setup/)
 

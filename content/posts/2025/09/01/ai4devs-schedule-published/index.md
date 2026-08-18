@@ -18,7 +18,7 @@ frozen: false
 
 The wait is over---**AI4Devs Amsterdam has just published its official schedule**, and it's packed with talks that every developer working with (or curious about) AI will want to catch.
 
-From live coding sessions to hands-on workshops, from security insights to multi-agent architectures---the program is designed to keep things practical, technical, and deeply relevant.
+From live coding sessions to hands-on workshops, from security insights to multi-agent architectures—the program is designed to keep things practical, technical, and deeply relevant.
 
 Whether you're already building AI-powered systems or just starting to explore what's possible, this year's edition has something for you. Let's take a look at the highlights.
 
@@ -32,7 +32,7 @@ Whether you're already building AI-powered systems or just starting to explore w
 
 This year's schedule brings together sessions across **Python, Java, Data Science, and JavaScript** .  
 
-Whether you're coding in Python notebooks, building enterprise systems in Java, exploring AI-driven APIs with JavaScript, or analyzing data for real-world insights---you'll find something practical and inspiring.
+Whether you're coding in Python notebooks, building enterprise systems in Java, exploring AI-driven APIs with JavaScript, or analyzing data for real-world insights—you'll find something practical and inspiring.
 
 Here are some examples by technology:
 
@@ -63,7 +63,7 @@ Here's a quick snapshot of who's speaking and what they'll be covering:
 |           | [Prachi Jamdade](https://amsterdam.ai4devs.io/speakers/prachi-jamdade) (Gravitee)                  | [*Building API Endpoints as MCP Tools for AI Agents using CrewAI*](https://amsterdam.ai4devs.io/speakers/prachi-jamdade)                                       | ![Prachi Jamdade](prachi-jamdade-300x260.jpg)          |
 |           | [Nimo Beeren](https://amsterdam.ai4devs.io/speakers/nimo-beeren) (iO)                              | [*Building Effective Multi-Agent Applications*](https://amsterdam.ai4devs.io/speakers/nimo-beeren)                                                             | ![Nimo Beeren](nimo-beeren-300x260.jpeg)               |
 | **14:35** | [Brian Vermeer](https://amsterdam.ai4devs.io/speakers/brian-vermeer) (Snyk)                        | [*Breaching LLM-Powered Applications: Overcoming Security and Privacy Challenges*](https://amsterdam.ai4devs.io/speakers/brian-vermeer)                        | ![Brian Vermeer](brian-vermeer.jpeg)                   |
-|           | [Sven Peters](https://amsterdam.ai4devs.io/speakers/sven-peters) (Atlassian)                       | [*AI Changed the Rules for Teamwork---Are You Ready?*](https://amsterdam.ai4devs.io/speakers/sven-peters)                                                      | ![Sven Peters](sven_headshot-300x260.jpg)              |
+|           | [Sven Peters](https://amsterdam.ai4devs.io/speakers/sven-peters) (Atlassian)                       | [*AI Changed the Rules for Teamwork—Are You Ready?*](https://amsterdam.ai4devs.io/speakers/sven-peters)                                                      | ![Sven Peters](sven_headshot-300x260.jpg)              |
 |           | [Mary Grygleski](https://amsterdam.ai4devs.io/speakers/mary-grygleski) (AI Collective)             | [*Harnessing Event-Driven and Multi-Agent Architectures for Complex Workflows in Generative AI Systems*](https://amsterdam.ai4devs.io/speakers/mary-grygleski) | ![Mary Grygleski](mary-grygleski-300x260.jpg)          |
 | **15:50** | [Jonathan Ellis](https://amsterdam.ai4devs.io/speakers/jonathan-ellis) (Brokk)                     | [*From Cassandra to Brokk: Building AI-Native Platforms*](https://amsterdam.ai4devs.io/speakers/jonathan-ellis)                                                | ![Jonathan Ellis](jonathan-ellis-300x260.jpg)          |
 |           | [Soham Dasgupta](https://amsterdam.ai4devs.io/speakers/soham-dasgupta) (Microsoft)                 | [*AI Developer Odyssey: Navigating Use Cases, Models, and Technical Patterns*](https://amsterdam.ai4devs.io/speakers/soham-dasgupta)                           | ![Soham Dasgupta](soham-dasgupta-300x260.jpeg)         |
@@ -79,7 +79,7 @@ Here's a quick snapshot of who's speaking and what they'll be covering:
 * **Hands-on workshops**: Learn by doing, not just listening.
 * **Networking built-in**: Lunch and drinks make it easy to connect with peers.
 
-This is **not** a fluffy AI hype conference---it's a developer-first gathering focused on what you can actually build and ship.
+This is **not** a fluffy AI hype conference—it's a developer-first gathering focused on what you can actually build and ship.
 
 ## 🔗 Join Us
 

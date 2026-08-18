@@ -154,4 +154,4 @@ segment_display_fully_wired-1024x498.jpg
 
 Once again, the Raspberry Pi proves to be a real workhorse which can run Java and Quarkus to bring business-power applications to inexpensive but powerfull hardware.
 
-**Note:** Used with permission and thanks --- originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/).
+**Note:** Used with permission and thanks — originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/quarkus-qute-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2019-12-18-controlling-a-led-number-display-with-javafx-and-python-on-raspberry-pi/).

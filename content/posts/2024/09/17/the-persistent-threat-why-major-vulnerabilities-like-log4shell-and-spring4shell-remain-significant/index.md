@@ -21,7 +21,7 @@ frozen: false
 
 **As developers, we're constantly juggling features, fixes, and deadlines. Yet, a lurking issue has been surprisingly overlooked: the continued use of vulnerable Log4j and Spring Framework versions in many projects.**
 
-Despite the high-profile exposure of Log4Shell and Spring4Shell vulnerabilities, a shocking number of applications are still running on these ticking time bombs. This isn't just a minor oversight --- it's a major risk. We're builders at heart, but part of building is ensuring our structures are safe.
+Despite the high-profile exposure of Log4Shell and Spring4Shell vulnerabilities, a shocking number of applications are still running on these ticking time bombs. This isn't just a minor oversight — it's a major risk. We're builders at heart, but part of building is ensuring our structures are safe.
 
 ## The developer's dilemma
 

@@ -324,7 +324,7 @@ public class ProductionHouse {
 
 The disadvantage mentioned above can be critical for a highly accessed object in an application. To improve this, the scope of the synchronized block is reduced to affect only the first access. This, again, has some disadvantages.
 
-The example remains the same, the difference being in the reduced scope of synchronization within the getInstance() method --- and also that it affects only the first access and not subsequent accesses. You can \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/singleton_doublechecked.jar> "Download the Sample Code") here.
+The example remains the same, the difference being in the reduced scope of synchronization within the getInstance() method — and also that it affects only the first access and not subsequent accesses. You can \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/singleton_doublechecked.jar> "Download the Sample Code") here.
 
 ```java
 package com.sumsoft.design.patterns.singleton.doublechecked;
@@ -533,7 +533,7 @@ public class SystemFactory {
 
 When there can be various families of products (objects) that can be instantiated, but each family of these products needs to be created by a specific type of factory, we define a factory method in the base factory class. The concrete implementations of the base factory then override this method to produce concrete type of products, depending on the condition. \[Download the Sample Code Here\](<http://www.sumithpuri.me/coderanch/factory_method.jar> "Download the Sample Code Here").
 
-In the example, you can notice the presence of two abstract classes, Mobile (Product) and MobileStore (Creator). One family of concrete product implementations are NokiaASeries, NokiaBSeries, and NokiaCSeries --- to be created by the NokiaStore, which is the concrete implementation of the creator. In a similar fashion, another family of products, such as SonyASeries, SonyBSeries, and SonyCSeries are to be created by SonyStore, another concrete implementation of MobileStore. MobileStoreCentre is the main class to run this application. The createMobile() method is the abstract method (factory method) that is to be overridden by the creator implementations.
+In the example, you can notice the presence of two abstract classes, Mobile (Product) and MobileStore (Creator). One family of concrete product implementations are NokiaASeries, NokiaBSeries, and NokiaCSeries — to be created by the NokiaStore, which is the concrete implementation of the creator. In a similar fashion, another family of products, such as SonyASeries, SonyBSeries, and SonyCSeries are to be created by SonyStore, another concrete implementation of MobileStore. MobileStoreCentre is the main class to run this application. The createMobile() method is the abstract method (factory method) that is to be overridden by the creator implementations.
 
 ```java
 package com.sumsoft.design.patterns.factory.method;
@@ -667,7 +667,7 @@ public class MobileStoreCentre {
 
 The Abstract Factory defines a template or interface for the creation of similar types of objects or implementations. Usually, an Abstract Factory will encapsulate one or more factory methods within it for actually creating the product. \[Download the Sample Code\](<http://www.sumithpuri.me/coderanch/abstract_factory.jar> "Download the Sample Code").
 
-Taking the same example as above, MobileStoreFactory instantiates the concrete instance of the abstract factory (MobileStore) based upon the variable specified, either "Nokia" (NokiaStore) or "Sony"(SonyStore). The factory is then responsible for creating the objects of similar types based upon the choice --- such as "ASeries" or "BSeries" or "CSeries". The mobile is then assembled based upon this by the MobileStore. You may use MobileStoreCentre to run this example and understand the design pattern based on the output.
+Taking the same example as above, MobileStoreFactory instantiates the concrete instance of the abstract factory (MobileStore) based upon the variable specified, either "Nokia" (NokiaStore) or "Sony"(SonyStore). The factory is then responsible for creating the objects of similar types based upon the choice — such as "ASeries" or "BSeries" or "CSeries". The mobile is then assembled based upon this by the MobileStore. You may use MobileStoreCentre to run this example and understand the design pattern based on the output.
 
 ```java
 package com.sumsoft.design.patterns.factory.abstract_;

@@ -268,4 +268,4 @@ Potential next steps for JmFrX include more meaningful handling of tabular and c
 
 Your feedback on and contributions to JmFrX will be very welcomed!
 
-**Note:** Used with permission and thanks --- originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/introducing-jmfrx-a-bridge-from-jmx-to-jdk-flight-recorder/).
+**Note:** Used with permission and thanks — originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/introducing-jmfrx-a-bridge-from-jmx-to-jdk-flight-recorder/).

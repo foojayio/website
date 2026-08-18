@@ -13,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-Every Monday at 10 AM Eastern, [@javaevolved](https://x.com/javaevolved) now tweets a modern Java pattern --- automatically. No manual steps, no third-party services, no cron servers. Just a GitHub Actions workflow, a couple of JBang scripts, and the Twitter API.
+Every Monday at 10 AM Eastern, [@javaevolved](https://x.com/javaevolved) now tweets a modern Java pattern — automatically. No manual steps, no third-party services, no cron servers. Just a GitHub Actions workflow, a couple of JBang scripts, and the Twitter API.
 
 Here's how it works, and how you can do the same for your own project.
 
@@ -21,13 +21,13 @@ Here's how it works, and how you can do the same for your own project.
 
 [Java Evolved](https://javaevolved.github.io) is a static site with 113 code patterns showing the old way vs. the modern way to write Java. Each pattern has a title, summary, old/modern approach labels, JDK version, and a link to its detail page.
 
-I wanted to promote each pattern on Twitter --- one per week, in random order, cycling forever. The requirements:
+I wanted to promote each pattern on Twitter — one per week, in random order, cycling forever. The requirements:
 
-* **Fully automated** --- no manual tweeting
-* **Pre-drafted tweets** --- reviewable and editable before they go live
-* **Resumable** --- survives failures, picks up where it left off
-* **Auditable** --- git history shows what was posted and when
-* **Zero infrastructure** --- no servers, no databases, no paid services
+* **Fully automated** — no manual tweeting
+* **Pre-drafted tweets** — reviewable and editable before they go live
+* **Resumable** — survives failures, picks up where it left off
+* **Auditable** — git history shows what was posted and when
+* **Zero infrastructure** — no servers, no databases, no paid services
 
 ## The Architecture
 
@@ -51,9 +51,9 @@ Everything lives in the repository. State is tracked via committed files, not ex
 
 A JBang script that scans all content YAML files, shuffles them randomly, and produces three files:
 
-* **`social/queue.txt`** --- the posting order, one `category/slug` per line
-* **`social/tweets.yaml`** --- pre-drafted tweet text for each pattern
-* **`social/state.yaml`** --- a pointer tracking where we are in the queue
+* **`social/queue.txt`** — the posting order, one `category/slug` per line
+* **`social/tweets.yaml`** — pre-drafted tweet text for each pattern
+* **`social/state.yaml`** — a pointer tracking where we are in the queue
 
 The tweet template looks like this:
 
@@ -73,7 +73,7 @@ The generator also validates that every tweet fits within Twitter's 280-characte
 
 ### Handling New Patterns
 
-When you re-run the generator after adding new content files, it detects new patterns and appends them to the end of the existing queue --- preserving the current order and any manual tweet edits. Deleted or renamed patterns are automatically pruned.
+When you re-run the generator after adding new content files, it detects new patterns and appends them to the end of the existing queue — preserving the current order and any manual tweet edits. Deleted or renamed patterns are automatically pruned.
 
 Use `--reshuffle` to force a full reshuffle when the cycle is exhausted.
 
@@ -91,7 +91,7 @@ Another JBang script that:
 
 ### OAuth 1.0a in Java
 
-I initially planned to use a shell script with `curl` and `openssl` for OAuth signing. That turned out to be a bad idea --- percent-encoding, signature base strings, and nonce generation are error-prone in Bash.
+I initially planned to use a shell script with `curl` and `openssl` for OAuth signing. That turned out to be a bad idea — percent-encoding, signature base strings, and nonce generation are error-prone in Bash.
 
 Instead, the post script uses Java's built-in `java.net.http.HttpClient` and `javax.crypto.Mac` for HMAC-SHA1 signing. Here's the core of the OAuth signature:
 
@@ -193,16 +193,16 @@ That's essentially free for a perpetual social media presence.
 
 ## Built in a Single Copilot CLI Session
 
-This entire feature --- the queue generator, the post script, the GitHub Actions workflow, the tweet drafts, the documentation updates --- was built in a single interactive session with [GitHub Copilot CLI](https://githubnext.com/projects/copilot-cli). From planning to the first live tweet, everything happened in the terminal.
+This entire feature — the queue generator, the post script, the GitHub Actions workflow, the tweet drafts, the documentation updates — was built in a single interactive session with [GitHub Copilot CLI](https://githubnext.com/projects/copilot-cli). From planning to the first live tweet, everything happened in the terminal.
 
-The session included planning the architecture, getting a rubber-duck critique (which caught several issues --- like using shell for OAuth signing and putting state files where they'd trigger deploys), implementing all three components, testing locally with `--dry-run`, committing, pushing, and triggering the first real tweet.
+The session included planning the architecture, getting a rubber-duck critique (which caught several issues — like using shell for OAuth signing and putting state files where they'd trigger deploys), implementing all three components, testing locally with `--dry-run`, committing, pushing, and triggering the first real tweet.
 
 You can read the full session transcript here: [gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11](https://gist.github.com/brunoborges/40ef1b5e9b05de279dab64e443b96a11)
 
 ## What I'd Do Differently
 
-* **Add Bluesky support** --- the AT Protocol API is simpler than Twitter's OAuth 1.0a. The architecture already supports it; just add a second API call in the post script.
-* **Content hash tracking** --- if a pattern's title or summary changes, the pre-drafted tweet goes stale. A hash per entry would flag which drafts need regeneration.
+* **Add Bluesky support** — the AT Protocol API is simpler than Twitter's OAuth 1.0a. The architecture already supports it; just add a second API call in the post script.
+* **Content hash tracking** — if a pattern's title or summary changes, the pre-drafted tweet goes stale. A hash per entry would flag which drafts need regeneration.
 
 ## Try It Yourself
 

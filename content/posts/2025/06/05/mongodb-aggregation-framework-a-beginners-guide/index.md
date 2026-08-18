@@ -30,7 +30,7 @@ And often, delivering this processed data to the client is essential for the app
 
 While `.find()` is great for basic queries, it doesn't cover more advanced scenarios like transformations and complex data processing. That's where the MongoDB Aggregation Framework comes in.
 
-The MongoDB Aggregation Framework works like a pipeline---a series of stages where each step processes the data in some way. When we use the `aggregate()` method, we're building this sequence of operations.
+The MongoDB Aggregation Framework works like a pipeline—a series of stages where each step processes the data in some way. When we use the `aggregate()` method, we're building this sequence of operations.
 
 Before diving into MongoDB, here's a simple example of a pipeline in Java:
 
@@ -259,7 +259,7 @@ The result would look like this:
 
 ### $Sort
 
-Continuing with our example---what if we want to query all articles and [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) them by publication date, from newest to oldest?
+Continuing with our example—what if we want to query all articles and [sort](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sort/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=aggregation_framework_a_beginner_guide&utm_term=ricardo.mello) them by publication date, from newest to oldest?
 
 ```
 db.articles.aggregate([  

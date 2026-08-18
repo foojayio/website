@@ -55,7 +55,7 @@ SBOMs are a valuable add-on to any piece of software that should be provided wit
 
 ## Creating SBOMs with the Snyk CLI
 
-Snyk's command line interface (CLI) is an open source security tool that enables developers and DevOps professionals to find, fix, and monitor known vulnerabilities in open source dependencies. The Snyk CLI supports a broad range of programming languages and package managers --- including JavaScript (npm, yarn), Python (pip), Java (Maven), .NET (NuGet), Ruby (RubyGems), PHP (Composer), and more. The Snyk CLI can be used locally or in a pipeline for SAST, SCA, container, and IaC scanning on a software project.
+Snyk's command line interface (CLI) is an open source security tool that enables developers and DevOps professionals to find, fix, and monitor known vulnerabilities in open source dependencies. The Snyk CLI supports a broad range of programming languages and package managers — including JavaScript (npm, yarn), Python (pip), Java (Maven), .NET (NuGet), Ruby (RubyGems), PHP (Composer), and more. The Snyk CLI can be used locally or in a pipeline for SAST, SCA, container, and IaC scanning on a software project.
 
 And now, it can also create SBOMs for your projects.
 
@@ -107,7 +107,7 @@ The default depth for searching for manifest files is four, this is configurable
 snyk sbom --format=cyclonedx1.4+json --all-projects --detection-depth=3 --exclude=package.json --json-file-output=mysbom.json
 ```
 
-Please be aware that there is a large number of command line flags available for specific ecosystems to handle --- such as multi-module Maven files, configuration attributes in Gradle, Yarn workspaces, etc. For a full overview of all possible flags for Snyk SBOM, check our extensive [++documentation page++](https://docs.snyk.io/snyk-cli/commands/sbom).
+Please be aware that there is a large number of command line flags available for specific ecosystems to handle — such as multi-module Maven files, configuration attributes in Gradle, Yarn workspaces, etc. For a full overview of all possible flags for Snyk SBOM, check our extensive [++documentation page++](https://docs.snyk.io/snyk-cli/commands/sbom).
 
 ### Automating SBOM generation with the Snyk CLI
 

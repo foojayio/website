@@ -44,7 +44,7 @@ In this type of relationship, multiple records in Table A can relate to various 
 
 A relational database is based on rigid predefined schemas and emphasises relationships. These work well when the structure is strict and is not subjected to much change in the future. SQL or MySQL has been the backbone of relational databases for many years now.
 
-Whether you're organizing customer contacts or powering complex financial systems, SQL's straightforward yet powerful commands have made it a go-to tool for businesses worldwide---and it's been that way for decades. Relational databases thrive on flexibility, adapting to everything from small-scale apps to enterprise-level solutions. That's why industries of all kinds, from retail to healthcare, rely on them to store, manage, and make sense of their data. Think of SQL as the quiet workhorse behind the scenes, keeping everything running smoothly.
+Whether you're organizing customer contacts or powering complex financial systems, SQL's straightforward yet powerful commands have made it a go-to tool for businesses worldwide—and it's been that way for decades. Relational databases thrive on flexibility, adapting to everything from small-scale apps to enterprise-level solutions. That's why industries of all kinds, from retail to healthcare, rely on them to store, manage, and make sense of their data. Think of SQL as the quiet workhorse behind the scenes, keeping everything running smoothly.
 
 A document database, on the other hand, is meant for a more flexible structure. They work well with modern applications where a variety of data is stored and processed from the applications. A document database represents data as documents, typically using formats like JSON (JavaScript object notation) or BSON (Binary JSON). A document database is often referred to as a NoSQL database.
 
@@ -233,7 +233,7 @@ When you migrate the data from Postgres to MongoDB, the process involves more th
 
 ### Rethinking schema design
 
-In a relational database like Postgres, data is often normalised across multiple tables---in our case, between Authors, Books, and Issue Details. In MongoDB, we need to combine the related data into embedded documents. For example, instead of storing authors and books in separate tables, you can embed author information directly within a book document.
+In a relational database like Postgres, data is often normalised across multiple tables—in our case, between Authors, Books, and Issue Details. In MongoDB, we need to combine the related data into embedded documents. For example, instead of storing authors and books in separate tables, you can embed author information directly within a book document.
 
 ```
 @Document(collection = "books")

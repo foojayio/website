@@ -39,7 +39,7 @@ If you've contributed to Foojay and your name appears there one week: thank you.
 
 ## Meet The Team: Finally Up to Date
 
-The "Meet The Team" page was one of the most embarrassingly outdated pages on the site --- it referenced roles and people that had changed significantly. We've replaced it with a proper current overview.
+The "Meet The Team" page was one of the most embarrassingly outdated pages on the site — it referenced roles and people that had changed significantly. We've replaced it with a proper current overview.
 
 The [updated team page](https://foojay.io/meet-the-team/) now accurately describes the three people actually running Foojay day to day: **Geertjan Wielenga** , who founded Foojay and remains the driving force behind it; **Frank Delporte** , who handles reviewing, editing, contributing, and hosting the podcast; and **Dominika Tasarz-Sochacka**, who joined the team most recently and looks after community, editing, platform maintenance, and sponsorships.
 

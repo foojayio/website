@@ -139,7 +139,7 @@ Ideally, at this point, the code ran successfully, performing the search query t
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Sweet November Cast: \[Keanu Reeves, Charlize Theron, Jason Isaacs, Greg Germann\] Genres: \[Drama, Romance\] Score:6.011996746063232 Something's Gotta Give Cast: \[Jack Nicholson, Diane Keaton, Keanu Reeves, Frances McDormand\] Genres: \[Comedy, Drama, Romance\] Score:6.011996746063232 A Walk in the Clouds Cast: \[Keanu Reeves, Aitana Sènchez-Gijèn, Anthony Quinn, Giancarlo Giannini\] Genres: \[Drama, Romance\] Score:5.7239227294921875 The Lake House Cast: \[Keanu Reeves, Sandra Bullock, Christopher Plummer, Ebon Moss-Bachrach\] Genres: \[Drama, Fantasy, Romance\] Score:5.7239227294921875 |
 
-So there are four movies that match our criteria --- our initial mission has been accomplished.
+So there are four movies that match our criteria — our initial mission has been accomplished.
 
 ## Java $search building
 
@@ -208,7 +208,7 @@ So now we've built the aggregation pipeline. To show the results, we simply iter
 
 The results are ordered in descending score order. Score is a numeric factor based on the relationship between the query and each document. In this case, the only scoring component to our query was a phrase query of "keanu reeves". Curiously, our results have documents with different scores! Why is that? If we covered everything, this article would never end, so addressing the scoring differences is beyond this scope, but we'll explain a bit below for bonus and future material.
 
-You're now an Atlas Search-savvy Java developer --- well done! You're well on your way to enhancing your applications with the power of full-text search. With just the steps and code presented here, even without additional configuration and deeper search understanding, the power of search is available to you.
+You're now an Atlas Search-savvy Java developer — well done! You're well on your way to enhancing your applications with the power of full-text search. With just the steps and code presented here, even without additional configuration and deeper search understanding, the power of search is available to you.
 
 This is only the beginning. And it is important, as we refine our application to meet our users' demanding relevancy needs, to continue the Atlas Search learning journey.
 
@@ -229,7 +229,7 @@ Scoring takes into account the field length (the number of terms/words in the co
 
 Now do you see how the field length (number of terms) varies between the documents? If you're curious of the even gnarlier details of how Lucene performs the scoring for our query, uncomment the \`printScoreDetails\` code in our results output loop.
 
-Don't worry if this section is a bit too much to take in right now. Stay tuned --- we've got some scoring explanation content coming shortly.
+Don't worry if this section is a bit too much to take in right now. Stay tuned — we've got some scoring explanation content coming shortly.
 
 We could quick fix the ordering to at least not bias based on the absence of hyphenated actor names. Moving the queryClause into the \`filters\` section, rather than the \`must\` section, such that there would be no scoring clauses, only filtering ones, will leave all documents of equal ranking.
 

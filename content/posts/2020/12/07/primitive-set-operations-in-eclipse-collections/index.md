@@ -34,11 +34,11 @@ Union as the name indicates, it takes elements from two sets and combines them i
 
 {{< img src="foojay-prim-union.png" class="size-full alignleft" width="250" height="125" >}}
 
-Set A --- 1, 2, 3, 4.
+Set A — 1, 2, 3, 4.
 
-Set B --- 4, 5.
+Set B — 4, 5.
 
-Union --- 1, 2, 3, 4, 5.
+Union — 1, 2, 3, 4, 5.
 
 #### Union:  Design Considerations
 
@@ -127,11 +127,11 @@ Intersect takes two elements from two sets and only retains the common elements 
 
 ![Intersect - Green](foojay-prim-intersect.png)
 
-Set A --- 1, 2, 3, 4.
+Set A — 1, 2, 3, 4.
 
-Set B --- 3, 4, 5, 6.
+Set B — 3, 4, 5, 6.
 
-Intersect --- 3, 4.
+Intersect — 3, 4.
 
 #### Intersect: Design Considerations
 
@@ -176,9 +176,9 @@ setA.difference(setB)
 
 Difference takes elements that are unique to Set A only and not Set B.  
 ![Difference - Green](foojay-prim-difference.png)  
-Set A --- 1, 2, 3, 4.
+Set A — 1, 2, 3, 4.
 
-Set B --- 3, 4, 5, 6.
+Set B — 3, 4, 5, 6.
 
 Difference--- 1, 2.
 

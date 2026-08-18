@@ -269,7 +269,7 @@ Now, let's see which part of the network traffic belongs to which Java request:
 
 The summarized network capture output has the following format: packet capture number, time relative to first packet captured in seconds, found protocol, size, and protocol dependent output.
 
-The first conclusion is that---based on the network traffic timing (the second column)---it is clear that creating a connection takes an amount of time relative to the following statement execution that is significant. The connection creation time is the time difference between frame one (0.0) and thirteen (0.061), which is 0.61 seconds. That might look like a tiny amount of time, however the statement execution took: 0.090 (frame fifteen) - 0.090 (frame fourteen), which is 0.01 second.
+The first conclusion is that—based on the network traffic timing (the second column)---it is clear that creating a connection takes an amount of time relative to the following statement execution that is significant. The connection creation time is the time difference between frame one (0.0) and thirteen (0.061), which is 0.61 seconds. That might look like a tiny amount of time, however the statement execution took: 0.090 (frame fifteen) - 0.090 (frame fourteen), which is 0.01 second.
 
 I explicitly call out the execution that is performed in this test: the time it takes for the database to execute a statement is relative to the busyness of the database server and to the amount of work the database needs to perform to execute the statement. This means you cannot declare a fixed latency if you don't know the statement; you probably don't know how it's executed and therefore the amount of work the database needs to perform.
 

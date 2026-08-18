@@ -114,4 +114,4 @@ Runtime.getRuntime().availableProcessors()
 
 This is important because some libraries and applications may use `availableProcessors` to determine the size of the thread pools. So, if you allocated only `2` CPUs, but the JVM inaccurately sees `32` CPUs from the host, then the libraries may over-allocate the thread pool size, and causing your application to run more than the underlying system allows.
 
-**Note:** Used with permission and thanks --- originally written by Ray Tsang and published on [Spring Boot on GCP](https://spring-gcp.saturnism.me/deployment/docker/container-awareness).
+**Note:** Used with permission and thanks — originally written by Ray Tsang and published on [Spring Boot on GCP](https://spring-gcp.saturnism.me/deployment/docker/container-awareness).

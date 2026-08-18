@@ -96,7 +96,7 @@ Since OpenAI embeddings are optimized for using the dot product algorithm, that 
 
 ## Create a Spring application
 
-We are going to create our application using [Spring Initializr](https://start.spring.io/). Here, we need to set our project to Maven, our language to Java, and our Spring Boot version to 3.4.2 (most recent stable release as of writing). We'll also set our app name---mine is frauddetector---and for packaging, we are going to make a jar, and Java version 21.
+We are going to create our application using [Spring Initializr](https://start.spring.io/). Here, we need to set our project to Maven, our language to Java, and our Spring Boot version to 3.4.2 (most recent stable release as of writing). We'll also set our app name—mine is frauddetector—and for packaging, we are going to make a jar, and Java version 21.
 
 We will need a couple of packages too.
 
@@ -371,7 +371,7 @@ This allows us to establish a baseline for their spending behavior. If a new tra
     }
 ```
 
-We'll also add the getUnfrequentCategory() method, to pick a category they don't usually spend money on---which could be a red flag.
+We'll also add the getUnfrequentCategory() method, to pick a category they don't usually spend money on—which could be a red flag.
 
 ```
    public Category getUnfrequentCategory() {  
@@ -429,7 +429,7 @@ This method helps simulate a realistic fraud scenario, where someone might steal
 
 ### **Customer seeding**
 
-Before we can generate transactions, we need some customers in our database. These aren't just random users---we're giving them specific spending habits, preferred merchants, and common transaction patterns. This will help us create realistic data for fraud detection. Create a service package and add a CustomerSeeder class. Copy the following code into it, then we'll break down what is happening.
+Before we can generate transactions, we need some customers in our database. These aren't just random users—we're giving them specific spending habits, preferred merchants, and common transaction patterns. This will help us create realistic data for fraud detection. Create a service package and add a CustomerSeeder class. Copy the following code into it, then we'll break down what is happening.
 
 ```
 package com.mongodb.frauddetector.service;  
@@ -1326,7 +1326,7 @@ To reduce latency and avoid excessive document transfers between the application
   * Transactions with a high fraud score are sent to MongoDB Vector Search.
   * Others skip vector search and are stored directly.
 
-When it comes to your application, it is likely going to be a hybrid approach. Each application will have its own considerations, needs, and limitations. In any case, a hybrid approach could work---using triggers to flag transactions and the application for deeper fraud analysis.
+When it comes to your application, it is likely going to be a hybrid approach. Each application will have its own considerations, needs, and limitations. In any case, a hybrid approach could work—using triggers to flag transactions and the application for deeper fraud analysis.
 
 ## Run our application
 

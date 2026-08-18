@@ -82,7 +82,7 @@ Micronaut is similar to Spring Boot in that it has a `public static void main()`
 
 #### Run Quarkus Apps in IntelliJ IDEA
 
-Quarkus is a bit different---it has no `main()` method. You have to run the `quarkus:dev` Maven goal to start the app. The good news is you can create a run (or debug) configuration from this by right-clicking on the goal in the Maven tool window and selecting the second option.
+Quarkus is a bit different—it has no `main()` method. You have to run the `quarkus:dev` Maven goal to start the app. The good news is you can create a run (or debug) configuration from this by right-clicking on the goal in the Maven tool window and selecting the second option.
 
 ![](9-quarkus-run.png "Create a Quarkus Run Configuration")
 
@@ -163,7 +163,7 @@ Below are some of the IntelliJ IDEA keyboard shortcuts I use daily.
 You can also use ⌘ + Shift + A to pop an actions dialog and search for commands. Heck, you can even create your own shortcuts!  
 > Assign shortcuts to frequently used actions, menu items or features, if they don't already have one. Use Project Settings -\> Keymap, or Find Action -\> Alt+Enter. [#IntelliJTopShortcut](https://twitter.com/hashtag/IntelliJTopShortcut?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/uv8Joj2fHT](https://t.co/uv8Joj2fHT)
 >
-> --- JetBrains IntelliJ IDEA (@intellijidea) [October 20, 2020](https://twitter.com/intellijidea/status/1318461975844724736?ref_src=twsrc%5Etfw)
+> — JetBrains IntelliJ IDEA (@intellijidea) [October 20, 2020](https://twitter.com/intellijidea/status/1318461975844724736?ref_src=twsrc%5Etfw)
 
 ### IDEA's Command-Line Launcher
 

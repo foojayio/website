@@ -27,7 +27,7 @@ frozen: false
 
 BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a centralized agent registry, and deep MCP observability along with a suite of analytics improvements and a critical bug fix. Let's dig in. 🎉
 
-🖼️ Image Generation --- aiImage()  
+🖼️ Image Generation — aiImage()  
 
 You can now generate images directly from BoxLang using any provider that supports text-to-image generation. The aiImage() BIF follows the same fluent, chainable philosophy as the rest of bx-ai then act on the result with expressive method calls.
 
@@ -66,9 +66,9 @@ agent = aiAgent( tools: [ "generateImage@bxai" ] )
 
 📚 **[Image Generation Docs](https://ai.ortusbooks.com/main-components/image-generation "Image Generation Docs")**
 
-🔍 Web Search --- aiWebSearch() \& aiWebSearchAsync()  
+🔍 Web Search — aiWebSearch() \& aiWebSearchAsync()  
 
-BoxLang AI now ships a unified web search system with provider abstraction and normalized results. Every provider returns the same fields --- title, url, snippet, publishedDate, domain, score, thumbnail, language --- so you can swap providers without touching your code.
+BoxLang AI now ships a unified web search system with provider abstraction and normalized results. Every provider returns the same fields — title, url, snippet, publishedDate, domain, score, thumbnail, language — so you can swap providers without touching your code.
 
 ```java
 // Synchronous search
@@ -83,7 +83,7 @@ Supported providers:
 
 | Provider |                      Notes                      |
 |----------|-------------------------------------------------|
-| http     | URL fetching \& parsing --- no API key required |
+| http     | URL fetching \& parsing — no API key required |
 | brave    | Privacy-focused; country/language filters       |
 | google   | Google Custom Search                            |
 | tavily   | Retrieval-focused, great for AI agents          |
@@ -104,7 +104,7 @@ response = agent.run( "Find and summarize recent BoxLang AI release highlights" 
 
 🎤 Fluent Builder API for Audio BIFs  
 
-aiSpeak(), aiTranscribe(), and aiTranslate() now support a full fluent builder API. Call any of them with no arguments to get the request object back, then chain your configuration before executing. The traditional positional-argument syntax continues to work exactly as before --- the fluent builder is purely additive.
+aiSpeak(), aiTranscribe(), and aiTranslate() now support a full fluent builder API. Call any of them with no arguments to get the request object back, then chain your configuration before executing. The traditional positional-argument syntax continues to work exactly as before — the fluent builder is purely additive.
 
 aiSpeak()
 
@@ -172,9 +172,9 @@ english = aiTranslate()
 
 📚 **[Audio Docs](https://ai.ortusbooks.com/main-components/audio "Audio Docs")**
 
-🤖 Agent Registry --- aiAgentRegistry()  
+🤖 Agent Registry — aiAgentRegistry()  
 
-3.2.0 introduces the AIAgentRegistry --- a global singleton that gives you centralized discoverability, observability, and lifecycle management for all agents running in your BoxLang application.
+3.2.0 introduces the AIAgentRegistry — a global singleton that gives you centralized discoverability, observability, and lifecycle management for all agents running in your BoxLang application.
 
 ```java
 // Auto-register at creation time
@@ -205,7 +205,7 @@ aiAgentRegistry().unregisterByModule( "my-app" )
 
 Module Authors: First-Class Agent \& Tool Registration 🎯  
 
-This is a big deal for the BoxLang ecosystem. Developers building BoxLang modules can now ship agents and tools that auto-register themselves globally when the module loads --- no manual wiring by the application developer required.
+This is a big deal for the BoxLang ecosystem. Developers building BoxLang modules can now ship agents and tools that auto-register themselves globally when the module loads — no manual wiring by the application developer required.
 
 Define your aiAgent() instances with register: true and a module namespace  
 
@@ -213,7 +213,7 @@ Define your tools, scan them via aiToolRegistry().scan( new MyTools(), "my-modul
 
 Application developers can consume your agents and tools by name, from any part of their app, the moment your module is installed  
 
-This makes bx-ai a genuine platform for building composable, discoverable AI ecosystems --- publish a module to ForgeBox, and your agents and tools show up ready to use. 🚀
+This makes bx-ai a genuine platform for building composable, discoverable AI ecosystems — publish a module to ForgeBox, and your agents and tools show up ready to use. 🚀
 
 Two new interception points fire on registry changes: onAIAgentRegistryRegister and onAIAgentRegistryUnregister.
 
@@ -234,9 +234,9 @@ if ( server.isPaused() ) {
 server.resume()
 ```
 
-pause() --- fires onMCPServerPause; all non-ping requests receive error code -32005  
+pause() — fires onMCPServerPause; all non-ping requests receive error code -32005  
 
-resume() --- fires onMCPServerResume; normal handling restored  
+resume() — fires onMCPServerResume; normal handling restored  
 
 getSummary() now includes a paused boolean  
 
@@ -248,21 +248,21 @@ MCP server monitoring gets a major overhaul in 3.2.0:
 
 Thread-safe counters using named locks across all stat operations  
 
-Security failure tracking --- auth failures, API key rejections, body-size violations all get dedicated counters  
+Security failure tracking — auth failures, API key rejections, body-size violations all get dedicated counters  
 
-Per-tool error tracking --- byTool\[name\].errors with errors.byTool roll-up  
+Per-tool error tracking — byTool\[name\].errors with errors.byTool roll-up  
 
-Active concurrent request counter --- activeRequests increments and decrements in real time  
+Active concurrent request counter — activeRequests increments and decrements in real time  
 
-Requests-per-minute rate --- exposed in getSummary()  
+Requests-per-minute rate — exposed in getSummary()  
 
-X-Request-ID correlation --- request IDs echoed in response headers and event payloads  
+X-Request-ID correlation — request IDs echoed in response headers and event payloads  
 
-Paused-request stats --- rejected requests tracked when server is paused  
+Paused-request stats — rejected requests tracked when server is paused  
 
 onMCPError now fires for METHOD_NOT_FOUND  
 
-Client Stats --- MCPClient  
+Client Stats — MCPClient  
 
 MCPClient gains full internal usage and performance tracking:
 
@@ -284,7 +284,7 @@ Three new interception points cover the full client lifecycle: onMCPClientReques
 
 🔧 Type-Aware Tool Argument Support  
 
-Tool schemas in bx-ai are now generated directly from callable parameter metadata, so LLMs finally receive accurate JSON Schema types for every argument instead of a flat bag of strings. ClosureTool.getArgumentsSchema() maps BoxLang types naturally --- numeric, integer, float, and double become "number", boolean becomes "boolean", array becomes "array" with "items": {}, and struct becomes "object" --- meaning LLMs can send native JSON values for non-string arguments and tools behave exactly as their signatures declare. On the output side, BaseTool.invoke() continues to serialize results consistently for provider compatibility, converting simple values via toString() and complex values via JSON serialization, keeping the tool contract clean in both directions. 🎯
+Tool schemas in bx-ai are now generated directly from callable parameter metadata, so LLMs finally receive accurate JSON Schema types for every argument instead of a flat bag of strings. ClosureTool.getArgumentsSchema() maps BoxLang types naturally — numeric, integer, float, and double become "number", boolean becomes "boolean", array becomes "array" with "items": {}, and struct becomes "object" — meaning LLMs can send native JSON values for non-string arguments and tools behave exactly as their signatures declare. On the output side, BaseTool.invoke() continues to serialize results consistently for provider compatibility, converting simple values via toString() and complex values via JSON serialization, keeping the tool contract clean in both directions. 🎯
 
 ```java
 // Tool with numeric and boolean arguments
@@ -334,7 +334,7 @@ agent = aiAgent(
 )
 ```
 
-🐛 Bug Fix --- ClosureTool.doInvoke() JSON Struct Handling  
+🐛 Bug Fix — ClosureTool.doInvoke() JSON Struct Handling  
 
 MCP clients that send JSON fields as real objects or arrays (rather than pre-stringified JSON) no longer cause "Can't cast Struct to a string" errors. doInvoke() now inspects declared parameters and calls jsonSerialize() on any non-simple value whose declared type is string. Silent, automatic, no code changes required.
 

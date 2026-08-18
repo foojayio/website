@@ -54,7 +54,7 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
+In this tutorial, we'll use aJava SE project—without any heavyweight frameworks—to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
 ## Step 1: Create the project structure
 
@@ -757,7 +757,7 @@ public class HotelRoomSteps {
 
 Behavior-driven development (BDD) encourages us to look beyond code and concentrate on a shared understanding among stakeholders. By integrating Jakarta Data, Eclipse JNoSQL, and Cucumber, we have learned how to articulate business expectations through executable scenarios. These scenarios are written in plain language and linked to actual database operations. This approach not only guarantees technical accuracy but also fosters alignment among developers, testers, and domain experts. Furthermore, it links more with another methodology that I enjoyed that is about[domain driven design](https://bpbonline.com/products/domain-driven-design-with-java), which I've written a new book about.
 
-In this tutorial, you discovered how to model a hotel domain, store and query data in MongoDB, and connect behavior specifications with concrete database assertions---all without relying on complex frameworks. The outcome is a clean, testable, and business-oriented foundation for your application.
+In this tutorial, you discovered how to model a hotel domain, store and query data in MongoDB, and connect behavior specifications with concrete database assertions—all without relying on complex frameworks. The outcome is a clean, testable, and business-oriented foundation for your application.
 
 BDD reminds us that software development is not merely about meeting requirements; it is about clearly communicating intent. When business language is incorporated into our code and tests, we move closer to the ultimate goal of software engineering: creating systems that operate exactly as users expect.
 

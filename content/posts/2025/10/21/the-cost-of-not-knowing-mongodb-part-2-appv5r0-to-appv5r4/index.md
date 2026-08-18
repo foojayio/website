@@ -31,7 +31,7 @@ As these are our first implementations using the Bucket Pattern, let's make it a
 
 For appV5R0, each document groups the events by month and user. Every document will have a field of type array called items to which each event document will be pushed. The event document pushed to the array will have its status field names shorthanded to its first letter, the same way we did in appV3 and appV4, and the date to which the event is referent.
 
-The _id field will have a logic similar to the one used in appV4, with the values of key and date concatenated and stored as hexadecimal/binary information. The difference is the date value---instead of being composed by year, month, and day (YYYYMMDD)---will only have year and month (YYYYMM), as we are bucketing the data by month.
+The _id field will have a logic similar to the one used in appV4, with the values of key and date concatenated and stored as hexadecimal/binary information. The difference is the date value—instead of being composed by year, month, and day (YYYYMMDD)---will only have year and month (YYYYMM), as we are bucketing the data by month.
 
 For appV5R1, we have almost the same implementation as appV5R0, with the difference being that we'll bucket the events by quarter, and the date value used to generate the _id field will be composed by year and quarter (YYYYQQ) instead of year and month (YYYYMM).
 
@@ -339,7 +339,7 @@ For appV5R4, we will double down on the Computed Pattern and pre-compute the sta
 
 ## Application Version 5 Revision 4 (appV5R4): Doubling down on the Computed Pattern
 
-As presented in the issues and improvements of appV5R3, for this revision, we'll double down on the Computed Pattern even though we have good evidence that it won't provide a better performance---but, you know, for science.
+As presented in the issues and improvements of appV5R3, for this revision, we'll double down on the Computed Pattern even though we have good evidence that it won't provide a better performance—but, you know, for science.
 
 We'll also use the Computed Pattern to pre-compute the status totals for each document. As each document stores the events per quarter and user, our application will have on each document the status totals per quarter and user. These pre-computed totals will be stored in a field called totals.
 
@@ -438,7 +438,7 @@ Here is a quick review of the improvements made between the application version:
 * appV4 to appV5R0/appV5R1: This is the simplest possible implementation of Bucket Pattern, grouping the events by month for appV5R0 and by quarter for appV5R1.
 * appV5R1 to appV5R2: Instead of just pushing the event document to the items array, we started to pre-compute the status totals by day, using the Computed Pattern.
 * appV5R2 to appV5R3: This improved the aggregation pipeline for Get Reports, preventing a costly intermediary stage. It didn't provide performance improvements because our MongoDB instance is currently disk-limited.
-* appV5R3 to appV5R4: We doubled down on Computed Pattern to pre-calculate the totals field even though we knew the performance wouldn't be better---but, just for science.
+* appV5R3 to appV5R4: We doubled down on Computed Pattern to pre-calculate the totals field even though we knew the performance wouldn't be better—but, just for science.
 
 We had noticeable improvements in the version presented in this second part of the series when compared to the versions from the first part of the series. appV0 to appV4. appV5R3 showed the best performance of them all, but it still can't reach all the desired rates. For the third and final version of this series, our application versions will be developed around the Dynamic Schema Pattern, which will reduce the overall document size and help with the current disk limitation.
 

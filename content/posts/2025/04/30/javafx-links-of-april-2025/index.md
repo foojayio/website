@@ -93,7 +93,7 @@ Here is the overview of the JavaFX LinksOfTheMonth of April 2025. You can find t
 
 ## Miscellaneous
 
-* Very short but [impressive video by **PIE SPACE**](https://x.com/PIE_SPACE_12/status/1907782342326079866): "*Check out my custom GUI made using Processing and JavaFX---specially designed to visualize real-time data from the Agni Flight Computer V2. You can find the full flight computer design along with the source code [on my GitHub page](https://github.com/PIEspace).*"
+* Very short but [impressive video by **PIE SPACE**](https://x.com/PIE_SPACE_12/status/1907782342326079866): "*Check out my custom GUI made using Processing and JavaFX—specially designed to visualize real-time data from the Agni Flight Computer V2. You can find the full flight computer design along with the source code [on my GitHub page](https://github.com/PIEspace).*"
 * [**Catherine Edelveis** asks your advise](https://bsky.app/profile/cat-edelveis.bsky.social/post/3lmc6dschus2f): "*Friends, does anyone know what is the best way of adding image urls to JavaFX CSS file?*"
 
 ## JFX Central

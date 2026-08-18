@@ -434,4 +434,4 @@ If you'd like to experiment with Java Flight Recorder and JDK Mission Control ba
 
 *Many thanks to Mario Torre and Jie Kang for reviewing an early draft of this post.*
 
-**Note:** Used with permission and thanks --- originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/rest-api-monitoring-with-custom-jdk-flight-recorder-events/).
+**Note:** Used with permission and thanks — originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/rest-api-monitoring-with-custom-jdk-flight-recorder-events/).

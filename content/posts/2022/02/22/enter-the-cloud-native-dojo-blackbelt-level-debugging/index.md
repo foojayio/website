@@ -19,7 +19,7 @@ frozen: false
 
 Debugging is often viewed as an art form or a craft. This is true for most engineering-related troubleshooting processes (e.g., art of motorcycle maintenance). We're usually indoctrinated into the basic moves by a senior developer and are then thrown into the proverbial pool. As a result, even senior engineers sometimes have gaps in their debugging skills. There are very few university courses or books on the subject, so it's really hard to blame them.
 
-In his book, "[Why Programs Fail --- A Guide to Systemic Debugging](https://www.amazon.com/Why-Programs-Fail-Systematic-Debugging/dp/0123745152)", Andreas Zeller told a story from his youth working at a computer store. A customer walked into the store with a new Commodore 64 computer. For context: The computers back then booted directly to a basic interpreter; basic would accept line numbers as the first argument. He tried inputting this valid basic line:
+In his book, "[Why Programs Fail — A Guide to Systemic Debugging](https://www.amazon.com/Why-Programs-Fail-Systematic-Debugging/dp/0123745152)", Andreas Zeller told a story from his youth working at a computer store. A customer walked into the store with a new Commodore 64 computer. For context: The computers back then booted directly to a basic interpreter; basic would accept line numbers as the first argument. He tried inputting this valid basic line:
 
 ```java
 10 print “Hello World”

@@ -50,4 +50,4 @@ Professionals can also make use of these tools to explore new language changes o
 
 We will explore this in more detail in the next part of this series.
 
-**Note:** Used with permission and thanks --- [originally written and published by Mohamed Taman](https://www.infoq.com/articles/single-file-execution-java11/).
+**Note:** Used with permission and thanks — [originally written and published by Mohamed Taman](https://www.infoq.com/articles/single-file-execution-java11/).

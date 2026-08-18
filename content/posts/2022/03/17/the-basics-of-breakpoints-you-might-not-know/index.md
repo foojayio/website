@@ -27,7 +27,7 @@ In episodes 4 and 5 of "140 Second Ducklings", I got deeper into the more advanc
 >
 > You can group breakpoints together which is very helpful for thorny bugs![#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/KfgrAb9qec](https://t.co/KfgrAb9qec)
 >
-> --- Shai Almog (@debugagent) [March 8, 2022](https://twitter.com/debugagent/status/1501229232994676739?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [March 8, 2022](https://twitter.com/debugagent/status/1501229232994676739?ref_src=twsrc%5Etfw)
 
 ## Types of Breakpoints
 

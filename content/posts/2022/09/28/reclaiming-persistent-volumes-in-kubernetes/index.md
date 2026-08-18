@@ -254,9 +254,9 @@ Note that when using this method to rename an STS, there will be downtime. Zero-
 
 1. [YouTube: Reassigning a Persistent Volume in Kubernetes](https://www.youtube.com/watch?v=8CSTdrPsOu4)
 2. [Azure Kubernetes Service](https://azure.microsoft.com/en-gb/services/kubernetes-service/)
-3. [Concepts --- Storage in Azure Kubernetes Services (AKS)](https://docs.microsoft.com/en-us/azure/aks/concepts-storage#storage-classes)
-4. [GitHub: jq --- a lightweight and flexible command-line JSON processor](https://stedolan.github.io/jq/)
-5. [GitHub: yq --- a portable command-line YAML processor](https://github.com/mikefarah/yq)
+3. [Concepts — Storage in Azure Kubernetes Services (AKS)](https://docs.microsoft.com/en-us/azure/aks/concepts-storage#storage-classes)
+4. [GitHub: jq — a lightweight and flexible command-line JSON processor](https://stedolan.github.io/jq/)
+5. [GitHub: yq — a portable command-line YAML processor](https://github.com/mikefarah/yq)
 6. [Using StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 7. [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 8. [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)

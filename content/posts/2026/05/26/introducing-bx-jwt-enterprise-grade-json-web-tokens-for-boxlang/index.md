@@ -23,16 +23,16 @@ frozen: false
 
 ![](bx-jwt-700x467.jpg)
 
-JWT authentication is everywhere. But rolling it correctly --- with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and zero security footguns --- is anything but trivial. Today, we're shipping **bx-jwt**, a production-ready JWT/JWE module for BoxLang that handles all of it out of the box, so you can focus on building, not fighting cryptography.
+JWT authentication is everywhere. But rolling it correctly — with proper algorithm enforcement, key management, clock skew handling, JWE encryption, and zero security footguns — is anything but trivial. Today, we're shipping **bx-jwt**, a production-ready JWT/JWE module for BoxLang that handles all of it out of the box, so you can focus on building, not fighting cryptography.
 
 **bx-jwt** is part of the [BoxLang+ and BoxLang++ subscription tiers](https://www.boxlang.io/plans "BoxLang+ and BoxLang++ subscription tiers") --- our enterprise-grade module collection built for teams that take security seriously.
 
 **bx-jwt** is a full implementation of the JWT/JWE specification stack for BoxLang:
 
-* **JWS** (JSON Web Signature) --- HMAC, RSA, and Elliptic Curve signing
-* **JWE** (JSON Web Encryption) --- RSA and symmetric encryption
-* **RFC 7518** --- JSON Web Algorithms
-* **RFC 7519** --- JSON Web Token
+* **JWS** (JSON Web Signature) — HMAC, RSA, and Elliptic Curve signing
+* **JWE** (JSON Web Encryption) — RSA and symmetric encryption
+* **RFC 7518** — JSON Web Algorithms
+* **RFC 7519** — JSON Web Token
 
 It ships with two APIs that serve different tastes: a **fluent builder** for expressive, chainable token construction, and a suite of **BIF functions** for direct, functional-style usage. Both share the same engine, key registry, and security model.
 
@@ -60,7 +60,7 @@ For teams that prefer a direct, functional style, all operations are available a
 |          BIF           |                             Purpose                              |
 |------------------------|------------------------------------------------------------------|
 | `jwtCreate()`          | Sign a payload struct into a compact JWS token                   |
-| `jwtVerify()`          | Verify signature and validate claims --- throws on failure       |
+| `jwtVerify()`          | Verify signature and validate claims — throws on failure       |
 | `jwtValidate()`        | Like `jwtVerify()` but returns `true`/`false`                    |
 | `jwtDecode()`          | Inspect header/payload without signature verification            |
 | `jwtRefresh()`         | Re-issue a token with fresh `iat`, `jti`, and optional new `exp` |
@@ -88,7 +88,7 @@ payload = jwtVerify( token, keys.publicKey, "RS256" );
 
 ### JWE Encryption
 
-Sensitive payloads --- PII, PHI, internal claims that must stay opaque --- belong in a JWE, not a JWS. bx-jwt handles both:
+Sensitive payloads — PII, PHI, internal claims that must stay opaque — belong in a JWE, not a JWS. bx-jwt handles both:
 
 ```java
 token   = jwtEncrypt(
@@ -99,7 +99,7 @@ token   = jwtEncrypt(
 payload = jwtDecrypt( token, secret32bytes, { keyAlgorithm: "dir", encAlgorithm: "A256GCM" } );
 ```
 
-Or nest them --- sign first, encrypt the signed token --- for the full sign-then-encrypt pattern:
+Or nest them — sign first, encrypt the signed token — for the full sign-then-encrypt pattern:
 
 ```java
 // Inner signed JWT
@@ -160,7 +160,7 @@ jwtService = getBoxContext().getRuntime().getGlobalService( "JWTService" );
 jwtService.registerKey( "session-key", { algorithm: "HS256", secret: generateSecureKey() } );
 ```
 
-`bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** --- they cannot be turned off:
+`bx-jwt` is built with the attack surface in mind. Security properties are **unconditional** — they cannot be turned off:
 
 ### `alg:none` Rejection
 
@@ -255,7 +255,7 @@ function verifyWithKeyRotation( token ) {
 |      Algorithm      |      Type      |                     Notes                     |
 |---------------------|----------------|-----------------------------------------------|
 | HS256, HS384, HS512 | HMAC           | Symmetric                                     |
-| RS256, RS384, RS512 | RSA            | Asymmetric --- private signs, public verifies |
+| RS256, RS384, RS512 | RSA            | Asymmetric — private signs, public verifies |
 | ES256, ES384, ES512 | Elliptic Curve | Smaller keys than RSA, equivalent security    |
 
 ### Encryption (JWE)
@@ -275,7 +275,7 @@ install-bx-module bx-jwt
 
 **bx-jwt requires a BoxLang+ or BoxLang++ subscription. 🔑**
 
-This module ships as part of our enterprise module collection --- a growing library of production-ready, security-focused, professionally maintained modules available exclusively to BoxLang+ subscribers.
+This module ships as part of our enterprise module collection — a growing library of production-ready, security-focused, professionally maintained modules available exclusively to BoxLang+ subscribers.
 
 bx-jwt is one of many enterprise modules available under BoxLang+/++/Starter. When you subscribe, you get:
 

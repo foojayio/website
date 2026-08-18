@@ -198,7 +198,7 @@ To prevent this, Kubernetes gives you control over where pods are scheduled usin
 
 ### Why this matters for MongoDB
 
-MongoDB replica sets [rely on quorum](https://www.mongodb.com/docs/manual/core/replica-set-elections/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly) to function. If you lose too many members due to a node or zone outage, your replica set may become read-only or fully unavailable. Even if data is safe on disk, your application will experience downtime. Kubernetes won't fix that automatically---you need to tell it how to schedule smarter.
+MongoDB replica sets [rely on quorum](https://www.mongodb.com/docs/manual/core/replica-set-elections/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly) to function. If you lose too many members due to a node or zone outage, your replica set may become read-only or fully unavailable. Even if data is safe on disk, your application will experience downtime. Kubernetes won't fix that automatically—you need to tell it how to schedule smarter.
 
 ### Use node affinity and pod anti-affinity
 
@@ -284,7 +284,7 @@ env:
   value: "20"
 ```
 
-This setting should be adjusted based on your operational needs and the available compute resources in your Kubernetes cluster. The more concurrent threads the Operator runs, the more CPU and memory it will require---and the more load it will place on the Kubernetes API server.
+This setting should be adjusted based on your operational needs and the available compute resources in your Kubernetes cluster. The more concurrent threads the Operator runs, the more CPU and memory it will require—and the more load it will place on the Kubernetes API server.
 
 ### Monitor API load and resource usage closely
 

@@ -20,20 +20,20 @@ frozen: false
 
 ## Deep Dive into the Model Context Protocol
 
-***Ever wondered how AI assistants like Claude actually communicate with external tools and services? While most tutorials focus on using pre-built SDKs and frameworks, this article takes a different approach---we'll dissect a production MCP server built from scratch using only Java's standard libraries and raw STDIO communication.***
+***Ever wondered how AI assistants like Claude actually communicate with external tools and services? While most tutorials focus on using pre-built SDKs and frameworks, this article takes a different approach—we'll dissect a production MCP server built from scratch using only Java's standard libraries and raw STDIO communication.***
 
 ***By stripping away all the abstractions and implementing the Model Context Protocol directly, we'll uncover the surprisingly elegant mechanics that enable AI systems to discover, understand, and execute tools.***
 
 ***Whether you're building AI integrations, debugging mysterious protocol errors, or simply curious about what really happens when an AI "uses a tool," this deep dive will transform JSON-RPC messages flowing through stdin/stdout from abstract concepts into concrete, debuggable reality.***
 
-***No frameworks, no magic---just the protocol in its purest form.***
+***No frameworks, no magic—just the protocol in its purest form.***
 > **Want to build this yourself?** This article is based on code from the [Agent MCP Workshop](https://github.com/David-Parry/agent-mcp-workshop), an instructor-led workshop that guides you through building a complete MCP server from scratch. The workshop includes hands-on exercises, detailed explanations, and practical examples that complement the concepts discussed in this article.
 
 ## Understanding MCP Through Raw STDIO Communication
 
 The Model Context Protocol (MCP) represents a paradigm shift in how AI systems interact with external tools and data sources. This article dives deep into the protocol's STDIO-based communication layer, examining a real-world Java implementation built without frameworks to better understand how the protocol and communication actually work at the fundamental level.
 
-By implementing MCP from scratch using only standard Java libraries, we gain invaluable insights into the protocol's inner workings---insights often hidden by higher-level abstractions and frameworks. This bare-metal approach reveals the elegant simplicity underlying MCP's powerful capabilities.
+By implementing MCP from scratch using only standard Java libraries, we gain invaluable insights into the protocol's inner workings—insights often hidden by higher-level abstractions and frameworks. This bare-metal approach reveals the elegant simplicity underlying MCP's powerful capabilities.
 
 ## Why STDIO? The Power of Universal Communication
 
@@ -44,7 +44,7 @@ Before diving into the implementation, it's crucial to understand why MCP chose 
 * **Simplicity**: No network configuration, firewall rules, or authentication complexity
 * **Debugging ease**: Messages can be logged, inspected, and replayed
 
-This implementation demonstrates these principles by building everything from scratch---no MCP SDK, no framework dependencies, just pure Java interacting with STDIO streams.
+This implementation demonstrates these principles by building everything from scratch—no MCP SDK, no framework dependencies, just pure Java interacting with STDIO streams.
 
 At the heart of any MCP implementation lies a robust transport layer. The Java implementation demonstrates a clean separation of concerns through its I/O handler architecture:
 
@@ -105,7 +105,7 @@ public void emit(Object message) {
 }
 ```
 
-The message goes directly to stdout as a single line of JSON. No framing, no length prefixes, no binary protocols---just newline-delimited JSON that any tool can read and debug.
+The message goes directly to stdout as a single line of JSON. No framing, no length prefixes, no binary protocols—just newline-delimited JSON that any tool can read and debug.
 
 ## Understanding the JSON-RPC Message Flow
 
@@ -131,7 +131,7 @@ publishLine(line);  // Notify the router
 {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"0.1.0","capabilities":{"tools":{},"prompts":{},"resources":{}},"serverInfo":{"name":"agent-mcp-workshop","version":"0.0.1"}}}
 ```
 
-The server writes this response directly to stdout. No HTTP headers, no WebSocket frames---just a line of JSON followed by a newline character.
+The server writes this response directly to stdout. No HTTP headers, no WebSocket frames—just a line of JSON followed by a newline character.
 
 ### The Message Type Hierarchy
 
@@ -245,7 +245,7 @@ private void process(JsonRpcResponse message) {
 }
 ```
 
-This bidirectional flow over STDIO demonstrates that MCP isn't limited to simple request-response patterns---it's a full-duplex protocol where both parties can initiate communication.
+This bidirectional flow over STDIO demonstrates that MCP isn't limited to simple request-response patterns—it's a full-duplex protocol where both parties can initiate communication.
 
 The routing mechanism demonstrates how MCP servers handle different message types:
 
@@ -321,7 +321,7 @@ java -jar agent-mcp-workshop-0.0.1.jar
 → [stdin]  {"jsonrpc":"2.0","id":-1000,"result":{"roots":[...]}}
 ```
 
-Each arrow represents a complete line written to stdin or stdout. The server never writes partial messages or multiple messages on one line---maintaining the protocol's simplicity.
+Each arrow represents a complete line written to stdin or stdout. The server never writes partial messages or multiple messages on one line—maintaining the protocol's simplicity.
 
 ### 4. Error Handling Without Exceptions
 
@@ -377,7 +377,7 @@ public class KeyWordSearch implements Tool {
 }
 ```
 
-The schema definition is particularly important---it enables AI clients to understand exactly how to invoke the tool. The actual implementation showcases robust file handling:
+The schema definition is particularly important—it enables AI clients to understand exactly how to invoke the tool. The actual implementation showcases robust file handling:
 
 ```
 public ToolCallResult call(ToolCallParams toolCallParams) {
@@ -413,7 +413,7 @@ This creates a complete trace of the STDIO communication:
 [2024-01-15 10:23:47] [API][SENT]: {"jsonrpc":"2.0","id":6,"result":{"content":[{"text":"/src/main/java/Server.java, keyword_count=3","type":"text"}]}}
 ```
 
-This trace can be replayed for testing, analyzed for performance, or used to debug protocol issues---something much harder with framework-heavy implementations.
+This trace can be replayed for testing, analyzed for performance, or used to debug protocol issues—something much harder with framework-heavy implementations.
 
 ```
 case RESOURCES_LIST -> {
@@ -445,14 +445,14 @@ public static String readResourceContent(String resourcePath) throws IOException
 }
 ```
 
-This approach allows servers to bundle and serve documentation, configurations, or any other static content directly from the JAR file---all transmitted as JSON over STDIO. When a client requests a resource:
+This approach allows servers to bundle and serve documentation, configurations, or any other static content directly from the JAR file—all transmitted as JSON over STDIO. When a client requests a resource:
 
 ```
 → {"jsonrpc":"2.0","method":"resources/read","params":{"uri":"javadoc/com/workshop/mcp/spec/Tool.html"},"id":10}
 ← {"jsonrpc":"2.0","id":10,"result":{"contents":[{"uri":"javadoc/com/workshop/mcp/spec/Tool.html","mimeType":"text/html","text":"<!DOCTYPE HTML>..."}]}}
 ```
 
-The entire HTML document is embedded in the JSON response, properly escaped and transmitted as a single line. This demonstrates STDIO's flexibility---it can handle everything from simple method calls to large content transfers.
+The entire HTML document is embedded in the JSON response, properly escaped and transmitted as a single line. This demonstrates STDIO's flexibility—it can handle everything from simple method calls to large content transfers.
 
 ## Prompts: Bridging Human Intent and Tool Execution
 
@@ -605,7 +605,7 @@ This implementation deliberately avoids MCP SDKs or frameworks to reveal importa
 
 ### 1. **The Protocol is Simple**
 
-At its core, MCP is just JSON-RPC 2.0 over newline-delimited streams. No magic, no hidden complexity---just structured messages over STDIO.
+At its core, MCP is just JSON-RPC 2.0 over newline-delimited streams. No magic, no hidden complexity—just structured messages over STDIO.
 
 ### 2. **Debugging is Straightforward**
 
@@ -613,7 +613,7 @@ Without framework abstractions, every message is visible and every routing decis
 
 ### 3. **Portability is Maximized**
 
-This implementation could be ported to any language that can read stdin and write stdout---no framework dependencies to worry about.
+This implementation could be ported to any language that can read stdin and write stdout—no framework dependencies to worry about.
 
 ### 4. **Understanding is Complete**
 
@@ -641,7 +641,7 @@ This deep dive into a framework-free MCP implementation reveals the elegant simp
 * **Debugging transparency**: Every message is visible and reproducible
 * **Deployment simplicity**: No ports, no certificates, no network configuration
 
-The implementation demonstrates that building AI-integrated tools doesn't require complex frameworks or abstractions. At its core, MCP is about structured communication---JSON messages flowing over STDIO streams, enabling AI systems to discover and use tools in a standardized way.
+The implementation demonstrates that building AI-integrated tools doesn't require complex frameworks or abstractions. At its core, MCP is about structured communication—JSON messages flowing over STDIO streams, enabling AI systems to discover and use tools in a standardized way.
 
 By understanding these fundamentals through a bare-metal implementation, developers gain the knowledge to:
 
@@ -650,9 +650,9 @@ By understanding these fundamentals through a bare-metal implementation, develop
 * Optimize performance by understanding the actual costs
 * Extend the protocol while maintaining compatibility
 
-As AI continues to evolve, the ability to create tools that AI can understand and use becomes increasingly valuable. This implementation shows that such integration doesn't require magic---just careful attention to protocol details and disciplined STDIO handling.
+As AI continues to evolve, the ability to create tools that AI can understand and use becomes increasingly valuable. This implementation shows that such integration doesn't require magic—just careful attention to protocol details and disciplined STDIO handling.
 
-The Model Context Protocol's choice of STDIO as its primary transport isn't just a technical decision---it's a philosophical one. It says that AI-tool integration should be simple, debuggable, and accessible to everyone. By building without frameworks, we see this philosophy in action: powerful capabilities emerging from simple, well-designed primitives.
+The Model Context Protocol's choice of STDIO as its primary transport isn't just a technical decision—it's a philosophical one. It says that AI-tool integration should be simple, debuggable, and accessible to everyone. By building without frameworks, we see this philosophy in action: powerful capabilities emerging from simple, well-designed primitives.
 
 Whether you're building the next generation of AI tools or simply understanding how AI systems communicate, the lessons from this STDIO-based implementation provide a solid foundation for creating robust, interoperable systems that bridge the gap between human intentions and machine capabilities.
 

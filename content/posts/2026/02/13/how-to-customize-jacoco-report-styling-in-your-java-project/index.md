@@ -17,11 +17,11 @@ related_posts:
 frozen: false
 ---
 
-JaCoCo is the go-to code coverage tool for Java projects. It integrates seamlessly with Maven, generates detailed HTML reports, and works out of the box. But let's be honest --- the default reports look like they were designed in 2008, because they were.
+JaCoCo is the go-to code coverage tool for Java projects. It integrates seamlessly with Maven, generates detailed HTML reports, and works out of the box. But let's be honest — the default reports look like they were designed in 2008, because they were.
 
 If you're publishing coverage reports as part of your project documentation (on GitHub Pages, for example), you probably want them to match your site's look and feel. The good news: it's entirely possible. The bad news: JaCoCo offers zero built-in support for CSS customization.
 
-In this post, I'll walk you through how we themed the JaCoCo reports in the [Copilot SDK for Java](https://github.com/copilot-community-sdk/copilot-sdk-java) project to match our Maven site design --- and how you can do the same.
+In this post, I'll walk you through how we themed the JaCoCo reports in the [Copilot SDK for Java](https://github.com/copilot-community-sdk/copilot-sdk-java) project to match our Maven site design — and how you can do the same.
 
 ## The Problem
 
@@ -40,8 +40,8 @@ Here is how the default CSS looks like:
 
 The approach is simple: let JaCoCo generate its reports with the default CSS, then **overwrite** `report.css` with your custom version. We do this at two levels:
 
-1. **During `mvn site`** --- a Maven Resources Plugin execution copies our CSS after JaCoCo finishes
-2. **During CI deployment** --- a workflow step overlays the CSS across all versioned documentation directories
+1. **During `mvn site`** — a Maven Resources Plugin execution copies our CSS after JaCoCo finishes
+2. **During CI deployment** — a workflow step overlays the CSS across all versioned documentation directories
 
 ### Step 1: Create Your Custom `report.css`
 
@@ -53,7 +53,7 @@ Place your customized version at:
 src/site/jacoco-resources/report.css
 ```
 
-Here's what ours looks like --- a light theme with rounded cards, GitHub-style colors, and a system font stack:
+Here's what ours looks like — a light theme with rounded cards, GitHub-style colors, and a system font stack:
 
 ```css
 /* ===== Custom JaCoCo Report Theme ===== */
@@ -116,7 +116,7 @@ pre.source span.pc  { background-color: #fff8c5; }  /* partially covered - yello
 ```
 
 You can see the full file in our repo: [`src/site/jacoco-resources/report.css`](https://github.com/copilot-community-sdk/copilot-sdk-java/blob/5b61dfc0f9878245098f2d84eea63943b14944f5/src/site/jacoco-resources/report.css).
-> **Important:** You must include the element icon classes (`.el_package`, `.el_class`, `.el_method`, etc.) and the sortable header classes (`.sortable`, `.up`, `.down`) in your custom CSS --- they reference GIF images that JaCoCo generates alongside the report. Omitting them breaks navigation icons and column sorting.
+> **Important:** You must include the element icon classes (`.el_package`, `.el_class`, `.el_method`, etc.) and the sortable header classes (`.sortable`, `.up`, `.down`) in your custom CSS — they reference GIF images that JaCoCo generates alongside the report. Omitting them breaks navigation icons and column sorting.
 
 ### Step 2: Overlay CSS During Maven Build
 
@@ -190,14 +190,14 @@ When deploying documentation, you typically run `mvn site`, not `mvn verify`. So
 Same data, completely different experience. The custom theme has clean white cards, rounded borders, GitHub-style coverage colors, modern typography.  
 ![](Screenshot-2026-02-13-at-07.38.45-700x290.png)
 
-You can see the live result on our documentation site: [Copilot SDK for Java --- JaCoCo Report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/).
+You can see the live result on our documentation site: [Copilot SDK for Java — JaCoCo Report](https://copilot-community-sdk.github.io/copilot-sdk-java/snapshot/jacoco/).
 
 ## Quick Start Checklist
 
 1. ☐ Run `mvn clean verify site` to generate a JaCoCo report with default CSS
 2. ☐ Copy `target/site/jacoco/jacoco-resources/report.css` to `src/site/jacoco-resources/report.css`
 3. ☐ Customize the CSS to match your site's design
-4. ☐ **Keep all `.el_*` icon classes and `.sortable`/`.up`/`.down` sort classes** --- they reference JaCoCo's GIF assets
+4. ☐ **Keep all `.el_*` icon classes and `.sortable`/`.up`/`.down` sort classes** — they reference JaCoCo's GIF assets
 5. ☐ Add the `overlay-jacoco-css` execution to `maven-resources-plugin` in your `pom.xml`
 6. ☐ If deploying to GitHub Pages with versioned docs, add the workflow overlay step
 7. ☐ Run `mvn clean verify site` again and open `target/site/jacoco/index.html` to verify

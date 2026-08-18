@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-Over the last few years at [FOSDEM](https://fosdem.org/2022/)---the free event for software developers, many of them in the open source ecosystem, for meeting, sharing ideas and collaborating---one of the developer rooms has been focused on short presentations dealing with demos and overviews of free tools and editors.
+Over the last few years at [FOSDEM](https://fosdem.org/2022/)---the free event for software developers, many of them in the open source ecosystem, for meeting, sharing ideas and collaborating—one of the developer rooms has been focused on short presentations dealing with demos and overviews of free tools and editors.
 
 The programs for 2020 and 2019 are listed below:
 

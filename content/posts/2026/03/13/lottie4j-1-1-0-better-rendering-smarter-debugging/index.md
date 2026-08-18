@@ -45,13 +45,13 @@ This release is primarily driven by testing more complex real-world Lottie files
 
 * Correct path closing (fixing gaps in thick borders)
 * Better border rendering
-* **Track Matte support** --- a key compositing feature in Lottie
+* **Track Matte support** — a key compositing feature in Lottie
 * Fix for a layer disappearance at exact keyframe boundaries
 * Correct gradient alpha channel parsing for proper transparency
-* **Image layer rendering** --- images embedded in Lottie files now display correctly
+* **Image layer rendering** — images embedded in Lottie files now display correctly
 * Fix for GradientStroke deserialization and color format handling
 * **Solid color layer rendering**
-* **Text rendering** --- text objects in animations now display in the JavaFX player
+* **Text rendering** — text objects in animations now display in the JavaFX player
 * Improved animation handling overall
 * **Gaussian Blur effect** support added
 * Fixed layer opacity
@@ -79,7 +79,7 @@ There's also a brand-new [**LottieFileSimpleViewer**](https://github.com/lottie4
 
 Perhaps the most exciting developer tooling addition: a unit test called [**CompareFxViewWithWebViewTest**](https://github.com/lottie4j/lottie4j/blob/main/fxfileviewer/src/test/java/com/lottie4j/fxfileviewer/CompareFxViewWithWebViewTest.java) that automates the comparison between the JavaFX player and the JavaScript web player. The test iterates through a list of Lottie files, captures a screenshot every five frames from both players, and compares them for visual similarity. Any frame that differs too much is saved to disk so you can inspect exactly where and how the rendering diverges.
 
-This makes it much easier to track down rendering regressions and verify improvements. Note that the test requires a display (it can't run headless yet --- see [this open issue](https://github.com/lottie4j/lottie4j/issues/4)), so it won't run on CI for now, but it's extremely useful locally.
+This makes it much easier to track down rendering regressions and verify improvements. Note that the test requires a display (it can't run headless yet — see [this open issue](https://github.com/lottie4j/lottie4j/issues/4)), so it won't run on CI for now, but it's extremely useful locally.
 
 ## Trying It Out
 

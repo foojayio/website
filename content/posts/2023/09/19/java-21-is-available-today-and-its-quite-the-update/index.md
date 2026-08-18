@@ -62,7 +62,7 @@ static String apply(Effect effect) {
 }
 ```
 
-This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs --- what if you added an else-if branch that didn't assign anything to `formatted`? Let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
+This code is still riddled with ceremony, though. On top of that it leaves room for subtle bugs — what if you added an else-if branch that didn't assign anything to `formatted`? Let's see what pattern matching in a switch statement (or even better: in a switch *expression*) would look like:
 
 ```java
 static String apply(Effect effect) {

@@ -226,4 +226,4 @@ By using the "Find" function in the IDE for value "1" it becomes pretty clear ho
 
 Both on hardware as software level, you have different possible approaches, but the result is the same... a fun project to learn new software technologies and getting introduced into electronics.
 
-**Note:** Used with permission and thanks --- originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2020-02-01-raspberry-pi-and-spi-8x8-led-matrix-example-with-java-and-pi4j/).
+**Note:** Used with permission and thanks — originally written and published on the blog of [Igor De Souza](http://www.igfasouza.com/blog/micronaut-velocity-with-raspberry-pi/) and [Frank Delporte](https://webtechie.be/post/2020-02-01-raspberry-pi-and-spi-8x8-led-matrix-example-with-java-and-pi4j/).

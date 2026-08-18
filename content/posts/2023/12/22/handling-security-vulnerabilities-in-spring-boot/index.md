@@ -109,7 +109,7 @@ implementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.17'
 
 **But stop right here!** This is not the recommended way of solving the problem. The specific version, 2.7.17, is used over the parent version. While this might work since this is a patch version release, it isn't the best or most secure solution. Since semver does not guarantee that API's stay intact, we can't be sure this will work. But the most important argument is that there probably is a full new release of Spring Boot.  
 
-Remember that I told you earlier that these starters belong together? Therefore the best thing you can do is update your complete Spring Boot distribution to 2.7.17. This is even more important when talking about minor or major releases of a package --- which can break API and not run smoothly together. So, in this example, do the following. Update the parent (Maven) or the plugin (Gradle) instead of the individual starters.
+Remember that I told you earlier that these starters belong together? Therefore the best thing you can do is update your complete Spring Boot distribution to 2.7.17. This is even more important when talking about minor or major releases of a package — which can break API and not run smoothly together. So, in this example, do the following. Update the parent (Maven) or the plugin (Gradle) instead of the individual starters.
 
 **Maven:**
 
@@ -158,7 +158,7 @@ For Gradle, we can edit this property in a \`gradle.properties\` file:
 snakeyaml.version=3.0
 ```
 
-This is the preferred way over dependency management since \`snakeyaml\` is just a single library. However, in many cases, it is more than one library. The version can refer to a [++BOM++](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#bill-of-materials-bom-poms) (bill of materials), not to be confused with an SBOM, representing a set of groups of packages that need to be used together and essentially have the same version --- such as an API and an implementation package. Both need to be on the same version to perform as expected.
+This is the preferred way over dependency management since \`snakeyaml\` is just a single library. However, in many cases, it is more than one library. The version can refer to a [++BOM++](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#bill-of-materials-bom-poms) (bill of materials), not to be confused with an SBOM, representing a set of groups of packages that need to be used together and essentially have the same version — such as an API and an implementation package. Both need to be on the same version to perform as expected.
 
 #### Dependency management declaration
 

@@ -40,9 +40,9 @@ As a side note, if you like the content of this and the other posts in this seri
 
 ## The Essence of Debugging with Git
 
-Before we tap into the advanced aspects of `git bisect`, it's essential to understand its foundational premise. Git is known for tracking changes and managing code history, but the `git bisect` tool is a hidden gem for regression detection. Regressions are distinct from generic bugs, they signify a backward step in functionality---where something that once worked flawlessly now fails. Pinpointing the exact change causing a regression can be akin to finding a needle in a haystack, particularly in extensive codebases with long commit histories.
+Before we tap into the advanced aspects of `git bisect`, it's essential to understand its foundational premise. Git is known for tracking changes and managing code history, but the `git bisect` tool is a hidden gem for regression detection. Regressions are distinct from generic bugs, they signify a backward step in functionality—where something that once worked flawlessly now fails. Pinpointing the exact change causing a regression can be akin to finding a needle in a haystack, particularly in extensive codebases with long commit histories.
 
-Traditionally, developers would employ a manual, binary search strategy---checking out different versions, testing them, and narrowing down the search scope. This method, while effective, is painstakingly slow and error-prone. `Git bisect` automates this search, transforming what used to be a marathon into a swift sprint.
+Traditionally, developers would employ a manual, binary search strategy—checking out different versions, testing them, and narrowing down the search scope. This method, while effective, is painstakingly slow and error-prone. `Git bisect` automates this search, transforming what used to be a marathon into a swift sprint.
 
 ## Setting the Stage for Debugging
 

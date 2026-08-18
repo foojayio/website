@@ -44,9 +44,9 @@ You can use the following Docker command to start a standalone MongoDB instance:
 docker run --rm -d --name mongodb-instance -p 27017:27017 mongo
 ```
 
-Java 21 has introduced a new era of concurrency with virtual threads---lightweight threads managed by the JVM that significantly enhance the performance of I/O-bound applications. Unlike traditional platform threads, which are directly linked to operating system threads, virtual threads are designed to be inexpensive and can number in the thousands. This enables you to manage many concurrent operations without the typical overhead of traditional threading.
+Java 21 has introduced a new era of concurrency with virtual threads—lightweight threads managed by the JVM that significantly enhance the performance of I/O-bound applications. Unlike traditional platform threads, which are directly linked to operating system threads, virtual threads are designed to be inexpensive and can number in the thousands. This enables you to manage many concurrent operations without the typical overhead of traditional threading.
 
-Virtual threads are scheduled on a small pool of carrier threads, ensuring that blocking operations---such as those commonly encountered when interacting with databases---do not waste valuable system resources.
+Virtual threads are scheduled on a small pool of carrier threads, ensuring that blocking operations—such as those commonly encountered when interacting with databases—do not waste valuable system resources.
 
 In this tutorial, we will generate a Quarkus project that leverages Java 21's virtual threads to build a highly responsive, non-blocking application integrated with MongoDB via Eclipse JNoSQL. The focus is on exploring the benefits of virtual threads in managing I/O-bound workloads and illustrating how modern Java concurrency can transform database interactions by reducing latency and improving scalability.  
 
@@ -116,7 +116,7 @@ Explanation of annotations:
 
 ## Step 2: Create the Service
 
-In our application, the CameraService class serves as a bridge between our business logic and MongoDB. We utilize Eclipse JNoSQL, which supports Jakarta NoSQL and Jakarta Data. In this tutorial, we work with the DocumentTemplate interface from Jakarta NoSQL---a specialized version of the generic Template interface tailored for NoSQL document capabilities. The Quarkus integration makes it easier once you, as a Java developer, need to use an injection annotation.
+In our application, the CameraService class serves as a bridge between our business logic and MongoDB. We utilize Eclipse JNoSQL, which supports Jakarta NoSQL and Jakarta Data. In this tutorial, we work with the DocumentTemplate interface from Jakarta NoSQL—a specialized version of the generic Template interface tailored for NoSQL document capabilities. The Quarkus integration makes it easier once you, as a Java developer, need to use an injection annotation.
 
 Furthermore, we inject an ExecutorService that is qualified with the @VirtualThreads annotation. This annotation instructs Quarkus to provide an executor that employs Java 21's virtual threads for improved concurrency.
 

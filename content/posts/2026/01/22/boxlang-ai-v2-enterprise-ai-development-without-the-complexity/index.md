@@ -27,7 +27,7 @@ Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thril
 
 ## What Makes This Release Groundbreaking?
 
-BoxLang AI v2 isn't an incremental update---it's a complete transformation. We've added **over 100 new features** that make building production-grade AI applications faster, simpler, and more powerful than ever.
+BoxLang AI v2 isn't an incremental update—it's a complete transformation. We've added **over 100 new features** that make building production-grade AI applications faster, simpler, and more powerful than ever.
 
 ## 🎯 Summary
 
@@ -54,7 +54,7 @@ BoxLang AI v2 delivers a complete AI platform with unprecedented capabilities:
 
 ## 🤖 Autonomous AI Agents
 
-Build intelligent agents that think, remember, and act independently. Agents are the crown jewel of BoxLang AI v2---capable of multi-step reasoning, tool usage, memory management, and delegation.
+Build intelligent agents that think, remember, and act independently. Agents are the crown jewel of BoxLang AI v2—capable of multi-step reasoning, tool usage, memory management, and delegation.
 
 ```java
 // Create an agent with multiple memories, tools, and sub-agents
@@ -119,7 +119,7 @@ function handler( event, context ) {
 
 ## 🔄 Autonomous Agents with BoxLang Scheduler
 
-Create truly autonomous agents that run on schedules---no servers required:
+Create truly autonomous agents that run on schedules—no servers required:
 
 ```java
 // Autonomous monitoring agent

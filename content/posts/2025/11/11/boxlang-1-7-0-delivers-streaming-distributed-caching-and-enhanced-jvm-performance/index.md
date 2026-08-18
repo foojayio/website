@@ -48,7 +48,7 @@ SSE(
 );
 ```
 
-The implementation includes **async execution** , **automatic keep-alive** , **client disconnect detection** , **CORS support** , and **automatic chunking** for messages exceeding 32KB---ensuring efficient, resilient streaming at scale.
+The implementation includes **async execution** , **automatic keep-alive** , **client disconnect detection** , **CORS support** , and **automatic chunking** for messages exceeding 32KB—ensuring efficient, resilient streaming at scale.
 
 ```
 // Stream AI responses token by token
@@ -122,7 +122,7 @@ cfAst = BoxAST(
 
 ## Bytecode Compatibility Versioning
 
-To enhance module stability and cross-version reliability, BoxLang now implements **bytecode compatibility versioning**, ensuring that compiled artifacts remain consistent and reusable across multiple runtime releases---a major improvement for module authors and enterprise teams maintaining large applications.
+To enhance module stability and cross-version reliability, BoxLang now implements **bytecode compatibility versioning**, ensuring that compiled artifacts remain consistent and reusable across multiple runtime releases—a major improvement for module authors and enterprise teams maintaining large applications.
 
 ## Performance \& Stability Enhancements
 
@@ -139,7 +139,7 @@ Additionally, over **40 bug fixes** improve database interaction, file handling,
 
 BoxLang follows a **professional open-source model** with three editions: **Open Source (Apache 2.0)** , **BoxLang+** , and **BoxLang++** .  
 
-The open-source core remains free, while commercial tiers provide support, advanced modules, and enterprise tooling---licensed fairly based on **usage, not infrastructure**.
+The open-source core remains free, while commercial tiers provide support, advanced modules, and enterprise tooling—licensed fairly based on **usage, not infrastructure**.
 
 New **BoxLang+ exclusive modules** include:
 

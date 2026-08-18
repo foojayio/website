@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-**When working with MongoDB, it's easy to think you're dealing with JSON. After all, the queries, documents, and API responses all look like JSON. But MongoDB is not storing JSON. It's storing BSON---a binary format designed for efficient storage and fast traversal.**
+**When working with MongoDB, it's easy to think you're dealing with JSON. After all, the queries, documents, and API responses all look like JSON. But MongoDB is not storing JSON. It's storing BSON—a binary format designed for efficient storage and fast traversal.**
 
 BSON (Binary JSON) is more than just a binary version of JSON. It introduces additional data types like ObjectId, Decimal128, and Timestamp, allowing MongoDB to handle more complex data structures and ensure data integrity. While we might rarely interact with raw BSON directly, understanding how MongoDB stores and processes BSON documents can help us write more efficient queries, handle data conversions properly, and debug unexpected behavior.
 
@@ -28,7 +28,7 @@ By the end, you'll have a clear understanding of how MongoDB leverages BSON unde
 
 ## What is BSON?
 
-[BSON](https://www.mongodb.com/resources/languages/bson#:~:text=What%20Does%20BSON%20Stand%20For,like%20dates%20and%20binary%20data.?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) stands for Binary JSON. It's a binary-encoded serialization of JSON-like documents. It's everything we like about JSON, just more efficient and type-rich---optimized for speed and storage in MongoDB.
+[BSON](https://www.mongodb.com/resources/languages/bson#:~:text=What%20Does%20BSON%20Stand%20For,like%20dates%20and%20binary%20data.?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=java+intro+to+bson&utm_term=tim.kelly) stands for Binary JSON. It's a binary-encoded serialization of JSON-like documents. It's everything we like about JSON, just more efficient and type-rich—optimized for speed and storage in MongoDB.
 
 While we interact with MongoDB using JSON-like queries, the documents themselves are stored and transmitted as BSON behind the scenes.
 
@@ -668,4 +668,4 @@ Throughout this tutorial, we explored how BSON types map to Java types and how w
 
 While most operations in MongoDB can be performed using Java objects and the Document class, understanding BSON is essential for tasks involving binary data, precision calculations with Decimal128, and operations that require explicit data types like BsonTimestamp.
 
-In every operation---document creation, querying, aggregation---BSON is working behind the scenes, ensuring that data types are consistent, optimized, and capable of handling complex structures. By understanding how Java types map to BSON, we can write more predictable queries, prevent data type mismatches, and take full advantage of MongoDB's type system. For a deeper dive, explore the [BSON Specification](https://bsonspec.org/).
+In every operation—document creation, querying, aggregation—BSON is working behind the scenes, ensuring that data types are consistent, optimized, and capable of handling complex structures. By understanding how Java types map to BSON, we can write more predictable queries, prevent data type mismatches, and take full advantage of MongoDB's type system. For a deeper dive, explore the [BSON Specification](https://bsonspec.org/).

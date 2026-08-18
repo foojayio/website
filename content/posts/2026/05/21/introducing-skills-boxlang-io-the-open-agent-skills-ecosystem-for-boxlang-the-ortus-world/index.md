@@ -32,7 +32,7 @@ If you've ever pasted a 400-line system prompt into yet another AI agent, watche
 * **203+** curated skills available on day one
 * **8,000+** installs already, before public announcement
 * **3 core** repositories maintained directly by Ortus Solutions
-* **Multiple agents** supported --- Claude Code, Cursor, GitHub Copilot, Codex, OpenCode, and more  
+* **Multiple agents** supported — Claude Code, Cursor, GitHub Copilot, Codex, OpenCode, and more  
   Let's dig into what it is, why we built it, and how to start using it in the next 30 seconds. 🚀
 
 ## 🤔 The Problem: AI Knowledge Doesn't Scale by Copy-Paste
@@ -41,13 +41,13 @@ Every team building with AI agents eventually hits the same wall.
 
 You write a great system prompt that teaches an agent your SQL conventions. Then a teammate spins up a new bot and pastes a slightly older version. A month later there's a third variant in a Slack snippet that nobody can find. Your "single source of truth" is now three sources of conflict, and the agent's outputs reflect every one of them.
 
-This isn't a discipline problem --- it's an architecture problem. **System prompts are plain strings, and plain strings don't have a source of truth**. They aren't versioned, aren't audited, aren't shared, and aren't discoverable.
+This isn't a discipline problem — it's an architecture problem. **System prompts are plain strings, and plain strings don't have a source of truth**. They aren't versioned, aren't audited, aren't shared, and aren't discoverable.
 
-Anthropic's Agent Skills open standard --- Markdown files with frontmatter metadata, distributed as `SKILL.md` --- gave the industry a real answer. [**BoxLang AI 3.0**](https://ai.boxlang.io/ "**BoxLang AI 3.0**") implemented it natively. And now [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") brings the missing piece: a public, curated, security-audited registry where these skills live, are versioned, and can be installed into any AI agent in seconds. 💚
+Anthropic's Agent Skills open standard — Markdown files with frontmatter metadata, distributed as `SKILL.md` --- gave the industry a real answer. [**BoxLang AI 3.0**](https://ai.boxlang.io/ "**BoxLang AI 3.0**") implemented it natively. And now [**skills.boxlang.io**](https://skills.boxlang.io/ "**skills.boxlang.io**") brings the missing piece: a public, curated, security-audited registry where these skills live, are versioned, and can be installed into any AI agent in seconds. 💚
 
 ## 🎓 What Is a Skill?
 
-A skill is a portable, reusable unit of expertise --- a SQL coding style guide, a tone-of-voice policy, a ColdBox conventions cheat sheet, an API design standard, a security ruleset. Anything your AI assistant should know **before** it starts answering.
+A skill is a portable, reusable unit of expertise — a SQL coding style guide, a tone-of-voice policy, a ColdBox conventions cheat sheet, an API design standard, a security ruleset. Anything your AI assistant should know **before** it starts answering.
 
 Each skill is a Markdown file (`SKILL.md`) with optional YAML frontmatter:
 
@@ -66,7 +66,7 @@ Use lambdas with `->` when no external scope is needed.
 ...
 ```
 
-Define it once. Inject it everywhere. Let your **codebase** --- not your clipboard --- be the source of truth. 📚
+Define it once. Inject it everywhere. Let your **codebase** — not your clipboard — be the source of truth. 📚
 
 ## 📥 Install in Seconds: Two Paths, One Standard
 
@@ -86,7 +86,7 @@ npx skills add ortus-boxlang/skills/coldbox-basics
 
 No global install needed. Works with any Node.js. 🌐
 
-### 🥊 Option 2 --- ColdBox CLI (deep BoxLang/ColdBox integration)
+### 🥊 Option 2 — ColdBox CLI (deep BoxLang/ColdBox integration)
 
 If you're already living in the ColdBox world, the [**ColdBox CLI 8.11 release**](https://www.ortussolutions.com/blog/coldbox-cli-811-the-era-of-ai-skills-comes-to-every-coldbox-boxlang-app "**ColdBox CLI 8.11 release**") wires the directory directly into your project workflow:
 
@@ -107,7 +107,7 @@ coldbox ai skills find "rest api"
 
 Bonus: when you `box install` a module that has skills published to the directory, `coldbox ai refresh` auto-installs them. Skills become **infrastructure**, not setup. 💚
 
-## 🔷 Core Repositories --- Curated by Ortus
+## 🔷 Core Repositories — Curated by Ortus
 
 Three core repositories are officially maintained by Ortus Solutions. Skills here are trusted by default and skip the community audit step.
 
@@ -133,7 +133,7 @@ A small sample of skills you'll find in the directory at launch:
 * `coldbox-basics` --- ColdBox MVC conventions, handlers, models, interceptors, and module architecture  
   ...and 195+ more. Browse the full directory at [**skills.boxlang.io/skills**](https://skills.boxlang.io/skills "**skills.boxlang.io/skills**"). 🎯
 
-## 🌐 Submit Your Own --- Community Skills, Security First
+## 🌐 Submit Your Own — Community Skills, Security First
 
 Don't want to contribute to a core repo? Publish your own GitHub repository as a **Community** source or send us a Pull Request to any of our repos. Community skills are listed alongside core skills in the directory and go through **automated security auditing** before being made available, so consumers can install them with confidence.
 
@@ -156,11 +156,11 @@ The change in agent behavior is immediate. Ask things like:
 * "Show me how to use TestBox to write integration tests"
 * "Help me configure bx-migrations for my BoxLang app"
 
-...and the agent answers using **patterns and idioms from the installed skills**, not scattered (and often outdated) snippets pulled from random internet training data. The hallucinations go down. The accuracy goes up. The output starts to feel like it was written by someone who actually knows the framework --- because, in a sense, it now was. 🎓
+...and the agent answers using **patterns and idioms from the installed skills**, not scattered (and often outdated) snippets pulled from random internet training data. The hallucinations go down. The accuracy goes up. The output starts to feel like it was written by someone who actually knows the framework — because, in a sense, it now was. 🎓
 
 ## 🔮 Why This Matters Beyond BoxLang
 
-We didn't build skills.boxlang.io as a marketing site. We built it because the Ortus ecosystem --- BoxLang, ColdBox, TestBox, CommandBox, WireBox, LogBox, CacheBox, hundreds of modules across 18+ years of work --- is too rich to fit into anyone's training data, and too valuable to be re-discovered through trial and error every time a developer opens a new chat with their AI assistant.
+We didn't build skills.boxlang.io as a marketing site. We built it because the Ortus ecosystem — BoxLang, ColdBox, TestBox, CommandBox, WireBox, LogBox, CacheBox, hundreds of modules across 18+ years of work — is too rich to fit into anyone's training data, and too valuable to be re-discovered through trial and error every time a developer opens a new chat with their AI assistant.
 
 A public, curated, audited skills directory means:
 
@@ -169,7 +169,7 @@ A public, curated, audited skills directory means:
 * **Newcomers** get accurate, idiomatic guidance from day one
 * **The community** owns and contributes to a shared knowledge layer that compounds over time
 
-This is the same shift package managers brought to language ecosystems --- except for **AI knowledge**. It's the era of skills, and now every BoxLang and ColdBox developer can participate. 🚀
+This is the same shift package managers brought to language ecosystems — except for **AI knowledge**. It's the era of skills, and now every BoxLang and ColdBox developer can participate. 🚀
 
 ## 🎯 Get Started Now
 
@@ -190,10 +190,10 @@ Then point your AI agent at your codebase and watch the difference. ⚡
 * **Documentation:** [skills.boxlang.io/docs](https://skills.boxlang.io/docs "skills.boxlang.io/docs")
 * **Submit a Repository:** [skills.boxlang.io/submit](https://skills.boxlang.io/submit "skills.boxlang.io/submit")
 * **skills.sh CLI:** [skills.sh](https://skills.sh/ "skills.sh")
-* **Core Repo --- BoxLang:** [github.com/ortus-boxlang/skills](https://github.com/ortus-boxlang/skills "github.com/ortus-boxlang/skills")
-* **Core Repo --- ColdBox:** [github.com/coldbox/skills](https://github.com/coldbox/skills "github.com/coldbox/skills")
-* **Core Repo --- Ortus:** [github.com/ortus-solutions/skills](https://github.com/ortus-solutions/skills "github.com/ortus-solutions/skills")
+* **Core Repo — BoxLang:** [github.com/ortus-boxlang/skills](https://github.com/ortus-boxlang/skills "github.com/ortus-boxlang/skills")
+* **Core Repo — ColdBox:** [github.com/coldbox/skills](https://github.com/coldbox/skills "github.com/coldbox/skills")
+* **Core Repo — Ortus:** [github.com/ortus-solutions/skills](https://github.com/ortus-solutions/skills "github.com/ortus-solutions/skills")
 * **BoxLang AI:** [ai.boxlang.io](https://ai.boxlang.io/ "ai.boxlang.io")
 * **BoxLang Plans:** [boxlang.io/plans](https://www.boxlang.io/plans "boxlang.io/plans")
 
-Got a skill you'd love to publish, or one you wish existed? We'd love to hear from you --- open a PR, submit your repo, or drop us a note. The directory grows because the community grows. 💚
+Got a skill you'd love to publish, or one you wish existed? We'd love to hear from you — open a PR, submit your repo, or drop us a note. The directory grows because the community grows. 💚

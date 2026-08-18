@@ -46,7 +46,7 @@ In the above command, `my.module` is your module, and `myRuntime` is the custom 
 
 ## The role of JLink in creating smaller Docker images
 
-When creating Docker images for Java applications, the size of the image is often a concern --- particularly for Spring Boot applications, which come with many dependencies. A large Docker image can lead to longer startup times, increased storage costs, and slower deployment processes.
+When creating Docker images for Java applications, the size of the image is often a concern — particularly for Spring Boot applications, which come with many dependencies. A large Docker image can lead to longer startup times, increased storage costs, and slower deployment processes.
 
 In legacy versions of Java, the Java Development Kit (JDK) came with a Java Runtime Environment (JRE). Only the JRE was needed to run the created Java artifact. Therefore, in the past, it was common to use the JRE in your Docker image or choose a JRE base image for your containers. Newer versions of Java don't always come with a JRE, although some vendors might still create a JRE and corresponding base images. You can use these or a more specific Java runtime tailored to your application.
 
@@ -171,7 +171,7 @@ JLink offers several advantages when it comes to creating Docker images for Spri
 
 3. **Security:** By including only the necessary modules, you reduce the attack surface of your application. Fewer modules mean fewer potential security vulnerabilities.
 
-Speaking of security, it's essential to mention the role of Snyk in ensuring the security of your applications. Snyk is a developer security tool that can scan your source code, open source packages, container images, and cloud configurations for vulnerabilities. With Snyk Container and Snyk Open Source, you can detect and fix security issues in your application and its dependencies --- including those in your Docker images.
+Speaking of security, it's essential to mention the role of Snyk in ensuring the security of your applications. Snyk is a developer security tool that can scan your source code, open source packages, container images, and cloud configurations for vulnerabilities. With Snyk Container and Snyk Open Source, you can detect and fix security issues in your application and its dependencies — including those in your Docker images.
 
 ```
 $ snyk container test your-repo/your-image:tag

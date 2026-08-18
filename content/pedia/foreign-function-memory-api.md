@@ -5,7 +5,7 @@ url: "/pedia/foreign-function-memory-api/"
 frozen: false
 ---
 
-The Foreign Function \& Memory (FFM) API, finalised in Java 22 (JEP 454), provides a safe, efficient, and pure-Java way to interact with native code and off-heap memory --- replacing the older, error-prone Java Native Interface (JNI).
+The Foreign Function \& Memory (FFM) API, finalised in Java 22 (JEP 454), provides a safe, efficient, and pure-Java way to interact with native code and off-heap memory — replacing the older, error-prone Java Native Interface (JNI).
 
 **Foreign memory access** allows Java programs to allocate, read, and write memory outside the Java heap using `MemorySegment`. Off-heap allocation is useful for large data structures that should not be managed by the GC, for memory-mapped files, and for shared memory between processes. The API enforces lifetime tracking: a `MemorySegment` is associated with an `Arena`, and its memory is released deterministically when the arena is closed.
 

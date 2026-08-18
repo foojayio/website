@@ -107,4 +107,4 @@ CSS and HTML bugs can be particularly tricky, often requiring a detailed examina
 
 There are many front-end tools that I want to discuss in the coming posts. I hope you picked up a couple of new debugging tricks in this first part.
 
-Front-end debugging requires deep understanding of browser tools and JavaScript capabilities. By mastering the techniques outlined in this post---instant debugging with the `debugger` keyword, DOM and XHR breakpoints, environment simulation, and layout inspection---you can significantly enhance your debugging efficiency and deliver more robust, error-free web applications.
+Front-end debugging requires deep understanding of browser tools and JavaScript capabilities. By mastering the techniques outlined in this post—instant debugging with the `debugger` keyword, DOM and XHR breakpoints, environment simulation, and layout inspection—you can significantly enhance your debugging efficiency and deliver more robust, error-free web applications.

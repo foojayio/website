@@ -26,7 +26,7 @@ frozen: false
 * [Test-Driven Development](#testdriven-development)
 * [Final Word](#final-word)
 
-Debugging is not just about identifying errors---it's about instituting a reliable process for ensuring software health and longevity. In this post we discuss the role of software testing in debugging, including foundational concepts and how they converge to improve software quality.
+Debugging is not just about identifying errors—it's about instituting a reliable process for ensuring software health and longevity. In this post we discuss the role of software testing in debugging, including foundational concepts and how they converge to improve software quality.
 
 {{< youtube yap509UZz6M >}}
 
@@ -40,7 +40,7 @@ Both are a part of the debug fix cycle which is a core concept in debugging. Bef
 
 ### Unit Tests
 
-Unit tests are tightly linked to debugging efforts, focusing on isolated parts of the application---typically individual functions or methods. Their purpose is to validate that each unit operates correctly in isolation, making them a swift and efficient tool in the debugging arsenal. These tests are characterized by their speed and consistency, enabling developers to run them frequently, sometimes even automatically as code is written within the IDE.
+Unit tests are tightly linked to debugging efforts, focusing on isolated parts of the application—typically individual functions or methods. Their purpose is to validate that each unit operates correctly in isolation, making them a swift and efficient tool in the debugging arsenal. These tests are characterized by their speed and consistency, enabling developers to run them frequently, sometimes even automatically as code is written within the IDE.
 
 Since software is so tightly bound it is nearly impossible to compose unit tests without extensive mocking. Mocking involves substituting a genuine component with a stand-in that returns predefined results, thus a test method can simulate scenarios without relying on the actual object. This is a powerful yet controversial tool. By using mocking we're in-effect creating a synthetic environment that might misrepresent the real world. We're reducing the scope of the test and might perpetuate some bugs.
 

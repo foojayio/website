@@ -55,9 +55,9 @@ Data-driven testing is a technique where a single test is executed with differen
 
 In this age, data is the heart of any software system. Ensuring consistency and validating the code based on several data conditions will increase your quality. In this process, we can use a database to inject the data as input, to check the queries themselves, and also store the results as a report.
 
-This approach aligns naturally with MongoDB, where application logic frequently relies on query conditions---particularly when filtering based on domain-specific rules. In a typical Java application, these queries are embedded in repositories or services and are rarely tested beyond simple "find by ID" checks. DDT allows you to test the *intent* behind queries, such as a hotel management system: Is a room considered available? Does it match VIP criteria? Should it be cleaned?
+This approach aligns naturally with MongoDB, where application logic frequently relies on query conditions—particularly when filtering based on domain-specific rules. In a typical Java application, these queries are embedded in repositories or services and are rarely tested beyond simple "find by ID" checks. DDT allows you to test the *intent* behind queries, such as a hotel management system: Is a room considered available? Does it match VIP criteria? Should it be cleaned?
 
-In this tutorial, we'll use aJava SE project---without any heavyweight frameworks---to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
+In this tutorial, we'll use aJava SE project—without any heavyweight frameworks—to demonstrate how to combine Jakarta Data, JNoSQL, and JUnit 5 to write expressive, testable queries against MongoDB. Our focus will be on clarity, maintainability, and aligning tests with the business language, not just with database fields.
 
 ## Step 1: Create the entities
 
@@ -214,7 +214,7 @@ public enum CleanStatus {
 * **@Id:** Indicates the primary identifier for the entity, uniquely distinguishing each document in the MongoDB collection.
 * **@Column**: Maps fields (roomNumber, type) for reading from or writing to MongoDB.
 
-Finally, with the entity done, we will create a repository where the goal is to find rooms by type, insert a new room, and check for availability on rooms---both standard and VIP rooms:
+Finally, with the entity done, we will create a repository where the goal is to find rooms by type, insert a new room, and check for availability on rooms—both standard and VIP rooms:
 
 ```
 @Repository
@@ -611,7 +611,7 @@ class RoomServiceTest {
 
 ## Conclusion
 
-In software development, the gap between business rules and database logic is often where subtle bugs and misunderstandings live. By adopting data-driven testing, we shift the focus from checking technical details to validating actual business behavior---across a wide range of scenarios and edge cases.
+In software development, the gap between business rules and database logic is often where subtle bugs and misunderstandings live. By adopting data-driven testing, we shift the focus from checking technical details to validating actual business behavior—across a wide range of scenarios and edge cases.
 
 In this tutorial, you learned how to apply this approach using Java SE, Jakarta Data, Eclipse JNoSQL, and MongoDB. You saw how to express queries with business semantics, isolate your tests using Testcontainers, and validate outcomes with JUnit 5 and AssertJ. More than just testing correctness, this style helps you design repositories and queries that align with the domain itself. That's the real power of data-driven testing: It turns your tests into a source of clarity, documentation, and confidence.
 

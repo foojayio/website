@@ -26,29 +26,29 @@ frozen: false
 
 By [Christopher Bradford](https://www.linkedin.com/in/bradfordcp/) and [Ty Morton](https://www.linkedin.com/in/ty-morton-2b55b82/){#31db}
 
-Global applications need a data layer that is as distributed as the users they serve. [Apache Cassandra](https://cassandra.apache.org/_/index.html) has risen to this challenge, handling data needs for the likes of Apple, Netflix and Sony. Traditionally, managing data layers for a distributed application was handled with dedicated teams to manage the deployment and operations of thousands of nodes --- both on-premises and in the cloud.
+Global applications need a data layer that is as distributed as the users they serve. [Apache Cassandra](https://cassandra.apache.org/_/index.html) has risen to this challenge, handling data needs for the likes of Apple, Netflix and Sony. Traditionally, managing data layers for a distributed application was handled with dedicated teams to manage the deployment and operations of thousands of nodes — both on-premises and in the cloud.
 
-To alleviate much of the load felt by DevOps teams, we evolved a number of these practices and patterns in [K8ssandra](https://k8ssandra.io/), leveraging the common control plane afforded by [Kubernetes](https://kubernetes.io/) (K8s) There has been a catch though --- running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front.{#4670}
+To alleviate much of the load felt by DevOps teams, we evolved a number of these practices and patterns in [K8ssandra](https://k8ssandra.io/), leveraging the common control plane afforded by [Kubernetes](https://kubernetes.io/) (K8s) There has been a catch though — running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front.{#4670}
 
 To show you how we did this, let's start by looking at a single region K8ssandra deployment running on a lone K8s cluster. It is made up of six Cassandra nodes spread across three availability zones within that region, with two Cassandra nodes in each availability zone. In this example, we'll use the [Google Cloud Platform](https://cloud.google.com/) (GCP) zone name. However, our example here could just as easily apply to other clouds or even on-prem.{#c5ee}
 
 Here's where we are now:{#f9b1}
 ![](0_C2mWeh5HM5olXxEt.png) Existing deployment of our cloud database.
 
-The goal is to have two regions, each with a Cassandra data center. In our cloud-managed K8s deployment here, this translates to two K8s clusters --- each with a separate control plane, but utilizing a common virtual private cloud (VPC) network. By expanding our Cassandra cluster into multiple data centers, we have redundancy in case of a regional outage, as well as improved response times and latencies to our client applications given local access to data.{#67a5}
+The goal is to have two regions, each with a Cassandra data center. In our cloud-managed K8s deployment here, this translates to two K8s clusters — each with a separate control plane, but utilizing a common virtual private cloud (VPC) network. By expanding our Cassandra cluster into multiple data centers, we have redundancy in case of a regional outage, as well as improved response times and latencies to our client applications given local access to data.{#67a5}
 ![](0_T5EBFr918S-sJOSr.png) *This is our goal: to have two regions, each with their own Cassandra data center.*
 
 On the surface, it would seem like we could achieve this by simply spinning up another K8s cluster deploying the same K8s [YAML](https://www.redhat.com/en/topics/automation/what-is-yaml). Then just add a couple tweaks for [Availability Zone](https://cloud.google.com/about/locations#network) names and we can call it done, right? Ultimately the shape of the resources is *very* similar, and it's all K8s objects. So, shouldn't this just work? Well, *maybe* . Depending on your environment, this approach *might* work.{#3f2a}
 
-If you're really lucky, you may be a firewall rule away from a fully distributed database deployment. Unfortunately, it's rarely that simple. Even if some of these hurdles are easily cleared, there are plenty of other innocuous things that can go wrong and lead to a degraded state. Your choice of cloud provider, K8s distro, command-line flag, and yes, even DNS --- these can all potentially lead you down a dark and stormy path. So, let's explore some of the most common issues you might run into, so you can avoid them.{#9ef7}
+If you're really lucky, you may be a firewall rule away from a fully distributed database deployment. Unfortunately, it's rarely that simple. Even if some of these hurdles are easily cleared, there are plenty of other innocuous things that can go wrong and lead to a degraded state. Your choice of cloud provider, K8s distro, command-line flag, and yes, even DNS — these can all potentially lead you down a dark and stormy path. So, let's explore some of the most common issues you might run into, so you can avoid them.{#9ef7}
 
 Even if some of your deployment seems to be working well initially, you will likely encounter a hurdle or two as you grow into a multicloud environment, upgrade to another K8s version, or begin working with different distributions and complimentary tooling.{#ba77}
 
-When it comes to distributed databases there's a lot more under the hood. Understanding what K8s is doing to enable running containers across a fleet of hardware will help you develop advanced solutions --- and ultimately, something that fits your exact needs.{#ba77}
+When it comes to distributed databases there's a lot more under the hood. Understanding what K8s is doing to enable running containers across a fleet of hardware will help you develop advanced solutions — and ultimately, something that fits your exact needs.{#ba77}
 
 One of the first hurdles you might run into involves basic networking. Going back to our first cluster, let's take a look at the layers of networking involved.{#b8a9}
 
-In our VPC shown below, we have a Classless Inter-Domain Routing (CIDR) range representing the addresses for the K8s worker instances. Within the scope of the K8s cluster there is a separate address space where pods operate and containers run. A pod is a collection of containers that have shared resources --- such as storage, networking, and process space.{#468f}
+In our VPC shown below, we have a Classless Inter-Domain Routing (CIDR) range representing the addresses for the K8s worker instances. Within the scope of the K8s cluster there is a separate address space where pods operate and containers run. A pod is a collection of containers that have shared resources — such as storage, networking, and process space.{#468f}
 
 In some cloud environments, these subnets are tied to specific availability zones. So, you might have a CIDR range for each subnet your K8s workers are launched into. You may also have other virtual machines within your VPC, but in this example we'll stick with K8s being the only tenant.{#10db}
 ![](0_El_xudxlj57P80m6.png) *CIDR ranges used by a VPC with a K8s layer*
@@ -81,13 +81,13 @@ While you could certainly instrument all that across all those different environ
 
 ## 1. Overlay networks
 
-An easier answer is to use overlay networks, in which you build out a separate IP address space for your application --- which, in this case, is a Cassandra database. Then you would run that on top of the existing Kube network leveraging proxies, sidecars and gateways. We won't go too far into that in this post, but we have some great content on [how to connect stateful workloads across K8s clusters](https://www.datastax.com/blog/how-connect-stateful-workloads-across-kubernetes-clusters) that will show you at a high level how to do that.{#7b7e}
+An easier answer is to use overlay networks, in which you build out a separate IP address space for your application — which, in this case, is a Cassandra database. Then you would run that on top of the existing Kube network leveraging proxies, sidecars and gateways. We won't go too far into that in this post, but we have some great content on [how to connect stateful workloads across K8s clusters](https://www.datastax.com/blog/how-connect-stateful-workloads-across-kubernetes-clusters) that will show you at a high level how to do that.{#7b7e}
 
 So, what's next? Packets are flowing, but now you have some new K8s shenanigans to deal with. Assuming that you get the network in place and have all the appropriate routing, some connectivity between these clusters exists, at least at an IP layer. You have IP connectivity pods and Cluster 1 can talk to Pods and Cluster 2, but you now also have some new things to think about.{#6c35}
 
 ## 2. Service discovery
 
-With a K8s network, identity is transient. Due to cluster events, a pod may be rescheduled and receive a new network address. In some applications this isn't a problem. In others, like databases, the network address is the identity --- which can lead to unexpected behavior. Even though IP addresses may change, over time our storage and thus the data each pod represents stays persistent. We must have a way to maintain a mapping of addresses to applications. This is where service discovery enters the fold.{#4ab9}
+With a K8s network, identity is transient. Due to cluster events, a pod may be rescheduled and receive a new network address. In some applications this isn't a problem. In others, like databases, the network address is the identity — which can lead to unexpected behavior. Even though IP addresses may change, over time our storage and thus the data each pod represents stays persistent. We must have a way to maintain a mapping of addresses to applications. This is where service discovery enters the fold.{#4ab9}
 
 In most circumstances service discovery is implemented via DNS within K8s. Even though a pod's IP address may change, it can have a persistent DNS-based identity that is updated as cluster events occur. This sounds great, but when we enter the world of multi-cluster we have to ensure that our services are discoverable across cluster boundaries. As a pod in Cluster 1, I *should* be able to get the address for a pod in Cluster 2.{#1504}
 
@@ -101,8 +101,8 @@ The gotcha here is that each cluster requires a separate DNS suffix set through 
 
 Another solution similar to DNS stubs is to use a managed DNS product. In the case of GCP there is the [Cloud DNS](https://cloud.google.com/dns) product, which handles replicating local DNS entries up to the VPC level for resolution by outside clusters, or even virtual machines within the same VPC. This option offers a lot of benefits, including:{#530f}
 
-* Removing the overhead of managing the cluster-hosted DNS server --- Cloud DNS requires no scaling, monitoring, or managing of DNS instances, because it is a hosted Google service.
-* Local resolution of DNS queries on each Google K8s Engine (GKE) node --- Similar to NodeLocal DNSCache, Cloud DNS caches DNS responses locally, providing low latency and high scalability DNS resolution.
+* Removing the overhead of managing the cluster-hosted DNS server — Cloud DNS requires no scaling, monitoring, or managing of DNS instances, because it is a hosted Google service.
+* Local resolution of DNS queries on each Google K8s Engine (GKE) node — Similar to NodeLocal DNSCache, Cloud DNS caches DNS responses locally, providing low latency and high scalability DNS resolution.
 * Integration with [Google Cloud's operations suite](https://cloud.google.com/stackdriver/docs) --- This provides for DNS monitoring and logging.
 * [VPC scope DNS](https://cloud.google.com/kubernetes-engine/docs/how-to/cloud-dns#vpc_scope_dns) --- Provides for multi-cluster, multi-environment, and VPC-wide K8s service resolution.
 

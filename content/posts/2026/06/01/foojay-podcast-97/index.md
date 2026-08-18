@@ -64,7 +64,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [How to Develop AI Agents Using BoxLang AI: A Practical Guide](https://foojay.io/today/how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide/)
   * [Introducing the BoxLang Spring Boot Starter](https://foojay.io/today/introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring/)
   * [Introducing BoxLings!](https://foojay.io/today/introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd/)
-  * [Introducing skills.boxlang.io --- The Open Agent Skills Ecosystem for BoxLang \& the Ortus World](https://foojay.io/today/introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world/)
+  * [Introducing skills.boxlang.io — The Open Agent Skills Ecosystem for BoxLang \& the Ortus World](https://foojay.io/today/introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world/)
 
 ## Content
 

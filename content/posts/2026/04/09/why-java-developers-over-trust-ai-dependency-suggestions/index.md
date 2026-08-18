@@ -101,6 +101,6 @@ The tools are useful. The confidence they project is not earned. Build the habit
 
 2. Chamorro-Premuzic, T., [Why Do So Many Incompetent Men Become Leaders?](https://ideas.ted.com/why-do-so-many-incompetent-men-become-leaders-and-what-can-we-do-about-it/) --- the confidence-competence gap in leadership selection.
 
-3. Carnegie Mellon University, [AI Chatbots Remain Confident --- Even When They're Wrong](https://www.cmu.edu/news/stories/archives/2025/july/ai-chatbots-remain-confident-even-when-theyre-wrong) --- 69--88% hallucination rate in legal queries with misleading authoritative tone.
+3. Carnegie Mellon University, [AI Chatbots Remain Confident — Even When They're Wrong](https://www.cmu.edu/news/stories/archives/2025/july/ai-chatbots-remain-confident-even-when-theyre-wrong) --- 69--88% hallucination rate in legal queries with misleading authoritative tone.
 
 4. Microsoft Research, [The Impact of Generative AI on Critical Thinking](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf) --- documented reductions in independent problem-solving among AI tool users.

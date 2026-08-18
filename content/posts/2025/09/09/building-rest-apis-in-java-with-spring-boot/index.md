@@ -21,7 +21,7 @@ frozen: false
 
 REST has become the default choice for building web services, and for good reason. It's straightforward to implement, easy for clients to consume, and built directly on top of the same principles of the web itself.
 
-HTTP already gives us well-defined methods (GET, POST, PUT, DELETE), built-in caching, redirect support, secure transport via TLS, and widespread tooling support across platforms. REST doesn't reinvent the web---it uses it.
+HTTP already gives us well-defined methods (GET, POST, PUT, DELETE), built-in caching, redirect support, secure transport via TLS, and widespread tooling support across platforms. REST doesn't reinvent the web—it uses it.
 
 REST is not a protocol or a rigid standard. It's a lightweight architectural approach that encourages scalable, evolvable, and interoperable services. Its creator, Roy Fielding, helped define many of the specs that underpin the web today.
 

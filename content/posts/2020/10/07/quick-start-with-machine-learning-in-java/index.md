@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-So you're a Java developer and you want to do some machine learning. Some of the questions that you might be wondering about are---what can machine learning do for me anyway, which library to use, which algorithms, and is there a common standard API?
+So you're a Java developer and you want to do some machine learning. Some of the questions that you might be wondering about are—what can machine learning do for me anyway, which library to use, which algorithms, and is there a common standard API?
 
 Since recently there is a standard API that was created to address exactly these questions. Meet [JSR 381](https://www.jcp.org/en/jsr/detail?id=381), a standard Java API for Visual Recognition using machine learning.
 

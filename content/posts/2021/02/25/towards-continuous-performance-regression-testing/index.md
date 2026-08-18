@@ -473,4 +473,4 @@ Stay tuned for next parts in this series, where we'll explore how to trace the S
 
 *Many thanks to [Hans-Peter Grahsl](https://twitter.com/hpgrahsl), [John O'Hara](https://twitter.com/JohnnyDoItAll), [Nitsan Wakart](https://twitter.com/nitsanw), and [Sanne Grinovero](https://twitter.com/SanneGrinovero/) for their extensive feedback while writing this blog post!*
 
-**Note:** Used with permission and thanks --- originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/towards-continuous-performance-regression-testing/).
+**Note:** Used with permission and thanks — originally written by Gunnar Morling and published on [Gunnar Morling's blog](https://www.morling.dev/blog/towards-continuous-performance-regression-testing/).

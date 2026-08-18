@@ -196,7 +196,7 @@ The higher you set the work factor, the stronger the hash will be, but it will a
 
 Whenever you need to implement password hashing in your application, there are a few best practices you should keep in mind.
 
-1. Never implement password hashing algorithms yourself --- use a well-vetted developer library instead! Cryptography is a complex field, and there are lots of things that can go wrong if you attempt to implement a popular algorithm yourself.
+1. Never implement password hashing algorithms yourself — use a well-vetted developer library instead! Cryptography is a complex field, and there are lots of things that can go wrong if you attempt to implement a popular algorithm yourself.
 2. As computers get stronger and faster every year, password hashing algorithms (and their parameters) need to be adjusted! Modern password hashing algorithms are reliant upon you (as the developer) to specify how much resources they should use when computing a hash, and as time progresses, you will need to update these parameters. The only way to stay on top of things like this is by keeping up with the latest security news and trends. The [Snyk blog](https://snyk.io/blog/), for example, is a great resource for security information and trends over time.
 
 Make sure that the libraries and techniques you're using are secure by using free tooling like Snyk to proactively identify security issues in your code. Tools like [Snyk](https://snyk.io/) can identify security issues in your code early as well as suggest fixes and provide you with additional information. They are a critical part of maintaining a secure codebase over time as technology advances.

@@ -18,19 +18,19 @@ related_posts:
 frozen: false
 ---
 
-While waiting for your flight in an airport, have you ever wondered how much behind-the-scenes planning it takes to keep an airport running smoothly? Every day, thousands of flights take off and land, passengers rush through terminals, and staff work tirelessly to make sure everything unfolds without a hitch. What looks like chaos on the surface is actually the result of a highly coordinated system---a kind of "brain" that's always working in the background to manage logistics, adapt to surprises, and keep the airport humming along.  
+While waiting for your flight in an airport, have you ever wondered how much behind-the-scenes planning it takes to keep an airport running smoothly? Every day, thousands of flights take off and land, passengers rush through terminals, and staff work tirelessly to make sure everything unfolds without a hitch. What looks like chaos on the surface is actually the result of a highly coordinated system—a kind of "brain" that's always working in the background to manage logistics, adapt to surprises, and keep the airport humming along.  
 
-In the world of software, domain-driven design (DDD) plays a similar role. DDD is an approach to building robust business applications by focusing on the core domain---the essential knowledge and operations at the heart of your business. Just like an airport's central system coordinates everything from flight schedules to security checks, DDD organizes your code around real-world processes and concepts. By using DDD, developers aren't just writing code---they're modeling the complex realities of a business, making their applications as reliable, adaptable, and well-orchestrated as a major international airport. They create a shared language which defines clear boundaries and responds flexibly to changing business needs.
+In the world of software, domain-driven design (DDD) plays a similar role. DDD is an approach to building robust business applications by focusing on the core domain—the essential knowledge and operations at the heart of your business. Just like an airport's central system coordinates everything from flight schedules to security checks, DDD organizes your code around real-world processes and concepts. By using DDD, developers aren't just writing code—they're modeling the complex realities of a business, making their applications as reliable, adaptable, and well-orchestrated as a major international airport. They create a shared language which defines clear boundaries and responds flexibly to changing business needs.
 
-Some of the key ideas in DDD include the domain itself (think of it as the "air traffic control" of your application, orchestrating all major operations), ubiquitous language (a shared, standardized vocabulary---much like the precise aviation terms used by every team in an airport), and bounded contexts (separate functional areas, just as an airport has terminals, security, and baggage claim, each with its own rules and workflows).
+Some of the key ideas in DDD include the domain itself (think of it as the "air traffic control" of your application, orchestrating all major operations), ubiquitous language (a shared, standardized vocabulary—much like the precise aviation terms used by every team in an airport), and bounded contexts (separate functional areas, just as an airport has terminals, security, and baggage claim, each with its own rules and workflows).
 
 You'll encounter entities (unique, trackable items like airplanes or passengers), value objects (descriptions or details, such as a boarding pass), aggregates (clusters of related operations), repositories (the places where you store, find, or update your important information), and services (essential operations that coordinate activities across the system but don't belong to any single entity).
 
-A vital part of modern DDD is the use of domain events---moments that signal significant changes, such as \`FlightDelayedEvent\` or \`BoardingStartedEvent\`, which help the whole system react and adapt, just like real-time announcements and operations in an actual airport.
+A vital part of modern DDD is the use of domain events—moments that signal significant changes, such as \`FlightDelayedEvent\` or \`BoardingStartedEvent\`, which help the whole system react and adapt, just like real-time announcements and operations in an actual airport.
 
-By relating each of these building blocks back to airport operations, DDD transforms abstract software concepts into practical, real-world solutions---making your business logic as organized, predictable, and effective as the world's busiest travel hubs.
+By relating each of these building blocks back to airport operations, DDD transforms abstract software concepts into practical, real-world solutions—making your business logic as organized, predictable, and effective as the world's busiest travel hubs.
 
-In this article, we'll take a hands-on approach to learning domain-driven design by actually building an airport operations system together---step by step, using Java and Spring Boot. You'll see how DDD concepts come to life as we model real-world airport activities, create domain classes, organize bounded contexts, and wire everything up with practical code.
+In this article, we'll take a hands-on approach to learning domain-driven design by actually building an airport operations system together—step by step, using Java and Spring Boot. You'll see how DDD concepts come to life as we model real-world airport activities, create domain classes, organize bounded contexts, and wire everything up with practical code.
 
 ## Understanding the "Airport" domain
 
@@ -614,6 +614,6 @@ Also, it is significant in DDD to have pitfall identification and have preventiv
 
 ## Conclusion
 
-By following these demo-driven steps, you'll experience DDD as a practical "control tower" for your Spring Boot project: organizing code, clarifying responsibilities, and enabling your team to grow and adapt the system---just as in a real-world airport operation.
+By following these demo-driven steps, you'll experience DDD as a practical "control tower" for your Spring Boot project: organizing code, clarifying responsibilities, and enabling your team to grow and adapt the system—just as in a real-world airport operation.
 
 We can enhance the capabilities of this demo application by adding new features, departments (contexts), or incorporating more real-life event correlations into the design. The main motive of DDD is to always try to have code that goes back to business understanding.

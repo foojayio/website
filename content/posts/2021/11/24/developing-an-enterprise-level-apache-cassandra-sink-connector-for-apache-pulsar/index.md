@@ -40,7 +40,7 @@ Apache Pulsar offers built-in mechanisms to deal with Schemas and enables you to
 
 With the Cassandra connector you can leverage Schema information in order to manage the contents of the topics and write them to Cassandra.
 
-You can also map an existing Pulsar schema to the schema of the Cassandra table---even when they don't match perfectly---by:
+You can also map an existing Pulsar schema to the schema of the Cassandra table—even when they don't match perfectly—by:
 
 * selecting only a subset of fields
 * selecting fields of inner structures in the case of nested types

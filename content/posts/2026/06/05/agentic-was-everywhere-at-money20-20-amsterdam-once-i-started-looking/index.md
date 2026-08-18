@@ -15,7 +15,7 @@ frozen: false
 
 **I walked the floor at [Money20/20](https://www.money2020.com/) in Amsterdam with a simple little mission: count the first ten vendor booths using "AI," "agent," or "agentic" in their pitch.**
 
-My first impression was that this would be hard. Hundreds of organizations, and the buzzwords felt oddly absent --- payments, core banking, compliance, the usual fintech furniture, but not the wall-to-wall "agentic everything" I'd braced for. I jotted down my first ten and thought: ***huh, AI is barely here**.*
+My first impression was that this would be hard. Hundreds of organizations, and the buzzwords felt oddly absent — payments, core banking, compliance, the usual fintech furniture, but not the wall-to-wall "agentic everything" I'd braced for. I jotted down my first ten and thought: ***huh, AI is barely here**.*
 
 Then I kept walking. And it turns out I'd just been looking past it. The "agentic" framing wasn't shouting from every banner, it had quietly landed within the messaging of nearly everyone. Once I got going and walked through all the many halls and areas, the ten gradually became twenty-plus.
 
@@ -31,13 +31,13 @@ The platforms that run the actual ledgers are rebranding speed and adaptability 
 
 ## Payments and money movement
 
-Unsurprisingly for Money20/20, payments showed up --- now with agents that initiate and settle:
+Unsurprisingly for Money20/20, payments showed up — now with agents that initiate and settle:
 
 * [BridgerPay](https://www.bridgerpay.com/) --- "AI powered payment orchestration"
 * [SolvaPay](https://solvapay.com/) --- "Agents need to pay. Agentic payments"
 * [Stripe](https://stripe.com/) --- "Moving money at agentic speed"
 
-A recurring idea here --- *agents that pay* --- is interesting. It implies AI agents *initiating* transactions, which is a new design problem for anyone building payment rails.
+A recurring idea here — *agents that pay* — is interesting. It implies AI agents *initiating* transactions, which is a new design problem for anyone building payment rails.
 
 ## Lending, credit, and collections
 
@@ -57,11 +57,11 @@ There's a lot going on here: the part of fintech where "auditable" and "agentic"
 * [Kalipso](https://kalipso.ai/) --- "Regulatory compliance, powered by AI"
 * [JupiterOne](https://www.jupiterone.com/) --- "AI Risk Management Platform"
 * [DataWhisper](https://datawhisper.co.uk/) --- "Agentic AI for Regulated Industries"
-* [Trustpilot](https://www.trustpilot.com/) --- "The future of commerce runs on AI --- and trust"
+* [Trustpilot](https://www.trustpilot.com/) --- "The future of commerce runs on AI — and trust"
 
 ## Build-your-own-agent platforms and tooling
 
-Another relevant area --- the tools you'd actually use to create the AI agents themselves:
+Another relevant area — the tools you'd actually use to create the AI agents themselves:
 
 * [Sierra](https://sierra.ai/) --- "There's an AI agent for that. It's built on Sierra."
 * [orq.ai](https://orq.ai/) --- "Build \& operate quality AI products"

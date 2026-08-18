@@ -24,11 +24,11 @@ To be able to write good code, you have to read a lot of good code. This way you
 
 There are several ways to improve reading skills. In this article, I would like to mention a few.
 
-**1. Run the Code** --- Well, this is the first step in reading code. This might not give you a lot of details about the project, however, you will know how to build it and run it, and you will get to learn about the libraries it uses, the framework(s) it depends on, etc., which is a great way to improve your understanding of a particular project.
+**1. Run the Code** — Well, this is the first step in reading code. This might not give you a lot of details about the project, however, you will know how to build it and run it, and you will get to learn about the libraries it uses, the framework(s) it depends on, etc., which is a great way to improve your understanding of a particular project.
 
 If you want to write your own piece of software similar to the particular project you are exploring, you might get some ideas about the possible framework or libraries you should use.
 
-**2. Find the High-Level Logic** --- You may not jump into each detail when you start reading a project. Rather, you should focus on the high-level structure. Start from the entry point. Most projects have a main method, start from there. Besides, if this is a web application, start looking into different packages, like where the business logic is housed, where the UI code is kept, where the controllers are, etc.
+**2. Find the High-Level Logic** — You may not jump into each detail when you start reading a project. Rather, you should focus on the high-level structure. Start from the entry point. Most projects have a main method, start from there. Besides, if this is a web application, start looking into different packages, like where the business logic is housed, where the UI code is kept, where the controllers are, etc.
 
 Basically, skim through the whole project and gain a primary idea, and then ask yourself where you want to focus and which part you want to read first. You may not read the entire code base, rather, just a portion of it may interest you. When you find your spot, you can start by method calling and see where it leads you.
 

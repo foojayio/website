@@ -23,7 +23,7 @@ Or simply put, pattern matching is a language feature where you can test for a s
 
 Pattern matching can be classified into two types.
 
-* **Sequence patterns**: pattern matching on character sequence or strings. Also known as our beloved Regular Expressions 😉 --- I still wish I could write RegEx without cursing and looking up the syntax.
+* **Sequence patterns**: pattern matching on character sequence or strings. Also known as our beloved Regular Expressions 😉 — I still wish I could write RegEx without cursing and looking up the syntax.
 * **Tree patterns**: testing for patterns on a data structure. This is what we are going to talk about today.
 
 ![regex meme](https://i.imgur.com/M6xKDas.jpeg)
@@ -49,13 +49,13 @@ Of course, these advantages depend on how a language implements pattern matching
 
 These are many languages that have great support for pattern matching. Rust and OCaml lead the pack here. On the JVM world, Scala also offers many of these pattern matching features. So when a language claims to have support for pattern matching, these are the features we expect:
 
-* Enum matching in switch statements --- Most languages, including Java, already does this
-* Match the value in switch/if statements --- Common in any Turing complete language
-* Match type in switch/if statements --- Required for pattern matching
+* Enum matching in switch statements — Most languages, including Java, already does this
+* Match the value in switch/if statements — Common in any Turing complete language
+* Match type in switch/if statements — Required for pattern matching
 * Pattern matched variable assignments
-* Null checks --- Required in a language like Java
+* Null checks — Required in a language like Java
 * Type guards
-* Refined patterns --- If we can match for data types, then its logical to expect refining the pattern further using the matched type, which acts as a type guard
+* Refined patterns — If we can match for data types, then its logical to expect refining the pattern further using the matched type, which acts as a type guard
 * Pattern dominance and type exhaustion
 * Partial/Nested/Compound type and/or value checks
 * Shallow/Deep Position-based Destructured matching
@@ -69,8 +69,8 @@ Unfortunately, Java is still a bit behind the curve when it comes to pattern mat
 But fortunately, we already have most of the building blocks required to achieve most of the features we saw earlier.
 
 * Switch statements
-* Switch expressions (Java 14) --- As compared to the switch statements, switch expressions can return a value, have multiple case labels on the same line, and need to be exhaustive. And hence can be used for variable assignments and statements without fallthrough
-* Pattern matching for `instanceof` (Java 16) --- It can now pattern match data types, which means casting after a check is no longer required, and this can be used in `if` statements, assignments, and returns.
+* Switch expressions (Java 14) — As compared to the switch statements, switch expressions can return a value, have multiple case labels on the same line, and need to be exhaustive. And hence can be used for variable assignments and statements without fallthrough
+* Pattern matching for `instanceof` (Java 16) — It can now pattern match data types, which means casting after a check is no longer required, and this can be used in `if` statements, assignments, and returns.
 * Sealed classes (Java 17)
 * Pattern matching for switch (Java 17 preview - JEP 406)
 

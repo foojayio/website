@@ -20,13 +20,13 @@ frozen: false
 
 The growing adoption of [MongoDB Atlas](https://www.mongodb.com/lp/cloud/atlas/try4-reg/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=samuel-foojay&utm_term=tony.kim) as a managed database platform increasingly demands mechanisms that align security, compliance, and governance. In April 2025, MongoDB introduced a critical feature for this purpose: [**Resource Policies**](https://www.mongodb.com/en-us/docs/atlas/atlas-resource-policies/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=samuel-foojay&utm_term=tony.kim).
 
-This article presents the concept and capabilities of Resource Policies, highlights their importance in enterprise environments, and demonstrates how to use them effectively via Terraform --- ensuring that essential configurations rely not only on best practices but also on enforceable and auditable constraints.
+This article presents the concept and capabilities of Resource Policies, highlights their importance in enterprise environments, and demonstrates how to use them effectively via Terraform — ensuring that essential configurations rely not only on best practices but also on enforceable and auditable constraints.
 
 ## **What Are Resource Policies?**
 
 **Resource Policies** are organization-level rules in Atlas that are automatically enforced across all projects and clusters under that organization. Their goal is straightforward yet powerful: to restrict specific actions or configurations that could compromise security, increase costs, or violate compliance standards.
 
-These policies are defined using the AWS open-source [Cedar](https://docs.cedarpolicy.com/) policy language, adopted by MongoDB for its concise and expressive syntax. Its declarative structure allows for clear and precise specification of forbidden actions based on the resource context --- including cluster configuration, networking parameters, associated projects, and security requirements such as minimum TLS versions.
+These policies are defined using the AWS open-source [Cedar](https://docs.cedarpolicy.com/) policy language, adopted by MongoDB for its concise and expressive syntax. Its declarative structure allows for clear and precise specification of forbidden actions based on the resource context — including cluster configuration, networking parameters, associated projects, and security requirements such as minimum TLS versions.
 
 ## **Why Use Them?**
 
@@ -152,7 +152,7 @@ curl --request GET \
 
 This endpoint returns a list of projects, clusters, or networks that violate current policies.
 
-*⚠️ Important: MongoDB Atlas does not automatically fix or block existing resources. If a resource is out of compliance, it will remain unchanged --- the system only reports the violation, enabling visibility without disruption.*
+*⚠️ Important: MongoDB Atlas does not automatically fix or block existing resources. If a resource is out of compliance, it will remain unchanged — the system only reports the violation, enabling visibility without disruption.*
 
 In the example below, a public IP was already configured in the project. After applying the policy that blocks 0.0.0.0/0, the resource was not removed, but it was flagged as non-compliant:
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeU1lUV71qq91DLAL39ZWmISnJR0xV7DClHUNbT-mnuKPLog1cbHEQpT79-UQnoS_V7oJxyhvqnNlGGhb8rUvteHC6mq48-rQoOr7VQngPk2y3Pr6ow-N_14XjF44wAbg4FL5Gx?key=FOpKAlLwLhYVlHz_DCq4KA)
@@ -184,4 +184,4 @@ MongoDB Atlas Resource Policies represent a significant advancement for organiza
 
 Instead of relying solely on manual processes or human reviews, organizations can automate guardrails that prevent insecure practices, enforce compliance, and promote consistency across environments.
 
-For teams using MongoDB Atlas in critical or regulated environments, gradual adoption is recommended --- starting with development environments and expanding as policies mature.
+For teams using MongoDB Atlas in critical or regulated environments, gradual adoption is recommended — starting with development environments and expanding as policies mature.

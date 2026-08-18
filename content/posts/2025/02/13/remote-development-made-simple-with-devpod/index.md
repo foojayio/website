@@ -67,7 +67,7 @@ DevPod offers providers: locations where to run the containers. The default is D
 
 {{< img src="devpod-configure-provider-700x245.webp" class="aligncenter size-medium" alt="Configuring a new DevPod provider" width="700" height="245" >}}
 
-For this post, I'll keep Docker---I'm using OrbStack. Now, onto the meat. Let's go to the workspaces menu item. If you already have created workspaces, they should appear here. Since it's our first visit, we shall create one. Click on the btn:\[Create workspace\] button. Let's try one of the quickstart examples, *i.e.*, Rust. My IDE of choice is IntelliJ IDEA, but you can choose yours. Once you've selected an image, an IDE, and a provider, click Create Workspace.
+For this post, I'll keep Docker—I'm using OrbStack. Now, onto the meat. Let's go to the workspaces menu item. If you already have created workspaces, they should appear here. Since it's our first visit, we shall create one. Click on the btn:\[Create workspace\] button. Let's try one of the quickstart examples, *i.e.*, Rust. My IDE of choice is IntelliJ IDEA, but you can choose yours. Once you've selected an image, an IDE, and a provider, click Create Workspace.
 
 {{< img src="devpod-create-workspace-576x510.webp" class="aligncenter size-medium" alt="Starting a new DevPod workspace" width="576" height="510" >}}
 

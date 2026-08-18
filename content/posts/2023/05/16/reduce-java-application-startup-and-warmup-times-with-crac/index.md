@@ -39,9 +39,9 @@ The builds are commercially supported as part of [Azul Platform Core](https://ww
 ## From Micronaut to Spring Boot
 
 > "***CRaC has generated immense interest among the Java developer community and provides a compelling, resource-efficient approach for improving startup and warmup times** . **Azul is well known for originating this project, so it came as no surprise that they would also deliver the world's first production-ready builds of OpenJDK with commercial CRaC support.***"
-> --- Sergio del Amo, Micronaut Product Development Lead.
+> — Sergio del Amo, Micronaut Product Development Lead.
 ![Time to first operation for Micronaut improved from 1 second without CRaC to 46 milliseconds with CRaC.](https://www.azul.com/wp-content/uploads/CleanShot-2023-05-15-at-08.03.52.gif) **"** ***Project CRaC's checkpoint restore approach is very promising for the immediate startup of Spring applications on the JVM. Our collaboration with Azul delivered some great initial results already**.*"
-> --- Juergen Hoeller, project lead and co-founder of the Spring Framework project.
+> — Juergen Hoeller, project lead and co-founder of the Spring Framework project.
 
 ![Time to first operation for Spring Boot improved from 4 seconds without CRaC to 38 milliseconds with CRaC.](https://www.azul.com/wp-content/uploads/CleanShot-2023-05-15-at-08.04.13.gif)
 

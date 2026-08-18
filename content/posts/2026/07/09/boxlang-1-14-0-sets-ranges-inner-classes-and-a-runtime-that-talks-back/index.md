@@ -31,7 +31,7 @@ This could have easily been a major release for the team. This has been a really
 
 BoxLang 1.14.0 delivers `BoxSet` as a genuine first-class type - not a thin wrapper, not a library afterthought - a fully integrated collection with literal syntax, functional pipelines, operator overloads for set algebra, and three backing variants to suit whatever your workload demands.
 
-Unlike arrays, sets enforce uniqueness by design and offer highly efficient lookup operations. BoxLang elevates sets to a first-class citizen with literal syntax, functional collection operations, and rich operator overloads for set algebra---including unions, intersections, differences, and symmetric differences---making complex data manipulation both expressive and concise.
+Unlike arrays, sets enforce uniqueness by design and offer highly efficient lookup operations. BoxLang elevates sets to a first-class citizen with literal syntax, functional collection operations, and rich operator overloads for set algebra—including unions, intersections, differences, and symmetric differences—making complex data manipulation both expressive and concise.
 
 Whether you're comparing datasets, managing unique identifiers, processing large collections, implementing access-control rules, or building recommendation and analytics engines, BoxSet provides a performant and elegant foundation for working with distinct values at scale.
 

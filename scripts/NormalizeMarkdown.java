@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 /**
  * One-off migration: brings already-converted content/ in line with the storage
- * format the conversion scripts now emit. Two independent normalizations, both
+ * format the conversion scripts now emit. Three independent normalizations, all
  * of them Flexmark defaults that were never a deliberate choice here.
  *
  * 1. SETEXT HEADINGS -> ATX.
@@ -43,12 +43,60 @@ import java.util.stream.Stream;
  *    newline. (Frontmatter-only files -- `_index.md`, `search.md` and the like
  *    -- have no body to trim and are left as they are.)
  *
+ * 3. ASCII DASH STAND-INS -> THE REAL CHARACTER.
+ *
+ *        Fair challenge --- JEP 491 was a big deal
+ *
+ *    becomes
+ *
+ *        Fair challenge — JEP 491 was a big deal
+ *
+ *    WordPress serves a real em dash and Flexmark's typographic pass rewrote it
+ *    as `---`. HtmlToMarkdown now sets TYPOGRAPHIC_SMARTS = false so future
+ *    conversions keep the character; this pass brings the 499 stored files into
+ *    the same shape.
+ *
+ *    THIS ONE IS COSMETIC -- know that before running it. Hugo enables Goldmark's
+ *    typographer extension by default, and it turns `---` back into `&mdash;` at
+ *    render time, so the SITE was never showing a literal `---`. Verified by
+ *    diffing the built output before and after: of 10,021 files, every HTML page
+ *    is byte-identical once `&mdash;` is decoded, and the 145 RSS feeds differ
+ *    only in entity-vs-character form, which readers resolve identically (those
+ *    feeds already carry 3,204 `&amp;rsquo;` from the same extension). The
+ *    control -- the same content built twice -- also has to be measured, because
+ *    sidebar.html shuffles its author and JUG widgets per page: 1,483 files
+ *    differ build-to-build for that reason alone, and only 0 once the <aside> is
+ *    excluded.
+ *
+ *    So the reason to run it is storage consistency, not output: with the
+ *    converter no longer emitting `---`, a re-scrape of any old post would
+ *    otherwise show a dash change in its diff on top of the real edits. Where the
+ *    ASCII form genuinely reached a reader was OUTSIDE Hugo -- GitHub Discussions
+ *    have no typographer, so `ImportWpComments.java` would have posted `Fair
+ *    challenge --- JEP 491` verbatim. That was fixed at the converter, not here.
+ *
+ *    Only the two unambiguous shapes are converted: ` --- ` between non-blanks,
+ *    and `---` glued between two word characters. Both are 3 hyphens, which
+ *    nobody types by hand mid-sentence.
+ *
  * WHAT IS DELIBERATELY NOT TOUCHED:
  *
  *   - A <br> with text on its line. In a table cell (`| iload_1 <br /> iload_2 |`)
  *     or inside inline SVG it is load-bearing; only a line consisting of nothing
  *     but <br> tags is a spacer.
- *   - Anything inside a fenced code block.
+ *   - Anything inside a fenced code block or an indented one.
+ *   - ` -- ` and `...`, the en-dash and ellipsis stand-ins (1,185 and 1,782 of
+ *     them). The typographer renders these too, so there is nothing to fix for a
+ *     reader, and unlike `---` they are things an author really types -- `--` is
+ *     also every long CLI flag written outside backticks, and rewriting that to
+ *     an en dash in the SOURCE would destroy what the author meant while leaving
+ *     the page unchanged. A re-scrape now emits the right character; that is the
+ *     only sound way to normalize them.
+ *   - `---` inside inline code, an autolink, a Markdown link destination or a
+ *     bare URL: `a---b` in a path is a path, not punctuation.
+ *   - A line that IS a `---` rule: frontmatter delimiters, thematic breaks and
+ *     setext underlines are all matched by the passes above, never by this one
+ *     (both dash patterns require non-blank content around the hyphens).
  *   - A `---` under a line that starts a LIST (`* x` / `1. x`). CommonMark says
  *     a setext underline cannot interrupt a list, so that pair already renders
  *     as a list plus a thematic break, not as a heading -- converting it would
@@ -99,6 +147,12 @@ public class NormalizeMarkdown {
     static final Pattern ATX = Pattern.compile("^[ \\t]{0,3}#{1,6}[ \\t]");
     /** A blank (or whitespace-only) line. */
     static final Pattern BLANK = Pattern.compile("^[ \\t]*$");
+    /** Flexmark's em-dash stand-in, spaced: `challenge --- JEP`. */
+    static final Pattern SPACED_EM = Pattern.compile("(?<=\\S) --- (?=\\S)");
+    /** Flexmark's em-dash stand-in, glued: `challenge---JEP`. */
+    static final Pattern GLUED_EM = Pattern.compile("(?<=\\w)---(?=\\w)");
+    /** Spans where `---` is not punctuation: inline code, autolinks, link destinations, bare URLs. */
+    static final Pattern NOT_PROSE = Pattern.compile("`[^`]*`|<[^>\\s]+>|\\]\\([^)]*\\)|https?://\\S+");
 
     public static void main(String[] args) throws IOException {
         boolean dryRun = false;
@@ -117,7 +171,7 @@ public class NormalizeMarkdown {
             files = s.filter(p -> p.toString().endsWith(".md")).sorted().toList();
         }
 
-        int changedFiles = 0, headings = 0, breaks = 0;
+        int changedFiles = 0, headings = 0, breaks = 0, dashes = 0;
         List<String> keptAsList = new ArrayList<>();
         List<String> paragraphSplits = new ArrayList<>();
 
@@ -127,7 +181,7 @@ public class NormalizeMarkdown {
             String head = original.substring(0, split);
             String body = original.substring(split);
 
-            int[] stats = new int[4]; // headings, breaks, list-guard skips, paragraph splits
+            int[] stats = new int[5]; // headings, breaks, list-guard skips, paragraph splits, dashes
             String newBody = normalize(body, stats);
             if (stats[2] > 0) keptAsList.add(file + " (" + stats[2] + ")");
             if (stats[3] > 0) paragraphSplits.add(file + " (" + stats[3] + ")");
@@ -136,11 +190,13 @@ public class NormalizeMarkdown {
             changedFiles++;
             headings += stats[0];
             breaks += stats[1];
+            dashes += stats[4];
             if (!dryRun) Files.writeString(file, head + newBody);
         }
 
-        System.out.printf("%s %d file(s): %d setext heading(s) -> ATX, %d decorative <br> line(s) dropped%n",
-                dryRun ? "[dry-run] would change" : "Changed", changedFiles, headings, breaks);
+        System.out.printf("%s %d file(s): %d setext heading(s) -> ATX, %d decorative <br> line(s) dropped, "
+                        + "%d ASCII dash stand-in(s) -> em dash%n",
+                dryRun ? "[dry-run] would change" : "Changed", changedFiles, headings, breaks, dashes);
         if (!keptAsList.isEmpty()) {
             System.out.println("Left underlined (a `---` under a list item is a thematic break, not a heading):");
             keptAsList.forEach(s -> System.out.println("  " + s));
@@ -210,19 +266,55 @@ public class NormalizeMarkdown {
                             stats[3]++;
                         }
                         String hashes = rule.group(1).equals("=") ? "# " : "## ";
-                        out.add(quote + hashes + text.trim());
+                        out.add(quote + hashes + restoreDashes(text.trim(), stats));
                         stats[0]++;
                         i++; // consume the underline
                         continue;
                     }
                 }
             }
-            out.add(lines[i]);
+            out.add(restoreDashes(lines[i], stats));
         }
 
         // Dropping a spacer leaves the blank lines that surrounded it, and an ATX
         // heading no longer needs the blank line the underline used to occupy.
         return collapseBlankLines(out).stripTrailing() + "\n";
+    }
+
+    /**
+     * Puts the em dash back on one prose line, leaving inline code, autolinks,
+     * link destinations and bare URLs exactly as they are. Fenced code never
+     * reaches here (the caller handles fences); an indented code block is skipped
+     * on the spot -- conservatively, since telling one from a deeply indented
+     * list paragraph needs context this doesn't have, and skipping only ever
+     * leaves a `---` in place.
+     */
+    static String restoreDashes(String line, int[] stats) {
+        if (INDENTED_CODE.matcher(line).find() || line.indexOf('-') < 0) return line;
+        StringBuilder sb = new StringBuilder();
+        Matcher notProse = NOT_PROSE.matcher(line);
+        int at = 0;
+        while (notProse.find()) {
+            sb.append(dashesToEmDash(line.substring(at, notProse.start()), stats));
+            sb.append(notProse.group());
+            at = notProse.end();
+        }
+        return sb.append(dashesToEmDash(line.substring(at), stats)).toString();
+    }
+
+    static String dashesToEmDash(String text, int[] stats) {
+        int found = count(SPACED_EM, text) + count(GLUED_EM, text);
+        if (found == 0) return text;
+        stats[4] += found;
+        String spaced = SPACED_EM.matcher(text).replaceAll(" \u2014 ");
+        return GLUED_EM.matcher(spaced).replaceAll("\u2014");
+    }
+
+    static int count(Pattern pattern, String text) {
+        Matcher m = pattern.matcher(text);
+        int n = 0;
+        while (m.find()) n++;
+        return n;
     }
 
     /**

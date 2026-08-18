@@ -142,7 +142,7 @@ So, let's cycle back to "Why Java?" Java has compile-time typing, which catches 
 
 Java, unlike other open-source communities, has deep pockets behind it that ought to be interested in growing the pie. Short term, what is needed is a bunch of tutorial material that stitches together what is already there. In the medium term, I am hoping for a social infrastructure that makes it easy to share Java-based solutions. Maybe because some benevolent entity pays for server costs, or maybe because Wasm advances enough that it can happen in the browser.
 
-I know---not a very satisfactory answer. As always, when paying for resources is involved, I brought this up with [Chad Arimura](https://www.linkedin.com/in/chadarimura/) from Oracle yesterday, and he was frustrated himself how hard it is. If you want to ask me about something else where I have a strong opinion, ask me about learning by practice with immediate feedback.  
+I know—not a very satisfactory answer. As always, when paying for resources is involved, I brought this up with [Chad Arimura](https://www.linkedin.com/in/chadarimura/) from Oracle yesterday, and he was frustrated himself how hard it is. If you want to ask me about something else where I have a strong opinion, ask me about learning by practice with immediate feedback.  
 
 **Bazlur: Let's shift gears and talk about the current state of software development. In your opinion, what are some of the biggest challenges that the software industry and its developers face today?**
 

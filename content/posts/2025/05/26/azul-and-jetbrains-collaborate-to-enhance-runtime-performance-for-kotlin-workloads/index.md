@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-**SUNNYVALE, Calif., --- May 20, 2025 --- [Azul](https://www.azul.com/), the only company 100% focused on Java, and [JetBrains](https://www.jetbrains.com/), the leading provider of professional software development tools and creator of the Kotlin programming language, today announced a strategic technical collaboration to enhance the runtime performance and scalability of web and server-side Kotlin applications. This strategic collaboration empowers Kotlin teams to accelerate development cycles and optimize application performance, helping them support their business priorities while driving greater operational efficiency.**
+**SUNNYVALE, Calif., — May 20, 2025 — [Azul](https://www.azul.com/), the only company 100% focused on Java, and [JetBrains](https://www.jetbrains.com/), the leading provider of professional software development tools and creator of the Kotlin programming language, today announced a strategic technical collaboration to enhance the runtime performance and scalability of web and server-side Kotlin applications. This strategic collaboration empowers Kotlin teams to accelerate development cycles and optimize application performance, helping them support their business priorities while driving greater operational efficiency.**
 
 **Joining Forces to Advance Kotlin Performance**
 

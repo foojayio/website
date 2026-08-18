@@ -24,7 +24,7 @@ MongoDB Aggregations Series
 * [MongoDB Aggregations: Finding Cooking Times with $min and $max](https://learnmongo.com/mongodb-aggregations-finding-cooking-times-with-min-and-max/)
 * MongoDB Aggregations: Organizing Recipes by Meal Type with $group
 
-As part of this series, we are imagining you're building a recipe website. For this post, we are adding some new features to our site, including allowing users to browse recipes by meal type---breakfast, lunch, dinner, etc.
+As part of this series, we are imagining you're building a recipe website. For this post, we are adding some new features to our site, including allowing users to browse recipes by meal type—breakfast, lunch, dinner, etc.
 
 MongoDB's [$group](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=recipe-foojay&utm_term=tony.kim) operator is ideal for this, as it lets you categorize recipes based on a specific field. This is useful for developing features like meal plans or quick filters that help users find just the recipes they need.
 

@@ -221,4 +221,4 @@ http://localhost:8080/poolservice/temperature
 
 See the sources at: [https://github.com/juneau001/poolServiceSpringBoot](https://www.blogger.com/blog/post/edit/25636372/7521245366027905053#)
 
-**Note:** Used with permission and thanks --- [originally written and published on Josh's Dev Blog](http://jj-blogger.blogspot.com/2020/09/developing-simple-service-with-spring.html).
+**Note:** Used with permission and thanks — [originally written and published on Josh's Dev Blog](http://jj-blogger.blogspot.com/2020/09/developing-simple-service-with-spring.html).

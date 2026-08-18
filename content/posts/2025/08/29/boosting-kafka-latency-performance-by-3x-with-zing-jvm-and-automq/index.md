@@ -69,7 +69,7 @@ To understand the real-world impact of the JVM on our Kafka workload, we conduct
 
 ### Latency: Taming the Tail
 
-For systems like Kafka, average latency only tells part of the story. It's the outliers---the highest latency requests---that can disrupt service stability and impact user experience. This is where **tail latency** (p99 and beyond) becomes a crucial metric.
+For systems like Kafka, average latency only tells part of the story. It's the outliers—the highest latency requests—that can disrupt service stability and impact user experience. This is where **tail latency** (p99 and beyond) becomes a crucial metric.
 
 Our results showed a clear advantage for Azul Zing in this area.
 ![](kafka-versus-automq-latency.png)

@@ -31,7 +31,7 @@ And,
 
 *Now consider the scenario of online banking. You begin a transfer, but rather than receiving immediate confirmation, the system gradually verifies information, checks account balances, and manually updates records in a step-by-step fashion. This lag can be quite exasperating, particularly when you handle transactions that are time-sensitive.*
 
-Considering this restaurant and banking example, contemporary applications manage extensive volumes of real-time data. Whether dealing with stock market fluctuations, IoT sensor outputs, or video streaming services, traditional request-response frameworks often fall short. This is where **event-driven architecture (EDA)** comes into play---a model/architecture pattern crafted for ***high throughput, low latency, fault-tolerance, and robust system resilience.***
+Considering this restaurant and banking example, contemporary applications manage extensive volumes of real-time data. Whether dealing with stock market fluctuations, IoT sensor outputs, or video streaming services, traditional request-response frameworks often fall short. This is where **event-driven architecture (EDA)** comes into play—a model/architecture pattern crafted for ***high throughput, low latency, fault-tolerance, and robust system resilience.***
 
 {{< img src="EventDrivenArchitecture-700x394.png" class="size-medium" alt="Event Driven Architecture" width="700" height="394" >}}
 
@@ -161,7 +161,7 @@ According to Eric Brewer's **CAP theorem,** distributed systems can only provide
 
 ## Conclusion
 
-Modern software development has transformed through event-driven systems, which enable scalability, fault tolerance, and real-time responsiveness. By leveraging **Spring Cloud Stream** , *developers seamlessly build event-driven microservices and integrate them with robust messaging systems like Kafka, RabbitMQ, and cloud-based event hubs*. As data continues to grow, organizations must adopt event-driven architecture; it's no longer a luxury---it's a necessity.
+Modern software development has transformed through event-driven systems, which enable scalability, fault tolerance, and real-time responsiveness. By leveraging **Spring Cloud Stream** , *developers seamlessly build event-driven microservices and integrate them with robust messaging systems like Kafka, RabbitMQ, and cloud-based event hubs*. As data continues to grow, organizations must adopt event-driven architecture; it's no longer a luxury—it's a necessity.
 
 Whether developers are streaming financial transactions, processing IoT sensor data, or ensuring glitch-free video experiences, event-driven architecture serves as the key to handling the future of real-time data processing.
 

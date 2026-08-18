@@ -204,7 +204,7 @@ MongoDB supports several types of indexes. Each one serves a very specific purpo
 
 <!-- -->
 
-* **Partial indexes:**These are useful for collections where only a subset of documents requires indexing---for example, active users or published posts. This reduces index size and improves write performance.
+* **Partial indexes:**These are useful for collections where only a subset of documents requires indexing—for example, active users or published posts. This reduces index size and improves write performance.
 
 Understanding index behavior early prevents common pitfalls such as creating too many indexes or building indexes that never get used. Both can slow down writes and increase memory usage. Balance is key.
 

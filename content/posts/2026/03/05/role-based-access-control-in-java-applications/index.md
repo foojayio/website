@@ -245,7 +245,7 @@ public boolean canCancel(Order order, Authentication authentication) {
 }
 ```
 
-In practice, RBAC tells you whether the action is allowed "in general," while context constraints---whether you choose to implement them in domain logic or as context-aware RBAC in the policy engine---tell you whether the action is allowed here and now. Keeping these layers separate helps avoid confusing identity-based access with business constraints related to the specific case.
+In practice, RBAC tells you whether the action is allowed "in general," while context constraints—whether you choose to implement them in domain logic or as context-aware RBAC in the policy engine—tell you whether the action is allowed here and now. Keeping these layers separate helps avoid confusing identity-based access with business constraints related to the specific case.
 
 ## RBAC vs ABAC: When Roles Are Not Enough
 

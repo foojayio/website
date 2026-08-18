@@ -45,7 +45,7 @@ I also remove JPEG metadata for an even higher size reduction.
 Yet, the traditional approach is to take advantage of the HTML `picture` tag:
 > The `<picture>` HTML element contains zero or more `<source>` elements and one `<img>` element to offer alternative versions of an image for different display/device scenarios.
 >
-> The browser will consider each child `<source>` element and choose the best match among them. If no matches are found---or the browser doesn't support the `<picture>` element---the URL of the `<img>` element's src attribute is selected. The selected image is then presented in the space occupied by the `<img>` element.
+> The browser will consider each child `<source>` element and choose the best match among them. If no matches are found—or the browser doesn't support the `<picture>` element—the URL of the `<img>` element's src attribute is selected. The selected image is then presented in the space occupied by the `<img>` element.
 >
 > -- [The Picture element on MDN web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
 

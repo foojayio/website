@@ -106,7 +106,7 @@ With NoSQL, data is distributed across multiple servers and regions, so there is
 
 ### Query speed
 
-Since NoSQL databases are denormalized, with no worry of data duplication, all the information needed for a particular query will often already be stored together --- no joins required. This can make lookups easier, especially when working with large data volumes.{#c5e2}
+Since NoSQL databases are denormalized, with no worry of data duplication, all the information needed for a particular query will often already be stored together — no joins required. This can make lookups easier, especially when working with large data volumes.{#c5e2}
 
 It also means NoSQL can be very fast for simple queries. Make no mistake, SQL databases can also return very speedy queries. They also support highly complex queries for structured data. However, query speed can quickly taper off as SQL databases grow and complex join requirements increase.{#c5e2}
 
@@ -154,7 +154,7 @@ Both SQL and NoSQL databases serve specific needs and use cases extremely well. 
 
 Many organizations use both SQL and NoSQL databases in their cloud architecture, sometimes even within the same application. Then again, the best option could be finding a solution, like [DataStax Astra DB](https://astra.dev/3av1hx2), that takes advantage of NoSQL's inherent benefits, such as flexibility, continuous availability, and scalability, while minimizing its drawbacks.{#de37}
 
-[Astra](https://www.datastax.com/products/datastax-astra) is a multi-cloud database as a service (DBaaS), built on [Apache Cassandra](https://cassandra.apache.org/_/index.html)® and [Kubernetes](https://kubernetes.io/), with a microservices architecture. You can be up and running in a few clicks on the cloud of your choice --- Azure, Google Cloud Platform or AWS. Once there, it drastically simplifies application development.{#3376}
+[Astra](https://www.datastax.com/products/datastax-astra) is a multi-cloud database as a service (DBaaS), built on [Apache Cassandra](https://cassandra.apache.org/_/index.html)® and [Kubernetes](https://kubernetes.io/), with a microservices architecture. You can be up and running in a few clicks on the cloud of your choice — Azure, Google Cloud Platform or AWS. Once there, it drastically simplifies application development.{#3376}
 
 [Astra](https://www.datastax.com/products/datastax-astra) has [Stargate](https://stargate.io/) built-in, providing an open source, data API layer that removes drivers from the equation while allowing you to query your data or create tables and schema without having to learn [Cassandra Query Language (CQL)](https://cassandra.apache.org/doc/latest/cassandra/cql/). Stargate enables you to interact with data using [modern APIs](https://www.datastax.com/products/datastax-astra/apis), including schemaless JSON, REST, and GraphQL. And with [Astra's Storage Attached Indexing (SAI)](https://www.datastax.com/dev/scenario/using-storage-attached-indexing-sai-astra), you can query any column in the table, without being restricted to the primary key.{#74d6}
 
@@ -164,7 +164,7 @@ If you're ready to explore an easier way to build an application with a NoSQL da
 
 1. [What is NoSQL? Non-Relational Databases Explained](https://www.datastax.com/what-is/nosql)
 2. [What are ACID properties in a database?](https://www.educative.io/edpresso/what-are-acid-properties-in-a-database?https://www.educative.io/courses/grokking-the-object-oriented-design-interview?aid=5082902844932096&affiliate_id=5082902844932096&utm_source=google&utm_medium=cpc&utm_campaign=grokking-ci&utm_term=&utm_campaign=Grokking+Coding+Interview+-+USA%2B&utm_source=adwords&utm_medium=ppc&hsa_acc=5451446008&hsa_cam=1871092258&hsa_grp=84009716779&hsa_ad=396821895536&hsa_src=g&hsa_tgt=dsa-1287243227899&hsa_kw=&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQiA-K2MBhC-ARIsAMtLKRulyN-g-obXdyG8_GyviiXCBcmYibBaR9otJ9w3NaR5T_klYt1GbboaAl-YEALw_wcB)
-3. [The basics of NoSQL databases --- and why we need them](https://www.freecodecamp.org/news/nosql-databases-5f6639ed9574/)
+3. [The basics of NoSQL databases — and why we need them](https://www.freecodecamp.org/news/nosql-databases-5f6639ed9574/)
 4. [DataStax Astra DB](https://astra.dev/3av1hx2)
 5. [Apache Cassandra](https://cassandra.apache.org/_/index.html)®
 6. [Kubernetes](https://kubernetes.io/)

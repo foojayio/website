@@ -48,7 +48,7 @@ The seasonal component cannot be ignored as it is not surprising for a disease t
 
 ### South America
 
-Now, we would like to ask the following question---can the same behavior also be seen in South America?
+Now, we would like to ask the following question—can the same behavior also be seen in South America?
 
 Let us surprise you with the following graph:  
 [![Total deaths in South America related to Covid-19](https://foojay.io/?attachment_id=36584)](https://foojay.io/?attachment_id=36584)

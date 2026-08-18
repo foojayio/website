@@ -21,7 +21,7 @@ frozen: false
 
 > TL;DR: You're building an AI-powered app that needs to send lots of prompts to OpenAI.
 >
-> Instead of sending them one by one, you want to do it in bulk --- efficiently and safely.
+> Instead of sending them one by one, you want to do it in bulk — efficiently and safely.
 >
 > This is how you can use Spring AI with Java Virtual Threads to process hundreds of prompts in parallel.
 
@@ -188,6 +188,6 @@ public class BulkSummarizationService {
 }
 ```
 
-And that's it! You now have a fully async, high-throughput pipeline that can send hundreds of prompts to OpenAI --- safely and efficiently --- using nothing but Spring AI, Java Virtual Threads, and good batching.
+And that's it! You now have a fully async, high-throughput pipeline that can send hundreds of prompts to OpenAI — safely and efficiently — using nothing but Spring AI, Java Virtual Threads, and good batching.
 
 ## Stay curious!

@@ -487,4 +487,4 @@ The [repository for the extension](https://github.com/rife2/bld-spring-boot) has
 
 Maven has been around since 2004, Gradle since 2008.
 
-Take some time out of your day to try `bld`. It's new, it's different, and you might like it --- a lot.
+Take some time out of your day to try `bld`. It's new, it's different, and you might like it — a lot.

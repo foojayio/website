@@ -99,7 +99,7 @@ Java is a clear leader in the enterprise market. Java is cross-platform, secure,
 
 That's also what Java developers need and want, but:
 
-* Either they are served a disappointing experience on Android with its disregard for compatibility with the real Java---supporting only earlier features of Java֫---and its attempts to force developers towards other technologies, such as Flutter (and Dart).
+* Either they are served a disappointing experience on Android with its disregard for compatibility with the real Java—supporting only earlier features of Java֫---and its attempts to force developers towards other technologies, such as Flutter (and Dart).
 * Or they are forced into Objective-C or Swift, or a different cross-platform offering such as Xamarin (C#), Cordova or React Native (JS).
 
 Moreover, enterprises dislike rapid breaking changes, such as those between Objective-C and Swift, or between the various releases of Swift, or even the evolution of the Android APIs. They require stability and a long-term perspective of backwards compatibility.

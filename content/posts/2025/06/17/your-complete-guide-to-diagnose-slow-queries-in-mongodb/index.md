@@ -48,7 +48,7 @@ We're gonna use both.
 Before we get started, make sure you have:
 
 * A MongoDB Atlas cluster (M10 or higher).
-* A database with the sample data loaded (Atlas makes this easy---click the "Load Sample Dataset" button).
+* A database with the sample data loaded (Atlas makes this easy—click the "Load Sample Dataset" button).
 * Access to mongosh (or your preferred shell).
 * Permissions to set profiler levels (`atlasAdmin` or `readWriteAnyDatabase` is fine).
 
@@ -371,7 +371,7 @@ We're looking for these fields:
 |----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `millis`       | The time the operation took to execute, in milliseconds. This is our go-to number for, "Was it fast or slow?" Keep in mind it includes everything: query parsing, planning, execution, and response serialization.                                                                        |
 | `docsExamined` | The number of documents MongoDB had to read from disk or memory to complete the operation. This is key for spotting collection scans or poor index use. The lower this is, the better it should match or be close to the number of results returned.                                      |
-| `keysExamined` | The number of index keys MongoDB had to scan. This helps us understand how selective your query is. A high number here (with a low docsExamined) often means the query used an index efficiently. A value of 0 means no index was used---i.e., we're likely doing a full collection scan. |
+| `keysExamined` | The number of index keys MongoDB had to scan. This helps us understand how selective your query is. A high number here (with a low docsExamined) often means the query used an index efficiently. A value of 0 means no index was used—i.e., we're likely doing a full collection scan. |
 
 That's step one. You've got the x-ray. Next, let's grab the scalpel: We'll dissect how MongoDB is actually executing these queries using `explain()`.
 
@@ -387,7 +387,7 @@ Before we get started, make sure you have:
 
 * `mongosh` connected to your Atlas cluster.
 * A sample dataset loaded (especially the `sample_mflix` database).
-* Permission to run the underlying command---e.g., `find.explain()` requires read access only---to use `explain()`.
+* Permission to run the underlying command—e.g., `find.explain()` requires read access only—to use `explain()`.
 
 ### What is `explain()`?
 
@@ -475,7 +475,7 @@ How to read this:
 * `stage: "SORT"`: MongoDB sorted results in memory.
 * `executionTimeMillis: 96`: The whole thing took just under 100 ms.
 
-Even though it worked fast in this small dataset, this plan doesn't scale. A filter + sort like this should ideally use a compound index---e.g., `{ year: -1 }`.
+Even though it worked fast in this small dataset, this plan doesn't scale. A filter + sort like this should ideally use a compound index—e.g., `{ year: -1 }`.
 
 Tip: When using `.explain().find()`, the result is a document (not a cursor), so you get back the full plan immediately without needing `.next()` or `.toArray()`.
 
@@ -485,13 +485,13 @@ The `explain()` method accepts a verbosity mode that controls how much detail yo
 
 |            Mode            |                                   What it shows                                    |
 |----------------------------|------------------------------------------------------------------------------------|
-| `"queryPlanner"` (default) | The query shape and chosen plan---no execution                                     |
+| `"queryPlanner"` (default) | The query shape and chosen plan—no execution                                     |
 | `"executionStats"`         | Runs the query and shows real metrics for the winning plan                         |
-| `"allPlansExecution"`      | Shows execution stats for all candidate plans---great for debugging plan selection |
+| `"allPlansExecution"`      | Shows execution stats for all candidate plans—great for debugging plan selection |
 
 Important behavior notes:
 
-* `explain()` ignores the plan cache---this is intentional so you can inspect the plan fresh.
+* `explain()` ignores the plan cache—this is intentional so you can inspect the plan fresh.
 * It also prevents creating a new plan cache entry.
 * `explain()` is supported in all MongoDB Atlas, Enterprise, and Community environments.
 
@@ -564,7 +564,7 @@ db.runCommand({
 });
 ```
 
-This runs an `updateOne()` under the hood, but wraps it with `explain` so you can analyze its performance---just like with reads.
+This runs an `updateOne()` under the hood, but wraps it with `explain` so you can analyze its performance—just like with reads.
 
 And here's what the (shortened) output looks like:
 
@@ -589,20 +589,20 @@ And here's what the (shortened) output looks like:
 }
 ```
 
-This tells us that MongoDB had to scan 7,675 documents just to find one to update. That's a full collection scan---confirmed by the `COLLSCAN` stage and `totalKeysExamined: 0`. It matched one document (`nMatched: 1`) and would've updated it (`nWouldModify: 1`), but the operation wasn't actually run since this was an `explain`, not a real write.
+This tells us that MongoDB had to scan 7,675 documents just to find one to update. That's a full collection scan—confirmed by the `COLLSCAN` stage and `totalKeysExamined: 0`. It matched one document (`nMatched: 1`) and would've updated it (`nWouldModify: 1`), but the operation wasn't actually run since this was an `explain`, not a real write.
 
 If this is a write pattern you rely on often (like updating by `title`, `customerId`, or some other frequent lookup), you should absolutely consider creating an index to reduce the scan cost.
 
 ### How to read execution stages
 
-MongoDB breaks your query into stages---like steps on an assembly line. Each stage does a specific job, and together, they describe how your query was executed.
+MongoDB breaks your query into stages—like steps on an assembly line. Each stage does a specific job, and together, they describe how your query was executed.
 
 Here are some common stage types you might see in an `explain()` plan:
 
 |    Stage     |                   What it does                    |
 |--------------|---------------------------------------------------|
-| `COLLSCAN`   | Scans all documents---slow, no index              |
-| `IXSCAN`     | Scans an index---fast                             |
+| `COLLSCAN`   | Scans all documents—slow, no index              |
+| `IXSCAN`     | Scans an index—fast                             |
 | `FETCH`      | Fetches full documents after matching keys        |
 | `SORT`       | Sorts results in-memory (unless covered by index) |
 | `PROJECTION` | Trims returned fields                             |
@@ -680,7 +680,7 @@ Now that you know how to dissect a query, let's move from diagnosis to live obse
 
 So far, we've looked at what was slow (`system.profile`) and why it was slow (`explain()`). But what if something is running slowly right now?
 
-MongoDB gives us a built-in way to monitor live operations---both queries and writes---using `db.currentOp()`. This is like opening a terminal into the brain of your database.
+MongoDB gives us a built-in way to monitor live operations—both queries and writes—using `db.currentOp()`. This is like opening a terminal into the brain of your database.
 
 You can see what's currently running, how long it's been running, what operation it's doing, and even kill it if needed.
 
@@ -694,7 +694,7 @@ Before we get started, make sure you have:
 
 ### What is `db.currentOp()`?
 
-`db.currentOp()` returns a list of all operations currently in progress on the node (mongod process) you're connected to---including queries, updates, aggregations, and internal commands.
+`db.currentOp()` returns a list of all operations currently in progress on the node (mongod process) you're connected to—including queries, updates, aggregations, and internal commands.
 
 You can filter it to just your operations or long-running ones.
 
@@ -734,7 +734,7 @@ db.currentOp({ "active": true, "op": "query" });
 
 ### Killing a long-running query
 
-If you need to stop an operation---like an accidental full collection scan---use `db.killOp()`:
+If you need to stop an operation—like an accidental full collection scan—use `db.killOp()`:
 
 ```
 db.killOp("12345");
@@ -781,7 +781,7 @@ This section is our early-warning radar: We're not fixing slow queries yet. We'r
 
 ### Look for query patterns that don't scale
 
-MongoDB gives us visibility into how queries behave---use it early and often.
+MongoDB gives us visibility into how queries behave—use it early and often.
 
 Use `.explain()` to diagnose inefficiencies even when queries "feel fast." A fast query can just be subject to luck, rather than actually well structured queries. And luck runs out. Be intentional and proactive, and you can spot these problems with scaling before they get a chance to slow you down.
 
@@ -897,11 +897,11 @@ In the Atlas UI, we can see how the memory of your MongoDB instance is affected 
 
 We'll want to toggle:
 
-* Cache Usage (shows cache dirty and used bytes---how much memory MongoDB is using and how much of it hasn't been flushed to disk).
+* Cache Usage (shows cache dirty and used bytes—how much memory MongoDB is using and how much of it hasn't been flushed to disk).
 * Cache Activity (tracks how much data is being read into or written from cache, which reflects memory churn).
 * Cache Ratio (shows fill ratio and dirty fill ratio, which help you understand how full the memory is and how many changes are waiting to be written).
 * Memory (gives you memory_resident and memory_virtual to gauge working set pressure).
-* System Memory (available and used---so you can correlate MongoDB's memory usage with overall RAM limits).
+* System Memory (available and used—so you can correlate MongoDB's memory usage with overall RAM limits).
 
 These charts let you visualize how much of your instance's memory is in active use, and how much of that is getting clogged by updates or large documents. If cache dirty steadily rises or you see frequent spikes in eviction activity, it's a sign that your working set is too big for your RAM. Document growth, overly large updates, and inefficient schemas all make this worse.
 
@@ -923,7 +923,7 @@ Check for:
 
 |                   Symptom                   |                       What it suggests                       |
 |---------------------------------------------|--------------------------------------------------------------|
-| Queries slow down as data grows             | Indexes can't keep up---look at `executionTimeMillis` trends |
+| Queries slow down as data grows             | Indexes can't keep up—look at `executionTimeMillis` trends |
 | Working set no longer fits in memory        | High disk I/O, cache evictions in Atlas                      |
 | Insert-heavy workloads bottlenecking writes | CPU/memory pressure on primaries                             |
 | Collection is approaching storage limits    | Time to scale out                                            |
@@ -1013,7 +1013,7 @@ This is one of the most important structural concepts when reading or profiling 
 
 You can observe the impact of pipeline reordering visually in the Atlas UI. Go to your cluster's Query Profiler, then filter by operation type to show only `aggregate` queries. Locate your slow group-first query in the scatterplot and click to expand the timeline. You'll see each stage listed with timing information.
 
-Look specifically at the execution time for the `$group` stage. It will likely dominate the operation. Then, compare it to the reordered pipeline where `$match` runs first---stage timings will show a reduced burden on `$group` and often a significantly lower execution time overall.
+Look specifically at the execution time for the `$group` stage. It will likely dominate the operation. Then, compare it to the reordered pipeline where `$match` runs first—stage timings will show a reduced burden on `$group` and often a significantly lower execution time overall.
 
 ### Diagnosing `$lookup` inefficiencies
 
@@ -1245,7 +1245,7 @@ A query as generic as "the" in movie titles will give us quite high latency, and
 
 Aggregation pipelines offer incredible power but carry significant performance implications when not constructed thoughtfully. By using `explain("executionStats")` at every step, you can see how each stage behaves, whether indexes are used, and where MongoDB is spending the most time.
 
-In MongoDB Atlas, use the Query Profiler to correlate slow queries with real execution data, and use the Indexes tab to verify whether your lookups and sorts are supported by indexes. Pay close attention to ordering---filter early, reduce early, and avoid letting costly stages like `$group`, `$sort`, or `$lookup` operate on more documents than necessary.
+In MongoDB Atlas, use the Query Profiler to correlate slow queries with real execution data, and use the Indexes tab to verify whether your lookups and sorts are supported by indexes. Pay close attention to ordering—filter early, reduce early, and avoid letting costly stages like `$group`, `$sort`, or `$lookup` operate on more documents than necessary.
 
 When profiling, don't just look at total execution time. Look at stage execution time, document counts, and index plans. MongoDB is giving us a detailed play-by-play.
 
@@ -1253,6 +1253,6 @@ When profiling, don't just look at total execution time. Look at stage execution
 
 We've now got the full diagnostic toolkit: a profiler to see what ran slowly, an execution plan to understand why, a live view to watch it happen in real time, and a deep dive into how performance scales. We're not stomping around, hunting problems. We're observant and well tooled. That's the foundation every great optimization effort is built on.
 
-This wasn't a guide to optimization---it was a guide to observation. Because you can't fix what you can't see.
+This wasn't a guide to optimization—it was a guide to observation. Because you can't fix what you can't see.
 
 If you want to keep digging deeper, here are a few useful next stops. Check out the [Atlas Query Profiler Documentation](https://www.mongodb.com/docs/atlas/tutorial/query-profiler/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=tony.kim), or read up on [Aggregation Pipeline Optimization Best Practices](https://www.mongodb.com/docs/manual/core/aggregation-pipeline-optimization/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=tony.kim). MongoDB gives you a lot of visibility if you know where to look. Now, you do.

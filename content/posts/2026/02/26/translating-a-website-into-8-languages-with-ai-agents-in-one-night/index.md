@@ -12,11 +12,11 @@ related_posts:
 frozen: false
 ---
 
-## How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved --- from spec to deployment
+## How I used Claude Sonnet 4.6 and fleets of GitHub Copilot Coding Agents to internationalize java.evolved — from spec to deployment
 
-[java.evolved](https://javaevolved.github.io) is a static site I built to showcase modern Java patterns side-by-side with their legacy equivalents. 112 patterns across 11 categories --- language, collections, streams, concurrency, and more --- each with code comparisons, explanations, and curated documentation links. All generated from YAML content files by a JBang-powered Java build script.
+[java.evolved](https://javaevolved.github.io) is a static site I built to showcase modern Java patterns side-by-side with their legacy equivalents. 112 patterns across 11 categories — language, collections, streams, concurrency, and more — each with code comparisons, explanations, and curated documentation links. All generated from YAML content files by a JBang-powered Java build script.
 
-By the end of February 25, the entire site was English-only. By the morning of February 26, it was available in **9 languages** --- English, German, Spanish, Portuguese (Brazil), Simplified Chinese, Arabic, French, Japanese, and Korean --- with full RTL support for Arabic. The total human effort was a few hours of prompting, reviewing PRs, and filing one bug.
+By the end of February 25, the entire site was English-only. By the morning of February 26, it was available in **9 languages** — English, German, Spanish, Portuguese (Brazil), Simplified Chinese, Arabic, French, Japanese, and Korean — with full RTL support for Arabic. The total human effort was a few hours of prompting, reviewing PRs, and filing one bug.
 
 This is the story of that experiment.
 
@@ -24,15 +24,15 @@ This is the story of that experiment.
 
 The first step wasn't writing code. It was writing a specification.
 
-I opened [issue #74](https://github.com/javaevolved/javaevolved.github.io/issues/74) --- "Plan architectural change for i18n" --- and assigned it to a Copilot Coding Agent. The prompt was simple: propose an architectural plan for internationalizing the website, considering the existing static-site structure.
+I opened [issue #74](https://github.com/javaevolved/javaevolved.github.io/issues/74) --- "Plan architectural change for i18n" — and assigned it to a Copilot Coding Agent. The prompt was simple: propose an architectural plan for internationalizing the website, considering the existing static-site structure.
 
 The agent ([PR #75](https://github.com/javaevolved/javaevolved.github.io/pull/75)) came back with a comprehensive i18n specification that addressed:
 
 * **Two-layer translation model:** UI strings (labels, nav, footer) separated from content translations (pattern titles, explanations, summaries)
 * **Partial translation files:** Translation files contain *only* translatable fields. Structural data (code snippets, navigation links, metadata) always comes from the English source of truth
-* **Graceful fallback:** Missing translations fall back to English with a build-time warning --- no page is ever blank
+* **Graceful fallback:** Missing translations fall back to English with a build-time warning — no page is ever blank
 * **Locale registry:** A simple `locales.properties` file drives the entire build pipeline and language selector
-* **AI-friendly design:** The architecture was explicitly designed so that an AI receives the full English content and returns a partial translation file --- no field-filtering logic needed in the prompt
+* **AI-friendly design:** The architecture was explicitly designed so that an AI receives the full English content and returns a partial translation file — no field-filtering logic needed in the prompt
 
 This last point proved prescient. The clean separation between "what changes per locale" and "what stays constant" meant each translation task was self-contained and parallelizable.
 
@@ -51,13 +51,13 @@ This was the only PR that required significant intervention. Everything after it
 
 ## Phase 2: The First Translations (Spanish + Portuguese)
 
-The first real translation --- Spanish --- came in [PR #84](https://github.com/javaevolved/javaevolved.github.io/pull/84). This PR also migrated the English content files from JSON to YAML for improved readability --- a format change that the AI handled naturally since the generator already supported multiple formats.
+The first real translation — Spanish — came in [PR #84](https://github.com/javaevolved/javaevolved.github.io/pull/84). This PR also migrated the English content files from JSON to YAML for improved readability — a format change that the AI handled naturally since the generator already supported multiple formats.
 
-Brazilian Portuguese followed immediately in [PR #85](https://github.com/javaevolved/javaevolved.github.io/pull/85), completing all 112 pattern files (going from 3/112 translated to 112/112 --- 100% coverage). These first two translations validated the architecture and surfaced a CI issue: the deploy workflow's path triggers didn't match YAML files or the `translations/` directory. A quick fix in [PR #86](https://github.com/javaevolved/javaevolved.github.io/pull/86) resolved that.
+Brazilian Portuguese followed immediately in [PR #85](https://github.com/javaevolved/javaevolved.github.io/pull/85), completing all 112 pattern files (going from 3/112 translated to 112/112 — 100% coverage). These first two translations validated the architecture and surfaced a CI issue: the deploy workflow's path triggers didn't match YAML files or the `translations/` directory. A quick fix in [PR #86](https://github.com/javaevolved/javaevolved.github.io/pull/86) resolved that.
 
-## Phase 3: The Fleet --- 6 Languages in Parallel
+## Phase 3: The Fleet — 6 Languages in Parallel
 
-This is where things got interesting. With the architecture proven and two complete translations validated, I launched a **fleet of Copilot Coding Agents** --- multiple agents working in parallel, each assigned a single language. I used the Copilot CLI `/delegate` command to dispatch them asynchonously, all with the same prompt:
+This is where things got interesting. With the architecture proven and two complete translations validated, I launched a **fleet of Copilot Coding Agents** — multiple agents working in parallel, each assigned a single language. I used the Copilot CLI `/delegate` command to dispatch them asynchonously, all with the same prompt:
 
 |                                 PR                                  |     Language      |  Agent  | Time to PR |
 |---------------------------------------------------------------------|-------------------|---------|------------|
@@ -72,11 +72,11 @@ Each agent independently:
 
 1. Read the i18n spec and understood the file structure
 2. Created a UI strings YAML file (`translations/strings/{locale}.yaml`) with 60+ translated keys
-3. Generated 112 content translation YAML files --- one per pattern, across all 11 categories
+3. Generated 112 content translation YAML files — one per pattern, across all 11 categories
 4. Registered the locale in `locales.properties`
 5. Opened a PR with a detailed description of what was translated
 
-All six PRs were opened within a span of about 12 minutes (2:33 AM to 2:45 AM) and were all merged within the next hour. **No translation conflicts**, no merge issues, no structural errors. The partial-file architecture did exactly what it was designed to do --- each agent's output was isolated to its own locale directory.
+All six PRs were opened within a span of about 12 minutes (2:33 AM to 2:45 AM) and were all merged within the next hour. **No translation conflicts**, no merge issues, no structural errors. The partial-file architecture did exactly what it was designed to do — each agent's output was isolated to its own locale directory.
 
 ### The Numbers
 
@@ -102,7 +102,7 @@ This was a genuinely thoughtful architectural change that I hadn't explicitly re
 
 ### The One Bug
 
-Of course, it wasn't perfect. When `dir="rtl"` is applied globally, the browser flips *everything* --- including Java source code blocks and the navigation bar, which IMO should always be LTR regardless of locale. I spotted this when reviewing the deployed site and [filed issue #96](https://github.com/javaevolved/javaevolved.github.io/issues/96).
+Of course, it wasn't perfect. When `dir="rtl"` is applied globally, the browser flips *everything* — including Java source code blocks and the navigation bar, which IMO should always be LTR regardless of locale. I spotted this when reviewing the deployed site and [filed issue #96](https://github.com/javaevolved/javaevolved.github.io/issues/96).
 
 A Copilot Coding Agent [fixed it in PR #97](https://github.com/javaevolved/javaevolved.github.io/pull/97) within minutes, adding targeted CSS overrides:
 
@@ -162,7 +162,7 @@ No code changes needed in the generator. No template modifications. The AI spec 
 * **Spec-first approach:** Having the AI draft the specification before any implementation meant the architecture was explicitly designed for AI-driven translation from day one
 * **Fleet parallelism:** Six language translations running simultaneously with zero conflicts demonstrates that well-isolated task boundaries enable effortless parallelization
 * **Proactive problem-solving:** The Arabic agent identifying and implementing RTL support without being explicitly asked shows that LLMs can reason about the downstream implications of their translations
-* **Technical term preservation:** Across all 9 languages, Java API names, annotations, JDK versions, and code examples were correctly left in English --- the agents understood what should and shouldn't be translated in a technical context
+* **Technical term preservation:** Across all 9 languages, Java API names, annotations, JDK versions, and code examples were correctly left in English — the agents understood what should and shouldn't be translated in a technical context
 
 ### What Required Human Intervention
 
@@ -174,19 +174,19 @@ No code changes needed in the generator. No template modifications. The AI spec 
 
 |      Time (UTC)      |                                          Event                                          |
 |----------------------|-----------------------------------------------------------------------------------------|
-| Feb 20, 20:33        | Issue #74 opened --- "Plan architectural change for i18n"                               |
-| Feb 20, 20:33        | PR #75 opened --- i18n specification (by Copilot Agent)                                 |
+| Feb 20, 20:33        | Issue #74 opened — "Plan architectural change for i18n"                               |
+| Feb 20, 20:33        | PR #75 opened — i18n specification (by Copilot Agent)                                 |
 | Feb 25, 20:56        | PR #75 merged (after 5 days of procrastination, and other projects at hand... finally!) |
-| Feb 25, 23:49        | PR #83 merged --- core i18n infrastructure                                              |
-| Feb 26, 01:28        | PR #84 merged --- Spanish translation + JSON→YAML migration                             |
-| Feb 26, 02:27        | PR #85 merged --- Complete Brazilian Portuguese (112/112)                               |
-| Feb 26, 02:29        | PR #86 merged --- CI path trigger fix                                                   |
-| Feb 26, 02:33--02:45 | PRs #87--#91 opened --- fleet of 6 language agents launched                             |
+| Feb 25, 23:49        | PR #83 merged — core i18n infrastructure                                              |
+| Feb 26, 01:28        | PR #84 merged — Spanish translation + JSON→YAML migration                             |
+| Feb 26, 02:27        | PR #85 merged — Complete Brazilian Portuguese (112/112)                               |
+| Feb 26, 02:29        | PR #86 merged — CI path trigger fix                                                   |
+| Feb 26, 02:33--02:45 | PRs #87--#91 opened — fleet of 6 language agents launched                             |
 | Feb 26, 03:09--03:39 | All fleet PRs merged (Japanese, German, French, Chinese, Arabic)                        |
-| Feb 26, 03:51        | PR #94 opened --- Korean (final language)                                               |
-| Feb 26, 03:59        | Issue #96 filed --- Arabic RTL bug                                                      |
-| Feb 26, 04:12        | PR #97 merged --- RTL fix                                                               |
-| Feb 26, 04:15        | PR #94 merged --- Korean complete                                                       |
+| Feb 26, 03:51        | PR #94 opened — Korean (final language)                                               |
+| Feb 26, 03:59        | Issue #96 filed — Arabic RTL bug                                                      |
+| Feb 26, 04:12        | PR #97 merged — RTL fix                                                               |
+| Feb 26, 04:15        | PR #94 merged — Korean complete                                                       |
 
 **From spec merge to 8-language site: \~7 hours.** From fleet launch to all 6 languages merged: **\~1 hour.**
 
@@ -194,12 +194,12 @@ No code changes needed in the generator. No template modifications. The AI spec 
 
 The experiment proved a simple thesis: **if you design your architecture for AI-driven workflows, AI agents can do remarkable things.**
 
-I didn't build a custom translation pipeline or prompt-engineering framework. I wrote a specification. An AI agent drafted it, I refined it through code review, and then a fleet of agents executed against it. The architecture --- partial files, fallback behavior, source-of-truth separation --- did all the heavy lifting.
+I didn't build a custom translation pipeline or prompt-engineering framework. I wrote a specification. An AI agent drafted it, I refined it through code review, and then a fleet of agents executed against it. The architecture — partial files, fallback behavior, source-of-truth separation — did all the heavy lifting.
 
 The result is a Java patterns reference site available in 8 languages, with 1,008 generated pages, serving developers who speak English, German, Spanish, Portuguese, Chinese, Arabic, French, and Korean. It handles right-to-left layouts. It has localized search. Every page has proper `hreflang` tags for SEO.
 
 And the only bug was a CSS rule that took 13 minutes from report to fix.
 
-The future isn't AI replacing developers. It's developers designing systems that let AI do what it's good at --- repetitive, structured, parallelizable work --- while humans focus on architecture, review, and the occasional RTL bug.
+The future isn't AI replacing developers. It's developers designing systems that let AI do what it's good at — repetitive, structured, parallelizable work — while humans focus on architecture, review, and the occasional RTL bug.
 
 *java.evolved is open source at [github.com/javaevolved/javaevolved.github.io](https://github.com/javaevolved/javaevolved.github.io). The i18n specification lives at [specs/i18n/i18n-spec.md](https://github.com/javaevolved/javaevolved.github.io/blob/main/specs/i18n/i18n-spec.md).*

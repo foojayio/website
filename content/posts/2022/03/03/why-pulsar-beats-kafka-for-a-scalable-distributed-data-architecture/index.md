@@ -47,7 +47,7 @@ But besides the database, microservices-based applications need a communication 
 
 Geo-replication was just one improvement resulting from the more general architectural advance that Pulsar made by separating compute and storage. This change at the core of Pulsar allows it to scale more elastically than Kafka as well as to lower costs with tiered storage, where older messages are stored in an object store like HDFS or Amazon S3.
 
-Apache Pulsar is also a superior choice for microservice architectures because of its first-class support for multi-tenancy --- allowing multiple services to easily share Pulsar infrastructure, even across different lines of business, while consistently enforcing data retention and security policies. Multi-tenancy is very useful for service providers because it allows them to run the same streaming data platform for multiple customers.
+Apache Pulsar is also a superior choice for microservice architectures because of its first-class support for multi-tenancy — allowing multiple services to easily share Pulsar infrastructure, even across different lines of business, while consistently enforcing data retention and security policies. Multi-tenancy is very useful for service providers because it allows them to run the same streaming data platform for multiple customers.
 
 Multi-tenancy is also growing in importance for single organizations, where different units or departments need a level of security and privacy for their customers' data. Consider the example of a bank: each financial product team wants to manage access and services around customer data, but they won't want to implement their own complete event streaming implementations. Instead, each team can have their data as part of that multi-tenant environment.
 

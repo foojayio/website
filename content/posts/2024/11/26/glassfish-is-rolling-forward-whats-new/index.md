@@ -19,7 +19,7 @@ related_posts:
 frozen: false
 ---
 
-**The Evolution Continues. GlassFish, which used to be a popular application server, free to use and reliable, is evolving again. If you've been holding onto your old GlassFish instances, there's good news---things have gotten a lot more exciting recently.**
+**The Evolution Continues. GlassFish, which used to be a popular application server, free to use and reliable, is evolving again. If you've been holding onto your old GlassFish instances, there's good news—things have gotten a lot more exciting recently.**
 
 Since we created the OmniFish company and started improving GlassFish in 2022 (read about that story in [Oh, What Did You Do to GlassFish?!](https://omnifish.ee/2022/06/28/oh-what-did-you-do-to-glassfish/)), a lot has happened around GlassFish. We joined the Eclipse GlassFish project and [joined the Jakarta EE Working Group](https://blogs.eclipse.org/post/tanja-obradovic/welcome-omnifish-jakarta-ee-working-group) as well.
 
@@ -29,7 +29,7 @@ We announced the [start of our enterprise support services](https://omnifish.ee/
 
 **What's the Buzz?**
 
-First off, **GJULE** ---a completely rewritten logging engine---now makes logging faster and more reliable. If logging felt sluggish before, GJULE breathes new life into it. You can enable even the lowest log levels and catch every detail without bogging down your server and applications. To find out more about the new GlassFish logging, watch this video about Changes in [GlassFish 7 Logging System](https://www.youtube.com/watch?v=j2gACdwWyNk) on YouTube.
+First off, **GJULE** ---a completely rewritten logging engine—now makes logging faster and more reliable. If logging felt sluggish before, GJULE breathes new life into it. You can enable even the lowest log levels and catch every detail without bogging down your server and applications. To find out more about the new GlassFish logging, watch this video about Changes in [GlassFish 7 Logging System](https://www.youtube.com/watch?v=j2gACdwWyNk) on YouTube.
 
 For those dabbling in microservices, GlassFish now natively supports **MicroProfile Config, REST Client,** and**JWT Authentication**. It means your applications can be more modular, easier to configure, and more secure without jumping through hoops. Of course, all these MicroProfile APIs are useful in traditional enterprise applications too, which allows you to modernize your existing apps, simplify or even remove some of the boilerplate code.  
 [Get started with GlassFish
@@ -43,7 +43,7 @@ Gone are the days of clunky setups. The **GlassFish Embedded** runtime now simpl
 
 There's an Arquillian container too, so you can easily run your tests without launching the whole GlassFish server. Since then, [GlassFish Embedded](https://glassfish.org/docs/SNAPSHOT/embedded-server-guide.html) received a few improvements. A simple API to run a plain JAR in the embedded server without a separate WAR file and easier-to-use Maven plugin are among them.
 
-And yes, GlassFish runs on the **latest Java versions**---even those still in pre-release---keeping you on the cutting edge without the usual headaches. Although GlassFish Embedded still requires a few --add-opens JVM arguments with recent Java versions to bypass the Java module system restrictions, the number of them has been reduced, with the aim to avoid any need for --add-opens arguments in the future.
+And yes, GlassFish runs on the **latest Java versions**---even those still in pre-release—keeping you on the cutting edge without the usual headaches. Although GlassFish Embedded still requires a few --add-opens JVM arguments with recent Java versions to bypass the Java module system restrictions, the number of them has been reduced, with the aim to avoid any need for --add-opens arguments in the future.
 
 {{< youtube mp0vROxSPmA >}}
 
@@ -80,6 +80,6 @@ OmniFish actively contributes to the development of the GlassFish project, more 
 
 **Final Thoughts**
 
-So, what's next for GlassFish? It's not about survival anymore---it's about thriving in a modern development landscape. OmniFish and the whole GlassFish team have more plans for the future. More features to simplify app development and configuration. More ways to run apps in different environments and architectures. And, of course, even more reliable, more secure, and faster production runtime.
+So, what's next for GlassFish? It's not about survival anymore—it's about thriving in a modern development landscape. OmniFish and the whole GlassFish team have more plans for the future. More features to simplify app development and configuration. More ways to run apps in different environments and architectures. And, of course, even more reliable, more secure, and faster production runtime.
 
 **Whether you're maintaining legacy systems or embracing the latest in Jakarta EE, GlassFish has the tools and updates you need to stay ahead.**

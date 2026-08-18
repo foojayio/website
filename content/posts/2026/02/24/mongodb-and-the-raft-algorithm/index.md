@@ -73,7 +73,7 @@ These options give applications the flexibility to balance latency and consisten
 
 ### Raft vs. Paxos: Why Chose Raft
 
-While Paxos is the foundation of many consensus protocols, Raft offers simplicity without compromising correctness. Its clear division of responsibilities --- leader election, log replication, and commitment --- makes it easier to implement and debug. MongoDB's enhancements further tailor Raft to the challenges of database replication, making it a natural fit for its replica set architecture.{#4c27}
+While Paxos is the foundation of many consensus protocols, Raft offers simplicity without compromising correctness. Its clear division of responsibilities — leader election, log replication, and commitment — makes it easier to implement and debug. MongoDB's enhancements further tailor Raft to the challenges of database replication, making it a natural fit for its replica set architecture.{#4c27}
 
 ### Conclusion
 

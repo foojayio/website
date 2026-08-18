@@ -46,7 +46,7 @@ This design allows Jet to always use the same, fixed-size thread pool no matter 
 
 ![Cooperative Multithreading](2020-08-05-dag2-700x260.png)
 
-By default, Jet creates as many threads for itself as there are available CPU cores, and inside each thread there are many tasklets. Switching from one tasklet to the next is extremely cheap --- it boils down to one tasklet returning from its `call()` method, the top-level loop taking the next tasklet from a list, and invoking its `call()` method. If you wonder at this point what happens to blocking IO calls, for example connecting to a JDBC data source, Jet does support a backdoor where it creates a dedicated thread for such a tasklet. Threads that block for IO aren't CPU-bound and usually their interference is quite low, but in a low-latency applications you should avoid depending on blocking APIs.
+By default, Jet creates as many threads for itself as there are available CPU cores, and inside each thread there are many tasklets. Switching from one tasklet to the next is extremely cheap — it boils down to one tasklet returning from its `call()` method, the top-level loop taking the next tasklet from a list, and invoking its `call()` method. If you wonder at this point what happens to blocking IO calls, for example connecting to a JDBC data source, Jet does support a backdoor where it creates a dedicated thread for such a tasklet. Threads that block for IO aren't CPU-bound and usually their interference is quite low, but in a low-latency applications you should avoid depending on blocking APIs.
 
 Now comes another advantage of this design: if we know there will also be a concurrent GC thread, we can configure Jet to use one thread less:
 

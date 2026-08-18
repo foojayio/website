@@ -32,7 +32,7 @@ frozen: false
 
 *If you are not familiar with the practice you might just think I'm running CPU utilization reports and telling people to scale down. There are teams that do this, but Cloud Cost Management (or FinOps) is really a combination of architecture strategy and encouraging teams to optimize cost.*
 > *"Cloud Cost Management (or FinOps) is really a combination of architecture strategy and encouraging teams to optimize cost."*
-> --- Tim O'Brien, Walmart
+> — Tim O'Brien, Walmart
 
 *Cloud cost optimization presents some fascinating challenges, particularly when it comes to technology selection and architecture. This is especially true as systems begin to scale. Questions arise such as:*
 
@@ -49,7 +49,7 @@ frozen: false
 
 *It isn't about Cloud cost reports as much as it is about relationships. When you need to sit down with teams and suggest improvements to an architecture or changes that might not be in their roadmap. You are going to get a lot of pushback. The most valuable tool in controlling Cloud cost is building the right relationships with the teams and departments you support.*
 > *"It isn't about Cloud cost reports as much as it is about relationships."*
-> --- Tim O'Brien, Walmart
+> — Tim O'Brien, Walmart
 
 *To succeed in Cloud Cost Management, it's crucial to build strong partnerships with teams that manage databases and other technology SMEs. You need to be able to communicate effectively with hundreds of engineering teams, which is why this role feels more like Developer Relations than anything else. Most of my job now is making sure that the right teams are talking to each other about the right topics - instead of me running at an engineering team criticizing how they use Cassandra, it's "Have you all synced up with the Cassandra team to discuss savings opportunities?"*
 
@@ -67,7 +67,7 @@ frozen: false
 
 *When you use Cassandra and Kafka at a very large scale, and when you have a large multi-tiered architecture there are going to be areas where Tomcat is critical to performance. But, the one thing that continues to be true even after 20 years is that heap settings always tend to cause the longest email threads.*
 > "*What I'd like to propose is that we develop more standards for how we assess workload utilization.*"
-> --- Tim O'Brien, Walmart
+> — Tim O'Brien, Walmart
 
 *Back to my previous answer where I mentioned that the FinOps foundation is starting a common standard for cost and utilization data. As that starts to mature, what I'd also like to propose is that we develop more standards for how we assess workload utilization. When we're running workloads in the JVM there's a constant question of whether a workload is CPU-bound or Memory-bound? If it's a search index or a data-bound system like Cassandra, CPU isn't as important as IO or Memory. If it's a stateless application server running Tomcat, that's when CPU matters.*
 
@@ -75,7 +75,7 @@ frozen: false
 
 *As a community, it would be helpful if different organizations could come together to exchange ideas about how utilization is measured for different applications. Right now I think a lot of organizations are creating their own standards to measure utilization, and I'd like to see more collaboration in this space.*
 > *As a community, it would be helpful if different organizations could come together to exchange ideas about how utilization is measured for different applications.*
-> --- Tim O'Brien, Walmart
+> — Tim O'Brien, Walmart
 
 *For big trends, what I predict going forward is that we're going to see more automation, more intelligent ways for systems to autoscale and adapt to changing traffic patterns. There are a few companies that provide automated ways to deploy applications, but I'd like to see more focus on automating scale up and scale down proactively. Right now, almost all the solutions just ask teams to set a threshold for scaling systems. I think there's more complexity that needs to be built in to predict spikes.*
 

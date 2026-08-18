@@ -67,7 +67,7 @@ The data shows project import time is indeed improved by the Maven parallel down
 
 #### Run Spring applications using Spring profiles
 
-Lastly, we want to share an update for Spring Boot dashboard. Profiles are a core feature of the Spring framework --- allowing us to map our beans to different profiles --- for example, dev / test, or different data sources.
+Lastly, we want to share an update for Spring Boot dashboard. Profiles are a core feature of the Spring framework — allowing us to map our beans to different profiles — for example, dev / test, or different data sources.
 
 In our latest release, we have supported starting a Spring Boot application with a selected Spring profile from the Spring Boot dashboard directly using the UI. The way to use this feature is to right click on a Spring application in the Apps panel and select "Run with Profile". Here's a demo.
 

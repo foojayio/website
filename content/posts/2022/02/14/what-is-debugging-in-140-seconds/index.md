@@ -27,7 +27,7 @@ See the video here:
 >
 > Debugging Basics 1 - Breakpoints, Variable Inspection \& Stack in [#Java](https://twitter.com/hashtag/Java?src=hash&ref_src=twsrc%5Etfw) using [@intellijidea](https://twitter.com/intellijidea?ref_src=twsrc%5Etfw).[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/QgV8kXvu7V](https://t.co/QgV8kXvu7V)
 >
-> --- Shai Almog (@debugagent) [February 8, 2022](https://twitter.com/debugagent/status/1491076030295117830?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [February 8, 2022](https://twitter.com/debugagent/status/1491076030295117830?ref_src=twsrc%5Etfw)
 
 The source code used in the video is available here: <https://github.com/shai-almog/PrimeMain>
 

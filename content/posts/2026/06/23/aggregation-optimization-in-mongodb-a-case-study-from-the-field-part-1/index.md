@@ -28,7 +28,7 @@ MongoDB is often described as a non-relational database, but whenever we store d
 
 MongoDB, by virtue of its use of the document data model rather than the rows and columns of tabular RDBMSs, provides ways of modeling relationships that can offer significant performance benefits when querying that data. However, to realize those benefits, data must be modeled in MongoDB using schema design patterns that are optimized for the document data model, and frequently, those are not the same as would be appropriate in a RDBMS.
 
-During a recent design review, I came across exactly that problem---a team relatively new to MongoDB had modeled their data in a very "RDBMS-like" manner and were struggling with poor query performance. However, with a relatively small set of changes to their data model and corresponding query design, we were able to transform their query, making it over *800 times faster* than their initial design.
+During a recent design review, I came across exactly that problem—a team relatively new to MongoDB had modeled their data in a very "RDBMS-like" manner and were struggling with poor query performance. However, with a relatively small set of changes to their data model and corresponding query design, we were able to transform their query, making it over *800 times faster* than their initial design.
 
 In this series of articles, we'll present a fictional scenario using a data model and aggregation pipeline query design based on that which was encountered during the review. We'll then walk through each of the steps taken to improve the query performance, using the sample data set to show the impact of each step as we go.
 
@@ -40,16 +40,16 @@ For our example scenario, we created a database for a fictional video streaming 
 
 User "profiles" represented individual users accessing the streaming service. Each profile document contained a profile ID, the user's name, date of birth and SSN, a contact address and telephone number, and the account number to which the profile belonged. (Each account could have multiple profiles. For example, a family might have one account with a separate profile for each family member.)
 
-"Devices" were the devices used by profiles to access the streaming service. Each device document contained a serial number uniquely identifying the device, a device model name---for example, "iPhone 12" or "Amazon Fire Tablet"---the IP address from which the device last connected, and a date after which the device's authorization to connect to the service would need to be renewed.
+"Devices" were the devices used by profiles to access the streaming service. Each device document contained a serial number uniquely identifying the device, a device model name—for example, "iPhone 12" or "Amazon Fire Tablet"---the IP address from which the device last connected, and a date after which the device's authorization to connect to the service would need to be renewed.
 
 A many-to-many relationship existed between devices and profiles --- some devices, like smart TVs, tended to be used by all profiles associated with an account, while others, like smartphones, tended to be used by a single profile. Typically, each profile would access the service through more than one device.
 
 To map profiles to devices, an intermediate (or "associative") "mappings" collection was used. Documents in this collection contained the profile ID of a profile at one side of the relationship and the device serial number of a device at the other side of the relationship, effectively turning the many-to-many relationship between profiles and devices into a one-to-many relationship between profiles and mappings, and a many-to-one relationship between mappings and devices.
 ![](tue12-1024x269.png)
 
-This approach to modeling many-to-many relationships is common when working with relational databases and works around the limitation that, with a tabular data model, there is no great way to store an arbitrary number of reference field values---in this case, profile IDs within devices, or device IDs within profiles.
+This approach to modeling many-to-many relationships is common when working with relational databases and works around the limitation that, with a tabular data model, there is no great way to store an arbitrary number of reference field values—in this case, profile IDs within devices, or device IDs within profiles.
 
-Using this data model, the query that we were trying to perform was designed to provide a list of all profiles with an address in a given city, and that had used a specific device type to access the service---for example, all profiles with an address in Austin that had used an iPhone 12 to access the service. The output from the query was required to embed details of each device of the specified type used by a matching profile. Profiles were to be returned ordered by profile ID and in pages of 10 documents. An example output document would look like this:
+Using this data model, the query that we were trying to perform was designed to provide a list of all profiles with an address in a given city, and that had used a specific device type to access the service—for example, all profiles with an address in Austin that had used an iPhone 12 to access the service. The output from the query was required to embed details of each device of the specified type used by a matching profile. Profiles were to be returned ordered by profile ID and in pages of 10 documents. An example output document would look like this:
 
 ```
 {
@@ -95,7 +95,7 @@ In this case, the initial pipeline was run against the profiles collection and i
 }
 ```
 
-This is typically the first stage in a pipeline. A $match stage performs a query against the input documents and outputs only the matching documents. If this is the first stage in the pipeline, the query is run against the underlying collection---in this case, profiles---and will make use of an index on the collection if one exists supporting the query. In the example above, we were searching the profiles collection for all documents where the contact address city was set to "Austin."
+This is typically the first stage in a pipeline. A $match stage performs a query against the input documents and outputs only the matching documents. If this is the first stage in the pipeline, the query is run against the underlying collection—in this case, profiles—and will make use of an index on the collection if one exists supporting the query. In the example above, we were searching the profiles collection for all documents where the contact address city was set to "Austin."
 
 [**$lookup**](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay.io&utm_term=tony.kim#-lookup--aggregation-)
 
@@ -283,7 +283,7 @@ If the two member documents from the prior $unwind stage both mapped to a device
 
 $lookup (join) stages anticipate that multiple child documents might have to be added to the parent document and so add the matched child documents to an array in the parent document ---deviceData in our pipeline.  
 
-However, as the prior $lookup stage was joining on a specific device serial number for each of the input documents and would therefore find---at most --- a single device document, using an array to store the matched device document was unnecessary. A second $unwind stage was therefore used to flatten the single-element deviceData array down to a sub-document.
+However, as the prior $lookup stage was joining on a specific device serial number for each of the input documents and would therefore find—at most --- a single device document, using an array to store the matched device document was unnecessary. A second $unwind stage was therefore used to flatten the single-element deviceData array down to a sub-document.
 
 This also had the effect of removing any input documents with an empty deviceData array from our data set. This would happen where the mapped device was not an iPhone 12.
 

@@ -29,7 +29,7 @@ Indeed, related terms like "software supply chain" or "security hygiene" were ab
 
 An SBOM, a software bill of materials, is often spoken about as a way to help supply chain security. To understand what it is, how it works and, most critically, why now? We must first step back and look at the broader landscape of software creation, software security and the threats to our systems.
 
-### Software runs the world --- and it's almost all open source
+### Software runs the world — and it's almost all open source
 
 Almost everything we do in modern life has some software component. Software is responsible for delivering food to our tables, lighting our homes, enabling communications, providing transport, and so on. Almost all of this software, or its constituent pieces, is open source. Ninety per cent of modern applications use open-source components and run on open-source operating systems in open-source Kubernetes clusters. Simply put, individuals outside the application development team produce 90% of the final application.
 

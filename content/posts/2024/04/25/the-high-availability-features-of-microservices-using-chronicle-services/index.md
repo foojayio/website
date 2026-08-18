@@ -44,7 +44,7 @@ Service-to-service interactions in[Chronicle Services](https://chronicle.softwar
 
 [Chronicle Queue](https://chronicle.software/queue-enterprise/ "Chronicle Queue") can persist approximately 1 million messages per second, combining efficiency with high throughput.
 
-In the event of an outage, services are able to precisely reconstruct their state by replaying operations from either the input or output persistent queues. Services are thus able to resume precisely from the point of disruption. Data loss is mitigated by adding minimal latency---a few microseconds per message to the queue.
+In the event of an outage, services are able to precisely reconstruct their state by replaying operations from either the input or output persistent queues. Services are thus able to resume precisely from the point of disruption. Data loss is mitigated by adding minimal latency—a few microseconds per message to the queue.
 
 ## Queue Replication for High Availability
 
@@ -61,7 +61,7 @@ An optional acknowledgement mechanism ensures events are received and stored by 
 
 ## Optimising Latency and Reliability
 
-While acknowledgement mechanisms over the network are essential for maintaining data integrity, they naturally incur latency.[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") mitigates this effect by supporting "in-flight" messages---those that have been dispatched but not yet acknowledged.
+While acknowledgement mechanisms over the network are essential for maintaining data integrity, they naturally incur latency.[Chronicle Services](https://chronicle.software/services/ " Chronicle Services") mitigates this effect by supporting "in-flight" messages—those that have been dispatched but not yet acknowledged.
 
 If enabled, this improves overall latency, balancing performance with looser high availability constraints.
 

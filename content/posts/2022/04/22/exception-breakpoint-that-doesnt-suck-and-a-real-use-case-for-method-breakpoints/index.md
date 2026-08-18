@@ -30,7 +30,7 @@ There's a solution, and it's discussed in duckling 6 number 7 also covers a lot 
 >
 > That and more...[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/5gIMdrV2m7](https://t.co/5gIMdrV2m7)
 >
-> --- Shai Almog (@debugagent) [March 22, 2022](https://twitter.com/debugagent/status/1506284778772963337?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [March 22, 2022](https://twitter.com/debugagent/status/1506284778772963337?ref_src=twsrc%5Etfw)
 
 ## Filters
 

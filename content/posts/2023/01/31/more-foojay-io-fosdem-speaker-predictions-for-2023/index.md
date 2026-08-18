@@ -28,7 +28,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > There's also a call to arms: everyone has a role to play in motivating or leading the Java community to tackle the challenges. I hope those there will help do their part, promote awareness, and/or take positive steps in making all our software safer and much harder to exploit.  
 >
 >
-> --- [Steve Poole](https://fosdem.org/2023/schedule/event/log4shell/) (Sonatype)
+> — [Steve Poole](https://fosdem.org/2023/schedule/event/log4shell/) (Sonatype)
 >
 > <br />
 >
@@ -43,7 +43,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > <br />
 >
 >
-> --- [Mary Grygleski and Enrico Olivelli](https://fosdem.org/2023/schedule/event/pulsar/) (Datastax)
+> — [Mary Grygleski and Enrico Olivelli](https://fosdem.org/2023/schedule/event/pulsar/) (Datastax)
 >
 > <br />
 >
@@ -56,7 +56,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > At FOSDEM, I will take a look back at what happened in 2022 (e.g., SDKMAN, JBang, Vaadin, Kotlin) and what we can expect in 2023.  
 >
 >
-> --- [Frank Delporte](https://fosdem.org/2023/schedule/event/pi/) (Azul)
+> — [Frank Delporte](https://fosdem.org/2023/schedule/event/pi/) (Azul)
 >
 > <br />
 >
@@ -75,7 +75,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > Another project that's near to my heart, Apache Camel, will also have a new major release with Camel 4 coming down the pipeline in a few months. Unsurprisingly, this is also due to the javax -\> jakarta migration. This should be a fun year!  
 >
 >
-> --- [Kevin Dubois](https://fosdem.org/2023/schedule/event/quarkus/) (Red Hat)
+> — [Kevin Dubois](https://fosdem.org/2023/schedule/event/quarkus/) (Red Hat)
 >
 > <br />
 >
@@ -88,7 +88,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > The outcome of this keynote was inspiring and revealed that many positive things are yet to come.  
 >
 >
-> --- [Thanos Stratikopoulos](https://fosdem.org/2023/schedule/event/hardware/) (University of Manchester)
+> — [Thanos Stratikopoulos](https://fosdem.org/2023/schedule/event/hardware/) (University of Manchester)
 >
 > <br />
 >
@@ -104,11 +104,11 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > All of these innovations provide real solutions for Java developers who want to take advantage of cloud platform features such as microservices, serverless, and auto-scalers.  
 >
 >
-> --- [Rich Hagarty](https://fosdem.org/2023/schedule/event/jit/) (IBM)
+> — [Rich Hagarty](https://fosdem.org/2023/schedule/event/jit/) (IBM)
 >
 > <br />
 >
-> I am working on bringing a new language --- Fuzion --- to the JVM platform.   
+> I am working on bringing a new language — Fuzion — to the JVM platform.   
 >
 >
 > But Fuzion also provides the possibility for other back ends that run without a JVM, where we could interact with a JVM only via JNI. So everything that has to do with inter-language operability is very exciting, project Panama greatly helps here!   
@@ -117,7 +117,7 @@ Following on [from the first part in this series](https://foojay.io/today/foojay
 > Panama gives us many new options: we can run on the JVM and use Panama to interact with foreign code, but we could as well ourselves create native code for the Fuzion language and use Panama to interact with code in the JVM, hopefully reducing the JNI hassle and overhead to a minimum..  
 >
 >
-> --- [Fridtjof Siebert](https://fosdem.org/2023/schedule/event/fuzion/) (Tokiwa Software)
+> — [Fridtjof Siebert](https://fosdem.org/2023/schedule/event/fuzion/) (Tokiwa Software)
 >
 > <br />
 >

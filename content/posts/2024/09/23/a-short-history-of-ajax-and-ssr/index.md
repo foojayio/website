@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-**My journey in programming began over two decades ago, a time when JavaScript was a far cry from its current state, and developers were primarily focused on Microsoft Internet Explorer. One of my proudest achievements back then was writing a few lines of code that allowed users to add and remove table rows entirely on the client side. We called it . Many developers today have forgotten about it---or never knew it existed.**
+**My journey in programming began over two decades ago, a time when JavaScript was a far cry from its current state, and developers were primarily focused on Microsoft Internet Explorer. One of my proudest achievements back then was writing a few lines of code that allowed users to add and remove table rows entirely on the client side. We called it . Many developers today have forgotten about it—or never knew it existed.**
 
 A few years later, emerged, revolutionizing the way we approached web development. The emergence of AJAX marked a significant shift in web development, transferring more logic from the server to the client, and this shift was not without reason.
 
@@ -27,7 +27,7 @@ This shift gained momentum due to two key factors: advancements in the JavaScrip
 
 Client-side rendering brings a host of benefits, with improved responsiveness being the most significant one, greatly enhancing the user experience. Keeping interactions local and avoiding server roundtrips makes the user experience noticeably faster.
 
-I mentioned the Local Storage API earlier. Along with Web Workers, it enables offline functionality---something browsers previously couldn't provide. I recall developing with [Java Web Start](https://openwebstart.com/) (now OpenWebStart), downloading an application with server connectivity, and marvelling at how it worked offline. At the time, it was one of the few technologies offering this capability. Now, we have similar functionality directly in the browser!
+I mentioned the Local Storage API earlier. Along with Web Workers, it enables offline functionality—something browsers previously couldn't provide. I recall developing with [Java Web Start](https://openwebstart.com/) (now OpenWebStart), downloading an application with server connectivity, and marvelling at how it worked offline. At the time, it was one of the few technologies offering this capability. Now, we have similar functionality directly in the browser!
 
 Another advantage of migrating logic to the user's machine is reducing server computational load. This not only improves performance but also reduces cloud costs.
 
@@ -43,7 +43,7 @@ This artificial separation between client and server is an unnecessary hurdle fo
 
 As with any new technology, early adopters jump on the bandwagon, the technology gains traction, and issues arise over time. Client-side rendering is no different.
 
-As more code moved to the client side, some software began to hit the limits of what browsers could handle despite their improvements. Before it could start rendering the page, the browser had to download all necessary assets---primarily JavaScript libraries. To mitigate this, we minified libraries and increased the number of parallel downloads. At one point, we even resorted to creating artificial subdomains because browsers were heavily limited in the number of parallel downloads from a single domain.
+As more code moved to the client side, some software began to hit the limits of what browsers could handle despite their improvements. Before it could start rendering the page, the browser had to download all necessary assets—primarily JavaScript libraries. To mitigate this, we minified libraries and increased the number of parallel downloads. At one point, we even resorted to creating artificial subdomains because browsers were heavily limited in the number of parallel downloads from a single domain.
 
 We developed complex techniques to trick users into thinking the page had loaded quickly, even if it wasn't fully rendered. It involved managing only the visible portion of the page initially and deferring the rest until necessary. Many of these techniques also depend on the browser's engine, which changes frequently. It led to a rise in "cargo cult" programming and black magic in what was supposed to be engineering.
 
@@ -51,7 +51,7 @@ Another significant issue was . Bots that crawl and index pages were designed fo
 
 Finally, server-side rendering improves initial load times and simplifies development organization.
 
-We must recognize the benefits that client-side rendering offers, but perhaps the pendulum has swung too far. Is it possible to have the best of both worlds? In some corners of the industry, cooler heads have prevailed, and the term has been coined to describe a return to what we've been doing for ages---albeit with some modern enhancements. The idea is to leverage AJAX, JavaScript, and browser improvements without the unnecessary bloat. While many tools are available, I frequently hear about [Vue. js](https://vuejs.org/) and [HTMX](https://htmx.org/). A recent search also led me to [Alpine.js](https://alpinejs.dev/). And I've long been a proponent of [Vaadin](https://vaadin.com/).
+We must recognize the benefits that client-side rendering offers, but perhaps the pendulum has swung too far. Is it possible to have the best of both worlds? In some corners of the industry, cooler heads have prevailed, and the term has been coined to describe a return to what we've been doing for ages—albeit with some modern enhancements. The idea is to leverage AJAX, JavaScript, and browser improvements without the unnecessary bloat. While many tools are available, I frequently hear about [Vue. js](https://vuejs.org/) and [HTMX](https://htmx.org/). A recent search also led me to [Alpine.js](https://alpinejs.dev/). And I've long been a proponent of [Vaadin](https://vaadin.com/).
 
 I plan to explore these technologies in this focused series by implementing a small to-do application with each. Here are my requirements:
 

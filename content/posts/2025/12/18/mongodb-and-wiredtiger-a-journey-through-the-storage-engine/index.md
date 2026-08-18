@@ -57,7 +57,7 @@ This is where data earns its permanence. But it's not a mere act of writing; it'
 Concurrency is a challenge, but MVCC (MultiVersion Concurrency Control) turns it into an art. By maintaining multiple versions of a dataset, it ensures that readers get a consistent view, even when writers are updating data.{#c7b6}
 > ***Example*** *:*While Jane updates her photo's caption, her followers can still view her photo without any inconsistencies.{#7acb}
 
-**Step 8: Capturing Moments --- Snapshot Management**{#ee30}
+**Step 8: Capturing Moments — Snapshot Management**{#ee30}
 
 Snapshots provide temporal anchors. By preserving data states at specific moments, they allow for historical data views, rollbacks, and consistent backups.{#1824}
 > ***Example*** *:*An hour after updating her caption, Jane wants to revert it. Snapshots ensure that her previous caption is still accessible for such rollbacks.{#f42a}
@@ -77,7 +77,7 @@ Within B-Trees, pages are the fundamental units of data storage. WiredTiger's in
 Data's residence is a complex maze of files on disk. Each serves a purpose, from storing collection data to indexing. Their interplay and management are pivotal for database health.{#b790}
 > ***Example*** *:*Jane's photo, her list of followers, and her comments might reside in different data files, each tailored for its specific type of data.{#d2e0}
 
-**Step 12: The Cleanup --- Garbage Collection**{#aacc}
+**Step 12: The Cleanup — Garbage Collection**{#aacc}
 
 As data evolves, remnants of its past linger. Garbage collection is WiredTiger's cleaning crew, diligently reclaiming space from obsolete or deleted data.{#be2d}
 > ***Example***: When Jane deletes a draft post, the space it occupied is efficiently reclaimed, ensuring the database remains uncluttered.{#ac59}

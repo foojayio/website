@@ -28,7 +28,7 @@ Part 3 provides a more detailed account of how Leyden's proposed solution operat
 
 To use an AOT cache (on JDK 25+), you need to add some JVM arguments to your app launch command. There are two ways of doing it, in 2 or 3 steps.
 
-Joint Training and Assembly steps --- writing of the AOT cache is performed in a forked Java runtime at training run exit:
+Joint Training and Assembly steps — writing of the AOT cache is performed in a forked Java runtime at training run exit:
 
 1. Training+Assembly Run: *java* ***-XX:AOTCacheOutput=${aot-cache-file}*** *-jar app.jar*
 2. Production Run: *java* ***-XX:AOTCache=${aot-cache-file}*** *-jar app.jar*
@@ -37,7 +37,7 @@ Step 1 of the two step model runs your application until it exits (whether by me
 
 Step 2 runs the production application using the AOT cache specified by the AOTCache command line option.
 
-Separate Training and Assembly steps --- allows the assembly run to be executed independently without delaying the training run exit:
+Separate Training and Assembly steps — allows the assembly run to be executed independently without delaying the training run exit:
 
 1. Training Run: *java* ***- XX:AOTMode=record -XX:AOTConfiguration=${aot-cache-conf-file}*** *-jar app.jar*
 2. Assembly Run: *java* ***-XX:AOTMode=create -XX:AOTConfiguration=${aot-cache-conf-file} -XX:AOTCacheOutput=${aot-cache-file}*** *-jar app.jar*

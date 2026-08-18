@@ -91,7 +91,7 @@ Given the specified request, let's define the response JSON structure to return 
 
 ## Search service implementation
 
-Code! That's where it's at. Keeping things as straightforward as possible so that our implementation is useful for every front-end technology, we're implementing an HTTP service that works with standard GET request parameters and returns easily digestible JSON. And Java is our language of choice here, so let's get to it. Coding is an opinionated endeavor, so we acknowledge that there are various ways to do this in Java and other languages --- here's one opinionated (and experienced) way to go about it.
+Code! That's where it's at. Keeping things as straightforward as possible so that our implementation is useful for every front-end technology, we're implementing an HTTP service that works with standard GET request parameters and returns easily digestible JSON. And Java is our language of choice here, so let's get to it. Coding is an opinionated endeavor, so we acknowledge that there are various ways to do this in Java and other languages — here's one opinionated (and experienced) way to go about it.
 
 To run with the configuration presented here, a good starting point is to get up and running with the examples from the article [Using Atlas Search from Java](https://www.mongodb.com/developer/products/atlas/atlas-search-java/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=search-service-foojay&utm_term=erik.hatcher). Once you've got that running, create a new index, called \`movies_index\`, with a custom index configuration as specified in the following JSON:
 

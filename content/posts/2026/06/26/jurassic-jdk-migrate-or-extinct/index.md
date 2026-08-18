@@ -140,7 +140,7 @@ Lock your minimum JDK version so nobody on the team accidentally compiles agains
 
 ### What Gaslights You ❌
 
-Any tool that says it will "fully migrate your project automatically." No it won't. These tools handle the mechanical stuff. The architectural decisions, the library incompatibilities, the Hibernate pain (more on that below 👇) --- that's still on you. Every diff needs a human review. Every automated change needs a test run. Don't skip that. Ever.
+Any tool that says it will "fully migrate your project automatically." No it won't. These tools handle the mechanical stuff. The architectural decisions, the library incompatibilities, the Hibernate pain (more on that below 👇) — that's still on you. Every diff needs a human review. Every automated change needs a test run. Don't skip that. Ever.
 
 ## Step 3: The Breaking Changes That Will Ruin Your Day
 

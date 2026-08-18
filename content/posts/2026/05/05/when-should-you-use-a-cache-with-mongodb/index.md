@@ -19,11 +19,11 @@ frozen: false
 
 From time to time, I'll run a [design review](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim) for an application being migrated from a relational database onto MongoDB, where the customer shares an architectural diagram showing a caching layer (typically Redis) sitting between the app server and MongoDB.
 
-I like to keep the architecture as simple as possible---after all, each layer brings its own complexity and management costs---so I'll ask why the caching layer is there. Of course, the answer is always that it's there to speed up data access. This reveals a misunderstanding of both the reason why caching layers were created and what MongoDB provides.
+I like to keep the architecture as simple as possible—after all, each layer brings its own complexity and management costs—so I'll ask why the caching layer is there. Of course, the answer is always that it's there to speed up data access. This reveals a misunderstanding of both the reason why caching layers were created and what MongoDB provides.
 
 I've yet to finish a design review without recommending that the cache tier be removed.
 
-So to answer the question in the title of this article---when should you use a cache with MongoDB?---the answer is probably never. This article attempts to explain why, but if you get to the end and still think your application needs it, then I'd love to discuss your app with you.
+So to answer the question in the title of this article—when should you use a cache with MongoDB?---the answer is probably never. This article attempts to explain why, but if you get to the end and still think your application needs it, then I'd love to discuss your app with you.
 
 ## Why were caches like Memcached \& Redis invented, and why do they thrive?
 
@@ -31,7 +31,7 @@ Caching tiers were introduced because it was too slow for applications to read t
 
 Does this mean there aren't smart developers working on Oracle, DB2, Postgres, MySQL, etc.? Why couldn't those developers make relational databases fast? The answer is that all those databases were written by great developers who included indexes, internal database caches, and other features to make reading a record as fast as possible.
 
-The problem is that the application rarely needs to read just a single record from the normalised relational database. Instead, it typically needs to perform multiple joins across many tables to form a single business object. These joins are expensive (they're slow and consume many resources). For this reason, the application doesn't want to incur that cost every time they read the same business object. That's where the caching tier adds value---join the normalised, relational data once and then cache the results so that the application can efficiently fetch the same results many times.
+The problem is that the application rarely needs to read just a single record from the normalised relational database. Instead, it typically needs to perform multiple joins across many tables to form a single business object. These joins are expensive (they're slow and consume many resources). For this reason, the application doesn't want to incur that cost every time they read the same business object. That's where the caching tier adds value—join the normalised, relational data once and then cache the results so that the application can efficiently fetch the same results many times.
 
 There's also the issue of data distribution. Most relational databases were designed 50 years ago when an enterprise would run the database and any applications in a single data center. Fast forward to today, when enterprises and customers are spread worldwide, with everyone wanting to work with the same data. You don't want globally distributed app servers to suffer the latency and expense of continually fetching the same data from a database located on a different continent. You want a copy of the data located locally close to every app server that needs it.
 
@@ -61,7 +61,7 @@ MongoDB has its own internal LRU (least recently used) cache, so if your documen
 
 Note that MongoDB supports [joins](https://mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim), but we try to structure your data to minimize their use.
 
-The other value-add from a caching layer is data locality in distributed architectures. MongoDB has this built in. A [MongoDB replica set](https://mongodb.com/docs/manual/replication/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim) has a single primary node that handles all writes, together with up to 49 secondary nodes---each with a copy of the data. For the lowest latency queries, you can place secondaries locally at each of your app server locations. MongoDB is responsible for keeping the data in the secondary nodes up to date with the primary, so you don't need to write and maintain any extra synchronization code.
+The other value-add from a caching layer is data locality in distributed architectures. MongoDB has this built in. A [MongoDB replica set](https://mongodb.com/docs/manual/replication/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=cache-foojay&utm_term=tony.kim) has a single primary node that handles all writes, together with up to 49 secondary nodes—each with a copy of the data. For the lowest latency queries, you can place secondaries locally at each of your app server locations. MongoDB is responsible for keeping the data in the secondary nodes up to date with the primary, so you don't need to write and maintain any extra synchronization code.
 
 ## What does AI think?
 

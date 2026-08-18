@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-If you build Java on GitHub Actions, `actions/setup-java` is almost certainly the first step in your workflow. It installs a JDK, wires up `JAVA_HOME` and the `PATH`, configures Maven `settings.xml`, sets up dependency caching, and registers Maven toolchains --- all before your build even starts.
+If you build Java on GitHub Actions, `actions/setup-java` is almost certainly the first step in your workflow. It installs a JDK, wires up `JAVA_HOME` and the `PATH`, configures Maven `settings.xml`, sets up dependency caching, and registers Maven toolchains — all before your build even starts.
 
 The last two releases, **v5.4.0** and **v5.5.0** , are quietly some of the most interesting in a while. v5.5.0 in particular brings something Java developers have been asking about for years on CI: **cryptographic verification of the JDK you just downloaded**. There's also a brand-new distribution, smarter version-file handling, and a batch of Maven quality-of-life fixes that make your logs cleaner and your toolchains file saner.
 
@@ -26,7 +26,7 @@ Let's dig in.
 
 ## Verify the signature of the JDK you download
 
-Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and runs your code is downloaded over the network, and for a long time the only integrity guarantee was TLS. That's fine --- until it isn't. The JDK becomes the `java` binary that the rest of your pipeline trusts, with access to your secrets, your signing keys, and your deploy credentials. Supply-chain integrity of the toolchain itself matters.
+Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and runs your code is downloaded over the network, and for a long time the only integrity guarantee was TLS. That's fine — until it isn't. The JDK becomes the `java` binary that the rest of your pipeline trusts, with access to your secrets, your signing keys, and your deploy credentials. Supply-chain integrity of the toolchain itself matters.
 
 v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
 
@@ -38,7 +38,7 @@ v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
     verify-signature: true
 ```
 
-When `verify-signature: true`, the action downloads the detached GPG signature that the distribution publishes alongside the archive and validates the JDK **before** it's installed. If the signature doesn't check out, the step fails --- the bad JDK never makes it onto the runner.
+When `verify-signature: true`, the action downloads the detached GPG signature that the distribution publishes alongside the archive and validates the JDK **before** it's installed. If the signature doesn't check out, the step fails — the bad JDK never makes it onto the runner.
 
 A few important details:
 
@@ -70,13 +70,13 @@ If you care about reproducible, supply-chain-safe builds, this is the flag to re
     java-version: '21'
 ```
 
-[Tencent Kona JDK](https://tencent.github.io/konajdk/) is an OpenJDK-based, production-grade distribution that Tencent runs at scale, with builds for LTS lines. If your organization standardizes on Kona --- or you just want to test against it --- you no longer need a custom download-and-extract step. It's a first-class `distribution` value now, and it also works via version files (more on that below).
+[Tencent Kona JDK](https://tencent.github.io/konajdk/) is an OpenJDK-based, production-grade distribution that Tencent runs at scale, with builds for LTS lines. If your organization standardizes on Kona — or you just want to test against it — you no longer need a custom download-and-extract step. It's a first-class `distribution` value now, and it also works via version files (more on that below).
 
 This brings the roster of supported distributions to a healthy list: Temurin, Zulu, Adopt (Hotspot/OpenJ9), Liberica, Microsoft, Corretto, Semeru, Oracle, Dragonwell, SapMachine, GraalVM, GraalVM Community, and now Kona.
 
 ## Install a JDK *without* making it the default
 
-By default, every call to `setup-java` sets `JAVA_HOME` and updates `PATH`, so the last JDK you install "wins" and becomes *the* `java` for the rest of the job. That's usually what you want --- but not always.
+By default, every call to `setup-java` sets `JAVA_HOME` and updates `PATH`, so the last JDK you install "wins" and becomes *the* `java` for the rest of the job. That's usually what you want — but not always.
 
 Sometimes you need a specific JDK available to *one* step (say, a tool that must run on Java 17) without disturbing the main Java version your build uses. Enter `set-default: false`:
 
@@ -102,7 +102,7 @@ With `set-default: false`, the action:
 * Still registers the JDK in the Maven **toolchains** file, so builds can select it via toolchains.
 
 This makes it possible for a single job to juggle multiple JDKs cleanly, without the ordering games of "install the one you want last."
-> Note: if you install multiple JDKs in one step via a multiline `java-version`, `set-default: false` applies to all of them --- none become the default, but each stays discoverable through its `JAVA_HOME__` variable.
+> Note: if you install multiple JDKs in one step via a multiline `java-version`, `set-default: false` applies to all of them — none become the default, but each stays discoverable through its `JAVA_HOME__` variable.
 
 ## Smarter version files: auto-detect the distribution
 
@@ -123,7 +123,7 @@ SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zul
 java=21.0.5-tem
 ```
 
-That `-tem` is enough --- no `distribution` input needed. In fact, `distribution` is now *optional* when your `.sdkmanrc` uses a recognized suffix.
+That `-tem` is enough — no `distribution` input needed. In fact, `distribution` is now *optional* when your `.sdkmanrc` uses a recognized suffix.
 
 ## A much nicer Maven experience
 
@@ -143,7 +143,7 @@ Maven loves to print a line for *every* artifact it downloads. On a cold cache t
 
 Details worth knowing:
 
-* Applies to **Maven 3.9.0+** and the **Maven Wrapper** (`mvnw`), which honor `MAVEN_ARGS`. Older Maven versions ignore it --- there you can pass `--no-transfer-progress` on the command line.
+* Applies to **Maven 3.9.0+** and the **Maven Wrapper** (`mvnw`), which honor `MAVEN_ARGS`. Older Maven versions ignore it — there you can pass `--no-transfer-progress` on the command line.
 * Any **existing** `MAVEN_ARGS` value is preserved, not clobbered.
 * Want the progress back? Set `show-download-progress: true`.
 
@@ -169,7 +169,7 @@ The generated `toolchains.xml` is now **deduplicated by toolchain type and id** 
 
 Three more things from that release deserve a callout:
 
-* **`javac` problem matcher:** the action registers a problem matcher after installing the JDK, turning `javac` errors and warnings into inline **annotations** on your pull requests and in the run summary. Compiler failures show up right on the offending line instead of being buried in the log. (You can disable it if you prefer --- see the advanced usage docs.)
+* **`javac` problem matcher:** the action registers a problem matcher after installing the JDK, turning `javac` errors and warnings into inline **annotations** on your pull requests and in the run summary. Compiler failures show up right on the offending line instead of being buried in the log. (You can disable it if you prefer — see the advanced usage docs.)
 
 * **Maven Wrapper caching:** with `cache: maven`, the action now also caches the Maven Wrapper, shaving time off jobs that use `./mvnw`.
 
@@ -184,7 +184,7 @@ Three more things from that release deserve a callout:
 
 ## Putting it all together
 
-Here's a workflow that uses several of these features at once --- signature-verified Temurin as the default, a secondary JDK for a tool, version driven from `.sdkmanrc`, Maven caching, and clean logs out of the box:
+Here's a workflow that uses several of these features at once — signature-verified Temurin as the default, a secondary JDK for a tool, version driven from `.sdkmanrc`, Maven caching, and clean logs out of the box:
 
 ```
 name: build

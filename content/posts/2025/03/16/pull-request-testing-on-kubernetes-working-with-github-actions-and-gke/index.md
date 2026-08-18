@@ -109,7 +109,7 @@ time gcloud container clusters create "minimal-cluster" \
   --enable-ip-alias --no-enable-basic-auth --no-enable-google-cloud-access
 ```
 
-You'll probably need to change your zone---I'm in Europe. Note that I'm using a single node to reduce costs further: don't do this in real-world scenarios! Kubernetes clusters have multiple nodes for a reason.
+You'll probably need to change your zone—I'm in Europe. Note that I'm using a single node to reduce costs further: don't do this in real-world scenarios! Kubernetes clusters have multiple nodes for a reason.
 
 The above command produces the following output:
 

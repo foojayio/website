@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line --- 2.13.x, 2.14.x, 2.15.x --- jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)
+**Quick version check:** the affected range for all seven is broadly `>=2.10.0 =2.19.0 =3.0.0 <3.1.4` --- with some CVEs affecting narrower ranges. If you're on a supported release, upgrade to 2.18.8, 2.21.4, or 3.1.4. If you're on an EOL line — 2.13.x, 2.14.x, 2.15.x — jump to the bottom of the page for more specifics or visit [HeroDevs Jackson Support](https://docs.herodevs.com/jackson?utm_source=devrel&utm_medium=referral&utm_campaign=2026q2_spring-boot-3-5-eol_global)
 
 ### Not a sales pitch
 
@@ -50,11 +50,11 @@ All seven are fixed in `jackson-databind` 2.18.8, 2.21.4, and 3.1.4. All seven w
 
 ### The Critical RCEs
 
-**[CVE-2026-54512](https://www.herodevs.com/vulnerability-directory/cve-2026-54512)** ([GHSA-j3rv-43j4-c7qm](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm)) --- CVSS v4 9.2 (Critical), EPSS 44%
+**[CVE-2026-54512](https://www.herodevs.com/vulnerability-directory/cve-2026-54512)** ([GHSA-j3rv-43j4-c7qm](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm)) — CVSS v4 9.2 (Critical), EPSS 44%
 
 The `PolymorphicTypeValidator` allowlist checks the container class name but never validates generic type parameters inside it. Supply `java.util.ArrayList` --- `ArrayList` passes the check, the gadget class rides in unchallenged. With a reachable gadget on the classpath, that's unauthenticated RCE. Affects `>=2.10.0`. Requires polymorphic typing enabled with a PTV allowlist.
 
-**[CVE-2026-54513](https://www.herodevs.com/vulnerability-directory/cve-2026-54513)** ([GHSA-rmj7-2vxq-3g9f](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f)) --- CVSS v4 9.3 (Critical)
+**[CVE-2026-54513](https://www.herodevs.com/vulnerability-directory/cve-2026-54513)** ([GHSA-rmj7-2vxq-3g9f](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f)) — CVSS v4 9.3 (Critical)
 
 `BasicPolymorphicTypeValidator.allowIfSubTypeIsArray()` approves any array based only on `clazz.isArray()` --- it never checks the element type against the allowlist. Supply `EvilType[]` and the validator waves it through. Same class of attack as CVE-2026-54512, different entry point. Affects `>=2.10.0`. Also requires polymorphic typing.
 
@@ -62,23 +62,23 @@ Both score Critical under CVSS v4. The CVSS v3.1 scores are 8.1 (High) due to At
 
 ### The Access Control and Deserialization Bypasses
 
-**[CVE-2026-54514](https://www.herodevs.com/vulnerability-directory/cve-2026-54514)** ([GHSA-hgj6-7826-r7m5](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5)) --- CVSS 5.3 (Medium)
+**[CVE-2026-54514](https://www.herodevs.com/vulnerability-directory/cve-2026-54514)** ([GHSA-hgj6-7826-r7m5](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5)) — CVSS 5.3 (Medium)
 
-`InetSocketAddress` deserialization triggers an eager DNS lookup at construction time --- before any application-level validation. Attacker-controlled hostname in JSON causes an outbound DNS query. SSRF. Affects `>=2.0.0`. No polymorphic typing required.
+`InetSocketAddress` deserialization triggers an eager DNS lookup at construction time — before any application-level validation. Attacker-controlled hostname in JSON causes an outbound DNS query. SSRF. Affects `>=2.0.0`. No polymorphic typing required.
 
-**[CVE-2026-54515](https://www.herodevs.com/vulnerability-directory/cve-2026-54515)** ([GHSA-5jmj-h7xm-6q6v](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5jmj-h7xm-6q6v)) --- CVSS 5.3 (Medium)
+**[CVE-2026-54515](https://www.herodevs.com/vulnerability-directory/cve-2026-54515)** ([GHSA-5jmj-h7xm-6q6v](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5jmj-h7xm-6q6v)) — CVSS 5.3 (Medium)
 
 Case-insensitive deserialization (`@JsonFormat(ACCEPT_CASE_INSENSITIVE_PROPERTIES)`) rebuilds `_beanProperties` from the unfiltered map rather than the contextual one, restoring properties that `@JsonIgnoreProperties` had just removed. Mass-assignment bypass. Affects `>=3.1.0` only.
 
-**[CVE-2026-54516](https://www.herodevs.com/vulnerability-directory/cve-2026-54516)** ([GHSA-9fxm-vc8v-hj55](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-9fxm-vc8v-hj55)) --- CVSS 5.3 (Medium)
+**[CVE-2026-54516](https://www.herodevs.com/vulnerability-directory/cve-2026-54516)** ([GHSA-9fxm-vc8v-hj55](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-9fxm-vc8v-hj55)) — CVSS 5.3 (Medium)
 
 A property with `@JsonProperty("renamed")` on the getter and `@JsonIgnore` on the setter gets renamed rather than dropped. With `INFER_PROPERTY_MUTATORS` enabled (default), the private backing field is retained and made writable. Attacker supplies the renamed key, field is set directly, bypassing the `@JsonIgnore`. Property tampering. Affects `>=2.21.0` and `>=3.0.0`.
 
-**[CVE-2026-54517](https://www.herodevs.com/vulnerability-directory/cve-2026-54517)** ([GHSA-5hh8-q8hv-fr38](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5hh8-q8hv-fr38)) --- CVSS 5.3 (Medium)
+**[CVE-2026-54517](https://www.herodevs.com/vulnerability-directory/cve-2026-54517)** ([GHSA-5hh8-q8hv-fr38](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5hh8-q8hv-fr38)) — CVSS 5.3 (Medium)
 
 `@JsonView` filter applied only to creator properties in `_deserializeUsingPropertyBased`; the setterless collection path bypasses it entirely. A setterless collection annotated with a restricted `@JsonView` can be written from untrusted JSON. Access control bypass. Affects `>=2.21.0` and `>=3.0.0`.
 
-**[CVE-2026-54518](https://www.herodevs.com/vulnerability-directory/cve-2026-54518)** ([GHSA-rcqc-6cw3-h962](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rcqc-6cw3-h962)) --- CVSS 6.5 (Medium)
+**[CVE-2026-54518](https://www.herodevs.com/vulnerability-directory/cve-2026-54518)** ([GHSA-rcqc-6cw3-h962](https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rcqc-6cw3-h962)) — CVSS 6.5 (Medium)
 
 `UnwrappedPropertyHandler.processUnwrappedCreatorProperties()` replays buffered JSON into creator parameters without checking `prop.visibleInView(activeView)`. Constructor parameters annotated with both `@JsonView` and `@JsonUnwrapped` get populated from attacker JSON even when a restrictive view is active. Access control bypass. Affects `>=2.21.0` and `>=3.0.0`.
 
@@ -86,7 +86,7 @@ A property with `@JsonProperty("renamed")` on the getter and `@JsonIgnore` on th
 
 The two critical RCEs are the most serious findings, but all seven share a common thread: Jackson's own annotation-based security mechanisms are the attack surface.
 
-CVE-2026-54512 and CVE-2026-54513 bypass the `PolymorphicTypeValidator` --- introduced after a [well-documented series of high-severity deserialization CVEs](https://www.sonatype.com/blog/jackson-databind-the-end-of-the-blacklist) stretching from 2017 to 2019. The bug in CVE-2026-54512 dates to 2019 --- introduced with the same release, 2.10, that brought the validator itself.
+CVE-2026-54512 and CVE-2026-54513 bypass the `PolymorphicTypeValidator` --- introduced after a [well-documented series of high-severity deserialization CVEs](https://www.sonatype.com/blog/jackson-databind-the-end-of-the-blacklist) stretching from 2017 to 2019. The bug in CVE-2026-54512 dates to 2019 — introduced with the same release, 2.10, that brought the validator itself.
 
 CVE-2026-54515 through CVE-2026-54518 bypass `@JsonIgnoreProperties`, `@JsonIgnore`, and `@JsonView` --- the annotation-based access control mechanisms developers use to keep fields unwritable from untrusted input.
 
@@ -115,7 +115,7 @@ Don't assume your scanner's silence, or its alert, tells the whole story. Check 
 | NES fix (critical RCEs)  | ---                             | ✅ 2.13.6, 2.14.4, 2.15.5     |
 | NES fix (remaining five) | ---                             | In progress                  |
 
-**If you're on a supported release** --- upgrade to 2.18.8, 2.21.4, or 3.1.4. All seven resolved.
+**If you're on a supported release** — upgrade to 2.18.8, 2.21.4, or 3.1.4. All seven resolved.
 
 **If you use polymorphic deserialization** --- `activateDefaultTyping()` or `@JsonTypeInfo` --- the two critical RCEs are directly relevant. Patch immediately.
 

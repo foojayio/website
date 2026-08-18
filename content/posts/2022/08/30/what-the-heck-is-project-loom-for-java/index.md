@@ -38,7 +38,7 @@ I wrote more about Java concurrency in my [Concurrency in modern programming lan
 
 > Project Loom aims to drastically reduce the effort of writing, maintaining, and observing high-throughput concurrent applications that make the best use of available hardware.
 >
-> --- Ron Pressler (Tech lead, Project Loom)
+> — Ron Pressler (Tech lead, Project Loom)
 
 OS threads are at the core of Java's concurrency model and have a very mature ecosystem around them, but they also come with some drawbacks and are expensive computationally. Let's look at the two most common use cases for concurrency and the drawbacks of the current Java concurrency model in these cases.
 
@@ -247,9 +247,9 @@ void handleOrder() throws ExecutionException, InterruptedException {
 
 Unlike the previous sample using `ExecutorService`, we can now use `StructuredTaskScope` to achieve the same result while confining the lifetimes of the subtasks to the lexical scope, in this case, the body of the *try-with-resources* statement. The code is much more readable, and the intent is also clear. `StructuredTaskScope` also ensures the following behavior automatically.
 
-* **Error handling with short-circuiting** --- If either the `updateInventory()` or `updateOrder()` fails, the other is canceled unless its already completed. This is managed by the cancellation policy implemented by `ShutdownOnFailure()`; other policies are possible.
-* **Cancellation propagation** --- If the thread running `handleOrder()` is interrupted before or during the call to `join()`, both forks are canceled automatically when the thread exits the scope.
-* **Observability** --- A thread dump would clearly display the task hierarchy, with the threads running `updateInventory()` and `updateOrder()` shown as children of the scope.
+* **Error handling with short-circuiting** — If either the `updateInventory()` or `updateOrder()` fails, the other is canceled unless its already completed. This is managed by the cancellation policy implemented by `ShutdownOnFailure()`; other policies are possible.
+* **Cancellation propagation** — If the thread running `handleOrder()` is interrupted before or during the call to `join()`, both forks are canceled automatically when the thread exits the scope.
+* **Observability** — A thread dump would clearly display the task hierarchy, with the threads running `updateInventory()` and `updateOrder()` shown as children of the scope.
 
 ## State of Project Loom
 

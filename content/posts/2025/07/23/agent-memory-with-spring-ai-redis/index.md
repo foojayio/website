@@ -31,13 +31,13 @@ In a travel assistant scenario, for example, if a user mentions "I'm allergic to
 
 > Video: [What is an embedding model?](https://youtu.be/0U1S0WSsPuE)
 
-Behind the scenes, this works thanks to vector similarity search. It turns text into vectors (embeddings) --- lists of numbers --- stores them in a vector database, and then finds the ones closest to your query when relevant information needs to be recalled.
+Behind the scenes, this works thanks to vector similarity search. It turns text into vectors (embeddings) — lists of numbers — stores them in a vector database, and then finds the ones closest to your query when relevant information needs to be recalled.
 
 {{< youtube o3XN4dImESE >}}
 
 > Video: [What is semantic search?](https://youtu.be/o3XN4dImESE)
 
-Today, we're gonna build a memory-enabled AI agent that helps users plan travel. It will remember user preferences, past trips, and important details across multiple conversations --- even if the user leaves and comes back later.
+Today, we're gonna build a memory-enabled AI agent that helps users plan travel. It will remember user preferences, past trips, and important details across multiple conversations — even if the user leaves and comes back later.
 
 To do that, we'll build a Spring Boot app from scratch and use Redis as our memory store. It'll handle both short-term memory (conversation history) and long-term memory (facts and preferences as vector embeddings), enabling our agent to provide truly personalized assistance.
 
@@ -648,9 +648,9 @@ If you run the `FT.INFO memoryIdx` command in the RedisInsight workbench, you'll
 
 ## Wrapping up
 
-And that's it --- you now have a working AI agent with memory using Spring Boot and Redis.
+And that's it — you now have a working AI agent with memory using Spring Boot and Redis.
 
-Instead of forgetting everything between conversations, your agent can now remember user preferences, past experiences, and important facts. Redis handles both short-term memory (conversation history) and long-term memory (vector embeddings) --- all with the performance and scalability Redis is known for.
+Instead of forgetting everything between conversations, your agent can now remember user preferences, past experiences, and important facts. Redis handles both short-term memory (conversation history) and long-term memory (vector embeddings) — all with the performance and scalability Redis is known for.
 
 With Spring AI and Redis, you get an easy way to integrate this into your Java applications. The combination of vector similarity search for semantic retrieval and traditional data structures for conversation history gives you a powerful foundation for building truly intelligent agents.
 

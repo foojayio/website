@@ -17,9 +17,9 @@ related_posts:
 frozen: false
 ---
 
-The **Jakarta EE 11 Web Profile** has [officially been released](https://www.agilejava.eu/2025/04/06/hashtag-jakarta-ee-275/) on March 30, 2025 --- bringing a cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications.
+The **Jakarta EE 11 Web Profile** has [officially been released](https://www.agilejava.eu/2025/04/06/hashtag-jakarta-ee-275/) on March 30, 2025 — bringing a cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications.
 
-Although it comes later than planned, due to unexpected challenges in refactoring the Jakarta EE TCK (compatibility kit), this release marks a key shift toward a more cloud-native, developer-focused platform --- and we're proud to say that **Eclipse GlassFish** was the **first implementation to pass the Jakarta EE 11 Web Profile TCK** and enable the specification's final approval.
+Although it comes later than planned, due to unexpected challenges in refactoring the Jakarta EE TCK (compatibility kit), this release marks a key shift toward a more cloud-native, developer-focused platform — and we're proud to say that **Eclipse GlassFish** was the **first implementation to pass the Jakarta EE 11 Web Profile TCK** and enable the specification's final approval.
 
 ### Key Technical Changes in Jakarta EE 11 Web Profile
 
@@ -50,7 +50,7 @@ As the **first runtime to pass the full TCK**, GlassFish played a critical role 
 
 ### OmniFish Engineering Contributions
 
-The **OmniFish engineering team** was deeply involved in this release cycle --- not only in maintaining and evolving GlassFish, but also in the **Jakarta EE specification process** itself. Our contributions include:
+The **OmniFish engineering team** was deeply involved in this release cycle — not only in maintaining and evolving GlassFish, but also in the **Jakarta EE specification process** itself. Our contributions include:
 
 * Contributions across several specifications, including updates in **Jakarta Concurrency** , **Jakarta Faces** , **Jakarta Security**
 * Help with refactoring and modularization of the **Jakarta EE TCK**, making it easier to maintain and adopt
@@ -68,7 +68,7 @@ The team at OmniFish is now working on the **final release of GlassFish 8**, whi
 * **Jakarta NoSQL Integration**   
   Support for [Jakarta NoSQL](https://jakarta.ee/specifications/nosql/1.0/), enabling integration with document, key-value, column, and graph databases. With this, GlassFish 8 will also support Jakarta Data repositories over Jakarta NoSQL entities
 * **MicroProfile Health Support**   
-  Adds MicroProfile Health endpoints for readiness and liveness probes --- a must for production deployments in Kubernetes or other cloud-native environments. This feature is already prepared and in the [roadmap for GlassFish 7.1](https://github.com/eclipse-ee4j/glassfish/discussions/25225), so GlassFish 8.0 will mainly inherit it from GlassFish 7 and update it for Jakarta EE 11.
+  Adds MicroProfile Health endpoints for readiness and liveness probes — a must for production deployments in Kubernetes or other cloud-native environments. This feature is already prepared and in the [roadmap for GlassFish 7.1](https://github.com/eclipse-ee4j/glassfish/discussions/25225), so GlassFish 8.0 will mainly inherit it from GlassFish 7 and update it for Jakarta EE 11.
 * Support for MicroProfile APIs in **Embedded GlassFish**   
   Adds support for all MicroProfile APIs supported by GlassFish server (running on Java 17+) to Embedded GlassFish. This might also already happen in GlassFish 7.1, which will drop support for Java 11 and allow integration of MicroProfile components, which require Java 17.
 

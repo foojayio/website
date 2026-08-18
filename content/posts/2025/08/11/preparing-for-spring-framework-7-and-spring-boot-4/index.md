@@ -34,7 +34,7 @@ To start with,
 Spring Framework 7 introduces powerful resilience tools directly into its core:
 
 * **@Retryable:** Retries failed method calls with configurable options like max attempts, delays, jitters, and backoff. It also supports reactive return types.
-* **@ConcurrencyLimit:**Limits concurrent method invocations to protect services and resources---for example, by restricting access to a single thread.
+* **@ConcurrencyLimit:**Limits concurrent method invocations to protect services and resources—for example, by restricting access to a single thread.
 * Enable both annotations using **@EnableResilientMethods** or by registering specific post-processors. For more details, please go read through [here](https://docs.spring.io/spring-framework/docs/7.0.0-M7/javadoc-api/org/springframework/resilience/annotation/EnableResilientMethods.html)
 
 ```java
@@ -72,7 +72,7 @@ public class PaymentService {
 
 ### 2. Fluent JMS Client API
 
-Spring now includes **JmsClient** , modeled after **JdbcClient** and RestClient. Developers can now send/receive messages using a fluent, builder-style API. This new approach is a more elegant and readable alternative to traditional JMS templates---just like how **JdbcClient** replaces **JdbcTemplate** , and **RestClient** replaces **RestTemplate**.
+Spring now includes **JmsClient** , modeled after **JdbcClient** and RestClient. Developers can now send/receive messages using a fluent, builder-style API. This new approach is a more elegant and readable alternative to traditional JMS templates—just like how **JdbcClient** replaces **JdbcTemplate** , and **RestClient** replaces **RestTemplate**.
 
 ### 3. Robust Api Versioning
 
@@ -118,7 +118,7 @@ Introduces **JSpecify** for null safety that certainly replaces the former `org.
 
 Spring Boot 4 is a significant leap forward in modernizing how Spring applications are developed, configured, and deployed. This milestone marks the beginning of a more modular, extensible, and developer-friendly version of the framework. Let's understand some of the significant enhancements in Spring Boot 4 and how they impact developers.
 
-### 1. Modular Codebase---A Refactored Architecture
+### 1. Modular Codebase—A Refactored Architecture
 
 It introduces a major architectural shift by **breaking up the internal codebase into smaller, focused modules.** Previously, Spring Boot relied on large, monolithic auto-configuration JARs. With version 4, the auto-configurations have been **refactored into modular packages**, making the framework more maintainable and composable.
 
@@ -234,7 +234,7 @@ When the task runs, Spring applies decorators in order:
 2. loggingDecorator
 3. Then the actual task
 
-We no longer need to manually compose decorators---Spring Boot handles it for us.
+We no longer need to manually compose decorators—Spring Boot handles it for us.
 
 ### 6. JMS Support via JdbcClient
 

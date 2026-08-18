@@ -20,7 +20,7 @@ frozen: false
 
 All companies are software companies, and businesses will always experience the challenge of keeping integrations between users and applications scalable, productive, fast, and of high quality. To combat this, cloud, microservices, and other modern solutions come up more and more in architectural decisions.
 
-#### Here is the question---is Java prepared to deal with these diverse concepts in a corporate environment?
+#### Here is the question—is Java prepared to deal with these diverse concepts in a corporate environment?
 
 Yes, and to demonstrate how [Jakarta EE](https://jakarta.ee/ "Jakarta EE") and [Eclipse MicroProfile](https://microprofile.io/ "Eclipse MicroProfile") work very well and in the cloud, Payara and Platform.sh collaborated together on this webinar. You can watch the video presentation by Otavio Santana and Rudy de Busscher below:
 
@@ -80,11 +80,11 @@ That's why several methodologies / technologies such as Agile, microservices, De
 Cloud computing has brought many methodologies and techniques that have revolutionized both the business and technical worlds. Among the terms that came up was cloud-native. To meet and cover these expectations in the Java universe, Jakarta EE emerged.
 
 Like any new concept, there are several concepts with the same name; if you read books or articles about cloud-native, you may not find consensus about it. For example:
-> *"Cloud-native is an approach to building and running applications that exploits the advantages of the cloud computing model."* --- [From Pivotal](https://pivotal.io/de/cloud-native)
+> *"Cloud-native is an approach to building and running applications that exploits the advantages of the cloud computing model."* — [From Pivotal](https://pivotal.io/de/cloud-native)
 
-> *"Cloud-native is a different way of thinking and reasoning about software systems. It embodies the following concepts: powered by disposable infrastructure, composed of bounded, scales globally, embraces disposable architecture."* --- [Architecting Cloud Native Applications: Design high-performing and cost-effective applications for the cloud.](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
+> *"Cloud-native is a different way of thinking and reasoning about software systems. It embodies the following concepts: powered by disposable infrastructure, composed of bounded, scales globally, embraces disposable architecture."* — [Architecting Cloud Native Applications: Design high-performing and cost-effective applications for the cloud.](https://www.amazon.com/Architecting-Cloud-Native-Applications-high-performing-ebook/dp/B07QTJ8WW8/ref=sr_1_4?keywords=cloud+native+applications&qid=1575059989&sr=8-4)
 
-> *"In general usage, 'cloud-native' is an approach to building and running applications that exploits the advantages of the cloud-computing delivery model. 'Cloud-native' is about how applications are created and deployed, not where."* --- [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
+> *"In general usage, 'cloud-native' is an approach to building and running applications that exploits the advantages of the cloud-computing delivery model. 'Cloud-native' is about how applications are created and deployed, not where."* — [InfoWorld](https://www.infoworld.com/article/3281046/what-is-cloud-native-the-modern-way-to-develop-software.html)
 
 In a mutual consensus around the definitions from several articles, we can say that cloud-native is a term used to describe container-based environments. So cloud-native isn't related to specific programming languages or frameworks or even to a cloud provider company, but to containers.
 

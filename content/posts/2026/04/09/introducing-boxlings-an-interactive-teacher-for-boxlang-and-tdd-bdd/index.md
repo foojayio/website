@@ -12,9 +12,9 @@ related_posts:
 frozen: false
 ---
 
-We believe the best way to learn a programming language is by writing code --- real code, with real feedback, and real tests. That's exactly why we built **BoxLings**.
+We believe the best way to learn a programming language is by writing code — real code, with real feedback, and real tests. That's exactly why we built **BoxLings**.
 
-Inspired by the beloved [rustlings](https://github.com/rust-lang/rustlings) project, **BoxLings** is an interactive CLI tool that teaches you **BoxLang** through hands-on exercises. You read failing tests, fix broken code, and level up --- one exercise at a time.
+Inspired by the beloved [rustlings](https://github.com/rust-lang/rustlings) project, **BoxLings** is an interactive CLI tool that teaches you **BoxLang** through hands-on exercises. You read failing tests, fix broken code, and level up — one exercise at a time.
 
 Oh, and the whole thing is written in BoxLang itself. 🥊 Dogfooding at its finest.
 
@@ -22,7 +22,7 @@ Oh, and the whole thing is written in BoxLang itself. 🥊 Dogfooding at its fin
 
 ![](https://www.ortussolutions.com/__media/contentbox:2026/boxlang/boxlings-intro.png)
 
-BoxLings gives you **129 progressive exercises across 28 topics** --- from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development.
+BoxLings gives you **129 progressive exercises across 28 topics** — from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development.
 
 But here's what makes BoxLings different: **we teach TDD/BDD as a first-class skill** , not an afterthought, using [TestBox](https://testbox.run); our BDD/TDD testing library.
 
@@ -32,7 +32,7 @@ From day one, you'll read **TestBox** specs before touching any implementation c
 
 BoxLings is organized into three progressive phases, with 28 topics and 129 exercises total.
 
-### 🟢 Phase 1 --- Core Fundamentals (50 Exercises)
+### 🟢 Phase 1 — Core Fundamentals (50 Exercises)
 
 Perfect for beginners and developers new to BoxLang:
 
@@ -49,7 +49,7 @@ Perfect for beginners and developers new to BoxLang:
 | 9  | **Strings**      | 6         | Interpolation, multi-line strings, string operations |
 | 10 | **Imports**      | 4         | Importing classes and the `java:` prefix             |
 
-### 🟡 Phase 2 --- Intermediate (40 Exercises)
+### 🟡 Phase 2 — Intermediate (40 Exercises)
 
 Dive deeper into BoxLang's power features:
 
@@ -64,7 +64,7 @@ Dive deeper into BoxLang's power features:
 | 17 | **Async**            | 6         | Threads, futures, async programming            |
 | 18 | **Components**       | 3         | `bx:http`, `bx:query`, and more                |
 
-### 🔴 Phase 3 --- Advanced (48 Exercises)
+### 🔴 Phase 3 — Advanced (48 Exercises)
 
 Master BoxLang-specific and power-user features:
 
@@ -86,19 +86,19 @@ Master BoxLang-specific and power-user features:
 
 BoxLings teaches test-driven development alongside BoxLang in four progressive stages:
 
-**Step 1 --- Reading Tests (Topics 1--10)**   
+**Step 1 — Reading Tests (Topics 1--10)**   
 
 Read TestBox specs to understand requirements. Tests are your documentation.
 
-**Step 2 --- Understanding Patterns (Topics 11--14)**   
+**Step 2 — Understanding Patterns (Topics 11--14)**   
 
 Multiple assertions, setup/teardown with `beforeEach`/`afterEach`, edge cases, and error scenarios.
 
-**Step 3 --- Writing Tests (Topic 15)**   
+**Step 3 — Writing Tests (Topic 15)**   
 
 Now *you* write the specs. Practice `describe` / `it` / `expect` from scratch.
 
-**Step 4 --- Full TDD Cycle (Topics 16--29)**   
+**Step 4 — Full TDD Cycle (Topics 16--29)**   
 
 Red → Green → Refactor. The real deal.
 
@@ -110,7 +110,7 @@ cd boxlings
 boxlang BoxLings.bx
 ```
 
-BoxLings drops you into **watch mode** --- it monitors your exercise files and reruns them automatically every time you save. Fix the code, hit save, see the tests go green.
+BoxLings drops you into **watch mode** — it monitors your exercise files and reruns them automatically every time you save. Fix the code, hit save, see the tests go green.
 
 **Keyboard shortcuts in watch mode:**
 
@@ -155,7 +155,7 @@ boxlang BoxLings.bx
 
 ## Join the Community
 
-We'd love to hear what you think --- and contributions are very welcome. New exercises, bug fixes, documentation --- all of it.
+We'd love to hear what you think — and contributions are very welcome. New exercises, bug fixes, documentation — all of it.
 
 * 📖 [BoxLang Docs](https://boxlang.ortusbooks.com/)
 * 💬 [Community Forum](https://community.ortussolutions.com/c/boxlang/42)

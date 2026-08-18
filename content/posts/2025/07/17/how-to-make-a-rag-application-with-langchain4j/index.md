@@ -551,7 +551,7 @@ This is a well informed response, and actually references the information availa
 
 ## Conclusion
 
-There we have it---we used MongoDB with LangChain4j to create a simple RAG application. LangChain4j abstracted away a lot of the steps along the way, from segmenting our data, to connecting to our MongoDB database and embedding model.
+There we have it—we used MongoDB with LangChain4j to create a simple RAG application. LangChain4j abstracted away a lot of the steps along the way, from segmenting our data, to connecting to our MongoDB database and embedding model.
 
 If you found this tutorial useful, head over to the Developer Center and check out some of our other tutorials, such as [Terraforming AI Workflows: RAG With MongoDB Atlas and Spring AI](https://www.mongodb.com/developer/languages/java/terraform-springai-rag/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=How%20to%20make%20a%20RAG%20application%20with%20LangChain4j&utm_term=tim.kelly), or head over to [LangChain4j](https://docs.langchain4j.dev/) to learn more about what you can do with MongoDB and AI in Java.
 

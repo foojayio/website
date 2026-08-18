@@ -148,7 +148,7 @@ vCluster allows an organization to get the best of both worlds: limit the number
 
 **To go further:**
 
-* [Architecting Kubernetes clusters --- how many should you have?](https://learnk8s.io/how-many-clusters)
+* [Architecting Kubernetes clusters — how many should you have?](https://learnk8s.io/how-many-clusters)
 * [vCluster](https://www.vcluster.com/)
 
 *[CRD]: Custom Resource Definition

@@ -22,7 +22,7 @@ frozen: false
 
 In a world full of opinions, tweets, reviews, chats, emails, understanding the tone behind words is crucial. Whether you're building a feedback system, monitoring brand reputation, or adding emotion detection to a chatbot, sentiment analysis plays a key role. It turns raw text into actionable signals: Is the customer happy? Frustrated? Neutral?
 
-Traditionally, this kind of natural language processing (NLP) required cloud APIs or heavyweight ML stacks. But now, thanks to modern Java frameworks like [Quarkus](https://quarkus.io/), local Large Language Models (LLMs), and the [LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html) library, you can build a sentiment analyzer that runs entirely on your machine---no cloud account, no API keys, no surprise billing.
+Traditionally, this kind of natural language processing (NLP) required cloud APIs or heavyweight ML stacks. But now, thanks to modern Java frameworks like [Quarkus](https://quarkus.io/), local Large Language Models (LLMs), and the [LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html) library, you can build a sentiment analyzer that runs entirely on your machine—no cloud account, no API keys, no surprise billing.
 
 This hands-on guide walks you through building a local sentiment analysis API using:
 

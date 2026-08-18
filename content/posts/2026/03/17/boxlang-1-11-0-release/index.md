@@ -31,7 +31,7 @@ We're proud to announce **BoxLang 1.11.0**, a highly focused performance and sta
 You can find the full release notes here:  
 <https://boxlang.ortusbooks.com/readme/release-history/1.11.0>
 
-### ⚡ Performance Wave --- 15+ Targeted Runtime Speedups
+### ⚡ Performance Wave — 15+ Targeted Runtime Speedups
 
 BoxLang 1.11.0 includes over **15 targeted performance improvements** spanning bytecode compilation, runtime execution, memory management, and concurrency. Every BoxLang application benefits immediately.
 
@@ -64,9 +64,9 @@ Memory \& Concurrency
 * **Simplified constructor path** for Box Classes reduces object creation overhead
 * **Removed function inner classes**, reducing class loading and GC pressure
 * **Avoided** `Map.containsValue()` in UDF invocation (linear scan → constant time)  
-  The cumulative effect is meaningful: applications under load will see reduced latency, lower GC pressure, and better throughput --- all with zero migration effort.
+  The cumulative effect is meaningful: applications under load will see reduced latency, lower GC pressure, and better throughput — all with zero migration effort.
 
-### 🔒 Concurrency \& Lock Safety --- Critical Fix
+### 🔒 Concurrency \& Lock Safety — Critical Fix
 
 Two critical bugs in the exclusive lock system have been resolved. Before 1.11.0, exclusive locks could occasionally allow more than one thread into a supposedly exclusive section under high load ([BL-2203](http://https://ortussolutions.atlassian.net/browse/BL-2203 "BL-2203"), [BL-2205](http://https://ortussolutions.atlassian.net/browse/BL-2205 "BL-2205")).
 
@@ -80,7 +80,7 @@ lock name="processPayment_#orderId#" type="exclusive" timeout="30" {
 }
 ```
 
-Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atlassian.net/browse/BL-2201 "BL-2201")) for better performance and memory efficiency. If you rely on exclusive locks for payment processing, inventory management, or any critical section --- this is an important upgrade.
+Lock storage has also been improved ([BL-2201](http://https://ortussolutions.atlassian.net/browse/BL-2201 "BL-2201")) for better performance and memory efficiency. If you rely on exclusive locks for payment processing, inventory management, or any critical section — this is an important upgrade.
 
 ### 🗓️ DateTime Casting Reliability
 
@@ -105,7 +105,7 @@ cast1 = dateTimeFormat( odbcDate, "yyyy-mm-dd" )          // BL-2188
 
 ### 🆕 **`enforceUDFTypeChecks`** Configuration Setting
 
-A new runtime setting allows you to skip UDF argument and return type validation --- useful for trusted high-performance codebases:
+A new runtime setting allows you to skip UDF argument and return type validation — useful for trusted high-performance codebases:
 
 ```java
 // boxlang.json
@@ -114,9 +114,9 @@ A new runtime setting allows you to skip UDF argument and return type validation
 }
 ```
 
-When false, BoxLang skips argument type validation and return type casting on function calls --- similar to how the Java compiler performs generic type erasure. This can improve performance but removes the safety net of runtime type checks.
+When false, BoxLang skips argument type validation and return type casting on function calls — similar to how the Java compiler performs generic type erasure. This can improve performance but removes the safety net of runtime type checks.
 
-### ⏱️ **`getTickCount()`** --- Nanosecond \& Second Precision
+### ⏱️ **`getTickCount()`** — Nanosecond \& Second Precision
 
 `getTickCount()` now supports `nano` and `second` units alongside the existing `millisecond` support:
 
@@ -155,7 +155,7 @@ executorDelete( "myPool" )
 ### 🏗️ Class System Improvements
 
 * **Super class loading** improved to handle complex inheritance hierarchies reliably ([BL-2211](http://https://ortussolutions.atlassian.net/browse/BL-2211 "BL-2211"))
-* **Abstract class enforcement** relaxed --- abstract classes are no longer required to implement all interface methods ([BL-2251](http://https://ortussolutions.atlassian.net/browse/BL-2251 "BL-2251")), matching Java and CFML semantics
+* **Abstract class enforcement** relaxed — abstract classes are no longer required to implement all interface methods ([BL-2251](http://https://ortussolutions.atlassian.net/browse/BL-2251 "BL-2251")), matching Java and CFML semantics
 * **Typed array returns** no longer throw NPE when a class is instantiated via a different invocation path ([BL-2237](http://https://ortussolutions.atlassian.net/browse/BL-2237 "BL-2237"))
 * **Implicit accessors** now generate the correct return type in method signatures instead of always using `any` ([BL-2195](http://https://ortussolutions.atlassian.net/browse/BL-2195 "BL-2195"))  
 
@@ -176,7 +176,7 @@ executorDelete( "myPool" )
   ### 🔤 String \& Type Improvements
 
 * **`quotedValueList()`** now correctly wraps values in single quotes per CFML spec ([BL-2185](http://https://ortussolutions.atlassian.net/browse/BL-2185 "BL-2185"))
-* **`println()`** can now be called with no arguments to output an empty line --- no more `println( "" )` workaround ([BL-2200](http://https://ortussolutions.atlassian.net/browse/BL-2200 "BL-2200"))
+* **`println()`** can now be called with no arguments to output an empty line — no more `println( "" )` workaround ([BL-2200](http://https://ortussolutions.atlassian.net/browse/BL-2200 "BL-2200"))
 * **`compareTo()`** **date member method** no longer incorrectly attaches to zero-valued BigDecimal ([BL-2166](http://https://ortussolutions.atlassian.net/browse/BL-2166 "BL-2166"))  
 
   ### 🌐 XML Handling
@@ -209,7 +209,7 @@ $ boxlang server start
 }
 ```
 
-This makes project-level BoxLang configuration portable and self-contained --- ideal for containerized deployments and team environments.
+This makes project-level BoxLang configuration portable and self-contained — ideal for containerized deployments and team environments.
 
 ### ⚙️ Undertow / Socket / WebSocket Options
 
@@ -235,7 +235,7 @@ You can now tune Undertow, socket, and WebSocket low-level options directly from
 
 ### 📂 Logging Directory Output
 
-The MiniServer now logs the logging directory path during startup ([BL-1342](http://https://ortussolutions.atlassian.net/browse/BL-1342 "BL-1342")) --- a small but welcome quality-of-life improvement:
+The MiniServer now logs the logging directory path during startup ([BL-1342](http://https://ortussolutions.atlassian.net/browse/BL-1342 "BL-1342")) — a small but welcome quality-of-life improvement:
 
 |           \[BoxLang\] MiniServer starting...           |
 |--------------------------------------------------------|
@@ -276,7 +276,7 @@ echo 'result = 1 + 2' | boxlang --bx-printast
 cat MyComponent.bx | boxlang --bx-printast | jq '.body[0]'
 ```
 
-### 🧩 SOAP Client --- Binary and Map Type Support
+### 🧩 SOAP Client — Binary and Map Type Support
 
 The SOAP client now supports binary data and map/struct types for both requests and responses. It also allows you to call service methods directly without going through `invoke()`:
 

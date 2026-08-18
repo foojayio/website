@@ -38,7 +38,7 @@ frozen: false
 
 **Serverless computing has emerged as a transformative approach to deploying and managing applications. The theory is that by abstracting away the underlying infrastructure, developers can focus solely on writing code.**
 
-While the benefits are clear---scalability, cost efficiency, and performance---debugging serverless applications presents unique challenges. This post explores effective strategies for debugging serverless applications, particularly focusing on AWS Lambda.
+While the benefits are clear—scalability, cost efficiency, and performance—debugging serverless applications presents unique challenges. This post explores effective strategies for debugging serverless applications, particularly focusing on AWS Lambda.
 
 Before I proceed I think it's important to disclose a bias: I am personally not a huge fan of Serverless or PaaS after [I was burned badly by PaaS in the past](https://dev.to/codenameone/production-horrors-handling-disasters-public-debrief-1kf6). However, [some smart people like Adam swear by it](https://www.adam-bien.com/) so I should keep an open mind.
 

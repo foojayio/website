@@ -186,7 +186,7 @@ For my recent co-recursive interview, Adam listened to me talk for 4 hours. I di
 
 **Shai Almog:** Focusing on long-term satisfaction and authenticity has always worked for me. So that's the one piece of advice I give my kids. Don't stress over grades and future prospects; focus on finding the right path, I obviously have to plug my latest book, or my publisher will be upset: <https://www.amazon.com/dp/1484290410/>
 
-I also enjoyed Vlad Mihalcea's book on persistence---an excellent read for anyone dealing with JPA/Hibernate from a really sweet guy.
+I also enjoyed Vlad Mihalcea's book on persistence—an excellent read for anyone dealing with JPA/Hibernate from a really sweet guy.
 
 I've enjoyed YouTube more in recent years as I started making more videos. [youtube.com/@debugagent](http://youtube.com/@debugagent)
 

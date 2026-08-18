@@ -26,7 +26,7 @@ In this article, I will explain how you can fix vulnerabilities in third-party l
 
 ## Finding vulnerabilities
 
-If you are using Maven for building your project and managing your dependencies for your project, there are several ways to scan your projects, using tools such as [Snyk](https://snyk.io). This is regardless of the actual programming language you use---this can be Java, Kotlin, Scala, Groovy, or any other language that is designed for the Java Virtual Machine (JVM).  
+If you are using Maven for building your project and managing your dependencies for your project, there are several ways to scan your projects, using tools such as [Snyk](https://snyk.io). This is regardless of the actual programming language you use—this can be Java, Kotlin, Scala, Groovy, or any other language that is designed for the Java Virtual Machine (JVM).  
 
 Scanning your Maven project for vulnerabilities can be done, by using Snyk, for example. In the example below, I use the [Snyk CLI](https://support.snyk.io/hc/en-us/articles/360003817357-Snyk-for-Java-Gradle-Maven-#UUID-3d91eb09-1fcf-e973-89ff-bf24ab0ddfe2_section-idm13169231445744), which will show you if and how you can fix vulnerabilities, by updating the top-level dependencies. However, if there is no improved version of the top-level dependencies, Snyk shows you if there is a newer version of the underlying dependency that fixes the vulnerabilities.
 ![](https://lh4.googleusercontent.com/mZSSwqr_bQsZ-HNTvPOThi2xscIaO49aDfH4QNj3GHXhgGHrq-gw7dw6EZLOvqu-n0ILqBtb9bVq_1gOwGZo0qRYuWY82HZ3_kXUXpN1tXQlnOlHzQtGUscExnxsofwyLBu4ESep)

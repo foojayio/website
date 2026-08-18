@@ -90,7 +90,7 @@ Discussions are underway for the addition of more `SecurityContext` defaults at 
 Curious to learn more about (or play with) Cassandra itself? We recommend trying it on the [Astra DB](https://astra.dev/3LUzt1X) free plan for the fastest setup.
 
 1. [Get started with K8ssandra in 10 Minutes](https://k8ssandra.io/get-started/)
-2. [K8ssandra Data Simplicity --- Getting Started](https://www.datastax.com/blog/2021/04/kubernetes-data-simplicity-getting-started-k8ssandra)
+2. [K8ssandra Data Simplicity — Getting Started](https://www.datastax.com/blog/2021/04/kubernetes-data-simplicity-getting-started-k8ssandra)
 3. [PodSecurityPolicy Deprecation, Past, Present and Future](https://kubernetes.io/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/)
 4. [Join the K8ssandra Community on Discord](https://discord.com/invite/qP5tAt6Uwt)
 5. [How to put a database in Kubernetes](https://medium.com/building-the-open-data-stack/how-to-put-a-database-in-kubernetes-ab7c21540ec2)

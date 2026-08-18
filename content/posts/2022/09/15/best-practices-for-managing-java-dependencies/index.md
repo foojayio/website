@@ -25,7 +25,7 @@ To speed up development, many folks use frameworks and libraries that do some of
 
 When looking at modern Java applications, almost all of them contain dependencies from libraries developed by someone else.
 
-Dependencies take up about 80 to 90 percent of the binary --- so, we should take good care of them when creating a Java project.
+Dependencies take up about 80 to 90 percent of the binary — so, we should take good care of them when creating a Java project.
 
 In this article, I'll give you some advice and best practices for dealing with Java dependencies in your project.
 
@@ -55,7 +55,7 @@ All of this can lead to:
 
 ## Managing Java dependencies
 
-One of the best practices for significantly using repositories, like Maven Central, is to set up your own repositories manager. This is a dedicated proxy server between your internal development and the public repositories --- which will not only gives you faster and more stable builds, but also allows you to set up [policies](https://snyk.io/series/open-source-security/open-source-policy/) for Java packages. You can, for instance, block certain versions so they cannot be downloaded and used in your applications.
+One of the best practices for significantly using repositories, like Maven Central, is to set up your own repositories manager. This is a dedicated proxy server between your internal development and the public repositories — which will not only gives you faster and more stable builds, but also allows you to set up [policies](https://snyk.io/series/open-source-security/open-source-policy/) for Java packages. You can, for instance, block certain versions so they cannot be downloaded and used in your applications.
 
 For more information about repository managers and a list of possible products, take a look at the [Maven documentation](https://maven.apache.org/repository-management.html).
 
@@ -77,11 +77,11 @@ A quick look at [mvnrepository.com](https://mvnrepository.com/) shows me that th
 
 ![](https://snyk.io/wp-content/uploads/blog-java-depen-eclipse-main-library.jpg)
 
-Also, check to see if the dependencies you already have can do the job for you. Some similar functions or data types might already be available. On the other hand, including a new, extensive library can help you solve multiple problems at once --- it all depends on the situation.
+Also, check to see if the dependencies you already have can do the job for you. Some similar functions or data types might already be available. On the other hand, including a new, extensive library can help you solve multiple problems at once — it all depends on the situation.
 
 ### 3. How many contributors are there?
 
-We have a pretty low bus factor if the Java dependency you use has only one or just a few maintainers. What happens if the maintainer decides to quit, or doesn't have time to fix a bug? Alternatively, you might also choose to contribute to the project yourself --- making it more secure for everyone involved.
+We have a pretty low bus factor if the Java dependency you use has only one or just a few maintainers. What happens if the maintainer decides to quit, or doesn't have time to fix a bug? Alternatively, you might also choose to contribute to the project yourself — making it more secure for everyone involved.
 
 But, before including any dependencies in your project, be sure to check the core repository and see how many active maintainers there are.
 
@@ -123,7 +123,7 @@ If your library contains a security vulnerability, you might want to pick anothe
 
 You don't want to manually check every Java dependency you have to see if newer versions are available. Luckily, there are easier ways to do this.
 
-By using plugins in your package manager you can automatically verify your dependencies as often as you'd like --- in every build, for example.
+By using plugins in your package manager you can automatically verify your dependencies as often as you'd like — in every build, for example.
 
 Be aware that your tools might point you to beta or pre-release versions. It is highly advised that you only use stable release versions of a library.
 
@@ -165,7 +165,7 @@ When connecting your GitHub repository to your Snyk account, we can provide you 
 
 It is wise to revisit the GitHub repo, or mvnpackage.com, to see if there are recent updates and commits. If it looks like a package is no longer well maintained, you can choose to maintain it yourself or migrate to another, better updated, library.
 
-However, if you encounter a problem with a dependency that's critical to your application, consider fixing the problem yourself and contributing that fix to the open-source project. This will be greatly appreciated --- and often quicker than submitting issue reports and pushing the maintainer to fix the problem.
+However, if you encounter a problem with a dependency that's critical to your application, consider fixing the problem yourself and contributing that fix to the open-source project. This will be greatly appreciated — and often quicker than submitting issue reports and pushing the maintainer to fix the problem.
 
 ### 3. Are there security issues with my Java dependencies?
 
@@ -183,9 +183,9 @@ Alternatively, you can add your Git repository to Snyk, so we can scan and updat
 
 ### 1. Is the package still in use?
 
-If a Java dependency is not used anymore, we should remove it from our manifest file. Every package in that file is part of your binary and available on the classpath. Removing unused dependencies will make your binary smaller --- and lead to faster startup and download times in addition to better security. Minimizing the dependencies on your classpath is critical to protecting against attacks like a [deserialization gadget chain](https://snyk.io/blog/serialization-and-deserialization-in-java/).
+If a Java dependency is not used anymore, we should remove it from our manifest file. Every package in that file is part of your binary and available on the classpath. Removing unused dependencies will make your binary smaller — and lead to faster startup and download times in addition to better security. Minimizing the dependencies on your classpath is critical to protecting against attacks like a [deserialization gadget chain](https://snyk.io/blog/serialization-and-deserialization-in-java/).
 
-A clean desk policy --- or in this case a clean app policy --- is always highly advisable. Luckily, your package managers can help you with identifying these unused Java dependencies.
+A clean desk policy — or in this case a clean app policy — is always highly advisable. Luckily, your package managers can help you with identifying these unused Java dependencies.
 
 **Maven example**
 

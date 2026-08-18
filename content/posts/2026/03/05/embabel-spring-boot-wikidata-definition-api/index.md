@@ -20,7 +20,7 @@ frozen: false
 * I built a **Spring Boot 4** API that defines terms via **Wikidata**.
 * The app is fully reproducible: **no API keys** and **no model installation** needed.
 * Embabel orchestrates the pipeline as a sequence of actions to achieve the goal `DefinitionResult`.
-* The logs show planning, execution, and typed object binding---the most useful part for teaching agentic flows.
+* The logs show planning, execution, and typed object binding—the most useful part for teaching agentic flows.
 
 {{< youtube TiuYS6K3HaU >}}
 
@@ -34,7 +34,7 @@ It returns a compact JSON "definition" fetched from **Wikidata** (no authenticat
 
 The important part: I used **Embabel** to orchestrate the workflow, even though the workflow is deterministic and **does not need an LLM**.
 
-## Part I --- Concepts
+## Part I — Concepts
 
 ### I.1 Embabel
 
@@ -70,7 +70,7 @@ The REST call is not the point. The point is to demonstrate a workflow that:
 3. fetches **entity details**
 4. builds a typed `DefinitionResult`
 
-Embabel makes these steps explicit, typed, and observable, and it can re-plan as the state evolves. That's a much better foundation than packing everything into one big service method---especially when the demo grows.
+Embabel makes these steps explicit, typed, and observable, and it can re-plan as the state evolves. That's a much better foundation than packing everything into one big service method—especially when the demo grows.
 
 ### I.4 Wikidata: definition and why it's ideal for demos
 
@@ -87,7 +87,7 @@ I used two endpoints:
 
 This gives a nice "definition API" in a few lines of code, with zero setup for viewers.
 
-## Part II --- App building (code + explanations)
+## Part II — App building (code + explanations)
 
 ### II.1 Maven setup (`pom.xml`)
 
@@ -596,7 +596,7 @@ public class WikiController {
 
 ```
 
-## Part III --- Demo
+## Part III — Demo
 
 ### III.1 Curl request
 
@@ -660,9 +660,9 @@ What stands out:
 * It binds the produced objects (`WikidataEntityId`, `WikidataEntityDetails`, then `DefinitionResult`)
 * It declares the goal achieved
 
-This is the "agentic" angle: Embabel is not just calling methods---it's planning against typed state.
+This is the "agentic" angle: Embabel is not just calling methods—it's planning against typed state.
 
-## Part IV --- Conclusion and extensions
+## Part IV — Conclusion and extensions
 
 This application intentionally starts simple. It's a demo designed to be reproduced in minutes.
 

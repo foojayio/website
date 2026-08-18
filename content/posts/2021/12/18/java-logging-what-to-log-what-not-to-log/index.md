@@ -22,11 +22,11 @@ In addition to the functional aspect of logging, logs are also critical from a J
 
 The quality of the logs is critical. Logging both too much or too little information can be catastrophic from a Java security perspective. In fact, Insufficient Logging \& Monitoring (A10:2017) has made the OWASP Top 10 list.
 
-In this article, I am going to guide you through a pragmatic approach to Java logging---what should we log, what shouldn't we log, and how to implement Java logging properly.
+In this article, I am going to guide you through a pragmatic approach to Java logging—what should we log, what shouldn't we log, and how to implement Java logging properly.
 
 ### What Should We Log?
 
-Back in the military, whenever we had to report something, we had to use the 5W-H method---Who, What, Where, When, Why, and How. This method is an excellent rule for logging statements as well.
+Back in the military, whenever we had to report something, we had to use the 5W-H method—Who, What, Where, When, Why, and How. This method is an excellent rule for logging statements as well.
 
 * **Who was doing this?** Identify the user or system that made this request. If possible, with a userID and an IP address.
 * **What is going on?** What kind of logging statement was this. Many developers already recognize the different log-levels to annotate the importance of a message (ERROR, WARN, INFO, DEBUG, TRACE). It is wise to distinguish between functional logging, security logging, and maybe even audit logging if that is applicable.
@@ -61,15 +61,15 @@ It is a great tactic to set thresholds for certain security log events. You can 
 
 Logging too much information is just as harmful as logging too little. You do not want your logs to be flooded by information that is not useful in production. Therefore, aim to always set the log level on a production system to a suitable level, like WARN or ERROR.
 
-As part of development, engineers will log sensitive entities that might contain personal data, in order to debug applications. Although we should aim to prevent this, internal debug messages should have the proper log level---for example, DEBUG or TRACE---and should not be visible in the production environment.
+As part of development, engineers will log sensitive entities that might contain personal data, in order to debug applications. Although we should aim to prevent this, internal debug messages should have the proper log level—for example, DEBUG or TRACE—and should not be visible in the production environment.
 
-As a general rule, an application should not reveal any application-specific or user-specific data---this data can be used by an attacker. Also, by exposing personal information, you are most probably not compliant with privacy regulations. Even if logs are only accessible to insiders, it is a single point of failure. So, we simply don't want this information to fall into the wrong hands.
+As a general rule, an application should not reveal any application-specific or user-specific data—this data can be used by an attacker. Also, by exposing personal information, you are most probably not compliant with privacy regulations. Even if logs are only accessible to insiders, it is a single point of failure. So, we simply don't want this information to fall into the wrong hands.
 
 When developing, think about what you need to log. Do we need to log an internal ID, the unencrypted password, or someone's credit card details? Be careful not to output a complete data object in Java as the output depends on the `toString()` method of that particular object.
 
-By logging personal information for debugging, we circumvent many of our own security policies---it would be sensible not to log these types of information altogether. If we need to log specific data, make sure to set the proper log-level, such as DEBUG. You should also set the log-level of the production system to a higher level, like WARN.
+By logging personal information for debugging, we circumvent many of our own security policies—it would be sensible not to log these types of information altogether. If we need to log specific data, make sure to set the proper log-level, such as DEBUG. You should also set the log-level of the production system to a higher level, like WARN.
 
-**Bottom line---personal and sensitive information must not appear in your production logging.**
+**Bottom line—personal and sensitive information must not appear in your production logging.**
 
 ### Security Logging in Java
 

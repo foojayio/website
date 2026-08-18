@@ -29,7 +29,7 @@ This is very important for collections and arrays. We can have thousands or mill
 >
 > Spring Boot JPA users... Check this one out...[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/oEjptQc2Ux](https://t.co/oEjptQc2Ux)
 >
-> --- Shai Almog (@debugagent) [April 5, 2022](https://twitter.com/debugagent/status/1511357550159187972?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [April 5, 2022](https://twitter.com/debugagent/status/1511357550159187972?ref_src=twsrc%5Etfw)
 
 ## Collections, Arrays and Streams
 

@@ -31,7 +31,7 @@ git clone https://github.com/mongodb/mongot
 
 MongoT is a wrapper around the amazing Java search engine: [Lucene](https://lucene.apache.org/).
 
-Lucene is a powerful search toolkit built around an inverted token index structure that enables advanced text search capabilities, including ranked results, autocomplete, synonyms, fuzzy matching, highlighting, and faceting --- all with high performance regardless of dataset size. Unlike MongoDB's native query engine, it can efficiently search across multiple indexes simultaneously by intersecting lists of ordinal document IDs in parallel, using optimization techniques like skip-lists, ordinal compression, and document frequency ordering. It also supports indexing of various field types (integers, dates, keywords, etc.) and has expanded into vector search, enabling semantic similarity search by meaning rather than exact text matching.
+Lucene is a powerful search toolkit built around an inverted token index structure that enables advanced text search capabilities, including ranked results, autocomplete, synonyms, fuzzy matching, highlighting, and faceting — all with high performance regardless of dataset size. Unlike MongoDB's native query engine, it can efficiently search across multiple indexes simultaneously by intersecting lists of ordinal document IDs in parallel, using optimization techniques like skip-lists, ordinal compression, and document frequency ordering. It also supports indexing of various field types (integers, dates, keywords, etc.) and has expanded into vector search, enabling semantic similarity search by meaning rather than exact text matching.
 
 Adding vector search to MongoDB was clearly a core goal for the MongoT project, as it is important to participate in the semantic search space. I think it is really worth digging into the capabilities it offers beyond vector search, too, as all the Lucene search types massively complement MongoDB database's own incredible B-tree index-based search features.
 
@@ -382,7 +382,7 @@ i.e., the query planner picks one index and uses that.
 
 Lucene, by contrast, can perform searches over multiple indexes efficiently and return the intersection of the results.
 
-Documents in Lucene are each assigned an ordinal id --- a docid (0, 1, 2...).
+Documents in Lucene are each assigned an ordinal id — a docid (0, 1, 2...).
 
 In a typical text field index, Lucene analyzes text into terms. It stores those terms in a term dictionary, and each term points to a postings list: a compact, sorted list of Lucene internal document IDs for documents that contain that term.
 

@@ -34,7 +34,7 @@ During a training run, the system profiles the application to identify the class
 
 JEP 515 takes this even further by incorporating detailed profiling data gathered by the JIT compiler during previous runs. This makes the AOT cache smarter and more tailored to the real-world behavior of the application, resulting in even greater efficiency.
 
-The biggest improvements show up in applications with many classes and methods --- exactly the kind of codebases that traditionally suffer long startup delays. In practice, this can cut startup time by up to 50%, depending on the workload.
+The biggest improvements show up in applications with many classes and methods — exactly the kind of codebases that traditionally suffer long startup delays. In practice, this can cut startup time by up to 50%, depending on the workload.
 
 #### Wisdom (Garbage Collector Evolution) - JEPs 521, 474 and 423
 

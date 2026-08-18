@@ -58,7 +58,7 @@ Both APIs use sessions under the hood and offer full ACID semantics. The differe
 
 ### When to use the callback API
 
-The callback API is ideal when our transaction logic is simple and self-contained. We write our operations in a lambda, and the driver handles the rest---from including starting the transaction to committing it, and even retrying if needed. Below is a little code snippet to show what this might look like:
+The callback API is ideal when our transaction logic is simple and self-contained. We write our operations in a lambda, and the driver handles the rest—from including starting the transaction to committing it, and even retrying if needed. Below is a little code snippet to show what this might look like:
 
 ```
 try (ClientSession session = client.startSession()) {

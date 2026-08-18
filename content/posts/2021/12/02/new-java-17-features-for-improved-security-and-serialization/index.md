@@ -19,7 +19,7 @@ frozen: false
 
 In December 2020, I wrote the article[Serialization and deserialization in Java: explaining the Java deserialize vulnerability](https://snyk.io/blog/serialization-and-deserialization-in-java/) about the problems Java has with its custom serialization implementation. The serialization framework is so deeply embedded inside Java that knowing how dangerous some implementation can be is important. Insecure deserialization can lead to arbitrary code executions if a gadget chain is created from your classpath classes.
 
-Recently, Java 17 --- the new LTS version --- was released. But how do the new features impact this problem, and can we prevent deserialization vulnerabilities better using these features?
+Recently, Java 17 — the new LTS version — was released. But how do the new features impact this problem, and can we prevent deserialization vulnerabilities better using these features?
 
 In the blog post, I will look at three main Java 17 features:
 

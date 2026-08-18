@@ -55,7 +55,7 @@ Unsure where to look next I decided to see if anyone in the community was seeing
 >
 >
 > On some apps we're seeing slow memory growth/leak. It's appears to be at the OS/native memory level as the heap is stable, as are the non-heap and direct memory areas [pic.twitter.com/rv5J2Dxdgp](https://t.co/rv5J2Dxdgp)
-> --- Nick Ebbitt (@nickebbitt) [October 27, 2021](https://twitter.com/nickebbitt/status/1453284230964912153?ref_src=twsrc%5Etfw)
+> — Nick Ebbitt (@nickebbitt) [October 27, 2021](https://twitter.com/nickebbitt/status/1453284230964912153?ref_src=twsrc%5Etfw)
 
 Unfortunately this didn't get much traction.
 
@@ -204,7 +204,7 @@ This gave us some additional information so I jumped back on Twitter to call for
 >
 >
 > So something changed between Java 11 -\> 17 that means with -XX:+UseStringDeduplication we see a slow off-heap memory leak <https://t.co/QWwNRy2rZr>
-> --- Nick Ebbitt (@nickebbitt) [November 30, 2021](https://twitter.com/nickebbitt/status/1465617649547849733?ref_src=twsrc%5Etfw)
+> — Nick Ebbitt (@nickebbitt) [November 30, 2021](https://twitter.com/nickebbitt/status/1465617649547849733?ref_src=twsrc%5Etfw)
 
 ## The bug \& the fix
 
@@ -213,7 +213,7 @@ Within 15 minutes of posting the tweet a member of the Java community spotted it
 Within a few hours they had [reproduced it and filed a bug report](https://bugs.openjdk.java.net/browse/JDK-8277981), as well [submitted a PR to the Open JDK project](https://github.com/openjdk/jdk/pull/6613) with the fix. It turns out it was a simple maths problem.
 
 > Ha-ha, math problem, whoops. <https://t.co/lKM04DKs77>
-> --- Aleksey Shipilëv (@shipilev) [November 30, 2021](https://twitter.com/shipilev/status/1465659474773950467?ref_src=twsrc%5Etfw)
+> — Aleksey Shipilëv (@shipilev) [November 30, 2021](https://twitter.com/shipilev/status/1465659474773950467?ref_src=twsrc%5Etfw)
 
 This was awesome!
 
@@ -235,7 +235,7 @@ This indeed did verify that we were no longer seeing the memory leak.
 >
 >
 > Thanks [@shipilev](https://twitter.com/shipilev?ref_src=twsrc%5Etfw) 👏 [pic.twitter.com/GdrhCSv5GM](https://t.co/GdrhCSv5GM)
-> --- Nick Ebbitt (@nickebbitt) [December 7, 2021](https://twitter.com/nickebbitt/status/1468157655365607425?ref_src=twsrc%5Etfw)
+> — Nick Ebbitt (@nickebbitt) [December 7, 2021](https://twitter.com/nickebbitt/status/1468157655365607425?ref_src=twsrc%5Etfw)
 
 ## The future
 

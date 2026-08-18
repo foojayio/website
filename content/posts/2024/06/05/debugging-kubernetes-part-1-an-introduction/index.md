@@ -55,7 +55,7 @@ Imagine a retail company preparing for the holiday season surge. Each time they 
 
 Virtualization technology introduced a layer that emulated the hardware, allowing for easier replication and migration of environments but at the cost of performance. However, fast virtualization enabled the cloud revolution. It let companies like Amazon lease its servers at scale without compromising their own workloads.
 
-Virtualization involves running multiple operating systems on a single physical hardware host. Each virtual machine (VM) includes a full copy of an operating system, the application, necessary binaries, and libraries---taking up tens of GBs. VMs are managed via a hypervisor, such as VMware's ESXi or Microsoft's Hyper-V, which sits between the hardware and the operating system and is responsible for distributing hardware resources among the VMs. This layer adds additional overhead and can lead to decreased performance due to the need to emulate hardware.
+Virtualization involves running multiple operating systems on a single physical hardware host. Each virtual machine (VM) includes a full copy of an operating system, the application, necessary binaries, and libraries—taking up tens of GBs. VMs are managed via a hypervisor, such as VMware's ESXi or Microsoft's Hyper-V, which sits between the hardware and the operating system and is responsible for distributing hardware resources among the VMs. This layer adds additional overhead and can lead to decreased performance due to the need to emulate hardware.
 
 Note that virtualization is often referred to as "virtual machines", I chose to avoid that terminology due to the focus of this blog on Java and the JVM where a virtual machine is typically a reference to the Java Virtual Machine (JVM).
 

@@ -38,11 +38,11 @@ You can listen and subscribe to the Foojay Podcast on:
 
 ## Guests
 
-* **Adam Bien** --- [airhacks.fm](https://open.spotify.com/show/6nOTQLa2uZxeyGpMW8eppS) \| [LinkedIn](https://www.linkedin.com/in/adam-bien/)
-* **Jennifer Reif** --- [Breaktime Tech Talks](https://open.spotify.com/show/30PqTBEJY7Tr9iHrSCbhMb) \| [LinkedIn](https://www.linkedin.com/in/jmhreif/)
-* **Kadi McKean** --- [10xInsights](https://10xinsights.dev/podcasts.html) \| [LinkedIn](https://www.linkedin.com/in/kadi-grigg/)
-* **Steve Pool** --- [10xInsights](https://10xinsights.dev/podcasts.html) \| [LinkedIn](https://www.linkedin.com/in/noregressions/)
-* **Oumaima Zerouali** --- [JCast](https://jcast.dev/) \| [LinkedIn](https://www.linkedin.com/in/oumaima-zerouali/)
+* **Adam Bien** — [airhacks.fm](https://open.spotify.com/show/6nOTQLa2uZxeyGpMW8eppS) \| [LinkedIn](https://www.linkedin.com/in/adam-bien/)
+* **Jennifer Reif** — [Breaktime Tech Talks](https://open.spotify.com/show/30PqTBEJY7Tr9iHrSCbhMb) \| [LinkedIn](https://www.linkedin.com/in/jmhreif/)
+* **Kadi McKean** — [10xInsights](https://10xinsights.dev/podcasts.html) \| [LinkedIn](https://www.linkedin.com/in/kadi-grigg/)
+* **Steve Pool** — [10xInsights](https://10xinsights.dev/podcasts.html) \| [LinkedIn](https://www.linkedin.com/in/noregressions/)
+* **Oumaima Zerouali** — [JCast](https://jcast.dev/) \| [LinkedIn](https://www.linkedin.com/in/oumaima-zerouali/)
 
 ## Links
 
@@ -60,7 +60,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * [Lenny's Podcast](https://www.lennysnewsletter.com/podcast)
   * [How I AI](https://podcasts.apple.com/us/podcast/how-i-ai/id1809663079)
   * [What's in the SOSS? (OpenSSF)](https://openssf.org/podcast/)
-  * [British Scandal --- Post Office episode](https://podtail.com/en/podcast/british-scandal/the-post-office-scandal-a-new-horizon-1/)
+  * [British Scandal — Post Office episode](https://podtail.com/en/podcast/british-scandal/the-post-office-scandal-a-new-horizon-1/)
   * [GraphStuff.FM](https://open.spotify.com/show/6Xc7vkxTPpNgk8XVh2paZO)
   * [The Standup](https://www.youtube.com/playlist?list=PL2Fq-K0QdOQiJpufsnhEd1z3xOv2JMHuk)
 * [Spring Documentary](https://www.youtube.com/watch?v=4qTwA6Y1-OI)

@@ -24,7 +24,7 @@ In a rapidly evolving world of technology, insights from industry luminaries can
 
 An illuminating example of the rich insights shared in these interviews comes from [Geertjan Wielenga](https://twitter.com/GeertjanW). He emphasizes the importance of building deep, specialized knowledge within a specific ecosystem, like Java. Constantly hopping from one technology to another might seem enticing, but it can lead to a superficial understanding of multiple technologies without truly mastering any.
 
-[Steve Poole](https://twitter.com/spoole167) echoes a similar sentiment. He proposes two potential paths for developers: becoming a technical "pond-skipper" who explores new technologies and jobs every few years or evolving into a deeply knowledgeable specialist in a specific technology. He emphasizes that neither path is inherently superior; it all depends on the individual's passion, preference, and what brings job satisfaction---however, he stresses job satisfaction, which is crucial for every developer.
+[Steve Poole](https://twitter.com/spoole167) echoes a similar sentiment. He proposes two potential paths for developers: becoming a technical "pond-skipper" who explores new technologies and jobs every few years or evolving into a deeply knowledgeable specialist in a specific technology. He emphasizes that neither path is inherently superior; it all depends on the individual's passion, preference, and what brings job satisfaction—however, he stresses job satisfaction, which is crucial for every developer.
 
 We have already hosted some enriching interviews, including:
 

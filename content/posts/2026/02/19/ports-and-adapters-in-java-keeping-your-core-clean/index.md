@@ -77,7 +77,7 @@ In a hexagonal architecture, domain objects are simple Java objects whose only t
 
 This is not purity for its own purpose: keeping the domain in the dark is what allows for true isolation. Business logic can be tested without a database, evaluated without any knowledge of specific frameworks, and evolved without coordinating changes between technical layers.
 
-## MongoDB as an Adapter --- Not a Repository
+## MongoDB as an Adapter — Not a Repository
 
 MongoDB fits perfectly into a hexagonal architecture, but only when we consider it an adapter and not a conceptual reference point. This way of looking at things requires us to go against the recommended approach of frameworks, which is centered on the concept of a repository.
 

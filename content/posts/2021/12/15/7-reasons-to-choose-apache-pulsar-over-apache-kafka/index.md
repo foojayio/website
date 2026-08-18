@@ -31,13 +31,13 @@ So why did we build our messaging service using [Apache Pulsar](https://www.data
 
 Apache Pulsar is like two products in one. Not only can it handle high-rate, real-time use cases like Kafka, but it also [supports standard message queuing](https://pulsar.apache.org/docs/en/concepts-messaging/#subscription-modes) patterns, such as competing consumers, fail-over subscriptions, and easy message fan out. Apache Pulsar automatically keeps track of the client read position in the topic and stores that information in its high-performance distributed ledger, Apache BookKeeper.
 
-Unlike Kafka, Apache Pulsar can handle many of the use cases of a traditional queuing system, like RabbitMQ. So instead of running two systems --- one for real-time streaming and one for queuing --- you do both with Pulsar. It's a two-for-one deal, and those are always good.
+Unlike Kafka, Apache Pulsar can handle many of the use cases of a traditional queuing system, like RabbitMQ. So instead of running two systems — one for real-time streaming and one for queuing — you do both with Pulsar. It's a two-for-one deal, and those are always good.
 
 If you use Kafka, you know about partitions. All topics are partitioned in Kafka. Partitioning is important because it increases throughput. By spreading the work across partitions and therefore multiple brokers, the rate that can be processed by a single topic goes up. But what if you have some topics that don't need high rates. In these simple cases, wouldn't it be nice to not have to worry about partitions and the API and management complexity that comes along with them?
 
 Well, with Apache Pulsar it can be that simple. If you just need a topic, then use a [topic](https://pulsar.apache.org/docs/en/concepts-messaging/#topics). You don't have to specify the number of partitions or think about how many consumers the topic might have. Pulsar [subscriptions](https://pulsar.apache.org/docs/en/concepts-messaging/#subscription-modes) allow you to add as many consumers as you want on a topic with Pulsar keeping track of it all. If your consuming application can't keep up, you just use a shared subscription to distribute the load between multiple consumers.
 
-And if you really do need the performance of a partitioned topic, you can do that, too. Pulsar has [partitioned topics](https://pulsar.apache.org/docs/en/concepts-messaging/#partitioned-topics) if you need them --- but only if you need them.
+And if you really do need the performance of a partitioned topic, you can do that, too. Pulsar has [partitioned topics](https://pulsar.apache.org/docs/en/concepts-messaging/#partitioned-topics) if you need them — but only if you need them.
 
 The Kafka team deserves credit for the [insight](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) that a log is a great abstraction for a real-time data exchange system. Because logs are append-only, data can be written to them quickly, and because the data in a log is sequential, it can be extracted quickly in the order that it was written. Sequential reading and writing is fast, random is not. Persistent storage interactions are a bottleneck in any system that offers data guarantees, and the log abstraction makes this about as efficient as possible.
 
@@ -59,7 +59,7 @@ Geo-replication is a first-class feature in Pulsar. It's not a bolt-on or a prop
 
 [Benchmark tests](http://openmessaging.cloud/docs/benchmarks/pulsar/) have shown that Pulsar delivers higher throughput along with lower and more consistent latency. Faster and more consistent is better. What else is there to say?
 
-Pulsar has many of the same features as Kafka --- such as geo-replication, in-stream message processing (Pulsar Functions), input and output connectors (Pulsar IO), SQL-based topic queries (Pulsar SQL), schema registry, as well as features Kafka doesn't have like tiered storage and multi-tenancy.
+Pulsar has many of the same features as Kafka — such as geo-replication, in-stream message processing (Pulsar Functions), input and output connectors (Pulsar IO), SQL-based topic queries (Pulsar SQL), schema registry, as well as features Kafka doesn't have like tiered storage and multi-tenancy.
 
 All these features are part of the [Apache open source project](https://pulsar.apache.org/en/).
 

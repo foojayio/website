@@ -53,7 +53,7 @@ We often start our journey in Kubernetes with commands such as:
 $ kubectl -- exec -ti <pod-name>
 ```
 
-This logs into a container and feels like accessing a traditional server with SSH. However, this approach has significant limitations. Containers often lack basic diagnostic tools---no `vim`, no `traceroute`, sometimes not even a shell. This can be a rude awakening for those accustomed to a full-featured Linux environment. Additionally, if a container crashes, `kubectl exec` becomes useless as there's no running instance to connect to. This tool is insufficient for thorough debugging, especially in production environments.
+This logs into a container and feels like accessing a traditional server with SSH. However, this approach has significant limitations. Containers often lack basic diagnostic tools—no `vim`, no `traceroute`, sometimes not even a shell. This can be a rude awakening for those accustomed to a full-featured Linux environment. Additionally, if a container crashes, `kubectl exec` becomes useless as there's no running instance to connect to. This tool is insufficient for thorough debugging, especially in production environments.
 
 Consider the frustration of logging into a container only to find out that you can't even open a simple text editor to check configuration files. This lack of basic tools means that you are often left with very few options for diagnosing problems. Moreover, the minimalistic nature of many container images, designed to reduce their attack surface and footprint, exacerbates this issue.
 

@@ -41,7 +41,7 @@ Micrometer is a vendor-neutral metrics facade. Your code records counters, timer
 
 * Micrometer offers a simple API: `Counter`, `Timer`, `Gauge`.
 * Spring Boot Actuator autoconfigures Micrometer and exposes metrics endpoints, including Prometheus format. [See](https://docs.spring.io/spring-boot/reference/actuator/metrics.html)
-* Prometheus "scrapes," so your app just exposes a text endpoint---no push needed. [docs.micrometer.io](https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html)
+* Prometheus "scrapes," so your app just exposes a text endpoint—no push needed. [docs.micrometer.io](https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html)
 
 🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪⚪⚪
 

@@ -17,7 +17,7 @@ frozen: false
 
 Writing documentation should be as low-key as possible to remove the pain from the process. One way to achieve this is through Documentation as Code. Setting it up and configuring it may take some time, but once it's done, you can focus on creating the content itself.
 
-As a developer, I appreciate good documentation, but writing it myself is often cumbersome and feels unrewarding --- especially when no one reads or uses it. The reason: documentation spread across multiple tools, with no clear way to find it.
+As a developer, I appreciate good documentation, but writing it myself is often cumbersome and feels unrewarding — especially when no one reads or uses it. The reason: documentation spread across multiple tools, with no clear way to find it.
 
 The solution is to use Documentation as Code. In projects where you are already using GitLab, you can write your documentation alongside your code in AsciiDoc, generate it as HTML using AsciiDoctor in GitLab CI, and publish it to GitLab Pages for everyone to read.
 
@@ -29,7 +29,7 @@ Each time you run the pipeline, the `public` folder will be cleared, so you don'
 
 ## GitLab CI
 
-To set up the pipeline, you need to modify the `.gitlab-ci.yml` file located at the root of your repository. The setup is fairly simple --- just make the necessary changes, commit, push, and your page is ready.  
+To set up the pipeline, you need to modify the `.gitlab-ci.yml` file located at the root of your repository. The setup is fairly simple — just make the necessary changes, commit, push, and your page is ready.  
 
 As mentioned earlier, you need to set the `pages` attribute. To generate HTML pages from AsciiDoc, we use the [AsciiDoctor docker image](https://github.com/asciidoctor/docker-asciidoctor). This makes the [AsciiDoctor CLI](https://docs.asciidoctor.org/asciidoctor/latest/cli/man1/asciidoctor/) available.  
 

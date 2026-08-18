@@ -30,7 +30,7 @@ I had already banned `ThreadLocal`, moved context propagation to Scoped Values, 
 
 Then I reached TLS.
 
-**Constraint upfront:** this is not a universal argument against `SSLEngine`. For a normal Java service it is still a perfectly reasonable choice --- battle-tested and deeply integrated into the ecosystem. This is about a narrower problem: what happens when TLS sits directly on the hot path of a runtime where off-heap ownership, deterministic cleanup, and zero-allocation execution are hard architectural constraints.
+**Constraint upfront:** this is not a universal argument against `SSLEngine`. For a normal Java service it is still a perfectly reasonable choice — battle-tested and deeply integrated into the ecosystem. This is about a narrower problem: what happens when TLS sits directly on the hot path of a runtime where off-heap ownership, deterministic cleanup, and zero-allocation execution are hard architectural constraints.
 
 In most Java applications, the TLS layer is just part of the stack. It encrypts bytes, hands them off, and usually gets discussed only when certificates break or latency suddenly becomes visible in production. But in a runtime where every byte on the transport path matters, TLS is not a side concern. It is one of the defining execution boundaries. Every request passes through it. Every response passes through it. If that boundary still speaks in heap-facing contracts, then the rest of the runtime is already adapting to the wrong model.
 
@@ -51,7 +51,7 @@ In a conventional stack, delayed cleanup is usually acceptable because the whole
 
 ## The Netty Question
 
-I looked at Netty's `OpenSslEngine` directly before committing to the FFM path. It is genuinely fast and battle-tested --- and for many systems it is the right answer. But it operates under a different architectural paradigm.
+I looked at Netty's `OpenSslEngine` directly before committing to the FFM path. It is genuinely fast and battle-tested — and for many systems it is the right answer. But it operates under a different architectural paradigm.
 
 Netty solves the off-heap problem through pooled buffers and manual reference counting (`retain()` and `release()`). That is a powerful model, but it comes with a structural tax: the ownership semantics inevitably leak into application code, and forgetting to release a buffer creates notoriously difficult memory leaks. It is still a model bridging JVM objects and native memory through a heavy framework abstraction.
 
@@ -116,7 +116,7 @@ I tested four distinct architectural models:
 | Exeris Memory BIO | Off-heap (Panama `Arena`) | **\~922k ops/s** | **0 B/op**                  |
 | Exeris FD Owner   | Direct Socket OS boundary | **\~367k ops/s** | **0 B/op**                  |
 
-*(Methodology: JMH `gc` phase, Oracle JDK 26 GA, ZGC, commit [`f778683`](https://github.com/exeris-systems/exeris-benchmarks/commit/f778683bf1d343d0c6a3a595d2d3b754c44a696c), 2026-05-01. The Memory BIO profile phase additionally confirmed via JFR: zero `jdk.GarbageCollection` events recorded --- ZGC never ran a single collection during the entire benchmark run. Full suite in [`exeris-benchmarks`](https://github.com/exeris-systems/exeris-benchmarks).)*
+*(Methodology: JMH `gc` phase, Oracle JDK 26 GA, ZGC, commit [`f778683`](https://github.com/exeris-systems/exeris-benchmarks/commit/f778683bf1d343d0c6a3a595d2d3b754c44a696c), 2026-05-01. The Memory BIO profile phase additionally confirmed via JFR: zero `jdk.GarbageCollection` events recorded — ZGC never ran a single collection during the entire benchmark run. Full suite in [`exeris-benchmarks`](https://github.com/exeris-systems/exeris-benchmarks).)*
 ![The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.](https://blog.arkstack.dev/blog/your-tls-stack-is-lying-about-zero-copy/fig2_fd_owner_path.png) Figure 2: The data path of Memory BIO vs FD Owner directly binding to the socket descriptor.
 
 Let's unpack what these numbers actually mean, because context matters more than raw digits.
@@ -131,7 +131,7 @@ A naive reading would ask why the throughput dropped to \~367,000 ops/s. The ans
 
 What changed my mind was not the ops/s number. It was what `-prof gc` showed underneath it.
 
-To process a standard 1024-byte payload, `SSLEngine` allocates over **2.5 Kilobytes** of garbage (`gc.alloc.rate.norm`). The TLS layer generates more heap waste than the data it encrypts. I had already pushed the rest of the hot path off-heap --- and the GC profiler was telling me the TLS boundary was quietly undoing that work on every record.
+To process a standard 1024-byte payload, `SSLEngine` allocates over **2.5 Kilobytes** of garbage (`gc.alloc.rate.norm`). The TLS layer generates more heap waste than the data it encrypts. I had already pushed the rest of the hot path off-heap — and the GC profiler was telling me the TLS boundary was quietly undoing that work on every record.
 
 By contrast, the Exeris FFM paths drop the normalized allocation rate to **strict zero**. (The profiler registers \~0.01 B/op with zero actual GC counts, which is standard JMH measurement noise for absolute zero).
 
@@ -146,7 +146,7 @@ First, `SSLEngine` is still the right answer for the vast majority of systems. I
 
 Second, direct buffers and pooling still matter. This is not an article pretending the entire existing Java ecosystem is naive.
 
-Finally, Panama FFM and native TLS do not remove complexity---they relocate it. You get absolute control, but you also inherit absolute responsibility for lifecycle, correctness, and failure modes. This is an architectural decision for a highly specialized kernel, not a generic industry recommendation.
+Finally, Panama FFM and native TLS do not remove complexity—they relocate it. You get absolute control, but you also inherit absolute responsibility for lifecycle, correctness, and failure modes. This is an architectural decision for a highly specialized kernel, not a generic industry recommendation.
 
 ## What I Changed, and What I Gave Up
 

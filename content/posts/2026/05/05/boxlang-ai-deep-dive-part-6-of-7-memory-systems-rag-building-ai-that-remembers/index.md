@@ -25,9 +25,9 @@ frozen: false
 
 *BoxLang AI 3.0 Series · Part 6 of 7*
 
-A chatbot with no memory isn't a conversation --- it's a series of isolated queries. Every message starts from scratch. The user has to re-explain who they are, what they're working on, and what was just said. It's exhausting, and it signals that the AI isn't really listening.
+A chatbot with no memory isn't a conversation — it's a series of isolated queries. Every message starts from scratch. The user has to re-explain who they are, what they're working on, and what was just said. It's exhausting, and it signals that the AI isn't really listening.
 
-Memory is what separates a useful AI application from a toy. BoxLang AI ships with one of the most comprehensive memory systems in any AI framework --- 20+ memory types across two major categories, vector embedding support for semantic retrieval, 30+ document loaders for RAG pipelines, and a per-call identity routing system that makes multi-tenant applications safe by default.
+Memory is what separates a useful AI application from a toy. BoxLang AI ships with one of the most comprehensive memory systems in any AI framework — 20+ memory types across two major categories, vector embedding support for semantic retrieval, 30+ document loaders for RAG pipelines, and a per-call identity routing system that makes multi-tenant applications safe by default.
 
 This post is a complete tour.
 
@@ -66,11 +66,11 @@ This post is a complete tour.
 
 BoxLang AI memory breaks into two fundamentally different categories, solving two different problems.
 
-**Standard Memory** stores conversation history --- the sequential messages between user and assistant. It's what lets the agent remember "my name is Luis" from three messages ago.
+**Standard Memory** stores conversation history — the sequential messages between user and assistant. It's what lets the agent remember "my name is Luis" from three messages ago.
 
-**Vector Memory** stores semantic knowledge --- embeddings of documents, past conversations, or domain content that can be retrieved by meaning, not by recency. It's what enables RAG: "find the three most relevant passages from our knowledge base for this query."
+**Vector Memory** stores semantic knowledge — embeddings of documents, past conversations, or domain content that can be retrieved by meaning, not by recency. It's what enables RAG: "find the three most relevant passages from our knowledge base for this query."
 
-Both categories share the same `IAiMemory` interface, the same `aiMemory()` BIF, and the same per-call identity routing --- your application code barely changes between them.
+Both categories share the same `IAiMemory` interface, the same `aiMemory()` BIF, and the same per-call identity routing — your application code barely changes between them.
 
 ## 📋 Standard Memory Types
 
@@ -112,7 +112,7 @@ mem = aiMemory( "jdbc", config: {
 | `cache`   | Distributed applications, multi-server deployments           |
 | `jdbc`    | Enterprise multi-user systems, full persistence              |
 
-### Summary Memory --- How It Actually Works
+### Summary Memory — How It Actually Works
 
 The `summary` type deserves special attention. When the message count exceeds `summaryThreshold`, it calls the configured LLM to produce a one-paragraph summary of the oldest messages, replaces them with that summary as a single system message, then continues accumulating. Conversation context survives without the token cost of carrying the full history.
 
@@ -129,7 +129,7 @@ agent = aiAgent(
 
 ## 🔍 Vector Memory Types
 
-Vector memory stores embeddings and retrieves by semantic similarity --- the right tool when "find relevant context" matters more than "recall what was said recently."
+Vector memory stores embeddings and retrieves by semantic similarity — the right tool when "find relevant context" matters more than "recall what was said recently."
 
 ```java
 // In-memory vectors — development and small datasets
@@ -180,9 +180,9 @@ Full vector memory roster:
 | `weaviate`   | GraphQL vector database                     |
 | `milvus`     | Enterprise-scale vector DB                  |
 
-### Hybrid Memory --- The Best of Both
+### Hybrid Memory — The Best of Both
 
-`hybrid` combines a recent message window with semantic vector retrieval --- you get recency and relevance:
+`hybrid` combines a recent message window with semantic vector retrieval — you get recency and relevance:
 
 ```java
 mem = aiMemory( "hybrid", config: {
@@ -192,7 +192,7 @@ mem = aiMemory( "hybrid", config: {
 } )
 ```
 
-For most production support-bot or assistant scenarios, `hybrid` is the sweet spot --- recent context for coherence, semantic retrieval for depth.
+For most production support-bot or assistant scenarios, `hybrid` is the sweet spot — recent context for coherence, semantic retrieval for depth.
 
 ## 🏢 Per-Call Multi-Tenant Identity Routing
 
@@ -292,7 +292,7 @@ docs = aiDocuments(
 
 ## 🔗 Building a Complete RAG Pipeline
 
-Here's the full picture --- ingest documents into vector memory, then use an agent with that memory to answer questions grounded in your content.
+Here's the full picture — ingest documents into vector memory, then use an agent with that memory to answer questions grounded in your content.
 
 ### Step 1: Ingest
 
@@ -325,7 +325,7 @@ println( "Duplicates skipped: #result.deduped#" )
 println( "Estimated cost   : $#result.estimatedCost#" )
 ```
 
-The `toMemory()` method handles chunking via `aiChunk()`, embedding via the configured provider, deduplication, and storage --- everything in one fluent call with a detailed report back.
+The `toMemory()` method handles chunking via `aiChunk()`, embedding via the configured provider, deduplication, and storage — everything in one fluent call with a detailed report back.
 
 ### Step 2: Query
 
@@ -345,7 +345,7 @@ response = agent.run(
 )
 ```
 
-When the agent runs, vector memory retrieves the most semantically similar document chunks for the query and injects them as context before the LLM call. The LLM answers based on your actual content --- not hallucinations.
+When the agent runs, vector memory retrieves the most semantically similar document chunks for the query and injects them as context before the LLM call. The LLM answers based on your actual content — not hallucinations.
 
 ### Step 3: Hybrid for Production
 
@@ -387,7 +387,7 @@ chunks = aiChunk( largeText, {
 
 ## 🏗️ Multiple Memories Per Agent
 
-Agents can have multiple memory instances simultaneously --- useful when you want different retention policies for different types of information:
+Agents can have multiple memory instances simultaneously — useful when you want different retention policies for different types of information:
 
 ```java
 agent = aiAgent(
@@ -409,7 +409,7 @@ agent.addMemory( aiMemory( "file", config: { filePath: "/audit/" } ) )
 
 All memories are read from and written to in parallel. Messages retrieved from all memories are merged before each LLM call.
 
-## 📦 The `aiPopulate()` BIF --- Structured Memory Without Live Calls
+## 📦 The `aiPopulate()` BIF — Structured Memory Without Live Calls
 
 One often-overlooked feature: `aiPopulate()` fills a typed BoxLang class from JSON without making any LLM call. This is essential for caching and testing:
 
@@ -438,7 +438,7 @@ Perfect for: pre-populated test fixtures, cached AI extractions, converting exis
 
 ## What's Next
 
-In **Part 7** --- the final post in the series --- we go deep on MCP: how to consume tools from any MCP server, how `MCPTool` proxies work, and how to expose your own BoxLang functions as an enterprise MCP server with full security, CORS, API key validation, and rate limiting.
+In **Part 7** — the final post in the series — we go deep on MCP: how to consume tools from any MCP server, how `MCPTool` proxies work, and how to expose your own BoxLang functions as an enterprise MCP server with full security, CORS, API key validation, and rate limiting.
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ "Full Documentation") 🌐 [BoxLang AI Site](https://ai.boxlang.io/ "BoxLang AI Site") 📦Install Today: `install-bx-module bx-ai` 🫶[Professional Support](https://ai.ortussolutions.com/ "Professional Support")
 

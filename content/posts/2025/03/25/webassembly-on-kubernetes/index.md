@@ -82,7 +82,7 @@ The final `wasm-kubernetes:native` image weighs 8.71M, with its base image `dist
 ## Adapting to WebAssembly
 
 The main idea behind WebAssembly is that it's secure because it can't access the host system. However, we must open a socket to listen to incoming requests to run an HTTP server. WebAssembly can't do that. We need a runtime that provides this feature and other system-dependent capabilities. It's the goal of .
-> The WebAssembly System Interface (WASI) is a group of standards-track API specifications for software compiled to the W3C WebAssembly (Wasm) standard. WASI is designed to provide a secure standard interface for applications that can be compiled to Wasm from any language, and that may run anywhere---from browsers to clouds to embedded devices.
+> The WebAssembly System Interface (WASI) is a group of standards-track API specifications for software compiled to the W3C WebAssembly (Wasm) standard. WASI is designed to provide a secure standard interface for applications that can be compiled to Wasm from any language, and that may run anywhere—from browsers to clouds to embedded devices.
 >
 > -- [Introduction to WASI](https://wasi.dev/)
 

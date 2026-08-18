@@ -41,7 +41,7 @@ As a side note, if you like the content of this and the other posts in this seri
 
 ## Full Stack Development, A Shifting Definition
 
-The definition of full stack development is as fluid as the technology stacks themselves. Traditionally, full stack developers were defined as those who could work on both the frontend and backend of an application. However, as the industry evolves, this definition has expanded to include aspects of operations (OPS) and configuration. The modern full stack developer is expected to submit pull requests that cover all parts required to implement a feature---backend, database, frontend, and configuration. While this does not make them an expert in all these areas, it does require them to navigate across domains, often relying on domain experts for guidance.
+The definition of full stack development is as fluid as the technology stacks themselves. Traditionally, full stack developers were defined as those who could work on both the frontend and backend of an application. However, as the industry evolves, this definition has expanded to include aspects of operations (OPS) and configuration. The modern full stack developer is expected to submit pull requests that cover all parts required to implement a feature—backend, database, frontend, and configuration. While this does not make them an expert in all these areas, it does require them to navigate across domains, often relying on domain experts for guidance.
 
 I've heard it said that full stack developers are:
 > Jack of all trades, master of none.
@@ -103,7 +103,7 @@ A common strategy is to reproduce the issue in a controlled environment, such as
 
 ### The Importance of System-Level Debugging
 
-Full stack debugging is not limited to the application code. Often, issues arise from the surrounding environment, such as network configurations, third-party services, or hardware limitations. A classic example of this that we ran into a couple of years ago was a production problem where a WebSocket connection would frequently disconnect. After extensive debugging, [Steve](https://github.com/shannah/) discovered that the issue was caused by the CDN provider (CloudFlare) timing out the WebSocket after two minutes---something that could only be identified by debugging the entire system, not just the application code.
+Full stack debugging is not limited to the application code. Often, issues arise from the surrounding environment, such as network configurations, third-party services, or hardware limitations. A classic example of this that we ran into a couple of years ago was a production problem where a WebSocket connection would frequently disconnect. After extensive debugging, [Steve](https://github.com/shannah/) discovered that the issue was caused by the CDN provider (CloudFlare) timing out the WebSocket after two minutes—something that could only be identified by debugging the entire system, not just the application code.
 
 System-level debugging requires a broad understanding of how different components of the infrastructure interact with each other. It also involves using tools that can monitor and analyze the behavior of the system as a whole, such as network analyzers, logging frameworks, and performance monitoring tools.
 

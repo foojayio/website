@@ -243,7 +243,7 @@ There is a good reason why the database engine stores the deleted and updated re
 
 It's clear that PostgreSQL can't and doesn't want to keep the dead row versions forever. This is why the database has its own garbage collection process called [vacuum](https://www.postgresql.org/docs/current/sql-vacuum.html "vacuum").
 
-There are two types of VACUUM --- the standard one and the full one. The standard VACUUM works in parallel with your application workloads and doesn't block your queries. This type of vacuuming marks the space occupied by dead rows as free, making it available for the new data that your app will add to the same table later.
+There are two types of VACUUM — the standard one and the full one. The standard VACUUM works in parallel with your application workloads and doesn't block your queries. This type of vacuuming marks the space occupied by dead rows as free, making it available for the new data that your app will add to the same table later.
 
 ![Standard Vacuum](image1-700x443.png)
 

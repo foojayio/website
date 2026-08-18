@@ -23,7 +23,7 @@ related_posts:
 frozen: false
 ---
 
-**Envision operating a successful e-commerce platform where every moment is crucial. Customers make purchases, adjust inventory levels, process payments, and dispatch shipping alerts---all in real time. In the background, microservices diligently function to guarantee seamless operations. However, how do these services interact effectively, particularly during peak traffic occurrences such as flash sales or holiday shopping events?**
+**Envision operating a successful e-commerce platform where every moment is crucial. Customers make purchases, adjust inventory levels, process payments, and dispatch shipping alerts—all in real time. In the background, microservices diligently function to guarantee seamless operations. However, how do these services interact effectively, particularly during peak traffic occurrences such as flash sales or holiday shopping events?**
 
 An efficient method to execute this use case involves utilizing Spring Cloud Stream (SCS) as the messaging infrastructure. SCS facilitates seamless interaction among microservices, enhancing the system's responsiveness and scalability. A significant benefit of SCS is that it provides an abstraction layer, allowing developers to transition between messaging technologies such as Kafka or RabbitMQ or Pulsar or Amazon Kinesis without altering their fundamental business logic.
 

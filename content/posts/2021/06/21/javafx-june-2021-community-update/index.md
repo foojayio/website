@@ -23,7 +23,7 @@ In order for any technology to grow and improve, community support and feedback 
 >
 > Consideration of the complexity and compatibility with the [#openjfx](https://twitter.com/hashtag/openjfx?src=hash&ref_src=twsrc%5Etfw) codebase is appreciated. This can help determine whether it should be an internal or external addition.
 >
-> --- Almas Baim (@AlmasBaim) [June 7, 2021](https://twitter.com/AlmasBaim/status/1401833314890178566?ref_src=twsrc%5Etfw)
+> — Almas Baim (@AlmasBaim) [June 7, 2021](https://twitter.com/AlmasBaim/status/1401833314890178566?ref_src=twsrc%5Etfw)
 
 The collated results are given below. Each entry also includes links to open-source libraries and other resources that may provide (or help develop) some of the necessary functionalities.
 

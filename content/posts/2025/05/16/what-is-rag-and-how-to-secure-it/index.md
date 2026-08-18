@@ -49,7 +49,7 @@ Long documents are broken down into smaller, manageable sections called *chunks*
 
 * **Fixed-length chunking** breaks text into equal-sized blocks (e.g., 500 tokens). It's simple but may cut off thoughts mid-sentence.
 * **Sliding window** uses overlapping chunks to preserve more context across boundaries.
-* **Structure-aware chunking** splits at natural boundaries---like paragraphs or headers---to keep meaning intact, which is ideal for documentation or FAQs.
+* **Structure-aware chunking** splits at natural boundaries—like paragraphs or headers—to keep meaning intact, which is ideal for documentation or FAQs.
 
 Choosing the right chunking strategy balances efficiency with retrieval quality. Sometimes a tool like [++chonky++](https://github.com/mirth/chonky) can be helpful in creating meaningful chunks.
 

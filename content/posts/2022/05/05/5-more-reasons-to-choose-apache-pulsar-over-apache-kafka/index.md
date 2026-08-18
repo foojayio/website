@@ -55,9 +55,9 @@ If you want to get into the gory details of Kafka and Pulsar latency, check out 
 
 One of the great things about a streaming system like Kafka is its ability to replay messages that have already been consumed. If you like those messages the first time around, replaying them to correct something or build a new application around them is fun to do.
 
-What if you like those messages so much, you want to keep them around forever? Like, say if you are doing [**event-sourcing**](https://martinfowler.com/eaaDev/EventSourcing.html). It sounds like a great idea, but forever is a [**mighty long time**](https://www.youtube.com/watch?v=aXJhDltzYVQ) and storing messages forever can get expensive --- especially if you are storing them on those high-performance SSDs that keep your messaging system humming.
+What if you like those messages so much, you want to keep them around forever? Like, say if you are doing [**event-sourcing**](https://martinfowler.com/eaaDev/EventSourcing.html). It sounds like a great idea, but forever is a [**mighty long time**](https://www.youtube.com/watch?v=aXJhDltzYVQ) and storing messages forever can get expensive — especially if you are storing them on those high-performance SSDs that keep your messaging system humming.
 
-Wouldn't it make sense if you could move those old messages --- the ones you need to keep around because you might need them someday --- to a cheaper storage solution? And if you could use dirt cheap cloud storage like Amazon S3 buckets, wouldn't that be great?
+Wouldn't it make sense if you could move those old messages — the ones you need to keep around because you might need them someday — to a cheaper storage solution? And if you could use dirt cheap cloud storage like Amazon S3 buckets, wouldn't that be great?
 
 You can probably guess where I am going here. With Pulsar [**tiered storage**](https://pulsar.apache.org/docs/en/concepts-tiered-storage/), you can automatically push those dusty old messages into practically infinite, cheap cloud storage and retrieve them just like you do those newer, fresh-as-a-daisy messages.
 
@@ -81,7 +81,7 @@ Stateless components are desirable because when one gets overloaded, you can jus
 
 In other words, you need to rebalance the load.
 
-Pulsar does [**broker load balancing**](https://pulsar.apache.org/docs/en/administration-load-balance/) automatically for you. It monitors the CPU, memory, and network (not disk; did I mention brokers are stateless?) usage of brokers and will move the load around to maintain balance. This means that you don't have to add that new broker until you use up the capacity of all the brokers --- not because one of them is running hot.
+Pulsar does [**broker load balancing**](https://pulsar.apache.org/docs/en/administration-load-balance/) automatically for you. It monitors the CPU, memory, and network (not disk; did I mention brokers are stateless?) usage of brokers and will move the load around to maintain balance. This means that you don't have to add that new broker until you use up the capacity of all the brokers — not because one of them is running hot.
 
 You can do broker load balancing with Kafka. But, you are going to have to install another package such as LinkedIn's [**Cruise Control**](https://github.com/linkedin/cruise-control). Or, if you like (eventually) paying for stuff, you can use Confluent's [**rebalancer**](https://docs.confluent.io/current/kafka/rebalancer/rebalancerhttps://www.confluent.io/product/auto-data-balancing/html) tool as well.
 

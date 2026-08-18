@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-I wanted to write about a small side project---a few months back, I got carried away with understanding how Java debugging works.
+I wanted to write about a small side project—a few months back, I got carried away with understanding how Java debugging works.
 
 The following is an hors d'oeuvre, a small post in between my series on profiling, on the [Java Platform Debugging Architecture](https://docs.oracle.com/en/java/javase/17/docs/specs/jpda/jpda.html).
 

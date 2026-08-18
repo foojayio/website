@@ -20,9 +20,9 @@ frozen: false
 
 Modern data-driven systems. ETL pipelines are no longer simply scheduled background processes that run silently overnight, one after another. They are the backbone of real-time analytics, powering operational dashboards and recommendation systems. They enable machine learning workflows.
 
-This evolution, while creating enormous benefits, has---with the increase in data volume and the decrease in latency tolerance---called into question the traditional sequential ETL approach. A bottleneck for the speed is now required.
+This evolution, while creating enormous benefits, has—with the increase in data volume and the decrease in latency tolerance—called into question the traditional sequential ETL approach. A bottleneck for the speed is now required.
 
-Designing an ETL pipeline today that operates at scale means tackling issues such as concurrency management, resilience against failures---whether total or, worse yet, partial---and observability. The challenge is no longer simply moving data, but doing so quickly, securely, predictably, and in a way that can be observed.
+Designing an ETL pipeline today that operates at scale means tackling issues such as concurrency management, resilience against failures—whether total or, worse yet, partial—and observability. The challenge is no longer simply moving data, but doing so quickly, securely, predictably, and in a way that can be observed.
 
 In this article, we will explore how to design a high-throughput ETL pipeline architecture using Java, focusing on concurrency models, error recovery strategies, and practical implementation techniques. To do this, we will leverage tools such as Project Reactor to build scalable, non-blocking pipelines. In the loading stage, we will consider [MongoDB](https://www.mongodb.com/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=etl-foojay&utm_term=hugh.murray) as the sink for transformed data.
 
@@ -268,7 +268,7 @@ Kafka also offers durability and reproducibility through its durable logs mechan
 
 ## Observability and monitoring
 
-In distributed systems---and this is nothing new---observability is just as important as correctness. Without adequate observability processes and mechanisms, debugging becomes slow, complicated, or even impossible.
+In distributed systems—and this is nothing new—observability is just as important as correctness. Without adequate observability processes and mechanisms, debugging becomes slow, complicated, or even impossible.
 
 A good ETL pipeline should provide:
 

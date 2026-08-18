@@ -106,7 +106,7 @@ When G1 determines that scanning the current card table during a pause would lik
 
 This approach reduces the amount of synchronization required between application and optimizer threads. In applications that heavily modify object-reference fields, throughput gains of 5-15% can be expected. On top of that, because the write barrier code can be a lot simpler, additional throughput gains of up to 5% have been observed in x64 architectures, even in applications that don't heavily modify object-reference fields.
 
-The two card tables are identical in size, each consuming the same extra native memory. Together they occupy roughly 0.2% of the Java heap, which translates to about 2MB of native memory for every gigabyte of heap space. This modest overhead is well worth the sizable performance gains---especially when you consider that, before Java 20, G1 needed more than eight times the memory that the second card table now requires.
+The two card tables are identical in size, each consuming the same extra native memory. Together they occupy roughly 0.2% of the Java heap, which translates to about 2MB of native memory for every gigabyte of heap space. This modest overhead is well worth the sizable performance gains—especially when you consider that, before Java 20, G1 needed more than eight times the memory that the second card table now requires.
 
 ##### More Information
 
@@ -156,7 +156,7 @@ var http3Request = HttpRequest.newBuilder(URI.create("https://foojay.io"))
     .GET().build();
 ```
 
-Once HTTP/3 has been chosen---either in the request itself or in the client---you transmit the request just as you normally would. If the destination server lacks HTTP/3 support, the request is automatically and transparently rolled back to HTTP/2 or, if necessary, to HTTP/1.1.
+Once HTTP/3 has been chosen—either in the request itself or in the client—you transmit the request just as you normally would. If the destination server lacks HTTP/3 support, the request is automatically and transparently rolled back to HTTP/2 or, if necessary, to HTTP/1.1.
 
 ##### Negotiating Protocol Versions
 

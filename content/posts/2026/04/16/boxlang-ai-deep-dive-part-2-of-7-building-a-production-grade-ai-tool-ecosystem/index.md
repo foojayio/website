@@ -25,7 +25,7 @@ frozen: false
 
 *BoxLang AI 3.0 Series · Part 2 of 7*
 
-Function calling is where most AI frameworks look deceptively simple on the surface and turn into a mess underneath. You define a tool, pass it to the LLM, and when the LLM calls it --- who handles the lifecycle? Who fires observability events? Who serializes the result? Who resolves the tool by name when the only thing you have is a string?
+Function calling is where most AI frameworks look deceptively simple on the surface and turn into a mess underneath. You define a tool, pass it to the LLM, and when the LLM calls it — who handles the lifecycle? Who fires observability events? Who serializes the result? Who resolves the tool by name when the only thing you have is a string?
 
 In most frameworks: you do. In BoxLang AI 3.0: the framework does, and the architecture is worth understanding.
 
@@ -40,7 +40,7 @@ ITool (interface)
         └── MCPTool    (MCP server proxy tool)
 ```
 
-Every tool in the system extends `BaseTool`. That means every tool gets the same lifecycle, the same event firing, and the same result serialization --- for free, without touching provider code.
+Every tool in the system extends `BaseTool`. That means every tool gets the same lifecycle, the same event firing, and the same result serialization — for free, without touching provider code.
 
 ## 🧱 `BaseTool` --- The Abstract Foundation
 
@@ -79,7 +79,7 @@ public final string function invoke( required struct args, AiChatRequest chatReq
 
 By making `invoke()` final, `BaseTool` guarantees that:
 
-* `beforeAIToolExecute` and `afterAIToolExecute` events **always fire** --- no subclass can skip them
+* `beforeAIToolExecute` and `afterAIToolExecute` events **always fire** — no subclass can skip them
 * Execution time is **always measured**
 * Results are **always serialized** consistently (simple values pass through, complex values get JSON-serialized)  
   Subclasses implement two abstract methods and nothing else:
@@ -128,7 +128,7 @@ public struct function getArgumentsSchema() {
 }
 ```
 
-In practice you never call this yourself --- the `aiTool()` BIF creates a `ClosureTool` for you:
+In practice you never call this yourself — the `aiTool()` BIF creates a `ClosureTool` for you:
 
 ```java
 // Required + optional args — schema is auto-generated from parameter metadata
@@ -207,7 +207,7 @@ result = aiChat(
 )
 ```
 
-String keys are resolved lazily via `resolveTools()` right before each LLM request --- so you can register at startup and reference anywhere.
+String keys are resolved lazily via `resolveTools()` right before each LLM request — so you can register at startup and reference anywhere.
 
 ### Module Namespacing
 
@@ -288,9 +288,9 @@ class {
 }
 ```
 
-`now@bxai` is **auto-registered on module load** --- every agent in every application gets temporal awareness without any configuration. This matters because LLMs have a training cutoff. Without access to the current date and time, they'll confidently tell you the wrong year, calculate ages incorrectly, or miscalculate deadlines. `now@bxai` solves this.
+`now@bxai` is **auto-registered on module load** — every agent in every application gets temporal awareness without any configuration. This matters because LLMs have a training cutoff. Without access to the current date and time, they'll confidently tell you the wrong year, calculate ages incorrectly, or miscalculate deadlines. `now@bxai` solves this.
 
-`httpGet@bxai` is **opt-in only** --- not auto-registered because it can reach any URL including internal network endpoints. Register it explicitly when your application genuinely needs web access:
+`httpGet@bxai` is **opt-in only** — not auto-registered because it can reach any URL including internal network endpoints. Register it explicitly when your application genuinely needs web access:
 
 ```java
 import bxModules.bxai.models.tools.core.CoreTools;
@@ -324,7 +324,7 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
 }
 ```
 
-The `generateSchema()` method converts the MCP `inputSchema` to OpenAI function-calling format automatically --- so the LLM can call MCP tools exactly the same way it calls any other `ITool`.
+The `generateSchema()` method converts the MCP `inputSchema` to OpenAI function-calling format automatically — so the LLM can call MCP tools exactly the same way it calls any other `ITool`.
 
 ## 🏗️ Building a Custom Class-Based Tool
 
@@ -404,7 +404,7 @@ tools   = agent.listTools()     // [{ name, description }] for ALL tools
 servers = agent.listMCPServers() // [{ url, toolNames }]
 ```
 
-Under the hood, `withMCPServer()` calls `listTools()`, wraps each result as an `MCPTool`, and appends them to the agent's tool list. The MCP server metadata is also injected into the system message so the LLM knows which tools came from which server --- useful for complex multi-server setups.
+Under the hood, `withMCPServer()` calls `listTools()`, wraps each result as an `MCPTool`, and appends them to the agent's tool list. The MCP server metadata is also injected into the system message so the LLM knows which tools came from which server — useful for complex multi-server setups.
 
 ## 🎯 Putting It All Together
 
@@ -428,7 +428,7 @@ response = agent.run( "Customer #12345 says their order #98765 never arrived. He
 
 ## What's Next
 
-In Part 3, we go deep on multi-agent orchestration --- how parent-child hierarchies work in code, how sub-agents become tools automatically, how stateless agents handle multi-tenant memory, and how to build real AI teams in BoxLang.
+In Part 3, we go deep on multi-agent orchestration — how parent-child hierarchies work in code, how sub-agents become tools automatically, how stateless agents handle multi-tenant memory, and how to build real AI teams in BoxLang.
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ "Full Documentation") 📦Install Today: `install-bx-module bx-ai` 🫶[Professional Support](https://ai.ortussolutions.com/ "Professional Support")
 

@@ -28,7 +28,7 @@ Docker Init was introduced in Docker Desktop 4.27, before LLMs became the defaul
 
 * A `README.Docker.md` with build and run instructions
 
-What makes it valuable is that it's deterministic---not a probabilistic guess. It produces the same correct output every time, following Docker's own best practices.
+What makes it valuable is that it's deterministic—not a probabilistic guess. It produces the same correct output every time, following Docker's own best practices.
 
 ![Docker Commandos setting up the command center](https://dockersecurity.io/commandos-asgard/asgard-init.png)
 
@@ -38,7 +38,7 @@ What makes it valuable is that it's deterministic---not a probabilistic guess. I
 
 ## Create a New Project
 
-I'm using a Spring Boot project. Because it's early Spring now and I haven't touched one in a while---so let's go.
+I'm using a Spring Boot project. Because it's early Spring now and I haven't touched one in a while—so let's go.
 
 Head to <https://start.spring.io/> and create a project with:
 
@@ -151,7 +151,7 @@ This is already a proper multi-stage build: separate stages for dependency resol
 
 The generated Dockerfile references `eclipse-temurin:26-jdk-jammy` and `eclipse-temurin:26-jre-jammy`. Since Java 26 was just released, these Eclipse Temurin images may not be fully available on Docker Hub yet.
 
-Swap them out for SAP Machine images instead---SAP's free OpenJDK distribution ships Java 26 on Ubuntu 24.04 (Noble Numbat):
+Swap them out for SAP Machine images instead—SAP's free OpenJDK distribution ships Java 26 on Ubuntu 24.04 (Noble Numbat):
 
 * `sapmachine:26-jdk-ubuntu-noble`
 
@@ -224,12 +224,12 @@ curl http://localhost:8080
 
 Docker Init supports more than Java. If you want to try it with other languages, Docker's official guides are the place to start: <https://docs.docker.com/guides/>.
 
-I co-authored the C++ guide---Docker thanked me for it at the top of the page, which means I wrote those words and then thanked myself on their behalf. Worth a read:
+I co-authored the C++ guide—Docker thanked me for it at the top of the page, which means I wrote those words and then thanked myself on their behalf. Worth a read:
 
 * <https://docs.docker.com/guides/cpp/>
 
 ## Conclusion
 
-Java 26 just shipped and Docker Init handles it cleanly out of the box---multi-stage build, layer extraction, non-root user, bind mounts for caching. You get a production-ready Dockerfile in under a minute. When Eclipse Temurin catches up, swap the base images back. Until then, SAP Machine has you covered.
+Java 26 just shipped and Docker Init handles it cleanly out of the box—multi-stage build, layer extraction, non-root user, bind mounts for caching. You get a production-ready Dockerfile in under a minute. When Eclipse Temurin catches up, swap the base images back. Until then, SAP Machine has you covered.
 
 If you want to learn about more Docker Commandos (or commands) head to: <https://dockersecurity.io/commandos>.

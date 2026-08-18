@@ -22,15 +22,15 @@ The book covers everything from the environmental footprint of our data centers 
 
 The current chapters (because the book continues to grow and everyone is invited to participate) are:
 
-* Chapter 1: Fair Trade Software --- Maarten Mulders and Geertjan Wielenga
-* Chapter 2: Stopping the Data Madness --- Frank Delporte
-* Chapter 3: Impact of Architecture --- Simon Martinelli and Jan Ouwens
-* Chapter 4: Career and Wellbeing --- Markus Westergren
-* Chapter 5: Sustaining Success: Java's Evergreen Appeal in a Rapidly Changing Tech Landscape --- A N M Bazlur Rahman
-* Chapter 6: Simple Things You Can Do Right Now --- Jan Ouwens and Ko Turk
-* Chapter 7: Java as a Scripting Language: Sustainable Code from Day One --- A N M Bazlur Rahman
+* Chapter 1: Fair Trade Software — Maarten Mulders and Geertjan Wielenga
+* Chapter 2: Stopping the Data Madness — Frank Delporte
+* Chapter 3: Impact of Architecture — Simon Martinelli and Jan Ouwens
+* Chapter 4: Career and Wellbeing — Markus Westergren
+* Chapter 5: Sustaining Success: Java's Evergreen Appeal in a Rapidly Changing Tech Landscape — A N M Bazlur Rahman
+* Chapter 6: Simple Things You Can Do Right Now — Jan Ouwens and Ko Turk
+* Chapter 7: Java as a Scripting Language: Sustainable Code from Day One — A N M Bazlur Rahman
 
-You'll find practical advice you can use today---like configuring build caching or using Java 25's scripting features---alongside deeper discussions about mentorship, community, and why sustainable practices actually make business sense.
+You'll find practical advice you can use today—like configuring build caching or using Java 25's scripting features—alongside deeper discussions about mentorship, community, and why sustainable practices actually make business sense.
 
 ## Project History
 

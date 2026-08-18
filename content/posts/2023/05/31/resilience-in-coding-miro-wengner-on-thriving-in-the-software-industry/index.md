@@ -35,7 +35,7 @@ In this insightful discussion, we sit down with Miro Wengner, an accomplished so
 
 I started "studying" the basic language, but I really had no idea. My gaming efforts ended with moving objects over the screen, but it was awesome.
 
-Anyway, later on, I was influenced by my friend's father. He did concepts for some car companies and always had the most powerful computer back in the 90s. Sometimes I watched him for a long time---his precision and attention to detail.
+Anyway, later on, I was influenced by my friend's father. He did concepts for some car companies and always had the most powerful computer back in the 90s. Sometimes I watched him for a long time—his precision and attention to detail.
 
 During my studies, I do remember a second very strong moment, which was joining Sun Microsystems. Entering the ground of the SUN changed my world perception, literally. It was like lightning; I got "access" to the world where many things have started, and technologies or approaches we are using today have been "invented." It all began as a student job, and it has evolved over the years. I got the opportunity to contribute to projects, learn, and be influenced by amazing people. I do remember being hungry for information; it was my hobby in those days.
 

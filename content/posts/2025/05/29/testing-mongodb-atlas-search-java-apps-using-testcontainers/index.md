@@ -88,7 +88,7 @@ In addition, if you are using Java, you can write unit tests using the awesome u
 TestContainers is a handy unit testing library that helps you write integration tests by managing containerised versions of services you might use in your code. A few things it does for you are it:
 
 * Automatically manages containers for unit test contexts.
-* Runs consistently in any environment---e.g., locally, on CI/CD like GitHub Actions with minimal or no config.
+* Runs consistently in any environment—e.g., locally, on CI/CD like GitHub Actions with minimal or no config.
 * Manages port conflicts dynamically and provides system-unique connection strings.
 * Cleans up after each scope for a consistent environment every test run.
 
@@ -431,17 +431,17 @@ OK, so now we have 10 people in the database before the tests run, and we've cre
 Let's explain what each index field type means, and what we can do with it:
 
 * Name + bio fields `{ type: 'string', analyzer: 'lucene.standard' }`
-* The name and bio fields have an index type of string. Don't let appearances fool you---this is the most complex type of index in MongoDB Atlas Search/Lucene. This index type tokenizes (splits) the strings in these fields into a list of terms using an analyzer. Here, we're explicitly calling out the [default analyzer](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/standard/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant), which splits on non-character boundaries, lower-casing (to ignore case), ignores stop words like *in* , *and* , and *the*, and handles acronyms and email addresses. This leaves the index with a nice ordered term list which is super fast to search and has ordinal indexes to the documents.
+* The name and bio fields have an index type of string. Don't let appearances fool you—this is the most complex type of index in MongoDB Atlas Search/Lucene. This index type tokenizes (splits) the strings in these fields into a list of terms using an analyzer. Here, we're explicitly calling out the [default analyzer](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/standard/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant), which splits on non-character boundaries, lower-casing (to ignore case), ignores stop words like *in* , *and* , and *the*, and handles acronyms and email addresses. This leaves the index with a nice ordered term list which is super fast to search and has ordinal indexes to the documents.
 * Age `{"type": "number", "representation": "int64", "indexDoubles": false}`
 * The age field is an integer number, and it will [allow searching by ranges, equality, or faceting](https://www.mongodb.com/docs/atlas/atlas-search/field-types/number-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant). Very flexible and handy!
 * Job `[{ type: 'token' }, { type: 'stringFacet' }]`
-* This is an interesting one. We're telling MongoDB Atlas Search to index this field twice---in both cases, not to split the string up as [tokens](https://www.mongodb.com/docs/atlas/atlas-search/field-types/token-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant) but to treat it as a single value. However, in the first case, we want an index for equality matching, and in the second, for [faceting](https://www.mongodb.com/docs/atlas/atlas-search/field-types/string-facet-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant).
+* This is an interesting one. We're telling MongoDB Atlas Search to index this field twice—in both cases, not to split the string up as [tokens](https://www.mongodb.com/docs/atlas/atlas-search/field-types/token-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant) but to treat it as a single value. However, in the first case, we want an index for equality matching, and in the second, for [faceting](https://www.mongodb.com/docs/atlas/atlas-search/field-types/string-facet-type/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Testing+MongoDB+Atlas+Search+Java+Apps+Using+TestContainers&utm_term=megan.grant).
 
 So far, we have inserted some seed data using the data access, and created a MongoDB Atlas Search index.
 
 We also used the nice [awaitility](https://github.com/awaitility/awaitility) library to await the READY status on the MongoDB Atlas Search index. This is important because you can't use the index until it has fully indexed all the data. In this case, we are inserting the data first and then adding the index, so once it is READY, we can be sure all the data can be searched.
 
-At this point, our tests are expected to fail---let's go implement the `findPersonByBio()` method to bring them to green.
+At this point, our tests are expected to fail—let's go implement the `findPersonByBio()` method to bring them to green.
 
 We'll use a fuzzy text search on the bio field in `PersonDataAccess`:
 
@@ -508,7 +508,7 @@ The Atlas Local container includes all of the [MongoDB Database Tools](https://w
 
 Why does that matter for us? Seed data loading!
 
-TestContainers has some awesome options which we can use here for loading seed data---mounting directories and executing commands within the container.
+TestContainers has some awesome options which we can use here for loading seed data—mounting directories and executing commands within the container.
 
 In our previous example, we manually created 10 records for testing search... What if we wanted to test against 15,000 records?
 

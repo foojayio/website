@@ -27,13 +27,13 @@ frozen: false
 
 The repository pattern is a design method that allows for abstraction between business logic and the data of an application. This allows for retrieving and saving/updating objects without exposing the technical details of how that data is stored in the main application. In this blog, we will use Spring Boot with MongoDB in order to create a repository pattern-based application.
 
-Spring Boot applications generally have two main components to a repository pattern: standard repository items from spring---in this case, MongoRepository---and then custom repository items that you create to perform operations beyond what is included with the standard repository.
+Spring Boot applications generally have two main components to a repository pattern: standard repository items from spring—in this case, MongoRepository—and then custom repository items that you create to perform operations beyond what is included with the standard repository.
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/RepositryModelSpring) used in this article.
 
 ## The Spring standard repository
 
-The standard repo items can extend the base MongoRepositry class. This greatly reduces the amount of code needed for standard CRUD operations. Note the use of the @Query annotation to allow for shorthanding the various functions---for example:
+The standard repo items can extend the base MongoRepositry class. This greatly reduces the amount of code needed for standard CRUD operations. Note the use of the @Query annotation to allow for shorthanding the various functions—for example:
 
 ```
 public interface ItemRepository extends MongoRepository<GroceryItem, String> {
@@ -126,7 +126,7 @@ if(itemsUpdated != null)
 Although this uses the base repository function saveAll() to do the update, it's likely to result in poor performance for a few reasons:
 
 * All items for the category are returned to the client.
-* The saveAll function is suboptimal in terms of performance---the collection must be queried in order to determine which items in the list need to be inserted versus which ones need to be updated.
+* The saveAll function is suboptimal in terms of performance—the collection must be queried in order to determine which items in the list need to be inserted versus which ones need to be updated.
 * The entire document is being sent to the DB for replacement when only a single field is being changed. This is a known [anti-pattern in MongoDB](https://learn.mongodb.com/courses/schema-design-anti-patterns/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=repository-pattern-mongodb&utm_term=megan.grant) as it results in more network traffic as well as oplog bloat.
 
 A better approach is to forgo the standard save and saveAll repository functions and send the update directly to the DB. This will result in much better performance and reduced oplog traffic. Be sure there is an index on the 'category' field for best performance. This is especially true if this is going to be a common update.
@@ -209,7 +209,7 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 }
 ```
 
-In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
+In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields—we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
 ## Why schema and indexing matter
 
@@ -230,7 +230,7 @@ The repository model can (and should) be used to abstract database I/O from the 
 * Less effort to change the schema of your documents
 * Business rules can be incorporated in custom repo functions
 
-Keeping the core application logic separate from database CRUD operations makes changes easier to implement and test---on both sides of the application.
+Keeping the core application logic separate from database CRUD operations makes changes easier to implement and test—on both sides of the application.
 
 Avoid using the standard Spring save() and saveAll() methods to update documents. They take a brute force approach by replacing the entire document, which can lead to significantly more network traffic, poor performance, and negative impacts on cluster availability due to oplog bloat.
 

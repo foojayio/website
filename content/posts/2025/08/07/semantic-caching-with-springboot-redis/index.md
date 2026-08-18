@@ -40,7 +40,7 @@ Semantic caching solves this by understanding the ***meaning*** behind queries r
 3. If a similar query exists above a certain threshold, it returns the cached response
 4. If not, it calls the LLM, gets a response, and caches both the query and response for future use
 
-Behind the scenes, this works thanks to vector similarity search. It turns text into vectors (embeddings) --- lists of numbers --- stores them in a vector database, and then finds the ones closest to your query when checking for cached responses.
+Behind the scenes, this works thanks to vector similarity search. It turns text into vectors (embeddings) — lists of numbers — stores them in a vector database, and then finds the ones closest to your query when checking for cached responses.
 
 Today, we're gonna build a semantic caching system for a beer recommendation assistant. It will remember previous responses to similar questions, dramatically improving response times and reducing API costs.
 
@@ -117,7 +117,7 @@ Let's break this down:
 * **Metadata Fields**:
 * `answer`: TEXT field for storing the LLM's response
 * **Prefix** : `semantic-caching:` --- All keys in Redis will be prefixed with this to organize the data
-* **Vector Algorithm**: HSNW --- Hierarchical Navigable Small World algorithm for efficient approximate nearest neighbor search
+* **Vector Algorithm**: HSNW — Hierarchical Navigable Small World algorithm for efficient approximate nearest neighbor search
 
 ## 3. Implement the Semantic Caching Service
 
@@ -316,7 +316,7 @@ If you run the `FT.INFO semanticCachingIdx` command in the RedisInsight workbenc
 
 ![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*eCSGHnfvU1obVePLTjQDuA.png)
 
-And that's it --- you now have a working semantic caching system using Spring Boot and Redis.
+And that's it — you now have a working semantic caching system using Spring Boot and Redis.
 
 Instead of making expensive LLM calls for every similar question, your application can now intelligently cache and retrieve responses based on semantic meaning. Redis handles the vector storage and similarity search with the performance and scalability Redis is known for.
 

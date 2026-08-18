@@ -44,7 +44,7 @@ Finally, they include training data, created as a training run progresses to tra
 
 We can also distinguish two types of data depending on their purpose:
 
-On one hand, there is the JVM data --- metadata, heap data and code. This is a network of C++ objects that are used during normal JVM running to define and regulate Java execution. These objects must always exist, even when running without a cache, in order for the JVM to be able to run an app. This object network needs to be dumped to the archive on disk in a format that allows it to be quickly and correctly restored to the relevant memory areas of the production JVM in a valid (C++ Object) format and layout that matches the JVM's expectations.
+On one hand, there is the JVM data — metadata, heap data and code. This is a network of C++ objects that are used during normal JVM running to define and regulate Java execution. These objects must always exist, even when running without a cache, in order for the JVM to be able to run an app. This object network needs to be dumped to the archive on disk in a format that allows it to be quickly and correctly restored to the relevant memory areas of the production JVM in a valid (C++ Object) format and layout that matches the JVM's expectations.
 
 On the other hand we also have Leyden's own Cache Management Data, i.e. training data, which exists specifically to support creation and consumption of AOT cache. Training data are also saved and restored as C++ object data but the format and layout of these objects is determined solely by the Leyden cache management code. Its sole purpose is to track and regulate what assets get written to the AOT cache after training completes and what assets can or should be restored in production.
 

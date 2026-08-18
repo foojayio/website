@@ -64,17 +64,17 @@ Separately from Zulu, Azul offers Platform Prime: a JVM alternative to OpenJDK H
 
 The AWS-specific additions benefit teams already in that environment: the Amazon Corretto Crypto Provider (ACCP) is optimized for AWS services, and SnapStart cuts cold start latency for Java-based Lambda functions by up to 10x.
 
-Commercial support isn't a separate Corretto product --- it runs through AWS Support Plans. For teams already on AWS with an active support plan, the JDK support comes with the relationship they already have. Outside that context, the commercial support picture is thin.
+Commercial support isn't a separate Corretto product — it runs through AWS Support Plans. For teams already on AWS with an active support plan, the JDK support comes with the relationship they already have. Outside that context, the commercial support picture is thin.
 
 ## IBM Semeru Runtimes
 
 [IBM Semeru](https://developer.ibm.com/languages/semeru-runtimes/ "IBM Semeru") is built around OpenJ9, an alternative JVM implementation that replaces HotSpot. It's available in an Open Edition (GPLv2 + Classpath Exception) and a Certified Edition under an IBM license, with IBM Runtimes for Business as the commercial support offering. Quarterly updates cover LTS versions and the current release.
 
-The second argument for Semeru is platform coverage: it supports IBM Z, Power, AIX, and z/OS-related environments. For organizations on those platforms, Semeru is the natural fit. For everyone else considering Semeru, the main draw is OpenJ9 itself --- the JVM optimizations are what make it distinct. But it also means it is not the most vanilla choice on the list as it might be hard to migrate to another JVM implementation in the future.
+The second argument for Semeru is platform coverage: it supports IBM Z, Power, AIX, and z/OS-related environments. For organizations on those platforms, Semeru is the natural fit. For everyone else considering Semeru, the main draw is OpenJ9 itself — the JVM optimizations are what make it distinct. But it also means it is not the most vanilla choice on the list as it might be hard to migrate to another JVM implementation in the future.
 
 ## Red Hat OpenJDK
 
-[Red Hat's OpenJDK build](https://developers.redhat.com/products/openjdk "Red Hat's OpenJDK build") is designed for the Red Hat stack: RHEL, OpenShift, and supported middleware environments. It ships with a RHEL subscription, covers all LTS versions, and runs on Windows and RHEL only --- no macOS, no other Linux distributions.
+[Red Hat's OpenJDK build](https://developers.redhat.com/products/openjdk "Red Hat's OpenJDK build") is designed for the Red Hat stack: RHEL, OpenShift, and supported middleware environments. It ships with a RHEL subscription, covers all LTS versions, and runs on Windows and RHEL only — no macOS, no other Linux distributions.
 
 JDK support lifecycle depends on RHEL: if a RHEL version reaches end of support before the JDK version it ships with, JDK support ends with RHEL.
 

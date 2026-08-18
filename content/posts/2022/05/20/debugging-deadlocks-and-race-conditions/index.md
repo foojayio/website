@@ -32,7 +32,7 @@ In the last two ducklings, I talked about threading issues:
 >
 > Threading issues are scary at first, but they're actually very easy to find \& fix.[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/fB22yZo0DF](https://t.co/fB22yZo0DF)
 >
-> --- Shai Almog (@debugagent) [May 3, 2022](https://twitter.com/debugagent/status/1521486750505488386?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [May 3, 2022](https://twitter.com/debugagent/status/1521486750505488386?ref_src=twsrc%5Etfw)
 
 Today we'll discuss the process of debugging threading issues, dealing with deadlocks and race conditions in the debugger.
 

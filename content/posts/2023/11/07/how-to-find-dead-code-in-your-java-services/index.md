@@ -27,7 +27,7 @@ There's an interesting relation between the problem of finding dead code and ano
 
 At Picnic, we use one of the tools that almost every Java developer has, directly or indirectly, interacted with: the [Java Code Coverage Library](https://www.jacoco.org/jacoco/) (JaCoCo). This tool is mostly used to report code coverage on automated test suites to gain more confidence that a test covers what it should. It collects coverage metrics by instrumenting the bytecode through a Java agent when the Java class loader loads the classes. In a future blog post, we will further dive into how it works under the hood.{#9155}
 
-In principle, a Java agent can run in any environment, not just during development --- as is typically the case with JaCoCo. Why not run it also in production to see actual code coverage?{#71a0}
+In principle, a Java agent can run in any environment, not just during development — as is typically the case with JaCoCo. Why not run it also in production to see actual code coverage?{#71a0}
 
 Carlos Becker^[1](#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0){#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0-link}^ and Markus Harrer^[2](#90d3d782-1949-4ee2-adf5-14f96c7f0444){#90d3d782-1949-4ee2-adf5-14f96c7f0444-link}^ also brought this up before. We wanted to follow in their footsteps but instead fetch the coverage at any time in an ephemeral context, that is, Kubernetes. So let's get started!{#a909}
 
@@ -159,7 +159,7 @@ Another example: take this deserializer with some logic for handling legacy data
 
 As you can see, this analysis can help you get a clearer picture of what code is still used in your projects. It's important to note, however, that this does not mean we can now delete all code without coverage. Some logic might be used in seasonal cases, demos, or emergencies. A careful look is still desired, but this helps us get a little more confident in what we may delete.{#4a3d}
 
-To see whether this is the case, we usually perform code searches to look at the age and commits for surrounding code. We identify whether code is exceptionally new --- maybe this is a feature in development or old and forgotten. Finding connected API endpoints and their documentation might also help to get an understanding of why this code is around. We also search our ticket and communication systems for any references and, of course, simply ask around.{#46c5}
+To see whether this is the case, we usually perform code searches to look at the age and commits for surrounding code. We identify whether code is exceptionally new — maybe this is a feature in development or old and forgotten. Finding connected API endpoints and their documentation might also help to get an understanding of why this code is around. We also search our ticket and communication systems for any references and, of course, simply ask around.{#46c5}
 
 Every time we introduce new tooling in production environments, we should understand its effect on application performance. This holds especially when instrumenting our code, as this can add quite some overhead in executing instructions. To understand its performance impact, we first ran it on staging environments to find any immediate problems with resource usage. This allowed us to tweak the settings accordingly.{#ad9a}
 

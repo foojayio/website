@@ -26,9 +26,9 @@ frozen: false
 
 Imagine managing your Jakarta EE applications not just with Maven goals, but by asking natural questions.
 
-With the [experimental AI Agent](http:/https://docs.payara.fish/community/docs/6.2025.5/Technical%20Documentation/Ecosystem/Project%20Management%20Tools/Maven%20Plugin/Payara%20Server%20Maven%20Plugin.html#ai-agent/ "experimental AI Agent") built into the Payara Server Community's Maven Plugin, you can now query server internals and perform admin tasks using plain English --- directly from the same terminal where you build and deploy your applications.
+With the [experimental AI Agent](http:/https://docs.payara.fish/community/docs/6.2025.5/Technical%20Documentation/Ecosystem/Project%20Management%20Tools/Maven%20Plugin/Payara%20Server%20Maven%20Plugin.html#ai-agent/ "experimental AI Agent") built into the Payara Server Community's Maven Plugin, you can now query server internals and perform admin tasks using plain English — directly from the same terminal where you build and deploy your applications.
 
-Thanks to this integration, developers can inspect, query and even execute server commands using natural language. It's a powerful and intuitive way to interact with Payara Server --- no need to remember long command syntax or dig through documentation.
+Thanks to this integration, developers can inspect, query and even execute server commands using natural language. It's a powerful and intuitive way to interact with Payara Server — no need to remember long command syntax or dig through documentation.
 
 In this post, I'll walk you through how it works, with real examples that show just how seamless the AI-powered CLI experience can be.
 
@@ -151,7 +151,7 @@ The Payara Server Maven Plugin already simplified the Jakarta EE development lif
 
 ### Want to see this in action?
 
-We're hosting a free, 45-minute webinar where we'll demo the AI Agent in the Payara Server Community Maven Plugin. You'll discover how to query server metrics, manage JDBC and JMS resources, and run diagnostics in plain English --- all from your terminal. This session is designed for the community: experimental, fun, and a glimpse into how AI can make Jakarta EE development more intuitive. [Register here to join the webinar (or watch on demand after the date)](https://www.crowdcast.io/c/ai-powered-payara-server-with-maven "Register here to join the webinar (or watch on demand after the date)")!
+We're hosting a free, 45-minute webinar where we'll demo the AI Agent in the Payara Server Community Maven Plugin. You'll discover how to query server metrics, manage JDBC and JMS resources, and run diagnostics in plain English — all from your terminal. This session is designed for the community: experimental, fun, and a glimpse into how AI can make Jakarta EE development more intuitive. [Register here to join the webinar (or watch on demand after the date)](https://www.crowdcast.io/c/ai-powered-payara-server-with-maven "Register here to join the webinar (or watch on demand after the date)")!
 
 ![webinar promo image: Smarter Jakarta EE Management: AI-Powered Payara Server with Maven](Gaurav-Webinar-AI-September-2-700x394.jpg)
 

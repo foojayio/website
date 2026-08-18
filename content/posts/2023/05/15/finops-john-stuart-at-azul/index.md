@@ -31,7 +31,7 @@ frozen: false
 
 *Engineering then must defend itself or explain how a product matches to that spend. What's missing here is teams working together with a common understanding of cloud spending so engineering has visibility into the costs, and agreed upon goals. There's a statement I heard that rings true when addressing cloud spend -- finance looks for adjustments in months while engineering plans in quarters. This is the disconnect.*
 > "The FinOps Foundation is a terrific group of individuals collaborating to share best practices for managing cloud spend. We helped develop a standard FinOps framework and maturity model."
-> --- John Stuart, Azul
+> — John Stuart, Azul
 
 ## **How have you applied the FinOps framework at Azul?**
 
@@ -51,7 +51,7 @@ frozen: false
 
 *Being over-provisioned like that is incredibly expensive. Offloading that work to CNC allows you to do things like setting higher CPU utilization limits for horizontal scaling. And because the JIT optimizations delivered by CNC are more powerful, that means you can get more traffic through each JVM and need to provision less instances overall to meet your demand.*
 > "Wouldn't it be great to use a Java Virtual Machine (JVM) to be 30% more performant? That is a win for both Engineering and Finance. Azul Platform Prime delivers higher throughput with less compute and better response times, delivering a better end user experience."
-> --- John Stuart, Azul
+> — John Stuart, Azul
 
 ## **What is your best advice on the most important KPIs and metrics that companies need to measure to control costs? Can you give examples**
 

@@ -64,7 +64,7 @@ Therefore, when high availability is crucial for your application, reading from 
 
 ## Properly increasing read capacity
 
-To safely and reliably increase read capacity without sacrificing availability, the best approach is to scale your cluster---either vertically (scaling up) or horizontally (scaling out).
+To safely and reliably increase read capacity without sacrificing availability, the best approach is to scale your cluster—either vertically (scaling up) or horizontally (scaling out).
 
 ### Vertical scaling (scale up)
 
@@ -122,6 +122,6 @@ The second point is the same as in the read-only case, so there's no need for fu
 
 ## Conclusion
 
-While distributing read operations across secondary MongoDB nodes to boost capacity might sound appealing, it can inadvertently impact availability---something that's crucial for systems like our national financial payment network. Such an approach could lead to cascading failures during outages, which we definitely want to avoid!   
+While distributing read operations across secondary MongoDB nodes to boost capacity might sound appealing, it can inadvertently impact availability—something that's crucial for systems like our national financial payment network. Such an approach could lead to cascading failures during outages, which we definitely want to avoid!   
 
 Instead, focus on scaling strategies. Consider vertical scaling for immediate performance enhancements, or horizontal sharding to ensure consistent throughput and address hotspot concerns. While read-only and analytical nodes offer certain benefits, they don't fully address the need for high availability and read capacity.

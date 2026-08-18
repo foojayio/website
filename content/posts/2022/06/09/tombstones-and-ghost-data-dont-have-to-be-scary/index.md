@@ -34,7 +34,7 @@ Of course, the best way to deal with tombstones is to not create them in the fir
 
 ## No DELETEs
 
-The simplest way to avoid tombstones is to never do the one operation guaranteed to create them --- deleting data. Of course, this isn't always possible and will definitely be applicable by use case. But by and large, if you have a data model which doesn't require data to be deleted on a regular basis, you'll avoid most of the pain that leads to tombstones right there.{#9069}
+The simplest way to avoid tombstones is to never do the one operation guaranteed to create them — deleting data. Of course, this isn't always possible and will definitely be applicable by use case. But by and large, if you have a data model which doesn't require data to be deleted on a regular basis, you'll avoid most of the pain that leads to tombstones right there.{#9069}
 
 ## No writing NULL values
 
@@ -117,6 +117,6 @@ Curious to learn more about (or play with) Cassandra itself? We recommend trying
 4. [DataStax Java Drivers](https://docs.datastax.com/en/developer/java-driver/index.html) (all versions)
 5. [Basic Rules of Cassandra Data Modeling](https://www.datastax.com/blog/basic-rules-cassandra-data-modeling)
 6. [Collections in Cassandra](https://www.datastax.com/blog/collections-cassandra)
-7. [TWCS Part 1 --- What is it and when should you use it?](https://thelastpickle.com/blog/2016/12/08/TWCS-part1.html) (Dejanovski, 2016)
+7. [TWCS Part 1 — What is it and when should you use it?](https://thelastpickle.com/blog/2016/12/08/TWCS-part1.html) (Dejanovski, 2016)
 8. [Compaction Strategies in Cassandra](https://cassandra.apache.org/doc/latest/cassandra/operating/compaction/index.html)
 9. [About Deletes and Tombstones](https://thelastpickle.com/blog/2016/07/27/about-deletes-and-tombstones.html) (Rodriguez, 2016)

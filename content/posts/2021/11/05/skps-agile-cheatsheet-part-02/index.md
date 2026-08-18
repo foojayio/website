@@ -46,7 +46,7 @@ SKP's Agile Cheatsheet is a three part series of articles focused on daily agile
 
 ![](https://imgur.com/W1EHH41.jpg)  
 
-**Milestone**. An Agile milestone is a specific point in an Agile project that marks a significant stage of development. When you use milestones in Agile projects, there is a higher likelihood of your deliverables being on time --- therefore they are an important feature in project management software. ( Credits: www.wrike.com ) \[Type -- Agile Project Management / Agile Product Management / Agile Development\]
+**Milestone**. An Agile milestone is a specific point in an Agile project that marks a significant stage of development. When you use milestones in Agile projects, there is a higher likelihood of your deliverables being on time — therefore they are an important feature in project management software. ( Credits: www.wrike.com ) \[Type -- Agile Project Management / Agile Product Management / Agile Development\]
 
 **Minimum Viable Product (MVP)** . A Minimum Viable Product is, as Eric Ries said, the "Version of a New Product which allows a team to collect the maximum amount of validated learning about customers with the Least Effort." This validated learning comes in the form of whether your customers will purchase your product. A key premise behind the idea of MVP is that you produce an actual product (which may be no more than a landing page, or a service with an appearance of automation, but which is fully manual behind the scenes) that you can offer to customers and observe their actual behavior with the product or service. Seeing what people do with respect to a product is much more reliable than asking people what they would do. \[Type -- Agile Releases/Product Management\]
 

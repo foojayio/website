@@ -21,13 +21,13 @@ frozen: false
 
 ### **From AI User to AI Pro**
 
-Let's be real, AI coding tools are everywhere now. 🤖 They're no longer some shiny new toy---they're a part of our daily grind as developers, just like our morning coffee. ☕
+Let's be real, AI coding tools are everywhere now. 🤖 They're no longer some shiny new toy—they're a part of our daily grind as developers, just like our morning coffee. ☕
 
 For us Java devs, whether we're wrestling with a giant legacy app or juggling a bunch of microservices, these tools look like a huge win for getting stuff done faster. 🚀
 
 But here's the catch: just coding faster isn't the whole story. If you're not careful, it can actually lead to bigger problems down the road. 🤔
 
-The real goal is to learn how to work with the AI to write code that's actually good---solid, secure, and won't give the next person on your team a headache or your company a serious problem.  
+The real goal is to learn how to work with the AI to write code that's actually good—solid, secure, and won't give the next person on your team a headache or your company a serious problem.  
 
 This means we have to level up from being copy-paste machines and become smart developers who really know how to handle these powerful tools. 💪
 
@@ -114,7 +114,7 @@ public UserDashboardDTO getDashboard(long userId) {
 
 This professional solution is vastly superior. It handles failures gracefully within each asynchronous call using `.exceptionally()`, allowing the dashboard to render with partial data. It enforces timeouts with `.orTimeout()` to protect system resources.
 
-By explaining these choices in the PR---discussing the principles of resilient design and fault tolerance---**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
+By explaining these choices in the PR—discussing the principles of resilient design and fault tolerance---**YOU** demonstrate deep expertise that goes far beyond simply making the code "work." This is how you build a reputation for excellence and drive your career forward.
 
 ### **2. Feed the Beast: Your Project's Context is its Fuel ⛽**
 
@@ -306,7 +306,7 @@ Think of your AI assistant as a super-enthusiastic and brilliant, but slightly m
 
 Our job is to be the diligent cleaner who tidies up afterward. "Stray code" isn't just about unused imports or dead methods; it's about ensuring every single line in our project, including our build files, is there for a reason and comes from a trusted source.
 
-Failing to do this isn't just sloppy---it can be a massive security risk. Modern software development is built on a mountain of dependencies, and AI can inadvertently lead us to pull a malicious one right into our project.
+Failing to do this isn't just sloppy—it can be a massive security risk. Modern software development is built on a mountain of dependencies, and AI can inadvertently lead us to pull a malicious one right into our project.
 
 #### **Technical Example: The AI's "Helpful" but Malicious Dependency**
 

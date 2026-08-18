@@ -118,7 +118,7 @@ try (var scope = StructuredTaskScope.open()) {
 }
 ```
 
-The zero-argument open() returns a scope that waits for all subtasks to succeed or any to fail---the default "all-or-fail" policy. If you need something fancier, call the overloaded open(joiner) variant and supply a custom completion policy via a Joiner (more on that in a minute). Why the factory? It packages sensible defaults and, critically, gives the implementation room to evolve without breaking your code. I find this change beneficial: using a single keyword is more concise, and it reduces potential complications.
+The zero-argument open() returns a scope that waits for all subtasks to succeed or any to fail—the default "all-or-fail" policy. If you need something fancier, call the overloaded open(joiner) variant and supply a custom completion policy via a Joiner (more on that in a minute). Why the factory? It packages sensible defaults and, critically, gives the implementation room to evolve without breaking your code. I find this change beneficial: using a single keyword is more concise, and it reduces potential complications.
 
 Now let's rewrite the previous example with the new API:
 

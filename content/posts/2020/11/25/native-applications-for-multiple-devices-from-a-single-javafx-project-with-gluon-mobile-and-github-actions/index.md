@@ -276,4 +276,4 @@ Really not a single code change is needed to run on different platforms. As you 
 
 Gluon is also working on a sample using this work-flow, which is available on [github.com/gluonhq/hello-gluon-ci](https://github.com/gluonhq/hello-gluon-ci).
 
-**Note:** Used with permission and thanks --- originally published on [webtechie.be](https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/).
+**Note:** Used with permission and thanks — originally published on [webtechie.be](https://webtechie.be/post/2020-11-24-javafx-gluon-mobile-github-actions/).

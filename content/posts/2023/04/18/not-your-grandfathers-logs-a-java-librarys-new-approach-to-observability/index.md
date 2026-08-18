@@ -159,8 +159,8 @@ This library is made possible by the work of @jonatan_ivanov, Tommy Ludwig (@Tom
 
 Working with Micrometer, are several additions to the library that would make it even more invaluable for developers:
 
-* Easier codeless configuration --- Specify exporter and other settings via environment variables.
-* More sophisticated parameter extraction policies --- automatically capture array sizes, enum values, or JSON lengths as a part of each request.
+* Easier codeless configuration — Specify exporter and other settings via environment variables.
+* More sophisticated parameter extraction policies — automatically capture array sizes, enum values, or JSON lengths as a part of each request.
 * Better logging instrumentation- implicitly add the TraceId and additional tags to your logs/structure logs provider.
 
 That said, Micrometer is a mature, production-ready framework that can have an amazing effect on the observability of your code base and your ability as developer to be more data-driven in design and code decisions.

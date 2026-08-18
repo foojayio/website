@@ -143,4 +143,4 @@ $ sudo hdparm -Tt /dev/mmcblk0       # For the SD card
 
 Switching from SD to USB Boot is **very easy if you have a Flash Drive which is supported** and the **read speed is a lot higher** ! Combined with the **higher reliability**, this makes the switch a go go go... 😉
 
-**Note:** Used with permission and thanks --- originally written and published on [Frank Delporte](https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/)'s blog.
+**Note:** Used with permission and thanks — originally written and published on [Frank Delporte](https://webtechie.be/post/2020-09-29-64bit-raspbianos-on-raspberrypi4-with-usbboot/)'s blog.

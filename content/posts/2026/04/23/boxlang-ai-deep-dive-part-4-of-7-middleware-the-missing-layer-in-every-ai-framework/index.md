@@ -33,11 +33,11 @@ And before testing, there's production: how do you add logging without touching 
 
 ## 🏗️ The Middleware Architecture
 
-Middleware sits between the agent's `run()` call and the actual LLM invocations and tool calls. Both `AiModel` and `AiAgent` support it. When an agent runs, its middleware is prepended to the model's middleware --- agent hooks fire first, then model hooks.
+Middleware sits between the agent's `run()` call and the actual LLM invocations and tool calls. Both `AiModel` and `AiAgent` support it. When an agent runs, its middleware is prepended to the model's middleware — agent hooks fire first, then model hooks.
 
 There are two hook styles:
 
-**Sequential hooks** --- fire in registration order (or reverse for `after*` hooks). Return `AiMiddlewareResult` to control flow.
+**Sequential hooks** — fire in registration order (or reverse for `after*` hooks). Return `AiMiddlewareResult` to control flow.
 
 |            Hook             |            Fires            | Direction |
 |-----------------------------|-----------------------------|-----------|
@@ -49,7 +49,7 @@ There are two hook styles:
 | `afterToolCall( context )`  | After each tool returns     | Reverse   |
 | `onError( context )`        | When any hook throws        | ---       |
 
-**Wrap hooks** --- nested closures. Call `handler()` to proceed, intercept the result.
+**Wrap hooks** — nested closures. Call `handler()` to proceed, intercept the result.
 
 |                Hook                |             Purpose             |
 |------------------------------------|---------------------------------|
@@ -95,9 +95,9 @@ result.isSuspended()  // waiting for async input (terminal)
 result.isTerminal()   // cancelled OR rejected OR suspended
 ```
 
-## 📝 LoggingMiddleware --- Instant Observability
+## 📝 LoggingMiddleware — Instant Observability
 
-Drop this in and every LLM call, tool invocation, agent run start/end, and error gets logged to BoxLang's `ai` log file and optionally to the console --- with zero code changes to your agents:
+Drop this in and every LLM call, tool invocation, agent run start/end, and error gets logged to BoxLang's `ai` log file and optionally to the console — with zero code changes to your agents:
 
 ```java
 agent = aiAgent(
@@ -142,7 +142,7 @@ Options:
 
 ## 🔁 `RetryMiddleware` --- Resilience Without Boilerplate
 
-LLM providers have rate limits. Networks have transient failures. `RetryMiddleware` wraps both LLM calls and tool calls with exponential backoff --- transparently, without any code in your tools or agents:
+LLM providers have rate limits. Networks have transient failures. `RetryMiddleware` wraps both LLM calls and tool calls with exponential backoff — transparently, without any code in your tools or agents:
 
 ```java
 agent = aiAgent(
@@ -156,7 +156,7 @@ agent = aiAgent(
 )
 ```
 
-It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches exceptions, sleeps, and retries up to `maxRetries` times. Non-retryable exceptions (like `InvalidInput` or `MaxInteractionsExceeded`) surface immediately:
+It uses `wrapLLMCall` and `wrapToolCall` hooks — the outer wrap catches exceptions, sleeps, and retries up to `maxRetries` times. Non-retryable exceptions (like `InvalidInput` or `MaxInteractionsExceeded`) surface immediately:
 
 |       Option        |                 Default                  |          Description           |
 |---------------------|------------------------------------------|--------------------------------|
@@ -168,7 +168,7 @@ It uses `wrapLLMCall` and `wrapToolCall` hooks --- the outer wrap catches except
 
 ## 🛡️ `GuardrailMiddleware` --- Defense in Depth
 
-Block dangerous tools entirely, or reject tool calls whose arguments match regex patterns --- before they ever reach the tool:
+Block dangerous tools entirely, or reject tool calls whose arguments match regex patterns — before they ever reach the tool:
 
 ```java
 guardrail = new GuardrailMiddleware(
@@ -214,7 +214,7 @@ AiMiddlewareResult function beforeToolCall( required struct context ) {
 
 This middleware intercepts specific tool calls and requires a human to approve, reject, or edit before execution proceeds. Two modes, two very different use cases.
 
-**CLI mode** --- blocks on stdin. Perfect for local scripts, automation tools, and development workflows:
+**CLI mode** — blocks on stdin. Perfect for local scripts, automation tools, and development workflows:
 
 ```java
 agent = aiAgent(
@@ -239,7 +239,7 @@ When the LLM calls `transferFunds`, the terminal shows:
  Decision:
 ```
 
-**Web mode** --- suspends the run and returns an `AiMiddlewareResult.suspend()`. The calling code checkpoints state and presents the approval request asynchronously --- via email, Slack, a web UI, whatever fits your workflow:
+**Web mode** — suspends the run and returns an `AiMiddlewareResult.suspend()`. The calling code checkpoints state and presents the approval request asynchronously — via email, Slack, a web UI, whatever fits your workflow:
 
 ```java
 agent = aiAgent(
@@ -268,7 +268,7 @@ agent.resume( "approve", session.pendingApproval )
 agent.resume( "edit", session.pendingApproval, { correctedArgs: { quantity: 10 } } )
 ```
 
-The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injected by `AiAgent.resume()`, honours the decision, and either continues, rejects, or patches the tool arguments --- then clears the context so subsequent tool calls in the same run go through normal HITL flow again.
+The resume path in `HumanInTheLoopMiddleware` reads the `_resumeContext` injected by `AiAgent.resume()`, honours the decision, and either continues, rejects, or patches the tool arguments — then clears the context so subsequent tool calls in the same run go through normal HITL flow again.
 
 |          Option          | Default |       Description        |
 |--------------------------|---------|--------------------------|
@@ -283,7 +283,7 @@ This is the one that changes how you think about testing AI agents.
 
 The problem: agent behaviour is non-deterministic. The LLM might phrase something differently each run. The tool call order might vary. Writing assertions against agent output directly is fragile. And running tests against live providers is slow, expensive, and requires network access in CI.
 
-`FlightRecorderMiddleware` solves this with a record/replay approach. Record a real run once --- capturing every LLM round-trip and tool invocation to a JSON fixture file. Then replay that fixture in CI without any live calls.
+`FlightRecorderMiddleware` solves this with a record/replay approach. Record a real run once — capturing every LLM round-trip and tool invocation to a JSON fixture file. Then replay that fixture in CI without any live calls.
 
 **Three modes:**
 
@@ -318,7 +318,7 @@ agent = aiAgent(
 )
 ```
 
-**The fixture format** --- human-readable JSON that you can inspect, edit, and commit to version control:
+**The fixture format** — human-readable JSON that you can inspect, edit, and commit to version control:
 
 ```java
 {
@@ -381,7 +381,7 @@ new FlightRecorderMiddleware( mode: "replay", strict: false )
 
 ## 🔢 `MaxToolCallsMiddleware` --- Runaway Agent Prevention
 
-Simple but essential in production --- caps the total number of tool invocations per agent run:
+Simple but essential in production — caps the total number of tool invocations per agent run:
 
 ```java
 agent = aiAgent(
@@ -396,7 +396,7 @@ The counter resets at the start of each new `run()` call. If the cap is hit mid-
 
 Two approaches, depending on how much structure you want.
 
-**Struct of closures** --- lightweight, no class needed:
+**Struct of closures** — lightweight, no class needed:
 
 ```java
 agent.withMiddleware( {
@@ -423,7 +423,7 @@ agent.withMiddleware( {
 
 Structs are automatically wrapped in `StructMiddlewareAdapter` --- you only define the hooks you need.
 
-**Class-based** --- reusable, configurable, independently testable:
+**Class-based** — reusable, configurable, independently testable:
 
 ```java
 import bxModules.bxai.models.middleware.BaseAiMiddleware;
@@ -454,7 +454,7 @@ class extends="BaseAiMiddleware" {
 
 ## 🚀 Composing Middleware
 
-Middleware stacks compose cleanly --- just pass an array:
+Middleware stacks compose cleanly — just pass an array:
 
 ```java
 agent = aiAgent(
@@ -482,7 +482,7 @@ In production, logging + retry + guardrails is the baseline stack. Add `MaxToolC
 
 ## What's Next
 
-In **Part 5** , we close the series with a deep dive into BoxLang AI's provider architecture --- how the capability system works, how `BaseService` and `OpenAIService` are structured, how to add custom providers, and a tour of the full 17-provider ecosystem.
+In **Part 5** , we close the series with a deep dive into BoxLang AI's provider architecture — how the capability system works, how `BaseService` and `OpenAIService` are structured, how to add custom providers, and a tour of the full 17-provider ecosystem.
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ "Full Documentation") 📦Install Today: `install-bx-module bx-ai` 🫶[Professional Support](https://ai.ortussolutions.com/ "Professional Support")
 

@@ -31,7 +31,7 @@ To achieve optimal flight performance, the pilot needs to adjust or recalibrate 
 
 ## Why GC Tuning Matters on Arm
 
-One of the most important controls in your metaphorical performance cockpit is Garbage Collection (GC). The Arm Neoverse architecture---the backbone of many Arm-based cloud instances---is known for its scalable core counts and can leverage those cores to deliver strong GC performance, though it often requires some fine-tuning to reach peak efficiency.
+One of the most important controls in your metaphorical performance cockpit is Garbage Collection (GC). The Arm Neoverse architecture—the backbone of many Arm-based cloud instances—is known for its scalable core counts and can leverage those cores to deliver strong GC performance, though it often requires some fine-tuning to reach peak efficiency.
 
 Let's explore the key settings you should adjust to unlock its full potential.
 
@@ -55,7 +55,7 @@ For most server workloads, a safe starting point is the `G1 GC`. It balances thr
 
 Heap size has a major impact on GC performance. If it's too small, collections happen too frequently; if it's too large, pause times can become excessive. How much of each your application can tolerate depends entirely on your specific use case.
 
-Thankfully, the Java community anticipated this trade-off and provided tuning options like -`XX:MaxGCPauseMillis`, allowing the JVM to handle the optimization---much like a pilot setting a cruise altitude and letting the autopilot take over.
+Thankfully, the Java community anticipated this trade-off and provided tuning options like -`XX:MaxGCPauseMillis`, allowing the JVM to handle the optimization—much like a pilot setting a cruise altitude and letting the autopilot take over.
 
 ### Adaptive Heap Sizing
 
@@ -71,7 +71,7 @@ To guide your tuning, make use of diagnostic tools: enable GC logging with `-Xlo
 
 ## Developer Education for the Java Community
 
-Of course, theory only goes so far---real-world experience is where the learning truly happens. That's why I've put together a simple tutorial to help developers experiment with various GC tuning options using a basic Java example. You can [follow along here for a hands-on walkthrough](https://learn.arm.com/learning-paths/servers-and-cloud-computing/java-gc-tuning/).
+Of course, theory only goes so far—real-world experience is where the learning truly happens. That's why I've put together a simple tutorial to help developers experiment with various GC tuning options using a basic Java example. You can [follow along here for a hands-on walkthrough](https://learn.arm.com/learning-paths/servers-and-cloud-computing/java-gc-tuning/).
 
 Just like a pilot's cockpit, the Java runtime offers a wide array of controls, and the garbage collector is only one of them. We're always interested in learning which areas of performance tuning developers find most challenging. If you have ideas for future Java tutorials, feel free to share them with us [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions/categories/ideas-for-new-learning-paths).
 

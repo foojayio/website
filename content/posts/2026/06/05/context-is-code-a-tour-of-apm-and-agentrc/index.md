@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-If you've shipped an AI agent into a real codebase in the last twelve months, you've felt this: every agent, every developer, every machine --- different setup. A README that says "install these extensions." A `copilot-instructions.md` somebody copy-pasted from another repo. MCP server configs in three different files. The same skills duplicated for Copilot, Claude, Cursor, and Codex.  
+If you've shipped an AI agent into a real codebase in the last twelve months, you've felt this: every agent, every developer, every machine — different setup. A README that says "install these extensions." A `copilot-instructions.md` somebody copy-pasted from another repo. MCP server configs in three different files. The same skills duplicated for Copilot, Claude, Cursor, and Codex.  
 
 No version pinning.  
 
@@ -39,13 +39,13 @@ Most teams' agent setup today is a tangle of hand-rolled files:
 
 The results:
 
-* **"It works on my agent" 🤷** --- the AI-era version of works-on-my-machine.
+* **"It works on my agent" 🤷** — the AI-era version of works-on-my-machine.
 * **Drift between developers** even within the same repo.
 * **Silent context rot** as the code evolves but the instructions don't.
 * **No way to ship agent context as a versioned artifact.**
-* **No security boundary around prompts** --- and a prompt is a program for an LLM.
+* **No security boundary around prompts** — and a prompt is a program for an LLM.
 
-If we treat prompts as text, we'll keep ignoring them in supply-chain reviews. If we treat them as code versioned, hashed, audited --- we get a real perimeter around what agents do.
+If we treat prompts as text, we'll keep ignoring them in supply-chain reviews. If we treat them as code versioned, hashed, audited — we get a real perimeter around what agents do.
 
 ## 2. The idea: what if agent context had a `package.json`?
 
@@ -79,11 +79,11 @@ $ apm install
 
 Three details worth highlighting:
 
-1. **Pinning** (`#v2.1`, `#v1.0.0`) --- reproducibility, the same way `package-lock.json`  
+1. **Pinning** (`#v2.1`, `#v1.0.0`) — reproducibility, the same way `package-lock.json`  
    gives it to you.
-2. **MCP servers live in the same file** --- one place to declare them, one policy to  
+2. **MCP servers live in the same file** — one place to declare them, one policy to  
    gate them.
-3. **Git is the registry** --- any git URL works. GitHub, GitLab, Azure DevOps,  
+3. **Git is the registry** — any git URL works. GitHub, GitLab, Azure DevOps,  
    Bitbucket, internal Gitea or Gogs. No central marketplace required (though  
    curated marketplaces do exist).
 
@@ -93,7 +93,7 @@ APM makes three headline guarantees, everything else flows from these.
 
 ### Portable by manifest
 
-One `apm.yml` describes every primitive --- instructions, skills, prompts, agents,  
+One `apm.yml` describes every primitive — instructions, skills, prompts, agents,  
 
 hooks, plugins, MCP servers and `apm install` reproduces the same setup across  
 
@@ -181,7 +181,7 @@ The honest pitch on security is this: agent context *is* executable in effect, a
 
 * **Hidden Unicode scanning.** Every install blocks bidi and zero-width characters that can hijack agent behaviour. This is a real, demonstrated prompt-injection vector.
 * **Lockfile integrity.** `apm.lock.yaml` records SHA-256 per file. Bundles embed it too, so installing a packaged bundle rehashes every file before writing.
-* **MCP trust gating.** Transitive MCP servers don't sneak in --- you re-declare or explicitly trust them.
+* **MCP trust gating.** Transitive MCP servers don't sneak in — you re-declare or explicitly trust them.
 * **`apm audit`** for on-demand scans, CI-friendly with SARIF output.
 * **Drift detection** so generated files can't diverge silently from the manifest.
 * **CI/CD ready** via the official `microsoft/apm-action` for GitHub Actions.
@@ -274,7 +274,7 @@ Six steps. Most teams should do steps 1--3 this week, 4--6 over the next quarter
 2. **Measure your repo.** `npx github:microsoft/agentrc readiness` gives you a maturity score and a list of missing context to add first.
 3. **Pin what you have.** Move your existing `copilot-instructions.md` and skills into an `apm.yml`. Commit the lockfile.
 4. **Share across the team.** Extract the org-wide bits into a shared APM package. Teammates run `apm install`.
-5. **Gate in CI.** Add `apm-action` + `agentrc readiness --fail-level 3` to PR checks. This is the step that prevents backsliding --- don't skip it.
+5. **Gate in CI.** Add `apm-action` + `agentrc readiness --fail-level 3` to PR checks. This is the step that prevents backsliding — don't skip it.
 6. **Govern.** Roll out an `apm-policy.yml` at the org level. Tighten as you learn.
 
 ## 13. Three things to take away

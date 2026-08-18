@@ -23,7 +23,7 @@ frozen: false
 
 The evolution of the Java and Jakarta Enterprise ecosystem is converging toward an increasingly simple, efficient, and scalable architecture that improves security, delivers higher performance, and reduces hardware and infrastructure costs.
 
-For years, Kubernetes has been considered the de‑facto standard for modernizing Java applications in a cloud‑native direction. However, Kubernetes is not the only way to achieve scalability, continuous upgrades, and isolation. An alternative approach --- often underestimated --- is to leverage the **hypervisors already included and fully managed by major cloud providers** , using **Unikernel** images based on [**Nanos**](https://nanovms.com).
+For years, Kubernetes has been considered the de‑facto standard for modernizing Java applications in a cloud‑native direction. However, Kubernetes is not the only way to achieve scalability, continuous upgrades, and isolation. An alternative approach — often underestimated — is to leverage the **hypervisors already included and fully managed by major cloud providers** , using **Unikernel** images based on [**Nanos**](https://nanovms.com).
 
 Nanos images are not just an alternative to containers: they are **lighter, faster, more secure, more performant, and more efficient** . Unlike containers, which coexist with a general‑purpose Linux kernel, a Nanos image contains **only what the Java application needs** , allowing the JVM to use **100% of the CPU and RAM** of the VM. The result is a more efficient environment with **higher density** , **less waste** , and **lower operational costs**.
 

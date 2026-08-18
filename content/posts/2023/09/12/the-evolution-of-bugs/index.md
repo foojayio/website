@@ -354,7 +354,7 @@ A race condition emerges when two or more operations must execute in a sequence 
 ### Why are Race Conditions so Tricky?
 
 1. **Sporadic Occurrence**: One of the defining characteristics of race conditions is that they don't always manifest. Depending on a myriad of factors such as system load, available resources, or even sheer randomness, the outcome of the race can differ, leading to a bug that's incredibly hard to reproduce consistently.
-2. **Silent Errors**: Sometimes, race conditions don't crash the system or produce visible errors. Instead, they might introduce minor inconsistencies---data might be slightly off, a log entry might get missed, or a transaction might not get recorded.
+2. **Silent Errors**: Sometimes, race conditions don't crash the system or produce visible errors. Instead, they might introduce minor inconsistencies—data might be slightly off, a log entry might get missed, or a transaction might not get recorded.
 3. **Complex Interdependencies**: Often, race conditions involve multiple parts of a system or even multiple systems. Tracing the interaction that causes the problem can be like finding a needle in a haystack.
 
 {#guarding-against-the-unpredictable}

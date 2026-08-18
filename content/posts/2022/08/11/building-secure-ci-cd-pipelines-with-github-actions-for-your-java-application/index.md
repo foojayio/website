@@ -61,7 +61,7 @@ jobs:
      run: mvn -B package --file pom.xml
 ```
 
-This action will run on every push or pull request on the master branch. It is based on ubuntu and checks out the repository, while using the [setup-java](https://github.com/actions/setup-java) GitHub Action --- with Java 17 and Maven --- to build the Java jar file.
+This action will run on every push or pull request on the master branch. It is based on ubuntu and checks out the repository, while using the [setup-java](https://github.com/actions/setup-java) GitHub Action — with Java 17 and Maven — to build the Java jar file.
 
 If you're familiar with the syntax, this workflow is relatively straightforward, but you can refer to the [GitHub Actions documentation](https://docs.github.com/en/actions) for a complete overview of the possibilities.
 
@@ -75,7 +75,7 @@ Begin by logging into your Snyk account, [creating one for free](https://app.sny
 
 You can use the Snyk CLI to automatically run security scans inside your current build.
 
-Follow the steps described below --- including the few extra steps after`Build with Maven` --- to get started.
+Follow the steps described below — including the few extra steps after`Build with Maven` --- to get started.
 
 ```
  - name: Set up Node 14
@@ -105,7 +105,7 @@ The benefit of this approach is that you only have to compile and build your app
 
 Snyk created a set of GitHub Actions to check for vulnerabilities in your projects. The required action depends on your language or build tool. For example, we'll use the [maven-based GitHub Action](https://github.com/snyk/actions/tree/master/maven) shown below for our Java project.
 
-The predefined actions ensure you have the correct prerequisites to build your application and include the latest CLI version to scan your code. Even though you may rebuild your applications several times, these actions can run individually and in parallel --- a considerable advantage of this approach..
+The predefined actions ensure you have the correct prerequisites to build your application and include the latest CLI version to scan your code. Even though you may rebuild your applications several times, these actions can run individually and in parallel — a considerable advantage of this approach..
 
 Let's start with scanning our dependencies. We already have a Snyk account, and our API key is stored as a secret called `SNYK_TOKEN`. So, instead of creating an extra step in the build job, create a new job called `opensource-security`.
 
@@ -142,7 +142,7 @@ Notice that all three jobs will run in parallel, which is, in many cases, more e
 
 ## Adding secure continuous delivery to your GitHub CI/CD
 
-Now, let's discuss the deployment --- or delivery --- part of your GitHub CI/CD. After building and testing are completed, it's time to publish the package to GitHub. To establish this, we'll use the Maven release plugin in our Java project
+Now, let's discuss the deployment — or delivery — part of your GitHub CI/CD. After building and testing are completed, it's time to publish the package to GitHub. To establish this, we'll use the Maven release plugin in our Java project
 
 Since we only want to release the package when the build job and both security jobs are successfully finished, we'll add a `needs` property with a list of prerequisite jobs for release. This way we can ensure that our package isn't deployed before it's fully built and secure.
 
@@ -200,7 +200,7 @@ In addition to scanning during development, we can use Snyk to monitor dependenc
          command: monitor
 ```
 
-This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using --- and ensure that our published Java project remains vulnerability free.
+This will send the dependency tree, which is static after release, over to Snyk for monitoring. We can now view our project in the Snyk UI, and get automatic notifications if a new vulnerability is found for any of the dependencies we're using — and ensure that our published Java project remains vulnerability free.
 ![](https://snyk.io/wp-content/uploads/blog-github-actions-snyk-ui-1240x149.jpg)
 
 ## Integrating security in your GitHub Actions

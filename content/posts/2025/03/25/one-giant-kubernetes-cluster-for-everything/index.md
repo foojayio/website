@@ -44,7 +44,7 @@ For example, regarding metrics, you'd set up a single Prometheus instance, poten
 
 Service-to-service communication inside a single cluster is straightforward. Point to `..svc.cluster.local` and be done with it. Even better, you only need the service name part inside the same namespace.
 
-You'll need a tool to help you with inter-cluster communication, from the simplicity of External DNS with LoadBalancer to the complexity of a full-fledged solution like Istio---both ends of the spectrum mandate time and operation costs.
+You'll need a tool to help you with inter-cluster communication, from the simplicity of External DNS with LoadBalancer to the complexity of a full-fledged solution like Istio—both ends of the spectrum mandate time and operation costs.
 
 ### Simplified governance
 
@@ -120,13 +120,13 @@ Let's review each downside of a giant cluster and how vCluster handles it.
 
 ## But I need different clusters!
 
-While a single giant cluster provides compelling advantages, there are contexts in which a multi-cluster approach is justified. The most common reason is geographic distribution---specific applications require clusters in multiple regions to meet compliance requirements, reduce latency, or provide disaster recovery. For example, companies operating under GDPR or financial regulations may need strict data residency enforcement, which requires region-specific clusters. Similarly, organizations with stringent security postures may enforce complete isolation between environments or business units, making separate clusters a hard requirement.
+While a single giant cluster provides compelling advantages, there are contexts in which a multi-cluster approach is justified. The most common reason is geographic distribution—specific applications require clusters in multiple regions to meet compliance requirements, reduce latency, or provide disaster recovery. For example, companies operating under GDPR or financial regulations may need strict data residency enforcement, which requires region-specific clusters. Similarly, organizations with stringent security postures may enforce complete isolation between environments or business units, making separate clusters a hard requirement.
 
 However, even in these cases, vCluster remains relevant. It allows for minimizing the number of physical clusters while still enabling workload separation at a virtual level. Instead of creating a sprawling landscape of Kubernetes clusters, teams can deploy regional virtual clusters within a single host cluster, balancing isolation and operation complexity.
 
 ## Conclusion
 
-Kubernetes cluster topology decisions are critical and long-lasting. While many advocate for a middle-ground approach between a single cluster and many small ones, they rarely specify the exact setup. Instead of guessing how many clusters to create, consolidating everything into a single, well-managed giant cluster makes more sense. The benefits---better resource utilization, lower operational overhead, simplified networking, centralized governance, and cost efficiency---outweigh the downsides.
+Kubernetes cluster topology decisions are critical and long-lasting. While many advocate for a middle-ground approach between a single cluster and many small ones, they rarely specify the exact setup. Instead of guessing how many clusters to create, consolidating everything into a single, well-managed giant cluster makes more sense. The benefits—better resource utilization, lower operational overhead, simplified networking, centralized governance, and cost efficiency—outweigh the downsides.
 
 That said, the traditional downsides of a giant cluster, such as a larger blast radius, multi-tenancy complexities, scalability limits, upgrade challenges, and cluster-wide object constraints, are valid concerns. This is where vCluster changes the game. By using virtual clusters, you retain all the advantages of a single giant cluster while mitigating its worst drawbacks. vCluster isolates workloads, reduces operational risk, scales dynamically, simplifies upgrades, and removes conflicts over cluster-wide objects.
 

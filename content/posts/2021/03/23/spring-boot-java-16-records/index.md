@@ -26,12 +26,12 @@ I have picked Records because they are definitely the most favored feature added
 >
 > Please vote for your favorite Java 16 language feature:
 >
-> --- Mala Gupta (@eMalaGupta) [March 4, 2021](https://twitter.com/eMalaGupta/status/1367274033184575497?ref_src=twsrc%5Etfw)
+> — Mala Gupta (@eMalaGupta) [March 4, 2021](https://twitter.com/eMalaGupta/status/1367274033184575497?ref_src=twsrc%5Etfw)
 
 I also conducted a similar survey, but it was focused on features from Java 8 onwards. The results were not unexpected as Java 8 is still widely used, which is very unfortunate, though, as tons of new features and improvements have been added to newer Java versions. But in terms of features, Java 8 was definitely a game-changer from a developer perspective.
 > Which feature from [@java](https://twitter.com/java?ref_src=twsrc%5Etfw) 8 and onwards do you like the most?[@javarevisited](https://twitter.com/javarevisited?ref_src=twsrc%5Etfw) [@Java_Champions](https://twitter.com/Java_Champions?ref_src=twsrc%5Etfw) [@java_masters](https://twitter.com/java_masters?ref_src=twsrc%5Etfw) [@Oraclejavamag](https://twitter.com/Oraclejavamag?ref_src=twsrc%5Etfw) [@javacodegeeks](https://twitter.com/javacodegeeks?ref_src=twsrc%5Etfw) [@piotr_minkowski](https://twitter.com/piotr_minkowski?ref_src=twsrc%5Etfw) [@vlad_mihalcea](https://twitter.com/vlad_mihalcea?ref_src=twsrc%5Etfw)[#100DaysOfCode](https://twitter.com/hashtag/100DaysOfCode?src=hash&ref_src=twsrc%5Etfw) [#MovedByJava](https://twitter.com/hashtag/MovedByJava?src=hash&ref_src=twsrc%5Etfw) [#100daysofjava](https://twitter.com/hashtag/100daysofjava?src=hash&ref_src=twsrc%5Etfw) [#java](https://twitter.com/hashtag/java?src=hash&ref_src=twsrc%5Etfw)
 >
-> --- Ashish Choudhary 👨🏻‍💻🧔🏻👨‍👩‍👦 (@iASHeeesh) [January 24, 2021](https://twitter.com/iASHeeesh/status/1353207204761899010?ref_src=twsrc%5Etfw)
+> — Ashish Choudhary 👨🏻‍💻🧔🏻👨‍👩‍👦 (@iASHeeesh) [January 24, 2021](https://twitter.com/iASHeeesh/status/1353207204761899010?ref_src=twsrc%5Etfw)
 
 For some more Java and tech-related stuff, follow me on [Twitter](https://twitter.com/iASHeeesh)
 

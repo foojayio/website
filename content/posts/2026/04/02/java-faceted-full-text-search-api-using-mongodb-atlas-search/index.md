@@ -282,7 +282,7 @@ stringFacet: String facet type indexes are used for counting potential exact mat
 
 ### Example search
 
-By combining these fields into a single index we can (all at once!) perform an advanced text search on the caption, filter by any category/categories we want, and collect the facet counts of the categories. For example, this abbreviated search will find images with "frisbee" in the caption and a dog in the picture. We'll use a [compound filter](https://www.mongodb.com/docs/atlas/atlas-search/compound/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) to combine multiple filter clauses in our example query. We will also count the number of potential matches for the animal and sports categories using the [facet](https://www.mongodb.com/docs/atlas/atlas-search/facet/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) Atlas Search collector. The query is quite complex, but don't worry too much about it for now---we'll dive into each part of this query in more detail as we implement it in Java. For the moment, give it a try in Compass, and notice that you can see both the query results and facets all returned together. You can run the example in Compass by clicking on the Aggregations tab in the image collection, and pasting the following JSON into the text view:  
+By combining these fields into a single index we can (all at once!) perform an advanced text search on the caption, filter by any category/categories we want, and collect the facet counts of the categories. For example, this abbreviated search will find images with "frisbee" in the caption and a dog in the picture. We'll use a [compound filter](https://www.mongodb.com/docs/atlas/atlas-search/compound/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) to combine multiple filter clauses in our example query. We will also count the number of potential matches for the animal and sports categories using the [facet](https://www.mongodb.com/docs/atlas/atlas-search/facet/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim) Atlas Search collector. The query is quite complex, but don't worry too much about it for now—we'll dive into each part of this query in more detail as we implement it in Java. For the moment, give it a try in Compass, and notice that you can see both the query results and facets all returned together. You can run the example in Compass by clicking on the Aggregations tab in the image collection, and pasting the following JSON into the text view:  
 ![](Screenshot-2026-03-12-at-1.55.42-PM.png)
 
 ```
@@ -536,7 +536,7 @@ Run the application and you should then be able to load the URLs in the browser:
 And: [](http://localhost:8080/images)<http://localhost:8080/images>  
 ![](Screenshot-2026-03-12-at-1.58.23-PM.png)
 
-There are a few things to notice about the main class implementation: The Mongo connection, database, and collection instances---the first thing we do is establish a connection to MongoDB and typed instances of collection classes which allow us to query the data:
+There are a few things to notice about the main class implementation: The Mongo connection, database, and collection instances—the first thing we do is establish a connection to MongoDB and typed instances of collection classes which allow us to query the data:
 
 ```
        String connectionString = "mongodb://localhost:27017";
@@ -564,7 +564,7 @@ The Category and Image types are the records we created earlier, which represent
        httpServer.start();
 ```
 
-Of course, we could use a framework like Springboot here, but to keep the focus on MongoDB Atlas Search, we'll just use this little basic HTTP server implementation for our project. One of my favourite things about Java's client for MongoDB is that we can easily take advantage of the strength of the type system. Our domain model as defined by the immutable Category record is strongly enforced here in all logic interacting with the database. Whilst our schema in MongoDB is free to evolve, the place we are controlling that evolution is here in our Java code. Any changes to the model will be deliberate and enforced at compile time and runtime in our service. Typically, our client---let's say a browser UI---would also be loosely typed JSON (not enforcing the data model). For me, the service is the right place for such control to be enforced, so our schema evolves with our API. Next, we have our placeholder for the image search:
+Of course, we could use a framework like Springboot here, but to keep the focus on MongoDB Atlas Search, we'll just use this little basic HTTP server implementation for our project. One of my favourite things about Java's client for MongoDB is that we can easily take advantage of the strength of the type system. Our domain model as defined by the immutable Category record is strongly enforced here in all logic interacting with the database. Whilst our schema in MongoDB is free to evolve, the place we are controlling that evolution is here in our Java code. Any changes to the model will be deliberate and enforced at compile time and runtime in our service. Typically, our client—let's say a browser UI—would also be loosely typed JSON (not enforcing the data model). For me, the service is the right place for such control to be enforced, so our schema evolves with our API. Next, we have our placeholder for the image search:
 
 ```
 httpServer.createContext("/images", exchange -> {
@@ -858,7 +858,7 @@ Then, we put together a list of the facets we want to return:
    );
 ```
 
-Here, we are saying that we want all of the fields we've indexed with stringFacet in our Atlas Search index, allowing them to be counted. We're also specifying 10 as the maximum number of buckets to count in. This means we'll get the top 10 results per super category, with their counts. For example, let's say there were 15 animals which had a count for a search on the caption "grass." In that case, we would receive only the top 10 animal counts---the five least significant would be omitted.
+Here, we are saying that we want all of the fields we've indexed with stringFacet in our Atlas Search index, allowing them to be counted. We're also specifying 10 as the maximum number of buckets to count in. This means we'll get the top 10 results per super category, with their counts. For example, let's say there were 15 animals which had a count for a search on the caption "grass." In that case, we would receive only the top 10 animal counts—the five least significant would be omitted.
 
 ### Search
 

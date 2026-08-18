@@ -27,13 +27,13 @@ You can contribute so that FEPCOS-J becomes *Free/Libre and Open-Source Software
 
 ## Introduction
 
-When I was a child, I loved to create things out of building blocks --- this has never changed (Fig. 1). It is a pleasure for me to compose parts into a new whole. This also applies for programming.  
+When I was a child, I loved to create things out of building blocks — this has never changed (Fig. 1). It is a pleasure for me to compose parts into a new whole. This also applies for programming.  
 
 {{< img src="fuchs2023fepcos-j-toy-robots-are-parts-of-current-test-and-development-environment.png" class="aligncenter size-full is-resized" alt="See two toy robots that are constructed out of building blocks. A Raspberry Pi Model 3B that is installed on each robot controls them. The robots run Linux, OpenJDK 17, and FEPCOS-J." width="540" height="432" caption="Fig. 1) Parts of the current test environment for FEPCOS-J: I have built these two toy robots to test and demonstrate the use of FEPCOS-J. The two robots can be used independently of each other. In addition, they can be composed into a swarm. Both each individual robot and the swarm are example systems. FEPCOS-J enables a developer to declaratively program those systems so that they are controllable via an IPv4-network." >}}
 
 I am a computer scientist who has researched and worked in the field of robot sensor networks since 2004. A network I have worked on was based on Java-programmable SunSPOTs (spots). \[[1,2,3](#references)\].
 
-There were up to a hundred spots (the number depended on the experiment) that had to interact and fulfill a common task. The network was a new whole composed of parts --- the spots. In this situation, I considered both the whole and each individual part as a system that I had to program.
+There were up to a hundred spots (the number depended on the experiment) that had to interact and fulfill a common task. The network was a new whole composed of parts — the spots. In this situation, I considered both the whole and each individual part as a system that I had to program.
 
 This abstraction has helped me handle the complexity. In the following years, I have dug deeper into this matter. Among others, FEPCOS-J has arisen in this context. \[[4,5,6](#references)\].
 

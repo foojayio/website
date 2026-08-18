@@ -54,9 +54,9 @@ Clearly, this is harder if you have a centralized single message bus deployment 
 
 Apache Pulsar enables local instances to be located alongside the application containers and database clusters closer to the customer while still replicating all messages to other consumers across the world. This reduces latency and improves performance while simplifying how the service can scale.
 
-The architecture design for Pulsar also splits the compute and storage sides of the message bus, so that storage can be managed independently --- even by a separate service like HDFS or Amazon S3. This means that Pulsar can retain large volumes of data much more cost-effectively than Kafka, which must store all data on expensive local disks attached to the broker nodes.
+The architecture design for Pulsar also splits the compute and storage sides of the message bus, so that storage can be managed independently — even by a separate service like HDFS or Amazon S3. This means that Pulsar can retain large volumes of data much more cost-effectively than Kafka, which must store all data on expensive local disks attached to the broker nodes.
 
-Pulsar's approach to abstracting the storage layer enables *tiered storage*, where data is stored on the storage service that is most cost-effective for its purpose. New events can be stored on Apache BookKeeper nodes for high-performance retrieval, while older data is offloaded to S3. This allows a very cost-effective approach of running the production message bus on a small number of nodes, while the much larger volume of historical data can be kept separately --- while still being available, via the same API, to services that need to process that data.
+Pulsar's approach to abstracting the storage layer enables *tiered storage*, where data is stored on the storage service that is most cost-effective for its purpose. New events can be stored on Apache BookKeeper nodes for high-performance retrieval, while older data is offloaded to S3. This allows a very cost-effective approach of running the production message bus on a small number of nodes, while the much larger volume of historical data can be kept separately — while still being available, via the same API, to services that need to process that data.
 
 ### **The need to be open**
 

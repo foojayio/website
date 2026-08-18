@@ -365,7 +365,7 @@ Here you enter text and hit the enter key to publish the message onto the topic.
 
 ### Step 6: Terminate the Kafka Environment
 
-Now that you reached the end of the quickstart, feel free to tear down the Kafka environment---or continue playing around.
+Now that you reached the end of the quickstart, feel free to tear down the Kafka environment—or continue playing around.
 
 * Stop the producer and consumer clients with Ctrl-C if you haven't done so already.
 * Stop the Kafka broker with Ctrl-C.

@@ -54,7 +54,7 @@ The cluster DemoCluster has a collection called movies in the database sample_mf
 
 To overcome this issue and maintain the cluster efficiently, you have to offload the infrequent or aged data to lower cost storage by the online archive feature and access it through a federated database connection. You can manage online archival at any point in time as per business requirements through [managing archives](https://www.mongodb.com/docs/atlas/online-archive/query-online-archive/).
 
-In your case, you have [loaded a sample dataset](https://www.mongodb.com/docs/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim) from the MongoDB Atlas cluster setup --- one of the databases is sample_mflix --- and there is a collection called movies that has aged, plus the latest data itself. As per the business requirement, the last 10 years of data have been frequently used by customers. Therefore, plan to implement archived data after 10 years from the collection based on the date field.
+In your case, you have [loaded a sample dataset](https://www.mongodb.com/docs/atlas/sample-data/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=atlas-mongodb-foojay&utm_term=tony.kim) from the MongoDB Atlas cluster setup — one of the databases is sample_mflix — and there is a collection called movies that has aged, plus the latest data itself. As per the business requirement, the last 10 years of data have been frequently used by customers. Therefore, plan to implement archived data after 10 years from the collection based on the date field.
 
 To implement the Online Archive feature, you need a basic M10 cluster or above:  
 ![Overview of cluster configuration details on MongoDB Atlas web browser](Screenshot-2026-03-10-at-1.57.52-PM.png)
@@ -175,7 +175,7 @@ Note: Using this connection string, you can view all the databases inside the cl
 
 #### Project cluster overview
 
-As discussed earlier, the main cluster DemoCluster contains the latest data as per the business requirements --- i.e., frequently consumed data. You can access data and perform read and write operations at any time by pointing to live application changes.
+As discussed earlier, the main cluster DemoCluster contains the latest data as per the business requirements — i.e., frequently consumed data. You can access data and perform read and write operations at any time by pointing to live application changes.
 
 *Note: In your case, the latest data refers to anything less than 10 years old.*
 

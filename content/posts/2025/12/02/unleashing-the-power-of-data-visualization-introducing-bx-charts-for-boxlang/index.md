@@ -17,7 +17,7 @@ frozen: false
 
 ![](bx-chart-release-700x467.jpg)
 
-In the world of modern web applications, data is king---but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, transforming complex datasets into intuitive, compelling narratives. Today, we're thrilled to introduce BX-Charts, a game-changing charting module that brings professional-grade data visualization directly into the BoxLang ecosystem. 🌟
+In the world of modern web applications, data is king—but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, transforming complex datasets into intuitive, compelling narratives. Today, we're thrilled to introduce BX-Charts, a game-changing charting module that brings professional-grade data visualization directly into the BoxLang ecosystem. 🌟
 
 ## The Visualization Challenge 🧩
 

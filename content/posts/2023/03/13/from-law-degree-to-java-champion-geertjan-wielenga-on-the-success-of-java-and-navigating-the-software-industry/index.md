@@ -55,7 +55,7 @@ What motivated me is that I got involved in Java, the language and community, wh
 
 ### Bazlur: It's clear that the Java community has played a pivotal role in the language's success, which has been a boon for countless developers looking to build their careers. On that note, I'm curious if you have any enjoyable or memorable stories from your time working in the software industry that you'd be willing to share with us?
 
-**Geertjan**: I think there are two memories that I'll always carry with me, both of which are both code and community-oriented and both which were (and continue to be) quite hard --- bringing NetBeans from Oracle into the ASF and starting the Friends of OpenJDK (Foojay.io) community.
+**Geertjan**: I think there are two memories that I'll always carry with me, both of which are both code and community-oriented and both which were (and continue to be) quite hard — bringing NetBeans from Oracle into the ASF and starting the Friends of OpenJDK (Foojay.io) community.
 
 As [Gil Tene](https://www.linkedin.com/in/giltene/), the CTO of Azul, recently told me: "Easy is overrated." In other words, tasks that are complex are the ones that are most satisfying when they work out well and start going in the right direction.
 
@@ -67,7 +67,7 @@ As [Gil Tene](https://www.linkedin.com/in/giltene/), the CTO of Azul, recently t
 
 I think that's my key learning in the software industry. It's not about going along with technology for some time, then being inspired by something completely different and doing that, and then after that doing something different again.
 
-The Java ecosystem --- from code to community --- is rich enough to sustain and nourish a lifetime's passion, and, in the process, your knowledge and network become so deep and varied that you can turn them over multiple times into each new iteration of yourself and the world you create for yourself around you.
+The Java ecosystem — from code to community — is rich enough to sustain and nourish a lifetime's passion, and, in the process, your knowledge and network become so deep and varied that you can turn them over multiple times into each new iteration of yourself and the world you create for yourself around you.
 > ***Success is not final, and failure is not fatal. It is the courage to continue that counts.***
 > Winston Churchill
 
@@ -77,7 +77,7 @@ The Java ecosystem --- from code to community --- is rich enough to sustain and 
 
 **Geertjan**: Some of the biggest challenges include the fact that there's so much choice in terms of language and technology while there's simultaneously so much churn. I don't envy JavaScript developers who have a new frontend framework "that solves all issues in all other frontend frameworks" every other year or so.
 
-That's what's good about Java --- it is stable, and indeed, though there's a lot of innovation, the basics don't change. Quarkus, Micronaut, and similar frameworks don't seem all that different to me, while the difference between React, Vue, and Angular is enormous. (And even between versions of Angular.)
+That's what's good about Java — it is stable, and indeed, though there's a lot of innovation, the basics don't change. Quarkus, Micronaut, and similar frameworks don't seem all that different to me, while the difference between React, Vue, and Angular is enormous. (And even between versions of Angular.)
 
 That may matter less in the JavaScript landscape, where less durable applications need to be built. In the Java ecosystem, we're building applications that need to last for many years and that need to be robust, so we have a good fit with our language and ecosystem.
 

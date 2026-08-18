@@ -20,11 +20,11 @@ frozen: false
 
 Co-authored by *Slav Babanin*.
 
-[Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/){#https://www-cs-faculty.stanford.edu/~knuth/}, widely recognized as the 'father of the analysis of algorithms,' warned against premature optimization---spending effort on code that appears inefficient but is not on the critical path. He observed that programmers often focus on the wrong 97% of the codebase. Real performance gains come from identifying and optimizing the critical 3%. But, how can you identify the critical 3%? Well, that's where the philosophy of 'never guess, always measure' comes in.
+[Donald Knuth](https://www-cs-faculty.stanford.edu/~knuth/){#https://www-cs-faculty.stanford.edu/~knuth/}, widely recognized as the 'father of the analysis of algorithms,' warned against premature optimization—spending effort on code that appears inefficient but is not on the critical path. He observed that programmers often focus on the wrong 97% of the codebase. Real performance gains come from identifying and optimizing the critical 3%. But, how can you identify the critical 3%? Well, that's where the philosophy of 'never guess, always measure' comes in.
 
 In this blog, we share how the Java developer experience team optimized the MongoDB Java Driver by strictly adhering to this principle. We discovered that performance issues were rarely where we thought they were. This post explains how we achieved throughput improvements between 20% to over 90% in specific workloads. We'll cover specific techniques, including using SWAR (SIMD Within A Register) for null-terminator detection, caching BSON array indexes, and eliminating redundant invariant checks.
 
-These are the lessons we learned turning micro-optimizations into macro-gains. Our findings might surprise you --- they certainly surprised us --- so we encourage you to read until the end.
+These are the lessons we learned turning micro-optimizations into macro-gains. Our findings might surprise you — they certainly surprised us — so we encourage you to read until the end.
 
 ## Getting the metrics right
 
@@ -34,7 +34,7 @@ Development teams often assume they know where bottlenecks are, but intuition is
 
 Programmers waste enormous amounts of time thinking about the speed of noncritical parts of their programs, and these attempts to improve efficiency have a strong negative impact on debugging and maintenance. We should forget about small efficiencies, say about 97% of the time: *premature optimization is the root of all evil*. Yet we should not pass up our opportunities in that critical 3%.
 
-To avoid 'premature optimization'---that is, improving code that appears slow but isn't on the critical path---we follow a strict rule: ***never guess, always measure***.
+To avoid 'premature optimization'---that is, improving code that appears slow but isn't on the critical path—we follow a strict rule: ***never guess, always measure***.
 
 We applied the [Pareto principle](https://en.wikipedia.org/wiki/Pareto_principle) (also known as the 80/20 rule) to target the specific code paths responsible for the majority of execution time. For this analysis, we used [**async-profiler**](https://github.com/async-profiler/async-profiler). Its low-overhead, sampling-based approach allowed us to capture actionable CPU and memory profiles with negligible performance impact.
 
@@ -114,9 +114,9 @@ write(value >> 16);
 write(value >> 24);
 ```
 
-However, this approach wasn't efficient. It required individual bounds checks and manual byte shuffling for every byte written, which showed up as a hotspot in profiles. We chose to adopt ByteBuffer's methods---such as putInt, putLong, and putDouble. This method collapses four separate byte operations into a single call (putInt) that handles byte order automatically.
+However, this approach wasn't efficient. It required individual bounds checks and manual byte shuffling for every byte written, which showed up as a hotspot in profiles. We chose to adopt ByteBuffer's methods—such as putInt, putLong, and putDouble. This method collapses four separate byte operations into a single call (putInt) that handles byte order automatically.
 
-Under the hood, modern JITs (e.g., in HotSpot) can compile these methods using intrinsics---such as Unsafe.putInt and Integer.reverseBytes---often mapping them to efficient machine instructions. For more context, see[Intrinsic functions](https://en.wikipedia.org/wiki/Intrinsic_function).
+Under the hood, modern JITs (e.g., in HotSpot) can compile these methods using intrinsics—such as Unsafe.putInt and Integer.reverseBytes—often mapping them to efficient machine instructions. For more context, see[Intrinsic functions](https://en.wikipedia.org/wiki/Intrinsic_function).
 
 The JVM can replace these helper methods with a very small sequence of machine instructions, sometimes even a single instruction. For example, on x86, the Integer.reverseBytes(int i) method may use the BSWAP instruction; on ARM, the JVM might use the REV instruction.
 
@@ -139,7 +139,7 @@ ByteBuffer currentBuffer = bufferList.get(currentBufferIndex);
 currentBuffer.put(value);
 ```
 
-This get() call is fast, but performing it many times adds up---especially since each call includes range checks and method indirection (as the path is too deep; the JVM might not always inline it).
+This get() call is fast, but performing it many times adds up—especially since each call includes range checks and method indirection (as the path is too deep; the JVM might not always inline it).
 
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Aha moment:** If the same buffer will be used for thousands of operations before switching, why should we keep re-checking? *By caching the buffer in a field and updating it only when switching buffers, we eliminated at least three redundant range checks. Here is how:* private ByteBuffer currentByteBuffer;// Only update when changing bufferscurrentByteBuffer.put(value); |
@@ -264,7 +264,7 @@ For direct buffers (which are not backed by a Java heap array), we cannot hand a
 To achieve this, the decoder maintains a reusable byte\[\] buffer. The first call allocates it (or grows it if a larger string is encountered), and subsequent calls reuse the same memory region. That has two benefits:
 
 * **Fewer allocations, less GC pressure, and memory zeroing:** We no longer create a fresh temporary byte\[\] for every CString, which reduces the amount of work the allocator and garbage collector must do per document.
-* **Better cache behavior:** The JVM repeatedly reads and writes the same small piece of memory, which tends to remain hot in the CPU cache. We examined CPU cache behavior on our "FindMany and empty cursor" workload using async-profiler's cache-misses event. Async-profiler samples hardware performance counters exposed by the CPU's [Performance Monitoring Unit](https://en.wikipedia.org/wiki/Hardware_performance_counter) (PMU), the hardware block that tracks events such as cache misses, branch misses, and cycles. For readString(), cache-miss samples dropped by roughly 13--28% between the old and new implementation, as we touch fewer cache lines per CString. We still treat the PMU data as directional rather than definitive --- counters and sampling semantics vary by CPU and kernel --- so the primary signal remains the end-to-end throughput gains (MB/s) that users actually observe.
+* **Better cache behavior:** The JVM repeatedly reads and writes the same small piece of memory, which tends to remain hot in the CPU cache. We examined CPU cache behavior on our "FindMany and empty cursor" workload using async-profiler's cache-misses event. Async-profiler samples hardware performance counters exposed by the CPU's [Performance Monitoring Unit](https://en.wikipedia.org/wiki/Hardware_performance_counter) (PMU), the hardware block that tracks events such as cache misses, branch misses, and cycles. For readString(), cache-miss samples dropped by roughly 13--28% between the old and new implementation, as we touch fewer cache lines per CString. We still treat the PMU data as directional rather than definitive — counters and sampling semantics vary by CPU and kernel — so the primary signal remains the end-to-end throughput gains (MB/s) that users actually observe.
 
 On our "FindMany and empty cursor" workload, eliminating the redundant intermediate copy in readString **improved throughput by approximately 22.5%** **.** Introducing the reusable buffer contributed a **\~5%** improvement in cases where the internal array is not available.
 

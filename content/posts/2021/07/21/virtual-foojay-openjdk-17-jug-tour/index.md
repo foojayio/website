@@ -18,7 +18,7 @@ frozen: false
 
 To celebrate OpenJDK 17 and Foojay as a community platform for its users, we're kicking off the Virtual Foojay OpenJDK 17+ JUG Tour, focused on OpenJDK 17, plus more!
 
-Ari Waller, JFrog's Event Manager, well known to many JUGs, will continue to wear a second hat, as he did on the previous tour---that of Foojay Event Manager, together with Jadon Ortlepp from Payara, newly added to the Foojay Event Team!
+Ari Waller, JFrog's Event Manager, well known to many JUGs, will continue to wear a second hat, as he did on the previous tour—that of Foojay Event Manager, together with Jadon Ortlepp from Payara, newly added to the Foojay Event Team!
 
 During September and October, contributors to Foojay will be making a whistle stop tour through as many JUGs as possible, via their virtual meetups! (And if you're not holding virtual events or don't have the facilities for this, we can support by making these available as needed and some of the sessions can be done live in-person, depending on the context.)
 
@@ -189,7 +189,7 @@ From an educational point of view, it's important to use a single programming la
 
 And you just need the OpenJDK and four libraries: JavaFX, FXGL, Pi4J, and JavaCV. Period. That's all. Right? No! Having these few technology gems is not sufficient to have real fun with programming. The initial hurdles faced by students before starting to write their first FXGL-based game and to deploy it on a Picade Console or a Game HAT need to be as low as possible. After the first steps, a smooth development experience is a must. Programmers want to focus on programming. Nothing else.   
 
-In this talk, you will see all the things that are needed besides the available libraries---ready made Linux images, Maven based, well documented template projects that enable development on laptops, and remote starting and debugging of apps on the Raspberry Pi, while you will also be shown the best practices of how to combine, for example, a GUI with a PUI (Physical User Interface). The fun is back. And the fun is 100% pure Java.
+In this talk, you will see all the things that are needed besides the available libraries—ready made Linux images, Maven based, well documented template projects that enable development on laptops, and remote starting and debugging of apps on the Raspberry Pi, while you will also be shown the best practices of how to combine, for example, a GUI with a PUI (Physical User Interface). The fun is back. And the fun is 100% pure Java.
 
 ### Miscellaneous
 

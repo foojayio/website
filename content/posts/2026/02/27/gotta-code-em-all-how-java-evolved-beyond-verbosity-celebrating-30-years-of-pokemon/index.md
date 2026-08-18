@@ -62,7 +62,7 @@ So the next time someone says: "Java is too verbose.", you can answer: That was 
 
 Which Java 25 feature would you use first to build your dream Pokédex or Pokémon battle simulator?
 
-Drop it in the comments --- let's evolve our code together!  
+Drop it in the comments — let's evolve our code together!  
 
 Gotta code 'em all!
 

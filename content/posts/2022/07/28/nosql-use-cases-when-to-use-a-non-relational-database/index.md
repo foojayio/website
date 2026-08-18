@@ -47,7 +47,7 @@ Since then, the cost of storage has plummeted, while the cost of developer time 
 
 NoSQL comes with many benefits, including:{#9536}
 
-* The choice of several database types --- [**key-value, document, tabular (or wide column), graph, and multi-model**](https://www.datastax.com/nosql#types-of-nosql-databases) --- so you can find the best fit for your data.
+* The choice of several database types — [**key-value, document, tabular (or wide column), graph, and multi-model**](https://www.datastax.com/nosql#types-of-nosql-databases) --- so you can find the best fit for your data.
 * The flexibility to easily store and access a wide variety of data types together, without upfront planning. The data types can include structured, semi-structured, unstructured, and polymorphic.
 * The ability to add new data types and fields to the database without having to redefine the data model.
 * Built-in, horizontal scalability that can handle rapid growth and is much less costly than attempting to scale-out a SQL database.
@@ -59,7 +59,7 @@ NoSQL comes with many benefits, including:{#9536}
 While NoSQL databases have many advantages, they're not the right choice for every situation. Sometimes sticking with a tried-and-true SQL database is the way to go. Let's compare SQL and NoSQL databases across several factors. Think about how each would apply to your data profile and use cases.{#dc4e}
 ![](1_qaZcXJEicNI3R1mTrEe5tw-733x1024.png) ![](1_tJO9HgZyaAjFSseYzjG1Og.png)
 
-As you can see, making the choice between a SQL and NoSQL database is not always a straightforward decision. Each has its advantages and disadvantages. Making the right choice depends on your organization's specific data environment, along with your current needs and future goals. Many development teams actually use both within their cloud data architecture, sometimes even within the same application --- deploying each to cover the areas they handle best.{#645d}
+As you can see, making the choice between a SQL and NoSQL database is not always a straightforward decision. Each has its advantages and disadvantages. Making the right choice depends on your organization's specific data environment, along with your current needs and future goals. Many development teams actually use both within their cloud data architecture, sometimes even within the same application — deploying each to cover the areas they handle best.{#645d}
 
 So, what are the non-relational use cases? Here are several where NoSQL has been proven to make sense:{#6330}
 

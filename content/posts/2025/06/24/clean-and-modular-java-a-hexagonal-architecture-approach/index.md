@@ -19,7 +19,7 @@ frozen: false
 
 One of the discussions that always leaves me with both doubts and excitement is the one about system architecture. Ever since I started diving deeper into programming, I've encountered questions like how to separate packages and modules: is it really worth creating so many divisions? I must admit, it's often complicated to understand or make decisions without being fully sure that I'm doing the right thing.
 
-Right from the start, I want to make it clear that this content will definitely spark a lot of discussion around best practices and whether what I'm doing is correct --- but, above all, I guarantee it will be fun!
+Right from the start, I want to make it clear that this content will definitely spark a lot of discussion around best practices and whether what I'm doing is correct — but, above all, I guarantee it will be fun!
 
 **System Architecture**
 
@@ -27,7 +27,7 @@ The main idea behind any software architecture is to ensure that development rem
 
 *The key objective is to make integration easier while decoupling dependencies between the layers, ensuring that the system is easier to maintain and evolve.*
 
-For example, imagine a warehouse management system (WMS); If every time there's a change in how you handle inbound operations (like receiving and stocking goods), you also have to update the way you handle outbound operations (like picking and shipping orders) --- because they're tightly coupled --- that  
+For example, imagine a warehouse management system (WMS); If every time there's a change in how you handle inbound operations (like receiving and stocking goods), you also have to update the way you handle outbound operations (like picking and shipping orders) — because they're tightly coupled — that  
 
 would become unsustainable in the long run, right? Well, exactly.
 
@@ -39,7 +39,7 @@ This separation ensures that the core of the application does not directly depen
 
 **What Are We Going to Build?**
 
-In this project, we're building a modular Java application with Maven, focusing on separating the layers of the system in a clear and maintainable way. While some layers do depend on others --- for example, the application layer depends on the domain, and the infrastructure layer depends on both --- the goal is to avoid direct, tight coupling and keep responsibilities well-defined.
+In this project, we're building a modular Java application with Maven, focusing on separating the layers of the system in a clear and maintainable way. While some layers do depend on others — for example, the application layer depends on the domain, and the infrastructure layer depends on both — the goal is to avoid direct, tight coupling and keep responsibilities well-defined.
 
 To achieve this, we'll split the application into distinct modules, each focused on a specific concern and designed to evolve independently.
 
@@ -386,7 +386,7 @@ At the end, we'll have a structure like this:
 
 Now let's talk about the infrastructure layer. This layer will contain everything related to accessing external resources, such as [MongoDB](https://www.mongodb.com/products/platform/atlas-database?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=foojay&utm_term=tony.kim), Spring, Kafka, and any other integrations or adapters our application might use.
 
-*It's important to note that in this layer, we're now working with Spring --- you can see that in the use of the @Configuration annotation, which tells Spring to treat this class as a source of bean definitions.*
+*It's important to note that in this layer, we're now working with Spring — you can see that in the use of the @Configuration annotation, which tells Spring to treat this class as a source of bean definitions.*
 
 Let's start by creating a configuration class in the br.com.ricas.config package:
 
@@ -593,7 +593,7 @@ cd infrastructure
 mvn spring-boot:run
 ```
 
-POST --- Create a new product:
+POST — Create a new product:
 
 ```
 POST http://localhost:8080/products
@@ -606,7 +606,7 @@ Content-Type: application/json
 }
 ```
 
-GET --- Fetch a paginated list of products:
+GET — Fetch a paginated list of products:
 
 ```
 GET http://localhost:8080/products?page=0&sizePerPage=10&sortField=id&sortDirection=ASC
@@ -616,7 +616,7 @@ GET http://localhost:8080/products?page=0&sizePerPage=10&sortField=id&sortDirect
 
 Well, there's certainly a lot to discuss about this architecture and about patterns and concepts like Clean Architecture and DDD. The main idea here is to show that isolating layers can bring significant benefits, as long as it's done thoughtfully and correctly.
 
-Remember, there's no single rule to follow --- just concepts and best practices to guide you.
+Remember, there's no single rule to follow — just concepts and best practices to guide you.
 
 I hope this application gives you a clear starting point if you're just beginning to explore this topic.
 
@@ -624,4 +624,4 @@ If you liked, follow me here and leave a comment 🙂
 
 You can find the project code \[[here](https://github.com/ricardohsmello/modular-hexagonal-architecture-sample)\]
 
-And if you're looking for a more complete example --- with tests, use cases, and services --- you can check out this project [here](https://github.com/ricardohsmello/g12-football-backend).
+And if you're looking for a more complete example — with tests, use cases, and services — you can check out this project [here](https://github.com/ricardohsmello/g12-football-backend).

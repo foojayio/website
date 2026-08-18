@@ -35,7 +35,7 @@ But before we proceed, here are the videos (the 2nd and 3rd):
 >
 > Also watch expressions, evaluate, change state and object marking which is a pretty amazing little known feature.[#CodeNewbie](https://twitter.com/hashtag/CodeNewbie?src=hash&ref_src=twsrc%5Etfw) [#140SecondDucklings](https://twitter.com/hashtag/140SecondDucklings?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/IjUMSCrmc6](https://t.co/IjUMSCrmc6)
 >
-> --- Shai Almog (@debugagent) [February 22, 2022](https://twitter.com/debugagent/status/1496126856692645894?ref_src=twsrc%5Etfw)
+> — Shai Almog (@debugagent) [February 22, 2022](https://twitter.com/debugagent/status/1496126856692645894?ref_src=twsrc%5Etfw)
 
 ## Java Return Value
 

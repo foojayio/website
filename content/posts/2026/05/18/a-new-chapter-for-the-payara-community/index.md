@@ -80,7 +80,7 @@ We didn't want to announce the rebrand without also catching you up on recent re
 
 **Component upgrades:** Docker JDK images refreshed to 21.0.11 and 25.0.3, with dependency updates for Jakarta Faces, MicroProfile Config, Project Reactor, and other libraries.
 
-The critical security fix is also backported across Azul Payara 6.38.0, 5.87.0, and 4.1.2.191.55 --- we recommend all users upgrade regardless of which branch they're on.
+The critical security fix is also backported across Azul Payara 6.38.0, 5.87.0, and 4.1.2.191.55 — we recommend all users upgrade regardless of which branch they're on.
 
 ### April: Azul Payara Community 7.2026.4
 

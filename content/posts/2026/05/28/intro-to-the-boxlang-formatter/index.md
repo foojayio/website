@@ -27,7 +27,7 @@ You know the drill. Someone opens a PR and half the review comments are about ta
 
 You can find the docs here: <https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter>
 
-The BoxLang Formatter is a built-in code formatting tool that ships with BoxLang. It enforces consistent style across `.bx`, `.bxs`, `.bxm`, `.cfm`, `.cfc`, and `.cfs` files --- automatically.
+The BoxLang Formatter is a built-in code formatting tool that ships with BoxLang. It enforces consistent style across `.bx`, `.bxs`, `.bxm`, `.cfm`, `.cfc`, and `.cfs` files — automatically.
 
 It's not a linter. It doesn't just complain. It *fixes* your code, or tells CI to fail when style drift sneaks in.
 
@@ -82,7 +82,7 @@ This drops a starter config in your current directory. From there, tweak what yo
 }
 ```
 
-You've got control over indentation, line length, brace style, struct/array formatting, operator style, SQL keyword casing, import sorting, and a lot more. Only override what you need --- everything else uses sensible defaults.
+You've got control over indentation, line length, brace style, struct/array formatting, operator style, SQL keyword casing, import sorting, and a lot more. Only override what you need — everything else uses sensible defaults.
 
 This is where it gets really useful. Run the formatter in check mode as a quality gate:
 
@@ -156,7 +156,7 @@ boxlang format --check --source ./
 
 See what (if anything) drifted. Run the formatter once in a cleanup commit, then turn on `--check` in CI and you're done.
 
-**Preview without rewriting files** --- pipe output to stdout instead:
+**Preview without rewriting files** — pipe output to stdout instead:
 
 ```java
 boxlang format --overwrite false --source ./handlers/MainHandler.cfc
@@ -174,7 +174,7 @@ boxlang format --source . --excludes generated,vendor
 boxlang format --config ./config/.bxformat.json --source ./
 ```
 
-Stop spending review cycles on style. The formatter handles it --- in your editor, in your pre-commit hook, in CI. One command, consistent output, zero arguments about semicolons ever again.
+Stop spending review cycles on style. The formatter handles it — in your editor, in your pre-commit hook, in CI. One command, consistent output, zero arguments about semicolons ever again.
 
 Go format something:
 

@@ -427,7 +427,7 @@ The Slider display now uses the same precision as the configured step.
 
 ▪️ New developers should understand the JSF lifecycle before judging PrimeFaces  
 
-▪️ The real power is not "drag and drop UI" --- it is the combination of Java beans, components, Ajax updates and rich widgets
+▪️ The real power is not "drag and drop UI" — it is the combination of Java beans, components, Ajax updates and rich widgets
 > PrimeFaces is not the trendy kid in the frontend room. But in many Java enterprise applications, it is still doing serious work. ☕🎨
 
 ##### Java #JakartaEE #JSF #PrimeFaces #JakartaFaces #EnterpriseJava #WebDevelopment #JavaDevelopers #SoftwareEngineering #Accessibility #WebSecurity #BackendDevelopment #FullStackJava

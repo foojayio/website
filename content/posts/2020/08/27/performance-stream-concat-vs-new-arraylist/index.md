@@ -30,7 +30,7 @@ List<Element> result = content.getFancyStuffs().stream()
   .collect(toList());
 ```
 
-Some more details here --- the `getFancyStuffs()` returns a list of `FancyStuff` elements. The `FancyStuff` class contains two getters where `getElement()` returns a single `Element` whereas the `getElements()` returns (guess what?) a list of `Element`s.
+Some more details here — the `getFancyStuffs()` returns a list of `FancyStuff` elements. The `FancyStuff` class contains two getters where `getElement()` returns a single `Element` whereas the `getElements()` returns (guess what?) a list of `Element`s.
 
 The interesting part was the lambda which creates a new `ArrayList` and adds a single element `objects.add(item.getElement())` and the second part which adds several elements via `objects.addAll(item.getElements)`.
 
@@ -166,10 +166,10 @@ So I ran also a solution with all possible options im JMH which took very long (
 So I will pick up some examples of the measured times here:
 ![](Screenshot-2020-08-26-at-22.26.48-1024x306.png)
 
-So finally the question comes --- what do the numbers actually mean?
+So finally the question comes — what do the numbers actually mean?
 
 A quote from the [JMH](https://github.com/openjdk/jmh) output:
 
 *REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial experiments, perform baseline and negative tests that provide experimental control, make sure the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts. Do not assume the numbers tell you what you want them to tell.*
 
-**Note:** Used with permission and thanks --- originally written by Karl Heinz Marbaise and published on [Karl Heinz Marbaise's blog](https://blog.soebes.de/blog/2020/03/31/performance-stream-concat/).
+**Note:** Used with permission and thanks — originally written by Karl Heinz Marbaise and published on [Karl Heinz Marbaise's blog](https://blog.soebes.de/blog/2020/03/31/performance-stream-concat/).

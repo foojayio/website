@@ -69,7 +69,7 @@ These qualitative differences translate into hard, operational differences.
 
 Because the fundamental behaviors of models have diverged, a prompt written for one model will not work "as is" on another anymore. For example, a directive-heavy prompt designed for Claude can feel over-constrained on GPT-5-Codex, and a prompt optimized for Codex to explore deep reasoning behavior will likely underperform on Claude. That means that the era of the monolithic, one-size-fits-all prompt is over.
 
-So, what does that mean for engineering teams who want to switch between models or adopt the newest models as they're released? It means even more prompt engineering! But before you groan at the thought --- there are some hacks to make this easier.
+So, what does that mean for engineering teams who want to switch between models or adopt the newest models as they're released? It means even more prompt engineering! But before you groan at the thought — there are some hacks to make this easier.
 
 ### The rise of prompt subunits
 

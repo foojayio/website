@@ -745,11 +745,11 @@ Chrome extensions have security restrictions. Content scripts cannot directly ma
 
 ### **Challenge 5: Prompt Engineering \& Model Compliance**
 
-Getting LLMs to follow detailed instructions exactly---especially when it comes to the output format and using logic like "try RAG first"---can be tricky.
+Getting LLMs to follow detailed instructions exactly—especially when it comes to the output format and using logic like "try RAG first"---can be tricky.
 
 Larger models like OpenAI's GPT-4o usually follow detailed system instructions well, including sticking to strict JSON formats and trying RAG before generating answers. However, smaller models running locally with Ollama (like `llama3` or `deepseek-llm:7b`) may not always do the same. They might add extra text outside the JSON, miss when they should use RAG, or create less accurate data for certain fields.
 
-* **Solution:** You often need to fine-tune the prompt to get better results with smaller models. This means making the system instructions clearer and simpler, giving good examples of the exact format you want, and even adding warnings like, "Don't write anything before or after the JSON." Sometimes, it also helps to add a cleanup step in your Java backend---like extracting just the JSON from the output---even if the model includes extra text. It's a balance between how powerful the model is, how complex your prompt is, and how much cleanup you're willing to do afterward.
+* **Solution:** You often need to fine-tune the prompt to get better results with smaller models. This means making the system instructions clearer and simpler, giving good examples of the exact format you want, and even adding warnings like, "Don't write anything before or after the JSON." Sometimes, it also helps to add a cleanup step in your Java backend—like extracting just the JSON from the output—even if the model includes extra text. It's a balance between how powerful the model is, how complex your prompt is, and how much cleanup you're willing to do afterward.
 
 ## **Lessons Learned**
 

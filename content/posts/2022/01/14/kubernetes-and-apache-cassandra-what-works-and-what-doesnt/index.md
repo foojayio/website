@@ -30,15 +30,15 @@ Deploy an application on Kubernetes and it's easy to miss the almost magical, co
 
 While Kubernetes is the go-to orchestration platform to run distributed applications in the cloud, Cassandra provides a dependable distributed database environment.
 
-If you go back to when we were using shell scripts on bare-metal, you'll find [Apache Cassandra®](https://cassandra.apache.org/_/index.html) proudly growing with the tech stacks of companies like Uber, Spotify, and Netflix. Known for its robust, distributed, and scalable infrastructure --- with no single point of failure and high availability --- it's the top choice for any business operating large-scale cloud applications that need to reliably maintain their "always-on" services.
+If you go back to when we were using shell scripts on bare-metal, you'll find [Apache Cassandra®](https://cassandra.apache.org/_/index.html) proudly growing with the tech stacks of companies like Uber, Spotify, and Netflix. Known for its robust, distributed, and scalable infrastructure — with no single point of failure and high availability — it's the top choice for any business operating large-scale cloud applications that need to reliably maintain their "always-on" services.
 
-It's common to Cassandra and K8s described as the "most logical pairing" since they allow you to keep your data and operations close for better performance at scale.So let's take a closer look at what makes Cassandra and K8s a dream team --- and why this isn't always true.
+It's common to Cassandra and K8s described as the "most logical pairing" since they allow you to keep your data and operations close for better performance at scale.So let's take a closer look at what makes Cassandra and K8s a dream team — and why this isn't always true.
 
 ## **Why Cassandra and K8s work so well together**
 
 Like any great story of modern infrastructure, it all started with the need to scale. Before the term "cloud native" became mainstream, Cassandra was inspired by the distributed storage and replication techniques from Amazon's [DynamoDB](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf), as well as the data storage engine model from Google's [Bigtable](https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf). The idea was to build the best of both into one package to help guarantee availability and resiliency for large-scale, business-critical applications.
 
-Guided by a similar philosophy, Kubernetes boasts a leaderless architecture that also makes it reliable, easy to scale, and highly available. The main difference is that Cassandra is a shared-nothing architecture (i.e. nodes don't share memory or storage), whereas Kubernetes has a primary node --- the control plane --- which runs across multiple machines to provide fault-tolerance.
+Guided by a similar philosophy, Kubernetes boasts a leaderless architecture that also makes it reliable, easy to scale, and highly available. The main difference is that Cassandra is a shared-nothing architecture (i.e. nodes don't share memory or storage), whereas Kubernetes has a primary node — the control plane — which runs across multiple machines to provide fault-tolerance.
 ![](components-of-kubernetes-1024x478.png)
 
 Essentially, both Cassandra and Kubernetes are distributed systems designed to meet the snowballing requirements for data and storage in global-scale apps. It's unlikely we'll have *less* data and infrastructure in the future, so we need strategies that embody the following ideas:
@@ -55,7 +55,7 @@ The concept of a node in distributed computing is a basic unit of scale and resi
 
 ## **How sometimes they don't work well together**
 
-It would appear Kubernetes and Cassandra are highly compatible and can coexist peacefully in your tech stack. After all, they're both distributed, scalable, and resilient --- except they're actually more like two pieces from different puzzles that don't quite fit together without some elbow grease.
+It would appear Kubernetes and Cassandra are highly compatible and can coexist peacefully in your tech stack. After all, they're both distributed, scalable, and resilient — except they're actually more like two pieces from different puzzles that don't quite fit together without some elbow grease.
 
 Take Cassandra operators, for example. In Kubernetes, the compute and storage are separate rather than managed as a group. So in a failure scenario, K8s could replace a node without attaching the precious storage data. The challenge is keeping the storage with the Cassandra node that owns the data, which is simple to do using operators like [cass-operator](https://dtsx.io/3ByF2yK) instead of hours of manual work.
 

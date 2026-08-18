@@ -45,7 +45,7 @@ The vast amount of data in motion that's present within a given enterprise is of
 
 Apache Pulsar provides not only a next-generation architecture for event streaming, but also a set of capabilities that address the needs of more traditional messaging systems that rely on work queues and pub/sub. Astra Streaming has made it even easier to bridge this gap by supporting Fast JMS for Pulsar, a spec-conformant drop-in replacement that enterprises can use to instantly modernize their JMS applications and connect it to the full capabilities of Apache Pulsar.
 
-The net result? Enterprises can easily capture, retain, and extract more value from data that today they are simply discarding---without taking on a long, painful migration project to adopt Astra Streaming. And because this capability is delivered as a fully managed SaaS, enterprises can choose to deploy Astra Streaming on AWS, GCP, or Azure to ensure close proximity and extremely low latency.
+The net result? Enterprises can easily capture, retain, and extract more value from data that today they are simply discarding—without taking on a long, painful migration project to adopt Astra Streaming. And because this capability is delivered as a fully managed SaaS, enterprises can choose to deploy Astra Streaming on AWS, GCP, or Azure to ensure close proximity and extremely low latency.
 
 **Try Astra Streaming free**
 

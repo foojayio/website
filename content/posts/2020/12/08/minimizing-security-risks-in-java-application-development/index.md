@@ -15,7 +15,7 @@ frozen: false
 
 United by their passion for open source, Payara and IBM recently teamed up for a panel discussion on security in Java application development.
 
-Security is something that is considered extremely important, however, it is not always something that is a priority for many development teams. The main question is---how to minimize security risks while developing Java applications.
+Security is something that is considered extremely important, however, it is not always something that is a priority for many development teams. The main question is—how to minimize security risks while developing Java applications.
 
 In this panel discussion, our experts addressed a variety of topics related to secure application development. Most of the topics were introduced by questions from the audience.
 

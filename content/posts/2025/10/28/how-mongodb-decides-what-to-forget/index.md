@@ -21,7 +21,7 @@ frozen: false
 
 Inside MongoDB's storage engine, [WiredTiger](https://www.mongodb.com/docs/manual/core/wiredtiger/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-forget-foojay&utm_term=tony.kim), **nothing happens by accident.**{#4cf7}
 
-Every page in [memory](https://www.mongodb.com/docs/atlas/sizing-tier-selection/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-forget-foojay&utm_term=tony.kim#memory) exists under policy --- governed, measured, and continuously evaluated against the limits of RAM, I/O bandwidth, and checkpoint cadence. Eviction is not cleanup. It's **runtime arbitration between volatility and durability**.{#ba51}
+Every page in [memory](https://www.mongodb.com/docs/atlas/sizing-tier-selection/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-forget-foojay&utm_term=tony.kim#memory) exists under policy — governed, measured, and continuously evaluated against the limits of RAM, I/O bandwidth, and checkpoint cadence. Eviction is not cleanup. It's **runtime arbitration between volatility and durability**.{#ba51}
 
 When the process starts, WiredTiger allocates a fixed memory region known as the **cache arena** typically 50% of physical RAM. Within that space live **B-tree pages** : internal nodes, leaf nodes, and history-store entries. Each page carries operational metadata: **dirty, clean, hazard-protected, in-use, last_access_time, and generation** . This metadata feeds into a **per-page score**, which informs the eviction subsystem's next decision.{#61cb}
 
@@ -43,9 +43,9 @@ The eviction engine constantly measures its own efficiency using internal metric
 
 When efficiency drops meaning eviction cannot keep up with mutation rate the engine escalates through defined phases:{#0275}
 
-1. **Passive eviction** --- background threads maintain equilibrium below eviction_target.
-2. **Aggressive eviction** --- triggered near eviction_trigger; application threads begin assisting.
-3. **Emergency eviction** --- above 95% occupancy; eviction threads run synchronously, blocking writers until space is reclaimed.
+1. **Passive eviction** — background threads maintain equilibrium below eviction_target.
+2. **Aggressive eviction** — triggered near eviction_trigger; application threads begin assisting.
+3. **Emergency eviction** — above 95% occupancy; eviction threads run synchronously, blocking writers until space is reclaimed.
 
 This escalation is controlled by the **Eviction Server** , which coordinates worker pools using an internal **task queue** implemented with spinlocks and condition variables to minimize scheduler overhead.{#edf3}
 

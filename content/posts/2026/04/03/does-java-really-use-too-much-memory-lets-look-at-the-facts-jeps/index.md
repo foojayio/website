@@ -32,7 +32,7 @@ For years, "Java uses too much memory" has been one of the most repeated claims 
 
 So let's do something different:  
 
-Let's look at what modern Java actually does --- backed by real improvements in the platform and the JEPs that introduced them.
+Let's look at what modern Java actually does — backed by real improvements in the platform and the JEPs that introduced them.
 
 ## The reputation didn't come out of nowhere.
 
@@ -72,7 +72,7 @@ These collectors:
 
 Key takeaway:
 
-Java doesn't freeze your application anymore --- it cleans memory while your app keeps running.
+Java doesn't freeze your application anymore — it cleans memory while your app keeps running.
 
 Modern Java doesn't "stop the world." It barely pauses.
 
@@ -114,7 +114,7 @@ This directly impacts:
 * Data-heavy applications
 * High-throughput systems
 
-Java objects are not just managed better --- they're physically smaller.
+Java objects are not just managed better — they're physically smaller.
 
 ### 4. The JVM Learned to Share (CDS)
 
@@ -158,7 +158,7 @@ Java used to think it owned the machine. Now it behaves like a good citizen.
 
 ### 6. Project Valhalla (Value Classes \& Objects) -- Coming Soon
 
-Still in preview/early access, but progressing steadily. Value objects eliminate identity and can be stored flattened (no pointer overhead). This will be a game-changer for memory density --- especially for collections, records, and data-oriented programming. Expect the first preview features to land in a future JDK (possibly 27 or 28).
+Still in preview/early access, but progressing steadily. Value objects eliminate identity and can be stored flattened (no pointer overhead). This will be a game-changer for memory density — especially for collections, records, and data-oriented programming. Expect the first preview features to land in a future JDK (possibly 27 or 28).
 
 ### 7. Optional: Going Even Leaner with Native Images
 
@@ -173,7 +173,7 @@ Java is not tied to one runtime model anymore.
 
 ### 7. Others
 
-Project Panama (Foreign Function \& Memory API) --- Safer, faster off-heap memory access without the old JNI tax. Leyden \& AOT improvements --- Better ahead-of-time caching and warmup reduction.
+Project Panama (Foreign Function \& Memory API) — Safer, faster off-heap memory access without the old JNI tax. Leyden \& AOT improvements — Better ahead-of-time caching and warmup reduction.
 
 If you apply these tips, Duke's nose might actually stop growing.
 
@@ -323,7 +323,7 @@ Here are simplified, realistic comparisons based on common setups:
 
 ### So... Does Java Use Too Much Memory?
 
-Sometimes --- but not for the reason people think.
+Sometimes — but not for the reason people think.
 
 Real causes of high memory usage:
 
@@ -349,12 +349,12 @@ Modern Java:
 * Adapts to containers
 * Continues to evolve with every release
 
-So no --- Java doesn't "use too much memory."
+So no — Java doesn't "use too much memory."
 
 Java isn't memory-hungry. It's memory-aware.
 
-If your app uses 2GB, start with your code --- not the JVM.
+If your app uses 2GB, start with your code — not the JVM.
 
 If after reading this your Java services are still using too much memory... blame the GC, not Duke. His nose is innocent this time.
 
-Happy April 1st --- and happy profiling. 🚀
+Happy April 1st — and happy profiling. 🚀

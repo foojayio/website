@@ -30,7 +30,7 @@ What if we lived in a world where we could solve massive global problems like wo
 
 ## Why Do Flaky Tests Matter?
 
-1. **Waste of Time and Money** : When a test fails, it can be difficult to tell at first glance if there is a real bug or if the test is just flaky. Developers often have to rerun tests, sift through logs, and add extra debugging code to confirm the issue is genuine. Over time, these continued efforts add up to an enormous cost. Brian Demers and I estimated in our talk ["Testing on Thin Ice: Chipping Away at Test Unpredictability"](https://youtu.be/kwxwHuScmLk) that **$36 billion** are wasted every year due to flaky tests worldwide---shockingly close to the **$40 billion** it would take to **[end world hunger by 2030](https://www.wfpusa.org/articles/how-much-would-it-cost-to-end-world-hunger/)**.
+1. **Waste of Time and Money** : When a test fails, it can be difficult to tell at first glance if there is a real bug or if the test is just flaky. Developers often have to rerun tests, sift through logs, and add extra debugging code to confirm the issue is genuine. Over time, these continued efforts add up to an enormous cost. Brian Demers and I estimated in our talk ["Testing on Thin Ice: Chipping Away at Test Unpredictability"](https://youtu.be/kwxwHuScmLk) that **$36 billion** are wasted every year due to flaky tests worldwide—shockingly close to the **$40 billion** it would take to **[end world hunger by 2030](https://www.wfpusa.org/articles/how-much-would-it-cost-to-end-world-hunger/)**.
 
 2. **Erosion of Trust:** When more test failures are due to flakiness than actual issues in the code, the team loses confidence in the test suite. As a result, teams start to ignore test failures in general, which means that genuine test failures also get ignored. This means that bugs can slip through to production and cause more severe and expensive problems in the future.
 
@@ -171,7 +171,7 @@ it.skip('should throw an error', () => {
 });
 ```
 
-Use a consistent prefix (e.g., `quarantine:`) to easily find and track these tests. However, **do not** let quarantined tests remain ignored forever---make fixing them a priority.
+Use a consistent prefix (e.g., `quarantine:`) to easily find and track these tests. However, **do not** let quarantined tests remain ignored forever—make fixing them a priority.
 
 ### 7. Split Up End-to-End and Integration Tests
 

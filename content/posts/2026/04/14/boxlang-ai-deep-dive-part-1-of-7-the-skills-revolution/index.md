@@ -31,7 +31,7 @@ Every AI framework eventually hits the same wall: your system prompts start drif
 
 This isn't a discipline problem: it's an architecture problem. System prompts are plain strings, and plain strings don't have a source of truth.
 
-**BoxLang AI 3.0 fixes this with the AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills "Anthropic's Agent Skills open standard") that treats knowledge as a first-class, versioned, reusable asset. Define it once. Inject it everywhere. Let your codebase --- not copy-paste --- be the source of truth.
+**BoxLang AI 3.0 fixes this with the AI Skills system** — a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills "Anthropic's Agent Skills open standard") that treats knowledge as a first-class, versioned, reusable asset. Define it once. Inject it everywhere. Let your codebase — not copy-paste — be the source of truth.
 
 ## 🧠 What Is a Skill?
 
@@ -78,7 +78,7 @@ Alias all tables with a meaningful short name.
 Use parameterized queries for all user input.
 ```
 
-One important detail from the source code: if you omit the frontmatter `description`, BoxLang automatically uses the **first paragraph of the body** as the description. This matches the Claude Agent Skills standard, and it means even the simplest possible `SKILL.md` --- just a few lines of plain text --- works without any configuration:
+One important detail from the source code: if you omit the frontmatter `description`, BoxLang automatically uses the **first paragraph of the body** as the description. This matches the Claude Agent Skills standard, and it means even the simplest possible `SKILL.md` --- just a few lines of plain text — works without any configuration:
 
 ```java
 // From AiSkill.bx — fromPath() method
@@ -123,7 +123,7 @@ sqlStyle = aiSkill(
 )
 ```
 
-The `aiSkill()` BIF handles all three cases --- you pass either a path or named arguments, and it figures out the rest.
+The `aiSkill()` BIF handles all three cases — you pass either a path or named arguments, and it figures out the rest.
 
 ## ⚡ Two Injection Modes
 
@@ -131,7 +131,7 @@ This is where the architecture gets genuinely clever. Skills support two injecti
 
 ### Always-On Skills
 
-Full content injected into the system message on every single call. Zero latency --- the LLM always has this knowledge in context.
+Full content injected into the system message on every single call. Zero latency — the LLM always has this knowledge in context.
 
 ```
 agent = aiAgent(
@@ -147,7 +147,7 @@ Best for: short, universally relevant guidance that applies to virtually every q
 
 ### Lazy / Available Skills
 
-Only a compact index --- the skill name and one-line description --- is included in the system message. When the LLM determines it needs a skill, it calls a built-in `loadSkill( name )` tool to fetch the full content on demand.
+Only a compact index — the skill name and one-line description — is included in the system message. When the LLM determines it needs a skill, it calls a built-in `loadSkill( name )` tool to fetch the full content on demand.
 
 ```java
 agent = aiAgent(
@@ -169,7 +169,7 @@ Call loadSkill(name) to activate when needed:
 
 The LLM only pulls full content for skills it actually needs. A query about formatting a date never loads the SQL optimizer. **Token usage stays low even with hundreds of skills in the library.**
 
-### The `loadSkill` Tool --- Auto-Registered, Not Magic
+### The `loadSkill` Tool — Auto-Registered, Not Magic
 
 One of the cleanest implementation details in the codebase is how lazy skills are wired up. When you add available skills to an agent, it automatically registers a `loadSkill` tool:
 
@@ -203,7 +203,7 @@ agent.activateSkill( "sql-optimizer" )
 
 ## 🌍 Global Skills Pool
 
-Register skills once at the application level and have them automatically available to every new agent --- no explicit wiring required.
+Register skills once at the application level and have them automatically available to every new agent — no explicit wiring required.
 
 ```java
 // In Application.bx or ModuleConfig.bx
@@ -255,7 +255,7 @@ Prefer CTEs over nested sub-queries for readability.
 ...
 ```
 
-The `buildSkillsContent()` method on `AiBaseRunnable` assembles both sections into the final system message block --- always-on skills rendered in full, available skills as a compact index.
+The `buildSkillsContent()` method on `AiBaseRunnable` assembles both sections into the final system message block — always-on skills rendered in full, available skills as a compact index.
 
 ## 🔍 Introspection
 
@@ -273,7 +273,7 @@ println( config.skills.availableSkills )        // [{ name, description }, ...]
 println( agent.buildSkillsContent() )
 ```
 
-The system message is also cached and fingerprinted --- if nothing has changed since the last call (same description, instructions, skill pools), the cached version is returned without rebuilding:
+The system message is also cached and fingerprinted — if nothing has changed since the last call (same description, instructions, skill pools), the cached version is returned without rebuilding:
 
 ```java
 // From AiAgent.bx — _buildSystemMessageFingerprint()

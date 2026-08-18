@@ -174,7 +174,7 @@ Caused by: com.pi4j.exception.Pi4JException: Error during call to method 'call' 
 
 On a Raspberry Pi, the numbers you pass to Pi4J directly match the SoC's own "BCM" GPIO numbering, so pin 16 on the header is simply BCM 23, no translation needed. The [Banana Pi M4 Zero](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero) uses a different SoC (Allwinner H618) with its own GPIO controller and numbering scheme, so that shortcut doesn't apply, even though the board has the same 40-pin header layout as a Raspberry Pi Zero.
 
-The first clue was Banana Pi's own [pinout table](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero#_gpio_pin_define), which lists physical pin 16 as `PI15` = GPIO bank `I`, pin `15`. Allwinner chips group their GPIOs into lettered banks of 32 pins each (`PA0`-`PA31`, `PB0`-`PB31`, and so on --- see [linux-sunxi.org/GPIO](https://linux-sunxi.org/GPIO) for the general convention), and the Linux kernel exposes this hardware as character devices under `/dev/gpiochip*`. Running `gpioinfo` on the board showed two chips: `gpiochip0` with 32 lines, and `gpiochip1` with 288 lines. 288 is exactly 9 banks of 32, which matches banks A through I. This indicates that `gpiochip1` is the controller behind the 40-pin header, not `gpiochip0`.
+The first clue was Banana Pi's own [pinout table](https://docs.banana-pi.org/en/BPI-M4_Zero/BananaPi_BPI-M4_Zero#_gpio_pin_define), which lists physical pin 16 as `PI15` = GPIO bank `I`, pin `15`. Allwinner chips group their GPIOs into lettered banks of 32 pins each (`PA0`-`PA31`, `PB0`-`PB31`, and so on — see [linux-sunxi.org/GPIO](https://linux-sunxi.org/GPIO) for the general convention), and the Linux kernel exposes this hardware as character devices under `/dev/gpiochip*`. Running `gpioinfo` on the board showed two chips: `gpiochip0` with 32 lines, and `gpiochip1` with 288 lines. 288 is exactly 9 banks of 32, which matches banks A through I. This indicates that `gpiochip1` is the controller behind the 40-pin header, not `gpiochip0`.
 
 ```
 $ sudo apt install -y gpiod
@@ -200,7 +200,7 @@ $ gpioset gpiochip1 271=1   # Red on
 $ gpioset gpiochip1 271=0   # Red off
 ```
 
-The red LED turned on and off, confirming line 271 on `gpiochip1` really is physical pin 16. I repeated the same process for green (`PI16` → line 272) and blue --- except blue's original pin (physical pin 22) turned out to be a 3.3V power pin on this board, not a GPIO at all. So I moved that wire to a real GPIO pin (physical pin 23, `PH6`, bank H → `7 × 32 + 6 = 230`) before it could work.
+The red LED turned on and off, confirming line 271 on `gpiochip1` really is physical pin 16. I repeated the same process for green (`PI16` → line 272) and blue — except blue's original pin (physical pin 22) turned out to be a 3.3V power pin on this board, not a GPIO at all. So I moved that wire to a real GPIO pin (physical pin 23, `PH6`, bank H → `7 × 32 + 6 = 230`) before it could work.
 
 | Color |       Physical pin | Offset (gpiochip1) |
 |:------|-------------------:|-------------------:|

@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-There is a lot going in the Java world lately. A lot of this is already captured is the [Snyk JVM Ecosystem Report 2021](https://snyk.io/jvm-ecosystem-report-2021/) based on a joint survey by [Azul](http://azul.com) and [Snyk](http://snyk.io). In addition, Java 17 --- the new LTS version --- was released in September and Oracle uncovered their plans to shorten the LTS release cycle to every 2 years.
+There is a lot going in the Java world lately. A lot of this is already captured is the [Snyk JVM Ecosystem Report 2021](https://snyk.io/jvm-ecosystem-report-2021/) based on a joint survey by [Azul](http://azul.com) and [Snyk](http://snyk.io). In addition, Java 17 — the new LTS version — was released in September and Oracle uncovered their plans to shorten the LTS release cycle to every 2 years.
 
 In a recent livestream, I had a discussion with some great folks in the Java world about the highlights of the Snyk Java Ecosystem report and the current developments in the Java world.
 

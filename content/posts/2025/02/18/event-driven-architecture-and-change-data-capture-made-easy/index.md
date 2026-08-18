@@ -93,7 +93,7 @@ In some cases, EDA and CDC can complement each other. For example:
 
 ##### Conclusion
 
-EDA and CDC are powerful patterns for modern software systems, but they serve different purposes. EDA is best for decoupling services and orchestrating real-time workflows, while CDC is great for synchronizing data and enabling analytics. By understanding their strengths and limitations, you can choose the right approach---or even combine them---for your specific needs.
+EDA and CDC are powerful patterns for modern software systems, but they serve different purposes. EDA is best for decoupling services and orchestrating real-time workflows, while CDC is great for synchronizing data and enabling analytics. By understanding their strengths and limitations, you can choose the right approach—or even combine them—for your specific needs.
 
 In short:
 

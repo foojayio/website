@@ -29,7 +29,7 @@ In this talk, we'll discuss why Java developers do or don't need DevOps. We'll c
 
 ## Why your talk is unmissable?
 
-Think DevOps is just a fancy new label for old-school Ops? You might be onto something---or maybe there's more to it. This talk is designed for Java developers at any knowledge level of DevOps, offering a candid look behind the buzzwords and hype.
+Think DevOps is just a fancy new label for old-school Ops? You might be onto something—or maybe there's more to it. This talk is designed for Java developers at any knowledge level of DevOps, offering a candid look behind the buzzwords and hype.
 
 We'll explore whether DevOps is genuinely beneficial for your coding and deployment practices or if it's just ops in a DevOps disguise. Join us for a session that promises to cut through the noise with sharp insights and a bit of healthy skepticism.
 

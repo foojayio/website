@@ -25,7 +25,7 @@ A team of fifty developers can quietly burn $30,000 a month on AI coding assista
 The cost is the obvious pain. The other two are sneakier:
 
 * **Latency.** Bigger contexts take longer. The model thinks more, but you also wait more.
-* **Context rot.** This is the surprising one. Anthropic and Chroma have both shown that as the context window fills up, model recall and reasoning *degrade* --- even well inside the advertised window. The 200K-token model is genuinely worse at the 150K mark than at the 20K mark. **More context is not free; past a point, it's actively harmful.**
+* **Context rot.** This is the surprising one. Anthropic and Chroma have both shown that as the context window fills up, model recall and reasoning *degrade* — even well inside the advertised window. The 200K-token model is genuinely worse at the 150K mark than at the 20K mark. **More context is not free; past a point, it's actively harmful.**
 
 The mental model that fixes all three: stop treating context as a free buffet. Treat it as a budget you spend on every turn.
 
@@ -47,23 +47,23 @@ Every request to a coding assistant is a stack of buckets. The shape varies by t
 
 A few things to notice:
 
-* **Tool schemas dominate more than people expect.** Five connected MCP servers can easily contribute 5,000--10,000 tokens to every request before you've typed a word. The model doesn't have to *use* the tool --- the schema ships either way.
+* **Tool schemas dominate more than people expect.** Five connected MCP servers can easily contribute 5,000--10,000 tokens to every request before you've typed a word. The model doesn't have to *use* the tool — the schema ships either way.
 * **Conversation history grows without bound.** A 30-turn chat is paying for the first 29 turns on every new question, plus your fresh one.
 * **Output is small in volume but expensive per token.** On most direct APIs, output tokens cost three to five times input tokens. A reply that says "Sure! Let me explain what I'm about to do..." before doing it is pure tax.
 
 > **Rule of thumb:** profile your own traffic before optimizing. The bucket dominating *your* sessions is rarely the one your gut says.
 
-In a Copilot context, you can't see token counts directly --- but you can see the symptom. Open **Output → "GitHub Copilot Chat"** and watch the `ccreq` lines: each one shows the model, latency, and request type per turn. When the same question takes three times longer in chat #2 than chat #1, you've just watched your token meter the entire time.
+In a Copilot context, you can't see token counts directly — but you can see the symptom. Open **Output → "GitHub Copilot Chat"** and watch the `ccreq` lines: each one shows the model, latency, and request type per turn. When the same question takes three times longer in chat #2 than chat #1, you've just watched your token meter the entire time.
 
 ![VS Code Output panel showing Copilot Chat ccreq lines — your free token meter](ccreq-log-650x510.png)
 
 ## The Eight Levers
 
-These aren't in priority order --- they're in the order you'd naturally encounter them in a session. The first three (context, caching, tools) are about the request *shape* . The next three (instructions, model, output) are about how you *talk* to the assistant. The last two (repo, observability) are the foundations that make all of the others stick.
+These aren't in priority order — they're in the order you'd naturally encounter them in a session. The first three (context, caching, tools) are about the request *shape* . The next three (instructions, model, output) are about how you *talk* to the assistant. The last two (repo, observability) are the foundations that make all of the others stick.
 
 ![Eight levers that mananges token budget](eight-levers-700x211.png)
 
-### A. Context engineering --- scope your asks
+### A. Context engineering — scope your asks
 
 The single biggest waste in most AI workflows is asking vague questions of agent-mode chat with full codebase access. The agent dutifully explores, reads ten files to find the two it needed, summarizes them all, and then answers. You pay for every step.
 
@@ -80,7 +80,7 @@ Specificity is free. Every `#file:` (Copilot) or explicit path (Claude Code) you
 
 **Do this Monday:** make `#file:` your default. Use agent-mode-with-broad-retrieval only when you genuinely don't know what you don't know.
 
-### B. Prompt caching --- order matters
+### B. Prompt caching — order matters
 
 Every major provider supports prompt caching now. Anthropic and OpenAI both charge roughly **10% of base input cost for cache hits**. Google's Gemini does it explicitly. The mechanism is the same: a stable prefix at the front of your prompt is cached after the first request and read back cheaply on subsequent ones.
 
@@ -98,7 +98,7 @@ The classic anti-pattern is innocent-looking and brutal is to have dynamic value
 
 **Do this Monday:** audit the *first* 200 tokens of your system prompts. Anything that changes per-request belongs further down.
 
-### C. Tool \& MCP hygiene --- every schema is a tax
+### C. Tool \& MCP hygiene — every schema is a tax
 
 Each connected tool ships its full JSON schema with every request. A typical MCP server with 8--15 tools costs **400--2,500 tokens per turn**. Five servers connected? You may be paying 5,000--10,000 tokens per turn for tool definitions the model never invokes.
 
@@ -114,13 +114,13 @@ Treat MCP servers like browser extensions: useful, but only the ones you actuall
 }
 ```
 
-The same discipline applies to **the tools you build yourself** . A tool that returns `{ id, summary }` is cheap. A tool that returns a 50-field JSON object is expensive --- the model re-processes all 50 fields on every turn it's referenced. Default to compact responses with optional `?expand=...` for the rare caller that needs the rest.
+The same discipline applies to **the tools you build yourself** . A tool that returns `{ id, summary }` is cheap. A tool that returns a 50-field JSON object is expensive — the model re-processes all 50 fields on every turn it's referenced. Default to compact responses with optional `?expand=...` for the rare caller that needs the rest.
 
 **Do this Monday:** open MCP server list, disable everything you didn't actively use this week. Re-enable on demand.
 
-### D. Custom instructions \& skills --- codify it once
+### D. Custom instructions \& skills — codify it once
 
-Anything you find yourself re-typing in chats belongs in an instructions file. The exact filename varies --- `.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, Cursor Rules --- but the principle is identical: write your team conventions once, commit them, and let every chat in the repo inherit them.
+Anything you find yourself re-typing in chats belongs in an instructions file. The exact filename varies --- `.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, Cursor Rules — but the principle is identical: write your team conventions once, commit them, and let every chat in the repo inherit them.
 
 A small example is worth more than a long one:
 
@@ -139,11 +139,11 @@ applyTo: "src/main/java/**/*.java"
 - Tests mirror the source tree under `src/test/java/...` as `<Name>Test.java`.
 ```
 
-This file is loaded *only* when a matching file is in scope. Repo-wide rules go in the global instructions; stack-specific rules go in scoped ones. Both are committed, both are versioned, both are team artifacts --- not personal preferences buried in someone's IDE settings.
+This file is loaded *only* when a matching file is in scope. Repo-wide rules go in the global instructions; stack-specific rules go in scoped ones. Both are committed, both are versioned, both are team artifacts — not personal preferences buried in someone's IDE settings.
 
 **Do this Monday:** check what you've typed into chat windows in the last week. Anything that reappeared more than twice is a candidate for an instructions file.
 
-### E. Model routing --- start cheap, escalate when stuck
+### E. Model routing — start cheap, escalate when stuck
 
 Routine tasks pick the most expensive model by default if you let them. You probably just paid 10× for the same answer.
 
@@ -156,13 +156,13 @@ A defensible default routing table:
 | Long-context refactor / agent mode | Mid-tier with long context        | 1×                   |
 | Genuinely hard reasoning           | Top-tier (Claude Opus)            | **10×**              |
 
-The rule is: **start cheap, escalate only when stuck.** "Stuck" means you've tried the mid-tier model with good context and it's plainly missing the point --- not "I want to feel sure," not "I have time to spare."
+The rule is: **start cheap, escalate only when stuck.** "Stuck" means you've tried the mid-tier model with good context and it's plainly missing the point — not "I want to feel sure," not "I have time to spare."
 
-The math compounds. A team of fifty doing twenty agent runs each per day at 10× costs five times more than at 2× --- for the same diffs, on most days.
+The math compounds. A team of fifty doing twenty agent runs each per day at 10× costs five times more than at 2× — for the same diffs, on most days.
 
 **Do this Monday:** pin your default to the mid-tier. Make Opus a deliberate choice with a reason.
 
-### F. Output discipline --- diffs, not novels
+### F. Output discipline — diffs, not novels
 
 Every model has a "let me explain what I'm about to do" reflex. It's polite. It's also pure cost.
 
@@ -184,7 +184,7 @@ The leverage is in the system prompt. Two lines in `copilot-instructions.md` mak
 
 **Do this Monday:** add those two lines.
 
-### G. Repo hygiene --- what the indexer sees
+### G. Repo hygiene — what the indexer sees
 
 The indexer that powers retrieval respects `.gitignore`. Tighten it.
 
@@ -197,7 +197,7 @@ The indexer that powers retrieval respects `.gitignore`. Tighten it.
  *.log
 ```
 
-**Important gotcha:** if a file is *already tracked* in git, adding the path to `.gitignore` does not untrack it --- the indexer still sees it. You also need:
+**Important gotcha:** if a file is *already tracked* in git, adding the path to `.gitignore` does not untrack it — the indexer still sees it. You also need:
 
 ```bash
 git rm --cached target/demo-0.0.1-SNAPSHOT.jar
@@ -217,13 +217,13 @@ Three lines, \~50 tokens. Now "what does the template engine do?" can be answere
 
 **Do this Monday:** `git rm --cached` whatever shouldn't be indexed; add three-line summaries to your top-of-mind modules.
 
-### H. Observability --- latency is your token meter
+### H. Observability — latency is your token meter
 
 You can't see Copilot's token counts. You don't need to. Use the proxy you already have:
 
 | Reply latency | ≈ Input tokens |
 |---------------|----------------|---------------------------------|
-| \< 5 s        | 20 s           | Near limit --- start a new chat |
+| \< 5 s        | 20 s           | Near limit — start a new chat |
 
 When the same question takes three times longer in your fourth chat than in a fresh one, you've just watched your context bloat in real time. The fix is "new chat with a summary," not "wait it out."
 
@@ -269,7 +269,7 @@ Why it works:
 * **Each iteration starts with a small, fresh context.** The chat history isn't growing the way it would in a free-form conversation.
 * **State lives on disk** (`TODO.md` and git commits), not in conversation tokens.
 * **A cheap model is good enough**, because each task is small and self-contained.
-* **It's restartable.** Kill the chat halfway, start a new one, run the prompt again --- it picks up where it left off.
+* **It's restartable.** Kill the chat halfway, start a new one, run the prompt again — it picks up where it left off.
 
 After it runs, `git log --oneline` reads like a changelog: one commit per task, message starts with the task title, easy to revert any one step. Compare with the typical "fix things" mega-commit and you'll never go back.
 
@@ -279,7 +279,7 @@ After it runs, `git log --oneline` reads like a changelog: one commit per task, 
 
 Most assistants don't compact aggressively on their own. **You** have to drive it.
 
-When a chat hits 60--80% of the context window (you'll know --- replies start to crawl), stop and ask:
+When a chat hits 60--80% of the context window (you'll know — replies start to crawl), stop and ask:
 > *Summarize what we've discussed: the goal, files we've touched, decisions made, open questions, and the next step. Keep it under 300 words and use bullet points.*
 
 Save the output to `plan.md`. Open a brand new chat. Attach it:
@@ -299,9 +299,9 @@ This is the one that changes how features get built. Three short, focused chats 
 
 ![The handover artifact is the only thing that crosses the boundary — never chat history](06-handover-flow-700x268.png)
 
-* **Planner** --- *expensive* model, one call. Reads the feature request, produces `plan.md` with goal, acceptance criteria, tasks, files expected to change, out-of-scope items, and risks. **No code yet.**
-* **Implementer** --- *cheap* model, agent mode, fresh chat. Sees only `plan.md`. Runs a Ralph loop on it: pick first unchecked task, implement, test, check the box, commit, repeat.
-* **Reviewer** --- *expensive* model, fresh chat. Sees only `plan.md` and the diff. Marks each acceptance criterion PASS or FAIL, lists bugs, smells, out-of-scope edits. Ends with `VERDICT: APPROVE` or `VERDICT: REQUEST CHANGES`.
+* **Planner** — *expensive* model, one call. Reads the feature request, produces `plan.md` with goal, acceptance criteria, tasks, files expected to change, out-of-scope items, and risks. **No code yet.**
+* **Implementer** — *cheap* model, agent mode, fresh chat. Sees only `plan.md`. Runs a Ralph loop on it: pick first unchecked task, implement, test, check the box, commit, repeat.
+* **Reviewer** — *expensive* model, fresh chat. Sees only `plan.md` and the diff. Marks each acceptance criterion PASS or FAIL, lists bugs, smells, out-of-scope edits. Ends with `VERDICT: APPROVE` or `VERDICT: REQUEST CHANGES`.
 
 Three chats, \~5--8 premium requests total for an end-to-end feature. Compare with one mega-chat using the most expensive model the whole way: easily 30+ requests at 10× the multiplier.
 
@@ -322,7 +322,7 @@ Pin this to your team's wiki. Take what's useful, ignore the rest.
 **Per-session habits**
 
 * \[ \] Disable MCP servers you don't need this session. Re-enable on demand.
-* \[ \] Default to a mid-tier model. Escalate to a top-tier model only when stuck --- and only with a reason.
+* \[ \] Default to a mid-tier model. Escalate to a top-tier model only when stuck — and only with a reason.
 * \[ \] Use `#file:` (or your tool's equivalent) instead of broad-retrieval / agent mode for scoped tasks.
 * \[ \] Ask for diffs, not full files.
 * \[ \] Start each new task in a fresh chat.
@@ -338,7 +338,7 @@ Pin this to your team's wiki. Take what's useful, ignore the rest.
 
 The mindset shift is small and the wins are not.
 
-Prompt engineering used to be about clever phrasing. Context engineering --- what this post was really about --- is about **what's in the window and what isn't**. Smaller prompts, fewer tools, scoped retrieval, summaries instead of histories, cheap models for cheap work, expensive models for the rare hard parts.
+Prompt engineering used to be about clever phrasing. Context engineering — what this post was really about — is about **what's in the window and what isn't**. Smaller prompts, fewer tools, scoped retrieval, summaries instead of histories, cheap models for cheap work, expensive models for the rare hard parts.
 
 None of it is novel. None of it is hard. Most teams don't actually have a token problem; they have a discipline problem. The levers are boring. The compounding is real: a team that adopts even half of the above will see latencies fall, premium-request burn drop noticeably, and, counterintuitively, answer quality go *up*, because the model isn't drowning in irrelevant context.
 

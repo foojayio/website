@@ -36,7 +36,7 @@ Although these factors have been a fantastic resource and guide for developers l
 
 So, it's time to modernize Twelve-Factor for the next decade of technological advancements, and we want this to be a community effort!
 
-While the folks at Heroku originally wrote Twelve-Factor on their own, it's now time that we define and implement these principles with the community, together --- taking lessons that we've all learned from building and operating modern apps and systems and sharing them. There's already a small group of communtity members helping to drive this work forward, including myself, but we're looking for more ideas and more keen individuals who are interested in helping update this methdology.
+While the folks at Heroku originally wrote Twelve-Factor on their own, it's now time that we define and implement these principles with the community, together — taking lessons that we've all learned from building and operating modern apps and systems and sharing them. There's already a small group of communtity members helping to drive this work forward, including myself, but we're looking for more ideas and more keen individuals who are interested in helping update this methdology.
 
 **So, let's do this together, if you're interested in getting involved, you can either email to join our Google group ([\[email protected\]](/cdn-cgi/l/email-protection)) or tell us about your ideas and perspectives through a blog and tag #12factor (X / LinkedIn) or @heroku when you publish it. We'd love to hear your ideas!**
 

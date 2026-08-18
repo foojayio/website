@@ -74,7 +74,7 @@ Exceptions:
 Out of scope of Liberty's zero migration policy:
 
 * Third-party API requirements: Updates to third-party components are not guaranteed to be compatible with earlier Liberty versions.
-* Undocumented configuration properties: Configuration options not documented in our platform's documentation can cause issues if used---and might even be removed or changed at any time. An example would be any beta functionality.
+* Undocumented configuration properties: Configuration options not documented in our platform's documentation can cause issues if used—and might even be removed or changed at any time. An example would be any beta functionality.
 * Incompatible Java changes: While rare, breaking changes in new Java SE versions can sometimes affect your application.
 
 If you're running your applications in a business production environment and you find yourself unable to quickly move to a newer version of Liberty, but need a specific bug or security fix, a [paid subscription with IBM](https://openliberty.io/support/?utm_source=foojay&utm_medium=article&utm_id=zeromigration "paid subscription with IBM") means you can contact IBM Support to receive an iFix that you can apply to your existing supported version. That iFix is then included in future releases of Liberty, meaning you won't need to reapply it when you do move to the latest version.

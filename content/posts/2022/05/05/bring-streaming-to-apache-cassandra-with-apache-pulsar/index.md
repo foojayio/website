@@ -23,7 +23,7 @@ frozen: false
 
 ![](1_4VRCkVXi6RRfK4pwrJkPjw-1024x506.jpeg)
 
-Twitch, YouTube, Instagram, Facebook --- virtually every major brand nowadays uses live streaming to connect and engage their audience.{#2544}
+Twitch, YouTube, Instagram, Facebook — virtually every major brand nowadays uses live streaming to connect and engage their audience.{#2544}
 
 For enterprises and developers [building cloud-native applications](https://datastax.medium.com/build-your-first-app-with-javascript-node-js-and-datastax-astra-db-573abc238583), this growing trend creates a need for streaming technologies that can reliably handle the rush of massive amounts of data, while also being flexible and easy to manage for developers.{#2544}
 
@@ -105,7 +105,7 @@ Go ahead and follow the instructions for [Lab 2 on GitHub](https://github.com/da
 
 Now it's time to connect Pulsar to Cassandra and create a database where you can store the messages sent from Pulsar/Kesque. But instead of installing Cassandra and dealing with all the operational complexity that comes with it, you can just use [Astra DB](https://astra.dev/3N3jzE2) and then connect it to Kesque.{#6e28}
 
-Astra DB is a multi-cloud database-as-a-service (DBaaS) built on Cassandra. It's the simplest way to benefit from Cassandra's robust and highly scalable architecture --- without the headache of managing the details yourself. So, in this lab you'll:{#81bc}
+Astra DB is a multi-cloud database-as-a-service (DBaaS) built on Cassandra. It's the simplest way to benefit from Cassandra's robust and highly scalable architecture — without the headache of managing the details yourself. So, in this lab you'll:{#81bc}
 
 * [Sign up for a free Astra DB account](https://astra.dev/3N3jzE2)
 * Create a database in Astra DB
@@ -138,7 +138,7 @@ Remember: if you need more guidance during this workshop, you can follow the who
 2. [GitHub: Workshop Apache Cassandra and Apache Pulsar](https://github.com/datastaxdevs/workshop-pulsar)
 3. [7 Reasons We Chose Apache Pulsar over Apache Kafka](https://www.datastax.com/blog/2019/05/7-reasons-we-chose-apache-pulsar-over-apache-kafka)
 4. [DataStax Astra DB](https://astra.dev/3N3jzE2)
-5. [DataStax Luna Streaming --- Apache Pulsar Distribution](https://www.datastax.com/products/luna-streaming)
+5. [DataStax Luna Streaming — Apache Pulsar Distribution](https://www.datastax.com/products/luna-streaming)
 6. [Pulsar connector overview](https://pulsar.apache.org/docs/en/io-overview/)
 7. [Discord: Fellowship of the (Cassandra) Rings](https://discord.com/invite/pPjPcZN)
 8. [DataStax Academy](https://auth.cloud.datastax.com/auth/realms/CloudUsers/protocol/saml/clients/absorb)

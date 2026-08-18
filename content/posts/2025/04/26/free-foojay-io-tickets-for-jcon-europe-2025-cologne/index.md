@@ -20,7 +20,7 @@ frozen: false
 
 Welcome to JCON EUROPE 2025, the international Java conference where the heart of the Java community beats loud and proud! Over 60 countries will be represented as Java developers from around the globe come together in Cologne to learn, connect, and celebrate three decades of Java innovation and a decade of JCON magic.
 
-And we're doing it in style: JCON EUROPE is hosted in a multiplex movie theater, where Java code, insights, and live demos unfold on massive cinema screens. It's an immersive learning experience like no other---where you're not just watching talks, you're living them.
+And we're doing it in style: JCON EUROPE is hosted in a multiplex movie theater, where Java code, insights, and live demos unfold on massive cinema screens. It's an immersive learning experience like no other—where you're not just watching talks, you're living them.
 
 ![](53721494882_6f31f6da3b_k-700x422.jpg)
 
@@ -33,17 +33,17 @@ This year we're throwing the ultimate Java birthday bash:
 
 To mark the occasion, we're bringing out the big names:
 
-✨ Sharat Chander, Senior Director of Java Product Management at Oracle---and one of the most recognized voices in the Java community---joins us with his team to celebrate Java's past, present, and future. Expect exclusive insights straight from the source of Java's evolution.
+✨ Sharat Chander, Senior Director of Java Product Management at Oracle—and one of the most recognized voices in the Java community—joins us with his team to celebrate Java's past, present, and future. Expect exclusive insights straight from the source of Java's evolution.
 
-✨ Mark Stoodley, Chief Architect for Java at IBM, is also taking the stage. Representing both IBM and Red Hat, he'll dive deep into how they're shaping the next era of Java---across the enterprise, the cloud-native landscape, and performance optimization.
+✨ Mark Stoodley, Chief Architect for Java at IBM, is also taking the stage. Representing both IBM and Red Hat, he'll dive deep into how they're shaping the next era of Java—across the enterprise, the cloud-native landscape, and performance optimization.
 
 These are keynotes you won't want to miss, delivering strategic, behind-the-scenes perspectives from the leaders driving Java forward.
 
-### 💙 Foojay.io friends, you're invited---for free!
+### 💙 Foojay.io friends, you're invited—for free!
 
 As proud members of the Java ecosystem, Foojay collaborators of all shapes and sizes can join JCON EUROPE 2025 at no cost via this link: <https://pretix.eu/impuls/europe2025/redeem?voucher=FOOJAY-COMMUNITY>
 
-🌐 Whether you're a backend veteran, JVM tinkerer, JavaFX enthusiast, or just exploring how Java meets AI, cloud, or microservices---JCON is your home base for real-world learning, shared passion, and serious fun.
+🌐 Whether you're a backend veteran, JVM tinkerer, JavaFX enthusiast, or just exploring how Java meets AI, cloud, or microservices—JCON is your home base for real-world learning, shared passion, and serious fun.
 
 ![](53726446409_97af25b8e2_k-700x385.jpg)
 

@@ -25,7 +25,7 @@ Keeping a project on Java 8 will eventually lead to running it on a non-maintain
 In an earlier article, [Unsupported Versions of Java Are Dangerous](https://www.azul.com/blog/unsupported-versions-of-java-are-dangerous/), Simon Ritter points out the problems if you are still running on an older version <kbd>–</kbd> Java 7 in this case -- that is no longer supported.
 
 Azul still supports Java 7 until 2027, but other distributions do not support it. You can find the complete [support lifecycle for existing and planned JDK releases](https://www.azul.com/products/azul-support-roadmap/) on the Azul website.
-> "***The adage 'if it ain't broke, don't fix it' is often applied to deployed applications. As a result, almost all production enterprise applications, including mission-critical ones, are still running on older versions of Java. Sometimes very old... and sometimes unsupported versions of Java*** ." --- **Simon Ritter, Deputy CTO, Azul**
+> "***The adage 'if it ain't broke, don't fix it' is often applied to deployed applications. As a result, almost all production enterprise applications, including mission-critical ones, are still running on older versions of Java. Sometimes very old... and sometimes unsupported versions of Java*** ." — **Simon Ritter, Deputy CTO, Azul**
 ![](10-11-unsupported-java-1024x400-1.jpeg)
 
 ## What are you Missing in Java 8?

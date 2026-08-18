@@ -26,7 +26,7 @@ I'm not going to dive into all functional programming concepts in detail, instea
 ## What is functional programming?
 
 As per Wikipedia,
-> Functional programming is a programming paradigm---a style of building the structure and elements of computer programs---that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
+> Functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
 
 Hence in functional programming, there are two very important rules
 

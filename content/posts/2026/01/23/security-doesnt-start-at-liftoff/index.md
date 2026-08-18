@@ -279,7 +279,7 @@ Ask which point releases in your environment would be applied automatically, and
 
 #### 3) Map responsibility for end-of-life components explicitly.
 
-If a dependency is out of upstream support, the risk is no longer abstract or future-dated. Security responsibility has already shifted. It now sits either with you, with a downstream vendor, or with nobody at all---and that ambiguity is itself a form of exposure.
+If a dependency is out of upstream support, the risk is no longer abstract or future-dated. Security responsibility has already shifted. It now sits either with you, with a downstream vendor, or with nobody at all—and that ambiguity is itself a form of exposure.
 
 I should be explicit about my own position here. I work for a company that provides extended support for end-of-life open-source components. That is one way, sometimes a very practical one, to regain control when vulnerabilities appear in older software. It can buy breathing space. It can stabilise a system long enough for thoughtful decisions to be made.
 

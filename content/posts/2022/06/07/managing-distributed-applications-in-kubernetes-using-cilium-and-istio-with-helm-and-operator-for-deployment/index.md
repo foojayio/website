@@ -121,4 +121,4 @@ Curious to learn more about (or play with) Cassandra itself? We recommend trying
 24. [Operator Framework](https://operatorframework.io/)
 25. [Operator SDK](https://sdk.operatorframework.io/)
 26. [What is the Kubernetes API?](https://www.redhat.com/en/topics/containers/what-is-the-kubernetes-API)
-27. [Global Locations --- Regions \& Zones](https://cloud.google.com/about/locations#network)
+27. [Global Locations — Regions \& Zones](https://cloud.google.com/about/locations#network)

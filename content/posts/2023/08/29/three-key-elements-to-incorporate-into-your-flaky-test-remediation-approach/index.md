@@ -59,7 +59,7 @@ There may be environmental factors in these failures too, since tests may time o
 
 **2. Environment, Network, and Resources**: Variations in testing environments or network conditions, as well as insufficient compute resources, can result in inconsistent test behavior.
 
-Gradle Enterprise can help you identify some of these issues---it will show details about the environment the tests ran in so you can compare the test results from different environments.
+Gradle Enterprise can help you identify some of these issues—it will show details about the environment the tests ran in so you can compare the test results from different environments.
 
 ![Screenshot of build scan's infrastructure page](flaky-test-remediation-approach-1-700x247.png)
 

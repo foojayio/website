@@ -26,11 +26,11 @@ frozen: false
 
 The AI ecosystem has a tool problem. Every framework has its own way of defining tools, every agent has its own way of calling them, and every integration requires custom code on both sides. An agent built in Python can't easily use tools built in Java. An MCP server written for Claude Desktop can't easily be consumed by a BoxLang agent without a custom adapter.
 
-The **Model Context Protocol (MCP)** is the industry's answer --- a standardized JSON-RPC protocol that lets AI agents discover and call tools from any MCP server, regardless of implementation language. It's an open standard, and it's gaining serious momentum.
+The **Model Context Protocol (MCP)** is the industry's answer — a standardized JSON-RPC protocol that lets AI agents discover and call tools from any MCP server, regardless of implementation language. It's an open standard, and it's gaining serious momentum.
 
 **BoxLang AI** is a first-class MCP citizen. You can **consume** any MCP server from your agents with zero configuration. You can **build** production-grade MCP servers that expose your BoxLang functions to any MCP client in the ecosystem. And thanks to the `MCPTool` class from Part 2, the two sides connect seamlessly inside the same agent.
 
-## 🔌 Consuming MCP Servers --- The Client Side
+## 🔌 Consuming MCP Servers — The Client Side
 
 The `MCP()` BIF creates an `MCPClient` connected to any MCP server. It handles JSON-RPC, tool discovery, invocation, and response normalization:
 
@@ -61,7 +61,7 @@ prompt  = mcpClient.getPrompt( "code-review", { language: "BoxLang" } )
 
 ### Seeding Agents with MCP Servers
 
-The most powerful use of MCP in BoxLang AI is seeding agents directly. When you call `withMCPServer()`, every tool the server exposes is automatically discovered and registered as an `MCPTool` instance --- the agent can use them exactly like any native tool:
+The most powerful use of MCP in BoxLang AI is seeding agents directly. When you call `withMCPServer()`, every tool the server exposes is automatically discovered and registered as an `MCPTool` instance — the agent can use them exactly like any native tool:
 
 ```java
 // Seed at construction time
@@ -87,11 +87,11 @@ println( agent.listMCPServers() )
 // → [{ url: "http://localhost:3001", toolNames: ["read_file", "write_file"] }, ...]
 ```
 
-The agent's system message is automatically updated with the MCP server list so the LLM knows which tools came from which server --- critical for complex multi-server setups where tool names might overlap.
+The agent's system message is automatically updated with the MCP server list so the LLM knows which tools came from which server — critical for complex multi-server setups where tool names might overlap.
 
 ### How `MCPTool` Works
 
-Each tool discovered from an `MCP` server becomes an `MCPTool` instance that extends BaseTool. This means it gets the full lifecycle --- `beforeAIToolExecute`/`afterAIToolExecute events`, result serialization, middleware interception --- exactly like any native tool.
+Each tool discovered from an `MCP` server becomes an `MCPTool` instance that extends BaseTool. This means it gets the full lifecycle --- `beforeAIToolExecute`/`afterAIToolExecute events`, result serialization, middleware interception — exactly like any native tool.
 
 The `doInvoke()` implementation strips internal keys and proxies the call to the MCP server:
 
@@ -118,9 +118,9 @@ public any function doInvoke( required struct args, AiChatRequest chatRequest ) 
 
 The schema conversion is also automatic --- `generateSchema()` wraps the MCP `inputSchema` (already in OpenAI-compatible format) in the standard function wrapper. LLM providers see MCP tools identically to native tools.
 
-## 🖥️ Building MCP Servers --- The Server Side
+## 🖥️ Building MCP Servers — The Server Side
 
-BoxLang AI lets you expose your own functions as an MCP server accessible by any MCP client --- Claude Desktop, other BoxLang agents, Python scripts, anything that speaks the protocol.
+BoxLang AI lets you expose your own functions as an MCP server accessible by any MCP client — Claude Desktop, other BoxLang agents, Python scripts, anything that speaks the protocol.
 
 ### Simple Server
 
@@ -241,7 +241,7 @@ Returns HTTP 401 for invalid keys.
 
 ### Automatic Security Headers
 
-Every response from a BoxLang MCP server includes industry-standard security headers automatically --- no configuration needed:
+Every response from a BoxLang MCP server includes industry-standard security headers automatically — no configuration needed:
 
 ```html
 X-Content-Type-Options: nosniff
@@ -380,13 +380,13 @@ response = supportAgent.run(
 )
 ```
 
-The agent uses get_order from the internal MCP server, searches the KB MCP for damage policies, checks customer history via hybrid memory, then calls update_order --- which triggers the HumanInTheLoopMiddleware and suspends for manager approval. The whole thing is logged, guarded, and fully introspectable.
+The agent uses get_order from the internal MCP server, searches the KB MCP for damage policies, checks customer history via hybrid memory, then calls update_order — which triggers the HumanInTheLoopMiddleware and suspends for manager approval. The whole thing is logged, guarded, and fully introspectable.
 
 ## 🎯 Wrapping Up the Full Series
 
 Seven posts. One framework. The complete picture.
 
-BoxLang AI 3.0 isn't a wrapper around OpenAI. It's a complete AI application platform --- skills for reusable knowledge, a type-safe tool ecosystem, a full agent hierarchy with stateless multi-tenant design, six battle-tested middleware classes, 17 providers with capability-safe routing, 20+ memory types with vector RAG support, and first-class MCP for both consuming and exposing tools.
+BoxLang AI 3.0 isn't a wrapper around OpenAI. It's a complete AI application platform — skills for reusable knowledge, a type-safe tool ecosystem, a full agent hierarchy with stateless multi-tenant design, six battle-tested middleware classes, 17 providers with capability-safe routing, 20+ memory types with vector RAG support, and first-class MCP for both consuming and exposing tools.
 
 And it all runs on the JVM, ships with BoxLang's full ecosystem, and takes a single install [\[email protected\]](/cdn-cgi/l/email-protection) to get started.
 
@@ -402,6 +402,6 @@ install-bx-module bx-ai
 
 📖 [Full Documentation](https://boxlang.ortusbooks.com/ai "Full Documentation") 🌍 [Official Website](https://ai.boxlang.io/ "Official Website") 🎓 [AI BootCamp](https://github.com/ortus-boxlang/bx-ai-bootcamp "AI BootCamp") 📦 [ForgeBox Package](https://forgebox.io/view/bx-ai "ForgeBox Package") 🐛 [Report Issues](https://github.com/ortus-boxlang/bx-ai/issues "Report Issues") 💬 [Community Slack](https://boxteam.ortussolutions.com/ "Community Slack") 💼 [BoxLang+ Plans](https://www.boxlang.io/plans "BoxLang+ Plans")
 
-*Thank you to everyone who read through all seven posts. The BoxLang AI team is just getting started --- see you in v4. 🙏*
+*Thank you to everyone who read through all seven posts. The BoxLang AI team is just getting started — see you in v4. 🙏*
 
 ← [Previous](https://foojay.io/today/boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers/ "Previous")

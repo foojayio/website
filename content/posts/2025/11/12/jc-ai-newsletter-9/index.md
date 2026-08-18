@@ -48,7 +48,7 @@ The world influenced by LLM is changing very quickly, let's start...
 **desc.** : A remaining challenge for LLMs is extending their powerful capabilities to solve problems beyond their training data and to achieve comparable results with data the LLM has never encountered. Although the Microsoft Research work on GraphRAG is already somewhat dated given the current pace of LLM development, it remains valuable to understand the fundamentals, rationale, and purpose of GraphRAG. GraphRAG may play an important role in the development of agentic AI systems.  
 **category**: research
 
-**article** : [Agentic GraphRAG: Simplifying Retrieval Across Structured \& Unstructured Data --- Zach Blumenfeld](https://www.youtube.com/watch?v=CzM3cW6FdBs "Agentic GraphRAG: Simplifying Retrieval Across Structured &amp; Unstructured Data — Zach Blumenfeld")  
+**article** : [Agentic GraphRAG: Simplifying Retrieval Across Structured \& Unstructured Data — Zach Blumenfeld](https://www.youtube.com/watch?v=CzM3cW6FdBs "Agentic GraphRAG: Simplifying Retrieval Across Structured &amp; Unstructured Data — Zach Blumenfeld")  
 **authors** : Zach Blumenfeld, AI Engineers  
 **date** : 2025-06-27  
 **desc.** : Agentic workflows often become complex, brittle, and difficult to maintain when they need to retrieve and reason across both structured and unstructured data. This talk explores how mapping key information into a knowledge graph can simplify these workflows and improve retrieval quality. The presented example of identifying individuals with similar skills and abilities extracted from CVs provides insight into the practical application of agentic AI systems with GraphRAG.  

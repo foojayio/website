@@ -239,7 +239,7 @@ The complete source code for this post can be found on [GitHub](https://github.c
 * [OpenTelemetry Traces](https://opentelemetry.io/docs/concepts/signals/traces/)
 * [OpenTelemetry Java integration](https://opentelemetry.io/docs/languages/java/getting-started/)
 * [OpenTelemetry Java examples](https://github.com/open-telemetry/opentelemetry-java-examples#java-opentelemetry-examples)
-* [Distributed Tracing with Spring Boot 3 --- Micrometer vs OpenTelemetry](https://itnext.io/distributed-tracing-with-spring-boot-3-micrometer-vs-opentelemetry-b3593546f61b)
+* [Distributed Tracing with Spring Boot 3 — Micrometer vs OpenTelemetry](https://itnext.io/distributed-tracing-with-spring-boot-3-micrometer-vs-opentelemetry-b3593546f61b)
 * [Observability With Spring Boot 3](https://www.baeldung.com/spring-boot-3-observability)
 
 *Originally published at [A Java Geek](https://blog.frankel.ch/opentelemetry-tracing-spring-boot/) on August 3^rd^, 2024*

@@ -462,11 +462,11 @@ This yields **one ranked list** that balances **keyword intent** (textRank) and 
 
 <!-- -->
 
-* **Fuse text + vectors with RRF** . When knnBeta can't be combined with a compound in a single $search, run two legs---$search.text and $vectorSearch---rank each leg, then fuse with **RRF**. Items with non-zero textRank and vectorRank (1 = best per leg) are promoted, yielding one balanced list.
+* **Fuse text + vectors with RRF** . When knnBeta can't be combined with a compound in a single $search, run two legs---$search.text and $vectorSearch—rank each leg, then fuse with **RRF**. Items with non-zero textRank and vectorRank (1 = best per leg) are promoted, yielding one balanced list.
 
 <!-- -->
 
-* **Keep it in MongoDB**. Indexing, vectors, filters, and ranking all live in one place---no cross-system syncing.
+* **Keep it in MongoDB**. Indexing, vectors, filters, and ranking all live in one place—no cross-system syncing.
 
 ### More tips like this
 

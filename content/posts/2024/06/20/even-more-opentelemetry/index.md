@@ -21,7 +21,7 @@ frozen: false
 
 Here's an updated diagram. New components appear in violet, and updated components appear in green.
 
-[![](otel-component-model.png)](otel-component-model.png)I want to be able to add more components. Thus, I decided that instead of directly querying the database, the `inventory` component would query warehouses, which are supposed to be located in different regions. Each warehouse can be implemented in a different stack, and you can have as many as you want---PRs are welcome. I miss Elixir and .Net at the moment. The contract, which I need to write down, is easy:
+[![](otel-component-model.png)](otel-component-model.png)I want to be able to add more components. Thus, I decided that instead of directly querying the database, the `inventory` component would query warehouses, which are supposed to be located in different regions. Each warehouse can be implemented in a different stack, and you can have as many as you want—PRs are welcome. I miss Elixir and .Net at the moment. The contract, which I need to write down, is easy:
 
 * An endpoint `/stocks/${productId}`
 * The ability to query PostgreSQL

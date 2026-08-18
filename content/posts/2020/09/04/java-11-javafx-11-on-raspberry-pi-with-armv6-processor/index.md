@@ -258,4 +258,4 @@ Compared to the latest Raspberry Pi with a much faster processor and more memory
 
 Again this small-superhero-board proves to be able to handle everything, even the most modern Java versions on an old processor.
 
-**Note:** Used with permission and thanks --- originally written by Frank Delporte and published on [Frank Delporte's blog](https://webtechie.be/post/2020-08-27-azul-zulu-java-11-and-gluon-javafx-11-on-armv6-raspberry-pi/).
+**Note:** Used with permission and thanks — originally written by Frank Delporte and published on [Frank Delporte's blog](https://webtechie.be/post/2020-08-27-azul-zulu-java-11-and-gluon-javafx-11-on-armv6-raspberry-pi/).

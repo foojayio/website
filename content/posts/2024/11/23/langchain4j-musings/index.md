@@ -331,7 +331,7 @@ curl -N -H 'Content-Type: application/json' localhost:8080 -d '{ "sessionId": "1
 The answer is much better:
 > The provided information doesn't mention specific books written by Nicolas Fränkel. It only provides metadata for his blog, which has a section dedicated to his "Books". ...​
 
-It's not really correct---I actually mentioned that I wrote the books mentioned, but it's at least not hallucinating.
+It's not really correct—I actually mentioned that I wrote the books mentioned, but it's at least not hallucinating.
 
 ## Conclusion
 

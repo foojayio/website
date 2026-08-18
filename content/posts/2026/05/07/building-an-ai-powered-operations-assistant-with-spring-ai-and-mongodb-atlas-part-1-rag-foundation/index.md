@@ -71,7 +71,7 @@ From an ingestion perspective, whenever a new runbook, procedure, postmortem, or
 The pipeline is shown below:  
 ![](Screenshot-2026-05-01-at-2.28.13-PM.png)
 
-The true strength of Spring AI lies in its abstraction, which allows the controller and service to remain unaware of which model is being used---whether it's GPT-5.4 or Sonnet 4.6---or whether the database is MongoDB Atlas or PostgreSQL. Changing the model or database is a matter of configuration, not a new development task. A game changer.
+The true strength of Spring AI lies in its abstraction, which allows the controller and service to remain unaware of which model is being used—whether it's GPT-5.4 or Sonnet 4.6—or whether the database is MongoDB Atlas or PostgreSQL. Changing the model or database is a matter of configuration, not a new development task. A game changer.
 
 ## Getting the Project Running
 
@@ -140,7 +140,7 @@ The prompt assembled from the previous steps is passed to GPT-5mini, which formu
 
 Throughout this process, the controller remains extremely lightweight, simply validating the inputs, constructing the filters to pass to the advisor, and building the response.
 
-This separation of responsibilities will become clearer and more useful as we continue through the tutorial. In Parts 2 and 3, we will add new advisors to the chain---for conversational memory and long-term memory---all without touching the controller or the exposed interfaces.
+This separation of responsibilities will become clearer and more useful as we continue through the tutorial. In Parts 2 and 3, we will add new advisors to the chain—for conversational memory and long-term memory—all without touching the controller or the exposed interfaces.
 
 ## The Atlas Vector Search Index
 

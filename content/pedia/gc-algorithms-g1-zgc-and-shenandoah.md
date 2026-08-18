@@ -17,11 +17,11 @@ The default collector before Java 9, optimised for **maximum throughput** on mul
 
 ### G1 (Garbage-First)
 
-The default collector since Java 9. G1 divides the heap into equal-sized regions and prioritises collecting regions with the most garbage first --- hence the name. It achieves a practical balance between throughput and pause time, with configurable pause-time goals (`-XX:MaxGCPauseMillis`). G1 is the right choice for most general-purpose server applications with heaps from a few hundred megabytes up to tens of gigabytes. Use `-XX:+UseG1GC` (default from Java 9).
+The default collector since Java 9. G1 divides the heap into equal-sized regions and prioritises collecting regions with the most garbage first — hence the name. It achieves a practical balance between throughput and pause time, with configurable pause-time goals (`-XX:MaxGCPauseMillis`). G1 is the right choice for most general-purpose server applications with heaps from a few hundred megabytes up to tens of gigabytes. Use `-XX:+UseG1GC` (default from Java 9).
 
 ### ZGC
 
-ZGC (Z Garbage Collector) became production-ready in Java 15 and performs the vast majority of its work **concurrently** with the application. Stop-the-world pauses are typically under 1 millisecond regardless of heap size --- ZGC has been validated on heaps exceeding a terabyte. ZGC is the best choice for latency-sensitive applications where even rare multi-millisecond pauses are unacceptable. Use `-XX:+UseZGC`.
+ZGC (Z Garbage Collector) became production-ready in Java 15 and performs the vast majority of its work **concurrently** with the application. Stop-the-world pauses are typically under 1 millisecond regardless of heap size — ZGC has been validated on heaps exceeding a terabyte. ZGC is the best choice for latency-sensitive applications where even rare multi-millisecond pauses are unacceptable. Use `-XX:+UseZGC`.
 
 ### Shenandoah
 

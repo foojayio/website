@@ -44,7 +44,7 @@ Who is the course for:
 
 ### Other resources:
 
-[CI/CD/CF? --- The DevOps toolchain's "missing-link"](https://digma.ai/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)  
+[CI/CD/CF? — The DevOps toolchain's "missing-link"](https://digma.ai/ci-cd-cf-the-devops-toolchains-missing-link-continuous-feedback/)  
 [Effective Java Observability](https://digma.ai/why-is-opentelemetry-important-for-java-applications/)  
 [Why is OpenTelemetry important for Java applications](https://digma.ai/why-is-opentelemetry-important-for-java-applications/ "Why is OpenTelemetry important for Java applications")
 

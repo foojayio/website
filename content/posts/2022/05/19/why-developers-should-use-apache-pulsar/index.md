@@ -41,7 +41,7 @@ The most common approach to application streaming is to use Apache Kafka. Howeve
 
 To start with, it's important to understand how the different streaming and messaging services work and how their design decisions around organizing messages can affect the implementation. Understanding these design decisions can help in determining the right fit for your requirements.
 
-For application streaming projects, one thing these services share is how data is stored on disk --- in what's called a segment file. This file contains the detailed data on individual events, and is eventually used to create a message that is then streamed out to consumers.
+For application streaming projects, one thing these services share is how data is stored on disk — in what's called a segment file. This file contains the detailed data on individual events, and is eventually used to create a message that is then streamed out to consumers.
 
 The individual segment files are bundled into a larger group in what is called a partition. Each partition is owned by a single lead broker, which replicates that partition to several followers. These are the basic steps on what needs to be done for reliable message passing.
 

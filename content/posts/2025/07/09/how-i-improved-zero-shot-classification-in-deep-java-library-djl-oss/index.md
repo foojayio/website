@@ -27,9 +27,9 @@ frozen: false
 ## **TL;DR:**
 
 * You're doing zero-shot classification in a Java app using DJL.
-* DJL didn't handle some models well --- like DeBERTa. It missed support for token_type_ids, assumed wrong label positions, and oversimplified the softmax implementation.
+* DJL didn't handle some models well — like DeBERTa. It missed support for token_type_ids, assumed wrong label positions, and oversimplified the softmax implementation.
 * It was fixed by reading the model config files and adjusting DJL's translator logic.
-* Now DJL gives correct results across different models --- just like the Transformers library does in Python.
+* Now DJL gives correct results across different models — just like the Transformers library does in Python.
 * The fix is merged and will probably be released with version 0.34.0.
 
 ## What's Zero-Shot Classification (and Why It Matters)
@@ -115,7 +115,7 @@ Under the hood, machine learning models work with tensors that are basically arr
 
 ### Loading and using the model
 
-Loading the model is easy --- you just call ModelZoo.loadModel(criteria). The criteria tells DJL what kind of model you're looking for, like the engine (PyTorch), input/output types, and where to find it. Once the model is loaded, we get a Predictor from it. That's what we use to actually run the predictions.
+Loading the model is easy — you just call ModelZoo.loadModel(criteria). The criteria tells DJL what kind of model you're looking for, like the engine (PyTorch), input/output types, and where to find it. Once the model is loaded, we get a Predictor from it. That's what we use to actually run the predictions.
 
 Next, we prepare the input. In this example, we're checking how related the sentence *"Java is the best programming language"* is to a few labels like *"Software Engineering"* , *"Software Programming"* , and *"Politics"*. Since a sentence can relate to more than one label, we set multiLabel to true.
 
@@ -318,7 +318,7 @@ Also, not all models use the same order for their logits. We can't assume "entai
 This mapping shows which index belongs to each class. Using it, we can apply softmax to the correct pair, usually "entailment" and "contradiction," for each label.
 > Check an example of a config.json file here: <https://huggingface.co/MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli/blob/main/config.json>
 
-Therefore, I not only had to fix the way softmax was applied, but also make sure we were using the correct index for the entailment score --- based on what the model actually defines in its config. That meant reading the label2id mapping from config.json, identifying which index corresponds to "*entailment* " and "*contradiction*", and then applying softmax to just those two values for each label.
+Therefore, I not only had to fix the way softmax was applied, but also make sure we were using the correct index for the entailment score — based on what the model actually defines in its config. That meant reading the label2id mapping from config.json, identifying which index corresponds to "*entailment* " and "*contradiction*", and then applying softmax to just those two values for each label.
 
 After refactoring the softmax logic, the translator started outputting the expected results. To test it with different types of models, I created a GitHub repository comparing the expected results from Python's Transformers Library with the refactored ZeroShotClassificationTranslator.
 

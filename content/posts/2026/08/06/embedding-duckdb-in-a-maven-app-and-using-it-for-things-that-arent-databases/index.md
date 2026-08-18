@@ -14,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-[DuckDB](https://duckdb.org/) is described as "SQLite for analytics," which is true: it's an in-process database engine that runs inside your application, with no server to install or manage. What's less obvious from that description is that **you can get value out of it without ever creating a database at all**. Because it can query CSV, JSON, and Parquet files directly --- local or over HTTP --- it works perfectly well as an embedded data-crunching library that happens to speak SQL.
+[DuckDB](https://duckdb.org/) is described as "SQLite for analytics," which is true: it's an in-process database engine that runs inside your application, with no server to install or manage. What's less obvious from that description is that **you can get value out of it without ever creating a database at all**. Because it can query CSV, JSON, and Parquet files directly — local or over HTTP — it works perfectly well as an embedded data-crunching library that happens to speak SQL.
 
 This article covers getting it into a Maven project and using it that way.
 
@@ -30,7 +30,7 @@ One dependency. The native engine is bundled inside the JAR, so there's nothing 
 </dependency>
 ```
 
-It exposes a standard JDBC interface, so from the point of view of anyone who's ever written Java database code before, there's no new API to learn. The connection string `jdbc:duckdb:` (with nothing after the colon) gives you a purely in-memory instance --- nothing is written to disk, and everything disappears when the connection closes.
+It exposes a standard JDBC interface, so from the point of view of anyone who's ever written Java database code before, there's no new API to learn. The connection string `jdbc:duckdb:` (with nothing after the colon) gives you a purely in-memory instance — nothing is written to disk, and everything disappears when the connection closes.
 
 ### Querying a file on the internet with SQL
 
@@ -166,7 +166,7 @@ Where it makes sense:
 
 <!-- -->
 
-* **In-memory aggregation of data you already have.** Anywhere you'd write nested loops with `HashMap<String, List<...>>` to group and summarize objects, you can often dump the data through DuckDB and express the logic as SQL. Whether that's clearer depends on the logic and on your team --- for a three-line group-by it's arguably overkill; for anything resembling a pivot or window function it usually wins.
+* **In-memory aggregation of data you already have.** Anywhere you'd write nested loops with `HashMap<String, List<...>>` to group and summarize objects, you can often dump the data through DuckDB and express the logic as SQL. Whether that's clearer depends on the logic and on your team — for a three-line group-by it's arguably overkill; for anything resembling a pivot or window function it usually wins.
 
 <!-- -->
 
@@ -178,6 +178,6 @@ Where it makes sense:
 
 ### Summing up
 
-The story isn't that DuckDB is magic --- it's that **a columnar engine is now a Maven dependency away** , and it's willing to **treat any file (or URL) as a table**.
+The story isn't that DuckDB is magic — it's that **a columnar engine is now a Maven dependency away** , and it's willing to **treat any file (or URL) as a table**.
 
 If your Java code contains a parsing-and-aggregating section you've never much liked, it might be a few lines of SQL instead.

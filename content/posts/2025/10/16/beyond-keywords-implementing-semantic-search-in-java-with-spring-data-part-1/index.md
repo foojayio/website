@@ -22,7 +22,7 @@ frozen: false
 
 Building a semantic movie search app with embeddings and vector queries
 
-Have you ever tried to search for something such as a product, a song, or a movie but couldn't quite remember its exact name? Maybe you recall only a clue---a desert pyramid, a short melody, or "that ship that hit an iceberg." Keyword search struggles with that. Vector search doesn't: It lets you search by meaning.
+Have you ever tried to search for something such as a product, a song, or a movie but couldn't quite remember its exact name? Maybe you recall only a clue—a desert pyramid, a short melody, or "that ship that hit an iceberg." Keyword search struggles with that. Vector search doesn't: It lets you search by meaning.
 
 It works by turning text into embeddings, vectors (arrays of numbers) that capture semantic similarity, so results are ranked by what they mean, not just what they say.
 

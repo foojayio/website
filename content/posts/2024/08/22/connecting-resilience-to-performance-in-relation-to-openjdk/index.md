@@ -20,7 +20,7 @@ related_posts:
 frozen: false
 ---
 
-**When considering the connection between performance and resilience in Java, especially in the context of OpenJDK distributions, specific distributions---like [Azul Platform Prime](https://www.azul.com/products/prime/), which includes Azul Zing, an enhanced build of OpenJDK for superior performance, consistency, and efficiency---offer unique features that can significantly influence how these two aspects are managed.**
+**When considering the connection between performance and resilience in Java, especially in the context of OpenJDK distributions, specific distributions—like [Azul Platform Prime](https://www.azul.com/products/prime/), which includes Azul Zing, an enhanced build of OpenJDK for superior performance, consistency, and efficiency—offer unique features that can significantly influence how these two aspects are managed.**
 
 The [Digital Operational Resilience Act (DORA) by the European Union](https://foojay.io/today/the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul/) adds another layer of importance to these considerations, particularly for financial institutions operating within the EU, [regardless of whether they are themselves EU-based institutions](https://foojay.io/today/the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations/).
 

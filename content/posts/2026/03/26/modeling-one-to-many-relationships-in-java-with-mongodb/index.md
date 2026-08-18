@@ -22,7 +22,7 @@ In a relational database, modeling a one-to-many relationship is straightforward
 
 Consider a common scenario: a BlogPost that has many Comment objects. In Java, this is a natural List\<Comment\> field on the post. But when it comes time to persist that relationship in MongoDB, you need to decide *how* to store it. Should the comments live inside the blog post document? Or should they sit in their own collection, connected by references?
 
-This tutorial walks you through both approaches --- **embedded documents** and **references** --- using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the **Subset Pattern** that combines the best of both worlds.
+This tutorial walks you through both approaches — **embedded documents** and **references** — using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the **Subset Pattern** that combines the best of both worlds.
 
 ## **What You'll Learn**
 
@@ -83,7 +83,7 @@ MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?retryWrit
 
 ### **Configuring the MongoClient with POJO Support**
 
-Before we dive into the relationship patterns, we need a MongoClient configured with the PojoCodecProvider. This tells the driver how to automatically map Java objects to BSON documents and vice versa --- no manual serialization required.
+Before we dive into the relationship patterns, we need a MongoClient configured with the PojoCodecProvider. This tells the driver how to automatically map Java objects to BSON documents and vice versa — no manual serialization required.
 
 ```
 package com.example.mongodb.relationships.config;
@@ -157,7 +157,7 @@ public class BlogPost {
 }
 ```
 
-This is intuitive and familiar. But how does this translate to a document database? In MongoDB, a document is a rich, hierarchical data structure --- similar to a JSON object. Unlike relational tables, a single MongoDB document can hold nested objects and arrays. That flexibility gives you options that don't exist in the relational world.
+This is intuitive and familiar. But how does this translate to a document database? In MongoDB, a document is a rich, hierarchical data structure — similar to a JSON object. Unlike relational tables, a single MongoDB document can hold nested objects and arrays. That flexibility gives you options that don't exist in the relational world.
 
 The core question becomes: should those Comment objects live *inside* the BlogPost document, or should they live in a separate collection with a pointer back to the post?
 
@@ -165,12 +165,12 @@ The core question becomes: should those Comment objects live *inside* the BlogPo
 
 In a relational database, data is normalized into tables. A blog_posts table and a comments table are connected by a post_id foreign key. To read a post with its comments, you write a JOIN query. The database enforces referential integrity, and the schema is fixed.
 
-MongoDB takes a different approach. Data is stored as flexible BSON documents (binary JSON) that can contain nested objects, arrays, and mixed types. There are no JOINs in the traditional sense --- although MongoDB's $lookup aggregation stage can perform similar operations when needed.
+MongoDB takes a different approach. Data is stored as flexible BSON documents (binary JSON) that can contain nested objects, arrays, and mixed types. There are no JOINs in the traditional sense — although MongoDB's $lookup aggregation stage can perform similar operations when needed.
 
 This flexibility means MongoDB lets you *choose* your relationship strategy per use case. The two primary strategies are:
 
-* **Embedded Documents** --- store the related data directly inside the parent document.
-* **References** --- store a pointer (usually an ObjectId) to a document in another collection.
+* **Embedded Documents** — store the related data directly inside the parent document.
+* **References** — store a pointer (usually an ObjectId) to a document in another collection.
 
 Neither is universally "better. The right choice depends on your data access patterns, update frequency, and growth expectations. Let's explore both.
 
@@ -178,7 +178,7 @@ Neither is universally "better. The right choice depends on your data access pat
 
 ### **When Should You Embed?**
 
-Embedding means storing the related data directly inside the parent document. When you fetch the parent, you get everything in a single read --- no second query needed.
+Embedding means storing the related data directly inside the parent document. When you fetch the parent, you get everything in a single read — no second query needed.
 
 Use embedding when:
 
@@ -196,7 +196,7 @@ Use embedding when:
 
 Let's model our blogging scenario with embedding. The Comment and User (the post author) are embedded directly inside the BlogPost document.
 
-Here's the embedded Comment --- notice it has no _id field, because it doesn't exist as an independent document:
+Here's the embedded Comment — notice it has no _id field, because it doesn't exist as an independent document:
 
 ```
 package com.example.mongodb.relationships.embedded.model;
@@ -377,7 +377,7 @@ The resulting MongoDB document looks like this:
 }
 ```
 
-Everything --- the post content, the author profile, and all comments --- lives in a single document. One find() call returns it all. Adding a new comment is an atomic $push operation on the parent document, with no need to touch a second collection.
+Everything — the post content, the author profile, and all comments — lives in a single document. One find() call returns it all. Adding a new comment is an atomic $push operation on the parent document, with no need to touch a second collection.
 
 You can also query into the embedded data using dot notation. Filters.eq("comments.author", "Bob") finds all posts that have at least one comment authored by Bob, and Filters.eq("author.username", "alice") filters by the embedded author's username.
 
@@ -385,7 +385,7 @@ You can also query into the embedded data using dot notation. Filters.eq("commen
 
 ### **When Should You Use References?**
 
-Referencing means storing a pointer --- typically an ObjectId --- to a document that lives in a separate collection. To assemble the full object, you need multiple queries.
+Referencing means storing a pointer — typically an ObjectId — to a document that lives in a separate collection. To assemble the full object, you need multiple queries.
 
 Use references when:
 
@@ -403,7 +403,7 @@ Use references when:
 
 In the referenced approach, users, blog posts, and comments each live in their own collection. The BlogPost stores an ObjectId pointing to the author in the users collection, and a list of ObjectIds pointing to comments in the comments collection.
 
-Here's the User --- now an independent document with its own _id:
+Here's the User — now an independent document with its own _id:
 
 ```
 package com.example.mongodb.relationships.referenced.model;
@@ -670,9 +670,9 @@ The resulting MongoDB documents span three collections:
 }]
 ```
 
-The trade-off is visible in the code. Assembling the full object graph requires fetching the post, then the author, then the comments, and then the comment authors. That's multiple round-trips. However, the Filters.in() operator lets us batch-load related documents efficiently --- notice how we collect all unique commentAuthorIds and resolve them in a single query rather than one query per comment.
+The trade-off is visible in the code. Assembling the full object graph requires fetching the post, then the author, then the comments, and then the comment authors. That's multiple round-trips. However, the Filters.in() operator lets us batch-load related documents efficiently — notice how we collect all unique commentAuthorIds and resolve them in a single query rather than one query per comment.
 
-A key advantage shows up in step 6: you can query the comments collection directly. Finding all comments by a specific user, or the most recent comments across all posts, is a simple query --- no need to scan through embedded arrays in every blog post document.
+A key advantage shows up in step 6: you can query the comments collection directly. Finding all comments by a specific user, or the most recent comments across all posts, is a simple query — no need to scan through embedded arrays in every blog post document.
 
 **Note:** For scenarios where you'd rather resolve references on the server side, MongoDB's [$lookup](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) aggregation stage can perform left-outer-join-like operations between collections. This is useful for analytics queries or dashboards, but for most application reads, the multi-step approach shown here gives you more control over what gets loaded and when.
 
@@ -698,7 +698,7 @@ What if you need the read performance of an embedding, but your dataset is too l
 
 For our blogging example, you might embed only the three most recent comments inside the post for quick rendering, while storing all comments in a separate comments collection for the "View all comments" page.
 
-Here is a simplified view of how the Subset Pattern looks in Java. First, the snapshot classes --- lightweight copies of data optimized for display:
+Here is a simplified view of how the Subset Pattern looks in Java. First, the snapshot classes — lightweight copies of data optimized for display:
 
 ```
 public class AuthorSnapshot {
@@ -799,7 +799,7 @@ private void addComment(ObjectId postId, User author, String body) {
 }
 ```
 
-The resulting document gives you the best of both worlds --- a single read for the most common view, with the full dataset available in a separate collection when needed:
+The resulting document gives you the best of both worlds — a single read for the most common view, with the full dataset available in a separate collection when needed:
 
 ```
 {
@@ -840,7 +840,7 @@ The choice between embedded documents and references comes down to your applicat
 
 **Choose the Subset Pattern** when you need the read performance of embedding, but your dataset is too large or too volatile to embed entirely. Embed a curated subset for fast access; reference the full dataset for completeness.
 
-The Java POJO model maps cleanly to all three patterns. The PojoCodecProvider handles serialization and deserialization automatically, whether your fields are embedded objects, ObjectId references, or a mix of both. Schema design in MongoDB should always be driven by your application's query patterns --- and Java's type system makes it easy to express exactly the document structure you need.
+The Java POJO model maps cleanly to all three patterns. The PojoCodecProvider handles serialization and deserialization automatically, whether your fields are embedded objects, ObjectId references, or a mix of both. Schema design in MongoDB should always be driven by your application's query patterns — and Java's type system makes it easy to express exactly the document structure you need.
 
 The full working code for all three patterns is available on [GitHub](https://github.com/arthurmr96/mongodb-java-modeling-relationships). To experiment with your own data, sign up for a free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=many-mongodb-foojay&utm_term=hugh.murray) cluster, clone the repository, set your connection string in the .env file, and run:
 
@@ -852,11 +852,11 @@ mvn compile exec:java
 
 ### **Can I mix embedded and referenced documents in the same MongoDB schema?**
 
-Yes --- and often you should. The Subset Pattern is a perfect example: you embed the most recent comments for quick display while storing the full comment history as references in a separate collection. Schema design in MongoDB is flexible by nature, and mixing strategies per relationship is a common and recommended practice.
+Yes — and often you should. The Subset Pattern is a perfect example: you embed the most recent comments for quick display while storing the full comment history as references in a separate collection. Schema design in MongoDB is flexible by nature, and mixing strategies per relationship is a common and recommended practice.
 
 ### **How do I handle one-to-many relationships in Spring Data MongoDB?**
 
-Spring Data MongoDB provides @DBRef and embedded document support out of the box. The schema design patterns covered here --- embedded documents, references, and the Subset Pattern --- apply regardless of your framework. This tutorial uses the core Java Sync Driver to explain the underlying mechanics, but the concepts translate directly to Spring Data, Quarkus, and Micronaut.
+Spring Data MongoDB provides @DBRef and embedded document support out of the box. The schema design patterns covered here — embedded documents, references, and the Subset Pattern — apply regardless of your framework. This tutorial uses the core Java Sync Driver to explain the underlying mechanics, but the concepts translate directly to Spring Data, Quarkus, and Micronaut.
 
 ### **Does this work with the MongoDB Java Reactive Streams driver?**
 
@@ -864,12 +864,12 @@ The schema design patterns covered in this tutorial apply universally regardless
 
 ### **What happens if my embedded array grows too large?**
 
-MongoDB documents have a 16 MB size limit. If your array can grow unboundedly --- event logs, chat messages, IoT sensor readings --- you should use references instead of embedding. The Subset Pattern offers a middle ground if you still want fast reads for a recent slice of the data.
+MongoDB documents have a 16 MB size limit. If your array can grow unboundedly — event logs, chat messages, IoT sensor readings — you should use references instead of embedding. The Subset Pattern offers a middle ground if you still want fast reads for a recent slice of the data.
 
 ### **Is there a performance difference between embedded and referenced documents?**
 
-Yes. Embedded documents are fetched in a single read operation, making them faster for read-heavy use cases where the child data is always needed alongside the parent. References require at least two reads, adding latency --- but they keep documents smaller and more efficient to update individually.
+Yes. Embedded documents are fetched in a single read operation, making them faster for read-heavy use cases where the child data is always needed alongside the parent. References require at least two reads, adding latency — but they keep documents smaller and more efficient to update individually.
 
 ### **Do I need to manage referential integrity manually with MongoDB references?**
 
-Yes. Unlike SQL foreign keys, MongoDB does not enforce referential integrity on ObjectId references. Your application code --- typically your Java service layer --- is responsible for keeping references consistent. This means handling cascading deletes, orphaned references, and ensuring that IDs point to existing documents is up to you.
+Yes. Unlike SQL foreign keys, MongoDB does not enforce referential integrity on ObjectId references. Your application code — typically your Java service layer — is responsible for keeping references consistent. This means handling cascading deletes, orphaned references, and ensuring that IDs point to existing documents is up to you.

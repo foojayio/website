@@ -320,7 +320,7 @@ I want to come back to the quote from Erik that I wrote in the beginning, answer
 
 1. Walking at Java frames at safepoints out of signal handlers makes the stack walking safer, and using improved method ids helps with the post-processing.
 2. Walking only at safepoints should make walking virtual threads possible; it is yet to be decided how to expose virtual threads in the API. But the current API is flexible enough to accommodate it.
-3. and 4. Stack watermarks allow profilers to implement incremental and concurrent stack walking, which should improve performance and offer the ability to compress stack traces---more on this in a future blog post.
+3. and 4. Stack watermarks allow profilers to implement incremental and concurrent stack walking, which should improve performance and offer the ability to compress stack traces—more on this in a future blog post.
 
 Thank you for joining me on my API journey; I'm open to any suggestions; please reach me using the typical channels.
 

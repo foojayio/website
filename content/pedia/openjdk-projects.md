@@ -9,16 +9,16 @@ OpenJDK is organised into named **Projects** : focused research and development 
 
 The most significant active and recent projects:
 
-**Project Loom** --- Delivered [virtual threads](https://foojay.io/pedia/virtual-threads/) (Java 21), structured concurrency, and scoped values. Aims to make concurrent Java programming dramatically simpler and more scalable by replacing thread-per-request models with lightweight virtual threads.
+**Project Loom** — Delivered [virtual threads](https://foojay.io/pedia/virtual-threads/) (Java 21), structured concurrency, and scoped values. Aims to make concurrent Java programming dramatically simpler and more scalable by replacing thread-per-request models with lightweight virtual threads.
 
-**Project Valhalla** --- Long-running project to introduce value types (objects without identity, stored as flat data rather than references) into the JVM and Java language. Value objects reduce memory overhead and improve cache locality for data-intensive applications. Preview features are available in recent Java versions.
+**Project Valhalla** — Long-running project to introduce value types (objects without identity, stored as flat data rather than references) into the JVM and Java language. Value objects reduce memory overhead and improve cache locality for data-intensive applications. Preview features are available in recent Java versions.
 
-**Project Panama** --- Delivered the [Foreign Function \& Memory API](https://foojay.io/pedia/foreign-function-memory-api/) (finalised Java 22) and the Vector API (incubating). Aims to simplify Java's connection to native code and non-Java data.
+**Project Panama** — Delivered the [Foreign Function \& Memory API](https://foojay.io/pedia/foreign-function-memory-api/) (finalised Java 22) and the Vector API (incubating). Aims to simplify Java's connection to native code and non-Java data.
 
-**Project Leyden** --- Focused on improving startup time, warmup time, and footprint via [ahead-of-time optimisation](https://foojay.io/pedia/aot-compilation-ahead-of-time/). The first deliverable, ahead-of-time class loading and linking (JEP 483), was included in Java 24.
+**Project Leyden** — Focused on improving startup time, warmup time, and footprint via [ahead-of-time optimisation](https://foojay.io/pedia/aot-compilation-ahead-of-time/). The first deliverable, ahead-of-time class loading and linking (JEP 483), was included in Java 24.
 
-**Project Amber** --- Delivers language productivity improvements. Responsible for records, sealed classes, pattern matching, text blocks, local-variable type inference (`var`), and other modern Java language features.
+**Project Amber** — Delivers language productivity improvements. Responsible for records, sealed classes, pattern matching, text blocks, local-variable type inference (`var`), and other modern Java language features.
 
-**Project CRaC** --- Developed [CRaC (Coordinated Restore at Checkpoint)](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/), a mechanism for checkpointing a warmed JVM and restoring it instantly. Led by Azul.
+**Project CRaC** — Developed [CRaC (Coordinated Restore at Checkpoint)](https://foojay.io/pedia/crac-coordinated-restore-at-checkpoint/), a mechanism for checkpointing a warmed JVM and restoring it instantly. Led by Azul.
 
 More information on all OpenJDK projects: [openjdk.org/projects/](https://openjdk.org/projects/)

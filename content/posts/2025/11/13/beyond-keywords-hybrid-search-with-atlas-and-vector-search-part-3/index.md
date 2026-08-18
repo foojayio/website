@@ -21,7 +21,7 @@ frozen: false
 
 Bringing together semantic vectors and exact keyword matching with $rankFusion
 
-If you've been following along this series, you already know we started by giving our movie search app the ability to understand meaning---not just keywords---using semantic search, as discussed in [*Part 1: Implementing Semantic Search in Java With Spring Data*](https://foojay.io/today/beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1/). Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in [*Part 2: Optimizing Vector Search With Filters and Caching*](https://foojay.io/today/beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2/).
+If you've been following along this series, you already know we started by giving our movie search app the ability to understand meaning—not just keywords—using semantic search, as discussed in [*Part 1: Implementing Semantic Search in Java With Spring Data*](https://foojay.io/today/beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1/). Then, we made it even smarter by adding filters and optimizing performance with embedding strategies in [*Part 2: Optimizing Vector Search With Filters and Caching*](https://foojay.io/today/beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2/).
 
 Now, in this final installment, we're taking our search capability to its ultimate form: combining the precision of full-text search with the semantic understanding of vector search.
 
@@ -29,7 +29,7 @@ Welcome to hybrid search.
 
 ## One search might not be enough
 
-Think about how people actually search for movies. Sometimes, they only remember fragments---such as, "a ship that sinks at night after hitting an iceberg"---and hope the app can figure it out. Other times, they know exactly what they want---like "Titanic"---and expect to see it right away.
+Think about how people actually search for movies. Sometimes, they only remember fragments—such as, "a ship that sinks at night after hitting an iceberg"---and hope the app can figure it out. Other times, they know exactly what they want—like "Titanic"---and expect to see it right away.
 
 These two very different situations expose a critical gap: **No single search technique works perfectly for every type of query**.
 
@@ -304,13 +304,13 @@ Here's the basic structure of a hybrid query using $rankFusion:
 Let's break it down:
 
 1. The **pipelines** section defines the individual search strategies you want to combine (full-text and vector, in our case).  
-2. The **weights** section then decides how much influence each pipeline has on the final ranking---a higher number means greater importance, so 0.8 will outweigh 0.5.
+2. The **weights** section then decides how much influence each pipeline has on the final ranking—a higher number means greater importance, so 0.8 will outweigh 0.5.
 
 ### How to decide the right weights
 
 Once you set up the aggregate, the big question is: *How much weight should each pipeline get?*
 
-There's no universal rule for picking these values---it depends entirely on your application and how users interact with it.
+There's no universal rule for picking these values—it depends entirely on your application and how users interact with it.
 
 In some cases, giving more weight to full-text search makes sense (when exact titles matter most). In others, boosting the vector pipeline produces better results (when queries are more descriptive).
 
@@ -543,7 +543,7 @@ Open your browser at[**http://localhost:8080**](http://localhost:8080), and appl
 Just like in the screenshot below:  
 ![](Screenshot-2025-11-11-at-1.58.35-PM.png)
 
-If we look closely at the results, we notice that some movies don't satisfy the pre-filters---for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980--2003.
+If we look closely at the results, we notice that some movies don't satisfy the pre-filters—for example, ***Night at the Museum*** is being returned even though it's from 2006, outside the requested year range of 1980--2003.
 
 This happens because the filters were applied only inside the **vector search pipeline** . The **full-text pipeline** doesn't have those restrictions, so when $rankFusion merges the results, movies that score highly in full-text (like *Night at the Museum*) can still appear, even if they don't match the vector filters.
 

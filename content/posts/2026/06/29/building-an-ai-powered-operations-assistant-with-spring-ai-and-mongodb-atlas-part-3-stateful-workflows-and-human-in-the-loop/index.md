@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-This is the third and final article in the series. [Part 1](https://foojay.io/today/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-1-rag-foundation/) covered the RAG foundation --- loading runbooks into a vector store and grounding model answers in real documentation. [Part 2](https://foojay.io/today/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-2-conversational-memory/) added short-term and long-term conversational memory. This article introduces stateful workflow checkpointing, tool calls, and a pause/resume mechanism that lets multi-step investigations survive session boundaries.
+This is the third and final article in the series. [Part 1](https://foojay.io/today/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-1-rag-foundation/) covered the RAG foundation — loading runbooks into a vector store and grounding model answers in real documentation. [Part 2](https://foojay.io/today/building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-2-conversational-memory/) added short-term and long-term conversational memory. This article introduces stateful workflow checkpointing, tool calls, and a pause/resume mechanism that lets multi-step investigations survive session boundaries.
 
 ## The Remaining Gap
 

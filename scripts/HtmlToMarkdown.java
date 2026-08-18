@@ -118,8 +118,17 @@ public final class HtmlToMarkdown {
     // content/ written in two styles at once, and the underline is the worse of
     // the two here: contributors send posts as PRs and type `##`, and an 80-dash
     // rule under every h2 is noise in a diff. Levels 3-6 are unaffected.
+    // TYPOGRAPHIC_SMARTS off: Flexmark's default rewrites the real characters WP
+    // serves -- em dash, en dash, ellipsis -- as `---`, `--` and `...`. Goldmark
+    // has no smartypants pass to turn them back, so the reader gets a literal
+    // `Fair challenge --- JEP 491` mid-sentence. Keeping the Unicode character is
+    // both what the author wrote and what an author writing a new post today
+    // would type. TYPOGRAPHIC_QUOTES is deliberately left ON: curly quotes in
+    // stored Markdown are harder to type and to diff, and ASCII quotes render
+    // identically.
     private static final MutableDataSet CONVERTER_OPTIONS = new MutableDataSet()
-            .set(FlexmarkHtmlConverter.SETEXT_HEADINGS, false);
+            .set(FlexmarkHtmlConverter.SETEXT_HEADINGS, false)
+            .set(FlexmarkHtmlConverter.TYPOGRAPHIC_SMARTS, false);
 
     // Images hosted on foojay.io die at cutover, so they are pulled local.
     // Third-party images (youtube thumbs, badges, ...) are left untouched.

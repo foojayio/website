@@ -27,13 +27,13 @@ This is the second part of a **three-part series** where we're building a movie 
 
 * Add filters to refine our vector search results.
 * Explore strategies with Spring (such as caching) to reduce the cost of generating embeddings.
-* Implement a **basic frontend** using only HTML, CSS, and JavaScript---just enough to test our API in a browser (UI is not the focus here).
+* Implement a **basic frontend** using only HTML, CSS, and JavaScript—just enough to test our API in a browser (UI is not the focus here).
 
 The full source code for this part is available on [GitHub](https://github.com/mongodb-developer/spring-data-mongodb-hybrid-search).
 
 ## Adding filters: From story to code
 
-Imagine this: You've just finished building your shiny new semantic movie search. You type "a science fiction movie about rebels fighting an empire in space" and---boom---*Star Wars* pops up. Success!
+Imagine this: You've just finished building your shiny new semantic movie search. You type "a science fiction movie about rebels fighting an empire in space" and—boom---*Star Wars* pops up. Success!
 
 But then your friend says:
 
@@ -254,7 +254,7 @@ public record MovieSearchRequest(
 }
 ```
 
-**In short:** The request validates which filters are present---if any are set, it builds a criteria combining them; if not, it returns an empty criteria, meaning no filters are applied.
+**In short:** The request validates which filters are present—if any are set, it builds a criteria combining them; if not, it returns an empty criteria, meaning no filters are applied.
 
 ### Applying toCriteria() in the search
 

@@ -102,7 +102,7 @@ public class QuestController {
 
 Spring covers far more than what's visible here: Security, JPA, validation, messaging, batch, cloud config, observability, GraphQL. If you need it, there's almost certainly a starter for it.
 
-The tradeoff is startup time and memory. Spring pays for its convenience with abstraction --- 4.9 seconds to start in a container in my tests, 194MB image size provided you choose a lightweight base image. That's manageable, and you can improve it significantly with AOT processing or native images, but it's the price of the warrior's armor.
+The tradeoff is startup time and memory. Spring pays for its convenience with abstraction — 4.9 seconds to start in a container in my tests, 194MB image size provided you choose a lightweight base image. That's manageable, and you can improve it significantly with AOT processing or native images, but it's the price of the warrior's armor.
 
 For hiring, Spring Boot is the default keyword in Java backend job descriptions. You can staff it at every level.
 
@@ -170,7 +170,7 @@ The dev experience is genuinely good. Live coding, where code changes are reflec
 
 Some patterns that Spring handles with a single annotation (post-transaction event listeners, for one) require explicit wiring in Quarkus. Build-time augmentation explains both the performance wins and the tradeoffs: some libraries need Quarkus-specific extensions or native-image hints to work with it.
 
-For Kubernetes deployments, Quarkus provides dedicated extensions, health checks, metrics, and OpenTelemetry out of the box. Red Hat's backing is solid and the LTS cadence is clear --- every six months, one year of support, overlap for upgrades.
+For Kubernetes deployments, Quarkus provides dedicated extensions, health checks, metrics, and OpenTelemetry out of the box. Red Hat's backing is solid and the LTS cadence is clear — every six months, one year of support, overlap for upgrades.
 
 The talent pool is thinner than Spring's. You can hire Java developers and train them up, but engineers with senior Quarkus production experience are still rare.
 
@@ -193,7 +193,7 @@ post("/quests", ctx -> {
 });
 ```
 
-Instead of JPA, Jooby offers a JDBI module --- the middle ground between raw JDBC and full ORM. You write SQL, get type-safe results, and see exactly what goes to the database:
+Instead of JPA, Jooby offers a JDBI module — the middle ground between raw JDBC and full ORM. You write SQL, get type-safe results, and see exactly what goes to the database:
 
 ```
 public Optional<Quest> findById(Long id) {
@@ -213,7 +213,7 @@ The SQL is right there in the method. There are no hidden queries or N+1 surpris
 
 The container image is 149MB and startup is 0.79 seconds. For a focused API service, that's a real win.
 
-The cost shows up when requirements grow. As soon as you need OAuth/OIDC, audit logging, distributed tracing, retry patterns, and platform conventions, you assemble them yourself --- and those decisions become yours to maintain. Jooby is actively maintained with a clear security policy, but the available modules are fewer than what Spring and Quarkus provide out of the box. A confident senior team that values simplicity will thrive with it. If the company expects easy staffing or rotation, Jooby gets harder to justify.
+The cost shows up when requirements grow. As soon as you need OAuth/OIDC, audit logging, distributed tracing, retry patterns, and platform conventions, you assemble them yourself — and those decisions become yours to maintain. Jooby is actively maintained with a clear security policy, but the available modules are fewer than what Spring and Quarkus provide out of the box. A confident senior team that values simplicity will thrive with it. If the company expects easy staffing or rotation, Jooby gets harder to justify.
 
 ## Vert.x
 
@@ -239,7 +239,7 @@ public Future<AssignQuestResponse> assign(Long id, AssignQuestRequest request) {
 }
 ```
 
-Clean, composable, genuinely async. The problem is what you write before you get there. The quest app's main verticle runs to nearly 90 lines to get the server started --- config loading, connection pool creation, router setup, health checks, validation, error handling, all explicit, all yours:
+Clean, composable, genuinely async. The problem is what you write before you get there. The quest app's main verticle runs to nearly 90 lines to get the server started — config loading, connection pool creation, router setup, health checks, validation, error handling, all explicit, all yours:
 
 ```
 @Override
@@ -259,7 +259,7 @@ For APIs that genuinely need high concurrency, event-bus patterns, reactive data
 
 All four apps were containerized with multi-stage Docker builds using [BellSoft Hardened Images](https://bell-sw.com/bellsoft-hardened-images/), which keep CVE counts low and image sizes lean by default. No AOT processing, no native images. Just the frameworks running as-is, so the comparison stays honest. The Dockerfiles are included into each framework's module.  
 
-These are baseline numbers without tuning. Spring's startup improves substantially with AOT processing, and native images change the picture further --- but that's a separate experiment.
+These are baseline numbers without tuning. Spring's startup improves substantially with AOT processing, and native images change the picture further — but that's a separate experiment.
 
 |             | Lines of Code | Container image size | Build time | Startup time |
 |:------------|:-------------:|:--------------------:|:----------:|:------------:|

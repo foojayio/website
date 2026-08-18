@@ -25,7 +25,7 @@ This drawing isn't accurate, but it's already better than telling people you're 
 
 Your company has a back end that consists of a combination of internal and external servers that are used to manage data in databases and process that data in an automated way through software. It is your task to ensure that an end user can interact with that back end, for instance by using an application on his own computer or smartphone.
 
-Usually, that's where the conversation that started with *"What do you do for a living?"* ends, but you and I know that your actual job is much more complex. In the drawing you made, you showed a portable with a globe on the screen, which could lead to believe that you're responsible for creating and maintaining the company websites, but that's only a small---albeit important---aspect of your job.
+Usually, that's where the conversation that started with *"What do you do for a living?"* ends, but you and I know that your actual job is much more complex. In the drawing you made, you showed a portable with a globe on the screen, which could lead to believe that you're responsible for creating and maintaining the company websites, but that's only a small—albeit important—aspect of your job.
 
 You could add more detail to your drawing to reflect this.
 ![](gluno-bruno-figure02.png)
@@ -64,7 +64,7 @@ You'll also need code that is written for the iPhone and iPad, which means you'l
 
 Many small-town developers will argue: *"Why would you need to create native apps? Why don't you simply use HTML, CSS, and JS? You'll have your app in no time, and it will run on every device that has a browser!"*
 
-While that's certainly true for simple applications, the quality and performance of cross-platform in-browser apps are usually sub-optimal when a certain complexity is needed. Maintaining a project that depends on a plethora of ECMAScript libraries can be hell, and security issues are easily introduced even if everyone in your team pays attention---which isn't something you should assume to be true by default.
+While that's certainly true for simple applications, the quality and performance of cross-platform in-browser apps are usually sub-optimal when a certain complexity is needed. Maintaining a project that depends on a plethora of ECMAScript libraries can be hell, and security issues are easily introduced even if everyone in your team pays attention—which isn't something you should assume to be true by default.
 
 ### ReactNative and Flutter
 

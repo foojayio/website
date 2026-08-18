@@ -138,7 +138,7 @@ Together, these three features guarantee the ordering and uniqueness of the pods
 
 #### **Session Affinity**
 
-Session affinity, sometimes referred to as sticky cookies/sessions, associates all requests coming from an end-user with a single pod. This means that all traffic from a client to a pod will be --- to the greatest extent possible --- directed to the same pod.
+Session affinity, sometimes referred to as sticky cookies/sessions, associates all requests coming from an end-user with a single pod. This means that all traffic from a client to a pod will be — to the greatest extent possible — directed to the same pod.
 
 #### **PersistentVolume / PersistentVolumeClaim**
 

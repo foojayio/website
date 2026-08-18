@@ -31,7 +31,7 @@ The key message of this article is simple and strong:
 
 Java and Jakarta EE, including modern frameworks such as Quarkus, can immediately take advantage of the unikernel model **without waiting for new languages, new runtimes, or radical rewrites**.
 
-With **Nanos Unikernel** , Java applications run unchanged: the JVM is not modified, the application is not rewritten, and the well-known Java promise of *write once, run anywhere* remains fully valid --- even in a unikernel environment.
+With **Nanos Unikernel** , Java applications run unchanged: the JVM is not modified, the application is not rewritten, and the well-known Java promise of *write once, run anywhere* remains fully valid — even in a unikernel environment.
 
 This represents a major shift: unikernels are no longer a research topic or a niche experiment, but a **first-class deployment target** for enterprise Java workloads.
 
@@ -175,7 +175,7 @@ Unikernels with Nanos represent an evolutionary step, not a disruptive rewrite, 
 
 The cloud is evolving, and unikernels are becoming a practical deployment option for real-world workloads.
 
-With Nanos Unikernel, Java, Jakarta EE, Quarkus, and IBM Semeru Runtime can fully exploit modern ARM64 cloud platforms such as AWS Graviton2 and the Nitro hypervisor --- **today, without compromise**.
+With Nanos Unikernel, Java, Jakarta EE, Quarkus, and IBM Semeru Runtime can fully exploit modern ARM64 cloud platforms such as AWS Graviton2 and the Nitro hypervisor — **today, without compromise**.
 
 Reference:
 

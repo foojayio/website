@@ -25,15 +25,15 @@ After all, it's been several years since the last in-person [FOSDEM](https://fos
 The night before, we'd had a great gathering of Foojay.io speakers, plus many others, including their friends and colleagues, a subset of whom are in the pic below, the nice Bier Central manager who ran the whole evening not having been able to squeeze us all into one pic.
 ![](image-1024x768.png)
 
-The dinner was sponsored by Sonatype, JFrog, and Azul (many thanks to each and all of them!) --- and it was great to hang out with so many people, most of whom already knew each other from collaborating over the past years in and around Foojay.io, especially on the [Foojay.io Slack channel](https://bit.ly/join-foojay-slack), but several had never seen each other before in real life.
+The dinner was sponsored by Sonatype, JFrog, and Azul (many thanks to each and all of them!) — and it was great to hang out with so many people, most of whom already knew each other from collaborating over the past years in and around Foojay.io, especially on the [Foojay.io Slack channel](https://bit.ly/join-foojay-slack), but several had never seen each other before in real life.
 
 Also, really great when Johannes from SAP got out his laptop in the middle of the dinner and demonstrated his brand new IntelliJ IDEA plugin to Marit from JetBrains and Tim from OpenRewrite!
 ![](image-4-1024x768.png)
 
-What I personally really enjoy and have always been focused on is bringing new hip up and coming developers into contact with those who've been running around for a long time --- and those who were at the dinner may have noticed Duart and David from Fontys Venlo University of Applied Sciences (working on a license management solution, which I predict will be included in the FOSDEM program next year), as well as Ties (very experienced and mad about monads, certainly not a student, aside from 'of life'), seen below in a cool discussion with Simon, as well as several others, from the young in age to the young at heart. 🙂
+What I personally really enjoy and have always been focused on is bringing new hip up and coming developers into contact with those who've been running around for a long time — and those who were at the dinner may have noticed Duart and David from Fontys Venlo University of Applied Sciences (working on a license management solution, which I predict will be included in the FOSDEM program next year), as well as Ties (very experienced and mad about monads, certainly not a student, aside from 'of life'), seen below in a cool discussion with Simon, as well as several others, from the young in age to the young at heart. 🙂
 ![](image-5-1024x768.png)
 
-And, of course, on the day itself --- and in retrospect only, of course --- one needn't have worried.
+And, of course, on the day itself — and in retrospect only, of course — one needn't have worried.
 
 There turned out to be heaps of OpenJDK-related developers, specifically Java since that was the focus of everything throughout the day (even Nicolas from a Kotlin perspective was a really nice and entertaining talk about Java), the room was well attended throughout the day and, especially wonderful, the room was full of engagement and discusion in between the talks, plus the quick fire 20 minute sessions worked out quite well, with a continuous program of content from first thing in the morning until the moment the equipment started getting packed up at the end of the day. ([Check out the full schedule here.](https://fosdem.org/2023/schedule/track/friends_of_openjdk/))
 ![](image-1-1024x631.png)
@@ -62,6 +62,6 @@ Each link above brings you to a summary of the topic and, once the videos have b
 
 Thanks everyone, as well as the excellent and dedicated FOSDEM organizers and technicians.
 
-All in all it was a really packed day --- which is something to think about, maybe we need two days at the next FOSDEM or possibly two different rooms one on the first day and another on the second.
+All in all it was a really packed day — which is something to think about, maybe we need two days at the next FOSDEM or possibly two different rooms one on the first day and another on the second.
 
 There's just too much to talk about in the OpenJDK ecosystem and too many speakers, some well established and some less well known, to share their knowledge, enthusiasm, and insights!

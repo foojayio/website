@@ -86,7 +86,7 @@ HTTP Response ← Controller ← Service ← Repository ← Database
 
 **Why this makes sense:**
 
-1. **Controllers stay thin**: They focus solely on web concerns---accepting requests, delegating to services, and formatting responses.
+1. **Controllers stay thin**: They focus solely on web concerns—accepting requests, delegating to services, and formatting responses.
 2. **Services stay focused**: They contain your business rules without worrying about HTTP details or database specifics.
 3. **Clear responsibilities**: Each layer has one job. Controllers route, Services decide, Repositories persist.
 4. **Framework independence**: Your business logic in services doesn't depend on Spring MVC, making it portable and easier to test.
@@ -108,11 +108,11 @@ We're building a user registration and management system. When someone creates a
 * Send a welcome email
 * Enforce business rules (like preventing updates to inactive users)
 
-This is a perfect use case for the Service Layer pattern---the controller shouldn't handle validation and email logic, and the repository shouldn't care about business rules. Let's see how we separate these concerns.
+This is a perfect use case for the Service Layer pattern—the controller shouldn't handle validation and email logic, and the repository shouldn't care about business rules. Let's see how we separate these concerns.
 
 ### Step 1: The domain model
 
-First, we define our domain object---the User entity that represents a user in our system.
+First, we define our domain object—the User entity that represents a user in our system.
 
 ```
 public class User {
@@ -125,11 +125,11 @@ public class User {
 }
 ```
 
-This is a plain Java object (POJO) that represents our core domain concept. It's framework-agnostic and contains no business logic---just data. This model will be used across all layers: The controller returns it as JSON, the service applies business rules to it, and the repository persists it to MongoDB.
+This is a plain Java object (POJO) that represents our core domain concept. It's framework-agnostic and contains no business logic—just data. This model will be used across all layers: The controller returns it as JSON, the service applies business rules to it, and the repository persists it to MongoDB.
 
 ### Step 2: The repository interface
 
-The repository defines our data access contract. It focuses purely on CRUD operations and simple queries---no business logic here.
+The repository defines our data access contract. It focuses purely on CRUD operations and simple queries—no business logic here.
 
 ```
 public interface UserRepository {
@@ -252,7 +252,7 @@ public class UserServiceImpl implements UserService {
 
 * **@Service annotation**: This Spring annotation marks this class as a service component, making it available for dependency injection.
 * **Constructor injection**: The service depends on UserRepository and EmailService. Spring automatically injects these dependencies.
-* **Business rule enforcement**: The service validates email uniqueness and format before saving---the repository doesn't do this validation.
+* **Business rule enforcement**: The service validates email uniqueness and format before saving—the repository doesn't do this validation.
 * **Orchestration**: The service coordinates multiple operations: checking for duplicates, saving to the database, and sending emails. The controller doesn't know about any of this complexity.
 * **Error handling**: The service throws meaningful business exceptions (like DuplicateEmailException) rather than letting database errors bubble up.
 
@@ -260,7 +260,7 @@ Notice how the service is the only place that knows the complete business workfl
 
 ### Step 5: The controller
 
-The controller is the **presentation layer**. It stays thin and focused solely on HTTP concerns---routing requests, handling status codes, and formatting responses.
+The controller is the **presentation layer**. It stays thin and focused solely on HTTP concerns—routing requests, handling status codes, and formatting responses.
 
 ```
 @RestController  
@@ -408,9 +408,9 @@ If you need more control over MongoDB operations, you can implement the reposito
 
 Notice how adding MongoDB didn't require any changes to:
 
-* Your UserService---business logic stays the same.
-* Your UserController---HTTP handling stays the same.
-* Your exception handling---error handling stays the same.
+* Your UserService—business logic stays the same.
+* Your UserController—HTTP handling stays the same.
+* Your exception handling—error handling stays the same.
 
 **The service depends on the** **UserRepository** **interface, not the MongoDB implementation.** This means you could swap MongoDB for other databases without touching your business logic. That's the power of the Service Layer pattern's separation of concerns!
 

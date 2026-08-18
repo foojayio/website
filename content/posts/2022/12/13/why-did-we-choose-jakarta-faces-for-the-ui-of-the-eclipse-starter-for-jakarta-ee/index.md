@@ -86,7 +86,7 @@ I tweeted passionately about JSF and many others commented on it. You can read t
 >
 > We can build amazing things with it without getting into the bottomless pit of sadness (JavaScript) 😛
 >
-> --- A N M Bazlur Rahman 🇧🇩🇨🇦 (@bazlur_rahman) [November 28, 2022](https://twitter.com/bazlur_rahman/status/1597131339375185920?ref_src=twsrc%5Etfw)
+> — A N M Bazlur Rahman 🇧🇩🇨🇦 (@bazlur_rahman) [November 28, 2022](https://twitter.com/bazlur_rahman/status/1597131339375185920?ref_src=twsrc%5Etfw)
 
 While JSF has many good sides, it has some disadvantages as well.
 

@@ -103,7 +103,7 @@ And with that, we conclude our workshop on a reactive implementation of Spring P
 1. [Build a Reactive app in Apache Cassandra™ with Spring Framework](https://www.youtube.com/watch?v=1aRbndIcXV4)
 2. [Github Workshop Spring Reactive](https://github.com/datastaxdevs/workshop-spring-reactive)
 3. [Join our Discord: Fellowship of the (Cassandra) Rings](https://discord.com/invite/pPjPcZN)
-4. [Astra DB --- Managed Apache Cassandra as a Service](https://astra.dev/3lSpuQp)
+4. [Astra DB — Managed Apache Cassandra as a Service](https://astra.dev/3lSpuQp)
 5. [Building Microservices with Spring Data, Cassandra, and Stargate.io](https://medium.com/building-the-open-data-stack/building-microservices-with-spring-data-cassandra-and-stargate-io-613f0aff8188)
 6. [DataStax Academy](https://auth.cloud.datastax.com/auth/realms/CloudUsers/login-actions/authenticate?client_id=absorb&tab_id=7jzmpQBmc-w)
 7. [DataStax Certifications](https://www.datastax.com/dev/certifications)

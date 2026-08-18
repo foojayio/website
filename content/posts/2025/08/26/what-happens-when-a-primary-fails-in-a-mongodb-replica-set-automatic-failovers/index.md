@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-In distributed systems, high availability is not a luxury---it's a necessity. And one of the very important parts of that is automatic failovers. What are automatic failovers and how do they work? Let's see today!
+In distributed systems, high availability is not a luxury—it's a necessity. And one of the very important parts of that is automatic failovers. What are automatic failovers and how do they work? Let's see today!
 
 These concepts are actually similar in every database, but as [MongoDB](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=shrey-foojay&utm_term=tony.kim) is natively built for replica-sets, we will talk about that here, whereas other DB systems need 3rd-party or managed systems to implement the same.
 
@@ -42,7 +42,7 @@ Let's say the primary node suddenly becomes unreachable (network issue, crash, m
 
 Each node in the replica set sends heartbeats to all other nodes every two seconds. If a node misses multiple heartbeats (typically for 10 seconds), it's marked as down. This is when the system knows that something is off, and if the primary is available or not.
 
-**2. Election time---yes, it is a democracy!**
+**2. Election time—yes, it is a democracy!**
 
 If secondaries can no longer reach the primary, an election process is triggered.
 

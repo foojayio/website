@@ -176,7 +176,7 @@ public class Crawler implements Runnable {
 
 When the program starts, it initializes a shared visited map, a pageQueue, and an AtomicInteger count.
 
-It then creates an executor service---either classical or virtual threads, based on the scenario---and enters a while loop.
+It then creates an executor service—either classical or virtual threads, based on the scenario—and enters a while loop.
 
 Inside this loop, it picks URLs from the pageQueue and submits new Crawler tasks for execution.
 

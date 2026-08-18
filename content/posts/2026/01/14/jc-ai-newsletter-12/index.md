@@ -80,7 +80,7 @@ Let's jump in and **happy reading**!
 **desc.** : This work examines memory mechanisms in large language models through the lens of weights and activations. Jack Morris addresses the limitations of current Large Language Models (LLMs) in handling niche, long-tail knowledge that falls outside their training data or beyond knowledge cutoffs. He critiques the reliance on massive context windows and Retrieval Augmented Generation (RAG), citing their high computational cost and latency due to the quadratic complexity of self-attention. The core thesis advocates for a third paradigm: training knowledge into weights, efficiently injecting specific knowledge directly into model parameters. This approach treats weights as a memory storage mechanism, conceptually distinct from the working memory represented by activations.  
 **category**: youtube
 
-**article** : [There are no new ideas in AI --- only new datasets](https://www.freethink.com/artificial-intelligence/ai-datasets "There are no new ideas in AI — only new datasets")  
+**article** : [There are no new ideas in AI — only new datasets](https://www.freethink.com/artificial-intelligence/ai-datasets "There are no new ideas in AI — only new datasets")  
 **authors** : Jack Morris  
 **date** : 2025-07-06  
 **desc.** : This article provides a comprehensive overview of progress in the AI field over recent years. All four major breakthroughs in LLMs occurred because researchers unlocked new sources of data. The question remains: what will be the next breakthrough?  

@@ -40,7 +40,7 @@ The LSM-tree is a data structure that is optimized for the sequential disk write
 
 * **Memtable** and **WAL (write-ahead-log)** - this is where the data first ends up. When the app writes an update, the update is sequentially written to the WAL on disk and added to the memtable in DRAM. The memtable is a sorted tree that keeps the records in order. If the app updates an existing key in the memtable, then some databases will overwrite the existing value (Cassandra) while others (YugabyteDB) will keep the old value untouched and store the new value separately (for MVCC).
 * **Immutable memtable** - over time, the memtable size reaches a predefined threshold. Once this happens, the current memtable is marked as immutable, and a new one is created. The new memtable starts handling writes from the application.
-* **SSTable (Sorted String Table)** - then at some point, the immutable memtable gets flushed to disk as an SSTable. The SSTable is immutable as well. All the data stays sorted within the file---making index search and range queries fast.
+* **SSTable (Sorted String Table)** - then at some point, the immutable memtable gets flushed to disk as an SSTable. The SSTable is immutable as well. All the data stays sorted within the file—making index search and range queries fast.
 
 When the database repeats the *memtable-\>immutable memtable-\>SSTable* cycle several times, it will end up having multiple SSTable files on disk. Some of those files can store duplicate keys holding the actual as well as old values.
 

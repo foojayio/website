@@ -23,7 +23,7 @@ In my previous [article](https://foojay.io/today/preparing-for-spring-framework-
 
 In this series of articles, we will explore these features in detail using a pragmatic approach. In this second article, I will dive deep into integration of Observability framework i.e., ***OpenTelemetry with SpringBoot***.
 
-As an architect and developer, when I engage in system design---whether it involves monolithic architecture, microservices, or contemporary cloud-native applications---I have made the integration of **observability** patterns utilizing **open-telemetry** tools a standard practice. Through observability, we can monitor application behavior via **metrics, logs, and traces** that we trigger
+As an architect and developer, when I engage in system design—whether it involves monolithic architecture, microservices, or contemporary cloud-native applications—I have made the integration of **observability** patterns utilizing **open-telemetry** tools a standard practice. Through observability, we can monitor application behavior via **metrics, logs, and traces** that we trigger
 
 Before the release of Spring Boot 4, developers needed to incorporate numerous dependencies related to open telemetry, including various micrometer dependencies, which could be quite overwhelming at times. However, with the introduction of Spring Boot 4, the team streamlined this process by adding a single starter dependency, namely `spring-boot-starter-opentelemetry`, which automatically includes most of the micrometer dependencies. The OTLP protocol serves as the key enabler here, rather than any specific library.
 ![OpenTelemetryWithSpringBoot4](OpenTelemetrySpringBoot4.jpg)

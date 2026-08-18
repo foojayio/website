@@ -30,7 +30,7 @@ In this post, I'll show how to benefit from the best of both worlds with [vClust
 >
 > -- [What are virtual clusters?](https://www.vcluster.com/docs/)
 
-With virtual clusters, we can have our cake---a single physical cluster for limited costs---and eat it with fully isolated virtual clusters.
+With virtual clusters, we can have our cake—a single physical cluster for limited costs—and eat it with fully isolated virtual clusters.
 
 ## Weaving vCluster into the GitHub workflow
 

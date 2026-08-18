@@ -16,7 +16,7 @@ It's not every day that **Mark Stoodley** , IBM's **Chief Architect for Java** ,
 
 ![](53725167482_02e2c3bafc_k-700x414.jpg)
 
-With over two decades of deep JVM experience, Mark has shaped the runtime used by thousands of enterprise applications worldwide. He led the transformation of IBM's J9 JVM into the open-source OpenJ9 and OMR projects. This isn't just a workshop---it's your chance to **tap directly into the mind of the architect behind the tech that powers your Java workloads.**
+With over two decades of deep JVM experience, Mark has shaped the runtime used by thousands of enterprise applications worldwide. He led the transformation of IBM's J9 JVM into the open-source OpenJ9 and OMR projects. This isn't just a workshop—it's your chance to **tap directly into the mind of the architect behind the tech that powers your Java workloads.**
 
 **Workshop: [Ultra Efficient Startup for Production Java Workloads](https://schedule.jcon.one/session/890995 "Ultra Efficient Startup for Production Java Workloads")**
 
@@ -28,7 +28,7 @@ Struggling with slow Java startup times? Tired of burning CPU and memory just to
 
 * How to reduce infrastructure cost and energy use without compromising speed
 
-* When to go native---and when JVM tech is the smarter choice
+* When to go native—and when JVM tech is the smarter choice
 
 * Tools to tune JVMs like a pro (because you're learning from the pro)
 

@@ -30,11 +30,11 @@ Viktor Gamov and Baruch Sadogursky did something really cool: they tested six di
 
 Stephen Chin showed me how graph databases can make AI responses more reliable by providing a solid source of truth rather than relying on vector search.
 
-Mario Fusco works on LangChain4J, a leading Java framework for AI. He explained that breaking down large tasks into smaller ones and using specialized agents can help reduce errors---hallucinations, as they're called.
+Mario Fusco works on LangChain4J, a leading Java framework for AI. He explained that breaking down large tasks into smaller ones and using specialized agents can help reduce errors—hallucinations, as they're called.
 
 Jeroen Benckhuijsen and Martijn Dashorst shared their experiences working with enterprise Java. Even as frameworks are becoming lighter and we're running everything in containers, there are still complex problems that require real developer expertise.
 
-Maarten Mulders reminds us that AI is a tool, not a replacement---especially when you're solving problems no one has tackled before. You still need to know what you're doing.
+Maarten Mulders reminds us that AI is a tool, not a replacement—especially when you're solving problems no one has tackled before. You still need to know what you're doing.
 
 And finally, Simon Maple from Tessel discussed moving beyond vibe coding towards a more reliable, production-ready approach, using specifications to guide AI tools.
 

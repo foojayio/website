@@ -43,28 +43,28 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 
 ![](222.gif)
 
-* **Real-time streaming test tree** --- live updates per spec, not per suite
+* **Real-time streaming test tree** — live updates per spec, not per suite
 * **Dark / Light theme** with `localStorage` persistence
 
 {{< img src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" class="aligncenter size-medium" width="509" height="510" >}}
 
-* **Live search + status filters** --- filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
+* **Live search + status filters** — filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 
 ![](333.gif)
 
-* **Per-bundle Run button** --- re-run a single bundle without touching the rest
+* **Per-bundle Run button** — re-run a single bundle without touching the rest
 
 ![](444.gif)
 
-* **Debug Buffer Panel** --- captured TestBox debug output surfaced per-bundle
+* **Debug Buffer Panel** — captured TestBox debug output surfaced per-bundle
 
 ![](555.gif)
 
-* **Floating progress widget** --- current bundle, specs completed vs. total, animated progress bar
+* **Floating progress widget** — current bundle, specs completed vs. total, animated progress bar
 
 ![](666.gif)
 
-* **Configurable settings** --- runner URL, directory, bundle pattern, labels, excludes --- all saved in `localStorage`
+* **Configurable settings** — runner URL, directory, bundle pattern, labels, excludes — all saved in `localStorage`
 
 ![](777.gif)
 
@@ -97,7 +97,7 @@ testbox generate harness --help
 
 #### Coming Soon: TestBox RUN Desktop App
 
-We're actively building a **native desktop app** version of TestBox RUN on the **BoxLang Desktop Runtime** --- connect to any local or remote runner URL and get the same streaming UI without a browser. Watch [testbox.run](http://https://www.testbox.run/ "testbox.run") for early access.
+We're actively building a **native desktop app** version of TestBox RUN on the **BoxLang Desktop Runtime** — connect to any local or remote runner URL and get the same streaming UI without a browser. Watch [testbox.run](http://https://www.testbox.run/ "testbox.run") for early access.
 
 ### Streaming Test Execution via SSE
 
@@ -154,7 +154,7 @@ var results = tb.dryRun();
 
 ![](888.gif)
 
-Lists every suite and spec that would execute, with labels and skip reasons --- perfect for coverage audits and CI test inventory reporting.
+Lists every suite and spec that would execute, with labels and skip reasons — perfect for coverage audits and CI test inventory reporting.
 
 #### JSON Output
 
@@ -167,7 +167,7 @@ Need to feed results into another tool?
 
 Dry run respects all the same filters as a normal run: `--labels`, `--bundles`, `--directory`, `--testSuites`, `--testSpecs`.
 
-### BoxLang CLI Runner --- New Power Options
+### BoxLang CLI Runner — New Power Options
 
 The BoxLang runner gets a substantial set of new flags for fine-grained control over output, failures, and performance analysis.
 
@@ -209,7 +209,7 @@ Combine them for a tight CI workflow:
 
 #### Application Mappings Auto-Load (TESTBOX-440)
 
-The BoxLang runner now automatically loads `Application.bx` mappings from your project root before running tests. Custom path mappings, datasources, and settings are available to your specs with zero extra configuration --- bringing the CLI experience much closer to a full web server environment.
+The BoxLang runner now automatically loads `Application.bx` mappings from your project root before running tests. Custom path mappings, datasources, and settings are available to your specs with zero extra configuration — bringing the CLI experience much closer to a full web server environment.
 
 ### Other Notable Improvements
 
@@ -231,7 +231,7 @@ Or from the CLI: `--show-skipped=false`
 
 #### Suite Filtering Fixes (TESTBOX-435)
 
-Direct suite name matching is now reliable at any nesting depth. If a suite's name exactly matches `testSuites`, it always runs --- no more surprises with nested suites getting skipped.
+Direct suite name matching is now reliable at any nesting depth. If a suite's name exactly matches `testSuites`, it always runs — no more surprises with nested suites getting skipped.
 
 ```java
 ./testbox/run --testSuites="My Integration Suite"

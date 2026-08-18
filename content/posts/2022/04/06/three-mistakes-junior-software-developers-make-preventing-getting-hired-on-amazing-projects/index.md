@@ -18,7 +18,7 @@ frozen: false
 
 Being hired is not easy and it is especially somewhat tricky for junior software developers to be taken on to work on amazing projects. The reason is clear: industries always want people with the right skills and a junior software developer does not typically always have those. We get to learn to program and acquire knowledge from universities and colleges, which is not enough to be able to work on unique projects right away.
 
-I was once a junior developer, I faced similar problems. This is so common that I get a lot of frustrating messages from junior developers. They say that they do not get to work on exciting projects. For example --- one junior developer sent me messages mentioning that he is really into Java programming and wants to work on exciting projects so that he can learn. But unfortunately, he always ends up doing the same dull and simple CRUD-based projects.
+I was once a junior developer, I faced similar problems. This is so common that I get a lot of frustrating messages from junior developers. They say that they do not get to work on exciting projects. For example — one junior developer sent me messages mentioning that he is really into Java programming and wants to work on exciting projects so that he can learn. But unfortunately, he always ends up doing the same dull and simple CRUD-based projects.
 
 Still, people are getting hired and working in big companies on amazing projects. So, there is always a way out.
 
@@ -34,7 +34,7 @@ Let me tell you a secret: most of the best jobs do not even show up on the job b
 
 This is true. Let me tell you my story here: I got to know about my current job directly from my network. I was known to someone inside the company and I was called by them. I did not even send them my résumé.
 
-So, the solution is simple --- networking. You have to be known to the people where you want to get work. And for that, a junior developer can do the following things:
+So, the solution is simple — networking. You have to be known to the people where you want to get work. And for that, a junior developer can do the following things:
 
 * Attend the various events (e.g., Java user group events) and talk to the people, ask questions about their work, and tell them what excites them.
 * Create your online presence, create a blog and write posts about the stuff that you are learning, join an open-source project, etc.

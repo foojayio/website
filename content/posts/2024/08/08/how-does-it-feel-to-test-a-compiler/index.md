@@ -24,7 +24,7 @@ I'll briefly talk about my path to compiler testing, the Kotlin/Native compiler,
 
 I graduated with a bachelor's and master's degree in Software Engineering and then spent ten years in backend automation testing, including testing email backends (IMAP, POP3 protocols, email storage system, etc.), leading a testing team, and building test processes and test automation from scratch.
 
-In addition, I was involved in testing infrastructure and a bit of backend building --- I believe that a tester needs to know what path a product takes from the code stage in the repository to the production service. By the way, I found a few bugs in the [linking](https://en.wikipedia.org/wiki/Linker_(computing) "linking") of services written in C that no one had noticed for years, and now I work with linking quite often.
+In addition, I was involved in testing infrastructure and a bit of backend building — I believe that a tester needs to know what path a product takes from the code stage in the repository to the production service. By the way, I found a few bugs in the [linking](https://en.wikipedia.org/wiki/Linker_(computing) "linking") of services written in C that no one had noticed for years, and now I work with linking quite often.
 
 As it often happens, it was a matter of chance. At the time, I was considering a career change, and I stumbled upon a job opening at JetBrains. I decided to give it a shot, went through several interview stages, and received an offer.
 
@@ -34,7 +34,7 @@ The test assignment, by the way, was to build and test an interpreter written in
 
 What is a compiler and what does it consist of? A compiler is a program that translates text written in a programming language into another language (the target language). Typically, a compiler translates software modules into equivalent software modules in a low-level language (or directly into machine language), and then assembles them into a program, taking into account static and dynamic linking (often with the help of a separate linker, such as [ld](https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_chapter/ld_1.html#SEC1 "ld")).
 
-Compilers consist of two parts: frontend and backend. The frontend is responsible for lexical, syntactic, and semantic analysis. For example, if you try to assign a string value to a variable of type Int, an error will be generated --- this is what the frontend is responsible for. The backend, on the other hand, is responsible for generating target language (i.e. machine code).
+Compilers consist of two parts: frontend and backend. The frontend is responsible for lexical, syntactic, and semantic analysis. For example, if you try to assign a string value to a variable of type Int, an error will be generated — this is what the frontend is responsible for. The backend, on the other hand, is responsible for generating target language (i.e. machine code).
 
 ![A simplified compiler design scheme](Untitled-4-scaled.jpg)
 
@@ -66,7 +66,7 @@ From a product perspective, things are a bit more complex. The compiler has many
 * Various [garbage collector](https://kotlinlang.org/docs/native-memory-manager.html "garbage collector") parameters
 * Interoperability ([e. g., with C](https://kotlinlang.org/docs/native-c-interop.html "e. g., with C"))
 
-And so on. We should also not forget about integration with the build system (we use [Gradle](https://gradle.org/ "Gradle")), working with different versions of Xcode (required for building applications for Apple operating systems), working with IDEs, the nuances of working in different operating systems, performance, the size of the binary file, and so on --- it turns out to be quite a large scope that needs to be monitored.
+And so on. We should also not forget about integration with the build system (we use [Gradle](https://gradle.org/ "Gradle")), working with different versions of Xcode (required for building applications for Apple operating systems), working with IDEs, the nuances of working in different operating systems, performance, the size of the binary file, and so on — it turns out to be quite a large scope that needs to be monitored.
 
 What helps us with this? Of course, first and foremost, automated tests. We have several types of automated tests and different test suites: for merge requests, nightly, weekly, etc. The types include:
 
@@ -81,7 +81,7 @@ In addition to automated testing, we also perform [exploratory testing](https://
 
 The typical workflow for tasks looks something like this:
 
-1. A QA engineer picks up a task from the backlog --- tasks in YouTrack that are filtered according to a certain rule.
+1. A QA engineer picks up a task from the backlog — tasks in YouTrack that are filtered according to a certain rule.
 2. Such tasks usually have either a [Root cause analysis](https://en.wikipedia.org/wiki/Root_cause_analysis "Root cause analysis") (developers use this problem-solving method for all bugs) in a comments section or a "Note for QA" comment in a special format (our internal agreement), which gives the tester context.
 3. Then the tester reviews the automated tests and, based on this review, the Note for QA, and sometimes communication with the developer, decides whether exploratory testing is necessary for this task. The tester may also suggest cases for expanding the automated tests.
 4. If necessary, exploratory testing is performed.
@@ -97,7 +97,7 @@ I will show a few examples of what I had to deal with, without describing detail
 
 One of the first tasks was <https://youtrack.jetbrains.com/issue/KT-56464/K-N-Allow-HiddenFromObjC-for-classes>. Kotlin/Native has a `@HiddenFromObjC` annotation that can be used to hide specific symbols from being available in Objective-C, and this task implemented the ability to apply the annotation to classes.
 
-I remember that at that time, for the sake of testing simplicity, I wanted to write a bash script that would compile all the necessary code, but I realized that I didn't know what options I needed to compile the project with and what the general compilation order should be --- after all, I had to first compile the Objective-C Framework and then compile the program itself in Objective-C or Swift, which I had never done before. As a result, after some digging, I wrote a script that looked something like this:
+I remember that at that time, for the sake of testing simplicity, I wanted to write a bash script that would compile all the necessary code, but I realized that I didn't know what options I needed to compile the project with and what the general compilation order should be — after all, I had to first compile the Objective-C Framework and then compile the program itself in Objective-C or Swift, which I had never done before. As a result, after some digging, I wrote a script that looked something like this:
 
 ```bash
 #/bin/zsh
@@ -133,7 +133,7 @@ echo "Launching Swift compiled Main:"
 echo
 ```
 
-What's a test case for such a feature? We compile classes.kt and then use the result in Objective-C or Swift code --- so different contents of classes.kt are the test cases.
+What's a test case for such a feature? We compile classes.kt and then use the result in Objective-C or Swift code — so different contents of classes.kt are the test cases.
 
 The simple example of the new feature usage looks like this:
 
@@ -190,7 +190,7 @@ pkg.liba/abcd|abcd(kotlin.Long){}[0]
 pkg.liba/|(kotlin.Int){}[0]
 ```
 
-There are also tasks for various compiler features --- for example, I once tested a task to improve error reporting during [partial linkage](https://kotlinconf.com/2023/talks/372287/ "partial linkage"). There were no interesting cases in this task, but the essence of the task itself might seem interesting to someone --- after all, we often don't think about how projects are assembled, in particular, how all the libraries needed for assembly are linked together. And here it was initially necessary to artificially create an error case during partial linkage. An example of a bug that can be found when testing such tasks is the [creation](https://youtrack.jetbrains.com/issue/KT-61097/PL-Dont-create-an-executable-if-there-were-errors-in-PL "creation") of an executable file in a situation where it should not be possible to create it.
+There are also tasks for various compiler features — for example, I once tested a task to improve error reporting during [partial linkage](https://kotlinconf.com/2023/talks/372287/ "partial linkage"). There were no interesting cases in this task, but the essence of the task itself might seem interesting to someone — after all, we often don't think about how projects are assembled, in particular, how all the libraries needed for assembly are linked together. And here it was initially necessary to artificially create an error case during partial linkage. An example of a bug that can be found when testing such tasks is the [creation](https://youtrack.jetbrains.com/issue/KT-61097/PL-Dont-create-an-executable-if-there-were-errors-in-PL "creation") of an executable file in a situation where it should not be possible to create it.
 
 ![A bug report for the task](0_izZs_boaQyYzKSPp.webp "A bug report for the task")
 
@@ -229,19 +229,19 @@ I also encountered automated tests as part of the task to improve Objective-C in
 
 These are just a few examples, but even from them you can see that the tasks can be very diverse: from testing on different code examples to setting up integration automated tests and performance testing.
 
-In fact, there are no specific tools --- I use the console, bash scripts, vim, IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/ "IntelliJ IDEA")), Gradle, I read documentation and specifications.
+In fact, there are no specific tools — I use the console, bash scripts, vim, IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/ "IntelliJ IDEA")), Gradle, I read documentation and specifications.
 
 Since the Kotlin/Native compiler has many different parameters, we're facing a problem of choosing the optimal set of tests that would not cover all combinations of parameters (this would be a huge test suite), but would find potential bugs at the intersection of using some parameters. I think it's already clear that I'm hinting at [pairwise testing](https://en.wikipedia.org/wiki/All-pairs_testing "pairwise testing") 🙂 We use this test design technique, and the [pict](https://github.com/microsoft/pict "pict") utility helps us with this. Our automated test configuration repository contains a test model for the compiler, and there is a script that generates the necessary methods for the [Kotlin DSL](https://www.jetbrains.com/help/teamcity/kotlin-dsl.html "Kotlin DSL") of TeamCity automated test build configurations.
 
-Sometimes I use [lldb](https://lldb.llvm.org/ "lldb") for debugging --- my experience with [gdb](https://sourceware.org/gdb/ "gdb") at one of my previous jobs helps. In general, my experience with Linux, with setting up infrastructure and building services written in various programming languages (C, C++, Java, Go and even Perl) is very helpful in my work. Specific tools may change, but there is always a basic theory, basic approaches on which everything is built.
+Sometimes I use [lldb](https://lldb.llvm.org/ "lldb") for debugging — my experience with [gdb](https://sourceware.org/gdb/ "gdb") at one of my previous jobs helps. In general, my experience with Linux, with setting up infrastructure and building services written in various programming languages (C, C++, Java, Go and even Perl) is very helpful in my work. Specific tools may change, but there is always a basic theory, basic approaches on which everything is built.
 
-In my opinion, it is very important to have and maintain knowledge of this rather than knowledge of specific tools. Today you're testing an HTTP API, and tomorrow they will implement a new service using a custom binary protocol. The QA engineer should not be daunted by this, because the essence remains the same --- you're still testing a service that receives and sends bytes organized according to some specification.
+In my opinion, it is very important to have and maintain knowledge of this rather than knowledge of specific tools. Today you're testing an HTTP API, and tomorrow they will implement a new service using a custom binary protocol. The QA engineer should not be daunted by this, because the essence remains the same — you're still testing a service that receives and sends bytes organized according to some specification.
 
 This article is just a brief overview of the work of a QA engineer in a compiler development team.
 
-It does not touch upon the work with the IDE --- there is a separate team for testing Kotlin in the IDE.
+It does not touch upon the work with the IDE — there is a separate team for testing Kotlin in the IDE.
 
-It does not say much about automation and performance testing --- we also have dedicated teams for these tasks.
+It does not say much about automation and performance testing — we also have dedicated teams for these tasks.
 
 As you can see, compiler testing is a big task!
 

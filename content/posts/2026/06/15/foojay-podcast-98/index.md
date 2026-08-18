@@ -44,8 +44,8 @@ WebAssembly engineer, creator of Chicory, maintainer of Endive under the Bytecod
 ## Links
 
 * Foojay post: [A New Generation of Java Libraries: Wasm Becomes the Implementation Detail](https://foojay.io/today/a-new-generation-of-java-libraries-is-born-wasm-becomes-the-implementation-detail/)
-* [Chicory --- WebAssembly interpreter for the JVM](https://github.com/dylibso/chicory)
-* [Endive --- WebAssembly runtime for Java, under Bytecode Alliance](https://github.com/bytecodealliance/endive)
+* [Chicory — WebAssembly interpreter for the JVM](https://github.com/dylibso/chicory)
+* [Endive — WebAssembly runtime for Java, under Bytecode Alliance](https://github.com/bytecodealliance/endive)
 * [Endive documentation](https://endive.run/docs/)
 * [Bytecode Alliance](https://bytecodealliance.org)
 * [OpenJDK Project Detroit](https://openjdk.org/projects/detroit/)

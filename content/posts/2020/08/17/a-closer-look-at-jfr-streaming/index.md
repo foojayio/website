@@ -198,4 +198,4 @@ So what is the conclusion of these benchmarks? Not much, except for: "don't use 
 
 \[2\]:<https://openjdk.java.net/jeps/349>
 
-**Note:** Used with permission and thanks --- originally written by and published on [Marcus Hirt's blog](http://hirt.se/blog/?p=1239).
+**Note:** Used with permission and thanks — originally written by and published on [Marcus Hirt's blog](http://hirt.se/blog/?p=1239).

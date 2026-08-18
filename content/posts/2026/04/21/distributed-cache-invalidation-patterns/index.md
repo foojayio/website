@@ -22,7 +22,7 @@ Caching is one of the most powerful tools developers have at their disposal for 
 
 In small monolithic applications, cache management is usually very simple. A service retrieves data from a database, stores it in memory, and fulfills subsequent requests by retrieving the data directly from the cache. When the data changes, the cache key is invalidated or updated.
 
-Things get complicated---and not just a little---when the system evolves into a distributed architecture.
+Things get complicated—and not just a little—when the system evolves into a distributed architecture.
 
 Modern, cloud-native applications run multiple service instances behind load balancers. Each instance can maintain its own local cache, and the system may include shared distributed caches such as Redis or Memcached. In these environments, maintaining cache consistency and coherence becomes much more difficult.
 

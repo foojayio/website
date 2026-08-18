@@ -356,7 +356,7 @@ public class HelloStreamWarmup {
 }
 ```
 
-This program runs in 90 milliseconds with an AOT cache that contains no profiles. After collecting profiles into the AOT cache, it runs in 73 milliseconds --- an improvement of 19%. The AOT cache with profiles occupies an additional 250 kilobytes, about 2.5% more than the AOT cache without profiles.
+This program runs in 90 milliseconds with an AOT cache that contains no profiles. After collecting profiles into the AOT cache, it runs in 73 milliseconds — an improvement of 19%. The AOT cache with profiles occupies an additional 250 kilobytes, about 2.5% more than the AOT cache without profiles.
 
 A short program such as this has only a short warmup period, but with cached profiles that warmup goes even faster as a result of timely and accurate JIT activity. More complex and longer-running programs are also likely to warm up more quickly, for the same reason.
 
@@ -494,7 +494,7 @@ For more information on this feature, read [JEP 509](https://openjdk.org/jeps/50
 
 #### JEP 518: JFR Cooperative Sampling
 
-We learned in the previous section that the JFR collects samples by obtaining stacktraces for a number of running Java threads. In order to produce these stacktraces, the target threads must be suspended so that the call frames on the stack can be parsed. As part of that process, the Hotspot JVM maintains metadata that is valid only when the thread is suspended at well-defined code locations known as *safepoints* . However, if sampling is only done at safepoints, the notorious [safety bias problem](https://plv.colorado.edu/papers/mytkowicz-pldi10.pdf) occurs --- where accuracy is lost since frequently-executed pieces of code might not be anywhere near a safepoint.
+We learned in the previous section that the JFR collects samples by obtaining stacktraces for a number of running Java threads. In order to produce these stacktraces, the target threads must be suspended so that the call frames on the stack can be parsed. As part of that process, the Hotspot JVM maintains metadata that is valid only when the thread is suspended at well-defined code locations known as *safepoints* . However, if sampling is only done at safepoints, the notorious [safety bias problem](https://plv.colorado.edu/papers/mytkowicz-pldi10.pdf) occurs — where accuracy is lost since frequently-executed pieces of code might not be anywhere near a safepoint.
 
 To avoid this problem, the JFR currently samples the stacks of program threads asynchronously, suspending threads at code locations that may not be safepoints at all. This means the metadata maintained by the JVM may not be valid and so we have to resort to using heuristics to generate a stacktrace. Unfortunately, these heuristics are inefficient, and may even crash the JVM when their results are incorrect.
 
@@ -779,7 +779,7 @@ Java 25 comes with a single removal.
 
 This JEP removes the 32-bit x86 (Linux) port, which was to be expected after [its deprecation in Java 24](https://hanno.codes/2025/03/18/java-24-rolls-out-today/#jep-501-deprecate-the-32-bit-x86-port-for-removal). The affected users are expected to already have migrated to 64-bit JVMs.
 
-Supporting multiple platforms has been the focus of the Java ecosystem since the beginning. But older platforms cannot be supported indefinitely---the effort that was required to maintain this port exceeded its advantages. Keeping it up-to-date with new features like Loom, the Foreign Function \& Memory API (FFM), the Vector API, and late GC barrier expansion represented a significant cost. So it's time to say goodbye to this port!
+Supporting multiple platforms has been the focus of the Java ecosystem since the beginning. But older platforms cannot be supported indefinitely—the effort that was required to maintain this port exceeded its advantages. Keeping it up-to-date with new features like Loom, the Foreign Function \& Memory API (FFM), the Vector API, and late GC barrier expansion represented a significant cost. So it's time to say goodbye to this port!
 
 #### More Information
 

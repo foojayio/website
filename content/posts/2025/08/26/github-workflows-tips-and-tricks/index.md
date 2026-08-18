@@ -104,7 +104,7 @@ When choosing an action, you should exert the same care as when bringing in any 
 
 ## Know your Actions
 
-As the previous tip, this one stems from a more generic one---I speak from experience. I was developing a workflow to package a Java application. I was heavily using the workflow, and the job had to download the dependencies at every run.
+As the previous tip, this one stems from a more generic one—I speak from experience. I was developing a workflow to package a Java application. I was heavily using the workflow, and the job had to download the dependencies at every run.
 
 ```yaml
 jobs:

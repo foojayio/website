@@ -27,7 +27,7 @@ In **chapter 1**, the book starts out with a review of "software qualities"---co
 * Add water to a vessel
 * Connect two vessels with a pipe
 
-Just one twist---the water level is equalized among all vessels that are connected by pipes.
+Just one twist—the water level is equalized among all vessels that are connected by pipes.
 
 I am not normally a fan of a running example in a technical book. The resulting programs start out simple but tend to get ever more baroque in later chapters, as all features of a particular technology are brought to bear. It can be difficult to jump around, browsing for the topics of interest. Instead, one must read the book linearly, chapter by chapter, whether or not one is interested in all of them.
 

@@ -24,11 +24,11 @@ frozen: false
 
 ![](boxlang-spring-boot-release-700x467.jpg)
 
-Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great --- until you need more expressiveness. FreeMarker is powerful --- until the syntax fights you. What if you could write templates in a dynamic JVM language that gives you the full power of the platform, feels natural, and requires zero setup to integrate?
+Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — until the syntax fights you. What if you could write templates in a dynamic JVM language that gives you the full power of the platform, feels natural, and requires zero setup to integrate?
 
 Meet the **BoxLang Spring Boot Starter.**
 
-**TL;DR:** Drop one dependency into your Spring Boot 3 app and start writing dynamic `.bxm` templates powered by BoxLang --- a modern, expressive JVM language. Zero configuration. Full web scopes. 100% Java interoperable. Not only that, you get full access to BoxLang's framework capabilities so you can integrate tons of features into your Spring Boot applications:
+**TL;DR:** Drop one dependency into your Spring Boot 3 app and start writing dynamic `.bxm` templates powered by BoxLang — a modern, expressive JVM language. Zero configuration. Full web scopes. 100% Java interoperable. Not only that, you get full access to BoxLang's framework capabilities so you can integrate tons of features into your Spring Boot applications:
 
 * Human \& Fluent Scheduled Tasks
 * Enterprise Caching Engine
@@ -49,10 +49,10 @@ Not only that, it is completely documented for you:
 
 Key highlights:
 
-**☕ 100% Java interoperable** --- call any Java class, library, or Spring bean directly  
-**🔩 Compiles to JVM bytecode** --- same performance guarantees you expect  
-**🚀 Multi-runtime** --- run it on OS, Servlet containers, AWS Lambda, and more  
-**🎨 Modern syntax** --- expressive, clean, and productive
+**☕ 100% Java interoperable** — call any Java class, library, or Spring bean directly  
+**🔩 Compiles to JVM bytecode** — same performance guarantees you expect  
+**🚀 Multi-runtime** — run it on OS, Servlet containers, AWS Lambda, and more  
+**🎨 Modern syntax** — expressive, clean, and productive
 
 ```java
 // Access the BoxLang runtime directly from any Spring-managed bean
@@ -85,7 +85,7 @@ Spring Boot's auto-configuration mechanism detects the starter on the classpath 
 
 ## 🚀 From Controller to Template in Minutes
 
-Your Spring MVC controllers stay exactly as they are. Return a view name, add model attributes --- BoxLang handles the rest.
+Your Spring MVC controllers stay exactly as they are. Return a view name, add model attributes — BoxLang handles the rest.
 
 ```java
 @Controller
@@ -120,7 +120,7 @@ Then write your template in `src/main/resources/templates/home.bxm`:
 
 Every attribute you add via `model.addAttribute(...)` is automatically injected into the BoxLang `variables` scope. No extra mapping, no boilerplate.
 
-## 🌐 Full Web Scopes --- Out of the Box
+## 🌐 Full Web Scopes — Out of the Box
 
 Unlike most view engines that only expose model data, BoxLang templates have access to the complete set of HTTP scopes natively, and the entire request/response servlet contexts.
 
@@ -148,7 +148,7 @@ Unlike most view engines that only expose model data, BoxLang templates have acc
 
 ## 🔥 Hot-Reload During Development
 
-Switch to a `file`: prefix in a dev Spring profile and template edits take effect on the next request --- no restarts required.
+Switch to a `file`: prefix in a dev Spring profile and template edits take effect on the next request — no restarts required.
 
 `src/main/resources/application-dev.properties `
 
@@ -179,7 +179,7 @@ You can also supply a `boxlang.json` config file at `src/main/resources/boxlang.
 
 ## 🔀 Coexist With Any Other View Technology
 
-`BoxLangViewResolver` integrates cleanly into Spring MVC's resolver chain. If a `.bxm` template doesn't exist for a given view name, it returns `null` and Spring falls through to the next resolver --- meaning Thymeleaf, FreeMarker, and BoxLang can all live in the same application without conflict.
+`BoxLangViewResolver` integrates cleanly into Spring MVC's resolver chain. If a `.bxm` template doesn't exist for a given view name, it returns `null` and Spring falls through to the next resolver — meaning Thymeleaf, FreeMarker, and BoxLang can all live in the same application without conflict.
 
 ```java
 # Lower number = higher priority in the resolver chain

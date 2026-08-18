@@ -44,7 +44,7 @@ So, let's dive into our conversation with the remarkable Steve Poole without fur
 
 ### Bazlur: Can you tell us about your background and how you got started in the software industry?
 
-**Steve Poole**: I live in the UK. I have a wife, three grown-up daughters, and more gadgets than I can count. I did computing at school---basic, of course---but it didn't excite me. As a kid, I wanted to be a fighter pilot, but that wasn't an option since I'm shortsighted. Next, I wanted to be an architect, so I went to university.
+**Steve Poole**: I live in the UK. I have a wife, three grown-up daughters, and more gadgets than I can count. I did computing at school—basic, of course—but it didn't excite me. As a kid, I wanted to be a fighter pilot, but that wasn't an option since I'm shortsighted. Next, I wanted to be an architect, so I went to university.
 
 While there, I got access to the department's mainframe and its raster graphics terminals. I was hooked. All I wanted to do was create 3D graphics with computers, but obviously, it was way, way, way too early. I ditched architecture and moved to computing. Then tried to find a job - none around. I didn't have any practical experience. I joined a local college and took a data processing course, and while doing that, I managed to get a few home computers (<https://en.wikipedia.org/wiki/Dragon_32/64>).
 
@@ -144,9 +144,9 @@ If you don't take chances and don't try different things, you're actively opting
 
 **Steve Poole**: How much time do you have?
 
-A long time ago, I was involved in a network performance problem. The customer's internal Windows network monitor would trigger alerts of a performance issue, but every time the customer tried to figure out what was happening, the problem disappeared. It didn't matter how long they waited---they'd get alert after alert until they signed onto the monitoring system.
+A long time ago, I was involved in a network performance problem. The customer's internal Windows network monitor would trigger alerts of a performance issue, but every time the customer tried to figure out what was happening, the problem disappeared. It didn't matter how long they waited—they'd get alert after alert until they signed onto the monitoring system.
 
-Eventually, they realized that the problem was the monitoring system itself; it would eat all the available CPU, which stopped the h/w monitoring from functioning correctly. So now they'd wait for the problem to occur, then look at the process list on the monitor to see what was eating all the CPU. But that didn't work either---the same thing; I logged on, and the problem disappeared.
+Eventually, they realized that the problem was the monitoring system itself; it would eat all the available CPU, which stopped the h/w monitoring from functioning correctly. So now they'd wait for the problem to occur, then look at the process list on the monitor to see what was eating all the CPU. But that didn't work either—the same thing; I logged on, and the problem disappeared.
 
 For weeks and weeks, we tried different things to capture the problem until someone realized that the Windows machine was running a 3D screen saver. Which, of course, was terminated every time you signed in! The cause had been in front of our noses for weeks.
 

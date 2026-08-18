@@ -31,7 +31,7 @@ The JavaFX links of the week are back on [jfx-central.com](https://www.jfx-centr
 
 ## News from "The Web"
 
-* **Pavlo Iatsiuk** announced the first release of DynamoIt --- a JavaFX GUI client application for AWS DynamoDB - [on Reddit](https://www.reddit.com/r/JavaFX/comments/xbdi2u/the_first_release_of_dynamoit_gui_client_for_aws/).
+* **Pavlo Iatsiuk** announced the first release of DynamoIt — a JavaFX GUI client application for AWS DynamoDB - [on Reddit](https://www.reddit.com/r/JavaFX/comments/xbdi2u/the_first_release_of_dynamoit_gui_client_for_aws/).
   * You can find the release [on GitHub](https://github.com/bykka/dynamoit/releases/tag/1.0.0).
 * [**Robert Ladstätter**](https://twitter.com/rladstaetter) announced the 1000th download of LogoRRR, another JavaFX GUI application!
   * This is the [Twitter announcement](https://twitter.com/logorrr/status/1569565540657647616?t=S5FvS5QpVKCi1KWrME09JA&s=09)

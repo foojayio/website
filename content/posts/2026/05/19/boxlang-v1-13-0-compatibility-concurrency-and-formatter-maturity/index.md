@@ -43,7 +43,7 @@ The string trimming BIFs now accept an optional chars argument. Strip arbitrary 
 "//path/to/dir//".trim( "/" )  // "path/to/dir"
 ```
 
-Each character in `chars` is treated as an independent trim target --- the same behavior you'd expect from Python or JavaScript. One less regex workaround.
+Each character in `chars` is treated as an independent trim target — the same behavior you'd expect from Python or JavaScript. One less regex workaround.
 
 ### `getClassMetadata()` by Absolute Path
 
@@ -62,8 +62,8 @@ This is a cornerstone API for tooling. Linters, IDE integrations, documentation 
 
 Two new arguments give you deterministic control over the environment of spawned child processes:
 
-* `inheritEnvironment` (boolean, default `true`) --- when `false`, the child starts with a clean slate
-* `environment` (struct) --- an explicit map of variables to inject
+* `inheritEnvironment` (boolean, default `true`) — when `false`, the child starts with a clean slate
+* `environment` (struct) — an explicit map of variables to inject
 
 ```java
 result = systemExecute(
@@ -80,7 +80,7 @@ result = systemExecute(
 writeOutput( result.output )
 ```
 
-Before 1.13.0, every `systemExecute()` call inherited the full parent environment --- including secrets, tokens, and internal config. Security-conscious deployments now have an explicit, auditable way to lock that down.
+Before 1.13.0, every `systemExecute()` call inherited the full parent environment — including secrets, tokens, and internal config. Security-conscious deployments now have an explicit, auditable way to lock that down.
 
 ## The [BoxLang Formatter](https://boxlang.ortusbooks.com/getting-started/ide-tooling/boxlang-formatter "BoxLang Formatter") Goes Production-Ready
 
@@ -99,7 +99,7 @@ This is a flagship moment. The formatter graduates from experimental to producti
 
 * `.bxformat.json` --- BoxLang-native config (Ortus gold-standard defaults)
 * `.cfformat.json` --- legacy CFFormat config, auto-converted with migration-safe defaults
-* Built-in defaults --- sensible behavior with zero config
+* Built-in defaults — sensible behavior with zero config
 
 #### Migration tooling built in:
 
@@ -113,26 +113,26 @@ boxlang format --convertConfig --input ./
 
 ## Async \& Concurrency Hardening
 
-Concurrency bugs are the worst kind of bug --- intermittent, non-deterministic, catastrophic when they hit production. 1.13.0 closes several long-standing race conditions and lifecycle issues across the [async subsystem](https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/async/ "async subsystem") and [threading layer](https://boxlang.ortusbooks.com/boxlang-language/syntax/threading "threading layer").
+Concurrency bugs are the worst kind of bug — intermittent, non-deterministic, catastrophic when they hit production. 1.13.0 closes several long-standing race conditions and lifecycle issues across the [async subsystem](https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/async/ "async subsystem") and [threading layer](https://boxlang.ortusbooks.com/boxlang-language/syntax/threading "threading layer").
 
-**API surface normalization** . Missing async methods are restored: `all()`, `allApply()`, `thenAsync()`, `delay()`, and `shutdownAndAwaitTermination()` now exist with correct signatures. Positional spread arguments (`...args`) are supported in calls --- unblocking a common functional-programming pattern.
+**API surface normalization** . Missing async methods are restored: `all()`, `allApply()`, `thenAsync()`, `delay()`, and `shutdownAndAwaitTermination()` now exist with correct signatures. Positional spread arguments (`...args`) are supported in calls — unblocking a common functional-programming pattern.
 
 ```java
 args     = [ "Ada", "Lovelace" ]
 fullName = formatName( ...args )
 ```
 
-**`BoxFuture()` lifecycle** . A `BoxFuture` created during an HTTP request used to throw scope-access errors if the parent request completed before the future resolved. The context lifecycle is now properly decoupled --- background work survives request teardown without touching stale scopes.
+**`BoxFuture()` lifecycle** . A `BoxFuture` created during an HTTP request used to throw scope-access errors if the parent request completed before the future resolved. The context lifecycle is now properly decoupled — background work survives request teardown without touching stale scopes.
 
 **Concurrent array iteration** . `for/in` loops over arrays no longer throw `ConcurrentModificationException` when the array is mutated from another thread.
 
-**Atomic class file writes.** Class generation now uses a temp-file-then-atomic-rename pattern. No more transient zero-byte `.class` artifacts surfacing under parallel compilation --- a race condition that produced some genuinely painful `ClassNotFoundException` reports in production.
+**Atomic class file writes.** Class generation now uses a temp-file-then-atomic-rename pattern. No more transient zero-byte `.class` artifacts surfacing under parallel compilation — a race condition that produced some genuinely painful `ClassNotFoundException` reports in production.
 
 ## [MiniServer](https://boxlang.ortusbooks.com/getting-started/running-boxlang/miniserver "MiniServer"): Security \& Reliability
 
 **The headline** : a misconfigured miniserver no longer accidentally serves your source code or configuration over HTTP. The static-serving security filter now blocks hidden files and dotfiles, framework config artifacts (`.boxlang.json`, `boxlang.json`), and source files (`.bx`, `.cfc`) when not routed through the engine.
 
-**Pass predicate is now configurable** through three channels --- pick whichever fits your deployment model:
+**Pass predicate is now configurable** through three channels — pick whichever fits your deployment model:
 
 ```java
 # CLI

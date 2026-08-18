@@ -19,11 +19,11 @@ related_posts:
 frozen: false
 ---
 
-In the era of **vibe coding**---where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs---you need immediate feedback on how new logic actually executes. Not comprehensive analysis. Not nanosecond-precise timing. Just a quick confirmation that your loops aren't spinning 10,000x more than they should.
+In the era of **vibe coding**---where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate feedback on how new logic actually executes. Not comprehensive analysis. Not nanosecond-precise timing. Just a quick confirmation that your loops aren't spinning 10,000x more than they should.
 
 However, traditional profilers can feel like overkill for quick validation. In addition, they present results at method/stack granularity and require context-switching to interpret. They also introduce overhead, ranging from negligible (e.g., JFR/sampling) to noticeable (call tracing/instrumentation). As a result, they are less convenient as always-on feedback during rapid iteration.
 
-**jvm-hotpath** is a lightweight Java agent built for this workflow. It surfaces per-line execution counts directly in your source code, showing you exactly which lines run and how often---while your application runs.
+**jvm-hotpath** is a lightweight Java agent built for this workflow. It surfaces per-line execution counts directly in your source code, showing you exactly which lines run and how often—while your application runs.
 
 ## What Makes This Different
 
@@ -41,7 +41,7 @@ However, traditional profilers can feel like overkill for quick validation. In a
 
 ### The Original Problem
 
-The immediate pain is simple: code arrives faster than you can build a mental model of it. Years ago, I faced the same core problem in an inherited system. So I hacked Cobertura---a coverage tool---to use it as a runtime analysis tool. By instrumenting the app and exercising specific behaviors, I could observe execution counts after the fact. As a result, I got a runtime-shaped mental map of the codebase---and an entry point for making changes with confidence.
+The immediate pain is simple: code arrives faster than you can build a mental model of it. Years ago, I faced the same core problem in an inherited system. So I hacked Cobertura—a coverage tool—to use it as a runtime analysis tool. By instrumenting the app and exercising specific behaviors, I could observe execution counts after the fact. As a result, I got a runtime-shaped mental map of the codebase—and an entry point for making changes with confidence.
 
 After all, static analysis tells you what *could* execute. Tests tell you what *should* execute. What I needed was to see what *does* execute under real workloads.
 
@@ -67,7 +67,7 @@ Ultimately, that question decided the direction.
 This tool was born during a high-velocity vibe coding session. Specifically, I was refactoring a core processing engine. Standard profilers missed this bug. The system didn't *feel* slow yet:
 
 **The Bug:** A `.filter(r -> r.isDuplicate())` call was executing 19 million times in 15 seconds.  
-**The Problem:** Each call was \~50 nanoseconds---easy for sampling profilers to under-sample.  
+**The Problem:** Each call was \~50 nanoseconds—easy for sampling profilers to under-sample.  
 **The Impact:** O(N²) instead of O(1) was hiding in plain sight.
 
 ### Why It Was Hard to Spot
@@ -80,7 +80,7 @@ Execution counts made it obvious. For example, seeing "19,147,293 executions" ne
 
 Java profilers focus on **resource consumption** : CPU time, memory allocation, thread contention. jvm-hotpath, by contrast, shows **how many times code runs** (frequency).
 
-In modern Java, this distinction matters. For instance, JIT compilation makes individual calls fast. So the bottleneck is often algorithmic---O(N) vs O(1). Also, logic errors can create millions of unnecessary calls. Furthermore, sampling profilers are statistical. Moreover, very short but frequent work is easy to under-sample.
+In modern Java, this distinction matters. For instance, JIT compilation makes individual calls fast. So the bottleneck is often algorithmic—O(N) vs O(1). Also, logic errors can create millions of unnecessary calls. Furthermore, sampling profilers are statistical. Moreover, very short but frequent work is easy to under-sample.
 
 **It's a "Logic X-Ray," not a "Resource Monitor."**
 
@@ -88,7 +88,7 @@ In modern Java, this distinction matters. For instance, JIT compilation makes in
 
 ### Instrumentation
 
-jvm-hotpath is a Java agent that instruments bytecode at class-load time using ASM. Specifically, it inserts a counter before each executable line. Indeed, there's no sampling, no timing---just frequency.
+jvm-hotpath is a Java agent that instruments bytecode at class-load time using ASM. Specifically, it inserts a counter before each executable line. Indeed, there's no sampling, no timing—just frequency.
 
 As a result, the overhead is low enough for normal development runs.
 
@@ -98,7 +98,7 @@ The collected data is written to an interactive HTML report that refreshes while
 
 JSONP-powered polling lets you open the report directly from disk (`file://`) and watch it update live. No server is needed.
 
-Notably, the narrow focus is intentional. There are no flame graphs, no dashboards, no post-hoc traces---just line-level execution frequency mapped onto source code.
+Notably, the narrow focus is intentional. There are no flame graphs, no dashboards, no post-hoc traces—just line-level execution frequency mapped onto source code.
 
 ### Machine-Readable Output
 
@@ -165,7 +165,7 @@ java -jar jvm-hotpath-agent.jar --data=target/site/jvm-hotpath/execution-report.
 
 ### What This Is Not
 
-It is not a coverage percentage tool---use JaCoCo for that. Nor is it a CPU timing profiler---use JFR or async-profiler instead. Finally, it is not a 24/7 production monitoring system.
+It is not a coverage percentage tool—use JaCoCo for that. Nor is it a CPU timing profiler—use JFR or async-profiler instead. Finally, it is not a 24/7 production monitoring system.
 
 ## Beyond Performance: Dead Code and Cognitive Load
 
@@ -181,7 +181,7 @@ Overall, the tools accelerated exploration. Even so, the motivation and directio
 
 ## Where This Is Going
 
-There are obvious next steps---Gradle improvements, better exclusion controls, broader framework testing. For now, though, I'm deliberately keeping the scope small. Indeed, this is my first open-source release.
+There are obvious next steps—Gradle improvements, better exclusion controls, broader framework testing. For now, though, I'm deliberately keeping the scope small. Indeed, this is my first open-source release.
 
 The real question is simpler: **does this help you understand your codebase faster and with more confidence?**
 

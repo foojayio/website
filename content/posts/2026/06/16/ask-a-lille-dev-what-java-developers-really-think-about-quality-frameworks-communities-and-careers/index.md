@@ -49,7 +49,7 @@ One topic came back constantly during the interviews: software quality.
 
 However, developers did not only speak about unit tests or static analysis. Instead, they emphasized engineering culture and technical understanding.
 
-Several developers mentioned the importance of keeping applications simple. The famous KISS principle --- **Keep It Simple, Stupid** --- remains highly relevant in modern Java applications.
+Several developers mentioned the importance of keeping applications simple. The famous KISS principle — **Keep It Simple, Stupid** — remains highly relevant in modern Java applications.
 
 Frameworks are useful. Nevertheless, developers also stressed the importance of understanding the fundamentals:
 

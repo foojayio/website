@@ -37,7 +37,7 @@ It sounds reasonable.
 >
 > [\[image or embed\]](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3ldq7sml3as2n?ref_src=embed)
 >
-> --- Nicolas Fränkel 🇺🇦🇬🇪 ([@frankel.ch](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x?ref_src=embed)) [December 20, 2024 at 10:52 AM](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3ldq7sml3as2n?ref_src=embed)
+> — Nicolas Fränkel 🇺🇦🇬🇪 ([@frankel.ch](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x?ref_src=embed)) [December 20, 2024 at 10:52 AM](https://bsky.app/profile/did:plc:lho243ntrkr6h4ohtvk3lr4x/post/3ldq7sml3as2n?ref_src=embed)
 
 In this series of posts, I'll show how you can do it. My plan is the following:
 

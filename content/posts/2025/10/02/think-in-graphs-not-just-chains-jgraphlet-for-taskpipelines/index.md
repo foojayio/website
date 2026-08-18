@@ -303,7 +303,7 @@ try (TaskPipeline pipeline = new TaskPipeline()) {
 }
 ```
 
-The result is a clean, testable way to orchestrate synchronous or asynchronous tasks for composing complex flows, such as parallel retrieval, merging, judging, and guardrails---without requiring a heavyweight workflow engine.
+The result is a clean, testable way to orchestrate synchronous or asynchronous tasks for composing complex flows, such as parallel retrieval, merging, judging, and guardrails—without requiring a heavyweight workflow engine.
 To learn more or try it out:
 * [Maven central](https://mvnrepository.com/artifact/dev.shaaf.jgraphlet/jgraphlet)
 * [Github repo](https://github.com/sshaaf/jgraphlet)**

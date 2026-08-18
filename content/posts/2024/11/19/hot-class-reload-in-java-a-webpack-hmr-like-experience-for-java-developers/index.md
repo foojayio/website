@@ -19,13 +19,13 @@ frozen: false
 
 **In the world of software development, time is everything. Every developer knows the frustration of waiting for a full application restart just to see a small change take effect.**
 
-Java developers, in particular, have long dealt with this issue. But what if you didn't have to stop and restart every time you updated a class? Enter **Hot Class Reload (HCR)** in Java---a technique that can keep you in the flow, reloading classes on the fly, much like **Hot Module Reload (HMR)** does in JavaScript.
+Java developers, in particular, have long dealt with this issue. But what if you didn't have to stop and restart every time you updated a class? Enter **Hot Class Reload (HCR)** in Java—a technique that can keep you in the flow, reloading classes on the fly, much like **Hot Module Reload (HMR)** does in JavaScript.
 
 In this guide, we'll walk through how to implement HCR and integrate it into your Java development workflow. By the end, you'll have a powerful new tool to cut down on those long, unproductive restart times.
 
 ## Understanding Hot Class Reload
 
-Simply put, Hot Class Reload (HCR) allows Java applications to reload classes at runtime. This is incredibly useful in development environments where you're constantly iterating and tweaking code. Think of it as real-time editing: you change some code, the application picks it up right away---no restart required.
+Simply put, Hot Class Reload (HCR) allows Java applications to reload classes at runtime. This is incredibly useful in development environments where you're constantly iterating and tweaking code. Think of it as real-time editing: you change some code, the application picks it up right away—no restart required.
 
 Hot Class Reload (HCR) is a technique that enables Java applications to reload classes at runtime. This approach is particularly useful in development environments where frequent code changes occur. By leveraging Java's `WatchService`, custom class loaders using the `javax.tools` api and `JavaCompiler` class we can monitor source files for changes, compile them on-the-fly, and reload the updated classes into the running application.
 

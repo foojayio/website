@@ -27,7 +27,7 @@ frozen: false
 
 The Command Query Responsibility Segregation (CQRS) pattern is a design method that segregates data access into separate services for reading and writing data. This allows a higher level of maintainability in your applications, especially if the schema or requirements change frequently. This pattern was originally developed with separate read and write sources in mind. However, implementing CQRS for a single data source is an effective way to abstract data from the application and make maintenance easier in the future. In this blog, we will use Spring Boot with MongoDB in order to create a CQRS pattern-based application.
 
-Spring Boot applications generally have two main components to a repository pattern: standard repository items from Spring---in this case, MongoRepository---and then custom repository items that you create to perform operations beyond what is included with the standard repository. In our case, we will be using 2 custom repositories - ItemReadRepository and ItemWriteRepository to segregate the reads and writes from each other.
+Spring Boot applications generally have two main components to a repository pattern: standard repository items from Spring—in this case, MongoRepository—and then custom repository items that you create to perform operations beyond what is included with the standard repository. In our case, we will be using 2 custom repositories - ItemReadRepository and ItemWriteRepository to segregate the reads and writes from each other.
 
 The code in this article is based on the [grocery item sample app](https://github.com/mongodb-developer/mongodb-springboot). View the [updated version of this code](https://github.com/mongodb-developer/CQRSModelSpring) used in this article. Note the connection string in the application.properties file passes the app name of 'devrel-blog-java-cqrs' to the DB.
 
@@ -230,7 +230,7 @@ Using the 'updateMulti' function in our bulkUpdateItemCategories function, this 
 }
 ```
 
-In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields---we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
+In the case of the first example, all of the highlighted fields have not changed and are simply bloating the oplog. Imagine if this document had 200 fields—we would be including *all* of the fields in the oplog for a single field update! When updating documents, it's best to write your own repo functions to avoid sending all of the document's fields to the DB for replacement. Use the updateXXX repo functions to provide an update that uses the $set MongoDB function under the covers.
 
 ## Conclusion
 

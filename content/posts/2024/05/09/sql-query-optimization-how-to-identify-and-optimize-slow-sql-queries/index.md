@@ -25,7 +25,7 @@ That's why we decided to share our experience and offer insights using real-life
 
 ## The context
 
-Here's our story---while monitoring our Postgres database in the development environment, we noticed a significant increase in CPU usage and set out to identify which queries were causing the issue.
+Here's our story—while monitoring our Postgres database in the development environment, we noticed a significant increase in CPU usage and set out to identify which queries were causing the issue.
 
 ## Why is it hard to find slow SQL queries?
 

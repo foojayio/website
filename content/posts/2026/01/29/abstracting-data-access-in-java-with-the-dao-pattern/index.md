@@ -18,11 +18,11 @@ related_posts:
 frozen: false
 ---
 
-The Data Access Object (DAO) pattern is a structural pattern that isolates your application's business logic from persistence operations. By using an abstract API, the DAO pattern hides all the complexity of performing CRUD operations against your database---whether that's MongoDB, a relational database, or any other storage mechanism.
+The Data Access Object (DAO) pattern is a structural pattern that isolates your application's business logic from persistence operations. By using an abstract API, the DAO pattern hides all the complexity of performing CRUD operations against your database—whether that's MongoDB, a relational database, or any other storage mechanism.
 
 This separation is crucial: Your business logic shouldn't care whether you're using MongoDB's flexible document model or a rigid SQL schema. The DAO pattern ensures both layers can evolve independently.
 
-In this tutorial, we'll implement the DAO pattern with MongoDB as our backend. We'll start with a simple in-memory example to understand the core concepts, then build a production-ready implementation using the MongoDB Java Driver. Along the way, you'll see how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs---no complex entity mappings required.
+In this tutorial, we'll implement the DAO pattern with MongoDB as our backend. We'll start with a simple in-memory example to understand the core concepts, then build a production-ready implementation using the MongoDB Java Driver. Along the way, you'll see how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs—no complex entity mappings required.
 
 ## A simple implementation
 
@@ -114,7 +114,7 @@ public class Product {
 }
 ```
 
-Notice that this is just a plain old Java object (POJO). No annotations, no framework dependencies---just a container for product data. This is exactly what we want: a clean domain model that knows nothing about how it will be persisted.
+Notice that this is just a plain old Java object (POJO). No annotations, no framework dependencies—just a container for product data. This is exactly what we want: a clean domain model that knows nothing about how it will be persisted.
 
 ### The DAO API
 
@@ -202,7 +202,7 @@ public class ProductDao implements Dao<Product> {
 }
 ```
 
-This in-memory implementation uses a simple ArrayList as our "database." In the constructor, we populate it with a few sample products. The key thing to notice here is that all the persistence logic---even if it's just managing a list---is encapsulated within the DAO.
+This in-memory implementation uses a simple ArrayList as our "database." In the constructor, we populate it with a few sample products. The key thing to notice here is that all the persistence logic—even if it's just managing a list—is encapsulated within the DAO.
 
 ### Using the DAO
 
@@ -404,7 +404,7 @@ Let's break down what's happening here:
 
 **ID handling**: MongoDB uses ObjectIds, so we convert between string IDs (what our domain model uses) and MongoDB's ObjectId type in the helper methods.
 
-**Mapping helpers**: The productToDocument and documentToProduct methods handle the translation between our domain model and MongoDB's document format. This is much simpler than ORM mapping---we're just moving fields around, no complex entity lifecycle to manage.
+**Mapping helpers**: The productToDocument and documentToProduct methods handle the translation between our domain model and MongoDB's document format. This is much simpler than ORM mapping—we're just moving fields around, no complex entity lifecycle to manage.
 
 ### Connecting to MongoDB
 
@@ -516,7 +516,7 @@ public class MongoDBInventoryApplication {
 }
 ```
 
-Notice how MongoDBInventoryApplication is almost identical to our earlier InventoryApplication---the only difference is how we initialize the DAO. The business logic remains completely unchanged.
+Notice how MongoDBInventoryApplication is almost identical to our earlier InventoryApplication—the only difference is how we initialize the DAO. The business logic remains completely unchanged.
 
 This is the power of the DAO pattern: We've swapped from an in-memory implementation to a full-fledged MongoDB backend without touching our application code. Our domain model (Product) stayed clean, and our business logic stayed focused on what it should do, not how to persist data.
 
@@ -695,7 +695,7 @@ Notice we're translating MongoDB-specific exceptions into application-specific e
 
 The DAO pattern remains valuable even with modern databases like MongoDB. It creates a clean separation between your business logic and persistence concerns, making your code more maintainable and testable.
 
-We started with a simple in-memory implementation to understand the pattern's core concepts, then built a production-ready MongoDB implementation using a product inventory system. Along the way, we saw how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs---no complex entity mappings or lazy loading to worry about.
+We started with a simple in-memory implementation to understand the pattern's core concepts, then built a production-ready MongoDB implementation using a product inventory system. Along the way, we saw how MongoDB's document model actually makes the DAO pattern more straightforward than with traditional ORMs—no complex entity mappings or lazy loading to worry about.
 
 The key takeaway: Keep your DAOs focused purely on persistence operations. All business logic, validation, and workflow concerns belong in your service layer. This separation will pay dividends as your application grows and evolves.
 

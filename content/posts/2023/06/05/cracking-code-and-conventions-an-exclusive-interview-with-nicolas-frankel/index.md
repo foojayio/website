@@ -56,7 +56,7 @@ Every engineering school requires an internship of three months or more. I chose
 > ***"A language has rules, and as long as you play by the rules, you'll get the expected results; humans, not so much. I guess it's easier for me (and probably for most developers) to interact with computers than with humans for this reason." .***
 > ***- Nicolas on his inclination towards coding***
 
-***Bazlur: In an article, my good friend Bruno Souza once suggested that programmers should explore their creative side outside of coding, whether it's through writing poetry or enjoying kite-flying. How many years of coding experience do you have---more than 20 perhaps? As the topic of art came up, what were your thoughts on it? Have you found any non-coding inspirations in your life?***
+***Bazlur: In an article, my good friend Bruno Souza once suggested that programmers should explore their creative side outside of coding, whether it's through writing poetry or enjoying kite-flying. How many years of coding experience do you have—more than 20 perhaps? As the topic of art came up, what were your thoughts on it? Have you found any non-coding inspirations in your life?***
 
 **Nicolas:** Actually, for me, it's the opposite. When I was younger, I drew a lot (and painted a bit). When I started working, I had to catch up with people who had a computer science/engineering education and spent a lot of time on it. It meant stopping most unrelated activities, including drawing. I tried to start again a couple of years ago, but I didn't have the same fun as before, plus it was time-consuming. Nowadays, I prefer taking pictures of places I visit via my job.
 
@@ -79,7 +79,7 @@ We are supposed to be engineers. Engineering is finding the "best" solution in a
 
 The context could be that we are already working with an externalized workforce, but we are not happy about it. Yet, given the schedule, it's not feasible to interview and hire developers to replace the ones we have. The pragmatic way is to keep using the workforce, at least for this one project - better the devil, you know.
 
-However, our industry is full of injunctions that completely ignore both requirements and specific contexts: be agile, and you'll solve all your delivery problems! Chances are that the organization won't change anything but the terms it uses---goodbye, project managers; hello, scrum masters. The former will get two days of training and magically transform into the latter without any other change.
+However, our industry is full of injunctions that completely ignore both requirements and specific contexts: be agile, and you'll solve all your delivery problems! Chances are that the organization won't change anything but the terms it uses—goodbye, project managers; hello, scrum masters. The former will get two days of training and magically transform into the latter without any other change.
 
 Another current favourite of mine is: migrate to microservices, and you'll solve your scalability and maintainability problems! It completely ignores the fact that most real-world companies don't have scalability problems, are not mature enough to tackle distributed system issues introduced by microservices, and will face the exact same maintainability problems with microservices as with monoliths.
 

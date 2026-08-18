@@ -58,7 +58,7 @@ Infrastructure as Code tools like Terraform make architecture changes easier. Ne
 
 ### Why developer happiness drives simpler, centralized architectures
 
-Vibecoding---the focus on great developer experience---often favors centralized architectures like monoliths or monorepos.
+Vibecoding—the focus on great developer experience—often favors centralized architectures like monoliths or monorepos.
 
 ### Why Developers Prefer It
 
@@ -90,7 +90,7 @@ Surprisingly, many large enterprises now return to modular monoliths or packaged
 
 * Microservices bring high coordination, deployment, and security costs.
 * When organizations are unprepared, the return on investment often falls short.
-* Enterprises prioritize stability, simplicity, and traceability---qualities monoliths offer.
+* Enterprises prioritize stability, simplicity, and traceability—qualities monoliths offer.
 
 > 💡 Example: Amazon, known for microservices, is now grouping services into well-bounded contexts.
 
@@ -135,7 +135,7 @@ In 2024, teams chased independence and scalability with microservices. In 2025, 
 Moreover, modern tools like Terraform, devcontainers, and powerful CI/CD platforms allow revisiting architecture with intention.
 
 Whether working in a monolith, a modulith, or a well-tooled microservice ecosystem, balance, clarity, and team alignment matter most.
-> 🎯 Maybe the future isn't monolith *or* microservices---it's the ability to move between them with purpose.
+> 🎯 Maybe the future isn't monolith *or* microservices—it's the ability to move between them with purpose.
 
 🔵🔵🔵🔵🔵🔵
 

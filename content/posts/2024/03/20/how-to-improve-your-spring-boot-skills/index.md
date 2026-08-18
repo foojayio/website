@@ -201,7 +201,7 @@ The spring-boot-starter-data-jpa is a starter for using Spring Data JPA. It incl
 * spring-boot-starter-aop: This library enables Aspect-Oriented Programming in Spring Boot which addresses cross-cutting concerns for cleaner, modular code.
 * spring-aspects: This library is typically used when you need the advanced features provided by AspectJ, such as weaving into third-party libraries.
 
-So instead of searching for and adding all these dependencies and worrying about their compatible version, you just need to add one Starter POM --- spring-boot-starter-data-jpa
+So instead of searching for and adding all these dependencies and worrying about their compatible version, you just need to add one Starter POM — spring-boot-starter-data-jpa
 
 ## 6. Make use of Spring Boot CLI
 

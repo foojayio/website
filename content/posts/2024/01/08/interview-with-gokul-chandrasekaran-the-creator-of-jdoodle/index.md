@@ -43,7 +43,7 @@ JDoodle's growth story has been a testament to the organic pull of genuine utili
 
 One by one, based on demand, we began adding support for different languages. Today, JDoodle is a versatile tool, supporting 75+ programming languages and offering 2 integrated databases. Beyond just being a coding platform, it provides integration options for other applications and educational solutions through our APIs and plugins. One of our proudest additions has been our programming assessment platform, which aids in gauging coding proficiency.
 
-Furthermore, in our constant quest to offer more value to our users, we've introduced an AI-powered code assistant. Think of it as your virtual coding companion---part teacher, peer, and assistant. It's designed to guide, assist, and enhance the overall coding experience, ensuring that every JDoodle user has the resources they need at their fingertips.
+Furthermore, in our constant quest to offer more value to our users, we've introduced an AI-powered code assistant. Think of it as your virtual coding companion—part teacher, peer, and assistant. It's designed to guide, assist, and enhance the overall coding experience, ensuring that every JDoodle user has the resources they need at their fingertips.
 
 ***JDoodle supports 80+ languages and 2 databases. Those are big numbers! How did you achieve this?***
 
@@ -54,7 +54,7 @@ This commitment to our community's requirements and our relentless drive to cate
 
 ***You are advertising JDoodle on your website as the "Programming Ecosystem for the AI Era." What plans do you have, and how is AI influencing your roadmap?***
 
-The tagline "Programming Ecosystem for the AI Era" isn't just a catchphrase for JDoodle---it reflects our forward-thinking vision and commitment to innovation. We're at the cusp of a new age in programming, where AI is set to play an integral role in automating tasks and enhancing the developer experience.
+The tagline "Programming Ecosystem for the AI Era" isn't just a catchphrase for JDoodle—it reflects our forward-thinking vision and commitment to innovation. We're at the cusp of a new age in programming, where AI is set to play an integral role in automating tasks and enhancing the developer experience.
 
 To this end, as I touched upon earlier, we are unveiling an AI-powered coding assistant. This assistant isn't merely a tool but rather a multifaceted companion. It's designed to aid in writing code, assist with debugging, explain complex algorithms, optimize solutions, and even translate code snippets into different languages or a more understandable pseudo-code. The objective is to ensure that every developer, whether a novice learning the ropes or a seasoned professional, feels like they have a teacher, a peer, a friend, and a guide beside them throughout their coding journey.
 

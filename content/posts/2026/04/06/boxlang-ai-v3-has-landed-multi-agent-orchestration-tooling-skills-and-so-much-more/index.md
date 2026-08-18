@@ -13,22 +13,22 @@ related_posts:
 frozen: false
 ---
 
-It's been a while since we've shipped something this big. **BoxLang AI 3.0** is a ground-up rethink of how AI agents, models, and tools work in the BoxLang ecosystem --- and it lands with ten major features at once.
+It's been a while since we've shipped something this big. **BoxLang AI 3.0** is a ground-up rethink of how AI agents, models, and tools work in the BoxLang ecosystem — and it lands with ten major features at once.
 
 The headline is the **AI Skills system** : a first-class implementation of Anthropic's [Agent Skills open standard](https://www.anthropic.com/news/agent-skills) that lets you define reusable knowledge blocks: coding styles, domain rules, tone policies, API guidelines once in a `SKILL.md` file and inject them into any number of agents and models at runtime. No more copy-pasting the same system-prompt boilerplate everywhere. Skills are versioned, composable, and come in two modes: always-on (full content in every call) and lazy (only a name + description until the LLM asks for more).
 
 But that's just the start. Here's everything landing in 3.0:
 
-* 🎯 **AI Skills System** --- composable, file-based knowledge blocks injected into any agent or model at runtime
-* 🔌 **MCP Server Seeding** --- agents auto-discover and register tools from any MCP server
-* 🗄️ **Global AI Tool Registry** --- register tools by name once, reference them as strings anywhere
-* 🔧 **Tool System Overhaul** --- new `BaseTool` / `ClosureTool` architecture plus two built-in core tools
-* 🛡️ **Provider Capability System** --- type-safe capability detection with clear `UnsupportedCapability` errors
-* 🌲 **Parent-Child Agent Hierarchy** --- multi-agent orchestration trees with cycle detection and depth tracking
-* 🧵 **Middleware Support** --- six built-in middleware classes for logging, retries, guardrails, and more
-* 🏢 **Stateless Agents + Per-Call Identity Routing** --- safe multi-tenant memory across concurrent requests
-* 🤗 **HuggingFace Embeddings** --- new provider for the HuggingFace Inference API
-* 🔀 **Custom Service URLs** --- proxy and self-hosted endpoint support across all providers
+* 🎯 **AI Skills System** — composable, file-based knowledge blocks injected into any agent or model at runtime
+* 🔌 **MCP Server Seeding** — agents auto-discover and register tools from any MCP server
+* 🗄️ **Global AI Tool Registry** — register tools by name once, reference them as strings anywhere
+* 🔧 **Tool System Overhaul** — new `BaseTool` / `ClosureTool` architecture plus two built-in core tools
+* 🛡️ **Provider Capability System** — type-safe capability detection with clear `UnsupportedCapability` errors
+* 🌲 **Parent-Child Agent Hierarchy** — multi-agent orchestration trees with cycle detection and depth tracking
+* 🧵 **Middleware Support** — six built-in middleware classes for logging, retries, guardrails, and more
+* 🏢 **Stateless Agents + Per-Call Identity Routing** — safe multi-tenant memory across concurrent requests
+* 🤗 **HuggingFace Embeddings** — new provider for the HuggingFace Inference API
+* 🔀 **Custom Service URLs** — proxy and self-hosted endpoint support across all providers
 
 Read the full changelog here: <https://ai.ortusbooks.com/readme/release-history/3.0.0>
 
@@ -38,9 +38,9 @@ Let's dig in. 🎉
 
 ## 🎯 The Headline: AI Skills System
 
-The single biggest addition in 3.0 is the **AI Skills system** --- a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills).
+The single biggest addition in 3.0 is the **AI Skills system** — a first-class implementation of [Anthropic's Agent Skills open standard](https://www.anthropic.com/news/agent-skills).
 
-Think of a skill as a portable, reusable unit of expertise: a SQL coding style guide, a tone-of-voice policy, domain-specific rules, API cheat sheets --- anything your AI should *know* before it starts answering. Define it once in a `SKILL.md` file. Inject it into any number of agents and models at runtime. No more copy-pasting the same system-prompt boilerplate across every agent you build.
+Think of a skill as a portable, reusable unit of expertise: a SQL coding style guide, a tone-of-voice policy, domain-specific rules, API cheat sheets — anything your AI should *know* before it starts answering. Define it once in a `SKILL.md` file. Inject it into any number of agents and models at runtime. No more copy-pasting the same system-prompt boilerplate across every agent you build.
 
 ```js
 // Load a skill from a file
@@ -59,8 +59,8 @@ sqlStyle = aiSkill(
 
 Skills come in two injection modes:
 
-* **Always-on** --- full content in every LLM call. Zero latency. Best for short, universally relevant rules like tone and formatting.
-* **Lazy** --- only a name + one-line description goes into the system message. The LLM calls a built-in `loadSkill( name )` tool to fetch the full content on demand. Perfect for large skill libraries where most skills are irrelevant to most queries --- keeps your token usage low.
+* **Always-on** — full content in every LLM call. Zero latency. Best for short, universally relevant rules like tone and formatting.
+* **Lazy** — only a name + one-line description goes into the system message. The LLM calls a built-in `loadSkill( name )` tool to fetch the full content on demand. Perfect for large skill libraries where most skills are irrelevant to most queries — keeps your token usage low.
 
 You can even **promote** a lazy skill to always-on mid-session:
 
@@ -77,7 +77,7 @@ aiGlobalSkills().add( aiSkill( ".ai/skills/company-tone/SKILL.md" ) )
 aiGlobalSkills().add( aiSkill( ".ai/skills/security-policy/SKILL.md" ) )
 ```
 
-Skills live in plain Markdown files --- which means your team can review them in pull requests, diff them, and keep them in sync with the rest of your codebase. This is the end of prompt drift.
+Skills live in plain Markdown files — which means your team can review them in pull requests, diff them, and keep them in sync with the rest of your codebase. This is the end of prompt drift.
 
 ## 📚 Brand New Docs
 
@@ -85,7 +85,7 @@ The entire documentation has been re-organized so you can go from zero to hero. 
 
 ## 🔌 MCP Server Seeding
 
-Agents can now be pointed directly at one or more **MCP servers** . All tools exposed by those servers are discovered automatically via `listTools()` and registered as `MCPTool` instances --- no manual tool construction required.
+Agents can now be pointed directly at one or more **MCP servers** . All tools exposed by those servers are discovered automatically via `listTools()` and registered as `MCPTool` instances — no manual tool construction required.
 
 ```js
 agent = aiAgent(
@@ -109,7 +109,7 @@ The agent's system prompt is automatically updated so the LLM knows which tools 
 
 ## 🗄️ Global AI Tool Registry
 
-New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once --- in `Application.bx` or `ModuleConfig.bx` --- and reference them as plain strings anywhere in your codebase.
+New in 3.0: a module-scoped **Global Tool Registry** accessible via the `aiToolRegistry()` BIF. Register tools by name once — in `Application.bx` or `ModuleConfig.bx` --- and reference them as plain strings anywhere in your codebase.
 
 ```js
 // Register once
@@ -129,7 +129,7 @@ Module namespacing (e.g. `now@bxai`) keeps registrations collision-free across m
 
 The tool system has been significantly redesigned around a new `BaseTool` abstract base class. All tool implementations extend it, getting the shared invocation lifecycle, result serialization, and fluent `describeArg()` annotation syntax for free.
 
-The old `Tool.bx` is replaced by **`ClosureTool`** --- a `BaseTool` subclass backed by any closure or lambda that auto-introspects the callable's parameter metadata to generate an OpenAI-compatible function schema.
+The old `Tool.bx` is replaced by **`ClosureTool`** — a `BaseTool` subclass backed by any closure or lambda that auto-introspects the callable's parameter metadata to generate an OpenAI-compatible function schema.
 
 ```js
 searchTool = aiTool(
@@ -146,7 +146,7 @@ Two **built-in core tools** ship with the module:
 * `now@bxai` --- **auto-registered on module load**, returns the current date/time in ISO 8601. Every agent gets temporal awareness for free, with no configuration.
 * `httpGet` --- opt-in only (not auto-registered for security), fetches any URL via HTTP GET.
 
-`now@bxai` being auto-registered is worth calling out. No major AI framework ships built-in tools out of the box. This is a genuine differentiator --- your agents just *know what time it is* without any wiring on your part.
+`now@bxai` being auto-registered is worth calling out. No major AI framework ships built-in tools out of the box. This is a genuine differentiator — your agents just *know what time it is* without any wiring on your part.
 
 ## 🛡️ Provider Capability System
 
@@ -179,7 +179,7 @@ println( researcherAgent.getAncestors() )    // [ coordinator ]
 
 ## 🧵 Middleware Support
 
-Both `AiModel` and `AiAgent` now support composable **middleware** for cross-cutting concerns --- logging, retries, guardrails, human-in-the-loop approvals, and more. Agent middleware is prepended ahead of model middleware in the execution chain.
+Both `AiModel` and `AiAgent` now support composable **middleware** for cross-cutting concerns — logging, retries, guardrails, human-in-the-loop approvals, and more. Agent middleware is prepended ahead of model middleware in the execution chain.
 
 3.0 ships **six middleware classes** out of the box:
 
@@ -192,7 +192,7 @@ Both `AiModel` and `AiAgent` now support composable **middleware** for cross-cut
 | `HumanInTheLoopMiddleware` | Require explicit human approval before sensitive tools execute |
 | `FlightRecorderMiddleware` | Record real runs to JSON fixtures, replay offline in CI        |
 
-The `FlightRecorderMiddleware` deserves a special mention --- it's a testing superpower. Record a live agent run once, commit the fixture, and replay it deterministically in CI with zero live provider calls.
+The `FlightRecorderMiddleware` deserves a special mention — it's a testing superpower. Record a live agent run once, commit the fixture, and replay it deterministically in CI with zero live provider calls.
 
 ```js
 // Record a real run
@@ -214,7 +214,7 @@ agent = aiAgent(
 
 `AiAgent` is now **fully stateless** . `userId` and `conversationId` are resolved per-call from the `options` argument, eliminating shared-state concurrency bugs in multi-user deployments.
 
-Every memory type (`IAiMemory`, `IVectorMemory`) now accepts optional `userId` and `conversationId` on `add()`, `getAll()`, `clear()`, and related methods --- so a single memory instance can safely serve multiple tenants:
+Every memory type (`IAiMemory`, `IVectorMemory`) now accepts optional `userId` and `conversationId` on `add()`, `getAll()`, `clear()`, and related methods — so a single memory instance can safely serve multiple tenants:
 
 ```js
 sharedMemory = aiMemory( "cache" )
@@ -226,11 +226,11 @@ sharedMemory.getAll( userId: "alice", conversationId: "conv-1" )
 
 ## What Else Is New
 
-* 🤗 **HuggingFace Embeddings** --- new `huggingface` provider for the HuggingFace Inference API
-* 🔀 **Custom Service URLs** --- all senders now accept a `baseUrl` override for proxies, self-hosted endpoints, and OpenAI-compatible APIs
+* 🤗 **HuggingFace Embeddings** — new `huggingface` provider for the HuggingFace Inference API
+* 🔀 **Custom Service URLs** — all senders now accept a `baseUrl` override for proxies, self-hosted endpoints, and OpenAI-compatible APIs
 * 🏗️ **`BaseService` → `OpenAIService` split** --- `BaseService` is now truly provider-agnostic, making custom provider implementations much cleaner
 * 🐛 **Streaming event fixes** --- `beforeAIModelInvoke`/`afterAIModelInvoke` events were not firing for streaming; fixed
-* 🐛 **MCP `requestId` null crash** --- fixed a crash on JSON-RPC notifications that intentionally omit `id`
+* 🐛 **MCP `requestId` null crash** — fixed a crash on JSON-RPC notifications that intentionally omit `id`
 
 ## No Breaking Changes
 

@@ -21,11 +21,11 @@ frozen: false
 
 ![](boxlang-digitalocean-wave-700x467.jpg)
 
-**TL;DR:** We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 minutes---starting at just **$5/month.** One-click deployment, auto-scaling, automatic redeployments, and zero downtime included.
+**TL;DR:** We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 minutes—starting at just **$5/month.** One-click deployment, auto-scaling, automatic redeployments, and zero downtime included.
 
 ## Cloud-Native BoxLang Has Never Been Easier
 
-Today, we're excited to announce the BoxLang DigitalOcean Starter Template---a complete, production-ready solution that takes you from zero to deployed BoxLang application in minutes, not hours.
+Today, we're excited to announce the BoxLang DigitalOcean Starter Template—a complete, production-ready solution that takes you from zero to deployed BoxLang application in minutes, not hours.
 
 For many developers evaluating modern JVM languages, the question isn't "Can it run?" but rather "How easily can I get this into production?" With this starter, the answer is now: ridiculously easy.
 
@@ -80,7 +80,7 @@ Start at $5/month, but grow as you need:
 * **Add worker processes** for background jobs
 * **Connect to external APIs** securely with environment variables
 * **Integrate with existing services** (S3, monitoring, logging, etc.)  
-  All managed through DigitalOcean's intuitive control panel---no YAML hell required.
+  All managed through DigitalOcean's intuitive control panel—no YAML hell required.
 
 ### 🥊 Why BoxLang + DigitalOcean?
 
@@ -108,7 +108,7 @@ boxlang.ortusbooks.com/getting-started/running-boxlang/digitalocean-app
 
 ### 🎉 Ready to Deploy?
 
-Whether you're building the next great SaaS application, migrating CFML apps to modern infrastructure, or just exploring what BoxLang can do---this starter template removes every barrier between you and production.
+Whether you're building the next great SaaS application, migrating CFML apps to modern infrastructure, or just exploring what BoxLang can do—this starter template removes every barrier between you and production.
 
 **Five dollars. Five minutes. Zero excuses.**
 

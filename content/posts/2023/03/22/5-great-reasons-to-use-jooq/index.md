@@ -245,7 +245,7 @@ So, given the assumption that a database is likely to outlive any user-facing ap
 
 Since your schema is "eternal," your application code should have a derived version of it (remember the stored procedure stubs!).
 
-If that's how you think as well, then you'll find jOOQ very productive. If that's not how you think, then you can still use jOOQ for dynamic SQL, SQL transformations, and many other things---jOOQ won't judge.
+If that's how you think as well, then you'll find jOOQ very productive. If that's not how you think, then you can still use jOOQ for dynamic SQL, SQL transformations, and many other things—jOOQ won't judge.
 
 ## Conclusion
 

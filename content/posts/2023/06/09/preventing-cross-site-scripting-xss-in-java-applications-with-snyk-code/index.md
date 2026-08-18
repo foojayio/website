@@ -80,7 +80,7 @@ The third option I want to show you, is the web UI. For this output I used the g
 Web UI output:
 ![blog-preventing-xss-snyk-code-report](https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1682439081%2Fblog-preventing-xss-snyk-code-report.jpg&w=2560&q=75)
 
-All three different scanning options show me that there are two distinct XSS security issues I need to address --- with Snyk Code pinpointing their exact location in my code. Let's break them down and see how we can mitigate them.
+All three different scanning options show me that there are two distinct XSS security issues I need to address — with Snyk Code pinpointing their exact location in my code. Let's break them down and see how we can mitigate them.
 
 ### Reflective XSS
 

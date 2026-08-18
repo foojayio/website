@@ -17,10 +17,10 @@ frozen: false
 
 This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the [Dash0 Kubernetes Operator](https://www.dash0.com/docs/dash0/monitoring/kubernetes/about-kubernetes) --- without making any changes to the application code.
 
-[Dash0](https://www.dash0.com/docs/dash0) is an OpenTelemetry-native observability platform that collects and correlates traces, metrics, and logs, and provides infrastructure monitoring across Kubernetes resources --- pods, nodes, namespaces, deployments, daemonsets, statefulsets, jobs, and cronjobs --- as well as cloud infrastructure such as AWS. Its Kubernetes operator can automatically instrument workloads at the pod level, with no changes required to application code or container images.
+[Dash0](https://www.dash0.com/docs/dash0) is an OpenTelemetry-native observability platform that collects and correlates traces, metrics, and logs, and provides infrastructure monitoring across Kubernetes resources — pods, nodes, namespaces, deployments, daemonsets, statefulsets, jobs, and cronjobs — as well as cloud infrastructure such as AWS. Its Kubernetes operator can automatically instrument workloads at the pod level, with no changes required to application code or container images.
 ![](kubernetes-dash0-1024x581.png)
 
-The setup is divided into two distinct phases. The first phase establishes the "before" state: a service running in Kubernetes with no instrumentation, generating traffic that is completely invisible to any observability tool. The second phase adds the Dash0 operator to the cluster, which automatically instruments the workload and begins sending traces, metrics, and logs to Dash0 --- again, with no changes to the application itself.
+The setup is divided into two distinct phases. The first phase establishes the "before" state: a service running in Kubernetes with no instrumentation, generating traffic that is completely invisible to any observability tool. The second phase adds the Dash0 operator to the cluster, which automatically instruments the workload and begins sending traces, metrics, and logs to Dash0 — again, with no changes to the application itself.
 
 The entire workflow runs without a local Docker installation. The Docker image is built and pushed via GitHub Actions, and the Kubernetes cluster runs inside a GitHub Codespace.
 
@@ -28,7 +28,7 @@ The entire workflow runs without a local Docker installation. The Docker image i
 
 ### Part 1: Build the Application
 
-The starting point is a minimal Spring Boot REST API with no observability configured at all. No OpenTelemetry, no Micrometer, no logging frameworks --- just the web starter and a controller with two endpoints. This is the "before" state: a service that is running but completely invisible.
+The starting point is a minimal Spring Boot REST API with no observability configured at all. No OpenTelemetry, no Micrometer, no logging frameworks — just the web starter and a controller with two endpoints. This is the "before" state: a service that is running but completely invisible.
 
 **1. Create the pom.xml.** Create `pom.xml` with one dependency:
 
@@ -41,7 +41,7 @@ The starting point is a minimal Spring Boot REST API with no observability confi
 </dependencies>
 ```
 
-One dependency, no telemetry --- this is intentional. The absence of any OpenTelemetry or metrics libraries is the purpose of the "before" state.
+One dependency, no telemetry — this is intentional. The absence of any OpenTelemetry or metrics libraries is the purpose of the "before" state.
 
 **2. Create the main application class.** Create `src/main/java/com/example/demo/DemoApplication.java`:
 
@@ -59,7 +59,7 @@ public class DemoApplication {
 }
 ```
 
-This is the standard Spring Boot entry point --- nothing beyond the minimum needed to start the application.
+This is the standard Spring Boot entry point — nothing beyond the minimum needed to start the application.
 
 **3. Create the controller.** Create `src/main/java/com/example/demo/OrderController.java`:
 
@@ -84,7 +84,7 @@ public class OrderController {
 }
 ```
 
-Two endpoints with no logging, no instrumentation, and no tracing --- when this service is running, you have no visibility into what it is doing.
+Two endpoints with no logging, no instrumentation, and no tracing — when this service is running, you have no visibility into what it is doing.
 
 **4. Build the app**
 
@@ -226,7 +226,7 @@ Wait until the pod shows `Running`.
 
 ### Part 4: Generate Traffic (the Before State)
 
-Because we are inside a Codespace rather than running locally, the service is not directly accessible on localhost. We use `kubectl port-forward` to bridge the gap. This is the **before** state --- the service is running and receiving traffic, but nothing appears in Dash0. No traces, no metrics, no logs.
+Because we are inside a Codespace rather than running locally, the service is not directly accessible on localhost. We use `kubectl port-forward` to bridge the gap. This is the **before** state — the service is running and receiving traffic, but nothing appears in Dash0. No traces, no metrics, no logs.
 
 **1. Start the port-forward (terminal 1)**
 
@@ -244,7 +244,7 @@ while true; do curl http://localhost:8080/orders; sleep 1; done
 
 ### Part 5: Install the Dash0 Operator
 
-Now we add observability --- without touching the application code, the pom.xml, or the Docker image. The Dash0 operator is installed into the cluster using Helm. It runs in its own namespace and is responsible for injecting instrumentation into workloads and forwarding telemetry to Dash0.
+Now we add observability — without touching the application code, the pom.xml, or the Docker image. The Dash0 operator is installed into the cluster using Helm. It runs in its own namespace and is responsible for injecting instrumentation into workloads and forwarding telemetry to Dash0.
 
 Run the install command on a single line to avoid shell parsing errors. Replace `<your-region>` with the region from your Dash0 ingress endpoint, and `<your-auth-token>` with an auth token from your Dash0 organisation. Both can be found in Dash0 under Settings.
 
@@ -341,13 +341,13 @@ Check the following:
 **Monitoring → Services** --- `order-service` with live request rate, error rate, and latency
 ![](dash0-services-1024x298.png)
 
-**Telemetry → Tracing** --- individual traces for each `/orders` request
+**Telemetry → Tracing** — individual traces for each `/orders` request
 ![](dash0-tracing-1024x465.png)
 
-**Telemetry → Logging** --- structured logs
+**Telemetry → Logging** — structured logs
 ![](dash0-pod-logs-1024x545.png)
 
-**Monitoring → Resources** --- pod and node resource usage
+**Monitoring → Resources** — pod and node resource usage
 ![](kubernetes-dash0-1024x581.png)
 
 **Further Reading:**

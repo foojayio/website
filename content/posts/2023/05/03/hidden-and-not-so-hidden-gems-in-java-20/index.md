@@ -20,7 +20,7 @@ frozen: false
 
 **Let's see the preview and incubator JEPs in Java 20, as well as many smaller enhancements, bug fixes, and deprecations.**
 
-March 2023 marked the latest feature release of the Java platform, which was delivered on time through the six-month release cadence as Java 20. Like Java 19, which became generally available in September 2022, Java 20 targeted JEPs---seven, in this case---from the [Panama](https://openjdk.org/projects/panama/), [Amber](https://openjdk.org/projects/amber/), and [Loom](https://wiki.openjdk.org/display/loom) projects.
+March 2023 marked the latest feature release of the Java platform, which was delivered on time through the six-month release cadence as Java 20. Like Java 19, which became generally available in September 2022, Java 20 targeted JEPs—seven, in this case—from the [Panama](https://openjdk.org/projects/panama/), [Amber](https://openjdk.org/projects/amber/), and [Loom](https://wiki.openjdk.org/display/loom) projects.
 
 I am using the Java 20 jshell tool to demonstrate the code in this article. To follow along, [download JDK 20](https://foojay.io/download/), fire up your terminal, check your version, and run jshell. Note that you might see a newer version of the JDK; that's okay.
 
@@ -37,7 +37,7 @@ I am using the Java 20 jshell tool to demonstrate the code in this article. To f
 Jshell>
 ```
 
-Three JEPs in Java 20 are published as incubator modules to solicit developer feedback. An incubator module's API could be altered or disappear entirely---that is, not be released in future JDK releases. Therefore, you shouldn't use incubator features in production code. To use the incubator modules, use the `--add-modules` JVM flag.
+Three JEPs in Java 20 are published as incubator modules to solicit developer feedback. An incubator module's API could be altered or disappear entirely—that is, not be released in future JDK releases. Therefore, you shouldn't use incubator features in production code. To use the incubator modules, use the `--add-modules` JVM flag.
 
 The other JEPs in Java 20 are preview features. Those features are fully specified and implemented but are provided in an early release to gather feedback. You should assume that preview features will change and not use them in production code. Use the `--enable-preview` switch to use such features.
 
@@ -78,7 +78,7 @@ Additionally, the lifetime of per-thread variables ought to be constrained: Once
 
 Java 19 introduced virtual threads to the Java platform as a first preview. In Java 20, JEP 436 provides a second preview of virtual threads in the older JEP 425 to allow time for further feedback collection. If there is no more feedback or if no significant enhancements are made to JEP 436, virtual threads will likely be a production-ready feature in the upcoming Java 21 release.
 
-**Structured concurrency (second incubator), JEP 437**. The structured concurrency API aims to make multithreaded programming easier to help simplify error management and cancellation; it treats concurrent tasks operating in distinct threads as a single unit of work---improving observability and dependability.
+**Structured concurrency (second incubator), JEP 437**. The structured concurrency API aims to make multithreaded programming easier to help simplify error management and cancellation; it treats concurrent tasks operating in distinct threads as a single unit of work—improving observability and dependability.
 
 JEP 437 essentially republishes the Java 19 version of JEP 428 - to allow time to gather more feedback. The only significant change is an updated StructuredTaskScope class that supports the inheritance of scoped values (from JEP 429) by threads created in a task scope. This streamlines the sharing of immutable data across all child threads.
 
@@ -102,7 +102,7 @@ JEP 432 and JEP 433 are connected to Project Amber, which is designed to improve
 
 This initiative, which includes JEP 434 and JEP 438, aims to improve interoperability between the JVM and well-defined "foreign" (non-Java) APIs. These APIs often include interfaces that are used in C libraries.
 
-**Foreign function and memory API (second preview), JEP 434**. This JEP defines an API through which Java programs can interoperate with code and data outside the Java runtime. By efficiently invoking foreign functions that are outside the JVM---and safely accessing foreign memory that the JVM doesn't manage---this API enables Java programs to call native libraries and process native data without the brittleness and danger of Java Native Interface (JNI).
+**Foreign function and memory API (second preview), JEP 434**. This JEP defines an API through which Java programs can interoperate with code and data outside the Java runtime. By efficiently invoking foreign functions that are outside the JVM—and safely accessing foreign memory that the JVM doesn't manage—this API enables Java programs to call native libraries and process native data without the brittleness and danger of Java Native Interface (JNI).
 
 There have been several versions of this feature since Java 17. Initially two separate APIs were proposed, but those were integrated into a single JEP in Java 19. JEP 434 incorporates the following additional refinements based on feedback:
 

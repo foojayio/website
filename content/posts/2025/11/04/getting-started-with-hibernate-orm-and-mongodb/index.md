@@ -38,7 +38,7 @@ Using the new MongoDB extension, Hibernate can now map your entities to MongoDB 
 from Contact where country = ?1 and age > ?2
 ```
 
-When executed, Hibernate replaces the parameters (?1 and ?2) with the actual values provided in your code---for example,*CANADA* and *18* . The MongoDB Dialect then translates the query into an equivalent **MongoDB aggregation pipeline**such as:
+When executed, Hibernate replaces the parameters (?1 and ?2) with the actual values provided in your code—for example,*CANADA* and *18* . The MongoDB Dialect then translates the query into an equivalent **MongoDB aggregation pipeline**such as:
 
 ```
 {
@@ -62,7 +62,7 @@ As a result, you can keep your Hibernate workflow and entity mappings exactly as
 Before we start building the project, make sure your environment has a few essentials ready.
 
 * Java 17+ installed and an IDE of your choice
-* Apache Maven---used in this project to manage dependencies and run the application (you can also use Gradle, if you prefer)
+* Apache Maven—used in this project to manage dependencies and run the application (you can also use Gradle, if you prefer)
 * MongoDB 7 or newer (*Replica set required* )
   * The easiest way to get started is by creating a free cluster in your [MongoDB Atlas account](https://www.mongodb.com/cloud/atlas/register/?utm_campaign=devrel&%20utm_source=third-part-content&utm_medium=cta&utm_content=mongodb-hibernate-crud&utm_term=ricardo.mello)
 
@@ -94,7 +94,7 @@ This step won't affect your code, but it's a best practice to keep your Atlas en
 
 ## Project overview
 
-In this article, we'll build a simple project that uses Hibernate ORM with MongoDB to manage a single entity---Book.  
+In this article, we'll build a simple project that uses Hibernate ORM with MongoDB to manage a single entity—Book.  
 
 The goal is to understand how the MongoDB Dialect works behind the scenes and explore the basic persistence operations that every application needs:
 
@@ -124,7 +124,7 @@ For this example, I'm using **IntelliJ IDEA** as my IDE. To create the project, 
 
 This will generate a simple Maven-based Java project with the standard structure (src/main/java and src/main/resources).
 
-If you prefer, you can create it manually using the command line---the structure and configuration will be exactly the same. We'll use Maven for dependency management in this example, but the same setup applies if you prefer Gradle.
+If you prefer, you can create it manually using the command line—the structure and configuration will be exactly the same. We'll use Maven for dependency management in this example, but the same setup applies if you prefer Gradle.
 
 Now, open your pom.xml and add the following dependencies:
 
@@ -359,7 +359,7 @@ This inserts a new document into the **books** collection. The MongoDB Dialect a
 session.createQuery("from Book", Book.class).list();
 ```
 
-This HQL query retrieves all documents from the books collection---equivalent to db.books.find() in MongoDB.
+This HQL query retrieves all documents from the books collection—equivalent to db.books.find() in MongoDB.
 
 ##### update
 
@@ -516,7 +516,7 @@ That's it: Your application should start and display the interactive menu in the
 Choose:
 ```
 
-You can now test each option in the console menu to create, list, update, and delete books---and see Hibernate and MongoDB working together in action.
+You can now test each option in the console menu to create, list, update, and delete books—and see Hibernate and MongoDB working together in action.
 
 ## Current limitations (Public Preview)
 

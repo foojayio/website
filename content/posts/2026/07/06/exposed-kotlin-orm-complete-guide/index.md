@@ -325,7 +325,7 @@ Putting ***@Transactional*** on the class means every public method automaticall
 * Spring opens a transaction before the method runs.
 * Exposed executes all queries within that same transaction (via SpringTransactionManager).
 * If the method finishes normally, Spring commits.
-* If it throws a runtime exception (like NotFoundException), Spring rolls back---no partial writes, no inconsistent data.
+* If it throws a runtime exception (like NotFoundException), Spring rolls back—no partial writes, no inconsistent data.
 
 Thanks to the Exposed Spring Boot Starter, you never have to write a manual `transaction { }` block yourself. Spring takes care of it. For more details about querying, go through this [link](https://www.jetbrains.com/help/exposed/dsl-querying-data.html)
 
@@ -342,19 +342,19 @@ Thanks to the Exposed Spring Boot Starter, you never have to write a manual `tra
 | Delete one          | deleteWhere { ... eq id }          | Deletes matching rows                |
 | Delete all          | deleteAll()                        | Wipes the table                      |
 
-Each of these reads almost like plain SQL but with full Kotlin type-checking---so a typo or wrong type gets caught at compile time, not at runtime.
+Each of these reads almost like plain SQL but with full Kotlin type-checking—so a typo or wrong type gets caught at compile time, not at runtime.
 
 **Why This Is Nice to Work With**
 
-* **Type-safe** --- the compiler catches query mistakes before you even run the app.
-* **Feels native to Kotlin** --- no clunky annotations or XML mapping files.
-* **Less boilerplate** --- CRUD logic stays short and readable. <https://www.jetbrains.com/help/exposed/dsl-crud-operations.html>{#https://www.jetbrains.com/help/exposed/dsl-crud-operations.html}
-* **Plays well with Spring** --- transactions are handled declaratively, no manual wiring.
-* **Easy to read** --- the DSL mirrors SQL closely enough that anyone familiar with SQL can follow along.
+* **Type-safe** — the compiler catches query mistakes before you even run the app.
+* **Feels native to Kotlin** — no clunky annotations or XML mapping files.
+* **Less boilerplate** — CRUD logic stays short and readable. <https://www.jetbrains.com/help/exposed/dsl-crud-operations.html>{#https://www.jetbrains.com/help/exposed/dsl-crud-operations.html}
+* **Plays well with Spring** — transactions are handled declaratively, no manual wiring.
+* **Easy to read** — the DSL mirrors SQL closely enough that anyone familiar with SQL can follow along.
 
 ### Step 8: Understanding the Controller Layer
 
-The *CourseController* is where HTTP requests meet business logic. It's a bit unusual in that it does double duty---serving server-rendered HTML views (**Thymeleaf** ) *and* exposing JSON REST endpoints, all from the same class.
+The *CourseController* is where HTTP requests meet business logic. It's a bit unusual in that it does double duty—serving server-rendered HTML views (**Thymeleaf** ) *and* exposing JSON REST endpoints, all from the same class.
 
 ```java
 @Controller
@@ -362,7 +362,7 @@ The *CourseController* is where HTTP requests meet business logic. It's a bit un
 class CourseController(private val courseService: CourseService) {
 ```
 
-Note this uses *@Controller* , not *@RestController.* That's intentional---most methods here return a **view name** (a string like *"index"* or *"redirect:/courses"*), which Spring resolves to an HTML template. A few methods explicitly wrap their response in ResponseEntity to return raw JSON instead. This lets one controller power both a traditional web UI and a small API.
+Note this uses *@Controller* , not *@RestController.* That's intentional—most methods here return a **view name** (a string like *"index"* or *"redirect:/courses"*), which Spring resolves to an HTML template. A few methods explicitly wrap their response in ResponseEntity to return raw JSON instead. This lets one controller power both a traditional web UI and a small API.
 
 Serving Pages (View-Based Endpoints)
 
@@ -370,7 +370,7 @@ Serving Pages (View-Based Endpoints)
 | **Route**                     | **Purpose**                                               |
 | **GET /courses/new**          | Shows a blank "add course" form                           |
 | **POST /courses**             | Saves the submitted form, then redirects back to the list |
-| **GET /courses**              | Shows the course list---optionally filtered by ?title=    |
+| **GET /courses**              | Shows the course list—optionally filtered by ?title=    |
 | **GET /courses/edit/{id}**    | Loads a course into an "edit" form                        |
 | **POST /courses/update/{id}** | Saves edits, then redirects back to the list              |
 | **GET /courses/delete/{id}**  | Deletes a course via a plain link click, then redirects   |
@@ -379,7 +379,7 @@ These all follow the classic **Post/Redirect/Get** pattern: after a form submiss
 
 ### Step 9: Thymeleaf under the hood
 
-Since this project uses **Thymeleaf** as the templating engine, every string returned from a view-based method (like **"index", "add-course", "edit-course"**) maps directly to an HTML template---typically found at:
+Since this project uses **Thymeleaf** as the templating engine, every string returned from a view-based method (like **"index", "add-course", "edit-course"**) maps directly to an HTML template—typically found at:
 
 ```powershell
 src/main/resources/templates/index.html
@@ -387,7 +387,7 @@ src/main/resources/templates/add-course.html
 src/main/resources/templates/edit-course.html
 ```
 
-Spring Boot's Thymeleaf auto-configuration takes care of resolving these automatically---no extra ViewResolver setup needed, as long as spring-boot-starter-thymeleaf is on the classpath.
+Spring Boot's Thymeleaf auto-configuration takes care of resolving these automatically—no extra ViewResolver setup needed, as long as spring-boot-starter-thymeleaf is on the classpath.
 
 ### **Step 10: Verify the Application**
 
@@ -442,9 +442,9 @@ SQL: SELECT COURSES.ID, COURSES.TITLE, COURSES.DESCRIPTION, COURSES.PUBLISHED FR
 
 Working with databases in Kotlin usually means picking a side: raw SQL, which is fast but easy to get wrong, or a heavy ORM, which is safe but full of boilerplate. Exposed sits nicely in between.
 
-In CourseService, we wrote queries that read almost like SQL --- but the Kotlin compiler checked them for us. No typos slipping through to production. No mapping files. Just clean, readable code.
+In CourseService, we wrote queries that read almost like SQL — but the Kotlin compiler checked them for us. No typos slipping through to production. No mapping files. Just clean, readable code.
 
-Spring's @Transactional quietly handled the hard part---committing when things went well, rolling back when they didn't---without us writing a single manual transaction block.
+Spring's @Transactional quietly handled the hard part—committing when things went well, rolling back when they didn't—without us writing a single manual transaction block.
 
 And in CourseController, we saw how well this all fits together: one class serving both HTML pages (via Thymeleaf) and JSON APIs, with the service layer staying completely unaware of which one was calling it.
 

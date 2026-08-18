@@ -80,7 +80,7 @@ This newsletter focuses on examining how agentic AI systems improve accuracy, tu
 **article** : [Stanford AI Club: Jeff Dean on Important AI Trends](https://www.youtube.com/watch?v=AnTw_t21ayE "Stanford AI Club: Jeff Dean on Important AI Trends")  
 **authors** : Stanford AI Club  
 **date** : 2025-11-24  
-**desc.** : Jeff Dean is one of the most influential computer scientists of the modern computing era, best known as Google's Chief Scientist and a co-founder of Google Brain. His work has shaped the foundations of large-scale distributed systems and modern machine learning---spanning breakthroughs in search infrastructure, deep learning frameworks like TensorFlow, and today's frontier AI research. The video provides a timeline of basic technologies and approaches currently employed in the AI-LLM field.  
+**desc.** : Jeff Dean is one of the most influential computer scientists of the modern computing era, best known as Google's Chief Scientist and a co-founder of Google Brain. His work has shaped the foundations of large-scale distributed systems and modern machine learning—spanning breakthroughs in search infrastructure, deep learning frameworks like TensorFlow, and today's frontier AI research. The video provides a timeline of basic technologies and approaches currently employed in the AI-LLM field.  
 **category**: youtube
 
 **article** : [Elon Musk Makes Shocking Future Predictions At U.S.-Saudi Arabia Forum Alongside Jensen Huang](https://www.youtube.com/watch?v=4bUmso_277Y "Elon Musk Makes Shocking Future Predictions At U.S.-Saudi Arabia Forum Alongside Jensen Huang")  

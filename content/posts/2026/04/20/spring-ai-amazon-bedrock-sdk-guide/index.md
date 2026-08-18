@@ -443,17 +443,17 @@ public class SampleChatAgent {
 }
 ```
 
-* **`PromptRequest`** --- a custom model (likely a Java record) that wraps the user's input prompt.
-* **`MathematicalTools`** --- a custom tool class that exposes functions (like addition, square root, etc.) that the AI can invoke during reasoning.
-* **`AgentCoreInvocation`, `AgentCoreContext`, `AgentCoreHeaders`** --- annotations and utilities from the [spring-ai-community/agent-core](https://github.com/spring-ai-community/spring-ai-agentcore) library, which adds agent orchestration capabilities on top of Spring AI.
+* **`PromptRequest`** — a custom model (likely a Java record) that wraps the user's input prompt.
+* **`MathematicalTools`** — a custom tool class that exposes functions (like addition, square root, etc.) that the AI can invoke during reasoning.
+* **`AgentCoreInvocation`, `AgentCoreContext`, `AgentCoreHeaders`** — annotations and utilities from the [spring-ai-community/agent-core](https://github.com/spring-ai-community/spring-ai-agentcore) library, which adds agent orchestration capabilities on top of Spring AI.
   * *`@AgentCoreInvocation` marks a method as the agent invocation handler for the AgentCore runtime.*
   * *You can annotate only one method per application with this annotation.*
   * *If you declare `@AgentCoreInvocation` in multiple times in a class, it will throw an error Multiple @AgentCoreInvocation methods found. Only one is allowed in MVP.*
-* **`ChatClient`** --- Spring AI's primary abstraction for communicating with an LLM (like OpenAI, Anthropic, etc.). It is similar to other Spring client patterns, such as RestClient and WebClient.
-  * **.prompt()** --- Starts building a new prompt
-  * **`.user(...)`** --- Sets the user message from the incoming request
-  * **.call()** --- Sends the request to the configured LLM
-  * **.content()** --- Extracts the plain text response
+* **`ChatClient`** — Spring AI's primary abstraction for communicating with an LLM (like OpenAI, Anthropic, etc.). It is similar to other Spring client patterns, such as RestClient and WebClient.
+  * **.prompt()** — Starts building a new prompt
+  * **`.user(...)`** — Sets the user message from the incoming request
+  * **.call()** — Sends the request to the configured LLM
+  * **.content()** — Extracts the plain text response
 
 ```java
 return chatClient.prompt()
@@ -462,7 +462,7 @@ return chatClient.prompt()
                 .content();
 ```
 
-If the LLM determines it needs a tool (e.g., to compute something), Spring AI handles the **tool-call loop automatically** behind .call() --- invoking `MathematicalTools`, feeding the result back to the model, and returning the final answer.
+If the LLM determines it needs a tool (e.g., to compute something), Spring AI handles the **tool-call loop automatically** behind .call() — invoking `MathematicalTools`, feeding the result back to the model, and returning the final answer.
 
 ### 5. Configure Amazon Bedrock Properties
 

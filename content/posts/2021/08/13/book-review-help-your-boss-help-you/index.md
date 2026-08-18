@@ -18,7 +18,7 @@ frozen: false
 
 {{< img src="book-help-your-boss-help-you-415x510.png" class="size-medium" width="415" height="510" >}}
 
-Some books were written to be read once and put aside, others to be read thoroughly several times over and then to be placed behind glass to be broken in case of emergency. This book is of the latter kind---once you've read through it a few times, and dipped into the areas that speak to you most, you want to have it nearby both as a PDF and in hard copy format
+Some books were written to be read once and put aside, others to be read thoroughly several times over and then to be placed behind glass to be broken in case of emergency. This book is of the latter kind—once you've read through it a few times, and dipped into the areas that speak to you most, you want to have it nearby both as a PDF and in hard copy format
 ---as a backup just in case you can't find that PDF at the crucial moment when you really need to have a response at hand in times of crisis. You'll also gradually find your hard copy filled with yellow sticky notes at the points in the book that speak to you most, with underlinings of the crucial passages that resonate back to battles long gone but frequently relived in anguish.
 
 The terms "manager management" and "managing upwards" are probably not unfamiliar to most

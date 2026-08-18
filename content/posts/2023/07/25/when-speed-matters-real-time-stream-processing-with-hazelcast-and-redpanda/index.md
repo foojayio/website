@@ -241,7 +241,7 @@ To add more members to your cluster, open another terminal window and rerun the 
 
 ### Step 3: Run SQL on Hazelcast
 
-We will use the SQL shell---the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics. The results can be sent directly to the client or inserted into maps or Kafka topics. You can also use Kafka [Connector](https://docs.hazelcast.com/hazelcast/latest/integrate/kafka-connector) which allows you to stream, filter, and transform events between Hazelcast clusters and Kafka. You can do so by running the following command:
+We will use the SQL shell—the easiest way to run SQL queries on a cluster. You can use SQL to query data in maps and Kafka topics. The results can be sent directly to the client or inserted into maps or Kafka topics. You can also use Kafka [Connector](https://docs.hazelcast.com/hazelcast/latest/integrate/kafka-connector) which allows you to stream, filter, and transform events between Hazelcast clusters and Kafka. You can do so by running the following command:
 
 ```
 bin/hz-cli sql

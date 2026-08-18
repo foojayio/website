@@ -27,7 +27,7 @@ Recently, my good friend Richard Fichtner advised using the `mvn dependency:anal
 >
 > [![](https://cdn.bsky.app/img/feed_thumbnail/plain/did:plc:cc2k5egfzqpf3nbjrs5xox4r/bafkreibztkdlkhrkyydfdntdkktrdw7qqr4t54mbwoazf6rkulcawhqkj4@jpeg)](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
 >
-> --- [Richard Fichtner 💻☕ @richard.fichtner.dev](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r?ref_src=embed)  
+> — [Richard Fichtner 💻☕ @richard.fichtner.dev](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r?ref_src=embed)  
 > [December 10, 2024 at 2:00 PM](https://bsky.app/profile/did:plc:cc2k5egfzqpf3nbjrs5xox4r/post/3lcxfnsc2h62m?ref_src=embed)
 
 While it was a great idea years ago, it's dangerous advice today. In this post, I'd like to explain what the plugin does and why you shouldn't use it but in the most straightforward projects.
