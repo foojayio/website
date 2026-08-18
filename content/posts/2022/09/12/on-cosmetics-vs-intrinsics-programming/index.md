@@ -1,6 +1,5 @@
 ---
 title: "On Cosmetics vs. Intrinsics in Programming"
-slug: "on-cosmetics-vs-intrinsics-programming"
 date: "2022-09-12T09:39:56+00:00"
 lastmod: "2022-09-12T09:43:40+00:00"
 description: "Instead of arguing about cosmetics, e.g., annotations vs. \"functional\", we need to spend time on intrinsics more: actors, asynchronous, etc."
@@ -98,6 +97,8 @@ Both snippets appear similar on the surface, but for the imports. Cosmetics are 
 
 Let's have a look at Kotlin [coroutines](https://kotlinlang.org/docs/coroutines-basics.html). Here's a snippet taken from Kotlin's [documentation](https://kotlinlang.org/docs/composing-suspending-functions.html#async-style-functions):
 
+```
+
 ```kotlin
 measureTimeMillis {
     val one = somethingUsefulOne()                             // 1
@@ -106,6 +107,8 @@ measureTimeMillis {
         println("The answer is ${one.await() + two.await()}")
     }
 }
+```
+
 ```
 
 1. Function points to a suspending computation

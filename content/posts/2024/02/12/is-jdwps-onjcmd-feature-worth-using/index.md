@@ -1,6 +1,5 @@
 ---
 title: "Is JDWP's onjcmd feature worth using?"
-slug: "is-jdwps-onjcmd-feature-worth-using"
 date: "2024-02-12T11:25:22+00:00"
 lastmod: "2024-02-12T11:25:23+00:00"
 description: "We run benchmarks to see whether JDWP's onjcmd features improves the debugging performance."

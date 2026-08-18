@@ -1,6 +1,5 @@
 ---
 title: "Deep Learning in Java for Nuclear Physics using Deep Netts"
-slug: "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
 date: "2022-06-16T09:01:44+00:00"
 lastmod: "2023-07-11T09:38:24+00:00"
 description: "We use the Deep Netts library to implement our neural networks to do track classification, using Multi-Layer Perceptron (MLP) Neural Network."

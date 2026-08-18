@@ -217,7 +217,7 @@ public final class HtmlToMarkdown {
         for (Element code : content.select("code")) {
             if (code.parent() != null && "pre".equals(code.parent().tagName())) continue;
             String text = code.wholeText();
-            String fixed = resolveDoubleEscaped(text);
+            String fixed = resolveDoubleEscaped(normalizeCodeSpaces(text));
             if (!fixed.equals(text)) code.text(fixed);
         }
 
@@ -271,7 +271,7 @@ public final class HtmlToMarkdown {
      */
     public static String codeFence(String code, String enlighterLanguage) {
         String body = code == null ? "" : resolveDoubleEscaped(
-                code.replace("\r\n", "\n").replaceAll("\\s+$", ""));
+                normalizeCodeSpaces(code.replace("\r\n", "\n")).replaceAll("\\s+$", ""));
         int longestRun = 0, run = 0;
         for (char c : body.toCharArray()) {
             run = (c == '`') ? run + 1 : 0;
@@ -321,6 +321,26 @@ public final class HtmlToMarkdown {
         // URL query separator: preceded by the end of a value, followed by `key=`.
         s = s.replaceAll("(?<=[?&\\w])&amp;(?=[A-Za-z_][\\w.-]*=)", "&");
         return s;
+    }
+
+    /**
+     * Turns the non-breaking spaces WordPress uses for code indentation into
+     * ordinary ones.
+     *
+     * WP bodies indent samples with `&nbsp;`, which Jsoup hands over as U+00A0.
+     * It LOOKS like an indent in the rendered block but isn't one: copy the
+     * sample into an editor and the compiler/shell chokes on a character it
+     * doesn't recognise as whitespace, which is the whole point of a code block
+     * on this site. MigrateEnlighterToFences has always done this to the blocks
+     * it converted; the scraper did not, so a re-scrape put 10,270 of them back
+     * across 36 posts. The rule lives here now so both paths agree -- the same
+     * arrangement as resolveDoubleEscaped.
+     *
+     * U+00A0 only. A narrow/thin/zero-width space is never accidental
+     * indentation, so those are left alone. Idempotent.
+     */
+    public static String normalizeCodeSpaces(String code) {
+        return code == null ? null : code.replace('\u00a0', ' ');
     }
 
     /**

@@ -1,6 +1,5 @@
 ---
 title: "Memory Debugging - a Deep Level of Insight"
-slug: "memory-debugging-a-deep-level-of-insight"
 date: "2023-02-03T10:08:16+00:00"
 lastmod: "2023-02-03T10:08:17+00:00"
 description: "It isn't just about memory leaks. Understanding how RAM is used and its content provides insight into the app you can't get in any other way!"

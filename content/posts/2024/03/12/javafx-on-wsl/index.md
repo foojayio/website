@@ -1,6 +1,5 @@
 ---
 title: "Run JavaFX on the Windows Subsystem for Linux and More!"
-slug: "javafx-on-wsl"
 date: "2024-03-12T16:11:56+00:00"
 lastmod: "2024-03-14T17:46:26+00:00"
 description: "What does it take to run JavaFX applications on exotic Linux systems like the Windows Subsystem for Linux or some embedded systems?"
@@ -59,7 +58,7 @@ libglib2.0-0
 libgtk-3-0
 libpango-1.0-0
 libpangoft2-1.0-0
-libx11-6<code></code>
+libx11-6
 ```
 
 And the following dependency list for RPM-based systems (And yes, that is the proper notation. For simplicity, you can ignore the suffixes when reading the list, but you must specify them for it to be a proper notation.):
@@ -165,4 +164,4 @@ If you're looking for a quick demo, you can attempt to install and run our appli
 
 And that's all for today! Here is how a JavaFX applications looks like in an Oracle Linux WSL instance:
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-106377 aligncenter" src="wsl-700x450.png" alt="" width="700" height="450">
+{{< img src="wsl-700x450.png" class="size-medium aligncenter" width="700" height="450" >}}

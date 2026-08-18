@@ -1,6 +1,5 @@
 ---
 title: "Building OpenJDK from GitHub Sources on 64-bit Raspberry Pi"
-slug: "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
 date: "2020-10-21T06:35:26+00:00"
 lastmod: "2020-10-21T06:35:28+00:00"
 description: "The OpenJDK sources are now fully available and developed on GitHub, thanks to Project Skara. We can build it from sources on any device."

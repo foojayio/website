@@ -1,6 +1,5 @@
 ---
 title: "JReleaser: Looking for Translation Contributions"
-slug: "jreleaser-looking-for-translation-contributions"
 date: "2021-10-08T20:45:46+00:00"
 lastmod: "2021-10-08T20:50:14+00:00"
 description: "Looking for people who would like to contribute translations allowing JReleaser to reach and help an even wider audience!"

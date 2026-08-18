@@ -1,6 +1,5 @@
 ---
 title: "JDK 23: Module Design Pattern with JEP-476"
-slug: "exploring-new-features-in-jdk-23-module-design-pattern-with-jep-476"
 date: "2024-10-31T09:41:20+00:00"
 lastmod: "2024-10-31T09:41:21+00:00"
 description: "JEP-476 is another great example of Java platform evolution while enabling internal project stability, transparency and security."
@@ -16,7 +15,7 @@ related_posts:
   - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
   - "exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners"
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"
-  - "exploring-new-features-in-jdk-23-builder-pattern-simplicity-with-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

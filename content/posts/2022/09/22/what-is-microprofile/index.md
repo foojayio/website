@@ -1,6 +1,5 @@
 ---
 title: "What is MicroProfile?"
-slug: "what-is-microprofile"
 date: "2022-09-22T09:03:08+00:00"
 lastmod: "2022-09-22T09:19:10+00:00"
 description: "What is the MicroProfile specification, what is it used for, and why might you need it? Find out here and get started! "
@@ -34,9 +33,7 @@ The [MicroProfile](https://microprofile.io/) specification is a set of Enterpris
 
 They are intended to be used on top of [Jakarta EE](https://jakarta.ee/) APIs to add specific functionalities that are needed when developing microservices.  
 
-<figure class="alignright is-resized">
- <img fetchpriority="high" decoding="async" src="https://blog.payara.fish/hs-fs/hubfs/microprofile%20square.png?width=403&amp;name=microprofile%20square.png" alt="microprofile square" width="473" height="472">
-</figure>
+{{< img src="https://blog.payara.fish/hs-fs/hubfs/microprofile%20square.png?width=403&name=microprofile%20square.png" class="alignright is-resized" alt="microprofile square" width="473" height="472" >}}
 
 ### Wait, What Is Jakarta EE?
 

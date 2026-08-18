@@ -1,6 +1,5 @@
 ---
 title: "When Should You Use a Cache With MongoDB?"
-slug: "when-should-you-use-a-cache-with-mongodb"
 date: "2026-05-05T15:23:30+00:00"
 lastmod: "2026-05-05T15:23:32+00:00"
 description: "From time to time, I'll run a design review for an application being migrated from a relational database onto MongoDB, where the customer shares an architectural diagram showing a caching layer (typically Redis) sitting between the app server and MongoDB."

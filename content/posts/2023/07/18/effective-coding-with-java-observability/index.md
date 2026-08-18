@@ -1,6 +1,5 @@
 ---
 title: "Effective Coding with Java Observability"
-slug: "effective-coding-with-java-observability"
 date: "2023-07-18T07:02:34+00:00"
 lastmod: "2023-07-18T21:13:51+00:00"
 description: "What are examples of things that observability can tell you, right now, about your code and how can it help you improve it?"
@@ -232,9 +231,7 @@ It looks like the 'Visits' relationship is being fetched lazily for each pet in 
 The true cause of the performance regression seems to be related to a misunderstanding of Bob's, probably due to the ambiguous naming of the `VaccineServiceFacade` methods. It seems that it was not that clear to him that an API call is executed behind the scenes each time the `VaccineRecord` function was invoked. This leaky abstraction might have been alleviated with a better naming convention, emphasizing this is in fact an execution of a long synchronous operation.{#1369}
 ![](image-26-1024x587.png)
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="image-27-1024x532.png" alt="" class="wp-image-100964" width="840" height="436">
-</figure>
+{{< img src="image-27-1024x532.png" class="size-large is-resized" width="840" height="436" >}}
 
 ## Hidden Errors
 
@@ -245,9 +242,7 @@ Something else is going on with the HTTP requests. As we scroll down the list of
 
 Just before he is off to start correcting the many issues revealed by examining the observability artifacts, Bob decides to take a quick look at the other API he modified. There doesn't seem to be a significant performance degradation in this case, but examining the trace still reveals at least one issue that needs to be fixed.{#d288}
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="image-29-1024x343.png" alt="" class="wp-image-100966" width="840" height="281">
-</figure>
+{{< img src="image-29-1024x343.png" class="size-large is-resized" width="840" height="281" >}}
 
 There is a significant number of SQL calls occurring during the rendering phase, an anti-pattern caused by accessing lazy Hibernate attributes while the Session is still open, known as [**open session in view**](https://vladmihalcea.com/the-open-session-in-view-anti-pattern/)**.**This issue can be tricky to spot but is immediately apparent in the trace.{#a7ae}
 

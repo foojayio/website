@@ -1,6 +1,5 @@
 ---
 title: "All Azul Zulu Container Images Explained: CA, SA, and Chainguard"
-slug: "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
 date: "2026-05-20T09:56:00+00:00"
 description: "Previously in this series: Trusted Java Containers: Azul Zulu OpenJDK Joins Docker’s Official Images The Road to Docker Official Images for Java: The Azul - by Frank Delporte"
 canonical: "https://www.azul.com/blog/all-azul-zulu-container-images-explained-ca-sa-and-chainguard/"

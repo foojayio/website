@@ -1,6 +1,5 @@
 ---
 title: "Tomcat TLSv1.3 cipher configuration"
-slug: "tomcat-tlsv13-cipher-configuration-spring-boot"
 date: "2026-02-26T18:02:34+00:00"
 lastmod: "2026-02-27T09:55:49+00:00"
 description: "A Tomcat update splits TLSv1.3 cipher configuration into a new attribute, silently dropping your Spring Boot cipher restrictions. Here's how to fix it."
@@ -18,7 +17,7 @@ related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "prevent-ldap-injection-in-java-with-springboot"
-  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -55,7 +54,8 @@ Before the Tomcat change, the server only offered the two ciphers listed above a
 After upgrading to an affected Tomcat version, both ciphers are removed from the *explicit* configuration set by the administrator. The only indication of this behavior is in the Tomcat log messages.
 
 ```bash
-2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_AES_256_GCM_SHA384] included in the TLS 1.2 and below ciphers list will be ignored<br>2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_CHACHA20_POLY1305_SHA256] included in the TLS 1.2 and below ciphers list will be ignored
+2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_AES_256_GCM_SHA384] included in the TLS 1.2 and below ciphers list will be ignored
+2026-02-22 09:05:06.426 WARN 58919 --- [ main] o.apache.tomcat.util.net.SSLHostConfig : The TLS 1.3 cipher suite [TLS_CHACHA20_POLY1305_SHA256] included in the TLS 1.2 and below ciphers list will be ignored
 ```
 
 In this scenario, this does not mean those ciphers are no longer offered. It does mean that the intended cipher restriction is now gone. As a result, Tomcat reverts to offering all default TLSv1.3 ciphers, which includes the 128-bit cipher that was intentionally left out.

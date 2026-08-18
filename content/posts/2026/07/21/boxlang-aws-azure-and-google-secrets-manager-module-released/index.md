@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AWS, Azure, and Google Secrets Manager Module Released"
-slug: "boxlang-aws-azure-and-google-secrets-manager-module-released"
 date: "2026-07-21T11:38:18+00:00"
 lastmod: "2026-07-21T11:52:14+00:00"
 description: "Every production application carries secrets: database passwords, API tokens, encryption keys. The question is never whether to manage them - it's how - by Cristobal Escobar"
@@ -17,10 +16,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
 ---
 

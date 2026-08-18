@@ -1,6 +1,5 @@
 ---
 title: "Managing Data Residency: The Demo"
-slug: "managing-data-residency-the-demo"
 date: "2023-05-29T07:33:28+00:00"
 lastmod: "2023-05-29T07:34:15+00:00"
 description: "In this article, implement Data Residency within a simple architecture, thanks to Apache APISIX and Apache ShardingSphere."

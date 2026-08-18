@@ -1,6 +1,5 @@
 ---
 title: "Help update the Twelve-Factor app methodology"
-slug: "updating-the-twelve-factor-app-methodology-a-call-for-participation"
 date: "2024-09-05T07:44:26+00:00"
 lastmod: "2024-09-05T07:44:56+00:00"
 description: "The 12 factor app methodology is being updated and we need your help with it! Contribute your ideas and help us modernize 12-Factor."

@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI Series: Complete Guide to Building AI Agents"
-slug: "boxlang-ai-series-complete-guide-to-building-ai-agents"
 date: "2026-05-14T09:26:48+00:00"
 lastmod: "2026-05-18T09:04:50+00:00"
 description: "The world of AI development is moving fast, but building real, production-ready AI agents doesn’t have to be complex. This series walks you step by step - by Cristobal Escobar"
@@ -15,10 +14,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "spring-ai-agents-no-second-runtime"
 frozen: false
 ---
 

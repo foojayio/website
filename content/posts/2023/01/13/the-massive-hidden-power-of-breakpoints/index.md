@@ -1,6 +1,5 @@
 ---
 title: "The Massive Hidden Power of Breakpoints"
-slug: "the-massive-hidden-power-of-breakpoints"
 date: "2023-01-13T14:58:57+00:00"
 lastmod: "2023-01-13T15:02:43+00:00"
 description: "Learn about tracepoints (AKA logpoints) how exception breakpoints don't suck, watchpoints, filters & why method breakpoints are problematic."

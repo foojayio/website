@@ -1,6 +1,5 @@
 ---
 title: "Evolution of Java Memory Architecture (Pre Java 8.0)"
-slug: "java-roots-1-java-memory-architecture"
 date: "2021-02-25T14:59:16+00:00"
 lastmod: "2021-10-11T12:36:53+00:00"
 description: "Welcome to a series of articles on key concepts in Core Java and J2EE. The series revolves around memory architecture and a lot more!"

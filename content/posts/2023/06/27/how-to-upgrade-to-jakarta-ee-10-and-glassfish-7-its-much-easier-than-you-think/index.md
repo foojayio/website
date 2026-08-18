@@ -1,6 +1,5 @@
 ---
 title: "Upgrade to Jakarta EE 10 and GlassFish 7: Easier Than You Think!"
-slug: "how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think"
 date: "2023-06-27T07:29:48+00:00"
 lastmod: "2023-08-08T10:34:38+00:00"
 description: "Everything you need to know before upgrading to Jakarta EE 10 and a guide to upgrade successfully and in almost no time!"
@@ -25,7 +24,7 @@ Upgrading to Jakarta EE 10 from an older version of Jakarta EE or Java EE can be
 
 In this series of articles, we'll explain everything you need to know before upgrading to Jakarta EE 10 and guide you to complete the upgrade successfully and in almost no time.
 
-## Types of challenges
+## Types of challenges {#more-98870}
 
 The challenges with upgrading to Jakarta EE 10 or to Eclipse GlassFish 7 fall into these 3 main categories:
 
@@ -59,9 +58,7 @@ So far, the series contains the following posts:
 
 We've prepared detailed instructions that explain how to use available automating tools and example projects that show how to use them. In near future, we'll be adding more articles to cover more details, like how to upgrade dependencies to Jakarta EE 10, how to transform them if needed, and how to refactor your code to remove usage of APIs removed in Jakarta EE 10. We hope that this series of articles will help you upgrade to Jakarta EE 10 easily and in a very short time.
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

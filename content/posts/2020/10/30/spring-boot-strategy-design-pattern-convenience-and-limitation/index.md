@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot: Strategy Design Pattern - Convenience and Limitation"
-slug: "spring-boot-strategy-design-pattern-convenience-and-limitation"
 date: "2020-10-30T09:22:41+00:00"
 lastmod: "2021-08-23T12:29:40+00:00"
 description: "with a few changes in our code we can easily solve the problem of having different strategies which using the same keys in our code."

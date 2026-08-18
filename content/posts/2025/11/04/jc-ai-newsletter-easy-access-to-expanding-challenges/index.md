@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter: Easy Access to Expanding Challenges"
-slug: "jc-ai-newsletter-easy-access-to-expanding-challenges"
 date: "2025-11-04T18:13:33+00:00"
 lastmod: "2025-11-10T12:56:42+00:00"
 description: "A few months ago, I launched the AI Newsletter to provide a minimally biased perspective on the growing challenges surrounding artificial intelligence."
@@ -40,13 +39,13 @@ Many of these challenges, in my humble opinion, had already been addressed even 
 
 Each published newsletter focuses on one core topic, dedicated to addressing a specific hot challenge in AI.
 
-<img fetchpriority="high" decoding="async" class="size-thumbnail wp-image-121661" src="FoojayJCAINewsletter_Menu_1-300x260.jpg" alt="JC-AI Newsletter Menu" width="300" height="260">
+{{< img src="FoojayJCAINewsletter_Menu_1-300x260.jpg" class="size-thumbnail" alt="JC-AI Newsletter Menu" width="300" height="260" >}}
 
 **Img.1.** : JC-AI Newsletter achive easy access from FooJay top menu **News** -\> **JC-AI Newsletter**
 
 The initial editions of the JC-AI Newsletter lacked easy access to previous issues. As the number of unique readers continues to rise with each new edition, and as I frequently reference past newsletters myself, I decided to address this "nice to have" feature (**Img.1.** ). I'm pleased to announce that we have created a dedicated section for JC-AI Newsletter archives (**Img.2.**).
 
-<img decoding="async" class="size-thumbnail wp-image-121662" src="FoojayJCAINewsletter_Section_1-300x260.jpg" alt="JC-AI Newsletter archive" width="300" height="260">
+{{< img src="FoojayJCAINewsletter_Section_1-300x260.jpg" class="size-thumbnail" alt="JC-AI Newsletter archive" width="300" height="260" >}}
 
 **Img.2.** : [JC-AI Newsletter archive](https://foojay.io/today/category/jc-ai-newsletter/ "JC-AI Newsletter archive")
 

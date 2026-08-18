@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #25: Game Development with Java, JavaFX, FXGL"
-slug: "foojay-podcast-25"
 date: "2023-06-19T08:56:11+00:00"
 lastmod: "2025-11-13T09:03:26+00:00"
 description: "Let's learn from the experts why Java and JavaFX should be on your game-development-language-list and how to get started!"

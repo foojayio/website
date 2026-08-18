@@ -1,6 +1,5 @@
 ---
 title: "Porting an Existing JavaFX App to iOS"
-slug: "porting-an-existing-javafx-app-to-ios"
 date: "2023-02-24T11:42:11+00:00"
 lastmod: "2023-02-24T11:42:13+00:00"
 description: "Sometimes there are JavaFX apps that I would also like to use on my iPhone but I wrote them for the desktop and... how to do that?"
@@ -220,7 +219,13 @@ To make the project work, you will need some specific settings for iOS.
 
 You will find things like icons and so called plist files for iOS in the `jarkanoid/src/ios/` folder.
 
-If I need to port a new JavaFX project to iOS, I usually copy this folder the new project in the `project/src` folder and modify the content of it's files (e.g., icons and plist files).
+If I need to port a new JavaFX project to iOS, I usually copy this folder the new project in the
+
+```
+project/src
+```
+
+folder and modify the content of it's files (e.g., icons and plist files).
 
 For JArkanoid, I copied the ios folder from my [SpaceFX](https://github.com/HanSolo/SpaceFX/tree/mobile) game that I wrote some time ago.
 

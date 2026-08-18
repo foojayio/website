@@ -1,6 +1,5 @@
 ---
 title: "New Book Announcement: \"Java Challengers\""
-slug: "new-book-java-challengers"
 date: "2021-05-03T07:03:36+00:00"
 lastmod: "2021-06-21T16:29:10+00:00"
 description: "Newly released \"Java Challenges\" book is a way for you to challenge yourself with fun code challenges so you will be a better Java developer."

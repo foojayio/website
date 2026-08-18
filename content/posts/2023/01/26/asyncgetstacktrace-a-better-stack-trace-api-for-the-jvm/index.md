@@ -1,6 +1,5 @@
 ---
 title: "AsyncGetStackTrace: A better Stack Trace API for the JVM"
-slug: "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
 date: "2023-01-26T09:16:06+00:00"
 lastmod: "2023-01-26T09:16:07+00:00"
 description: "An introduction into GetStackTrace, AsyncGetCallTrace, and the history and specification of AsyncGetStackTrace."

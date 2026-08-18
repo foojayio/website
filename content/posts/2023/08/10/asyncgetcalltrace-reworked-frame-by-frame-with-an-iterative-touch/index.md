@@ -1,6 +1,5 @@
 ---
 title: "AsyncGetCallTrace Reworked: Frame by Frame Iterative Touch!"
-slug: "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
 date: "2023-08-10T09:43:33+00:00"
 lastmod: "2023-08-10T09:44:03+00:00"
 description: "This article is the first of two articles covering the draft of a new iterator-based stack walking API, which builds the base for the follow-up article on safepoint-based profiling."
@@ -276,7 +275,13 @@ struct CallTrace {
 
 We still use the pre-defined frame data structure in this example for brevity, but the profiler could customize this too. This allows the profiler only to store the relevant information.
 
-We fill the related `global_traces` entries in the signal handler. Previously we just called:
+We fill the related
+
+```
+global_traces
+```
+
+entries in the signal handler. Previously we just called:
 
 ```cpp
 static void signalHandler(int signo, siginfo_t* siginfo, 

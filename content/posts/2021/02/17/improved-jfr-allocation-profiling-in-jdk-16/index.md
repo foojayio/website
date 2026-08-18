@@ -1,6 +1,5 @@
 ---
 title: "Improved JFR Allocation Profiling in JDK 16"
-slug: "improved-jfr-allocation-profiling-in-jdk-16"
 date: "2021-02-17T09:46:33+00:00"
 lastmod: "2021-02-17T10:17:56+00:00"
 description: "The new throughput management mechanism in JFR gets fine details about behavior without being overwhelmed by the sheer number of JFR events."

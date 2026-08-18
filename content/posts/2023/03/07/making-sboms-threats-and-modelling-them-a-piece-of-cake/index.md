@@ -1,6 +1,5 @@
 ---
 title: "Making SBOMs, Threats, and Modelling Them a Piece of Cake!"
-slug: "making-sboms-threats-and-modelling-them-a-piece-of-cake"
 date: "2023-03-07T09:15:56+00:00"
 lastmod: "2023-03-07T09:15:58+00:00"
 description: "The third article in a series on SBOMs, software supply chains, the government and you, introducing threat modelling and tools to help!"
@@ -23,9 +22,7 @@ The third in a series of SBOMs, software supply chains, the government and you (
 
 Yes, just like the previous articles, we have cake this time too - this one is a three tiered extravaganza!  
 
-<figure class="aligncenter size-thumbnail">
- <img fetchpriority="high" decoding="async" width="300" height="260" src="Unknown-300x260.jpg" alt="" class="wp-image-62771">
-</figure>
+{{< img src="Unknown-300x260.jpg" class="aligncenter size-thumbnail" width="300" height="260" >}}
 
 So... still with us? Good!
 

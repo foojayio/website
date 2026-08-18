@@ -1,6 +1,5 @@
 ---
 title: "Java 11 & JavaFX 11 on Raspberry Pi with ARMv6 Processor"
-slug: "java-11-javafx-11-on-raspberry-pi-with-armv6-processor"
 date: "2020-09-04T08:00:39+00:00"
 lastmod: "2020-09-09T08:24:39+00:00"
 description: "Here are complete and thorough steps for having a working Java JDK with JavaFX 11 on the Raspberry Pi using a ARMv6 Processor."
@@ -14,9 +13,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

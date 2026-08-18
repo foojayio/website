@@ -1,6 +1,5 @@
 ---
 title: "What Are Your Java Predictions, Hopes, and Dreams For 2021?"
-slug: "java-predictions-for-2021"
 date: "2020-12-30T09:03:00+00:00"
 lastmod: "2021-08-23T13:03:24+00:00"
 description: "Wrapping up a series with a list of brief predictions from a wide variety of leading members of the Java community!"

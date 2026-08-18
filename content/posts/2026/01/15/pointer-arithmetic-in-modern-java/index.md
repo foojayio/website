@@ -1,6 +1,5 @@
 ---
 title: "Pointer Arithmetic in Modern Java"
-slug: "pointer-arithmetic-in-modern-java"
 date: "2026-01-15T09:00:12+00:00"
 lastmod: "2026-01-19T10:06:59+00:00"
 description: "How to perform pointer arithmetic using the Foreign Function & Memory API to achieve zero-GC memory access."
@@ -95,7 +94,6 @@ import java.lang.foreign.Arena;
 import java.lang.foreign.MemoryLayout;
 import java.lang.foreign.MemorySegment;
 import java.lang.invoke.VarHandle;
-
 
 public class Main {
     public static void main(String[] args) {

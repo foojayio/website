@@ -1,6 +1,5 @@
 ---
 title: "Why the Fastest Way of Serializing a Java Field is not Serializing it at All"
-slug: "why-the-fastest-way-of-serializing-a-java-field-is-not-serializing-it-at-all"
 date: "2022-10-25T12:54:49+00:00"
 lastmod: "2022-10-25T12:54:51+00:00"
 description: "Let's dive into detail about the different ways to serialize Java objects and compare how well they work."

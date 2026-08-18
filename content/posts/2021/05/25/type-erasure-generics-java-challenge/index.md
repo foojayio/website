@@ -1,6 +1,5 @@
 ---
 title: "Take the Type Erasure Generics Java Challenge!"
-slug: "type-erasure-generics-java-challenge"
 date: "2021-05-25T06:50:45+00:00"
 lastmod: "2021-08-23T12:35:40+00:00"
 description: "In this challenge, you will see the generic type that will be erased by the compiler and will be replaced by the type we defined at runtime."

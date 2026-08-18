@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"OpenJDK Migration for Dummies\""
-slug: "book-review-openjdk-migration-for-dummies-3"
 date: "2023-09-18T04:48:45+00:00"
 lastmod: "2024-06-30T11:18:56+00:00"
 description: "A comprehensive and informative guide for those looking to navigate the complex world of JDK distributions and licenses,"

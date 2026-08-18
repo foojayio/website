@@ -1,6 +1,5 @@
 ---
 title: "My Summary of jPrime 2022"
-slug: "my-summary-of-jprime-2022"
 date: "2022-06-08T18:37:55+00:00"
 lastmod: "2022-06-08T18:38:35+00:00"
 description: "Writing summaries of conference talks is probably the best way to focus on the talk and listen actively..."
@@ -186,7 +185,7 @@ Event modeling is a blueprint for a solution. Some think that storming and model
 
 [
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-56168 size-medium" src="Screenshot-2022-05-29-at-09.23.42-477x510.png" alt="" width="477" height="510">
+{{< img src="Screenshot-2022-05-29-at-09.23.42-477x510.png" class="aligncenter size-medium" width="477" height="510" >}}
 
 ](https://twitter.com/adymitruk/status/1443582579425230848)
 

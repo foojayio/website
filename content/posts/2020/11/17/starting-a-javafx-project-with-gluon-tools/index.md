@@ -1,6 +1,5 @@
 ---
 title: "Starting a JavaFX Project with Gluon Tools"
-slug: "starting-a-javafx-project-with-gluon-tools"
 date: "2020-11-17T08:38:06+00:00"
 lastmod: "2021-08-23T13:01:07+00:00"
 description: "Here on foojay.io you can already find two posts by Carl Dea to get you started with JavaFX. In this post, I want to show you yet another approach that uses the tools provided by Gluon, who are the maintainers, and the driving force behind OpenJFX. The Gluon start website and the plugin allow you to get started with a new JavaFX project in a few clicks. Thanks to the amazing work done by the Gluon team this also gives you a quick-start for the creation of a mobile application which can be built for both Android and iOS. - by Frank Delporte"
@@ -100,12 +99,7 @@ In that case you'll need to follow these steps:
 
 Gluon has created the website [start.gluon.io](https://start.gluon.io/) to start a new JavaFX project, the same way you can also do for Spring with [start.spring.io](https://start.spring.io/), or Quarkus with [code.quarkus.io](https://code.quarkus.io/).
 
-<figure class="wp-block-image size-medium">
- <img decoding="async" width="675" height="510" src="start-gluon-io-minimal-675x510.png" alt="" class="wp-image-36314">
- <figcaption>
-  Minimal selections for a JavaFX application on start.gluon.io
- </figcaption>
-</figure>
+{{< img src="start-gluon-io-minimal-675x510.png" class="size-medium" width="675" height="510" caption="Minimal selections for a JavaFX application on start.gluon.io" >}}
 
 For a minimal JavaFX project, you only need to define the "Application Details" and select the version and modules you are going to need.
 
@@ -113,21 +107,11 @@ As Gluon also offers additional features and you can use their tools to build mo
 
 A nice feature of this site is the "Preview Project" button which will show you the structure of your project before you download it.
 
-<figure class="wp-block-image size-medium">
- <img loading="lazy" decoding="async" width="700" height="496" src="start-gluon-io-preview-700x496.png" alt="" class="wp-image-36315">
- <figcaption>
-  Preview of the project before downloading
- </figcaption>
-</figure>
+{{< img src="start-gluon-io-preview-700x496.png" class="size-medium" width="700" height="496" caption="Preview of the project before downloading" >}}
 
 By clicking the "Generate Project" button, you will get a ZIP with the full project you can open in your IDE and run immediately with `mvn javafx:run`.
 
-<figure class="wp-block-image size-medium">
- <img loading="lazy" decoding="async" width="700" height="372" src="start-gluon-io-running-700x372.png" alt="" class="wp-image-36316">
- <figcaption>
-  The created application running in IntelliJ IDEA
- </figcaption>
-</figure>
+{{< img src="start-gluon-io-running-700x372.png" class="size-medium" width="700" height="372" caption="The created application running in IntelliJ IDEA" >}}
 
 ### Create a New Mobile Project with the Gluon Plugin in IntelliJ IDEA
 

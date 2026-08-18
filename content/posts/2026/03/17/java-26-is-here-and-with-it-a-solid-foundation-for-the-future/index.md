@@ -1,6 +1,5 @@
 ---
 title: "Java 26 Is Here, And With It a Solid Foundation for the Future"
-slug: "java-26-is-here-and-with-it-a-solid-foundation-for-the-future"
 date: "2026-03-17T07:00:00+00:00"
 description: "Java 26 is here, and its main purpose seems to be to provide a solid foundation for future things to come. It comes with a few new features, some performance improvements and multiple enhancements that mention Project Valhalla as the inspiration for their existence. This post has all the info! - by Hanno Embregts"
 canonical: "https://hanno.codes/2026/03/17/java-26-is-here/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

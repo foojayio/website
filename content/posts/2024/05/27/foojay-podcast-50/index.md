@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #50: JCON Report, Part 2 - Maven, Software Security, Code Quality"
-slug: "foojay-podcast-50"
 date: "2024-05-27T08:07:54+00:00"
 lastmod: "2025-11-13T08:46:54+00:00"
 description: "This is part 2 of the interviews we recorded at the JCON conference earlier this month in Germany. In this episode, you get two main topics: Maven and Code Quality."

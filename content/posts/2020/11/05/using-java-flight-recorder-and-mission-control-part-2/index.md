@@ -1,6 +1,5 @@
 ---
 title: "Using Java Flight Recorder and Mission Control (Part 2)"
-slug: "using-java-flight-recorder-and-mission-control-part-2"
 date: "2020-11-05T16:50:59+00:00"
 lastmod: "2025-02-17T09:27:47+00:00"
 description: "Continuing from part 1, to exploit the recording by analyzing it, we have a tool named jfr that ships with the JDK. Let's get started!"

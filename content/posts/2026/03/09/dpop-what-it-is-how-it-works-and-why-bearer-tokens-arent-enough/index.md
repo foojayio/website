@@ -1,6 +1,5 @@
 ---
 title: "DPoP: What It Is, How It Works, and Why Bearer Tokens Aren't Enough"
-slug: "dpop-what-it-is-how-it-works-and-why-bearer-tokens-arent-enough"
 date: "2026-03-09T08:08:06+00:00"
 lastmod: "2026-03-09T08:08:08+00:00"
 description: "DPoP is one of the most exciting developments in the IAM (Identity and Access Management) space in recent years. Yet many backend developers either have - by Hüseyin Akdoğan"
@@ -79,7 +78,7 @@ However, if you want to **enforce** DPoP for a specific client, meaning Bearer t
 
 **Step 3:** Enable the **Require DPoP bound tokens** switch.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-122936" src="image1-700x370.png" alt="" width="700" height="370">
+{{< img src="image1-700x370.png" class="size-medium" width="700" height="370" >}}
 
 With this option enabled, the client must include a DPoP proof with every token request. Requests without valid proof will be rejected, and Bearer tokens will not be accepted to access this client's resources.
 
@@ -98,7 +97,13 @@ The application uses Quarkus 3.32.2 with the following key extension: **OpenId C
 </dependency>
 ```
 
-The `quarkus.oidc.auth-server-url` property specifies the base URL of the OpenID Connect (OIDC) server, which points to the Keycloak instance in this case:
+The
+
+```
+quarkus.oidc.auth-server-url
+```
+
+property specifies the base URL of the OpenID Connect (OIDC) server, which points to the Keycloak instance in this case:
 
 ```ini
 quarkus.http.port=8180

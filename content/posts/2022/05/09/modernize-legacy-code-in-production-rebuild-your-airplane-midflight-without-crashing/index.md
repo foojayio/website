@@ -1,6 +1,5 @@
 ---
 title: "How To Modernize Legacy Code in Production"
-slug: "modernize-legacy-code-in-production-rebuild-your-airplane-midflight-without-crashing"
 date: "2022-05-09T15:58:36+00:00"
 lastmod: "2022-05-09T16:07:02+00:00"
 description: "Rewriting applications is easy. Doing it while preserving compatibility... that's a bit hard. Doing it live in prod. That's the big challenge!"
@@ -16,7 +15,7 @@ related_posts:
   - "logging-best-practices-mdc-ingestion-and-scale"
   - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
   - "debugging-the-java-message-service-jms-api-using-lightrun"
-  - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

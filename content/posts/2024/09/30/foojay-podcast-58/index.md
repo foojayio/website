@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #58: How Java Developers Can Secure Their Code"
-slug: "foojay-podcast-58"
 date: "2024-09-30T07:43:46+00:00"
 lastmod: "2025-11-13T08:42:28+00:00"
 description: "Three years after Log4Shell caused a significant security issue, we still struggle with insecure dependencies and injection problems..."

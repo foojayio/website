@@ -1,6 +1,5 @@
 ---
 title: "Modular Monolithic in Practice"
-slug: "modular-monolithic-in-practice"
 date: "2023-01-25T08:01:08+00:00"
 lastmod: "2023-01-25T08:08:52+00:00"
 description: "In this article, you learn about the Modular Monolithic architecture and how you can create it using the Spring Framework and Gradle."

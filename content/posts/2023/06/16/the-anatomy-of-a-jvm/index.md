@@ -1,6 +1,5 @@
 ---
 title: "The Anatomy of a JVM"
-slug: "the-anatomy-of-a-jvm"
 date: "2023-06-16T07:57:44+00:00"
 lastmod: "2023-06-16T07:57:45+00:00"
 description: "Find out how the JVM handles many tasks that you, as a developer, don't want and need to take care of compared to other languages."

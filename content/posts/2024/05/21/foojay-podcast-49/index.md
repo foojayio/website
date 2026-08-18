@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #49: JCON Report, Part 1 - JUGs, Communities, Generative AI, and more!"
-slug: "foojay-podcast-49"
 date: "2024-05-21T06:05:39+00:00"
 lastmod: "2025-11-13T08:47:11+00:00"
 description: "On Tuesday, May 14th, the Foojay Podcast went live at the JCON conference in Cologne, Germany, to talk with speakers and visitors about all things Java."

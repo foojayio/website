@@ -1,6 +1,5 @@
 ---
 title: "Profiling Maven Projects with my IntelliJ Profiler Plugin"
-slug: "profiling-maven-projects-with-my-intellij-profiler-plugin"
 date: "2023-12-14T10:41:34+00:00"
 lastmod: "2023-12-14T10:41:35+00:00"
 description: "Or: I just released version 0.0.11 with a cool new feature that I can't wait to tell you about..."

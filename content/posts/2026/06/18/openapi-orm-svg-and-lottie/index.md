@@ -1,6 +1,5 @@
 ---
 title: "OpenAPI, ORM, SVG and Lottie"
-slug: "openapi-orm-svg-and-lottie"
 date: "2026-06-18T00:52:45+00:00"
 lastmod: "2026-06-18T13:38:40+00:00"
 description: "An OpenAPI 3.x client generator that turns a spec into typed Codename One code, a JPA-shaped SQLite ORM, JAXB-shaped JSON / XML mappers, build-time SVG and"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

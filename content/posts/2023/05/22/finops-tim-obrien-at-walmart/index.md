@@ -1,6 +1,5 @@
 ---
 title: "FinOps: Tim O'Brien at Walmart"
-slug: "finops-tim-obrien-at-walmart"
 date: "2023-05-22T06:01:54+00:00"
 lastmod: "2023-05-23T14:14:09+00:00"
 description: "\"Java and the Java community are what brought me to this role, but my focus is now on Cloud cost, budget, and ideas for efficiency.\""
@@ -18,9 +17,7 @@ frozen: false
 
 ## FinOps and Cloud Cost Management, what's it all about and how does it impact us as developers and others who are close to the code? In this series on Foojay.io, you're introduced to FinOps practitioners around the world, focused on how they have gradually found themselves, their technology, and their organization in the FinOps space.
 
-<figure class="alignleft size-medium is-resized">
- <img fetchpriority="high" decoding="async" src="1683981616677-510x510.jpeg" alt="" class="wp-image-98408" width="271" height="271">
-</figure>
+{{< img src="1683981616677-510x510.jpeg" class="alignleft size-medium is-resized" width="271" height="271" >}}
 
 [Tim O'Brien](https://www.linkedin.com/in/timobrien/) is Senior Director of Engineering, Cloud Cost Management at Walmart, with experience in all aspects of software development from project inception to developing scaleable production architectures for large-scale systems during critical, high-risk events such as Black Friday. He has helped many organizations ranging from small startups to Fortune 100 companies take a more strategic approach to adopting and evaluating technology and managing the risks associated with change.
 

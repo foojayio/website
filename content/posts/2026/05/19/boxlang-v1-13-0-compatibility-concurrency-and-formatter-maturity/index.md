@@ -1,6 +1,5 @@
 ---
 title: "BoxLang v1.13.0: Compatibility, Concurrency, and Formatter Maturity"
-slug: "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
 date: "2026-05-19T12:11:19+00:00"
 lastmod: "2026-05-19T12:15:47+00:00"
 description: "BoxLang 1.13.0 is a stability-first release with deep compatibility work and runtime hardening. This build closes 48 issues, with the majority focused on - by Cristobal Escobar"

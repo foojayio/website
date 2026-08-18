@@ -1,6 +1,5 @@
 ---
 title: "Run AI-enabled JakartaEE/MicroProfile apps with LangChain4j"
-slug: "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
 date: "2024-08-12T22:14:36+00:00"
 lastmod: "2024-08-14T10:18:34+00:00"
 description: "Experience AI technology in Jakarta EE and MicroProfile applications that run on Open Liberty by using LangChain4j APIs."

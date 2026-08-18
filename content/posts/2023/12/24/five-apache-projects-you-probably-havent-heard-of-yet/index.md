@@ -1,6 +1,5 @@
 ---
 title: "Five Apache Projects You Probably Haven't Heard Of (Yet)"
-slug: "five-apache-projects-you-probably-havent-heard-of-yet"
 date: "2023-12-24T10:17:38+00:00"
 lastmod: "2023-12-24T19:15:05+00:00"
 description: "In this article, I'd like to introduce some Apache projects that are not so well-known."
@@ -24,7 +23,7 @@ As a result, in this article, I'd like to introduce some Apache projects that ar
 
 ## Apache APISIX
 
-<img fetchpriority="high" decoding="async" class="alignright wp-image-103491 size-full" src="apisix.png" alt="" width="256" height="256">
+{{< img src="apisix.png" class="alignright size-full" width="256" height="256" >}}
 
 [APISIX](https://apisix.apache.org/) is an [API Gateway](https://en.wikipedia.org/wiki/API_management). It builds upon [OpenResty](https://openresty.org/en/), a Lua layer built on top of the famous [nginx](https://nginx.org/) reverse-proxy. APISIX adds abstractions to the mix, *e.g.* , `Route`, `Service`, `Upstream`, and offers a plugin-based architecture.
 
@@ -46,7 +45,7 @@ You can leverage APISIX on Kubernetes as an Ingress Controller. APISIX provides 
 
 ## Apache ShardingSphere
 
-<img decoding="async" class="alignright wp-image-103494 size-full" src="shardingSphere.png" alt="" width="256" height="170">
+{{< img src="shardingSphere.png" class="alignright size-full" width="256" height="170" >}}
 
 [ShardingSphere](https://shardingsphere.apache.org/) claims to offer an ecosystem able to transform any database into a distributed database system. It acts as a proxy between your code and your database(s). It comes in two flavors:
 
@@ -63,7 +62,7 @@ ShardingSphere offers several core features:
 
 ## Apache SeaTunnel
 
-<img loading="lazy" decoding="async" class="alignright wp-image-103495 size-full" src="seatunnel.png" alt="" width="256" height="275">
+{{< img src="seatunnel.png" class="alignright size-full" width="256" height="275" >}}
 
 [Apache SeaTunnel](https://seatunnel.apache.org/) is a data integration platform that offers the three pillars of data pipelines: sources, transforms, and sinks. It offers an abstract API over three possible engines: the Zeta engine from SeaTunnel or a wrapper around [Apache Spark](https://spark.apache.org/) or [Apache Flink](https://flink.apache.org/). Be careful, as each engine comes with its own set of features.
 
@@ -73,7 +72,7 @@ The power of SeaTunnel comes from its rich connector ecosystem. It does provide 
 
 [
 
-<img loading="lazy" decoding="async" class="alignleft size-full wp-image-103496" src="seatunnel-architecture.png" alt="" width="946" height="593">
+{{< img src="seatunnel-architecture.png" class="alignleft size-full" width="946" height="593" >}}
 
 ](seatunnel-architecture.png)
 
@@ -81,7 +80,7 @@ SeaTunnel comes with a web UI, which provides visual management of jobs, schedul
 
 ## Apache SkyWalking
 
-<img loading="lazy" decoding="async" class="alignright wp-image-103497 size-full" src="skywalking-logo.png" alt="" width="256" height="61">
+{{< img src="skywalking-logo.png" class="alignright size-full" width="256" height="61" >}}
 
 [Apache SkyWalking](https://skywalking.apache.org/) is an tool, focusing on microservices, Cloud Native apps, and Kubernetes architectures. It builds its architecture on four kinds of components:
 
@@ -96,7 +95,7 @@ Skywalking supports a couple of formats, including OpenTelemetry. Given the indu
 
 ## Apache Doris
 
-<img loading="lazy" decoding="async" class="alignright size-full wp-image-103499" src="Doris_Logo.png" alt="" width="256" height="90">
+{{< img src="Doris_Logo.png" class="alignright size-full" width="256" height="90" >}}
 
 [Apache Doris](https://doris.apache.org/) is a real-time data warehouse.
 

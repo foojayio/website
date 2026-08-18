@@ -1,6 +1,5 @@
 ---
 title: "Interviews with Robert Savage & Johan Vos on Java on the Raspberry Pi"
-slug: "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"
 date: "2021-05-28T07:14:26+00:00"
 lastmod: "2021-12-10T13:00:35+00:00"
 description: "Java and JavaFX are a great match with the Raspberry Pi, here on Foojay you can find a lot of examples to get you started!"
@@ -15,10 +14,10 @@ categories:
   - "Raspberry Pi"
 tags:
 related_posts:
-  - "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
   - "the-javafx-revival"
   - "pi4j-welcomes-java-21-on-the-raspberry-pi"
+  - "a-fresh-look-at-embedded-java"
 frozen: false
 ---
 

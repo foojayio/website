@@ -1,6 +1,5 @@
 ---
 title: "Use Query Parameterization to Prevent Injection"
-slug: "use-query-parameterization-to-prevent-injection"
 date: "2020-11-23T08:14:52+00:00"
 lastmod: "2020-11-23T08:14:54+00:00"
 description: "Tip: By distinguishing between the SQL code and the parameter data, the query can’t be hijacked by malicious input."

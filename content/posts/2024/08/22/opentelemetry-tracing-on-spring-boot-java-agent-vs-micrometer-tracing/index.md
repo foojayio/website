@@ -1,6 +1,5 @@
 ---
 title: "OpenTelemetry Tracing on Spring Boot, Java Agent vs. Micrometer Tracing"
-slug: "opentelemetry-tracing-on-spring-boot-java-agent-vs-micrometer-tracing"
 date: "2024-08-22T08:34:57+00:00"
 lastmod: "2024-08-22T08:34:58+00:00"
 description: "Let's compare three different ways to do OpenTelemtry Tracing: Java agent v1, Java agent v2, and Micrometer Tracing."

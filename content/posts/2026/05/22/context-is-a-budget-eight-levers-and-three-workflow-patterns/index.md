@@ -1,6 +1,5 @@
 ---
 title: "Context Is a Budget — Reducing Token Usage in AI-Assisted Development"
-slug: "context-is-a-budget-eight-levers-and-three-workflow-patterns"
 date: "2026-05-22T12:52:06+00:00"
 lastmod: "2026-05-27T07:54:58+00:00"
 description: "Eight levers and three workflow patterns that pay for themselves in a week."

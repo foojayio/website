@@ -1,6 +1,5 @@
 ---
 title: "Skills, Java 17, And Theme Accents with Codename One"
-slug: "skills-java-17-and-theme-accents-with-codename-one"
 date: "2026-05-27T09:32:00+00:00"
 description: "Java 17 is the new Initializr default, generated projects ship an AGENTS.md authoring skill that any AI agent can pick up (including a…"
 canonical: "https://www.codenameone.com/blog/skills-java17-and-theme-accents/"

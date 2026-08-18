@@ -1,6 +1,5 @@
 ---
 title: "Spring Framework 7.0 Jakarta EE 11 Compatibility"
-slug: "spring-framework-7-0-and-spring-data-2025-1-0-embrace-jakarta-ee-11-compatibility"
 date: "2025-11-21T13:50:47+00:00"
 lastmod: "2025-11-21T14:22:00+00:00"
 description: "Overview of Spring Framework 7.0 and Spring Data 2025.1.0 gaining compatibility with Jakarta EE 11, highlighting the impact on the Java ecosystem, the history between Spring and Jakarta, and how developers can benefit when combining these technologies with Payara Qube."

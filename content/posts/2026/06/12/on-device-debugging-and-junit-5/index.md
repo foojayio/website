@@ -1,6 +1,5 @@
 ---
 title: "On-Device Debugging And JUnit 5"
-slug: "on-device-debugging-and-junit-5"
 date: "2026-06-12T08:49:00+00:00"
 description: "A walk-through of the new JDWP-based on-device debugging pipeline for ParparVM iOS apps and Android apps, with a step-by-step IntelliJ tutorial for each. P"
 canonical: "https://www.codenameone.com/blog/developer-workflow-debug-and-junit/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 
@@ -229,7 +228,7 @@ class EmailValidatorTest {
 
     @Test
     void acceptsCommonAddress() {
-        assertTrue(new EmailValidator().isValid("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e101f131b3e1b061f130e121b501d1113">[email protected]</a>"));
+        assertTrue(new EmailValidator().isValid("[email protected]"));
     }
 }
 ```

@@ -1,6 +1,5 @@
 ---
 title: "The Map, Equals, Hashcode Java Challenge"
-slug: "map-equals-hashcode-java-challenge"
 date: "2021-05-17T08:38:13+00:00"
 lastmod: "2021-08-23T12:22:47+00:00"
 description: "Understanding deeply how to use a Map, equals, and hashcode in Java will be a massive help for you to create high-quality code!"

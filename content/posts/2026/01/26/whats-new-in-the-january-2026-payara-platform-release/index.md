@@ -1,6 +1,5 @@
 ---
 title: "What’s New in the January 2026 Payara Platform Release?"
-slug: "whats-new-in-the-january-2026-payara-platform-release"
 date: "2026-01-26T14:37:09+00:00"
 description: "As we begin 2026, we’re pleased to announce new releases across all Payara Platform editions this January: Payara Platform Community 7.2026.1, Payara - by Dominika Tasarz"
 authors:

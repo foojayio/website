@@ -1,6 +1,5 @@
 ---
 title: "OpenTelemetry configuration gotchas"
-slug: "opentelemetry-configuration-gotchas"
 date: "2025-08-17T08:01:26+00:00"
 lastmod: "2025-08-18T08:03:42+00:00"
 description: "Operators of OpenTelemetry can't treat services as black boxes. They must consider the underlying stack and framework, and learn how to configure them accordingly."

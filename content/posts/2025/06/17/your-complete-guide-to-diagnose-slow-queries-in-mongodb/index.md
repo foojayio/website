@@ -1,6 +1,5 @@
 ---
 title: "Your Complete Guide to Diagnose Slow Queries in MongoDB"
-slug: "your-complete-guide-to-diagnose-slow-queries-in-mongodb"
 date: "2025-06-17T04:06:04+00:00"
 lastmod: "2025-06-17T04:29:35+00:00"
 description: "MongoDB is built to be fast. The real win comes from knowing how to keep it that way, even as your app grows and your data gets more complex."
@@ -34,8 +33,7 @@ We'll cover the full stack of diagnostics available to you:
 
 In order to follow along, we'll be interacting with [MongoDB Atlas](https://www.mongodb.com/docs/atlas/getting-started/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=tony.kim) and [MongoDB Shell](https://www.mongodb.com/docs/mongodb-shell/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_term=tony.kim) (`mongosh`). I recommend you have these both set up before starting. Some tools shown in this will be restricted to M10+ clusters, but I'll highlight where that's relevant, and there should be something to take away for everyone, whether you're on a free-forever M0 cluster and just getting started, or a seasoned MongoDB veteran running enterprise workloads. We'll run the commands, see what the output looks like, and learn how to read it.
 
-1. MongoDB's Query Profiler
----------------------------
+## 1. MongoDB's Query Profiler
 
 We've all done it. We run a query. It hangs. We check the app logs. We stare. Maybe we slap an index on something and hope it helps. Or maybe, just maybe, we start guessing at what our database is actually doing behind the scenes.
 
@@ -378,8 +376,7 @@ We're looking for these fields:
 
 That's step one. You've got the x-ray. Next, let's grab the scalpel: We'll dissect how MongoDB is actually executing these queries using `explain()`.
 
-2. Understanding execution plans with `explain()`
--------------------------------------------------
+## 2. Understanding execution plans with `explain()`
 
 MongoDB's profiler told us what ran slow. Now, we want to know why. That's where our `explain()` comes in.
 
@@ -680,8 +677,7 @@ This is incredibly useful when you're wondering why your index wasn't used. Ofte
 
 Now that you know how to dissect a query, let's move from diagnosis to live observation. In Section 3, we'll track what's running right now using `db.currentOp()`,and how to kill it if needed.
 
-3. Watching queries in real time with `db.currentOp()`
-------------------------------------------------------
+## 3. Watching queries in real time with `db.currentOp()`
 
 So far, we've looked at what was slow (`system.profile`) and why it was slow (`explain()`). But what if something is running slowly right now?
 
@@ -771,8 +767,7 @@ db.currentOp({ "active": true, "secs_running": { $gt: 2 }, "ns": /movies/ });
 
 Now that we can observe slow queries as they happen, let's look at why they happen as data scales. In Section 4, we'll explore inefficient patterns, unused indexes, and how things change when collections grow.
 
-4. Identifying inefficient query and write patterns in large data sets
-----------------------------------------------------------------------
+## 4. Identifying inefficient query and write patterns in large data sets
 
 Some queries feel fast... until they don't. Performance issues in MongoDB often creep in as data grows, silently at first, until something starts to lag.
 
@@ -950,8 +945,7 @@ You're now equipped to spot performance concerns before they explode, whether it
 
 In Section 5, we'll turn our attention to aggregation pipelines, and how to diagnose performance issues stage-by-stage using `explain()`.
 
-5. Analyzing aggregation query performance
-------------------------------------------
+## 5. Analyzing aggregation query performance
 
 Aggregation pipelines are often where performance issues hide in MongoDB. On the surface, everything seems clean, an elegant series of stages reshaping documents, filtering out noise, grouping and sorting. But underneath, inefficiencies can quietly stack up. Poor pipeline ordering, unindexed lookups, broad scans, or early memory-intensive operations like `$group` or `$sort` may not be obvious until they degrade performance significantly at scale.
 

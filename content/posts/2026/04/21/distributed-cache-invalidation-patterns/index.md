@@ -1,6 +1,5 @@
 ---
 title: "Distributed Cache Invalidation Patterns"
-slug: "distributed-cache-invalidation-patterns"
 date: "2026-04-21T13:52:03+00:00"
 lastmod: "2026-04-21T13:52:05+00:00"
 description: "Caching is one of the most powerful tools developers have at their disposal for optimizing application performance. Caching systems can significantly reduce latency and reduce the load on databases or external systems by storing frequently accessed data as close as possible to the application layer. The result? Improved responsiveness and overall system usability."

@@ -1,6 +1,5 @@
 ---
 title: "Your TLS Stack Is Lying to You About Zero-Copy"
-slug: "your-tls-stack-is-lying-about-zero-copy"
 date: "2026-06-10T12:00:28+00:00"
 lastmod: "2026-06-10T14:49:57+00:00"
 description: "In a zero-allocation runtime, SSLEngine becomes a structural mismatch. It keeps TLS on the heap-facing side of the JVM..."

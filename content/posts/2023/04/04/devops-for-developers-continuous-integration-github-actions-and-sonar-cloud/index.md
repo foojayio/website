@@ -1,6 +1,5 @@
 ---
 title: "DevOps For Developers: Continuous Integration, GitHub Actions"
-slug: "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
 date: "2023-04-04T07:35:12+00:00"
 lastmod: "2023-04-04T07:40:32+00:00"
 description: "When it is done badly, the CI process can turn this amazing tool into a nightmare. CI should make our lives easier, not the other way around."
@@ -225,7 +224,7 @@ void testActivateAccount() throws Exception {
     final String activationKey = "some activation key";
     User user = new User();
     user.setLogin("activate-account");
-    user.setEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3c3e29342b3c2938703c3e3e322833291d38253c302d3138733e3230">[email protected]</a>");
+    user.setEmail("[email protected]");
     user.setPassword(RandomStringUtils.randomAlphanumeric(60));
     user.setActivated(false);
     user.setActivationKey(activationKey);

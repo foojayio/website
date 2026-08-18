@@ -1,6 +1,5 @@
 ---
 title: "Nulling Out References Won't Help Your Garbage Collector"
-slug: "nulling-out-references-wont-help-your-garbage-collector"
 date: "2026-07-09T13:49:39+00:00"
 lastmod: "2026-07-09T13:53:17+00:00"
 description: "Learn how intricate and amazing the JVM is and how much cognitive load that it takes on so you rarely have to think about things that steal your focus away from application logic."

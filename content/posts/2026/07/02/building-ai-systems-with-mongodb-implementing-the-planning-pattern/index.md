@@ -31,7 +31,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the GitHub repository:
 
 ```
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8aede3fecaede3fee2ffe8a4e9e5e7">[email protected]</a>:soujava/mongodb-ai-planning-pattern.git
+[email protected]:soujava/mongodb-ai-planning-pattern.git
 ```
 
 ## Prerequisites

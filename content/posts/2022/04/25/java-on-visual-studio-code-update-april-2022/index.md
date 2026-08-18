@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code Update – April 2022"
-slug: "java-on-visual-studio-code-update-april-2022"
 date: "2022-04-25T08:14:40+00:00"
 lastmod: "2022-04-25T08:16:19+00:00"
 description: "Java 18 support, inlay hints for parameter names, new language server status UX, lambda expression support in debugging and more!"

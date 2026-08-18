@@ -1,6 +1,5 @@
 ---
 title: "Setting up and Working with Apache Tomcat in IntelliJ IDEA Ultimate"
-slug: "setting-up-and-working-with-apache-tomcat-in-intellij-idea-ultimate"
 date: "2022-05-10T08:46:17+00:00"
 lastmod: "2022-05-10T08:47:08+00:00"
 description: "In this article, you will learn how to quickly and efficiently set up IntelliJ IDEA Ultimate to work with Apache Tomcat."

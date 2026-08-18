@@ -1,6 +1,5 @@
 ---
 title: "Journey of a Java Champion: Bert Jan Schrijver's Path to Mastery and Community Leadership"
-slug: "journey-of-a-java-champion-bert-jan-schrijvers-path-to-mastery-and-community-leadership"
 date: "2024-01-10T15:50:26+00:00"
 lastmod: "2024-01-10T16:05:43+00:00"
 description: "Explore the insightful journey of Bert Jan Schrijver, a Java Champion, as he discusses his path in software development, the role of community, and the evolution of Java in this enlightening interview."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full">
- <img fetchpriority="high" decoding="async" width="400" height="400" src="image.png" alt="" class="wp-image-105572">
-</figure>
+{{< img src="image.png" class="alignright size-full" width="400" height="400" >}}
 
 Bert Jan is CTO at [OpenValue](https://www.openvalue.eu/) and focuses on Java, software architecture, Continuous Delivery and DevOps.   
 

@@ -1,6 +1,5 @@
 ---
 title: "OIDC Client with Mutual TLS Client Authentication"
-slug: "oidc-client-with-mutual-tls-client-authentication"
 date: "2021-02-04T08:48:06+00:00"
 lastmod: "2021-02-04T08:48:46+00:00"
 description: "Learn how to set up an OpenID Connect (OIDC) client with Spring Security using mutual TLS as a method for authenticating the client."

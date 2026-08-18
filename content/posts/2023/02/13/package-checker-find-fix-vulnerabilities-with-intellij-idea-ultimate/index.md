@@ -1,6 +1,5 @@
 ---
 title: "How to Find & Fix Vulnerabilities with IntelliJ IDEA Ultimate"
-slug: "package-checker-find-fix-vulnerabilities-with-intellij-idea-ultimate"
 date: "2023-02-13T09:09:39+00:00"
 lastmod: "2023-08-03T08:27:34+00:00"
 description: "In this article, we're going to take a look at the Package Checker plugin, that's bundled with IntelliJ IDEA Ultimate!"

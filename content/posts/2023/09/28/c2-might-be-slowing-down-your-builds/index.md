@@ -1,6 +1,5 @@
 ---
 title: "C2 Might Be Slowing Down Your Builds"
-slug: "c2-might-be-slowing-down-your-builds"
 date: "2023-09-28T09:55:13+00:00"
 lastmod: "2023-09-28T09:55:14+00:00"
 description: "Disabling C2 can be an option to speed up builds of smaller Java applications in CI systems, mainly when restricted to one or two CPU cores."
@@ -63,12 +62,7 @@ Does this mean that you should always disable C2 in CI builds? No. At a certain 
 
 Take, for example, [quarkus](https://quarkus.io/): A clean build on two cores runs for 430s (710s cpu-time) with C2 enabled:
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/09/image-9-2000x383.png" alt="" class="wp-image-1094" style="width:614px;height:126px" width="614" height="126">
- <figcaption class="wp-element-caption">
-  Quarkus (af4208a05e) built with maven 3.8.8 on SapMachine 17.0.8.1 and <code>./mvnd -Dquickly</code>
- </figcaption>
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/09/image-9-2000x383.png" class="size-large is-resized" width="614" height="126" style="width:614px;height:126px" caption="Quarkus (af4208a05e) built with maven 3.8.8 on SapMachine 17.0.8.1 and ./mvnd -Dquickly" >}}
 
 The runtime proportions are less skewed in the direction of C2:
 

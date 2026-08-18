@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #8"
-slug: "jc-ai-newsletter-8"
 date: "2025-10-30T06:36:12+00:00"
 lastmod: "2025-10-30T12:06:35+00:00"
 description: "This newsletter focuses on examining how AI enhances productivity through enterprise studies, agentic system architecture, attack vectors, and more!"

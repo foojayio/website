@@ -1,6 +1,5 @@
 ---
 title: "Using Firefox Profiler beyond the web"
-slug: "using-firefox-profiler-beyond-the-web"
 date: "2023-02-03T15:28:55+00:00"
 lastmod: "2023-02-03T15:28:56+00:00"
 description: "Ever wondered how to use Firefox Profiler to view your own profiling data? This article gives you the foundations!"

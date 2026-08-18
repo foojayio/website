@@ -1,6 +1,5 @@
 ---
 title: "The Cost of Not Knowing MongoDB - Part 2"
-slug: "the-cost-of-not-knowing-mongodb-part-2-appv5r0-to-appv5r4"
 date: "2025-10-21T14:26:51+00:00"
 lastmod: "2025-10-21T14:26:53+00:00"
 description: "This is the second part of the series “The Cost of Not Knowing MongoDB,” where we go through many ways we can model our MongoDB schemas for the same application and have different performances. In the first part of the series, we concatenated fields, changed data types, and short-handed field names to improve the application performance. In this second part, as discussed in the issues and improvement of appV4, the performance gains will be achieved by analyzing the application behavior and how it stores and reads its data, leading us to the use of the Bucket Pattern and the Computed Pattern. "

@@ -1,6 +1,5 @@
 ---
 title: "7 Reasons to Choose Apache Pulsar over Apache Kafka"
-slug: "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
 date: "2021-12-15T10:03:13+00:00"
 lastmod: "2022-07-05T20:57:34+00:00"
 description: "When you set out to build the best messaging infrastructure service, the first step is to pick the right underlying messaging technology!"

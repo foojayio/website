@@ -1,6 +1,5 @@
 ---
 title: "Monitoring Event Loops for Blockages"
-slug: "monitoring-event-loops-for-blockages"
 date: "2023-05-15T16:42:18+00:00"
 lastmod: "2023-06-15T00:40:53+00:00"
 description: "Chronicle Threads provides high performance event loop implementations and utility functions to help with threading and concurrency."

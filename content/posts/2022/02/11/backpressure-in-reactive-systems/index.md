@@ -1,6 +1,5 @@
 ---
 title: "Backpressure in Reactive Systems"
-slug: "backpressure-in-reactive-systems"
 date: "2022-02-11T10:07:46+00:00"
 lastmod: "2022-02-11T10:08:56+00:00"
 description: "Considering a fast data producer and a slow data consumer, backpressure \"pushes back\" on the producer, not to be overwhelmed by data."

@@ -1,6 +1,5 @@
 ---
 title: "JUG PH Continuation Report 2023"
-slug: "jugph-continuing-the-connection-with-the-java-enthusiasts"
 date: "2023-09-05T06:11:57+00:00"
 lastmod: "2023-11-01T14:31:05+00:00"
 description: "A JUG PH Continuation Report for the June and August Meetups. This report focuses on the meetups that happened in June and August 2023."

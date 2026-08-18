@@ -1,6 +1,5 @@
 ---
 title: "Reactive Database Access on the JVM"
-slug: "reactive-database-access-on-the-jvm"
 date: "2023-07-17T09:18:37+00:00"
 lastmod: "2023-07-17T09:18:38+00:00"
 description: "Let's browse through the surface of the main three reactive database access: Spring Data R2DBC, Hibernate, and jOOQ!"

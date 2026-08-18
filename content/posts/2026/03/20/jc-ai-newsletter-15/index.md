@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #15"
-slug: "jc-ai-newsletter-15"
 date: "2026-03-20T07:56:01+00:00"
 lastmod: "2026-03-20T07:56:03+00:00"
 description: "Over the past two weeks, the field of artificial intelligence has continued its remarkable pace of advancement. As AI becomes increasingly woven into the - by Miro Wengner"
@@ -24,7 +23,7 @@ related_posts:
   - "jc-ai-newsletter-16"
   - "jc-ai-newsletter-14"
   - "jc-ai-newsletter-13"
-  - "boxlang-ai-series-complete-guide-to-building-ai-agents"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

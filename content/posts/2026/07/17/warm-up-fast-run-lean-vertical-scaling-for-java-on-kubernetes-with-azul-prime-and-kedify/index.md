@@ -1,6 +1,5 @@
 ---
 title: "Warm Up Fast, Run Lean: Vertical Scaling for Java on Kubernetes with Azul Prime and Kedify"
-slug: "warm-up-fast-run-lean-vertical-scaling-for-java-on-kubernetes-with-azul-prime-and-kedify"
 date: "2026-07-17T08:02:07+00:00"
 description: "Autoscaling on Kubernetes has evolved significantly, but many production systems still rely on reactive scaling based on CPU and memory utilization. - by Jiří Holuša"
 authors:

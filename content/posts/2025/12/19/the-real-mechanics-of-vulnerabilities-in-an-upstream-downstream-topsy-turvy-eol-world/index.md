@@ -1,6 +1,5 @@
 ---
 title: "The Real Mechanics of Vulnerabilities in an Upstream/Downstream, Topsy-Turvy EOL World"
-slug: "the-real-mechanics-of-vulnerabilities-in-an-upstream-downstream-topsy-turvy-eol-world"
 date: "2025-12-19T13:36:28+00:00"
 description: "In this article you’ll learn Why CVEs record that a vulnerability exists, not that a usable fix exists How vulnerabilities are often discovered and fixed - by Steve Poole"
 authors:

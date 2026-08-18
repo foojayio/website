@@ -1,6 +1,5 @@
 ---
 title: "Immutable Collections in Java with Sealed Types"
-slug: "immutable-collections-in-java-with-sealed-types"
 date: "2020-12-10T03:02:00+00:00"
 lastmod: "2021-07-12T05:11:09+00:00"
 description: "JDK 15 was released on September 15, 2020. JEP 360 Sealed Types was included as a preview feature in this release, with its second preview in JDK 16.  Sealed Types is part of Project Amber. Sealed classes or interfaces can be used to restrict the interfaces or classes that are allowed to extend them. Also learn about the source code for an experimental implementation of a collections framework can be found in the Deck of Cards Kata repo. - by Don Raab"
@@ -12,14 +11,14 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "idempotent-spring-boot-starter"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "your-tls-stack-is-lying-about-zero-copy"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
 ---
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-36538" class="size-medium wp-image-36538" src="foojay-don-1-1-469x510.png" alt="" width="469" height="510">
+{{< img src="foojay-don-1-1-469x510.png" class="size-medium" width="469" height="510" >}}
 
 *Designing Immutable Collection using Sealed Types in JDK 15*{#caption-attachment-36538}
 

@@ -1,6 +1,5 @@
 ---
 title: "Book review: \"Get Your Hands Dirty on Clean Architecture - Second Edition\""
-slug: "book-review-get-your-hands-dirty-on-clean-architecture-second-edition"
 date: "2023-10-14T11:51:34+00:00"
 lastmod: "2023-10-14T11:51:35+00:00"
 description: "A magnificent job of walking through a lot the different architectural considerations one has to make to develop maintainable code."
@@ -21,9 +20,7 @@ frozen: false
 
 **Clean Architecture helps us ensure a solid foundation for our applications** ,**and helps keep our code organized and maintainable. Furthermore when properly applied it helps keep ones team on the same page and ensures our applications stay robust and flexible over time. Of course there are a lot of pitfalls to take into account, and a lot of pros/cons to each approach. There certainly is no one size fits all approach. But luckily this book by [Tom Hombergs](https://www.linkedin.com/in/thombergs/) provides a lot of valuable practical insights.**
 
-<figure class="aligncenter size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102635" style="width:301px;height:371px" width="301" height="371">
-</figure>
+{{< img src="image-830x1024.png" class="aligncenter size-large is-resized" width="301" height="371" style="width:301px;height:371px" >}}
 
 ## About the book
 

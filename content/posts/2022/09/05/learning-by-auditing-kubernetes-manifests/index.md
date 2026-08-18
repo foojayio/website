@@ -1,6 +1,5 @@
 ---
 title: "Learning by Auditing Kubernetes Manifests"
-slug: "learning-by-auditing-kubernetes-manifests"
 date: "2022-09-05T08:44:17+00:00"
 lastmod: "2022-09-05T08:44:18+00:00"
 description: "Find out about Checkov, which scans cloud infrastructure configurations to find misconfigurations before they're deployed."

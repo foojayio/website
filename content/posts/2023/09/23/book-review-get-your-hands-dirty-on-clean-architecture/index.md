@@ -1,6 +1,5 @@
 ---
 title: "Book Review: Get Your Hands Dirty on Clean Architecture"
-slug: "book-review-get-your-hands-dirty-on-clean-architecture"
 date: "2023-09-23T12:00:31+00:00"
 lastmod: "2023-09-23T12:00:33+00:00"
 description: "A hands on guide to creating clean web applications with code examples in Java to elevate your coding skills with this essential guide!"

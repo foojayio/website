@@ -1,6 +1,5 @@
 ---
 title: "How to Detect Cache Misses Using Observability"
-slug: "how-to-detect-cache-misses-using-observability"
 date: "2024-04-04T07:44:31+00:00"
 lastmod: "2024-04-04T07:49:33+00:00"
 description: "In this article, we'll examine cache misses and, in general, learn about the caching concept and how to implement it in Spring Boot."

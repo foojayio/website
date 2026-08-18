@@ -1,6 +1,5 @@
 ---
 title: "K8ssandra ramps up security features to match Kubernetes’ best practices"
-slug: "k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices"
 date: "2022-06-23T19:54:58+00:00"
 lastmod: "2022-06-23T19:55:00+00:00"
 description: "New security features are coming to the open-source data platform: K8ssandra. The goal? To align even more with the security best practices of Kubernetes. - by Jeff Banks"

@@ -1,6 +1,5 @@
 ---
 title: "Cracking Code and Conventions: An Exclusive Interview with Nicolas Fränkel"
-slug: "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
 date: "2023-06-05T11:06:00+00:00"
 lastmod: "2023-06-06T20:08:26+00:00"
 description: "Join us as we explore Nicolas Fränkel's journey in software development, industry challenges, and the potential role of AI in the future of coding."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright is-resized">
- <img fetchpriority="high" decoding="async" src="nicols-510x510.jpeg" alt="" class="wp-image-98603" width="383" height="383">
-</figure>
+{{< img src="nicols-510x510.jpeg" class="alignright is-resized" width="383" height="383" >}}
 
 In this enlightening interview, we explore the unique journey of Nicolas Fränkel, a seasoned professional in the software industry. From an architecture student to a passionate software developer, Nicolas shares his candid thoughts about the current state of software development and the potential impacts of AI.
 

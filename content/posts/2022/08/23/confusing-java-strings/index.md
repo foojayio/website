@@ -1,6 +1,5 @@
 ---
 title: "Java Strings and confusion with Unicode"
-slug: "confusing-java-strings"
 date: "2022-08-23T10:29:58+00:00"
 lastmod: "2022-08-23T10:30:00+00:00"
 description: "How to avoid trouble and confusion with Java String and Unicode characters. Learn more and find out all the details here!"
@@ -39,7 +38,7 @@ What do you think, what is the `length` of the following Java Strings?
 
 By now, you might get why "Confusing Java Strings" is the title of this article. In the rest of the article, I'm going to explain why you might got unexpected results in the quiz and give you a few suggestions to avoid issues.
 
-## Facts
+## Facts {#more-57319}
 
 As you might know, Java uses UTF-16 to encode Unicode text. Unicode is a standard to represent text while UTF-16 is a way to encode Unicode characters. That's why the size of the Java `char` type is 2 bytes (2x8 = 16 bits).
 

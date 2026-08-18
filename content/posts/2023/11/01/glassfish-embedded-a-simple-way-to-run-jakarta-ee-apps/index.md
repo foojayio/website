@@ -1,6 +1,5 @@
 ---
 title: "GlassFish Embedded - a simple way to run Jakarta EE apps"
-slug: "glassfish-embedded-a-simple-way-to-run-jakarta-ee-apps"
 date: "2023-11-01T15:55:14+00:00"
 lastmod: "2023-11-01T15:55:16+00:00"
 description: "Jan Blavins shares how builds both server component and a client component in his project using the GlassFish Embedded container with little effort."
@@ -26,11 +25,9 @@ I've been asked by the Eclipse GlassFish project to say a few words about how I 
 
 I started using GlassFish while GlassFish was in Oracle's hands as a reference implementation of Java EE. Some time ago, there were suggestions that GlassFish was not being actively maintained. Since Oracle's donation of GlassFish to the Eclipse Foundation, with support from the Foundation's GlassFish team, and the OmniFish team (that also provides commercial support), the GlassFish project is very active and the community around it is certainly present and responsive. That's one more reason for me to continue using GlassFish in the future.  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="https://omnifish.ee/wp-content/uploads/2023/09/GlassFish-embedded.png" alt="" class="wp-image-2518" style="width:264px;height:135px" width="264" height="135">
-</figure>
+{{< img src="https://omnifish.ee/wp-content/uploads/2023/09/GlassFish-embedded.png" class="aligncenter size-full is-resized" width="264" height="135" style="width:264px;height:135px" >}}
 
-## Overview of the APILoader Project
+## Overview of the APILoader Project {#more-102900}
 
 My project is APILoader. APILoader is, I believe (quite possibly wrongly) the seed for the next generation of software performance testing tools. I won't say a lot about APILoader since it hasn't been released yet and there is IP to protect. But I can say a bit about how it uses GlassFish Embedded.
 > For an individual, I intend that APILoader be deployed using GlassFish Embedded. This obviates the server administration, as the server is created and destroyed by the tool on each tool session.
@@ -71,9 +68,7 @@ More information:
 
 This article was published in collaboration with [OmniFish](https://omnifish.ee) and the [Eclipse GlassFish](https://glassfish.org) team. For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the [OmniFish blog](https://omnifish.ee/blog/) and [Eclipse GlassFish mailing lists](https://projects.eclipse.org/projects/ee4j.glassfish/contact).  
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px" width="200" height="200">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" style="width:200px;height:200px" >}}
 
 ## OmniFish - Jakarta EE experts
 

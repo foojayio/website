@@ -1,6 +1,5 @@
 ---
 title: "Using my new Raspberry Pi to run an existing GitHub Action"
-slug: "using-my-new-raspberry-pi-to-run-an-existing-github-action"
 date: "2024-04-23T18:45:04+00:00"
 lastmod: "2024-04-24T21:02:14+00:00"
 description: "Recently, I mentioned how I refactored the script that kept my GitHub profile up-to-date. Since Geecon Prague, I'm also a happy owner of a Raspberry Pi."
@@ -26,7 +25,7 @@ Recently, I mentioned [how I refactored](https://blog.frankel.ch/kotlin-scriptin
 
 [
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-106305 size-medium" src="Screenshot-2024-03-10-at-17.20.56-557x510.png" alt="" width="557" height="510">
+{{< img src="Screenshot-2024-03-10-at-17.20.56-557x510.png" class="aligncenter size-medium" width="557" height="510" >}}
 
 ](https://twitter.com/nicolas_frankel/status/1715313240568197233)
 

@@ -1,6 +1,5 @@
 ---
 title: "Testable Code: A Journey Through Consideration and Refactoring"
-slug: "writing-testable-code-a-journey-through-consideration-and-refactoring"
 date: "2023-08-30T06:47:47+00:00"
 lastmod: "2023-08-30T06:47:48+00:00"
 description: "By considering real-world examples and learning from the process of refactoring and testing, we can create robust and maintainable code!"

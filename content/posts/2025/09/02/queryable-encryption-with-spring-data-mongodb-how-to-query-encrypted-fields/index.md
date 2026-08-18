@@ -1,6 +1,5 @@
 ---
 title: "Copy of Queryable Encryption with Spring Data MongoDB: How to Query Encrypted Fields"
-slug: "queryable-encryption-with-spring-data-mongodb-how-to-query-encrypted-fields"
 date: "2025-09-02T19:00:24+00:00"
 lastmod: "2025-12-12T21:22:43+00:00"
 description: "Information is one of the most valuable assets in computing and keeping it protected is even more critical. When we talk about data protection, it’s not just about preventing breaches or leaks; it’s also about complying with privacy regulations and protecting user data.MongoDB provides strong encryption capabilities, including in transit, at rest, and in use. The Queryable Encryption feature falls into the in use category. It allows data to be encrypted on the client side, so that even with access to the database and its credentials, no one can read the protected fields without the proper encryption key. At the same time, it supports querying over encrypted fields, making it possible to filter, match, or retrieve data without compromising confidentiality. In this tutorial, we’ll implement this feature using Spring Data MongoDB, applying encryption to sensitive fields in a sample human resources (HR) system."
@@ -86,9 +85,7 @@ To keep things simple and practical, our application will expose four basic endp
 
 At the end, when we open a document in [MongoDB Compass](https://www.mongodb.com/products/tools/compass/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=query-foojay&utm_term=tony.kim), we'll see encrypted fields as unreadable binary blobs, only decryptable by the client configured with the proper keys:
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="535" height="278" src="Screenshot-2025-08-29-at-8.47.45-AM.png" alt="json-block-1" class="wp-image-121111" style="width:535px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-08-29-at-8.47.45-AM.png" class="size-full is-resized" alt="json-block-1" width="535" height="278" style="width:535px;height:auto" >}}
 
 ## Setting up the project
 

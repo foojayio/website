@@ -1,6 +1,5 @@
 ---
 title: "The Impact of the Digital Operational Resilience Act (DORA) on Java Investment with Azul"
-slug: "the-impact-of-the-digital-operational-resilience-act-dora-on-java-investment-with-azul"
 date: "2024-07-14T13:26:13+00:00"
 lastmod: "2024-09-05T06:33:01+00:00"
 description: "DORA significantly impacts investments by the financial sector in Java, because of its emphasis on secure and resilient software."

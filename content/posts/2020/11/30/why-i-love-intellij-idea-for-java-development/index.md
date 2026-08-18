@@ -1,6 +1,5 @@
 ---
 title: "Why I Love IntelliJ IDEA for Java Development"
-slug: "why-i-love-intellij-idea-for-java-development"
 date: "2020-11-30T09:16:06+00:00"
 lastmod: "2020-11-30T20:45:11+00:00"
 description: "I like many things about IntelliJ IDEA, but I thought it'd be fun to write about the ones that make me most productive. Read on for details!"
@@ -52,9 +51,13 @@ If you select Spring Boot, it'll even create a run configuration for you with th
 
 If you're doing microservices with Spring Boot, there's also a run dashboard you can use to start/stop/monitor all your services. To demonstrate what it looks like, you can clone the example code from [Secure Reactive Microservices with Spring Cloud Gateway](https://developer.okta.com/blog/2019/08/28/reactive-microservices-spring-cloud-gateway) and open it in IDEA:
 
-`git clone https://github.com/oktadeveloper/java-microservices-examples.git `
+```
+git clone https://github.com/oktadeveloper/java-microservices-examples.git
+```
 
-`cd java-microservices-examples/spring-cloud-gateway idea .`
+```
+cd java-microservices-examples/spring-cloud-gateway idea .
+```
 
 After downloading dependencies and initializing the project, you'll see a **Services** popup in the bottom right corner.
 
@@ -106,13 +109,17 @@ If you start your app with Maven, you can debug it too. Let's use Micronaut in t
 
 Gradle has a similar ability. For example, if you created a Spring Boot app with Gradle, you could start it with the following command to run in debug mode.
 
-    `gradle bootRun -Dorg.gradle.debug=true --no-daemon`
+```
+gradle bootRun -Dorg.gradle.debug=true --no-daemon
+```
 
 In this case, Gradle will listen on port 5005 by default, so you'll need to modify your remote configuration to listen on this port.
 
 Confession: I was a Java developer for over five years before I learned [you can remotely debug **any** Java application](https://raibledesigns.com/rd/entry/remotely_debug_your_app_in). All it takes is starting your Java app with some extra arguments, and it'll wait until you attach to it. For example:
 
-    `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar path/to/jar.jar`
+```
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar path/to/jar.jar
+```
 
 ### Run Your Java Tests from IntelliJ IDEA
 
@@ -198,26 +205,28 @@ I use live templates for almost all my screencasts and keep them updated at [git
 
 For example, here's my `ss-resource-config` shortcut that configures Spring Security to be an OAuth 2.0 resource server.
 
-    `import com.okta.spring.boot.oauth.Okta;
-    import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-    import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-    import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+```java
+import com.okta.spring.boot.oauth.Okta;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-    @EnableWebSecurity
-    public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            // @formatter:off
-            http
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .oauth2ResourceServer().jwt();
-            // @formatter:on
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
+        http
+            .authorizeRequests().anyRequest().authenticated()
+            .and()
+            .oauth2ResourceServer().jwt();
+        // @formatter:on
 
-            Okta.configureResourceServer401ResponseBody(http);
-        }
-    }`
+        Okta.configureResourceServer401ResponseBody(http);
+    }
+}
+```
 
 To add new live templates, select the code you want to save, then go to **Tools** \> **Save as Live Template**. You can also use variables in your template that you can tab to change after you expand it.
 

@@ -1,6 +1,5 @@
 ---
 title: "Debug Real World Applications using a Systemic Proven Process"
-slug: "the-debugger-checklist-part-ii"
 date: "2021-09-28T08:54:00+00:00"
 lastmod: "2021-09-28T08:55:29+00:00"
 description: "Debugging isn't a part of curriculum, it's a crucial skill we're expected to \"just pick up\". Here we fill in the blanks on this black art!"

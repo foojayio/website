@@ -1,6 +1,5 @@
 ---
 title: "How to improve your spring boot skills"
-slug: "how-to-improve-your-spring-boot-skills"
 date: "2024-03-20T15:10:29+00:00"
 lastmod: "2024-08-14T13:05:42+00:00"
 description: "How to make sure you're unlocking the full potential of Spring Boot. 9 ways to improve your Spring Boot Skills."
@@ -29,8 +28,7 @@ So I started thinking to myself, how would Spring Pros approach this? How much t
 
 ## Here are 9 ways to improve your Spring Boot skills:
 
-1. Externalize your configuration:
-----------------------------------
+## 1. Externalize your configuration:
 
 Another way to utilize Spring Boot to its full potential is to try as much as possible to externalize your configuration instead of hard coding them. Externalizing your configuration will make your application more flexible and easier to manage.
 
@@ -103,8 +101,7 @@ public class DemoService {
 }
 ```
 
-2. You need to keep your controllers lean
------------------------------------------
+## 2. You need to keep your controllers lean
 
 Another way to utilize Spring Boot to its full potential is to ensure that you keep your controllers lean. Keeping your controllers lean will help you avoid practices that will lead to the 'Fat Controller' anti-pattern.
 
@@ -124,8 +121,7 @@ To avoid the 'Fat Controller' anti-pattern, adhere to the following principles:
 * Encapsulated: The HTTP layer of your application should be handled by controllers, this should not be handled by the service layer.  
   Use-case-centric: make sure your controllers are built around use cases or the business domain.
 
-3. Handle exception globally
-----------------------------
+## 3. Handle exception globally
 
 To use Spring Boot to the fullest, you'll need to learn how to handle exceptions globally and this is important because:
 
@@ -178,8 +174,7 @@ public class UserService {
 
 Using @ControllerAdvice or @RestControllerAdvice in your Spring Boot application allows you to centralize exception handling and other configurations across multiple controllers in a Spring Boot application.
 
-4. Make use of Lazy Initialization
-----------------------------------
+## 4. Make use of Lazy Initialization
 
 The SpringApplication allows you as a developer to initialize your spring boot application lazily. When lazy initialization is enabled, beans get created as they are needed rather than during application startup. Enabling lazy initialization reduces the time that it takes your application to start.
 
@@ -195,8 +190,7 @@ Lazy initialization can be enabled programmatically using:
 * the setLazyInitialization method on SpringApplication.
 * the spring.main.lazy-initialization property
 
-5. Make good use of Starter POMs
---------------------------------
+## 5. Make good use of Starter POMs
 
 Just as AutoConfiguration takes away the pain of having to configure common functionalities, Starter POMs removes the pain of looking for and configuring common dependencies in your project.
 
@@ -210,8 +204,7 @@ The spring-boot-starter-data-jpa is a starter for using Spring Data JPA. It incl
 
 So instead of searching for and adding all these dependencies and worrying about their compatible version, you just need to add one Starter POM --- spring-boot-starter-data-jpa
 
-6. Make use of Spring Boot CLI
-------------------------------
+## 6. Make use of Spring Boot CLI
 
 The Spring Boot CLI is a command line tool provided by the Spring Boot team. This tool allows you to create Spring Boot web applications. Obviously, you'll need to install it in order to use it, here is how you install it.
 
@@ -222,8 +215,7 @@ The Spring Boot CLI is a command line tool provided by the Spring Boot team. Thi
 \`\> scoop bucket add extras
 > scoop install spring boot
 
-7. Master your build tool of preference
----------------------------------------
+## 7. Master your build tool of preference
 
 One way to use Spring Boot to its fullest is to master the build tool of your preference. If you prefer the Maven or Gradle build tool, you have to master it, know its downsides and equally know how to mitigate the downside of your build tool of preference.
 
@@ -231,8 +223,7 @@ One common complaint of the Maven build tool is that is slow and the best way to
 
 One common downside of the Gradle build tool is that the methods names are getting changed all the time, so the only way to mitigate this is to keep yourself abreast of the new features and deprecated features that comes with every new release of Gradle.
 
-8. Take Observability Seriously
--------------------------------
+## 8. Take Observability Seriously
 
 [Observability](https://foojay.io/today/effective-coding-with-java-observability/ "Observability") is basically the process of measuring the internal state of your application using its external outputs such as logs, metrics and traces.
 
@@ -324,8 +315,7 @@ OpenTelemetry provides end-to-end tracing and observability in microservice-base
 
 Continuous Feedback tools such as digma.ai can make the journey from no observability to full observability much easier, but more importantly, make sure that observability data becomes impactful -- instead of just pretty dashboards. Digma and similar tools can analyze what the observability data means about your code to detect common anti-patterns and issues and provide you with feedback as-you-code.
 
-9. Test, Test, Test
--------------------
+## 9. Test, Test, Test
 
 With Spring Boot, writing unit tests and integration tests became less of a headache and more of a satisfying routine.
 

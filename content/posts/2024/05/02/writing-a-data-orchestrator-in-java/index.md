@@ -1,6 +1,5 @@
 ---
 title: "Writing a Data Orchestrator in Java"
-slug: "writing-a-data-orchestrator-in-java"
 date: "2024-05-02T19:43:32+00:00"
 lastmod: "2024-05-03T08:37:28+00:00"
 description: "What makes Kestra unique amongst all the data orchestrators and how to leverage the power of the Java platform and its ecosystem to build a performant, scalable, and feature-rich data orchestrator."
@@ -16,7 +15,7 @@ related_posts:
   - "effective-coding-with-java-observability"
   - "journeys-in-java-level-10-service-discovery-with-eureka"
   - "observability-is-cultural"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

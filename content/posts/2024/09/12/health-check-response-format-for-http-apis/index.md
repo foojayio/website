@@ -1,6 +1,5 @@
 ---
 title: "Health Check Response Format for HTTP APIs"
-slug: "health-check-response-format-for-http-apis"
 date: "2024-09-12T10:02:32+00:00"
 lastmod: "2024-09-12T10:02:34+00:00"
 description: "I'm continuing my journey on getting more familiar with HTTP APIs by reading related RFCs."

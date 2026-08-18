@@ -1,6 +1,5 @@
 ---
 title: "TornadoInsight - Compatibility with TornadoVM SDK 2.0+ & Configuration Guide"
-slug: "tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide"
 date: "2025-12-30T09:00:00+00:00"
 lastmod: "2025-12-30T15:18:44+00:00"
 description: "This blog updates the previously published TornadoInsight configuration guidelines and explains how to configure the required environment variable to - by Thanos Stratikopoulos"
@@ -20,9 +19,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="298" height="298" src="tornado-insight.webp" alt="" class="wp-image-106112" style="width:138px;height:auto">
-</figure>
+{{< img src="tornado-insight.webp" class="size-full is-resized" width="298" height="298" style="width:138px;height:auto" >}}
 
 This blog updates the previously published **TornadoInsight** configuration [**++guidelines++**](https://www.tornadovm.org/post/introducing-tornadoinsight-unleashing-the-power-of-tornadovm-in-intellij-idea) and explains how to configure the required environment variable to ensure that TornadoInsight correctly detects the TornadoVM SDK when IntelliJ IDEA is launched from a graphical environment.
 
@@ -50,9 +47,7 @@ TornadoInsight supports using the JDK defined in the IntelliJ project settings.{
 
 When a compatible JDK (e.g., JDK 21) is configured here, TornadoInsight will automatically use it.{#fibw029743}  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://plugins.jetbrains.com/files/23309/screenshot_bd38c017-be77-49d6-a5b0-f9ca54069cd9" alt="" style="width:738px;height:auto">
-</figure>
+{{< img src="https://plugins.jetbrains.com/files/23309/screenshot_bd38c017-be77-49d6-a5b0-f9ca54069cd9" class="aligncenter size-large is-resized" style="width:738px;height:auto" >}}
 
 ## TornadoVM SDK Configuration (Recommended)
 

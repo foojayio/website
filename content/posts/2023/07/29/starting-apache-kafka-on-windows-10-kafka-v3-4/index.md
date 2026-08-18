@@ -1,6 +1,5 @@
 ---
 title: "Starting Apache Kafka v3.4 on Win 10"
-slug: "starting-apache-kafka-on-windows-10-kafka-v3-4"
 date: "2023-07-29T07:43:32+00:00"
 lastmod: "2023-07-30T07:47:48+00:00"
 description: "Part one of a two part series on Running Apache Kafka Server, Configuring Kafka Topics, and Creating a Kafka Consumer and Kafka Producer."
@@ -80,7 +79,7 @@ kafka-server-start.bat ..\..\config\server.properties
 Create a Kafka Topic to test out the Kafka Installation using the following command.
 
 ```
-kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test<code></code>
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
 ```
 
 ![](https://blogger.googleusercontent.com/img/a/AVvXsEjjiMOt1XyY3YkmDdyfZsg5_7CcUCp7-6jHcaayMx54busg9nf_d1fe7jypHXifPX5vYmTOwb4cy0Ei5ad1kVwlwQ1TeInPct2NUzGsx-lig7rF09dropGBcYv3r2Q7JzciqlAitenBAsxJ24tb6dCqi9OVrGO_rMc2h32zmVj0-tinLeuhm8ZDM6z6Nq_1=w640-h44)

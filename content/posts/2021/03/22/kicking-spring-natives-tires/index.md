@@ -1,6 +1,5 @@
 ---
 title: "Kicking Spring Native's Tires with GraalVM"
-slug: "kicking-spring-natives-tires"
 date: "2021-03-22T17:18:05+00:00"
 lastmod: "2021-03-22T17:18:08+00:00"
 description: "Despite all the \"magic\" of Spring Boot, Spring Native handles most of GraalVM's required configuration out-of-the-box!"
@@ -15,8 +14,8 @@ tags:
 related_posts:
   - "diving-into-jvm-framework-monitoring-and-profiling"
   - "kotlin-faas-impossible-union"
+  - "idempotent-spring-boot-starter"
   - "five-java-developer-must-haves"
-  - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
 frozen: false
 ---
 

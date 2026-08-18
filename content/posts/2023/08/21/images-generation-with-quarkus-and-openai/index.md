@@ -1,6 +1,5 @@
 ---
 title: "AI-based Images generation with Quarkus and OpenAI DALL.E"
-slug: "images-generation-with-quarkus-and-openai"
 date: "2023-08-21T07:38:07+00:00"
 lastmod: "2023-08-21T07:39:49+00:00"
 description: "We explore image generation with Quarkus and OpenAI using the new REST Client Reactive to invoke the OpenAI DALL.E API."
@@ -17,7 +16,7 @@ related_posts:
   - "book-review-quarkus-for-spring-developers"
   - "native-graphql-api-with-neo4j-auradb-on-heroku"
   - "native-image-quarkus"
-  - "why-we-moved-our-timefold-java-worker-pods-from-amd-to-arm64"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
 frozen: false
 ---
 

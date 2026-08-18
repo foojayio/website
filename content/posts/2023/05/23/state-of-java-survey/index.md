@@ -1,6 +1,5 @@
 ---
 title: "State of Java Survey"
-slug: "state-of-java-survey"
 date: "2023-05-23T05:47:41+00:00"
 lastmod: "2024-10-01T07:12:29+00:00"
 description: "Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? What Java versions?"

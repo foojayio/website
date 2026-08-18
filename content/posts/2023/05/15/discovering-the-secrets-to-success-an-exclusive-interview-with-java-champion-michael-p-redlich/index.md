@@ -1,6 +1,5 @@
 ---
 title: "Discovering the Secrets to Success: An Exclusive Interview with Michael"
-slug: "discovering-the-secrets-to-success-an-exclusive-interview-with-java-champion-michael-p-redlich"
 date: "2023-05-15T17:35:04+00:00"
 lastmod: "2023-05-15T19:49:30+00:00"
 description: "Discover valuable insights from Java Champion Michael P. Redlich and learn about continuous learning, open-source contributions, and adapting to new technologies in software development."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="michael-redlich.jpg" alt="" class="wp-image-98312" width="480" height="480">
-</figure>
+{{< img src="michael-redlich.jpg" class="alignright size-full is-resized" width="480" height="480" >}}
 
 In this interview, we had the pleasure of speaking with Michael P. Redlich, a seasoned software developer with over 30 years of experience in the field.
 
@@ -53,7 +50,7 @@ Overall, this interview provides a wealth of knowledge and advice for anyone int
 
 > I'm an avid cyclist, along with my wife, Rowena. I'm also a former marathon runner, having completed 11 marathons and one ultramarathon (50K).  
 >
-> 
+> *** ** * ** ***
 >
 ### Bazlur: First of all, congratulations, Mike, on your recent achievement of becoming the Java Champion. How are you feeling?
 

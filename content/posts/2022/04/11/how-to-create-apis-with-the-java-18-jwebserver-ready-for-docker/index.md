@@ -1,6 +1,5 @@
 ---
 title: "How to Create APIs with the Java 18 jwebserver Ready for Docker "
-slug: "how-to-create-apis-with-the-java-18-jwebserver-ready-for-docker"
 date: "2022-04-11T14:26:57+00:00"
 lastmod: "2022-04-11T14:26:59+00:00"
 description: "When simple web content or responses are required, Java 18 reduces the need to search for more complicated solutions like Jetty and Netty."

@@ -1,6 +1,5 @@
 ---
 title: "Patterns For The Design Of Microservices – Part 2"
-slug: "patterns-for-the-design-of-microservices-part-2"
 date: "2023-10-30T08:58:06+00:00"
 lastmod: "2023-10-30T08:58:08+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."
@@ -24,7 +23,7 @@ frozen: false
 
 In the [previous article](https://foojay.io/today/patterns-for-the-design-of-microservices-part-1/ "previous article"), we discussed some of the design patterns employed in the creation of microservices. In this subsequent article, we will delve into the remaining patterns that are commonly utilized in the realm of microservices.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-102866" src="MSPatterns-700x394.png" alt="Microservice Architecture" width="700" height="394">
+{{< img src="MSPatterns-700x394.png" class="size-medium" alt="Microservice Architecture" width="700" height="394" >}}
 
 Database Patterns
 

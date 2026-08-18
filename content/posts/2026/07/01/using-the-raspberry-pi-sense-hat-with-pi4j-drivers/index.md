@@ -1,6 +1,5 @@
 ---
 title: "Using the Raspberry Pi Sense HAT with Pi4J Drivers"
-slug: "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
 date: "2026-07-01T08:38:00+00:00"
 lastmod: "2026-07-01T11:32:34+00:00"
 description: "One of the biggest advantages of the Pi4J Drivers project is the ability to interact with complex hardware through simple and intuitive Java APIs. A great - by Igor De Souza"
@@ -21,9 +20,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img decoding="async" src="duke_sensehat-819x1024.png" alt="" style="width:250px">
-</figure>
+{{< img src="duke_sensehat-819x1024.png" class="alignleft is-resized" style="width:250px" >}}
 
 One of the biggest advantages of the Pi4J Drivers project is the ability to interact with complex hardware through simple and intuitive Java APIs. A great example of this is the Raspberry Pi Sense HAT, one of the most popular Raspberry Pi add-on boards and the hardware platform used in the Astro Pi program aboard the International Space Station.
 

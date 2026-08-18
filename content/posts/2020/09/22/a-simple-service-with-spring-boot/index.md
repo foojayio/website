@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with a Simple Service with Spring Boot"
-slug: "a-simple-service-with-spring-boot"
 date: "2020-09-22T12:59:42+00:00"
 lastmod: "2023-08-28T12:43:57+00:00"
 description: "How to create a simple Web Service using Spring Boot, making it effortless to develop Web Services, so long as the appropriate dependencies are in place."

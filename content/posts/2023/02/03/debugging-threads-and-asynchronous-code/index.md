@@ -1,6 +1,5 @@
 ---
 title: "Debugging Threads and Asynchronous Code"
-slug: "debugging-threads-and-asynchronous-code"
 date: "2023-02-03T10:07:22+00:00"
 lastmod: "2023-02-03T10:07:24+00:00"
 description: "Track thread race conditions, figure out deadlocks, and understand the flow of asynchronous applications (even in custom code)."

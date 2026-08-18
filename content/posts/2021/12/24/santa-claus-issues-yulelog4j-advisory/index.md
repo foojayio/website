@@ -1,6 +1,5 @@
 ---
 title: "foojay - Santa Claus Issues YuleLog4J Advisory"
-slug: "santa-claus-issues-yulelog4j-advisory"
 date: "2021-12-24T16:23:07+00:00"
 lastmod: "2021-12-24T16:23:43+00:00"
 description: "Santa Claus has issued a security advisory for the popular holiday celebration."

@@ -1,6 +1,5 @@
 ---
 title: "Who instruments the instrumenters?"
-slug: "who-instruments-the-instrumenters"
 date: "2024-05-30T16:25:45+00:00"
 lastmod: "2025-02-04T19:16:52+00:00"
 description: "Have you ever wondered how libraries like Spring and Mockito modify your code at run-time to implement all their advanced features?"
@@ -50,7 +49,7 @@ Another nice feature is that the agent allows you to inspect almost all classes,
 
 Now I'm handing it over to Mikaël, who actually fixed bugs using my tool:
 
-## Spring and Mockito
+## Spring and Mockito {#more-111153}
 
 Two of the tools I work the most with are Spring and Mockito, and both make liberal use of bytecode generation and modification.
 

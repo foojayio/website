@@ -1,6 +1,5 @@
 ---
 title: "Why Java is Still Worth Learning in 2025: A Developer's 25-Year Journey"
-slug: "why-java-is-still-worth-learning-in-2025-a-developers-25-year-journey"
 date: "2025-08-04T06:32:05+00:00"
 lastmod: "2025-08-04T06:33:52+00:00"
 description: "In 2025, Java offers something rare in the tech world: stability without stagnation, innovation without disruption, and a community that values both technical excellence and human growth."
@@ -226,7 +225,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
             var response = httpClient.send(buildRequest(i), HttpResponse.BodyHandlers.ofString());
             System.out.println("Response " + i + ": " + response.statusCode());
         }));
-} // Auto-waits for completion<code class="language-java"></code>
+} // Auto-waits for completion
 ```
 
 ## Getting Started with Java in 2025

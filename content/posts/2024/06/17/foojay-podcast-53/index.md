@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #53: JCON Report, Part 5 – CQRS, JOOQ, GraphQL, API, Vaadin, OpenRewrite, ErrorProne, Gateways, Proxies,..."
-slug: "foojay-podcast-53"
 date: "2024-06-17T09:24:52+00:00"
 lastmod: "2025-11-13T08:46:00+00:00"
 description: "In this episode you'll hear Simon Martinelli, Nicolas Fränkel, Marcus Hellberg, Rick Ossendrijver, and Abdel Sghiouar."

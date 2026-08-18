@@ -1,6 +1,5 @@
 ---
 title: "Remote Development Made Simple with DevPod"
-slug: "remote-development-made-simple-with-devpod"
 date: "2025-02-13T16:06:30+00:00"
 lastmod: "2025-02-13T16:06:32+00:00"
 description: "DevPod is a nice tool around your toolbelt that allows your development team(s) to share the same machine configuration without hassle."
@@ -63,25 +62,25 @@ brew install devpod
 
 Once installed, you can launch it from the CLI or the GUI. I favour GUIs, in the beginning, to help understand the available options.
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-115479 size-medium" src="devpod-home-700x490.webp" alt="DevPod Home screen" width="700" height="490">
+{{< img src="devpod-home-700x490.webp" class="aligncenter size-medium" alt="DevPod Home screen" width="700" height="490" >}}
 
 DevPod offers providers: locations where to run the containers. The default is Docker. You can add additional providers, including Cloud Providers and Kubernetes clusters.
 
-<img decoding="async" class="aligncenter size-medium wp-image-115480" src="devpod-configure-provider-700x245.webp" alt="Configuring a new DevPod provider" width="700" height="245">
+{{< img src="devpod-configure-provider-700x245.webp" class="aligncenter size-medium" alt="Configuring a new DevPod provider" width="700" height="245" >}}
 
 For this post, I'll keep Docker---I'm using OrbStack. Now, onto the meat. Let's go to the workspaces menu item. If you already have created workspaces, they should appear here. Since it's our first visit, we shall create one. Click on the btn:\[Create workspace\] button. Let's try one of the quickstart examples, *i.e.*, Rust. My IDE of choice is IntelliJ IDEA, but you can choose yours. Once you've selected an image, an IDE, and a provider, click Create Workspace.
 
-<img decoding="async" class="aligncenter size-medium wp-image-115481" src="devpod-create-workspace-576x510.webp" alt="Starting a new DevPod workspace" width="576" height="510">
+{{< img src="devpod-create-workspace-576x510.webp" class="aligncenter size-medium" alt="Starting a new DevPod workspace" width="576" height="510" >}}
 
 At this point, DevPod will download the image and open the project running in OrbStack in IntelliJ.
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-115482" src="intellij-via-gateway-700x437.webp" alt="Running IntelliJ via the JetBrains Gateway" width="700" height="437">
+{{< img src="intellij-via-gateway-700x437.webp" class="aligncenter size-medium" alt="Running IntelliJ via the JetBrains Gateway" width="700" height="437" >}}
 
 From now on, we can happily start working on our Rust project, confident that every team member uses the same Rust version.
 
 Note that the first time you use this setup, DevPod will download the JetBrains client as well. It's a one-time download delay, though.
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-115483" src="dl-jetbrains-client-700x145.webp" alt="Downloading the JetBrains client" width="700" height="145">
+{{< img src="dl-jetbrains-client-700x145.webp" class="aligncenter size-medium" alt="Downloading the JetBrains client" width="700" height="145" >}}
 
 The same holds for Git pre-commit hooks, for example. If you prefer to develop within another IDE, select it at launch time, and you're good. When done with your day's work, stop the container. If you're running in the Cloud, it saves money. On the next day, resume the container and continue your work.
 

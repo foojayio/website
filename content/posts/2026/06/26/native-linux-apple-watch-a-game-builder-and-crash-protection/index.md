@@ -1,6 +1,5 @@
 ---
 title: "Native Linux, Apple Watch, A Game Builder And Crash Protection"
-slug: "native-linux-apple-watch-a-game-builder-and-crash-protection"
 date: "2026-06-26T18:43:22+00:00"
 lastmod: "2026-06-29T11:15:36+00:00"
 description: "This week adds a native Linux desktop port, an Apple Watch and Wear OS port, a visual Game Builder with a high-level gaming API, and seamless crash protect"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

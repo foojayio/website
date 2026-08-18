@@ -1,6 +1,5 @@
 ---
 title: "WebAssembly on Kubernetes"
-slug: "webassembly-on-kubernetes"
 date: "2025-03-25T10:32:31+00:00"
 lastmod: "2025-03-25T10:32:33+00:00"
 description: "Like a couple of innovative technologies, different people have different viewpoints on where WebAssembly fits the technology landscape. WebAssembly (also - by Nicolas Frankel"
@@ -483,7 +482,7 @@ We do the same with the `embed` and the `native` pods, barring the `runtimeClass
 
 The final deployment diagram is the following:
 
-<img decoding="async" class="aligncenter size-medium wp-image-115699" src="deployment-diagram-600x510.png" alt="" width="600" height="510">
+{{< img src="deployment-diagram-600x510.png" class="aligncenter size-medium" width="600" height="510" >}}
 
 The final touch is to tunnel to expose services:
 

@@ -1,6 +1,5 @@
 ---
 title: "The slow Death of the onjcmd Debugger Feature"
-slug: "the-slow-death-of-the-onjcmd-debugger-feature"
 date: "2025-01-18T10:47:30+00:00"
 lastmod: "2025-01-20T08:14:47+00:00"
 description: "Learn about the rise and fall of the onjcmd Java debugger feature, from its inception to its eventual removal."

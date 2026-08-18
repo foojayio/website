@@ -1,6 +1,5 @@
 ---
 title: "Start using Java 21 in your apps on Open Liberty 23.0.0.10"
-slug: "start-using-java-21"
 date: "2023-10-23T08:39:06+00:00"
 lastmod: "2023-10-23T08:41:14+00:00"
 description: "Java 21, including virtual threads, is finally here! And you can try it all out now on Open Liberty 23.0.0.10 for free."
@@ -23,7 +22,7 @@ frozen: false
 
 [Open Liberty](https://openliberty.io/?utm_source=foojay&utm_medium=news&utm_content=java21) is a developer-friendly, fast, modular Java application runtime for the cloud. The Open Liberty project began six years ago when [IBM open-sourced](https://openliberty.io/blog/2017/09/19/open-sourcing-liberty.html?utm_source=foojay&utm_medium=news&utm_content=java21) the Liberty Java runtime. IBM's commercial Java runtime, WebSphere Liberty, is built from the Open Liberty project. You can use Open Liberty for free though.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-102813" src="OL_logo_green_on_white-700x120.png" alt="Open Liberty logo" width="700" height="120">
+{{< img src="OL_logo_green_on_white-700x120.png" class="size-medium" alt="Open Liberty logo" width="700" height="120" >}}
 
 In this release of Open Liberty, in addition to support for Java 21, we also have an update to Liberty's `featureUtility` command, which you use to install modular features in the core Liberty runtime; the command now verifies feature authenticity by default when you install a new feature into Liberty.
 

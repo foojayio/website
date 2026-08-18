@@ -1,6 +1,5 @@
 ---
 title: "Java on Azure Tooling Update – September 2022"
-slug: "java-on-azure-tooling-update-september-2022"
 date: "2022-10-17T09:25:59+00:00"
 lastmod: "2022-10-18T08:58:48+00:00"
 description: "In this update, we will introduce the Azure Cosmos DB Support, the Azure Virtual Machine Enhancement, and Azure SDK Reference Book updates."

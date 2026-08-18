@@ -1,6 +1,5 @@
 ---
 title: "Announcing \"Java Unscripted: An Asynchronous Exploration of Excellence"
-slug: "announcing-java-unscripted-an-asynchronous-exploration-of-excellence"
 date: "2023-05-16T10:09:48+00:00"
 lastmod: "2023-05-16T10:12:19+00:00"
 description: "\"Java Unscripted\" is an exciting interview series featuring insights from Java industry luminaries. Join us as we explore their journeys, sharing wisdom to inspire and guide the next generation of developers."
@@ -45,9 +44,7 @@ The interviews will be conducted asynchronously via **email** or **Slack** , wit
 
 ### **We'd be thrilled to have you if you're interested in contributing to this series. Please fill out this Google Form to provide some basic information and preferences for the interview process:[Interview Participation Form](https://forms.gle/DsC9hN424sCPicgM8)**
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-847x1024.png" alt="" class="wp-image-98319" width="629" height="760">
-</figure>
+{{< img src="image-847x1024.png" class="size-large is-resized" width="629" height="760" >}}
 
 We eagerly look forward to hearing from you.   
 

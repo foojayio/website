@@ -1,6 +1,5 @@
 ---
 title: "Python \"magic\" methods - part 1"
-slug: "python-magic-methods-part-1"
 date: "2023-11-03T09:08:42+00:00"
 lastmod: "2023-11-03T09:18:37+00:00"
 description: "Java was the first language I used professionally and is the scale by which I measure other languages I learned afterward. Hence, Python feels a bit weird because of its dynamic typing approach."

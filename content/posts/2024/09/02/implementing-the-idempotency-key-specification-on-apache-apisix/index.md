@@ -1,6 +1,5 @@
 ---
 title: "Implementing the Idempotency-Key specification on Apache APISIX"
-slug: "implementing-the-idempotency-key-specification-on-apache-apisix"
 date: "2024-09-02T20:58:24+00:00"
 lastmod: "2024-09-02T20:58:25+00:00"
 description: "A simple implementation of the Idempotency-Key header specification on Apache APISIX via a plugin."

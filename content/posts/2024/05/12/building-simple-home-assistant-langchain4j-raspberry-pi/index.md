@@ -1,6 +1,5 @@
 ---
 title: "Building a Simple Home Assistant using Langchain4j and Raspberry Pi"
-slug: "building-simple-home-assistant-langchain4j-raspberry-pi"
 date: "2024-05-12T05:31:16+00:00"
 lastmod: "2024-05-12T05:31:18+00:00"
 description: "Discover how to build a smart home assistant using Langchain4j and Raspberry Pi, featuring capabilities such as question-answering with RAG, integrating external APIs, controlling smart devices, and utilizing camera and multimodal functionalities."
@@ -16,7 +15,7 @@ related_posts:
   - "spring-ai-how-to-write-genai-applications-with-java"
   - "quick-start-with-machine-learning-in-java"
   - "predicting-secure-java-projects-on-maven-central"
-  - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

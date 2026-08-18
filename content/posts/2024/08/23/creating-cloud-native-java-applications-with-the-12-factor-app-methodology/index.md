@@ -1,6 +1,5 @@
 ---
 title: "Creating 12-factor cloud-native Java apps with open source"
-slug: "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 date: "2024-08-23T05:30:51+00:00"
 lastmod: "2024-09-05T07:46:26+00:00"
 description: "Learn how you could create cloud-native Java apps that are portable, scalable, and reliable with the 12 factor app methodology."

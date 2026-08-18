@@ -1,6 +1,5 @@
 ---
 title: "Is OpenJDK Just a Drop-In Replacement?"
-slug: "is-openjdk-just-a-drop-in-replacement"
 date: "2023-08-18T07:58:02+00:00"
 lastmod: "2024-06-30T11:20:57+00:00"
 description: "What are the pitfalls in replacing OracleJDK with OpenJDK? Simon Ritter has some interesting observations in his free new book."

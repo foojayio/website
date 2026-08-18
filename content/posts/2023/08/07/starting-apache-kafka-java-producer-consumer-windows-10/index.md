@@ -1,6 +1,5 @@
 ---
 title: "Starting Apache Kafka on Java 8, Win 10"
-slug: "starting-apache-kafka-java-producer-consumer-windows-10"
 date: "2023-08-07T09:39:39+00:00"
 lastmod: "2023-08-07T09:40:48+00:00"
 description: "Learn how to configure Kafka topics and create a Java-based Kafka Consumer and Producer, withApache Kafka v3.4 on Windows 10."

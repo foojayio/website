@@ -1,6 +1,5 @@
 ---
 title: "Why the JVM Is a Brilliant Platform for New Programming Languages"
-slug: "why-the-jvm-is-a-brilliant-platform-for-new-programming-languages"
 date: "2020-09-09T05:07:34+00:00"
 lastmod: "2020-09-11T10:43:40+00:00"
 description: "The capability of the JVM to overcome problems related to hardware and operating systems is why we're seeing inventions of new languages on top of the JVM."
@@ -12,9 +11,9 @@ categories:
 tags:
 related_posts:
   - "java-panama-polyglot-part-3"
+  - "idempotent-spring-boot-starter"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "jurassic-jdk-migrate-or-extinct"
-  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 frozen: false
 ---
 

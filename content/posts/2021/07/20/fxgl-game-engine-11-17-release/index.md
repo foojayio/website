@@ -1,6 +1,5 @@
 ---
 title: "Announcement: FXGL Game Engine 11.17 Release"
-slug: "fxgl-game-engine-11-17-release"
 date: "2021-07-20T11:23:27+00:00"
 lastmod: "2021-07-20T11:23:29+00:00"
 description: "The FXGL game engine is now at 11.17. Most of the changes in this release focus on internal code quality and fixes."

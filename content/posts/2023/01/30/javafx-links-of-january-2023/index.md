@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of January 2023"
-slug: "javafx-links-of-january-2023"
 date: "2023-01-30T09:14:33+00:00"
 lastmod: "2023-02-03T07:15:30+00:00"
 description: "2023 has taken of with a flying start! Here is a summary of the Links Of The Week that were published in January on jfx-central.com."

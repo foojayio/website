@@ -1,6 +1,5 @@
 ---
 title: "Useful Hotspot JVM Options for Today: Heap Sizing"
-slug: "useful-jvm-options-heap-sizing"
 date: "2020-09-14T16:37:30+00:00"
 lastmod: "2020-09-15T14:41:11+00:00"
 description: "The HotSpot JVM has a lot of options available. I have summed up here some of the most useful JVM options in the context of heap sizing."

@@ -1,6 +1,5 @@
 ---
 title: "Building gdocweb with Java 21, Spring Boot 3.x and Beyond"
-slug: "building-gdocweb-with-java-21-spring-boot-3-x-and-beyond"
 date: "2024-01-30T12:40:00+00:00"
 lastmod: "2024-01-30T12:54:57+00:00"
 description: "Explore the journey of building gdocweb: a developer's insight into choosing Java 21, Spring Boot 3.x, and navigating tech stack challenges."

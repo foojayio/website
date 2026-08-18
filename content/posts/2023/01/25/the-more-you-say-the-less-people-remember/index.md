@@ -1,6 +1,5 @@
 ---
 title: "\"The More You Say, the Less People Remember..."
-slug: "the-more-you-say-the-less-people-remember"
 date: "2023-01-25T07:56:39+00:00"
 lastmod: "2023-06-29T06:38:17+00:00"
 description: "…The Fewer the Words, the Greater the Profit.” And more wisdom and insight from Peter Lawrey, covering a range of development approaches."

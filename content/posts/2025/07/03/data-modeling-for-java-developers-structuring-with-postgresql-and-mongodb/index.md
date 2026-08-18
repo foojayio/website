@@ -1,6 +1,5 @@
 ---
 title: "Data Modeling for Java Developers: Structuring With PostgreSQL and MongoDB"
-slug: "data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb"
 date: "2025-07-03T21:02:16+00:00"
 lastmod: "2025-07-03T21:03:28+00:00"
 description: "Application and system designs have always been considered the most essential step in application development. All the later steps and technologies to be - by Aasawari Sahasrabuddhe"
@@ -152,7 +151,7 @@ Depending on the modelling technique chosen, the documents inside in the collect
 {
   _id: ObjectId("60d5ec9f4b1a8e2a1c8f7a1"), 
   name: "J.K. Rowling",
-  email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cecfd6cbd3c8cdcac3e4c1dcc5c9d4c8c18ac7cbc9">[email protected]</a>",
+  email: "[email protected]",
   nationality: "British",
   books: [
     ObjectId("60d5ec9f4b1a8e2a1c8f7a2"), 

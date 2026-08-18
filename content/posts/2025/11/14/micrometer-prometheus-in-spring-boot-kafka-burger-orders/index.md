@@ -1,6 +1,5 @@
 ---
 title: "Micrometer & Prometheus in Spring Boot: Kafka Burger Orders"
-slug: "micrometer-prometheus-in-spring-boot-kafka-burger-orders"
 date: "2025-11-14T10:13:03+00:00"
 lastmod: "2025-11-14T10:13:04+00:00"
 description: "Learn Micrometer and Prometheus in Spring Boot by building a Kafka Burger Orders app that emits metrics. Step-by-step guide with code and takeaways."
@@ -21,9 +20,9 @@ categories:
 tags:
 related_posts:
   - "spring-boot-kafka-streams-event-routing-testing"
+  - "idempotent-spring-boot-starter"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 frozen: false
 ---
 
@@ -73,12 +72,11 @@ This pattern is common: REST → Kafka → Consumer → Metric. Spring Kafka mak
 
 🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪⚪  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-121484" class="size-medium wp-image-121484" src="spring-init-1-700x404.png" alt="Spring initializer for Micrometer &amp; Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="404">
+{{< img src="spring-init-1-700x404.png" class="size-medium" alt="Spring initializer for Micrometer & Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="404" >}}
 
 Spring initializer for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121484}
 
-1) Expose a Counter with Tags (Micrometer)
-------------------------------------------
+## 1) Expose a Counter with Tags (Micrometer)
 
 ```java
 package com.vv.burger.config;
@@ -114,8 +112,7 @@ public class MetricsConfig {
 
 🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪⚪
 
-2) REST Controller → Produce to Kafka
--------------------------------------
+## 2) REST Controller → Produce to Kafka
 
 ```java
 package com.vv.burger.controller;
@@ -189,8 +186,7 @@ public class OrderController {
 
 🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪⚪
 
-3) Kafka Consumer → Count "DukeBurger"
---------------------------------------
+## 3) Kafka Consumer → Count "DukeBurger"
 
 ```java
 package com.vv.burger.consumer;
@@ -284,8 +280,7 @@ public class ConsumerApp {
 
 🔵🔵🔵🔵🔵🔵🔵🔵⚪⚪⚪⚪
 
-4) Avro Bytes → Object (utility)
---------------------------------
+## 4) Avro Bytes → Object (utility)
 
 ```java
 package com.vv.burger.consumer;
@@ -342,7 +337,12 @@ management:
 
 1. **Build the image** : `docker build -t my-spring-boot-app:latest .`
 2. **Run the app** : `docker-compose up -d`
-3. **Create the topic:** <http://localhost:8080/ui/clusters/local/all-topics/create-new-topic> named `burger.orders`
+3. **Create the topic:** <http://localhost:8080/ui/clusters/local/all-topics/create-new-topic> named
+
+```
+burger.orders
+```
+
 4. **Send a few orders:**
    * `curl -X POST "http://localhost:8080/orders?burger=DukeBurger`
    * `curl -X POST "http://localhost:8080/orders?burger=Veggie`
@@ -350,7 +350,7 @@ management:
 5. **Check metrics:** open `http://localhost:8080/actuator/prometheus` and search for `events_DukeBurger_total`. You should see it increase after each "DukeBurger" consumed.
 6. **Check in JMC:** Connect [JMC](https://www.oracle.com/java/technologies/javase/products-jmc9-downloads.html) to your app and In JMC; open **MBean Browser** (left pane); Expand the **`metric `; Navigate to the counter** `events_DukeBurger_total`; Click it → **Attributes** tab → read **`Count`;** You should see it increase after each "DukeBurger" consumed.
 
-<img decoding="async" aria-describedby="caption-attachment-121487" class="size-medium wp-image-121487" src="jmc-1-700x350.png" alt="JMC for Micrometer &amp; Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="350">
+{{< img src="jmc-1-700x350.png" class="size-medium" alt="JMC for Micrometer & Prometheus in Spring Boot: Kafka Burger Orders" width="700" height="350" >}}
 
 JMC for Micrometer \& Prometheus in Spring Boot: Kafka Burger Orders{#caption-attachment-121487}
 

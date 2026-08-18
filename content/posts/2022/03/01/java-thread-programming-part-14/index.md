@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 14)"
-slug: "java-thread-programming-part-14"
 date: "2022-03-01T12:03:03+00:00"
 lastmod: "2022-03-03T09:02:16+00:00"
 description: "What happens if the child-task creates more tasks and the parent-task waits for the child-tasks to finish in TheadPool in java."
@@ -88,7 +87,11 @@ Then we created a **Callable** with a lambda expression and passed it to the thr
 
 As we know, fibonacci series is - 0, 1,1, 2,3,5,8....
 
-Which is mathmatically- `f(n) = f(n-1) + f(n-2)`
+Which is mathmatically-
+
+```
+f(n) = f(n-1) + f(n-2)
+```
 
 We usually use recursion for that. We know recursion must have a base case; over here, it is - if the n is less than 2, then we return n.
 
@@ -112,7 +115,7 @@ With the above code, how many tasks will be created?
 
 The recursion tree will look like this.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-52494" src="Screen-Shot-2022-02-26-at-10.05.20-AM-493x510.png" alt="" width="493" height="510">
+{{< img src="Screen-Shot-2022-02-26-at-10.05.20-AM-493x510.png" class="size-medium" width="493" height="510" >}}
 
 We count that we will have 15 tasks. The top task, which is 5, will create two new tasks and wait for them to finish.
 
@@ -125,7 +128,11 @@ We could have solved this problem if we had more thread in the pool.
 Interestingly if we use CachedThreadPool, the problem goes away,
 
 ```
+
+```java
 var threadPool = Executors.newCachedThreadPool();
+```
+
 ```
 
 Because CachedThreadPool creates a thread on the fly whenever it requires one. The only caveat is that we cannot create unlimited threads. If we want to calculate the Fibonacci number of a large number, we will have more tasks, and more threads will be waiting.
@@ -134,7 +141,9 @@ So it's a genuine problem. And we concluded that a thread while performing a tas
 
 However, when there is a problem, there is a solution. Precisely for this sort of problem, we have a unique factory method in Executors---
 
-`var threadPool = Executors.newWorkStealingPool();`
+```java
+var threadPool = Executors.newWorkStealingPool();
+```
 
 This method returns an instance of ForkJoinPool. This pool allows its threads to create new tasks and suspend their current tasks when they wait for their child tasks to finish.
 

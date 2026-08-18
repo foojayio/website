@@ -1,6 +1,5 @@
 ---
 title: "Command completion (..) in IntelliJ IDEA"
-slug: "command-completion-intellij-idea"
 date: "2026-01-20T07:31:35+00:00"
 lastmod: "2026-01-20T09:51:08+00:00"
 description: "Command completion (..) extends regular completion. It lets you discover and use IntelliJ IDEA features without having to remember shortcuts."

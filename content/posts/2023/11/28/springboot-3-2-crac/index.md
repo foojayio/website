@@ -1,6 +1,5 @@
 ---
 title: "SpringBoot 3.2 + CRaC"
-slug: "springboot-3-2-crac"
 date: "2023-11-28T13:04:41+00:00"
 lastmod: "2024-02-06T12:23:02+00:00"
 description: "To test the new support for CRaC in SpringBoot 3.2, let's use the SpringBoot Petclinic demo."

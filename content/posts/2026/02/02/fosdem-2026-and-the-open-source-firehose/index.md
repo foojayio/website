@@ -1,6 +1,5 @@
 ---
 title: "FOSDEM 2026: Open Source Supply Chains, CRA Compliance, and the Future of Software"
-slug: "fosdem-2026-and-the-open-source-firehose"
 date: "2026-02-02T22:52:20+00:00"
 description: "Is open source hitting a watershed moment? After 8,000 developers converged for FOSDEM 2026, it’s clear that legal obligations and supply chain security are rewriting the rules. Discover why the hardest problems are no longer technical—they’re about how we sustain and secure the software we ship."
 authors:

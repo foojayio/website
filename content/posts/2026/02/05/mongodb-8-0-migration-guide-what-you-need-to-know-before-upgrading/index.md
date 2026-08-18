@@ -1,6 +1,5 @@
 ---
 title: "MongoDB 8.0 Migration Guide: What You Need to Know Before Upgrading"
-slug: "mongodb-8-0-migration-guide-what-you-need-to-know-before-upgrading"
 date: "2026-02-05T14:56:13+00:00"
 lastmod: "2026-02-05T14:56:15+00:00"
 description: "Have you ever wondered why updates and upgrades are so essential for any system? Well, it’s no secret: They ensure that systems remain relevant and efficient. With MongoDB, it’s no different. Whenever we think about updating, we seek efficiency, security, performance, and other benefits that come with updated systems. However, every update introduces changes that need to be carefully managed. In this article, we will cover some of the new features of MongoDB version 8.0 and highlight the key considerations you should take into account before migrating to this new version."
@@ -273,9 +272,7 @@ To ensure a safe update and mitigate risks, it is essential to work with a testi
 
 #### Update the staging cluster to MongoDB 8.0 to test the new version and its features. To do this, simply click on the cluster and select "Edit Configuration" and "Additional Settings":
 
-<figure class="aligncenter size-full is-resized">
- <img loading="lazy" decoding="async" width="592" height="223" src="Screenshot-2025-12-30-at-10.26.38-PM.png" alt="" class="wp-image-122190" style="width:592px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-30-at-10.26.38-PM.png" class="aligncenter size-full is-resized" width="592" height="223" style="width:592px;height:auto" >}}
 
 4. **Test your application**
 

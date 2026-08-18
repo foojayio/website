@@ -1,6 +1,5 @@
 ---
 title: "Improve Your Java Applications’ Startup and Compilation Speed with Optimizer Hub"
-slug: "improve-your-java-applications-startup-and-compilation-speed-with-optimizer-hub"
 date: "2025-06-27T09:35:31+00:00"
 lastmod: "2025-07-07T08:11:49+00:00"
 description: "This is the fourth blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to the first - by Frank Delporte"

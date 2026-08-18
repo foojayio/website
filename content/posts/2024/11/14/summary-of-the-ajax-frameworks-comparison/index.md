@@ -1,6 +1,5 @@
 ---
 title: "Summary of the AJAX Frameworks Comparison"
-slug: "summary-of-the-ajax-frameworks-comparison"
 date: "2024-11-14T11:35:50+00:00"
 lastmod: "2024-11-15T11:23:56+00:00"
 description: "In previous weeks, I've analyzed several libraries and frameworks that augment the client with AJAX capabilities."

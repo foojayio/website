@@ -1,6 +1,5 @@
 ---
 title: "Payara Launches Jakarta EE 10 Platform Compatible Product"
-slug: "payara-launches-jakarta-ee-10-platform-compatible-product"
 date: "2022-09-22T16:05:19+00:00"
 lastmod: "2022-09-22T16:05:21+00:00"
 description: "With the launch of Jakarta EE 10 today, Payara releases Payara 6 Community Alpha 4 immediately, bringing new features!"
@@ -24,9 +23,7 @@ frozen: false
 
 [Payara is one of the few vendors to have a product certified against the Jakarta EE 10 Platform on the launch day.](https://jakarta.ee/compatibility/certification/10/) Payara 6 Enterprise will follow in Q1, 2023, bringing the future of Jakarta EE to those using Payara's enterprise product.  
 
-<figure class="alignright size-thumbnail">
- <img fetchpriority="high" decoding="async" width="300" height="260" src="MicrosoftTeams-image-57-1-300x260.jpg" alt="" class="wp-image-60085">
-</figure>
+{{< img src="MicrosoftTeams-image-57-1-300x260.jpg" class="alignright size-thumbnail" width="300" height="260" >}}
 
 ***"With the release of Jakarta EE 10, Jakarta EE - formerly Java EE - continues to lead the way in application development for enterprise, cloud native Java applications. Payara Server is proud to support reliable and secure deployments of Jakarta EE apps in any environment. Being a member of the Eclipse Foundation, and a Strategic Member of the Jakarta EE Working Group, Payara continuously contributes to the Jakarta EE initiative and is pleased to welcome this next stage",*emphasized Payara CEO and Founder Steve Millidge.**
 

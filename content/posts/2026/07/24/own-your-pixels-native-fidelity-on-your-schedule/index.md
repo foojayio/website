@@ -10,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
   - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
-  - "native-linux-apple-watch-a-game-builder-and-crash-protection"
 frozen: false
 ---
 

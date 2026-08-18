@@ -1,6 +1,5 @@
 ---
 title: "MongoDB Sharding: What to Know Before You Shard a Collection"
-slug: "mongodb-sharding-what-to-know-before-you-shard"
 date: "2026-02-12T16:47:52+00:00"
 lastmod: "2026-02-12T16:47:54+00:00"
 description: "When we think about a system that operates at scale, we are usually talking about an application that needs to serve millions of users. This often happens when an application suddenly becomes popular and usage grows much faster than expected. As more people start using it, the system naturally begins to struggle to keep up with the load."

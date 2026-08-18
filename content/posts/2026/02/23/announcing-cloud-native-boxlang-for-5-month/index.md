@@ -1,6 +1,5 @@
 ---
 title: "Announcing Cloud-Native BoxLang for $5/Month"
-slug: "announcing-cloud-native-boxlang-for-5-month"
 date: "2026-02-23T16:39:44+00:00"
 lastmod: "2026-02-25T12:38:06+00:00"
 description: "TL;DR: We just released a production-ready starter template that deploys a modern BoxLang application to DigitalOcean App Platform in under 5 - by Cristobal Escobar"
@@ -14,10 +13,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
-  - "intro-to-the-boxlang-formatter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Exploring the Depths of Java: A Comprehensive Conversation with Jakob Jenkov, Part-II"
-slug: "exploring-the-depths-of-java-a-comprehensive-conversation-with-jakob-jenkov-part-ii"
 date: "2023-07-05T16:21:30+00:00"
 lastmod: "2023-07-05T16:21:31+00:00"
 description: "Explore the first part of our in-depth interview with Jakob Jenkov, an experienced Java developer and AWS solution architect, as he shares his insights on the past, present, and future of Java."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="jekov.jpeg" alt="" class="wp-image-98946" width="400" height="400">
-</figure>
+{{< img src="jekov.jpeg" class="alignright size-full is-resized" width="400" height="400" >}}
 
 Welcome back to the second installment of our in-depth conversation with Jakob Jenkov, a leading figure in the world of Java. If you joined us for[Part I](https://foojay.io/today/exploring-the-depths-of-java-a-comprehensive-conversation-with-jakob-jenkov-part-i/), you'll recall the insightful discussions around the evolving landscape of Java and its continuous improvements. Today, we delve even deeper into the subject. Jakob will share his thoughts on the challenges of modern software development, the impacts of artificial intelligence on developers, and much more. Get ready for another fascinating exploration into the depths of Java with Jakob Jenkov!
 

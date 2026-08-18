@@ -1,6 +1,5 @@
 ---
 title: "Shaping Jakarta Agentic AI Together"
-slug: "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
 date: "2026-03-02T11:15:46+00:00"
 lastmod: "2026-03-02T11:15:48+00:00"
 description: "Watch the Jakarta Agentic AI open conversation recording and learn how the community is shaping early thinking on agent-based AI in the Jakarta ecosystem."
@@ -18,8 +17,8 @@ tags:
 related_posts:
   - "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
   - "boost-developer-productivity-with-payara-server-maven-plugin-ai-agent"
+  - "jakarta-agentic-ai-hits-its-first-milestone"
   - "whats-new-in-the-july-2026-azul-payara-release"
-  - "jurassic-jdk-migrate-or-extinct"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "The 5 Knights of the MCP Apocalypse 😱"
-slug: "the-5-knights-of-the-mcp-apocalypse"
 date: "2025-12-09T15:55:41+00:00"
 lastmod: "2025-12-09T16:41:19+00:00"
 description: "AI MCP is awesome to connect our Agents to real time data, but also open a dangerous door to security threats"

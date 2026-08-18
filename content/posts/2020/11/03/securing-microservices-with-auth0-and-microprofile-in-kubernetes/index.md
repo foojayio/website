@@ -1,6 +1,5 @@
 ---
 title: "Securing Microservices with Auth0 and MicroProfile in Kubernetes"
-slug: "securing-microservices-with-auth0-and-microprofile-in-kubernetes"
 date: "2020-11-03T15:38:00+00:00"
 lastmod: "2021-07-05T20:07:28+00:00"
 description: "This presentation by Ondrej Mihalyi at DevOpsCon showcases the strength of combining MicroProfile and an OAuth service."

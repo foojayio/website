@@ -1,6 +1,5 @@
 ---
 title: "Writing C Code in Java"
-slug: "writing-c-code-in-java"
 date: "2023-12-20T09:21:56+00:00"
 lastmod: "2023-12-20T09:21:57+00:00"
 description: "The Foreign Function & Memory API (also called Project Panama) has come a long way since it started."

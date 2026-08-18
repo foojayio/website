@@ -1,6 +1,5 @@
 ---
 title: "foojay – Documentation as Code with AsciiDoctor, GitLab CI, and GitLab Pages"
-slug: "documentation-as-code-with-asciidoctor-gitlab-ci-and-gitlab-pages"
 date: "2026-01-19T06:00:00+00:00"
 description: "Writing documentation should be as low-key as possible to remove the pain from the process. One way to achieve this is through Documentation as Code. Setting it up and configuring it may take some time, but once it's done, you can focus on creating the content itself."
 canonical: "https://jensknipper.de/blog/gitlab-ci-pages-asciidoc-documentation-as-code/"

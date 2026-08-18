@@ -1,6 +1,5 @@
 ---
 title: "Tips on High Performance Rendering in JavaFX"
-slug: "high-performance-rendering-in-javafx"
 date: "2021-01-18T09:07:52+00:00"
 lastmod: "2021-01-26T13:30:59+00:00"
 description: "Different rendering techniques in JavaFX using Canvas API, AWT Graphics2D, PixelBuffer and PixelBuffer GPU."
@@ -13,10 +12,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-  - "foojay-podcast-83"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "From Assembler to Chat-GPT: Steve Poole on the Shifting Landscape of Programming"
-slug: "from-assembler-to-chat-gpt-steve-poole-on-the-shifting-landscape-of-programming"
 date: "2023-03-20T11:56:20+00:00"
 lastmod: "2023-03-21T11:35:42+00:00"
 description: "Discover insights from seasoned Java developer Steve Poole on the ever-evolving software landscape, career growth, and lessons learned throughout his remarkable journey in the tech industry."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-4-921x1024.png" alt="" class="wp-image-63004" width="461" height="512">
-</figure>
+{{< img src="image-4-921x1024.png" class="alignright size-large is-resized" width="461" height="512" >}}
 
 Welcome to our exclusive interview with [Steve Poole](https://www.linkedin.com/in/noregressions/), a seasoned Java developer, leader, and evangelist with a lot of experience in the tech industry.
 
@@ -156,9 +153,7 @@ For weeks and weeks, we tried different things to capture the problem until some
 
 Unfortunately, we just made assumptions before we'd even started about the problem - rather than stepping back and understanding the situation, we just allowed a rogue screen saver to eat all the CPU right in front of us! That taught me a great deal about how to really diagnose problems and avoid pre-emptive guessing and assumptions.  
 
-<figure class="alignright size-full is-resized">
- <img decoding="async" src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.png" alt="" class="wp-image-63020" width="256" height="256">
-</figure>
+{{< img src="3750862963_A_group_of_developers_gathered_around_a_computer__laughing_as_they_discover_the_cause_of_their_netwo.png" class="alignright size-full is-resized" width="256" height="256" >}}
 
 **Editor's note:** *Steve's anecdote emphasizes the importance of thorough diagnosis and avoiding assumptions when tackling problems. This lesson highlights the need to step back, understand the situation, and remain open to possibilities, which is applicable across various problem-solving contexts.*
 

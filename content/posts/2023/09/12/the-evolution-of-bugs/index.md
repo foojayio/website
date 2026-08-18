@@ -1,6 +1,5 @@
 ---
 title: "The Evolution of Bugs"
-slug: "the-evolution-of-bugs"
 date: "2023-09-12T03:34:48+00:00"
 lastmod: "2023-09-28T07:07:52+00:00"
 description: "Unlock the secrets of debugging in software development. Dive deep into state bugs, thread issues, race conditions, and performance pitfalls."

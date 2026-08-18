@@ -1,6 +1,5 @@
 ---
 title: "Sustainable Software Engineering: Input Requested!"
-slug: "sustainable-software-engineering-input-requested"
 date: "2024-08-21T09:49:20+00:00"
 lastmod: "2024-08-21T09:51:22+00:00"
 description: "Since about a year ago, the Foojay community has a group of people that are working on a book with tips and information on Sustainable Software Engineering."
@@ -35,7 +34,7 @@ ven you or your organization does not do anything, we still want to ask you to f
 
 [
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-114041" src="itsustainability-630x510.png" alt="" width="630" height="510">
+{{< img src="itsustainability-630x510.png" class="size-medium" width="630" height="510" >}}
 
 ](https://opnform.com/forms/it-sustainability-goals-ewq3yc)
 

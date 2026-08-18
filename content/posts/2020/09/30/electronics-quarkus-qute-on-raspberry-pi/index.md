@@ -1,6 +1,5 @@
 ---
 title: "Electronics & Quarkus Qute on Raspberry Pi"
-slug: "electronics-quarkus-qute-on-raspberry-pi"
 date: "2020-09-30T08:07:13+00:00"
 lastmod: "2021-12-10T13:02:15+00:00"
 description: "Igor De Souza has set up an interesting experiment in which he combines a LED number display with the Raspberry Pi and Quarkus."
@@ -26,9 +25,7 @@ The "Hello World" version of electronics programming is a blinking LED. But, in 
 
 We will do this by taking a closer look at one of the projects in the list "[Spectacular Java Projects on the Raspberry Pi](https://foojay.io/blog/spectacular-java-projects-on-the-raspberry-pi/)".  
 
-<figure class="alignleft size-thumbnail is-resized">
- <img decoding="async" src="led-number-display-300x260.jpg" alt="" class="wp-image-35408" width="99" height="86">
-</figure>
+{{< img src="led-number-display-300x260.jpg" class="alignleft size-thumbnail is-resized" width="99" height="86" >}}
 
 [Igor De Souza](https://twitter.com/Igfasouza), Dublin based Principal Big Data Consultant at Oracle, set up an interesting experiment in which he combines a LED number display with the Raspberry Pi and Quarkus.
 

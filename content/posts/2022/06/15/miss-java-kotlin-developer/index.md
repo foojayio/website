@@ -1,6 +1,5 @@
 ---
 title: "What I Miss in Java, the Perspective of a Kotlin Developer"
-slug: "miss-java-kotlin-developer"
 date: "2022-06-15T08:15:34+00:00"
 lastmod: "2022-06-15T08:17:07+00:00"
 description: "I miss some features in Java that would improve my code's readability, expressiveness, and maintainability."

@@ -1,6 +1,5 @@
 ---
 title: "Make the life of your developer client's easier with smart builders"
-slug: "make-the-life-of-your-developer-clients-easier-with-smart-builders"
 date: "2025-01-09T11:49:51+00:00"
 lastmod: "2025-01-16T08:35:27+00:00"
 description: "We often hear the phrase \"Make the life of your client easier\". But, what about the developers? Make the life of your developer client's easier with smart builders."
@@ -15,7 +14,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -155,7 +154,7 @@ public class NotificationProgram {
         Notification notification = new Notification();
         notification.setTitle("New message");
         notification.setMessage("Hello, world!");
-        notification.setRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58f8a8d8b818a80a5969c96918088cb868a88">[email protected]</a>");
+        notification.setRecipient("[email protected]");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -259,7 +258,7 @@ Let's update the `NotificationProgram` that creates a `Notification` object:
 public class NotificationProgram {
 
     public static void main(String[] args) {
-        Notification notification = new Notification("New message", "Hello, world!", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c8cdcaccc6cdc7e2d1dbd1d6c7cf8cc1cdcf">[email protected]</a>");
+        Notification notification = new Notification("New message", "Hello, world!", "[email protected]");
         notification.setHighPriority(true);
         notification.setType(Notification.Type.INFO);
         notification.setAttachment("/path/to/attachment.txt");
@@ -360,7 +359,7 @@ public class NotificationProgram {
         Notification notification = new Notification(
                 "New message",
                 "Hello, world!",
-                "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="12787d7a7c767d7752616b6166777f3c717d7f">[email protected]</a>",
+                "[email protected]",
                 true,
                 Notification.Type.INFO,
                 "/path/to/attachment.txt");
@@ -450,13 +449,13 @@ public class NotificationProgram {
                 new Notification(
                         "New message",
                         "Hello, world!",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0e5e2e4eee5efcaf9f3f9feefe7a4e9e5e7">[email protected]</a>");
+                        "[email protected]");
 
         var notificationWithCustomOptionalValues =
                 new Notification(
                         "Another message",
                         "Oh no! Something wrong happened",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0b5b2b4beb5bf9aa9a3a9aebfb7f4b9b5b7">[email protected]</a>",
+                        "[email protected]",
                         true,
                         Notification.Type.ERROR,
                         "/path/to/attachment.txt");
@@ -546,14 +545,14 @@ public class NotificationProgram {
                         Notification.Type.GENERAL,
                         "General Notification",
                         "This is a general notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8fe5e0e7e1ebe0eacffcf6fcfbeae2a1ece0e2">[email protected]</a>");
+                        "[email protected]");
 
         var highPrioryInfoNotification = Notification
                 .createHighPriorityNotification(
                         Notification.Type.INFO,
                         "High Priority Info Notification",
                         "This is a high priority info notification",
-                        "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef858087818b808aaf9c969c9b8a82c18c8082">[email protected]</a>");
+                        "[email protected]");
     }
 }
 ```
@@ -690,7 +689,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f454047414b404a6f5c565c5b4a42014c4042">[email protected]</a>")
+                .recipient("[email protected]")
                 .build();
 
         // do something with generalNotification
@@ -698,7 +697,7 @@ public class NotificationProgram {
         var highPriorityInfoNotificationWithAttachment = Notification.builder()
                 .title("Hello")
                 .message("Hello World")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="22484d4a4c464d4762515b5156474f0c414d4f">[email protected]</a>")
+                .recipient("[email protected]")
                 .type(Type.INFO)
                 .highPriority(true)
                 .attachment("attachment.pdf")
@@ -721,7 +720,7 @@ Before to add the builder solution in the `Notification` class, developers whose
 public class NotificationProgram {
     public static void main(String[] args) {
         var anotherNotification = Notification.builder()
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cdc8cfc9c3c8c2e7d4ded4d3c2ca89c4c8ca">[email protected]</a>")
+                .recipient("[email protected]")
                 .build();
     }
 }
@@ -1026,7 +1025,7 @@ public class NotificationProgram {
         var generalNotification = Notification.builder()
                 .title("Another title")
                 .message("Another message")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea4a1a6a0aaa1ab8ebdb7bdbaaba3e0ada1a3">[email protected]</a>")
+                .recipient("[email protected]")
                 .build();
 
         // do something with generalNotification
@@ -1034,7 +1033,7 @@ public class NotificationProgram {
         var highPriorityWarningNotification = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email protected]</a>")
+                .recipient("[email protected]")
                 .addMore()
                 .highPriority(true)
                 .type(Notification.Type.WARNING)
@@ -1045,7 +1044,7 @@ public class NotificationProgram {
         var highPriorityErrorNotificationWithAttachment = Notification.builder()
                 .title("Warning title")
                 .message("Attention people!")
-                .recipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d171215131912183d0e04091810531e1210">[email protected]</a>")
+                .recipient("[email protected]")
                 .addMore()
                 .type(Notification.Type.ERROR)
                 .attachment("error.log")

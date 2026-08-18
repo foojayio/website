@@ -1,6 +1,5 @@
 ---
 title: "Take the 2021 Jakarta EE Developer Survey"
-slug: "2021-jakarta-ee-developer-survey"
 date: "2021-04-26T07:47:29+00:00"
 lastmod: "2021-08-23T15:33:35+00:00"
 description: "Help to provide valuable insight into the state of the community ti better understand the top priorities for future Jakarta EE releases!"

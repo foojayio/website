@@ -1,6 +1,5 @@
 ---
 title: "Deploy a Multi-Datacenter Cassandra Cluster in Kubernetes"
-slug: "deploy-a-multi-datacenter-apache-cassandra-cluster-in-kubernetes-pt-1"
 date: "2022-08-10T08:27:59+00:00"
 lastmod: "2022-10-04T10:34:57+00:00"
 description: "Today let's examine different Kubernetes deployment patterns and show how to implement them using K8ssandra."

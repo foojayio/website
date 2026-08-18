@@ -1,6 +1,5 @@
 ---
 title: "TornadoVM: Code Interoperability Mode"
-slug: "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"
 date: "2023-05-11T07:54:04+00:00"
 lastmod: "2023-05-11T08:01:41+00:00"
 description: "Code Interoperability Mode enables TornadoVM to prototype kernels that run from multiple programming languages."
@@ -29,9 +28,7 @@ This blog outlines the key changes in TornadoVM to **enable code interoperabilit
 
 The following figure illustrates the code interoperability of the generated OpenCL kernels in TornadoVM.  
 
-<figure class="aligncenter is-resized">
- <img fetchpriority="high" decoding="async" src="TornadoVM-Code-Interoperability-Mode.png" alt="" class="wp-image-66385" width="512" height="180">
-</figure>
+{{< img src="TornadoVM-Code-Interoperability-Mode.png" class="aligncenter is-resized" width="512" height="180" >}}
 
 **Note:** The code interoperability is prototyped as a complementary mode[^\[1\]^](#_ftn1){#_ftnref1} to enable TornadoVM-generated kernels to be transferable for execution from other programming languages, beyond Java.
 

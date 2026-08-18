@@ -1,6 +1,5 @@
 ---
 title: "How Oracle Separates Java Pricing from Value"
-slug: "how-oracle-separates-java-pricing-from-value"
 date: "2024-03-15T14:00:25+00:00"
 lastmod: "2024-10-03T16:43:20+00:00"
 description: "Oracle deserves props for continuing to develop Java as an open-source platform, but its pricing model and licensing continues to drive users away. "

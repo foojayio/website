@@ -1,6 +1,5 @@
 ---
 title: "Native-image with Quarkus"
-slug: "native-image-quarkus"
 date: "2021-12-13T17:50:08+00:00"
 lastmod: "2021-12-13T17:50:09+00:00"
 description: "Quarkus brings an exciting take to the table. Unlike Micronaut, it doesn't generate additional bytecode during each compilation."
@@ -31,7 +30,7 @@ Just as Spring Boot and Micronaut, Quarkus provides options to create new projec
 1. A dedicated `quarkus` [CLI](https://quarkus.io/guides/cli-tooling)
 2. A [Web UI](https://code.quarkus.io/)
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-50950" src="code-quarkus-700x477.jpg" alt="" width="700" height="477">
+{{< img src="code-quarkus-700x477.jpg" class="aligncenter size-medium" width="700" height="477" >}}
 
    Quarkus offers a definite improvement over its competitors. Every dependency has a detailed contextual menu that allows:
    * Copying the command to add the dependency via `quarkus`
@@ -116,7 +115,7 @@ Micronaut integrates with many HTTP client flavors via plugins. In this project,
 
 Here's a glimpse into a subset of the Mutiny API:
 
-<img decoding="async" class="aligncenter size-medium wp-image-50951" src="mutiny-api-700x475.png" alt="" width="700" height="475">
+{{< img src="mutiny-api-700x475.png" class="aligncenter size-medium" width="700" height="475" >}}
 
 At first, I was not fond of Mutiny. I mean, we already have enough reactive clients: Project Reactor, RxJava2, etc.
 
@@ -213,7 +212,7 @@ Like its siblings, Quarkus offers its dedicated annotation for tests, `@QuarkusT
 
 But IMHO, the added value of Quarkus in a testing context lies in how it defines a reusable resource abstraction.
 
-<img decoding="async" class="aligncenter size-medium wp-image-50952" src="quarkus-test-api-700x166.png" alt="" width="700" height="166">
+{{< img src="quarkus-test-api-700x166.png" class="aligncenter size-medium" width="700" height="166" >}}
 
 With only one interface and one annotation, one can define a resource, *e.g.*, a mock server, start it before tests and stop it after. Let's do that:
 

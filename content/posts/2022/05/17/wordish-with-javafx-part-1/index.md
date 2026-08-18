@@ -1,6 +1,5 @@
 ---
 title: "Wordish with JavaFX - Part 1"
-slug: "wordish-with-javafx-part-1"
 date: "2022-05-17T10:13:21+00:00"
 lastmod: "2022-05-24T07:52:44+00:00"
 description: "Learn about the main UI layout of a cool JavaFX game using Scene Builder, TilePane, FlowPane, controller code, iOS and Android settings!"
@@ -17,7 +16,7 @@ related_posts:
   - "game-development-basics-with-fxgl"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
   - "custom-controls-in-javafx-part-i"
-  - "the-javafx-revival"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -54,19 +53,9 @@ We present this discussion in the following five parts:
 
 JavaFX typically uses FXML to describe a UI scene. FXML, an XML-based markup language, is well-suited to define a JavaFX scenegraph, since both have a hierarchical structure. [Scene Builder](https://gluonhq.com/products/scene-builder/), an open-source drag-and-drop tool, lets you build your view visually and produces FXML. Figure 2 shows the view we built using Scene Builder for the Wordish main application view, **wordish.fxml** and Figure 3 shows the layout containers that hold the scene graph. Let's start with the layout.
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="playgame1-308x510.png" alt="" class="wp-image-56004" width="308" height="510">
- <figcaption>
-  Figure 2. The wordish.fxml view.
- </figcaption>
-</figure>
+{{< img src="playgame1-308x510.png" class="is-resized" width="308" height="510" caption="Figure 2. The wordish.fxml view." >}}
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="scenebuilder-hierarchy.png" alt="" class="wp-image-56003" width="326" height="186">
- <figcaption>
-  Figure 3. Hierarchy view for wordish.fxml
- </figcaption>
-</figure>
+{{< img src="scenebuilder-hierarchy.png" class="is-resized" width="326" height="186" caption="Figure 3. Hierarchy view for wordish.fxml" >}}
 
 Part of the challenge of building a view is picking the best layout containers. Here, the root container is AnchorPane, as shown in Figure 3. This is the default container Scene Builder gives you. Its main feature is providing anchor points for child nodes when the user resizes the top window.
 
@@ -76,12 +65,7 @@ Under the AnchorPane, we have a VBox (vertical box), since our main scene consis
 
 The top three buttons and the title are in a three-column by two-row grid pane, as shown in Figure 4. The title is centered and spans all columns of the grid pane. We widen the title by inserting blanks between its letters. The action buttons are spread out by increasing the GridPane's Vgap property to 15.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="scenebuilder-gridpane.png" alt="" class="wp-image-56010" width="388" height="155">
- <figcaption>
-  Figure 4. GridPane Layout Control
- </figcaption>
-</figure>
+{{< img src="scenebuilder-gridpane.png" class="size-full is-resized" width="388" height="155" caption="Figure 4. GridPane Layout Control" >}}
 
 Note that the top action buttons have customized graphics. First, on the left, the *Replay* icon lets you play a new game. Next, in the middle, the *Information* icon displays the rules of Wordish. Finally, on the right, the *Bar Chart*icon displays the game and guess statistics for this session. We show how to configure the icon library in Part 2.
 
@@ -89,34 +73,19 @@ Note that the top action buttons have customized graphics. First, on the left, t
 
 Under the GridPane is the TilePane, as shown in Figure 5. TilePane arranges its child nodes in rows and columns, where each tile is the same size. This is perfect for our view, since the letter guess labels appear in equal-sized controls. We use the visual capabilities of Scene Builder to set the TilePane's properties: the Preferred Tile Width (55), Preferred Tile Height (50), Preferred Columns (5), and Preferred Rows (6). The Vgap and Hgap are both 5. Although you could use a GridPane here, the TilePane is easier to configure. You don't need to assign specific row and column numbers to the child nodes because the TilePane layout manager takes care of that for you.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="scenebuilder-tilepane.png" alt="" class="wp-image-56011" width="343" height="144">
- <figcaption>
-  Figure 5. TilePane Layout Control
- </figcaption>
-</figure>
+{{< img src="scenebuilder-tilepane.png" class="size-full is-resized" width="343" height="144" caption="Figure 5. TilePane Layout Control" >}}
 
 ### **FlowPane**
 
 We build our virtual keyboard with the FlowPane layout container, as shown in Figure 6. We add multiple Button controls to the FlowPane container, where each Button corresponds to a letter key, Enter, or Delete. FlowPane is similar to TilePane, but here we are not limited to equal-sized tiles and the tiles do not have to align in a grid. Using Scene Builder, we can experiment with the FlowPane size, as well as the specific size of the buttons, to achieve the keyboard layout that we want.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="scenebuilder-flowpane.png" alt="" class="wp-image-56012" width="348" height="175">
- <figcaption>
-  Figure 6. FlowPane Layout Control
- </figcaption>
-</figure>
+{{< img src="scenebuilder-flowpane.png" class="size-full is-resized" width="348" height="175" caption="Figure 6. FlowPane Layout Control" >}}
 
 ### **Resizing the Window**
 
 When running the desktop version of Wordish, the user can resize the top window, as shown in Figure 7. Here, we increase the window width from the default size as compared to Figure 2.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="UILayout-resizing-805x1024.png" alt="" class="wp-image-56013" width="421" height="536">
- <figcaption>
-  Figure 7. Resizing the desktop version of Wordish
- </figcaption>
-</figure>
+{{< img src="UILayout-resizing-805x1024.png" class="size-large is-resized" width="421" height="536" caption="Figure 7. Resizing the desktop version of Wordish" >}}
 
 Normally, when you increase the width of a TilePane or FlowPane control, the layout manager rearranges its child nodes to fill in the added width. However, we don't want the container to modify the number of rows and columns in either the TilePane or FlowPane. You can prevent changes to the layout by setting the minimum, maximum, and preferred width to be the same value. You can determine the correct values by looking at the layout properties in Scene Builder and selecting the calculated value in the width property. Then, if the user resizes the window, the contents of the layout container remain unaltered.
 
@@ -150,12 +119,7 @@ So far, so good. But what's the best way to access the Label controls that displ
 
 Figure 8 shows the labels in the first row containing the word "STONE." Accessing these Label controls requires some sort of a list. Similarly, accessing the individual buttons of our virtual keyboard in the FlowPane requires storing them in a map associated with the key's letter.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="playgame2-619x1024.png" alt="" class="wp-image-56014" width="301" height="498">
- <figcaption>
-  Figure 8. Playing the first guess word
- </figcaption>
-</figure>
+{{< img src="playgame2-619x1024.png" class="size-large is-resized" width="301" height="498" caption="Figure 8. Playing the first guess word" >}}
 
 ### Using Modern Java
 
@@ -235,12 +199,7 @@ To limit the layout to portrait mode only requires limiting the supported orient
 
 Next, we create an icon for our app. We use [Inkscape](https://inkscape.org/) to create a 1024 x 1024 PNG image. The web site: <https://appicon.co/> generates a set of icons from a single 1024 x 1024 PNG file for both iOS and Android.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="Wordish-icon-1024x1024.png" alt="" class="wp-image-56015" width="190" height="190">
- <figcaption>
-  Figure 9. Wordish mobile app icon
- </figcaption>
-</figure>
+{{< img src="Wordish-icon-1024x1024.png" class="size-large is-resized" width="190" height="190" caption="Figure 9. Wordish mobile app icon" >}}
 
 ### **Android Customizations**
 

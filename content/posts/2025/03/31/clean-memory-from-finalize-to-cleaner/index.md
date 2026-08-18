@@ -1,6 +1,5 @@
 ---
 title: "Clean your Memory: From Finalize to Cleaner"
-slug: "clean-memory-from-finalize-to-cleaner"
 date: "2025-03-31T12:30:08+00:00"
 lastmod: "2025-03-31T12:30:10+00:00"
 description: "Clean your Memory: exploring approaches for cleaning native resources, starting from finalize() method to the Cleaner API"
@@ -46,7 +45,7 @@ In Java, there are four types of references differentiated by the way by which t
 * **Soft References**: the objects which are being referenced by soft reference, even if the object is free for garbage collection, it's not garbage collected until JVM needs memory badly
 * **Phantom References**: the objects referenced by phantom references are eligible for garbage collection, but before removing them, the JVM puts them in the "reference queue".
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-115882" style="margin-left: auto; margin-right: auto;" src="java_references-700x361.png" alt="Clean your Memory: From Finalize to Cleaner - Java Reference Hierarchy" width="700" height="361">
+{{< img src="java_references-700x361.png" class="size-medium" alt="Clean your Memory: From Finalize to Cleaner - Java Reference Hierarchy" width="700" height="361" style="margin-left: auto; margin-right: auto;" >}}
 
 The logic that guides how they are collected is always related to the concept of [reachability](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ref/package-summary.html#reachability), as described in the related Javadoc. Java Reference classes are not easy to use, and the resulting [code](https://www.baeldung.com/java-phantom-reference) is sometimes complicated.  
 
@@ -135,7 +134,7 @@ The implementation behind Cleaner is not trivial. It leverages a combination of 
 * **Phantom Reference Management** : Under the hood, `Cleaner` uses a `PhantomReference` to track the object's reachability.
 * **Daemon Thread for Cleanup**: The Cleaner framework uses a dedicated daemon thread (normally named Common-Cleaner) that monitors registered objects. Once an object becomes unreachable, the cleanup task for that object is queued for execution in this background thread.
 
-<img decoding="async" class="size-medium wp-image-115883" style="margin-left: auto; margin-right: auto;" src="JVM_threads_and_cleaner-700x338.jpg" alt="Clean your Memory: From Finalize to Cleaner - JVM Thread and the Common-Cleaner Thread" width="700" height="338">
+{{< img src="JVM_threads_and_cleaner-700x338.jpg" class="size-medium" alt="Clean your Memory: From Finalize to Cleaner - JVM Thread and the Common-Cleaner Thread" width="700" height="338" style="margin-left: auto; margin-right: auto;" >}}
 
 The following snippet uses a `Cleaner` to manage files.
 

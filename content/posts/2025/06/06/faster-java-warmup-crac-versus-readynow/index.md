@@ -1,6 +1,5 @@
 ---
 title: "Faster Java Warmup: CRaC versus ReadyNow"
-slug: "faster-java-warmup-crac-versus-readynow"
 date: "2025-06-06T17:23:00+00:00"
 lastmod: "2025-06-13T07:58:31+00:00"
 description: "This is the first blog post in a series on faster Java application warmup with ReadyNow.Azul has developed different solutions to help achieve faster Java - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "JDKMon 17.0.17 Released"
-slug: "jdkmon-17-0-17-released"
 date: "2021-12-08T09:11:22+00:00"
 lastmod: "2021-12-08T09:11:23+00:00"
 description: "Point JDKMon to the folder where all your JavaFX SDK's are installed and it will check if there are any updates available."
@@ -16,7 +15,7 @@ related_posts:
   - "jdkmon-your-friendly-jdk-distribution-updater"
   - "jdkmon-17-0-23-released"
   - "jdkmon-17-0-18-released"
-  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 

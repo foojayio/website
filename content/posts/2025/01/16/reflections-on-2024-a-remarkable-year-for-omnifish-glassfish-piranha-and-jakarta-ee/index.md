@@ -1,6 +1,5 @@
 ---
 title: "Reflections on 2024: OmniFish, GlassFish, Piranha, Jakarta EE"
-slug: "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
 date: "2025-01-16T08:43:09+00:00"
 lastmod: "2025-01-16T08:43:10+00:00"
 description: "As we look to the future, our momentum only grows stronger!"
@@ -51,9 +50,7 @@ As the most active contributor to the GlassFish project, we've continued to lead
     * **Embedded Support in Docker:** Enabled GlassFish Embedded to run seamlessly in the official GlassFish Docker container.
   * Consistently updated dependencies to address security and compatibility concerns.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="874" height="275" src="GlassFish-Admin-Command-Logger.png" alt="" class="wp-image-115293" style="width:836px;height:auto">
-</figure>
+{{< img src="GlassFish-Admin-Command-Logger.png" class="size-full is-resized" width="874" height="275" style="width:836px;height:auto" >}}
 
 ![](Runnable-GlassFish-Embedded-1-1024x399-1.png)
 

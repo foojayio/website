@@ -1,6 +1,5 @@
 ---
 title: "What's New in the May 2026 Payara Platform Release | Azul"
-slug: "whats-new-in-the-may-2026-azul-payara-release"
 date: "2026-05-14T11:40:02+00:00"
 lastmod: "2026-05-14T17:01:44+00:00"
 description: "The May 2026 Payara Platform release delivers Azul Payara Server 7 and Payara Micro 7 as the first commercially supported Jakarta EE 11 runtime certified across all three profiles, plus a critical security fix across every supported branch from Payara 4 through 7."

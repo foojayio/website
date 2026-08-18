@@ -1,6 +1,5 @@
 ---
 title: "OpenJDK January 2026 Critical Patch Update and Patch Set Update Released"
-slug: "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
 date: "2026-01-21T08:32:01+00:00"
 description: "The January 2026 OpenJDK quarterly updates are now (or will soon be) available from various OpenJDK distributors. This quarterly release brings important - by Frank Delporte"
 authors:

@@ -1,6 +1,5 @@
 ---
 title: "Performance of Modern Java on Data-Heavy Workloads: Batch Processing"
-slug: "performance-of-modern-java-on-data-heavy-workloads-batch-processing"
 date: "2020-06-09T14:45:00+00:00"
 lastmod: "2021-03-25T17:52:24+00:00"
 description: "Let's consider the experimental low-latency collectors in this round, since their very short GC pauses have no effect on the test result."

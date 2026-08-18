@@ -1,6 +1,5 @@
 ---
 title: "JetBrains and Azul Collaborate on Kotlin Performance in Various JVMs"
-slug: "jetbrains-and-azul-collaborate-on-kotlin-performance-in-various-jvms"
 date: "2025-09-10T07:11:44+00:00"
 lastmod: "2025-11-13T17:01:04+00:00"
 description: "On May 20, JetBrains and Azul announced a strategic technical collaboration to enhance the runtime performance and scalability of web and server-side Kotlin applications."

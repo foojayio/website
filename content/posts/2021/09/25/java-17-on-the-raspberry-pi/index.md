@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Java 17 on the Raspberry Pi"
-slug: "java-17-on-the-raspberry-pi"
 date: "2021-09-25T13:56:53+00:00"
 lastmod: "2024-02-06T12:18:16+00:00"
 description: "As part of the Foojay Virtual OpenJDK 17+ JUG Tour, I was asked to present the state of Java and JavaFX 17 on the Raspberry Pi!"

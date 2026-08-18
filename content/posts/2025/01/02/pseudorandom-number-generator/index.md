@@ -1,6 +1,5 @@
 ---
 title: "Pseudorandom Number Generators - The Secret Behind Santa’s Gift Bag"
-slug: "pseudorandom-number-generator"
 date: "2025-01-02T14:51:10+00:00"
 lastmod: "2025-01-02T14:51:11+00:00"
 description: "Discover the importance of random number generators and their crucial role in cryptography and data security."
@@ -41,7 +40,31 @@ TRNGs are based on physical phenomena that are inherently unpredictable, such as
 
 #### 1. java.util.random Class
 
-You can generate random numbers in Java using `java.util.random.RandomGenerator`. The `RandomGenerator.getDefault()` method returns a `RandomGenerator` object with the default algorithm implementation. The current default implementation uses `L32X64MixRandom`. However, as algorithms improve over time, there is no guarantee that this method will always return the same algorithm.
+You can generate random numbers in Java using
+
+```
+java.util.random.RandomGenerator
+```
+
+. The
+
+```
+RandomGenerator.getDefault()
+```
+
+method returns a
+
+```
+RandomGenerator
+```
+
+object with the default algorithm implementation. The current default implementation uses
+
+```
+L32X64MixRandom
+```
+
+. However, as algorithms improve over time, there is no guarantee that this method will always return the same algorithm.
 
 *Example : Using RandomGenerator to pick a random gift from Santa's Bag*
 
@@ -59,13 +82,43 @@ public class SantasRandomGiftBag {
 }
 ```
 
-By utilizing a `Random` object, you can generate streams of random numbers across various types, including int, double, long, float, and boolean.
+By utilizing a
+
+```
+Random
+```
+
+object, you can generate streams of random numbers across various types, including int, double, long, float, and boolean.
 
 #### 2. java.security.SecureRandom Class
 
-Instances of `Random` are not cryptographically secure. For secure pseudorandom number generation, Java provides `java.security.SecureRandom`, which is implemented in compliance with the FIPS 140-2 and RFC 1740 standards.
+Instances of
 
-We can implement the `SecureRandom` class in a manner similar to how the `Random` class is used.
+```
+Random
+```
+
+are not cryptographically secure. For secure pseudorandom number generation, Java provides
+
+```
+java.security.SecureRandom
+```
+
+, which is implemented in compliance with the FIPS 140-2 and RFC 1740 standards.
+
+We can implement the
+
+```
+SecureRandom
+```
+
+class in a manner similar to how the
+
+```
+Random
+```
+
+class is used.
 
 *Example : Using SecureRandom to pick a random gift from Santa's Bag*
 
@@ -83,24 +136,96 @@ public class SantasSecureRandomGiftBag {
 }
 ```
 
-The fundamental difference between `java.util.Random` and `java.security. SecureRandom` lies in how the seed is chosen. A seed is an initial value used to initialize a pseudorandom number generator, and its randomness directly impacts the quality of the generated random numbers
+The fundamental difference between
 
-In `java.util.Random`, the seed is typically generated using the system clock, which can be predictable. In contrast, `java.security.SecureRandom` generates its seed from random data provided by the operating system, ensuring a higher level of unpredictability and cryptographic security.
+```
+java.util.Random
+```
+
+and
+
+```
+java.security. SecureRandom
+```
+
+lies in how the seed is chosen. A seed is an initial value used to initialize a pseudorandom number generator, and its randomness directly impacts the quality of the generated random numbers
+
+In
+
+```
+java.util.Random
+```
+
+, the seed is typically generated using the system clock, which can be predictable. In contrast,
+
+```
+java.security.SecureRandom
+```
+
+generates its seed from random data provided by the operating system, ensuring a higher level of unpredictability and cryptographic security.
 
 #### **SecureRandom Number Generation Algorithms**
 
-The algorithm used by `SecureRandom` can vary depending on the Java Runtime Environment (JRE) and the underlying operating system. Common algorithms include `SHA1PRNG`, `NativePRNG`, and `DRBG`. For general cryptographic purposes, it is usually best to stick with the default algorithm selected by `SecureRandom`, as it is designed to be both secure and efficient.
+The algorithm used by
 
-However, if you have specific requirements, you can explicitly select an algorithm when creating an instance of `SecureRandom`:
+```
+SecureRandom
+```
+
+can vary depending on the Java Runtime Environment (JRE) and the underlying operating system. Common algorithms include
+
+```
+SHA1PRNG
+```
+
+,
+
+```
+NativePRNG
+```
+
+, and
+
+```
+DRBG
+```
+
+. For general cryptographic purposes, it is usually best to stick with the default algorithm selected by
+
+```
+SecureRandom
+```
+
+, as it is designed to be both secure and efficient.
+
+However, if you have specific requirements, you can explicitly select an algorithm when creating an instance of
+
+```
+SecureRandom
+```
+
+:
 
 ```java
 // Specify the algorithm you want to use
 SecureRandom secureRandom = SecureRandom.getInstance("NativePRNG");
 ```
 
-When choosing a [random number generation algorithm](https://docs.oracle.com/en/java/javase/21/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms), it is important to consider its blocking behavior. A blocking algorithm, such as `NativePRNGBlocking`, can stall if there isn't enough environmental noise to generate the required amount of randomness. This can lead to performance issues, particularly in applications that need large volumes of random data quickly.
+When choosing a [random number generation algorithm](https://docs.oracle.com/en/java/javase/21/docs/specs/security/standard-names.html#securerandom-number-generation-algorithms), it is important to consider its blocking behavior. A blocking algorithm, such as
 
-In contrast, non-blocking algorithms like `NativePRNGNonBlocking` are designed to provide random data without delay. They use alternative methods to ensure a continuous flow of randomness, which tends to be faster, but may not be as cryptographically strong as the randomness produced by blocking sources.
+```
+NativePRNGBlocking
+```
+
+, can stall if there isn't enough environmental noise to generate the required amount of randomness. This can lead to performance issues, particularly in applications that need large volumes of random data quickly.
+
+In contrast, non-blocking algorithms like
+
+```
+NativePRNGNonBlocking
+```
+
+are designed to provide random data without delay. They use alternative methods to ensure a continuous flow of randomness, which tends to be faster, but may not be as cryptographically strong as the randomness produced by blocking sources.
 
 ### Conclusion
 

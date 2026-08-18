@@ -1,6 +1,5 @@
 ---
 title: "Eliminate the Nightmare of Debugging Java Concurrency Bugs"
-slug: "jcstress"
 date: "2021-02-10T17:58:33+00:00"
 lastmod: "2021-02-10T18:07:23+00:00"
 description: "Writing concurrent programs is hard, testing concurrent programs is harder, and debugging concurrent programs is a nightmare!"

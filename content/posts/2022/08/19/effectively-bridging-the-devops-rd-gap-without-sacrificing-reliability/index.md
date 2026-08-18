@@ -1,6 +1,5 @@
 ---
 title: "Bridge the DevOps/Dev Gap without Sacrificing Reliability"
-slug: "effectively-bridging-the-devops-rd-gap-without-sacrificing-reliability"
 date: "2022-08-19T09:16:00+00:00"
 lastmod: "2022-08-22T07:17:12+00:00"
 description: "DevOps revolutionized our industry. CI & CD made six sigma common. Still bugs make it to production past our tests. Fixing them is harder now!"
@@ -16,7 +15,7 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "what-is-debugging-in-140-seconds"
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

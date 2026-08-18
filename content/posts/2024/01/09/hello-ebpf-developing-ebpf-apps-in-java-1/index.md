@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Developing eBPF Apps in Java (1)"
-slug: "hello-ebpf-developing-ebpf-apps-in-java-1"
 date: "2024-01-09T16:34:56+00:00"
 lastmod: "2024-01-30T00:11:41+00:00"
 description: "eBPF allows you to attach programs directly to hooks in the Linux kernel without loading kernel modules, like hooks for networking or executing programs."
@@ -23,9 +22,7 @@ frozen: false
 This has historically been used for writing custom package filters in firewalls. Still, nowadays, it is used for monitoring and tracing, becoming an ever more critical building block of modern observability tools. To quote from [ebpf.io](https://ebpf.io/what-is-ebpf/):
 > 
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/12/image-20.png" alt="" class="wp-image-1469" style="width:524px;height:auto">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/12/image-20.png" class="aligncenter size-full is-resized" style="width:524px;height:auto" >}}
 
 >
 > Historically, the operating system has always been an ideal place to implement observability, security, and networking functionality due to the kernel's privileged ability to oversee and control the entire system. At the same time, an operating system kernel is hard to evolve due to its central role and high requirement towards stability and security. The rate of innovation at the operating system level has thus traditionally been lower compared to functionality implemented outside of the operating system.[](https://ebpf.io/static/e293240ecccb9d506587571007c36739/f2674/overview.png)

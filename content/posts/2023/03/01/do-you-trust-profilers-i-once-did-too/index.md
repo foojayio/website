@@ -1,6 +1,5 @@
 ---
 title: "Do you trust profilers? I once did too!"
-slug: "do-you-trust-profilers-i-once-did-too"
 date: "2023-03-01T13:14:06+00:00"
 lastmod: "2023-03-03T09:08:45+00:00"
 description: "Do you trust profilers? I once did too. Here I describe why you should take the results of profilers with a grain of salt."

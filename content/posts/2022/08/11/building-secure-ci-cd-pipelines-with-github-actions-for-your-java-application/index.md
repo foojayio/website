@@ -1,6 +1,5 @@
 ---
 title: "Secure CI/CD Pipelines with GitHub Actions for Your Java Apps"
-slug: "building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application"
 date: "2022-08-11T06:28:38+00:00"
 lastmod: "2022-08-11T06:29:14+00:00"
 description: "Learn how to integrate Snyk into your GitHub CI/CD to automate security scanning as part of your build cycle prior to production."
@@ -160,7 +159,7 @@ release:
          java-version: 17
      - name: Set Git user
        run: |
-         git config user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="214649404255484e4f5261435348404f5744534c4444530f4f4d">[email protected]</a>"
+         git config user.email "[email protected]"
          git config user.name "GitHub Actions"
      - name: Publish JAR
        run: mvn -B release:prepare release:perform -DskipTests

@@ -1,6 +1,5 @@
 ---
 title: "Is Java Still an 'Emerging Technology' Today?"
-slug: "is-java-still-an-emerging-technology"
 date: "2020-08-10T11:33:00+00:00"
 lastmod: "2021-08-23T12:56:53+00:00"
 description: "Every advance in creating a better performing JVM will increase the performance of every program ever developed in any JVM language."

@@ -1,6 +1,5 @@
 ---
 title: "How To Bring Your Java Microservices To The Cloud"
-slug: "how-to-bring-your-java-microservices-to-the-cloud"
 date: "2021-01-08T11:20:46+00:00"
 lastmod: "2021-01-08T11:59:19+00:00"
 description: "Cloud and microservices come up more in architectural decisions. Is Java ready for these diverse concepts in corporate environments?"

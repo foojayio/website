@@ -1,6 +1,5 @@
 ---
 title: "Dockerizing a Java 26 Project with Docker Init"
-slug: "dockerizing-a-java-26-project-with-docker-init"
 date: "2026-04-27T09:55:12+00:00"
 description: "Java 26 came out in March 2026. This article walks you through Dockerizing a Java 26 Spring Boot project using Docker Init."
 canonical: "https://www.dockersecurity.io/blog/dockerize-java-26-with-docker-init"

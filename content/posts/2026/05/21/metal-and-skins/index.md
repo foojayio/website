@@ -1,6 +1,5 @@
 ---
 title: "Metal and Skins"
-slug: "metal-and-skins"
 date: "2026-05-21T08:59:46+00:00"
 description: "A new Metal rendering backend for iOS, a browser-hosted Skin Designer that retires the skin downloader, an iOS Reminders-style…"
 canonical: "https://www.codenameone.com/blog/metal-and-skins/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 
@@ -87,25 +86,17 @@ Everything else stays the same. The Java surface is unchanged, your existing cod
 
 The most user-visible improvement from the Metal port is text. Here is the `ShowcaseTheme` capture from the Metal screenshot suite:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-light.png" alt="Metal showcase, light" style="width:200px">
-</figure>
+{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-light.png" class="is-resized" alt="Metal showcase, light" style="width:200px" >}}
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-dark.png" alt="Metal showcase, dark" style="width:200px">
-</figure>
+{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-showcase-dark.png" class="is-resized" alt="Metal showcase, dark" style="width:200px" >}}
 
 And the `SpanLabelTheme` capture, which is the real test for body-copy rendering, multiple lines, variable widths, the kind of paragraphs that show up in real apps:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-spanlabel-light.png" alt="Metal SpanLabel theme" style="width:200px">
-</figure>
+{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-spanlabel-light.png" class="is-resized" alt="Metal SpanLabel theme" style="width:200px" >}}
 
 The Metal `Dialog` capture is also worth showing because the translucent surface composites correctly against the textured backdrop:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://www.codenameone.com/blog/metal-and-skins/metal-dialog-light.png" alt="Metal Dialog over textured backdrop" style="width:200px">
-</figure>
+{{< img src="https://www.codenameone.com/blog/metal-and-skins/metal-dialog-light.png" class="is-resized" alt="Metal Dialog over textured backdrop" style="width:200px" >}}
 
 ## The end of the skin downloader
 

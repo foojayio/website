@@ -1,6 +1,5 @@
 ---
 title: "JReleaser 0.10.0 Released!"
-slug: "jreleaser-0-10-0-released"
 date: "2022-01-04T13:30:48+00:00"
 lastmod: "2022-01-04T13:30:49+00:00"
 description: "JReleaser v0.10.0 is the last push towards 1.0.0. We'll concentrate on bug fixing and polishing from now on."

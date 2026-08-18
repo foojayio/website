@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #23: Java Profiling and Performance"
-slug: "foojay-podcast-23"
 date: "2023-05-22T10:23:52+00:00"
 lastmod: "2025-11-13T09:05:44+00:00"
 description: "There are challenges with Java profiling, and the need for profiling depends on application complexity and performance requirements."

@@ -1,6 +1,5 @@
 ---
 title: "AI, OAuth, And Other Platform APIs In The Core"
-slug: "codename-one-ai-oauth-and-other-platform-apis-in-the-core"
 date: "2026-06-15T09:00:00+00:00"
 description: "Deeper AI integration in the framework core, modern authentication via OAuth / OIDC and WebAuthn passkeys driven from the system browser, and a few smaller"
 canonical: "https://www.codenameone.com/blog/platform-apis-in-the-core/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

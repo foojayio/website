@@ -1,6 +1,5 @@
 ---
 title: "Project Panama for Newbies (Part 2)"
-slug: "project-panama-for-newbies-part-2"
 date: "2026-01-02T01:21:00+00:00"
 lastmod: "2026-01-02T11:55:15+00:00"
 description: "In this part of the Panama series, the goal is to call C function signatures, often defined to accept pointers and structs, from Java."
@@ -21,9 +20,7 @@ frozen: false
 
 **Updated December 29, 2025 **(**originally published August 17**, 2021, republished January 2, 2026):**** This article now features Java 25 and the Foreign Function \& Memory (FFM) API, which has been a standard feature since JDK 22 ([JEP-454](https://openjdk.java.net/jeps/454)).
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="218" height="407" src="panama_part2.png" alt="" class="wp-image-46434" style="width:140px;height:261px">
-</figure>
+{{< img src="panama_part2.png" class="size-full is-resized" width="218" height="407" style="width:140px;height:261px" >}}
 
 ## Introduction
 

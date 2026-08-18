@@ -1,6 +1,5 @@
 ---
 title: "Taking VSCodium for a Spin"
-slug: "taking-vscodium-for-a-spin"
 date: "2022-07-12T08:10:30+00:00"
 lastmod: "2022-07-12T08:10:32+00:00"
 description: "The VSCode ecosystem has matured, and lots of plugins are available. I decided to give it a shot. Let's see how and why to get started!"
@@ -61,7 +60,7 @@ VSCodium is built around a plugin architecture. The application is very lightwei
 
 Because I needed to update one of my Python projects, I searched for the relevant plugin. Navigate to *Extension*, then search for "python".
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-56348 size-medium" src="python_extension-379x510.jpg" alt="Searching for Python extensions" width="379" height="510">
+{{< img src="python_extension-379x510.jpg" class="aligncenter size-medium" alt="Searching for Python extensions" width="379" height="510" >}}
 
 I installed the "official" [Python](https://open-vsx.org/extension/ms-python/python) extension. As I was there, I also installed the [TabNine](https://www.tabnine.com/install/vscode) one.
 

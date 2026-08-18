@@ -1,6 +1,5 @@
 ---
 title: "Defining patterns of data transfers for Java applications with TornadoVM"
-slug: "defining-patterns-of-data-transfers-for-java-applications-with-tornadovm"
 date: "2024-08-15T15:43:56+00:00"
 lastmod: "2024-11-13T13:37:51+00:00"
 description: "How TornadoVM programmers can utilize the API functions for transferring data to the accelerator's (e.g., GPU) memory, and backwards."
@@ -68,9 +67,7 @@ executionResult.transferToHost(matrixC);
 
 **Note:** The **executionPlan.execute()** is a blocking call that performs all the steps (see the screenshot from the Java editor) in the executionPlan as defined by the programmer.  
 
-<figure class="aligncenter size-full is-resized">
- <img fetchpriority="high" decoding="async" width="963" height="292" src="TornadoExecutionPlan-configurations.png" alt="" class="wp-image-113890" style="width:676px;height:auto">
-</figure>
+{{< img src="TornadoExecutionPlan-configurations.png" class="aligncenter size-full is-resized" width="963" height="292" style="width:676px;height:auto" >}}
 
 ## Pattern 2. Data do not fit into the GPU memory
 
@@ -96,9 +93,7 @@ executionResult.transferToHost(dataRange.withSize(1).withOffset(0));
 
 An example of this API call is shown in one of the TornadoVM unit-tests, [here](https://github.com/beehive-lab/TornadoVM/blob/faffab7ee2fc9c9f06ece7f7e5f075fc056f379a/tornado-unittests/src/main/java/uk/ac/manchester/tornado/unittests/api/TestAPI.java#L283). Several variations of the above code snippet are shown in the following image.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" width="1024" height="786" src="DataRange-Scheme-1024x786.png" alt="" class="wp-image-113889" style="width:676px;height:auto">
-</figure>
+{{< img src="DataRange-Scheme-1024x786.png" class="aligncenter size-large is-resized" width="1024" height="786" style="width:676px;height:auto" >}}
 
 ## Summary
 

@@ -1,6 +1,5 @@
 ---
 title: "Server-Side Rendering with Spring Boot"
-slug: "server-side-rendering-with-spring-boot"
 date: "2024-09-23T06:58:41+00:00"
 lastmod: "2024-09-24T11:50:15+00:00"
 description: "Understanding the shared steps in the project setup is crucial before delving into the specifics of each client-augmenting technology."

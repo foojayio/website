@@ -1,6 +1,5 @@
 ---
 title: "Best practices for Mastering AI Agents, Subagents, Skills & MCP"
-slug: "best-practices-for-working-with-ai-agents-subagents-skills-and-mcp"
 date: "2026-03-30T18:55:59+00:00"
 lastmod: "2026-03-30T18:56:00+00:00"
 description: "Master AI agents with 5 developer best practices for building scalable architecture with MCP, subagents, context isolation, and guardrails."

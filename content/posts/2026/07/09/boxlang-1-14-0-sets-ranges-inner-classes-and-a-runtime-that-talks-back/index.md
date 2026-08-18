@@ -1,6 +1,5 @@
 ---
 title: "BoxLang 1.14.0 : Sets, Ranges, Inner Classes, and a Runtime That Talks Back"
-slug: "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 date: "2026-07-09T18:02:59+00:00"
 lastmod: "2026-07-10T13:46:44+00:00"
 description: "BoxLang has never stood still, but 1.14.0 is something different. This is the release where the language stops filling gaps and starts defining what a - by Cristobal Escobar"
@@ -270,9 +269,9 @@ import java.lang.StringBuilder
 import models.User
 
 // These three forms are equivalent
-u1 = new User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c3e333e1c39243d312c3039723f3331">[email protected]</a>" )
-u2 = User.init( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="75171a1735100d14180519105b161a18">[email protected]</a>" )
-u3 = User( "Bob", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="52303d3012372a333f223e377c313d3f">[email protected]</a>" )      // class reference called as function
+u1 = new User( "Bob", "[email protected]" )
+u2 = User.init( "Bob", "[email protected]" )
+u3 = User( "Bob", "[email protected]" )      // class reference called as function
 ```
 
 Where this becomes genuinely powerful is functional programming. Because class references are now callable objects, you can pass them directly to higher-order functions:
@@ -558,7 +557,7 @@ Sixty-five issues means a lot of ground covered. Some fixes worth calling out sp
 * **`BL-2483`** - URISyntaxException on paths containing spaces is resolved.
 * **`BL-1007`** - `snakeCase()`, `pascalCase()`, and `kebabCase()` now correctly handle camelCase, PascalCase, snake_case, kebab-case, and mixed inputs.  
 
-## Getting 1.14.0Update via CommandBox:
+  ## Getting 1.14.0Update via CommandBox:
 
 ```java
 box update boxlang

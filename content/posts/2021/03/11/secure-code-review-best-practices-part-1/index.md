@@ -1,6 +1,5 @@
 ---
 title: "Secure Code Review Best Practices (Part 1)"
-slug: "secure-code-review-best-practices-part-1"
 date: "2021-03-11T16:58:46+00:00"
 lastmod: "2021-09-28T08:56:35+00:00"
 description: "Code reviews are hard to do well. Particularly when you’re not entirely sure about the errors you should be looking for!"

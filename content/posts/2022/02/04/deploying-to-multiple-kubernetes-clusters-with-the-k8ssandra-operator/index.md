@@ -1,6 +1,5 @@
 ---
 title: "Deploying to Multiple Kubernetes Clusters with the K8ssandra Operator"
-slug: "deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator"
 date: "2022-02-04T22:10:56+00:00"
 lastmod: "2022-05-29T18:00:59+00:00"
 description: "Let’s learn about the new K8ssandra Operator that simplifies deploying multiple Apache Cassandra data centers in different regions"

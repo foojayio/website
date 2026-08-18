@@ -1,6 +1,5 @@
 ---
 title: "JUnit 5 Testing Basics"
-slug: "junit-5-testing-basics"
 date: "2021-12-03T12:29:06+00:00"
 lastmod: "2022-06-01T20:13:05+00:00"
 description: "Continuing the series on JUnit 5, this artcle shows examples of a JUnit test which makes use of a few of the annotations from Part 1!"

@@ -1,6 +1,5 @@
 ---
 title: "Towards Continuous Performance Regression Testing"
-slug: "towards-continuous-performance-regression-testing"
 date: "2021-02-25T09:44:43+00:00"
 lastmod: "2022-01-12T13:53:08+00:00"
 description: "Introduction to the JfrUnit open-source project, providing assertions not on metrics like latency/throughput, but on indirect metrics."

@@ -1,6 +1,5 @@
 ---
 title: "How to Create an Open Source Pull Request (PR)"
-slug: "creating-an-open-source-pull-request"
 date: "2023-07-19T11:26:23+00:00"
 lastmod: "2023-08-03T08:28:14+00:00"
 description: "Let's take a look at contributing to Open Source Software, specifically how to create an open source pull request (PR)."

@@ -1,6 +1,5 @@
 ---
 title: "Hidden Dracula Polymorphism Java Challenge"
-slug: "hidden-dracula-polymorphism-java-challenge"
 date: "2021-06-14T11:26:37+00:00"
 lastmod: "2021-08-23T12:29:05+00:00"
 description: "Polymorphism, the ability of an object to take on forms, one of the important Java concepts, decouples responsibilities, adding flexibility."
@@ -18,7 +17,19 @@ related_posts:
 frozen: false
 ---
 
-Polymorphism is one of the most important Java concepts. We might not even be aware we're using it all the time but when we instantiate an `ArrayList` and assign it to a variable of the `List` type, we are using polymorphism. It's a powerful concept because it helps us to decouple responsibilities, therefore, making code more flexible and easier to maintain.
+Polymorphism is one of the most important Java concepts. We might not even be aware we're using it all the time but when we instantiate an
+
+```java
+ArrayList
+```
+
+and assign it to a variable of the
+
+```java
+List
+```
+
+type, we are using polymorphism. It's a powerful concept because it helps us to decouple responsibilities, therefore, making code more flexible and easier to maintain.
 
 This Java Challenge is one of the hardest ones, are you ready for this one? Now is your time to improve your Java skills by doing this Java Challenge!
 
@@ -74,7 +85,43 @@ The very first thing to notice is that we are using polymorphism in the line of 
 Dracula dracula = new Alucard();
 ```
 
-Then we will be using the `name` attribute but remember that attributes will never be overridden and there is no polymorphism with attributes, only with instance methods. Therefore the name that will be printed will be from the Dracula class since we declared the `dracula` variable with the type of `Dracula`. And the `getName` method will be from the `Alucard` class, since we are using polymorphism and `getName` is an instance method:
+Then we will be using the
+
+```java
+name
+```
+
+attribute but remember that attributes will never be overridden and there is no polymorphism with attributes, only with instance methods. Therefore the name that will be printed will be from the Dracula class since we declared the
+
+```java
+dracula
+```
+
+variable with the type of
+
+```java
+Dracula
+```
+
+. And the
+
+```java
+getName
+```
+
+method will be from the
+
+```java
+Alucard
+```
+
+class, since we are using polymorphism and
+
+```java
+getName
+```
+
+is an instance method:
 
 ```java
 System.out.print(dracula.name + dracula.getName());
@@ -82,13 +129,31 @@ System.out.print(dracula.name + dracula.getName());
 
 Therefore it will print... what do you think?
 
-Finally, we invoke the static method, keeping in mind that a static method is not an instance method, it's a class method and it doesn't depend on an instance to work. For that reason, polymorphism won't happen even though we are using the same method name with the child class. The invoked method will be from the class we declared the `dracula` instance, therefore it will be the `Dracula` class:
+Finally, we invoke the static method, keeping in mind that a static method is not an instance method, it's a class method and it doesn't depend on an instance to work. For that reason, polymorphism won't happen even though we are using the same method name with the child class. The invoked method will be from the class we declared the
+
+```java
+dracula
+```
+
+instance, therefore it will be the
+
+```java
+Dracula
+```
+
+class:
 
 ```java
 System.out.print(dracula.metamorphosis());
 ```
 
-The information from the `Dracula` class will be printed then... and that information is... what do you think?
+The information from the
+
+```java
+Dracula
+```
+
+class will be printed then... and that information is... what do you think?
 
 In conclusion, the final output will be...
 

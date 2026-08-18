@@ -1,6 +1,5 @@
 ---
 title: "From Reactive Streams to Virtual Threads"
-slug: "javapro-shout-out-from-reactive-streams-to-virtual-threads"
 date: "2025-04-07T19:34:45+00:00"
 lastmod: "2025-04-08T05:14:13+00:00"
 description: "Can we have the simplicity that Virtual Threads promise and the resilience and safety of Reactive Streams? Let’s find out!"

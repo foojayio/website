@@ -1,6 +1,5 @@
 ---
 title: "join.slack.com/t/foojay/signup"
-slug: "join-slack-com-t-foojay-signup"
 date: "2022-08-04T14:14:09+00:00"
 lastmod: "2023-01-20T12:24:23+00:00"
 description: "Join Foojay.io on Slack, here: join.slack.com/t/foojay/signup"

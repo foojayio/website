@@ -1,6 +1,5 @@
 ---
 title: "GraphQL for Java Developers: Building a Flexible Data Layer"
-slug: "graphql-for-java-developers-building-a-flexible-data-layer"
 date: "2026-02-03T15:43:07+00:00"
 lastmod: "2026-02-03T15:43:10+00:00"
 description: "For many years, REST has been the standard architectural style for creating APIs in the Java ecosystem. Frameworks such as Spring MVC and, more recently, - by Matteo Rossi"

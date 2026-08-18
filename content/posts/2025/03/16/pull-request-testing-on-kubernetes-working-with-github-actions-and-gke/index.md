@@ -1,6 +1,5 @@
 ---
 title: "Pull Request testing on Kubernetes: Working with GitHub Actions and GKE"
-slug: "pull-request-testing-on-kubernetes-working-with-github-actions-and-gke"
 date: "2025-03-16T15:44:27+00:00"
 lastmod: "2025-03-17T08:27:54+00:00"
 description: "In this article, we'll achieved several milestones toward the end-to-end testing goal."
@@ -247,7 +246,7 @@ Using the authentication setup above within the GitHub workflow requires the fol
   uses: google-github-actions/auth@v2
   with:
     workload_identity_provider: projects/49535911505/locations/global/workloadIdentityPools/github-actions/providers/github-provider #1
-    service_account: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37505e435f42551a5654435e5859447741545b42444352451a475e47525b5e5952195e565a1950445245415e5452565454584259431954585a">[email protected]</a> #2
+    service_account: [email protected] #2
 ```
 
 1. The full path to the WIPP we created above. For reference, the pattern is `projects/$PROJECT_ID/locations/global/workloadIdentityPools/$WORKLOAD_ID_POOL_NAME/providers/$WORKLOAD_ID_POOL_PROVIDER_NAME`
@@ -381,7 +380,7 @@ That being settled, we should follow the nominal path: create a Kubernetes secre
   run: |
     kubectl create secret docker-registry github-docker-registry \      #1
       --docker-server=${{ env.REGISTRY }} \                             #2
-      --docker-email="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5937362b3c293520193e302d312c3b773a3634">[email protected]</a>" \                             #3
+      --docker-email="[email protected]" \                             #3
       --docker-username="${{ github.actor }}" \                         #4
       --docker-password="${{ secrets.GITHUB_TOKEN }}" \                 #5
       --dry-run=client -o yaml | kubectl apply -f -                     #6

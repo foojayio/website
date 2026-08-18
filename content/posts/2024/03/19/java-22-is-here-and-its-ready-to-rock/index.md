@@ -1,6 +1,5 @@
 ---
 title: "Java 22 Is Here, And It's Ready To Rock"
-slug: "java-22-is-here-and-its-ready-to-rock"
 date: "2024-03-19T13:56:23+00:00"
 lastmod: "2024-03-19T13:57:48+00:00"
 description: "Java 22 is here, and it's ready to rock! Boasting a set of 12 JEPs, it finalizes features and previews new ones. This article has all the info!"
@@ -17,7 +16,7 @@ related_posts:
   - "foojay-podcast-45"
   - "java-22-whats-new"
   - "java-21-is-available-today-and-its-quite-the-update"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

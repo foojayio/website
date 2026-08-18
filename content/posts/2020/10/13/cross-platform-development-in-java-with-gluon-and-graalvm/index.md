@@ -1,6 +1,5 @@
 ---
 title: "Cross-Platform Development in Java with Gluon and GraalVM"
-slug: "cross-platform-development-in-java-with-gluon-and-graalvm"
 date: "2020-10-13T12:27:38+00:00"
 lastmod: "2021-08-23T12:55:13+00:00"
 description: "Gluon has invested in R&D to create a technology stack over the past five years. Gluon now offers a complete end-to-end development platform."

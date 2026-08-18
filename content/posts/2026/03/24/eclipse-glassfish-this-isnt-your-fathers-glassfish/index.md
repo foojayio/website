@@ -1,6 +1,5 @@
 ---
 title: "Eclipse GlassFish: This Isn’t Your Father’s GlassFish"
-slug: "eclipse-glassfish-this-isnt-your-fathers-glassfish"
 date: "2026-03-24T15:30:49+00:00"
 lastmod: "2026-03-30T12:19:59+00:00"
 description: "GlassFish is an application server with a long history and has always had a special role in the Java world as the reference implementation of Java EE, - by Ondro Mihalyi"
@@ -77,9 +76,7 @@ Eclipse GlassFish was the **first to pass the Jakarta EE 11 Web Profile and Jaka
 
 Embedded GlassFish has grown from a developer-focused tool into a **production-ready, lightweight runtime** . It's now a viable option for running microservices from the [command line](https://omnifish.ee/run-your-apps-with-glassfish-from-the-command-line/) or in [cloud containers](https://github.com/eclipse-ee4j/glassfish.docker/wiki/Example:-Using-Embedded-GlassFish-with-the-docker-Command). With the inclusion of MicroProfile APIs and JMX monitoring, Embedded GlassFish offers the same power and observability as the full server in a smaller footprint.  
 
-<figure class="aligncenter size-thumbnail">
- <a target="_blank" href="https://omnifish.ee/run-your-apps-with-glassfish-from-the-command-line/"><img decoding="async" width="300" height="260" src="Embedded-GlassFish-featured-300x260.png" alt="" class="wp-image-123141"></a>
-</figure>
+{{< img src="Embedded-GlassFish-featured-300x260.png" class="aligncenter size-thumbnail" width="300" height="260" >}}
 
 ### Performance and Security at the Core
 
@@ -94,9 +91,7 @@ On the security front, GlassFish now supports the **PKCS12 keystore format**and 
 * [GlassFish 8 Released: Enterprise-Grade Java, Redefined. What's new?](https://omnifish.ee/blog/glassfish-8-released-enterprise-grade-java-redefined/)
 * [Azul Acquires Payara: GlassFish Supported by OmniFish Is A Reliable Choice](https://omnifish.ee/blog/azul-acquires-payara-glassfish-supported-by-omnifish-is-a-reliable-choice/)
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 ## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 

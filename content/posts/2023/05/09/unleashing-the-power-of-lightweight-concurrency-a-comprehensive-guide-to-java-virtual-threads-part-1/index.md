@@ -1,6 +1,5 @@
 ---
 title: "A Comprehensive Guide to Java Virtual Threads (Part 1)"
-slug: "unleashing-the-power-of-lightweight-concurrency-a-comprehensive-guide-to-java-virtual-threads-part-1"
 date: "2023-05-09T08:33:12+00:00"
 lastmod: "2023-09-11T17:51:15+00:00"
 description: "Learn about Java Virtual Threads, how they simplify concurrent programming, how they overcome the limitations of traditional Java threads."
@@ -49,6 +48,8 @@ With this virtual thread, we get all the benefits traditional threads have, plus
 Consider the following example:
 
 ```
+
+```java
 try (var executor = Executors.newVirtualThreadPerTaskExecutor()) 
     IntStream.range(0, 10_000).forEach(i -> {
         executor.submit(() -> {
@@ -57,6 +58,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor())
         });
     });
 }
+```
 
 ```
 
@@ -77,8 +79,11 @@ To manage your JDK installations, we recommend using SDKMAN, a versatile tool th
 Once you have SDKMAN installed, you can list available JDK versions, including early access builds, and install the desired version:
 
 ```
+
+```java
 sdk list java
 sdk install java <version>
+```
 
 ```
 
@@ -89,9 +94,16 @@ Once you have downloaded JDK 21, you can create virtual threads in three ways:
 ### Using the Thread Factory method
 
 ```
+
+```java
 Thread.startVirtualThread(() -> 
    System.out.println("Hello world!");
 });
+```
+
+```java
+
+```
 
 ```
 
@@ -100,11 +112,14 @@ You don't need to start the thread; it automatically starts and executes.
 Note that virtual threads are always daemon threads. So make sure you wait on the main thread. Otherwise, you may not see the output.
 
 ```
+
+```java
 var thread = Thread.startVirtualThread(() -> 
    System.out.println("Hello world!");
 });
 
 thread.join();
+```
 
 ```
 
@@ -113,18 +128,24 @@ thread.join();
 Like the factory method, you can use the builder method, which is much more convenient as you can create **started** or **unstarted** threads.
 
 ```
+
+```java
 var started =Thread.ofVirtual().start(() -> 
    System.out.println("Hello world!");
 });
+```
 
 ```
 
 To create an **unstarted** thread, you can use the following:
 
 ```
+
+```java
 var unstarted = Thread.ofVirtual().unstarted(() -> 
    System.out.println("Hello world!");
 });
+```
 
 ```
 
@@ -133,12 +154,15 @@ var unstarted = Thread.ofVirtual().unstarted(() ->
 If we want to move away from our existing code, which is heavily dependent on executors, one new method that is just one line long and uses virtual threads has been added.
 
 ```
+
+```java
 var executorService = Executors.newVirtualThreadPerTaskExecutor()
 
 executorService.submit(() -> {
    System.out.println("Hello world!");
 
 });
+```
 
 ```
 

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #42: Jozi-JUG and Cape Town Java Community"
-slug: "foojay-podcast-42"
 date: "2024-02-05T08:50:39+00:00"
 lastmod: "2025-11-13T08:44:57+00:00"
 description: "Today, we are traveling to Cape Town and Johannesburg to learn more about its Java communities!"

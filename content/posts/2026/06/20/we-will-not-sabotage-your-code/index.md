@@ -1,6 +1,5 @@
 ---
 title: "We Will Not Sabotage Your Code"
-slug: "we-will-not-sabotage-your-code"
 date: "2026-06-20T15:37:22+00:00"
 lastmod: "2026-06-22T10:59:45+00:00"
 description: "A maintainer recently hid a destructive prompt-injection payload aimed at AI agents inside his own framework. That is a betrayal of the trust open source r"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Low Latency Crypto Trading Systems with Java and Chronicle"
-slug: "low-latency-crypto-trading-systems-using-java-and-chronicle-services"
 date: "2022-10-18T14:59:37+00:00"
 lastmod: "2022-10-18T14:59:39+00:00"
 description: "Chronicle-Services framework allows running the market data connectors within a single event loop, which is designed to minimize latency."
@@ -16,7 +15,7 @@ related_posts:
   - "peter-lawrey-latency-performance"
   - "a-closer-look-at-jfr-streaming"
   - "billion-events-per-second-with-millisecond-latency"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

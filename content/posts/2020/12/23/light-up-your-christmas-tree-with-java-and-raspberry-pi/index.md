@@ -1,6 +1,5 @@
 ---
 title: "Light Up your Christmas Tree with Java and Raspberry Pi"
-slug: "light-up-your-christmas-tree-with-java-and-raspberry-pi"
 date: "2020-12-23T09:38:17+00:00"
 lastmod: "2021-12-10T13:01:51+00:00"
 description: "Here we go with this small project to get you introduced to the world of electronics programming. Get started with Java and the Raspberry Pi!"
@@ -157,9 +156,7 @@ Maven home: /usr/share/maven
 
 To control the LED-lights, we are going to use the Pi4J-library, which makes the bridge between our Java-code and the GPIO-pins on the Raspberry Pi. These General-Purpose Input/Output-pins allow us to connect and control electronic components. There are 40 of those pins on the Raspberry Pi and can be used for different purposes. In this post, we are only using them as output-pins to control the LEDs but there are countless other possibilities.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="headerpins_in_header.png" alt="" class="wp-image-36647" width="293" height="449">
-</figure>
+{{< img src="headerpins_in_header.png" class="size-full is-resized" width="293" height="449" >}}
 
 For full support of the Pi4J-library, we need to install some extra software on the board. Again we only need a single command to do this:
 

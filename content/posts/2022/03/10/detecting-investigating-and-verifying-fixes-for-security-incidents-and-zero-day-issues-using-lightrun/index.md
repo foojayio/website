@@ -1,6 +1,5 @@
 ---
 title: "Detect, Track, Verify Security Issues & 0-Days"
-slug: "detecting-investigating-and-verifying-fixes-for-security-incidents-and-zero-day-issues-using-lightrun"
 date: "2022-03-10T12:25:09+00:00"
 lastmod: "2022-03-10T12:25:10+00:00"
 description: "Learn about major milestones in app security: finding the issue, evaluating a breach, proving it, and validating the fix!"
@@ -63,7 +62,7 @@ BTW, notice I'm using [Java](https://lightrun.com/debugging/top-10-java-linters/
 
 This is trivial to test in Lightrun. We can just add a log or a snapshot that will be triggered when an invalid request happens. Then we can try sending invalid values via a curl command to see if our log is triggered.
 
-<img decoding="async" class="alignnone size-medium wp-image-52559" src="2-700x471.png" alt="" width="700" height="471">
+{{< img src="2-700x471.png" class="size-medium" width="700" height="471" >}}
 
 Notice that we use a regular expression to validate the name value. If we receive a log, it means the problematic value is exploitable. This also means the risk of the security vulnerability is high.
 
@@ -75,7 +74,7 @@ What do we do?
 
 Well, we can do something similar to what we did above and add a snapshot with a similar condition and a few "tune ups":
 
-<img decoding="async" class="alignnone size-medium wp-image-52560" src="3-672x510.png" alt="" width="672" height="510">
+{{< img src="3-672x510.png" class="size-medium" width="672" height="510" >}}
 
 This image contains a lot, so let's try to unpack it.
 

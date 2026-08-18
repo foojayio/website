@@ -1,6 +1,5 @@
 ---
 title: "Foojay Live @ JCON Köln"
-slug: "foojay-live-jcon-koln"
 date: "2025-05-13T07:40:02+00:00"
 lastmod: "2025-05-20T07:34:21+00:00"
 description: "Today and tomorrow, we will be at the JCON Conference in Köln, Germany. We have set up an interview booth to talk to speakers and visitors about all - by Frank Delporte"

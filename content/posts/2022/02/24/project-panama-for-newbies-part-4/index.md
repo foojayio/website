@@ -1,6 +1,5 @@
 ---
 title: "Project Panama for Newbies (Part 4)"
-slug: "project-panama-for-newbies-part-4"
 date: "2022-02-24T08:34:52+00:00"
 lastmod: "2026-01-01T04:57:29+00:00"
 description: "imagine C code capable of performing a computation and after its completion the C code will notify Java code to perform updates to JavaFX UI."

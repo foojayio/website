@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #38: Java in the Cloud"
-slug: "foojay-podcast-38"
 date: "2023-12-25T12:02:46+00:00"
 lastmod: "2025-11-13T08:51:08+00:00"
 description: "Cloud servers, Docker, Kubernetes, distributed systems, scaling up and down… these things are now part of our daily job, but Java wasn’t originally designed for it."

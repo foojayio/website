@@ -1,6 +1,5 @@
 ---
 title: "Timely Computation of Derived Values"
-slug: "timely-computation-derived-values"
 date: "2021-09-10T09:22:36+00:00"
 lastmod: "2021-09-10T09:26:14+00:00"
 description: "Learn about adding computed values, as in an eager approach, but only triggering the computation when you need to access its result!"
@@ -55,7 +54,7 @@ The flow is the following. When the cart is updated, set `dirty` to `true`.
 
 When you need to display the cost:
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-44918" src="flow-319x510.png" alt="" width="319" height="510">
+{{< img src="flow-319x510.png" class="aligncenter size-medium" width="319" height="510" >}}
 
 The only con is more complex logic.
 

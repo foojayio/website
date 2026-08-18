@@ -1,8 +1,7 @@
 ---
 title: "Systematic AI Coding: My Takeaways from the Eclipse Foundation Workshop in Brussels"
-slug: "systematic-ai-coding-my-takeaways-from-the-eclipse-foundation-workshop-in-brussels"
 date: "2026-06-23T19:48:42+00:00"
-lastmod: "2026-06-24T06:32:24+00:00"
+lastmod: "2026-08-17T05:40:40+00:00"
 description: "Most developers using AI tools are still guessing. The Eclipse Foundation's first AI Coding Workshop in Brussels was built to change that. It's a brand - by Frank Delporte"
 authors:
   - "frankdelporte"
@@ -121,6 +120,8 @@ Thanks to the Eclipse Foundation for the free tickets, for the perfect organizat
 It was a dense, practical day. This summary is only a small part of all the tips, tricks, hints, pitfalls, and all the other knowledge shared by Jonas, in over four hours. He runs a longer version of this workshop at companies and events. If you have the opportunity to meet him or join one of those sessions, you should definitely do!
 
 **AI coding isn't magic and it isn't a shortcut. It's a different kind of engineering discipline, with its own workflows, its own failure modes, and its own learning curve. The developers who benefit most are the ones who take it seriously and build repeatable processes on top of AI tooling.**
+
+{{< youtube moPFlZnmHwk >}}
 
 ## This Post Was Co-Authored With Claude Code
 

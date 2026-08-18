@@ -1,6 +1,5 @@
 ---
 title: "Getting Started Hacking Third-Party APIs on the JVM"
-slug: "hacking-third-party-api-jvm"
 date: "2021-05-27T06:27:58+00:00"
 lastmod: "2021-05-27T06:28:00+00:00"
 description: "Some alternatives that allow you to make third-party APIs behave in a way that their designers didn't intend to!"
@@ -12,10 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-  - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
 frozen: false
 ---
 

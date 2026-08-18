@@ -1,6 +1,5 @@
 ---
 title: "Latest Java Releases and Eclipse Java IDE"
-slug: "keeping-pace-with-java-using-eclipse-ide"
 date: "2021-03-30T07:51:12+00:00"
 lastmod: "2021-07-12T05:11:54+00:00"
 description: "Major interesting features of latest Java versions like records and switch expressions with their tooling support in Eclipse Java IDE."

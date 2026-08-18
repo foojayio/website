@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Ring buffers in libbpf (6)"
-slug: "hello-ebpf-ring-buffers-in-libbpf-6"
 date: "2024-03-19T17:54:22+00:00"
 lastmod: "2024-03-19T17:54:23+00:00"
 description: "This week I'll implement ring buffer support in my eBPF library and explain how ring buffers are used in eBPF."
@@ -270,8 +269,8 @@ public abstract class RingSample extends BPFProgram {
 You can run the example via `./run_bpf.sh RingSample`:
 
 ```bash
-do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e693958394a6d7d6d6d6c8958394908f8583">[email protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
-do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86f3f5e3f4c6b7b6b6b6a8f5e3f4f0efe5e3">[email protected]</a>/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
+do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/[email protected]/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69817
+do_sys_openat2 called by:C1 CompilerThre file:/sys/fs/cgroup/user.slice/user-1000.slice/[email protected]/app.slice/snap.intellij-idea-community.intellij-idea-community-a46a168b-28d0-4bb9-9e15-f3a966353efe.scope/memory.max pid:69812
 do_sys_openat2 called by:java file:/home/i560383/.sdkman/candidates/java/21.0.2-sapmchn/lib/libjimage.so pid:69797
 ```
 

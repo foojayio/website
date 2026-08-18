@@ -1,6 +1,5 @@
 ---
 title: "Bring Streaming to Apache Cassandra with Apache Pulsar"
-slug: "bring-streaming-to-apache-cassandra-with-apache-pulsar"
 date: "2022-05-05T18:10:42+00:00"
 lastmod: "2022-05-30T15:13:36+00:00"
 description: "How can you stream from Pulsar to Apache Cassandra, the powerful NoSQL database designed to support data-heavy applications in the cloud?"

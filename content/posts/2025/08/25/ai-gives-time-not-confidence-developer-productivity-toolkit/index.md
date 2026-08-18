@@ -1,6 +1,5 @@
 ---
 title: "AI Gives Time, Not Confidence: Developer Productivity Toolkit"
-slug: "ai-gives-time-not-confidence-developer-productivity-toolkit"
 date: "2025-08-25T07:07:56+00:00"
 lastmod: "2025-08-25T07:08:59+00:00"
 description: "By offloading some of that work to AI, you get more time and energy to focus on the truly challenging and rewarding parts of software development."

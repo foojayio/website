@@ -1,6 +1,5 @@
 ---
 title: "New User Interface for JFX Central, Home for JavaFX - Part 1"
-slug: "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-1"
 date: "2023-09-18T05:37:45+00:00"
 lastmod: "2023-09-18T06:10:25+00:00"
 description: "JFX Central is the place to be for all JavaFX info. The website is a project started by Dirk Lemmermann and has been online since 2021."

@@ -1,6 +1,5 @@
 ---
 title: "Aggregation Optimization in MongoDB: Unnecessary Unwinds (Part 2)"
-slug: "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
 date: "2026-06-25T10:01:00+00:00"
 lastmod: "2026-06-25T12:01:22+00:00"
 description: "And why MongoDB might be a better relational database than you ever realized. Design reviews are one-on-one meetings where MongoDB experts deliver advice - by Graeme Robinson"
@@ -22,9 +21,7 @@ frozen: false
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="aspect-ratio:2.2802192518511397;width:840px;height:auto">
-</figure>
+{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="aspect-ratio:2.2802192518511397;width:840px;height:auto" >}}
 
 [*Design reviews*](https://www.mongodb.com/events/mongodb-schema-design-reviews/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=agg-part2-foojay&utm_term=tony.kim)*are one-on-one meetings where MongoDB experts deliver advice on data modeling best practices and application design challenges. In this series, we are going to explore common real-life scenarios where design reviews helped developers achieve meaningful success with MongoDB.*
 

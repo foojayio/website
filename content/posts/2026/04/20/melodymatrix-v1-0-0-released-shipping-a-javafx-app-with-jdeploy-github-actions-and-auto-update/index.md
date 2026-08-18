@@ -1,6 +1,5 @@
 ---
 title: "MelodyMatrix V1.0.0 Released: Shipping a JavaFX App with jDeploy, GitHub Actions, and Auto-Update"
-slug: "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"
 date: "2026-04-20T14:51:00+00:00"
 description: "Some side projects take a while to get to a proper release. MelodyMatrix is one of those. The app has been downloadable for quite some time thanks to - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-04-16-first-release-of-melodymatrix-with-jdeploy/"

@@ -1,6 +1,5 @@
 ---
 title: "How to Get Started with the Hazelcast Viridian Serverless"
-slug: "how-to-get-started-with-the-hazelcast-viridian-serverless"
 date: "2023-02-22T08:13:32+00:00"
 lastmod: "2023-03-10T10:08:36+00:00"
 description: "Hazelcast Serverless manages your Cloud infrastructure, handling resource isolation, resource stealing, and isolated network access."

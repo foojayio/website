@@ -1,6 +1,5 @@
 ---
 title: "Enterprise Java in Practice"
-slug: "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
 date: "2026-01-29T10:11:40+00:00"
 description: "Learn how enterprise Java teams are modernizing, adopting Kubernetes, and tackling fragmentation. Discover insights from our report and join the webinar for practical, data-driven strategies."
 authors:

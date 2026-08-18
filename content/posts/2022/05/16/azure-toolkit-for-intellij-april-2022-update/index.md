@@ -1,6 +1,5 @@
 ---
 title: "Azure Toolkit for IntelliJ – April 2022 Update"
-slug: "azure-toolkit-for-intellij-april-2022-update"
 date: "2022-05-16T08:28:24+00:00"
 lastmod: "2022-05-16T08:29:08+00:00"
 description: "Azure Toolkit for IntelliJ is a plugin that allows you to easily create, develop, configure, test, and deploy Java applications to Azure."

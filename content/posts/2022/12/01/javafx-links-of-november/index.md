@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of November"
-slug: "javafx-links-of-november"
 date: "2022-12-01T15:04:22+00:00"
 lastmod: "2022-12-01T15:04:23+00:00"
 description: "Another month has passed and this is a summary of the Links Of The Week that were published on jfx-central.com during November!"
@@ -14,7 +13,7 @@ related_posts:
   - "javafx-links-of-november"
   - "javafx-links-of-october"
   - "a-javafx-app-on-zulufx-in-60-seconds"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

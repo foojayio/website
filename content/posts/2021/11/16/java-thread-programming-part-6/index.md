@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 6)"
-slug: "java-thread-programming-part-6"
 date: "2021-11-16T15:02:53+00:00"
 lastmod: "2021-11-16T15:11:51+00:00"
 description: "Have you ever wondered what is the purpose of the \"wait()\", \"notify()\", \"notifyAll()\" methods that come with each Java object?"

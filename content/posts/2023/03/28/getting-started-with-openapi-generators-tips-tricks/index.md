@@ -1,6 +1,5 @@
 ---
 title: "Getting started with OpenAPI Generators : tips and tricks"
-slug: "getting-started-with-openapi-generators-tips-tricks"
 date: "2023-03-28T15:50:14+00:00"
 lastmod: "2023-04-13T07:13:46+00:00"
 description: "Tips and tricks on how to get productive with creating OpenAPI generators. How to run and debug, create your own easily and more!"
@@ -118,7 +117,7 @@ Useful, but quite cumbersome. On top of this, you typically want to be able to r
 
 Using IntelliJ, you can do it by creating a run configuration as such :
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-65426" src="runconf-700x423.png" alt="A run configuration in IntelliJ used to run a specific generator" width="700" height="423">
+{{< img src="runconf-700x423.png" class="size-medium" alt="A run configuration in IntelliJ used to run a specific generator" width="700" height="423" >}}
 
 Above, a run configuration in IntelliJ used to run a specific generator.
 
@@ -147,7 +146,7 @@ if (GlobalSettings.getProperty("debugModels") != null) {
 }
 ```
 
-<img decoding="async" class="size-medium wp-image-65427" src="debugshow-700x411.png" alt="A screenshot of a debug of the model, showing the content of the &quot;allModels&quot; variable" width="700" height="411">
+{{< img src="debugshow-700x411.png" class="size-medium" alt="A screenshot of a debug of the model, showing the content of the 'allModels' variable" width="700" height="411" >}}
 
 Above, a screenshot of a debug of the model, showing the content of the "allModels" variable.
 
@@ -188,7 +187,7 @@ There is a [list available](https://mustache.github.io/mustache.5.html "list ava
 
 You can search the code for any class implementing the `Mustache.Lambda` interface 😊.
 
-<img decoding="async" class="size-medium wp-image-65428" src="mustache-410x510.png" alt="A list of many custom lambdas in the OpenAPI source code" width="410" height="510">
+{{< img src="mustache-410x510.png" class="size-medium" alt="A list of many custom lambdas in the OpenAPI source code" width="410" height="510" >}}
 
 A screenshot showing a list of many custom lambdas in the OpenAPI source code.
 

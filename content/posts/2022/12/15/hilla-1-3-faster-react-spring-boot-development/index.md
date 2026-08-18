@@ -1,6 +1,5 @@
 ---
 title: "Hilla 1.3: Build React + Spring Boot Apps Faster"
-slug: "hilla-1-3-faster-react-spring-boot-development"
 date: "2022-12-15T00:01:50+00:00"
 lastmod: "2022-12-15T00:01:51+00:00"
 description: "With full-stack type safety, 45+ UI components and integrated tooling, Hilla lets you build Spring Boot + React apps faster than ever."

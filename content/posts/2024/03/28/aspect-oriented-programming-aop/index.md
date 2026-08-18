@@ -1,6 +1,5 @@
 ---
 title: "Aspect-Oriented Programming (AOP) Made Easy With Java"
-slug: "aspect-oriented-programming-aop"
 date: "2024-03-28T06:58:22+00:00"
 lastmod: "2024-03-28T06:58:57+00:00"
 description: "The AspectJ framework streamlines AOP adoption in Java. AOP improves modularity which leads to code that is easier to understand and maintain."
@@ -14,7 +13,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
   - "42-practical-java-design-patterns-builder-and-more"
-  - "building-a-declarative-api-with-spring-aop-and-spel"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

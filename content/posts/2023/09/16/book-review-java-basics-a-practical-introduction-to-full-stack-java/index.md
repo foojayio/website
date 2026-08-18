@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"Java Basics\", by Shai Almog"
-slug: "book-review-java-basics-a-practical-introduction-to-full-stack-java"
 date: "2023-09-16T08:43:09+00:00"
 lastmod: "2023-09-16T08:50:17+00:00"
 description: "Shai Almog's \"Java Basics\" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author"
@@ -20,9 +19,7 @@ frozen: false
 
 Shai Almog's "[Java Basics: A Practical Introduction to Full Stack Java](https://www.amazon.com/Java-Basics-Practical-Introduction-Full-Stack/dp/B0CCCJ38WH)" more than lives up to its title. And how could it be otherwise, with its highly Java driven and opinionated author having a track record going back to leading Java mobile efforts all the way back to Sun Microsystems.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" alt="" class="wp-image-102286" style="width:290px;height:362px" width="290" height="362">
-</figure>
+{{< img src="B0CCCJ38WH.01._SCLZZZZZZZ_SX500_.jpg" class="size-full is-resized" width="290" height="362" style="width:290px;height:362px" >}}
 
 **Thoroughness and Ambition**
 

@@ -1,6 +1,5 @@
 ---
 title: "Master-Detail with Hilla"
-slug: "master-detail-with-hilla"
 date: "2022-06-21T12:13:24+00:00"
 lastmod: "2022-06-21T12:20:09+00:00"
 description: "Learn how to use the web application framework Hilla to create a master-detail view with a Grid to display data and a Form to edit the data."

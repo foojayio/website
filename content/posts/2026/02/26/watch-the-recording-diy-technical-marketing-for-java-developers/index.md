@@ -1,6 +1,5 @@
 ---
 title: "Personal Branding Tips for Java Developers"
-slug: "watch-the-recording-diy-technical-marketing-for-java-developers"
 date: "2026-02-26T10:28:58+00:00"
 description: "See why personal branding matters for developers and how even small, intentional actions can make a real difference over time."
 canonical: "https://payara.fish/blog/watch-the-recording-diy-technical-marketing-for-developers/"

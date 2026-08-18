@@ -1,6 +1,5 @@
 ---
 title: "MongoDB Schemas in Java"
-slug: "mongodb-schemas-in-java"
 date: "2025-09-11T13:15:02+00:00"
 lastmod: "2025-09-18T00:11:35+00:00"
 description: "A lot of what I have said would also apply to other strongly typed languages too—but for most of the problems I am solving at the moment, Java feels like the best tool for the job. In addition to its excellent strengths as a language, ease of maintenance, and the benefits I have mentioned, it also has an excellent community of experienced developers you can easily find and hire (which you can’t say for many other languages).I would also say that I am a regular developer of Python, TypeScript, and JavaScript solutions. I love some of the flexibility and simplicity they have. When I build things with those languages, I like to spend even more effort on testing than I will with Java, to try to safeguard against the inadequacies of the type systems they use. MongoDB also supports JSON Schema validation rules that enforce schemas at the database layer. This may be a useful guardrail to add if the language you are using is not enforcing the schema through the type system."
@@ -38,9 +37,7 @@ And if you want to play with the example API visually (like I do!) and you have 
 
 Put your connection string in and you'll see the sea surface temperatures displayed on a nice little browser UI:  
 
-<figure class="aligncenter size-full is-resized">
- <img fetchpriority="high" decoding="async" width="693" height="469" src="Screenshot-2025-09-09-at-10.50.44-AM.png" alt="A web application showing a map of Australia with red temperature markers, featuring coordinate input fields and titled &quot;MongoDB Schemas in Java&quot; demonstrating weather data visualization." class="wp-image-121193" style="width:790px;height:auto" title="A web application showing a map of Australia with red temperature markers, featuring coordinate input fields and titled &quot;MongoDB Schemas in Java&quot; demonstrating weather data visualization.">
-</figure>
+{{< img src="Screenshot-2025-09-09-at-10.50.44-AM.png" class="aligncenter size-full is-resized" alt="A web application showing a map of Australia with red temperature markers, featuring coordinate input fields and titled 'MongoDB Schemas in Java' demonstrating weather data visualization." width="693" height="469" style="width:790px;height:auto" >}}
 
 (If you're a screen-reader user, there's a way for you to [read the data](https://github.com/luketn/mongodb-schemas-in-java/blob/main/src/main/resources/static/index.html#L187-L190) too.)
 
@@ -523,7 +520,7 @@ public class WeatherDataAccess {
     public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<WeatherReport> weatherReportConsumer) {
         MongoDatabase database = mongoDBProvider.getMongoDatabase();
         MongoCollection<WeatherReport> collection = database.getCollection(COLLECTION_NAME, WeatherReport.class);
-        
+
         Bson filter = and(
                 gte("position.coordinates.0", boundingBox.west()),
                 lte("position.coordinates.0", boundingBox.east()),
@@ -652,7 +649,7 @@ To support this, all you need to do is +1 on your query limit. If the cursor ret
 public WeatherReportSummaryListNoCount listReportsNoPageCount(int page) {
     MongoDatabase database = mongoDBProvider.getMongoDatabase();
     MongoCollection<WeatherReportSummary> collection = database.getCollection(COLLECTION_NAME, WeatherReportSummary.class);
-    
+
     List<WeatherReportSummary> reports = collection.find()
             .skip(page * pageSize)
             .limit(pageSize+1) // Fetch one extra to determine if there are more pages
@@ -753,7 +750,7 @@ public class SeaTemperatureService {
 
     public void streamSeaTemperatures(BoundingBox boundingBox, Consumer<List<SeaTemperature>> seaTemperatureConsumer) {
         List<SeaTemperature> seaTemperaturesBatch = new ArrayList<>();
-        
+
         record Coordinates(Double longitude, Double latitude) {}
         Set<Coordinates> uniqueCoordinates = new HashSet<>();
 

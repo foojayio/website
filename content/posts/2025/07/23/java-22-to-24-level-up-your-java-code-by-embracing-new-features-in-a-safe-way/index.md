@@ -1,6 +1,5 @@
 ---
 title: "Java 22 to 24: Level up your Java Code by embracing new features in a safe way"
-slug: "java-22-to-24-level-up-your-java-code-by-embracing-new-features-in-a-safe-way"
 date: "2025-07-23T15:29:09+00:00"
 lastmod: "2025-07-23T15:42:47+00:00"
 description: "By embracing the new features in Java 22, 23, and 24—such as unnamed variables and patterns, Markdown in Javadoc, the Class-File API, and Stream Gatherers—developers can write more efficient, and more maintainable code resulting in a higher-quality code."

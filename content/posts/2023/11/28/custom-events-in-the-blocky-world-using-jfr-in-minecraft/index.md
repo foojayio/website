@@ -1,6 +1,5 @@
 ---
 title: "Custom Events in the Blocky World: Using JFR in Minecraft"
-slug: "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
 date: "2023-11-28T19:12:50+00:00"
 lastmod: "2023-11-28T19:12:51+00:00"
 description: "I was searching for some JFR-related settings on the internet when I stumbled upon the /jfr command that exists in Minecraft..."
@@ -21,9 +20,7 @@ frozen: false
 
 I was searching for some JFR-related settings on the internet when I stumbled upon the [`/jfr` command](https://minecraft.fandom.com/wiki/Commands/jfr) that exists in [Minecraft](https://www.minecraft.net):  
 
-<figure class="aligncenter size-full is-resized">
- <a target="_blank" href="https://minecraft.fandom.com/wiki/Commands/jfr"><img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/11/image-2.png" alt="" class="wp-image-1298" style="width:614px;height:auto"></a>
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/11/image-2.png" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 This, of course, intrigued me, especially as Minecraft apparently adds some custom JFR events:
 [![](https://mostlynerdless.de/wp-content/uploads/2023/11/image-3.png)](https://minecraft.fandom.com/wiki/Commands/jfr)
@@ -32,9 +29,7 @@ So I had to check it out. I downloaded and started the [Java server](https://www
 
 You then must ensure that you have OP privileges and add them, if not via the Minecraft server shell. Then, you can type `/jfr start` in the chat (launch it by typing <kbd>T</kbd>) to start the recording and `/jfr stop` to stop it.  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/11/Screenshot-from-2023-11-17-15-47-07.png" alt="" class="wp-image-1296" style="width:614px;height:auto">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/11/Screenshot-from-2023-11-17-15-47-07.png" class="aligncenter size-full is-resized" style="width:614px;height:auto" >}}
 
 *You see that it's my first time "playing" Minecraft, and I'm great at getting attacked. It's probably also my last time.*
 

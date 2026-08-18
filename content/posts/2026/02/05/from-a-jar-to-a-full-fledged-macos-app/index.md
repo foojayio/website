@@ -1,6 +1,5 @@
 ---
 title: "From a JAR to a full-fledged MacOS app"
-slug: "from-a-jar-to-a-full-fledged-macos-app"
 date: "2026-02-05T10:15:05+00:00"
 lastmod: "2026-02-05T10:18:16+00:00"
 description: "A couple of years ago, I developed a small Kotlin GUI to help me rename my files in batch. I actually created it with different JVM frameworks to compare - by Nicolas Frankel"
@@ -26,7 +25,7 @@ A couple of years ago, I developed a small [Kotlin GUI](https://blog.frankel.ch/
 
 When launching the UberJAR, I couldn't see the network volumes. If I typed the path in the field, I couldn't see any sub-nodes. I searched online for a solution, and it mentioned giving the application the `Local Network` permissions: *Settings \> Privacy \& Security \> Local Network*. I tried to add the Java SDK or the UberJAR to the list, but I didn't find a way.
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-122504 size-medium" src="security-settings-531x510.png" alt="" width="531" height="510">
+{{< img src="security-settings-531x510.png" class="aligncenter size-medium" width="531" height="510" >}}
 
 ## The solution
 

@@ -1,6 +1,5 @@
 ---
 title: "1.0 Release of Language Support for Java on Visual Studio Code"
-slug: "announcing-the-1-0-release-of-language-support-for-java-on-visual-studio-code"
 date: "2021-10-25T07:53:21+00:00"
 lastmod: "2021-10-25T08:30:55+00:00"
 description: "We are excited to announce the 1.0 release of Language Support for Java™ by Red Hat on Visual Studio Code."

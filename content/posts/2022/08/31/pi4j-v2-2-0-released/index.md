@@ -1,6 +1,5 @@
 ---
 title: "Pi4J V2.2.0 Released"
-slug: "pi4j-v2-2-0-released"
 date: "2022-08-31T17:09:19+00:00"
 lastmod: "2022-09-02T12:03:20+00:00"
 description: "Pi4J provides friendly object-oriented I/O API and libraries for Java devs to access the full I/O capabilities of the Raspberry Pi platform."

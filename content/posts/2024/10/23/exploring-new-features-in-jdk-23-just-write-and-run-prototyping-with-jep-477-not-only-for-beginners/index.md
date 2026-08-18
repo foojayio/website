@@ -1,6 +1,5 @@
 ---
 title: "Just-Write-And-Run prototyping with JEP-477"
-slug: "exploring-new-features-in-jdk-23-just-write-and-run-prototyping-with-jep-477-not-only-for-beginners"
 date: "2024-10-23T09:37:04+00:00"
 lastmod: "2024-10-23T09:45:14+00:00"
 description: "JEP-477 can be considered an example of the symbiotic development of multiple JEPs together, similar to the result of the development of the Java platform."
@@ -16,7 +15,7 @@ related_posts:
   - "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"
   - "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
-  - "exploring-new-features-in-jdk-23-module-design-pattern-with-jep-476"
+  - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
 frozen: false
 ---
 

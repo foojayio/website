@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"Designing APIs with Swagger and OpenAPI\""
-slug: "book-review-designing-apis-with-swagger-and-openapi"
 date: "2023-08-01T18:21:08+00:00"
 lastmod: "2023-08-01T18:21:10+00:00"
 description: "This review is about Designing APIs with Swagger and OpenAPI by Joshua S. Ponelat and Lukas L. Rosenstock from Manning."

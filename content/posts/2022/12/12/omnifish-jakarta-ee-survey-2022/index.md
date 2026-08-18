@@ -1,6 +1,5 @@
 ---
 title: "OmniFish Jakarta EE Survey 2022"
-slug: "omnifish-jakarta-ee-survey-2022"
 date: "2022-12-12T11:44:26+00:00"
 lastmod: "2022-12-12T11:44:27+00:00"
 description: "Want to have a say in what happens for the next version of Jakarta EE? Check out the new edition of the Jakarta EE Survey 2022 by OmniFish!"
@@ -66,9 +65,7 @@ More information:
 * [OmniFaces Jakarta EE 2020 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 * [OmniFaces Jakarta EE 2018 Survey Results](https://arjan-tijms.omnifaces.org/2021/02/jakarta-ee-survey-20202021-results.html)
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

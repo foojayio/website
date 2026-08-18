@@ -1,6 +1,5 @@
 ---
 title: "Thread Safe Native Memory in Java"
-slug: "java-native-memory-access-modes"
 date: "2026-04-07T10:00:43+00:00"
 lastmod: "2026-04-16T07:28:18+00:00"
 description: "Thread-safe native memory access covering Plain, Opaque, Acquire/Release, and Volatile with JCStress tests to prove each guarantee"

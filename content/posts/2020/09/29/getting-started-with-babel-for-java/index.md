@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Babel for Java and OpenJDK"
-slug: "getting-started-with-babel-for-java"
 date: "2020-09-29T07:57:36+00:00"
 lastmod: "2021-08-23T12:36:52+00:00"
 description: "Introdudcing frgaal, a retrofitting Java compiler, letting you use modern and experimental features, while keeping compatibility with your target runtime."

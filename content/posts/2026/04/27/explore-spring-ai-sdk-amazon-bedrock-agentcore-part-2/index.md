@@ -1,6 +1,5 @@
 ---
 title: "Explore Spring AI SDK – Amazon Bedrock AgentCore – Part 2"
-slug: "explore-spring-ai-sdk-amazon-bedrock-agentcore-part-2"
 date: "2026-04-27T09:09:00+00:00"
 lastmod: "2026-04-27T15:56:38+00:00"
 description: "Explore how to integrate AgentCore Memory in the Spring AI SDK with Amazon Bedrock. Learn how to add short-term to AI agents for improved context awareness, conversation continuity, and smarter responses in real-world applications."

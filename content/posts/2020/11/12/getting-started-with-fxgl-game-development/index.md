@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with FXGL Game Development"
-slug: "getting-started-with-fxgl-game-development"
 date: "2020-11-12T08:24:54+00:00"
 lastmod: "2021-04-23T12:36:38+00:00"
 description: "FXGL is a JavaFX Game Library Engine for Java and Kotlin, created by Almas Baimagambetov. Here is everything you need to get started!"
@@ -16,8 +15,8 @@ tags:
 related_posts:
   - "foojay-podcast-25"
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-  - "javafx-links-of-november-2025"
 frozen: false
 ---
 

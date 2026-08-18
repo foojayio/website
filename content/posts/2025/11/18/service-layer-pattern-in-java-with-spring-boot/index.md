@@ -1,6 +1,5 @@
 ---
 title: "Service Layer Pattern in Java With Spring Boot"
-slug: "service-layer-pattern-in-java-with-spring-boot"
 date: "2025-11-18T14:40:26+00:00"
 lastmod: "2025-11-18T14:40:28+00:00"
 description: "In modern software design, it is important to develop code that is clean and maintainable. One way developers do this is using the Service Layer pattern.What you'll learnIn this article, you'll learn:What the Service Layer pattern is and why it matters.How it fits with the MVC architecture.How to implement it in a real Spring Boot application.How to add MongoDB with minimal code.Best practices and common mistakes to avoid."
@@ -434,9 +433,9 @@ Notice how adding MongoDB didn't require any changes to:
 @Test
 
 public void createUser_duplicateEmail_throwsException() {
-    when(userRepository.existsByEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="027667717642677a636f726e672c616d6f">[email protected]</a>")).thenReturn(true);
+    when(userRepository.existsByEmail("[email protected]")).thenReturn(true);
     assertThrows(DuplicateEmailException.class, () -> {
-        userService.createUser("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dca8b9afa89cb9a4bdb1acb0b9f2bfb3b1">[email protected]</a>", "Test User");
+        userService.createUser("[email protected]", "Test User");
     });
 }
 ```

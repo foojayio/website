@@ -1,6 +1,5 @@
 ---
 title: "Book Review : The Software Engineer's Guidebook"
-slug: "book-review-the-software-engineers-guidebook"
 date: "2023-12-15T14:12:12+00:00"
 lastmod: "2023-12-15T14:12:14+00:00"
 description: "Discover the ultimate guidebook for software engineers, packed with essential tips and strategies for success in the industry."
@@ -30,7 +29,7 @@ While I was perusing this book, memories of the days when I embarked on my softw
 Author: Gergely Orosz
 Genre: Technical Fiction***
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-103465" src="The-Software-Engineers-GuideBook-396x510.jpg" alt="The Software Engineer's Guidebook" width="396" height="510">
+{{< img src="The-Software-Engineers-GuideBook-396x510.jpg" class="size-medium" alt="The Software Engineer's Guidebook" width="396" height="510" >}}
 
 The Software Engineer's Guidebook
 

@@ -1,6 +1,5 @@
 ---
 title: "How to profile a performance issue using Spring Boot profiling tools"
-slug: "how-to-profile-a-performance-issue-using-spring-boot-profiling-tools"
 date: "2024-09-02T09:56:13+00:00"
 lastmod: "2024-09-02T10:03:50+00:00"
 description: "Profiling performance issues and establishing robust monitoring and observability are critical for maintaining the health and efficiency of your Spring Boot application."
@@ -237,9 +236,7 @@ The [duration](https://docs.digma.ai/digma-developer-guide/digma-features/analyt
 
 In observability, we can see all recent calls, and by clicking on calls we get to see the insights.{#1ec0}
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" title="How To Profile A Performance Issue Using Spring Boot Profiling Tools" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*OViVway4sDw2tYTuEfriiQ.png" alt="Duration ">
-</figure>
+{{< img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*OViVway4sDw2tYTuEfriiQ.png" class="size-large is-resized" alt="Duration" >}}
 
 **Last Call Duration:**   
 

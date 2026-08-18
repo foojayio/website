@@ -1,6 +1,5 @@
 ---
 title: "Implementing Soft Deletes in Java"
-slug: "implementing-soft-deletes-in-java"
 date: "2026-05-21T10:09:00+00:00"
 lastmod: "2026-05-22T07:06:23+00:00"
 description: "Usually, when deleting documents from a database, the entry is permanently gone and can not be recovered or accessed again. Sometimes data needs to be made unavailable for regular access without actually being removed from a database. A common example is a user deleting their account on a platform, but retention policies require you to keep all data related to that user for a certain period of time. At the same time, no data regarding that user is accessible on the platform. A soft delete is a treatment for a piece of data that ensures it is ignored by your application while actually still being stored in the database."
@@ -54,7 +53,7 @@ What we want to do is to change the schema of the users collection from its curr
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8a8b9adb487b3b9a1bd98bfb9b5bdb7beacb0aab7b6f6bdab">[email protected]</a>",
+  "email": "[email protected]",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G"
 }
 ```
@@ -67,7 +66,7 @@ To something that includes a flag regarding the deletion:
     "$oid": "59b99dddcfa9a34dcd788604"
   },
   "name": "Thoros of Myr",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8b8a9bda497a3a9b1ad88afa9a5ada7aebca0baa7a6e6adbb">[email protected]</a>",
+  "email": "[email protected]",
   "password": "$2b$12$bkA1MM3UEwZ4N0VpCQY68eMY8HKTHWtk2xI2QnG4MuW5UWHlBrF8G",
   "deletedAt": null
 }
@@ -410,7 +409,7 @@ When using this method we need to make sure to also cascade deletions into relat
     "$oid": "5a9427648b0beebeb69579e7"
   },
   "name": "Mercedes Tyler",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b767e69787e7f7e68446f62777e695b7d7a707e7c767a727735787476">[email protected]</a>",
+  "email": "[email protected]",
   "movie_id": {
     "$oid": "573a1390f29313caabcd4323"
   },

@@ -1,6 +1,5 @@
 ---
 title: "Announcing the Digma Beta: First Runtime Linter for Java Code"
-slug: "announcing-the-digma-beta-first-runtime-linter-for-java-code"
 date: "2023-05-22T13:52:34+00:00"
 lastmod: "2023-07-18T07:06:00+00:00"
 description: "Looking for senior Java developers to participate in the beta program of a new free runtime linter that provides Continuous code Feedback."
@@ -42,9 +41,7 @@ We have 20 slots currently open for the beta.
 4. Help create a tool that will improve developer happiness
 5. Some cool swag... (TShirt, stressballs and more )🦇
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" alt="" class="wp-image-98441" width="155" height="206">
-</figure>
+{{< img src="4D2F9C818E2F9075155FC2B1FB4DDA4C-768x1024.jpg" class="aligncenter size-large is-resized" width="155" height="206" >}}
 
 ## Requirements to apply ✅
 

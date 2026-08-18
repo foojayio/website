@@ -1,6 +1,5 @@
 ---
 title: "Getting More Mileage Out of Kafka: OpenJDK vs. Azul Prime"
-slug: "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
 date: "2022-05-11T06:47:07+00:00"
 lastmod: "2025-07-15T14:20:08+00:00"
 description: "Kafka is horizontally scalable, fault-tolerant, runs in production for thousands of companies – let's figure out how to get more out of it!"

@@ -1,6 +1,5 @@
 ---
 title: "Integrate executable Java code in your blog posts, part 2: How to use dependencies"
-slug: "integrate-executable-java-code-in-your-blog-posts-part-2-how-to-use-dependencies"
 date: "2023-12-15T10:07:55+00:00"
 lastmod: "2023-12-15T10:12:29+00:00"
 description: "Not only \"simple\" Java code can be added: a more complex class with a record and Maven dependencies can be created and executed on Foojay."

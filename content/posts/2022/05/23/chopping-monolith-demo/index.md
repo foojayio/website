@@ -1,6 +1,5 @@
 ---
 title: "Chopping the Monolith: The Demo"
-slug: "chopping-monolith-demo"
 date: "2022-05-23T12:53:49+00:00"
 lastmod: "2022-05-23T12:53:50+00:00"
 description: "Learn how to chop up the monolith by exposing the to-be-chopped parts via HTTP and use an API Gateway to route the wanted requests to one's service of choice!"

@@ -1,6 +1,5 @@
 ---
 title: "Why Did We Choose JSF for the Eclipse Starter for Jakarta EE?"
-slug: "why-did-we-choose-jakarta-faces-for-the-ui-of-the-eclipse-starter-for-jakarta-ee"
 date: "2022-12-13T10:27:44+00:00"
 lastmod: "2022-12-14T16:53:18+00:00"
 description: "This article explains why we chose JSF to build the Eclipse starter for Jakarta and why it deserves more love and attention!"

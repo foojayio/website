@@ -1,6 +1,5 @@
 ---
 title: "Operator Overloading in Java"
-slug: "operator-overloading-in-java"
 date: "2023-06-10T12:19:26+00:00"
 lastmod: "2023-06-10T12:19:28+00:00"
 description: "Write expressions like (bigDecimalMap[ObjKey] * 5 > 20) in Java. Manifold makes that happen. Expressions like \"var distance = 5 mph * 3 hr\"!"

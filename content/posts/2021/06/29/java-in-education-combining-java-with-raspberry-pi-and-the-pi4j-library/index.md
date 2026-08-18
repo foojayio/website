@@ -1,6 +1,5 @@
 ---
 title: "Java in Education: Combining Java with Raspberry Pi and the Pi4J Library"
-slug: "java-in-education-combining-java-with-raspberry-pi-and-the-pi4j-library"
 date: "2021-06-29T07:40:55+00:00"
 lastmod: "2021-12-10T12:59:17+00:00"
 description: "At the University of Applied Sciences and Arts Northwestern in Switzerland, theoretical subjects are combined with programming assignments."
@@ -17,9 +16,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-  - "javafx-links-of-november-2025"
 frozen: false
 ---
 

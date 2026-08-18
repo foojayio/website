@@ -1,6 +1,5 @@
 ---
 title: "Does Language Still Matter in the Age of AI? Yes — But the Tradeoff Has Changed"
-slug: "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"
 date: "2026-03-25T16:37:20+00:00"
 lastmod: "2026-03-26T07:12:39+00:00"
 description: "I keep hearing the same question in architecture reviews, slack threads, and conference Hallways: \"If AI is writing the code, does language even matter - by David Parry"
@@ -17,7 +16,7 @@ related_posts:
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
   - "jc-ai-newsletter-4"
   - "ai4devs-schedule-published"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

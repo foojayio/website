@@ -1,6 +1,5 @@
 ---
 title: "Adelphi: Apache Cassandra Testing Goes Cloud Native"
-slug: "adelphi-apache-cassandra-testing-goes-cloud-native"
 date: "2021-12-09T15:55:43+00:00"
 lastmod: "2021-12-11T03:23:08+00:00"
 description: "Adelphi is an open-source QA tool for Apache Cassandra, packaged as a Helm chart, simplifying Kubernetes data integrity and performance tests."

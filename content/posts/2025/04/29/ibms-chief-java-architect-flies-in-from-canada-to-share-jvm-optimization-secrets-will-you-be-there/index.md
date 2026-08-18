@@ -1,6 +1,5 @@
 ---
 title: "IBM's Chief Java Architect Flies in from Canada to Share JVM Optimization Secrets—Will You Be There?"
-slug: "ibms-chief-java-architect-flies-in-from-canada-to-share-jvm-optimization-secrets-will-you-be-there"
 date: "2025-04-29T10:14:21+00:00"
 lastmod: "2025-04-30T09:50:04+00:00"
 description: "It's not every day that Mark Stoodley, IBM's Chief Architect for Java, flies from Canada to Europe to lead a hands-on workshop. At JCON EUROPE 2025, you - by Richard Fichtner"

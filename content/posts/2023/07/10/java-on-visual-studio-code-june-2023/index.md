@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code – June 2023"
-slug: "java-on-visual-studio-code-june-2023"
 date: "2023-07-10T12:44:47+00:00"
 lastmod: "2023-07-10T12:46:06+00:00"
 description: "Hi everyone, welcome to the our June update for Visual Studio Code for Java!"

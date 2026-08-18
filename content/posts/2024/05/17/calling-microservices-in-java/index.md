@@ -1,6 +1,5 @@
 ---
 title: "Calling Microservices in Java: Part 1"
-slug: "calling-microservices-in-java"
 date: "2024-05-17T19:41:44+00:00"
 lastmod: "2024-05-17T19:48:22+00:00"
 description: "This article explores various approaches to calling microservices in Java, from simple RESTful APIs to advanced. Learn more!"
@@ -15,7 +14,7 @@ related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "book-review-monolith-to-microservices-part-1"
   - "book-review-quarkus-for-spring-developers"
-  - "intro-to-the-boxlang-formatter"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

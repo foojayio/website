@@ -1,6 +1,5 @@
 ---
 title: "The Story of a Java 17 Native Memory Leak"
-slug: "the-story-of-a-java-17-native-memory-leak"
 date: "2022-09-13T08:15:53+00:00"
 lastmod: "2022-09-13T08:15:55+00:00"
 description: "How a native memory leak in Java 17 got fixed, improving the future operability of the JVM platform for millions!"

@@ -1,6 +1,5 @@
 ---
 title: "What is JVM Bytecode?"
-slug: "what-is-jvm-bytecode"
 date: "2020-09-16T03:55:43+00:00"
 lastmod: "2020-09-16T08:23:59+00:00"
 description: "Everyone who programs in Java is familiar with the term \"bytecode\". But how many of us understand what JDK bytecode actually is?"

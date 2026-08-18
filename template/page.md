@@ -1,5 +1,11 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+# ============================================================================
+#  Static page — starter template.  MAINTAINERS ONLY.
+# ----------------------------------------------------------------------------
+#  Pages under content/pages/ are hand-maintained, not contributed. Article
+#  authors want template/post.md instead.
+# ============================================================================
+title: "Page Title"
 description: ""
 canonical: ""
 # Explicit URL override so nested legacy paths (e.g.

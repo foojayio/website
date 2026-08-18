@@ -1,6 +1,5 @@
 ---
 title: "Six JDK 24 Features You Should Know About"
-slug: "six-jdk-24-features-you-should-know-about"
 date: "2025-04-03T08:42:12+00:00"
 lastmod: "2025-04-07T12:23:22+00:00"
 description: "Since 2018, we’ve had a new release of the Java platform every six months. With Swiss watch-like regularity, the latest version of Java is upon us. - by Simon Ritter"

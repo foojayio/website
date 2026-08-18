@@ -1,6 +1,5 @@
 ---
 title: "Book review: \"OpenJDK Migration for Dummies\""
-slug: "book-review-openjdk-migration-for-dummies-2"
 date: "2023-09-01T07:42:43+00:00"
 lastmod: "2024-06-30T11:18:26+00:00"
 description: "Is \"OpenJDK Migration for Dummies\" worth reading? I'd say so!"
@@ -25,9 +24,7 @@ frozen: false
 
 This is where the new **free** book [OpenJDK Migration for Dummies](https://www.azul.com/openjdk-migration-for-dummies/) by [Simon Ritter](https://www.linkedin.com/in/siritter/) offers a very useful resource.  
 
-<figure class="aligncenter is-resized">
- <a target="_blank" href="https://www.azul.com/openjdk-migration-for-dummies/"><img fetchpriority="high" decoding="async" src="dummies-373x510.png" alt="" class="wp-image-101738" style="width:262px;height:358px" width="262" height="358"></a>
-</figure>
+{{< img src="dummies-373x510.png" class="aligncenter is-resized" width="262" height="358" style="width:262px;height:358px" >}}
 
 After all, it's easy to say: "Just pick an OpenJDK, any will do!", but is it really that easy, are there any caveats? As it turns out, yes, there are, and this book will help you navigate quite a bit of them. (For example, you might be using the Lucida font.)
 

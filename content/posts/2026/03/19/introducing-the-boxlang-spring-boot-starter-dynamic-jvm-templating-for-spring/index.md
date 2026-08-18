@@ -1,6 +1,5 @@
 ---
 title: "Introducing the BoxLang Spring Boot Starter: Dynamic JVM Templating for Spring"
-slug: "introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring"
 date: "2026-03-19T14:20:02+00:00"
 lastmod: "2026-03-20T06:51:26+00:00"
 description: "Spring Boot developers know the pain of evaluating view technologies. Thymeleaf is great — until you need more expressiveness. FreeMarker is powerful — - by Cristobal Escobar"
@@ -17,10 +16,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
-  - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
 frozen: false
 ---
 

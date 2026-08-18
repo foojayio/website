@@ -1,6 +1,5 @@
 ---
 title: "Research: Measuring Energy Consumption in Programming Languages for AI Applications"
-slug: "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
 date: "2025-09-15T07:03:00+00:00"
 lastmod: "2025-09-15T14:24:46+00:00"
 description: "I hope my research paper helps the community understand not only the importance of proper language platform selection, but also hardware choice considerations."

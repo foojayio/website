@@ -1,6 +1,5 @@
 ---
 title: "How to Share Your Work With a Video or Podcast"
-slug: "how-to-share-your-work-with-a-video-or-podcast"
 date: "2023-07-14T09:22:11+00:00"
 lastmod: "2023-08-31T06:44:16+00:00"
 description: "Learn about the experiences of creating podcasts and how you can share your work in a video with a small (or bigger) budget."

@@ -1,6 +1,5 @@
 ---
 title: "Java: Where the Wild Code Isn't (On Security and Modularity)"
-slug: "java-where-the-wild-code-isnt"
 date: "2024-09-17T08:41:00+00:00"
 lastmod: "2024-10-03T16:36:26+00:00"
 description: "The OpenJDK community has made Java safer for users and developers while making it easier to design, build, and run applications quickly."
@@ -24,8 +23,7 @@ There are two core aspects that have led to this:
 1. A secure JDK, where vulnerabilities are dealt with and patched.
 2. A modular JDK, where different types or risk can be clearly delineated.
 
-1. A Secure JDK
----------------
+## 1. A Secure JDK
 
 The core Java platform underlies all Java applications and is kept secure by a special OpenJDK Vulnerability Group. This group helps to perform different actions and security regression tests like fuzzing and ensuring old vulnerabilities do not recur.
 
@@ -55,8 +53,7 @@ By recognizing the need for vulnerability disclosure and leveraging the knowns o
 
 The alterative to this coordination would be a situation of semi-predictable yet meaningless numbers that would require special lookup tables to know which security patches were present where.
 
-2. Security of a Modular JDK
-----------------------------
+## 2. Security of a Modular JDK
 
 A security posture often moves in waves. Something is considered secure until it fails, then attackers learn to emulate and build on new ways that caused the fail. By isolating the areas in which security has been a major issue, the Java platform has provided and continues to provide a secure development platform for running applications and workloads.
 

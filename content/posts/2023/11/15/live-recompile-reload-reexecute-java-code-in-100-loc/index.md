@@ -1,6 +1,5 @@
 ---
 title: "Live (re)compile, (re)load, (re)execute Java code in 100 LoC"
-slug: "live-recompile-reload-reexecute-java-code-in-100-loc"
 date: "2023-11-15T16:22:05+00:00"
 lastmod: "2024-01-09T12:58:25+00:00"
 description: "A way to automatically (re)compile, (re)load and (re)execute code on file changed!"

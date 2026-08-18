@@ -1,6 +1,5 @@
 ---
 title: "Avoiding Stringly-typed in Kotlin"
-slug: "avoid-stringly-typed-in-kotlin"
 date: "2022-02-28T16:35:28+00:00"
 lastmod: "2022-02-28T16:35:29+00:00"
 description: "It is more beneficial to use sealed and value class instead of enumerations in Kotlin; let’s find out why."

@@ -1,6 +1,5 @@
 ---
 title: "Semantic Search with Spring Boot & Redis"
-slug: "semantic-search-with-spring-boot-redis"
 date: "2025-05-05T15:35:55+00:00"
 lastmod: "2025-05-05T15:35:56+00:00"
 description: "Learn how to build a semantic search app with Spring Boot and Redis. Discover how Redis OM Spring makes it easy to find results based on meaning, not just keywords."

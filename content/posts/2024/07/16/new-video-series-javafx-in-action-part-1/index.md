@@ -1,6 +1,5 @@
 ---
 title: "New video series \"JavaFX In Action\", Part 1"
-slug: "new-video-series-javafx-in-action-part-1"
 date: "2024-07-16T07:35:29+00:00"
 lastmod: "2024-11-19T08:01:28+00:00"
 description: "With this new series of video interviews, I want to take you behind-the-scenes of some applications built using JavaFX."

@@ -1,6 +1,5 @@
 ---
 title: "A Closer Look at Java Flight Recorder Streaming"
-slug: "a-closer-look-at-jfr-streaming"
 date: "2020-08-17T11:04:00+00:00"
 lastmod: "2025-02-17T09:29:09+00:00"
 description: "Learn some of the things you can do with Java Flight Recorder streaming, as well as some of the things you may want to avoid!"

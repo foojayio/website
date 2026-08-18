@@ -1,6 +1,5 @@
 ---
 title: "How to Best Use Java Records as DTOs in Spring Boot 3"
-slug: "how-to-best-use-java-records-as-dtos-in-spring-boot-3"
 date: "2023-03-09T17:06:46+00:00"
 lastmod: "2023-03-09T17:06:47+00:00"
 description: "Explore how to best use compact Java Records as Data Transfer Objects (DTOs) for database and API calls in Spring Boot 3 with Hibernate 6."
@@ -18,7 +17,7 @@ related_posts:
   - "how-java-litters-beyond-the-heap-relational-databases"
   - "how-java-litters-beyond-the-heap-part-2-distributed-databases"
   - "how-java-litters-beyond-the-heap-part-3-solid-state-drives"
-  - "from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Effortless updates requires a zero-migration policy"
-slug: "effortless-updates-zero-migration"
 date: "2024-11-05T12:19:43+00:00"
 lastmod: "2024-11-06T15:10:32+00:00"
 description: "In today’s production environments, it is not only expected, but critical to keep your technology stack as up to date as possible."
@@ -29,7 +28,7 @@ This is true whether you're deploying to a cloud or locally, and applies regardl
 
 Updating an application runtime is, however, typically a grueling task to undertake. With each new version, breaking changes can be introduced that directly impact your application, your configuration, or your operations. Breaking changes translate to significant development effort being needed to re-run all the tests and address any regressions. Similarly, the operations team also need to ensure that all their automation still works with the new version, and that it remains compatible with their target deployment environment.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-114702" src="frustrated-man-8836744_1280-700x453.jpg" alt="Man at laptop with his head in his hands." width="700" height="453">
+{{< img src="frustrated-man-8836744_1280-700x453.jpg" class="size-medium" alt="Man at laptop with his head in his hands." width="700" height="453" >}}
 
 Now multiply these concerns by the hundreds or thousands of deployments of your microservices, each containing an instance of the application runtime, and it's no wonder that many applications remain on old versions and teams pursue upgrades only when deemed absolutely necessary. This growing technical debt not only delays the benefits provided by newer releases, including security fixes, but can also snowball into making the eventual migration process that much more difficult and risky.
 

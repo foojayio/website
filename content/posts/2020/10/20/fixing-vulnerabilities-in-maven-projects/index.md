@@ -1,6 +1,5 @@
 ---
 title: "Fixing Vulnerabilities in Maven-Based Projects"
-slug: "fixing-vulnerabilities-in-maven-projects"
 date: "2020-10-20T06:40:22+00:00"
 lastmod: "2022-01-25T08:22:01+00:00"
 description: "In this article, I will explain how you can fix vulnerabilities in third-party libraries when using Maven, even when it is not obvious."

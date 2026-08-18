@@ -1,6 +1,5 @@
 ---
 title: "Migrating Monoliths to Microservices in Practice"
-slug: "migrating-monoliths-to-microservices-in-practice"
 date: "2022-09-02T14:47:21+00:00"
 lastmod: "2022-09-02T14:47:44+00:00"
 description: "Not another \"break down the monolith\" article, this article is about making the applicable decisions, measuring, and verifying the results!"

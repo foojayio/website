@@ -1,6 +1,5 @@
 ---
 title: "Java Bytecode Simplified: Journey to the Wonderland (Part 1)"
-slug: "java-bytecode-simplified-journey-to-the-wonderland-part-1"
 date: "2022-03-08T10:16:36+00:00"
 lastmod: "2022-08-20T07:06:31+00:00"
 description: "Today I will make an attempt to appreciate how unique the JVM is. So, let’s begin the journey to how Java works!"
@@ -90,11 +89,11 @@ We know the JVM interprets byte code, and it is a stack machine. It has an opera
 
 If we want to evaluate this using the following images:
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-52514" src="page-272-700x250.png" alt="" width="700" height="250">
+{{< img src="page-272-700x250.png" class="size-medium" width="700" height="250" >}}
 
 Firstly, we will push 1 and 2 to the stack. And then we will pop these two, add them, and put them in the stack again. The same thing is done in JVM by two instructions: **iconst_\<\>** and **iadd**.
 
-<img decoding="async" class="alignnone size-medium wp-image-52515" src="page-273-700x239.png" alt="" width="700" height="239">
+{{< img src="page-273-700x239.png" class="size-medium" width="700" height="239" >}}
 
 *iconst_1* and *iconst_2* , these two opcodess push 1 and 2 to the stack, and `iadd` opcode pops them from the stack and puts them back after adding them. The *iconst_1* and *iconst_2*are two special opcodes for loading 1 and 2 as they are constant.
 

@@ -1,6 +1,5 @@
 ---
 title: "New Java 17 Features for Improved Security and Serialization"
-slug: "new-java-17-features-for-improved-security-and-serialization"
 date: "2021-12-02T08:06:36+00:00"
 lastmod: "2021-12-02T08:09:22+00:00"
 description: "The Java 17 LTS release brings you significant improvements to prevent malicious deserialization in your java applications."
@@ -29,8 +28,7 @@ In the blog post, I will look at three main Java 17 features:
 2. Java Flight Recorder (JFR) improvements
 3. [JEP 415](https://openjdk.java.net/jeps/415) (Java Enhancement Proposal) Context-Specific Deserialization Filters.
 
-1. Records
-----------
+## 1. Records
 
 [Records](https://docs.oracle.com/en/java/javase/17/language/records.html) were introduced in Java 14 as a preview feature and became a fully released feature in Java 16. However, since many developers prefer to upgrade only to LTS versions, it makes sense to discuss Records in the context of serialization now Java 17 is fully released.  
 
@@ -38,8 +36,7 @@ In contrast to normal POJOs when deserializing a Record, the constructor is used
 
 Nevertheless, we can debate if you should put any logic in a record at all. Doing so wrongly can create gadgets that can play a role in a deserialization gadget chain. More importantly, we still use the `readObject()` function to deserialize. This means that we are still vulnerable to gadget chains in normal POJOs regardless of records.
 
-2. Deserialization Filters in Java
-----------------------------------
+## 2. Deserialization Filters in Java
 
 To address deserialization vulnerabilities in Java, it is possible to set serialization filters. This was introduced in Java 9 with the implementation of [JEP 290](https://openjdk.java.net/jeps/290). You can place limits on array sizes, graph depth, total references and stream size. In addition, you can create block and allow lists based on a pattern to limit the classes you want to get deserialized.  
 
@@ -117,8 +114,7 @@ public static void deserialize(String filename) throws IOException, ClassNotFoun
    System.out.println(tv);
 ```
 
-3. Java Flight Recorder Deserialization Events
-----------------------------------------------
+## 3. Java Flight Recorder Deserialization Events
 
 The release of Java 17 also comes with a nice edition to the [Java Flight Recorder (JFR)](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jfr.html) to help you in your crusade against deserialization exploits. This new Java version now supports a specific event to monitor deserialization. A deserialization event will be created for every Object in a stream and records all sorts of interesting things like: the actual type, if there was a filter, if the object was filtered, the object depth, the number of references etc.
 

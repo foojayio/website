@@ -1,6 +1,5 @@
 ---
 title: "How DataStax Tracked Down a Linux Kernel Bug with Fallout"
-slug: "how-datastax-tracked-down-a-linux-kernel-bug-with-fallout"
 date: "2022-06-02T15:32:08+00:00"
 lastmod: "2022-06-02T15:32:10+00:00"
 description: "Sometimes as a developer, you run into a bug buried deep within the layers of your software stack. Chasing down the root cause requires not only - by Matt Fleming"
@@ -60,8 +59,8 @@ Knowing all of this and combining that knowledge with the tpstats output I decid
 ```
 "Native-Transport-Requests-2" #173 daemon prio=5 os_prio=0 cpu=462214.94ms elapsed=19374.32s tid=0x00007efee606eb00 nid=0x385d waiting on condition  [0x00007efec18b9000]
 4   java.lang.Thread.State: TIMED_WAITING (parking)
-5 at jdk.internal.misc.Unsafe.park(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae0ebfceba4e8ebf9efcabbbba4baa4bc">[email protected]</a>/Native Method)
-6 at java.util.concurrent.locks.LockSupport.parkNanos(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf1faedfab5f9fae8fedbaaaab5abb5ad">[email protected]</a>/LockSupport.java:357)
+5 at jdk.internal.misc.Unsafe.park([email protected]/Native Method)
+6 at java.util.concurrent.locks.LockSupport.parkNanos([email protected]/LockSupport.java:357)
 7 at org.apache.cassandra.concurrent.SEPWorker.doWaitSpin(SEPWorker.java:268)
 ```
 

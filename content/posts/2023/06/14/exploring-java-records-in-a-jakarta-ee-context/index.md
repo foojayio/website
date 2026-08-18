@@ -1,6 +1,5 @@
 ---
 title: "Exploring Java Records In A Jakarta EE Context"
-slug: "exploring-java-records-in-a-jakarta-ee-context"
 date: "2023-06-14T21:08:35+00:00"
 lastmod: "2023-06-14T21:08:36+00:00"
 description: "This article explores the adoption of Java Records in a Jakarta EE application as a data transfer and projection object."

@@ -1,6 +1,5 @@
 ---
 title: "When Should we Move to Microservices?"
-slug: "when-should-we-move-to-microservices"
 date: "2023-12-28T14:08:28+00:00"
 lastmod: "2023-12-28T14:08:29+00:00"
 description: "Avoid the small monolith antipattern. When do Microservices make sense? Avoid a solution worse than the problem, understand the tradeoffs."
@@ -14,7 +13,7 @@ related_posts:
   - "is-it-time-to-go-back-to-the-monolith"
   - "devops-for-developers-introduction-version-control"
   - "why-i-dont-do-tdd"
-  - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Spring's new JdbcClient API for performing database operations"
-slug: "the-new-jdbcclient-introduced-in-spring-framework-6-1"
 date: "2023-09-08T06:45:44+00:00"
 lastmod: "2023-09-08T06:45:45+00:00"
 description: "Learn how to perform JDBC operations using the new JdbcClient fluent API introduced in Spring framework 6.1."
@@ -16,7 +15,7 @@ related_posts:
   - "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
   - "spring-6-1-restclient"
   - "how-to-create-sboms-in-java-with-maven-and-gradle"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

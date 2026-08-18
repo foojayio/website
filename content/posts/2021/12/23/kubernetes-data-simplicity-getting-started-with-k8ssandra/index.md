@@ -1,6 +1,5 @@
 ---
 title: "Kubernetes Data Simplicity: Getting started with K8ssandra"
-slug: "kubernetes-data-simplicity-getting-started-with-k8ssandra"
 date: "2021-12-23T08:56:22+00:00"
 lastmod: "2022-07-07T17:20:13+00:00"
 description: "K8ssandra is an open-source distribution of Apache Cassandra for Kubernetes, with a rich set of trusted open-source services and tooling."
@@ -187,9 +186,7 @@ The K8ssandra project creates separation between the tests themselves and the su
 
 #### Unit test artifacts with test data files
 
-<figure class="alignright size-large">
- <img decoding="async" width="269" height="463" src="pasted-image-0-1.png" alt="" class="wp-image-45600">
-</figure>
+{{< img src="pasted-image-0-1.png" class="alignright size-large" width="269" height="463" >}}
 
 ![](pasted-image-0-2.png)  
 

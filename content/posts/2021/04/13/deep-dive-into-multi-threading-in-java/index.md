@@ -1,6 +1,5 @@
 ---
 title: "Taking A Deep Dive Into Multi-Threading in Java"
-slug: "deep-dive-into-multi-threading-in-java"
 date: "2021-04-13T07:21:59+00:00"
 lastmod: "2021-10-11T12:39:53+00:00"
 description: "Multi-threading is a very intriguing topic, even after years of research and development for high quality, robust, and efficient software."

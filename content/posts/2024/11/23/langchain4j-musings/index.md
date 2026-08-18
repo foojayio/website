@@ -1,6 +1,5 @@
 ---
 title: "Langchain4J Musings"
-slug: "langchain4j-musings"
 date: "2024-11-23T13:57:30+00:00"
 lastmod: "2024-11-25T08:12:53+00:00"
 description: "Learn how to start your Langchain4j journey in several incremental steps."

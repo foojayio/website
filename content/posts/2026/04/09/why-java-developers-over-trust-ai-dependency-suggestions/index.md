@@ -1,6 +1,5 @@
 ---
 title: "Why Java Developers Over-Trust AI-Generated Code"
-slug: "why-java-developers-over-trust-ai-dependency-suggestions"
 date: "2026-04-09T10:45:36+00:00"
 lastmod: "2026-04-09T18:22:21+00:00"
 description: "AI coding tools sound confident even when they're wrong. Here's the psychology behind why Java developers accept bad suggestions — and habits that help."
@@ -12,10 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "spring-ai-agents-no-second-runtime"
   - "jc-ai-newsletter-16"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
 frozen: false
 ---
 

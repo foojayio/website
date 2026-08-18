@@ -1,6 +1,5 @@
 ---
 title: "Primitive Set Operations in Eclipse Collections"
-slug: "primitive-set-operations-in-eclipse-collections"
 date: "2020-12-07T11:14:46+00:00"
 lastmod: "2020-12-07T14:11:45+00:00"
 description: "Recently, I worked on an issue to implement union, intersect, and difference operations in Sets for primitive types in Eclipse Collections."
@@ -14,7 +13,7 @@ related_posts:
 frozen: false
 ---
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-36467" src="foojay-prim-1-700x157.png" alt="Set Operations Venn Diagrams" width="700" height="157">
+{{< img src="foojay-prim-1-700x157.png" class="size-medium" alt="Set Operations Venn Diagrams" width="700" height="157" >}}
 
 [Eclipse Collections](https://www.eclipse.org/collections/) has a rich assortment of data structures, and one of them is a Set.
 
@@ -26,11 +25,15 @@ The last section covers the takeaways.
 
 ### Union: What Does This Operation Do?
 
-Method signature: `setA.union(setB)`
+Method signature:
+
+```java
+setA.union(setB)
+```
 
 Union as the name indicates, it takes elements from two sets and combines them into one.
 
-<img decoding="async" class="size-full wp-image-36470 alignleft" src="foojay-prim-union.png" alt="" width="250" height="125">
+{{< img src="foojay-prim-union.png" class="size-full alignleft" width="250" height="125" >}}
 
 Set A --- 1, 2, 3, 4.
 
@@ -48,7 +51,9 @@ Union --- 1, 2, 3, 4, 5.
 Eclipse Collections has an existing API `withAll` which allows you to add elements from one set to the other.
 
 ```java
-`default MutableIntSet union(IntSet set)
+
+```java
+default MutableIntSet union(IntSet set)
 {
     if (this.size() > set.size())
     {
@@ -58,13 +63,17 @@ Eclipse Collections has an existing API `withAll` which allows you to add elemen
     {
         return set.toSet().withAll(this);
     }
-}`
+}
+```
+
 ```
 
 Unit tests for union covering scenarios for equal-sized, unequal-sized, and empty sets.
 
 ```java
-`private void assertUnion(MutableIntSet set1, MutableIntSet set2, MutableIntSet expected)
+
+```java
+private void assertUnion(MutableIntSet set1, MutableIntSet set2, MutableIntSet expected)
 {
     MutableIntSet actual = set1.union(set2);
     Assert.assertEquals(expected, actual);
@@ -103,12 +112,17 @@ public void union()
             this.newWith(),
             this.newWith(1, 2, 3));
 }
-`
+```
+
 ```
 
 ### Intersect: What Does This Operation Do?
 
-Method signature: `setA.intersect(setB)`
+Method signature:
+
+```java
+setA.intersect(setB)
+```
 
 Intersect takes two elements from two sets and only retains the common elements in the resulting set.
 
@@ -130,7 +144,9 @@ Intersect --- 3, 4.
 Eclipse Collections has an existing API that allows us to select all elements that evaluate true for the given Predicate.
 
 ```java
-`default MutableIntSet intersect(IntSet set)
+
+```java
+default MutableIntSet intersect(IntSet set)
 {
     if (this.size() < set.size())
     {
@@ -140,18 +156,27 @@ Eclipse Collections has an existing API that allows us to select all elements th
     {
         return set.select(this::contains, this.newEmpty());
     }
-}`
+}
+```
+
 ```
 
 Unit tests for intersect covering [scenarios](https://github.com/eclipse/eclipse-collections/blob/00557933f648e2c3a2112bcfc7cfb349a7609844/eclipse-collections-code-generator/src/main/resources/test/set/mutable/abstractPrimitiveSetTestCase.stg#L502) for equal-sized, unequal-sized, and empty sets.
 
 ### Difference: What Does This Operation Do?
 
-Method signature: `setA.difference(setB)`
+Method signature:
+
+```java
+setA.difference(setB)
+```
+
+```java
+
+```
 
 Difference takes elements that are unique to Set A only and not Set B.  
 ![Difference - Green](foojay-prim-difference.png)  
-
 Set A --- 1, 2, 3, 4.
 
 Set B --- 3, 4, 5, 6.
@@ -167,10 +192,14 @@ As you may have guessed, the size of these two sets doesn't matter, as our start
 Eclipse Collections has an existing API that allows us to reject which returns all elements that evaluate false for the Predicate. In other words, it is the opposite of select.
 
 ```java
-`default MutableIntSet difference(IntSet set)
+
+```java
+default MutableIntSet difference(IntSet set)
 {
     return this.reject(set::contains);
-}`
+}
+```
+
 ```
 
 Unit tests for difference covering scenarios for equal-sized, unequal-sized, and empty sets.

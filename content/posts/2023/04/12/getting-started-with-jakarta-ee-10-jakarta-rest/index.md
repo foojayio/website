@@ -1,6 +1,5 @@
 ---
 title: "Getting Started With Jakarta EE 10 - Jakarta REST"
-slug: "getting-started-with-jakarta-ee-10-jakarta-rest"
 date: "2023-04-12T07:42:29+00:00"
 lastmod: "2023-04-12T07:43:57+00:00"
 description: "In this article, we take a look at how to get started developing RESTful web services on the Jakarta EE Platform using the Jakarta REST API."

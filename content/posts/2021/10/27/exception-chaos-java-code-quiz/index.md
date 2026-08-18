@@ -1,6 +1,5 @@
 ---
 title: "Exception Chaos Java Code Quiz"
-slug: "exception-chaos-java-code-quiz"
 date: "2021-10-27T15:03:38+00:00"
 lastmod: "2021-10-27T15:03:39+00:00"
 description: "Working correctly with exceptions is crucial to a high-quality application that users enjoy using. This quiz reinforces some of the basics."

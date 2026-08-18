@@ -1,6 +1,5 @@
 ---
 title: "beetRoot: Yet Another Web Framework?"
-slug: "beetroot-yet-another-web-framework"
 date: "2024-07-02T07:26:01+00:00"
 lastmod: "2025-12-08T22:31:32+00:00"
 description: "beetRoot is a slim and rapid Java web development as well as a full & secure client-server framework ready to run."

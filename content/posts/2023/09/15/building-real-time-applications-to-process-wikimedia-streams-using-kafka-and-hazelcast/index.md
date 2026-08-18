@@ -1,6 +1,5 @@
 ---
 title: "Building Real-Time Applications to Process Wikimedia Streams"
-slug: "building-real-time-applications-to-process-wikimedia-streams-using-kafka-and-hazelcast"
 date: "2023-09-15T14:33:16+00:00"
 lastmod: "2023-09-15T14:54:42+00:00"
 description: "Learn how to build a real-time application to process Wikimedia streams using Kafka and Hazelcast."

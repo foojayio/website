@@ -1,6 +1,5 @@
 ---
 title: "Optimizing MongoDB Queries in Java Applications"
-slug: "optimizing-mongodb-queries-in-java-applications"
 date: "2025-12-09T17:45:09+00:00"
 lastmod: "2025-12-09T17:45:12+00:00"
 description: "Modern Java applications often struggle with performance bottlenecks that have little to do with the JVM itself. In most cases, the culprit lies deeper in how the application interacts with its database. Slow queries, missing indexes, or inefficient access patterns can quietly degrade user experience, increase latency, and inflate infrastructure costs. MongoDB, known for its flexibility and document-oriented design, can deliver remarkable performance when used correctly. However, that performance can quickly diminish when queries and indexes are not aligned with real-world access patterns."
@@ -121,7 +120,7 @@ This pattern stays consistent with standard Java configuration approaches. You c
 Many teams also rely on the explain plan built into MongoDB. Unlike relational databases where explain plans often feel abstract, MongoDB's explain output presents actionable information about index usage, examined documents, and winning plans. The two most important metrics are \`nReturned\` and \`totalDocsExamined\`. If the latter is significantly larger than the former, your query is scanning more documents than necessary. This indicates a missing or misaligned index. The explain plan is also helpful when confirming that compound indexes match your query pattern correctly.
 
 ```
-db.users.find({ email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d8d5d0dadcf9dcc1d8d4c9d5dc97dad6d4">[email protected]</a>" }).explain("executionStats");
+db.users.find({ email: "[email protected]" }).explain("executionStats");
 ```
 
 The \`executionStats\` mode gives the most practical insights because it includes execution time and the number of index keys scanned. Use this mode when validating a new index or comparing similar queries side by side.

@@ -1,6 +1,5 @@
 ---
 title: "On The Costs of Hidden Logging"
-slug: "the-costs-of-hidden-logging"
 date: "2021-10-11T08:05:33+00:00"
 lastmod: "2021-10-11T08:08:55+00:00"
 description: "Tip: Never underestimate the danger of a partial implementation (even if it is just a logging implementation)."

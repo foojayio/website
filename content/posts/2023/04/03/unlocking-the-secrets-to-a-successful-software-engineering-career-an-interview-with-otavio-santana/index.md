@@ -1,6 +1,5 @@
 ---
 title: "Unlocking the Secrets to a Successful Software Engineering Career: An Interview with Otavio Santana"
-slug: "unlocking-the-secrets-to-a-successful-software-engineering-career-an-interview-with-otavio-santana"
 date: "2023-04-03T11:55:15+00:00"
 lastmod: "2023-04-03T14:17:26+00:00"
 description: "Discover insights from Otavio Santana on the importance of open-source contributions, mentorship, and simplicity in software engineering, as he shares valuable advice for developers at all career stages."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="otavio-edited.webp" alt="" class="wp-image-65618" width="481" height="481">
-</figure>
+{{< img src="otavio-edited.webp" class="alignright size-full is-resized" width="481" height="481" >}}
 
 In this exclusive interview, we had the pleasure of speaking with [Otavio Santana](https://www.linkedin.com/in/otaviojava/), a Java Champion and passionate software engineer and architect dedicated to empowering fellow engineers to deliver efficient, scalable software on the Cloud.
 

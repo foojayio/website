@@ -1,6 +1,5 @@
 ---
 title: "Java Serialization Filtering: Prevent 0-day Security Vulnerabilities"
-slug: "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
 date: "2023-03-03T16:04:53+00:00"
 lastmod: "2023-03-03T16:04:55+00:00"
 description: "Simple configuration that requires no code change can save you from hacks such as Log4Shell, & from vulnerabilities we don't know about yet!"

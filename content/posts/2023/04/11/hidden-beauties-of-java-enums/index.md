@@ -1,6 +1,5 @@
 ---
 title: "Hidden Beauties of Java Enums"
-slug: "hidden-beauties-of-java-enums"
 date: "2023-04-11T07:02:08+00:00"
 lastmod: "2023-07-28T08:00:40+00:00"
 description: "Java enums can contain much more than just a list of definitions, but also data and extended functionality!"

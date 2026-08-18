@@ -1,6 +1,5 @@
 ---
 title: "Sticky sessions with Apache APISIX - the demo"
-slug: "sticky-sessions-with-apache-apisix-the-demo"
 date: "2023-07-07T16:54:25+00:00"
 lastmod: "2023-07-07T16:54:27+00:00"
 description: "Learn how to setup sticky sessions with Apache APISIX and replication involving the Spring ecosystem and Hazelcast."

@@ -1,6 +1,5 @@
 ---
 title: "Released: JReleaser 0.4.0 is Now Available"
-slug: "jreleaser-0-4-0-is-now-available"
 date: "2021-05-31T20:11:44+00:00"
 lastmod: "2021-11-30T10:30:53+00:00"
 description: "JReleaser streamlines releases for Homebrew, Snapcraft, Docker, Chocolatey, JBang, Twitter, SdkMan, Zulip, Gitter, Slack, Teams, etc."

@@ -1,6 +1,5 @@
 ---
 title: "Unlocking Java Secrets with Frank Delporte Foojay.io Today"
-slug: "unlocking-java-secrets-with-frank-delporte-insights-stories-and-tips-for-success"
 date: "2023-04-10T13:48:51+00:00"
 lastmod: "2023-04-10T17:13:08+00:00"
 description: "Learn about Frank Delporte, Java Champion and Azul technical writer at Azul, on Java, resources for beginners, insights into in the industry."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="Frank-7-XS.jpg" alt="" class="wp-image-57087" width="450" height="413">
-</figure>
+{{< img src="Frank-7-XS.jpg" class="alignright size-full is-resized" width="450" height="413" >}}
 
 Welcome to our exclusive interview with [Frank Delporte](https://www.linkedin.com/in/frankdelporte/), a Senior Technical Writer at Azul, Java Champion, and a passionate advocate for all things related to Java and Java on [Raspberry Pi](https://www.raspberrypi.org/).
 

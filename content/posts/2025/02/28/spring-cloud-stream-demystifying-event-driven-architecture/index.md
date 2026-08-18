@@ -1,6 +1,5 @@
 ---
 title: "Spring Cloud Stream: Demystifying Event-Driven Architecture"
-slug: "spring-cloud-stream-demystifying-event-driven-architecture"
 date: "2025-02-28T08:34:32+00:00"
 description: "Introduction Consider a bustling restaurant environment. The kitchen receives a flood of orders, waitstaff dart between tables, and patrons anxiously - by Mahendra Rao B"
 authors:
@@ -35,7 +34,7 @@ And,
 
 Considering this restaurant and banking example, contemporary applications manage extensive volumes of real-time data. Whether dealing with stock market fluctuations, IoT sensor outputs, or video streaming services, traditional request-response frameworks often fall short. This is where **event-driven architecture (EDA)** comes into play---a model/architecture pattern crafted for ***high throughput, low latency, fault-tolerance, and robust system resilience.***
 
-<img fetchpriority="high" decoding="async" src="EventDrivenArchitecture-700x394.png" alt="Event Driven Architecture" width="700" height="394" class="size-medium wp-image-115615">
+{{< img src="EventDrivenArchitecture-700x394.png" class="size-medium" alt="Event Driven Architecture" width="700" height="394" >}}
 
 This article aims to explore and elucidate the significance of **Event-Driven Architecture**.
 

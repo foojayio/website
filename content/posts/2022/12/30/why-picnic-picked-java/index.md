@@ -1,6 +1,5 @@
 ---
 title: "Why Picnic picked Java"
-slug: "why-picnic-picked-java"
 date: "2022-12-30T08:22:54+00:00"
 lastmod: "2025-01-05T09:25:00+00:00"
 description: "Finding the right tech stack is a context-dependent journey. There's no right or wrong, just a lot of different angles to explore!"

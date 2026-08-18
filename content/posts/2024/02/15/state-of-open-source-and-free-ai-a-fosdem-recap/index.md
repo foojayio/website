@@ -1,6 +1,5 @@
 ---
 title: "State of Open (Source?!) and Free AI"
-slug: "state-of-open-source-and-free-ai-a-fosdem-recap"
 date: "2024-02-15T13:04:44+00:00"
 lastmod: "2024-02-15T13:17:27+00:00"
 description: "Recap of spending the day in AI and Machine Learning Developer Room at FOSDEM’24!"

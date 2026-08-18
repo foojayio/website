@@ -1,6 +1,5 @@
 ---
 title: "BlockHound and Blocking Calls: How It Works"
-slug: "blockhound-how-it-works"
 date: "2021-06-22T17:09:13+00:00"
 lastmod: "2021-06-22T17:09:15+00:00"
 description: "BlockHound lets you check if a blocking call occurs in a thread where it shouldn't happen and throws an exception at runtime when it does."
@@ -140,7 +139,7 @@ Exception in thread "non-blocking" reactor.blockhound.BlockingOperationError: \
     at java.base/java.lang.Thread.sleep(Thread.java)
     at ch.frankel.blog.blockhound.C.lambda$main$3(C.java:16)
     at java.base/java.lang.Thread.run(Thread.java:829)
-Main thread finished<code></code>
+Main thread finished
 ```
 
 ## BlockHound is only as good as its configuration

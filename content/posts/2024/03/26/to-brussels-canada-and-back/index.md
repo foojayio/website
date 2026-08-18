@@ -1,6 +1,5 @@
 ---
 title: "To Brussels, Canada and back"
-slug: "to-brussels-canada-and-back"
 date: "2024-03-26T10:53:11+00:00"
 lastmod: "2024-03-26T10:53:12+00:00"
 description: "I went traveling again, read more on my travels to FOSDEM, Canada and Zurich in February/early March in this travel report."

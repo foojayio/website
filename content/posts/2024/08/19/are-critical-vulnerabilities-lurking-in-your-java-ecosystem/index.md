@@ -1,6 +1,5 @@
 ---
 title: "Are Critical Vulnerabilities Lurking in Your Java Ecosystem?"
-slug: "are-critical-vulnerabilities-lurking-in-your-java-ecosystem"
 date: "2024-08-19T12:57:59+00:00"
 lastmod: "2024-08-19T12:58:01+00:00"
 description: "According to the Datadog \"State of DevSecOps\" report, a staggering 90% of Java services are susceptible to one or more critical or high-severity vulnerabilities"

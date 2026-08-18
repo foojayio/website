@@ -1,6 +1,5 @@
 ---
 title: "The Visitor Pattern - 'Revisited' using Data Oriented Programming techniques"
-slug: "the-visitor-pattern-revisited-using-data-oriented-programming-techniques"
 date: "2025-11-26T10:38:43+00:00"
 lastmod: "2025-11-26T11:05:08+00:00"
 description: "Java Language improvements culminating in java 21 obviate the need for the verbose visitor pattern as we know it, instead elevating it into a first class language feature."
@@ -15,10 +14,10 @@ categories:
   - "Sealed Classes"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 
@@ -351,7 +350,11 @@ public interface Visitable {
 a contract to which all Books adhere
 
 ```
+
+```java
 public abstract class Book implements Visitable { //... }
+```
+
 ```
 
 and which is implemented by each *leaf node*
@@ -740,7 +743,11 @@ case Ratings(
 The last *fall through case* can be even more brief: 'if any of the ratings were not handled by the previous cases, it must be uninteresting':
 
 ```
+
+```java
             case Ratings(_, _) -> notifyUninteresting();
+```
+
 ```
 
 ##### Bonus: primitives in a switch case (a java 24 preview feature)

@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Debugging with Aspect-Oriented Programming (AOP)"
-slug: "spring-boot-debugging-with-aspect-oriented-programming-aop"
 date: "2023-05-05T08:19:18+00:00"
 lastmod: "2023-05-05T08:19:19+00:00"
 description: "Does your app fail CI tests \"sometimes\"? Does it display flaky behavior? Did you add many logs trying to solve it? There's a better way: AOP!"

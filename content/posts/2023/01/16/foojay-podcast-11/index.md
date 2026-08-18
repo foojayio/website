@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #11: Looking Back to 2022"
-slug: "foojay-podcast-11"
 date: "2023-01-16T09:31:57+00:00"
 lastmod: "2025-11-13T09:17:59+00:00"
 description: "In this Foojay Podcast episode, we talk about Ted Neward's predictions, and an analogy between Twitter and Java!"
@@ -57,9 +56,7 @@ You can listen and subscribe to the Foojay Podcast on:
   * Be hungry, humble, and smart!
   * <https://www.reddit.com/r/ProgrammerHumor/comments/jo4b6s/recruiters_be_like/>
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="960" height="1008" src="fullstackitdepartment.webp" alt="" class="wp-image-61897" style="width:240px;height:252px">
-</figure>
+{{< img src="fullstackitdepartment.webp" class="size-full is-resized" width="960" height="1008" style="width:240px;height:252px" >}}
 
 * 26'39 "*2023 will be the year we try to figure out what to do with all this AI stuff* "
   * Devoxx Belgium 2022 AI intro movie

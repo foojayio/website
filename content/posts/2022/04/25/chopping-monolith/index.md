@@ -1,6 +1,5 @@
 ---
 title: "Chopping the Monolith: Foojay.io Today"
-slug: "chopping-monolith"
 date: "2022-04-25T19:06:50+00:00"
 lastmod: "2022-04-25T19:06:52+00:00"
 description: "In this article, I highlight that microservices, as presented at conferences, are doomed to fail in most organizations."
@@ -16,7 +15,7 @@ related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "deploying-spring-boot-applications-on-kubernetes"
   - "do-you-really-need-kubernetes"
-  - "monolith-vs-microservices-2025"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -64,7 +63,7 @@ Hence, they cannot claim to do microservices (unless they want to prove that Fow
 Before microservices became a hype, writers and speakers were careful to explain Conway's Law:
 > Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure. -- [Melvin E. Conway](https://en.wikipedia.org/wiki/Conway%27s_law)
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-55798 size-medium" src="conway-and-nicolas-680x510.jpg" alt="" width="680" height="510">
+{{< img src="conway-and-nicolas-680x510.jpg" class="aligncenter size-medium" width="680" height="510" >}}
 
 *Unrelated but fun, I took a selfie with M. Conway*
 
@@ -173,7 +172,7 @@ The biggest issue is regarding clients. Migrating an HTTP endpoint to a differen
 
 Just route the request to the new endpoint location, and you're done.
 
-<img decoding="async" class="size-medium wp-image-55799 aligncenter" src="chop-monolith-700x246.png" alt="" width="700" height="246">
+{{< img src="chop-monolith-700x246.png" class="size-medium aligncenter" width="700" height="246" >}}
 
 ## Conclusion
 

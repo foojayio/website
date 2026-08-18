@@ -1,6 +1,5 @@
 ---
 title: "Debugging Kubernetes Part 1: An Introduction"
-slug: "debugging-kubernetes-part-1-an-introduction"
 date: "2024-06-05T06:12:40+00:00"
 lastmod: "2024-06-05T06:13:35+00:00"
 description: "In this first part of our k8s debugging series we take an in-depth view of the underlying technologies from containers to orchestration."

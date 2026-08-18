@@ -1,6 +1,5 @@
 ---
 title: "Building Java Containers Without a Dockerfile: Azul Zulu and Paketo Buildpacks"
-slug: "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
 date: "2026-06-18T08:15:45+00:00"
 description: "Skip the Dockerfile. Learn how to build Java containers with Azul Zulu via Paketo Buildpacks — covering Spring Boot, jlink, JFR, JMX, and the pack CLI."
 authors:

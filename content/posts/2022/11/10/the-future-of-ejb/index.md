@@ -1,6 +1,5 @@
 ---
 title: "The Future of EJB"
-slug: "the-future-of-ejb"
 date: "2022-11-10T16:06:56+00:00"
 lastmod: "2022-11-10T16:06:57+00:00"
 description: "A possible future direction for EJB is to rebase it on CDI. We would end up with just one component model in Jakarta EE."
@@ -19,15 +18,13 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img decoding="async" src="beans-300x260.jpg" alt="" class="wp-image-60965" width="225" height="195">
-</figure>
+{{< img src="beans-300x260.jpg" class="alignleft is-resized" width="225" height="195" >}}
 
 *EJB, or Enterprise Beans, are Java classes with a number of container provided services attached to them, such as transactions, remoting and security. In this article we will take a look at what we can expect for EJB in the future.*
 
 Once upon a time EJB was almost synonymous with what was called Java EE or J2EE back then (Jakarta EE now). It suffered from many issues though, although it did incrementally got better. We'll explore some of those issues next.
 
-## The past
+## The past {#more-60964}
 
 The very first version of EJB was released before XML even existed and featured a rather awkward "programmatic" configuration, where a java class had to be compiled and its binary and serialised version used as configuration file.
 
@@ -97,9 +94,7 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here: <https://omnifish.ee/blog/>.
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
 
 ## OmniFish - Jakarta EE experts
 

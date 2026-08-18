@@ -1,6 +1,5 @@
 ---
 title: "Stop Writing YAML: Automating Your Repo with Plain Natural Language"
-slug: "stop-writing-yaml-automating-your-repo-with-plain-natural-language"
 date: "2026-02-20T19:01:34+00:00"
 lastmod: "2026-02-20T19:01:35+00:00"
 description: "If you maintain a busy codebase, you already know the daily grind: triaging issues, writing status reports, updating documentation, and chasing down - by Bruno Borges"

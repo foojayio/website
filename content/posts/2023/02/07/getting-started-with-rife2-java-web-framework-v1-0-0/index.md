@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with RIFE2 Java Web Framework v1.0.0"
-slug: "getting-started-with-rife2-java-web-framework-v1-0-0"
 date: "2023-02-07T07:44:45+00:00"
 lastmod: "2023-04-10T20:39:18+00:00"
 description: "Benefiting from a decade of work that went into original RIFE, the new RIFE2 provides an opinionated full stack web framework in a 2MB JAR."

@@ -1,6 +1,5 @@
 ---
 title: "Book Announcement: \"OpenJDK Migration Guide for Dummies\""
-slug: "book-announcement-openjdk-migration-guide-for-dummies"
 date: "2023-08-01T16:15:47+00:00"
 lastmod: "2024-06-30T11:17:04+00:00"
 description: "Learn how to migrate to OpenJDK and get tips on how to select the right Java partner to assist with your migration and provide suppoer."
@@ -27,9 +26,7 @@ But if you have a variety of specialized Java applications, created at different
 
 But, worry no more, Java Champion Simon Ritter has you covered in a new (free) book.
 
-<figure class="wp-block-image size-large is-resized">
- <a target="_blank" href="https://www.azul.com/openjdk-migration-for-dummies/"><img fetchpriority="high" decoding="async" src="image-764x1024.png" alt="" class="wp-image-101737" width="372" height="499"></a>
-</figure>
+{{< img src="image-764x1024.png" class="size-large is-resized" width="372" height="499" >}}
 
 This handy book offers a concise, fun-to-read overview of OpenJDK migration:
 

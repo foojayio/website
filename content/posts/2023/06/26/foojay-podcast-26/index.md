@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #26: The Future of Source Control and CI/CD"
-slug: "foojay-podcast-26"
 date: "2023-06-26T08:35:21+00:00"
 lastmod: "2025-11-13T09:01:28+00:00"
 description: "We have seen evolutions from CVS to Subversion to Git. Is this the endpoint? Did we find the holy grail? What evolutions are waiting for us?"

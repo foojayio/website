@@ -1,6 +1,5 @@
 ---
 title: "Real-time Stream Processing with Hazelcast and StreamNative"
-slug: "real-time-stream-processing-with-hazelcast-and-streamnative"
 date: "2023-02-01T09:09:04+00:00"
 lastmod: "2023-02-01T09:11:50+00:00"
 description: "Learn how to stream data from Apache Pulsar into Hazelcast, where you learn how to process data in real time."
@@ -49,7 +48,7 @@ If you have macOS \& Homebrew, you can install Hazelcast using the following com
 ```
 brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f8f1eaf5fcf3f1e3e4d0a5bea2bea1">[email protected]</a>
+brew install [email protected]
 ```
 
 Check if Hazelcast is installed:
@@ -87,7 +86,7 @@ To install Management Center, use one of the following methods, depending on you
 ```
 brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6afb4aba2adafbdbae3a3afa0afa9aba3aba0bae3adaba0baabbc8efbe0fce0ff">[email protected]</a>
+brew install [email protected]
 ```
 
 Check that Management Center is installed:

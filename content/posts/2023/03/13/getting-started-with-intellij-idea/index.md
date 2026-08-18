@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with IntelliJ IDEA"
-slug: "getting-started-with-intellij-idea"
 date: "2023-03-13T08:26:00+00:00"
 lastmod: "2023-03-13T08:26:02+00:00"
 description: "Starting in a new team can be daunting. You have to learn All The Things, one of which is your IDE! So, how can you best learn IntelliJ IDEA?"

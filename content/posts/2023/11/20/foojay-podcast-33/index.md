@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #33: J-Fall Report, Part 1"
-slug: "foojay-podcast-33"
 date: "2023-11-20T10:22:53+00:00"
 lastmod: "2025-11-13T08:53:25+00:00"
 description: "This is part 1, and we talk about J-Fall, of course. Plus, much more, with Brian Vermeer, Pratik Patel, and many more!"

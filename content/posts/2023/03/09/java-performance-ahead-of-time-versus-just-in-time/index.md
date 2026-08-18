@@ -1,6 +1,5 @@
 ---
 title: "Java Performance: Ahead-Of-Time versus Just-In-Time"
-slug: "java-performance-ahead-of-time-versus-just-in-time"
 date: "2023-03-09T08:00:18+00:00"
 lastmod: "2023-05-10T05:35:57+00:00"
 description: "The impact of the Just-In-Time (JIT) compiler should not be underestimated to achieve the best performing code during runtime."

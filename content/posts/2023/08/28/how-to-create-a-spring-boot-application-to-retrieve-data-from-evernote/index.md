@@ -1,6 +1,5 @@
 ---
 title: "Create a Spring Boot Application to Retrieve Data from Evernote"
-slug: "how-to-create-a-spring-boot-application-to-retrieve-data-from-evernote"
 date: "2023-08-28T11:06:45+00:00"
 lastmod: "2023-08-28T12:19:12+00:00"
 description: "In this article, I will show you how to use the Evernote API and SDK in a Spring Boot application to retrieve data from Evernote."

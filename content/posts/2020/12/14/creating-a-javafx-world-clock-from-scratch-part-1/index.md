@@ -1,6 +1,5 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 1)"
-slug: "creating-a-javafx-world-clock-from-scratch-part-1"
 date: "2020-12-14T09:27:54+00:00"
 lastmod: "2022-04-30T03:38:36+00:00"
 description: "I would like to show you how I created a \"sci-fi\" looking world clock that happens to be a cross-platform Java desktop application."
@@ -13,10 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-  - "foojay-podcast-83"
 frozen: false
 ---
 
@@ -26,7 +25,7 @@ frozen: false
 
 Welcome to *Creating a JavaFX World Clock from Scratch (Part 1)*! In this series of blog entries I would like to show you how I created a "sci-fi" looking world clock that happens to be a cross-platform Java desktop application.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-36527" src="Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png" alt="A JavaFX based World Clock" width="286" height="510">
+{{< img src="Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png" class="size-medium" alt="A JavaFX based World Clock" width="286" height="510" >}}
 
 Here I will explain my thought process, development workflow, and of course JavaFX code details. Since it's still in the early stages, you can tune in by commenting or joining foojay's Slack channel at foojay.slack.com [\[2\]](https://foojay.slack.com/archives/C01GEEGDCHJ "foojay Slack channel #openjfx"), where I and others (Java experts \& friends of OpenJDK/OpenJFX) can offer advice.
 
@@ -74,7 +73,7 @@ After searching for a clean minimalist clock design I found a few that I liked i
 
 As with any tool, practice makes perfect. You will be surprised how easy it is to draw the main clock face using IntelliJ's built-in JavaFX Scene Builder. More on that later, but first let's see how things are laid out. Shown below is the world clock's component (JavaFX Node) hierarchy displayed at the lower left panel:  
 
-<img decoding="async" aria-describedby="caption-attachment-36528" class="size-medium wp-image-36528" src="Screen-Shot-2020-12-07-at-11.48.17-PM-700x488.png" alt="Scene Builder" width="700" height="488">
+{{< img src="Screen-Shot-2020-12-07-at-11.48.17-PM-700x488.png" class="size-medium" alt="Scene Builder" width="700" height="488" >}}
 
 JavaFX Scene Builder{#caption-attachment-36528}
 
@@ -110,7 +109,9 @@ After showing you the hierarchy and what shapes consist of the clock face lets l
 An excerpt of the JavaFX Scene Builder's **FXML** representing the hour hand shape nodes:
 
 ```xml
-`<Group>
+
+```xml
+<Group>
    <children>
       <Circle id="hour-hand-shadow" fill="#1f93ff00" radius="35.0" stroke="#403939db" strokeWidth="4.0" />
       <Arc id="hour-hand-arc" fx:id="hourHandArc" fill="#1f93ff00" length="90.0" opacity="0.91" radiusX="35.0" radiusY="35.0" stroke="#de752ff7" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeMiterLimit="0.0" strokeWidth="4.0">
@@ -148,7 +149,9 @@ An excerpt of the JavaFX Scene Builder's **FXML** representing the hour hand sha
          </effect>
       </Circle>
    </children>
-</Group>`
+</Group>
+```
+
 ```
 
 Looking at the XML above you'll notice the three children nodes Circle, Arc, and Circle representing the hour hand track, hour hand arc, and hour hand tip respectively. Each shape element will have its own styling attributes that I will describe in more details below.
@@ -201,7 +204,7 @@ The hour hand tip is a glowing orange colored ball shape with a radial gradient 
 
 When experimenting with Scene Builder, you get to play with changing a shapes fill color, stroke color, width, and much more. Below shows how to change the hour hand's tip (circle node) to appear as a spherical glowing ball.  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-36540" class="size-medium wp-image-36540" src="Screen-Shot-2020-12-08-at-12.48.07-PM-499x510.png" alt="Scene Builder Altering fill color" width="499" height="510">
+{{< img src="Screen-Shot-2020-12-08-at-12.48.07-PM-499x510.png" class="size-medium" alt="Scene Builder Altering fill color" width="499" height="510" >}}
 
 Scene Builder's fill color process{#caption-attachment-36540}
 

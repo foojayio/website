@@ -1,6 +1,5 @@
 ---
 title: "Duplicate Finder for Documentation"
-slug: "duplicate-finder-for-documentation"
 date: "2024-05-08T22:08:04+00:00"
 lastmod: "2024-12-08T21:40:59+00:00"
 description: "Let's make a duplicate finder for documentation together – a tool to quickly detect non-exact, or fuzzy, matches in large text repositories."

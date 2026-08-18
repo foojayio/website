@@ -1,6 +1,5 @@
 ---
 title: "Azul Enhances ReadyNow to Solve Java’s Warmup & Cloud Costs"
-slug: "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"
 date: "2023-08-30T21:30:14+00:00"
 lastmod: "2023-08-31T06:23:10+00:00"
 description: "ReadyNow Orchestrator delivers the highest possible optimized code speed at warmup, making deployment easier for containerized Java."

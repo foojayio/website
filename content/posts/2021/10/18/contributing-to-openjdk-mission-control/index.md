@@ -1,6 +1,5 @@
 ---
 title: "Contributing to OpenJDK Mission Control"
-slug: "contributing-to-openjdk-mission-control"
 date: "2021-10-18T08:33:12+00:00"
 lastmod: "2021-10-18T08:46:27+00:00"
 description: "Since this month is Hacktoberfest, I thought it would be a good idea to talk about how to contribute to the OpenJDK Mission Control project."

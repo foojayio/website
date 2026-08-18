@@ -1,6 +1,5 @@
 ---
 title: "Browserless Testing of Vaadin Applications with Karibu Testing"
-slug: "browserless-testing-of-vaadin-applications-with-karibu-testing"
 date: "2024-09-09T06:27:41+00:00"
 lastmod: "2024-09-09T06:27:42+00:00"
 description: "About a testing framework that stands out for its ability to run browserless testing, offering several advantages over traditional end-to-end testing approaches, such as Selenium, Playwright, or Cypress."
@@ -142,7 +141,7 @@ class ClubsViewTest extends KaribuTest {
 
     @BeforeEach
     public void login() {
-        login("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6112080c0e0f210c001315080f040d0d084f0209">[email protected]</a>", "", List.of(Role.ADMIN));
+        login("[email protected]", "", List.of(Role.ADMIN));
 
         UI.getCurrent().navigate(ClubsView.class);
     }

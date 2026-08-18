@@ -1,6 +1,5 @@
 ---
 title: "Foojay.io At JFall 2024 (And The Winner Is...)"
-slug: "foojay-io-at-jfall-2024-and-the-winner-is"
 date: "2024-11-12T08:47:26+00:00"
 lastmod: "2024-11-12T13:24:19+00:00"
 description: "It was a great day, with a lot of reconnecting to new and existing (not old!) friends, a solid basis for more Foojay.io booths at conferences, just like this and last year at JFall!"

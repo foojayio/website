@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #48: JUG Oberpfalz, JCON Conference, and JAVAPRO Magazine"
-slug: "foojay-podcast-48"
 date: "2024-05-06T07:48:17+00:00"
 lastmod: "2025-11-13T08:47:31+00:00"
 description: "In this episode, we are in Oberpfalz, Germany, for a particular reason; the organizers of the local JUG are the same people responsible for the JCON conference in Cologne in a few weeks."

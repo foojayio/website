@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot 3.5 Migration and the CRA: When Good Enough Isn't\""
-slug: "spring-boot-migration-and-the-cra-when-good-enough-isnt"
 date: "2026-06-05T08:52:01+00:00"
 description: "Spring Boot 3.5 reaches EOL on June 30. The legal context is about to change. Here's what 'without undue delay' means when commercial patches exist.."
 authors:

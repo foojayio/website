@@ -1,6 +1,5 @@
 ---
 title: "How to Kickstart Your Jakarta EE 11 Projects with Payara Starter"
-slug: "how-to-kickstart-your-jakarta-ee-11-projects-with-payara-starter"
 date: "2025-09-23T10:26:53+00:00"
 lastmod: "2025-09-23T10:26:55+00:00"
 description: "Payara Starter now supports Jakarta EE 11 with a fast project setup, an ERD-based code generator, and a Jakarta Faces project generator—making enterprise app development easier than ever."

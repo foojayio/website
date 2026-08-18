@@ -1,6 +1,5 @@
 ---
 title: "Kafka vs. Chronicle for Microservices: Which is 750 Times Faster?"
-slug: "kafka-vs-chronicle-for-microservices-which-is-750-times-faster"
 date: "2022-11-30T08:15:40+00:00"
 lastmod: "2022-11-30T08:24:05+00:00"
 description: "Find out why, while Kafka is a good choice for log aggregation, it might not be low latency enough for use cases involving microservices."

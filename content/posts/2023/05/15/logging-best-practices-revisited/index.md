@@ -1,6 +1,5 @@
 ---
 title: "Logging Best Practices Revisited"
-slug: "logging-best-practices-revisited"
 date: "2023-05-15T13:07:59+00:00"
 lastmod: "2023-05-15T17:20:22+00:00"
 description: "Join me for a livestream discussion on logging and how observability shouldn't just be the forte of DevOps. Logs are more than debug prints."

@@ -1,6 +1,5 @@
 ---
 title: "Putting JFR into Context"
-slug: "putting-jfr-into-context"
 date: "2023-11-02T14:03:25+00:00"
 lastmod: "2023-11-02T14:03:26+00:00"
 description: "Have you ever wanted to bring your JFR events into context? Adding information on sessions, user IDs, and more can improve your ability to make sense of all the events in your profile."

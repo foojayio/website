@@ -1,6 +1,5 @@
 ---
 title: "Reduce Java Application Startup and Warmup Times with CRaC"
-slug: "reduce-java-application-startup-and-warmup-times-with-crac"
 date: "2023-05-16T11:21:12+00:00"
 lastmod: "2023-06-04T08:05:13+00:00"
 description: "Today Azul announces the general availability of Azul Zulu Builds of OpenJDK for Java 17 with CRaC support in x86, 64-bit configurations."

@@ -1,6 +1,5 @@
 ---
 title: "Visualization of Business Function Message Flow with Vaadin and Neo4j"
-slug: "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
 date: "2022-03-16T08:21:10+00:00"
 lastmod: "2022-04-20T07:13:47+00:00"
 description: "Analyzing & visualizing message flows between business functions was the goal of my current project. Learn about where Vaadin and Neo4J fit!"

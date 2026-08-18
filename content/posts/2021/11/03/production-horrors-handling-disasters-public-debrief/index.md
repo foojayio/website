@@ -1,6 +1,5 @@
 ---
 title: "Production Horrors - Handling Disasters: Public Debrief. Handling failures"
-slug: "production-horrors-handling-disasters-public-debrief"
 date: "2021-11-03T10:49:21+00:00"
 lastmod: "2021-11-03T10:49:23+00:00"
 description: "Just in time for Halloween failures in production are scarier than most movie monsters. Here's a personal scary story of a production fail..."

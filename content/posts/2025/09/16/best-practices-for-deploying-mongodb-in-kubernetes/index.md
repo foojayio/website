@@ -1,6 +1,5 @@
 ---
 title: "Best Practices for Deploying MongoDB in Kubernetes"
-slug: "best-practices-for-deploying-mongodb-in-kubernetes"
 date: "2025-09-16T19:01:34+00:00"
 lastmod: "2025-09-16T19:01:35+00:00"
 description: "Running MongoDB in Kubernetes introduces challenges that don’t exist with stateless applications. By default, Kubernetes doesn’t understand MongoDB’s replica set topology, quorum requirements, or data durability constraints. The MongoDB Kubernetes Operator bridges that gap, enabling you to declaratively deploy and manage replica sets and sharded clusters using familiar Kubernetes patterns."
@@ -30,8 +29,7 @@ If you're new to the Atlas Kubernetes Operator, check out our [quick start guide
 
 In this guide, we'll explore production-ready [best practices for deploying MongoDB with Kubernetes](https://www.mongodb.com/docs/kubernetes/current/tutorial/plan-k8s-op-considerations/?utm_campaign=devrel&utm_source=third-part-content&utm_medium=cta&utm_content=kubernetes+best+practices&utm_term=tim.kelly).
 
-1. Use the MongoDB Kubernetes Operator
---------------------------------------
+## 1. Use the MongoDB Kubernetes Operator
 
 Managing MongoDB manually in Kubernetes can quickly become complex. You'd need to configure [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), wire up persistent storage, manage services for each pod, and ensure the cluster maintains high availability through scaling events and upgrades. It's doable, but error-prone, and even small mistakes can lead to data loss or downtime.
 
@@ -63,8 +61,7 @@ To install the MongoDB Kubernetes Operator, you can use [Helm](https://helm.sh/)
 
 Before we go deeper into scaling and availability, we need to understand how MongoDB maintains identity and state inside a Kubernetes environment.
 
-2. StatefulSets and persistent volumes: Running MongoDB the right way
----------------------------------------------------------------------
+## 2. StatefulSets and persistent volumes: Running MongoDB the right way
 
 MongoDB is a stateful database, and running it safely in Kubernetes means respecting both its need for stable identity and durable storage. Kubernetes offers two key building blocks to make that possible: StatefulSets and persistent volumes. When deploying MongoDB, they always go hand-in-hand.
 
@@ -95,8 +92,7 @@ For a full example of persistent volumes configuration, see [replica-set-persist
 
 Together, StatefulSets and persistent volumes give MongoDB what it needs to run reliably in Kubernetes: stable identities, durable data, and predictable recovery. Understanding how these pieces work, even if the Operator is managing them for you, is key to operating MongoDB clusters confidently at scale.
 
-3. Set CPU and memory resources for MongoDB and the Operator
-------------------------------------------------------------
+## 3. Set CPU and memory resources for MongoDB and the Operator
 
 Kubernetes is excellent at sharing cluster resources efficiently, but it needs clear instructions to do so. This is especially important when deploying MongoDB with the Kubernetes Operator, where both the database pods and the Operator itself must be resource-aware to avoid performance issues, evictions, or startup delays.
 
@@ -195,8 +191,7 @@ For more examples, check out the the [replica-set-podspec.yaml](https://github.c
 
 By clearly defining resource requests and limits for both the Operator and MongoDB pods, you create a Kubernetes environment that is more predictable, resilient, and production-ready. Proper sizing helps avoid performance spikes, prevents out-of-memory errors, and ensures MongoDB clusters scale reliably as workloads grow.
 
-4. Spread replica set members across failure domains
-----------------------------------------------------
+## 4. Spread replica set members across failure domains
 
 High availability isn't just about running multiple MongoDB pods. It's also about ensuring they aren't all vulnerable to the same point of failure. If every replica set member ends up scheduled on the same [node](https://kubernetes.io/docs/concepts/architecture/nodes/), or worse, in the same availability zone, a single failure could bring down your entire cluster.
 
@@ -267,8 +262,7 @@ You can find full examples in the replica-set-affinity.yaml file in the [MongoDB
 
 By default, Kubernetes will schedule pods wherever it finds room, which might be great for stateless web services, but is risky for databases. For MongoDB, you must be explicit about fault tolerance. Spreading your pods across zones and nodes ensures that a localized failure won't turn into a full cluster outage.
 
-5. Increase reconciliation throughput with thread count configuration
----------------------------------------------------------------------
+## 5. Increase reconciliation throughput with thread count configuration
 
 The MongoDB Kubernetes Operator reconciles resources one at a time by default. For most small-scale deployments, this is sufficient. However, if you plan to deploy more than 10 MongoDB replica sets or sharded clusters in parallel, the Operator can become a bottleneck. In this case, you should consider increasing the number of concurrent reconciliation threads.
 

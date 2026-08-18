@@ -1,6 +1,5 @@
 ---
 title: "Why JEP 411 Will Have a Negative Impact on Java Security"
-slug: "why-jep-411-will-have-a-negative-impact-on-java-security"
 date: "2021-05-22T07:43:06+00:00"
 lastmod: "2021-05-24T17:14:06+00:00"
 description: "SecurityManager, foundation to build secure software, on its own is insufficient to limit users & software to the least privilege principle."

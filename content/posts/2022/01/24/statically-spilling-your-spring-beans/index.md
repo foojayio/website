@@ -1,6 +1,5 @@
 ---
 title: "Statically Spilling Your (Spring) Beans"
-slug: "statically-spilling-your-spring-beans"
 date: "2022-01-24T11:25:13+00:00"
 lastmod: "2022-01-24T19:05:22+00:00"
 description: "There are some edge cases where you want to access Spring Beans in a static method, while you should always try to avoid this."
@@ -51,12 +50,7 @@ Some notes about the above code example before we continue:
 * *@Autowired can also be placed on a field or a setX(x) method. [Constructor injection](https://reflectoring.io/constructor-injection/) is generally accepted as the best way to inject dependencies;*
 * *When a class only has a single constructor you can omit the @Autowired annotation (since Spring 4.3), I kept it here for clarity;*
 
-<figure class="aligncenter is-resized">
- <img fetchpriority="high" decoding="async" src="https://www.tomcools.be/post/apr-2020-static-spring-bean/spilling-the-beans.jpg" alt="Flavor Image: Spilling Beans" width="640" height="427">
- <figcaption>
-  Spilling some beans!
- </figcaption>
-</figure>
+{{< img src="https://www.tomcools.be/post/apr-2020-static-spring-bean/spilling-the-beans.jpg" class="aligncenter is-resized" alt="Flavor Image: Spilling Beans" width="640" height="427" caption="Spilling some beans!" >}}
 
 ## The problem
 

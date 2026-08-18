@@ -1,6 +1,5 @@
 ---
 title: "Build local LLM applications with Quarkus, Ollama, Testcontainers"
-slug: "building-local-llm-ai-powered-applications-with-quarkus-ollama-and-testcontainers"
 date: "2025-02-27T10:13:19+00:00"
 lastmod: "2025-05-06T10:50:02+00:00"
 description: "Explore how to combine Quarkus with Ollama, a platform for running AI models locally. We’ll also demonstrate how tools like Testcontainers and Quarkus Dev Services simplify development and testing workflows"
@@ -38,8 +37,7 @@ The project integrates Quarkus with Ollama to create an AI model-driven applicat
 2. Using Testcontainers for Integration Testing
 3. Leveraging Quarkus Dev Services for Simplified Development
 
-1. Integrating Quarkus with Ollama
-----------------------------------
+## 1. Integrating Quarkus with Ollama
 
 ### Why Ollama?
 
@@ -107,8 +105,7 @@ quarkus.langchain4j.ollama.wiseModel.chat-model.model-id=tinydolphin
 quarkus.langchain4j.ollama.curiousModel.chat-model.model-id=tinyllama
 ```
 
-2. Using Testcontainers for Integration Testing
------------------------------------------------
+## 2. Using Testcontainers for Integration Testing
 
 ### Why Testcontainers?
 
@@ -163,8 +160,7 @@ class CuriousChatResourceTest {
 * The `@QuarkusTest` annotation allows Quarkus to run the application in a test-friendly mode.
 * Quarkus finds a service (Ollama) for which it needs an instance and it will spin up a container for that.
 
-3. Leveraging Quarkus Dev Services for Ollama
----------------------------------------------
+## 3. Leveraging Quarkus Dev Services for Ollama
 
 ### What Are Quarkus Dev Services?
 

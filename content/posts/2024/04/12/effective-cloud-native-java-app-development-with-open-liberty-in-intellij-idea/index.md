@@ -1,6 +1,5 @@
 ---
 title: "IntelliJ IDEA and Open Liberty - Effective Java app development"
-slug: "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
 date: "2024-04-12T13:36:25+00:00"
 lastmod: "2024-04-12T13:38:09+00:00"
 description: "How to use Liberty Tools for IntelliJ IDEA to enable rapid, easy, and efficient development of cloud-native Java applications with Liberty."

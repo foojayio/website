@@ -1,6 +1,5 @@
 ---
 title: "Creating Executables For JavaFX Applications"
-slug: "creating-executables-for-javafx-applications"
 date: "2023-12-08T13:46:50+00:00"
 lastmod: "2023-12-08T13:46:52+00:00"
 description: "Let's take a look in this article at the current state of what can be done with jpackage and GitHub Actions for JavaFX."

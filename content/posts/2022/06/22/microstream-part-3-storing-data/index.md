@@ -1,6 +1,5 @@
 ---
 title: "MicroStream: How to store your data?"
-slug: "microstream-part-3-storing-data"
 date: "2022-06-22T11:10:55+00:00"
 lastmod: "2022-06-22T11:12:12+00:00"
 description: "In the third article in the introductory MicroStream series, we discuss the key strategies for storing your data."

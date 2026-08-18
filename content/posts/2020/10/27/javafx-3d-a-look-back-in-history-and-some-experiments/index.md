@@ -1,6 +1,5 @@
 ---
 title: "JavaFX 3D: A Look Back Through History & Some Experiments"
-slug: "javafx-3d-a-look-back-in-history-and-some-experiments"
 date: "2020-10-27T09:11:30+00:00"
 lastmod: "2020-11-08T20:53:12+00:00"
 description: "JavaFX 3D really is a hidden gem! I've been using JavaFX already for a long time now but wasn't aware of these 3D features!"
@@ -14,9 +13,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

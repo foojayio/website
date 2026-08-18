@@ -1,6 +1,5 @@
 ---
 title: "Behaviour Driven Development with Event Driven Architectures"
-slug: "how-behaviour-driven-development-works-well-with-event-driven-architectures"
 date: "2023-02-15T07:57:18+00:00"
 lastmod: "2023-02-15T08:01:53+00:00"
 description: "How to use Behaviour Driven Development to establish the requirements from users, and Event Driven Architecture to automate testing!"

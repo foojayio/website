@@ -1,6 +1,5 @@
 ---
 title: "Chronicle Services: Building Fast Microservices with Java"
-slug: "chronicle-services-building-fast-microservices-with-java"
 date: "2023-09-13T13:47:47+00:00"
 lastmod: "2023-09-25T08:39:43+00:00"
 description: "Chronicle Services presents an opinionated view of several of the specialised libraries we have developed to support low-latency applications."

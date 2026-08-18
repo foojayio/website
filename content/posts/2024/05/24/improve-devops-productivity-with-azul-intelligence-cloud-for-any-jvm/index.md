@@ -1,6 +1,5 @@
 ---
 title: "Improve DevOps Productivity with Azul Intelligence Cloud for Any JVM"
-slug: "improve-devops-productivity-with-azul-intelligence-cloud-for-any-jvm"
 date: "2024-05-24T09:46:34+00:00"
 lastmod: "2024-05-24T09:54:53+00:00"
 description: "Intelligence Cloud works with any JVM from any vendor or distribution to slash time from tasks across an enterprise’s entire Java estate."

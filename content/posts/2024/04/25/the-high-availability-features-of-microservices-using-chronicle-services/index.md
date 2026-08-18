@@ -1,6 +1,5 @@
 ---
 title: "The High Availability Features of Microservices using Chronicle Services"
-slug: "the-high-availability-features-of-microservices-using-chronicle-services"
 date: "2024-04-25T13:36:34+00:00"
 lastmod: "2024-04-25T13:37:04+00:00"
 description: "Learn how Chronicle Services, a Java-based framework optimised for low-latency microservices, meets critical requirements by integrating HA, performance, and data persistence."

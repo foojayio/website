@@ -1,6 +1,5 @@
 ---
 title: "Book review: Frontend Development with JavaFX and Kotlin"
-slug: "book-review-frontend-development-with-javafx-and-kotlin"
 date: "2024-06-14T09:06:53+00:00"
 lastmod: "2024-06-14T09:06:55+00:00"
 description: "If you are new to JavaFX+Kotlin, this book is a good starting point and gives enough examples to help you understand how to create an application and benefit from Kotlin's features."
@@ -21,9 +20,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="327" height="466" src="cover.jpg" alt="" class="wp-image-110882" style="width:auto;height:200px">
-</figure>
+{{< img src="cover.jpg" class="size-full is-resized" width="327" height="466" style="width:auto;height:200px" >}}
 
 For a personal pet project, I started experimenting with JavaFX and Kotlin to create a user interface with a lot of Java / Kotlin background processing. As I knew there is a book available on this specific topic, Apress was so kind to send me a review copy of [Frontend Development with JavaFX and Kotlin: Build State-of-the-Art Kotlin GUI Applications](https://www.amazon.nl/Frontend-Development-JavaFX-Kotlin-State/dp/1484297164) by Peter Späth (152 pages, 48€ on paper, 35.5€ for ebook on Amazon.nl).
 

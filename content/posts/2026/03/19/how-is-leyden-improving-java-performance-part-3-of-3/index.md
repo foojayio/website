@@ -1,6 +1,5 @@
 ---
 title: "How is Leyden improving Java Performance? Part 3 of 3"
-slug: "how-is-leyden-improving-java-performance-part-3-of-3"
 date: "2026-03-19T12:10:22+00:00"
 lastmod: "2026-03-20T06:52:40+00:00"
 description: "provides a more detailed account of how Leyden’s proposed solution operates"

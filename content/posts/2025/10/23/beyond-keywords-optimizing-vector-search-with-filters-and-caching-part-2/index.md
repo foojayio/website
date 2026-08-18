@@ -1,6 +1,5 @@
 ---
 title: "Beyond Keywords: Optimizing Vector Search with Filters and Caching (Part 2)"
-slug: "beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2"
 date: "2025-10-23T15:44:38+00:00"
 lastmod: "2025-12-12T21:21:35+00:00"
 description: "Welcome back! If you landed here without reading Part 1: Beyond Keywords: Implementing Semantic Search in Java With Spring Data, I recommend going back and checking it first so the steps in this article make more sense in sequence.This is the second part of a three-part series where we’re building a movie search application. So far, our app supports semantic search using vector queries with Spring Data and Voyage AI. In this article, we’ll take things further:Add filters to refine our vector search results.Explore strategies with Spring (such as caching) to reduce the cost of generating embeddings.Implement a basic frontend using only HTML, CSS, and JavaScript—just enough to test our API in a browser (UI is not the focus here)."

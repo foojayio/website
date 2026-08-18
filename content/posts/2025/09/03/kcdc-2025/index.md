@@ -1,6 +1,5 @@
 ---
 title: "KCDC 2025"
-slug: "kcdc-2025"
 date: "2025-09-03T17:38:36+00:00"
 lastmod: "2025-09-04T05:33:07+00:00"
 description: "When I first started attending conferences, I diligently tried to write down notes and publish them. It forced me to actively listen to the talks I was - by Nicolas Frankel"

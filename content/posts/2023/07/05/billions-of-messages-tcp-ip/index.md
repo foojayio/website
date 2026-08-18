@@ -1,6 +1,5 @@
 ---
 title: "Billions of Messages Per Minute Over TCP/IP"
-slug: "billions-of-messages-tcp-ip"
 date: "2023-07-05T21:05:08+00:00"
 lastmod: "2023-07-05T21:05:09+00:00"
 description: "Chronicle Wire has had new features added to permit communication with other components across a TCP/IP network."

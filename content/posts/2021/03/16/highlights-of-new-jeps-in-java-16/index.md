@@ -1,6 +1,5 @@
 ---
 title: "Highlights of the Newest and Latest JEPs in Java 16"
-slug: "highlights-of-new-jeps-in-java-16"
 date: "2021-03-16T18:02:43+00:00"
 lastmod: "2021-07-12T05:13:11+00:00"
 description: "The JDK Enhancement Proposal (or JEP) is a community process for proposals for enhancements to the OpenJDK. Which ones made it into Java 16?"

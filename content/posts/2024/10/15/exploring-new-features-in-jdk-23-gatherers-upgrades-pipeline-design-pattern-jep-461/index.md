@@ -1,6 +1,5 @@
 ---
 title: "Gatherers upgrades pipeline design pattern JEP-461"
-slug: "exploring-new-features-in-jdk-23-gatherers-upgrades-pipeline-design-pattern-jep-461"
 date: "2024-10-15T06:18:04+00:00"
 lastmod: "2024-10-18T16:53:19+00:00"
 description: "Gatherers help eliminate the need to define large error-prone Collectors, which can degrade source code maintainability."

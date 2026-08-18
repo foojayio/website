@@ -1,6 +1,5 @@
 ---
 title: "Send Your Logs To Loki"
-slug: "send-your-logs-to-loki"
 date: "2023-10-12T08:00:12+00:00"
 lastmod: "2023-10-12T08:00:14+00:00"
 description: "Loki, a storage engine, provides a RESTful API to store and read logs. Let's push a log from a Java app."

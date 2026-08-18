@@ -1,6 +1,5 @@
 ---
 title: "How to Change a Field's Type in Recent JDKs"
-slug: "changing-field-type-recent-jdks"
 date: "2021-04-08T07:40:56+00:00"
 lastmod: "2021-08-23T12:56:16+00:00"
 description: "In this article, I will share some findings regarding the security changes regarding changing a field's type across JDK versions."

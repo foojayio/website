@@ -1,6 +1,5 @@
 ---
 title: "TornadoVM for RISC-V Accelerators"
-slug: "tornadovm-for-risc-v-accelerators"
 date: "2024-09-19T07:50:28+00:00"
 lastmod: "2024-09-19T08:05:01+00:00"
 description: "Is Java ready for running on RISC-V accelerators? If so, how? This post shows a possible way by using open source solutions integrating TornadoVM with the oneAPI Construction Kit. - by Juan Fumero"
@@ -16,7 +15,7 @@ related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
   - "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"
   - "defining-patterns-of-data-transfers-for-java-applications-with-tornadovm"
-  - "jc-ai-newsletter-5"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

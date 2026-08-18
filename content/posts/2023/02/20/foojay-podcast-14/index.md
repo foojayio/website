@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #14: Debugging Tools and Skills for Fun and Profit"
-slug: "foojay-podcast-14"
 date: "2023-02-20T08:29:01+00:00"
 lastmod: "2025-11-13T09:15:05+00:00"
 description: "Let's talk about debugging and observability. We work with debugging all the time, but how well do we know this common practice?"
@@ -21,7 +20,7 @@ related_posts:
   - "debug-like-a-senior-developer"
   - "a-short-primer-on-java-debugging-internals"
   - "package-checker-find-fix-vulnerabilities-with-intellij-idea-ultimate"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Handling Exceptions in Java Lambdas"
-slug: "exceptions-lambdas"
 date: "2022-10-22T11:36:46+00:00"
 lastmod: "2022-10-22T11:36:47+00:00"
 description: "Java streams don't play well with checked exceptions. To recover the readability we expect of streams, we can rely on Apache Commons Lang."

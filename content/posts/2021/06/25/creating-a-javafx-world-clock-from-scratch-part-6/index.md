@@ -1,6 +1,5 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 6)"
-slug: "creating-a-javafx-world-clock-from-scratch-part-6"
 date: "2021-06-25T16:48:48+00:00"
 lastmod: "2022-01-12T13:46:44+00:00"
 description: "Learn how to make WebService calls (RESTful) from your JavaFX application to retrieve weather data based on geographic locations."
@@ -12,10 +11,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-  - "foojay-podcast-83"
 frozen: false
 ---
 
@@ -148,7 +147,7 @@ BiConsumer<String, Throwable> updateWeatherUI =  (dayForecastJson, err) -> {
         Map<String, Object> weatherIconInfo = weatherInfo.size() > 0 ? weatherInfo.get(0) : null;
         Map<String, Object> tempInfo = (Map<String, Object>) dayForecast.get("main");
         // Load weather icon asynchronously
-        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="255665175d0b554b42">[email protected]</a>".formatted(weatherIconInfo.get("icon")), true);
+        Image weatherIcon = new Image("https://openweathermap.org/img/wn/%[email protected]".formatted(weatherIconInfo.get("icon")), true);
         weatherIconImageView.setImage(weatherIcon);
 
         // Apply Tooltip

@@ -1,6 +1,5 @@
 ---
 title: "Book Review: Quarkus for Spring Developers"
-slug: "book-review-quarkus-for-spring-developers"
 date: "2021-10-04T08:25:37+00:00"
 lastmod: "2021-10-14T09:23:37+00:00"
 description: "Shift your Spring skills to leverage the “supersonic subatomic” Quarkus framework, opportunity for developers to learn two frameworks at once."

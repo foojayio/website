@@ -1,6 +1,5 @@
 ---
 title: "Announcing bx-ldap: Enterprise LDAP for BoxLang"
-slug: "announcing-bx-ldap-enterprise-ldap-for-boxlang"
 date: "2025-12-16T17:01:13+00:00"
 lastmod: "2025-12-16T17:01:15+00:00"
 description: "We're excited to announce the release of bx-ldap, a comprehensive LDAP module that brings enterprise-grade directory access to BoxLang! This module goes - by Cristobal Escobar"
@@ -106,7 +105,7 @@ bx:ldap
     action="modify"
     connection="myLdap"
     dn="uid=jdoe,ou=users,dc=example,dc=org"
-    attributes={ "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caa4afbdafa7aba3a68aafb2aba7baa6afe4a9a5a7">[email protected]</a>" }
+    attributes={ "mail" : "[email protected]" }
     modifyType="replace";
 
 // Explicitly close when done
@@ -201,7 +200,7 @@ newUser = {
     "cn" : "John Doe",
     "sn" : "Doe",
     "uid" : "jdoe",
-    "mail" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23494c4b4d0d474c4663465b424e534f460d404c4e">[email protected]</a>",
+    "mail" : "[email protected]",
     "userPassword" : "SecurePassword123",
     "telephoneNumber" : "+1-555-0123"
 };
@@ -320,6 +319,6 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 \[email protected\]](/cdn-cgi/l/email-protection#3c55525a537c5e5344505d525b125553 "📧 info@boxlang.io")
+[📧 \[email protected\]](/cdn-cgi/l/email-protection#234a4d454c63414c5b4f424d440d4a4c "📧 info@boxlang.io")
 
 **Ready to supercharge your LDAP integration?** Get started with bx-ldap today and experience enterprise-grade directory access in BoxLang!

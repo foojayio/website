@@ -1,6 +1,5 @@
 ---
 title: "Spec-Driven Development with AI: A New Approach and a Journey into the Past"
-slug: "spec-driven-development-with-ai-a-new-approach-and-a-journey-into-the-past"
 date: "2025-09-08T07:35:46+00:00"
 lastmod: "2025-09-09T08:53:57+00:00"
 description: "We’re at an inflection point. AI can generate high-quality code, but only if we give it high-quality specifications."

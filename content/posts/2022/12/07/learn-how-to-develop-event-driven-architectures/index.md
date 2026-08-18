@@ -1,6 +1,5 @@
 ---
 title: "Learn How to Develop Event-Driven Architectures"
-slug: "learn-how-to-develop-event-driven-architectures"
 date: "2022-12-07T15:25:16+00:00"
 lastmod: "2022-12-07T16:27:04+00:00"
 description: "EDA is a design pattern in which decoupled components (often microservices) can asynchronously publish and subscribe to events."

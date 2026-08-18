@@ -1,6 +1,5 @@
 ---
 title: "Building Command Line Interfaces with Kotlin using picoCLI"
-slug: "building-command-line-interfaces-with-kotlin-using-picocli"
 date: "2021-09-23T07:05:12+00:00"
 lastmod: "2021-09-23T07:08:55+00:00"
 description: "Use cases where CLIs are a great idea, best practises, and discover one of the most used library for CLIs in the JVM world: picoCLI."
@@ -28,19 +27,19 @@ There are a couple reasons why a CLI can be a good use case for you and your use
 
 * In case you create fat jars that you run with input arguments, creating a thin CLI wrapper around it can be of great help for you and your users. Indeed, **it looks cleaner and abstracts the JVM ecosystem away** . This becomes easily clear with an example.
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-46678" class="size-medium wp-image-46678" src="image1-700x135.png" alt="2 commands, one usiong the java -jar expression and the other using a native tool" width="700" height="135">
+{{< img src="image1-700x135.png" class="size-medium" alt="2 commands, one usiong the java -jar expression and the other using a native tool" width="700" height="135" >}}
 
   Using a native application from the CLI is cleaner than using java -jar{#caption-attachment-46678}
 
 * Compared to running in an IDE, or via a GUI, CLIs make it very easy to interface (pipe) with other terminal tools, or scripts. <br />
 
-<img decoding="async" aria-describedby="caption-attachment-46679" class="size-medium wp-image-46679" src="image2-700x168.png" alt="2 bash commands, piped into each other" width="700" height="168">
+{{< img src="image2-700x168.png" class="size-medium" alt="2 bash commands, piped into each other" width="700" height="168" >}}
 
   Usage of piping in Bash{#caption-attachment-46679}
 
 * CLIs usually also have a very clear and embedded man / help page. This helps your user use the tool in the right way and avoids having to look at documentation or ask for help. <br />
 
-<img decoding="async" aria-describedby="caption-attachment-46680" class="size-medium wp-image-46680" src="image3-700x335.png" alt="The help commands from swacli" width="700" height="335">
+{{< img src="image3-700x335.png" class="size-medium" alt="The help commands from swacli" width="700" height="335" >}}
 
   Help is a very expressive way to have information about the tool{#caption-attachment-46680}
 
@@ -60,7 +59,7 @@ The snippet and code used in this article are all directly taken from my swacli 
 
 At its core, picoCli is nothing more than a Java library. To add it to your project the only thing you actually are required to do is add it to your Maven or Gradle dependencies. It is also recommended to add support for the annotation processor in your IDE. The annotation processor allows for compile time error checking, instead of runtime but it is also useful to generate GraalVM configuration files later on during native compilation.  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46681" class="size-medium wp-image-46681" src="image4-662x510.png" alt="A snippet of the kapt related part of my gradle file" width="662" height="510">
+{{< img src="image4-662x510.png" class="size-medium" alt="A snippet of the kapt related part of my gradle file" width="662" height="510" >}}
 
 how the gradle configuration looks like in Gradle for a Kotlin project.{#caption-attachment-46681}
 
@@ -70,7 +69,7 @@ how the gradle configuration looks like in Gradle for a Kotlin project.{#caption
 
 As usual, the first thing we want to do with a new tool is to run Hello World.  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46682" class="size-medium wp-image-46682" src="image5-700x312.png" alt="Hello World using picoCLI" width="700" height="312">
+{{< img src="image5-700x312.png" class="size-medium" alt="Hello World using picoCLI" width="700" height="312" >}}
 
 Hello World using picoCLI{#caption-attachment-46682}
 
@@ -80,7 +79,7 @@ From this example, we discover a few things :
 * picoCLI will wrap around any *Callable* or *Runnable*. This means that your core logic should be embedded in a Runnable or Callable.
 * We can use the *@Command* annotation for picoCLI to generate things for us. In that case, we provide a name, version, and description to the tool. We also tell it to generate standard help for us. This allows us in a single line of code to do things like `sw --version` or `sw --help` . Here is the output when running the snippet of code above with the `--help` input parameter.
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46683" class="size-medium wp-image-46683" src="image6-700x126.png" alt="Result of the help command of sw" width="700" height="126">
+{{< img src="image6-700x126.png" class="size-medium" alt="Result of the help command of sw" width="700" height="126" >}}
 
 Result of the help command of sw{#caption-attachment-46683}
 > "A user interface is like a joke, if you have to explain it it's not that great" - Martin LeBlanc.
@@ -97,7 +96,7 @@ Without being able to provide any inputs to it, a CLI usage would be very limite
   Because this will be the main interface between our users and the tool, we should take good care of choosing options and arguments that make sense.  
   In our Star Wars use case, we want users to be able to **search for planets OR characters** and **either insert some search item (ex : 'Darth') or nothing** and get a full list of characters back. Let's see how those options and parameters look like :
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46684" class="size-medium wp-image-46684" src="image7-700x349.png" alt="Using argument groups with pico CLI. Snippet of code" width="700" height="349">
+{{< img src="image7-700x349.png" class="size-medium" alt="Using argument groups with pico CLI. Snippet of code" width="700" height="349" >}}
 
   Our arguments and commands for to search for StarWars information{#caption-attachment-46684}
 
@@ -107,7 +106,7 @@ Without being able to provide any inputs to it, a CLI usage would be very limite
 
 Here is what happens when trying to run the code without specifying one option :  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46685" class="size-medium wp-image-46685" src="image8-700x197.png" alt="The error message when using the tool without argument" width="700" height="197">
+{{< img src="image8-700x197.png" class="size-medium" alt="The error message when using the tool without argument" width="700" height="197" >}}
 
 Missing required argument when running the example. Good!{#caption-attachment-46685}
 > Tip : Don't break conventions that have been there for decades. -i (input) , -o (output), -r (recursive) have typical meanings when using command lines. Make sure to apply those unwritten conventions
@@ -116,7 +115,7 @@ Missing required argument when running the example. Good!{#caption-attachment-46
 
 You may already have heard or seen subcommands in CLIs. Subcommands are basically using semantic words to achieve your actions. Typical examples are `kubectl get services`, or `gh repo clone jlengrand/swacli`. SubCommands are perfect in our case because they allow us to get rid of our clunky exclusive options. Let's see how to implement them :  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46686" class="size-medium wp-image-46686" src="image9-700x435.png" alt="Snippet of code using Subcommands" width="700" height="435">
+{{< img src="image9-700x435.png" class="size-medium" alt="Snippet of code using Subcommands" width="700" height="435" >}}
 
 Same example, using subcommands this time{#caption-attachment-46686}
 
@@ -130,7 +129,7 @@ Nowadays, all terminals support color schemes as well as emojis (!!). We can lev
 
 Picturing a *Response* object that contains a number of results, together with data about a planet, here is a snippet that declares markup. picoCLI declares '@\|' and '\|@' , in between which specific colors and types can be defined such as 'bold,green'. The unicode characters that can be seen represent emojis. Much more can be done with colors in picoCLI, such as palettes. [You can read more about it here](http://https://picocli.info/#_ansi_colors_and_styles "You can read more about it here").  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46687" class="size-medium wp-image-46687" src="image10-700x250.png" alt="An example of formatted text using the picoCLI format" width="700" height="250">
+{{< img src="image10-700x250.png" class="size-medium" alt="An example of formatted text using the picoCLI format" width="700" height="250" >}}
 
 An example of formatted text using the picoCLI format{#caption-attachment-46687}
 
@@ -140,7 +139,7 @@ The last thing we can do to help our users enjoy our CLI is to make sure it's bl
 
 picoCLI supports GraalVM native compilation by default (unless you added some unsupported library). To generate a native executable, run the following command (with graalVM and its native-image extension enabled on your system).  
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-46688" class="size-medium wp-image-46688" src="image11-700x166.png" alt="Compiling a native image for our swacli application" width="700" height="166">
+{{< img src="image11-700x166.png" class="size-medium" alt="Compiling a native image for our swacli application" width="700" height="166" >}}
 
 Compiling a native image for our swacli application{#caption-attachment-46688}
 

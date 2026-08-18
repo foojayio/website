@@ -1,6 +1,5 @@
 ---
 title: "Conditional Builds on GitLab"
-slug: "conditional-builds-on-gitlab"
 date: "2022-05-09T09:16:26+00:00"
 lastmod: "2023-06-12T08:56:41+00:00"
 description: "Learn how to run a build on GitLab only if a condition is met, especially helpful when conditions are expensive and time-consuming operations."

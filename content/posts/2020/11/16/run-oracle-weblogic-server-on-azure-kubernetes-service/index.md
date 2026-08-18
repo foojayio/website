@@ -1,6 +1,5 @@
 ---
 title: "Run Oracle WebLogic Server on Azure Kubernetes Service"
-slug: "run-oracle-weblogic-server-on-azure-kubernetes-service"
 date: "2020-11-16T13:40:19+00:00"
 lastmod: "2021-07-05T20:06:45+00:00"
 description: "We are delighted to announce the initial release of solutions to run Oracle WebLogic Server on the Azure Kubernetes Service."

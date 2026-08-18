@@ -1,6 +1,5 @@
 ---
 title: "Getting Started Learning Java as a First Language"
-slug: "learning-java-as-a-first-language"
 date: "2020-09-24T13:44:00+00:00"
 lastmod: "2020-09-24T21:28:29+00:00"
 description: "I thought it’d be fun to write a post that provides people with no programming experience info on how to quickly and efficiently become Java developers!"

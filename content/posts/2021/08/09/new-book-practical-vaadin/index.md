@@ -1,6 +1,5 @@
 ---
 title: "Announcing New Book: \"Practical Vaadin\""
-slug: "new-book-practical-vaadin"
 date: "2021-08-09T18:02:08+00:00"
 lastmod: "2022-03-25T14:56:15+00:00"
 description: "Alejandro Duarte's new book shows how to implement web applications in Java using the open source Vaadin framework version 20 and later."

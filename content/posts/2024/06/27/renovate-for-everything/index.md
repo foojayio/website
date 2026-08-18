@@ -1,6 +1,5 @@
 ---
 title: "Renovate for everything"
-slug: "renovate-for-everything"
 date: "2024-06-27T08:18:20+00:00"
 lastmod: "2024-06-27T08:18:21+00:00"
 description: "You can configure Renovate for every package manager you can think of. Even better, Renovate allows the contribution of new package managers, contrary to Dependabot."

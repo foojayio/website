@@ -1,6 +1,5 @@
 ---
 title: "Minimize costs utilizing the cloud with Spring-Data-Eclipse-Store"
-slug: "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
 date: "2024-02-13T15:26:37+00:00"
 lastmod: "2024-02-13T15:36:11+00:00"
 description: "How to save money storing data in Cloud blob-stores instead of expensive databases through the use of the open-source Spring-Data-Eclipse-Store library."
@@ -18,7 +17,7 @@ related_posts:
   - "microstream-part-1-what-is-it"
   - "exploring-file-storage-solutions-in-spring-boot-database-local-systems-cloud-services-and-beyond"
   - "microstream-part-3-storing-data"
-  - "did-ai-just-break-software-security-for-ever"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -48,12 +47,7 @@ Another characteristic of EclipseStore is that all changes are on the live data.
 
 In other words: **There are no working copies for your objects.** This enhances performance by taking only the minimal required steps to save data, but might be a concern especially in multi-threaded applications.  
 
-<figure class="aligncenter is-resized">
- <a href="WorkingCopy_1.svg"><img decoding="async" src="WorkingCopy_1.svg" alt="Diagram of an application using EclipseStore showing that the application directly works with the data objects in memory." class="wp-image-105950" style="width:394px;height:auto"></a>
- <figcaption class="wp-element-caption">
-  With EclipseStore the application works directly on the java objects in memory
- </figcaption>
-</figure>
+{{< img src="WorkingCopy_1.svg" class="aligncenter is-resized" alt="Diagram of an application using EclipseStore showing that the application directly works with the data objects in memory." style="width:394px;height:auto" caption="With EclipseStore the application works directly on the java objects in memory" >}}
 
 ## Spring Integration with Spring-Data-Eclipse-Store
 

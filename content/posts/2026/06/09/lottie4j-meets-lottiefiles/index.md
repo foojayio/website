@@ -1,6 +1,5 @@
 ---
 title: "Lottie4J Meets LottieFiles: A Conversation with Naail Abdul Rahman"
-slug: "lottie4j-meets-lottiefiles"
 date: "2026-06-09T07:31:00+00:00"
 description: "Lottie animations run on Android, iOS, and the web. Getting them working on the JVM is a different story. Lottie4J started as a question: can JavaFX - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-06-04-interview-with-naail-from-lottiefiles/"

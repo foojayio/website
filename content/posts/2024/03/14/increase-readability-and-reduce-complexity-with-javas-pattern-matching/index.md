@@ -1,6 +1,5 @@
 ---
 title: "More readability & less complexity with Java's Pattern Matching."
-slug: "increase-readability-and-reduce-complexity-with-javas-pattern-matching"
 date: "2024-03-14T13:29:36+00:00"
 lastmod: "2024-03-15T14:09:35+00:00"
 description: "Increase readability, reduce cognitive complexity, and avoid bugs that are hard to spot with Java's Pattern Matching."

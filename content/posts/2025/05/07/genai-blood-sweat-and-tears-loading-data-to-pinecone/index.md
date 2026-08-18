@@ -1,6 +1,5 @@
 ---
 title: "GenAI blood, sweat, and tears: Loading data to Pinecone"
-slug: "genai-blood-sweat-and-tears-loading-data-to-pinecone"
 date: "2025-05-07T22:10:37+00:00"
 lastmod: "2025-05-07T22:10:39+00:00"
 description: "The task to load some JSON data to Pinecone was much more arduous than I had anticipated, but I learned a lot along the way!"

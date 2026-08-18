@@ -1,6 +1,5 @@
 ---
 title: "Java Security Starts with the JVM"
-slug: "java-security-starts-with-the-jvm"
 date: "2025-11-10T12:37:20+00:00"
 lastmod: "2025-11-10T12:39:51+00:00"
 description: "When it comes to Java security, the first thing that comes to mind should be the JVM. If you’re relying on outdated, unpatched, or unsupported Java runtimes, you’re taking unnecessary risks."
@@ -34,8 +33,7 @@ When it comes to securing your Java applications, the JVM might not be the first
 
 At Azul, security is baked into the way we build and maintain our JDK distributions. Here's how we think about Java security---and what you can do to reduce risk in production.
 
-1. Security starts with timely, predictable updates
----------------------------------------------------
+## 1. Security starts with timely, predictable updates
 
 Not all Java updates are created equal. Some vendors offer only Patch Set Updates (PSUs) --- which include a mix of security fixes, bug fixes, and enhancements. While these can be valuable in development environments, they often introduce changes that require careful testing before production rollout.
 
@@ -52,8 +50,7 @@ Azul is the only vendor outside of Oracle to deliver timely security-focused upd
 
 With Azul, you're in control: apply only what you need, when you need it---whether that's zero-risk security updates or broader enhancements through PSUs.
 
-2. Long-term support = long-term security
------------------------------------------
+## 2. Long-term support = long-term security
 
 ### The problem
 
@@ -70,8 +67,7 @@ Azul supports more Java versions than any other vendor, helping organizations se
 
 This has a real-world impact: Financial institutions, healthcare platforms, and embedded systems often depend on legacy Java versions. With Azul, they stay secure without forced upgrades.
 
-3. A secure software supply chain
----------------------------------
+## 3. A secure software supply chain
 
 The Java runtime is part of your build and deploy chain. If it's compromised, every app that runs on it could be too.
 
@@ -85,8 +81,7 @@ The Java runtime is part of your build and deploy chain. If it's compromised, ev
 
 Using a verified, signed, and TCK-tested Azul JDK reduces your exposure to supply chain risks---and gives you confidence that what you deploy is exactly what you expect.
 
-4. Beyond the JDK: proactive insights
--------------------------------------
+## 4. Beyond the JDK: proactive insights
 
 Many organizations focus on securing their Java runtime but still lack clear visibility into what's deployed. Over time, environments accumulate multiple JDK versions, unpatched workloads, and legacy installations that no one remembers---creating hidden risk.
 
@@ -106,8 +101,7 @@ With Azul Intelligence Cloud, you can:
 
 Knowing exactly what's deployed is critical to closing security gaps before they become incidents.
 
-5. Enterprise migration without the headaches
----------------------------------------------
+## 5. Enterprise migration without the headaches
 
 Switching to Azul isn't just about reducing licensing costs---it's also about simplifying operations and strengthening security. Azul makes the transition straightforward by providing:
 

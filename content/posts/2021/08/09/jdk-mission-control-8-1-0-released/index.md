@@ -1,6 +1,5 @@
 ---
 title: "JDK Mission Control 8.1.0 Released!"
-slug: "jdk-mission-control-8-1-0-released"
 date: "2021-08-09T18:02:33+00:00"
 lastmod: "2021-08-10T19:38:51+00:00"
 description: "The latest release of JDK Mission Control was released! It may take time for downstream vendors to release binaries of JDK Mission Control."

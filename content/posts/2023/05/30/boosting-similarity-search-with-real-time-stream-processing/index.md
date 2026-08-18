@@ -1,6 +1,5 @@
 ---
 title: "Boosting Similarity Search with Real-time Stream Processing"
-slug: "boosting-similarity-search-with-real-time-stream-processing"
 date: "2023-05-30T12:42:35+00:00"
 lastmod: "2023-05-30T12:42:36+00:00"
 description: "Combining the strengths of vector databases and real-time stream processing is an efficient way of processing data in real-time at scale."

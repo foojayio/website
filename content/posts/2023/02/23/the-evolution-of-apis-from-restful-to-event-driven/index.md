@@ -1,6 +1,5 @@
 ---
 title: "The evolution of APIs: From RESTful to Event-Driven"
-slug: "the-evolution-of-apis-from-restful-to-event-driven"
 date: "2023-02-23T08:23:25+00:00"
 lastmod: "2023-02-23T08:45:55+00:00"
 description: "Transitioning from synchronous to event-driven APIs modernizes the enterprise and unlocks real-time events and information."
@@ -51,7 +50,7 @@ While these events are generated organically, they must be captured, interpreted
 
 A Gartner study demonstrates that the value from data and events increases with the speed of their usage.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-62603" src="need4speed-700x395.png" alt="Source: Gartner “Stream Processing: The New Data Processing Paradigm” 9 April 2019, Sumit Pal" width="700" height="395">
+{{< img src="need4speed-700x395.png" class="size-medium" alt="Source: Gartner “Stream Processing: The New Data Processing Paradigm” 9 April 2019, Sumit Pal" width="700" height="395" >}}
 
 **Source: Gartner "Stream Processing: The New Data Processing Paradigm" 9 April 2019, Sumit Pal**
 
@@ -120,7 +119,7 @@ Having discussed event-driven APIs and their benefits, the next step is to explo
 
 At [Solace](https://solace.com/products/platform/ "Solace") we have a 5-step process to achieve this:
 
-<img decoding="async" class="size-medium wp-image-62605" src="5stepsEventAPI-700x332.png" alt="Solace steps to Event API products" width="700" height="332">
+{{< img src="5stepsEventAPI-700x332.png" class="size-medium" alt="Solace steps to Event API products" width="700" height="332" >}}
 
 **Solace steps to Event API products**
 

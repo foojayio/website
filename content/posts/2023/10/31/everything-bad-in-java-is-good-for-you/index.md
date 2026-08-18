@@ -1,6 +1,5 @@
 ---
 title: "Everything Bad in Java is Good for You"
-slug: "everything-bad-in-java-is-good-for-you"
 date: "2023-10-31T09:28:44+00:00"
 lastmod: "2023-11-01T10:37:53+00:00"
 description: "Nulls & checked exceptions are often promoted as bad things in Java, this isn't the case. Both carry significant advantage over alternatives!"

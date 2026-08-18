@@ -1,6 +1,5 @@
 ---
 title: "Spring AI: How to Write GenAI Applications with Java"
-slug: "spring-ai-how-to-write-genai-applications-with-java"
 date: "2024-05-09T18:46:55+00:00"
 lastmod: "2024-05-09T21:46:43+00:00"
 description: "We'll look at how to write GenAI applications with Java using the Spring AI framework and utilize RAG for improving answers."

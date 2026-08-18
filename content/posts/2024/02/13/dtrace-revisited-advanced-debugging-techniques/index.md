@@ -1,6 +1,5 @@
 ---
 title: "DTrace Revisited: Advanced Debugging Techniques"
-slug: "dtrace-revisited-advanced-debugging-techniques"
 date: "2024-02-13T07:46:04+00:00"
 lastmod: "2024-02-13T07:50:14+00:00"
 description: "Explore the power of DTrace for system debugging and optimization: a comprehensive guide on its capabilities, performance, and applications."

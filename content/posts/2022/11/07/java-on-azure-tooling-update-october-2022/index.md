@@ -1,6 +1,5 @@
 ---
 title: "Java on Azure Tooling Update – October 2022"
-slug: "java-on-azure-tooling-update-october-2022"
 date: "2022-11-07T22:04:16+00:00"
 lastmod: "2022-11-07T22:04:18+00:00"
 description: "In this update, we will introduce our new roadmap in the next few months, plus learn about Azure Functions Deployment Slot Support."

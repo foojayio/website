@@ -1,6 +1,5 @@
 ---
 title: "Free Webinar: Making AI useful for Java developers in Real Applications with BoxLang!"
-slug: "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 date: "2026-05-29T15:43:47+00:00"
 description: "AI is everywhere right now, but for many development teams, the biggest question is no longer “What is AI?” it’s “How do we actually use it in real - by Cristobal Escobar"
 authors:
@@ -13,10 +12,10 @@ categories:
   - "Webinar"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
 ---
 

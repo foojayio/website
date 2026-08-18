@@ -1,6 +1,5 @@
 ---
 title: "Introduction to Maven Toolchains"
-slug: "introduction-to-maven-toolchains"
 date: "2022-01-25T08:20:47+00:00"
 lastmod: "2022-01-25T14:32:30+00:00"
 description: "How to make sure I can build projects projects on Java 8, 11, and 17 without having to constantly switch Java runtimes?"
@@ -137,7 +136,7 @@ This makes the file specific to the machine where it is stored. That's why its l
 
 Some ten months ago, I [asked around on Twitter](https://twitter.com/mthmulders/status/1367754038826201089) to see if people know this feature, and whether they use it.
 
-<img fetchpriority="high" decoding="async" width="550" height="510" class="size-medium wp-image-52099" src="toolchain-minipoll-550x510.png" alt="Toolchains mini-poll">
+{{< img src="toolchain-minipoll-550x510.png" class="size-medium" alt="Toolchains mini-poll" width="550" height="510" >}}
 
 Although the response wasn't very large, it's interesting to have a look at the results:
 

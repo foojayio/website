@@ -1,6 +1,5 @@
 ---
 title: "The Home Assistant Model"
-slug: "the-home-assistant-model"
 date: "2024-12-09T15:58:27+00:00"
 lastmod: "2024-12-09T16:00:15+00:00"
 description: "Learn about the model objects available in Home Assistant. After that, migrate from the proprietary Philips Hue automation to Home Assistant."

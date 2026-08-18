@@ -1,6 +1,5 @@
 ---
 title: "Java 25: What's New?"
-slug: "java-25-whats-new"
 date: "2025-12-03T09:02:49+00:00"
 lastmod: "2025-12-10T10:25:58+00:00"
 description: "This article was first published in my personal blog: Java 25: What's new? and is part of a serie on what’s new on the last versions of Java. Now that - by Loic Mathieu"

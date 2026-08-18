@@ -1,6 +1,5 @@
 ---
 title: "A Modern Approach to Middleware with Chronicle"
-slug: "a-modern-approach-to-middleware-with-chronicle"
 date: "2024-05-17T09:46:40+00:00"
 lastmod: "2024-05-17T09:46:41+00:00"
 description: "Financial institutions today face significant challenges in updating their legacy middleware systems which are crucial for supporting millions of lines of code serving critical business functions."

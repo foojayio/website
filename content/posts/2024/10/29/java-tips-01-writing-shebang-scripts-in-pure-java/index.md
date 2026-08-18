@@ -1,6 +1,5 @@
 ---
 title: "Java Tips # 01 -  Writing Shebang Scripts in Pure Java"
-slug: "java-tips-01-writing-shebang-scripts-in-pure-java"
 date: "2024-10-29T17:06:37+00:00"
 lastmod: "2024-10-30T15:12:43+00:00"
 description: "Learn how to write a Java CLI shebang script and run it from the terminal, leveraging Java 11 and beyond to create simple, effective command-line tools for developers."

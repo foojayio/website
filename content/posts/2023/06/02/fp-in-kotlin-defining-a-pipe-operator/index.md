@@ -1,6 +1,5 @@
 ---
 title: "FP in Kotlin: Defining a Pipe Operator"
-slug: "fp-in-kotlin-defining-a-pipe-operator"
 date: "2023-06-02T15:18:13+00:00"
 lastmod: "2023-06-02T15:18:50+00:00"
 description: "There's no support for the pipe operator |> in Kotlin, so we have to come up with a custom and clean implementation for this function."
@@ -78,7 +77,19 @@ Where:
   **operator argument** . So, we have:
   * The constant (LHS) is given by `X`.
   * The function (RHS) to be applied is given by `f:X \to Y`.
-* `---` **returns** `Y` ---result of applying `f` to some `x`.
+* `---` **returns** `Y` ---result of applying
+
+```
+f
+```
+
+  to some
+
+```
+x
+```
+
+  .
 * `---`'s **image is defined as `f(this)`** where `this` is an element of `X`.
 
 That was the definition of the pipe operator.

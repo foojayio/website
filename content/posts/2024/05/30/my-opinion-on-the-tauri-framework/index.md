@@ -1,6 +1,5 @@
 ---
 title: "My opinion on the Tauri framework"
-slug: "my-opinion-on-the-tauri-framework"
 date: "2024-05-30T16:05:06+00:00"
 lastmod: "2024-05-30T16:06:08+00:00"
 description: "Tauri is a Rust-based framework for building desktop applications. Here's my view."

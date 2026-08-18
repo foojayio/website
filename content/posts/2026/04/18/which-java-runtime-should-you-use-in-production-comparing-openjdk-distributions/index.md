@@ -1,6 +1,5 @@
 ---
 title: "Choosing the Right OpenJDK Distribution for Production"
-slug: "which-java-runtime-should-you-use-in-production-comparing-openjdk-distributions"
 date: "2026-04-18T15:01:39+00:00"
 lastmod: "2026-04-20T06:37:53+00:00"
 description: "Compare leading OpenJDK distributions for production use, including Temurin, Liberica, Zulu, Corretto, Semeru, Red Hat, SapMachine, and Microsoft Build of OpenJDK. Learn how support, lifecycle, platform alignment, and Java-focused tooling affect the choice."

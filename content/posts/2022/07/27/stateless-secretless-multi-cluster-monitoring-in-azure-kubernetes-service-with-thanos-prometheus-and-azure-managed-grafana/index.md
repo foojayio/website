@@ -1,6 +1,5 @@
 ---
 title: "Stateless, Secretless Multi-cluster Monitoring in Azure Kubernetes"
-slug: "stateless-secretless-multi-cluster-monitoring-in-azure-kubernetes-service-with-thanos-prometheus-and-azure-managed-grafana"
 date: "2022-07-27T08:36:46+00:00"
 lastmod: "2022-07-27T08:36:47+00:00"
 description: "For cloud native engineers facing the challenge of observing multiple Azure Kubernetes Clusters and needing a flexible, stateless solution!"
@@ -74,7 +73,7 @@ metadata:
   name: letsencrypt-prod
 spec:
   acme:
-    email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57323a363e3b17323a363e3b7934383a">[email protected]</a>
+    email: [email protected]
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod

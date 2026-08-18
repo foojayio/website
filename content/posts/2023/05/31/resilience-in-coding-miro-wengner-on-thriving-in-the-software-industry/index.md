@@ -1,6 +1,5 @@
 ---
 title: "Resilience in Coding: Miro Wengner on Thriving in the Software Industry"
-slug: "resilience-in-coding-miro-wengner-on-thriving-in-the-software-industry"
 date: "2023-05-31T16:24:55+00:00"
 lastmod: "2023-06-01T20:52:21+00:00"
 description: "Dive into our interview with software engineer Miro Wengner as he discusses his career, software challenges, and insights from his experience in the industry."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full">
- <img fetchpriority="high" decoding="async" width="426" height="426" src="miro.jpeg" alt="" class="wp-image-98571">
-</figure>
+{{< img src="miro.jpeg" class="alignright size-full" width="426" height="426" >}}
 
 In this insightful discussion, we sit down with Miro Wengner, an accomplished software engineer with a deep-rooted affinity for Java. Miro shares his professional journey, highlights the significant challenges in the field, and reflects on the key moments that shaped his career.  
 

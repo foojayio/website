@@ -1,6 +1,5 @@
 ---
 title: "Better Error Handling for Your Spring Boot REST APIs"
-slug: "better-error-handling-for-your-spring-boot-rest-apis"
 date: "2021-08-21T07:41:59+00:00"
 lastmod: "2023-08-28T12:45:38+00:00"
 description: "One of the things that distinguishes a decent API from one that is a pleasure to work with is robust error handling."

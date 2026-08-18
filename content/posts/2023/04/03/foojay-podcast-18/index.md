@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #18: Atlanta JUG and DevNexus"
-slug: "foojay-podcast-18"
 date: "2023-04-03T05:48:34+00:00"
 lastmod: "2025-11-13T09:10:57+00:00"
 description: "Today we travel back to the US to learn more about the Atlanta JUG, mainly because this week, they are organizing the DevNexus conference!"

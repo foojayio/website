@@ -1,6 +1,5 @@
 ---
 title: "CI/CD Workflow for Spring Boot Applications on Kubernetes via Skaffold"
-slug: "ci-cd-workflow-for-spring-boot-applications-on-kubernetes-via-skaffold"
 date: "2021-01-19T07:37:03+00:00"
 lastmod: "2021-07-05T20:04:51+00:00"
 description: "Skaffold eases development and deployment of applications running on Kubernetes, managing the entire workflow, giving instant feedback."
@@ -311,7 +310,7 @@ Following are the screenshots from Cloud Shell.
 
 ![Cloud shell output](Screenshot-2021-01-16-at-2.48.04-AM-700x408.png)
 
-<img decoding="async" src="Screenshot-2021-01-16-at-2.48.36-AM-700x92.png" alt="curl output" width="700" height="92" class="size-medium wp-image-37429">
+{{< img src="Screenshot-2021-01-16-at-2.48.36-AM-700x92.png" class="size-medium" alt="curl output" width="700" height="92" >}}
 
 Final Output
 

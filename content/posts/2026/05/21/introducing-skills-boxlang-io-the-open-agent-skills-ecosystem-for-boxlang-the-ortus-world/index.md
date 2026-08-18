@@ -1,6 +1,5 @@
 ---
 title: "Introducing skills.boxlang.io — The Open Agent Skills Ecosystem for BoxLang & the Ortus World"
-slug: "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
 date: "2026-05-21T11:42:26+00:00"
 lastmod: "2026-05-21T11:44:10+00:00"
 description: "Today we're launching something we've been quietly building for months: skills.boxlang.io — a public, agent-agnostic directory for AI skills covering - by Cristobal Escobar"
@@ -18,8 +17,8 @@ tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
 ---
 

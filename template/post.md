@@ -4,6 +4,7 @@
 # ----------------------------------------------------------------------------
 #  HOW TO USE
 #   1. Copy this file to  draft/<your-article-slug>/index.md
+#      (yes, it gets renamed to index.md — the FOLDER name is the URL slug)
 #      Name the folder with the URL slug you want, e.g. draft/my-great-article/.
 #      That folder name becomes the URL: /today/my-great-article/  (no `slug`
 #      frontmatter needed — the folder name is the slug). A maintainer moves it
@@ -11,16 +12,18 @@
 #      never have to pick that path yourself. See draft/README.md.
 #   2. Fill in the frontmatter below, write the article, and drop any images
 #      into the SAME folder next to this file.
-#   3. See `categories.md` (in the template folder) for the list of existing
+#   3. See `categories.md` (next to this file) for the list of existing
 #      categories. Don't copy it into your own folder — it's just a reference.
+#      `README.md` there lists every starter template.
 # ============================================================================
 
 # Article title. Rendered as the page H1 — do NOT repeat it as a "# " heading in
 # the content (start your sections at "## "). Required.
 title: "Your Article Title Here"
 
-# Publish date (ISO 8601). Should match the folder date. A future date keeps the
-# post unpublished until then. Required.
+# Publish date (ISO 8601). 
+# Only fill in when you want to have it published on a specific date.
+# Foojay admins will fill this in once the post gets published.
 date: 2026-01-01T09:00:00+00:00
 
 # Optional: last-updated date, if you revise the article later.
@@ -34,15 +37,15 @@ description: "A short, one- or two-sentence summary of the article."
 # which is grouped by first letter
 # (e.g. content/authors/f/frankdelporte/  ->  "frankdelporte"). One or more.
 # Required — every post needs at least one author. If you don't have a profile
-# yet, create one from archetypes/authors.md and include it in the same PR.
+# yet, copy template/author.md to that folder and include it in the same PR.
 authors:
   - "your-author-slug"
 
 # Preview / hero image. Put the file in THIS folder and reference it by name.
-# Leave empty ("") for no hero image.
+# Required as it is used in the preview card of your post and when sharing your post on social media.
 image: ""
 
-# Categories (see categories.md for the existing list — prefer existing ones).
+# Categories (see categories.md for the existing list — prefer existing ones). Required.
 categories:
   - "Java"
 
@@ -52,7 +55,7 @@ tags: []
 # Slugs (folder names) of related foojay articles to show at the bottom. Optional.
 related_posts: []
 
-# Advanced / optional -------------------------------------------------------
+# Advanced / optional:
 # slug: "override-url-slug"   # only to make the URL differ from the folder name
 # canonical: "https://example.com/original/"  # only if first published elsewhere
 ---

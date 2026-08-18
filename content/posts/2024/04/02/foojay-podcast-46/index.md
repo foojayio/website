@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #46: JUG Switzerland"
-slug: "foojay-podcast-46"
 date: "2024-04-02T09:42:09+00:00"
 lastmod: "2025-11-13T08:48:13+00:00"
 description: "In this episode, Frank and the Foojay Podcast leave the European Union and step over the border of Switzerland, the country where the Red Cross was started, and many international institutions have their headquarters."

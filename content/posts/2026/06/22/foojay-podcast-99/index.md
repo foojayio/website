@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #99: Testing the Untestable: LLM Security for Java Developers with Tiberius"
-slug: "foojay-podcast-99"
 date: "2026-06-22T06:54:00+00:00"
 lastmod: "2026-06-22T08:46:05+00:00"
 description: "Your Java AI app is live. But have you tested whether it can be jailbroken? Iryna Dohndorf introduces Tiberius, an open-source security testing library for LLM applications in Java, and explains how to deal with the biggest challenge in AI testing: non-determinism by design."

@@ -1,6 +1,5 @@
 ---
 title: "Creating Mobile Apps with JavaFX - Part 1"
-slug: "creating-mobile-apps-with-javafx-part-1"
 date: "2021-06-11T07:14:27+00:00"
 lastmod: "2022-07-26T08:11:59+00:00"
 description: "In this three-part series, I’ll show how to use JavaFX for mobile development, using the same code targeting Google Play and Apple App stores."

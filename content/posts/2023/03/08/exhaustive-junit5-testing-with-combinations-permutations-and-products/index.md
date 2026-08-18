@@ -1,6 +1,5 @@
 ---
 title: "Exhaustive JUnit5 Testing: Combinations, Permutations, Products"
-slug: "exhaustive-junit5-testing-with-combinations-permutations-and-products"
 date: "2023-03-08T10:08:21+00:00"
 lastmod: "2023-03-09T09:12:53+00:00"
 description: "Read this article and learn how to use JUnit5 in conjunction with combinations, permutations, and products."

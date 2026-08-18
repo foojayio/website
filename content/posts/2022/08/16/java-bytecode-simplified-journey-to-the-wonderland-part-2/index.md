@@ -1,6 +1,5 @@
 ---
 title: "Java Bytecode Simplified: Journey to the Wonderland (Part 2)"
-slug: "java-bytecode-simplified-journey-to-the-wonderland-part-2"
 date: "2022-08-16T15:15:22+00:00"
 lastmod: "2022-08-16T15:15:24+00:00"
 description: "Let’s appreciate the Java Virtual Machine (JVM) even more. Today we'll discuss Constant Pool in quite some detail."
@@ -146,7 +145,9 @@ Now, this becomes significantly more intriguing, and we can observe the presence
 
 In addition to this, the code has other locations with numbers such as #1, #2, etc. These are the constant pool's reference values. If we wish to view the constant pool, we must use an additional switch, `-v`.
 
-`javap -v Lamp`
+```
+javap -v Lamp
+```
 
 ```
 Classfile /bytecode-simplified/src/main/java/ca/bazlur/Lamp.class

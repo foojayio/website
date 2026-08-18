@@ -1,6 +1,5 @@
 ---
 title: "Functional Programming: Revolutionizing Software Development"
-slug: "java-functional-programming"
 date: "2024-04-25T17:43:17+00:00"
 lastmod: "2024-04-25T17:43:58+00:00"
 description: "Dive into the world of functional programming in Java and through declarative programming we can able write a better and concise code"
@@ -25,7 +24,7 @@ frozen: false
 
 *Many other programming paradigms, like functional programming, take inspiration from Mathematics to address challenges related to concurrency and parallelism. Computing shifts towards utilizing multiple cores and distributed systems, which makes this increasingly important.*
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-103465" src="FunctionalProgramming-700x394.png" alt="Functional Programming" width="700" height="394">
+{{< img src="FunctionalProgramming-700x394.png" class="size-medium" alt="Functional Programming" width="700" height="394" >}}
 
 Java : Functional Programming
 

@@ -1,6 +1,5 @@
 ---
 title: "Stochastic AI Agility: Breaking Cycles of Debt"
-slug: "stochastic-ai-agility-breaking-cycles-of-debt"
 date: "2025-09-10T11:27:16+00:00"
 lastmod: "2025-09-12T09:09:14+00:00"
 description: "The name “Stochastic AI Agility” suggests that the output of using AI-LLM definitely contributes to the goal, but the impact may not be exactly predicted."

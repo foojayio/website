@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of February 2024"
-slug: "javafx-links-of-february-2024"
 date: "2024-02-29T09:46:49+00:00"
 lastmod: "2024-03-01T09:47:05+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of February 2024 that got published on jfx-central.com during this month. Core Christopher Schnick - by Frank Delporte"

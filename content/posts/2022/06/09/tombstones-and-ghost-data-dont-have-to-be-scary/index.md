@@ -1,6 +1,5 @@
 ---
 title: "Tombstones and Ghost Data Don’t Have to Be Scary!"
-slug: "tombstones-and-ghost-data-dont-have-to-be-scary"
 date: "2022-06-09T20:36:25+00:00"
 lastmod: "2022-06-10T10:13:44+00:00"
 description: "Working with tombstones can be one of the more frustrating aspects of Apache Cassandra®. Problems with tombstones can happen when a large number of - by Aaron Ploetz"

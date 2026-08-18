@@ -1,6 +1,5 @@
 ---
 title: "Warp: the new CRaC engine"
-slug: "warp-the-new-crac-engine"
 date: "2024-12-18T16:04:48+00:00"
 lastmod: "2024-12-19T13:15:57+00:00"
 description: "Warp is a new engine available in Azul Zulu builds that can fully replace CRIU, and does not require any extra priviledges."

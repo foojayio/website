@@ -1,6 +1,5 @@
 ---
 title: "Replacing Postman with the Jetbrains HTTP Client"
-slug: "replacing-postman-with-the-jetbrains-http-client"
 date: "2023-04-13T06:59:28+00:00"
 lastmod: "2023-04-13T07:09:10+00:00"
 description: "How to use the JetBrains HTTP Client to replace Postman, test third party APIs, share requests and run them in CI all of that within minutes!"
@@ -35,14 +34,13 @@ One thing I love about it is that it's integrated into the IDE, and it can gener
 
 For example, looking at this [Spring Boot Kotlin Sample](https://github.com/spring-guides/tut-spring-boot-kotlin "Spring Boot Kotlin Sample"), next to each Mapping there is a "Open in HTTP Client" option in the gutter.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-65438" src="openin-700x197.png" alt="The &quot;Open in HTTP Client&quot; option in the gutter of our IDE" width="700" height="197">
+{{< img src="openin-700x197.png" class="size-medium" alt="The 'Open in HTTP Client' option in the gutter of our IDE" width="700" height="197" >}}
 
 *The "Open in HTTP Client" option in the gutter of our IDE.*
 
 When clicking it, it will generate a scratch file for this request:
 
-<img decoding="async" class="size-medium wp-image-65439" src="generated-700x161.png" alt="The generated request
-" width="700" height="161">
+{{< img src="generated-700x161.png" class="size-medium" alt="The generated request" width="700" height="161" >}}
 
 *The generated request.*
 
@@ -50,14 +48,13 @@ You can do many things with those requests, like setting Content-Type, sending b
 
 The one thing that I want to show you here is that it defines variables for you that you can fill in using a separate configuration file. Pick an environment, and fill in a value for the variables you need. You can either create a public file, or a private one for, say, API Keys.
 
-<img decoding="async" class="size-medium wp-image-65440" src="env-700x241.png" alt="Me creating a Public Environment file
-" width="700" height="241">
+{{< img src="env-700x241.png" class="size-medium" alt="Me creating a Public Environment file" width="700" height="241" >}}
 
 *Me creating a Public Environment file.*
 
 Running the request gets me the response, as expected, and it's even saved in a log file for me.
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65441" src="running-471x510.png" alt="Running the request with the slug set to ispum returns a valid response" width="471" height="510">
+{{< img src="running-471x510.png" class="size-medium" alt="Running the request with the slug set to ispum returns a valid response" width="471" height="510" >}}
 
 *Running the request with the slug set to ispum returns a valid response.*
 
@@ -77,8 +74,7 @@ I'm a big DOTA 2 player, and let's imagine I want to start playing with the [Ope
 
 Let's have a quick look:
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65442" src="spec-510x510.png" alt="The beginning of the OpenAPI Spec file
-" width="510" height="510">
+{{< img src="spec-510x510.png" class="size-medium" alt="The beginning of the OpenAPI Spec file" width="510" height="510" >}}
 
 *The beginning of the OpenAPI Spec file.*
 
@@ -102,8 +98,7 @@ When we open the folder in IntelliJ, we're presented with a few very nice things
 
 * First, a complete documentation with all available endpoints and how they work in the README. Each call is clickable and link to locations in our source code.
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65443" src="doc-615x510.png" alt="A screenshot of the Dota Client README
-" width="615" height="510">
+{{< img src="doc-615x510.png" class="size-medium" alt="A screenshot of the Dota Client README" width="615" height="510" >}}
 
 *A screenshot of the Dota Client README.*
 
@@ -149,15 +144,13 @@ Now let's create en environment file and run all those calls for a given hero. L
 
 Just like this, I can start running queries against the API, and for example see which players have the most wins with Crytal Maiden:
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65444" src="request-700x219.png" alt="A screenshot of the results of running the Heroes to Player endpoint
-" width="700" height="219">
+{{< img src="request-700x219.png" class="size-medium" alt="A screenshot of the results of running the Heroes to Player endpoint" width="700" height="219" >}}
 
 *A screenshot of the results of running the Heroes to Player endpoint.*
 
 I can also decide to run the Health endpoint and see whether the DOTA or Steam servers are down. 😊
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65445" src="request2-700x227.png" alt="Results of running a query against the Health endpoint
-" width="700" height="227">
+{{< img src="request2-700x227.png" class="size-medium" alt="Results of running a query against the Health endpoint" width="700" height="227" >}}
 
 *Results of running a query against the Health endpoint.*
 
@@ -185,7 +178,7 @@ This
 
 This should fail, as DOTA 2 currently has 123 heroes:
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65446" src="bingo-700x107.png" alt="Bingo!" width="700" height="107">
+{{< img src="bingo-700x107.png" class="size-medium" alt="Bingo!" width="700" height="107" >}}
 
 *Bingo!*
 
@@ -264,7 +257,7 @@ We check out, set the Java version to 17, and run the ijhttp package like we did
 
 [Success](https://github.com/jlengrand/dotaClient/actions/runs/4073382476 "Success")! We now have reliable CI tests using JetBrains HTTP Client requests!
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-65447" src="action-700x352.png" alt="GitHub action run results" width="700" height="352">
+{{< img src="action-700x352.png" class="size-medium" alt="GitHub action run results" width="700" height="352" >}}
 
 *GitHub action run results.*
 

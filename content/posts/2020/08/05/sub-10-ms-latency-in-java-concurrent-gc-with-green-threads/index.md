@@ -1,6 +1,5 @@
 ---
 title: "Sub-10 ms Latency in Java: Concurrent GC with Green Threads"
-slug: "sub-10-ms-latency-in-java-concurrent-gc-with-green-threads"
 date: "2020-08-05T17:44:00+00:00"
 lastmod: "2021-03-25T18:08:36+00:00"
 description: "Same problem from the opposite angle: what can we do to help Hazelcast Jet achieve the best performance available on a JVM?"

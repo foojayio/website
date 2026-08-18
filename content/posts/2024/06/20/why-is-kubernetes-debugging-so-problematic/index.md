@@ -1,6 +1,5 @@
 ---
 title: "Why is Kubernetes Debugging so Problematic?"
-slug: "why-is-kubernetes-debugging-so-problematic"
 date: "2024-06-20T06:37:37+00:00"
 lastmod: "2024-06-20T06:37:39+00:00"
 description: "Discover effective k8s debugging strategies, from kubectl debug and ephemeral containers to debuggers. Troubleshoot production/dev issues."

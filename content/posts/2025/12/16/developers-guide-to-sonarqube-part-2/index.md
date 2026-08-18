@@ -1,6 +1,5 @@
 ---
 title: "Java developer's guide : Sync Rules & Stop CI Failures"
-slug: "developers-guide-to-sonarqube-part-2"
 date: "2025-12-16T15:53:28+00:00"
 lastmod: "2025-12-16T15:53:30+00:00"
 description: "Eliminate \"works on my machine\" issues. Learn to sync SonarQube for IDE with the cloud, catch taint security flaws, and customize Quality Gates for your Java projects."
@@ -13,10 +12,10 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 
@@ -61,9 +60,7 @@ No more surprises in the pipeline. You see the error *before* you commit.
 
 Open IntelliJ **Settings** (or Preferences) -\> **Tools** -\> **SonarQube for IDE** . Click the **+** icon under "Connections" to start, or on the SonarQube IDE plugin window click on the **configure** button.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="660" height="606" src="Screenshot-2025-12-16-at-10.22.56.png" alt="" class="wp-image-122071" style="width:369px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.22.56.png" class="size-full is-resized" width="660" height="606" style="width:369px;height:auto" >}}
 
 Click on the tool icon to open the settings dialog.
 ![](Screenshot-2025-12-16-at-10.23.05-1024x265.png)
@@ -84,9 +81,7 @@ Click on the + icon to add the connection
 
 **Step 5: Bind the Project** Now that the connection is made, IntelliJ will ask which specific project on the server matches your current open folder. Search for your project key (e.g., my-company_backend-api) and click **Bind**.
 
-<figure class="wp-block-image size-medium is-resized">
- <img loading="lazy" decoding="async" width="686" height="510" src="Screenshot-2025-12-16-at-10.23.52-686x510.png" alt="" class="wp-image-122065" style="width:374px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.23.52-686x510.png" class="size-medium is-resized" width="686" height="510" style="width:374px;height:auto" >}}
 
 ![](Screenshot-2025-12-16-at-10.24.00-1024x251.png)
 
@@ -152,18 +147,14 @@ SonarQube Cloud allows you to define what "New Code" means for *your* specific s
    * *Result:* You can merge if *your* changes are tested, even if the rest of the app is a mess.
 2. **Custom Profiles:** Your Tech Lead can clone the "Sonar way (Java)" profile and disable rules that don't fit your style (e.g., maybe you don't care about "Trailing comments" or specific naming conventions).
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" width="910" height="570" src="Screenshot-2025-12-16-at-10.24.44.png" alt="" class="wp-image-122060" style="width:581px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.24.44.png" class="size-full is-resized" width="910" height="570" style="width:581px;height:auto" >}}
 
 We can inherit the Sonar default profile, and modify it
 ![](Screenshot-2025-12-16-at-10.24.53.png)
 
 We see in our profile we have one more rule activated
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" width="804" height="628" src="Screenshot-2025-12-16-at-10.25.03.png" alt="" class="wp-image-122058" style="width:618px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.25.03.png" class="size-full is-resized" width="804" height="628" style="width:618px;height:auto" >}}
 
 By tuning the gate, the tool becomes a helper, not a blocker. We can define our thresholds that resonate better with our maturity and goals.
 ![](Screenshot-2025-12-16-at-10.25.14-1024x703.png)
@@ -186,9 +177,7 @@ You have the final say. You can override the tool's judgment in the SonarQube Cl
    * ***Tip*** *:* You can leave a comment explaining your reasoning so the next developer understands why this exception exists.
 2. **Assigning the Issue** : If the pipeline failed because of a bug in a file you touched, but the bug was actually part of a legacy method written by your colleague Bob, you can Assign it to him. It's not about blaming; it's about making sure the right person handles the debt. You can optionally also [integrate](https://docs.sonarsource.com/sonarqube-cloud/managing-your-projects/administering-your-projects/jira-integration) with SonarQube Cloud with your Jira workflow.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="454" src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" alt="" class="wp-image-122056" style="width:571px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.25.23-1024x454.png" class="size-large is-resized" width="1024" height="454" style="width:571px;height:auto" >}}
 
 ## **Problem #6: "I'm lost in the details: How is the project actually doing?"**
 
@@ -320,9 +309,7 @@ jobs:
 
 **Why is this cool?** Because of the pull_request trigger and the GITHUB_TOKEN, SonarQube Cloud knows exactly where to post those comments on your PR.
 
-<figure class="wp-block-image size-medium is-resized">
- <img loading="lazy" decoding="async" width="611" height="510" src="Screenshot-2025-12-16-at-10.25.44-611x510.png" alt="" class="wp-image-122054" style="width:376px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-16-at-10.25.44-611x510.png" class="size-medium is-resized" width="611" height="510" style="width:376px;height:auto" >}}
 
 ![](Screenshot-2025-12-16-at-10.25.50.png)
 

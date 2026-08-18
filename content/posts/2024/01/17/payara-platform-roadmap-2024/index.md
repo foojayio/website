@@ -1,6 +1,5 @@
 ---
 title: "Payara Platform Roadmap 2024"
-slug: "payara-platform-roadmap-2024"
 date: "2024-01-17T10:39:43+00:00"
 lastmod: "2024-02-09T09:41:21+00:00"
 description: "Read on to find out more about Payara Rodmap in the coming months -  Java 21 compatibility, the upcoming Jakarta EE 11 and our plan for support, and more!"

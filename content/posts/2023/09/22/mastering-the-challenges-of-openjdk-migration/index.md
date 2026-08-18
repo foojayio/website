@@ -1,6 +1,5 @@
 ---
 title: "Mastering the Challenges of OpenJDK Migration."
-slug: "mastering-the-challenges-of-openjdk-migration"
 date: "2023-09-22T15:11:37+00:00"
 lastmod: "2024-03-15T14:05:34+00:00"
 description: "If you're in a Java-centric role and need to confront the ever-evolving JDK landscape, Simon Ritter's book is the lighthouse guiding you safely to shore."

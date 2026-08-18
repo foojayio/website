@@ -1,6 +1,5 @@
 ---
 title: "Semantic Caching with SpringBoot & Redis"
-slug: "semantic-caching-with-springboot-redis"
 date: "2025-08-07T06:58:07+00:00"
 lastmod: "2025-08-07T07:02:22+00:00"
 description: "Build semantic caching with Spring AI & Redis to cut LLM costs 80%. Cache by meaning, not exact text. Full tutorial with working demo."
@@ -68,15 +67,13 @@ Spring AI provides a unified API for working with various AI models and vector s
 
 Our application will be built using Spring Boot with Spring AI and Redis. It will implement a beer recommendation assistant that caches responses semantically, providing fast answers to similar questions about beer pairings.
 
-0. GitHub Repository
---------------------
+## 0. GitHub Repository
 
 The full application can be found on GitHub
 
 <https://github.com/redis-developer/redis-springboot-resources/tree/main/artificial-intelligence/semantic-caching-with-spring-ai>
 
-1. Add the required dependencies
---------------------------------
+## 1. Add the required dependencies
 
 From a Spring Boot application, add the following dependencies to your Maven or Gradle file:
 
@@ -86,8 +83,7 @@ implementation("org.springframework.ai:spring-ai-starter-vector-store-redis")
 implementation("org.springframework.ai:spring-ai-starter-model-openai")
 ```
 
-2. Configure the Semantic Cache Vector Store
---------------------------------------------
+## 2. Configure the Semantic Cache Vector Store
 
 We'll use Spring AI's `RedisVectorStore` to store and search vector embeddings of cached queries and responses:
 
@@ -124,8 +120,7 @@ Let's break this down:
 * **Prefix** : `semantic-caching:` --- All keys in Redis will be prefixed with this to organize the data
 * **Vector Algorithm**: HSNW --- Hierarchical Navigable Small World algorithm for efficient approximate nearest neighbor search
 
-3. Implement the Semantic Caching Service
------------------------------------------
+## 3. Implement the Semantic Caching Service
 
 The SemanticCachingService handles storing and retrieving cached responses from Redis:
 
@@ -177,8 +172,7 @@ Key features of the semantic caching service:
 * Configurable similarity threshold for cache hits
 * Comprehensive logging for debugging and monitoring
 
-4. Integrate with the RAG Service
----------------------------------
+## 4. Integrate with the RAG Service
 
 The RagService orchestrates the semantic caching with the standard RAG pipeline:
 

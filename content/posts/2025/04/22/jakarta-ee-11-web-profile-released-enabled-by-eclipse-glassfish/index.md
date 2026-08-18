@@ -1,6 +1,5 @@
 ---
 title: "Jakarta EE 11 Web Profile Released, Enabled by Eclipse GlassFish"
-slug: "jakarta-ee-11-web-profile-released-enabled-by-eclipse-glassfish"
 date: "2025-04-22T11:06:19+00:00"
 lastmod: "2026-03-23T15:13:53+00:00"
 description: "A cleaner, more modern baseline to the Jakarta EE platform, with strong alignment to recent Java versions, improved modularity, and the removal of legacy specifications."
@@ -86,9 +85,7 @@ More information:
 
 > This article was originally published on the [OmniFish blog](https://omnifish.ee/2022/06/29/the-future-of-ejb/). For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to the OmniFish blog here: [https://omnifish.ee/blog/](https://omnifish.ee/jakarta-ee-11-web-profile-released-enabled-by-eclipse-glassfish/).
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 ## [OmniFish - Jakarta EE experts](https://omnifish.ee)
 

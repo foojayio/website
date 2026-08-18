@@ -1,6 +1,5 @@
 ---
 title: "Resolving Git Merge Conflicts in IntelliJ IDEA"
-slug: "resolving-git-merge-conflicts-in-intellij-idea"
 date: "2022-09-21T11:04:06+00:00"
 lastmod: "2022-09-21T11:12:42+00:00"
 description: "At some point in your career, probably many points, you'll have to resolve merge conflicts. Learn how on Foojay.io!"

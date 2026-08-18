@@ -1,6 +1,5 @@
 ---
 title: "What is RAG, and How to Secure It"
-slug: "what-is-rag-and-how-to-secure-it"
 date: "2025-05-16T11:48:16+00:00"
 lastmod: "2025-05-16T11:49:19+00:00"
 description: "The implementation of RAG introduces security considerations. Risks such as prompt injection, data poisoning, access control gaps, and data leakage must be proactively managed."

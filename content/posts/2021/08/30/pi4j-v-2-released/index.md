@@ -1,6 +1,5 @@
 ---
 title: "Announcement: Pi4J V.2 Released!"
-slug: "pi4j-v-2-released"
 date: "2021-08-30T12:13:54+00:00"
 lastmod: "2021-12-10T12:59:06+00:00"
 description: "The Pi4J library (a friendly object-oriented I/O API and libraries for Java access to the full I/O of the Raspberry Pi) has taken a big step!"

@@ -1,6 +1,5 @@
 ---
 title: "Pi4J Welcomes Java 21 on the Raspberry Pi"
-slug: "pi4j-welcomes-java-21-on-the-raspberry-pi"
 date: "2025-02-20T10:49:07+00:00"
 lastmod: "2025-02-20T10:49:09+00:00"
 description: "So with the core team we made a few decisions that are allowing us to bring the project to \"the next level\" and... Java 21!."

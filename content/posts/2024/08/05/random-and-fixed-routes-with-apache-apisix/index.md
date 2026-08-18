@@ -1,6 +1,5 @@
 ---
 title: "Random and fixed routes with Apache APISIX"
-slug: "random-and-fixed-routes-with-apache-apisix"
 date: "2024-08-05T13:29:59+00:00"
 lastmod: "2024-08-05T13:30:02+00:00"
 description: "If no cookie is set, randomly forward the request to one of the upstreams, if a cookie has been set, forward the request to the correct upstream."

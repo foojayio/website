@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Performance Workshop with Vlad Mihalcea"
-slug: "spring-boot-performance-workshop-with-vlad-mihalcea"
 date: "2022-06-24T07:43:52+00:00"
 lastmod: "2022-06-24T07:53:09+00:00"
 description: "Learn how to improve the performance of a Spring application and diagnose production problems. Lessons from our live workshop covering JPA!"

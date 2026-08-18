@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 15)"
-slug: "java-thread-programming-part-15"
 date: "2022-08-31T17:30:53+00:00"
 lastmod: "2022-09-04T13:48:59+00:00"
 description: "Let's learn how to do asynchronous method invocation with Callable and Future by means of a practical example."
@@ -20,7 +19,7 @@ frozen: false
 
 This article will discuss how we do asynchronous method invocation with [Callable](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/Callable.html) and [Future](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/Future.html) with a practical example.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-57278" src="Playground.java_-700x227.png" alt="" width="700" height="227">
+{{< img src="Playground.java_-700x227.png" class="size-medium" width="700" height="227" >}}
 
 Look at the code snippet. It doesn't have anything yet, but [as we learned about Java threading](https://foojay.io/today/java-thread-programming-part-14/), we know anything we put here will run on the main thread unless we spawn a new thread from here.
 

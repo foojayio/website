@@ -1,6 +1,5 @@
 ---
 title: "SBOMs: First Steps in a New Journey for Developers"
-slug: "sboms-first-steps-in-a-new-journey-for-developers"
 date: "2023-02-14T10:01:28+00:00"
 lastmod: "2023-02-14T10:02:29+00:00"
 description: "Software bill of materials, anyone? A year ago, developers had not heard of the 'SBOM' acronym... and now SBOM visualiser called BOM Doctor."
@@ -17,7 +16,7 @@ tags:
 related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

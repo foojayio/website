@@ -1,6 +1,5 @@
 ---
 title: "Interview: Marc Hoffmann and Java Version Almanac"
-slug: "interview-java-version-almanac"
 date: "2020-08-25T06:39:44+00:00"
 lastmod: "2020-09-01T14:07:55+00:00"
 description: "The Java Version Almanac provides details per release on OpenJDK distributions, new features, and differences between APIs across releases."
@@ -24,9 +23,7 @@ Go here to take a look, yourself: <http://foojay.io/almanac/jdk-8>
 
 And, let's meet Marc, here's a quick interview with him about the Java Version Almanac**!**  
 
-<figure class="alignleft size-large is-resized">
- <img decoding="async" src="Screenshot-2020-08-21-at-09.20.34.png" alt="" class="wp-image-32786" width="154" height="176">
-</figure>
+{{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="154" height="176" >}}
 
 **Hi Marc, can you briefly introduce yourself and how you've been active in the Java ecosystem over the years?**   
 

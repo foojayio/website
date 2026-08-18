@@ -1,6 +1,5 @@
 ---
 title: "Tips for reading code"
-slug: "tips-for-reading-code"
 date: "2024-03-26T11:46:58+00:00"
 lastmod: "2024-03-26T11:46:59+00:00"
 description: "As developers, we read code more than we write it. When reading code inside the IDE, IntelliJ IDEA helps us to read and understand code by providing helpful features."

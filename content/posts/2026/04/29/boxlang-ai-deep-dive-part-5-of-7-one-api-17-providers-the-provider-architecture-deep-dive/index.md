@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI Deep Dive — Part 5 of 7: One API, 17 Providers — The Provider Architecture Deep Dive"
-slug: "boxlang-ai-deep-dive-part-5-of-7-one-api-17-providers-the-provider-architecture-deep-dive"
 date: "2026-04-29T16:38:08+00:00"
 lastmod: "2026-05-05T15:23:49+00:00"
 description: "BoxLang AI 3.0 Series · Part 5 of 7 Vendor lock-in is the silent killer of AI projects. You pick OpenAI, build everything against the OpenAI API, and then - by Cristobal Escobar"
@@ -440,7 +439,7 @@ Over these five posts, we've covered the full depth of BoxLang AI 3.0:
 
 ```
 # Install via CommandBox
-install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e7c66337f775e2d302e302e">[email protected]</a>
+install [email protected]
 
 # Or for OS/CLI applications
 install-bx-module bx-ai

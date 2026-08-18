@@ -1,6 +1,5 @@
 ---
 title: "BoxLang RSS : Full-Featured RSS/Atom Feed Module for BoxLang"
-slug: "boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang"
 date: "2025-12-02T11:19:11+00:00"
 lastmod: "2025-12-02T11:44:24+00:00"
 description: "We're thrilled to announce the release of bx-rss, a comprehensive RSS and Atom feed module that brings powerful syndication capabilities to BoxLang! - by Cristobal Escobar"
@@ -17,10 +16,10 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "whats-new-in-the-july-2026-azul-payara-release"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
 ---
 
@@ -211,14 +210,14 @@ feedItems = [
         "link" : "https://myblog.com/getting-started-boxlang",
         "description" : "Learn the basics of BoxLang in this comprehensive guide",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37535241525b58475245775a4e555b58501954585a">[email protected]</a>"
+        "author" : "[email protected]"
     },
     {
         "title" : "Building REST APIs with BoxLang",
         "link" : "https://myblog.com/rest-apis-boxlang",
         "description" : "Create powerful REST APIs using BoxLang",
         "publishedDate" : dateAdd( "d", -1, now() ),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7511100310191a05100735180c17191a125b161a18">[email protected]</a>"
+        "author" : "[email protected]"
     }
 ];
 
@@ -260,7 +259,7 @@ episodes = [
         "link" : "https://podcast.boxlang.io/episode-1",
         "description" : "Introduction to BoxLang and what makes it special",
         "publishedDate" : now(),
-        "author" : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c2ddd6d1d3c1c6f2d0ddcaded3dcd59cdbdd">[email protected]</a>",
+        "author" : "[email protected]",
         // iTunes episode metadata
         "itunesTitle" : "Welcome to BoxLang",
         "itunesDuration" : "00:42: 15",

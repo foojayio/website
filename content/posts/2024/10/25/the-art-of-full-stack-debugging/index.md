@@ -1,6 +1,5 @@
 ---
 title: "The Art of Full Stack Debugging"
-slug: "the-art-of-full-stack-debugging"
 date: "2024-10-25T07:24:06+00:00"
 lastmod: "2024-10-25T07:24:07+00:00"
 description: "Tired of frustrating bugs? Learn practical, real-world strategies for full stack debugging to track down issues from frontend to backend!"

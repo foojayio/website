@@ -1,6 +1,5 @@
 ---
 title: "Connect Stateful Workloads Across Kubernetes Clusters"
-slug: "connect-stateful-workloads-across-kubernetes-clusters"
 date: "2021-07-23T08:44:32+00:00"
 lastmod: "2021-11-10T23:20:39+00:00"
 description: "How we utilize off-the-shelf functionality and components to set up lightweight cross-cluster communication in a multitenant environment."

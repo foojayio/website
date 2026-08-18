@@ -1,6 +1,5 @@
 ---
 title: "Mac Native Builds, Live Protocols, And Open Issues Under 350"
-slug: "mac-native-builds-live-protocols-and-open-issues-under-350"
 date: "2026-06-17T15:03:06+00:00"
 lastmod: "2026-06-18T13:39:39+00:00"
 description: "The open issue count dropped below 350 after a push through the oldest reports, and the same week brought native Mac builds, WebSockets in the core, gRPC a"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

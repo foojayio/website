@@ -1,6 +1,5 @@
 ---
 title: "Intro for Java Devs to DevOps 101 Part I: CI/CD"
-slug: "devops-101-part-i-ci-cd"
 date: "2021-03-09T08:00:56+00:00"
 lastmod: "2021-03-09T08:00:59+00:00"
 description: "I’ll cover tools and terminology common to DevOps, plus the occasional newbie-friendly tutorial for emerging or established technologies."

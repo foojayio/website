@@ -1,6 +1,5 @@
 ---
 title: "Metal Default, A New Build Cloud, And A New Format"
-slug: "metal-default-a-new-build-cloud-and-a-new-format"
 date: "2026-06-08T09:47:43+00:00"
 lastmod: "2026-06-08T10:25:31+00:00"
 description: "The iOS Metal renderer is now the default, the new Build Cloud console is wired into every Dashboard link on the site, and the weekly release blog is movin"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

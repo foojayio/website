@@ -1,6 +1,5 @@
 ---
 title: "Intro to the BoxLang Formatter"
-slug: "intro-to-the-boxlang-formatter"
 date: "2026-05-28T17:45:09+00:00"
 lastmod: "2026-05-28T17:49:19+00:00"
 description: "You know the drill. Someone opens a PR and half the review comments are about tabs vs spaces, where braces go, or why that one function has its arguments - by Cristobal Escobar"

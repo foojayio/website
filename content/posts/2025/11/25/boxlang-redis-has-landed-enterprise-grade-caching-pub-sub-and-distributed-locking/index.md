@@ -1,6 +1,5 @@
 ---
 title: "BoxLang Redis Has Landed: Enterprise-Grade Caching, Pub/Sub, and Distributed Locking"
-slug: "boxlang-redis-has-landed-enterprise-grade-caching-pub-sub-and-distributed-locking"
 date: "2025-11-25T09:33:34+00:00"
 lastmod: "2025-11-25T09:35:45+00:00"
 description: "We're thrilled to announce the release of the BoxLang Redis Module (bx-redis) - a powerful addition to BoxLang that brings enterprise-grade Redis - by Cristobal Escobar"
@@ -87,7 +86,7 @@ The Redis module works seamlessly with BoxLang's standard caching approaches:
 userData = {
     userID: 123,
     name: "John Doe",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f311409101c011d145f121e1c">[email protected]</a>",
+    email: "[email protected]",
     preferences: { theme: "dark", language: "en" }
 };
 
@@ -455,4 +454,4 @@ Ready to unlock bx-ldap and other premium modules? Choose your plan:
 
 Need help choosing the right plan or have questions? **Contact us directly:**
 
-[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#20494e464f60424f584c414e470e494f "📧 **info@boxlang.io**")
+[📧 **\[email protected\]**](/cdn-cgi/l/email-protection#543d3a323b14363b2c38353a337a3d3b "📧 **info@boxlang.io**")

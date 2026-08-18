@@ -1,6 +1,5 @@
 ---
 title: "Multithreaded server in Java: That's easy with FEPCOS-J."
-slug: "fuchs-2024-fepcos-j-multithreaded-server"
 date: "2024-03-21T08:38:28+00:00"
 lastmod: "2024-03-21T08:41:03+00:00"
 description: "Users of the Java development tool FEPCOS-J can create a multithreaded server in Java without thread or network programming. Read more."
@@ -53,12 +52,7 @@ Using application-specific requests and responses, multithreaded TCP/IP servers 
 
 **Fig. 1** depicts an abstract example realization.  
 
-<figure class="aligncenter size-medium">
- <img fetchpriority="high" decoding="async" width="510" height="510" src="fuchs-2024-multithreaded-tcp-ip-server-510x510.png" alt="An abstract example realization of a multithreaded TCP/IP server." class="wp-image-106204">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 1) A multithreaded TCP/IP server</strong> runs a main thread <strong>(a)</strong>. It opens a TCP/IP server socket within an IP network and accepts client requests <strong>(b)</strong>. When a client sends a request to the server via the server socket <strong>(c)</strong>, the main thread <strong>(d)</strong> starts a worker thread <strong>(e)</strong>. It handles the request and sends a response to the client <strong>(f)</strong>. Concurrently, the main thread can immediately accept requests from other clients <strong>(g)</strong>.
- </figcaption>
-</figure>
+{{< img src="fuchs-2024-multithreaded-tcp-ip-server-510x510.png" class="aligncenter size-medium" alt="An abstract example realization of a multithreaded TCP/IP server." width="510" height="510" caption="Fig. 1) A multithreaded TCP/IP server runs a main thread (a). It opens a TCP/IP server socket within an IP network and accepts client requests (b). When a client sends a request to the server via the server socket (c), the main thread (d) starts a worker thread (e). It handles the request and sends a response to the client (f). Concurrently, the main thread can immediately accept requests from other clients (g)." >}}
 
 ## How does FEPCOS-J support developers programming a multithreaded TCP/IP server in Java?
 
@@ -70,10 +64,22 @@ To explain, the programming of multithreaded TCP/IP servers in Java covers both 
 
 The generic part is the programming of the main-class and multithreading TCP/IP aspects, like:
 
-* the `main()` -- method with the main thread;
+* the 
+
+```java
+main()
+```
+
+  -- method with the main thread;
 * determining of an IP-address, and port [\[9\]](#references);
 * creating a ServerSocket [\[10\]](#references) which is bound to the IP-address and the port;
-* a `while`-loop which blockingly calls *ServerSocket.accept()* to await client requests;
+* a 
+
+```java
+while
+```
+
+  -loop which blockingly calls *ServerSocket.accept()* to await client requests;
 * starting a Thread [\[11\]](#references) or Virtual Thread [\[12, 13\]](#references) to handle the request;
 * Exception handling;
 * shutting down the server.
@@ -100,39 +106,92 @@ Moreover, the developer can implement a Java client by using the system import m
 
 In its current state, FEPCOS-J uses Virtual Threads [\[12, 13\]](#references) and therefore requires Java 21. Beyond that, FEPCOS-J has no other dependencies.  
 
-<figure class="aligncenter size-medium">
- <img decoding="async" width="680" height="510" src="fuchs-2024-fepcos-j-implemented-multithreaded-server-in-java-680x510.png" alt="FEPCOS-J allows implementing multithreaded servers as Java modules. Each module contains exactly one class, e.g., MyServer, annotated with @SYDec. In addition, it contains at least one class, e.g., MyService, annotated with @AYSpec. The @SYDec annotated class uses the @Cap annotation to declare the server's services. To point out, the classes annotated with @AYSpec implement these services using the @Behavior annotation." class="wp-image-106229">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 2) FEPCOS-J allows implementing multithreaded servers as Java modules.</strong> Each module contains exactly one class, e.g., <em>MyServer</em>, annotated with <em>@SYDec</em>. In addition, it contains at least one class, e.g., <em>MyService</em>, annotated with <em>@AYSpec</em>. The <em>@SYDec</em> annotated class uses the <em>@Cap</em> annotation to declare the server's services. To point out, the classes annotated with <em>@AYSpec</em> implement these services using the <em>@Behavior</em> annotation. <strong>Tabs. 1 and 2</strong> explain further details, particularly the other annotations shown in this figure.
- </figcaption>
-</figure>
+{{< img src="fuchs-2024-fepcos-j-implemented-multithreaded-server-in-java-680x510.png" class="aligncenter size-medium" alt="FEPCOS-J allows implementing multithreaded servers as Java modules. Each module contains exactly one class, e.g., MyServer, annotated with @SYDec. In addition, it contains at least one class, e.g., MyService, annotated with @AYSpec. The @SYDec annotated class uses the @Cap annotation to declare the server's services. To point out, the classes annotated with @AYSpec implement these services using the @Behavior annotation." width="680" height="510" caption="Fig. 2) FEPCOS-J allows implementing multithreaded servers as Java modules. Each module contains exactly one class, e.g., MyServer, annotated with @SYDec. In addition, it contains at least one class, e.g., MyService, annotated with @AYSpec. The @SYDec annotated class uses the @Cap annotation to declare the server's services. To point out, the classes annotated with @AYSpec implement these services using the @Behavior annotation. Tabs. 1 and 2 explain further details, particularly the other annotations shown in this figure." >}}
 
 ### Programming the system declaration of a multithreaded server
 
-| Annotation |                                                                                                                                                      Description                                                                                                                                                       |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| @SYDec     | It annotates the class of **a multithreaded server's system declaration** . *@SYDec* requires a *String* parameter that ***fjp*** uses to generate system documentation. Example: `@SYDec("My new server") class MyServer{...}`                                                                                        |
-| @Cap       | It annotates a member variable that **declares** a capability, which is **a service that the server provides** . Example: `@Cap MyService service;`                                                                                                                                                                    |
-| @Part      | It annotates a member variable that declares **another server that the implemented server accesses as a client** . *@Part* requires an *ip address* and a *port* as parameters. The type of the variable must be a system interface generated by ***fjp*** . Example: `@Part("10.0.0.8", 8888) accessedServer.S part;` |
-| @Start     | It annotates **a method that the server executes when it starts** . The method optionally accepts the command line parameters as a *String\[\]* . Example: `@Start void start(String[] args){...}`                                                                                                                     |
-| @Stop      | It annotates **a method that the server executes when it stops** . Example: `@Stop void stop(){...}`.                                                                                                                                                                                                                  |
+| Annotation |                                                                                                                                           Description                                                                                                                                            |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| @SYDec     | It annotates the class of **a multithreaded server's system declaration** . *@SYDec* requires a *String* parameter that ***fjp*** uses to generate system documentation. Example: 
+
+```java
+@SYDec("My new server") class MyServer{…}
+```
+
+                                                                                     |
+| @Cap       | It annotates a member variable that **declares** a capability, which is **a service that the server provides** . Example: 
+
+```java
+@Cap MyService service;
+```
+
+                                                                                                                                             |
+| @Part      | It annotates a member variable that declares **another server that the implemented server accesses as a client** . *@Part* requires an *ip address* and a *port* as parameters. The type of the variable must be a system interface generated by ***fjp*** . Example: 
+
+```java
+@Part("10.0.0.8", 8888) accessedServer.S part;
+```
+
+ |
+| @Start     | It annotates **a method that the server executes when it starts** . The method optionally accepts the command line parameters as a *String\[\]* . Example: 
+
+```java
+@Start void start(String[] args){…}
+```
+
+                                                                                                            |
+| @Stop      | It annotates **a method that the server executes when it stops** . Example: 
+
+```java
+@Stop void stop(){…}
+```
+
+ .                                                                                                                                                                                         |
 
 **Tab. 1) **The *fepcos.j.annotation* module contains these Java annotations**. Developers can use them to implement the system declaration of a multithreaded server.** Using *@SYDec* and *@Cap* is required. In contrast, the use of *@Part,* *@Start* , and *@Stop* is optional.
 
 ### Programming activity specifications of services that a multithreaded server provides
 
-| Annotation |                                                                                                                                                                              Description                                                                                                                                                                               |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| @AYSpec    | It annotates the class of **an activity specification which implements a service** of the server. *@AYSpec* requires a *String* parameter that ***fjp*** uses to generate system documentation. Example: `@AYSpec("My new service") MyService{...}`                                                                                                                    |
-| @In        | It annotates a member variable that is **an input parameter of the service** . *@In* requires a *String* parameter that ***fjp*** uses to generate system documentation. *Byte* , *short* , *char* , *int* , *long* , *float* , *double* , *String* , and *byte\[\]* are currently allowed as the type of parameter. Example: `@In("My input parameter") int iPa;`     |
-| @Out       | It annotates a member variable that is **an output parameter of the service** . *@Out* requires a *String* parameter that ***fjp*** uses to generate system documentation. *Byte* , *short* , *char* , *int* , *long* , *float* , *double* , *String* , and *byte\[\]* are currently allowed as the type of parameter. Example: `@Out("My output parameter") int oPa;` |
-| @Behavior  | It annotates a method, that implements **the desired behavior of the service** . The method optionally accepts the system declaration as a parameter. This allows the manipulation of the server. Example: `@Behavior void go(MyServer s){...}`                                                                                                                        |
+| Annotation |                                                                                                                                                                        Description                                                                                                                                                                         |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| @AYSpec    | It annotates the class of **an activity specification which implements a service** of the server. *@AYSpec* requires a *String* parameter that ***fjp*** uses to generate system documentation. Example: 
+
+```java
+@AYSpec("My new service") MyService{…}
+```
+
+                                                                                                                        |
+| @In        | It annotates a member variable that is **an input parameter of the service** . *@In* requires a *String* parameter that ***fjp*** uses to generate system documentation. *Byte* , *short* , *char* , *int* , *long* , *float* , *double* , *String* , and *byte\[\]* are currently allowed as the type of parameter. Example: 
+
+```java
+@In("My input parameter") int iPa;
+```
+
+   |
+| @Out       | It annotates a member variable that is **an output parameter of the service** . *@Out* requires a *String* parameter that ***fjp*** uses to generate system documentation. *Byte* , *short* , *char* , *int* , *long* , *float* , *double* , *String* , and *byte\[\]* are currently allowed as the type of parameter. Example: 
+
+```java
+@Out("My output parameter") int oPa;
+```
+
+ |
+| @Behavior  | It annotates a method, that implements **the desired behavior of the service** . The method optionally accepts the system declaration as a parameter. This allows the manipulation of the server. Example: 
+
+```java
+@Behavior void go(MyServer s){…}
+```
+
+                                                                                                                     |
 
 **Tab. 2) The *fepcos.j.annotation* module contains these Java annotations. Developers can use them to implement an activity specification for a service that the multithreaded server provides.** Using *@AYSpec* and *@Behavior* is required. In contrast, the use of *@In* and *@Out* is optional.
 
 ## Exemplary implementation of a multithreaded server in Java using FEPCOS-J
 
-This section describes how to use FEPCOS-J to implement the following simple example: A server called `idServer`
+This section describes how to use FEPCOS-J to implement the following simple example: A server called
+
+```
+idServer
+```
 
 * concurrently handles requests from multiple clients, providing a service that returns integer IDs.
 * accepts the server socket address as a command-line parameter.
@@ -200,13 +259,49 @@ The class imports ***fepcos.j.annotation.\**** . In particular, this package con
 
 *@SYDec* indicates that the *IdServer* class is the system declaration of the server.
 
-*@Cap* declares the service `IdService getId` whose class's source code is described later.
+*@Cap* declares the service
 
-Further, the *IdServer* class imports `java.util.concurrent.atomic.AtomicInteger` [\[14\]](#references). It is required to realize the server's application logic. Since the `final AtomicInteger counter` member variable is thread-safe, it is used to concurrently generate integer IDs.
+```java
+IdService getId
+```
 
-*@Start* indicates that the server executes the `void start(String[] args)` method when it starts. The method initializes *counter* by parsing the command line parameters `args`.
+whose class's source code is described later.
 
-*@Stop* indicates that the server executes the `void stop()` method when it stops. The method prints the next ID the server would have returned.
+Further, the *IdServer* class imports
+
+```java
+java.util.concurrent.atomic.AtomicInteger
+```
+
+[\[14\]](#references). It is required to realize the server's application logic. Since the
+
+```java
+final AtomicInteger counter
+```
+
+member variable is thread-safe, it is used to concurrently generate integer IDs.
+
+*@Start* indicates that the server executes the
+
+```java
+void start(String[] args)
+```
+
+method when it starts. The method initializes *counter* by parsing the command line parameters
+
+```java
+args
+```
+
+.
+
+*@Stop* indicates that the server executes the
+
+```java
+void stop()
+```
+
+method when it stops. The method prints the next ID the server would have returned.
 
 #### Activity Specification *IdService.java*
 
@@ -232,13 +327,39 @@ The class imports ***fepcos.j.annotation.\**** . In particular, this package con
 
 *@AYSpec* indicates that the *IdService* class is the activity specification of the service.
 
-*@Out* declares the output parameter of the service `int id`.
+*@Out* declares the output parameter of the service
 
-*@Behavior* indicates that the server executes the void `go(IdServer srv)` method to realize the service. The line
+```java
+int id
+```
 
-`id=srv.counter.getAndIncrement();`
+.
 
-sets the `id` output parameter and increments `srv.counter`.
+*@Behavior* indicates that the server executes the void
+
+```java
+go(IdServer srv)
+```
+
+method to realize the service. The line
+
+```java
+id=srv.counter.getAndIncrement();
+```
+
+sets the
+
+```java
+id
+```
+
+output parameter and increments
+
+```java
+srv.counter
+```
+
+.
 
 ### Processing, and executing
 
@@ -248,7 +369,9 @@ As a result, the *tgt* directory contains the system export module *idServer.exp
 
 After that, the developer can start the server by using the command:
 
-`fjx tgt idServer.exp 10.0.0.8:8888 0`
+```
+fjx tgt idServer.exp 10.0.0.8:8888 0
+```
 
 To explain:
 
@@ -257,28 +380,67 @@ To explain:
 * *10.0.0.8:8888* is the address of the server socket that accepts the client requests.
 * *0* is the initial ID that the server returns.
 
-<figure class="aligncenter size-medium">
- <img decoding="async" width="550" height="510" src="fuchs-2024-multithreaded-server-with-fepcos-j-example-idServer-550x510.png" alt="A screenshot shows the exemplary realization of a multithreaded server in Java with FEPCOS-J." class="wp-image-106191">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 3) A screenshot shows the exemplary implementation of a multithreaded server with FEPCOS-J: (a)</strong> <em><strong>tree</strong></em> lists source code of the server. <strong>(b)</strong> <strong><em>fjp</em></strong> processes the source code. <strong>(c)</strong> The <em>tgt</em> directory contains the result. <strong>(d)</strong> <strong><em>fjx</em></strong> starts the server. <strong>(e)</strong> The server shuts down after typing <em>exit</em> and pressing [Enter].
- </figcaption>
-</figure>
+{{< img src="fuchs-2024-multithreaded-server-with-fepcos-j-example-idServer-550x510.png" class="aligncenter size-medium" alt="A screenshot shows the exemplary realization of a multithreaded server in Java with FEPCOS-J." width="550" height="510" caption="Fig. 3) A screenshot shows the exemplary implementation of a multithreaded server with FEPCOS-J: (a) tree lists source code of the server. (b) fjp processes the source code. (c) The tgt directory contains the result. (d) fjx starts the server. (e) The server shuts down after typing exit and pressing [Enter]." >}}
 
 ### Requesting the service by a Client
 
 The ***fjp*** -generated system import module *idServer.imp.jar* enables a client to request the service from the server.
 
-To explain, *idServer.imp.jar* contains the `idServer.imp.S` system interface. A client instantiates it and specifies the IP address and port of the server socket, here 10.0.0.8 and 8888:
+To explain, *idServer.imp.jar* contains the
 
-`var srv = new idServer.imp.S("10.0.0.8", 8888);`
+```java
+idServer.imp.S
+```
 
-Then, the client can request an ID either blockingly with `srv.b.getId()` or concurrently with `srv.c.getId()`.
+system interface. A client instantiates it and specifies the IP address and port of the server socket, here 10.0.0.8 and 8888:
 
-As a result, `srv.b.getId()` returns a Record class [\[15\]](#references) with an *id* component; `srv.c.getId()` returns a Future object [\[16\]](#references) of the Record class.
+```java
+var srv = new idServer.imp.S("10.0.0.8", 8888);
+```
+
+Then, the client can request an ID either blockingly with
+
+```java
+srv.b.getId()
+```
+
+or concurrently with
+
+```java
+srv.c.getId()
+```
+
+.
+
+As a result,
+
+```java
+srv.b.getId()
+```
+
+returns a Record class [\[15\]](#references) with an *id* component;
+
+```java
+srv.c.getId()
+```
+
+returns a Future object [\[16\]](#references) of the Record class.
 
 Below is the complete source code of a client that blockingly accesses the server.
 
-It is important to realize that `idServer.imp.S` implements the AutoCloseable interface. Thus, it is declared in a `try`-with-resources statement [\[17\]](#resources).
+It is important to realize that
+
+```
+idServer.imp.S
+```
+
+implements the AutoCloseable interface. Thus, it is declared in a
+
+```
+try
+```
+
+-with-resources statement [\[17\]](#resources).
 
 ```
 idClient/

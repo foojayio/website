@@ -1,6 +1,5 @@
 ---
 title: "Elastic JVM: Configuring G1 GC for Automatic Vertical Memory Scaling"
-slug: "elastic-jvm-configuring-g1-for-automatic-vertical-memory-scaling"
 date: "2021-05-05T13:45:22+00:00"
 lastmod: "2021-09-16T14:48:32+00:00"
 description: "Details on OpenJDK patch that improves elasticity & enables automatic vertical memory scaling of Java applications with G1 garbage collector!"
@@ -15,9 +14,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/12/elastic-jvm-e1545213859238.png" alt="Automatic Vertical Memory Scaling" class="wp-image-31447">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/12/elastic-jvm-e1545213859238.png" class="alignleft" alt="Automatic Vertical Memory Scaling" >}}
 
 Nowadays, JVM-based applications can benefit from elasticity and density of container technology. However, there are still some issues that may prevent from unleashing the full potential of Java and containers "marriage."
 
@@ -33,9 +30,7 @@ There is a necessity to rethink the Garbage Collection (GC) policies that contro
 
 As a result, in most cases, the Java heap will not be released unless forced externally. Such behavior is particularly disadvantageous in scalable container environments when the JVM uses a fraction of assigned memory resources due to inactivity or a small load. This results in customers overpaying for unused resources, and cloud providers not being able to fully utilize their hardware.  
 
-<figure class="alignright">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/12/jdk-9-e1545213845349.png" alt="Automatic Vertical Memory Scaling of Java" class="wp-image-31449">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/12/jdk-9-e1545213845349.png" class="alignright" alt="Automatic Vertical Memory Scaling of Java" >}}
 
 In order to overcome this issue, we have introduced additional logic into the JVM to trigger a heap reduction whenever the amount of unused memory is significant. It can be performed at any time by configurable options, not only during regular GC cycles.
 

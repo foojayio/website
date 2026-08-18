@@ -1,6 +1,5 @@
 ---
 title: "Introduction to CQRS using MongoDB"
-slug: "introduction-to-cqrs-using-mongodb"
 date: "2026-06-09T10:00:00+00:00"
 description: "In enterprise environments, projects often begin with a simple structure: one model, one service, and one document, using a single class and data transfer object for both read and write operations. While this unified approach works at first, it becomes problematic as requirements grow. Operations become more complex, requiring additional validations, rules, and constraints. Over time, read operations may demand different formats, such as aggregations, summaries, or custom views. Relying on a single model for both reading and writing leads to maintenance challenges and inefficient queries. This approach can result in returning unnecessary data or omitting required information, violating the single responsibility principle and making the design less effective."
 authors:
@@ -34,7 +33,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/helidon-mongodb-cqrs):
 
 ```bash
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="73141a0733141a071b06115d101c1e">[email protected]</a>:soujava/helidon-mongodb-cqrs.git
+git clone [email protected]:soujava/helidon-mongodb-cqrs.git
 ```
 
 ## Prerequisites

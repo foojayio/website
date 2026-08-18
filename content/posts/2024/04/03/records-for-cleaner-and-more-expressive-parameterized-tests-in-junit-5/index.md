@@ -1,6 +1,5 @@
 ---
 title: "Records for Cleaner and More Expressive Parameterized Tests in JUnit 5"
-slug: "records-for-cleaner-and-more-expressive-parameterized-tests-in-junit-5"
 date: "2024-04-03T09:00:38+00:00"
 lastmod: "2024-04-03T09:00:39+00:00"
 description: "Discover how Java records enhance parameterized testing in JUnit 5. Learn to create cleaner, more expressive, and type-safe tests."

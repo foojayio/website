@@ -1,6 +1,5 @@
 ---
 title: "Join the Celebration of 30 Years of Java"
-slug: "join-the-celebration-of-30-years-of-java"
 date: "2025-02-03T08:03:07+00:00"
 lastmod: "2025-02-03T09:29:06+00:00"
 description: "On Thursday, March 13, Azul is hosting a virtual celebration of 30 years of Java, starting at 09:00 PST / 17:00 GMT / 18:00 CET."

@@ -1,6 +1,5 @@
 ---
 title: "Fun with Flags: My Top 10 Resources for JVM Flags"
-slug: "top-10-fun-with-jvm-flags"
 date: "2020-06-08T08:21:02+00:00"
 lastmod: "2021-01-29T22:34:03+00:00"
 description: "Resources on JVM command line arguments are scattered and hard to find, here is aconsolidated list so that others don't have to scour the internet as I did!"

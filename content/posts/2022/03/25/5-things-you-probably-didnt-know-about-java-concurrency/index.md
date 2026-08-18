@@ -1,6 +1,5 @@
 ---
 title: "5 Things You Probably Didn’t Know About Java Concurrency"
-slug: "5-things-you-probably-didnt-know-about-java-concurrency"
 date: "2022-03-25T05:51:41+00:00"
 lastmod: "2022-03-25T05:54:53+00:00"
 description: "Even while threads are helpful, they are dreadful to many developers. Here are five essential threading concepts for Java developers!"
@@ -24,8 +23,7 @@ Think about a web server: it simultaneously handles many thousands of requests a
 
 That's why, in this article, I will share five interesting threading concepts that beginner and intermediate developers might not know about, yet.
 
-1. Program Order And Execution Order Are Not The Same
------------------------------------------------------
+## 1. Program Order And Execution Order Are Not The Same
 
 When we write code, we assume it will be executed exactly the way we write it.
 
@@ -98,8 +96,7 @@ Thread 1: 0,3,3
 
 I'm not claiming all of them can be reproducible on your machine, but all of them are possibilities.
 
-2. Java Threads Are Limited
----------------------------
+## 2. Java Threads Are Limited
 
 Creating a thread is easy in Java.
 
@@ -139,8 +136,7 @@ Here we are interested in the number that we get before the program throws an ex
 
 On my machine, I was able to create only 4065 threads.
 
-3. Having Many Threads Doesn't Guarantee Better Performance
------------------------------------------------------------
+## 3. Having Many Threads Doesn't Guarantee Better Performance
 
 Sometimes we may naively think that, since we can create threads easily in Java, that that certainly boosts application performance. Unfortunately, this assumption is flawed in the case of our traditional threading model that Java provides today.
 
@@ -191,8 +187,7 @@ N = 8 * ( 1 + 100/20)
 
 However, this is an oversimplification because adequate testing is always critical to figuring out the number.
 
-4. Concurrency Isn't Parallelism
---------------------------------
+## 4. Concurrency Isn't Parallelism
 
 Sometimes the terms concurrency and parallelism interchangeably, which isn't correct. Although in Java we achieve both using threads, these two are two different things.
 
@@ -204,8 +199,7 @@ Suppose we have absolutely independent tasks, and they can be computed separatel
 
 On the other hand, if we have many tasks, some of them may depend on one another. The way we compose and structure them are said to be concurrency. Concurrency is all about structure. We may want to progress multiple tasks simultaneously to achieve a particular result and not necessarily finish one faster.
 
-5. Project Loom Enables Us To Create Millions Of Threads
---------------------------------------------------------
+## 5. Project Loom Enables Us To Create Millions Of Threads
 
 In our previous point, I argued that having many threads doesn't mean performance gain in the application.
 

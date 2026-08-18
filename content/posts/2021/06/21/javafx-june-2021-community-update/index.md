@@ -1,6 +1,5 @@
 ---
 title: "Announcing JavaFX: June 2021 Community Update"
-slug: "javafx-june-2021-community-update"
 date: "2021-06-21T08:22:42+00:00"
 lastmod: "2021-06-21T08:29:14+00:00"
 description: "To get a general idea of what the community would like to see in JavaFX in the future, I have asked developers to share their thoughts!"

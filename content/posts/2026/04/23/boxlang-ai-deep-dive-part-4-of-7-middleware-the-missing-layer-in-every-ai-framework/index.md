@@ -1,6 +1,4 @@
 ---
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework-🧵/"
 title: "BoxLang AI Deep Dive — Part 4 of 7: Middleware — The Missing Layer in Every AI Framework 🧵"
 date: "2026-04-23T14:25:53+00:00"
 lastmod: "2026-05-14T09:54:42+00:00"
@@ -16,9 +14,9 @@ categories:
 tags:
 related_posts:
   - "boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
-  - "boxlang-1-14-0-introducing-inner-classes"
 frozen: false
 ---
 

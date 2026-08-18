@@ -1,6 +1,5 @@
 ---
 title: "Cloud Cost Optimization Is Hard, Java Can Help"
-slug: "cloud-cost-optimization-is-hard-java-can-help"
 date: "2024-02-21T12:07:37+00:00"
 lastmod: "2024-02-22T10:49:48+00:00"
 description: "Did you know switching your Java runtime helps reduce Cloud waste?"

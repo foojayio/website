@@ -1,6 +1,5 @@
 ---
 title: "Announcement: Friends of OpenJDK Podcast #1"
-slug: "foojay-podcast-1"
 date: "2021-07-09T08:39:39+00:00"
 lastmod: "2023-09-21T12:21:12+00:00"
 description: "JavaFX Skins for Android, iOS; BlockHound, for detecting cases of blocking, JEP 411, the SecurityManager deprecation, recent Snyk/Azul survey."

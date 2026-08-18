@@ -1,6 +1,5 @@
 ---
 title: "Enhancing LLM’s Conversations with Efficient Summarization"
-slug: "summarizingtokenwindowchatmemory-enhancing-llms-conversations-with-efficient-summarization"
 date: "2025-03-03T13:16:21+00:00"
 lastmod: "2025-03-03T13:16:22+00:00"
 description: "LangChain4j already provides two types of memory eviction policies, lets adopt a third one: SummarizingTokenWindowChatMemory"

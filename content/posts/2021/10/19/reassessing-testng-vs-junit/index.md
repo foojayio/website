@@ -1,6 +1,5 @@
 ---
 title: "On Reassessing TestNG vs. Junit"
-slug: "reassessing-testng-vs-junit"
 date: "2021-10-19T08:28:48+00:00"
 lastmod: "2021-10-19T08:28:49+00:00"
 description: "Given that the JUnit ecosystem is much more developed, I think I'll switch to JUnit for new projects and reassess again in a few years."

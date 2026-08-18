@@ -1,6 +1,5 @@
 ---
 title: "New Book Announcement: \"Taming Thymeleaf\""
-slug: "new-book-taming-thymeleaf"
 date: "2021-06-21T16:27:53+00:00"
 lastmod: "2021-06-21T16:38:31+00:00"
 description: "\"Taming Thymeleaf\": step-by-step how to get started and build web applications with security, validation, internationalization, and testing."

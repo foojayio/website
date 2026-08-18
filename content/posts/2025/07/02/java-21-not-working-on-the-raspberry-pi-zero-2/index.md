@@ -1,6 +1,5 @@
 ---
 title: "Java 21+ Not Working on the Raspberry Pi Zero 2"
-slug: "java-21-not-working-on-the-raspberry-pi-zero-2"
 date: "2025-07-02T07:46:09+00:00"
 lastmod: "2025-07-02T19:30:04+00:00"
 description: "This story is about how \"Write Once, Run Anywhere\" got broken in a specific use case. It reveals the complexity of maintaining this \"Run Anywhere\" - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: First steps with libbpf (5)"
-slug: "hello-ebpf-first-steps-with-libbpf-5"
 date: "2024-03-07T13:51:35+00:00"
 lastmod: "2024-03-07T13:51:36+00:00"
 description: "Learn why using libbcc is not the best idea and start working with the newer libbpf."

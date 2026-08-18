@@ -1,6 +1,5 @@
 ---
 title: "A Return to Annotation-Free Spring"
-slug: "annotation-free-spring"
 date: "2021-09-17T12:03:24+00:00"
 lastmod: "2021-09-23T07:03:27+00:00"
 description: "In this article, I'd like to show you how to remove annotations for different features that Spring provides!"

@@ -1,6 +1,5 @@
 ---
 title: "Building JavaFX with Gradle"
-slug: "building-javafx-with-gradle"
 date: "2023-01-05T11:32:24+00:00"
 lastmod: "2023-01-05T21:20:18+00:00"
 description: "I decided to create two Gradle build scripts that apply to modular and non-modular Java projects. Take a look -- what do you think?"
@@ -16,7 +15,7 @@ related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "compilation-avoidance-with-gradle"
   - "introducing-gradle-test-suites"
-  - "creating-a-javafx-world-clock-from-scratch-part-4"
+  - "javafx-templates-for-desktop-applications"
 frozen: false
 ---
 
@@ -198,7 +197,7 @@ jlink {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f7659786c6d6c7476377a71">[email protected]</a>'
+                '--linux-deb-maintainer', '[email protected]'
             ]
         }
         if (installerType == 'rpm') {
@@ -392,7 +391,7 @@ runtime {
         }
         if (installerType == 'deb') {
             installerOptions += [
-                '--linux-deb-maintainer', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="82ebece4edc2e3f7f6f7efedace1ea">[email protected]</a>'
+                '--linux-deb-maintainer', '[email protected]'
             ]
         }
         if (installerType == 'rpm') {

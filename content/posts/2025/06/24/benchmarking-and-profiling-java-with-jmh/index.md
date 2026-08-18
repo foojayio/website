@@ -1,6 +1,5 @@
 ---
 title: "Benchmark and profiling Java with JMH"
-slug: "benchmarking-and-profiling-java-with-jmh"
 date: "2025-06-24T21:49:25+00:00"
 lastmod: "2025-06-24T21:51:12+00:00"
 description: "Exploring how to profile and benchmark Java code using JMH and Async profiler."
@@ -272,7 +271,7 @@ The key parameters I use most often:
 
 When you run the benchmark, the async profiler will generate an HTML file that looks like the flame graph in the following image. Let me explain how to read it:
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-116488" src="flamegraph-example-700x258.png" alt="" width="700" height="258">
+{{< img src="flamegraph-example-700x258.png" class="size-medium" width="700" height="258" >}}
 
 In this real flame graph, you can immediately see the problem: an enormous amount of time is being spent in close() operations. The width of each stack frame represents the percentage of time spent in that method. The wider the frame, the more time it's consuming. Looking at this graph, I can see:
 

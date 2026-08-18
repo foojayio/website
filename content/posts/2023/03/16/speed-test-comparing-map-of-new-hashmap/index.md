@@ -1,6 +1,5 @@
 ---
 title: "Comparing Map.of() and new HashMap() in Java"
-slug: "speed-test-comparing-map-of-new-hashmap"
 date: "2023-03-16T08:16:32+00:00"
 lastmod: "2023-03-17T09:46:46+00:00"
 description: "Discussion of the use of Map.of() and new HashMap() in Java, the difference between them, and the benefits of using Map.of()."

@@ -1,6 +1,5 @@
 ---
 title: "How to enable java preview feature and run code from IntelliJ IDEA"
-slug: "how-to-run-project-loom-from-intellij-idea"
 date: "2022-05-08T10:07:50+00:00"
 lastmod: "2022-05-10T16:46:57+00:00"
 description: "JEP 425: Virtual Threads (Preview) has been proposed recently. I wanted to give it a try on my favourite IDE, this article shows you how to do that in IntelliJ IDEA"
@@ -61,7 +60,13 @@ And then go to the run configuration. Select the modify options and Mark the Add
 
 ![](Screen-Shot-2022-05-08-at-5.04.39-AM.png)
 
-You need to add `--enable-preview `there as well.
+You need to add
+
+```
+--enable-preview
+```
+
+there as well.
 
 ![](Screen-Shot-2022-05-08-at-5.11.43-AM.png)
 

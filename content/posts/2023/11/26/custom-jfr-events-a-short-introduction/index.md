@@ -1,6 +1,5 @@
 ---
 title: "Custom JFR Events: A Short Introduction"
-slug: "custom-jfr-events-a-short-introduction"
 date: "2023-11-26T21:08:03+00:00"
 lastmod: "2023-11-26T21:09:21+00:00"
 description: "Find out how JFR allows you to implement your events to record custom information directly in your profiling file."

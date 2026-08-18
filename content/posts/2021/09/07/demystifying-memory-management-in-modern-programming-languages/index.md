@@ -1,6 +1,5 @@
 ---
 title: "Demystifying Memory Management in Modern Programming Languages"
-slug: "demystifying-memory-management-in-modern-programming-languages"
 date: "2021-09-07T08:13:38+00:00"
 lastmod: "2021-09-07T08:37:07+00:00"
 description: "Let's demystify the concepts behind memory management, taking a deeper look at memory management in some of the modern programming languages."

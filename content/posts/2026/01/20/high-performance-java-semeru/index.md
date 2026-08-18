@@ -1,6 +1,5 @@
 ---
 title: "Get high performance Java applications with IBM Semeru Runtimes"
-slug: "high-performance-java-semeru"
 date: "2026-01-20T13:53:00+00:00"
 lastmod: "2026-01-20T13:53:03+00:00"
 description: "Explore real‑world benchmarks, tuning options, and best‑practice strategies to optimize latency, throughput, and memory on modern hardware with Semeru Runtimes, an OpenJDK distribution."

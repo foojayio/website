@@ -1,6 +1,5 @@
 ---
 title: "SKP's Core Java/Java EE Roots : Gang of Four Design Patterns - Part 01"
-slug: "gang-of-four-design-patterns-using-core-java-part-01"
 date: "2021-04-28T13:43:33+00:00"
 lastmod: "2021-10-11T12:38:41+00:00"
 description: "Gang of Four patterns are legend, let's walk through examples of the Observer, Factory, Command, Singleton, Decorator, and Factory Patterns."

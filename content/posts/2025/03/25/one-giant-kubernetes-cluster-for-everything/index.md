@@ -1,6 +1,5 @@
 ---
 title: "One giant Kubernetes cluster for everything"
-slug: "one-giant-kubernetes-cluster-for-everything"
 date: "2025-03-25T10:33:50+00:00"
 lastmod: "2025-03-25T10:33:52+00:00"
 description: "The ideal size of your Kubernetes clusters is a day 0 question and demands a definite answer. You find one giant cluster on one end of the spectrum and - by Nicolas Frankel"
@@ -94,7 +93,7 @@ I could describe the pros and cons of very granular clusters, but they mirror th
 
 Most, if not all, articles evaluating the pros and cons of each end of the spectrum advise a meet-in-the-middle approach: "a couple" of clusters to mitigate the worst aspects of each extreme approach. It's all well and good, but none of them, at least none I've read, tell precisely how many "a couple" is. Is it a cluster per environment, *i.e.*, production, staging, or development? Is it a cluster per team?
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-115768 size-medium" src="ideal-cluster-size-700x313.png" alt="What's the ideal cluster topology?" width="700" height="313">
+{{< img src="ideal-cluster-size-700x313.png" class="aligncenter size-medium" alt="What's the ideal cluster topology?" width="700" height="313" >}}
 
 ‎I'll take a risk and advertise for two clusters: one for production and the other for everything else. How would you manage the cons mentioned above? Read on.
 
@@ -104,7 +103,7 @@ Most, if not all, articles evaluating the pros and cons of each end of the spect
 
 vCluster operates by creating the virtual cluster in a dedicated namespace. You can specify the latter, or vCluster will infer it from the virtual cluster's name. By default, it creates a control plane using the vanilla k8s distribution, but you can choose another one, such as k3s. Likewise, by default, it stores its configuration in an SQLite database, which works particularly well for temporary and pre-production clusters, such as those you create for a pull request. Alternatively, you can rely on a regular etcd or even external databases such as MySQL or Postgres as a data store for more permanent usage and better resilience and scalability of the virtual cluster.
 
-<img decoding="async" class="aligncenter wp-image-115769 size-medium" src="vcluster-700x510.png" alt="Virtual clusters inside a host cluster" width="700" height="510">
+{{< img src="vcluster-700x510.png" class="aligncenter size-medium" alt="Virtual clusters inside a host cluster" width="700" height="510" >}}
 
 Once you've created a virtual cluster via the CLI or the Helm chart, you can connect to it. The client-side CLI creates a dedicated reusable kubeconfig context. From within a virtual cluster, users see no other virtual clusters.
 

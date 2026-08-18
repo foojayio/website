@@ -1,6 +1,5 @@
 ---
 title: "Java Panama Polyglot (Swift) Part 2"
-slug: "java-panama-polyglot-swift-part-2"
 date: "2022-04-13T15:34:59+00:00"
 lastmod: "2022-06-01T20:08:13+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages! Today we'll see swift!"
@@ -171,7 +170,7 @@ After the compilation the output should be a file named `libmyauth.dylib` in the
 Above you'll notice switches being used. The following are the switches and their descriptions:
 
 * `-emit-library` - To indicate this will be a dynamic library, that can be shared with other applications.
-* `-o`` - `The output file name of the file
+* `-o - `The output file name of the file
 
 As a reminder the name of the library when loaded using `System.loadLibrary("myauth")` will be `myauth` and not `libmyauth`. This will allow portability across operating systems.
 
@@ -251,7 +250,9 @@ The following is the naming convention for the MacOS operating system:
 
 **Note:** When running the Java application specify the `java.library.path` property to the location of the library. If not set correctly you can get the following runtime exception:
 
-`java.lang.UnsatisfiedLinkError`
+```
+java.lang.UnsatisfiedLinkError
+```
 
 ### Java talking to Swift functions as (C functions)
 

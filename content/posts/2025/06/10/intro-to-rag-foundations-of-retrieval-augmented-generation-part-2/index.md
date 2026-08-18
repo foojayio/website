@@ -1,6 +1,5 @@
 ---
 title: "Intro to RAG: Foundations of Retrieval Augmented Generation, part 2"
-slug: "intro-to-rag-foundations-of-retrieval-augmented-generation-part-2"
 date: "2025-06-10T21:54:49+00:00"
 lastmod: "2025-06-11T07:35:51+00:00"
 description: "In this blog post, we'll explore the different layers of RAG, including vector RAG, graph RAG, and agents."

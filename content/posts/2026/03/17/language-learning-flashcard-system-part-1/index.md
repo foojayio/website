@@ -1,6 +1,5 @@
 ---
 title: "Language Learning Flashcard System - Part 1"
-slug: "language-learning-flashcard-system-part-1"
 date: "2026-03-17T16:39:58+00:00"
 lastmod: "2026-03-24T17:17:50+00:00"
 description: "In this post, we'll write a Java Spring Boot REST API backend application without any frontend, that will store flash cards and decks in MongoDB. In a second post, we'll add the SRS part and a functional React frontend to use our cards."
@@ -166,7 +165,7 @@ Then run your application again.
 Finally, if we provide a URI, the app starts:
 
 ```
-MONGODB_URI=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4a5b49494d55485e7a43554f481759564f494e5f48145755545d555e5814545f4e">[email protected]</a>/srsapp ./mvnw spring-boot:run
+MONGODB_URI=mongodb+srv://user:[email protected]/srsapp ./mvnw spring-boot:run
 ```
 
 And you should see in the log messages from org.mongodb.driver.client

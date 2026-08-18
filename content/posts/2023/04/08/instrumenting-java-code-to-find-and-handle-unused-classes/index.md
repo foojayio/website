@@ -1,6 +1,5 @@
 ---
 title: "Instrumenting Java Code to Find and Handle Unused Classes"
-slug: "instrumenting-java-code-to-find-and-handle-unused-classes"
 date: "2023-04-08T13:26:34+00:00"
 lastmod: "2023-04-08T13:27:21+00:00"
 description: "Ever wondered how to find classes and dependencies that you don't actually use? Here I describe how to implement an instrumenting Java agent."

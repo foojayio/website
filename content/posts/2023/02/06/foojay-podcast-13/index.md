@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #13: Denver and Boulder JUG"
-slug: "foojay-podcast-13"
 date: "2023-02-06T09:25:28+00:00"
 lastmod: "2025-11-13T09:15:59+00:00"
 description: "Last month we were in Dubai... and now we are on the other side of the world in the US to meet the people behind the Denver and Boulder JUG."

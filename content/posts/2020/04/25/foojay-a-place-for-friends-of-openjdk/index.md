@@ -1,6 +1,5 @@
 ---
 title: "foojay: A Place for Friends of OpenJDK"
-slug: "foojay-a-place-for-friends-of-openjdk"
 date: "2020-04-25T15:09:00+00:00"
 lastmod: "2020-10-20T07:11:11+00:00"
 description: "For Java developers who depend on OpenJDK, foojay is the place to be for comprehensive dashboards, insights, analysis, and blogs. Read More!"
@@ -12,10 +11,10 @@ categories:
   - "Security"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-  - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
 frozen: false
 ---
 
@@ -28,12 +27,7 @@ Together with Java enthusiasts around the world, the foojay team works to identi
 
 [Go here to see all the fixes and CVEs of the recent OpenJDK update releases](https://foojay.io/java-8/?tab=highlights), while indicating their relevance to you by voting on them. Use the Highlights tab to see what the community as a whole thinks about them. More details on the motivations for the OpenJDK update release details dashboard [are described here on foojay](https://foojay.io/blog/dashboard-for-openjdk-update-release-details/).  
 
-<figure class="alignleft size-large is-resized">
- <img decoding="async" src="Screenshot-2020-08-21-at-09.20.34.png" alt="" class="wp-image-32786" width="88" height="100">
- <figcaption>
-  Marc Hoffmann
- </figcaption>
-</figure>
+{{< img src="Screenshot-2020-08-21-at-09.20.34.png" class="alignleft size-large is-resized" width="88" height="100" caption="Marc Hoffmann" >}}
 
 A key contributor to foojay is [Marc Hoffmann](https://twitter.com/marcandsweep). On his [javaalmanac.io](http://javaalmanac.io), he presents extensive data on each Java release, with details on distributions, new features, and API differences between releases.
 
@@ -45,12 +39,7 @@ Take special note at the lower end of each page of the almanac, where you'll fin
 
 [Go here to explore the Java Version Almanac on foojay](https://foojay.io/almanac/jdk-8/), with thanks to Marc.  
 
-<figure class="alignleft size-large is-resized">
- <img loading="lazy" decoding="async" src="0-2.jpeg" alt="" class="wp-image-32784" width="92" height="92">
- <figcaption>
-  Chris Newland
- </figcaption>
-</figure>
+{{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="92" height="92" caption="Chris Newland" >}}
 
 Another key contributor to foojay is [Chris Newland](https://twitter.com/chriswhocodes), who's gathered extensive data sets on JVM command line arguments, which he hosts on his own [chriswhocodes.com](http://chriswhocodes.com).   
 
@@ -65,17 +54,13 @@ The Java community is rich with up to date and cutting edge insights and knowled
 
 Let's introduce some of the bloggers active on foojay.  
 
-<figure class="alignleft size-large is-resized">
- <img loading="lazy" decoding="async" src="b4927414dd9dfdd1d7f5973a880dccea.png" alt="" class="wp-image-32789" width="73" height="73">
-</figure>
+{{< img src="b4927414dd9dfdd1d7f5973a880dccea.png" class="alignleft size-large is-resized" width="73" height="73" >}}
 
 **Marcus Hirt** is the project lead for the Open JDK JMC project. Once upon the time he co-founded Appeal, the company creating the JRockit JVM.
 
 Marcus blogs on topics relating to Java Mission Control (JMC) and Java Flight Recorder (JFR). [Check out his posts here.](https://foojay.io/blog/author/hirt/)  
 
-<figure class="alignleft size-large is-resized">
- <img loading="lazy" decoding="async" src="51e2bcc080bf5b4acaf66b8071f80610.png" alt="" class="wp-image-32790" width="73" height="73">
-</figure>
+{{< img src="51e2bcc080bf5b4acaf66b8071f80610.png" class="alignleft size-large is-resized" width="73" height="73" >}}
 
 **Kevin Farnham** is a technology writer and software engineer. He's focused on high-performance low-latency big-data Java, Python, C/C++ programming.
 

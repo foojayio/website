@@ -1,6 +1,5 @@
 ---
 title: "Prevent LDAP injection in #java 💥💉with #springboot"
-slug: "prevent-ldap-injection-in-java-with-springboot"
 date: "2024-12-04T14:45:35+00:00"
 lastmod: "2024-12-05T06:26:36+00:00"
 description: "Prevent LDAP injection in #java 💥💉with #springboot: Learn how to prevent LDAP injection attacks with expert tips from Vincent VAUBAN. Understand the basics of LDAP, its importance, and techniques to secure your applications. Includes practical coding demonstrations and OWASP recommendations."
@@ -53,8 +52,18 @@ For example, when you log into a corporate network, LDAP plays a crucial role in
 
 **Imagine LDAP as a tree**:
 
-* Roots: e.g., `dc=example, dc=com`
-* Branches: Like departments `cn=readers`
+* Roots: e.g., 
+
+```
+dc=example, dc=com
+```
+
+* Branches: Like departments 
+
+```
+cn=readers
+```
+
 * Leaves: Entries like users, printers, or shared resources
 
 LDAP organizes data hierarchically, making it easy to query and retrieve specific information efficiently.
@@ -72,12 +81,28 @@ LDAP Injection is a**type of injection attack that exploits user input**. If the
 
 ### How Does LDAP Injection Work?
 
-You typically input a filter like this: `cn=readers`. If the input is `cn=*` , you get access to all the data, potentially **exposing sensitive information**.
+You typically input a filter like this:
+
+```
+cn=readers
+```
+
+. If the input is
+
+```
+cn=*
+```
+
+, you get access to all the data, potentially **exposing sensitive information** .
 
 ### How to Prevent LDAP Injection?
 
 * **Sanitize User Input**
-* **Escape special** LDAP **characters** like `*, (, ), and .`
+* **Escape special** LDAP **characters** like
+
+```
+*, (, ), and .
+```
 
 ## 3️⃣ OWASP Recommendations
 
@@ -181,6 +206,10 @@ OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>
 
 #### Open a terminal session to the OpenLDAP container
 
+```
+
+```
+
 `docker exec -it -u root openldap5 /bin/bash`
 
 #### Navigate to the database files folder:
@@ -193,7 +222,7 @@ OpenLDAP Image: <https://hub.docker.com/r/bitnami/openldap>
 
 *password: **adminpassword***  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-114911" class="size-medium wp-image-114911" src="2ldap-search-700x407.png" alt="Prevent LDAP injection in Java with SpringBoot" width="700" height="407">
+{{< img src="2ldap-search-700x407.png" class="size-medium" alt="Prevent LDAP injection in Java with SpringBoot" width="700" height="407" >}}
 
 Entries in LDAP{#caption-attachment-114911}
 

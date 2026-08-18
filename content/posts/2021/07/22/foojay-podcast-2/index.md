@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #2: Embedded Java -- Robots and FX"
-slug: "foojay-podcast-2"
 date: "2021-07-22T14:13:32+00:00"
 lastmod: "2025-11-13T09:25:45+00:00"
 description: "Foojay podcast, with James Gosling, Java creator, embedded enthusiast, distinguished engineer of AWS GreenGrass, formerly at Liquid Robotics."

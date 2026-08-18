@@ -1,6 +1,5 @@
 ---
 title: "Web Crawling in Java: Classical Threads and Virtual Threads"
-slug: "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
 date: "2023-09-29T12:23:48+00:00"
 lastmod: "2023-09-29T12:23:49+00:00"
 description: "Explore the intriguing world of web crawling in Java through a comparative lens: classical threads vs. virtual threads."

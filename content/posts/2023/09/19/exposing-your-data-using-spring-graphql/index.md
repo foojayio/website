@@ -1,6 +1,5 @@
 ---
 title: "Exposing your data using Spring GraphQL"
-slug: "exposing-your-data-using-spring-graphql"
 date: "2023-09-19T05:25:46+00:00"
 lastmod: "2023-09-19T08:34:54+00:00"
 description: "An introductory look at how we can use Spring GraphQL in our Java applications."
@@ -15,7 +14,7 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
-  - "jurassic-jdk-migrate-or-extinct"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

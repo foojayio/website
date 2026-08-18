@@ -1,6 +1,5 @@
 ---
 title: "The Road to Docker Official Images for Java: The Azul Zulu Story"
-slug: "the-road-to-docker-official-images-for-java-the-azul-zulu-story"
 date: "2026-04-24T08:57:12+00:00"
 description: "Previously in this series: Trusted Java Containers: Azul Zulu OpenJDK Joins Docker’s Official Images After more than two years of collaboration, reviews, - by Frank Delporte"
 canonical: "https://www.azul.com/blog/the-road-to-docker-official-images-for-java-the-azul-zulu-story/"

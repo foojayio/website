@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #10: JUG World Tour: Dubai JUG"
-slug: "foojay-podcast-10"
 date: "2023-01-03T11:27:27+00:00"
 lastmod: "2025-11-13T09:18:36+00:00"
 description: "in this episode, we talk to the organizers of the Dubai JUG that started in May of 2022. Find out how the JUG started and where it's going!"

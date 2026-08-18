@@ -1,6 +1,5 @@
 ---
 title: "What Can We Expect In OpenJDK 19?"
-slug: "what-can-we-expect-in-openjdk-19"
 date: "2022-06-01T19:00:37+00:00"
 lastmod: "2022-06-02T08:42:36+00:00"
 description: "Although the Java 19 release is coming in September (2022-09-20), we already know what will happen in that release!"
@@ -73,12 +72,7 @@ In one of the previously published articles (Thinking of Massive Throughput? Get
 
 The current release (Reference 7., Build23) shows that a lot of work has been done on the shared thread container (**Figure 1**) to achieve the desired state (JEP-424, Reference 6).
 
-<figure class="wp-block-image alignnone size-medium wp-image-56170">
- <img fetchpriority="high" decoding="async" width="700" height="388" src="Image1_vt_build23-700x388.png" alt="Image 1.: Runnable task distribute to the platform thread through the SharedThredContainer" class="wp-image-56170">
- <figcaption>
-  <strong>Figure 1.</strong>: Runnable task distribute to the platform thread through the <em>SharedThreadContainer</em>
- </figcaption>
-</figure>
+{{< img src="Image1_vt_build23-700x388.png" class="size-medium" alt="Image 1.: Runnable task distribute to the platform thread through the SharedThredContainer" width="700" height="388" caption="Figure 1.: Runnable task distribute to the platform thread through the SharedThreadContainer" >}}
 
 ### JEP-428: Structured Concurrency (Incubator)
 

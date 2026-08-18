@@ -1,6 +1,5 @@
 ---
 title: "Java Garbage Collection Types & Settings Customization via Jelastic PaaS"
-slug: "java-garbage-collection-types-and-settings-customization-via-jelastic-paas"
 date: "2021-04-29T07:54:20+00:00"
 lastmod: "2021-09-16T14:49:21+00:00"
 description: "What types of garbage collection is available at the market, what GC does for Java applications and how it works within Jelastic PaaS."
@@ -16,9 +15,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-gc.png" alt="java gc" class="wp-image-34173" width="250">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-gc.png" class="alignleft is-resized" alt="java gc" width="250" >}}
 
 Performance and price are two big considerations in application hosting that always matter. And, often, we question ourselves on how to decrease the spends, without affecting the performance of your apps at the same time. In this article, we'd like to address automatic memory management for Java applications hosted with Jelastic using garbage collection.
 
@@ -32,9 +29,7 @@ The created object uses some memory that remains allocated until there are refer
 
 We've [tested different kinds of Garbage Collectors (GC)](https://jelastic.com/blog/tuning-garbage-collector-java-memory-usage-optimization/) and defined the most appropriate ones for the Java applications hosted in our cloud, taking into consideration the automatic vertical scaling that Jelastic provides. As a result of our investigations, we adjusted the default settings of Garbage Collectors in Jelastic in order to increase the benefits for our users.  
 
-<figure class="aligncenter is-resized">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collector-types.png" alt="java-garbage-collector-types" class="wp-image-34175" width="600">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2019/08/java-garbage-collector-types.png" class="aligncenter is-resized" alt="java-garbage-collector-types" width="600" >}}
 
 Jelastic supports the following GCs:
 

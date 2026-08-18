@@ -1,6 +1,5 @@
 ---
 title: "Where do you get your Java?"
-slug: "where-do-you-get-your-java"
 date: "2024-01-16T14:19:33+00:00"
 lastmod: "2024-01-16T14:22:16+00:00"
 description: "Which Java should you download and use? A brief history of Java, the current Java distribution options, and which stand above the rest."
@@ -89,7 +88,7 @@ Semeru provides full support for all major operating systems and architectures b
 
 The other major difference is the JVM. Instead of the default "HotSpot" JVM from Oracle, Semeru Runtimes is the only Java distribution that is powered by the Eclipse OpenJ9 JVM. This JVM also has a lot of history. Originally developed by IBM over 25 years ago as the J9 JVM, it was open sourced to the Eclipse Foundation over 6 years ago. It is renowned for its small footprint, fast start-up, and fast ramp-up time. (See more in [this performance blog post](https://eclipse.dev/openj9/performance/ "this performance blog post").)
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-105640" src="EclipseOpenJ9Performance-700x304.png" alt="" width="700" height="304">
+{{< img src="EclipseOpenJ9Performance-700x304.png" class="size-medium" width="700" height="304" >}}
 
 ## Foundation for Open Liberty and Websphere Liberty
 

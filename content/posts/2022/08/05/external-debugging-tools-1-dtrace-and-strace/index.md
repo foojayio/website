@@ -1,6 +1,5 @@
 ---
 title: "External Debugging Tools 1: dtrace and strace"
-slug: "external-debugging-tools-1-dtrace-and-strace"
 date: "2022-08-05T13:13:43+00:00"
 lastmod: "2022-08-05T13:14:10+00:00"
 description: "With these tools, track bugs within an application and its external dependencies without the source or deep knowledge of the environment!"

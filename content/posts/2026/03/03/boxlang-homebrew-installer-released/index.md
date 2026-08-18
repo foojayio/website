@@ -1,6 +1,5 @@
 ---
 title: "BoxLang Homebrew Installer Released"
-slug: "boxlang-homebrew-installer-released"
 date: "2026-03-03T12:34:03+00:00"
 lastmod: "2026-03-06T22:25:40+00:00"
 description: "We're excited to announce the official BoxLang Homebrew tap — the easiest way to get BoxLang up and running on macOS (and Linux with Homebrew). One - by Cristobal Escobar"

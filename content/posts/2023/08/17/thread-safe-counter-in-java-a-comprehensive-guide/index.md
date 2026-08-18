@@ -1,6 +1,5 @@
 ---
 title: "Thread-Safe Counter in Java: A Comprehensive Guide"
-slug: "thread-safe-counter-in-java-a-comprehensive-guide"
 date: "2023-08-17T06:59:29+00:00"
 lastmod: "2023-09-02T00:46:07+00:00"
 description: "In this tutorial, we will explore the concept of thread safety in Java, specifically focusing on a simple counter."

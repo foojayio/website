@@ -1,6 +1,5 @@
 ---
 title: "10 Basic Questions About PDF Files for Java Developers"
-slug: "10-basic-questions-about-pdf-files-for-java-developers"
 date: "2020-08-28T05:45:52+00:00"
 lastmod: "2021-08-23T12:55:40+00:00"
 description: "PDF files are the world's most common file format, defining 70% of the world's documents. But they are also complex and poorly supported by Java. Tips!"

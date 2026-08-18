@@ -1,6 +1,5 @@
 ---
 title: "New to IntelliJ IDEA by JetBrains? Me Too!"
-slug: "new-to-intellij-idea-me-too"
 date: "2020-10-02T10:07:49+00:00"
 lastmod: "2020-10-06T08:43:22+00:00"
 description: "There’s a lot going on when you first load IntelliJ IDEA. Here’s my experience of using IntelliJ IDEA for the first time!"

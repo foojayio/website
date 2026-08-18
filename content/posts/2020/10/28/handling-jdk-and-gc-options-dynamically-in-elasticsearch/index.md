@@ -1,6 +1,5 @@
 ---
 title: "Handling JDK & GC Options Dynamically in Elasticsearch"
-slug: "handling-jdk-and-gc-options-dynamically-in-elasticsearch"
 date: "2020-10-28T07:48:08+00:00"
 lastmod: "2021-08-23T13:02:17+00:00"
 description: "We dive into the startup of Elasticsearch, parse configurable JVM options, and ergonomically switch between JVM options on startup."

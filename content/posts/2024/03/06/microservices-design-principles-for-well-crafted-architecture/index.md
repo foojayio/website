@@ -1,6 +1,5 @@
 ---
 title: "Microservices Design Principles"
-slug: "microservices-design-principles-for-well-crafted-architecture"
 date: "2024-03-06T10:48:38+00:00"
 lastmod: "2024-03-06T13:01:42+00:00"
 description: "Dive into the Microservices Design Principles with our in-depth guide to creating modular, scalable, and resilient software systems."

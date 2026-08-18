@@ -1,6 +1,5 @@
 ---
 title: "Let's Optimize Relational Database Access"
-slug: "optimizing-relational-database-access"
 date: "2021-06-28T07:42:54+00:00"
 lastmod: "2021-07-08T09:42:37+00:00"
 description: "Most database protocols have not followed the HTTP path yet and remain in the stone age of connection pooling."
@@ -43,7 +42,7 @@ In the initial version, the client establishes a connection for every request it
 
 [
 
-<img fetchpriority="high" decoding="async" class="wp-image-45295 size-medium" src="http1-connection-lifecycle-700x343.png" alt="HTTP 1 Connection Lifecycle" width="700" height="343">
+{{< img src="http1-connection-lifecycle-700x343.png" class="size-medium" alt="HTTP 1 Connection Lifecycle" width="700" height="343" >}}
 
 ](http1-connection-lifecycle.png)
 
@@ -53,7 +52,7 @@ In 1996, HTTP/1.0 was officially released. It introduced *persistent connections
 
 [
 
-<img decoding="async" class="aligncenter wp-image-45511 size-medium" src="connection-pool-sequence-1-700x477.png" alt="" width="700" height="477">
+{{< img src="connection-pool-sequence-1-700x477.png" class="aligncenter size-medium" width="700" height="477" >}}
 
 ](connection-pool-sequence-1.png)
 
@@ -69,7 +68,7 @@ As servers usually process each request upon reception and send the response jus
 
 [
 
-<img decoding="async" class="wp-image-45294 size-medium" src="http-pipelining-700x477.png" alt="HTTP Pipelining" width="700" height="477">
+{{< img src="http-pipelining-700x477.png" class="size-medium" alt="HTTP Pipelining" width="700" height="477" >}}
 
 ](http-pipelining.png)
 
@@ -111,7 +110,7 @@ Whether PostgreSQL supports message pipelining is a legitimate concern. The Post
 
 [
 
-<img loading="lazy" decoding="async" class="wp-image-45293 size-medium" src="database-pipelining-700x469.png" alt="Using pipelining when interacting with a database" width="700" height="469">
+{{< img src="database-pipelining-700x469.png" class="size-medium" alt="Using pipelining when interacting with a database" width="700" height="469" >}}
 
 ](database-pipelining.png)
 
@@ -132,7 +131,7 @@ The client and the database run in different pods but running on the same node.
 
 [
 
-<img loading="lazy" decoding="async" class="wp-image-45290 size-medium" src="benchmark-700x174.png" alt="Impact of the level of pipelining on database queries" width="700" height="174">
+{{< img src="benchmark-700x174.png" class="size-medium" alt="Impact of the level of pipelining on database queries" width="700" height="174" >}}
 
 ](benchmark.png)
 

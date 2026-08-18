@@ -1,6 +1,5 @@
 ---
 title: "More Free Shells for your Java IDE"
-slug: "more-free-shells-for-your-java-ide"
 date: "2024-12-31T14:30:57+00:00"
 lastmod: "2025-01-02T22:59:52+00:00"
 description: "How to have less terminal windows opened and stay in the flow while working in your IDE."
@@ -38,12 +37,7 @@ Not all shells are included in your IDE. Here is a list of shells by default sup
 
 Note that by JetBrains IntelliJ IDEA, I mean all JetBrains IDE's based on the same framework such as Android Studio, PyCharm, WebStorm, PhpStorm, IntelliJ IDEA Ultimate, ...  
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="393" height="142" src="shell-intellij-choice.png" alt="Choice of shells in IntelliJ IDEA" class="wp-image-114966" style="width:371px;height:auto">
- <figcaption class="wp-element-caption">
-  <em>IntelliJ IDEA Shells</em>
- </figcaption>
-</figure>
+{{< img src="shell-intellij-choice.png" class="size-full is-resized" alt="Choice of shells in IntelliJ IDEA" width="393" height="142" style="width:371px;height:auto" caption="IntelliJ IDEA Shells" >}}
 
 ![Choice of shells in Eclipse](shell-eclipse-choice.png) *Choice of shells in Eclipse*
 

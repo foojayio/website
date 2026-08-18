@@ -1,6 +1,5 @@
 ---
 title: "Cloudflare Tunnel for Home Assistant"
-slug: "cloudflare-tunnel-for-home-assistant"
 date: "2025-06-03T11:29:18+00:00"
 lastmod: "2025-06-04T12:32:27+00:00"
 description: "I continue to take care of my Home Assistant. This week, I replaced my original setup with Cloudflare Tunnel. This is the 6th post in the My journey with - by Nicolas Frankel"
@@ -113,7 +112,7 @@ The Cloudflared add-on uses the existing environment to create its configuration
 
 I went to the Cloudflare console and migrated to a remote config. Beware that there's no way back: once managed remotely, you can't migrate back to a local configuration. Go to the *Public Hostname* tab, and on the line of the `homeassistant` tunnel, click on *Edit*. Here's the configuration:
 
-<img decoding="async" class="aligncenter wp-image-116195 size-medium" src="cloudlflare-tunnel-config-700x504.png" alt="Configuration of a Cloudflare Tunnel" width="700" height="504">
+{{< img src="cloudlflare-tunnel-config-700x504.png" class="aligncenter size-medium" alt="Configuration of a Cloudflare Tunnel" width="700" height="504" >}}
 
 The `homeassistant` domain is internal to HA: it's a set value. Because `cloudflared` works on HA, you must keep it as it is. Also, the default HA port is 8123.
 

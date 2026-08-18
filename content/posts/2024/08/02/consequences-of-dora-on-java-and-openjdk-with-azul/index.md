@@ -1,6 +1,5 @@
 ---
 title: "Consequences of DORA on Java and OpenJDK with Azul"
-slug: "consequences-of-dora-on-java-and-openjdk-with-azul"
 date: "2024-08-02T13:49:44+00:00"
 lastmod: "2024-10-18T06:42:44+00:00"
 description: "Azul ensures that financial institutions using Java remain compliant with DORA by providing a secure, supported, and stable Java platform, mitigating the risks associated with unsupported OpenJDK distributions."

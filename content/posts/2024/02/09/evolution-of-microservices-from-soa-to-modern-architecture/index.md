@@ -1,6 +1,5 @@
 ---
 title: "Evolution of Microservices & SOA -- the Architectural Landscape"
-slug: "evolution-of-microservices-from-soa-to-modern-architecture"
 date: "2024-02-09T09:30:18+00:00"
 lastmod: "2024-02-09T10:18:25+00:00"
 description: "Explore the Evolution of Microservices: Microservices in the Modern Architecture Landscape with our in-depth guide that compares it with SOA."

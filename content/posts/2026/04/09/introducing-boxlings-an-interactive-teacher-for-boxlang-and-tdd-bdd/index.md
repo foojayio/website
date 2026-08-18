@@ -1,6 +1,5 @@
 ---
 title: "Introducing BoxLings! An interactive teacher for BoxLang and TDD/BDD"
-slug: "introducing-boxlings-an-interactive-teacher-for-boxlang-and-tdd-bdd"
 date: "2026-04-09T08:48:57+00:00"
 description: "BoxLings gives you 129 progressive exercises across 28 topics from the basics of variables and functions all the way to async programming, Java interop, destructuring, and CLI app development."
 authors:

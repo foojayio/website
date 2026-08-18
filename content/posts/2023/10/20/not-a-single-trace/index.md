@@ -1,6 +1,5 @@
 ---
 title: "Not a Single Trace"
-slug: "not-a-single-trace"
 date: "2023-10-20T07:06:31+00:00"
 lastmod: "2023-10-20T07:07:20+00:00"
 description: "Observability is an orchestra, not a single instrument. By combining multiple data points we form an accurate production narrative."

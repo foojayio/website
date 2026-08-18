@@ -1,6 +1,5 @@
 ---
 title: "Introducing Bld: A New Pure Java Build System"
-slug: "introducing-bld-a-new-pure-java-build-system"
 date: "2023-04-10T20:12:47+00:00"
 lastmod: "2023-05-23T12:56:08+00:00"
 description: "We created bld because we're not really interested in build tools. We use them because we have to, but we'd rather just get on with coding."

@@ -1,6 +1,5 @@
 ---
 title: "Book review: \"Tidy first?\""
-slug: "book-review-tidy-first"
 date: "2024-01-26T18:30:35+00:00"
 lastmod: "2024-01-27T11:18:35+00:00"
 description: "Very useful insights, and the small bite-sized sections made it an enjoyable, educative read."

@@ -1,6 +1,5 @@
 ---
 title: "Create a CRUD UI in Pure Java"
-slug: "create-a-crud-ui-in-pure-java"
 date: "2022-02-02T17:10:06+00:00"
 lastmod: "2023-03-08T10:03:12+00:00"
 description: "Many developers struggle with writing a web UI, but it becomes absolute fun if we could do it with pure java; let's find out how."

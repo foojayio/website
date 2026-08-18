@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #7"
-slug: "jc-ai-newsletter-7"
 date: "2025-10-14T05:35:01+00:00"
 lastmod: "2025-10-14T07:49:59+00:00"
 description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial intelligence."

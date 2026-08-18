@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 2)"
-slug: "java-thread-programming-part-2"
 date: "2021-10-12T09:07:05+00:00"
 lastmod: "2021-11-16T15:08:22+00:00"
 description: "Let's see an example of where we can use Threads. Let's assume we are building a web server that returns the most used words in a website."

@@ -1,6 +1,5 @@
 ---
 title: "Live Templates for Java Developers in IntelliJ IDEA"
-slug: "live-templates-in-intellij-idea"
 date: "2020-10-26T08:31:52+00:00"
 lastmod: "2021-06-25T09:11:06+00:00"
 description: "When I first came across the notion of Live Templates, I couldn't figure out what was 'live' about them. Did they need feeding?"

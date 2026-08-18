@@ -1,6 +1,5 @@
 ---
 title: "Is the Java/Jakarta EE Deployment Model Out of Date?"
-slug: "is-the-java-jakarta-ee-deployment-model-out-of-date"
 date: "2021-08-25T13:05:59+00:00"
 lastmod: "2021-08-25T13:06:38+00:00"
 description: "From this video, learn how the Jakarta EE deployment model using thin WARs allows you to modernize your application development, today!"

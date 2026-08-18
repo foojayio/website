@@ -1,6 +1,5 @@
 ---
 title: "Debugging Deadlocks and Race Conditions"
-slug: "debugging-deadlocks-and-race-conditions"
 date: "2022-05-20T08:08:00+00:00"
 lastmod: "2022-05-20T08:10:33+00:00"
 description: "Threading issues are a piece of cake with these simple debugger techniques. Yes, you CAN debug threads with breakpoints!"

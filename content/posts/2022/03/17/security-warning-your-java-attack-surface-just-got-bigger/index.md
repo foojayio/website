@@ -1,6 +1,5 @@
 ---
 title: "Security Warning: Your Java Attack Surface Just Got Bigger"
-slug: "security-warning-your-java-attack-surface-just-got-bigger"
 date: "2022-03-17T16:35:38+00:00"
 lastmod: "2022-07-14T07:41:37+00:00"
 description: "Learn about common threats, vulnerabilities, and misconfiguration including the recently disclosed issues in Log4j."

@@ -1,6 +1,5 @@
 ---
 title: "Learn About How Your Peers Use Java!"
-slug: "learn-about-how-your-peers-use-java"
 date: "2024-10-24T12:44:16+00:00"
 lastmod: "2024-10-24T12:50:36+00:00"
 description: "Do you ever wonder what OpenJDK distributions and what Java versions your peers are using? Java-based infrastructures and languages? How Java workloads are affecting cloud compute costs?"

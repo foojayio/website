@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #8: JUG World Tour: Manchester"
-slug: "foojay-podcast-8"
 date: "2022-12-05T12:02:21+00:00"
 lastmod: "2025-11-13T09:20:13+00:00"
 description: "Let's virtually travel to a Java User Group (JUG) to learn how they organize their events and learn from their experiences!"

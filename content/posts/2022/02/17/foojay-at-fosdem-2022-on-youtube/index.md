@@ -1,6 +1,5 @@
 ---
 title: "Foojay at FOSDEM 2022 on YouTube And Prize Winners"
-slug: "foojay-at-fosdem-2022-on-youtube"
 date: "2022-02-17T09:52:49+00:00"
 lastmod: "2022-02-17T10:08:58+00:00"
 description: "Last weekend, FOSDEM 2022 was held, with the friends of OpenJDK putting together an awesome program on the tools and editors around OpenJDK."

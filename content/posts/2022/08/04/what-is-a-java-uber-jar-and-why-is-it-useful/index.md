@@ -1,6 +1,5 @@
 ---
 title: "What is a Java Uber-JAR and Why Is It Useful?"
-slug: "what-is-a-java-uber-jar-and-why-is-it-useful"
 date: "2022-08-04T12:53:49+00:00"
 lastmod: "2022-08-04T12:53:50+00:00"
 description: "Get started with Uber-JAR today and learn the different variants of the Uber-JAR artifact and the advantages and drawbacks it has."
@@ -16,7 +15,7 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "whats-new-in-the-july-2026-azul-payara-release"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

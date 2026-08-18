@@ -1,6 +1,5 @@
 ---
 title: "Vaadin 23.3 Improves Kubernetes, Three New Components"
-slug: "vaadin-23-3-improves-kubernetes-support"
 date: "2022-12-14T23:59:15+00:00"
 lastmod: "2022-12-15T17:29:16+00:00"
 description: "Vaadin 23.3 includes improved clustering support for high availability and rolling updates. It also includes 3 new components."

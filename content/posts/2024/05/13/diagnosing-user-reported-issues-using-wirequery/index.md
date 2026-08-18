@@ -1,6 +1,5 @@
 ---
 title: "Diagnosing user-reported issues using WireQuery"
-slug: "diagnosing-user-reported-issues-using-wirequery"
 date: "2024-05-13T07:11:04+00:00"
 lastmod: "2024-05-14T12:20:53+00:00"
 description: "WireQuery is a tool that helps you solve user-reported issues by combining session replay with capturing API calls. In this article, I will explain how it works, how to use it and how it can be integrated into your projects."
@@ -53,7 +52,7 @@ Do take note, however, that in real world applications, the user is probably bet
 To get started, first clone the WireQuery repository and start the server:
 
 ```bash
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adcac4d9edcac4d9c5d8cf83cec2c0">[email protected]</a>:wirequery/wirequery.git
+git clone [email protected]:wirequery/wirequery.git
 cd wirequery
 docker-compose up
 ```

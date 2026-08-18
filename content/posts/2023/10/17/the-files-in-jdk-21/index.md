@@ -1,6 +1,5 @@
 ---
 title: "The Files in JDK 21"
-slug: "the-files-in-jdk-21"
 date: "2023-10-17T07:21:32+00:00"
 lastmod: "2023-10-17T07:22:29+00:00"
 description: "As Java developers, we all have it installed on our computer: the Java Development Kit, also known as the JDK. In this article, we'll explore the files of the JDK."

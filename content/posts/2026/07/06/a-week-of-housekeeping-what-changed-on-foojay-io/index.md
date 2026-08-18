@@ -1,6 +1,5 @@
 ---
 title: "A Week of Housekeeping: What Changed on Foojay.io"
-slug: "a-week-of-housekeeping-what-changed-on-foojay-io"
 date: "2026-07-06T10:04:00+00:00"
 lastmod: "2026-07-06T11:58:10+00:00"
 description: "Running a community website is a bit like maintaining a codebase: the content that matters most is never completely done. And if you don't schedule - by Dominika Tasarz"
@@ -75,4 +74,4 @@ The full story, including how the site came to be, is on the [Who We Are page](h
 
 Transparency is part of what we want Foojay to be. The site exists because the Java community keeps it alive with articles, podcast appearances, event submissions, and feedback. When we make changes, small or big, it's worth saying so, both so you know where things stand and so you can point out anything we missed.
 
-If you spot something that's still broken, outdated, or confusing on the site, the easiest way to let us know is via the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or by emailing [\[email protected\]](/cdn-cgi/l/email-protection#c2aaa7aeaead82a4adada8a3bbecabad). The Pedia in particular is designed to grow. If there's a Java or OpenJDK term you'd like to see explained, use the submission form on any Pedia entry and we'll add it to the list.
+If you spot something that's still broken, outdated, or confusing on the site, the easiest way to let us know is via the [Foojay Slack](https://foojay.io/today/join-slack-com-t-foojay-signup/) or by emailing [\[email protected\]](/cdn-cgi/l/email-protection#59313c353536193f3636333820773036). The Pedia in particular is designed to grow. If there's a Java or OpenJDK term you'd like to see explained, use the submission form on any Pedia entry and we'll add it to the list.

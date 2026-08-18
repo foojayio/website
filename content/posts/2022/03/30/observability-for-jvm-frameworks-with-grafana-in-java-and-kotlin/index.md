@@ -1,6 +1,5 @@
 ---
 title: "Observability for JVM Frameworks with Grafana in Java and Kotlin"
-slug: "observability-for-jvm-frameworks-with-grafana-in-java-and-kotlin"
 date: "2022-03-30T06:30:58+00:00"
 lastmod: "2023-07-18T07:09:29+00:00"
 description: "Learn about observability configurations and libraries required over a range of frameworks using two JVM languages, namely Java and Kotlin. "

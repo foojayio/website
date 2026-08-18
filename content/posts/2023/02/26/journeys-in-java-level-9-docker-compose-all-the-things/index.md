@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 9: Docker compose all the things"
-slug: "journeys-in-java-level-9-docker-compose-all-the-things"
 date: "2023-02-26T10:02:15+00:00"
 lastmod: "2023-02-26T10:08:04+00:00"
 description: "In part 9 of this series, learn how to successfully create an orchestrated microservices system with Docker Compose!"

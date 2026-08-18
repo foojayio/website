@@ -1,6 +1,5 @@
 ---
 title: "Spring4Shell: The zero-day RCE in the Spring Framework explained"
-slug: "spring4shell-the-zero-day-rce-in-the-spring-framework-explained-ready"
 date: "2022-04-08T04:17:45+00:00"
 lastmod: "2022-04-08T04:17:47+00:00"
 description: "We’ll explore how remote code execution (RCE) works, explaining Spring4Shell, a zero-day vulnerability in the Spring framework that could allow for RCE"

@@ -1,6 +1,5 @@
 ---
 title: "Grails Is Back: Inside the Apache Software Foundation Migration"
-slug: "grails-isnt-done-yet-part-2-eol-spring-boot-and-what-comes-next"
 date: "2026-04-01T08:48:56+00:00"
 description: "Grails graduated to a Top-Level Apache project in 2025. Here's what the 18-month migration, Grails 7 release, and Spring Boot alignment mean for teams still running it."
 authors:

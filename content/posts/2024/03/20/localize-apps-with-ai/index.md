@@ -1,6 +1,5 @@
 ---
 title: "Localize applications with AI"
-slug: "localize-apps-with-ai"
 date: "2024-03-20T08:50:29+00:00"
 lastmod: "2024-07-29T18:13:49+00:00"
 description: "Ever wondered if AI can localize an entire project? Let’s walk through the process end-to-end using Spring Petclinic as an example"
@@ -18,7 +17,7 @@ related_posts:
   - "using-ai-to-create-jfr-event-descriptions"
   - "state-of-open-source-and-free-ai-a-fosdem-recap"
   - "springboot-3-2-crac"
-  - "jurassic-jdk-migrate-or-extinct"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -39,7 +38,11 @@ If you're already familiar with the basics, and just want to see AI in action, y
 
 Creating an application just for a localization experiment would be overkill, so let's fork some open-source project. I chose [Spring Petclinic](https://github.com/spring-projects/spring-petclinic), an example web app that is used to showcase the [Spring](https://spring.io) framework for Java.
 
-Fork and clone Petclinic (requires GitHub CLI): `gh repo fork https://github.com/spring-projects/spring-petclinic --clone=true`
+Fork and clone Petclinic (requires GitHub CLI):
+
+```bash
+gh repo fork https://github.com/spring-projects/spring-petclinic --clone=true
+```
 
 If you haven't used Spring before, some code snippets might not look familiar to you, but, as I already mentioned, this discussion is technology-agnostic. The steps are roughly the same regardless of the language and framework.
 
@@ -278,9 +281,7 @@ After replacing all UI text with references to property bundle keys, we must mak
 
 IntelliJ IDEA has good Thymeleaf support. It detects if a template references a missing property, so you can spot the missing ones without lots of manual checking:
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" src="https://flounder.dev/img/cannot-resolve-property-dark.png" alt="IntelliJ IDEA shows a warning in the template that references a missing property key" style="width:412px">
-</figure>
+{{< img src="https://flounder.dev/img/cannot-resolve-property-dark.png" class="size-large is-resized" alt="IntelliJ IDEA shows a warning in the template that references a missing property key" style="width:412px" >}}
 
 With all preparations done, we get to the most interesting part of the work. We have all the keys, and we have all the values for English. Where do we get values for the other languages?
 

@@ -1,6 +1,5 @@
 ---
 title: "Java Panama Polyglot (C++) Part 1"
-slug: "java-panama-polyglot-part1"
 date: "2022-04-06T15:41:49+00:00"
 lastmod: "2022-05-26T09:37:35+00:00"
 description: "Java Panama Polyglot series: quick tutorials or recipes on how to access native libraries written in other languages!"
@@ -21,9 +20,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="polyglot.png" alt="" class="wp-image-55283" width="469" height="112">
-</figure>
+{{< img src="polyglot.png" class="size-full is-resized" width="469" height="112" >}}
 
 Hello and welcome to the **Java Panama Polyglot** series where we will be presenting quick tutorials or recipes on how to access native libraries written in other languages.
 

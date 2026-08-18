@@ -1,6 +1,5 @@
 ---
 title: "MongoDB as a Vector Database for AI Agents-MongoDB"
-slug: "mongodb-as-a-vector-database-for-ai-agents-mongodb"
 date: "2026-06-04T10:00:00+00:00"
 description: "Modern artificial intelligence systems are continually evolving. Large Language Models, or LLMs, have become the backbone of modern applications and help build conversational interfaces, like GPS, to more integrated content. However, LLMs lack memory and the capacity to retain content across interactions because they are stateless. And these limitations led to the building of AI agents. These AI agents build beyond simple prompt-response interactions into more autonomous, task-oriented workflows."
 authors:

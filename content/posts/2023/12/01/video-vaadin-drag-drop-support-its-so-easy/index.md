@@ -1,6 +1,5 @@
 ---
 title: "Video: Vaadin Drag & Drop Support. It's so easy!"
-slug: "video-vaadin-drag-drop-support-its-so-easy"
 date: "2023-12-01T13:24:06+00:00"
 lastmod: "2023-12-01T14:02:28+00:00"
 description: "In this video I show how simple it can be to add drag and drop to a Vaadin application! - by Simon Martinelli"

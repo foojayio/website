@@ -1,6 +1,5 @@
 ---
 title: "Compilation Avoidance with Gradle"
-slug: "compilation-avoidance-with-gradle"
 date: "2022-12-13T15:35:31+00:00"
 lastmod: "2022-12-13T15:36:42+00:00"
 description: "Learn what ABI-based compilation means for the average workflow, turning out to be one of the best performance enhancements for any build!"

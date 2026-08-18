@@ -1,6 +1,5 @@
 ---
 title: "Let's create an AI MCP server with Quarkus"
-slug: "lets-talk-about-mcp"
 date: "2025-11-03T10:15:45+00:00"
 lastmod: "2025-11-03T17:30:09+00:00"
 description: "MCP overview, benefits and challenges and a concrete example of creation of an MCP server using Quarkus and using it from the IDE."

@@ -1,6 +1,5 @@
 ---
 title: "AI-powered Chat Application using watsonx.ai and Spring AI"
-slug: "ai-powered-chat-application-using-ibm-watsonx-ai-and-spring-ai"
 date: "2025-01-03T08:31:51+00:00"
 lastmod: "2025-01-03T08:39:32+00:00"
 description: "Discover on how quickly to integrate the IBM watsonx.ai platform in your Java application using Spring AI by creating a chat application"

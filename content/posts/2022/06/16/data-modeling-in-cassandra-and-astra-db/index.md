@@ -1,6 +1,5 @@
 ---
 title: "Data Modeling in Cassandra and Astra DB"
-slug: "data-modeling-in-cassandra-and-astra-db"
 date: "2022-06-16T19:22:05+00:00"
 lastmod: "2022-06-16T19:22:06+00:00"
 description: "What does it take to build an efficient and sound data model for Apache Cassandra® and DataStax Astra DB? Where would one start? Are there any - by Artem Chebotko"

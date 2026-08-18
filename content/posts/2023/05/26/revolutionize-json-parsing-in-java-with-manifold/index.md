@@ -1,6 +1,5 @@
 ---
 title: "Revolutionize JSON Parsing in Java with Manifold"
-slug: "revolutionize-json-parsing-in-java-with-manifold"
 date: "2023-05-26T17:39:19+00:00"
 lastmod: "2023-05-26T17:39:20+00:00"
 description: "Parsing JSON in Java (and other formats) can be as easy as in JS. It can do much more while keeping the type-safety and deep IDE integration."
@@ -262,7 +261,7 @@ User.builder("Name", "/cdn-cgi/l/email-protection")
 That is just the start... The schema includes a date. Dates are a painful prospect in JSON, the standardization is poor and fraught with issues. The schema also includes a gender field which is effectively an enum. This is all converted to type-safe semantics using common Java classes such as LocalDate:
 
 ```
-User u = User.builder("Name", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2a7afa3abae82a6adafa3abaceca1adaf">[email protected]</a>")
+User u = User.builder("Name", "[email protected]")
        .withDate_of_birth(LocalDate.of(1999, 10, 11))
        .withGender(User.Gender.male)
        .build();

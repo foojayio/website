@@ -1,6 +1,5 @@
 ---
 title: "Interview with Gokul Chandrasekaran, the creator of JDoodle"
-slug: "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 date: "2024-01-08T12:08:12+00:00"
 lastmod: "2024-01-08T12:40:16+00:00"
 description: "Thanks Gokul for your support to bring an online Java editor to Foojay!"

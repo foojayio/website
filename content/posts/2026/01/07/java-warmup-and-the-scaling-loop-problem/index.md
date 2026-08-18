@@ -1,6 +1,5 @@
 ---
 title: "Java Warmup and the Scaling Loop Problem"
-slug: "java-warmup-and-the-scaling-loop-problem"
 date: "2026-01-07T06:50:00+00:00"
 lastmod: "2026-01-08T11:06:04+00:00"
 description: "In cloud environments with auto-scaling, a “scaling loop” can make Java application warmup even worse. It can cause you to run unnecessary instances. Even - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "Superfast Application Startup: Java on CRaC"
-slug: "superfast-application-startup-java-on-crac"
 date: "2022-05-30T05:37:24+00:00"
 lastmod: "2023-05-10T05:40:30+00:00"
 description: "If you want a superfast startup for your Java applications without warmup time or resources, why not try Java on CRaC?"

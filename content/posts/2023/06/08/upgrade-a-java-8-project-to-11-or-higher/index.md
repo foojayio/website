@@ -1,6 +1,5 @@
 ---
 title: "Upgrade a Java 8 Project to 11 or Higher"
-slug: "upgrade-a-java-8-project-to-11-or-higher"
 date: "2023-06-08T15:12:27+00:00"
 lastmod: "2023-06-08T15:40:31+00:00"
 description: "Keeping a project on Java 8 will eventually lead to running it on a non-maintained runtime. Aim for the stars and go for Java 17!"

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #34: J-Fall Report, Part 2"
-slug: "foojay-podcast-34"
 date: "2023-11-27T11:04:16+00:00"
 lastmod: "2025-11-13T08:53:00+00:00"
 description: "We did interviews with speakers and guests at J-Fall in the Netherlands. In this part, we touch on topics related to the developers' lives."

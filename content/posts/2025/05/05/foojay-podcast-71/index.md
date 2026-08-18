@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #71: Celebrating 30 Years of Java with James Gosling"
-slug: "foojay-podcast-71"
 date: "2025-05-05T06:55:39+00:00"
 lastmod: "2025-11-13T08:37:20+00:00"
 description: "We are celebrating Java's 30th anniversary this May! This is a very special anniversary episode of the Foojay Podcast! As we approach May 23rd, marking - by Frank Delporte"

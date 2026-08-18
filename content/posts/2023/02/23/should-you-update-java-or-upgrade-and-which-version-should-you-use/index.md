@@ -1,6 +1,5 @@
 ---
 title: "Update or Upgrade Java... and Which Version Should You Use?"
-slug: "should-you-update-java-or-upgrade-and-which-version-should-you-use"
 date: "2023-02-23T09:12:39+00:00"
 lastmod: "2023-02-23T09:15:21+00:00"
 description: "Keeping your Java environment stable requires discerning which updates to install and then installing them appropriately."

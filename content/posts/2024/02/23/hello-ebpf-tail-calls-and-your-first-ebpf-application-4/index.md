@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Tail calls and your first eBPF application (4)"
-slug: "hello-ebpf-tail-calls-and-your-first-ebpf-application-4"
 date: "2024-02-23T08:44:51+00:00"
 lastmod: "2024-02-23T08:44:52+00:00"
 description: "This week, we use tail calls and create our first application using hello-ebpf as a library."

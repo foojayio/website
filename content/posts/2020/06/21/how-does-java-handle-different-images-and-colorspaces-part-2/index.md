@@ -1,6 +1,5 @@
 ---
 title: "How does Java handle different Images and ColorSpaces – Part 2"
-slug: "how-does-java-handle-different-images-and-colorspaces-part-2"
 date: "2020-06-21T17:11:00+00:00"
 lastmod: "2021-08-23T12:25:20+00:00"
 description: "There are lots of different ways of describing Color. As developers, we are most familiar with the RGB model, where every color is defined by mixing Red, Green and Blue together. In the print world, CMYK is very common, where colors or printed by literally mixing different amounts of Cyan, Magenta, Yellow and Key (black). You may also come across other ways of describing color such as DeviceN. There are also lots of different versions of RGB.  Next time we will talk more about BufferedImages. - by Mark Stephens"

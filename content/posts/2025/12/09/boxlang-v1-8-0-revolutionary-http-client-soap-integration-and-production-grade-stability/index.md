@@ -1,6 +1,5 @@
 ---
 title: "BoxLang v1.8.0 : Revolutionary HTTP Client, SOAP Integration, and Production-Grade Stability"
-slug: "boxlang-v1-8-0-revolutionary-http-client-soap-integration-and-production-grade-stability"
 date: "2025-12-09T11:04:07+00:00"
 lastmod: "2025-12-10T10:24:43+00:00"
 description: "The BoxLang team is excited to announce BoxLang 1.8.0, a massive release that revolutionizes HTTP capabilities, introduces comprehensive SOAP/WSDL - by Cristobal Escobar"
@@ -190,7 +189,7 @@ println( "Status: #result.statusCode#" );
 result = http( "https://api.example.com/users" )
     .post()
     .header( "Content-Type", "application/json" )
-    .body( { name : "John Doe", email : "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3898c8b8da3869b828e938f86cd808c8e">[email protected]</a>" } )
+    .body( { name : "John Doe", email : "[email protected]" } )
     .send();
 
 // Transform response inline
@@ -637,7 +636,7 @@ Ready to experience revolutionary HTTP capabilities, SOAP integration, and rock-
 
 ```java
 # Update with CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680a07100409060f285946504658">[email protected]</a>
+box install [email protected]
 
 # Or download from boxlang.io
 https://boxlang.io/download

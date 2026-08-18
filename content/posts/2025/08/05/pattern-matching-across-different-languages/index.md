@@ -1,6 +1,5 @@
 ---
 title: "Pattern-matching across different languages"
-slug: "pattern-matching-across-different-languages"
 date: "2025-08-05T07:40:40+00:00"
 lastmod: "2025-08-05T07:40:41+00:00"
 description: "With destructuring, pattern matching is a huge help to developers who want to write readable and maintainable code."

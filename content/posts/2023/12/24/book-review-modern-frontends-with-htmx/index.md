@@ -1,6 +1,5 @@
 ---
 title: "Book Review: Modern Frontends with htmx"
-slug: "book-review-modern-frontends-with-htmx"
 date: "2023-12-24T10:07:20+00:00"
 lastmod: "2023-12-24T10:07:21+00:00"
 description: "Get started experimenting with htmx and the many benefits it can bring to build dynamic, user-friendly, web pages!"
@@ -28,9 +27,7 @@ htmx seems to be one of those hot new rising stars, and I already wanted to dive
 
 Luckily, [Wim Deblauwe](https://www.wimdeblauwe.com) is here now to help me!
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="540" height="810" src="htmx-cover-small.jpg" alt="" class="wp-image-103438" style="aspect-ratio:0.6666666666666666;width:259px;height:auto">
-</figure>
+{{< img src="htmx-cover-small.jpg" class="size-full is-resized" width="540" height="810" style="aspect-ratio:0.6666666666666666;width:259px;height:auto" >}}
 
 In the past, I had the privilege to work on a project that was initially created by Wim for a startup, where Thymeleaf was used. His book "[Taming Thymeleaf](https://www.wimdeblauwe.com/books/taming-thymeleaf/)" has been a reference for many people who wanted to learn more about the Thymeleaf framework.
 

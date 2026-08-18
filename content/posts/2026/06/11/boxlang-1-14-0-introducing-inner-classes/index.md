@@ -1,6 +1,5 @@
 ---
 title: "BoxLang 1.14.0 : Introducing Inner Classes"
-slug: "boxlang-1-14-0-introducing-inner-classes"
 date: "2026-06-11T10:29:32+00:00"
 lastmod: "2026-06-11T10:29:34+00:00"
 description: "BoxLang has always embraced a simple truth: the way you organize code shapes the way you think about problems. For a long time, if you needed a helper - by Cristobal Escobar"

@@ -1,6 +1,5 @@
 ---
 title: "Remote Debugging and Developer Observability"
-slug: "remote-debugging-and-developer-observability"
 date: "2022-06-10T10:12:26+00:00"
 lastmod: "2023-07-18T07:08:08+00:00"
 description: "Connect to remote processes to solve bugs using remote debugging and observability. Learn how to securely scale debugging to match growth!"
@@ -64,7 +63,7 @@ kubectl port-forward podname 9000:9000
 
 Once we do that, we can use the usual debugging features by connecting directly to the remote server from the IDE by creating a remote debugging target and just running it. Notice that you can do all of that in visual studio code, as discussed [here](https://lightrun.com/debugging/how-to-debug-remotely-in-vs-code/).
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-56241" src="remote-debugging-700x188.png" alt="" width="700" height="188">
+{{< img src="remote-debugging-700x188.png" class="size-medium" width="700" height="188" >}}
 
 We now have a debug session of the application as if we launched it directly from the IDE!
 

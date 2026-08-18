@@ -1,6 +1,5 @@
 ---
 title: "Creating Mobile Apps with JavaFX - Part 2"
-slug: "creating-mobile-apps-with-javafx-part-2"
 date: "2021-06-18T07:10:41+00:00"
 lastmod: "2022-02-11T09:12:35+00:00"
 description: "Let's discuss technologies we use with JavaFX to build JVM byte code versions as well as native images that target iOS and Android devices!"

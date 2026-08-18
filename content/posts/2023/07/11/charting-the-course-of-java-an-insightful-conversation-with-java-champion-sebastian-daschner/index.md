@@ -1,6 +1,5 @@
 ---
 title: "Charting the Course of Java: An Insightful Conversation with Java Champion, Sebastian Daschner"
-slug: "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"
 date: "2023-07-11T15:34:09+00:00"
 lastmod: "2023-07-12T06:55:27+00:00"
 description: "Explore the world of Java with Champion Sebastian Daschner, discussing his journey, future trends in Java, and tips for developer growth."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="Sebastian.jpeg" alt="" class="wp-image-100950" width="375" height="375">
-</figure>
+{{< img src="Sebastian.jpeg" class="alignright size-full is-resized" width="375" height="375" >}}
 
 In this insightful interview, renowned Java Champion, Oracle Developer Champion, and JavaOne Rockstar, Sebastian Daschner, shares his journey in the field of Java enterprise software development.
 

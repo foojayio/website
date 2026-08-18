@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #92: Java 26 Is Here: What's New, What's Gone, and Why It Matters in 2026"
-slug: "foojay-podcast-92"
 date: "2026-03-16T06:58:00+00:00"
 description: "Welcome to another episode of the Foojay Podcast! In this episode, we're talking about Java 26, released on March 17 in the year 26. Again, right on - by Frank Delporte"
 authors:

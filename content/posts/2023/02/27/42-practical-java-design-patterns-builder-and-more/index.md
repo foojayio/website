@@ -1,6 +1,5 @@
 ---
 title: "42 Practical Java Design Patterns: Builder and More"
-slug: "42-practical-java-design-patterns-builder-and-more"
 date: "2023-02-27T08:27:06+00:00"
 lastmod: "2023-02-27T08:28:36+00:00"
 description: "The aim of the article is to introduce my newly published book \"Practical Design Pattern for Java Developers\"."

@@ -1,6 +1,5 @@
 ---
 title: "Still Using JUnit Like It’s 2017? Learn What You’ve Missed—from the Team That Built It"
-slug: "still-using-junit-like-its-2017-learn-what-youve-missed-from-the-team-that-built-it"
 date: "2025-05-02T08:11:51+00:00"
 lastmod: "2025-05-02T08:27:50+00:00"
 description: "(And finally catch up on 8 years of updates you might have missed) Let's be honest: When was the last time you really looked at what's new in JUnit? If - by Richard Fichtner"

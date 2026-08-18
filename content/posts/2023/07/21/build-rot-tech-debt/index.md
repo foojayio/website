@@ -1,6 +1,5 @@
 ---
 title: "Build Rot: The Hidden Technical Debt in Maven and Gradle Builds"
-slug: "build-rot-tech-debt"
 date: "2023-07-21T08:14:01+00:00"
 lastmod: "2023-07-21T09:01:43+00:00"
 description: "Explore the impact of Build Rot on build speed and test times, offering strategies for enhanced observability and more!"

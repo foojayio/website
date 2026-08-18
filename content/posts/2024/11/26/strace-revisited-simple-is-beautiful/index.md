@@ -1,6 +1,5 @@
 ---
 title: "strace Revisited: Simple is Beautiful"
-slug: "strace-revisited-simple-is-beautiful"
 date: "2024-11-26T14:58:28+00:00"
 lastmod: "2024-11-26T15:02:49+00:00"
 description: "Explore strace for Linux debugging: origins, usage, JVM insights, and advanced tips in an in-depth, easy-to-follow guide."

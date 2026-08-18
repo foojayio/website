@@ -1,6 +1,5 @@
 ---
 title: "Securing Vaadin Applications with Microsoft Entra"
-slug: "securing-vaadin-applications-with-microsoft-entra"
 date: "2025-02-26T12:55:43+00:00"
 lastmod: "2025-02-26T12:57:16+00:00"
 description: "Many companies use Microsoft 365, so letting users log in with their Microsoft account is a good choice. This blog post shows how to secure your Vaadin - by Simon Martinelli"
@@ -158,7 +157,7 @@ public abstract class KaribuTest {
     @Autowired
     protected ApplicationContext ctx;
     // Default user and role
-    private String username = "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a3a6a1a7e7ada6ac89bdacbabde7aaa6a4">[email protected]</a>";
+    private String username = "[email protected]";
     private String name = "John Doe";
     private String role = Roles.ADMIN;
     private OAuth2AuthenticationToken oAuth2AuthenticationToken;

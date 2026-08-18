@@ -2,7 +2,7 @@
 
 Author submissions land here before they're published. To contribute, add a
 folder named with your article's URL slug, containing an `index.md` (start from
-`template/index.md`) and any images:
+`template/post.md`, renamed to `index.md`) and any images:
 
     draft/
       your-article-slug/

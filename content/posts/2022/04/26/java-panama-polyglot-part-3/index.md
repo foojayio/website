@@ -1,6 +1,5 @@
 ---
 title: "Java Panama Polyglot (Python/Tensorflow) Part 3"
-slug: "java-panama-polyglot-part-3"
 date: "2022-04-26T04:42:58+00:00"
 lastmod: "2022-05-26T12:17:24+00:00"
 description: "How can you, as a Java developer, execute Python script code and access 3rd party Python libraries, such as Tensorflow?"
@@ -454,15 +453,11 @@ plt.show()
 
 The output of the first training image of a tennis show `plt.imshow(train_images[0])`. Since the pyplot window blocks you'll need to click on the close button on the title bar to **close the window**.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="Screen-Shot-2022-04-24-at-8.15.58-PM.png" alt="" class="wp-image-55815" width="393" height="343">
-</figure>
+{{< img src="Screen-Shot-2022-04-24-at-8.15.58-PM.png" class="size-full is-resized" width="393" height="343" >}}
 
 Next, the Python code statements will display a 5x5 grid of the first set of training data (25 images) and their labels shown below. There are 10 different clothing types.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="Screen-Shot-2022-04-24-at-8.17.58-PM.png" alt="" class="wp-image-55816" width="450" height="557">
-</figure>
+{{< img src="Screen-Shot-2022-04-24-at-8.17.58-PM.png" class="size-full is-resized" width="450" height="557" >}}
 
 Next, the code steps through training data that updates the models (using forward and back propagation). The loss function is the error score (smaller is better). The accuracy is the percentage of the likelihood of it predicting what type of clothing.
 
@@ -504,9 +499,7 @@ plt.show()
 
 Below shows prediction's accuracy of the test data (image of an Ankle boot) was 98% confident it was able to predict the clothing type.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="Screen-Shot-2022-04-24-at-8.19.20-PM.png" alt="" class="wp-image-55817" width="500" height="334">
-</figure>
+{{< img src="Screen-Shot-2022-04-24-at-8.19.20-PM.png" class="size-full is-resized" width="500" height="334" >}}
 
 Correct predictions show blue, and incorrect predictions will be in red. The following Python code will display a prediction that was inaccurate (in determining the clothing type).
 
@@ -522,9 +515,7 @@ plt.show()
 
 The output below shows a not so good prediction of a Sneaker. The model was 40% confident (red) that it was a sandal. While it was just under 40% (blue) confidence it was a sneaker.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="Screen-Shot-2022-04-24-at-8.20.05-PM.png" alt="" class="wp-image-55818" width="493" height="330">
-</figure>
+{{< img src="Screen-Shot-2022-04-24-at-8.20.05-PM.png" class="size-full is-resized" width="493" height="330" >}}
 
 To show more predictions from test data the Python code below display a grid showing the first 15 images with a prediction chart having five rows and 3 columns. Each column contains an image of the clothing with a label and a bar chart of the prediction 0-9 (clothing type).
 
@@ -605,12 +596,7 @@ plt.show()
 
 Output of a single image prediction:
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="Screen-Shot-2022-04-24-at-8.22.41-PM.png" alt="" class="wp-image-55820" width="425" height="511">
- <figcaption>
-  Prediction of single image is a Pullover
- </figcaption>
-</figure>
+{{< img src="Screen-Shot-2022-04-24-at-8.22.41-PM.png" class="size-full is-resized" width="425" height="511" caption="Prediction of single image is a Pullover" >}}
 
 So, there you have it -- Java's Panama talking to Python's interpreter. Of course we've only scratched the surface in terms of interacting with the Python interpreter. This article's objective was to just get your feet wet.
 

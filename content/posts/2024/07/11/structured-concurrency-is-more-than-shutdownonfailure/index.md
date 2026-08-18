@@ -1,6 +1,5 @@
 ---
 title: "Structured Concurrency is More Than ShutdownOnFailure"
-slug: "structured-concurrency-is-more-than-shutdownonfailure"
 date: "2024-07-11T16:34:52+00:00"
 lastmod: "2024-07-11T16:34:53+00:00"
 description: "Let's see other possibilities than the default ones that can be done with the structured concurrency API."

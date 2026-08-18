@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #79: AI4Devs Interviews - Part 1"
-slug: "foojay-podcast-79"
 date: "2025-10-06T07:59:54+00:00"
 lastmod: "2025-11-13T08:35:17+00:00"
 description: "On September 19th, 2025, the first AI4Devs conference took place in Amsterdam. I grabbed my camera and microphone to talk with speakers and attendees - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "Deep Learning in Java Using Deep Netts (Part 2)"
-slug: "getting-started-with-deep-learning-in-java-using-deep-netts-part-2"
 date: "2022-08-03T09:48:18+00:00"
 lastmod: "2023-07-11T09:37:04+00:00"
 description: "For more complex deep learning challenges, more data, and need better performance, take a look at Deep Netts Professional Edition."

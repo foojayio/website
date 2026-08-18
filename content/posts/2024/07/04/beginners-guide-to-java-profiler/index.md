@@ -1,6 +1,5 @@
 ---
 title: "A Beginner's Guide to IntelliJ Profiler"
-slug: "beginners-guide-to-java-profiler"
 date: "2024-07-04T06:26:35+00:00"
 lastmod: "2024-11-12T16:10:09+00:00"
 description: "Learn how to troubleshoot and optimize Java code with IntelliJ Profiler – using createDirectories() as an example."
@@ -94,9 +93,7 @@ First, we need to collect profiling data, which is also referred to as a snapsho
 
 To attach the profiler from IntelliJ IDEA, choose a run configuration that you would normally use to run the application, and select **Profile** from the menu.
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/launch-run-configuration-dark.png" alt="A menu in the run widget shows the Profile option" style="width:407px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/launch-run-configuration-dark.png" class="is-resized" alt="A menu in the run widget shows the Profile option" style="width:407px" >}}
 
 When the app has finished running, a popup will appear, prompting us to open the snapshot. If we dismiss the popup by mistake, the snapshot will still be available in the **Profiler** tool window.
 
@@ -106,25 +103,19 @@ Let's open the report and see what's in it.
 
 The first thing we see after opening the report is the flame graph. This is essentially a summary of all sampled stacks. The more samples with the same stack the profiler has collected, the wider this stack grows on the flame graph. So, the width of the frame is roughly equivalent to the share of time spent in this state.
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/flame-graph-dark.png" alt="Flame graph displays after opening snapshot" style="width:674px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-dark.png" class="is-resized" alt="Flame graph displays after opening snapshot" style="width:674px" >}}
 
 To our surprise, the `createDirectories()` method did not account for the most execution time. Our homemade benchmark took about the same amount of time to execute!
 
 Furthermore, if we look at the frame above, we see that this is primarily because of the `removeIf()` method, which accounts for almost all the time of its caller, `update()`.
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/flame-graph-removeif-dark.png" alt="Pointing at the removeIf() frame on the flame graph" style="width:674px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-removeif-dark.png" class="is-resized" alt="Pointing at the removeIf() frame on the flame graph" style="width:674px" >}}
 
 This clearly needs some looking into.
 
 **Tip**: Alongside traditional tools like the flame graph, IntelliJ Profiler provides performance hints right in the editor, which works great for quick reference and simple scenarios:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/hints-dark.png" alt="Profiler hints in the editor's gutter" style="width:774px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/hints-dark.png" class="is-resized" alt="Profiler hints in the editor's gutter" style="width:774px" >}}
 
 ## Optimize the benchmark
 
@@ -141,9 +132,7 @@ while (events.peekFirst() < nanos - interval) {
 
 Let's change the code, then profile our app once again and look at the result:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/flame-graph-after-dark.png" alt="Pointing at createDirectories() in the new snapshot shows '96.49% of all'" style="width:674px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-after-dark.png" class="is-resized" alt="Pointing at createDirectories() in the new snapshot shows '96.49% of all'" style="width:674px" >}}
 
 The overhead from the benchmark logic is now minimal as it should be, and the `createDirectories()` frame now occupies approximately 95% of the entire execution time.
 
@@ -201,9 +190,7 @@ If you are using IntelliJ Profiler, there is a handy tool that lets you visually
 
 Here's a brief rundown of the results the diff shows:
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://flounder.dev/img/get-started-with-profiling/flame-graph-diff-dark.png" alt="The differences in the snapshots are reflected with different colors" style="width:674px">
-</figure>
+{{< img src="https://flounder.dev/img/get-started-with-profiling/flame-graph-diff-dark.png" class="is-resized" alt="The differences in the snapshots are reflected with different colors" style="width:674px" >}}
 
 Frames missing from the newer snapshot are highlighted in green, while the new ones are colored red. If a frame has several colors, this means the frame is present in both snapshots, but its overall runtime has changed.
 

@@ -1,6 +1,5 @@
 ---
 title: "Apache APISIX Loves Rust! (And Me Too)"
-slug: "apache-apisix-loves-rust"
 date: "2022-09-26T09:23:23+00:00"
 lastmod: "2022-09-26T09:23:25+00:00"
 description: "Context and more surrounding the Rust integration in Apache APISIX, a good story because it highlights the power of Open Source."
@@ -99,7 +98,7 @@ Let me first say that the available documentation is pretty sparse. For example,
 
 The Rust code maps to the same abstractions.  
 
-<img decoding="async" aria-describedby="caption-attachment-60107" class="wp-image-60107 size-medium" src="struct-diagram-694x510.png" alt="Rust's 'structure diagram'" width="694" height="510">
+{{< img src="struct-diagram-694x510.png" class="size-medium" alt="Rust's 'structure diagram'" width="694" height="510" >}}
 
 Rust's 'structure diagram'{#caption-attachment-60107}
 

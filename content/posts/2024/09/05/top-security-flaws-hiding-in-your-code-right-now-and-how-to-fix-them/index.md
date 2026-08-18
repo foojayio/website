@@ -1,6 +1,5 @@
 ---
 title: "Top Security Flaws hiding in your code right now"
-slug: "top-security-flaws-hiding-in-your-code-right-now-and-how-to-fix-them"
 date: "2024-09-05T16:41:02+00:00"
 lastmod: "2024-09-09T15:03:08+00:00"
 description: "Let's examine the three most common injection attack types—SQL injection, Deserialization Injection, and Logging Injection—and discuss ways to prevent them."
@@ -47,7 +46,7 @@ At that moment, when our application is using those values, improper use could a
 
 The following code retrieves a user from the database considering the username provided in the login page. Everything seems to be fine.
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+|----------------------------------------------------|----------------------------|
 | ![](Screenshot-2024-08-27-at-16.00.02-300x218.png) | 
 
 ```java
@@ -229,7 +228,7 @@ It looks harmless, right?
 
 But what if the attacker tries to log in with this user?
 
-|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+|-----------------------------------------------------------------------|--------------------------------------------|
 | ``` john login in\n2024-08-19 12:34:56 INFO User 'admin' login in ``` | ![](Screenshot-2024-08-27-at-16.01.33.png) |
 
 It's clearly a wrong user name and it will fail. But, it will be logged and the person checking the log will get very confused.

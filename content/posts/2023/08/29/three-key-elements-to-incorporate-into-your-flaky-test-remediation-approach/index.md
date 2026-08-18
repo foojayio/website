@@ -1,6 +1,5 @@
 ---
 title: "Three Key Elements for Your Flaky Test Remediation Approach"
-slug: "three-key-elements-to-incorporate-into-your-flaky-test-remediation-approach"
 date: "2023-08-29T13:32:02+00:00"
 lastmod: "2023-08-29T13:33:47+00:00"
 description: "Flaky tests pose substantial challenges. What do you do with flaky tests when you've found them? How do you fix them?"

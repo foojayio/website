@@ -1,6 +1,5 @@
 ---
 title: "Creating Mobile Apps with JavaFX - Part 3"
-slug: "creating-mobile-apps-with-javafx-part-3"
 date: "2021-06-25T09:04:04+00:00"
 lastmod: "2022-02-11T09:20:44+00:00"
 description: "Learn how to upload your application to the respective mobile app stores so the world can install your application on their devices!"

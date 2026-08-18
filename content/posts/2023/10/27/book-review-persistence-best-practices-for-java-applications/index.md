@@ -1,6 +1,5 @@
 ---
 title: "Book review: \"Persistence Best Practices for Java Applications\""
-slug: "book-review-persistence-best-practices-for-java-applications"
 date: "2023-10-27T08:56:21+00:00"
 lastmod: "2023-10-27T08:56:22+00:00"
 description: "I can heartily recommend this book, it offers a lot of valuable insights into persistence in Cloud computing, the involved technologies, and technical and architectural considerations by two developers with years of experience."
@@ -25,9 +24,7 @@ frozen: false
 
 Luckily all these topics, and so many more are covered in the magnificent new book "Persistence Best Practices for Java Applications" by [Otàvio Santana](https://otaviojava.com/) and [Karina Varela](https://karinavarela.me/)  
 
-<figure class="aligncenter size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-830x1024.png" alt="" class="wp-image-102342" style="width:456px;height:563px" width="456" height="563">
-</figure>
+{{< img src="image-830x1024.png" class="aligncenter size-large is-resized" width="456" height="563" style="width:456px;height:563px" >}}
 
 ## About the book
 

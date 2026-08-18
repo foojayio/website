@@ -1,6 +1,5 @@
 ---
 title: "Native Java Win32, 3D Gaming, Printing and Wallet"
-slug: "native-java-win32-3d-gaming-printing-and-wallet"
 date: "2026-06-19T15:45:42+00:00"
 lastmod: "2026-06-22T10:59:58+00:00"
 description: "This week brings native Windows executables with no JVM, a portable 3D graphics API, a gaming API with Box2D physics, cross-platform printing, and Apple Wa"
@@ -12,10 +11,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 

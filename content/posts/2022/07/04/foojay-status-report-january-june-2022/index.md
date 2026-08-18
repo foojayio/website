@@ -1,6 +1,5 @@
 ---
 title: "Foojay Status Report: January – June 2022"
-slug: "foojay-status-report-january-june-2022"
 date: "2022-07-04T07:01:20+00:00"
 lastmod: "2022-07-04T07:03:48+00:00"
 description: "The latest analysis and statistics show that Foojay had as much traffic over the past half year as over the whole of 2021."
@@ -24,15 +23,11 @@ It's been another half year of content and activities in and around the place fo
 
 Let's start by looking at Google Analytics, what's the curve look like for the past half year? Here it is:
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-1024x843.png" alt="" class="wp-image-56455" width="427" height="351">
-</figure>
+{{< img src="image-1024x843.png" class="size-large is-resized" width="427" height="351" >}}
 
 Over the past 6 months, from the first day of January to the last day of June, there were **90K unique visitors and 127K sessions on Foojay.io**. That is meaningless in the absence of something to compare it to. Let's compare the above to the same analysis for the entirety of last year, from the first day of last year to the last day of last year:
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" src="image-1-1024x838.png" alt="" class="wp-image-56456" width="431" height="352">
-</figure>
+{{< img src="image-1-1024x838.png" class="size-large is-resized" width="431" height="352" >}}
 
 What you see above is that **we have had as much traffic on Foojay.io in the first half of this year as we had for the whole of last year**. That's a good trend!
 

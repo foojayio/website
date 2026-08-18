@@ -1,6 +1,5 @@
 ---
 title: "Introduction to Behavior Driving Development with Java and MongoDB"
-slug: "introduction-to-behavior-driving-development-with-java-and-mongodb"
 date: "2026-01-27T16:35:53+00:00"
 lastmod: "2026-01-27T16:35:55+00:00"
 description: "When we face software development, the biggest mistake is about delivering what the client wants. It sounds like a cliché, but after decades, we are still facing this problem. One good way to solve it is to start the test focusing on what the business needs."
@@ -37,7 +36,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/behavior-driven-development-mongodb):
 
 ```
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e88f819ca88f819c809d8ac68b8785">[email protected]</a>:soujava/behavior-driven-development-mongodb.git
+git clone [email protected]:soujava/behavior-driven-development-mongodb.git
 ```
 
 ## Prerequisites

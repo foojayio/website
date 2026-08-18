@@ -1,6 +1,5 @@
 ---
 title: "Book review: Learn JavaFX Game Development with FXGL 17"
-slug: "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
 date: "2022-10-19T07:20:32+00:00"
 lastmod: "2023-03-16T10:45:28+00:00"
 description: "FXGL provides an impressive list of components with methods to override and build the exact functionality your game requires."
@@ -26,9 +25,7 @@ In "Entreprenerd," he also describes the process of writing two books about the 
 
 So, when I received this book about **FXGL**, I immediately had to think back to Bruno's story. Who better to write a book about FXGL than Almas, its creator?
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img fetchpriority="high" decoding="async" src="41ou5Nfo9DL.jpeg" alt="" class="wp-image-60838" width="248" height="375">
-</figure>
+{{< img src="41ou5Nfo9DL.jpeg" class="size-full is-resized" width="248" height="375" >}}
 
 [**Dr. Almas Baimagambetov**](https://twitter.com/AlmasBaim) is a principal lecturer in computer science at the University of Brighton, UK. He has considerable software development experience and is a huge fan of open source. His prominent contributions to the JVM community on GitHub include the FXGL game engine, collaborations on numerous JavaFX projects, a wide range of open-source games, and a collection of practical tutorials.
 

@@ -1,6 +1,5 @@
 ---
 title: "How to deploy a Vaadin application to Google Cloud App Engine"
-slug: "how-to-deploy-a-vaadin-application-to-google-cloud-app-engine"
 date: "2022-07-26T08:27:20+00:00"
 lastmod: "2022-10-10T08:53:15+00:00"
 description: "Deploying to Google App Engine is straight-forward using the Maven plugin, but you must analyze the log files and probably configure the Java version, the instance size, and session affinity."

@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 3)"
-slug: "java-thread-programming-part-3"
 date: "2021-10-21T13:20:17+00:00"
 lastmod: "2021-11-16T15:09:12+00:00"
 description: "Tip: We can only ask the Java thread to execute a piece of code, but we cannot guarantee the execution order of multiple threads!"

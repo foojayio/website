@@ -1,6 +1,5 @@
 ---
 title: "Testing Emails with Testcontainers and Mailpit"
-slug: "testing-emails-with-testcontainers-and-mailpit"
 date: "2026-01-29T08:38:10+00:00"
 lastmod: "2026-01-29T10:00:03+00:00"
 description: "Testing email functionality is often painful. SMTP servers are external, tests become slow or flaky, and local setups differ from CI environments. As a result, many teams either mock the mail sender or skip proper email tests completely. - by Simon Martinelli"
@@ -92,8 +91,8 @@ class EmailServiceTest {
   @Test
   void shouldSendAndVerifyEmail() {
     var msg = new SimpleMailMessage();
-    msg.setFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dcddc0d7c2decbf2dfcbd3c2c29cd1dddf">[email protected]</a>");
-    msg.setTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="720701170032170a131f021e175c111d1f">[email protected]</a>");
+    msg.setFrom("[email protected]");
+    msg.setTo("[email protected]");
     msg.setSubject("Welcome");
     msg.setText("Hello!");
 
@@ -128,8 +127,8 @@ class PlainEmailTest {
     Session session = Session.getInstance(props);
 
     MimeMessage message = new MimeMessage(session);
-    message.setFrom(new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abd8cec5cfced9ebced3cac6dbc7ce85c8c4c6">[email protected]</a>"));
-    message.setRecipient(RecipientType.TO, new InternetAddress("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="770512141e071e12190337120f161a071b125914181a">[email protected]</a>"));
+    message.setFrom(new InternetAddress("[email protected]"));
+    message.setRecipient(RecipientType.TO, new InternetAddress("[email protected]"));
     message.setSubject("Test Subject");
     message.setText("Hello, this is a test email!");
 
@@ -159,8 +158,8 @@ void shouldVerifyEmailSent() {
       .hasMessages()
       .hasMessageCount(1)
       .hasMessageWithSubject("Welcome")
-      .hasMessageTo("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9aefe9ffe8daffe2fbf7eaf6ffb4f9f5f7">[email protected]</a>")
-      .hasMessageFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e60617c6b7e62774e63776f7e7e206d6163">[email protected]</a>");
+      .hasMessageTo("[email protected]")
+      .hasMessageFrom("[email protected]");
 }
 ```
 
@@ -174,8 +173,8 @@ void shouldVerifyMessageDetails() {
   assertThat(mailpit)
       .firstMessage()
       .hasSubject("Order Confirmation")
-      .isFrom("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d627f69687f7e4d7e65627d236e6260">[email protected]</a>")
-      .hasRecipient("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9aabcbabda6a4acbb89acb1a8a4b9a5ace7aaa6a4">[email protected]</a>")
+      .isFrom("[email protected]")
+      .hasRecipient("[email protected]")
       .hasNoAttachments()
       .hasSnippetContaining("Thank you");
 }
@@ -195,7 +194,7 @@ void shouldWaitForAsyncEmail() {
       .withPollInterval(Duration.ofSeconds(1))
       .awaitMessage()
       .withSubject("Password Reset")
-      .to("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="542127312614312c35392438317a373b39">[email protected]</a>")
+      .to("[email protected]")
       .isPresent();
 }
 ```

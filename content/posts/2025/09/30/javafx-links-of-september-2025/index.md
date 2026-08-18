@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of September 2025"
-slug: "javafx-links-of-september-2025"
 date: "2025-09-30T06:08:48+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of September 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there - by Frank Delporte"
 canonical: "https://webtechie.be/post/2025-09-26-javafx-links-of-september-2025/"

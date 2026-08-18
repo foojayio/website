@@ -1,6 +1,5 @@
 ---
 title: "How to Debug Java on the Command Line"
-slug: "jdb"
 date: "2021-06-24T16:51:14+00:00"
 lastmod: "2021-06-24T16:51:16+00:00"
 description: "Some bugs are hard to replicate on your personal computer but easily replicated on production or test machines!"

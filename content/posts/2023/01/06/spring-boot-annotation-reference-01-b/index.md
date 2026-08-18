@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Annotation Reference-01/b"
-slug: "spring-boot-annotation-reference-01-b"
 date: "2023-01-06T09:54:05+00:00"
 lastmod: "2023-01-06T09:55:03+00:00"
 description: "In part #2 of my article series on Spring Boot Annotations, we focus on the REST and Spring Stereotype Annotations."
@@ -16,7 +15,7 @@ related_posts:
   - "spring-boot-annotation-reference-01-a"
   - "clean-shutdown-of-spring-boot-applications"
   - "starting-docker-desktop-with-spring-boot"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -188,7 +187,7 @@ This annotation is used to map a HTTP DELETE request to a specific handler metho
 This annotation is used to map a HTTP PUT request to a specific handler method in the controller. It is equivalent to the following alternative.
 
 ```java
-@RequestMapping(method = RequestMethod.PUT)<code> </code>
+@RequestMapping(method = RequestMethod.PUT)
 ```
 
 **@PatchMapping**

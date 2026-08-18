@@ -1,6 +1,5 @@
 ---
 title: "A Poor Man's API"
-slug: "poor-mans-api"
 date: "2022-11-29T09:13:38+00:00"
 lastmod: "2022-11-29T09:17:12+00:00"
 description: "Creating a full-fledged API requires resources, both time and money. Let's achieve it without writing a single line of code!"
@@ -357,7 +356,7 @@ curl http://apisix:9080/apisix/admin/global_rules/2 -H 'X-API-KEY: 123xyz' -X PU
 
 Send a couple of queries and open the Grafana dashboard. It should look similar to this:
 
-<img decoding="async" class="size-medium wp-image-61082 aligncenter" src="grafana-700x288.jpg" alt="" width="700" height="288">
+{{< img src="grafana-700x288.jpg" class="size-medium aligncenter" width="700" height="288" >}}
 
 ## Conclusion
 

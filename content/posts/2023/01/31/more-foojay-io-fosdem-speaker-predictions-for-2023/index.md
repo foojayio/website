@@ -1,6 +1,5 @@
 ---
 title: "More Foojay.io FOSDEM Speaker Predictions for 2023"
-slug: "more-foojay-io-fosdem-speaker-predictions-for-2023"
 date: "2023-01-31T08:28:10+00:00"
 lastmod: "2023-01-31T11:44:15+00:00"
 description: "Following from the first part in this series, here is the next, from speakers who will be in the Foojay room at FOSDEM, Sunday, 5 February."

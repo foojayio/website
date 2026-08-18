@@ -1,6 +1,5 @@
 ---
 title: "Unboxing K8ssandra: The Data Layer For Your Kubernetes-Powered Applications"
-slug: "unboxing-k8ssandra-the-data-layer-for-your-kubernetes-powered-applications"
 date: "2022-02-01T17:51:35+00:00"
 lastmod: "2022-02-01T17:51:37+00:00"
 description: "A Complimentary Live Webinar, Sponsored by DataStax Kubernetes made it easy to deploy and scale out your cloud-native applications. With K8ssandra, - by Jeff Carpenter"

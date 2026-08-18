@@ -1,6 +1,5 @@
 ---
 title: "A (Definitive?) Guide to LazyInitializationException"
-slug: "guide-lazyinitializationexception"
 date: "2021-03-29T07:19:49+00:00"
 lastmod: "2021-03-29T07:19:51+00:00"
 description: "Posts that have been written about Hibernate's LazyInitializationException could probably fill whole books. Time for a definitive guide!"
@@ -12,10 +11,10 @@ categories:
   - "Performance"
 tags:
 related_posts:
+  - "idempotent-spring-boot-starter"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "jurassic-jdk-migrate-or-extinct"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
-  - "your-tls-stack-is-lying-about-zero-copy"
 frozen: false
 ---
 
@@ -205,7 +204,7 @@ var customer = (Customer) query.getSingleResult();
 var builder = em.getCriteriaBuilder();
 var criteria = builder.createQuery(Customer.class);
 var root = criteria.from(Customer.class);
-root.fetch("orders", JoinType.LEFT);<code class="language-java"></code>
+root.fetch("orders", JoinType.LEFT);
 ```
 
 By running one of the above snippets, Hibernate fetches the `orders` attribute of the `Customer` instance in the same query that loads the `Customer` itself. Here's the corresponding SQL query:

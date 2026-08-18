@@ -1,6 +1,5 @@
 ---
 title: "Atlas Searching with the Java Driver"
-slug: "atlas-searching-with-the-java-driver"
 date: "2025-12-02T17:28:43+00:00"
 lastmod: "2026-01-23T22:25:53+00:00"
 description: "Atlas Search is a full-text search engine embedded in MongoDB Atlas that gives you a seamless, scalable experience for building relevance-based app features. Built on Apache Lucene, Atlas Search eliminates the need to run a separate search system alongside your database. The gateway to Atlas Search is the $search aggregation pipeline stage.The $search stage, as one of the newest members of the MongoDB aggregation pipeline family,  has gotten native, convenient support added to various language drivers. Driver support helps developers build concise and readable code. This article delves into using the Atlas Search support built into the MongoDB Java driver, where we’ll see how to use the driver, how to handle `$search` features that don’t yet have native driver convenience methods or have been released after the driver was released, and a glimpse into Atlas Search relevancy scoring. Let’s get started!"
@@ -98,9 +97,7 @@ Rather than incrementally building up to our final example, here's the complete 
 
 At this point, go ahead and copy the above JSON aggregation pipeline and paste it into Atlas UI or Compass. There's a nifty feature (the mode button - see button image below) where you can paste in the entire JSON just copied.  
 
-<figure class="aligncenter size-full is-resized">
- <img loading="lazy" decoding="async" width="164" height="50" src="Screenshot-2026-01-23-at-4.24.49-PM.png" alt="" class="wp-image-122465" style="width:208px;height:auto">
-</figure>
+{{< img src="Screenshot-2026-01-23-at-4.24.49-PM.png" class="aligncenter size-full is-resized" width="164" height="50" style="width:208px;height:auto" >}}
 
 Here's what the results should look like for you:
 ![three-stage aggregation pipeline in Compass](Screenshot-2025-11-18-at-9.14.25-AM.png)

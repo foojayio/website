@@ -1,6 +1,5 @@
 ---
 title: "Why This JCON Europe Talk Is Unmissable (Part 2)"
-slug: "why-this-jcon-europe-talk-is-unmissable-part-2"
 date: "2024-05-06T08:22:31+00:00"
 lastmod: "2024-05-06T08:25:45+00:00"
 description: "My talk titled \"Jakarta EE 11 - Performance and Developer Productivity\" will give you a full overview of what to expect from the upcoming Jakarta EE 11 release."
@@ -20,9 +19,7 @@ frozen: false
 
 **[JCON Europe](https://2024.europe.jcon.one/) in Cologne is around the corner ([and here are your free Foojay JCON tickets](https://bit.ly/3xv9yfT)), May 13 to 16. Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!**
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="1024" height="682" src="image.png" alt="" class="wp-image-110878" style="width:582px;height:auto">
-</figure>
+{{< img src="image.png" class="size-full is-resized" width="1024" height="682" style="width:582px;height:auto" >}}
 
 ### Jakarta EE 11 - Performance and Developer Productivity - Ivar Grimstad
 

@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 7)"
-slug: "java-thread-programming-part-7"
 date: "2021-11-23T10:10:53+00:00"
 lastmod: "2021-11-23T10:10:55+00:00"
 description: "Can we create as many Java threads as we want? I will try to come up with an answer via an exercise, so bear with me!"

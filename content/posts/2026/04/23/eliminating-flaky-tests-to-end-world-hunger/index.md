@@ -1,6 +1,5 @@
 ---
 title: "Eliminating Flaky Tests to End World Hunger"
-slug: "eliminating-flaky-tests-to-end-world-hunger"
 date: "2026-04-23T09:02:34+00:00"
 lastmod: "2026-04-23T09:08:08+00:00"
 description: "Tired of rerunning the same broken pipeline? Learn how to find and fix flaky tests with better data, waits, parallel runs and team habits."

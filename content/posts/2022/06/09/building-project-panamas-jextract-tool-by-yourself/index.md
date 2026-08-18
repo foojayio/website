@@ -1,6 +1,5 @@
 ---
 title: "Building Project Panama's jextract tool by yourself"
-slug: "building-project-panamas-jextract-tool-by-yourself"
 date: "2022-06-09T14:22:47+00:00"
 lastmod: "2022-07-09T19:42:01+00:00"
 description: "Learn about jextract, which can generate Java binding code that represents native functions or variables (symbols) from C libraries."
@@ -102,7 +101,7 @@ Of course if you choose to make environment variables persistent you'll need to 
 After setting up JDK 19 you can fork / clone the GitHub project `jextract` with the following command:
 
 ```bash
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5828c91a5828c918d9087cb868a88">[email protected]</a>:openjdk/jextract.git
+git clone [email protected]:openjdk/jextract.git
 cd jextract
 ```
 

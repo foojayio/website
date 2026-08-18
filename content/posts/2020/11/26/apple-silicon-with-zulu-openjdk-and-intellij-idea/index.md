@@ -1,6 +1,5 @@
 ---
 title: "Apple Silicon with Zulu OpenJDK and IntelliJ IDEA"
-slug: "apple-silicon-with-zulu-openjdk-and-intellij-idea"
 date: "2020-11-26T09:01:34+00:00"
 lastmod: "2025-05-26T08:24:53+00:00"
 description: "Azul has made Zulu OpenJDK builds of OpenJDK 8, 11, and 13, as well as 16-ea, available on Apple Silicon, Arm-based Macs. Check it out!"

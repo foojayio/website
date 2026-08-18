@@ -1,6 +1,5 @@
 ---
 title: "Inside the Engine: Performance Relay of MongoDB 8.0"
-slug: "inside-the-engine-the-sub-millisecond-performance-relay-of-mongodb-8-0"
 date: "2025-12-16T20:16:42+00:00"
 lastmod: "2025-12-17T08:27:20+00:00"
 description: "In environments where microseconds dictate competitive advantage, MongoDB 8.0 delivers a meticulously tuned execution pipeline that transforms raw network packets into sub-millisecond query responses at global scale. This reference traces a single trade query through every internal boundary network ingress, scheduling, security, parsing, planning, execution, storage‐engine internals, indexing, replication, sharding, change streams, time‐series buckets, backup, and monitoring illustrating how MongoDB 8.0’s per-CPU allocators, active-work profiling, SIMD-vectorized execution, adaptive bucketization, compact resume tokens, and refined journaling coalesce into a seamless, predictable performance engine."
@@ -19,9 +18,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="aligncenter size-full is-resized">
- <img fetchpriority="high" decoding="async" width="720" height="720" src="1_rM-JIRWo49QIKv-vZ4taEQ.webp" alt="" class="wp-image-121981" style="width:308px;height:auto">
-</figure>
+{{< img src="1_rM-JIRWo49QIKv-vZ4taEQ.webp" class="aligncenter size-full is-resized" width="720" height="720" style="width:308px;height:auto" >}}
 
 In environments where microseconds dictate competitive advantage, [MongoDB 8.0](https://www.mongodb.com/products/updates/version-release/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=mongodb-engine-foojay&utm_term=tony.kim) delivers a meticulously tuned execution pipeline that transforms raw network packets into sub-millisecond query responses at global scale.{#e2e4}
 

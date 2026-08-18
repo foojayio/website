@@ -1,6 +1,5 @@
 ---
 title: "OpenJDK, JDKs and Every Java Acronym in Between"
-slug: "openjdk-jdks-and-every-java-acronym-in-between"
 date: "2020-11-04T09:57:46+00:00"
 lastmod: "2020-11-10T08:59:10+00:00"
 description: "The Java SE landscape is strewn with acronyms picked up over the last 25 years. Sometimes those acronyms even mean multiple things!"

@@ -1,6 +1,5 @@
 ---
 title: "Manage HTTP Sessions with Spring Session MongoDB"
-slug: "building-distributed-http-sessions-with-spring-session-mongodb"
 date: "2026-04-07T15:19:10+00:00"
 lastmod: "2026-04-07T15:19:12+00:00"
 description: "Spring Session MongoDB is a library that enables Spring applications to store and manage HTTP session data in MongoDB rather than relying on container-specific session storage. In traditional deployments, session state is often tied to a single application instance, which makes scaling across multiple servers difficult. By integrating Spring Session with MongoDB, session data can be persisted beyond application restarts and shared across instances in a cluster, enabling scalable distributed applications with minimal configuration."

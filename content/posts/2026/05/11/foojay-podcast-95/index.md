@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #95: Is Your Java App Actually Secure, Or Does It Just Look That Way?"
-slug: "foojay-podcast-95"
 date: "2026-05-11T09:57:00+00:00"
 lastmod: "2026-05-11T15:00:10+00:00"
 description: "Is your Java application actually secure, or does it just look that way? In this episode of the Foojay Podcast, Frank is joined by Steve Poole and David - by Frank Delporte"

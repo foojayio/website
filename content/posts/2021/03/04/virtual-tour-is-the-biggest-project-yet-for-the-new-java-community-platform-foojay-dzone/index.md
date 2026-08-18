@@ -1,6 +1,5 @@
 ---
 title: "\"Biggest Project Yet for the New Java Community Platform, Foojay\""
-slug: "virtual-tour-is-the-biggest-project-yet-for-the-new-java-community-platform-foojay-dzone"
 date: "2021-03-04T14:02:00+00:00"
 lastmod: "2021-03-26T14:10:51+00:00"
 description: "Fifteen events are already confirmed in an ambitious virtual tour of Java User Groups across the globe, marking a strong start for Foojay.io."

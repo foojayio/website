@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #74: JCON Report, Part 3 – AI, ChatGPT, LLM, ML, RAG, MCP, GenAI, and more"
-slug: "foojay-podcast-74"
 date: "2025-06-30T06:47:00+00:00"
 lastmod: "2025-11-13T08:36:07+00:00"
 description: "Let's have an AI Bingo and talk about ChatGPT, LLM, ML, RAG, MCP, GenAI, and more! This is part 3 of the interviews recorded at the JCON conference in - by Frank Delporte"

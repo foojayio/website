@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #12: State and Future of the IDEs"
-slug: "foojay-podcast-12"
 date: "2023-01-23T10:14:45+00:00"
 lastmod: "2025-11-13T09:17:01+00:00"
 description: "In this podcast,  we are talking to some of the key people working on different IDEs, Integrated Development Environments."

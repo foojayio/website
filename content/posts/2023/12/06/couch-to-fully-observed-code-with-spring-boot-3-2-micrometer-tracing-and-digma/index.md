@@ -1,6 +1,5 @@
 ---
 title: "Couch to fully-observed code with Spring Boot 3.2, Micrometer Tracing, and Digma"
-slug: "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
 date: "2023-12-06T10:42:46+00:00"
 lastmod: "2024-01-03T20:23:49+00:00"
 description: "Collecting important data about your code in dev and test has become trivial, it's now also getting easier to put that data to use."
@@ -18,7 +17,7 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023"
   - "effective-coding-with-java-observability"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "New: JDKMonitor"
-slug: "new-jdkmonitor"
 date: "2023-10-18T08:04:08+00:00"
 lastmod: "2023-10-19T15:09:19+00:00"
 description: "A widget on your MacOS desktop that shows the days until the next release/update of OpenJDK, and more."
@@ -30,11 +29,11 @@ Here are some screenshots...
 
 The application:
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-102830" src="JDKMonitor-644x510.png" alt="" width="644" height="510">
+{{< img src="JDKMonitor-644x510.png" class="size-medium" width="644" height="510" >}}
 
 The available widgets:
 
-<img decoding="async" class="alignnone size-medium wp-image-102832" src="JDKMonitor-Widgets-700x236.png" alt="" width="700" height="236">
+{{< img src="JDKMonitor-Widgets-700x236.png" class="size-medium" width="700" height="236" >}}
 
 You can find the app on the MacOS app store following [this link](https://apps.apple.com/us/app/jdkmonitor/id6468484792 "this link")...
 

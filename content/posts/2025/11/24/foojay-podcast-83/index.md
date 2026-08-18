@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast 83: OpenJDK Evolutions plus Tips and Tricks"
-slug: "foojay-podcast-83"
 date: "2025-11-24T06:07:00+00:00"
 lastmod: "2025-11-26T09:25:31+00:00"
 description: "Welcome to another episode of the Foojay Podcast! Just like in the previous episode, I bring you conversations from two of Europe's premier Java - by François Martin"

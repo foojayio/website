@@ -1,6 +1,5 @@
 ---
 title: "Blink a LED on Raspberry Pi with Vaadin"
-slug: "blink-a-led-on-raspberry-pi-with-vaadin"
 date: "2022-03-25T14:44:02+00:00"
 lastmod: "2022-03-25T14:54:49+00:00"
 description: "Thanks to Vaadin, you can get a fully running application with a few clicks. And Adding GPIO-interaction is easy with the Pi4J library. - by Frank Delporte"
@@ -303,7 +302,7 @@ If you are developing on a PC, you can build the application with the following 
 
 and upload to your Raspberry Pi with the following command (replace login `pi` and the IP address with the one of your board):
 
-`$ scp target/pi4jdemo-1.0-SNAPSHOT.jar `[[email protected]](/cdn-cgi/l/email-protection)`://home/pi`
+`$ scp target/pi4jdemo-1.0-SNAPSHOT.jar [email protected]://home/pi`
 
 ## Run on Raspberry Pi
 

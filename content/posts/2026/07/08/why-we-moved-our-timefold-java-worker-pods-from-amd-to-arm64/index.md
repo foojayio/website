@@ -1,6 +1,5 @@
 ---
 title: "Why We Moved Our Timefold Java Worker Pods from AMD to ARM64"
-slug: "why-we-moved-our-timefold-java-worker-pods-from-amd-to-arm64"
 date: "2026-07-08T15:25:58+00:00"
 lastmod: "2026-07-08T17:10:44+00:00"
 description: "AMD hyperthreading caused solver performance variance in our Java based cloud pods. Switching to ARM instances doubled throughput per dollar."
@@ -13,10 +12,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
-  - "quarkus-a-runtime-and-framework-for-cloud-native-java"
 frozen: false
 ---
 

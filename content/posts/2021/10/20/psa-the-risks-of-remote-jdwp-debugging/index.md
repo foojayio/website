@@ -1,6 +1,5 @@
 ---
 title: "PSA: The Risks of Remote JDWP Debugging: It's Like a Wide Open Door"
-slug: "psa-the-risks-of-remote-jdwp-debugging"
 date: "2021-10-20T08:13:29+00:00"
 lastmod: "2021-10-20T08:15:28+00:00"
 description: "Java Debug Wire Protocol (a.k.a. JDWP) was designed for testing internally. Opening it to production is a HUGE security and stability risk..."

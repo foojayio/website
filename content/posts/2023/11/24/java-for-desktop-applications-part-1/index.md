@@ -1,6 +1,5 @@
 ---
 title: "Java for desktop applications: Tips and Tricks (Part 1)"
-slug: "java-for-desktop-applications-part-1"
 date: "2023-11-24T09:18:15+00:00"
 lastmod: "2023-11-24T09:21:13+00:00"
 description: "Improve your desktop applications with easy-to-apply tips!"
@@ -17,7 +16,7 @@ related_posts:
   - "9-outdated-ideas-about-java"
   - "state-jvm-desktop-frameworks-jetpack-compose-for-desktop"
   - "starting-docker-desktop-with-spring-boot"
-  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -27,8 +26,7 @@ Since I have been doing this for many years now, I hope that I can share some of
 
 You can be assured that everything you read here is tried and tested with many different end users, over a longer period of time, and across all platforms. The general idea is that you can quickly integrate these tips into your own desktop application projects with minimal effort.
 
-1. Verify directory permissions
--------------------------------
+## 1. Verify directory permissions
 
 Most applications store some kind of configuration data, usually in a subdirectory located somewhere in the user home directory. While this is a straightforward process, a lot of unexpected things can go wrong here.
 
@@ -63,8 +61,7 @@ public static void checkDirectoryPermissions() {
 
 This check has drastically reduced reported issues of this kind for us as users now understand why the access is failing. Of course, you can also adapt it to fit your needs and targeted directories. You can make use of this approach in basically all desktop applications, it is not specific to Java. It is very simple but very effective.
 
-2. Adapt tray icons to the OS
------------------------------
+## 2. Adapt tray icons to the OS
 
 While you want your application to stand out, you don't want it to stand out in a bad way. Sadly, Java applications usually do stand out in a bad way in some desktop environments. Many parts of the Linux desktop implementation for AWT feel like they were made to satisfy the minimum requirements in order to be called cross-platform rather than well-thought-out implementations.
 
@@ -136,8 +133,7 @@ The images should also be adapted in terms of their padding. On Windows, the inp
 
 At the end of the day, we have now moved into somewhat acceptable territory with the tray icon. This is the best that we can do with the current tools, assuming that you don't want to dip into custom native code.
 
-3. Utilize the advantages of the module system
-----------------------------------------------
+## 3. Utilize the advantages of the module system
 
 The Java Platform Module System (JPMS) is still a controversial topic amongst many Java developers, mostly because it breaks their existing classpath-based projects that were working fine before. One major selling point, however, is that with modules, you get access to [jlink](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jlink.html) and [jpackage](https://docs.oracle.com/en/java/javase/21/docs/specs/man/jpackage.html), which are essential tools to build proper self-contained desktop applications.
 

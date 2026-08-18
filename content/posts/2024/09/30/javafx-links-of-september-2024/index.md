@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of September 2024"
-slug: "javafx-links-of-september-2024"
 date: "2024-09-30T02:00:00+00:00"
 lastmod: "2024-10-01T07:18:45+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of September 2024, published on jfx-central.com during this month."
@@ -35,7 +34,7 @@ More info and links below in this overview...
 
 * [**Pedro Duke** shared the following](https://x.com/P_Duke/status/1830644652287926277): "Noteworthy features coming in the next release of JavaFX (23) coming this month (September 17):"
   * CSS transitions: This introduces basic animation support in CSS. Won't be able to do it on Background and Borders for now. Work is already underway to also support that in a next release.
-  * Support "@3x" and greater high-density image naming convention. Currently JavaFX supports `img.png` and [[email protected]](/cdn-cgi/l/email-protection), soon also [[email protected]](/cdn-cgi/l/email-protection).
+  * Support "@3x" and greater high-density image naming convention. Currently JavaFX supports `img.png` and `[email protected]`, soon also `[email protected]`.
   * Horizontal scroll support with the keyboard on controls like ListView, TreeView
   * TextTruncated property to know when text is being truncated
   * Add support for EXT-X-MEDIA tag in HTTP Live Streaming

@@ -1,6 +1,5 @@
 ---
 title: "High-Performance Java Serialisation to Different Formats"
-slug: "high-performance-java-serialisation"
 date: "2022-10-12T14:15:06+00:00"
 lastmod: "2022-12-07T15:22:27+00:00"
 description: "Learn the basics of serialization in an article that discusses some of the key advantages of the open source Chronicle Wire."

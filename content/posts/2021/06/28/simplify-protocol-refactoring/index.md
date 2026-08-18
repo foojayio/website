@@ -1,6 +1,5 @@
 ---
 title: "Introduction to Simplify Protocol Refactoring"
-slug: "simplify-protocol-refactoring"
 date: "2021-06-28T13:22:24+00:00"
 lastmod: "2021-09-03T09:23:36+00:00"
 description: "Sometimes you need to make code more trivial to see the higher-level patterns that solve the issue at hand more elegantly."

@@ -1,6 +1,5 @@
 ---
 title: "Dissection of Joeffice: Open Source Office Suite in Java"
-slug: "dissection-of-joeffice-open-source-office-suite-in-java"
 date: "2023-07-11T09:33:30+00:00"
 lastmod: "2023-07-12T06:54:59+00:00"
 description: "Let's explore libraries and framework used to write an office suite in Java."

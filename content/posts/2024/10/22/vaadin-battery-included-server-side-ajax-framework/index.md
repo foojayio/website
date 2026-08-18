@@ -1,6 +1,5 @@
 ---
 title: "Vaadin: Battery-Included Server-Side AJAX Framework"
-slug: "vaadin-battery-included-server-side-ajax-framework"
 date: "2024-10-22T09:39:11+00:00"
 lastmod: "2024-10-22T09:39:12+00:00"
 description: "The beauty of Vaadin lies in its simplicity - you only write backend code."

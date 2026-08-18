@@ -1,6 +1,5 @@
 ---
 title: "Internal Security: Hardening Internal Systems"
-slug: "internal-security-hardening-internal-systems"
 date: "2022-11-18T15:08:28+00:00"
 lastmod: "2022-11-18T15:08:57+00:00"
 description: "Security is at odds with productivity and team cohesion. It doesn't have to be. There's a balance that mitigates external and internal risk"

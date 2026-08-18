@@ -1,6 +1,5 @@
 ---
-title: "It's Java 20 Release Day! Here's What's New | foojay.io Today"
-slug: "its-java-20-release-day-heres-whats-new"
+title: "It's Java 20 Release Day! Here's What's New"
 date: "2023-03-21T06:40:34+00:00"
 lastmod: "2023-03-21T10:29:49+00:00"
 description: "Today is Java 20 release day! It's been six months since Java 19 was released, and so it's time for another fresh wave of Java features."

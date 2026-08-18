@@ -1,6 +1,5 @@
 ---
 title: "AI Applications with LangChain4j Guardrails and Spring Boot"
-slug: "building-robust-ai-applications-with-langchain4j-guardrails-and-spring-boot"
 date: "2025-07-29T11:16:31+00:00"
 lastmod: "2025-08-11T07:12:42+00:00"
 description: "Learn how to build secure AI applications using LangChain4j guardrails in Spring Boot. Implement input/output validation, prevent prompt injection & more."
@@ -928,7 +927,7 @@ Expected response:
 
 ```
 # Clone the project
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e4838d90a4838d908c9186ca878b89">[email protected]</a>:rokon12/guardrails-demo.git
+git clone [email protected]:rokon12/guardrails-demo.git
 cd guardrails-demo
 
 # Set your OpenAI API key

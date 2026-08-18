@@ -1,6 +1,5 @@
 ---
 title: "Profile IntelliJ IDEA with its own profiler"
-slug: "profile-intellij-idea-with-its-own-profiler"
 date: "2024-10-16T15:49:38+00:00"
 lastmod: "2024-10-16T15:52:50+00:00"
 description: "Analyzing a curious bottleneck in IntelliJ IDEA using the built-in IntelliJ Profiler and several handy debugger features."
@@ -29,7 +28,7 @@ This might be useful if you are writing an [IntelliJ IDEA plugin](https://plugin
 
 Also, regardless of whether you are a plugin author, the described case might be interesting to you because the profiling strategy that I'll cover is not exclusive to IntelliJ IDEA -- you can use it to troubleshoot similar bottlenecks in other types of projects and using other tools.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://flounder.dev/img/profile-idea-with-idea/banner.png" alt="Self-profiling IntelliJ IDEA – post banner" width="2400" height="1260">
+{{< img src="https://flounder.dev/img/profile-idea-with-idea/banner.png" class="size-medium" alt="Self-profiling IntelliJ IDEA – post banner" width="2400" height="1260" >}}
 
 ## The problem
 

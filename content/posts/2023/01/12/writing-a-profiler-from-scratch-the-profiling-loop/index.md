@@ -1,6 +1,5 @@
 ---
 title: "Writing a Profiler from Scratch: The Profiling Loop"
-slug: "writing-a-profiler-from-scratch-the-profiling-loop"
 date: "2023-01-12T15:26:34+00:00"
 lastmod: "2023-01-12T15:36:10+00:00"
 description: "How do profilers like async-profiler work? How to write your own? This is the second part, covering wall-clock profiling."

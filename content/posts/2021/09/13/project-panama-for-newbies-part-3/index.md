@@ -1,6 +1,5 @@
 ---
 title: "Project Panama for Newbies (Part 3)"
-slug: "project-panama-for-newbies-part-3"
 date: "2021-09-13T08:53:47+00:00"
 lastmod: "2026-01-01T14:49:45+00:00"
 description: "Dig a little deeper in our exploration of Project Panama and learn how to talk to third party libraries such as SDL & OpenGL."
@@ -23,12 +22,7 @@ frozen: false
 
 **Updated December 31, 2025:** This article now features Java 25 and the Foreign Function \& Memory (FFM) API, which has been a standard feature since JDK 22 ([JEP-454](https://openjdk.java.net/jeps/454)).
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img fetchpriority="high" decoding="async" width="218" height="407" src="panama_part3.png" alt="Panama for newbies Part 3" class="wp-image-46521" style="width:140px;height:230px">
- <figcaption class="wp-element-caption">
-  Panama for newbies Part 3
- </figcaption>
-</figure>
+{{< img src="panama_part3.png" class="size-full is-resized" alt="Panama for newbies Part 3" width="218" height="407" style="width:140px;height:230px" caption="Panama for newbies Part 3" >}}
 
 ## Introduction
 
@@ -117,7 +111,13 @@ When looking at the function signiture above you're probably wondering what is a
 
 In regards to the type `pid_t` you can examine closer by looking inside of the C header file `sys/types.h`. Inside you'll see the `typedef` `pid_t` defined as an unsigned C `int` type. While it's safe to say it is a C `int` it can vary depending on the platform such as a 16 or 32 bit integer. On Mac/Windows/Linux it is a type C `int`(32 bit).
 
-Next lets look at what is a void parameter. In the definition you'll notice the `getpid(void)` function parameter signiture is a type **void**. This means there are no parameters to pass into the function.
+Next lets look at what is a void parameter. In the definition you'll notice the
+
+```
+getpid(void)
+```
+
+function parameter signiture is a type **void** . This means there are no parameters to pass into the function.
 
 ### Let's create a MethodHandle
 
@@ -202,7 +202,13 @@ Outputs the following:
 MethodHandle calling getpid() (16514)
 ```
 
-Of course if you use the `jextract` tool the `getpid() `method would only be a one liner like the following code snippet:
+Of course if you use the
+
+```
+jextract
+```
+
+tool the `getpid() `method would only be a one liner like the following code snippet:
 
 ```java
 // Using Jextract's getpid method.
@@ -262,12 +268,7 @@ $ jextract \
    foo.h
 ```
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img decoding="async" width="397" height="243" src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" alt="" class="wp-image-46625" style="width:425px;height:260px">
- <figcaption class="wp-element-caption">
-  Generated class files from jextract
- </figcaption>
-</figure>
+{{< img src="Screen-Shot-2021-09-07-at-2.37.15-PM.png" class="size-full is-resized" width="397" height="243" style="width:425px;height:260px" caption="Generated class files from jextract" >}}
 
 Now that you have generated the classes you can use the available convenience methods.
 
@@ -823,9 +824,7 @@ env JAVA_LIBRARY_PATH=:/usr/local/lib java \
 
 This should display a window like this:
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" width="650" height="504" src="sdlfoo-panama.gif" alt="" class="wp-image-46554" style="width:420px;height:326px">
-</figure>
+{{< img src="sdlfoo-panama.gif" class="size-full is-resized" width="650" height="504" style="width:420px;height:326px" >}}
 
 This example shows that porting a complete C or C++ program to Java using Panama is possible. However, this requires a sizeable effort to understand the API of a native library, in particular what comes to mind in this regard is pointer or reference passing.
 

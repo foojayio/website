@@ -1,6 +1,5 @@
 ---
 title: "Secure your API with these 16 Practices with Apache APISIX – part 2"
-slug: "secure-your-api-with-these-16-practices-with-apache-apisix-part-2"
 date: "2024-03-11T09:39:24+00:00"
 lastmod: "2024-03-11T09:43:37+00:00"
 description: "In this two-post series, I've addressed most of 16 different practices to secure APIs with Apache APISIX."

@@ -1,6 +1,5 @@
 ---
 title: "Modules, Modules, Everywhere, on Maven Central!"
-slug: "modules-modules-everywhere"
 date: "2021-02-24T08:34:58+00:00"
 lastmod: "2021-08-23T12:30:04+00:00"
 description: "Modules, Modules, Modules, Modules, everywhere... when will you publish your first Java module to Maven Central?"

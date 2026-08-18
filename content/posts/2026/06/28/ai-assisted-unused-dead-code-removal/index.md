@@ -1,6 +1,5 @@
 ---
 title: "AI-Assisted Unused & Dead Code Removal"
-slug: "ai-assisted-unused-dead-code-removal"
 date: "2026-06-28T07:19:42+00:00"
 description: "Why Your Codebase Is Forcing AI to Underperform, and What to Do About It Your AI coding assistant is only as good as the codebase it works on. If your - by Frank Delporte"
 canonical: "https://www.azul.com/blog/ai-assisted-unused-dead-code-removal/"
@@ -22,9 +21,7 @@ frozen: false
 
 ## Why Your Codebase Is Forcing AI to Underperform, and What to Do About It
 
-<figure class="alignleft size-large is-resized">
- <img fetchpriority="high" decoding="async" width="1024" height="576" src="ai-assisted-dead-code-removal-1024x576.avif" alt="" class="wp-image-124402" style="width:250px">
-</figure>
+{{< img src="ai-assisted-dead-code-removal-1024x576.avif" class="alignleft size-large is-resized" width="1024" height="576" style="width:250px" >}}
 
 Your AI coding assistant is only as good as the codebase it works on. If your Java application carries years of dead \& unused code, and most do, the AI spends its reasoning budget on code that nobody runs. The result is more hallucinations, worse suggestions, and higher token costs. Here's what to do about it.
 

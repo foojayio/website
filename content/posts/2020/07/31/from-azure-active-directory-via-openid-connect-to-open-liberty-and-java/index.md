@@ -1,6 +1,5 @@
 ---
 title: "Azure Active Directory, OpenID Connect, Open Liberty, and Java"
-slug: "from-azure-active-directory-via-openid-connect-to-open-liberty-and-java"
 date: "2020-07-31T20:31:00+00:00"
 lastmod: "2021-08-23T12:30:34+00:00"
 description: "Let's look at an example of how to configure the Liberty social login feature as OpenID Connect client to secure Java apps with Azure Active Directory."

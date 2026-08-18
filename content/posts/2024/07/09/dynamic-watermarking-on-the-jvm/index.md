@@ -1,6 +1,5 @@
 ---
 title: "Dynamic watermarking on the JVM"
-slug: "dynamic-watermarking-on-the-jvm"
 date: "2024-07-09T07:59:29+00:00"
 lastmod: "2024-07-10T13:51:22+00:00"
 description: "Displaying images on your website makes for an interesting problem: on one side, you want to make them publicly available; on the other, you want to protect them against undue use."

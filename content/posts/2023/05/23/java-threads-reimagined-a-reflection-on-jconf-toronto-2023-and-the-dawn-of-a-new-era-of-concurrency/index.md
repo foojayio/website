@@ -1,6 +1,5 @@
 ---
 title: "JConf Toronto 2023 and the Dawn of a New Era of Concurrency"
-slug: "java-threads-reimagined-a-reflection-on-jconf-toronto-2023-and-the-dawn-of-a-new-era-of-concurrency"
 date: "2023-05-23T16:52:41+00:00"
 lastmod: "2023-05-23T17:02:36+00:00"
 description: "Experience the intersection of expertise, innovation, and camaraderie at JConf Toronto 2023, a unique platform."
@@ -63,8 +62,6 @@ For those who could not attend, presentation slides will be posted on the confer
 
 The '**hallway track**', the networking opportunities at the pub afterwards, and the direct access to presenters are integral parts of the overall experience that virtual interactions cannot replace.
 
-<figure class="wp-block-image size-large is-resized is-style-default">
- <img loading="lazy" decoding="async" src="PXL_20230503_204004325-edited.jpg" alt="" class="wp-image-98406" width="530" height="704">
-</figure>
+{{< img src="PXL_20230503_204004325-edited.jpg" class="size-large is-resized" width="530" height="704" >}}
 
 In conclusion, JConf Toronto 2023 was a confluence of minds and ideas, weaving together the threads of innovation and camaraderie, setting the stage for an even more inspiring event in 2024.

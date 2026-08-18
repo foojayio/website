@@ -1,6 +1,5 @@
 ---
 title: "Lights, Camera, Action: GitHub Actions with Java (Part 1)"
-slug: "github-actions-with-java-part-1"
 date: "2021-10-28T12:36:19+00:00"
 lastmod: "2021-10-28T12:53:46+00:00"
 description: "Learn how to create a GitHub Action job that will build and test a Java-based project using Maven or Gradle."
@@ -21,12 +20,7 @@ frozen: false
 
 #### Have you ever heard of [Jenkins](https://www.jenkins.io/), [Travis](https://www.travis-ci.com/), [TeamCity](https://www.jetbrains.com/teamcity/) or [Bamboo](https://www.atlassian.com/software/bamboo)?
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="github_smothie.jpg" alt="GitHub Actions with Java" class="wp-image-50461" width="332" height="442">
- <figcaption>
-  "Github smoothie" Acarlos1000
- </figcaption>
-</figure>
+{{< img src="github_smothie.jpg" class="alignright size-full is-resized" alt="GitHub Actions with Java" width="332" height="442" caption="'Github smoothie' Acarlos1000" >}}
 
 For those who do not know, these are build infrastructure software services that manage and schedule (notify) the building of software artifacts (yours).
 

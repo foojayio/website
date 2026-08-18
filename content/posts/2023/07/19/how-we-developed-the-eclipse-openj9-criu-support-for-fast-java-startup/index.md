@@ -1,6 +1,5 @@
 ---
 title: "How we developed the Eclipse OpenJ9 CRIU Support for fast Java start-up"
-slug: "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
 date: "2023-07-19T15:33:39+00:00"
 lastmod: "2023-07-20T15:01:07+00:00"
 description: "Java startup is a hot topic. Learn how we made Eclipse OpenJ9 start in milliseconds in the Cloud."

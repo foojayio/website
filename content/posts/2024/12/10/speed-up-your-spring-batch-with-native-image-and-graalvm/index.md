@@ -1,6 +1,5 @@
 ---
 title: "Speed up your Spring Batch with Native Image and GraalVM"
-slug: "speed-up-your-spring-batch-with-native-image-and-graalvm"
 date: "2024-12-10T15:47:53+00:00"
 lastmod: "2025-04-02T06:55:24+00:00"
 description: "Learn how to speed up your Spring Batch jobs using GraalVM Native Image! Discover how to compile batch apps into native executables and more!"
@@ -63,7 +62,7 @@ Download and install from GraalVM Downloads.
 Install Visual Studio (for C++ tools), as GraalVM uses native compilers.  
 <https://www.graalvm.org/latest/getting-started/windows/>  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-114938" class="size-medium wp-image-114938" src="desktop_development_with_C-700x394.png" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="394">
+{{< img src="desktop_development_with_C-700x394.png" class="size-medium" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="394" >}}
 
 Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114938}
 
@@ -78,7 +77,7 @@ Run a PostgreSQL container with Docker
 
 Go to Spring Initializr: <https://start.spring.io>  
 
-<img decoding="async" aria-describedby="caption-attachment-114939" class="size-medium wp-image-114939" src="spring-init-native-image-700x348.png" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="348">
+{{< img src="spring-init-native-image-700x348.png" class="size-medium" alt="Speed up your Spring Batch with Native Image and GraalVM" width="700" height="348" >}}
 
 Speed up your Spring Batch with Native Image and GraalVM{#caption-attachment-114939}
 

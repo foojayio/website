@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #75: JCON Report, Part 4 - Tips and Tricks for Java Devs"
-slug: "foojay-podcast-75"
 date: "2025-07-14T06:47:00+00:00"
 lastmod: "2025-11-13T08:35:49+00:00"
 description: "This is the final part of the JCON 2025 interviews with a lot of tips and tricks! In the three previous podcasts, we featured interviews from the JCON - by Frank Delporte"

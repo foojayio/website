@@ -1,6 +1,5 @@
 ---
 title: "Failover Client with the Hazelcast Viridian Serverless"
-slug: "how-to-create-a-failover-client-using-the-hazelcast-viridian-serverless"
 date: "2023-03-24T14:55:42+00:00"
 lastmod: "2023-03-24T15:05:49+00:00"
 description: "Learn to update a Java client to automatically connect to a secondary, failover cluster if it cannot connect to its original, primary cluster."

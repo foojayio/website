@@ -1,6 +1,5 @@
 ---
 title: "The Problem with Functional Programming"
-slug: "the-problem-with-functional-programming"
 date: "2022-10-27T10:17:32+00:00"
 lastmod: "2022-12-22T10:10:17+00:00"
 description: "Functional programming is amazing, although I think there are a few problems that prevent it from being used more."

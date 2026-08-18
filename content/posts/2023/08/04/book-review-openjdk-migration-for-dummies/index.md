@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"OpenJDK Migration for Dummies\""
-slug: "book-review-openjdk-migration-for-dummies"
 date: "2023-08-04T09:02:46+00:00"
 lastmod: "2024-06-30T11:16:33+00:00"
 description: "Not just a technical manual, Simon Ritter's new book is a companion on a journey through the complexities of OpenJDK migration."
@@ -30,7 +29,7 @@ frozen: false
 
 [
 
-<img decoding="async" class="alignright wp-image-101738" src="dummies-373x510.png" alt="" width="270" height="369">
+{{< img src="dummies-373x510.png" class="alignright" width="270" height="369" >}}
 
 ](https://www.azul.com/openjdk-migration-for-dummies/)
 

@@ -1,6 +1,5 @@
 ---
 title: "A Tentative Comparison of Fault Tolerance Libraries on the JVM"
-slug: "comparison-fault-tolerance-libraries"
 date: "2022-01-11T09:31:19+00:00"
 lastmod: "2022-01-11T09:31:21+00:00"
 description: "If you're implementing microservices or not, chances are that you're calling HTTP endpoints. With HTTP calls, a lot of things can go wrong."

@@ -1,6 +1,5 @@
 ---
 title: "Explaining Java Deserialization Vulnerabilities (Part 2)"
-slug: "explaining-java-deserialization-vulnerabilities-part-2"
 date: "2021-01-28T08:23:00+00:00"
 lastmod: "2021-01-28T08:33:25+00:00"
 description: "In this part, we continue with even more harmful attacks and show you how you can prevent this in your own code."

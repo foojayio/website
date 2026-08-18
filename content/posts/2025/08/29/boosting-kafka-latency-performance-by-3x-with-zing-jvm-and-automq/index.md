@@ -1,6 +1,5 @@
 ---
 title: "Boosting Kafka Latency Performance by 3x with Zing JVM and AutoMQ"
-slug: "boosting-kafka-latency-performance-by-3x-with-zing-jvm-and-automq"
 date: "2025-08-29T12:57:48+00:00"
 lastmod: "2025-08-29T12:57:50+00:00"
 description: "Why is Latency so Important to Kafka? The importance of low latency in Kafka stems from the use cases it enables. Many applications that rely on Kafka are - by John Ceccarelli"

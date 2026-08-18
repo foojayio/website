@@ -1,6 +1,5 @@
 ---
 title: "Java Modules in the Pi4J Project?"
-slug: "java-modules-in-the-pi4j-project"
 date: "2021-12-23T15:28:39+00:00"
 lastmod: "2021-12-24T08:31:26+00:00"
 description: "Java modules have been a big discussion point before in many places. And this is now also causing some headaches in the Pi4J project..."

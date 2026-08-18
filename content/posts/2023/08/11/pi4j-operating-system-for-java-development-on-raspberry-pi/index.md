@@ -1,6 +1,5 @@
 ---
 title: "Pi4J Operating System for Java development on Raspberry Pi"
-slug: "pi4j-operating-system-for-java-development-on-raspberry-pi"
 date: "2023-08-11T10:19:50+00:00"
 lastmod: "2023-08-11T10:21:37+00:00"
 description: "Pi4J is an ideal way to introduce the Java language into experiments with electronic components. And Pi4J OS makes this even easier."

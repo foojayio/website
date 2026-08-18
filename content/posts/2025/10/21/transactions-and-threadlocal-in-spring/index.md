@@ -1,6 +1,5 @@
 ---
 title: "Transactions and ThreadLocal in Spring"
-slug: "transactions-and-threadlocal-in-spring"
 date: "2025-10-21T13:27:00+00:00"
 lastmod: "2025-10-21T13:27:02+00:00"
 description: "Though I used Spring transactions a lot via the @Transactional annotation, I never opened thought about looking at their implementation."
@@ -36,7 +35,7 @@ I started with doing [a search](https://github.com/spring-projects/) for `Thread
 >
 > Yes, **Spring transactions** use `ThreadLocal` as part of their transaction management mechanism. Here's an explanation of how it works:
 >
-> 
+> *** ** * ** ***
 >
 > **How Spring Transactions Use `ThreadLocal`**
 >

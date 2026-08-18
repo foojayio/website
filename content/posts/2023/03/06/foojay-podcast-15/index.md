@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #15: Japan JUG"
-slug: "foojay-podcast-15"
 date: "2023-03-06T08:30:46+00:00"
 lastmod: "2025-11-13T09:13:40+00:00"
 description: "Last month we were in the US, and this time we travel to the other side of the world as we spoke with the organizers of the Japan JUG!"

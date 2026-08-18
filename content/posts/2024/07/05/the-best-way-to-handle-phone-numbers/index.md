@@ -1,6 +1,5 @@
 ---
 title: "The Best Way to Handle Phone Numbers"
-slug: "the-best-way-to-handle-phone-numbers"
 date: "2024-07-05T07:00:23+00:00"
 lastmod: "2024-09-18T06:31:21+00:00"
 description: "Processing phone numbers seems complicated at first glance because of the many different formats."

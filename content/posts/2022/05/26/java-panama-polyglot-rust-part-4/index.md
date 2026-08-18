@@ -1,6 +1,5 @@
 ---
 title: "Java Panama Polyglot (Rust) Part 4"
-slug: "java-panama-polyglot-rust-part-4"
 date: "2022-05-26T08:33:02+00:00"
 lastmod: "2022-05-26T08:33:05+00:00"
 description: "By exposing native Rust functions, you can be easily accessed from Java code using Project Panama's Foreign Function Access APIs."
@@ -167,12 +166,7 @@ cargo build
 
 The output should look like the following:
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="Screen-Shot-2022-05-20-at-1.23.55-AM.png" alt="" class="wp-image-56103" width="725" height="271">
- <figcaption>
-  Executing <code>cargo build</code>
- </figcaption>
-</figure>
+{{< img src="Screen-Shot-2022-05-20-at-1.23.55-AM.png" class="size-full is-resized" width="725" height="271" caption="Executing cargo build" >}}
 
 This may take awhile. When this is done you can view the contents of `lib.h` as shown below:
 

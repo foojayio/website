@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of July 2023"
-slug: "javafx-links-of-july-2023"
 date: "2023-07-28T07:50:36+00:00"
 lastmod: "2023-07-28T07:54:07+00:00"
 description: "Changes to the JavaFX core, new and enhanced applications, games, component libraries, tools, podcasts, videos, tutorials, and books!"
@@ -15,7 +14,7 @@ related_posts:
   - "foojay-podcast-25"
   - "javafx-links-of-june-2023"
   - "javafx-links-of-may-2023"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "JUG PH Meetup 4 and 5 Report"
-slug: "jug-ph-meetup-4-and-5"
 date: "2024-01-14T13:26:26+00:00"
 lastmod: "2024-01-14T13:26:27+00:00"
 description: "The JUG PH Meetup 4 and 5 Report. This report focuses on the meetups that happened in September and November 2023."

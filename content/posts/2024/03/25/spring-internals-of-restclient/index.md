@@ -1,6 +1,5 @@
 ---
 title: "Spring Framework – Internals of RestClient"
-slug: "spring-internals-of-restclient"
 date: "2024-03-25T11:32:54+00:00"
 lastmod: "2024-03-31T01:37:12+00:00"
 description: "Experience the ease and efficiency of Spring Framework RestClient. Simplify your RESTful API integration and unlock the full potential of your applications."
@@ -24,7 +23,7 @@ frozen: false
 
 This framework enables the creation of complex enterprise applications in a more streamlined and refined manner, boasting a sophisticated diffusion and transformer architecture.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-103465" src="RestClient_1-700x394.jpg" alt="Spring RestClient" width="700" height="394">
+{{< img src="RestClient_1-700x394.jpg" class="size-medium" alt="Spring RestClient" width="700" height="394" >}}
 
 Spring RestClient
 

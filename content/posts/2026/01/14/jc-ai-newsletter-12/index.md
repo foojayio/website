@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #12"
-slug: "jc-ai-newsletter-12"
 date: "2026-01-14T07:15:44+00:00"
 lastmod: "2026-02-05T20:40:57+00:00"
 description: "First of all, Happy New Year 2026! This year is designated in the Chinese Calendar as the Year of the Fire Horse (starting on February 17.). The year 2026 - by Miro Wengner"
@@ -19,10 +18,10 @@ categories:
   - "Research"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
   - "jc-ai-newsletter-11"
-  - "jc-ai-newsletter-9"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Schedule for Foojay Virtual OpenJDK 17+ JUG Tour"
-slug: "schedule-for-foojay-virtual-openjdk-17-jug-tour"
 date: "2021-08-10T12:04:52+00:00"
 lastmod: "2021-12-10T12:59:46+00:00"
 description: "To celebrate the OpenJDK 17 & Foojay.io as a vendor-neutral community platform for its users, we’re kicking off the Virtual Foojay JUG Tour!"

@@ -1,6 +1,5 @@
 ---
 title: "Equals and Hashcode Implementation Considerations"
-slug: "equals-and-hashcode-implementation-considerations"
 date: "2021-11-21T11:55:39+00:00"
 lastmod: "2021-11-21T11:55:41+00:00"
 description: "I always struggled with how to implement equals and hashcode, until I learned about the difference between entities and value objects!"

@@ -1,6 +1,5 @@
 ---
 title: "Developer Observability, KoolKits and Reliability"
-slug: "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
 date: "2022-03-16T14:01:52+00:00"
 lastmod: "2022-03-16T17:58:45+00:00"
 description: "Interview with Lightruns Tom Granot about developer observability, how it's different? K8S, KoolKits and kubectl debug."

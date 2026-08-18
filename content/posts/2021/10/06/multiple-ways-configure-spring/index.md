@@ -1,6 +1,5 @@
 ---
 title: "Multiple Ways to Configure Spring"
-slug: "multiple-ways-configure-spring"
 date: "2021-10-06T08:55:34+00:00"
 lastmod: "2021-10-06T08:55:35+00:00"
 description: "Alternatives are available to configure your Spring app. I'd like to list them, leaving Spring Boot out of the picture on purpose."
@@ -36,7 +35,7 @@ A couple of concepts are central in Spring. The related documentation doesn't de
 * **Bean Definition** : A bean definition is the set of properties given to the Spring container and that the requested bean will have, *e.g.*, class, name, scope, dependencies, etc.
 * **Context**: A context is a bean factory with additional capabilities (mainly internationalization and event publishing)
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-49678" src="spring-concepts-700x492.png" alt="" width="700" height="492">
+{{< img src="spring-concepts-700x492.png" class="aligncenter size-medium" width="700" height="492" >}}
 
 To configure a Spring application, one creates one or more contexts and registers the necessary bean definitions in the desired ones. In the following sections, we will configure the following simple model:
 
@@ -227,7 +226,7 @@ GenericApplicationContext().apply {             // 1
 
 All the previous configuration alternatives provide an abstraction layer over bean definitions. Then, the container creates beans out of bean definitions. We can bypass these abstraction layers and directly use the bean definition API.
 
-<img decoding="async" class="aligncenter size-medium wp-image-49680" src="bean-definition-class-700x312.png" alt="" width="700" height="312">
+{{< img src="bean-definition-class-700x312.png" class="aligncenter size-medium" width="700" height="312" >}}
 
 Let's first define a specialized bean definition:
 
@@ -271,7 +270,7 @@ context.refresh();                                                           // 
 
 Spring provides a simple API for simple bean definitions, so we don't need to create dedicated bean definition classes. This mechanism creates such a definition when necessary.
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-49681" src="bean-registration-700x156.png" alt="" width="700" height="156">
+{{< img src="bean-registration-700x156.png" class="aligncenter size-medium" width="700" height="156" >}}
 
 Here's the code to create the sample configuration:
 

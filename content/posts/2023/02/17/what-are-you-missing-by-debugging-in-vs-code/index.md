@@ -1,6 +1,5 @@
 ---
 title: "What are you Missing by Debugging in VS Code?"
-slug: "what-are-you-missing-by-debugging-in-vs-code"
 date: "2023-02-17T16:20:16+00:00"
 lastmod: "2023-02-17T16:20:17+00:00"
 description: "16 missing features in the VS code debugger that are available in IntelliJ. Are they worth switching your main IDE? Detailed lists and videos!"

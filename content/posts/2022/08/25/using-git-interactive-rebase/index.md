@@ -1,6 +1,5 @@
 ---
 title: "Using Git Interactive Rebase"
-slug: "using-git-interactive-rebase"
 date: "2022-08-25T09:32:22+00:00"
 lastmod: "2023-08-03T08:24:38+00:00"
 description: "This tutorial shows you how to use Git interactive rebase from the IntelliJ IDEA UI as well as the command line."

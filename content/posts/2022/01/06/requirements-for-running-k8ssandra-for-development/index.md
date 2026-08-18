@@ -1,6 +1,5 @@
 ---
 title: "Requirements for Running K8ssandra for Development"
-slug: "requirements-for-running-k8ssandra-for-development"
 date: "2022-01-06T12:15:27+00:00"
 lastmod: "2022-01-06T12:15:55+00:00"
 description: "Learn how to configure K8ssandra for your development machine, and get ready to start building cloud-native apps."

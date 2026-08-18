@@ -1,6 +1,5 @@
 ---
 title: "Testing Spring Boot JMS with ActiveMQ Artemis and Testcontainers"
-slug: "testing-spring-boot-jms-with-activemq-artemis-and-testcontainers"
 date: "2023-12-12T07:55:03+00:00"
 lastmod: "2023-12-12T07:55:05+00:00"
 description: "Testcontainers is a fantastic way to start resources as containers. Even if there is no pre-made container, you can always use GenericContainer to run virtually any container image."

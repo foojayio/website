@@ -1,6 +1,5 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 2)"
-slug: "creating-a-javafx-world-clock-from-scratch-part-2"
 date: "2020-12-24T09:46:11+00:00"
 lastmod: "2022-04-30T03:36:27+00:00"
 description: "Join Carl Dea in his JavaFX clock tutorial series where he shows you how he animates the clock face's hands using basic trigonometry."
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
   - "new-video-series-javafx-in-action-part-1"
-  - "javafx-links-of-june-2026"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -31,7 +30,7 @@ If you have not read Part 1[\[2\]](https://foojay.io/today/creating-a-javafx-wor
 
 In Part 2, I will show you how I animate the clock face's hands using basic trigonometry. If you want to skip the tutorial and go straight to the source code head over to GitHub WorldClock [\[4\]](https://github.com/carldea/worldclock "JavaFX WorldClock")  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-36624" class="size-medium wp-image-36624" src="Screen-Shot-2020-12-19-at-9.35.09-PM-280x510.png" alt="Creating a JavaFX World Clock from Scratch (Part 2)" width="280" height="510">
+{{< img src="Screen-Shot-2020-12-19-at-9.35.09-PM-280x510.png" class="size-medium" alt="Creating a JavaFX World Clock from Scratch (Part 2)" width="280" height="510" >}}
 
 *Creating a JavaFX World Clock from Scratch (Part 2)*{#caption-attachment-36624}
 
@@ -41,7 +40,7 @@ First lets give a quick recap of Part 1. In the first part I discussed my design
 
 I want to give a shout out to the folks from GluonHQ[\[3\]](https://gluonhq.com "GluonHQ") who maintain and provide the Scene Builder tool free of charge. Lets help Gluon keep this tool free by testing, contributing or requesting for support or services at Gluon Services. [\[1\]](https://gluonhq.com/services/ "SceneBuilder Support")  
 
-<img decoding="async" aria-describedby="caption-attachment-36633" class="size-medium wp-image-36633" src="Screen-Shot-2020-12-20-at-6.38.48-PM-484x510.png" alt="Gluon Scene Builder" width="484" height="510">
+{{< img src="Screen-Shot-2020-12-20-at-6.38.48-PM-484x510.png" class="size-medium" alt="Gluon Scene Builder" width="484" height="510" >}}
 
 *Gluon Scene Builder*{#caption-attachment-36633}
 
@@ -63,7 +62,7 @@ To change the length of the arc position around the clock face you will need to 
 | startAngle | 0.0   | Start angle (in degrees). Zero is at the 3'o clock position moving counter clockwise     |
 | length     | 90.0  | Extent angle (in degrees). The angle offset from the start angle going counter clockwise |
 
-<img loading="lazy" decoding="async" aria-describedby="caption-attachment-36628" class="size-medium wp-image-36628" src="Screen-Shot-2020-12-19-at-10.23.06-PM-626x510.png" alt="Drawing the Hour Hand Arc" width="626" height="510">
+{{< img src="Screen-Shot-2020-12-19-at-10.23.06-PM-626x510.png" class="size-medium" alt="Drawing the Hour Hand Arc" width="626" height="510" >}}
 
 *Drawing the Hour Hand*{#caption-attachment-36628}
 
@@ -162,7 +161,7 @@ After referencing the Arc the controller code can now update the positions on ev
 int hourStartAngle = startAngleHour.apply(hour);
 int hourExtentAngle = extentAngleHour.apply(hour);
 hourHandArc.setStartAngle(hourStartAngle);
-hourHandArc.setLength(hourExtentAngle);<code class="language-java"></code>
+hourHandArc.setLength(hourExtentAngle);
 ```
 
 Similar to a time lapse an animation of the hour hand is shown below. It doesn't show the hour hand tip, more on that next.  

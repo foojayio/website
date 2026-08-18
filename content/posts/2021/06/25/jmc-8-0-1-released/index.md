@@ -1,6 +1,5 @@
 ---
 title: "Announcement: JMC 8.0.1 Has Been Released!"
-slug: "jmc-8-0-1-released"
 date: "2021-06-25T18:10:26+00:00"
 lastmod: "2021-06-25T18:19:57+00:00"
 description: "The 8.0.1-ga tag was just set in the jmc8 repository on GitHub, a patch update release, and will therefore not include any new features."

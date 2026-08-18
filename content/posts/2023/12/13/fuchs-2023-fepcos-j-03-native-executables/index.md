@@ -1,6 +1,5 @@
 ---
 title: "FEPCOS-J: Native executables of Java-coded networked systems"
-slug: "fuchs-2023-fepcos-j-03-native-executables"
 date: "2023-12-13T12:13:07+00:00"
 lastmod: "2023-12-13T12:14:17+00:00"
 description: "An example shows how Java developers can build native executables of declaratively composed networked systems by using FEPCOS-J and GraalVM."
@@ -44,9 +43,17 @@ I would also like to ask you to [help me to make FEPCOS-J a Free/Libre and Open-
 
 ## FEPCOS-J builds native executables by using GraalVM
 
-In its current prototypical state, the FEPCOS-J processor ***fjp*** accepts the parameter `--native`, as follows:
+In its current prototypical state, the FEPCOS-J processor ***fjp*** accepts the parameter
 
-`fjp --native`
+```
+--native
+```
+
+, as follows:
+
+```
+fjp --native
+```
 
 This command causes ***fjp*** to build the default output and a native executable of the system export module by invoking ***native-image*** with application-tailored parameters afterwards.
 
@@ -60,11 +67,37 @@ The remaining section delineates the interaction between FEPCOS-J and GraalVM us
 
 There are various ways to build native executables with GraalVM, in particular by using the following command:
 
-`native-image -o <name> -p <module_path> -m <module>/<main_class>`
+```
+native-image -o <name> -p <module_path> -m <module>/<main_class>
+```
 
-To explain, `-o <name>` specifies the name of the native executable, and `-p <module_path>` specifies the module path, which must contain all modules of the application to be built.
+To explain,
 
-Further, `-m <module>/<main_class>` specifies the module and the class, which contains the `main(...)` method.
+```
+-o <name>
+```
+
+specifies the name of the native executable, and
+
+```
+-p <module_path>
+```
+
+specifies the module path, which must contain all modules of the application to be built.
+
+Further,
+
+```
+-m <module>/<main_class>
+```
+
+specifies the module and the class, which contains the
+
+```java
+main(…)
+```
+
+method.
 
 To sum up, ***native-image*** can build native executables with a definable name out of a Java module, provided that the *name* , the *module path* , and the *main class* are properly specified as parameters.
 
@@ -111,10 +144,16 @@ A Java developer programs the system specification *sys.spec* within the directo
 
 The FEPCOS-J Processor ***fjp*** generates the following modules and stores them as modular Jar files in the directory *${PROJ}/tgt*.
 
-| Module Name |                                                                                                                                                                                                                                       Explanation                                                                                                                                                                                                                                       |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| sys.exp     | This module is the ***fjp*** -generated system export module. It includes all system-specific Java classes that provide access to the specified system via an IPv4 network. In particular, it contains the generated class **sys.exp.Main** that has a `main(...)` method, which starts the correctly parametrized FEPCOS-J Exporter. For the sake of completeness, ***fjx*** is a start script that calls ***java*** , specifying the module path and the main class **sys.exp.Main**. |
-| sys.imp     | This module is the ***fjp***-generated system import module. It contains a generated system interface that allows users to access the specified system both blockingly and concurrently.                                                                                                                                                                                                                                                                                                |
+| Module Name |                                                                                                                                                                                                                                              Explanation                                                                                                                                                                                                                                               |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| sys.exp     | This module is the ***fjp*** -generated system export module. It includes all system-specific Java classes that provide access to the specified system via an IPv4 network. In particular, it contains the generated class **sys.exp.Main** that has a 
+
+```java
+main(…)
+```
+
+ method, which starts the correctly parametrized FEPCOS-J Exporter. For the sake of completeness, ***fjx*** is a start script that calls ***java*** , specifying the module path and the main class **sys.exp.Main**. |
+| sys.imp     | This module is the ***fjp***-generated system import module. It contains a generated system interface that allows users to access the specified system both blockingly and concurrently.                                                                                                                                                                                                                                                                                                               |
 
 **Tab. 3) Modules generated by fjp.**
 
@@ -126,17 +165,23 @@ Combining the requirements of ***native-image*** with the properties of FEPCOS-J
 
 Firstly,
 
-`fjp`
+```
+fjp
+```
 
 generates the system import module and the system export module out of the system specification.
 
 Secondly,
 
-`MP=${FEPCOS_HOME}/mlib:tgt[:mlib]`
+```
+MP=${FEPCOS_HOME}/mlib:tgt[:mlib]
+```
 
 specifies the module path *${MP}* . The directory *mlib* is optional and is only appended to the module path if the system specification requires further modules. Finally,
 
-`native-image -o sys.exp -p ${MP} -m sys.exp/sys.exp.Main`
+```
+native-image -o sys.exp -p ${MP} -m sys.exp/sys.exp.Main
+```
 
 generates the native executable *sys.exp* out of the system export module. So, the native executable and the system export module have the same name.
 
@@ -172,20 +217,45 @@ My last post [\[2\]](#references) explains in detail how to use FEPCOS-J to real
 
 In short, the development workflow is almost identical, solely differing in that:
 
-* the calling of `fjp --native` substitutes the calling of `fjp`;
-* the running of `fjx` with the generated system export module is replaced by the running of the generated native executable;
+* the calling of 
+
+```
+fjp --native
+```
+
+  substitutes the calling of
+
+```
+fjp
+```
+
+  ;
+* the running of 
+
+```
+fjx
+```
+
+  with the generated system export module is replaced by the running of the generated native executable;
 * a native executable of the system user *app* is manually built and started.
 
-**Figs. 3-6** depict screenshots of the native builds, including details. You will see that the outputs of `fjp --native` and `native-image` are piped to a file for evaluation afterwards.
+**Figs. 3-6** depict screenshots of the native builds, including details. You will see that the outputs of
+
+```
+fjp --native
+```
+
+and
+
+```
+native-image
+```
+
+are piped to a file for evaluation afterwards.
 
 #### Build and run *adder.exp*
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" width="1024" height="512" src="fuchs2023-screenshot-fepcos-j-native-build-adder.png" alt="Running the native executable adder.exp built by using FEPCOS-J: Calling fjp --native within the project directory causes the execution of native-image, which generates the native executable adder.exp. Further, the file adder.out contains the piped output for subsequent evaluation. Running adder.exp provides access to the system internet socket 10.1.0.1:8001, which is specified as a parameter." class="wp-image-102878" style="aspect-ratio:2;width:840px;height:auto">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 3) Running the native executable <em>adder.exp</em> built by using FEPCOS-J:</strong> Calling <em>fjp --native</em> within the project directory <strong>(1)</strong> causes the execution of <em>native-image</em>, which generates the native executable <em>adder.exp</em> <strong>(2)</strong>. Further, the file <em>adder.out</em> contains the piped output for subsequent evaluation. Running <em>adder.exp</em> <strong>(3)</strong> provides access to the system internet socket 10.1.0.1:8001, which is specified as a parameter.
- </figcaption>
-</figure>
+{{< img src="fuchs2023-screenshot-fepcos-j-native-build-adder.png" class="size-full is-resized" alt="Running the native executable adder.exp built by using FEPCOS-J: Calling fjp --native within the project directory causes the execution of native-image, which generates the native executable adder.exp. Further, the file adder.out contains the piped output for subsequent evaluation. Running adder.exp provides access to the system internet socket 10.1.0.1:8001, which is specified as a parameter." width="1024" height="512" style="aspect-ratio:2;width:840px;height:auto" caption="Fig. 3) Running the native executable adder.exp built by using FEPCOS-J: Calling fjp --native within the project directory (1) causes the execution of native-image, which generates the native executable adder.exp (2). Further, the file adder.out contains the piped output for subsequent evaluation. Running adder.exp (3) provides access to the system internet socket 10.1.0.1:8001, which is specified as a parameter." >}}
 
 #### Build and run *multiplier.exp*
 
@@ -461,7 +531,13 @@ In other words, all required FEPCOS-J modules together contribute less than 1% t
 
 The rebuild of the example scenario showed that:
 
-* The prototype of FEPCOS-J and GraalVM can interact, such that `fjp --native` starts ***native-image*** with the correct parameters.
+* The prototype of FEPCOS-J and GraalVM can interact, such that 
+
+```
+fjp --native
+```
+
+  starts ***native-image*** with the correct parameters.
 * It is consequently possible to use FEPCOS-J to automatically build native executables for Java-coded networked systems, in particular multithreaded servers.
 * The building of the native executable on the x86_64 computers took 2m 23s or 2m 58s, respectively.
 * The building of the native executable on the aarch64 computers took 11m 41s or 16m 32s, respectively.

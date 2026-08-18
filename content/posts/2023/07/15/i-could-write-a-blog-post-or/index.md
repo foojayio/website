@@ -1,6 +1,5 @@
 ---
 title: "I could write a blog post, or ..."
-slug: "i-could-write-a-blog-post-or"
 date: "2023-07-15T07:09:33+00:00"
 lastmod: "2023-07-15T07:09:34+00:00"
 description: "Go out, visit the world, have friends, and read my blog post on flame-graph construction mid-next week."

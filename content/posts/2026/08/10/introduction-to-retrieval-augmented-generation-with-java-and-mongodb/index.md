@@ -31,7 +31,7 @@ In this tutorial, you'll:
 You can find all the code presented in this tutorial in the GitHub repository:
 
 ```
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e69677a4e69677a667b6c206d6163">[email protected]</a>:soujava/mongodb-rag.git
+[email protected]:soujava/mongodb-rag.git
 ```
 
 ## Prerequisites

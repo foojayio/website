@@ -1,6 +1,5 @@
 ---
 title: "[Unit] Testing Supabase in Kotlin using Test Containers - PART 2"
-slug: "unit-testing-supabase-in-kotlin-using-test-containers-part-2"
 date: "2023-12-13T08:37:47+00:00"
 lastmod: "2023-12-13T08:48:41+00:00"
 description: "In this article we continue diving into TestContainers and Supabase, and run unit tests against a full local self-hosted Supabase."

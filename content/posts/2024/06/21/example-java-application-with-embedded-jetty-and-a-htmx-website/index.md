@@ -1,6 +1,5 @@
 ---
 title: "Example Java Application with Embedded Jetty and a htmx Website"
-slug: "example-java-application-with-embedded-jetty-and-a-htmx-website"
 date: "2024-06-21T08:59:42+00:00"
 lastmod: "2024-06-21T08:59:43+00:00"
 description: "I was experimenting with a Java application that can act as a web server and includes the user interface HTML-files that get modified with htmx, to replace certain parts of the HTML with other ones created in Java."
@@ -42,7 +41,7 @@ It's a JavaScript library you add to your website, that allows you to "swap" HTM
 The htmx website gives this minimal example for a webpage with the action: _"When a user clicks on this button, issue an AJAX request to `MARKDOWN_HASH15537f6d76c78712ccd209e4e3f83362MARKDOWN`*HASH*, and replace the entire button with the HTML response":
 
 ```
-<script src="https://unpkg.com/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b435f46530544594c6b1a0512051a1a">[email protected]</a>"></script>
+<script src="https://unpkg.com/[email protected]"></script>
 <!-- have a button POST a click via AJAX -->
 <button hx-post="/clicked" hx-swap="outerHTML">
     Click Me
@@ -195,12 +194,7 @@ private void addWebSocketHandler(ContextHandlerCollection contextHandlerCollecti
 
 I use the Firefox plugin ["Simple WebSocket Client"](https://addons.mozilla.org/en-US/firefox/addon/simple-websocket-client/) to test WebSocket communication to make sure it works, before diving into the HTML client implementation... As you can see in the screenshot, the server sends a timestamp every second and answers when you send a message starting with "echo".
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a6bc8b7446c2&quot;}" data-wp-interactive="core/image" data-wp-key="6a6bc8b7446c2" class="wp-block-image size-thumbnail wp-lightbox-container">
- <img fetchpriority="high" decoding="async" width="300" height="260" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" src="websocket-test-300x260.png" alt="" class="wp-image-107461"><button class="lightbox-trigger" type="button" aria-haspopup="dialog" data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel" data-wp-init="callbacks.initTriggerButton" data-wp-on--click="actions.showLightbox" data-wp-style--right="state.thisImage.buttonRight" data-wp-style--top="state.thisImage.buttonTop">
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
-   <path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
-  </svg></button>
-</figure>
+{{< img src="websocket-test-300x260.png" class="size-thumbnail" width="300" height="260" >}}
 
 ### htmx web requests
 

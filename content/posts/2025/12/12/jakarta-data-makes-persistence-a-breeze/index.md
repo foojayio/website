@@ -1,6 +1,5 @@
 ---
 title: "Jakarta Data Makes Persistence a Breeze"
-slug: "jakarta-data-makes-persistence-a-breeze"
 date: "2025-12-12T11:55:58+00:00"
 description: "In this blog post, we look at what Jakarta Data brings to the table and how it can transform everyday Java development tasks."
 canonical: "https://payara.fish/downloads/payara-platform-community-edition/"

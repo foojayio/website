@@ -1,6 +1,5 @@
 ---
 title: "End-to-End Tracing with OpenTelemetry"
-slug: "end-to-end-tracing-opentelemetry"
 date: "2022-08-29T14:24:00+00:00"
 lastmod: "2022-09-03T19:40:42+00:00"
 description: "Let's focus on tracing by following a request across an API gateway, two apps based on different tech stacks, and their respective databases."
@@ -55,7 +54,7 @@ Two critical concepts emerge from the document:
 * A **trace** follows the path of a request that spans multiple components
 * A **span** is bound to a single component and linked to another span by a child-parent relationship
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-57373 size-medium" src="trace-spans-700x268.png" alt="" width="700" height="268">
+{{< img src="trace-spans-700x268.png" class="aligncenter size-medium" width="700" height="268" >}}
 
 At the time of this writing, the specification is a W3C recommendation, which is the **final** stage.
 

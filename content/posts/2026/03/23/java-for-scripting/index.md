@@ -1,6 +1,5 @@
 ---
 title: "How to Use Java as a Scripting Language"
-slug: "java-for-scripting"
 date: "2026-03-23T10:00:19+00:00"
 lastmod: "2026-03-23T10:48:35+00:00"
 description: "Discover how Java has evolved into a powerful scripting language, eliminating boilerplate and enabling instant execution for automation tasks"
@@ -16,10 +15,10 @@ categories:
   - "JEPs"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

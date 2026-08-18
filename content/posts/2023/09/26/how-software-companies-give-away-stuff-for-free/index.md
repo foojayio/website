@@ -1,6 +1,5 @@
 ---
 title: "How do software companies give away stuff for free?"
-slug: "how-software-companies-give-away-stuff-for-free"
 date: "2023-09-26T14:34:20+00:00"
 lastmod: "2023-09-26T14:39:57+00:00"
 description: "There are many different ways to give away stuff for free and in this article I try and explain the main approaches that software companies use and the reasoning behind these methods."

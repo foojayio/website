@@ -1,6 +1,5 @@
 ---
 title: "Ask a Lille Dev"
-slug: "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
 date: "2026-06-16T00:35:19+00:00"
 description: "Ask a Lille Dev: Java developers from DevLille 2026 share insights on Spring Boot, Quarkus, IntelliJ, software quality, tech communities, architecture, and DevOps."
 authors:
@@ -15,10 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "idempotent-spring-boot-starter"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "spring-ai-agents-no-second-runtime"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-  - "foojay-podcast-91"
 frozen: false
 ---
 

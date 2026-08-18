@@ -1,6 +1,5 @@
 ---
 title: "DevOps 101 Part III: Package Management"
-slug: "devops-101-part-iii-package-management"
 date: "2021-03-24T07:35:47+00:00"
 lastmod: "2021-03-24T07:35:50+00:00"
 description: "DevOps has a ton of jargon in it, though. It’s like running into a brick wall. Here, I'll explain package managers!"

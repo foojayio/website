@@ -1,6 +1,5 @@
 ---
 title: "Vaadin 24: Java 17, Jakarta EE 10, Servlet 6, Spring Boot 3"
-slug: "vaadin-24-java-17-jakarta-ee-10-servlet-6-spring-boot-3"
 date: "2023-03-22T09:22:27+00:00"
 lastmod: "2023-03-22T09:25:55+00:00"
 description: "Vaadin 24 is a step forward with a new technology baseline that includes Java 17, Jakarta EE 10, Servlet 6.0, Spring 6.0, and Spring Boot 3."

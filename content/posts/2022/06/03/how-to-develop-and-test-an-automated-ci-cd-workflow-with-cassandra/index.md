@@ -1,6 +1,5 @@
 ---
 title: "How to Develop and Test an Automated CI/CD Workflow with Cassandra"
-slug: "how-to-develop-and-test-an-automated-ci-cd-workflow-with-cassandra"
 date: "2022-06-03T08:52:14+00:00"
 lastmod: "2022-06-03T08:55:08+00:00"
 description: "Learn how to get started today developing a CI/CD workflow using Apache Cassandra with a GitHub Actions runner!"

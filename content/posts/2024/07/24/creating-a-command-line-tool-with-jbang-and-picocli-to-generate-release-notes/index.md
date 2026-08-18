@@ -1,6 +1,5 @@
 ---
 title: "Creating a Command Line Tool with JBang and PicoCLI to Generate Release Notes"
-slug: "creating-a-command-line-tool-with-jbang-and-picocli-to-generate-release-notes"
 date: "2024-07-24T09:44:36+00:00"
 lastmod: "2024-07-24T13:56:35+00:00"
 description: "Learn how to create a Java command-line tool with JBang and PicoCLI to automate generating release notes from GitHub."
@@ -374,7 +373,7 @@ Usage: release_notes [-f=<outputFile>] [-o=<outputFormat>] -r=<repo>
 
 It will print on the terminal if we don't want to save it in any file.
 
-<img decoding="async" class="alignnone size-medium wp-image-113687" src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.png" alt="" width="700" height="290">
+{{< img src="Screenshot-2024-07-18-at-9.46.00-PM-700x290.png" class="size-medium" width="700" height="290" >}}
 
 That's it.
 

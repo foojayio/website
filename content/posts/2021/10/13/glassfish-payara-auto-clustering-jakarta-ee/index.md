@@ -1,6 +1,5 @@
 ---
 title: "GlassFish & Payara Auto-Clustering for Jakarta EE Applications"
-slug: "glassfish-payara-auto-clustering-jakarta-ee"
 date: "2021-10-13T13:27:30+00:00"
 lastmod: "2021-10-13T13:29:34+00:00"
 description: "Check out out-of-box GlassFish & Payara auto-clustering implementation details and infrastructure topology specifics!"
@@ -21,9 +20,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img fetchpriority="high" decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2021/09/GlassFish-and-Payara-clustering.png" alt="" class="wp-image-55851" width="400" height="216">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/09/GlassFish-and-Payara-clustering.png" class="alignleft is-resized" width="400" height="216" >}}
 
 Ensuring trouble-proof 24/7 service delivery is among one of the most discussed areas in cloud hosting for the last few years. And the very obvious and commonly used solution here is building a clustered infrastructure for your project.
 
@@ -42,9 +39,7 @@ Starting with the Jelastic 5.5.3 version, a new **Auto-Clustering** feature is i
 
 Choose either *GlassFish* or *Payara* application server on the **Java** tab of the wizard. Then, in the central part, locate and enable the appropriate ***Auto-Clustering*** switcher. Configure the remaining settings up to your need including [horizontal scaling](https://docs.jelastic.com/horizontal-scaling) to get a reliable solution from the start.  
 
-<figure class="aligncenter is-resized">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2021/09/01-415x1024.png" alt="" class="wp-image-55857" width="179" height="442">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/09/01-415x1024.png" class="aligncenter is-resized" width="179" height="442" >}}
 
 **Tip:** The ***Auto-Clustering*** feature is also available for some other software templates (e.g. [*MySQL*](https://jelastic.com/blog/mysql-mariadb-database-auto-clustering-cloud-hosting/), [*MariaDB*](https://jelastic.com/blog/mysql-mariadb-database-auto-clustering-cloud-hosting/)*,* [PostgreSQL](https://jelastic.com/blog/postgresql-auto-clustering-master-slave-replication/), [Tomcat/TomEE](https://jelastic.com/blog/tomcat-tomee-clustering-automation/), [WildFly](https://jelastic.com/blog/wildfly-managed-domain-automatic-clustering-scaling/), [Shared Storage](https://docs.jelastic.com/shared-storage-container/), [MongoDB](https://jelastic.com/blog/mongodb-auto-clustering/) and [*Couchbase*](https://docs.jelastic.com/auto-clustering/#couchbase)).
 
@@ -57,9 +52,7 @@ For production, clustering is virtually a mandatory option to ensure your applic
   * administration server is linked to all workers within the application server layer with the *DAS* alias hostname, which can be used by workers for further interaction
   * to enable proper nodes connectivity and control, the system automatically generates an SSH keypair for DAS node and places it within a [volume](https://docs.jelastic.com/docker-volumes), mounted to all the rest of cluster instances
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2018/11/glassfish-and-payara-wizard-topology-1024x445.png" alt="auto clustering topology" class="wp-image-30885" width="828" height="360">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2018/11/glassfish-and-payara-wizard-topology-1024x445.png" class="is-resized" alt="auto clustering topology" width="828" height="360" >}}
 
 ## Session Replication Implementation
 

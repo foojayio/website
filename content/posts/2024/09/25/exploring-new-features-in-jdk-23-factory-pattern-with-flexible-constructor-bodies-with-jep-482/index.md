@@ -1,6 +1,5 @@
 ---
 title: "JDK 23: Factory Pattern with Flexible Constructor Bodies"
-slug: "exploring-new-features-in-jdk-23-factory-pattern-with-flexible-constructor-bodies-with-jep-482"
 date: "2024-09-25T11:14:01+00:00"
 lastmod: "2024-10-06T09:21:04+00:00"
 description: "Let's take a look at one particular brand new preview feature added to the latest JDK release 23 [2], JEP-482: Flexible Constructor Bodies in its second iteration."

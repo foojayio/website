@@ -1,6 +1,5 @@
 ---
 title: "Announcement: Virtual Foojay OpenJDK 17+ JUG Tour"
-slug: "virtual-foojay-openjdk-17-jug-tour"
 date: "2021-07-21T16:07:16+00:00"
 lastmod: "2022-05-19T19:11:32+00:00"
 description: "During September and October, contributors to Foojay will make a whistle stop tour through as many JUGs as possible, via virtual meetups!"

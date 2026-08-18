@@ -1,6 +1,5 @@
 ---
 title: "API Versioning"
-slug: "api-versioning"
 date: "2024-01-22T09:00:23+00:00"
 lastmod: "2024-01-22T09:00:25+00:00"
 description: "In this short article, we detail the three options for versioning HTTP APIs: path-based, query-based, and header-based."
@@ -134,7 +133,7 @@ routes:
 
 The last alternative for versioning is to use HTTP headers. Here's a custom header:
 
-```vb
+```visualbasic
 GET / HTTP1.1
 
 Version: 1
@@ -153,7 +152,7 @@ The agreed-upon content type format follows the pattern `application/vnd.aaa.bbb
 
 Hence, here's a possible request:
 
-```vb
+```visualbasic
 GET / HTTP1.1
 
 Accept: application/vnd.ch.frankel.myservice.v1+json
@@ -161,7 +160,7 @@ Accept: application/vnd.ch.frankel.myservice.v1+json
 
 Theoretically, the client can leverage the *quality* of `Accept` headers to communicate that it can handle different versions. The following request tells that the client prefers version 2 but can handle version 1 if the need be:
 
-```vb
+```visualbasic
 GET / HTTP1.1
 
 Accept: application/vnd.ch.frankel.myservice.v2+json;q=0.8, application/vnd.ch.frankel.myservice.v1+json;q=0.2
@@ -171,7 +170,7 @@ In practice, quality requires a high level of maturity, both on the server-side 
 
 Here's the APISIX configuration for quality-less content negotiation. It's very similar to the one above, the only difference being the Nginx variable in play, `http_X` instead of `arg_Y`.
 
-```vb
+```visualbasic
 routes:
   - uri: /*
     upstream_id: 1

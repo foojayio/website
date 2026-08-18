@@ -1,6 +1,5 @@
 ---
 title: "Clean Ways to Shutdown Spring Boot Applications"
-slug: "clean-shutdown-of-spring-boot-applications"
 date: "2022-11-04T14:11:00+00:00"
 lastmod: "2023-08-28T12:48:39+00:00"
 description: "Article discusses and presents five ways to shutdown Spring Boot apps cleanly. It provides inline code samples and link to GitHub."

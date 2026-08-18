@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with TornadoVM 2.0 for Accelerating Java Applications"
-slug: "getting-started-with-tornadovm-2-0"
 date: "2025-12-22T10:00:00+00:00"
 lastmod: "2025-12-22T17:37:05+00:00"
 description: "Starting with TornadoVM 2.0, installing and using TornadoVM is easier than ever. The project now provides prebuilt SDKs for multiple operating systems, - by Thanos Stratikopoulos"
@@ -46,9 +45,7 @@ SDKMAN! will automatically set **JAVA_HOME** and make the JDK available to Torna
 
 TornadoVM SDKs come as ZIP archives tailored for different operating systems, CPU architectures, and accelerator backends. Choose the SDK that matches your setup from the official [++TornadoVM webpage++](https://www.tornadovm.org/downloads) or the [SDKMAN! TornadoVM page](https://sdkman.io/sdks/tornadovm/).{#viewer-dae9277e-ba59-42c1-b958-a40a2e031a81}  
 
-<figure class="aligncenter size-large is-resized">
- <img fetchpriority="high" decoding="async" width="1024" height="617" src="tornadovm-sdkman-1024x617.png" alt="" class="wp-image-122107" style="width:578px;height:auto">
-</figure>
+{{< img src="tornadovm-sdkman-1024x617.png" class="aligncenter size-large is-resized" width="1024" height="617" style="width:578px;height:auto" >}}
 
 You can choose a backend-specific build:{#ib4ew13010}
 

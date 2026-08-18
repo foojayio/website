@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #89: Quarkus and Agentic Commerce"
-slug: "foojay-podcast-89"
 date: "2026-01-26T06:34:00+00:00"
 description: "For this episode of the Foojay Podcast, we invited the author of three recent posts published on Foojay. And he brought a colleague to get even more - by Frank Delporte"
 authors:

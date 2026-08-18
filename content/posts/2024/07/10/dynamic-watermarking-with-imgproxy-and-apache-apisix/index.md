@@ -1,6 +1,5 @@
 ---
 title: "Dynamic watermarking with imgproxy and Apache APISIX"
-slug: "dynamic-watermarking-with-imgproxy-and-apache-apisix"
 date: "2024-07-10T13:38:07+00:00"
 lastmod: "2024-07-10T13:52:21+00:00"
 description: "Let's implement a watermarking feature with the help of imgproxy. The more I think about it, the more I think they make a match made in Heaven."

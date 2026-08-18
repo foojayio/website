@@ -1,6 +1,5 @@
 ---
 title: "Embracing JVM unified logging (JEP-158 / JEP-271)"
-slug: "embracing-jvm-unified-logging"
 date: "2021-03-10T18:20:13+00:00"
 lastmod: "2021-08-23T12:25:52+00:00"
 description: "In the previous post, I briefly introduced unified logging and a simple GC configuration. For the savvy GC tuners, there are many options."

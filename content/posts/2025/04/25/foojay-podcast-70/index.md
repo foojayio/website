@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #70: Celebrating 5 Years of Foojay"
-slug: "foojay-podcast-70"
 date: "2025-04-25T08:00:00+00:00"
 lastmod: "2025-11-13T08:37:39+00:00"
 description: "On April 25, 2020, Geertjan Wielenga published the first Foojay post. Yes, we are celebrating 5 years since the Friends Of OpenJDK website launch! Today, - by Frank Delporte"

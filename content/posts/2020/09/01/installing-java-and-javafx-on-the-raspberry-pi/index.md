@@ -1,6 +1,5 @@
 ---
 title: "Installing Java and JavaFX on the Raspberry Pi"
-slug: "installing-java-and-javafx-on-the-raspberry-pi"
 date: "2020-09-01T08:32:24+00:00"
 lastmod: "2020-09-04T08:02:06+00:00"
 description: "One of the most read articles on my blog is on the installation of a recent Java on Raspberry Pi, in March 13, 2019, so it was time for an update! More..."
@@ -14,9 +13,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Ask Yourself: Do You Really Need Kubernetes?"
-slug: "do-you-really-need-kubernetes"
 date: "2021-07-07T07:37:55+00:00"
 lastmod: "2021-07-09T09:02:44+00:00"
 description: "Whether or not you need Kubernetes depends on many different factors. Statistically, you don't need Kubernetes more often than you do need it."

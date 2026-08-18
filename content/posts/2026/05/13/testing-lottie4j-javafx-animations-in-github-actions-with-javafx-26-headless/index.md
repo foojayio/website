@@ -1,6 +1,5 @@
 ---
 title: "Testing Lottie4J JavaFX Animations in GitHub Actions Without a Display: JavaFX 26 Headless to the Rescue"
-slug: "testing-lottie4j-javafx-animations-in-github-actions-with-javafx-26-headless"
 date: "2026-05-13T07:35:26+00:00"
 description: "When I released Lottie4J 1.1.0, I mentioned something a bit embarrassing in the release notes and this blog post: there was a new unit test to compare the - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-04-20-lottie4j-unit-test-with-headless-javafx/"

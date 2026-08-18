@@ -1,6 +1,5 @@
 ---
 title: "9 Outdated Ideas About Java"
-slug: "9-outdated-ideas-about-java"
 date: "2023-03-11T08:56:17+00:00"
 lastmod: "2023-07-28T08:01:17+00:00"
 description: "In this article, we want to look into some false assumptions and outdated ideas about Java based on early versions."
@@ -29,8 +28,7 @@ As Azul Deputy CTO Simon Ritter says, "***Java shows no danger of becoming the n
 In this article, we want to look into some false assumptions and outdated ideas about Java.
 ![](nine-outdate-ideas-1024x410.jpg)
 
-1. Myth: Java is old and not evolving
--------------------------------------
+## 1. Myth: Java is old and not evolving
 
 Why do people think Java has been around so long? PHP is just as old, and Python is four years older.
 
@@ -67,8 +65,7 @@ Some features got first introduced as a preview and only got finalized in a late
 
 **Fact: the 6-months release cycle brought a lot of evolution to OpenJDK.**
 
-2. Myth: You need to compile your code before you can run it
-------------------------------------------------------------
+## 2. Myth: You need to compile your code before you can run it
 
 Indeed, Java is a compiled language, and the best way to execute it is to compile your code into a class file.
 
@@ -99,8 +96,7 @@ And other tools provide excellent added value to this topic. Take a look at **[J
 
 **Fact: behind the scenes, indeed Java code must be compiled before it can be executed. But different tools are available to "hide" this process and make it very easy to execute Java code directly.**
 
-3. Myth: Java is slow
----------------------
+## 3. Myth: Java is slow
 
 Java has been a Just-In-Time Compiled language since 1999.
 
@@ -116,8 +112,7 @@ Java may not be very popular for desktop applications nowadays, but it is the mo
 
 **Fact: Java runs "most of the internet" and dominates custom-developed business applications and is [the preferred runtime for the top trading companies](https://www.azul.com/use-cases/trading-risk/), thanks to its speed.**
 
-4. Myth: Java is insecure
--------------------------
+## 4. Myth: Java is insecure
 
 In the late '90s and 2000s, browser plugins were a popular means of bringing applications to the internet where plain HTML was insufficient.
 
@@ -141,8 +136,7 @@ Many distributors release such improved runtimes within hours or days after the 
 
 **Fact: A fully secure system doesn't exist, but having a workflow that collects, documents, and fixes issues guarantees that the security of Java is continuously guarded and improved.**
 
-5. Myth: It's challenging to install Java on your machine, and the license is not clear
----------------------------------------------------------------------------------------
+## 5. Myth: It's challenging to install Java on your machine, and the license is not clear
 
 As OpenJDK is an open-source project, anyone can create a JVM to execute Java programs.
 
@@ -162,8 +156,7 @@ sdk install java 17.0.4-zulu
 
 **Fact: most of the OpenJDK distributions provide installers for the various platforms and tools like SDKMAN allow to easily install and switch between versions.**
 
-6. Myth: You need a Java runtime installed on your PC to run Java code
-----------------------------------------------------------------------
+## 6. Myth: You need a Java runtime installed on your PC to run Java code
 
 Traditionally a Java Runtime (JRE) installed by the user independently (as part of a JDK) is used to execute a Java program.
 
@@ -179,8 +172,7 @@ There are other packagers too. For instance, "**[GluonFX Plugin for Maven](https
 
 **Fact: Yes, having a Java runtime installed on your computer is the easiest way to run Java applications. But other tools are available to create executables that have the runtime included.**
 
-7. Myth: Your application stops while memory cleanup is ongoing
----------------------------------------------------------------
+## 7. Myth: Your application stops while memory cleanup is ongoing
 
 In some cases, that's precisely what you want!
 
@@ -198,8 +190,7 @@ With flags, you can select which GC you want to use. For more info on this topic
 
 **Fact: It depends! In some use cases, a Stop-The-World Garbage Collector is exactly what you need. For other use cases, different Garbage Collectors are available which work differently and don't have these stops.**
 
-8. Myth: Java only supports single inheritance
-----------------------------------------------
+## 8. Myth: Java only supports single inheritance
 
 Java has no multiple inheritance of state indeed.
 
@@ -249,8 +240,7 @@ Output of C
 
 **Fact: Since JDK 8 multiple inheritance of behavior is available.**
 
-9. Myth: Interfaces can't contain implementations
--------------------------------------------------
+## 9. Myth: Interfaces can't contain implementations
 
 The default methods and static methods mentioned in the previous topic also removed this limitation from Java.
 

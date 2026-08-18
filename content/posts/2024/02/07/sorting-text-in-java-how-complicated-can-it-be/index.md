@@ -1,6 +1,5 @@
 ---
 title: "foojay – Sorting Text in Java"
-slug: "sorting-text-in-java-how-complicated-can-it-be"
 date: "2024-02-07T08:41:54+00:00"
 lastmod: "2025-05-17T13:16:33+00:00"
 description: "Sorting text should be easy as String implements the Comparable interface. In this article, we'll see that it can be more complicated than that."

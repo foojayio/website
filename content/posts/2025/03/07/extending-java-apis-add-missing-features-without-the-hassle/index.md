@@ -1,6 +1,5 @@
 ---
 title: "Extending Java APIs - Add Missing Features Without the Hassle"
-slug: "extending-java-apis-add-missing-features-without-the-hassle"
 date: "2025-03-07T12:03:57+00:00"
 lastmod: "2025-03-07T12:04:00+00:00"
 description: "Do you ever pull your hair out in frustration, why isn't this a part of Java? Thanks to Manifold you can solve that problem for everyone."

@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot: Java Template Engine (JTE)"
-slug: "spring-boot-java-template-engine-jte"
 date: "2024-11-13T09:03:00+00:00"
 lastmod: "2024-11-13T16:26:06+00:00"
 description: "Java Template Engine(jte) offers a secure and efficient solution tailored for Java and Kotlin."
@@ -237,7 +236,8 @@ public class IndexController {
 ```
 
 ```
-<br>package com.bsmlabs.jte;
+
+package com.bsmlabs.jte;
 
 public record Page(String title, String description) {
 }

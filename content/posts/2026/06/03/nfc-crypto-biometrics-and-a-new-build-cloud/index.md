@@ -1,6 +1,5 @@
 ---
 title: "NFC, Crypto, Biometrics, And A New Build Cloud"
-slug: "nfc-crypto-biometrics-and-a-new-build-cloud"
 date: "2026-06-03T08:37:24+00:00"
 description: "Device APIs move into the framework core, revolutionary Bluetooth debugging, and the Build Cloud's new UI is live in preview."
 canonical: "https://www.codenameone.com/blog/nfc-crypto-biometrics-and-build-cloud/"
@@ -283,7 +282,7 @@ This PR forwards `ACTION_HOVER_ENTER/MOVE/EXIT` on Android into the framework's 
 
 This is structural for two reasons. Android wants to replace ChromeOS for the laptop form factor, which means our Android apps are going to land on laptop-shaped devices with attached keyboards and trackpads more often than they ever have, and they need to behave like real desktop apps when they do. And iPad apps with a Magic Keyboard are increasingly indistinguishable from desktop apps in user expectation. Codename One's whole pitch is "write once, run on every screen" --- the screen got a keyboard, and now we handle it.
 
-## Expanded CSS gradients and blurs --- [PR #4957](https://github.com/codenameone/CodenameOne/pull/4957)
+## Expanded CSS gradients and blurs --- [PR #4957](https://github.com/codenameone/CodenameOne/pull/4957){#https://github.com/codenameone/CodenameOne/pull/4957}
 
 The CSS compiler used to reject anything past two-stop linear gradients at the four cardinal angles and two-stop radial gradients at the center, falling back to a CEF-rasterised bitmap for everything else. `filter` and `backdrop-filter` were ignored entirely. The bitmap fallback worked but it cost you the GPU path and it could not scale with the component.
 

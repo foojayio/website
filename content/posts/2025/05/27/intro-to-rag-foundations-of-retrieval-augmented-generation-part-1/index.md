@@ -1,6 +1,5 @@
 ---
 title: "Intro to RAG: Foundations of Retrieval Augmented Generation, part 1"
-slug: "intro-to-rag-foundations-of-retrieval-augmented-generation-part-1"
 date: "2025-05-27T14:42:43+00:00"
 lastmod: "2025-06-11T07:34:11+00:00"
 description: "Explore a few introductory concepts around Retrieval Augmented Generation (RAG), why it exists and the problems it solves."

@@ -1,6 +1,5 @@
 ---
 title: "Neo4j's Online Conference Is Coming In October..."
-slug: "neo4js-online-conference-is-coming-in-october-and-youre-invited"
 date: "2023-06-07T08:46:15+00:00"
 lastmod: "2023-06-07T08:46:17+00:00"
 description: "Join the biggest graph community gathering dedicated to learning how to integrate graph technologies into ML and dev projects."

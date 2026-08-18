@@ -1,6 +1,5 @@
 ---
 title: "Great Time at JavaZone 2022"
-slug: "great-time-at-javazone-2022"
 date: "2022-09-23T07:57:36+00:00"
 lastmod: "2022-09-23T07:57:37+00:00"
 description: "JavaZone is my favorite Java conference. I like it even more than JavaOne at Moscone! Great to be back to enjoy great content, food & company"

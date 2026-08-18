@@ -1,6 +1,5 @@
 ---
 title: "Securing Symmetric Encryption Algorithms in Java"
-slug: "securing-symmetric-encryption-algorithms-in-java"
 date: "2023-12-29T05:53:50+00:00"
 lastmod: "2023-12-29T05:56:15+00:00"
 description: "Encryption is converting readable data or plaintext into unreadable data or ciphertext, ensuring that even if encrypted data is intercepted, it remains inaccessible to unauthorized individuals."

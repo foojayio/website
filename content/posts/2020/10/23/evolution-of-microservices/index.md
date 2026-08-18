@@ -1,6 +1,5 @@
 ---
 title: "Evolution of the Growth in Interest in Microservices"
-slug: "evolution-of-microservices"
 date: "2020-10-23T07:35:11+00:00"
 lastmod: "2020-10-23T08:09:31+00:00"
 description: "For some time now, there has been an undeniable growth in interest for Microservices. The core concept itself, however, is not that new."

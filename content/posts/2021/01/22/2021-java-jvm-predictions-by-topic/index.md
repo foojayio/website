@@ -1,6 +1,5 @@
 ---
 title: "A Compendium of 2021 Java & OpenJDK Predictions"
-slug: "2021-java-jvm-predictions-by-topic"
 date: "2021-01-22T08:03:25+00:00"
 lastmod: "2021-01-24T08:09:41+00:00"
 description: "Now that 2021 is well underway, many prominent Java developers have taken the time to predict what 2021 may bring to the Java universe!"

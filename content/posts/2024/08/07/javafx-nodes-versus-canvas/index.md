@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Nodes versus Canvas"
-slug: "javafx-nodes-versus-canvas"
 date: "2024-08-07T08:22:31+00:00"
 lastmod: "2024-08-09T08:48:12+00:00"
 description: "An experiment showing that you can add roughly 10 times more objects to the Canvas before the framerate drops compared to the number of Nodes."

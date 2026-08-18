@@ -1,6 +1,5 @@
 ---
 title: "The Pitfall of Increasing Read Capacity by Reading From Secondary Nodes in a MongoDB Replica Set"
-slug: "the-pitfall-of-increasing-read-capacity-by-reading-from-secondary-nodes-in-a-mongodb-replica-set"
 date: "2025-10-30T15:23:31+00:00"
 lastmod: "2025-10-30T15:23:33+00:00"
 description: "Imagine we are responsible for managing the MongoDB cluster that supports our country's national financial payment system, similar to Pix in Brazil. Our application was designed to be read-heavy, with one write operation for every 20 read operations.With Black Friday approaching, a critical period for our national financial payment system, we have been entrusted with the crucial task of creating a scaling plan for our cluster to handle the increased demand during this shopping spree. Given that our system is read-heavy, we are exploring ways to enhance the read performance and capacity of our cluster.We're in charge of the national financial payment system that powers a staggering 60% of all transactions across the nation. That's why ensuring the highest availability of this MongoDB cluster is absolutely critical—it's the backbone of our economy!"

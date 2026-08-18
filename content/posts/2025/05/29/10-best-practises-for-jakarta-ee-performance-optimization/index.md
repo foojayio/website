@@ -1,6 +1,5 @@
 ---
 title: "10 Best Practises For Jakarta EE Performance Optimization"
-slug: "10-best-practises-for-jakarta-ee-performance-optimization"
 date: "2025-05-29T13:44:01+00:00"
 lastmod: "2025-05-29T13:44:04+00:00"
 description: "We start a series where we compiled 10 best practices for performance optimizations and suggestions how to implement them using Jakarta EE & Eclipse GlassFish."

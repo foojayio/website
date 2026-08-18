@@ -1,6 +1,5 @@
 ---
 title: "Predicting Secure Java Projects on Maven Central"
-slug: "predicting-secure-java-projects-on-maven-central"
 date: "2023-03-23T14:10:02+00:00"
 lastmod: "2023-03-23T14:12:58+00:00"
 description: "Next time you’re considering a new Java library, look for the Sonatype Safety Rating on Maven Central to aid in your decision making."
@@ -27,7 +26,7 @@ I like to think of the software supply chain as a mighty waterfall, like Niagara
 
 Cybersecurity can also be a bit of a stressful topic at times, and the sight or sounds of a beautiful waterfall can significantly calm the nerves.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-62963" src="3Falls_Niagara-700x466.jpg" alt="Niagara Falls" width="700" height="466">
+{{< img src="3Falls_Niagara-700x466.jpg" class="size-medium" alt="Niagara Falls" width="700" height="466" >}}
 
 Got your relaxing waterfall sounds on? Good!
 
@@ -57,7 +56,7 @@ This is a question Maven Central attempts to provide insight into through the So
 
 The rating ranges from 1 to 10, where 1 means a project is very likely to have future vulnerabilities and 10 is unlikely to have future vulnerabilities.  
 
-<img decoding="async" aria-describedby="caption-attachment-62930" class="size-medium wp-image-62930" src="foojay-safetyrating-700x265.png" alt="" width="700" height="265">
+{{< img src="foojay-safetyrating-700x265.png" class="size-medium" width="700" height="265" >}}
 
 ***Screenshot from central.sonatype.com***{#caption-attachment-62930}
 

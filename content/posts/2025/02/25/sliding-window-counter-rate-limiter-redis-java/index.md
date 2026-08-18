@@ -1,6 +1,5 @@
 ---
 title: "Sliding Window Counter Rate Limiter (Redis & Java)"
-slug: "sliding-window-counter-rate-limiter-redis-java"
 date: "2025-02-25T21:21:11+00:00"
 lastmod: "2025-05-02T12:50:43+00:00"
 description: "Learn how to implement a Sliding Window Counter Rate Limiter using Redis and Java. Discover an efficient way to manage API request limits."
@@ -18,7 +17,7 @@ related_posts:
   - "sliding-window-log-rate-limiter-redis-java"
   - "token-bucket-rate-limiter-redis-java"
   - "fixed-window-counter-rate-limiter-redis-java"
-  - "rate-limiting-with-redis-an-essential-guide"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

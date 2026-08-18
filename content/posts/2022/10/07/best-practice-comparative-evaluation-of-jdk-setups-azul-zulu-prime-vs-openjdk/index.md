@@ -1,6 +1,5 @@
 ---
 title: "Comparative Evaluation Azul Zulu Prime vs. OpenJDK"
-slug: "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
 date: "2022-10-07T08:51:00+00:00"
 lastmod: "2022-10-07T09:10:08+00:00"
 description: "How to establish whether Azul Zulu Prime improves aspects of application behavior to a degree justifying using it within your organization."

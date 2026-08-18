@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Auto Layouting Structs (7)"
-slug: "hello-ebpf-auto-layouting-structs-7"
 date: "2024-04-14T16:19:50+00:00"
 lastmod: "2024-04-14T16:19:51+00:00"
 description: "Let's look into the eBPF memory layout and alignment of structs transferred between the kernel and user-land."

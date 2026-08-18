@@ -1,6 +1,5 @@
 ---
 title: "How to Build a Search Service in Java with MongoDB"
-slug: "how-to-build-a-search-service-in-java-with-mongodb"
 date: "2026-02-27T18:28:09+00:00"
 lastmod: "2026-07-23T19:20:44+00:00"
 description: "We need to code our way from the search box to our search index. Performing a search and rendering the results in a presentable fashion, itself, is not a tricky endeavor: Send the user’s query to the search server, and translate the response data into some user interface technology. However, there are some important issues that need to be addressed, such as security, error handling, performance, and other concerns that deserve isolation and control."

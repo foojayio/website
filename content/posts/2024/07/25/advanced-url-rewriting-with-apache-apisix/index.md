@@ -1,6 +1,5 @@
 ---
 title: "Advanced URL Rewriting with Apache APISIX"
-slug: "advanced-url-rewriting-with-apache-apisix"
 date: "2024-07-25T09:10:06+00:00"
 lastmod: "2024-07-25T09:10:07+00:00"
 description: "Here I describe using the proxy-rewrite plugin with a path variable. You can reuse the same technique with multiple variables."

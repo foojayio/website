@@ -1,6 +1,5 @@
 ---
 title: "Book Review: Monolith to Microservices (Part 2)"
-slug: "book-review-monolith-to-microservices-part-2"
 date: "2022-05-25T09:09:08+00:00"
 lastmod: "2023-03-16T10:45:19+00:00"
 description: "In many cases, microservices are probably not ideal, but if we are to do it, we should take baby steps. Let's find out the what alternatives we have on the table."

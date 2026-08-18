@@ -1,6 +1,5 @@
 ---
 title: "Is There a Best OS to Develop a Java Application on?"
-slug: "is-there-a-best-os-to-develop-a-java-application-on"
 date: "2023-02-22T11:43:40+00:00"
 lastmod: "2023-02-22T11:43:42+00:00"
 description: "One subject that often evokes a lot of debate is which is the best OS to develop a Java application on. This article gives my view!"

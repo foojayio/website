@@ -1,6 +1,5 @@
 ---
 title: "Your First Vaadin Spring Application in 2023"
-slug: "your-first-vaadin-spring-application-in-2023"
 date: "2023-05-25T12:08:30+00:00"
 lastmod: "2023-05-25T12:08:31+00:00"
 description: "Create new Vaadin Java web application projects using start.spring.io. Configure the dependencies and choose your Maven or Gradle."
@@ -15,7 +14,7 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "create-a-crud-ui-in-pure-java"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

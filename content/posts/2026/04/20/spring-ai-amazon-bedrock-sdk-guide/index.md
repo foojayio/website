@@ -1,6 +1,5 @@
 ---
 title: "Explore Spring AI SDK - Amazon Bedrock AgentCore - Part 1"
-slug: "spring-ai-amazon-bedrock-sdk-guide"
 date: "2026-04-20T13:44:54+00:00"
 lastmod: "2026-04-20T13:44:55+00:00"
 description: "Learn how to use Spring AI SDK with the Amazon Bedrock AgentCore to build scalable AI-powered applications."

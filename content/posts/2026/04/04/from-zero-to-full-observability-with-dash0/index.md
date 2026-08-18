@@ -1,6 +1,5 @@
 ---
 title: "From Zero to Full Observability with Dash0"
-slug: "from-zero-to-full-observability-with-dash0"
 date: "2026-04-04T06:35:47+00:00"
 lastmod: "2026-04-12T12:35:16+00:00"
 description: "This guide walks through the complete process of deploying a minimal Spring Boot service to Kubernetes and adding full observability using the Dash0 operator — without making any changes to the application code."

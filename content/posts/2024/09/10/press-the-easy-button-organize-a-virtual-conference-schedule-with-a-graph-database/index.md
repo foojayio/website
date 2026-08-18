@@ -1,6 +1,5 @@
 ---
 title: "Press the Easy Button: Organize a Virtual Conference Schedule with a Graph Database"
-slug: "press-the-easy-button-organize-a-virtual-conference-schedule-with-a-graph-database"
 date: "2024-09-10T06:17:38+00:00"
 lastmod: "2024-09-10T06:18:37+00:00"
 description: "Putting together a conference schedule for NODES 2024 (one of my favorite events of the year) is a massive undertaking, but my colleague and I used technologies and tools at our disposal to make this process a little more efficient and greatly reduce opportunities for mistakes."

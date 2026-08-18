@@ -1,6 +1,5 @@
 ---
 title: "Debugging Program Control Flow"
-slug: "debugging-program-control-flow"
 date: "2022-12-23T07:36:35+00:00"
 lastmod: "2022-12-23T07:36:36+00:00"
 description: "Control flow is more than step over. You can \"jump\" to arbitrary code offsets while debugging to reproduce elaborate states and behaviors!"

@@ -1,6 +1,5 @@
 ---
 title: "Kover : Code Coverage plugin for Kotlin"
-slug: "kover-code-coverage-plugin-for-kotlin"
 date: "2022-02-28T21:34:12+00:00"
 lastmod: "2023-04-13T07:15:14+00:00"
 description: "Kover is a code coverage tool for Kotlin. It's still in incubator phase but I took it for a spin and it is already very useful as part of local or CI workflows! In this article I go through the setup and some of my favourite goodies of the tool."
@@ -192,13 +191,13 @@ Again, not very much happening here. A couple of noticeable things though :
 
 When [opening a Pull Request on GitHub](https://github.com/jlengrand/spring-petclinic-kotlin/pull/1), this allows for the following overview :  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-52438" class="size-medium wp-image-52438" src="kover2-700x336.png" alt="Build and KoverVerify checks in a Github Pull request, failing here" width="700" height="336">
+{{< img src="kover2-700x336.png" class="size-medium" alt="Build and KoverVerify checks in a Github Pull request, failing here" width="700" height="336" >}}
 
 Build and KoverVerify checks in a Github Pull request, failing here{#caption-attachment-52438}
 
 But because I am running 2 different action files, I also get extra (clickable) information from CodeCov directly as to where I should be doing better:  
 
-<img decoding="async" aria-describedby="caption-attachment-52439" class="size-medium wp-image-52439" src="kover3-598x510.png" alt="CodeCov report in my Pull Request with diff coverage" width="598" height="510">
+{{< img src="kover3-598x510.png" class="size-medium" alt="CodeCov report in my Pull Request with diff coverage" width="598" height="510" >}}
 
 CodeCov report in my Pull Request with diff coverage{#caption-attachment-52439}
 
@@ -208,7 +207,7 @@ In case you want to have code coverage information straight from IntelliJ, this 
 
 In your run configuration, you can select "More Options" and decide to use the IntelliJ or JaCoCo agents there:  
 
-<img decoding="async" aria-describedby="caption-attachment-52437" class="size-medium wp-image-52437" src="kover4-621x510.png" alt="Specify alternative coverage runner in IntelliJ" width="621" height="510">
+{{< img src="kover4-621x510.png" class="size-medium" alt="Specify alternative coverage runner in IntelliJ" width="621" height="510" >}}
 
 Specify alternative coverage runner in IntelliJ{#caption-attachment-52437}
 

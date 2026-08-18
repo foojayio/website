@@ -1,6 +1,5 @@
 ---
 title: "Quest for REST"
-slug: "quest-for-rest"
 date: "2023-01-27T14:48:38+00:00"
 lastmod: "2023-01-27T14:49:15+00:00"
 description: "SOAP's biggest flaw was its complexity and its focus on big companies, but it at least provided a shared set of standard specifications."
@@ -116,7 +115,7 @@ A common issue with REST is the lack of standards; HATEOAS is no different. The 
 
 Here's a quick diagram that summarizes the proposal:
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-62221 aligncenter" src="hal-700x291.png" alt="" width="700" height="291">
+{{< img src="hal-700x291.png" class="size-medium aligncenter" width="700" height="291" >}}
 
 We can rework the above with HAL as the following:
 

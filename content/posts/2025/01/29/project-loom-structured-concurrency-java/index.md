@@ -1,6 +1,5 @@
 ---
 title: "Project Loom: Structured Concurrency - Java"
-slug: "project-loom-structured-concurrency-java"
 date: "2025-01-29T12:12:38+00:00"
 lastmod: "2025-01-29T12:12:40+00:00"
 description: "Learn about structured concurrency, a paradigm that simplifies concurrent programming by bringing order and predictability to task management."
@@ -31,7 +30,7 @@ One such advancement in this domain is *structured concurrency*, a paradigm that
 
 The structured concurrency feature was first introduced as an incubator in [JEP-428](https://openjdk.org/jeps/428 "JEP - 428") with the release of **Java 19,** later evolved into a preview feature in [JEP-453](https://openjdk.org/jeps/453 "JEP-453"), part of the **Java 21** release, and as an another preview in [JEP-480](https://openjdk.org/jeps/480) part of the Java 23 release.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-115435" src="SC-700x394.jpg" alt="Structured Concurrency" width="700" height="394">
+{{< img src="SC-700x394.jpg" class="size-medium" alt="Structured Concurrency" width="700" height="394" >}}
 
 To effectively explore structured concurrency, one must grasp several fundamental concepts, including:
 
@@ -69,7 +68,7 @@ In a nutshell, *Structured Concurrency occurs when a primary task divides into m
 
 The structured concurrency API includes the primary class *StructuredTaskScope* , which resides in the `java.util.concurrent` package.
 
-<img decoding="async" class="size-medium wp-image-115436" src="SC1-700x394.jpg" alt="StructuredTaskScope" width="700" height="394">
+{{< img src="SC1-700x394.jpg" class="size-medium" alt="StructuredTaskScope" width="700" height="394" >}}
 
 **Overview of the StructuredTaskScope Class Utilization**
 

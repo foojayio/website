@@ -1,6 +1,5 @@
 ---
 title: "MongoDB and the Raft Algorithm"
-slug: "mongodb-and-the-raft-algorithm"
 date: "2026-02-24T15:47:27+00:00"
 lastmod: "2026-02-24T15:47:29+00:00"
 description: "MongoDB’s replica set architecture uses distributed consensus to ensure consistency, availability, and fault tolerance across nodes. At the core of this architecture is the Raft consensus algorithm, which breaks the complexities of distributed consensus into manageable operations: leader election, log replication, and commitment. This document explores how MongoDB integrates and optimizes Raft for its high-performance replication needs."

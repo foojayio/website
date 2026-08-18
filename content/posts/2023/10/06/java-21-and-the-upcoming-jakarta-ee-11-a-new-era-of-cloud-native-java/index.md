@@ -1,6 +1,5 @@
 ---
 title: "Java 21 and Jakarta EE 11: A New Era of Cloud Native Java"
-slug: "java-21-and-the-upcoming-jakarta-ee-11-a-new-era-of-cloud-native-java"
 date: "2023-10-06T08:28:38+00:00"
 lastmod: "2023-10-06T08:28:40+00:00"
 description: "While Java 21 is already bringing transformative features to the table, the upcoming release of Jakarta EE 11 is expected to further elevate the state of cloud native Java development."

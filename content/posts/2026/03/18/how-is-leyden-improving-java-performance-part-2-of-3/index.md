@@ -1,6 +1,5 @@
 ---
 title: "How is Leyden improving Java Performance? Part 2 of"
-slug: "how-is-leyden-improving-java-performance-part-2-of-3"
 date: "2026-03-18T12:05:34+00:00"
 lastmod: "2026-03-20T06:54:34+00:00"
 description: "How to use the AOT capabilities by Leyden and show test results which show that very significant progress has already been made."

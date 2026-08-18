@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 6: Build a Neo4j Microservice"
-slug: "journeys-in-java-level-6-build-a-neo4j-microservice"
 date: "2022-07-13T15:13:43+00:00"
 lastmod: "2022-07-13T15:15:11+00:00"
 description: "Create a Neo4j database, get data loaded, then build a new service that interacts with the database and provides an API for client services."

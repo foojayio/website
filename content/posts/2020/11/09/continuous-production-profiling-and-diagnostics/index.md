@@ -1,6 +1,5 @@
 ---
 title: "Continuous Production Profiling and Diagnostics"
-slug: "continuous-production-profiling-and-diagnostics"
 date: "2020-11-09T15:57:38+00:00"
 lastmod: "2023-07-18T07:06:53+00:00"
 description: "I’ve gotten a lot of questions about continuous production profiling. Why to profile in production and why the heck leave it on continuously?"
@@ -162,8 +161,8 @@ You would be excused for believing that Errors would happen very rarely, and tha
 
 These techniques, and more, can be used together to provide a best-of-all-worlds profiling environment. Just be careful, as with most things in life a balance must be found. Just like there is (trigger warning) no single energy source that will solve our energy problems in a carbon neutral way (we should use all at our disposal -- including nuclear power -- to have a chance to go carbon neutral in a reasonable time \[2\]\[3\]), a balance must be struck between sampling and execution tracing, and a balance for how much data to capture for the various types of profiling you're doing.
 
-Continuous Profiling in Large Deployments
-## Or, Finding What You're Looking For
+## Continuous Profiling in Large Deployments
+Or, Finding What You're Looking For
 
 In a way this part of the blog will be a shameless plug for the work I've been involved with at Datadog, but it may offer insights into what matters for a continuous profiler to be successful. Feel free to skip if you dislike me talking about a specific commercial solution.
 

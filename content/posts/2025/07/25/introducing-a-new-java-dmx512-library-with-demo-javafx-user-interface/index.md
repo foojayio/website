@@ -1,6 +1,5 @@
 ---
 title: "Introducing a New Java DMX512 Library With Demo JavaFX User Interface"
-slug: "introducing-a-new-java-dmx512-library-with-demo-javafx-user-interface"
 date: "2025-07-25T06:17:00+00:00"
 description: "In this post, I would like to inform you about a new Java library that is now available on Maven Central, allowing interaction with DMX512 devices using - by Frank Delporte"
 canonical: "https://webtechie.be/post/2025-07-17-introducing-java-dmx512-library-with-demo-javafx-ui/"
@@ -15,10 +14,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
+  - "idempotent-spring-boot-starter"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-  - "foojay-podcast-83"
 frozen: false
 ---
 

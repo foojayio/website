@@ -1,6 +1,5 @@
 ---
 title: "Billion Events Per Second, Millisecond Latency: Giga Streaming Analytics"
-slug: "billion-events-per-second-with-millisecond-latency"
 date: "2021-03-25T17:04:38+00:00"
 lastmod: "2021-03-25T19:18:42+00:00"
 description: "On a scientific paper on Hazelcast Jet, its architecture based on symmetric, data-local, non-blocking distributed event processing."

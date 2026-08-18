@@ -1,6 +1,5 @@
 ---
 title: "Is Java/Jakarta EE Outdated & Dead?"
-slug: "is-java-ee-outdated-dead"
 date: "2021-07-28T08:08:50+00:00"
 lastmod: "2021-07-28T08:08:53+00:00"
 description: "Heard that Java EE is outdated? Watch this to see why that’s not true and how you can continue using existing Java EE development skills!"

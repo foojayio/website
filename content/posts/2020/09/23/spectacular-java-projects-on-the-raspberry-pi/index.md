@@ -1,6 +1,5 @@
 ---
 title: "Spectacular Java Projects on the Raspberry Pi"
-slug: "spectacular-java-projects-on-the-raspberry-pi"
 date: "2020-09-23T10:38:17+00:00"
 lastmod: "2021-12-16T09:43:29+00:00"
 description: "I want to share a number of Java / Raspberry Pi projects with everyone, as they can be an inspiration for getting started with Java on the Raspberry Pi!"
@@ -15,9 +14,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-  - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
 frozen: false
 ---
 

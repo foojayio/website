@@ -1,6 +1,5 @@
 ---
 title: "Treat Security as a Risk"
-slug: "treat-security-as-risk"
 date: "2022-01-27T11:26:57+00:00"
 lastmod: "2022-01-27T11:26:58+00:00"
 description: "Security is the poster child of a Non-Functional Requirement: most people don't care until the proverbial matter hits the rotary propeller."

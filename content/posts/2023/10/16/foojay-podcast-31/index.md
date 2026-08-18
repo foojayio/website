@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #31: Report of Devoxx 23 in Belgium"
-slug: "foojay-podcast-31"
 date: "2023-10-16T07:16:57+00:00"
 lastmod: "2025-11-13T08:55:45+00:00"
 description: "The first week of October, the 20th edition of Devoxx took place in Antwerp, Belgium. I got the opportunity to walk around with a microphone and talk to visitors and speakers!"

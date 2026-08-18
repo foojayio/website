@@ -1,6 +1,5 @@
 ---
 title: "Local Variable Type Inference: Declare Var, Not War"
-slug: "local-variable-type-inference-declare-var-not-war"
 date: "2021-01-04T08:29:00+00:00"
 lastmod: "2021-08-23T13:04:16+00:00"
 description: "In this article, I will try to explain the new feature, from Java 10, local variable type inference using the reserved type name \"var\"."

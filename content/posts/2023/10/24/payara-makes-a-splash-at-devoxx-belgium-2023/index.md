@@ -1,6 +1,5 @@
 ---
 title: "Payara Makes a Splash at Devoxx Belgium 2023"
-slug: "payara-makes-a-splash-at-devoxx-belgium-2023"
 date: "2023-10-24T10:50:46+00:00"
 lastmod: "2023-10-24T10:50:48+00:00"
 description: "As representatives of Payara, a sponsor of the conference, we had the privilege of attending this year's gathering, which took place at the iconic Kinepolis Antwerpen Cinema."

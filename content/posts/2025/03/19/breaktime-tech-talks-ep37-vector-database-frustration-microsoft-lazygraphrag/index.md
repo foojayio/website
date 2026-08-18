@@ -1,6 +1,5 @@
 ---
 title: "Breaktime Tech Talks (Ep37): Vector Database Frustration + Microsoft LazyGraphRAG"
-slug: "breaktime-tech-talks-ep37-vector-database-frustration-microsoft-lazygraphrag"
 date: "2025-03-19T12:54:36+00:00"
 lastmod: "2025-04-11T07:28:27+00:00"
 description: "This is episode 37 of the Breaktime Tech Talks. https://www.youtube.com/watch?v=hv-FtjIHg_I&list=PLzZ7iUdr2mwS6qexoz9dsI0NfnU614p1w&index=1 You - by Jennifer Reif"

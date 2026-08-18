@@ -1,6 +1,5 @@
 ---
 title: "Building a Kotlin App with Spring Boot and MongoDB Search"
-slug: "building-a-kotlin-app-with-spring-boot-and-mongodb-search"
 date: "2026-04-09T15:21:05+00:00"
 lastmod: "2026-04-15T19:31:48+00:00"
 description: "In this tutorial, we will learn to build an application in Kotlin that utilizes full-text search in a database containing thousands of Airbnb listings. We'll explore how we can find the perfect accommodation that meets our specific needs."
@@ -169,7 +168,7 @@ To establish our connection, we need to follow these steps. First, update the ap
 ```
 spring.application.name=Airbnb Searcher
 
-spring.data.mongodb.uri=mongodb+srv://user:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="55253426261536392026213027657b363920262130277b383a3b323a31377b3b3021">[email protected]</a>/
+spring.data.mongodb.uri=mongodb+srv://user:[email protected]/
 
 spring.data.mongodb.database=sample_airbnb
 ```

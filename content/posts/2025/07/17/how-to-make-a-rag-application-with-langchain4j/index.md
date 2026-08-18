@@ -1,6 +1,5 @@
 ---
 title: "How to Make a RAG Application With LangChain4j"
-slug: "how-to-make-a-rag-application-with-langchain4j"
 date: "2025-07-17T20:42:12+00:00"
 lastmod: "2025-07-17T20:42:13+00:00"
 description: "Let's use MongoDB with LangChain4j to create a simple RAG application. LangChain4j abstracted away a lot of the steps along the way, from segmenting our data, to connecting to our MongoDB database and embedding model."

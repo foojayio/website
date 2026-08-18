@@ -1,6 +1,5 @@
 ---
 title: "You're Running Untrusted Code!"
-slug: "running-untrusted-code"
 date: "2022-01-17T08:28:24+00:00"
 lastmod: "2026-03-07T20:13:55+00:00"
 description: "I'm afraid the deprecation of the Security Manager just added several lines to that risk, all linked to running untrusted code."
@@ -28,7 +27,7 @@ I immediately made the connection between Log4Shell and the Security Manager. At
 
 [
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-51338" src="johannes-rab-700x119.png" alt="" width="700" height="119">
+{{< img src="johannes-rab-700x119.png" class="size-medium" width="700" height="119" >}}
 
 ](https://twitter.com/nicolas_frankel/status/1471140080366632968)
 
@@ -111,7 +110,7 @@ PGP key:
         bits:        2048
         fingerprint: 0xF3A90E6B10E809F851AB4FC54CC08E7F47C3EC76
         create date: Wed Sep 18 02:51:23 CEST 2013
-        uids:        [Brett Wooldridge (Sonatype) <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f2d3d2a3b3b61382020232b3d262b282a0f28222e2623612c2022">[email protected]</a>>]
+        uids:        [Brett Wooldridge (Sonatype) <[email protected]>]
 ```
 
 However, none of this amounts to much. Signing doesn't assert the identity of the provider. It tells that a private key with the referenced email signed it with a private key with the referenced email. Nothing prevents a malicious actor from creating another private key with the same email or a similar one.

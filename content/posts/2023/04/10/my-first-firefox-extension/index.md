@@ -1,6 +1,5 @@
 ---
 title: "My First Firefox Extension"
-slug: "my-first-firefox-extension"
 date: "2023-04-10T18:36:13+00:00"
 lastmod: "2023-04-10T18:37:40+00:00"
 description: "A couple of weeks ago, I spent the weekend creating another CFP submission helper in the form of a Firefox extension."
@@ -88,11 +87,11 @@ document.body.style.border = '5px solid red';
 
 I found the development feedback loop good. Imagine that you have followed the tutorial and created all the necessary files above. You can go to and click on the "Load Temporary Add-on" button.
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-65603" src="firefox-load-extension-700x182.jpg" alt="" width="700" height="182">
+{{< img src="firefox-load-extension-700x182.jpg" class="aligncenter size-medium" width="700" height="182" >}}
 
 Then, point to your manifest file. Firefox loads the extension: it's now active.
 
-<img decoding="async" class="aligncenter size-medium wp-image-65604" src="firefox-loaded-extension-700x508.jpg" alt="" width="700" height="508">
+{{< img src="firefox-loaded-extension-700x508.jpg" class="aligncenter size-medium" width="700" height="508" >}}
 
 In the above example, the JavaScript from the tutorial adds a red border around every web page. It's useless, we can do better, but it shows how it works. We can change the script to change the color, *e.g.* , from `red` to `green`. To make Firefox reload **any change**, including changes to the manifest, click on the "Reload" button on the temporary extension panel.
 
@@ -155,7 +154,7 @@ Let's stop for a moment to talk about debugging. I lost several hours because I 
 
 First things first, content scripts work in the context of the page. Hence, logging statements work in the regular console. Background scripts do work in another context. To watch their log statements, we need to have **another** Firefox developer console. You can open it on the extension panel by clicking the "Inspect" button.
 
-<img decoding="async" class="aligncenter size-medium wp-image-65605" src="extension-developer-console-700x260.jpg" alt="" width="700" height="260">
+{{< img src="extension-developer-console-700x260.jpg" class="aligncenter size-medium" width="700" height="260" >}}
 
 ## Communication across scripts
 
@@ -275,7 +274,7 @@ We also need to ask the `storage` permission in the manifest:
 
 We can now store the Trello credentials (as well as the required Trello list id) on the settings page:
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-65607" src="settings-700x384.jpg" alt="" width="700" height="384">
+{{< img src="settings-700x384.jpg" class="aligncenter size-medium" width="700" height="384" >}}
 
 We can use the same `storage` API in the Trello calling code to read credentials.
 

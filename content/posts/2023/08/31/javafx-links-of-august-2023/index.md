@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of August 2023"
-slug: "javafx-links-of-august-2023"
 date: "2023-08-31T15:42:48+00:00"
 lastmod: "2023-08-31T15:42:49+00:00"
 description: "I've taken a holiday this month, so probably missed a lot of the amazing JavaFX news, but still some things caught my attention and you can find them in - by Frank Delporte"
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-july-2023"
   - "javafx-links-of-may-2023"
   - "javafx-links-of-april-2023"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

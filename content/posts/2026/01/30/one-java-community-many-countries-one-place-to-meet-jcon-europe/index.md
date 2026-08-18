@@ -1,6 +1,5 @@
 ---
 title: "One Java community. Many countries. One place to meet: JCON EUROPE"
-slug: "one-java-community-many-countries-one-place-to-meet-jcon-europe"
 date: "2026-01-30T14:50:01+00:00"
 lastmod: "2026-01-30T14:55:07+00:00"
 description: "At JCON EUROPE, developers, speakers, and contributors from across the globe come together to exchange ideas, share experiences, and connect around Java. - by Richard Fichtner"

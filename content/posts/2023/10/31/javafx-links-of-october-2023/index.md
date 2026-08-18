@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of October 2023"
-slug: "javafx-links-of-october-2023"
 date: "2023-10-31T13:04:32+00:00"
 lastmod: "2023-10-31T13:08:36+00:00"
 description: "Have fun with this overview of the \"JavaFX LinksOfTheWeek\" that got published on jfx-central.com during October."

@@ -1,8 +1,17 @@
 ---
-# An author is a leaf bundle: content/authors/<first-letter>/<slug>/index.md with
-# the avatar image(s) in the same folder. The FOLDER NAME is the slug that posts
-# reference in their `authors:` list, and it is the URL: /today/author/<folder>/
-title: "{{ replace .Name "-" " " | title }}"
+# ============================================================================
+#  Author profile — starter template
+# ----------------------------------------------------------------------------
+#  Copy this file to  content/authors/<first-letter>/<your-slug>/index.md
+#  and put your avatar image(s) in that same folder. Pick the slug yourself:
+#  lowercase, dashes, usually your name (e.g. content/authors/j/jane-doe/).
+#
+#  The FOLDER NAME is the slug your posts reference in their `authors:` list,
+#  and it is also the URL: /today/author/<folder>/
+#
+#  Include this in the same pull request as your first article.
+# ============================================================================
+title: "Your Name"
 
 # Square avatar image(s) placed in THIS folder, referenced by bare filename.
 # `avatar` (small) is used in cards, grids and the author box; `avatarFull`
@@ -27,9 +36,6 @@ website: ""
 
 # Legacy WordPress author URLs, if this profile ever lived somewhere else.
 aliases: []
-
-# Set true to stop the WordPress conversion scripts from overwriting hand edits.
-frozen: false
 ---
 
 <!-- Optional. Anything here renders below the profile header. Most author

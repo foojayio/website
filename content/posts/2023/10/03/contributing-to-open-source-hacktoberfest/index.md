@@ -1,6 +1,5 @@
 ---
 title: "Contributing to Open Source: Hacktoberfest"
-slug: "contributing-to-open-source-hacktoberfest"
 date: "2023-10-03T09:07:45+00:00"
 lastmod: "2023-10-03T09:08:14+00:00"
 description: "Have you ever considered contributing to open source software, but are you unsure on how to start? Consider participating in Hacktoberfest."
@@ -37,7 +36,7 @@ Participating in Hacktoberfest is quite straightforward:
 * **Read Contribution Guidelines**: Usually projects with have a README and/or CONTRIBUTING file containing some information on how you can contribute/how to find good tickets (such as tagged with #beginnerfriendly, #good-first-issue, etc.) Please follow these to make the experience as pleasant as possible for everyone
 * **Contribute** : find a good ticket, drop a mention you'd like to work on it to prevent multiple people working on it. And raise your merge request. Please do not be afraid of this process, they will provide helpful feedback in case any changes are needed
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-102487 aligncenter" src="gfi-700x227.png" alt="" width="700" height="227">
+{{< img src="gfi-700x227.png" class="size-medium aligncenter" width="700" height="227" >}}
 
 All kinds of contributions are possible, and you certainly don't need to be a developer:
 

@@ -1,6 +1,5 @@
 ---
 title: "Embracing Java 17: Here’s What We Learned at Picnic"
-slug: "embracing-java-17-heres-what-we-learned-at-picnic"
 date: "2022-05-30T08:10:20+00:00"
 lastmod: "2022-05-31T13:45:14+00:00"
 description: "Most Java 17 blog posts focus on shiny new features. We’d like to share what it takes to adopt Java 17 in a large tech team."

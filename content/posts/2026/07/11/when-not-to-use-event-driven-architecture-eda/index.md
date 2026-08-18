@@ -1,6 +1,5 @@
 ---
 title: "🛑⚡ When NOT TO USE Event-Driven Architecture (EDA)"
-slug: "when-not-to-use-event-driven-architecture-eda"
 date: "2026-07-11T00:34:03+00:00"
 lastmod: "2026-07-11T00:34:05+00:00"
 description: "Learn when not to use Event-Driven Architecture (EDA), from simple CRUD apps to strong consistency, immediate responses, and operational complexity."
@@ -62,12 +61,11 @@ A useful rule of thumb is:
 
 Let us examine the most common situations where EDA may actually be the wrong architectural choice.  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-124878" class="size-medium wp-image-124878" src="2noeda-700x467.png" alt="Don't use EDA for everything" width="700" height="467">
+{{< img src="2noeda-700x467.png" class="size-medium" alt="Don't use EDA for everything" width="700" height="467" >}}
 
 Don't use EDA for everything{#caption-attachment-124878}
 
-1. Avoid EDA for Simple CRUD Applications
------------------------------------------
+## 1. Avoid EDA for Simple CRUD Applications
 
 If your application has:
 
@@ -127,8 +125,7 @@ One request, one transaction and one database update. For small CRUD application
 
 **The complexity budget of EDA should be paid only when it brings clear business value.**
 
-2. Avoid EDA When Strong Consistency Is Required
-------------------------------------------------
+## 2. Avoid EDA When Strong Consistency Is Required
 
 Some domains cannot tolerate eventual consistency.
 
@@ -171,8 +168,7 @@ Some business operations require atomicity. Distributed events introduce tempora
 
 **This does not mean EDA is incompatible with finance. Many banks use it extensively, but usually after the transactional boundary.**
 
-3. Avoid EDA When Users Expect an Immediate Response
-----------------------------------------------------
+## 3. Avoid EDA When Users Expect an Immediate Response
 
 Imagine clicking:
 
@@ -217,8 +213,7 @@ public Token login(LoginRequest request) {
 
 Authentication is conversational. The client waits for the answer before continuing. An asynchronous workflow would only increase latency and complexity.
 
-4. Avoid EDA When There Is No Fan-Out
--------------------------------------
+## 4. Avoid EDA When There Is No Fan-Out
 
 One of the biggest strengths of EDA is fan-out:
 
@@ -275,8 +270,7 @@ paymentService.process(order);
 
 If only one service consumes the information, direct calls are usually simpler, easier to debug and cheaper to operate than an event broker.
 
-5. Avoid EDA When Your Team Is Not Operationally Ready
-------------------------------------------------------
+## 5. Avoid EDA When Your Team Is Not Operationally Ready
 
 EDA is an operational architecture, not just a programming model.
 
@@ -315,8 +309,7 @@ handle(event);
 
 Consumers should safely process duplicate events. Idempotency is one of the foundations of reliable event-driven systems.
 
-6. Avoid EDA When the Business Process Is a Conversation
---------------------------------------------------------
+## 6. Avoid EDA When the Business Process Is a Conversation
 
 EDA excels at notifications.
 
@@ -353,8 +346,7 @@ reservationService.reserve(quote);
 
 Sequential workflows where each step depends on the previous result are often easier to express using synchronous service calls.
 
-7. Avoid EDA When You Do Not Have a Real Event Model
-----------------------------------------------------
+## 7. Avoid EDA When You Do Not Have a Real Event Model
 
 Some teams create events such as:
 

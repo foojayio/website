@@ -1,6 +1,5 @@
 ---
 title: "Preserving Software Continuity: Empowering Failover Strategies for Uninterrupted Operations"
-slug: "preserving-software-continuity"
 date: "2023-11-16T07:53:49+00:00"
 lastmod: "2023-11-16T11:16:13+00:00"
 description: "Let’s examine the world of failover strategies and explore how they safeguard software continuity."

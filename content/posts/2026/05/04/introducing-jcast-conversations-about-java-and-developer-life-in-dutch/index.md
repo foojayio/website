@@ -1,6 +1,5 @@
 ---
 title: "JCast"
-slug: "introducing-jcast-conversations-about-java-and-developer-life-in-dutch"
 date: "2026-05-04T08:00:40+00:00"
 description: "JCast: A Dutch podcast about IT, dev life, and soft skills by three Belgian developers exploring what it means to work in software."
 authors:

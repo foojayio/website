@@ -1,6 +1,5 @@
 ---
 title: "Get recognized for your cloud-native Java development skills"
-slug: "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
 date: "2024-08-29T16:08:34+00:00"
 lastmod: "2024-09-05T07:45:54+00:00"
 description: "Earn this brand-new badge, recognizing your ability to effectively develop basic cloud-native Java applications ready for the cloud."

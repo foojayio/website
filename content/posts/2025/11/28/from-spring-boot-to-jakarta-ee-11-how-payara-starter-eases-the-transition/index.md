@@ -1,6 +1,5 @@
 ---
 title: "From Spring Boot To Jakarta EE 11"
-slug: "from-spring-boot-to-jakarta-ee-11-how-payara-starter-eases-the-transition"
 date: "2025-11-28T08:11:53+00:00"
 lastmod: "2025-12-02T10:44:32+00:00"
 description: "Discover how Payara Starter simplifies the transition from Spring Boot to Jakarta EE 11, offering a fast, Spring-style project generator and full Jakarta EE support to get you up and running with minimal boilerplate."

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #44: Quarkus Club"
-slug: "foojay-podcast-44"
 date: "2024-03-04T08:25:41+00:00"
 lastmod: "2025-11-13T08:48:53+00:00"
 description: "Did you know? The Quarkus Clubd initiative started less than a year ago and is already one of the biggest groups in the world dedicated to Quarkus!"

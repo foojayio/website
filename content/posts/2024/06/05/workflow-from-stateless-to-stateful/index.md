@@ -1,6 +1,5 @@
 ---
 title: "Workflow, From Stateless To Stateful"
-slug: "workflow-from-stateless-to-stateful"
 date: "2024-06-05T06:11:38+00:00"
 lastmod: "2024-06-05T06:11:39+00:00"
 description: "How I first limited my usage of BPMN and then unlocked its true power when I benefited from persistent storage."

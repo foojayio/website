@@ -1,6 +1,5 @@
 ---
 title: "Does Java Really Use Too Much Memory? Let’s Look at the Facts (JEPs)"
-slug: "does-java-really-use-too-much-memory-lets-look-at-the-facts-jeps"
 date: "2026-04-03T07:28:09+00:00"
 description: "Breaking news: Java has been confirmed to consume all available RAM. Developers worldwide shocked. … okay, not really. Happy April 1st. It’s only fair to - by Igor De Souza"
 authors:

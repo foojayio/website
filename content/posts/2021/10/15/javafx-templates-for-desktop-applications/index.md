@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Templates for Desktop Applications"
-slug: "javafx-templates-for-desktop-applications"
 date: "2021-10-15T08:48:16+00:00"
 lastmod: "2021-10-18T06:43:51+00:00"
 description: "Both for Maven and Gradle lovers there are different possibilities to build Java executables and GitHub provides the free tools to do so!"
@@ -30,12 +29,7 @@ In this post, we are going to take a look at other different approaches.
 
 [This is a little project on GitHub](https://github.com/HanSolo/fxmodules) that can be used as a template for modularized JavaFX projects, based on JDK17. You can import the `build.gradle` file as a project into your IDE and start the application by using `gradlew Main` from the command line or from within the IDE.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="Screenshot-2021-10-10-at-22.08.21.png" alt="" class="wp-image-49758" width="401" height="183">
- <figcaption>
-  The running template application
- </figcaption>
-</figure>
+{{< img src="Screenshot-2021-10-10-at-22.08.21.png" class="size-full is-resized" width="401" height="183" caption="The running template application" >}}
 
 You will find three script files
 
@@ -70,12 +64,7 @@ The `ci.yml` file will build the native packages for each platform on GitHub aft
 
 The project in this repository uses a multi-module Maven setup with a parent module containing three child modules. One of these child modules is the "main" module as it contains the main class. This module also contains the build scripts and its target directory will contain the results of the build. The JavaFX application consists of a single-window displaying three labels. The first one shows the currently configured locale and the other two labels get imported from module 1 and module 2 respectively.
 
-<figure class="wp-block-image is-resized">
- <a href="https://github.com/dlemmermann/JPackageScriptFX/blob/master/app.png" target="_blank" rel="noreferrer noopener"><img decoding="async" src="https://github.com/dlemmermann/JPackageScriptFX/raw/master/app.png" alt="alt text" width="216" height="216" title="Demo App"></a>
- <figcaption>
-  The second template application
- </figcaption>
-</figure>
+{{< img src="https://github.com/dlemmermann/JPackageScriptFX/raw/master/app.png" class="is-resized" alt="alt text" width="216" height="216" caption="The second template application" >}}
 
 The platform-specific versions are created with Maven and this whole process is very well and detailed explained [in the README file of the GitHub project](https://github.com/dlemmermann/JPackageScriptFX/blob/master/README.md).
 

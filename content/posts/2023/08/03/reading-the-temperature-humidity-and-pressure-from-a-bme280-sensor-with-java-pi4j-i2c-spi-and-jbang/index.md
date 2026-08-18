@@ -1,6 +1,5 @@
 ---
 title: "Temperature, humidity, and pressure in BME280 Sensors with Java"
-slug: "reading-the-temperature-humidity-and-pressure-from-a-bme280-sensor-with-java-pi4j-i2c-spi-and-jbang"
 date: "2023-08-03T07:16:36+00:00"
 lastmod: "2023-08-03T07:16:38+00:00"
 description: "In this tutorial, I want to show you how you can read the temperature, humidity, and pressure from a BME280 Sensor."

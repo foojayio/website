@@ -1,6 +1,5 @@
 ---
 title: "An Introduction to Scoped Values in Java"
-slug: "an-introduction-to-scoped-values-in-java"
 date: "2023-02-20T11:32:20+00:00"
 lastmod: "2023-02-20T11:32:22+00:00"
 description: "The Scoped Values API allows us to store and share immutable data for a bounded lifetime, and is included since Java 20 as an incubator API."

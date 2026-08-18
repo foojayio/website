@@ -1,6 +1,5 @@
 ---
 title: "Introducing Lottie4J, a Java(FX) Library to Parse and Play Lottie Animation Files"
-slug: "introducing-lottie4j-a-javafx-library-to-parse-and-play-lottie-animation-files"
 date: "2026-03-10T08:24:00+00:00"
 description: "I'm proud to present a new JavaFX library: Lottie4J, that brings Lottie animations to JavaFX applications. I first learned about Lottie many years ago - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-03-03-introducing-lottie4j/"

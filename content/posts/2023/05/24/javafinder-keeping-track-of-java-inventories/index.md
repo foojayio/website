@@ -1,6 +1,5 @@
 ---
 title: "JavaFinder: Keeping Track of Java Inventories"
-slug: "javafinder-keeping-track-of-java-inventories"
 date: "2023-05-24T20:12:31+00:00"
 lastmod: "2023-05-26T07:52:14+00:00"
 description: "Do you ever wonder how many Java distros you've installed? Not only for development but also those bundled with the applications you use?"

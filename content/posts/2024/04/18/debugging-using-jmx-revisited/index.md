@@ -1,6 +1,5 @@
 ---
 title: "Debugging Using JMX Revisited"
-slug: "debugging-using-jmx-revisited"
 date: "2024-04-18T13:02:35+00:00"
 lastmod: "2024-04-18T13:23:17+00:00"
 description: "Learn how to leverage JMX and Spring Boot for advanced debugging and management, enabling efficient monitoring and control of Java applications."

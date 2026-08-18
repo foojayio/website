@@ -1,6 +1,5 @@
 ---
 title: "Building a Personalized Content Delivery System"
-slug: "building-a-personalized-content-delivery-system"
 date: "2026-04-23T15:10:45+00:00"
 lastmod: "2026-04-23T15:10:47+00:00"
 description: "Recommendation engines have a reputation for requiring specialized ML infrastructure: matrix factorization pipelines, training jobs, and model serving layers. That is one way to do it, but not the only way. If your data already lives in MongoDB and your application runs on Spring Boot, you can build a practical recommendation system using tools you already have. MongoDB aggregation pipelines handle the scoring math server-side, and Atlas Vector Search adds semantic matching without a separate vector database."
@@ -35,8 +34,7 @@ By the end, you will have a working recommendation API built with Java 21+, Spri
 * An OpenAI API key (used for generating embeddings in the second half of the article)
 * Basic familiarity with Spring Boot (controllers, services, dependency injection)
 
-1. Data model
--------------
+## 1. Data model
 
 The system needs two collections: one for games and one for user profiles. Start with the `Game` document:
 
@@ -170,8 +168,7 @@ Notice how each game has multiple genres, tags, and mechanics. When a user's pre
 
 The companion repository includes a `DataSeeder` component implemented as a `CommandLineRunner` that loads approximately 25 indie games into the `games` collection on startup. This gives you a meaningful dataset to test recommendations against without manual data entry.
 
-2. Project setup
-----------------
+## 2. Project setup
 
 Head over to [Spring Initializr](https://start.spring.io/) and configure a new project. Select **Maven** as the build tool, **Java 21** as the language version, and the latest **Spring Boot 3.x** release. For dependencies, add **Spring Web** and **Spring Data MongoDB**. These two are all you need for now. Spring AI gets added later in section 5 when you build the embedding-based recommendation layer. Generate the project, unzip it, and open it in your IDE.
 
@@ -193,8 +190,7 @@ Replace the placeholders with your Atlas credentials and cluster URL. If you fol
 
 If you want to skip the incremental setup and jump straight into a working project, clone the [companion repository](https://github.com/fhsinchy/indie-game-discovery). It contains the complete source code for every section, so you can follow along with the article or run the finished application directly.
 
-3. Building the content-based recommendation engine
----------------------------------------------------
+## 3. Building the content-based recommendation engine
 
 Before you can generate recommendations, you need endpoints for managing user profiles and a repository for querying games. Start with a simple request DTO and controller for user profiles.
 
@@ -442,8 +438,7 @@ The response is a list of games sorted by score. Take *Slay the Spire* as an exa
 
 That gives it a total score of 3.1. Compare that to *Hollow Knight*, which scores well on "metroidvania" (0.7) and tags like "difficult" (0.8) and "atmospheric" (0.6), but lacks roguelike traits, so it ends up lower in the ranking. The scores map directly to the user's preference weights, which makes the results easy to explain and debug.
 
-4. User ratings and affinity adjustment
----------------------------------------
+## 4. User ratings and affinity adjustment
 
 The recommendation engine works, but the preference weights are static. A user sets their initial preferences once, and the system never learns from their behavior. You need a ratings endpoint that lets users score games they have played, and adjustment logic that updates preference weights based on those ratings.  
 ![](Screenshot-2026-04-17-at-1.26.02-PM.png)
@@ -614,8 +609,7 @@ curl http://localhost:8080/api/recommendations/<user-id>
 
 Compare the two responses. Games that share genres, tags, or mechanics with the highly rated game will have moved up in the rankings because their matching weights increased. Games that do not share those attributes remain at their previous scores. Each rating nudges the profile slightly, and over several ratings, the preference weights settle into a profile that matches what the user actually enjoys.
 
-5. Adding Spring AI embeddings and MongoDB Atlas Vector Search
---------------------------------------------------------------
+## 5. Adding Spring AI embeddings and MongoDB Atlas Vector Search
 
 The preference engine works well when a user's tags literally match a game's tags. But it misses semantic connections. A game tagged "exploration" and "mystery" should appeal to a user who likes "adventure" and "narrative," because those concepts are closely related. The preference engine scores that match at zero since none of the strings overlap.
 
@@ -832,8 +826,7 @@ public RecommendationService(MongoTemplate mongoTemplate,
 
 Using the same user profile from section 3, vector search surfaces games like *Outer Wilds* (tagged "exploration" and "mystery") even though the user's preferences contain "adventure" and "narrative" rather than those exact terms. The preference engine gives *Outer Wilds* a low score because there is no literal tag overlap, but the embedding vectors for "exploration" and "adventure" are close in vector space, so `$vectorSearch` ranks it highly. This is the gap that embeddings fill.
 
-6. Combining both signals
--------------------------
+## 6. Combining both signals
 
 You now have two recommendation approaches that each capture something the other misses. Content-based scoring reflects what the user explicitly told you they want. Vector similarity catches semantic relationships that literal tag matching overlooks. The next step is to merge both into a single ranked result.
 
@@ -962,8 +955,7 @@ The 0.6/0.4 split is a reasonable starting point, not a universal answer. The ri
 
 Treat these weights as a tunable parameter, not a fixed constant. You could also make them dynamic per user, shifting toward content-based as the system accumulates more ratings.
 
-7. Testing the full workflow
-----------------------------
+## 7. Testing the full workflow
 
 With all the pieces in place, walk through the full cycle: create a user, get initial recommendations, submit ratings, and observe how the results change.
 

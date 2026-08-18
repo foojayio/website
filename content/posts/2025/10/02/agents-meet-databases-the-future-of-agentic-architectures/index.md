@@ -1,6 +1,5 @@
 ---
 title: "Agents Meet Databases: The Future of Agentic Architectures"
-slug: "agents-meet-databases-the-future-of-agentic-architectures"
 date: "2025-10-02T15:01:49+00:00"
 lastmod: "2025-10-02T15:01:51+00:00"
 description: "With 2025 hailed as \"the year of agents\" by NVIDIA CEO Jensen Huang and OpenAI CPO Kevin Weil, AI agents are increasingly of interest to organizations across industries. These autonomous systems will often need to interact with databases, where much of the world’s valuable data resides. According to IDC’s Data Age 2025 report, enterprises will manage nearly 60% of the world’s data by 2025, most of it organized in databases. As a result, databases will be central to agentic architectures, and the success of agent deployments will depend on how well they connect and interact with them.Enter the Model Context Protocol (MCP), originally developed by Anthropic. MCP has quickly become popular as a standardized method for connecting tools and data to agentic systems, offering a new approach to agent-database interoperability. But this raises key questions for AI developers: What do agentic architectures involving databases actually look like? And what should you consider when building one?"

@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code - May Update"
-slug: "java-on-visual-studio-code-may-update"
 date: "2022-06-20T14:06:37+00:00"
 lastmod: "2023-06-13T11:01:05+00:00"
 description: "Exciting improvements to our user experience regarding signature help and code completion as well as new Gradle features."

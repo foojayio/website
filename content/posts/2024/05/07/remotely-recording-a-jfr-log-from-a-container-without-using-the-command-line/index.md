@@ -1,6 +1,5 @@
 ---
 title: "Remotely Recording a JFR Log from a Container (Without Using the Command Line)"
-slug: "remotely-recording-a-jfr-log-from-a-container-without-using-the-command-line"
 date: "2024-05-07T04:32:29+00:00"
 lastmod: "2024-05-07T04:33:47+00:00"
 description: "JFR logs are easily obtained by simply going into the command line. But what if you don't have access to the command line or terminal directly on the system where the JVM is running?"

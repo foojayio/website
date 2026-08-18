@@ -1,6 +1,5 @@
 ---
 title: "Building an AI-Powered Operations Assistant with Spring AI and MongoDB Atlas — Part 2: Conversational Memory"
-slug: "building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-2-conversational-memory"
 date: "2026-06-10T19:23:46+00:00"
 lastmod: "2026-06-10T19:23:48+00:00"
 description: "This is the second article in a three-part series. Part 1 covered the RAG foundation — loading runbooks into a vector store and wiring them to a language model. Part 3 will introduce stateful workflow checkpointing with pause and resume."

@@ -1,6 +1,5 @@
 ---
 title: "BoxLang NeoVim Plugin Released"
-slug: "boxlang-neovim-plugin-released"
 date: "2026-02-18T14:51:35+00:00"
 lastmod: "2026-02-19T08:42:51+00:00"
 description: "We're excited to announce the release of the BoxLang NeoVim Plugin - a comprehensive syntax highlighting solution designed specifically for BoxLang - by Cristobal Escobar"
@@ -95,13 +94,12 @@ class UserService {
      * Safe navigation with elvis operator
      */
     public function getEmail() {
-        return this.user?.email ?: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b3dddc9ed6ded2dadff3d6cbd2dec3dfd69dd0dcde">[email protected]</a>";
+        return this.user?.email ?: "[email protected]";
     }
 }
 ```
 
-2. BoxLang Templates (`.bxm`)
------------------------------
+## 2. BoxLang Templates (`.bxm`)
 
 Markup-based syntax for views, layouts, and content generation:
 

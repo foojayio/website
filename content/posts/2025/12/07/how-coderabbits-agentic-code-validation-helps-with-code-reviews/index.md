@@ -1,6 +1,5 @@
 ---
 title: "How CodeRabbit's Agentic Code Validation helps with code reviews"
-slug: "how-coderabbits-agentic-code-validation-helps-with-code-reviews"
 date: "2025-12-07T11:10:21+00:00"
 lastmod: "2025-12-07T11:14:09+00:00"
 description: "Instead of chasing higher benchmark scores or relying on traditional metrics, CodeRabbit focuses on how AI systems actually perform in live engineering environments through custom evaluation methods, some visible directly on the PRs we review."

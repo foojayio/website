@@ -1,6 +1,5 @@
 ---
 title: "Spring Framework 7 API Versioning Explained"
-slug: "explore-spring-framework-7-features-api-versioning"
 date: "2025-10-29T06:45:53+00:00"
 lastmod: "2025-10-29T06:45:54+00:00"
 description: "Discover how Spring Framework 7 introduces powerful API versioning support. Learn configuration options to manage multiple API versions effectively in your Spring Boot applications."

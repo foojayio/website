@@ -1,6 +1,5 @@
 ---
 title: "Funding Open Source Without The Bait And Switch: Analytics, Native Maps, TV And More"
-slug: "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 date: "2026-07-05T13:41:00+00:00"
 description: "This week adds a privacy-first analytics API, a pure-vector map engine with pluggable native providers, Apple TV and Android TV support with CSS @media for"
 canonical: "https://www.codenameone.com/blog/funding-open-source-without-the-bait-and-switch/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "native-linux-apple-watch-a-game-builder-and-crash-protection"
 frozen: false
 ---
 

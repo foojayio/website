@@ -1,6 +1,5 @@
 ---
 title: "JDKMon 17.0.23 Released"
-slug: "jdkmon-17-0-23-released"
 date: "2022-03-11T09:52:39+00:00"
 lastmod: "2022-03-11T10:01:02+00:00"
 description: "JDKMon is a little tool written in JavaFX that tries to detect all OpenJDK distros installed while keeping track of updates for them."
@@ -24,9 +23,7 @@ JDKMon is a little tool written in JavaFX that tries to detect all OpenJDK distr
 
 It will scan for new updates every three hours and will inform you about available updates.
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img fetchpriority="high" decoding="async" src="jdkmon-17.0.23.png" alt="" class="wp-image-52579" width="423" height="306">
-</figure>
+{{< img src="jdkmon-17.0.23.png" class="size-full is-resized" width="423" height="306" >}}
 
 **Note:** JDKMon won't install the distributions on your machine but will enable you to download them to a place of your choice.
 
@@ -65,9 +62,7 @@ At the moment the following distributions are supported:
 
 JDKMon 17.0.23 has just been released and brings a new feature consisting of CVE's that are found will be coloured according to their score, e.g., low is green and high is red.
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img decoding="async" src="slack-imgs.com_.png" alt="" class="wp-image-52580" width="279" height="135">
-</figure>
+{{< img src="slack-imgs.com_.png" class="size-full is-resized" width="279" height="135" >}}
 
 JDKMon is available for the following platforms:
 

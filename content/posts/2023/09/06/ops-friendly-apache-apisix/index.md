@@ -1,6 +1,5 @@
 ---
 title: "Ops friendly Apache APISIX"
-slug: "ops-friendly-apache-apisix"
 date: "2023-09-06T06:27:42+00:00"
 lastmod: "2023-09-06T06:27:43+00:00"
 description: "When configuring Apache APISIX, we should ensure it's as operable as possible. In this post, I've described several ways to make it so."

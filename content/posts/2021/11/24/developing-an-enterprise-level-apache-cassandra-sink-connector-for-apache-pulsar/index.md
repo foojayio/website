@@ -1,6 +1,5 @@
 ---
 title: "Enterprise-Level Apache Cassandra Sink Connector for Apache Pulsar"
-slug: "developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar"
 date: "2021-11-24T19:16:16+00:00"
 lastmod: "2021-11-24T19:17:46+00:00"
 description: "From streaming with Apache Pulsar to connecting existing enterprise data sources to Apache Cassandra using Pulsar."

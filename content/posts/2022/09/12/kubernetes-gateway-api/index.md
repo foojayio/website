@@ -1,6 +1,5 @@
 ---
 title: "A Quick Glance at the Kubernetes Gateway API"
-slug: "kubernetes-gateway-api"
 date: "2022-09-12T09:55:16+00:00"
 lastmod: "2022-09-12T09:55:17+00:00"
 description: "The idea behind the Gateway API is to have a clean separation between standard objects and the proprietary implementation."

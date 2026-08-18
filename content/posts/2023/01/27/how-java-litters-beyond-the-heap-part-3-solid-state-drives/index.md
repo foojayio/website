@@ -1,6 +1,5 @@
 ---
 title: "How Java Litters Beyond the Heap: Solid-State Drives"
-slug: "how-java-litters-beyond-the-heap-part-3-solid-state-drives"
 date: "2023-01-27T10:54:47+00:00"
 lastmod: "2023-01-27T10:57:10+00:00"
 description: "Explore how solid-state drives (SSDs), the default storage medium for on-disk data, use garbage collection."

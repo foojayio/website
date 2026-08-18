@@ -1,6 +1,5 @@
 ---
 title: "Multi-cluster Cassandra with Google Kubernetes Engine (Pt. 2)"
-slug: "multi-cluster-cassandra-deployment-with-google-kubernetes-engine-pt-2"
 date: "2022-09-08T17:20:08+00:00"
 lastmod: "2022-09-09T07:56:52+00:00"
 description: "This is the second in a series of posts examining patterns for using K8ssandra to create Cassandra clusters."

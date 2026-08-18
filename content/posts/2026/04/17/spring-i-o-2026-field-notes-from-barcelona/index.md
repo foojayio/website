@@ -1,6 +1,5 @@
 ---
 title: "Spring I/O 2026: Field Notes from Barcelona"
-slug: "spring-i-o-2026-field-notes-from-barcelona"
 date: "2026-04-17T13:09:24+00:00"
 description: "Three days at Spring I/O 2026 in Barcelona. Agents, Embabel, the sessions that didn't get the main stage, and a booth full of dragons"
 authors:
@@ -12,9 +11,9 @@ categories:
 tags:
 related_posts:
   - "spring-ai-agents-no-second-runtime"
+  - "idempotent-spring-boot-starter"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
-  - "did-ai-just-break-software-security-for-ever"
 frozen: false
 ---
 

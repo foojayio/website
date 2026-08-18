@@ -1,6 +1,5 @@
 ---
 title: "Why Your Choice of JVM Matters More Than Ever"
-slug: "why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever"
 date: "2023-01-11T17:36:35+00:00"
 lastmod: "2023-02-06T19:31:26+00:00"
 description: "Learn why when you use hyper-optimized Java runtimes instead of vanilla OpenJDK you do less tuning and debugging!"

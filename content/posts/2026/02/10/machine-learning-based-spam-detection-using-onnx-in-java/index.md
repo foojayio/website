@@ -1,6 +1,5 @@
 ---
 title: "Machine Learning in Java - SPAM detection using ONNX"
-slug: "machine-learning-based-spam-detection-using-onnx-in-java"
 date: "2026-02-10T06:51:50+00:00"
 lastmod: "2026-02-10T06:55:53+00:00"
 description: "See how to use machine learning in java by building a Spring Boot API for Spam Detection using the ONNX Runtime for Java."

@@ -1,6 +1,5 @@
 ---
 title: "Modeling One-to-Many Relationships in Java with MongoDB"
-slug: "modeling-one-to-many-relationships-in-java-with-mongodb"
 date: "2026-03-26T15:50:30+00:00"
 lastmod: "2026-03-26T15:50:32+00:00"
 description: "This tutorial walks you through both approaches — embedded documents and references — using plain Java POJOs and the MongoDB Java Sync Driver. You'll build a small blogging application, see the resulting document structures, and learn when each pattern shines (and when it doesn't). Along the way, we'll also introduce a hybrid strategy known as the Subset Pattern that combines the best of both worlds."
@@ -312,7 +311,7 @@ public class EmbeddedExample {
 
     public void run() {
         // 1. Build the author as an embedded User object
-        User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97f6fbfef4f2d7f2eff6fae7fbf2b9f4f8fa">[email protected]</a>",
+        User alice = new User("alice", "Alice Johnson", "[email protected]",
                 "Java developer and MongoDB enthusiast.");
 
         // 2. Build the post with the embedded author and comments
@@ -368,7 +367,7 @@ The resulting MongoDB document looks like this:
   "author": {
     "username": "alice",
     "display_name": "Alice Johnson",
-    "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8f82878d8bae8b968f839e828bc08d8183">[email protected]</a>",
+    "email": "[email protected]",
     "bio": "Java developer and MongoDB enthusiast."
   },
   "published_at": ISODate("2025-01-01T00:00:00Z"),
@@ -543,11 +542,11 @@ public class ReferencedExample {
 
     public void run() {
         // 1. Insert users into the users collection
-        User alice = new User("alice", "Alice Johnson", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7d6dbded4d2f7d2cfd6dac7dbd299d4d8da">[email protected]</a>",
+        User alice = new User("alice", "Alice Johnson", "[email protected]",
                 "Java developer and MongoDB enthusiast.");
-        User bob = new User("bob", "Bob Smith", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb999499bb9e839a968b979ed5989496">[email protected]</a>",
+        User bob = new User("bob", "Bob Smith", "[email protected]",
                 "Backend engineer who loves databases.");
-        User carol = new User("carol", "Carol Williams", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d0e0c1f02012d08150c001d0108430e0200">[email protected]</a>",
+        User carol = new User("carol", "Carol Williams", "[email protected]",
                 "Full-stack developer and tech blogger.");
         usersCollection.insertMany(Arrays.asList(alice, bob, carol));
 
@@ -639,7 +638,7 @@ The resulting MongoDB documents span three collections:
   "_id": ObjectId("uuu"),
   "username": "alice",
   "display_name": "Alice Johnson",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9f92979d9bbe9b869f938e929bd09d9193">[email protected]</a>",
+  "email": "[email protected]",
   "bio": "Java developer and MongoDB enthusiast.",
   "joined_at": ISODate("...")
 },
@@ -647,7 +646,7 @@ The resulting MongoDB documents span three collections:
   "_id": ObjectId("uuu2"),
   "username": "bob",
   "display_name": "Bob Smith",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="02606d6042677a636f726e672c616d6f">[email protected]</a>",
+  "email": "[email protected]",
   "bio": "Java developer and MongoDB enthusiast.",
   "joined_at": ISODate("...")
 }]

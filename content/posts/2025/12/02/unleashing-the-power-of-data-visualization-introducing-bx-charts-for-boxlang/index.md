@@ -1,6 +1,5 @@
 ---
 title: "Unleashing the Power of Data Visualization: Introducing BX-Charts for BoxLang"
-slug: "unleashing-the-power-of-data-visualization-introducing-bx-charts-for-boxlang"
 date: "2025-12-02T09:21:00+00:00"
 description: "In the world of modern web applications, data is king—but raw numbers rarely tell the full story. 📈 That's where visualization becomes crucial, - by Cristobal Escobar"
 authors:

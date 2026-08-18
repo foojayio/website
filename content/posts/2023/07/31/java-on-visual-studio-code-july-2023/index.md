@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code – July 2023"
-slug: "java-on-visual-studio-code-july-2023"
 date: "2023-07-31T07:11:13+00:00"
 lastmod: "2023-08-01T07:11:40+00:00"
 description: "Learn about the improved decompiler functionality. Additionally, we are going to do a deep-dive into our code completion."

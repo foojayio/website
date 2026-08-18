@@ -1,6 +1,5 @@
 ---
 title: "Patterns For The Design Of Microservices – Part 3"
-slug: "patterns-for-the-design-of-microservices-part-3"
 date: "2023-11-16T04:35:02+00:00"
 lastmod: "2023-11-19T21:31:57+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."
@@ -28,7 +27,7 @@ This blog post will cover the subsequent design patterns.
 * Observability Patterns
 * Cross-cutting Concern Patterns
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-103034" src="MSPatternsOne-700x394.png" alt="Microservice Architecture" width="700" height="394">
+{{< img src="MSPatternsOne-700x394.png" class="size-medium" alt="Microservice Architecture" width="700" height="394" >}}
 
 Microservice Architecture Patterns
 

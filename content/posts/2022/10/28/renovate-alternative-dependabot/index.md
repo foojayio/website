@@ -1,6 +1,5 @@
 ---
 title: "Renovate: Dependabot Alternative"
-slug: "renovate-alternative-dependabot"
 date: "2022-10-28T07:17:55+00:00"
 lastmod: "2023-03-27T15:25:07+00:00"
 description: "Compared to Dependabot, I love Renovate's capability to update Docker, Docker Compose, and Kubernetes files. I'll use it from now on!"
@@ -53,7 +52,7 @@ In the end, I ended up with the following Renovate runner configuration:
 
 ```yaml
 variables:
-  RENOVATE_GIT_AUTHOR: Renovate Bot <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="60020f142012050e0f160114054e030f0d">[email protected]</a>>
+  RENOVATE_GIT_AUTHOR: Renovate Bot <[email protected]>
   RENOVATE_REQUIRE_CONFIG: optional
 
 include:

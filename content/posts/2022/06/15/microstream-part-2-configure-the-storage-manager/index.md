@@ -1,6 +1,5 @@
 ---
 title: "MicroStream: Configure the StorageManager"
-slug: "microstream-part-2-configure-the-storage-manager"
 date: "2022-06-15T08:04:11+00:00"
 lastmod: "2022-06-15T08:05:25+00:00"
 description: "In this second article in the series, we cover how to get started configuring the StorageManager of MicroStream!"

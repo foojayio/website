@@ -1,6 +1,5 @@
 ---
 title: "Using Java Flight Recorder and Mission Control (Part 3)"
-slug: "using-java-flight-recorder-and-mission-control-part-3"
 date: "2020-11-19T09:13:02+00:00"
 lastmod: "2025-02-17T09:30:30+00:00"
 description: "Did you know Java Flight Recorder offers a public API for controling JFR programmatically or to read events from a JFR file? Read on!"

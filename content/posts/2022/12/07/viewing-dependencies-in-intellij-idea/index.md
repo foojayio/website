@@ -1,6 +1,5 @@
 ---
 title: "Viewing Maven and Gradle Dependencies in IntelliJ IDEA"
-slug: "viewing-dependencies-in-intellij-idea"
 date: "2022-12-07T08:54:13+00:00"
 lastmod: "2022-12-07T08:54:14+00:00"
 description: "In this article, we're going to take a look at different ways to view your external dependencies in IntelliJ IDEA."

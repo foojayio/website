@@ -1,6 +1,5 @@
 ---
 title: "Native Memory in Java: Arenas, Malloc, and Pools"
-slug: "java-native-memory-allocation-ffm-api"
 date: "2026-03-20T10:20:04+00:00"
 lastmod: "2026-03-23T10:45:17+00:00"
 description: "Managing native memory in Java using the Foreign Function & Memory API, covering Arenas, manual allocation, pooling, and slicing"
@@ -16,8 +15,8 @@ tags:
 related_posts:
   - "pointer-arithmetic-in-modern-java"
   - "async-file-io-with-java-and-io_uring"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

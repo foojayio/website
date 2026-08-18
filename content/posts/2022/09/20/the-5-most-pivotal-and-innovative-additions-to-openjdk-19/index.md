@@ -1,6 +1,5 @@
 ---
 title: "The 5 Most Pivotal and Innovative Additions to OpenJDK 19"
-slug: "the-5-most-pivotal-and-innovative-additions-to-openjdk-19"
 date: "2022-09-20T16:25:12+00:00"
 lastmod: "2022-09-21T15:13:48+00:00"
 description: "Although OpenJDK 19 is not an LTS, it is still a significant release, in my opinion. It includes several game-changing features!"

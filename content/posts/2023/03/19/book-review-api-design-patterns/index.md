@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"API Design Patterns\""
-slug: "book-review-api-design-patterns"
 date: "2023-03-19T15:20:56+00:00"
 lastmod: "2023-03-19T15:21:25+00:00"
 description: "This review is about API Design Patterns by JJ Geewax from Manning. Check it out and if you've read it too, what did you think?"

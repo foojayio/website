@@ -1,6 +1,5 @@
 ---
 title: "Building a Spring Boot CRUD Application Using MongoDB’s Relational Migrator"
-slug: "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
 date: "2025-07-08T19:05:43+00:00"
 lastmod: "2025-07-08T19:08:25+00:00"
 description: "Learn how transitioning from traditional relational databases to MongoDB’s dynamic and schema-less architecture can be overwhelming, but MongoDB’s Relational Migrator simplifies the process."

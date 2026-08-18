@@ -1,6 +1,5 @@
 ---
 title: "The Basis of Virtual Threads: Continuations"
-slug: "the-basis-of-virtual-threads-continuations"
 date: "2023-04-28T13:38:05+00:00"
 lastmod: "2023-04-28T13:45:23+00:00"
 description: "In Project Loom, \"continuation\" is delimited, a \"coroutine\", sequential code suspends or yields execution by itself, resumed by a caller."
@@ -194,7 +193,13 @@ When executing the above example, we will get the following output.
 Continuation running
 ```
 
-When we change the `continuation.run();` line as below and run the code again, we get a different output.
+When we change the
+
+```
+continuation.run();
+```
+
+line as below and run the code again, we get a different output.
 
 ```java
 while (!continuation.isDone()){

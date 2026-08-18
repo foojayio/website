@@ -1,6 +1,5 @@
 ---
 title: "VS Code s Getting Better & Better for Java"
-slug: "vs-code-getting-better-and-better-for-java"
 date: "2021-05-18T07:13:13+00:00"
 lastmod: "2021-05-18T07:16:39+00:00"
 description: "We have made progresses in all key areas including core language support, testing, debugging, refactoring and project management."

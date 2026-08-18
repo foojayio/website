@@ -1,6 +1,5 @@
 ---
 title: "Scoped Values: Why I Banned ThreadLocal in Exeris"
-slug: "banned-threadlocal-java-scoped-values"
 date: "2026-05-28T09:36:00+00:00"
 lastmod: "2026-06-03T07:06:38+00:00"
 description: "Why ThreadLocal kills performance under Project Loom and how the Exeris Kernel uses Scoped Values for true zero-copy architecture."
@@ -17,7 +16,7 @@ related_posts:
   - "virtual-thread-pinning-field-guide"
   - "foojay-podcast-64"
   - "foojay-podcast-92"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

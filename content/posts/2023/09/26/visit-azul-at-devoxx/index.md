@@ -1,6 +1,5 @@
 ---
 title: "Visit Azul at Devoxx!"
-slug: "visit-azul-at-devoxx"
 date: "2023-09-26T07:55:31+00:00"
 lastmod: "2023-09-27T14:42:11+00:00"
 description: "As a sponsor of the largest Java developer community conference in Europe, the Azul team is excited to be back!"

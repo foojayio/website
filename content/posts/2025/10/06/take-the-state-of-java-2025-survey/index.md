@@ -1,6 +1,5 @@
 ---
 title: "Take the State of Java 2025 Survey"
-slug: "take-the-state-of-java-2025-survey"
 date: "2025-10-06T12:23:17+00:00"
 lastmod: "2025-10-07T05:30:45+00:00"
 description: "Take the State of Java 2025 Survey and learn what's being used where and how in the Java ecosystem."

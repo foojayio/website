@@ -1,6 +1,5 @@
 ---
 title: "Java 24 : What's New?"
-slug: "java-24-whats-new"
 date: "2025-02-26T09:58:53+00:00"
 lastmod: "2026-07-03T12:15:12+00:00"
 description: "What's new in Java 24 for us, developers"

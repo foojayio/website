@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #52 from JCON in Cologne!"
-slug: "foojay-podcast-52"
 date: "2024-06-10T09:32:12+00:00"
 lastmod: "2025-11-13T08:46:18+00:00"
 description: "Garbage Collectors, Intelligence Cloud, Test Containers and Flaky Tests, ToxiProxy, Structured Concurrency, and Virtual Threads!"

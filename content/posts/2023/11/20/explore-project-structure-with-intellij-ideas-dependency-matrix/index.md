@@ -1,6 +1,5 @@
 ---
 title: "Explore project structure with IntelliJ IDEA's Dependency Matrix"
-slug: "explore-project-structure-with-intellij-ideas-dependency-matrix"
 date: "2023-11-20T10:28:01+00:00"
 lastmod: "2023-11-28T07:47:47+00:00"
 description: "Use IntelliJ IDEA's Dependency Matrix to explore the structure of your project and the dependencies between components."

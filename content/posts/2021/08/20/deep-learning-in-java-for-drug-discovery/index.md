@@ -1,6 +1,5 @@
 ---
 title: "Deep Learning in Java for Drug Discovery"
-slug: "deep-learning-in-java-for-drug-discovery"
 date: "2021-08-20T09:28:10+00:00"
 lastmod: "2023-07-11T09:40:33+00:00"
 description: "Tremendous potential for Deep Netts in the drug discovery pipeline and it is necessary to share its existence with the scientific community!"

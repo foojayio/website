@@ -1,6 +1,5 @@
 ---
 title: "Fixed Window Counter Rate Limiter (Redis & Java)"
-slug: "fixed-window-counter-rate-limiter-redis-java"
 date: "2025-01-20T16:34:18+00:00"
 lastmod: "2025-02-22T20:31:41+00:00"
 description: "Learn how to implement a Fixed Window Rate Limiter with Redis and Java! This detailed guide covers everything from the basics of rate-limiting to Java implem..."
@@ -222,7 +221,7 @@ test
 org.assertj
 assertj-core
 3.11.1
-test<code></code>
+test
 ```
 
 Once you've added these dependencies, you're ready to start writing your test class.

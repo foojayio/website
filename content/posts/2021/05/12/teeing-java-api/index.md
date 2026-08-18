@@ -1,6 +1,5 @@
 ---
 title: "Introducing Teeing: A Hidden Gem in the Java API"
-slug: "teeing-java-api"
 date: "2021-05-12T07:15:07+00:00"
 lastmod: "2021-08-23T13:05:39+00:00"
 description: "teeing() method returns a Collector, a composite of two downstream collectors. There will be a single Collector and a single pass in the end."
@@ -18,7 +17,7 @@ frozen: false
 
 Last week, I [described a use-case](https://blog.frankel.ch/real-world-stream-collector/) for a custom Stream `Collector`. I received a intriguing comment on Twitter:
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-44873 size-medium" src="Screenshot-2021-05-09-at-15.31.46-700x171.png" alt="" width="700" height="171">
+{{< img src="Screenshot-2021-05-09-at-15.31.46-700x171.png" class="aligncenter size-medium" width="700" height="171" >}}
 
 Hats off to you, Miguel! Your comment revealed a method I didn't know!
 

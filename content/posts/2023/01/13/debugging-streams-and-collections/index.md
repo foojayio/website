@@ -1,6 +1,5 @@
 ---
 title: "Debugging Streams and Collections"
-slug: "debugging-streams-and-collections"
 date: "2023-01-13T14:59:59+00:00"
 lastmod: "2023-01-13T15:01:35+00:00"
 description: "Java 8 streams improved readability and provide great debugging opportunities. There are amazing tools for inspecting collections and arrays."

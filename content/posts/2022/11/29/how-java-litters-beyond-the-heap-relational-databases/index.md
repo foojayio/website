@@ -1,6 +1,5 @@
 ---
 title: "How Java Litters Beyond the Heap: Relational Databases"
-slug: "how-java-litters-beyond-the-heap-relational-databases"
 date: "2022-11-29T19:08:04+00:00"
 lastmod: "2023-01-27T10:55:42+00:00"
 description: "Let’s create a simple Java application and see how the application generates garbage at the relational database level."

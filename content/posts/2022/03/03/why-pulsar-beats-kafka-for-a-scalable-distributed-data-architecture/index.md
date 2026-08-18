@@ -1,6 +1,5 @@
 ---
 title: "Why Pulsar Beats Kafka for a Scalable, Distributed Data Architecture"
-slug: "why-pulsar-beats-kafka-for-a-scalable-distributed-data-architecture"
 date: "2022-03-03T14:10:45+00:00"
 lastmod: "2022-07-22T03:31:07+00:00"
 description: "This article argues why Apache Pulser is better than Apache Kafka when it comes to using cloud and microservices and how it fits the open-source mindset."

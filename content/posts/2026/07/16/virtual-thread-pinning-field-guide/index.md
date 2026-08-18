@@ -1,6 +1,5 @@
 ---
 title: "Your Loom App Quietly Became a Thread Pool Again: A Field Guide to Virtual Thread Pinning"
-slug: "virtual-thread-pinning-field-guide"
 date: "2026-07-16T07:43:16+00:00"
 description: "The incident that taught me to respect pinning looked like nothing. A service freshly migrated to virtual threads, a load test that plateaued at about 420 - by Felipe Maschio Virtual thread pinning quietly turns your Loom app back into a bounded thread pool. The two causes, what JEP 491 changed in JDK 24, how to detect it with JFR, and how to fix it."
 canonical: "https://dev.to/maschiojv/your-loom-app-quietly-became-a-thread-pool-again-a-field-guide-to-virtual-thread-pinning-2a3f"

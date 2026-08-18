@@ -1,6 +1,5 @@
 ---
 title: "Modeling Relationships With Hibernate ORM and MongoDB"
-slug: "modeling-relationships-with-hibernate-orm-and-mongodb"
 date: "2025-11-04T17:08:49+00:00"
 lastmod: "2025-12-12T21:20:20+00:00"
 description: "In the previous article—Getting Started With Hibernate ORM and MongoDB—we learned how to configure Hibernate to work with MongoDB, create an entity, and perform basic CRUD operations using the familiar Hibernate API.If you haven’t read that first part yet, I recommend starting there before continuing. It covers the project setup, dependencies, and the fundamentals that we’ll build upon here.In this second part, we’ll extend our application to model relationships between entities—introducing a Review entity and linking it to our existing Book class. This will allow us to explore more advanced capabilities of the MongoDB Hibernate integration, including:Representing one-to-many relationships.Storing embedded data structures.Executing more complex queries.By the end of this tutorial, you’ll see how Hibernate and MongoDB can work together to model richer, interconnected data, all while using the same familiar annotations and APIs from the ORM world."

@@ -1,6 +1,5 @@
 ---
 title: "SQL Query Optimization: How to Identify and Optimize Slow SQL Queries"
-slug: "sql-query-optimization-how-to-identify-and-optimize-slow-sql-queries"
 date: "2024-05-09T21:44:39+00:00"
 lastmod: "2024-05-13T09:45:59+00:00"
 description: "In this article, we want to share our experience using real-life examples on how to identify and optimize slow SQL queries, especially when working with relational database management systems like PostgreSQL, MySQL, MSSQL, Oracle, etc."
@@ -15,7 +14,7 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "effective-coding-with-java-observability"
   - "foojay-podcast-29"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Payara Platform 2021 Survey Ready For You!"
-slug: "payara-platform-2021-survey"
 date: "2021-02-23T08:22:13+00:00"
 lastmod: "2021-03-08T17:37:53+00:00"
 description: "The Payara Platform 2021 Survey is underway and we're inviting everyone to answer a few questions about your use of the Payara Platform."

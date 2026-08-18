@@ -1,6 +1,5 @@
 ---
 title: "Gerrit and Ivar's North America JUG Tour!"
-slug: "gerrit-and-ivars-north-america-jug-tour"
 date: "2023-09-10T07:55:15+00:00"
 lastmod: "2023-09-12T03:11:11+00:00"
 description: "Because I will be in the US this month, I decided to do a little Java User Group tour again. Ivar Grimstad will join me!"

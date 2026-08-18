@@ -1,6 +1,5 @@
 ---
 title: "The proper way to define configuration properties in Spring"
-slug: "the-proper-way-to-define-configuration-properties-in-spring"
 date: "2025-01-07T16:55:31+00:00"
 lastmod: "2025-01-22T09:50:05+00:00"
 description: "Upgrading from Spring Boot 2 to 3 forced me to define my configuration properties in a better way."
@@ -16,7 +15,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -24,7 +23,13 @@ frozen: false
 
 I recently did a (long overdue) **migration from Spring Boot 2 to 3** on one of our larger applications.
 
-Something that surprised me was that classes marked with `@ConfigurationProperties` had properties that were properly bound when running in Spring Boot 2 but were **no longer** bound after the upgrade.
+Something that surprised me was that classes marked with
+
+```
+@ConfigurationProperties
+```
+
+had properties that were properly bound when running in Spring Boot 2 but were **no longer** bound after the upgrade.
 
 Luckily, the automated testing suite caught this issue at *run time* , but it's obvious that such a thing silently failing can be **quite problematic**.
 
@@ -47,7 +52,19 @@ app:
     foo: 'foonest'
 ```
 
-And you can run the `DemoApp` to see what the `ApplicationProperties` contain at run time.
+And you can run the
+
+```
+DemoApp
+```
+
+to see what the
+
+```
+ApplicationProperties
+```
+
+contain at run time.
 
 ## The initial set-up in Spring Boot 2.
 
@@ -71,8 +88,14 @@ public class ApplicationProperties {
 
 Nothing special here except maybe some *lombok magic* 🪄
 
-Running the `DemoApp` gives us what we expect, though:
->
+Running the
+
+```
+DemoApp
+```
+
+gives us what we expect, though:
+
 > ```
 > ApplicationProperties(
 >  url=foo,
@@ -84,7 +107,14 @@ Running the `DemoApp` gives us what we expect, though:
 
 ## Spring boot 3: Some of my properties are suddenly empty!
 
-**Module-spring3-wrong** contains the **exact same setup** we've just seen in **module-spring2** but running the `DemoApp` gives us:
+**Module-spring3-wrong** contains the **exact same setup** we've just seen in **module-spring2** but running the
+
+```
+DemoApp
+```
+
+gives us:
+
 > ApplicationProperties(  
 >
 > url=null,  
@@ -97,9 +127,37 @@ Running the `DemoApp` gives us what we expect, though:
 >
 > )
 
-`url` and `username` now contains a `null` value, while `required` went from true to false... Not good!
+```
+url
+```
 
-Strangely, the `nested` property is still filled in...
+and
+
+```
+username
+```
+
+now contains a
+
+```
+null
+```
+
+value, while
+
+```
+required
+```
+
+went from true to false... Not good!
+
+Strangely, the
+
+```
+nested
+```
+
+property is still filled in...
 
 So, can you spot what changed from spring boot 2 to spring boot 3?
 
@@ -124,10 +182,27 @@ But Spring Boot 3 strongly favours *constructor binding* , and **if a single par
 
 The ApplicationProperties in our example have a sole constructor which only contains the `nested` property, so the other properties are simply not bound or have *default* values.
 
-Normally using Lombok sparsely isn't all that bad, but in this case the sole constructor we made was somewhat hidden by using `@RequiredArgsConstructor` , obscuring the problem for me...
+Normally using Lombok sparsely isn't all that bad, but in this case the sole constructor we made was somewhat hidden by using
 
-The **easy** solution I first saw was to just replace the `@RequiredArgsConstructor` with a `@AllArgsConstructor` or mark the fields final. Problem solved.  
+```
+@RequiredArgsConstructor
+```
 
+, obscuring the problem for me...
+
+The **easy** solution I first saw was to just replace the
+
+```
+@RequiredArgsConstructor
+```
+
+with a
+
+```
+@AllArgsConstructor
+```
+
+or mark the fields final. Problem solved.  
 But while we're busy upgrading, you might as well do some [code gardening](https://blog.codinghorror.com/tending-your-software-garden/) and look for the more **proper and maintainable** solution instead of the easy one.
 
 ## The proper way to define your configuration properties
@@ -164,14 +239,32 @@ Since configuration is bound at start-up time and should be **immutable** , it m
 By doing this, we can get rid of all the Lombok annotations we had before.
 
 * Getters, setters, and a toString() method are all provided by the record.
-* A record and all its components are also *final* , and an implicit *canonical* constructor will be created by the compiler. So no need for the `@RequiredArgsConstructor` and you won't need to remember to add the final keyword to the field.
+* A record and all its components are also *final* , and an implicit *canonical* constructor will be created by the compiler. So no need for the
+
+```
+@RequiredArgsConstructor
+```
+
+  and you won't need to remember to add the final keyword to the field.
 
 ### 2. Acquire 'start-up' time security: validate your configuration
 
 We've added some [bean validation](https://beanvalidation.org/) to the configuration, too:
 
-* `@NotBlank` on the url and username
-* `@Valid` on the nested configuration properties to cascade the validation.
+* 
+
+```
+@NotBlank
+```
+
+  on the url and username
+* 
+
+```
+@Valid
+```
+
+  on the nested configuration properties to cascade the validation.
 
 Now, when a property is missing for whatever reason, Spring will fail while wiring up its beans:
 
@@ -198,7 +291,13 @@ Action:
 Update your application's configuration
 ```
 
-Note also that to cascade the validation to the nested properties, we had to add `@Valid` , which is in line with what the Bean Validation specification lays out, but which spring boot [did not follow](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes#bean-validation-of-configuration-properties%0A) up until recently.
+Note also that to cascade the validation to the nested properties, we had to add
+
+```
+@Valid
+```
+
+, which is in line with what the Bean Validation specification lays out, but which spring boot [did not follow](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.4-Release-Notes#bean-validation-of-configuration-properties%0A) up until recently.
 
 To start using bean validation, just add the following dependency:
 
@@ -260,7 +359,19 @@ This metadata is then stored under a /META-INF/spring-configuration-metadata.jso
 }
 ```
 
-Note that we also used the annotation `@NestedConfigurationProperty` in the revised example, which provides a *hint* to the annotation processor to view `com.example.NestedApplicationProperties` as [a nested type](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/context/properties/NestedConfigurationProperty.html).
+Note that we also used the annotation
+
+```
+@NestedConfigurationProperty
+```
+
+in the revised example, which provides a *hint* to the annotation processor to view
+
+```
+com.example.NestedApplicationProperties
+```
+
+as [a nested type](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/context/properties/NestedConfigurationProperty.html).
 
 Now... the good thing is that your IDE probably supports reading out this JSON file and can give you neat things like:
 

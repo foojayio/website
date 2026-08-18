@@ -1,6 +1,5 @@
 ---
 title: "Backend-for-Frontend: The Demo"
-slug: "backend-for-frontend-the-demo"
 date: "2022-08-15T18:29:48+00:00"
 lastmod: "2022-08-15T18:30:13+00:00"
 description: "Let's use a very simple e-commerce use-case to demo how to implement the Backend-for-Frontend with and without the help of Apache APISIX."

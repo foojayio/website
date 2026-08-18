@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code Update – December 2022"
-slug: "java-on-visual-studio-code-update-december-2022"
 date: "2022-12-28T08:11:44+00:00"
 lastmod: "2022-12-28T08:11:45+00:00"
 description: "Hi everyone, we are near the end of year. Looking back on 2022, there are a few highlights that we wanted to share with you all!"

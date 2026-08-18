@@ -1,6 +1,5 @@
 ---
 title: "Pull request testing on Kubernetes: testing locally and on GitHub workflows"
-slug: "pull-request-testing-on-kubernetes-testing-locally-and-on-github-workflows"
 date: "2025-03-16T17:32:27+00:00"
 lastmod: "2025-03-17T08:47:16+00:00"
 description: "In this post, we'll lay the ground for a simple app's unit- and integration-testing, leveraging Testcontainers in the local environment."
@@ -331,7 +330,7 @@ For the same reason, we should cache our built artifacts. While researching for 
 
    At this point, we should run the integration test. Yet, we need the app deployed to run this test. For this, we need available infrastructure.
 
-## Alternative "Unit testing" on GitHub
+   ## Alternative "Unit testing" on GitHub
 
    The above works perfectly on GitHub, but we can move closer to the deployment setup by leveraging GitHub [service containers](https://docs.github.com/en/actions/use-cases-and-examples/using-containerized-services/about-service-containers). Let's migrate PostgreSQL from Testcontainers to a GitHub service container.
 
@@ -384,7 +383,7 @@ jobs:
 
    For more information on `job.services.`, please check the [GitHub documentation](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices).
 
-## Conclusion
+   ## Conclusion
 
    In this article, we laid the ground for a simple app's unit- and integration-testing, leveraging Testcontainers in the local environment. We then proceeded to automate unit testing via a GitHub workflow with the help of GitHub service containers. In the next post, we will prepare the Kubernetes environment on a Cloud provider infrastructure, build the image, and deploy it to the latter.
 

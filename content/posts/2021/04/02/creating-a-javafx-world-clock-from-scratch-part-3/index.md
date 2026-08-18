@@ -1,6 +1,5 @@
 ---
 title: "Creating a JavaFX World Clock from Scratch (Part 3)"
-slug: "creating-a-javafx-world-clock-from-scratch-part-3"
 date: "2021-04-02T09:51:45+00:00"
 lastmod: "2022-04-30T03:41:23+00:00"
 description: "Building Java apps using the new module system can be a challenge, here I will show you how I was able to build a modern MVC based JavaFX UI!"

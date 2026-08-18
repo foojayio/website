@@ -1,6 +1,5 @@
 ---
 title: "Build Web Apps in Pure Java with Vaadin Flow"
-slug: "build-web-apps-in-pure-java-with-vaadin-flow"
 date: "2021-12-16T09:21:24+00:00"
 lastmod: "2022-04-04T10:58:54+00:00"
 description: "In this guide, learn how to build a small but fully functional ToDo application in pure Java using Vaadin Flow."

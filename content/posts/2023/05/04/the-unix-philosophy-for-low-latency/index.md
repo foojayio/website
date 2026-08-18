@@ -1,6 +1,5 @@
 ---
 title: "The Unix Philosophy for Low Latency"
-slug: "the-unix-philosophy-for-low-latency"
 date: "2023-05-04T08:03:40+00:00"
 lastmod: "2023-05-04T08:03:41+00:00"
 description: "How to realize the Unix Philosophy in Enterprise IT using Java, microservices, and Chronicle Queue & Wire."

@@ -1,6 +1,5 @@
 ---
 title: "Generative AI and Java - hype or urgent reality?"
-slug: "generative-ai-and-java-hype-or-urgent-reality"
 date: "2023-11-06T07:59:04+00:00"
 lastmod: "2023-11-06T11:17:35+00:00"
 description: "AI and Java what is there?, what can it do?, what do we want it to do?, Asking for your input readers. Share your thoughts at Foojay.io"

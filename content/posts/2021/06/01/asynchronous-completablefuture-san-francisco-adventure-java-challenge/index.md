@@ -1,6 +1,5 @@
 ---
 title: "Asynchronous CompletableFuture Java Challenge"
-slug: "asynchronous-completablefuture-san-francisco-adventure-java-challenge"
 date: "2021-06-01T07:42:43+00:00"
 lastmod: "2021-08-23T12:35:13+00:00"
 description: "Solving the limitations of the Future interface, we have the CompletableFuture API with methods to build reliable high-performant software."

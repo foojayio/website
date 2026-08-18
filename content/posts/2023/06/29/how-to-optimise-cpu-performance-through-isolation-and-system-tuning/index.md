@@ -1,6 +1,5 @@
 ---
 title: "Optimise CPU Performance Through Isolation and System Tuning"
-slug: "how-to-optimise-cpu-performance-through-isolation-and-system-tuning"
 date: "2023-06-29T06:36:39+00:00"
 lastmod: "2023-06-29T06:37:51+00:00"
 description: "Standard solutions for controlling CPU isolation for low-latency Linux applications are isolcpus and cgroups/csets. Each have their downsides"

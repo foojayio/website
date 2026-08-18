@@ -1,6 +1,5 @@
 ---
 title: "Ignore Infrastructure, Focus on Code, with Jakarta EE and Payara"
-slug: "ignore-infrastructure-concentrate-on-code-with-jakarta-ee-and-payara-cloud"
 date: "2022-08-09T09:59:12+00:00"
 lastmod: "2022-08-09T10:07:14+00:00"
 description: "What used to take days or weeks of frustration getting the infrastructure set up to run an application in the Cloud is now automated when you use Payara Cloud."

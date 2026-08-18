@@ -1,6 +1,5 @@
 ---
 title: "Are You New Yo Java? Here Are Some Resources"
-slug: "new-to-java-some-resources"
 date: "2021-04-30T07:16:16+00:00"
 lastmod: "2022-01-12T13:48:16+00:00"
 description: "These are resources I've used and still use to re-learn Java. If you're new to Java or looking to pick it up again, this article is for you."

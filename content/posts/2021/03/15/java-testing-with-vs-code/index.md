@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Java Testing with VS Code"
-slug: "java-testing-with-vs-code"
 date: "2021-03-15T12:24:02+00:00"
 lastmod: "2021-10-25T07:57:11+00:00"
 description: "To run Java tests on VS Code, we recommend using the Java Test Runner extension or the Java Extension Pack, which includes the extension."

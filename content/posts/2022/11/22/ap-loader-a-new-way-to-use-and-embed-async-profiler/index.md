@@ -1,6 +1,5 @@
 ---
 title: "AP-Loader: A New Way to Use and Embed async-profiler"
-slug: "ap-loader-a-new-way-to-use-and-embed-async-profiler"
 date: "2022-11-22T14:54:35+00:00"
 lastmod: "2022-11-30T09:52:56+00:00"
 description: "Using async-profiler can be quite a hassle, especially when trying to use it in a library. The new ap-loader project tries to fix this!"

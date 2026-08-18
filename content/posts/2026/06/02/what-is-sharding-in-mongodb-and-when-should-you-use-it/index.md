@@ -1,6 +1,5 @@
 ---
 title: "What is Sharding in MongoDB and When Should You Use It?"
-slug: "what-is-sharding-in-mongodb-and-when-should-you-use-it"
 date: "2026-06-02T22:15:00+00:00"
 description: "If you're using MongoDB, sharding is the mechanism that allows your database to scale beyond the limits of a single machine.In this article, we'll walk through:What sharding actually isWhy horizontal scaling mattersHow MongoDB implements shardingWhen you should (and shouldn’t) use it"
 authors:

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #88: From Code to Stage: Organizing Conferences and Finding Your Voice as a Speake"
-slug: "foojay-podcast-88"
 date: "2025-12-29T06:02:00+00:00"
 lastmod: "2025-12-29T13:35:01+00:00"
 description: "What turns a nervous first-timer into a confident conference speaker? Let's find out. This the last Foojay Podcast of 2025 and also the last one with - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "Migrating Browser-Based Java Applets to IcedTea-Web using JNLP"
-slug: "migrating-browser-based-java-applets-to-icedtea-web-using-jnlp"
 date: "2021-02-02T07:55:53+00:00"
 lastmod: "2023-05-16T13:40:49+00:00"
 description: "Let's use a 20 year old JAR, once created for a Java Applet to be run in the Java 1.1 Browser Plugin... and run it on JDK 11!"
@@ -22,9 +21,7 @@ As a practical, more challenging example around this question, I used a 20 year 
 
 And to provide more detail---it now runs outside of any Web Browser and without modifying its decades-old JAR. The Applet was once created and offered to browse through all raw color images uploaded by the Mars Pathfinder Lander which settled down on the planet on July 4th, 1997.  
 
-<figure class="alignright size-large is-resized">
- <img fetchpriority="high" decoding="async" src="image-11-1024x825.png" alt="" class="wp-image-37589" width="417" height="336">
-</figure>
+{{< img src="image-11-1024x825.png" class="alignright size-large is-resized" width="417" height="336" >}}
 
 That's the same lander / rover combination which saved the day for Mark Watney in the 2015 movie ​*The Martian* ​ and already before in the 2000 movie ​*Red Planet*​ for Robby Gallagher, where they were able to reuse its parts, telnet into the software and regain contact with Earth.
 

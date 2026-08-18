@@ -1,6 +1,5 @@
 ---
 title: "ArchUnit - test your architecture"
-slug: "archunit-testing-your-architecture"
 date: "2023-09-14T14:09:56+00:00"
 lastmod: "2023-09-14T14:09:58+00:00"
 description: "How to test your application architecture, and make life easier for those joining the team later on."

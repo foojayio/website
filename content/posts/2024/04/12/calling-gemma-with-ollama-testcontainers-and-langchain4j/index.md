@@ -1,6 +1,5 @@
 ---
 title: "Calling Gemma with Ollama, TestContainers, and LangChain4j"
-slug: "calling-gemma-with-ollama-testcontainers-and-langchain4j"
 date: "2024-04-12T13:55:38+00:00"
 lastmod: "2024-04-12T13:55:40+00:00"
 description: "Lately, for my Generative AI powered Java apps, I've used the Gemini multimodal large language model from Google. But there's also Gemma, its little sister model."

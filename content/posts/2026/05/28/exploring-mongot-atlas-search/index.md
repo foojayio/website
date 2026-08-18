@@ -1,6 +1,5 @@
 ---
 title: "Exploring MongoT"
-slug: "exploring-mongot-atlas-search"
 date: "2026-05-28T21:02:49+00:00"
 lastmod: "2026-06-24T15:52:11+00:00"
 description: "MongoT is a wrapper around the amazing Java search engine: Lucene. "

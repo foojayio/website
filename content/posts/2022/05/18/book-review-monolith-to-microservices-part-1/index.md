@@ -1,6 +1,5 @@
 ---
 title: "Book Review: Monolith to Microservices (Part 1)"
-slug: "book-review-monolith-to-microservices-part-1"
 date: "2022-05-18T07:43:41+00:00"
 lastmod: "2023-03-16T10:45:08+00:00"
 description: "Do we need to do all modern development via the microservices architecture? Is it the norm, the new standard? This book argues differently."
@@ -22,7 +21,7 @@ frozen: false
 
 I have just finished reading ["Monolith to Microservices: Evolutionary Patterns to Transform Your Monolith](https://www.amazon.ca/Monolith-Microservices-Evolutionary-Patterns-Transform/dp/1492047848)" by Sam Newman.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55937" src="monolith-to-microservice-388x510.jpeg" alt="" width="388" height="510">
+{{< img src="monolith-to-microservice-388x510.jpeg" class="size-medium" width="388" height="510" >}}
 
 This book is undoubtedly great. It explains the critical aspects applicable when moving away from a monolith to a microservices architecture.
 

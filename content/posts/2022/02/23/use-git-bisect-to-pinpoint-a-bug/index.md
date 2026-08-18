@@ -1,6 +1,5 @@
 ---
 title: "Use git bisect to Pinpoint a Bug"
-slug: "use-git-bisect-to-pinpoint-a-bug"
 date: "2022-02-23T14:44:51+00:00"
 lastmod: "2022-02-23T14:44:52+00:00"
 description: "I had read about git bisect a few times and figured that this time, I would use that tool to find an annoying bug."

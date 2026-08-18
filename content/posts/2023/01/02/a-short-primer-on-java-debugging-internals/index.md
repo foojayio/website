@@ -1,6 +1,5 @@
 ---
 title: "A Short Primer on Java Debugging Internals"
-slug: "a-short-primer-on-java-debugging-internals"
 date: "2023-01-02T08:14:17+00:00"
 lastmod: "2023-01-02T08:22:48+00:00"
 description: "How does debugging work under the hood? This article explains the basics of JDI and JDWP and gives the JDWP packets for an example program."

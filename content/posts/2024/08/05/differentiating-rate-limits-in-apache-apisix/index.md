@@ -1,6 +1,5 @@
 ---
 title: "Differentiating rate limits in Apache APISIX"
-slug: "differentiating-rate-limits-in-apache-apisix"
 date: "2024-08-05T13:37:40+00:00"
 lastmod: "2024-08-09T08:49:57+00:00"
 description: "In this post, we implement rate limiting with Apache APISIX. We set the rate limit on a route and moved it to individual consumers. Then we moved it to consumer groups, so all consumers in a group share the same \"pool\"."

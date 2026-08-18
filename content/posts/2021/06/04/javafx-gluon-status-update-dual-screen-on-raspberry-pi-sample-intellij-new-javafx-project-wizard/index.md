@@ -1,6 +1,5 @@
 ---
 title: "Gluon Update, Dual Screen Raspberry Pi , IntelliJ JavaFX Project Wizard"
-slug: "javafx-gluon-status-update-dual-screen-on-raspberry-pi-sample-intellij-new-javafx-project-wizard"
 date: "2021-06-04T07:27:41+00:00"
 lastmod: "2021-12-10T13:00:24+00:00"
 description: "In this post we are going to take a deeper look into some of the recent JavaFX announcements, e.g., dual screen support on Raspberry Pi!"
@@ -17,9 +16,9 @@ categories:
 tags:
 related_posts:
   - "a-fresh-look-at-embedded-java"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-  - "javafx-links-of-november-2025"
 frozen: false
 ---
 

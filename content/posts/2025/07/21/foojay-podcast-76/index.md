@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #76: DevBcn Report, Part 1 – Learn from the Community"
-slug: "foojay-podcast-76"
 date: "2025-07-21T06:41:00+00:00"
 lastmod: "2025-11-13T08:34:42+00:00"
 description: "In early July, the DevBcn conference in Barcelona featured a diverse lineup of speakers, covering topics across multiple technology domains. Geertjan - by Frank Delporte"

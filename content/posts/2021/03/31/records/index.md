@@ -1,6 +1,5 @@
 ---
 title: "Introduction to Java Records: Data carrier classes"
-slug: "records"
 date: "2021-03-31T07:16:13+00:00"
 lastmod: "2021-08-23T12:24:02+00:00"
 description: "Record classes provide a way to model data in Java, simplifying coding, making Java more concise and readable, and increasing productivity."

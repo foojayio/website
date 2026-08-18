@@ -1,6 +1,5 @@
 ---
 title: "Publish a Java Project to the Maven Central Repository"
-slug: "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
 date: "2022-05-13T06:22:58+00:00"
 lastmod: "2022-05-13T16:46:17+00:00"
 description: "Get started and follow along whenever you need to publish a Java Maven-based library or artifact to Maven!"
@@ -166,7 +165,7 @@ As you can see, the first tags are just general project information:
     <developers>
         <developer>
             <name>Tobias Briones</name>
-            <email><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d0d1c2f4d9d5c0dcc7dbd2c0c3d5c6d19ad1dad3dddad1d1c6">[email protected]</a></email>
+            <email>[email protected]</email>
             <organization>Tobias Briones</organization>
             <organizationUrl>https://mathsoftware.engineer</organizationUrl>
         </developer>
@@ -393,7 +392,19 @@ This configuration is tricky. It's useful for verification of the GPG signature,
 
 Read more about this plugin at [GPG Plugin \| Maven](https://maven.apache.org/plugins/maven-gpg-plugin). This plugin allows us to deploy signed artifacts.
 
-The `pinentry-mode` argument set to `loopback` passed to the GPG program allows to enter the passphrase via terminal instead of via the Pinentry GUI.
+The
+
+```
+pinentry-mode
+```
+
+argument set to
+
+```
+loopback
+```
+
+passed to the GPG program allows to enter the passphrase via terminal instead of via the Pinentry GUI.
 
 I have also read that you have to use the Pinentry GUI to enter your passphrase, and do not enter it on the terminal, so take this into account. As documented above, the GPG passphrase is stored in the \`settings.xml\` file, so this should not concern here.
 

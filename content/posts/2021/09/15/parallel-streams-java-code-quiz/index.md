@@ -1,6 +1,5 @@
 ---
 title: "Parallel Streams Java Code Quiz"
-slug: "parallel-streams-java-code-quiz"
 date: "2021-09-15T09:04:38+00:00"
 lastmod: "2021-09-15T09:07:43+00:00"
 description: "Using streams concurrently with the parallel method can optimize performance. However, what about when we depend on the order of execution?"

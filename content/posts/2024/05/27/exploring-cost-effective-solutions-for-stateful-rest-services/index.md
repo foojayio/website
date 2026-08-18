@@ -1,6 +1,5 @@
 ---
 title: "Exploring Cost-Effective Solutions for Stateful Rest Services"
-slug: "exploring-cost-effective-solutions-for-stateful-rest-services"
 date: "2024-05-27T13:13:02+00:00"
 lastmod: "2024-09-05T07:47:45+00:00"
 description: "A cost-effective approach to implementing stateful REST services using IBM Cloud Code Engine, EclipseStore, and IBM Cloud Object Storage, highlighting their integration and scalability benefits for enterprise applications."

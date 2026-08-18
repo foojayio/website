@@ -1,6 +1,5 @@
 ---
 title: "Java, What's Old? Part I: Collections"
-slug: "java-whats-old-part-i-collections"
 date: "2025-06-19T08:31:52+00:00"
 lastmod: "2025-06-19T08:33:40+00:00"
 description: "In this series, I'm focusing on what's old in the JDK, not that known, and can be useful. A few hidden gems in the JDK."

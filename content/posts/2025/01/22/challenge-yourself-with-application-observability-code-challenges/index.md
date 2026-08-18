@@ -1,6 +1,5 @@
 ---
 title: "Challenge yourself with Application Observability Code Challenges"
-slug: "challenge-yourself-with-application-observability-code-challenges"
 date: "2025-01-22T13:19:56+00:00"
 lastmod: "2025-01-22T13:23:26+00:00"
 description: "Quite a few developers are struggling to get up to speed with applying observability practices!"

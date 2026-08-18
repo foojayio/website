@@ -1,6 +1,5 @@
 ---
 title: "How to Release a Java Module to Maven Central with JReleaser and GitHub Actions (2025 Guide)"
-slug: "how-to-publish-a-java-maven-project-to-maven-central-using-jreleaser-and-github-actions-2025-guide"
 date: "2025-12-12T07:42:00+00:00"
 lastmod: "2025-12-12T08:46:01+00:00"
 description: "Complete step-by-step guide to publishing Java modules to Maven Central using JReleaser and GitHub Actions. Learn GPG signing, automation, and CI/CD best practices for Maven releases in 2025."
@@ -55,7 +54,7 @@ gpg --list-keys --keyid-format=long
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="423027262321362726022f232b2e6c212d2f">[email protected]</a>>
+uid                 [ultimate] Jago de Vreede <[email protected]>
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]
 ```
 
@@ -196,7 +195,8 @@ JRELEASER_GITHUB_TOKEN=ghp_eWVzIGFsc28gc2VjcmV0==
 JRELEASER_GPG_SECRET_KEY=something_base64_with_around_6500+_chars
 JRELEASER_GPG_PASSPHRASE=secret
 JRELEASER_GPG_PUBLIC_KEY=something_base64_with_around_3000+_chars
-JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME=p72a6s<br>JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD=also-secret
+JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME=p72a6s
+JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD=also-secret
 ```
 
 #### GitHub token
@@ -297,7 +297,7 @@ jreleaser full-release
 
 You can login in to the [Maven Central repository](https://central.sonatype.com/publishing) to see the progress.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-121972" src="Screenshot-2025-12-08-at-14.20.55-700x402.png" alt="" width="700" height="402">
+{{< img src="Screenshot-2025-12-08-at-14.20.55-700x402.png" class="size-medium" width="700" height="402" >}}
 
 ## GitHub action
 
@@ -334,7 +334,7 @@ on:
 
 This will look something like this when you start the release workflow
 
-<img decoding="async" class="alignnone size-medium wp-image-121970" src="Screenshot-2025-12-08-at-14.08.23-653x510.png" alt="" width="653" height="510">
+{{< img src="Screenshot-2025-12-08-at-14.08.23-653x510.png" class="size-medium" width="653" height="510" >}}
 
 Next up is just your default build setup, in this example, java 11 is used, but this is the same as for your normal build. Except `fetch-depth` as JReleaser will use the git log to create the changelog it will need the full history, and thus we set the `fetch-depth` to `0`. As it defaults to `1`.
 
@@ -382,7 +382,20 @@ Now its time to stage the release, as we did manually
 Then we can call JReleaser this is where we use the secrets we set up before.
 
 ```
-<br>- name: Run JReleaser<br>  uses: jreleaser/release-action@v2<br>  with:<br>    setup-java: false<br>    version: 1.20.0<br>  env:<br>    JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}<br>    JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}<br>    JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}<br>    JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}<br>    JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME }}<br>    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_PASSWORD }}
+
+- name: Run JReleaser
+  uses: jreleaser/release-action@v2
+  with:
+    setup-java: false
+    version: 1.20.0
+  env:
+    JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}
+    JRELEASER_GITHUB_TOKEN: ${{ secrets.JRELEASER_GITHUB_TOKEN }}
+    JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
+    JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}
+    JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
+    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_USERNAME }}
+    JRELEASER_DEPLOY_MAVEN_MAVENCENTRAL_RELEASE_DEPLOY_PASSWORD: ${{ secrets.JRELEASER_MAVENCENTRAL_SONATYPE_PASSWORD }}
 ```
 
 When we are done we need to set the next development version and push that.

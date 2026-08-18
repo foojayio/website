@@ -1,6 +1,5 @@
 ---
 title: "Native Applications from a JavaFX Project for Multiple Devices"
-slug: "native-applications-for-multiple-devices-from-a-single-javafx-project-with-gluon-mobile-and-github-actions"
 date: "2020-11-25T08:58:00+00:00"
 lastmod: "2021-02-05T12:58:26+00:00"
 description: "How to build native applications for multiple devices from a single JavaFX project with Gluon Mobile and GitHub Actions."
@@ -131,9 +130,7 @@ Gluon created such a build action which you can integrate into the build process
 
 **This license-step is optional!** If you don't have one, a popup will be shown at startup of your application. You can request a free license to Gluon if you are working on a student or open-source project, as described on ["Free Gluon Licenses"](https://gluonhq.com/programs/free-gluon-licenses/).
 
-<figure class="wp-block-image size-medium">
- <img loading="lazy" decoding="async" width="700" height="220" src="github-secret-gluon-license-700x220.png" alt="" class="wp-image-36373">
-</figure>
+{{< img src="github-secret-gluon-license-700x220.png" class="size-medium" width="700" height="220" >}}
 
 ### **Build as a Native Application with GraalVM**
 
@@ -201,7 +198,7 @@ To build the Windows version of the application, Visual Studio is required, whic
 
 ```
 - name: Add msbuild to PATH
-  uses: microsoft/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d6c0d1d0d588c8d6c7d0ccc9c1e5d3948b958b97">[email protected]</a>
+  uses: microsoft/[email protected]
 - name: Visual Studio shell
   uses: egor-tensin/vs-shell@v1
 ```

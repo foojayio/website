@@ -1,6 +1,5 @@
 ---
 title: "Podcast with Ken Fogel: \"What Are You Leaving Behind?\""
-slug: "ken-fogel-what-are-you-leaving-behind"
 date: "2021-06-08T08:02:26+00:00"
 lastmod: "2021-06-08T08:19:35+00:00"
 description: "Ken talks on how software is about more than just getting things to work, why it's important to focus on longterm impact of coding decisions."

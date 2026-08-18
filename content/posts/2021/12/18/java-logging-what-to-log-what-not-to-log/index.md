@@ -1,6 +1,5 @@
 ---
 title: "Java Logging: What To Log & What Not To Log?"
-slug: "java-logging-what-to-log-what-not-to-log"
 date: "2021-12-18T11:29:33+00:00"
 lastmod: "2021-12-18T11:29:34+00:00"
 description: "A pragmatic guide to Java logging—what should we log, what shouldn’t we log, and how to implement Java logging properly."
@@ -84,29 +83,39 @@ There are many different logging frameworks in Java. This article will focus on 
 To implement Logback, you only need the `logback-classic` dependency, as shown below. This will pull in both `logback-core` and the `slf4j-api` packages.
 
 ```xml
-`<dependency>
+
+```java
+<dependency>
    <groupId>ch.qos.logback</groupId>
    <artifactId>logback-classic</artifactId>
    <version>1.2.3</version>
-</dependency>`
+</dependency>
+```
+
 ```
 
 * Markers. Markers can be set with any given String and added to your logger regardless of the log level, as you see below.
 
 ```java
-`private static final Logger logger = LoggerFactory.getLogger(LogbackExample.class);
+
+```java
+private static final Logger logger = LoggerFactory.getLogger(LogbackExample.class);
 private static final Marker security = MarkerFactory.getMarker("SECURITY");
 
 public boolean  login(String userName, String encryptedPassword) {
    logger.warn(security, "login attempt by user: {}", userName);
   ...
-}`
+}
+```
+
 ```
 
 * Configuration. In the following example of Logback configuration, I have created two appenders to my `logback.xml` file. The first appender will show all the log lines in the console, including the marker I might have added. The second appender only filters out the security-specific logs based on the maker SECURITY and put these in a separate security log file per day.
 
 ```xml
-`<configuration>
+
+```xml
+<configuration>
    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
        <encoder>
            <pattern>%d{HH:mm:ss.SSS} [%thread] %-8marker %-5level %logger{36} - %msg%n</pattern>
@@ -131,7 +140,9 @@ public boolean  login(String userName, String encryptedPassword) {
        <appender-ref ref="STDOUT" />
        <appender-ref ref="SECURITY-FILE" />
    </root>
-</configuration>`
+</configuration>
+```
+
 ```
 
 #### Log4j2
@@ -139,7 +150,9 @@ public boolean  login(String userName, String encryptedPassword) {
 To use, you have to include the `log4j-api` and the `log4j-core` package, as seen below.
 
 ```xml
-`<dependency>
+
+```xml
+<dependency>
    <groupId>org.apache.logging.log4j</groupId>
    <artifactId>log4j-api</artifactId>
    <version>2.15.0</version>
@@ -149,25 +162,33 @@ To use, you have to include the `log4j-api` and the `log4j-core` package, as see
    <groupId>org.apache.logging.log4j</groupId>
    <artifactId>log4j-core</artifactId>
    <version>2.15.0</version>
-</dependency>`
+</dependency>
+```
+
 ```
 
 * Markers. Creating and adding the markers is similar to the Logback example; only this time, we use the specific Log4j manager to create the logger and the marker.
 
 ```java
-`private static final Logger logger = LogManager.getLogger(Log4j2Example.class);
+
+```java
+private static final Logger logger = LogManager.getLogger(Log4j2Example.class);
 private static final Marker security = MarkerManager.getMarker("SECURITY");
 
 public boolean login(String userName, String encryptedPassword) {
    logger.warn(security, "login attempt by user: {}", userName);
   ...
-}`
+}
+```
+
 ```
 
 * Configuration. Similar to the Logback configuration, I created a configuration for Log4j2 with two appenders where the security log will get stored in a separate file based on the markers. This configuration needs to be in the `log4j2.xml` on the classpath.
 
 ```xml
-`<?xml version="1.0" encoding="UTF-8"?>
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
    <Appenders>
        <Console name="Console" target="SYSTEM_OUT">
@@ -186,7 +207,9 @@ public boolean login(String userName, String encryptedPassword) {
            <AppenderRef ref="SECURITY-FILE"/>
        </Root>
    </Loggers>
-</Configuration>`
+</Configuration>
+```
+
 ```
 
 #### Logging for Distributed Systems

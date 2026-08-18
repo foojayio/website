@@ -1,6 +1,5 @@
 ---
 title: "Achieving High Throughput Without Sacrificing Latency"
-slug: "achieving-high-throughput-without-sacrificing-latency"
 date: "2024-02-02T09:39:47+00:00"
 lastmod: "2024-02-02T10:07:26+00:00"
 description: "Low latency coding techniques are designed to keep a processor core as busy as possible, executing at its full potential and so getting work done as quickly as possible."

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #54: Music and MIDI with Java and Kotlin"
-slug: "foojay-podcast-54"
 date: "2024-06-24T18:23:33+00:00"
 lastmod: "2025-11-13T08:45:42+00:00"
 description: "Within OpenJDK, there is a whole Java package dedicated to MIDI communication and data handling. Is it up to date? Are there better approaches now? And what can we do with music, Java, and Kotlin?"

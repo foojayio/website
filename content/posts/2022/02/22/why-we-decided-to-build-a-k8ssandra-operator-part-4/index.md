@@ -1,6 +1,5 @@
 ---
 title: "Why we decided to build a K8ssandra Operator - Part 4"
-slug: "why-we-decided-to-build-a-k8ssandra-operator-part-4"
 date: "2022-02-22T17:04:28+00:00"
 lastmod: "2022-02-24T19:41:21+00:00"
 description: "In the first, second, and third posts in this series, we’ve shared conversations with K8ssandra core team members on our journey to - by Jeff Carpenter"

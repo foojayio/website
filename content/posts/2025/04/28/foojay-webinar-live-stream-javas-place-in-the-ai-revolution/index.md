@@ -1,6 +1,5 @@
 ---
 title: "Foojay Webinar: Java's Place in the AI Revolution"
-slug: "foojay-webinar-live-stream-javas-place-in-the-ai-revolution"
 date: "2025-04-28T15:53:25+00:00"
 lastmod: "2025-05-15T12:25:26+00:00"
 description: "This first online Foojay Webinar highlights Java's place in the AI revolution, focusing on exploring AI/ML using pure Java tools. - by Frank Delporte"

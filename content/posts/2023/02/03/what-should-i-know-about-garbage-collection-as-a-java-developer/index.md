@@ -1,6 +1,5 @@
 ---
 title: "What to Know About Garbage Collection as a Java Developer!"
-slug: "what-should-i-know-about-garbage-collection-as-a-java-developer"
 date: "2023-02-03T13:20:28+00:00"
 lastmod: "2023-02-03T13:25:10+00:00"
 description: "Check out this overview of the functionality of the Garbage Collector and the things a developer should know."

@@ -1,6 +1,5 @@
 ---
 title: "Webinar: Harnessing the Power of AI Assistant in IntelliJ IDEA"
-slug: "webinar-harnessing-the-power-of-ai-assistant-in-intellij-idea"
 date: "2023-11-28T16:38:47+00:00"
 lastmod: "2023-11-28T16:40:18+00:00"
 description: "In this session, Anton Arhipov will demonstrate the capabilities of AI Assistant in IntelliJ IDEA. You will learn how the tool helps you explore and improve existing code as well as write new code in different scenarios."

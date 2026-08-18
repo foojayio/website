@@ -1,6 +1,5 @@
 ---
 title: "Reclaim 25% of Java Heap Memory & Lower Your Cloud Bills"
-slug: "compact-strings-reclaim-25-of-java-heap-memory-lower-your-cloud-bills"
 date: "2021-09-24T09:15:05+00:00"
 lastmod: "2022-02-25T21:58:06+00:00"
 description: "Learn how using compact strings can help you reclaim 25% of Java heap memory and lower your Cloud bills... very easily."

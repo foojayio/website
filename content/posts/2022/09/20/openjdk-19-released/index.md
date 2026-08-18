@@ -1,6 +1,5 @@
 ---
 title: "OpenJDK 19 Released!"
-slug: "openjdk-19-released"
 date: "2022-09-20T16:00:40+00:00"
 lastmod: "2023-07-03T13:03:15+00:00"
 description: "The friends of OpenJDK community has put together a number of resources, and more coming in the coming weeks!"

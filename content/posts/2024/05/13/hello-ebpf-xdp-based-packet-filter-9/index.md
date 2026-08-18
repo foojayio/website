@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: XDP-based Packet Filter (9)"
-slug: "hello-ebpf-xdp-based-packet-filter-9"
 date: "2024-05-13T07:13:38+00:00"
 lastmod: "2024-05-13T07:13:39+00:00"
 description: "Learn about new support for XDP to create a simple package blocker for eBPF."
@@ -78,7 +77,7 @@ This misses the last field officially specified field, the options field, but it
 
 Above the IP protocol is the TCP protocol, which essentially adds ports and acknowledged package delivery, and on the web, the topmost layer is usually HTTP, which adds URL paths and more.
 
-## eXpress Data Path (XDP)
+## eXpress Data Path (XDP) {#more-110929}
 
 XDP is one of the most essential parts of the eBPF kernel land. It allows users to write firewalls, load balancers, and more, such as the packet filter of this blog post. To quote Jonathan Corbet:
 > The core idea behind the XDP initiative is to get the network stack out of the way as much as possible. While the network stack is highly flexible, XDP is built around a bare-bones packet transport that is as fast as it can be. When a decision needs to be made or a packet must be modified, XDP will provide a hook for a user-supplied BPF program to do the work. The result combines minimal overhead with a great deal of flexibility, at the cost of a little "some assembly required" label on the relevant man pages.

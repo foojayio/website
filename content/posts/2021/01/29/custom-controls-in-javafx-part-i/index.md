@@ -1,6 +1,5 @@
 ---
 title: "How to Use Custom Controls in JavaFX (Part I)"
-slug: "custom-controls-in-javafx-part-i"
 date: "2021-01-29T08:22:15+00:00"
 lastmod: "2021-09-03T09:28:33+00:00"
 description: "In this part, we create a custom JavaFX control by changing the style of an existing control, for example, using a JavaFX CheckBox control."

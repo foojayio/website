@@ -1,6 +1,5 @@
 ---
 title: "SQL Best Practices Every Java Engineer Must Know"
-slug: "sql-best-practices-every-java-engineer-must-know"
 date: "2024-10-01T17:52:46+00:00"
 lastmod: "2024-10-09T09:33:23+00:00"
 description: "This comprehensive guide dives into the best practices for SQL query optimization, tailored specifically for Java engineers."
@@ -34,14 +33,14 @@ Indexes can significantly improve query performance by allowing the database to 
 ⛔ **Avoid Practice:**
 
 ```
-SELECT * FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09686560496e64686065276a6664">[email protected]</a>';
+SELECT * FROM users WHERE email = '[email protected]';
 ```
 
 🟢 **Good Practice**:
 
 ```
 CREATE INDEX idx_users_email ON users (email);
-SELECT name, email FROM users WHERE email = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e485888da48389858d88ca878b89">[email protected]</a>';
+SELECT name, email FROM users WHERE email = '[email protected]';
 ```
 
 This creates an index on the `email` column of the `users` table, speeding up searches based on email.
@@ -75,7 +74,7 @@ In PostgreSQL, these are called expression indexes. Here's an example:
 
 ```
 CREATE INDEX idx_lower_email ON users (LOWER(email)); 
-SELECT * FROM users WHERE LOWER(email) = '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdb8bea8bf8da8b5aca0bda1a8e3aea2a0">[email protected]</a>';
+SELECT * FROM users WHERE LOWER(email) = '[email protected]';
 ```
 
 This creates an expression index on the lowercase version of the email column, optimizing case-insensitive email searches.

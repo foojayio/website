@@ -1,6 +1,5 @@
 ---
 title: "Open Source Bait and Switch"
-slug: "open-source-bait-and-switch"
 date: "2022-09-16T07:44:39+00:00"
 lastmod: "2022-09-16T07:44:41+00:00"
 description: "When OSS advocacy goes too far and corporate greed takes over. FOSS is used as a tool to destroy competition and hurt the dev community."

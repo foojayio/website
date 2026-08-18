@@ -1,6 +1,5 @@
 ---
 title: "How We Beat HotSpot Performance (By Cheating, But Not Like That)"
-slug: "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
 date: "2026-07-17T17:24:17+00:00"
 description: "ParparVM went from 4.21x slower than warmed Java 25 to geomean parity, with six of ten benchmarks at or below HotSpot and peak memory below the JVM's. The"
 canonical: "https://www.codenameone.com/blog/beating-hotspot-performance/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
-  - "native-linux-apple-watch-a-game-builder-and-crash-protection"
 frozen: false
 ---
 

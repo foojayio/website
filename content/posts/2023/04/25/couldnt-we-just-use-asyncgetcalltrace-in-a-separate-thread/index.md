@@ -1,6 +1,5 @@
 ---
 title: "Couldn’t we just Use AsyncGetCallTrace in a Separate Thread?"
-slug: "couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread"
 date: "2023-04-25T05:31:36+00:00"
 lastmod: "2023-04-25T05:31:38+00:00"
 description: "Using AsyncGetCallTrace from a separate sampler thread is possible and this article tells you why and how!"

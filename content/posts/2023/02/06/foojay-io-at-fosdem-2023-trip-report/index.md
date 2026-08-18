@@ -1,6 +1,5 @@
 ---
 title: "Foojay.io at FOSDEM 2023 Trip Report"
-slug: "foojay-io-at-fosdem-2023-trip-report"
 date: "2023-02-06T20:58:47+00:00"
 lastmod: "2023-02-07T16:00:21+00:00"
 description: "\"What if Simon Ritter's keynote at FOSDEM entitled 'After Nearly 30 Years, How Is Java So Popular?' ends up being held... in an empty room?\""
@@ -46,9 +45,7 @@ The program was split more or less into sections, the initial topics focusing mo
 
 There were also stickers, which hundreds must have received, they were going around the room, and there were none left by the end of it, designed by Gerrit Grunwald...
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" src="image-2-870x1024.png" alt="" class="wp-image-62451" width="277" height="325">
-</figure>
+{{< img src="image-2-870x1024.png" class="size-large is-resized" width="277" height="325" >}}
 
 ...and maybe next time there should be hats and t-shirts too!
 

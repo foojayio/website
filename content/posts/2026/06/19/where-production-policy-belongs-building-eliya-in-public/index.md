@@ -1,6 +1,5 @@
 ---
 title: "Where production policy belongs: building Eliya in public"
-slug: "where-production-policy-belongs-building-eliya-in-public"
 date: "2026-06-19T08:15:28+00:00"
 description: "Where does production policy belong in a managed runtime? The thesis behind Eliya, an opinionated OpenJDK 25 distribution, and the one flag it ships. Part 1."
 authors:
@@ -121,14 +120,14 @@ curl -fsSLO https://github.com/asymmsystems/eliya-jdk/releases/download/eliya-jd
 # Fetch the signing key, then cross-check its fingerprint 
 # against at least one independent channel before trusting it
 gpg --keyserver keys.openpgp.org --recv-keys 076DE547397A5D27EECEE0B307A90689B71A158F
-gpg --fingerprint <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9afff6f3e3fbdafbe9e3f7f7b4e9e3e9eefff7e9">[email protected]</a>
+gpg --fingerprint [email protected]
 # Expected: 076D E547 397A 5D27 EECE  E0B3 07A9 0689 B71A 158F
 
 # Verify the signature on the checksums file, 
 # then verify the checksum on the tarball:
 gpg --verify SHA256SUMS.txt.asc SHA256SUMS.txt
 sha256sum -c SHA256SUMS.txt --ignore-missing
-# Expected: "Good signature from "Eliya Releases (Asymm Systems) <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6a3aaafbfa786a7b5bfababe8b5bfb5b2a3abb5">[email protected]</a>>"" + "OK" on the tarball checksum.
+# Expected: "Good signature from "Eliya Releases (Asymm Systems) <[email protected]>"" + "OK" on the tarball checksum.
 ```
 
 The full multi-channel verification ceremony is documented at [verify download](https://asymm.systems/product/eliya/user-guide/verify-download) page.

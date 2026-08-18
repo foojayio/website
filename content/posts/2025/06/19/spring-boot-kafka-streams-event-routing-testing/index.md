@@ -1,6 +1,5 @@
 ---
 title: "SpringBoot and Kafka Streams – Event Routing & Testing"
-slug: "spring-boot-kafka-streams-event-routing-testing"
 date: "2025-06-19T08:37:11+00:00"
 lastmod: "2025-06-19T08:38:07+00:00"
 description: "SpringBoot and Kafka Streams – Event Routing & Testing. Build a Kafka Streams app to validate and route Lille city tour!"
@@ -189,7 +188,7 @@ Each branch of the stream is defined clearly, allowing easy debugging and mainta
 
 #### 🔄 Kafka Topics: All messages are pushed and consumed in real time.
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-116470" class="size-medium wp-image-116470" src="topics-700x208.png" alt="Topics involved: visit-events, trip-steps, trip-dlq" width="700" height="208">
+{{< img src="topics-700x208.png" class="size-medium" alt="Topics involved: visit-events, trip-steps, trip-dlq" width="700" height="208" >}}
 
 Topics involved: ***visit-events, trip-steps, trip-dlq***{#caption-attachment-116470}
 

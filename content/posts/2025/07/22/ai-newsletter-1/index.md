@@ -1,6 +1,5 @@
 ---
 title: "AI Newsletter #1"
-slug: "ai-newsletter-1"
 date: "2025-07-22T05:39:26+00:00"
 lastmod: "2025-10-14T05:36:45+00:00"
 description: "After brainstorming, our Java Champion Education group agreed to create a newsletter with a 14 days cadence."

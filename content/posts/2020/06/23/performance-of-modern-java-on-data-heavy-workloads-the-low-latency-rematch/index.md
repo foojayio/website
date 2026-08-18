@@ -1,6 +1,5 @@
 ---
 title: "Performance of Modern Java on Heavy Workloads: Low-Latency Rematch"
-slug: "performance-of-modern-java-on-data-heavy-workloads-the-low-latency-rematch"
 date: "2020-06-23T17:48:00+00:00"
 lastmod: "2021-03-25T17:33:58+00:00"
 description: "This is a followup on the series analyzing performance of modern JVMs on workloads relevant to the use case of real-time stream processing."

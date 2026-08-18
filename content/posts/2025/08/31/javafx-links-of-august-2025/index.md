@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of August 2025"
-slug: "javafx-links-of-august-2025"
 date: "2025-08-31T07:57:13+00:00"
 description: "Here are the links shared on jfx-central.com in the August summary. Did we miss anything? Is there anything you want to have included in one of the next - by Frank Delporte"
 canonical: "https://www.jfx-central.com/links"

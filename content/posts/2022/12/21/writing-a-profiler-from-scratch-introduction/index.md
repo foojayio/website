@@ -1,6 +1,5 @@
 ---
 title: "Writing a Profiler from Scratch: Introduction"
-slug: "writing-a-profiler-from-scratch-introduction"
 date: "2022-12-21T15:26:44+00:00"
 lastmod: "2022-12-21T15:31:47+00:00"
 description: "How do profilers like async-profiler work? How to write your own? This series tries to write a tiny sampling-based profiler from scratch!"

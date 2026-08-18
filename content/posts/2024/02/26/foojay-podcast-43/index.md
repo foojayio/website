@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #43: Modern Java Testing"
-slug: "foojay-podcast-43"
 date: "2024-02-26T08:03:08+00:00"
 lastmod: "2025-11-13T08:49:10+00:00"
 description: "Learn from the experts in this podcast about testing methodologies, tools, and best practices, empowering you to write reliable Java applications."

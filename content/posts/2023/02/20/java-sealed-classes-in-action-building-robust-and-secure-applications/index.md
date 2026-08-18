@@ -1,6 +1,5 @@
 ---
 title: "Java Sealed Classes: Building Robust and Secure Applications"
-slug: "java-sealed-classes-in-action-building-robust-and-secure-applications"
 date: "2023-02-20T11:11:07+00:00"
 lastmod: "2023-03-02T23:31:27+00:00"
 description: "Sealed classes can help you create more robust and maintainable code by restricting the inheritance hierarchy of your classes and interfaces."
@@ -384,7 +383,7 @@ In this example, Animal is a sealed interface that permits Dog, Cat, and Bird to
 By using sealed classes to define the set of possible animals, developers can ensure that a collection of animals is type-safe and can enforce certain invariants.
 
 ```java
-List<!--? extends Animal--> animals = List.of(new Dog(), new Cat(), new Bird());
+List animals = List.of(new Dog(), new Cat(), new Bird());
 ```
 
 In this example, animal is a List of elements that extend the Animal interface.

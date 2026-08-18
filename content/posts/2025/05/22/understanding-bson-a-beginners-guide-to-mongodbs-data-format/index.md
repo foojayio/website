@@ -1,6 +1,5 @@
 ---
 title: "Understanding BSON: A Beginner’s Guide to MongoDB’s Data Format"
-slug: "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
 date: "2025-05-22T08:05:06+00:00"
 lastmod: "2025-05-23T06:58:58+00:00"
 description: "BSON is at the core of how MongoDB stores and transmits data. It extends JSON with additional data."

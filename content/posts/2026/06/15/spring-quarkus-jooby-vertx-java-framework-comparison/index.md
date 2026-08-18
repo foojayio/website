@@ -1,6 +1,5 @@
 ---
 title: "Spring, Quarkus,Jooby, or Vert.x: Java Framework Comparison"
-slug: "spring-quarkus-jooby-vertx-java-framework-comparison"
 date: "2026-06-15T15:06:50+00:00"
 lastmod: "2026-06-15T15:06:52+00:00"
 description: "Compare Spring, Quarkus, Jooby, Vert.x on the same Java CRUD app. See startup time, image size, complexity, ecosystem tradeoffs, and best-fit use cases."

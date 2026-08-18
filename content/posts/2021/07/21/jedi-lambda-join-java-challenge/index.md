@@ -1,6 +1,5 @@
 ---
 title: "Join The Jedi Lambda Join Java Challenge!"
-slug: "jedi-lambda-join-java-challenge"
 date: "2021-07-21T08:08:24+00:00"
 lastmod: "2021-08-23T12:17:12+00:00"
 description: "Are you ready for the next Java Challenge? Less introduction, more action, and master Java concepts by having fun!"

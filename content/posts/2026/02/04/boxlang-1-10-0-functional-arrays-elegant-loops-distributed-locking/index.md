@@ -1,6 +1,5 @@
 ---
 title: "BoxLang 1.10.0: Functional Arrays, Elegant Loops & Distributed Locking"
-slug: "boxlang-1-10-0-functional-arrays-elegant-loops-distributed-locking"
 date: "2026-02-04T10:46:22+00:00"
 lastmod: "2026-02-05T10:14:07+00:00"
 description: "We're excited to announce BoxLang 1.10.0, a feature-packed release that brings powerful functional programming capabilities, elegant loop syntax, and - by Cristobal Escobar"
@@ -198,7 +197,7 @@ combined = names.zip( ages, cities )
 
 // Real-world: combine headers with data
 headers = [ "Name", "Email", "Role" ]
-values = [ "Alice", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41202d282224012439202c312d246f222e2c">[email protected]</a>", "Admin" ]
+values = [ "Alice", "[email protected]", "Admin" ]
 record = headers.zip( values )
 ```
 
@@ -210,7 +209,7 @@ BoxLang 1.10.0 introduces destructuring syntax `for` for loops, eliminating verb
 // Struct iteration with key and value
 userData = {
     name: "Alice",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="680904010b0d280d10090518040d460b0705">[email protected]</a>",
+    email: "[email protected]",
     role: "admin"
 }
 
@@ -479,7 +478,7 @@ The runtime now automatically removes trailing semicolons from Oracle SQL statem
 * **\[BL-2129\]** Variable attribute is now optional on execute component in compat mode
 * **\[BL-2131\]** Compat mode now allows duplicate UDF declarations in CF source files  
 
-## 🚀 Get Started
+  ## 🚀 Get Started
 
   ### Download BoxLang 1.10.0:
 

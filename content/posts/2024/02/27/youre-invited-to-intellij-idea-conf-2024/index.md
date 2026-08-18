@@ -1,6 +1,5 @@
 ---
 title: "You’re Invited to IntelliJ IDEA Conf 2024!"
-slug: "youre-invited-to-intellij-idea-conf-2024"
 date: "2024-02-27T08:13:58+00:00"
 lastmod: "2024-02-27T08:21:01+00:00"
 description: "We are back and excited to invite you to IntelliJ IDEA Conf 2024, a developer-focused, live, online event that is free for all to attend!"

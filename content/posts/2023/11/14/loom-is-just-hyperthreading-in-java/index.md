@@ -1,6 +1,5 @@
 ---
 title: "Loom is just HyperThreading in Java"
-slug: "loom-is-just-hyperthreading-in-java"
 date: "2023-11-14T10:54:06+00:00"
 lastmod: "2023-11-14T10:54:08+00:00"
 description: "I had an epiphany: Aren't virtual threads with Loom just a version of HyperThreading on the JVM?"

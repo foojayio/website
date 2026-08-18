@@ -1,6 +1,5 @@
 ---
 title: "Five Data Models for IoT: Managing the Latest IoT Events Based on a State in Apache Cassandra"
-slug: "five-data-models-for-iot-managing-the-latest-iot-events-based-on-a-state-in-apache-cassandra"
 date: "2022-07-28T17:36:28+00:00"
 lastmod: "2022-07-28T17:36:29+00:00"
 description: "© Shutterstock / everything possible Apache Cassandra is a rock-solid choice for managing IoT and time series data at scale. The most popular use - by Artem Chebotko"

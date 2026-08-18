@@ -1,6 +1,5 @@
 ---
 title: "Efficient Memory Mapping for Terabyte Sparse Files in Java"
-slug: "efficient-memory-mapping-for-terabyte-sparse-files-in-java"
 date: "2023-03-15T11:50:41+00:00"
 lastmod: "2023-03-15T11:55:37+00:00"
 description: "Mapping large areas of memory avoids having to know in advance how much memory we need or having to resize the memory mappings while in use."
@@ -17,7 +16,7 @@ related_posts:
   - "creating-terabyte-sized-queues-with-low-latency"
   - "how-object-reuse-can-reduce-latency-and-improve-performance"
   - "demystifying-jvm-memory-management"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Exploring the OpenTelemetry Collector"
-slug: "exploring-the-opentelemetry-collector"
 date: "2023-12-03T12:57:06+00:00"
 lastmod: "2023-12-03T12:57:07+00:00"
 description: "Let's explore aspects of the OpenTelemetry Collector that sits at the center of the OpenTelemetry architecture."

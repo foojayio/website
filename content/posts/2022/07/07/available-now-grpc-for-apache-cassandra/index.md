@@ -1,6 +1,5 @@
 ---
 title: "Available Now - gRPC for Apache Cassandra"
-slug: "available-now-grpc-for-apache-cassandra"
 date: "2022-07-07T07:38:47+00:00"
 lastmod: "2022-07-07T07:39:32+00:00"
 description: "General availability of a gRPC API for Apache Cassandra to leverage a powerful database in combination with a microservices-oriented API."

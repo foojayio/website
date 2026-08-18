@@ -1,6 +1,5 @@
 ---
 title: "Web resource caching: Server-side"
-slug: "web-caching-server"
 date: "2022-12-09T15:32:42+00:00"
 lastmod: "2022-12-09T15:41:12+00:00"
 description: "Learn how the most challenging issue with server-side caching is the configuration, such as what to cache and for how long."
@@ -33,7 +32,7 @@ While client-side caching works well, it has one central issue: to serve the res
 
 The idea behind server-side caching is to compute the resource once and serve it from the cache to all clients.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-61200 aligncenter" src="server-cache-557x510.png" alt="" width="557" height="510">
+{{< img src="server-cache-557x510.png" class="size-medium aligncenter" width="557" height="510" >}}
 
 A couple of dedicated server-side resource caching solutions have emerged over the years: [Memcached](https://memcached.org/), [Varnish](https://varnish-cache.org/), [Squid](http://www.squid-cache.org/), etc. Other solutions are less focused on web resource caching and more generic, *e.g.* , [Redis](https://redis.io/) or [Hazelcast](https://hazelcast.com/).
 

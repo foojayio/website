@@ -1,6 +1,5 @@
 ---
 title: "Java: Functional Programming f(x) – Part2"
-slug: "java-functional-programming-fx-part2"
 date: "2024-06-03T17:05:56+00:00"
 lastmod: "2024-06-03T17:06:34+00:00"
 description: "Dive into the world of functional programming in Java using Lambda Expressions, Method References, and Functional Interfaces."
@@ -106,8 +105,7 @@ And, Lambdas cannot modify local variables that are defined outside of their bod
 
 This concept of accessing variables is known as **capturing** : `lambdas have the ability to capture values, not variables`. A `final` variable essentially represents a value.
 
-2. Method References
---------------------
+## 2. Method References
 
 Typically, developers utilize Lambda Expressions for writing business logic within parentheses or for invoking custom defined methods. On the other hand, Method References can serve as replacements for lambda expressions when there is an existing method available.
 
@@ -205,8 +203,7 @@ Supplier<List<String>> supplier = () -> new ArrayList<>();
 Supplier<List<String>> supplier = ArrayList::new;
 ```
 
-3. Functional Interfaces
-------------------------
+## 3. Functional Interfaces
 
 A **functional interface** is an interface that has only **Single Abstract Method (SAM)**.
 

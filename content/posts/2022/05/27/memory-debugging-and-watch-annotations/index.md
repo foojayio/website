@@ -1,6 +1,5 @@
 ---
 title: "Memory Debugging and Watch Annotations"
-slug: "memory-debugging-and-watch-annotations"
 date: "2022-05-27T08:04:34+00:00"
 lastmod: "2022-05-27T08:04:35+00:00"
 description: "RAM profiling has its strengths and weaknesses. The Debugger is a complementary tool to translate obtuse statistics to actionable changes!"

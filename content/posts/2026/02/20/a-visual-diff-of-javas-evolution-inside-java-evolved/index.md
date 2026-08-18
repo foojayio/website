@@ -1,6 +1,5 @@
 ---
 title: "A Visual Diff of Java’s Evolution: Inside java.evolved"
-slug: "a-visual-diff-of-javas-evolution-inside-java-evolved"
 date: "2026-02-20T17:48:21+00:00"
 lastmod: "2026-02-23T08:31:58+00:00"
 description: "A community site showcasing legacy Java patterns alongside modern equivalents to help developers understand how everyday Java code has evolved."

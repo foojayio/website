@@ -1,6 +1,5 @@
 ---
 title: "How to Avoid NullPointerException in Java Code"
-slug: "avoiding-nullpointerexception"
 date: "2020-12-22T10:14:41+00:00"
 lastmod: "2023-02-13T12:16:36+00:00"
 description: "The terrible NullPointerException (NPE) is the most frequent Java exception occurring in production, according to a 2016 study. Read on!"

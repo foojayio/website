@@ -1,6 +1,5 @@
 ---
 title: "BoxLang 1.7 Released!"
-slug: "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"
 date: "2025-11-11T12:59:50+00:00"
 lastmod: "2025-11-11T13:01:47+00:00"
 description: "Ortus Solutions announced the release of **BoxLang 1.7.0**, a major update to its modern dynamic language for the JVM that delivers enterprise-grade capabilities for building real-time, horizontally scalable, and AI-driven applications."
@@ -186,7 +185,7 @@ With native capabilities for **scheduling** , **asynchronous execution** , **eve
 
 Ortus Solutions, Corp.  
 
-📧 [\[email protected\]](/cdn-cgi/l/email-protection#bcd5d2dad3fcd3cec8c9cfcfd3d0c9c8d5d3d2cf92dfd3d1)  
+📧 [\[email protected\]](/cdn-cgi/l/email-protection#b5dcdbd3daf5dac7c1c0c6c6dad9c0c1dcdadbc69bd6dad8)  
 
 🌍 [www.ortussolutions.com](https://www.ortussolutions.com)  
 

@@ -1,6 +1,5 @@
 ---
 title: "The TornadoVM Programming Model Explained"
-slug: "the-tornadovm-programming-model-explained"
 date: "2024-05-28T11:01:14+00:00"
 lastmod: "2024-05-29T08:47:56+00:00"
 description: "In this article, we have explained the basics of the TornadoVM programming model and the main API blocks."
@@ -61,8 +60,7 @@ So, let's focus now on the API level and how developers can start using TornadoV
 
 The TornadoVM API tries to tackle all these questions with different API components. Let's discuss this briefly one by one.
 
-1. Representing Parallelism
----------------------------
+## 1. Representing Parallelism
 
 There are two ways to express parallelism with TornadoVM, and developers can choose one or the other:
 
@@ -150,8 +148,7 @@ CPUs, usually offer the same performance when computing fp32 and fp64 operations
 
 Now, let's move on to create our compute graphs.
 
-2. Identifying the Java Methods to Offload
-------------------------------------------
+## 2. Identifying the Java Methods to Offload
 
 TornadoVM offloads code at the method level (similar to the [JIT compiler in Hotspot](https://developers.redhat.com/articles/2021/06/23/how-jit-compiler-boosts-java-performance-openjdk)). To specify which method/s to offload, TornadoVM offers a Task-Graph API, in which each node in the graph represents a task.
 
@@ -186,8 +183,7 @@ We see that, for creating and defining all data and tasks of our computation, we
 
 Note that the Task-Graph is never executed. It only defines which method/s, and which object/s to use. To execute a Task-Graph, we need to instantiate an object of type `TornadoExecutionPlan`.
 
-3. Deploying and Running Task-Graphs
-------------------------------------
+## 3. Deploying and Running Task-Graphs
 
 We are almost done. To execute a task graph, we need to instantiate an execution plan. The execution plan, receives, as an argument, a snapshot of an existing task graph.
 

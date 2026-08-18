@@ -1,6 +1,5 @@
 ---
 title: "Controlling a LED Strip with Pi4J and JBang"
-slug: "controlling-a-led-strip-with-pi4j-and-jbang"
 date: "2022-11-28T13:07:06+00:00"
 lastmod: "2023-07-28T07:59:53+00:00"
 description: "The Raspberry Pi, Pi4J and JBang are a perfect combination to experiment with electronics. Find out more here!"

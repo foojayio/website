@@ -1,6 +1,5 @@
 ---
 title: "Multiple Spring Boot Applications in the Same Project"
-slug: "multiple-spring-boot-apps-same-project"
 date: "2021-12-08T16:42:44+00:00"
 lastmod: "2021-12-08T16:42:45+00:00"
 description: "I frequently use Spring Boot in my demos. The latest one is no different, showing how to achieve CQRS using two different code paths."

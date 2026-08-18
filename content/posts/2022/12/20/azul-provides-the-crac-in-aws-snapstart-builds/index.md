@@ -1,6 +1,5 @@
 ---
 title: "Azul Provides the CRaC in AWS SnapStart Builds"
-slug: "azul-provides-the-crac-in-aws-snapstart-builds"
 date: "2022-12-20T07:45:54+00:00"
 lastmod: "2023-05-10T05:32:03+00:00"
 description: "Now, with a major Cloud platform providing built-in support for the CRaC API, it’s truly off to the races for CRaC."

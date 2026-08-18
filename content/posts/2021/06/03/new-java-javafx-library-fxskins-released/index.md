@@ -1,6 +1,5 @@
 ---
 title: "New Java/JavaFX Library FXSkins Released"
-slug: "new-java-javafx-library-fxskins-released"
 date: "2021-06-03T14:02:47+00:00"
 lastmod: "2021-06-03T14:02:48+00:00"
 description: "FXSkins is a collection of new Skins for existing JavaFX controls, adding more functionality to the controls used in your applications."
@@ -21,7 +20,7 @@ FXSkins is a collection of new Skins for existing JavaFX controls. These Skins w
 
 This library is targeted for the most recent Java versions.
 
-## FXSkins Details
+## FXSkins Details {#more-45085}
 
 ![FXSkins ScrollPane Skin](ScrollPane4.gif)
 

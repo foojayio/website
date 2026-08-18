@@ -1,6 +1,5 @@
 ---
 title: "Java Faceted Full-Text Search API Using MongoDB Atlas Search"
-slug: "java-faceted-full-text-search-api-using-mongodb-atlas-search"
 date: "2026-04-02T16:27:30+00:00"
 lastmod: "2026-04-02T16:27:33+00:00"
 description: "This is going to be a fun, practical tutorial demonstrating how to build a Java faceted full-text search API (like the ones powering sites like Amazon)!"
@@ -59,14 +58,12 @@ You'll need the following on your machine:
 * [MongoDB Compass](https://www.mongodb.com/products/tools/compass/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim)
 * [Apache Maven](https://maven.apache.org/){#https://maven.apache.org/}
 
-1. Project setup
-----------------
+## 1. Project setup
 
 Let's create a new Java project! Open your Java IDE and create a new Maven-based project, for Java 21. In IntelliJ select File -\> New Project...  
 ![](Screenshot-2026-03-24-at-12.51.17-PM.png)
 
-2. COCO data
-------------
+## 2. COCO data
 
 The example we'll use is the open source [COCO image dataset](https://www.mongodb.com/products/tools/compass/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=fulltext-foojay&utm_term=tony.kim).
 
@@ -420,8 +417,7 @@ Example result:
 
 ![](Screenshot-2026-03-12-at-1.56.21-PM.png)
 
-3. Java service implementation
-------------------------------
+## 3. Java service implementation
 
 Alright! Let's implement our Java service class. Let's not mince words. Atlas Search syntax is complex, especially if you get into multiple compound clauses and conditions. Faceting adds an extra layer of complexity, and getting the results out of the search alongside the facets in a single query further complicates it. I think the MongoDB Java driver, and Java in general, helps mitigate the complexity in a few ways:
 
@@ -602,8 +598,7 @@ httpServer.createContext("/images", exchange -> {
 
 Here, we are adding a nice safe ingestion of the query params into a map, and for now, just return the first image. Note that the map is from String to List, which is important because our query params may include 1-n instances of the same parameter. We'll use that in the next step to filter on multiple values in the search.
 
-4. Java search
---------------
+## 4. Java search
 
 Our last step: the search!  
 

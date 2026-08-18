@@ -1,6 +1,5 @@
 ---
 title: "Improving Maven's dependency:analyze... or not"
-slug: "improving-mavens-dependencyanalyze-or-not"
 date: "2025-04-28T08:28:32+00:00"
 lastmod: "2025-04-28T08:28:34+00:00"
 description: "Recently, my good friend Richard Fichtner advised using the mvn dependency:analyze command to get rid of declared but unused dependencies."
@@ -131,11 +130,11 @@ What would be necessary to make the analyzer work with Spring Boot projects?
 
 Let's analyze the analyzer.
 
-<img decoding="async" class="aligncenter wp-image-115762 size-medium" src="analyzer-class-diagram-700x300.png" alt="Analyzer class diagram" width="700" height="300">
+{{< img src="analyzer-class-diagram-700x300.png" class="aligncenter size-medium" alt="Analyzer class diagram" width="700" height="300" >}}
 
 The plugin allows configuring another analyzer:
 >
-> 
+> *** ** * ** ***
 >
 > Specify the project dependency analyzer to use (plexus component role-hint). By default, maven-dependency-analyzer is used. To use this, you must declare a dependency for this plugin that contains the code for the analyzer. The analyzer must have a declared Plexus role name, and you specify the role name here.
 >

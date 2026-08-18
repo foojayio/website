@@ -1,6 +1,5 @@
 ---
 title: "Debugging the Java Message Service (JMS) API using Lightrun"
-slug: "debugging-the-java-message-service-jms-api-using-lightrun"
 date: "2022-06-03T09:26:12+00:00"
 lastmod: "2022-06-03T09:26:14+00:00"
 description: "Due to their asynchronous nature and production complexities debugging messaging systems is remarkably hard... WAS remarkably hard..."

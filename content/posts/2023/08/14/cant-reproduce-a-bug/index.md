@@ -1,6 +1,5 @@
 ---
 title: "Can't Reproduce a Bug?"
-slug: "cant-reproduce-a-bug"
 date: "2023-08-14T07:09:14+00:00"
 lastmod: "2023-08-14T07:09:15+00:00"
 description: "\"It works on my machine\" is not an excuse. Sometimes we have bugs that we can't reproduce or understand. How do we investigate these bugs?"

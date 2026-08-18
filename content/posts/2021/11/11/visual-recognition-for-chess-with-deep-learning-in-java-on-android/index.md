@@ -1,6 +1,5 @@
 ---
 title: "Visual Recognition for Chess with Deep Learning in Java on Android"
-slug: "visual-recognition-for-chess-with-deep-learning-in-java-on-android"
 date: "2021-11-11T20:07:51+00:00"
 lastmod: "2023-01-08T07:42:34+00:00"
 description: "Learn about Deep Netts, a lightweight Java-native library, easy to learn, and solves many technical challenges related to ML."

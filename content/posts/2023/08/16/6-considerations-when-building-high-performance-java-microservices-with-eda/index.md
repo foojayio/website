@@ -1,6 +1,5 @@
 ---
 title: "Building High-Performance Java Microservices with EDA"
-slug: "6-considerations-when-building-high-performance-java-microservices-with-eda"
 date: "2023-08-16T21:34:18+00:00"
 lastmod: "2023-08-17T10:01:03+00:00"
 description: "Renowned for its resilience and low latency, EDA is a reliable choice for developing robust, high-performing microservices."
@@ -18,7 +17,7 @@ related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "billions-of-messages-tcp-ip"
   - "building-custom-solutions-vs-buy-and-build-software"
-  - "intro-to-the-boxlang-formatter"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

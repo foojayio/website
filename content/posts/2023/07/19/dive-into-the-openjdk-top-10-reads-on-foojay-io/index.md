@@ -1,6 +1,5 @@
 ---
 title: "Dive into the OpenJDK: Top 10 Reads on Foojay.io"
-slug: "dive-into-the-openjdk-top-10-reads-on-foojay-io"
 date: "2023-07-19T07:45:04+00:00"
 lastmod: "2023-07-19T07:45:05+00:00"
 description: "Foojay.io is a community platform dedicated to the needs of developers who use the OpenJDK and related technologies."

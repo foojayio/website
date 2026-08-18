@@ -1,6 +1,5 @@
 ---
 title: "Apache APISIX North America Tour"
-slug: "apache-apisix-north-america-tour"
 date: "2024-03-25T15:31:08+00:00"
 lastmod: "2024-03-25T15:33:10+00:00"
 description: "Today, I'd like to write about my North America \"Tour\" across several conferences and user groups."

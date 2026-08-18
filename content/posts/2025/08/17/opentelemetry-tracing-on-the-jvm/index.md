@@ -1,6 +1,5 @@
 ---
 title: "OpenTelemetry Tracing on the JVM"
-slug: "opentelemetry-tracing-on-the-jvm"
 date: "2025-08-17T08:00:39+00:00"
 lastmod: "2025-08-18T08:02:05+00:00"
 description: "You may know I'm a big fan of OpenTelemetry. I recently finished developing a master class for the YOW! conference at the end of the year. During - by Nicolas Frankel"

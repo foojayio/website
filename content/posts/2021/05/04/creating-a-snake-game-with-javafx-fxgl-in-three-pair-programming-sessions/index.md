@@ -1,6 +1,5 @@
 ---
 title: "Snake Game with JavaFX FXGL in Three Pair-Programming Sessions"
-slug: "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
 date: "2021-05-04T07:00:00+00:00"
 lastmod: "2021-12-10T13:00:49+00:00"
 description: "Start with an idea for a game, bring it to life in a prototype, modify the application to run on Raspberry Pi and on mobile device."

@@ -1,6 +1,5 @@
 ---
 title: "Improving upon my OpenTelemetry Tracing demo"
-slug: "improving-upon-my-opentelemetry-tracing-demo"
 date: "2024-04-03T06:35:22+00:00"
 lastmod: "2024-04-03T06:35:23+00:00"
 description: "Last year, I wrote a post on Open Telemetry Tracing to understand more about the subject. I also created a demo around it..."

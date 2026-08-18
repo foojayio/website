@@ -1,6 +1,5 @@
 ---
 title: "How does Java handle different Images and ColorSpaces – Part 3"
-slug: "how-does-java-handle-different-images-and-colorspaces-part-3-introducing-the-bufferedimage"
 date: "2020-06-22T17:16:00+00:00"
 lastmod: "2021-08-23T12:52:36+00:00"
 description: "BufferedImage is one of the most useful Java abstractions. It hides all the complexity of different types of images whilst allowing access to the underlying data. Under the hood, a BufferedImage can be many types of image.  Java includes support to load and save images in various formats using ImageIO, and other libraries such as Apache Imaging and our JDeli library also offer this feature.  Next time we will talk more about ImageIO and other Image libraries. - by Mark Stephens"

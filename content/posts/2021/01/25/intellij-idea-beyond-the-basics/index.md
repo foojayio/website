@@ -1,6 +1,5 @@
 ---
 title: "IntelliJ IDEA: Let's Go Beyond The Basics!"
-slug: "intellij-idea-beyond-the-basics"
 date: "2021-01-25T08:32:47+00:00"
 lastmod: "2021-01-25T08:41:17+00:00"
 description: "In this article, I’ll talk about some tricks that I use in my day to day job and show some best practices that can boost your productivity."

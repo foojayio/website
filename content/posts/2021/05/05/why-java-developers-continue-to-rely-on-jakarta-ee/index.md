@@ -1,6 +1,5 @@
 ---
 title: "Why Java Developers Continue to Rely on Jakarta EE"
-slug: "why-java-developers-continue-to-rely-on-jakarta-ee"
 date: "2021-05-05T07:53:59+00:00"
 lastmod: "2021-08-23T15:33:08+00:00"
 description: "Eclipse Foundation spoke to Java developers to discuss why they rely on Jakarta EE and the unique benefits of using Jakarta EE technologies."
@@ -22,9 +21,7 @@ frozen: false
 
 Over the past year, the Eclipse Foundation spoke to leading Java developers around the world to discuss why they rely on[Jakarta EE](https://jakarta.ee/) and the unique benefits of using Jakarta EE technologies. Their input is captured in our white paper, which describes the important advantages Jakarta EE offers today and for the future.  
 
-<figure class="aligncenter size-large is-resized">
- <a href="https://outreach.jakartaee.org/white-paper-java-applications" target="_blank" rel="noopener"><img fetchpriority="high" decoding="async" src="https://www.agilejava.eu/wp-content/uploads/2021/03/JakartaEEWhitepaper.png" alt="" class="wp-image-3727" width="222" height="288"></a>
-</figure>
+{{< img src="https://www.agilejava.eu/wp-content/uploads/2021/03/JakartaEEWhitepaper.png" class="aligncenter size-large is-resized" width="222" height="288" >}}
 
 [Download the Jakarta EE white paper!](https://outreach.jakartaee.org/white-paper-java-applications)
 

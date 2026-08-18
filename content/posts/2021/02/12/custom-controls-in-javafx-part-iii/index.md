@@ -1,6 +1,5 @@
 ---
 title: "Custom Controls in JavaFX (Part III) -- Extend an Existing Control"
-slug: "custom-controls-in-javafx-part-iii"
 date: "2021-02-12T08:22:02+00:00"
 lastmod: "2021-02-12T10:07:33+00:00"
 description: "In the ongoing series on custom JavaFX controls, learn how to create a custom JavaFX control by extending an existing control."

@@ -1,6 +1,5 @@
 ---
 title: "Manage Different Java Versions on Your Machine with SDKMan!"
-slug: "easily-manage-different-java-versions-on-your-machine-with-sdkman"
 date: "2023-09-20T07:05:16+00:00"
 lastmod: "2023-09-20T07:05:17+00:00"
 description: "SDKMan! stands for Software Development Kit Manager, a shell script that allows you to manage parallel versions of multiple Software Development Kits for JVM-based languages."
@@ -19,7 +18,7 @@ related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "video-sdkman-explained"
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -43,7 +42,16 @@ To get started, you'll first need to install SDKMan! on your system, with the fo
 
 After the installation is complete, open a new terminal window and type the following to ensure that SDKMan! has been installed:
 
-`sdk version`
+`
+`
+
+`
+
+```
+sdk version
+```
+
+`
 
 You should see the SDKMan! version displayed, confirming that the installation was successful.
 

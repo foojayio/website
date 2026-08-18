@@ -1,6 +1,5 @@
 ---
 title: "Video series “JavaFX In Action”, Part 3"
-slug: "video-series-javafx-in-action-part-3"
 date: "2025-01-03T09:38:59+00:00"
 lastmod: "2025-01-03T10:59:23+00:00"
 description: "This is the next part in the series of \"JavaFX in Action\" interviews published in the last part of 2024. Are you working on a fantastic JavaFX - by Frank Delporte"

@@ -1,6 +1,5 @@
 ---
 title: "Playing practically with Stream API"
-slug: "playing-practically-with-stream-api"
 date: "2022-02-16T00:43:54+00:00"
 lastmod: "2022-02-16T00:43:56+00:00"
 description: "Let’s learn java stream API with a few practical examples."

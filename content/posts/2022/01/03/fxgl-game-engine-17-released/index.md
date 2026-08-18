@@ -1,6 +1,5 @@
 ---
 title: "FXGL Game Engine 17 Released"
-slug: "fxgl-game-engine-17-released"
 date: "2022-01-03T10:43:05+00:00"
 lastmod: "2022-01-03T10:44:09+00:00"
 description: "Game developers unite around Java and JavaFX! Version 17 of the FXGL game engine brings a number of improvements in many areas."
@@ -16,7 +15,7 @@ related_posts:
   - "game-development-basics-with-fxgl"
   - "getting-started-with-fxgl-game-development"
   - "high-performance-rendering-in-javafx"
-  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 

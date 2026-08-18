@@ -1,6 +1,5 @@
 ---
 title: "2022 in Retrospective"
-slug: "2022-in-retrospective"
 date: "2023-01-10T08:19:43+00:00"
 lastmod: "2023-01-10T08:19:44+00:00"
 description: "Years when one changes jobs are always challenging but very interesting; 2022 was no different. What are your insights into last/this year?"
@@ -25,7 +24,7 @@ On the personal and technical side, here's a summary of the past year from my pe
 
 ## Job change
 
-<img fetchpriority="high" decoding="async" class="alignright size-full wp-image-61589" src="apache-apisix.jpeg" alt="" width="300" height="300">
+{{< img src="apache-apisix.jpeg" class="alignright size-full" width="300" height="300" >}}
 
 First and foremost, I changed jobs. I worked for [Hazelcast](https://hazelcast.com/) for 3½ years.
 
@@ -103,7 +102,7 @@ It's interesting to see that though I thought dev.to focused on web and front-en
 
 Indeed, 2022 was not my best year in terms of conference attendance. Here's a comparison of the previous years:
 
-<img decoding="async" class="aligncenter wp-image-61591 size-medium" src="public-speaking-700x438.png" alt="" width="700" height="438">
+{{< img src="public-speaking-700x438.png" class="aligncenter size-medium" width="700" height="438" >}}
 
 Raw numbers are a bit misleading: Because of Covid, I spoke at many events online in 2020 and 2021. It's **much** easier to do so than traveling to another country (or continent!); on the other hand, engagement is much lower, not to mention the lack of social interactions.
 
@@ -120,7 +119,7 @@ It's below the number of talks I usually try to achieve, but they were pretty po
 
 As a Developer Advocate, my [GitHub contributions](https://github.com/nfrankel/) are different from the ones of a regular software developer, especially one working on Open Source.
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-61592 aligncenter" src="github-analytics-700x480.png" alt="" width="700" height="480">
+{{< img src="github-analytics-700x480.png" class="size-medium aligncenter" width="700" height="480" >}}
 
 Most of my contributions are commits because I'm the only one working on my demos. Furthermore, I regularly update them with the latest version of whatever dependency I use. I'm trying to open issues on Apache APISIX since I'm a huge user. Eating one's dog food is a great way to uncover either bugs or usability improvements. Finally, pull requests are for blog posts and reviews for my colleagues' blog posts.
 

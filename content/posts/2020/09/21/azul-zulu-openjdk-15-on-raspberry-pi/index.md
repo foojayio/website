@@ -1,6 +1,5 @@
 ---
 title: "Azul Zulu OpenJDK 15 on the Raspberry Pi"
-slug: "azul-zulu-openjdk-15-on-raspberry-pi"
 date: "2020-09-21T07:54:30+00:00"
 lastmod: "2020-09-21T08:34:45+00:00"
 description: "For this post I did some experiments with Java 15, reusing the Ubuntu 64bit SD card, which was also used for my earlier post on startup speed."

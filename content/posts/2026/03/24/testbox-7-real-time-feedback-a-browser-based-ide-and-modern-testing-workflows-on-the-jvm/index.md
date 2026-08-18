@@ -1,6 +1,5 @@
 ---
 title: "TestBox 7: Real-Time Feedback, a Browser-Based IDE, and Modern Testing Workflows on the JVM"
-slug: "testbox-7-real-time-feedback-a-browser-based-ide-and-modern-testing-workflows-on-the-jvm"
 date: "2026-03-24T16:58:53+00:00"
 lastmod: "2026-03-26T06:40:39+00:00"
 description: "TestBox 7.x focuses on improving testing workflows for BoxLang and CFML applications. This release introduces improvements to the BoxLang CLI runner, - by Cristobal Escobar"
@@ -18,10 +17,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
-  - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
 frozen: false
 ---
 
@@ -48,7 +47,7 @@ It communicates with your existing `runner.bxm` or `runner.cfm` endpoints and st
 * **Real-time streaming test tree** --- live updates per spec, not per suite
 * **Dark / Light theme** with `localStorage` persistence
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-123170" src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" alt="" width="509" height="510">
+{{< img src="spaces_5kuiG5ZXNT2hNA83299A_uploads_git-blob-59873e9fdb6a57fb2d0ebdf0b128173f735a7e4d_testbox-run-light-509x510.webp" class="aligncenter size-medium" width="509" height="510" >}}
 
 * **Live search + status filters** --- filter by bundle, suite, or spec name; chips for Passed / Failed / Errored / Skipped
 

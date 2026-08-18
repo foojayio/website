@@ -1,6 +1,5 @@
 ---
 title: "Running JavaFX applications on ARM with Azul Zulu"
-slug: "running-javafx-applications-on-arm-with-azul-zulu"
 date: "2024-08-22T08:51:57+00:00"
 lastmod: "2025-04-17T12:53:39+00:00"
 description: "Since the April release of Azul Zulu Builds of OpenJDK, packages with JavaFX support for ARM 64-bit systems have been available."

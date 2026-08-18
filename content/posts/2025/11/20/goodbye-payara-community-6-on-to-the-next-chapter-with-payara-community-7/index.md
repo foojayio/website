@@ -1,6 +1,5 @@
 ---
 title: "Goodbye Payara Community 6, welcome Payara Community 7"
-slug: "goodbye-payara-community-6-on-to-the-next-chapter-with-payara-community-7"
 date: "2025-11-20T16:00:29+00:00"
 description: "Payara 6 Community has reached its final release, and the platform now moves forward with Payara 7 and Jakarta EE 11."
 canonical: "https://payara.fish/blog/payara-6-community-end-of-life/"

@@ -1,6 +1,5 @@
 ---
 title: "Remote Debugging Dangers and Pitfalls"
-slug: "remote-debugging-dangers-and-pitfalls"
 date: "2023-02-10T10:14:47+00:00"
 lastmod: "2023-02-10T10:14:48+00:00"
 description: "Debugging over the network using JDWP isn't hard. However, there are risks that aren't immediately intuitive and some subtle solutions!"

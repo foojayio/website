@@ -1,6 +1,5 @@
 ---
 title: "Rolling Binary Trees: A Guide to Common Design Patterns in Java"
-slug: "rolling-binary-trees-a-guide-to-common-design-patterns-in-java"
 date: "2023-05-24T12:55:14+00:00"
 lastmod: "2023-06-04T18:02:23+00:00"
 description: "We introduce a linear algorithm for rolling binary trees and implement it in Java, by demonstrating the use of common design patterns."
@@ -42,15 +41,15 @@ We can deduce that the two roll variants are **inverse** to one another, i.e., a
 
 Below is a simple illustration of a binary tree (T1) and its clockwise-rolled counterpart (T2) to its right. Due to the inverse nature of the roll variants, we can also say that T1 is the counterclockwise-rolled counterpart of T2.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/q7ZXwMfj/BTROLL1-SM.png" alt="binary_tree_roll_example_1" width="790" height="480">
+{{< img src="https://i.postimg.cc/q7ZXwMfj/BTROLL1-SM.png" class="size-medium" alt="binary_tree_roll_example_1" width="790" height="480" >}}
 
 In some cases, when the topology of the tree is such that when viewed at a ±90° angle it appears as though certain nodes have two parents, the visual effect of the roll transformation may lose its acuity. Nevertheless, **the equivalence between the correlated traversals always holds**. For instance, consider the binary tree T2 from the previous example and its clockwise-rolled counterpart T3 shown below.
 
-<img decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/BQhDPrtJ/BTROLL2-SM.png" alt="binary_tree_example_2" width="790" height="608">
+{{< img src="https://i.postimg.cc/BQhDPrtJ/BTROLL2-SM.png" class="size-medium" alt="binary_tree_example_2" width="790" height="608" >}}
 
 If we compare T3 to a literal -90° view of T2, the subtrees rooted at nodes **④** and **⑥** appear to be "pulled down" to create a proper binary tree structure. A similar thing happens when we take T3 from the example above and roll it clockwise.
 
-<img decoding="async" class="alignnone size-medium" src="https://i.postimg.cc/9FXZMmmx/BTROLL3-SM.png" alt="binary_tree_example_3" width="790" height="609">
+{{< img src="https://i.postimg.cc/9FXZMmmx/BTROLL3-SM.png" class="size-medium" alt="binary_tree_example_3" width="790" height="609" >}}
 
 This time we get a rolled tree that has the same root as the original tree, since T3's root node is also its leftmost node. And the subtrees rooted at **④** and **⑥** appear to be adjusted again, to correct for the aforementioned double-parent "anomaly."
 

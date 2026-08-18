@@ -1,6 +1,5 @@
 ---
 title: "Switch Statement and the Factory Pattern in Three JVM Languages"
-slug: "examining-the-switch-statement-and-the-factory-pattern-in-three-jvm-languages"
 date: "2022-04-06T09:10:08+00:00"
 lastmod: "2022-04-06T11:01:05+00:00"
 description: "Let's examine a program selection control mechanism, for a value, expression or variable type to influence program flow execution, for Switch."

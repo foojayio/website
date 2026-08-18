@@ -1,6 +1,5 @@
 ---
 title: "Quick Fire Java: Java After Log4j"
-slug: "quick-fire-java-java-after-log4j"
 date: "2022-03-31T08:23:36+00:00"
 lastmod: "2022-03-31T08:25:49+00:00"
 description: "Watch a 10 minute discussion on Log4j, security processes and prioritization, and how Payara dealt with the vulnerability."

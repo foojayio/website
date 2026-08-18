@@ -1,6 +1,5 @@
 ---
 title: "Top 7 Java Microservices Frameworks"
-slug: "top-7-java-microservices-frameworks"
 date: "2024-05-29T08:58:16+00:00"
 lastmod: "2024-06-13T14:54:27+00:00"
 description: "It's crucial to understand the trade-offs and ensure they are the right fit for your specific context before moving ahead with a microservices architecture"

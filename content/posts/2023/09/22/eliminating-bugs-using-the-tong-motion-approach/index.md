@@ -1,6 +1,5 @@
 ---
 title: "Eliminating Bugs Using the Tong Motion Approach"
-slug: "eliminating-bugs-using-the-tong-motion-approach"
 date: "2023-09-22T14:53:39+00:00"
 lastmod: "2023-09-22T14:53:41+00:00"
 description: "Delve into a two-pronged strategy that streamlines debugging, enabling developers to swiftly pinpoint and resolve elusive software glitches."

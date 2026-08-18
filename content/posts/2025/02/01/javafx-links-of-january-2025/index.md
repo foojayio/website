@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of January 2025"
-slug: "javafx-links-of-january-2025"
 date: "2025-02-01T16:20:33+00:00"
 lastmod: "2025-02-01T16:20:34+00:00"
 description: "Here is the first overview of the JavaFX LinksOfTheMonth for 2025. You can find the weekly lists on jfx-central.com. Did we miss anything? Is there - by Frank Delporte"

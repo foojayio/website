@@ -1,6 +1,5 @@
 ---
 title: "Java top most detected issues"
-slug: "top-most-detected-issues-in-java-projects"
 date: "2024-02-14T09:49:16+00:00"
 lastmod: "2024-02-14T09:57:11+00:00"
 description: "The most detected issues in Java projects by not following the clean code approach, and how to fix them with clear examples."
@@ -16,7 +15,7 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "effective-coding-with-java-observability"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -30,8 +29,7 @@ Although some issues may seem trivial, they can have a huge impact on the softwa
 
 And here they are...
 
-1. Code commented out
----------------------
+## 1. Code commented out
 
 Code commented out should be removed as it is making readability harder, and in case the code is needed again it can be retrieved from the version control system.
 
@@ -52,8 +50,7 @@ public void println(String x) {
 
 **Hint**: check the commented-out code and remove it if it no longer applies to the submitted feature or uncomment it if it was a temporary disabling
 
-2. Track uses of "TODO" tags
-----------------------------
+## 2. Track uses of "TODO" tags
 
 Leaving TODO comments in the source code, which most likely will survive eons, leads to code that is not complete and that can impact several areas.
 
@@ -77,8 +74,7 @@ SslHandler sslHandler = configureClientSSLOnDemand();
 
 **Hint**: do not add new TODO blocks and implement the feature before submitting the code or record these tasks in the proper task manager to tackle them in the future by the team.
 
-3. String literals duplicated
------------------------------
+## 3. String literals duplicated
 
 Having duplicated strings will lead to extra work or missing changes when those values need to be changed to adjust to new conditions.
 
@@ -104,8 +100,7 @@ public void run() {
 }
 ```
 
-4. Cognitive Complexity of functions should not be too high
------------------------------------------------------------
+## 4. Cognitive Complexity of functions should not be too high
 
 You are probably more used to hearing about cyclomatic complexity, a concept to measure how many paths are used in the code and, therefore, the level of reading complexity for a given part of the code.
 
@@ -131,8 +126,7 @@ The key takeout of this issue is that usually projects are hard to read and unde
 
 **Hint**: consider the complexity index of your new code and invest time trying to reduce it according to the configured threshold that should be low enough.
 
-5. Unused elements (imports, assignments, variables, private fields, parameters) should be removed
---------------------------------------------------------------------------------------------------
+## 5. Unused elements (imports, assignments, variables, private fields, parameters) should be removed
 
 It's so common that when we start coding a feature we create elements of the code that at the moment of merging it to the main branch, no longer have any purpose. These unused elements do not cause runtime errors or failing tests so, it's hard to spot these elements, that need to be removed, or in the worst case, that will force us to rethink the code if what it's right is the existence of the element.
 
@@ -156,8 +150,7 @@ public class MyClass {
 
 **Hint**: check the unused code and remove the one that is no longer used or consider if there's missing code that would use that dead elements.
 
-6. Raw types should not be used
--------------------------------
+## 6. Raw types should not be used
 
 In Java you should not use generic types without type parameters as it avoids the type checking and catching of unsafe code during the compilation, making everything visible during runtime.
 
@@ -175,8 +168,7 @@ List<String> myList;
 Set<? extends Number> mySet;
 ```
 
-7. Generic exceptions should never be thrown
---------------------------------------------
+## 7. Generic exceptions should never be thrown
 
 The usage of generic exceptions prevents the calling methods from handling different system-generated exceptions and application-generated errors.
 

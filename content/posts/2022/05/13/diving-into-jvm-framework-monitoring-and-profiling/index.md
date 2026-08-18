@@ -1,6 +1,5 @@
 ---
 title: "Diving into JVM Framework Monitoring and Profiling"
-slug: "diving-into-jvm-framework-monitoring-and-profiling"
 date: "2022-05-13T06:36:05+00:00"
 lastmod: "2022-05-13T12:59:16+00:00"
 description: "Let's look at how frameworks work under the hood, namely Quarkus and Spring Boot, and how many threads they initiate to serve up results."
@@ -100,12 +99,7 @@ Data is subsequently generated and shipped to the endpoints. What we observe nex
 
 Http status code 200 in case the element was successfully stored and found inside the system. The status code 400, bad request, is expected in case when an object is not present inside the system (Figure 4.). It means the scenarios also considers the negative cases.
 
-<figure class="wp-block-image alignnone size-medium wp-image-55960">
- <img loading="lazy" decoding="async" width="654" height="510" src="Image_4-654x510.png" alt="Image 4.: When element is not available response is 400, Bad request" class="wp-image-55960">
- <figcaption>
-  Figure 4.: <span style="font-weight: 400">When an element is not available, the https response code is 400, Bad request</span>
- </figcaption>
-</figure>
+{{< img src="Image_4-654x510.png" class="size-medium" alt="Image 4.: When element is not available response is 400, Bad request" width="654" height="510" caption="Figure 4.: When an element is not available, the https response code is 400, Bad request" >}}
 
 Everything is going according to the plan so far. But is that really enough to state the application has a good throughput and all is good? Of course not, even when tests have passed and the application is able to take some load, we still do not know enough.What about ....(explain what else)
 
@@ -119,12 +113,7 @@ Well now, to answer another important question, if an application is ready, shou
 
 **Monitoring** is something like keeping eyes on a running application based on sampled data (CPU, memory usage etc.) (Figure 5.).
 
-<figure class="wp-block-image alignnone size-medium wp-image-55961">
- <img loading="lazy" decoding="async" width="700" height="377" src="Image_5-700x377.png" alt="Image 5.: Spring-Boot kotlin grafana heap monitoring " class="wp-image-55961">
- <figcaption>
-  <strong>Figure 5.</strong>: <span style="font-weight: 400">Spring-Boot-kotlin grafana heap monitoring shows a sampled data-point with defined granularity, sampling step. Data highlighted something is happening but does it look serious ? ( Figure 7.)</span>
- </figcaption>
-</figure>
+{{< img src="Image_5-700x377.png" class="size-medium" alt="Image 5.: Spring-Boot kotlin grafana heap monitoring" width="700" height="377" caption="Figure 5.: Spring-Boot-kotlin grafana heap monitoring shows a sampled data-point with defined granularity, sampling step. Data highlighted something is happening but does it look serious ? ( Figure 7.)" >}}
 
 It means data is not really evaluated real time. Monitoring data is sampled and may therefore also have missed some significant values based on its nature ( Figures 5. and 7.).
 
@@ -134,12 +123,7 @@ It enables us to take action before it is too late (Figure 6. shows an increment
 
 Monitoring teaches us that understanding application limitation helps us to define a helpful thresholds, which should not be crossed.
 
-<figure class="wp-block-image alignnone size-medium wp-image-55962">
- <img loading="lazy" decoding="async" width="700" height="407" src="Image_6-700x407.png" alt="Image 6.: Quarkus on java monitoring, response times are getting higher" class="wp-image-55962">
- <figcaption>
-  <strong>Figure 6.</strong>: <span style="font-weight: 400">Quarkus on java monitoring, response times are getting higher</span>
- </figcaption>
-</figure>
+{{< img src="Image_6-700x407.png" class="size-medium" alt="Image 6.: Quarkus on java monitoring, response times are getting higher" width="700" height="407" caption="Figure 6.: Quarkus on java monitoring, response times are getting higher" >}}
 
 **Application profiling**, on other hand, gives a closer look into the heart of the application. The data is almost real time and may highlight challenges with insufficient memory allocation and usage.
 ![Image 7.: Problematic GC behavior in each pod recorded by Java Flight Recorder.](Image_11-480x510.png) **Figure 7.** : Problematic GC behaviour in each pod recorded by Java Flight Recorder.
@@ -154,23 +138,13 @@ Long pauses or many small ones may cause challenges in application response time
 
 Profiling can give a great hint and directly lead to the root cause. It allows to create a focused selection of application threads and examine them closely.
 
-<figure class="wp-block-image alignnone size-medium wp-image-55964">
- <img loading="lazy" decoding="async" width="435" height="510" src="Image_13-435x510.png" alt="Image 8.: Considered frameworks threads initiated by default." class="wp-image-55964">
- <figcaption>
-  <strong>Figure 8.</strong>: <span style="font-weight: 400">JFR recording shows that each of the considered frameworks has initiated a bunch of helper threads by default</span>
- </figcaption>
-</figure>
+{{< img src="Image_13-435x510.png" class="size-medium" alt="Image 8.: Considered frameworks threads initiated by default." width="435" height="510" caption="Figure 8.: JFR recording shows that each of the considered frameworks has initiated a bunch of helper threads by default" >}}
 
 By analysing thread behaviour we may uncover some suspicious action happening behind the scene that is not visible by monitoring or manual application tests or load tests.
 
 In general it could prove to be very challenging with significant difficulties to find out that the issue is hidden inside the code of the imported library, which is problematic in memory cache(Figure 9).
 
-<figure class="wp-block-image alignnone size-medium wp-image-55965">
- <img loading="lazy" decoding="async" width="700" height="247" src="Image_12-700x247.png" alt="Image 9.: Highlighted problematic hot method discovered by analyzing Java Flight recording with focused threads selection" class="wp-image-55965">
- <figcaption>
-  <strong>Figure 9.</strong>: Highlighted problematic hot method discovered by analysing Java Flight recording with focused threads selection
- </figcaption>
-</figure>
+{{< img src="Image_12-700x247.png" class="size-medium" alt="Image 9.: Highlighted problematic hot method discovered by analyzing Java Flight recording with focused threads selection" width="700" height="247" caption="Figure 9.: Highlighted problematic hot method discovered by analysing Java Flight recording with focused threads selection" >}}
 
 ## Conclusion
 

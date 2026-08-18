@@ -1,6 +1,5 @@
 ---
 title: "Ai4Devs Amsterdam: Successful Inaugural Developer-Focused AI Conference"
-slug: "ai4devs-amsterdam-successful-inaugural-developer-focused-ai-conference"
 date: "2025-10-03T09:37:43+00:00"
 lastmod: "2025-10-03T09:47:20+00:00"
 description: "The inaugural AI4Devs conference in Amsterdam, proved to be a resounding success, bringing together approximately 200 developers at Amsterdam's iO Digital Campus."
@@ -40,9 +39,7 @@ The full-day event featured in-depth technical sessions, real-world AI implement
 
 With its laser-focused, developer-centric approach and intimate setting, AI4Devs Amsterdam successfully established itself as a premier destination for practical AI knowledge.
 
-<figure class="wp-block-image size-large is-resized">
- <a target="_blank" href="https://www.linkedin.com/feed/update/urn:li:activity:7377341304550105089/"><img decoding="async" width="1024" height="493" src="ing-ai4devs-1024x493.png" alt="" class="wp-image-121377" style="width:523px;height:auto"></a>
-</figure>
+{{< img src="ing-ai4devs-1024x493.png" class="size-large is-resized" width="1024" height="493" style="width:523px;height:auto" >}}
 
 The inaugural event sets a strong foundation for future editions, demonstrating clear demand for technical, code-heavy AI conferences in the European market and beyond.
 

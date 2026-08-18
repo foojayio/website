@@ -1,6 +1,5 @@
 ---
 title: "How Organizations Became Stuck on Outdated Java Versions"
-slug: "how-organizations-became-stuck-on-outdated-java-versions"
 date: "2024-11-27T15:46:16+00:00"
 lastmod: "2024-11-27T15:46:17+00:00"
 description: "Why is your company still on Java 8 (or older)? And why did you never move to 9, 10,... and got stuck on this outdated version?"

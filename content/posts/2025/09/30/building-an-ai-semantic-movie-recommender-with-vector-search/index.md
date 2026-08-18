@@ -1,6 +1,5 @@
 ---
 title: "Building an AI Semantic Movie Recommender with Vector Search"
-slug: "building-an-ai-semantic-movie-recommender-with-vector-search"
 date: "2025-09-30T13:23:18+00:00"
 lastmod: "2025-09-30T13:23:38+00:00"
 description: "Last time, we created a vector search index in a local MongoDB Atlas cluster. Now, let’s put it to work with a real case: building an AI-powered movie recommender that suggests films similar to The Matrix–without any shared keywords."

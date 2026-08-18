@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of March 2023"
-slug: "javafx-links-of-march-2023"
 date: "2023-03-31T12:56:00+00:00"
 lastmod: "2023-04-01T08:57:27+00:00"
 description: "Already the end of March, so time to look back at the JavaFX Links Of The Week that were published on JFXCentral.com."
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-february-2023"
   - "javafx-links-of-january-2023"
   - "javafx-links-of-december"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

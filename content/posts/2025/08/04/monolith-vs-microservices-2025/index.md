@@ -1,6 +1,5 @@
 ---
 title: "Monolith vs Microservices in 2025"
-slug: "monolith-vs-microservices-2025"
 date: "2025-08-04T13:45:09+00:00"
 lastmod: "2025-08-04T13:47:37+00:00"
 description: "Monolith vs Microservices in 2025. Discover trends, trade-offs, and why simplicity and DX matter more than ever."

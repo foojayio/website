@@ -1,6 +1,5 @@
 ---
 title: "Write Once, Run Embedded in any IDE"
-slug: "write-once-run-embedded-in-any-ide"
 date: "2023-05-16T13:34:19+00:00"
 lastmod: "2023-05-16T13:34:20+00:00"
 description: "Having written many Java GUI applications, I thought it would be cool to run them embedded in IntelliJ IDEA, Eclipse and NetBeans."
@@ -214,7 +213,7 @@ If you decide to **package** it in a Jar file, Applet Runner will use the *Main-
 
 To **run** the application in your IDE, install and start Applet Runner, use the *Open...* icon and select the class file.
 
-<img decoding="async" class="size-medium wp-image-66520 aligncenter" src="netbeans-monitor-700x431.png" alt="Monitoring applet running in NetBeans" width="700" height="431">
+{{< img src="netbeans-monitor-700x431.png" class="size-medium aligncenter" alt="Monitoring applet running in NetBeans" width="700" height="431" >}}
 
 It is also possible to specify another class file or to add external libraries or to pass parameters to the applet. For this you need to create an HTML file with an [\<applet\>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/applet) tag or a JNLP file with an [\<applet-desc\>](https://docs.oracle.com/javase/tutorial/deployment/deploymentInDepth/embeddingJNLPFileInWebPage.html) tag.
 
@@ -230,11 +229,11 @@ It is also possible to specify another class file or to add external libraries o
 </html>
 ```
 
-<img decoding="async" class="aligncenter size-medium wp-image-66522" src="eclipse-monitor-700x405.png" alt="Monitoring applet running in Eclipse IDE" width="700" height="405">
+{{< img src="eclipse-monitor-700x405.png" class="aligncenter size-medium" alt="Monitoring applet running in Eclipse IDE" width="700" height="405" >}}
 
 If you have JDK 18 or higher installed, you can test the monitoring by executing *jwebserver -p 8080*.
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-66521" src="intellij-monitor-700x456.png" alt="Monitoring applet in JetBrains IntelliJ IDEA" width="700" height="456">
+{{< img src="intellij-monitor-700x456.png" class="aligncenter size-medium" alt="Monitoring applet in JetBrains IntelliJ IDEA" width="700" height="456" >}}
 
 For the **distribution**, copy the html and class files on a network drive or website and send the location of the file to your colleagues.
 

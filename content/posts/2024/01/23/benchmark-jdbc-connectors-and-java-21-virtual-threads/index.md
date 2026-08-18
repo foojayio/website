@@ -1,6 +1,5 @@
 ---
 title: "MariaDB Java Connector, Benchmark, and Java 21 virtual threads"
-slug: "benchmark-jdbc-connectors-and-java-21-virtual-threads"
 date: "2024-01-23T13:03:18+00:00"
 lastmod: "2024-01-23T13:03:19+00:00"
 description: "The impact of Java 21s virtual threads on the performance of MariaDB database exchanges."

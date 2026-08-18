@@ -1,6 +1,5 @@
 ---
 title: "Payara Platform October 2021 Survey"
-slug: "payara-platform-october-2021-survey"
 date: "2021-10-13T07:58:29+00:00"
 lastmod: "2021-10-13T08:03:36+00:00"
 description: "We are inviting all Payara Platform community users to answer a few questions about your use of the Payara Platform and ecosystem components!"
@@ -22,7 +21,7 @@ frozen: false
 
 [
 
-<img fetchpriority="high" decoding="async" class="alignnone wp-image-49781 size-medium" src="MicrosoftTeams-image-33-700x394.jpg" alt="" width="700" height="394">
+{{< img src="MicrosoftTeams-image-33-700x394.jpg" class="size-medium" width="700" height="394" >}}
 
 ](https://www.payara.fish/Survey)
 

@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Configuration for Docker Images with Azul Zulu"
-slug: "configuring-spring-boot-to-build-a-docker-image-with-azul-zulu-and-debug-options"
 date: "2023-08-30T16:14:52+00:00"
 lastmod: "2023-08-30T16:14:54+00:00"
 description: "The Spring Boot Maven Plugin makes creating a Docker image from your app very easy! Let's see how define the Java runtime used and more."

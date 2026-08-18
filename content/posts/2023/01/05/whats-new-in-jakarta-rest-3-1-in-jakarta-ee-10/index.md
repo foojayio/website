@@ -1,6 +1,5 @@
 ---
 title: "What’s New in Jakarta REST 3.1 in Jakarta EE 10?"
-slug: "whats-new-in-jakarta-rest-3-1-in-jakarta-ee-10"
 date: "2023-01-05T11:30:17+00:00"
 lastmod: "2023-01-05T11:35:20+00:00"
 description: "The latest version of Jakarta REST is 3.1, which shipped with Jakarta EE 10. This version comes with two great new noteworthy features!"

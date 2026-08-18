@@ -1,6 +1,5 @@
 ---
 title: "\"Transitioning to Java\": My First Book!"
-slug: "transitioning-to-java-my-first-book"
 date: "2023-05-24T08:01:58+00:00"
 lastmod: "2023-05-24T08:01:59+00:00"
 description: "I like to describe this book as a beginner's book for experts. Anyone who needs to get up to speed quickly using Java is my primary audience."
@@ -19,7 +18,7 @@ related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "new-book-fxgl-17-learn-javafx-game-and-app-development"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 

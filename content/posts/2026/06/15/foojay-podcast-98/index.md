@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #98: The End of JNI Pain: How WebAssembly Is Quietly Replacing Native Libraries in Java"
-slug: "foojay-podcast-98"
 date: "2026-06-15T08:13:00+00:00"
 lastmod: "2026-06-15T15:25:19+00:00"
 description: "WebAssembly is already running inside Java applications, most developers just don't know it yet. In this episode, Andrea Peruffo walks us through how WebAssembly is becoming the modern, safe alternative to JNI: letting you run Rust, C, and other native libraries directly on the JVM, without the crash risks, the per-platform distribution headaches, or the observability blackhole that JNI creates. From JRuby's Prism parser to SQLite and Postgres running as pure Java bytecode, the use cases are real and the project Endive, under the Bytecode Alliance, is ready to explore."

@@ -1,6 +1,5 @@
 ---
 title: "Unsupported OpenJDK Distributions are at Risk of Non-Compliance with DORA"
-slug: "unsupported-openjdk-distributions-are-at-risk-of-non-compliance-with-dora"
 date: "2024-08-26T12:24:05+00:00"
 lastmod: "2024-09-05T06:31:09+00:00"
 description: "Read the only logical conclusion of reading DORA in the context of OpenJDK, assuming that it has meaning and intent in the context of OpenJDK or any ICT asset that is vulnerable to the risk that DORA seeks to mitigate."

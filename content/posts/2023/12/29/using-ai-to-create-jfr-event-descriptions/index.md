@@ -1,6 +1,5 @@
 ---
 title: "Using AI to Create JFR Event Descriptions"
-slug: "using-ai-to-create-jfr-event-descriptions"
 date: "2023-12-29T05:42:16+00:00"
 lastmod: "2023-12-29T05:47:05+00:00"
 description: "Learn about the website that gives an overview of JFR events, with descriptions from the OpenJDK, their properties, examples, configurations, and the JDK versions in which every event is present."
@@ -15,7 +14,7 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"
   - "foojay-podcast-14"
-  - "where-production-policy-belongs-building-eliya-in-public"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

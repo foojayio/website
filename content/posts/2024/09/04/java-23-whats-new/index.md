@@ -1,6 +1,5 @@
 ---
-title: "Java 23: What’s New? | Foojay.io today"
-slug: "java-23-whats-new"
+title: "Java 23: What’s New?"
 date: "2024-09-04T09:19:35+00:00"
 lastmod: "2024-09-16T07:23:33+00:00"
 description: "The latest version of Java is rather sparse in terms of new features, and few of those currently under development have made it out of the preview."

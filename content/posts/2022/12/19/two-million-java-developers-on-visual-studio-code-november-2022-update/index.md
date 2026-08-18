@@ -1,6 +1,5 @@
 ---
 title: "Two Million Java Developers on Visual Studio Code!"
-slug: "two-million-java-developers-on-visual-studio-code-november-2022-update"
 date: "2022-12-19T13:12:37+00:00"
 lastmod: "2022-12-19T13:12:39+00:00"
 description: "New code editing features, the debugger gets a nice update, and visual enhancements to the Spring components."

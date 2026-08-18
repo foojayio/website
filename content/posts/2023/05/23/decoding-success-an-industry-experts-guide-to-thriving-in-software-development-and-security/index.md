@@ -1,6 +1,5 @@
 ---
 title: "An Industry Expert's Guide to Thriving in Software Development and Security"
-slug: "decoding-success-an-industry-experts-guide-to-thriving-in-software-development-and-security"
 date: "2023-05-23T15:14:55+00:00"
 lastmod: "2023-05-23T20:26:51+00:00"
 description: "Uncover the dynamics of software development and product management in our discussion with Erik, Senior Director at Azul. Learn about his transition from engineering to product management, key industry challenges, and the importance of application security in today's tech-driven world."
@@ -17,9 +16,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="erik.jpeg" alt="" class="wp-image-98444" width="450" height="675">
-</figure>
+{{< img src="erik.jpeg" class="alignright size-full is-resized" width="450" height="675" >}}
 
 In today's fast-paced tech world, understanding the intricacies of software development and product management is key to success.
 

@@ -1,6 +1,5 @@
 ---
 title: "How ReadyNow Improves Java Warmup Time"
-slug: "how-readynow-improves-java-warmup-time"
 date: "2025-06-13T07:55:38+00:00"
 lastmod: "2025-06-27T09:39:25+00:00"
 description: "This is the second article in a series on faster Java application warmup. The first blog post, Faster Java Warmup: CRaC versus ReadyNow, explained how - by Frank Delporte"

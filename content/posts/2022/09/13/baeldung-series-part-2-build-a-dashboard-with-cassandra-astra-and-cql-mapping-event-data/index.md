@@ -1,6 +1,5 @@
 ---
 title: "Baeldung Series Part 2: Build a Dashboard With Cassandra, Astra and CQL – Mapping Event Data"
-slug: "baeldung-series-part-2-build-a-dashboard-with-cassandra-astra-and-cql-mapping-event-data"
 date: "2022-09-13T17:46:02+00:00"
 lastmod: "2022-09-13T17:46:04+00:00"
 description: "1. Introduction In our previous article, we looked at augmenting our dashboard to store and display individual events from the Avengers - by Graham Cox"
@@ -70,8 +69,7 @@ We now need to add this key to our *application.properties*file:
 GOOGLE_CLIENT_ID=someRandomClientId
 ```
 
-3. Building the Client Layer Using Astra and CQL
-------------------------------------------------
+## 3. Building the Client Layer Using Astra and CQL
 
 **In order to communicate with the database via CQL, we need to write our client layer.** This will be a class called CqlClient that wraps the DataStax CQL APIs, abstracting away the connection details:
 
@@ -239,7 +237,7 @@ Once we've written our controller, we need a template to actually render the HTM
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7875756e696e687b6a5a2f342a342a37787f6e7b29">[email protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
 
   <title>Avengers Status Map</title>
@@ -281,7 +279,7 @@ Once we've written our controller, we need a template to actually render the HTM
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03616c6c77707771627343362d332d332e6166776230">[email protected]</a>/dist/js/bootstrap.bundle.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
     </script>
   <script type="text/javascript" th:inline="javascript">

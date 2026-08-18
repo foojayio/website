@@ -1,6 +1,5 @@
 ---
 title: "Release with JReleaser to Maven Central with GitHub Actions"
-slug: "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"
 date: "2023-01-18T08:55:48+00:00"
 lastmod: "2025-12-12T12:03:48+00:00"
 description: "Learn from scratch about how to get started releasing a Java module with JReleaser to Maven Central with Github Actions."
@@ -59,7 +58,7 @@ gpg --list-keys --keyid-format=long
 --------------------------------------
 pub   rsa4096/XXXXXXXX9925B017 2022-11-17 [SC] [expires: 2026-11-17]
       C20FC085CF5B0D4D861E8CEDXXXXXXXX9925B017
-uid                 [ultimate] Jago de Vreede <<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ae8fffefbf9eefffedaf7fbf3f6b4f9f5f7">[email protected]</a>>
+uid                 [ultimate] Jago de Vreede <[email protected]>
 sub   rsa4096/XXXXXXXXXXXXFC74 2022-11-17 [E] [expires: 2026-11-17]
 ```
 

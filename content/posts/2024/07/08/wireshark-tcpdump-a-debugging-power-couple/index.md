@@ -1,6 +1,5 @@
 ---
 title: "Wireshark & tcpdump: A Debugging Power Couple"
-slug: "wireshark-tcpdump-a-debugging-power-couple"
 date: "2024-07-08T14:51:05+00:00"
 lastmod: "2024-07-09T10:23:12+00:00"
 description: "Explore the power of Wireshark and tcpdump for network analysis in our comprehensive guide, unveiling tips for effective troubleshooting."

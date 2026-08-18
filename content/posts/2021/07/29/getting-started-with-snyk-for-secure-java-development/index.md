@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Snyk for Secure Java Development"
-slug: "getting-started-with-snyk-for-secure-java-development"
 date: "2021-07-29T06:39:02+00:00"
 lastmod: "2021-07-29T06:39:05+00:00"
 description: "Learn how to begin with Snyk for secure Java development so that you too can be more secure from the get-go!"

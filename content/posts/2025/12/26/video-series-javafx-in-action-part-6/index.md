@@ -1,6 +1,5 @@
 ---
 title: "Video series “JavaFX In Action”, Part 6 with Vlad Protsenko (Clojure), Matt Coley (Recaf), Craig Raw (Sparrow), and Florian Enner (3D Robot Visualization)"
-slug: "video-series-javafx-in-action-part-6"
 date: "2025-12-26T08:07:18+00:00"
 description: "This is the next part in the series of \"JavaFX in Action\" interviews. Are you working on a fantastic JavaFX application? Let me know, and let's discuss it - by Frank Delporte"
 authors:

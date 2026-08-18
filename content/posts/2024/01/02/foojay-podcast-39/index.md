@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #39: Java Dominicano"
-slug: "foojay-podcast-39"
 date: "2024-01-02T10:29:06+00:00"
 lastmod: "2025-11-13T08:50:50+00:00"
 description: "Today, we are traveling to the Dominican Republic to learn more about the country and its Java community."

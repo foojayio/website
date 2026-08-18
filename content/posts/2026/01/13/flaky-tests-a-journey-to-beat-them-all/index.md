@@ -1,6 +1,5 @@
 ---
 title: "Flaky Tests: a journey to beat them all"
-slug: "flaky-tests-a-journey-to-beat-them-all"
 date: "2026-01-13T13:00:07+00:00"
 description: "“Sleep is not a synchronization primitive.” Every test engineer, eventually What’s a flaky test? A flaky test is a test that sometimes passes and - by Loic Mathieu"
 authors:
@@ -11,10 +10,10 @@ categories:
   - "Testing"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

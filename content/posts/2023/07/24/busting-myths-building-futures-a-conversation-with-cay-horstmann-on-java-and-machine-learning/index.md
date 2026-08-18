@@ -1,6 +1,5 @@
 ---
 title: "Busting Myths, Building Futures: A Conversation with Cay Horstmann on Java and Machine Learning"
-slug: "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
 date: "2023-07-24T15:12:00+00:00"
 lastmod: "2023-07-24T15:37:44+00:00"
 description: "Cay Horstmann shares his experiences with Java, his writing process for technical books, the challenges of teaching Java, and discusses its role in education."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-medium is-resized">
- <img fetchpriority="high" decoding="async" src="cay-pfh-big-edited.jpg" alt="" class="wp-image-101427" width="503" height="356">
-</figure>
+{{< img src="cay-pfh-big-edited.jpg" class="alignright size-medium is-resized" width="503" height="356" >}}
 
 In our ongoing series of interviews with the movers and shakers of the software world, we bring you a conversation with Cay Horstmann, a towering figure in the Java community and a respected academic and entrepreneur.
 

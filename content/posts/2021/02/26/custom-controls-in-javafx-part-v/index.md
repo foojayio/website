@@ -1,6 +1,5 @@
 ---
 title: "Custom Controls in JavaFX (Part V): Region Class"
-slug: "custom-controls-in-javafx-part-v"
 date: "2021-02-26T08:31:08+00:00"
 lastmod: "2021-02-26T08:31:10+00:00"
 description: "Learn how to create a custom Control based on the JavaFX Region class. The Region class is the class that all JavaFX controls are based on."
@@ -13,8 +12,8 @@ tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-vi"
-  - "custom-controls-in-javafx-part-iv"
-  - "custom-controls-in-javafx-part-iii"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "java-for-desktop-applications-part-1"
 frozen: false
 ---
 

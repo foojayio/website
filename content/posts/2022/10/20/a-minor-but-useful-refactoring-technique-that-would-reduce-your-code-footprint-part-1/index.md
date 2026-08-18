@@ -1,6 +1,5 @@
 ---
 title: "Minor Techniques That Would Reduce Your Code Footprint (Part 1)"
-slug: "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
 date: "2022-10-20T14:32:52+00:00"
 lastmod: "2022-10-20T16:21:42+00:00"
 description: "That was a long-awaited migration, but I'm pleased that we eventually made it. The next thing... \"Why not Java 17 directly?\""

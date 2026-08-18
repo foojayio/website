@@ -1,6 +1,5 @@
 ---
 title: "Time Zone and Currency Database in JDK"
-slug: "time-zone-and-currency-database-in-jdk"
 date: "2023-04-08T13:39:00+00:00"
 lastmod: "2023-04-08T13:39:45+00:00"
 description: "You aren’t a real developer until you have programmed with dates, times, daylight savings, and time zones. Luckily the JDK assists you!"

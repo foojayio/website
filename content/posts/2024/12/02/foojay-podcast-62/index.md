@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #62: Better Coding with AI: Friend or Enemy?"
-slug: "foojay-podcast-62"
 date: "2024-12-02T14:57:10+00:00"
 lastmod: "2025-11-13T08:40:51+00:00"
 description: "AI, LLMs, ChatGPT—these are just a few of the buzzwords of the massive revolution unfolding right now."

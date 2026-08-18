@@ -1,6 +1,5 @@
 ---
 title: "I Got Java 25 Running on the RISC-V BeagleBoard BeagleV-Fire"
-slug: "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"
 date: "2026-02-25T06:04:00+00:00"
 description: "After my initial struggles with the BeagleV-Fire in a previous video, I succeeded in getting Java 25 running on RISC-V-powered BeagleV-Fire! Let me walk - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-02-13-java-25-runs-on-riscv-beagleboard-beaglev-fire/"

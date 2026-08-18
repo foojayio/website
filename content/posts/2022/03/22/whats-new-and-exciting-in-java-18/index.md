@@ -1,6 +1,5 @@
 ---
 title: "What's New and Exciting in Java 18?"
-slug: "whats-new-and-exciting-in-java-18"
 date: "2022-03-22T07:23:21+00:00"
 lastmod: "2022-03-22T07:31:56+00:00"
 description: "Java 18 is here and in this article we explore the most important changes and, in my humble opinion, this release is an important one!"

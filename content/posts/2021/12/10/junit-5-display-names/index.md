@@ -1,6 +1,5 @@
 ---
 title: "JUnit 5 Display Names"
-slug: "junit-5-display-names"
 date: "2021-12-10T12:31:03+00:00"
 lastmod: "2022-06-01T20:12:43+00:00"
 description: "Continue with the JUnit 5 series on how to customize test classes and test method names to produce more meaningful output."

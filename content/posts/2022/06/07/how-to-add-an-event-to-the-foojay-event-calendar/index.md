@@ -1,6 +1,5 @@
 ---
 title: "How to Add an Event to the Foojay Event Calendar"
-slug: "how-to-add-an-event-to-the-foojay-event-calendar"
 date: "2022-06-07T09:34:47+00:00"
 lastmod: "2022-06-07T09:39:02+00:00"
 description: "If you want to add an event to our calendar or advertize your event on Foojay.io, you can follow the following steps! "

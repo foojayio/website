@@ -1,6 +1,5 @@
 ---
 title: "Make Java Fleets Warm Up Faster on AWS With Azul Optimizer Hub"
-slug: "make-java-fleets-warm-up-faster-on-aws-with-azul-optimizer-hub"
 date: "2025-12-18T08:35:52+00:00"
 lastmod: "2025-12-22T13:20:49+00:00"
 description: "Traditional Java executes code in slower interpreted mode, known as Java warmup, until it can build an optimized profile. This means it can only start - by Frank Delporte"

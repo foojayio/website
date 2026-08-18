@@ -1,6 +1,5 @@
 ---
 title: "Avoid Multithreading Bugs Using Immutable Java Records"
-slug: "immutable-records"
 date: "2021-06-07T07:52:44+00:00"
 lastmod: "2021-07-12T04:59:40+00:00"
 description: "Records help remove repetitive error-prone code, increasing developer productivity, with immutability keeping it away from concurrency bugs."

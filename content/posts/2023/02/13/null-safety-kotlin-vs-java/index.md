@@ -1,6 +1,5 @@
 ---
 title: "Null Safety: Kotlin vs. Java"
-slug: "null-safety-kotlin-vs-java"
 date: "2023-02-13T12:12:35+00:00"
 lastmod: "2023-02-13T12:13:54+00:00"
 description: "Following on from FOSDEM discussions, let's expand on the problem of nullability and how it's solved in Kotlin and Java."
@@ -30,7 +29,7 @@ The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-k
 
 [
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-62512 size-medium" src="Screenshot-2023-02-11-at-13.11.04-485x510.png" alt="" width="485" height="510">
+{{< img src="Screenshot-2023-02-11-at-13.11.04-485x510.png" class="aligncenter size-medium" width="485" height="510" >}}
 
 ](https://twitter.com/martinbonnin/status/1622197657534857220)
 

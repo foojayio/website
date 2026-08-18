@@ -1,6 +1,5 @@
 ---
 title: "Augmenting the client with Alpine.js"
-slug: "augmenting-the-client-with-alpine-js"
 date: "2024-10-14T10:59:44+00:00"
 lastmod: "2024-10-14T10:59:45+00:00"
 description: "Alpine is very similar to Vue, with the notable difference of the lack of templating; components are only available via a price. All other features have an equivalent."
@@ -71,8 +70,8 @@ It's similar to Vue's setup.
 Here's the code on the HTML side:
 
 ```html
-<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="34554c5d5b4774051a03">[email protected]</a>/dist/axios.min.js"></script> <!--1-->
-<script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59499859c9b909f86b5c6dbc4c1dbc4">[email protected]</a>/dist/cdn.min.js" defer></script> <!--2-->
+<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/axios.min.js"></script> <!--1-->
+<script th:src="@{/webjars/alpinejs/dist/cdn.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/cdn.min.js" defer></script> <!--2-->
 <script th:src="@{/alpine.js}" src="../static/alpine.js"></script>  <!--3-->
 <script th:inline="javascript">
 /*<![CDATA[*/

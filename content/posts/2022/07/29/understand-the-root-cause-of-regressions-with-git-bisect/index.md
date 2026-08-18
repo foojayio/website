@@ -1,6 +1,5 @@
 ---
 title: "Understand the Root Cause of Regressions with Git Bisect"
-slug: "understand-the-root-cause-of-regressions-with-git-bisect"
 date: "2022-07-29T13:18:07+00:00"
 lastmod: "2022-08-26T14:48:58+00:00"
 description: "Your git fairy godmother will test and locate bugs for you with a swish of her magic wand. All you need are the magic words: \"git bisect\"."

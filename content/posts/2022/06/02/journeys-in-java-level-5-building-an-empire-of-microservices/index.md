@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 5: Building an Empire of Microservices"
-slug: "journeys-in-java-level-5-building-an-empire-of-microservices"
 date: "2022-06-02T05:08:28+00:00"
 lastmod: "2022-06-02T05:08:36+00:00"
 description: "We continue building our microservices system by adding a coordination layer to handle spinning multiple services up and down."
@@ -72,7 +71,7 @@ FROM openjdk:11
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f79d9299999e919285b7839f929f92949c9b928584d9988590">[email protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,[email protected],@JMHReif"
 
 #Copy jar and expose entrypoints
 #--------------------------------

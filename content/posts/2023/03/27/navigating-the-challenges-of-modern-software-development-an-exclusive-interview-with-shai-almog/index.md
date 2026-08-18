@@ -1,6 +1,5 @@
 ---
 title: "Navigating the Challenges of Modern Software Development: An Exclusive Interview with Shai Almog"
-slug: "navigating-the-challenges-of-modern-software-development-an-exclusive-interview-with-shai-almog"
 date: "2023-03-27T16:39:07+00:00"
 lastmod: "2023-03-27T17:10:44+00:00"
 description: "Join our interview with Java expert Shai Almog, as he shares his journey and offers valuable advice for developers, discussing mentorship and overcoming challenges in the software industry."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft size-full">
- <img fetchpriority="high" decoding="async" width="474" height="474" src="shai-almog.jpg" alt="" class="wp-image-61677">
-</figure>
+{{< img src="shai-almog.jpg" class="alignleft size-full" width="474" height="474" >}}
 
 Welcome to our exclusive interview with [Shai Almog](https://www.linkedin.com/in/shai-almog-81a42/), an accomplished entrepreneur, author, blogger, and Java expert with over two decades of experience in the software industry.
 

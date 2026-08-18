@@ -1,6 +1,5 @@
 ---
 title: "5 Tips to Create Secure Docker Images for Java Applications"
-slug: "5-tips-to-create-secure-docker-images-for-java-applications"
 date: "2020-12-25T10:41:54+00:00"
 lastmod: "2025-12-12T08:47:11+00:00"
 description: "Naively creating custom Docker images for Java apps comes with security concerns. How do we make security an essential part of Docker images?"
@@ -19,8 +18,7 @@ Docker is the most widely used way to containerize your application. With Docker
 
 However, the naive way of creating custom Docker images for your Java applications comes with many security concerns. So, how do we make security an essential part of Docker images for Java?
 
-1. Choose the right Docker base image for your Java application
----------------------------------------------------------------
+## 1. Choose the right Docker base image for your Java application
 
 When creating a Docker image, we make this image based on some image we pull from Docker Hub. This is what we call the base-image. The base image is the foundation of the new image you are about to build for your Java application. The base image you choose is essential because it allows you to utilize everything available in this image. However, this comes at a price. When a base image has a vulnerability, you will inherit this in your newly created image.
 
@@ -31,8 +29,7 @@ We can conclude that choosing the right base image is critical from a security p
 
 Next to the security aspect, a minimal base image will reduce your newly created image's size. A smaller Docker image also means a smaller footprint and, most likely, a faster startup time.
 
-2. Use a JRE, not a JDK
------------------------
+## 2. Use a JRE, not a JDK
 
 When creating a Docker image, we should only assign the necessary resources to function correctly. This means that we should start by using an appropriate Java Runtime Environment (JRE) for your production image and not the complete Java Development Kit (JDK). In addition, your production image should not include a build system like Maven or Gradle. The product of a build, for instance, your jar file, should be enough.
 
@@ -56,8 +53,7 @@ Smaller images are not only easier to upload and save startup time but are also 
 
 You can also use this when you have to include secrets for accessing a private repository. You don't want these kinds of secrets in the cache of your production image. You don't use the build image in production, so it is perfectly acceptable to use the secrets over there. With this technique, you can cherrypick the stuff you need from other images and create a product Docker image with only the resources it needs.
 
-3. Don't run your Docker container as root
-------------------------------------------
+## 3. Don't run your Docker container as root
 
 When creating a Docker container, by default, you will run it as root. Although this is convenient for development, you do not want this in your production images. Suppose, for whatever reason, an attacker has access to a terminal or can execute code. In that case, it has significant privileges over that running container, as well as potentially accessing host filesystems via filesystem bind mounts with inappropriately high access rights.  
 
@@ -68,8 +64,7 @@ On the third line, I am creating a new group and adding a user. This user is a s
 
 Next, I give the user permission to the application folder on line 6. Don't forget line 7. Here, I am setting the user I want to use. This way, the newly created restricted user does the command on the last line.
 
-4. Scan your Docker image and Java application during development
------------------------------------------------------------------
+## 4. Scan your Docker image and Java application during development
 
 Creating a Docker image from a Dockerfile and even rebuilding an image can introduce new vulnerabilities in your system. Scanning your docker images during development should be part of your workflow to catch vulnerabilities as early as possible.
 
@@ -102,8 +97,7 @@ The majority of the Java binary you put into your Docker image is probably code 
 
 For the code you wrote, it is wise to use a code analysis tool or linter like SonarLint, PMD, or spotbugs. These tools are general-purpose tools for creating better code but also help you prevent making obvious security mistakes.
 
-5. Build to rebuild
--------------------
+## 5. Build to rebuild
 
 Build your Java application for your Docker image in such a way that you can throw it away and rebuild it at any time. Say you noticed something is wrong with your running container. It would be great if you can simply kill it and spin up a new instance. This means that you have to design stateless Java applications, such that the data is stored outside the container. A couple of things you can think of are:
 

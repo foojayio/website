@@ -1,6 +1,5 @@
 ---
 title: "GraphQL, JavaScript, Preprocessor, SQL and more in Manifold"
-slug: "graphql-javascript-preprocessor-sql-and-more-in-manifold"
 date: "2023-07-17T12:42:59+00:00"
 lastmod: "2023-07-17T12:43:03+00:00"
 description: "In the final installment of the Manifold series we discuss the final integrations, review the benefits, and discuss using it in a project."

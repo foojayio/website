@@ -1,6 +1,5 @@
 ---
 title: "3 Ways to Refactor Your Code in IntelliJ IDEA"
-slug: "3-ways-to-refactor-your-code-in-intellij-idea"
 date: "2021-01-12T08:24:00+00:00"
 lastmod: "2021-09-03T09:25:09+00:00"
 description: "Simplifying your code has advantages, including improving readability, tackling technical debt, and managing ever-changing requirements."
@@ -108,7 +107,13 @@ We can extract the number 365 to a constant in this line of code because the ear
 System.out.println("Number of times the planet rotates around the sun is " + 365);
 ```
 
-We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as `NUMBER_OF_DAYS_IN_A_YEAR`. IntelliJ IDEA creates a new public static final constant at the start of our class:
+We can select the number and then use **⌘⌥C** on macOS, and **Ctrl** +**Alt** +**C** on Windows and Linux, to extract it to a constant. We can give it a name such as
+
+```java
+NUMBER_OF_DAYS_IN_A_YEAR
+```
+
+. IntelliJ IDEA creates a new public static final constant at the start of our class:
 
 ```java
 public static final int NUMBER_OF_DAYS_IN_A_YEAR = 365;

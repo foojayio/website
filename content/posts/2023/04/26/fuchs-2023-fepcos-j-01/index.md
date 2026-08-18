@@ -1,6 +1,5 @@
 ---
 title: "FEPCOS-J (1) – Description, Impression of Usage, Current State"
-slug: "fuchs-2023-fepcos-j-01"
 date: "2023-04-26T06:09:41+00:00"
 lastmod: "2023-04-26T08:29:52+00:00"
 description: "FEPCOS-J implements a Java-language extension that frees a Java-developer from network programming and supports cross-system concurrency."
@@ -31,12 +30,7 @@ You can contribute so that FEPCOS-J becomes *Free/Libre and Open-Source Software
 
 When I was a child, I loved to create things out of building blocks --- this has never changed (Fig. 1). It is a pleasure for me to compose parts into a new whole. This also applies for programming.  
 
-<figure class="aligncenter size-full is-resized">
- <img fetchpriority="high" decoding="async" src="fuchs2023fepcos-j-toy-robots-are-parts-of-current-test-and-development-environment.png" alt="See two toy robots that are constructed out of building blocks. A Raspberry Pi Model 3B that is installed on each robot controls them. The robots run Linux, OpenJDK 17, and FEPCOS-J." class="wp-image-65636" width="540" height="432">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 1) Parts of the current test environment for FEPCOS-J: </strong>I have built these two toy robots to test and demonstrate the use of FEPCOS-J. The two robots can be used independently of each other. In addition, they can be composed into a swarm. Both each individual robot and the swarm are example systems. FEPCOS-J enables a developer to declaratively program those systems so that they are controllable via an IPv4-network.
- </figcaption>
-</figure>
+{{< img src="fuchs2023fepcos-j-toy-robots-are-parts-of-current-test-and-development-environment.png" class="aligncenter size-full is-resized" alt="See two toy robots that are constructed out of building blocks. A Raspberry Pi Model 3B that is installed on each robot controls them. The robots run Linux, OpenJDK 17, and FEPCOS-J." width="540" height="432" caption="Fig. 1) Parts of the current test environment for FEPCOS-J: I have built these two toy robots to test and demonstrate the use of FEPCOS-J. The two robots can be used independently of each other. In addition, they can be composed into a swarm. Both each individual robot and the swarm are example systems. FEPCOS-J enables a developer to declaratively program those systems so that they are controllable via an IPv4-network." >}}
 
 I am a computer scientist who has researched and worked in the field of robot sensor networks since 2004. A network I have worked on was based on Java-programmable SunSPOTs (spots). \[[1,2,3](#references)\].
 
@@ -191,12 +185,7 @@ But in that case, the calling computer does not have to wait for the result and 
 
 Finally, `sy.close()` closes the system interface (Fig. 5g).
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="fuchs2023fepcos-j-screenshot-bash-using-jshell-to-access-system-via-ip-network-by-using-system-interface-fjp-has-generated.png" alt="screenshot, bash: Example of using jshell to access a system specification that fjx has exported via an IPv4-network by means of a system interface that fjp has generated." class="wp-image-65654" width="840" height="630">
- <figcaption class="wp-element-caption">
-  <strong>Fig. 5)</strong> <strong>Accessing a system specification via the IPv4-network by means of<em> jshell</em>.</strong>
- </figcaption>
-</figure>
+{{< img src="fuchs2023fepcos-j-screenshot-bash-using-jshell-to-access-system-via-ip-network-by-using-system-interface-fjp-has-generated.png" class="size-full is-resized" alt="screenshot, bash: Example of using jshell to access a system specification that fjx has exported via an IPv4-network by means of a system interface that fjp has generated." width="840" height="630" caption="Fig. 5) Accessing a system specification via the IPv4-network by means of jshell." >}}
 
 ## FEPCOS-J -- Current State
 

@@ -1,6 +1,5 @@
 ---
 title: "Native-image with Spring Boot"
-slug: "native-spring-boot"
 date: "2021-11-19T11:47:19+00:00"
 lastmod: "2021-11-19T11:52:01+00:00"
 description: "As the Cloud has become more widespread, the Spring ecosystem has been forced to cope with GraalVM native."
@@ -69,7 +68,7 @@ For more detailed information, please refer to the [documentation](https://devel
 
 The Spring team was the first to offer a Web UI to configure one's project, the [Spring Initializr](https://start.spring.io/).
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-50718" src="spring-initializr-700x331.jpg" alt="" width="700" height="331">
+{{< img src="spring-initializr-700x331.jpg" class="aligncenter size-medium" width="700" height="331" >}}
 
 With it, you can configure the following parameters:
 
@@ -81,7 +80,7 @@ With it, you can configure the following parameters:
 
 Additionally, the application also offers a REST API to use the CLI and automate repetitive tasks. IntelliJ IDEA integrates the REST API, so you can create a new project while not leaving your IDE.
 
-<img decoding="async" class="aligncenter size-medium wp-image-50719" src="spring-intellij-689x510.jpg" alt="" width="689" height="510">
+{{< img src="spring-intellij-689x510.jpg" class="aligncenter size-medium" width="689" height="510" >}}
 
 Finally, while it's hosted, the underlying code is [available on GitHub](https://github.com/spring-io/initializr) under the Apache v2 license so that you can clone and configure it. It's designed with extensibility in mind to allow for upgrades.
 

@@ -1,6 +1,5 @@
 ---
 title: "Temporal Is to Your Code What a Database Is to Your Data"
-slug: "temporal-is-to-your-code-what-a-database-is-to-your-data"
 date: "2026-07-11T10:31:54+00:00"
 lastmod: "2026-07-11T13:48:54+00:00"
 description: "Your database made your data durable. Temporal does the same for your code."
@@ -20,9 +19,7 @@ frozen: false
 
 Then the relational database arrived and made a deal with application developers: ***you declare what you want, and I guarantee it survives**.* Atomicity, durability, crash recovery: all of it moved out of application code and into a dedicated platform. Nobody writes their own file-based transaction log anymore.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-1-database-deal.svg" alt="" class="wp-image-124909" style="width:840px;height:auto">
-</figure>
+{{< img src="img-1-database-deal.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 Now let's take a look at how we handle ***execution*** today...
 
@@ -38,9 +35,7 @@ This problem has a name now, :durable execution", and [Temporal.io](https://temp
 
 Its proposition is the same deal the database made, aimed at a different layer: **you write ordinary (Java) code, and the platform guarantees it runs to completion, across crashes, deploys, and outages.**
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-2-hand-rolled-mess.svg" alt="" class="wp-image-124908" style="width:840px;height:auto">
-</figure>
+{{< img src="img-2-hand-rolled-mess.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 [Temporal.io](https://temporal.io/) is to code execution what a database is to data.
 
@@ -54,9 +49,7 @@ Every meaningful event in a Temporal Workflow's life (an Activity started, a tim
 
 When the JVM running your Temporal Workflow dies, Temporal rehydrates that Workflow on another Worker by replaying that history through your code. Your local variables, your position in a loop, the fact that you're on step 3 of 7, all of it is reconstructed.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-3-wal-replay.svg" alt="" class="wp-image-124899" style="width:840px;height:auto">
-</figure>
+{{< img src="img-3-wal-replay.svg" class="size-full is-resized" style="width:840px;height:auto" >}}
 
 Your `int retriesRemaining` survives a JVM crash the way a committed row survives a Postgres restart.
 
@@ -73,9 +66,7 @@ sendRenewalReminder(customer);
 
 and no thread, no pod, no JVM sits around waiting for a month. The Temporal Workflow is durably parked, consuming essentially nothing, and gets rehydrated when the timer fires, even if you've deployed forty times and replaced every server in between.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-4-month-transaction.svg" alt="" class="wp-image-124896" style="aspect-ratio:2.142891431314505;width:840px;height:auto">
-</figure>
+{{< img src="img-4-month-transaction.svg" class="size-full is-resized" style="aspect-ratio:2.142891431314505;width:840px;height:auto" >}}
 
 In effect, a Temporal Workflow provides run-to-completion guarantees that can span days or months. For extremely long-running workflows (years, or those exceeding \~10,000 events), use Continue-As-New to reset the history while preserving state. It's not literally ACID, long-running business processes use Sagas and compensation rather than rollback, but the direction of the guarantee is the same: the process either completes, or it resumes from exactly where it stopped.
 
@@ -95,9 +86,7 @@ The half-finished, stuck-in-limbo state that plagues distributed systems simply 
 
 In each case, a hard, error-prone concern that every application was reimplementing (data durability, memory, orchestration, execution) moved into a dedicated platform that hands back a guarantee.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-5-same-pattern.svg" alt="" class="wp-image-124895" style="aspect-ratio:2.1429491307147455;width:840px;height:auto">
-</figure>
+{{< img src="img-5-same-pattern.svg" class="size-full is-resized" style="aspect-ratio:2.1429491307147455;width:840px;height:auto" >}}
 
 ## What this means for your Java code
 
@@ -110,9 +99,7 @@ Concretely, adopting Temporal means deleting things:
 
 What's left is code that reads like the business process it implements: charge the card, reserve the inventory, send the email, wait for the shipment, remind the customer in 30 days.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="img-6-what-you-delete.svg" alt="" class="wp-image-124893" style="aspect-ratio:2.1429315652379826;width:820px;height:auto">
-</figure>
+{{< img src="img-6-what-you-delete.svg" class="size-full is-resized" style="aspect-ratio:2.1429315652379826;width:820px;height:auto" >}}
 
 Straight-line Java, with the reliability engineering underneath handled by a platform whose entire job is exactly that.
 

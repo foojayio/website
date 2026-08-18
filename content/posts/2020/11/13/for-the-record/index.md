@@ -1,6 +1,5 @@
 ---
 title: "For the Record: A Little Less Conversation, A Little More Action"
-slug: "for-the-record"
 date: "2020-11-13T08:52:40+00:00"
 lastmod: "2020-11-19T00:21:54+00:00"
 description: "Data-carrier classes can be simplified to a few lines by adding the keyword \"record\". Read on for advantages and constraints and more!"
@@ -36,11 +35,11 @@ As mentioned earlier, data-carrier classes can now be simplified to just a few l
 
 {#d6b4}
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-36285 aligncenter" src="public-record-donut-700x510.png" alt="" width="700" height="510">
+{{< img src="public-record-donut-700x510.png" class="size-medium aligncenter" width="700" height="510" >}}
 
 Refactoring this code resulted in 58 changes (2 additions, 56 deletions).{#ca2c}
 
-<img decoding="async" class="size-medium wp-image-36286 aligncenter" src="donut-code-refactoring-700x51.png" alt="" width="700" height="51">
+{{< img src="donut-code-refactoring-700x51.png" class="size-medium aligncenter" width="700" height="51" >}}
 
 ![](donut-code-refactored-1024x522.png)
 

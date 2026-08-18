@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Generating C Code (8)"
-slug: "hello-ebpf-generating-c-code-8"
 date: "2024-04-24T13:11:40+00:00"
 lastmod: "2024-04-24T21:01:32+00:00"
 description: "This week we generate the C code for struct and map definitions automatically, using annotation processors to simplify writing programs."

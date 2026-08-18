@@ -1,6 +1,5 @@
 ---
 title: "OpenRewrite: we all grow older, but do our projects really have to?"
-slug: "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
 date: "2023-08-08T09:24:44+00:00"
 lastmod: "2023-08-08T10:32:46+00:00"
 description: "An introduction to how OpenRewrite can help you modernize your application, refactor it, perform migrations, and more!"

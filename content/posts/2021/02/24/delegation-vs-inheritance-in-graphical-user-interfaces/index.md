@@ -1,6 +1,5 @@
 ---
 title: "Delegation vs. Inheritance in Graphical User Interfaces"
-slug: "delegation-vs-inheritance-in-graphical-user-interfaces"
 date: "2021-02-24T16:07:53+00:00"
 lastmod: "2021-12-16T09:45:05+00:00"
 description: "Find out what why Sven Ruppert from JFrog prefer delegation and why he wants to emphasize this rarely-used feature in Java!"

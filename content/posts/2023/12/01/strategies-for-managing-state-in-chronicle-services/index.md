@@ -1,6 +1,5 @@
 ---
 title: "Strategies for Managing State in Chronicle Services"
-slug: "strategies-for-managing-state-in-chronicle-services"
 date: "2023-12-01T08:41:44+00:00"
 lastmod: "2024-01-09T12:57:55+00:00"
 description: "When implementing an application using a Microservice architecture, it is crucially important to be aware of the potential pitfalls of managing mutable state in components."

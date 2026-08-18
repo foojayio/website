@@ -1,6 +1,5 @@
 ---
 title: "Primitive Set Operations in Eclipse Collections — Part 2"
-slug: "primitive-set-operations-in-eclipse-collections-part-2"
 date: "2021-06-22T22:58:38+00:00"
 lastmod: "2021-06-23T16:34:34+00:00"
 description: "Eclipse Collections 11.0: Set operations union, intersect, difference, symmetricDifference, isSubsetOf, isProperSubsetOf, cartesianProduct."
@@ -25,7 +24,7 @@ Primitive Set Operations in Eclipse Collections - Part 2{#caption-attachment
 
 Continuing [from Part 1](https://foojay.io/today/primitive-set-operations-in-eclipse-collections/), in the Eclipse Collections 11.0 release, we will have the following Set operations `union`, `intersect`, `difference`, `symmetricDifference`, `isSubsetOf`, `isProperSubsetOf`, `cartesianProduct` on primitive collections.
 
-<img decoding="async" aria-describedby="caption-attachment-45283" class="wp-image-45283 size-medium" src="Set_Operations-4-700x444.png" alt="Set Operations that will be available on primitive sets in Eclipse Collections 11.0." width="700" height="444">
+{{< img src="Set_Operations-4-700x444.png" class="size-medium" alt="Set Operations that will be available on primitive sets in Eclipse Collections 11.0." width="700" height="444" >}}
 
 Set Operations that will be available on primitive sets in Eclipse Collections 11.0.{#caption-attachment-45283}  
 
@@ -39,7 +38,7 @@ Method signature: `setA.symmetricDifference(setB)`
 
 This operation returns a set that contains elements that are in either one of the two sets but not **both**. In other words, (Set A --- Set B) U (Set B --- Set A).
 
-<img decoding="async" class="graf-image alignleft" src="https://cdn-images-1.medium.com/max/450/1*n6jDbl59hZRjqlJTElHOKA.png" alt="Symmetric Difference " width="310" height="305" data-image-id="1*n6jDbl59hZRjqlJTElHOKA.png" data-width="310" data-height="305">
+{{< img src="https://cdn-images-1.medium.com/max/450/1*n6jDbl59hZRjqlJTElHOKA.png" class="alignleft" alt="Symmetric Difference " width="310" height="305" >}}
 
 Set A --- 1, 2, 3.
 
@@ -86,7 +85,7 @@ Method signature: `setA.isSubsetOf(setB)`
 
 This operation returns true if all elements from Set A are present in Set B.
 
-<img loading="lazy" decoding="async" class="graf-image alignleft" src="https://cdn-images-1.medium.com/max/450/1*Ge_-WW6p36ypRkKo_ARUow.png" alt="Set A is a subset of Set B" width="216" height="280" data-image-id="1*Ge_-WW6p36ypRkKo_ARUow.png" data-width="216" data-height="280">
+{{< img src="https://cdn-images-1.medium.com/max/450/1*Ge_-WW6p36ypRkKo_ARUow.png" class="alignleft" alt="Set A is a subset of Set B" width="216" height="280" >}}
 
 Set A --- 1, 2.
 
@@ -162,7 +161,7 @@ Method Signature: `setA.cartesianProduct(setB)`
 
 Cartesian Product of Set A and Set B is the set of all possible ordered pairs where the first element of the pair is from Set A and the second element from Set B.
 
-<img loading="lazy" decoding="async" class="graf-image alignleft" src="https://cdn-images-1.medium.com/max/450/1*dIfPbw3i4Vm8Z_nSJc-Bpg.png" alt="Cartesian Product A x B" width="270" height="273" data-image-id="1*dIfPbw3i4Vm8Z_nSJc-Bpg.png" data-width="270" data-height="273">
+{{< img src="https://cdn-images-1.medium.com/max/450/1*dIfPbw3i4Vm8Z_nSJc-Bpg.png" class="alignleft" alt="Cartesian Product A x B" width="270" height="273" >}}
 
 Set A --- 1, 3.
 

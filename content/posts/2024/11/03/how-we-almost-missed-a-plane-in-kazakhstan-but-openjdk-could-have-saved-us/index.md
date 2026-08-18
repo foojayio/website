@@ -1,6 +1,5 @@
 ---
 title: "How we almost missed a plane, but OpenJDK could have saved us."
-slug: "how-we-almost-missed-a-plane-in-kazakhstan-but-openjdk-could-have-saved-us"
 date: "2024-11-03T08:01:44+00:00"
 lastmod: "2024-11-03T08:01:46+00:00"
 description: "A family vacation as a topic for a Foojay blog post? Really? Yes, because, very unexpectedly, it was influenced by a change in the OpenJDK project..."

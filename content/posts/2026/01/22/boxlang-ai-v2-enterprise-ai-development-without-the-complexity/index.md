@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI v2: Enterprise AI Development Without the Complexity"
-slug: "boxlang-ai-v2-enterprise-ai-development-without-the-complexity"
 date: "2026-01-22T15:09:25+00:00"
 lastmod: "2026-01-23T12:03:32+00:00"
 description: "One Year. 100+ Features. Unlimited Possibilities. Just one year ago, in March 2024, we launched BoxLang AI 1.0. Today, we're thrilled to announce BoxLang - by Cristobal Escobar"

@@ -1,6 +1,5 @@
 ---
 title: "Time Machine: A Look-Back at Java Sessions from NODES 2022"
-slug: "time-machine-a-look-back-at-java-sessions-from-nodes-2022"
 date: "2023-06-28T07:53:07+00:00"
 lastmod: "2024-01-09T12:59:25+00:00"
 description: "As we prepare for NODES 2023, let's pull out the time machine and review the Java sessions from NODES 2022."

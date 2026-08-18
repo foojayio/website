@@ -1,6 +1,5 @@
 ---
 title: "Be a Better Java Developer: 19 Tips for Staying Ahead in 2024"
-slug: "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
 date: "2024-06-11T12:31:30+00:00"
 lastmod: "2024-06-11T12:44:19+00:00"
 description: "I reached out to one of my fellow Java developers who is very experienced and has been working in the industry forever and asked for his thoughts about the observability improvements in JDK 21 and Spring Boot 3.2."
@@ -15,7 +14,7 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
   - "effective-coding-with-java-observability"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

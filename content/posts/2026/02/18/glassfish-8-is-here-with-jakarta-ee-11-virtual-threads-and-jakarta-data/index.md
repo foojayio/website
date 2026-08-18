@@ -1,6 +1,5 @@
 ---
 title: "GlassFish 8 is here with Jakarta EE 11, virtual threads, and Jakarta Data"
-slug: "glassfish-8-is-here-with-jakarta-ee-11-virtual-threads-and-jakarta-data"
 date: "2026-02-18T16:06:02+00:00"
 lastmod: "2026-05-13T10:22:04+00:00"
 description: "The final version of Eclipse GlassFish 8 is here, released on 5 February 2026. As a GlassFish committer, I'd like to share what it brings for the Java - by Ondro Mihalyi"
@@ -108,9 +107,7 @@ More information:
 * [](https://omnifish.ee/glassfish-is-rolling-forward-whats-new/)[Level up from Payara: Why GlassFish Is much better](https://omnifish.ee/level-up-from-payara-why-glassfish-is-much-better/) (OmniFish)
 * [The Eclipse Foundation's Jakarta EE Working Group Announces Jakarta EE 11 Release](https://newsroom.eclipse.org/news/announcements/eclipse-foundation%E2%80%99s-jakarta-ee-working-group-announces-jakarta-ee-11-release) (Eclipse Foundation)
 
-<figure class="alignleft size-full is-resized">
- <img fetchpriority="high" decoding="async" width="400" height="400" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" style="width:200px;height:200px">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="400" height="400" style="width:200px;height:200px" >}}
 
 **OmniFish - Modern Jakarta EE Runtimes**
 

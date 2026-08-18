@@ -1,6 +1,5 @@
 ---
 title: "Understanding Apache Maven (Part 2): POM Hierarchy and Effective POM"
-slug: "understanding-apache-maven-part-2-pom-hierarchy"
 date: "2021-09-03T08:57:41+00:00"
 lastmod: "2021-09-03T09:04:19+00:00"
 description: "Following on from the first article covering the Maven basics, the Project Object Model (POM) is explored, here in part 2!"

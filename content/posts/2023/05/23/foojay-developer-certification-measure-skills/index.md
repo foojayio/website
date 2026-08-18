@@ -1,6 +1,5 @@
 ---
 title: "Foojay Developer Certification: Measure Skills!"
-slug: "foojay-developer-certification-measure-skills"
 date: "2023-05-23T16:32:31+00:00"
 lastmod: "2023-05-23T16:46:43+00:00"
 description: "Learn the why and how of a group of enthusiastic people implementing a new sort of developer certification that objectively measures dev skills on Foojay."

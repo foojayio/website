@@ -1,6 +1,5 @@
 ---
 title: "Stop the trojan horse in your pom : SonarQube Advace Security"
-slug: "avoid-the-trojan-horse-in-your-pom-xml-sonarqube-advanced-security-part-3"
 date: "2025-12-22T10:42:41+00:00"
 lastmod: "2025-12-22T10:42:43+00:00"
 description: "Your code is safe, but are your dependencies? Part 3 reveals how SonarQube Advanced Security detects hidden CVEs, manages licenses, and generates SBOMs to secure your Java supply chain."
@@ -191,7 +190,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     "type" : "library",
 
-    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="315b50525a425e5f1c505f5f5e455045585e5f4271031f081f0001">[email protected]</a>",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/[email protected]",
 
     "supplier" : {
 
@@ -211,13 +210,13 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     } ],
 
-    "purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2842494b435b474605494646475c495c4147465b681a0611061918">[email protected]</a>"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/[email protected]"
 
   }, {
 
     "type" : "library",
 
-    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c464d4f475f4342014f435e496c1e0215021d1c">[email protected]</a>",
+    "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/[email protected]",
 
     "supplier" : {
 
@@ -237,7 +236,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
     } ],
 
-    "purl" : "pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c7e766e7273307e726f785d2f3324332c2d">[email protected]</a>"
+    "purl" : "pkg:maven/com.fasterxml.jackson.core/[email protected]"
 
   }
 
@@ -246,9 +245,7 @@ You don't want to write this list by hand in Excel. SonarQube creates this for y
 
 You just click "Download," hand it to the auditor (or the automated compliance system), and go back to coding.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" width="710" height="590" src="Screenshot-2025-12-22-at-11.08.19.png" alt="" class="wp-image-122122" style="width:426px;height:auto">
-</figure>
+{{< img src="Screenshot-2025-12-22-at-11.08.19.png" class="size-full is-resized" width="710" height="590" style="width:426px;height:auto" >}}
 
 ## **🎯 Summary**
 

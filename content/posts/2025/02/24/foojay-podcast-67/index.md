@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #67: Writing a book and fame and fortune!"
-slug: "foojay-podcast-67"
 date: "2025-02-24T12:23:42+00:00"
 lastmod: "2025-11-13T08:39:16+00:00"
 description: "I invited several guests to share their knowledge about book writing!"

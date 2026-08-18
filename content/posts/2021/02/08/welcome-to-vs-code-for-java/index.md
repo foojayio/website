@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with VS Code for Java Developers"
-slug: "welcome-to-vs-code-for-java"
 date: "2021-02-08T08:10:07+00:00"
 lastmod: "2023-04-11T07:05:42+00:00"
 description: "VS Code has been used by more and more Java developers to edit, build, run, debug, test and deploy their code and manage their projects."

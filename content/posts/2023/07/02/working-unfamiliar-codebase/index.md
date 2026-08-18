@@ -1,6 +1,5 @@
 ---
 title: "Working on An Unfamiliar Codebase"
-slug: "working-unfamiliar-codebase"
 date: "2023-07-02T09:00:47+00:00"
 lastmod: "2023-07-02T09:02:53+00:00"
 description: "If you want to understand a codebase better, you need more than just to read its code; you need to draw diagrams."

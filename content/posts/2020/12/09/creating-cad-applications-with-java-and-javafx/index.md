@@ -1,6 +1,5 @@
 ---
 title: "Creating CAD Applications with Java and JavaFX"
-slug: "creating-cad-applications-with-java-and-javafx"
 date: "2020-12-09T11:26:19+00:00"
 lastmod: "2021-01-21T12:02:33+00:00"
 description: "Some days ago I finished a CAD application whose purpose is to calculate the energy efficiency of Dwellings (or multiple Dwellings). It can be seen as an application similar to Autocad (which is used in Civil Engineering, Architecture, etc) but with the specific purpose to do energy efficiency assessment. I believe, having a good UX, features users have been dying to have, good, well structured code that lets you continuously evolve and better maintain what you already have and finally topping all that with a nice looking user interface, are the markers to a successful application. I think we’ve been able to score high in all those markers. - by Pedro Duque Vieira"

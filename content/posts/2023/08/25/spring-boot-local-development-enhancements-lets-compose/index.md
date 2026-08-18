@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot: local development enhancements, let's compose!"
-slug: "spring-boot-local-development-enhancements-lets-compose"
 date: "2023-08-25T11:16:05+00:00"
 lastmod: "2023-08-25T12:07:27+00:00"
 description: "How to make use of the new local development enhancements in Spring boot 3.1. Get started here on Foojay.io Today!"

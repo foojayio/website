@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #10"
-slug: "jc-ai-newsletter-10"
 date: "2025-11-26T18:39:40+00:00"
 lastmod: "2025-11-26T18:39:42+00:00"
 description: "Fourteen days have passed, and it is time to present a fresh collection of readings that could influence developments in the field of artificial - by Miro Wengner"
@@ -21,9 +20,9 @@ categories:
 tags:
 related_posts:
   - "jc-ai-newsletter-9"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-  - "jc-ai-newsletter-15"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Trip Report: Dubai JUG 2nd Meetup"
-slug: "trip-report-dubai-jug-2nd-meetup"
 date: "2022-10-27T07:28:22+00:00"
 lastmod: "2022-10-27T08:11:30+00:00"
 description: "The second meetup, yet also the first real one. The first one was more of a practice team building version."

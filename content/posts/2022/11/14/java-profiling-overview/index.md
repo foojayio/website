@@ -1,6 +1,5 @@
 ---
 title: "Java Profiling Overview"
-slug: "java-profiling-overview"
 date: "2022-11-14T09:14:25+00:00"
 lastmod: "2022-12-06T15:32:49+00:00"
 description: "When I ask Java devs whether they profile, the answer is usually \"no\". A reason is the lack of info and knowledge for everyday developers."

@@ -1,6 +1,5 @@
 ---
 title: "Liquid Glass, Material 3, And A Lot Of Plumbing"
-slug: "liquid-glass-material-3-and-a-lot-of-plumbing"
 date: "2026-05-11T09:10:00+00:00"
 description: "New iOS Modern (liquid glass) and Android Material 3 native themes, how they work in the Playground, in the simulator, and on devices, plus a"
 canonical: "https://www.codenameone.com/blog/liquid-glass-material-3-modern-native-themes/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
 frozen: false
 ---
 
@@ -57,7 +56,7 @@ raised.setUIID("RaisedButton");
 row.add(raised);
 form.add(row);
 
-TextField tf = new TextField("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="29414c454546694c51484459454c074a4644">[email protected]</a>");
+TextField tf = new TextField("[email protected]");
 form.add(tf);
 
 Container toggles = new Container(BoxLayout.x());

@@ -1,6 +1,5 @@
 ---
 title: "API Mocking: Essential and Redundant"
-slug: "api-mocking-essential-and-redundant"
 date: "2022-11-11T08:13:23+00:00"
 lastmod: "2022-11-11T08:13:25+00:00"
 description: "Is API mocking in unit tests important or does it do nothing? The answer is nuanced but we do need such tests to reduce daily churn."

@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Game Development Basics with FXGL"
-slug: "game-development-basics-with-fxgl"
 date: "2021-06-17T08:48:28+00:00"
 lastmod: "2021-06-17T08:48:30+00:00"
 description: "Learn the fundamental concepts of FXGL to abstract away complex details that are present in modern games and help simplify development."

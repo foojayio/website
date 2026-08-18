@@ -1,6 +1,5 @@
 ---
 title: "Time to panic? AI and Cybercrime legislation is on your doorstep now"
-slug: "time-to-panic-ai-and-cybercrime-legislation-is-on-your-doorstep-now"
 date: "2025-04-10T07:25:52+00:00"
 lastmod: "2025-04-10T07:25:54+00:00"
 description: "As we settle into 2025, legislation around AI and cybercrime is no longer a distant threat or vague aspiration."

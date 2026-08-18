@@ -1,6 +1,5 @@
 ---
 title: "Java Virtual Threads in Action: Optimizing MongoDB Operation"
-slug: "java-virtual-threads-in-action-optimizing-mongodb-operation"
 date: "2025-07-01T08:12:24+00:00"
 lastmod: "2025-07-01T08:12:25+00:00"
 description: "Java 21's virtual threads simplify handling I/O-bound operations, allowing for massive concurrency with minimal overhead."
@@ -26,7 +25,7 @@ Virtual threads have become one of the most popular resources in Java and are tr
 You can find all the code presented in this tutorial in the [GitHub repository](https://github.com/soujava/mongodb-virtual-threads):
 
 ```
-git clone <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe99978abe99978a968b9cd09d9193">[email protected]</a>:soujava/mongodb-virtual-threads.git
+git clone [email protected]:soujava/mongodb-virtual-threads.git
 ```
 
 ## Prerequisites

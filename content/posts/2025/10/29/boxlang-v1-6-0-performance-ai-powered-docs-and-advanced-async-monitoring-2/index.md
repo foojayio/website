@@ -1,6 +1,5 @@
 ---
 title: "BoxLang v1.6.0 - Performance, AI-Powered Docs, and Advanced Async Monitoring"
-slug: "boxlang-v1-6-0-performance-ai-powered-docs-and-advanced-async-monitoring-2"
 date: "2025-10-29T06:48:07+00:00"
 lastmod: "2025-10-29T06:48:10+00:00"
 description: "We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities."
@@ -18,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-121537 aligncenter" src="boxlang-v1.6.0-1-700x467.jpg" alt="" width="700" height="467">
+{{< img src="boxlang-v1.6.0-1-700x467.jpg" class="size-medium aligncenter" width="700" height="467" >}}
 
 We're thrilled to announce BoxLang 1.6.0, a release that delivers massive performance improvements, intelligent developer tooling, and enhanced async capabilities. This release focuses on making BoxLang faster, smarter, and more observable than ever before.
 

@@ -1,6 +1,5 @@
 ---
 title: "Debugging JAXB Production Issues"
-slug: "debugging-jaxb-production-issues"
 date: "2022-04-04T14:13:10+00:00"
 lastmod: "2022-04-04T14:13:12+00:00"
 description: "Failures in XML parsing can happen in production when the source data changes. These are notoriously hard to debug... At least until now..."

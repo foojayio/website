@@ -1,6 +1,5 @@
 ---
 title: "Avoid Java Serialization: The Gift That Keeps On Giving"
-slug: "avoid-java-serialization"
 date: "2020-11-11T08:48:37+00:00"
 lastmod: "2020-11-11T08:48:40+00:00"
 description: "If you need to Deserialize an inputstream yourself, you should use an ObjectsInputStream with restrictions."

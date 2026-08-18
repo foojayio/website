@@ -1,6 +1,5 @@
 ---
 title: "Reclaiming Persistent Volumes in Kubernetes"
-slug: "reclaiming-persistent-volumes-in-kubernetes"
 date: "2022-09-28T09:55:19+00:00"
 lastmod: "2022-09-28T09:55:21+00:00"
 description: "Learn how to manually reassign a PersistentVolume from one StatefulSet to another. Also learn about the STS, PV, and PVC API resources."

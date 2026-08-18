@@ -1,6 +1,5 @@
 ---
 title: "Gluon is focused on end-to-end Java solutions"
-slug: "cross-platform-development-in-java-with-gluon-and-graalvm-part-2"
 date: "2020-10-14T17:59:00+00:00"
 lastmod: "2021-08-23T12:59:49+00:00"
 description: "Gluon is a company that enables Java on desktop, embedded, and mobile with a rich, full-featured, JavaFX user interface."

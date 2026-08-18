@@ -1,6 +1,5 @@
 ---
 title: "Hack a Java application with the debugger"
-slug: "debugger-godmode-hacking-a-jvm-application-with-the-debugger"
 date: "2024-06-13T04:58:03+00:00"
 lastmod: "2024-11-12T16:19:59+00:00"
 description: "Use the debugger to find out how a Java application works under the hood, access its memory, and modify it without a single source file"

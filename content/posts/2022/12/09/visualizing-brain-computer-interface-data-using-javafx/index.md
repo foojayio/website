@@ -1,6 +1,5 @@
 ---
 title: "Visualizing Brain Computer Interface Data using JavaFX"
-slug: "visualizing-brain-computer-interface-data-using-javafx"
 date: "2022-12-09T09:42:20+00:00"
 lastmod: "2022-12-09T09:49:32+00:00"
 description: "Learn about JavaFX and Brain-Computer Interfaces: data collected non-invasively (head wraps with cables) and invasively (brain implants)."

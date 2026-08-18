@@ -1,6 +1,5 @@
 ---
 title: "Announcing New Book Review: \"Java by Comparison\""
-slug: "book-review-java-by-comparison"
 date: "2021-06-02T08:13:15+00:00"
 lastmod: "2021-09-04T07:46:46+00:00"
 description: "“Java by Comparison”, Simon Harrer, Jörg Lenhard, and Linus Dietz, promises the reader to become a “Java Craftsman” by studying 70 examples."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image size-medium">
- <a target="_blank" href="https://pragprog.com/titles/javacomp/java-by-comparison/"><img fetchpriority="high" decoding="async" width="423" height="510" src="book-java-by-comparison-423x510.png" alt="" class="wp-image-46411"></a>
-</figure>
+{{< img src="book-java-by-comparison-423x510.png" class="size-medium" width="423" height="510" >}}
 
 The book ["Java by Comparison" by Simon Harrer, Jörg Lenhard, and Linus Dietz](https://pragprog.com/titles/javacomp/java-by-comparison/), promises the reader to become a "Java Craftsman" through the study of 70 examples. The book is published by The Pragmatic Bookshelf.
 

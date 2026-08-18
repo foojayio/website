@@ -1,6 +1,5 @@
 ---
 title: "What's New in actions/setup-java 5.4 and 5.5: Signature Verification, Kona JDK, and a Better Maven Experience"
-slug: "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
 date: "2026-07-08T18:56:31+00:00"
 lastmod: "2026-07-08T20:28:22+00:00"
 description: "If you build Java on GitHub Actions, actions/setup-java is almost certainly the first step in your workflow. It installs a JDK, wires up JAVA_HOME and the - by Bruno Borges"
@@ -33,7 +32,7 @@ Here's an uncomfortable truth about most CI pipelines: the JDK that compiles and
 v5.5.0 adds **detached GPG signature verification** for downloaded JDK archives:
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9aabcadaca9f4b3b8afb899afecf7ecf7e9">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -49,7 +48,7 @@ A few important details:
 * **Bring your own key:** If you mirror JDKs internally or want to pin to a specific trusted key, supply your own with `verify-signature-public-key`:
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7b4a2b3b2b7eaada6b1a687b1f2e9f2e9f7">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -66,7 +65,7 @@ If you care about reproducible, supply-chain-safe builds, this is the flag to re
 `actions/setup-java` now speaks **Tencent Kona JDK** natively:
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b786e7f7e7b26616a7d6a4b7d3e253e253b">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'kona'
     java-version: '21'
@@ -84,13 +83,13 @@ Sometimes you need a specific JDK available to *one* step (say, a tool that must
 
 ```
 # Main build JDK
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d3c5d4d5d08dcac1d6c1e0d6958e958e90">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '21'
 
 # An extra JDK, available but NOT the default
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa899f8e8f8ad7909b8c9bba8ccfd4cfd4ca">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '17'
@@ -115,7 +114,7 @@ This makes it possible for a single job to juggle multiple JDKs cleanly, without
 SDKMAN identifiers carry a vendor suffix --- `-tem` for Temurin, `-zulu` for Zulu, and so on. The action now maps that suffix to a distribution automatically:
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4f5948494c11565d4a5d7c4a091209120c">[email protected]</a>
+- uses: actions/[email protected]
   with:
     java-version-file: '.sdkmanrc'
 ```
@@ -136,7 +135,7 @@ Several changes in these releases target one of the most common Java build tools
 Maven loves to print a line for *every* artifact it downloads. On a cold cache that's hundreds of noisy lines burying the output you actually care about. `setup-java` now sets `--no-transfer-progress` (`-ntp`) in the `MAVEN_ARGS` environment variable by default:
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba8beafaeabf6b1baadba9badeef5eef5eb">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -150,7 +149,7 @@ Details worth knowing:
 * Want the progress back? Set `show-download-progress: true`.
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5c6d0c1c0c598dfd4c3d4f5c3809b809b85">[email protected]</a>
+- uses: actions/[email protected]
   with:
     distribution: 'temurin'
     java-version: '21'
@@ -178,7 +177,7 @@ Three more things from that release deserve a callout:
 * **Free GraalVM Community distribution** (`graalvm-community`): install GraalVM Community Edition builds (stable JDK 17+) directly, no license gymnastics required.
 
 ```
-- uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2152445554510c4b4057406157140f140f11">[email protected]</a>
+- uses: actions/[email protected]
   with: 
     distribution: 'graalvm-community'
     java-version: '21'
@@ -199,14 +198,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Java (verified, from .sdkmanrc)
-        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="740711000104591e1502153402415a415a44">[email protected]</a>
+        uses: actions/[email protected]
         with:
           java-version-file: '.sdkmanrc'   # e.g. java=21.0.5-tem
           verify-signature: true            # fail if the JDK signature is bad
           cache: maven
 
       - name: Add a Java 17 toolchain (not the default)
-        uses: actions/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91e2f4e5e4e1bcfbf0e7f0d1e7a4bfa4bfa1">[email protected]</a>
+        uses: actions/[email protected]
         with:
           distribution: 'temurin'
           java-version: '17'

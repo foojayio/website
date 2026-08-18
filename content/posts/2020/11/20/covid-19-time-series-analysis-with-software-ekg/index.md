@@ -1,6 +1,5 @@
 ---
 title: "COVID-19 Time Series Analysis with Software EKG"
-slug: "covid-19-time-series-analysis-with-software-ekg"
 date: "2020-11-20T10:55:45+00:00"
 lastmod: "2020-11-20T10:55:47+00:00"
 description: "Our goal is to provide you with raw data on COVID-19, with a tool that lets you analyze, visualize, and interpret the impact of the pandemic."

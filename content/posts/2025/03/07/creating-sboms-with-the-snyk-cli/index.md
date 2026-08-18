@@ -1,6 +1,5 @@
 ---
 title: "Creating SBOMs with the Snyk CLI"
-slug: "creating-sboms-with-the-snyk-cli"
 date: "2025-03-07T12:25:36+00:00"
 lastmod: "2025-03-10T15:17:53+00:00"
 description: "The software bill of materials (SBOM) is quickly becoming an essential aspect of open source security and compliance. In this post, we'll delve into what - by Brian Vermeer"

@@ -1,6 +1,5 @@
 ---
 title: "JDK Safari: How To Find Hidden Tools in the JDK"
-slug: "jdk-safari-how-to-find-hidden-tools-in-the-jdk"
 date: "2023-07-19T08:25:23+00:00"
 lastmod: "2023-07-19T08:25:24+00:00"
 description: "Guess what? One of my hobbies is regularly searching the JDK for new Java classes with executable main methods."
@@ -32,21 +31,86 @@ Of course, that was many moons ago, in the meantime, BCEL has been replaced in t
 
 Since then, I've been looking for new unknown tools and possibilities in the JDK :).
 
-Many binary tools from the `$JDK_HOME/bin` directory are, in fact, only wrappers around corresponding classes with main methods, which can also be executed directly.  
+Many binary tools from the
 
-An example is the tool `jcmd`, which is based on the class `sun.tools.jcmd.JCmd`, and can alternatively be called via `java -m jdk.jcmd/sun.tools.jcmd.JCmd`.
+```bash
+$JDK_HOME/bin
+```
 
-In addition to these programs, however, many other small executable programs in the JDK have no direct equivalent in the `$JDK_HOME/bin` directory.
+directory are, in fact, only wrappers around corresponding classes with main methods, which can also be executed directly.  
+An example is the tool
+
+```bash
+jcmd
+```
+
+, which is based on the class
+
+```java
+sun.tools.jcmd.JCmd
+```
+
+, and can alternatively be called via
+
+```java
+java -m jdk.jcmd/sun.tools.jcmd.JCmd
+```
+
+.
+
+In addition to these programs, however, many other small executable programs in the JDK have no direct equivalent in the
+
+```bash
+$JDK_HOME/bin
+```
+
+directory.
 
 There are different approaches to searching the JDK for classes with main methods.  
 
-For example, one could try to open all JDK libraries (jar's) as `JarFile` and then analyze all it's classes with dynamic class-loading and reflection. Although, this approach would work to some degree (reading .jmods this way would not work), it would be very inefficient and slow due to expensive class-loading and memory usage.
+For example, one could try to open all JDK libraries (jar's) as
+
+```java
+JarFile
+```
+
+and then analyze all it's classes with dynamic class-loading and reflection. Although, this approach would work to some degree (reading .jmods this way would not work), it would be very inefficient and slow due to expensive class-loading and memory usage.
 
 My alternative approach combines a fast-analysis technique with low memory consumption and provides compatibility across different JDK (bytecode) versions.
 
 * Instead of reflection, I use ASM to scan the classes for executable main-method signatures.
-* Using the `ForkJoin` framework and `RecursiveAction` to analyze JDK libraries in parallel.
-* Using `FileSystem.provider().newInputStream(...)` to read from both `.jar` and `.jmod` (Java Modules) archives.
+* Using the 
+
+```java
+ForkJoin
+```
+
+  framework and
+
+```java
+RecursiveAction
+```
+
+  to analyze JDK libraries in parallel.
+* Using 
+
+```java
+FileSystem.provider().newInputStream(...)
+```
+
+  to read from both
+
+```java
+.jar
+```
+
+  and
+
+```java
+.jmod
+```
+
+  (Java Modules) archives.
 
 Here is a small program I use for this. The program works with Java 11 and above and can parse JDK versions \>= 8. The program can analyze the current or a different JDK and print an appropriate command-line for the java launcher to execute the found classes with main-methods.
 
@@ -54,7 +118,19 @@ Here is a small program I use for this. The program works with Java 11 and above
 
 ## MainMethodFinder
 
-The class **MainMethodFinder** is the main driver of our scanning tool. It detects the current execution environment and checks if the current JDK or a different JDK should be analyzed. The `Path` of the current JDK is derived via `ProcessHandle.current().info().command()`.
+The class **MainMethodFinder** is the main driver of our scanning tool. It detects the current execution environment and checks if the current JDK or a different JDK should be analyzed. The
+
+```java
+Path
+```
+
+of the current JDK is derived via
+
+```java
+ProcessHandle.current().info().command()
+```
+
+.
 
 It uses a **MainMethodReportingVisitor** , to recursively analyze the libraries of a given JDK. The actual "class with main method"-search is performed by a **MainMethodVisitor.** The found main method locations are reported as instances of the **MainMethod** data-holder class.
 
@@ -172,11 +248,59 @@ class MainMethod {
 
 ## MainMethodVisitor
 
-The class **MainMethodVisitor** is an ASM `ClassVisitor` which analyzes the class byte code to detect executable main methods. An executable main-Method obviously has the name `"main"` and is `public static` and has a `String[]` as single parameter.
+The class **MainMethodVisitor** is an ASM
+
+```java
+ClassVisitor
+```
+
+which analyzes the class byte code to detect executable main methods. An executable main-Method obviously has the name
+
+```java
+"main"
+```
+
+and is
+
+```java
+public static
+```
+
+and has a
+
+```java
+String[]
+```
+
+as single parameter.
 
 Fun fact: With **Java 21** and the introduction of [JEP 445 Unnamed Classes and Instance Main Methods (Preview)](https://openjdk.org/jeps/445) the ways to declare main-methods got extended, therefore the detection rule above will no longer catch all main-method variants. If you are curious to see what's possible, just take a look at **JEP 445**.
 
-The **MainMethodVisitor** uses the `FileSystem#provider().newInputStream(..)` method in the **tryGetClassBytes** method to load class bytes from a `.jar` and `.jmod` files. The `FileSystem` instance is created via `FileSystems.newFileSystem(...)` with a `Path` to a `.jar` or `.jmod` file.
+The **MainMethodVisitor** uses the
+
+```java
+FileSystem#provider().newInputStream(..)
+```
+
+method in the **tryGetClassBytes** method to load class bytes from a `.jar` and `.jmod` files. The
+
+```java
+FileSystem
+```
+
+instance is created via
+
+```java
+FileSystems.newFileSystem(...)
+```
+
+with a
+
+```java
+Path
+```
+
+to a `.jar` or `.jmod` file.
 
 *Note that we deliberately duplicate the ASM version constants, to be able to run the tool with older JDK versions.*
 
@@ -267,9 +391,69 @@ class MainMethodVisitor extends ClassVisitor {
 
 ## MainMethodReportingVisitor
 
-The actual scanning of JDK `.jar`-Files and `.jmods` is performed by the **MainMethodReportingVisitor** class, which is a `SimpleFileVisitor` used in combination with `Files.walkFileTree(jdkHomePath, visitor)` in the `MainMethodFinder` main-method.
+The actual scanning of JDK `.jar`-Files and `.jmods` is performed by the **MainMethodReportingVisitor** class, which is a
 
-To speed up the scanning we spawn and enqueue a new `RecursiveAction` in the `visitFile(..)` method with the `ForkJoin` infrastructure. The method `waitForCompletionAndReturnMainMethods(..)` waits for all spawned scanning actions to complete and returns the `List` of detected `MainMethod`s to the `MainMethodFinder` which eventuelly prints command-lines to execute the all detected main-methods.
+```java
+SimpleFileVisitor
+```
+
+used in combination with
+
+```java
+Files.walkFileTree(jdkHomePath, visitor)
+```
+
+in the
+
+```java
+MainMethodFinder
+```
+
+main-method.
+
+To speed up the scanning we spawn and enqueue a new
+
+```java
+RecursiveAction
+```
+
+in the
+
+```java
+visitFile(..)
+```
+
+method with the
+
+```java
+ForkJoin
+```
+
+infrastructure. The method
+
+```java
+waitForCompletionAndReturnMainMethods(..)
+```
+
+waits for all spawned scanning actions to complete and returns the
+
+```java
+List
+```
+
+of detected
+
+```java
+MainMethod
+```
+
+s to the
+
+```java
+MainMethodFinder
+```
+
+which eventuelly prints command-lines to execute the all detected main-methods.
 
 ```java
 class MainMethodReportingVisitor extends SimpleFileVisitor<Path> {
@@ -445,11 +629,19 @@ java -m jdk.security.auth/com.sun.security.auth.module.Crypt
 java -m jdk.zipfs/jdk.nio.zipfs.ZipInfo
 ```
 
-The listed classes contain the known tools from the `$JDK_HOME/bin` directory and many small debugging tools and test programs. Just have a look for yourself 🙂
+The listed classes contain the known tools from the
+
+```bash
+$JDK_HOME/bin
+```
+
+directory and many small debugging tools and test programs. Just have a look for yourself 🙂
 
 Did you ever want to know how the pattern node tree looks for a compiled regex pattern? Just run:
 
-`$ java -m java.base/java.util.regex.PrintPattern "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"`
+```bash
+$ java -m java.base/java.util.regex.PrintPattern "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+```
 
 ```
 Pattern: ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
@@ -474,7 +666,7 @@ Another tool that many Java developers are not familiar with is the HotSpot Debu
 
 You can also start the hsdb ui via: `java -m jdk.hotspot.agent/sun.jvm.hotspot.HSDB`.  
 
-<img fetchpriority="high" decoding="async" aria-describedby="caption-attachment-101022" class="size-medium wp-image-101022" src="java-hsdb-700x445.png" alt="Hot Spot Debugger UI" width="700" height="445">
+{{< img src="java-hsdb-700x445.png" class="size-medium" alt="Hot Spot Debugger UI" width="700" height="445" >}}
 
 HotSpot Debugger UI{#caption-attachment-101022}
 
@@ -636,6 +828,12 @@ OpenJDK 64-Bit Server VM (build 21-ea+27-2343, mixed mode, sharing)
 /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/bin/java -cp /home/tom/.sdkman/candidates/java/8.0.282.hs-adpt/jre/lib/ext/zipfs.jar com.sun.nio.zipfs.ZipInfo
 ```
 
-In this article we have learned that the JDK contains many more programmes than the `$JDK_HOME/bin` directory would suggest at first glance. We also learned about efficient ways to analyse Java classes with ASM.
+In this article we have learned that the JDK contains many more programmes than the
+
+```bash
+$JDK_HOME/bin
+```
+
+directory would suggest at first glance. We also learned about efficient ways to analyse Java classes with ASM.
 
 I hope you discovered some new things in the article and have fun with your JDK Safari!

@@ -1,6 +1,5 @@
 ---
 title: "Unique Identifiers Based on Timestamps in Distributed Applications"
-slug: "unique-identifiers-based-on-timestamps-in-distributed-applications"
 date: "2023-06-14T11:22:03+00:00"
 lastmod: "2023-06-29T06:40:30+00:00"
 description: "Generate a highly efficient approach to generating an 8-byte lightweight identifier that is unique across many hosts."
@@ -16,7 +15,7 @@ related_posts:
   - "the-more-you-say-the-less-people-remember"
   - "peter-lawrey-latency-performance"
   - "automatically-creating-microservices-architecture-diagrams"
-  - "virtual-thread-pinning-field-guide"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

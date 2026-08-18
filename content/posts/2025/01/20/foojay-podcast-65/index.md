@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #65: Boost Your Career in 2025!"
-slug: "foojay-podcast-65"
 date: "2025-01-20T08:37:01+00:00"
 lastmod: "2025-11-13T08:39:54+00:00"
 description: "With the first Foojay podcast of 2025, we want to help you to boost your career!"

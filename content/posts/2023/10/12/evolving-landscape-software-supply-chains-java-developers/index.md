@@ -1,6 +1,5 @@
 ---
 title: "State of the Software Supply Chain Report: Key Takeaways for Java Developers"
-slug: "evolving-landscape-software-supply-chains-java-developers"
 date: "2023-10-12T08:19:25+00:00"
 lastmod: "2023-10-13T08:01:52+00:00"
 description: "Dive into the highlights from Sonatype's 9th edition of the 'State of the Software Supply Chain Report.' Discover insights on open source adoption, software vulnerabilities, and the transformative role of AI in software development."

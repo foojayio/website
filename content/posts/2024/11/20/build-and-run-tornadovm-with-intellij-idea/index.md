@@ -1,6 +1,5 @@
 ---
 title: "Build and Run TornadoVM with IntelliJ IDEA"
-slug: "build-and-run-tornadovm-with-intellij-idea"
 date: "2024-11-20T19:08:13+00:00"
 lastmod: "2024-11-20T19:08:15+00:00"
 description: "Learn how to build TornadoVM with IntelliJ, and run the unit-tests or other Java programs from the IDE."
@@ -102,8 +101,7 @@ $ <path-to-TornadoVM-directory>\.venv\Scripts
 
 **Note:** It is recommended to use the python interpreter under the virtual environment (.venv) as the Python SDK for your TornadoVM project, since it contains all dependent modules (i.e., PyInstaller, psutil) to build TornadoVM and run the tests from IntelliJ.
 
-1. Clone \& Install TornadoVM from Shell
-----------------------------------------
+## 1. Clone \& Install TornadoVM from Shell
 
 To initialize IDE project files for building and running TornadoVM from IntelliJ, you must have first built TornadoVM and loaded the file with the environment variables (setvars.sh, setvars.cmd), as explained in the [++Installation page++](https://tornadovm.readthedocs.io/en/latest/installation.html#installation).{#pwbqo232319}
 
@@ -138,8 +136,7 @@ $ .\bin\tornadovm-installer --jdk graal-jdk-21 --backend opencl
 $ setvars.cmd
 ```
 
-2. Generate the IntelliJ Project Files
---------------------------------------
+## 2. Generate the IntelliJ Project Files
 
 Then you can generate the IDE project files based on your built TornadoVM instance (i.e., with the JAVA_HOME and the backends), by running:{#y050h259785}
 
@@ -153,49 +150,37 @@ IntelIj Files Generated ............... [ok]
 
 This command will generate three files. The first two files are used to build TornadoVM from IntelliJ, while the latter is used to run the TornadoVM unit-tests. You will be able to configure those files from IntelliJ in the next step.
 
-3. Configure the generated IDE project files
---------------------------------------------
+## 3. Configure the generated IDE project files
 
 At first, you need to launch the IntelliJ application and open TornadoVM as a project. Then you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to configure the build configuration file, as follows:{#7r0go280974}
 
 **Run \> Edit Configurations \> Python \> TornadoVM-Build**  
 
-<figure class="aligncenter size-large is-resized">
- <img fetchpriority="high" decoding="async" width="1024" height="656" src="Run-EditConfigurations-1024x656.png" alt="" class="wp-image-114760" style="width:560px;height:auto">
-</figure>
+{{< img src="Run-EditConfigurations-1024x656.png" class="aligncenter size-large is-resized" width="1024" height="656" style="width:560px;height:auto" >}}
 
 At this point all fields must have been automatically populated with the correct directories and attributes. You must ensure that the Use specified interpreter points to a valid Python interpreter from your system. If not, select one and click Apply.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" width="1024" height="782" src="Configure-Build-1024x782.png" alt="" class="wp-image-114761" style="width:560px;height:auto">
-</figure>
+{{< img src="Configure-Build-1024x782.png" class="aligncenter size-large is-resized" width="1024" height="782" style="width:560px;height:auto" >}}
 
 Similarly you can update the selected interpreter for the Python configuration file that is used to run the TornadoVM unit-tests:{#hx4l2378675}
 
 **Run \> Edit Configurations \> Python \> TornadoVM-Tests**{#27v2k387006}  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" width="1024" height="784" src="Configure-Tests-1024x784.png" alt="" class="wp-image-114762" style="width:566px;height:auto">
-</figure>
+{{< img src="Configure-Tests-1024x784.png" class="aligncenter size-large is-resized" width="1024" height="784" style="width:566px;height:auto" >}}
 
-4. Build TornadoVM from IntelliJ
---------------------------------
+## 4. Build TornadoVM from IntelliJ
 
 You can select the TornadoVM-Build configuration file and run. This should build TornadoVM with the JAVA_HOME and the backends that you selected in Step 1. If you run in Windows OS, this process will also invoke the pyInstaller package to create the TornadoVM executables.
 
-5. Run TornadoVM Unit-tests from IntelliJ
------------------------------------------
+## 5. Run TornadoVM Unit-tests from IntelliJ
 
 You can select the TornadoVM-Tests configuration file and run. This should run a subgroup of the TornadoVM unit-tests suite on the first device that is recognized in your system. If you open to edit the configurations of this file, you will see that the default arguments contain the quickPass argument which will skip the unit-tests that perform exhaustive testing and require long time to run (\~30 minutes).{#1gxfu440346}
 
 The outcome of running the unit-tests should be similar to this image:  
 
-<figure class="aligncenter size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="943" src="Run-Tests-1024x943.png" alt="" class="wp-image-114763" style="width:604px;height:auto">
-</figure>
+{{< img src="Run-Tests-1024x943.png" class="aligncenter size-large is-resized" width="1024" height="943" style="width:604px;height:auto" >}}
 
-6. Run TornadoVM Examples/Applications from IntelliJ
-----------------------------------------------------
+## 6. Run TornadoVM Examples/Applications from IntelliJ
 
 To add a new Application you can go in the menu (top bar) and navigate through Run and the Edit Configurations, to create a new application:{#7d56w493465}
 
@@ -271,15 +256,11 @@ You can add any values that will be selected as arguments for your class. In our
 
 You can click Apply and Run your application.{#yne6f805976}  
 
-<figure class="aligncenter size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="787" src="Configure-Application-1024x787.png" alt="" class="wp-image-114764" style="width:624px;height:auto">
-</figure>
+{{< img src="Configure-Application-1024x787.png" class="aligncenter size-large is-resized" width="1024" height="787" style="width:624px;height:auto" >}}
 
 The output should be similar to the following image, which is executed on Apple M1 silicon.  
 
-<figure class="aligncenter size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="502" src="Run-Application-1024x502.png" alt="" class="wp-image-114765" style="width:628px;height:auto">
-</figure>
+{{< img src="Run-Application-1024x502.png" class="aligncenter size-large is-resized" width="1024" height="502" style="width:628px;height:auto" >}}
 
 ## *Summary*
 

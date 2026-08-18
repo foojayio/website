@@ -1,6 +1,5 @@
 ---
 title: "Task scheduler in Java: background job processing with JobRunr"
-slug: "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
 date: "2024-05-22T11:05:04+00:00"
 lastmod: "2026-04-20T10:32:30+00:00"
 description: "Task scheduler in Java - JobRunr, a powerful java background job processing library. Learn how to enqueue tasks and schedule recurring tasks."
@@ -321,13 +320,7 @@ And we're done, let's enjoy the results! Start the application and head over to 
 
 Once you're satisfied, visit <http://localhost:8080/confirm-order> to trigger the order fulfillment tasks. Head back to the dashboard, you can observe the jobs moving from one state to another until they succeed.
 
-<figure class="wp-block-image wp-image-110991 size-medium">
- <img fetchpriority="high" decoding="async" width="700" height="373" src="jobrunr-dashboard-jobs-page-700x373.png" alt="The jobs page on the dashboard of JobRunr
-task scheduler in Java" class="wp-image-110991">
- <figcaption class="wp-element-caption">
-  Monitor jobs processing by visiting the jobs page of JobRunr dashboard
- </figcaption>
-</figure>
+{{< img src="jobrunr-dashboard-jobs-page-700x373.png" class="size-medium" alt="The jobs page on the dashboard of JobRunr task scheduler in Java" width="700" height="373" caption="Monitor jobs processing by visiting the jobs page of JobRunr dashboard" >}}
 
 If you haven't done so yet, visit <http://localhost:8000/reccuring-jobs> to see the recurring jobs. Have fun triggering them!
 

@@ -1,6 +1,5 @@
 ---
 title: "How & When to Use JDK Flight Recorder in Production"
-slug: "how-when-to-use-jdk-flight-recorder-in-production"
 date: "2020-12-15T12:44:28+00:00"
 lastmod: "2020-12-15T12:50:14+00:00"
 description: "A discussion on the usage of JDK Flight Recorder and that it’s possible to aim at specific time frames where a recording could be useful."

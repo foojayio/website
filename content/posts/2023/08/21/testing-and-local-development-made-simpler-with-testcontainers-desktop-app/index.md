@@ -1,6 +1,5 @@
 ---
 title: "Local Development Made Simpler with Testcontainers Desktop app"
-slug: "testing-and-local-development-made-simpler-with-testcontainers-desktop-app"
 date: "2023-08-21T07:52:45+00:00"
 lastmod: "2023-08-21T07:53:10+00:00"
 description: "Learn how you can simplify your application testing and local development workflow using Testcontainers Desktop app."

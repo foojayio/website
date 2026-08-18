@@ -1,6 +1,5 @@
 ---
 title: "Three Mistakes Developers Make Preventing Getting Hired On Projects"
-slug: "three-mistakes-junior-software-developers-make-preventing-getting-hired-on-amazing-projects"
 date: "2022-04-06T07:46:48+00:00"
 lastmod: "2022-04-06T08:05:45+00:00"
 description: "From experience, I have seen three big mistakes every junior software developer makes that could easily be solved."

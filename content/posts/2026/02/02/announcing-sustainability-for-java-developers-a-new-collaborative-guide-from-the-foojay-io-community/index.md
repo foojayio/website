@@ -1,6 +1,5 @@
 ---
 title: "Announcing: Sustainability for Java Developers"
-slug: "announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community"
 date: "2026-02-02T11:04:54+00:00"
 lastmod: "2026-02-02T11:54:29+00:00"
 description: "Java developers from around the world are writung a book about a question that's becoming impossible to ignore: how do we write software that's good for both our projects and the planet?"
@@ -29,9 +28,7 @@ Java developers from around the world are writing a book about a question that's
 
 *Sustainability for Java Developers: Towards an Understanding of Sustainable Java Software Development* is now freely available on Leanpub, bringing together Java Champions, architects, and technical writers to look at sustainability from every angle.
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" width="793" height="1024" src="sustainabilitybook-793x1024.png" alt="" class="wp-image-122569" style="width:277px;height:auto">
-</figure>
+{{< img src="sustainabilitybook-793x1024.png" class="size-large is-resized" width="793" height="1024" style="width:277px;height:auto" >}}
 
 The book covers everything from the environmental footprint of our data centers to the ethics of open source supply chains, from efficient data formats to the often-overlooked topic of career longevity.
 

@@ -1,6 +1,5 @@
 ---
 title: "DevOps for Developers - Introduction and Version Control"
-slug: "devops-for-developers-introduction-version-control"
 date: "2023-03-12T09:13:33+00:00"
 lastmod: "2023-03-12T09:16:01+00:00"
 description: "Improving our DevOps skills can help us become better developers, team mates, and managers. Learn DevOps principles and advanced git!"
@@ -16,7 +15,7 @@ related_posts:
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
   - "is-it-time-to-go-back-to-the-monolith"
   - "what-are-you-missing-by-debugging-in-vs-code"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Kubernetes and Apache Cassandra: What Works (and What Doesn’t)"
-slug: "kubernetes-and-apache-cassandra-what-works-and-what-doesnt"
 date: "2022-01-14T16:30:50+00:00"
 lastmod: "2022-02-17T18:19:59+00:00"
 description: "Cassandra and K8s are seen as the “most logical pairing”, let’s take a look at how they are a dream team — and why this isn’t always true.   "

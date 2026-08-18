@@ -1,6 +1,5 @@
 ---
 title: "Optimizing the MongoDB Java Driver"
-slug: "optimizing-the-mongodb-java-driver-how-minor-optimizations-led-to-macro-gains"
 date: "2026-02-17T15:33:56+00:00"
 lastmod: "2026-02-18T14:52:52+00:00"
 description: "In this blog, we share how the Java developer experience team optimized the MongoDB Java Driver by strictly adhering to this principle. We discovered that performance issues were rarely where we thought they were. This post explains how we achieved throughput improvements between 20% to over 90% in specific workloads. We’ll cover specific techniques, including using SWAR (SIMD Within A Register) for null-terminator detection, caching BSON array indexes, and eliminating redundant invariant checks."
@@ -100,8 +99,7 @@ The flat byte\[\] layout remains the preferred choice because it uses fewer heap
 **Figure 1.** The figure below shows the before-and-after results of performance tests on 100x100 and 100x1000 array documents. The larger arrays saw the greatest improvement in performance.  
 ![](Screenshot-2026-02-10-at-11.40.40-AM.png)
 
-2. Java Virtual Machine (JVM) intrinsics
-----------------------------------------
+## 2. Java Virtual Machine (JVM) intrinsics
 
 As Java developers, we write code with many abstractions, which makes the code easier to maintain and understand; however, these abstractions can also cause significant performance issues. What is easy for humans to read isn't always what the machine prefers to execute, which is why having [mechanical sympathy](https://wa.aws.amazon.com/wellarchitected/2020-07-02T19-33-23/wat.concept.mechanical-sympathy.en.html) may be beneficial.
 
@@ -131,8 +129,7 @@ After implementing our changes and testing them, we realized thata simple change
 **Figure 2.**The figure below shows throughput improvements for each insert command. 'Large Doc Bulk Insert' saw the most significant gain because processing larger payloads maximizes the impact of optimizing the hottest execution paths.  
 ![](Screenshot-2026-02-10-at-11.41.20-AM.png)
 
-3. Check and check again
-------------------------
+## 3. Check and check again
 
 As mentioned earlier, size checks on **ByteBuffer** in the critical path are expensive. However, we also performed similar checks on invariants in many other places**.**When encoding BSON, we retrieved the current buffer from a list by index on every write:
 
@@ -153,8 +150,7 @@ This minor change led to a **16% increase in throughput** for bulk inserts. This
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **The lesson:** Remove unnecessary checks from the hottest paths. Because these checks run so frequently, they quickly become bottlenecks that drag down performance. |
 
-4. BSON null terminator detection with SWAR
--------------------------------------------
+## 4. BSON null terminator detection with SWAR
 
 Every BSON document is structured as a list of triplets: *a type byte, a field name, and a value* . Crucially, each field name is a null-terminated string---[CString](https://stackoverflow.com/questions/14473526/what-is-cstring)---not a length-prefixed string. While this design saves four bytes per field, it introduces a performance trade-off: extracting a CString now requires a linear scan rather than a constant-time lookup.
 
@@ -245,8 +241,7 @@ The final result:
 
 Because the loop body now consists of a small, predictable set of arithmetic instructions, it integrates seamlessly with modern CPU pipelines. The efficiency of SWAR stems from its reduced instruction count, the absence of per-byte branches, and one memory load for every eight bytes.
 
-5. Avoiding redundant copies and allocations
---------------------------------------------
+## 5. Avoiding redundant copies and allocations
 
 While optimizing CString detection with SWAR, we also identified an opportunity to reduce allocations and copies on the string decoding path.
 
@@ -274,8 +269,7 @@ To achieve this, the decoder maintains a reusable byte\[\] buffer. The first cal
 
 On our "FindMany and empty cursor" workload, eliminating the redundant intermediate copy in readString **improved throughput by approximately 22.5%** **.** Introducing the reusable buffer contributed a **\~5%** improvement in cases where the internal array is not available.
 
-6. String Encoding, removing method indirection and redundant checks
---------------------------------------------------------------------
+## 6. String Encoding, removing method indirection and redundant checks
 
 While benchmarking our code, we observed that encoding Strings to UTF-8, the format used by BSON, consumed a significant amount of time. BSON documents contain many strings, including attribute names as CStrings and various string values of different lengths and Unicode code points. The process of encoding strings to UTF-8 was identified as a hot path, prompting us to investigate it and suggest potential improvements. Our initial implementation used custom UTF-8 encoding to avoid creating additional arrays with the standard JDK libraries.
 

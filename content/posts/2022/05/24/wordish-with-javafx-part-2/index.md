@@ -1,6 +1,5 @@
 ---
 title: "Wordish with JavaFX - Part 2"
-slug: "wordish-with-javafx-part-2"
 date: "2022-05-24T07:50:54+00:00"
 lastmod: "2022-05-24T07:50:55+00:00"
 description: "Learn specialized JavaFX Labels and Buttons, pseudo-classes for CSS styling, and third-party font libraries and customizing Scene Builder!"
@@ -19,7 +18,7 @@ related_posts:
   - "wordish-with-javafx-part-1"
   - "beginning-javafx-with-intellij"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
-  - "the-javafx-revival"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -37,12 +36,7 @@ We'll also cover incorporating third-party font libraries and customizing Scene 
 
 Here's an example screenshot of Wordish.
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="playgame5-619x1024.png" alt="Wordish Game in progress" class="wp-image-56002" width="350" height="580">
- <figcaption>
-  Figure 1. Wordish Main View Layout
- </figcaption>
-</figure>
+{{< img src="playgame5-619x1024.png" class="size-large is-resized" alt="Wordish Game in progress" width="350" height="580" caption="Figure 1. Wordish Main View Layout" >}}
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
@@ -89,12 +83,7 @@ public class LetterStyle {
 
 Figure 2 illustrates all five `DisplayType` enum states: The three lower rows of LetterLabel in the TilePane are styled with DisplayType `PLAIN`. The word "BLEAK" is styled with DisplayType `DISPLAYING`. This state applies when the user is entering the word before submitting it. The words "STONE" and "FLAIR" illustrate the other three DisplayTypes applied after the matching process is complete: the L in FLAIR is `MATCHING`, the E in STONE and the A in FLAIR is `PARTIALMATCH`, and the remaining LetterLabels are DisplayType `NOMATCH`.
 
-<figure class="wp-block-image size-large is-resized" id="figure-2">
- <img decoding="async" src="playgame4-619x1024.png" alt="Wordish UI shoing customized LetterLabel and KeyButton controls" class="wp-image-56018" width="350" height="579">
- <figcaption>
-  Figure 2. Customized LetterLabel and KeyButton controls
- </figcaption>
-</figure>
+{{< img src="playgame4-619x1024.png" class="size-large is-resized" alt="Wordish UI shoing customized LetterLabel and KeyButton controls" width="350" height="579" caption="Figure 2. Customized LetterLabel and KeyButton controls" >}}
 
 ### Specialized Button Control
 
@@ -309,21 +298,11 @@ To use customized controls with Scene Builder, supply a JAR file with these comp
 
 From the Scene Builder Library menu, select the **Settings** icon (at the top next to Library) and the **JAR/FXML Manager**, as shown in Figure 3.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="screenbuilder-librarysettings.png" alt="" class="wp-image-56022" width="477" height="292">
- <figcaption>
-  Figure 3. Use the JAR/FXML Manager to customize Scene Builder
- </figcaption>
-</figure>
+{{< img src="screenbuilder-librarysettings.png" class="size-full is-resized" width="477" height="292" caption="Figure 3. Use the JAR/FXML Manager to customize Scene Builder" >}}
 
 Scene Builder will then display the Library Manager. To add the KeyButton and LetterLabel classes, select **Add Library/FXML from file system** , as shown in Figure 4. Supply the jar file containing the compiled class files for LetterLabel, KeyButton, and LetterStyle (here, file **wordish.jar**).
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" src="screenbuilder-addcustom.png" alt="" class="wp-image-56023" width="388" height="377">
- <figcaption>
-  Figure 4. The Scene Builder Library Manager
- </figcaption>
-</figure>
+{{< img src="screenbuilder-addcustom.png" class="size-full is-resized" width="388" height="377" caption="Figure 4. The Scene Builder Library Manager" >}}
 
 Once you add them, the classes appear in the Custom section under Library. You can then select a LetterLabel, for example, place it in your visual view, and even configure its properties, including the custom properties `letterDisplay` and `matchResult` that we showed earlier.
 

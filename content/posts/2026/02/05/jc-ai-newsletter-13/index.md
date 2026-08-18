@@ -1,6 +1,5 @@
 ---
 title: "JC-AI Newsletter #13"
-slug: "jc-ai-newsletter-13"
 date: "2026-02-05T21:12:12+00:00"
 lastmod: "2026-02-05T21:12:14+00:00"
 description: "Two weeks have passed, and it is time to present a new collection of readings that may shape developments, utilization or ideas in the field of artificial - by Miro Wengner"

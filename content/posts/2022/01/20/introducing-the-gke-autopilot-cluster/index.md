@@ -1,6 +1,5 @@
 ---
 title: "Introducing the GKE Autopilot Cluster"
-slug: "introducing-the-gke-autopilot-cluster"
 date: "2022-01-20T08:28:34+00:00"
 lastmod: "2022-01-20T08:28:35+00:00"
 description: "Google's fully managed Kubernetes services, GKE Autopilot, is a completely managed and serverless \"Kubernetes as a service\" offering."

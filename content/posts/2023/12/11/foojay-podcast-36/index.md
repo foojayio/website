@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #36: J-Fall Report, Part 3"
-slug: "foojay-podcast-36"
 date: "2023-12-11T09:41:41+00:00"
 lastmod: "2025-11-13T08:51:45+00:00"
 description: "In this part, hear about Maven, contributing to Open Source projects, JOOQ, Desktop Applications, Thymeleaf, htmx, and Security."

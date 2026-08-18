@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #19: Working Free For Fun Brings Fame & Fortune"
-slug: "foojay-podcast-19"
 date: "2023-04-17T12:35:51+00:00"
 lastmod: "2025-11-13T09:09:17+00:00"
 description: "Many devs spend their time on side projects: an opportunity to learn and get involved in communities, sometimes leading to a new job!"

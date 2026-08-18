@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 9)"
-slug: "java-thread-programming-part-9"
 date: "2021-12-14T11:14:33+00:00"
 lastmod: "2021-12-14T11:23:04+00:00"
 description: "Let's continue the discussion and share a few more thread-safe classes that we can use in our day-to-day coding!"
@@ -173,7 +172,7 @@ However, this iteration doesn't avert the need for client-side locking if other 
 Although client-side locking solves our issue discussed above, it has some downside as well. If a collection is extensive, it may take a while to iterate. While it's being iterated, no other operation can be performed, which would certainly hurt the overall performance of the applications. To deal with this issue, in java 5.0, a few classes are added to the concurrent packages. These are:
 
 ```java
-<code class="language-java">java.util.concurrent.ConcurrentLinkedQueue
+java.util.concurrent.ConcurrentLinkedQueue
 java.util.concurrent.ConcurrentLinkedDeque
 java.util.concurrent.ConcurrentSkipListSet
 java.util.concurrent.ConcurrentHashMap
@@ -181,7 +180,7 @@ java.util.concurrent.ConcurrentSkipListMap
 java.util.concurrent.ConcurrentNavigableMap
 java.util.concurrent.CopyOnWriteArraySet
 java.util.concurrent.CopyOnWriteArrayList
-java.util.concurrent.ArrayBlockingQueue</code>
+java.util.concurrent.ArrayBlockingQueue
 ```
 
 We don't need to use client-side locking in the above classes. These are thread-safe, optimized, and highly performant classes. Ideally, in our modern code, we will use these classes in our day-to-day coding rather than the technique discussed in this article.

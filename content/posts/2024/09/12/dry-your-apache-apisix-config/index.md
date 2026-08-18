@@ -1,6 +1,5 @@
 ---
 title: "DRY your Apache APISIX config"
-slug: "dry-your-apache-apisix-config"
 date: "2024-09-12T09:59:44+00:00"
 lastmod: "2024-09-12T09:59:45+00:00"
 description: "DRY is an important principle in software development. In this article, you learn how to apply it to Apache APISIX configuration."

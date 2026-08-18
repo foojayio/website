@@ -1,6 +1,5 @@
 ---
 title: "Watch Area and Renderers"
-slug: "watch-area-and-renderers"
 date: "2023-03-25T07:25:03+00:00"
 lastmod: "2023-03-25T07:25:05+00:00"
 description: "Stop digging through variables in the watch to find nuggets of gold, or rerunning the expression evaluation. Use entity renderers instead."

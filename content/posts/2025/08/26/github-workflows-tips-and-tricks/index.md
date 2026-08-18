@@ -1,6 +1,5 @@
 ---
 title: "GitHub workflows tips and tricks"
-slug: "github-workflows-tips-and-tricks"
 date: "2025-08-26T12:06:00+00:00"
 lastmod: "2025-08-26T12:06:02+00:00"
 description: "I recently developed a new workflow, and it prompted me to write this post. Feel free to add your own."

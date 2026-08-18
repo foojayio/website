@@ -1,6 +1,5 @@
 ---
 title: "SQL vs. NoSQL: Pros & Cons"
-slug: "sql-vs-nosql-pros-cons"
 date: "2022-02-09T09:26:22+00:00"
 lastmod: "2022-02-09T09:28:58+00:00"
 description: "What’s the best way to store, protect and access your data? This is a fundamental, yet critical decision. Find out more on Foojay.io Today!"

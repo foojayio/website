@@ -1,6 +1,5 @@
 ---
 title: "The Systemic Process of Debugging"
-slug: "the-systemic-process-of-debugging"
 date: "2023-09-28T07:06:14+00:00"
 lastmod: "2023-09-28T07:07:04+00:00"
 description: "Explore the academic theory of the debugging process, focuse on issue tracking, team communication & the balance of unit to integration tests"

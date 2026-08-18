@@ -1,6 +1,5 @@
 ---
 title: "Breaktime Tech Talks (Ep39): Why embedding models should match + Advice for starting a blog"
-slug: "breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog"
 date: "2025-04-16T05:35:04+00:00"
 lastmod: "2025-04-22T08:07:51+00:00"
 description: "This week I talk through my hands-on experience of what happens when embedding models for creating vectors and searching them don’t match."

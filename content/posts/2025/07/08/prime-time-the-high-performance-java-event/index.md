@@ -1,6 +1,5 @@
 ---
 title: "Prime Time: The High Performance Java Event"
-slug: "prime-time-the-high-performance-java-event"
 date: "2025-07-08T07:05:00+00:00"
 lastmod: "2025-08-14T12:35:26+00:00"
 description: "Java is the engine behind mission-critical applications and end user experiences. From faster response times to consistent performance, Java can have a - by Geertjan Wielenga"

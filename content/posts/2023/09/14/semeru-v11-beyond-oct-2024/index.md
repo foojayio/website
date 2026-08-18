@@ -1,6 +1,5 @@
 ---
 title: "Extending availability of IBM Semeru Runtimes V11 beyond Oct 2024"
-slug: "semeru-v11-beyond-oct-2024"
 date: "2023-09-14T14:17:33+00:00"
 lastmod: "2023-09-21T09:14:19+00:00"
 description: "IBM extends availability for Semeru Runtimes V11 from Oct 2024 to Nov 2026. IBM Semeru Runtimes support page is now updated to reflect this."

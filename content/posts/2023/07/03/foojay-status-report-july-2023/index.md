@@ -1,6 +1,5 @@
 ---
 title: "Foojay Status Report: July 2023"
-slug: "foojay-status-report-july-2023"
 date: "2023-07-03T05:20:56+00:00"
 lastmod: "2023-07-03T11:00:52+00:00"
 description: "Great big overview of Foojay.io, plus its subprojects and related insights and statistics, as well as upcoming plans."
@@ -135,9 +134,7 @@ The Y axis shows a line for each day from May 1, 2020 (the first month of Foojay
 
 The day on which the largest spike took place overall above correlates with the most popular article yet published on Foojay, which is Helen Scott's multiple carets article below.
 
-<figure class="wp-block-image size-large is-resized">
- <a href="https://foojay.io/today/working-with-multiple-carets-in-intellij-idea/"><img loading="lazy" decoding="async" src="image-5-1024x263.png" alt="" class="wp-image-98965" width="513" height="131"></a>
-</figure>
+{{< img src="image-5-1024x263.png" class="size-large is-resized" width="513" height="131" >}}
 
 Notice that you can now see the total number of unique views, which several people have asked for. It helps to see which articles clearly resonate with a broad audience versus those that are more relevant to a more niche group of specialists. (In the above case, the article was republished in November 2021, while it was originally published in September 2021, which is why the unique views count starts in September while its publication date shows November. Maybe that distinction should also be shown, i.e., first published versus subsequent republications.)
 
@@ -146,9 +143,7 @@ Each article now publicly exposes its unique views live on the page, although wi
 
 In addition to all the articles on Foojay Today, all/many/most of the other pages on Foojay are now for the first time also being tracked for unique views, so as to gather stats on them, too. For example, you'll see the below on the [Foojay Download page](https://foojay.io/download).
 
-<figure class="wp-block-image size-full is-resized">
- <a href="https://foojay.io/download"><img loading="lazy" decoding="async" src="image-8.png" alt="" class="wp-image-98968" width="334" height="104"></a>
-</figure>
+{{< img src="image-8.png" class="size-full is-resized" width="334" height="104" >}}
 
 It helps to take two equivalent periods and compare them to each other, before the cookie policy change, e.g., May 1 to July 13 in 2022 with the same period in the previous year, which shows an almost 100% growth of unique users year over year, as shown below, together with other stats from those specific periods.
 ![](image-9-1024x702.png)

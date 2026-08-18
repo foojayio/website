@@ -1,6 +1,5 @@
 ---
 title: "Method Reference VS Lambda Java Challenge"
-slug: "method-reference-vs-lambda-java-challenge"
 date: "2021-06-29T19:31:00+00:00"
 lastmod: "2021-08-23T12:18:12+00:00"
 description: "In this Java Challenge, we will explore how lambdas and method references behave so that you can really understand how they work!"

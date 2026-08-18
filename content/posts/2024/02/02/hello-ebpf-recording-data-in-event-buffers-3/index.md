@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Recording data in event buffers (3)"
-slug: "hello-ebpf-recording-data-in-event-buffers-3"
 date: "2024-02-02T14:45:02+00:00"
 lastmod: "2024-02-02T14:45:03+00:00"
 description: "How to use another kind of eBPF maps, the perf event buffer, and run tests with docker and JUnit 5."

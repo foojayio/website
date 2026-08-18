@@ -1,6 +1,5 @@
 ---
 title: "Foojay on Mastodon: An Update"
-slug: "foojay-on-mastodon-an-update"
 date: "2022-12-16T06:45:03+00:00"
 lastmod: "2022-12-16T07:34:59+00:00"
 description: "We started with an instance to host foojay.social via toot.io that provides us 200Gb of storage space to handle 250 active users."
@@ -40,9 +39,7 @@ It has been one month since we announced [foojay.social](https://foojay.social).
 
 On our own account [foojay.social/@foojay](https://foojay.social/@foojay) we share the same content as we do on Twitter, mainly links to new articles. We don't use a cross-posting tool, but try to link to the Mastodon account of the writer, or other references, whenever possible. This account is also one month old, and already gained nearly 250 followers.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="mastodon-foojay-20221215.png" alt="" class="wp-image-61430" width="316" height="591">
-</figure>
+{{< img src="mastodon-foojay-20221215.png" class="size-full is-resized" width="316" height="591" >}}
 
 The administration dashboard shows we have a total of 118 active users on the foojay.social-server, who interacted more than 4000 times. Two spam-like messages got reported during this month and those account are blocked, and are no longer able to interact with this Mastodon instance.
 

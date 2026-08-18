@@ -1,6 +1,5 @@
 ---
 title: "JManc 2024 Trip Report"
-slug: "jmanc-2024-trip-report"
 date: "2024-07-31T06:01:49+00:00"
 lastmod: "2024-08-02T08:06:12+00:00"
 description: "Great day, great people, great discussions and great team of dis-organisers!"

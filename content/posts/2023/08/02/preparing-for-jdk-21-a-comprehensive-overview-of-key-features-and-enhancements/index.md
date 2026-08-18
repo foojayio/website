@@ -1,6 +1,5 @@
 ---
 title: "Preparing for JDK 21: A Comprehensive Overview of Key Features and Enhancements"
-slug: "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
 date: "2023-08-02T10:46:28+00:00"
 lastmod: "2023-08-02T15:45:26+00:00"
 description: "As we inch to the release of JDK 21 in September (next month!), get familiar with the features and improvements this version will bring!"
@@ -15,7 +14,7 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
-  - "foojay-podcast-64"
+  - "virtual-thread-pinning-field-guide"
 frozen: false
 ---
 

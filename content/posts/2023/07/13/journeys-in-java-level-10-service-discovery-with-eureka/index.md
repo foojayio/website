@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 10: Service Discovery with Eureka"
-slug: "journeys-in-java-level-10-service-discovery-with-eureka"
 date: "2023-07-13T06:39:06+00:00"
 lastmod: "2023-07-13T10:35:34+00:00"
 description: "Eureka: service discovery to help services interact with one another without hardwiring in instance-specific or environment-dependent details."
@@ -20,7 +19,7 @@ related_posts:
   - "journeys-in-java-level-9-docker-compose-all-the-things"
   - "journeys-in-java-level-8-add-mongodb-to-spring-cloud-config"
   - "journeys-in-java-level-7-externalize-microservice-configuration"
-  - "spring-boot-api-documentation-redocusaurus"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

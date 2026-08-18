@@ -1,6 +1,5 @@
 ---
 title: "Kubernetes and the Data Centre: Is Full Scale Migration Possible?"
-slug: "kubernetes-and-the-data-centre-is-full-scale-migration-possible"
 date: "2022-07-21T13:48:13+00:00"
 lastmod: "2022-07-21T13:48:15+00:00"
 description: "Using Kubernetes as a standard layer will help everyone to control how and where applications run and data gets created."

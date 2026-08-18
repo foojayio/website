@@ -1,6 +1,5 @@
 ---
 title: "Lottie4J 1.2.0: dotLottie Support, Marker Playback, Cropping, and a Big Speed Boost"
-slug: "lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost"
 date: "2026-03-24T07:51:00+00:00"
 description: "Version 1.2.0 of Lottie4J is out, and it's again a big release! The headline feature is support for the .lottie container format, but that's just the - by Frank Delporte"
 authors:
@@ -13,7 +12,7 @@ related_posts:
   - "lottie4j-meets-lottiefiles"
   - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
   - "lottie4j-1-1-0-better-rendering-smarter-debugging"
-  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

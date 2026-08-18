@@ -1,6 +1,5 @@
 ---
 title: "Patterns For The Design of Microservices"
-slug: "patterns-for-the-design-of-microservices-part-1"
 date: "2023-10-11T06:11:03+00:00"
 lastmod: "2023-10-13T06:11:27+00:00"
 description: "Design patterns plays a pivotal role in designing and solving the commonly occurring problems in software application."

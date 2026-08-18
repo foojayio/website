@@ -1,6 +1,5 @@
 ---
 title: "Building JavaFX Native Images"
-slug: "a-guide-to-creating-javafx-native-images"
 date: "2025-04-15T09:57:48+00:00"
 lastmod: "2025-06-10T08:57:32+00:00"
 description: "Discover how to turn JavaFX applications into native executables with GraalVM. Build native images locally or with GitHub Actions."
@@ -218,7 +217,7 @@ jobs:
           ./mvnw -Pnative package
 
       - name: Archive Release
-        uses: thedoctor0/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ffecf5a8f7e0e9e0e4f6e0c5b5abb2abb0">[email protected]</a>
+        uses: thedoctor0/[email protected]
         with:
           type: 'zip'
           filename: "raffle-${{ matrix.platform }}.zip"

@@ -1,6 +1,5 @@
 ---
 title: "Lessons learned from previous projects"
-slug: "lessons-learned-from-previous-projects"
 date: "2022-03-14T13:02:01+00:00"
 lastmod: "2022-03-14T13:02:03+00:00"
 description: "This article discusses our shifting thought process on the notion that our practices, which were once considered good practices, can fade over time."

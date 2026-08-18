@@ -1,6 +1,5 @@
 ---
 title: "Custom Controls in JavaFX (Part VI) -- Canvas Class"
-slug: "custom-controls-in-javafx-part-vi"
 date: "2021-03-05T08:21:10+00:00"
 lastmod: "2021-03-05T08:21:13+00:00"
 description: "Drawing on the Canvas node will directly go down to the graphics hardware, making it really fast. Of course, this also comes with drawbacks!"
@@ -13,8 +12,8 @@ tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-v"
-  - "custom-controls-in-javafx-part-iv"
-  - "custom-controls-in-javafx-part-iii"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "java-for-desktop-applications-part-1"
 frozen: false
 ---
 

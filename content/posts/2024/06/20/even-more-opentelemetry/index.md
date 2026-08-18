@@ -1,6 +1,5 @@
 ---
 title: "Even More Opentelemetry!"
-slug: "even-more-opentelemetry"
 date: "2024-06-20T06:40:47+00:00"
 lastmod: "2024-06-20T06:40:48+00:00"
 description: "I continue to work on my Opentelemetry demo. Its main idea is to showcase traces across various technology stacks, including asynchronous communication via an MQTT queue."

@@ -1,6 +1,5 @@
 ---
 title: "Run a Java Lambda Function From a Docker image"
-slug: "run-a-java-lambda-function-from-a-docker-image"
 date: "2024-12-11T16:16:36+00:00"
 lastmod: "2024-12-11T22:24:06+00:00"
 description: "The Hello Lambda Function project contains an AWS Lambda maven application with AWS Java SDK 2.x dependencies."
@@ -17,7 +16,7 @@ related_posts:
   - "azul-provides-the-crac-in-aws-snapstart-builds"
   - "exceptions-lambdas"
   - "method-reference-vs-lambda-java-challenge"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

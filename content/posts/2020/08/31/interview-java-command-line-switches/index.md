@@ -1,6 +1,5 @@
 ---
 title: "Interview: Chris Newland & Java Command Line Switches"
-slug: "interview-java-command-line-switches"
 date: "2020-08-31T07:12:40+00:00"
 lastmod: "2020-09-03T09:44:46+00:00"
 description: "We're happy to announce that we’re hosting Chris Newland’s VMOptionsExplorer on foojay, providing all details per release on Java command line switches."
@@ -24,9 +23,7 @@ Go here to take a look, yourself: <https://foojay.io/command-line-arguments/open
 
 Let's meet Chris, here's a quick interview with him about his Java command line switches integrated into foojay!  
 
-<figure class="alignleft size-large is-resized">
- <img decoding="async" src="0-2.jpeg" alt="" class="wp-image-32784" width="146" height="146">
-</figure>
+{{< img src="0-2.jpeg" class="alignleft size-large is-resized" width="146" height="146" >}}
 
 **Hi Chris, who are you and what does your Java life look like?**
 

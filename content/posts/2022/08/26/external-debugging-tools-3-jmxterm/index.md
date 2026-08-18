@@ -1,6 +1,5 @@
 ---
 title: "External Debugging Tools 3: JMXTerm"
-slug: "external-debugging-tools-3-jmxterm"
 date: "2022-08-26T14:52:23+00:00"
 lastmod: "2022-08-26T15:09:32+00:00"
 description: "Monitor your application in production and locally. Understand what's going on under the hood while debugging & changing settings on the fly."

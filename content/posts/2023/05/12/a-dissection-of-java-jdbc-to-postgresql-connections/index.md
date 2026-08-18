@@ -1,6 +1,5 @@
 ---
 title: "A Dissection of Java JDBC to PostgreSQL Connections"
-slug: "a-dissection-of-java-jdbc-to-postgresql-connections"
 date: "2023-05-12T08:52:52+00:00"
 lastmod: "2023-05-12T10:43:21+00:00"
 description: "When using Java JDBC with PostgreSQL, know the difference between simple and extended protocols, how to recognize protocol implementations, and more."

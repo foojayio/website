@@ -1,6 +1,5 @@
 ---
 title: "The Persistent Threat: Why Major Vulnerabilities Like Log4Shell and Spring4Shell Remain Significant"
-slug: "the-persistent-threat-why-major-vulnerabilities-like-log4shell-and-spring4shell-remain-significant"
 date: "2024-09-17T16:17:07+00:00"
 lastmod: "2024-09-17T16:31:15+00:00"
 description: "A lurking issue has been surprisingly overlooked: the continued use of vulnerable Log4j and Spring Framework versions in many projects."

@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot 3.5 EOL — The CVE Blind Spot Nobody Talks About"
-slug: "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
 date: "2026-04-19T13:37:13+00:00"
 lastmod: "2026-04-19T14:25:30+00:00"
 description: "Spring Boot 3.5 goes EOL June 30, 2026. But the real risk isn't the migration. It's what happens to CVE reporting once a project reaches end of life."

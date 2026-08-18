@@ -1,6 +1,5 @@
 ---
 title: "💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
-slug: "the-12-labours-of-primefaces-15-0-15-release"
 date: "2026-05-10T08:15:26+00:00"
 lastmod: "2026-05-10T15:14:28+00:00"
 description: "💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release"
@@ -15,7 +14,7 @@ related_posts:
 frozen: false
 ---
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-123733" src="toge-herculer-700x394.png" alt="💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release" width="700" height="394">
+{{< img src="toge-herculer-700x394.png" class="size-medium" alt="💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release" width="700" height="394" >}}
 
 💪😤 THE 12 LABOURS OF PRIMEFACES 15.0.15 #release
 

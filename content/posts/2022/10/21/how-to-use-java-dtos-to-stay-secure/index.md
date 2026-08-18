@@ -1,6 +1,5 @@
 ---
 title: "How to Use Java DTOs to Stay Secure"
-slug: "how-to-use-java-dtos-to-stay-secure"
 date: "2022-10-21T07:29:57+00:00"
 lastmod: "2022-10-21T07:29:58+00:00"
 description: "How DTOs are used in modern Java, how your apps can benefit, and how Java DTOs can help you be more secure."

@@ -1,6 +1,5 @@
 ---
 title: "5 Minute Azure Survey: Java EE, Jakarta EE, and MicroProfile"
-slug: "5-minute-azure-survey-java-ee-jakarta-ee-and-microprofile"
 date: "2020-10-01T12:55:57+00:00"
 lastmod: "2021-08-23T12:37:38+00:00"
 description: "Azure team at Microsoft is strengthening its commitment to Jakarta EE, Java EE, and MicroProfile communities. Please provide feedback via a quick survey."

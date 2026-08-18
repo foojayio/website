@@ -1,6 +1,5 @@
 ---
 title: "GitLab: Your Continuous Deployment One-Stop Shop"
-slug: "gitlab-continuous-deployment-one-stop-shop"
 date: "2021-08-04T07:44:20+00:00"
 lastmod: "2023-06-12T08:57:32+00:00"
 description: "This article shows how one could offload the Docker part of your build pipeline from your local machine to GitLab using the Kaniko image. It saves on time and resources. The only regret I have is that I should have done it much earlier as I'm a huge proponent of automation!"

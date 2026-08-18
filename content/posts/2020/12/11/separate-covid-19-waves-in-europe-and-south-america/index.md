@@ -1,6 +1,5 @@
 ---
 title: "Separate Covid-19 Waves in Europe and South America"
-slug: "separate-covid-19-waves-in-europe-and-south-america"
 date: "2020-12-11T09:47:59+00:00"
 lastmod: "2020-12-11T09:58:50+00:00"
 description: "Software-ECG is a free time series analysis tool which we will use this week to compare Covid-19 trends in Europe with South America."

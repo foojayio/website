@@ -1,6 +1,5 @@
 ---
 title: "Contributing to Foojay's Java Community Certification"
-slug: "how-to-participate-in-the-foojay-community-certification-project"
 date: "2023-10-04T07:12:55+00:00"
 lastmod: "2023-10-04T07:13:41+00:00"
 description: "Read how you can help create a community certification for Java Developers as part of the Foojay community"
@@ -16,7 +15,7 @@ related_posts:
   - "foojay-developer-certification-measure-skills"
   - "42-practical-java-design-patterns-builder-and-more"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "12 Text Tools For Developers"
-slug: "12-text-tools-for-developers"
 date: "2024-04-09T07:31:13+00:00"
 lastmod: "2024-04-12T13:39:52+00:00"
 description: "Text data and text manipulation of it is also part of a developer job. Let's see a few free text tools to simplify your job."

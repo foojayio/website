@@ -1,6 +1,5 @@
 ---
 title: "Explore Spring AI SDK – Amazon Bedrock AgentCore – Part 3"
-slug: "explore-spring-ai-sdk-amazon-bedrock-agentcore-part-3"
 date: "2026-05-10T09:09:00+00:00"
 lastmod: "2026-05-18T05:55:12+00:00"
 description: "Explore how to use built-in tools in Spring AI SDK with Amazon Bedrock AgentCore, including Browser and Code Interpreter capabilities. Learn how AI agents can browse web content, execute code, automate reasoning tasks, and build intelligent workflows using Spring AI and Amazon Bedrock AgentCore."

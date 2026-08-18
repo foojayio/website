@@ -1,6 +1,5 @@
 ---
 title: "Review of Junie, a coding agent by JetBrains – Revie"
-slug: "checking-out-junie-a-coding-agent-by-jetbrains"
 date: "2025-02-26T01:38:47+00:00"
 lastmod: "2025-03-26T09:16:14+00:00"
 description: "Checking out Junie, a newly announced coding agent by JetBrains by asking it to add a new feature to my pet project."

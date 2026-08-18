@@ -1,6 +1,5 @@
 ---
 title: "Modern JavaFX Game Development with FXGL - Pong"
-slug: "modern-javafx-game-development-with-fxgl-pong-simple"
 date: "2021-04-27T07:48:29+00:00"
 lastmod: "2021-04-27T07:48:32+00:00"
 description: "How to make a simple clone of Pong using the JavaFX FXGL game engine. We will be using the latest (currently 11.15) version of FXGL."

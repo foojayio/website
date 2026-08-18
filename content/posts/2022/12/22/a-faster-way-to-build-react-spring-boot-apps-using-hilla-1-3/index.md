@@ -1,6 +1,5 @@
 ---
 title: "A Faster Way to Build React + Spring Boot Apps Using Hilla 1.3"
-slug: "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
 date: "2022-12-22T09:59:35+00:00"
 lastmod: "2022-12-22T10:35:10+00:00"
 description: "Hilla 1.3 offers an improved way to build React and Spring Boot apps, by enabling end-to-end type-safety and 45 UI components."

@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 8)"
-slug: "java-thread-programming-part-8"
 date: "2021-12-07T18:15:09+00:00"
 lastmod: "2021-12-14T11:07:55+00:00"
 description: "I will try to explain in a very simplified way what Java thread safety is and how we can achieve it while we write our day-to-day code!"

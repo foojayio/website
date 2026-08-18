@@ -1,6 +1,5 @@
 ---
 title: "JDKMon 17.0.18 Released"
-slug: "jdkmon-17-0-18-released"
 date: "2021-12-20T09:06:26+00:00"
 lastmod: "2021-12-20T09:09:32+00:00"
 description: "Vulnerability information and TCK test status details are available and easily detectable with JDKMon 17.0.18."

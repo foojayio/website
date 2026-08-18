@@ -1,6 +1,5 @@
 ---
 title: "OpenAPI Generator: From YAML to JetBrains HTTP Client"
-slug: "creating-an-openapi-generator-from-scratch-from-yaml-to-jetbrains-http-client"
 date: "2023-11-10T10:41:35+00:00"
 lastmod: "2023-11-10T11:03:10+00:00"
 description: "In this article, I'll be implementing an openapi generator from scratch so you can too! We'll be creating a very simple generator for the Jetbrains HTTP Client."
@@ -87,7 +86,7 @@ As you can see, the object is essentially a lot of key/value pairs that are quit
 To create our own client, we will take advantage of this nice work. Let's dive into it. We first clone the repository:
 
 ```
-$ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f68667b4f68667b677a6d216c6062">[email protected]</a>:OpenAPITools/openapi-generator.git; cd openapi-generator
+$ [email protected]:OpenAPITools/openapi-generator.git; cd openapi-generator
 ```
 
 We can then use the `/new.sh` script to generate a few placeholder files for us. We'll be generating a client, and since we're not creating any bugs we won't be generating test files.
@@ -171,7 +170,7 @@ public class JavaMagazineClientClientCodegen extends DefaultCodegen implements C
 
 Now that we have our baseline, what we want to do is work on our mustache files. Those files are basically templates that will be fed into the processing pipeline to generate our `.http` files.
 
-We know we want one file per main API endpoint, with some documentation. We also want the [code\>@name\</code](/cdn-cgi/l/email-protection#23404c474605445718634d424e46054f57180c404c4746) unique identifier from the Jetbrains HTTP Client to be able [to reference our code](https://www.jetbrains.com/help/idea/exploring-http-syntax.html?ref=lengrand.fr#http_request_names). Finally, we want to add the supported content type for the calls.
+We know we want one file per main API endpoint, with some documentation. We also want the [code\>@name\</code](/cdn-cgi/l/email-protection#b6d5d9d2d390d1c28df6d8d7dbd390dac28d99d5d9d2d3) unique identifier from the Jetbrains HTTP Client to be able [to reference our code](https://www.jetbrains.com/help/idea/exploring-http-syntax.html?ref=lengrand.fr#http_request_names). Finally, we want to add the supported content type for the calls.
 
 If we look at the data object available for operations, we end up with this, where each `{{item}}` notation is the value of the item key inside the object.
 

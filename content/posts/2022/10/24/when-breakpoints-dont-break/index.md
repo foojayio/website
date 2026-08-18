@@ -1,6 +1,5 @@
 ---
 title: "When Breakpoints Don't Break"
-slug: "when-breakpoints-dont-break"
 date: "2022-10-24T07:24:44+00:00"
 lastmod: "2022-10-24T07:24:52+00:00"
 description: "Tracepoints, also known as Logpoints, are gaining name recognition. But some still don't know about the non-breaking breakpoints family."

@@ -1,6 +1,5 @@
 ---
 title: "How to Configure Your Java XML Parsers to Prevent XXE Attacks"
-slug: "how-to-configure-your-java-xml-parsers-to-prevent-xxe-attacks"
 date: "2020-11-06T11:27:18+00:00"
 lastmod: "2020-11-06T11:44:16+00:00"
 description: "With XML eXternal Entity (XXE) enabled, it is possible to create a malicious XML, and read the content of an arbitrary file on the machine."

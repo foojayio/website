@@ -1,6 +1,5 @@
 ---
 title: "First Experiments with Java on the LattePanda IOTA: An Alternative to Raspberry Pi?"
-slug: "first-experiments-with-java-on-the-lattepanda-iota"
 date: "2025-12-11T09:13:14+00:00"
 lastmod: "2025-12-11T16:25:58+00:00"
 description: "After years of experimenting with Raspberry Pi boards, Java, JavaFX, and Pi4J to control electronics, I wanted to explore whether my knowledge and - by Frank Delporte"
@@ -17,10 +16,10 @@ categories:
   - "Videos"
 tags:
 related_posts:
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
   - "foojay-podcast-83"
-  - "introducing-a-new-java-dmx512-library-with-demo-javafx-user-interface"
 frozen: false
 ---
 

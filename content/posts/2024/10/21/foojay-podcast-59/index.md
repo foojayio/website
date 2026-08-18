@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #59: DevRel Explained!"
-slug: "foojay-podcast-59"
 date: "2024-10-21T10:42:21+00:00"
 lastmod: "2025-11-13T08:42:09+00:00"
 description: "What do people who have Developer Relations as their job description do? And how do you become a conference speaker? You'll learn in this Foojay podcast! "

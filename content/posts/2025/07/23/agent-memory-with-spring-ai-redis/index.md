@@ -1,6 +1,5 @@
 ---
 title: "Agent Memory with Spring AI & Redis"
-slug: "agent-memory-with-spring-ai-redis"
 date: "2025-07-23T16:34:04+00:00"
 lastmod: "2025-09-05T10:01:06+00:00"
 description: "Learn how to build a memory-enabled AI agent using Spring Boot, Spring AI, and Redis. Store and recall user preferences and conversation history for personalized, context-aware responses."
@@ -16,8 +15,8 @@ tags:
 related_posts:
   - "semantic-caching-with-springboot-redis"
   - "checking-out-junie-a-coding-agent-by-jetbrains"
+  - "idempotent-spring-boot-starter"
   - "exposed-kotlin-orm-complete-guide"
-  - "foojay-podcast-99"
 frozen: false
 ---
 

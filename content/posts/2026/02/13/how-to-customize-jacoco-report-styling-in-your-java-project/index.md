@@ -1,6 +1,5 @@
 ---
 title: "How to Customize JaCoCo Report Styling in Your Java Project"
-slug: "how-to-customize-jacoco-report-styling-in-your-java-project"
 date: "2026-02-13T13:10:45+00:00"
 lastmod: "2026-02-13T14:27:43+00:00"
 description: "JaCoCo is the go-to code coverage tool for Java projects. It integrates seamlessly with Maven, generates detailed HTML reports, and works out of the box. - by Bruno Borges"

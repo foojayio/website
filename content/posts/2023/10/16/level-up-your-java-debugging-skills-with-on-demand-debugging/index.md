@@ -1,6 +1,5 @@
 ---
 title: "Level-up your Java Debugging Skills with on-demand Debugging"
-slug: "level-up-your-java-debugging-skills-with-on-demand-debugging"
 date: "2023-10-16T14:21:24+00:00"
 lastmod: "2023-10-16T14:21:25+00:00"
 description: "Learn about onthrow and onjcmd and more that can improve the performance of on-demand debugging, as this allows us to trigger the start of the debugging session from outside the debugger."

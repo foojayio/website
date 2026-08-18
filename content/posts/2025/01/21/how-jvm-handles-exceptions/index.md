@@ -1,6 +1,5 @@
 ---
 title: "How JVM handles exceptions"
-slug: "how-jvm-handles-exceptions"
 date: "2025-01-21T14:45:12+00:00"
 lastmod: "2025-01-21T14:49:17+00:00"
 description: "It's interesting to know how the JVM runs bytecode instructions... But do you know what is going on when an exception is thrown? How does JVM handle the delegation of control? What does it look like in the bytecode?"

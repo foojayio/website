@@ -1,6 +1,5 @@
 ---
 title: "Soft Assertions - testing kindly"
-slug: "soft-assertions-testing-kindly"
 date: "2024-01-19T10:17:45+00:00"
 lastmod: "2024-01-20T10:51:23+00:00"
 description: "Using the concept of soft-assertions makes testing the impact of our changes on a single object a lot more convenient, and reduces the potential need for reruns."

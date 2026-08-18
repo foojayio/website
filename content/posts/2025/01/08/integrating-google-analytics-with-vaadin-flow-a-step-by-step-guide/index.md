@@ -1,6 +1,5 @@
 ---
 title: "Integrating Google Analytics With Vaadin Flow: A Step-By-Step Guide"
-slug: "integrating-google-analytics-with-vaadin-flow-a-step-by-step-guide"
 date: "2025-01-08T11:55:48+00:00"
 lastmod: "2025-01-09T17:13:27+00:00"
 description: "Want to track how users interact with your Vaadin Flow application? Learn how to integrate Google Analytics with a clean, reusable component."

@@ -1,6 +1,5 @@
 ---
 title: "Enter the Cloud Native Dojo: Blackbelt-Level Debugging"
-slug: "enter-the-cloud-native-dojo-blackbelt-level-debugging"
 date: "2022-02-22T13:28:42+00:00"
 lastmod: "2022-02-22T13:30:35+00:00"
 description: "In this article, I want to go over three challenges we face when debugging modern applications: polyglot, unreproducible, data pollution."
@@ -24,7 +23,7 @@ Debugging is often viewed as an art form or a craft. This is true for most engin
 In his book, "[Why Programs Fail --- A Guide to Systemic Debugging](https://www.amazon.com/Why-Programs-Fail-Systematic-Debugging/dp/0123745152)", Andreas Zeller told a story from his youth working at a computer store. A customer walked into the store with a new Commodore 64 computer. For context: The computers back then booted directly to a basic interpreter; basic would accept line numbers as the first argument. He tried inputting this valid basic line:
 
 ```java
-10 print “Hello World”<code class="language-basic"></code>
+10 print “Hello World”
 ```
 
 And he got a syntax error. He was surprised since the program seemed correct and it isn't exactly complex. You can probably understand it without knowing any Basic...
@@ -47,8 +46,7 @@ In this article, I want to go over three big challenges we face when debugging m
 2. Debugging the Unreproducible
 3. Data Pollution
 
-1. Polyglot Debugging
----------------------
+## 1. Polyglot Debugging
 
 This isn't a new problem. As a person who used to build JVMs for a living, I would occasionally "meta debug": debugging the debug support for the JVM. That sent me between Java and native code with both debuggers running and stepping through.
 
@@ -60,8 +58,7 @@ With serverless, this problem has become even worse. Reproducing a serverless en
 
 [Remote debugging is problematic, risky,](https://talktotheduck.dev/psa-the-risks-of-remote-jdwp-debugging) and it can't scale for complex deployments. So a lot of developers limit themselves to logging and maybe some observability tools. While that can help with some problems, these are poor replacements to local debugging. Continuous observability tools provide us with a way to go beyond simple monitoring. We can get source-level debugging similar to traditional debuggers on production servers.
 
-2. Debugging the Unreproducible
--------------------------------
+## 2. Debugging the Unreproducible
 
 There are two types of unreproducible bugs: those we can't reproduce locally and those we can't reproduce at all. If we can reproduce the issue in production, we can use a continuous observability tool to inspect the server.
 
@@ -69,8 +66,7 @@ However, if we can't, we're effectively stuck with log and observability analysi
 
 As developers, we need to fight the culture of closing bugs with "can't reproduce." This is a cop-out. A can't-reproduce scenario should add logs or similar guards to verify assumptions held by the developer. That way, we won't get caught again with the can't reproduce conundrum.
 
-3. Data Pollution
------------------
+## 3. Data Pollution
 
 We often think of bugs as failures, crashes and downtime. While those are indeed bad, they are often the best bugs. We know there's a problem and the solution is usually obvious and immediate.
 

@@ -1,6 +1,5 @@
 ---
 title: "Bring AI into your Jakarta EE apps with LangChain4J-CDI"
-slug: "bring-ai-into-your-jakarta-ee-apps-with-langchain4j-cdi"
 date: "2026-01-24T17:20:02+00:00"
 lastmod: "2026-01-26T22:03:09+00:00"
 description: "Goal: This article will demonstrate how to add AI features to a Jakarta EE / MicroProfile application using LangChain4J‑CDI, with simple to implement - by Buhake Sindi"

@@ -1,6 +1,5 @@
 ---
 title: "AI4Devs - Schedule published"
-slug: "ai4devs-schedule-published"
 date: "2025-09-01T20:05:04+00:00"
 description: "We are happy to announce the Schedule for AI4Devs. Talks 50% live coding showing libraries in Python, Java, Kotlin, Data Science and JScript."
 authors:
@@ -14,7 +13,7 @@ related_posts:
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
   - "jc-ai-newsletter-4"
   - "2023-software-conferences-in-the-philippines"
-  - "spring-ai-agents-no-second-runtime"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -54,8 +53,8 @@ Attendees will also find deep dives into:
 
 Here's a quick snapshot of who's speaking and what they'll be covering:
 
-|   Time    |                                              Speaker                                               |                                                                              Talk                                                                              |                                                  Image                                                  |
-|-----------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+|   Time    |                                              Speaker                                               |                                                                              Talk                                                                              |                         Image                          |
+|-----------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
 | **10:15** | [Josh Long](https://amsterdam.ai4devs.io/speakers/josh-long) (Spring Developer Advocate, Broadcom) | [*Bootiful Artificial Intelligence*](https://amsterdam.ai4devs.io/speakers/josh-long)                                                                          | ![Josh Long](josh-long-300x260.png)                    |
 | **11:00** | [Pratik Patel](https://amsterdam.ai4devs.io/speakers/pratik-patel) (Azul)                          | [*AI-Powered Data Exploration: Interacting with Apache Iceberg via Spark and LLMs*](https://amsterdam.ai4devs.io/speakers/pratik-patel)                        | ![Pratik Patel](pratik-patel-300x260.jpeg)             |
 | **11:55** | [Anton Arhipov](https://amsterdam.ai4devs.io/speakers/anton-arhipov) (JetBrains)                   | [*Building AI Agents in Kotlin*](https://amsterdam.ai4devs.io/speakers/anton-arhipov)                                                                          | ![Anton Arhipov](anton-arhipov-300x260.jpg)            |

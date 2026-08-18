@@ -1,6 +1,5 @@
 ---
 title: "Detect and Fix Memory Leaks in Managed Languages"
-slug: "debugging-ram-detect-fix-memory-leaks-in-managed-languages-heap-deep-dive-part-2"
 date: "2022-02-10T08:45:27+00:00"
 lastmod: "2022-02-10T08:47:28+00:00"
 description: "Java and JavaScript are garbage collected languages. But memory leaks can still plague them. How to avoid, detect, and fix heap problems?"
@@ -16,7 +15,7 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
   - "polyglot-cloud-native-debugging-beyond-apm-and-logging"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

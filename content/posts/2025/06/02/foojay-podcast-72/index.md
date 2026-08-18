@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #72: JCon Report, Part 1 - Grow your career, public speaking, 30 years of Java, greener coding,..."
-slug: "foojay-podcast-72"
 date: "2025-06-02T13:55:37+00:00"
 lastmod: "2025-11-13T08:37:00+00:00"
 description: "On May 13th and 14th, Foojay attended the JCON conference in Köln, Germany, where we did over 30 live-stream interviews. In this episode, we present to - by Brian Vermeer"

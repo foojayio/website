@@ -1,6 +1,5 @@
 ---
 title: "Sustainability Starts with Your Runtime: Meet a Green JVM"
-slug: "sustainability-starts-with-your-runtime-meet-a-green-jvm"
 date: "2025-07-15T14:20:00+00:00"
 lastmod: "2025-11-10T12:39:56+00:00"
 description: "Whether you’re a sustainability lead, a FinOps architect, or a Java developer who just cares about clean code and a cleaner planet, Azul Platform Prime deserves a look!"

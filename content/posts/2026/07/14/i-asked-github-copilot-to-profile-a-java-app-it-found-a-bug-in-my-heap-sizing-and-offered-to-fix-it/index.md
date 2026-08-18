@@ -1,6 +1,5 @@
 ---
 title: "I Asked GitHub Copilot to Profile a Java App. It Found a Bug in My Heap Sizing, and Offered to Fix It"
-slug: "i-asked-github-copilot-to-profile-a-java-app-it-found-a-bug-in-my-heap-sizing-and-offered-to-fix-it"
 date: "2026-07-14T14:42:11+00:00"
 lastmod: "2026-07-15T07:41:12+00:00"
 description: "I built an extension to collapse the entire loop of running and measuring the performance of Java workloads, so it can be used within a place some - by Bruno Borges"

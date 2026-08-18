@@ -13,7 +13,7 @@ images, and delivering it (pull request, fork, or zip).
 - Posts are contributed via pull request (fork the repo if you don't have write access).
 - Each post is a folder under `content/posts/<year>/<month>/<day>/<your-slug>/`
   with the text in `index.md` and its images in the same folder. Copy
-  `template/index.md` as your starting point.
+  `template/post.md` as your starting point.
 - New author? Add yourself under `content/authors/<first-letter>/<your-slug>/`
   in the same PR.
 - Preview locally with `hugo server -D`, then check

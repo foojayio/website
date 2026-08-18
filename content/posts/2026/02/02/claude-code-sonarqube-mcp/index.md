@@ -1,6 +1,5 @@
 ---
 title: "Claude Code SonarQube MCP: A Java Developer’s Workflow"
-slug: "claude-code-sonarqube-mcp"
 date: "2026-02-02T15:15:17+00:00"
 lastmod: "2026-02-13T15:58:22+00:00"
 description: "Stay in the flow with the Claude Code SonarQube MCP integration. Verify Java code, fix security issues, and check quality gates directly from your terminal."

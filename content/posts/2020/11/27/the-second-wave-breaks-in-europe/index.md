@@ -1,6 +1,5 @@
 ---
 title: "Using Java to Analyze The Second Wave Breaking in Europe"
-slug: "the-second-wave-breaks-in-europe"
 date: "2020-11-27T09:47:14+00:00"
 lastmod: "2020-11-27T10:15:35+00:00"
 description: "With the Software ECG Covid-19 Edition, you can evaluate the most important Covid-19 time series across countries. Read on for details!"

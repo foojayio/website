@@ -1,6 +1,5 @@
 ---
 title: "Serverless is the New Timeshare"
-slug: "serverless-is-the-new-timeshare"
 date: "2022-09-09T07:53:18+00:00"
 lastmod: "2022-09-09T07:54:38+00:00"
 description: "Remember mainframes? Serverless is that: we own the machine and you rent out time on our big iron. We went full circle on progress..."
@@ -15,7 +14,7 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "production-horrors-handling-disasters-public-debrief"
   - "debugging-gson-moshi-and-jackson-json-frameworks-in-production"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

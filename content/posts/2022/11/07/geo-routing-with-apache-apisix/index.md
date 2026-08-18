@@ -1,6 +1,5 @@
 ---
 title: "Geo-routing with Apache APISIX"
-slug: "geo-routing-with-apache-apisix"
 date: "2022-11-07T16:41:47+00:00"
 lastmod: "2022-11-07T16:41:48+00:00"
 description: "Geo-routing is a requirement for successful apps and businesses. Apache APISIX doesn't provide it out-of-the-box..."

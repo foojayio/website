@@ -1,6 +1,5 @@
 ---
 title: "Video series “JavaFX In Action”, Part 2"
-slug: "video-series-javafx-in-action-part-2"
 date: "2024-11-22T14:31:11+00:00"
 lastmod: "2024-11-22T14:31:12+00:00"
 description: "In this part, we have four new interviews for you! Learn more about JavaFX combined with Scala, Swing, React, trains, scientific research, banking, and more..."

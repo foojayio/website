@@ -1,6 +1,5 @@
 ---
 title: "Enriching Kafka Applications with Contextual Data"
-slug: "enriching-kafka-applications-with-contextual-data"
 date: "2023-05-18T15:11:22+00:00"
 lastmod: "2023-05-18T15:55:42+00:00"
 description: "Hazelcast can process real-time and batch data in one platform, making it the right platform to use because it enriches your Kafka apps."
@@ -61,7 +60,7 @@ Start a Hazelcast local cluster: This will run a Hazelcast cluster in client/ser
 ```
 brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9b1b8a3bcb5bab8aaad99ecf7ebf7ea">[email protected]</a>
+brew install [email protected]
 
 hz -V
 
@@ -75,7 +74,7 @@ To add more members to your cluster, open another terminal window and rerun the 
 ```
 brew tap hazelcast/hz
 
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c9c0dbc4cdc2c0d2d58cccc0cfc0c6c4ccc4cfd58cc2c4cfd5c4d3e1948f938f92">[email protected]</a>
+brew install [email protected]
 
 hz-mc -V
 
@@ -272,7 +271,7 @@ SELECT * FROM trade_map;
 
 The following diagram explains our demo setup; we have a Kafka topic called trades which contains a collection of trades that will be ingested into a Hazelcast cluster.
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-98378" src="Hazelcast-Kafka-700x289.png" alt="" width="700" height="289">
+{{< img src="Hazelcast-Kafka-700x289.png" class="size-medium" width="700" height="289" >}}
 
 Additionally, a companies map represents companies' data stored in the Hazelcast cluster.
 

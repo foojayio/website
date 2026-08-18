@@ -1,6 +1,5 @@
 ---
 title: "How Chat Memory Manipulation Can Ruin Your AI System"
-slug: "how-chat-memory-manipulation-can-ruin-your-ai-system"
 date: "2025-10-16T10:45:59+00:00"
 lastmod: "2025-10-16T10:46:02+00:00"
 description: "Did you know that by tampering with chat history, you're able to make LLMs respond and execute functions that are out of policy?"

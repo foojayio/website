@@ -1,6 +1,5 @@
 ---
 title: "Augmenting the client with Vue.js"
-slug: "augmenting-the-client-with-vue-js"
 date: "2024-10-14T10:53:42+00:00"
 lastmod: "2024-10-14T10:53:44+00:00"
 description: "In this article, I take my first steps in augmenting an SSR app with Vue."
@@ -85,7 +84,7 @@ If you're used to developing APIs, you're familiar with the `body()` function; i
 Here's the code on the HTML side:
 
 ```html
-<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="513029383e2211607f66">[email protected]</a>/dist/axios.min.js"></script> <!--1-->
+<script th:src="@{/webjars/axios/dist/axios.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/axios.min.js"></script> <!--1-->
 <script th:src="@{/webjars/vue/dist/vue.global.js}" src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script> <!--2-->
 <script th:src="@{/vue.js}" src="../static/vue.js"></script>             <!--3-->
 <script th:inline="javascript">

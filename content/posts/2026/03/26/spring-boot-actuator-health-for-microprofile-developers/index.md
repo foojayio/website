@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Actuator Health for MicroProfile Developers"
-slug: "spring-boot-actuator-health-for-microprofile-developers"
 date: "2026-03-26T09:30:00+00:00"
 description: "This post will help you map your MicroProfile Health knowledge to Spring’s world."
 canonical: "https://payara.fish/blog/spring-boot-actuator-health-for-microprofile-developers/"
@@ -15,10 +14,10 @@ categories:
   - "Spring"
 tags:
 related_posts:
+  - "idempotent-spring-boot-starter"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-  - "spring-ai-agents-no-second-runtime"
 frozen: false
 ---
 

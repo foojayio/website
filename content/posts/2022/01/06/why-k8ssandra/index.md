@@ -1,6 +1,5 @@
 ---
 title: "Why K8ssandra?"
-slug: "why-k8ssandra"
 date: "2022-01-06T12:10:09+00:00"
 lastmod: "2022-01-06T12:12:16+00:00"
 description: "Read all about how K8ssandra is an open source project with the mission of capturing SRE knowledge and best practices."

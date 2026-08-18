@@ -1,6 +1,5 @@
 ---
 title: "How to find dead code in your Java services"
-slug: "how-to-find-dead-code-in-your-java-services"
 date: "2023-11-07T10:40:48+00:00"
 lastmod: "2023-11-07T14:53:08+00:00"
 description: "There’s an interesting relation between the problem of finding dead code and another widespread practice: measuring code coverage for tests."
@@ -35,7 +34,11 @@ Carlos Becker^[1](#b5c1e9e5-5fce-4bfe-9cb7-6477372782a0){#b5c1e9e5-5fce-4bfe-9cb
 
 First, we need to get the JaCoCo Java agent JAR. We can retrieve it from the latest [release](https://github.com/jacoco/jacoco/releases/latest) or the central Maven repository. There are several ways to get this JAR in your Kubernetes pod, such as copying it into the container's image or making it available through a mounted volume. Once it's available, it's time to start configuring the JVM. We can configure the agent using the `-javaagent` JVM argument. There are plenty of [configuration options](https://www.eclemma.org/jacoco/trunk/doc/agent.html). At Picnic, we run it as follows:{#b736}
 
-`-javaagent:/path/to/jacocoagent.jar=includes=tech.picnic.*,output=tcpserver,address=*`{#b736}
+{#b736}
+
+```
+-javaagent:/path/to/jacocoagent.jar=includes=tech.picnic.*,output=tcpserver,address=*
+```
 
 This enables the JaCoCo Java agent and configures it to only instrument classes in our `tech.picnic.*` packages. The more specific we are here, the less performance overhead we will have, as fewer classes will be instrumented. We also configure JaCoCo to write to incoming TCP connections through `tcpserver`, which we will use to interact with the agent. Using the server, we can fetch the data anytime while the pod is alive.{#fe68}
 > *Note: As we expose a server here, security is important. By default, the JaCoCo server listens on port 6300. By setting `address=*` we only allow connections from local addresses. We do not expose port 6300 in our containers and services. We will later show that we perform Kubernetes port-forwarding when interacting with the JaCoCo Java agent.*{#7355}
@@ -146,12 +149,7 @@ Source: [Gist on GitHub](https://gist.github.com/Badbond/0777680409ce28349c79241
 
 Now that we have generated a report, we can inspect the generated `report/index.html` and look for coverage on some suspected legacy code. We are looking for red lines, which means the code is not covered. Let's dive into some examples.{#d3a0}
 
-<figure class="wp-block-image is-resized">
- <img fetchpriority="high" decoding="async" src="https://miro.medium.com/v2/resize:fit:473/0*qYvVZekF-qruyoxt" alt="" style="width:546px;height:125px" width="546" height="125">
- <figcaption class="wp-element-caption">
-  A service method marked for deletion which has not been executed.
- </figcaption>
-</figure>
+{{< img src="https://miro.medium.com/v2/resize:fit:473/0*qYvVZekF-qruyoxt" class="is-resized" width="546" height="125" style="width:546px;height:125px" caption="A service method marked for deletion which has not been executed." >}}
 
 This bit of legacy code has been around for a few years already and has been marked as deprecated for a few months already. When searching for usages of this method across organization repositories, we find that it is indeed unused apart from tests!{#189a}
 

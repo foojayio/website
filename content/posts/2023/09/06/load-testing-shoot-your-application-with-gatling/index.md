@@ -1,6 +1,5 @@
 ---
 title: "Load testing - shoot your application with Gatling"
-slug: "load-testing-shoot-your-application-with-gatling"
 date: "2023-09-06T09:32:29+00:00"
 lastmod: "2023-09-06T09:32:30+00:00"
 description: "Load testing entails testing how our application performs under a significant load so we can be certain it behaves as expected when there’s an influx of users."

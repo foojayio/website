@@ -1,6 +1,5 @@
 ---
 title: "Preventing Cross-Site Scripting (XSS) in Java with Snyk Code"
-slug: "preventing-cross-site-scripting-xss-in-java-applications-with-snyk-code"
 date: "2023-06-09T15:23:39+00:00"
 lastmod: "2023-06-09T15:23:40+00:00"
 description: "By taking a proactive approach to XSS prevention and using the right resources and tools, developers can help ensure the security and integrity of their Java web applications. - by Brian Vermeer"

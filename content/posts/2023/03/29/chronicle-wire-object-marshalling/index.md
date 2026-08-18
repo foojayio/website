@@ -1,6 +1,5 @@
 ---
 title: "Chronicle Wire: Object Marshalling"
-slug: "chronicle-wire-object-marshalling"
 date: "2023-03-29T13:35:43+00:00"
 lastmod: "2023-03-29T13:36:37+00:00"
 description: "About the efficiencies of using Chronicle Wire to encode small Strings into long primitives and how this improves serialisation performance."

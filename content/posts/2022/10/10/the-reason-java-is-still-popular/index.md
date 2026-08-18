@@ -1,6 +1,5 @@
 ---
 title: "The Reason Java is Still Popular"
-slug: "the-reason-java-is-still-popular"
 date: "2022-10-10T16:11:32+00:00"
 lastmod: "2022-10-10T16:16:04+00:00"
 description: "Java has maintained its popularity for such a long period of time: its conservative, slow, and steady approach is key to its success"

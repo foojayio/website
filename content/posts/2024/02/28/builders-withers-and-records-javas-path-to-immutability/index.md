@@ -1,6 +1,5 @@
 ---
 title: "Builders, Withers, and Records - Java’s path to immutability"
-slug: "builders-withers-and-records-javas-path-to-immutability"
 date: "2024-02-28T12:19:11+00:00"
 lastmod: "2024-03-06T11:01:56+00:00"
 description: "Immutability in Java with creational patterns Builders and Withers, along with a new type of immutable object in Java: Records."
@@ -15,7 +14,7 @@ related_posts:
   - "top-most-detected-issues-in-java-projects"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -101,7 +100,7 @@ With this approach though, we face potential issues in terms of readability and 
 ```
 public Person(String name, int age, String id, String phoneNumber, String email, Person parent1, Person parent2) { ... }
 
-Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14757a607b7a7d7b54716c75796478713a777b79">[email protected]</a>", juan, carla);
+Person person = new Person("Antonio", 15, 1445678, "+34 666 77 88 99", "[email protected]", juan, carla);
 ```
 
 In case we add more mandatory properties, as we see above, we need to add more parameters to the constructor and this will impact the existing code making us modify it on every call to the constructor.

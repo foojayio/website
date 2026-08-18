@@ -1,6 +1,5 @@
 ---
 title: "Java User Group PH Revitalization Report 2023"
-slug: "java-user-group-ph-report-2023"
 date: "2023-04-19T07:47:30+00:00"
 lastmod: "2023-04-19T08:11:15+00:00"
 description: "Event group report for the revitalized meetup of Java User Group PH. A meetup group focusing in Java ecosystem."

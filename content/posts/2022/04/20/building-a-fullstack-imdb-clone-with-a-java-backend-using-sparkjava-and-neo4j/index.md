@@ -1,6 +1,5 @@
 ---
 title: "Fullstack IMDB Clone with a Java Backend using SparkJava and Neo4j"
-slug: "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"
 date: "2022-04-20T07:11:02+00:00"
 lastmod: "2022-06-01T20:11:24+00:00"
 description: "Learn about a brand new Java developer course for Neo4J with Java 17, with lessons learned, code snippets, insights, and more!"

@@ -1,6 +1,5 @@
 ---
 title: "APISIX: An API Gateway the Apache Way"
-slug: "apisix-api-gateway"
 date: "2022-03-28T07:40:15+00:00"
 lastmod: "2022-03-28T07:40:16+00:00"
 description: "Starting with Apache APISIX as your API Gateway is easy as pie. Use Docker, with the APISIX and etcd images, and off you go."
@@ -79,7 +78,7 @@ APISIX provides several core objects:
 * Route:"The route matches the client's request by defining rules, then loads and executes the corresponding plugin based on the matching result, and forwards the request to the specified Upstream."
 * Service: A reusable object that binds both a set of plugins and an upstream.
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-55145 aligncenter" src="apisix-objects-479x510.png" alt="" width="479" height="510">
+{{< img src="apisix-objects-479x510.png" class="size-medium aligncenter" width="479" height="510" >}}
 
 Objects are stored in [etcd](https://etcd.io/), a distributed key-value store also used by Kubernetes. Apache APISIX exposes a REST API so that you can access the configuration in a technical-agnostic way. Here, we request all existing routes:
 

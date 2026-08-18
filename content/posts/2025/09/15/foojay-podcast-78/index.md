@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #78: Welcome to OpenJDK 25!"
-slug: "foojay-podcast-78"
 date: "2025-09-15T10:22:00+00:00"
 lastmod: "2025-11-13T08:35:06+00:00"
 description: "We're excited to present the first episode of the Foojay Podcast's fifth season, marking the release of OpenJDK 25! For the first time, an OpenJDK release - by Frank Delporte"

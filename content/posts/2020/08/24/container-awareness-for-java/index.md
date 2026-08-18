@@ -1,6 +1,5 @@
 ---
 title: "Container Awareness for Java Developers Today"
-slug: "container-awareness-for-java"
 date: "2020-08-24T08:55:22+00:00"
 lastmod: "2020-08-27T05:38:04+00:00"
 description: "When you containerize a Java application, make sure your base JDK image is container-aware so that the JDK can allocate memory and CPU counts properly."
@@ -13,9 +12,9 @@ categories:
 tags:
 related_posts:
   - "optimizing-the-garbage-collector-when-migrating-cloud-workloads"
+  - "idempotent-spring-boot-starter"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "jurassic-jdk-migrate-or-extinct"
-  - "quarkus-unpacked-insights-from-the-foojay-podcast"
 frozen: false
 ---
 

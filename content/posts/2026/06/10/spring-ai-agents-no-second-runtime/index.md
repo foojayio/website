@@ -1,6 +1,5 @@
 ---
 title: "Why Spring Teams Don't Need a Second Runtime for AI Agents"
-slug: "spring-ai-agents-no-second-runtime"
 date: "2026-06-10T19:02:58+00:00"
 lastmod: "2026-06-14T22:05:20+00:00"
 description: "AgentFlow4J is a JVM-native runtime for governed multi-agent systems. Build, govern and operate AI agents on your existing Spring infrastructure without introducing a second platform."
@@ -17,8 +16,8 @@ tags:
 related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-  - "boxlang-ai-series-complete-guide-to-building-ai-agents"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "A Walk to Lazy Fetching With Hibernate and Spring Data JPA"
-slug: "a-walk-to-lazy-fetching-with-hibernate-and-spring-data-jpa"
 date: "2021-11-17T11:47:30+00:00"
 lastmod: "2023-08-28T12:40:10+00:00"
 description: "Using FetchType.EAGER is a very bad practice, since our services may not require all the data of the mapped entities in all cases."
@@ -17,15 +16,25 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image is-resized">
- <img fetchpriority="high" decoding="async" src="oie_koKWLHXsUxuL.jpg" alt="" style="width:452px;height:226px" width="452" height="226">
-</figure>
+{{< img src="oie_koKWLHXsUxuL.jpg" class="is-resized" width="452" height="226" style="width:452px;height:226px" >}}
 
 ### Background
 
-Using `FetchType.EAGER` is a very bad practice, since our services may not require all the data of the mapped entities in all cases. And moreover, it is a bad idea to fetch so much data in a single session and makes the session heavy.
+Using
 
-Therefore we will refactor the code and use `FetchType.LAZY`.
+```
+FetchType.EAGER
+```
+
+is a very bad practice, since our services may not require all the data of the mapped entities in all cases. And moreover, it is a bad idea to fetch so much data in a single session and makes the session heavy.
+
+Therefore we will refactor the code and use
+
+```
+FetchType.LAZY
+```
+
+.
 
 Our old code for the entity was below:
 ![Domain model with fetch type EAGER](1_Tr3xvq9hSvqoK3LHNaib6g-445x510.png)

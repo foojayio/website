@@ -1,6 +1,5 @@
 ---
 title: "How I Improved Zero-Shot Classification in Deep Java Library (DJL) OSS: Enhancing Machine Learning Model Translators"
-slug: "how-i-improved-zero-shot-classification-in-deep-java-library-djl-oss"
 date: "2025-07-09T10:51:16+00:00"
 lastmod: "2025-07-09T11:00:59+00:00"
 description: "Learn how I improved zero-shot classification in Deep Java Library (DJL) by fixing token_type_ids support, optimizing logit handling, and aligning it with Hugging Face Transformers for accurate Java machine learning."

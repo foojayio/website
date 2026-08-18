@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of December 2024"
-slug: "javafx-links-of-december-2024"
 date: "2024-12-30T08:06:43+00:00"
 lastmod: "2024-12-30T10:27:45+00:00"
 description: "Here is the last overview of the JavaFX LinksOfTheMonth for 2024. You can find the weekly lists on jfx-central.com. We hope you enjoyed all the previous - by Frank Delporte"

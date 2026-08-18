@@ -1,6 +1,5 @@
 ---
 title: "Java Concurrency Best Practices for MongoDB"
-slug: "java-concurrency-best-practices-for-mongodb"
 date: "2025-06-12T15:30:29+00:00"
 lastmod: "2025-06-12T15:40:26+00:00"
 description: "In a multi-threaded, distributed environment like MongoDB, when clients execute queries concurrently, operations interleave with one another if they are - by Vivekanandan Sakthivelu"
@@ -33,7 +32,7 @@ Writes to a single document in MongoDB are [atomic](https://www.mongodb.com/docs
 The [example](https://gist.github.com/couragecowardlydog/34e8026bd74b69031b198f5e25b4adfe) below demonstrates this issue. Two threads read the same inventory document and update the quantity field independently. The reads and writes are not coordinated, meaning one thread's update may overwrite the other's, resulting in an inconsistent state.
 
 ```java
-<code class="language-java">package io.gitrebase;
+package io.gitrebase;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -95,7 +94,7 @@ public class InventoryUpdate {
             System.out.println("Error during update: " + e.getMessage());
         }
     }
-}</code>
+}
 ```
 
 To avoid lost updates, it's best to shift the responsibility for concurrency control to the database itself, where possible. For example, using atomic update operators like [`$inc`](https://www.mongodb.com/docs/manual/reference/operator/update/inc/?utm_campaign=devrel&utm_source=third-party-content&utm_medium=cta&utm_content=Java+Concurrency+Best+Practices&utm_term=tim.kelly#mongodb-update-up.-inc) allows MongoDB to apply changes directly without requiring a read-modify-write cycle in the application. This reduces the chance of conflicting updates and helps maintain data integrity even under concurrent access.
@@ -113,7 +112,7 @@ A non-repeatable read occurs when a client reads the same document multiple time
 For the [example](https://gist.github.com/couragecowardlydog/6457af17307f2f3f9acb8e4b1dcda4ab#file-nonrepeatableread-java) below, Client A reads a document before processing another query. Meanwhile, Client B modifies this document. Later, when Client A reads the same document again, it sees the modified version of the document, resulting in a non-repeatable read.
 
 ```java
-<code class="language-java">package io.gitrebase;
+package io.gitrebase;
 
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
@@ -189,7 +188,7 @@ public class NonRepeatableRead {
         clientAThread.join();
         clientBThread.join();
     }
-}</code>
+}
 ```
 
 * At time t1, Client A issues `findOne({ \_id: 'PIZZA\_001' })` on the products collection to retrieve product details.
@@ -263,7 +262,9 @@ The `rs.status().optimes.lastCommittedOpTime` command returns the timestamp of t
 Below, I've provided an [example](https://gist.github.com/couragecowardlydog/e0d417c37e7780b591fefa39d9281f26%20file=ReadConcernMajority.java) of `ReadConcern.MAJORITY` being used with MongoDB, which prevents rollback-prone reads.
 
 ```java
-`package io.gitrebase;
+
+```bash
+package io.gitrebase;
 
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -303,7 +304,9 @@ public class ReadConcernMajority {
             System.out.println("Found pizza: " + result.toJson());
         }
     }
-}`
+}
+```
+
 ```
 
 #### Snapshot
@@ -315,7 +318,7 @@ If a multi-document transaction uses \\`readConcern: "majority"\`, different rea
 In the previous example of a non-repeatable read, the entire sequence of operation can be isolated from the write operation using the MongoDB transaction API with an appropriate read concern.
 
 ```java
-<code class="language-java">package io.gitrebase;
+package io.gitrebase;
 
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
@@ -403,7 +406,7 @@ public class InventoryUpdateWithTransaction {
         clientAThread.join();
         clientBThread.join();
     }
-}</code>
+}
 ```
 
 Using SNAPSHOT isolation ensures the client observes a consistent view throughout the transaction, even if a concurrent write operation happens outside. The second read shows the same price as the first, despite Client B's concurrent update.

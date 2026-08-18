@@ -1,6 +1,5 @@
 ---
 title: "Five ways to pass parameters to Apache APISIX"
-slug: "five-ways-to-pass-parameters-to-apache-apisix"
 date: "2024-04-30T14:53:30+00:00"
 lastmod: "2024-04-30T14:53:31+00:00"
 description: "In this post, we list five alternatives to pass parameters server-side and explained how to access them on Apache APISIX."

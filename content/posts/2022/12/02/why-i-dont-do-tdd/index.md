@@ -1,6 +1,5 @@
 ---
 title: "Why I Don't do TDD"
-slug: "why-i-dont-do-tdd"
 date: "2022-12-02T08:59:00+00:00"
 lastmod: "2022-12-05T07:59:27+00:00"
 description: "Test Driven Development puts emphasis on unit over integration tests. The result can be lower quality featuring bugs baked into the product."

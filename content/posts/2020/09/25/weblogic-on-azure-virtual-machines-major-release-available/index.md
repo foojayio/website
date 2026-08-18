@@ -1,6 +1,5 @@
 ---
 title: "WebLogic on Azure Virtual Machines Major Release Available"
-slug: "weblogic-on-azure-virtual-machines-major-release-available"
 date: "2020-09-25T19:06:16+00:00"
 lastmod: "2020-09-25T19:08:25+00:00"
 description: "We are delighted to announce the availability of a major release for solutions to run Oracle WebLogic Server (WLS) on Azure Linux Virtual Machines."

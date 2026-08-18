@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of May 2023"
-slug: "javafx-links-of-may-2023"
 date: "2023-05-31T06:48:43+00:00"
 lastmod: "2023-05-31T06:51:37+00:00"
 description: "Again a busy month in JavaFX-world! Here is a nice list with links for your reading and clicking pleasure!"
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-april-2023"
   - "javafx-links-of-march-2023"
   - "javafx-links-of-february-2023"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

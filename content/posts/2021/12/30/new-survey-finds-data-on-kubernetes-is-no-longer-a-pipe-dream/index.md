@@ -1,6 +1,5 @@
 ---
 title: "New Survey Finds Data on Kubernetes Is No Longer a Pipe Dream"
-slug: "new-survey-finds-data-on-kubernetes-is-no-longer-a-pipe-dream"
 date: "2021-12-30T15:52:00+00:00"
 lastmod: "2022-01-13T17:25:53+00:00"
 description: "For people that work in infrastructure and application development, the pace of change is quick. Finish one project and it’s on to the next. Each - by Patrick McFadin"

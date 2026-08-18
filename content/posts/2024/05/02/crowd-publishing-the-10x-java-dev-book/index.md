@@ -1,6 +1,5 @@
 ---
 title: "Crowd-Publishing the 10x Java Dev Book"
-slug: "crowd-publishing-the-10x-java-dev-book"
 date: "2024-05-02T07:17:58+00:00"
 lastmod: "2024-05-02T07:17:59+00:00"
 description: "The “enlightenment roadmap” of a Java developer can be scary. How do you become the 10x Java Developer you always dreamed of becoming?"
@@ -29,7 +28,7 @@ That's the question Steve Poole and Olimpiu Pop embarked on to respond. And, wha
 
 [
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-110833" src="10xdev-700x465.png" alt="" width="700" height="465">
+{{< img src="10xdev-700x465.png" class="size-medium" width="700" height="465" >}}
 
 ](https://10xjava.dev/)
 

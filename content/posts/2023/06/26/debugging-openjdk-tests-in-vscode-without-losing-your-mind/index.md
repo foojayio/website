@@ -1,6 +1,5 @@
 ---
 title: "Debugging OpenJDK Tests in VSCode (Without Losing Your Mind)"
-slug: "debugging-openjdk-tests-in-vscode-without-losing-your-mind"
 date: "2023-06-26T11:27:55+00:00"
 lastmod: "2023-07-10T12:46:48+00:00"
 description: "jtreg is the test harness used by the JDK test framework. Attaching a debugger cumbersome to enable debugging in VSCode. But worry no more!"
@@ -49,27 +48,19 @@ Be sure always to pass `JTREG="VERBOSE=all"`: vsreg executes the command, parses
 
 You're now able to select "ASGCT debug" in "Run and Debug":  
 
-<figure class="aligncenter size-full is-resized">
- <img fetchpriority="high" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-04-38.png" alt="" class="wp-image-903" width="767" height="218">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-04-38.png" class="aligncenter size-full is-resized" width="767" height="218" >}}
 
 You can choose the launch config and run the jtreg test with a debugger:  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-07-40.png" alt="" class="wp-image-904" width="765" height="544">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-07-40.png" class="aligncenter size-full is-resized" width="765" height="544" >}}
 
 The debugger pauses on a segfault, but there are always a few at the beginning of the execution that can safely be ignored. We can use the program's pause to add a break-point at an interesting line. After hitting the break-point, we're able to inspect the local variables...  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-11-51.png" alt="" class="wp-image-905" width="767" height="545">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-11-51.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ... and do things like stepping over a line:  
 
-<figure class="aligncenter size-full is-resized">
- <img loading="lazy" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-13-18.png" alt="" class="wp-image-906" width="767" height="545">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/Screenshot-from-2023-06-21-15-13-18.png" class="aligncenter size-full is-resized" width="767" height="545" >}}
 
 ## Recompilation
 

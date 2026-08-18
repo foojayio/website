@@ -1,6 +1,5 @@
 ---
 title: "How to Do Faster Maven Builds (Part 1)"
-slug: "faster-maven-builds-1"
 date: "2021-10-14T08:27:35+00:00"
 lastmod: "2021-10-14T09:11:33+00:00"
 description: "Some techniques how to make your Maven builds faster in this article. The next article will focus on how to do the same inside of Docker."

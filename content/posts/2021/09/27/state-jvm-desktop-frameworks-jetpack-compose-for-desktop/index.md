@@ -1,6 +1,5 @@
 ---
 title: "Introducing Jetpack Compose for Desktop"
-slug: "state-jvm-desktop-frameworks-jetpack-compose-for-desktop"
 date: "2021-09-27T07:36:24+00:00"
 lastmod: "2021-09-27T08:46:58+00:00"
 description: "This article is dedicated to Jet Compose for Desktop, the new kid on the block that offers a completely different approach."

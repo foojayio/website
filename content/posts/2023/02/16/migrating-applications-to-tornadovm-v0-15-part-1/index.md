@@ -1,6 +1,5 @@
 ---
 title: "Migrating Applications to TornadoVM v0.15 (Part 1)"
-slug: "migrating-applications-to-tornadovm-v0-15-part-1"
 date: "2023-02-16T07:58:43+00:00"
 lastmod: "2023-02-16T08:00:37+00:00"
 description: "TornadoVM 0.15 introduced changes at the API level with the aim of making the exposed operations more comprehensive to the programmers."
@@ -30,8 +29,7 @@ This article has the following objectives:
 * Provide guidelines on how to define what to run on a device.
 * Provide guidelines on how existing TornadoVM programs can migrate to use the TornadoVM v0.15 API.
 
-1. TornadoVM Programming Model
-------------------------------
+## 1. TornadoVM Programming Model
 
 TornadoVM uses a programming model that derives from the state-of-the-art programming models of heterogeneous hardware accelerators, such as OpenCL, Level Zero, and CUDA. A key aspect for software applications that require to offload computations for hardware acceleration is that they are composed of two parts:
 
@@ -55,8 +53,7 @@ To follow the TornadoVM execution model, a programmer needs to use:
 * the **TaskGraph** object for the definition of the data to be transferred and the processing,
 * the **TornadoExecutionPlan** object for the configuration of the execution.
 
-2. *TornadoVM TaskGraphs: What to run on a device?*
----------------------------------------------------
+## 2. *TornadoVM TaskGraphs: What to run on a device?*
 
 TaskGraphs (or formerly known as TaskSchedules) are used in TornadoVM as a way to define the TornadoVM execution model within the host code. This is a TornadoVM object that is exposed to Java programmers and enables them to configure which data have to be transferred between the host and a device (Steps 1 and 3) and which Java method will be offloaded for hardware acceleration (Step 2).
 
@@ -93,9 +90,7 @@ A task can be defined as follows:
 
     taskGraph.task("sample", Class::methodA, input, output);
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="task-graph-1024x163.png" alt="" class="wp-image-62547" width="559" height="88">
-</figure>
+{{< img src="task-graph-1024x163.png" class="aligncenter size-large is-resized" width="559" height="88" >}}
 
 **Note:** The data in the **transferToHost** and **transferToDevice** methods, define the data flow between one or multiple tasks in a **TaskGraph**. In case data from one task is going to be consumed by another task, then it will be persisted into the device's memory and no copy will be involved.
 
@@ -116,14 +111,11 @@ The following code snippet sets one output array (output) to be transferred from
 
 **Note for migration:** The **streamOut()** and **copyOut()** methods of TornadoVM API (prior to v0.15) need to be replaced with the **transferToHost()** method and the first parameter has to be configured accordingly. If your program was using **streamOut()** , then data was moved in every execution, and you will have to use **DataTransferMode.EVERY_EXECUTION**.
 
-3. Create an Immutable Task Graph
----------------------------------
+## 3. Create an Immutable Task Graph
 
 Once a TaskGraph is defined, and the programmer is confident that the shape of the TaskGraph will not be altered, then it is necessary to capture a snapshot of the TaskGraph which will return an object of type **ImmutableTaskGraph**.  
 
-<figure class="aligncenter size-large is-resized">
- <img loading="lazy" decoding="async" src="taskgraph-snapshot-1024x79.png" alt="" class="wp-image-62548" width="644" height="49">
-</figure>
+{{< img src="taskgraph-snapshot-1024x79.png" class="aligncenter size-large is-resized" width="644" height="49" >}}
 
 This is a very simple process:
 
@@ -133,8 +125,7 @@ An immutable task graph cannot be modified. Thus, if programmers need to update 
 
 **Note:** This is a new feature that ensures that different shapes of a TaskGraph can co-exist in the same application. The benefit is that code (e.g., OpenCL, PTX, SPIR-V) is generated only for each **snapshot** of a **TaskGraph**, which allows programmers to invoke different versions of a TaskGraph without triggering re-compilation.
 
-4. Further reading and examples
--------------------------------
+## 4. Further reading and examples
 
 The TornadoVM modules for the [tornado-unittests](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-unittests) and the [tornado-examples](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples) contain a list of diverse applications that showcase how to use the new TornadoVM API. For more information see [here](https://tornadovm.readthedocs.io/en/latest/programming.html).
 

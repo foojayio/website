@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot Annotation Reference - 01/a"
-slug: "spring-boot-annotation-reference-01-a"
 date: "2022-12-22T09:57:33+00:00"
 lastmod: "2023-01-06T09:56:40+00:00"
 description: "Spring Boot Annotation Guide, providing an easy reference for daily development and provides code samples."
@@ -16,7 +15,7 @@ related_posts:
   - "spring-boot-annotation-reference-01-b"
   - "a-simple-service-with-spring-boot"
   - "better-error-handling-for-your-spring-boot-rest-apis"
-  - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

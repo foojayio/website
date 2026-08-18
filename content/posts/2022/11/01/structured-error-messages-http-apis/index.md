@@ -1,6 +1,5 @@
 ---
 title: "Structured Error Messages for HTTP APIs"
-slug: "structured-error-messages-http-apis"
 date: "2022-11-01T11:01:18+00:00"
 lastmod: "2022-11-01T11:01:20+00:00"
 description: "RFC 7807 helps API implementors as it provides quick guidelines to avoid reinventing the wheel on every project."

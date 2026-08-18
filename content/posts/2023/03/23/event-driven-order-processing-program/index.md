@@ -1,6 +1,5 @@
 ---
 title: "Event-Driven Order Processing Program"
-slug: "event-driven-order-processing-program"
 date: "2023-03-23T09:27:37+00:00"
 lastmod: "2023-03-23T09:36:41+00:00"
 description: "Following the Hello World example, this article looks at an Order Processor with a New Order Single in and an Execution Report out."

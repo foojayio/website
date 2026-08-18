@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of September"
-slug: "javafx-news-september-2022"
 date: "2022-09-30T08:58:10+00:00"
 lastmod: "2022-10-05T07:46:46+00:00"
 description: "The JavaFX links of the week are back on jfx-central.com, and here we collect the complete month for you in an excellent overview."
@@ -14,7 +13,7 @@ related_posts:
   - "beginning-javafx-with-intellij"
   - "wordish-with-javafx-part-5"
   - "new-java-javafx-library-fxskins-released"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

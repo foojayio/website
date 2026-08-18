@@ -1,6 +1,5 @@
 ---
 title: "Interview with Abdoulaye Wade Cissé: Using a JavaFX application as a virtual chemistry and biology lab"
-slug: "interview-with-abdoulaye-wade-cisse-using-a-javafx-application-as-a-virtual-chemistry-and-biology-lab"
 date: "2025-03-20T13:46:59+00:00"
 lastmod: "2025-03-20T13:47:00+00:00"
 description: "I continuously collect JavaFX-related content for the JFX Central Links Of The Week. Recently, I saw a video on LinkedIn, shared by Abdoulaye Wade Cissé, - by Frank Delporte"
@@ -16,7 +15,7 @@ related_posts:
   - "beginning-javafx-with-intellij"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
   - "creating-cad-applications-with-java-and-javafx"
-  - "introducing-sheetmusic4j-a-javafx-library-to-render-and-interact-with-sheet-music"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Handling Null: Optional and Nullable Types"
-slug: "handling-null-optional-and-nullable-types"
 date: "2022-04-04T08:06:37+00:00"
 lastmod: "2023-02-13T12:20:25+00:00"
 description: "Java is infamous for its NullPointerException: calling a method or accessing an attribute of an object that has not been initialized."
@@ -183,7 +182,7 @@ Besides inferring the correct type, Arrow's `Option` offers:
 * Other standard functions traditionally associated with monads, *e.g.* , `flatMap()` and `fold()`
 * Additional functions
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-55237 aligncenter" src="arrow-option-508x510.png" alt="" width="508" height="510">
+{{< img src="arrow-option-508x510.png" class="size-medium aligncenter" width="508" height="510" >}}
 
 For example, `fold()` allows to provide two lambdas, one to run when the `Option` is `Some`, the other when it's `None`:
 

@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of April 2023"
-slug: "javafx-links-of-april-2023"
 date: "2023-04-29T13:57:01+00:00"
 lastmod: "2023-04-29T13:57:38+00:00"
 description: "JavaFX Core, Conferences, Scene Builder, Gluon, JFX Central, Almas, Gerrit, Dirk, and much more... JavaFX Links of April 2023!"
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-march-2023"
   - "javafx-links-of-february-2023"
   - "javafx-links-of-january-2023"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

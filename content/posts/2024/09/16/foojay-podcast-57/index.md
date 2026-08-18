@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #57: Welcome to OpenJDK 23"
-slug: "foojay-podcast-57"
 date: "2024-09-16T11:34:40+00:00"
 lastmod: "2025-11-13T08:42:58+00:00"
 description: "OpenJDK (Java) 23 is (almost) here! This version introduces three new features to the language and runtime and many bug fixes, small improvements, and a longer list of preview features."

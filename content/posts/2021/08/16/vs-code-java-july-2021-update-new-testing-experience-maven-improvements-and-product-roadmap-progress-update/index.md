@@ -1,6 +1,5 @@
 ---
 title: "Announcing VS Code Java July 2021 Update"
-slug: "vs-code-java-july-2021-update-new-testing-experience-maven-improvements-and-product-roadmap-progress-update"
 date: "2021-08-16T07:23:34+00:00"
 lastmod: "2021-08-16T07:28:45+00:00"
 description: "Product roadmap progress, with improved user experiences of features for testing, Maven dependency management, and project management."

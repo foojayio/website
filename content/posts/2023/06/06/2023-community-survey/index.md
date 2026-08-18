@@ -1,6 +1,5 @@
 ---
 title: "Friends of OpenJDK Community Survey"
-slug: "2023-community-survey"
 date: "2023-06-06T08:33:06+00:00"
 lastmod: "2023-06-06T08:37:48+00:00"
 description: "Friends of OpenJDK Community Survey. Kickoff and instructions for a community driven data gathering exercise."

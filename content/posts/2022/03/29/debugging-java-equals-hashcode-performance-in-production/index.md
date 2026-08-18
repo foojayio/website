@@ -1,6 +1,5 @@
 ---
 title: "Debugging Java Equals & Hashcode Performance in Production"
-slug: "debugging-java-equals-hashcode-performance-in-production"
 date: "2022-03-29T06:50:17+00:00"
 lastmod: "2022-03-29T06:58:14+00:00"
 description: "Hashcode and equals are at the crux of many hard to nail down Java performance issues. Here's how to track these in production!"

@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of February 2023"
-slug: "javafx-links-of-february-2023"
 date: "2023-02-28T11:24:43+00:00"
 lastmod: "2023-02-28T11:25:04+00:00"
 description: "A lot of game and 3D development, releases, interesting ongoing development, and so much more to read. Enjoy reading and clicking!"
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-january-2023"
   - "javafx-links-of-december"
   - "javafx-links-of-november"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

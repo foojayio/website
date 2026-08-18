@@ -1,6 +1,5 @@
 ---
 title: "Deploying Spring Boot Application on Kubernetes"
-slug: "deploying-spring-boot-applications-on-kubernetes"
 date: "2021-02-26T17:51:44+00:00"
 lastmod: "2021-07-05T20:03:09+00:00"
 description: "Learn how you can create a pod, deploy a Spring Boot application, and manage the single node cluster with Lens IDE on Docker Desktop."

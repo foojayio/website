@@ -1,6 +1,5 @@
 ---
 title: "A Look at Sealed Classes, Pattern Matching, Functional Paradigms"
-slug: "embracing-modernity-a-comprehensive-look-at-sealed-classes-pattern-matching-and-functional-paradigms-in-java"
 date: "2023-09-11T08:42:17+00:00"
 lastmod: "2023-09-11T08:42:46+00:00"
 description: "Let's examine the principles and practical applications of Sealed Classes and pattern matching in Java."

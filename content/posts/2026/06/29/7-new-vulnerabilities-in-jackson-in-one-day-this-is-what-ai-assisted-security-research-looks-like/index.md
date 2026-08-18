@@ -1,6 +1,5 @@
 ---
 title: "7 Jackson CVEs in One Day: AI-Assisted Security Research"
-slug: "7-new-vulnerabilities-in-jackson-in-one-day-this-is-what-ai-assisted-security-research-looks-like"
 date: "2026-06-29T11:47:41+00:00"
 description: "Seven jackson-databind vulnerabilities, one researcher, one day. Two critical RCEs. This is AI-assisted security research in practice."
 authors:
@@ -14,7 +13,7 @@ related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
   - "grails-isnt-done-yet-part-1-inside-the-asf-reboot"
-  - "foojay-podcast-95"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

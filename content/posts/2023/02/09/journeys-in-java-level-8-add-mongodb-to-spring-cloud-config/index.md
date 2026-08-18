@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 8: Add MongoDB to Spring Cloud Config"
-slug: "journeys-in-java-level-8-add-mongodb-to-spring-cloud-config"
 date: "2023-02-09T16:56:28+00:00"
 lastmod: "2023-02-09T16:56:30+00:00"
 description: "Convert an existing MongoDB-connected service to use Spring Cloud Config for accessing database credentials, as with a Neo4j microservice."

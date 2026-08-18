@@ -1,6 +1,5 @@
 ---
 title: "Quest to the OS: Java Native Memory"
-slug: "the-quest-to-the-os-java-native-memory-foojay-today"
 date: "2022-04-08T04:19:05+00:00"
 lastmod: "2022-04-15T11:36:07+00:00"
 description: "Let’s embark on an epic journey to the wonderland of java native memory to the level of OS while investing in a non-trivial memory issue."

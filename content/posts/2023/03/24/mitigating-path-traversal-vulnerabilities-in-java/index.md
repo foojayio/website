@@ -1,6 +1,5 @@
 ---
 title: "Mitigating Path Traversal Vulnerabilities in Java"
-slug: "mitigating-path-traversal-vulnerabilities-in-java"
 date: "2023-03-24T07:57:06+00:00"
 lastmod: "2023-03-31T15:24:02+00:00"
 description: "Path traversal vulnerabilities are a serious threat to Java web applications, amongst the top security issues Snyk finds in Java code."

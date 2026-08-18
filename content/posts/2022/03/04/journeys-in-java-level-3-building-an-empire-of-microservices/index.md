@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 3: Building an Empire of Microservices"
-slug: "journeys-in-java-level-3-building-an-empire-of-microservices"
 date: "2022-03-04T16:23:40+00:00"
 lastmod: "2022-04-21T16:24:17+00:00"
 description: "Let’s continue our journey to learn microservice. Today we will learn to use a full-fledged MongoDB database running in a Docker container."
@@ -57,7 +56,7 @@ FROM mongo
 
 #Author
 #-------
-LABEL org.opencontainers.image.authors="Jennifer Reif,<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd0dbdbdcd3d0c7f5c1ddd0ddd0d6ded9d0c7c69bdac7d2">[email protected]</a>,@JMHReif"
+LABEL org.opencontainers.image.authors="Jennifer Reif,[email protected],@JMHReif"
 
 #expose the default port
 EXPOSE 27017
@@ -204,7 +203,7 @@ Next, we can start the service1 and service2 applications, either through an IDE
 
 And here is the resulting output!
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55183" src="microservices-lvl3-results-554x510.png" alt="" width="554" height="510">
+{{< img src="microservices-lvl3-results-554x510.png" class="size-medium" width="554" height="510" >}}
 
 ## Wrapping up!
 

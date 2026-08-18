@@ -1,6 +1,5 @@
 ---
 title: "Fix Java Security Issues While Coding in IntelliJ IDEA"
-slug: "fix-java-security-issues-while-coding-in-intellij-idea"
 date: "2021-04-29T17:10:33+00:00"
 lastmod: "2021-05-07T07:54:23+00:00"
 description: "Let’s see how we can integrate security and secure development into IntelliJ IDEA using the new Snyk vulnerability scanner plugin!"

@@ -1,6 +1,5 @@
 ---
 title: "Augmenting the client with HTMX"
-slug: "augmenting-the-client-with-htmx"
 date: "2024-10-14T12:37:39+00:00"
 lastmod: "2024-10-14T12:37:41+00:00"
 description: "In the two previous articles, I described Vue and Alpine. We configured Spring Boot to return JSON. With HTMX, we configured it to return HTML."
@@ -61,7 +60,7 @@ Here is how I integrate Thymeleaf and HTMX in the POM:
 The code on the HTML side is straightforward :
 
 ```html
-<script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="19716d746137766b7e59283720">[email protected]</a>/dist/htmx.min.js"></script> <!--1-->
+<script th:src="@{/webjars/htmx.org/dist/htmx.js}" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/htmx.min.js"></script> <!--1-->
 ```
 
 1. Add the HTMX dependency

@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of December"
-slug: "javafx-links-of-december"
 date: "2022-12-27T07:55:52+00:00"
 lastmod: "2022-12-27T07:55:53+00:00"
 description: "If anyone needs a reminder Java and JavaFX are \"alive and kicking\", you can not only check out jfx-central.com, but also the list below."
@@ -14,7 +13,7 @@ related_posts:
   - "foojay-podcast-9"
   - "javafx-links-of-november"
   - "javafx-links-of-october"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

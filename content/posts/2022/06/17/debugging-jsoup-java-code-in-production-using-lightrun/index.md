@@ -1,6 +1,5 @@
 ---
 title: "Debugging jsoup Java Code in Production Using Lightrun"
-slug: "debugging-jsoup-java-code-in-production-using-lightrun"
 date: "2022-06-17T09:35:06+00:00"
 lastmod: "2022-06-17T09:35:07+00:00"
 description: "Scraping is a fragile discipline. As a workaround, we often use a server. Debugging these issues is remarkably difficult. Or at least it was!"
@@ -187,7 +186,6 @@ Then, to find out how many entries we returned, we just go to the caller (which 
 
 ```
 Links query returned {links.size()}
-<img decoding="async" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1650465693574/unexIjfhz.png" alt="image5.png">
 ```
 
 This produces the following log which lets us see that we had 147 `a[href]` links. The beauty of this is that the additional logs are interlaced with the pre-existing logs in-context:

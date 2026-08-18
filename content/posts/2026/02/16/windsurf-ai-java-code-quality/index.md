@@ -1,6 +1,5 @@
 ---
 title: "Windsurf AI and SonarQube The Dream Team for AI Code Quality"
-slug: "windsurf-ai-java-code-quality"
 date: "2026-02-16T09:34:00+00:00"
 lastmod: "2026-02-16T09:35:10+00:00"
 description: "Boost your Windsurf AI Java coding! 🚀 Learn how to use Skills and MCP to connect SonarQube directly to your IDE for high quality code. 💻✨"
@@ -13,10 +12,10 @@ categories:
   - "LLM"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "spring-ai-agents-no-second-runtime"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 frozen: false
 ---
 
@@ -128,9 +127,7 @@ To bring **Code Quality** checks into Windsurf via MCP, you can use Docker:
 
 **Manual:** Add this to your \~/.codeium/windsurf/mcp_config.json file.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" width="849" height="607" src="Screenshot-2026-02-16-at-09.40.51.png" alt="" class="wp-image-122724" style="aspect-ratio:1.398688729316266;width:487px;height:auto">
-</figure>
+{{< img src="Screenshot-2026-02-16-at-09.40.51.png" class="size-full is-resized" width="849" height="607" style="aspect-ratio:1.398688729316266;width:487px;height:auto" >}}
 
 Or even easier, using the free extension [SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-intellij/), that you can install in major IDEs like VSCode or IntelliJ, you will have live analysis results on your IDE, plus a very convenient way to install SonarQube MCP server or even Windsurf Hooks to guarantee that all responses from the Agent go through a SonarQube analysis.
 ![](Screenshot-2026-02-16-at-08.54.42.png) ![](Screenshot-2026-02-16-at-09.05.28.png)

@@ -1,6 +1,5 @@
 ---
 title: "The Impact of the EU DORA Act on Non-EU Financial Organizations"
-slug: "the-impact-of-the-eu-dora-act-on-non-eu-financial-organizations"
 date: "2024-08-14T05:33:09+00:00"
 lastmod: "2024-09-05T06:31:52+00:00"
 description: "DORA is not just a regional EU regulation but one with far-reaching implications for the global financial services market."

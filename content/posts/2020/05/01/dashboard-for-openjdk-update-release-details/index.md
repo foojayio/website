@@ -1,6 +1,5 @@
 ---
 title: "OpenJDK Update Release Details Dashboard"
-slug: "dashboard-for-openjdk-update-release-details"
 date: "2020-05-01T14:59:00+00:00"
 lastmod: "2021-08-23T12:15:26+00:00"
 description: "Foojay is a one stop solution for everything related to Java. The Dashboard offers analysis, highlights, and categorized lists of updates by Java users."

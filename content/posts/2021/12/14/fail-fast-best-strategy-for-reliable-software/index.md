@@ -1,6 +1,5 @@
 ---
 title: "Fail-Fast Reliable Software Strategy. Debug Failures Effectively"
-slug: "fail-fast-best-strategy-for-reliable-software"
 date: "2021-12-14T15:30:46+00:00"
 lastmod: "2021-12-14T15:30:47+00:00"
 description: "A broken kitchen appliance leads me down the path of intelligent failure, downside risk, exponential growth and Cloud computing!"
@@ -15,7 +14,7 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "debugging-the-technical-interview-methods-and-cheating"
   - "the-debugger-checklist-part-ii"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

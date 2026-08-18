@@ -1,6 +1,5 @@
 ---
 title: "Jakarta Concurrency: Present and Future"
-slug: "jakarta-concurrency-present-and-future-2"
 date: "2022-07-13T13:38:25+00:00"
 lastmod: "2022-07-13T13:39:16+00:00"
 description: "Concurrency is a small fundamental spec under the Jakarta EE umbrella. As project lead, here's what it is, its future, and how to be involved!"

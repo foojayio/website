@@ -1,6 +1,5 @@
 ---
 title: "Reducing Tail Latencies with Chronicle Queue Enterprise"
-slug: "reducing-tail-latencies-with-chronicle-queue-enterprise"
 date: "2022-11-09T15:07:36+00:00"
 lastmod: "2022-11-09T15:08:08+00:00"
 description: "Fed up with pauses at the high percentiles in your application? You may want to consider Chronicle Queue Enterprise!"

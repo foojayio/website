@@ -1,6 +1,5 @@
 ---
 title: "What Java Version Are You Running?"
-slug: "what-java-version-are-you-running-lets-take-a-look-under-the-hood-of-the-jdk"
 date: "2022-12-15T08:59:05+00:00"
 lastmod: "2022-12-15T11:06:02+00:00"
 description: "Did you know there are multiple ways you check your Java version and even get much more information than you might think, very quickly?"
@@ -14,7 +13,7 @@ tags:
 related_posts:
   - "best-practice-comparative-evaluation-of-jdk-setups-azul-zulu-prime-vs-openjdk"
   - "jdb"
-  - "virtual-thread-pinning-field-guide"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -67,7 +66,7 @@ MODULES="java.base java.compiler ... jdk.unsupported jdk.unsupported.desktop jdk
 OS_ARCH="aarch64"
 OS_NAME="Darwin"
 SOURCE=".:git:3d665268e905"
- 
+
 $ cat /Users/frankdelporte/.sdkman/candidates/java/8.0.332-zulu//release
 JAVA_VERSION="1.8.0_332"
 OS_NAME="Darwin"
@@ -147,7 +146,7 @@ Property settings:
     user.home = /Users/frankdelporte
     user.language = en
     user.name = frankdelporte
- 
+
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
@@ -177,7 +176,7 @@ Locale settings:
         ...
         zh_MO_#Hant, zh_SG, zh_SG_#Hans, zh_TW, zh_TW_#Hant, zh__#Hans, zh__#Hant, zu,
         zu_ZA, zu_ZA_#Latn
- 
+
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
@@ -194,16 +193,16 @@ $ java -XshowSettings:vm -version
 VM settings:
     Max. Heap Size (Estimated): 8.00G
     Using VM: OpenJDK 64-Bit Server VM
- 
+
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)
- 
+
 $ java -XshowSettings:vm -Xmx512M -version
 VM settings:
     Max. Heap Size: 512.00M
     Using VM: OpenJDK 64-Bit Server VM
- 
+
 openjdk version "19" 2022-09-20
 OpenJDK Runtime Environment Zulu19.28+81-CA (build 19+36)
 OpenJDK 64-Bit Server VM Zulu19.28+81-CA (build 19+36, mixed mode, sharing)

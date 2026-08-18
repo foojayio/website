@@ -1,6 +1,5 @@
 ---
 title: "Hazelcast, from Embedded to Client-Server"
-slug: "hazelcast-from-embedded-to-client-server"
 date: "2021-04-23T06:58:00+00:00"
 lastmod: "2023-02-01T09:12:58+00:00"
 description: "Because Hazelcast is developed in Java, it's available as a JAR, and we can integrate it as a library in our application."

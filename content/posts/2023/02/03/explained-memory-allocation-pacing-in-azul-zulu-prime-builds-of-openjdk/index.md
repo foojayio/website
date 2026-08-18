@@ -1,6 +1,5 @@
 ---
 title: "Memory Allocation Pacing in Azul Zulu Prime builds of OpenJDK"
-slug: "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
 date: "2023-02-03T13:29:09+00:00"
 lastmod: "2025-07-15T14:25:48+00:00"
 description: "Allocation Pacing (AP) is a technique within the JVM of Azul Zulu Prime builds of OpenJDK to prevent long memory allocation delays."

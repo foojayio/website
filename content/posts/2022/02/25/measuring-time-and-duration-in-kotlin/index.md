@@ -1,6 +1,5 @@
 ---
 title: "Measuring Time and Durations in Kotlin"
-slug: "measuring-time-and-duration-in-kotlin"
 date: "2022-02-25T09:56:31+00:00"
 lastmod: "2022-02-25T09:57:22+00:00"
 description: "The DurationAPI is coming out of its experimental stage and offers a nice DSL to easily work with time durations."

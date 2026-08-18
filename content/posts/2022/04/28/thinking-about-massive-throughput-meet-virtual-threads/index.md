@@ -1,6 +1,5 @@
 ---
 title: "Thinking About Massive Throughput? Meet Virtual Threads!"
-slug: "thinking-about-massive-throughput-meet-virtual-threads"
 date: "2022-04-28T07:41:25+00:00"
 lastmod: "2022-04-28T11:03:35+00:00"
 description: "Virtual threads not only help to increase application throughput, they also provide a framework to refactor already existing code."

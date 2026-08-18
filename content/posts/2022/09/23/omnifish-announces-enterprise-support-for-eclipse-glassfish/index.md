@@ -1,6 +1,5 @@
 ---
 title: "OmniFish announces Eclipse GlassFish support"
-slug: "omnifish-announces-enterprise-support-for-eclipse-glassfish"
 date: "2022-09-23T09:15:34+00:00"
 lastmod: "2022-09-23T09:17:07+00:00"
 description: "OmniFish is a new international company that offers Java consulting and support for Eclipse GlassFish and a new cloud‑native runtime Piranha Cloud."

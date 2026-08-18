@@ -1,6 +1,5 @@
 ---
 title: "Why the Cool Kids Use Event Loops"
-slug: "why-the-cool-kids-use-event-loops"
 date: "2022-12-14T10:17:48+00:00"
 lastmod: "2023-01-19T08:43:02+00:00"
 description: "Check out some of the key points to consider, as well as a full code sample, when choosing to use event Loops!"

@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 5)"
-slug: "java-thread-programming-part-5"
 date: "2021-11-02T08:29:36+00:00"
 lastmod: "2021-11-16T15:04:06+00:00"
 description: "When a thread acquires a lock object, no other thread will be able to use it. Once a thread unlocks the lock, other threads acquire it again."

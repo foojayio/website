@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #40: Making Java Attractive for Beginners in Programming"
-slug: "foojay-podcast-40"
 date: "2024-01-15T09:06:04+00:00"
 lastmod: "2025-11-13T08:50:31+00:00"
 description: "How can we make the Java language more attractive for newbies? Let’s ask some experts…"

@@ -1,6 +1,5 @@
 ---
 title: "Trash Pandas Love Enterprise Java Garbage Code"
-slug: "trash-pandas-love-enterprise-java-garbage-code"
 date: "2024-08-13T08:16:55+00:00"
 lastmod: "2024-08-13T08:19:02+00:00"
 description: "If raccoons were software engineers, they would feel at home inside many enterprise systems. These systems are often full of unused and dead code that was written, fully tested, then altered in a way that prevents teams from ever running it."

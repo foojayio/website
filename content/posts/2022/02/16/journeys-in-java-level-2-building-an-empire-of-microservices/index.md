@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 2: Building an Empire of Microservices"
-slug: "journeys-in-java-level-2-building-an-empire-of-microservices"
 date: "2022-02-16T15:29:33+00:00"
 lastmod: "2022-06-01T20:08:48+00:00"
 description: "Let's dive into the world of microservices find out the complexities, best practices, and troubles. I will share all my learnings, as well!"
@@ -191,7 +190,7 @@ Start each of the applications, either through your IDE or via the command line.
 
 And here is the resulting output!
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-55181" src="microservices-lvl2-results-1-611x510.png" alt="" width="611" height="510">
+{{< img src="microservices-lvl2-results-1-611x510.png" class="size-medium" width="611" height="510" >}}
 
 ## Wrapping up!
 

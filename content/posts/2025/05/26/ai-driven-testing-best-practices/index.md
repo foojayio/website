@@ -1,6 +1,5 @@
 ---
 title: "AI-Driven Testing Best Practices"
-slug: "ai-driven-testing-best-practices"
 date: "2025-05-26T08:06:15+00:00"
 lastmod: "2025-05-26T08:12:58+00:00"
 description: "AI can generate tests, but the result is not totally reliable. This article covers best practices to incorporate AI into the test generation."

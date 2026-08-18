@@ -1,6 +1,5 @@
 ---
 title: "Multi-cloud Strategies With MongoDB Atlas"
-slug: "multi-cloud-strategies-with-mongodb-atlas"
 date: "2025-06-19T11:49:29+00:00"
 lastmod: "2025-06-19T11:50:11+00:00"
 description: "In the technological world, the cloud has become more prevalent. It brings many benefits, including flexibility, scalability, faster innovation, and - by Luce Carter"

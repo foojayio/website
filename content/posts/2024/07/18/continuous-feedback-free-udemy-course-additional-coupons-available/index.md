@@ -1,6 +1,5 @@
 ---
 title: "Continuous Feedback Free Udemy Course: Additional Coupons Available"
-slug: "continuous-feedback-free-udemy-course-additional-coupons-available"
 date: "2024-07-18T08:24:55+00:00"
 lastmod: "2024-09-05T07:47:10+00:00"
 description: "We've added extra coupons for our free Continuous Feedback Udemy course! We're glad to see it's been valuable for some of you."

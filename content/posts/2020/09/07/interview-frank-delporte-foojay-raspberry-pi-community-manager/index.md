@@ -1,6 +1,5 @@
 ---
 title: "Interview: Frank Delporte, Foojay Raspberry Pi Community Manager"
-slug: "interview-frank-delporte-foojay-raspberry-pi-community-manager"
 date: "2020-09-07T13:20:38+00:00"
 lastmod: "2025-02-20T10:53:16+00:00"
 description: "Today we introduce a community manager for all things Raspberry Pi on foojay, Frank Delporte. He'd love to publish your Java/Raspberry Pi content on foojay!"
@@ -21,9 +20,7 @@ frozen: false
 
 **Welcome, Frank!** **Tell us about yourself. 🙂**  
 
-<figure class="alignleft size-large is-resized">
- <img decoding="async" src="pasfoto-2.jpg" alt="" class="wp-image-32891" width="173" height="208">
-</figure>
+{{< img src="pasfoto-2.jpg" class="alignleft size-large is-resized" width="173" height="208" >}}
 
 Hi, I'm Frank Delporte, living in Belgium. I started programming when I was 10 on my Commodore 64.
 
@@ -75,9 +72,7 @@ More info and links to the sources [can be found on my blog](https://webtechie.b
 
 #### And you even wrote a book, tell us about that!
 
-<figure class="alignleft size-large is-resized">
- <img fetchpriority="high" decoding="async" src="ebook-paperbook.jpg" alt="ebook-paperbook.jpg" class="wp-image-32892" width="355" height="236">
-</figure>
+{{< img src="ebook-paperbook.jpg" class="alignleft size-large is-resized" alt="ebook-paperbook.jpg" width="355" height="236" >}}
 
 When I started my Java on Raspberry Pi experiments, I wrote a first 4-page article for "The MagPi", the official Raspberry Pi magazine, which was [published in the Dutch and French edition](https://webtechie.be/articles/).
 

@@ -1,6 +1,5 @@
 ---
 title: "Introducing the Foojay.io Calendar API"
-slug: "foojay-calendar-api"
 date: "2023-06-22T06:40:22+00:00"
 lastmod: "2023-07-25T14:22:55+00:00"
 description: "We are excited to share that Foojay is growing and offering additional resources to bring the OpenJDK community together on a global scale."
@@ -38,7 +37,7 @@ Our hope is that this change will keep the OpenJDK community engaged and informe
 
 We welcome inquiries from organizations interested in connecting with us.
 
-You can reach us at [\[email protected\]](/cdn-cgi/l/email-protection#b7dfd2dbdbd8f7d1d8d8ddd6ce99ded8) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).
+You can reach us at [\[email protected\]](/cdn-cgi/l/email-protection#a8c0cdc4c4c7e8cec7c7c2c9d186c1c7) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).
 
 If you have events to share but lack development capabilities, our team is happy to assist with integration setup.  
 
@@ -46,12 +45,10 @@ If you have events to share but lack development capabilities, our team is happy
 
 Other organizations that want to use our API directly and send events via an endpoint can follow the instructions below.
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="image-1.png" alt="" class="wp-image-98886" width="414" height="360">
-</figure>
+{{< img src="image-1.png" class="size-full is-resized" width="414" height="360" >}}
 
 1. To get started, you'll need to retrieve your source and generate a unique API key. Please note that only **Contributors** and **Admins** currently have permission to complete this step. If you don't fall into either of these categories, please reach out to us so we can grant you the necessary permissions.
-2. To obtain an **API key** and register your source, kindly send a request to [\[email protected\]](/cdn-cgi/l/email-protection#7018151c1c1f30161f1f1a11095e191f) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email) with the subject line "API key". Our Foojay calendar administrator will then generate your API key and add you to our system as a trusted vendor.
+2. To obtain an **API key** and register your source, kindly send a request to [\[email protected\]](/cdn-cgi/l/email-protection#e8808d848487a88e8787828991c68187) or via [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email) with the subject line "API key". Our Foojay calendar administrator will then generate your API key and add you to our system as a trusted vendor.
 3. Provide additional information about your organization, including its name, description, and details about the types of events it will host.
 4. Once the Foojay Calendar admin generates your API key, you can use it to access the Foojay Calendar API.
 
@@ -93,10 +90,8 @@ Below is a description of the API fields and their corresponding elements on the
 
 The following is a real imported event provided by <https://adoptium.net/:>  
 
-<figure class="wp-block-image size-medium">
- <img loading="lazy" decoding="async" width="341" height="510" src="image1-341x510.png" alt="" class="wp-image-98854">
-</figure>
+{{< img src="image1-341x510.png" class="size-medium" width="341" height="510" >}}
 
 ![](image6-1-1024x470.png)
 
-*If you encounter any problems or have any questions, please reach out to us at [\[email protected\]](/cdn-cgi/l/email-protection#e8808d848487a88e8787828991c68187) or on the [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).*
+*If you encounter any problems or have any questions, please reach out to us at [\[email protected\]](/cdn-cgi/l/email-protection#d9b1bcb5b5b699bfb6b6b3b8a0f7b0b6) or on the [Foojay Slack](https://foojay.slack.com/join/shared_invite/zt-tgefdcxv-SDwnqUqPH8peWujGNvC1ZQ#/shared-invite/email).*

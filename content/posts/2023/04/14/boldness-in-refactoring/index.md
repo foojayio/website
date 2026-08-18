@@ -1,6 +1,5 @@
 ---
 title: "Boldness in Refactoring!"
-slug: "boldness-in-refactoring"
 date: "2023-04-14T08:09:09+00:00"
 lastmod: "2023-04-14T08:21:59+00:00"
 description: "\"Don't touch it, it works\" is problematic. It leads us down a bad path. How do you handle a project that held that policy for years?"

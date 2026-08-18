@@ -1,6 +1,5 @@
 ---
 title: "Write Your Own Service Discovery Client for Apache APISIX"
-slug: "service-discovery-client-apache-apisix"
 date: "2022-08-01T10:27:42+00:00"
 lastmod: "2022-08-01T15:15:25+00:00"
 description: "Most modern infrastructures are dynamic. Servers are cattle, not pets. Learn how to implement a dynamic node registry based on a YAML file."

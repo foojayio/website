@@ -1,6 +1,5 @@
 ---
 title: "Evaluating Apache APISIX vs. Spring Cloud Gateway"
-slug: "evaluating-apache-apisix-vs-spring-cloud-gateway"
 date: "2023-07-27T06:29:55+00:00"
 lastmod: "2023-07-27T06:29:56+00:00"
 description: "In this article, I'd like to share my understanding of Spring Cloud Gateway and how it compares to Apache APISIX."

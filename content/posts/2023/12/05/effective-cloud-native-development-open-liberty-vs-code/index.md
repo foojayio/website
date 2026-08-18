@@ -1,6 +1,5 @@
 ---
 title: "Effective cloud native development with Open Liberty in VS Code"
-slug: "effective-cloud-native-development-open-liberty-vs-code"
 date: "2023-12-05T10:25:29+00:00"
 lastmod: "2023-12-05T10:25:49+00:00"
 description: "Liberty Tools for Visual Studio Code enables fast, easy and efficient development of cloud native Java applications with Open Liberty."

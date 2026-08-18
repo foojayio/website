@@ -1,6 +1,5 @@
 ---
 title: "Java and Jakarta EE and the Evolution of the Cloud with Nanos Unikernel"
-slug: "java-jakarta-ee-and-the-evolution-of-the-cloud-with-nanos-unikernel"
 date: "2026-01-06T20:51:09+00:00"
 lastmod: "2026-01-06T21:40:18+00:00"
 description: "Nanos shows that cloud-native can exist without adding complexity, and can be secure, faster, lighter, safer, more efficient, and more cost-effective."
@@ -33,7 +32,7 @@ Nanos images are not just an alternative to containers: they are **lighter, fast
 
 VMs vs. Containers vs. Unikernels
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium" src="https://nanos.org/static/img/vms-vs-unikernels.png" width="600" height="379">
+{{< img src="https://nanos.org/static/img/vms-vs-unikernels.png" class="size-medium" width="600" height="379" >}}
 
 The Key Point: Cloud hypervisors already have everything you need...
 
@@ -59,7 +58,7 @@ This results in:
 
 ### What Changes Compared to Kubernetes
 
-|-------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------------------------|--------------------------------------------|
 | ##### Kubernetes Model ![](k8s.png) | ##### Nanos Unikernel Model ![](nanos.png) |
 
 With Nanos:
@@ -106,7 +105,7 @@ This not only increases security but also enables **higher application density**
 
 ### CI/CD: GitHub Actions for Building Azul 25 + Payara 7 on Nanos Images
 
-|---------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+|---------------|---------------|------------------------------|
 | ![](logo.png) | ![](logo.svg) | ![](Payara_Logo-700x365.jpg) |
 
 ![](oracleOCI.jpg)

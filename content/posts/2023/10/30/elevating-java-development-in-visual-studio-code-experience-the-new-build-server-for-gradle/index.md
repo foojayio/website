@@ -1,6 +1,5 @@
 ---
 title: "Elevating Java in Visual Studio Code: New Build Server for Gradle"
-slug: "elevating-java-development-in-visual-studio-code-experience-the-new-build-server-for-gradle"
 date: "2023-10-30T15:24:14+00:00"
 lastmod: "2023-11-01T08:04:30+00:00"
 description: "Microsoft and Gradle Enterprise have joined forces to explore a novel approach to Gradle project import and building, based on the Build Server Protocol (BSP)."

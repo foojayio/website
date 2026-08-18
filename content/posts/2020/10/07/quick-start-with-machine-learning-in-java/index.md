@@ -1,6 +1,5 @@
 ---
 title: "Quick Start with Machine Learning for Java"
-slug: "quick-start-with-machine-learning-in-java"
 date: "2020-10-07T01:21:00+00:00"
 lastmod: "2023-02-16T14:07:14+00:00"
 description: "So you're a Java developer and you want to do some machine learning. Meet JSR 381, a standard Java API for Visual Recognition using machine learning."

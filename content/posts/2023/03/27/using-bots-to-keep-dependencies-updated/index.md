@@ -1,6 +1,5 @@
 ---
 title: "Using Bots to Keep Dependencies Updated"
-slug: "using-bots-to-keep-dependencies-updated"
 date: "2023-03-27T15:18:33+00:00"
 lastmod: "2023-03-27T15:53:26+00:00"
 description: "Did you know bots can automatically create pull requests to keep dependencies secure and up to date? Find out here!"

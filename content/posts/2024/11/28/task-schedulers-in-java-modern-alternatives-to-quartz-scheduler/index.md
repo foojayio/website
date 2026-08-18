@@ -1,6 +1,5 @@
 ---
 title: "Task schedulers in Java: modern alternatives to Quartz Scheduler"
-slug: "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
 date: "2024-11-28T18:04:32+00:00"
 lastmod: "2024-11-29T12:11:10+00:00"
 description: "Quartz is often considered the standard job scheduling library in Java, which can lead developers to overlook more modern alternatives."
@@ -18,7 +17,7 @@ related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "foojay-podcast-60"
   - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
-  - "ai-found-the-bugs-whos-patching-your-eol-java-code"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 
@@ -84,7 +83,7 @@ Here's a simple example of how to schedule a job using JobRunr:
 // Schedule a one-off job to run in 1 hour
 jobScheduler.schedule(
     Instant.now().plus(1, ChronoUnit.HOURS),
-    () -> sendEmail("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6114120413210419000c110d044f020e0c">[email protected]</a>")
+    () -> sendEmail("[email protected]")
 );
 ```
 

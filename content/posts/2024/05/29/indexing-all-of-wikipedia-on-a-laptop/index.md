@@ -1,6 +1,5 @@
 ---
 title: "Indexing all of Wikipedia, on a laptop"
-slug: "indexing-all-of-wikipedia-on-a-laptop"
 date: "2024-05-29T15:54:32+00:00"
 lastmod: "2024-12-30T10:55:24+00:00"
 description: "Indexing the entirety of English Wikipedia on a laptop has become a practical reality thanks to recent advances in the JVector library that will be part of the imminent 3.0 release. - by Jonathan Ellis"

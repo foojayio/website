@@ -1,6 +1,5 @@
 ---
 title: "Hand Ground Coffee: Command Line Tools for Java"
-slug: "hand-ground-coffee-command-line-tools-for-java"
 date: "2022-02-21T16:04:15+00:00"
 lastmod: "2022-04-20T07:16:46+00:00"
 description: "I prefer the command line for my daily work, using the combination of git, sed, grep, bash commands etc. makes recurring tasks easier."

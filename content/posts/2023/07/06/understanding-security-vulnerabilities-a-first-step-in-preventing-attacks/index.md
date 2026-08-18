@@ -1,6 +1,5 @@
 ---
 title: "Understanding Security Vulnerabilities: Preventing Attacks"
-slug: "understanding-security-vulnerabilities-a-first-step-in-preventing-attacks"
 date: "2023-07-06T12:49:42+00:00"
 lastmod: "2023-07-06T12:50:22+00:00"
 description: "What are the common vulnerabilities we need to be aware of? How do they look & how can we better protect ourselves from these common attacks?"

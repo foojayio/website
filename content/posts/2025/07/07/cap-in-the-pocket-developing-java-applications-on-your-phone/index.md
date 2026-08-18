@@ -1,6 +1,5 @@
 ---
 title: "CAP in the Pocket"
-slug: "cap-in-the-pocket-developing-java-applications-on-your-phone"
 date: "2025-07-07T15:27:26+00:00"
 lastmod: "2025-07-07T15:27:28+00:00"
 description: "Learn you how develop and run a CAP Spring-Boot Java app locally on your Android phone using Termux and VSCode."
@@ -23,7 +22,7 @@ Smartphones are more powerful then ever, with processors rivaling old laptops. S
 Below I'll show you how to do use run and develop a [CAP Java](https://cap.cloud.sap/docs/java/) [Spring Boot](https://spring.io/projects/spring-boot) application on your smartphone and how to run [VSCode](https://code.visualstudio.com/) locally to develop and modify it. This, of course, works only on Android phones, as they are a Linux at their core.
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_28_58-PM-2000x900.png)
 
-## Termux
+## Termux {#more-116511}
 
 We first need a proper Linux environment with a package manager and more. The most popular app that facilitates this is [Termux](https://termux.dev/):
 > Termux is an **Android terminal emulator and Linux environment app** that works directly with no rooting or setup required. A minimal base system is installed automatically - additional packages are available using the APT package manager.
@@ -56,9 +55,7 @@ apt install openjdk-21
 
 Now we have a proper OpenJDK JVM running on our phone:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-12_40_05-PM-900x2000.png" alt="" class="wp-image-2102" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-12_40_05-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 But developing code in shell tools like VIM is cumbersome, so we let's install VSCode. The cool part about VSCode is that it consists of two parts, a backend and a front-end. We can run the backend in Termux and the front-end in the browser.
 
@@ -81,9 +78,7 @@ This launches a local version and ignores the shell output. Code-server is by de
 
 Go to [localhost:8080](8080) to access it. Now we have a IDE, running locally directly on our device:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-1_11_41-PM-900x2000.png" alt="" class="wp-image-2103" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-1_11_41-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 That was simple, wasn't it? The only Problem: The official VSCode extensions and accessing the official VSCode market place is not supported, as code-server is a fork of VSCode:  
 ![](https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-1_19_15-PM-2000x900.png)
@@ -138,9 +133,7 @@ apt install sapmachine-21-jdk
 
 Resulting in a proper JVM:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_37_53-PM-900x2000.png" alt="" class="wp-image-2114" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_37_53-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 After that, we can install the official VSCode distribution:
 
@@ -162,9 +155,7 @@ nohup code serve-web --port 8080 --without-connection-token &
 
 Now we have a proper official VSCode and can view it in the browser at [localhost:8080](8080):  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_14_40-PM-900x2000.png" alt="" class="wp-image-2119" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-1_14_40-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 In this we can install all the extensions we want and can start developing applications.
 
@@ -223,15 +214,11 @@ mvn spring-boot:run
 
 But the CAP tools run into a problem:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-4_53_38-PM-900x2000.png" alt="" class="wp-image-2107" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-4_53_38-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Seems like nobody prebuilt their npm packages from the Android arm64 target. And no, self-building all packages doesn't work and even if. `mvn spring-boot:run`, which uses the CAP's NodeJS tools internally, crashes with a double free:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/image-1-900x2000.png" alt="" class="wp-image-2108" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/image-1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Because I still want to build SFlight on my phone, I need to get creative. The problem here are solely the CAP tools, not anything written in Java. So yes, you might call the following hacky, but this would be no problem in standard Spring Boot applications. It only means that you should be aware of the dependencies that your project needs, especially of natively compiled dependencies.
 
@@ -265,21 +252,15 @@ You might want to add this to your `.zshrc` to make it permament.
 
 To access the most basic page of the app, visit [localhost:4004](4004)  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-5_03_35-PM1-900x2000.png" alt="" class="wp-image-2110" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-7-2025-5_03_35-PM1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Or visit <http://localhost:4004/travel_processor/dist/index.html> to a proper page with which we can easily interact. When the website wants you to sign in, choose "privileged" as a user and an empty password.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_53_04-PM-900x2000.png" alt="" class="wp-image-2116" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_53_04-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Leading you to:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_55_39-PM-1-900x2000.png" alt="" class="wp-image-2118" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-12_55_39-PM-1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 ## Modifying the Application via VSCode
 
@@ -352,9 +333,7 @@ And of course you should set `JAVA_HOME` as before to prevent maven from complai
 
 We now have a SapMachine:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_05_45-PM-1-900x2000.png" alt="" class="wp-image-2126" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_05_45-PM-1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 *There are now technically two SapMachines and one OpenJDK installed on my tiny phone. Maybe I should install an OpenJ9 build just for good measure...*
 
@@ -370,15 +349,11 @@ rm code.deb
 
 During the installation I got asked whether I want to add the Microsoft apt repository, having this prompt on my phone just looks funny:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_19_39-PM-900x2000.png" alt="" class="wp-image-2128" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_19_39-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Unsuprisingly, launching VSCode via `nohup code serve-web --port 8080 --without-connection-token &` and then accessing the front-end via [localhost:8080](http://localhost:8080) works:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_25_43-PM-1-900x2000.png" alt="" class="wp-image-2130" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-2_25_43-PM-1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Now the thing you're all waiting for: How long does a git clone take and do the CAP Java tools work in building the SFlight CAP app on this system?
 
@@ -416,9 +391,7 @@ And well, it worked... Which I find surprising. The UI of the new Linux Terminal
 
 Well it worked till I opened the browser and then the Linux Terminal App crashed. I'm happy that I documented everything. I tried it two times more. But this means that despite it's apparent benefits, it's basically unusuable for this specific use case for now.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-4_27_18-PM-1-900x2000.png" alt="" class="wp-image-2134" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-8-2025-4_27_18-PM-1-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 Hopefully I can revisit this in a few months and it's fixed.
 
@@ -428,9 +401,7 @@ Hopefully I can revisit this in a few months and it's fixed.
 
 Switching between VSCode for editing and the shell for killing the previous SFlight server instance is too cumbersome for my demo. So I created the [CAP-in-the-Pocket](https://github.com/parttimenerd/cap-in-the-pocket-extension) extension for VSCode:  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-9-2025-12_42_33-PM-900x2000.png" alt="" class="wp-image-2139" style="width:300px">
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2025/05/Screenshot-May-9-2025-12_42_33-PM-900x2000.png" class="aligncenter size-large is-resized" style="width:300px" >}}
 
 To install it, download the extension from [GitHub](https://github.com/parttimenerd/cap-in-the-pocket-extension/releases/download/snapshot/cap-in-the-pocket-0.0.1.vsix) and open with the Termux app to make it available to VSCode. Then open the Extensions view in VSCode, click the "..." at the top of the Extensions view, select "Install from VSIX..." and select the downloaded file.
 

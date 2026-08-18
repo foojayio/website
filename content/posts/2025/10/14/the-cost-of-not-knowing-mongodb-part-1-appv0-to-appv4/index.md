@@ -1,6 +1,5 @@
 ---
 title: "The Cost of Not Knowing MongoDB (Part 1)"
-slug: "the-cost-of-not-knowing-mongodb-part-1-appv0-to-appv4"
 date: "2025-10-14T13:43:42+00:00"
 lastmod: "2025-10-27T20:33:37+00:00"
 description: "The primary focus of this series is to show how much performance you can gain, and as a consequence, the cost you can save when using MongoDB properly, following the best practices, studying your application needs, and using it to model your data. To show these possible gains, a dummy application will be presented, and many possible implementations of it using MongoDB will be developed and load-tested. There will be implementations for all levels of MongoDB knowledge: beginner, intermediate, senior, and mind-blowing."

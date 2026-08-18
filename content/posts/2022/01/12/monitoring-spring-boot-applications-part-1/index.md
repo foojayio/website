@@ -1,6 +1,5 @@
 ---
 title: "Monitoring Spring Boot Applications (Part 1)"
-slug: "monitoring-spring-boot-applications-part-1"
 date: "2022-01-12T16:34:53+00:00"
 lastmod: "2022-01-12T16:44:44+00:00"
 description: "In part 1 of this new Foojay series, learn about JDK Flight Recorder and how we can use it to monitor a Spring Boot application."

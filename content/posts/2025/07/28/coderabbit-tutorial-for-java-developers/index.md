@@ -1,6 +1,5 @@
 ---
 title: "CodeRabbit Tutorial for Java Developers"
-slug: "coderabbit-tutorial-for-java-developers"
 date: "2025-07-28T12:43:19+00:00"
 lastmod: "2025-07-29T04:20:09+00:00"
 description: "For Java developers, CodeRabbit offers specialized analysis that understands Java syntax, best practices, and common patterns."
@@ -67,7 +66,7 @@ public class DemoApplication{  // Missing space before {
 
 For example, when you ask CodeRabbit to check the style above, you'll get a response comparable to this:
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-116987" src="coderabbitai-1-548x510.png" alt="" width="548" height="510">
+{{< img src="coderabbitai-1-548x510.png" class="size-medium" width="548" height="510" >}}
 
 **Best Practices**
 
@@ -93,7 +92,7 @@ public void unsafeMethod(String userInput) {
 
 The above is analyzed in several ways, including this, by CodeRabbit:
 
-<img decoding="async" class="alignnone size-medium wp-image-116991" src="coderabbit-2-575x510.png" alt="" width="575" height="510">
+{{< img src="coderabbit-2-575x510.png" class="size-medium" width="575" height="510" >}}
 
 ### **3. Performance Optimization Suggestions**
 

@@ -1,6 +1,5 @@
 ---
 title: "Java is Not the Dark Side: Why Learning Java is Easier Than You Think"
-slug: "java-is-not-the-dark-side-why-learning-java-is-easier-than-you-think"
 date: "2026-05-07T08:44:23+00:00"
 description: "Every year on May 4th, fans around the world celebrate Star Wars Day with the iconic phrase “May the 4th be with you.” The following day, May 5th, is - by Igor De Souza"
 authors:

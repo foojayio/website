@@ -1,6 +1,5 @@
 ---
 title: "Migrating from Java EE to Jakarta EE with IntelliJ IDEA"
-slug: "migrating-from-java-ee-to-jakarta-ee-with-intellij-idea"
 date: "2022-04-08T17:02:37+00:00"
 lastmod: "2022-04-08T17:02:38+00:00"
 description: "In this post we're going to migrate some sample code from the `javax` namespace to `jakarta`."

@@ -1,6 +1,5 @@
 ---
 title: "2023 in Retrospective"
-slug: "2023-in-retrospective"
 date: "2024-01-16T07:44:39+00:00"
 lastmod: "2024-01-16T07:44:40+00:00"
 description: "Last year, I wrote my first yearly retrospective. I liked the experience, so I'm trying one more time. Let the future decide if it will become a trend or not."
@@ -79,7 +78,7 @@ Here's the GitHub summary:
 
 [
 
-<img decoding="async" class="aligncenter wp-image-105579 size-medium" src="github-contribs-700x482.webp" alt="" width="700" height="482">
+{{< img src="github-contribs-700x482.webp" class="aligncenter size-medium" width="700" height="482" >}}
 
 ](https://github.com/nfrankel/)
 

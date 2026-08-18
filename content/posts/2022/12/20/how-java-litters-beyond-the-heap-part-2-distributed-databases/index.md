@@ -1,6 +1,5 @@
 ---
 title: "How Java Litters Beyond the Heap: Distributed Databases"
-slug: "how-java-litters-beyond-the-heap-part-2-distributed-databases"
 date: "2022-12-20T11:40:43+00:00"
 lastmod: "2023-01-27T10:56:29+00:00"
 description: "Let’s create a Java application with YugabyteDB distributed database to see if garbage is generated in response to application requests."

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #55: Embedded Java, Part 2"
-slug: "foojay-podcast-55"
 date: "2024-07-01T08:21:42+00:00"
 lastmod: "2025-11-13T08:45:23+00:00"
 description: "In this episode #55, we look into the history of the Java Micro Edition and how things evolved."

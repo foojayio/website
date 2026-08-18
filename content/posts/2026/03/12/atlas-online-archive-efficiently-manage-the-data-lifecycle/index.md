@@ -1,6 +1,5 @@
 ---
 title: "Atlas Online Archive: Efficiently Manage the Data Lifecycle"
-slug: "atlas-online-archive-efficiently-manage-the-data-lifecycle"
 date: "2026-03-12T14:55:00+00:00"
 lastmod: "2026-03-12T14:55:02+00:00"
 description: "In the production environment, in a MongoDB Atlas database, a collection contains massive amounts of data stored, including aged and current data. However, aged data is not frequently accessed through applications, and the data piles up daily in the collection, leading to performance degradation and cost consumption. This results in needing to upgrade the cluster tier size to maintain sufficient resources according to workload, as it would be difficult to continue with the existing tier size. Overall, this negatively impacts application performance and equates to higher resource utilization and increased costs for business."
@@ -184,7 +183,7 @@ As discussed earlier, the main cluster DemoCluster contains the latest data as p
 Connection string:
 
 ```
-mongodb+srv://Username:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2171405252564e53456145444c4e424d54525544530f40434245170f4c4e4f464e45430f4f4455">[email protected]</a>/
+mongodb+srv://Username:[email protected]/
 ```
 
 In this scenario, after archiving aged data, you can see only 2186 documents for the movies collection with data less than 10 years old.  

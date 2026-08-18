@@ -1,6 +1,5 @@
 ---
 title: "Digma, Apache APISIX, and OpenValue: Foojay.io at JFall 2023"
-slug: "digma-apache-apisix-and-openvalue-sponsor-foojay-io-at-jfall-2023"
 date: "2023-11-13T22:19:48+00:00"
 lastmod: "2023-11-13T22:31:11+00:00"
 description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for friends of OpenJDK."

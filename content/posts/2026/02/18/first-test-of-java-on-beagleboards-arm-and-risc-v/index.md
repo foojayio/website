@@ -1,6 +1,5 @@
 ---
 title: "First Test of Java on BeagleBoards (ARM and RISC-V)"
-slug: "first-test-of-java-on-beagleboards-arm-and-risc-v"
 date: "2026-02-18T07:10:00+00:00"
 description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asked various suppliers to send me - by Frank Delporte"
 canonical: "https://webtechie.be/post/2026-02-10-first-test-beagleboard-java/"
@@ -124,7 +123,7 @@ This board proved challenging due to my Raspberry Pi habits. I initially created
 Default username and password are `beagle:temppwd`.
 
 ```
-% ssh <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="71131410161d143140415f4043415f40415f4040">[email protected]</a>
+% ssh [email protected]
 Ubuntu 23.04
 
 BeagleBoard.org Ubuntu 23.04 Console Image 2023-10-19

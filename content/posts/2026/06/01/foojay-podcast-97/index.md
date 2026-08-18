@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #97: From Scripting Language to AI Powerhouse: How BoxLang Is Redefining JVM Development"
-slug: "foojay-podcast-97"
 date: "2026-06-01T06:57:25+00:00"
 description: "BoxLang is a modern dynamic JVM language built for rapid application development. It's 100% Java-interoperable, compiles to JVM bytecode, and deployable - by Cristobal Escobar"
 authors:

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #87: The Human Side of Development: Career Growth, Staying Healthy, and Why People Matter More Than AI"
-slug: "foojay-podcast-87"
 date: "2025-12-22T06:52:00+00:00"
 lastmod: "2025-12-22T13:20:16+00:00"
 description: "What if work-life balance is a myth, and the real secret is just... life? In this Foojay Podcast we're stepping away from pure code and diving into - by Frank Delporte"

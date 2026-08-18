@@ -1,6 +1,5 @@
 ---
 title: "Java, What's Old? Part II: Utils"
-slug: "java-whats-old-part-ii-utils"
 date: "2025-07-30T08:48:29+00:00"
 lastmod: "2025-07-30T08:52:09+00:00"
 description: "What are the old utility classes less known in Java?"
@@ -25,32 +24,110 @@ Everything in this series will be in Java 8 and later, so after reading this art
 
 ## Objects
 
-[Objects](https://docs.oracle.com/javase/8/docs/api/java/util/Objects.html) (with a s) is a utility class from the `java.util` package that contains static methods to make your code more readable. Do not confuse it with the `Object` (without s) class of the `java.lang` package.
+[Objects](https://docs.oracle.com/javase/8/docs/api/java/util/Objects.html) (with a s) is a utility class from the
+
+```
+java.util
+```
+
+package that contains static methods to make your code more readable. Do not confuse it with the
+
+```
+Object
+```
+
+(without s) class of the
+
+```
+java.lang
+```
+
+package.
 
 Let's see a few of them:
 
-* `static boolean equals(Object, Object)`  
-  Compare two objects and taking care of the null check. `(o1 == null && o2 == null) || (o1 != null && o1.equals(o2)` =\> `Objects.equals(o1, o2)`
-* `static int hash(Object... values)`  
+* 
+
+```java
+static boolean equals(Object, Object)
+```
+
+  Compare two objects and taking care of the null check.
+
+```java
+(o1 == null && o2 == null) || (o1 != null && o1.equals(o2)
+```
+
+  =\>
+
+```java
+Objects.equals(o1, o2)
+```
+
+* 
+
+```java
+static int hash(Object… values)
+```
+
   Calculate a hash code integer based on the arguments passed.   
-  E.g. `int hash = Objects.hash(firstName, lastName, age);`
-* `static String toString(Object value, String nullDefault);`  
+  E.g.
+
+```java
+int hash = Objects.hash(firstName, lastName, age);
+```
+
+* 
+
+```java
+static String toString(Object value, String nullDefault);
+```
+
   Returns the String representation of the value and provide a default value if null. Note that value doesn't need to be a String.   
-  E.g. `System.out.println("Job: " + Objects.toString(job, "none"));`
+  E.g.
+
+```java
+System.out.println("Job: " + Objects.toString(job, "none"));
+```
 
 ## volatile
 
-`volatile` is not a class but a keyword in Java. It means that you want to keep the value to be read and written from the main memory and not copied to the CPU core local memory.
+```java
+volatile
+```
+
+is not a class but a keyword in Java. It means that you want to keep the value to be read and written from the main memory and not copied to the CPU core local memory.
 
 This may be slower to read and write the value but all threads will point to the same memory address instead of having a local copy that is then copied to the main memory.
 
-Note that it doesn't mean that operations on the value are thread-safe. For example `i++;` from 2 threads may result in incorrect value as 2 threads can put the value in their registry, increment it of one and copy it back to the main memory at the same time.  
+Note that it doesn't mean that operations on the value are thread-safe. For example
 
-For this case, use `AtomicInteger` or `synchronized`.
+```java
+i++;
+```
+
+from 2 threads may result in incorrect value as 2 threads can put the value in their registry, increment it of one and copy it back to the main memory at the same time.  
+For this case, use
+
+```java
+AtomicInteger
+```
+
+or
+
+```java
+synchronized
+```
+
+.
 
 ## Locale
 
-`Locale` is a well known Java class and is used to specify a country and a language. Beside country and language, Locale can have a script (ISO 15924 alpha-4 script code), variant and extensions.
+```java
+Locale
+```
+
+is a well known Java class and is used to specify a country and a language. Beside country and language, Locale can have a script (ISO 15924 alpha-4 script code), variant and extensions.
 
 Locale is used at many well know places like formatters (numbers, dates), *String.toLocalCase(Locale)* , *DayOfWeek.getDisplayName* , *Currency* or *ResourceBundle*.
 
@@ -58,7 +135,19 @@ What is less known is that Locale is used at many other places like *Font* (font
 
 ## Collator
 
-The [Collator](https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html) class is used to compare `String`. The String class implements `Comparable` but the *compareTo* method compare strings based on the Unicode value of each character in the strings.
+The [Collator](https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html) class is used to compare
+
+```java
+String
+```
+
+. The String class implements
+
+```java
+Comparable
+```
+
+but the *compareTo* method compare strings based on the Unicode value of each character in the strings.
 
 *Collator* offers a better way to compare strings. It is based on a *Locale* , you can specify a strength and decomposition (See *Normalizer* below).
 
@@ -87,6 +176,8 @@ The [Normalizer](https://docs.oracle.com/javase/8/docs/api/java/text/Normalizer.
 
 I use this class to remove any diacritical marks to easily search for text independently of accents in the text or search term:  
 
-`String searchTermNoDiacritics = Normalizer.normalize(searchTerm, Normalizer.Form.NFKD).replaceAll("\p{InCombiningDiacriticalMarks}+", "");`
+```
+String searchTermNoDiacritics = Normalizer.normalize(searchTerm, Normalizer.Form.NFKD).replaceAll("\p{InCombiningDiacriticalMarks}+", "");
+```
 
 In the next and last article of this series, we'll look at IO classes.

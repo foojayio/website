@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI Deep Dive — Part 3 of 7: Multi-Agent Orchestration — Building AI Teams That Work 🌲"
-slug: "boxlang-ai-deep-dive-part-3-of-7-multi-agent-orchestration-building-ai-teams-that-work"
 date: "2026-04-21T08:32:06+00:00"
 lastmod: "2026-05-14T09:51:47+00:00"
 description: "BoxLang AI 3.0 Series · Part 3 of 7 A single agent is useful. An orchestra of agents is powerful. The problem with most multi-agent frameworks is that the - by Cristobal Escobar"
@@ -15,9 +14,9 @@ categories:
 tags:
 related_posts:
   - "boxlang-ai-deep-dive-part-4-of-7-middleware-the-missing-layer-in-every-ai-framework"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
   - "boxlang-1-14-0-introducing-inner-classes"
-  - "jc-ai-newsletter-16"
 frozen: false
 ---
 

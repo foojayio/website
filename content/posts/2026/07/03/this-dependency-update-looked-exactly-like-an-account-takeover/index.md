@@ -1,6 +1,5 @@
 ---
 title: "This Dependency Update Looked Exactly Like an Account Takeover"
-slug: "this-dependency-update-looked-exactly-like-an-account-takeover"
 date: "2026-07-03T08:31:27+00:00"
 description: "I pointed a scanner I have been building at an old Spring project, and it flagged javax.activation. The bump was 1.1-rev-1 to 1.1.1. Prior releases - by Muhammad Usman"
 authors:

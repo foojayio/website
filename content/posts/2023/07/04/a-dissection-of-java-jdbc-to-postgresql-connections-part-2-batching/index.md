@@ -1,6 +1,5 @@
 ---
 title: "A Dissection of Java JDBC to PostgreSQL, Part 2: Batching"
-slug: "a-dissection-of-java-jdbc-to-postgresql-connections-part-2-batching"
 date: "2023-07-04T13:56:41+00:00"
 lastmod: "2023-07-04T13:56:42+00:00"
 description: "Batching for PostgreSQL JDBC is a property of the extended protocol. It uniquely allows you to send multiple statements in a single request."

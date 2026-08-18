@@ -1,6 +1,5 @@
 ---
 title: "How to create SBOMs in Java with Maven and Gradle"
-slug: "how-to-create-sboms-in-java-with-maven-and-gradle"
 date: "2023-03-17T09:08:28+00:00"
 lastmod: "2023-03-17T09:21:56+00:00"
 description: "Java is a compiled language, so you should create an SBOM whenever you build a release version of your application. Find out more here!"
@@ -115,7 +114,7 @@ You can configure the CycloneDX plugin in different ways. In this case, I bound 
 All dependencies, both direct and transitive, are mentioned in the SBOM individually like below. The `jackson-databind` package, in this case, was transitively included in my application via `sprint-boot-starter-web`.
 
 ```
-<component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d373c3e362e323370393c293c3f3433391d6f736c6e7369">[email protected]</a>?type=jar">
+<component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/[email protected]?type=jar">
  <publisher>FasterXML</publisher>
  <group>com.fasterxml.jackson.core</group>
  <name>jackson-databind</name>
@@ -136,7 +135,7 @@ All dependencies, both direct and transitive, are mentioned in the SBOM individu
      <id>Apache-2.0</id>
    </license>
  </licenses>
- <purl>pkg:maven/com.fasterxml.jackson.core/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a2a9aba3bba7a6e5aca9bca9aaa1a6ac88fae6f9fbe6fc">[email protected]</a>?type=jar</purl>
+ <purl>pkg:maven/com.fasterxml.jackson.core/[email protected]?type=jar</purl>
  <externalReferences><reference type="vcs"><url>http://github.com/FasterXML/jackson-databind</url></reference><reference type="website"><url>http://fasterxml.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference></externalReferences>
 </component>
 ```

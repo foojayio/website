@@ -1,6 +1,5 @@
 ---
 title: "Breaking the Code: How Chris Newland is Changing the Game in JVM Performance!"
-slug: "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
 date: "2023-06-12T08:44:27+00:00"
 lastmod: "2023-06-12T22:08:02+00:00"
 description: "Dive into an exclusive interview with Chris Newland, the creator of JITWatch. Explore JVM performance optimization, and gain expert advice."
@@ -20,9 +19,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignright size-full is-resized">
- <img fetchpriority="high" decoding="async" src="chris.png" alt="" class="wp-image-98734" width="384" height="384">
-</figure>
+{{< img src="chris.png" class="alignright size-full is-resized" width="384" height="384" >}}
 
 We're excited to introduce you to Chris Newland, an industry veteran and dedicated JVM performance specialist.
 
@@ -93,7 +90,7 @@ If you want to specialize in Java performance, then I have two pieces of advice:
 
 #### **Bazlur: You've developed a number of open-source JVM tools that have been widely used and contributed to. For individuals interested in joining and contributing to these projects, could you provide a brief guide on how they can get started?**
 
-**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#56353e243f2516353e243f253833213a3738327835393b) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
+**Chris:** Please talk to me first 🙂 Drop me an email at [\[email protected\]](/cdn-cgi/l/email-protection#0e6d667c677d4e6d667c677d606b79626f606a206d6163) with your idea before submitting a PR because I might already be working on something similar or taking the tools in a different direction.
 
 #### **Bazlur: Java has evolved significantly over the years, with new features and functionalities being introduced in each release. Out of these numerous updates, is there a specific feature that you find particularly exciting or innovative? Can you share why this feature stands out to you?**
 

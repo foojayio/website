@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Jakarta EE 9: Hello World"
-slug: "getting-started-with-jakarta-ee-9-hello-world"
 date: "2021-04-07T08:55:22+00:00"
 lastmod: "2021-09-03T08:38:23+00:00"
 description: "Regarding backward compatibility, Jakarta EE 9 is historic as namespaces changed (like package names that changed from 'javax' to 'jakarta')."

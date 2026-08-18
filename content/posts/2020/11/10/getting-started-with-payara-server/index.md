@@ -1,6 +1,5 @@
 ---
 title: "Getting Started Quickly and Easily with Payara Server"
-slug: "getting-started-with-payara-server"
 date: "2020-11-10T09:39:02+00:00"
 lastmod: "2020-11-10T09:49:53+00:00"
 description: "The following four short videos will take you step-by-step through installing, writing, and deploying an application to Payara Server."

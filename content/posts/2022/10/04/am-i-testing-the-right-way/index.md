@@ -1,6 +1,5 @@
 ---
 title: "Am I Testing the Right Way?"
-slug: "am-i-testing-the-right-way"
 date: "2022-10-04T18:24:12+00:00"
 lastmod: "2022-10-04T18:24:14+00:00"
 description: "What can or should be considered the right size of a unit with regard to what is tested in isolation? Two unit-testing approaches explained!"

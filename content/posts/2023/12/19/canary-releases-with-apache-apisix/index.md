@@ -1,6 +1,5 @@
 ---
 title: "Canary Releases with Apache APISIX"
-slug: "canary-releases-with-apache-apisix"
 date: "2023-12-19T08:01:55+00:00"
 lastmod: "2023-12-19T08:01:56+00:00"
 description: "In this article, learn about canary releases and how you can configure one via Apache APISIX."

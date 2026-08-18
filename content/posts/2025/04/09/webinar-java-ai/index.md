@@ -1,6 +1,5 @@
 ---
 title: "Register for Foojay Webinar: \"Java's Place in the AI Revolution\""
-slug: "webinar-java-ai"
 date: "2025-04-09T13:15:20+00:00"
 lastmod: "2025-04-15T06:38:00+00:00"
 description: "This first online Foojay Webinar will highlight Java's place in the AI Revolution, focusing on Exploring AI/ML Using Pure Java Tools."

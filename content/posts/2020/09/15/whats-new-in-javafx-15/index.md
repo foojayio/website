@@ -1,6 +1,5 @@
 ---
 title: "What's New, Noteworthy, and Enhanced in JavaFX 15?"
-slug: "whats-new-in-javafx-15"
 date: "2020-09-15T13:26:28+00:00"
 lastmod: "2020-09-17T20:01:55+00:00"
 description: "A couple of weeks ago, JavaFX version 15 was released. These are some of the highlights and improvements we’ve selected for you to understand its scope."

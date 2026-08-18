@@ -1,6 +1,5 @@
 ---
 title: "Introduction to Kubernetes Extensibility"
-slug: "introduction-to-kubernetes-extensibility"
 date: "2022-09-20T09:44:43+00:00"
 lastmod: "2022-09-20T09:44:44+00:00"
 description: "Let's browser through several extension points in Kubernetes: the data model, admission controllers, and client-side."

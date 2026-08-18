@@ -1,6 +1,5 @@
 ---
 title: "Azul Zulu April 2026 Quarterly Update Released"
-slug: "azul-zulu-april-2026-quarterly-update-released"
 date: "2026-04-23T07:12:29+00:00"
 lastmod: "2026-04-23T07:18:47+00:00"
 description: "The April 2026 quarterly update for Azul Zulu Builds of OpenJDK is now available. This quarterly release brings security and bug fixes, along with a few - by Frank Delporte"

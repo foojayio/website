@@ -1,6 +1,5 @@
 ---
 title: "Journeys in Java, Level 7: Externalize Microservice Configuration"
-slug: "journeys-in-java-level-7-externalize-microservice-configuration"
 date: "2023-01-30T15:43:16+00:00"
 lastmod: "2023-01-30T15:43:18+00:00"
 description: "Learn how to set up a service that hosts the Spring Cloud Config server and wire our Neo4j microservice as the config client service."

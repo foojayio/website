@@ -1,6 +1,5 @@
 ---
 title: "Backing up K8ssandra with MinIO"
-slug: "backing-up-k8ssandra-with-minio"
 date: "2021-11-30T17:00:00+00:00"
 lastmod: "2021-12-03T14:30:09+00:00"
 description: "K8ssandra includes Medusa for Apache Cassandra® to handle backup and restore for your Cassandra nodes. Recently Medusa was upgraded to introduce support - by Alexander Dejanovski"
@@ -175,10 +174,10 @@ Copy/paste the following statements into the CQLSH prompt and press enter:
 CREATE KEYSPACE medusa_test  WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 USE medusa_test;
 CREATE TABLE users (email TEXT PRIMARY KEY, name TEXT, state TEXT);
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b2bfbab0b693b6abb2bea3bfb6fdb0bcbe">[email protected]</a>', 'Alice Smith', 'TX');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a1aca183a6bba2aeb3afa6eda0acae">[email protected]</a>', 'Bob Jones', 'VA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89eae8fbe6e5c9ecf1e8e4f9e5eca7eae6e4">[email protected]</a>', 'Carol Jackson', 'CA');
-INSERT INTO users (email, name, state) VALUES ('<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c080d1a05082c09140d011c0009420f0301">[email protected]</a>', 'David Yang', 'NV');
+INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Alice Smith', 'TX');
+INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Bob Jones', 'VA');
+INSERT INTO users (email, name, state) VALUES ('[email protected]', 'Carol Jackson', 'CA');
+INSERT INTO users (email, name, state) VALUES ('[email protected]', 'David Yang', 'NV');
 ```
 
 Check that the rows were properly inserted:
@@ -188,10 +187,10 @@ SELECT * FROM medusa_test.users;
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7415181d171134110c15190418115a171b19">[email protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8d808daf8a978e829f838ac18c8082">[email protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0b0e19060b2f0a170e021f030a410c0002">[email protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e7e5f6ebe8c4e1fce5e9f4e8e1aae7ebe9">[email protected]</a> | Carol Jackson |    CA
+ [email protected] |   Alice Smith |    TX
+   [email protected] |     Bob Jones |    VA
+ [email protected] |    David Yang |    NV
+ [email protected] | Carol Jackson |    CA
 
 (4 rows)
 ```
@@ -259,10 +258,10 @@ Check that you can read the data from the previously truncated table:
 
  email             | name          | state
 -------------------+---------------+-------
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="accdc0c5cfc9ecc9d4cdc1dcc0c982cfc3c1">[email protected]</a> |   Alice Smith |    TX
-   <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781a171a381d00191508141d561b1715">[email protected]</a> |     Bob Jones |    VA
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6c2c7d0cfc2e6c3dec7cbd6cac388c5c9cb">[email protected]</a> |    David Yang |    NV
- <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="751614071a1935100d14180519105b161a18">[email protected]</a> | Carol Jackson |    CA
+ [email protected] |   Alice Smith |    TX
+   [email protected] |     Bob Jones |    VA
+ [email protected] |    David Yang |    NV
+ [email protected] | Carol Jackson |    CA
 
 (4 rows)
 ```

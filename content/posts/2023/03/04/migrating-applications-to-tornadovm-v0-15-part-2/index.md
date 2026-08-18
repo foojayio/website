@@ -1,6 +1,5 @@
 ---
 title: "Migrating Applications to TornadoVM v0.15 (Part 2)"
-slug: "migrating-applications-to-tornadovm-v0-15-part-2"
 date: "2023-03-04T18:38:41+00:00"
 lastmod: "2023-03-04T18:54:54+00:00"
 description: "In this article, we will spotlight all the TornadoVM configurations/operations that regard the execution on the hardware device."
@@ -28,16 +27,13 @@ In particular, this blog has the following objectives:
 * Provide guidelines regarding how programmers can trigger TornadoVM-specific configurations that regard the execution on hardware accelerators.
 * Provide examples on how to exploit the new operations that are exposed by the new TornadoVM API.
 
-1. Prerequisites
-----------------
+## 1. Prerequisites
 
 This blog begins with a prerequisite that a snapshot of a user-defined TaskGraph is captured to an immutable state. This was the final point of the [previous blog](https://foojay.io/today/migrating-applications-to-tornadovm-v0-15-part-1/).
 
 The following code snippet defines the TaskGraph of our example and shows how the **TaskGraph** is converted to an **ImmutableTaskGraph**.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="taskgraph-snapshot-1-1024x79.png" alt="" class="wp-image-62620" width="531" height="40">
-</figure>
+{{< img src="taskgraph-snapshot-1-1024x79.png" class="aligncenter size-large is-resized" width="531" height="40" >}}
 
 ```java
 TaskGraph taskGraph = new TaskGraph(“name”);
@@ -47,8 +43,7 @@ taskGraph.transferToHost(DataTransferMode.EVERY_EXECUTION, output);
 ImmutableTaskGraph itg = taskGraph.snapshot();
 ```
 
-2. Build, Optimize and Execute an Execution Plan
-------------------------------------------------
+## 2. Build, Optimize and Execute an Execution Plan
 
 The first step that enables programmers to configure the execution of a TaskGraph is the creation of an execution plan. This is a new feature of TornadoVM v0.15.
 
@@ -105,8 +100,7 @@ executionPlan.execute();
 
 **Note for migration:** The **execute()** method that was exposed in the **TaskSchedule** object of TornadoVM API (prior to v0.15) needs to be replaced with: i) the creation of a **TornadoExecutionPlan** object that accepts the corresponding **ImmutableTaskGraph** object as input; and ii) the invocation of the **execute** method of the generated execution plan.
 
-3. Obtain the result and the profiling information
---------------------------------------------------
+## 3. Obtain the result and the profiling information
 
 Every time an execution plan is executed, a new object of type **TornadoExecutionResult** is created.
 
@@ -122,8 +116,7 @@ TornadoExecutionResult executionResult = executionPlan.execute();
 TornadoProfilerResult profilerResult = executionResult.getProfilerResult();
 ```
 
-4. Further reading and examples
--------------------------------
+## 4. Further reading and examples
 
 The TornadoVM modules for the [tornado-unittests](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-unittests) and the [tornado-examples](https://github.com/beehive-lab/TornadoVM/tree/master/tornado-examples) contain a list of diverse applications that showcase how to use the new TornadoVM API.
 

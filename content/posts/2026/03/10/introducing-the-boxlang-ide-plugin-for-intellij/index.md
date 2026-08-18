@@ -1,6 +1,5 @@
 ---
 title: "Introducing the BoxLang IDE Plugin for IntelliJ"
-slug: "introducing-the-boxlang-ide-plugin-for-intellij"
 date: "2026-03-10T14:25:33+00:00"
 lastmod: "2026-03-17T15:47:36+00:00"
 description: "The IntelliJ ecosystem is one of the most powerful development environments for JVM developers. Today, we’re excited to introduce the official BoxLang IDE - by Cristobal Escobar"
@@ -13,10 +12,10 @@ categories:
   - "Tools"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
-  - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Apache Cassandra 4.0: Taming Tail Latencies with Java 16 ZGC"
-slug: "apache-cassandra-4-0-taming-tail-latencies-with-java-16-zgc"
 date: "2021-06-22T07:45:40+00:00"
 lastmod: "2021-11-03T13:32:36+00:00"
 description: "Learn about improvements in Java garbage collection that Cassandra 4.0 coupled with Java 16 offers over Cassandra 3.11 on Java 8!"
@@ -29,9 +28,7 @@ Here, I'd like to focus on improvements in Java garbage collection that Cassandr
 
 In 2012, I gave a talk titled, "Dealing with JVM Limitations in Apache Cassandra." Here is the first slide from that presentation:
 
-<figure class="wp-block-image size-full is-resized is-style-default">
- <img decoding="async" src="paintpointsforjavadatabases.png" alt="" class="wp-image-45221" width="734">
-</figure>
+{{< img src="paintpointsforjavadatabases.png" class="size-full is-resized" width="734" >}}
 
 On the one hand, garbage collection is a primary reason that Java is so much more productive than traditional systems languages like C++. As JVM architect Cliff Click once wrote, "Many concurrent algorithms are very easy to write with a GC and totally hard to downright impossible using explicit free." Cassandra takes full advantage of this power.
 
@@ -45,9 +42,7 @@ The Z Garbage Collector (ZGC) was created to address this situation, and specifi
 
 To show how well ZGC improves Cassandra performance, we compared both throughput and latency in three environments: Cassandra 3.11 running on JDK 8 with its default CMS GC settings, Cassandra 4.0 running on JDK 8 with the same settings, and Cassandra 4.0 running on JDK 16 with ZGC. I'm pleased to report that ZGC convincingly achieves its design goals, allowing Cassandra to deliver nearly-constant latencies through the 99th percentile, with only a modest uptick at the 99.9th percentile!
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" src="JAX_LDN21_728x90_61392_v1.jpg" alt="" class="wp-image-45222" width="716">
-</figure>
+{{< img src="JAX_LDN21_728x90_61392_v1.jpg" class="size-large is-resized" width="716" >}}
 
 ## ZGC performance results
 
@@ -66,9 +61,7 @@ Cassandra 4.0 running with the same configuration as Cassandra 3.11 is 30% faste
 I've split the latency results into one chart per workload so it's easier to see the trends across the different percentiles:
 ![](workloadlatencies.png)
 
-<figure class="wp-block-image size-large is-resized is-style-default">
- <img decoding="async" src="timeseries-768x475-1.png" alt="" class="wp-image-45228" width="512">
-</figure>
+{{< img src="timeseries-768x475-1.png" class="size-large is-resized" width="512" >}}
 
 ![](tabular.png)
 

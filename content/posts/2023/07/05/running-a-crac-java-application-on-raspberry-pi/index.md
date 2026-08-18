@@ -1,6 +1,5 @@
 ---
 title: "Running a CRaC Java application on Raspberry Pi"
-slug: "running-a-crac-java-application-on-raspberry-pi"
 date: "2023-07-05T12:23:19+00:00"
 lastmod: "2023-07-05T12:23:20+00:00"
 description: "Did you know that CRaC on embedded / Raspberry Pi is definitely possible and dramatically improves startup time?"
@@ -314,7 +313,7 @@ Unfortunately, this kernel change is insufficient, as the same error occurs duri
 As it turns out, the current Zulu version 17.0.7 with CRaC doesn't support this Linux kernel. Luckily, Sergey could provide me a dev-version of Zulu with changes that will be part of the next release in July. First, I needed to upload them to my Raspberry Pi.
 
 ```
-% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5d4c5f5d7e0f090c100f08100f100f0a0b">[email protected]</a>:/home/crac/
+% scp zulu17.42.21-dev-20230613095837-jdk17.0.7-linux-aarch64.tar.gz [email protected]:/home/crac/
 ```
 
 And then installed in the `/opt/` directory as described above.

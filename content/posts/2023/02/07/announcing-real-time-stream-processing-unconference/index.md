@@ -1,6 +1,5 @@
 ---
 title: "Announcing Real-time Stream Processing Unconference"
-slug: "announcing-real-time-stream-processing-unconference"
 date: "2023-02-07T07:20:06+00:00"
 lastmod: "2023-02-07T07:23:57+00:00"
 description: "Hazelcast kicks off 2023 to connect with community members and industry experts on the Future of Real-Time Stream Processing."

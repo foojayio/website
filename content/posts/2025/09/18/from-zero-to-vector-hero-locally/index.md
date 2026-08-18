@@ -1,6 +1,5 @@
 ---
 title: "From Zero to Vector Hero - Locally! (Vector Search)"
-slug: "from-zero-to-vector-hero-locally"
 date: "2025-09-18T15:25:23+00:00"
 lastmod: "2025-09-18T15:25:24+00:00"
 description: "After launching your local MongoDB Atlas cluster and running the show dbs command in mongosh, you’ll see only the default system databases: admin, config, and local. These are used internally by MongoDB and contain no user data or vector embeddings at this point. To understand how embeddings come into play, take a look at the diagram below. It illustrates how they are generated and stored in MongoDB together with application data."

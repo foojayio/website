@@ -1,6 +1,5 @@
 ---
 title: "Non-blocking with Spring WebFlux, Kotlin and Coroutines"
-slug: "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
 date: "2021-12-09T14:03:28+00:00"
 lastmod: "2021-12-09T14:06:34+00:00"
 description: "In this article, we will develop a simple RESTful API using Spring WebFlux and aim to leverage the special Kotlin extensions in Spring."

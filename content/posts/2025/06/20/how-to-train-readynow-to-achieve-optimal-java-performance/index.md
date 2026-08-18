@@ -1,6 +1,5 @@
 ---
 title: "How to Train ReadyNow to Achieve Optimal Java Performance"
-slug: "how-to-train-readynow-to-achieve-optimal-java-performance"
 date: "2025-06-20T19:31:00+00:00"
 lastmod: "2025-06-27T11:17:17+00:00"
 description: "This is the third blog post in a series on faster Java application warmup with ReadyNow. If you haven’t been following the series, go back to the first - by Frank Delporte"
@@ -46,8 +45,8 @@ You can define these criteria based on the known properties of the expected appl
 
 Different approaches to training the ReadyNow profile can apply depending on your goals and constraints.
 >
-> **TIP**
-> ## To reach an optimal profile, each run needs a minimum of 10,000 executions of all critical application methods.
+> ## **TIP**
+> To reach an optimal profile, each run needs a minimum of 10,000 executions of all critical application methods.
 >
 ### Optimal approach (pre-production)
 

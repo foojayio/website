@@ -1,6 +1,5 @@
 ---
 title: "Evolution of Java Memory Architecture (Post Java 7.0)"
-slug: "evolution-of-java-memory-architecture-post-java-7-0"
 date: "2021-03-03T16:19:20+00:00"
 lastmod: "2021-10-16T21:32:43+00:00"
 description: "The most impactful change to Java has been the movement from PermGen to MetaSpace. Among others, learn about the related changes in Java 8."

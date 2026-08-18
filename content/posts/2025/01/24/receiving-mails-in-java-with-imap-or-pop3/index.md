@@ -1,6 +1,5 @@
 ---
 title: "Receiving mails in Java with IMAP or POP3"
-slug: "receiving-mails-in-java-with-imap-or-pop3"
 date: "2025-01-24T10:33:44+00:00"
 lastmod: "2025-01-24T10:46:33+00:00"
 description: "There is a lot of documentation for sending mails, but gathering information about the receiving and processing part is less easy.This example shows you how to receive mails in Java either using the IMAP or the POP3 protocol."
@@ -15,7 +14,7 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 
@@ -25,7 +24,37 @@ This example shows you how to receive mails in Java either using the IMAP or the
 
 ## Receiving mails
 
-You need to use to the following import statement `import javax.mail.*;` to be able to connect mail servers. The constructor of the client is straightforward. It is simply used to pass and store some values into fields, which are then used later on. We are interested in the protocol, host, port user and password. Valid values for the protocol are `imap`, `imaps`, `pop3` and `pop3s`.
+You need to use to the following import statement
+
+```java
+import javax.mail.*;
+```
+
+to be able to connect mail servers. The constructor of the client is straightforward. It is simply used to pass and store some values into fields, which are then used later on. We are interested in the protocol, host, port user and password. Valid values for the protocol are
+
+```java
+imap
+```
+
+,
+
+```java
+imaps
+```
+
+,
+
+```java
+pop3
+```
+
+and
+
+```java
+pop3s
+```
+
+.
 
 ```java
 public final class MailReceiveClient {
@@ -44,7 +73,13 @@ public final class MailReceiveClient {
 
 We use the following code sample to connect to the mail server. First we have to create new properties and add values with the defined protocol, host and port. We use these properties to create a Session. With this session we can create a Store and connect to the server using the given username and password.
 
-Afterwards we get the inbox folder and open it in read write mode. Inbox usually is the default folder. If you want to get a different one, just change this string. The folder is opened also in write mode to mark mails as read. We pass this folder into the `getNewMails` method to receive the latest mails.
+Afterwards we get the inbox folder and open it in read write mode. Inbox usually is the default folder. If you want to get a different one, just change this string. The folder is opened also in write mode to mark mails as read. We pass this folder into the
+
+```java
+getNewMails
+```
+
+method to receive the latest mails.
 
 There is some wrapping of exceptions into runtime exceptions in the end. Folder and Store also have to be disconnected before returning.
 
@@ -87,7 +122,13 @@ public List<Mail> receive() {
 
 ### Processing Mails
 
-The `getNewMails` method gets all the messages in the folder. An if condition is used to only process unseen messages. Afterwards the message is set to seen.
+The
+
+```java
+getNewMails
+```
+
+method gets all the messages in the folder. An if condition is used to only process unseen messages. Afterwards the message is set to seen.
 
 Keep in mind that no data is being deleted. When processing big volumes of mails your folder gets bigger quite fast. You might want to delete messages, instead of marking them as read, to keep the mail processing short.
 
@@ -179,7 +220,19 @@ And for POP3 like this:
 new MailReceiveClient("pop3", "localhost", "110", "user", "password");
 ```
 
-You could also use Spring to create a bean using the `@Component` annotation and set the constructor's parameters via properties using the `@Value` annotation. This is the way I am doing it in my [demo project](https://github.com/JensKnipper/greenmail-example).
+You could also use Spring to create a bean using the
+
+```java
+@Component
+```
+
+annotation and set the constructor's parameters via properties using the
+
+```java
+@Value
+```
+
+annotation. This is the way I am doing it in my [demo project](https://github.com/JensKnipper/greenmail-example).
 
 If you do not know how to easily start up a local (mock) mail server you can use GreenMail to do that. I have written an article how to [integrate it into you local environment](https://jensknipper.de/blog/greenmail-mock-mail-server-dev-setup/).
 

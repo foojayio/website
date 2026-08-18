@@ -1,6 +1,5 @@
 ---
 title: "Java is Very Fast, If You Don’t Create Many Objects"
-slug: "java-is-very-fast"
 date: "2023-06-01T04:45:56+00:00"
 lastmod: "2023-06-29T06:46:12+00:00"
 description: "The cost of object creation can be far higher than the cost of cleaning them up if they are very short lived."

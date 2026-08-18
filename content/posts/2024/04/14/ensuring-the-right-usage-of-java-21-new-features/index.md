@@ -1,6 +1,5 @@
 ---
 title: "Ensuring the right usage of the Java 21 new features"
-slug: "ensuring-the-right-usage-of-java-21-new-features"
 date: "2024-04-14T16:16:13+00:00"
 lastmod: "2024-04-14T16:16:14+00:00"
 description: "How to ensure the right usage of the new version of Java 21, and improve performance and clarity in our code base."
@@ -69,7 +68,7 @@ This method throws IllegalArgument exceptions when the ranges are not considered
 The following example throws an IllegalArgumentException:
 
 ```
-Math.clamp(42, 0, -1); // Non compliant<code></code>
+Math.clamp(42, 0, -1); // Non compliant
 ```
 
 The following example is a redundant operation:

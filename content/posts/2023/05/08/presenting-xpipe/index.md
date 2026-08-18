@@ -1,6 +1,5 @@
 ---
 title: "Unconventional Remote Process Control in Java"
-slug: "presenting-xpipe"
 date: "2023-05-08T14:03:08+00:00"
 lastmod: "2023-05-08T14:03:35+00:00"
 description: "If the user has already installed the programs to connect to remote systems, why not try to use them from Java instead of libraries?"

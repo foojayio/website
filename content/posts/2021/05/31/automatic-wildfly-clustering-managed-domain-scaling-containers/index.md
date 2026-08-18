@@ -1,6 +1,5 @@
 ---
 title: "Automatic WildFly Managed Domain Clustering & Scaling in Containers"
-slug: "automatic-wildfly-clustering-managed-domain-scaling-containers"
 date: "2021-05-31T08:08:12+00:00"
 lastmod: "2021-09-16T14:47:47+00:00"
 description: "Extend WildFly from standalone server to cluster in managed domain mode inside containers for running cloud-native scalable applications!"

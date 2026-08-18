@@ -1,6 +1,5 @@
 ---
 title: "Why Many Developers Don't Write or Give Talks"
-slug: "why-many-developers-dont-write-or-give-talks-and-how-to-overcome-challenges"
 date: "2023-01-11T09:53:10+00:00"
 lastmod: "2023-01-11T09:57:20+00:00"
 description: "Learn why developers may not write or give talks and how sharing knowledge and experiences can improve communication skills, and much more!"

@@ -1,6 +1,5 @@
 ---
 title: "Autopo: An open source tool to automate .po file translation with AI."
-slug: "building-autopo-an-ai-powered-open-source-application-to-manage-po-files"
 date: "2025-05-12T07:12:39+00:00"
 lastmod: "2025-05-12T07:12:42+00:00"
 description: "Autopo is a free and open source JavaFX application that automates .po file translation and validation with AI."
@@ -77,7 +76,7 @@ To keep the translation templates up to date, I use a simple script that uses ge
 
 ```bash
 #!/bin/sh
-xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fad7d797899d939ed7988f9d89d79b9e9e889f8989c7979fba9f829b978a969fd4999597">[email protected]</a> --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
+xgettext -ktr -L Java -o po/autopo.pot --copyright-holder='Your copyright info' [email protected] --no-location $(find ../ -name "*.java" -not -path "*/.idea/*" -not -name "*Test.java") –from-code=UTF-8
 ```
 
 ## Introducing Zanata

@@ -1,6 +1,5 @@
 ---
 title: "Real-time Stream Processing with Hazelcast and Redpanda"
-slug: "when-speed-matters-real-time-stream-processing-with-hazelcast-and-redpanda"
 date: "2023-07-25T09:33:27+00:00"
 lastmod: "2023-07-25T09:33:28+00:00"
 description: "Explore the combination of Hazelcast and Redpanda for high-performance, scalable, and fault-tolerant applications reacting to real-time data."
@@ -207,7 +206,7 @@ Start a Hazelcast local cluster. This will run a Hazelcast cluster in client/ser
 
 ```
 brew tap hazelcast/hz
-brew install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c0c9d2cdc4cbc9dbdce89d869b8699">[email protected]</a>
+brew install [email protected]
 hz -V
 ```
 

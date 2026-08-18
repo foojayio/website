@@ -1,6 +1,5 @@
 ---
 title: "A New Chapter for the Payara Community"
-slug: "a-new-chapter-for-the-payara-community"
 date: "2026-05-18T06:51:51+00:00"
 lastmod: "2026-05-18T09:25:50+00:00"
 description: "Payara Platform Community is now Azul Payara Community. Find out what's changing, what's staying the same, and what's new in the April and May 2026 releases."

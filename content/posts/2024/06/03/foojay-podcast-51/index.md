@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #51: Persistence, Evolving your Career, Jakarta EE, GlassFish, Messaging via Telegram"
-slug: "foojay-podcast-51"
 date: "2024-06-03T08:03:53+00:00"
 lastmod: "2025-11-13T08:46:36+00:00"
 description: "This is part 3 of Frank's JCON interviews, featuring multiple people, on Jakarta EE, GlassFish, and a PET project with messaging via Telegram, and more!"

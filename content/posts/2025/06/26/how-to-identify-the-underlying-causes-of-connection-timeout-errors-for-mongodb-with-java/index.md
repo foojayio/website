@@ -1,6 +1,5 @@
 ---
 title: "How to Identify the Underlying Causes of Connection Timeout Errors for MongoDB With Java"
-slug: "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
 date: "2025-06-26T12:13:44+00:00"
 lastmod: "2025-06-26T12:19:13+00:00"
 description: "Understand common causes of connection timeout error when using MongoDB with Java and learn how to tackle them by analyzing logs and tuning connection settings."

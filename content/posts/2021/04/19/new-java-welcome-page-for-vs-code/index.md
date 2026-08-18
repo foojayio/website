@@ -1,6 +1,5 @@
 ---
 title: "Welcome to the New Java Welcome Page for VS Code"
-slug: "new-java-welcome-page-for-vs-code"
 date: "2021-04-19T09:02:03+00:00"
 lastmod: "2021-04-19T09:02:54+00:00"
 description: "Our new design focuses on helping users find the most important features, getting started with the first project, and accessing references."

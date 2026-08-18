@@ -1,6 +1,5 @@
 ---
 title: "Sonar Connect Amsterdam 2025"
-slug: "sonar-connect-amsterdam-2025"
 date: "2025-06-16T15:51:13+00:00"
 lastmod: "2025-06-16T15:51:57+00:00"
 description: "Sonar Connect Amsterdam : learn about code quality and code security specially when using AI generated code."

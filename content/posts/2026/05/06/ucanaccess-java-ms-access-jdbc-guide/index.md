@@ -1,6 +1,5 @@
 ---
 title: "UCanAccess: The Modern Pure-Java Bridge to Microsoft Access"
-slug: "ucanaccess-java-ms-access-jdbc-guide"
 date: "2026-05-06T08:44:00+00:00"
 lastmod: "2026-05-25T08:41:07+00:00"
 description: "Learn how to connect Java applications to Microsoft Access (.accdb/.mdb) using UCanAccess. A pure-Java, open-source JDBC driver for cross-platform database access."
@@ -16,18 +15,16 @@ categories:
   - "Tutorials"
 tags:
 related_posts:
+  - "idempotent-spring-boot-starter"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
-  - "did-ai-just-break-software-security-for-ever"
 frozen: false
 ---
 
 Microsoft Access databases are everywhere. Decades of `.mdb` and `.accdb` files silently power spreadsheets, small business applications, and legacy data stores across organizations of all sizes. Yet for Java developers, connecting to these files has historically meant wrestling with native Windows libraries, ODBC bridges, and platform-specific hacks.  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="ucanaccess-logo.svg" alt="UCanAccess Logo" class="wp-image-123938" style="width:320px">
-</figure>
+{{< img src="ucanaccess-logo.svg" class="aligncenter size-full is-resized" alt="UCanAccess Logo" style="width:320px" >}}
 
 **UCanAccess** puts an end to that. It is an open-source, pure-Java JDBC driver that lets you read and write Microsoft Access databases (`.mdb` and `.accdb`) just like any other SQL database --- no native drivers, no Windows dependency, no friction.
 

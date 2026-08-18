@@ -1,6 +1,5 @@
 ---
 title: "Facelift and Redesign for Foojay Homepage | foojat"
-slug: "redesigned-foojay-home"
 date: "2020-09-11T18:20:40+00:00"
 lastmod: "2021-08-23T12:51:58+00:00"
 description: "foojay.io has had a bit of a facelift over the past week. Now you can see directly on the homepage all the key pieces that make up foojay."

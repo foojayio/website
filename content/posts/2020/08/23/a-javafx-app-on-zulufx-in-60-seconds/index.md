@@ -1,6 +1,5 @@
 ---
 title: "How to get a JavaFX App on ZuluFX in 60 Seconds"
-slug: "a-javafx-app-on-zulufx-in-60-seconds"
 date: "2020-08-23T06:57:41+00:00"
 lastmod: "2021-09-03T09:27:33+00:00"
 description: "Here I show you how to use a popular distribution from Azul Zulu OpenJDK to build a JavaFX Hello World Application in 60 seconds."
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img fetchpriority="high" decoding="async" src="https://carlfx.files.wordpress.com/2020/08/duke_azul_jfx_shirt.png?w=174" alt="Duke's shirt with Azul and JavaFX." class="wp-image-3276" width="174" height="313">
-</figure>
+{{< img src="https://carlfx.files.wordpress.com/2020/08/duke_azul_jfx_shirt.png?w=174" class="alignleft is-resized" alt="Duke's shirt with Azul and JavaFX." width="174" height="313" >}}
 
 Most Java developers probably know by now that [Oracle](https://www.oracle.com/) has open sourced the Java JDK and hosted its source code on [Github](https://github.com/openjdk) (aka [Project Skara](https://openjdk.java.net/projects/skara/)).
 
@@ -46,12 +43,7 @@ Before we start the stopwatch (60 seconds), let's install the ZuluFX distributio
 
 [Azul](https://www.azul.com/downloads/zulu-community) creates a free and user-friendly distribution of the JDK bundled with JavaFX. Azul provides a simple user interface shown in figure 1 that allows you to pick and choose an appropriate version of the JDK and JavaFX in one compressed file to be downloaded. To get paid commercial Java support check out Azul's [support](https://www.azul.com/products/zulu-enterprise/) subscriptions.
 
-<figure class="wp-block-image is-resized is-style-default">
- <a target="_blank" href="https://www.azul.com/downloads/zulu-community"><img decoding="async" src="https://carlfx.files.wordpress.com/2020/08/download-zulu-builds-of-openjdk.png?w=1024" alt="Azul System's Download of OpenJDK" class="wp-image-3280" width="668" height="327"></a>
- <figcaption>
-  Figure 1. https://www.azul.com/downloads/zulu-community
- </figcaption>
-</figure>
+{{< img src="https://carlfx.files.wordpress.com/2020/08/download-zulu-builds-of-openjdk.png?w=1024" class="is-resized" alt="Azul System's Download of OpenJDK" width="668" height="327" caption="Figure 1. https://www.azul.com/downloads/zulu-community" >}}
 
 Download **ZuluFX** (JDK \& JavaFX bundle) from:   
 [https://www.azul.com/downloads/zulu-community](https://www.azul.com/downloads/zulu-community/?package=jdk-fx)
@@ -93,13 +85,13 @@ OpenJDK 64-Bit Server VM Zulu14.29+23-CA (build 14.0.2+12, mixed mode, sharing)
 # Verify JavaFX Modules are included in Zulu's Open JDK
 $ java --list-modules
 ...
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48e859285829cca86859781a4d5d0cad4cad6">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="274d465146415f094448495355484b5467161309170915">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f757e697e796731796772735f2e2b312f312d">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b414a5d4a4d53054c594a5b434248586b1a1f051b0519">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4329223522253b6d2e26272a220372776d736d71">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0dad1c6d1d6c89ec3c7d9ded7f081849e809e82">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a505b4c5b5c42144d5f587a0b0e140a1408">[email protected]</a>
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
 ...
 ```
 
@@ -109,12 +101,7 @@ On your mark, get set, **GO!**
 
 ***Step 1:*** Create the **`helloworld`** project directory structure
 
-<figure class="wp-block-image size-large is-resized is-style-default">
- <img decoding="async" src="initial-proj-directory.png" alt="" class="wp-image-32798" width="381" height="64">
- <figcaption>
-  Figure 1. Initial project and source code directories created.
- </figcaption>
-</figure>
+{{< img src="initial-proj-directory.png" class="size-large is-resized" width="381" height="64" caption="Figure 1. Initial project and source code directories created." >}}
 
 The following commands create the project and src directories.
 
@@ -188,12 +175,7 @@ The **exports** keyword exposes the **com.mycompany.helloworld** module to the r
 
 The file will be created in the directory **src/com.mycompany.helloworld/com/mycompany/helloworld** as shown in figure 4 below.
 
-<figure class="wp-block-image is-resized">
- <img loading="lazy" decoding="async" src="https://carlfx.files.wordpress.com/2020/08/helloworld.java_.png?w=279" alt="" class="wp-image-3303" width="428" height="267">
- <figcaption>
-  Figure 4. HelloWorld.java application file
- </figcaption>
-</figure>
+{{< img src="https://carlfx.files.wordpress.com/2020/08/helloworld.java_.png?w=279" class="is-resized" width="428" height="267" caption="Figure 4. HelloWorld.java application file" >}}
 
 Use **[vim](https://www.vim.org/)** for those who despise those other wimpy editors 😉
 
@@ -256,16 +238,11 @@ javac -d mods/com.mycompany.helloworld src/com.mycompany.helloworld/module-info.
 
 After compiling your code the class files the mods directory should look like the following:
 
-<figure class="wp-block-image is-resized">
- <img loading="lazy" decoding="async" src="https://carlfx.files.wordpress.com/2020/08/compiled-classes.png?w=310" alt="" class="wp-image-3304" width="374" height="366">
- <figcaption>
-  Figure 5. Compiled classes in the mods directory.
- </figcaption>
-</figure>
+{{< img src="https://carlfx.files.wordpress.com/2020/08/compiled-classes.png?w=310" class="is-resized" width="374" height="366" caption="Figure 5. Compiled classes in the mods directory." >}}
 
 ***Step 7:***Execute the JavaFX HelloWorld application!
 
-Execute the Hello World application as a module. After compiling the module into the **mods** directory you will now use Java 9 or above's new ***--module-path***` `option to specify a compiled module's directory. Also, you will specify the***-m*** option to execute the module and its main class **HelloWorld**. Use the following command:
+Execute the Hello World application as a module. After compiling the module into the **mods** directory you will now use Java 9 or above's new `--module-path `option to specify a compiled module's directory. Also, you will specify the***-m*** option to execute the module and its main class **HelloWorld**. Use the following command:
 
 ```bash
 java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.HelloWorld
@@ -273,12 +250,7 @@ java --module-path mods -m com.mycompany.helloworld/com.mycompany.helloworld.Hel
 
 The following is the output of the previous command:
 
-<figure class="wp-block-image is-resized">
- <a target="_blank" href="https://carlfx.files.wordpress.com/2016/04/screen-shot-2016-04-26-at-1-42-13-am.png"><img loading="lazy" decoding="async" src="https://carlfx.files.wordpress.com/2016/04/screen-shot-2016-04-26-at-1-42-13-am.png?w=625" alt="Output of a JavaFX Hello World Application " class="wp-image-3223" width="333" height="302"></a>
- <figcaption>
-  Figure 6. The output of a JavaFX Hello World application.
- </figcaption>
-</figure>
+{{< img src="https://carlfx.files.wordpress.com/2016/04/screen-shot-2016-04-26-at-1-42-13-am.png?w=625" class="is-resized" alt="Output of a JavaFX Hello World Application" width="333" height="302" caption="Figure 6. The output of a JavaFX Hello World application." >}}
 
 ## Conclusion
 

@@ -1,6 +1,5 @@
 ---
 title: "You’re Doing It Wrong — Recruiting a DevRel"
-slug: "youre-doing-it-wrong-recruiting-a-devrel"
 date: "2022-11-25T14:42:15+00:00"
 lastmod: "2022-11-25T14:48:36+00:00"
 description: "Hiring a developer relations/advocate is difficult. It's even harder to be the first DevRel in the company."

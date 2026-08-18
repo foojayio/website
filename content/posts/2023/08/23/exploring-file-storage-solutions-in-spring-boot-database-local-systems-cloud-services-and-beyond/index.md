@@ -1,6 +1,5 @@
 ---
 title: "Exploring File Storage Solutions in Spring Boot"
-slug: "exploring-file-storage-solutions-in-spring-boot-database-local-systems-cloud-services-and-beyond"
 date: "2023-08-23T08:07:19+00:00"
 lastmod: "2023-08-23T08:13:32+00:00"
 description: "In this article, we will cover how to store files in a database using Spring Boot and discuss some alternatives."
@@ -38,6 +37,8 @@ That being said, if you're building a small-scale application or have specific r
 To begin, we create an Entity class. This class represents the data that we will store in the database. An example Document entity with fields name, type, and data might look like this:
 
 ```
+
+```java
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,11 +63,15 @@ public class Document {
 }
 ```
 
+```
+
 In this class, **@Lob** denotes that the data attribute should be stored as a **BLOB** in the database.  
 
 The equivalent MySQL table for the Document entity class would look something like this:
 
 ```
+
+```sql
 create table files.document
 (
     id   bigint auto_increment
@@ -75,6 +80,8 @@ create table files.document
     type varchar(255) null,
     data longblob     null
 );
+```
+
 ```
 
 **data LONGBLOB:**This creates a data column using the LONGBLOB datatype, which can hold a BLOB (Binary Large Object) of data of up to 4GB.
@@ -92,13 +99,19 @@ Please ensure that your MySQL database can indeed support that maximum size. If 
 Next, we create a Repository interface extending JpaRepository. This gives us a variety of standard methods for CRUD operations that we can use with our Document entities.
 
 ```
+
+```java
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 }
+```
+
 ```
 
 ### Step 3: Service Class
 
 ```
+
+```java
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -114,9 +127,13 @@ public class FileUploadService {
 }
 ```
 
+```
+
 ### Step 4: Controller Class
 
 ```
+
+```java
 @Slf4j
 @RestController
 @RequestMapping("/files")
@@ -135,6 +152,8 @@ public class FileUploadController {
 }
 ```
 
+```
+
 When the user sends an HTTP POST request to upload a file, the uploadFile method will be triggered, which creates a new Document object with the file's details and data.
 
 It then uses the fileUploadService.saveFileInDatabase(file) **;** to persist this object in the database.
@@ -150,6 +169,8 @@ You can write your files to your server's local file system. While this can be v
 Here's what saving a file to the local file system might look like
 
 ```
+
+```java
 public void saveFileInFileSystem(MultipartFile file) throws IOException {
     log.info("Uploading file to local file system: {}", file.getOriginalFilename());
 
@@ -165,10 +186,16 @@ public void saveFileInFileSystem(MultipartFile file) throws IOException {
 }
 ```
 
+```
+
 Now run the application and do curl:
 
 ```
+
+```bash
 curl -X POST -H 'Content-Type: multipart/form-data' -F 'file=@/home/uses/uploads/_cd03deb1-489d-4867-9b5b-2ffde99a3e20.jpeg http://localhost:8080/files/upload
+```
+
 ```
 
 ### **Cloud Storage Services**
@@ -178,6 +205,8 @@ Services like Amazon S3, Google Cloud Storage, and Azure Blob Storage are built 
 These services provide durability, security, and performance for your applications. Here's an example of how you might upload a file to Amazon S3 using the AWS SDK for Java:
 
 ```
+
+```java
 public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
     log.info("Uploading file to s3: {}", multipartFile.getOriginalFilename());
     var s3Client = getS3Client();
@@ -193,6 +222,8 @@ public void uploadFileToS3(MultipartFile multipartFile) throws IOException {
         throw new RuntimeException("Failed to upload file to s3");
     }
 }
+```
+
 ```
 
 ### **Content Delivery Network (CDN) Storage**

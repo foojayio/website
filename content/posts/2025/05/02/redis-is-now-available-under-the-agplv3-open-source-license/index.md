@@ -1,6 +1,5 @@
 ---
 title: "Redis is now available under the AGPLv3 open source license"
-slug: "redis-is-now-available-under-the-agplv3-open-source-license"
 date: "2025-05-02T12:15:59+00:00"
 lastmod: "2025-05-02T12:23:26+00:00"
 description: "Redis 8 with its new capabilities and with AGPL licensing demonstrates our ongoing commitment to making a platform developers love."

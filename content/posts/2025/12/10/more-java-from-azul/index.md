@@ -1,6 +1,5 @@
 ---
 title: "More Java From Azul!"
-slug: "more-java-from-azul"
 date: "2025-12-10T17:14:23+00:00"
 lastmod: "2025-12-11T09:50:58+00:00"
 description: "Strategic acquisition bolsters Azul’s Java platform with complementary products, deep Java expertise and accelerated go-to-market capabilities!"

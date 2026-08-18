@@ -1,6 +1,5 @@
 ---
 title: "SolarWinds Hack: What Does This Mean For Us?"
-slug: "solarwinds-hack-and-the-executive-order-of-cybersecurity-what-does-this-mean-for-us"
 date: "2021-08-19T08:19:56+00:00"
 lastmod: "2021-08-19T08:19:58+00:00"
 description: "New attack vectors are becoming more and more sophisticated and are directed more and more against the value chain in general!"

@@ -1,6 +1,5 @@
 ---
 title: "Kotlin adoption inside ING, five years later"
-slug: "ing-kotlin-adoption-five-years"
 date: "2025-07-02T06:21:47+00:00"
 lastmod: "2025-07-02T06:24:15+00:00"
 description: "TL;DR : 5 years after its introduction Kotlin adoption inside ING keeps growing year after year, with a current adoption rate of just over 11%."

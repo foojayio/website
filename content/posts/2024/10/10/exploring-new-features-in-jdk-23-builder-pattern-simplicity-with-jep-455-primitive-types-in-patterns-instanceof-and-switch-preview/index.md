@@ -1,6 +1,5 @@
 ---
 title: "Builder Pattern Simplicity with JEP-455 Primitive Types"
-slug: "exploring-new-features-in-jdk-23-builder-pattern-simplicity-with-jep-455-primitive-types-in-patterns-instanceof-and-switch-preview"
 date: "2024-10-10T10:54:08+00:00"
 lastmod: "2024-10-10T11:00:56+00:00"
 description: "Explore how to shift an object initiation process across various parties with creational pattern builder and JEP-455."

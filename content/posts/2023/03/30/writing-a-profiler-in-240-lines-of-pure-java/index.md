@@ -1,6 +1,5 @@
 ---
 title: "Writing a Profiler in 240 Lines of Pure Java"
-slug: "writing-a-profiler-in-240-lines-of-pure-java"
 date: "2023-03-30T07:14:46+00:00"
 lastmod: "2023-03-30T07:14:47+00:00"
 description: "How to develop a tiny Java profiler, that can output flame graphs, in just 240 lines of pure Java, making it easy for anyone to understand."
@@ -375,14 +374,14 @@ private static class Node {
                 <head>                                                                                                                                                                                                   
                   <link rel="stylesheet" 
                    type="text/css" 
-                   href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="395d0a145f5558545c145e4b584951790d1708170a">[email protected]</a>/dist/d3-flamegraph.css">                                                                                
+                   href="https://cdn.jsdelivr.net/npm/[email protected]/dist/d3-flamegraph.css">                                                                                
                 </head>                                                                                                                                                                                                  
                 <body>                                                                                                                                                                                                   
                   <div id="chart"></div>                                                                                                                                                                                 
                   <script type="text/javascript" 
                    src="https://d3js.org/d3.v7.js"></script>                                                                                                                               
                   <script type="text/javascript" 
-                   src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25411608434944484008425744554d65110b140b16">[email protected]</a>/dist/d3-flamegraph.min.js"></script>                                                                             
+                   src="https://cdn.jsdelivr.net/npm/[email protected]/dist/d3-flamegraph.min.js"></script>                                                                             
                   <script type="text/javascript">                                                                                                                                                                        
                   var chart = flamegraph().width(window.innerWidth);                                                                                                                                                     
                   d3.select("#chart").datum(""");                                                                                                                                                                        

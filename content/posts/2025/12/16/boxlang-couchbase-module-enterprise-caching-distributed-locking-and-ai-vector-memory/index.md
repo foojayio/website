@@ -1,6 +1,5 @@
 ---
 title: "BoxLang Native Couchbase Module"
-slug: "boxlang-couchbase-module-enterprise-caching-distributed-locking-and-ai-vector-memory"
 date: "2025-12-16T08:37:02+00:00"
 lastmod: "2025-12-17T08:28:07+00:00"
 description: "Ortus Solutions is thrilled to announce the official release of bx-couchbase v1.0, a groundbreaking module that brings enterprise-grade Couchbase capabilities to the BoxLang ecosystem"
@@ -39,7 +38,7 @@ bx-couchbase introduces a complete cache provider with replication, fault tolera
 ```
 cache("default").set("user:123", {
     name: "Alice Smith",
-    email: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="62030e0b010722071a030f120e074c010d0f">[email protected]</a>",
+    email: "[email protected]",
     role: "admin"
 } )
 

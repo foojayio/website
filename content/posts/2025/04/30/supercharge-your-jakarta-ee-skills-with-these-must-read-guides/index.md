@@ -1,6 +1,5 @@
 ---
 title: "Supercharge Your Jakarta EE Skills with These Must-Read Guides"
-slug: "supercharge-your-jakarta-ee-skills-with-these-must-read-guides"
 date: "2025-04-30T09:49:03+00:00"
 lastmod: "2025-05-01T07:52:49+00:00"
 description: "Jakarta EE is a mature, powerful platform — but it’s also approachable, thanks to resources like these!"

@@ -1,6 +1,5 @@
 ---
 title: "EJB support in Piranha via CDI"
-slug: "ejb-support-in-piranha-via-cdi"
 date: "2022-11-15T14:14:42+00:00"
 lastmod: "2022-11-15T14:15:30+00:00"
 description: "Piranha Cloud takes a novel approach and maps Enterprise Beans annotations to equivalent functionality in CDI or other Jakarta EE APIs."
@@ -108,11 +107,9 @@ More information:
 
 [This article was originally published on the](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) [OmniFish blog. For more information about Jakarta EE, Eclipse GlassFish and related topics, subscribe to follow the OmniFish blog here:](https://omnifish.ee/2022/11/01/ejb-support-in-piranha-via-cdi/) <https://omnifish.ee/blog/>.  
 
-<figure class="alignleft size-full is-resized">
- <img decoding="async" src="omnifish-logo-transparent-400px-margin.png" alt="" class="wp-image-60966" width="200" height="200">
-</figure>
+{{< img src="omnifish-logo-transparent-400px-margin.png" class="alignleft size-full is-resized" width="200" height="200" >}}
 
-## OmniFish - Jakarta EE experts
+## OmniFish - Jakarta EE experts {#more-61006}
 
 * Eclipse GlassFish Production Support
 * Jakarta EE Consulting

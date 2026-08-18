@@ -1,6 +1,5 @@
 ---
 title: "Java 24 Rolls Out Today! Find Out Why It's Aptly Named"
-slug: "java-24-rolls-out-today-find-out-why-its-aptly-named"
 date: "2025-03-18T07:36:39+00:00"
 lastmod: "2025-03-18T07:43:55+00:00"
 description: "Java 24 rolls out today, and it brings a diverse set of features. For example, compact object headers bring better performance, and various security features have been added. Or how about the eagerly-awaited solution to virtual thread pinning? This post has all the info! - by Hanno Embregts"

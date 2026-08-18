@@ -31,7 +31,13 @@ should catch a mistake at PR time rather than letting it fail silently.
 ## What exists so far
 
 - **Hugo skeleton**: `hugo.toml`, `themes/foojay/` (layouts + `static/css/style.css`),
-  `archetypes/` for posts/authors/pages.
+  and `template/` (article / author / page starter files + the category list;
+  see `template/README.md`). There is deliberately no `archetypes/` folder —
+  nothing runs `hugo new`, and keeping a second set of starter files under a
+  Hugo-specific name meant two places to look. They drifted: the post archetype
+  wrote a singular `author:` against author *files*, while posts take an
+  `authors:` list of author *folders*, so anything created from it failed
+  `ValidateFrontmatter`. Add starter files to `template/`, not `archetypes/`.
 - **Two jbang conversion scripts** in `scripts/`: `ConvertPosts.java` and
   `ConvertAuthors.java`. They scrape the live foojay.io site (no WP admin/DB
   access was used or assumed) and write Hugo content markdown. Both are
@@ -100,6 +106,14 @@ should catch a mistake at PR time rather than letting it fail silently.
   this into a second blanket unescape: content/ has a JSF snippet whose
   `value="Food &amp; Culture"` and a post that appends a literal `"&nbsp;"`
   string, and a blanket pass corrupts both.
+
+  It also turns the **non-breaking spaces WordPress indents code with** into
+  ordinary ones (`HtmlToMarkdown.normalizeCodeSpaces`). A U+00A0 looks like an
+  indent in the rendered block but isn't one — copy the sample out and the
+  compiler chokes on it. This script always did it; the SCRAPER did not, so a
+  re-scrape put 10,270 of them back across 36 posts. Both call the same method
+  now. Fence bodies and inline code only — a U+00A0 in prose is left alone (147
+  of them, harmless, and sometimes deliberate).
 
   The repair covers **fence bodies, inline code spans and Markdown link
   destinations** — the three places WP damage can land. Code spans get the same

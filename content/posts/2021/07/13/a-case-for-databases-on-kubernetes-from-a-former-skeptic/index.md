@@ -1,6 +1,5 @@
 ---
 title: "A Case for Databases on Kubernetes from a Former Skeptic"
-slug: "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
 date: "2021-07-13T09:12:18+00:00"
 lastmod: "2021-11-10T23:02:46+00:00"
 description: "Should you run a database on Kubernetes? Let's retrace the stages in the journey to my current answer: “In a cloud native environment? Yes!”"

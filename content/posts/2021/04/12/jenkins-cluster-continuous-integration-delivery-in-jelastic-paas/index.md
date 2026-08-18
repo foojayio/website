@@ -1,6 +1,5 @@
 ---
 title: "Jenkins Cluster for Continuous Integration and Delivery in Jelastic PaaS"
-slug: "jenkins-cluster-continuous-integration-delivery-in-jelastic-paas"
 date: "2021-04-12T12:44:50+00:00"
 lastmod: "2021-09-16T14:50:47+00:00"
 description: "Automate Java applications continuous integration and delivery with pre-configured master-slave Jenkins cluster from Jelastic PaaS."
@@ -36,7 +35,7 @@ In this article, we'll describe how to install Jenkins cluster with slave nodes 
 
 3. As shown in the picture below, the deployed Jenkins topology comprises one master node and two worker nodes.
 
-<img decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-environment-1.png" width="625" height="254">
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-environment-1.png" class="size-medium" width="625" height="254" >}}
 
 ### Installation as New Environment
 
@@ -56,7 +55,7 @@ Change the number of executors and apply changes with the **Save** button.
 
 For example you build tasks stuck in a long queue, the worker nodes can be [scaled out horizontally](https://jelastic.com/blog/horizontal-scaling-of-cloud-environments-stateless-stateful-automatic/) either manually or automatically for speeding up a large number of the project builds. In such cases, the package ensures an automatic discovery of new worker nodes by the Jenkins master node. It takes just a couple minutes to expand cluster e.g. up to 10 workers.
 
-<img loading="lazy" decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-cicd-1.png" width="711" height="154">
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2020/02/jenkins-cluster-cicd-1.png" class="size-medium" width="711" height="154" >}}
 
 Press **Change Environment Topology** and choose Workers layer (Java Engine) and do horizontal scaling with + button in the **Horizontal Scaling** section of the wizard. It's also preferable to choose **stateless** scaling mode as we do not store any important state in the workers.
 
@@ -120,7 +119,7 @@ As for our example, we use four variables defined globally for the project:
 * **JELASTIC_API_ENDPOINT** - Defines destination hosting platform hostname. See Hoster Domain field in the list of [Jelastic Hosting Providers](https://docs.jelastic.com/jelastic-hoster-info).
 * **TARGET_ENV** - deployment destination environment [shortdomain](https://docs.jelastic.com/create-env-api) name within the destination hosting platform. The destination environment must have a Java application server, here we use [Tomcat](https://docs.jelastic.com/tomcat). You can deploy to a single node environment or clusterized one.  
 
-<img loading="lazy" decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Domain-2.png" width="841" height="195">
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Domain-2.png" class="size-medium" width="841" height="195" >}}
 
 * **TOKEN** - access token for the platform on which the deployment environment is located.Set the **Description** for new access token and expiry date, then in the **API** field use a predefined **Maven Plugin** template which will allow the DeployApp API method to be executed. The respective access parameters will be selected automatically.  
   ![](https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Access-Token-1.png)
@@ -173,7 +172,7 @@ If the build procedure succeeds, it means that Jenkins deployed the result appli
 
 Click on the **Open in Browser** button at the destination server to make sure the deployment was performed properly.
 
-<img loading="lazy" decoding="async" class="alignnone size-medium" src="https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Java-Application-Deployment.png" width="838" height="194">
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2020/02/Jenkins-Cluster-Java-Application-Deployment.png" class="size-medium" width="838" height="194" >}}
 
 The *helloworld.war* application web page should be displayed as follows.
 

@@ -1,6 +1,5 @@
 ---
 title: "Exploring New Features in JDK 23: Simplifying Java with Module Import Declarations with JEP 476"
-slug: "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"
 date: "2024-06-20T16:14:08+00:00"
 lastmod: "2024-06-20T16:15:54+00:00"
 description: "JEP 476 represents a significant step towards simplifying Java programming by reducing boilerplate code and improving readability."

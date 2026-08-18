@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 13)"
-slug: "java-thread-programming-part-13"
 date: "2022-02-08T08:15:29+00:00"
 lastmod: "2022-02-08T08:19:37+00:00"
 description: "What is the maximum number of worker threads we can put in a ThreadPool? Let's find out today on Foojay's amazing Java threading series!"
@@ -89,7 +88,9 @@ However, in a most typical scenario, we usually have a diverse set of tasks. And
 
 In "[**Java Concurrency in Practice**](https://www.amazon.ca/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601/)," Brian Goetz provided a formula that we can use in most cases.
 
-`Number of threads = Number of Available Cores * (1 + Wait time / Service time)`
+```
+Number of threads = Number of Available Cores * (1 + Wait time / Service time)
+```
 
 **Waiting time**- could IO, e.g., waiting for an HTTP response, acquiring Lock, etc.
 

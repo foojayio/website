@@ -1,6 +1,5 @@
 ---
 title: "Does Java 18 Finally Have A Better Alternative To JNI?"
-slug: "does-java-18-finally-have-a-better-alternative-to-jni"
 date: "2022-04-19T21:01:50+00:00"
 lastmod: "2022-04-19T21:03:36+00:00"
 description: "Java 18, released last month, includes the 2nd incubator of the Foreign Function & Memory API (FFI). Let's look at the state of the Java FFI."

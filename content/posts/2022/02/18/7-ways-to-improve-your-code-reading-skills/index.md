@@ -1,6 +1,5 @@
 ---
 title: "7 Ways to Improve Your Code Reading Skills"
-slug: "7-ways-to-improve-your-code-reading-skills"
 date: "2022-02-18T21:21:56+00:00"
 lastmod: "2022-02-21T06:29:24+00:00"
 description: "As more and more companies go Agile, being able to read other's code is more important than ever. Read on for some tips on how to improve this skill."

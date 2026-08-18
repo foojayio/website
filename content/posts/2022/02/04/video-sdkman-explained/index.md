@@ -1,6 +1,5 @@
 ---
 title: "Video: SDKMAN Explained"
-slug: "video-sdkman-explained"
 date: "2022-02-04T08:30:04+00:00"
 lastmod: "2022-02-04T08:31:28+00:00"
 description: "One of the highlights of the Friends of OpenJDK room at FOSDEM 2021 was Marco Vermeulen, the creator of SDKMAN, talking about SDKMAN."

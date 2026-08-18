@@ -1,6 +1,5 @@
 ---
 title: "Runtime Code Analysis in the Age of Vibe Coding"
-slug: "runtime-code-analysis-in-the-age-of-vibe-coding"
 date: "2026-02-17T14:00:00+00:00"
 lastmod: "2026-02-17T18:33:34+00:00"
 description: "In the era of vibe coding—where large amounts of code are introduced or refactored in short bursts, often with the help of LLMs—you need immediate - by Suneet Kamath"
@@ -15,9 +14,9 @@ categories:
 tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-  - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
 frozen: false
 ---
 

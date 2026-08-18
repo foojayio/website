@@ -1,6 +1,5 @@
 ---
 title: "Unikernel: Profiling and Troubleshooting JVM on Nanos Unikernel"
-slug: "unikernel-profiling-and-troubleshooting-jvm-on-nanos-unikernel"
 date: "2026-02-11T13:50:41+00:00"
 lastmod: "2026-02-11T21:24:49+00:00"
 description: "Profiling a Java Application Running Inside an Unikernel with JProfiler Unikernels are often associated with minimalism and tight resource control. But - by Angelo Rubini"

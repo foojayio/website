@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #61: Keep Your Body And Mind Healthy"
-slug: "foojay-podcast-61"
 date: "2024-11-18T08:03:10+00:00"
 lastmod: "2025-11-13T08:41:11+00:00"
 description: "At Devoxx and JFall, we talked with several people about staying physically and mentally healthy as software developers."

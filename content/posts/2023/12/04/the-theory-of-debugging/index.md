@@ -1,6 +1,5 @@
 ---
 title: "The Theory of Debugging"
-slug: "the-theory-of-debugging"
 date: "2023-12-04T09:18:49+00:00"
 lastmod: "2023-12-04T09:18:50+00:00"
 description: "What do you do when you have a bug? Using a well defined process instead of looking everywhere, can change the issue resolution process."

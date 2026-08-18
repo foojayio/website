@@ -1,6 +1,5 @@
 ---
 title: "Spring 6.1 - RestClient"
-slug: "spring-6-1-restclient"
 date: "2023-08-30T16:23:40+00:00"
 lastmod: "2023-08-31T17:46:29+00:00"
 description: "Getting started making use of the new RestClient introduced in Spring 6.1!"
@@ -117,7 +116,25 @@ And we'll receive:
 
 ### Error handling
 
-By default, RestClient will throw a subclass of RestClientException upon a `4**` or `5**` status code, but we can override this using `onStatus` so that we can define our own status handlers:
+By default, RestClient will throw a subclass of RestClientException upon a
+
+```
+4**
+```
+
+or
+
+```
+5**
+```
+
+status code, but we can override this using
+
+```
+onStatus
+```
+
+so that we can define our own status handlers:
 
 ```java
 .onStatus(HttpStatusCode::is4xxClientError, ((request, response) -> {
@@ -127,7 +144,13 @@ By default, RestClient will throw a subclass of RestClientException upon a `4**`
 
 ### More granular control
 
-In some cases, we might want to do some more advanced things for which we need access to the underlying HTTP request or HTTP response. This can be achieved by using`exchange`.
+In some cases, we might want to do some more advanced things for which we need access to the underlying HTTP request or HTTP response. This can be achieved by using
+
+```java
+exchange
+```
+
+.
 
 **note**: Status handlers are not applied when using exchange as you already have full access to the response, so you can perform any needed error handling.
 
@@ -144,7 +167,25 @@ return this.restClient
 
 ## Wrap-up
 
-I hope this sheds some light on the how, and why. And if you're adding `Webflux` just to make use of `WebClient` please consider changing to `RestClient`.
+I hope this sheds some light on the how, and why. And if you're adding
+
+```
+Webflux
+```
+
+just to make use of
+
+```
+WebClient
+```
+
+please consider changing to
+
+```
+RestClient
+```
+
+.
 
 In case you want to read a bit more about this:
 

@@ -1,6 +1,5 @@
 ---
 title: "Why I moved my blog to RIFE2 after 23 years?"
-slug: "why-i-moved-my-blog-to-rife2-after-23-years"
 date: "2024-03-05T06:42:47+00:00"
 lastmod: "2024-03-05T07:19:54+00:00"
 description: "In April 2023, I decided to move my 23-year-old blog to RIFE2, a no-dependencies full-stack Java framework…"
@@ -17,7 +16,7 @@ related_posts:
   - "getting-started-with-rife2-java-web-framework-v1-0-0"
   - "web-app-startup-in-3ms-with-rife2-and-graalvm"
   - "introducing-bld-a-new-pure-java-build-system"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

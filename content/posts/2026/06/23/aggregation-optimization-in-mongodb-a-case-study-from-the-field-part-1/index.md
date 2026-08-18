@@ -1,6 +1,5 @@
 ---
 title: "Aggregation Optimization in MongoDB: A Case Study From the Field (Part 1)"
-slug: "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
 date: "2026-06-23T13:17:32+00:00"
 lastmod: "2026-06-24T07:10:03+00:00"
 description: "MongoDB, by virtue of its use of the document data model rather than the rows and columns of tabular RDBMSs, provides ways of modeling relationships that can offer significant performance benefits when querying that data. However, to realize those benefits, data must be modeled in MongoDB using schema design patterns that are optimized for the document data model, and frequently, those are not the same as would be appropriate in a RDBMS"
@@ -20,9 +19,7 @@ frozen: false
 
 ## And why MongoDB might be a better relational database than you ever realized.
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" width="700" height="307" src="tue11.png" alt="" class="wp-image-124328" style="width:840px;height:auto">
-</figure>
+{{< img src="tue11.png" class="size-full is-resized" width="700" height="307" style="width:840px;height:auto" >}}
 
 *This article was written by Graeme Robinson. Find him on* [*LinkedIn*](https://www.linkedin.com/in/graemecrobinson)*.*
 

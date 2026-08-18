@@ -1,6 +1,5 @@
 ---
 title: "Let's Create Mappers Without Creating Underlying Objects in Java"
-slug: "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
 date: "2022-09-20T09:16:35+00:00"
 lastmod: "2022-09-20T09:19:07+00:00"
 description: "Learn how to devise a way of creating an object-creation-free, light-weighted mapper with rudimentary lookup capability."

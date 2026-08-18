@@ -1,6 +1,5 @@
 ---
 title: "The SolarWinds Hack for Java Developers"
-slug: "the-solarwinds-hack-for-java-developers"
 date: "2021-02-09T07:39:53+00:00"
 lastmod: "2021-02-09T12:40:16+00:00"
 description: "For Java developers and architects who design, build, and run applications, there are two core take-aways to the SolarWinds hack..."
@@ -56,7 +55,9 @@ Java offers signed JAR files as a way of verifying the integrity of a library. T
 
 The most common process for applying signatures is, an automated tool checks out code and compiles it, packages the class files into a JAR file, then signs the JAR file (or hands it to a signing service). Other users can then verify the signature by [verifying signed JAR files](https://docs.oracle.com/javase/tutorial/deployment/jar/verify.html) even if they do not know the original author. The command for this is:
 
-`jarsigner -verify file.jar -verbose`
+```
+jarsigner -verify file.jar -verbose
+```
 
 This command will inform whether the signature is valid or if anything has been modified. Software alone cannot validate if the signature was by the right party, so it is critical to verify that the output chains to a valid root certificate authority and that the signer's name matches what is expected.
 

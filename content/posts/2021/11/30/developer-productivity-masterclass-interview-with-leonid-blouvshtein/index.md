@@ -1,6 +1,5 @@
 ---
 title: "Developer Productivity Masterclass: Interview With Leonid Blouvshtein"
-slug: "developer-productivity-masterclass-interview-with-leonid-blouvshtein"
 date: "2021-11-30T09:09:01+00:00"
 lastmod: "2021-11-30T09:15:37+00:00"
 description: "Are the problems startups run into different from the ones experienced by Netflix, Hashicorp and Meta? Learn about increased productivity!"
@@ -26,7 +25,7 @@ frozen: false
 
 [
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-50863" src="devprodmaster-700x227.png" alt="" width="700" height="227">
+{{< img src="devprodmaster-700x227.png" class="size-medium" width="700" height="227" >}}
 
 ](https://www.linkedin.com/events/developerproductivitymasterclas6870717107772907520/)
 

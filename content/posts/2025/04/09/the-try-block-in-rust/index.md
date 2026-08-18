@@ -1,6 +1,5 @@
 ---
 title: "The try block in Rust"
-slug: "the-try-block-in-rust"
 date: "2025-04-09T12:37:58+00:00"
 lastmod: "2025-04-09T12:37:59+00:00"
 description: "I wrote previously about libs for error management in Rust. This week, I want to write about the try block, an experimental feature."

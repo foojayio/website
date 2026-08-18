@@ -1,6 +1,5 @@
 ---
 title: "Kubernetes Is The Best Technology For Running A Cloud-Native Database"
-slug: "why-kubernetes-is-the-best-technology-for-running-a-cloud-native-database"
 date: "2021-06-30T09:13:19+00:00"
 lastmod: "2021-11-10T23:19:15+00:00"
 description: "A truly cloud-native approach means adopting key elements of the Kubernetes design paradigm. Let’s explore a few that point the way!"

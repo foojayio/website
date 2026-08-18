@@ -1,6 +1,5 @@
 ---
 title: "Announcement: JReleaser 0.5.0 Released!"
-slug: "jreleaser-0-5-0-released"
 date: "2021-07-01T07:54:13+00:00"
 lastmod: "2021-08-03T17:10:51+00:00"
 description: "JReleaser is a tool that streamlines creating releases for [Java] projects. It can create a GitHub/GitLab/Gitea release, and more!"

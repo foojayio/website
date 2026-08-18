@@ -1,6 +1,5 @@
 ---
 title: "My first steps with Playwright"
-slug: "my-first-steps-with-playwright"
 date: "2025-01-30T11:58:04+00:00"
 lastmod: "2025-01-30T11:58:06+00:00"
 description: "In my previous company, I developed a batch job that tracked metrics across social media, such as Twitter, LinkedIn, Mastodon, Bluesky, Reddit, etc."

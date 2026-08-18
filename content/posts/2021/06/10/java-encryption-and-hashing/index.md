@@ -1,6 +1,5 @@
 ---
 title: "Learn All About Java Encryption and Hashing"
-slug: "java-encryption-and-hashing"
 date: "2021-06-10T08:04:22+00:00"
 lastmod: "2021-06-10T08:17:54+00:00"
 description: "What is a strong encryption algorithm today, might be a weak algorithm a year from now. Therefore, encryption needs to be reviewed regularly!"

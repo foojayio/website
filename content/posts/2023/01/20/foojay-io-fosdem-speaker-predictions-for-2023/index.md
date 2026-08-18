@@ -1,6 +1,5 @@
 ---
 title: "Foojay.io FOSDEM Speaker Predictions for 2023"
-slug: "foojay-io-fosdem-speaker-predictions-for-2023"
 date: "2023-01-20T13:40:25+00:00"
 lastmod: "2023-01-31T08:34:13+00:00"
 description: "FOSDEM is around the corner and a group of great speakers is lined up to talk about the OpenJDK -- see what they predict for 2023!"

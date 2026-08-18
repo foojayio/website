@@ -1,6 +1,5 @@
 ---
 title: "Hilla 1.0 - A new reactive frontend framework for Spring Boot backends"
-slug: "hilla-1-0-a-new-frontend-framework-for-springboot"
 date: "2022-03-09T08:20:42+00:00"
 lastmod: "2022-03-09T08:21:32+00:00"
 description: "Hilla enables type-safe communication between SpringBoot backends and TS frontend. Integrated tooling and components help you build apps fast!"

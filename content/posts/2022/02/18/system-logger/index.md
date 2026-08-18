@@ -1,6 +1,5 @@
 ---
 title: "System Logger"
-slug: "system-logger"
 date: "2022-02-18T12:34:57+00:00"
 lastmod: "2022-02-18T12:34:58+00:00"
 description: "Almost all Java developers are familiar with logging frameworks like Log4j, but not the System.Logger that has been available since java 9."
@@ -25,7 +24,7 @@ December was not a good time for Java developers and even less for Ops. The form
 
 [
 
-<img fetchpriority="high" decoding="async" class="size-medium wp-image-52382 aligncenter" src="Screenshot-2022-02-12-at-16.53.31-700x451.png" alt="" width="700" height="451">
+{{< img src="Screenshot-2022-02-12-at-16.53.31-700x451.png" class="size-medium aligncenter" width="700" height="451" >}}
 
 ](https://twitter.com/OndroMih/status/1469599938782932992)
 In short, `System.Logger` is a façade over your logging engine. Instead of using, say, SFL4J's API and the wanted implementation, you'd use `System.Logger` instead of SLF4J. It's available since Java 9, and it's a bummer that I learned about it only recently.
@@ -34,7 +33,7 @@ In short, `System.Logger` is a façade over your logging engine. Instead of usin
 
 The API is a bit different than other logging APIs: it avoids different logging methods such as `debug()`, `info()` in favor of a single `log()` one where you pass a logging `Level` parameter.
 
-<img decoding="async" class="size-medium wp-image-52383 aligncenter" src="system-logger-api-700x369.png" alt="" width="700" height="369">
+{{< img src="system-logger-api-700x369.png" class="size-medium aligncenter" width="700" height="369" >}}
 
 If you don't provide any corresponding implementation on the classpath, `System.Logger` defaults to .
 
@@ -119,7 +118,7 @@ The snippet outputs:
 
 `System.Logger` relies on Java's [ServiceLoader](https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html) mechanism. Both `log4j-jpl` and `slf4j-jdk-platform-logging` contain a `META-INF/services/java.lang.System$LoggerFinder` file that points to a `LoggerFinder` implementation.
 
-<img decoding="async" class="size-medium wp-image-52384 aligncenter" src="system-loggerfinder-700x284.png" alt="" width="700" height="284">
+{{< img src="system-loggerfinder-700x284.png" class="size-medium aligncenter" width="700" height="284" >}}
 
 We can create our own based on `System.out` for educational purposes.  
 

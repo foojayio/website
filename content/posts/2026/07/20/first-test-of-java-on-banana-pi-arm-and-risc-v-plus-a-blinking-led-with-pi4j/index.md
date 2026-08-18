@@ -1,6 +1,5 @@
 ---
 title: "First Test of Java on Banana Pi (ARM and RISC-V), Plus a Blinking LED with Pi4J"
-slug: "first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j"
 date: "2026-07-20T06:03:00+00:00"
 description: "As part of my 2026 learning goals around Java on RISC-V (see this post about x86 versus ARM versus RISC-V), I've asked various suppliers to send me - by Frank Delporte"
 canonical: "https://webtechie.be/post/first-test-of-java-on-banana-pi-arm-and-risc-v-plus-a-blinking-led-with-pi4j/"

@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #24: BeJUG, BruJUG, and how Devoxx was born"
-slug: "foojay-podcast-24"
 date: "2023-06-05T08:21:41+00:00"
 lastmod: "2025-11-13T09:04:28+00:00"
 description: "The Foojay Java User Group World Tour has already brought us all over the world. In this episode, the host decided to stay at home in Belgium!"

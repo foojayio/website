@@ -105,7 +105,8 @@ public class MigrateEnlighterToFences {
             String head = original.substring(0, split);
             String body = original.substring(split);
             // Two independent repairs below; a file needs only one of them.
-            if (!body.contains("EnlighterJSRAW") && body.indexOf('&') < 0) continue;
+            if (!body.contains("EnlighterJSRAW") && body.indexOf('&') < 0
+                    && body.indexOf('\u00a0') < 0) continue;
 
             StringBuilder out = new StringBuilder();
             Matcher m = BLOCK.matcher(body);
@@ -186,7 +187,8 @@ public class MigrateEnlighterToFences {
      *
      * Covers the three places WP damage can land, and only those:
      *
-     *   fence bodies      -- via resolveDoubleEscaped, as before.
+     *   fence bodies      -- via resolveDoubleEscaped, plus normalizeCodeSpaces
+     *       for the U+00A0 WordPress indents samples with (see that method).
      *   inline code spans -- same rule, same reason: Markdown does not decode
      *       entities inside `...` either, so `DESCRIBE KEYSPACE &lt;name>`
      *       renders as a literal `&lt;`.
@@ -226,7 +228,8 @@ public class MigrateEnlighterToFences {
                 openMarker = null;
                 continue;
             }
-            String fixed = HtmlToMarkdown.resolveDoubleEscaped(lines[i]);
+            String fixed = HtmlToMarkdown.resolveDoubleEscaped(
+                    HtmlToMarkdown.normalizeCodeSpaces(lines[i]));
             if (!fixed.equals(lines[i])) {
                 lines[i] = fixed;
                 fixedLines[0]++;
@@ -240,12 +243,14 @@ public class MigrateEnlighterToFences {
      * A line containing an HTML tag is returned untouched -- see fixFenceEntities.
      */
     static String fixProseLine(String line) {
-        if (line.indexOf('&') < 0 || HTML_TAG.matcher(line).find()) return line;
+        if ((line.indexOf('&') < 0 && line.indexOf('\u00a0') < 0)
+                || HTML_TAG.matcher(line).find()) return line;
         String out = LINK_DEST.matcher(line).replaceAll(r ->
                 Matcher.quoteReplacement(HtmlToMarkdown.resolveEscapedUrl(r.group(1))));
         out = CODE_SPAN.matcher(out).replaceAll(r ->
                 Matcher.quoteReplacement(r.group(1)
-                        + HtmlToMarkdown.resolveDoubleEscaped(r.group(2)) + r.group(1)));
+                        + HtmlToMarkdown.resolveDoubleEscaped(
+                                HtmlToMarkdown.normalizeCodeSpaces(r.group(2))) + r.group(1)));
         return out;
     }
 

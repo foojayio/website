@@ -1,6 +1,5 @@
 ---
 title: "Pull request testing on Kubernetes: vCluster for isolation and costs control"
-slug: "pull-request-testing-on-kubernetes-vcluster-for-isolation-and-costs-control"
 date: "2025-03-16T11:47:20+00:00"
 lastmod: "2025-03-17T08:30:26+00:00"
 description: "This week's article is the third and final in my series about running tests on Kubernetes for each pull request."

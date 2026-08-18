@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI 3.2.0 — Image Generation, Web Search, Fluent Audio, Agent Registry & MCP Observability"
-slug: "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
 date: "2026-06-02T12:27:07+00:00"
 lastmod: "2026-06-02T12:33:49+00:00"
 description: "BoxLang AI 3.2.0 is here, and it's a landmark release. We're shipping five major features: image generation, web search, a fluent audio builder API, a - by Cristobal Escobar"
@@ -20,8 +19,8 @@ tags:
 related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
 ---
 

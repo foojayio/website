@@ -1,6 +1,5 @@
 ---
 title: "How to Develop AI Agents Using BoxLang AI: A Practical Guide"
-slug: "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
 date: "2026-05-12T12:52:39+00:00"
 lastmod: "2026-05-14T10:03:42+00:00"
 description: "AI agents are transforming how we build software. Unlike traditional chatbots that just answer questions, agents can reason about what tools they need, - by Cristobal Escobar"
@@ -18,9 +17,9 @@ categories:
 tags:
 related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
-  - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
 frozen: false
 ---
 
@@ -551,8 +550,8 @@ When you pass `userId` and `conversationId` through `agent.run()` options, they 
 
 ```java
 // Same agent instance, fully isolated per user
-agent.run( "My order is late.", {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefe2e7edebceebf6efe3fee2eba0ede1e3">[email protected]</a>", conversationId: "ticket-101" } )
-agent.run( "I need a refund.",  {}, { userId: "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="54363b3614312c35392438317a373b39">[email protected]</a>",   conversationId: "ticket-102" } )
+agent.run( "My order is late.", {}, { userId: "[email protected]", conversationId: "ticket-101" } )
+agent.run( "I need a refund.",  {}, { userId: "[email protected]",   conversationId: "ticket-102" } )
 ```
 
 No per-user agent factories. No thread-local hacks. One instance handles thousands of concurrent users safely.

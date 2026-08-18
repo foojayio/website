@@ -1,6 +1,5 @@
 ---
 title: "Johannes Bechberger's Tour d'Europe"
-slug: "report-of-my-small-tour-deurope"
 date: "2023-06-16T17:08:53+00:00"
 lastmod: "2023-06-16T17:16:25+00:00"
 description: "I spoke in two weeks in 3 countries, 4 cities and 5 different venues. This is my report on the trip. Check it out!"
@@ -25,12 +24,7 @@ Between 31st May and 14th June, I was on tour, giving seven talks in 4 cities in
 * 10th and 11th of June: [Gulasch Programmier Nacht Karlsruhe](https://cfp.gulas.ch/gpn21/speaker/9ZMNT9/)
 * 14th of June: [Karlsruher Entwicklertag](https://www.entwicklertag.de/2023/conference_day.html)
 
-<figure class="wp-block-image size-full is-resized">
- <img fetchpriority="high" decoding="async" src="https://mostlynerdless.de/wp-content/uploads/2023/06/image-7.png" alt="" class="wp-image-877" width="372" height="507">
- <figcaption class="wp-element-caption">
-  A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla).
- </figcaption>
-</figure>
+{{< img src="https://mostlynerdless.de/wp-content/uploads/2023/06/image-7.png" class="size-full is-resized" width="372" height="507" caption="A visualization of all the cities I visited, but I took the train for all transits (except for the Arnhem to Nieuwegein route, where Ties van de Ven drove me in his Tesla)." >}}
 
 It was an exciting trip, and I had the pleasure of visiting friends in Zurich and Augsburg and a [grain mill shop](https://www.muehlen-kaiser.de/) in Munich.
 

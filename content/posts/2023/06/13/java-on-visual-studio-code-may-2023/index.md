@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code – May 2023"
-slug: "java-on-visual-studio-code-may-2023"
 date: "2023-06-13T11:03:09+00:00"
 lastmod: "2023-06-13T11:03:10+00:00"
 description: "Tons of new features covering performance improvement, user experience as well as Spring Boot integration."

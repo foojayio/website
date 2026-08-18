@@ -1,6 +1,5 @@
 ---
 title: "Java on Visual Studio Code May 2024 Update - New AI Feature, Spring Updates"
-slug: "java-on-visual-studio-code-may-2024-update-new-ai-feature-spring-updates"
 date: "2024-06-18T10:42:26+00:00"
 lastmod: "2024-06-18T10:42:28+00:00"
 description: "An exciting new AI related feature for Java developers on Visual Studio Code."

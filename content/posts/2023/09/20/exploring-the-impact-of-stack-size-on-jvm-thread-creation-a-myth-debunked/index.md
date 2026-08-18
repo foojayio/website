@@ -1,6 +1,5 @@
 ---
 title: "Exploring the Impact of Stack Size on JVM Thread Creation: A Myth Debunked"
-slug: "exploring-the-impact-of-stack-size-on-jvm-thread-creation-a-myth-debunked"
 date: "2023-09-20T06:59:31+00:00"
 lastmod: "2023-09-20T07:28:45+00:00"
 description: "This article debunks the commonly held belief that stack size influences the number of native threads that can be created in a JVM environment."
@@ -14,7 +13,7 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

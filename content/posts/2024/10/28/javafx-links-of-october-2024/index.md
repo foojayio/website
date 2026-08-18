@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of October 2024"
-slug: "javafx-links-of-october-2024"
 date: "2024-10-28T18:19:34+00:00"
 lastmod: "2024-10-29T12:16:01+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of October 2024, published on jfx-central.com during this month."
@@ -15,7 +14,7 @@ related_posts:
   - "javafx-links-of-september-2024"
   - "javafx-links-of-august-2024"
   - "javafx-links-of-july-2024"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 
@@ -27,7 +26,7 @@ Let us know via [\[email protected\]](/cdn-cgi/l/email-protection).
 
 ## Core
 
-* Message from **Kevin Rushforth** in the [[email protected]](/cdn-cgi/l/email-protection) mailing list that shows how OpenJDK and OpenJFX keep being aligned thanks to the 6-months release cycle: "*I propose to remove support for running JavaFX applications with a security manager in JavaFX 24. Any JavaFX application that uses a security manager will necessarily need to use JDK 21.x LTS going forward, and thus can similarly use JavaFX 21.x LTS.* "
+* Message from **Kevin Rushforth** in the `[email protected]` mailing list that shows how OpenJDK and OpenJFX keep being aligned thanks to the 6-months release cycle: "*I propose to remove support for running JavaFX applications with a security manager in JavaFX 24. Any JavaFX application that uses a security manager will necessarily need to use JDK 21.x LTS going forward, and thus can similarly use JavaFX 21.x LTS.* "
   * See [JDK-8341090](https://bugs.openjdk.org/browse/JDK-8341090): "The Java Security Manager was deprecated for removal in JDK 17 by [JEP 411](https://openjdk.org/jeps/411)."
 * **Artur Skowronski** highlights in his [JVM Weekly newsletter](https://www.jvm-weekly.com/p/what-will-jdk-24-bring-jvm-weekly) some JavaFX facts:
   * *[JavaFX 23 announced by Kevin Rushforth](https://github.com/openjdk/jfx/blob/master/doc-files/release-notes-23.md) has hit the scene and brought with it a warning: "It's time to update." JavaFX has dropped support for older versions and will now require JDK 21.*

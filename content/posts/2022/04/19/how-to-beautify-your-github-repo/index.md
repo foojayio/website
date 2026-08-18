@@ -1,6 +1,5 @@
 ---
 title: "How To Beautify Your GitHub Repo"
-slug: "how-to-beautify-your-github-repo"
 date: "2022-04-19T08:16:37+00:00"
 lastmod: "2022-04-19T08:26:14+00:00"
 description: "Time to spruce up your GitHub! In this article, I want to highlight some files that you can use to beautify your GitHub repository."
@@ -68,7 +67,7 @@ You can choose any license you want, but the GitHub provides a good help for Ope
 
 You can choose one to check its content. GitHub displays its permissions, limitations, and conditions:
 
-<img fetchpriority="high" decoding="async" class="aligncenter wp-image-55345 size-medium" src="license-properties-700x226.jpg" alt="" width="700" height="226">
+{{< img src="license-properties-700x226.jpg" class="aligncenter size-medium" width="700" height="226" >}}
 
 You can now *Review and submit*. At this point, you are faced with three choices:
 
@@ -78,7 +77,7 @@ You can now *Review and submit*. At this point, you are faced with three choices
 
 After adding the license, GitHub displays it on the right of the repository's page.
 
-<img decoding="async" class="aligncenter wp-image-55346 size-medium" src="cite-sidebar-548x510.jpg" alt="" width="548" height="510">
+{{< img src="cite-sidebar-548x510.jpg" class="aligncenter size-medium" width="548" height="510" >}}
 
 For more details, check the [documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 
@@ -113,7 +112,7 @@ Here's a quick sum-up of how GitHub handles it:
 
 GitHub skips invalid configuration lines. To verify, you can use the UI:
 
-<img decoding="async" class="size-medium wp-image-55347 aligncenter" src="check-codeowners-700x291.jpg" alt="" width="700" height="291">
+{{< img src="check-codeowners-700x291.jpg" class="size-medium aligncenter" width="700" height="291" >}}
 
 ## SECURITY
 
@@ -165,7 +164,7 @@ license: Unlicense
 
 After adding the file, a new *Cite this repository* link appears on the right sidebar. You can choose which format you want to copy, APA or BibTeX when you click it.
 
-<img loading="lazy" decoding="async" class="aligncenter wp-image-55348 size-medium" src="cite-sidebar-1-548x510.jpg" alt="" width="548" height="510">
+{{< img src="cite-sidebar-1-548x510.jpg" class="aligncenter size-medium" width="548" height="510" >}}
 
 ## Sponsorship
 
@@ -182,7 +181,7 @@ custom:
 
 The preview tab validates your input.
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-55349 aligncenter" src="validate-funding-571x510.jpg" alt="" width="571" height="510">
+{{< img src="validate-funding-571x510.jpg" class="size-medium aligncenter" width="571" height="510" >}}
 
 In this case, the validation fails by telling that user `nfrankel` (me) didn't enroll in the GitHub sponsors program.
 

@@ -1,6 +1,5 @@
 ---
 title: "Debugging Gson, Moshi and Jackson JSON Frameworks in Production"
-slug: "debugging-gson-moshi-and-jackson-json-frameworks-in-production"
 date: "2022-07-08T07:14:01+00:00"
 lastmod: "2022-07-08T07:14:03+00:00"
 description: "Parsing is a major source of production failures. Some are easy to track but some are insidious. Here's how you can debug them on the fly!"

@@ -1,6 +1,4 @@
 ---
-aliases:
-  - "/today/boxlang-ai-deep-dive-part-1-of-7-the-skills-revolution-🎓/"
 title: "BoxLang AI Deep Dive — Part 1 of 7: The Skills Revolution 🎓"
 date: "2026-04-14T11:50:53+00:00"
 lastmod: "2026-05-14T09:46:38+00:00"
@@ -20,7 +18,7 @@ related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
-  - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

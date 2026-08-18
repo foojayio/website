@@ -1,6 +1,5 @@
 ---
 title: "Authenticate with OpenID Connect and Apache APISIX"
-slug: "authenticate-with-openid-connect-and-apache-apisix"
 date: "2023-03-09T07:51:47+00:00"
 lastmod: "2023-03-09T07:54:58+00:00"
 description: "Externalizing your authentication process to a third party may be sensible, but avoid binding your infrastructure to its proprietary process."
@@ -141,15 +140,15 @@ If you didn't do it already, customize the [OAuth Consent Screen](https://consol
 
 In the project context, navigate *APIs \& Services \| Credentials*.
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-62734" src="google-cloud-credentials-526x510.jpg" alt="" width="526" height="510">
+{{< img src="google-cloud-credentials-526x510.jpg" class="aligncenter size-medium" width="526" height="510" >}}
 
 Then, press the *+ CREATE CREDENTIALS* button in the upper menu bar.
 
-<img decoding="async" class="aligncenter size-medium wp-image-62735" src="google-cloud-create-credentials-700x72.jpg" alt="" width="700" height="72">
+{{< img src="google-cloud-create-credentials-700x72.jpg" class="aligncenter size-medium" width="700" height="72" >}}
 
 Select *OAuth Client Id* in the scrolling menu.
 
-<img decoding="async" class="aligncenter size-medium wp-image-62736" src="google-cloud-choose-credentials-700x447.jpg" alt="" width="700" height="447">
+{{< img src="google-cloud-choose-credentials-700x447.jpg" class="aligncenter size-medium" width="700" height="447" >}}
 
 Fill in the fields:
 
@@ -169,7 +168,7 @@ The last missing variable is `OIDC_ISSUER`: it's `accounts.google.com`. If you n
 
 At this point, we can start our setup with `docker compose up`. When we navigate to , the browser redirects us to the Google authentication page. Since I'm already authenticated, I can choose my ID - and I need one bound to the organization of the project I created above.
 
-<img loading="lazy" decoding="async" class="aligncenter size-medium wp-image-62739" src="google-auth-choose-account-457x510.jpg" alt="" width="457" height="510">
+{{< img src="google-auth-choose-account-457x510.jpg" class="aligncenter size-medium" width="457" height="510" >}}
 
 Then, I can freely access the resource.
 

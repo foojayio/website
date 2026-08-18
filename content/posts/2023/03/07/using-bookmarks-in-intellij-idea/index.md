@@ -1,6 +1,5 @@
 ---
 title: "Using Bookmarks in IntelliJ IDEA"
-slug: "using-bookmarks-in-intellij-idea"
 date: "2023-03-07T15:07:04+00:00"
 lastmod: "2023-03-10T07:29:06+00:00"
 description: "Learn everything about bookmarks in IntelliJ IDEA for 'saving' interesting locations in the code base, so we can easily go back to them later."

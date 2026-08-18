@@ -1,6 +1,5 @@
 ---
 title: "Where is the 2nd Wave in Russia and China?"
-slug: "where-is-the-2nd-wave-in-russia-and-china"
 date: "2020-12-04T12:56:27+00:00"
 lastmod: "2020-12-04T17:12:51+00:00"
 description: "Last week, we took a look at the current situation in Europe. We saw that the second wave is already breaking in Europe. This trend continues."

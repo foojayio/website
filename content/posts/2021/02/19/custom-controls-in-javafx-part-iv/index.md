@@ -1,6 +1,5 @@
 ---
 title: "Custom Controls in JavaFX (Part IV): Control & Skin Classes"
-slug: "custom-controls-in-javafx-part-iv"
 date: "2021-02-19T08:22:35+00:00"
 lastmod: "2021-02-19T08:22:37+00:00"
 description: "Continuing the JavaFX custom control series, next I will show you how to create a custom control in JavaFX by using Control and Skin classes."
@@ -13,8 +12,8 @@ tags:
 related_posts:
   - "custom-controls-in-javafx-part-vii"
   - "custom-controls-in-javafx-part-vi"
-  - "custom-controls-in-javafx-part-v"
-  - "custom-controls-in-javafx-part-iii"
+  - "azul-brings-java-from-edge-to-cloud"
+  - "java-for-desktop-applications-part-1"
 frozen: false
 ---
 

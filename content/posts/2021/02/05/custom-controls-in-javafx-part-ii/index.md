@@ -1,6 +1,5 @@
 ---
 title: "Custom Controls in JavaFX (Part II) -- Combining Existing Controls"
-slug: "custom-controls-in-javafx-part-ii"
 date: "2021-02-05T08:23:32+00:00"
 lastmod: "2021-02-05T08:49:42+00:00"
 description: "Last time you saw how to create JavaFX controls by playing around with CSS, today how to create a control by combining existing controls."
@@ -22,7 +21,25 @@ frozen: false
 
 This time I will show you how to create a custom control by combining existing controls. The idea is to create a control that contains a text field where you can type in values and next to the text field should be a button that when pressed will convert the value from the text field to another value.
 
-To realize this, we simply create a class that extends `HBox` and add a `TextField` and a `Button` to it.
+To realize this, we simply create a class that extends
+
+```java
+HBox
+```
+
+and add a
+
+```java
+TextField
+```
+
+and a
+
+```java
+Button
+```
+
+to it.
 
 The code of that control looks as follows:
 
@@ -105,11 +122,65 @@ If we would use this control without applying a CSS file it would look as follow
 
 Well that's in principle fine, but I would prefer a more integrated look. Now it still looks like we have two controls, while it should more look like a single control.
 
-To achieve this, we need to modify the CSS styles of the `TextField` and the `Button`. The things we need to change are the corner-radii on the right side of the `TextField` and on the left side of the `Button`. And, not to forget, the focused state of the control which should appear as one focus border around the control.
+To achieve this, we need to modify the CSS styles of the
 
-As you can see in the code, we have set the `focusTraversal` for the `TextField` and the `Button` to false to make sure that they don't catch the focus when "travelling" the focus through the application using the tab key.
+```java
+TextField
+```
 
-For that reason, we have to define a CSS style that is the same for the normal and the focused state for the `TextField`. For the `Button` we need to define separate styles for normal and focused state.
+and the
+
+```java
+Button
+```
+
+. The things we need to change are the corner-radii on the right side of the
+
+```java
+TextField
+```
+
+and on the left side of the
+
+```java
+Button
+```
+
+. And, not to forget, the focused state of the control which should appear as one focus border around the control.
+
+As you can see in the code, we have set the
+
+```java
+focusTraversal
+```
+
+for the
+
+```java
+TextField
+```
+
+and the
+
+```java
+Button
+```
+
+to false to make sure that they don't catch the focus when "travelling" the focus through the application using the tab key.
+
+For that reason, we have to define a CSS style that is the same for the normal and the focused state for the
+
+```java
+TextField
+```
+
+. For the
+
+```java
+Button
+```
+
+we need to define separate styles for normal and focused state.
 
 The CSS style for the TextField looks as follows:
 
@@ -124,9 +195,21 @@ The CSS style for the TextField looks as follows:
 }
 ```
 
-As you can see, we set the background radius for the right two corners of the `TextField` to 0.
+As you can see, we set the background radius for the right two corners of the
 
-For the `Button`, the CSS styles now look as follows:
+```java
+TextField
+```
+
+to 0.
+
+For the
+
+```java
+Button
+```
+
+, the CSS styles now look as follows:
 
 ```java
 .combined-control > .button {
@@ -168,7 +251,13 @@ If we focus now on our new control it will look as follows:
 
 ![](Combined-Control-2021-01-26-16-17-16.png)
 
-Still not perfect, but good enough, I guess. The tricky part with the focus is that the left side of the button should still show the `-fx-outer-border` color but the rest of the button not.
+Still not perfect, but good enough, I guess. The tricky part with the focus is that the left side of the button should still show the
+
+```java
+-fx-outer-border
+```
+
+color but the rest of the button not.
 
 So, with all these CSS styles in place, we now have created a new control made out of two existing controls.
 

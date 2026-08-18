@@ -1,6 +1,5 @@
 ---
 title: "What's New In The June 2026 Azul Payara Release?"
-slug: "whats-new-in-the-june-2026-azul-payara-release"
 date: "2026-06-24T11:28:52+00:00"
 lastmod: "2026-06-24T14:38:27+00:00"
 description: "The June 2026 Azul Payara release ships a critical security fix across every supported branch, Jakarta EE 11 GA libraries, and key updates for Payara 7, 6, 5, and 4."
@@ -16,10 +15,10 @@ categories:
   - "Release Notes"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
   - "whats-new-in-the-july-2026-azul-payara-release"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
-  - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
 frozen: false
 ---
 

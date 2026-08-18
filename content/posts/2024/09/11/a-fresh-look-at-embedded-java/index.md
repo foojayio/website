@@ -1,6 +1,5 @@
 ---
 title: "A Fresh Look at Embedded Java"
-slug: "a-fresh-look-at-embedded-java"
 date: "2024-09-11T07:37:10+00:00"
 lastmod: "2024-09-11T07:37:11+00:00"
 description: "Java is the environment that offers the highest developer productivity thanks to its many amazing tools, evolutions, and community."

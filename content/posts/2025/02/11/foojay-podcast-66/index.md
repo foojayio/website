@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #66: Let's Talk About Java Code!"
-slug: "foojay-podcast-66"
 date: "2025-02-11T08:24:06+00:00"
 lastmod: "2025-11-13T08:39:35+00:00"
 description: "Foojay Podcast #66: Let's Talk About Java Code! Diving into a few Foojay blog posts..."

@@ -1,6 +1,5 @@
 ---
 title: "Durable Subscription with JMS and Spring Boot"
-slug: "durable-subscription-with-jms-and-spring-boot"
 date: "2023-12-28T12:45:56+00:00"
 lastmod: "2023-12-28T12:46:51+00:00"
 description: "When using the publish-subscribe domain with JMS, we often want to use durable subscriptions. But how can this be done with Spring Boot?"

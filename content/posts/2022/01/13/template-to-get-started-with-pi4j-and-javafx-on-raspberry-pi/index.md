@@ -1,6 +1,5 @@
 ---
 title: "Template to Get Started with Pi4J and JavaFX on Raspberry Pi"
-slug: "template-to-get-started-with-pi4j-and-javafx-on-raspberry-pi"
 date: "2022-01-13T12:07:26+00:00"
 lastmod: "2023-08-01T06:36:33+00:00"
 description: "How to use the same architecture to implement a JavaFX-based GUI, a PUI attached to a Raspberry Pi, and integrate in a clean, modular way."

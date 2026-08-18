@@ -1,6 +1,5 @@
 ---
 title: "Debug Without Breakpoints – Guide to IntelliJ IDEA's Pause"
-slug: "debug-without-breakpoints"
 date: "2024-04-22T06:59:28+00:00"
 lastmod: "2024-07-29T18:14:26+00:00"
 description: "Learn how to use IntelliJ IDEA's Pause – a lesser known feature that will help you diagnose UI freezes, deadlocks, livelocks, and more"
@@ -40,9 +39,7 @@ We'll discuss its use-cases and limitations as well as discover the *secret step
 
 **Pause** is a feature in IntelliJ IDEA's debugger that enables you to arbitrarily suspend your application at any given point of time. To use it, you don't have to be familiar with the application code. In fact, you can completely ignore it!
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" width="1024" height="370" src="pause-button-dark-1024x370.png" alt="Pause button on the debugger's toolbar" class="wp-image-109432" style="width:692px">
-</figure>
+{{< img src="pause-button-dark-1024x370.png" class="size-large is-resized" alt="Pause button on the debugger's toolbar" width="1024" height="370" style="width:692px" >}}
 
 To pause a program, click **Pause** on the debugger's toolbar. As a result, the program gets suspended right in the middle of what it is currently doing.
 
@@ -50,9 +47,7 @@ To pause a program, click **Pause** on the debugger's toolbar. As a result, the 
 
 At first sight, a paused program may look exactly like the one that has been suspended at a breakpoint. However, this is only true to a certain extent.
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" width="1024" height="370" src="paused-program-dark-1024x370.png" alt="Debugger looks the same regardless of whether Pause or a breakpoint was used to suspend the app" class="wp-image-109433" style="width:692px">
-</figure>
+{{< img src="paused-program-dark-1024x370.png" class="size-large is-resized" alt="Debugger looks the same regardless of whether Pause or a breakpoint was used to suspend the app" width="1024" height="370" style="width:692px" >}}
 
 It would be correct to consider **Pause** a sort of *thread dump plus* . You can still inspect variables and threads just as you typically would. However, some of the more advanced features, such as **Evaluate expression**, won't work.
 
@@ -64,9 +59,7 @@ There are countless ways you can use **Pause** . Often, it can be used interchan
 
 If you encounter a UI freeze, that's usually because the UI thread is blocked or doing something heavy. **Pause** might be useful in both those cases.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="370" src="inspect-blocked-thread-dark-1024x370.png" alt="The stack of the blocked UI thread shows what method it is currently executing" class="wp-image-109434" style="width:692px">
-</figure>
+{{< img src="inspect-blocked-thread-dark-1024x370.png" class="size-large is-resized" alt="The stack of the blocked UI thread shows what method it is currently executing" width="1024" height="370" style="width:692px" >}}
 
 Pause the application while it is being unresponsive and examine the call stack of the UI thread. Often this is sufficient to diagnose the problem.
 
@@ -78,9 +71,7 @@ As I mentioned before, **Pause** allows you to ignore the source code. Actually,
 
 ... which is not a problem for **Pause**.
 
-<figure class="wp-block-image size-full is-resized">
- <img loading="lazy" decoding="async" width="680" height="766" src="hehe.png" alt="hehe cat meme" class="wp-image-109435" style="width:200px">
-</figure>
+{{< img src="hehe.png" class="size-full is-resized" alt="hehe cat meme" width="680" height="766" style="width:200px" >}}
 
 For a hands-on example of this scenario, see [Debugger.godMode()](https://flounder.dev/posts/debugger-god-mode/).
 
@@ -88,9 +79,7 @@ For a hands-on example of this scenario, see [Debugger.godMode()](https://flound
 
 If you suspect a synchronization problem, such as a deadlock or a livelock, **Pause** might help you find exact threads and monitors that are causing the issue.
 
-<figure class="wp-block-image size-large is-resized">
- <img loading="lazy" decoding="async" width="1024" height="441" src="debug-locks-with-pause-dark-1024x441.png" alt="The list of threads shows which threads have ended up in a deadlock" class="wp-image-109436" style="width:692px">
-</figure>
+{{< img src="debug-locks-with-pause-dark-1024x441.png" class="size-large is-resized" alt="The list of threads shows which threads have ended up in a deadlock" width="1024" height="441" style="width:692px" >}}
 
 Pause the program and inspect the thread list. It will show which threads are blocked.  
 

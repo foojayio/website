@@ -1,6 +1,5 @@
 ---
 title: "Sliding Window Log Rate Limiter (Redis & Java)"
-slug: "sliding-window-log-rate-limiter-redis-java"
 date: "2025-02-04T12:21:56+00:00"
 lastmod: "2025-05-02T12:51:23+00:00"
 description: "Build a sliding window log rate limiter with Redis and Java. Track requests in a rolling window, expire old entries, and test your setup for smooth..."

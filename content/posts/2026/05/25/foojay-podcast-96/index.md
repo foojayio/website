@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #96: Local AWS Development Without LocalStack: Meet Floci, the GraalVM-Powered Alternative"
-slug: "foojay-podcast-96"
 date: "2026-05-25T06:36:00+00:00"
 description: "What if you could run 35 AWS services locally in under 25 milliseconds, using just 13 megabytes of memory, with a single Docker command and no cloud bill? - by Frank Delporte"
 authors:

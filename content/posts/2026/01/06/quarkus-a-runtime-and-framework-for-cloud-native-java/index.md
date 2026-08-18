@@ -1,6 +1,5 @@
 ---
 title: "Quarkus: A Runtime and Framework for Cloud-Native Java"
-slug: "quarkus-a-runtime-and-framework-for-cloud-native-java"
 date: "2026-01-06T13:46:50+00:00"
 lastmod: "2026-01-06T21:53:41+00:00"
 description: "Public clouds such as AWS, Microsoft Azure, and Google Cloud, and platforms like Red Hat OpenShift, favor services that start fast and stay lean. Quarkus is engineered for exactly that."

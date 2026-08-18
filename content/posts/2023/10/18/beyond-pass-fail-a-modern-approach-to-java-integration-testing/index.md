@@ -1,6 +1,5 @@
 ---
 title: "Beyond Pass/Fail- a Modern Approach to Java Integration Testing"
-slug: "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
 date: "2023-10-18T15:15:14+00:00"
 lastmod: "2023-10-18T15:15:15+00:00"
 description: "Tests can run limited sets of assertions on your code, or reveal important insights about how your application really works!"
@@ -37,12 +36,7 @@ However, the extra punch these tests packed came at a cost. The more realistic t
 
 Unit tests were an easy alternative and a cheap substitute. Fast, better suited for creating tests en-mass, especially efficient in testing isolated pieces of logic or data-driven testing use cases, leveraging the quick execution time to cover numerous input permutations. Trying to balance the faster easier-to-write unit tests with the heavy wielder test types resulted in the concept of the 'testing pyramid'. Today it is widely accepted as a best practice in testing your code.  
 
-<figure class="aligncenter size-full is-resized">
- <img decoding="async" src="0_h3w4QyATz5z8k25E.png" alt="" class="wp-image-102668" style="width:466px;height:246px" width="466" height="246">
- <figcaption class="wp-element-caption">
-  source: &nbsp;<a href="https://martinfowler.com/articles/practical-test-pyramid.html" target="_blank" rel="noreferrer noopener">https://martinfowler.com/articles/practical-test-pyramid.html</a>&nbsp;
- </figcaption>
-</figure>
+{{< img src="0_h3w4QyATz5z8k25E.png" class="aligncenter size-full is-resized" width="466" height="246" style="width:466px;height:246px" caption="source: https://martinfowler.com/articles/practical-test-pyramid.html" >}}
 
 #### Continuous Integration is not Continuous Unit Testing
 
@@ -50,12 +44,7 @@ Unfortunately, over-investing in unit tests has its downturns. I have seen huge,
 
 The fact that it was easy to produce so many unit tests turned out to be a two-edged sword. The tests often induced a 'false sense of confidence' that did not take into account the many biases that these tests fall into. Each test would look at a very narrow scope and validate only one happy path in a complex distributed system. A developer, reviewing thousands of green tests in the build would assume that his code change is well tested, often being surprised when real-world issues started occurring soon after merging the code.  
 
-<figure class="aligncenter size-large is-resized">
- <img decoding="async" src="0_rHXaD5-qSgbzCx6m-1024x811.png" alt="" class="wp-image-102669" style="width:677px;height:536px" width="677" height="536">
- <figcaption class="wp-element-caption">
-  source: <a href="https://turnoff.us/geek/software-test/" target="_blank" rel="noreferrer noopener">https://turnoff.us/geek/software-test/</a>
- </figcaption>
-</figure>
+{{< img src="0_rHXaD5-qSgbzCx6m-1024x811.png" class="aligncenter size-large is-resized" width="677" height="536" style="width:677px;height:536px" caption="source: https://turnoff.us/geek/software-test/" >}}
 
 To complicate matters, in some programming languages, injecting dependencies to allow mocking at every level, as unit tests require, entails complex changes, which do not necessarily lead to better design. The practice of 'refactoring for better testability', once vaunted as advantageous in producing less closely coupled components, soon became an obstacle as the cost of that abstraction became clear. Modern dev practices often favor simplicity over multi-layered modular designs and unit tests unfortunately strictly require the latter.
 
@@ -204,9 +193,7 @@ Given the changes in both the cost and value of integration tests, we can certai
 
 We'll be looking for high-value tests with minimal cost. As such, single service integration tests such as the one we just created seem to represent an optimal balance.  
 
-<figure class="aligncenter size-large is-resized">
- <img loading="lazy" decoding="async" src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" alt="" class="wp-image-102675" style="width:644px;height:483px" width="644" height="483">
-</figure>
+{{< img src="1_IkVAlbazd7HA57YCpwVnVA-1024x768.png" class="aligncenter size-large is-resized" width="644" height="483" style="width:644px;height:483px" >}}
 
 This means that we can invest in more tests that will be both easier to code, relatively fast to run, and still provide great coverage and real-world scenario validation. In addition, the data produced by these tests can be leveraged for more than simple functional validation --- we can give our code some exercise and see the shape just by running our tests.
 

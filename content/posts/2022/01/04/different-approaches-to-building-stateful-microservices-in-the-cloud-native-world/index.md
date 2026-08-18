@@ -1,6 +1,5 @@
 ---
 title: "Building Stateful Microservices in the Cloud Native World"
-slug: "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
 date: "2022-01-04T09:34:13+00:00"
 lastmod: "2022-01-04T09:35:42+00:00"
 description: "How can systems be able to manage and track the flow of data in a coherent fashion and in a stateless world?"

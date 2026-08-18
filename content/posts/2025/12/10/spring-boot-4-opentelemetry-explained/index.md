@@ -1,6 +1,5 @@
 ---
 title: "Spring Boot 4 - OpenTelemetry Guide"
-slug: "spring-boot-4-opentelemetry-explained"
 date: "2025-12-10T09:09:58+00:00"
 lastmod: "2025-12-10T10:24:14+00:00"
 description: "A complete Spring Boot 4 OpenTelemetry guide covering metrics, traces, and logs. Understand native observability features, OTLP support, and how to monitor microservices with detailed tracing and instrumentation."

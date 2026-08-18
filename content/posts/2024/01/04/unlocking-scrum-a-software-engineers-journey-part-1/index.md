@@ -1,6 +1,5 @@
 ---
 title: "Unlocking Scrum: A Software Engineer's Journey - Part 1"
-slug: "unlocking-scrum-a-software-engineers-journey-part-1"
 date: "2024-01-04T16:12:26+00:00"
 lastmod: "2024-01-04T16:13:08+00:00"
 description: "Embrace Scrum, make it your own, and watch as your projects transform from to-do lists to done-and-dusted"

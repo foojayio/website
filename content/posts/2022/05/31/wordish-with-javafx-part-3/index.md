@@ -1,6 +1,5 @@
 ---
 title: "Wordish with JavaFX - Part 3"
-slug: "wordish-with-javafx-part-3"
 date: "2022-05-31T07:23:02+00:00"
 lastmod: "2022-05-31T07:23:08+00:00"
 description: "The JavaFX controller code maintains game state and responds to user input with appropriate updates to the UI."
@@ -19,7 +18,7 @@ related_posts:
   - "wordish-with-javafx-part-1"
   - "wordish-with-javafx-part-2"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
-  - "the-javafx-revival"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -37,12 +36,7 @@ Now in Part 3, we'll examine the controller code. The controller code maintains 
 
 Before we start, here's an example screenshot of Wordish.
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="playgame5-619x1024.png" alt="Wordish Game in progress" class="wp-image-56002" width="350" height="579">
- <figcaption>
-  Figure 1. Wordish Main View Layout
- </figcaption>
-</figure>
+{{< img src="playgame5-619x1024.png" class="size-large is-resized" alt="Wordish Game in progress" width="350" height="579" caption="Figure 1. Wordish Main View Layout" >}}
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 

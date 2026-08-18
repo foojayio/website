@@ -1,6 +1,5 @@
 ---
 title: "Taking a Closer Look at Kotlin's Delegation"
-slug: "kotlin-delegation"
 date: "2021-04-30T13:53:00+00:00"
 lastmod: "2021-11-08T08:37:51+00:00"
 description: "Kotlin offers many cool features, most tend to cite null safety as their favorite. For me, it's function extensions, with delegation second."
@@ -27,7 +26,7 @@ Kotlin offers many exciting features. In general, developers tend to cite null s
 The delegation pattern is described in the book:
 > *Delegation* is a way to make composition as powerful for reuse as inheritance \[Lie86, JZ91\]. In delegation, *two* objects are involved in handling a request: a receiving object delegates operations to its *delegate* . This is analogous to subclasses deferring requests to parent classes. But with inheritance, an inherited operation can always refer to the receiving object through the `this` member variable in C++ and `self` in Smalltalk. To achieve the same effect with delegation, the receiver passes itself to the delegate to let the delegated operation refer to the receiver.
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-43993" src="window-rectangle-700x117.png" alt="" width="700" height="117">
+{{< img src="window-rectangle-700x117.png" class="aligncenter size-medium" width="700" height="117" >}}
 
 Delegation is critical when one chooses *composition* over *inheritance*.
 

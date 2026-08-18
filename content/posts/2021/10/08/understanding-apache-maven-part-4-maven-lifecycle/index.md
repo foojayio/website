@@ -1,6 +1,5 @@
 ---
 title: "Understanding Apache Maven (Part 4): Maven Lifecycle"
-slug: "understanding-apache-maven-part-4-maven-lifecycle"
 date: "2021-10-08T09:00:35+00:00"
 lastmod: "2021-10-08T09:00:36+00:00"
 description: "In Part 4 of the series, a walkthrough of the Apache Maven lifecycles and executions is covered in quite some detail!"
@@ -87,7 +86,7 @@ It is usually rare to bind goals, by default, to phases prefixed with **pre** an
 > Lifecycle **clean**  
 >
 > Default Phase: **`clean`**
-> Associated plugin (as of Maven 3.6.3): **org.apache.maven.plugins:maven-clean-plugin:2.5** ` : `**clean**  
+> Associated plugin (as of Maven 3.6.3): `org.apache.maven.plugins:maven-clean-plugin:2.5 : clean`  
 >
 > The **default phase** implies that if the lifecycle is invoked without a phase, the default phase (and any phases prior to it) will be executed. In this case, invoking the lifecycle will invoke both the **pre-clean** and **clean** phases.   
 >

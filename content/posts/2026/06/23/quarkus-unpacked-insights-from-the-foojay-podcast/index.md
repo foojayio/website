@@ -1,6 +1,5 @@
 ---
 title: "Quarkus Unpacked: Insights from the Foojay Podcast"
-slug: "quarkus-unpacked-insights-from-the-foojay-podcast"
 date: "2026-06-23T12:36:54+00:00"
 lastmod: "2026-06-24T07:15:41+00:00"
 description: "I recently had the pleasure of joining the Foojay podcast to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes - by Michal Maléř"
@@ -28,13 +27,11 @@ related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
   - "quarkus-a-runtime-and-framework-for-cloud-native-java"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "http-query-method-explained-rfc-10008-ecosystem-adoption-and-a-quarkus-implementation"
 frozen: false
 ---
 
-<figure class="alignleft is-resized">
- <img decoding="async" src="3-Quarkus-Unpacked-2-2.jpeg" alt="Quarkus: A Runtime and Framework for Cloud-Native Java" style="width:300px">
-</figure>
+{{< img src="3-Quarkus-Unpacked-2-2.jpeg" class="alignleft is-resized" alt="Quarkus: A Runtime and Framework for Cloud-Native Java" style="width:300px" >}}
 
 I recently had the pleasure of joining the [Foojay podcast](https://www.youtube.com/watch?v=_nJCTTrnZkE) to talk about Quarkus in depth. The conversation covered a lot of ground, from what makes Quarkus different to the practical trade-offs between JVM and native mode. This post captures the key questions and answers from that discussion, lightly edited for readability.{#_quarkus_unpacked_insights_from_the_foojay_podcast}
 

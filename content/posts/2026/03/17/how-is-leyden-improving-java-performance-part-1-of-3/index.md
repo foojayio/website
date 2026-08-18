@@ -1,6 +1,5 @@
 ---
 title: "How is Leyden improving Java Performance? Part 1 of 3"
-slug: "how-is-leyden-improving-java-performance-part-1-of-3"
 date: "2026-03-17T12:00:45+00:00"
 lastmod: "2026-03-17T13:09:16+00:00"
 description: "In this series of 3 blog posts we will explain how OpenJDK project Leyden is helping to improve a specific area of performance where Java has notably lagged behind other languages i.e. application ‘startup’, ‘warmup’, and ‘initial footprint’."

@@ -1,6 +1,5 @@
 ---
 title: "Java String Templates Today"
-slug: "java-string-templates-today"
 date: "2023-06-02T16:28:25+00:00"
 lastmod: "2023-06-02T16:29:05+00:00"
 description: "String manipulation is improving (JEP 430), but Manifold can help us now. Even on JDK 8, it goes further with a sophisticated template engine"
@@ -119,7 +118,7 @@ The backslash syntax implicitly disables the templating behavior, just like in o
 
 There's something that you can't really see in the code, you need to look at a screenshot of the same code:
 
-<img decoding="async" class="alignnone size-medium wp-image-98591" src="84f52be2-30c3-435f-bbf6-4a53937b3859-700x59.png" alt="" width="700" height="59">
+{{< img src="84f52be2-30c3-435f-bbf6-4a53937b3859-700x59.png" class="size-medium" width="700" height="59" >}}
 
 It's subtle, do you see it?
 

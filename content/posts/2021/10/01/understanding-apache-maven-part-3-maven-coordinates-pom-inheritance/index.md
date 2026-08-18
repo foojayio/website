@@ -1,6 +1,5 @@
 ---
 title: "Understanding Apache Maven: Maven Coordinates & POM Inheritance"
-slug: "understanding-apache-maven-part-3-maven-coordinates-pom-inheritance"
 date: "2021-10-01T10:05:15+00:00"
 lastmod: "2021-10-01T10:11:42+00:00"
 description: "An explanation of dependency coordinates and \"distinguishers\" as well as a more detailed look at POM hierarchies are covered."

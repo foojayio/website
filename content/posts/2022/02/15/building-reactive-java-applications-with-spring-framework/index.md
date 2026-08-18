@@ -1,6 +1,5 @@
 ---
 title: "Building Reactive Java Applications with Spring Framework"
-slug: "building-reactive-java-applications-with-spring-framework"
 date: "2022-02-15T14:09:28+00:00"
 lastmod: "2022-05-30T15:36:37+00:00"
 description: "Pretty much all Java developers are familiar with Spring Pet Clinic. Let's get to know the reactive implementation of it."

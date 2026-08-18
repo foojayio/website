@@ -1,6 +1,5 @@
 ---
 title: "Master Your Journey in the School of OpenJDK Migration"
-slug: "master-your-journey-in-the-school-of-openjdk-migration"
 date: "2024-06-30T09:46:03+00:00"
 lastmod: "2024-06-30T11:16:00+00:00"
 description: "The School of OpenJDK Migration is totally free and self-paced. Do yourself a favor and start preparing about OpenJDK migration today. "

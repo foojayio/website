@@ -1,6 +1,5 @@
 ---
 title: "Hello eBPF: Recording data in basic eBPF maps (2)"
-slug: "hello-ebpf-recording-data-in-basic-ebpf-maps-2"
 date: "2024-01-18T15:50:44+00:00"
 lastmod: "2024-01-30T00:11:32+00:00"
 description: "This week we'll add support eBPF maps to hello-ebpf to communicate between eBPF program and userland Java programs."

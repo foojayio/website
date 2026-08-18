@@ -1,6 +1,5 @@
 ---
 title: "Carbon Aware Job Processing With JobRunr v8"
-slug: "carbon-aware-job-processing-with-jobrunr-v8"
 date: "2025-07-07T09:00:09+00:00"
 lastmod: "2025-07-07T09:50:58+00:00"
 description: "Discover how JobRunr v8 helps developers cut CO2 emissions without sacrificing performance. Use Carbon Aware Job Processing to run background jobs when your grid is greenest. Make your apps smarter, and the planet a little cleaner, with just a few lines of code."
@@ -15,7 +14,7 @@ related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "foojay-podcast-60"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

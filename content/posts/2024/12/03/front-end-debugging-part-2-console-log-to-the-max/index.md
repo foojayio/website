@@ -1,6 +1,5 @@
 ---
 title: "Front End Debugging Part 2: Console.log() to the Max"
-slug: "front-end-debugging-part-2-console-log-to-the-max"
 date: "2024-12-03T16:28:40+00:00"
 lastmod: "2024-12-03T16:30:05+00:00"
 description: "Learn advanced front-end debugging: use console log levels, CSS styles, assertions, & more to simplify and enhance your development workflow"

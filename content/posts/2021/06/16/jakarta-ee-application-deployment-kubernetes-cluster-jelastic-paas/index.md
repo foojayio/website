@@ -1,6 +1,5 @@
 ---
 title: "Jakarta EE Application Deployment to Kubernetes Cluster in Jelastic PaaS"
-slug: "jakarta-ee-application-deployment-kubernetes-cluster-jelastic-paas"
 date: "2021-06-16T06:58:31+00:00"
 lastmod: "2021-09-16T14:47:03+00:00"
 description: "Explore how to deploy the Jakarta EE projects to Kubernetes cluster within Jelastic PaaS using Cargo Tracker as an example."
@@ -100,14 +99,10 @@ Wait for a minute and check whether the mentioned above resources have been crea
 Finally, press the **Open in Browser** button to get to your application and check its workability.
 ![open in browser jakarta ee application](https://jelastic.com/blog/wp-content/uploads/2021/06/image11-1.png)
 
-<figure class="wp-block-image is-resized">
- <img fetchpriority="high" decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2021/06/image2-1.png" alt="cargo tracker" class="wp-image-53913" width="647" height="512">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/06/image2-1.png" class="is-resized" alt="cargo tracker" width="647" height="512" >}}
 
 You can check how the system works using demo Tracking ID **ABC123**.
 
-<figure class="wp-block-image is-resized">
- <img decoding="async" src="https://jelastic.com/blog/wp-content/uploads/2021/06/image3-1.png" alt="cargo tracker testing" class="wp-image-53915" width="645" height="600">
-</figure>
+{{< img src="https://jelastic.com/blog/wp-content/uploads/2021/06/image3-1.png" class="is-resized" alt="cargo tracker testing" width="645" height="600" >}}
 
 Congratulations! Application setup is finished successfully. Feel free to run your Jakarta EE projects inside Kubernetes clusters with [Jelastic PaaS Providers](https://jelastic.cloud/).

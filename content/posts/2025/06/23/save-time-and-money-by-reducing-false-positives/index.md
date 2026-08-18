@@ -1,6 +1,5 @@
 ---
 title: "Save Time and Money by Reducing False Positives"
-slug: "save-time-and-money-by-reducing-false-positives"
 date: "2025-06-23T08:35:27+00:00"
 lastmod: "2025-08-14T12:38:44+00:00"
 description: "Recently Azul announced that AVD makes it possible to identify vulnerable components on a jar file level but also on class file level."

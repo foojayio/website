@@ -1,6 +1,5 @@
 ---
 title: "foojay – 12 Lessons Learned From Doing The 1BRC Challenge"
-slug: "12-lessons-learned-from-doing-the-one-billion-row-challenge"
 date: "2024-02-22T10:44:56+00:00"
 lastmod: "2024-02-22T10:51:04+00:00"
 description: "How fast can you process a 1 billion rows text file in Java? That's the challenge that many Java developers tried to solve in January 2024."

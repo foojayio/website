@@ -1,6 +1,5 @@
 ---
 title: "Startup Speed of Spring and Quarkus JARs on the Raspberry Pi"
-slug: "startup-spring-quarkus-raspberry-pi"
 date: "2020-09-18T09:16:03+00:00"
 lastmod: "2020-09-18T09:38:06+00:00"
 description: "The same application was developed in both Spring and Quarkus. The average startup speed of my Quarkus JAR is 3 to 4 times faster compared to my Spring JAR."

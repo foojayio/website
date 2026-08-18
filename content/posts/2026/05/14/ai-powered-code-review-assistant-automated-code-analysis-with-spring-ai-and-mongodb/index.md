@@ -1,6 +1,5 @@
 ---
 title: "AI-Powered Code Review Assistant: Automated Code Analysis with Spring AI and MongoDB"
-slug: "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
 date: "2026-05-14T17:09:39+00:00"
 lastmod: "2026-05-14T17:09:41+00:00"
 description: "In this article, you will build a code review assistant API. Developers submit code snippets through a REST endpoint. The system embeds the submitted code with Spring AI and searches a library of known anti-patterns stored as vectors in MongoDB Atlas. It then sends the code along with matched patterns to an LLM for structured review feedback. Every submission and its findings are stored in MongoDB, and aggregation pipelines surface trends over time."
@@ -35,8 +34,7 @@ The tech stack is Java 21+, Spring Boot 3.x, Spring AI, Spring Data MongoDB, and
 * An OpenAI API key (used for both the embedding model and the chat model)
 * Basic familiarity with Spring Boot (controllers, services, dependency injection)
 
-1. Project setup
-----------------
+## 1. Project setup
 
 Go to [Spring Initializr](https://start.spring.io/) and generate a new project. I am using the following settings, feel free to use your own group name:
 
@@ -57,8 +55,7 @@ Replace the placeholders with your Atlas cluster credentials. The `appName` quer
 
 The companion repository has the complete project structure. You can clone it and follow along, or build each piece from scratch as you read.
 
-2. Storing and managing review patterns
----------------------------------------
+## 2. Storing and managing review patterns
 
 The review assistant works by comparing submitted code against a library of known anti-patterns. Before you can do any comparison, you need a way to define what an anti-pattern looks like, store it in MongoDB, and expose endpoints for adding and listing patterns.
 
@@ -103,7 +100,7 @@ Each pattern's `id` is a human-readable slug like `unclosed-resources` or `hardc
 
 To see what a pattern looks like as a JSON document, here are two examples. The first describes an empty catch block, a common error-handling problem:
 
-```
+```````
 {
   "_id": "empty-catch-block",
   "name": "Empty catch block",
@@ -115,7 +112,19 @@ To see what a pattern looks like as a JSON document, here are two examples. The 
   "exampleGoodCode": "try { connection.close(); } catch (SQLException e) { logger.warn(\"Failed to close: {}\", e.getMessage()); }",
   "explanation": "Empty catch blocks silently swallow errors. When something fails, there is no log entry and no way to diagnose the problem."
 }
-```
+``````json
+{
+  "_id": "hardcoded-credentials",
+  "name": "Hardcoded credentials",
+  "description": "Storing passwords, API keys, or secrets as string literals in source code",
+  "language": "java",
+  "severity": "CRITICAL",
+  "category": "security",
+  "exampleBadCode": "private static final String DB_PASSWORD = \"s3cretP@ss!\";",
+  "exampleGoodCode": "@Value(\"${db.password}\") private String dbPassword;",
+  "explanation": "Hardcoded credentials end up in version control and build artifacts. Use environment variables or a secrets manager."
+}
+```````
 
 The second describes hardcoded credentials, a security anti-pattern:
 
@@ -281,8 +290,7 @@ curl -X POST http://localhost:8080/api/patterns \
 
 This works for adding patterns one at a time, but the system is more useful with a full library loaded. The next section adds the data seeder along with the embedding and vector search capabilities that make pattern matching work.
 
-3. Embedding patterns with Spring AI and MongoDB Atlas Vector Search
---------------------------------------------------------------------
+## 3. Embedding patterns with Spring AI and MongoDB Atlas Vector Search
 
 Suppose a developer writes `InputStream is = new FileInputStream(path);` without a try-with-resources block. Your pattern library describes "unclosed resources in try blocks" with a different code example that uses `FileReader`. The underlying problem is identical, but the code looks different. Exact string matching will not connect the two. This is where embeddings help. By converting both the stored pattern and the submitted code into vectors, you can measure their semantic similarity regardless of superficial differences in syntax.
 
@@ -530,8 +538,7 @@ private double searchScore;
 
 The `@Transient` annotation tells Spring Data MongoDB not to persist this field to the database. The `searchScore` only gets populated during vector search results and has no meaning outside that context. Without `@Transient`, saving a pattern returned by vector search would write a stale score to the database.
 
-4. Building the code review engine
-----------------------------------
+## 4. Building the code review engine
 
 The `ReviewService` is where the pieces connect. It accepts a code submission, finds matching patterns via vector search, sends both to an LLM, and parses the structured response into findings. The following diagram shows the complete flow from submission to response:  
 ![](Screenshot-2026-05-08-at-3.08.56-PM-313x1024.png)
@@ -784,8 +791,7 @@ curl -X POST http://localhost:8080/api/reviews \
 
 This code has three issues: an unclosed `FileInputStream` (no try-with-resources), a generic `catch (Exception e)` with an empty body, and string concatenation with `+=` inside a loop. The response includes a finding for each issue, with the matched pattern ID, severity, line range, and a suggestion for how to fix it. The confidence scores typically range from 0.7 to 0.95 depending on how closely the code matches the stored patterns.
 
-5. Tracking review trends with aggregation pipelines
-----------------------------------------------------
+## 5. Tracking review trends with aggregation pipelines
 
 After enough reviews accumulate, you can use MongoDB aggregation pipelines to answer questions like "what issues keep showing up?" across all submissions. Aggregation pipelines work by passing documents through a series of stages, where each stage performs an operation like filtering, grouping, or sorting. The output of one stage becomes the input for the next.
 
@@ -897,8 +903,7 @@ After running several reviews through the system, the category endpoint might re
 
 This tells you that error handling is the most frequent issue category across all reviewed code. These pipelines scan the entire `review_findings` collection each time they run. For a tutorial with a few dozen reviews, that is fine. In production with thousands of findings, you would want indexes on `category`, `severity`, and `matchedPatternId` to speed up the `$group` stages.
 
-6. Testing the full workflow
-----------------------------
+## 6. Testing the full workflow
 
 Here is the complete flow from start to finish:
 

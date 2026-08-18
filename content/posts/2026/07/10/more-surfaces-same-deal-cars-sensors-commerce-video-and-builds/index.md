@@ -1,6 +1,5 @@
 ---
 title: "More Surfaces, Same Deal: Cars, Sensors, Commerce, Video And Builds"
-slug: "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
 date: "2026-07-10T18:17:06+00:00"
 description: "This week's release adds car dashboards, motion sensors, desktop-class input, foldables, Commerce, Secrets, versioned builds, and real video generation whi"
 canonical: "https://www.codenameone.com/blog/one-codebase-more-surfaces/"
@@ -11,10 +10,10 @@ categories:
   - "Java"
 tags:
 related_posts:
+  - "push-v3-one-message-from-your-server-to-every-surface"
+  - "the-codename-one-javascript-port-is-now-free-and-open-source"
   - "own-your-pixels-native-fidelity-on-your-schedule"
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
-  - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
-  - "native-linux-apple-watch-a-game-builder-and-crash-protection"
 frozen: false
 ---
 

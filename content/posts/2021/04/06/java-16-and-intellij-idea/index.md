@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Java 16 and IntelliJ IDEA"
-slug: "java-16-and-intellij-idea"
 date: "2021-04-06T07:11:02+00:00"
 lastmod: "2021-07-12T04:56:53+00:00"
 description: "In this article, I will cover Java 16 to its language features, why you need them, and how you can start using them in IntelliJ IDEA."

@@ -1,6 +1,5 @@
 ---
 title: "Details on OpenJDK vs. OpenJFX Release Cycles"
-slug: "openjdk-vs-openjfx-release-cycles"
 date: "2020-10-29T14:41:57+00:00"
 lastmod: "2021-10-15T08:37:46+00:00"
 description: "Confused about the release cycles of OpenJDK and OpenJFX and the relationship between them? Read on to have all your questions answered."

@@ -1,6 +1,5 @@
 ---
 title: "Java on Azure Tooling Update – August 2022"
-slug: "java-on-azure-tooling-update-august-2022"
 date: "2022-10-17T09:15:27+00:00"
 lastmod: "2022-10-18T08:59:56+00:00"
 description: "In this update, we will introduce the new AKS support and Virtual Machine support. Check it out and try it out!"

@@ -1,6 +1,5 @@
 ---
 title: "Java 21 Is Available Today, And It's Quite The Update"
-slug: "java-21-is-available-today-and-its-quite-the-update"
 date: "2023-09-19T05:31:13+00:00"
 lastmod: "2024-02-06T12:29:42+00:00"
 description: "Today's the first day of Java 21's availability! It's been six months since Java 20 was released, so it's time for another fresh wave of Java features. This post takes you on a tour of the JEPs that are associated with this release and it gives you a brief introduction to each of them. Where applicable the differences with Java 20 are highlighted and a few typical use cases are provided, so that you'll be more than ready to use these features after reading this!"
@@ -19,7 +18,7 @@ related_posts:
   - "foojay-podcast-28"
   - "its-java-20-release-day-heres-whats-new"
   - "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
 frozen: false
 ---
 

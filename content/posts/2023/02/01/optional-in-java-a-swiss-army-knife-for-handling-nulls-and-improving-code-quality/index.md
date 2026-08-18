@@ -1,6 +1,5 @@
 ---
 title: "Optional in Java: A Swiss Army Knife for Handling Nulls and Improving Code Quality"
-slug: "optional-in-java-a-swiss-army-knife-for-handling-nulls-and-improving-code-quality"
 date: "2023-02-01T05:29:38+00:00"
 lastmod: "2023-02-20T12:49:55+00:00"
 description: "Optional is a Java class that provides a way to handle null values in a type-safe and efficient manner. This tutorial will cover the features and use cases of Optional in Java, with practical examples."
@@ -240,7 +239,7 @@ Optional can be used to provide an alternative value if a value is not present. 
 
 ```java
 Optional<String> optionalValue = Optional.ofNullable(value)
-                                         .or(() -> Optional.of("default"));<span class="c3 c0">                                   </span>
+                                         .or(() -> Optional.of("default"));
 ```
 
 In this example, we create an Optional from a potentially null value, and use Optional.or() to provide an alternative value if the value is not present. This allows us to handle missing values more elegantly and expressively.
@@ -251,7 +250,7 @@ Optional can be used to provide a lazy evaluation of a value that is expensive t
 
 ```java
 Optional<String> lazyValue = Optional.ofNullable(null)
-                                      .map(v -> computeValue());<span class="c3 c0">            </span>
+                                      .map(v -> computeValue());
 ```
 
 In this example, we create an Optional from a potentially null value and use Optional.map() to defer the computation of the value until the value is actually needed. This provides a lazy evaluation of the value, and can improve the performance of the code.

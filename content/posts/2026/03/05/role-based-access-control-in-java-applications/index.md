@@ -1,6 +1,5 @@
 ---
 title: "Role-Based Access Control in Java Applications"
-slug: "role-based-access-control-in-java-applications"
 date: "2026-03-05T20:31:49+00:00"
 lastmod: "2026-03-05T20:31:51+00:00"
 description: "In this article, we will explore how to implement RBAC at the application level, using MongoDB to store user metadata and keeping the authorization logic close to the core of the system. The goal is not only to make things secure, but also to make them architecturally consistent. All the code used in this article is inside this repository."
@@ -110,7 +109,7 @@ Below, let's try to imagine a simple document representing a user
 ```
 {
   "_id": "user-123",
-  "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5b4b9bcb6b095b0adb4b8a5b9b0fbb6bab8">[email protected]</a>",
+  "email": "[email protected]",
   "roles": ["CUSTOMER"],
   "status": "ACTIVE"
 }

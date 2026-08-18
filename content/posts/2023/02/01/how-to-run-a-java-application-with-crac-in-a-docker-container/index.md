@@ -1,6 +1,5 @@
 ---
 title: "How to Run a Java Application with CRaC in a Docker Container"
-slug: "how-to-run-a-java-application-with-crac-in-a-docker-container"
 date: "2023-02-01T09:41:11+00:00"
 lastmod: "2023-11-30T07:39:38+00:00"
 description: "CRaC is an OpenJDK project developed by Azul to solve the problem of \"slow\" startup times of the JVM in a microservice environment."

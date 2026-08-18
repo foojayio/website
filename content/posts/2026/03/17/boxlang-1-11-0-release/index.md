@@ -1,6 +1,5 @@
 ---
 title: "BoxLang 1.11.0 Release"
-slug: "boxlang-1-11-0-release"
 date: "2026-03-17T09:40:04+00:00"
 lastmod: "2026-03-17T15:45:32+00:00"
 description: "We're proud to announce BoxLang 1.11.0, a highly focused performance and stability release that delivers measurable speed improvements across every - by Cristobal Escobar"
@@ -352,7 +351,7 @@ BoxLang 1.11.0 is a drop-in upgrade. No code changes are required to benefit fro
 
 ```java
 # CommandBox
-box install <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8bab7a0b4b9b6bf98e9f6e9e9f6e8">[email protected]</a>
+box install [email protected]
 
 # BVM
 bvm install 1.11.0 && bvm use 1.11.0

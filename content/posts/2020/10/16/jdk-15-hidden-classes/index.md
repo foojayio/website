@@ -1,6 +1,5 @@
 ---
 title: "JDK 15 Hidden Classes (JEP 371) for the JVM"
-slug: "jdk-15-hidden-classes"
 date: "2020-10-16T14:03:40+00:00"
 lastmod: "2021-08-23T13:01:36+00:00"
 description: "Unlike sealed classes, hidden classes (JEP 371) are a JVM rather than a language-level feature, aiming not to change the Java language."

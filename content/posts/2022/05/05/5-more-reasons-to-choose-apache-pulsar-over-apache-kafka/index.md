@@ -1,6 +1,5 @@
 ---
 title: "5 More Reasons to Choose Apache Pulsar Over Apache Kafka"
-slug: "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
 date: "2022-05-05T18:11:20+00:00"
 lastmod: "2022-05-05T18:11:21+00:00"
 description: "Author’s note: I originally published this blog post in 2019, while I was CEO of Kesque, a real-time messaging service built on Apache Pulsar, the - by Chris Bartholomew"
@@ -37,15 +36,13 @@ Before diving into the new reasons, let's quickly recap the seven mentioned in t
 
 Those are the first seven reasons. These seem like plenty, but I have found some more. So let's get into them.
 
-1. Getting along with multi-tenancy
------------------------------------
+## 1. Getting along with multi-tenancy
 
 I really should have talked about multi-tenancy in the first post because it's a big deal. Even if you aren't planning on building a managed Pulsar service (and why would you, since we've already built **one**for you?), unless you are a hermit, there are going to be multiple teams working on multiple projects using your messaging infrastructure. Having to spin up a cluster for each team or project is a pain. And it's also expensive.
 
 With Pulsar, you can have [**multiple tenants**](https://pulsar.apache.org/docs/en/concepts-multi-tenancy/) and those tenants can have multiple namespaces to keep things all organized. Add to that access controls, quotas, and rate-limiting for each namespace and you can imagine a future where we can all get along using just this one cluster. Not only can we imagine this future, but Kafka can imagine it, too. You can read about it in Kafka Improvement Proposal (KIP) [**KIP-37**](https://cwiki.apache.org/confluence/display/KAFKA/KIP-37+-+Add+Namespaces+to+Kafka). It's been under discussion for a while now.
 
-2. Have we got a quorum yet? Replication
-----------------------------------------
+## 2. Have we got a quorum yet? Replication
 
 We're getting into the weeds here, but bear with me. You want to make sure your messages never get lost, so you configure your messaging system to make two or three replicas of each message in case something goes wrong.
 
@@ -55,8 +52,7 @@ Quorum replication is more democratic with none of this leader-follower hierarch
 
 If you want to get into the gory details of Kafka and Pulsar latency, check out this [**blog post**](https://kafkaesque.io/performance-comparison-between-apache-pulsar-and-kafka-latency/) I wrote. (It's long. Don't say I didn't warn you.) Oh, and Kafka has been thinking about quorum replication for improving latency consistency, too. Check out [**KIP-250**](https://cwiki.apache.org/confluence/display/KAFKA/KIP-250+Add+Support+for+Quorum-based+Producer+Acknowledgment) for the discussion.
 
-3. Tiered storage, event sourcing dreaming
-------------------------------------------
+## 3. Tiered storage, event sourcing dreaming
 
 One of the great things about a streaming system like Kafka is its ability to replay messages that have already been consumed. If you like those messages the first time around, replaying them to correct something or build a new application around them is fun to do.
 
@@ -68,8 +64,7 @@ You can probably guess where I am going here. With Pulsar [**tiered storage**](h
 
 I bet Kafka would like to have that feature. You guessed it, they would. It's described in [**KIP-405**](https://cwiki.apache.org/confluence/display/KAFKA/KIP-405%3A+Kafka+Tiered+Storage).
 
-4. End-to-end encryption and gobbledygook
------------------------------------------
+## 4. End-to-end encryption and gobbledygook
 
 Obviously, security is important and you want to keep your messages safe from prying eyes. Of course, you will use TLS between your client and the messaging system (encrypted in transit).
 
@@ -79,8 +74,7 @@ In many cases, this level of encryption is good enough. But if you want to make 
 
 Pulsar can do [**end-to-end encryption**](https://pulsar.apache.org/docs/en/security-encryption/) in its Java client. Kafka has been talking about doing it in [**KIP-317**](https://cwiki.apache.org/confluence/display/KAFKA/KIP-317%3A+Add+end-to-end+data+encryption+functionality+to+Apache+Kafka).
 
-5. Broker balancing act
------------------------
+## 5. Broker balancing act
 
 In my last post, I talked about Pulsar brokers being stateless, which is great. But there is actually more to the story.
 

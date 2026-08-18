@@ -1,6 +1,5 @@
 ---
 title: "Testing an OpenRewrite Recipe"
-slug: "testing-an-openrewrite-recipe"
 date: "2025-07-14T09:43:52+00:00"
 lastmod: "2025-07-14T09:43:53+00:00"
 description: "Let's migrate ad hoc test code to rely on OpenRewrite's provided classes."

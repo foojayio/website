@@ -1,6 +1,5 @@
 ---
 title: "Taking Your Database Beyond a Single Kubernetes Cluster"
-slug: "taking-your-database-beyond-a-single-kubernetes-cluster"
 date: "2022-01-19T10:31:47+00:00"
 lastmod: "2022-05-30T14:12:16+00:00"
 description: "Running a database (or indeed any application) across multiple regions or K8s clusters is tricky without proper care and planning up front. - by Christopher Bradford"
@@ -81,29 +80,25 @@ However, these options might not always be the best answer, depending on what yo
 
 While you could certainly instrument all that across all those different environments, you can count on it requiring a lot of time and upkeep.{#97d5}
 
-1. Overlay networks
--------------------
+## 1. Overlay networks
 
 An easier answer is to use overlay networks, in which you build out a separate IP address space for your application --- which, in this case, is a Cassandra database. Then you would run that on top of the existing Kube network leveraging proxies, sidecars and gateways. We won't go too far into that in this post, but we have some great content on [how to connect stateful workloads across K8s clusters](https://www.datastax.com/blog/how-connect-stateful-workloads-across-kubernetes-clusters) that will show you at a high level how to do that.{#7b7e}
 
 So, what's next? Packets are flowing, but now you have some new K8s shenanigans to deal with. Assuming that you get the network in place and have all the appropriate routing, some connectivity between these clusters exists, at least at an IP layer. You have IP connectivity pods and Cluster 1 can talk to Pods and Cluster 2, but you now also have some new things to think about.{#6c35}
 
-2. Service discovery
---------------------
+## 2. Service discovery
 
 With a K8s network, identity is transient. Due to cluster events, a pod may be rescheduled and receive a new network address. In some applications this isn't a problem. In others, like databases, the network address is the identity --- which can lead to unexpected behavior. Even though IP addresses may change, over time our storage and thus the data each pod represents stays persistent. We must have a way to maintain a mapping of addresses to applications. This is where service discovery enters the fold.{#4ab9}
 
 In most circumstances service discovery is implemented via DNS within K8s. Even though a pod's IP address may change, it can have a persistent DNS-based identity that is updated as cluster events occur. This sounds great, but when we enter the world of multi-cluster we have to ensure that our services are discoverable across cluster boundaries. As a pod in Cluster 1, I *should* be able to get the address for a pod in Cluster 2.{#1504}
 
-3. DNS stubs
-------------
+## 3. DNS stubs
 
 One approach to this conundrum is DNS stubs. In this configuration we configure the K8s DNS services to route requests for a specific domain suffix to our remote cluster(s). With a fully qualified domain name, we can then forward the DNS lookup request to the appropriate cluster for resolution and ultimately routing.{#736f}
 
 The gotcha here is that each cluster requires a separate DNS suffix set through a kubelet flag, which isn't an option in all flavors of K8s. Some users work around this by using namespace names as part of the FQDN to configure the stub. This works, but is a little bit of a hack instead of setting up proper cluster suffixes.{#452d}
 
-4. Managed DNS
---------------
+## 4. Managed DNS
 
 Another solution similar to DNS stubs is to use a managed DNS product. In the case of GCP there is the [Cloud DNS](https://cloud.google.com/dns) product, which handles replicating local DNS entries up to the VPC level for resolution by outside clusters, or even virtual machines within the same VPC. This option offers a lot of benefits, including:{#530f}
 

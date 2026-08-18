@@ -1,6 +1,5 @@
 ---
 title: "Logging Best Practices: MDC, Ingestion, and Scale"
-slug: "logging-best-practices-mdc-ingestion-and-scale"
 date: "2022-04-11T12:16:37+00:00"
 lastmod: "2022-04-11T12:54:33+00:00"
 description: "Where should you add logs in a method? Should you log in this method? If so what should you include in the log? How to phrase the message?"

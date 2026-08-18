@@ -1,6 +1,5 @@
 ---
 title: "Discussion: The State of Java 2021"
-slug: "discussion-state-of-java-2021"
 date: "2021-10-25T14:05:56+00:00"
 lastmod: "2021-10-25T14:07:04+00:00"
 description: "A discussion with some great folks in the Java world about the highlights of the Snyk Java Ecosystem report and current developments in Java."

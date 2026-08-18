@@ -1,6 +1,5 @@
 ---
 title: "Controlling an LCD Display with Spring and Thymeleaf on the Raspberry Pi"
-slug: "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
 date: "2021-05-19T07:10:12+00:00"
 lastmod: "2021-05-19T07:10:16+00:00"
 description: "Igor De Souza shares a lot fun and inspirational experiments with Java on Raspberry Pi. Some of those were already shared here on Foojay.io."
@@ -40,9 +39,7 @@ This time we want to highlight his work which combines a web app made with Sprin
 
 ## Wiring
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" src="glcd-pinout-683x1024.jpg" alt="" class="wp-image-44923" width="683" height="1024">
-</figure>
+{{< img src="glcd-pinout-683x1024.jpg" class="size-large is-resized" width="683" height="1024" >}}
 
 The display is connected according to this table indicating the physical PIN number and its according BCM number used in the code:
 ![](LCD_raspberry_map.png)

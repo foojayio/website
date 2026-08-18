@@ -1,6 +1,5 @@
 ---
 title: "Build a Status Dashboard Using Spring Boot and Astra DB"
-slug: "build-a-status-dashboard-using-spring-boot-and-astra-db"
 date: "2021-12-17T09:28:19+00:00"
 lastmod: "2022-09-22T17:21:14+00:00"
 description: "Learn how to leverage the Astra Document API on top of Cassandra to build a dashboard of statuses, with Spring Boot for rendering.  - by Graham Cox"
@@ -261,7 +260,7 @@ Our main "dashboard.html" template is then as follows:
 <head>  
   <meta charset="utf-8" />  
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9d90908b8c8b8d9e8fbfcad1cfd1cfd29d9a8b9ecc">[email protected]</a>/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />  
+  <link href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/bootstrap.min.css" rel="stylesheet"    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />  
   <title>Avengers Status Dashboard</title>
 </head>
 <body>  
@@ -284,7 +283,7 @@ Our main "dashboard.html" template is then as follows:
     </div>    
   </div>  
 </div>
-<script src="https://cdn.jsdelivr.net/npm/<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2c0cdcdd6d1d6d0c3d2e2978c928c928fc0c7d6c391">[email protected]</a>/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/bootstrap.bundle.min.js"    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"    crossorigin="anonymous"></script>
 </body>
 </html>
 ```

@@ -1,6 +1,5 @@
 ---
 title: "Beautify Third-Party APIs with Kotlin"
-slug: "beautify-third-party-api-kotlin"
 date: "2021-12-21T08:15:42+00:00"
 lastmod: "2021-12-21T08:16:19+00:00"
 description: "Learn how to improve the API provided by third-party libraries by combining Kotlin extension functions and delegation."
@@ -55,7 +54,7 @@ try (Component component = new Component()) {
 
 However, `Component` must implement `AutoCloseable`.
 
-<img fetchpriority="high" decoding="async" class="aligncenter size-medium wp-image-51028" src="auto-closeable-api-278x510.png" alt="" width="278" height="510">
+{{< img src="auto-closeable-api-278x510.png" class="aligncenter size-medium" width="278" height="510" >}}
 
 Kotlin provides the `use()` extension function on `Closeable`.  
 

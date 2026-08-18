@@ -1,6 +1,5 @@
 ---
 title: "New JavaFX theme library \"Transit\" released"
-slug: "new-javafx-theme-library-transit-released"
 date: "2023-09-12T02:56:13+00:00"
 lastmod: "2023-09-12T07:24:45+00:00"
 description: "A new Java (JavaFX) theme has been released. This is a new theme called \"Transit\" and it builds upon JMetro."
@@ -16,7 +15,7 @@ related_posts:
   - "beginning-javafx-with-intellij"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "a-quick-look-at-faces-jsf-4-0-in-jakarta-ee-10"
-  - "first-experiments-with-java-on-the-lattepanda-iota"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 

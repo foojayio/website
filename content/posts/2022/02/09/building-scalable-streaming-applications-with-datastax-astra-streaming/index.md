@@ -1,6 +1,5 @@
 ---
 title: "Building Scalable Streaming Applications with DataStax Astra Streaming"
-slug: "building-scalable-streaming-applications-with-datastax-astra-streaming"
 date: "2022-02-09T19:09:28+00:00"
 lastmod: "2022-08-18T18:17:00+00:00"
 description: "DataStax Astra Streaming with a step-by-step tutorial that illustrates how it can be used to easily build scalable, streaming applications."

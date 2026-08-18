@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of March 2024"
-slug: "javafx-links-of-march-2024"
 date: "2024-03-31T08:39:00+00:00"
 lastmod: "2024-04-03T06:43:19+00:00"
 description: "Here is the overview of the JavaFX LinksOfTheMonth of March 2024, published on jfx-central.com during this month."

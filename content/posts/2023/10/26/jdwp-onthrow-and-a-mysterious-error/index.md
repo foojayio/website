@@ -1,6 +1,5 @@
 ---
 title: "JDWP, onthrow and a mysterious error"
-slug: "jdwp-onthrow-and-a-mysterious-error"
 date: "2023-10-26T13:44:01+00:00"
 lastmod: "2023-11-20T12:00:24+00:00"
 description: "Collaborating with other people from different companies in an Open-Source project is great."

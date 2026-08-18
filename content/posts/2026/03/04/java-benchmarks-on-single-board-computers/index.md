@@ -1,6 +1,5 @@
 ---
 title: "I Benchmarked Java on Single-Board Computers: Orange Pi 5 Ultra and Raspberry Pi 5 Lead the Pack"
-slug: "java-benchmarks-on-single-board-computers"
 date: "2026-03-04T06:52:00+00:00"
 description: "In my \"Java on Single Board Computers\" series, I already published several posts and videos in which I unpack the board, connect it for the first time, - by Frank Delporte"
 authors:

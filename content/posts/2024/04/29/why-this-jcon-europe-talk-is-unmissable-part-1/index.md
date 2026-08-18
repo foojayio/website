@@ -1,6 +1,5 @@
 ---
 title: "Why This JCON Europe Talk Is Unmissable (Part 1)"
-slug: "why-this-jcon-europe-talk-is-unmissable-part-1"
 date: "2024-04-29T07:29:25+00:00"
 lastmod: "2024-04-29T07:33:07+00:00"
 description: "JCON Europe in Cologne is around the corner (and here are your free Foojay JCON tickets). Why should you go? Well, one reason is that the talks will be awesome. Here's the start of a series of reasons why some of them are absolutely unmissable!"

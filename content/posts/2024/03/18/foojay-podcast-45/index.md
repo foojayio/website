@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #45: Welcome to Java 22"
-slug: "foojay-podcast-45"
 date: "2024-03-18T10:31:53+00:00"
 lastmod: "2025-11-13T08:48:31+00:00"
 description: "Last September, we got Java 21, a Long Term Support (LTS) version with eight new big features and seven incubator or preview features. Does Java 22 also bring that much innovation, or is it \"just\" a bug-fix release?"

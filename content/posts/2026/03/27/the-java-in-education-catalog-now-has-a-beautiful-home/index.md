@@ -1,6 +1,5 @@
 ---
 title: "The Java in Education Catalog Now Has a Beautiful Home"
-slug: "the-java-in-education-catalog-now-has-a-beautiful-home"
 date: "2026-03-27T13:17:41+00:00"
 lastmod: "2026-03-27T13:17:43+00:00"
 description: "A few weeks ago, Igor De Souza shared Bringing Java Closer to Education: A Community-Driven Initiative here on Foojay. It's something we started together - by Frank Delporte"

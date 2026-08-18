@@ -1,6 +1,5 @@
 ---
 title: "Demystifying Java Virtual Machine Memory Management"
-slug: "demystifying-jvm-memory-management"
 date: "2021-05-20T07:26:37+00:00"
 lastmod: "2023-08-02T04:35:38+00:00"
 description: "I aim to demystify the concepts behind memory management and take a look at memory management in some of the modern programming languages."

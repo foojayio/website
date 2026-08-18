@@ -1,6 +1,5 @@
 ---
 title: "How to choose your LLM without ruining your Java code"
-slug: "dev-guide-how-to-choose-your-llm"
 date: "2026-01-09T19:49:47+00:00"
 lastmod: "2026-01-22T14:54:28+00:00"
 description: "In the AI LLM ecosystem (Anthropic, OpenAI, Google, ...), if the code compiles and does what we asked is just level 1. I have been analyzing the latest Sonar Leaderboard (with fresh data from late 2025/2026 on 4,444 Java tasks) and there are big surprises."
@@ -11,10 +10,10 @@ categories:
   - "AI"
 tags:
 related_posts:
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
   - "spring-ai-agents-no-second-runtime"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-  - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
 frozen: false
 ---
 

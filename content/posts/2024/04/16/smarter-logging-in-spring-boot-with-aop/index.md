@@ -1,6 +1,5 @@
 ---
 title: "Smarter Logging in Spring Boot with AOP"
-slug: "smarter-logging-in-spring-boot-with-aop"
 date: "2024-04-16T06:25:36+00:00"
 lastmod: "2024-04-16T06:25:37+00:00"
 description: "Smart logging with AOP in Spring boot with our smart Logging, leveraging AOP for detailed, configurable logging. Ideal for cleaner code"
@@ -14,7 +13,7 @@ related_posts:
   - "aspect-oriented-programming-aop"
   - "microservices-design-principles-for-well-crafted-architecture"
   - "evolution-of-microservices-from-soa-to-modern-architecture"
-  - "building-a-declarative-api-with-spring-aop-and-spel"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

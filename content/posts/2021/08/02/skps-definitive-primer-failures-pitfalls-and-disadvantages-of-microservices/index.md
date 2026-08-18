@@ -1,6 +1,5 @@
 ---
 title: "SKP's Primer: Failures, Pitfalls, and Disadvantages of Microservices"
-slug: "skps-definitive-primer-failures-pitfalls-and-disadvantages-of-microservices"
 date: "2021-08-02T09:35:44+00:00"
 lastmod: "2021-10-11T14:04:44+00:00"
 description: "Pitfalls, failures, and disadvantages of microservices, a one stop reference and gateway for principal architects for decisions of go/no-go."
@@ -14,9 +13,9 @@ categories:
 tags:
 related_posts:
   - "can-java-jakarta-ee-do-microservices"
+  - "idempotent-spring-boot-starter"
   - "effortless-updates-zero-migration"
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
-  - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
 frozen: false
 ---
 

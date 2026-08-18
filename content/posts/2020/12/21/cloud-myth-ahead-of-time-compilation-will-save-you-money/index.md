@@ -1,6 +1,5 @@
 ---
 title: "Cloud Myth: Ahead of Time Compilation Will Save You Money"
-slug: "cloud-myth-ahead-of-time-compilation-will-save-you-money"
 date: "2020-12-21T14:54:19+00:00"
 lastmod: "2020-12-21T14:54:58+00:00"
 description: "Learn about Jakarta EE runtimes that run Jakarta EE applications in the cloud, with no need to rewrite apps to proprietary frameworks."

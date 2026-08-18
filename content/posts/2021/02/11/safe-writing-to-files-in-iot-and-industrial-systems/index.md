@@ -1,6 +1,5 @@
 ---
 title: "Safe Writing to Files in IoT and Industrial Systems"
-slug: "safe-writing-to-files-in-iot-and-industrial-systems"
 date: "2021-02-11T09:12:23+00:00"
 lastmod: "2021-02-11T09:13:06+00:00"
 description: "Learn how to write to disk safely in Java, combining disk sync, shutdown hooks, and atomic renaming of files!"

@@ -1,6 +1,5 @@
 ---
 title: "Book Review: \"Help Your Boss Help You\""
-slug: "book-review-help-your-boss-help-you"
 date: "2021-08-13T12:19:00+00:00"
 lastmod: "2021-09-03T08:40:14+00:00"
 description: "Here's a book to be read thoroughly several times and then to be placed behind glass to be broken in case of emergency!"
@@ -18,9 +17,7 @@ related_posts:
 frozen: false
 ---
 
-<figure class="wp-block-image size-medium">
- <a target="_blank" href="https://pragprog.com/titles/kkmanage/help-your-boss-help-you/"><img fetchpriority="high" decoding="async" width="415" height="510" src="book-help-your-boss-help-you-415x510.png" alt="" class="wp-image-46413"></a>
-</figure>
+{{< img src="book-help-your-boss-help-you-415x510.png" class="size-medium" width="415" height="510" >}}
 
 Some books were written to be read once and put aside, others to be read thoroughly several times over and then to be placed behind glass to be broken in case of emergency. This book is of the latter kind---once you've read through it a few times, and dipped into the areas that speak to you most, you want to have it nearby both as a PDF and in hard copy format
 ---as a backup just in case you can't find that PDF at the crucial moment when you really need to have a response at hand in times of crisis. You'll also gradually find your hard copy filled with yellow sticky notes at the points in the book that speak to you most, with underlinings of the crucial passages that resonate back to battles long gone but frequently relived in anguish.

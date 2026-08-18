@@ -1,6 +1,5 @@
 ---
 title: "New User Interface for JFX Central, the Home for JavaFX – Part 2"
-slug: "new-user-interface-for-jfx-central-the-home-for-all-javafx-information-part-2"
 date: "2023-09-18T05:42:34+00:00"
 lastmod: "2023-09-18T05:55:24+00:00"
 description: "JFX Central is a not-for-profit team effort. Many people are involved, and any issue or pull request provided by anyone from the JavaFX community helps!"
@@ -26,9 +25,7 @@ In [part 1 of this series](https://foojay.io/today/new-user-interface-for-jfx-ce
 
 *CEO of Senapt GmbH \& DLSC Software \& Consulting GmbH, [@dlemmermann](https://twitter.com/dlemmermann)*
 
-<figure class="wp-block-image size-thumbnail">
- <img fetchpriority="high" decoding="async" width="300" height="260" src="dirk-300x260.jpg" alt="" class="wp-image-102262">
-</figure>
+{{< img src="dirk-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in JavaFX and JavaFX development?**
 
@@ -70,9 +67,7 @@ Up until the final release of JavaFX 8, we could frequently see new features bei
 
 *JavaFX developer and freelancer, [@LeeWyatt_7788](https://twitter.com/LeeWyatt_7788)*
 
-<figure class="wp-block-image size-thumbnail">
- <img decoding="async" width="300" height="260" src="liwang-300x260.jpg" alt="" class="wp-image-102263">
-</figure>
+{{< img src="liwang-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 
@@ -110,9 +105,7 @@ I owe profound gratitude to Mr. Dirk Lemmermann for the invaluable opportunities
 
 *CO-Founder and CTO at Sandec GmbH, [@FlorianKirmaier](https://twitter.com/FlorianKirmaier)*
 
-<figure class="wp-block-image size-thumbnail">
- <img decoding="async" width="300" height="260" src="florian-300x260.jpg" alt="" class="wp-image-102264">
-</figure>
+{{< img src="florian-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 
@@ -166,9 +159,7 @@ Additionally, we'll make public various libraries we've created and employed in 
 
 *Founder Hydraulic Software*
 
-<figure class="wp-block-image size-thumbnail">
- <img loading="lazy" decoding="async" width="300" height="260" src="mike-300x260.jpg" alt="" class="wp-image-102265">
-</figure>
+{{< img src="mike-300x260.jpg" class="size-thumbnail" width="300" height="260" >}}
 
 **Can you introduce yourself and your history in Java and JavaFX development?**
 

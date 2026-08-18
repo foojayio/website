@@ -1,6 +1,5 @@
 ---
 title: "The Inner Workings of Safepoints"
-slug: "the-inner-workings-of-safepoints"
 date: "2023-08-02T10:27:27+00:00"
 lastmod: "2023-08-02T10:27:28+00:00"
 description: "Have you ever wondered how safepoints are implemented in the OpenJDK? Follow me down the rabbit hole into the inner workings of the JVM."

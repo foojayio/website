@@ -1,6 +1,5 @@
 ---
 title: "Querying Your In-Memory-Data-Grid: Why and How?"
-slug: "querying-your-in-memory-data-grid-why-and-how"
 date: "2021-05-21T07:11:28+00:00"
 lastmod: "2021-05-21T07:11:31+00:00"
 description: "In this article, I'd like to describe how you can take advantage of Hazelcast to query your cached data in different ways and still be fast."
@@ -83,7 +82,8 @@ Collection<String> values = map.values(predicate);
 Collection<HazelcastJsonValue> values = map.values(predicate);
 ```
 
-### The Shape of ~~Water~~ Stored Data
+### The Shape of
+~~Water~~ Stored Data
 
 Using HazelcastJsonValue means we are still storing data as JSON-formatted Strings. While some language ecosystems favor the usage of JSON, *e.g.* , JavaScript, some others favor the usage of dedicated data structures, *e.g.* , Java and Go. If developers on different language stacks use your Hazelcast cluster, you need to store the data in the most "consumable" shape. Enters `Portable`Another data serialization format that is query-friendly. With Portable, you need to
 

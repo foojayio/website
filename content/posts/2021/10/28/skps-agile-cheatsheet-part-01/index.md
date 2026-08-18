@@ -1,6 +1,5 @@
 ---
 title: "SKP's Agile Cheatsheet: Part 01 | On Foojay.io Today"
-slug: "skps-agile-cheatsheet-part-01"
 date: "2021-10-28T17:39:31+00:00"
 lastmod: "2021-10-28T17:39:34+00:00"
 description: "SKP's Agile Cheatsheet listing the most important terms in agile, devops, scrum, lean, kanban, and more."

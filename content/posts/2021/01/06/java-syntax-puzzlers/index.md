@@ -1,6 +1,5 @@
 ---
 title: "Let's Do Some Java Syntax Puzzlers Today"
-slug: "java-syntax-puzzlers"
 date: "2021-01-06T09:26:04+00:00"
 lastmod: "2021-01-06T09:41:29+00:00"
 description: "Given I love a good puzzle (especially the Java Puzzles), let’s try some puzzles, using the Java syntax only, without any runtime behavior."
@@ -18,7 +17,7 @@ Roughly 12 years ago, I started to contribute to the Eclipse ecosystem in variou
 
 While working on Eclipse, I fondly remember working on various parts of the Java Tooling (JDT) and while working on refactorings and quick fixes. And not surprisingly, working on language-intensive pieces turned out to have the same hiccups as other non-trivial algorithms - the transition from "this is gonna be easy" to "why am I up at 3 am reading the Java Language Specification".
 
-<img fetchpriority="high" decoding="async" class="alignnone size-medium wp-image-36746" src="muskallatweet-700x129.png" alt="" width="700" height="129">
+{{< img src="muskallatweet-700x129.png" class="size-medium" width="700" height="129" >}}
 
 Working on language-specific tooling exposes you to all kinds of edge cases and delicate details and language has to offer. Some of them are well known and generally seen as "unprofessional" (hello `goto`). Others are actually not known at all. And with all due respect, I quite enjoy discovering the edge cases of the language syntax - a lot of times to confuse my co-workers who think they know the Java Language Syntax 😉 And given I love a good puzzle (especially the Java Puzzles), let's try a puzzle but using the Java syntax only, without any runtime behavior.
 

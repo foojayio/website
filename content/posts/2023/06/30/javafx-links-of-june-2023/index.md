@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of June 2023"
-slug: "javafx-links-of-june-2023"
 date: "2023-06-30T09:18:30+00:00"
 description: "Again a lot has been shared this month in the jfx-central.com #LinksOfTheWeek! And that website itself is \"under heavy construction\" as version - by Frank Delporte"
 canonical: "https://webtechie.be/post/2023-06-30-javafx-links-of-june-2023/"
@@ -14,7 +13,7 @@ related_posts:
   - "javafx-links-of-may-2023"
   - "javafx-links-of-april-2023"
   - "javafx-links-of-march-2023"
-  - "javafx-links-of-june-2026"
+  - "javafx-links-of-july-2026"
 frozen: false
 ---
 

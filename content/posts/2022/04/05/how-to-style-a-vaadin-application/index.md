@@ -1,6 +1,5 @@
 ---
 title: "How to style a Vaadin Application"
-slug: "how-to-style-a-vaadin-application"
 date: "2022-04-05T07:41:12+00:00"
 lastmod: "2022-04-05T08:00:28+00:00"
 description: "The basics of styling a Vaadin application using CSS: custom themes, override Lumo values, and selectively style views and components."

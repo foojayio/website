@@ -1,6 +1,5 @@
 ---
 title: "Spring Cloud Stream for Real-Time Event-Driven Systems"
-slug: "spring-cloud-stream-event-driven-architecture-part-1"
 date: "2025-07-21T13:33:34+00:00"
 lastmod: "2025-07-21T13:35:48+00:00"
 description: "Learn how to build scalable, event-driven microservices using Spring Cloud Stream. This guide covers core concepts, messaging patterns, and integration with brokers like RabbitMQ, Kafka, Apache Pulsar, and Amazon Kinesis etc."

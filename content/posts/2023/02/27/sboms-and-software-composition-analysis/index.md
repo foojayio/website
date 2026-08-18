@@ -1,6 +1,5 @@
 ---
 title: "SBOMs and Software Composition Analysis │ Foojay.io"
-slug: "sboms-and-software-composition-analysis"
 date: "2023-02-27T08:11:28+00:00"
 lastmod: "2023-02-27T08:14:41+00:00"
 description: "Let's learn all about software composition analysis, how they work and why it is important for developers to get started as soon as possible!"

@@ -1,6 +1,5 @@
 ---
 title: "A Short History of AJAX and SSR"
-slug: "a-short-history-of-ajax-and-ssr"
 date: "2024-09-23T06:57:01+00:00"
 lastmod: "2024-09-24T11:50:58+00:00"
 description: "My journey in programming began over two decades ago, a time when JavaScript was a far cry from its current state, and developers were primarily focused on Microsoft Internet Explorer."

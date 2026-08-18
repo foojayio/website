@@ -1,6 +1,5 @@
 ---
 title: "BoxLang AI Deep Dive — Part 2 of 7: Building a Production-Grade AI Tool Ecosystem"
-slug: "boxlang-ai-deep-dive-part-2-of-7-building-a-production-grade-ai-tool-ecosystem"
 date: "2026-04-16T09:27:15+00:00"
 lastmod: "2026-05-14T09:49:31+00:00"
 description: "BoxLang AI 3.0 Series · Part 2 of 7 Function calling is where most AI frameworks look deceptively simple on the surface and turn into a mess underneath. - by Cristobal Escobar"

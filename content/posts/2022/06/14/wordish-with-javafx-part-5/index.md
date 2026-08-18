@@ -1,6 +1,5 @@
 ---
 title: "Wordish with JavaFX - Part 5"
-slug: "wordish-with-javafx-part-5"
 date: "2022-06-14T07:25:37+00:00"
 lastmod: "2022-06-14T07:25:40+00:00"
 description: "Let's turn to JavaFX charts, showing how to customize charts with orientation and colors and how to add nodes to the chart scene graph!"
@@ -19,7 +18,7 @@ related_posts:
   - "wordish-with-javafx-part-1"
   - "wordish-with-javafx-part-2"
   - "wordish-with-javafx-part-3"
-  - "the-javafx-revival"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
 frozen: false
 ---
 
@@ -36,12 +35,7 @@ Furthermore, we look at implementing a customized Popup control.
 
 Before we start, here's an example screenshot of Wordish.
 
-<figure class="wp-block-image size-large is-resized">
- <img fetchpriority="high" decoding="async" src="playgame5-619x1024.png" alt="Wordish Game in progress" class="wp-image-56002" width="350" height="579">
- <figcaption>
-  Figure 1. Wordish Main View Layout
- </figcaption>
-</figure>
+{{< img src="playgame5-619x1024.png" class="size-large is-resized" alt="Wordish Game in progress" width="350" height="579" caption="Figure 1. Wordish Main View Layout" >}}
 
 You can access the code on github here: <https://github.com/gailasgteach/Wordish>.
 
@@ -53,12 +47,7 @@ To do this, we collect the game statistics in a singleton object, GameStats, whi
 
 Similar to the Wordle game, we display the number of games played, win percentage, current streak, and maximum streak, as shown in Figure 2.
 
-<figure class="wp-block-image size-large is-resized">
- <img decoding="async" src="chart-stats-1-619x1024.png" alt="" class="wp-image-56047" width="350" height="579">
- <figcaption>
-  Figure 2. Wordish Statistics View
- </figcaption>
-</figure>
+{{< img src="chart-stats-1-619x1024.png" class="size-large is-resized" width="350" height="579" caption="Figure 2. Wordish Statistics View" >}}
 
 Below the statistics data, we display the Guess Distribution as a horizontal bar chart. Here you see the left Y axis shows the number of guesses it took the user for a correct answer (1 through 6). Likewise, the corresponding X axis value reflects the number of games at each guess level.
 
@@ -306,12 +295,7 @@ Wordish uses a PopUp control to display messages to users who play the game. We 
 
 Figure 3 shows the popup control after guessing the word in one try. (Spoiler alert, I did cheat!)
 
-<figure class="wp-block-image size-full is-resized">
- <img decoding="async" src="popup1.png" alt="" class="wp-image-56052" width="346" height="269">
- <figcaption>
-  Figure 3. The Wordish Popup
- </figcaption>
-</figure>
+{{< img src="popup1.png" class="size-full is-resized" width="346" height="269" caption="Figure 3. The Wordish Popup" >}}
 
 We style the popup with CSS as shown here.
 

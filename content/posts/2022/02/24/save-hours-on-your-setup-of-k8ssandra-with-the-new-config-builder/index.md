@@ -1,6 +1,5 @@
 ---
 title: "Save Hours on your Setup of K8ssandra with the New Config Builder"
-slug: "save-hours-on-your-setup-of-k8ssandra-with-the-new-config-builder"
 date: "2022-02-24T19:36:47+00:00"
 lastmod: "2022-02-27T12:20:42+00:00"
 description: "Setting up K8ssandra in your workflow just got a whole lot easier. With the new Config Builder you can be running Apache Cassandra® on Kubernetes in a - by Matt Overstreet"

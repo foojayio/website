@@ -1,6 +1,5 @@
 ---
 title: "Java Thread Programming (Part 4)"
-slug: "java-thread-programming-part-4"
 date: "2021-10-26T13:04:40+00:00"
 lastmod: "2021-12-23T22:53:28+00:00"
 description: "We need to be very careful when using the \"volatile\" keyword, and we should use it only where it’s required, and definitely not everywhere."

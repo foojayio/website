@@ -1,6 +1,5 @@
 ---
 title: "Friends of OpenJDK Hangout at FOSDEM 2024"
-slug: "friends-of-openjdk-hangout-at-fosdem-2024"
 date: "2024-01-29T10:20:42+00:00"
 lastmod: "2024-01-29T10:20:44+00:00"
 description: "Spend time with OpenJDK enthusiasts in Bier Central in Brussels on Saturday, 3 February from 18.30."

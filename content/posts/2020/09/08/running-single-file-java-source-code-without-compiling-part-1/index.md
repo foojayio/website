@@ -1,6 +1,5 @@
 ---
 title: "Running Single-File Java Source Code Without Compiling (Part 1)"
-slug: "running-single-file-java-source-code-without-compiling-part-1"
 date: "2020-09-08T08:15:03+00:00"
 lastmod: "2020-09-11T10:45:36+00:00"
 description: "From OpenJDK 11 onwards, you get the option to launch a single Java source file directly, without intermediate compilation."

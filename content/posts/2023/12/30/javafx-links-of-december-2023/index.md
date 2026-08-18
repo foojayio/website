@@ -1,6 +1,5 @@
 ---
 title: "JavaFX Links of December 2023"
-slug: "javafx-links-of-december-2023"
 date: "2023-12-30T13:11:51+00:00"
 lastmod: "2023-12-30T13:11:53+00:00"
 description: "Thanks for following these updates and looking forward to more of your JavaFX work in the new year!"

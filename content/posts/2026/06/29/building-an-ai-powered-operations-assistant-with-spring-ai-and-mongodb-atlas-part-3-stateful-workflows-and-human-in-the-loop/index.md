@@ -1,6 +1,5 @@
 ---
 title: "Building an AI-Powered Operations Assistant with Spring AI and MongoDB Atlas — Part 3: Stateful Workflows and Human-in-the-Loop"
-slug: "building-an-ai-powered-operations-assistant-with-spring-ai-and-mongodb-atlas-part-3-stateful-workflows-and-human-in-the-loop"
 date: "2026-06-29T09:40:40+00:00"
 lastmod: "2026-06-29T09:40:43+00:00"
 description: "This is the third and final article in the series. Part 1 covered the RAG foundation — loading runbooks into a vector store and grounding model answers in real documentation. Part 2 added short-term and long-term conversational memory. This article introduces stateful workflow checkpointing, tool calls, and a pause/resume mechanism that lets multi-step investigations survive session boundaries."

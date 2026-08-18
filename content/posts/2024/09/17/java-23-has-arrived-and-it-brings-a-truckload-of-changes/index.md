@@ -1,6 +1,5 @@
 ---
 title: "Java 23 Has Arrived, And It Brings a Truckload of Changes"
-slug: "java-23-has-arrived-and-it-brings-a-truckload-of-changes"
 date: "2024-09-17T06:45:11+00:00"
 lastmod: "2024-09-18T10:03:36+00:00"
 description: "Java 23 has arrived! It's been six months since Java 22 was released, so it's time for a fresh truckload of JEPs."

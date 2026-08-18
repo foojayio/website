@@ -1,6 +1,5 @@
 ---
 title: "Learn JShell with JavaFX in Only 60 Seconds"
-slug: "learn-javafx-with-jshell-in-60-seconds"
 date: "2021-07-12T10:54:56+00:00"
 lastmod: "2021-07-12T11:01:43+00:00"
 description: "Learn the basics of using jshell. Next, combine that with learning how to run a JavaFX application file from a terminal command prompt!"
@@ -13,9 +12,9 @@ categories:
 tags:
 related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-6"
+  - "sheetmusic4j-0-0-3-abc-notation-guitar-pro-engraving-improvements"
   - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-  - "javafx-links-of-november-2025"
 frozen: false
 ---
 
@@ -162,13 +161,13 @@ java --list-modules | grep javafx
 You should see something like the following:
 
 ```
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5339322532352b7d313220361362627d637d6a">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08a8196818698ce838f8e94928f8c93a0d1d1ced0ced9">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f892998e999e80d69e809594b8c9c9d6c8d6c1">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="95fff4e3f4f3edbbf2e7f4e5fdfcf6e6d5a4a4bba5bbac">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd5dec9ded9c791d2dadbd6deff8e8e918f9186">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e389829582859bcd90948a8d84a3d2d2cdd3cdda">[email protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f59f948394938ddb829097b5c4c4dbc5dbcc">[email protected]</a>
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
+[email protected]
 ```
 
 If you don't see the modules shown above, you probably downloaded just the JDK itself (not containing JavaFX's modules). (Head over to Azul to download Zulu builds with JavaFX here: <https://www.azul.com/downloads/?package=jdk-fx>.)

@@ -1,6 +1,5 @@
 ---
 title: "Java, What's Old? Part III - I/O"
-slug: "java-whats-old-part-iii-i-o"
 date: "2025-12-09T08:23:00+00:00"
 description: "Let's see input and output hidden gems in the Java."
 authors:
@@ -13,8 +12,8 @@ tags:
 related_posts:
   - "java-whats-old-part-ii-utils"
   - "java-whats-old-part-i-collections"
-  - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-  - "virtual-thread-pinning-field-guide"
+  - "build-secure-ai-chat-applications-with-boxlang-rag-ollama-and-amazon-bedrock-with-dan-card"
+  - "idempotent-spring-boot-starter"
 frozen: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "How to create your own custom Spring Data repository"
-slug: "custom-spring-data-repository"
 date: "2021-04-14T07:33:08+00:00"
 lastmod: "2021-04-14T07:33:11+00:00"
 description: "how one can use Arrow's type system with Spring Data. You can benefit from the explanations to craft your custom Spring Data repository."
@@ -154,7 +153,7 @@ repository
     .fold(
         { ServerResponse.notFound().build() },    // 3
         { ServerResponse.ok().body(it) }          // 3
-    )<code class="language-kotlin"></code>
+    )
 ```
 
 1. `Optional`

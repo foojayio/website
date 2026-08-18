@@ -1,6 +1,5 @@
 ---
 title: "Memory Management in Java: An Introduction"
-slug: "java-memory-management"
 date: "2023-09-27T13:47:28+00:00"
 lastmod: "2023-09-27T13:47:29+00:00"
 description: "Understanding memory management in Java, and particularly the role of object allocation is essential when optimising system performance."

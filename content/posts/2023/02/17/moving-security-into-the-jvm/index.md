@@ -1,6 +1,5 @@
 ---
 title: "Moving Security into the JVM"
-slug: "moving-security-into-the-jvm"
 date: "2023-02-17T11:15:35+00:00"
 lastmod: "2023-04-27T13:04:54+00:00"
 description: "With Azul Vulnerability Detection, running the software and getting security insight become the same action."

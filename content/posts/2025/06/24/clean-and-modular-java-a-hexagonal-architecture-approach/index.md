@@ -1,6 +1,5 @@
 ---
 title: "Clean and Modular Java: A Hexagonal Architecture Approach"
-slug: "clean-and-modular-java-a-hexagonal-architecture-approach"
 date: "2025-06-24T08:03:50+00:00"
 lastmod: "2025-06-25T12:17:57+00:00"
 description: "One of the discussions that always leaves me with both doubts and excitement is the one about system architecture."

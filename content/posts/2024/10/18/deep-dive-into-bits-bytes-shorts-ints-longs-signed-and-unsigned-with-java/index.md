@@ -1,6 +1,5 @@
 ---
 title: "Deep dive into bits, bytes, shorts, ints, longs, signed, and unsigned with Java"
-slug: "deep-dive-into-bits-bytes-shorts-ints-longs-signed-and-unsigned-with-java"
 date: "2024-10-18T13:54:09+00:00"
 lastmod: "2024-10-18T13:54:10+00:00"
 description: "On the Pi4J discussion list, someone recently asked what the best and easiest way is in Java to convert a byte value. In Java, there is no distinction - by Frank Delporte"

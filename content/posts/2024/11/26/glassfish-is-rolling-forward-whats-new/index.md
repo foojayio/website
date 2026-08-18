@@ -1,6 +1,5 @@
 ---
 title: "GlassFish is rolling forward. What’s New?"
-slug: "glassfish-is-rolling-forward-whats-new"
 date: "2024-11-26T15:11:17+00:00"
 lastmod: "2024-11-26T16:59:03+00:00"
 description: "The Evolution Continues. GlassFish, which used to be a popular application server, free to use and reliable, is evolving again."

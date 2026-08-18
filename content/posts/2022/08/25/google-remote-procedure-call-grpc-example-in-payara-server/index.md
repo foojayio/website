@@ -1,6 +1,5 @@
 ---
 title: "Google Remote Procedure Call (gRPC) Example in Payara Server"
-slug: "google-remote-procedure-call-grpc-example-in-payara-server"
 date: "2022-08-25T10:09:21+00:00"
 lastmod: "2022-08-25T10:35:09+00:00"
 description: "Payara has developed a module to support gRPC. It is available in Payara Community GitHub repository. Find out more here!"
@@ -83,10 +82,10 @@ service RouteGuide {}
 
 Now we can define some `rpc` methods into the service definition with their types for request and response. Our service includes four methods that encompass the four possible kinds:
 
-* **rpc** ` GetFeature(Point) `**returns**` (Feature) {}`
-* **rpc** ` ListFeatures(Rectangle) `**returns**` (stream Feature) {}`
-* **rpc** ` RecordRoute(stream Point) `**returns**` (RouteSummary) {}`
-* **rpc** ` RouteChat(stream RouteNote) `**returns**` (stream RouteNote) {}`
+* `rpc GetFeature(Point) returns (Feature) {}`
+* `rpc ListFeatures(Rectangle) returns (stream Feature) {}`
+* `rpc RecordRoute(stream Point) returns (RouteSummary) {}`
+* `rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}`
 
 `GetFeature` returns the `Feature` at a given `Point`. It acts like a *simple function call*done by the client as a request to the server through the client Stub.
 

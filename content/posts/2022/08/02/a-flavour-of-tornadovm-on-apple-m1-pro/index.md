@@ -1,6 +1,5 @@
 ---
 title: "A Flavour of TornadoVM on Apple M1 Pro"
-slug: "a-flavour-of-tornadovm-on-apple-m1-pro"
 date: "2022-08-02T08:21:12+00:00"
 lastmod: "2023-02-16T08:01:45+00:00"
 description: "This article aims to describe all of the main steps required to install and run TornadoVM on Apple M1 Pro."

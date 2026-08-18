@@ -1,6 +1,5 @@
 ---
 title: "Join the NLJUG JSpring Conference on Thursday, June 5"
-slug: "join-the-nljug-jspring-conference-on-thursday-june-5"
 date: "2025-05-19T08:11:26+00:00"
 lastmod: "2025-05-19T08:27:58+00:00"
 description: "Join the Dutch Java community at J-Spring 2025, the premier Java conference in the Netherlands, taking place Thursday, June 5th at Jaarbeurs Utrecht."

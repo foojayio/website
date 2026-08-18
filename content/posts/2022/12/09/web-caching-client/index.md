@@ -1,6 +1,5 @@
 ---
 title: "Web resource caching: Client-side"
-slug: "web-caching-client"
 date: "2022-12-09T15:27:44+00:00"
 lastmod: "2022-12-09T15:42:06+00:00"
 description: "Learn about several alternatives to cache web resources: Expiry and Cache-Control, Last-Modified and ETag, and the Cache API and web workers."
@@ -89,7 +88,7 @@ To avoid the risk of serving an out-of-date resource, the browser **must** send 
 
 Let's use a diagram to make clear how they interact:
 
-<img decoding="async" class="size-medium wp-image-61153 aligncenter" src="last-modified-sequence-498x510.png" alt="" width="498" height="510">
+{{< img src="last-modified-sequence-498x510.png" class="size-medium aligncenter" width="498" height="510" >}}
 
 Note: the `If-Unmodified-Since` has the opposite function for `POST` and other non-idempotent methods. It returns a `412 Precondition Failed` HTTP error to avoid overwriting resources that have changed.
 

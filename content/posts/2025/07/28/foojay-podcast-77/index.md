@@ -1,6 +1,5 @@
 ---
 title: "Foojay Podcast #77: DevBcn Report, Part 2 – Spanish Knowledge Sharing"
-slug: "foojay-podcast-77"
 date: "2025-07-28T06:49:00+00:00"
 lastmod: "2025-11-13T08:34:53+00:00"
 description: "This is the first Foojay podcast in Spanish. It's also the shortest one and the final of season 4 ;-) Jonathan Vila \"highjacked\" the microphone from - by Frank Delporte"

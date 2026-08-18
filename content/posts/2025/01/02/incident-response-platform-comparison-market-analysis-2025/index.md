@@ -1,6 +1,5 @@
 ---
 title: "Incident Response Platform Comparison: Market Analysis 2025"
-slug: "incident-response-platform-comparison-market-analysis-2025"
 date: "2025-01-02T08:38:07+00:00"
 lastmod: "2025-01-29T16:51:24+00:00"
 description: "The incident response platform market continues to expand as organizations prioritize effective incident management in their cloud-native environments."

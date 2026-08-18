@@ -1,6 +1,5 @@
 ---
 title: "Pitest: Do You Test Your Tests?"
-slug: "pitest-do-you-test-your-tests"
 date: "2023-08-15T14:32:55+00:00"
 lastmod: "2023-08-15T14:53:37+00:00"
 description: "A brief introduction with code to mutation testing using Pitest. Now you too can get started testing your tests!"
@@ -49,13 +48,19 @@ It can also help us find issues if there were gaps in our **T** est **D** riven 
 
 ## A short demo
 
-If you want to run the code yourself, please make sure you have `Maven` installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
+If you want to run the code yourself, please make sure you have
+
+```
+Maven
+```
+
+installed, and that you have cloned or downloaded the code from the [GitHub repository.](https://github.com/SimonVerhoeven/pitest-demo/tree/main)
 
 The actual application itself doesn't entail much, it just contains a simple function that's sensitive to mutations.
 
 Let's run `mvn test` on this project, and we'll get this magnificent JaCoCo project:
 
-<img decoding="async" class="alignnone size-medium wp-image-101899" src="jacoco-700x48.png" alt="A JaCoCo report - all 100%" width="700" height="48">
+{{< img src="jacoco-700x48.png" class="size-medium" alt="A JaCoCo report - all 100%" width="700" height="48" >}}
 
 A line \& branch coverage of 100% magnificent, isn't it?  
 
@@ -67,7 +72,7 @@ In this project a basic Pitest setup has already been done, so we can also take 
 
 As you can see
 
-<img fetchpriority="high" decoding="async" class="alignnone wp-image-101900 size-medium" src="report1-700x122.png" alt="The first Pitest report with all mutations surviving" width="700" height="122">
+{{< img src="report1-700x122.png" class="size-medium" alt="The first Pitest report with all mutations surviving" width="700" height="122" >}}
 
 Things do not look quite as good over here. Pitest mutated our code, and 6 out of 7 mutations survived.  
 
@@ -106,7 +111,7 @@ void decays() {
 
 If we then run Pitest again, we'll already see some improvements:
 
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-101902" src="report3-700x414.png" alt="" width="700" height="414">
+{{< img src="report3-700x414.png" class="size-medium" width="700" height="414" >}}
 
 However, we'll notice there are still a couple of surviving mutations.  
 
@@ -136,7 +141,7 @@ And rerun our tests we'll see that 2 more mutations have joined the choir invisi
 
 **Note**: hovering over a covered mutation will show you which testcase(s) have killed it:
 
-<img loading="lazy" decoding="async" class="alignnone wp-image-101905 size-medium" src="solvedmutation-700x96.png" alt="A display of which test(s) killed a mutation" width="700" height="96">
+{{< img src="solvedmutation-700x96.png" class="size-medium" alt="A display of which test(s) killed a mutation" width="700" height="96" >}}
 
 Now if we take a look at the remaining mutations we notice we can cover a lot of mutations in one by testing our happy path:
 
