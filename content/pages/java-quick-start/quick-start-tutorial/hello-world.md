@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Hello World"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Write and run your first Java program with a simple Hello World example, including the Java 25 shorthand syntax and the classic class-based approach."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/hello-world/"
 url: "/java-quick-start/quick-start-tutorial/hello-world/"
 jdoodle: true

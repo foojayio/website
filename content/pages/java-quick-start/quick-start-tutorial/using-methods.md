@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Using Methods"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Split a Java program into methods to keep the code simple, readable and maintainable long after you wrote it."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-methods/"
 url: "/java-quick-start/quick-start-tutorial/using-methods/"
 jdoodle: true

@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Using the Arguments"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Use the start-up arguments of the main method to learn Java arrays: their length, and how to loop through them."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-the-arguments/"
 url: "/java-quick-start/quick-start-tutorial/using-the-arguments/"
 jdoodle: true

@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - If, Then, Else"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Compare values and branch on the result with if, then and else - the most-used construct in any programming language."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/if-then-else/"
 url: "/java-quick-start/quick-start-tutorial/if-then-else/"
 jdoodle: true

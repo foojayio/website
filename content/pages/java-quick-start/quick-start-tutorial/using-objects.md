@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Getting Started with Java - Using Objects"
+description: "Java is object-oriented: turn part of your program into an object with its own variables and methods."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/"
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
 jdoodle: true

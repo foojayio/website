@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Quick Start Tutorial"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "A high-speed introduction to Java in single source files: no project, no build tool, just java HelloWorld.java and go."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/"
 url: "/java-quick-start/quick-start-tutorial/"
 aliases:

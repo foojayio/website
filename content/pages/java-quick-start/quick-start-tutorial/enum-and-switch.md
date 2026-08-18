@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Enum and Switch"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Replace loose integer values with an enum, and use a switch to react to each of its options in Java."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/"
 url: "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 jdoodle: true

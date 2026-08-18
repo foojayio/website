@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Getting Started with Java - Find Another Java Version"
+description: "OpenJDK is the source; the runtime you install comes from a distribution. An overview of the free builds you can choose between."
 canonical: "https://foojay.io/java-quick-start/install-java/find-another-java-version/"
 url: "/java-quick-start/install-java/find-another-java-version/"
 aliases:

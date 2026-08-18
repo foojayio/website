@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Getting Started with Java - Install Java on Windows"
+description: "Install Java on Windows with an MSI installer, then check the installation from the command prompt."
 canonical: "https://foojay.io/java-quick-start/install-java/install-java-on-windows/"
 url: "/java-quick-start/install-java/install-java-on-windows/"
 aliases:

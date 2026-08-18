@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - Install Java on Linux"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "Install Java on Linux with a Debian package installer, and find the other distributions and versions available for your system."
 canonical: "https://foojay.io/java-quick-start/install-java/install-java-on-linux/"
 url: "/java-quick-start/install-java/install-java-on-linux/"
 aliases:

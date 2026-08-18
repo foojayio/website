@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with Java - What's Next?"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+description: "You have the basics. Where to go next: beginner posts on Foojay.io, and free tutorials from the wider Java community."
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/whats-next/"
 url: "/java-quick-start/quick-start-tutorial/whats-next/"
 aliases:
