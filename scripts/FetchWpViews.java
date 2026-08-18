@@ -97,7 +97,14 @@ public class FetchWpViews {
      * doesn't match are listing pages (/today/, /today/author/, the home page,
      * the sitemap) that have no single Hugo page to attach a count to.
      */
-    static final Map<String, String> PAGE_ALIASES = Map.of("jugs", "java-user-groups-jugs");
+    static final Map<String, String> PAGE_ALIASES = Map.of(
+            "jugs", "java-user-groups-jugs",
+            // WordPress serves the events calendar at BOTH /calendar/ and
+            // /all-events/; here it is one page, `calendar`. Both WP items
+            // resolve to that key and fetchAll() merges with Math::max, so the
+            // page keeps the higher of the two counts rather than summing two
+            // views of the same content.
+            "all-events", "calendar");
 
     /**
      * WordPress objects that live in a different SECTION here, keyed

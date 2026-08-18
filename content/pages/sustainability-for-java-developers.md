@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Sustainability for Java Developers"
+description: "A free community eBook in which Java Champions, architects and writers explore what sustainable Java software development means."
 canonical: "https://foojay.io/sustainability-for-java-developers/"
 url: "/sustainability-for-java-developers/"
 aliases:

@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "The Foojay.io Team"
+description: "The team maintaining the foojay.io website and other channels."
 canonical: "https://foojay.io/team/"
 url: "/team/"
 aliases:

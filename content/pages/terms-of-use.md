@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Terms of Use"
+description: "The terms and conditions that apply when you visit foojay.io or use any of its services."
 canonical: "https://foojay.io/terms-of-use/"
 url: "/terms-of-use/"
 aliases:

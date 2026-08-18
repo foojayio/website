@@ -332,7 +332,7 @@ public class ConvertPosts {
         d.url = stripTrailingSlash(url) + "/";
         d.slug = sanitizeSlug(lastPathSegment(d.url));
 
-        d.title = stripEmoji(stripSiteSuffix(firstNonBlank(
+        d.title = stripEmoji(stripSiteName(firstNonBlank(
                 metaContent(doc, "og:title"),
                 textOrNull(doc.selectFirst("h1")),
                 doc.title())));
@@ -665,12 +665,23 @@ public class ConvertPosts {
         return "";
     }
 
-    /** Drops a trailing site-name suffix ("… | foojay", "… - foojay.io",
-     *  "… | Foojay Today") that the WordPress/Yoast <title>/og:title tags
-     *  append. */
-    static String stripSiteSuffix(String title) {
+    /** Drops the site name where WordPress glued it onto the post title.
+     *
+     *  Two shapes, both seen in the wild. A trailing suffix ("… | foojay",
+     *  "… - foojay.io", "… | Foojay Today") is what the Yoast
+     *  <title>/og:title tags append. A LEADING copy of the site's own title
+     *  ("foojay – a place for friends of OpenJDK") comes from the <h1>
+     *  fallback: on some posts that heading holds a site-title element next to
+     *  the post title, and Jsoup's text() runs the two together without a
+     *  space -- which is how one post landed with the title
+     *  "foojay – a place for friends of OpenJDKJava 21+ on Raspberry Pi …".
+     *  Anchored to the start and to that exact wording, so a post legitimately
+     *  ABOUT being a place for friends of OpenJDK keeps its title. */
+    static String stripSiteName(String title) {
         if (title == null) return "";
-        return title.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?(\\s+today)?\\s*$", "").strip();
+        String out = title.replaceAll(
+                "(?i)^\\s*foojay(\\.io)?\\s*[|\\-–—]?\\s*a place for friends of openjdk\\s*", "");
+        return out.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?(\\s+today)?\\s*$", "").strip();
     }
 
     /**

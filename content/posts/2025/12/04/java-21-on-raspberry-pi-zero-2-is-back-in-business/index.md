@@ -1,5 +1,5 @@
 ---
-title: "foojay – a place for friends of OpenJDKJava 21+ on Raspberry Pi Zero 2 is Back In Business"
+title: "Java 21+ on Raspberry Pi Zero 2 is Back In Business"
 date: "2025-12-04T08:46:00+00:00"
 lastmod: "2025-12-04T09:16:19+00:00"
 description: "As described before on Java 21+ Not Working on Raspberry Pi Zero 2, a problem appeared to execute Java code on the Raspberry Pi Zero 2 with OpenJDK 21 or - by Frank Delporte"

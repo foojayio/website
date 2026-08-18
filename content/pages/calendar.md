@@ -1,10 +1,10 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "Events Calendar"
+description: "Upcoming Java User Group meetups, synced daily from Meetup."
 canonical: "https://foojay.io/calendar/"
 url: "/calendar/"
+type: "events"
 aliases:
-  - "/calendar/"
-frozen: false
+  - "/all-events/"
+frozen: true
 ---
-

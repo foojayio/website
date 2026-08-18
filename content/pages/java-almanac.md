@@ -1,6 +1,6 @@
 ---
-title: "foojay – a place for friends of OpenJDK"
-description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
+title: "The Java Version Almanac"
+description: "Compare any two Java versions side by side, browse the API diffs, and find the docs and specs for every JDK release."
 canonical: "https://foojay.io/java-almanac/"
 url: "/java-almanac/"
 aliases:
