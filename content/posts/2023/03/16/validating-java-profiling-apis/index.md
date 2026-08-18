@@ -16,7 +16,6 @@ related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "a-short-primer-on-java-debugging-internals"
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
-enlighterjs: true
 frozen: false
 ---
 

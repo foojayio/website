@@ -15,7 +15,6 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "hilla-1-0-a-new-frontend-framework-for-springboot"
-enlighterjs: true
 frozen: false
 ---
 

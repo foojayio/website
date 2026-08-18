@@ -15,7 +15,6 @@ related_posts:
   - "skills-java-17-and-theme-accents-with-codename-one"
   - "metal-and-skins"
   - "liquid-glass-material-3-and-a-lot-of-plumbing"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"
   - "java-17-on-the-raspberry-pi"
   - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
-enlighterjs: true
 frozen: false
 ---
 

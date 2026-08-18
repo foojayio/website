@@ -17,7 +17,6 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "why-i-moved-my-blog-to-rife2-after-23-years"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "can-java-jakarta-ee-do-microservices"
   - "do-java-jakarta-ee-standards-matter"
   - "is-java-jakarta-ee-cloud-native"
-enlighterjs: true
 frozen: false
 ---
 

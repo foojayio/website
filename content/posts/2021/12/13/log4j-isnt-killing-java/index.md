@@ -14,7 +14,6 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "java-logging-what-to-log-what-not-to-log"
   - "log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0"
-enlighterjs: true
 frozen: false
 ---
 

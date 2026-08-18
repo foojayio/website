@@ -17,7 +17,6 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

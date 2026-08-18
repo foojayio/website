@@ -17,7 +17,6 @@ related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"
   - "foojay-podcast-47"
   - "foojay-podcast-56"
-enlighterjs: true
 frozen: false
 ---
 

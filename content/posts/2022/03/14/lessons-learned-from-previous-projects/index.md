@@ -14,7 +14,6 @@ related_posts:
   - "10-basic-questions-about-pdf-files-for-java-developers"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "7-functional-programming-techniques-in-java-a-primer"
-enlighterjs: true
 frozen: false
 ---
 

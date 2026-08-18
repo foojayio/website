@@ -17,7 +17,6 @@ related_posts:
   - "localize-apps-with-ai"
   - "managing-distributed-applications-in-kubernetes-using-cilium-and-istio-with-helm-and-operator-for-deployment"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
-enlighterjs: true
 frozen: false
 ---
 

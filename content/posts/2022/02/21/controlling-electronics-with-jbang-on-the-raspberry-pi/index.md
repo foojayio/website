@@ -20,7 +20,6 @@ related_posts:
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "foojay-podcast-2"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
-enlighterjs: true
 frozen: false
 ---
 

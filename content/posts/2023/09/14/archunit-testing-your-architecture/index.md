@@ -17,7 +17,6 @@ related_posts:
   - "pitest-do-you-test-your-tests"
   - "spring-6-1-restclient"
   - "foojay-podcast-99"
-enlighterjs: true
 frozen: false
 ---
 

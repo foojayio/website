@@ -17,7 +17,6 @@ related_posts:
   - "geo-routing-with-apache-apisix"
   - "apache-apisix-loves-rust"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

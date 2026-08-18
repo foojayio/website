@@ -16,7 +16,6 @@ related_posts:
   - "8-best-practices-to-prevent-sql-injection-attacks"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "are-java-security-updates-important"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "checking-out-junie-a-coding-agent-by-jetbrains"
   - "duplicate-finder-for-text-requirements"
   - "how-does-it-feel-to-test-a-compiler"
-enlighterjs: true
 frozen: false
 ---
 

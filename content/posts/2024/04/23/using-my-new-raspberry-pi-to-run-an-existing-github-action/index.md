@@ -17,7 +17,6 @@ related_posts:
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"
   - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "jdk-mission-control-8-1-0-released"
   - "jmc-8-0-1-released"
   - "using-java-flight-recorder-and-mission-control-part-1"
-enlighterjs: true
 frozen: false
 ---
 

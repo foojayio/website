@@ -17,7 +17,6 @@ related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "building-rest-apis-in-java-with-spring-boot"
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "building-java-containers-without-a-dockerfile-azul-zulu-and-paketo-buildpacks"
   - "intro-to-the-boxlang-formatter"
   - "all-azul-zulu-container-images-explained-ca-sa-and-chainguard"
-enlighterjs: true
 frozen: false
 ---
 

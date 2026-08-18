@@ -19,7 +19,6 @@ related_posts:
   - "dockerizing-a-java-26-project-with-docker-init"
   - "official-azul-zulu-openjdk-images-now-available-on-docker-hub"
   - "documentation-as-code-with-asciidoctor-gitlab-ci-and-gitlab-pages"
-enlighterjs: true
 frozen: false
 ---
 

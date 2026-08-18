@@ -21,7 +21,6 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
-enlighterjs: true
 frozen: false
 ---
 

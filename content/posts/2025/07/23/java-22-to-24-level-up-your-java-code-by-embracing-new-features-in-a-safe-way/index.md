@@ -16,7 +16,6 @@ related_posts:
   - "code-reviews-with-ai-a-developer-guide"
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "ai-driven-testing-best-practices"
-enlighterjs: true
 frozen: false
 ---
 

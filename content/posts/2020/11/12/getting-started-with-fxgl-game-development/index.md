@@ -18,7 +18,6 @@ related_posts:
   - "creating-a-snake-game-with-javafx-fxgl-in-three-pair-programming-sessions"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-enlighterjs: true
 frozen: false
 ---
 

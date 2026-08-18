@@ -16,7 +16,6 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

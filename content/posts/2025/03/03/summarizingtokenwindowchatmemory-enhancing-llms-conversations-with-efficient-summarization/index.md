@@ -16,7 +16,6 @@ related_posts:
   - "building-simple-home-assistant-langchain4j-raspberry-pi"
   - "building-local-llm-ai-powered-applications-with-quarkus-ollama-and-testcontainers"
   - "calling-gemma-with-ollama-testcontainers-and-langchain4j"
-enlighterjs: true
 frozen: false
 ---
 

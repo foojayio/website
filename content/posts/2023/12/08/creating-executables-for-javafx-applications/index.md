@@ -19,7 +19,6 @@ related_posts:
   - "beginning-javafx-with-intellij"
   - "building-javafx-with-gradle"
   - "whats-new-in-actions-setup-java-5-4-and-5-5-signature-verification-kona-jdk-and-a-better-maven-experience"
-enlighterjs: true
 frozen: false
 ---
 

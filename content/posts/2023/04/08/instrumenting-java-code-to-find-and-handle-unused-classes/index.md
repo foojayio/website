@@ -14,7 +14,6 @@ related_posts:
   - "instrumenting-java-code-to-find-and-handle-unused-classes"
   - "validating-java-profiling-apis"
   - "do-you-trust-profilers-i-once-did-too"
-enlighterjs: true
 frozen: false
 ---
 

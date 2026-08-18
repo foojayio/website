@@ -20,7 +20,6 @@ related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "developing-an-enterprise-level-apache-cassandra-sink-connector-for-apache-pulsar"
   - "why-developers-should-use-apache-pulsar"
-enlighterjs: true
 frozen: false
 ---
 

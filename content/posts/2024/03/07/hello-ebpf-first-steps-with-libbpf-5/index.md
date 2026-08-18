@@ -15,7 +15,6 @@ related_posts:
   - "hello-ebpf-recording-data-in-basic-ebpf-maps-2"
   - "hello-ebpf-recording-data-in-event-buffers-3"
   - "hello-ebpf-xdp-based-packet-filter-9"
-enlighterjs: true
 frozen: false
 ---
 

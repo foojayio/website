@@ -16,7 +16,6 @@ related_posts:
   - "using-java-flight-recorder-and-mission-control-part-2"
   - "using-java-flight-recorder-and-mission-control-part-3"
   - "java-native-memory-allocation-ffm-api"
-enlighterjs: true
 frozen: false
 ---
 

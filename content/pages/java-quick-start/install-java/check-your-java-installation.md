@@ -3,7 +3,6 @@ title: "Getting Started with Java - Check your Java installation"
 description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
 canonical: "https://foojay.io/java-quick-start/install-java/check-your-java-installation/"
 url: "/java-quick-start/install-java/check-your-java-installation/"
-enlighterjs: true
 aliases:
   - "/java-quick-start/install-java/check-your-java-installation/"
 frozen: false

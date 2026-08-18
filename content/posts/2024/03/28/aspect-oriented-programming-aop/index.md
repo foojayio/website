@@ -15,7 +15,6 @@ related_posts:
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
   - "42-practical-java-design-patterns-builder-and-more"
   - "building-a-declarative-api-with-spring-aop-and-spel"
-enlighterjs: true
 frozen: false
 ---
 

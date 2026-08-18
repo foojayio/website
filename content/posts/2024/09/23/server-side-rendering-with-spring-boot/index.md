@@ -16,7 +16,6 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "9-outdated-ideas-about-java"
   - "augmenting-the-client-with-alpine-js"
-enlighterjs: true
 frozen: false
 ---
 

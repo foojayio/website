@@ -16,7 +16,6 @@ related_posts:
   - "replacing-postman-with-the-jetbrains-http-client"
   - "getting-started-with-openapi-generators-tips-tricks"
   - "unit-testing-supabase-in-kotlin-using-test-containers-part-2"
-enlighterjs: true
 frozen: false
 ---
 

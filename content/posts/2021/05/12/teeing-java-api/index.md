@@ -13,7 +13,6 @@ categories:
 tags:
 related_posts:
   - "optional-stream"
-enlighterjs: true
 frozen: false
 ---
 

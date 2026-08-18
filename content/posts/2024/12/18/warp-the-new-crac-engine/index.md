@@ -18,7 +18,6 @@ related_posts:
   - "foojay-podcast-17"
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"
   - "openjdk-january-2026-critical-patch-update-and-patch-set-update-released"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "guide-lazyinitializationexception"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
-enlighterjs: true
 frozen: false
 ---
 

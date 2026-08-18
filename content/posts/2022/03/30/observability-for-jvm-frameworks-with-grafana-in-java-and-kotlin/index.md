@@ -20,7 +20,6 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "are-java-security-updates-important"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
-enlighterjs: true
 frozen: false
 ---
 

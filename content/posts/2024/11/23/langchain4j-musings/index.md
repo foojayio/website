@@ -17,7 +17,6 @@ related_posts:
   - "comparison-fault-tolerance-libraries"
   - "advanced-url-rewriting-with-apache-apisix"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-enlighterjs: true
 frozen: false
 ---
 

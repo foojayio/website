@@ -20,7 +20,6 @@ related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

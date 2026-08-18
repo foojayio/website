@@ -16,7 +16,6 @@ related_posts:
   - "why-your-choice-of-java-virtual-machine-jvm-matters-more-than-ever"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

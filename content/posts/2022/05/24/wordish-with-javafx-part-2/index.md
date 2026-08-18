@@ -20,7 +20,6 @@ related_posts:
   - "beginning-javafx-with-intellij"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
   - "the-javafx-revival"
-enlighterjs: true
 frozen: false
 ---
 

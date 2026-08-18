@@ -17,7 +17,6 @@ related_posts:
   - "kicking-spring-natives-tires"
   - "2021-java-jvm-predictions-by-topic"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

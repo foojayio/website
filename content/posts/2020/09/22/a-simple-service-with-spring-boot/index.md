@@ -16,7 +16,6 @@ related_posts:
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "baeldung-series-part-2-build-a-dashboard-with-cassandra-astra-and-cql-mapping-event-data"
   - "building-microservices-spring-boot-fat-uber-jar"
-enlighterjs: true
 frozen: false
 ---
 

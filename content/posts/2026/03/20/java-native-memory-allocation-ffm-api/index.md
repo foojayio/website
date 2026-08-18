@@ -18,7 +18,6 @@ related_posts:
   - "async-file-io-with-java-and-io_uring"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

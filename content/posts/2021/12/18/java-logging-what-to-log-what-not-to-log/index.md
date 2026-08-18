@@ -15,7 +15,6 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "the-costs-of-hidden-logging"
   - "the-debugger-checklist-part-i"
-enlighterjs: true
 frozen: false
 ---
 

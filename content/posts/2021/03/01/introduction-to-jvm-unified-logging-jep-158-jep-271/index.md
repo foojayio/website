@@ -15,7 +15,6 @@ related_posts:
   - "banned-threadlocal-java-scoped-values"
   - "java-for-scripting"
   - "project-panama-for-newbies-part-2"
-enlighterjs: true
 frozen: false
 ---
 

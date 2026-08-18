@@ -19,7 +19,6 @@ related_posts:
   - "how-does-kafka-perform-when-you-need-low-latency"
   - "how-to-reduce-cloud-cost-by-99-for-eda-kafka-applications"
   - "how-to-create-a-failover-client-using-the-hazelcast-viridian-serverless"
-enlighterjs: true
 frozen: false
 ---
 

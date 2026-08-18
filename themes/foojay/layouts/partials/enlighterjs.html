@@ -6,8 +6,8 @@
      originals were served from wp-content and disappear at cutover. The init
      config below is copied verbatim from the live site (theme "dracula", etc.).
 
-     Loaded only on pages whose frontmatter has `enlighterjs: true`, which
-     ConvertPages.java sets when it finds EnlighterJSRAW blocks. */}}
+     Loaded only on pages whose RENDERED output contains an EnlighterJS block
+     (see baseof.html) -- no frontmatter flag is involved. */}}
 <link rel="stylesheet" href="{{ "vendor/enlighterjs/enlighterjs.min.css" | relURL }}">
 <script src="{{ "vendor/enlighterjs/enlighterjs.min.js" | relURL }}"></script>
 <script>

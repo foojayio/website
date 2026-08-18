@@ -17,7 +17,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "get-started-with-allocation-profiling"
-enlighterjs: true
 frozen: false
 ---
 

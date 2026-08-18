@@ -17,7 +17,6 @@ related_posts:
   - "book-review-monolith-to-microservices-part-1"
   - "building-microservices-spring-boot-fat-uber-jar"
   - "the-right-feature-at-the-right-place"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "java-where-the-wild-code-isnt"
   - "are-java-security-updates-important"
   - "whats-new-in-the-july-2026-azul-payara-release"
-enlighterjs: true
 frozen: false
 ---
 

@@ -4,7 +4,6 @@ description: "foojay is the place for all OpenJDK Update Release Information. Le
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/using-objects/"
 url: "/java-quick-start/quick-start-tutorial/using-objects/"
 jdoodle: true
-enlighterjs: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/using-objects/"
 frozen: false

@@ -17,7 +17,6 @@ related_posts:
   - "cross-platform-development-in-java-with-gluon-and-graalvm"
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "native-image-micronaut"
-enlighterjs: true
 frozen: false
 ---
 

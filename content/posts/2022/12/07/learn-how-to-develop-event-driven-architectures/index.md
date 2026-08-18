@@ -17,7 +17,6 @@ related_posts:
   - "creating-terabyte-sized-queues-with-low-latency"
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
   - "chronicle-services-building-fast-microservices-with-java"
-enlighterjs: true
 frozen: false
 ---
 

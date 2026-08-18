@@ -16,7 +16,6 @@ related_posts:
   - "clean-shutdown-of-spring-boot-applications"
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "micrometer-prometheus-in-spring-boot-kafka-burger-orders"
-enlighterjs: true
 frozen: false
 ---
 

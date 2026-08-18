@@ -15,7 +15,6 @@ related_posts:
   - "unlocking-scrum-a-software-engineers-journey-part-1"
   - "a-day-in-the-life-of-a-software-engineer-in-a-scrum-team-part-2"
   - "how-to-identify-dependencies-in-your-codebase-during-microservices-migration"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "chronicle-fix-designed-not-to-skip-a-message-even-if-your-data-centre-fails"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "java-whats-old-part-ii-utils"
-enlighterjs: true
 frozen: false
 ---
 

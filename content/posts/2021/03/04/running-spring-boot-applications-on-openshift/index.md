@@ -16,7 +16,6 @@ related_posts:
   - "introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring"
   - "spring-boot-api-documentation-redocusaurus"
   - "spring-boot-kafka-streams-event-routing-testing"
-enlighterjs: true
 frozen: false
 ---
 

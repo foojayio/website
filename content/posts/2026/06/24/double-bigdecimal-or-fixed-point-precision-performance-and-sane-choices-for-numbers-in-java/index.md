@@ -15,7 +15,6 @@ related_posts:
   - "does-language-still-matter-in-the-age-of-ai-yes-but-the-tradeoff-has-changed"
   - "effective-coding-with-java-observability"
   - "hard-things-computer-science"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "project-panama-for-newbies-part-4"
   - "writing-c-code-in-java"
   - "project-panama-for-newbies-part-1"
-enlighterjs: true
 frozen: false
 ---
 

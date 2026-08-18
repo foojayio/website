@@ -16,7 +16,6 @@ related_posts:
   - "much-ado-about-nothing-in-java"
   - "handling-null-optional-and-nullable-types"
   - "avoiding-nullpointerexception"
-enlighterjs: true
 frozen: false
 ---
 

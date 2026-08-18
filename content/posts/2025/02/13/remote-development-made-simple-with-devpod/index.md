@@ -15,7 +15,6 @@ related_posts:
   - "a-list-of-cache-providers"
   - "poor-mans-api"
   - "kubernetes-gateway-api"
-enlighterjs: true
 frozen: false
 ---
 

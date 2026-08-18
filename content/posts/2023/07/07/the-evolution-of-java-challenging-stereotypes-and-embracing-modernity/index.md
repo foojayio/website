@@ -14,7 +14,6 @@ related_posts:
   - "foojay-all-about-java-and-the-openjdk-i-programmer"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "7-ways-to-contribute-to-openjdk"
-enlighterjs: true
 frozen: false
 ---
 

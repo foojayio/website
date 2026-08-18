@@ -20,7 +20,6 @@ related_posts:
   - "springboot-3-2-crac"
   - "openrewrite-migrate-to-spring-boot-3-2"
   - "a-guide-to-creating-javafx-native-images"
-enlighterjs: true
 frozen: false
 ---
 

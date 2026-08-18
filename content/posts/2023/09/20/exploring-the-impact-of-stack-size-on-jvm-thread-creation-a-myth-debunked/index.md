@@ -15,7 +15,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

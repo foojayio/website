@@ -16,7 +16,6 @@ related_posts:
   - "delegation-vs-inheritance-in-graphical-user-interfaces"
   - "new-book-practical-vaadin"
   - "securing-vaadin-applications-with-microsoft-entra"
-enlighterjs: true
 frozen: false
 ---
 

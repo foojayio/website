@@ -17,7 +17,6 @@ related_posts:
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
   - "the-evolution-of-apis-from-restful-to-event-driven"
-enlighterjs: true
 frozen: false
 ---
 

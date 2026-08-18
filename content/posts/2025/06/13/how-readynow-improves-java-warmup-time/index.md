@@ -16,7 +16,6 @@ related_posts:
   - "superfast-application-startup-java-on-crac"
   - "azul-brings-java-from-edge-to-cloud"
   - "the-anatomy-of-a-jvm"
-enlighterjs: true
 frozen: false
 ---
 

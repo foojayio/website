@@ -16,7 +16,6 @@ related_posts:
   - "kotlin-delegation"
   - "kubernetes-gateway-api"
   - "playing-with-wasm-on-docker"
-enlighterjs: true
 frozen: false
 ---
 

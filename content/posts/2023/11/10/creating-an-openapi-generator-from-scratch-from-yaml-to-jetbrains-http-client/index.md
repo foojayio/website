@@ -17,7 +17,6 @@ related_posts:
   - "book-review-api-design-patterns"
   - "book-review-designing-apis-with-swagger-and-openapi"
   - "replacing-postman-with-the-jetbrains-http-client"
-enlighterjs: true
 frozen: false
 ---
 

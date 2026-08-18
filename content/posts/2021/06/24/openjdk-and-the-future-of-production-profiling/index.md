@@ -16,7 +16,6 @@ related_posts:
   - "jfr-timestamps-and-system-nanotime"
   - "jfr-event-collection"
   - "java-profiling-overview"
-enlighterjs: true
 frozen: false
 ---
 

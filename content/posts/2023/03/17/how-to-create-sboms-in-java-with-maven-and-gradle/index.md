@@ -17,7 +17,6 @@ related_posts:
   - "sboms-first-steps-in-a-new-journey-for-developers"
   - "sboms-and-software-composition-analysis"
   - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "using-java-flight-recorder-and-mission-control-part-2"
   - "using-java-flight-recorder-and-mission-control-part-3"
   - "where-production-policy-belongs-building-eliya-in-public"
-enlighterjs: true
 frozen: false
 ---
 

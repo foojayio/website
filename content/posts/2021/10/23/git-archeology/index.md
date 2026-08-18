@@ -17,7 +17,6 @@ related_posts:
   - "java-on-azure-tooling-update-july-2022"
   - "github-actions-with-java-part-2"
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
-enlighterjs: true
 frozen: false
 ---
 

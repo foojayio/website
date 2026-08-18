@@ -15,7 +15,6 @@ related_posts:
   - "lottie4j-1-2-0-dotlottie-support-marker-playback-cropping-and-a-big-speed-boost"
   - "lottie4j-meets-lottiefiles"
   - "testing-lottie4j-javafx-animations-in-github-actions-with-javafx-26-headless"
-enlighterjs: true
 frozen: false
 ---
 

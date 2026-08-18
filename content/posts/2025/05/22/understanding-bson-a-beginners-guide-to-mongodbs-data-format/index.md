@@ -17,7 +17,6 @@ related_posts:
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "7-reasons-to-switch-to-openjdk-17-as-a-jakarta-ee-developer"
   - "are-java-jakarta-ee-application-servers-heavy"
   - "can-java-jakarta-ee-do-microservices"
-enlighterjs: true
 frozen: false
 ---
 

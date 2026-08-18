@@ -18,7 +18,6 @@ related_posts:
   - "join-slack-com-t-foojay-signup"
   - "interview-with-gokul-chandrasekaran-the-creator-of-jdoodle"
 jdoodle: true
-enlighterjs: true
 frozen: false
 ---
 

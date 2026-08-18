@@ -15,7 +15,6 @@ related_posts:
   - "foojay-podcast-90"
   - "foojay-podcast-78"
   - "foojay-podcast-28"
-enlighterjs: true
 frozen: false
 ---
 

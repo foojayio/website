@@ -16,7 +16,6 @@ related_posts:
   - "chopping-monolith"
   - "competing-for-the-crown-a-friendly-debate-on-the-future-of-java-and-kotlin-on-foojay-io-today"
   - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
-enlighterjs: true
 frozen: false
 ---
 

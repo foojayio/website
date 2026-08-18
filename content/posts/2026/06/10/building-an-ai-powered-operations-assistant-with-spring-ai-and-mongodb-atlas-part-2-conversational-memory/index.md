@@ -17,7 +17,6 @@ related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
   - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
-enlighterjs: true
 frozen: false
 ---
 

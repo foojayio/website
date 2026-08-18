@@ -17,7 +17,6 @@ related_posts:
   - "do-you-trust-profilers-i-once-did-too"
   - "validating-java-profiling-apis"
   - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
-enlighterjs: true
 frozen: false
 ---
 

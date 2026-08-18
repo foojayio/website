@@ -16,7 +16,6 @@ related_posts:
   - "getting-started-with-jakarta-ee-9-context-and-dependency-injection-cdi"
   - "jakarta-concurrency-present-and-future-2"
   - "ejb-support-in-piranha-via-cdi"
-enlighterjs: true
 frozen: false
 ---
 

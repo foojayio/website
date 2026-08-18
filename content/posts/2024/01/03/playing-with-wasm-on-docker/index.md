@@ -16,7 +16,6 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "transitioning-to-java-my-first-book"
   - "apache-apisix-loves-rust"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "microstream-part-2-configure-the-storage-manager"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "microstream-part-5-caching-integrations-and-clustering"
-enlighterjs: true
 frozen: false
 ---
 

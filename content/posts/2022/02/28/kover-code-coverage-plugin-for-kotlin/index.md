@@ -16,7 +16,6 @@ related_posts:
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
   - "demystifying-memory-management-in-modern-programming-languages"
   - "unit-testing-supabase-in-kotlin-using-test-containers-part-2"
-enlighterjs: true
 frozen: false
 ---
 

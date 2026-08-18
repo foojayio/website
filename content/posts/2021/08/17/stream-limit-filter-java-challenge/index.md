@@ -15,7 +15,6 @@ related_posts:
   - "jedi-lambda-join-java-challenge"
   - "type-erasure-generics-java-challenge"
   - "soprano-ofnullable-stream-java-challenge"
-enlighterjs: true
 frozen: false
 ---
 

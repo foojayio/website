@@ -17,7 +17,6 @@ related_posts:
   - "understanding-apache-maven-part-1-the-basics"
   - "understanding-apache-maven-part-2-pom-hierarchy"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

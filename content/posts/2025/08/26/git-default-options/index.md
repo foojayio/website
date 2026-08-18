@@ -16,7 +16,6 @@ related_posts:
   - "poor-mans-api"
   - "kubernetes-gateway-api"
   - "real-world-stream-collector"
-enlighterjs: true
 frozen: false
 ---
 

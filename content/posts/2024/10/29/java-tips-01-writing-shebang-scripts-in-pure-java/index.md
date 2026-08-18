@@ -15,7 +15,6 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-enlighterjs: true
 frozen: false
 ---
 

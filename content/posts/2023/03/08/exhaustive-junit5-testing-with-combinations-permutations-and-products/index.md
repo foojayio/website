@@ -15,7 +15,6 @@ related_posts:
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "creating-terabyte-sized-queues-with-low-latency"
   - "foojay-podcast-99"
-enlighterjs: true
 frozen: false
 ---
 

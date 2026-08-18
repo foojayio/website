@@ -16,7 +16,6 @@ related_posts:
   - "skps-definitive-primer-failures-pitfalls-and-disadvantages-of-microservices"
   - "book-review-quarkus-for-spring-developers"
   - "journeys-in-java-level-10-service-discovery-with-eureka"
-enlighterjs: true
 frozen: false
 ---
 

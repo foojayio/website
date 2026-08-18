@@ -17,7 +17,6 @@ related_posts:
   - "kotlin-faas-impossible-union"
   - "five-java-developer-must-haves"
   - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
-enlighterjs: true
 frozen: false
 ---
 

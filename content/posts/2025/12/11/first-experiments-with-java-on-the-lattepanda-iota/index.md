@@ -21,7 +21,6 @@ related_posts:
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
   - "foojay-podcast-83"
   - "introducing-a-new-java-dmx512-library-with-demo-javafx-user-interface"
-enlighterjs: true
 frozen: false
 ---
 

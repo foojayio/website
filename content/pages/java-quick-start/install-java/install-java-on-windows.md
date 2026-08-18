@@ -3,7 +3,6 @@ title: "foojay – a place for friends of OpenJDK"
 description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
 canonical: "https://foojay.io/java-quick-start/install-java/install-java-on-windows/"
 url: "/java-quick-start/install-java/install-java-on-windows/"
-enlighterjs: true
 aliases:
   - "/java-quick-start/install-java/install-java-on-windows/"
 frozen: false

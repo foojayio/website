@@ -18,7 +18,6 @@ related_posts:
   - "agent-memory-with-spring-ai-redis"
   - "checking-out-junie-a-coding-agent-by-jetbrains"
   - "duplicate-finder-for-text-requirements"
-enlighterjs: true
 frozen: false
 ---
 

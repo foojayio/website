@@ -16,7 +16,6 @@ related_posts:
   - "virtual-thread-pinning-field-guide"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
-enlighterjs: true
 frozen: false
 ---
 

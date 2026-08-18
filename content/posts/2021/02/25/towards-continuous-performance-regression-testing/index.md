@@ -18,7 +18,6 @@ related_posts:
   - "soft-assertions-testing-kindly"
   - "custom-events-in-the-blocky-world-using-jfr-in-minecraft"
   - "custom-jfr-events-a-short-introduction"
-enlighterjs: true
 frozen: false
 ---
 

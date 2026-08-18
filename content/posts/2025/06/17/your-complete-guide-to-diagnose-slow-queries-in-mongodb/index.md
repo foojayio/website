@@ -18,7 +18,6 @@ related_posts:
   - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
   - "mongodb-aggregation-framework-a-beginners-guide"
   - "true-to-production-testing-java-apps"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "builders-withers-and-records-javas-path-to-immutability"
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "make-the-life-of-your-developer-clients-easier-with-smart-builders"
-enlighterjs: true
 frozen: false
 ---
 

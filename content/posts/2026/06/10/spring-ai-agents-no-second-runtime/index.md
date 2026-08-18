@@ -19,7 +19,6 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "boxlang-ai-series-complete-guide-to-building-ai-agents"
-enlighterjs: true
 frozen: false
 ---
 

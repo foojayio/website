@@ -17,7 +17,6 @@ related_posts:
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
   - "langchain4j-musings"
   - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
-enlighterjs: true
 frozen: false
 ---
 

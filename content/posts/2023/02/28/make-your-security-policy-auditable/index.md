@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "jc-ai-newsletter-8"
-enlighterjs: true
 frozen: false
 ---
 

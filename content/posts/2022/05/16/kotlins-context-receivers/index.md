@@ -16,7 +16,6 @@ related_posts:
   - "comparison-fault-tolerance-libraries"
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "exposed-kotlin-orm-complete-guide"
-enlighterjs: true
 frozen: false
 ---
 

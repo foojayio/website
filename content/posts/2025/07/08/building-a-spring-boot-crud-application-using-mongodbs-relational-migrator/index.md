@@ -18,7 +18,6 @@ related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "data-modeling-for-java-developers-structuring-with-postgresql-and-mongodb"
   - "how-to-identify-the-underlying-causes-of-connection-timeout-errors-for-mongodb-with-java"
-enlighterjs: true
 frozen: false
 ---
 

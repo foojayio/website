@@ -18,7 +18,6 @@ related_posts:
   - "evolution-of-microservices"
   - "migrating-from-java-ee-to-jakarta-ee-with-intellij-idea"
   - "getting-started-with-apache-camel-on-jakarta-ee-10"
-enlighterjs: true
 frozen: false
 ---
 

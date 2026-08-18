@@ -16,7 +16,6 @@ related_posts:
   - "payara-launches-payara-cloud-serverless-approach-for-jakarta-ee"
   - "what-is-an-application-server-in-3-minutes"
   - "what-is-jakarta-rpc"
-enlighterjs: true
 frozen: false
 ---
 

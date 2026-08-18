@@ -17,7 +17,6 @@ related_posts:
   - "8-best-practices-to-prevent-sql-injection-attacks"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "5-great-reasons-to-use-jooq"
-enlighterjs: true
 frozen: false
 ---
 

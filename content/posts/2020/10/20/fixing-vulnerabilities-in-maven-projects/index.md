@@ -17,7 +17,6 @@ related_posts:
   - "faster-maven-builds-1"
   - "introduction-to-maven-toolchains"
   - "understanding-apache-maven-part-1-the-basics"
-enlighterjs: true
 frozen: false
 ---
 

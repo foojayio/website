@@ -15,7 +15,6 @@ related_posts:
   - "how-we-beat-hotspot-performance-by-cheating-but-not-like-that"
   - "more-surfaces-same-deal-cars-sensors-commerce-video-and-builds"
   - "funding-open-source-without-the-bait-and-switch-analytics-native-maps-tv-and-more"
-enlighterjs: true
 frozen: false
 ---
 

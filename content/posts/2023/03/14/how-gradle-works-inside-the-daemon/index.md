@@ -18,7 +18,6 @@ related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "compilation-avoidance-with-gradle"
   - "foojay-podcast-81"
-enlighterjs: true
 frozen: false
 ---
 

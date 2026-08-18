@@ -16,7 +16,6 @@ related_posts:
   - "crafting-your-own-railway-display-with-java"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "project-panama-for-newbies-part-2"
   - "project-panama-for-newbies-part-3"
   - "java-panama-polyglot-swift-part-2"
-enlighterjs: true
 frozen: false
 ---
 

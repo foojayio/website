@@ -15,7 +15,6 @@ related_posts:
   - "foojay-podcast-17"
   - "hardware-acceleration-for-java-tornadovm-can-do-it"
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
-enlighterjs: true
 frozen: false
 ---
 

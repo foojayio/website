@@ -17,7 +17,6 @@ related_posts:
   - "is-it-time-to-go-back-to-the-monolith"
   - "langchain4j-musings"
   - "my-final-take-on-gradle-vs-maven"
-enlighterjs: true
 frozen: false
 ---
 

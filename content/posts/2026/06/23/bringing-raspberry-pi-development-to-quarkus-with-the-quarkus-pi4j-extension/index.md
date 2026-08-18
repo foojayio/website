@@ -16,7 +16,6 @@ related_posts:
   - "controlling-led-strips-with-java-and-jbang"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "java-on-raspberry-pi-5-with-pi4j"
-enlighterjs: true
 frozen: false
 ---
 

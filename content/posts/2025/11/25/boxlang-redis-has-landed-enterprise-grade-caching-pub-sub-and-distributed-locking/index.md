@@ -16,7 +16,6 @@ related_posts:
   - "boxlang-1-7-0-delivers-streaming-distributed-caching-and-enhanced-jvm-performance"
   - "boxlang-v1-6-0-performance-ai-powered-docs-and-advanced-async-monitoring-2"
   - "foojay-podcast-76"
-enlighterjs: true
 frozen: false
 ---
 

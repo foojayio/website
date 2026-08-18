@@ -3,7 +3,6 @@ title: "Getting Started with Java - Install Java on Linux"
 description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
 canonical: "https://foojay.io/java-quick-start/install-java/install-java-on-linux/"
 url: "/java-quick-start/install-java/install-java-on-linux/"
-enlighterjs: true
 aliases:
   - "/java-quick-start/install-java/install-java-on-linux/"
 frozen: false

@@ -17,7 +17,6 @@ related_posts:
   - "why-jep-411-will-have-a-negative-impact-on-java-security"
   - "log4shell-leak4j"
   - "quick-fire-java-java-after-log4j"
-enlighterjs: true
 frozen: false
 ---
 

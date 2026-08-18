@@ -15,7 +15,6 @@ related_posts:
   - "book-review-seriously-good-software"
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

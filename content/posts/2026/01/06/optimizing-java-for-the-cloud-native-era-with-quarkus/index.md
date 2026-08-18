@@ -22,7 +22,6 @@ related_posts:
   - "chronicle-services-building-fast-microservices-with-java"
   - "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"
   - "carbon-aware-job-processing-with-jobrunr-v8"
-enlighterjs: true
 frozen: false
 ---
 

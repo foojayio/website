@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "10-best-practises-for-jakarta-ee-performance-optimization"
-enlighterjs: true
 frozen: false
 ---
 

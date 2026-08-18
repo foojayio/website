@@ -19,7 +19,6 @@ related_posts:
   - "electronics-quarkus-qute-on-raspberry-pi"
   - "spectacular-java-projects-on-the-raspberry-pi"
   - "crafting-your-own-railway-display-with-java"
-enlighterjs: true
 frozen: false
 ---
 

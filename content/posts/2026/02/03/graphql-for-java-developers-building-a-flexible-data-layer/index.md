@@ -17,7 +17,6 @@ related_posts:
   - "atlas-searching-with-the-java-driver"
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "beyond-keywords-hybrid-search-with-atlas-and-vector-search-part-3"
-enlighterjs: true
 frozen: false
 ---
 

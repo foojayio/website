@@ -134,16 +134,15 @@ public final class HtmlToMarkdown {
         }
     }
 
-    /** Markdown body plus which widgets it uses. */
+    /** Markdown body plus which widgets it uses. (EnlighterJS is NOT among them:
+     *  the layout detects code blocks in the rendered page, so no flag is written.) */
     public static final class Result {
         public final String markdown;
         public final boolean jdoodle;
-        public final boolean enlighterjs;
 
-        Result(String markdown, boolean jdoodle, boolean enlighterjs) {
+        Result(String markdown, boolean jdoodle) {
             this.markdown = markdown;
             this.jdoodle = jdoodle;
-            this.enlighterjs = enlighterjs;
         }
     }
 
@@ -159,9 +158,8 @@ public final class HtmlToMarkdown {
         repairEscapedUrls(content);
         localizeImages(content, opts, itemSubpath);
         boolean jdoodle = !content.select(SELECTOR_JDOODLE).isEmpty();
-        boolean enlighterjs = !content.select(SELECTOR_ENLIGHTERJS).isEmpty();
         String markdown = toMarkdown(content);
-        return new Result(markdown, jdoodle, enlighterjs);
+        return new Result(markdown, jdoodle);
     }
 
     // ---- html -> markdown ------------------------------------------------
@@ -367,10 +365,12 @@ public final class HtmlToMarkdown {
      * an author would naturally type.
      *
      * The stored values are NOT all real EnlighterJS languages -- the plugin
-     * accepts free text, so content carries "bash", "yaml", "xml" and "html"
-     * (870 blocks between them) which EnlighterJS has never supported and has
-     * always rendered as plain `generic`. Those become proper fence tags here,
-     * which is strictly more information than the site had before.
+     * accepts free text -- so they are normalised to the tag an author would
+     * type, which the render hook maps back to a real lexer.
+     *
+     * Note "vb" is only an ALIAS of the `visualbasic` lexer, so the canonical
+     * name is emitted; the render hook's supported-language list is keyed on
+     * canonical names.
      *
      * "generic"/"raw"/"text" mean "no highlighting" and become a bare fence.
      */
@@ -391,7 +391,7 @@ public final class HtmlToMarkdown {
             case "md" -> "markdown";
             case "bat", "cmd" -> "batch";
             case "gradle" -> "groovy";
-            case "visualbasic", "vb" -> "vb";
+            case "vb", "vbnet", "vba" -> "visualbasic";
             case "assembly" -> "asm";
             default -> l.replaceAll("[^a-z0-9+#._-]", "");
         };

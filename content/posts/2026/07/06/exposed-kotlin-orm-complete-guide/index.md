@@ -23,7 +23,6 @@ related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "agent-memory-with-spring-ai-redis"
   - "checking-out-junie-a-coding-agent-by-jetbrains"
-enlighterjs: true
 frozen: false
 ---
 

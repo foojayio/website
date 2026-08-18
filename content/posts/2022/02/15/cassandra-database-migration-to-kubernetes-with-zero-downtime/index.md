@@ -20,7 +20,6 @@ related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "avoiding-nullpointerexception"
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"
-enlighterjs: true
 frozen: false
 ---
 

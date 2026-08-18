@@ -9,6 +9,5 @@ url: ""
 # Opt-in loaders for interactive widgets carried over from WordPress. Set them
 # by hand when a page embeds one of these widgets.
 #   jdoodle: true      -> load the JDoodle runner for <div data-pym-src=...> snippets
-#   enlighterjs: true  -> load EnlighterJS for <pre class="EnlighterJSRAW"> code blocks
 aliases: []
 ---

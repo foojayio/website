@@ -18,7 +18,6 @@ related_posts:
   - "jc-ai-newsletter-4"
   - "ai4devs-schedule-published"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

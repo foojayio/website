@@ -17,7 +17,6 @@ related_posts:
   - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
   - "running-a-crac-java-application-on-raspberry-pi"
   - "java-21-on-raspberry-pi-zero-2-is-back-in-business"
-enlighterjs: true
 frozen: false
 ---
 

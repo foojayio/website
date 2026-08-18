@@ -18,7 +18,6 @@ related_posts:
   - "foojay-podcast-29"
   - "book-review-developing-apps-with-gpt-4-and-chatgpt"
   - "foojay-podcast-47"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
   - "quarkus-a-runtime-and-framework-for-cloud-native-java"
   - "ensuring-safe-and-reliable-ai-interactions-with-llm-guardrails"
-enlighterjs: true
 frozen: false
 ---
 

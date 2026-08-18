@@ -18,7 +18,6 @@ related_posts:
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
   - "java-21-is-available-today-and-its-quite-the-update"
   - "foojay-podcast-28"
-enlighterjs: true
 frozen: false
 ---
 

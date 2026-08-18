@@ -15,7 +15,6 @@ related_posts:
   - "generating-code-with-intellij-idea"
   - "beginning-javafx-with-intellij"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

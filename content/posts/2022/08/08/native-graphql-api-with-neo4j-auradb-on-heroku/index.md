@@ -18,7 +18,6 @@ related_posts:
   - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "time-machine-a-look-back-at-java-sessions-from-nodes-2022"
-enlighterjs: true
 frozen: false
 ---
 

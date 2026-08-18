@@ -18,7 +18,6 @@ related_posts:
   - "foojay-podcast-64"
   - "loom-is-just-hyperthreading-in-java"
   - "what-the-heck-is-project-loom-for-java"
-enlighterjs: true
 frozen: false
 ---
 

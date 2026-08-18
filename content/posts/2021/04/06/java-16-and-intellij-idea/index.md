@@ -17,7 +17,6 @@ related_posts:
   - "exploring-java-records-in-a-jakarta-ee-context"
   - "java-on-azure-tooling-update-july-2022"
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
-enlighterjs: true
 frozen: false
 ---
 

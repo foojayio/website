@@ -19,7 +19,6 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "springboot-3-2-crac"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-enlighterjs: true
 frozen: false
 ---
 

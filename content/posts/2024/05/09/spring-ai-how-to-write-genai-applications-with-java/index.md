@@ -18,7 +18,6 @@ related_posts:
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "fabiane-nardon-machine-learning-data-science"
   - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-2"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "apisix-api-gateway"
   - "back-to-basics-accessing-kubernetes-pods"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

@@ -21,7 +21,6 @@ related_posts:
   - "calling-gemma-with-ollama-testcontainers-and-langchain4j"
   - "foojay-podcast-47"
   - "spring-ai-agents-no-second-runtime"
-enlighterjs: true
 frozen: false
 ---
 

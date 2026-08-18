@@ -18,7 +18,6 @@ related_posts:
   - "boxlang-couchbase-module-enterprise-caching-distributed-locking-and-ai-vector-memory"
   - "boxlang-redis-has-landed-enterprise-grade-caching-pub-sub-and-distributed-locking"
   - "boxlang-rss-full-featured-rss-atom-feed-module-for-boxlang"
-enlighterjs: true
 frozen: false
 ---
 

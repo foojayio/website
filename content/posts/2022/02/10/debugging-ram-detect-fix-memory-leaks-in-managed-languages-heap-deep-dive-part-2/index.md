@@ -17,7 +17,6 @@ related_posts:
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
   - "polyglot-cloud-native-debugging-beyond-apm-and-logging"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

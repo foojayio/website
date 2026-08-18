@@ -13,7 +13,6 @@ related_posts:
   - "create-music-bingo-cards-with-itext"
   - "melodymatrix-v1-0-0-released-shipping-a-javafx-app-with-jdeploy-github-actions-and-auto-update"
   - "foojay-podcast-54"
-enlighterjs: true
 frozen: false
 ---
 

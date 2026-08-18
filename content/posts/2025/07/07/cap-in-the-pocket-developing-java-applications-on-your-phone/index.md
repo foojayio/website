@@ -15,7 +15,6 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"
   - "class-loader-hierarchies"
-enlighterjs: true
 frozen: false
 ---
 

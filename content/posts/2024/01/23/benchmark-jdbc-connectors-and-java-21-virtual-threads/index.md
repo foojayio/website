@@ -16,7 +16,6 @@ related_posts:
   - "k8ssandra-performance-benchmarks-on-cloud-managed-kubernetes"
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "everything-bad-in-java-is-good-for-you"
-enlighterjs: true
 frozen: false
 ---
 

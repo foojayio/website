@@ -16,7 +16,6 @@ related_posts:
   - "prevent-ldap-injection-in-java-with-springboot"
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "spring-i-o-2026-field-notes-from-barcelona"
-enlighterjs: true
 frozen: false
 ---
 

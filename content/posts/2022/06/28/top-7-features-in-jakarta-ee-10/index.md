@@ -16,7 +16,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
   - "getting-started-with-apache-camel-on-jakarta-ee-10"
-enlighterjs: true
 frozen: false
 ---
 

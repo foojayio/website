@@ -17,7 +17,6 @@ related_posts:
   - "code-reviews-with-ai-a-developer-guide"
   - "jdb"
   - "eliminating-bugs-using-the-tong-motion-approach"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "crafting-your-own-railway-display-with-java"
   - "foojay-podcast-41"
-enlighterjs: true
 frozen: false
 ---
 

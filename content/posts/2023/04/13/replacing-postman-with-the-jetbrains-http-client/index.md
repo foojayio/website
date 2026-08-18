@@ -18,7 +18,6 @@ related_posts:
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "kover-code-coverage-plugin-for-kotlin"
   - "avoid-stringly-typed-in-kotlin"
-enlighterjs: true
 frozen: false
 ---
 

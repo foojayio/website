@@ -16,7 +16,6 @@ related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-5"
   - "creating-a-javafx-world-clock-from-scratch-part-4"
   - "the-javafx-revival"
-enlighterjs: true
 frozen: false
 ---
 

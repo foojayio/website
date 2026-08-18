@@ -17,7 +17,6 @@ related_posts:
   - "log4shell-leak4j"
   - "system-logger"
   - "jurassic-jdk-migrate-or-extinct"
-enlighterjs: true
 frozen: false
 ---
 

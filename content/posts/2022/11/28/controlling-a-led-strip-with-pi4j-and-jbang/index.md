@@ -19,7 +19,6 @@ related_posts:
   - "java-17-on-the-raspberry-pi"
   - "pi4j-v-2-released"
   - "pi4j-welcomes-java-21-on-the-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

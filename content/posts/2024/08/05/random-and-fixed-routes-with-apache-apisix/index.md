@@ -16,7 +16,6 @@ related_posts:
   - "kubernetes-gateway-api"
   - "advanced-url-rewriting-with-apache-apisix"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

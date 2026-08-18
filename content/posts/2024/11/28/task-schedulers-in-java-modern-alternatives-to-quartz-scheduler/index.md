@@ -19,7 +19,6 @@ related_posts:
   - "foojay-podcast-60"
   - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
-enlighterjs: true
 frozen: false
 ---
 

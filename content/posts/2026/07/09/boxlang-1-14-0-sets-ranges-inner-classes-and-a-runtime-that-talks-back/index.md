@@ -18,7 +18,6 @@ related_posts:
   - "boxlang-1-14-0-introducing-inner-classes"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "microstream-part-2-configure-the-storage-manager"
   - "microstream-part-3-storing-data"
   - "microstream-part-4-serialisation-engine"
-enlighterjs: true
 frozen: false
 ---
 

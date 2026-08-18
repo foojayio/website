@@ -15,7 +15,6 @@ related_posts:
   - "10-basic-questions-about-pdf-files-for-java-developers"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"
   - "cross-platform-development-in-java-with-gluon-and-graalvm-part-2"
-enlighterjs: true
 frozen: false
 ---
 

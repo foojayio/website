@@ -16,7 +16,6 @@ related_posts:
   - "fantastic-jvms-and-where-to-find-them"
   - "highlights-of-changes-to-the-core-java-platform"
   - "how-does-java-handle-different-images-and-colorspaces-part-3-introducing-the-bufferedimage"
-enlighterjs: true
 frozen: false
 ---
 

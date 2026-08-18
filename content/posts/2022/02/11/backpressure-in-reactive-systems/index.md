@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
   - "reactive-database-access-on-the-jvm"
-enlighterjs: true
 frozen: false
 ---
 

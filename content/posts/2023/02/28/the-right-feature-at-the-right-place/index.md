@@ -18,7 +18,6 @@ related_posts:
   - "chopping-monolith"
   - "rust-jvm"
   - "jc-ai-newsletter-8"
-enlighterjs: true
 frozen: false
 ---
 

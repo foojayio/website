@@ -16,7 +16,6 @@ related_posts:
   - "foojay-podcast-98"
   - "playing-with-wasm-on-docker"
   - "rust-jvm"
-enlighterjs: true
 frozen: false
 ---
 

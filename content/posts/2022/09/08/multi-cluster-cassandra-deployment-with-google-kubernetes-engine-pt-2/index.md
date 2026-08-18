@@ -20,7 +20,6 @@ related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "kubernetes-gateway-api"
   - "apisix-api-gateway"
-enlighterjs: true
 frozen: false
 ---
 

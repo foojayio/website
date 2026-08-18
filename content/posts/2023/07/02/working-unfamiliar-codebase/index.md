@@ -17,7 +17,6 @@ related_posts:
   - "kotlin-delegation"
   - "a-list-of-cache-providers"
   - "tips-for-reading-code"
-enlighterjs: true
 frozen: false
 ---
 

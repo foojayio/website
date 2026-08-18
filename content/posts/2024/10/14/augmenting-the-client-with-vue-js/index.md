@@ -18,7 +18,6 @@ related_posts:
   - "server-side-rendering-with-spring-boot"
   - "cracking-code-and-conventions-an-exclusive-interview-with-nicolas-frankel"
   - "augmenting-the-client-with-alpine-js"
-enlighterjs: true
 frozen: false
 ---
 

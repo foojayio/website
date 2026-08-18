@@ -4,7 +4,6 @@ description: "foojay is the place for all OpenJDK Update Release Information. Le
 canonical: "https://foojay.io/java-quick-start/quick-start-tutorial/enum-and-switch/"
 url: "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 jdoodle: true
-enlighterjs: true
 aliases:
   - "/java-quick-start/quick-start-tutorial/enum-and-switch/"
 frozen: false

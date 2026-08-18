@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "localize-apps-with-ai"
-enlighterjs: true
 frozen: false
 ---
 

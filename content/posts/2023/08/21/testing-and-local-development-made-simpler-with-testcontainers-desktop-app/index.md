@@ -16,7 +16,6 @@ related_posts:
   - "pitest-do-you-test-your-tests"
   - "seven-reasons-you-should-not-ignore-flaky-tests"
   - "pull-request-testing-on-kubernetes-testing-locally-and-on-github-workflows"
-enlighterjs: true
 frozen: false
 ---
 

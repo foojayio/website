@@ -16,7 +16,6 @@ related_posts:
   - "a-list-of-cache-providers"
   - "kotlin-delegation"
   - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
-enlighterjs: true
 frozen: false
 ---
 

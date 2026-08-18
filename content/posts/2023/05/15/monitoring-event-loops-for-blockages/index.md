@@ -17,7 +17,6 @@ related_posts:
   - "chronicle-fix-designed-not-to-skip-a-message-even-if-your-data-centre-fails"
   - "challenges-when-developing-a-gui-for-fix"
   - "using-pausers-in-event-loops"
-enlighterjs: true
 frozen: false
 ---
 

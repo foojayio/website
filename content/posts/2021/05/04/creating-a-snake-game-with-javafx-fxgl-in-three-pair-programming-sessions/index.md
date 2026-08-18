@@ -18,7 +18,6 @@ related_posts:
   - "the-javafx-revival"
   - "javafx-links-of-november-2025"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-enlighterjs: true
 frozen: false
 ---
 

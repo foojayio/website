@@ -19,7 +19,6 @@ related_posts:
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
   - "controlling-an-lcd-display-with-spring-and-thymeleaf-on-the-raspberry-pi"
   - "mqtt-on-raspberry-pi-part-3-sending-sensor-data-from-raspberry-pi-pico-to-hivemq-cloud"
-enlighterjs: true
 frozen: false
 ---
 

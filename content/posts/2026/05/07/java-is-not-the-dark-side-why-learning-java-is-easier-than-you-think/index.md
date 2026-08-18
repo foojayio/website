@@ -15,7 +15,6 @@ related_posts:
   - "get-recognized-for-your-cloud-native-java-development-skills-with-this-new-badge"
   - "foojay-podcast-40"
   - "pi4j-operating-system-for-java-development-on-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

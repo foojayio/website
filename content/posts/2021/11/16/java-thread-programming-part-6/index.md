@@ -15,7 +15,6 @@ related_posts:
   - "java-thread-programming-part-4"
   - "java-thread-programming-part-3"
   - "java-thread-programming-part-2"
-enlighterjs: true
 frozen: false
 ---
 

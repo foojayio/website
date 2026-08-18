@@ -15,7 +15,6 @@ related_posts:
   - "challenges-when-developing-a-gui-for-fix"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "creating-terabyte-sized-queues-with-low-latency"
-enlighterjs: true
 frozen: false
 ---
 

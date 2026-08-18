@@ -20,7 +20,6 @@ related_posts:
   - "creating-a-kubernetes-operator-in-java"
   - "deploying-spring-boot-applications-on-kubernetes"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
-enlighterjs: true
 frozen: false
 ---
 

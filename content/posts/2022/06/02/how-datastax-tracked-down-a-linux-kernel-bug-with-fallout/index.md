@@ -18,7 +18,6 @@ related_posts:
   - "minimize-costs-by-utilizing-cloud-storage-with-spring-data-eclipse-store"
   - "reclaiming-persistent-volumes-in-kubernetes"
   - "k8ssandra-ramps-up-security-features-to-match-kubernetes-best-practices"
-enlighterjs: true
 frozen: false
 ---
 

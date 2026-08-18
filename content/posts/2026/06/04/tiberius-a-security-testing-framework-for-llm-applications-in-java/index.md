@@ -22,7 +22,6 @@ related_posts:
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
   - "jc-ai-newsletter-9"
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
-enlighterjs: true
 frozen: false
 ---
 

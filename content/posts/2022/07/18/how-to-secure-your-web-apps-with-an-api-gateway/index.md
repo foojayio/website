@@ -17,7 +17,6 @@ related_posts:
   - "kotlin-delegation"
   - "a-list-of-cache-providers"
   - "system-architecture-move-authentication-to-the-api-gateway"
-enlighterjs: true
 frozen: false
 ---
 

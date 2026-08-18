@@ -17,7 +17,6 @@ related_posts:
   - "foojay-podcast-69"
   - "foojay-podcast-74"
   - "intro-to-rag-foundations-of-retrieval-augmented-generation-part-2"
-enlighterjs: true
 frozen: false
 ---
 

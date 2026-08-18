@@ -16,7 +16,6 @@ related_posts:
   - "intellij-idea-made-me-lazy"
   - "live-templates-in-intellij-idea"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

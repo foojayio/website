@@ -18,7 +18,6 @@ related_posts:
   - "monkey-patching-in-java"
   - "who-instruments-the-instrumenters"
   - "jurassic-jdk-migrate-or-extinct"
-enlighterjs: true
 frozen: false
 ---
 

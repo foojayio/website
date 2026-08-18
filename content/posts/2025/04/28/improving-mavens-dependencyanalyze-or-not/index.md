@@ -17,7 +17,6 @@ related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "real-world-stream-collector"
   - "a-simple-service-with-spring-boot"
-enlighterjs: true
 frozen: false
 ---
 

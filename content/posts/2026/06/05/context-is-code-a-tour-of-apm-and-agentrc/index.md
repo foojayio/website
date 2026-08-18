@@ -17,7 +17,6 @@ related_posts:
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "context-is-a-budget-eight-levers-and-three-workflow-patterns"
   - "claude-code-sonarqube-mcp"
-enlighterjs: true
 frozen: false
 ---
 

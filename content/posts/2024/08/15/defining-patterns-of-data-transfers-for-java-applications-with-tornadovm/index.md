@@ -15,7 +15,6 @@ related_posts:
   - "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"
   - "exploring-the-depths-of-java-a-comprehensive-conversation-with-jakob-jenkov-part-i"
   - "tornadovm-for-risc-v-accelerators"
-enlighterjs: true
 frozen: false
 ---
 

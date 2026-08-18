@@ -16,7 +16,6 @@ related_posts:
   - "getting-started-with-java-17-and-intellij-idea"
   - "hidden-and-not-so-hidden-gems-in-java-20"
   - "dive-into-the-openjdk-top-10-reads-on-foojay-io"
-enlighterjs: true
 frozen: false
 ---
 

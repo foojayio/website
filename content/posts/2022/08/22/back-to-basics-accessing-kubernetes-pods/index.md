@@ -16,7 +16,6 @@ related_posts:
   - "cassandra-database-migration-to-kubernetes-with-zero-downtime"
   - "choosing-a-cache-1"
   - "fearless-distroless"
-enlighterjs: true
 frozen: false
 ---
 

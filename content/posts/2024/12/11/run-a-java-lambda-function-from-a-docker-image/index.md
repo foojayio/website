@@ -18,7 +18,6 @@ related_posts:
   - "exceptions-lambdas"
   - "method-reference-vs-lambda-java-challenge"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

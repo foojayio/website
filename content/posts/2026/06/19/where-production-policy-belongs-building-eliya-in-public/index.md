@@ -16,7 +16,6 @@ related_posts:
   - "a-glance-into-jfr-class-and-method-tagging"
   - "where-do-you-get-your-java"
   - "the-files-in-jdk-21"
-enlighterjs: true
 frozen: false
 ---
 

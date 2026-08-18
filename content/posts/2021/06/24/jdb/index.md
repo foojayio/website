@@ -17,7 +17,6 @@ related_posts:
   - "tornadovm-for-risc-v-accelerators"
   - "java-on-azure-tooling-update-july-2022"
   - "java-on-azure-tooling-update-june-2022"
-enlighterjs: true
 frozen: false
 ---
 

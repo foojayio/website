@@ -15,7 +15,6 @@ related_posts:
   - "foojay-all-about-java-and-the-openjdk-i-programmer"
   - "foojay-announces-initial-companies-making-up-its-advisory-board-sd-times"
   - "foojay-a-place-for-friends-of-openjdk-adt-magazine"
-enlighterjs: true
 frozen: false
 ---
 

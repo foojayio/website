@@ -18,7 +18,6 @@ related_posts:
   - "announcing-real-time-stream-processing-unconference"
   - "backpressure-in-reactive-systems"
   - "real-time-stream-processing-with-hazelcast-and-streamnative"
-enlighterjs: true
 frozen: false
 ---
 

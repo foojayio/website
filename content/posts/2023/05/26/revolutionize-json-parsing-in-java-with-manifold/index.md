@@ -17,7 +17,6 @@ related_posts:
   - "boldness-in-refactoring"
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
-enlighterjs: true
 frozen: false
 ---
 

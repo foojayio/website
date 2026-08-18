@@ -16,7 +16,6 @@ related_posts:
   - "introduction-to-maven-toolchains"
   - "git-archeology"
   - "understanding-apache-maven-part-1-the-basics"
-enlighterjs: true
 frozen: false
 ---
 

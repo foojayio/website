@@ -17,7 +17,6 @@ related_posts:
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "beyond-keywords-hybrid-search-with-atlas-and-vector-search-part-3"
   - "building-systems-that-know-why-they-exist-when-data-logic-and-intent-finally-align"
-enlighterjs: true
 frozen: false
 ---
 

@@ -14,7 +14,6 @@ related_posts:
   - "how-java-litters-beyond-the-heap-relational-databases"
   - "how-java-litters-beyond-the-heap-part-2-distributed-databases"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
-enlighterjs: true
 frozen: false
 ---
 

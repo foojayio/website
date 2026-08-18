@@ -19,7 +19,6 @@ related_posts:
   - "journeys-in-java-level-2-building-an-empire-of-microservices"
   - "journeys-in-java-level-3-building-an-empire-of-microservices"
   - "journeys-in-java-level-5-building-an-empire-of-microservices"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "mastering-the-art-of-controlling-the-jit-unlocking-reproducible-profiler-tests"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "creating-cloud-native-java-applications-with-the-12-factor-app-methodology"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
   - "continuous-feedback-free-udemy-course-additional-coupons-available"
-enlighterjs: true
 frozen: false
 ---
 

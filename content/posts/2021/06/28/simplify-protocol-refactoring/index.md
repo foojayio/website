@@ -16,7 +16,6 @@ related_posts:
   - "java-syntax-puzzlers"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
-enlighterjs: true
 frozen: false
 ---
 

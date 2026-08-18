@@ -16,7 +16,6 @@ related_posts:
   - "jdk-15-sealed-classes"
   - "immutable-collections-in-java-with-sealed-types"
   - "the-state-of-pattern-matching-in-java-17"
-enlighterjs: true
 frozen: false
 ---
 

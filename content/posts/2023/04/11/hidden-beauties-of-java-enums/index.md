@@ -18,7 +18,6 @@ related_posts:
   - "learning-java-as-a-first-language"
   - "welcome-to-vs-code-for-java"
   - "tornadovm-for-risc-v-accelerators"
-enlighterjs: true
 frozen: false
 ---
 

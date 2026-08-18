@@ -17,7 +17,6 @@ related_posts:
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "starting-docker-desktop-with-spring-boot"
   - "kicking-spring-natives-tires"
-enlighterjs: true
 frozen: false
 ---
 

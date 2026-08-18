@@ -17,7 +17,6 @@ related_posts:
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
   - "startup-spring-quarkus-raspberry-pi"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
-enlighterjs: true
 frozen: false
 ---
 

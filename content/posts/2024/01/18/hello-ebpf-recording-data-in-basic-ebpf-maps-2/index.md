@@ -15,7 +15,6 @@ related_posts:
   - "continuous-production-profiling-and-diagnostics"
   - "looking-back-on-one-year-of-speaking-and-blogging"
   - "hello-ebpf-xdp-based-packet-filter-9"
-enlighterjs: true
 frozen: false
 ---
 

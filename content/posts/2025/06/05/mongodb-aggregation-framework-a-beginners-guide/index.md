@@ -16,7 +16,6 @@ related_posts:
   - "testing-mongodb-atlas-search-java-apps-using-testcontainers"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
   - "avoiding-nullpointerexception"
-enlighterjs: true
 frozen: false
 ---
 

@@ -14,7 +14,6 @@ categories:
 tags:
 related_posts:
   - "foojay-podcast-76"
-enlighterjs: true
 frozen: false
 ---
 

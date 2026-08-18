@@ -15,7 +15,6 @@ related_posts:
   - "avoiding-nullpointerexception"
   - "introduction-to-jvm-unified-logging-jep-158-jep-271"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
-enlighterjs: true
 frozen: false
 ---
 

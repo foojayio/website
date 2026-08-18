@@ -15,7 +15,6 @@ related_posts:
   - "custom-controls-in-javafx-part-vi"
   - "custom-controls-in-javafx-part-v"
   - "custom-controls-in-javafx-part-iii"
-enlighterjs: true
 frozen: false
 ---
 

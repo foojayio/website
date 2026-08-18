@@ -18,7 +18,6 @@ related_posts:
   - "building-autopo-an-ai-powered-open-source-application-to-manage-po-files"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
   - "even-more-opentelemetry"
-enlighterjs: true
 frozen: false
 ---
 

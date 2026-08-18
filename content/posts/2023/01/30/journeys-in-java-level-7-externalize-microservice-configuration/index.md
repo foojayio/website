@@ -20,7 +20,6 @@ related_posts:
   - "journeys-in-java-level-5-building-an-empire-of-microservices"
   - "journeys-in-java-level-4-building-an-empire-of-microservices"
   - "journeys-in-java-level-10-service-discovery-with-eureka"
-enlighterjs: true
 frozen: false
 ---
 

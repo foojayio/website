@@ -18,7 +18,6 @@ related_posts:
   - "announcing-the-astra-service-broker-tradeoff-free-cassandra-in-kubernetes"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "backing-up-k8ssandra-with-minio"
-enlighterjs: true
 frozen: false
 ---
 

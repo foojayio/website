@@ -17,7 +17,6 @@ related_posts:
   - "are-java-security-updates-important"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "the-5-most-pivotal-and-innovative-additions-to-openjdk-19"
-enlighterjs: true
 frozen: false
 ---
 

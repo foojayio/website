@@ -15,7 +15,6 @@ related_posts:
   - "java-thread-programming-part-3"
   - "demystifying-memory-management-in-modern-programming-languages"
   - "java-thread-programming-part-6"
-enlighterjs: true
 frozen: false
 ---
 

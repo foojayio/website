@@ -16,7 +16,6 @@ related_posts:
   - "7-ways-to-contribute-to-openjdk"
   - "7-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

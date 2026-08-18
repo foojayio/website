@@ -17,7 +17,6 @@ related_posts:
   - "should-you-update-java-or-upgrade-and-which-version-should-you-use"
   - "still-time-to-schedule-your-holiday-for-2038"
   - "foojay-podcast-92"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "azul-enhances-readynow-to-solve-javas-warmup-problem-simplify-operations-and-optimize-cloud-costs"
   - "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
   - "beginning-javafx-with-intellij"
-enlighterjs: true
 frozen: false
 ---
 

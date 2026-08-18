@@ -18,7 +18,6 @@ related_posts:
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "journeys-in-java-level-2-building-an-empire-of-microservices"
   - "gear-up-for-nodes-2024-what-to-know"
-enlighterjs: true
 frozen: false
 ---
 

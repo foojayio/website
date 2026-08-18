@@ -16,7 +16,6 @@ related_posts:
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "runtime-code-analysis-in-the-age-of-vibe-coding"
-enlighterjs: true
 frozen: false
 ---
 

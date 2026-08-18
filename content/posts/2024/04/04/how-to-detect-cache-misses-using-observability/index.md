@@ -17,7 +17,6 @@ related_posts:
   - "boldness-in-refactoring"
   - "book-review-why-programs-fail"
   - "introducing-the-boxlang-spring-boot-starter-dynamic-jvm-templating-for-spring"
-enlighterjs: true
 frozen: false
 ---
 

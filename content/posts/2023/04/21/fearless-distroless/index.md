@@ -17,7 +17,6 @@ related_posts:
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
   - "running-your-database-on-openshift-and-codeready-containers"
-enlighterjs: true
 frozen: false
 ---
 

@@ -19,7 +19,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
   - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
-enlighterjs: true
 frozen: false
 ---
 

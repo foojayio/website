@@ -17,7 +17,6 @@ related_posts:
   - "conditional-builds-on-gitlab"
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
   - "documentation-as-code-with-asciidoctor-gitlab-ci-and-gitlab-pages"
-enlighterjs: true
 frozen: false
 ---
 

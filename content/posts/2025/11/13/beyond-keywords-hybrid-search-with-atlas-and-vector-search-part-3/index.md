@@ -18,7 +18,6 @@ related_posts:
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "beyond-keywords-implementing-semantic-search-in-java-with-spring-data-part-1"
   - "beyond-keywords-optimizing-vector-search-with-filters-and-caching-part-2"
-enlighterjs: true
 frozen: false
 ---
 

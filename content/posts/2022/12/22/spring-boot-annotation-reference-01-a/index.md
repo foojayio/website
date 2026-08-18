@@ -17,7 +17,6 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "better-error-handling-for-your-spring-boot-rest-apis"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

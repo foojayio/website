@@ -17,7 +17,6 @@ related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "do-java-jakarta-ee-standards-matter"
   - "enterprise-java-in-practice-fragmentation-platforms-and-real-world-trade-offs"
-enlighterjs: true
 frozen: false
 ---
 

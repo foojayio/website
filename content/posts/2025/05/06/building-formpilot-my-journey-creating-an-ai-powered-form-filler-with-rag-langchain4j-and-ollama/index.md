@@ -18,7 +18,6 @@ related_posts:
   - "a-minor-but-useful-refactoring-technique-that-would-reduce-your-code-footprint-part-1"
   - "breaking-the-code-how-chris-newland-is-changing-the-game-in-jvm-performance"
   - "busting-myths-building-futures-a-conversation-with-cay-horstmann-on-java-and-machine-learning"
-enlighterjs: true
 frozen: false
 ---
 

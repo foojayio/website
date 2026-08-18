@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

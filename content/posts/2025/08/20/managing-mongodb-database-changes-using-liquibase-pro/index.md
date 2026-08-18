@@ -17,7 +17,6 @@ related_posts:
   - "java-on-azure-tooling-update-september-2022"
   - "java-virtual-threads-in-action-optimizing-mongodb-operation"
   - "run-an-atlas-cluster-locally-in-minutes"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
   - "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
-enlighterjs: true
 frozen: false
 ---
 

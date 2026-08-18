@@ -16,7 +16,6 @@ related_posts:
   - "clean-shutdown-of-spring-boot-applications"
   - "gang-of-four-design-patterns-using-core-java-part-01"
   - "starting-apache-kafka-java-producer-consumer-windows-10"
-enlighterjs: true
 frozen: false
 ---
 

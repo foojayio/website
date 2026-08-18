@@ -17,7 +17,6 @@ related_posts:
   - "book-review-frontend-development-with-javafx-and-kotlin"
   - "unit-testing-supabase-in-kotlin-using-test-containers-part-2"
   - "exposed-kotlin-orm-complete-guide"
-enlighterjs: true
 frozen: false
 ---
 

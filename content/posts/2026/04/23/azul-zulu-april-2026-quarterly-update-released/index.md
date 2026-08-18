@@ -16,7 +16,6 @@ related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "faster-java-warmup-crac-versus-readynow"
   - "java-security-starts-with-the-jvm"
-enlighterjs: true
 frozen: false
 ---
 

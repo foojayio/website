@@ -19,7 +19,6 @@ related_posts:
   - "foojay-podcast-28"
   - "announcing-sustainability-for-java-developers-a-new-collaborative-guide-from-the-foojay-io-community"
   - "are-java-security-updates-important"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "how-is-leyden-improving-java-performance-part-2-of-3"
   - "indexing-all-of-wikipedia-on-a-laptop"
   - "billion-events-per-second-with-millisecond-latency"
-enlighterjs: true
 frozen: false
 ---
 

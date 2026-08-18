@@ -17,7 +17,6 @@ related_posts:
   - "what-is-debugging-in-140-seconds"
   - "the-basics-of-breakpoints-you-might-not-know"
   - "debugging-collections-streams-and-watch-renderers"
-enlighterjs: true
 frozen: false
 ---
 

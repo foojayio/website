@@ -17,7 +17,6 @@ related_posts:
   - "clean-shutdown-of-spring-boot-applications"
   - "starting-docker-desktop-with-spring-boot"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

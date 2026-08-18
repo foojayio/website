@@ -18,7 +18,6 @@ related_posts:
   - "exploring-new-features-in-jdk-23-null-object-pattern-to-avoid-null-pointer-exception-with-jep-455"
   - "exploring-new-features-in-jdk-23-simplifying-java-with-module-import-declarations-with-jep-476"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
-enlighterjs: true
 frozen: false
 ---
 

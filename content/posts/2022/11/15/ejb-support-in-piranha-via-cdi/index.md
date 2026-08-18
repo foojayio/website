@@ -17,7 +17,6 @@ related_posts:
   - "omnifish-announces-enterprise-support-for-eclipse-glassfish"
   - "do-java-jakarta-ee-standards-matter"
   - "reflections-on-2024-a-remarkable-year-for-omnifish-glassfish-piranha-and-jakarta-ee"
-enlighterjs: true
 frozen: false
 ---
 

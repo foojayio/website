@@ -14,7 +14,6 @@ related_posts:
   - "java-thread-programming-part-1"
   - "java-thread-programming-part-2"
   - "changing-field-type-recent-jdks"
-enlighterjs: true
 frozen: false
 ---
 

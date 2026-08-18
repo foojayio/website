@@ -15,7 +15,6 @@ related_posts:
   - "immutable-collections-in-java-with-sealed-types"
   - "getting-started-with-java-17-and-intellij-idea"
   - "keeping-pace-with-java-using-eclipse-ide"
-enlighterjs: true
 frozen: false
 ---
 

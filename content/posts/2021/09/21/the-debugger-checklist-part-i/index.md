@@ -16,7 +16,6 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "jdb"
   - "debugging-collections-streams-and-watch-renderers"
-enlighterjs: true
 frozen: false
 ---
 

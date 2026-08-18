@@ -16,7 +16,6 @@ related_posts:
   - "how-behaviour-driven-development-works-well-with-event-driven-architectures"
   - "the-evolution-of-apis-from-restful-to-event-driven"
   - "dive-into-the-openjdk-top-10-reads-on-foojay-io"
-enlighterjs: true
 frozen: false
 ---
 

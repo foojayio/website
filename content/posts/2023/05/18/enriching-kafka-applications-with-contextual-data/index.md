@@ -16,7 +16,6 @@ related_posts:
   - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
   - "hazelcast-from-embedded-to-client-server"
   - "how-to-get-started-with-the-hazelcast-viridian-serverless"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "jc-ai-newsletter-2"
   - "jc-ai-newsletter-3"
   - "jc-ai-newsletter-4"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
   - "journeys-in-java-level-9-docker-compose-all-the-things"
-enlighterjs: true
 frozen: false
 ---
 

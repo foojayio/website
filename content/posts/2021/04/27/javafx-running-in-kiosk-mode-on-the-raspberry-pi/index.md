@@ -19,7 +19,6 @@ related_posts:
   - "azul-brings-java-from-edge-to-cloud"
   - "wordish-with-javafx-part-5"
   - "wordish-with-javafx-part-4"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "debugging-kubernetes-part-1-an-introduction"
   - "software-testing-as-a-debugging-tool"
   - "debugging-using-jmx-revisited"
-enlighterjs: true
 frozen: false
 ---
 

@@ -19,7 +19,6 @@ related_posts:
   - "java-performance-ahead-of-time-versus-just-in-time"
   - "are-java-security-updates-important"
   - "five-java-developer-must-haves"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "i-got-java-25-running-on-the-risc-v-beagleboard-beaglev-fire"
   - "first-test-of-java-on-the-visionfive-2-lite-risc-v"
   - "java-on-single-board-computers-x86-vs-arm-vs-risc-v"
-enlighterjs: true
 frozen: false
 ---
 

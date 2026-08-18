@@ -3,7 +3,6 @@ title: "Getting Started with Java - Install Java on MacOS"
 description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
 canonical: "https://foojay.io/java-quick-start/install-java/install-java-on-macos/"
 url: "/java-quick-start/install-java/install-java-on-macos/"
-enlighterjs: true
 aliases:
   - "/java-quick-start/install-java/install-java-on-macos/"
 frozen: false

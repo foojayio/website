@@ -15,7 +15,6 @@ related_posts:
   - "building-microservices-spring-boot-fat-uber-jar"
   - "creating-a-simple-spring-boot-application-in-intellij-idea"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "electronics-quarkus-qute-on-raspberry-pi"
   - "bringing-raspberry-pi-development-to-quarkus-with-the-quarkus-pi4j-extension"
-enlighterjs: true
 frozen: false
 ---
 

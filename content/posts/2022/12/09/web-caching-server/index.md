@@ -18,7 +18,6 @@ related_posts:
   - "a-list-of-cache-providers"
   - "chopping-monolith"
   - "augmenting-the-client-with-alpine-js"
-enlighterjs: true
 frozen: false
 ---
 

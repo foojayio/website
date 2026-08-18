@@ -16,7 +16,6 @@ related_posts:
   - "kubernetes-gateway-api"
   - "apache-apisix-loves-rust"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

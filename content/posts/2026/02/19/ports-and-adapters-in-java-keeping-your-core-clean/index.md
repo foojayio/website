@@ -17,7 +17,6 @@ related_posts:
   - "abstracting-data-access-in-java-with-the-dao-pattern"
   - "atlas-searching-with-the-java-driver"
   - "best-practices-for-deploying-mongodb-in-kubernetes"
-enlighterjs: true
 frozen: false
 ---
 

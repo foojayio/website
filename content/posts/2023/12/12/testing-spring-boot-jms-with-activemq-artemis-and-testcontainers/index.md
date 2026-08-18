@@ -17,7 +17,6 @@ related_posts:
   - "unit-testing-supabase-in-kotlin"
   - "api-mocking-essential-and-redundant"
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
-enlighterjs: true
 frozen: false
 ---
 

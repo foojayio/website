@@ -16,7 +16,6 @@ related_posts:
   - "foojay-mastodon-service-here-it-is"
   - "java-mastodon-service-the-feedback"
   - "not-a-lucid-web3-dream-anymore-x402-erc-8004-a2a-and-the-next-wave-of-ai-commerce"
-enlighterjs: true
 frozen: false
 ---
 

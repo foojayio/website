@@ -20,7 +20,6 @@ related_posts:
   - "token-bucket-rate-limiter-redis-java"
   - "rate-limiting-with-redis-an-essential-guide"
   - "sliding-window-counter-rate-limiter-redis-java"
-enlighterjs: true
 frozen: false
 ---
 

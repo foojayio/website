@@ -19,7 +19,6 @@ related_posts:
   - "state-of-open-source-and-free-ai-a-fosdem-recap"
   - "springboot-3-2-crac"
   - "jurassic-jdk-migrate-or-extinct"
-enlighterjs: true
 frozen: false
 ---
 

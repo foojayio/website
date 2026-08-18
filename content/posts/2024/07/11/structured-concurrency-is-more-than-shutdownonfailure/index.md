@@ -17,7 +17,6 @@ related_posts:
   - "java-22-is-here-and-its-ready-to-rock"
   - "what-the-heck-is-project-loom-for-java"
   - "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
-enlighterjs: true
 frozen: false
 ---
 

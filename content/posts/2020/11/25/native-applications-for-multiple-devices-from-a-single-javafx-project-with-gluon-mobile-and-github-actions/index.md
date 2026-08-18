@@ -18,7 +18,6 @@ related_posts:
   - "the-javafx-revival"
   - "wordish-with-javafx-part-5"
   - "wordish-with-javafx-part-4"
-enlighterjs: true
 frozen: false
 ---
 

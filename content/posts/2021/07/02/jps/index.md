@@ -16,7 +16,6 @@ related_posts:
   - "jdb"
   - "introducing-the-boxlang-ide-plugin-for-intellij"
   - "indexing-all-of-wikipedia-on-a-laptop"
-enlighterjs: true
 frozen: false
 ---
 

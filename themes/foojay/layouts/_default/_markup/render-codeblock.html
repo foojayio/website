@@ -12,10 +12,14 @@
        server-side highlighting, which is what we want while EnlighterJS owns
        the rendering.
 
-       LANGUAGE MAPPING. EnlighterJS ships 53 languages and, notably, has no
-       yaml, xml, html or plain-text lexer; those fall back to `generic`, which
-       is exactly what the old WordPress markup did with them too, so nothing
-       regresses. Fence tags authors actually type are mapped to the closest
+       LANGUAGE MAPPING. The list below is the registry of the VENDORED build
+       (static/vendor/enlighterjs/enlighterjs.min.js) -- 57 languages, read out
+       of the bundle itself rather than from documentation. It really does have
+       `xml`, `yaml` and `visualbasic` lexers, and `html` is a declared alias of
+       `xml`; an earlier version of this list omitted all four, which silently
+       downgraded 591 blocks in content/ to `generic`. If the vendored build is
+       ever updated, re-derive the list from the new bundle rather than editing
+       it by hand. Fence tags authors actually type are mapped to the closest
        EnlighterJS name here, and anything unrecognised degrades to `generic`
        rather than breaking the block. */ -}}
 
@@ -37,6 +41,9 @@
       "docker" "dockerfile"
       "ps" "powershell" "ps1" "powershell"
       "postgres" "postgresql" "psql" "postgresql" "mysql" "mariadb"
+      "html" "xml" "htm" "xml" "xhtml" "xml" "svg" "xml" "xsl" "xml" "xsd" "xml"
+      "pom" "xml" "yml" "yaml"
+      "vb" "visualbasic" "vbnet" "visualbasic" "vba" "visualbasic"
 -}}
 
 {{- /* EnlighterJS's own registry -- a fence tag in this list is passed straight
@@ -49,7 +56,7 @@
       "mariadb" "markdown" "matlab" "mssql" "nginx" "nsis" "oracledb" "php"
       "postgresql" "powershell" "prolog" "purebasic" "python" "qml" "r" "raw"
       "routeros" "ruby" "rust" "scala" "scss" "shell" "sql" "squirrel" "swift"
-      "typescript" "vhdl"
+      "typescript" "verilog" "vhdl" "visualbasic" "xml" "yaml"
 -}}
 
 {{- $tag := lower (trim (.Type | default "") " ") -}}

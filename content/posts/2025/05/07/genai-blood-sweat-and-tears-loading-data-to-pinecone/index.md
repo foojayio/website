@@ -18,7 +18,6 @@ related_posts:
   - "building-a-fullstack-imdb-clone-with-a-java-backend-using-sparkjava-and-neo4j"
   - "journeys-in-java-level-3-building-an-empire-of-microservices"
   - "journeys-in-java-level-5-building-an-empire-of-microservices"
-enlighterjs: true
 frozen: false
 ---
 

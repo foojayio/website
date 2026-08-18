@@ -3,7 +3,6 @@ title: "foojay – a place for friends of OpenJDK"
 description: "foojay is the place for all OpenJDK Update Release Information. Learn More."
 canonical: "https://foojay.io/log4j-cve/"
 url: "/log4j-cve/"
-enlighterjs: true
 aliases:
   - "/log4j-cve/"
 frozen: false

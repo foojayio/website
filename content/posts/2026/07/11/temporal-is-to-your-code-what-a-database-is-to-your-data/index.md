@@ -13,7 +13,6 @@ categories:
   - "Temporal"
 tags:
 related_posts:
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "controlling-led-strips-with-java-and-jbang"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

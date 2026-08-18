@@ -17,7 +17,6 @@ related_posts:
   - "apache-apisix-loves-rust"
   - "annotation-free-spring"
   - "an-example-of-overengineering-keep-it-wet"
-enlighterjs: true
 frozen: false
 ---
 

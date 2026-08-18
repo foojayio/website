@@ -16,7 +16,6 @@ related_posts:
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
   - "effective-cloud-native-development-open-liberty-vs-code"
-enlighterjs: true
 frozen: false
 ---
 

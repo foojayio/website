@@ -20,7 +20,6 @@ related_posts:
   - "run-ai-enabled-jakarta-ee-and-microprofile-applications-with-langchain4j-and-open-liberty"
   - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
   - "boost-developer-productivity-with-payara-server-maven-plugin-ai-agent"
-enlighterjs: true
 frozen: false
 ---
 

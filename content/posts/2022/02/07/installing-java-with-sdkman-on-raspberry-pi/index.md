@@ -16,7 +16,6 @@ related_posts:
   - "installing-java-and-javafx-on-the-raspberry-pi"
   - "java-17-on-the-raspberry-pi"
   - "a-fresh-look-at-embedded-java"
-enlighterjs: true
 frozen: false
 ---
 

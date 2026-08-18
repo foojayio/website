@@ -16,7 +16,6 @@ related_posts:
   - "create-a-crud-ui-in-pure-java"
   - "hilla-1-0-a-new-frontend-framework-for-springboot"
   - "securing-vaadin-applications-with-microsoft-entra"
-enlighterjs: true
 frozen: false
 ---
 

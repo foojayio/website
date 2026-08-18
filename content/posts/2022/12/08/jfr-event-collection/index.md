@@ -17,7 +17,6 @@ related_posts:
   - "using-java-flight-recorder-and-mission-control-part-2"
   - "using-java-flight-recorder-and-mission-control-part-3"
   - "a-glance-into-jfr-class-and-method-tagging"
-enlighterjs: true
 frozen: false
 ---
 

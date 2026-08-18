@@ -15,7 +15,6 @@ related_posts:
   - "neo-stream-search-java-challenge"
   - "jedi-lambda-join-java-challenge"
   - "soprano-ofnullable-stream-java-challenge"
-enlighterjs: true
 frozen: false
 ---
 

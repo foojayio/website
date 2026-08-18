@@ -16,7 +16,6 @@ related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "implementing-the-idempotency-key-specification-on-apache-apisix"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "a-dissection-of-java-jdbc-to-postgresql-connections"
   - "a-list-of-cache-providers"
   - "5-great-reasons-to-use-jooq"
-enlighterjs: true
 frozen: false
 ---
 

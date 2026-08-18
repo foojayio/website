@@ -18,7 +18,6 @@ related_posts:
   - "native-spring-boot"
   - "native-image-micronaut"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
-enlighterjs: true
 frozen: false
 ---
 

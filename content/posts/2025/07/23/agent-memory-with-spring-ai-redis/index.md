@@ -18,7 +18,6 @@ related_posts:
   - "checking-out-junie-a-coding-agent-by-jetbrains"
   - "exposed-kotlin-orm-complete-guide"
   - "foojay-podcast-99"
-enlighterjs: true
 frozen: false
 ---
 

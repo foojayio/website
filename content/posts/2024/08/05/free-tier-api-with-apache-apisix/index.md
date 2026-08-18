@@ -16,7 +16,6 @@ related_posts:
   - "advanced-url-rewriting-with-apache-apisix"
   - "api-versioning"
   - "health-check-response-format-for-http-apis"
-enlighterjs: true
 frozen: false
 ---
 

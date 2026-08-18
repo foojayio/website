@@ -17,7 +17,6 @@ related_posts:
   - "java-concurrency-best-practices-for-mongodb"
   - "mongodb-sharding-what-to-know-before-you-shard"
   - "power-your-ai-application-with-vector-search"
-enlighterjs: true
 frozen: false
 ---
 

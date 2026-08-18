@@ -17,7 +17,6 @@ related_posts:
   - "low-latency-microservices-a-retrospective"
   - "chronicle-queue-storing-1tb-in-virtual-memory-on-a-128gb-machine"
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
-enlighterjs: true
 frozen: false
 ---
 

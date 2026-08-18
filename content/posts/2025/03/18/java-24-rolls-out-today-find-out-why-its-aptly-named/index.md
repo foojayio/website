@@ -16,7 +16,6 @@ related_posts:
   - "java-24-whats-new"
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"
   - "java-22-is-here-and-its-ready-to-rock"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "web-app-startup-in-3ms-with-rife2-and-graalvm"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"
   - "cross-platform-development-in-java-with-gluon-and-graalvm-part-2"
-enlighterjs: true
 frozen: false
 ---
 

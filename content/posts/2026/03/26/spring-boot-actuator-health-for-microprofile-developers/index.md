@@ -19,7 +19,6 @@ related_posts:
   - "did-ai-just-break-software-security-for-ever"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "spring-ai-agents-no-second-runtime"
-enlighterjs: true
 frozen: false
 ---
 

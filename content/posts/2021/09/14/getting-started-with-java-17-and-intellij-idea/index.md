@@ -18,7 +18,6 @@ related_posts:
   - "java-17-on-the-raspberry-pi"
   - "schedule-for-foojay-virtual-openjdk-17-jug-tour"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

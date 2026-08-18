@@ -16,7 +16,6 @@ related_posts:
   - "7-ways-to-contribute-to-openjdk"
   - "a-closer-look-at-jfr-streaming"
   - "boxlang-neovim-plugin-released"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "book-review-why-programs-fail"
   - "debugging-tutorial-1-introduction-conditional-breakpoints-set-value"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

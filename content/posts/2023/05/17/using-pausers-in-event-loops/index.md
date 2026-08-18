@@ -16,7 +16,6 @@ related_posts:
   - "automatically-creating-microservices-architecture-diagrams"
   - "challenges-when-developing-a-gui-for-fix"
   - "monitoring-event-loops-for-blockages"
-enlighterjs: true
 frozen: false
 ---
 

@@ -24,7 +24,6 @@ related_posts:
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
   - "did-ai-just-break-software-security-for-ever"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "how-to-secure-your-web-apps-with-an-api-gateway"
   - "backend-for-front-end"
   - "backend-for-frontend-the-demo"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "github-actions-with-java-part-1"
   - "github-actions-with-java-part-2"
   - "lights-camera-action-github-actions-with-java-part-3"
-enlighterjs: true
 frozen: false
 ---
 

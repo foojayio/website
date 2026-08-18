@@ -16,7 +16,6 @@ related_posts:
   - "sorting-text-in-java-how-complicated-can-it-be"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
-enlighterjs: true
 frozen: false
 ---
 

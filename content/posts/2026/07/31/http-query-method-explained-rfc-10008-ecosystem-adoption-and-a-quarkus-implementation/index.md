@@ -14,7 +14,6 @@ related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "build-a-sentiment-analysis-api-in-java-with-quarkus-and-local-llms"
-enlighterjs: true
 frozen: false
 ---
 

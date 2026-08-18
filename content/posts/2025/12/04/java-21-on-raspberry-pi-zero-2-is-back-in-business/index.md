@@ -19,7 +19,6 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "controlling-a-led-strip-with-pi4j-and-jbang"
   - "foojay-podcast-55"
-enlighterjs: true
 frozen: false
 ---
 

@@ -20,7 +20,6 @@ related_posts:
   - "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"
   - "build-web-apps-in-pure-java-with-vaadin-flow"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

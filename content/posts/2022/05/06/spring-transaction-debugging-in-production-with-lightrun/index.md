@@ -18,7 +18,6 @@ related_posts:
   - "debugging-tutorial-java-return-value-intellij-jump-to-line-and-more"
   - "debugging-ram-java-garbage-collection-java-heap-deep-dive-part-1"
   - "spring-boot-debugging-with-aspect-oriented-programming-aop"
-enlighterjs: true
 frozen: false
 ---
 

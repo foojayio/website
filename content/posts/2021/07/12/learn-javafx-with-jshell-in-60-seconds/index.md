@@ -16,7 +16,6 @@ related_posts:
   - "closing-the-visual-gap-between-the-official-lottie-webplayer-and-lottie4j"
   - "first-experiments-with-java-on-the-lattepanda-iota"
   - "javafx-links-of-november-2025"
-enlighterjs: true
 frozen: false
 ---
 

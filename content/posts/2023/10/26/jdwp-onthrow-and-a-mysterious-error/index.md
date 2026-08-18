@@ -16,7 +16,6 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "class-loader-hierarchies"
   - "level-up-your-java-debugging-skills-with-on-demand-debugging"
-enlighterjs: true
 frozen: false
 ---
 

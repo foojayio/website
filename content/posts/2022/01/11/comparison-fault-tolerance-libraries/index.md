@@ -18,7 +18,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "avoiding-nullpointerexception"
   - "the-vary-http-header"
-enlighterjs: true
 frozen: false
 ---
 

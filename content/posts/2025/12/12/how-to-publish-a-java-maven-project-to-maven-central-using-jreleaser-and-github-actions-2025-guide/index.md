@@ -18,7 +18,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "9-outdated-ideas-about-java"
   - "a-faster-way-to-build-react-spring-boot-apps-using-hilla-1-3"
-enlighterjs: true
 frozen: false
 ---
 

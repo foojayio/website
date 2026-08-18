@@ -18,7 +18,6 @@ related_posts:
   - "kotlin-delegation"
   - "a-list-of-cache-providers"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

@@ -394,7 +394,6 @@ public class ConvertPosts {
             HtmlToMarkdown.Result r = HtmlToMarkdown.convert(content, opts, "");
             d.body = r.markdown;
             d.jdoodle = r.jdoodle;
-            d.enlighterjs = r.enlighterjs;
         } else {
             d.body = "";
             System.err.println("  WARNING: no content matched for " + url);
@@ -609,7 +608,6 @@ public class ConvertPosts {
         fm.append("related_posts:\n");
         for (String r : d.relatedSlugs) fm.append("  - ").append(yamlString(r)).append("\n");
         if (d.jdoodle) fm.append("jdoodle: true\n");
-        if (d.enlighterjs) fm.append("enlighterjs: true\n");
         // No aliases: `slug` above already makes the permalink the legacy
         // /today/<slug>/ URL, so a self-referential alias would be redundant.
         fm.append("frozen: false\n");
@@ -712,7 +710,7 @@ public class ConvertPosts {
     static class PostData {
         String url, slug, title, description, canonical, image, date, dateModified, body;
         Path bundleDir;
-        boolean jdoodle, enlighterjs;
+        boolean jdoodle;
         List<String> authors = new ArrayList<>();
         List<String> categories = new ArrayList<>();
         List<String> tags = new ArrayList<>();

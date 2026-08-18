@@ -19,7 +19,6 @@ related_posts:
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "issues-with-old-glassfish-server-upgrade-to-eclipse-glassfish"
-enlighterjs: true
 frozen: false
 ---
 

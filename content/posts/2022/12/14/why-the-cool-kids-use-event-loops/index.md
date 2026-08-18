@@ -15,7 +15,6 @@ related_posts:
   - "low-latency-crypto-trading-systems-using-java-and-chronicle-services"
   - "kafka-vs-chronicle-for-microservices-which-is-750-times-faster"
   - "lets-replace-the-synchronized-keyword"
-enlighterjs: true
 frozen: false
 ---
 

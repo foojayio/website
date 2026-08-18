@@ -16,7 +16,6 @@ related_posts:
   - "42-practical-java-design-patterns-builder-and-more"
   - "5-great-reasons-to-use-jooq"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

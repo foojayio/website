@@ -16,7 +16,6 @@ related_posts:
   - "getting-a-single-value-from-a-devices-state-in-home-assistant"
   - "the-home-assistant-model"
   - "why-home-assistant"
-enlighterjs: true
 frozen: false
 ---
 

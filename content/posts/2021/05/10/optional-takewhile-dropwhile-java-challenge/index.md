@@ -15,7 +15,6 @@ related_posts:
   - "daemon-thread-java-code-quiz"
   - "function-calculation-java-challenge"
   - "stream-limit-filter-java-challenge"
-enlighterjs: true
 frozen: false
 ---
 

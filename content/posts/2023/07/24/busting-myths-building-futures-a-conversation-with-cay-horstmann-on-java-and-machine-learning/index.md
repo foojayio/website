@@ -15,7 +15,6 @@ related_posts:
   - "virtual-tour-is-the-biggest-project-yet-for-the-new-java-community-platform-foojay-dzone"
   - "3-ways-to-refactor-your-code-in-intellij-idea"
   - "jc-ai-newsletter-16"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "are-java-security-updates-important"
   - "foojay-podcast-83"
-enlighterjs: true
 frozen: false
 ---
 

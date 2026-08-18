@@ -21,7 +21,6 @@ related_posts:
   - "debug-unresponsive-apps"
   - "debug-without-breakpoints"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

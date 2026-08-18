@@ -16,7 +16,6 @@ related_posts:
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
-enlighterjs: true
 frozen: false
 ---
 

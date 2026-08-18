@@ -15,7 +15,6 @@ related_posts:
   - "book-review-java-by-comparison"
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "debugging-streams-and-collections"
-enlighterjs: true
 frozen: false
 ---
 

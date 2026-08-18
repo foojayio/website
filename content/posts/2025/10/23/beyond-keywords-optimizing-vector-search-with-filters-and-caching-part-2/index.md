@@ -18,7 +18,6 @@ related_posts:
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "building-an-ai-semantic-movie-recommender-with-vector-search"
   - "building-rest-apis-in-java-with-spring-boot"
-enlighterjs: true
 frozen: false
 ---
 

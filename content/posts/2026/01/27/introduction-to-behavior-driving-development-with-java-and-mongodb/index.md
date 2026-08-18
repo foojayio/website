@@ -18,7 +18,6 @@ related_posts:
   - "atlas-searching-with-the-java-driver"
   - "best-practices-for-deploying-mongodb-in-kubernetes"
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
-enlighterjs: true
 frozen: false
 ---
 

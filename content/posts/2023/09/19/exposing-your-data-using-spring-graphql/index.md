@@ -16,7 +16,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-simple-service-with-spring-boot"
   - "jurassic-jdk-migrate-or-extinct"
-enlighterjs: true
 frozen: false
 ---
 

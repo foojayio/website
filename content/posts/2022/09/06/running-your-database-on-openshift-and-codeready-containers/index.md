@@ -21,7 +21,6 @@ related_posts:
   - "run-websphere-liberty-and-open-liberty-on-openshift"
   - "log4shell-shows-the-need-for-trustworthy-java"
   - "deploying-to-multiple-kubernetes-clusters-with-the-k8ssandra-operator"
-enlighterjs: true
 frozen: false
 ---
 

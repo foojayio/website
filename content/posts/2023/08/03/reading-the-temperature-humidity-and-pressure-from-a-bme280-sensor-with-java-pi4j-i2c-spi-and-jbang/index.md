@@ -21,7 +21,6 @@ related_posts:
   - "controlling-a-led-strip-with-pi4j-and-jbang"
   - "interviews-with-robert-savage-and-johan-vos-on-the-state-of-java-on-raspberry-pi"
   - "pi4j-welcomes-java-21-on-the-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "fix-java-security-issues-while-coding-in-intellij-idea"
   - "intellij-idea-beyond-the-basics"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

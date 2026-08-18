@@ -18,7 +18,6 @@ related_posts:
   - "native-graphql-api-with-neo4j-auradb-on-heroku"
   - "faster-integration-tests-with-reusable-testcontainers"
   - "running-your-database-on-openshift-and-codeready-containers"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
   - "exploring-java-records-in-a-jakarta-ee-context"
   - "five-apache-projects-you-probably-havent-heard-of-yet"
-enlighterjs: true
 frozen: false
 ---
 

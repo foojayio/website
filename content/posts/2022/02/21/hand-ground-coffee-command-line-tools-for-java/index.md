@@ -16,7 +16,6 @@ related_posts:
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "building-openjdk-from-github-sources-on-64-bit-raspberry-pi"
   - "jdb"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "build-rot-tech-debt"
   - "java-where-the-wild-code-isnt"
   - "making-sboms-threats-and-modelling-them-a-piece-of-cake"
-enlighterjs: true
 frozen: false
 ---
 

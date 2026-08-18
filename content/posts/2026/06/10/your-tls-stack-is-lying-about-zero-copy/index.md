@@ -21,7 +21,6 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
-enlighterjs: true
 frozen: false
 ---
 

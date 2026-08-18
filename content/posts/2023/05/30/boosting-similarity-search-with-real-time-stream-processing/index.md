@@ -15,7 +15,6 @@ related_posts:
   - "billion-events-per-second-with-millisecond-latency"
   - "enriching-kafka-applications-with-contextual-data"
   - "hazelcast-kibana-best-buddies-for-exploring-visualizing-data"
-enlighterjs: true
 frozen: false
 ---
 

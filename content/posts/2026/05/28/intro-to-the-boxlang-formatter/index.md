@@ -18,7 +18,6 @@ related_posts:
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

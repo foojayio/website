@@ -15,7 +15,6 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "are-java-security-updates-important"
   - "beginning-javafx-with-intellij"
-enlighterjs: true
 frozen: false
 ---
 

@@ -20,7 +20,6 @@ related_posts:
   - "its-java-20-release-day-heres-whats-new"
   - "preparing-for-jdk-21-a-comprehensive-overview-of-key-features-and-enhancements"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

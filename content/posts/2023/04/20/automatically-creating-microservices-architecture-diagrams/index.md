@@ -16,7 +16,6 @@ related_posts:
   - "chronicle-wire-object-marshalling"
   - "creating-terabyte-sized-queues-with-low-latency"
   - "event-driven-hello-world-program"
-enlighterjs: true
 frozen: false
 ---
 

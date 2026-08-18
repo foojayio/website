@@ -16,7 +16,6 @@ related_posts:
   - "the-debugger-checklist-part-ii"
   - "what-is-debugging-in-140-seconds"
   - "get-started-with-allocation-profiling"
-enlighterjs: true
 frozen: false
 ---
 

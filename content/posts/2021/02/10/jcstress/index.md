@@ -16,7 +16,6 @@ related_posts:
   - "new-jdkmonitor"
   - "disco-api-helping-you-to-find-any-openjdk-distribution"
   - "debugging-openjdk-tests-in-vscode-without-losing-your-mind"
-enlighterjs: true
 frozen: false
 ---
 

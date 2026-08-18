@@ -18,7 +18,6 @@ related_posts:
   - "native-graphql-api-with-neo4j-auradb-on-heroku"
   - "faster-integration-tests-with-reusable-testcontainers"
   - "gear-up-for-nodes-2024-what-to-know"
-enlighterjs: true
 frozen: false
 ---
 

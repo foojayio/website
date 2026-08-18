@@ -18,7 +18,6 @@ related_posts:
   - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
   - "java-concurrency-best-practices-for-mongodb"
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
-enlighterjs: true
 frozen: false
 ---
 

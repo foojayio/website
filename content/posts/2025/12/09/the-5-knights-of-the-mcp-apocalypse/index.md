@@ -16,7 +16,6 @@ related_posts:
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "sonarqube-part-4-ai-code-assurance"
-enlighterjs: true
 frozen: false
 ---
 

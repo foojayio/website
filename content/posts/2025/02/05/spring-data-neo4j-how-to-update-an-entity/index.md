@@ -19,7 +19,6 @@ related_posts:
   - "how-to-run-neo4j-on-kubernetes"
   - "journeys-in-java-level-6-build-a-neo4j-microservice"
   - "visualization-of-the-message-flow-between-business-functions-with-vaadin-and-neo4j"
-enlighterjs: true
 frozen: false
 ---
 

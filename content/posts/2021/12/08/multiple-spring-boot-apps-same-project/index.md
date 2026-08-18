@@ -17,7 +17,6 @@ related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "spring-i-o-2026-field-notes-from-barcelona"
   - "spring-boot-actuator-health-for-microprofile-developers"
-enlighterjs: true
 frozen: false
 ---
 

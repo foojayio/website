@@ -20,7 +20,6 @@ related_posts:
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
   - "renovate-for-everything"
-enlighterjs: true
 frozen: false
 ---
 

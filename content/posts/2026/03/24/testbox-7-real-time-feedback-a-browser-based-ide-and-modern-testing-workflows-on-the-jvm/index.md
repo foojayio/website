@@ -22,7 +22,6 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-sets-ranges-inner-classes-and-a-runtime-that-talks-back"
   - "boxlang-ai-3-2-0-image-generation-web-search-fluent-audio-agent-registry-mcp-observability"
-enlighterjs: true
 frozen: false
 ---
 

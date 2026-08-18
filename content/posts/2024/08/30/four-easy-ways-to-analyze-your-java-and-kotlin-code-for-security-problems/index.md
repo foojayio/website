@@ -17,7 +17,6 @@ related_posts:
   - "preventing-cross-site-scripting-xss-in-java-applications-with-snyk-code"
   - "sanitize-all-input"
   - "securing-symmetric-encryption-algorithms-in-java"
-enlighterjs: true
 frozen: false
 ---
 

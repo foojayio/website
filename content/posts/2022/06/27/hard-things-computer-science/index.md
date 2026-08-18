@@ -15,7 +15,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
-enlighterjs: true
 frozen: false
 ---
 

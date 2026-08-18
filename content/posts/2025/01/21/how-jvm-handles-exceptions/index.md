@@ -17,7 +17,6 @@ related_posts:
   - "understanding-jvm-memory-layout-with-openjdk24s-new-printmemorymapatexit-vm-option"
   - "dynamic-watermarking-on-the-jvm"
   - "clean-memory-from-finalize-to-cleaner"
-enlighterjs: true
 frozen: false
 ---
 

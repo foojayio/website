@@ -16,7 +16,6 @@ related_posts:
   - "how-to-publish-a-java-maven-project-to-the-maven-central-repository"
   - "jreleaser-looking-for-translation-contributions"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-enlighterjs: true
 frozen: false
 ---
 

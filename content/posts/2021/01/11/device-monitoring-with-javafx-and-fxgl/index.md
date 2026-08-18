@@ -18,7 +18,6 @@ related_posts:
   - "dive-into-the-openjdk-top-10-reads-on-foojay-io"
   - "foojay-podcast-25"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-enlighterjs: true
 frozen: false
 ---
 

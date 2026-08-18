@@ -17,7 +17,6 @@ related_posts:
   - "debugging-jaxb-production-issues"
   - "debugging-race-conditions-in-production"
   - "get-started-with-allocation-profiling"
-enlighterjs: true
 frozen: false
 ---
 

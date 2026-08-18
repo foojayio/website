@@ -18,7 +18,6 @@ related_posts:
   - "streaming-real-time-data-on-the-hazelcast-viridian-serverless"
   - "real-time-stream-processing-with-hazelcast-and-streamnative"
   - "ingesting-time-series-events-from-kafka-into-questdb"
-enlighterjs: true
 frozen: false
 ---
 

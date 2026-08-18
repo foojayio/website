@@ -18,7 +18,6 @@ related_posts:
   - "creating-a-javafx-world-clock-from-scratch-part-1"
   - "custom-controls-in-javafx-part-i"
   - "the-javafx-revival"
-enlighterjs: true
 frozen: false
 ---
 

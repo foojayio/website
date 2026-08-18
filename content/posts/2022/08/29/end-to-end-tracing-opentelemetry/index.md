@@ -18,7 +18,6 @@ related_posts:
   - "book-review-why-programs-fail"
   - "interview-with-tom-granot-developer-observability-koolkits-and-reliability"
   - "improving-upon-my-opentelemetry-tracing-demo"
-enlighterjs: true
 frozen: false
 ---
 

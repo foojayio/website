@@ -16,7 +16,6 @@ related_posts:
   - "your-new-ai-powered-coding-buddy-a-guide-to-sonarqube-mcp-server-on-intellij"
   - "java-22-to-24-level-up-your-java-code-by-embracing-new-features-in-a-safe-way"
   - "effective-cloud-native-java-app-development-with-open-liberty-in-intellij-idea"
-enlighterjs: true
 frozen: false
 ---
 

@@ -13,7 +13,6 @@ related_posts:
   - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
   - "ai-powered-code-review-assistant-automated-code-analysis-with-spring-ai-and-mongodb"
-enlighterjs: true
 frozen: false
 ---
 

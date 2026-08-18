@@ -20,7 +20,6 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
   - "boxlang-ai-deep-dive-part-7-of-7-mcp-the-protocol-that-connects-everything"
-enlighterjs: true
 frozen: false
 ---
 

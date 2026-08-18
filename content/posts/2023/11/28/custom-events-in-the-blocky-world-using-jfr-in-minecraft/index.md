@@ -16,7 +16,6 @@ related_posts:
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "a-closer-look-at-jfr-streaming"
   - "firefox-profiler-beyond-the-web"
-enlighterjs: true
 frozen: false
 ---
 

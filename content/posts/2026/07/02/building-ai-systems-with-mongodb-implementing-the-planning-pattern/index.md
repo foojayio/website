@@ -13,7 +13,6 @@ related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "aggregation-optimization-in-mongodb-a-case-study-from-the-field-part-1"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
-enlighterjs: true
 frozen: false
 ---
 

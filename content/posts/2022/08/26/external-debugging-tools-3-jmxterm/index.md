@@ -17,7 +17,6 @@ related_posts:
   - "understand-the-root-cause-of-regressions-with-git-bisect"
   - "debugging-race-conditions-in-production"
   - "get-started-with-allocation-profiling"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "javafx-links-of-february-2024"
   - "javafx-links-of-february-2023"
   - "hidden-beauties-of-java-enums"
-enlighterjs: true
 frozen: false
 ---
 

@@ -19,7 +19,6 @@ related_posts:
   - "easy-jakarta-ee-integration-testing"
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
   - "soft-assertions-testing-kindly"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "web-crawling-in-java-a-tale-of-classical-threads-and-virtual-threads"
   - "the-curious-case-of-different-runtimes-with-different-training-data-jit"
-enlighterjs: true
 frozen: false
 ---
 

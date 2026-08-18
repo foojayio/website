@@ -17,7 +17,6 @@ related_posts:
   - "peter-lawrey-latency-performance"
   - "automatically-creating-microservices-architecture-diagrams"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

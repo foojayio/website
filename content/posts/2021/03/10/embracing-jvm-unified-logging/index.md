@@ -15,7 +15,6 @@ related_posts:
   - "fantastic-jvms-and-where-to-find-them"
   - "building-ai-systems-with-mongodb-implementing-the-planning-pattern"
   - "whats-new-in-the-june-2026-azul-payara-release"
-enlighterjs: true
 frozen: false
 ---
 

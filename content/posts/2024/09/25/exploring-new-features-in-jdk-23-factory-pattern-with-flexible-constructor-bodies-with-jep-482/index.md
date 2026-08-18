@@ -16,7 +16,6 @@ related_posts:
   - "java-23-whats-new"
   - "foojay-podcast-57"
   - "boxlang-1-14-0-boxset-is-here-boxlangs-new-first-class-set-type"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "exploring-cve-2022-33980-the-apache-commons-configuration-rce-vulnerability"
   - "foojay-podcast-7"
   - "tiberius-a-security-testing-framework-for-llm-applications-in-java"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "java-serialization-filtering-prevent-0-day-security-vulnerabilities"
   - "is-it-time-to-go-back-to-the-monolith"
   - "java-thread-programming-part-15"
-enlighterjs: true
 frozen: false
 ---
 

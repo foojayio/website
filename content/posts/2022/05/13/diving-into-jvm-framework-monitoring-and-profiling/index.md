@@ -17,7 +17,6 @@ related_posts:
   - "build-a-status-dashboard-using-spring-boot-and-astra-db"
   - "building-microservices-spring-boot-fat-uber-jar"
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
-enlighterjs: true
 frozen: false
 ---
 

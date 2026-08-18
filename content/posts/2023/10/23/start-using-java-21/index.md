@@ -16,7 +16,6 @@ related_posts:
   - "from-azure-active-directory-via-openid-connect-to-open-liberty-and-java"
   - "how-we-developed-the-eclipse-openj9-criu-support-for-fast-java-startup"
   - "semeru-v11-beyond-oct-2024"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "an-example-of-overengineering-keep-it-wet"
   - "annotation-free-spring"
   - "resizing-images-on-the-fly"
-enlighterjs: true
 frozen: false
 ---
 

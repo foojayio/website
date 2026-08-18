@@ -21,7 +21,6 @@ related_posts:
   - "foojay-podcast-4"
   - "installing-java-with-sdkman-on-raspberry-pi"
   - "where-production-policy-belongs-building-eliya-in-public"
-enlighterjs: true
 frozen: false
 ---
 

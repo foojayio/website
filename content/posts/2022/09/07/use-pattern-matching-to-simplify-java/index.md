@@ -15,7 +15,6 @@ related_posts:
   - "jdk-7-an-extended-hello-and-farewell"
   - "are-java-security-updates-important"
   - "much-ado-about-nothing-in-java"
-enlighterjs: true
 frozen: false
 ---
 

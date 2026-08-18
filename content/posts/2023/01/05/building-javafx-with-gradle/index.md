@@ -17,7 +17,6 @@ related_posts:
   - "compilation-avoidance-with-gradle"
   - "introducing-gradle-test-suites"
   - "creating-a-javafx-world-clock-from-scratch-part-4"
-enlighterjs: true
 frozen: false
 ---
 

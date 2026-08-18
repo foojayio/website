@@ -18,7 +18,6 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "java-17-on-the-raspberry-pi"
   - "fuchs-2024-fepcos-j-multithreaded-server"
-enlighterjs: true
 frozen: false
 ---
 

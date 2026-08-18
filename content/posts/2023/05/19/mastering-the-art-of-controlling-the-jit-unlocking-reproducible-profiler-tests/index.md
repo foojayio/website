@@ -15,7 +15,6 @@ related_posts:
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
   - "do-you-trust-profilers-i-once-did-too"
   - "how-is-leyden-improving-java-performance-part-3-of-3"
-enlighterjs: true
 frozen: false
 ---
 

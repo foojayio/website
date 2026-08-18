@@ -12,7 +12,6 @@ categories:
   - "Security"
 tags:
 related_posts:
-enlighterjs: true
 frozen: false
 ---
 

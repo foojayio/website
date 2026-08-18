@@ -20,7 +20,6 @@ related_posts:
   - "controlling-a-led-strip-with-pi4j-and-jbang"
   - "controlling-electronics-with-jbang-on-the-raspberry-pi"
   - "java-21-on-raspberry-pi-zero-2-is-back-in-business"
-enlighterjs: true
 frozen: false
 ---
 

@@ -19,7 +19,6 @@ related_posts:
   - "what-the-heck-is-project-loom-for-java"
   - "an-introduction-to-scoped-values-in-java"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

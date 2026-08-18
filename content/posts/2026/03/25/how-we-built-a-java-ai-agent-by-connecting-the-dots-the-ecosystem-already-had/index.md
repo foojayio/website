@@ -15,7 +15,6 @@ related_posts:
   - "getting-started-with-jobrunr-a-powerful-task-scheduler-in-ja"
   - "carbon-aware-job-processing-with-jobrunr-v8"
   - "foojay-podcast-60"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "journeys-in-java-level-1-building-an-empire-of-microservices"
   - "building-microservices-spring-boot-fat-uber-jar"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
-enlighterjs: true
 frozen: false
 ---
 

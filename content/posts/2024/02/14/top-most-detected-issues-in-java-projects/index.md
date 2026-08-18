@@ -17,7 +17,6 @@ related_posts:
   - "building-for-failure-best-practices-for-easy-production-debugging"
   - "effective-coding-with-java-observability"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

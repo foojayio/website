@@ -16,7 +16,6 @@ related_posts:
   - "kubernetes-gateway-api"
   - "a-list-of-cache-providers"
   - "comparison-fault-tolerance-libraries"
-enlighterjs: true
 frozen: false
 ---
 

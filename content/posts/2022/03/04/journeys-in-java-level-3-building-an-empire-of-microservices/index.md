@@ -17,7 +17,6 @@ related_posts:
   - "book-review-effortless-cloud-native-app-development-using-skaffold-2"
   - "building-reactive-java-applications-with-spring-framework"
   - "journeys-in-java-level-6-build-a-neo4j-microservice"
-enlighterjs: true
 frozen: false
 ---
 

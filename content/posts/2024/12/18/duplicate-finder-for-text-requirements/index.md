@@ -16,7 +16,6 @@ related_posts:
   - "get-started-with-allocation-profiling"
   - "beginners-guide-to-java-profiler"
   - "duplicate-finder-for-documentation"
-enlighterjs: true
 frozen: false
 ---
 

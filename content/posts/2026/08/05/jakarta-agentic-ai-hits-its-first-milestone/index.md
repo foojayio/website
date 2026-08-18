@@ -12,7 +12,6 @@ categories:
 tags:
 related_posts:
   - "shaping-jakarta-agentic-ai-together-watch-the-open-conversation"
-enlighterjs: true
 frozen: false
 ---
 

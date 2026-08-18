@@ -17,7 +17,6 @@ related_posts:
   - "annotation-free-spring"
   - "extending-third-party-apis-in-different-languages"
   - "foojay-podcast-53"
-enlighterjs: true
 frozen: false
 ---
 

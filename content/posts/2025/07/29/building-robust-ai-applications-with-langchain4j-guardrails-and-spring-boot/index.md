@@ -19,7 +19,6 @@ related_posts:
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "ai-driven-testing-best-practices"
   - "azul-and-jetbrains-collaborate-to-enhance-runtime-performance-for-kotlin-workloads"
-enlighterjs: true
 frozen: false
 ---
 

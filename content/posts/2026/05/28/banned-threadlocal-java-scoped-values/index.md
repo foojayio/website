@@ -18,7 +18,6 @@ related_posts:
   - "foojay-podcast-64"
   - "foojay-podcast-92"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

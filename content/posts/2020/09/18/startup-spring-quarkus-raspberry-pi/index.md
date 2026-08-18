@@ -17,7 +17,6 @@ related_posts:
   - "optimizing-java-for-the-cloud-native-era-with-quarkus"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "electronics-quarkus-qute-on-raspberry-pi"
-enlighterjs: true
 frozen: false
 ---
 

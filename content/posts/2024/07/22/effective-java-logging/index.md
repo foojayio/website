@@ -16,7 +16,6 @@ related_posts:
   - "logging-best-practices-revisited"
   - "how-to-build-and-deploy-a-real-time-cloud-based-logging-system"
   - "system-logger"
-enlighterjs: true
 frozen: false
 ---
 

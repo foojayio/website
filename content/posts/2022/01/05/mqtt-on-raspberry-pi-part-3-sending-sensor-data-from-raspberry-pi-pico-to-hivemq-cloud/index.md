@@ -18,7 +18,6 @@ related_posts:
   - "mqtt-on-raspberry-pi-part-2-using-mqtt-and-raspberry-pi-to-visualize-sensor-data-on-a-tilesfx-dashboard"
   - "different-approaches-to-building-stateful-microservices-in-the-cloud-native-world"
   - "a-fresh-look-at-embedded-java"
-enlighterjs: true
 frozen: false
 ---
 

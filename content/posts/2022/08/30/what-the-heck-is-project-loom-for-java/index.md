@@ -17,7 +17,6 @@ related_posts:
   - "concurrency-in-java-and-how-it-compares-with-other-modern-programming-languages"
   - "demystifying-memory-management-in-modern-programming-languages"
   - "boxlang-v1-13-0-compatibility-concurrency-and-formatter-maturity"
-enlighterjs: true
 frozen: false
 ---
 

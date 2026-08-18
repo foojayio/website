@@ -17,7 +17,6 @@ related_posts:
   - "writing-a-profiler-from-scratch-the-profiling-loop"
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread"
-enlighterjs: true
 frozen: false
 ---
 

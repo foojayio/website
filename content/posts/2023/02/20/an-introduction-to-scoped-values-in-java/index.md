@@ -16,7 +16,6 @@ related_posts:
   - "for-the-record"
   - "7-reasons-why-after-26-years-java-still-makes-sense"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

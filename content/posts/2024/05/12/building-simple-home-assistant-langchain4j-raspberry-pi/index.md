@@ -17,7 +17,6 @@ related_posts:
   - "quick-start-with-machine-learning-in-java"
   - "predicting-secure-java-projects-on-maven-central"
   - "boxlang-ai-deep-dive-part-6-of-7-memory-systems-rag-building-ai-that-remembers"
-enlighterjs: true
 frozen: false
 ---
 

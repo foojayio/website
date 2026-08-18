@@ -17,7 +17,6 @@ related_posts:
   - "ap-loader-a-new-way-to-use-and-embed-async-profiler"
   - "a-short-primer-on-java-debugging-internals"
   - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
-enlighterjs: true
 frozen: false
 ---
 

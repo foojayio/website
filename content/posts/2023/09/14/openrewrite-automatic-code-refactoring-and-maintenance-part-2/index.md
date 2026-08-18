@@ -16,7 +16,6 @@ related_posts:
   - "we-all-grow-older-but-do-our-projects-really-have-to-openrewrite"
   - "how-to-upgrade-to-jakarta-ee-10-and-glassfish-7-its-much-easier-than-you-think"
   - "jurassic-jdk-migrate-or-extinct"
-enlighterjs: true
 frozen: false
 ---
 

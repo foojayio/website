@@ -16,7 +16,6 @@ related_posts:
   - "book-review-practical-design-patterns-for-java-developers"
   - "foojay-podcast-14"
   - "where-production-policy-belongs-building-eliya-in-public"
-enlighterjs: true
 frozen: false
 ---
 

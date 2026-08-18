@@ -17,7 +17,6 @@ related_posts:
   - "agents-meet-databases-the-future-of-agentic-architectures"
   - "atlas-online-archive-efficiently-manage-the-data-lifecycle"
   - "atlas-searching-with-the-java-driver"
-enlighterjs: true
 frozen: false
 ---
 

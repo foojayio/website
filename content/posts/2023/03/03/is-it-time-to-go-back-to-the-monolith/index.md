@@ -18,7 +18,6 @@ related_posts:
   - "remote-debugging-dangers-and-pitfalls"
   - "memory-debugging-a-deep-level-of-insight"
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
-enlighterjs: true
 frozen: false
 ---
 

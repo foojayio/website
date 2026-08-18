@@ -15,7 +15,6 @@ related_posts:
   - "openjdk-19-released"
   - "what-the-heck-is-project-loom-for-java"
   - "what-can-we-expect-in-openjdk-19"
-enlighterjs: true
 frozen: false
 ---
 

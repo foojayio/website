@@ -12,7 +12,6 @@ categories:
   - "JDK Flight Recorder"
 tags:
 related_posts:
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "creating-mobile-apps-with-javafx-part-2"
   - "virtual-foojay-openjdk-17-jug-tour"
   - "wordish-with-javafx-part-2"
-enlighterjs: true
 frozen: false
 ---
 

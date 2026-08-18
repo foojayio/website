@@ -17,7 +17,6 @@ related_posts:
   - "building-a-real-time-ai-fraud-detection-system-with-spring-kafka-and-mongodb"
   - "building-a-spring-boot-crud-application-using-mongodbs-relational-migrator"
   - "building-an-ai-semantic-movie-recommender-with-vector-search"
-enlighterjs: true
 frozen: false
 ---
 

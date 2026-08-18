@@ -16,7 +16,6 @@ related_posts:
   - "java-23-has-arrived-and-it-brings-a-truckload-of-changes"
   - "java-22-is-here-and-its-ready-to-rock"
   - "java-21-is-available-today-and-its-quite-the-update"
-enlighterjs: true
 frozen: false
 ---
 

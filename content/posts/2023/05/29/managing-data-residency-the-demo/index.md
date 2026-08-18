@@ -18,7 +18,6 @@ related_posts:
   - "a-list-of-cache-providers"
   - "annotation-free-spring"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

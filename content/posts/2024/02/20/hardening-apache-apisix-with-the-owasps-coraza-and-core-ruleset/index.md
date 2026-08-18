@@ -16,7 +16,6 @@ related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "apache-apisix-loves-rust"
-enlighterjs: true
 frozen: false
 ---
 

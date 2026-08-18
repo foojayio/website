@@ -17,7 +17,6 @@ related_posts:
   - "6-considerations-when-building-high-performance-java-microservices-with-eda"
   - "automatically-creating-microservices-architecture-diagrams"
   - "learn-how-to-develop-event-driven-architectures"
-enlighterjs: true
 frozen: false
 ---
 

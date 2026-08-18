@@ -16,7 +16,6 @@ related_posts:
   - "jurassic-jdk-migrate-or-extinct"
   - "quarkus-unpacked-insights-from-the-foojay-podcast"
   - "your-tls-stack-is-lying-about-zero-copy"
-enlighterjs: true
 frozen: false
 ---
 

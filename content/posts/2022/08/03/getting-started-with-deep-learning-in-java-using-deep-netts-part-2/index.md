@@ -16,7 +16,6 @@ related_posts:
   - "getting-started-with-deep-learning-in-java-using-deep-netts"
   - "deep-learning-in-java-for-nuclear-physics-using-deep-netts"
   - "deep-learning-in-java-for-drug-discovery"
-enlighterjs: true
 frozen: false
 ---
 

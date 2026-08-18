@@ -17,7 +17,6 @@ related_posts:
   - "exposed-kotlin-orm-complete-guide"
   - "jc-ai-newsletter-15"
   - "jc-ai-newsletter-13"
-enlighterjs: true
 frozen: false
 ---
 

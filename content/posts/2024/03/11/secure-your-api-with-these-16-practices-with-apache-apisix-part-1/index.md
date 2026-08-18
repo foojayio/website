@@ -17,7 +17,6 @@ related_posts:
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "canary-releases-with-apache-apisix"
   - "free-tier-api-with-apache-apisix"
-enlighterjs: true
 frozen: false
 ---
 

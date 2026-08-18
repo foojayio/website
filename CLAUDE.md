@@ -5,6 +5,29 @@ scaffolded to run in parallel with the live WordPress site during a
 trial/transition period before cutover. If you're picking this up fresh in
 IntelliJ's terminal, read this before making changes.
 
+## The goal that outranks the others
+
+**Publishing a post has to stay effortless for the author.** Contributors send
+posts as pull requests (see `CONTRIBUTING.md`); most of them write Java, not
+Hugo, and they should be able to open a file, write Markdown, and be done.
+Every flag, frontmatter key, naming rule or manual step is a tax on that, and a
+thing an author can get wrong or forget.
+
+So **validate every change against this**, and prefer, in order:
+
+1. **Derive it.** If the build can work it out from the content, it must —
+   don't ask the author. The layout detects code blocks in the rendered page
+   instead of reading an `enlighterjs:` flag; sponsor article counts and
+   "Topics covered" are computed from `authors:` rather than stored.
+2. **Default it.** If it can't be derived, pick the right default and let the
+   rare case override.
+3. **Ask for it.** Only when the answer genuinely lives in the author's head
+   (`title`, `related_posts`, a sponsor's `authors:` list).
+
+A flag that is always set to the same value is not configuration, it's a
+chore — delete it. When a knob does have to exist, `ValidateFrontmatter.java`
+should catch a mistake at PR time rather than letting it fail silently.
+
 ## What exists so far
 
 - **Hugo skeleton**: `hugo.toml`, `themes/foojay/` (layouts + `static/css/style.css`),
@@ -270,12 +293,22 @@ IntelliJ's terminal, read this before making changes.
   on purpose — the hook returns its own HTML. Storage and presentation are
   separated so contributors write Markdown and swapping the highlighter later
   means editing that one file rather than reprocessing 1000+ posts. The
-  render hook maps fence tags to EnlighterJS's 53 languages and degrades
-  anything unrecognised (yaml, xml, html, …) to `generic`, exactly as the WP
-  markup did. `baseof.html` loads the partial when the *rendered* page
-  contains an EnlighterJS block, so an author can't ship a post whose code
-  silently isn't highlighted by forgetting an `enlighterjs: true` flag (the
-  flag is still honoured). `HtmlToMarkdown.codeFence`/`fenceLanguage` emit
+  render hook maps fence tags to the 57 languages in the **vendored** bundle
+  and degrades anything unrecognised to `generic`. That list is derived by
+  reading `static/vendor/enlighterjs/enlighterjs.min.js`, not from docs — an
+  earlier hand-written version omitted `xml`, `yaml`, `visualbasic` and
+  `verilog`, silently rendering 592 blocks (`yaml` 266, `xml`/`html` 322, `vb`
+  4) as plain `generic`. `html` is a declared alias of `xml` and `vb` of
+  `visualbasic`, so the hook aliases those to the canonical name. Re-derive the
+  list from the bundle if it is ever updated. `baseof.html` loads the partial when the *rendered* page
+  contains an EnlighterJS block. **There is no `enlighterjs:` frontmatter flag**
+  — it was removed (1090 files) once detection covered every case: an author
+  writes a fence and highlighting happens. Removing it beat defaulting it to
+  `true`, which would have pulled 144 KB of JS+CSS onto the 1477 pages with no
+  code at all; it also stopped 4 posts loading the highlighter for nothing (they
+  carried the flag but have only inline backticks, which EnlighterJS no longer
+  touches). Verified by rebuilding — byte-identical output apart from those 4.
+  Don't reintroduce a flag for this. `HtmlToMarkdown.codeFence`/`fenceLanguage` emit
   fences from the conversion scripts, so a re-scrape produces the same shape;
   `MigrateEnlighterToFences.java` above cleans up anything that slips through.
   Don't reintroduce raw `<pre class="EnlighterJSRAW">` into `content/`.
@@ -316,6 +349,18 @@ IntelliJ's terminal, read this before making changes.
   (Redis shows 11 articles here vs 1 there) — author-based attribution is
   broader than whatever WP was doing. That's the intended semantics; if a
   sponsor should own fewer posts, narrow its `authors:` list.
+- **Galleries: raw WP HTML for migrated posts, `{{< gallery >}}` for new ones.**
+  55 migrated posts carry WordPress gallery markup, preserved verbatim by
+  `SELECTOR_PRESERVE` (two shapes: modern nested `<figure>`s, and 15 posts using
+  the older `<ul class="blocks-gallery-grid">`, which had **no CSS at all** and
+  rendered as a bulleted list until it was added). Nobody can be asked to type
+  that markup, so `themes/foojay/layouts/shortcodes/gallery.html` is what an
+  author uses: `{{< gallery "a.png" "b.png" >}}`, or
+  `{{< gallery images="a.png|caption, b.png|caption" cols="2" >}}`. `cols` is a
+  maximum — the CSS grid auto-fits to fewer columns on narrow screens. Filenames
+  go through `resource-url.html`, so a bare name means the file next to
+  `index.md`. No lightbox wiring needed: `static/js/lightbox.js` binds every
+  `.prose img`.
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT

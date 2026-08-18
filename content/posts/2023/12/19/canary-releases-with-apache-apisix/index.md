@@ -16,7 +16,6 @@ related_posts:
   - "chopping-monolith"
   - "how-to-beautify-your-github-repo"
   - "dry-your-apache-apisix-config"
-enlighterjs: true
 frozen: false
 ---
 

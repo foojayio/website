@@ -21,7 +21,6 @@ related_posts:
   - "journeys-in-java-level-7-externalize-microservice-configuration"
   - "journeys-in-java-level-6-build-a-neo4j-microservice"
   - "journeys-in-java-level-10-service-discovery-with-eureka"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "building-javafx-with-gradle"
   - "javafx-templates-for-desktop-applications"
   - "creating-a-javafx-world-clock-from-scratch-part-3"
-enlighterjs: true
 frozen: false
 ---
 

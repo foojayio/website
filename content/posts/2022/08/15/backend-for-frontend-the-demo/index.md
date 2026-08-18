@@ -16,7 +16,6 @@ related_posts:
   - "a-simple-service-with-spring-boot"
   - "annotation-free-spring"
   - "service-discovery-client-apache-apisix"
-enlighterjs: true
 frozen: false
 ---
 

@@ -18,7 +18,6 @@ related_posts:
   - "faster-maven-builds-part-2"
   - "fixing-vulnerabilities-in-maven-projects"
   - "enterprise-java-quality-gates-ai"
-enlighterjs: true
 frozen: false
 ---
 

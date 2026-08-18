@@ -15,7 +15,6 @@ related_posts:
   - "custom-controls-in-javafx-part-i"
   - "creating-a-javafx-world-clock-from-scratch-part-1"
   - "will-openjfx-be-merged-into-openjdk-it-would-be-a-perfect-match-with-java-on-mobile"
-enlighterjs: true
 frozen: false
 ---
 

@@ -14,7 +14,6 @@ related_posts:
   - "5-things-you-probably-didnt-know-about-java-concurrency"
   - "5-more-reasons-to-choose-apache-pulsar-over-apache-kafka"
   - "5-great-reasons-to-use-jooq"
-enlighterjs: true
 frozen: false
 ---
 

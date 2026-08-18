@@ -21,7 +21,6 @@ related_posts:
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
   - "boxlang-1-14-0-navigate-anything-jsonpath-comes-to-boxlangs-datanavigator"
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
-enlighterjs: true
 frozen: false
 ---
 

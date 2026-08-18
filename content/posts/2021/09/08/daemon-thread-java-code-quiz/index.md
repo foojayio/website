@@ -15,7 +15,6 @@ related_posts:
   - "eight-debugging-tips-for-intellijidea-users-you-never-knew-existed"
   - "a-closer-look-at-jfr-streaming"
   - "jedi-lambda-join-java-challenge"
-enlighterjs: true
 frozen: false
 ---
 

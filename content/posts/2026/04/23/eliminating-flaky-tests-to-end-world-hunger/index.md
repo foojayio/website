@@ -20,7 +20,6 @@ related_posts:
   - "foojay-podcast-52"
   - "five-ways-to-use-gradle-enterprise-to-identify-and-manage-flaky-tests"
   - "seven-reasons-you-should-not-ignore-flaky-tests"
-enlighterjs: true
 frozen: false
 ---
 

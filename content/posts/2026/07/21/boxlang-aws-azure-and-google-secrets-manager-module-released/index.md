@@ -21,7 +21,6 @@ related_posts:
   - "introducing-bx-jwt-enterprise-grade-json-web-tokens-for-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

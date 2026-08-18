@@ -17,7 +17,6 @@ categories:
   - "Use Cases"
 tags:
 related_posts:
-enlighterjs: true
 frozen: false
 ---
 

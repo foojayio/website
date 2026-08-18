@@ -17,7 +17,6 @@ related_posts:
   - "benchmark-jdbc-connectors-and-java-21-virtual-threads"
   - "revolutionising-java-collections-the-advent-of-sequenced-collections-in-java-21"
   - "sonarqube-part-4-ai-code-assurance"
-enlighterjs: true
 frozen: false
 ---
 

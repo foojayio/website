@@ -893,6 +893,32 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
 .prose .wp-block-gallery { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; padding: 0; list-style: none; }
 .prose .wp-block-gallery figure { flex: 1 1 45%; margin: 0; }
 .prose .wp-block-gallery img { width: 100%; height: auto; }
+/* Older WordPress galleries nest a <ul class="blocks-gallery-grid"> inside the
+   .wp-block-gallery figure, so the rule above hits the <ul> rather than the
+   images and those 15 posts rendered as a plain bulleted list. Flatten the list
+   and let its items be the grid cells. */
+.prose .blocks-gallery-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; width: 100%; margin: 0; padding: 0; list-style: none; }
+.prose .blocks-gallery-item { flex: 1 1 45%; margin: 0; list-style: none; }
+.prose .blocks-gallery-item figure { flex: none; width: 100%; }
+.prose .blocks-gallery-caption { flex-basis: 100%; }
+
+/* --- {{< gallery >}} shortcode (layouts/shortcodes/gallery.html) ------------
+   What an author writing a NEW post uses. auto-fit means --gallery-cols is a
+   maximum: cells reflow to fewer columns as the container narrows, so no media
+   query is needed and a 3-column gallery becomes 1 column on a phone. */
+.prose .gallery {
+  --gallery-gap: 0.8rem;
+  display: grid;
+  gap: var(--gallery-gap);
+  margin: 1.5rem 0;
+  /* Each cell is at least its exact 1/cols share, so the grid never exceeds
+     --gallery-cols columns; the 180px floor makes auto-fit drop to fewer
+     columns on a narrow screen instead of squashing. */
+  grid-template-columns: repeat(auto-fit, minmax(max(180px,
+      calc((100% - (var(--gallery-cols) - 1) * var(--gallery-gap)) / var(--gallery-cols))), 1fr));
+}
+.prose .gallery__item { margin: 0; }
+.prose .gallery__item img { width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose figure::after { content: ""; display: block; clear: both; }
 
 /* ---------------------------------------------------------------- search --

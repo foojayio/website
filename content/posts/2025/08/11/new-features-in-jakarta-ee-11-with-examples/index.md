@@ -18,7 +18,6 @@ related_posts:
   - "are-java-jakarta-ee-application-servers-heavy"
   - "a-simple-service-with-spring-boot"
   - "book-review-persistence-best-practices-for-java-applications"
-enlighterjs: true
 frozen: false
 ---
 

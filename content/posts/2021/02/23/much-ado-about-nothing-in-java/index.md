@@ -14,7 +14,6 @@ related_posts:
   - "avoiding-nullpointerexception"
   - "null-safety-kotlin-vs-java"
   - "handling-null-optional-and-nullable-types"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "how-to-secure-your-web-apps-with-an-api-gateway"
-enlighterjs: true
 frozen: false
 ---
 

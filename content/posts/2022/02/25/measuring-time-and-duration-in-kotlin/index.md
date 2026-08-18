@@ -16,7 +16,6 @@ related_posts:
   - "building-command-line-interfaces-with-kotlin-using-picocli"
   - "build-and-test-non-blocking-web-applications-with-spring-webflux-kotlin-and-coroutines"
   - "debug-unresponsive-apps"
-enlighterjs: true
 frozen: false
 ---
 

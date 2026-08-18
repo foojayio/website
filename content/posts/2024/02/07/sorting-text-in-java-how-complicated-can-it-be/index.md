@@ -16,7 +16,6 @@ related_posts:
   - "playing-practically-with-stream-api"
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
   - "confusing-java-strings"
-enlighterjs: true
 frozen: false
 ---
 

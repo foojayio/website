@@ -1,0 +1,56 @@
+{{- /* Image gallery -- a responsive grid of co-located images.
+
+       WHY THIS EXISTS. 55 migrated posts contain galleries, but only as raw
+       WordPress block HTML (<figure class="wp-block-gallery"> with nested
+       figures, or the older <ul class="blocks-gallery-grid">). That markup is
+       preserved verbatim by HtmlToMarkdown's SELECTOR_PRESERVE so those posts
+       keep working, but nobody can be asked to TYPE it -- which left an author
+       writing a new post with no way to make a gallery at all. This is that way.
+
+       USAGE -- positional, for the common case:
+           {{< gallery "one.png" "two.png" "three.png" >}}
+
+       Or named, when you want to set the column count or add captions
+       (a `|` separates a filename from its caption):
+           {{< gallery images="one.png|First shot, two.png|Second shot" cols="3" >}}
+
+       Filenames resolve through resource-url.html, so a bare name means "the
+       file sitting next to index.md in this post's folder" -- the same rule as
+       a plain Markdown image. Full URLs and /static paths work too.
+
+       cols is a MAXIMUM, not a fixed count: the grid uses auto-fit, so the
+       images reflow to fewer columns on a narrow screen. Default 3.
+
+       Images are click-to-enlarge for free -- static/js/lightbox.js binds every
+       `.prose img`, so no per-image markup is needed here. */ -}}
+
+{{- $cols := int (.Get "cols" | default 3) -}}
+{{- if or (lt $cols 1) (gt $cols 6) }}{{ $cols = 3 }}{{ end -}}
+
+{{- /* Named `images="a.png, b.png"` wins; otherwise take the positional args. */ -}}
+{{- $items := slice -}}
+{{- with .Get "images" -}}
+  {{- range split . "," -}}
+    {{- with trim . " " }}{{ $items = $items | append . }}{{ end -}}
+  {{- end -}}
+{{- else -}}
+  {{- range .Params }}{{ with trim . " " }}{{ $items = $items | append . }}{{ end }}{{ end -}}
+{{- end -}}
+
+{{- if $items -}}
+<div class="gallery" style="--gallery-cols: {{ $cols }}">
+  {{- range $items -}}
+    {{- $parts := split . "|" -}}
+    {{- $file := trim (index $parts 0) " " -}}
+    {{- $caption := "" -}}
+    {{- if gt (len $parts) 1 }}{{ $caption = trim (index $parts 1) " " }}{{ end -}}
+    {{- $src := partial "resource-url.html" (dict "page" $.Page "src" $file) -}}
+    <figure class="gallery__item">
+      <img src="{{ $src }}" alt="{{ $caption }}" loading="lazy" class="is-zoomable">
+      {{- with $caption }}<figcaption class="wp-element-caption">{{ . }}</figcaption>{{ end -}}
+    </figure>
+  {{- end -}}
+</div>
+{{- else -}}
+  {{- errorf "gallery shortcode in %q: no images given. Use {{< gallery \"a.png\" \"b.png\" >}} or images=\"a.png,b.png\"" $.Page.File.Path -}}
+{{- end -}}

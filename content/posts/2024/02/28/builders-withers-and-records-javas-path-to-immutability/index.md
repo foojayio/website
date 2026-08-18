@@ -16,7 +16,6 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "12-lessons-learned-from-doing-the-one-billion-row-challenge"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "authoring-an-openrewrite-recipe"
   - "foojay-podcast-12"
   - "foojay-podcast-19"
-enlighterjs: true
 frozen: false
 ---
 

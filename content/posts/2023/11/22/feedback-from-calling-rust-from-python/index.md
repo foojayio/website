@@ -17,7 +17,6 @@ related_posts:
   - "apache-apisix-loves-rust"
   - "java-panama-polyglot-rust-part-4"
   - "research-measuring-energy-consumption-in-programming-languages-for-ai-applications"
-enlighterjs: true
 frozen: false
 ---
 

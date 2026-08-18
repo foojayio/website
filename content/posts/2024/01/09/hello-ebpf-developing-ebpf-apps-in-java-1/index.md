@@ -15,7 +15,6 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "class-loader-hierarchies"
   - "hello-ebpf-xdp-based-packet-filter-9"
-enlighterjs: true
 frozen: false
 ---
 

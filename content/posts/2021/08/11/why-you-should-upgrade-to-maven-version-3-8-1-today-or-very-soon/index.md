@@ -16,7 +16,6 @@ related_posts:
   - "understanding-apache-maven-part-1-the-basics"
   - "understanding-apache-maven-part-2-pom-hierarchy"
   - "understanding-apache-maven-part-3-maven-coordinates-pom-inheritance"
-enlighterjs: true
 frozen: false
 ---
 

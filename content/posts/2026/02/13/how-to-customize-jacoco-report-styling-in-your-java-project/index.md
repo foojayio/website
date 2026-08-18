@@ -16,7 +16,6 @@ related_posts:
   - "pitest-do-you-test-your-tests"
   - "how-to-find-dead-code-in-your-java-services"
   - "embracing-java-17-heres-what-we-learned-at-picnic"
-enlighterjs: true
 frozen: false
 ---
 

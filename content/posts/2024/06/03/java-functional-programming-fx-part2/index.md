@@ -18,7 +18,6 @@ related_posts:
   - "java-functional-programming"
   - "spring-internals-of-restclient"
   - "openrewrite-migrate-to-spring-boot-3-2"
-enlighterjs: true
 frozen: false
 ---
 

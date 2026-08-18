@@ -16,7 +16,6 @@ related_posts:
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
   - "building-reactive-java-applications-with-spring-framework"
   - "how-is-leyden-improving-java-performance-part-3-of-3"
-enlighterjs: true
 frozen: false
 ---
 

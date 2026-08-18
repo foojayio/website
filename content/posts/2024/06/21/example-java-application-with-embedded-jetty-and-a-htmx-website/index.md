@@ -16,7 +16,6 @@ related_posts:
   - "book-review-modern-frontends-with-htmx"
   - "foojay-podcast-41"
   - "foojay-podcast-36"
-enlighterjs: true
 frozen: false
 ---
 

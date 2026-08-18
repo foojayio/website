@@ -15,7 +15,6 @@ related_posts:
   - "asyncgetcalltrace-reworked-frame-by-frame-with-an-iterative-touch"
   - "book-review-practical-design-patterns-for-java-developers"
   - "who-killed-the-jvm-attaching-a-debugger-twice"
-enlighterjs: true
 frozen: false
 ---
 

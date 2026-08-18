@@ -19,7 +19,6 @@ related_posts:
   - "getting-more-mileage-out-of-kafka-openjdk-vs-azul-prime"
   - "analyzing-and-tuning-warm-up-of-the-jvm-with-azul-zulu-prime-builds-of-openjdk"
   - "explained-memory-allocation-pacing-in-azul-zulu-prime-builds-of-openjdk"
-enlighterjs: true
 frozen: false
 ---
 

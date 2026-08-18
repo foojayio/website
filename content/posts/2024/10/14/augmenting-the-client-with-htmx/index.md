@@ -15,7 +15,6 @@ related_posts:
   - "a-short-history-of-ajax-and-ssr"
   - "augmenting-the-client-with-vue-js"
   - "augmenting-the-client-with-alpine-js"
-enlighterjs: true
 frozen: false
 ---
 

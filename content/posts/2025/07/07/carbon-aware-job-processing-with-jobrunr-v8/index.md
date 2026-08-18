@@ -16,7 +16,6 @@ related_posts:
   - "task-schedulers-in-java-modern-alternatives-to-quartz-scheduler"
   - "foojay-podcast-60"
   - "boxlang-aws-azure-and-google-secrets-manager-module-released"
-enlighterjs: true
 frozen: false
 ---
 

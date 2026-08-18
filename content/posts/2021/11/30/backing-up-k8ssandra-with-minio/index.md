@@ -18,7 +18,6 @@ related_posts:
   - "k8ssandra-production-ready-platform-for-running-apache-cassandra-on-kubernetes"
   - "connect-stateful-workloads-across-kubernetes-clusters"
   - "running-your-database-on-openshift-and-codeready-containers"
-enlighterjs: true
 frozen: false
 ---
 

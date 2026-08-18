@@ -19,7 +19,6 @@ related_posts:
   - "real-world-stream-collector"
   - "a-short-history-of-ajax-and-ssr"
   - "poor-mans-api"
-enlighterjs: true
 frozen: false
 ---
 

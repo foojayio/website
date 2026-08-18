@@ -19,7 +19,6 @@ related_posts:
   - "metaphorical-programming-gossips-event-bus"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "using-the-raspberry-pi-sense-hat-with-pi4j-drivers"
-enlighterjs: true
 frozen: false
 ---
 

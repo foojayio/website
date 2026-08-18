@@ -17,7 +17,6 @@ related_posts:
   - "light-up-your-christmas-tree-with-java-and-raspberry-pi"
   - "foojay-podcast-2"
   - "blink-a-led-on-raspberry-pi-with-vaadin"
-enlighterjs: true
 frozen: false
 ---
 

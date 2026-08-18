@@ -18,7 +18,6 @@ related_posts:
   - "server-side-rendering-with-spring-boot"
   - "augmenting-the-client-with-vue-js"
   - "web-caching-server"
-enlighterjs: true
 frozen: false
 ---
 

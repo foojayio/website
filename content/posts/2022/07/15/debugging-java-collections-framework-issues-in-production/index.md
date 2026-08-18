@@ -18,7 +18,6 @@ related_posts:
   - "debugging-java-equals-hashcode-performance-in-production"
   - "debugging-race-conditions-in-production"
   - "get-started-with-allocation-profiling"
-enlighterjs: true
 frozen: false
 ---
 

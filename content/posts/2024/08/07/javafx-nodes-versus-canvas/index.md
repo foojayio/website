@@ -16,7 +16,6 @@ related_posts:
   - "a-javafx-app-on-zulufx-in-60-seconds"
   - "book-review-learn-javafx-game-and-app-development-with-fxgl-17"
   - "book-review-frontend-development-with-javafx-and-kotlin"
-enlighterjs: true
 frozen: false
 ---
 

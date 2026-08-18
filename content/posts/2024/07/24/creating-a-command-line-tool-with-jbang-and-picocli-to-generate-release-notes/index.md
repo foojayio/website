@@ -15,7 +15,6 @@ related_posts:
   - "charting-the-course-of-java-an-insightful-conversation-with-java-champion-sebastian-daschner"
   - "competing-for-the-crown-a-friendly-debate-on-the-future-of-java-and-kotlin-on-foojay-io-today"
   - "java-for-scripting"
-enlighterjs: true
 frozen: false
 ---
 

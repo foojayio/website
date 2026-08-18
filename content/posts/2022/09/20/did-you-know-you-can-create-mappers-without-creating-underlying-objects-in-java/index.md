@@ -16,7 +16,6 @@ related_posts:
   - "peter-lawrey-latency-performance"
   - "the-unix-philosophy-for-low-latency"
   - "7-functional-programming-techniques-in-java-a-primer"
-enlighterjs: true
 frozen: false
 ---
 

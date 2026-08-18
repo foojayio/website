@@ -16,7 +16,6 @@ related_posts:
   - "an-introduction-to-scoped-values-in-java"
   - "thinking-about-massive-throughput-meet-virtual-threads"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

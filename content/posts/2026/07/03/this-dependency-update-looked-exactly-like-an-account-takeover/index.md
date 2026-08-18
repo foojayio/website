@@ -17,7 +17,6 @@ related_posts:
   - "how-to-release-a-java-module-with-jreleaser-to-maven-central-with-github-actions"
   - "where-production-policy-belongs-building-eliya-in-public"
   - "class-loader-hierarchies"
-enlighterjs: true
 frozen: false
 ---
 

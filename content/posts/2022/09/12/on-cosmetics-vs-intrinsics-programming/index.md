@@ -16,7 +16,6 @@ related_posts:
   - "blockhound-how-it-works"
   - "chopping-monolith"
   - "foojay-podcast-20"
-enlighterjs: true
 frozen: false
 ---
 

@@ -15,7 +15,6 @@ related_posts:
   - "effective-java-logging"
   - "calling-microservices-in-java"
   - "smarter-logging-in-spring-boot-with-aop"
-enlighterjs: true
 frozen: false
 ---
 

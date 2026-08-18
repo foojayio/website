@@ -12,7 +12,6 @@ categories:
   - "Books"
 tags:
 related_posts:
-enlighterjs: true
 frozen: false
 ---
 

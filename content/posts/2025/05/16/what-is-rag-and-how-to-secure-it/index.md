@@ -18,7 +18,6 @@ related_posts:
   - "log4shell-critical-log4j-rce-vulnerabilty-update-to-version-2-15-0"
   - "minimizing-security-risks-in-java-application-development"
   - "foojay-podcast-7"
-enlighterjs: true
 frozen: false
 ---
 

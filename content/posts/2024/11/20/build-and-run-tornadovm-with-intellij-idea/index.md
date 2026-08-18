@@ -17,7 +17,6 @@ related_posts:
   - "a-flavour-of-tornadovm-on-apple-m1-pro"
   - "code-interoperability-mode-for-opencl-portability-across-various-programming-languages-with-tornadovm"
   - "tornadoinsight-compatibility-with-tornadovm-sdk-2-0-configuration-guide"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "real-world-stream-collector"
   - "comparison-fault-tolerance-libraries"
   - "leverage-the-richness-of-http-status-codes"
-enlighterjs: true
 frozen: false
 ---
 

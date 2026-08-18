@@ -16,7 +16,6 @@ related_posts:
   - "immutable-records"
   - "automatically-creating-microservices-architecture-diagrams"
   - "become-a-better-java-developer-19-tips-for-staying-ahead-in-2024"
-enlighterjs: true
 frozen: false
 ---
 

@@ -16,7 +16,6 @@ related_posts:
   - "apache-apisix-north-america-tour"
   - "apache-apisix-loves-rust"
   - "implementing-the-idempotency-key-specification-on-apache-apisix"
-enlighterjs: true
 frozen: false
 ---
 

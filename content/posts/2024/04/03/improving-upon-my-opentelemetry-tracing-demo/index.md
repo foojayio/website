@@ -16,7 +16,6 @@ related_posts:
   - "beyond-pass-fail-a-modern-approach-to-java-integration-testing"
   - "end-to-end-tracing-opentelemetry"
   - "exploring-the-opentelemetry-collector"
-enlighterjs: true
 frozen: false
 ---
 

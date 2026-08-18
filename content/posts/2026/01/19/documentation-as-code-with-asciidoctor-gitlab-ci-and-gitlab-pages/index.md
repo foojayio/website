@@ -14,7 +14,6 @@ related_posts:
   - "gitlab-pages-preview"
   - "foojay-podcast-26"
   - "gitlab-continuous-deployment-one-stop-shop"
-enlighterjs: true
 frozen: false
 ---
 

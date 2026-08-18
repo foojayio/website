@@ -15,7 +15,6 @@ related_posts:
   - "new-book-practical-vaadin"
   - "vaadin-22-released-with-quarkus-support-and-stateless-fusion"
   - "delegation-vs-inheritance-in-graphical-user-interfaces"
-enlighterjs: true
 frozen: false
 ---
 

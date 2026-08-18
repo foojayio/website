@@ -15,7 +15,6 @@ related_posts:
   - "blink-a-led-on-raspberry-pi-with-vaadin"
   - "book-review-modern-frontends-with-htmx"
   - "build-web-apps-in-pure-java-with-vaadin-flow"
-enlighterjs: true
 frozen: false
 ---
 

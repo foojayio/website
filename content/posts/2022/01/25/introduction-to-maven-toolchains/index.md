@@ -15,7 +15,6 @@ related_posts:
   - "faster-maven-builds-1"
   - "understanding-apache-maven-part-1-the-basics"
   - "enterprise-java-quality-gates-ai"
-enlighterjs: true
 frozen: false
 ---
 

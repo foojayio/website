@@ -16,7 +16,6 @@ related_posts:
   - "vaadin-oauth2-and-keycloak"
   - "how-to-do-password-hashing-in-java-applications-the-right-way"
   - "quick-fire-java-java-after-log4j"
-enlighterjs: true
 frozen: false
 ---
 

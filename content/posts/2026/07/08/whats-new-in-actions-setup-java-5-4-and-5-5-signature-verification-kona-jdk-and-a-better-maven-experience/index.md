@@ -15,7 +15,6 @@ related_posts:
   - "a-better-way-to-use-gradle-with-github-actions"
   - "building-secure-ci-cd-pipelines-with-github-actions-for-your-java-application"
   - "devops-for-developers-continuous-integration-github-actions-and-sonar-cloud"
-enlighterjs: true
 frozen: false
 ---
 

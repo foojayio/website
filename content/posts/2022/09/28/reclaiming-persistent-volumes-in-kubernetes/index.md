@@ -21,7 +21,6 @@ related_posts:
   - "kubernetes-gateway-api"
   - "apisix-api-gateway"
   - "aggregation-optimization-in-mongodb-unnecessary-unwinds-part-2"
-enlighterjs: true
 frozen: false
 ---
 

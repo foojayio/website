@@ -19,7 +19,6 @@ related_posts:
   - "crossing-the-river-styx-spring-boot-3-5-and-the-zombie-dependency-problem"
   - "prevent-ldap-injection-in-java-with-springboot"
   - "ai-found-the-bugs-whos-patching-your-eol-java-code"
-enlighterjs: true
 frozen: false
 ---
 

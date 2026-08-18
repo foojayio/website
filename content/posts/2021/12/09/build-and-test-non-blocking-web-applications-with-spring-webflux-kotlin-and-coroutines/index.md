@@ -16,7 +16,6 @@ related_posts:
   - "kotlin-delegation"
   - "a-simple-service-with-spring-boot"
   - "demystifying-memory-management-in-modern-programming-languages"
-enlighterjs: true
 frozen: false
 ---
 

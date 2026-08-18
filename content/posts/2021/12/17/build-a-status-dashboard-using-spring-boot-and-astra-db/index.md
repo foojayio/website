@@ -19,7 +19,6 @@ related_posts:
   - "a-case-for-databases-on-kubernetes-from-a-former-skeptic"
   - "adelphi-apache-cassandra-testing-goes-cloud-native"
   - "tombstones-and-ghost-data-dont-have-to-be-scary"
-enlighterjs: true
 frozen: false
 ---
 

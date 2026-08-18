@@ -16,7 +16,6 @@ related_posts:
   - "7-functional-programming-techniques-in-java-a-primer"
   - "7-ways-to-contribute-to-openjdk"
   - "effective-java-logging"
-enlighterjs: true
 frozen: false
 ---
 

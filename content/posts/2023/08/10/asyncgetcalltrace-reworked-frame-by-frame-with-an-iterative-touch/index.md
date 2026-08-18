@@ -18,7 +18,6 @@ related_posts:
   - "class-loader-hierarchies"
   - "foojay-podcast-14"
   - "validating-java-profiling-apis"
-enlighterjs: true
 frozen: false
 ---
 

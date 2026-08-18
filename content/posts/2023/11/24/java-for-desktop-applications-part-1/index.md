@@ -18,7 +18,6 @@ related_posts:
   - "state-jvm-desktop-frameworks-jetpack-compose-for-desktop"
   - "starting-docker-desktop-with-spring-boot"
   - "first-experiments-with-java-on-the-lattepanda-iota"
-enlighterjs: true
 frozen: false
 ---
 

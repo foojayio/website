@@ -16,7 +16,6 @@ related_posts:
   - "kubernetes-gateway-api"
   - "apisix-api-gateway"
   - "fearless-distroless"
-enlighterjs: true
 frozen: false
 ---
 

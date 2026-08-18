@@ -17,7 +17,6 @@ related_posts:
   - "create-a-crud-ui-in-pure-java"
   - "new-book-practical-vaadin"
   - "breaktime-tech-talks-ep39-why-embedding-models-should-match-advice-for-starting-a-blog"
-enlighterjs: true
 frozen: false
 ---
 

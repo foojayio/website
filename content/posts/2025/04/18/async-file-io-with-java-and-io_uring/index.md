@@ -18,7 +18,6 @@ related_posts:
   - "using-async-profiler-and-jattach-programmatically-with-ap-loader"
   - "asyncgetstacktrace-a-better-stack-trace-api-for-the-jvm"
   - "couldnt-we-just-use-asyncgetcalltrace-in-a-separate-thread"
-enlighterjs: true
 frozen: false
 ---
 

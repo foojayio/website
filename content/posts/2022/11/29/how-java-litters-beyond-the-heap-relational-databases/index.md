@@ -16,7 +16,6 @@ related_posts:
   - "how-java-litters-beyond-the-heap-part-3-solid-state-drives"
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "boxlang-1-14-0-query-transformers-take-full-control-of-your-query-results"
-enlighterjs: true
 frozen: false
 ---
 

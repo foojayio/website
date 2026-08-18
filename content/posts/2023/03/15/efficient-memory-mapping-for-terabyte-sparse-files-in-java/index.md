@@ -18,7 +18,6 @@ related_posts:
   - "how-object-reuse-can-reduce-latency-and-improve-performance"
   - "demystifying-jvm-memory-management"
   - "boxlang-1-15-0-released-blazing-fast-strings-runtime-portability-and-much-more"
-enlighterjs: true
 frozen: false
 ---
 

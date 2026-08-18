@@ -17,7 +17,6 @@ related_posts:
   - "ask-a-lille-dev-what-java-developers-really-think-about-quality-frameworks-communities-and-careers"
   - "challenge-yourself-with-application-observability-code-challenges"
   - "couch-to-fully-observed-code-with-spring-boot-3-2-micrometer-tracing-and-digma"
-enlighterjs: true
 frozen: false
 ---
 

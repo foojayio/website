@@ -19,7 +19,6 @@ related_posts:
   - "which-is-the-fastest-jvm-openjdk-or-graalvm"
   - "cross-platform-development-in-java-with-gluon-and-graalvm"
   - "why-i-moved-my-blog-to-rife2-after-23-years"
-enlighterjs: true
 frozen: false
 ---
 

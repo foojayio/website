@@ -17,7 +17,6 @@ related_posts:
   - "apisix-api-gateway"
   - "authenticate-with-openid-connect-and-apache-apisix"
   - "poor-mans-api"
-enlighterjs: true
 frozen: false
 ---
 

@@ -17,7 +17,6 @@ related_posts:
   - "java-thread-programming-part-1"
   - "java-thread-programming-part-2"
   - "virtual-thread-pinning-field-guide"
-enlighterjs: true
 frozen: false
 ---
 

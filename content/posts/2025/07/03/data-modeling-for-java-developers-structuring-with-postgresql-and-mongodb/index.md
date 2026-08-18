@@ -17,7 +17,6 @@ related_posts:
   - "java-virtual-threads-in-action-optimizing-mongodb-operation"
   - "understanding-bson-a-beginners-guide-to-mongodbs-data-format"
   - "clean-and-modular-java-a-hexagonal-architecture-approach"
-enlighterjs: true
 frozen: false
 ---
 

@@ -20,7 +20,6 @@ related_posts:
   - "spring-ai-how-to-write-genai-applications-with-java"
   - "jug-ph-1h-2024-meetups"
   - "spring-ai-agents-no-second-runtime"
-enlighterjs: true
 frozen: false
 ---
 

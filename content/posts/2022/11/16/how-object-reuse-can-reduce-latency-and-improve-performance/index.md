@@ -16,7 +16,6 @@ related_posts:
   - "did-you-know-you-can-create-mappers-without-creating-underlying-objects-in-java"
   - "creating-terabyte-sized-queues-with-low-latency"
   - "java-is-very-fast"
-enlighterjs: true
 frozen: false
 ---
 

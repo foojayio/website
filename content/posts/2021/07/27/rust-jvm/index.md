@@ -15,7 +15,6 @@ related_posts:
   - "the-try-block-in-rust"
   - "feedback-from-calling-rust-from-python"
   - "error-handling"
-enlighterjs: true
 frozen: false
 ---
 

@@ -19,7 +19,6 @@ related_posts:
   - "free-webinar-making-ai-useful-for-java-developers-in-real-applications-with-boxlang"
   - "introducing-skills-boxlang-io-the-open-agent-skills-ecosystem-for-boxlang-the-ortus-world"
   - "how-to-develop-ai-agents-using-boxlang-ai-a-practical-guide"
-enlighterjs: true
 frozen: false
 ---
 

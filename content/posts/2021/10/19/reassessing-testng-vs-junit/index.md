@@ -15,7 +15,6 @@ related_posts:
   - "java-testing-with-vs-code"
   - "towards-continuous-performance-regression-testing"
   - "avoiding-nullpointerexception"
-enlighterjs: true
 frozen: false
 ---
 

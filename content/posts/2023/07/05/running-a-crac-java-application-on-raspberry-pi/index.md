@@ -17,7 +17,6 @@ related_posts:
   - "how-to-run-a-java-application-with-crac-in-a-docker-container"
   - "introducing-the-openjdk-coordinated-restore-at-checkpoint-project"
   - "demo-application-with-crac-and-loading-data-in-memory"
-enlighterjs: true
 frozen: false
 ---
 

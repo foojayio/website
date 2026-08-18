@@ -17,7 +17,6 @@ related_posts:
   - "5-tips-to-create-secure-docker-images-for-java-applications"
   - "a-guide-to-creating-javafx-native-images"
   - "comparison-fault-tolerance-libraries"
-enlighterjs: true
 frozen: false
 ---
 

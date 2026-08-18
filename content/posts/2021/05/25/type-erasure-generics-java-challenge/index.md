@@ -15,7 +15,6 @@ related_posts:
   - "function-calculation-java-challenge"
   - "stream-limit-filter-java-challenge"
   - "neo-stream-search-java-challenge"
-enlighterjs: true
 frozen: false
 ---
 

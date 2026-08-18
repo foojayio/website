@@ -15,7 +15,6 @@ related_posts:
   - "two-million-java-developers-on-visual-studio-code-november-2022-update"
   - "java-on-azure-tooling-update-october-2022"
   - "java-on-azure-tooling-update-august-2022"
-enlighterjs: true
 frozen: false
 ---
 

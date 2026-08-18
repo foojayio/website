@@ -16,7 +16,6 @@ related_posts:
   - "load-testing-shoot-your-application-with-gatling"
   - "pitest-do-you-test-your-tests"
   - "am-i-testing-the-right-way"
-enlighterjs: true
 frozen: false
 ---
 
