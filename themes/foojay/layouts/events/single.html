@@ -1,38 +1,376 @@
 {{ define "main" }}
+{{/* /calendar/ -- the events calendar.
+
+     Everything on this page is derived from data/events.json (written by
+     scripts/FetchMeetupEvents.java, four times a day) joined to data/jugs.yaml
+     on the group's `jug` slug for the country. There is nothing to author: the
+     page file holds a one-line intro and this layout does the rest, the same
+     way /jugs/ and /java-champions/ work.
+
+     Two renderings of one set of events, and only one of them is content: the
+     agenda list below is server-rendered (so it is what Pagefind indexes and
+     what a reader without JavaScript gets), and the month grid is a
+     visualisation of the same events built client-side from the JSON island.
+     The toolbar starts `hidden` because every control on it is JS-only --
+     without the script the page is simply the agenda. */}}
+
+{{ $data := hugo.Data.events }}
+
+{{/* Join key: events.json's `jug` is a data/jugs.yaml slug -- verified, all 32
+     groups match -- which is where the country comes from. */}}
+{{ $jugBySlug := dict }}
+{{ range hugo.Data.jugs }}
+  {{ $jugBySlug = merge $jugBySlug (dict .slug .) }}
+{{ end }}
+
+{{/* Flatten groups -> events, and enrich each one with everything the grid,
+     the agenda and the detail dialog need, so neither the templates below nor
+     the JavaScript has to re-derive it. Times are formatted here, in the
+     event's OWN offset (that is what the JUG means by "19:00" and what Meetup
+     shows); rebuilding them from the ISO string in the browser would silently
+     restate them in the reader's zone instead. */}}
+{{ $events := slice }}
+{{ $errored := slice }}
+{{ range $g := $data.groups }}
+  {{ if $g.error }}
+    {{ $errored = $errored | append $g.name }}
+  {{ end }}
+  {{ $jug := index $jugBySlug $g.jug }}
+  {{ $country := "" }}
+  {{ with $jug }}{{ $country = .country | default "" }}{{ end }}
+  {{/* One hue per group, derived from its slug, so a JUG keeps the same dot
+       colour everywhere on the page without a colour ever being configured. */}}
+  {{ $hue := mod (hash.FNV32a $g.jug) 360 }}
+  {{ range $e := ($g.events | default slice) }}
+    {{ $start := time.AsTime $e.startTime }}
+    {{ $endDate := "" }}
+    {{ $endTime := "" }}
+    {{ with $e.endTime }}
+      {{ $end := time.AsTime . }}
+      {{ $endDate = $end.Format "2006-01-02" }}
+      {{ $endTime = $end.Format "15:04" }}
+    {{ end }}
+    {{ $events = $events | append (dict
+        "title"      $e.title
+        "url"        $e.url
+        "group"      $g.name
+        "groupUrl"   ($g.url | default "")
+        "jug"        $g.jug
+        "country"    $country
+        "hue"        $hue
+        "sort"       $start.Unix
+        "date"       ($start.Format "2006-01-02")
+        "endDate"    $endDate
+        "day"        ($start.Format "2")
+        "weekday"    ($start.Format "Mon")
+        "time"       ($start.Format "15:04")
+        "endTime"    $endTime
+        "dateLabel"  ($start.Format "Monday, 2 January 2006")
+        "monthKey"   ($start.Format "2006-01")
+        "monthLabel" ($start.Format "January 2006")
+        "venue"      ($e.venue | default "")
+        "city"       ($e.city | default "")
+      ) }}
+  {{ end }}
+{{ end }}
+{{ $events = sort $events "sort" }}
+
+{{/* Months present in the data, in order, plus their labels -- Hugo's `group`
+     only works on pages, so the agenda's month headings are collected here and
+     the rows filtered per month below. 25 events; the nested loop is free. */}}
+{{ $monthKeys := slice }}
+{{ $monthLabels := dict }}
+{{ $groupNames := slice }}
+{{ $countries := slice }}
+{{ range $events }}
+  {{ if not (in $monthKeys .monthKey) }}
+    {{ $monthKeys = $monthKeys | append .monthKey }}
+    {{ $monthLabels = merge $monthLabels (dict .monthKey .monthLabel) }}
+  {{ end }}
+  {{ if not (in $groupNames .group) }}{{ $groupNames = $groupNames | append .group }}{{ end }}
+  {{ if and .country (not (in $countries .country)) }}{{ $countries = $countries | append .country }}{{ end }}
+{{ end }}
+
 <div class="page-head">
   <div class="page-head__inner">
     <span class="eyebrow">Community</span>
     <h1>{{ .Title }}</h1>
     {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+    <div class="page-head__meta">
+      {{ if $events }}
+      <p class="cal-stats">
+        <strong>{{ len $events }}</strong> events &middot;
+        <strong>{{ len $groupNames }}</strong> Java User Groups &middot;
+        <strong>{{ len $countries }}</strong> countries
+      </p>
+      {{ end }}
+      {{ with partial "views.html" . }}<div class="page-head__views">{{ . | safeHTML }}</div>{{ end }}
+    </div>
   </div>
 </div>
 
 <div class="content-col full-width">
-  {{ $data := hugo.Data.events }}
-  {{ if $data }}
-    <p class="events-updated">Last updated: {{ $data.generatedAt }}</p>
-    {{ range $data.groups }}
-      <section class="jug-events">
-        <h2>{{ .name }}</h2>
-        {{ if .error }}
-          <p class="events-error">Could not load events for this group right now.</p>
-        {{ else if .events }}
-          <ul>
-            {{ range .events }}
-              <li>
-                <a href="{{ .url }}">{{ .title }}</a>
-                <span class="event-date">{{ .startTime }}</span>
-                {{ if .venue }}<span class="event-venue">{{ .venue }}{{ with .city }}, {{ . }}{{ end }}</span>{{ end }}
-              </li>
-            {{ end }}
-          </ul>
-        {{ else }}
-          <p>No upcoming events listed right now.</p>
-        {{ end }}
+  {{ with .Content }}<div class="prose cal-intro">{{ . }}</div>{{ end }}
+
+  {{ if $events }}
+  <div class="calendar" data-calendar>
+    <aside class="calendar__aside">
+      <a class="btn btn--accent cal-cta" href="https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs" target="_blank" rel="noopener">+ Add your JUG</a>
+
+      <section class="cal-legend">
+        <h2 class="cal-legend__head">Groups on the calendar</h2>
+        <ul class="cal-legend__list">
+          {{ range $g := $groupNames }}
+            {{ $first := index (where $events "group" $g) 0 }}
+            {{ $count := len (where $events "group" $g) }}
+            <li class="cal-legend__item">
+              <span class="cal-dot" style="--cal-dot: hsl({{ $first.hue }} 62% 46%)" aria-hidden="true"></span>
+              <span class="cal-legend__name">
+                {{ with $first.groupUrl }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $g }}</a>{{ else }}{{ $g }}{{ end }}
+                {{ with $first.country }}<span class="cal-legend__country">{{ . }}</span>{{ end }}
+              </span>
+              <span class="cal-legend__count">{{ $count }}</span>
+            </li>
+          {{ end }}
+        </ul>
       </section>
-    {{ end }}
+
+      {{/* Same note, and the same reason, as the one on /jugs/: the data behind
+           this page is regenerated on a schedule, so say where it comes from
+           where it is actually shown rather than only in a code comment. */}}
+      <p class="cal-source">
+        Events are pulled from the Meetup groups listed in the community-run
+        <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a>
+        directory and refreshed several times a day. If your JUG is missing or its events
+        aren't showing up, add or fix its entry there &mdash; it appears here automatically.
+        {{ with $data.generatedAt }}<br><span class="cal-source__synced">Last synced {{ dateFormat "2 January 2006, 15:04 MST" . }}.</span>{{ end }}
+        {{ with $errored }}<br><span class="cal-source__errors">{{ len . }} group{{ if gt (len .) 1 }}s{{ end }} could not be synced last time: {{ delimit . ", " }}.</span>{{ end }}
+      </p>
+    </aside>
+
+    <div class="calendar__main">
+      {{/* Every control here is JavaScript-only, so it stays hidden until the
+           script switches it on -- a reader without JS gets the agenda, not a
+           row of dead buttons. */}}
+      <div class="cal-toolbar" data-cal-toolbar hidden>
+        <div class="cal-nav">
+          <button type="button" class="cal-nav__btn" data-cal-prev aria-label="Previous month">&lsaquo;</button>
+          <strong class="cal-nav__label" data-cal-label aria-live="polite"></strong>
+          <button type="button" class="cal-nav__btn" data-cal-next aria-label="Next month">&rsaquo;</button>
+          <button type="button" class="btn btn--sm btn--ghost cal-nav__today" data-cal-today>Today</button>
+        </div>
+        <div class="cal-switch" role="group" aria-label="Calendar view">
+          <button type="button" class="cal-switch__btn" data-cal-view="grid" aria-pressed="true">Month</button>
+          <button type="button" class="cal-switch__btn" data-cal-view="list" aria-pressed="false">List</button>
+        </div>
+      </div>
+
+      {{/* Built by the script from the JSON island below. */}}
+      <div class="cal-grid" data-cal-grid hidden></div>
+
+      <div class="cal-agenda" data-cal-list>
+        {{ range $mk := $monthKeys }}
+          <section class="cal-month">
+            <h2 class="cal-month__head">{{ index $monthLabels $mk }}</h2>
+            <ul class="cal-month__list">
+              {{ range $e := (where $events "monthKey" $mk) }}
+                <li class="cal-row">
+                  <div class="cal-row__date">
+                    <span class="cal-row__day">{{ $e.day }}</span>
+                    <span class="cal-row__weekday">{{ $e.weekday }}</span>
+                  </div>
+                  <div class="cal-row__body">
+                    <a class="cal-row__title" href="{{ $e.url }}" target="_blank" rel="noopener">{{ $e.title }}</a>
+                    <p class="cal-row__meta">
+                      <span class="cal-dot" style="--cal-dot: hsl({{ $e.hue }} 62% 46%)" aria-hidden="true"></span>
+                      <span class="cal-row__group">{{ $e.group }}</span>
+                      {{ with $e.country }}<span class="cal-row__sep">&middot;</span><span>{{ . }}</span>{{ end }}
+                      <span class="cal-row__sep">&middot;</span>
+                      <span class="cal-row__time">{{ $e.time }}{{ with $e.endTime }}&ndash;{{ . }}{{ end }}</span>
+                      {{ if and $e.endDate (ne $e.endDate $e.date) }}<span class="cal-row__sep">&middot;</span><span class="cal-row__span">until {{ dateFormat "2 Jan" $e.endDate }}</span>{{ end }}
+                      {{ with $e.venue }}<span class="cal-row__sep">&middot;</span><span>{{ . }}{{ with $e.city }}, {{ . }}{{ end }}</span>{{ end }}
+                    </p>
+                  </div>
+                </li>
+              {{ end }}
+            </ul>
+          </section>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  {{/* The grid's data. Rendered as JSON rather than assembled in JS from the
+       raw file so the browser never has to re-derive a date, a time or a
+       colour -- the two views agree by construction. */}}
+  <script type="application/json" id="calendar-data">{{ $events | jsonify | safeJS }}</script>
+
+  <dialog class="cal-dialog" data-cal-dialog aria-labelledby="cal-dialog-title">
+    <button type="button" class="cal-dialog__close" data-cal-close aria-label="Close">&times;</button>
+    <p class="cal-dialog__group" data-cal-dialog-group></p>
+    <h2 class="cal-dialog__title" id="cal-dialog-title" data-cal-dialog-title></h2>
+    <p class="cal-dialog__when" data-cal-dialog-when></p>
+    <p class="cal-dialog__where" data-cal-dialog-where hidden></p>
+    <a class="btn btn--accent btn--sm cal-dialog__link" data-cal-dialog-link href="#" target="_blank" rel="noopener">View on Meetup</a>
+  </dialog>
+
+  <script>
+    (function () {
+      var root = document.querySelector('[data-calendar]');
+      var island = document.getElementById('calendar-data');
+      if (!root || !island) return;
+
+      var events;
+      try { events = JSON.parse(island.textContent); } catch (e) { return; }
+      if (!events || !events.length) return;
+
+      var grid = root.querySelector('[data-cal-grid]');
+      var list = root.querySelector('[data-cal-list]');
+      var toolbar = root.querySelector('[data-cal-toolbar]');
+      var label = root.querySelector('[data-cal-label]');
+      var dialog = document.querySelector('[data-cal-dialog]');
+
+      var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+      var WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+      /* Bucketed on the date string the template already computed, so a day
+         cell is a lookup and nothing is re-parsed in the browser. */
+      var byDate = {};
+      events.forEach(function (e, i) {
+        e.index = i;
+        (byDate[e.date] = byDate[e.date] || []).push(e);
+      });
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      function keyOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+      var today = new Date();
+      var todayKey = keyOf(today);
+      var cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+
+      function renderGrid() {
+        label.textContent = MONTHS[cursor.getMonth()] + ' ' + cursor.getFullYear();
+
+        var first = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
+        /* Weeks start on Monday, as they do on the live calendar. */
+        var offset = (first.getDay() + 6) % 7;
+        var daysInMonth = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0).getDate();
+        var weeks = Math.ceil((offset + daysInMonth) / 7);
+
+        var html = '<table class="cal-table"><thead><tr>';
+        WEEKDAYS.forEach(function (w) {
+          html += '<th scope="col"><abbr title="' + w + '">' + w.slice(0, 3) + '</abbr></th>';
+        });
+        html += '</tr></thead><tbody>';
+
+        var day = new Date(first);
+        day.setDate(1 - offset);
+        for (var w = 0; w < weeks; w++) {
+          html += '<tr>';
+          for (var d = 0; d < 7; d++) {
+            var k = keyOf(day);
+            var classes = ['cal-cell'];
+            if (day.getMonth() !== cursor.getMonth()) classes.push('is-outside');
+            if (k === todayKey) classes.push('is-today');
+            html += '<td class="' + classes.join(' ') + '">';
+            html += '<span class="cal-cell__day">' + day.getDate() + '</span>';
+            var dayEvents = byDate[k];
+            if (dayEvents) {
+              html += '<ul class="cal-cell__events">';
+              dayEvents.forEach(function (e) {
+                html += '<li><a class="cal-chip" href="' + e.url + '" target="_blank" rel="noopener"' +
+                        ' data-cal-event="' + e.index + '"' +
+                        ' style="--cal-dot: hsl(' + e.hue + ' 62% 46%)"' +
+                        ' title="' + escapeAttr(e.time + ' · ' + e.title + ' · ' + e.group) + '">' +
+                        '<span class="cal-chip__time">' + e.time + '</span>' +
+                        '<span class="cal-chip__title">' + escapeHtml(e.title) + '</span></a></li>';
+              });
+              html += '</ul>';
+            }
+            html += '</td>';
+            day.setDate(day.getDate() + 1);
+          }
+          html += '</tr>';
+        }
+        html += '</tbody></table>';
+        grid.innerHTML = html;
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;'); }
+
+      /* A chip is a real link to the event on Meetup -- so it can be opened in
+         a new tab, copied or followed without JavaScript -- and the click is
+         intercepted to show the details we already have instead. */
+      grid.addEventListener('click', function (ev) {
+        var chip = ev.target.closest('[data-cal-event]');
+        if (!chip || !dialog || typeof dialog.showModal !== 'function') return;
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
+        ev.preventDefault();
+        openDialog(events[parseInt(chip.getAttribute('data-cal-event'), 10)]);
+      });
+
+      function openDialog(e) {
+        if (!e) return;
+        dialog.querySelector('[data-cal-dialog-group]').textContent = e.group + (e.country ? ' · ' + e.country : '');
+        dialog.querySelector('[data-cal-dialog-group]').style.setProperty('--cal-dot', 'hsl(' + e.hue + ' 62% 46%)');
+        dialog.querySelector('[data-cal-dialog-title]').textContent = e.title;
+        var when = e.dateLabel + ', ' + e.time + (e.endTime ? '–' + e.endTime : '');
+        dialog.querySelector('[data-cal-dialog-when]').textContent = when;
+        var where = dialog.querySelector('[data-cal-dialog-where]');
+        var place = [e.venue, e.city].filter(Boolean).join(', ');
+        where.textContent = place;
+        where.hidden = !place;
+        dialog.querySelector('[data-cal-dialog-link]').href = e.url;
+        dialog.showModal();
+      }
+
+      if (dialog) {
+        dialog.querySelector('[data-cal-close]').addEventListener('click', function () { dialog.close(); });
+        /* Click outside the card (the ::backdrop area) closes it. */
+        dialog.addEventListener('click', function (ev) { if (ev.target === dialog) dialog.close(); });
+      }
+
+      root.querySelector('[data-cal-prev]').addEventListener('click', function () {
+        cursor.setMonth(cursor.getMonth() - 1);
+        renderGrid();
+      });
+      root.querySelector('[data-cal-next]').addEventListener('click', function () {
+        cursor.setMonth(cursor.getMonth() + 1);
+        renderGrid();
+      });
+      root.querySelector('[data-cal-today]').addEventListener('click', function () {
+        cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+        renderGrid();
+        show('grid');
+      });
+
+      var switches = root.querySelectorAll('[data-cal-view]');
+      function show(view) {
+        grid.hidden = view !== 'grid';
+        list.hidden = view !== 'list';
+        Array.prototype.forEach.call(switches, function (btn) {
+          btn.setAttribute('aria-pressed', String(btn.getAttribute('data-cal-view') === view));
+        });
+      }
+      Array.prototype.forEach.call(switches, function (btn) {
+        btn.addEventListener('click', function () { show(btn.getAttribute('data-cal-view')); });
+      });
+
+      toolbar.hidden = false;
+      renderGrid();
+      /* Seven columns of chips are unreadable on a phone, so a narrow screen
+         opens on the agenda instead -- the switch is still there for anyone who
+         wants the grid. */
+      show(window.matchMedia('(max-width: 720px)').matches ? 'list' : 'grid');
+    })();
+  </script>
   {{ else }}
-    <p>Event data hasn't synced yet. It updates daily via the Meetup sync workflow.</p>
+  <p class="cal-empty">No events have synced yet. The calendar is refreshed several times a day from the
+    Meetup groups in the <a href="https://github.com/World-Wide-JUGs/GlobalWWJugs" target="_blank" rel="noopener">World Wide JUGs</a> directory.</p>
   {{ end }}
 </div>
 {{ end }}

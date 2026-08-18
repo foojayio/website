@@ -720,22 +720,211 @@ body[data-nav-open="true"] .nav-backdrop { opacity: 1; visibility: visible; }
   display: inline-block; font-size: .74rem; padding: .12rem .5rem;
 }
 
-/* --------------------------------------------------------------- events -- */
+/* ------------------------------------------------------- events calendar -- */
+/* /calendar/ (themes/foojay/layouts/events/single.html). Two views of one set
+   of events: the server-rendered agenda, and the month grid the script builds.
+   Each JUG's dot colour arrives as --cal-dot on the element itself, derived
+   from the group slug in the template -- there are no per-group rules here. */
 
-.events-updated { color: var(--ink-muted); font-size: .88rem; }
-.jug-events { margin-bottom: 2rem; }
-.jug-events h2 { font-size: 1.25rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
-.jug-events ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
-.jug-events li {
-  display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline;
-  padding: .7rem .9rem;
-  background: var(--surface-sunken); border-radius: var(--radius-sm);
+.calendar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
 }
-.jug-events li a { font-family: var(--font-display); font-weight: 600; color: var(--ink); flex: 1 1 260px; }
-.jug-events li a:hover { color: var(--brand-accent-strong); }
-.event-date { font-weight: 600; color: var(--brand-accent-strong); font-size: .9rem; }
-.event-venue { color: var(--ink-muted); font-size: .9rem; }
-.events-error { color: #a33; font-size: .92rem; }
+/* Left rail on the live calendar, right rail here: the site's other wide pages
+   all put their secondary column on the right, and the grid should start at
+   the same x as every other page's content. */
+.calendar__aside { order: 2; display: grid; gap: 1.5rem; align-content: start; }
+.calendar__main { order: 1; min-width: 0; }
+
+.cal-intro { margin-bottom: 1.75rem; }
+.cal-stats { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+.cal-stats strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.cal-cta { justify-self: stretch; text-align: center; }
+
+/* The group legend doubles as the key to the grid's dots and as the list of
+   which JUGs actually have something coming up. */
+.cal-legend__head {
+  margin: 0 0 .75rem; font-size: .82rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--ink-muted);
+}
+.cal-legend__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.cal-legend__item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .55rem; align-items: baseline; font-size: .92rem; }
+.cal-legend__name a { color: var(--ink); font-weight: 600; }
+.cal-legend__name a:hover { color: var(--brand-accent-strong); }
+.cal-legend__country { display: block; color: var(--ink-muted); font-size: .85em; }
+.cal-legend__count {
+  color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: .85em; font-weight: 700;
+}
+
+.cal-dot {
+  width: .55rem; height: .55rem; border-radius: 50%;
+  background: var(--cal-dot, var(--brand-secondary));
+  display: inline-block; flex: none;
+}
+
+.cal-source { margin: 0; color: var(--ink-muted); font-size: .85rem; line-height: 1.55; }
+.cal-source__synced { display: inline-block; margin-top: .35rem; }
+.cal-source__errors { display: inline-block; margin-top: .35rem; }
+.cal-empty { color: var(--ink-muted); }
+
+/* Toolbar ------------------------------------------------------- */
+
+.cal-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;
+}
+.cal-nav { display: flex; align-items: center; gap: .5rem; }
+.cal-nav__btn {
+  width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink);
+  font-size: 1.1rem; line-height: 1; display: grid; place-items: center;
+}
+.cal-nav__btn:hover { border-color: var(--ink); }
+.cal-nav__label {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--ink);
+  min-width: 10.5ch; text-align: center;
+}
+.cal-nav__today { margin-left: .35rem; cursor: pointer; }
+
+.cal-switch {
+  display: inline-flex; border: 1px solid var(--border-strong);
+  border-radius: 999px; overflow: hidden; background: var(--surface);
+}
+.cal-switch__btn {
+  border: 0; background: transparent; cursor: pointer;
+  padding: .35rem 1rem; font-family: var(--font-display); font-weight: 600;
+  font-size: .88rem; color: var(--ink-soft);
+}
+.cal-switch__btn[aria-pressed="true"] { background: var(--brand-accent); color: #1c1204; }
+
+/* Month grid ---------------------------------------------------- */
+
+/* Scrolls inside itself rather than pushing the page sideways: a month grid
+   has a floor below which seven columns stop being legible. */
+.cal-grid { overflow-x: auto; }
+.cal-table {
+  width: 100%; min-width: 34rem; border-collapse: collapse; table-layout: fixed;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+}
+.cal-table th {
+  text-align: left; padding: .6rem .7rem; font-size: .74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted);
+  border-bottom: 1px solid var(--border);
+}
+.cal-table th abbr { text-decoration: none; }
+.cal-cell {
+  vertical-align: top; height: 7.5rem; padding: .4rem .45rem;
+  border: 1px solid var(--border); border-width: 0 1px 1px 0;
+}
+.cal-cell:last-child { border-right: 0; }
+.cal-table tbody tr:last-child .cal-cell { border-bottom: 0; }
+.cal-cell.is-outside { background: var(--surface-sunken); }
+.cal-cell.is-outside .cal-cell__day { opacity: .45; }
+.cal-cell__day {
+  display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem;
+  font-size: .82rem; font-weight: 600; color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+.cal-cell.is-today .cal-cell__day {
+  background: var(--brand-accent); color: #1c1204; border-radius: 50%;
+}
+.cal-cell__events { list-style: none; margin: .2rem 0 0; padding: 0; display: grid; gap: .2rem; }
+
+/* An event chip: a real link to the event, with the click intercepted to open
+   the detail dialog (see the layout). */
+.cal-chip {
+  display: block; padding: .3rem .45rem; border-radius: var(--radius-sm);
+  background: var(--surface-sunken); border-left: 3px solid var(--cal-dot, var(--brand-secondary));
+  font-size: .78rem; line-height: 1.25; color: var(--ink);
+}
+.cal-chip:hover { background: var(--brand-accent-soft); color: var(--ink); text-decoration: none; }
+.cal-chip__time { display: block; color: var(--ink-muted); font-variant-numeric: tabular-nums; font-size: .95em; }
+/* Two lines of title, then ellipsis: a cell is ~140px wide, and one line cuts
+   most meetup titles off before the topic. The full title is in the chip's
+   tooltip, the detail dialog and the list view. */
+.cal-chip__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; font-weight: 600;
+}
+
+/* Agenda (also the no-JavaScript view) -------------------------- */
+
+.cal-month + .cal-month { margin-top: 2rem; }
+.cal-month__head {
+  margin: 0 0 .85rem; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em;
+  padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+}
+.cal-month__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.cal-row {
+  display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1rem; align-items: center;
+  padding: .8rem .95rem; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+}
+.cal-row__date { text-align: center; line-height: 1.1; }
+.cal-row__day {
+  display: block; font-family: var(--font-display); font-size: 1.45rem; font-weight: 800;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.cal-row__weekday { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
+.cal-row__title { font-family: var(--font-display); font-weight: 700; color: var(--ink); }
+.cal-row__title:hover { color: var(--brand-accent-strong); }
+.cal-row__meta {
+  margin: .25rem 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+  color: var(--ink-muted); font-size: .88rem;
+}
+.cal-row__group { color: var(--ink-soft); font-weight: 600; }
+.cal-row__time { font-variant-numeric: tabular-nums; }
+.cal-row__sep { opacity: .5; }
+
+/* Event detail dialog ------------------------------------------- */
+
+.cal-dialog {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--ink-soft);
+  padding: 1.6rem 1.75rem; max-width: 26rem; width: calc(100% - 2rem);
+  box-shadow: var(--shadow-md);
+}
+/* Don't give the dialog a `position` of its own: the modal is centred by the
+   browser's own `position: fixed; inset: 0; margin: auto`, and overriding it
+   drops the card wherever it happens to sit in the flow. The close button is
+   absolute against that fixed box. */
+.cal-dialog::backdrop { background: rgba(13, 29, 47, .55); }
+.cal-dialog__close {
+  position: absolute; top: .5rem; right: .6rem; border: 0; background: none; cursor: pointer;
+  font-size: 1.4rem; line-height: 1; color: var(--ink-muted);
+}
+.cal-dialog__close:hover { color: var(--ink); }
+.cal-dialog__group {
+  margin: 0 0 .5rem; display: flex; align-items: center; gap: .45rem;
+  font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-muted);
+}
+.cal-dialog__group::before {
+  content: ""; width: .55rem; height: .55rem; border-radius: 50%; flex: none;
+  background: var(--cal-dot, var(--brand-secondary));
+}
+.cal-dialog__title { margin: 0 0 .6rem; font-size: 1.25rem; line-height: 1.25; }
+.cal-dialog__when { margin: 0; color: var(--brand-accent-strong); font-weight: 600; }
+.cal-dialog__where { margin: .3rem 0 0; color: var(--ink-muted); font-size: .92rem; }
+.cal-dialog__link { margin-top: 1.1rem; }
+
+@media (max-width: 900px) {
+  .calendar { grid-template-columns: 1fr; }
+  /* The legend and the "add your JUG" call belong under the calendar once they
+     are no longer a rail beside it. */
+  .calendar__aside { order: 2; }
+  .cal-cell { height: auto; min-height: 4.5rem; }
+  .cal-chip__time { display: none; }
+}
+@media (max-width: 560px) {
+  .cal-toolbar { justify-content: center; }
+  .cal-chip { padding: .2rem .3rem; font-size: .7rem; }
+  .cal-cell { padding: .25rem .2rem; }
+}
 
 /* ----------------------------------------------------------- pagination -- */
 

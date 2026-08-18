@@ -669,6 +669,35 @@ should catch a mistake at PR time rather than letting it fail silently.
   not land in `unmatched`; `fetchAll` merges duplicate keys with `Math::max`, so
   the page keeps the higher count rather than summing two views of one page.
   Renaming the file back would silently move the key and drop the bigger number.
+- **`/calendar/` is two views of `data/events.json`, and only one of them is
+  content.** `themes/foojay/layouts/events/single.html` flattens the file's
+  groups into a single list of events and joins each group's `jug` slug to
+  `data/jugs.yaml` for the country (all 32 groups match), so the page file holds
+  a one-line intro and nothing else -- the event count, the group count, the
+  country count and the "Groups on the calendar" legend are all derived, the
+  same way `/jugs/` and `/java-champions/` are. Each JUG's dot colour is a hue
+  hashed from its slug (`hash.FNV32a`), so a group keeps one colour across the
+  grid, the legend and the detail dialog without a colour ever being configured.
+
+  The **agenda list is server-rendered and the month grid is not**, which is the
+  part to keep: the agenda is real HTML (so it is what Pagefind indexes and what
+  a reader without JavaScript gets), while the grid is a visualisation the
+  script builds from a JSON island. The whole toolbar -- month arrows, Today,
+  the Month/List switch -- starts `hidden` and the script switches it on, so
+  without JS the page is simply the agenda rather than a row of dead buttons,
+  and a narrow screen opens on the agenda because seven columns of chips are
+  unreadable on a phone. Times are formatted in the template, in each event's
+  OWN UTC offset (what the JUG means by "19:00", and what Meetup shows);
+  rebuilding them from the ISO string in the browser would silently restate
+  every event in the reader's timezone. An event chip is a real link to the
+  event on Meetup with the click intercepted for the detail dialog, so
+  middle-click and copy-link still do the obvious thing.
+
+  Groups whose sync failed (`error` in the JSON) are named under the calendar
+  rather than dropped -- an empty month should not be indistinguishable from a
+  broken fetch. Note the upstream data is not always sane: a few recurring
+  "Stammtisch" events carry an end time a week after their start, which is why
+  the agenda renders a bare "until 4 Sep" instead of pretending to know better.
 - **A multi-page series is a folder of pages with a `weight`, and nothing else.**
   The 11 Java Quick Start tutorial steps used to hand-write the same
   `<< Prev` / `Next >>` markdown pair TWICE each (top and bottom of every page),
