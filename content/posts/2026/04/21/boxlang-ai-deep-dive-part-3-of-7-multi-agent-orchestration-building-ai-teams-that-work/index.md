@@ -1,5 +1,5 @@
 ---
-title: "BoxLang AI Deep Dive — Part 3 of 7: Multi-Agent Orchestration — Building AI Teams That Work 🌲"
+title: "BoxLang AI Deep Dive — Part 3 of 7: Multi-Agent Orchestration — Building AI Teams That Work"
 date: "2026-04-21T08:32:06+00:00"
 lastmod: "2026-05-14T09:51:47+00:00"
 description: "BoxLang AI 3.0 Series · Part 3 of 7 A single agent is useful. An orchestra of agents is powerful. The problem with most multi-agent frameworks is that the - by Cristobal Escobar"

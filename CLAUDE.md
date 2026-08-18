@@ -263,7 +263,8 @@ should catch a mistake at PR time rather than letting it fail silently.
   already renders as list + thematic break — 203 left underlined for this).
 - **`scripts/ValidateFrontmatter.java`**: PR-time content check (required
   fields present, no dangling `related_posts` references, no sponsor
-  `authors:` slug without a matching author bundle), run by
+  `authors:` slug without a matching author bundle, no emoji in a post title),
+  run by
   `.github/workflows/pr-check.yml` in lieu of a visual preview (GitHub Pages
   has no per-PR preview URLs).
 - **`.github/workflows/build-deploy.yml`**: builds with Hugo and deploys to
@@ -488,6 +489,25 @@ should catch a mistake at PR time rather than letting it fail silently.
   signal was always empty. If tags are ever wanted, they are recoverable from
   `/wp-json/wp/v2/posts?slug=…&_fields=tags` plus `/wp-json/wp/v2/tags?include=…`
   (both open, verified) — but only until cutover. Categories are the taxonomy.
+- **Emoji come off post TITLES, never out of bodies.**
+  `ConvertPosts.stripEmoji` runs on the scraped title, because a title isn't
+  just text on the post -- it is the card in every grid, the RSS item, the
+  browser tab, the `og:title` a link preview renders and the text a search
+  result shows, and a decorative glyph reads as noise or breaks alignment in all
+  of them. 7 titles were affected. Bodies are deliberately untouched: an emoji
+  in prose is the author's writing, and 404 posts carry 3443 of them -- among
+  which the arrows (`->` 336, `^` 55), `(TM)` (31) and the check/cross marks in
+  comparison tables are load-bearing, not decoration. The rule is
+  `\p{IsExtended_Pictographic}` plus skin tones / keycap / variation selector /
+  ZWJ, **not** `\p{IsEmoji}`: the latter is true for ASCII digits, `#` and `*`,
+  so it would eat the "5" out of "The 5 Knights" and every `#release` hashtag.
+  Titles don't feed the URL (the slug is the bundle folder name), so nothing
+  needed an alias.
+
+  The converter only covers what it scrapes, and a contributor writes their own
+  frontmatter by hand -- so `ValidateFrontmatter.checkTitleEmoji` applies the
+  same rule at PR time. Both use the same character class on purpose; change one
+  and change the other.
 - **`related_posts` is manual**, chosen by the author — never replace it
   with an automated tag-similarity algorithm.
 - **Sponsors ↔ articles is an author list, and it's hand-maintained.**
@@ -602,6 +622,27 @@ should catch a mistake at PR time rather than letting it fail silently.
   every category chip shows instead of the usual first two -- on a portal the
   chips are the navigation. That option is the only reason the partial accepts a
   dict; called with a Page it behaves exactly as before.
+- **`/sitemap/` is an HTML page for readers, derived from the content tree.**
+  Not to be confused with Hugo's `/sitemap.xml`, which is for crawlers.
+  WordPress serves an HTML sitemap at `/sitemap/` (34,244 views) and
+  `partials/footer.html` links to it from every page, but nothing here answered
+  that URL -- the footer link was dead. `content/pages/sitemap.md` (`type:
+  "sitemap"` -> `themes/foojay/layouts/sitemap/single.html`) holds only a
+  one-line intro; the page tree, pedia, sponsors, authors and every article by
+  year are all derived, so a new page or post appears at the next build and
+  there is no list to maintain. The page tree's nesting comes from sorting on
+  `.File.Path`: a lexicographic path sort is already tree order
+  (`pages/board.md` before `pages/board/azul.md`), so depth is a slash count
+  rather than recursion.
+
+  Fixing it turned up that **`content/all-events.md` and the scraped
+  `content/pages/all-events.md` both claimed `url: "/all-events/"`**, and the
+  empty scraped stub won -- so the real events calendar (`type: "events"`)
+  rendered nowhere and a footer link led to a blank page. Hugo does not warn
+  about two files claiming one `url:`. They are now one file under
+  `content/pages/`, which is also what keeps the `pages/all-events` view key
+  (20,984 legacy views) resolving; a root-level `content/*.md` has no section
+  and `views-key.html` would not count it.
 - **Sponsors appear site-wide via the sidebar**, not just on `/our-sponsors/`:
   `themes/foojay/layouts/partials/sidebar-sponsors.html` lists every sponsor
   tier-ordered, with the logo sized by tier (gold largest). Deliberately NOT

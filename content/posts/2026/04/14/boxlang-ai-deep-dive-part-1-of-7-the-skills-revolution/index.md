@@ -1,5 +1,5 @@
 ---
-title: "BoxLang AI Deep Dive — Part 1 of 7: The Skills Revolution 🎓"
+title: "BoxLang AI Deep Dive — Part 1 of 7: The Skills Revolution"
 date: "2026-04-14T11:50:53+00:00"
 lastmod: "2026-05-14T09:46:38+00:00"
 description: "This article is part of our 7-part deep dive on building production-ready AI systems with BoxLang. BoxLang AI 3.0 Series · Part 1 of 7 Every AI framework - by Cristobal Escobar"

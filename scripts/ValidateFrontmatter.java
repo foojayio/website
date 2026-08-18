@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -64,6 +65,7 @@ public class ValidateFrontmatter {
         problems.addAll(checkDir(Path.of("content/authors"), List.of("title")));
         problems.addAll(checkDir(Path.of("content/pages"), List.of("title", "url")));
         problems.addAll(checkDir(Path.of("content/sponsors"), List.of("title", "tier")));
+        problems.addAll(checkTitleEmoji(postsDir));
         problems.addAll(checkRelatedPosts(postsDir, postSlugs));
         problems.addAll(checkSponsorAuthors(Path.of("content/sponsors"), authorSlugs()));
         problems.addAll(checkBoardMembers(Path.of("content/pages/board")));
@@ -96,6 +98,47 @@ public class ValidateFrontmatter {
                     if (v == null || (v instanceof String s && s.isBlank())) {
                         problems.add(file + ": missing/empty required field '" + field + "'");
                     }
+                }
+            }
+        }
+        return problems;
+    }
+
+    /**
+     * A post title carrying an emoji.
+     *
+     * `ConvertPosts.stripEmoji` takes these off everything it scrapes, but a
+     * contributor writes their own frontmatter by hand and the scraper never
+     * sees that title -- so without this a decorated headline sails straight
+     * into the repo. It fails at PR time rather than silently, because a title
+     * is the card in every grid, the RSS item, the browser tab and the
+     * `og:title` a link preview renders, and it is exactly the kind of thing
+     * nobody notices is wrong until it is on the home page.
+     *
+     * Same rule as the converter, and deliberately so -- Extended_Pictographic
+     * plus the modifiers, NOT \p{IsEmoji}, which is true for ASCII digits, `#`
+     * and `*` and would reject "The 5 Knights" and every `#release` hashtag.
+     * Only TITLES: an emoji in the body is the author's writing, and in a table
+     * or a legend it carries meaning.
+     */
+    static final Pattern TITLE_EMOJI = Pattern.compile(
+            "[\\p{IsExtended_Pictographic}\\x{1F3FB}-\\x{1F3FF}\\x{FE0F}\\x{20E3}\\x{200D}]");
+
+    static List<String> checkTitleEmoji(Path postsDir) throws IOException {
+        List<String> problems = new ArrayList<>();
+        if (!Files.isDirectory(postsDir)) return problems;
+
+        try (Stream<Path> files = Files.walk(postsDir)) {
+            for (Path file : files.filter(p -> p.toString().endsWith(".md")).toList()) {
+                if (file.getFileName().toString().equals("_index.md")) continue;
+                Map<String, Object> fm = readFrontmatter(file);
+                if (fm == null) continue;
+                if (!(fm.get("title") instanceof String title)) continue;
+                Matcher m = TITLE_EMOJI.matcher(title);
+                if (m.find()) {
+                    problems.add(file + ": title contains emoji (" + m.group()
+                            + ") -- titles are used as cards, RSS items and link previews;"
+                            + " put it in the body instead: \"" + title + "\"");
                 }
             }
         }

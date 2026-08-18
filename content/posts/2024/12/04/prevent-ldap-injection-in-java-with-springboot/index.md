@@ -1,5 +1,5 @@
 ---
-title: "Prevent LDAP injection in #java 💥💉with #springboot"
+title: "Prevent LDAP injection in #java with #springboot"
 date: "2024-12-04T14:45:35+00:00"
 lastmod: "2024-12-05T06:26:36+00:00"
 description: "Prevent LDAP injection in #java 💥💉with #springboot: Learn how to prevent LDAP injection attacks with expert tips from Vincent VAUBAN. Understand the basics of LDAP, its importance, and techniques to secure your applications. Includes practical coding demonstrations and OWASP recommendations."

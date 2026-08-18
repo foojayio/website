@@ -332,10 +332,10 @@ public class ConvertPosts {
         d.url = stripTrailingSlash(url) + "/";
         d.slug = sanitizeSlug(lastPathSegment(d.url));
 
-        d.title = stripSiteSuffix(firstNonBlank(
+        d.title = stripEmoji(stripSiteSuffix(firstNonBlank(
                 metaContent(doc, "og:title"),
                 textOrNull(doc.selectFirst("h1")),
-                doc.title()));
+                doc.title())));
 
         d.description = firstNonBlank(
                 attrContent(doc, "meta[name=description]"),
@@ -671,6 +671,39 @@ public class ConvertPosts {
     static String stripSiteSuffix(String title) {
         if (title == null) return "";
         return title.replaceAll("(?i)\\s*[|\\-–]\\s*foojay(\\.io)?(\\s+today)?\\s*$", "").strip();
+    }
+
+    /**
+     * Drops emoji from a title.
+     *
+     * A handful of authors decorate the headline ("The 5 Knights of the MCP
+     * Apocalypse [skull]", "[flex][steam] THE 12 LABOURS OF PRIMEFACES"), and a
+     * title is not just text on the post: it is the card in every grid, the RSS
+     * item, the browser tab, the og:title a link preview renders, and the text a
+     * search result shows. Those are the places a decorative glyph reads as
+     * noise or breaks alignment, so the emoji comes off here rather than being
+     * something each template has to cope with.
+     *
+     * BODIES are deliberately left alone -- an emoji in prose is the author's
+     * writing, and in a table or a legend it is load-bearing.
+     *
+     * Extended_Pictographic, NOT \p{IsEmoji}: the latter is true for the ASCII
+     * digits, `#` and `*` (they head keycap sequences), so it would eat the "5"
+     * out of "The 5 Knights" and the "#release" hashtag. Skin-tone modifiers,
+     * the keycap combiner, the variation selector and ZWJ go too, so a
+     * multi-codepoint sequence leaves nothing behind. Typographic arrows
+     * (-> <- ^) and (TM) are NOT pictographic and survive -- they carry meaning
+     * in a title, though no post title currently has one.
+     *
+     * The whitespace tidy-up afterwards matters: removing a leading emoji would
+     * otherwise leave the title starting with a space, and "#java [boom][syringe]with
+     * #springboot" would collapse to "#java  with".
+     */
+    static String stripEmoji(String title) {
+        if (title == null) return "";
+        String out = title.replaceAll(
+                "[\\p{IsExtended_Pictographic}\\x{1F3FB}-\\x{1F3FF}\\x{FE0F}\\x{20E3}\\x{200D}]+", " ");
+        return out.replaceAll("\\s{2,}", " ").replaceAll("\\s+([,.;:!?])", "$1").strip();
     }
 
     static String lastPathSegment(String urlWithTrailingSlash) {
