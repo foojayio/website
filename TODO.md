@@ -1,6 +1,12 @@
 # TODO
 
-## ConverPosts
+## Still TODO
+
+* [ ] Visualization of events/calendar
+
+## Finished
+
+### ConverPosts
 
 * [X] Search for `[\[email protected\]](/cdn-cgi/l/email-protection)`
   * Not a conversion bug of ours: foojay.io runs behind Cloudflare with **Email
@@ -59,7 +65,7 @@
 * [X] Image galleries -> `{{< gallery >}}` shortcode, migrated with `scripts/MigrateGalleriesToShortcode.java`
 * [X] Tags -> won't do as we have fixed list of categories
 
-## Missing Content
+### Missing Content
 
 * [X] log4j-cve.md
 * [X] advisory board text -> `content/pages/board.md` (intro + grid) with one
@@ -83,7 +89,7 @@
     that shows all 66 beats one that hides two thirds); the category page it
     links to does paginate.
 
-## Features
+### Features
 
 * [X] Read counter -> our own Cloudflare Worker + D1 on `foojay.io/api/views/*`
   * **Not a hosted analytics service**, and the reason goes past "not Google
