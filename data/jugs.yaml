@@ -11,7 +11,7 @@
 # folder instead: https://github.com/World-Wide-JUGs/GlobalWWJugs/tree/master/_jugs
 #
 # meetup_slug/meetup_url are set only when a JUG's file has an explicit
-# `meetup` field (never inferred from `website`); scripts/FetchMeetupEvents.java
+# `meetup` field (never inferred from `website`); scripts/FetchJugEvents.java
 # uses meetup_slug to pull calendar events.
 
 - slug: AlmatyJUG
@@ -453,6 +453,19 @@
   latitude: 49.4875
   longitude: 8.466
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/MannheimJUG.md
+- slug: MuenchenJUG
+  name: Java User Group Muenchen
+  country: Germany
+  website: http://www.jugm.de/
+  meetup_slug: Java-User-Group-Munchen-JUGM
+  meetup_url: https://www.meetup.com/Java-User-Group-Munchen-JUGM/
+  calendar: https://www.meetup.com/Java-User-Group-Munchen-JUGM/events/ical/
+  founded_date: '2000-01-01'
+  contact: Andreas Haug *
+  email: ah@jugm.de
+  latitude: 48.1351
+  longitude: 11.582
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/MuenchenJUG.md
 - slug: MuensterJUG
   name: Java User Group Muenster
   country: Germany
@@ -686,6 +699,15 @@
   latitude: 25.75296
   longitude: -80.27106
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/MiamiJUG.md
+- slug: MontrealJUG
+  name: Montréal Java User Group
+  country: Canada
+  website: https://www.montreal-jug.org/
+  twitter: montrealjug
+  founded_date: '2010-01-01'
+  latitude: 45.508888
+  longitude: -73.561668
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/MontrealJUG.md
 - slug: NairobiJavaCommunity
   name: Nairobi Java User Group
   country: Kenya
@@ -780,6 +802,17 @@
   latitude: 47.6205476
   longitude: -122.3493031
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/SeattleJUG.md
+- slug: SevillaJUG
+  name: Sevilla Java User Group
+  country: Spain
+  website: https://www.meetup.com/SVQJUG/
+  meetup_slug: SVQJUG
+  meetup_url: https://www.meetup.com/SVQJUG/
+  twitter: SVQJUG
+  founded_date: '2014-02-06'
+  latitude: 37.394718
+  longitude: -5.98389
+  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/SevillaJUG.md
 - slug: StLouisJUG
   name: St. Louis Java Users Group
   country: USA
