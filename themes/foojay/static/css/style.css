@@ -1577,3 +1577,48 @@ body.lightbox-open { overflow: hidden; }
   .board-profile__head { flex-direction: column; align-items: flex-start; }
   .board-logo--large { width: 100%; }
 }
+
+/* ---------------------------------------------------------------------------
+   Sitemap: /sitemap/ -- the HTML sitemap linked from the footer.
+
+   A long page of nothing but links, so the styling's whole job is scanning:
+   multi-column where the entries are short and independent (pedia, sponsors,
+   authors), single column where order carries meaning (the page tree's
+   indentation, and articles newest-first inside a year). */
+
+.sitemap__section { margin-top: 2.5rem; }
+.sitemap__section > h2 {
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sitemap__list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.sitemap__list--cols { columns: 4 200px; column-gap: 2rem; }
+
+.sitemap__item {
+  /* break-inside stops a multi-column layout splitting a wrapped title. */
+  break-inside: avoid;
+  padding: .18rem 0;
+  line-height: 1.45;
+}
+.sitemap__item a { text-decoration: none; }
+.sitemap__item a:hover { text-decoration: underline; }
+
+/* The page tree: depth comes from the file path, not from nested <ul>s. */
+.sitemap__item--d1 { padding-left: 1.25rem; }
+.sitemap__item--d2 { padding-left: 2.5rem; }
+.sitemap__item--d1, .sitemap__item--d2 { color: var(--ink-muted); }
+
+.sitemap__year {
+  margin: 1.75rem 0 0;
+  font-size: 1.1rem;
+}
+.sitemap__count {
+  margin-left: .4rem;
+  color: var(--ink-muted);
+  font-weight: 400; font-size: .85rem;
+}
+
+@media (max-width: 700px) {
+  .sitemap__list--cols { columns: 1; }
+}
