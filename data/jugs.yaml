@@ -625,15 +625,6 @@
   latitude: 12.137038
   longitude: -86.31601
   source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/NicaraguaJUG.md
-- slug: JUGVale
-  name: JUG Vale
-  country: Brazil
-  website: https://jugvale.wordpress.com/
-  twitter: jugvale
-  founded_date: '2012-01-21'
-  latitude: -23.178889
-  longitude: -45.886944
-  source_url: https://github.com/World-Wide-JUGs/GlobalWWJugs/blob/master/_jugs/JUGVale.md
 - slug: Milano
   name: JVM User Group Milano (JUG Milano)
   country: Italy
