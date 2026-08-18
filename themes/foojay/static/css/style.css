@@ -323,13 +323,19 @@ a.nav-group__title:hover { background: none; color: var(--brand-accent-strong); 
   background: var(--surface-sunken);
   border: 1px solid transparent; border-radius: 999px;
   color: var(--ink);
+  /* `visibility` steps rather than eases, and it is delayed on the way OUT so
+     the field is still there while it shrinks. On the way IN it must flip at
+     once: a visibility:hidden element cannot take focus, so easing it would
+     make the click land the caret nowhere. */
   transition: width .2s var(--ease), padding .2s var(--ease), opacity .15s var(--ease),
-              visibility .2s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
+              visibility 0s linear .2s, background .15s var(--ease), border-color .15s var(--ease);
 }
 .site-search input::placeholder { color: var(--ink-muted); }
 .site-search[data-open="true"] input {
   width: 210px; padding: .5rem .9rem; opacity: 1; visibility: visible;
   background: var(--surface); border-color: var(--border-strong);
+  transition: width .2s var(--ease), padding .2s var(--ease), opacity .15s var(--ease),
+              visibility 0s, background .15s var(--ease), border-color .15s var(--ease);
 }
 .site-search input:focus { outline-offset: 0; }
 

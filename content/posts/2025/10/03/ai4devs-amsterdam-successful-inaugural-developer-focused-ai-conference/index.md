@@ -18,7 +18,7 @@ related_posts:
 frozen: false
 ---
 
-**The [inaugural AI4Devs conference in Amsterdam](https://amsterdam.ai4devs.io/), held recently Friday 19 September, a collaboration between Java Champion Jonathan Vila, [local developer agency IO Digital](https://www.iodigital.com/en) (in particular Joost Kaan, Arno Koehler, and Michel Blankenstein), and the Friends of OpenJDK (Foojay.io), proved to be a resounding success, bringing together approximately 200 developers at Amsterdam's iO Digital Campus.**
+**The [inaugural AI4Devs conference in Amsterdam](https://amsterdam.ai4devs.io/), held recently Friday 19 September, a collaboration between Java Champion Jonathan Vila, [local developer agency IO Digital](https://www.iodigital.com/en) (in particular Joost Kaan, Arno Koehler, and Michel Blankenstein), and the Friends Of OpenJDK (Foojay.io), proved to be a resounding success, bringing together approximately 200 developers at Amsterdam's iO Digital Campus.**
 
 **ING, Azul, Qodo, and ContentStack**
 

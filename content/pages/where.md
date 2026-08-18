@@ -1,5 +1,5 @@
 ---
-title: "Where to Find Friends of OpenJDK"
+title: "Where to Find Friends Of OpenJDK"
 description: "Every place the Foojay community lives: articles, podcasts, videos, Slack, newsletters and events."
 canonical: "https://foojay.io/where/"
 url: "/where/"
@@ -8,7 +8,7 @@ aliases:
 frozen: false
 ---
 
-Welcome to Foojay! There are lots of ways to connect with the Friends of OpenJDK community — here's where to find us.
+Welcome to Foojay! There are lots of ways to connect with the Friends Of OpenJDK community — here's where to find us.
 
 <div class="where-grid">
 

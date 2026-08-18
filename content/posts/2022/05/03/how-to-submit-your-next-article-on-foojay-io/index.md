@@ -15,7 +15,7 @@ related_posts:
 frozen: true
 ---
 
-Foojay, the place for friends of OpenJDK, is a friendly community of Java and Kotlin developers who share tips and insights every day on [Foojay Today](/today/). We would love to publish your article too!
+Foojay, the place for Friends Of OpenJDK, is a friendly community of Java and Kotlin developers who share tips and insights every day on [Foojay Today](/today/). We would love to publish your article too!
 
 In September 2026, Foojay.io moved from a WordPress system to a static site built with [Hugo](https://gohugo.io/) and published from a public GitHub repository, [github.com/foojayio/website](https://github.com/foojayio/website). Contributing an article means adding a small folder of files (your text and images) to that repository. You don't need to know Hugo — everything you need is in a ready-made template.
 
@@ -55,4 +55,4 @@ Not comfortable with Git? No problem. **Zip up your article folder** (the `index
 
 ## What happens next
 
-We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the friends of OpenJDK!
+We review every submission for a good fit and light editing, then publish it and share it with the community. Thanks for writing for the Friends Of OpenJDK!

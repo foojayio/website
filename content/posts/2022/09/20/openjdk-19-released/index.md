@@ -2,7 +2,7 @@
 title: "OpenJDK 19 Released!"
 date: "2022-09-20T16:00:40+00:00"
 lastmod: "2023-07-03T13:03:15+00:00"
-description: "The friends of OpenJDK community has put together a number of resources, and more coming in the coming weeks!"
+description: "The Friends Of OpenJDK community has put together a number of resources, and more coming in the coming weeks!"
 authors:
   - "geertjan-wielenga"
 image: "image-1024x631-1.png"
@@ -18,7 +18,7 @@ frozen: false
 
 OpenJDK 19 has been released today! Get it from your favorite vendor... whether it is BellSoft, Amazon, Red Hat, Azul, Oracle, Microsoft [or any other of a large number of Java providers](https://foojay.io/almanac/jdk-19/).
 
-The friends of OpenJDK community has put together a number of resources, and more coming in the coming weeks, about the new features and all the enhancements and fixes that have gone into the release, accompanied by a brand new podcast released today, featuring key Java community leaders from around the world.
+The Friends Of OpenJDK community has put together a number of resources, and more coming in the coming weeks, about the new features and all the enhancements and fixes that have gone into the release, accompanied by a brand new podcast released today, featuring key Java community leaders from around the world.
 
 ### Release Highlights
 

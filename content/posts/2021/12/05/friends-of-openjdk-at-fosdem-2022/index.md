@@ -1,8 +1,8 @@
 ---
-title: "Friends of OpenJDK at FOSDEM 2022"
+title: "Friends Of OpenJDK at FOSDEM 2022"
 date: "2021-12-05T12:00:03+00:00"
 lastmod: "2021-12-26T14:17:17+00:00"
-description: "The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded, submit to the \"Friends of OpenJDK devroom\"!"
+description: "The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded, submit to the \"Friends Of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"
 image: "Favicon-3-2.png"
@@ -25,13 +25,13 @@ The programs for 2020 and 2019 are listed below:
 
 You can see in the above that the room was organized by developers connected to, in particular, Eclipse, IntelliJ IDEA, and NetBeans.
 
-And in 2021, the above was transformed into... the Friends of OpenJDK developer room, with an awesome program:
+And in 2021, the above was transformed into... the Friends Of OpenJDK developer room, with an awesome program:
 
 <https://archive.fosdem.org/2021/schedule/track/friends_of_openjdk/>
 
 ### **Overview of Foojay at FOSDEM 202**2
 
-In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (friends of OpenJDK) are running the program:
+In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (Friends Of OpenJDK) are running the program:
 
 [https://fosdem.org/2022/schedule/track/friends_of_openjdk](https://fosdem.org/2022/schedule/track/friends_of_openjdk/)
 
@@ -41,7 +41,7 @@ The content is focused on being similar to previous years, that is, short presen
 
 ### Submission Details and Deadlines
 
-The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends of OpenJDK devroom" in the "Track" field:
+The upcoming FOSDEM, 5 and 6 February 2022, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends Of OpenJDK devroom" in the "Track" field:
 
 <https://penta.fosdem.org/submission/FOSDEM22>
 
@@ -51,7 +51,7 @@ Here's the announcement details on the FOSDEM mailing list:
 
 ### **Program Committee**
 
-This year the program committee for the Friends of OpenJDK devroom consists of:
+This year the program committee for the Friends Of OpenJDK devroom consists of:
 
 * Shai Almog, Lightrun
 * Jaroslav Bachorik, Datadog

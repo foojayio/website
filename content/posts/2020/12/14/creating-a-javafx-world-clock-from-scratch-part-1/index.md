@@ -26,7 +26,7 @@ Welcome to *Creating a JavaFX World Clock from Scratch (Part 1)*! In this series
 
 {{< img src="Screen-Shot-2020-12-07-at-3.57.09-PM-286x510.png" class="size-medium" alt="A JavaFX based World Clock" width="286" height="510" >}}
 
-Here I will explain my thought process, development workflow, and of course JavaFX code details. Since it's still in the early stages, you can tune in by commenting or joining foojay's Slack channel at foojay.slack.com [\[2\]](https://foojay.slack.com/archives/C01GEEGDCHJ "foojay Slack channel #openjfx"), where I and others (Java experts \& friends of OpenJDK/OpenJFX) can offer advice.
+Here I will explain my thought process, development workflow, and of course JavaFX code details. Since it's still in the early stages, you can tune in by commenting or joining foojay's Slack channel at foojay.slack.com [\[2\]](https://foojay.slack.com/archives/C01GEEGDCHJ "foojay Slack channel #openjfx"), where I and others (Java experts \& Friends Of OpenJDK/OpenJFX) can offer advice.
 
 Before we begin, I would like to mention some assumptions the reader (you) may expect. The tutorial will assume you have a basic knowlege of Java and JavaFX. If you are a beginner who is new to Java and JavaFX you may want to check out the numerous tutorials[\[5\]](https://foojay.io/?s=javafx&t=posts "JavaFX Tutorials") and books[\[3\]](https://www.apress.com/gp/book/9781484219607 "JavaFX 9 Intro by Example")[\[4\]](https://www.apress.com/gp/book/9781484249253 "The Definitive Guide to Modern Java Clients with JavaFX").
 

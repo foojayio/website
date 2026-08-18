@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-It's been another half year of content and activities in and around the place for friends of OpenJDK... let's look at some statistics, trends, comparisons, highlights, and plans for the future!
+It's been another half year of content and activities in and around the place for Friends Of OpenJDK... let's look at some statistics, trends, comparisons, highlights, and plans for the future!
 
 ## Trends and Comparisons
 
@@ -42,7 +42,7 @@ Of course, what makes Bazlur's articles extremely popular is that they are high 
 
 Foojay.io has always been more than a website. It is a vehicle for the users of the OpenJDK to get together and unite around their common platform.
 
-For example, this year [the second Friends of OpenJDK devroom was held at FOSDEM](http://Foojay%20at%20FOSDEM%202022%20on%20YouTube) and Foojay.io continues to be a place where OpenJDK users find each other, e.g., such as speakers for JUG events around the world. Recently a Foojay.io Board meeting was held, in which around 15 different organizations participated to plan upcoming events.
+For example, this year [the second Friends Of OpenJDK devroom was held at FOSDEM](http://Foojay%20at%20FOSDEM%202022%20on%20YouTube) and Foojay.io continues to be a place where OpenJDK users find each other, e.g., such as speakers for JUG events around the world. Recently a Foojay.io Board meeting was held, in which around 15 different organizations participated to plan upcoming events.
 
 Just over the past week, in the Foojay.io Slack channel, the ideas were raised to continue with the Foojay Podcast and also to set up a developer certification program.
 

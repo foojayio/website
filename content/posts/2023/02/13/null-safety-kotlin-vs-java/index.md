@@ -20,7 +20,7 @@ frozen: false
 Last week, I was at the [FOSDEM](https://fosdem.org/) conference. FOSDEM is specific in that it has multiple rooms, each dedicated to a different theme and organized by a team. I had two talks:
 
 * [Practical Introduction to OpenTelemetry Tracing](https://fosdem.org/2023/schedule/event/tracing/), in the *Monitoring and Observability* devroom
-* [What I miss in Java, the perspective of a Kotlin developer](https://fosdem.org/2023/schedule/event/miss/), in the *Friends of OpenJDK* devroom
+* [What I miss in Java, the perspective of a Kotlin developer](https://fosdem.org/2023/schedule/event/miss/), in the *Friends Of OpenJDK* devroom
 
 The second talk is from [an earlier post](https://blog.frankel.ch/miss-in-java-kotlin-developer/). Martin Bonnin did a tweet from a single slide, and it created quite a stir, even attracting Brian Goetz.
 

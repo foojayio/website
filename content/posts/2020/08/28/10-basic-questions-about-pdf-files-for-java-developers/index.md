@@ -14,7 +14,7 @@ frozen: false
 
 PDF files are the world's most common file format, defining 70% of the world's documents. But they are also complex and poorly supported by Java.
 
-As I have spent over 20 years working with Java and PDF files, I thought a useful contribution to the excellent new foojay.io (a place for friends of OpenJDK), where you are reading this now, would be a quick guide for Java Developers!
+As I have spent over 20 years working with Java and PDF files, I thought a useful contribution to the excellent new foojay.io (a place for Friends Of OpenJDK), where you are reading this now, would be a quick guide for Java Developers!
 
 #### 1. What are PDF files?
 

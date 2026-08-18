@@ -2,7 +2,7 @@
 title: "Digma, Apache APISIX, and OpenValue: Foojay.io at JFall 2023"
 date: "2023-11-13T22:19:48+00:00"
 lastmod: "2023-11-13T22:31:11+00:00"
-description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for friends of OpenJDK."
+description: "Last week at JFall 2023, was a high point in the evolution of Foojay.io, the place for Friends Of OpenJDK."
 authors:
   - "geertjan-wielenga"
 image: "booth-1-jfall-2023-1024x768.png"
@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-**Last week's JFall 2023 was a high point in the evolution of Foojay.io, the place for friends of OpenJDK.**
+**Last week's JFall 2023 was a high point in the evolution of Foojay.io, the place for Friends Of OpenJDK.**
 
 We had a very big booth right by the entrance to the venue, consisting of a large rollout banner featuring all the organizations involved in Foojay.io, a table totally covered in stickers (hundreds, maybe thousands, of Foojay.io stickers, as well as sponsor stickers, such as Digma), and a podcast zone, where Frank spent most of the day recording short podcast interviews with a very wide range of Java enthusiasts attending the event.
 

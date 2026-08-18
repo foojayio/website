@@ -1,8 +1,8 @@
 ---
-title: "Friends of OpenJDK Community Survey"
+title: "Friends Of OpenJDK Community Survey"
 date: "2023-06-06T08:33:06+00:00"
 lastmod: "2023-06-06T08:37:48+00:00"
-description: "Friends of OpenJDK Community Survey. Kickoff and instructions for a community driven data gathering exercise."
+description: "Friends Of OpenJDK Community Survey. Kickoff and instructions for a community driven data gathering exercise."
 authors:
   - "steve-poole"
 image: "question-mark-1872665_1280.jpg"
@@ -24,7 +24,7 @@ Often, when a survey's results are released, the reader is left wanting more, ex
 
 The Foojay survey breaks this pattern. We will make all the data available, within the bounds of GDPR, and you will have the opportunity to propose the questions that should be included. The [Foojay Board](https://foojay.io/board/) also has the chance to propose their own questions.
 
-The result will be a survey where the friends of OpenJDK ask themselves the burning questions that other surveys overlook, although some of the the usual ones will probably sneak in!
+The result will be a survey where the Friends Of OpenJDK ask themselves the burning questions that other surveys overlook, although some of the the usual ones will probably sneak in!
 
 ### How to get involved?
 

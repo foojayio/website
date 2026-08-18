@@ -1,8 +1,8 @@
 ---
-title: "Friends of OpenJDK at FOSDEM 2023"
+title: "Friends Of OpenJDK at FOSDEM 2023"
 date: "2022-11-22T08:30:07+00:00"
 lastmod: "2022-11-22T10:57:13+00:00"
-description: "The upcoming FOSDEM 2023, 5 February 2023, will be live and everything will be in person, submit to the \"Friends of OpenJDK devroom\"!"
+description: "The upcoming FOSDEM 2023, 5 February 2023, will be live and everything will be in person, submit to the \"Friends Of OpenJDK devroom\"!"
 authors:
   - "geertjan-wielenga"
 image: "image-9.png"
@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-We're excited to announce that friends of OpenJDK (foojay.io), that is, developers who use OpenJDK on a day to day basis developing tools and technologies in languages such as Java and Kotlin, will be represented at [FOSDEM 2023](https://fosdem.org/) again at the live Foojay DevRoom on Sunday, 5 February 2023!
+We're excited to announce that Friends Of OpenJDK (foojay.io), that is, developers who use OpenJDK on a day to day basis developing tools and technologies in languages such as Java and Kotlin, will be represented at [FOSDEM 2023](https://fosdem.org/) again at the live Foojay DevRoom on Sunday, 5 February 2023!
 
 Here you can find the CFP (Call For Papers) for submitting your talks, giving you the opportunity to deliver a talk during the Foojay DevRoom.
 
@@ -55,7 +55,7 @@ Please submit through Pentabarf here:
 
 <https://penta.fosdem.org/submission/FOSDEM23>
 
-When submitting your talk in Pentabarf, make sure to select "Friends of OpenJDK devroom" as the Track, as shown below.
+When submitting your talk in Pentabarf, make sure to select "Friends Of OpenJDK devroom" as the Track, as shown below.
 
 {{< img src="image-1024x1013.png" class="size-large is-resized" width="554" height="547" >}}
 

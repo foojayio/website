@@ -2,7 +2,7 @@
 title: "DevIgnition with Foojay.io at Washington DC JUG"
 date: "2024-08-14T13:06:50+00:00"
 lastmod: "2024-08-14T13:30:06+00:00"
-description: "This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends of OpenJDK, in addition to our normal schedule of diverse technical talks."
+description: "This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends Of OpenJDK, in addition to our normal schedule of diverse technical talks."
 authors:
   - "cullen-gray"
   - "geertjan-wielenga"
@@ -23,7 +23,7 @@ Come discover how the best minds use the latest technologies to build solutions.
 
 The scope of talks focus on the interests of the Washington DC area's software developer community, including [really a lot of different topics](https://devignition.com/).
 
-**This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends of OpenJDK, in addition to the normal schedule of diverse technical talks.**
+**This year DevIgnition is proud to partner with Foojay to include a track of talks by the Friends Of OpenJDK, in addition to the normal schedule of diverse technical talks.**
 [![](ticketsdev-1024x395.png)](https://devignition.ticketleap.com/devignition2024/dates/Nov-07-2024_at_0830AM)
 
 Links:

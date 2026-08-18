@@ -1,5 +1,5 @@
 ---
-title: "Let's Start a Java Mastodon Community for Friends of OpenJDK!"
+title: "Let's Start a Java Mastodon Community for Friends Of OpenJDK!"
 date: "2022-11-14T13:41:06+00:00"
 lastmod: "2022-11-14T13:41:07+00:00"
 description: "Let's investigate if the Java community is interested in joining a dedicated Mastodon instance."

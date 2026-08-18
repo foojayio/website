@@ -46,7 +46,7 @@ To quote from the Payara website:
 
 This is the same model as Azul uses for our Platform Core product: *an* *open-source* *, production-ready, fully supported* build of OpenJDK.
 
-We see many synergies between how Payara supports Jakarta EE applications and how Azul supports the JDK. We see that we work in the Java ecosystem in the same ways, with the same collaborative culture, via open ecosystems and active participation in developer conferences, Java User Groups, and community platforms, such as Foojay.io, the place for friends of OpenJDK, where both Azul and Payara have been actively collaborating for several years.
+We see many synergies between how Payara supports Jakarta EE applications and how Azul supports the JDK. We see that we work in the Java ecosystem in the same ways, with the same collaborative culture, via open ecosystems and active participation in developer conferences, Java User Groups, and community platforms, such as Foojay.io, the place for Friends Of OpenJDK, where both Azul and Payara have been actively collaborating for several years.
 
 We also see opportunities to help customers optimise the performance of their Jakarta EE applications through Azul's Platform Prime. As such, Azul has announced that it is acquiring Payara to extend our Java support offerings.
 

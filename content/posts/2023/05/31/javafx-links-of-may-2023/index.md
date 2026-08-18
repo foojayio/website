@@ -70,7 +70,7 @@ This is the summary of the #LinksOfTheWeek as published on [jfx-central.com](htt
 * [**Christopher Schnick** is feeling magic with dynamic OS theme detection](https://twitter.com/crschnick/status/1658174428612550671)! Done with jSystemThemeDetector.
 * [**Sean Phillips** got a lot of interest on the animated circular progress indicator](https://twitter.com/SeanMiPhillips/status/1658120303539519491) he made for Trinity and uploaded a version of it along with a tester app so folks could play with it.
 
-## JavaFX on Foojay.io, the website for Friends of OpenJDK
+## JavaFX on Foojay.io, the website for Friends Of OpenJDK
 
 * ["If the user has installed programs to connect to remote systems, why not try to use them from Java instead of via libraries?"](https://foojay.io/today/presenting-xpipe/) And then, on top of that, a tool for people who work with remote shell connections? **Christopher Schnick** presenting X-Pipe.
 * [Interview by **Frank Delporte** with **Paul Kocian** aka @Orango_Mango](https://foojay.io/today/interview-with-paul-kocian-aka-orango_mango/), who shared his progress on Twitter in creating a 3D engine with JavaFX, from a Rubik's cube in January '23, over a basic tumbling car in February, to a full Minecraft-like world in April! His age? 16!

@@ -23,7 +23,7 @@ In the last months of 2023, technical conferences took place in the Philippines 
 
 The Philippine Java Community were involved in two big conferences namely, Software Conference Philippines and Samsung Open Source Conference.
 
-Members of the Foojay community were included as the speakers of the conferences, including me (Tristan Mahinay). This is the first time that the Friends of OpenJDK is involved in these big conferences. Thanks to [Azul](https://www.azul.com/ "Azul") for being a sponsor of both events.
+Members of the Foojay community were included as the speakers of the conferences, including me (Tristan Mahinay). This is the first time that the Friends Of OpenJDK is involved in these big conferences. Thanks to [Azul](https://www.azul.com/ "Azul") for being a sponsor of both events.
 
 ## Software Conference Philippines
 
@@ -58,7 +58,7 @@ The conference was held on Oct 25-27, 2023 in hybrid format. [Airmeet](https://w
 
 ### Foojay Speakers
 
-Most of the speakers were part of Friends of OpenJDK community and Java Champions. Check the link below for the full list of speakers.
+Most of the speakers were part of Friends Of OpenJDK community and Java Champions. Check the link below for the full list of speakers.
 
 [SOFTCON PH Speakers](https://softconph.com/speakers "SOFTCON")
 

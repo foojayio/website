@@ -20,7 +20,7 @@ frozen: false
 
 Some weeks ago we checked here with the Java community if there was an interest to have a Java-oriented Mastodon service.
 
-* [Let's Start a Java Mastodon Community for Friends of OpenJDK!](https://foojay.io/today/lets-start-a-java-mastodon-community-for-friends-of-openjdk/)
+* [Let's Start a Java Mastodon Community for Friends Of OpenJDK!](https://foojay.io/today/lets-start-a-java-mastodon-community-for-friends-of-openjdk/)
 * [Java Mastodon Service: The Feedback](https://foojay.io/today/java-mastodon-service-the-feedback/)
 * [Foojay Mastodon Service: Here It Is!](https://foojay.io/today/foojay-mastodon-service-here-it-is)
 

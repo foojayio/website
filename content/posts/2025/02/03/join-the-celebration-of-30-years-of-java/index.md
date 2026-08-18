@@ -14,7 +14,7 @@ frozen: false
 
 **On Thursday, March 13, Azul is hosting a virtual celebration of 30 years of Java, starting at 09:00 PST / 17:00 GMT / 18:00 CET.**
 
-In addition to discussion panels, including a Friends of OpenJDK Panel with Marit Van Dijk, Ondro Mihályi, and Simon Martinelli, the highlighted speakers and topics of the program are:
+In addition to discussion panels, including a Friends Of OpenJDK Panel with Marit Van Dijk, Ondro Mihályi, and Simon Martinelli, the highlighted speakers and topics of the program are:
 
 * "30 Years of Java" by Simon Ritter
 * "AI for Busy Java Developers" by Frank Greco

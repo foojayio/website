@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-Another 6 months are behind us... and let's take a look at some stats on Foojay, a central resource and community platform for friends of OpenJDK. ([The previous report is here.](https://foojay.io/today/foojay-status-report-january-june-2021/))
+Another 6 months are behind us... and let's take a look at some stats on Foojay, a central resource and community platform for Friends Of OpenJDK. ([The previous report is here.](https://foojay.io/today/foojay-status-report-january-june-2021/))
 
 In the back of my mind, in the first full year of Foojay, **it would have been great to have had 50K unique visitors and 100K sessions** , in terms of Google Analytics. Below is the actual result over the whole of last year, i.e., significantly more unique visitors and sessions than anticipated: **84K unique visitors and 131K sessions**.
 
@@ -31,6 +31,6 @@ In other words, Foojay doubled in usage from the first half to the second half o
 
 Congrats everyone and that's a really nice trend!
 
-Onwards to 2022, let's see what this year brings... first and most important of all is the upcoming Friends of OpenJDK room at FOSDEM. [See you there!](https://foojay.io/today/friends-of-openjdk-at-fosdem-2022/)
+Onwards to 2022, let's see what this year brings... first and most important of all is the upcoming Friends Of OpenJDK room at FOSDEM. [See you there!](https://foojay.io/today/friends-of-openjdk-at-fosdem-2022/)
 
 **Note:** Thanks to [Yelk for all their development work](https://yelk.com.ua) on Foojay.io!

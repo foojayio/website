@@ -283,7 +283,7 @@ It was great to talk with so many different people from different companies.
 
 I hope to continue this in the future and someday land this JEP in the OpenJDK, gifting the Java ecosystem a much-needed official profiling API. Achieving this will probably take months, if not years, but we'll see.
 
-Thanks for reading this article. If you're interested in a presentation version, come to the [Friends of OpenJDK devroom](https://fosdem.org/2023/schedule/track/friends_of_openjdk/) at FOSDEM 2023, where I give a talk on Sunday the 5th of February at 3:20 pm or drop me a message if you're there.
+Thanks for reading this article. If you're interested in a presentation version, come to the [Friends Of OpenJDK devroom](https://fosdem.org/2023/schedule/track/friends_of_openjdk/) at FOSDEM 2023, where I give a talk on Sunday the 5th of February at 3:20 pm or drop me a message if you're there.
 
 Share the word on [AsyncGetStackTrace](https://openjdk.org/jeps/435) and comment with any suggestions or questions that you might have.
 

@@ -17,7 +17,7 @@ related_posts:
 frozen: false
 ---
 
-Yesterday we launched this idea: [Let's Start a Java Mastodon Community for Friends of OpenJDK!](https://foojay.io/today/lets-start-a-java-mastodon-community-for-friends-of-openjdk/).
+Yesterday we launched this idea: [Let's Start a Java Mastodon Community for Friends Of OpenJDK!](https://foojay.io/today/lets-start-a-java-mastodon-community-for-friends-of-openjdk/).
 
 At the same time, we shared this post on [Twitter](https://twitter.com/foojayio/status/1592151003264155656) (yes, the irony), [Mastodon](https://mastodon.social/@FrankDelporte/109342467245148388), and [LinkedIn](https://www.linkedin.com/posts/frankdelporte_lets-start-a-java-mastodon-community-for-activity-6997919205920489472-Ei66).
 

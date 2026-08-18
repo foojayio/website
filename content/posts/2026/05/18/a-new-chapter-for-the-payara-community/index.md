@@ -37,7 +37,7 @@ The rebrand is part of bringing Azul Payara Community properly into the Azul por
 
 Over the coming weeks and months, you can expect to see updates to Payara documentation, resource names, technical content and the blog. Downloads are still available at [payara.fish](https://payara.fish/downloads/payara-platform-community-edition/ "payara.fish") for now, but will be moving to Azul website before long - we'll announce that when the time comes.
 
-One thing we're particularly excited about: we'll be increasing our presence here on Foojay sharing everything that is relevant for the Friends of OpenJDK community - educational content, tutorials, community updates and more.
+One thing we're particularly excited about: we'll be increasing our presence here on Foojay sharing everything that is relevant for the Friends Of OpenJDK community - educational content, tutorials, community updates and more.
 
 For social media, we're consolidating onto Foojay and Azul's official channels. Make sure you're following us there, so you don't miss a thing.
 

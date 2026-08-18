@@ -1,5 +1,5 @@
 ---
-title: "Join Friends of OpenJDK at FOSDEM 2021"
+title: "Join Friends Of OpenJDK at FOSDEM 2021"
 date: "2020-12-17T15:31:43+00:00"
 lastmod: "2021-08-23T12:50:20+00:00"
 description: "Organizations included in setting up the Foojay dev room, all active on Foojay.io in one way or another, are Azul, JFrog, Payara, and Snyk."
@@ -24,7 +24,7 @@ You can see in the above that the room was organized by developers connected to,
 
 ### **Overview of Foojay at FOSDEM 2021**
 
-In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (friends of OpenJDK) are running the program:
+In next year's implementation of the same concept, developers connected to [Foojay](https://foojay.io/) (Friends Of OpenJDK) are running the program:
 
 [https://fosdem.org/2021/schedule/track/friends_of_openjdk](https://fosdem.org/2021/schedule/track/friends_of_openjdk/)
 
@@ -34,7 +34,7 @@ The content is focused on being similar to previous years, that is, short presen
 
 ### Submission Details and Deadlines
 
-The upcoming FOSDEM, 6 and 7 February 2021, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends of OpenJDK devroom" in the "Track" field:
+The upcoming FOSDEM, 6 and 7 February 2021, will be virtual and everything will be prerecorded. Go here to sign up and submit your abstracts, making sure to use the "Friends Of OpenJDK devroom" in the "Track" field:
 
 <https://penta.fosdem.org/submission/FOSDEM21>
 

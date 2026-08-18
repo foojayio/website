@@ -43,7 +43,7 @@ The current chapters (because the book continues to grow and everyone is invited
 
 You'll find practical advice you can use today—like configuring build caching or using Java 25's scripting features—alongside deeper discussions about mentorship, community, and why sustainable practices actually make business sense.
 
-The project has grown out of the Foojay (Friends of OpenJDK) community, where members from different companies and countries found they shared the same concerns about sustainability.
+The project has grown out of the Foojay (Friends Of OpenJDK) community, where members from different companies and countries found they shared the same concerns about sustainability.
 
 Because it's published on Leanpub, the book will keep evolving with reader feedback—and others are welcome to join in with their own content.
 

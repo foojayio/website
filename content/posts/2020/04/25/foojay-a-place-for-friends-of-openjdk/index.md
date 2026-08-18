@@ -1,5 +1,5 @@
 ---
-title: "foojay: A Place for Friends of OpenJDK"
+title: "foojay: A Place for Friends Of OpenJDK"
 date: "2020-04-25T15:09:00+00:00"
 lastmod: "2020-10-20T07:11:11+00:00"
 description: "For Java developers who depend on OpenJDK, foojay is the place to be for comprehensive dashboards, insights, analysis, and blogs. Read More!"

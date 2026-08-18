@@ -17,15 +17,15 @@ related_posts:
 frozen: false
 ---
 
-Since the start of the Friends of OpenJDK community in April 2020, we've had half yearly status reports, providing the highlights of the past half year, together with some stats and analysis, ending with roadmaps for the next upcoming periods.
+Since the start of the Friends Of OpenJDK community in April 2020, we've had half yearly status reports, providing the highlights of the past half year, together with some stats and analysis, ending with roadmaps for the next upcoming periods.
 
 **Note:** Here are the earlier reports, from [January - June 2021](https://foojay.io/today/foojay-status-report-january-june-2021/), [July - December 2021](https://foojay.io/today/foojay-status-report-july-december-2021/), and [January - June 2022](https://foojay.io/today/foojay-status-report-january-june-2022/). At that stage, a much stricter cookie policy was implemented, for reasons of the EU's GDPR and similar, so that the Google Analytics trends which had been very nice until that stage (we had as much traffic in the first half of 2022 as we had for the whole of 2021) were destroyed. Attempts were made to recover or reinstate similar methods for analyzing usage, hence the delay in reports coming out since midway through last year, though these attempts have failed. And if the method for counting usage changes as dramatically as it now has, then it becomes impossible to discuss trend comparisons from before that change and after it. In terms of trends, we now need to start from scratch. Since that is not something that can be repaired, making comparisons between different periods in the past and the current period, as in previous reports, doesn't make sense anymore.
 
-What's good about all this is that we can now look at more meaningful measures of the impact of the Friends of OpenJDK community such as...
+What's good about all this is that we can now look at more meaningful measures of the impact of the Friends Of OpenJDK community such as...
 
 ## ...FOSDEM 2023
 
-Over the past 6 months, the activity that most clearly highlights all the key strengths and relevance of the Friends of OpenJDK community was [FOSDEM 2023](https://fosdem.org/2023/schedule/track/friends_of_openjdk/).
+Over the past 6 months, the activity that most clearly highlights all the key strengths and relevance of the Friends Of OpenJDK community was [FOSDEM 2023](https://fosdem.org/2023/schedule/track/friends_of_openjdk/).
 
 After having collaborated with and supported FOSDEM during the two virtual years of the Corona period, we came together for the first time in person this year, bringing together developers from across the Java community, and beyond, and had an awesome and truly united experience, [as described in detail here](https://foojay.io/today/foojay-io-at-fosdem-2023-trip-report/), with a speaker dinner and full rooms and well known as well as less well known engaging speakers.
 ![](image-1-1024x631.png)
@@ -34,7 +34,7 @@ We fully intend to continue the tradition next year. Maybe we could try to use b
 
 ## Advisory Board Growth
 
-Next, a key aspect to highlight right away is that the [Foojay.io Advisory Board](https://foojay.io/board/) has grown over the past 6 months, with 5 new organizations being added, [and now there are 17 in total](https://foojay.io/board/). Here they are, together with a great quotation from each organization, really showing how well aligned we all are in relation to the Friends of OpenJDK community.
+Next, a key aspect to highlight right away is that the [Foojay.io Advisory Board](https://foojay.io/board/) has grown over the past 6 months, with 5 new organizations being added, [and now there are 17 in total](https://foojay.io/board/). Here they are, together with a great quotation from each organization, really showing how well aligned we all are in relation to the Friends Of OpenJDK community.
 > [Chronicle Software](https://chronicle.software/): "**Foojay is an open and independent marketplace of ideas and curated information relating to the JVM, and as such is immensely useful for the entire community. We are very happy to support Foojay however we can and are delighted to be part of the Foojay Board.** " *--- Jerry Shea, Chronicle Software MD, APAC*
 > [Gradle](https://gradle.org/): "**From the outset, open source has been central to Gradle, starting with the build tool and now encompassing a program through which we contribute our commercial Gradle developer acceleration tools to open source endeavors and institutions. It's wonderful to observe Foojay's emergence as a leading provider of impartial, curated content and insights on all aspects of open source Java. The ecosystem truly needs this, and it will undoubtedly reap substantial benefits from it.** " *--- Vincent Mayers, Director of Community Operations, Gradle*
 > [OmniFish](https://omnifish.ee/): "**At OmniFish, we want to be part of the Java and Jakarta EE communities by giving back and being active participants. We like to share our knowledge and expertise, and work with other developers and industry leaders to create new ideas and improve the Java ecosystem. By joining the Foojay.io Advisory Board, we hope to connect with like-minded individuals, share our ideas, and work together to improve the Java ecosystem. We look forward to contributing to the ongoing development and growth of the Java and Jakarta EE communities which is already happening at Foojay.io.** " *--- Ondro Mihalyi, OmniFish Founder*
@@ -56,7 +56,7 @@ Since Foojay Today is the one part of Foojay that changes on a daily basis, with
 
 ## Calendar
 
-A lot of work has been done by the Yelk team in Ukraine in collaboration with the Foojay.io community. Of course, Foojay.io is a WordPress site. In a way, that's sad, that we're not (yet?) using an OpenJDK technology for the Friends of OpenJDK site. On the other hand, everyone knows (loves?) WordPress, so onboarding new collaborators is trivial.
+A lot of work has been done by the Yelk team in Ukraine in collaboration with the Foojay.io community. Of course, Foojay.io is a WordPress site. In a way, that's sad, that we're not (yet?) using an OpenJDK technology for the Friends Of OpenJDK site. On the other hand, everyone knows (loves?) WordPress, so onboarding new collaborators is trivial.
 
 We're constantly finetuning and adding enhancements and new features to Foojay.io, ever since we began the project from scratch in April 2020. One of the most impressive recent features is the [Foojay.io Community Calendar](http://https;//foojay.io/calendar).
 [![](image-10-1024x495.png)](https://foojay.io/calendar)
@@ -73,7 +73,7 @@ That being the case, the purpose of a community site such as Foojay.io is to bri
 
 One can also imagine there being a listing of speakers, i.e., some kind of dating site for speakers/JUGs and conferences, and that is in the works too. And/or a way to appeal for sponsorships, too, as well as multiple channels on the [Foojay Slack](https://bit.ly/join-foojay-slack) for JUGs to interact with each other, which is already the case and JUGs are very welcome to use the [Foojay Slack](https://bit.ly/join-foojay-slack) for that purpose. A special highlight in this area is that new life has been blown into Philippines JUG via Foojay.io, with meetings having been had again several times now.
 
-Are you involved in a JUG in any way and are there any resources that you need and that the Foojay community can help you with? Just speak up, that's a key reason for the Friends of OpenJDK to exist in the first place.
+Are you involved in a JUG in any way and are there any resources that you need and that the Foojay community can help you with? Just speak up, that's a key reason for the Friends Of OpenJDK to exist in the first place.
 
 ## Foojay.io Disco API
 

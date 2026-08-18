@@ -2,7 +2,7 @@
 title: "Foojay Podcast #94: More Than a Blog: How Foojay Connects, Sustains, and Evolves the Java Community"
 date: "2026-05-04T06:26:00+00:00"
 lastmod: "2026-06-11T18:04:03+00:00"
-description: "Foojay.io, the website for the Friends of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down - by Annelore Egger"
+description: "Foojay.io, the website for the Friends Of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down - by Annelore Egger"
 authors:
   - "annelore-egger"
   - "buhake-sindi"
@@ -32,7 +32,7 @@ related_posts:
 frozen: false
 ---
 
-Foojay.io, the website for the Friends of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down with twelve members of the Java community to talk about what Foojay means to them, what they learn from each other, and how the community is evolving.
+Foojay.io, the website for the Friends Of OpenJDK, is turning six years old. To celebrate, Frank Delporte headed to JCON in Cologne, Germany, and sat down with twelve members of the Java community to talk about what Foojay means to them, what they learn from each other, and how the community is evolving.
 
 This episode covers a lot of ground. Sharat Chandar reflects on 25 years in the Java community and why the people are what keep the language alive. Markus Westergren and Iryna Dohndorf both focus on a theme that comes up again and again: developer sustainability. Not just green software, but how you stay healthy, grounded, and relevant when AI is changing everything around you. Markus and his wife researched how developers are reacting to AI, from ignoring it completely to transforming everything they do. Iryna talks about building resilience and robustness as skills, not afterthoughts.
 

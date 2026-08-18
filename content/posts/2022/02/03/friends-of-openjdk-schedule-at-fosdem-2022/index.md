@@ -1,5 +1,5 @@
 ---
-title: "Friends of OpenJDK at FOSDEM with Prizes"
+title: "Friends Of OpenJDK at FOSDEM with Prizes"
 date: "2022-02-03T10:42:04+00:00"
 lastmod: "2023-01-19T08:43:53+00:00"
 description: "A great line up of known and less known OpenJDK users from the Foojay community will be at FOSDEM, with a quiz and awesome prizes to be won."
@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-A great line up of known and less known OpenJDK users will be presenting new and unique content in the Friends of OpenJDK room at FOSDEM this weekend.
+A great line up of known and less known OpenJDK users will be presenting new and unique content in the Friends Of OpenJDK room at FOSDEM this weekend.
 
 [Check out the great program](https://fosdem.org/2022/schedule/track/friends_of_openjdk/), there's likely something for everyone, starting with new features in Java, including the hot topic of Java security, expanding out from Java to Kotlin and beyond, as well as several sessions around JavaFX and Java on the Web and beyond.
 

@@ -16,7 +16,7 @@ related_posts:
 frozen: false
 ---
 
-### "What if Simon Ritter's Friends of OpenJDK keynote session at FOSDEM entitled '[After Nearly 30 Years, How Is Java So Popular?](https://fosdem.org/2023/schedule/event/javapopularity/)' ends up being held... in an empty room?"
+### "What if Simon Ritter's Friends Of OpenJDK keynote session at FOSDEM entitled '[After Nearly 30 Years, How Is Java So Popular?](https://fosdem.org/2023/schedule/event/javapopularity/)' ends up being held... in an empty room?"
 
 In a nutshell, this was my worst case scenario slash biggest 'concern' over the past weeks, narrowly followed by the image of someone taking a pic of Simon in an empty room talking about Java's popularity.
 

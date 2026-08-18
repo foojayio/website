@@ -1,5 +1,5 @@
 ---
-title: "About Foojay | The Place for Friends of OpenJDK"
+title: "About Foojay | The Place for Friends Of OpenJDK"
 description: "Foojay is the vendor-neutral home for the Java community - daily news, OpenJDK data, podcasts and guides, made by the developers who use it."
 canonical: "https://foojay.io/who-we-are/"
 url: "/who-we-are/"
@@ -33,7 +33,7 @@ Foojay is the place to be for the **F** riends **O** f **O** pen**J**DK. But wha
 
 "Foo", as we know, is a placeholder in demo apps. This site and community is, likewise, a placeholder for your content, of all kinds. In particular, it is "Foo" for "J", i.e., "Java". The name should really be "FooJ" but then it would be weird to pronounce. "Jay" is the right way to pronounce the J in "FooJ", which at the same time is the name of a bird, and gave us a nice base for a logo. The initial logo was created by a designer, and used as the basis for several variations by [Gerrit Grunwald](https://foojay.io/today/author/gerrit-grunwald/).
 
-Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those names freely ofr initiatives like Foojay. So that's how "Foojay" became the name for the place for Friends of OpenJDK.
+Oracle owns the trademark on Java and OpenJDK, and it's not allowed to use those names freely ofr initiatives like Foojay. So that's how "Foojay" became the name for the place for Friends Of OpenJDK.
 
 ## Logo
 

@@ -30,7 +30,7 @@ Let's begin.
 
 1. The success of Java can be attributed to various factors. Still, the stability and expressiveness of the language from the start, the creation of many libraries, and the enthusiastic community have been instrumental in its widespread adoption and ongoing success.
 2. Geertjan's motivation for specializing in Java and its community came from his involvement with the language and community while working at Sun Microsystems, which he found stimulating.
-3. Geertjan has two memorable, code- and community-oriented experiences in the software industry that were challenging but ultimately rewarding: bringing NetBeans from Oracle into the Apache Software Foundation and starting the Friends of OpenJDK (Foojay.io) community.
+3. Geertjan has two memorable, code- and community-oriented experiences in the software industry that were challenging but ultimately rewarding: bringing NetBeans from Oracle into the Apache Software Foundation and starting the Friends Of OpenJDK (Foojay.io) community.
 4. Success in the software industry is not about constantly moving on to new technologies but rather about building a deep and varied knowledge and network within a particular ecosystem, such as the Java ecosystem. Courage to continue is crucial to success.
 5. Following one's interests and being open to unconventional paths is essential for success in the software industry.
 6. Contributing to open-source projects can help junior developers grow and improve their skills.
@@ -55,7 +55,7 @@ What motivated me is that I got involved in Java, the language and community, wh
 
 ### Bazlur: It's clear that the Java community has played a pivotal role in the language's success, which has been a boon for countless developers looking to build their careers. On that note, I'm curious if you have any enjoyable or memorable stories from your time working in the software industry that you'd be willing to share with us?
 
-**Geertjan**: I think there are two memories that I'll always carry with me, both of which are both code and community-oriented and both which were (and continue to be) quite hard — bringing NetBeans from Oracle into the ASF and starting the Friends of OpenJDK (Foojay.io) community.
+**Geertjan**: I think there are two memories that I'll always carry with me, both of which are both code and community-oriented and both which were (and continue to be) quite hard — bringing NetBeans from Oracle into the ASF and starting the Friends Of OpenJDK (Foojay.io) community.
 
 As [Gil Tene](https://www.linkedin.com/in/giltene/), the CTO of Azul, recently told me: "Easy is overrated." In other words, tasks that are complex are the ones that are most satisfying when they work out well and start going in the right direction.
 

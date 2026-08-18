@@ -27,4 +27,4 @@ In the talk below we'll show common threats, vulnerabilities, and misconfigurati
 
 {{< youtube YXJyZ4tIE6Y >}}
 
-The above talk was part of the Friends of OpenJDK room at FOSDEM 2022.
+The above talk was part of the Friends Of OpenJDK room at FOSDEM 2022.

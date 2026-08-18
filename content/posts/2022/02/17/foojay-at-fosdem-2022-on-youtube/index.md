@@ -2,7 +2,7 @@
 title: "Foojay at FOSDEM 2022 on YouTube And Prize Winners"
 date: "2022-02-17T09:52:49+00:00"
 lastmod: "2022-02-17T10:08:58+00:00"
-description: "Last weekend, FOSDEM 2022 was held, with the friends of OpenJDK putting together an awesome program on the tools and editors around OpenJDK."
+description: "Last weekend, FOSDEM 2022 was held, with the Friends Of OpenJDK putting together an awesome program on the tools and editors around OpenJDK."
 authors:
   - "geertjan-wielenga"
 image: "Favicon-3-2.png"
@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-Last weekend, FOSDEM 2022 was held virtually, with the friends of OpenJDK putting together an awesome program around the tools and editors that support the OpenJDK, from overviews of new OpenJDK features, to cutting edge development with new languages on the OpenJDK, sessions on the ever important topic of security, as well as new developments in JavaFX, Jakarta EE, Raspberry Pi, and beyond:
+Last weekend, FOSDEM 2022 was held virtually, with the Friends Of OpenJDK putting together an awesome program around the tools and editors that support the OpenJDK, from overviews of new OpenJDK features, to cutting edge development with new languages on the OpenJDK, sessions on the ever important topic of security, as well as new developments in JavaFX, Jakarta EE, Raspberry Pi, and beyond:
 
 <https://fosdem.org/2022/schedule/track/friends_of_openjdk/>
 
@@ -37,4 +37,4 @@ And the winners are...
 
 ## Andreas Lämmlein (Germany) and Mark Striekwold (Netherlands) are the runners up, soon to be receiving cool techy toys, as well as the one year license to Deep Netts.
 
-Congrats to everyone who participated and, if you missed it, check out the videos above, soon the questions will be made available and there'll be new prizes to be awarded. And, of course, lets have the friends of OpenJDK program again next year at the live FOSDEM in Brussels, Belgium!
+Congrats to everyone who participated and, if you missed it, check out the videos above, soon the questions will be made available and there'll be new prizes to be awarded. And, of course, lets have the Friends Of OpenJDK program again next year at the live FOSDEM in Brussels, Belgium!

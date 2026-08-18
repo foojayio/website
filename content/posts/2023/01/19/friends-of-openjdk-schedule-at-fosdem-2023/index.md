@@ -1,5 +1,5 @@
 ---
-title: "Friends of OpenJDK Schedule at FOSDEM 2023"
+title: "Friends Of OpenJDK Schedule at FOSDEM 2023"
 date: "2023-01-19T14:42:49+00:00"
 lastmod: "2023-01-31T08:16:39+00:00"
 description: "On from good times in 2022 and 2021, we have a really great schedule with inspiring speakers for FOSDEM in Brussels, on Sunday, February 5!"
@@ -15,7 +15,7 @@ related_posts:
 frozen: false
 ---
 
-Again, i.e., following on from good times in [2022](https://foojay.io/today/friends-of-openjdk-schedule-at-fosdem-2022/) and [2021](https://foojay.io/today/friends-of-openjdk-schedule-at-fosdem-2021/), we have a really great schedule with inspiring speakers for FOSDEM in Brussels, on Sunday, February 5, providing a place for friends of OpenJDK in the Foojay.io Developer Room.
+Again, i.e., following on from good times in [2022](https://foojay.io/today/friends-of-openjdk-schedule-at-fosdem-2022/) and [2021](https://foojay.io/today/friends-of-openjdk-schedule-at-fosdem-2021/), we have a really great schedule with inspiring speakers for FOSDEM in Brussels, on Sunday, February 5, providing a place for Friends Of OpenJDK in the Foojay.io Developer Room.
 
 It's all free and fun and we're also organizing a get together with drinks and food the evening before, on Saturday, February 4.
 [![](image-1024x621.png)](https://fosdem.org/2023/schedule/track/friends_of_openjdk/)
